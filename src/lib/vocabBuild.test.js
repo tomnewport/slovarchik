@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseKey, buildWords, shapeVocab, partsOfSpeech } from './vocabBuild.js'
+import { parseKey, buildWords, shapeVocab, shapePhrases, partsOfSpeech } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 describe('parseKey', () => {
@@ -73,5 +73,16 @@ describe('the bundled vocabulary fixtures', () => {
     const shaped = shapeVocab(words)
     expect(shaped[0]).toHaveProperty('ru')
     expect(Array.isArray(shaped[0].en)).toBe(true)
+  })
+
+  it('shapePhrases flattens usage examples into translatable phrases', () => {
+    const ph = shapePhrases(words)
+    expect(ph.length).toBeGreaterThan(0)
+    for (const p of ph) {
+      expect(p.ru.length, p.id).toBeGreaterThan(0)
+      expect(p.en.length, p.id).toBeGreaterThan(0)
+    }
+    // Phrases are deduplicated by their russian=english pair.
+    expect(new Set(ph.map((p) => p.id)).size).toBe(ph.length)
   })
 })
