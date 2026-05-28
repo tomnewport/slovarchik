@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll } from 'vitest'
+import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import VocabView from './VocabView.vue'
 import { state } from '../stores/vocab.js'
@@ -60,4 +60,47 @@ describe('VocabView', () => {
     expect(left[0].classes()).not.toContain('matched')
     expect(right[wrongIndex].classes()).not.toContain('matched')
   })
+
+  it('celebrates and auto-advances after a correct answer', async () => {
+    vi.useFakeTimers()
+    const wrapper = mount(VocabView)
+    // Start advanced (typing) mode — celebration applies to the typing drills.
+    await wrapper.findAll('button.card')[2].trigger('click')
+
+    // Type the correct answer and submit.
+    const want = wrapper.vm.current
+    const answer = Array.isArray(want.en) ? want.en[0] : want.en
+    await wrapper.find('input[type="text"]').setValue(answer)
+    await wrapper.find('form').trigger('submit')
+
+    // Celebration is showing and no manual "Next" button is offered.
+    expect(wrapper.vm.wasCorrect).toBe(true)
+    expect(wrapper.vm.celebrating).toBe(true)
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(true)
+    expect(wrapper.text()).not.toContain('Next')
+
+    // After the celebration window, it moves on to a fresh question.
+    vi.advanceTimersByTime(1000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.answered).toBe(false)
+    expect(wrapper.vm.celebrating).toBe(false)
+  })
+
+  it('waits for the user after a wrong answer', async () => {
+    const wrapper = mount(VocabView)
+    // Start advanced (typing) mode.
+    await wrapper.findAll('button.card')[2].trigger('click')
+
+    // Submit an answer that is definitely wrong.
+    await wrapper.find('input[type="text"]').setValue('definitely-not-correct')
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.vm.wasCorrect).toBe(false)
+    expect(wrapper.vm.celebrating).toBe(false)
+    expect(wrapper.text()).toContain('Next')
+  })
+})
+
+afterEach(() => {
+  vi.useRealTimers()
 })

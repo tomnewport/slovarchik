@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, onUnmounted } from 'vue'
 import { nouns, state } from '../stores/vocab.js'
 import {
   CASES,
@@ -13,6 +13,10 @@ import {
   validSlots,
 } from '../lib/declension.js'
 import { normalize, sample } from '../lib/quiz.js'
+import CelebrationBurst from '../components/CelebrationBurst.vue'
+
+// How long the celebration plays before auto-advancing to the next noun.
+const CELEBRATE_MS = 1000
 
 const ready = computed(() => nouns.value.length > 0)
 
@@ -25,6 +29,10 @@ const LEVELS = [
 const level = ref(null)
 const noun = ref(null)
 const score = reactive({ right: 0, total: 0 })
+
+const celebrating = ref(false)
+const lastCorrect = ref(false)
+let advanceTimer = null
 
 // --- Easy: spot the case + number ----------------------------------------
 const probeForm = ref('')
@@ -60,6 +68,9 @@ function start(levelId) {
 }
 
 function newRound() {
+  clearTimeout(advanceTimer)
+  celebrating.value = false
+  lastCorrect.value = false
   noun.value = sample(nouns.value, 1)[0]
   easyChecked.value = false
   tableChecked.value = false
@@ -79,13 +90,22 @@ function toggle(slot) {
   selected.has(slot) ? selected.delete(slot) : selected.add(slot)
 }
 
+function celebrateThenAdvance() {
+  lastCorrect.value = true
+  celebrating.value = true
+  advanceTimer = setTimeout(newRound, CELEBRATE_MS)
+}
+
 function checkEasy() {
   if (easyChecked.value) return
   easyChecked.value = true
   score.total += 1
   const want = correctSlots.value
   const same = want.size === selected.size && [...want].every((s) => selected.has(s))
-  if (same) score.right += 1
+  if (same) {
+    score.right += 1
+    celebrateThenAdvance()
+  }
 }
 
 function key(num, c) {
@@ -113,15 +133,22 @@ function checkTable() {
   tableChecked.value = true
   score.total += 1
   // One "point" per fully-correct table keeps scoring comparable across modes.
-  if (countRight() === cellCount.value) score.right += 1
+  if (countRight() === cellCount.value) {
+    score.right += 1
+    celebrateThenAdvance()
+  }
 }
 
 const tableScore = computed(() => (tableChecked.value ? countRight() : null))
 
 function quit() {
+  clearTimeout(advanceTimer)
+  celebrating.value = false
   level.value = null
   noun.value = null
 }
+
+onUnmounted(() => clearTimeout(advanceTimer))
 </script>
 
 <template>
@@ -146,7 +173,8 @@ function quit() {
     </div>
   </section>
 
-  <section v-else class="grid" style="gap: 1.25rem">
+  <section v-else class="grid" style="gap: 1.25rem; position: relative">
+    <CelebrationBurst :show="celebrating" />
     <div class="row" style="justify-content: space-between">
       <span class="pill">{{ level }}</span>
       <span class="muted">Score: {{ score.right }} / {{ score.total }}</span>
@@ -192,8 +220,8 @@ function quit() {
         <button v-if="!easyChecked" class="primary" :disabled="selected.size === 0" @click="checkEasy">
           Check
         </button>
-        <button v-else class="primary" @click="newRound">Next →</button>
-        <button @click="quit">Change mode</button>
+        <button v-else-if="!lastCorrect" class="primary" @click="newRound">Next →</button>
+        <button v-if="!lastCorrect" @click="quit">Change mode</button>
       </div>
     </template>
 
@@ -254,8 +282,8 @@ function quit() {
 
       <div class="row">
         <button v-if="!tableChecked" class="primary" @click="checkTable">Check table</button>
-        <button v-else class="primary" @click="newRound">Next noun →</button>
-        <button @click="quit">Change mode</button>
+        <button v-else-if="!lastCorrect" class="primary" @click="newRound">Next noun →</button>
+        <button v-if="!lastCorrect" @click="quit">Change mode</button>
       </div>
     </template>
   </section>
