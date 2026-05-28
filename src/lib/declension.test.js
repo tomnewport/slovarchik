@@ -5,6 +5,7 @@ import {
   endingsTable,
   matchingSlots,
   validCases,
+  validSlots,
   numbersOf,
   CASES,
 } from './declension.js'
@@ -69,6 +70,18 @@ describe('matchingSlots / validCases', () => {
   })
   it('returns an empty set for a form that does not occur', () => {
     expect(validCases(kniga, 'нет-такого').size).toBe(0)
+  })
+})
+
+describe('validSlots', () => {
+  it('keeps the number distinction (dative & prepositional singular of книге)', () => {
+    expect(validSlots(kniga, 'книге')).toEqual(new Set(['sg.dat', 'sg.pre']))
+  })
+  it('distinguishes the syncretic genitive & accusative plural of собака', () => {
+    expect(validSlots(sobaka, 'собак')).toEqual(new Set(['pl.gen', 'pl.acc']))
+  })
+  it('returns an empty set for a form that does not occur', () => {
+    expect(validSlots(kniga, 'нет-такого').size).toBe(0)
   })
 })
 

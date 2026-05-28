@@ -124,3 +124,20 @@ export function matchingSlots(noun, form) {
 export function validCases(noun, form) {
   return new Set(matchingSlots(noun, form).map((m) => m.case))
 }
+
+/** Canonical key for a (number, case) slot, e.g. 'pl.gen'. */
+export function slotKey(number, c) {
+  return `${number}.${c}`
+}
+
+/**
+ * The set of (number, case) slots a form is valid in, as a Set of slot keys
+ * (e.g. 'pl.gen'). Like {@link validCases} but keeps the number distinction —
+ * used to grade the easy drill where learners pick case *and* number.
+ * @param {object} noun
+ * @param {string} form
+ * @returns {Set<string>}
+ */
+export function validSlots(noun, form) {
+  return new Set(matchingSlots(noun, form).map((m) => slotKey(m.number, m.case)))
+}
