@@ -13,6 +13,7 @@ import RussianKeyboard from './components/RussianKeyboard.vue'
     <nav class="row">
       <RouterLink to="/vocab">Vocab</RouterLink>
       <RouterLink to="/declension">Declension</RouterLink>
+      <RouterLink to="/phrases">Phrases</RouterLink>
     </nav>
   </header>
 

@@ -131,6 +131,28 @@ export function shapeVocab(words) {
   }))
 }
 
+/**
+ * Shape usage examples into a phrase bank for the phrase drill. Every word may
+ * carry example sentences as `{ ru, en_gb }` pairs; we flatten them all into a
+ * single deduplicated list of translatable phrases.
+ */
+export function shapePhrases(words) {
+  const seen = new Set()
+  const out = []
+  for (const w of words) {
+    for (const ex of w.usage ?? []) {
+      const ru = String(ex?.ru ?? '').trim()
+      const en = String(ex?.en_gb ?? '').trim()
+      if (!ru || !en) continue
+      const id = `${ru}=${en}`
+      if (seen.has(id)) continue
+      seen.add(id)
+      out.push({ id, ru, en, source: w.key, cefr: w.cefr })
+    }
+  }
+  return out
+}
+
 /** Shape declinable nouns for the declension drill. */
 export function shapeNouns(words) {
   return words
