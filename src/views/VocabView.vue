@@ -1,7 +1,11 @@
 <script setup>
-import { computed, reactive, ref, nextTick } from 'vue'
+import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
 import { buildChoices, checkAnswer, maskWord, sample } from '../lib/quiz.js'
+import CelebrationBurst from '../components/CelebrationBurst.vue'
+
+// How long the celebration plays before auto-advancing to the next question.
+const CELEBRATE_MS = 1000
 
 const ready = computed(() => vocab.value.length > 0)
 
@@ -21,6 +25,8 @@ const answered = ref(false)
 const wasCorrect = ref(false)
 const typed = ref('')
 const inputEl = ref(null)
+const celebrating = ref(false)
+let advanceTimer = null
 
 // English answers may be arrays; show the first as the canonical prompt/answer.
 const promptOf = (w) => (direction.value === 'ru-en' ? w.ru : firstEn(w))
@@ -38,6 +44,8 @@ function start(levelId) {
 }
 
 function nextQuestion() {
+  clearTimeout(advanceTimer)
+  celebrating.value = false
   answered.value = false
   wasCorrect.value = false
   typed.value = ''
@@ -54,7 +62,12 @@ function record(correct) {
   answered.value = true
   wasCorrect.value = correct
   score.total += 1
-  if (correct) score.right += 1
+  if (correct) {
+    score.right += 1
+    // Celebrate, then move straight to the next question.
+    celebrating.value = true
+    advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
+  }
 }
 
 function pick(word) {
@@ -82,9 +95,13 @@ function classFor(word) {
 }
 
 function quit() {
+  clearTimeout(advanceTimer)
+  celebrating.value = false
   level.value = null
   current.value = null
 }
+
+onUnmounted(() => clearTimeout(advanceTimer))
 </script>
 
 <template>
@@ -123,7 +140,8 @@ function quit() {
     </div>
   </section>
 
-  <section v-else class="grid" style="gap: 1.25rem">
+  <section v-else class="grid" style="gap: 1.25rem; position: relative">
+    <CelebrationBurst :show="celebrating" />
     <div class="row" style="justify-content: space-between">
       <span class="pill">{{ direction === 'ru-en' ? 'RU → EN' : 'EN → RU' }} · {{ level }}</span>
       <span class="muted">Score: {{ score.right }} / {{ score.total }}</span>
@@ -171,7 +189,8 @@ function quit() {
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + displayAnswer(current) }}
       </p>
       <p v-if="current.note" class="muted" style="margin: 0">{{ current.note }}</p>
-      <div class="row">
+      <!-- Correct answers advance on their own; only wrong answers wait for the user. -->
+      <div v-if="!wasCorrect" class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
         <button @click="quit">Change mode</button>
       </div>
