@@ -175,6 +175,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
         ref="inputEl"
         v-model="typed"
         type="text"
+        :lang="direction === 'en-ru' ? 'ru' : 'en'"
         :disabled="answered"
         :placeholder="direction === 'ru-en' ? 'type in English' : 'наберите по-русски'"
         autocomplete="off"

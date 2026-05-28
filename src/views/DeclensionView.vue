@@ -1,10 +1,6 @@
 <script setup>
 import { computed, reactive, ref, onUnmounted } from 'vue'
 import { nouns, state } from '../stores/vocab.js'
-import CelebrationBurst from '../components/CelebrationBurst.vue'
-
-// How long the celebration plays before auto-advancing to the next noun.
-const CELEBRATE_MS = 1000
 import {
   CASES,
   CASE_LABELS,
@@ -13,9 +9,14 @@ import {
   numbersOf,
   endingsTable,
   matchingSlots,
-  validCases,
+  slotKey,
+  validSlots,
 } from '../lib/declension.js'
 import { normalize, sample } from '../lib/quiz.js'
+import CelebrationBurst from '../components/CelebrationBurst.vue'
+
+// How long the celebration plays before auto-advancing to the next noun.
+const CELEBRATE_MS = 1000
 
 const ready = computed(() => nouns.value.length > 0)
 
@@ -33,12 +34,21 @@ const celebrating = ref(false)
 const lastCorrect = ref(false)
 let advanceTimer = null
 
-// --- Easy: spot the case -------------------------------------------------
+// --- Easy: spot the case + number ----------------------------------------
 const probeForm = ref('')
-const selected = reactive(new Set())
+const selected = reactive(new Set()) // slot keys, e.g. 'pl.gen'
 const easyChecked = ref(false)
-const correctCases = computed(() =>
-  noun.value && probeForm.value ? validCases(noun.value, probeForm.value) : new Set(),
+const correctSlots = computed(() =>
+  noun.value && probeForm.value ? validSlots(noun.value, probeForm.value) : new Set(),
+)
+// Every (case, number) slot offered as a button — grouped by case, with each
+// number the noun actually has (pluralia tantum nouns offer plural only).
+const easySlots = computed(() =>
+  noun.value
+    ? CASES.flatMap((c) =>
+        numbersOf(noun.value).map((num) => ({ key: slotKey(num, c), case: c, number: num })),
+      )
+    : [],
 )
 
 // --- Table modes (intermediate / advanced) -------------------------------
@@ -75,9 +85,9 @@ function newRound() {
   }
 }
 
-function toggle(c) {
+function toggle(slot) {
   if (easyChecked.value) return
-  selected.has(c) ? selected.delete(c) : selected.add(c)
+  selected.has(slot) ? selected.delete(slot) : selected.add(slot)
 }
 
 function celebrateThenAdvance() {
@@ -90,8 +100,8 @@ function checkEasy() {
   if (easyChecked.value) return
   easyChecked.value = true
   score.total += 1
-  const want = correctCases.value
-  const same = want.size === selected.size && [...want].every((c) => selected.has(c))
+  const want = correctSlots.value
+  const same = want.size === selected.size && [...want].every((s) => selected.has(s))
   if (same) {
     score.right += 1
     celebrateThenAdvance()
@@ -173,29 +183,29 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <!-- Easy: spot the case -->
     <template v-if="level === 'easy'">
       <div class="card" style="text-align: center">
-        <div class="muted">{{ noun.lemma }} ({{ noun.en }}) — which case is this form?</div>
+        <div class="muted">{{ noun.lemma }} ({{ noun.en }}) — which case &amp; number is this form?</div>
         <div style="font-size: 2rem; margin: 0.5rem 0" lang="ru">{{ probeForm }}</div>
       </div>
       <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.5rem">
         <button
-          v-for="c in CASES"
-          :key="c"
+          v-for="slot in easySlots"
+          :key="slot.key"
           class="choice"
           :class="
             easyChecked
-              ? correctCases.has(c)
+              ? correctSlots.has(slot.key)
                 ? 'correct'
-                : selected.has(c)
+                : selected.has(slot.key)
                   ? 'wrong'
                   : ''
-              : selected.has(c)
+              : selected.has(slot.key)
                 ? 'primary'
                 : ''
           "
-          @click="toggle(c)"
+          @click="toggle(slot.key)"
         >
-          {{ CASE_LABELS[c] }}
-          <div class="muted" style="font-size: 0.75rem">{{ CASE_HINTS[c] }}</div>
+          {{ CASE_LABELS[slot.case] }} {{ NUMBER_LABELS[slot.number].toLowerCase() }}
+          <div class="muted" style="font-size: 0.75rem">{{ CASE_HINTS[slot.case] }}</div>
         </button>
       </div>
       <p v-if="easyChecked" class="muted">
