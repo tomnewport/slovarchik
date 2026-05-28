@@ -1,7 +1,8 @@
 <script setup>
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
-import { buildChoices, checkAnswer, maskWord, sample } from '../lib/quiz.js'
+import { buildChoices, checkAnswer, sample } from '../lib/quiz.js'
+import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 
 // How long the celebration plays before auto-advancing to the next question.
@@ -11,7 +12,11 @@ const ready = computed(() => vocab.value.length > 0)
 
 const LEVELS = [
   { id: 'easy', label: 'Easy · match', help: 'Pick the right translation.' },
-  { id: 'intermediate', label: 'Intermediate · hint', help: 'Type it, first letters shown.' },
+  {
+    id: 'intermediate',
+    label: 'Intermediate · hint',
+    help: 'Type it — the keyboard highlights the letters it uses.',
+  },
   { id: 'advanced', label: 'Advanced · blind', help: 'Type it with no help.' },
 ]
 
@@ -55,6 +60,19 @@ function nextQuestion() {
   } else {
     nextTick(() => inputEl.value?.focus())
   }
+  applyKeyboardHint()
+}
+
+// Intermediate mode highlights the answer's letters on the on-screen Russian
+// keyboard instead of revealing them as text. That keyboard only exists for
+// Russian, so the hint applies when the answer is Russian (EN → RU); otherwise
+// there is no hint.
+function applyKeyboardHint() {
+  if (level.value === 'intermediate' && direction.value === 'en-ru' && current.value) {
+    setHintLetters(answerOf(current.value))
+  } else {
+    clearHintLetters()
+  }
 }
 
 function record(correct) {
@@ -82,12 +100,6 @@ function submitTyped() {
   record(checkAnswer(typed.value, answerOf(current.value)))
 }
 
-const hint = computed(() => {
-  if (!current.value) return ''
-  const target = displayAnswer(current.value)
-  return maskWord(target, 1)
-})
-
 function classFor(word) {
   if (!answered.value) return ''
   if (word.id === current.value.id) return 'correct'
@@ -96,12 +108,16 @@ function classFor(word) {
 
 function quit() {
   clearTimeout(advanceTimer)
+  clearHintLetters()
   celebrating.value = false
   level.value = null
   current.value = null
 }
 
-onUnmounted(() => clearTimeout(advanceTimer))
+onUnmounted(() => {
+  clearTimeout(advanceTimer)
+  clearHintLetters()
+})
 </script>
 
 <template>
@@ -150,9 +166,6 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <div class="card" style="text-align: center">
       <div class="muted">Translate</div>
       <div style="font-size: 2rem; margin: 0.5rem 0" lang="ru">{{ promptOf(current) }}</div>
-      <div v-if="level === 'intermediate' && !answered" class="muted" style="letter-spacing: 0.2em">
-        {{ hint }}
-      </div>
     </div>
 
     <!-- Easy: multiple choice -->

@@ -1,6 +1,7 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import RussianKeyboard from './RussianKeyboard.vue'
+import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
 
 // A Russian input lives in the document; the keyboard follows focus to it.
 function makeInput(lang = 'ru') {
@@ -13,6 +14,7 @@ function makeInput(lang = 'ru') {
 
 afterEach(() => {
   document.body.innerHTML = ''
+  clearHintLetters()
 })
 
 describe('RussianKeyboard', () => {
@@ -53,6 +55,23 @@ describe('RussianKeyboard', () => {
 
     await wrapper.find('[aria-label="Backspace"]').trigger('click')
     expect(input.value).toBe('')
+    wrapper.unmount()
+  })
+
+  it('highlights the hinted letters of the answer', async () => {
+    const wrapper = mount(RussianKeyboard, { attachTo: document.body })
+    const input = makeInput()
+    input.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
+    setHintLetters('дом')
+    await wrapper.vm.$nextTick()
+
+    const hinted = wrapper.findAll('.kbd-key.hint').map((k) => k.text())
+    expect(new Set(hinted)).toEqual(new Set(['д', 'о', 'м']))
+
+    // Clearing the hint removes every highlight.
+    clearHintLetters()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.findAll('.kbd-key.hint')).toHaveLength(0)
     wrapper.unmount()
   })
 

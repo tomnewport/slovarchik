@@ -1,7 +1,7 @@
 // Pure, framework-free quiz helpers. Kept side-effect free so they are easy to
 // unit test and reuse across the vocab and declension drills.
 
-import { normalize } from './text.js'
+import { normalize, stripStress } from './text.js'
 
 export { normalize }
 
@@ -68,16 +68,16 @@ export function buildChoices(correct, pool, choices, keyOf, rng = Math.random) {
 }
 
 /**
- * Reveal the first `revealed` characters of a target word and mask the rest
- * with the given placeholder — used for the "intermediate" hint mode.
+ * The set of distinct letters a target word uses, lowercased and with stress
+ * marks removed — used by the "intermediate" mode to light up the matching keys
+ * on the on-screen keyboard. Spaces, punctuation and digits are dropped.
  * @param {string} target
- * @param {number} revealed
- * @param {string} [mask]
- * @returns {string}
+ * @returns {Set<string>}
  */
-export function maskWord(target, revealed, mask = '·') {
-  const chars = [...String(target)]
-  return chars
-    .map((ch, i) => (ch === ' ' ? ' ' : i < revealed ? ch : mask))
-    .join('')
+export function hintLetters(target) {
+  const out = new Set()
+  for (const ch of stripStress(String(target)).toLowerCase()) {
+    if (/\p{Letter}/u.test(ch)) out.add(ch)
+  }
+  return out
 }

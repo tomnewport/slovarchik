@@ -1,6 +1,8 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
+import { keyboardHint } from '../stores/keyboard.js'
+
 // Standard ЙЦУКЕН layout — the same arrangement as a physical Russian keyboard.
 const ROWS = [
   ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
@@ -116,6 +118,7 @@ function keep(e) {
           :key="letter"
           type="button"
           class="kbd-key"
+          :class="{ hint: keyboardHint.letters.has(letter) }"
           @click="press(letter)"
         >
           {{ shift ? letter.toUpperCase() : letter }}
@@ -184,6 +187,17 @@ function keep(e) {
   background: var(--primary);
   border-color: var(--primary);
   color: white;
+}
+
+/* Letters that appear in the answer — the "intermediate" mode hint. */
+.kbd-key.hint {
+  background: color-mix(in srgb, var(--primary) 22%, var(--card));
+  border-color: var(--primary);
+  font-weight: 700;
+}
+
+.kbd-key.hint:active:not(:disabled) {
+  background: var(--primary);
 }
 
 .kbd-mod {

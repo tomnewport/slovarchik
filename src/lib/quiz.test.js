@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalize, checkAnswer, shuffle, sample, buildChoices, maskWord } from './quiz.js'
+import { normalize, checkAnswer, shuffle, sample, buildChoices, hintLetters } from './quiz.js'
 
 // A deterministic pseudo-rng so shuffle/sample assertions are stable.
 function seededRng(seed) {
@@ -69,11 +69,15 @@ describe('buildChoices', () => {
   })
 })
 
-describe('maskWord', () => {
-  it('reveals the first n characters and masks the rest', () => {
-    expect(maskWord('привет', 2)).toBe('пр····')
+describe('hintLetters', () => {
+  it('returns the distinct lowercased letters of a word', () => {
+    expect(hintLetters('Привет')).toEqual(new Set(['п', 'р', 'и', 'в', 'е', 'т']))
   })
-  it('keeps spaces visible', () => {
-    expect(maskWord('to read', 0)).toBe('·· ····')
+  it('drops spaces, punctuation and duplicates', () => {
+    expect(hintLetters('мама, papa')).toEqual(new Set(['м', 'а', 'p', 'a']))
+  })
+  it('strips stress marks so the bare letter is highlighted', () => {
+    // дома́ carries a combining acute accent on the final а.
+    expect(hintLetters('до́ма')).toEqual(new Set(['д', 'о', 'м', 'а']))
   })
 })
