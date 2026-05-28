@@ -1,0 +1,106 @@
+# adverbs.yml — Russian adverbs (mostly invariable)
+---
+meta:
+  form:
+    comparative: comparative degree
+words:
+  "быстро=quickly":
+    cefr_level: A2
+    accented: бы́стро
+    en_gb:
+      standard: quickly (at high speed)
+      alt:
+        - fast
+    usage:
+      - ru: Он бы́стро бежи́т.
+        en_gb: He runs quickly.
+    forms:
+      comparative: быстре́е
+  "всегда=always":
+    cefr_level: A1
+    accented: всегда́
+    en_gb:
+      standard: always (every time)
+    usage:
+      - ru: Я всегда́ пью́ ча́й у́тром.
+        en_gb: I always drink tea in the morning.
+  "здесь=here":
+    cefr_level: A1
+    accented: здесь
+    en_gb:
+      standard: here (in this place)
+    usage:
+      - ru: Я живу́ здесь.
+        en_gb: I live here.
+  "медленно=slowly":
+    cefr_level: A2
+    accented: ме́дленно
+    en_gb:
+      standard: slowly (at low speed)
+    usage:
+      - ru: Говори́те ме́дленно, пожа́луйста.
+        en_gb: Please speak slowly.
+    forms:
+      comparative: медле́ннее
+  "плохо=badly":
+    cefr_level: A1
+    accented: пло́хо
+    en_gb:
+      standard: badly (not well)
+    usage:
+      - ru: Он пло́хо себя́ чу́вствует.
+        en_gb: He feels bad.
+    forms:
+      comparative: ху́же
+  "редко=rarely":
+    cefr_level: B1
+    accented: ре́дко
+    en_gb:
+      standard: rarely (not often)
+      alt:
+        - seldom
+    usage:
+      - ru: Мы ре́дко смо́трим телеви́зор.
+        en_gb: We rarely watch television.
+    forms:
+      comparative: ре́же
+  "сейчас=now":
+    cefr_level: A1
+    accented: сейча́с
+    en_gb:
+      standard: now (at this moment)
+      alt:
+        - right now
+    usage:
+      - ru: Я сейча́с за́нят.
+        en_gb: I am busy now.
+  "там=there":
+    cefr_level: A1
+    accented: там
+    en_gb:
+      standard: there (in that place)
+    usage:
+      - ru: Магази́н там, напра́во.
+        en_gb: The shop is there, on the right.
+  "хорошо=well":
+    cefr_level: A1
+    accented: хорошо́
+    en_gb:
+      standard: well (in a good way)
+      alt:
+        - good
+    usage:
+      - ru: Она́ хорошо́ говори́т по-англи́йски.
+        en_gb: She speaks English well.
+    forms:
+      comparative: лу́чше
+  "часто=often":
+    cefr_level: A1
+    accented: ча́сто
+    en_gb:
+      standard: often (many times)
+    usage:
+      - ru: Мы ча́сто хо́дим в кино́.
+        en_gb: We often go to the cinema.
+    forms:
+      comparative: ча́ще

@@ -1,0 +1,119 @@
+# prepositions.yml — Russian prepositions
+# `governs` lists the case(s) the preposition requires.
+---
+meta:
+  case:
+    gen: genitive
+    dat: dative
+    acc: accusative
+    ins: instrumental
+    pre: prepositional
+words:
+  "в=in":
+    cefr_level: A1
+    accented: в
+    governs: ["acc", "pre"]
+    en_gb:
+      standard: in (inside something)
+      alt:
+        - into (with the accusative)
+        - to
+    usage:
+      - ru: Я живу́ в Москве́.
+        en_gb: I live in Moscow.
+  "для=for":
+    cefr_level: A2
+    accented: для
+    governs: ["gen"]
+    en_gb:
+      standard: for (intended for someone)
+    usage:
+      - ru: Э́тот пода́рок для тебя́.
+        en_gb: This present is for you.
+  "до=until":
+    cefr_level: A2
+    accented: до
+    governs: ["gen"]
+    en_gb:
+      standard: until (up to a point or time)
+      alt:
+        - before
+        - as far as
+    usage:
+      - ru: Магази́н рабо́тает до девяти́.
+        en_gb: The shop is open until nine.
+  "к=towards":
+    cefr_level: A2
+    accented: к
+    governs: ["dat"]
+    en_gb:
+      standard: towards (in the direction of)
+      alt:
+        - to (a person)
+    usage:
+      - ru: Я иду́ к врачу́.
+        en_gb: I am going to the doctor.
+  "на=on":
+    cefr_level: A1
+    accented: на
+    governs: ["acc", "pre"]
+    en_gb:
+      standard: on (on top of a surface)
+      alt:
+        - onto (with the accusative)
+        - to
+    usage:
+      - ru: Кни́га на столе́.
+        en_gb: The book is on the table.
+  "о=about":
+    cefr_level: A2
+    accented: о
+    governs: ["pre"]
+    en_gb:
+      standard: about (on the topic of)
+    usage:
+      - ru: Мы говори́м о фи́льме.
+        en_gb: We are talking about the film.
+  "от=from":
+    cefr_level: A2
+    accented: от
+    governs: ["gen"]
+    en_gb:
+      standard: from (away from a source)
+    usage:
+      - ru: Я получи́л письмо́ от дру́га.
+        en_gb: I received a letter from a friend.
+  "по=along":
+    cefr_level: B1
+    accented: по
+    governs: ["dat"]
+    en_gb:
+      standard: along (moving over a surface)
+      alt:
+        - according to
+        - around
+    usage:
+      - ru: Мы гуля́ем по па́рку.
+        en_gb: We are walking around the park.
+  "с=with":
+    cefr_level: A1
+    accented: с
+    governs: ["ins", "gen"]
+    en_gb:
+      standard: with (together with)
+      alt:
+        - from / off (with the genitive)
+    usage:
+      - ru: Я пью́ ча́й с са́харом.
+        en_gb: I drink tea with sugar.
+  "у=at":
+    cefr_level: A1
+    accented: у
+    governs: ["gen"]
+    en_gb:
+      standard: at (by, or in someone's possession)
+      alt:
+        - by
+    usage:
+      - ru: У меня́ есть соба́ка.
+        en_gb: I have a dog.

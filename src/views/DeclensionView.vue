@@ -1,17 +1,19 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
-import { nouns } from '../data/nouns.js'
+import { nouns, state } from '../stores/vocab.js'
 import {
   CASES,
   CASE_LABELS,
   CASE_HINTS,
-  NUMBERS,
   NUMBER_LABELS,
+  numbersOf,
   endingsTable,
   matchingSlots,
   validCases,
 } from '../lib/declension.js'
-import { sample } from '../lib/quiz.js'
+import { normalize, sample } from '../lib/quiz.js'
+
+const ready = computed(() => nouns.value.length > 0)
 
 const LEVELS = [
   { id: 'easy', label: 'Easy · spot the case', help: 'Which case(s) could this form be?' },
@@ -36,6 +38,10 @@ const entries = reactive({}) // `${num}.${case}` -> typed value
 const tableChecked = ref(false)
 const table = computed(() => (noun.value ? endingsTable(noun.value) : null))
 
+// Numbers actually present (some nouns are plural-only, e.g. деньги, ворота).
+const nums = computed(() => (noun.value ? numbersOf(noun.value) : []))
+const cellCount = computed(() => nums.value.length * CASES.length)
+
 function start(levelId) {
   level.value = levelId
   score.right = 0
@@ -44,15 +50,15 @@ function start(levelId) {
 }
 
 function newRound() {
-  noun.value = sample(nouns, 1)[0]
+  noun.value = sample(nouns.value, 1)[0]
   easyChecked.value = false
   tableChecked.value = false
   selected.clear()
   for (const k of Object.keys(entries)) delete entries[k]
 
   if (level.value === 'easy') {
-    // Pick a random form to identify.
-    const num = sample(NUMBERS, 1)[0]
+    // Pick a random form (from a number the noun actually has) to identify.
+    const num = sample(numbersOf(noun.value), 1)[0]
     const c = sample(CASES, 1)[0]
     probeForm.value = noun.value.forms[num][c]
   }
@@ -81,26 +87,26 @@ function expected(num, c) {
   return noun.value.forms[num][c]
 }
 
+// Stress marks are ignored — learners type without them.
 function cellCorrect(num, c) {
-  return (entries[key(num, c)] ?? '').trim().toLowerCase() === expected(num, c).toLowerCase()
+  return normalize(entries[key(num, c)] ?? '') === normalize(expected(num, c))
+}
+
+function countRight() {
+  let right = 0
+  for (const num of nums.value) for (const c of CASES) if (cellCorrect(num, c)) right += 1
+  return right
 }
 
 function checkTable() {
   if (tableChecked.value) return
   tableChecked.value = true
-  let right = 0
-  for (const num of NUMBERS) for (const c of CASES) if (cellCorrect(num, c)) right += 1
   score.total += 1
   // One "point" per fully-correct table keeps scoring comparable across modes.
-  if (right === NUMBERS.length * CASES.length) score.right += 1
+  if (countRight() === cellCount.value) score.right += 1
 }
 
-const tableScore = computed(() => {
-  if (!tableChecked.value) return null
-  let right = 0
-  for (const num of NUMBERS) for (const c of CASES) if (cellCorrect(num, c)) right += 1
-  return right
-})
+const tableScore = computed(() => (tableChecked.value ? countRight() : null))
 
 function quit() {
   level.value = null
@@ -111,8 +117,19 @@ function quit() {
 <template>
   <section v-if="!level" class="grid">
     <h2 style="margin: 0">Noun declension</h2>
+    <p v-if="!ready && state.status === 'loading'" class="muted">Loading vocabulary…</p>
+    <p v-else-if="!ready" class="feedback bad">
+      No vocabulary available offline yet — connect once to download it.
+    </p>
     <div class="grid">
-      <button v-for="l in LEVELS" :key="l.id" class="card" style="text-align: left" @click="start(l.id)">
+      <button
+        v-for="l in LEVELS"
+        :key="l.id"
+        class="card"
+        style="text-align: left"
+        :disabled="!ready"
+        @click="start(l.id)"
+      >
         <strong>{{ l.label }}</strong>
         <div class="muted">{{ l.help }}</div>
       </button>
@@ -175,7 +192,8 @@ function quit() {
       <div class="card" style="text-align: center">
         <div style="font-size: 1.6rem" lang="ru">{{ noun.lemma }}</div>
         <div class="muted">
-          {{ noun.en }} · {{ noun.gender }}{{ noun.animate ? ' · animate' : '' }}
+          {{ noun.en }} · {{ noun.gender || 'pl' }}{{ noun.animate ? ' · animate' : '' }}
+          <span v-if="noun.cefr" class="pill">{{ noun.cefr }}</span>
           <template v-if="level === 'advanced'"> · stem <b lang="ru">{{ table.stem }}-</b></template>
         </div>
       </div>
@@ -184,7 +202,7 @@ function quit() {
         <thead>
           <tr>
             <th></th>
-            <th v-for="num in NUMBERS" :key="num" style="text-align: left; padding: 0.3rem">
+            <th v-for="num in nums" :key="num" style="text-align: left; padding: 0.3rem">
               {{ NUMBER_LABELS[num] }}
             </th>
           </tr>
@@ -194,7 +212,7 @@ function quit() {
             <th style="text-align: left; padding: 0.3rem; white-space: nowrap">
               {{ CASE_LABELS[c] }}
             </th>
-            <td v-for="num in NUMBERS" :key="num" style="padding: 0.2rem">
+            <td v-for="num in nums" :key="num" style="padding: 0.2rem">
               <div class="row" style="gap: 0.3rem; flex-wrap: nowrap">
                 <span v-if="level === 'advanced'" class="muted" lang="ru">{{ table.stem }}</span>
                 <input
@@ -222,7 +240,7 @@ function quit() {
         </tbody>
       </table>
 
-      <p v-if="tableChecked" class="muted">{{ tableScore }} / {{ NUMBERS.length * CASES.length }} cells correct.</p>
+      <p v-if="tableChecked" class="muted">{{ tableScore }} / {{ cellCount }} cells correct.</p>
 
       <div class="row">
         <button v-if="!tableChecked" class="primary" @click="checkTable">Check table</button>

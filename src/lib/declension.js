@@ -1,4 +1,10 @@
 // Pure helpers for working with Russian noun declension tables.
+//
+// A noun's `forms` is keyed by number ('sg' / 'pl') then case. Some nouns are
+// pluralia tantum (e.g. деньги, ворота) and only carry a 'pl' table, so helpers
+// iterate over whichever numbers are actually present.
+
+import { stripStress } from './text.js'
 
 export const CASES = ['nom', 'gen', 'dat', 'acc', 'ins', 'pre']
 
@@ -21,11 +27,16 @@ export const CASE_HINTS = {
   pre: 'about whom / what',
 }
 
-export const NUMBERS = ['singular', 'plural']
+export const NUMBERS = ['sg', 'pl']
 
 export const NUMBER_LABELS = {
-  singular: 'Singular',
-  plural: 'Plural',
+  sg: 'Singular',
+  pl: 'Plural',
+}
+
+/** Numbers actually present in a noun's table, in canonical order. */
+export function numbersOf(noun) {
+  return NUMBERS.filter((n) => noun.forms?.[n])
 }
 
 /**
@@ -49,26 +60,32 @@ export function commonStem(forms) {
 }
 
 /**
- * Flatten every form in a noun's table into a single list of strings.
+ * Flatten every form in a noun's table into a single list of (stress-free)
+ * strings.
  * @param {object} noun
  * @returns {string[]}
  */
 export function allForms(noun) {
-  return NUMBERS.flatMap((num) => CASES.map((c) => noun.forms[num][c]))
+  return numbersOf(noun).flatMap((num) =>
+    CASES.filter((c) => noun.forms[num][c]).map((c) => stripStress(noun.forms[num][c])),
+  )
 }
 
 /**
- * Derive the ending table (stem stripped) for a noun.
+ * Derive the ending table (stem stripped) for a noun. Stress marks are removed
+ * first so endings reflect what a learner would type.
  * @param {object} noun
  * @returns {{stem: string, endings: Record<string, Record<string, string>>}}
  */
 export function endingsTable(noun) {
   const stem = commonStem(allForms(noun))
+  const stemLen = [...stem].length
   const endings = {}
-  for (const num of NUMBERS) {
+  for (const num of numbersOf(noun)) {
     endings[num] = {}
     for (const c of CASES) {
-      endings[num][c] = [...noun.forms[num][c]].slice([...stem].length).join('')
+      if (!noun.forms[num][c]) continue
+      endings[num][c] = [...stripStress(noun.forms[num][c])].slice(stemLen).join('')
     }
   }
   return { stem, endings }
@@ -76,19 +93,20 @@ export function endingsTable(noun) {
 
 /**
  * Given a surface form, return every (number, case) slot in which the noun
- * takes exactly that form. Powers the "which case is this?" easy drill, where a
- * single form (e.g. книге = dative *and* prepositional) can have several
- * correct answers.
+ * takes exactly that form (comparison ignores stress and case). Powers the
+ * "which case is this?" easy drill, where a single form (e.g. книге = dative
+ * *and* prepositional) can have several correct answers.
  * @param {object} noun
  * @param {string} form
  * @returns {Array<{number: string, case: string}>}
  */
 export function matchingSlots(noun, form) {
-  const target = String(form).trim().toLowerCase()
+  const target = stripStress(form).trim().toLowerCase()
   const matches = []
-  for (const num of NUMBERS) {
+  for (const num of numbersOf(noun)) {
     for (const c of CASES) {
-      if (noun.forms[num][c].toLowerCase() === target) {
+      if (!noun.forms[num][c]) continue
+      if (stripStress(noun.forms[num][c]).toLowerCase() === target) {
         matches.push({ number: num, case: c })
       }
     }

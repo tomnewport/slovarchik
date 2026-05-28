@@ -1,0 +1,178 @@
+# pronouns.yml — Russian pronouns
+---
+meta:
+  type:
+    pers: personal
+    inter: interrogative
+  case:
+    nom: nominative
+    gen: genitive
+    dat: dative
+    acc: accusative
+    ins: instrumental
+    pre: prepositional
+words:
+  "вы=you":
+    cefr_level: A1
+    type: pers
+    accented: вы
+    en_gb:
+      standard: you (plural, or one person politely)
+    usage:
+      - ru: Вы говори́те по-ру́сски?
+        en_gb: Do you speak Russian?
+    forms:
+      nom: вы
+      gen: вас
+      dat: вам
+      acc: вас
+      ins: ва́ми
+      pre: вас
+  "кто=who":
+    cefr_level: A1
+    type: inter
+    accented: кто
+    en_gb:
+      standard: who (asking about a person)
+    usage:
+      - ru: Кто там?
+        en_gb: Who is there?
+    forms:
+      nom: кто
+      gen: кого́
+      dat: кому́
+      acc: кого́
+      ins: кем
+      pre: ком
+  "мы=we":
+    cefr_level: A1
+    type: pers
+    accented: мы
+    en_gb:
+      standard: we (the speaker and others)
+    usage:
+      - ru: Мы живём в Ло́ндоне.
+        en_gb: We live in London.
+    forms:
+      nom: мы
+      gen: нас
+      dat: нам
+      acc: нас
+      ins: на́ми
+      pre: нас
+  "он=he":
+    cefr_level: A1
+    type: pers
+    accented: он
+    en_gb:
+      standard: he (a male person)
+      alt:
+        - it (for masculine nouns)
+    usage:
+      - ru: Он чита́ет газе́ту.
+        en_gb: He is reading the newspaper.
+    forms:
+      nom: он
+      gen: его́
+      dat: ему́
+      acc: его́
+      ins: им
+      pre: нём
+  "она=she":
+    cefr_level: A1
+    type: pers
+    accented: она́
+    en_gb:
+      standard: she (a female person)
+      alt:
+        - it (for feminine nouns)
+    usage:
+      - ru: Она́ живёт в Москве́.
+        en_gb: She lives in Moscow.
+    forms:
+      nom: она́
+      gen: её
+      dat: ей
+      acc: её
+      ins: ей
+      pre: ней
+  "они=they":
+    cefr_level: A1
+    type: pers
+    accented: они́
+    en_gb:
+      standard: they (more than one person or thing)
+    usage:
+      - ru: Они́ рабо́тают вме́сте.
+        en_gb: They work together.
+    forms:
+      nom: они́
+      gen: их
+      dat: им
+      acc: их
+      ins: и́ми
+      pre: них
+  "оно=it":
+    cefr_level: A1
+    type: pers
+    accented: оно́
+    en_gb:
+      standard: it (for neuter nouns)
+    usage:
+      - ru: Где письмо́? — Оно́ на столе́.
+        en_gb: Where is the letter? — It is on the table.
+    forms:
+      nom: оно́
+      gen: его́
+      dat: ему́
+      acc: его́
+      ins: им
+      pre: нём
+  "ты=you":
+    cefr_level: A1
+    type: pers
+    accented: ты
+    en_gb:
+      standard: you (one person, informal)
+    usage:
+      - ru: Ты лю́бишь ко́фе?
+        en_gb: Do you like coffee?
+    forms:
+      nom: ты
+      gen: тебя́
+      dat: тебе́
+      acc: тебя́
+      ins: тобо́й
+      pre: тебе́
+  "что=what":
+    cefr_level: A1
+    type: inter
+    accented: что
+    en_gb:
+      standard: what (asking about a thing)
+    usage:
+      - ru: Что э́то?
+        en_gb: What is this?
+    forms:
+      nom: что
+      gen: чего́
+      dat: чему́
+      acc: что
+      ins: чем
+      pre: чём
+  "я=I":
+    cefr_level: A1
+    type: pers
+    accented: я
+    en_gb:
+      standard: I (the speaker)
+    usage:
+      - ru: Я живу́ здесь.
+        en_gb: I live here.
+    forms:
+      nom: я
+      gen: меня́
+      dat: мне
+      acc: меня́
+      ins: мной
+      pre: мне
