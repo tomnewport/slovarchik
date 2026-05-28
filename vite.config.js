@@ -34,7 +34,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        // Precache the app shell *and* the vocab manifest/YAML so the very first
+        // offline launch (after install) still has data to download into IDB.
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2,json,yml}'],
       },
     }),
   ],

@@ -1,20 +1,13 @@
-// Loads every YAML file under ./vocab/ at startup and builds an in-memory,
-// queryable vocabulary database. Files are bundled as raw strings (so it works
-// offline with no fetch) and parsed once on import.
+// Pure functions that turn raw YAML file contents into the normalised, queryable
+// word records used across the app. No I/O here (no fetch, no IndexedDB) so it
+// stays trivially testable; the store layer feeds it raw text.
 import yaml from 'js-yaml'
 
-import { CASES, NUMBERS } from '../lib/declension.js'
-import { stripStress } from '../lib/text.js'
+import { CASES, NUMBERS } from './declension.js'
+import { stripStress } from './text.js'
 
-// e.g. './vocab/nouns.yml' -> raw file contents.
-const raw = import.meta.glob('./vocab/*.yml', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-})
-
-// Map a filename to its part of speech (singular).
-const POS_BY_FILE = {
+/** Map a vocab filename (without extension) to its part of speech. */
+export const POS_BY_FILE = {
   nouns: 'noun',
   pronouns: 'pronoun',
   verbs: 'verb',
@@ -22,6 +15,9 @@ const POS_BY_FILE = {
   adverbs: 'adverb',
   prepositions: 'preposition',
 }
+
+/** Parts of speech in a stable display order. */
+export const partsOfSpeech = ['noun', 'pronoun', 'verb', 'adjective', 'adverb', 'preposition']
 
 /** Split the "<russian>=<english>" natural key. */
 export function parseKey(key) {
@@ -74,12 +70,12 @@ function normalizeWord(pos, key, word) {
   const std = word.en_gb?.standard ?? en
   const alts = word.en_gb?.alt ?? []
 
-  const numbers = pos === 'noun' ? word.number ?? ['sg', 'pl'] : []
+  const numbers = pos === 'noun' ? (word.number ?? ['sg', 'pl']) : []
   const forms = pos === 'noun' ? nestForms(word.declension, numbers) : {}
   const headword = headwordOf(pos, word, forms, ru)
 
-  // Accepted English answers for the vocab drill: the key gloss plus the short
-  // form of the standard and alternate meanings.
+  // Accepted English answers: the key gloss plus the short form of the standard
+  // and alternate meanings.
   const english = [...new Set([en, shortGloss(std), ...alts.map(shortGloss)].filter(Boolean))]
 
   return {
@@ -96,22 +92,23 @@ function normalizeWord(pos, key, word) {
     english,
     usage: word.usage ?? [],
     collections: word.collections ?? [],
-    // Noun-specific (empty for other POS):
     gender: word.gender ?? null,
     animacy: word.animacy ?? null,
     animate: word.animacy === 'a',
     numbers,
     forms,
-    // Everything else (conjugation, governs, type, …) stays available.
     extra: word,
   }
 }
 
-function loadAll() {
+/**
+ * Build the full, sorted word list from raw file contents.
+ * @param {Array<{pos: string, text: string}>} files
+ * @returns {object[]}
+ */
+export function buildWords(files) {
   const out = []
-  for (const [path, text] of Object.entries(raw)) {
-    const file = path.split('/').pop().replace(/\.ya?ml$/, '')
-    const pos = POS_BY_FILE[file]
+  for (const { pos, text } of files) {
     if (!pos) continue
     const doc = yaml.load(text) ?? {}
     for (const [key, word] of Object.entries(doc.words ?? {})) {
@@ -122,21 +119,31 @@ function loadAll() {
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
 
-/** Every word, sorted alphabetically. */
-export const words = loadAll()
-
-/** Words grouped by part of speech. */
-export const byPos = words.reduce((acc, w) => {
-  ;(acc[w.pos] ??= []).push(w)
-  return acc
-}, {})
-
-const byKey = new Map(words.map((w) => [w.key, w]))
-
-/** Look up a single word by its natural key. */
-export function getByKey(key) {
-  return byKey.get(key)
+/** Shape words for the vocabulary (translation) drill. */
+export function shapeVocab(words) {
+  return words.map((w) => ({
+    id: w.key,
+    ru: w.headword || w.ru,
+    en: w.english,
+    pos: w.pos,
+    cefr: w.cefr,
+    note: w.meaningNote,
+  }))
 }
 
-/** All parts of speech present, in a stable order. */
-export const partsOfSpeech = ['noun', 'pronoun', 'verb', 'adjective', 'adverb', 'preposition']
+/** Shape declinable nouns for the declension drill. */
+export function shapeNouns(words) {
+  return words
+    .filter((w) => w.pos === 'noun' && Object.keys(w.forms).length > 0)
+    .map((w) => ({
+      id: w.key,
+      lemma: w.headword || w.ru,
+      en: w.meaning,
+      cefr: w.cefr,
+      gender: w.gender,
+      animacy: w.animacy,
+      animate: w.animate,
+      numbers: w.numbers,
+      forms: w.forms,
+    }))
+}

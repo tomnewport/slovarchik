@@ -1,6 +1,14 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeAll } from 'vitest'
 import { mount } from '@vue/test-utils'
 import VocabView from './VocabView.vue'
+import { state } from '../stores/vocab.js'
+import { loadFixtureWords } from '../test/fixtures.js'
+
+// Seed the reactive store with real vocab data so the menu is ready.
+beforeAll(() => {
+  state.words = loadFixtureWords()
+  state.status = 'ready'
+})
 
 describe('VocabView', () => {
   it('shows the three difficulty options on the menu', () => {

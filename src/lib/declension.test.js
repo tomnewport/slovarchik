@@ -8,7 +8,9 @@ import {
   numbersOf,
   CASES,
 } from './declension.js'
-import { nouns } from '../data/nouns.js'
+import { loadFixtureNouns } from '../test/fixtures.js'
+
+const nouns = loadFixtureNouns()
 
 const kniga = nouns.find((n) => n.id === 'книга=book')
 const sobaka = nouns.find((n) => n.id === 'собака=dog')

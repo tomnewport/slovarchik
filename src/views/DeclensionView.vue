@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive, ref } from 'vue'
-import { nouns } from '../data/nouns.js'
+import { nouns, state } from '../stores/vocab.js'
 import {
   CASES,
   CASE_LABELS,
@@ -12,6 +12,8 @@ import {
   validCases,
 } from '../lib/declension.js'
 import { normalize, sample } from '../lib/quiz.js'
+
+const ready = computed(() => nouns.value.length > 0)
 
 const LEVELS = [
   { id: 'easy', label: 'Easy · spot the case', help: 'Which case(s) could this form be?' },
@@ -48,7 +50,7 @@ function start(levelId) {
 }
 
 function newRound() {
-  noun.value = sample(nouns, 1)[0]
+  noun.value = sample(nouns.value, 1)[0]
   easyChecked.value = false
   tableChecked.value = false
   selected.clear()
@@ -115,8 +117,19 @@ function quit() {
 <template>
   <section v-if="!level" class="grid">
     <h2 style="margin: 0">Noun declension</h2>
+    <p v-if="!ready && state.status === 'loading'" class="muted">Loading vocabulary…</p>
+    <p v-else-if="!ready" class="feedback bad">
+      No vocabulary available offline yet — connect once to download it.
+    </p>
     <div class="grid">
-      <button v-for="l in LEVELS" :key="l.id" class="card" style="text-align: left" @click="start(l.id)">
+      <button
+        v-for="l in LEVELS"
+        :key="l.id"
+        class="card"
+        style="text-align: left"
+        :disabled="!ready"
+        @click="start(l.id)"
+      >
         <strong>{{ l.label }}</strong>
         <div class="muted">{{ l.help }}</div>
       </button>

@@ -43,12 +43,33 @@ line up with the genitive.
 - Deployed to **GitHub Pages** via GitHub Actions
 
 The quiz/declension logic lives in framework-free modules under
-[`src/lib`](src/lib) so it can be unit-tested in isolation. The vocabulary lives
-in human-editable **YAML files** under [`src/data/vocab`](src/data/vocab) (one
-per part of speech) which [`src/data/db.js`](src/data/db.js) bundles and parses
-into an in-memory database at startup — no backend, no fetch, works offline.
+[`src/lib`](src/lib) so it can be unit-tested in isolation. The vocabulary is
+**not bundled** — it's a set of human-editable **YAML files** served as static
+assets from [`public/vocab`](public/vocab) (one per part of speech), downloaded
+on demand and cached in IndexedDB. This keeps the JS bundle small and constant
+as the word lists grow.
 
 ## The vocabulary database
+
+### How loading works
+
+1. On startup the app reads any vocab already cached in **IndexedDB** and renders
+   immediately (works fully offline).
+2. If online, it fetches [`vocab/manifest.json`](public/vocab/manifest.json),
+   which lists each file and an `updated` timestamp.
+3. Any file that is new or whose timestamp is newer than the cached copy is
+   downloaded, parsed and written back to IndexedDB; the drills update reactively.
+
+The service worker also precaches the manifest and YAML, so even the *first*
+offline launch after install has data to load. The flow lives in
+[`src/stores/vocab.js`](src/stores/vocab.js) (reactive store + sync),
+[`src/lib/idb.js`](src/lib/idb.js) (IndexedDB) and
+[`src/lib/vocabBuild.js`](src/lib/vocabBuild.js) (pure YAML → records builder).
+
+To publish updated words, edit the YAML and bump the file's `updated` timestamp
+in the manifest.
+
+### File format
 
 Each part of speech is one YAML file (`nouns.yml`, `verbs.yml`, …). Every word
 is keyed by a **natural key** of the form `"<russian>=<english>"`, which keeps
@@ -79,9 +100,9 @@ words:
       # …
 ```
 
-`db.js` exposes `words` (all entries, sorted alphabetically by Russian),
-`byPos`, `getByKey(key)` and `parseKey()`. Words are loaded via
-`import.meta.glob`, so **adding a new `.yml` file is picked up automatically**.
+The store exposes reactive `vocab` and `nouns` lists (sorted alphabetically by
+Russian) plus a `state` with the current `status`. Add a new part of speech by
+dropping a `.yml` file in `public/vocab/` and adding it to the manifest.
 
 ## Develop
 
@@ -97,12 +118,12 @@ npm run gen:icons  # regenerate the PWA PNG icons
 
 ## Adding words
 
-Append entries to the relevant file in [`src/data/vocab`](src/data/vocab)
-following the schema above (keep each file sorted alphabetically by Russian).
-The `db.test.js` and `declension.test.js` suites guard the shape — unique keys,
-a valid CEFR level, a meaning, accepted answers, and complete case tables for
-nouns. Noun endings (for the advanced drill) are derived automatically from the
-forms.
+Append entries to the relevant file in [`public/vocab`](public/vocab) following
+the schema above (keep each file sorted alphabetically by Russian) and bump its
+`updated` timestamp in `manifest.json`. The `vocabBuild.test.js` and
+`declension.test.js` suites guard the shape — unique keys, a valid CEFR level, a
+meaning, accepted answers, and complete case tables for nouns. Noun endings (for
+the advanced drill) are derived automatically from the forms.
 
 ## Deployment
 

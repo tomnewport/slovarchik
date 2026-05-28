@@ -1,7 +1,9 @@
 <script setup>
 import { computed, reactive, ref, nextTick } from 'vue'
-import { vocab } from '../data/vocab.js'
+import { vocab, state } from '../stores/vocab.js'
 import { buildChoices, checkAnswer, maskWord, sample } from '../lib/quiz.js'
+
+const ready = computed(() => vocab.value.length > 0)
 
 const LEVELS = [
   { id: 'easy', label: 'Easy · match', help: 'Pick the right translation.' },
@@ -39,9 +41,9 @@ function nextQuestion() {
   answered.value = false
   wasCorrect.value = false
   typed.value = ''
-  current.value = sample(vocab, 1)[0]
+  current.value = sample(vocab.value, 1)[0]
   if (level.value === 'easy') {
-    choices.value = buildChoices(current.value, vocab, 4, (w) => w.id)
+    choices.value = buildChoices(current.value, vocab.value, 4, (w) => w.id)
   } else {
     nextTick(() => inputEl.value?.focus())
   }
@@ -102,8 +104,19 @@ function quit() {
         EN → RU
       </button>
     </div>
+    <p v-if="!ready && state.status === 'loading'" class="muted">Loading vocabulary…</p>
+    <p v-else-if="!ready" class="feedback bad">
+      No vocabulary available offline yet — connect once to download it.
+    </p>
     <div class="grid">
-      <button v-for="l in LEVELS" :key="l.id" class="card" style="text-align: left" @click="start(l.id)">
+      <button
+        v-for="l in LEVELS"
+        :key="l.id"
+        class="card"
+        style="text-align: left"
+        :disabled="!ready"
+        @click="start(l.id)"
+      >
         <strong>{{ l.label }}</strong>
         <div class="muted">{{ l.help }}</div>
       </button>
