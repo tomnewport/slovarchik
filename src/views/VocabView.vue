@@ -1,7 +1,7 @@
 <script setup>
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
-import { buildChoices, checkAnswer, sample } from '../lib/quiz.js'
+import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
 import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 
@@ -11,7 +11,7 @@ const CELEBRATE_MS = 1000
 const ready = computed(() => vocab.value.length > 0)
 
 const LEVELS = [
-  { id: 'easy', label: 'Easy · match', help: 'Pick the right translation.' },
+  { id: 'easy', label: 'Easy · match', help: 'Pair up Russian and English.' },
   {
     id: 'intermediate',
     label: 'Intermediate · hint',
@@ -20,18 +20,31 @@ const LEVELS = [
   { id: 'advanced', label: 'Advanced · blind', help: 'Type it with no help.' },
 ]
 
+// How many pairs to show on the easy-mode matching board at once.
+const BOARD_PAIRS = 5
+
 const level = ref(null)
 const direction = ref('ru-en') // or 'en-ru'
 const score = reactive({ right: 0, total: 0 })
 
 const current = ref(null)
-const choices = ref([])
 const answered = ref(false)
 const wasCorrect = ref(false)
 const typed = ref('')
 const inputEl = ref(null)
 const celebrating = ref(false)
 let advanceTimer = null
+
+// Easy-mode matching board: two independently-shuffled columns of the same
+// words. The player taps one Russian and one English item to clear a pair.
+const boardLeft = ref([]) // Russian column
+const boardRight = ref([]) // English column
+const selectedLeft = ref(null) // word id picked in the left column
+const selectedRight = ref(null) // word id picked in the right column
+const matched = reactive(new Set()) // ids of cleared pairs
+const wrongLeft = ref(null) // transient "wrong" flash markers
+const wrongRight = ref(null)
+let wrongTimer = null
 
 // English answers may be arrays; show the first as the canonical prompt/answer.
 const promptOf = (w) => (direction.value === 'ru-en' ? w.ru : firstEn(w))
@@ -45,7 +58,11 @@ function start(levelId) {
   level.value = levelId
   score.right = 0
   score.total = 0
-  nextQuestion()
+  if (levelId === 'easy') {
+    nextBoard()
+  } else {
+    nextQuestion()
+  }
 }
 
 function nextQuestion() {
@@ -55,12 +72,65 @@ function nextQuestion() {
   wasCorrect.value = false
   typed.value = ''
   current.value = sample(vocab.value, 1)[0]
-  if (level.value === 'easy') {
-    choices.value = buildChoices(current.value, vocab.value, 4, (w) => w.id)
-  } else {
-    nextTick(() => inputEl.value?.focus())
-  }
+  nextTick(() => inputEl.value?.focus())
   applyKeyboardHint()
+}
+
+// Deal a fresh matching board: a sample of distinct words shown as two columns,
+// each shuffled on its own so the rows don't line up.
+function nextBoard() {
+  clearWrong()
+  matched.clear()
+  selectedLeft.value = null
+  selectedRight.value = null
+  const words = sample(vocab.value, Math.min(BOARD_PAIRS, vocab.value.length))
+  boardLeft.value = shuffle(words)
+  boardRight.value = shuffle(words)
+}
+
+function clearWrong() {
+  if (wrongTimer) clearTimeout(wrongTimer)
+  wrongTimer = null
+  wrongLeft.value = null
+  wrongRight.value = null
+}
+
+function pickLeft(word) {
+  if (matched.has(word.id)) return
+  clearWrong()
+  selectedLeft.value = selectedLeft.value === word.id ? null : word.id
+  resolveMatch()
+}
+
+function pickRight(word) {
+  if (matched.has(word.id)) return
+  clearWrong()
+  selectedRight.value = selectedRight.value === word.id ? null : word.id
+  resolveMatch()
+}
+
+// Once one item is chosen in each column, score the attempt: a hit clears the
+// pair, a miss flashes both briefly so the player can try again.
+function resolveMatch() {
+  if (selectedLeft.value == null || selectedRight.value == null) return
+  const left = selectedLeft.value
+  const right = selectedRight.value
+  score.total += 1
+  if (left === right) {
+    matched.add(left)
+    score.right += 1
+    selectedLeft.value = null
+    selectedRight.value = null
+    if (matched.size === boardLeft.value.length) {
+      setTimeout(nextBoard, 500)
+    }
+  } else {
+    wrongLeft.value = left
+    wrongRight.value = right
+    selectedLeft.value = null
+    selectedRight.value = null
+    wrongTimer = setTimeout(clearWrong, 600)
+  }
 }
 
 // Intermediate mode highlights the answer's letters on the on-screen Russian
@@ -73,6 +143,20 @@ function applyKeyboardHint() {
   } else {
     clearHintLetters()
   }
+}
+
+function leftClass(word) {
+  if (matched.has(word.id)) return 'matched'
+  if (word.id === selectedLeft.value) return 'selected'
+  if (word.id === wrongLeft.value) return 'wrong'
+  return ''
+}
+
+function rightClass(word) {
+  if (matched.has(word.id)) return 'matched'
+  if (word.id === selectedRight.value) return 'selected'
+  if (word.id === wrongRight.value) return 'wrong'
+  return ''
 }
 
 function record(correct) {
@@ -88,10 +172,6 @@ function record(correct) {
   }
 }
 
-function pick(word) {
-  record(word.id === current.value.id)
-}
-
 function submitTyped() {
   if (answered.value) {
     nextQuestion()
@@ -100,18 +180,16 @@ function submitTyped() {
   record(checkAnswer(typed.value, answerOf(current.value)))
 }
 
-function classFor(word) {
-  if (!answered.value) return ''
-  if (word.id === current.value.id) return 'correct'
-  return 'wrong'
-}
-
 function quit() {
+  clearWrong()
   clearTimeout(advanceTimer)
   clearHintLetters()
   celebrating.value = false
   level.value = null
   current.value = null
+  boardLeft.value = []
+  boardRight.value = []
+  matched.clear()
 }
 
 onUnmounted(() => {
@@ -163,23 +241,41 @@ onUnmounted(() => {
       <span class="muted">Score: {{ score.right }} / {{ score.total }}</span>
     </div>
 
-    <div class="card" style="text-align: center">
+    <div v-if="level !== 'easy'" class="card" style="text-align: center">
       <div class="muted">Translate</div>
       <div style="font-size: 2rem; margin: 0.5rem 0" lang="ru">{{ promptOf(current) }}</div>
     </div>
 
-    <!-- Easy: multiple choice -->
-    <div v-if="level === 'easy'" class="grid">
-      <button
-        v-for="opt in choices"
-        :key="opt.id"
-        class="choice"
-        :class="classFor(opt)"
-        :disabled="answered"
-        @click="pick(opt)"
-      >
-        {{ displayAnswer(opt) }}
-      </button>
+    <!-- Easy: tap a Russian word and its English match to clear the pair. -->
+    <div v-if="level === 'easy'">
+      <p class="muted" style="margin: 0 0 0.75rem">Tap a matching pair to clear it.</p>
+      <div class="match">
+        <div class="match-col">
+          <button
+            v-for="word in boardLeft"
+            :key="word.id"
+            class="match-item"
+            :class="leftClass(word)"
+            :disabled="matched.has(word.id)"
+            lang="ru"
+            @click="pickLeft(word)"
+          >
+            {{ word.ru }}
+          </button>
+        </div>
+        <div class="match-col">
+          <button
+            v-for="word in boardRight"
+            :key="word.id"
+            class="match-item"
+            :class="rightClass(word)"
+            :disabled="matched.has(word.id)"
+            @click="pickRight(word)"
+          >
+            {{ firstEn(word) }}
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Intermediate / advanced: typing -->

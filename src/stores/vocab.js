@@ -5,7 +5,7 @@
 // timestamp is newer than the cached copy, storing them back in IndexedDB.
 import { computed, reactive } from 'vue'
 
-import { buildWords, shapeVocab, shapeNouns } from '../lib/vocabBuild.js'
+import { buildWords, shapeVocab, shapeNouns, shapePhrases } from '../lib/vocabBuild.js'
 import * as idb from '../lib/idb.js'
 
 const BASE = import.meta.env.BASE_URL || '/'
@@ -22,6 +22,7 @@ export const state = reactive({
 
 export const vocab = computed(() => shapeVocab(state.words))
 export const nouns = computed(() => shapeNouns(state.words))
+export const phrases = computed(() => shapePhrases(state.words))
 export const isReady = computed(() => state.words.length > 0)
 
 function rebuild(records) {

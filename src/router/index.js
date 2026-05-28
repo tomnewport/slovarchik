@@ -15,6 +15,11 @@ export const routes = [
     name: 'declension',
     component: () => import('../views/DeclensionView.vue'),
   },
+  {
+    path: '/phrases',
+    name: 'phrases',
+    component: () => import('../views/PhraseTesterView.vue'),
+  },
 ]
 
 export const router = createRouter({

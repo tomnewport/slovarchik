@@ -27,5 +27,15 @@ import { RouterLink } from 'vue-router'
       </p>
       <span class="pill">6 cases · 2 numbers</span>
     </RouterLink>
+
+    <RouterLink to="/phrases" class="card" style="text-decoration: none; color: inherit">
+      <h2 style="margin-top: 0">💬 Phrases</h2>
+      <p>
+        Translate whole sentences. <strong>Easy:</strong> tap the words into order.
+        <strong>Intermediate:</strong> type with a hinting keyboard.
+        <strong>Hard:</strong> type it blind.
+      </p>
+      <span class="pill">build → guided → blind</span>
+    </RouterLink>
   </section>
 </template>
