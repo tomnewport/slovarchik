@@ -1,0 +1,158 @@
+# adjectives.yml — Russian adjectives
+# `accented` holds the masculine nominative singular (dictionary form).
+# `forms` gives the nominative for each gender + plural.
+---
+meta:
+  form:
+    m: masculine nominative singular
+    f: feminine nominative singular
+    n: neuter nominative singular
+    pl: nominative plural
+    comparative: comparative degree
+words:
+  "белый=white":
+    cefr_level: A1
+    accented: бе́лый
+    en_gb:
+      standard: white (the colour of snow)
+    usage:
+      - ru: На столе́ лежи́т бе́лый лист бума́ги.
+        en_gb: A white sheet of paper lies on the table.
+    forms:
+      m: бе́лый
+      f: бе́лая
+      n: бе́лое
+      pl: бе́лые
+      comparative: беле́е
+  "большой=big":
+    cefr_level: A1
+    accented: большо́й
+    en_gb:
+      standard: big (large in size)
+      alt:
+        - large
+    usage:
+      - ru: Э́то большо́й го́род.
+        en_gb: This is a big city.
+    forms:
+      m: большо́й
+      f: больша́я
+      n: большо́е
+      pl: больши́е
+      comparative: бо́льше
+  "красивый=beautiful":
+    cefr_level: A2
+    accented: краси́вый
+    en_gb:
+      standard: beautiful (very nice to look at)
+      alt:
+        - handsome
+    usage:
+      - ru: Кака́я краси́вая пе́сня!
+        en_gb: What a beautiful song!
+    forms:
+      m: краси́вый
+      f: краси́вая
+      n: краси́вое
+      pl: краси́вые
+      comparative: краси́вее
+  "красный=red":
+    cefr_level: A1
+    accented: кра́сный
+    en_gb:
+      standard: red (the colour of blood)
+    usage:
+      - ru: У неё кра́сная маши́на.
+        en_gb: She has a red car.
+    forms:
+      m: кра́сный
+      f: кра́сная
+      n: кра́сное
+      pl: кра́сные
+  "маленький=small":
+    cefr_level: A1
+    accented: ма́ленький
+    en_gb:
+      standard: small (little in size)
+      alt:
+        - little
+    usage:
+      - ru: У них ма́ленькая соба́ка.
+        en_gb: They have a small dog.
+    forms:
+      m: ма́ленький
+      f: ма́ленькая
+      n: ма́ленькое
+      pl: ма́ленькие
+      comparative: ме́ньше
+  "новый=new":
+    cefr_level: A1
+    accented: но́вый
+    en_gb:
+      standard: new (recently made or bought)
+    usage:
+      - ru: У меня́ но́вый телефо́н.
+        en_gb: I have a new phone.
+    forms:
+      m: но́вый
+      f: но́вая
+      n: но́вое
+      pl: но́вые
+      comparative: нове́е
+  "плохой=bad":
+    cefr_level: A1
+    accented: плохо́й
+    en_gb:
+      standard: bad (not good)
+    usage:
+      - ru: Сего́дня плоха́я пого́да.
+        en_gb: The weather is bad today.
+    forms:
+      m: плохо́й
+      f: плоха́я
+      n: плохо́е
+      pl: плохи́е
+      comparative: ху́же
+  "русский=Russian":
+    cefr_level: A1
+    accented: ру́сский
+    en_gb:
+      standard: Russian (from Russia, or the language)
+    usage:
+      - ru: Он чита́ет ру́сский журна́л.
+        en_gb: He is reading a Russian magazine.
+    forms:
+      m: ру́сский
+      f: ру́сская
+      n: ру́сское
+      pl: ру́сские
+  "старый=old":
+    cefr_level: A1
+    accented: ста́рый
+    en_gb:
+      standard: old (not new, or aged)
+    usage:
+      - ru: Э́то о́чень ста́рый дом.
+        en_gb: This is a very old house.
+    forms:
+      m: ста́рый
+      f: ста́рая
+      n: ста́рое
+      pl: ста́рые
+      comparative: ста́рше
+  "хороший=good":
+    cefr_level: A1
+    accented: хоро́ший
+    en_gb:
+      standard: good (of high quality)
+      alt:
+        - nice
+    usage:
+      - ru: Он хоро́ший друг.
+        en_gb: He is a good friend.
+    forms:
+      m: хоро́ший
+      f: хоро́шая
+      n: хоро́шее
+      pl: хоро́шие
+      comparative: лу́чше

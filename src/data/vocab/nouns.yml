@@ -1,0 +1,302 @@
+# nouns.yml — Russian nouns
+# Natural key: "<russian>=<english>" (disambiguates homophones).
+# Stress is marked with a combining acute accent (´, U+0301) on the vowel.
+---
+meta:
+  gender:
+    m: masculine
+    f: feminine
+    n: neuter
+  animacy:
+    a: animate
+    i: inanimate
+  number:
+    sg: singular
+    pl: plural
+  case:
+    nom: nominative
+    gen: genitive
+    dat: dative
+    acc: accusative
+    ins: instrumental
+    pre: prepositional
+  declension:
+    sg_nom: nominative singular
+    pl_nom: nominative plural
+words:
+  "вода=water":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the kitchen
+      - nature
+    en_gb:
+      standard: water (the clear liquid you drink)
+    usage:
+      - ru: Я пью́ во́ду ка́ждое у́тро.
+        en_gb: I drink water every morning.
+    declension:
+      sg_nom: вода́
+      sg_gen: воды́
+      sg_dat: воде́
+      sg_acc: во́ду
+      sg_ins: водо́й
+      sg_pre: воде́
+      pl_nom: во́ды
+      pl_gen: вод
+      pl_dat: во́дам
+      pl_acc: во́ды
+      pl_ins: во́дами
+      pl_pre: во́дах
+  "ворота=gate":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["pl"]
+    collections:
+      - in the garden
+      - architecture
+    en_gb:
+      standard: gate (a doorlike structure outside a house)
+      alt:
+        - goal (in sports, the area a ball is put into)
+    usage:
+      - ru: Больши́е желе́зные воро́та ме́дленно откры́лись.
+        en_gb: The big iron gate slowly opened.
+    declension:
+      pl_nom: воро́та
+      pl_gen: воро́т
+      pl_dat: воро́там
+      pl_acc: воро́та
+      pl_ins: воро́тами
+      pl_pre: воро́тах
+  "город=city":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+    en_gb:
+      standard: city (a large town)
+      alt:
+        - town
+    usage:
+      - ru: Москва́ — большо́й и краси́вый го́род.
+        en_gb: Moscow is a big and beautiful city.
+    declension:
+      sg_nom: го́род
+      sg_gen: го́рода
+      sg_dat: го́роду
+      sg_acc: го́род
+      sg_ins: го́родом
+      sg_pre: го́роде
+      pl_nom: города́
+      pl_gen: городо́в
+      pl_dat: города́м
+      pl_acc: города́
+      pl_ins: города́ми
+      pl_pre: города́х
+  "деньги=money":
+    cefr_level: A1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - shopping
+    en_gb:
+      standard: money (what you pay with)
+    usage:
+      - ru: У меня́ нет де́нег.
+        en_gb: I don't have any money.
+    declension:
+      pl_nom: де́ньги
+      pl_gen: де́нег
+      pl_dat: деньга́м
+      pl_acc: де́ньги
+      pl_ins: деньга́ми
+      pl_pre: деньга́х
+  "дом=house":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - family
+    en_gb:
+      standard: house (a building people live in)
+      alt:
+        - home
+    usage:
+      - ru: Наш дом стои́т у реки́.
+        en_gb: Our house stands by the river.
+    declension:
+      sg_nom: дом
+      sg_gen: до́ма
+      sg_dat: до́му
+      sg_acc: дом
+      sg_ins: до́мом
+      sg_pre: до́ме
+      pl_nom: дома́
+      pl_gen: домо́в
+      pl_dat: дома́м
+      pl_acc: дома́
+      pl_ins: дома́ми
+      pl_pre: дома́х
+  "книга=book":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - school
+      - reading
+    en_gb:
+      standard: book (pages bound together to read)
+    usage:
+      - ru: Э́то о́чень интере́сная кни́га.
+        en_gb: This is a very interesting book.
+    declension:
+      sg_nom: кни́га
+      sg_gen: кни́ги
+      sg_dat: кни́ге
+      sg_acc: кни́гу
+      sg_ins: кни́гой
+      sg_pre: кни́ге
+      pl_nom: кни́ги
+      pl_gen: книг
+      pl_dat: кни́гам
+      pl_acc: кни́ги
+      pl_ins: кни́гами
+      pl_pre: кни́гах
+  "кошка=cat":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - animals
+    en_gb:
+      standard: cat (a small furry pet)
+    usage:
+      - ru: На́ша ко́шка лю́бит спать на дива́не.
+        en_gb: Our cat likes to sleep on the sofa.
+    declension:
+      sg_nom: ко́шка
+      sg_gen: ко́шки
+      sg_dat: ко́шке
+      sg_acc: ко́шку
+      sg_ins: ко́шкой
+      sg_pre: ко́шке
+      pl_nom: ко́шки
+      pl_gen: ко́шек
+      pl_dat: ко́шкам
+      pl_acc: ко́шек
+      pl_ins: ко́шками
+      pl_pre: ко́шках
+  "море=sea":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - holiday
+    en_gb:
+      standard: sea (a large area of salt water)
+    usage:
+      - ru: Ле́том мы е́здим на мо́ре.
+        en_gb: In summer we go to the sea.
+    declension:
+      sg_nom: мо́ре
+      sg_gen: мо́ря
+      sg_dat: мо́рю
+      sg_acc: мо́ре
+      sg_ins: мо́рем
+      sg_pre: мо́ре
+      pl_nom: моря́
+      pl_gen: море́й
+      pl_dat: моря́м
+      pl_acc: моря́
+      pl_ins: моря́ми
+      pl_pre: моря́х
+  "работа=work":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: work (a job, or effort you do)
+      alt:
+        - job
+    usage:
+      - ru: Я иду́ на рабо́ту.
+        en_gb: I am going to work.
+    declension:
+      sg_nom: рабо́та
+      sg_gen: рабо́ты
+      sg_dat: рабо́те
+      sg_acc: рабо́ту
+      sg_ins: рабо́той
+      sg_pre: рабо́те
+      pl_nom: рабо́ты
+      pl_gen: рабо́т
+      pl_dat: рабо́там
+      pl_acc: рабо́ты
+      pl_ins: рабо́тами
+      pl_pre: рабо́тах
+  "собака=dog":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - animals
+    en_gb:
+      standard: dog (a common pet that barks)
+    usage:
+      - ru: Соба́ка гро́мко ла́ет на у́лице.
+        en_gb: The dog is barking loudly outside.
+    declension:
+      sg_nom: соба́ка
+      sg_gen: соба́ки
+      sg_dat: соба́ке
+      sg_acc: соба́ку
+      sg_ins: соба́кой
+      sg_pre: соба́ке
+      pl_nom: соба́ки
+      pl_gen: соба́к
+      pl_dat: соба́кам
+      pl_acc: соба́к
+      pl_ins: соба́ками
+      pl_pre: соба́ках
+  "студент=student":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - school
+      - people
+    en_gb:
+      standard: student (a person who studies)
+    usage:
+      - ru: Э́тот студе́нт у́чится в университе́те.
+        en_gb: This student studies at the university.
+    declension:
+      sg_nom: студе́нт
+      sg_gen: студе́нта
+      sg_dat: студе́нту
+      sg_acc: студе́нта
+      sg_ins: студе́нтом
+      sg_pre: студе́нте
+      pl_nom: студе́нты
+      pl_gen: студе́нтов
+      pl_dat: студе́нтам
+      pl_acc: студе́нтов
+      pl_ins: студе́нтами
+      pl_pre: студе́нтах

@@ -43,8 +43,45 @@ line up with the genitive.
 - Deployed to **GitHub Pages** via GitHub Actions
 
 The quiz/declension logic lives in framework-free modules under
-[`src/lib`](src/lib) so it can be unit-tested in isolation; the word and noun
-data live in [`src/data`](src/data).
+[`src/lib`](src/lib) so it can be unit-tested in isolation. The vocabulary lives
+in human-editable **YAML files** under [`src/data/vocab`](src/data/vocab) (one
+per part of speech) which [`src/data/db.js`](src/data/db.js) bundles and parses
+into an in-memory database at startup — no backend, no fetch, works offline.
+
+## The vocabulary database
+
+Each part of speech is one YAML file (`nouns.yml`, `verbs.yml`, …). Every word
+is keyed by a **natural key** of the form `"<russian>=<english>"`, which keeps
+homographs distinct (e.g. a word that declines differently per meaning gets one
+entry per meaning). Stress is marked with a combining acute accent (´) on the
+stressed vowel; the drills strip it when grading what you type, but show it for
+learning.
+
+```yaml
+# nouns.yml
+words:
+  "ворота=gate":
+    cefr_level: B2          # A1 | A2 | B1 | B2 | C1 | C2
+    gender: n               # m | f | n  (omit for pluralia tantum)
+    animacy: i              # a (animate) | i (inanimate)
+    number: ["pl"]          # which numbers exist — ворота is plural-only
+    collections: [architecture]
+    en_gb:
+      standard: gate (a doorlike structure outside a house)   # short gloss (clarification)
+      alt:
+        - goal (in sports, the area a ball is put into)
+    usage:
+      - ru: Больши́е воро́та ме́дленно откры́лись.
+        en_gb: The big gate slowly opened.
+    declension:             # flat <number>_<case> keys: sg_nom, pl_gen, …
+      pl_nom: воро́та
+      pl_gen: воро́т
+      # …
+```
+
+`db.js` exposes `words` (all entries, sorted alphabetically by Russian),
+`byPos`, `getByKey(key)` and `parseKey()`. Words are loaded via
+`import.meta.glob`, so **adding a new `.yml` file is picked up automatically**.
 
 ## Develop
 
@@ -58,13 +95,14 @@ npm run preview    # serve the production build locally
 npm run gen:icons  # regenerate the PWA PNG icons
 ```
 
-## Adding words & nouns
+## Adding words
 
-- Vocabulary: append entries to [`src/data/vocab.js`](src/data/vocab.js).
-  `en` may be a string or an array of accepted answers.
-- Nouns: append a full declension table to
-  [`src/data/nouns.js`](src/data/nouns.js). The `data integrity` test guards the
-  shape, and endings are derived automatically from the forms.
+Append entries to the relevant file in [`src/data/vocab`](src/data/vocab)
+following the schema above (keep each file sorted alphabetically by Russian).
+The `db.test.js` and `declension.test.js` suites guard the shape — unique keys,
+a valid CEFR level, a meaning, accepted answers, and complete case tables for
+nouns. Noun endings (for the advanced drill) are derived automatically from the
+forms.
 
 ## Deployment
 

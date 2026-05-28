@@ -5,13 +5,14 @@ import {
   endingsTable,
   matchingSlots,
   validCases,
+  numbersOf,
   CASES,
-  NUMBERS,
 } from './declension.js'
 import { nouns } from '../data/nouns.js'
 
-const kniga = nouns.find((n) => n.id === 'kniga')
-const sobaka = nouns.find((n) => n.id === 'sobaka')
+const kniga = nouns.find((n) => n.id === 'книга=book')
+const sobaka = nouns.find((n) => n.id === 'собака=dog')
+const dengi = nouns.find((n) => n.id === 'деньги=money')
 
 describe('commonStem', () => {
   it('finds the shared prefix', () => {
@@ -25,33 +26,44 @@ describe('commonStem', () => {
   })
 })
 
+describe('numbersOf', () => {
+  it('returns both numbers for a normal noun', () => {
+    expect(numbersOf(kniga)).toEqual(['sg', 'pl'])
+  })
+  it('returns only plural for a pluralia tantum noun', () => {
+    expect(numbersOf(dengi)).toEqual(['pl'])
+  })
+})
+
 describe('allForms', () => {
-  it('flattens every slot in the table', () => {
-    expect(allForms(kniga)).toHaveLength(NUMBERS.length * CASES.length)
+  it('flattens every present slot and strips stress', () => {
+    const forms = allForms(kniga)
+    expect(forms).toHaveLength(2 * CASES.length)
+    expect(forms).toContain('книга') // not "кни́га"
   })
 })
 
 describe('endingsTable', () => {
-  it('derives endings by stripping the stem', () => {
+  it('derives stress-free endings by stripping the stem', () => {
     const { stem, endings } = endingsTable(kniga)
     expect(stem).toBe('книг')
-    expect(endings.singular.nom).toBe('а')
-    expect(endings.singular.gen).toBe('и')
-    expect(endings.plural.gen).toBe('') // книг — bare stem
+    expect(endings.sg.nom).toBe('а')
+    expect(endings.sg.gen).toBe('и')
+    expect(endings.pl.gen).toBe('') // книг — bare stem
   })
 })
 
 describe('matchingSlots / validCases', () => {
   it('finds the syncretic dative & prepositional singular of книга (книге)', () => {
-    const cases = validCases(kniga, 'книге')
-    expect(cases).toEqual(new Set(['dat', 'pre']))
+    expect(validCases(kniga, 'книге')).toEqual(new Set(['dat', 'pre']))
+  })
+  it('ignores stress marks in the probe form', () => {
+    expect(validCases(kniga, 'кни́ге')).toEqual(new Set(['dat', 'pre']))
   })
   it('finds animate accusative plural = genitive plural for собака (собак)', () => {
     const slots = matchingSlots(sobaka, 'собак')
-    const accPl = slots.find((s) => s.number === 'plural' && s.case === 'acc')
-    const genPl = slots.find((s) => s.number === 'plural' && s.case === 'gen')
-    expect(accPl).toBeTruthy()
-    expect(genPl).toBeTruthy()
+    expect(slots.some((s) => s.number === 'pl' && s.case === 'acc')).toBe(true)
+    expect(slots.some((s) => s.number === 'pl' && s.case === 'gen')).toBe(true)
   })
   it('returns an empty set for a form that does not occur', () => {
     expect(validCases(kniga, 'нет-такого').size).toBe(0)
@@ -59,9 +71,10 @@ describe('matchingSlots / validCases', () => {
 })
 
 describe('data integrity', () => {
-  it('every noun has all cases for both numbers', () => {
+  it('every noun has all cases for each number it declares', () => {
     for (const noun of nouns) {
-      for (const num of NUMBERS) {
+      expect(numbersOf(noun).length).toBeGreaterThan(0)
+      for (const num of numbersOf(noun)) {
         for (const c of CASES) {
           expect(typeof noun.forms[num][c]).toBe('string')
           expect(noun.forms[num][c].length).toBeGreaterThan(0)

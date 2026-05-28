@@ -1,19 +1,9 @@
 // Pure, framework-free quiz helpers. Kept side-effect free so they are easy to
 // unit test and reuse across the vocab and declension drills.
 
-/**
- * Normalise a Russian/English answer for comparison: trim, lowercase, collapse
- * internal whitespace and treat ё/е as equivalent (a very common typing slip).
- * @param {string} value
- * @returns {string}
- */
-export function normalize(value) {
-  return String(value ?? '')
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .replace(/ё/g, 'е')
-}
+import { normalize } from './text.js'
+
+export { normalize }
 
 /**
  * Check a free-text answer against one or more accepted answers.

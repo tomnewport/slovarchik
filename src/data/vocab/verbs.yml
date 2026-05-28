@@ -1,0 +1,237 @@
+# verbs.yml — Russian verbs
+# `accented` holds the infinitive (dictionary form) with stress marked.
+---
+meta:
+  aspect:
+    impf: imperfective
+    pf: perfective
+  conjugation:
+    present: present tense (imperfective)
+    future: simple future (быть)
+    "1sg": "I"
+    "2sg": "you (informal)"
+    "3sg": "he / she / it"
+    "1pl": "we"
+    "2pl": "you (plural)"
+    "3pl": "they"
+    past_m: past, masculine subject
+    past_f: past, feminine subject
+    past_n: past, neuter subject
+    past_pl: past, plural subject
+words:
+  "быть=to be":
+    cefr_level: A1
+    accented: быть
+    aspect: impf
+    en_gb:
+      standard: to be (to exist or to equal)
+    usage:
+      - ru: За́втра я бу́ду до́ма.
+        en_gb: Tomorrow I will be at home.
+    conjugation:
+      future:
+        "1sg": бу́ду
+        "2sg": бу́дешь
+        "3sg": бу́дет
+        "1pl": бу́дем
+        "2pl": бу́дете
+        "3pl": бу́дут
+      past_m: был
+      past_f: была́
+      past_n: бы́ло
+      past_pl: бы́ли
+  "видеть=to see":
+    cefr_level: A2
+    accented: ви́деть
+    aspect: impf
+    en_gb:
+      standard: to see (to notice with your eyes)
+    usage:
+      - ru: Я ви́жу большо́й дом.
+        en_gb: I see a big house.
+    conjugation:
+      present:
+        "1sg": ви́жу
+        "2sg": ви́дишь
+        "3sg": ви́дит
+        "1pl": ви́дим
+        "2pl": ви́дите
+        "3pl": ви́дят
+      past_m: ви́дел
+      past_f: ви́дела
+      past_n: ви́дело
+      past_pl: ви́дели
+  "говорить=to speak":
+    cefr_level: A1
+    accented: говори́ть
+    aspect: impf
+    en_gb:
+      standard: to speak (to say words)
+      alt:
+        - to talk
+    usage:
+      - ru: Мы говори́м по-ру́сски.
+        en_gb: We speak Russian.
+    conjugation:
+      present:
+        "1sg": говорю́
+        "2sg": говори́шь
+        "3sg": говори́т
+        "1pl": говори́м
+        "2pl": говори́те
+        "3pl": говоря́т
+      past_m: говори́л
+      past_f: говори́ла
+      past_n: говори́ло
+      past_pl: говори́ли
+  "делать=to do":
+    cefr_level: A1
+    accented: де́лать
+    aspect: impf
+    en_gb:
+      standard: to do (to perform an action)
+      alt:
+        - to make
+    usage:
+      - ru: Что ты де́лаешь?
+        en_gb: What are you doing?
+    conjugation:
+      present:
+        "1sg": де́лаю
+        "2sg": де́лаешь
+        "3sg": де́лает
+        "1pl": де́лаем
+        "2pl": де́лаете
+        "3pl": де́лают
+      past_m: де́лал
+      past_f: де́лала
+      past_n: де́лало
+      past_pl: де́лали
+  "жить=to live":
+    cefr_level: A1
+    accented: жить
+    aspect: impf
+    en_gb:
+      standard: to live (to be alive, or to reside)
+    usage:
+      - ru: Они́ живу́т в дере́вне.
+        en_gb: They live in a village.
+    conjugation:
+      present:
+        "1sg": живу́
+        "2sg": живёшь
+        "3sg": живёт
+        "1pl": живём
+        "2pl": живёте
+        "3pl": живу́т
+      past_m: жил
+      past_f: жила́
+      past_n: жи́ло
+      past_pl: жи́ли
+  "знать=to know":
+    cefr_level: A1
+    accented: знать
+    aspect: impf
+    en_gb:
+      standard: to know (to have information)
+    usage:
+      - ru: Я зна́ю э́тот го́род.
+        en_gb: I know this city.
+    conjugation:
+      present:
+        "1sg": зна́ю
+        "2sg": зна́ешь
+        "3sg": зна́ет
+        "1pl": зна́ем
+        "2pl": зна́ете
+        "3pl": зна́ют
+      past_m: знал
+      past_f: зна́ла
+      past_n: зна́ло
+      past_pl: зна́ли
+  "идти=to go":
+    cefr_level: A1
+    accented: идти́
+    aspect: impf
+    en_gb:
+      standard: to go (on foot, in one direction)
+      alt:
+        - to walk
+    usage:
+      - ru: Я иду́ в шко́лу.
+        en_gb: I am going to school.
+    conjugation:
+      present:
+        "1sg": иду́
+        "2sg": идёшь
+        "3sg": идёт
+        "1pl": идём
+        "2pl": идёте
+        "3pl": иду́т
+      past_m: шёл
+      past_f: шла
+      past_n: шло
+      past_pl: шли
+  "писать=to write":
+    cefr_level: A1
+    accented: писа́ть
+    aspect: impf
+    en_gb:
+      standard: to write (to put words on paper)
+    usage:
+      - ru: Она́ пи́шет письмо́.
+        en_gb: She is writing a letter.
+    conjugation:
+      present:
+        "1sg": пишу́
+        "2sg": пи́шешь
+        "3sg": пи́шет
+        "1pl": пи́шем
+        "2pl": пи́шете
+        "3pl": пи́шут
+      past_m: писа́л
+      past_f: писа́ла
+      past_n: писа́ло
+      past_pl: писа́ли
+  "работать=to work":
+    cefr_level: A1
+    accented: рабо́тать
+    aspect: impf
+    en_gb:
+      standard: to work (to do a job)
+    usage:
+      - ru: Он рабо́тает в больни́це.
+        en_gb: He works in a hospital.
+    conjugation:
+      present:
+        "1sg": рабо́таю
+        "2sg": рабо́таешь
+        "3sg": рабо́тает
+        "1pl": рабо́таем
+        "2pl": рабо́таете
+        "3pl": рабо́тают
+      past_m: рабо́тал
+      past_f: рабо́тала
+      past_n: рабо́тало
+      past_pl: рабо́тали
+  "читать=to read":
+    cefr_level: A1
+    accented: чита́ть
+    aspect: impf
+    en_gb:
+      standard: to read (to look at and understand text)
+    usage:
+      - ru: Я люблю́ чита́ть кни́ги.
+        en_gb: I like to read books.
+    conjugation:
+      present:
+        "1sg": чита́ю
+        "2sg": чита́ешь
+        "3sg": чита́ет
+        "1pl": чита́ем
+        "2pl": чита́ете
+        "3pl": чита́ют
+      past_m: чита́л
+      past_f: чита́ла
+      past_n: чита́ло
+      past_pl: чита́ли

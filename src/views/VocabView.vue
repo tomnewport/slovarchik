@@ -157,6 +157,7 @@ function quit() {
       <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + displayAnswer(current) }}
       </p>
+      <p v-if="current.note" class="muted" style="margin: 0">{{ current.note }}</p>
       <div class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
         <button @click="quit">Change mode</button>
