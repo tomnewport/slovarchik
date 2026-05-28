@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import RussianKeyboard from './components/RussianKeyboard.vue'
 </script>
 
 <template>
@@ -22,4 +23,6 @@ import { RouterLink, RouterView } from 'vue-router'
   <footer class="muted" style="margin-top: 3rem; font-size: 0.85rem; text-align: center">
     Works offline · installable · no tracking, no backend.
   </footer>
+
+  <RussianKeyboard />
 </template>
