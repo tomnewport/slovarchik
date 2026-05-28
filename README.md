@@ -4,6 +4,8 @@ An offline-first **PWA for practising Russian** — built because Duolingo kept
 drilling the same tiny slice of vocabulary. No backend, no tracking, no account.
 Everything runs in your browser and works fully offline once loaded.
 
+🔗 **Live app: [tomnewport.github.io/slovarchik](https://tomnewport.github.io/slovarchik/)**
+
 > **Status:** skeleton app. The core drills work end-to-end; the word/noun data
 > sets are intentionally small and meant to grow.
 
@@ -128,9 +130,10 @@ the advanced drill) are derived automatically from the forms.
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the app
-and publishes `dist/` to GitHub Pages. The site is served from the `/slovarchik/`
-base path (configured in `vite.config.js`); update `base` if you fork under a
-different name.
+and publishes `dist/` to GitHub Pages at
+[tomnewport.github.io/slovarchik](https://tomnewport.github.io/slovarchik/). The
+site is served from the `/slovarchik/` base path (configured in
+`vite.config.js`); update `base` if you fork under a different name.
 
 To enable it on your repo: **Settings → Pages → Build and deployment → Source:
 GitHub Actions**.
