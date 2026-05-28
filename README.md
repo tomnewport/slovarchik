@@ -19,7 +19,7 @@ levels:
 | Level        | How it works                                         |
 | ------------ | ---------------------------------------------------- |
 | Easy         | **Match** — pick the right translation (4 choices).  |
-| Intermediate | **Hinted typing** — type it, first letter(s) shown.  |
+| Intermediate | **Hinted typing** — type it; the on-screen keyboard lights up the letters it uses (RU answers). |
 | Advanced     | **Blind typing** — type it with no help.             |
 
 ### 🧩 Noun declension
