@@ -108,14 +108,18 @@ function checkEasy() {
   const same = want.size === selected.size && [...want].every((s) => selected.has(s))
   if (same) {
     score.right += 1
-    recordAttempt({ kind: 'form', key: noun.value.id, slot: probeSlot.value }, GRADES.EASY)
+    recordAttempt({ kind: 'form', key: noun.value.id, slot: probeSlot.value }, GRADES.EASY, {
+      level: 'easy',
+    })
     celebrateThenAdvance()
   } else {
     // Count a miss against the correct form and each form wrongly selected.
-    recordAttempt({ kind: 'form', key: noun.value.id, slot: probeSlot.value }, GRADES.INCORRECT)
+    recordAttempt({ kind: 'form', key: noun.value.id, slot: probeSlot.value }, GRADES.INCORRECT, {
+      level: 'easy',
+    })
     for (const slot of selected) {
       if (!want.has(slot)) {
-        recordAttempt({ kind: 'form', key: noun.value.id, slot }, GRADES.INCORRECT)
+        recordAttempt({ kind: 'form', key: noun.value.id, slot }, GRADES.INCORRECT, { level: 'easy' })
       }
     }
   }
@@ -151,6 +155,7 @@ function checkTable() {
       recordAttempt(
         { kind: 'form', key: noun.value.id, slot: slotKey(num, c) },
         gradeFor(level.value, cellCorrect(num, c)),
+        { level: level.value },
       )
     }
   }

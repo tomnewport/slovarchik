@@ -26,7 +26,11 @@ describe('PhraseTesterView', () => {
     // Place the shuffled tiles back into their original (correct) order.
     const correctOrder = wrapper.vm.targetOf(wrapper.vm.current).trim().split(/\s+/)
     for (const word of correctOrder) {
-      const tile = wrapper.findAll('button.tile').find((b) => b.text() === word && !b.element.disabled)
+      // Pick an *unplaced* pool tile (placed tiles keep the same text in the
+      // answer line) so duplicate-word phrases resolve unambiguously.
+      const tile = wrapper
+        .findAll('button.tile')
+        .find((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
       await tile.trigger('click')
     }
 
@@ -41,7 +45,9 @@ describe('PhraseTesterView', () => {
 
     const correctOrder = wrapper.vm.targetOf(wrapper.vm.current).trim().split(/\s+/)
     for (const word of correctOrder) {
-      const tile = wrapper.findAll('button.tile').find((b) => b.text() === word && !b.element.disabled)
+      const tile = wrapper
+        .findAll('button.tile')
+        .find((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
       await tile.trigger('click')
     }
 

@@ -144,6 +144,24 @@ q.collections() //   most mistaken collections
 q.combined((s) => s.kind === 'form' && s.facets.gender === 'n' && s.facets.case === 'nom')
 ```
 
+### Skills, mastery & exam readiness
+
+[`src/lib/skills.js`](src/lib/skills.js) turns that history into **skills** — a
+word, a grammatical form (e.g. *genitive plural*), a word type (*masculine
+nouns*) or a collection. Each skill knows its **breadth** (how many vocab words
+it covers — a word is 1, a collection its members, a gender every such noun), so
+they group into bands: **100+ / 10+ / 1+ words**. A correct attempt earns mastery
+credit by difficulty (10× easy ≈ 3× intermediate ≈ 1× hard = mastered, per #12),
+which drives per-collection **exam readiness** (an average that fills as you near
+it; the exam unlocks when every word is mastered).
+[`src/lib/practice.js`](src/lib/practice.js) composes a practice session from
+#12's sections (recap / current / grammar / weakest-25% / new).
+
+The store exposes these live: `skills`, `skillsByBreadth`, `weakSkills`,
+`examReadiness`, `currentCollection` / `setCurrentCollection`, and
+`composePractice(size)`. The **Progress** page (`/progress`) surfaces the four
+rankings, exam readiness, skills grouped by breadth, and a session preview.
+
 ## Develop
 
 ```bash

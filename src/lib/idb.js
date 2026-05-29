@@ -1,11 +1,13 @@
-// Tiny promise-based IndexedDB wrapper. Two object stores:
+// Tiny promise-based IndexedDB wrapper. Three object stores:
 //   'vocab-files' (keyed by filename)  — cached vocab YAML: { file, pos, updated, content }
 //   'progress'    (keyed by subject id) — per-subject attempt history (see lib/progress.js)
+//   'meta'        (keyed by name)       — small app settings: { key, value }
 
 const DB_NAME = 'slovarchik'
 const FILES_STORE = 'vocab-files'
 const PROGRESS_STORE = 'progress'
-const VERSION = 2
+const META_STORE = 'meta'
+const VERSION = 3
 
 let dbPromise = null
 
@@ -21,6 +23,9 @@ function openDb() {
       }
       if (!db.objectStoreNames.contains(PROGRESS_STORE)) {
         db.createObjectStore(PROGRESS_STORE, { keyPath: 'id' })
+      }
+      if (!db.objectStoreNames.contains(META_STORE)) {
+        db.createObjectStore(META_STORE, { keyPath: 'key' })
       }
     }
     req.onsuccess = () => resolve(req.result)
@@ -93,6 +98,25 @@ export function clearProgress() {
   return tx(PROGRESS_STORE, 'readwrite', (store) => {
     store.clear()
     return { value: undefined }
+  })
+}
+
+/** Read a single app setting's value (undefined if unset). */
+export function getMeta(key) {
+  return tx(META_STORE, 'readonly', (store) => {
+    const result = { value: undefined }
+    store.get(key).onsuccess = (e) => {
+      result.value = e.target.result?.value
+    }
+    return result
+  })
+}
+
+/** Insert or replace a single app setting. */
+export function setMeta(key, value) {
+  return tx(META_STORE, 'readwrite', (store) => {
+    store.put({ key, value })
+    return { value }
   })
 }
 

@@ -23,6 +23,20 @@ export const GRADES = Object.freeze({
 export const MAX_EVENTS = 10
 
 /**
+ * How many correct uses at each difficulty equal "mastered" for one subject
+ * (issue #12: ten times easy, three intermediate, once hard). `advanced` is the
+ * blind/typing tier of the vocab & declension drills — as hard as a phrase's
+ * `hard`. A correct attempt therefore earns `1 / target` mastery credit.
+ */
+export const MASTERY_TARGETS = Object.freeze({ easy: 10, intermediate: 3, advanced: 1, hard: 1 })
+
+/** Mastery credit a single correct attempt at `level` earns (0–1). */
+export function levelCredit(level) {
+  const target = MASTERY_TARGETS[level] ?? MASTERY_TARGETS.intermediate
+  return 1 / target
+}
+
+/**
  * Map a drill level and whether the answer was right to a {@link GRADES} value.
  * Every drill calls the same helper so grading is uniform across the app.
  * @param {string} level    the drill difficulty ('easy' | 'intermediate' | …)
@@ -70,13 +84,13 @@ export function emptyStat(subject) {
 }
 
 /** Append an event and keep only the most recent {@link MAX_EVENTS}. Pure. */
-export function recordEvent(events, grade, at = Date.now()) {
-  return [...(events ?? []), { at, grade }].slice(-MAX_EVENTS)
+export function recordEvent(events, grade, at = Date.now(), level = null) {
+  return [...(events ?? []), { at, grade, level }].slice(-MAX_EVENTS)
 }
 
 /** Return a new stat record with `grade` appended to its event history. Pure. */
-export function applyEvent(stat, grade, at = Date.now()) {
-  return { ...stat, events: recordEvent(stat.events, grade, at) }
+export function applyEvent(stat, grade, at = Date.now(), level = null) {
+  return { ...stat, events: recordEvent(stat.events, grade, at, level) }
 }
 
 /**
@@ -90,10 +104,12 @@ export function summarize(events = []) {
   let easy = 0
   let correct = 0
   let lastAt = 0
+  let credit = 0
   for (const e of events) {
     if (e.grade === GRADES.INCORRECT) incorrect += 1
     else if (e.grade === GRADES.EASY) easy += 1
     else if (e.grade === GRADES.CORRECT) correct += 1
+    if (e.grade > GRADES.INCORRECT) credit += levelCredit(e.level)
     if (e.at > lastAt) lastAt = e.at
   }
   const attempts = events.length
@@ -103,6 +119,8 @@ export function summarize(events = []) {
     easy,
     correct,
     errorRate: attempts ? incorrect / attempts : 0,
+    // 0–1 mastery from the retained correct attempts (issue #12's exam threshold).
+    mastery: Math.min(1, credit),
     lastAt: lastAt || null,
   }
 }

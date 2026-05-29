@@ -10,6 +10,11 @@ import {
   record,
   describedStats,
   progressQueries,
+  skills,
+  examReadiness,
+  composePractice,
+  currentCollection,
+  setCurrentCollection,
   _resetForTests,
 } from './progress.js'
 import { loadFixtureWords } from '../test/fixtures.js'
@@ -83,5 +88,41 @@ describe('progress store', () => {
     const byId = new Map(describedStats.value.map((s) => [s.id, s]))
     expect(byId.get('word:собака=dog').incorrect).toBe(1)
     expect(byId.get('form:море=sea#sg.gen').correct).toBe(1)
+  })
+})
+
+describe('progress store — skills, exam readiness & practice', () => {
+  it('builds skills from the live history and vocab', () => {
+    record({ kind: 'word', key: 'собака=dog' }, GRADES.CORRECT, { level: 'advanced' })
+    const dog = skills.value.find((s) => s.id === 'word:собака=dog')
+    expect(dog.breadth).toBe(1)
+    expect(dog.mastery).toBeCloseTo(1) // one unaided correct = mastered
+    // Type and collection skills cover more than one word.
+    expect(skills.value.some((s) => s.kind === 'collection' && s.breadth >= 1)).toBe(true)
+  })
+
+  it('tracks exam readiness for the chosen collection', () => {
+    setCurrentCollection('animals')
+    expect(examReadiness.value.collection).toBe('animals')
+    expect(examReadiness.value.words).toBe(2) // the bundled vocab has two animals
+    expect(examReadiness.value.eligible).toBe(false)
+  })
+
+  it('composes a sized practice session from the live data', () => {
+    setCurrentCollection('animals')
+    record({ kind: 'word', key: 'собака=dog' }, GRADES.INCORRECT, { level: 'easy' })
+    const session = composePractice('small')
+    expect(session.size).toBe(3)
+    expect(Array.isArray(session.sections)).toBe(true)
+    expect(session.exam.collection).toBe('animals')
+  })
+
+  it('persists the current collection across a reload', async () => {
+    setCurrentCollection('animals')
+    await flush()
+    _resetForTests()
+    expect(currentCollection.value).toBe(null)
+    await initProgress()
+    expect(currentCollection.value).toBe('animals')
   })
 })

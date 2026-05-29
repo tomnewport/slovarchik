@@ -20,6 +20,11 @@ export const routes = [
     name: 'phrases',
     component: () => import('../views/PhraseTesterView.vue'),
   },
+  {
+    path: '/progress',
+    name: 'progress',
+    component: () => import('../views/ProgressView.vue'),
+  },
 ]
 
 export const router = createRouter({

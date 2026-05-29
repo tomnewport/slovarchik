@@ -76,7 +76,9 @@ function record(correct) {
   wasCorrect.value = correct
   score.total += 1
   // Spelling/word-order success or error for a phrase.
-  recordAttempt({ kind: 'phrase', key: current.value.id }, gradeFor(level.value, correct))
+  recordAttempt({ kind: 'phrase', key: current.value.id }, gradeFor(level.value, correct), {
+    level: level.value,
+  })
   if (correct) {
     score.right += 1
     // Celebrate, then move straight to the next phrase.
