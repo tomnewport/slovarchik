@@ -17,7 +17,17 @@ import {
   setCurrentCollection,
   _resetForTests,
 } from './progress.js'
-import { loadFixtureWords } from '../test/fixtures.js'
+
+// A small, deterministic vocab (exactly two animals) built fresh for each test,
+// so assertions don't depend on the bundled fixture counts or on any state
+// another test file might leave in the shared, module-level vocab store.
+function controlledVocab() {
+  return [
+    { key: 'собака=dog', pos: 'noun', gender: 'f', animacy: 'a', collections: ['animals'], headword: 'соба́ка', ru: 'собака', forms: { sg: { nom: 'соба́ка', gen: 'соба́ки' } } },
+    { key: 'кошка=cat', pos: 'noun', gender: 'f', animacy: 'a', collections: ['animals'], headword: 'ко́шка', ru: 'кошка', forms: { sg: { nom: 'ко́шка', gen: 'ко́шки' } } },
+    { key: 'море=sea', pos: 'noun', gender: 'n', animacy: 'i', collections: ['nature'], headword: 'мо́ре', ru: 'море', forms: { sg: { nom: 'мо́ре', gen: 'мо́ря' } } },
+  ]
+}
 
 // Let the fire-and-forget persistence (microtask + IndexedDB transaction) settle.
 function flush() {
@@ -30,7 +40,7 @@ beforeEach(() => {
   globalThis.indexedDB = new IDBFactory()
   idb._resetForTests()
   _resetForTests()
-  vocabState.words = loadFixtureWords()
+  vocabState.words = controlledVocab()
   vocabState.status = 'ready'
 })
 
@@ -97,15 +107,28 @@ describe('progress store — skills, exam readiness & practice', () => {
     const dog = skills.value.find((s) => s.id === 'word:собака=dog')
     expect(dog.breadth).toBe(1)
     expect(dog.mastery).toBeCloseTo(1) // one unaided correct = mastered
-    // Type and collection skills cover more than one word.
-    expect(skills.value.some((s) => s.kind === 'collection' && s.breadth >= 1)).toBe(true)
+    // The 'animals' collection skill covers both animals.
+    const animals = skills.value.find((s) => s.id === 'collection:animals')
+    expect(animals.breadth).toBe(2)
   })
 
   it('tracks exam readiness for the chosen collection', () => {
     setCurrentCollection('animals')
-    expect(examReadiness.value.collection).toBe('animals')
-    expect(examReadiness.value.words).toBe(2) // the bundled vocab has two animals
-    expect(examReadiness.value.eligible).toBe(false)
+    const readiness = examReadiness.value
+    expect(readiness.collection).toBe('animals')
+    expect(readiness.words).toBe(2) // dog + cat
+    expect(readiness.mastered).toBe(0) // nothing recorded yet
+    expect(readiness.eligible).toBe(false)
+  })
+
+  it('marks a collection exam-ready once every word is mastered', () => {
+    setCurrentCollection('animals')
+    record({ kind: 'word', key: 'собака=dog' }, GRADES.CORRECT, { level: 'advanced' })
+    record({ kind: 'word', key: 'кошка=cat' }, GRADES.CORRECT, { level: 'advanced' })
+    const readiness = examReadiness.value
+    expect(readiness.mastered).toBe(2)
+    expect(readiness.readiness).toBeCloseTo(1)
+    expect(readiness.eligible).toBe(true)
   })
 
   it('composes a sized practice session from the live data', () => {
