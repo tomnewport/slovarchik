@@ -12,7 +12,7 @@ import {
   RU_LETTERS,
   EN_LETTERS,
 } from '../lib/phrases.js'
-import { speak, speechSupported } from '../lib/speech.js'
+import { speak } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import HintKeyboard from '../components/HintKeyboard.vue'
 import SpeakButton from '../components/SpeakButton.vue'
@@ -43,8 +43,6 @@ let advanceTimer = null
 // Easy mode: a shuffled bank of word tokens and the learner's placed sequence.
 const bank = ref([])
 const placed = ref([])
-
-const canSpeak = speechSupported()
 
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
