@@ -127,11 +127,15 @@ export const numberProgress = computed(() =>
     .sort((a, b) => b.attempts - a.attempts || a.label.localeCompare(b.label)),
 )
 
-/** Every skill (word / form / type / collection) with its breadth and strength. */
-export const skills = computed(() => buildSkills(describedStats.value, vocabState.words))
+/** Every skill (word / form / type / collection / number) with breadth + strength. */
+export const skills = computed(() =>
+  buildSkills(describedStats.value, vocabState.words, { numberLabels: TOPIC_LABELS }),
+)
 
-/** Skills bucketed into the breadth bands (100+ / 10+ / 1+ words). */
-export const skillsByBreadth = computed(() => groupByBreadth(skills.value))
+/** Skills bucketed into the breadth bands (100+ / 10+ / 1+ words) — words only. */
+export const skillsByBreadth = computed(() =>
+  groupByBreadth(skills.value.filter((s) => s.kind !== 'number')),
+)
 
 /** The weakest 25% of attempted skills — the practice session's focus. */
 export const weakSkills = computed(() => weakestSkills(skills.value))

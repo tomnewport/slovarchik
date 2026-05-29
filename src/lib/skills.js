@@ -82,7 +82,7 @@ function finalize(def, tiers) {
  * @param {object} [opts] `tiers` to override the breadth bands
  * @returns {object[]} skills (word, form, type and collection)
  */
-export function buildSkills(stats, words, { tiers = BREADTH_TIERS } = {}) {
+export function buildSkills(stats, words, { tiers = BREADTH_TIERS, numberLabels = {} } = {}) {
   // Per-word mastery comes from each word's translation ('word') subject.
   const masteryByWord = new Map()
   for (const s of stats) if (s.kind === 'word') masteryByWord.set(s.key, s.mastery ?? 0)
@@ -145,6 +145,32 @@ export function buildSkills(stats, words, { tiers = BREADTH_TIERS } = {}) {
   for (const c of [...collections].sort()) {
     const wordKeys = words.filter((w) => (w.collections ?? []).includes(c)).map((w) => w.key)
     mk({ id: `collection:${c}`, kind: 'collection', label: c, stats: statsForWords(wordKeys), wordKeys })
+  }
+
+  // 5. Number-drill topics. These are non-lexical (no vocab words), so they
+  // bypass `finalize`: strength/mastery come straight from each topic's own
+  // attempt history. Breadth is 0 — the dashboard surfaces them in their own
+  // panel and in "weakest skills", not in the word-coverage breadth grid.
+  for (const s of stats) {
+    if (s.kind !== 'number') continue
+    const topic = s.facets?.topic ?? s.key
+    skills.push({
+      id: `number:${topic}`,
+      kind: 'number',
+      label: numberLabels[topic] ?? s.label ?? topic,
+      breadth: 0,
+      tier: 'narrow',
+      mastery: s.mastery ?? 0,
+      wordsMastered: 0,
+      wordKeys: [],
+      attempts: s.attempts,
+      incorrect: s.incorrect,
+      easy: s.easy,
+      correct: s.correct,
+      errorRate: s.errorRate,
+      strength: s.attempts ? 1 - s.incorrect / s.attempts : null,
+      wordsAttempted: s.attempts > 0 ? 1 : 0,
+    })
   }
 
   return skills
