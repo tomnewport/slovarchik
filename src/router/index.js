@@ -25,6 +25,11 @@ export const routes = [
     name: 'listening',
     component: () => import('../views/ListeningView.vue'),
   },
+  {
+    path: '/progress',
+    name: 'progress',
+    component: () => import('../views/ProgressView.vue'),
+  },
 ]
 
 export const router = createRouter({

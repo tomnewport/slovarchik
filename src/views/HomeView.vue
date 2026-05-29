@@ -46,5 +46,14 @@ import { RouterLink } from 'vue-router'
       </p>
       <span class="pill">listen → build</span>
     </RouterLink>
+
+    <RouterLink to="/progress" class="card" style="text-decoration: none; color: inherit">
+      <h2 style="margin-top: 0">📈 Progress</h2>
+      <p>
+        See your strongest and weakest words, forms, genders and collections, track exam readiness
+        for a collection, and preview a tailored practice session.
+      </p>
+      <span class="pill">skills · mastery · exam</span>
+    </RouterLink>
   </section>
 </template>

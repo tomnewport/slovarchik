@@ -13,6 +13,8 @@ import {
   validSlots,
 } from '../lib/declension.js'
 import { normalize, sample } from '../lib/quiz.js'
+import { record as recordAttempt } from '../stores/progress.js'
+import { GRADES, gradeFor } from '../lib/progress.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 
 // How long the celebration plays before auto-advancing to the next noun.
@@ -36,6 +38,7 @@ let advanceTimer = null
 
 // --- Easy: spot the case + number ----------------------------------------
 const probeForm = ref('')
+const probeSlot = ref('') // the slot the probe form was drawn from, e.g. 'pl.gen'
 const selected = reactive(new Set()) // slot keys, e.g. 'pl.gen'
 const easyChecked = ref(false)
 const correctSlots = computed(() =>
@@ -82,6 +85,7 @@ function newRound() {
     const num = sample(numbersOf(noun.value), 1)[0]
     const c = sample(CASES, 1)[0]
     probeForm.value = noun.value.forms[num][c]
+    probeSlot.value = slotKey(num, c)
   }
 }
 
@@ -104,7 +108,20 @@ function checkEasy() {
   const same = want.size === selected.size && [...want].every((s) => selected.has(s))
   if (same) {
     score.right += 1
+    recordAttempt({ kind: 'form', key: noun.value.id, slot: probeSlot.value }, GRADES.EASY, {
+      level: 'easy',
+    })
     celebrateThenAdvance()
+  } else {
+    // Count a miss against the correct form and each form wrongly selected.
+    recordAttempt({ kind: 'form', key: noun.value.id, slot: probeSlot.value }, GRADES.INCORRECT, {
+      level: 'easy',
+    })
+    for (const slot of selected) {
+      if (!want.has(slot)) {
+        recordAttempt({ kind: 'form', key: noun.value.id, slot }, GRADES.INCORRECT, { level: 'easy' })
+      }
+    }
   }
 }
 
@@ -132,6 +149,16 @@ function checkTable() {
   if (tableChecked.value) return
   tableChecked.value = true
   score.total += 1
+  // Record each cell as a word-form attempt (spelling of that number × case form).
+  for (const num of nums.value) {
+    for (const c of CASES) {
+      recordAttempt(
+        { kind: 'form', key: noun.value.id, slot: slotKey(num, c) },
+        gradeFor(level.value, cellCorrect(num, c)),
+        { level: level.value },
+      )
+    }
+  }
   // One "point" per fully-correct table keeps scoring comparable across modes.
   if (countRight() === cellCount.value) {
     score.right += 1

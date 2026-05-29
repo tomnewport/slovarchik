@@ -2,6 +2,8 @@
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
+import { record as recordAttempt } from '../stores/progress.js'
+import { GRADES, gradeFor } from '../lib/progress.js'
 import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
 import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
@@ -126,12 +128,17 @@ function resolveMatch() {
   if (left === right) {
     matched.add(left)
     score.right += 1
+    // A correct match is a win in easy/assisted mode.
+    recordAttempt({ kind: 'word', key: left }, GRADES.EASY, { level: 'easy' })
     selectedLeft.value = null
     selectedRight.value = null
     if (matched.size === boardLeft.value.length) {
       setTimeout(nextBoard, 500)
     }
   } else {
+    // The learner confused two words — count it against both.
+    recordAttempt({ kind: 'word', key: left }, GRADES.INCORRECT, { level: 'easy' })
+    recordAttempt({ kind: 'word', key: right }, GRADES.INCORRECT, { level: 'easy' })
     wrongLeft.value = left
     wrongRight.value = right
     selectedLeft.value = null
@@ -171,6 +178,10 @@ function record(correct) {
   answered.value = true
   wasCorrect.value = correct
   score.total += 1
+  // Typed answer (intermediate/advanced) → spelling success or error for a word.
+  recordAttempt({ kind: 'word', key: current.value.id }, gradeFor(level.value, correct), {
+    level: level.value,
+  })
   if (correct) {
     score.right += 1
     // Celebrate, then move straight to the next question.
