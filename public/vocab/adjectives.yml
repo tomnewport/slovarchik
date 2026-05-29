@@ -10,9 +10,43 @@ meta:
     pl: nominative plural
     comparative: comparative degree
 words:
+  "бедный=poor":
+    cefr_level: B1
+    accented: бе́дный
+    collections:
+      - finance
+      - people
+    en_gb:
+      standard: poor (having little money)
+    usage:
+      - ru: Они́ вы́росли в бе́дной семье́.
+        en_gb: They grew up in a poor family.
+    forms:
+      m: бе́дный
+      f: бе́дная
+      n: бе́дное
+      pl: бе́дные
+      comparative: бедне́е
+  "бежевый=beige":
+    cefr_level: B1
+    accented: бе́жевый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: beige (a pale sandy colour)
+    usage:
+      - ru: Она́ купи́ла бе́жевое пальто́.
+        en_gb: She bought a beige coat.
+    forms:
+      m: бе́жевый
+      f: бе́жевая
+      n: бе́жевое
+      pl: бе́жевые
   "белый=white":
     cefr_level: A1
     accented: бе́лый
+    collections:
+      - colours and textures
     en_gb:
       standard: white (the colour of snow)
     usage:
@@ -24,6 +58,60 @@ words:
       n: бе́лое
       pl: бе́лые
       comparative: беле́е
+  "бледный=pale":
+    cefr_level: B1
+    accented: бле́дный
+    collections:
+      - colours and textures
+      - sickness and health
+      - feelings and sensations
+    en_gb:
+      standard: pale (light in colour, or lacking colour)
+    usage:
+      - ru: По́сле боле́зни он о́чень бле́дный.
+        en_gb: After the illness he is very pale.
+    forms:
+      m: бле́дный
+      f: бле́дная
+      n: бле́дное
+      pl: бле́дные
+      comparative: бледне́е
+  "богатый=rich":
+    cefr_level: B1
+    accented: бога́тый
+    collections:
+      - finance
+      - people
+    en_gb:
+      standard: rich (having a lot of money)
+      alt:
+        - wealthy
+    usage:
+      - ru: Он о́чень бога́тый челове́к.
+        en_gb: He is a very rich man.
+    forms:
+      m: бога́тый
+      f: бога́тая
+      n: бога́тое
+      pl: бога́тые
+      comparative: бога́че
+  "больной=ill":
+    cefr_level: A2
+    accented: больно́й
+    collections:
+      - sickness and health
+    en_gb:
+      standard: ill (not healthy)
+      alt:
+        - sick
+    usage:
+      - ru: Ребёнок сего́дня больно́й.
+        en_gb: The child is ill today.
+    forms:
+      m: больно́й
+      f: больна́я
+      n: больно́е
+      pl: больны́е
   "большой=big":
     cefr_level: A1
     accented: большо́й
@@ -40,6 +128,572 @@ words:
       n: большо́е
       pl: больши́е
       comparative: бо́льше
+  "важный=important":
+    cefr_level: A2
+    accented: ва́жный
+    collections:
+      - work
+      - the law
+      - daily life
+    en_gb:
+      standard: important (mattering a great deal)
+    usage:
+      - ru: Э́то о́чень ва́жный вопро́с.
+        en_gb: This is a very important question.
+    forms:
+      m: ва́жный
+      f: ва́жная
+      n: ва́жное
+      pl: ва́жные
+      comparative: важне́е
+  "весёлый=cheerful":
+    cefr_level: A2
+    accented: весёлый
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: cheerful (happy and lively)
+      alt:
+        - merry
+    usage:
+      - ru: У неё весёлый хара́ктер.
+        en_gb: She has a cheerful character.
+    forms:
+      m: весёлый
+      f: весёлая
+      n: весёлое
+      pl: весёлые
+      comparative: веселе́е
+  "виновный=guilty":
+    cefr_level: B2
+    accented: вино́вный
+    collections:
+      - the law
+    en_gb:
+      standard: guilty (having done something wrong)
+    usage:
+      - ru: Суд призна́л его́ вино́вным.
+        en_gb: The court found him guilty.
+    forms:
+      m: вино́вный
+      f: вино́вная
+      n: вино́вное
+      pl: вино́вные
+  "вкусный=tasty":
+    cefr_level: A2
+    accented: вку́сный
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: tasty (pleasant to eat)
+      alt:
+        - delicious
+    usage:
+      - ru: Э́то о́чень вку́сный суп.
+        en_gb: This is a very tasty soup.
+    forms:
+      m: вку́сный
+      f: вку́сная
+      n: вку́сное
+      pl: вку́сные
+      comparative: вкусне́е
+  "военный=military":
+    cefr_level: B2
+    accented: вое́нный
+    collections:
+      - war and peace
+      - history
+    en_gb:
+      standard: military (to do with the army or war)
+    usage:
+      - ru: Э́то вое́нная фо́рма.
+        en_gb: This is a military uniform.
+    forms:
+      m: вое́нный
+      f: вое́нная
+      n: вое́нное
+      pl: вое́нные
+  "высокий=tall":
+    cefr_level: A2
+    accented: высо́кий
+    collections:
+      - measurement and calculation
+      - shapes and patterns
+    en_gb:
+      standard: tall (of great height)
+      alt:
+        - high
+    usage:
+      - ru: Он живёт в высо́ком до́ме.
+        en_gb: He lives in a tall building.
+    forms:
+      m: высо́кий
+      f: высо́кая
+      n: высо́кое
+      pl: высо́кие
+      comparative: вы́ше
+  "главный=main":
+    cefr_level: B1
+    accented: гла́вный
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: main (most important)
+      alt:
+        - chief
+    usage:
+      - ru: Э́то гла́вный вопро́с.
+        en_gb: This is the main question.
+    forms:
+      m: гла́вный
+      f: гла́вная
+      n: гла́вное
+      pl: гла́вные
+  "гладкий=smooth":
+    cefr_level: B1
+    accented: гла́дкий
+    collections:
+      - colours and textures
+    en_gb:
+      standard: smooth (even, without bumps)
+    usage:
+      - ru: У ка́мня гла́дкая пове́рхность.
+        en_gb: The stone has a smooth surface.
+    forms:
+      m: гла́дкий
+      f: гла́дкая
+      n: гла́дкое
+      pl: гла́дкие
+      comparative: гла́же
+  "глубокий=deep":
+    cefr_level: B1
+    accented: глубо́кий
+    collections:
+      - measurement and calculation
+      - nature
+    en_gb:
+      standard: deep (going a long way down)
+    usage:
+      - ru: Э́то о́чень глубо́кое о́зеро.
+        en_gb: This is a very deep lake.
+    forms:
+      m: глубо́кий
+      f: глубо́кая
+      n: глубо́кое
+      pl: глубо́кие
+      comparative: глу́бже
+  "голодный=hungry":
+    cefr_level: A2
+    accented: голо́дный
+    collections:
+      - feelings and sensations
+      - in the kitchen
+    en_gb:
+      standard: hungry (wanting to eat)
+    usage:
+      - ru: По́сле рабо́ты я о́чень голо́дный.
+        en_gb: After work I am very hungry.
+    forms:
+      m: голо́дный
+      f: голо́дная
+      n: голо́дное
+      pl: голо́дные
+  "голубой=light blue":
+    cefr_level: A2
+    accented: голубо́й
+    collections:
+      - colours and textures
+      - nature
+    en_gb:
+      standard: light blue (the colour of a clear sky)
+    usage:
+      - ru: У неё голубы́е глаза́.
+        en_gb: She has light blue eyes.
+    forms:
+      m: голубо́й
+      f: голуба́я
+      n: голубо́е
+      pl: голубы́е
+  "гордый=proud":
+    cefr_level: B1
+    accented: го́рдый
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: proud (feeling pleased with oneself)
+    usage:
+      - ru: Роди́тели горды́ свои́м сы́ном.
+        en_gb: The parents are proud of their son.
+    forms:
+      m: го́рдый
+      f: го́рдая
+      n: го́рдое
+      pl: го́рдые
+  "горячий=hot":
+    cefr_level: A2
+    accented: горя́чий
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: hot (high in temperature, of objects)
+    usage:
+      - ru: Осторо́жно, ча́шка горя́чая.
+        en_gb: Careful, the cup is hot.
+    forms:
+      m: горя́чий
+      f: горя́чая
+      n: горя́чее
+      pl: горя́чие
+  "грустный=sad":
+    cefr_level: A2
+    accented: гру́стный
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: sad (unhappy)
+    usage:
+      - ru: Почему́ у тебя́ тако́е гру́стное лицо́?
+        en_gb: Why do you have such a sad face?
+    forms:
+      m: гру́стный
+      f: гру́стная
+      n: гру́стное
+      pl: гру́стные
+      comparative: грустне́е
+  "грязный=dirty":
+    cefr_level: A2
+    accented: гря́зный
+    collections:
+      - colours and textures
+      - daily life
+      - nature
+    en_gb:
+      standard: dirty (not clean)
+    usage:
+      - ru: По́сле игры́ оде́жда ста́ла гря́зной.
+        en_gb: After the game the clothes got dirty.
+    forms:
+      m: гря́зный
+      f: гря́зная
+      n: гря́зное
+      pl: гря́зные
+      comparative: грязне́е
+  "дешёвый=cheap":
+    cefr_level: A2
+    accented: дешёвый
+    collections:
+      - finance
+      - shopping
+    en_gb:
+      standard: cheap (low in price)
+      alt:
+        - inexpensive
+    usage:
+      - ru: Здесь о́чень дешёвые фру́кты.
+        en_gb: The fruit here is very cheap.
+    forms:
+      m: дешёвый
+      f: дешёвая
+      n: дешёвое
+      pl: дешёвые
+      comparative: деше́вле
+  "длинный=long":
+    cefr_level: A1
+    accented: дли́нный
+    collections:
+      - measurement and calculation
+      - shapes and patterns
+    en_gb:
+      standard: long (great in length)
+    usage:
+      - ru: Э́то о́чень дли́нная доро́га.
+        en_gb: This is a very long road.
+    forms:
+      m: дли́нный
+      f: дли́нная
+      n: дли́нное
+      pl: дли́нные
+      comparative: длинне́е
+  "добрый=kind":
+    cefr_level: A2
+    accented: до́брый
+    collections:
+      - feelings and sensations
+      - people
+    en_gb:
+      standard: kind (gentle and caring)
+      alt:
+        - good
+    usage:
+      - ru: Она́ о́чень до́брая же́нщина.
+        en_gb: She is a very kind woman.
+    forms:
+      m: до́брый
+      f: до́брая
+      n: до́брое
+      pl: до́брые
+      comparative: добре́е
+  "дорогой=expensive":
+    cefr_level: A1
+    accented: дорого́й
+    collections:
+      - finance
+      - shopping
+      - romance and dating
+    en_gb:
+      standard: expensive (high in price)
+      alt:
+        - dear
+    usage:
+      - ru: Э́та маши́на о́чень дорога́я.
+        en_gb: This car is very expensive.
+    forms:
+      m: дорого́й
+      f: дорога́я
+      n: дорого́е
+      pl: дороги́е
+      comparative: доро́же
+  "жёлтый=yellow":
+    cefr_level: A1
+    accented: жёлтый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: yellow (the colour of the sun)
+    usage:
+      - ru: Осенью ли́стья стано́вятся жёлтыми.
+        en_gb: In autumn the leaves turn yellow.
+    forms:
+      m: жёлтый
+      f: жёлтая
+      n: жёлтое
+      pl: жёлтые
+  "жёсткий=hard":
+    cefr_level: B1
+    accented: жёсткий
+    collections:
+      - colours and textures
+    en_gb:
+      standard: hard (firm and not soft to the touch)
+      alt:
+        - tough
+    usage:
+      - ru: Э́то мя́со о́чень жёсткое.
+        en_gb: This meat is very tough.
+    forms:
+      m: жёсткий
+      f: жёсткая
+      n: жёсткое
+      pl: жёсткие
+      comparative: жёстче
+  "законный=legal":
+    cefr_level: B2
+    accented: зако́нный
+    collections:
+      - the law
+    en_gb:
+      standard: legal (allowed by law)
+      alt:
+        - lawful
+    usage:
+      - ru: Э́то его́ зако́нное пра́во.
+        en_gb: This is his legal right.
+    forms:
+      m: зако́нный
+      f: зако́нная
+      n: зако́нное
+      pl: зако́нные
+  "занятый=busy":
+    cefr_level: B1
+    accented: за́нятый
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: busy (having a lot to do)
+    usage:
+      - ru: Сего́дня я о́чень за́нятый.
+        en_gb: I am very busy today.
+    forms:
+      m: за́нятый
+      f: за́нятая
+      n: за́нятое
+      pl: за́нятые
+  "здоровый=healthy":
+    cefr_level: A2
+    accented: здоро́вый
+    collections:
+      - sickness and health
+    en_gb:
+      standard: healthy (in good health)
+    usage:
+      - ru: Он си́льный и здоро́вый.
+        en_gb: He is strong and healthy.
+    forms:
+      m: здоро́вый
+      f: здоро́вая
+      n: здоро́вое
+      pl: здоро́вые
+      comparative: здорове́е
+  "зелёный=green":
+    cefr_level: A1
+    accented: зелёный
+    collections:
+      - colours and textures
+      - nature
+      - in the garden
+    en_gb:
+      standard: green (the colour of grass)
+    usage:
+      - ru: Ле́том трава́ зелёная.
+        en_gb: In summer the grass is green.
+    forms:
+      m: зелёный
+      f: зелёная
+      n: зелёное
+      pl: зелёные
+      comparative: зелене́е
+  "злой=angry":
+    cefr_level: B1
+    accented: злой
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: angry (feeling or showing anger)
+      alt:
+        - evil
+    usage:
+      - ru: Не будь таки́м злым.
+        en_gb: Don't be so angry.
+    forms:
+      m: злой
+      f: зла́я
+      n: зло́е
+      pl: злы́е
+      comparative: зле́е
+  "золотой=golden":
+    cefr_level: B1
+    accented: золото́й
+    collections:
+      - colours and textures
+    en_gb:
+      standard: golden (made of gold, or gold-coloured)
+      alt:
+        - gold
+    usage:
+      - ru: На ней золото́е кольцо́.
+        en_gb: She is wearing a golden ring.
+    forms:
+      m: золото́й
+      f: золота́я
+      n: золото́е
+      pl: золоты́е
+  "известный=famous":
+    cefr_level: B1
+    accented: изве́стный
+    collections:
+      - the arts
+      - people
+      - history
+    en_gb:
+      standard: famous (known by many people)
+      alt:
+        - well-known
+    usage:
+      - ru: Э́то изве́стный худо́жник.
+        en_gb: This is a famous artist.
+    forms:
+      m: изве́стный
+      f: изве́стная
+      n: изве́стное
+      pl: изве́стные
+  "интересный=interesting":
+    cefr_level: A1
+    accented: интере́сный
+    collections:
+      - reading
+      - school
+      - hobbies and pastimes
+      - the arts
+    en_gb:
+      standard: interesting (holding your attention)
+    usage:
+      - ru: Я чита́ю интере́сную кни́гу.
+        en_gb: I am reading an interesting book.
+    forms:
+      m: интере́сный
+      f: интере́сная
+      n: интере́сное
+      pl: интере́сные
+      comparative: интере́снее
+  "квадратный=square":
+    cefr_level: B1
+    accented: квадра́тный
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+    en_gb:
+      standard: square (having the shape of a square)
+    usage:
+      - ru: На полу́ лежи́т квадра́тный ковёр.
+        en_gb: A square rug lies on the floor.
+    forms:
+      m: квадра́тный
+      f: квадра́тная
+      n: квадра́тное
+      pl: квадра́тные
+  "кислый=sour":
+    cefr_level: B1
+    accented: ки́слый
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: sour (having a sharp taste like lemon)
+    usage:
+      - ru: Э́тот лимо́н о́чень ки́слый.
+        en_gb: This lemon is very sour.
+    forms:
+      m: ки́слый
+      f: ки́слая
+      n: ки́слое
+      pl: ки́слые
+      comparative: кисле́е
+  "коричневый=brown":
+    cefr_level: A2
+    accented: кори́чневый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: brown (the colour of wood or earth)
+    usage:
+      - ru: Он наде́л кори́чневые ту́фли.
+        en_gb: He put on brown shoes.
+    forms:
+      m: кори́чневый
+      f: кори́чневая
+      n: кори́чневое
+      pl: кори́чневые
+  "короткий=short":
+    cefr_level: A1
+    accented: коро́ткий
+    collections:
+      - measurement and calculation
+      - shapes and patterns
+    en_gb:
+      standard: short (small in length)
+    usage:
+      - ru: У неё коро́ткие во́лосы.
+        en_gb: She has short hair.
+    forms:
+      m: коро́ткий
+      f: коро́ткая
+      n: коро́ткое
+      pl: коро́ткие
+      comparative: коро́че
   "красивый=beautiful":
     cefr_level: A2
     accented: краси́вый
@@ -59,6 +713,8 @@ words:
   "красный=red":
     cefr_level: A1
     accented: кра́сный
+    collections:
+      - colours and textures
     en_gb:
       standard: red (the colour of blood)
     usage:
@@ -69,6 +725,39 @@ words:
       f: кра́сная
       n: кра́сное
       pl: кра́сные
+  "круглый=round":
+    cefr_level: A2
+    accented: кру́глый
+    collections:
+      - shapes and patterns
+    en_gb:
+      standard: round (shaped like a circle)
+    usage:
+      - ru: На столе́ кру́глая таре́лка.
+        en_gb: There is a round plate on the table.
+    forms:
+      m: кру́глый
+      f: кру́глая
+      n: кру́глое
+      pl: кру́глые
+  "любимый=favourite":
+    cefr_level: A2
+    accented: люби́мый
+    collections:
+      - romance and dating
+      - family
+    en_gb:
+      standard: favourite (liked best, or beloved)
+      alt:
+        - beloved
+    usage:
+      - ru: Э́то моя́ люби́мая пе́сня.
+        en_gb: This is my favourite song.
+    forms:
+      m: люби́мый
+      f: люби́мая
+      n: люби́мое
+      pl: люби́мые
   "маленький=small":
     cefr_level: A1
     accented: ма́ленький
@@ -85,6 +774,148 @@ words:
       n: ма́ленькое
       pl: ма́ленькие
       comparative: ме́ньше
+  "мирный=peaceful":
+    cefr_level: B2
+    accented: ми́рный
+    collections:
+      - war and peace
+    en_gb:
+      standard: peaceful (without war or trouble)
+    usage:
+      - ru: Лю́ди мечта́ют о ми́рной жи́зни.
+        en_gb: People dream of a peaceful life.
+    forms:
+      m: ми́рный
+      f: ми́рная
+      n: ми́рное
+      pl: ми́рные
+  "модный=fashionable":
+    cefr_level: B1
+    accented: мо́дный
+    collections:
+      - clothes
+      - shopping
+    en_gb:
+      standard: fashionable (in the latest style)
+      alt:
+        - trendy
+    usage:
+      - ru: Она́ купи́ла мо́дное пальто́.
+        en_gb: She bought a fashionable coat.
+    forms:
+      m: мо́дный
+      f: мо́дная
+      n: мо́дное
+      pl: мо́дные
+      comparative: модне́е
+  "мокрый=wet":
+    cefr_level: A2
+    accented: мо́крый
+    collections:
+      - nature
+      - daily life
+      - colours and textures
+    en_gb:
+      standard: wet (covered with water)
+    usage:
+      - ru: По́сле дождя́ доро́га мо́края.
+        en_gb: After the rain the road is wet.
+    forms:
+      m: мо́крый
+      f: мо́края
+      n: мо́крое
+      pl: мо́крые
+  "молодой=young":
+    cefr_level: A2
+    accented: молодо́й
+    collections:
+      - people
+      - daily life
+    en_gb:
+      standard: young (not old)
+    usage:
+      - ru: Они́ ещё совсе́м молоды́е.
+        en_gb: They are still quite young.
+    forms:
+      m: молодо́й
+      f: молода́я
+      n: молодо́е
+      pl: молоды́е
+      comparative: моло́же
+  "мягкий=soft":
+    cefr_level: A2
+    accented: мя́гкий
+    collections:
+      - colours and textures
+      - feelings and sensations
+    en_gb:
+      standard: soft (not hard to the touch)
+    usage:
+      - ru: Э́то о́чень мя́гкая ткань.
+        en_gb: This is very soft fabric.
+    forms:
+      m: мя́гкий
+      f: мя́гкая
+      n: мя́гкое
+      pl: мя́гкие
+      comparative: мя́гче
+  "народный=folk":
+    cefr_level: B2
+    accented: наро́дный
+    collections:
+      - the arts
+      - history
+    en_gb:
+      standard: folk (belonging to the common people)
+      alt:
+        - national
+    usage:
+      - ru: Они́ танцу́ют наро́дный та́нец.
+        en_gb: They are dancing a folk dance.
+    forms:
+      m: наро́дный
+      f: наро́дная
+      n: наро́дное
+      pl: наро́дные
+  "нежный=gentle":
+    cefr_level: B1
+    accented: не́жный
+    collections:
+      - feelings and sensations
+      - romance and dating
+      - colours and textures
+    en_gb:
+      standard: gentle (soft and tender)
+      alt:
+        - tender
+    usage:
+      - ru: Она́ погла́дила котёнка не́жной руко́й.
+        en_gb: She stroked the kitten with a gentle hand.
+    forms:
+      m: не́жный
+      f: не́жная
+      n: не́жное
+      pl: не́жные
+      comparative: нежне́е
+  "низкий=low":
+    cefr_level: A2
+    accented: ни́зкий
+    collections:
+      - measurement and calculation
+      - shapes and patterns
+    en_gb:
+      standard: low (not high)
+      alt:
+        - short
+    usage:
+      - ru: Стол сли́шком ни́зкий.
+        en_gb: The table is too low.
+    forms:
+      m: ни́зкий
+      f: ни́зкая
+      n: ни́зкое
+      pl: ни́зкие
+      comparative: ни́же
   "новый=new":
     cefr_level: A1
     accented: но́вый
@@ -99,6 +930,92 @@ words:
       n: но́вое
       pl: но́вые
       comparative: нове́е
+  "одинокий=lonely":
+    cefr_level: B1
+    accented: одино́кий
+    collections:
+      - romance and dating
+      - feelings and sensations
+    en_gb:
+      standard: lonely (alone and sad)
+      alt:
+        - single
+    usage:
+      - ru: Он чу́вствует себя́ одино́ким.
+        en_gb: He feels lonely.
+    forms:
+      m: одино́кий
+      f: одино́кая
+      n: одино́кое
+      pl: одино́кие
+  "опасный=dangerous":
+    cefr_level: B1
+    accented: опа́сный
+    collections:
+      - war and peace
+      - daily life
+      - sickness and health
+    en_gb:
+      standard: dangerous (likely to cause harm)
+    usage:
+      - ru: Э́то о́чень опа́сная доро́га.
+        en_gb: This is a very dangerous road.
+    forms:
+      m: опа́сный
+      f: опа́сная
+      n: опа́сное
+      pl: опа́сные
+      comparative: опа́снее
+  "оранжевый=orange":
+    cefr_level: A2
+    accented: ора́нжевый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: orange (the colour of an orange)
+    usage:
+      - ru: На де́реве ора́нжевые ли́стья.
+        en_gb: There are orange leaves on the tree.
+    forms:
+      m: ора́нжевый
+      f: ора́нжевая
+      n: ора́нжевое
+      pl: ора́нжевые
+  "острый=sharp":
+    cefr_level: B1
+    accented: о́стрый
+    collections:
+      - in the kitchen
+      - shapes and patterns
+      - DIY
+    en_gb:
+      standard: sharp (with a fine edge, or spicy)
+      alt:
+        - spicy
+    usage:
+      - ru: Бу́дь осторо́жен, нож о́стрый.
+        en_gb: Be careful, the knife is sharp.
+    forms:
+      m: о́стрый
+      f: о́страя
+      n: о́строе
+      pl: о́стрые
+      comparative: остре́е
+  "плоский=flat":
+    cefr_level: B1
+    accented: пло́ский
+    collections:
+      - shapes and patterns
+    en_gb:
+      standard: flat (level and even)
+    usage:
+      - ru: У стола́ пло́ская пове́рхность.
+        en_gb: The table has a flat surface.
+    forms:
+      m: пло́ский
+      f: пло́ская
+      n: пло́ское
+      pl: пло́ские
   "плохой=bad":
     cefr_level: A1
     accented: плохо́й
@@ -113,6 +1030,140 @@ words:
       n: плохо́е
       pl: плохи́е
       comparative: ху́же
+  "полный=full":
+    cefr_level: B1
+    accented: по́лный
+    collections:
+      - measurement and calculation
+      - daily life
+    en_gb:
+      standard: full (holding as much as possible)
+    usage:
+      - ru: Стака́н по́лный воды́.
+        en_gb: The glass is full of water.
+    forms:
+      m: по́лный
+      f: по́лная
+      n: по́лное
+      pl: по́лные
+      comparative: полне́е
+  "простой=simple":
+    cefr_level: A2
+    accented: просто́й
+    collections:
+      - daily life
+      - school
+    en_gb:
+      standard: simple (easy, not complicated)
+      alt:
+        - easy
+    usage:
+      - ru: Э́то о́чень просто́й вопро́с.
+        en_gb: This is a very simple question.
+    forms:
+      m: просто́й
+      f: проста́я
+      n: просто́е
+      pl: просты́е
+      comparative: про́ще
+  "прямой=straight":
+    cefr_level: B1
+    accented: прямо́й
+    collections:
+      - shapes and patterns
+    en_gb:
+      standard: straight (not bent or curved)
+      alt:
+        - direct
+    usage:
+      - ru: Проведи́ прямо́й отре́зок.
+        en_gb: Draw a straight segment.
+    forms:
+      m: прямо́й
+      f: пряма́я
+      n: прямо́е
+      pl: прямы́е
+  "пустой=empty":
+    cefr_level: A2
+    accented: пусто́й
+    collections:
+      - measurement and calculation
+      - daily life
+    en_gb:
+      standard: empty (with nothing inside)
+    usage:
+      - ru: Буты́лка совсе́м пуста́я.
+        en_gb: The bottle is completely empty.
+    forms:
+      m: пусто́й
+      f: пуста́я
+      n: пусто́е
+      pl: пусты́е
+  "равный=equal":
+    cefr_level: B2
+    accented: ра́вный
+    collections:
+      - measurement and calculation
+    en_gb:
+      standard: equal (the same in amount or size)
+    usage:
+      - ru: Раздели́ я́блоко на ра́вные ча́сти.
+        en_gb: Divide the apple into equal parts.
+    forms:
+      m: ра́вный
+      f: ра́вная
+      n: ра́вное
+      pl: ра́вные
+  "разноцветный=multicoloured":
+    cefr_level: B1
+    accented: разноцве́тный
+    collections:
+      - colours and textures
+      - shapes and patterns
+    en_gb:
+      standard: multicoloured (having many colours)
+    usage:
+      - ru: На стене́ разноцве́тный узо́р.
+        en_gb: There is a multicoloured pattern on the wall.
+    forms:
+      m: разноцве́тный
+      f: разноцве́тная
+      n: разноцве́тное
+      pl: разноцве́тные
+  "ровный=even":
+    cefr_level: B1
+    accented: ро́вный
+    collections:
+      - shapes and patterns
+      - colours and textures
+    en_gb:
+      standard: even (level and smooth)
+      alt:
+        - flat
+    usage:
+      - ru: Доро́га здесь ро́вная и гла́дкая.
+        en_gb: The road here is even and smooth.
+    forms:
+      m: ро́вный
+      f: ро́вная
+      n: ро́вное
+      pl: ро́вные
+      comparative: ровне́е
+  "розовый=pink":
+    cefr_level: A2
+    accented: ро́зовый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: pink (a pale red colour)
+    usage:
+      - ru: У неё ро́зовое пла́тье.
+        en_gb: She has a pink dress.
+    forms:
+      m: ро́зовый
+      f: ро́зовая
+      n: ро́зовое
+      pl: ро́зовые
   "русский=Russian":
     cefr_level: A1
     accented: ру́сский
@@ -126,6 +1177,296 @@ words:
       f: ру́сская
       n: ру́сское
       pl: ру́сские
+  "свежий=fresh":
+    cefr_level: A2
+    accented: све́жий
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+      - nature
+    en_gb:
+      standard: fresh (new and not stale)
+    usage:
+      - ru: Я люблю́ све́жий хлеб.
+        en_gb: I love fresh bread.
+    forms:
+      m: све́жий
+      f: све́жая
+      n: све́жее
+      pl: све́жие
+      comparative: свеже́е
+  "светлый=light":
+    cefr_level: A2
+    accented: све́тлый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: light (pale, not dark)
+      alt:
+        - bright
+    usage:
+      - ru: У них све́тлая ко́мната.
+        en_gb: They have a light room.
+    forms:
+      m: све́тлый
+      f: све́тлая
+      n: све́тлое
+      pl: све́тлые
+      comparative: светле́е
+  "свободный=free":
+    cefr_level: B1
+    accented: свобо́дный
+    collections:
+      - the law
+      - daily life
+      - war and peace
+    en_gb:
+      standard: free (not controlled, or not occupied)
+    usage:
+      - ru: Э́то ме́сто свобо́дно?
+        en_gb: Is this seat free?
+    forms:
+      m: свобо́дный
+      f: свобо́дная
+      n: свобо́дное
+      pl: свобо́дные
+      comparative: свобо́днее
+  "серебряный=silver":
+    cefr_level: B1
+    accented: сере́бряный
+    collections:
+      - colours and textures
+    en_gb:
+      standard: silver (made of silver, or silver-coloured)
+    usage:
+      - ru: У неё сере́бряные серёжки.
+        en_gb: She has silver earrings.
+    forms:
+      m: сере́бряный
+      f: сере́бряная
+      n: сере́бряное
+      pl: сере́бряные
+  "серый=grey":
+    cefr_level: A2
+    accented: се́рый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: grey (the colour of clouds or ash)
+    usage:
+      - ru: Не́бо ста́ло се́рым пе́ред дождём.
+        en_gb: The sky turned grey before the rain.
+    forms:
+      m: се́рый
+      f: се́рая
+      n: се́рое
+      pl: се́рые
+  "серьёзный=serious":
+    cefr_level: B1
+    accented: серьёзный
+    collections:
+      - feelings and sensations
+      - work
+    en_gb:
+      standard: serious (not joking, or important)
+    usage:
+      - ru: У нас серьёзный разгово́р.
+        en_gb: We are having a serious conversation.
+    forms:
+      m: серьёзный
+      f: серьёзная
+      n: серьёзное
+      pl: серьёзные
+      comparative: серьёзнее
+  "сильный=strong":
+    cefr_level: A2
+    accented: си́льный
+    collections:
+      - sickness and health
+      - feelings and sensations
+      - war and peace
+    en_gb:
+      standard: strong (having great power)
+    usage:
+      - ru: Он о́чень си́льный челове́к.
+        en_gb: He is a very strong man.
+    forms:
+      m: си́льный
+      f: си́льная
+      n: си́льное
+      pl: си́льные
+      comparative: сильне́е
+  "синий=blue":
+    cefr_level: A1
+    accented: си́ний
+    collections:
+      - colours and textures
+      - nature
+    en_gb:
+      standard: blue (the colour of a clear sky)
+    usage:
+      - ru: Над на́ми си́нее не́бо.
+        en_gb: Above us is the blue sky.
+    forms:
+      m: си́ний
+      f: си́няя
+      n: си́нее
+      pl: си́ние
+  "скучный=boring":
+    cefr_level: A2
+    accented: ску́чный
+    collections:
+      - reading
+      - the arts
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: boring (not interesting)
+      alt:
+        - dull
+    usage:
+      - ru: Э́тот фильм о́чень ску́чный.
+        en_gb: This film is very boring.
+    forms:
+      m: ску́чный
+      f: ску́чная
+      n: ску́чное
+      pl: ску́чные
+      comparative: скучне́е
+  "слабый=weak":
+    cefr_level: B1
+    accented: сла́бый
+    collections:
+      - sickness and health
+      - feelings and sensations
+    en_gb:
+      standard: weak (not strong)
+    usage:
+      - ru: По́сле боле́зни он ещё сла́бый.
+        en_gb: After the illness he is still weak.
+    forms:
+      m: сла́бый
+      f: сла́бая
+      n: сла́бое
+      pl: сла́бые
+      comparative: слабе́е
+  "сладкий=sweet":
+    cefr_level: A2
+    accented: сла́дкий
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: sweet (tasting of sugar)
+    usage:
+      - ru: Чай сли́шком сла́дкий.
+        en_gb: The tea is too sweet.
+    forms:
+      m: сла́дкий
+      f: сла́дкая
+      n: сла́дкое
+      pl: сла́дкие
+      comparative: сла́ще
+  "смелый=brave":
+    cefr_level: B1
+    accented: сме́лый
+    collections:
+      - war and peace
+      - feelings and sensations
+    en_gb:
+      standard: brave (not afraid of danger)
+      alt:
+        - courageous
+    usage:
+      - ru: Он сме́лый солда́т.
+        en_gb: He is a brave soldier.
+    forms:
+      m: сме́лый
+      f: сме́лая
+      n: сме́лое
+      pl: сме́лые
+      comparative: смеле́е
+  "современный=modern":
+    cefr_level: B1
+    accented: совреме́нный
+    collections:
+      - technology
+      - daily life
+    en_gb:
+      standard: modern (of the present time)
+    usage:
+      - ru: У них совреме́нная ку́хня.
+        en_gb: They have a modern kitchen.
+    forms:
+      m: совреме́нный
+      f: совреме́нная
+      n: совреме́нное
+      pl: совреме́нные
+      comparative: совреме́ннее
+  "солёный=salty":
+    cefr_level: B1
+    accented: солёный
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: salty (tasting of salt)
+    usage:
+      - ru: Суп сли́шком солёный.
+        en_gb: The soup is too salty.
+    forms:
+      m: солёный
+      f: солёная
+      n: солёное
+      pl: солёные
+  "солнечный=sunny":
+    cefr_level: A2
+    accented: со́лнечный
+    collections:
+      - nature
+      - holiday
+    en_gb:
+      standard: sunny (full of sunshine)
+    usage:
+      - ru: Сего́дня я́сный со́лнечный день.
+        en_gb: Today is a clear sunny day.
+    forms:
+      m: со́лнечный
+      f: со́лнечная
+      n: со́лнечное
+      pl: со́лнечные
+  "сонный=sleepy":
+    cefr_level: B1
+    accented: со́нный
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: sleepy (wanting to sleep)
+    usage:
+      - ru: У́тром я всегда́ со́нный.
+        en_gb: In the morning I am always sleepy.
+    forms:
+      m: со́нный
+      f: со́нная
+      n: со́нное
+      pl: со́нные
+  "спокойный=calm":
+    cefr_level: B1
+    accented: споко́йный
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: calm (quiet and relaxed)
+    usage:
+      - ru: У него́ споко́йный го́лос.
+        en_gb: He has a calm voice.
+    forms:
+      m: споко́йный
+      f: споко́йная
+      n: споко́йное
+      pl: споко́йные
+      comparative: споко́йнее
   "старый=old":
     cefr_level: A1
     accented: ста́рый
@@ -140,6 +1481,258 @@ words:
       n: ста́рое
       pl: ста́рые
       comparative: ста́рше
+  "сухой=dry":
+    cefr_level: A2
+    accented: сухо́й
+    collections:
+      - colours and textures
+      - nature
+      - in the kitchen
+    en_gb:
+      standard: dry (not wet)
+    usage:
+      - ru: Возьми́ сухо́е полоте́нце.
+        en_gb: Take a dry towel.
+    forms:
+      m: сухо́й
+      f: суха́я
+      n: сухо́е
+      pl: сухи́е
+      comparative: су́ше
+  "счастливый=happy":
+    cefr_level: A2
+    accented: счастли́вый
+    collections:
+      - feelings and sensations
+      - romance and dating
+      - family
+    en_gb:
+      standard: happy (feeling joy)
+    usage:
+      - ru: Они́ о́чень счастли́вая семья́.
+        en_gb: They are a very happy family.
+    forms:
+      m: счастли́вый
+      f: счастли́вая
+      n: счастли́вое
+      pl: счастли́вые
+      comparative: счастли́вее
+  "твёрдый=hard":
+    cefr_level: B1
+    accented: твёрдый
+    collections:
+      - colours and textures
+      - craft and construction
+    en_gb:
+      standard: hard (firm and solid)
+    usage:
+      - ru: Ка́мень — твёрдый материа́л.
+        en_gb: Stone is a hard material.
+    forms:
+      m: твёрдый
+      f: твёрдая
+      n: твёрдое
+      pl: твёрдые
+      comparative: твёрже
+  "тёмный=dark":
+    cefr_level: A2
+    accented: тёмный
+    collections:
+      - colours and textures
+    en_gb:
+      standard: dark (with little light, or deep in colour)
+    usage:
+      - ru: В ко́мнате бы́ло тёмно и ти́хо.
+        en_gb: It was dark and quiet in the room.
+    forms:
+      m: тёмный
+      f: тёмная
+      n: тёмное
+      pl: тёмные
+      comparative: темне́е
+  "тёплый=warm":
+    cefr_level: A1
+    accented: тёплый
+    collections:
+      - feelings and sensations
+      - clothes
+      - nature
+    en_gb:
+      standard: warm (pleasantly hot)
+    usage:
+      - ru: Сего́дня тёплый день.
+        en_gb: Today is a warm day.
+    forms:
+      m: тёплый
+      f: тёплая
+      n: тёплое
+      pl: тёплые
+      comparative: тепле́е
+  "толстый=thick":
+    cefr_level: A2
+    accented: то́лстый
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+    en_gb:
+      standard: thick (wide from side to side, or fat)
+      alt:
+        - fat
+    usage:
+      - ru: Он чита́ет то́лстую кни́гу.
+        en_gb: He is reading a thick book.
+    forms:
+      m: то́лстый
+      f: то́лстая
+      n: то́лстое
+      pl: то́лстые
+      comparative: то́лще
+  "тонкий=thin":
+    cefr_level: A2
+    accented: то́нкий
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+      - colours and textures
+    en_gb:
+      standard: thin (narrow from side to side)
+    usage:
+      - ru: Она́ ре́жет хлеб то́нкими куска́ми.
+        en_gb: She cuts the bread into thin slices.
+    forms:
+      m: то́нкий
+      f: то́нкая
+      n: то́нкое
+      pl: то́нкие
+      comparative: то́ньше
+  "трудный=difficult":
+    cefr_level: A2
+    accented: тру́дный
+    collections:
+      - school
+      - work
+      - daily life
+    en_gb:
+      standard: difficult (hard to do)
+      alt:
+        - hard
+    usage:
+      - ru: Э́то о́чень тру́дный экза́мен.
+        en_gb: This is a very difficult exam.
+    forms:
+      m: тру́дный
+      f: тру́дная
+      n: тру́дное
+      pl: тру́дные
+      comparative: трудне́е
+  "удобный=comfortable":
+    cefr_level: B1
+    accented: удо́бный
+    collections:
+      - clothes
+      - daily life
+      - technology
+    en_gb:
+      standard: comfortable (pleasant to use or wear)
+      alt:
+        - convenient
+    usage:
+      - ru: Э́то о́чень удо́бное кре́сло.
+        en_gb: This is a very comfortable armchair.
+    forms:
+      m: удо́бный
+      f: удо́бная
+      n: удо́бное
+      pl: удо́бные
+      comparative: удо́бнее
+  "узкий=narrow":
+    cefr_level: B1
+    accented: у́зкий
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+    en_gb:
+      standard: narrow (small from side to side)
+    usage:
+      - ru: Они́ шли по у́зкой у́лице.
+        en_gb: They walked along a narrow street.
+    forms:
+      m: у́зкий
+      f: у́зкая
+      n: у́зкое
+      pl: у́зкие
+      comparative: у́же
+  "умный=clever":
+    cefr_level: A2
+    accented: у́мный
+    collections:
+      - school
+      - people
+    en_gb:
+      standard: clever (quick to understand)
+      alt:
+        - smart
+        - intelligent
+    usage:
+      - ru: Он о́чень у́мный студе́нт.
+        en_gb: He is a very clever student.
+    forms:
+      m: у́мный
+      f: у́мная
+      n: у́мное
+      pl: у́мные
+      comparative: умне́е
+  "усталый=tired":
+    cefr_level: B1
+    accented: уста́лый
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: tired (needing rest)
+    usage:
+      - ru: По́сле рабо́ты он уста́лый.
+        en_gb: After work he is tired.
+    forms:
+      m: уста́лый
+      f: уста́лая
+      n: уста́лое
+      pl: уста́лые
+  "фиолетовый=purple":
+    cefr_level: B1
+    accented: фиоле́товый
+    collections:
+      - colours and textures
+    en_gb:
+      standard: purple (a colour of red and blue mixed)
+      alt:
+        - violet
+    usage:
+      - ru: В саду́ расту́т фиоле́товые цветы́.
+        en_gb: Purple flowers grow in the garden.
+    forms:
+      m: фиоле́товый
+      f: фиоле́товая
+      n: фиоле́товое
+      pl: фиоле́товые
+  "холодный=cold":
+    cefr_level: A1
+    accented: холо́дный
+    collections:
+      - feelings and sensations
+      - nature
+      - in the kitchen
+    en_gb:
+      standard: cold (low in temperature)
+    usage:
+      - ru: Я пью́ холо́дную во́ду.
+        en_gb: I drink cold water.
+    forms:
+      m: холо́дный
+      f: холо́дная
+      n: холо́дное
+      pl: холо́дные
+      comparative: холодне́е
   "хороший=good":
     cefr_level: A1
     accented: хоро́ший
@@ -156,3 +1749,109 @@ words:
       n: хоро́шее
       pl: хоро́шие
       comparative: лу́чше
+  "цветной=colourful":
+    cefr_level: B1
+    accented: цветно́й
+    collections:
+      - colours and textures
+      - the arts
+    en_gb:
+      standard: colourful (having many colours)
+      alt:
+        - coloured
+    usage:
+      - ru: Де́ти рису́ют цветны́ми карандаша́ми.
+        en_gb: The children draw with coloured pencils.
+    forms:
+      m: цветно́й
+      f: цветна́я
+      n: цветно́е
+      pl: цветны́е
+  "чёрный=black":
+    cefr_level: A1
+    accented: чёрный
+    collections:
+      - colours and textures
+    en_gb:
+      standard: black (the colour of night)
+    usage:
+      - ru: У меня́ чёрный кот.
+        en_gb: I have a black cat.
+    forms:
+      m: чёрный
+      f: чёрная
+      n: чёрное
+      pl: чёрные
+      comparative: черне́е
+  "чистый=clean":
+    cefr_level: A2
+    accented: чи́стый
+    collections:
+      - daily life
+      - nature
+      - colours and textures
+    en_gb:
+      standard: clean (not dirty)
+      alt:
+        - pure
+    usage:
+      - ru: В реке́ чи́стая вода́.
+        en_gb: There is clean water in the river.
+    forms:
+      m: чи́стый
+      f: чи́стая
+      n: чи́стое
+      pl: чи́стые
+      comparative: чи́ще
+  "широкий=wide":
+    cefr_level: A2
+    accented: широ́кий
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+    en_gb:
+      standard: wide (large from side to side)
+      alt:
+        - broad
+    usage:
+      - ru: Че́рез ре́ку идёт широ́кий мост.
+        en_gb: A wide bridge crosses the river.
+    forms:
+      m: широ́кий
+      f: широ́кая
+      n: широ́кое
+      pl: широ́кие
+      comparative: ши́ре
+  "яркий=bright":
+    cefr_level: B1
+    accented: я́ркий
+    collections:
+      - colours and textures
+    en_gb:
+      standard: bright (giving out strong light or colour)
+    usage:
+      - ru: На ней я́ркое кра́сное пла́тье.
+        en_gb: She is wearing a bright red dress.
+    forms:
+      m: я́ркий
+      f: я́ркая
+      n: я́ркое
+      pl: я́ркие
+      comparative: я́рче
+  "ясный=clear":
+    cefr_level: B1
+    accented: я́сный
+    collections:
+      - nature
+      - feelings and sensations
+    en_gb:
+      standard: clear (easy to understand, or cloudless)
+    usage:
+      - ru: Отве́т был я́сный и просто́й.
+        en_gb: The answer was clear and simple.
+    forms:
+      m: я́сный
+      f: я́сная
+      n: я́сное
+      pl: я́сные
+      comparative: ясне́е

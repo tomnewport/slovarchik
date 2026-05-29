@@ -4,6 +4,35 @@ meta:
   form:
     comparative: comparative degree
 words:
+  "близко=near":
+    cefr_level: A1
+    accented: бли́зко
+    collections:
+      - measurement and calculation
+      - places
+    en_gb:
+      standard: near (a short distance away)
+      alt:
+        - close
+    usage:
+      - ru: Магази́н совсе́м бли́зко.
+        en_gb: The shop is very near.
+    forms:
+      comparative: бли́же
+  "больно=painfully":
+    cefr_level: B1
+    accented: бо́льно
+    collections:
+      - sickness and health
+      - parts of the body
+      - feelings and sensations
+    en_gb:
+      standard: painfully (in a way that hurts)
+      alt:
+        - it hurts
+    usage:
+      - ru: Мне бо́льно ходи́ть.
+        en_gb: It hurts me to walk.
   "быстро=quickly":
     cefr_level: A2
     accented: бы́стро
@@ -16,6 +45,94 @@ words:
         en_gb: He runs quickly.
     forms:
       comparative: быстре́е
+  "вверх=up":
+    cefr_level: A2
+    accented: вверх
+    collections:
+      - shapes and patterns
+      - daily life
+    en_gb:
+      standard: up (towards a higher place)
+      alt:
+        - upwards
+    usage:
+      - ru: Посмотри́ вверх, на не́бо.
+        en_gb: Look up, at the sky.
+  "весело=cheerfully":
+    cefr_level: A2
+    accented: ве́село
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: cheerfully (in a happy way)
+    usage:
+      - ru: На пра́зднике бы́ло о́чень ве́село.
+        en_gb: It was very cheerful at the party.
+    forms:
+      comparative: веселе́е
+  "вкусно=deliciously":
+    cefr_level: A2
+    accented: вку́сно
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: deliciously (in a tasty way)
+    usage:
+      - ru: Здесь о́чень вку́сно гото́вят.
+        en_gb: They cook very deliciously here.
+    forms:
+      comparative: вкусне́е
+  "вместе=together":
+    cefr_level: A2
+    accented: вме́сте
+    collections:
+      - family
+      - romance and dating
+      - daily life
+    en_gb:
+      standard: together (with one another)
+    usage:
+      - ru: Мы всегда́ вме́сте.
+        en_gb: We are always together.
+  "вниз=down":
+    cefr_level: A2
+    accented: вниз
+    collections:
+      - shapes and patterns
+      - daily life
+    en_gb:
+      standard: down (towards a lower place)
+      alt:
+        - downwards
+    usage:
+      - ru: Он смотре́л вниз с ба́шни.
+        en_gb: He looked down from the tower.
+  "вокруг=around":
+    cefr_level: B1
+    accented: вокру́г
+    collections:
+      - shapes and patterns
+      - places
+    en_gb:
+      standard: around (on all sides)
+    usage:
+      - ru: Вокру́г бы́ло ти́хо и темно́.
+        en_gb: All around it was quiet and dark.
+  "вперёд=forward":
+    cefr_level: A2
+    accented: вперёд
+    collections:
+      - public transport
+      - travel
+      - daily life
+    en_gb:
+      standard: forward (towards the front)
+      alt:
+        - ahead
+    usage:
+      - ru: Маши́на ме́дленно дви́галась вперёд.
+        en_gb: The car moved slowly forward.
   "всегда=always":
     cefr_level: A1
     accented: всегда́
@@ -24,6 +141,91 @@ words:
     usage:
       - ru: Я всегда́ пью́ ча́й у́тром.
         en_gb: I always drink tea in the morning.
+  "вчера=yesterday":
+    cefr_level: A1
+    accented: вчера́
+    collections:
+      - daily life
+    en_gb:
+      standard: yesterday (the day before today)
+    usage:
+      - ru: Вчера́ мы бы́ли в теа́тре.
+        en_gb: Yesterday we were at the theatre.
+  "громко=loudly":
+    cefr_level: A2
+    accented: гро́мко
+    collections:
+      - the arts
+      - feelings and sensations
+    en_gb:
+      standard: loudly (with much noise)
+    usage:
+      - ru: Не говори́ так гро́мко!
+        en_gb: Don't speak so loudly!
+    forms:
+      comparative: гро́мче
+  "грустно=sadly":
+    cefr_level: A2
+    accented: гру́стно
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: sadly (in an unhappy way)
+    usage:
+      - ru: Ей ста́ло гру́стно.
+        en_gb: She began to feel sad.
+    forms:
+      comparative: грустне́е
+  "далеко=far":
+    cefr_level: A1
+    accented: далеко́
+    collections:
+      - travel
+      - measurement and calculation
+      - places
+    en_gb:
+      standard: far (a long distance away)
+    usage:
+      - ru: Шко́ла далеко́ от до́ма.
+        en_gb: The school is far from home.
+    forms:
+      comparative: да́льше
+  "дёшево=cheaply":
+    cefr_level: B1
+    accented: дёшево
+    collections:
+      - finance
+      - shopping
+    en_gb:
+      standard: cheaply (at a low price)
+    usage:
+      - ru: Здесь всё сто́ит дёшево.
+        en_gb: Everything is cheap here.
+    forms:
+      comparative: деше́вле
+  "дорого=expensively":
+    cefr_level: A2
+    accented: до́рого
+    collections:
+      - finance
+      - shopping
+    en_gb:
+      standard: expensively (at a high price)
+    usage:
+      - ru: Здесь всё сто́ит до́рого.
+        en_gb: Everything is expensive here.
+    forms:
+      comparative: доро́же
+  "завтра=tomorrow":
+    cefr_level: A1
+    accented: за́втра
+    collections:
+      - daily life
+    en_gb:
+      standard: tomorrow (the day after today)
+    usage:
+      - ru: За́втра бу́дет хоро́шая пого́да.
+        en_gb: The weather will be good tomorrow.
   "здесь=here":
     cefr_level: A1
     accented: здесь
@@ -32,6 +234,77 @@ words:
     usage:
       - ru: Я живу́ здесь.
         en_gb: I live here.
+  "здорово=great":
+    cefr_level: B1
+    accented: здо́рово
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: great (wonderful, brilliant)
+      alt:
+        - brilliantly
+    usage:
+      - ru: Мы здо́рово провели́ вре́мя.
+        en_gb: We had a great time.
+  "иногда=sometimes":
+    cefr_level: A2
+    accented: иногда́
+    collections:
+      - daily life
+    en_gb:
+      standard: sometimes (now and then)
+    usage:
+      - ru: Иногда́ я хожу́ в кино́.
+        en_gb: Sometimes I go to the cinema.
+  "интересно=interestingly":
+    cefr_level: A2
+    accented: интере́сно
+    collections:
+      - reading
+      - school
+      - the arts
+      - hobbies and pastimes
+    en_gb:
+      standard: interestingly (in a way that holds attention)
+      alt:
+        - it is interesting
+    usage:
+      - ru: Он интере́сно расска́зывает о войне́.
+        en_gb: He talks about the war in an interesting way.
+    forms:
+      comparative: интере́снее
+  "легко=easily":
+    cefr_level: A2
+    accented: легко́
+    collections:
+      - school
+      - daily life
+      - measurement and calculation
+    en_gb:
+      standard: easily (without difficulty)
+      alt:
+        - lightly
+    usage:
+      - ru: Он легко́ реши́л зада́чу.
+        en_gb: He solved the problem easily.
+    forms:
+      comparative: ле́гче
+  "мало=little":
+    cefr_level: A2
+    accented: ма́ло
+    collections:
+      - measurement and calculation
+      - daily life
+    en_gb:
+      standard: little (a small amount)
+      alt:
+        - few
+    usage:
+      - ru: У меня́ ма́ло вре́мени.
+        en_gb: I have little time.
+    forms:
+      comparative: ме́ньше
   "медленно=slowly":
     cefr_level: A2
     accented: ме́дленно
@@ -42,6 +315,71 @@ words:
         en_gb: Please speak slowly.
     forms:
       comparative: медле́ннее
+  "много=a lot":
+    cefr_level: A1
+    accented: мно́го
+    collections:
+      - measurement and calculation
+      - daily life
+    en_gb:
+      standard: a lot (a large amount)
+      alt:
+        - much
+        - many
+    usage:
+      - ru: Он мно́го рабо́тает.
+        en_gb: He works a lot.
+    forms:
+      comparative: бо́льше
+  "назад=back":
+    cefr_level: A2
+    accented: наза́д
+    collections:
+      - public transport
+      - travel
+      - daily life
+    en_gb:
+      standard: back (towards the rear, or ago)
+      alt:
+        - backwards
+        - ago
+    usage:
+      - ru: Сде́лай шаг наза́д.
+        en_gb: Take a step back.
+  "налево=to the left":
+    cefr_level: A2
+    accented: нале́во
+    collections:
+      - public transport
+      - travel
+      - places
+    en_gb:
+      standard: to the left (on or to the left side)
+    usage:
+      - ru: На углу́ поверни́те нале́во.
+        en_gb: At the corner turn to the left.
+  "направо=to the right":
+    cefr_level: A2
+    accented: напра́во
+    collections:
+      - public transport
+      - travel
+      - places
+    en_gb:
+      standard: to the right (on or to the right side)
+    usage:
+      - ru: Магази́н бу́дет напра́во.
+        en_gb: The shop will be on the right.
+  "обычно=usually":
+    cefr_level: A2
+    accented: обы́чно
+    collections:
+      - daily life
+    en_gb:
+      standard: usually (most of the time)
+    usage:
+      - ru: Обы́чно я встаю́ в семь.
+        en_gb: I usually get up at seven.
   "плохо=badly":
     cefr_level: A1
     accented: пло́хо
@@ -52,6 +390,44 @@ words:
         en_gb: He feels bad.
     forms:
       comparative: ху́же
+  "поздно=late":
+    cefr_level: A2
+    accented: по́здно
+    collections:
+      - daily life
+      - public transport
+    en_gb:
+      standard: late (after the usual time)
+    usage:
+      - ru: Вчера́ я лёг спать по́здно.
+        en_gb: Yesterday I went to bed late.
+    forms:
+      comparative: по́зже
+  "прямо=straight ahead":
+    cefr_level: A2
+    accented: пря́мо
+    collections:
+      - public transport
+      - travel
+      - shapes and patterns
+    en_gb:
+      standard: straight ahead (in a straight line)
+    usage:
+      - ru: Иди́те пря́мо до све́тофора.
+        en_gb: Go straight ahead to the traffic light.
+  "рано=early":
+    cefr_level: A2
+    accented: ра́но
+    collections:
+      - daily life
+      - public transport
+    en_gb:
+      standard: early (before the usual time)
+    usage:
+      - ru: Я просну́лся о́чень ра́но.
+        en_gb: I woke up very early.
+    forms:
+      comparative: ра́ньше
   "редко=rarely":
     cefr_level: B1
     accented: ре́дко
@@ -64,6 +440,31 @@ words:
         en_gb: We rarely watch television.
     forms:
       comparative: ре́же
+  "светло=brightly":
+    cefr_level: B1
+    accented: светло́
+    collections:
+      - nature
+      - colours and textures
+    en_gb:
+      standard: brightly (with a lot of light)
+      alt:
+        - it is light
+    usage:
+      - ru: У́тром на у́лице светло́.
+        en_gb: In the morning it is light outside.
+    forms:
+      comparative: светле́е
+  "сегодня=today":
+    cefr_level: A1
+    accented: сего́дня
+    collections:
+      - daily life
+    en_gb:
+      standard: today (on this day)
+    usage:
+      - ru: Сего́дня о́чень тёплый день.
+        en_gb: Today is a very warm day.
   "сейчас=now":
     cefr_level: A1
     accented: сейча́с
@@ -74,6 +475,21 @@ words:
     usage:
       - ru: Я сейча́с за́нят.
         en_gb: I am busy now.
+  "скучно=boringly":
+    cefr_level: A2
+    accented: ску́чно
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: boringly (in a dull way)
+      alt:
+        - it is boring
+    usage:
+      - ru: Без друзе́й мне ску́чно.
+        en_gb: Without friends I am bored.
+    forms:
+      comparative: скучне́е
   "там=there":
     cefr_level: A1
     accented: там
@@ -82,6 +498,95 @@ words:
     usage:
       - ru: Магази́н там, напра́во.
         en_gb: The shop is there, on the right.
+  "темно=dark":
+    cefr_level: B1
+    accented: темно́
+    collections:
+      - nature
+      - colours and textures
+    en_gb:
+      standard: dark (with little light)
+    usage:
+      - ru: Ве́чером в ле́се темно́.
+        en_gb: In the evening it is dark in the forest.
+    forms:
+      comparative: темне́е
+  "тепло=warmly":
+    cefr_level: A2
+    accented: тепло́
+    collections:
+      - nature
+      - feelings and sensations
+      - clothes
+    en_gb:
+      standard: warmly (in a warm way)
+      alt:
+        - it is warm
+    usage:
+      - ru: Сего́дня на у́лице тепло́.
+        en_gb: It is warm outside today.
+    forms:
+      comparative: тепле́е
+  "тихо=quietly":
+    cefr_level: A2
+    accented: ти́хо
+    collections:
+      - feelings and sensations
+      - faith
+    en_gb:
+      standard: quietly (with little noise)
+    usage:
+      - ru: В це́ркви на́до вести́ себя́ ти́хо.
+        en_gb: In church you must behave quietly.
+    forms:
+      comparative: ти́ше
+  "трудно=with difficulty":
+    cefr_level: A2
+    accented: тру́дно
+    collections:
+      - school
+      - work
+      - daily life
+    en_gb:
+      standard: with difficulty (in a hard way)
+      alt:
+        - it is difficult
+    usage:
+      - ru: Мне тру́дно поня́ть э́то пра́вило.
+        en_gb: It is difficult for me to understand this rule.
+    forms:
+      comparative: трудне́е
+  "тяжело=heavily":
+    cefr_level: B1
+    accented: тяжело́
+    collections:
+      - feelings and sensations
+      - sickness and health
+      - work
+    en_gb:
+      standard: heavily (with great effort, or hard)
+      alt:
+        - it is hard
+    usage:
+      - ru: По́сле боле́зни ему́ тяжело́ ходи́ть.
+        en_gb: After the illness it is hard for him to walk.
+    forms:
+      comparative: тяжеле́е
+  "холодно=coldly":
+    cefr_level: A2
+    accented: хо́лодно
+    collections:
+      - nature
+      - feelings and sensations
+    en_gb:
+      standard: coldly (in a cold way)
+      alt:
+        - it is cold
+    usage:
+      - ru: Зимо́й на у́лице хо́лодно.
+        en_gb: In winter it is cold outside.
+    forms:
+      comparative: холодне́е
   "хорошо=well":
     cefr_level: A1
     accented: хорошо́
