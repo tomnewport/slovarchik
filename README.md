@@ -37,6 +37,15 @@ The "spot the case" mode understands syncretism — e.g. *книге* is accepte
 both dative **and** prepositional, and animate accusatives (*собак*, *студентов*)
 line up with the genitive.
 
+### 🎧 Listening
+
+Hear a Russian phrase read aloud (Web Speech API) and rebuild its English
+translation by tapping the words in order. A few random **decoy** words are
+mixed into the bank to keep it honest. The Vocabulary *easy* drill also gains a
+**listen & match** option that hides the Russian spellings and speaks each word
+when you tap it — so you match by ear. Both degrade gracefully where speech
+synthesis isn't available.
+
 ## Tech
 
 - **Vue 3** + **Vite 6**, **Vue Router** (hash history for clean offline deep links)

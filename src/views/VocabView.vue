@@ -3,6 +3,7 @@ import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
 import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
+import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 
 // How long the celebration plays before auto-advancing to the next question.
@@ -45,6 +46,11 @@ const matched = reactive(new Set()) // ids of cleared pairs
 const wrongLeft = ref(null) // transient "wrong" flash markers
 const wrongRight = ref(null)
 let wrongTimer = null
+
+// Easy-mode "listen & match": hide the Russian spellings and read each word
+// aloud when it's tapped, turning the matching board into a listening drill.
+const hideSpellings = ref(false)
+const canSpeak = speechSupported()
 
 // English answers may be arrays; show the first as the canonical prompt/answer.
 const promptOf = (w) => (direction.value === 'ru-en' ? w.ru : firstEn(w))
@@ -97,6 +103,7 @@ function clearWrong() {
 
 function pickLeft(word) {
   if (matched.has(word.id)) return
+  if (hideSpellings.value) speak(word.ru)
   clearWrong()
   selectedLeft.value = selectedLeft.value === word.id ? null : word.id
   resolveMatch()
@@ -215,6 +222,11 @@ onUnmounted(() => {
         EN → RU
       </button>
     </div>
+    <label v-if="canSpeak" class="row" style="gap: 0.5rem; cursor: pointer">
+      <input type="checkbox" v-model="hideSpellings" />
+      <span>🔊 Listen &amp; match
+        <span class="muted">— easy mode: hide Russian, tap to hear</span></span>
+    </label>
     <p v-if="!ready && state.status === 'loading'" class="muted">Loading vocabulary…</p>
     <p v-else-if="!ready" class="feedback bad">
       No vocabulary available offline yet — connect once to download it.
@@ -257,10 +269,10 @@ onUnmounted(() => {
             class="match-item"
             :class="leftClass(word)"
             :disabled="matched.has(word.id)"
-            lang="ru"
             @click="pickLeft(word)"
           >
-            {{ word.ru }}
+            <span v-if="hideSpellings" aria-hidden="true">🔊</span>
+            <span v-else lang="ru">{{ word.ru }}</span>
           </button>
         </div>
         <div class="match-col">

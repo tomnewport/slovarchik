@@ -125,6 +125,28 @@ describe('VocabView', () => {
     expect(wrapper.vm.celebrating).toBe(false)
     expect(wrapper.text()).toContain('Next')
   })
+
+  it('easy mode can hide Russian spellings and speak words on tap', async () => {
+    const wrapper = mount(VocabView)
+    // The menu toggle is hidden when speech is unavailable (as in jsdom), so
+    // enable the option directly, then start easy mode.
+    wrapper.vm.hideSpellings = true
+    await wrapper.findAll('button.card')[0].trigger('click')
+
+    const cols = wrapper.findAll('.match-col')
+    const left = cols[0].findAll('button.match-item')
+    // Russian text is replaced by a speaker icon …
+    expect(left[0].text()).toContain('🔊')
+    expect(left[0].text()).not.toContain(wrapper.vm.boardLeft[0].ru)
+
+    // … and pairing still scores correctly.
+    const right = cols[1].findAll('button.match-item')
+    const targetId = wrapper.vm.boardLeft[0].id
+    const rightIndex = wrapper.vm.boardRight.findIndex((w) => w.id === targetId)
+    await left[0].trigger('click')
+    await right[rightIndex].trigger('click')
+    expect(wrapper.vm.score.right).toBe(1)
+  })
 })
 
 afterEach(() => {

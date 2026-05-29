@@ -1,0 +1,216 @@
+<script setup>
+import { computed, reactive, ref, onUnmounted } from 'vue'
+import { phrases, state } from '../stores/vocab.js'
+import { sample } from '../lib/quiz.js'
+import { buildListeningBank, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
+import { speak, speechSupported } from '../lib/speech.js'
+import CelebrationBurst from '../components/CelebrationBurst.vue'
+
+// How long the celebration plays before auto-advancing to the next phrase.
+const CELEBRATE_MS = 1000
+// A few random decoys are mixed into the word bank alongside the real words.
+const DECOYS = 3
+
+const ready = computed(() => phrases.value.length > 0)
+const canSpeak = speechSupported()
+
+const started = ref(false)
+const score = reactive({ right: 0, total: 0 })
+
+const current = ref(null)
+const bank = ref([])
+const placed = ref([])
+const answered = ref(false)
+const wasCorrect = ref(false)
+const celebrating = ref(false)
+let advanceTimer = null
+
+const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
+const pool = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id)))
+
+function replay() {
+  if (current.value) speak(current.value.ru)
+}
+
+function start() {
+  started.value = true
+  score.right = 0
+  score.total = 0
+  nextQuestion()
+}
+
+function nextQuestion() {
+  clearTimeout(advanceTimer)
+  celebrating.value = false
+  answered.value = false
+  wasCorrect.value = false
+  placed.value = []
+  current.value = sample(phrases.value, 1)[0]
+  bank.value = buildListeningBank(
+    current.value?.en ?? '',
+    listeningWordPool(phrases.value),
+    DECOYS,
+  )
+  replay() // read the phrase aloud as soon as it appears
+}
+
+function place(tile) {
+  if (answered.value) return
+  placed.value = [...placed.value, tile]
+}
+
+function remove(tile) {
+  if (answered.value) return
+  placed.value = placed.value.filter((t) => t.id !== tile.id)
+}
+
+function clear() {
+  if (!answered.value) placed.value = []
+}
+
+function record(correct) {
+  if (answered.value) return
+  answered.value = true
+  wasCorrect.value = correct
+  score.total += 1
+  if (correct) {
+    score.right += 1
+    // Celebrate, then move straight to the next phrase.
+    celebrating.value = true
+    advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
+  }
+}
+
+function check() {
+  if (answered.value || !placed.value.length) return
+  record(phraseCorrect(placed.value.map((t) => t.text).join(' '), current.value.en))
+}
+
+function quit() {
+  clearTimeout(advanceTimer)
+  celebrating.value = false
+  started.value = false
+  current.value = null
+  placed.value = []
+  bank.value = []
+}
+
+onUnmounted(() => clearTimeout(advanceTimer))
+</script>
+
+<template>
+  <section v-if="!started" class="grid">
+    <h2 style="margin: 0">Listening</h2>
+    <p class="muted" style="margin: 0">
+      Listen to a Russian phrase, then tap the English words in order to build the
+      translation. A few decoy words are mixed in.
+    </p>
+    <p v-if="!canSpeak" class="feedback bad">
+      Your browser can’t read text aloud, so the Russian will be shown as text instead.
+    </p>
+    <p v-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
+    <p v-else-if="!ready" class="feedback bad">
+      No phrases available offline yet — connect once to download them.
+    </p>
+    <button class="primary start" :disabled="!ready" @click="start">
+      Start listening
+    </button>
+  </section>
+
+  <section v-else class="grid" style="gap: 1.25rem; position: relative">
+    <CelebrationBurst :show="celebrating" />
+    <div class="row" style="justify-content: space-between">
+      <span class="pill">Listening</span>
+      <span class="muted">Score: {{ score.right }} / {{ score.total }}</span>
+    </div>
+
+    <div class="card" style="text-align: center">
+      <div class="muted">Listen</div>
+      <button class="primary replay" :disabled="!canSpeak" @click="replay">
+        🔊 Play phrase
+      </button>
+      <!-- Without speech the drill degrades to translating the shown text. -->
+      <p v-if="!canSpeak" lang="ru" class="ru">{{ current.ru }}</p>
+    </div>
+
+    <!-- Answer line: the words placed so far (tap to send one back). -->
+    <div class="answer-line" lang="en">
+      <button
+        v-for="tile in placed"
+        :key="tile.id"
+        class="tile placed"
+        :disabled="answered"
+        @click="remove(tile)"
+      >
+        {{ tile.text }}
+      </button>
+      <span v-if="!placed.length" class="muted">Tap the words below…</span>
+    </div>
+
+    <!-- Word bank: real words plus decoys, shuffled together. -->
+    <div class="bank row" style="flex-wrap: wrap" lang="en">
+      <button
+        v-for="tile in pool"
+        :key="tile.id"
+        class="tile"
+        :disabled="answered"
+        @click="place(tile)"
+      >
+        {{ tile.text }}
+      </button>
+    </div>
+
+    <div v-if="answered" class="grid">
+      <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
+        {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + current.en }}
+      </p>
+      <p class="muted" lang="ru" style="margin: 0">{{ current.ru }}</p>
+      <!-- Correct answers advance on their own; only wrong answers wait. -->
+      <div v-if="!wasCorrect" class="row">
+        <button class="primary" @click="nextQuestion">Next →</button>
+        <button @click="quit">Stop</button>
+      </div>
+    </div>
+    <div v-else class="row">
+      <button class="primary check" :disabled="!placed.length" @click="check">
+        Check
+      </button>
+      <button :disabled="!placed.length" @click="clear">Clear</button>
+      <button @click="nextQuestion">Skip</button>
+      <button style="margin-left: auto" @click="quit">Stop</button>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.tile {
+  padding: 0.5rem 0.8rem;
+  font-size: 1.05rem;
+}
+
+.tile.placed {
+  border-color: var(--primary);
+  background: rgba(79, 125, 255, 0.18);
+}
+
+.answer-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.replay {
+  margin: 0.5rem auto 0;
+  font-size: 1.1rem;
+}
+
+.ru {
+  font-size: 1.4rem;
+  margin: 0.75rem 0 0;
+}
+</style>

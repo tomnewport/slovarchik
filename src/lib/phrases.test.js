@@ -7,6 +7,9 @@ import {
   hintKeys,
   RU_LETTERS,
   EN_LETTERS,
+  listeningTokens,
+  listeningWordPool,
+  buildListeningBank,
 } from './phrases.js'
 
 // A deterministic pseudo-rng so hintKeys assertions are stable.
@@ -80,5 +83,48 @@ describe('hintKeys', () => {
   })
   it('returns nothing once the phrase is complete', () => {
     expect(hintKeys('', RU_LETTERS)).toEqual([])
+  })
+})
+
+describe('listeningTokens', () => {
+  it('lowercases and strips surrounding punctuation, keeping contractions', () => {
+    expect(listeningTokens("Hello, don't go!")).toEqual(['hello', "don't", 'go'])
+  })
+  it('strips Russian stress marks', () => {
+    expect(listeningTokens('Я иду́ домо́й')).toEqual(['я', 'иду', 'домой'])
+  })
+  it('returns an empty array for blank input', () => {
+    expect(listeningTokens('   ')).toEqual([])
+  })
+})
+
+describe('listeningWordPool', () => {
+  it('collects a deduplicated pool of words across phrases', () => {
+    const pool = listeningWordPool([{ en: 'I go home' }, { en: 'You go away' }])
+    expect(pool).toContain('go')
+    expect(pool.filter((w) => w === 'go')).toHaveLength(1)
+    expect(new Set(pool).size).toBe(pool.length)
+  })
+})
+
+describe('buildListeningBank', () => {
+  it('contains every target word plus the requested number of decoys', () => {
+    const pool = ['cat', 'dog', 'fish', 'bird', 'tree']
+    const bank = buildListeningBank('I see a dog', pool, 3, seededRng(7))
+    const texts = bank.map((t) => t.text)
+    for (const w of ['i', 'see', 'a', 'dog']) expect(texts).toContain(w)
+    expect(bank.filter((t) => t.decoy)).toHaveLength(3)
+    expect(bank).toHaveLength(7) // 4 words + 3 decoys
+  })
+  it('never uses a decoy that already appears in the phrase', () => {
+    const pool = ['dog', 'cat'] // 'dog' is in the phrase and must be skipped
+    const bank = buildListeningBank('the dog', pool, 3, seededRng(1))
+    const decoys = bank.filter((t) => t.decoy).map((t) => t.text)
+    expect(decoys).not.toContain('dog')
+    expect(decoys).toEqual(['cat']) // only eligible decoy
+  })
+  it('gives every tile a unique id', () => {
+    const bank = buildListeningBank('a b c', ['x', 'y'], 2, seededRng(2))
+    expect(new Set(bank.map((t) => t.id)).size).toBe(bank.length)
   })
 })
