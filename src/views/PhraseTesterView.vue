@@ -12,8 +12,10 @@ import {
   RU_LETTERS,
   EN_LETTERS,
 } from '../lib/phrases.js'
+import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import HintKeyboard from '../components/HintKeyboard.vue'
+import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing to the next phrase.
 const CELEBRATE_MS = 1000
@@ -42,6 +44,8 @@ let advanceTimer = null
 const bank = ref([])
 const placed = ref([])
 
+const canSpeak = speechSupported()
+
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
 // The translation's alphabet — drives the guided keyboard and Russian input.
@@ -62,6 +66,7 @@ function nextQuestion() {
   typed.value = ''
   placed.value = []
   current.value = sample(phrases.value, 1)[0]
+  if (direction.value === 'ru-en') speak(current.value.ru)
   if (level.value === 'easy') {
     const tokens = phraseTokens(targetOf(current.value)).map((text, id) => ({ id, text }))
     bank.value = sample(tokens, tokens.length) // shuffle
@@ -93,6 +98,7 @@ const pool = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id))
 
 function placeToken(token) {
   if (answered.value) return
+  if (targetLang.value === 'ru') speak(token.text)
   placed.value = [...placed.value, token]
   if (placed.value.length === bank.value.length) {
     record(phraseCorrect(placed.value.map((t) => t.text).join(' '), targetOf(current.value)))
@@ -185,6 +191,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
       >
         {{ sourceOf(current) }}
       </div>
+      <SpeakButton v-if="direction === 'ru-en'" :text="sourceOf(current)" />
     </div>
 
     <!-- Easy: build the sentence from shuffled word tiles -->
@@ -249,6 +256,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <div v-if="answered" class="grid">
       <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + targetOf(current) }}
+        <SpeakButton v-if="!wasCorrect && direction === 'en-ru'" :text="targetOf(current)" />
       </p>
       <!-- Correct answers advance on their own; only wrong answers wait. -->
       <div v-if="!wasCorrect" class="row">

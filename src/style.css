@@ -186,3 +186,17 @@ input[type='text']:focus {
   border: 1px solid var(--border);
   color: var(--muted);
 }
+
+.speak-btn {
+  padding: 0.1rem 0.25rem;
+  border-color: transparent;
+  background: transparent;
+  opacity: 0.5;
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.speak-btn:hover:not(:disabled) {
+  background: transparent;
+  opacity: 1;
+}

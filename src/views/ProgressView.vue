@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import SpeakButton from '../components/SpeakButton.vue'
 
 import { state as vocabState } from '../stores/vocab.js'
 import {
@@ -142,8 +143,13 @@ function sortedSkills(list) {
             </span>
           </div>
           <div class="row" style="gap: 0.4rem">
-            <span v-for="item in sec.items" :key="item.key + (item.slot || '')" class="pill" lang="ru">
-              {{ item.label }}
+            <span
+              v-for="item in sec.items"
+              :key="item.key + (item.slot || '')"
+              style="display: inline-flex; align-items: center; gap: 0.2rem"
+            >
+              <span class="pill" lang="ru">{{ item.label }}</span>
+              <SpeakButton :text="item.label" />
             </span>
           </div>
         </div>
@@ -165,7 +171,10 @@ function sortedSkills(list) {
           </div>
           <table v-if="group.skills.length" class="skills">
             <tr v-for="sk in sortedSkills(group.skills).slice(0, SKILL_CAP)" :key="sk.id">
-              <td>{{ sk.label }}</td>
+              <td style="display: flex; align-items: center; gap: 0.3rem">
+                <span :lang="['word', 'form'].includes(sk.kind) ? 'ru' : undefined">{{ sk.label }}</span>
+                <SpeakButton v-if="['word', 'form'].includes(sk.kind)" :text="sk.label" />
+              </td>
               <td class="muted" style="white-space: nowrap">{{ sk.breadth }}w</td>
               <td style="width: 40%">
                 <div class="bar">
@@ -199,7 +208,10 @@ function sortedSkills(list) {
         <p class="muted" style="margin: 0">The bottom 25% a practice session would target.</p>
         <table class="skills">
           <tr v-for="sk in weakSkills" :key="sk.id">
-            <td>{{ sk.label }}</td>
+            <td style="display: flex; align-items: center; gap: 0.3rem">
+              <span :lang="['word', 'form'].includes(sk.kind) ? 'ru' : undefined">{{ sk.label }}</span>
+              <SpeakButton v-if="['word', 'form'].includes(sk.kind)" :text="sk.label" />
+            </td>
             <td class="muted">{{ sk.kind }}</td>
             <td class="feedback bad" style="text-align: right; white-space: nowrap">
               {{ pct(sk.errorRate) }} wrong · {{ sk.attempts }}x
@@ -213,7 +225,10 @@ function sortedSkills(list) {
         <div class="card grid" style="gap: 0.4rem">
           <strong>Most mistaken words</strong>
           <div v-for="b in topWords" :key="b.id" class="rank">
-            <span lang="ru" class="truncate">{{ b.label }}</span>
+            <span style="display: inline-flex; align-items: center; gap: 0.2rem; overflow: hidden">
+              <span lang="ru" class="truncate">{{ b.label }}</span>
+              <SpeakButton :text="b.label" />
+            </span>
             <span class="muted">{{ pct(b.errorRate) }} · {{ b.attempts }}x</span>
           </div>
           <p v-if="!topWords.length" class="muted" style="margin: 0">No word attempts yet.</p>
@@ -221,7 +236,10 @@ function sortedSkills(list) {
         <div class="card grid" style="gap: 0.4rem">
           <strong>Most mistaken forms</strong>
           <div v-for="b in topForms" :key="b.id" class="rank">
-            <span lang="ru" class="truncate">{{ b.label }}</span>
+            <span style="display: inline-flex; align-items: center; gap: 0.2rem; overflow: hidden">
+              <span lang="ru" class="truncate">{{ b.label }}</span>
+              <SpeakButton :text="b.label" />
+            </span>
             <span class="muted">{{ pct(b.errorRate) }} · {{ b.attempts }}x</span>
           </div>
           <p v-if="!topForms.length" class="muted" style="margin: 0">No form attempts yet.</p>

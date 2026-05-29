@@ -15,7 +15,11 @@ import {
 import { normalize, sample } from '../lib/quiz.js'
 import { record as recordAttempt } from '../stores/progress.js'
 import { GRADES, gradeFor } from '../lib/progress.js'
+import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import SpeakButton from '../components/SpeakButton.vue'
+
+const canSpeak = speechSupported()
 
 // How long the celebration plays before auto-advancing to the next noun.
 const CELEBRATE_MS = 1000
@@ -86,6 +90,9 @@ function newRound() {
     const c = sample(CASES, 1)[0]
     probeForm.value = noun.value.forms[num][c]
     probeSlot.value = slotKey(num, c)
+    if (canSpeak) speak(probeForm.value)
+  } else {
+    if (canSpeak) speak(noun.value.lemma)
   }
 }
 
@@ -212,6 +219,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
       <div class="card" style="text-align: center">
         <div class="muted">{{ noun.lemma }} ({{ noun.en }}) — which case &amp; number is this form?</div>
         <div style="font-size: 2rem; margin: 0.5rem 0" lang="ru">{{ probeForm }}</div>
+        <SpeakButton :text="probeForm" />
       </div>
       <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 0.5rem">
         <button
@@ -255,7 +263,10 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <!-- Intermediate / advanced: the table -->
     <template v-else>
       <div class="card" style="text-align: center">
-        <div style="font-size: 1.6rem" lang="ru">{{ noun.lemma }}</div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem">
+          <span style="font-size: 1.6rem" lang="ru">{{ noun.lemma }}</span>
+          <SpeakButton :text="noun.lemma" />
+        </div>
         <div class="muted">
           {{ noun.en }} · {{ noun.gender || 'pl' }}{{ noun.animate ? ' · animate' : '' }}
           <span v-if="noun.cefr" class="pill">{{ noun.cefr }}</span>
@@ -297,8 +308,9 @@ onUnmounted(() => clearTimeout(advanceTimer))
                   spellcheck="false"
                 />
               </div>
-              <div v-if="tableChecked && !cellCorrect(num, c)" class="muted" style="font-size: 0.8rem" lang="ru">
-                {{ expected(num, c) }}
+              <div v-if="tableChecked && !cellCorrect(num, c)" class="muted" style="font-size: 0.8rem; display: flex; align-items: center; gap: 0.2rem" lang="ru">
+                <span>{{ expected(num, c) }}</span>
+                <SpeakButton :text="expected(num, c)" />
               </div>
             </td>
           </tr>
