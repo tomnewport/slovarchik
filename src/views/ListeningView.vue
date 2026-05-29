@@ -25,6 +25,10 @@ const wasCorrect = ref(false)
 const celebrating = ref(false)
 let advanceTimer = null
 
+// Decoy candidates are the same for every question, so cache them and only
+// recompute when the phrase list itself changes.
+const decoyPool = computed(() => listeningWordPool(phrases.value))
+
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const pool = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id)))
 
@@ -46,11 +50,7 @@ function nextQuestion() {
   wasCorrect.value = false
   placed.value = []
   current.value = sample(phrases.value, 1)[0]
-  bank.value = buildListeningBank(
-    current.value?.en ?? '',
-    listeningWordPool(phrases.value),
-    DECOYS,
-  )
+  bank.value = buildListeningBank(current.value?.en ?? '', decoyPool.value, DECOYS)
   replay() // read the phrase aloud as soon as it appears
 }
 

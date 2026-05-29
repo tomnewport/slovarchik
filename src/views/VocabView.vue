@@ -269,6 +269,7 @@ onUnmounted(() => {
             class="match-item"
             :class="leftClass(word)"
             :disabled="matched.has(word.id)"
+            :aria-label="hideSpellings ? 'Play word' : undefined"
             @click="pickLeft(word)"
           >
             <span v-if="hideSpellings" aria-hidden="true">🔊</span>
