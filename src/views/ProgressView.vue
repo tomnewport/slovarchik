@@ -149,8 +149,8 @@ function sortedSkills(list) {
               :key="item.key + (item.slot || '')"
               class="speak-row"
             >
-              <span class="pill" lang="ru">{{ item.label }}</span>
-              <SpeakButton :text="item.label" />
+              <span class="pill" :lang="item.kind === 'number' ? undefined : 'ru'">{{ item.label }}</span>
+              <SpeakButton v-if="item.kind !== 'number'" :text="item.label" />
             </span>
           </div>
         </div>

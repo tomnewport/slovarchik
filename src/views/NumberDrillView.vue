@@ -5,7 +5,9 @@ import { FOCUSES, nextExercise } from '../lib/numberDrill.js'
 import { checkAnswer } from '../lib/quiz.js'
 import { record as recordAttempt } from '../stores/progress.js'
 import { gradeFor } from '../lib/progress.js'
+import { speak } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing.
 const CELEBRATE_MS = 1000
@@ -51,6 +53,8 @@ function submit() {
   recordAttempt({ kind: 'number', key: current.value.kind }, gradeFor('advanced', wasCorrect.value), {
     level: 'advanced',
   })
+  // Read the correct Russian aloud — hearing the number/year said is the point.
+  speak(current.value.reveal)
   if (wasCorrect.value) {
     score.right += 1
     celebrating.value = true
@@ -127,8 +131,9 @@ onUnmounted(() => clearTimeout(advanceTimer))
       <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
         {{ wasCorrect ? '✓ Correct!' : '✗ Not quite' }}
       </p>
-      <p v-if="!wasCorrect" style="margin: 0" lang="ru">
-        Answer: <strong>{{ current.reveal }}</strong>
+      <p v-if="!wasCorrect" class="speak-row" style="margin: 0">
+        <span lang="ru">Answer: <strong>{{ current.reveal }}</strong></span>
+        <SpeakButton :text="current.reveal" />
       </p>
       <p v-if="current.note" class="muted" style="margin: 0">{{ current.note }}</p>
       <div v-if="!wasCorrect" class="row">
