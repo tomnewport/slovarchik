@@ -4,6 +4,7 @@ import VocabView from './VocabView.vue'
 import { state } from '../stores/vocab.js'
 import { keyboardHint } from '../stores/keyboard.js'
 import { hintLetters } from '../lib/quiz.js'
+import { shapeVocab } from '../lib/vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab data so the menu is ready.
@@ -86,6 +87,33 @@ describe('VocabView', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.answered).toBe(false)
     expect(wrapper.vm.celebrating).toBe(false)
+  })
+
+  it('shows a heteronym reminder and waits, even on a correct answer', async () => {
+    vi.useFakeTimers()
+    const wrapper = mount(VocabView)
+    // Advanced (typing) mode so the answer flows through record().
+    await wrapper.findAll('button.card')[2].trigger('click')
+
+    // Force the question to a known heteronym (сто́ить "to cost").
+    const cost = shapeVocab(loadFixtureWords()).find((w) => w.id === 'стоить=to cost')
+    expect(cost.heteronyms.length).toBeGreaterThan(0)
+    wrapper.vm.current = cost
+    await wrapper.vm.$nextTick()
+
+    const answer = Array.isArray(cost.en) ? cost.en[0] : cost.en
+    await wrapper.find('input[type="text"]').setValue(answer)
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.vm.wasCorrect).toBe(true)
+    // The reminder is shown with the other stress/meaning spelled out …
+    expect(wrapper.text()).toContain('Heteronym')
+    expect(wrapper.text()).toContain('it stands')
+    // … and a correct heteronym answer does NOT auto-advance: it waits.
+    vi.advanceTimersByTime(2000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.answered).toBe(true)
+    expect(wrapper.text()).toContain('Next')
   })
 
   it('highlights the Russian answer letters on the keyboard in intermediate EN → RU', async () => {

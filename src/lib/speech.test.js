@@ -13,7 +13,7 @@ describe('speech', () => {
     expect(speak('привет')).toBe(false)
   })
 
-  it('speaks stress-stripped text in the requested language', () => {
+  it('speaks text with stress marks preserved in the requested language', () => {
     const spoken = []
     window.SpeechSynthesisUtterance = class {
       constructor(text) {
@@ -31,7 +31,9 @@ describe('speech', () => {
     expect(ok).toBe(true)
     expect(window.speechSynthesis.cancel).toHaveBeenCalled()
     expect(window.speechSynthesis.speak).toHaveBeenCalledTimes(1)
-    expect(spoken[0].text).toBe('Привет, как дела?')
+    // Stress marks (U+0301) stay so Russian voices stress the right vowel —
+    // the only audible difference between heteronyms like сто́ит / стои́т.
+    expect(spoken[0].text).toBe('Приве́т, как дела́?')
     expect(spoken[0].lang).toBe('ru-RU')
   })
 

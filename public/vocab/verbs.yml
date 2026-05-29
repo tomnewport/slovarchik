@@ -1495,6 +1495,11 @@ words:
     cefr_level: A2
     accented: сто́ить
     aspect: impf
+    heteronyms:
+      - ru: сто́ит
+        gloss: it costs
+      - ru: стои́т
+        gloss: it stands
     collections:
       - finance
       - shopping
@@ -1515,6 +1520,34 @@ words:
       past_f: сто́ила
       past_n: сто́ило
       past_pl: сто́или
+  "стоять=to stand":
+    cefr_level: A1
+    accented: стоя́ть
+    aspect: impf
+    heteronyms:
+      - ru: стои́т
+        gloss: it stands
+      - ru: сто́ит
+        gloss: it costs
+    collections:
+      - daily life
+    en_gb:
+      standard: to stand (to be upright)
+    usage:
+      - ru: Он стои́т у окна́.
+        en_gb: He is standing by the window.
+    conjugation:
+      present:
+        "1sg": стою́
+        "2sg": стои́шь
+        "3sg": стои́т
+        "1pl": стои́м
+        "2pl": стои́те
+        "3pl": стоя́т
+      past_m: стоя́л
+      past_f: стоя́ла
+      past_n: стоя́ло
+      past_pl: стоя́ли
   "стрелять=to shoot":
     cefr_level: B2
     accented: стреля́ть

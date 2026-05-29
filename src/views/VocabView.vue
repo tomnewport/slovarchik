@@ -63,6 +63,10 @@ function firstEn(w) {
   return Array.isArray(w.en) ? w.en[0] : w.en
 }
 
+// Same-spelling forms whose stress carries the meaning (сто́ит vs стои́т). When
+// the current word has any, we surface a reminder after it's answered.
+const heteronyms = computed(() => current.value?.heteronyms ?? [])
+
 function start(levelId) {
   level.value = levelId
   score.right = 0
@@ -186,9 +190,12 @@ function record(correct) {
   })
   if (correct) {
     score.right += 1
-    // Celebrate, then move straight to the next question.
+    // Celebrate, then move straight to the next question — unless there's a
+    // heteronym reminder to read, in which case wait for the learner to advance.
     celebrating.value = true
-    advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
+    if (heteronyms.value.length === 0) {
+      advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
+    }
   }
 }
 
@@ -327,8 +334,25 @@ onUnmounted(() => {
         <SpeakButton v-if="!wasCorrect && direction === 'en-ru'" :text="displayAnswer(current)" />
       </p>
       <p v-if="current.note" class="muted" style="margin: 0">{{ current.note }}</p>
-      <!-- Correct answers advance on their own; only wrong answers wait for the user. -->
-      <div v-if="!wasCorrect" class="row">
+      <!-- Heteronym reminder: same spelling, the stress changes the meaning. -->
+      <div v-if="heteronyms.length" class="card heteronym-note">
+        <div class="muted" style="margin-bottom: 0.5rem">
+          ⚠ Heteronym — same spelling, but the stress changes the meaning:
+        </div>
+        <div
+          v-for="h in heteronyms"
+          :key="h.ru"
+          class="row"
+          style="gap: 0.5rem; align-items: center"
+        >
+          <strong lang="ru">{{ h.ru }}</strong>
+          <span class="muted">— {{ h.gloss }}</span>
+          <SpeakButton :text="h.ru" />
+        </div>
+      </div>
+      <!-- Correct answers advance on their own; wrong answers and heteronym
+           reminders wait for the user. -->
+      <div v-if="!wasCorrect || heteronyms.length" class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
         <button @click="quit">Change mode</button>
       </div>
@@ -336,3 +360,10 @@ onUnmounted(() => {
     <button v-else style="justify-self: start" @click="quit">Change mode</button>
   </section>
 </template>
+
+<style scoped>
+.heteronym-note {
+  border-left: 3px solid #d9a400;
+  text-align: left;
+}
+</style>
