@@ -37,5 +37,14 @@ import { RouterLink } from 'vue-router'
       </p>
       <span class="pill">build → guided → blind</span>
     </RouterLink>
+
+    <RouterLink to="/listening" class="card" style="text-decoration: none; color: inherit">
+      <h2 style="margin-top: 0">🎧 Listening</h2>
+      <p>
+        Hear a Russian phrase read aloud and tap the English words into order. A few
+        <strong>decoy</strong> words are mixed in to keep you honest.
+      </p>
+      <span class="pill">listen → build</span>
+    </RouterLink>
   </section>
 </template>

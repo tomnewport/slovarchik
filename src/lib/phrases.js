@@ -4,7 +4,7 @@
 // game and a letter-by-letter sequence for the guided keyboard — and grade
 // answers leniently, forgiving punctuation, case, stress and the usual ё/е slip.
 import { stripStress } from './text.js'
-import { shuffle } from './quiz.js'
+import { sample, shuffle } from './quiz.js'
 
 /** Lowercase alphabets offered by the guided keyboards. */
 export const RU_LETTERS = [...'абвгдежзийклмнопрстуфхцчшщъыьэюя']
@@ -74,4 +74,64 @@ export function hintKeys(next, letters, extra = 2, rng = Math.random) {
     rng,
   ).slice(0, Math.max(0, extra))
   return shuffle([next, ...decoys], rng)
+}
+
+/**
+ * Display tokens for the listening word bank: each word lowercased with
+ * surrounding punctuation and stress marks removed (internal apostrophes in
+ * contractions like "don't" are kept). Lowercasing everything keeps decoys
+ * indistinguishable from the real words — there's no capital-letter tell for
+ * the first word of the phrase.
+ * @param {string} phrase
+ * @returns {string[]}
+ */
+export function listeningTokens(phrase) {
+  return phraseTokens(phrase)
+    .map((w) =>
+      stripStress(w)
+        .toLowerCase()
+        .replace(/^[^\p{L}]+|[^\p{L}]+$/gu, ''),
+    )
+    .filter(Boolean)
+}
+
+/**
+ * Flatten a set of phrases into a deduplicated pool of candidate decoy words,
+ * taken from their English side and cleaned like {@link listeningTokens}.
+ * @param {Array<{en: string}>} phrases
+ * @returns {string[]}
+ */
+export function listeningWordPool(phrases) {
+  const out = new Set()
+  for (const p of phrases ?? []) {
+    for (const w of listeningTokens(p?.en ?? '')) out.add(w)
+  }
+  return [...out]
+}
+
+/**
+ * Build a shuffled word bank for the listening drill: every word of the target
+ * English phrase plus up to `decoyCount` random decoys drawn from `pool`
+ * (skipping any word that already appears in the phrase, so there's never an
+ * ambiguous extra copy). Each tile carries a stable `id` so repeated words stay
+ * distinct, and a `decoy` flag. `rng` is injectable for deterministic tests.
+ * @param {string} target    the English phrase to rebuild
+ * @param {string[]} pool    candidate decoy words
+ * @param {number} [decoyCount]
+ * @param {() => number} [rng]
+ * @returns {Array<{id: number, text: string, decoy: boolean}>}
+ */
+export function buildListeningBank(target, pool, decoyCount = 3, rng = Math.random) {
+  const words = listeningTokens(target)
+  const have = new Set(words)
+  const decoys = sample(
+    (pool ?? []).filter((w) => !have.has(w)),
+    Math.max(0, decoyCount),
+    rng,
+  )
+  const tiles = [
+    ...words.map((text) => ({ text, decoy: false })),
+    ...decoys.map((text) => ({ text, decoy: true })),
+  ].map((t, id) => ({ id, ...t }))
+  return shuffle(tiles, rng)
 }
