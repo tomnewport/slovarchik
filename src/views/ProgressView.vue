@@ -8,6 +8,7 @@ import {
   skills,
   skillsByBreadth,
   weakSkills,
+  numberProgress,
   examReadiness,
   completedCollections,
   currentCollection,
@@ -73,8 +74,8 @@ function sortedSkills(list) {
 
     <p v-if="vocabState.status === 'loading' && !hasData" class="muted">Loading…</p>
     <p v-else-if="!hasData" class="feedback bad" style="margin: 0">
-      No attempts recorded yet — play a few rounds of Vocab, Declension or Phrases and your
-      strengths and weak spots will show up here.
+      No attempts recorded yet — play a few rounds of Vocab, Declension, Numbers or Phrases and
+      your strengths and weak spots will show up here.
     </p>
 
     <template v-else>
@@ -191,6 +192,27 @@ function sortedSkills(list) {
             +{{ group.skills.length - SKILL_CAP }} more
           </p>
         </div>
+      </div>
+
+      <!-- Numbers drill (generated, so tracked by topic rather than by word) -->
+      <div v-if="numberProgress.length" class="card grid" style="gap: 0.6rem">
+        <strong>Numbers</strong>
+        <p class="muted" style="margin: 0">
+          Generated questions, tracked by topic — years, dates, cases and agreement.
+        </p>
+        <table class="skills">
+          <tr v-for="t in numberProgress" :key="t.topic">
+            <td>{{ t.label }}</td>
+            <td style="width: 40%">
+              <div class="bar">
+                <i :style="{ width: pct(t.strength), background: strengthColor(t.strength) }" />
+              </div>
+            </td>
+            <td class="muted" style="white-space: nowrap; text-align: right">
+              {{ pct(t.strength) }} · {{ t.attempts }}x
+            </td>
+          </tr>
+        </table>
       </div>
 
       <!-- Weakest skills -->

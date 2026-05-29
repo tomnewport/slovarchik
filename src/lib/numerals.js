@@ -114,20 +114,143 @@ export function agree(n, forms) {
  * @param {'m'|'f'|'n'} [gender]  gender of the final unit (один/одна/одно, два/две)
  * @returns {string}  stress-marked Russian
  */
-export function cardinalNominative(n, gender = 'm') {
-  if (n === 0) return UNITS[0]
-  const parts = []
-  const thousands = Math.floor(n / 1000)
-  const rest = n % 1000
-  if (thousands === 1) {
-    parts.push('ты́сяча')
-  } else if (thousands > 1) {
-    // тысяча is feminine, so its multiplier takes feminine один/два.
-    parts.push(group3(thousands, 'f'))
-    parts.push(agree(thousands, { one: 'ты́сяча', few: 'ты́сячи', many: 'ты́сяч' }))
+// ── Oblique-case cardinal atoms ──────────────────────────────────────────
+// In an oblique case every component of a compound cardinal declines (e.g. the
+// instrumental of 2945 is "двумя́ тысячами девятьюста́ми сорока́ пятью́"). These
+// tables give the gen/dat/ins/pre of each atom; nominative & accusative reuse
+// the nominative tables above (accusative ≈ nominative for inanimate counts).
+const ONE_OBL = {
+  m: { gen: 'одного́', dat: 'одному́', ins: 'одни́м', pre: 'одно́м' },
+  f: { gen: 'одно́й', dat: 'одно́й', ins: 'одно́й', pre: 'одно́й' },
+  n: { gen: 'одного́', dat: 'одному́', ins: 'одни́м', pre: 'одно́м' },
+}
+const UNIT_OBL = {
+  2: { gen: 'двух', dat: 'двум', ins: 'двумя́', pre: 'двух' },
+  3: { gen: 'трёх', dat: 'трём', ins: 'тремя́', pre: 'трёх' },
+  4: { gen: 'четырёх', dat: 'четырём', ins: 'четырьмя́', pre: 'четырёх' },
+  5: { gen: 'пяти́', dat: 'пяти́', ins: 'пятью́', pre: 'пяти́' },
+  6: { gen: 'шести́', dat: 'шести́', ins: 'шестью́', pre: 'шести́' },
+  7: { gen: 'семи́', dat: 'семи́', ins: 'семью́', pre: 'семи́' },
+  8: { gen: 'восьми́', dat: 'восьми́', ins: 'восемью́', pre: 'восьми́' },
+  9: { gen: 'девяти́', dat: 'девяти́', ins: 'девятью́', pre: 'девяти́' },
+}
+// Teens: десять is end-stressed; 11–19 keep stem stress (-надцати / -надцатью).
+const TEEN_OBL = { 10: { gen: 'десяти́', dat: 'десяти́', ins: 'десятью́', pre: 'десяти́' } }
+for (let i = 1; i <= 9; i++) {
+  const stem = TEENS[i].slice(0, -1) // drop the soft sign
+  TEEN_OBL[10 + i] = { gen: `${stem}и`, dat: `${stem}и`, ins: `${stem}ью`, pre: `${stem}и` }
+}
+const TENS_OBL = {
+  2: { gen: 'двадцати́', dat: 'двадцати́', ins: 'двадцатью́', pre: 'двадцати́' },
+  3: { gen: 'тридцати́', dat: 'тридцати́', ins: 'тридцатью́', pre: 'тридцати́' },
+  4: { gen: 'сорока́', dat: 'сорока́', ins: 'сорока́', pre: 'сорока́' },
+  5: { gen: 'пяти́десяти', dat: 'пяти́десяти', ins: 'пятью́десятью', pre: 'пяти́десяти' },
+  6: { gen: 'шести́десяти', dat: 'шести́десяти', ins: 'шестью́десятью', pre: 'шести́десяти' },
+  7: { gen: 'семи́десяти', dat: 'семи́десяти', ins: 'семью́десятью', pre: 'семи́десяти' },
+  8: { gen: 'восьми́десяти', dat: 'восьми́десяти', ins: 'восемью́десятью', pre: 'восьми́десяти' },
+  9: { gen: 'девяно́ста', dat: 'девяно́ста', ins: 'девяно́ста', pre: 'девяно́ста' },
+}
+const HUND_OBL = {
+  1: { gen: 'ста', dat: 'ста', ins: 'ста', pre: 'ста' },
+  2: { gen: 'двухсо́т', dat: 'двумста́м', ins: 'двумяста́ми', pre: 'двухста́х' },
+  3: { gen: 'трёхсо́т', dat: 'трёмста́м', ins: 'тремяста́ми', pre: 'трёхста́х' },
+  4: { gen: 'четырёхсо́т', dat: 'четырёмста́м', ins: 'четырьмяста́ми', pre: 'четырёхста́х' },
+  5: { gen: 'пятисо́т', dat: 'пятиста́м', ins: 'пятьюста́ми', pre: 'пятиста́х' },
+  6: { gen: 'шестисо́т', dat: 'шестиста́м', ins: 'шестьюста́ми', pre: 'шестиста́х' },
+  7: { gen: 'семисо́т', dat: 'семиста́м', ins: 'семьюста́ми', pre: 'семиста́х' },
+  8: { gen: 'восьмисо́т', dat: 'восьмиста́м', ins: 'восемьюста́ми', pre: 'восьмиста́х' },
+  9: { gen: 'девятисо́т', dat: 'девятиста́м', ins: 'девятьюста́ми', pre: 'девятиста́х' },
+}
+const NOLL_OBL = { gen: 'ноля́', dat: 'нолю́', ins: 'нолём', pre: 'ноле́' }
+
+// Scale nouns. Their case form is governed by the count before them: the "one"
+// class keeps the singular ("двадцати одной ты́сячи"), everything else takes the
+// plural in oblique cases; the nominative uses the usual ты́сяча / ты́сячи / ты́сяч.
+const THOUSAND = {
+  sg: { nom: 'ты́сяча', gen: 'ты́сячи', dat: 'ты́сяче', acc: 'ты́сячу', ins: 'ты́сячей', pre: 'ты́сяче' },
+  pl: { nom: 'ты́сячи', gen: 'ты́сяч', dat: 'ты́сячам', acc: 'ты́сячи', ins: 'ты́сячами', pre: 'ты́сячах' },
+}
+const MILLION = {
+  sg: { nom: 'миллио́н', gen: 'миллио́на', dat: 'миллио́ну', acc: 'миллио́н', ins: 'миллио́ном', pre: 'миллио́не' },
+  pl: { nom: 'миллио́ны', gen: 'миллио́нов', dat: 'миллио́нам', acc: 'миллио́ны', ins: 'миллио́нами', pre: 'миллио́нах' },
+}
+
+const isOblique = (kase) => kase === 'gen' || kase === 'dat' || kase === 'ins' || kase === 'pre'
+
+/** Oblique form of a single unit 1–9 (gendered for один). */
+function unitOblique(u, kase, gender) {
+  if (u === 1) return ONE_OBL[gender][kase]
+  return UNIT_OBL[u][kase]
+}
+
+/** Oblique form of a 1–999 group. */
+function group3Oblique(n, kase, gender) {
+  const out = []
+  const h = Math.floor(n / 100)
+  const rem = n % 100
+  if (h) out.push(HUND_OBL[h][kase])
+  if (rem >= 10 && rem < 20) {
+    out.push(TEEN_OBL[rem][kase])
+  } else {
+    const t = Math.floor(rem / 10)
+    const u = rem % 10
+    if (t) out.push(TENS_OBL[t][kase])
+    if (u) out.push(unitOblique(u, kase, gender))
   }
-  if (rest) parts.push(group3(rest, gender))
+  return out.join(' ')
+}
+
+/** The form a scale noun (ты́сяча / миллио́н) takes after a group of size `gv`. */
+function scaleForm(scale, gv, kase) {
+  const cat = pluralCategory(gv)
+  if (kase === 'nom' || kase === 'acc') {
+    // Count government: 1 → ты́сяча, 2–4 → ты́сячи, 5+ → ты́сяч.
+    if (cat === 'one') return scale.sg.nom
+    return cat === 'few' ? scale.sg.gen : scale.pl.gen
+  }
+  return (cat === 'one' ? scale.sg : scale.pl)[kase]
+}
+
+// Scales, widest first: [divisor, scale noun, gender the multiplier agrees with].
+const SCALES = [
+  [1000000, MILLION, 'm'],
+  [1000, THOUSAND, 'f'],
+  [1, null, null],
+]
+
+/**
+ * Spell a whole number in any case. Nominative and (inanimate) accusative reuse
+ * the nominative atoms; the four oblique cases decline every component.
+ * @param {number} n            0 … 999_999_999
+ * @param {{case?: string, gender?: 'm'|'f'|'n'}} [opts]
+ * @returns {string}
+ */
+export function cardinal(n, { case: kase = 'nom', gender = 'm' } = {}) {
+  if (n === 0) return isOblique(kase) ? NOLL_OBL[kase] : UNITS[0]
+  const oblique = isOblique(kase)
+  const parts = []
+  for (const [div, scale, scaleGender] of SCALES) {
+    const gv = Math.floor(n / div) % 1000
+    if (!gv) continue
+    const g = scale ? scaleGender : gender
+    // Drop the bare multiplier "один" directly before a scale noun (тысяча, not
+    // одна тысяча) — but keep it inside a larger group (двадцать одна тысяча).
+    if (!(scale && gv === 1)) {
+      parts.push(oblique ? group3Oblique(gv, kase, g) : group3(gv, g))
+    }
+    if (scale) parts.push(scaleForm(scale, gv, kase))
+  }
   return parts.join(' ')
+}
+
+/**
+ * Spell a whole number in the nominative case.
+ * @param {number} n            0 … 999_999_999
+ * @param {'m'|'f'|'n'} [gender]  gender of the final unit (один/одна/одно, два/две)
+ * @returns {string}  stress-marked Russian
+ */
+export function cardinalNominative(n, gender = 'm') {
+  return cardinal(n, { case: 'nom', gender })
 }
 
 // ── Ordinal atoms ────────────────────────────────────────────────────────

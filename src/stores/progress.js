@@ -25,6 +25,7 @@ import {
   weakestSkills,
 } from '../lib/skills.js'
 import { composeSession } from '../lib/practice.js'
+import { TOPIC_LABELS } from '../lib/numberDrill.js'
 
 const CURRENT_COLLECTION_KEY = 'currentCollection'
 
@@ -107,6 +108,24 @@ export const progressQueries = {
   /** A single error-rate summary over an arbitrary subset (e.g. nominative neuter forms). */
   combined: (filter) => combined(describedStats.value, filter),
 }
+
+/**
+ * Number-drill performance, one row per topic (years, dates, cases …). These
+ * subjects have no vocab words, so they live outside the word-centric `skills`
+ * machinery and get their own dashboard panel.
+ */
+export const numberProgress = computed(() =>
+  describedStats.value
+    .filter((s) => s.kind === 'number' && s.attempts > 0)
+    .map((s) => ({
+      topic: s.key,
+      label: TOPIC_LABELS[s.key] ?? s.key,
+      attempts: s.attempts,
+      errorRate: s.errorRate,
+      strength: 1 - s.errorRate,
+    }))
+    .sort((a, b) => b.attempts - a.attempts || a.label.localeCompare(b.label)),
+)
 
 /** Every skill (word / form / type / collection) with its breadth and strength. */
 export const skills = computed(() => buildSkills(describedStats.value, vocabState.words))

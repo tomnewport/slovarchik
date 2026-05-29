@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import {
+  cardinal,
   cardinalNominative,
   ordinal,
   yearOrdinal,
@@ -55,6 +56,48 @@ describe('cardinalNominative', () => {
   it('keeps stress marks', () => {
     expect(cardinalNominative(8)).toContain('́')
     expect(cardinalNominative(248)).toBe('две́сти со́рок во́семь')
+  })
+})
+
+describe('cardinal (oblique cases)', () => {
+  const cases = [
+    [2, 'ins', 'двумя'],
+    [3, 'gen', 'трёх'],
+    [4, 'ins', 'четырьмя'],
+    [5, 'pre', 'пяти'],
+    [8, 'ins', 'восемью'],
+    [21, 'gen', 'двадцати одного'],
+    [40, 'ins', 'сорока'],
+    [50, 'gen', 'пятидесяти'],
+    [100, 'gen', 'ста'],
+    [200, 'dat', 'двумстам'],
+    [300, 'ins', 'тремястами'],
+    [347, 'dat', 'трёмстам сорока семи'],
+    [1000, 'gen', 'тысячи'],
+    [5000, 'ins', 'пятью тысячами'],
+    // The notorious one: every component declines.
+    [2945, 'ins', 'двумя тысячами девятьюстами сорока пятью'],
+  ]
+  for (const [n, kase, expected] of cases) {
+    it(`${n} (${kase}) → ${expected}`, () => {
+      expect(bare(cardinal(n, { case: kase }))).toBe(expected)
+    })
+  }
+
+  it('declines один by gender', () => {
+    expect(bare(cardinal(1, { case: 'ins', gender: 'm' }))).toBe('одним')
+    expect(bare(cardinal(1, { case: 'ins', gender: 'f' }))).toBe('одной')
+    expect(bare(cardinal(1, { case: 'gen', gender: 'f' }))).toBe('одной')
+  })
+
+  it('nominative and accusative match (inanimate)', () => {
+    expect(cardinal(247, { case: 'acc' })).toBe(cardinalNominative(247))
+  })
+
+  it('keeps stress through the compound', () => {
+    expect(cardinal(2945, { case: 'ins' })).toBe(
+      'двумя́ ты́сячами девятьюста́ми сорока́ пятью́',
+    )
   })
 })
 

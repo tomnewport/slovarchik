@@ -3,6 +3,8 @@ import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 
 import { FOCUSES, nextExercise } from '../lib/numberDrill.js'
 import { checkAnswer } from '../lib/quiz.js'
+import { record as recordAttempt } from '../stores/progress.js'
+import { gradeFor } from '../lib/progress.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 
 // How long the celebration plays before auto-advancing.
@@ -44,6 +46,11 @@ function submit() {
   answered.value = true
   wasCorrect.value = checkAnswer(typed.value, current.value.answers)
   score.total += 1
+  // Track per-topic so numbers show up in the progress dashboard. Blind typing
+  // grades as the 'advanced' tier.
+  recordAttempt({ kind: 'number', key: current.value.kind }, gradeFor('advanced', wasCorrect.value), {
+    level: 'advanced',
+  })
   if (wasCorrect.value) {
     score.right += 1
     celebrating.value = true

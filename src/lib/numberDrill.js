@@ -7,7 +7,27 @@
 // ё/е-insensitively by quiz.checkAnswer) and `reveal` is the canonical,
 // stress-marked form to show as the model answer.
 
-import { cardinalNominative, ordinal, yearOrdinal, yearPhrase, agree } from './numerals.js'
+import {
+  cardinal as declineCardinal,
+  cardinalNominative,
+  ordinal,
+  yearOrdinal,
+  yearPhrase,
+  agree,
+} from './numerals.js'
+
+const CASE_NAMES = {
+  gen: 'genitive',
+  dat: 'dative',
+  ins: 'instrumental',
+  pre: 'prepositional',
+}
+const CASE_HINTS = {
+  gen: 'of … / нет …',
+  dat: 'to … / к …',
+  ins: 'with / by … / с …',
+  pre: 'about … / о …',
+}
 
 const randInt = (rng, lo, hi) => lo + Math.floor(rng() * (hi - lo + 1))
 
@@ -131,6 +151,23 @@ function date(rng) {
   }
 }
 
+/** Put a whole number into an oblique case — drills full cardinal declension. */
+function caseForm(rng) {
+  const n = randInt(rng, 11, 999)
+  const kase = ['gen', 'dat', 'ins', 'pre'][randInt(rng, 0, 3)]
+  const word = declineCardinal(n, { case: kase })
+  return {
+    id: `caseForm:${n}:${kase}`,
+    kind: 'caseForm',
+    value: n,
+    prompt: `Put ${n} into the ${CASE_NAMES[kase]}`,
+    instruction: `${CASE_NAMES[kase]} — ${CASE_HINTS[kase]}`,
+    answers: [word],
+    reveal: word,
+    note: `${n}`,
+  }
+}
+
 /** English ordinal suffix, just for the prompt text. */
 function ordinalEn(n) {
   const t = n % 100
@@ -138,13 +175,24 @@ function ordinalEn(n) {
   return `${n}${{ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th'}`
 }
 
-export const GENERATORS = { year, cardinal, age, price, date }
+export const GENERATORS = { year, cardinal, age, price, date, caseForm }
+
+/** Human labels for each exercise kind (used by the progress dashboard too). */
+export const TOPIC_LABELS = {
+  year: 'Years',
+  cardinal: 'Whole numbers',
+  age: 'Ages',
+  price: 'Prices',
+  date: 'Dates',
+  caseForm: 'Number cases',
+}
 
 /** Named focus areas the UI offers, each a set of exercise kinds. */
 export const FOCUSES = [
-  { id: 'mixed', label: 'Mixed', kinds: ['year', 'cardinal', 'age', 'price', 'date'] },
+  { id: 'mixed', label: 'Mixed', kinds: ['year', 'cardinal', 'age', 'price', 'date', 'caseForm'] },
   { id: 'years', label: 'Years', kinds: ['year'] },
   { id: 'numbers', label: 'Whole numbers', kinds: ['cardinal'] },
+  { id: 'cases', label: 'Number cases', kinds: ['caseForm'] },
   { id: 'dates', label: 'Dates', kinds: ['date'] },
   { id: 'agreement', label: 'Ages & prices', kinds: ['age', 'price'] },
 ]
