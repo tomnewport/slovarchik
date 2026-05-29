@@ -1,6 +1,12 @@
 <script setup>
 import { speak, speechSupported } from '../lib/speech.js'
-defineProps({ text: { type: String, required: true } })
+
+// Russian-only: all current call sites pass Russian text; lang defaults to ru-RU.
+const props = defineProps({
+  text: { type: String, required: true },
+  lang: { type: String, default: 'ru-RU' },
+})
+
 const canSpeak = speechSupported()
 </script>
 
@@ -10,7 +16,7 @@ const canSpeak = speechSupported()
     type="button"
     class="speak-btn"
     aria-label="Read aloud"
-    @click.stop="speak(text)"
+    @click.stop="speak(props.text, props.lang)"
   >
     🔊
   </button>

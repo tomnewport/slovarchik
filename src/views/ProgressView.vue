@@ -146,7 +146,7 @@ function sortedSkills(list) {
             <span
               v-for="item in sec.items"
               :key="item.key + (item.slot || '')"
-              style="display: inline-flex; align-items: center; gap: 0.2rem"
+              class="speak-row"
             >
               <span class="pill" lang="ru">{{ item.label }}</span>
               <SpeakButton :text="item.label" />
@@ -171,9 +171,11 @@ function sortedSkills(list) {
           </div>
           <table v-if="group.skills.length" class="skills">
             <tr v-for="sk in sortedSkills(group.skills).slice(0, SKILL_CAP)" :key="sk.id">
-              <td style="display: flex; align-items: center; gap: 0.3rem">
-                <span :lang="['word', 'form'].includes(sk.kind) ? 'ru' : undefined">{{ sk.label }}</span>
-                <SpeakButton v-if="['word', 'form'].includes(sk.kind)" :text="sk.label" />
+              <td>
+                <span class="speak-row">
+                  <span :lang="['word', 'form'].includes(sk.kind) ? 'ru' : undefined">{{ sk.label }}</span>
+                  <SpeakButton v-if="['word', 'form'].includes(sk.kind)" :text="sk.label" />
+                </span>
               </td>
               <td class="muted" style="white-space: nowrap">{{ sk.breadth }}w</td>
               <td style="width: 40%">
@@ -225,7 +227,7 @@ function sortedSkills(list) {
         <div class="card grid" style="gap: 0.4rem">
           <strong>Most mistaken words</strong>
           <div v-for="b in topWords" :key="b.id" class="rank">
-            <span style="display: inline-flex; align-items: center; gap: 0.2rem; overflow: hidden">
+            <span class="speak-row" style="overflow: hidden">
               <span lang="ru" class="truncate">{{ b.label }}</span>
               <SpeakButton :text="b.label" />
             </span>
@@ -236,7 +238,7 @@ function sortedSkills(list) {
         <div class="card grid" style="gap: 0.4rem">
           <strong>Most mistaken forms</strong>
           <div v-for="b in topForms" :key="b.id" class="rank">
-            <span style="display: inline-flex; align-items: center; gap: 0.2rem; overflow: hidden">
+            <span class="speak-row" style="overflow: hidden">
               <span lang="ru" class="truncate">{{ b.label }}</span>
               <SpeakButton :text="b.label" />
             </span>

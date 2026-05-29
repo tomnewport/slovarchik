@@ -15,11 +15,9 @@ import {
 import { normalize, sample } from '../lib/quiz.js'
 import { record as recordAttempt } from '../stores/progress.js'
 import { GRADES, gradeFor } from '../lib/progress.js'
-import { speak, speechSupported } from '../lib/speech.js'
+import { speak } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
-
-const canSpeak = speechSupported()
 
 // How long the celebration plays before auto-advancing to the next noun.
 const CELEBRATE_MS = 1000
@@ -90,9 +88,9 @@ function newRound() {
     const c = sample(CASES, 1)[0]
     probeForm.value = noun.value.forms[num][c]
     probeSlot.value = slotKey(num, c)
-    if (canSpeak) speak(probeForm.value)
+    speak(probeForm.value)
   } else {
-    if (canSpeak) speak(noun.value.lemma)
+    speak(noun.value.lemma)
   }
 }
 
@@ -263,7 +261,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <!-- Intermediate / advanced: the table -->
     <template v-else>
       <div class="card" style="text-align: center">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem">
+        <div class="speak-row" style="justify-content: center">
           <span style="font-size: 1.6rem" lang="ru">{{ noun.lemma }}</span>
           <SpeakButton :text="noun.lemma" />
         </div>
@@ -308,7 +306,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
                   spellcheck="false"
                 />
               </div>
-              <div v-if="tableChecked && !cellCorrect(num, c)" class="muted" style="font-size: 0.8rem; display: flex; align-items: center; gap: 0.2rem" lang="ru">
+              <div v-if="tableChecked && !cellCorrect(num, c)" class="speak-row muted" style="font-size: 0.8rem" lang="ru">
                 <span>{{ expected(num, c) }}</span>
                 <SpeakButton :text="expected(num, c)" />
               </div>

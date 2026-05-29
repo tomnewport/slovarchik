@@ -187,6 +187,13 @@ input[type='text']:focus {
   color: var(--muted);
 }
 
+/* Wraps a Russian label and its SpeakButton inline without disturbing layout. */
+.speak-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 .speak-btn {
   padding: 0.1rem 0.25rem;
   border-color: transparent;
