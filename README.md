@@ -106,6 +106,44 @@ The store exposes reactive `vocab` and `nouns` lists (sorted alphabetically by
 Russian) plus a `state` with the current `status`. Add a new part of speech by
 dropping a `.yml` file in `public/vocab/` and adding it to the manifest.
 
+## Progress tracking
+
+Every drill records each attempt through one shared module so the history can be
+ranked and aggregated consistently (the foundation for the progression system in
+[issue #12](https://github.com/tomnewport/slovarchik/issues/12)). Grading uses a
+0/1/2 scale — incorrect (`0`), correct in an assisted *easy* mode (`1`), correct
+unaided (`2`) — and only the **last 10 attempts** per subject are kept.
+
+A *subject* is a word, a single declension form (e.g. `pl.gen` of a noun) or a
+phrase. Drills record an attempt with one call:
+
+```js
+import { record } from './stores/progress.js'
+import { gradeFor, GRADES } from './lib/progress.js'
+
+record({ kind: 'word', key }, gradeFor(level, correct))         // typed a word
+record({ kind: 'form', key, slot: 'pl.gen' }, GRADES.INCORRECT) // missed a form
+record({ kind: 'phrase', key }, gradeFor(level, correct))       // built a phrase
+```
+
+Facets (gender, case, collection, CEFR …) are **derived at query time** from the
+live vocab, so the stored history stays tiny and any attribute — even one added
+later — can be aggregated. The pure model and query engine live in
+[`src/lib/progress.js`](src/lib/progress.js); the IndexedDB-backed reactive store
+in [`src/stores/progress.js`](src/stores/progress.js) exposes the headline
+queries:
+
+```js
+import { progressQueries as q } from './stores/progress.js'
+
+q.words() //         most mistaken words
+q.forms() //         most mistaken word-forms
+q.byFacet('gender') // worst noun genders (or any facet / kind)
+q.collections() //   most mistaken collections
+// arbitrary slice → one error rate, e.g. nominative forms of neuter nouns:
+q.combined((s) => s.kind === 'form' && s.facets.gender === 'n' && s.facets.case === 'nom')
+```
+
 ## Develop
 
 ```bash
