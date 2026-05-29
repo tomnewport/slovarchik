@@ -5,21 +5,46 @@
 // names are allowed, so the set stays curated rather than drifting per file.
 // The bundled vocab is checked against this list in collections.test.js.
 
-/** Every valid collection name, in alphabetical order. */
+/**
+ * Every valid collection name, in (default `Array.prototype.sort`) order.
+ * `DIY` is capitalised, so it sorts ahead of the lowercase names.
+ */
 export const COLLECTIONS = [
+  'DIY',
   'animals',
   'architecture',
+  'clothes',
+  'colours and textures',
+  'craft and construction',
   'daily life',
+  'faith',
   'family',
+  'feelings and sensations',
+  'finance',
+  'history',
+  'hobbies and pastimes',
   'holiday',
   'in the garden',
   'in the kitchen',
+  'measurement and calculation',
   'nature',
+  'parts of the body',
   'people',
   'places',
+  'public transport',
   'reading',
+  'restaurants and cafes',
+  'romance and dating',
   'school',
+  'shapes and patterns',
   'shopping',
+  'sickness and health',
+  'technology',
+  'the arts',
+  'the law',
+  'travel',
+  'war and peace',
+  'work',
 ]
 
 /** Fast membership lookup for the names above. */

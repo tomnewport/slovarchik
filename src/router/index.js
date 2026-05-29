@@ -21,6 +21,11 @@ export const routes = [
     component: () => import('../views/PhraseTesterView.vue'),
   },
   {
+    path: '/listening',
+    name: 'listening',
+    component: () => import('../views/ListeningView.vue'),
+  },
+  {
     path: '/progress',
     name: 'progress',
     component: () => import('../views/ProgressView.vue'),
