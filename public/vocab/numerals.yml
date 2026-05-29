@@ -1,0 +1,550 @@
+# numerals.yml — Russian numerals (числительные)
+# Natural key: "<russian>=<english>" (disambiguates homophones).
+# Stress is marked with a combining acute accent (´, U+0301) on the vowel.
+# Monosyllabic words carry no mark (their single vowel is always stressed).
+#
+# `value` is the number the word names, where it is a plain integer/decimal.
+# `type` records the kind of numeral:
+#   cardinal   — counting numbers (one, two, three …)
+#   ordinal    — position in a sequence (first, second …); these decline like
+#                adjectives and the `accented` form is the masculine nominative
+#   collective — groups of people/young animals (двое, трое, оба …)
+#   quantity   — words naming a fixed amount (a dozen, a pair, a half)
+#   year       — a spelled-out calendar year
+---
+meta:
+  type:
+    cardinal: cardinal
+    ordinal: ordinal
+    collective: collective
+    quantity: quantity
+    year: year
+words:
+  # ── Cardinal numbers ───────────────────────────────────────────────
+  "ноль=zero":
+    cefr_level: A1
+    type: cardinal
+    value: 0
+    accented: ноль
+    en_gb:
+      standard: zero (nought)
+      alt:
+        - nought
+    usage:
+      - ru: Температу́ра — ноль гра́дусов.
+        en_gb: The temperature is zero degrees.
+  "один=one":
+    cefr_level: A1
+    type: cardinal
+    value: 1
+    accented: оди́н
+    en_gb:
+      standard: one (the feminine is "одна", the neuter "одно")
+    usage:
+      - ru: У меня́ оди́н брат.
+        en_gb: I have one brother.
+  "два=two":
+    cefr_level: A1
+    type: cardinal
+    value: 2
+    accented: два
+    en_gb:
+      standard: two (the feminine is "две")
+    usage:
+      - ru: У неё два сы́на.
+        en_gb: She has two sons.
+  "три=three":
+    cefr_level: A1
+    type: cardinal
+    value: 3
+    accented: три
+    en_gb:
+      standard: three
+    usage:
+      - ru: В ко́мнате три окна́.
+        en_gb: There are three windows in the room.
+  "четыре=four":
+    cefr_level: A1
+    type: cardinal
+    value: 4
+    accented: четы́ре
+    en_gb:
+      standard: four
+    usage:
+      - ru: Я зна́ю четы́ре языка́.
+        en_gb: I know four languages.
+  "пять=five":
+    cefr_level: A1
+    type: cardinal
+    value: 5
+    accented: пять
+    en_gb:
+      standard: five
+    usage:
+      - ru: У меня́ пять рубле́й.
+        en_gb: I have five roubles.
+  "шесть=six":
+    cefr_level: A1
+    type: cardinal
+    value: 6
+    accented: шесть
+    en_gb:
+      standard: six
+    usage:
+      - ru: Сейча́с шесть часо́в.
+        en_gb: It is six o'clock now.
+  "семь=seven":
+    cefr_level: A1
+    type: cardinal
+    value: 7
+    accented: семь
+    en_gb:
+      standard: seven
+    usage:
+      - ru: В неде́ле семь дней.
+        en_gb: There are seven days in a week.
+  "восемь=eight":
+    cefr_level: A1
+    type: cardinal
+    value: 8
+    accented: во́семь
+    en_gb:
+      standard: eight
+    usage:
+      - ru: Магази́н рабо́тает во́семь часо́в.
+        en_gb: The shop is open for eight hours.
+  "девять=nine":
+    cefr_level: A1
+    type: cardinal
+    value: 9
+    accented: де́вять
+    en_gb:
+      standard: nine
+    usage:
+      - ru: Ему́ де́вять лет.
+        en_gb: He is nine years old.
+  "десять=ten":
+    cefr_level: A1
+    type: cardinal
+    value: 10
+    accented: де́сять
+    en_gb:
+      standard: ten
+    usage:
+      - ru: Да́йте мне де́сять рубле́й.
+        en_gb: Give me ten roubles.
+  "одиннадцать=eleven":
+    cefr_level: A1
+    type: cardinal
+    value: 11
+    accented: оди́ннадцать
+    en_gb:
+      standard: eleven
+    usage:
+      - ru: В кла́ссе оди́ннадцать ученико́в.
+        en_gb: There are eleven pupils in the class.
+  "двенадцать=twelve":
+    cefr_level: A1
+    type: cardinal
+    value: 12
+    accented: двена́дцать
+    en_gb:
+      standard: twelve
+    usage:
+      - ru: В году́ двена́дцать ме́сяцев.
+        en_gb: There are twelve months in a year.
+  "тринадцать=thirteen":
+    cefr_level: A1
+    type: cardinal
+    value: 13
+    accented: трина́дцать
+    en_gb:
+      standard: thirteen
+  "четырнадцать=fourteen":
+    cefr_level: A1
+    type: cardinal
+    value: 14
+    accented: четы́рнадцать
+    en_gb:
+      standard: fourteen
+  "пятнадцать=fifteen":
+    cefr_level: A1
+    type: cardinal
+    value: 15
+    accented: пятна́дцать
+    en_gb:
+      standard: fifteen
+    usage:
+      - ru: Уро́к дли́тся пятна́дцать мину́т.
+        en_gb: The lesson lasts fifteen minutes.
+  "шестнадцать=sixteen":
+    cefr_level: A1
+    type: cardinal
+    value: 16
+    accented: шестна́дцать
+    en_gb:
+      standard: sixteen
+  "семнадцать=seventeen":
+    cefr_level: A1
+    type: cardinal
+    value: 17
+    accented: семна́дцать
+    en_gb:
+      standard: seventeen
+  "восемнадцать=eighteen":
+    cefr_level: A1
+    type: cardinal
+    value: 18
+    accented: восемна́дцать
+    en_gb:
+      standard: eighteen
+    usage:
+      - ru: Ему́ восемна́дцать лет.
+        en_gb: He is eighteen years old.
+  "девятнадцать=nineteen":
+    cefr_level: A1
+    type: cardinal
+    value: 19
+    accented: девятна́дцать
+    en_gb:
+      standard: nineteen
+  "двадцать=twenty":
+    cefr_level: A1
+    type: cardinal
+    value: 20
+    accented: два́дцать
+    en_gb:
+      standard: twenty
+    usage:
+      - ru: В гру́ппе два́дцать студе́нтов.
+        en_gb: There are twenty students in the group.
+  "тридцать=thirty":
+    cefr_level: A2
+    type: cardinal
+    value: 30
+    accented: три́дцать
+    en_gb:
+      standard: thirty
+    usage:
+      - ru: В ме́сяце три́дцать дней.
+        en_gb: There are thirty days in the month.
+  "сорок=forty":
+    cefr_level: A2
+    type: cardinal
+    value: 40
+    accented: со́рок
+    en_gb:
+      standard: forty
+    usage:
+      - ru: Ему́ со́рок лет.
+        en_gb: He is forty years old.
+  "пятьдесят=fifty":
+    cefr_level: A2
+    type: cardinal
+    value: 50
+    accented: пятьдеся́т
+    en_gb:
+      standard: fifty
+    usage:
+      - ru: Биле́т сто́ит пятьдеся́т рубле́й.
+        en_gb: The ticket costs fifty roubles.
+  "сто=hundred":
+    cefr_level: A2
+    type: cardinal
+    value: 100
+    accented: сто
+    en_gb:
+      standard: a hundred
+    usage:
+      - ru: У меня́ сто рубле́й.
+        en_gb: I have a hundred roubles.
+  "двести=two hundred":
+    cefr_level: B1
+    type: cardinal
+    value: 200
+    accented: две́сти
+    en_gb:
+      standard: two hundred
+    usage:
+      - ru: Две́сти лет наза́д здесь был лес.
+        en_gb: Two hundred years ago there was a forest here.
+  "тысяча=thousand":
+    cefr_level: A2
+    type: cardinal
+    value: 1000
+    accented: ты́сяча
+    en_gb:
+      standard: a thousand
+    usage:
+      - ru: В го́роде ты́сяча жи́телей.
+        en_gb: There are a thousand inhabitants in the town.
+  "миллион=million":
+    cefr_level: B1
+    type: cardinal
+    value: 1000000
+    accented: миллио́н
+    en_gb:
+      standard: a million
+    usage:
+      - ru: Э́та карти́на сто́ит миллио́н рубле́й.
+        en_gb: This painting costs a million roubles.
+  # ── Years (spelled out) ────────────────────────────────────────────
+  "тысяча девятьсот девяносто девять=1999":
+    cefr_level: B1
+    type: year
+    value: 1999
+    accented: ты́сяча девятьсо́т девяно́сто де́вять
+    en_gb:
+      standard: nineteen ninety-nine (the year 1999)
+    usage:
+      - ru: Я роди́лся в ты́сяча девятьсо́т девяно́сто девя́том году́.
+        en_gb: I was born in nineteen ninety-nine.
+  "две тысячи шестнадцать=2016":
+    cefr_level: B1
+    type: year
+    value: 2016
+    accented: две ты́сячи шестна́дцать
+    en_gb:
+      standard: twenty sixteen (the year 2016)
+    usage:
+      - ru: Э́то бы́ло в две ты́сячи шестна́дцатом году́.
+        en_gb: That was in twenty sixteen.
+  # ── Ordinal numbers ────────────────────────────────────────────────
+  "первый=first":
+    cefr_level: A1
+    type: ordinal
+    value: 1
+    accented: пе́рвый
+    en_gb:
+      standard: first
+    usage:
+      - ru: Сего́дня пе́рвое ма́я.
+        en_gb: Today is the first of May.
+  "второй=second":
+    cefr_level: A1
+    type: ordinal
+    value: 2
+    accented: второ́й
+    en_gb:
+      standard: second
+    usage:
+      - ru: Он живёт на второ́м этаже́.
+        en_gb: He lives on the second floor.
+  "третий=third":
+    cefr_level: A1
+    type: ordinal
+    value: 3
+    accented: тре́тий
+    en_gb:
+      standard: third
+    usage:
+      - ru: Э́то её тре́тий ребёнок.
+        en_gb: This is her third child.
+  "четвёртый=fourth":
+    cefr_level: A2
+    type: ordinal
+    value: 4
+    accented: четвёртый
+    en_gb:
+      standard: fourth
+  "пятый=fifth":
+    cefr_level: A2
+    type: ordinal
+    value: 5
+    accented: пя́тый
+    en_gb:
+      standard: fifth
+    usage:
+      - ru: Мы у́чимся в пя́том кла́ссе.
+        en_gb: We are in the fifth grade.
+  "шестой=sixth":
+    cefr_level: A2
+    type: ordinal
+    value: 6
+    accented: шесто́й
+    en_gb:
+      standard: sixth
+  "седьмой=seventh":
+    cefr_level: A2
+    type: ordinal
+    value: 7
+    accented: седьмо́й
+    en_gb:
+      standard: seventh
+  "восьмой=eighth":
+    cefr_level: A2
+    type: ordinal
+    value: 8
+    accented: восьмо́й
+    en_gb:
+      standard: eighth
+    usage:
+      - ru: Восьмо́е ма́рта — большо́й пра́здник.
+        en_gb: The eighth of March is a big holiday.
+  "девятый=ninth":
+    cefr_level: A2
+    type: ordinal
+    value: 9
+    accented: девя́тый
+    en_gb:
+      standard: ninth
+  "десятый=tenth":
+    cefr_level: A2
+    type: ordinal
+    value: 10
+    accented: деся́тый
+    en_gb:
+      standard: tenth
+    usage:
+      - ru: Он зако́нчил деся́тый класс.
+        en_gb: He finished the tenth grade.
+  "двадцатый=twentieth":
+    cefr_level: B1
+    type: ordinal
+    value: 20
+    accented: двадца́тый
+    en_gb:
+      standard: twentieth
+    usage:
+      - ru: Э́то бы́ло в двадца́том ве́ке.
+        en_gb: That was in the twentieth century.
+  "сотый=hundredth":
+    cefr_level: B1
+    type: ordinal
+    value: 100
+    accented: со́тый
+    en_gb:
+      standard: hundredth
+  "тысячный=thousandth":
+    cefr_level: B1
+    type: ordinal
+    value: 1000
+    accented: ты́сячный
+    en_gb:
+      standard: thousandth
+  # ── Collective numbers (groups) ────────────────────────────────────
+  "двое=two together":
+    cefr_level: B1
+    type: collective
+    value: 2
+    accented: дво́е
+    en_gb:
+      standard: two (a group of two, especially people)
+    usage:
+      - ru: У них дво́е дете́й.
+        en_gb: They have two children.
+  "трое=three together":
+    cefr_level: B1
+    type: collective
+    value: 3
+    accented: тро́е
+    en_gb:
+      standard: three (a group of three, especially people)
+    usage:
+      - ru: В ко́мнате тро́е мужчи́н.
+        en_gb: There are three men in the room.
+  "четверо=four together":
+    cefr_level: B1
+    type: collective
+    value: 4
+    accented: че́тверо
+    en_gb:
+      standard: four (a group of four, especially people)
+    usage:
+      - ru: У нас че́тверо друзе́й.
+        en_gb: We have four friends.
+  "пятеро=five together":
+    cefr_level: B2
+    type: collective
+    value: 5
+    accented: пя́теро
+    en_gb:
+      standard: five (a group of five, especially people)
+  "шестеро=six together":
+    cefr_level: B2
+    type: collective
+    value: 6
+    accented: ше́стеро
+    en_gb:
+      standard: six (a group of six, especially people)
+  "семеро=seven together":
+    cefr_level: B2
+    type: collective
+    value: 7
+    accented: се́меро
+    en_gb:
+      standard: seven (a group of seven, especially people)
+    usage:
+      - ru: Се́меро одного́ не ждут.
+        en_gb: Seven do not wait for one. (a proverb)
+  "оба=both":
+    cefr_level: B1
+    type: collective
+    value: 2
+    accented: о́ба
+    en_gb:
+      standard: both (with masculine or neuter nouns; the feminine is "обе")
+    usage:
+      - ru: О́ба бра́та живу́т здесь.
+        en_gb: Both brothers live here.
+  "обе=both":
+    cefr_level: B1
+    type: collective
+    value: 2
+    accented: о́бе
+    en_gb:
+      standard: both (with feminine nouns)
+    usage:
+      - ru: О́бе сестры́ у́чатся в шко́ле.
+        en_gb: Both sisters study at school.
+  # ── Quantity words and non-standard units ──────────────────────────
+  "дюжина=dozen":
+    cefr_level: B1
+    type: quantity
+    value: 12
+    accented: дю́жина
+    en_gb:
+      standard: a dozen (twelve of something)
+    usage:
+      - ru: Я купи́л дю́жину яи́ц.
+        en_gb: I bought a dozen eggs.
+  "пара=pair":
+    cefr_level: A2
+    type: quantity
+    value: 2
+    accented: па́ра
+    en_gb:
+      standard: a pair (two of something, or a couple)
+    usage:
+      - ru: Я купи́л па́ру боти́нок.
+        en_gb: I bought a pair of boots.
+  "десяток=ten of":
+    cefr_level: B1
+    type: quantity
+    value: 10
+    accented: деся́ток
+    en_gb:
+      standard: a ten (a batch of ten, e.g. of eggs)
+    usage:
+      - ru: Да́йте, пожа́луйста, деся́ток яи́ц.
+        en_gb: Please give me ten eggs.
+  "сотня=hundred of":
+    cefr_level: B1
+    type: quantity
+    value: 100
+    accented: со́тня
+    en_gb:
+      standard: a hundred (an informal batch of about a hundred)
+    usage:
+      - ru: На пло́щади бы́ло со́тня люде́й.
+        en_gb: There were about a hundred people in the square.
+  "полтора=one and a half":
+    cefr_level: B1
+    type: quantity
+    value: 1.5
+    accented: полтора́
+    en_gb:
+      standard: one and a half (the feminine is "полторы")
+    usage:
+      - ru: Я ждал полтора́ часа́.
+        en_gb: I waited for one and a half hours.

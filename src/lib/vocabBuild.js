@@ -9,15 +9,29 @@ import { stripStress } from './text.js'
 /** Map a vocab filename (without extension) to its part of speech. */
 export const POS_BY_FILE = {
   nouns: 'noun',
+  calendar: 'noun', // days, months and festivals — nouns grouped by topic
   pronouns: 'pronoun',
+  numerals: 'numeral',
   verbs: 'verb',
   adjectives: 'adjective',
   adverbs: 'adverb',
   prepositions: 'preposition',
+  conjunctions: 'conjunction',
+  interjections: 'interjection',
 }
 
 /** Parts of speech in a stable display order. */
-export const partsOfSpeech = ['noun', 'pronoun', 'verb', 'adjective', 'adverb', 'preposition']
+export const partsOfSpeech = [
+  'noun',
+  'pronoun',
+  'numeral',
+  'verb',
+  'adjective',
+  'adverb',
+  'preposition',
+  'conjunction',
+  'interjection',
+]
 
 /** Split the "<russian>=<english>" natural key. */
 export function parseKey(key) {

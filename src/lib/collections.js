@@ -41,6 +41,7 @@ export const COLLECTIONS = [
   'sickness and health',
   'technology',
   'the arts',
+  'the calendar',
   'the law',
   'travel',
   'war and peace',

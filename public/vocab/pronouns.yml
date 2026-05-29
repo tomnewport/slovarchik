@@ -1,9 +1,25 @@
-# pronouns.yml — Russian pronouns
+# pronouns.yml — Russian pronouns (местоимения)
+# Natural key: "<russian>=<english>" (disambiguates homophones).
+# Stress is marked with a combining acute accent (´, U+0301) on the vowel.
+#
+# The `forms` block depends on the `type`:
+#   pers / refl / inter (кто, что) / neg — the six cases (nom … pre) of the
+#     single pronoun (reflexive себя has no nominative).
+#   poss / demo / det / inter (какой, чей) — the nominative agreement forms
+#     m / f / n / pl, because these decline like adjectives. The `accented`
+#     headword is the masculine nominative.
+#   A few pronouns (его, её, их, сколько) take no `forms` block: the possessives
+#     его/её/их never change, and сколько is quantitative.
 ---
 meta:
   type:
     pers: personal
+    refl: reflexive
+    poss: possessive
+    demo: demonstrative
+    det: determinative
     inter: interrogative
+    neg: negative
   case:
     nom: nominative
     gen: genitive
@@ -12,6 +28,38 @@ meta:
     ins: instrumental
     pre: prepositional
 words:
+  "ваш=your":
+    cefr_level: A1
+    type: poss
+    accented: ваш
+    en_gb:
+      standard: your (belonging to "you" — plural or polite)
+      alt:
+        - yours
+    usage:
+      - ru: Э́то ваш дом?
+        en_gb: Is this your house?
+    forms:
+      m: ваш
+      f: ва́ша
+      n: ва́ше
+      pl: ва́ши
+  "весь=all":
+    cefr_level: A2
+    type: det
+    accented: весь
+    en_gb:
+      standard: all (the whole of something)
+      alt:
+        - the whole
+    usage:
+      - ru: Я прочита́л всю кни́гу.
+        en_gb: I read the whole book.
+    forms:
+      m: весь
+      f: вся
+      n: всё
+      pl: все
   "вы=you":
     cefr_level: A1
     type: pers
@@ -28,6 +76,69 @@ words:
       acc: вас
       ins: ва́ми
       pre: вас
+  "его=his":
+    cefr_level: A2
+    type: poss
+    accented: его́
+    en_gb:
+      standard: his (belonging to him; this form never changes)
+    usage:
+      - ru: Э́то его́ маши́на.
+        en_gb: This is his car.
+  "её=her":
+    cefr_level: A2
+    type: poss
+    accented: её
+    en_gb:
+      standard: her (belonging to her; this form never changes)
+      alt:
+        - hers
+    usage:
+      - ru: Я зна́ю её сестру́.
+        en_gb: I know her sister.
+  "их=their":
+    cefr_level: A2
+    type: poss
+    accented: их
+    en_gb:
+      standard: their (belonging to them; this form never changes)
+      alt:
+        - theirs
+    usage:
+      - ru: Их де́ти у́чатся в шко́ле.
+        en_gb: Their children study at school.
+  "каждый=each":
+    cefr_level: A2
+    type: det
+    accented: ка́ждый
+    en_gb:
+      standard: each (every one taken separately)
+      alt:
+        - every
+    usage:
+      - ru: Ка́ждый день я гуля́ю в па́рке.
+        en_gb: Every day I walk in the park.
+    forms:
+      m: ка́ждый
+      f: ка́ждая
+      n: ка́ждое
+      pl: ка́ждые
+  "какой=which":
+    cefr_level: A2
+    type: inter
+    accented: како́й
+    en_gb:
+      standard: which (asking what kind or sort)
+      alt:
+        - what kind of
+    usage:
+      - ru: Кака́я сего́дня пого́да?
+        en_gb: What is the weather like today?
+    forms:
+      m: како́й
+      f: кака́я
+      n: како́е
+      pl: каки́е
   "кто=who":
     cefr_level: A1
     type: inter
@@ -44,6 +155,22 @@ words:
       acc: кого́
       ins: кем
       pre: ком
+  "мой=my":
+    cefr_level: A1
+    type: poss
+    accented: мой
+    en_gb:
+      standard: my (belonging to me)
+      alt:
+        - mine
+    usage:
+      - ru: Э́то мой друг.
+        en_gb: This is my friend.
+    forms:
+      m: мой
+      f: моя́
+      n: моё
+      pl: мои́
   "мы=we":
     cefr_level: A1
     type: pers
@@ -60,6 +187,56 @@ words:
       acc: нас
       ins: на́ми
       pre: нас
+  "наш=our":
+    cefr_level: A1
+    type: poss
+    accented: наш
+    en_gb:
+      standard: our (belonging to us)
+      alt:
+        - ours
+    usage:
+      - ru: Наш дом нахо́дится в це́нтре.
+        en_gb: Our house is in the centre.
+    forms:
+      m: наш
+      f: на́ша
+      n: на́ше
+      pl: на́ши
+  "никто=nobody":
+    cefr_level: A2
+    type: neg
+    accented: никто́
+    en_gb:
+      standard: nobody (not a single person)
+      alt:
+        - no one
+    usage:
+      - ru: Никто́ не зна́ет отве́та.
+        en_gb: Nobody knows the answer.
+    forms:
+      nom: никто́
+      gen: никого́
+      dat: никому́
+      acc: никого́
+      ins: нике́м
+      pre: ни о ком
+  "ничто=nothing":
+    cefr_level: B1
+    type: neg
+    accented: ничто́
+    en_gb:
+      standard: nothing (not a single thing)
+    usage:
+      - ru: Ничто́ не ве́чно.
+        en_gb: Nothing is eternal.
+    forms:
+      nom: ничто́
+      gen: ничего́
+      dat: ничему́
+      acc: ничто́
+      ins: ниче́м
+      pre: ни о чём
   "он=he":
     cefr_level: A1
     type: pers
@@ -128,6 +305,94 @@ words:
       acc: его́
       ins: им
       pre: нём
+  "сам=oneself":
+    cefr_level: B1
+    type: det
+    accented: сам
+    en_gb:
+      standard: oneself (emphatic — "in person", e.g. "I myself")
+    usage:
+      - ru: Я сам э́то сде́лал.
+        en_gb: I did it myself.
+    forms:
+      m: сам
+      f: сама́
+      n: само́
+      pl: са́ми
+  "свой=one's own":
+    cefr_level: B1
+    type: poss
+    accented: свой
+    en_gb:
+      standard: one's own (belonging to the subject of the clause)
+    usage:
+      - ru: Он лю́бит свою́ рабо́ту.
+        en_gb: He loves his (own) work.
+    forms:
+      m: свой
+      f: своя́
+      n: своё
+      pl: свои́
+  "себя=oneself":
+    cefr_level: B1
+    type: refl
+    accented: себя́
+    en_gb:
+      standard: oneself (the reflexive pronoun; it has no nominative form)
+      alt:
+        - myself
+        - yourself
+        - himself
+    usage:
+      - ru: Он ви́дит себя́ в зе́ркале.
+        en_gb: He sees himself in the mirror.
+    forms:
+      gen: себя́
+      dat: себе́
+      acc: себя́
+      ins: собо́й
+      pre: себе́
+  "сколько=how many":
+    cefr_level: A1
+    type: inter
+    accented: ско́лько
+    en_gb:
+      standard: how many (asking about quantity)
+      alt:
+        - how much
+    usage:
+      - ru: Ско́лько э́то сто́ит?
+        en_gb: How much does this cost?
+  "твой=your":
+    cefr_level: A1
+    type: poss
+    accented: твой
+    en_gb:
+      standard: your (belonging to "you" — one person, informal)
+      alt:
+        - yours
+    usage:
+      - ru: Где твой телефо́н?
+        en_gb: Where is your phone?
+    forms:
+      m: твой
+      f: твоя́
+      n: твоё
+      pl: твои́
+  "тот=that":
+    cefr_level: A1
+    type: demo
+    accented: тот
+    en_gb:
+      standard: that (the more distant one)
+    usage:
+      - ru: Кто тот челове́к?
+        en_gb: Who is that person?
+    forms:
+      m: тот
+      f: та
+      n: то
+      pl: те
   "ты=you":
     cefr_level: A1
     type: pers
@@ -144,6 +409,20 @@ words:
       acc: тебя́
       ins: тобо́й
       pre: тебе́
+  "чей=whose":
+    cefr_level: B1
+    type: inter
+    accented: чей
+    en_gb:
+      standard: whose (asking who something belongs to)
+    usage:
+      - ru: Чья э́то кни́га?
+        en_gb: Whose book is this?
+    forms:
+      m: чей
+      f: чья
+      n: чьё
+      pl: чьи
   "что=what":
     cefr_level: A1
     type: inter
@@ -160,6 +439,20 @@ words:
       acc: что
       ins: чем
       pre: чём
+  "этот=this":
+    cefr_level: A1
+    type: demo
+    accented: э́тот
+    en_gb:
+      standard: this (the nearer one)
+    usage:
+      - ru: Э́тот дом о́чень ста́рый.
+        en_gb: This house is very old.
+    forms:
+      m: э́тот
+      f: э́та
+      n: э́то
+      pl: э́ти
   "я=I":
     cefr_level: A1
     type: pers
