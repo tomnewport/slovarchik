@@ -16,6 +16,11 @@ export const routes = [
     component: () => import('../views/DeclensionView.vue'),
   },
   {
+    path: '/numbers',
+    name: 'numbers',
+    component: () => import('../views/NumberDrillView.vue'),
+  },
+  {
     path: '/phrases',
     name: 'phrases',
     component: () => import('../views/PhraseTesterView.vue'),
