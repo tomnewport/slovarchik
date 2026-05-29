@@ -4,6 +4,21 @@ meta:
   form:
     comparative: comparative degree
 words:
+  "близко=near":
+    cefr_level: A1
+    accented: бли́зко
+    collections:
+      - measurement and calculation
+      - places
+    en_gb:
+      standard: near (a short distance away)
+      alt:
+        - close
+    usage:
+      - ru: Магази́н совсе́м бли́зко.
+        en_gb: The shop is very near.
+    forms:
+      comparative: бли́же
   "быстро=quickly":
     cefr_level: A2
     accented: бы́стро
@@ -16,6 +31,18 @@ words:
         en_gb: He runs quickly.
     forms:
       comparative: быстре́е
+  "вместе=together":
+    cefr_level: A2
+    accented: вме́сте
+    collections:
+      - family
+      - romance and dating
+      - daily life
+    en_gb:
+      standard: together (with one another)
+    usage:
+      - ru: Мы всегда́ вме́сте.
+        en_gb: We are always together.
   "всегда=always":
     cefr_level: A1
     accented: всегда́
@@ -24,6 +51,46 @@ words:
     usage:
       - ru: Я всегда́ пью́ ча́й у́тром.
         en_gb: I always drink tea in the morning.
+  "громко=loudly":
+    cefr_level: A2
+    accented: гро́мко
+    collections:
+      - the arts
+      - feelings and sensations
+    en_gb:
+      standard: loudly (with much noise)
+    usage:
+      - ru: Не говори́ так гро́мко!
+        en_gb: Don't speak so loudly!
+    forms:
+      comparative: гро́мче
+  "далеко=far":
+    cefr_level: A1
+    accented: далеко́
+    collections:
+      - travel
+      - measurement and calculation
+      - places
+    en_gb:
+      standard: far (a long distance away)
+    usage:
+      - ru: Шко́ла далеко́ от до́ма.
+        en_gb: The school is far from home.
+    forms:
+      comparative: да́льше
+  "дорого=expensively":
+    cefr_level: A2
+    accented: до́рого
+    collections:
+      - finance
+      - shopping
+    en_gb:
+      standard: expensively (at a high price)
+    usage:
+      - ru: Здесь всё сто́ит до́рого.
+        en_gb: Everything is expensive here.
+    forms:
+      comparative: доро́же
   "здесь=here":
     cefr_level: A1
     accented: здесь
@@ -82,6 +149,19 @@ words:
     usage:
       - ru: Магази́н там, напра́во.
         en_gb: The shop is there, on the right.
+  "тихо=quietly":
+    cefr_level: A2
+    accented: ти́хо
+    collections:
+      - feelings and sensations
+      - faith
+    en_gb:
+      standard: quietly (with little noise)
+    usage:
+      - ru: В це́ркви на́до вести́ себя́ ти́хо.
+        en_gb: In church you must behave quietly.
+    forms:
+      comparative: ти́ше
   "хорошо=well":
     cefr_level: A1
     accented: хорошо́

@@ -19,6 +19,33 @@ meta:
     past_n: past, neuter subject
     past_pl: past, plural subject
 words:
+  "болеть=to be ill":
+    cefr_level: A2
+    accented: боле́ть
+    aspect: impf
+    collections:
+      - sickness and health
+      - parts of the body
+      - feelings and sensations
+    en_gb:
+      standard: to be ill (to be sick, or to ache)
+      alt:
+        - to hurt
+    usage:
+      - ru: Я ча́сто боле́ю зимо́й.
+        en_gb: I often get ill in winter.
+    conjugation:
+      present:
+        "1sg": боле́ю
+        "2sg": боле́ешь
+        "3sg": боле́ет
+        "1pl": боле́ем
+        "2pl": боле́ете
+        "3pl": боле́ют
+      past_m: боле́л
+      past_f: боле́ла
+      past_n: боле́ло
+      past_pl: боле́ли
   "быть=to be":
     cefr_level: A1
     accented: быть
@@ -84,6 +111,32 @@ words:
       past_f: говори́ла
       past_n: говори́ло
       past_pl: говори́ли
+  "готовить=to cook":
+    cefr_level: A2
+    accented: гото́вить
+    aspect: impf
+    collections:
+      - in the kitchen
+      - daily life
+    en_gb:
+      standard: to cook (to prepare food)
+      alt:
+        - to prepare
+    usage:
+      - ru: Ма́ма гото́вит у́жин.
+        en_gb: Mum is cooking dinner.
+    conjugation:
+      present:
+        "1sg": гото́влю
+        "2sg": гото́вишь
+        "3sg": гото́вит
+        "1pl": гото́вим
+        "2pl": гото́вите
+        "3pl": гото́вят
+      past_m: гото́вил
+      past_f: гото́вила
+      past_n: гото́вило
+      past_pl: гото́вили
   "делать=to do":
     cefr_level: A1
     accented: де́лать
@@ -107,6 +160,58 @@ words:
       past_f: де́лала
       past_n: де́лало
       past_pl: де́лали
+  "есть=to eat":
+    cefr_level: A1
+    accented: есть
+    aspect: impf
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+      - daily life
+    en_gb:
+      standard: to eat (to take in food)
+    usage:
+      - ru: Что ты ешь?
+        en_gb: What are you eating?
+    conjugation:
+      present:
+        "1sg": ем
+        "2sg": ешь
+        "3sg": ест
+        "1pl": еди́м
+        "2pl": еди́те
+        "3pl": едя́т
+      past_m: ел
+      past_f: е́ла
+      past_n: е́ло
+      past_pl: е́ли
+  "ехать=to go by transport":
+    cefr_level: A1
+    accented: е́хать
+    aspect: impf
+    collections:
+      - public transport
+      - travel
+    en_gb:
+      standard: to go by transport (to ride or drive)
+      alt:
+        - to ride
+        - to drive
+    usage:
+      - ru: Мы е́дем на по́езде.
+        en_gb: We are going by train.
+    conjugation:
+      present:
+        "1sg": е́ду
+        "2sg": е́дешь
+        "3sg": е́дет
+        "1pl": е́дем
+        "2pl": е́дете
+        "3pl": е́дут
+      past_m: е́хал
+      past_f: е́хала
+      past_n: е́хало
+      past_pl: е́хали
   "жить=to live":
     cefr_level: A1
     accented: жить
@@ -149,6 +254,31 @@ words:
       past_f: зна́ла
       past_n: зна́ло
       past_pl: зна́ли
+  "играть=to play":
+    cefr_level: A1
+    accented: игра́ть
+    aspect: impf
+    collections:
+      - hobbies and pastimes
+      - daily life
+      - the arts
+    en_gb:
+      standard: to play (a game, or an instrument)
+    usage:
+      - ru: Де́ти игра́ют в саду́.
+        en_gb: The children are playing in the garden.
+    conjugation:
+      present:
+        "1sg": игра́ю
+        "2sg": игра́ешь
+        "3sg": игра́ет
+        "1pl": игра́ем
+        "2pl": игра́ете
+        "3pl": игра́ют
+      past_m: игра́л
+      past_f: игра́ла
+      past_n: игра́ло
+      past_pl: игра́ли
   "идти=to go":
     cefr_level: A1
     accented: идти́
@@ -172,6 +302,107 @@ words:
       past_f: шла
       past_n: шло
       past_pl: шли
+  "любить=to love":
+    cefr_level: A1
+    accented: люби́ть
+    aspect: impf
+    collections:
+      - romance and dating
+      - feelings and sensations
+      - family
+    en_gb:
+      standard: to love (to feel deep affection)
+      alt:
+        - to like
+    usage:
+      - ru: Я люблю́ тебя́.
+        en_gb: I love you.
+    conjugation:
+      present:
+        "1sg": люблю́
+        "2sg": лю́бишь
+        "3sg": лю́бит
+        "1pl": лю́бим
+        "2pl": лю́бите
+        "3pl": лю́бят
+      past_m: люби́л
+      past_f: люби́ла
+      past_n: люби́ло
+      past_pl: люби́ли
+  "молиться=to pray":
+    cefr_level: B1
+    accented: моли́ться
+    aspect: impf
+    collections:
+      - faith
+    en_gb:
+      standard: to pray (to speak to God)
+    usage:
+      - ru: Она́ мо́лится ка́ждый ве́чер.
+        en_gb: She prays every evening.
+    conjugation:
+      present:
+        "1sg": молю́сь
+        "2sg": мо́лишься
+        "3sg": мо́лится
+        "1pl": мо́лимся
+        "2pl": мо́литесь
+        "3pl": мо́лятся
+      past_m: моли́лся
+      past_f: моли́лась
+      past_n: моли́лось
+      past_pl: моли́лись
+  "носить=to wear":
+    cefr_level: A2
+    accented: носи́ть
+    aspect: impf
+    collections:
+      - clothes
+      - daily life
+    en_gb:
+      standard: to wear (to have clothes on)
+      alt:
+        - to carry
+    usage:
+      - ru: Зимо́й я ношу́ тёплое пальто́.
+        en_gb: In winter I wear a warm coat.
+    conjugation:
+      present:
+        "1sg": ношу́
+        "2sg": но́сишь
+        "3sg": но́сит
+        "1pl": но́сим
+        "2pl": но́сите
+        "3pl": но́сят
+      past_m: носи́л
+      past_f: носи́ла
+      past_n: носи́ло
+      past_pl: носи́ли
+  "петь=to sing":
+    cefr_level: A2
+    accented: петь
+    aspect: impf
+    collections:
+      - the arts
+      - faith
+      - holiday
+    en_gb:
+      standard: to sing (to make music with the voice)
+    usage:
+      - ru: Она́ хорошо́ поёт.
+        en_gb: She sings well.
+    conjugation:
+      present:
+        "1sg": пою́
+        "2sg": поёшь
+        "3sg": поёт
+        "1pl": поём
+        "2pl": поёте
+        "3pl": пою́т
+      past_m: пел
+      past_f: пе́ла
+      past_n: пе́ло
+      past_pl: пе́ли
   "писать=to write":
     cefr_level: A1
     accented: писа́ть
@@ -193,10 +424,138 @@ words:
       past_f: писа́ла
       past_n: писа́ло
       past_pl: писа́ли
+  "пить=to drink":
+    cefr_level: A1
+    accented: пить
+    aspect: impf
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+      - daily life
+    en_gb:
+      standard: to drink (to swallow liquid)
+    usage:
+      - ru: Я пью́ во́ду.
+        en_gb: I drink water.
+    conjugation:
+      present:
+        "1sg": пью
+        "2sg": пьёшь
+        "3sg": пьёт
+        "1pl": пьём
+        "2pl": пьёте
+        "3pl": пьют
+      past_m: пил
+      past_f: пила́
+      past_n: пи́ло
+      past_pl: пи́ли
+  "покупать=to buy":
+    cefr_level: A2
+    accented: покупа́ть
+    aspect: impf
+    collections:
+      - shopping
+      - finance
+      - daily life
+    en_gb:
+      standard: to buy (to get by paying)
+    usage:
+      - ru: Я покупа́ю хлеб ка́ждый день.
+        en_gb: I buy bread every day.
+    conjugation:
+      present:
+        "1sg": покупа́ю
+        "2sg": покупа́ешь
+        "3sg": покупа́ет
+        "1pl": покупа́ем
+        "2pl": покупа́ете
+        "3pl": покупа́ют
+      past_m: покупа́л
+      past_f: покупа́ла
+      past_n: покупа́ло
+      past_pl: покупа́ли
+  "помогать=to help":
+    cefr_level: A2
+    accented: помога́ть
+    aspect: impf
+    collections:
+      - daily life
+      - people
+      - work
+    en_gb:
+      standard: to help (to assist someone)
+    usage:
+      - ru: Я помога́ю ма́ме на ку́хне.
+        en_gb: I help my mum in the kitchen.
+    conjugation:
+      present:
+        "1sg": помога́ю
+        "2sg": помога́ешь
+        "3sg": помога́ет
+        "1pl": помога́ем
+        "2pl": помога́ете
+        "3pl": помога́ют
+      past_m: помога́л
+      past_f: помога́ла
+      past_n: помога́ло
+      past_pl: помога́ли
+  "продавать=to sell":
+    cefr_level: A2
+    accented: продава́ть
+    aspect: impf
+    collections:
+      - shopping
+      - finance
+      - work
+    en_gb:
+      standard: to sell (to give for money)
+    usage:
+      - ru: В э́том магази́не продаю́т о́бувь.
+        en_gb: They sell shoes in this shop.
+    conjugation:
+      present:
+        "1sg": продаю́
+        "2sg": продаёшь
+        "3sg": продаёт
+        "1pl": продаём
+        "2pl": продаёте
+        "3pl": продаю́т
+      past_m: продава́л
+      past_f: продава́ла
+      past_n: продава́ло
+      past_pl: продава́ли
+  "путешествовать=to travel":
+    cefr_level: B1
+    accented: путеше́ствовать
+    aspect: impf
+    collections:
+      - travel
+      - holiday
+      - hobbies and pastimes
+    en_gb:
+      standard: to travel (to make journeys)
+    usage:
+      - ru: Они́ лю́бят путеше́ствовать по ми́ру.
+        en_gb: They love to travel around the world.
+    conjugation:
+      present:
+        "1sg": путеше́ствую
+        "2sg": путеше́ствуешь
+        "3sg": путеше́ствует
+        "1pl": путеше́ствуем
+        "2pl": путеше́ствуете
+        "3pl": путеше́ствуют
+      past_m: путеше́ствовал
+      past_f: путеше́ствовала
+      past_n: путеше́ствовало
+      past_pl: путеше́ствовали
   "работать=to work":
     cefr_level: A1
     accented: рабо́тать
     aspect: impf
+    collections:
+      - work
+      - daily life
     en_gb:
       standard: to work (to do a job)
     usage:
@@ -214,10 +573,115 @@ words:
       past_f: рабо́тала
       past_n: рабо́тало
       past_pl: рабо́тали
+  "слушать=to listen":
+    cefr_level: A1
+    accented: слу́шать
+    aspect: impf
+    collections:
+      - the arts
+      - hobbies and pastimes
+      - school
+    en_gb:
+      standard: to listen (to pay attention to sound)
+    usage:
+      - ru: Мы слу́шаем му́зыку.
+        en_gb: We are listening to music.
+    conjugation:
+      present:
+        "1sg": слу́шаю
+        "2sg": слу́шаешь
+        "3sg": слу́шает
+        "1pl": слу́шаем
+        "2pl": слу́шаете
+        "3pl": слу́шают
+      past_m: слу́шал
+      past_f: слу́шала
+      past_n: слу́шало
+      past_pl: слу́шали
+  "строить=to build":
+    cefr_level: A2
+    accented: стро́ить
+    aspect: impf
+    collections:
+      - craft and construction
+      - DIY
+      - work
+    en_gb:
+      standard: to build (to make a structure)
+    usage:
+      - ru: Они́ стро́ят но́вый дом.
+        en_gb: They are building a new house.
+    conjugation:
+      present:
+        "1sg": стро́ю
+        "2sg": стро́ишь
+        "3sg": стро́ит
+        "1pl": стро́им
+        "2pl": стро́ите
+        "3pl": стро́ят
+      past_m: стро́ил
+      past_f: стро́ила
+      past_n: стро́ило
+      past_pl: стро́или
+  "считать=to count":
+    cefr_level: A2
+    accented: счита́ть
+    aspect: impf
+    collections:
+      - measurement and calculation
+      - finance
+      - school
+    en_gb:
+      standard: to count (to find a total)
+      alt:
+        - to consider
+    usage:
+      - ru: Ребёнок у́чится счита́ть до десяти́.
+        en_gb: The child is learning to count to ten.
+    conjugation:
+      present:
+        "1sg": счита́ю
+        "2sg": счита́ешь
+        "3sg": счита́ет
+        "1pl": счита́ем
+        "2pl": счита́ете
+        "3pl": счита́ют
+      past_m: счита́л
+      past_f: счита́ла
+      past_n: счита́ло
+      past_pl: счита́ли
+  "учиться=to study":
+    cefr_level: A1
+    accented: учи́ться
+    aspect: impf
+    collections:
+      - school
+      - daily life
+    en_gb:
+      standard: to study (to learn at a school)
+    usage:
+      - ru: Я учу́сь в университе́те.
+        en_gb: I study at university.
+    conjugation:
+      present:
+        "1sg": учу́сь
+        "2sg": у́чишься
+        "3sg": у́чится
+        "1pl": у́чимся
+        "2pl": у́читесь
+        "3pl": у́чатся
+      past_m: учи́лся
+      past_f: учи́лась
+      past_n: учи́лось
+      past_pl: учи́лись
   "читать=to read":
     cefr_level: A1
     accented: чита́ть
     aspect: impf
+    collections:
+      - reading
+      - school
+      - hobbies and pastimes
     en_gb:
       standard: to read (to look at and understand text)
     usage:

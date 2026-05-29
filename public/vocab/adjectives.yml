@@ -13,6 +13,8 @@ words:
   "белый=white":
     cefr_level: A1
     accented: бе́лый
+    collections:
+      - colours and textures
     en_gb:
       standard: white (the colour of snow)
     usage:
@@ -24,6 +26,23 @@ words:
       n: бе́лое
       pl: бе́лые
       comparative: беле́е
+  "больной=ill":
+    cefr_level: A2
+    accented: больно́й
+    collections:
+      - sickness and health
+    en_gb:
+      standard: ill (not healthy)
+      alt:
+        - sick
+    usage:
+      - ru: Ребёнок сего́дня больно́й.
+        en_gb: The child is ill today.
+    forms:
+      m: больно́й
+      f: больна́я
+      n: больно́е
+      pl: больны́е
   "большой=big":
     cefr_level: A1
     accented: большо́й
@@ -40,6 +59,134 @@ words:
       n: большо́е
       pl: больши́е
       comparative: бо́льше
+  "важный=important":
+    cefr_level: A2
+    accented: ва́жный
+    collections:
+      - work
+      - the law
+      - daily life
+    en_gb:
+      standard: important (mattering a great deal)
+    usage:
+      - ru: Э́то о́чень ва́жный вопро́с.
+        en_gb: This is a very important question.
+    forms:
+      m: ва́жный
+      f: ва́жная
+      n: ва́жное
+      pl: ва́жные
+      comparative: важне́е
+  "дешёвый=cheap":
+    cefr_level: A2
+    accented: дешёвый
+    collections:
+      - finance
+      - shopping
+    en_gb:
+      standard: cheap (low in price)
+      alt:
+        - inexpensive
+    usage:
+      - ru: Здесь о́чень дешёвые фру́кты.
+        en_gb: The fruit here is very cheap.
+    forms:
+      m: дешёвый
+      f: дешёвая
+      n: дешёвое
+      pl: дешёвые
+      comparative: деше́вле
+  "длинный=long":
+    cefr_level: A1
+    accented: дли́нный
+    collections:
+      - measurement and calculation
+      - shapes and patterns
+    en_gb:
+      standard: long (great in length)
+    usage:
+      - ru: Э́то о́чень дли́нная доро́га.
+        en_gb: This is a very long road.
+    forms:
+      m: дли́нный
+      f: дли́нная
+      n: дли́нное
+      pl: дли́нные
+      comparative: длинне́е
+  "дорогой=expensive":
+    cefr_level: A1
+    accented: дорого́й
+    collections:
+      - finance
+      - shopping
+      - romance and dating
+    en_gb:
+      standard: expensive (high in price)
+      alt:
+        - dear
+    usage:
+      - ru: Э́та маши́на о́чень дорога́я.
+        en_gb: This car is very expensive.
+    forms:
+      m: дорого́й
+      f: дорога́я
+      n: дорого́е
+      pl: дороги́е
+      comparative: доро́же
+  "зелёный=green":
+    cefr_level: A1
+    accented: зелёный
+    collections:
+      - colours and textures
+      - nature
+      - in the garden
+    en_gb:
+      standard: green (the colour of grass)
+    usage:
+      - ru: Ле́том трава́ зелёная.
+        en_gb: In summer the grass is green.
+    forms:
+      m: зелёный
+      f: зелёная
+      n: зелёное
+      pl: зелёные
+      comparative: зелене́е
+  "интересный=interesting":
+    cefr_level: A1
+    accented: интере́сный
+    collections:
+      - reading
+      - school
+      - hobbies and pastimes
+      - the arts
+    en_gb:
+      standard: interesting (holding your attention)
+    usage:
+      - ru: Я чита́ю интере́сную кни́гу.
+        en_gb: I am reading an interesting book.
+    forms:
+      m: интере́сный
+      f: интере́сная
+      n: интере́сное
+      pl: интере́сные
+      comparative: интере́снее
+  "короткий=short":
+    cefr_level: A1
+    accented: коро́ткий
+    collections:
+      - measurement and calculation
+      - shapes and patterns
+    en_gb:
+      standard: short (small in length)
+    usage:
+      - ru: У неё коро́ткие во́лосы.
+        en_gb: She has short hair.
+    forms:
+      m: коро́ткий
+      f: коро́ткая
+      n: коро́ткое
+      pl: коро́ткие
+      comparative: коро́че
   "красивый=beautiful":
     cefr_level: A2
     accented: краси́вый
@@ -59,6 +206,8 @@ words:
   "красный=red":
     cefr_level: A1
     accented: кра́сный
+    collections:
+      - colours and textures
     en_gb:
       standard: red (the colour of blood)
     usage:
@@ -69,6 +218,21 @@ words:
       f: кра́сная
       n: кра́сное
       pl: кра́сные
+  "круглый=round":
+    cefr_level: A2
+    accented: кру́глый
+    collections:
+      - shapes and patterns
+    en_gb:
+      standard: round (shaped like a circle)
+    usage:
+      - ru: На столе́ кру́глая таре́лка.
+        en_gb: There is a round plate on the table.
+    forms:
+      m: кру́глый
+      f: кру́глая
+      n: кру́глое
+      pl: кру́глые
   "маленький=small":
     cefr_level: A1
     accented: ма́ленький
@@ -85,6 +249,23 @@ words:
       n: ма́ленькое
       pl: ма́ленькие
       comparative: ме́ньше
+  "мягкий=soft":
+    cefr_level: A2
+    accented: мя́гкий
+    collections:
+      - colours and textures
+      - feelings and sensations
+    en_gb:
+      standard: soft (not hard to the touch)
+    usage:
+      - ru: Э́то о́чень мя́гкая ткань.
+        en_gb: This is very soft fabric.
+    forms:
+      m: мя́гкий
+      f: мя́гкая
+      n: мя́гкое
+      pl: мя́гкие
+      comparative: мя́гче
   "новый=new":
     cefr_level: A1
     accented: но́вый
@@ -126,6 +307,22 @@ words:
       f: ру́сская
       n: ру́сское
       pl: ру́сские
+  "синий=blue":
+    cefr_level: A1
+    accented: си́ний
+    collections:
+      - colours and textures
+      - nature
+    en_gb:
+      standard: blue (the colour of a clear sky)
+    usage:
+      - ru: Над на́ми си́нее не́бо.
+        en_gb: Above us is the blue sky.
+    forms:
+      m: си́ний
+      f: си́няя
+      n: си́нее
+      pl: си́ние
   "старый=old":
     cefr_level: A1
     accented: ста́рый
@@ -140,6 +337,80 @@ words:
       n: ста́рое
       pl: ста́рые
       comparative: ста́рше
+  "счастливый=happy":
+    cefr_level: A2
+    accented: счастли́вый
+    collections:
+      - feelings and sensations
+      - romance and dating
+      - family
+    en_gb:
+      standard: happy (feeling joy)
+    usage:
+      - ru: Они́ о́чень счастли́вая семья́.
+        en_gb: They are a very happy family.
+    forms:
+      m: счастли́вый
+      f: счастли́вая
+      n: счастли́вое
+      pl: счастли́вые
+      comparative: счастли́вее
+  "тёплый=warm":
+    cefr_level: A1
+    accented: тёплый
+    collections:
+      - feelings and sensations
+      - clothes
+      - nature
+    en_gb:
+      standard: warm (pleasantly hot)
+    usage:
+      - ru: Сего́дня тёплый день.
+        en_gb: Today is a warm day.
+    forms:
+      m: тёплый
+      f: тёплая
+      n: тёплое
+      pl: тёплые
+      comparative: тепле́е
+  "умный=clever":
+    cefr_level: A2
+    accented: у́мный
+    collections:
+      - school
+      - people
+    en_gb:
+      standard: clever (quick to understand)
+      alt:
+        - smart
+        - intelligent
+    usage:
+      - ru: Он о́чень у́мный студе́нт.
+        en_gb: He is a very clever student.
+    forms:
+      m: у́мный
+      f: у́мная
+      n: у́мное
+      pl: у́мные
+      comparative: умне́е
+  "холодный=cold":
+    cefr_level: A1
+    accented: холо́дный
+    collections:
+      - feelings and sensations
+      - nature
+      - in the kitchen
+    en_gb:
+      standard: cold (low in temperature)
+    usage:
+      - ru: Я пью́ холо́дную во́ду.
+        en_gb: I drink cold water.
+    forms:
+      m: холо́дный
+      f: холо́дная
+      n: холо́дное
+      pl: холо́дные
+      comparative: холодне́е
   "хороший=good":
     cefr_level: A1
     accented: хоро́ший
@@ -156,3 +427,19 @@ words:
       n: хоро́шее
       pl: хоро́шие
       comparative: лу́чше
+  "чёрный=black":
+    cefr_level: A1
+    accented: чёрный
+    collections:
+      - colours and textures
+    en_gb:
+      standard: black (the colour of night)
+    usage:
+      - ru: У меня́ чёрный кот.
+        en_gb: I have a black cat.
+    forms:
+      m: чёрный
+      f: чёрная
+      n: чёрное
+      pl: чёрные
+      comparative: черне́е

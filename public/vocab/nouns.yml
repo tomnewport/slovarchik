@@ -24,6 +24,114 @@ meta:
     sg_nom: nominative singular
     pl_nom: nominative plural
 words:
+  "банк=bank":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - finance
+      - places
+    en_gb:
+      standard: bank (where you keep money)
+    usage:
+      - ru: Я храню́ де́ньги в ба́нке.
+        en_gb: I keep my money in the bank.
+    declension:
+      sg_nom: банк
+      sg_gen: ба́нка
+      sg_dat: ба́нку
+      sg_acc: банк
+      sg_ins: ба́нком
+      sg_pre: ба́нке
+      pl_nom: ба́нки
+      pl_gen: ба́нков
+      pl_dat: ба́нкам
+      pl_acc: ба́нки
+      pl_ins: ба́нками
+      pl_pre: ба́нках
+  "боль=pain":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sickness and health
+      - parts of the body
+      - feelings and sensations
+    en_gb:
+      standard: pain (an unpleasant feeling in the body)
+      alt:
+        - ache
+    usage:
+      - ru: Он чу́вствует си́льную боль.
+        en_gb: He feels a strong pain.
+    declension:
+      sg_nom: боль
+      sg_gen: бо́ли
+      sg_dat: бо́ли
+      sg_acc: боль
+      sg_ins: бо́лью
+      sg_pre: бо́ли
+      pl_nom: бо́ли
+      pl_gen: бо́лей
+      pl_dat: бо́лям
+      pl_acc: бо́ли
+      pl_ins: бо́лями
+      pl_pre: бо́лях
+  "больница=hospital":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sickness and health
+      - places
+      - architecture
+    en_gb:
+      standard: hospital (where sick people are treated)
+    usage:
+      - ru: Он лежи́т в больни́це.
+        en_gb: He is in hospital.
+    declension:
+      sg_nom: больни́ца
+      sg_gen: больни́цы
+      sg_dat: больни́це
+      sg_acc: больни́цу
+      sg_ins: больни́цей
+      sg_pre: больни́це
+      pl_nom: больни́цы
+      pl_gen: больни́ц
+      pl_dat: больни́цам
+      pl_acc: больни́цы
+      pl_ins: больни́цами
+      pl_pre: больни́цах
+  "брат=brother":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - family
+      - people
+    en_gb:
+      standard: brother (a male sibling)
+    usage:
+      - ru: Мой брат живёт в друго́м го́роде.
+        en_gb: My brother lives in another city.
+    declension:
+      sg_nom: брат
+      sg_gen: бра́та
+      sg_dat: бра́ту
+      sg_acc: бра́та
+      sg_ins: бра́том
+      sg_pre: бра́те
+      pl_nom: бра́тья
+      pl_gen: бра́тьев
+      pl_dat: бра́тьям
+      pl_acc: бра́тьев
+      pl_ins: бра́тьями
+      pl_pre: бра́тьях
   "вода=water":
     cefr_level: A1
     gender: f
@@ -50,6 +158,32 @@ words:
       pl_acc: во́ды
       pl_ins: во́дами
       pl_pre: во́дах
+  "война=war":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - war and peace
+      - history
+    en_gb:
+      standard: war (armed conflict between countries)
+    usage:
+      - ru: Война́ принесла́ мно́го го́ря.
+        en_gb: The war brought much grief.
+    declension:
+      sg_nom: война́
+      sg_gen: войны́
+      sg_dat: войне́
+      sg_acc: войну́
+      sg_ins: войно́й
+      sg_pre: войне́
+      pl_nom: во́йны
+      pl_gen: войн
+      pl_dat: во́йнам
+      pl_acc: во́йны
+      pl_ins: во́йнами
+      pl_pre: во́йнах
   "ворота=gate":
     cefr_level: B2
     gender: n
@@ -72,6 +206,35 @@ words:
       pl_acc: воро́та
       pl_ins: воро́тами
       pl_pre: воро́тах
+  "врач=doctor":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - sickness and health
+      - work
+      - people
+    en_gb:
+      standard: doctor (a medical professional)
+      alt:
+        - physician
+    usage:
+      - ru: Мне ну́жен хоро́ший врач.
+        en_gb: I need a good doctor.
+    declension:
+      sg_nom: врач
+      sg_gen: врача́
+      sg_dat: врачу́
+      sg_acc: врача́
+      sg_ins: врачо́м
+      sg_pre: враче́
+      pl_nom: врачи́
+      pl_gen: враче́й
+      pl_dat: врача́м
+      pl_acc: враче́й
+      pl_ins: врача́ми
+      pl_pre: врача́х
   "город=city":
     cefr_level: B1
     gender: m
@@ -99,12 +262,41 @@ words:
       pl_acc: города́
       pl_ins: города́ми
       pl_pre: города́х
+  "дерево=tree":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - in the garden
+    en_gb:
+      standard: tree (a tall plant with a trunk)
+      alt:
+        - wood (the material)
+    usage:
+      - ru: В саду́ растёт высо́кое де́рево.
+        en_gb: A tall tree grows in the garden.
+    declension:
+      sg_nom: де́рево
+      sg_gen: де́рева
+      sg_dat: де́реву
+      sg_acc: де́рево
+      sg_ins: де́ревом
+      sg_pre: де́реве
+      pl_nom: дере́вья
+      pl_gen: дере́вьев
+      pl_dat: дере́вьям
+      pl_acc: дере́вья
+      pl_ins: дере́вьями
+      pl_pre: дере́вьях
   "деньги=money":
     cefr_level: A1
     animacy: i
     number: ["pl"]
     collections:
       - shopping
+      - finance
     en_gb:
       standard: money (what you pay with)
     usage:
@@ -145,6 +337,277 @@ words:
       pl_acc: дома́
       pl_ins: дома́ми
       pl_pre: дома́х
+  "дорога=road":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - travel
+      - public transport
+      - places
+      - nature
+    en_gb:
+      standard: road (a way for travelling)
+      alt:
+        - way
+    usage:
+      - ru: Доро́га в го́род была́ дли́нной.
+        en_gb: The road to the city was long.
+    declension:
+      sg_nom: доро́га
+      sg_gen: доро́ги
+      sg_dat: доро́ге
+      sg_acc: доро́гу
+      sg_ins: доро́гой
+      sg_pre: доро́ге
+      pl_nom: доро́ги
+      pl_gen: доро́г
+      pl_dat: доро́гам
+      pl_acc: доро́ги
+      pl_ins: доро́гами
+      pl_pre: доро́гах
+  "друг=friend":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - romance and dating
+      - daily life
+    en_gb:
+      standard: friend (someone you like and trust)
+    usage:
+      - ru: Он мой лу́чший друг.
+        en_gb: He is my best friend.
+    declension:
+      sg_nom: друг
+      sg_gen: дру́га
+      sg_dat: дру́гу
+      sg_acc: дру́га
+      sg_ins: дру́гом
+      sg_pre: дру́ге
+      pl_nom: друзья́
+      pl_gen: друзе́й
+      pl_dat: друзья́м
+      pl_acc: друзе́й
+      pl_ins: друзья́ми
+      pl_pre: друзья́х
+  "еда=food":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+      - daily life
+      - shopping
+    en_gb:
+      standard: food (what you eat)
+    usage:
+      - ru: Э́та еда́ о́чень вку́сная.
+        en_gb: This food is very tasty.
+    declension:
+      sg_nom: еда́
+      sg_gen: еды́
+      sg_dat: еде́
+      sg_acc: еду́
+      sg_ins: едо́й
+      sg_pre: еде́
+  "жена=wife":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - family
+      - romance and dating
+      - people
+    en_gb:
+      standard: wife (a married woman)
+    usage:
+      - ru: Его́ жена́ рабо́тает в шко́ле.
+        en_gb: His wife works at a school.
+    declension:
+      sg_nom: жена́
+      sg_gen: жены́
+      sg_dat: жене́
+      sg_acc: жену́
+      sg_ins: жено́й
+      sg_pre: жене́
+      pl_nom: жёны
+      pl_gen: жён
+      pl_dat: жёнам
+      pl_acc: жён
+      pl_ins: жёнами
+      pl_pre: жёнах
+  "закон=law":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the law
+    en_gb:
+      standard: law (a rule made by the state)
+    usage:
+      - ru: Все должны́ соблюда́ть зако́н.
+        en_gb: Everyone must obey the law.
+    declension:
+      sg_nom: зако́н
+      sg_gen: зако́на
+      sg_dat: зако́ну
+      sg_acc: зако́н
+      sg_ins: зако́ном
+      sg_pre: зако́не
+      pl_nom: зако́ны
+      pl_gen: зако́нов
+      pl_dat: зако́нам
+      pl_acc: зако́ны
+      pl_ins: зако́нами
+      pl_pre: зако́нах
+  "зима=winter":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - holiday
+      - daily life
+    en_gb:
+      standard: winter (the cold season)
+    usage:
+      - ru: Зимо́й здесь мно́го сне́га.
+        en_gb: In winter there is a lot of snow here.
+    declension:
+      sg_nom: зима́
+      sg_gen: зимы́
+      sg_dat: зиме́
+      sg_acc: зи́му
+      sg_ins: зимо́й
+      sg_pre: зиме́
+      pl_nom: зи́мы
+      pl_gen: зим
+      pl_dat: зи́мам
+      pl_acc: зи́мы
+      pl_ins: зи́мами
+      pl_pre: зи́мах
+  "игра=game":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - hobbies and pastimes
+      - daily life
+      - school
+    en_gb:
+      standard: game (an activity played for fun)
+    usage:
+      - ru: Э́та игра́ о́чень интере́сная.
+        en_gb: This game is very interesting.
+    declension:
+      sg_nom: игра́
+      sg_gen: игры́
+      sg_dat: игре́
+      sg_acc: игру́
+      sg_ins: игро́й
+      sg_pre: игре́
+      pl_nom: и́гры
+      pl_gen: игр
+      pl_dat: и́грам
+      pl_acc: и́гры
+      pl_ins: и́грами
+      pl_pre: и́грах
+  "инструмент=tool":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - DIY
+      - craft and construction
+      - work
+    en_gb:
+      standard: tool (a device for doing work)
+      alt:
+        - instrument
+    usage:
+      - ru: Молото́к — поле́зный инструме́нт.
+        en_gb: A hammer is a useful tool.
+    declension:
+      sg_nom: инструме́нт
+      sg_gen: инструме́нта
+      sg_dat: инструме́нту
+      sg_acc: инструме́нт
+      sg_ins: инструме́нтом
+      sg_pre: инструме́нте
+      pl_nom: инструме́нты
+      pl_gen: инструме́нтов
+      pl_dat: инструме́нтам
+      pl_acc: инструме́нты
+      pl_ins: инструме́нтами
+      pl_pre: инструме́нтах
+  "история=history":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - history
+      - reading
+      - school
+      - the arts
+    en_gb:
+      standard: history (the study of the past)
+      alt:
+        - story
+    usage:
+      - ru: Я люблю́ ру́сскую исто́рию.
+        en_gb: I love Russian history.
+    declension:
+      sg_nom: исто́рия
+      sg_gen: исто́рии
+      sg_dat: исто́рии
+      sg_acc: исто́рию
+      sg_ins: исто́рией
+      sg_pre: исто́рии
+      pl_nom: исто́рии
+      pl_gen: исто́рий
+      pl_dat: исто́риям
+      pl_acc: исто́рии
+      pl_ins: исто́риями
+      pl_pre: исто́риях
+  "картина=picture":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: picture (a painting or image)
+      alt:
+        - painting
+    usage:
+      - ru: На стене́ виси́т краси́вая карти́на.
+        en_gb: A beautiful painting hangs on the wall.
+    declension:
+      sg_nom: карти́на
+      sg_gen: карти́ны
+      sg_dat: карти́не
+      sg_acc: карти́ну
+      sg_ins: карти́ной
+      sg_pre: карти́не
+      pl_nom: карти́ны
+      pl_gen: карти́н
+      pl_dat: карти́нам
+      pl_acc: карти́ны
+      pl_ins: карти́нами
+      pl_pre: карти́нах
   "книга=book":
     cefr_level: A1
     gender: f
@@ -171,6 +634,33 @@ words:
       pl_acc: кни́ги
       pl_ins: кни́гами
       pl_pre: кни́гах
+  "компьютер=computer":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+      - work
+      - school
+    en_gb:
+      standard: computer (an electronic machine for data)
+    usage:
+      - ru: Я рабо́таю за компью́тером.
+        en_gb: I work at the computer.
+    declension:
+      sg_nom: компью́тер
+      sg_gen: компью́тера
+      sg_dat: компью́теру
+      sg_acc: компью́тер
+      sg_ins: компью́тером
+      sg_pre: компью́тере
+      pl_nom: компью́теры
+      pl_gen: компью́теров
+      pl_dat: компью́терам
+      pl_acc: компью́теры
+      pl_ins: компью́терами
+      pl_pre: компью́терах
   "кошка=cat":
     cefr_level: A1
     gender: f
@@ -196,6 +686,274 @@ words:
       pl_acc: ко́шек
       pl_ins: ко́шками
       pl_pre: ко́шках
+  "круг=circle":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+    en_gb:
+      standard: circle (a round shape)
+    usage:
+      - ru: Нарису́й большо́й круг.
+        en_gb: Draw a big circle.
+    declension:
+      sg_nom: круг
+      sg_gen: кру́га
+      sg_dat: кру́гу
+      sg_acc: круг
+      sg_ins: кру́гом
+      sg_pre: кру́ге
+      pl_nom: круги́
+      pl_gen: круго́в
+      pl_dat: круга́м
+      pl_acc: круги́
+      pl_ins: круга́ми
+      pl_pre: круга́х
+  "кухня=kitchen":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the kitchen
+      - architecture
+    en_gb:
+      standard: kitchen (the room where you cook)
+    usage:
+      - ru: Ма́ма гото́вит на ку́хне.
+        en_gb: Mum is cooking in the kitchen.
+    declension:
+      sg_nom: ку́хня
+      sg_gen: ку́хни
+      sg_dat: ку́хне
+      sg_acc: ку́хню
+      sg_ins: ку́хней
+      sg_pre: ку́хне
+      pl_nom: ку́хни
+      pl_gen: ку́хонь
+      pl_dat: ку́хням
+      pl_acc: ку́хни
+      pl_ins: ку́хнями
+      pl_pre: ку́хнях
+  "лес=forest":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - places
+    en_gb:
+      standard: forest (a large area of trees)
+      alt:
+        - wood (the area)
+    usage:
+      - ru: В лесу́ живу́т ди́кие зве́ри.
+        en_gb: Wild animals live in the forest.
+    declension:
+      sg_nom: лес
+      sg_gen: ле́са
+      sg_dat: ле́су
+      sg_acc: лес
+      sg_ins: ле́сом
+      sg_pre: ле́се
+      pl_nom: леса́
+      pl_gen: лесо́в
+      pl_dat: леса́м
+      pl_acc: леса́
+      pl_ins: леса́ми
+      pl_pre: леса́х
+  "линия=line":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - shapes and patterns
+      - measurement and calculation
+      - public transport
+    en_gb:
+      standard: line (a long thin mark)
+    usage:
+      - ru: Проведи́ пряму́ю ли́нию.
+        en_gb: Draw a straight line.
+    declension:
+      sg_nom: ли́ния
+      sg_gen: ли́нии
+      sg_dat: ли́нии
+      sg_acc: ли́нию
+      sg_ins: ли́нией
+      sg_pre: ли́нии
+      pl_nom: ли́нии
+      pl_gen: ли́ний
+      pl_dat: ли́ниям
+      pl_acc: ли́нии
+      pl_ins: ли́ниями
+      pl_pre: ли́ниях
+  "лошадь=horse":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - animals
+      - nature
+    en_gb:
+      standard: horse (a large animal you can ride)
+    usage:
+      - ru: На по́ле пасётся ло́шадь.
+        en_gb: A horse grazes in the field.
+    declension:
+      sg_nom: ло́шадь
+      sg_gen: ло́шади
+      sg_dat: ло́шади
+      sg_acc: ло́шадь
+      sg_ins: ло́шадью
+      sg_pre: ло́шади
+      pl_nom: ло́шади
+      pl_gen: лошаде́й
+      pl_dat: лошадя́м
+      pl_acc: лошаде́й
+      pl_ins: лошадьми́
+      pl_pre: лошадя́х
+  "любовь=love":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - romance and dating
+      - feelings and sensations
+      - faith
+    en_gb:
+      standard: love (a deep feeling of affection)
+    usage:
+      - ru: Любо́вь — э́то прекра́сно.
+        en_gb: Love is wonderful.
+    declension:
+      sg_nom: любо́вь
+      sg_gen: любви́
+      sg_dat: любви́
+      sg_acc: любо́вь
+      sg_ins: любо́вью
+      sg_pre: любви́
+  "магазин=shop":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - shopping
+      - places
+      - daily life
+    en_gb:
+      standard: shop (a place where you buy things)
+      alt:
+        - store
+    usage:
+      - ru: Я иду́ в магази́н за хле́бом.
+        en_gb: I am going to the shop for bread.
+    declension:
+      sg_nom: магази́н
+      sg_gen: магази́на
+      sg_dat: магази́ну
+      sg_acc: магази́н
+      sg_ins: магази́ном
+      sg_pre: магази́не
+      pl_nom: магази́ны
+      pl_gen: магази́нов
+      pl_dat: магази́нам
+      pl_acc: магази́ны
+      pl_ins: магази́нами
+      pl_pre: магази́нах
+  "машина=car":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - public transport
+      - travel
+      - technology
+      - daily life
+    en_gb:
+      standard: car (a vehicle with an engine)
+      alt:
+        - machine
+    usage:
+      - ru: У нас но́вая маши́на.
+        en_gb: We have a new car.
+    declension:
+      sg_nom: маши́на
+      sg_gen: маши́ны
+      sg_dat: маши́не
+      sg_acc: маши́ну
+      sg_ins: маши́ной
+      sg_pre: маши́не
+      pl_nom: маши́ны
+      pl_gen: маши́н
+      pl_dat: маши́нам
+      pl_acc: маши́ны
+      pl_ins: маши́нами
+      pl_pre: маши́нах
+  "мать=mother":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - family
+      - people
+    en_gb:
+      standard: mother (a female parent)
+    usage:
+      - ru: Моя́ мать рабо́тает в шко́ле.
+        en_gb: My mother works at a school.
+    declension:
+      sg_nom: мать
+      sg_gen: ма́тери
+      sg_dat: ма́тери
+      sg_acc: мать
+      sg_ins: ма́терью
+      sg_pre: ма́тери
+      pl_nom: ма́тери
+      pl_gen: матере́й
+      pl_dat: матеря́м
+      pl_acc: матере́й
+      pl_ins: матеря́ми
+      pl_pre: матеря́х
+  "мир=world":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - war and peace
+      - faith
+      - nature
+    en_gb:
+      standard: world (the earth and everything in it)
+      alt:
+        - peace
+    usage:
+      - ru: Все наро́ды хотя́т ми́ра.
+        en_gb: All peoples want peace.
+    declension:
+      sg_nom: мир
+      sg_gen: ми́ра
+      sg_dat: ми́ру
+      sg_acc: мир
+      sg_ins: ми́ром
+      sg_pre: ми́ре
+      pl_nom: миры́
+      pl_gen: миро́в
+      pl_dat: мира́м
+      pl_acc: миры́
+      pl_ins: мира́ми
+      pl_pre: мира́х
   "море=sea":
     cefr_level: A2
     gender: n
@@ -222,6 +980,209 @@ words:
       pl_acc: моря́
       pl_ins: моря́ми
       pl_pre: моря́х
+  "музыка=music":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+      - hobbies and pastimes
+    en_gb:
+      standard: music (sounds made by instruments or voices)
+    usage:
+      - ru: Она́ слу́шает му́зыку.
+        en_gb: She is listening to music.
+    declension:
+      sg_nom: му́зыка
+      sg_gen: му́зыки
+      sg_dat: му́зыке
+      sg_acc: му́зыку
+      sg_ins: му́зыкой
+      sg_pre: му́зыке
+  "нога=leg":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - parts of the body
+    en_gb:
+      standard: leg (a limb you walk on)
+      alt:
+        - foot
+    usage:
+      - ru: У меня́ боли́т нога́.
+        en_gb: My leg hurts.
+    declension:
+      sg_nom: нога́
+      sg_gen: ноги́
+      sg_dat: ноге́
+      sg_acc: но́гу
+      sg_ins: ного́й
+      sg_pre: ноге́
+      pl_nom: но́ги
+      pl_gen: ног
+      pl_dat: нога́м
+      pl_acc: но́ги
+      pl_ins: нога́ми
+      pl_pre: нога́х
+  "одежда=clothes":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - clothes
+      - shopping
+    en_gb:
+      standard: clothes (things you wear)
+      alt:
+        - clothing
+    usage:
+      - ru: Зимо́й нужна́ тёплая оде́жда.
+        en_gb: In winter you need warm clothes.
+    declension:
+      sg_nom: оде́жда
+      sg_gen: оде́жды
+      sg_dat: оде́жде
+      sg_acc: оде́жду
+      sg_ins: оде́ждой
+      sg_pre: оде́жде
+  "окно=window":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - architecture
+      - in the kitchen
+      - daily life
+    en_gb:
+      standard: window (an opening in a wall with glass)
+    usage:
+      - ru: Откро́й окно́, пожа́луйста.
+        en_gb: Open the window, please.
+    declension:
+      sg_nom: окно́
+      sg_gen: окна́
+      sg_dat: окну́
+      sg_acc: окно́
+      sg_ins: окно́м
+      sg_pre: окне́
+      pl_nom: о́кна
+      pl_gen: о́кон
+      pl_dat: о́кнам
+      pl_acc: о́кна
+      pl_ins: о́кнами
+      pl_pre: о́кнах
+  "отец=father":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - family
+      - people
+    en_gb:
+      standard: father (a male parent)
+    usage:
+      - ru: Его́ оте́ц — врач.
+        en_gb: His father is a doctor.
+    declension:
+      sg_nom: оте́ц
+      sg_gen: отца́
+      sg_dat: отцу́
+      sg_acc: отца́
+      sg_ins: отцо́м
+      sg_pre: отце́
+      pl_nom: отцы́
+      pl_gen: отцо́в
+      pl_dat: отца́м
+      pl_acc: отцо́в
+      pl_ins: отца́ми
+      pl_pre: отца́х
+  "платье=dress":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - shopping
+    en_gb:
+      standard: dress (a one-piece garment for women)
+    usage:
+      - ru: На ней краси́вое кра́сное пла́тье.
+        en_gb: She is wearing a beautiful red dress.
+    declension:
+      sg_nom: пла́тье
+      sg_gen: пла́тья
+      sg_dat: пла́тью
+      sg_acc: пла́тье
+      sg_ins: пла́тьем
+      sg_pre: пла́тье
+      pl_nom: пла́тья
+      pl_gen: пла́тьев
+      pl_dat: пла́тьям
+      pl_acc: пла́тья
+      pl_ins: пла́тьями
+      pl_pre: пла́тьях
+  "поезд=train":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - public transport
+      - travel
+    en_gb:
+      standard: train (a string of railway carriages)
+    usage:
+      - ru: По́езд идёт в Москву́.
+        en_gb: The train goes to Moscow.
+    declension:
+      sg_nom: по́езд
+      sg_gen: по́езда
+      sg_dat: по́езду
+      sg_acc: по́езд
+      sg_ins: по́ездом
+      sg_pre: по́езде
+      pl_nom: поезда́
+      pl_gen: поездо́в
+      pl_dat: поезда́м
+      pl_acc: поезда́
+      pl_ins: поезда́ми
+      pl_pre: поезда́х
+  "праздник=holiday":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - holiday
+      - faith
+      - daily life
+    en_gb:
+      standard: holiday (a day of celebration)
+      alt:
+        - celebration
+    usage:
+      - ru: Но́вый год — мой люби́мый пра́здник.
+        en_gb: New Year is my favourite holiday.
+    declension:
+      sg_nom: пра́здник
+      sg_gen: пра́здника
+      sg_dat: пра́зднику
+      sg_acc: пра́здник
+      sg_ins: пра́здником
+      sg_pre: пра́зднике
+      pl_nom: пра́здники
+      pl_gen: пра́здников
+      pl_dat: пра́здникам
+      pl_acc: пра́здники
+      pl_ins: пра́здниками
+      pl_pre: пра́здниках
   "работа=work":
     cefr_level: A1
     gender: f
@@ -229,6 +1190,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - daily life
+      - work
     en_gb:
       standard: work (a job, or effort you do)
       alt:
@@ -249,6 +1211,222 @@ words:
       pl_acc: рабо́ты
       pl_ins: рабо́тами
       pl_pre: рабо́тах
+  "река=river":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - places
+      - travel
+    en_gb:
+      standard: river (a large natural stream of water)
+    usage:
+      - ru: Ло́дка плывёт по реке́.
+        en_gb: A boat floats along the river.
+    declension:
+      sg_nom: река́
+      sg_gen: реки́
+      sg_dat: реке́
+      sg_acc: ре́ку
+      sg_ins: реко́й
+      sg_pre: реке́
+      pl_nom: ре́ки
+      pl_gen: рек
+      pl_dat: ре́кам
+      pl_acc: ре́ки
+      pl_ins: ре́ками
+      pl_pre: ре́ках
+  "ресторан=restaurant":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - restaurants and cafes
+      - places
+      - holiday
+    en_gb:
+      standard: restaurant (a place where you eat out)
+    usage:
+      - ru: Мы у́жинаем в рестора́не.
+        en_gb: We are having dinner at the restaurant.
+    declension:
+      sg_nom: рестора́н
+      sg_gen: рестора́на
+      sg_dat: рестора́ну
+      sg_acc: рестора́н
+      sg_ins: рестора́ном
+      sg_pre: рестора́не
+      pl_nom: рестора́ны
+      pl_gen: рестора́нов
+      pl_dat: рестора́нам
+      pl_acc: рестора́ны
+      pl_ins: рестора́нами
+      pl_pre: рестора́нах
+  "рука=hand":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - parts of the body
+    en_gb:
+      standard: hand (the part at the end of the arm)
+      alt:
+        - arm
+    usage:
+      - ru: Он держа́л кни́гу в руке́.
+        en_gb: He held the book in his hand.
+    declension:
+      sg_nom: рука́
+      sg_gen: руки́
+      sg_dat: руке́
+      sg_acc: ру́ку
+      sg_ins: руко́й
+      sg_pre: руке́
+      pl_nom: ру́ки
+      pl_gen: рук
+      pl_dat: рука́м
+      pl_acc: ру́ки
+      pl_ins: рука́ми
+      pl_pre: рука́х
+  "сад=garden":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the garden
+      - nature
+    en_gb:
+      standard: garden (land for growing plants)
+    usage:
+      - ru: Ба́бушка рабо́тает в саду́.
+        en_gb: Grandmother works in the garden.
+    declension:
+      sg_nom: сад
+      sg_gen: са́да
+      sg_dat: са́ду
+      sg_acc: сад
+      sg_ins: са́дом
+      sg_pre: са́де
+      pl_nom: сады́
+      pl_gen: садо́в
+      pl_dat: сада́м
+      pl_acc: сады́
+      pl_ins: сада́ми
+      pl_pre: сада́х
+  "самолёт=aeroplane":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - public transport
+      - travel
+      - technology
+    en_gb:
+      standard: aeroplane (a flying vehicle)
+      alt:
+        - plane
+        - airplane
+    usage:
+      - ru: Самолёт лети́т над облака́ми.
+        en_gb: The plane flies above the clouds.
+    declension:
+      sg_nom: самолёт
+      sg_gen: самолёта
+      sg_dat: самолёту
+      sg_acc: самолёт
+      sg_ins: самолётом
+      sg_pre: самолёте
+      pl_nom: самолёты
+      pl_gen: самолётов
+      pl_dat: самолётам
+      pl_acc: самолёты
+      pl_ins: самолётами
+      pl_pre: самолётах
+  "семья=family":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - family
+      - daily life
+    en_gb:
+      standard: family (parents and their children)
+    usage:
+      - ru: У меня́ больша́я семья́.
+        en_gb: I have a big family.
+    declension:
+      sg_nom: семья́
+      sg_gen: семьи́
+      sg_dat: семье́
+      sg_acc: семью́
+      sg_ins: семьёй
+      sg_pre: семье́
+      pl_nom: се́мьи
+      pl_gen: семе́й
+      pl_dat: се́мьям
+      pl_acc: се́мьи
+      pl_ins: се́мьями
+      pl_pre: се́мьях
+  "сердце=heart":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - parts of the body
+      - feelings and sensations
+      - romance and dating
+    en_gb:
+      standard: heart (the organ that pumps blood)
+    usage:
+      - ru: Се́рдце бьётся бы́стро.
+        en_gb: The heart beats fast.
+    declension:
+      sg_nom: се́рдце
+      sg_gen: се́рдца
+      sg_dat: се́рдцу
+      sg_acc: се́рдце
+      sg_ins: се́рдцем
+      sg_pre: се́рдце
+      pl_nom: сердца́
+      pl_gen: серде́ц
+      pl_dat: сердца́м
+      pl_acc: сердца́
+      pl_ins: сердца́ми
+      pl_pre: сердца́х
+  "слово=word":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - reading
+      - school
+    en_gb:
+      standard: word (a unit of language)
+    usage:
+      - ru: Я не зна́ю э́то сло́во.
+        en_gb: I don't know this word.
+    declension:
+      sg_nom: сло́во
+      sg_gen: сло́ва
+      sg_dat: сло́ву
+      sg_acc: сло́во
+      sg_ins: сло́вом
+      sg_pre: сло́ве
+      pl_nom: слова́
+      pl_gen: слов
+      pl_dat: слова́м
+      pl_acc: слова́
+      pl_ins: слова́ми
+      pl_pre: слова́х
   "собака=dog":
     cefr_level: A1
     gender: f
@@ -274,6 +1452,56 @@ words:
       pl_acc: соба́к
       pl_ins: соба́ками
       pl_pre: соба́ках
+  "солнце=sun":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - nature
+      - holiday
+    en_gb:
+      standard: sun (the star that lights the day)
+    usage:
+      - ru: Сего́дня я́рко све́тит со́лнце.
+        en_gb: The sun is shining brightly today.
+    declension:
+      sg_nom: со́лнце
+      sg_gen: со́лнца
+      sg_dat: со́лнцу
+      sg_acc: со́лнце
+      sg_ins: со́лнцем
+      sg_pre: со́лнце
+  "стол=table":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the kitchen
+      - daily life
+      - work
+      - restaurants and cafes
+    en_gb:
+      standard: table (furniture with a flat top)
+      alt:
+        - desk
+    usage:
+      - ru: На столе́ стои́т ча́шка.
+        en_gb: A cup is on the table.
+    declension:
+      sg_nom: стол
+      sg_gen: стола́
+      sg_dat: столу́
+      sg_acc: стол
+      sg_ins: столо́м
+      sg_pre: столе́
+      pl_nom: столы́
+      pl_gen: столо́в
+      pl_dat: стола́м
+      pl_acc: столы́
+      pl_ins: стола́ми
+      pl_pre: стола́х
   "студент=student":
     cefr_level: A2
     gender: m
@@ -300,3 +1528,279 @@ words:
       pl_acc: студе́нтов
       pl_ins: студе́нтами
       pl_pre: студе́нтах
+  "суд=court":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the law
+    en_gb:
+      standard: court (where legal cases are heard)
+    usage:
+      - ru: Де́ло рассмотре́ли в суде́.
+        en_gb: The case was examined in court.
+    declension:
+      sg_nom: суд
+      sg_gen: суда́
+      sg_dat: суду́
+      sg_acc: суд
+      sg_ins: судо́м
+      sg_pre: суде́
+      pl_nom: суды́
+      pl_gen: судо́в
+      pl_dat: суда́м
+      pl_acc: суды́
+      pl_ins: суда́ми
+      pl_pre: суда́х
+  "театр=theatre":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - places
+      - holiday
+    en_gb:
+      standard: theatre (where plays are performed)
+      alt:
+        - theater
+    usage:
+      - ru: Ве́чером мы идём в теа́тр.
+        en_gb: In the evening we are going to the theatre.
+    declension:
+      sg_nom: теа́тр
+      sg_gen: теа́тра
+      sg_dat: теа́тру
+      sg_acc: теа́тр
+      sg_ins: теа́тром
+      sg_pre: теа́тре
+      pl_nom: теа́тры
+      pl_gen: теа́тров
+      pl_dat: теа́трам
+      pl_acc: теа́тры
+      pl_ins: теа́трами
+      pl_pre: теа́трах
+  "телефон=telephone":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+      - daily life
+    en_gb:
+      standard: telephone (a device for calls)
+      alt:
+        - phone
+    usage:
+      - ru: Где мой телефо́н?
+        en_gb: Where is my phone?
+    declension:
+      sg_nom: телефо́н
+      sg_gen: телефо́на
+      sg_dat: телефо́ну
+      sg_acc: телефо́н
+      sg_ins: телефо́ном
+      sg_pre: телефо́не
+      pl_nom: телефо́ны
+      pl_gen: телефо́нов
+      pl_dat: телефо́нам
+      pl_acc: телефо́ны
+      pl_ins: телефо́нами
+      pl_pre: телефо́нах
+  "улица=street":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - architecture
+      - public transport
+    en_gb:
+      standard: street (a road in a town)
+    usage:
+      - ru: На у́лице идёт дождь.
+        en_gb: It is raining in the street.
+    declension:
+      sg_nom: у́лица
+      sg_gen: у́лицы
+      sg_dat: у́лице
+      sg_acc: у́лицу
+      sg_ins: у́лицей
+      sg_pre: у́лице
+      pl_nom: у́лицы
+      pl_gen: у́лиц
+      pl_dat: у́лицам
+      pl_acc: у́лицы
+      pl_ins: у́лицами
+      pl_pre: у́лицах
+  "учитель=teacher":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - school
+      - work
+      - people
+    en_gb:
+      standard: teacher (a person who teaches)
+    usage:
+      - ru: Наш учи́тель о́чень до́брый.
+        en_gb: Our teacher is very kind.
+    declension:
+      sg_nom: учи́тель
+      sg_gen: учи́теля
+      sg_dat: учи́телю
+      sg_acc: учи́теля
+      sg_ins: учи́телем
+      sg_pre: учи́теле
+      pl_nom: учителя́
+      pl_gen: учителе́й
+      pl_dat: учителя́м
+      pl_acc: учителе́й
+      pl_ins: учителя́ми
+      pl_pre: учителя́х
+  "церковь=church":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - faith
+      - architecture
+      - places
+    en_gb:
+      standard: church (a building for Christian worship)
+    usage:
+      - ru: В це́нтре го́рода стои́т ста́рая це́рковь.
+        en_gb: An old church stands in the town centre.
+    declension:
+      sg_nom: це́рковь
+      sg_gen: це́ркви
+      sg_dat: це́ркви
+      sg_acc: це́рковь
+      sg_ins: це́рковью
+      sg_pre: це́ркви
+      pl_nom: це́ркви
+      pl_gen: церкве́й
+      pl_dat: церква́м
+      pl_acc: це́ркви
+      pl_ins: церква́ми
+      pl_pre: церква́х
+  "цвет=colour":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - colours and textures
+      - the arts
+    en_gb:
+      standard: colour (red, blue, green, and so on)
+      alt:
+        - color
+    usage:
+      - ru: Како́й твой люби́мый цвет?
+        en_gb: What is your favourite colour?
+    declension:
+      sg_nom: цвет
+      sg_gen: цве́та
+      sg_dat: цве́ту
+      sg_acc: цвет
+      sg_ins: цве́том
+      sg_pre: цве́те
+      pl_nom: цвета́
+      pl_gen: цвето́в
+      pl_dat: цвета́м
+      pl_acc: цвета́
+      pl_ins: цвета́ми
+      pl_pre: цвета́х
+  "цена=price":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - finance
+      - shopping
+    en_gb:
+      standard: price (how much something costs)
+      alt:
+        - cost
+    usage:
+      - ru: Кака́я цена́ э́того биле́та?
+        en_gb: What is the price of this ticket?
+    declension:
+      sg_nom: цена́
+      sg_gen: цены́
+      sg_dat: цене́
+      sg_acc: це́ну
+      sg_ins: цено́й
+      sg_pre: цене́
+      pl_nom: це́ны
+      pl_gen: цен
+      pl_dat: це́нам
+      pl_acc: це́ны
+      pl_ins: це́нами
+      pl_pre: це́нах
+  "число=number":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - measurement and calculation
+      - daily life
+    en_gb:
+      standard: number (a value used in counting)
+      alt:
+        - date (of the month)
+    usage:
+      - ru: Назови́те любо́е число́.
+        en_gb: Name any number.
+    declension:
+      sg_nom: число́
+      sg_gen: числа́
+      sg_dat: числу́
+      sg_acc: число́
+      sg_ins: число́м
+      sg_pre: числе́
+      pl_nom: чи́сла
+      pl_gen: чи́сел
+      pl_dat: чи́слам
+      pl_acc: чи́сла
+      pl_ins: чи́слами
+      pl_pre: чи́слах
+  "чувство=feeling":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+      - romance and dating
+    en_gb:
+      standard: feeling (an emotion or sensation)
+      alt:
+        - emotion
+        - sense
+    usage:
+      - ru: Э́то прия́тное чу́вство.
+        en_gb: It is a pleasant feeling.
+    declension:
+      sg_nom: чу́вство
+      sg_gen: чу́вства
+      sg_dat: чу́вству
+      sg_acc: чу́вство
+      sg_ins: чу́вством
+      sg_pre: чу́встве
+      pl_nom: чу́вства
+      pl_gen: чувств
+      pl_dat: чу́вствам
+      pl_acc: чу́вства
+      pl_ins: чу́вствами
+      pl_pre: чу́вствах
