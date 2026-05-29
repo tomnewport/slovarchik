@@ -7,6 +7,7 @@ import { GRADES, gradeFor } from '../lib/progress.js'
 import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
 import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing to the next question.
 const CELEBRATE_MS = 1000
@@ -82,6 +83,7 @@ function nextQuestion() {
   current.value = sample(vocab.value, 1)[0]
   nextTick(() => inputEl.value?.focus())
   applyKeyboardHint()
+  if (direction.value === 'ru-en') speak(current.value.ru)
 }
 
 // Deal a fresh matching board: a sample of distinct words shown as two columns,
@@ -105,7 +107,7 @@ function clearWrong() {
 
 function pickLeft(word) {
   if (matched.has(word.id)) return
-  if (hideSpellings.value) speak(word.ru)
+  speak(word.ru)
   clearWrong()
   selectedLeft.value = selectedLeft.value === word.id ? null : word.id
   resolveMatch()
@@ -267,6 +269,7 @@ onUnmounted(() => {
     <div v-if="level !== 'easy'" class="card" style="text-align: center">
       <div class="muted">Translate</div>
       <div style="font-size: 2rem; margin: 0.5rem 0" lang="ru">{{ promptOf(current) }}</div>
+      <SpeakButton v-if="direction === 'ru-en'" :text="promptOf(current)" />
     </div>
 
     <!-- Easy: tap a Russian word and its English match to clear the pair. -->
@@ -321,6 +324,7 @@ onUnmounted(() => {
     <div v-if="answered" class="grid">
       <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + displayAnswer(current) }}
+        <SpeakButton v-if="!wasCorrect && direction === 'en-ru'" :text="displayAnswer(current)" />
       </p>
       <p v-if="current.note" class="muted" style="margin: 0">{{ current.note }}</p>
       <!-- Correct answers advance on their own; only wrong answers wait for the user. -->

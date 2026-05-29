@@ -5,6 +5,7 @@ import { sample } from '../lib/quiz.js'
 import { buildListeningBank, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
 import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing to the next phrase.
 const CELEBRATE_MS = 1000
@@ -164,7 +165,10 @@ onUnmounted(() => clearTimeout(advanceTimer))
       <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + current.en }}
       </p>
-      <p class="muted" lang="ru" style="margin: 0">{{ current.ru }}</p>
+      <div class="muted" style="display: flex; align-items: center; gap: 0.4rem; margin: 0">
+        <span lang="ru">{{ current.ru }}</span>
+        <SpeakButton :text="current.ru" />
+      </div>
       <!-- Correct answers advance on their own; only wrong answers wait. -->
       <div v-if="!wasCorrect" class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
