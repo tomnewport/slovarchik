@@ -4,7 +4,7 @@ import pluginVue from 'eslint-plugin-vue'
 // Correctness-focused config. Formatting is intentionally left to the editor /
 // Prettier rather than enforced here, so we use Vue's "essential" rules.
 export default [
-  { ignores: ['dist/**', 'dev-dist/**', 'node_modules/**'] },
+  { ignores: ['dist/**', 'dev-dist/**', 'node_modules/**', '.claude/**'] },
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
   {

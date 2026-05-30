@@ -44,6 +44,55 @@ words:
       past_f: бе́гала
       past_n: бе́гало
       past_pl: бе́гали
+  "бежать=to run":
+    cefr_level: A2
+    accented: бежа́ть
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to run (to move fast on foot, in one direction)
+    usage:
+      - ru: Де́ти бегу́т к ре́ке.
+        en_gb: The children are running to the river.
+    conjugation:
+      present:
+        "1sg": бегу́
+        "2sg": бежи́шь
+        "3sg": бежи́т
+        "1pl": бежи́м
+        "2pl": бежи́те
+        "3pl": бегу́т
+      past_m: бежа́л
+      past_f: бежа́ла
+      past_n: бежа́ло
+      past_pl: бежа́ли
+  "беспокоиться=to worry":
+    cefr_level: B1
+    accented: беспоко́иться
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to worry (to feel anxious about something)
+      alt:
+        - to be anxious
+    usage:
+      - ru: Не беспоко́йся, всё бу́дет хорошо́.
+        en_gb: Don't worry, everything will be fine.
+    conjugation:
+      present:
+        "1sg": беспоко́юсь
+        "2sg": беспоко́ишься
+        "3sg": беспоко́ится
+        "1pl": беспоко́имся
+        "2pl": беспоко́итесь
+        "3pl": беспоко́ятся
+      past_m: беспоко́ился
+      past_f: беспоко́илась
+      past_n: беспоко́илось
+      past_pl: беспоко́ились
   "болеть=to be ill":
     cefr_level: A2
     accented: боле́ть
@@ -96,6 +145,29 @@ words:
       past_f: боя́лась
       past_n: боя́лось
       past_pl: боя́лись
+  "брать=to take":
+    cefr_level: A1
+    accented: брать
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to take (to reach for and hold)
+    usage:
+      - ru: Я беру́ кни́гу со сто́ла.
+        en_gb: I am taking the book from the table.
+    conjugation:
+      present:
+        "1sg": беру́
+        "2sg": берёшь
+        "3sg": берёт
+        "1pl": берём
+        "2pl": берёте
+        "3pl": беру́т
+      past_m: брал
+      past_f: брала́
+      past_n: бра́ло
+      past_pl: бра́ли
   "быть=to be":
     cefr_level: A1
     accented: быть
@@ -117,6 +189,32 @@ words:
       past_f: была́
       past_n: бы́ло
       past_pl: бы́ли
+  "везти=to be taking":
+    cefr_level: B1
+    accented: везти́
+    aspect: impf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to be taking (to convey by vehicle, in one direction)
+      alt:
+        - to be transporting
+    usage:
+      - ru: Он везёт това́р на ры́нок.
+        en_gb: He is taking goods to the market.
+    conjugation:
+      present:
+        "1sg": везу́
+        "2sg": везёшь
+        "3sg": везёт
+        "1pl": везём
+        "2pl": везёте
+        "3pl": везу́т
+      past_m: вёз
+      past_f: везла́
+      past_n: везло́
+      past_pl: везли́
   "верить=to believe":
     cefr_level: A2
     accented: ве́рить
@@ -164,6 +262,55 @@ words:
       past_f: ве́сила
       past_n: ве́сило
       past_pl: ве́сили
+  "вести=to be leading":
+    cefr_level: B1
+    accented: вести́
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to be leading (to guide on foot, in one direction)
+      alt:
+        - to be guiding
+    usage:
+      - ru: Учи́тель ведёт дете́й в музе́й.
+        en_gb: The teacher is leading the children to the museum.
+    conjugation:
+      present:
+        "1sg": веду́
+        "2sg": ведёшь
+        "3sg": ведёт
+        "1pl": ведём
+        "2pl": ведёте
+        "3pl": веду́т
+      past_m: вёл
+      past_f: вела́
+      past_n: вело́
+      past_pl: вели́
+  "взять=to take":
+    cefr_level: A1
+    accented: взять
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to take (to pick up)
+    usage:
+      - ru: Возьми́ зо́нтик — бу́дет дождь.
+        en_gb: Take an umbrella — it will rain.
+    conjugation:
+      future:
+        "1sg": возьму́
+        "2sg": возьмёшь
+        "3sg": возьмёт
+        "1pl": возьмём
+        "2pl": возьмёте
+        "3pl": возьму́т
+      past_m: взял
+      past_f: взяла́
+      past_n: взя́ло
+      past_pl: взя́ли
   "видеть=to see":
     cefr_level: A2
     accented: ви́деть
@@ -185,6 +332,209 @@ words:
       past_f: ви́дела
       past_n: ви́дело
       past_pl: ви́дели
+  "водить=to drive":
+    cefr_level: B1
+    accented: води́ть
+    aspect: impf
+    heteronyms:
+      - ru: вожу́
+        gloss: I drive / I transport (водить / возить)
+    collections:
+      - motion
+      - travel
+      - public transport
+    en_gb:
+      standard: to drive (to operate a vehicle, habitually)
+      alt:
+        - to lead (on foot, repeatedly)
+    usage:
+      - ru: Она́ во́дит маши́ну о́чень осторо́жно.
+        en_gb: She drives a car very carefully.
+    conjugation:
+      present:
+        "1sg": вожу́
+        "2sg": во́дишь
+        "3sg": во́дит
+        "1pl": во́дим
+        "2pl": во́дите
+        "3pl": во́дят
+      past_m: води́л
+      past_f: води́ла
+      past_n: води́ло
+      past_pl: води́ли
+  "возить=to transport":
+    cefr_level: B1
+    accented: вози́ть
+    aspect: impf
+    heteronyms:
+      - ru: вожу́
+        gloss: I transport / I drive (возить / водить)
+    collections:
+      - motion
+      - travel
+      - public transport
+    en_gb:
+      standard: to transport (to carry by vehicle, habitually)
+    usage:
+      - ru: Он вози́т проду́кты на грузовике́.
+        en_gb: He transports goods by lorry.
+    conjugation:
+      present:
+        "1sg": вожу́
+        "2sg": во́зишь
+        "3sg": во́зит
+        "1pl": во́зим
+        "2pl": во́зите
+        "3pl": во́зят
+      past_m: вози́л
+      past_f: вози́ла
+      past_n: вози́ло
+      past_pl: вози́ли
+  "войти=to enter":
+    cefr_level: A2
+    accented: войти́
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to enter (to come or go in)
+      alt:
+        - to go in
+    usage:
+      - ru: Она́ вошла́ в ко́мнату и закры́ла дверь.
+        en_gb: She entered the room and closed the door.
+    conjugation:
+      future:
+        "1sg": войду́
+        "2sg": войдёшь
+        "3sg": войдёт
+        "1pl": войдём
+        "2pl": войдёте
+        "3pl": войду́т
+      past_m: вошёл
+      past_f: вошла́
+      past_n: вошло́
+      past_pl: вошли́
+  "волноваться=to worry":
+    cefr_level: B1
+    accented: волнова́ться
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to worry (to feel excited or nervous)
+      alt:
+        - to be excited
+    usage:
+      - ru: Он волну́ется пе́ред экза́меном.
+        en_gb: He is nervous before the exam.
+    conjugation:
+      present:
+        "1sg": волну́юсь
+        "2sg": волну́ешься
+        "3sg": волну́ется
+        "1pl": волну́емся
+        "2pl": волну́етесь
+        "3pl": волну́ются
+      past_m: волнова́лся
+      past_f: волнова́лась
+      past_n: волнова́лось
+      past_pl: волнова́лись
+  "вставать=to get up":
+    cefr_level: A2
+    accented: встава́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to get up (to rise from bed or a seat)
+    usage:
+      - ru: Я встаю́ в семь часо́в у́тра.
+        en_gb: I get up at seven o'clock in the morning.
+    conjugation:
+      present:
+        "1sg": встаю́
+        "2sg": встаёшь
+        "3sg": встаёт
+        "1pl": встаём
+        "2pl": встаёте
+        "3pl": встаю́т
+      past_m: встава́л
+      past_f: встава́ла
+      past_n: встава́ло
+      past_pl: встава́ли
+  "встать=to stand up":
+    cefr_level: A2
+    accented: встать
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to stand up (to rise to one's feet)
+    usage:
+      - ru: Пожа́луйста, вста́ньте.
+        en_gb: Please stand up.
+    conjugation:
+      future:
+        "1sg": вста́ну
+        "2sg": вста́нешь
+        "3sg": вста́нет
+        "1pl": вста́нем
+        "2pl": вста́нете
+        "3pl": вста́нут
+      past_m: встал
+      past_f: вста́ла
+      past_n: вста́ло
+      past_pl: вста́ли
+  "встретить=to meet":
+    cefr_level: A2
+    accented: встре́тить
+    aspect: pf
+    collections:
+      - daily life
+      - people
+    en_gb:
+      standard: to meet (to encounter on one occasion)
+    usage:
+      - ru: Я встре́тил её в кафе́.
+        en_gb: I met her in a café.
+    conjugation:
+      future:
+        "1sg": встре́чу
+        "2sg": встре́тишь
+        "3sg": встре́тит
+        "1pl": встре́тим
+        "2pl": встре́тите
+        "3pl": встре́тят
+      past_m: встре́тил
+      past_f: встре́тила
+      past_n: встре́тило
+      past_pl: встре́тили
+  "встречать=to meet":
+    cefr_level: A2
+    accented: встреча́ть
+    aspect: impf
+    collections:
+      - daily life
+      - people
+    en_gb:
+      standard: to meet (to greet on arrival)
+    usage:
+      - ru: Я встреча́ю друзе́й на вокза́ле.
+        en_gb: I meet friends at the station.
+    conjugation:
+      present:
+        "1sg": встреча́ю
+        "2sg": встреча́ешь
+        "3sg": встреча́ет
+        "1pl": встреча́ем
+        "2pl": встреча́ете
+        "3pl": встреча́ют
+      past_m: встреча́л
+      past_f: встреча́ла
+      past_n: встреча́ло
+      past_pl: встреча́ли
   "встречаться=to date":
     cefr_level: B1
     accented: встреча́ться
@@ -211,6 +561,102 @@ words:
       past_f: встреча́лась
       past_n: встреча́лось
       past_pl: встреча́лись
+  "входить=to enter":
+    cefr_level: A2
+    accented: входи́ть
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to enter (to go in, habitually or repeatedly)
+    usage:
+      - ru: Он всегда́ вхо́дит без сту́ка.
+        en_gb: He always enters without knocking.
+    conjugation:
+      present:
+        "1sg": вхожу́
+        "2sg": вхо́дишь
+        "3sg": вхо́дит
+        "1pl": вхо́дим
+        "2pl": вхо́дите
+        "3pl": вхо́дят
+      past_m: входи́л
+      past_f: входи́ла
+      past_n: входи́ло
+      past_pl: входи́ли
+  "выйти=to go out":
+    cefr_level: A2
+    accented: вы́йти
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to go out (to leave a building)
+    usage:
+      - ru: Она́ вы́шла из до́ма ра́но у́тром.
+        en_gb: She went out of the house early in the morning.
+    conjugation:
+      future:
+        "1sg": вы́йду
+        "2sg": вы́йдешь
+        "3sg": вы́йдет
+        "1pl": вы́йдем
+        "2pl": вы́йдете
+        "3pl": вы́йдут
+      past_m: вы́шел
+      past_f: вы́шла
+      past_n: вы́шло
+      past_pl: вы́шли
+  "выпить=to drink up":
+    cefr_level: A2
+    accented: вы́пить
+    aspect: pf
+    collections:
+      - in the kitchen
+      - restaurants and cafes
+    en_gb:
+      standard: to drink up (to drink completely)
+    usage:
+      - ru: Он вы́пил стака́н молока́.
+        en_gb: He drank up a glass of milk.
+    conjugation:
+      future:
+        "1sg": вы́пью
+        "2sg": вы́пьешь
+        "3sg": вы́пьет
+        "1pl": вы́пьем
+        "2pl": вы́пьете
+        "3pl": вы́пьют
+      past_m: вы́пил
+      past_f: вы́пила
+      past_n: вы́пило
+      past_pl: вы́пили
+  "выходить=to go out":
+    cefr_level: A2
+    accented: выходи́ть
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to go out (to leave, habitually or repeatedly)
+    usage:
+      - ru: Он выхо́дит из до́ма ка́ждое у́тро.
+        en_gb: He goes out of the house every morning.
+    conjugation:
+      present:
+        "1sg": выхожу́
+        "2sg": выхо́дишь
+        "3sg": выхо́дит
+        "1pl": выхо́дим
+        "2pl": выхо́дите
+        "3pl": выхо́дят
+      past_m: выходи́л
+      past_f: выходи́ла
+      past_n: выходи́ло
+      past_pl: выходи́ли
   "говорить=to speak":
     cefr_level: A1
     accented: говори́ть
@@ -234,6 +680,31 @@ words:
       past_f: говори́ла
       past_n: говори́ло
       past_pl: говори́ли
+  "гордиться=to be proud":
+    cefr_level: B1
+    accented: горди́ться
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to be proud (to feel pride)
+      alt:
+        - to take pride in
+    usage:
+      - ru: Роди́тели гордя́тся свои́ми детьми́.
+        en_gb: Parents are proud of their children.
+    conjugation:
+      present:
+        "1sg": горжу́сь
+        "2sg": горди́шься
+        "3sg": горди́тся
+        "1pl": горди́мся
+        "2pl": горди́тесь
+        "3pl": гордя́тся
+      past_m: горди́лся
+      past_f: горди́лась
+      past_n: горди́лось
+      past_pl: горди́лись
   "готовить=to cook":
     cefr_level: A2
     accented: гото́вить
@@ -287,6 +758,75 @@ words:
       past_f: гуля́ла
       past_n: гуля́ло
       past_pl: гуля́ли
+  "давать=to give":
+    cefr_level: A1
+    accented: дава́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to give (to hand over to someone)
+    usage:
+      - ru: Она́ даёт мне кни́гу.
+        en_gb: She is giving me a book.
+    conjugation:
+      present:
+        "1sg": даю́
+        "2sg": даёшь
+        "3sg": даёт
+        "1pl": даём
+        "2pl": даёте
+        "3pl": даю́т
+      past_m: дава́л
+      past_f: дава́ла
+      past_n: дава́ло
+      past_pl: дава́ли
+  "дать=to give":
+    cefr_level: A1
+    accented: дать
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to give (to hand over on one occasion)
+    usage:
+      - ru: Дай мне, пожа́луйста, ка́рандаш.
+        en_gb: Please give me a pencil.
+    conjugation:
+      future:
+        "1sg": дам
+        "2sg": дашь
+        "3sg": даст
+        "1pl": дади́м
+        "2pl": дади́те
+        "3pl": даду́т
+      past_m: дал
+      past_f: дала́
+      past_n: да́ло
+      past_pl: да́ли
+  "двигаться=to move":
+    cefr_level: B1
+    accented: дви́гаться
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to move (to change position)
+    usage:
+      - ru: По́езд дви́гается о́чень медле́нно.
+        en_gb: The train is moving very slowly.
+    conjugation:
+      present:
+        "1sg": дви́гаюсь
+        "2sg": дви́гаешься
+        "3sg": дви́гается
+        "1pl": дви́гаемся
+        "2pl": дви́гаетесь
+        "3pl": дви́гаются
+      past_m: дви́гался
+      past_f: дви́галась
+      past_n: дви́галось
+      past_pl: дви́гались
   "делать=to do":
     cefr_level: A1
     accented: де́лать
@@ -335,6 +875,31 @@ words:
       past_f: ду́мала
       past_n: ду́мало
       past_pl: ду́мали
+  "ездить=to go by transport":
+    cefr_level: A2
+    accented: е́здить
+    aspect: impf
+    collections:
+      - motion
+      - travel
+      - public transport
+    en_gb:
+      standard: to go by transport (to travel habitually by vehicle)
+    usage:
+      - ru: Ка́ждый день он е́здит на рабо́ту на метро́.
+        en_gb: Every day he goes to work by metro.
+    conjugation:
+      present:
+        "1sg": е́зжу
+        "2sg": е́здишь
+        "3sg": е́здит
+        "1pl": е́здим
+        "2pl": е́здите
+        "3pl": е́здят
+      past_m: е́здил
+      past_f: е́здила
+      past_n: е́здило
+      past_pl: е́здили
   "есть=to eat":
     cefr_level: A1
     accented: есть
@@ -387,6 +952,55 @@ words:
       past_f: е́хала
       past_n: е́хало
       past_pl: е́хали
+  "жалеть=to feel sorry":
+    cefr_level: B1
+    accented: жале́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to feel sorry (to have pity or regret)
+      alt:
+        - to pity
+        - to regret
+    usage:
+      - ru: Я жале́ю, что не пришёл ра́ньше.
+        en_gb: I feel sorry that I didn't come earlier.
+    conjugation:
+      present:
+        "1sg": жале́ю
+        "2sg": жале́ешь
+        "3sg": жале́ет
+        "1pl": жале́ем
+        "2pl": жале́ете
+        "3pl": жале́ют
+      past_m: жале́л
+      past_f: жале́ла
+      past_n: жале́ло
+      past_pl: жале́ли
+  "ждать=to wait":
+    cefr_level: A1
+    accented: ждать
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to wait (to stay until something happens)
+    usage:
+      - ru: Я жду авто́бус на остано́вке.
+        en_gb: I am waiting for the bus at the stop.
+    conjugation:
+      present:
+        "1sg": жду
+        "2sg": ждёшь
+        "3sg": ждёт
+        "1pl": ждём
+        "2pl": ждёте
+        "3pl": ждут
+      past_m: ждал
+      past_f: ждала́
+      past_n: жда́ло
+      past_pl: жда́ли
   "жениться=to marry":
     cefr_level: B1
     accented: жени́ться
@@ -434,6 +1048,123 @@ words:
       past_f: жила́
       past_n: жи́ло
       past_pl: жи́ли
+  "забрать=to take away":
+    cefr_level: B1
+    accented: забра́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to take away (to remove by taking)
+    usage:
+      - ru: Он забра́л свои́ ве́щи и ушёл.
+        en_gb: He took away his things and left.
+    conjugation:
+      future:
+        "1sg": заберу́
+        "2sg": заберёшь
+        "3sg": заберёт
+        "1pl": заберём
+        "2pl": заберёте
+        "3pl": заберу́т
+      past_m: забра́л
+      past_f: забрала́
+      past_n: забра́ло
+      past_pl: забра́ли
+  "забывать=to forget":
+    cefr_level: A2
+    accented: забыва́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to forget (to fail to remember)
+    usage:
+      - ru: Он часто забыва́ет ключи́ до́ма.
+        en_gb: He often forgets his keys at home.
+    conjugation:
+      present:
+        "1sg": забыва́ю
+        "2sg": забыва́ешь
+        "3sg": забыва́ет
+        "1pl": забыва́ем
+        "2pl": забыва́ете
+        "3pl": забыва́ют
+      past_m: забыва́л
+      past_f: забыва́ла
+      past_n: забыва́ло
+      past_pl: забыва́ли
+  "забыть=to forget":
+    cefr_level: A2
+    accented: забы́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to forget (to fail to remember, on one occasion)
+    usage:
+      - ru: Я забы́л её и́мя.
+        en_gb: I forgot her name.
+    conjugation:
+      future:
+        "1sg": забу́ду
+        "2sg": забу́дешь
+        "3sg": забу́дет
+        "1pl": забу́дем
+        "2pl": забу́дете
+        "3pl": забу́дут
+      past_m: забы́л
+      past_f: забы́ла
+      past_n: забы́ло
+      past_pl: забы́ли
+  "заканчивать=to finish":
+    cefr_level: A2
+    accented: зака́нчивать
+    aspect: impf
+    collections:
+      - daily life
+      - work
+    en_gb:
+      standard: to finish (to bring to an end)
+    usage:
+      - ru: Он зака́нчивает рабо́ту в шесть.
+        en_gb: He finishes work at six.
+    conjugation:
+      present:
+        "1sg": зака́нчиваю
+        "2sg": зака́нчиваешь
+        "3sg": зака́нчивает
+        "1pl": зака́нчиваем
+        "2pl": зака́нчиваете
+        "3pl": зака́нчивают
+      past_m: зака́нчивал
+      past_f: зака́нчивала
+      past_n: зака́нчивало
+      past_pl: зака́нчивали
+  "закончить=to finish":
+    cefr_level: A2
+    accented: зако́нчить
+    aspect: pf
+    collections:
+      - daily life
+      - work
+    en_gb:
+      standard: to finish (to complete)
+    usage:
+      - ru: Я зако́нчил рабо́ту и пошёл домо́й.
+        en_gb: I finished work and went home.
+    conjugation:
+      future:
+        "1sg": зако́нчу
+        "2sg": зако́нчишь
+        "3sg": зако́нчит
+        "1pl": зако́нчим
+        "2pl": зако́нчите
+        "3pl": зако́нчат
+      past_m: зако́нчил
+      past_f: зако́нчила
+      past_n: зако́нчило
+      past_pl: зако́нчили
   "запрещать=to forbid":
     cefr_level: B2
     accented: запреща́ть
@@ -509,6 +1240,32 @@ words:
       past_f: защища́ла
       past_n: защища́ло
       past_pl: защища́ли
+  "звонить=to call":
+    cefr_level: A1
+    accented: звони́ть
+    aspect: impf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to call (to phone someone)
+      alt:
+        - to ring
+    usage:
+      - ru: Я звоню́ маме ка́ждый день.
+        en_gb: I call my mum every day.
+    conjugation:
+      present:
+        "1sg": звоню́
+        "2sg": звони́шь
+        "3sg": звони́т
+        "1pl": звони́м
+        "2pl": звони́те
+        "3pl": звоня́т
+      past_m: звони́л
+      past_f: звони́ла
+      past_n: звони́ло
+      past_pl: звони́ли
   "знать=to know":
     cefr_level: A1
     accented: знать
@@ -626,6 +1383,31 @@ words:
       past_f: ката́лась
       past_n: ката́лось
       past_pl: ката́лись
+  "класть=to put":
+    cefr_level: A2
+    accented: класть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to put (to place in a lying position)
+      alt:
+        - to place
+    usage:
+      - ru: Она́ кладёт кни́гу на по́лку.
+        en_gb: She puts the book on the shelf.
+    conjugation:
+      present:
+        "1sg": кладу́
+        "2sg": кладёшь
+        "3sg": кладёт
+        "1pl": кладём
+        "2pl": кладёте
+        "3pl": кладу́т
+      past_m: клал
+      past_f: кла́ла
+      past_n: кла́ло
+      past_pl: кла́ли
   "копать=to dig":
     cefr_level: B1
     accented: копа́ть
@@ -676,6 +1458,103 @@ words:
       past_f: кра́сила
       past_n: кра́сило
       past_pl: кра́сили
+  "кричать=to shout":
+    cefr_level: A2
+    accented: крича́ть
+    aspect: impf
+    collections:
+      - communication
+      - feelings and sensations
+    en_gb:
+      standard: to shout (to call out loudly)
+      alt:
+        - to yell
+    usage:
+      - ru: Не кричи́! Говори́ споко́йно.
+        en_gb: Don't shout! Speak calmly.
+    conjugation:
+      present:
+        "1sg": кричу́
+        "2sg": кричи́шь
+        "3sg": кричи́т
+        "1pl": кричи́м
+        "2pl": кричи́те
+        "3pl": крича́т
+      past_m: крича́л
+      past_f: крича́ла
+      past_n: крича́ло
+      past_pl: крича́ли
+  "купить=to buy":
+    cefr_level: A2
+    accented: купи́ть
+    aspect: pf
+    collections:
+      - shopping
+      - finance
+      - daily life
+    en_gb:
+      standard: to buy (to purchase)
+    usage:
+      - ru: Я купи́л нову́ю кни́гу.
+        en_gb: I bought a new book.
+    conjugation:
+      future:
+        "1sg": куплю́
+        "2sg": ку́пишь
+        "3sg": ку́пит
+        "1pl": ку́пим
+        "2pl": ку́пите
+        "3pl": ку́пят
+      past_m: купи́л
+      past_f: купи́ла
+      past_n: купи́ло
+      past_pl: купи́ли
+  "лежать=to lie":
+    cefr_level: A2
+    accented: лежа́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to lie (to be in a horizontal position)
+    usage:
+      - ru: Кот лежи́т на дива́не.
+        en_gb: The cat is lying on the sofa.
+    conjugation:
+      present:
+        "1sg": лежу́
+        "2sg": лежи́шь
+        "3sg": лежи́т
+        "1pl": лежи́м
+        "2pl": лежи́те
+        "3pl": лежа́т
+      past_m: лежа́л
+      past_f: лежа́ла
+      past_n: лежа́ло
+      past_pl: лежа́ли
+  "лезть=to climb":
+    cefr_level: B1
+    accented: ле́зть
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to climb (to move upward using hands and feet)
+    usage:
+      - ru: Ребёнок ле́зет на де́рево.
+        en_gb: The child is climbing a tree.
+    conjugation:
+      present:
+        "1sg": ле́зу
+        "2sg": ле́зешь
+        "3sg": ле́зет
+        "1pl": ле́зем
+        "2pl": ле́зете
+        "3pl": ле́зут
+      past_m: лез
+      past_f: ле́зла
+      past_n: ле́зло
+      past_pl: ле́зли
   "летать=to fly":
     cefr_level: A2
     accented: лета́ть
@@ -701,6 +1580,30 @@ words:
       past_f: лета́ла
       past_n: лета́ло
       past_pl: лета́ли
+  "лететь=to be flying":
+    cefr_level: A2
+    accented: лете́ть
+    aspect: impf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to be flying (to move through the air, in one direction)
+    usage:
+      - ru: Самолёт лети́т в Москву́.
+        en_gb: The plane is flying to Moscow.
+    conjugation:
+      present:
+        "1sg": лечу́
+        "2sg": лети́шь
+        "3sg": лети́т
+        "1pl": лети́м
+        "2pl": лети́те
+        "3pl": летя́т
+      past_m: лете́л
+      past_f: лете́ла
+      past_n: лете́ло
+      past_pl: лете́ли
   "лечить=to treat":
     cefr_level: B1
     accented: лечи́ть
@@ -727,6 +1630,52 @@ words:
       past_f: лечи́ла
       past_n: лечи́ло
       past_pl: лечи́ли
+  "лечь=to lie down":
+    cefr_level: A2
+    accented: лечь
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to lie down (to assume a horizontal position)
+    usage:
+      - ru: Она́ легла́ спать в де́сять.
+        en_gb: She lay down to sleep at ten.
+    conjugation:
+      future:
+        "1sg": ля́гу
+        "2sg": ля́жешь
+        "3sg": ля́жет
+        "1pl": ля́жем
+        "2pl": ля́жете
+        "3pl": ля́гут
+      past_m: лёг
+      past_f: легла́
+      past_n: легло́
+      past_pl: легли́
+  "ложиться=to lie down":
+    cefr_level: A2
+    accented: ложи́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to lie down (to go into a horizontal position, habitually)
+    usage:
+      - ru: Я ложу́сь спать в одиннадцать.
+        en_gb: I go to bed at eleven.
+    conjugation:
+      present:
+        "1sg": ложу́сь
+        "2sg": ложи́шься
+        "3sg": ложи́тся
+        "1pl": ложи́мся
+        "2pl": ложи́тесь
+        "3pl": ложа́тся
+      past_m: ложи́лся
+      past_f: ложи́лась
+      past_n: ложи́лось
+      past_pl: ложи́лись
   "любить=to love":
     cefr_level: A1
     accented: люби́ть
@@ -754,6 +1703,31 @@ words:
       past_f: люби́ла
       past_n: люби́ло
       past_pl: люби́ли
+  "мечтать=to dream":
+    cefr_level: B1
+    accented: мечта́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to dream (to long for something)
+      alt:
+        - to daydream
+    usage:
+      - ru: Она́ мечта́ет о путеше́ствии.
+        en_gb: She dreams of travelling.
+    conjugation:
+      present:
+        "1sg": мечта́ю
+        "2sg": мечта́ешь
+        "3sg": мечта́ет
+        "1pl": мечта́ем
+        "2pl": мечта́ете
+        "3pl": мечта́ют
+      past_m: мечта́л
+      past_f: мечта́ла
+      past_n: мечта́ло
+      past_pl: мечта́ли
   "молиться=to pray":
     cefr_level: B1
     accented: моли́ться
@@ -777,6 +1751,31 @@ words:
       past_f: моли́лась
       past_n: моли́лось
       past_pl: моли́лись
+  "молчать=to be silent":
+    cefr_level: A2
+    accented: молча́ть
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to be silent (to say nothing)
+      alt:
+        - to keep quiet
+    usage:
+      - ru: Он молча́л всё вре́мя.
+        en_gb: He was silent the whole time.
+    conjugation:
+      present:
+        "1sg": молчу́
+        "2sg": молчи́шь
+        "3sg": молчи́т
+        "1pl": молчи́м
+        "2pl": молчи́те
+        "3pl": молча́т
+      past_m: молча́л
+      past_f: молча́ла
+      past_n: молча́ло
+      past_pl: молча́ли
   "мочь=to be able":
     cefr_level: A1
     accented: мочь
@@ -826,6 +1825,196 @@ words:
       past_f: мы́ла
       past_n: мы́ло
       past_pl: мы́ли
+  "надеяться=to hope":
+    cefr_level: B1
+    accented: наде́яться
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to hope (to wish for something to happen)
+    usage:
+      - ru: Я наде́юсь, что всё получи́тся.
+        en_gb: I hope that everything will work out.
+    conjugation:
+      present:
+        "1sg": наде́юсь
+        "2sg": наде́ешься
+        "3sg": наде́ется
+        "1pl": наде́емся
+        "2pl": наде́етесь
+        "3pl": наде́ются
+      past_m: наде́ялся
+      past_f: наде́ялась
+      past_n: наде́ялось
+      past_pl: наде́ялись
+  "назвать=to call/name":
+    cefr_level: B1
+    accented: назва́ть
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to name (to give a name to)
+      alt:
+        - to call
+    usage:
+      - ru: Они́ назвали́ сы́на Ива́ном.
+        en_gb: They named their son Ivan.
+    conjugation:
+      future:
+        "1sg": назову́
+        "2sg": назовёшь
+        "3sg": назовёт
+        "1pl": назовём
+        "2pl": назовёте
+        "3pl": назову́т
+      past_m: назва́л
+      past_f: назвала́
+      past_n: назва́ло
+      past_pl: назва́ли
+  "называть=to call/name":
+    cefr_level: B1
+    accented: называ́ть
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to call (to name repeatedly or habitually)
+      alt:
+        - to name
+    usage:
+      - ru: Как называ́ют э́то блю́до?
+        en_gb: What is this dish called?
+    conjugation:
+      present:
+        "1sg": называ́ю
+        "2sg": называ́ешь
+        "3sg": называ́ет
+        "1pl": называ́ем
+        "2pl": называ́ете
+        "3pl": называ́ют
+      past_m: называ́л
+      past_f: называ́ла
+      past_n: называ́ло
+      past_pl: называ́ли
+  "написать=to write":
+    cefr_level: A1
+    accented: написа́ть
+    aspect: pf
+    collections:
+      - school
+      - communication
+    en_gb:
+      standard: to write (to put words on paper, on one occasion)
+    usage:
+      - ru: Я написа́л письмо́ другу́.
+        en_gb: I wrote a letter to a friend.
+    conjugation:
+      future:
+        "1sg": напишу́
+        "2sg": напи́шешь
+        "3sg": напи́шет
+        "1pl": напи́шем
+        "2pl": напи́шете
+        "3pl": напи́шут
+      past_m: написа́л
+      past_f: написа́ла
+      past_n: написа́ло
+      past_pl: написа́ли
+  "начать=to begin":
+    cefr_level: A1
+    accented: нача́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to begin (to start)
+    usage:
+      - ru: Мы на́чали занима́ться в девять.
+        en_gb: We began studying at nine.
+    conjugation:
+      future:
+        "1sg": начну́
+        "2sg": начнёшь
+        "3sg": начнёт
+        "1pl": начнём
+        "2pl": начнёте
+        "3pl": начну́т
+      past_m: на́чал
+      past_f: начала́
+      past_n: на́чало
+      past_pl: на́чали
+  "начинать=to begin":
+    cefr_level: A1
+    accented: начина́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to begin (to start, habitually)
+    usage:
+      - ru: Он начина́ет рабо́ту в де́вять утра́.
+        en_gb: He begins work at nine in the morning.
+    conjugation:
+      present:
+        "1sg": начина́ю
+        "2sg": начина́ешь
+        "3sg": начина́ет
+        "1pl": начина́ем
+        "2pl": начина́ете
+        "3pl": начина́ют
+      past_m: начина́л
+      past_f: начина́ла
+      past_n: начина́ло
+      past_pl: начина́ли
+  "ненавидеть=to hate":
+    cefr_level: B1
+    accented: ненави́деть
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to hate (to feel strong dislike)
+    usage:
+      - ru: Он ненави́дит вста́вать ра́но.
+        en_gb: He hates getting up early.
+    conjugation:
+      present:
+        "1sg": ненави́жу
+        "2sg": ненави́дишь
+        "3sg": ненави́дит
+        "1pl": ненави́дим
+        "2pl": ненави́дите
+        "3pl": ненави́дят
+      past_m: ненави́дел
+      past_f: ненави́дела
+      past_n: ненави́дело
+      past_pl: ненави́дели
+  "нести=to be carrying":
+    cefr_level: B1
+    accented: нести́
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to be carrying (to hold and transport on foot, in one direction)
+    usage:
+      - ru: Она́ несёт тяжёлую су́мку.
+        en_gb: She is carrying a heavy bag.
+    conjugation:
+      present:
+        "1sg": несу́
+        "2sg": несёшь
+        "3sg": несёт
+        "1pl": несём
+        "2pl": несёте
+        "3pl": несу́т
+      past_m: нёс
+      past_f: несла́
+      past_n: несло́
+      past_pl: несли́
   "носить=to wear":
     cefr_level: A2
     accented: носи́ть
@@ -852,6 +2041,126 @@ words:
       past_f: носи́ла
       past_n: носи́ло
       past_pl: носи́ли
+  "обещать=to promise":
+    cefr_level: A2
+    accented: обеща́ть
+    aspect: impf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to promise (to give a word to do something)
+    usage:
+      - ru: Он обеща́ет прийти́ во́время.
+        en_gb: He promises to come on time.
+    conjugation:
+      present:
+        "1sg": обеща́ю
+        "2sg": обеща́ешь
+        "3sg": обеща́ет
+        "1pl": обеща́ем
+        "2pl": обеща́ете
+        "3pl": обеща́ют
+      past_m: обеща́л
+      past_f: обеща́ла
+      past_n: обеща́ло
+      past_pl: обеща́ли
+  "объяснить=to explain":
+    cefr_level: A2
+    accented: объясни́ть
+    aspect: pf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to explain (to make clear on one occasion)
+    usage:
+      - ru: Учи́тель объясни́л но́вое пра́вило.
+        en_gb: The teacher explained the new rule.
+    conjugation:
+      future:
+        "1sg": объясню́
+        "2sg": объясни́шь
+        "3sg": объясни́т
+        "1pl": объясни́м
+        "2pl": объясни́те
+        "3pl": объясня́т
+      past_m: объясни́л
+      past_f: объясни́ла
+      past_n: объясни́ло
+      past_pl: объясни́ли
+  "объяснять=to explain":
+    cefr_level: A2
+    accented: объясня́ть
+    aspect: impf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to explain (to make clear)
+    usage:
+      - ru: Она́ объясня́ет зада́ние студе́нтам.
+        en_gb: She explains the task to the students.
+    conjugation:
+      present:
+        "1sg": объясня́ю
+        "2sg": объясня́ешь
+        "3sg": объясня́ет
+        "1pl": объясня́ем
+        "2pl": объясня́ете
+        "3pl": объясня́ют
+      past_m: объясня́л
+      past_f: объясня́ла
+      past_n: объясня́ло
+      past_pl: объясня́ли
+  "ответить=to answer":
+    cefr_level: A1
+    accented: отве́тить
+    aspect: pf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to answer (to reply on one occasion)
+    usage:
+      - ru: Он отве́тил на все вопро́сы.
+        en_gb: He answered all the questions.
+    conjugation:
+      future:
+        "1sg": отве́чу
+        "2sg": отве́тишь
+        "3sg": отве́тит
+        "1pl": отве́тим
+        "2pl": отве́тите
+        "3pl": отве́тят
+      past_m: отве́тил
+      past_f: отве́тила
+      past_n: отве́тило
+      past_pl: отве́тили
+  "отвечать=to answer":
+    cefr_level: A1
+    accented: отвеча́ть
+    aspect: impf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to answer (to reply)
+    usage:
+      - ru: Студе́нты отвеча́ют на вопро́сы.
+        en_gb: The students answer the questions.
+    conjugation:
+      present:
+        "1sg": отвеча́ю
+        "2sg": отвеча́ешь
+        "3sg": отвеча́ет
+        "1pl": отвеча́ем
+        "2pl": отвеча́ете
+        "3pl": отвеча́ют
+      past_m: отвеча́л
+      past_f: отвеча́ла
+      past_n: отвеча́ло
+      past_pl: отвеча́ли
   "отдыхать=to rest":
     cefr_level: A2
     accented: отдыха́ть
@@ -876,6 +2185,30 @@ words:
       past_f: отдыха́ла
       past_n: отдыха́ло
       past_pl: отдыха́ли
+  "падать=to fall":
+    cefr_level: A2
+    accented: па́дать
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to fall (to drop down)
+    usage:
+      - ru: Ле́том листья́ не па́дают.
+        en_gb: In summer the leaves don't fall.
+    conjugation:
+      present:
+        "1sg": па́даю
+        "2sg": па́даешь
+        "3sg": па́дает
+        "1pl": па́даем
+        "2pl": па́даете
+        "3pl": па́дают
+      past_m: па́дал
+      past_f: па́дала
+      past_n: па́дало
+      past_pl: па́дали
   "парить=to steam":
     cefr_level: B2
     accented: па́рить
@@ -1076,6 +2409,32 @@ words:
       past_f: плати́ла
       past_n: плати́ло
       past_pl: плати́ли
+  "плыть=to be swimming":
+    cefr_level: A2
+    accented: плыть
+    aspect: impf
+    collections:
+      - motion
+      - nature
+    en_gb:
+      standard: to be swimming (to move through water, in one direction)
+      alt:
+        - to be sailing
+    usage:
+      - ru: Ло́дка плывёт по реке́.
+        en_gb: The boat is sailing along the river.
+    conjugation:
+      present:
+        "1sg": плыву́
+        "2sg": плывёшь
+        "3sg": плывёт
+        "1pl": плывём
+        "2pl": плывёте
+        "3pl": плыву́т
+      past_m: плыл
+      past_f: плыла́
+      past_n: плы́ло
+      past_pl: плы́ли
   "побеждать=to win":
     cefr_level: B2
     accented: побежда́ть
@@ -1102,6 +2461,126 @@ words:
       past_f: побежда́ла
       past_n: побежда́ло
       past_pl: побежда́ли
+  "подниматься=to go up":
+    cefr_level: B1
+    accented: поднима́ться
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to go up (to move upward, habitually or repeatedly)
+      alt:
+        - to rise
+    usage:
+      - ru: Мы поднима́емся на го́ру ка́ждое ле́то.
+        en_gb: We go up the mountain every summer.
+    conjugation:
+      present:
+        "1sg": поднима́юсь
+        "2sg": поднима́ешься
+        "3sg": поднима́ется
+        "1pl": поднима́емся
+        "2pl": поднима́етесь
+        "3pl": поднима́ются
+      past_m: поднима́лся
+      past_f: поднима́лась
+      past_n: поднима́лось
+      past_pl: поднима́лись
+  "подняться=to go up":
+    cefr_level: B1
+    accented: подня́ться
+    aspect: pf
+    collections:
+      - motion
+    en_gb:
+      standard: to go up (to rise on one occasion)
+    usage:
+      - ru: Он подня́лся на вто́рой эта́ж.
+        en_gb: He went up to the second floor.
+    conjugation:
+      future:
+        "1sg": подниму́сь
+        "2sg": подни́мешься
+        "3sg": подни́мется
+        "1pl": подни́мемся
+        "2pl": подни́метесь
+        "3pl": подни́мутся
+      past_m: подня́лся
+      past_f: поднялась́
+      past_n: подняло́сь
+      past_pl: подняли́сь
+  "подойти=to approach":
+    cefr_level: B1
+    accented: подойти́
+    aspect: pf
+    collections:
+      - motion
+    en_gb:
+      standard: to approach (to walk up to)
+    usage:
+      - ru: Он подошёл к окну́.
+        en_gb: He approached the window.
+    conjugation:
+      future:
+        "1sg": подойду́
+        "2sg": подойдёшь
+        "3sg": подойдёт
+        "1pl": подойдём
+        "2pl": подойдёте
+        "3pl": подойду́т
+      past_m: подошёл
+      past_f: подошла́
+      past_n: подошло́
+      past_pl: подошли́
+  "подходить=to approach":
+    cefr_level: B1
+    accented: подходи́ть
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to approach (to walk up to, habitually or repeatedly)
+    usage:
+      - ru: Не подходи́ к краю́!
+        en_gb: Don't approach the edge!
+    conjugation:
+      present:
+        "1sg": подхожу́
+        "2sg": подхо́дишь
+        "3sg": подхо́дит
+        "1pl": подхо́дим
+        "2pl": подхо́дите
+        "3pl": подхо́дят
+      past_m: подходи́л
+      past_f: подходи́ла
+      past_n: подходи́ло
+      past_pl: подходи́ли
+  "позвонить=to call":
+    cefr_level: A1
+    accented: позвони́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to call (to phone once)
+      alt:
+        - to ring
+    usage:
+      - ru: Позвони́ мне ве́чером.
+        en_gb: Call me in the evening.
+    conjugation:
+      future:
+        "1sg": позвоню́
+        "2sg": позвони́шь
+        "3sg": позвони́т
+        "1pl": позвони́м
+        "2pl": позвони́те
+        "3pl": позвоня́т
+      past_m: позвони́л
+      past_f: позвони́ла
+      past_n: позвони́ло
+      past_pl: позвони́ли
   "покупать=to buy":
     cefr_level: A2
     accented: покупа́ть
@@ -1127,6 +2606,30 @@ words:
       past_f: покупа́ла
       past_n: покупа́ло
       past_pl: покупа́ли
+  "ползти=to crawl":
+    cefr_level: B2
+    accented: ползти́
+    aspect: impf
+    collections:
+      - motion
+      - animals
+    en_gb:
+      standard: to crawl (to move on hands and knees, or to creep)
+    usage:
+      - ru: Улитка по́лзет по листу́.
+        en_gb: The snail is crawling along the leaf.
+    conjugation:
+      present:
+        "1sg": ползу́
+        "2sg": ползёшь
+        "3sg": ползёт
+        "1pl": ползём
+        "2pl": ползёте
+        "3pl": ползу́т
+      past_m: полз
+      past_f: ползла́
+      past_n: ползло́
+      past_pl: ползли́
   "поливать=to water":
     cefr_level: B1
     accented: полива́ть
@@ -1150,6 +2653,29 @@ words:
       past_f: полива́ла
       past_n: полива́ло
       past_pl: полива́ли
+  "помнить=to remember":
+    cefr_level: A2
+    accented: по́мнить
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to remember (to have in one's memory)
+    usage:
+      - ru: Я хорошо́ по́мню э́тот день.
+        en_gb: I remember that day well.
+    conjugation:
+      present:
+        "1sg": по́мню
+        "2sg": по́мнишь
+        "3sg": по́мнит
+        "1pl": по́мним
+        "2pl": по́мните
+        "3pl": по́мнят
+      past_m: по́мнил
+      past_f: по́мнила
+      past_n: по́мнило
+      past_pl: по́мнили
   "помогать=to help":
     cefr_level: A2
     accented: помога́ть
@@ -1199,6 +2725,78 @@ words:
       past_f: понима́ла
       past_n: понима́ло
       past_pl: понима́ли
+  "понять=to understand":
+    cefr_level: A1
+    accented: поня́ть
+    aspect: pf
+    collections:
+      - school
+      - daily life
+    en_gb:
+      standard: to understand (to grasp meaning, on one occasion)
+    usage:
+      - ru: Я на́конец по́нял э́то пра́вило.
+        en_gb: I finally understood this rule.
+    conjugation:
+      future:
+        "1sg": пойму́
+        "2sg": поймёшь
+        "3sg": поймёт
+        "1pl": поймём
+        "2pl": поймёте
+        "3pl": пойму́т
+      past_m: по́нял
+      past_f: поняла́
+      past_n: по́няло
+      past_pl: по́няли
+  "пообещать=to promise":
+    cefr_level: A2
+    accented: пообеща́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to promise (to give a firm commitment)
+    usage:
+      - ru: Он пообеща́л верну́ться.
+        en_gb: He promised to return.
+    conjugation:
+      future:
+        "1sg": пообеща́ю
+        "2sg": пообеща́ешь
+        "3sg": пообеща́ет
+        "1pl": пообеща́ем
+        "2pl": пообеща́ете
+        "3pl": пообеща́ют
+      past_m: пообеща́л
+      past_f: пообеща́ла
+      past_n: пообеща́ло
+      past_pl: пообеща́ли
+  "попросить=to ask for":
+    cefr_level: A2
+    accented: попроси́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to ask for (to request on one occasion)
+    usage:
+      - ru: Он попроси́л меня́ о по́мощи.
+        en_gb: He asked me for help.
+    conjugation:
+      future:
+        "1sg": попрошу́
+        "2sg": попро́сишь
+        "3sg": попро́сит
+        "1pl": попро́сим
+        "2pl": попро́сите
+        "3pl": попро́сят
+      past_m: попроси́л
+      past_f: попроси́ла
+      past_n: попроси́ло
+      past_pl: попроси́ли
   "править=to rule":
     cefr_level: B2
     accented: пра́вить
@@ -1223,6 +2821,152 @@ words:
       past_f: пра́вила
       past_n: пра́вило
       past_pl: пра́вили
+  "предлагать=to suggest":
+    cefr_level: B1
+    accented: предлага́ть
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to suggest (to put forward an idea)
+      alt:
+        - to offer
+    usage:
+      - ru: Он предлага́ет но́вое реше́ние.
+        en_gb: He is suggesting a new solution.
+    conjugation:
+      present:
+        "1sg": предлага́ю
+        "2sg": предлага́ешь
+        "3sg": предлага́ет
+        "1pl": предлага́ем
+        "2pl": предлага́ете
+        "3pl": предлага́ют
+      past_m: предлага́л
+      past_f: предлага́ла
+      past_n: предлага́ло
+      past_pl: предлага́ли
+  "предложить=to suggest":
+    cefr_level: B1
+    accented: предложи́ть
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to suggest (to put forward an idea, on one occasion)
+      alt:
+        - to offer
+    usage:
+      - ru: Она́ предложи́ла пойти́ в кино́.
+        en_gb: She suggested going to the cinema.
+    conjugation:
+      future:
+        "1sg": предложу́
+        "2sg": предло́жишь
+        "3sg": предло́жит
+        "1pl": предло́жим
+        "2pl": предло́жите
+        "3pl": предло́жат
+      past_m: предложи́л
+      past_f: предложи́ла
+      past_n: предложи́ло
+      past_pl: предложи́ли
+  "приезжать=to arrive by transport":
+    cefr_level: A2
+    accented: приезжа́ть
+    aspect: impf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to arrive by transport (to come by vehicle, habitually)
+    usage:
+      - ru: Он приезжа́ет к нам ка́ждое ле́то.
+        en_gb: He comes to visit us every summer.
+    conjugation:
+      present:
+        "1sg": приезжа́ю
+        "2sg": приезжа́ешь
+        "3sg": приезжа́ет
+        "1pl": приезжа́ем
+        "2pl": приезжа́ете
+        "3pl": приезжа́ют
+      past_m: приезжа́л
+      past_f: приезжа́ла
+      past_n: приезжа́ло
+      past_pl: приезжа́ли
+  "приехать=to arrive by transport":
+    cefr_level: A2
+    accented: прие́хать
+    aspect: pf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to arrive by transport (to come by vehicle on one occasion)
+    usage:
+      - ru: Они́ прие́хали из Москвы́ вчера́.
+        en_gb: They arrived from Moscow yesterday.
+    conjugation:
+      future:
+        "1sg": прие́ду
+        "2sg": прие́дешь
+        "3sg": прие́дет
+        "1pl": прие́дем
+        "2pl": прие́дете
+        "3pl": прие́дут
+      past_m: прие́хал
+      past_f: прие́хала
+      past_n: прие́хало
+      past_pl: прие́хали
+  "прийти=to come":
+    cefr_level: A2
+    accented: прийти́
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to come (to arrive on foot, on one occasion)
+    usage:
+      - ru: Он пришёл до́мой по́здно.
+        en_gb: He came home late.
+    conjugation:
+      future:
+        "1sg": приду́
+        "2sg": придёшь
+        "3sg": придёт
+        "1pl": придём
+        "2pl": придёте
+        "3pl": приду́т
+      past_m: пришёл
+      past_f: пришла́
+      past_n: пришло́
+      past_pl: пришли́
+  "приходить=to come":
+    cefr_level: A2
+    accented: приходи́ть
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to come (to arrive on foot, habitually or repeatedly)
+    usage:
+      - ru: Он прихо́дит на рабо́ту ра́но.
+        en_gb: He comes to work early.
+    conjugation:
+      present:
+        "1sg": прихожу́
+        "2sg": прихо́дишь
+        "3sg": прихо́дит
+        "1pl": прихо́дим
+        "2pl": прихо́дите
+        "3pl": прихо́дят
+      past_m: приходи́л
+      past_f: приходи́ла
+      past_n: приходи́ло
+      past_pl: приходи́ли
   "продавать=to sell":
     cefr_level: A2
     accented: продава́ть
@@ -1248,6 +2992,77 @@ words:
       past_f: продава́ла
       past_n: продава́ло
       past_pl: продава́ли
+  "просить=to ask for":
+    cefr_level: A2
+    accented: проси́ть
+    aspect: impf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to ask for (to request)
+    usage:
+      - ru: Она́ про́сит меня́ помо́чь.
+        en_gb: She is asking me to help.
+    conjugation:
+      present:
+        "1sg": прошу́
+        "2sg": про́сишь
+        "3sg": про́сит
+        "1pl": про́сим
+        "2pl": про́сите
+        "3pl": про́сят
+      past_m: проси́л
+      past_f: проси́ла
+      past_n: проси́ло
+      past_pl: проси́ли
+  "прочитать=to read":
+    cefr_level: A1
+    accented: прочита́ть
+    aspect: pf
+    collections:
+      - reading
+      - school
+    en_gb:
+      standard: to read (to read through to the end)
+    usage:
+      - ru: Я прочита́л э́ту кни́гу за неде́лю.
+        en_gb: I read this book in a week.
+    conjugation:
+      future:
+        "1sg": прочита́ю
+        "2sg": прочита́ешь
+        "3sg": прочита́ет
+        "1pl": прочита́ем
+        "2pl": прочита́ете
+        "3pl": прочита́ют
+      past_m: прочита́л
+      past_f: прочита́ла
+      past_n: прочита́ло
+      past_pl: прочита́ли
+  "прыгать=to jump":
+    cefr_level: A2
+    accented: пры́гать
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to jump (to leap into the air)
+    usage:
+      - ru: Де́ти пры́гают от ра́дости.
+        en_gb: The children are jumping for joy.
+    conjugation:
+      present:
+        "1sg": пры́гаю
+        "2sg": пры́гаешь
+        "3sg": пры́гает
+        "1pl": пры́гаем
+        "2pl": пры́гаете
+        "3pl": пры́гают
+      past_m: пры́гал
+      past_f: пры́гала
+      past_n: пры́гало
+      past_pl: пры́гали
   "путешествовать=to travel":
     cefr_level: B1
     accented: путеше́ствовать
@@ -1273,6 +3088,32 @@ words:
       past_f: путеше́ствовала
       past_n: путеше́ствовало
       past_pl: путеше́ствовали
+  "пытаться=to attempt":
+    cefr_level: B1
+    accented: пыта́ться
+    aspect: impf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to attempt (to try to do something)
+      alt:
+        - to try
+    usage:
+      - ru: Он пыта́ется реши́ть задачу́.
+        en_gb: He is attempting to solve the problem.
+    conjugation:
+      present:
+        "1sg": пыта́юсь
+        "2sg": пыта́ешься
+        "3sg": пыта́ется
+        "1pl": пыта́емся
+        "2pl": пыта́етесь
+        "3pl": пыта́ются
+      past_m: пыта́лся
+      past_f: пыта́лась
+      past_n: пыта́лось
+      past_pl: пыта́лись
   "работать=to work":
     cefr_level: A1
     accented: рабо́тать
@@ -1297,6 +3138,31 @@ words:
       past_f: рабо́тала
       past_n: рабо́тало
       past_pl: рабо́тали
+  "радоваться=to be glad":
+    cefr_level: B1
+    accented: ра́доваться
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to be glad (to feel joy)
+      alt:
+        - to rejoice
+    usage:
+      - ru: Де́ти ра́дуются но́вым игру́шкам.
+        en_gb: The children are glad about the new toys.
+    conjugation:
+      present:
+        "1sg": ра́дуюсь
+        "2sg": ра́дуешься
+        "3sg": ра́дуется
+        "1pl": ра́дуемся
+        "2pl": ра́дуетесь
+        "3pl": ра́дуются
+      past_m: ра́довался
+      past_f: ра́довалась
+      past_n: ра́довалось
+      past_pl: ра́довались
   "разрешать=to allow":
     cefr_level: B1
     accented: разреша́ть
@@ -1323,6 +3189,52 @@ words:
       past_f: разреша́ла
       past_n: разреша́ло
       past_pl: разреша́ли
+  "рассказать=to tell":
+    cefr_level: A2
+    accented: рассказа́ть
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to tell (to narrate on one occasion)
+    usage:
+      - ru: Он рассказа́л нам о свое́й пое́здке.
+        en_gb: He told us about his trip.
+    conjugation:
+      future:
+        "1sg": расскажу́
+        "2sg": расска́жешь
+        "3sg": расска́жет
+        "1pl": расска́жем
+        "2pl": расска́жете
+        "3pl": расска́жут
+      past_m: рассказа́л
+      past_f: рассказа́ла
+      past_n: рассказа́ло
+      past_pl: рассказа́ли
+  "рассказывать=to tell":
+    cefr_level: A2
+    accented: расска́зывать
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to tell (to narrate)
+    usage:
+      - ru: Ба́бушка расска́зывает сказки дет́ям.
+        en_gb: Grandmother tells fairy tales to the children.
+    conjugation:
+      present:
+        "1sg": расска́зываю
+        "2sg": расска́зываешь
+        "3sg": расска́зывает
+        "1pl": расска́зываем
+        "2pl": расска́зываете
+        "3pl": расска́зывают
+      past_m: расска́зывал
+      past_f: расска́зывала
+      past_n: расска́зывало
+      past_pl: расска́зывали
   "расти=to grow":
     cefr_level: B1
     accented: расти́
@@ -1372,6 +3284,56 @@ words:
       past_f: ре́зала
       past_n: ре́зало
       past_pl: ре́зали
+  "решать=to decide":
+    cefr_level: A2
+    accented: реша́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to decide (to make a decision)
+      alt:
+        - to solve
+    usage:
+      - ru: Мы реша́ем, куда́ пойти́.
+        en_gb: We are deciding where to go.
+    conjugation:
+      present:
+        "1sg": реша́ю
+        "2sg": реша́ешь
+        "3sg": реша́ет
+        "1pl": реша́ем
+        "2pl": реша́ете
+        "3pl": реша́ют
+      past_m: реша́л
+      past_f: реша́ла
+      past_n: реша́ло
+      past_pl: реша́ли
+  "решить=to decide":
+    cefr_level: A2
+    accented: реши́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to decide (to make a decision, on one occasion)
+      alt:
+        - to solve
+    usage:
+      - ru: Он реши́л уе́хать за грани́цу.
+        en_gb: He decided to go abroad.
+    conjugation:
+      future:
+        "1sg": решу́
+        "2sg": реши́шь
+        "3sg": реши́т
+        "1pl": реши́м
+        "2pl": реши́те
+        "3pl": реша́т
+      past_m: реши́л
+      past_f: реши́ла
+      past_n: реши́ло
+      past_pl: реши́ли
   "рисовать=to draw":
     cefr_level: A2
     accented: рисова́ть
@@ -1397,6 +3359,30 @@ words:
       past_f: рисова́ла
       past_n: рисова́ло
       past_pl: рисова́ли
+  "садиться=to sit down":
+    cefr_level: A2
+    accented: сади́ться
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to sit down (to lower oneself into a sitting position, habitually)
+    usage:
+      - ru: Он всегда́ сади́тся у окна́.
+        en_gb: He always sits down by the window.
+    conjugation:
+      present:
+        "1sg": сажу́сь
+        "2sg": сади́шься
+        "3sg": сади́тся
+        "1pl": сади́мся
+        "2pl": сади́тесь
+        "3pl": садя́тся
+      past_m: сади́лся
+      past_f: сади́лась
+      past_n: сади́лось
+      past_pl: сади́лись
   "сажать=to plant":
     cefr_level: B1
     accented: сажа́ть
@@ -1421,6 +3407,78 @@ words:
       past_f: сажа́ла
       past_n: сажа́ло
       past_pl: сажа́ли
+  "сделать=to do/make":
+    cefr_level: A1
+    accented: сде́лать
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to do (to complete an action)
+      alt:
+        - to make
+    usage:
+      - ru: Я сде́лал до́машнее зада́ние.
+        en_gb: I did my homework.
+    conjugation:
+      future:
+        "1sg": сде́лаю
+        "2sg": сде́лаешь
+        "3sg": сде́лает
+        "1pl": сде́лаем
+        "2pl": сде́лаете
+        "3pl": сде́лают
+      past_m: сде́лал
+      past_f: сде́лала
+      past_n: сде́лало
+      past_pl: сде́лали
+  "сесть=to sit down":
+    cefr_level: A2
+    accented: сесть
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to sit down (to take a seat, on one occasion)
+    usage:
+      - ru: Она́ се́ла на скаме́йку.
+        en_gb: She sat down on the bench.
+    conjugation:
+      future:
+        "1sg": ся́ду
+        "2sg": ся́дешь
+        "3sg": ся́дет
+        "1pl": ся́дем
+        "2pl": ся́дете
+        "3pl": ся́дут
+      past_m: сел
+      past_f: се́ла
+      past_n: се́ло
+      past_pl: се́ли
+  "сказать=to say":
+    cefr_level: A1
+    accented: сказа́ть
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to say (to utter words, on one occasion)
+    usage:
+      - ru: Он сказа́л пра́вду.
+        en_gb: He said the truth.
+    conjugation:
+      future:
+        "1sg": скажу́
+        "2sg": ска́жешь
+        "3sg": ска́жет
+        "1pl": ска́жем
+        "2pl": ска́жете
+        "3pl": ска́жут
+      past_m: сказа́л
+      past_f: сказа́ла
+      past_n: сказа́ло
+      past_pl: сказа́ли
   "слушать=to listen":
     cefr_level: A1
     accented: слу́шать
@@ -1523,6 +3581,100 @@ words:
       past_f: собира́ла
       past_n: собира́ло
       past_pl: собира́ли
+  "согласиться=to agree":
+    cefr_level: B1
+    accented: согласи́ться
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to agree (to consent, on one occasion)
+    usage:
+      - ru: Он согласи́лся помо́чь нам.
+        en_gb: He agreed to help us.
+    conjugation:
+      future:
+        "1sg": соглашу́сь
+        "2sg": согласи́шься
+        "3sg": согласи́тся
+        "1pl": согласи́мся
+        "2pl": согласи́тесь
+        "3pl": соглася́тся
+      past_m: согласи́лся
+      past_f: согласи́лась
+      past_n: согласи́лось
+      past_pl: согласи́лись
+  "соглашаться=to agree":
+    cefr_level: B1
+    accented: соглаша́ться
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to agree (to consent)
+    usage:
+      - ru: Она́ всегда́ соглаша́ется с ним.
+        en_gb: She always agrees with him.
+    conjugation:
+      present:
+        "1sg": соглаша́юсь
+        "2sg": соглаша́ешься
+        "3sg": соглаша́ется
+        "1pl": соглаша́емся
+        "2pl": соглаша́етесь
+        "3pl": соглаша́ются
+      past_m: соглаша́лся
+      past_f: соглаша́лась
+      past_n: соглаша́лось
+      past_pl: соглаша́лись
+  "сообщать=to inform":
+    cefr_level: B1
+    accented: сообща́ть
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to inform (to report or announce)
+      alt:
+        - to report
+    usage:
+      - ru: Газе́та сообща́ет о но́вых собы́тиях.
+        en_gb: The newspaper reports on new events.
+    conjugation:
+      present:
+        "1sg": сообща́ю
+        "2sg": сообща́ешь
+        "3sg": сообща́ет
+        "1pl": сообща́ем
+        "2pl": сообща́ете
+        "3pl": сообща́ют
+      past_m: сообща́л
+      past_f: сообща́ла
+      past_n: сообща́ло
+      past_pl: сообща́ли
+  "сообщить=to inform":
+    cefr_level: B1
+    accented: сообщи́ть
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to inform (to report or announce, on one occasion)
+    usage:
+      - ru: Она́ сообщи́ла нам об э́том.
+        en_gb: She informed us about this.
+    conjugation:
+      future:
+        "1sg": сообщу́
+        "2sg": сообщи́шь
+        "3sg": сообщи́т
+        "1pl": сообщи́м
+        "2pl": сообщи́те
+        "3pl": сообща́т
+      past_m: сообщи́л
+      past_f: сообщи́ла
+      past_n: сообщи́ло
+      past_pl: сообщи́ли
   "спать=to sleep":
     cefr_level: A1
     accented: спать
@@ -1547,6 +3699,80 @@ words:
       past_f: спала́
       past_n: спа́ло
       past_pl: спа́ли
+  "спрашивать=to ask":
+    cefr_level: A1
+    accented: спра́шивать
+    aspect: impf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to ask (to put a question)
+    usage:
+      - ru: Он спра́шивает, где нахо́дится вокза́л.
+        en_gb: He is asking where the station is.
+    conjugation:
+      present:
+        "1sg": спра́шиваю
+        "2sg": спра́шиваешь
+        "3sg": спра́шивает
+        "1pl": спра́шиваем
+        "2pl": спра́шиваете
+        "3pl": спра́шивают
+      past_m: спра́шивал
+      past_f: спра́шивала
+      past_n: спра́шивало
+      past_pl: спра́шивали
+  "спросить=to ask":
+    cefr_level: A1
+    accented: спроси́ть
+    aspect: pf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to ask (to put a question, on one occasion)
+    usage:
+      - ru: Она́ спроси́ла меня́ о пла́нах.
+        en_gb: She asked me about my plans.
+    conjugation:
+      future:
+        "1sg": спрошу́
+        "2sg": спро́сишь
+        "3sg": спро́сит
+        "1pl": спро́сим
+        "2pl": спро́сите
+        "3pl": спро́сят
+      past_m: спроси́л
+      past_f: спроси́ла
+      past_n: спроси́ло
+      past_pl: спроси́ли
+  "стараться=to try hard":
+    cefr_level: A2
+    accented: стара́ться
+    aspect: impf
+    collections:
+      - daily life
+      - feelings and sensations
+    en_gb:
+      standard: to try hard (to make a great effort)
+      alt:
+        - to strive
+    usage:
+      - ru: Она́ стара́ется хорошо́ учи́ться.
+        en_gb: She tries hard to study well.
+    conjugation:
+      present:
+        "1sg": стара́юсь
+        "2sg": стара́ешься
+        "3sg": стара́ется
+        "1pl": стара́емся
+        "2pl": стара́етесь
+        "3pl": стара́ются
+      past_m: стара́лся
+      past_f: стара́лась
+      past_n: стара́лось
+      past_pl: стара́лись
   "стоить=to cost":
     cefr_level: A2
     accented: сто́ить
@@ -1704,6 +3930,31 @@ words:
       past_f: танцева́ла
       past_n: танцева́ло
       past_pl: танцева́ли
+  "тащить=to drag":
+    cefr_level: B1
+    accented: тащи́ть
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to drag (to pull along with effort)
+      alt:
+        - to haul
+    usage:
+      - ru: Он тащи́т тяжёлый чемода́н.
+        en_gb: He is dragging a heavy suitcase.
+    conjugation:
+      present:
+        "1sg": тащу́
+        "2sg": та́щишь
+        "3sg": та́щит
+        "1pl": та́щим
+        "2pl": та́щите
+        "3pl": та́щат
+      past_m: тащи́л
+      past_f: тащи́ла
+      past_n: тащи́ло
+      past_pl: тащи́ли
   "тратить=to spend":
     cefr_level: B1
     accented: тра́тить
@@ -1754,6 +4005,130 @@ words:
       past_f: убира́ла
       past_n: убира́ло
       past_pl: убира́ли
+  "уезжать=to leave by transport":
+    cefr_level: A2
+    accented: уезжа́ть
+    aspect: impf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to leave by transport (to depart by vehicle, habitually)
+    usage:
+      - ru: Он уезжа́ет из го́рода ка́ждую пя́тницу.
+        en_gb: He leaves the city by transport every Friday.
+    conjugation:
+      present:
+        "1sg": уезжа́ю
+        "2sg": уезжа́ешь
+        "3sg": уезжа́ет
+        "1pl": уезжа́ем
+        "2pl": уезжа́ете
+        "3pl": уезжа́ют
+      past_m: уезжа́л
+      past_f: уезжа́ла
+      past_n: уезжа́ло
+      past_pl: уезжа́ли
+  "уехать=to leave by transport":
+    cefr_level: A2
+    accented: уе́хать
+    aspect: pf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to leave by transport (to depart by vehicle, on one occasion)
+    usage:
+      - ru: Она́ уе́хала в Петербу́рг вчера́.
+        en_gb: She left for St Petersburg yesterday.
+    conjugation:
+      future:
+        "1sg": уе́ду
+        "2sg": уе́дешь
+        "3sg": уе́дет
+        "1pl": уе́дем
+        "2pl": уе́дете
+        "3pl": уе́дут
+      past_m: уе́хал
+      past_f: уе́хала
+      past_n: уе́хало
+      past_pl: уе́хали
+  "узнавать=to find out":
+    cefr_level: A2
+    accented: узнава́ть
+    aspect: impf
+    collections:
+      - daily life
+      - communication
+    en_gb:
+      standard: to find out (to discover information, habitually)
+      alt:
+        - to recognise
+    usage:
+      - ru: Она́ всегда́ узнаёт но́вости пе́рвой.
+        en_gb: She always finds out the news first.
+    conjugation:
+      present:
+        "1sg": узнаю́
+        "2sg": узнаёшь
+        "3sg": узнаёт
+        "1pl": узнаём
+        "2pl": узнаёте
+        "3pl": узнаю́т
+      past_m: узнава́л
+      past_f: узнава́ла
+      past_n: узнава́ло
+      past_pl: узнава́ли
+  "узнать=to find out":
+    cefr_level: A2
+    accented: узна́ть
+    aspect: pf
+    collections:
+      - daily life
+      - communication
+    en_gb:
+      standard: to find out (to discover information, on one occasion)
+      alt:
+        - to recognise
+    usage:
+      - ru: Я узна́л об э́том то́лько вчера́.
+        en_gb: I found out about this only yesterday.
+    conjugation:
+      future:
+        "1sg": узна́ю
+        "2sg": узна́ешь
+        "3sg": узна́ет
+        "1pl": узна́ем
+        "2pl": узна́ете
+        "3pl": узна́ют
+      past_m: узна́л
+      past_f: узна́ла
+      past_n: узна́ло
+      past_pl: узна́ли
+  "уйти=to leave":
+    cefr_level: A2
+    accented: уйти́
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to leave (to go away on foot, on one occasion)
+    usage:
+      - ru: Он ушёл не попроща́вшись.
+        en_gb: He left without saying goodbye.
+    conjugation:
+      future:
+        "1sg": уйду́
+        "2sg": уйдёшь
+        "3sg": уйдёт
+        "1pl": уйдём
+        "2pl": уйдёте
+        "3pl": уйду́т
+      past_m: ушёл
+      past_f: ушла́
+      past_n: ушло́
+      past_pl: ушли́
   "улыбаться=to smile":
     cefr_level: B1
     accented: улыба́ться
@@ -1778,6 +4153,30 @@ words:
       past_f: улыба́лась
       past_n: улыба́лось
       past_pl: улыба́лись
+  "уходить=to leave":
+    cefr_level: A2
+    accented: уходи́ть
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to leave (to go away on foot, habitually or repeatedly)
+    usage:
+      - ru: Он ухо́дит на рабо́ту в во́семь.
+        en_gb: He leaves for work at eight.
+    conjugation:
+      present:
+        "1sg": ухожу́
+        "2sg": ухо́дишь
+        "3sg": ухо́дит
+        "1pl": ухо́дим
+        "2pl": ухо́дите
+        "3pl": ухо́дят
+      past_m: уходи́л
+      past_f: уходи́ла
+      past_n: уходи́ло
+      past_pl: уходи́ли
   "учиться=to study":
     cefr_level: A1
     accented: учи́ться
@@ -1802,6 +4201,30 @@ words:
       past_f: учи́лась
       past_n: учи́лось
       past_pl: учи́лись
+  "ходить=to walk":
+    cefr_level: A1
+    accented: ходи́ть
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to walk (to go on foot, habitually or in multiple directions)
+    usage:
+      - ru: Он хо́дит в спортза́л три ра́за в неде́лю.
+        en_gb: He goes to the gym three times a week.
+    conjugation:
+      present:
+        "1sg": хожу́
+        "2sg": хо́дишь
+        "3sg": хо́дит
+        "1pl": хо́дим
+        "2pl": хо́дите
+        "3pl": хо́дят
+      past_m: ходи́л
+      past_f: ходи́ла
+      past_n: ходи́ло
+      past_pl: ходи́ли
   "хотеть=to want":
     cefr_level: A1
     accented: хоте́ть
