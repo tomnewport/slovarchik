@@ -388,6 +388,52 @@ words:
       pl_acc: а́рмии
       pl_ins: а́рмиями
       pl_pre: а́рмиях
+  "атлас=atlas":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - reading
+      - school
+    en_gb:
+      standard: atlas (a book of maps)
+    usage:
+      - ru: Я нашёл го́род в а́тласе.
+        en_gb: I found the city in the atlas.
+    declension:
+      sg_nom: а́тлас
+      sg_gen: а́тласа
+      sg_dat: а́тласу
+      sg_acc: а́тлас
+      sg_ins: а́тласом
+      sg_pre: а́тласе
+      pl_nom: а́тласы
+      pl_gen: а́тласов
+      pl_dat: а́тласам
+      pl_acc: а́тласы
+      pl_ins: а́тласами
+      pl_pre: а́тласах
+  "атлас=satin":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - clothes
+      - colours and textures
+    en_gb:
+      standard: satin (a smooth, glossy fabric)
+    usage:
+      - ru: Пла́тье сши́то из атла́са.
+        en_gb: The dress is made of satin.
+    declension:
+      sg_nom: атла́с
+      sg_gen: атла́са
+      sg_dat: атла́су
+      sg_acc: атла́с
+      sg_ins: атла́сом
+      sg_pre: атла́се
   "аэропорт=airport":
     cefr_level: A2
     gender: m
@@ -1935,6 +1981,56 @@ words:
       pl_acc: взя́тки
       pl_ins: взя́тками
       pl_pre: взя́тках
+  "видение=vision":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: vision (the faculty of sight; a way of seeing things)
+    usage:
+      - ru: У него́ своё ви́дение пробле́мы.
+        en_gb: He has his own vision of the problem.
+    declension:
+      sg_nom: ви́дение
+      sg_gen: ви́дения
+      sg_dat: ви́дению
+      sg_acc: ви́дение
+      sg_ins: ви́дением
+      sg_pre: ви́дении
+      pl_nom: ви́дения
+      pl_gen: ви́дений
+      pl_dat: ви́дениям
+      pl_acc: ви́дения
+      pl_ins: ви́дениями
+      pl_pre: ви́дениях
+  "видение=apparition":
+    cefr_level: C1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - faith
+    en_gb:
+      standard: apparition (a ghostly vision)
+    usage:
+      - ru: Ему́ яви́лось стра́нное виде́ние.
+        en_gb: A strange apparition appeared to him.
+    declension:
+      sg_nom: виде́ние
+      sg_gen: виде́ния
+      sg_dat: виде́нию
+      sg_acc: виде́ние
+      sg_ins: виде́нием
+      sg_pre: виде́нии
+      pl_nom: виде́ния
+      pl_gen: виде́ний
+      pl_dat: виде́ниям
+      pl_acc: виде́ния
+      pl_ins: виде́ниями
+      pl_pre: виде́ниях
   "виза=visa":
     cefr_level: B1
     gender: f
@@ -5293,6 +5389,52 @@ words:
       sg_acc: интерне́т
       sg_ins: интерне́том
       sg_pre: интерне́те
+  "ирис=iris":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - in the garden
+    en_gb:
+      standard: iris (the flower)
+    usage:
+      - ru: В саду́ расцвёл и́рис.
+        en_gb: An iris bloomed in the garden.
+    declension:
+      sg_nom: и́рис
+      sg_gen: и́риса
+      sg_dat: и́рису
+      sg_acc: и́рис
+      sg_ins: и́рисом
+      sg_pre: и́рисе
+      pl_nom: и́рисы
+      pl_gen: и́рисов
+      pl_dat: и́рисам
+      pl_acc: и́рисы
+      pl_ins: и́рисами
+      pl_pre: и́рисах
+  "ирис=toffee":
+    cefr_level: C1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - in the kitchen
+      - shopping
+    en_gb:
+      standard: toffee (a chewy iris-flavoured sweet)
+    usage:
+      - ru: Он купи́л па́чку ири́са.
+        en_gb: He bought a pack of toffee.
+    declension:
+      sg_nom: ири́с
+      sg_gen: ири́са
+      sg_dat: ири́су
+      sg_acc: ири́с
+      sg_ins: ири́сом
+      sg_pre: ири́се
   "иск=lawsuit":
     cefr_level: B2
     gender: m
@@ -9186,6 +9328,51 @@ words:
       sg_acc: му́зыку
       sg_ins: му́зыкой
       sg_pre: му́зыке
+  "мука=torment":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: torment (suffering, agony)
+    usage:
+      - ru: Ожида́ние бы́ло настоя́щей му́кой.
+        en_gb: The waiting was real torment.
+    declension:
+      sg_nom: му́ка
+      sg_gen: му́ки
+      sg_dat: му́ке
+      sg_acc: му́ку
+      sg_ins: му́кой
+      sg_pre: му́ке
+      pl_nom: му́ки
+      pl_gen: му́к
+      pl_dat: му́кам
+      pl_acc: му́ки
+      pl_ins: му́ками
+      pl_pre: му́ках
+  "мука=flour":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - in the kitchen
+      - shopping
+    en_gb:
+      standard: flour (ground grain for baking)
+    usage:
+      - ru: Для хле́ба нужна́ мука́.
+        en_gb: You need flour for bread.
+    declension:
+      sg_nom: мука́
+      sg_gen: муки́
+      sg_dat: муке́
+      sg_acc: муку́
+      sg_ins: муко́й
+      sg_pre: муке́
   "муха=fly":
     cefr_level: B1
     gender: f
@@ -10376,6 +10563,61 @@ words:
       pl_acc: опера́ции
       pl_ins: опера́циями
       pl_pre: опера́циях
+  "орган=bodily organ":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - parts of the body
+      - sickness and health
+    en_gb:
+      standard: bodily organ (a part of the body)
+      alt:
+        - organ
+    usage:
+      - ru: Се́рдце — ва́жный о́рган.
+        en_gb: The heart is an important organ.
+    declension:
+      sg_nom: о́рган
+      sg_gen: о́ргана
+      sg_dat: о́ргану
+      sg_acc: о́рган
+      sg_ins: о́рганом
+      sg_pre: о́ргане
+      pl_nom: о́рганы
+      pl_gen: о́рганов
+      pl_dat: о́рганам
+      pl_acc: о́рганы
+      pl_ins: о́рганами
+      pl_pre: о́рганах
+  "орган=pipe organ":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: pipe organ (the keyboard musical instrument)
+      alt:
+        - organ
+    usage:
+      - ru: В собо́ре игра́л орга́н.
+        en_gb: The organ was playing in the cathedral.
+    declension:
+      sg_nom: орга́н
+      sg_gen: орга́на
+      sg_dat: орга́ну
+      sg_acc: орга́н
+      sg_ins: орга́ном
+      sg_pre: орга́не
+      pl_nom: орга́ны
+      pl_gen: орга́нов
+      pl_dat: орга́нам
+      pl_acc: орга́ны
+      pl_ins: орга́нами
+      pl_pre: орга́нах
   "оркестр=orchestra":
     cefr_level: B2
     gender: m
@@ -18630,6 +18872,51 @@ words:
       sg_acc: хлеб
       sg_ins: хле́бом
       sg_pre: хле́бе
+  "хлопок=cotton":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - clothes
+      - craft and construction
+    en_gb:
+      standard: cotton (the soft fibre or fabric)
+    usage:
+      - ru: Э́та руба́шка из хло́пка.
+        en_gb: This shirt is made of cotton.
+    declension:
+      sg_nom: хло́пок
+      sg_gen: хло́пка
+      sg_dat: хло́пку
+      sg_acc: хло́пок
+      sg_ins: хло́пком
+      sg_pre: хло́пке
+  "хлопок=clap":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: clap (a sudden sharp sound, a bang)
+    usage:
+      - ru: Разда́лся гро́мкий хлопо́к.
+        en_gb: A loud clap rang out.
+    declension:
+      sg_nom: хлопо́к
+      sg_gen: хлопка́
+      sg_dat: хлопку́
+      sg_acc: хлопо́к
+      sg_ins: хлопко́м
+      sg_pre: хлопке́
+      pl_nom: хлопки́
+      pl_gen: хлопко́в
+      pl_dat: хлопка́м
+      pl_acc: хлопки́
+      pl_ins: хлопка́ми
+      pl_pre: хлопка́х
   "холодильник=fridge":
     cefr_level: A2
     gender: m

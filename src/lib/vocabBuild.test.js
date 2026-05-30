@@ -41,6 +41,98 @@ words:
   })
 })
 
+describe('heteronyms', () => {
+  it('auto-links same-spelling headwords that differ only in stress', () => {
+    const text = `
+words:
+  "замок=lock":
+    cefr_level: A2
+    accented: замо́к
+    en_gb:
+      standard: lock
+    declension:
+      sg_nom: замо́к
+  "замок=castle":
+    cefr_level: A2
+    accented: за́мок
+    en_gb:
+      standard: castle
+    declension:
+      sg_nom: за́мок
+`
+    const words = buildWords([{ pos: 'noun', text }])
+    const lock = words.find((w) => w.key === 'замок=lock')
+    expect(lock.heteronyms).toEqual([
+      { ru: 'замо́к', gloss: 'lock' },
+      { ru: 'за́мок', gloss: 'castle' },
+    ])
+  })
+
+  it('does not link headwords that share both spelling and stress', () => {
+    const text = `
+words:
+  "коса=plait":
+    cefr_level: B1
+    accented: коса́
+    en_gb:
+      standard: plait
+    declension:
+      sg_nom: коса́
+  "коса=scythe":
+    cefr_level: B1
+    accented: коса́
+    en_gb:
+      standard: scythe
+    declension:
+      sg_nom: коса́
+`
+    const words = buildWords([{ pos: 'noun', text }])
+    for (const w of words) expect(w.heteronyms).toEqual([])
+  })
+
+  it('falls back to an empty gloss rather than "undefined" when a meaning is missing', () => {
+    const text = `
+words:
+  "замок=lock":
+    cefr_level: A2
+    accented: замо́к
+    declension:
+      sg_nom: замо́к
+  "замок=castle":
+    cefr_level: A2
+    accented: за́мок
+    declension:
+      sg_nom: за́мок
+`
+    const words = buildWords([{ pos: 'noun', text }])
+    for (const w of words) {
+      for (const h of w.heteronyms) expect(h.gloss).not.toContain('undefined')
+    }
+  })
+
+  it('honours an explicit heteronyms annotation over auto-detection', () => {
+    const text = `
+words:
+  "стоить=to cost":
+    cefr_level: A2
+    accented: сто́ить
+    heteronyms:
+      - ru: сто́ит
+        gloss: it costs
+      - ru: стои́т
+        gloss: it stands
+    en_gb:
+      standard: to cost
+`
+    const [cost] = buildWords([{ pos: 'verb', text }])
+    expect(cost.heteronyms).toEqual([
+      { ru: 'сто́ит', gloss: 'it costs' },
+      { ru: 'стои́т', gloss: 'it stands' },
+    ])
+    expect(shapeVocab([cost])[0].heteronyms).toEqual(cost.heteronyms)
+  })
+})
+
 describe('the bundled vocabulary fixtures', () => {
   const words = loadFixtureWords()
 
