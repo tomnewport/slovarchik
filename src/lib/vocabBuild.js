@@ -39,6 +39,29 @@ function glossNote(text) {
   return m ? m[1].trim() : ''
 }
 
+/**
+ * Normalise an explicit `heteronyms` annotation into {ru, gloss} entries.
+ *
+ * Heteronyms link at two levels and an author picks one per word:
+ *  - Headword level (за́мок "castle" vs замо́к "lock") is detected automatically
+ *    by linkHeteronyms — no annotation needed.
+ *  - Inflected level, where only a conjugated/declined form collides while the
+ *    dictionary forms differ (стоить → сто́ит vs стоять → стои́т), can't be
+ *    auto-detected, so the author writes the contrasting forms out explicitly:
+ *      heteronyms:
+ *        - { ru: сто́ит, gloss: it costs }
+ *        - { ru: стои́т, gloss: it stands }
+ */
+function normalizeHeteronyms(raw) {
+  if (!Array.isArray(raw)) return []
+  return raw
+    .map((h) => ({
+      ru: String(h?.ru ?? h?.form ?? '').trim(),
+      gloss: String(h?.gloss ?? h?.en ?? '').trim(),
+    }))
+    .filter((h) => h.ru)
+}
+
 /** Convert a flat declension map (sg_nom, pl_gen, …) into nested forms. */
 function nestForms(declension, numbers) {
   const forms = {}
@@ -97,7 +120,38 @@ function normalizeWord(pos, key, word) {
     animate: word.animacy === 'a',
     numbers,
     forms,
+    // Confusable same-spelling forms whose stress carries the meaning. An
+    // explicit annotation wins; otherwise buildWords fills this in for headword
+    // collisions (за́мок "castle" vs замо́к "lock").
+    heteronyms: normalizeHeteronyms(word.heteronyms),
     extra: word,
+  }
+}
+
+/**
+ * Link heteronyms across the word list: entries whose accented headwords share
+ * the same letters but differ in stress. Each unannotated member inherits a
+ * contrast set listing every spelling (itself first) so a drill can remind the
+ * learner which stress goes with which meaning.
+ */
+function linkHeteronyms(words) {
+  const byBare = new Map()
+  for (const w of words) {
+    const k = stripStress(w.headword).toLowerCase()
+    if (!byBare.has(k)) byBare.set(k, [])
+    byBare.get(k).push(w)
+  }
+  for (const group of byBare.values()) {
+    // A real heteronym needs ≥2 entries whose *stressed* forms actually differ;
+    // matching stress is just a homonym and stress can't tell them apart.
+    if (group.length < 2 || new Set(group.map((w) => w.headword)).size < 2) continue
+    for (const w of group) {
+      if (w.heteronyms.length) continue
+      w.heteronyms = [w, ...group.filter((m) => m !== w)].map((m) => ({
+        ru: m.headword,
+        gloss: m.meaning ?? '',
+      }))
+    }
   }
 }
 
@@ -115,6 +169,7 @@ export function buildWords(files) {
       out.push(normalizeWord(pos, key, word ?? {}))
     }
   }
+  linkHeteronyms(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
@@ -128,6 +183,7 @@ export function shapeVocab(words) {
     pos: w.pos,
     cefr: w.cefr,
     note: w.meaningNote,
+    heteronyms: w.heteronyms,
   }))
 }
 

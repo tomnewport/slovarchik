@@ -876,6 +876,52 @@ words:
       past_f: отдыха́ла
       past_n: отдыха́ло
       past_pl: отдыха́ли
+  "парить=to steam":
+    cefr_level: B2
+    accented: па́рить
+    aspect: impf
+    collections:
+      - in the kitchen
+    en_gb:
+      standard: to steam (to cook or treat with steam)
+    usage:
+      - ru: Я люблю́ па́рить о́вощи.
+        en_gb: I like to steam vegetables.
+    conjugation:
+      present:
+        "1sg": па́рю
+        "2sg": па́ришь
+        "3sg": па́рит
+        "1pl": па́рим
+        "2pl": па́рите
+        "3pl": па́рят
+      past_m: па́рил
+      past_f: па́рила
+      past_n: па́рило
+      past_pl: па́рили
+  "парить=to soar":
+    cefr_level: C1
+    accented: пари́ть
+    aspect: impf
+    collections:
+      - nature
+    en_gb:
+      standard: to soar (to glide high in the air)
+    usage:
+      - ru: Орёл пари́т в не́бе.
+        en_gb: The eagle soars in the sky.
+    conjugation:
+      present:
+        "1sg": парю́
+        "2sg": пари́шь
+        "3sg": пари́т
+        "1pl": пари́м
+        "2pl": пари́те
+        "3pl": паря́т
+      past_m: пари́л
+      past_f: пари́ла
+      past_n: пари́ло
+      past_pl: пари́ли
   "петь=to sing":
     cefr_level: A2
     accented: петь
@@ -976,6 +1022,11 @@ words:
     cefr_level: B1
     accented: пла́кать
     aspect: impf
+    heteronyms:
+      - ru: пла́чу
+        gloss: I cry
+      - ru: плачу́
+        gloss: I pay
     collections:
       - feelings and sensations
     en_gb:
@@ -999,6 +1050,11 @@ words:
     cefr_level: A2
     accented: плати́ть
     aspect: impf
+    heteronyms:
+      - ru: плачу́
+        gloss: I pay
+      - ru: пла́чу
+        gloss: I cry
     collections:
       - finance
       - shopping
@@ -1495,6 +1551,11 @@ words:
     cefr_level: A2
     accented: сто́ить
     aspect: impf
+    heteronyms:
+      - ru: сто́ит
+        gloss: it costs
+      - ru: стои́т
+        gloss: it stands
     collections:
       - finance
       - shopping
@@ -1515,6 +1576,34 @@ words:
       past_f: сто́ила
       past_n: сто́ило
       past_pl: сто́или
+  "стоять=to stand":
+    cefr_level: A1
+    accented: стоя́ть
+    aspect: impf
+    heteronyms:
+      - ru: стои́т
+        gloss: it stands
+      - ru: сто́ит
+        gloss: it costs
+    collections:
+      - daily life
+    en_gb:
+      standard: to stand (to be upright)
+    usage:
+      - ru: Он стои́т у окна́.
+        en_gb: He is standing by the window.
+    conjugation:
+      present:
+        "1sg": стою́
+        "2sg": стои́шь
+        "3sg": стои́т
+        "1pl": стои́м
+        "2pl": стои́те
+        "3pl": стоя́т
+      past_m: стоя́л
+      past_f: стоя́ла
+      past_n: стоя́ло
+      past_pl: стоя́ли
   "стрелять=to shoot":
     cefr_level: B2
     accented: стреля́ть
