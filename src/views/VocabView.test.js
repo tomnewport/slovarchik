@@ -116,6 +116,29 @@ describe('VocabView', () => {
     expect(wrapper.text()).toContain('Next')
   })
 
+  it('clears a heteronym pair in easy mode without the typing-mode pause', async () => {
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[0].trigger('click') // easy / match
+
+    // Force the board to a heteronym word; matching goes through resolveMatch(),
+    // not record(), so the auto-advance pause must not apply here.
+    const cost = shapeVocab(loadFixtureWords()).find((w) => w.id === 'стоить=to cost')
+    expect(cost.heteronyms.length).toBeGreaterThan(0)
+    wrapper.vm.boardLeft = [cost]
+    wrapper.vm.boardRight = [cost]
+    await wrapper.vm.$nextTick()
+
+    const left = wrapper.findAll('.match-col')[0].findAll('button.match-item')
+    const right = wrapper.findAll('.match-col')[1].findAll('button.match-item')
+    await left[0].trigger('click')
+    await right[0].trigger('click')
+
+    expect(wrapper.vm.score.right).toBe(1)
+    expect(left[0].classes()).toContain('matched')
+    // No reminder / Next button in the matching flow.
+    expect(wrapper.text()).not.toContain('Heteronym')
+  })
+
   it('highlights the Russian answer letters on the keyboard in intermediate EN → RU', async () => {
     const wrapper = mount(VocabView)
     // Switch to EN → RU so the answer is Russian (the on-screen keyboard case).

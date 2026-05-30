@@ -39,7 +39,19 @@ function glossNote(text) {
   return m ? m[1].trim() : ''
 }
 
-/** Normalise an explicit `heteronyms` annotation into {ru, gloss} entries. */
+/**
+ * Normalise an explicit `heteronyms` annotation into {ru, gloss} entries.
+ *
+ * Heteronyms link at two levels and an author picks one per word:
+ *  - Headword level (за́мок "castle" vs замо́к "lock") is detected automatically
+ *    by linkHeteronyms — no annotation needed.
+ *  - Inflected level, where only a conjugated/declined form collides while the
+ *    dictionary forms differ (стоить → сто́ит vs стоять → стои́т), can't be
+ *    auto-detected, so the author writes the contrasting forms out explicitly:
+ *      heteronyms:
+ *        - { ru: сто́ит, gloss: it costs }
+ *        - { ru: стои́т, gloss: it stands }
+ */
 function normalizeHeteronyms(raw) {
   if (!Array.isArray(raw)) return []
   return raw
@@ -137,7 +149,7 @@ function linkHeteronyms(words) {
       if (w.heteronyms.length) continue
       w.heteronyms = [w, ...group.filter((m) => m !== w)].map((m) => ({
         ru: m.headword,
-        gloss: m.meaning,
+        gloss: m.meaning ?? '',
       }))
     }
   }

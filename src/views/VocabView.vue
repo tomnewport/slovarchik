@@ -337,7 +337,7 @@ onUnmounted(() => {
       <!-- Heteronym reminder: same spelling, the stress changes the meaning. -->
       <div v-if="heteronyms.length" class="card heteronym-note">
         <div class="muted" style="margin-bottom: 0.5rem">
-          ⚠ Heteronym — same spelling, but the stress changes the meaning:
+          Heteronym — same spelling, but the stress changes the meaning:
         </div>
         <div
           v-for="h in heteronyms"

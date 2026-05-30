@@ -37,6 +37,20 @@ describe('speech', () => {
     expect(spoken[0].lang).toBe('ru-RU')
   })
 
+  it('passes a heteronym stress mark through unchanged', () => {
+    const spoken = []
+    window.SpeechSynthesisUtterance = class {
+      constructor(text) {
+        this.text = text
+      }
+    }
+    window.speechSynthesis = { cancel: vi.fn(), speak: vi.fn((u) => spoken.push(u)) }
+
+    speak('сто́ит')
+    // The stress is the only thing telling сто́ит (costs) from стои́т (stands).
+    expect(spoken[0].text).toBe('сто́ит')
+  })
+
   it('does not speak empty text', () => {
     window.SpeechSynthesisUtterance = class {}
     window.speechSynthesis = { cancel: vi.fn(), speak: vi.fn() }

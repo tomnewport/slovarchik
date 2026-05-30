@@ -90,6 +90,26 @@ words:
     for (const w of words) expect(w.heteronyms).toEqual([])
   })
 
+  it('falls back to an empty gloss rather than "undefined" when a meaning is missing', () => {
+    const text = `
+words:
+  "замок=lock":
+    cefr_level: A2
+    accented: замо́к
+    declension:
+      sg_nom: замо́к
+  "замок=castle":
+    cefr_level: A2
+    accented: за́мок
+    declension:
+      sg_nom: за́мок
+`
+    const words = buildWords([{ pos: 'noun', text }])
+    for (const w of words) {
+      for (const h of w.heteronyms) expect(h.gloss).not.toContain('undefined')
+    }
+  })
+
   it('honours an explicit heteronyms annotation over auto-detection', () => {
     const text = `
 words:
