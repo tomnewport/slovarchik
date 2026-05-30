@@ -13,7 +13,26 @@ export const routes = [
   {
     path: '/declension',
     name: 'declension',
-    component: () => import('../views/DeclensionView.vue'),
+    component: () => import('../views/InflectionView.vue'),
+    props: { pos: 'noun' },
+  },
+  {
+    path: '/verbs',
+    name: 'verbs',
+    component: () => import('../views/InflectionView.vue'),
+    props: { pos: 'verb' },
+  },
+  {
+    path: '/pronouns',
+    name: 'pronouns',
+    component: () => import('../views/InflectionView.vue'),
+    props: { pos: 'pronoun' },
+  },
+  {
+    path: '/adjectives',
+    name: 'adjectives',
+    component: () => import('../views/InflectionView.vue'),
+    props: { pos: 'adjective' },
   },
   {
     path: '/numbers',
