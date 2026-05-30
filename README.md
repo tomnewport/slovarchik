@@ -6,6 +6,10 @@ Everything runs in your browser and works fully offline once loaded.
 
 🔗 **Live app: [tomnewport.github.io/slovarchik](https://tomnewport.github.io/slovarchik/)**
 
+> **Stack:** **Vue 3** + Vite 6 PWA (Vue Router, Vitest). It is **not** a React
+> app — there's no JSX or hooks. Agents and contributors: start with
+> [`AGENTS.md`](AGENTS.md) for a fast orientation. Details in [Tech](#tech) below.
+
 > **Status:** skeleton app. The core drills work end-to-end; the word/noun data
 > sets are intentionally small and meant to grow.
 
@@ -221,6 +225,10 @@ the schema above (keep each file sorted alphabetically by Russian) and bump its
 `declension.test.js` suites guard the shape — unique keys, a valid CEFR level, a
 meaning, accepted answers, and complete case tables for nouns. Noun endings (for
 the advanced drill) are derived automatically from the forms.
+
+📖 **Full reference:** [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md)
+documents every field, the per-part-of-speech schemas, stress marks, heteronyms,
+and exactly what the tests check.
 
 ## Deployment
 
