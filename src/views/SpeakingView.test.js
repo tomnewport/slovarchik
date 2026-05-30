@@ -74,8 +74,8 @@ describe('SpeakingView', () => {
     expect(wrapper.vm.result.correct).toBe(true)
     expect(wrapper.vm.score.right).toBe(1)
     expect(wrapper.text()).toContain('✓ Correct!')
-    // The match score and a per-word breakdown are shown.
-    expect(wrapper.text()).toContain('100% match')
+    // The letter-match score and a per-word breakdown are shown.
+    expect(wrapper.text()).toContain('100% letters')
     const words = wrapper.findAll('.word-diff span')
     expect(words.length).toBeGreaterThan(0)
     expect(words.every((w) => w.classes('word-hit'))).toBe(true)

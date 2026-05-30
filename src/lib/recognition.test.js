@@ -2,6 +2,8 @@ import { describe, it, expect, afterEach, vi } from 'vitest'
 import {
   recognitionSupported,
   spokenSimilarity,
+  levenshtein,
+  charSimilarity,
   wordDiff,
   isPass,
   gradeSpoken,
@@ -61,20 +63,56 @@ describe('isPass', () => {
   })
 })
 
+describe('levenshtein', () => {
+  it('counts insertions, deletions and substitutions', () => {
+    expect(levenshtein('kitten', 'sitting')).toBe(3)
+    expect(levenshtein('abc', 'abc')).toBe(0)
+    expect(levenshtein('', 'abc')).toBe(3)
+    expect(levenshtein('abc', '')).toBe(3)
+  })
+})
+
+describe('charSimilarity', () => {
+  it('is 1 for identical letters, ignoring stress, case, spaces and punctuation', () => {
+    expect(charSimilarity('Приве́т, как дела?', 'привет как дела')).toBe(1)
+  })
+
+  it('drops by one edit over the longer length', () => {
+    expect(charSimilarity('кот', 'кит')).toBeCloseTo(2 / 3)
+  })
+
+  it('treats empty-vs-empty as 1 and empty-vs-nonempty as 0', () => {
+    expect(charSimilarity('', '')).toBe(1)
+    expect(charSimilarity('', 'кот')).toBe(0)
+  })
+})
+
 describe('gradeSpoken', () => {
-  it('accepts an exact (normalised) match', () => {
-    const { correct, similarity } = gradeSpoken('Приве́т!', 'привет')
+  it('passes an exact match', () => {
+    const { correct, similarity, best } = gradeSpoken('Приве́т!', 'привет')
     expect(correct).toBe(true)
     expect(similarity).toBe(1)
+    expect(best).toBe('Приве́т!')
   })
 
-  it('accepts a close-enough match above the threshold', () => {
-    const { correct } = gradeSpoken('the cat is sleeping', 'the cat is asleep', 0.5)
+  it('passes when ~90%+ of the letters match (one wrong ending)', () => {
+    // 11 of 12 letters right → ≈ 0.92, above the 0.9 default.
+    expect(gradeSpoken('здравствуйти', 'здравствуйте').correct).toBe(true)
+  })
+
+  it('rejects an answer with too many wrong letters', () => {
+    expect(gradeSpoken('собака', 'большая кошка').correct).toBe(false)
+  })
+
+  it('keeps the most generous of several alternative guesses', () => {
+    const { correct, best } = gradeSpoken(['кошка большая', 'здравствуйте'], 'здравствуйте')
     expect(correct).toBe(true)
+    expect(best).toBe('здравствуйте')
   })
 
-  it('rejects an answer below the threshold', () => {
-    expect(gradeSpoken('собака', 'большая красивая кошка').correct).toBe(false)
+  it('honours a custom threshold', () => {
+    expect(gradeSpoken('кот', 'кит', 0.6).correct).toBe(true) // 2/3 ≈ 0.67
+    expect(gradeSpoken('кот', 'кит').correct).toBe(false) // default 0.9
   })
 })
 
@@ -118,7 +156,7 @@ describe('listen', () => {
     const onEnd = vi.fn()
     const ctl = listen({ onError, onEnd })
     expect(onError).toHaveBeenCalledWith('unsupported')
-    expect(onEnd).toHaveBeenCalledWith('')
+    expect(onEnd).toHaveBeenCalledWith('', [])
     // Controller methods are safe no-ops.
     expect(() => {
       ctl.stop()
@@ -139,30 +177,39 @@ describe('listen', () => {
 
     const results = []
     let ended
+    let endedAlts
     listen({
       lang: 'en-GB',
       onResult: (r) => results.push(r),
-      onEnd: (final) => {
+      onEnd: (final, alts) => {
         ended = final
+        endedAlts = alts
       },
     })
 
     expect(instance.lang).toBe('en-GB')
     expect(instance.start).toHaveBeenCalled()
 
-    // Simulate an interim then a final result, the way the browser fires them.
+    // Simulate an interim, then a final result carrying two alternatives.
     instance.onresult({
       resultIndex: 0,
       results: [Object.assign([{ transcript: 'the cat' }], { isFinal: false, length: 1 })],
     })
     instance.onresult({
       resultIndex: 0,
-      results: [Object.assign([{ transcript: 'the cat sleeps' }], { isFinal: true, length: 1 })],
+      results: [
+        Object.assign([{ transcript: 'the cat sleeps' }, { transcript: 'the cat creeps' }], {
+          isFinal: true,
+          length: 2,
+        }),
+      ],
     })
     instance.onend()
 
     expect(results[0].transcript).toBe('the cat')
     expect(results[1].final).toBe(true)
+    // Best guess first, then the alternative full-phrase guess for the grader.
     expect(ended).toBe('the cat sleeps')
+    expect(endedAlts).toEqual(['the cat sleeps', 'the cat creeps'])
   })
 })

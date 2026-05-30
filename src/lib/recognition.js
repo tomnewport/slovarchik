@@ -19,11 +19,61 @@ function tokens(text) {
   return typingSequence(text).split(' ').filter(Boolean)
 }
 
+/** Just the letters of an utterance — normalised and with spaces removed — so
+ * comparisons count letters, not word boundaries the recogniser may guess. */
+function lettersOnly(text) {
+  return typingSequence(text).replace(/\s+/g, '')
+}
+
+/**
+ * Levenshtein edit distance between two strings (insertions, deletions and
+ * substitutions). Single-row dynamic programming, O(a·b) time, O(b) space.
+ * @param {string} a
+ * @param {string} b
+ * @returns {number}
+ */
+export function levenshtein(a, b) {
+  a = String(a ?? '')
+  b = String(b ?? '')
+  if (a === b) return 0
+  if (!a.length) return b.length
+  if (!b.length) return a.length
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i)
+  let curr = new Array(b.length + 1)
+  for (let i = 1; i <= a.length; i += 1) {
+    curr[0] = i
+    for (let j = 1; j <= b.length; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1
+      curr[j] = Math.min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost)
+    }
+    ;[prev, curr] = [curr, prev]
+  }
+  return prev[b.length]
+}
+
+/**
+ * Letter-level similarity: the fraction of letters that line up between two
+ * utterances, as `1 − editDistance / longerLength` over their letters (spaces,
+ * stress, case and punctuation ignored). 1 means identical letters; 0 means
+ * completely different. This is the measure the speaking drill grades on — it
+ * forgives a single mangled ending far better than word-level overlap does.
+ * @param {string} a
+ * @param {string} b
+ * @returns {number} 0–1
+ */
+export function charSimilarity(a, b) {
+  const x = lettersOnly(a)
+  const y = lettersOnly(b)
+  if (!x.length && !y.length) return 1
+  const longer = Math.max(x.length, y.length)
+  if (!longer) return 0
+  return 1 - levenshtein(x, y) / longer
+}
+
 /**
  * How close two utterances are, as a Sørensen–Dice coefficient over their word
  * tokens (a multiset overlap). 1 means the same words; 0 means nothing shared.
- * Word-level — not character-level — because recognisers return whole words and
- * we want "almost the right words" to score well even with a wrong ending.
+ * Used for the per-word breakdown; grading itself uses {@link charSimilarity}.
  * @param {string} a
  * @param {string} b
  * @returns {number} 0–1
@@ -75,18 +125,30 @@ export function isPass(transcript) {
 }
 
 /**
- * Grade a spoken answer against a target phrase.
- * @param {string} transcript  what the recogniser heard
- * @param {string} target      the expected phrase
- * @param {number} [threshold] minimum similarity to count as correct (0–1)
- * @returns {{ correct: boolean, similarity: number }}
+ * Grade a spoken answer against a target phrase. Recognisers return several
+ * guesses per utterance; we score every one by letter-level similarity and keep
+ * the most generous — so an answer the recogniser ranked second still counts if
+ * its letters line up. Correct when ≥ `threshold` of the letters match (90% by
+ * default).
+ * @param {string | string[]} transcripts  the recognised guess(es)
+ * @param {string} target                  the expected phrase
+ * @param {number} [threshold]             min letter-similarity to pass (0–1)
+ * @returns {{ correct: boolean, similarity: number, best: string }}
  */
-export function gradeSpoken(transcript, target, threshold = 0.7) {
-  const wanted = typingSequence(target)
-  const heard = typingSequence(transcript)
-  const exact = wanted.length > 0 && heard === wanted
-  const similarity = spokenSimilarity(transcript, target)
-  return { correct: exact || similarity >= threshold, similarity }
+export function gradeSpoken(transcripts, target, threshold = 0.9) {
+  const candidates = (Array.isArray(transcripts) ? transcripts : [transcripts]).filter(
+    (c) => c != null && String(c).trim(),
+  )
+  let similarity = 0
+  let best = candidates[0] ?? ''
+  for (const candidate of candidates) {
+    const s = charSimilarity(candidate, target)
+    if (s > similarity) {
+      similarity = s
+      best = candidate
+    }
+  }
+  return { correct: similarity >= threshold, similarity, best }
 }
 
 /**
@@ -128,18 +190,22 @@ export function wordDiff(transcript, target) {
  * recognition is unavailable the callbacks fire an 'unsupported' error and the
  * controller's methods are no-ops, so callers never need to branch.
  *
+ * `onEnd` receives the best full transcript plus an array of alternative full
+ * transcripts (the recogniser's other guesses, stitched across segments) so the
+ * grader can score every guess and keep the most generous.
+ *
  * @param {object} opts
  * @param {string} [opts.lang]        BCP-47 tag, e.g. 'ru-RU' or 'en-GB'
  * @param {(r: { transcript: string, final: boolean, alternatives: string[] }) => void} [opts.onResult]
  * @param {(err: string) => void} [opts.onError]
- * @param {(finalTranscript: string) => void} [opts.onEnd]
+ * @param {(finalTranscript: string, alternatives: string[]) => void} [opts.onEnd]
  * @param {() => void} [opts.onStart]
  * @returns {{ stop: () => void, abort: () => void }}
  */
 export function listen({ lang = 'ru-RU', onResult, onError, onEnd, onStart } = {}) {
   if (!recognitionSupported()) {
     onError?.('unsupported')
-    onEnd?.('')
+    onEnd?.('', [])
     return { stop() {}, abort() {} }
   }
   const Ctor = window.SpeechRecognition || window.webkitSpeechRecognition
@@ -148,7 +214,7 @@ export function listen({ lang = 'ru-RU', onResult, onError, onEnd, onStart } = {
     rec = new Ctor()
   } catch {
     onError?.('unsupported')
-    onEnd?.('')
+    onEnd?.('', [])
     return { stop() {}, abort() {} }
   }
 
@@ -157,25 +223,41 @@ export function listen({ lang = 'ru-RU', onResult, onError, onEnd, onStart } = {
   rec.maxAlternatives = 3
   rec.continuous = false
 
-  let final = ''
+  // One entry per final result segment, holding that segment's alternative
+  // transcripts (best first). Keyed by result index so re-fired events don't
+  // double-count.
+  const finalAlts = []
+  const bestSoFar = () => finalAlts.filter(Boolean).map((a) => a[0]).join('')
+
   rec.onstart = () => onStart?.()
   rec.onresult = (event) => {
     let interim = ''
     for (let i = event.resultIndex; i < event.results.length; i += 1) {
       const result = event.results[i]
-      if (result.isFinal) final += result[0].transcript
-      else interim += result[0].transcript
       const alternatives = []
       for (let j = 0; j < result.length; j += 1) alternatives.push(result[j].transcript)
+      if (result.isFinal) finalAlts[i] = alternatives
+      else interim += alternatives[0] ?? ''
       onResult?.({
-        transcript: `${final}${interim}`.trim(),
+        transcript: `${bestSoFar()}${interim}`.trim(),
         final: result.isFinal,
         alternatives,
       })
     }
   }
   rec.onerror = (event) => onError?.(event?.error || 'error')
-  rec.onend = () => onEnd?.(final.trim())
+  rec.onend = () => {
+    const segments = finalAlts.filter(Boolean)
+    // Build up to maxAlternatives full-phrase guesses by taking the n-th
+    // alternative of each segment (falling back to its best where it has fewer).
+    const depth = Math.max(0, ...segments.map((a) => a.length))
+    const candidates = []
+    for (let n = 0; n < depth; n += 1) {
+      const guess = segments.map((a) => a[n] ?? a[0]).join('').trim()
+      if (guess && !candidates.includes(guess)) candidates.push(guess)
+    }
+    onEnd?.(candidates[0] ?? '', candidates)
+  }
 
   try {
     rec.start()

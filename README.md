@@ -57,9 +57,13 @@ and grades what it hears. Three modes:
 | **Produce**   | See the English, say the Russian; the correct phrase is then read aloud.       |
 | **Interpret** | Hear a Russian phrase, say the English — or say *"pass"*. **Hands-free** with spoken feedback. |
 
-Answers are graded leniently (a word-level Sørensen–Dice overlap, forgiving
-stress, case, punctuation and the odd misheard word), so "close enough"
-pronunciation counts. In **hands-free** mode the loop runs itself: it reads the
+Answers are graded leniently: an answer counts when **≥ 90% of its letters
+match** (a Levenshtein letter-similarity, forgiving stress, case, spaces and
+punctuation), and the recogniser's *alternative* guesses are all scored — the
+most generous wins — so a near-miss that the recogniser ranked second still
+passes. The result screen shows the letter-match score, the words that landed
+versus those missed, and any extra words it heard. In **hands-free** mode the
+loop runs itself: it reads the
 prompt, waits for the synthesised voice to finish before opening the mic, grades
 what you said, speaks the verdict and the model answer, then moves on — eyes-free
 practice. Recognition only ships in some browsers (Chrome/Edge, and online), so

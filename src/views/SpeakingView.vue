@@ -144,7 +144,7 @@ function beginListen() {
     onError: (err) => {
       recError.value = err
     },
-    onEnd: (finalText) => {
+    onEnd: (finalText, alternatives) => {
       recCtl = null
       // A real error (permission/network) leaves us on the prompt to retry;
       // a plain empty result after the user spoke nothing does too.
@@ -153,7 +153,7 @@ function beginListen() {
         phase.value = 'prompt'
         return
       }
-      grade(finalText)
+      grade(finalText, alternatives)
     },
   })
 }
@@ -163,20 +163,24 @@ function finishListening() {
   if (recCtl) recCtl.stop()
 }
 
-function grade(finalText) {
+function grade(finalText, alternatives = []) {
   const passed = isPass(finalText)
   const target = current.value[modeCfg.value.target]
-  const { correct, similarity } = passed
-    ? { correct: false, similarity: 0 }
-    : gradeSpoken(finalText, target)
-  // Per-word breakdown so the learner sees which words landed (skip it on a
-  // deliberate pass — there was no real attempt to diff).
-  const diff = passed ? null : wordDiff(finalText, target)
-  reveal({ correct, passed, similarity, diff })
+  // Grade on the most generous of all the recogniser's guesses; the winning
+  // guess (`best`) is what we show and diff against.
+  const guesses = [finalText, ...alternatives]
+  const { correct, similarity, best } = passed
+    ? { correct: false, similarity: 0, best: finalText }
+    : gradeSpoken(guesses, target)
+  // Per-word breakdown of the best guess, so the highlighted words line up with
+  // the score (skip it on a deliberate pass — there was no real attempt).
+  const diff = passed ? null : wordDiff(best, target)
+  reveal({ correct, passed, similarity, diff, heard: best })
 }
 
-function reveal({ correct, passed, similarity, diff }) {
+function reveal({ correct, passed, similarity, diff, heard }) {
   phase.value = 'graded'
+  if (heard) transcript.value = heard
   result.value = { correct, passed, similarity, diff, targetLang: modeCfg.value.target }
   score.total += 1
   if (correct) {
@@ -315,7 +319,7 @@ onUnmounted(() => {
         <template v-if="result.correct">✓ Correct!</template>
         <template v-else-if="result.passed">↷ Passed</template>
         <template v-else>✗ Not quite</template>
-        <span v-if="result.diff" class="match-score">· {{ Math.round(result.diff.score * 100) }}% match</span>
+        <span v-if="!result.passed" class="match-score">· {{ Math.round(result.similarity * 100) }}% letters</span>
       </p>
 
       <!-- Per-word breakdown: which words landed (green) and which were missed
