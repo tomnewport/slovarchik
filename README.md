@@ -6,6 +6,10 @@ Everything runs in your browser and works fully offline once loaded.
 
 🔗 **Live app: [tomnewport.github.io/slovarchik](https://tomnewport.github.io/slovarchik/)**
 
+> **Stack:** **Vue 3** + Vite 6 PWA (Vue Router, Vitest). It is **not** a React
+> app — there's no JSX or hooks. Agents and contributors: start with
+> [`AGENTS.md`](AGENTS.md) for a fast orientation. Details in [Tech](#tech) below.
+
 > **Status:** skeleton app. The core drills work end-to-end; the word/noun data
 > sets are intentionally small and meant to grow.
 
