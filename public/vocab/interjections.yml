@@ -1,0 +1,161 @@
+# interjections.yml — Russian interjections and discourse words (междометия)
+# Natural key: "<russian>=<english>" (disambiguates homophones).
+# Stress is marked with a combining acute accent (´, U+0301) on the vowel.
+# Monosyllabic words carry no mark (their single vowel is always stressed).
+---
+meta:
+  type:
+    greet: greeting
+    excl: exclamation
+    polite: politeness
+    resp: response
+words:
+  "алло=hello":
+    cefr_level: A1
+    type: greet
+    accented: алло́
+    en_gb:
+      standard: hello (when answering the telephone)
+    usage:
+      - ru: Алло́! Кто говори́т?
+        en_gb: Hello! Who is speaking?
+  "ах=ah":
+    cefr_level: A2
+    type: excl
+    accented: ах
+    en_gb:
+      standard: ah (surprise, delight or dismay)
+      alt:
+        - oh
+    usage:
+      - ru: Ах, кака́я красота́!
+        en_gb: Ah, what beauty!
+  "да=yes":
+    cefr_level: A1
+    type: resp
+    accented: да
+    en_gb:
+      standard: yes (agreement or confirmation)
+    usage:
+      - ru: Ты гото́в? — Да.
+        en_gb: Are you ready? — Yes.
+  "до свидания=goodbye":
+    cefr_level: A1
+    type: greet
+    accented: до свида́ния
+    en_gb:
+      standard: goodbye (literally "until the meeting")
+    usage:
+      - ru: До свида́ния, до за́втра!
+        en_gb: Goodbye, see you tomorrow!
+  "здравствуйте=hello":
+    cefr_level: A1
+    type: greet
+    accented: здра́вствуйте
+    en_gb:
+      standard: hello (polite or to more than one person)
+    usage:
+      - ru: Здра́вствуйте, как ва́ши дела́?
+        en_gb: Hello, how are you?
+  "извините=excuse me":
+    cefr_level: A1
+    type: polite
+    accented: извини́те
+    en_gb:
+      standard: excuse me (apology or to get attention)
+      alt:
+        - sorry
+    usage:
+      - ru: Извини́те, где метро́?
+        en_gb: Excuse me, where is the metro?
+  "конечно=of course":
+    cefr_level: A2
+    type: resp
+    accented: коне́чно
+    en_gb:
+      standard: of course (emphatic agreement)
+      alt:
+        - certainly
+    usage:
+      - ru: Ты помо́жешь мне? — Коне́чно!
+        en_gb: Will you help me? — Of course!
+  "нет=no":
+    cefr_level: A1
+    type: resp
+    accented: нет
+    en_gb:
+      standard: no (refusal or denial)
+    usage:
+      - ru: Хо́чешь ча́ю? — Нет, спаси́бо.
+        en_gb: Do you want tea? — No, thank you.
+  "ну=well":
+    cefr_level: A2
+    type: excl
+    accented: ну
+    en_gb:
+      standard: well (hesitation, urging or surprise)
+      alt:
+        - come on
+    usage:
+      - ru: Ну, что бу́дем де́лать?
+        en_gb: Well, what shall we do?
+  "ой=oh":
+    cefr_level: A2
+    type: excl
+    accented: ой
+    en_gb:
+      standard: oh (sudden surprise, fright or pain)
+    usage:
+      - ru: Ой, я забы́л ключи́!
+        en_gb: Oh, I forgot the keys!
+  "пожалуйста=please":
+    cefr_level: A1
+    type: polite
+    accented: пожа́луйста
+    en_gb:
+      standard: please (request, or "you're welcome" in reply to thanks)
+    usage:
+      - ru: Да́йте, пожа́луйста, во́ду.
+        en_gb: Please give me some water.
+  "пока=bye":
+    cefr_level: A1
+    type: greet
+    accented: пока́
+    en_gb:
+      standard: bye (informal farewell)
+      alt:
+        - see you
+    usage:
+      - ru: Пока́! Уви́димся за́втра.
+        en_gb: Bye! See you tomorrow.
+  "привет=hi":
+    cefr_level: A1
+    type: greet
+    accented: приве́т
+    en_gb:
+      standard: hi (informal greeting)
+      alt:
+        - hello
+    usage:
+      - ru: Приве́т! Как дела́?
+        en_gb: Hi! How are you?
+  "спасибо=thank you":
+    cefr_level: A1
+    type: polite
+    accented: спаси́бо
+    en_gb:
+      standard: thank you (expressing gratitude)
+      alt:
+        - thanks
+    usage:
+      - ru: Большо́е спаси́бо за по́мощь!
+        en_gb: Thank you very much for the help!
+  "ура=hurray":
+    cefr_level: A2
+    type: excl
+    accented: ура́
+    en_gb:
+      standard: hurray (joy or triumph)
+    usage:
+      - ru: Ура́! Мы вы́играли!
+        en_gb: Hurray! We won!

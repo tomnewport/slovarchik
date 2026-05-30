@@ -28,6 +28,16 @@ import { RouterLink } from 'vue-router'
       <span class="pill">6 cases · 2 numbers</span>
     </RouterLink>
 
+    <RouterLink to="/numbers" class="card" style="text-decoration: none; color: inherit">
+      <h2 style="margin-top: 0">🔢 Numbers</h2>
+      <p>
+        Generated on the fly and declined by rule, so they never run out. Read
+        <strong>years</strong> ("I was born in 1987"), spell <strong>whole numbers</strong>,
+        and get <strong>ages, prices and dates</strong> with the right agreement.
+      </p>
+      <span class="pill">years · cardinals · dates</span>
+    </RouterLink>
+
     <RouterLink to="/phrases" class="card" style="text-decoration: none; color: inherit">
       <h2 style="margin-top: 0">💬 Phrases</h2>
       <p>

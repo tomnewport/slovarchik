@@ -102,3 +102,27 @@ describe('weakest skills (practice focus)', () => {
     expect(weak.some((s) => s.id === 'word:лебедь=swan')).toBe(false)
   })
 })
+
+describe('number-drill skills (non-lexical)', () => {
+  const numStats = [
+    described({ kind: 'number', key: 'year' }, [ev(2, 'advanced'), ev(0, 'advanced')]), // 1/2 wrong
+    described({ kind: 'number', key: 'caseForm' }, [ev(0, 'advanced'), ev(0, 'advanced'), ev(0, 'advanced')]),
+  ]
+  const ns = buildSkills([...STATS, ...numStats], WORDS, {
+    numberLabels: { year: 'Years', caseForm: 'Number cases' },
+  })
+  const nById = new Map(ns.map((s) => [s.id, s]))
+
+  it('creates one skill per topic, with a friendly label and no vocab words', () => {
+    const yr = nById.get('number:year')
+    expect(yr.kind).toBe('number')
+    expect(yr.label).toBe('Years')
+    expect(yr.breadth).toBe(0)
+    expect(yr.wordKeys).toEqual([])
+    expect(yr.strength).toBeCloseTo(0.5)
+  })
+
+  it('lets a weak number topic surface among the weakest skills', () => {
+    expect(weakestSkills(ns).some((s) => s.id === 'number:caseForm')).toBe(true)
+  })
+})

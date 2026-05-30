@@ -165,6 +165,10 @@ export function describeSubject(record, wordsByKey = new Map()) {
   if (kind === 'word') {
     return { label: lemma ?? key, facets: { kind, ...wordFacets } }
   }
+  if (kind === 'number') {
+    // Number-drill topics aren't vocab words; the key *is* the topic id.
+    return { label: `Numbers · ${key}`, facets: { kind, topic: key } }
+  }
   // phrase (and any future kinds): minimal facets, label from the Russian side.
   return { label: String(key).split('=')[0] || key, facets: { kind } }
 }

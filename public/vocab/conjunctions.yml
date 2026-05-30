@@ -1,0 +1,151 @@
+# conjunctions.yml — Russian conjunctions (союзы)
+# Natural key: "<russian>=<english>" (disambiguates homophones).
+# Stress is marked with a combining acute accent (´, U+0301) on the vowel.
+# Monosyllabic words carry no mark (their single vowel is always stressed).
+---
+meta:
+  type:
+    coord: coordinating
+    sub: subordinating
+words:
+  "а=and":
+    cefr_level: A1
+    type: coord
+    accented: а
+    en_gb:
+      standard: and (drawing a gentle contrast — "whereas")
+      alt:
+        - but
+        - whereas
+    usage:
+      - ru: Я чита́ю, а он пи́шет.
+        en_gb: I am reading, and (whereas) he is writing.
+  "если=if":
+    cefr_level: A2
+    type: sub
+    accented: е́сли
+    en_gb:
+      standard: if (introducing a condition)
+    usage:
+      - ru: Е́сли бу́дет дождь, мы оста́немся до́ма.
+        en_gb: If it rains, we will stay at home.
+  "и=and":
+    cefr_level: A1
+    type: coord
+    accented: и
+    en_gb:
+      standard: and (joining like things)
+    usage:
+      - ru: Ма́ма и па́па до́ма.
+        en_gb: Mum and dad are at home.
+  "или=or":
+    cefr_level: A1
+    type: coord
+    accented: и́ли
+    en_gb:
+      standard: or (offering an alternative)
+    usage:
+      - ru: Чай и́ли ко́фе?
+        en_gb: Tea or coffee?
+  "когда=when":
+    cefr_level: A2
+    type: sub
+    accented: когда́
+    en_gb:
+      standard: when (at the time that)
+    usage:
+      - ru: Когда́ я приду́, я позвоню́.
+        en_gb: When I arrive, I will call.
+  "но=but":
+    cefr_level: A1
+    type: coord
+    accented: но
+    en_gb:
+      standard: but (introducing a contrast)
+    usage:
+      - ru: Я хочу́ спать, но на́до рабо́тать.
+        en_gb: I want to sleep, but I have to work.
+  "пока=while":
+    cefr_level: B1
+    type: sub
+    accented: пока́
+    en_gb:
+      standard: while (during the time that)
+      alt:
+        - until (with "не")
+    usage:
+      - ru: Пока́ ты гото́вишь, я накро́ю на стол.
+        en_gb: While you cook, I will lay the table.
+  "потому что=because":
+    cefr_level: A2
+    type: sub
+    accented: потому́ что
+    en_gb:
+      standard: because (giving the reason)
+    usage:
+      - ru: Я не пришёл, потому́ что заболе́л.
+        en_gb: I did not come because I fell ill.
+  "поэтому=therefore":
+    cefr_level: A2
+    type: coord
+    accented: поэ́тому
+    en_gb:
+      standard: therefore (drawing a consequence)
+      alt:
+        - so
+        - that is why
+    usage:
+      - ru: Шёл дождь, поэ́тому мы оста́лись до́ма.
+        en_gb: It was raining, therefore we stayed at home.
+  "так как=since":
+    cefr_level: B1
+    type: sub
+    accented: так как
+    en_gb:
+      standard: since (because, giving a reason)
+      alt:
+        - as
+        - because
+    usage:
+      - ru: Так как бы́ло по́здно, мы реши́ли оста́ться.
+        en_gb: Since it was late, we decided to stay.
+  "хотя=although":
+    cefr_level: B1
+    type: sub
+    accented: хотя́
+    en_gb:
+      standard: although (admitting a contrast)
+      alt:
+        - though
+    usage:
+      - ru: Хотя́ бы́ло хо́лодно, мы пошли́ гуля́ть.
+        en_gb: Although it was cold, we went for a walk.
+  "чем=than":
+    cefr_level: B1
+    type: sub
+    accented: чем
+    en_gb:
+      standard: than (in a comparison)
+    usage:
+      - ru: Он вы́ше, чем я.
+        en_gb: He is taller than me.
+  "что=that":
+    cefr_level: A2
+    type: sub
+    accented: что
+    en_gb:
+      standard: that (introducing a reported clause)
+    usage:
+      - ru: Я зна́ю, что ты прав.
+        en_gb: I know that you are right.
+  "чтобы=in order to":
+    cefr_level: B1
+    type: sub
+    accented: что́бы
+    en_gb:
+      standard: in order to (expressing purpose)
+      alt:
+        - so that
+    usage:
+      - ru: Я учу́сь, что́бы найти́ хоро́шую рабо́ту.
+        en_gb: I study in order to find a good job.

@@ -45,6 +45,13 @@ function expandSkill(skill, wordsByKey, lastAtById) {
       lastAt: lastAtById.get(`form:${key}#${slot}`) ?? 0,
     }))
   }
+  if (skill.kind === 'number') {
+    // Number topics have no vocab words; the topic itself is the drillable item.
+    const topic = skill.id.slice('number:'.length)
+    return [
+      { kind: 'number', key: topic, label: skill.label, lastAt: lastAtById.get(`number:${topic}`) ?? 0 },
+    ]
+  }
   // word / type / collection skills all resolve to their member words.
   return skill.wordKeys.map((key) => wordItem(wordsByKey.get(key) ?? { key }, lastAtById))
 }

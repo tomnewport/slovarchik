@@ -97,4 +97,20 @@ describe('composeSession', () => {
     const b = composeSession({ size: 'large', ...base, rng: seededRng(7) })
     expect(JSON.stringify(a)).toBe(JSON.stringify(b))
   })
+
+  it('drills a weak number topic in the weak-skills section', () => {
+    const numStat = described({ kind: 'number', key: 'caseForm' }, [
+      ev(0, 'advanced', 4),
+      ev(0, 'advanced', 5),
+      ev(0, 'advanced', 6),
+    ])
+    const stats = [...STATS, numStat]
+    const skills = buildSkills(stats, WORDS, { numberLabels: { caseForm: 'Number cases' } })
+    const session = composeSession({ ...base, stats, skills, size: 'large', rng: seededRng() })
+    const weak = session.sections.find((s) => s.id === 'weak')
+    const num = weak?.items.find((i) => i.kind === 'number')
+    expect(num).toBeTruthy()
+    expect(num.key).toBe('caseForm')
+    expect(num.label).toBe('Number cases')
+  })
 })

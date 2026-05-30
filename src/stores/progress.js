@@ -25,6 +25,7 @@ import {
   weakestSkills,
 } from '../lib/skills.js'
 import { composeSession } from '../lib/practice.js'
+import { TOPIC_LABELS } from '../lib/numberDrill.js'
 
 const CURRENT_COLLECTION_KEY = 'currentCollection'
 
@@ -108,11 +109,33 @@ export const progressQueries = {
   combined: (filter) => combined(describedStats.value, filter),
 }
 
-/** Every skill (word / form / type / collection) with its breadth and strength. */
-export const skills = computed(() => buildSkills(describedStats.value, vocabState.words))
+/**
+ * Number-drill performance, one row per topic (years, dates, cases …). These
+ * subjects have no vocab words, so they live outside the word-centric `skills`
+ * machinery and get their own dashboard panel.
+ */
+export const numberProgress = computed(() =>
+  describedStats.value
+    .filter((s) => s.kind === 'number' && s.attempts > 0)
+    .map((s) => ({
+      topic: s.key,
+      label: TOPIC_LABELS[s.key] ?? s.key,
+      attempts: s.attempts,
+      errorRate: s.errorRate,
+      strength: 1 - s.errorRate,
+    }))
+    .sort((a, b) => b.attempts - a.attempts || a.label.localeCompare(b.label)),
+)
 
-/** Skills bucketed into the breadth bands (100+ / 10+ / 1+ words). */
-export const skillsByBreadth = computed(() => groupByBreadth(skills.value))
+/** Every skill (word / form / type / collection / number) with breadth + strength. */
+export const skills = computed(() =>
+  buildSkills(describedStats.value, vocabState.words, { numberLabels: TOPIC_LABELS }),
+)
+
+/** Skills bucketed into the breadth bands (100+ / 10+ / 1+ words) — words only. */
+export const skillsByBreadth = computed(() =>
+  groupByBreadth(skills.value.filter((s) => s.kind !== 'number')),
+)
 
 /** The weakest 25% of attempted skills — the practice session's focus. */
 export const weakSkills = computed(() => weakestSkills(skills.value))

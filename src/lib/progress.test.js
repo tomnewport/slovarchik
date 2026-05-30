@@ -132,6 +132,12 @@ describe('describeSubject', () => {
     expect(gone.label).toBe('исчез=vanished')
     expect(gone.facets).toMatchObject({ kind: 'word', gender: null })
   })
+
+  it('labels a number-drill topic by its key', () => {
+    const num = describeSubject({ kind: 'number', key: 'year' })
+    expect(num.label).toBe('Numbers · year')
+    expect(num.facets).toEqual({ kind: 'number', topic: 'year' })
+  })
 })
 
 // --- The four headline queries from the issue ---------------------------------
