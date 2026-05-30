@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint . --ext .js,.vue",
-    "gen:icons": "node scripts/gen-icons.mjs"
+    "gen:icons": "node scripts/gen-icons.mjs",
+    "gen:adjectives": "node scripts/gen-adjective-declension.mjs"
   },
   "dependencies": {
     "js-yaml": "^4.1.1",

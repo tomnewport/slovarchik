@@ -26,20 +26,28 @@ levels:
 | Intermediate | **Hinted typing** — type it; the on-screen keyboard lights up the letters it uses (RU answers). |
 | Advanced     | **Blind typing** — type it with no help.             |
 
-### 🧩 Noun declension
+### 🧩 Inflection drills
 
-Drill the six cases (nominative, genitive, dative, accusative, instrumental,
-prepositional) across singular and plural:
+The same four exercises drill every inflecting part of speech — **nouns**
+(case × number), **adjectives** (full case × gender/number agreement),
+**pronouns** (case, or gender agreement for the adjective-like ones) and
+**verbs** (present-tense conjugation). Each word type is just a different
+paradigm table fed to the shared engine in `src/lib/paradigm.js`.
 
-| Level        | How it works                                                       |
-| ------------ | ------------------------------------------------------------------ |
-| Easy         | **Spot the case** — given a form, select which case(s) it can be.  |
-| Intermediate | **Fill the table** — type every form in the number × case grid.    |
-| Advanced     | **Endings only** — the stem is shown; type just the ending.        |
+Adjective declension tables are generated from the dictionary form by
+`scripts/gen-adjective-declension.mjs` (run via `npm run gen:adjectives`),
+which derives all 24 forms by rule and refuses to write unless they validate
+against hand-checked golden paradigms and every curated nominative.
 
-The "spot the case" mode understands syncretism — e.g. *книге* is accepted as
-both dative **and** prepositional, and animate accusatives (*собак*, *студентов*)
-line up with the genitive.
+| Exercise        | How it works                                                                 |
+| --------------- | ---------------------------------------------------------------------------- |
+| Identify        | Given one form, select every cell it could fill (handles syncretism).        |
+| Build the table | Drag (or tap) each shuffled form into the right cell of an empty table.       |
+| Guided endings  | The stem is shown; add each ending one letter at a time — the on-screen keyboard lights up the correct next letter alongside a couple of decoys. |
+| Type the endings| The stem is shown; type every ending with no help at all.                    |
+
+The identify exercise understands syncretism — e.g. *книге* matches both dative
+**and** prepositional, and *стол* matches nominative **and** accusative singular.
 
 ### 🎧 Listening
 

@@ -19,14 +19,21 @@ import { RouterLink } from 'vue-router'
     </RouterLink>
 
     <RouterLink to="/declension" class="card" style="text-decoration: none; color: inherit">
-      <h2 style="margin-top: 0">🧩 Noun declension</h2>
+      <h2 style="margin-top: 0">🧩 Inflection drills</h2>
       <p>
-        Master the six cases. <strong>Easy:</strong> pick valid case(s) for a form.
-        <strong>Intermediate:</strong> fill the number × case table.
-        <strong>Advanced:</strong> type the endings.
+        Master the forms of <strong>nouns</strong>, <strong>adjectives</strong>,
+        <strong>pronouns</strong> and <strong>verbs</strong> with four exercises:
+        <strong>identify</strong> a form, <strong>build</strong> the table,
+        add endings with <strong>guided</strong> hints, then <strong>type</strong> them blind.
       </p>
-      <span class="pill">6 cases · 2 numbers</span>
+      <span class="pill">identify → build → guided → type</span>
     </RouterLink>
+
+    <div class="row" style="gap: 0.5rem">
+      <RouterLink to="/adjectives" class="pill">Adjectives →</RouterLink>
+      <RouterLink to="/pronouns" class="pill">Pronouns →</RouterLink>
+      <RouterLink to="/verbs" class="pill">Verbs →</RouterLink>
+    </div>
 
     <RouterLink to="/numbers" class="card" style="text-decoration: none; color: inherit">
       <h2 style="margin-top: 0">🔢 Numbers</h2>

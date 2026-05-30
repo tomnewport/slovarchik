@@ -12,7 +12,10 @@ import RussianKeyboard from './components/RussianKeyboard.vue'
     </RouterLink>
     <nav class="row">
       <RouterLink to="/vocab">Vocab</RouterLink>
-      <RouterLink to="/declension">Declension</RouterLink>
+      <RouterLink to="/declension">Nouns</RouterLink>
+      <RouterLink to="/adjectives">Adjectives</RouterLink>
+      <RouterLink to="/pronouns">Pronouns</RouterLink>
+      <RouterLink to="/verbs">Verbs</RouterLink>
       <RouterLink to="/phrases">Phrases</RouterLink>
       <RouterLink to="/listening">Listening</RouterLink>
       <RouterLink to="/speaking">Speaking</RouterLink>
