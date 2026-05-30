@@ -54,7 +54,13 @@ function newRound() {
   clearTimeout(advanceTimer)
   celebrating.value = false
   lastResult.value = null
-  paradigm.value = sample(list.value, 1)[0]
+  // Avoid drawing the same paradigm twice in a row when there's a choice.
+  const prev = paradigm.value
+  let next = sample(list.value, 1)[0]
+  if (list.value.length > 1) {
+    while (next?.key === prev?.key) next = sample(list.value, 1)[0]
+  }
+  paradigm.value = next
   round.value += 1
 }
 

@@ -6,7 +6,8 @@
 import { computed, reactive, ref } from 'vue'
 
 import { cellKey } from '../../lib/paradigm.js'
-import { shuffle, normalize } from '../../lib/quiz.js'
+import { shuffle } from '../../lib/quiz.js'
+import { normalize } from '../../lib/text.js'
 
 const props = defineProps({ paradigm: { type: Object, required: true } })
 const emit = defineEmits(['graded'])

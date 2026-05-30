@@ -25,7 +25,8 @@ levels:
 ### 🧩 Inflection drills
 
 The same four exercises drill every inflecting part of speech — **nouns**
-(case × number), **adjectives** (short forms), **pronouns** (case) and **verbs**
+(case × number), **adjectives** (gender/number agreement), **pronouns**
+(case, or gender agreement for the adjective-like ones) and **verbs**
 (present-tense conjugation). Each word type is just a different paradigm table
 fed to the shared engine in `src/lib/paradigm.js`.
 

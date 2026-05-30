@@ -42,14 +42,14 @@ const VERB_PERSONS = [
   { key: '3pl', label: '3rd plural', sub: 'они' },
 ]
 
-// The short (predicate) forms by gender/number — the declension data we have for
-// adjectives. The comparative is excluded: it is frequently suppletive (лучше,
-// больше) and would break the shared stem the ending exercises rely on.
-const ADJ_FORMS = [
-  { key: 'short_m', label: 'Short masc.', sub: 'он' },
-  { key: 'short_f', label: 'Short fem.', sub: 'она' },
-  { key: 'short_n', label: 'Short neut.', sub: 'оно' },
-  { key: 'short_pl', label: 'Short plural', sub: 'они' },
+// Gender × number agreement rows. Adjectives and the adjective-like pronouns
+// (possessives, determiners, demonstratives, какой/чей) decline like this: the
+// data gives the nominative form for each gender plus the shared plural.
+const GENDER_FORMS = [
+  { key: 'm', label: 'Masculine', sub: 'он' },
+  { key: 'f', label: 'Feminine', sub: 'она' },
+  { key: 'n', label: 'Neuter', sub: 'оно' },
+  { key: 'pl', label: 'Plural', sub: 'они' },
 ]
 
 const SINGLE_COL = (label) => [{ key: '_', label }]
@@ -114,9 +114,16 @@ export function buildParadigm(word) {
       break
     }
     case 'pronoun': {
-      const raw = word.extra?.declension ?? {}
-      const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
-      paradigm = assemble(meta, rows, SINGLE_COL('Form'), (row) => raw[row])
+      // Raw YAML `forms` (word.forms is only populated for nouns). Two shapes:
+      // personal/reflexive/кто-что decline by case; possessives, determiners,
+      // demonstratives and какой/чей agree by gender like adjectives.
+      const raw = word.extra?.forms ?? {}
+      if (CASES.some((c) => raw[c] != null)) {
+        const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
+        paradigm = assemble(meta, rows, SINGLE_COL('Form'), (row) => raw[row])
+      } else {
+        paradigm = assemble(meta, GENDER_FORMS, SINGLE_COL('Form'), (row) => raw[row])
+      }
       break
     }
     case 'verb': {
@@ -125,10 +132,11 @@ export function buildParadigm(word) {
       break
     }
     case 'adjective': {
+      // Nominative agreement forms (m / f / n / pl). The comparative is excluded:
+      // it is a separate degree, often suppletive (лучше, больше), and would
+      // break the shared stem the ending exercises rely on.
       const raw = word.extra?.forms ?? {}
-      const lemma = cleanForm(raw.base)
-      if (lemma && hasCyrillic(lemma)) meta.lemma = lemma
-      paradigm = assemble(meta, ADJ_FORMS, SINGLE_COL('Form'), (row) => raw[row])
+      paradigm = assemble(meta, GENDER_FORMS, SINGLE_COL('Form'), (row) => raw[row])
       break
     }
     default:
@@ -155,7 +163,15 @@ export function isMultiColumn(paradigm) {
   return paradigm.cols.length > 1
 }
 
-/** Stress-free ending of a cell relative to the paradigm stem. */
+/**
+ * Stress-free ending of a cell relative to the paradigm stem.
+ *
+ * The stem is the longest common prefix of every form (see {@link assemble}),
+ * so this is exact for regular nouns, verbs and adjective agreement. For
+ * stem-mutating or suppletive paradigms (e.g. personal pronouns я/меня, where
+ * the common prefix is empty) the "ending" degrades to the whole form — the
+ * ending drills then ask for the full word, which is acceptable for those.
+ */
 export function endingOf(paradigm, cell) {
   const stemLen = [...paradigm.stem].length
   return [...stripStress(cell.form)].slice(stemLen).join('')

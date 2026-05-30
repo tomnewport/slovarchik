@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
+import { buildWords } from './vocabBuild.js'
 import {
   buildParadigm,
   buildParadigms,
@@ -23,12 +27,22 @@ const stol = {
   },
 }
 
+// Personal pronoun — declines by case. Raw YAML lives under `extra.forms`.
 const ya = {
   key: 'я=I',
   pos: 'pronoun',
   headword: 'я',
   meaning: 'I',
-  extra: { declension: { nom: 'я', gen: 'меня́', dat: 'мне', acc: 'меня́', ins: 'мной', pre: '(обо) мне' } },
+  extra: { type: 'pers', forms: { nom: 'я', gen: 'меня́', dat: 'мне', acc: 'меня́', ins: 'мной', pre: 'мне' } },
+}
+
+// Possessive pronoun — agrees by gender/number (m / f / n / pl), like adjectives.
+const moy = {
+  key: 'мой=my',
+  pos: 'pronoun',
+  headword: 'мой',
+  meaning: 'my',
+  extra: { type: 'poss', forms: { m: 'мой', f: 'моя́', n: 'моё', pl: 'мои́' } },
 }
 
 const chitat = {
@@ -43,14 +57,13 @@ const chitat = {
   },
 }
 
+// Adjective — nominative agreement forms plus a comparative (which is excluded).
 const novyy = {
   key: 'новый=new',
   pos: 'adjective',
   headword: 'но́вый',
   meaning: 'new',
-  extra: {
-    forms: { base: 'но́вый', short_m: 'но́в', short_f: 'нова́', short_n: 'но́во', short_pl: 'но́вы', comparative: 'нове́е' },
-  },
+  extra: { forms: { m: 'но́вый', f: 'но́вая', n: 'но́вое', pl: 'но́вые', comparative: 'нове́е' } },
 }
 
 describe('cleanForm', () => {
@@ -89,14 +102,19 @@ describe('buildParadigm — noun', () => {
 })
 
 describe('buildParadigm — pronoun', () => {
-  const p = buildParadigm(ya)
-  it('is a single-column case table', () => {
+  it('builds a case table for personal pronouns', () => {
+    const p = buildParadigm(ya)
     expect(p.cols).toHaveLength(1)
     expect(p.cells).toHaveLength(6)
+    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
     expect(isMultiColumn(p)).toBe(false)
   })
-  it('cleans the prepositional form', () => {
-    expect(p.cells.find((c) => c.row === 'pre').form).toBe('мне')
+  it('builds a gender table for possessive pronouns', () => {
+    const p = buildParadigm(moy)
+    expect(p.rows.map((r) => r.key)).toEqual(['m', 'f', 'n', 'pl'])
+    expect(p.cells).toHaveLength(4)
+    expect(p.stem).toBe('мо')
+    expect(endingOf(p, p.cells.find((c) => c.row === 'f'))).toBe('я')
   })
 })
 
@@ -112,25 +130,60 @@ describe('buildParadigm — verb', () => {
 
 describe('buildParadigm — adjective', () => {
   const p = buildParadigm(novyy)
-  it('uses the base as lemma and short forms as cells', () => {
-    expect(p.lemma).toBe('но́вый') // base form kept with its stress mark, like noun headwords
+  it('uses the gender agreement forms and excludes the comparative', () => {
+    expect(p.rows.map((r) => r.key)).toEqual(['m', 'f', 'n', 'pl'])
+    expect(p.cells).toHaveLength(4)
     expect(p.stem).toBe('нов')
-    expect(p.cells.length).toBeGreaterThanOrEqual(4)
+    expect(p.cells.some((c) => c.form.includes('нове'))).toBe(false) // comparative dropped
+    expect(p.lemma).toBe('но́вый') // accented masculine headword
   })
   it('drops non-Cyrillic placeholder forms', () => {
     const broken = buildParadigm({
       ...novyy,
-      extra: { forms: { base: 'но́вый', short_m: 'short', short_f: 'нова́', short_n: 'но́во', short_pl: 'но́вы' } },
+      extra: { forms: { m: 'но́вый', f: 'placeholder', n: 'но́вое', pl: 'но́вые' } },
     })
-    expect(broken.cells.some((c) => c.form === 'short')).toBe(false)
+    expect(broken.cells.some((c) => c.form === 'placeholder')).toBe(false)
   })
 })
 
 describe('buildParadigms', () => {
   it('filters by part of speech and skips tableless words', () => {
-    const words = [stol, ya, chitat, novyy, { key: 'и=and', pos: 'conjunction', headword: 'и' }]
+    const words = [stol, ya, moy, chitat, novyy, { key: 'и=and', pos: 'conjunction', headword: 'и' }]
     expect(buildParadigms(words, 'noun')).toHaveLength(1)
+    expect(buildParadigms(words, 'pronoun')).toHaveLength(2)
     expect(buildParadigms(words, 'verb')).toHaveLength(1)
     expect(buildParadigms(words, 'conjunction')).toHaveLength(0)
+  })
+})
+
+// Guards against schema drift: runs the real pipeline over the committed YAML
+// and asserts every drillable part of speech yields paradigms. This is what
+// would have caught the pronoun/adjective field-name mismatch.
+describe('buildParadigms over the shipped vocabulary', () => {
+  const POS_BY_FILE = {
+    nouns: 'noun',
+    calendar: 'noun',
+    pronouns: 'pronoun',
+    verbs: 'verb',
+    adjectives: 'adjective',
+  }
+  const here = path.dirname(fileURLToPath(import.meta.url))
+  const dir = path.resolve(here, '../../public/vocab')
+  const files = Object.entries(POS_BY_FILE).map(([file, pos]) => ({
+    pos,
+    text: fs.readFileSync(path.join(dir, `${file}.yml`), 'utf8'),
+  }))
+  const words = buildWords(files)
+
+  it.each([
+    ['noun', 100],
+    ['pronoun', 20],
+    ['verb', 50],
+    ['adjective', 100],
+  ])('produces plenty of %s paradigms (≥ %i)', (pos, min) => {
+    const paradigms = buildParadigms(words, pos)
+    expect(paradigms.length).toBeGreaterThanOrEqual(min)
+    // Every paradigm must carry at least three filled cells to be drillable.
+    for (const p of paradigms) expect(p.cells.length).toBeGreaterThanOrEqual(3)
   })
 })

@@ -30,7 +30,10 @@ const decoyPool = [...new Set(Object.values(endings).flatMap((e) => [...e]))]
 const typed = reactive({}) // cellKey -> built ending
 const active = ref(0)
 const finished = ref(typable.length === 0)
-let mistakes = 0
+// Cells where the learner pressed a wrong key — recorded per-slot so progress
+// tracking reflects which endings were actually struggled with, not just the
+// table-wide pass/fail.
+const mistakeCells = new Set()
 
 const hintCache = {}
 function hintFor(key, idx, next) {
@@ -63,8 +66,11 @@ const highlight = computed(() => {
 
 function finishUp() {
   finished.value = true
-  const records = props.paradigm.cells.map((c) => ({ slot: cellKey(c.row, c.col), correct: true }))
-  emit('graded', mistakes === 0, records)
+  const records = props.paradigm.cells.map((c) => {
+    const slot = cellKey(c.row, c.col)
+    return { slot, correct: !mistakeCells.has(slot) }
+  })
+  emit('graded', mistakeCells.size === 0, records)
 }
 
 function press(letter) {
@@ -78,7 +84,7 @@ function press(letter) {
       else active.value += 1
     }
   } else {
-    mistakes += 1
+    mistakeCells.add(key)
   }
 }
 
