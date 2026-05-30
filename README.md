@@ -71,6 +71,11 @@ the whole drill is gated behind a capability check and shows a clear notice wher
 it isn't available. The recogniser wrapper and grading live in
 [`src/lib/recognition.js`](src/lib/recognition.js).
 
+> **Privacy:** unlike the rest of the app, speaking drills aren't local. In
+> Chrome/Edge the Web Speech API streams your microphone audio to the browser
+> maker's cloud service for transcription (which is why it needs a network
+> connection). The app surfaces this in the UI before you start.
+
 ## Tech
 
 - **Vue 3** + **Vite 6**, **Vue Router** (hash history for clean offline deep links)

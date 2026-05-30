@@ -76,11 +76,62 @@ const result = ref(null) // { correct, passed, similarity }
 const celebrating = ref(false)
 
 let recCtl = null
-let advanceTimer = null
+// Bumped on every question change / quit so callbacks captured by an earlier
+// question (a late recogniser result, or a `speechSynthesis.cancel()` that
+// retro-fires the old utterance's `onend`) bail instead of acting on the new one.
+let seq = 0
+// Auto re-listens after a silent result, capped so a blocked mic can't spin.
+let emptyRetries = 0
+const MAX_EMPTY_RETRIES = 5
+// Errors that won't fix themselves — never auto-retry listening on these.
+const FATAL_ERRORS = new Set([
+  'not-allowed',
+  'service-not-allowed',
+  'audio-capture',
+  'network',
+  'unsupported',
+])
+
+// Pending timers (watchdogs + advance delays), all cleared on any transition.
+const timers = new Set()
+function later(fn, ms) {
+  const id = setTimeout(() => {
+    timers.delete(id)
+    fn()
+  }, ms)
+  timers.add(id)
+  return id
+}
+function clearTimers() {
+  for (const id of timers) clearTimeout(id)
+  timers.clear()
+}
 
 const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
 )
+
+// Rough upper bound on how long an utterance takes to read, so a watchdog can
+// rescue the hands-free loop when speechSynthesis never fires `onend` (a known
+// flaky case: long utterances, backgrounded tabs, after a cancel()).
+function estimateSpeechMs(text) {
+  return Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
+}
+
+// Run `action` exactly once for the *current* question — whichever fires first,
+// the speech `onEnd` callback or the watchdog. Returns the callback to hand to
+// speak()/speakSequence(); a stale call from a previous question is ignored.
+function onceForQuestion(action, watchdogMs) {
+  const mySeq = seq
+  let done = false
+  const run = () => {
+    if (done || mySeq !== seq) return
+    done = true
+    action()
+  }
+  later(run, watchdogMs)
+  return run
+}
 
 function start(modeId) {
   mode.value = modeId
@@ -97,10 +148,12 @@ function stopRecognition() {
 }
 
 function nextQuestion() {
-  clearTimeout(advanceTimer)
+  seq += 1
+  clearTimers()
   stopRecognition()
   cancelSpeech()
   celebrating.value = false
+  emptyRetries = 0
   phase.value = 'prompt'
   transcript.value = ''
   recError.value = ''
@@ -111,15 +164,15 @@ function nextQuestion() {
 
 // Read the prompt (if the mode reads Russian) and, hands-free, start listening
 // the moment the prompt finishes — never while the phone is still talking, or
-// the mic would hear the synthesised voice.
+// the mic would hear the synthesised voice. A watchdog opens the mic anyway if
+// `onend` never arrives.
 function presentPrompt() {
   if (modeCfg.value?.promptRu) {
-    const spoke = speak(current.value.ru, 'ru-RU', 0.9, {
-      onEnd: () => {
-        if (handsFree.value && phase.value === 'prompt') beginListen()
-      },
-    })
-    if (!spoke && handsFree.value) beginListen()
+    const onEnd = onceForQuestion(() => {
+      if (handsFree.value && phase.value === 'prompt') beginListen()
+    }, estimateSpeechMs(current.value.ru) + 1500)
+    const spoke = speak(current.value.ru, 'ru-RU', 0.9, { onEnd })
+    if (!spoke) onEnd() // no TTS — don't wait on a callback that won't come
   } else if (handsFree.value) {
     beginListen()
   }
@@ -133,26 +186,37 @@ function replayPrompt() {
 function beginListen() {
   if (!canRecognize || phase.value === 'graded') return
   stopRecognition()
+  const mySeq = seq
   recError.value = ''
   transcript.value = ''
   phase.value = 'listening'
   recCtl = listen({
     lang: modeCfg.value.recLang,
     onResult: ({ transcript: heard }) => {
-      transcript.value = heard
+      if (mySeq === seq) transcript.value = heard
     },
     onError: (err) => {
-      recError.value = err
+      if (mySeq === seq) recError.value = err
     },
     onEnd: (finalText, alternatives) => {
       recCtl = null
-      // A real error (permission/network) leaves us on the prompt to retry;
-      // a plain empty result after the user spoke nothing does too.
-      if (phase.value !== 'listening') return
+      // Ignore a result that arrives after we've already moved on.
+      if (mySeq !== seq || phase.value !== 'listening') return
       if (!finalText) {
+        // Empty result (usually a silent 'no-speech'): drop back to the prompt,
+        // and hands-free re-open the mic so a quiet moment doesn't end the loop
+        // — but not on a fatal error, and not forever.
         phase.value = 'prompt'
+        const retryable = handsFree.value && !FATAL_ERRORS.has(recError.value)
+        if (retryable && emptyRetries < MAX_EMPTY_RETRIES) {
+          emptyRetries += 1
+          later(() => {
+            if (phase.value === 'prompt' && handsFree.value) beginListen()
+          }, 700)
+        }
         return
       }
+      emptyRetries = 0
       grade(finalText, alternatives)
     },
   })
@@ -167,8 +231,9 @@ function grade(finalText, alternatives = []) {
   const passed = isPass(finalText)
   const target = current.value[modeCfg.value.target]
   // Grade on the most generous of all the recogniser's guesses; the winning
-  // guess (`best`) is what we show and diff against.
-  const guesses = [finalText, ...alternatives]
+  // guess (`best`) is what we show and diff against. `onEnd` already passes the
+  // best guess as `finalText` and the full set as `alternatives`.
+  const guesses = alternatives.length ? alternatives : [finalText]
   const { correct, similarity, best } = passed
     ? { correct: false, similarity: 0, best: finalText }
     : gradeSpoken(guesses, target)
@@ -194,22 +259,27 @@ function reveal({ correct, passed, similarity, diff, heard }) {
   })
 
   // Spoken feedback: a short English cue, then the Russian phrase so you always
-  // hear the model answer — the heart of the hands-free loop.
+  // hear the model answer — the heart of the hands-free loop. A watchdog advances
+  // even if speechSynthesis never reports the sequence finishing.
   const cue = correct ? 'Correct.' : passed ? 'Passed.' : 'Not quite.'
-  speakSequence([
-    { text: cue, lang: 'en-GB', rate: 1 },
-    { text: current.value.ru, lang: 'ru-RU', rate: 0.9 },
-  ], {
-    onEnd: () => {
-      if (handsFree.value && phase.value === 'graded') {
-        advanceTimer = setTimeout(nextQuestion, correct ? CELEBRATE_MS : 1400)
-      }
-    },
-  })
+  const advance = onceForQuestion(() => {
+    if (handsFree.value && phase.value === 'graded') {
+      later(nextQuestion, correct ? CELEBRATE_MS : 1400)
+    }
+  }, estimateSpeechMs(cue) + estimateSpeechMs(current.value.ru) + 1500)
+  const spoke = speakSequence(
+    [
+      { text: cue, lang: 'en-GB', rate: 1 },
+      { text: current.value.ru, lang: 'ru-RU', rate: 0.9 },
+    ],
+    { onEnd: advance },
+  )
+  if (!spoke) advance()
 }
 
 function quit() {
-  clearTimeout(advanceTimer)
+  seq += 1
+  clearTimers()
   stopRecognition()
   cancelSpeech()
   celebrating.value = false
@@ -219,7 +289,7 @@ function quit() {
 }
 
 onUnmounted(() => {
-  clearTimeout(advanceTimer)
+  clearTimers()
   stopRecognition()
   cancelSpeech()
 })
@@ -232,6 +302,11 @@ onUnmounted(() => {
     <p class="muted" style="margin: 0">
       Practise saying Russian (and translating) out loud — your browser listens and grades
       what it hears. Best with headphones in a quiet room.
+    </p>
+
+    <p v-if="canRecognize" class="muted" style="margin: 0; font-size: 0.85rem">
+      🔒 Heads-up: in Chrome and Edge, speech recognition sends your microphone audio to the
+      browser maker’s cloud service to transcribe it — it isn’t processed on your device.
     </p>
 
     <p v-if="!canRecognize" class="feedback bad">

@@ -15,6 +15,7 @@ afterEach(() => {
   delete window.webkitSpeechRecognition
   delete window.speechSynthesis
   delete window.SpeechSynthesisUtterance
+  vi.useRealTimers()
   vi.restoreAllMocks()
 })
 
@@ -99,6 +100,36 @@ describe('SpeakingView', () => {
     const missed = wrapper.findAll('.word-diff .word-miss')
     expect(missed.length).toBeGreaterThan(0)
     expect(wrapper.vm.result.diff.score).toBeLessThan(1)
+  })
+
+  it('re-opens the mic after a silent result in hands-free mode', async () => {
+    const instances = []
+    window.webkitSpeechRecognition = class {
+      constructor() {
+        instances.push(this)
+      }
+      start() {}
+      stop() {}
+      abort() {}
+    }
+    vi.useFakeTimers()
+
+    // No speechSynthesis, so the prompt's onEnd runs immediately and (hands-free
+    // is on by default) opens the mic — creating the first recogniser.
+    const wrapper = mount(SpeakingView)
+    await wrapper.findAll('button.card')[2].trigger('click') // interpret
+    expect(instances.length).toBe(1)
+    expect(wrapper.vm.phase).toBe('listening')
+
+    // A silent (empty) final result drops us back to the prompt …
+    instances[0].onend()
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.phase).toBe('prompt')
+
+    // … and after a short pause the mic re-opens on its own.
+    vi.advanceTimersByTime(800)
+    await wrapper.vm.$nextTick()
+    expect(instances.length).toBe(2)
   })
 
   it('marks a spoken "pass" as passed, not correct', async () => {
