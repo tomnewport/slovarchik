@@ -57,8 +57,26 @@ const chitat = {
   },
 }
 
-// Adjective — nominative agreement forms plus a comparative (which is excluded).
+// Adjective with the full case × gender/number declension block.
 const novyy = {
+  key: 'новый=new',
+  pos: 'adjective',
+  headword: 'но́вый',
+  meaning: 'new',
+  extra: {
+    forms: { m: 'но́вый', f: 'но́вая', n: 'но́вое', pl: 'но́вые', comparative: 'нове́е' },
+    declension: {
+      m_nom: 'но́вый', m_gen: 'но́вого', m_dat: 'но́вому', m_acc: 'но́вый', m_ins: 'но́вым', m_pre: 'но́вом',
+      n_nom: 'но́вое', n_gen: 'но́вого', n_dat: 'но́вому', n_acc: 'но́вое', n_ins: 'но́вым', n_pre: 'но́вом',
+      f_nom: 'но́вая', f_gen: 'но́вой', f_dat: 'но́вой', f_acc: 'но́вую', f_ins: 'но́вой', f_pre: 'но́вой',
+      pl_nom: 'но́вые', pl_gen: 'но́вых', pl_dat: 'но́вым', pl_acc: 'но́вые', pl_ins: 'но́выми', pl_pre: 'но́вых',
+    },
+  },
+}
+
+// Adjective with only the legacy nominative forms (no declension block) — must
+// still fall back to the gender-only agreement table.
+const novyyNoDecl = {
   key: 'новый=new',
   pos: 'adjective',
   headword: 'но́вый',
@@ -130,16 +148,33 @@ describe('buildParadigm — verb', () => {
 
 describe('buildParadigm — adjective', () => {
   const p = buildParadigm(novyy)
-  it('uses the gender agreement forms and excludes the comparative', () => {
-    expect(p.rows.map((r) => r.key)).toEqual(['m', 'f', 'n', 'pl'])
-    expect(p.cells).toHaveLength(4)
+  it('builds the full case × gender/number grid', () => {
+    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
+    expect(p.cols.map((c) => c.key)).toEqual(['m', 'n', 'f', 'pl'])
+    expect(p.cells).toHaveLength(24)
+    expect(isMultiColumn(p)).toBe(true)
     expect(p.stem).toBe('нов')
-    expect(p.cells.some((c) => c.form.includes('нове'))).toBe(false) // comparative dropped
     expect(p.lemma).toBe('но́вый') // accented masculine headword
+  })
+  it('places oblique forms and derives their endings', () => {
+    const fGen = p.cells.find((c) => c.row === 'gen' && c.col === 'f')
+    expect(fGen.form).toBe('но́вой')
+    expect(endingOf(p, fGen)).toBe('ой')
+    const plIns = p.cells.find((c) => c.row === 'ins' && c.col === 'pl')
+    expect(plIns.form).toBe('но́выми')
+  })
+  it('excludes the comparative (it lives in forms, not declension)', () => {
+    expect(p.cells.some((c) => c.form.includes('нове'))).toBe(false)
+  })
+  it('falls back to the gender agreement table without a declension block', () => {
+    const p2 = buildParadigm(novyyNoDecl)
+    expect(p2.rows.map((r) => r.key)).toEqual(['m', 'f', 'n', 'pl'])
+    expect(p2.cells).toHaveLength(4)
+    expect(isMultiColumn(p2)).toBe(false)
   })
   it('drops non-Cyrillic placeholder forms', () => {
     const broken = buildParadigm({
-      ...novyy,
+      ...novyyNoDecl,
       extra: { forms: { m: 'но́вый', f: 'placeholder', n: 'но́вое', pl: 'но́вые' } },
     })
     expect(broken.cells.some((c) => c.form === 'placeholder')).toBe(false)

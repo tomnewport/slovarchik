@@ -25,10 +25,15 @@ levels:
 ### 🧩 Inflection drills
 
 The same four exercises drill every inflecting part of speech — **nouns**
-(case × number), **adjectives** (gender/number agreement), **pronouns**
-(case, or gender agreement for the adjective-like ones) and **verbs**
-(present-tense conjugation). Each word type is just a different paradigm table
-fed to the shared engine in `src/lib/paradigm.js`.
+(case × number), **adjectives** (full case × gender/number agreement),
+**pronouns** (case, or gender agreement for the adjective-like ones) and
+**verbs** (present-tense conjugation). Each word type is just a different
+paradigm table fed to the shared engine in `src/lib/paradigm.js`.
+
+Adjective declension tables are generated from the dictionary form by
+`scripts/gen-adjective-declension.mjs` (run via `npm run gen:adjectives`),
+which derives all 24 forms by rule and refuses to write unless they validate
+against hand-checked golden paradigms and every curated nominative.
 
 | Exercise        | How it works                                                                 |
 | --------------- | ---------------------------------------------------------------------------- |

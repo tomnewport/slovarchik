@@ -52,6 +52,14 @@ const GENDER_FORMS = [
   { key: 'pl', label: 'Plural', sub: 'они' },
 ]
 
+// Gender/number columns for the full adjective case × agreement grid.
+const GENDER_COLS = [
+  { key: 'm', label: 'Masc.' },
+  { key: 'n', label: 'Neut.' },
+  { key: 'f', label: 'Fem.' },
+  { key: 'pl', label: 'Plural' },
+]
+
 const SINGLE_COL = (label) => [{ key: '_', label }]
 
 /** Human-readable title for a part of speech. */
@@ -132,11 +140,19 @@ export function buildParadigm(word) {
       break
     }
     case 'adjective': {
-      // Nominative agreement forms (m / f / n / pl). The comparative is excluded:
-      // it is a separate degree, often suppletive (лучше, больше), and would
-      // break the shared stem the ending exercises rely on.
-      const raw = word.extra?.forms ?? {}
-      paradigm = assemble(meta, GENDER_FORMS, SINGLE_COL('Form'), (row) => raw[row])
+      const decl = word.extra?.declension
+      if (decl && Object.keys(decl).length) {
+        // Full case × gender/number grid: cases are rows, genders are columns.
+        // declension keys are "<gender>_<case>".
+        const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
+        paradigm = assemble(meta, rows, GENDER_COLS, (row, col) => decl[`${col}_${row}`])
+      } else {
+        // Fallback: just the nominative agreement forms (m / f / n / pl). The
+        // comparative is excluded — it is a separate, often suppletive degree
+        // (лучше, больше) that would break the shared stem of the ending drills.
+        const raw = word.extra?.forms ?? {}
+        paradigm = assemble(meta, GENDER_FORMS, SINGLE_COL('Form'), (row) => raw[row])
+      }
       break
     }
     default:
