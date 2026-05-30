@@ -46,6 +46,36 @@ mixed into the bank to keep it honest. The Vocabulary *easy* drill also gains a
 when you tap it — so you match by ear. Both degrade gracefully where speech
 synthesis isn't available.
 
+### 🗣️ Speaking
+
+Say it out loud — the browser's **speech recognition** (Web Speech API) listens
+and grades what it hears. Three modes:
+
+| Mode          | How it works                                                                 |
+| ------------- | ---------------------------------------------------------------------------- |
+| **Echo**      | See the Russian (and English), hear it, then say it back — checks your accent. |
+| **Produce**   | See the English, say the Russian; the correct phrase is then read aloud.       |
+| **Interpret** | Hear a Russian phrase, say the English — or say *"pass"*. **Hands-free** with spoken feedback. |
+
+Answers are graded leniently: an answer counts when **≥ 90% of its letters
+match** (a Levenshtein letter-similarity, forgiving stress, case, spaces and
+punctuation), and the recogniser's *alternative* guesses are all scored — the
+most generous wins — so a near-miss that the recogniser ranked second still
+passes. The result screen shows the letter-match score, the words that landed
+versus those missed, and any extra words it heard. In **hands-free** mode the
+loop runs itself: it reads the
+prompt, waits for the synthesised voice to finish before opening the mic, grades
+what you said, speaks the verdict and the model answer, then moves on — eyes-free
+practice. Recognition only ships in some browsers (Chrome/Edge, and online), so
+the whole drill is gated behind a capability check and shows a clear notice where
+it isn't available. The recogniser wrapper and grading live in
+[`src/lib/recognition.js`](src/lib/recognition.js).
+
+> **Privacy:** unlike the rest of the app, speaking drills aren't local. In
+> Chrome/Edge the Web Speech API streams your microphone audio to the browser
+> maker's cloud service for transcription (which is why it needs a network
+> connection). The app surfaces this in the UI before you start.
+
 ## Tech
 
 - **Vue 3** + **Vite 6**, **Vue Router** (hash history for clean offline deep links)

@@ -31,6 +31,11 @@ export const routes = [
     component: () => import('../views/ListeningView.vue'),
   },
   {
+    path: '/speaking',
+    name: 'speaking',
+    component: () => import('../views/SpeakingView.vue'),
+  },
+  {
     path: '/progress',
     name: 'progress',
     component: () => import('../views/ProgressView.vue'),
