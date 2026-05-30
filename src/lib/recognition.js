@@ -3,7 +3,7 @@
 // a progressive enhancement: recognition only ships in some browsers (Chrome /
 // Edge, behind the `webkit` prefix, and online) so every entry point degrades
 // to a safe no-op when it's missing.
-import { typingSequence } from './phrases.js'
+import { typingSequence, phraseTokens } from './phrases.js'
 
 /** True when the browser exposes a SpeechRecognition implementation. */
 export function recognitionSupported() {
@@ -87,6 +87,39 @@ export function gradeSpoken(transcript, target, threshold = 0.7) {
   const exact = wanted.length > 0 && heard === wanted
   const similarity = spokenSimilarity(transcript, target)
   return { correct: exact || similarity >= threshold, similarity }
+}
+
+/**
+ * Per-word feedback: walk the target phrase (keeping its original spelling and
+ * punctuation) and flag each word as `hit` when the recogniser's transcript
+ * contains it, consuming matches from a multiset so a repeated target word needs
+ * to be said the right number of times. Also returns the words that were *heard*
+ * but aren't in the target (`extra`), and the overall similarity `score`.
+ * Punctuation-only tokens carry `skip: true` so callers can render them plainly.
+ * @param {string} transcript
+ * @param {string} target
+ * @returns {{ score: number, words: Array<{ text: string, hit: boolean, skip?: boolean }>, extra: string[] }}
+ */
+export function wordDiff(transcript, target) {
+  const counts = new Map()
+  for (const t of tokens(transcript)) counts.set(t, (counts.get(t) ?? 0) + 1)
+
+  const words = phraseTokens(target).map((display) => {
+    const norm = typingSequence(display)
+    if (!norm) return { text: display, hit: true, skip: true } // pure punctuation
+    const have = counts.get(norm) ?? 0
+    if (have > 0) {
+      counts.set(norm, have - 1)
+      return { text: display, hit: true }
+    }
+    return { text: display, hit: false }
+  })
+
+  // Whatever's left in the multiset was heard but not wanted.
+  const extra = []
+  for (const [word, n] of counts) for (let i = 0; i < n; i += 1) extra.push(word)
+
+  return { score: spokenSimilarity(transcript, target), words, extra }
 }
 
 /**

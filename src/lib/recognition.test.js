@@ -2,6 +2,7 @@ import { describe, it, expect, afterEach, vi } from 'vitest'
 import {
   recognitionSupported,
   spokenSimilarity,
+  wordDiff,
   isPass,
   gradeSpoken,
   recognitionErrorMessage,
@@ -74,6 +75,31 @@ describe('gradeSpoken', () => {
 
   it('rejects an answer below the threshold', () => {
     expect(gradeSpoken('собака', 'большая красивая кошка').correct).toBe(false)
+  })
+})
+
+describe('wordDiff', () => {
+  it('flags each target word as hit or miss against what was heard', () => {
+    const { words } = wordDiff('the cat is asleep', 'the cat is sleeping')
+    expect(words.map((w) => w.text)).toEqual(['the', 'cat', 'is', 'sleeping'])
+    expect(words.map((w) => w.hit)).toEqual([true, true, true, false])
+  })
+
+  it('keeps original spelling/punctuation but matches stress- and case-insensitively', () => {
+    const { words, score } = wordDiff('привет как дела', 'Приве́т, как дела́?')
+    expect(words.map((w) => w.text)).toEqual(['Приве́т,', 'как', 'дела́?'])
+    expect(words.every((w) => w.hit)).toBe(true)
+    expect(score).toBe(1)
+  })
+
+  it('reports words that were heard but not wanted as extra', () => {
+    const { extra } = wordDiff('the big red cat', 'the cat')
+    expect(extra).toEqual(expect.arrayContaining(['big', 'red']))
+  })
+
+  it('needs a repeated target word to be said the right number of times', () => {
+    const { words } = wordDiff('na na', 'na na na')
+    expect(words.map((w) => w.hit)).toEqual([true, true, false])
   })
 })
 

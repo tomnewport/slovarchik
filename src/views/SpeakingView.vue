@@ -8,6 +8,7 @@ import { speak, speakSequence, cancelSpeech } from '../lib/speech.js'
 import {
   listen,
   gradeSpoken,
+  wordDiff,
   isPass,
   recognitionSupported,
   recognitionErrorMessage,
@@ -164,15 +165,19 @@ function finishListening() {
 
 function grade(finalText) {
   const passed = isPass(finalText)
+  const target = current.value[modeCfg.value.target]
   const { correct, similarity } = passed
     ? { correct: false, similarity: 0 }
-    : gradeSpoken(finalText, current.value[modeCfg.value.target])
-  reveal({ correct, passed, similarity })
+    : gradeSpoken(finalText, target)
+  // Per-word breakdown so the learner sees which words landed (skip it on a
+  // deliberate pass — there was no real attempt to diff).
+  const diff = passed ? null : wordDiff(finalText, target)
+  reveal({ correct, passed, similarity, diff })
 }
 
-function reveal({ correct, passed, similarity }) {
+function reveal({ correct, passed, similarity, diff }) {
   phase.value = 'graded'
-  result.value = { correct, passed, similarity }
+  result.value = { correct, passed, similarity, diff, targetLang: modeCfg.value.target }
   score.total += 1
   if (correct) {
     score.right += 1
@@ -310,6 +315,20 @@ onUnmounted(() => {
         <template v-if="result.correct">✓ Correct!</template>
         <template v-else-if="result.passed">↷ Passed</template>
         <template v-else>✗ Not quite</template>
+        <span v-if="result.diff" class="match-score">· {{ Math.round(result.diff.score * 100) }}% match</span>
+      </p>
+
+      <!-- Per-word breakdown: which words landed (green) and which were missed
+           or misheard (struck through) against what you were asked to say. -->
+      <div v-if="result.diff && result.diff.words.length" class="word-diff" :lang="result.targetLang">
+        <span
+          v-for="(w, i) in result.diff.words"
+          :key="i"
+          :class="w.skip ? '' : w.hit ? 'word-hit' : 'word-miss'"
+        >{{ w.text }}</span>
+      </div>
+      <p v-if="result.diff && result.diff.extra.length" class="muted extra-words" style="margin: 0">
+        Extra heard: {{ result.diff.extra.join(', ') }}
       </p>
 
       <p v-if="transcript" class="muted heard" style="margin: 0">
@@ -342,6 +361,37 @@ onUnmounted(() => {
 .replay {
   margin: 0.5rem auto 0;
   font-size: 1.05rem;
+}
+
+.match-score {
+  margin-left: 0.4rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.word-diff {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  font-size: 1.2rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+}
+
+.word-hit {
+  color: var(--good, #1a9d52);
+}
+
+.word-miss {
+  color: var(--bad, #d23b3b);
+  text-decoration: underline wavy;
+  text-underline-offset: 3px;
+}
+
+.extra-words {
+  font-size: 0.9rem;
 }
 
 .mic-area {

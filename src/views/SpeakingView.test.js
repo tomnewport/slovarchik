@@ -74,6 +74,31 @@ describe('SpeakingView', () => {
     expect(wrapper.vm.result.correct).toBe(true)
     expect(wrapper.vm.score.right).toBe(1)
     expect(wrapper.text()).toContain('✓ Correct!')
+    // The match score and a per-word breakdown are shown.
+    expect(wrapper.text()).toContain('100% match')
+    const words = wrapper.findAll('.word-diff span')
+    expect(words.length).toBeGreaterThan(0)
+    expect(words.every((w) => w.classes('word-hit'))).toBe(true)
+  })
+
+  it('shows which words were missed when the answer is only partly right', async () => {
+    window.webkitSpeechRecognition = class {
+      start() {}
+      stop() {}
+      abort() {}
+    }
+    const wrapper = mount(SpeakingView)
+    await wrapper.find('input[type="checkbox"]').setValue(false)
+    await wrapper.findAll('button.card')[0].trigger('click') // echo (target = ru)
+
+    // Drop the last word of the target so it registers as a miss.
+    const said = wrapper.vm.current.ru.split(/\s+/).slice(0, -1).join(' ')
+    wrapper.vm.grade(said)
+    await wrapper.vm.$nextTick()
+
+    const missed = wrapper.findAll('.word-diff .word-miss')
+    expect(missed.length).toBeGreaterThan(0)
+    expect(wrapper.vm.result.diff.score).toBeLessThan(1)
   })
 
   it('marks a spoken "pass" as passed, not correct', async () => {
