@@ -80,6 +80,7 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, then `build` on every push.
   framework-free so it stays unit-testable), and add/extend its `*.test.js`.
 - **Add/edit words** → the YAML in `public/vocab/` + bump `updated` in
   `manifest.json`. `vocabBuild.test.js`/`declension.test.js` guard the shape.
+  Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store).
 - **Routing/nav** → `src/router/index.js` + the `<nav>` in `App.vue`.
 

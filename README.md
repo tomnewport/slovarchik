@@ -196,6 +196,10 @@ the schema above (keep each file sorted alphabetically by Russian) and bump its
 meaning, accepted answers, and complete case tables for nouns. Noun endings (for
 the advanced drill) are derived automatically from the forms.
 
+📖 **Full reference:** [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md)
+documents every field, the per-part-of-speech schemas, stress marks, heteronyms,
+and exactly what the tests check.
+
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the app
