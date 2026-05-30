@@ -31,7 +31,7 @@ works offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
 - **Vue 3** (`<script setup>` SFCs) + **Vue Router** (hash history)
 - **Vite 6** build, **vite-plugin-pwa** (Workbox) for the service worker/offline cache
 - **Vitest** + **@vue/test-utils** + jsdom for tests
-- Vocabulary is **YAML files** in `public/vocab/`, loaded on demand and cached in **IndexedDB** — not bundled
+- Vocabulary is **YAML files** in `public/vocab/`, loaded on demand and cached in **IndexedDB** — not bundled. (`js-yaml` is a **runtime** dependency, not a devDep: the app parses the YAML in the browser.)
 
 ## Project map
 
