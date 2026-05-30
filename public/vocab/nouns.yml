@@ -104,6 +104,32 @@ words:
       pl_acc: а́второв
       pl_ins: а́вторами
       pl_pre: а́вторах
+  "агент=agent":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: agent (a person who acts on behalf of another)
+    usage:
+      - ru: Аге́нт передал секре́тные сведе́ния.
+        en_gb: The agent passed on secret information.
+    declension:
+      sg_nom: аге́нт
+      sg_gen: аге́нта
+      sg_dat: аге́нту
+      sg_acc: аге́нта
+      sg_ins: аге́нтом
+      sg_pre: аге́нте
+      pl_nom: аге́нты
+      pl_gen: аге́нтов
+      pl_dat: аге́нтам
+      pl_acc: аге́нтов
+      pl_ins: аге́нтами
+      pl_pre: аге́нтах
   "ад=hell":
     cefr_level: B2
     gender: m
@@ -150,6 +176,33 @@ words:
       pl_acc: адвока́тов
       pl_ins: адвока́тами
       pl_pre: адвока́тах
+  "академик=academician":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+      - school
+    en_gb:
+      standard: academician (a full member of an academy of sciences)
+    usage:
+      - ru: Академи́к выступи́л на конфере́нции.
+        en_gb: The academician spoke at the conference.
+    declension:
+      sg_nom: академи́к
+      sg_gen: академи́ка
+      sg_dat: академи́ку
+      sg_acc: академи́ка
+      sg_ins: академи́ком
+      sg_pre: академи́ке
+      pl_nom: академи́ки
+      pl_gen: академи́ков
+      pl_dat: академи́кам
+      pl_acc: академи́ков
+      pl_ins: академи́ками
+      pl_pre: академи́ках
   "актёр=actor":
     cefr_level: A2
     gender: m
@@ -281,6 +334,59 @@ words:
       pl_acc: алтари́
       pl_ins: алтаря́ми
       pl_pre: алтаря́х
+  "альбом=album":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - daily life
+      - home
+    en_gb:
+      standard: album (a book for photos or a music release)
+    usage:
+      - ru: Она вклеила фотографии в альбо́м.
+        en_gb: She glued the photos into the album.
+    declension:
+      sg_nom: альбо́м
+      sg_gen: альбо́ма
+      sg_dat: альбо́му
+      sg_acc: альбо́м
+      sg_ins: альбо́мом
+      sg_pre: альбо́ме
+      pl_nom: альбо́мы
+      pl_gen: альбо́мов
+      pl_dat: альбо́мам
+      pl_acc: альбо́мы
+      pl_ins: альбо́мами
+      pl_pre: альбо́мах
+  "американец=American":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - nationalities
+    en_gb:
+      standard: American (a person from America)
+    usage:
+      - ru: Он — америка́нец из Нью-Йо́рка.
+        en_gb: He is an American from New York.
+    declension:
+      sg_nom: америка́нец
+      sg_gen: америка́нца
+      sg_dat: америка́нцу
+      sg_acc: америка́нца
+      sg_ins: америка́нцем
+      sg_pre: америка́нце
+      pl_nom: америка́нцы
+      pl_gen: америка́нцев
+      pl_dat: америка́нцам
+      pl_acc: америка́нцев
+      pl_ins: америка́нцами
+      pl_pre: америка́нцах
   "ангел=angel":
     cefr_level: B1
     gender: m
@@ -589,6 +695,32 @@ words:
       pl_acc: балко́ны
       pl_ins: балко́нами
       pl_pre: балко́нах
+  "бандит=bandit":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - the law
+    en_gb:
+      standard: bandit (an armed robber or outlaw)
+    usage:
+      - ru: Банди́т ограби́л банк.
+        en_gb: The bandit robbed the bank.
+    declension:
+      sg_nom: банди́т
+      sg_gen: банди́та
+      sg_dat: банди́ту
+      sg_acc: банди́та
+      sg_ins: банди́том
+      sg_pre: банди́те
+      pl_nom: банди́ты
+      pl_gen: банди́тов
+      pl_dat: банди́там
+      pl_acc: банди́тов
+      pl_ins: банди́тами
+      pl_pre: банди́тах
   "банк=bank":
     cefr_level: B1
     gender: m
@@ -615,6 +747,33 @@ words:
       pl_acc: ба́нки
       pl_ins: ба́нками
       pl_pre: ба́нках
+  "банкомат=ATM":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - finance
+      - shopping
+      - places
+    en_gb:
+      standard: ATM (a cash machine)
+    usage:
+      - ru: Я снял деньги в банкома́те.
+        en_gb: I took money out of the ATM.
+    declension:
+      sg_nom: банкома́т
+      sg_gen: банкома́та
+      sg_dat: банкома́ту
+      sg_acc: банкома́т
+      sg_ins: банкома́том
+      sg_pre: банкома́те
+      pl_nom: банкома́ты
+      pl_gen: банкома́тов
+      pl_dat: банкома́там
+      pl_acc: банкома́ты
+      pl_ins: банкома́тами
+      pl_pre: банкома́тах
   "бар=bar":
     cefr_level: A2
     gender: m
@@ -641,6 +800,32 @@ words:
       pl_acc: ба́ры
       pl_ins: ба́рами
       pl_pre: ба́рах
+  "барон=baron":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - history
+    en_gb:
+      standard: baron (a member of the lowest rank of the nobility)
+    usage:
+      - ru: Баро́н владел огро́мными земля́ми.
+        en_gb: The baron owned vast lands.
+    declension:
+      sg_nom: баро́н
+      sg_gen: баро́на
+      sg_dat: баро́ну
+      sg_acc: баро́на
+      sg_ins: баро́ном
+      sg_pre: баро́не
+      pl_nom: баро́ны
+      pl_gen: баро́нов
+      pl_dat: баро́нам
+      pl_acc: баро́нов
+      pl_ins: баро́нами
+      pl_pre: баро́нах
   "бассейн=swimming pool":
     cefr_level: A2
     gender: m
@@ -1128,6 +1313,33 @@ words:
       pl_acc: бога́тства
       pl_ins: бога́тствами
       pl_pre: бога́тствах
+  "боец=fighter":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+      - war and peace
+    en_gb:
+      standard: fighter (a soldier or combatant)
+    usage:
+      - ru: Бое́ц сра́жался до конца́.
+        en_gb: The fighter fought to the end.
+    declension:
+      sg_nom: бое́ц
+      sg_gen: бойца́
+      sg_dat: бойцу́
+      sg_acc: бойца́
+      sg_ins: бойцо́м
+      sg_pre: бойце́
+      pl_nom: бойцы́
+      pl_gen: бойцо́в
+      pl_dat: бойца́м
+      pl_acc: бойцо́в
+      pl_ins: бойца́ми
+      pl_pre: бойца́х
   "болезнь=illness":
     cefr_level: B1
     gender: f
@@ -1371,6 +1583,32 @@ words:
       pl_acc: бра́тьев
       pl_ins: бра́тьями
       pl_pre: бра́тьях
+  "бригадир=foreman":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: foreman (a supervisor of a work team)
+    usage:
+      - ru: Бригади́р раздал зада́ния рабо́чим.
+        en_gb: The foreman assigned tasks to the workers.
+    declension:
+      sg_nom: бригади́р
+      sg_gen: бригади́ра
+      sg_dat: бригади́ру
+      sg_acc: бригади́ра
+      sg_ins: бригади́ром
+      sg_pre: бригади́ре
+      pl_nom: бригади́ры
+      pl_gen: бригади́ров
+      pl_dat: бригади́рам
+      pl_acc: бригади́ров
+      pl_ins: бригади́рами
+      pl_pre: бригади́рах
   "бровь=eyebrow":
     cefr_level: B1
     gender: f
@@ -1630,6 +1868,32 @@ words:
       pl_acc: валю́ты
       pl_ins: валю́тами
       pl_pre: валю́тах
+  "ванная=bathroom":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: bathroom (a room with a bath or shower)
+    usage:
+      - ru: Она приня́ла душ в ва́нной.
+        en_gb: She had a shower in the bathroom.
+    declension:
+      sg_nom: ва́нная
+      sg_gen: ва́нной
+      sg_dat: ва́нной
+      sg_acc: ва́нную
+      sg_ins: ва́нной
+      sg_pre: ва́нной
+      pl_nom: ва́нные
+      pl_gen: ва́нных
+      pl_dat: ва́нным
+      pl_acc: ва́нные
+      pl_ins: ва́нными
+      pl_pre: ва́нных
   "ведро=bucket":
     cefr_level: B1
     gender: n
@@ -2395,6 +2659,32 @@ words:
       pl_acc: води́телей
       pl_ins: води́телями
       pl_pre: води́телях
+  "вождь=leader":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - history
+    en_gb:
+      standard: leader (a chief or tribal leader)
+    usage:
+      - ru: Вождь племени принял решение.
+        en_gb: The tribe's leader made the decision.
+    declension:
+      sg_nom: вождь
+      sg_gen: вождя́
+      sg_dat: вождю́
+      sg_acc: вождя́
+      sg_ins: вождём
+      sg_pre: вожде́
+      pl_nom: вожди́
+      pl_gen: вожде́й
+      pl_dat: вождя́м
+      pl_acc: вожде́й
+      pl_ins: вождя́ми
+      pl_pre: вождя́х
   "война=war":
     cefr_level: B1
     gender: f
@@ -3122,6 +3412,33 @@ words:
       pl_acc: города́
       pl_ins: города́ми
       pl_pre: города́х
+  "госпиталь=military hospital":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - sickness and health
+      - military
+    en_gb:
+      standard: military hospital (a hospital for soldiers)
+    usage:
+      - ru: Ра́неного отвезли́ в госпита́ль.
+        en_gb: The wounded soldier was taken to the military hospital.
+    declension:
+      sg_nom: госпита́ль
+      sg_gen: госпита́ля
+      sg_dat: госпита́лю
+      sg_acc: госпита́ль
+      sg_ins: госпита́лем
+      sg_pre: госпита́ле
+      pl_nom: госпита́ли
+      pl_gen: госпита́лей
+      pl_dat: госпита́лям
+      pl_acc: госпита́ли
+      pl_ins: госпита́лями
+      pl_pre: госпита́лях
   "гостиница=hotel":
     cefr_level: A2
     gender: f
@@ -3176,6 +3493,32 @@ words:
       pl_acc: гра́дусы
       pl_ins: гра́дусами
       pl_pre: гра́дусах
+  "гражданин=citizen":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - the law
+    en_gb:
+      standard: citizen (a person who belongs to a state)
+    usage:
+      - ru: Ка́ждый гражда́нин обя́зан соблюда́ть зако́н.
+        en_gb: Every citizen is obliged to obey the law.
+    declension:
+      sg_nom: гражда́нин
+      sg_gen: гражда́нина
+      sg_dat: гражда́нину
+      sg_acc: гражда́нина
+      sg_ins: гражда́нином
+      sg_pre: гражда́нине
+      pl_nom: гра́ждане
+      pl_gen: гра́ждан
+      pl_dat: гра́жданам
+      pl_acc: гра́ждан
+      pl_ins: гра́жданами
+      pl_pre: гра́жданах
   "грамматика=grammar":
     cefr_level: B1
     gender: f
@@ -3448,6 +3791,32 @@ words:
       pl_acc: гу́бы
       pl_ins: губа́ми
       pl_pre: губа́х
+  "губернатор=governor":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: governor (the head of a regional administration)
+    usage:
+      - ru: Губерна́тор посети́л но́вую шко́лу.
+        en_gb: The governor visited the new school.
+    declension:
+      sg_nom: губерна́тор
+      sg_gen: губерна́тора
+      sg_dat: губерна́тору
+      sg_acc: губерна́тора
+      sg_ins: губерна́тором
+      sg_pre: губерна́торе
+      pl_nom: губерна́торы
+      pl_gen: губерна́торов
+      pl_dat: губерна́торам
+      pl_acc: губерна́торов
+      pl_ins: губерна́торами
+      pl_pre: губерна́торах
   "гусь=goose":
     cefr_level: B1
     gender: m
@@ -3494,6 +3863,32 @@ words:
       sg_acc: давле́ние
       sg_ins: давле́нием
       sg_pre: давле́нии
+  "дача=dacha":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - daily life
+    en_gb:
+      standard: dacha (a Russian country cottage)
+    usage:
+      - ru: Ле́том мы живём на да́че.
+        en_gb: In summer we live at the dacha.
+    declension:
+      sg_nom: да́ча
+      sg_gen: да́чи
+      sg_dat: да́че
+      sg_acc: да́чу
+      sg_ins: да́чей
+      sg_pre: да́че
+      pl_nom: да́чи
+      pl_gen: дач
+      pl_dat: да́чам
+      pl_acc: да́чи
+      pl_ins: да́чами
+      pl_pre: да́чах
   "дверь=door":
     cefr_level: A1
     gender: f
@@ -3576,6 +3971,32 @@ words:
       pl_acc: дворцы́
       pl_ins: дворца́ми
       pl_pre: дворца́х
+  "девчонка=girl":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - family
+    en_gb:
+      standard: girl (a young female person, informal)
+    usage:
+      - ru: Весёлая девчо́нка пела песню.
+        en_gb: The cheerful girl was singing a song.
+    declension:
+      sg_nom: девчо́нка
+      sg_gen: девчо́нки
+      sg_dat: девчо́нке
+      sg_acc: девчо́нку
+      sg_ins: девчо́нкой
+      sg_pre: девчо́нке
+      pl_nom: девчо́нки
+      pl_gen: девчо́нок
+      pl_dat: девчо́нкам
+      pl_acc: девчо́нок
+      pl_ins: девчо́нками
+      pl_pre: девчо́нках
   "дедушка=grandfather":
     cefr_level: A1
     gender: m
@@ -3649,6 +4070,32 @@ words:
       pl_acc: де́ньги
       pl_ins: деньга́ми
       pl_pre: деньга́х
+  "депутат=deputy":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: deputy (an elected representative in a parliament)
+    usage:
+      - ru: Депута́т выступи́л в Государственной Думе.
+        en_gb: The deputy spoke in the State Duma.
+    declension:
+      sg_nom: депута́т
+      sg_gen: депута́та
+      sg_dat: депута́ту
+      sg_acc: депута́та
+      sg_ins: депута́том
+      sg_pre: депута́те
+      pl_nom: депута́ты
+      pl_gen: депута́тов
+      pl_dat: депута́там
+      pl_acc: депута́тов
+      pl_ins: депута́тами
+      pl_pre: депута́тах
   "деревня=village":
     cefr_level: A2
     gender: f
@@ -3774,6 +4221,32 @@ words:
       sg_acc: де́тство
       sg_ins: де́тством
       sg_pre: де́тстве
+  "деятель=figure":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: public figure (a prominent person in public life)
+    usage:
+      - ru: Он — изве́стный де́ятель ку́льтуры.
+        en_gb: He is a well-known figure in culture.
+    declension:
+      sg_nom: де́ятель
+      sg_gen: де́ятеля
+      sg_dat: де́ятелю
+      sg_acc: де́ятеля
+      sg_ins: де́ятелем
+      sg_pre: де́ятеле
+      pl_nom: де́ятели
+      pl_gen: де́ятелей
+      pl_dat: де́ятелям
+      pl_acc: де́ятелей
+      pl_ins: де́ятелями
+      pl_pre: де́ятелях
   "джинсы=jeans":
     cefr_level: A2
     animacy: i
@@ -3793,6 +4266,32 @@ words:
       pl_acc: джи́нсы
       pl_ins: джи́нсами
       pl_pre: джи́нсах
+  "диван=sofa":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: sofa (a long soft seat for several people)
+    usage:
+      - ru: Кот спит на дива́не.
+        en_gb: The cat is sleeping on the sofa.
+    declension:
+      sg_nom: дива́н
+      sg_gen: дива́на
+      sg_dat: дива́ну
+      sg_acc: дива́н
+      sg_ins: дива́ном
+      sg_pre: дива́не
+      pl_nom: дива́ны
+      pl_gen: дива́нов
+      pl_dat: дива́нам
+      pl_acc: дива́ны
+      pl_ins: дива́нами
+      pl_pre: дива́нах
   "диета=diet":
     cefr_level: B1
     gender: f
@@ -3870,6 +4369,32 @@ words:
       pl_acc: дина́стии
       pl_ins: дина́стиями
       pl_pre: дина́стиях
+  "директор=director":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: director (the head of an organisation)
+    usage:
+      - ru: Дире́ктор подпи́сал прика́з.
+        en_gb: The director signed the order.
+    declension:
+      sg_nom: дире́ктор
+      sg_gen: дире́ктора
+      sg_dat: дире́ктору
+      sg_acc: дире́ктора
+      sg_ins: дире́ктором
+      sg_pre: дире́кторе
+      pl_nom: дире́кторы
+      pl_gen: дире́кторов
+      pl_dat: дире́кторам
+      pl_acc: дире́кторов
+      pl_ins: дире́кторами
+      pl_pre: дире́кторах
   "длина=length":
     cefr_level: B1
     gender: f
@@ -4243,6 +4768,56 @@ words:
       pl_acc: ду́ги
       pl_ins: ду́гами
       pl_pre: ду́гах
+  "дура=fool":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: fool (a foolish woman, informal and insulting)
+    usage:
+      - ru: Не будь дурой — подумай хорошо.
+        en_gb: Don't be a fool — think it over.
+    declension:
+      sg_nom: дура́
+      sg_gen: дуры́
+      sg_dat: дуре́
+      sg_acc: дуру́
+      sg_ins: дурой
+      sg_pre: дуре́
+      pl_nom: ду́ры
+      pl_gen: дур
+      pl_dat: ду́рам
+      pl_acc: дур
+      pl_ins: ду́рами
+      pl_pre: ду́рах
+  "дурак=fool":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: fool (a foolish man, informal and insulting)
+    usage:
+      - ru: Не будь дурако́м.
+        en_gb: Don't be a fool.
+    declension:
+      sg_nom: дура́к
+      sg_gen: дурака́
+      sg_dat: дураку́
+      sg_acc: дурака́
+      sg_ins: дурако́м
+      sg_pre: дураке́
+      pl_nom: дураки́
+      pl_gen: дураков
+      pl_dat: дурака́м
+      pl_acc: дураков
+      pl_ins: дурака́ми
+      pl_pre: дурака́х
   "дух=spirit":
     cefr_level: B2
     gender: m
@@ -4322,6 +4897,32 @@ words:
       pl_acc: дя́дей
       pl_ins: дя́дями
       pl_pre: дя́дях
+  "еврей=Jew":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - nationalities
+    en_gb:
+      standard: Jew (a member of the Jewish people)
+    usage:
+      - ru: Его́ де́душка был евре́ем.
+        en_gb: His grandfather was a Jew.
+    declension:
+      sg_nom: евре́й
+      sg_gen: евре́я
+      sg_dat: евре́ю
+      sg_acc: евре́я
+      sg_ins: евре́ем
+      sg_pre: евре́е
+      pl_nom: евре́и
+      pl_gen: евре́ев
+      pl_dat: евре́ям
+      pl_acc: евре́ев
+      pl_ins: евре́ями
+      pl_pre: евре́ях
   "еда=food":
     cefr_level: A1
     gender: f
@@ -4536,6 +5137,31 @@ words:
       pl_acc: живо́тных
       pl_ins: живо́тными
       pl_pre: живо́тных
+  "житель=resident":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: resident (a person who lives in a place)
+    usage:
+      - ru: Жи́тели го́рода вы́шли на улицу.
+        en_gb: The residents of the city took to the streets.
+    declension:
+      sg_nom: жи́тель
+      sg_gen: жи́теля
+      sg_dat: жи́телю
+      sg_acc: жи́теля
+      sg_ins: жи́телем
+      sg_pre: жи́теле
+      pl_nom: жи́тели
+      pl_gen: жи́телей
+      pl_dat: жи́телям
+      pl_acc: жи́телей
+      pl_ins: жи́телями
+      pl_pre: жи́телях
   "жук=beetle":
     cefr_level: B1
     gender: m
@@ -4615,6 +5241,32 @@ words:
       pl_acc: забо́ры
       pl_ins: забо́рами
       pl_pre: забо́рах
+  "завод=factory":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - work
+    en_gb:
+      standard: factory (a large building where goods are manufactured)
+    usage:
+      - ru: Он рабо́тает на заво́де.
+        en_gb: He works at the factory.
+    declension:
+      sg_nom: заво́д
+      sg_gen: заво́да
+      sg_dat: заво́ду
+      sg_acc: заво́д
+      sg_ins: заво́дом
+      sg_pre: заво́де
+      pl_nom: заво́ды
+      pl_gen: заво́дов
+      pl_dat: заво́дам
+      pl_acc: заво́ды
+      pl_ins: заво́дами
+      pl_pre: заво́дах
   "завтрак=breakfast":
     cefr_level: A2
     gender: m
@@ -5076,6 +5728,32 @@ words:
       sg_acc: здоро́вье
       sg_ins: здоро́вьем
       sg_pre: здоро́вье
+  "зеркало=mirror":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: mirror (a reflective glass surface)
+    usage:
+      - ru: Она посмотре́лась в зе́ркало.
+        en_gb: She looked at herself in the mirror.
+    declension:
+      sg_nom: зе́ркало
+      sg_gen: зе́ркала
+      sg_dat: зе́ркалу
+      sg_acc: зе́ркало
+      sg_ins: зе́ркалом
+      sg_pre: зе́ркале
+      pl_nom: зе́ркала
+      pl_gen: зерка́л
+      pl_dat: зе́ркалам
+      pl_acc: зе́ркала
+      pl_ins: зе́ркалами
+      pl_pre: зе́ркалах
   "зима=winter":
     cefr_level: A1
     gender: f
@@ -5340,6 +6018,85 @@ words:
       pl_acc: инжене́ров
       pl_ins: инжене́рами
       pl_pre: инжене́рах
+  "иностранец=foreigner":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - travel
+    en_gb:
+      standard: foreigner (a person from another country)
+    usage:
+      - ru: Иностра́нец спроси́л доро́гу.
+        en_gb: The foreigner asked for directions.
+    declension:
+      sg_nom: иностра́нец
+      sg_gen: иностра́нца
+      sg_dat: иностра́нцу
+      sg_acc: иностра́нца
+      sg_ins: иностра́нцем
+      sg_pre: иностра́нце
+      pl_nom: иностра́нцы
+      pl_gen: иностра́нцев
+      pl_dat: иностра́нцам
+      pl_acc: иностра́нцев
+      pl_ins: иностра́нцами
+      pl_pre: иностра́нцах
+  "инспектор=inspector":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+      - the law
+    en_gb:
+      standard: inspector (an official who inspects something)
+    usage:
+      - ru: Инспе́ктор прове́рил докуме́нты.
+        en_gb: The inspector checked the documents.
+    declension:
+      sg_nom: инспе́ктор
+      sg_gen: инспе́ктора
+      sg_dat: инспе́ктору
+      sg_acc: инспе́ктора
+      sg_ins: инспе́ктором
+      sg_pre: инспе́кторе
+      pl_nom: инспе́кторы
+      pl_gen: инспе́кторов
+      pl_dat: инспе́кторам
+      pl_acc: инспе́кторов
+      pl_ins: инспе́кторами
+      pl_pre: инспе́кторах
+  "институт=institute":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - school
+    en_gb:
+      standard: institute (a research or educational institution)
+    usage:
+      - ru: Она учится в институ́те.
+        en_gb: She studies at the institute.
+    declension:
+      sg_nom: институ́т
+      sg_gen: институ́та
+      sg_dat: институ́ту
+      sg_acc: институ́т
+      sg_ins: институ́том
+      sg_pre: институ́те
+      pl_nom: институ́ты
+      pl_gen: институ́тов
+      pl_dat: институ́там
+      pl_acc: институ́ты
+      pl_ins: институ́тами
+      pl_pre: институ́тах
   "инструмент=tool":
     cefr_level: B1
     gender: m
@@ -5543,6 +6300,32 @@ words:
       pl_acc: ка́бели
       pl_ins: ка́белями
       pl_pre: ка́белях
+  "кабинет=office":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - work
+    en_gb:
+      standard: office (a room used for work)
+    usage:
+      - ru: Начальник ждёт тебя в кабине́те.
+        en_gb: The boss is waiting for you in the office.
+    declension:
+      sg_nom: кабине́т
+      sg_gen: кабине́та
+      sg_dat: кабине́ту
+      sg_acc: кабине́т
+      sg_ins: кабине́том
+      sg_pre: кабине́те
+      pl_nom: кабине́ты
+      pl_gen: кабине́тов
+      pl_dat: кабине́там
+      pl_acc: кабине́ты
+      pl_ins: кабине́тами
+      pl_pre: кабине́тах
   "каблук=heel (shoe)":
     cefr_level: B2
     gender: m
@@ -5643,6 +6426,33 @@ words:
       pl_acc: кани́кулы
       pl_ins: кани́кулами
       pl_pre: кани́кулах
+  "капитан=captain":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+      - travel
+    en_gb:
+      standard: captain (the commander of a ship or military unit)
+    usage:
+      - ru: Капита́н дал коме́нду отплыть.
+        en_gb: The captain gave the order to set sail.
+    declension:
+      sg_nom: капита́н
+      sg_gen: капита́на
+      sg_dat: капита́ну
+      sg_acc: капита́на
+      sg_ins: капита́ном
+      sg_pre: капита́не
+      pl_nom: капита́ны
+      pl_gen: капита́нов
+      pl_dat: капита́нам
+      pl_acc: капита́нов
+      pl_ins: капита́нами
+      pl_pre: капита́нах
   "карандаш=pencil":
     cefr_level: A2
     gender: m
@@ -5828,6 +6638,33 @@ words:
       pl_acc: ка́ссы
       pl_ins: ка́ссами
       pl_pre: ка́ссах
+  "кастрюля=saucepan":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - in the kitchen
+      - daily life
+    en_gb:
+      standard: saucepan (a deep cooking pot with a handle)
+    usage:
+      - ru: Суп варится в кастрю́ле.
+        en_gb: The soup is cooking in the saucepan.
+    declension:
+      sg_nom: кастрю́ля
+      sg_gen: кастрю́ли
+      sg_dat: кастрю́ле
+      sg_acc: кастрю́лю
+      sg_ins: кастрю́лей
+      sg_pre: кастрю́ле
+      pl_nom: кастрю́ли
+      pl_gen: кастрю́ль
+      pl_dat: кастрю́лям
+      pl_acc: кастрю́ли
+      pl_ins: кастрю́лями
+      pl_pre: кастрю́лях
   "каток=ice rink":
     cefr_level: B2
     gender: m
@@ -5854,6 +6691,33 @@ words:
       pl_acc: катки́
       pl_ins: катка́ми
       pl_pre: катка́х
+  "кафе=café":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - restaurants and cafes
+      - daily life
+    en_gb:
+      standard: café (a small restaurant serving coffee and light meals; indeclinable)
+    usage:
+      - ru: Мы встретились в кафе́.
+        en_gb: We met at the café.
+    declension:
+      sg_nom: кафе́
+      sg_gen: кафе́
+      sg_dat: кафе́
+      sg_acc: кафе́
+      sg_ins: кафе́
+      sg_pre: кафе́
+      pl_nom: кафе́
+      pl_gen: кафе́
+      pl_dat: кафе́
+      pl_acc: кафе́
+      pl_ins: кафе́
+      pl_pre: кафе́
   "каша=porridge":
     cefr_level: A2
     gender: f
@@ -6088,6 +6952,57 @@ words:
       pl_acc: клавиату́ры
       pl_ins: клавиату́рами
       pl_pre: клавиату́рах
+  "кладбище=cemetery":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+    en_gb:
+      standard: cemetery (a place where people are buried)
+    usage:
+      - ru: Они пришли на кла́дбище.
+        en_gb: They came to the cemetery.
+    declension:
+      sg_nom: кла́дбище
+      sg_gen: кла́дбища
+      sg_dat: кла́дбищу
+      sg_acc: кла́дбище
+      sg_ins: кла́дбищем
+      sg_pre: кла́дбище
+      pl_nom: кла́дбища
+      pl_gen: кла́дбищ
+      pl_dat: кла́дбищам
+      pl_acc: кла́дбища
+      pl_ins: кла́дбищами
+      pl_pre: кла́дбищах
+  "класс=classroom":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - school
+    en_gb:
+      standard: classroom (a room in a school where lessons take place)
+    usage:
+      - ru: Учени́к вошёл в класс.
+        en_gb: The pupil entered the classroom.
+    declension:
+      sg_nom: класс
+      sg_gen: кла́сса
+      sg_dat: кла́ссу
+      sg_acc: класс
+      sg_ins: кла́ссом
+      sg_pre: кла́ссе
+      pl_nom: кла́ссы
+      pl_gen: кла́ссов
+      pl_dat: кла́ссам
+      pl_acc: кла́ссы
+      pl_ins: кла́ссами
+      pl_pre: кла́ссах
   "клей=glue":
     cefr_level: B1
     gender: m
@@ -6165,6 +7080,32 @@ words:
       pl_acc: кли́ники
       pl_ins: кли́никами
       pl_pre: кли́никах
+  "клуб=club":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - hobbies and pastimes
+    en_gb:
+      standard: club (an organisation or venue for social activity)
+    usage:
+      - ru: Мы встречаемся в клу́бе по пя́тницам.
+        en_gb: We meet at the club on Fridays.
+    declension:
+      sg_nom: клуб
+      sg_gen: клу́ба
+      sg_dat: клу́бу
+      sg_acc: клуб
+      sg_ins: клу́бом
+      sg_pre: клу́бе
+      pl_nom: клу́бы
+      pl_gen: клу́бов
+      pl_dat: клу́бам
+      pl_acc: клу́бы
+      pl_ins: клу́бами
+      pl_pre: клу́бах
   "клумба=flower bed":
     cefr_level: B2
     gender: f
@@ -6394,6 +7335,32 @@ words:
       sg_acc: коли́чество
       sg_ins: коли́чеством
       sg_pre: коли́честве
+  "коллега=colleague":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: colleague (a fellow worker)
+    usage:
+      - ru: Я познакомил тебя с колле́гой.
+        en_gb: I introduced you to my colleague.
+    declension:
+      sg_nom: колле́га
+      sg_gen: колле́ги
+      sg_dat: колле́ге
+      sg_acc: колле́гу
+      sg_ins: колле́гой
+      sg_pre: колле́ге
+      pl_nom: колле́ги
+      pl_gen: колле́г
+      pl_dat: колле́гам
+      pl_acc: колле́г
+      pl_ins: колле́гами
+      pl_pre: колле́гах
   "колокол=bell":
     cefr_level: B2
     gender: m
@@ -6448,6 +7415,32 @@ words:
       pl_acc: коло́нны
       pl_ins: коло́ннами
       pl_pre: коло́ннах
+  "колхоз=collective farm":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - history
+    en_gb:
+      standard: collective farm (a Soviet cooperative farm)
+    usage:
+      - ru: Де́д рабо́тал на колхо́зе.
+        en_gb: Grandfather worked on a collective farm.
+    declension:
+      sg_nom: колхо́з
+      sg_gen: колхо́за
+      sg_dat: колхо́зу
+      sg_acc: колхо́з
+      sg_ins: колхо́зом
+      sg_pre: колхо́зе
+      pl_nom: колхо́зы
+      pl_gen: колхо́зов
+      pl_dat: колхо́зам
+      pl_acc: колхо́зы
+      pl_ins: колхо́зами
+      pl_pre: колхо́зах
   "кольцо=ring":
     cefr_level: A2
     gender: n
@@ -6503,6 +7496,32 @@ words:
       pl_acc: кома́нды
       pl_ins: кома́ндами
       pl_pre: кома́ндах
+  "командир=commander":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+    en_gb:
+      standard: commander (the officer in charge of a military unit)
+    usage:
+      - ru: Команди́р отда́л прика́з.
+        en_gb: The commander gave the order.
+    declension:
+      sg_nom: команди́р
+      sg_gen: команди́ра
+      sg_dat: команди́ру
+      sg_acc: команди́ра
+      sg_ins: команди́ром
+      sg_pre: команди́ре
+      pl_nom: команди́ры
+      pl_gen: команди́ров
+      pl_dat: команди́рам
+      pl_acc: команди́ров
+      pl_ins: команди́рами
+      pl_pre: команди́рах
   "комар=mosquito":
     cefr_level: B1
     gender: m
@@ -6529,6 +7548,33 @@ words:
       pl_acc: комаро́в
       pl_ins: комара́ми
       pl_pre: комара́х
+  "комиссар=commissar":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+      - history
+    en_gb:
+      standard: commissar (a Soviet political officer)
+    usage:
+      - ru: Комисса́р следил за моралью в части.
+        en_gb: The commissar monitored morale in the unit.
+    declension:
+      sg_nom: комисса́р
+      sg_gen: комисса́ра
+      sg_dat: комисса́ру
+      sg_acc: комисса́ра
+      sg_ins: комисса́ром
+      sg_pre: комисса́ре
+      pl_nom: комисса́ры
+      pl_gen: комисса́ров
+      pl_dat: комисса́рам
+      pl_acc: комисса́ров
+      pl_ins: комисса́рами
+      pl_pre: комисса́рах
   "комната=room":
     cefr_level: A1
     gender: f
@@ -6582,6 +7628,32 @@ words:
       pl_acc: компью́теры
       pl_ins: компью́терами
       pl_pre: компью́терах
+  "контора=office":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - work
+    en_gb:
+      standard: office (a business office or bureau)
+    usage:
+      - ru: Он пришёл в нота́риальную конто́ру.
+        en_gb: He came to the notary's office.
+    declension:
+      sg_nom: конто́ра
+      sg_gen: конто́ры
+      sg_dat: конто́ре
+      sg_acc: конто́ру
+      sg_ins: конто́рой
+      sg_pre: конто́ре
+      pl_nom: конто́ры
+      pl_gen: конто́р
+      pl_dat: конто́рам
+      pl_acc: конто́ры
+      pl_ins: конто́рами
+      pl_pre: конто́рах
   "конус=cone":
     cefr_level: B2
     gender: m
@@ -6735,6 +7807,33 @@ words:
       pl_acc: ко́рни
       pl_ins: корня́ми
       pl_pre: корня́х
+  "корзина=basket":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+      - shopping
+    en_gb:
+      standard: basket (a container made of woven material)
+    usage:
+      - ru: Она несла корзи́ну с фруктами.
+        en_gb: She was carrying a basket of fruit.
+    declension:
+      sg_nom: корзи́на
+      sg_gen: корзи́ны
+      sg_dat: корзи́не
+      sg_acc: корзи́ну
+      sg_ins: корзи́ной
+      sg_pre: корзи́не
+      pl_nom: корзи́ны
+      pl_gen: корзи́н
+      pl_dat: корзи́нам
+      pl_acc: корзи́ны
+      pl_ins: корзи́нами
+      pl_pre: корзи́нах
   "коридор=corridor":
     cefr_level: B1
     gender: m
@@ -6842,6 +7941,32 @@ words:
       pl_acc: короле́й
       pl_ins: короля́ми
       pl_pre: короля́х
+  "корреспондент=correspondent":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: correspondent (a journalist reporting from a location)
+    usage:
+      - ru: Корреспонде́нт взял интервью у министра.
+        en_gb: The correspondent interviewed the minister.
+    declension:
+      sg_nom: корреспонде́нт
+      sg_gen: корреспонде́нта
+      sg_dat: корреспонде́нту
+      sg_acc: корреспонде́нта
+      sg_ins: корреспонде́нтом
+      sg_pre: корреспонде́нте
+      pl_nom: корреспонде́нты
+      pl_gen: корреспонде́нтов
+      pl_dat: корреспонде́нтам
+      pl_acc: корреспонде́нтов
+      pl_ins: корреспонде́нтами
+      pl_pre: корреспонде́нтах
   "костёр=campfire":
     cefr_level: B1
     gender: m
@@ -7137,6 +8262,32 @@ words:
       pl_acc: креди́ты
       pl_ins: креди́тами
       pl_pre: креди́тах
+  "кремль=kremlin":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - history
+    en_gb:
+      standard: kremlin (a fortress or citadel in a Russian city)
+    usage:
+      - ru: Они гуляли у стен кремля́.
+        en_gb: They walked by the walls of the kremlin.
+    declension:
+      sg_nom: кремль
+      sg_gen: кремля́
+      sg_dat: кремлю́
+      sg_acc: кремль
+      sg_ins: кремлём
+      sg_pre: кремле́
+      pl_nom: кремли́
+      pl_gen: кремле́й
+      pl_dat: кремля́м
+      pl_acc: кремли́
+      pl_ins: кремля́ми
+      pl_pre: кремля́х
   "крепость=fortress":
     cefr_level: B2
     gender: f
@@ -7165,6 +8316,32 @@ words:
       pl_acc: кре́пости
       pl_ins: крепостя́ми
       pl_pre: крепостя́х
+  "кресло=armchair":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: armchair (a comfortable chair with armrests)
+    usage:
+      - ru: Де́душка дремлет в кре́сле.
+        en_gb: Grandfather is dozing in the armchair.
+    declension:
+      sg_nom: кре́сло
+      sg_gen: кре́сла
+      sg_dat: кре́слу
+      sg_acc: кре́сло
+      sg_ins: кре́слом
+      sg_pre: кре́сле
+      pl_nom: кре́сла
+      pl_gen: кре́сел
+      pl_dat: кре́слам
+      pl_acc: кре́сла
+      pl_ins: кре́слами
+      pl_pre: кре́слах
   "крест=cross":
     cefr_level: B1
     gender: m
@@ -7191,6 +8368,32 @@ words:
       pl_acc: кресты́
       pl_ins: креста́ми
       pl_pre: креста́х
+  "крестьянин=peasant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - history
+    en_gb:
+      standard: peasant (a rural farmer, historically a serf)
+    usage:
+      - ru: Крестья́нин рабо́тал в по́ле.
+        en_gb: The peasant worked in the field.
+    declension:
+      sg_nom: крестья́нин
+      sg_gen: крестья́нина
+      sg_dat: крестья́нину
+      sg_acc: крестья́нина
+      sg_ins: крестья́нином
+      sg_pre: крестья́нине
+      pl_nom: крестья́не
+      pl_gen: крестья́н
+      pl_dat: крестья́нам
+      pl_acc: крестья́н
+      pl_ins: крестья́нами
+      pl_pre: крестья́нах
   "крещение=baptism":
     cefr_level: B2
     gender: n
@@ -7335,6 +8538,32 @@ words:
       pl_acc: кры́лья
       pl_ins: кры́льями
       pl_pre: кры́льях
+  "крыльцо=porch":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - architecture
+    en_gb:
+      standard: porch (a covered entrance to a building)
+    usage:
+      - ru: Он стоял на крыльце́ и ждал гостей.
+        en_gb: He stood on the porch waiting for guests.
+    declension:
+      sg_nom: крыльцо́
+      sg_gen: крыльца́
+      sg_dat: крыльцу́
+      sg_acc: крыльцо́
+      sg_ins: крыльцо́м
+      sg_pre: крыльце́
+      pl_nom: крыльца́
+      pl_gen: кры́лец
+      pl_dat: крыльца́м
+      pl_acc: крыльца́
+      pl_ins: крыльца́ми
+      pl_pre: крыльца́х
   "крыса=rat":
     cefr_level: B1
     gender: f
@@ -7705,6 +8934,33 @@ words:
       pl_acc: ку́хни
       pl_ins: ку́хнями
       pl_pre: ку́хнях
+  "лагерь=camp":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - travel
+      - history
+    en_gb:
+      standard: camp (a place where people live temporarily in tents or huts)
+    usage:
+      - ru: Де́ти пое́хали в ла́герь на лето.
+        en_gb: The children went to a camp for the summer.
+    declension:
+      sg_nom: ла́герь
+      sg_gen: ла́геря
+      sg_dat: ла́герю
+      sg_acc: ла́герь
+      sg_ins: ла́герем
+      sg_pre: ла́гере
+      pl_nom: лагеря́
+      pl_gen: лагере́й
+      pl_dat: лагеря́м
+      pl_acc: лагеря́
+      pl_ins: лагеря́ми
+      pl_pre: лагеря́х
   "ладонь=palm":
     cefr_level: B1
     gender: f
@@ -7758,6 +9014,58 @@ words:
       pl_acc: ла́ки
       pl_ins: ла́ками
       pl_pre: ла́ках
+  "лампа=lamp":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: lamp (a device for producing light)
+    usage:
+      - ru: Включи ла́мпу, здесь темно.
+        en_gb: Turn on the lamp, it's dark here.
+    declension:
+      sg_nom: ла́мпа
+      sg_gen: ла́мпы
+      sg_dat: ла́мпе
+      sg_acc: ла́мпу
+      sg_ins: ла́мпой
+      sg_pre: ла́мпе
+      pl_nom: ла́мпы
+      pl_gen: ламп
+      pl_dat: ла́мпам
+      pl_acc: ла́мпы
+      pl_ins: ла́мпами
+      pl_pre: ла́мпах
+  "лампочка=light bulb":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: light bulb (a glass bulb that produces electric light)
+    usage:
+      - ru: Ла́мпочка перегоре́ла.
+        en_gb: The light bulb has blown.
+    declension:
+      sg_nom: ла́мпочка
+      sg_gen: ла́мпочки
+      sg_dat: ла́мпочке
+      sg_acc: ла́мпочку
+      sg_ins: ла́мпочкой
+      sg_pre: ла́мпочке
+      pl_nom: ла́мпочки
+      pl_gen: ла́мпочек
+      pl_dat: ла́мпочкам
+      pl_acc: ла́мпочки
+      pl_ins: ла́мпочками
+      pl_pre: ла́мпочках
   "лев=lion":
     cefr_level: B1
     gender: m
@@ -7837,6 +9145,32 @@ words:
       pl_acc: лёгкие
       pl_ins: лёгкими
       pl_pre: лёгких
+  "лейтенант=lieutenant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+    en_gb:
+      standard: lieutenant (a junior military officer)
+    usage:
+      - ru: Лейтена́нт доложил о ситуации.
+        en_gb: The lieutenant reported on the situation.
+    declension:
+      sg_nom: лейтена́нт
+      sg_gen: лейтена́нта
+      sg_dat: лейтена́нту
+      sg_acc: лейтена́нта
+      sg_ins: лейтена́нтом
+      sg_pre: лейтена́нте
+      pl_nom: лейтена́нты
+      pl_gen: лейтена́нтов
+      pl_dat: лейтена́нтам
+      pl_acc: лейтена́нтов
+      pl_ins: лейтена́нтами
+      pl_pre: лейтена́нтах
   "лекарство=medicine":
     cefr_level: A2
     gender: n
@@ -7922,6 +9256,59 @@ words:
       pl_acc: ле́стницы
       pl_ins: ле́стницами
       pl_pre: ле́стницах
+  "лётчик=pilot":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+      - travel
+    en_gb:
+      standard: pilot (a person who flies an aircraft)
+    usage:
+      - ru: Лётчик посадил самолёт в туман.
+        en_gb: The pilot landed the plane in fog.
+    declension:
+      sg_nom: лётчик
+      sg_gen: лётчика
+      sg_dat: лётчику
+      sg_acc: лётчика
+      sg_ins: лётчиком
+      sg_pre: лётчике
+      pl_nom: лётчики
+      pl_gen: лётчиков
+      pl_dat: лётчикам
+      pl_acc: лётчиков
+      pl_ins: лётчиками
+      pl_pre: лётчиках
+  "лидер=leader":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: leader (a person who leads a group or organisation)
+    usage:
+      - ru: Ли́дер па́ртии вы́ступил с ре́чью.
+        en_gb: The party leader gave a speech.
+    declension:
+      sg_nom: ли́дер
+      sg_gen: ли́дера
+      sg_dat: ли́деру
+      sg_acc: ли́дера
+      sg_ins: ли́дером
+      sg_pre: ли́дере
+      pl_nom: ли́деры
+      pl_gen: ли́деров
+      pl_dat: ли́дерам
+      pl_acc: ли́деров
+      pl_ins: ли́дерами
+      pl_pre: ли́дерах
   "линия=line":
     cefr_level: A2
     gender: f
@@ -8377,6 +9764,84 @@ words:
       pl_acc: магази́ны
       pl_ins: магази́нами
       pl_pre: магази́нах
+  "майка=T-shirt":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - daily life
+    en_gb:
+      standard: T-shirt (a short-sleeved casual top)
+    usage:
+      - ru: Он надел белую ма́йку.
+        en_gb: He put on a white T-shirt.
+    declension:
+      sg_nom: ма́йка
+      sg_gen: ма́йки
+      sg_dat: ма́йке
+      sg_acc: ма́йку
+      sg_ins: ма́йкой
+      sg_pre: ма́йке
+      pl_nom: ма́йки
+      pl_gen: ма́ек
+      pl_dat: ма́йкам
+      pl_acc: ма́йки
+      pl_ins: ма́йками
+      pl_pre: ма́йках
+  "майор=major":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+    en_gb:
+      standard: major (a military officer above captain)
+    usage:
+      - ru: Майо́р отдал приказ наступать.
+        en_gb: The major gave the order to advance.
+    declension:
+      sg_nom: майо́р
+      sg_gen: майо́ра
+      sg_dat: майо́ру
+      sg_acc: майо́ра
+      sg_ins: майо́ром
+      sg_pre: майо́ре
+      pl_nom: майо́ры
+      pl_gen: майо́ров
+      pl_dat: майо́рам
+      pl_acc: майо́ров
+      pl_ins: майо́рами
+      pl_pre: майо́рах
+  "мальчик=boy":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - family
+    en_gb:
+      standard: boy (a male child)
+    usage:
+      - ru: Ма́льчик бежит по двору.
+        en_gb: The boy is running around the yard.
+    declension:
+      sg_nom: ма́льчик
+      sg_gen: ма́льчика
+      sg_dat: ма́льчику
+      sg_acc: ма́льчика
+      sg_ins: ма́льчиком
+      sg_pre: ма́льчике
+      pl_nom: ма́льчики
+      pl_gen: ма́льчиков
+      pl_dat: ма́льчикам
+      pl_acc: ма́льчиков
+      pl_ins: ма́льчиками
+      pl_pre: ма́льчиках
   "маршрут=route":
     cefr_level: B1
     gender: m
@@ -8797,6 +10262,33 @@ words:
       pl_acc: ме́тры
       pl_ins: ме́трами
       pl_pre: ме́трах
+  "метро=metro":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - public transport
+      - travel
+      - places
+    en_gb:
+      standard: metro (an underground railway; indeclinable)
+    usage:
+      - ru: Я е́ду до рабо́ты на метро́.
+        en_gb: I go to work on the metro.
+    declension:
+      sg_nom: метро́
+      sg_gen: метро́
+      sg_dat: метро́
+      sg_acc: метро́
+      sg_ins: метро́
+      sg_pre: метро́
+      pl_nom: метро́
+      pl_gen: метро́
+      pl_dat: метро́
+      pl_acc: метро́
+      pl_ins: метро́
+      pl_pre: метро́
   "мех=fur":
     cefr_level: B2
     gender: m
@@ -8873,6 +10365,85 @@ words:
       sg_acc: мечту́
       sg_ins: мечто́й
       sg_pre: мечте́
+  "мешок=sack":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: sack (a large bag made of cloth or other material)
+    usage:
+      - ru: Он нёс мешо́к карто́феля.
+        en_gb: He was carrying a sack of potatoes.
+    declension:
+      sg_nom: мешо́к
+      sg_gen: мешка́
+      sg_dat: мешку́
+      sg_acc: мешо́к
+      sg_ins: мешко́м
+      sg_pre: мешке́
+      pl_nom: мешки́
+      pl_gen: мешко́в
+      pl_dat: мешка́м
+      pl_acc: мешки́
+      pl_ins: мешка́ми
+      pl_pre: мешка́х
+  "милиционер=militiaman":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - the law
+      - history
+    en_gb:
+      standard: militiaman (a Soviet-era police officer)
+    usage:
+      - ru: Милиционе́р остановил машину.
+        en_gb: The militiaman stopped the car.
+    declension:
+      sg_nom: милиционе́р
+      sg_gen: милиционе́ра
+      sg_dat: милиционе́ру
+      sg_acc: милиционе́ра
+      sg_ins: милиционе́ром
+      sg_pre: милиционе́ре
+      pl_nom: милиционе́ры
+      pl_gen: милиционе́ров
+      pl_dat: милиционе́рам
+      pl_acc: милиционе́ров
+      pl_ins: милиционе́рами
+      pl_pre: милиционе́рах
+  "министр=minister":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: minister (a senior government official)
+    usage:
+      - ru: Мини́стр финансов выступил перед журналистами.
+        en_gb: The finance minister spoke to journalists.
+    declension:
+      sg_nom: мини́стр
+      sg_gen: мини́стра
+      sg_dat: мини́стру
+      sg_acc: мини́стра
+      sg_ins: мини́стром
+      sg_pre: мини́стре
+      pl_nom: мини́стры
+      pl_gen: мини́стров
+      pl_dat: мини́страм
+      pl_acc: мини́стров
+      pl_ins: мини́страми
+      pl_pre: мини́страх
   "мир=world":
     cefr_level: A2
     gender: m
@@ -9225,6 +10796,58 @@ words:
       sg_acc: морко́вь
       sg_ins: морко́вью
       sg_pre: морко́ви
+  "моряк=sailor":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - travel
+    en_gb:
+      standard: sailor (a person who works on a ship)
+    usage:
+      - ru: Моря́к вернулся из долгого плавания.
+        en_gb: The sailor returned from a long voyage.
+    declension:
+      sg_nom: моря́к
+      sg_gen: моряка́
+      sg_dat: моряку́
+      sg_acc: моряка́
+      sg_ins: моряко́м
+      sg_pre: моряке́
+      pl_nom: моряки́
+      pl_gen: моряков
+      pl_dat: морякам
+      pl_acc: моряков
+      pl_ins: моряками
+      pl_pre: моряках
+  "москвич=Muscovite":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - places
+    en_gb:
+      standard: Muscovite (a person from Moscow)
+    usage:
+      - ru: Коренной москви́ч гордится своим городом.
+        en_gb: A native Muscovite is proud of his city.
+    declension:
+      sg_nom: москви́ч
+      sg_gen: москвича́
+      sg_dat: москвичу́
+      sg_acc: москвича́
+      sg_ins: москвичо́м
+      sg_pre: москвиче́
+      pl_nom: москвичи́
+      pl_gen: москвиче́й
+      pl_dat: москвича́м
+      pl_acc: москвиче́й
+      pl_ins: москвича́ми
+      pl_pre: москвича́х
   "мотоцикл=motorcycle":
     cefr_level: B1
     gender: m
@@ -9280,6 +10903,56 @@ words:
       pl_acc: муже́й
       pl_ins: мужья́ми
       pl_pre: мужья́х
+  "мужик=fellow":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: fellow (a man, informal Russian term)
+    usage:
+      - ru: Ну ты и мужи́к! Сам починил.
+        en_gb: What a fellow! He fixed it himself.
+    declension:
+      sg_nom: мужи́к
+      sg_gen: мужика́
+      sg_dat: мужику́
+      sg_acc: мужика́
+      sg_ins: мужико́м
+      sg_pre: мужике́
+      pl_nom: мужики́
+      pl_gen: мужиков
+      pl_dat: мужика́м
+      pl_acc: мужиков
+      pl_ins: мужика́ми
+      pl_pre: мужика́х
+  "мужчина=man":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: man (an adult male person)
+    usage:
+      - ru: Мужчи́на помог ей нести чемодан.
+        en_gb: The man helped her carry the suitcase.
+    declension:
+      sg_nom: мужчи́на
+      sg_gen: мужчи́ны
+      sg_dat: мужчи́не
+      sg_acc: мужчи́ну
+      sg_ins: мужчи́ной
+      sg_pre: мужчи́не
+      pl_nom: мужчи́ны
+      pl_gen: мужчи́н
+      pl_dat: мужчи́нам
+      pl_acc: мужчи́н
+      pl_ins: мужчи́нами
+      pl_pre: мужчи́нах
   "музей=museum":
     cefr_level: A2
     gender: m
@@ -9328,6 +11001,32 @@ words:
       sg_acc: му́зыку
       sg_ins: му́зыкой
       sg_pre: му́зыке
+  "музыкант=musician":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - the arts
+    en_gb:
+      standard: musician (a person who plays a musical instrument)
+    usage:
+      - ru: Музыка́нт исполнил сонату.
+        en_gb: The musician performed the sonata.
+    declension:
+      sg_nom: музыка́нт
+      sg_gen: музыка́нта
+      sg_dat: музыка́нту
+      sg_acc: музыка́нта
+      sg_ins: музыка́нтом
+      sg_pre: музыка́нте
+      pl_nom: музыка́нты
+      pl_gen: музыка́нтов
+      pl_dat: музыка́нтам
+      pl_acc: музыка́нтов
+      pl_ins: музыка́нтами
+      pl_pre: музыка́нтах
   "мука=torment":
     cefr_level: B2
     gender: f
@@ -10430,6 +12129,32 @@ words:
       sg_acc: оде́жду
       sg_ins: оде́ждой
       sg_pre: оде́жде
+  "одеяло=blanket":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: blanket (a warm covering used on a bed)
+    usage:
+      - ru: Она укуталась в одея́ло.
+        en_gb: She wrapped herself in the blanket.
+    declension:
+      sg_nom: одея́ло
+      sg_gen: одея́ла
+      sg_dat: одея́лу
+      sg_acc: одея́ло
+      sg_ins: одея́лом
+      sg_pre: одея́ле
+      pl_nom: одея́ла
+      pl_gen: одея́л
+      pl_dat: одея́лам
+      pl_acc: одея́ла
+      pl_ins: одея́лами
+      pl_pre: одея́лах
   "ожог=burn":
     cefr_level: B2
     gender: m
@@ -10816,6 +12541,32 @@ words:
       sg_acc: о́тдых
       sg_ins: о́тдыхом
       sg_pre: о́тдыхе
+  "отель=hotel":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - travel
+    en_gb:
+      standard: hotel (a building where people pay to stay)
+    usage:
+      - ru: Мы остановились в хорошем оте́ле.
+        en_gb: We stayed in a good hotel.
+    declension:
+      sg_nom: оте́ль
+      sg_gen: оте́ля
+      sg_dat: оте́лю
+      sg_acc: оте́ль
+      sg_ins: оте́лем
+      sg_pre: оте́ле
+      pl_nom: оте́ли
+      pl_gen: оте́лей
+      pl_dat: оте́лям
+      pl_acc: оте́ли
+      pl_ins: оте́лями
+      pl_pre: оте́лях
   "отец=father":
     cefr_level: A1
     gender: m
@@ -11126,6 +12877,59 @@ words:
       sg_acc: охо́ту
       sg_ins: охо́той
       sg_pre: охо́те
+  "охотник=hunter":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - nature
+      - hobbies and pastimes
+    en_gb:
+      standard: hunter (a person who hunts animals)
+    usage:
+      - ru: Охо́тник вернулся с добычей.
+        en_gb: The hunter returned with his catch.
+    declension:
+      sg_nom: охо́тник
+      sg_gen: охо́тника
+      sg_dat: охо́тнику
+      sg_acc: охо́тника
+      sg_ins: охо́тником
+      sg_pre: охо́тнике
+      pl_nom: охо́тники
+      pl_gen: охо́тников
+      pl_dat: охо́тникам
+      pl_acc: охо́тников
+      pl_ins: охо́тниками
+      pl_pre: охо́тниках
+  "охранник=security guard":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: security guard (a person employed to protect a building)
+    usage:
+      - ru: Охра́нник проверил пропуска.
+        en_gb: The security guard checked the passes.
+    declension:
+      sg_nom: охра́нник
+      sg_gen: охра́нника
+      sg_dat: охра́ннику
+      sg_acc: охра́нника
+      sg_ins: охра́нником
+      sg_pre: охра́ннике
+      pl_nom: охра́нники
+      pl_gen: охра́нников
+      pl_dat: охра́нникам
+      pl_acc: охра́нников
+      pl_ins: охра́нниками
+      pl_pre: охра́нниках
   "оценка=mark":
     cefr_level: B1
     gender: f
@@ -11183,6 +12987,33 @@ words:
       pl_acc: оши́бки
       pl_ins: оши́бками
       pl_pre: оши́бках
+  "пакет=bag":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+      - shopping
+    en_gb:
+      standard: bag (a plastic or paper bag for carrying items)
+    usage:
+      - ru: Он нёс паке́т с покупками.
+        en_gb: He was carrying a bag of shopping.
+    declension:
+      sg_nom: паке́т
+      sg_gen: паке́та
+      sg_dat: паке́ту
+      sg_acc: паке́т
+      sg_ins: паке́том
+      sg_pre: паке́те
+      pl_nom: паке́ты
+      pl_gen: паке́тов
+      pl_dat: паке́там
+      pl_acc: паке́ты
+      pl_ins: паке́тами
+      pl_pre: паке́тах
   "палец=finger":
     cefr_level: A2
     gender: m
@@ -11237,6 +13068,32 @@ words:
       pl_acc: пало́мников
       pl_ins: пало́мниками
       pl_pre: пало́мниках
+  "пальто=coat":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - daily life
+    en_gb:
+      standard: coat (a long outer garment; indeclinable)
+    usage:
+      - ru: Она надела пальто́ и вышла на улицу.
+        en_gb: She put on her coat and went outside.
+    declension:
+      sg_nom: пальто́
+      sg_gen: пальто́
+      sg_dat: пальто́
+      sg_acc: пальто́
+      sg_ins: пальто́
+      sg_pre: пальто́
+      pl_nom: пальто́
+      pl_gen: пальто́
+      pl_dat: пальто́
+      pl_acc: пальто́
+      pl_ins: пальто́
+      pl_pre: пальто́
   "памятник=monument":
     cefr_level: B1
     gender: m
@@ -11265,6 +13122,33 @@ words:
       pl_acc: па́мятники
       pl_ins: па́мятниками
       pl_pre: па́мятниках
+  "папка=folder":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+      - school
+    en_gb:
+      standard: folder (a cardboard or plastic holder for papers)
+    usage:
+      - ru: Документы лежат в па́пке.
+        en_gb: The documents are in the folder.
+    declension:
+      sg_nom: па́пка
+      sg_gen: па́пки
+      sg_dat: па́пке
+      sg_acc: па́пку
+      sg_ins: па́пкой
+      sg_pre: па́пке
+      pl_nom: па́пки
+      pl_gen: па́пок
+      pl_dat: па́пкам
+      pl_acc: па́пки
+      pl_ins: па́пками
+      pl_pre: па́пках
   "пара=couple":
     cefr_level: A2
     gender: f
@@ -11454,6 +13338,32 @@ words:
       pl_acc: пассажи́ров
       pl_ins: пассажи́рами
       pl_pre: пассажи́рах
+  "пастух=shepherd":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - nature
+    en_gb:
+      standard: shepherd (a person who tends sheep)
+    usage:
+      - ru: Пасту́х гнал стадо домой.
+        en_gb: The shepherd was driving the flock home.
+    declension:
+      sg_nom: пасту́х
+      sg_gen: пастуха́
+      sg_dat: пастуху́
+      sg_acc: пастуха́
+      sg_ins: пастухо́м
+      sg_pre: пастухе́
+      pl_nom: пастухи́
+      pl_gen: пастухо́в
+      pl_dat: пастуха́м
+      pl_acc: пастухо́в
+      pl_ins: пастуха́ми
+      pl_pre: пастуха́х
   "паук=spider":
     cefr_level: B1
     gender: m
@@ -11506,6 +13416,33 @@ words:
       pl_acc: пацие́нтов
       pl_ins: пацие́нтами
       pl_pre: пацие́нтах
+  "пачка=packet":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+      - shopping
+    en_gb:
+      standard: packet (a small pack of goods)
+    usage:
+      - ru: Купи па́чку чая.
+        en_gb: Buy a packet of tea.
+    declension:
+      sg_nom: па́чка
+      sg_gen: па́чки
+      sg_dat: па́чке
+      sg_acc: па́чку
+      sg_ins: па́чкой
+      sg_pre: па́чке
+      pl_nom: па́чки
+      pl_gen: па́чек
+      pl_dat: па́чкам
+      pl_acc: па́чки
+      pl_ins: па́чками
+      pl_pre: па́чках
   "перевод=translation":
     cefr_level: B1
     gender: m
@@ -11558,6 +13495,32 @@ words:
       pl_acc: перело́мы
       pl_ins: перело́мами
       pl_pre: перело́мах
+  "переулок=lane":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - town
+    en_gb:
+      standard: lane (a narrow side street)
+    usage:
+      - ru: Он свернул в тихий переу́лок.
+        en_gb: He turned into a quiet lane.
+    declension:
+      sg_nom: переу́лок
+      sg_gen: переу́лка
+      sg_dat: переу́лку
+      sg_acc: переу́лок
+      sg_ins: переу́лком
+      sg_pre: переу́лке
+      pl_nom: переу́лки
+      pl_gen: переу́лков
+      pl_dat: переу́лкам
+      pl_acc: переу́лки
+      pl_ins: переу́лками
+      pl_pre: переу́лках
   "переход=crossing":
     cefr_level: B1
     gender: m
@@ -12122,6 +14085,33 @@ words:
       pl_acc: пле́чи
       pl_ins: плеча́ми
       pl_pre: плеча́х
+  "плита=stove":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - in the kitchen
+      - daily life
+    en_gb:
+      standard: stove (a cooker used for heating and cooking)
+    usage:
+      - ru: Она готовила суп на плите́.
+        en_gb: She was making soup on the stove.
+    declension:
+      sg_nom: плита́
+      sg_gen: плиты́
+      sg_dat: плите́
+      sg_acc: плиту́
+      sg_ins: плито́й
+      sg_pre: плите́
+      pl_nom: пли́ты
+      pl_gen: плит
+      pl_dat: пли́там
+      pl_acc: пли́ты
+      pl_ins: пли́тами
+      pl_pre: пли́тах
   "плитка=tile":
     cefr_level: B2
     gender: f
@@ -12476,6 +14466,32 @@ words:
       pl_acc: подро́стков
       pl_ins: подро́стками
       pl_pre: подро́стках
+  "подушка=pillow":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: pillow (a soft cushion used to rest the head on in bed)
+    usage:
+      - ru: Она спала на мягкой поду́шке.
+        en_gb: She slept on a soft pillow.
+    declension:
+      sg_nom: поду́шка
+      sg_gen: поду́шки
+      sg_dat: поду́шке
+      sg_acc: поду́шку
+      sg_ins: поду́шкой
+      sg_pre: поду́шке
+      pl_nom: поду́шки
+      pl_gen: поду́шек
+      pl_dat: поду́шкам
+      pl_acc: поду́шки
+      pl_ins: поду́шками
+      pl_pre: поду́шках
   "поезд=train":
     cefr_level: A1
     gender: m
@@ -12683,6 +14699,32 @@ words:
       pl_acc: по́лки
       pl_ins: по́лками
       pl_pre: по́лках
+  "полковник=colonel":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+    en_gb:
+      standard: colonel (a senior military officer above lieutenant colonel)
+    usage:
+      - ru: Полко́вник принял командование полком.
+        en_gb: The colonel took command of the regiment.
+    declension:
+      sg_nom: полко́вник
+      sg_gen: полко́вника
+      sg_dat: полко́внику
+      sg_acc: полко́вника
+      sg_ins: полко́вником
+      sg_pre: полко́внике
+      pl_nom: полко́вники
+      pl_gen: полко́вников
+      pl_dat: полко́вникам
+      pl_acc: полко́вников
+      pl_ins: полко́вниками
+      pl_pre: полко́вниках
   "половина=half":
     cefr_level: A2
     gender: f
@@ -12763,6 +14805,32 @@ words:
       pl_acc: помидо́ры
       pl_ins: помидо́рами
       pl_pre: помидо́рах
+  "помощник=assistant":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: assistant (a person who helps someone else)
+    usage:
+      - ru: Помо́щник принёс бумаги.
+        en_gb: The assistant brought the papers.
+    declension:
+      sg_nom: помо́щник
+      sg_gen: помо́щника
+      sg_dat: помо́щнику
+      sg_acc: помо́щника
+      sg_ins: помо́щником
+      sg_pre: помо́щнике
+      pl_nom: помо́щники
+      pl_gen: помо́щников
+      pl_dat: помо́щникам
+      pl_acc: помо́щников
+      pl_ins: помо́щниками
+      pl_pre: помо́щниках
   "попугай=parrot":
     cefr_level: B1
     gender: m
@@ -12788,6 +14856,32 @@ words:
       pl_acc: попуга́ев
       pl_ins: попуга́ями
       pl_pre: попуга́ях
+  "порт=port":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - travel
+    en_gb:
+      standard: port (a harbour where ships load and unload)
+    usage:
+      - ru: Корабль вошёл в порт.
+        en_gb: The ship entered the port.
+    declension:
+      sg_nom: порт
+      sg_gen: по́рта
+      sg_dat: по́рту
+      sg_acc: порт
+      sg_ins: по́ртом
+      sg_pre: по́рте
+      pl_nom: порты́
+      pl_gen: порто́в
+      pl_dat: порта́м
+      pl_acc: порты́
+      pl_ins: порта́ми
+      pl_pre: порта́х
   "порядок=order":
     cefr_level: B1
     gender: m
@@ -12815,6 +14909,57 @@ words:
       pl_acc: поря́дки
       pl_ins: поря́дками
       pl_pre: поря́дках
+  "посёлок=settlement":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - town
+    en_gb:
+      standard: settlement (a small village or housing area)
+    usage:
+      - ru: Он вырос в небольшом посёлке.
+        en_gb: He grew up in a small settlement.
+    declension:
+      sg_nom: посёлок
+      sg_gen: посёлка
+      sg_dat: посёлку
+      sg_acc: посёлок
+      sg_ins: посёлком
+      sg_pre: посёлке
+      pl_nom: посёлки
+      pl_gen: посёлков
+      pl_dat: посёлкам
+      pl_acc: посёлки
+      pl_ins: посёлками
+      pl_pre: посёлках
+  "посетитель=visitor":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: visitor (a person who visits a place)
+    usage:
+      - ru: Посети́тель музея рассматривал картины.
+        en_gb: The museum visitor was looking at the paintings.
+    declension:
+      sg_nom: посети́тель
+      sg_gen: посети́теля
+      sg_dat: посети́телю
+      sg_acc: посети́теля
+      sg_ins: посети́телем
+      sg_pre: посети́теле
+      pl_nom: посети́тели
+      pl_gen: посети́телей
+      pl_dat: посети́телям
+      pl_acc: посети́телей
+      pl_ins: посети́телями
+      pl_pre: посети́телях
   "пословица=proverb":
     cefr_level: B2
     gender: f
@@ -12866,6 +15011,32 @@ words:
       pl_acc: посты́
       pl_ins: поста́ми
       pl_pre: поста́х
+  "постель=bed":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: bed (a piece of furniture for sleeping on)
+    usage:
+      - ru: Она заправила посте́ль.
+        en_gb: She made the bed.
+    declension:
+      sg_nom: посте́ль
+      sg_gen: посте́ли
+      sg_dat: посте́ли
+      sg_acc: посте́ль
+      sg_ins: посте́лью
+      sg_pre: посте́ли
+      pl_nom: посте́ли
+      pl_gen: посте́лей
+      pl_dat: посте́лям
+      pl_acc: посте́ли
+      pl_ins: посте́лями
+      pl_pre: посте́лях
   "посуда=dishes":
     cefr_level: B1
     gender: f
@@ -13217,6 +15388,58 @@ words:
       pl_acc: пре́дков
       pl_ins: пре́дками
       pl_pre: пре́дках
+  "председатель=chairman":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: chairman (the head of a committee or organisation)
+    usage:
+      - ru: Председа́тель открыл заседание.
+        en_gb: The chairman opened the meeting.
+    declension:
+      sg_nom: председа́тель
+      sg_gen: председа́теля
+      sg_dat: председа́телю
+      sg_acc: председа́теля
+      sg_ins: председа́телем
+      sg_pre: председа́теле
+      pl_nom: председа́тели
+      pl_gen: председа́телей
+      pl_dat: председа́телям
+      pl_acc: председа́телей
+      pl_ins: председа́телями
+      pl_pre: председа́телях
+  "президент=president":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: president (the head of state of a republic)
+    usage:
+      - ru: Президе́нт подписал закон.
+        en_gb: The president signed the law.
+    declension:
+      sg_nom: президе́нт
+      sg_gen: президе́нта
+      sg_dat: президе́нту
+      sg_acc: президе́нта
+      sg_ins: президе́нтом
+      sg_pre: президе́нте
+      pl_nom: президе́нты
+      pl_gen: президе́нтов
+      pl_dat: президе́нтам
+      pl_acc: президе́нтов
+      pl_ins: президе́нтами
+      pl_pre: президе́нтах
   "преступление=crime":
     cefr_level: B2
     gender: n
@@ -13371,6 +15594,32 @@ words:
       pl_acc: приложе́ния
       pl_ins: приложе́ниями
       pl_pre: приложе́ниях
+  "принц=prince":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - history
+    en_gb:
+      standard: prince (the son of a king or queen)
+    usage:
+      - ru: При́нц выступил на балу.
+        en_gb: The prince appeared at the ball.
+    declension:
+      sg_nom: принц
+      sg_gen: при́нца
+      sg_dat: при́нцу
+      sg_acc: при́нца
+      sg_ins: при́нцем
+      sg_pre: при́нце
+      pl_nom: при́нцы
+      pl_gen: при́нцев
+      pl_dat: при́нцам
+      pl_acc: при́нцев
+      pl_ins: при́нцами
+      pl_pre: при́нцах
   "пробка=traffic jam":
     cefr_level: B1
     gender: f
@@ -13696,6 +15945,32 @@ words:
       pl_acc: проро́ков
       pl_ins: проро́ками
       pl_pre: проро́ках
+  "проспект=avenue":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - town
+    en_gb:
+      standard: avenue (a wide main street)
+    usage:
+      - ru: Они шли по главному проспе́кту.
+        en_gb: They walked along the main avenue.
+    declension:
+      sg_nom: проспе́кт
+      sg_gen: проспе́кта
+      sg_dat: проспе́кту
+      sg_acc: проспе́кт
+      sg_ins: проспе́ктом
+      sg_pre: проспе́кте
+      pl_nom: проспе́кты
+      pl_gen: проспе́ктов
+      pl_dat: проспе́ктам
+      pl_acc: проспе́кты
+      pl_ins: проспе́ктами
+      pl_pre: проспе́ктах
   "простуда=cold":
     cefr_level: B1
     gender: f
@@ -14065,6 +16340,32 @@ words:
       pl_acc: рабо́ты
       pl_ins: рабо́тами
       pl_pre: рабо́тах
+  "работник=worker":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: worker (a person who does a particular kind of work)
+    usage:
+      - ru: Рабо́тник фа́брики получил премию.
+        en_gb: The factory worker received a bonus.
+    declension:
+      sg_nom: рабо́тник
+      sg_gen: рабо́тника
+      sg_dat: рабо́тнику
+      sg_acc: рабо́тника
+      sg_ins: рабо́тником
+      sg_pre: рабо́тнике
+      pl_nom: рабо́тники
+      pl_gen: рабо́тников
+      pl_dat: рабо́тникам
+      pl_acc: рабо́тников
+      pl_ins: рабо́тниками
+      pl_pre: рабо́тниках
   "радость=joy":
     cefr_level: B1
     gender: f
@@ -14445,6 +16746,60 @@ words:
       pl_acc: револю́ции
       pl_ins: револю́циями
       pl_pre: револю́циях
+  "редактор=editor":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+      - reading
+    en_gb:
+      standard: editor (a person who edits texts or publications)
+    usage:
+      - ru: Реда́ктор исправил ошибки в тексте.
+        en_gb: The editor corrected the mistakes in the text.
+    declension:
+      sg_nom: реда́ктор
+      sg_gen: реда́ктора
+      sg_dat: реда́ктору
+      sg_acc: реда́ктора
+      sg_ins: реда́ктором
+      sg_pre: реда́кторе
+      pl_nom: реда́кторы
+      pl_gen: реда́кторов
+      pl_dat: реда́кторам
+      pl_acc: реда́кторов
+      pl_ins: реда́кторами
+      pl_pre: реда́кторах
+  "режиссёр=director":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+      - the arts
+    en_gb:
+      standard: director (a person who directs films or theatrical productions)
+    usage:
+      - ru: Режиссёр снял новый фильм.
+        en_gb: The director made a new film.
+    declension:
+      sg_nom: режиссёр
+      sg_gen: режиссёра
+      sg_dat: режиссёру
+      sg_acc: режиссёра
+      sg_ins: режиссёром
+      sg_pre: режиссёре
+      pl_nom: режиссёры
+      pl_gen: режиссёров
+      pl_dat: режиссёрам
+      pl_acc: режиссёров
+      pl_ins: режиссёрами
+      pl_pre: режиссёрах
   "результат=result":
     cefr_level: B1
     gender: m
@@ -14955,6 +17310,32 @@ words:
       pl_acc: рты
       pl_ins: рта́ми
       pl_pre: рта́х
+  "рубаха=shirt":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - daily life
+    en_gb:
+      standard: shirt (a loose garment for the upper body)
+    usage:
+      - ru: Он надел белую руба́ху.
+        en_gb: He put on a white shirt.
+    declension:
+      sg_nom: руба́ха
+      sg_gen: руба́хи
+      sg_dat: руба́хе
+      sg_acc: руба́ху
+      sg_ins: руба́хой
+      sg_pre: руба́хе
+      pl_nom: руба́хи
+      pl_gen: руба́х
+      pl_dat: руба́хам
+      pl_acc: руба́хи
+      pl_ins: руба́хами
+      pl_pre: руба́хах
   "рубашка=shirt":
     cefr_level: A2
     gender: f
@@ -15059,6 +17440,32 @@ words:
       pl_acc: рукава́
       pl_ins: рукава́ми
       pl_pre: рукава́х
+  "руководитель=manager":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: manager (a person who manages a team or organisation)
+    usage:
+      - ru: Руководи́тель провёл совещание.
+        en_gb: The manager held a meeting.
+    declension:
+      sg_nom: руководи́тель
+      sg_gen: руководи́теля
+      sg_dat: руководи́телю
+      sg_acc: руководи́теля
+      sg_ins: руководи́телем
+      sg_pre: руководи́теле
+      pl_nom: руководи́тели
+      pl_gen: руководи́телей
+      pl_dat: руководи́телям
+      pl_acc: руководи́телей
+      pl_ins: руководи́телями
+      pl_pre: руководи́телях
   "рулетка=tape measure":
     cefr_level: B2
     gender: f
@@ -15167,6 +17574,33 @@ words:
       pl_acc: рыб
       pl_ins: ры́бами
       pl_pre: ры́бах
+  "рыбак=fisherman":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - nature
+      - hobbies and pastimes
+    en_gb:
+      standard: fisherman (a person who catches fish)
+    usage:
+      - ru: Рыбак сидел на берегу с удочкой.
+        en_gb: The fisherman sat on the bank with a fishing rod.
+    declension:
+      sg_nom: рыбак
+      sg_gen: рыбака́
+      sg_dat: рыбаку́
+      sg_acc: рыбака́
+      sg_ins: рыбако́м
+      sg_pre: рыбаке́
+      pl_nom: рыбаки́
+      pl_gen: рыбаков
+      pl_dat: рыбакам
+      pl_acc: рыбаков
+      pl_ins: рыбаками
+      pl_pre: рыбаках
   "рынок=market":
     cefr_level: A2
     gender: m
@@ -15220,6 +17654,33 @@ words:
       pl_acc: ры́царей
       pl_ins: ры́царями
       pl_pre: ры́царях
+  "рюмка=shot glass":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - food and drink
+      - daily life
+    en_gb:
+      standard: shot glass (a small glass for spirits)
+    usage:
+      - ru: Он налил водку в рю́мку.
+        en_gb: He poured vodka into the shot glass.
+    declension:
+      sg_nom: рю́мка
+      sg_gen: рю́мки
+      sg_dat: рю́мке
+      sg_acc: рю́мку
+      sg_ins: рю́мкой
+      sg_pre: рю́мке
+      pl_nom: рю́мки
+      pl_gen: рю́мок
+      pl_dat: рю́мкам
+      pl_acc: рю́мки
+      pl_ins: рю́мками
+      pl_pre: рю́мках
   "ряд=row":
     cefr_level: B1
     gender: m
@@ -15407,6 +17868,33 @@ words:
       pl_acc: самолёты
       pl_ins: самолётами
       pl_pre: самолётах
+  "санаторий=sanatorium":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - sickness and health
+      - travel
+    en_gb:
+      standard: sanatorium (a health resort for treatment and recovery)
+    usage:
+      - ru: Она провела месяц в санато́рии.
+        en_gb: She spent a month at the sanatorium.
+    declension:
+      sg_nom: санато́рий
+      sg_gen: санато́рия
+      sg_dat: санато́рию
+      sg_acc: санато́рий
+      sg_ins: санато́рием
+      sg_pre: санато́рии
+      pl_nom: санато́рии
+      pl_gen: санато́риев
+      pl_dat: санато́риям
+      pl_acc: санато́рии
+      pl_ins: санато́риями
+      pl_pre: санато́риях
   "сапог=boot":
     cefr_level: B1
     gender: m
@@ -15432,6 +17920,32 @@ words:
       pl_acc: сапоги́
       pl_ins: сапога́ми
       pl_pre: сапога́х
+  "сарай=shed":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - places
+    en_gb:
+      standard: shed (a small outbuilding for storage)
+    usage:
+      - ru: Он хранил инструменты в сара́е.
+        en_gb: He kept his tools in the shed.
+    declension:
+      sg_nom: сара́й
+      sg_gen: сара́я
+      sg_dat: сара́ю
+      sg_acc: сара́й
+      sg_ins: сара́ем
+      sg_pre: сара́е
+      pl_nom: сара́и
+      pl_gen: сара́ев
+      pl_dat: сара́ям
+      pl_acc: сара́и
+      pl_ins: сара́ями
+      pl_pre: сара́ях
   "сахар=sugar":
     cefr_level: A2
     gender: m
@@ -15768,6 +18282,32 @@ words:
       pl_acc: сердца́
       pl_ins: сердца́ми
       pl_pre: сердца́х
+  "сержант=sergeant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - military
+    en_gb:
+      standard: sergeant (a non-commissioned officer above corporal)
+    usage:
+      - ru: Сержа́нт обучал новобранцев.
+        en_gb: The sergeant was training the recruits.
+    declension:
+      sg_nom: сержа́нт
+      sg_gen: сержа́нта
+      sg_dat: сержа́нту
+      sg_acc: сержа́нта
+      sg_ins: сержа́нтом
+      sg_pre: сержа́нте
+      pl_nom: сержа́нты
+      pl_gen: сержа́нтов
+      pl_dat: сержа́нтам
+      pl_acc: сержа́нтов
+      pl_ins: сержа́нтами
+      pl_pre: сержа́нтах
   "сестра=sister":
     cefr_level: A1
     gender: f
@@ -15849,6 +18389,33 @@ words:
       pl_acc: се́ти
       pl_ins: сетя́ми
       pl_pre: сетя́х
+  "сиденье=seat":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - travel
+      - daily life
+    en_gb:
+      standard: seat (a place for sitting, e.g. in a vehicle or chair)
+    usage:
+      - ru: Он занял свободное сиде́нье в автобусе.
+        en_gb: He took the free seat in the bus.
+    declension:
+      sg_nom: сиде́нье
+      sg_gen: сиде́нья
+      sg_dat: сиде́нью
+      sg_acc: сиде́нье
+      sg_ins: сиде́ньем
+      sg_pre: сиде́нье
+      pl_nom: сиде́нья
+      pl_gen: сиде́ний
+      pl_dat: сиде́ньям
+      pl_acc: сиде́нья
+      pl_ins: сиде́ньями
+      pl_pre: сиде́ньях
   "симпатия=liking":
     cefr_level: B2
     gender: f
@@ -16006,6 +18573,32 @@ words:
       pl_acc: ски́дки
       pl_ins: ски́дками
       pl_pre: ски́дках
+  "склад=warehouse":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - work
+    en_gb:
+      standard: warehouse (a large building for storing goods)
+    usage:
+      - ru: Товары хранятся на скла́де.
+        en_gb: The goods are stored in the warehouse.
+    declension:
+      sg_nom: склад
+      sg_gen: скла́да
+      sg_dat: скла́ду
+      sg_acc: склад
+      sg_ins: скла́дом
+      sg_pre: скла́де
+      pl_nom: скла́ды
+      pl_gen: скла́дов
+      pl_dat: скла́дам
+      pl_acc: скла́ды
+      pl_ins: скла́дами
+      pl_pre: скла́дах
   "скорость=speed":
     cefr_level: B1
     gender: f
@@ -16078,6 +18671,32 @@ words:
       pl_acc: скри́пки
       pl_ins: скри́пками
       pl_pre: скри́пках
+  "следователь=investigator":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - the law
+    en_gb:
+      standard: investigator (an official who investigates crimes)
+    usage:
+      - ru: Сле́дователь допросил свидетеля.
+        en_gb: The investigator questioned the witness.
+    declension:
+      sg_nom: сле́дователь
+      sg_gen: сле́дователя
+      sg_dat: сле́дователю
+      sg_acc: сле́дователя
+      sg_ins: сле́дователем
+      sg_pre: сле́дователе
+      pl_nom: сле́дователи
+      pl_gen: сле́дователей
+      pl_dat: сле́дователям
+      pl_acc: сле́дователей
+      pl_ins: сле́дователями
+      pl_pre: сле́дователях
   "слеза=tear":
     cefr_level: B1
     gender: f
@@ -16433,6 +19052,58 @@ words:
       pl_acc: сорняки́
       pl_ins: сорняка́ми
       pl_pre: сорняка́х
+  "сосед=neighbour":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - daily life
+    en_gb:
+      standard: neighbour (a person who lives next door)
+    usage:
+      - ru: Сосе́д помог перенести диван.
+        en_gb: The neighbour helped to move the sofa.
+    declension:
+      sg_nom: сосе́д
+      sg_gen: сосе́да
+      sg_dat: сосе́ду
+      sg_acc: сосе́да
+      sg_ins: сосе́дом
+      sg_pre: сосе́де
+      pl_nom: сосе́ди
+      pl_gen: сосе́дей
+      pl_dat: сосе́дям
+      pl_acc: сосе́дей
+      pl_ins: сосе́дями
+      pl_pre: сосе́дях
+  "соседка=female neighbour":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - daily life
+    en_gb:
+      standard: female neighbour (a woman who lives next door)
+    usage:
+      - ru: Сосе́дка принесла домашнее варенье.
+        en_gb: The female neighbour brought homemade jam.
+    declension:
+      sg_nom: сосе́дка
+      sg_gen: сосе́дки
+      sg_dat: сосе́дке
+      sg_acc: сосе́дку
+      sg_ins: сосе́дкой
+      sg_pre: сосе́дке
+      pl_nom: сосе́дки
+      pl_gen: сосе́док
+      pl_dat: сосе́дкам
+      pl_acc: сосе́док
+      pl_ins: сосе́дками
+      pl_pre: сосе́дках
   "сотрудник=colleague":
     cefr_level: B1
     gender: m
@@ -16482,6 +19153,32 @@ words:
       sg_acc: спасе́ние
       sg_ins: спасе́нием
       sg_pre: спасе́нии
+  "специалист=specialist":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: specialist (an expert in a particular field)
+    usage:
+      - ru: Специали́ст по IT решил проблему.
+        en_gb: The IT specialist solved the problem.
+    declension:
+      sg_nom: специали́ст
+      sg_gen: специали́ста
+      sg_dat: специали́сту
+      sg_acc: специали́ста
+      sg_ins: специали́стом
+      sg_pre: специали́сте
+      pl_nom: специали́сты
+      pl_gen: специали́стов
+      pl_dat: специали́стам
+      pl_acc: специали́стов
+      pl_ins: специали́стами
+      pl_pre: специали́стах
   "спина=back":
     cefr_level: B1
     gender: f
@@ -16712,6 +19409,56 @@ words:
       pl_acc: ста́нции
       pl_ins: ста́нциями
       pl_pre: ста́нциях
+  "старик=old man":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: old man (an elderly male person)
+    usage:
+      - ru: Стари́к медленно шёл по улице.
+        en_gb: The old man walked slowly down the street.
+    declension:
+      sg_nom: стари́к
+      sg_gen: старика́
+      sg_dat: старику́
+      sg_acc: старика́
+      sg_ins: старико́м
+      sg_pre: старике́
+      pl_nom: старики́
+      pl_gen: стариков
+      pl_dat: старика́м
+      pl_acc: стариков
+      pl_ins: старика́ми
+      pl_pre: старика́х
+  "старуха=old woman":
+    cefr_level: B1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: old woman (an elderly female person)
+    usage:
+      - ru: Стару́ха сидела у окна.
+        en_gb: The old woman sat by the window.
+    declension:
+      sg_nom: стару́ха
+      sg_gen: стару́хи
+      sg_dat: стару́хе
+      sg_acc: стару́ху
+      sg_ins: стару́хой
+      sg_pre: стару́хе
+      pl_nom: стару́хи
+      pl_gen: стару́х
+      pl_dat: стару́хам
+      pl_acc: стару́х
+      pl_ins: стару́хами
+      pl_pre: стару́хах
   "стекло=glass (material)":
     cefr_level: B1
     gender: n
@@ -16978,6 +19725,32 @@ words:
       pl_acc: студе́нтов
       pl_ins: студе́нтами
       pl_pre: студе́нтах
+  "стул=chair":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: chair (a separate seat for one person)
+    usage:
+      - ru: Он поставил стул у окна.
+        en_gb: He placed the chair by the window.
+    declension:
+      sg_nom: стул
+      sg_gen: сту́ла
+      sg_dat: сту́лу
+      sg_acc: стул
+      sg_ins: сту́лом
+      sg_pre: сту́ле
+      pl_nom: сту́лья
+      pl_gen: сту́льев
+      pl_dat: сту́льям
+      pl_acc: сту́лья
+      pl_ins: сту́льями
+      pl_pre: сту́льях
   "сувенир=souvenir":
     cefr_level: B1
     gender: m
@@ -17167,6 +19940,32 @@ words:
       pl_acc: супы́
       pl_ins: супа́ми
       pl_pre: супа́х
+  "супермаркет=supermarket":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - shopping
+    en_gb:
+      standard: supermarket (a large self-service food shop)
+    usage:
+      - ru: Мы купили продукты в супермарке́те.
+        en_gb: We bought groceries at the supermarket.
+    declension:
+      sg_nom: супермарке́т
+      sg_gen: супермарке́та
+      sg_dat: супермарке́ту
+      sg_acc: супермарке́т
+      sg_ins: супермарке́том
+      sg_pre: супермарке́те
+      pl_nom: супермарке́ты
+      pl_gen: супермарке́тов
+      pl_dat: супермарке́там
+      pl_acc: супермарке́ты
+      pl_ins: супермарке́тами
+      pl_pre: супермарке́тах
   "супруг=spouse":
     cefr_level: B2
     gender: m
@@ -18028,6 +20827,33 @@ words:
       pl_acc: тру́бы
       pl_ins: тру́бами
       pl_pre: тру́бах
+  "туалет=toilet":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - home
+      - daily life
+    en_gb:
+      standard: toilet (a room with a lavatory)
+    usage:
+      - ru: Где туале́т?
+        en_gb: Where is the toilet?
+    declension:
+      sg_nom: туале́т
+      sg_gen: туале́та
+      sg_dat: туале́ту
+      sg_acc: туале́т
+      sg_ins: туале́том
+      sg_pre: туале́те
+      pl_nom: туале́ты
+      pl_gen: туале́тов
+      pl_dat: туале́там
+      pl_acc: туале́ты
+      pl_ins: туале́тами
+      pl_pre: туале́тах
   "турист=tourist":
     cefr_level: A2
     gender: m
@@ -18429,6 +21255,31 @@ words:
       pl_acc: у́ши
       pl_ins: уша́ми
       pl_pre: уша́х
+  "участник=participant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: participant (a person who takes part in something)
+    usage:
+      - ru: Уча́стники конкурса подготовились.
+        en_gb: The competition participants prepared.
+    declension:
+      sg_nom: уча́стник
+      sg_gen: уча́стника
+      sg_dat: уча́стнику
+      sg_acc: уча́стника
+      sg_ins: уча́стником
+      sg_pre: уча́стнике
+      pl_nom: уча́стники
+      pl_gen: уча́стников
+      pl_dat: уча́стникам
+      pl_acc: уча́стников
+      pl_ins: уча́стниками
+      pl_pre: уча́стниках
   "ученик=pupil":
     cefr_level: A2
     gender: m
@@ -18482,6 +21333,32 @@ words:
       pl_acc: учителе́й
       pl_ins: учителя́ми
       pl_pre: учителя́х
+  "учреждение=institution":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - work
+    en_gb:
+      standard: institution (an official organisation or establishment)
+    usage:
+      - ru: Это государственное учрежде́ние.
+        en_gb: This is a government institution.
+    declension:
+      sg_nom: учрежде́ние
+      sg_gen: учрежде́ния
+      sg_dat: учрежде́нию
+      sg_acc: учрежде́ние
+      sg_ins: учрежде́нием
+      sg_pre: учрежде́нии
+      pl_nom: учрежде́ния
+      pl_gen: учрежде́ний
+      pl_dat: учрежде́ниям
+      pl_acc: учрежде́ния
+      pl_ins: учрежде́ниями
+      pl_pre: учрежде́ниях
   "файл=file":
     cefr_level: B1
     gender: m
@@ -19237,6 +22114,32 @@ words:
       pl_acc: це́ркви
       pl_ins: церква́ми
       pl_pre: церква́х
+  "цех=workshop":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - work
+    en_gb:
+      standard: workshop (a section of a factory where a specific process takes place)
+    usage:
+      - ru: Рабочие трудились в це́хе.
+        en_gb: The workers laboured in the workshop.
+    declension:
+      sg_nom: цех
+      sg_gen: це́ха
+      sg_dat: це́ху
+      sg_acc: цех
+      sg_ins: це́хом
+      sg_pre: це́хе
+      pl_nom: цеха́
+      pl_gen: цехо́в
+      pl_dat: цеха́м
+      pl_acc: цеха́
+      pl_ins: цеха́ми
+      pl_pre: цеха́х
   "цилиндр=cylinder":
     cefr_level: B2
     gender: m
@@ -19495,6 +22398,32 @@ words:
       pl_acc: черте́й
       pl_ins: чертя́ми
       pl_pre: чертя́х
+  "чиновник=official":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+    en_gb:
+      standard: official (a government bureaucrat)
+    usage:
+      - ru: Чино́вник подписал разрешение.
+        en_gb: The official signed the permit.
+    declension:
+      sg_nom: чино́вник
+      sg_gen: чино́вника
+      sg_dat: чино́внику
+      sg_acc: чино́вника
+      sg_ins: чино́вником
+      sg_pre: чино́внике
+      pl_nom: чино́вники
+      pl_gen: чино́вников
+      pl_dat: чино́вникам
+      pl_acc: чино́вников
+      pl_ins: чино́вниками
+      pl_pre: чино́вниках
   "число=number":
     cefr_level: A2
     gender: n
@@ -19932,6 +22861,33 @@ words:
       pl_acc: шо́рты
       pl_ins: шо́ртами
       pl_pre: шо́ртах
+  "шофёр=chauffeur":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - work
+      - travel
+    en_gb:
+      standard: chauffeur (a professional driver)
+    usage:
+      - ru: Шофёр подал машину к подъезду.
+        en_gb: The chauffeur brought the car to the entrance.
+    declension:
+      sg_nom: шофёр
+      sg_gen: шофёра
+      sg_dat: шофёру
+      sg_acc: шофёра
+      sg_ins: шофёром
+      sg_pre: шофёре
+      pl_nom: шофёры
+      pl_gen: шофёров
+      pl_dat: шофёрам
+      pl_acc: шофёров
+      pl_ins: шофёрами
+      pl_pre: шофёрах
   "шприц=syringe":
     cefr_level: B2
     gender: m
@@ -19957,6 +22913,32 @@ words:
       pl_acc: шпри́цы
       pl_ins: шпри́цами
       pl_pre: шпри́цах
+  "штаб=headquarters":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - military
+    en_gb:
+      standard: headquarters (the central office of a military or civilian organisation)
+    usage:
+      - ru: Приказ пришёл из шта́ба.
+        en_gb: The order came from headquarters.
+    declension:
+      sg_nom: штаб
+      sg_gen: шта́ба
+      sg_dat: шта́бу
+      sg_acc: штаб
+      sg_ins: шта́бом
+      sg_pre: шта́бе
+      pl_nom: шта́бы
+      pl_gen: шта́бов
+      pl_dat: шта́бам
+      pl_acc: шта́бы
+      pl_ins: шта́бами
+      pl_pre: шта́бах
   "штраф=fine":
     cefr_level: B1
     gender: m
@@ -20258,6 +23240,33 @@ words:
       pl_acc: эпо́хи
       pl_ins: эпо́хами
       pl_pre: эпо́хах
+  "эскалатор=escalator":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - public transport
+      - travel
+    en_gb:
+      standard: escalator (a moving staircase)
+    usage:
+      - ru: Встань на эскала́тор справа.
+        en_gb: Stand on the escalator on the right.
+    declension:
+      sg_nom: эскала́тор
+      sg_gen: эскала́тора
+      sg_dat: эскала́тору
+      sg_acc: эскала́тор
+      sg_ins: эскала́тором
+      sg_pre: эскала́торе
+      pl_nom: эскала́торы
+      pl_gen: эскала́торов
+      pl_dat: эскала́торам
+      pl_acc: эскала́торы
+      pl_ins: эскала́торами
+      pl_pre: эскала́торах
   "этаж=floor (storey)":
     cefr_level: A2
     gender: m
@@ -20311,6 +23320,31 @@ words:
       pl_acc: ю́бки
       pl_ins: ю́бками
       pl_pre: ю́бках
+  "юноша=young man":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: young man (a youth or adolescent male)
+    usage:
+      - ru: Ю́ноша поклонился и вышел.
+        en_gb: The young man bowed and left.
+    declension:
+      sg_nom: ю́ноша
+      sg_gen: ю́ноши
+      sg_dat: ю́ноше
+      sg_acc: ю́ношу
+      sg_ins: ю́ношей
+      sg_pre: ю́ноше
+      pl_nom: ю́ноши
+      pl_gen: ю́ношей
+      pl_dat: ю́ношам
+      pl_acc: ю́ношей
+      pl_ins: ю́ношами
+      pl_pre: ю́ношах
   "яблоко=apple":
     cefr_level: A2
     gender: n
