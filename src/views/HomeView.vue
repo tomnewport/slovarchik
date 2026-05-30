@@ -47,6 +47,16 @@ import { RouterLink } from 'vue-router'
       <span class="pill">listen → build</span>
     </RouterLink>
 
+    <RouterLink to="/speaking" class="card" style="text-decoration: none; color: inherit">
+      <h2 style="margin-top: 0">🗣️ Speaking</h2>
+      <p>
+        Say it out loud — the browser listens and grades you. <strong>Echo</strong> a Russian
+        phrase, <strong>produce</strong> Russian from English, or <strong>interpret</strong>
+        spoken Russian into English hands-free.
+      </p>
+      <span class="pill">echo → produce → interpret</span>
+    </RouterLink>
+
     <RouterLink to="/progress" class="card" style="text-decoration: none; color: inherit">
       <h2 style="margin-top: 0">📈 Progress</h2>
       <p>
