@@ -9,6 +9,7 @@ meta:
     excl: exclamation
     polite: politeness
     resp: response
+    particle: particle
 words:
   "ага=yes":
     cefr_level: A1
@@ -78,6 +79,12 @@ words:
     usage:
       - ru: Ты гото́в? — Да.
         en_gb: Are you ready? — Yes.
+  "даже=even":
+    cefr_level: A2
+    type: particle
+    accented: да́же
+    en_gb:
+      standard: even (emphatic particle adding emphasis or surprise)
   "де=reportedly":
     cefr_level: B2
     type: particle
@@ -122,7 +129,7 @@ words:
   "ибо=because":
     cefr_level: B2
     type: particle
-    accented: ибо
+    accented: и́бо
     en_gb:
       standard: "because (bookish or archaic: for, since)"
       alt:
