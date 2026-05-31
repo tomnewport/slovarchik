@@ -9,6 +9,18 @@ meta:
     ins: instrumental
     pre: prepositional
 words:
+  "без=without":
+    cefr_level: A2
+    accented: без
+    governs: ["gen"]
+    en_gb:
+      standard: without (not having something)
+  "благодаря=thanks to":
+    cefr_level: B1
+    accented: благодаря́
+    governs: ["dat"]
+    en_gb:
+      standard: thanks to (as a result of something positive)
   "в=in":
     cefr_level: A1
     accented: в
@@ -21,6 +33,38 @@ words:
     usage:
       - ru: Я живу́ в Москве́.
         en_gb: I live in Moscow.
+  "вдоль=along":
+    cefr_level: B1
+    accented: вдоль
+    governs: ["gen"]
+    en_gb:
+      standard: along (following the length of something)
+  "вместо=instead of":
+    cefr_level: B1
+    accented: вме́сто
+    governs: ["gen"]
+    en_gb:
+      standard: instead of (as a substitute for)
+  "вне=outside of":
+    cefr_level: B2
+    accented: вне
+    governs: ["gen"]
+    en_gb:
+      standard: outside of (beyond the limits of)
+  "во=in":
+    cefr_level: A1
+    accented: во
+    governs: ["acc", "pre"]
+    en_gb:
+      standard: in (variant of "в" used before certain consonant clusters)
+      alt:
+        - into
+  "вокруг=around (prep)":
+    cefr_level: A2
+    accented: вокру́г
+    governs: ["gen"]
+    en_gb:
+      standard: around (encircling something, governs genitive)
   "для=for":
     cefr_level: A2
     accented: для
@@ -42,6 +86,32 @@ words:
     usage:
       - ru: Магази́н рабо́тает до девяти́.
         en_gb: The shop is open until nine.
+  "за=behind":
+    cefr_level: A1
+    accented: за
+    governs: ["acc", "ins"]
+    en_gb:
+      standard: behind (on the other side of)
+      alt:
+        - for (with the accusative)
+        - in exchange for
+  "из=from":
+    cefr_level: A1
+    accented: из
+    governs: ["gen"]
+    en_gb:
+      standard: from (out of a place or container)
+      alt:
+        - out of
+        - made of
+  "изо=from":
+    cefr_level: A2
+    accented: изо
+    governs: ["gen"]
+    en_gb:
+      standard: from (variant of "из" before certain clusters)
+      alt:
+        - out of
   "к=towards":
     cefr_level: A2
     accented: к
@@ -53,6 +123,35 @@ words:
     usage:
       - ru: Я иду́ к врачу́.
         en_gb: I am going to the doctor.
+  "ко=towards":
+    cefr_level: A2
+    accented: ко
+    governs: ["dat"]
+    en_gb:
+      standard: towards (variant of "к" before certain clusters)
+  "кроме=except":
+    cefr_level: B1
+    accented: кро́ме
+    governs: ["gen"]
+    en_gb:
+      standard: except (not including)
+      alt:
+        - besides
+        - apart from
+  "меж=between":
+    cefr_level: B2
+    accented: меж
+    governs: ["ins"]
+    en_gb:
+      standard: between (variant of "между", literary or poetic)
+  "между=between":
+    cefr_level: A2
+    accented: ме́жду
+    governs: ["gen", "ins"]
+    en_gb:
+      standard: between (in the space separating two things)
+      alt:
+        - among
   "на=on":
     cefr_level: A1
     accented: на
@@ -65,6 +164,22 @@ words:
     usage:
       - ru: Кни́га на столе́.
         en_gb: The book is on the table.
+  "над=above":
+    cefr_level: A2
+    accented: над
+    governs: ["ins"]
+    en_gb:
+      standard: above (higher than something)
+      alt:
+        - over
+  "несмотря=despite":
+    cefr_level: B1
+    accented: несмотря́
+    governs: ["acc"]
+    en_gb:
+      standard: despite (usually "несмотря на" — in spite of)
+      alt:
+        - in spite of
   "о=about":
     cefr_level: A2
     accented: о
@@ -74,6 +189,29 @@ words:
     usage:
       - ru: Мы говори́м о фи́льме.
         en_gb: We are talking about the film.
+  "об=about":
+    cefr_level: A2
+    accented: об
+    governs: ["acc", "pre"]
+    en_gb:
+      standard: about (variant of "о" used before vowels)
+      alt:
+        - against (with the accusative)
+  "обо=about":
+    cefr_level: A2
+    accented: обо
+    governs: ["acc", "pre"]
+    en_gb:
+      standard: about (variant of "о" used in certain fixed phrases)
+  "около=near":
+    cefr_level: A2
+    accented: о́коло
+    governs: ["gen"]
+    en_gb:
+      standard: near (close to; also approximately)
+      alt:
+        - approximately
+        - about (quantity)
   "от=from":
     cefr_level: A2
     accented: от
@@ -83,6 +221,14 @@ words:
     usage:
       - ru: Я получи́л письмо́ от дру́га.
         en_gb: I received a letter from a friend.
+  "перед=in front of":
+    cefr_level: A2
+    accented: пе́ред
+    governs: ["ins"]
+    en_gb:
+      standard: in front of (directly ahead of)
+      alt:
+        - before (a time or event)
   "по=along":
     cefr_level: B1
     accented: по
@@ -95,6 +241,27 @@ words:
     usage:
       - ru: Мы гуля́ем по па́рку.
         en_gb: We are walking around the park.
+  "при=at":
+    cefr_level: B1
+    accented: при
+    governs: ["pre"]
+    en_gb:
+      standard: at (attached to; under a ruler; in the presence of)
+      alt:
+        - under (a ruler or era)
+        - in the presence of
+  "про=about":
+    cefr_level: A2
+    accented: про
+    governs: ["acc"]
+    en_gb:
+      standard: "about (colloquial: concerning, on the subject of)"
+  "ради=for the sake of":
+    cefr_level: B1
+    accented: ра́ди
+    governs: ["gen"]
+    en_gb:
+      standard: for the sake of (in order to benefit someone)
   "с=with":
     cefr_level: A1
     accented: с
@@ -106,6 +273,20 @@ words:
     usage:
       - ru: Я пью́ ча́й с са́харом.
         en_gb: I drink tea with sugar.
+  "сквозь=through":
+    cefr_level: B1
+    accented: сквозь
+    governs: ["acc"]
+    en_gb:
+      standard: through (passing all the way through something)
+  "среди=among":
+    cefr_level: A2
+    accented: среди́
+    governs: ["gen"]
+    en_gb:
+      standard: among (in the middle of a group)
+      alt:
+        - in the middle of
   "у=at":
     cefr_level: A1
     accented: у
@@ -117,3 +298,12 @@ words:
     usage:
       - ru: У меня́ есть соба́ка.
         en_gb: I have a dog.
+  "через=through":
+    cefr_level: A2
+    accented: че́рез
+    governs: ["acc"]
+    en_gb:
+      standard: through (crossing or passing something)
+      alt:
+        - across
+        - in (after a period of time)

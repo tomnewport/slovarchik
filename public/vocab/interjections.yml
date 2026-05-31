@@ -10,6 +10,21 @@ meta:
     polite: politeness
     resp: response
 words:
+  "ага=yes":
+    cefr_level: A1
+    type: resp
+    accented: ага́
+    en_gb:
+      standard: yes (informal agreement, uh-huh)
+      alt:
+        - uh-huh
+        - yeah
+  "ай=oh":
+    cefr_level: A2
+    type: excl
+    accented: ай
+    en_gb:
+      standard: oh (exclamation of pain or mild surprise)
   "алло=hello":
     cefr_level: A1
     type: greet
@@ -30,6 +45,30 @@ words:
     usage:
       - ru: Ах, кака́я красота́!
         en_gb: Ah, what beauty!
+  "бы=would":
+    cefr_level: B1
+    type: particle
+    accented: бы
+    en_gb:
+      standard: would (subjunctive or conditional particle)
+      alt:
+        - if only
+  "ведь=after all":
+    cefr_level: B1
+    type: particle
+    accented: ведь
+    en_gb:
+      standard: after all (emphasising a reason or reminding)
+      alt:
+        - you know (seeking agreement)
+  "вон=there":
+    cefr_level: A2
+    type: particle
+    accented: вон
+    en_gb:
+      standard: "there (pointing particle: look, over there)"
+      alt:
+        - look (directing attention)
   "да=yes":
     cefr_level: A1
     type: resp
@@ -39,6 +78,12 @@ words:
     usage:
       - ru: Ты гото́в? — Да.
         en_gb: Are you ready? — Yes.
+  "де=reportedly":
+    cefr_level: B2
+    type: particle
+    accented: де
+    en_gb:
+      standard: reportedly (archaic particle indicating reported speech)
   "до свидания=goodbye":
     cefr_level: A1
     type: greet
@@ -48,6 +93,23 @@ words:
     usage:
       - ru: До свида́ния, до за́втра!
         en_gb: Goodbye, see you tomorrow!
+  "же=after all":
+    cefr_level: B1
+    type: particle
+    accented: же
+    en_gb:
+      standard: after all (emphatic particle strengthening a statement)
+      alt:
+        - but (the very same)
+        - do (emphatic)
+  "зато=but at least":
+    cefr_level: B1
+    type: particle
+    accented: зато́
+    en_gb:
+      standard: but at least (on the other hand, compensating)
+      alt:
+        - on the other hand
   "здравствуйте=hello":
     cefr_level: A1
     type: greet
@@ -57,6 +119,14 @@ words:
     usage:
       - ru: Здра́вствуйте, как ва́ши дела́?
         en_gb: Hello, how are you?
+  "ибо=because":
+    cefr_level: B2
+    type: particle
+    accented: ибо
+    en_gb:
+      standard: "because (bookish or archaic: for, since)"
+      alt:
+        - for
   "извините=excuse me":
     cefr_level: A1
     type: polite
@@ -68,6 +138,15 @@ words:
     usage:
       - ru: Извини́те, где метро́?
         en_gb: Excuse me, where is the metro?
+  "итак=so":
+    cefr_level: B1
+    type: particle
+    accented: ита́к
+    en_gb:
+      standard: so (discourse marker summing up or introducing a conclusion)
+      alt:
+        - thus
+        - well then
   "конечно=of course":
     cefr_level: A2
     type: resp
@@ -79,6 +158,23 @@ words:
     usage:
       - ru: Ты помо́жешь мне? — Коне́чно!
         en_gb: Will you help me? — Of course!
+  "ли=whether":
+    cefr_level: A2
+    type: particle
+    accented: ли
+    en_gb:
+      standard: whether (question particle, or indirect question)
+      alt:
+        - if (in indirect questions)
+  "мол=reportedly":
+    cefr_level: B2
+    type: particle
+    accented: мол
+    en_gb:
+      standard: reportedly (particle indicating someone else's words)
+      alt:
+        - supposedly
+        - they say
   "нет=no":
     cefr_level: A1
     type: resp
@@ -88,6 +184,14 @@ words:
     usage:
       - ru: Хо́чешь ча́ю? — Нет, спаси́бо.
         en_gb: Do you want tea? — No, thank you.
+  "ни=not a single":
+    cefr_level: B1
+    type: particle
+    accented: ни
+    en_gb:
+      standard: not a single (negative intensifier, reinforcing negation)
+      alt:
+        - neither … nor
   "ну=well":
     cefr_level: A2
     type: excl
@@ -108,6 +212,12 @@ words:
     usage:
       - ru: Ой, я забы́л ключи́!
         en_gb: Oh, I forgot the keys!
+  "ох=oh":
+    cefr_level: A2
+    type: excl
+    accented: ох
+    en_gb:
+      standard: oh (exclamation of pain, weariness or dismay)
   "пожалуйста=please":
     cefr_level: A1
     type: polite
@@ -150,6 +260,36 @@ words:
     usage:
       - ru: Большо́е спаси́бо за по́мощь!
         en_gb: Thank you very much for the help!
+  "таки=after all":
+    cefr_level: B2
+    type: particle
+    accented: та́ки
+    en_gb:
+      standard: "after all (emphatic particle: still, all the same)"
+      alt:
+        - still
+  "тут=here":
+    cefr_level: A2
+    type: particle
+    accented: тут
+    en_gb:
+      standard: here (at this place or point; colloquial for "here")
+      alt:
+        - at this point
+  "увы=alas":
+    cefr_level: B1
+    type: excl
+    accented: увы́
+    en_gb:
+      standard: alas (expressing regret or sorrow)
+  "уж=indeed":
+    cefr_level: B1
+    type: particle
+    accented: уж
+    en_gb:
+      standard: "indeed (emphatic particle: already, certainly)"
+      alt:
+        - already (emphatic)
   "ура=hurray":
     cefr_level: A2
     type: excl
@@ -159,3 +299,32 @@ words:
     usage:
       - ru: Ура́! Мы вы́играли!
         en_gb: Hurray! We won!
+  "ха=ha":
+    cefr_level: B2
+    type: excl
+    accented: ха
+    en_gb:
+      standard: ha (laughter or triumph)
+  "хоть=at least":
+    cefr_level: B1
+    type: particle
+    accented: хоть
+    en_gb:
+      standard: "at least (particle: even, if only)"
+      alt:
+        - even
+  "чуть=barely":
+    cefr_level: A2
+    type: particle
+    accented: чуть
+    en_gb:
+      standard: barely (almost, just a little)
+      alt:
+        - almost
+        - just a little
+  "эй=hey":
+    cefr_level: A1
+    type: excl
+    accented: эй
+    en_gb:
+      standard: hey (calling attention or expressing surprise)
