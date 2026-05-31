@@ -361,6 +361,22 @@ words:
       pl_acc: альбо́мы
       pl_ins: альбо́мами
       pl_pre: альбо́мах
+  "Америка=America":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: America (the United States)
+    declension:
+      sg_nom: Аме́рика
+      sg_gen: Аме́рики
+      sg_dat: Аме́рике
+      sg_acc: Аме́рику
+      sg_ins: Аме́рикой
+      sg_pre: Аме́рике
   "американец=American":
     cefr_level: A2
     gender: m
@@ -387,6 +403,28 @@ words:
       pl_acc: америка́нцев
       pl_ins: америка́нцами
       pl_pre: америка́нцах
+  "анализ=analysis":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: analysis (detailed examination of something)
+    declension:
+      sg_nom: ана́лиз
+      sg_gen: ана́лиза
+      sg_dat: ана́лизу
+      sg_acc: ана́лиз
+      sg_ins: ана́лизом
+      sg_pre: ана́лизе
+      pl_nom: ана́лизы
+      pl_gen: ана́лизов
+      pl_dat: ана́лизам
+      pl_acc: ана́лизы
+      pl_ins: ана́лизами
+      pl_pre: ана́лизах
   "ангел=angel":
     cefr_level: B1
     gender: m
@@ -412,6 +450,22 @@ words:
       pl_acc: а́нгелов
       pl_ins: а́нгелами
       pl_pre: а́нгелах
+  "Англия=England":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: England (country in the United Kingdom)
+    declension:
+      sg_nom: А́нглия
+      sg_gen: А́нглии
+      sg_dat: А́нглии
+      sg_acc: А́нглию
+      sg_ins: А́нглией
+      sg_pre: А́нглии
   "антенна=aerial":
     cefr_level: B2
     gender: f
@@ -494,6 +548,28 @@ words:
       pl_acc: а́рмии
       pl_ins: а́рмиями
       pl_pre: а́рмиях
+  "атака=attack":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - military
+    en_gb:
+      standard: attack (aggressive action against someone)
+    declension:
+      sg_nom: ата́ка
+      sg_gen: ата́ки
+      sg_dat: ата́ке
+      sg_acc: ата́ку
+      sg_ins: ата́кой
+      sg_pre: ата́ке
+      pl_nom: ата́ки
+      pl_gen: ата́к
+      pl_dat: ата́кам
+      pl_acc: ата́ки
+      pl_ins: ата́ками
+      pl_pre: ата́ках
   "атлас=atlas":
     cefr_level: B1
     gender: m
@@ -540,6 +616,28 @@ words:
       sg_acc: атла́с
       sg_ins: атла́сом
       sg_pre: атла́се
+  "атмосфера=atmosphere":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: atmosphere (the air around a planet, or a general feeling)
+    declension:
+      sg_nom: атмосфе́ра
+      sg_gen: атмосфе́ры
+      sg_dat: атмосфе́ре
+      sg_acc: атмосфе́ру
+      sg_ins: атмосфе́рой
+      sg_pre: атмосфе́ре
+      pl_nom: атмосфе́ры
+      pl_gen: атмосфе́р
+      pl_dat: атмосфе́рам
+      pl_acc: атмосфе́ры
+      pl_ins: атмосфе́рами
+      pl_pre: атмосфе́рах
   "аэропорт=airport":
     cefr_level: A2
     gender: m
@@ -996,6 +1094,24 @@ words:
       pl_acc: бе́женцев
       pl_ins: бе́женцами
       pl_pre: бе́женцах
+  "безопасность=safety":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - daily life
+    en_gb:
+      standard: safety (the state of being protected from harm)
+      alt:
+        - security (protection from danger)
+    declension:
+      sg_nom: безопа́сность
+      sg_gen: безопа́сности
+      sg_dat: безопа́сности
+      sg_acc: безопа́сность
+      sg_ins: безопа́сностью
+      sg_pre: безопа́сности
   "белка=squirrel":
     cefr_level: B1
     gender: f
@@ -1066,6 +1182,24 @@ words:
       sg_acc: бензи́н
       sg_ins: бензи́ном
       sg_pre: бензи́не
+  "беспокойство=anxiety":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: anxiety (worried feeling)
+      alt:
+        - worry (troubled state of mind)
+    declension:
+      sg_nom: беспоко́йство
+      sg_gen: беспоко́йства
+      sg_dat: беспоко́йству
+      sg_acc: беспоко́йство
+      sg_ins: беспоко́йством
+      sg_pre: беспоко́йстве
   "бетон=concrete":
     cefr_level: B2
     gender: m
@@ -1192,6 +1326,22 @@ words:
       pl_acc: би́твы
       pl_ins: би́твами
       pl_pre: би́твах
+  "благодарность=gratitude":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: gratitude (the feeling of being thankful)
+    declension:
+      sg_nom: благода́рность
+      sg_gen: благода́рности
+      sg_dat: благода́рности
+      sg_acc: благода́рность
+      sg_ins: благода́рностью
+      sg_pre: благода́рности
   "благословение=blessing":
     cefr_level: B2
     gender: n
@@ -1502,6 +1652,24 @@ words:
       pl_acc: бо́мбы
       pl_ins: бо́мбами
       pl_pre: бо́мбах
+  "борьба=struggle":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - daily life
+    en_gb:
+      standard: struggle (a determined effort)
+      alt:
+        - fight (a conflict or contest)
+    declension:
+      sg_nom: борьба́
+      sg_gen: борьбы́
+      sg_dat: борьбе́
+      sg_acc: борьбу́
+      sg_ins: борьбо́й
+      sg_pre: борьбе́
   "ботинок=shoe":
     cefr_level: A2
     gender: m
@@ -2739,6 +2907,22 @@ words:
       pl_acc: вокза́лы
       pl_ins: вокза́лами
       pl_pre: вокза́лах
+  "Волга=Volga":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Volga (the longest river in Europe)
+    declension:
+      sg_nom: Во́лга
+      sg_gen: Во́лги
+      sg_dat: Во́лге
+      sg_acc: Во́лгу
+      sg_ins: Во́лгой
+      sg_pre: Во́лге
   "волк=wolf":
     cefr_level: B1
     gender: m
@@ -2765,6 +2949,30 @@ words:
       pl_acc: волко́в
       pl_ins: волка́ми
       pl_pre: волка́х
+  "волнение=excitement":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: excitement (strong feeling of enthusiasm or eagerness)
+      alt:
+        - agitation (state of worry or upset)
+    declension:
+      sg_nom: волне́ние
+      sg_gen: волне́ния
+      sg_dat: волне́нию
+      sg_acc: волне́ние
+      sg_ins: волне́нием
+      sg_pre: волне́нии
+      pl_nom: волне́ния
+      pl_gen: волне́ний
+      pl_dat: волне́ниям
+      pl_acc: волне́ния
+      pl_ins: волне́ниями
+      pl_pre: волне́ниях
   "волос=hair":
     cefr_level: A2
     gender: m
@@ -2790,6 +2998,22 @@ words:
       pl_acc: во́лосы
       pl_ins: волоса́ми
       pl_pre: волоса́х
+  "воображение=imagination":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: imagination (the ability to create ideas or pictures in the mind)
+    declension:
+      sg_nom: воображе́ние
+      sg_gen: воображе́ния
+      sg_dat: воображе́нию
+      sg_acc: воображе́ние
+      sg_ins: воображе́нием
+      sg_pre: воображе́нии
   "вопрос=question":
     cefr_level: A2
     gender: m
@@ -2890,6 +3114,24 @@ words:
       pl_acc: воротники́
       pl_ins: воротника́ми
       pl_pre: воротника́х
+  "восторг=delight":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: delight (great pleasure and happiness)
+      alt:
+        - rapture (ecstatic joy)
+    declension:
+      sg_nom: восто́рг
+      sg_gen: восто́рга
+      sg_dat: восто́ргу
+      sg_acc: восто́рг
+      sg_ins: восто́ргом
+      sg_pre: восто́рге
   "враг=enemy":
     cefr_level: B1
     gender: m
@@ -3155,6 +3397,22 @@ words:
       pl_acc: генера́лов
       pl_ins: генера́лами
       pl_pre: генера́лах
+  "Германия=Germany":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Germany (country in central Europe)
+    declension:
+      sg_nom: Герма́ния
+      sg_gen: Герма́нии
+      sg_dat: Герма́нии
+      sg_acc: Герма́нию
+      sg_ins: Герма́нией
+      sg_pre: Герма́нии
   "герой=hero":
     cefr_level: B1
     gender: m
@@ -3307,6 +3565,24 @@ words:
       sg_acc: гли́ну
       sg_ins: гли́ной
       sg_pre: гли́не
+  "гнев=anger":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: anger (a strong feeling of displeasure)
+      alt:
+        - wrath (intense anger)
+    declension:
+      sg_nom: гнев
+      sg_gen: гнева
+      sg_dat: гневу
+      sg_acc: гнев
+      sg_ins: гневом
+      sg_pre: гневе
   "голова=head":
     cefr_level: A2
     gender: f
@@ -3359,6 +3635,40 @@ words:
       pl_acc: го́ры
       pl_ins: гора́ми
       pl_pre: гора́х
+  "гордость=pride":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: pride (a feeling of deep pleasure from achievements)
+    declension:
+      sg_nom: го́рдость
+      sg_gen: го́рдости
+      sg_dat: го́рдости
+      sg_acc: го́рдость
+      sg_ins: го́рдостью
+      sg_pre: го́рдости
+  "горе=grief":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: grief (intense sorrow)
+      alt:
+        - misfortune (an unfortunate event or situation)
+    declension:
+      sg_nom: го́ре
+      sg_gen: го́ря
+      sg_dat: го́рю
+      sg_acc: го́ре
+      sg_ins: го́рем
+      sg_pre: го́ре
   "горло=throat":
     cefr_level: B1
     gender: n
@@ -3467,6 +3777,30 @@ words:
       pl_acc: гости́ницы
       pl_ins: гости́ницами
       pl_pre: гости́ницах
+  "государство=state":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: state (a politically organised territory)
+      alt:
+        - government (the ruling body of a nation)
+    declension:
+      sg_nom: госуда́рство
+      sg_gen: госуда́рства
+      sg_dat: госуда́рству
+      sg_acc: госуда́рство
+      sg_ins: госуда́рством
+      sg_pre: госуда́рстве
+      pl_nom: госуда́рства
+      pl_gen: госуда́рств
+      pl_dat: госуда́рствам
+      pl_acc: госуда́рства
+      pl_ins: госуда́рствами
+      pl_pre: госуда́рствах
   "градус=degree":
     cefr_level: B1
     gender: m
@@ -4051,6 +4385,28 @@ words:
       pl_acc: дельфи́нов
       pl_ins: дельфи́нами
       pl_pre: дельфи́нах
+  "демократия=democracy":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: democracy (a system of government by the whole population)
+    declension:
+      sg_nom: демокра́тия
+      sg_gen: демокра́тии
+      sg_dat: демокра́тии
+      sg_acc: демокра́тию
+      sg_ins: демокра́тией
+      sg_pre: демокра́тии
+      pl_nom: демокра́тии
+      pl_gen: демокра́тий
+      pl_dat: демокра́тиям
+      pl_acc: демокра́тии
+      pl_ins: демокра́тиями
+      pl_pre: демокра́тиях
   "деньги=money":
     cefr_level: A1
     animacy: i
@@ -4743,6 +5099,22 @@ words:
       pl_acc: друзе́й
       pl_ins: друзья́ми
       pl_pre: друзья́х
+  "дружба=friendship":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - people
+    en_gb:
+      standard: friendship (the state of being friends)
+    declension:
+      sg_nom: дру́жба
+      sg_gen: дру́жбы
+      sg_dat: дру́жбе
+      sg_acc: дру́жбу
+      sg_ins: дру́жбой
+      sg_pre: дру́жбе
   "дуга=arc":
     cefr_level: B2
     gender: f
@@ -4923,6 +5295,22 @@ words:
       pl_acc: евре́ев
       pl_ins: евре́ями
       pl_pre: евре́ях
+  "Европа=Europe":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Europe (the continent)
+    declension:
+      sg_nom: Евро́па
+      sg_gen: Евро́пы
+      sg_dat: Евро́пе
+      sg_acc: Евро́пу
+      sg_ins: Евро́пой
+      sg_pre: Евро́пе
   "еда=food":
     cefr_level: A1
     gender: f
@@ -5027,6 +5415,30 @@ words:
       pl_acc: жа́лобы
       pl_ins: жа́лобами
       pl_pre: жа́лобах
+  "желание=wish":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: wish (a strong desire or hope)
+      alt:
+        - desire (a strong feeling of wanting something)
+    declension:
+      sg_nom: жела́ние
+      sg_gen: жела́ния
+      sg_dat: жела́нию
+      sg_acc: жела́ние
+      sg_ins: жела́нием
+      sg_pre: жела́нии
+      pl_nom: жела́ния
+      pl_gen: жела́ний
+      pl_dat: жела́ниям
+      pl_acc: жела́ния
+      pl_ins: жела́ниями
+      pl_pre: жела́ниях
   "жена=wife":
     cefr_level: A1
     gender: f
@@ -5340,6 +5752,54 @@ words:
       pl_acc: заголо́вки
       pl_ins: заголо́вками
       pl_pre: заголо́вках
+  "задание=task":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: task (a piece of work to be done)
+      alt:
+        - assignment (a job or duty assigned to someone)
+    declension:
+      sg_nom: зада́ние
+      sg_gen: зада́ния
+      sg_dat: зада́нию
+      sg_acc: зада́ние
+      sg_ins: зада́нием
+      sg_pre: зада́нии
+      pl_nom: зада́ния
+      pl_gen: зада́ний
+      pl_dat: зада́ниям
+      pl_acc: зада́ния
+      pl_ins: зада́ниями
+      pl_pre: зада́ниях
+  "задача=problem":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: problem (a matter needing a solution)
+      alt:
+        - objective (a goal or aim)
+    declension:
+      sg_nom: зада́ча
+      sg_gen: зада́чи
+      sg_dat: зада́че
+      sg_acc: зада́чу
+      sg_ins: зада́чей
+      sg_pre: зада́че
+      pl_nom: зада́чи
+      pl_gen: зада́ч
+      pl_dat: зада́чам
+      pl_acc: зада́чи
+      pl_ins: зада́чами
+      pl_pre: зада́чах
   "заказ=order":
     cefr_level: B1
     gender: m
@@ -5577,6 +6037,30 @@ words:
       pl_acc: зарпла́ты
       pl_ins: зарпла́тами
       pl_pre: зарпла́тах
+  "заседание=meeting":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: meeting (a formal session of a group)
+      alt:
+        - session (a period devoted to a particular activity)
+    declension:
+      sg_nom: заседа́ние
+      sg_gen: заседа́ния
+      sg_dat: заседа́нию
+      sg_acc: заседа́ние
+      sg_ins: заседа́нием
+      sg_pre: заседа́нии
+      pl_nom: заседа́ния
+      pl_gen: заседа́ний
+      pl_dat: заседа́ниям
+      pl_acc: заседа́ния
+      pl_ins: заседа́ниями
+      pl_pre: заседа́ниях
   "защита=defence":
     cefr_level: B2
     gender: f
@@ -5599,6 +6083,30 @@ words:
       sg_acc: защи́ту
       sg_ins: защи́той
       sg_pre: защи́те
+  "заявление=statement":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: statement (a formal declaration)
+      alt:
+        - application (a formal written request)
+    declension:
+      sg_nom: заявле́ние
+      sg_gen: заявле́ния
+      sg_dat: заявле́нию
+      sg_acc: заявле́ние
+      sg_ins: заявле́нием
+      sg_pre: заявле́нии
+      pl_nom: заявле́ния
+      pl_gen: заявле́ний
+      pl_dat: заявле́ниям
+      pl_acc: заявле́ния
+      pl_ins: заявле́ниями
+      pl_pre: заявле́ниях
   "заяц=hare":
     cefr_level: B1
     gender: m
@@ -5781,6 +6289,22 @@ words:
       pl_acc: зи́мы
       pl_ins: зи́мами
       pl_pre: зи́мах
+  "зло=evil":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - daily life
+    en_gb:
+      standard: evil (profound immorality and wickedness)
+    declension:
+      sg_nom: зло
+      sg_gen: зла
+      sg_dat: злу
+      sg_acc: зло
+      sg_ins: злом
+      sg_pre: зле
   "змея=snake":
     cefr_level: B1
     gender: f
@@ -5807,6 +6331,30 @@ words:
       pl_acc: змей
       pl_ins: зме́ями
       pl_pre: зме́ях
+  "значение=meaning":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - reading
+    en_gb:
+      standard: meaning (what something signifies)
+      alt:
+        - significance (importance or value)
+    declension:
+      sg_nom: значе́ние
+      sg_gen: значе́ния
+      sg_dat: значе́нию
+      sg_acc: значе́ние
+      sg_ins: значе́нием
+      sg_pre: значе́нии
+      pl_nom: значе́ния
+      pl_gen: значе́ний
+      pl_dat: значе́ниям
+      pl_acc: значе́ния
+      pl_ins: значе́ниями
+      pl_pre: значе́ниях
   "зуб=tooth":
     cefr_level: A2
     gender: m
@@ -5939,6 +6487,46 @@ words:
       pl_acc: изме́ны
       pl_ins: изме́нами
       pl_pre: изме́нах
+  "изменение=change":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: change (the act of becoming different)
+      alt:
+        - amendment (a modification to something)
+    declension:
+      sg_nom: измене́ние
+      sg_gen: измене́ния
+      sg_dat: измене́нию
+      sg_acc: измене́ние
+      sg_ins: измене́нием
+      sg_pre: измене́нии
+      pl_nom: измене́ния
+      pl_gen: измене́ний
+      pl_dat: измене́ниям
+      pl_acc: измене́ния
+      pl_ins: измене́ниями
+      pl_pre: измене́ниях
+  "Израиль=Israel":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Israel (country in the Middle East)
+    declension:
+      sg_nom: Изра́иль
+      sg_gen: Изра́иля
+      sg_dat: Изра́илю
+      sg_acc: Изра́иль
+      sg_ins: Изра́илем
+      sg_pre: Изра́иле
   "икона=icon":
     cefr_level: B2
     gender: f
@@ -6146,6 +6734,22 @@ words:
       sg_acc: интерне́т
       sg_ins: интерне́том
       sg_pre: интерне́те
+  "информация=information":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - technology
+    en_gb:
+      standard: information (facts or knowledge about something)
+    declension:
+      sg_nom: информа́ция
+      sg_gen: информа́ции
+      sg_dat: информа́ции
+      sg_acc: информа́цию
+      sg_ins: информа́цией
+      sg_pre: информа́ции
   "ирис=iris":
     cefr_level: B2
     gender: m
@@ -6274,6 +6878,22 @@ words:
       pl_acc: исто́рии
       pl_ins: исто́риями
       pl_pre: исто́риях
+  "Италия=Italy":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Italy (country in southern Europe)
+    declension:
+      sg_nom: Ита́лия
+      sg_gen: Ита́лии
+      sg_dat: Ита́лии
+      sg_acc: Ита́лию
+      sg_ins: Ита́лией
+      sg_pre: Ита́лии
   "кабель=cable":
     cefr_level: B2
     gender: m
@@ -6927,6 +7547,22 @@ words:
       pl_acc: ки́сти
       pl_ins: кистя́ми
       pl_pre: кистя́х
+  "Китай=China":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: China (country in East Asia)
+    declension:
+      sg_nom: Кита́й
+      sg_gen: Кита́я
+      sg_dat: Кита́ю
+      sg_acc: Кита́й
+      sg_ins: Кита́ем
+      sg_pre: Кита́е
   "клавиатура=keyboard":
     cefr_level: B1
     gender: f
@@ -7575,6 +8211,23 @@ words:
       pl_acc: комисса́ров
       pl_ins: комисса́рами
       pl_pre: комисса́рах
+  "коммунизм=communism":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - politics
+      - history
+    en_gb:
+      standard: communism (a political system of collective ownership)
+    declension:
+      sg_nom: коммуни́зм
+      sg_gen: коммуни́зма
+      sg_dat: коммуни́зму
+      sg_acc: коммуни́зм
+      sg_ins: коммуни́змом
+      sg_pre: коммуни́зме
   "комната=room":
     cefr_level: A1
     gender: f
@@ -7807,6 +8460,22 @@ words:
       pl_acc: ко́рни
       pl_ins: корня́ми
       pl_pre: корня́х
+  "Корея=Korea":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Korea (peninsula in East Asia)
+    declension:
+      sg_nom: Коре́я
+      sg_gen: Коре́и
+      sg_dat: Коре́е
+      sg_acc: Коре́ю
+      sg_ins: Коре́ей
+      sg_pre: Коре́е
   "корзина=basket":
     cefr_level: A2
     gender: f
@@ -8718,6 +9387,28 @@ words:
       pl_acc: кулаки́
       pl_ins: кулака́ми
       pl_pre: кулака́х
+  "культура=culture":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: culture (the arts and social institutions of a society)
+    declension:
+      sg_nom: культу́ра
+      sg_gen: культу́ры
+      sg_dat: культу́ре
+      sg_acc: культу́ру
+      sg_ins: культу́рой
+      sg_pre: культу́ре
+      pl_nom: культу́ры
+      pl_gen: культу́р
+      pl_dat: культу́рам
+      pl_acc: культу́ры
+      pl_ins: культу́рами
+      pl_pre: культу́рах
   "купальник=swimsuit":
     cefr_level: B1
     gender: m
@@ -9198,6 +9889,23 @@ words:
       pl_acc: лека́рства
       pl_ins: лека́рствами
       pl_pre: лека́рствах
+  "Ленинград=Leningrad":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+      - history
+    en_gb:
+      standard: Leningrad (former name of Saint Petersburg)
+    declension:
+      sg_nom: Ленингра́д
+      sg_gen: Ленингра́да
+      sg_dat: Ленингра́ду
+      sg_acc: Ленингра́д
+      sg_ins: Ленингра́дом
+      sg_pre: Ленингра́де
   "лес=forest":
     cefr_level: A2
     gender: m
@@ -9709,6 +10417,22 @@ words:
       sg_acc: любо́вь
       sg_ins: любо́вью
       sg_pre: любви́
+  "любопытство=curiosity":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: curiosity (a strong desire to know or learn)
+    declension:
+      sg_nom: любопы́тство
+      sg_gen: любопы́тства
+      sg_dat: любопы́тству
+      sg_acc: любопы́тство
+      sg_ins: любопы́тством
+      sg_pre: любопы́тстве
   "лягушка=frog":
     cefr_level: B1
     gender: f
@@ -10418,6 +11142,28 @@ words:
       pl_acc: милиционе́ров
       pl_ins: милиционе́рами
       pl_pre: милиционе́рах
+  "министерство=ministry":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: ministry (a government department)
+    declension:
+      sg_nom: министе́рство
+      sg_gen: министе́рства
+      sg_dat: министе́рству
+      sg_acc: министе́рство
+      sg_ins: министе́рством
+      sg_pre: министе́рстве
+      pl_nom: министе́рства
+      pl_gen: министе́рств
+      pl_dat: министе́рствам
+      pl_acc: министе́рства
+      pl_ins: министе́рствами
+      pl_pre: министе́рствах
   "министр=minister":
     cefr_level: B1
     gender: m
@@ -10527,6 +11273,28 @@ words:
       pl_acc: младе́нцев
       pl_ins: младе́нцами
       pl_pre: младе́нцах
+  "мнение=opinion":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: opinion (a view or judgement)
+    declension:
+      sg_nom: мне́ние
+      sg_gen: мне́ния
+      sg_dat: мне́нию
+      sg_acc: мне́ние
+      sg_ins: мне́нием
+      sg_pre: мне́нии
+      pl_nom: мне́ния
+      pl_gen: мне́ний
+      pl_dat: мне́ниям
+      pl_acc: мне́ния
+      pl_ins: мне́ниями
+      pl_pre: мне́ниях
   "мода=fashion":
     cefr_level: B1
     gender: f
@@ -10822,6 +11590,22 @@ words:
       pl_acc: моряков
       pl_ins: моряками
       pl_pre: моряках
+  "Москва=Moscow":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Moscow (capital city of Russia)
+    declension:
+      sg_nom: Москва́
+      sg_gen: Москвы́
+      sg_dat: Москве́
+      sg_acc: Москву́
+      sg_ins: Москво́й
+      sg_pre: Москве́
   "москвич=Muscovite":
     cefr_level: B2
     gender: m
@@ -11460,6 +12244,28 @@ words:
       pl_acc: нау́шники
       pl_ins: нау́шниками
       pl_pre: нау́шниках
+  "нация=nation":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: nation (a large group of people sharing history and territory)
+    declension:
+      sg_nom: на́ция
+      sg_gen: на́ции
+      sg_dat: на́ции
+      sg_acc: на́цию
+      sg_ins: на́цией
+      sg_pre: на́ции
+      pl_nom: на́ции
+      pl_gen: на́ций
+      pl_dat: на́циям
+      pl_acc: на́ции
+      pl_ins: на́циями
+      pl_pre: на́циях
   "начальник=boss":
     cefr_level: B1
     gender: m
@@ -11585,6 +12391,22 @@ words:
       sg_acc: не́жность
       sg_ins: не́жностью
       sg_pre: не́жности
+  "ненависть=hatred":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: hatred (intense dislike or ill will)
+    declension:
+      sg_nom: не́нависть
+      sg_gen: не́нависти
+      sg_dat: не́нависти
+      sg_acc: не́нависть
+      sg_ins: не́навистью
+      sg_pre: не́нависти
   "новость=news":
     cefr_level: A2
     gender: f
@@ -12155,6 +12977,48 @@ words:
       pl_acc: одея́ла
       pl_ins: одея́лами
       pl_pre: одея́лах
+  "одиночество=loneliness":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: loneliness (feeling alone and unhappy)
+      alt:
+        - solitude (the state of being alone)
+    declension:
+      sg_nom: одино́чество
+      sg_gen: одино́чества
+      sg_dat: одино́честву
+      sg_acc: одино́чество
+      sg_ins: одино́чеством
+      sg_pre: одино́честве
+  "ожидание=expectation":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: expectation (a belief that something will happen)
+      alt:
+        - waiting (the act of staying until something happens)
+    declension:
+      sg_nom: ожида́ние
+      sg_gen: ожида́ния
+      sg_dat: ожида́нию
+      sg_acc: ожида́ние
+      sg_ins: ожида́нием
+      sg_pre: ожида́нии
+      pl_nom: ожида́ния
+      pl_gen: ожида́ний
+      pl_dat: ожида́ниям
+      pl_acc: ожида́ния
+      pl_ins: ожида́ниями
+      pl_pre: ожида́ниях
   "ожог=burn":
     cefr_level: B2
     gender: m
@@ -12343,6 +13207,28 @@ words:
       pl_acc: орга́ны
       pl_ins: орга́нами
       pl_pre: орга́нах
+  "организация=organisation":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: organisation (a group of people with a shared purpose)
+    declension:
+      sg_nom: организа́ция
+      sg_gen: организа́ции
+      sg_dat: организа́ции
+      sg_acc: организа́цию
+      sg_ins: организа́цией
+      sg_pre: организа́ции
+      pl_nom: организа́ции
+      pl_gen: организа́ций
+      pl_dat: организа́циям
+      pl_acc: организа́ции
+      pl_ins: организа́циями
+      pl_pre: организа́циях
   "оркестр=orchestra":
     cefr_level: B2
     gender: m
@@ -12698,6 +13584,22 @@ words:
       pl_acc: отте́нки
       pl_ins: отте́нками
       pl_pre: отте́нках
+  "отчаяние=despair":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: despair (the complete loss of hope)
+    declension:
+      sg_nom: отча́яние
+      sg_gen: отча́яния
+      sg_dat: отча́янию
+      sg_acc: отча́яние
+      sg_ins: отча́янием
+      sg_pre: отча́янии
   "отчество=patronymic":
     cefr_level: B1
     gender: n
@@ -12987,6 +13889,30 @@ words:
       pl_acc: оши́бки
       pl_ins: оши́бками
       pl_pre: оши́бках
+  "ощущение=sensation":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: sensation (a physical feeling or perception)
+      alt:
+        - feeling (an emotional state or reaction)
+    declension:
+      sg_nom: ощуще́ние
+      sg_gen: ощуще́ния
+      sg_dat: ощуще́нию
+      sg_acc: ощуще́ние
+      sg_ins: ощуще́нием
+      sg_pre: ощуще́нии
+      pl_nom: ощуще́ния
+      pl_gen: ощуще́ний
+      pl_dat: ощуще́ниям
+      pl_acc: ощуще́ния
+      pl_ins: ощуще́ниями
+      pl_pre: ощуще́ниях
   "пакет=bag":
     cefr_level: A1
     gender: m
@@ -13178,6 +14104,22 @@ words:
       pl_acc: па́ры
       pl_ins: па́рами
       pl_pre: па́рах
+  "Париж=Paris":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Paris (capital city of France)
+    declension:
+      sg_nom: Пари́ж
+      sg_gen: Пари́жа
+      sg_dat: Пари́жу
+      sg_acc: Пари́ж
+      sg_ins: Пари́жем
+      sg_pre: Пари́же
   "парк=park":
     cefr_level: A1
     gender: m
@@ -13259,6 +14201,28 @@ words:
       pl_acc: паро́ли
       pl_ins: паро́лями
       pl_pre: паро́лях
+  "партия=party":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: party (a political organisation)
+    declension:
+      sg_nom: па́ртия
+      sg_gen: па́ртии
+      sg_dat: па́ртии
+      sg_acc: па́ртию
+      sg_ins: па́ртией
+      sg_pre: па́ртии
+      pl_nom: па́ртии
+      pl_gen: па́ртий
+      pl_dat: па́ртиям
+      pl_acc: па́ртии
+      pl_ins: па́ртиями
+      pl_pre: па́ртиях
   "партнёр=partner":
     cefr_level: B1
     gender: m
@@ -13621,6 +14585,22 @@ words:
       sg_acc: песо́к
       sg_ins: песко́м
       sg_pre: песке́
+  "Петербург=Petersburg":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Petersburg (Saint Petersburg, city in Russia)
+    declension:
+      sg_nom: Петербу́рг
+      sg_gen: Петербу́рга
+      sg_dat: Петербу́ргу
+      sg_acc: Петербу́рг
+      sg_ins: Петербу́ргом
+      sg_pre: Петербу́рге
   "петух=rooster":
     cefr_level: B1
     gender: m
@@ -14625,6 +15605,24 @@ words:
       pl_acc: полы́
       pl_ins: пола́ми
       pl_pre: пола́х
+  "политика=politics":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - politics
+    en_gb:
+      standard: politics (activities associated with governance)
+      alt:
+        - policy (a course of action adopted by a government)
+    declension:
+      sg_nom: поли́тика
+      sg_gen: поли́тики
+      sg_dat: поли́тике
+      sg_acc: поли́тику
+      sg_ins: поли́тикой
+      sg_pre: поли́тике
   "полицейский=policeman":
     cefr_level: B1
     gender: m
@@ -15260,6 +16258,28 @@ words:
       pl_acc: пра́вила
       pl_ins: пра́вилами
       pl_pre: пра́вилах
+  "правительство=government":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: government (the group of people who govern a state)
+    declension:
+      sg_nom: прави́тельство
+      sg_gen: прави́тельства
+      sg_dat: прави́тельству
+      sg_acc: прави́тельство
+      sg_ins: прави́тельством
+      sg_pre: прави́тельстве
+      pl_nom: прави́тельства
+      pl_gen: прави́тельств
+      pl_dat: прави́тельствам
+      pl_acc: прави́тельства
+      pl_ins: прави́тельствами
+      pl_pre: прави́тельствах
   "право=right":
     cefr_level: B1
     gender: n
@@ -15865,6 +16885,30 @@ words:
       pl_acc: прое́кты
       pl_ins: прое́ктами
       pl_pre: прое́ктах
+  "производство=production":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: production (the process of making goods)
+      alt:
+        - manufacturing (the making of goods on a large scale)
+    declension:
+      sg_nom: произво́дство
+      sg_gen: произво́дства
+      sg_dat: произво́дству
+      sg_acc: произво́дство
+      sg_ins: произво́дством
+      sg_pre: произво́дстве
+      pl_nom: произво́дства
+      pl_gen: произво́дств
+      pl_dat: произво́дствам
+      pl_acc: произво́дства
+      pl_ins: произво́дствами
+      pl_pre: произво́дствах
   "прокурор=prosecutor":
     cefr_level: B2
     gender: m
@@ -17004,6 +18048,28 @@ words:
       pl_acc: ресни́цы
       pl_ins: ресни́цами
       pl_pre: ресни́цах
+  "республика=republic":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: republic (a state governed by elected representatives)
+    declension:
+      sg_nom: респу́блика
+      sg_gen: респу́блики
+      sg_dat: респу́блике
+      sg_acc: респу́блику
+      sg_ins: респу́бликой
+      sg_pre: респу́блике
+      pl_nom: респу́блики
+      pl_gen: респу́блик
+      pl_dat: респу́бликам
+      pl_acc: респу́блики
+      pl_ins: респу́бликами
+      pl_pre: респу́бликах
   "ресторан=restaurant":
     cefr_level: A2
     gender: m
@@ -17031,6 +18097,28 @@ words:
       pl_acc: рестора́ны
       pl_ins: рестора́нами
       pl_pre: рестора́нах
+  "реформа=reform":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: reform (a change made to improve something)
+    declension:
+      sg_nom: рефо́рма
+      sg_gen: рефо́рмы
+      sg_dat: рефо́рме
+      sg_acc: рефо́рму
+      sg_ins: рефо́рмой
+      sg_pre: рефо́рме
+      pl_nom: рефо́рмы
+      pl_gen: рефо́рм
+      pl_dat: рефо́рмам
+      pl_acc: рефо́рмы
+      pl_ins: рефо́рмами
+      pl_pre: рефо́рмах
   "рецепт=recipe":
     cefr_level: B1
     gender: m
@@ -17285,6 +18373,22 @@ words:
       pl_acc: ро́мбы
       pl_ins: ро́мбами
       pl_pre: ро́мбах
+  "Россия=Russia":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Russia (largest country in the world)
+    declension:
+      sg_nom: Росси́я
+      sg_gen: Росси́и
+      sg_dat: Росси́и
+      sg_acc: Росси́ю
+      sg_ins: Росси́ей
+      sg_pre: Росси́и
   "рот=mouth":
     cefr_level: A2
     gender: m
@@ -18495,6 +19599,28 @@ words:
       pl_acc: синяки́
       pl_ins: синяка́ми
       pl_pre: синяка́х
+  "система=system":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: system (a set of connected things forming a whole)
+    declension:
+      sg_nom: систе́ма
+      sg_gen: систе́мы
+      sg_dat: систе́ме
+      sg_acc: систе́му
+      sg_ins: систе́мой
+      sg_pre: систе́ме
+      pl_nom: систе́мы
+      pl_gen: систе́м
+      pl_dat: систе́мам
+      pl_acc: систе́мы
+      pl_ins: систе́мами
+      pl_pre: систе́мах
   "сказка=fairy tale":
     cefr_level: A2
     gender: f
@@ -18905,6 +20031,24 @@ words:
       pl_acc: собы́тия
       pl_ins: собы́тиями
       pl_pre: собы́тиях
+  "сожаление=regret":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: regret (a feeling of sadness about something)
+      alt:
+        - pity (a feeling of sorrow for someone's misfortune)
+    declension:
+      sg_nom: сожале́ние
+      sg_gen: сожале́ния
+      sg_dat: сожале́нию
+      sg_acc: сожале́ние
+      sg_ins: сожале́нием
+      sg_pre: сожале́нии
   "сок=juice":
     cefr_level: A2
     gender: m
@@ -19132,6 +20276,47 @@ words:
       pl_acc: сотру́дников
       pl_ins: сотру́дниками
       pl_pre: сотру́дниках
+  "социализм=socialism":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - politics
+      - history
+    en_gb:
+      standard: socialism (a political system of collective ownership)
+    declension:
+      sg_nom: социали́зм
+      sg_gen: социали́зма
+      sg_dat: социали́зму
+      sg_acc: социали́зм
+      sg_ins: социали́змом
+      sg_pre: социали́зме
+  "союз=union":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - politics
+    en_gb:
+      standard: union (a number of people or groups joined together)
+      alt:
+        - alliance (a formal agreement between groups)
+    declension:
+      sg_nom: сою́з
+      sg_gen: сою́за
+      sg_dat: сою́зу
+      sg_acc: сою́з
+      sg_ins: сою́зом
+      sg_pre: сою́зе
+      pl_nom: сою́зы
+      pl_gen: сою́зов
+      pl_dat: сою́зам
+      pl_acc: сою́зы
+      pl_ins: сою́зами
+      pl_pre: сою́зах
   "спасение=salvation":
     cefr_level: B2
     gender: n
@@ -19300,6 +20485,23 @@ words:
       pl_acc: сраже́ния
       pl_ins: сраже́ниями
       pl_pre: сраже́ниях
+  "СССР=USSR":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+      - history
+    en_gb:
+      standard: USSR (Soviet Union, historical state)
+    declension:
+      sg_nom: СССР
+      sg_gen: СССР
+      sg_dat: СССР
+      sg_acc: СССР
+      sg_ins: СССР
+      sg_pre: СССР
   "стадион=stadium":
     cefr_level: B1
     gender: m
@@ -20076,6 +21278,22 @@ words:
       pl_acc: счета́
       pl_ins: счета́ми
       pl_pre: счета́х
+  "США=USA":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["pl"]
+    collections:
+      - geography
+    en_gb:
+      standard: USA (the United States of America)
+    declension:
+      pl_nom: США
+      pl_gen: США
+      pl_dat: США
+      pl_acc: США
+      pl_ins: США
+      pl_pre: США
   "сын=son":
     cefr_level: A1
     gender: m
@@ -20604,6 +21822,24 @@ words:
       pl_acc: то́рты
       pl_ins: то́ртами
       pl_pre: то́ртах
+  "тоска=longing":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: longing (a yearning or melancholy)
+      alt:
+        - anguish (severe mental suffering)
+    declension:
+      sg_nom: тоска́
+      sg_gen: тоски́
+      sg_dat: тоске́
+      sg_acc: тоску́
+      sg_ins: тоско́й
+      sg_pre: тоске́
   "точка=dot":
     cefr_level: B1
     gender: f
@@ -20662,6 +21898,28 @@ words:
       pl_acc: тра́вы
       pl_ins: тра́вами
       pl_pre: тра́вах
+  "традиция=tradition":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: tradition (a long-established custom)
+    declension:
+      sg_nom: тради́ция
+      sg_gen: тради́ции
+      sg_dat: тради́ции
+      sg_acc: тради́цию
+      sg_ins: тради́цией
+      sg_pre: тради́ции
+      pl_nom: тради́ции
+      pl_gen: тради́ций
+      pl_dat: тради́циям
+      pl_acc: тради́ции
+      pl_ins: тради́циями
+      pl_pre: тради́циях
   "трамвай=tram":
     cefr_level: A2
     gender: m
@@ -20687,6 +21945,30 @@ words:
       pl_acc: трамва́и
       pl_ins: трамва́ями
       pl_pre: трамва́ях
+  "тревога=alarm":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: alarm (a feeling of anxiety or worry)
+      alt:
+        - anxiety (a feeling of nervousness)
+    declension:
+      sg_nom: трево́га
+      sg_gen: трево́ги
+      sg_dat: трево́ге
+      sg_acc: трево́гу
+      sg_ins: трево́гой
+      sg_pre: трево́ге
+      pl_nom: трево́ги
+      pl_gen: трево́г
+      pl_dat: трево́гам
+      pl_acc: трево́ги
+      pl_ins: трево́гами
+      pl_pre: трево́гах
   "тренер=coach":
     cefr_level: B1
     gender: m
@@ -20933,6 +22215,22 @@ words:
       pl_acc: уби́йства
       pl_ins: уби́йствами
       pl_pre: уби́йствах
+  "уверенность=confidence":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: confidence (a feeling of certainty or trust in oneself)
+    declension:
+      sg_nom: уве́ренность
+      sg_gen: уве́ренности
+      sg_dat: уве́ренности
+      sg_acc: уве́ренность
+      sg_ins: уве́ренностью
+      sg_pre: уве́ренности
   "угол=corner":
     cefr_level: A2
     gender: m
@@ -20962,6 +22260,24 @@ words:
       pl_acc: углы́
       pl_ins: угла́ми
       pl_pre: угла́х
+  "удивление=surprise":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: surprise (a feeling of astonishment)
+      alt:
+        - astonishment (great surprise)
+    declension:
+      sg_nom: удивле́ние
+      sg_gen: удивле́ния
+      sg_dat: удивле́нию
+      sg_acc: удивле́ние
+      sg_ins: удивле́нием
+      sg_pre: удивле́нии
   "ужин=dinner":
     cefr_level: A2
     gender: m
@@ -21045,6 +22361,22 @@ words:
       pl_acc: уко́лы
       pl_ins: уко́лами
       pl_pre: уко́лах
+  "Украина=Ukraine":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Ukraine (country in Eastern Europe)
+    declension:
+      sg_nom: Украи́на
+      sg_gen: Украи́ны
+      sg_dat: Украи́не
+      sg_acc: Украи́ну
+      sg_ins: Украи́ной
+      sg_pre: Украи́не
   "улица=street":
     cefr_level: A1
     gender: f
@@ -21204,6 +22536,48 @@ words:
       pl_acc: уро́ки
       pl_ins: уро́ками
       pl_pre: уро́ках
+  "условие=condition":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: condition (a circumstance affecting something)
+      alt:
+        - term (a condition or requirement in an agreement)
+    declension:
+      sg_nom: усло́вие
+      sg_gen: усло́вия
+      sg_dat: усло́вию
+      sg_acc: усло́вие
+      sg_ins: усло́вием
+      sg_pre: усло́вии
+      pl_nom: усло́вия
+      pl_gen: усло́вий
+      pl_dat: усло́виям
+      pl_acc: усло́вия
+      pl_ins: усло́виями
+      pl_pre: усло́виях
+  "усталость=tiredness":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: tiredness (the state of feeling weary)
+      alt:
+        - fatigue (extreme tiredness)
+    declension:
+      sg_nom: уста́лость
+      sg_gen: уста́лости
+      sg_dat: уста́лости
+      sg_acc: уста́лость
+      sg_ins: уста́лостью
+      sg_pre: уста́лости
   "утка=duck":
     cefr_level: B1
     gender: f
@@ -21621,6 +22995,22 @@ words:
       pl_acc: фра́зы
       pl_ins: фра́зами
       pl_pre: фра́зах
+  "Франция=France":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: France (country in western Europe)
+    declension:
+      sg_nom: Фра́нция
+      sg_gen: Фра́нции
+      sg_dat: Фра́нции
+      sg_acc: Фра́нцию
+      sg_ins: Фра́нцией
+      sg_pre: Фра́нции
   "фрукт=fruit":
     cefr_level: A2
     gender: m
@@ -22398,6 +23788,40 @@ words:
       pl_acc: черте́й
       pl_ins: чертя́ми
       pl_pre: чертя́х
+  "честь=honour":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: honour (high respect or great esteem)
+      alt:
+        - pride (a feeling based on dignity)
+    declension:
+      sg_nom: честь
+      sg_gen: чести
+      sg_dat: чести
+      sg_acc: честь
+      sg_ins: честью
+      sg_pre: чести
+  "Чечня=Chechnya":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Chechnya (republic in southern Russia)
+    declension:
+      sg_nom: Чечня́
+      sg_gen: Чечни́
+      sg_dat: Чечне́
+      sg_acc: Чечню́
+      sg_ins: Чечнёй
+      sg_pre: Чечне́
   "чиновник=official":
     cefr_level: B2
     gender: m
@@ -23372,6 +24796,30 @@ words:
       pl_acc: я́блоки
       pl_ins: я́блоками
       pl_pre: я́блоках
+  "явление=phenomenon":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: phenomenon (a fact or event)
+      alt:
+        - occurrence (something that happens)
+    declension:
+      sg_nom: явле́ние
+      sg_gen: явле́ния
+      sg_dat: явле́нию
+      sg_acc: явле́ние
+      sg_ins: явле́нием
+      sg_pre: явле́нии
+      pl_nom: явле́ния
+      pl_gen: явле́ний
+      pl_dat: явле́ниям
+      pl_acc: явле́ния
+      pl_ins: явле́ниями
+      pl_pre: явле́ниях
   "язык=tongue":
     cefr_level: A2
     gender: m
