@@ -20,6 +20,37 @@ words:
     usage:
       - ru: Я чита́ю, а он пи́шет.
         en_gb: I am reading, and (whereas) he is writing.
+  "будто=as if":
+    cefr_level: B1
+    type: sub
+    accented: бу́дто
+    en_gb:
+      standard: as if (introducing a comparison or supposition)
+      alt:
+        - as though
+  "да=and":
+    cefr_level: A1
+    type: coord
+    accented: да
+    en_gb:
+      standard: and (colloquial conjunction joining clauses)
+      alt:
+        - but (in the adversative sense)
+  "даже=even":
+    cefr_level: A2
+    type: coord
+    accented: да́же
+    en_gb:
+      standard: even (adding emphasis or surprise)
+  "едва=hardly":
+    cefr_level: B1
+    type: sub
+    accented: едва́
+    en_gb:
+      standard: "hardly (barely; also: as soon as)"
+      alt:
+        - as soon as
+        - scarcely
   "если=if":
     cefr_level: A2
     type: sub
@@ -56,6 +87,12 @@ words:
     usage:
       - ru: Когда́ я приду́, я позвоню́.
         en_gb: When I arrive, I will call.
+  "либо=or":
+    cefr_level: B1
+    type: coord
+    accented: ли́бо
+    en_gb:
+      standard: or (formal or literary alternative)
   "но=but":
     cefr_level: A1
     type: coord
@@ -65,6 +102,15 @@ words:
     usage:
       - ru: Я хочу́ спать, но на́до рабо́тать.
         en_gb: I want to sleep, but I have to work.
+  "однако=however":
+    cefr_level: B1
+    type: coord
+    accented: одна́ко
+    en_gb:
+      standard: however (introducing a contrast)
+      alt:
+        - yet
+        - but
   "пока=while":
     cefr_level: B1
     type: sub
@@ -76,6 +122,14 @@ words:
     usage:
       - ru: Пока́ ты гото́вишь, я накро́ю на стол.
         en_gb: While you cook, I will lay the table.
+  "поскольку=since":
+    cefr_level: B1
+    type: sub
+    accented: поско́льку
+    en_gb:
+      standard: since (because, given that)
+      alt:
+        - seeing as
   "потому что=because":
     cefr_level: A2
     type: sub
@@ -97,6 +151,36 @@ words:
     usage:
       - ru: Шёл дождь, поэ́тому мы оста́лись до́ма.
         en_gb: It was raining, therefore we stayed at home.
+  "прежде=before":
+    cefr_level: B1
+    type: sub
+    accented: пре́жде
+    en_gb:
+      standard: before (usually in "прежде чем" — before doing something)
+  "раз=since":
+    cefr_level: B1
+    type: sub
+    accented: раз
+    en_gb:
+      standard: "since (colloquial: if, seeing as)"
+      alt:
+        - if
+  "словно=as if":
+    cefr_level: B1
+    type: sub
+    accented: сло́вно
+    en_gb:
+      standard: as if (like, as though)
+      alt:
+        - like
+  "так=so":
+    cefr_level: B1
+    type: coord
+    accented: так
+    en_gb:
+      standard: so (therefore, as a result — conjunction use)
+      alt:
+        - therefore
   "так как=since":
     cefr_level: B1
     type: sub
@@ -109,6 +193,31 @@ words:
     usage:
       - ru: Так как бы́ло по́здно, мы реши́ли оста́ться.
         en_gb: Since it was late, we decided to stay.
+  "тогда=then":
+    cefr_level: A2
+    type: coord
+    accented: тогда́
+    en_gb:
+      standard: then (in that case; at that time — conjunction use)
+      alt:
+        - in that case
+  "тоже=also":
+    cefr_level: A2
+    type: coord
+    accented: то́же
+    en_gb:
+      standard: also (too, as well — conjunction use)
+      alt:
+        - too
+  "хоть=although":
+    cefr_level: B1
+    type: sub
+    accented: хоть
+    en_gb:
+      standard: "although (colloquial variant of хотя; also: at least)"
+      alt:
+        - at least
+        - even if
   "хотя=although":
     cefr_level: B1
     type: sub
@@ -138,6 +247,14 @@ words:
     usage:
       - ru: Я зна́ю, что ты прав.
         en_gb: I know that you are right.
+  "чтоб=so that":
+    cefr_level: B1
+    type: sub
+    accented: чтоб
+    en_gb:
+      standard: so that (colloquial variant of чтобы)
+      alt:
+        - in order to
   "чтобы=in order to":
     cefr_level: B1
     type: sub
