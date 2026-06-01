@@ -2402,6 +2402,70 @@ words:
       past_f: вы́яснилась
       past_n: вы́яснилось
       past_pl: вы́яснились
+  "глядеть=to look":
+    cefr_level: B1
+    accented: гляде́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to look (to gaze at something)
+      alt:
+        - to gaze
+    conjugation:
+      present:
+        "1sg": гляжу́
+        "2sg": гляди́шь
+        "3sg": гляди́т
+        "1pl": гляди́м
+        "2pl": гляди́те
+        "3pl": глядя́т
+      past_m: гляде́л
+      past_f: гляде́ла
+      past_n: гляде́ло
+      past_pl: гляде́ли
+  "глянуть=to glance":
+    cefr_level: B1
+    accented: гля́нуть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to glance (to look briefly)
+    conjugation:
+      future:
+        "1sg": гля́ну
+        "2sg": гля́нешь
+        "3sg": гля́нет
+        "1pl": гля́нем
+        "2pl": гля́нете
+        "3pl": гля́нут
+      past_m: гля́нул
+      past_f: гля́нула
+      past_n: гля́нуло
+      past_pl: гля́нули
+  "гнать=to drive":
+    cefr_level: B1
+    accented: гнать
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to drive (to chase or force to move)
+      alt:
+        - to chase
+    conjugation:
+      present:
+        "1sg": гоню́
+        "2sg": го́нишь
+        "3sg": го́нит
+        "1pl": го́ним
+        "2pl": го́ните
+        "3pl": го́нят
+      past_m: гнал
+      past_f: гнала́
+      past_n: гна́ло
+      past_pl: гна́ли
   "говорить=to speak":
     cefr_level: A1
     accented: говори́ть
@@ -2425,6 +2489,22 @@ words:
       past_f: говори́ла
       past_n: говори́ло
       past_pl: говори́ли
+  "говориться=to be said":
+    cefr_level: B2
+    accented: говори́ться
+    aspect: impf
+    en_gb:
+      standard: to be said (impersonal — as the saying goes)
+      alt:
+        - to be told
+    conjugation:
+      present:
+        "3sg": говори́тся
+        "3pl": говоря́тся
+      past_m: говори́лось
+      past_f: говори́лось
+      past_n: говори́лось
+      past_pl: говори́лись
   "гордиться=to be proud":
     cefr_level: B1
     accented: горди́ться
@@ -2450,6 +2530,29 @@ words:
       past_f: горди́лась
       past_n: горди́лось
       past_pl: горди́лись
+  "гореть=to burn":
+    cefr_level: B1
+    accented: горе́ть
+    aspect: impf
+    collections:
+      - nature
+      - home
+    en_gb:
+      standard: to burn (to be on fire)
+      alt:
+        - to be on fire
+    conjugation:
+      present:
+        "1sg": горю́
+        "2sg": гори́шь
+        "3sg": гори́т
+        "1pl": гори́м
+        "2pl": гори́те
+        "3pl": горя́т
+      past_m: горе́л
+      past_f: горе́ла
+      past_n: горе́ло
+      past_pl: горе́ли
   "готовить=to cook":
     cefr_level: A2
     accented: гото́вить
@@ -2476,6 +2579,73 @@ words:
       past_f: гото́вила
       past_n: гото́вило
       past_pl: гото́вили
+  "готовиться=to prepare oneself":
+    cefr_level: A2
+    accented: гото́виться
+    aspect: impf
+    collections:
+      - daily life
+      - school
+    en_gb:
+      standard: to prepare oneself (to get ready)
+      alt:
+        - to get ready
+    conjugation:
+      present:
+        "1sg": гото́влюсь
+        "2sg": гото́вишься
+        "3sg": гото́вится
+        "1pl": гото́вимся
+        "2pl": гото́витесь
+        "3pl": гото́вятся
+      past_m: гото́вился
+      past_f: гото́вилась
+      past_n: гото́вилось
+      past_pl: гото́вились
+  "грозить=to threaten":
+    cefr_level: B1
+    accented: грози́ть
+    aspect: impf
+    collections:
+      - the law
+      - war and peace
+    en_gb:
+      standard: to threaten (to warn of harm)
+    conjugation:
+      present:
+        "1sg": грожу́
+        "2sg": грози́шь
+        "3sg": грози́т
+        "1pl": грози́м
+        "2pl": грози́те
+        "3pl": грозя́т
+      past_m: грози́л
+      past_f: грози́ла
+      past_n: грози́ло
+      past_pl: грози́ли
+  "гудеть=to hum":
+    cefr_level: B1
+    accented: гуде́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to hum (to make a continuous low sound)
+      alt:
+        - to buzz
+        - to honk
+    conjugation:
+      present:
+        "1sg": гужу́
+        "2sg": гуди́шь
+        "3sg": гуди́т
+        "1pl": гуди́м
+        "2pl": гуди́те
+        "3pl": гудя́т
+      past_m: гуде́л
+      past_f: гуде́ла
+      past_n: гуде́ло
+      past_pl: гуде́ли
   "гулять=to stroll":
     cefr_level: A2
     accented: гуля́ть
@@ -2572,6 +2742,52 @@ words:
       past_f: дви́галась
       past_n: дви́галось
       past_pl: дви́гались
+  "двинуться=to move":
+    cefr_level: B1
+    accented: дви́нуться
+    aspect: pf
+    collections:
+      - motion
+    en_gb:
+      standard: to move (to start moving)
+      alt:
+        - to start moving
+    conjugation:
+      future:
+        "1sg": дви́нусь
+        "2sg": дви́нешься
+        "3sg": дви́нется
+        "1pl": дви́немся
+        "2pl": дви́нетесь
+        "3pl": дви́нутся
+      past_m: дви́нулся
+      past_f: дви́нулась
+      past_n: дви́нулось
+      past_pl: дви́нулись
+  "действовать=to act":
+    cefr_level: B1
+    accented: де́йствовать
+    aspect: impf
+    collections:
+      - daily life
+      - work
+    en_gb:
+      standard: to act (to take action)
+      alt:
+        - to work
+        - to function
+    conjugation:
+      present:
+        "1sg": де́йствую
+        "2sg": де́йствуешь
+        "3sg": де́йствует
+        "1pl": де́йствуем
+        "2pl": де́йствуете
+        "3pl": де́йствуют
+      past_m: де́йствовал
+      past_f: де́йствовала
+      past_n: де́йствовало
+      past_pl: де́йствовали
   "делать=to do":
     cefr_level: A1
     accented: де́лать
@@ -2595,6 +2811,617 @@ words:
       past_f: де́лала
       past_n: де́лало
       past_pl: де́лали
+  "делаться=to become":
+    cefr_level: B1
+    accented: де́латься
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to become (to happen or be made)
+      alt:
+        - to be made
+    conjugation:
+      present:
+        "1sg": де́лаюсь
+        "2sg": де́лаешься
+        "3sg": де́лается
+        "1pl": де́лаемся
+        "2pl": де́лаетесь
+        "3pl": де́лаются
+      past_m: де́лался
+      past_f: де́лалась
+      past_n: де́лалось
+      past_pl: де́лались
+  "держать=to hold":
+    cefr_level: A2
+    accented: держа́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to hold (to grip in the hand)
+      alt:
+        - to keep
+    conjugation:
+      present:
+        "1sg": держу́
+        "2sg": де́ржишь
+        "3sg": де́ржит
+        "1pl": де́ржим
+        "2pl": де́ржите
+        "3pl": де́ржат
+      past_m: держа́л
+      past_f: держа́ла
+      past_n: держа́ло
+      past_pl: держа́ли
+  "держаться=to hold on":
+    cefr_level: B1
+    accented: держа́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to hold on (to keep one's grip)
+      alt:
+        - to keep oneself
+    conjugation:
+      present:
+        "1sg": держу́сь
+        "2sg": де́ржишься
+        "3sg": де́ржится
+        "1pl": де́ржимся
+        "2pl": де́ржитесь
+        "3pl": де́ржатся
+      past_m: держа́лся
+      past_f: держа́лась
+      past_n: держа́лось
+      past_pl: держа́лись
+  "добавить=to add":
+    cefr_level: B1
+    accented: доба́вить
+    aspect: pf
+    collections:
+      - daily life
+      - food and drink
+    en_gb:
+      standard: to add (to put something extra in)
+    conjugation:
+      future:
+        "1sg": доба́влю
+        "2sg": доба́вишь
+        "3sg": доба́вит
+        "1pl": доба́вим
+        "2pl": доба́вите
+        "3pl": доба́вят
+      past_m: доба́вил
+      past_f: доба́вила
+      past_n: доба́вило
+      past_pl: доба́вили
+  "добиться=to achieve":
+    cefr_level: B1
+    accented: доби́ться
+    aspect: pf
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: to achieve (to attain through effort)
+      alt:
+        - to attain
+    conjugation:
+      future:
+        "1sg": добью́сь
+        "2sg": добьёшься
+        "3sg": добьётся
+        "1pl": добьёмся
+        "2pl": добьётесь
+        "3pl": добью́тся
+      past_m: доби́лся
+      past_f: доби́лась
+      past_n: доби́лось
+      past_pl: доби́лись
+  "добраться=to reach":
+    cefr_level: B1
+    accented: добра́ться
+    aspect: pf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to reach (to get to a place)
+      alt:
+        - to get to
+    conjugation:
+      future:
+        "1sg": доберу́сь
+        "2sg": доберёшься
+        "3sg": доберётся
+        "1pl": доберёмся
+        "2pl": доберётесь
+        "3pl": доберу́тся
+      past_m: добра́лся
+      past_f: добра́лась
+      past_n: добра́лось
+      past_pl: добра́лись
+  "доверять=to trust":
+    cefr_level: B1
+    accented: доверя́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to trust (to believe in someone's reliability)
+    conjugation:
+      present:
+        "1sg": доверя́ю
+        "2sg": доверя́ешь
+        "3sg": доверя́ет
+        "1pl": доверя́ем
+        "2pl": доверя́ете
+        "3pl": доверя́ют
+      past_m: доверя́л
+      past_f: доверя́ла
+      past_n: доверя́ло
+      past_pl: доверя́ли
+  "довести=to lead to":
+    cefr_level: B1
+    accented: довести́
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to lead to (to bring someone to a place or state)
+      alt:
+        - to drive someone crazy
+    conjugation:
+      future:
+        "1sg": доведу́
+        "2sg": доведёшь
+        "3sg": доведёт
+        "1pl": доведём
+        "2pl": доведёте
+        "3pl": доведу́т
+      past_m: довёл
+      past_f: довела́
+      past_n: довело́
+      past_pl: довели́
+  "догадаться=to guess":
+    cefr_level: B1
+    accented: дога́даться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to guess (to figure out correctly)
+      alt:
+        - to figure out
+    conjugation:
+      future:
+        "1sg": дога́даюсь
+        "2sg": дога́даешься
+        "3sg": дога́дается
+        "1pl": дога́даемся
+        "2pl": дога́даетесь
+        "3pl": дога́даются
+      past_m: дога́дался
+      past_f: дога́далась
+      past_n: дога́далось
+      past_pl: дога́дались
+  "догадываться=to guess":
+    cefr_level: B1
+    accented: дога́дываться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to guess (to suspect or sense something)
+      alt:
+        - to suspect
+    conjugation:
+      present:
+        "1sg": дога́дываюсь
+        "2sg": дога́дываешься
+        "3sg": дога́дывается
+        "1pl": дога́дываемся
+        "2pl": дога́дываетесь
+        "3pl": дога́дываются
+      past_m: дога́дывался
+      past_f: дога́дывалась
+      past_n: дога́дывалось
+      past_pl: дога́дывались
+  "догнать=to catch up with":
+    cefr_level: B1
+    accented: догна́ть
+    aspect: pf
+    collections:
+      - motion
+    en_gb:
+      standard: to catch up with (to reach someone who is ahead)
+    conjugation:
+      future:
+        "1sg": догоню́
+        "2sg": дого́нишь
+        "3sg": дого́нит
+        "1pl": дого́ним
+        "2pl": дого́ните
+        "3pl": дого́нят
+      past_m: догна́л
+      past_f: догнала́
+      past_n: догна́ло
+      past_pl: догна́ли
+  "договориться=to agree":
+    cefr_level: B1
+    accented: договори́ться
+    aspect: pf
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: to agree (to come to an arrangement)
+      alt:
+        - to arrange
+    conjugation:
+      future:
+        "1sg": договорю́сь
+        "2sg": догово́ришься
+        "3sg": догово́рится
+        "1pl": догово́римся
+        "2pl": догово́ритесь
+        "3pl": догово́рятся
+      past_m: договори́лся
+      past_f: договори́лась
+      past_n: договори́лось
+      past_pl: договори́лись
+  "дождаться=to wait for":
+    cefr_level: B1
+    accented: дожда́ться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to wait for (to wait until someone or something arrives)
+      alt:
+        - to wait until
+    conjugation:
+      future:
+        "1sg": дожду́сь
+        "2sg": дождёшься
+        "3sg": дождётся
+        "1pl": дождёмся
+        "2pl": дождётесь
+        "3pl": дожду́тся
+      past_m: дожда́лся
+      past_f: дождала́сь
+      past_n: дожда́лось
+      past_pl: дожда́лись
+  "дожидаться=to wait for":
+    cefr_level: B1
+    accented: дожида́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to wait for (to stay until something happens)
+    conjugation:
+      present:
+        "1sg": дожида́юсь
+        "2sg": дожида́ешься
+        "3sg": дожида́ется
+        "1pl": дожида́емся
+        "2pl": дожида́етесь
+        "3pl": дожида́ются
+      past_m: дожида́лся
+      past_f: дожида́лась
+      past_n: дожида́лось
+      past_pl: дожида́лись
+  "дойти=to reach":
+    cefr_level: A2
+    accented: дойти́
+    aspect: pf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to reach (to walk to a destination)
+      alt:
+        - to walk to
+    conjugation:
+      future:
+        "1sg": дойду́
+        "2sg": дойдёшь
+        "3sg": дойдёт
+        "1pl": дойдём
+        "2pl": дойдёте
+        "3pl": дойду́т
+      past_m: дошёл
+      past_f: дошла́
+      past_n: дошло́
+      past_pl: дошли́
+  "доказать=to prove":
+    cefr_level: B1
+    accented: доказа́ть
+    aspect: pf
+    collections:
+      - the law
+      - school
+    en_gb:
+      standard: to prove (to show something is true)
+    conjugation:
+      future:
+        "1sg": докажу́
+        "2sg": дока́жешь
+        "3sg": дока́жет
+        "1pl": дока́жем
+        "2pl": дока́жете
+        "3pl": дока́жут
+      past_m: доказа́л
+      past_f: доказа́ла
+      past_n: доказа́ло
+      past_pl: доказа́ли
+  "доказывать=to prove":
+    cefr_level: B1
+    accented: дока́зывать
+    aspect: impf
+    collections:
+      - the law
+      - school
+    en_gb:
+      standard: to prove (to demonstrate that something is true)
+    conjugation:
+      present:
+        "1sg": дока́зываю
+        "2sg": дока́зываешь
+        "3sg": дока́зывает
+        "1pl": дока́зываем
+        "2pl": дока́зываете
+        "3pl": дока́зывают
+      past_m: дока́зывал
+      past_f: дока́зывала
+      past_n: дока́зывало
+      past_pl: дока́зывали
+  "доложить=to report":
+    cefr_level: B1
+    accented: доложи́ть
+    aspect: pf
+    collections:
+      - work
+      - military
+    en_gb:
+      standard: to report (to inform formally)
+      alt:
+        - to inform
+    conjugation:
+      future:
+        "1sg": доложу́
+        "2sg": доло́жишь
+        "3sg": доло́жит
+        "1pl": доло́жим
+        "2pl": доло́жите
+        "3pl": доло́жат
+      past_m: доложи́л
+      past_f: доложи́ла
+      past_n: доложи́ло
+      past_pl: доложи́ли
+  "доноситься=to reach":
+    cefr_level: B2
+    accented: доноси́ться
+    aspect: impf
+    en_gb:
+      standard: to reach (of sounds — to be heard from a distance)
+      alt:
+        - to be heard
+    conjugation:
+      present:
+        "3sg": доно́сится
+        "3pl": доно́сятся
+      past_m: доноси́лся
+      past_f: доноси́лась
+      past_n: доноси́лось
+      past_pl: доноси́лись
+  "допустить=to allow":
+    cefr_level: B1
+    accented: допусти́ть
+    aspect: pf
+    collections:
+      - daily life
+      - the law
+    en_gb:
+      standard: to allow (to permit or admit)
+      alt:
+        - to admit
+        - to suppose
+    conjugation:
+      future:
+        "1sg": допущу́
+        "2sg": допу́стишь
+        "3sg": допу́стит
+        "1pl": допу́стим
+        "2pl": допу́стите
+        "3pl": допу́стят
+      past_m: допусти́л
+      past_f: допусти́ла
+      past_n: допусти́ло
+      past_pl: допусти́ли
+  "доставать=to get":
+    cefr_level: B1
+    accented: достава́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to get (to obtain or reach for something)
+      alt:
+        - to obtain
+        - to reach
+    conjugation:
+      present:
+        "1sg": доста́ю
+        "2sg": доста́ёшь
+        "3sg": доста́ёт
+        "1pl": доста́ём
+        "2pl": доста́ёте
+        "3pl": доста́ют
+      past_m: достава́л
+      past_f: достава́ла
+      past_n: достава́ло
+      past_pl: достава́ли
+  "доставить=to deliver":
+    cefr_level: B1
+    accented: доста́вить
+    aspect: pf
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: to deliver (to bring to a destination)
+      alt:
+        - to provide
+    conjugation:
+      future:
+        "1sg": доста́влю
+        "2sg": доста́вишь
+        "3sg": доста́вит
+        "1pl": доста́вим
+        "2pl": доста́вите
+        "3pl": доста́вят
+      past_m: доста́вил
+      past_f: доста́вила
+      past_n: доста́вило
+      past_pl: доста́вили
+  "достать=to get":
+    cefr_level: A2
+    accented: доста́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to get (to obtain something)
+      alt:
+        - to obtain
+        - to reach
+    conjugation:
+      future:
+        "1sg": доста́ну
+        "2sg": доста́нешь
+        "3sg": доста́нет
+        "1pl": доста́нем
+        "2pl": доста́нете
+        "3pl": доста́нут
+      past_m: доста́л
+      past_f: доста́ла
+      past_n: доста́ло
+      past_pl: доста́ли
+  "достаться=to fall to":
+    cefr_level: B1
+    accented: доста́ться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to fall to (to become someone's share)
+      alt:
+        - to get
+    conjugation:
+      future:
+        "3sg": доста́нется
+        "3pl": доста́нутся
+      past_m: доста́лся
+      past_f: доста́лась
+      past_n: доста́лось
+      past_pl: доста́лись
+  "достигнуть=to reach":
+    cefr_level: B1
+    accented: дости́гнуть
+    aspect: pf
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: to reach (to achieve a goal)
+      alt:
+        - to achieve
+    conjugation:
+      future:
+        "1sg": дости́гну
+        "2sg": дости́гнешь
+        "3sg": дости́гнет
+        "1pl": дости́гнем
+        "2pl": дости́гнете
+        "3pl": дости́гнут
+      past_m: дости́г
+      past_f: дости́гла
+      past_n: дости́гло
+      past_pl: дости́гли
+  "доходить=to reach":
+    cefr_level: B1
+    accented: дохо́дить
+    aspect: impf
+    collections:
+      - motion
+    en_gb:
+      standard: to reach (to walk as far as somewhere)
+      alt:
+        - to walk to
+    conjugation:
+      present:
+        "1sg": дохожу́
+        "2sg": до́ходишь
+        "3sg": до́ходит
+        "1pl": до́ходим
+        "2pl": до́ходите
+        "3pl": до́ходят
+      past_m: дохо́дил
+      past_f: дохо́дила
+      past_n: дохо́дило
+      past_pl: дохо́дили
+  "драться=to fight":
+    cefr_level: B1
+    accented: дра́ться
+    aspect: impf
+    collections:
+      - war and peace
+      - daily life
+    en_gb:
+      standard: to fight (to brawl or struggle physically)
+      alt:
+        - to brawl
+    conjugation:
+      present:
+        "1sg": деру́сь
+        "2sg": дерёшься
+        "3sg": дерётся
+        "1pl": дерёмся
+        "2pl": дерётесь
+        "3pl": деру́тся
+      past_m: дра́лся
+      past_f: дра́лась
+      past_n: дра́лось
+      past_pl: дра́лись
+  "дрожать=to tremble":
+    cefr_level: B1
+    accented: дрожа́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to tremble (to shake with fear or cold)
+      alt:
+        - to shake
+    conjugation:
+      present:
+        "1sg": дрожу́
+        "2sg": дрожи́шь
+        "3sg": дрожи́т
+        "1pl": дрожи́м
+        "2pl": дрожи́те
+        "3pl": дрожа́т
+      past_m: дрожа́л
+      past_f: дрожа́ла
+      past_n: дрожа́ло
+      past_pl: дрожа́ли
   "думать=to think":
     cefr_level: A1
     accented: ду́мать
@@ -2620,6 +3447,26 @@ words:
       past_f: ду́мала
       past_n: ду́мало
       past_pl: ду́мали
+  "дышать=to breathe":
+    cefr_level: A2
+    accented: дыша́ть
+    aspect: impf
+    collections:
+      - sickness and health
+    en_gb:
+      standard: to breathe (to take air in and out)
+    conjugation:
+      present:
+        "1sg": дышу́
+        "2sg": ды́шишь
+        "3sg": ды́шит
+        "1pl": ды́шим
+        "2pl": ды́шите
+        "3pl": ды́шат
+      past_m: дыша́л
+      past_f: дыша́ла
+      past_n: дыша́ло
+      past_pl: дыша́ли
   "ездить=to go by transport":
     cefr_level: A2
     accented: е́здить
@@ -2723,6 +3570,27 @@ words:
       past_f: жале́ла
       past_n: жале́ло
       past_pl: жале́ли
+  "жаловаться=to complain":
+    cefr_level: B1
+    accented: жа́ловаться
+    aspect: impf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to complain (to express dissatisfaction)
+    conjugation:
+      present:
+        "1sg": жа́луюсь
+        "2sg": жа́луешься
+        "3sg": жа́луется
+        "1pl": жа́луемся
+        "2pl": жа́луетесь
+        "3pl": жа́луются
+      past_m: жа́ловался
+      past_f: жа́ловалась
+      past_n: жа́ловалось
+      past_pl: жа́ловались
   "ждать=to wait":
     cefr_level: A1
     accented: ждать
@@ -2746,6 +3614,50 @@ words:
       past_f: ждала́
       past_n: жда́ло
       past_pl: жда́ли
+  "желать=to wish":
+    cefr_level: B1
+    accented: жела́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to wish (to want something strongly)
+      alt:
+        - to desire
+    conjugation:
+      present:
+        "1sg": жела́ю
+        "2sg": жела́ешь
+        "3sg": жела́ет
+        "1pl": жела́ем
+        "2pl": жела́ете
+        "3pl": жела́ют
+      past_m: жела́л
+      past_f: жела́ла
+      past_n: жела́ло
+      past_pl: жела́ли
+  "женить=to marry off":
+    cefr_level: B1
+    accented: жени́ть
+    aspect: pf
+    collections:
+      - family
+      - romance and dating
+    en_gb:
+      standard: to marry off (to cause a man to get married)
+    conjugation:
+      future:
+        "1sg": женю́
+        "2sg": же́нишь
+        "3sg": же́нит
+        "1pl": же́ним
+        "2pl": же́ните
+        "3pl": же́нят
+      past_m: жени́л
+      past_f: жени́ла
+      past_n: жени́ло
+      past_pl: жени́ли
   "жениться=to marry":
     cefr_level: B1
     accented: жени́ться
@@ -2862,6 +3774,205 @@ words:
       past_f: забы́ла
       past_n: забы́ло
       past_pl: забы́ли
+  "зависеть=to depend on":
+    cefr_level: B1
+    accented: зави́сеть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to depend on (to be determined by something else)
+    conjugation:
+      present:
+        "1sg": завишу́
+        "2sg": зави́сишь
+        "3sg": зави́сит
+        "1pl": зави́сим
+        "2pl": зави́сите
+        "3pl": зави́сят
+      past_m: зависе́л
+      past_f: зависе́ла
+      past_n: зависе́ло
+      past_pl: зависе́ли
+  "заглядывать=to peep in":
+    cefr_level: B1
+    accented: загля́дывать
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to peep in (to look briefly into a place)
+      alt:
+        - to look in
+    conjugation:
+      present:
+        "1sg": загля́дываю
+        "2sg": загля́дываешь
+        "3sg": загля́дывает
+        "1pl": загля́дываем
+        "2pl": загля́дываете
+        "3pl": загля́дывают
+      past_m: загля́дывал
+      past_f: загля́дывала
+      past_n: загля́дывало
+      past_pl: загля́дывали
+  "заглянуть=to peep in":
+    cefr_level: B1
+    accented: загляну́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to peep in (to look briefly into a place on one occasion)
+      alt:
+        - to look in
+    conjugation:
+      future:
+        "1sg": загляну́
+        "2sg": загля́нешь
+        "3sg": загля́нет
+        "1pl": загля́нем
+        "2pl": загля́нете
+        "3pl": загля́нут
+      past_m: загляну́л
+      past_f: загляну́ла
+      past_n: загляну́ло
+      past_pl: загляну́ли
+  "заговорить=to start speaking":
+    cefr_level: B1
+    accented: загово́рить
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to start speaking (to begin to talk)
+      alt:
+        - to begin to speak
+    conjugation:
+      future:
+        "1sg": загово́рю
+        "2sg": загово́ришь
+        "3sg": загово́рит
+        "1pl": загово́рим
+        "2pl": загово́рите
+        "3pl": загово́рят
+      past_m: загово́рил
+      past_f: загово́рила
+      past_n: загово́рило
+      past_pl: загово́рили
+  "задавать=to assign":
+    cefr_level: A2
+    accented: задава́ть
+    aspect: impf
+    collections:
+      - school
+      - daily life
+    en_gb:
+      standard: to assign (to set a task or question)
+      alt:
+        - to set
+    conjugation:
+      present:
+        "1sg": задаю́
+        "2sg": задаёшь
+        "3sg": задаёт
+        "1pl": задаём
+        "2pl": задаёте
+        "3pl": задаю́т
+      past_m: задава́л
+      past_f: задава́ла
+      past_n: задава́ло
+      past_pl: задава́ли
+  "задать=to assign":
+    cefr_level: A2
+    accented: зада́ть
+    aspect: pf
+    collections:
+      - school
+      - daily life
+    en_gb:
+      standard: to assign (to set a question or task on one occasion)
+      alt:
+        - to set
+    conjugation:
+      future:
+        "1sg": зада́м
+        "2sg": зада́шь
+        "3sg": зада́ст
+        "1pl": зади́м
+        "2pl": зади́те
+        "3pl": зададу́т
+      past_m: зада́л
+      past_f: задала́
+      past_n: зада́ло
+      past_pl: зада́ли
+  "задержать=to detain":
+    cefr_level: B1
+    accented: задержа́ть
+    aspect: pf
+    collections:
+      - the law
+      - daily life
+    en_gb:
+      standard: to detain (to hold someone back)
+      alt:
+        - to delay
+    conjugation:
+      future:
+        "1sg": задержу́
+        "2sg": заде́ржишь
+        "3sg": заде́ржит
+        "1pl": заде́ржим
+        "2pl": заде́ржите
+        "3pl": заде́ржат
+      past_m: задержа́л
+      past_f: задержа́ла
+      past_n: задержа́ло
+      past_pl: задержа́ли
+  "задуматься=to start thinking":
+    cefr_level: B1
+    accented: заду́маться
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to start thinking (to become lost in thought)
+      alt:
+        - to be lost in thought
+    conjugation:
+      future:
+        "1sg": заду́маюсь
+        "2sg": заду́маешься
+        "3sg": заду́мается
+        "1pl": заду́маемся
+        "2pl": заду́маетесь
+        "3pl": заду́маются
+      past_m: заду́мался
+      past_f: заду́малась
+      past_n: заду́малось
+      past_pl: заду́мались
+  "заказать=to order":
+    cefr_level: A2
+    accented: заказа́ть
+    aspect: pf
+    collections:
+      - restaurants and cafes
+      - food and drink
+      - daily life
+    en_gb:
+      standard: to order (to request a product or service)
+    conjugation:
+      future:
+        "1sg": закажу́
+        "2sg": зака́жешь
+        "3sg": зака́жет
+        "1pl": зака́жем
+        "2pl": зака́жете
+        "3pl": зака́жут
+      past_m: заказа́л
+      past_f: заказа́ла
+      past_n: заказа́ло
+      past_pl: заказа́ли
   "заканчивать=to finish":
     cefr_level: A2
     accented: зака́нчивать
@@ -2886,6 +3997,47 @@ words:
       past_f: зака́нчивала
       past_n: зака́нчивало
       past_pl: зака́нчивали
+  "заключаться=to consist of":
+    cefr_level: B1
+    accented: заключа́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to consist of (to lie in or be contained in)
+      alt:
+        - to lie in
+    conjugation:
+      present:
+        "3sg": заключа́ется
+        "3pl": заключа́ются
+      past_m: заключа́лся
+      past_f: заключа́лась
+      past_n: заключа́лось
+      past_pl: заключа́лись
+  "заключить=to conclude":
+    cefr_level: B1
+    accented: заключи́ть
+    aspect: pf
+    collections:
+      - the law
+      - work
+    en_gb:
+      standard: to conclude (to reach an agreement; to imprison)
+      alt:
+        - to imprison
+    conjugation:
+      future:
+        "1sg": заключу́
+        "2sg": заключи́шь
+        "3sg": заключи́т
+        "1pl": заключи́м
+        "2pl": заключи́те
+        "3pl": заключа́т
+      past_m: заключи́л
+      past_f: заключи́ла
+      past_n: заключи́ло
+      past_pl: заключи́ли
   "закончить=to finish":
     cefr_level: A2
     accented: зако́нчить
@@ -2910,6 +4062,495 @@ words:
       past_f: зако́нчила
       past_n: зако́нчило
       past_pl: зако́нчили
+  "закончиться=to end":
+    cefr_level: A2
+    accented: зако́нчиться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to end (to come to a finish)
+      alt:
+        - to finish
+    conjugation:
+      future:
+        "3sg": зако́нчится
+        "3pl": зако́нчатся
+      past_m: зако́нчился
+      past_f: зако́нчилась
+      past_n: зако́нчилось
+      past_pl: зако́нчились
+  "закричать=to shout":
+    cefr_level: B1
+    accented: закрича́ть
+    aspect: pf
+    collections:
+      - communication
+      - feelings and sensations
+    en_gb:
+      standard: to shout (to cry out suddenly)
+      alt:
+        - to cry out
+    conjugation:
+      future:
+        "1sg": закричу́
+        "2sg": закричи́шь
+        "3sg": закричи́т
+        "1pl": закричи́м
+        "2pl": закричи́те
+        "3pl": закрича́т
+      past_m: закрича́л
+      past_f: закрича́ла
+      past_n: закрича́ло
+      past_pl: закрича́ли
+  "закрывать=to close":
+    cefr_level: A2
+    accented: закрыва́ть
+    aspect: impf
+    collections:
+      - daily life
+      - home
+    en_gb:
+      standard: to close (to shut repeatedly or habitually)
+      alt:
+        - to shut
+    conjugation:
+      present:
+        "1sg": закрыва́ю
+        "2sg": закрыва́ешь
+        "3sg": закрыва́ет
+        "1pl": закрыва́ем
+        "2pl": закрыва́ете
+        "3pl": закрыва́ют
+      past_m: закрыва́л
+      past_f: закрыва́ла
+      past_n: закрыва́ло
+      past_pl: закрыва́ли
+  "закрыть=to close":
+    cefr_level: A2
+    accented: закры́ть
+    aspect: pf
+    collections:
+      - daily life
+      - home
+    en_gb:
+      standard: to close (to shut on one occasion)
+      alt:
+        - to shut
+    conjugation:
+      future:
+        "1sg": закро́ю
+        "2sg": закро́ешь
+        "3sg": закро́ет
+        "1pl": закро́ем
+        "2pl": закро́ете
+        "3pl": закро́ют
+      past_m: закры́л
+      past_f: закры́ла
+      past_n: закры́ло
+      past_pl: закры́ли
+  "закурить=to light up":
+    cefr_level: B1
+    accented: закури́ть
+    aspect: pf
+    collections:
+      - daily life
+      - sickness and health
+    en_gb:
+      standard: to light up (to start smoking a cigarette)
+      alt:
+        - to start smoking
+    conjugation:
+      future:
+        "1sg": закурю́
+        "2sg": заку́ришь
+        "3sg": заку́рит
+        "1pl": заку́рим
+        "2pl": заку́рите
+        "3pl": заку́рят
+      past_m: закури́л
+      past_f: закури́ла
+      past_n: закури́ло
+      past_pl: закури́ли
+  "заложить=to lay down":
+    cefr_level: B1
+    accented: заложи́ть
+    aspect: pf
+    collections:
+      - finance
+      - daily life
+    en_gb:
+      standard: to lay down (to place as a foundation; to mortgage)
+      alt:
+        - to mortgage
+    conjugation:
+      future:
+        "1sg": заложу́
+        "2sg": зало́жишь
+        "3sg": зало́жит
+        "1pl": зало́жим
+        "2pl": зало́жите
+        "3pl": зало́жат
+      past_m: заложи́л
+      past_f: заложи́ла
+      past_n: заложи́ло
+      past_pl: заложи́ли
+  "заменить=to replace":
+    cefr_level: B1
+    accented: замени́ть
+    aspect: pf
+    collections:
+      - daily life
+      - work
+    en_gb:
+      standard: to replace (to put something in place of another)
+      alt:
+        - to substitute
+    conjugation:
+      future:
+        "1sg": заменю́
+        "2sg": замени́шь
+        "3sg": замени́т
+        "1pl": замени́м
+        "2pl": замени́те
+        "3pl": заменя́т
+      past_m: замени́л
+      past_f: замени́ла
+      past_n: замени́ло
+      past_pl: замени́ли
+  "замереть=to freeze":
+    cefr_level: B1
+    accented: замере́ть
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to freeze (to stop dead from shock or fear)
+      alt:
+        - to stop dead
+    conjugation:
+      future:
+        "1sg": замру́
+        "2sg": замрёшь
+        "3sg": замрёт
+        "1pl": замрём
+        "2pl": замрёте
+        "3pl": замру́т
+      past_m: за́мер
+      past_f: замерла́
+      past_n: замерло́
+      past_pl: замерли́
+  "заметить=to notice":
+    cefr_level: A2
+    accented: заме́тить
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to notice (to become aware of something on one occasion)
+    conjugation:
+      future:
+        "1sg": заме́чу
+        "2sg": заме́тишь
+        "3sg": заме́тит
+        "1pl": заме́тим
+        "2pl": заме́тите
+        "3pl": заме́тят
+      past_m: заме́тил
+      past_f: заме́тила
+      past_n: заме́тило
+      past_pl: заме́тили
+  "замечать=to notice":
+    cefr_level: A2
+    accented: замеча́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to notice (to become aware of something)
+    conjugation:
+      present:
+        "1sg": замеча́ю
+        "2sg": замеча́ешь
+        "3sg": замеча́ет
+        "1pl": замеча́ем
+        "2pl": замеча́ете
+        "3pl": замеча́ют
+      past_m: замеча́л
+      past_f: замеча́ла
+      past_n: замеча́ло
+      past_pl: замеча́ли
+  "замолчать=to fall silent":
+    cefr_level: B1
+    accented: замолча́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to fall silent (to stop talking suddenly)
+      alt:
+        - to stop talking
+    conjugation:
+      future:
+        "1sg": замолчу́
+        "2sg": замо́лчишь
+        "3sg": замо́лчит
+        "1pl": замо́лчим
+        "2pl": замо́лчите
+        "3pl": замо́лчат
+      past_m: замолча́л
+      past_f: замолча́ла
+      past_n: замолча́ло
+      past_pl: замолча́ли
+  "занимать=to occupy":
+    cefr_level: B1
+    accented: занима́ть
+    aspect: impf
+    collections:
+      - daily life
+      - finance
+    en_gb:
+      standard: to occupy (to take up space or borrow money)
+      alt:
+        - to borrow money
+    conjugation:
+      present:
+        "1sg": занима́ю
+        "2sg": занима́ешь
+        "3sg": занима́ет
+        "1pl": занима́ем
+        "2pl": занима́ете
+        "3pl": занима́ют
+      past_m: занима́л
+      past_f: занима́ла
+      past_n: занима́ло
+      past_pl: занима́ли
+  "заниматься=to study":
+    cefr_level: A2
+    accented: занима́ться
+    aspect: impf
+    collections:
+      - school
+      - hobbies and pastimes
+      - daily life
+    en_gb:
+      standard: to study (to be engaged in an activity)
+      alt:
+        - to be engaged in
+    conjugation:
+      present:
+        "1sg": занима́юсь
+        "2sg": занима́ешься
+        "3sg": занима́ется
+        "1pl": занима́емся
+        "2pl": занима́етесь
+        "3pl": занима́ются
+      past_m: занима́лся
+      past_f: занима́лась
+      past_n: занима́лось
+      past_pl: занима́лись
+  "занять=to occupy":
+    cefr_level: B1
+    accented: заня́ть
+    aspect: pf
+    collections:
+      - daily life
+      - finance
+    en_gb:
+      standard: to occupy (to take a place or borrow)
+      alt:
+        - to borrow
+    conjugation:
+      future:
+        "1sg": займу́
+        "2sg": займёшь
+        "3sg": займёт
+        "1pl": займём
+        "2pl": займёте
+        "3pl": займу́т
+      past_m: за́нял
+      past_f: заняла́
+      past_n: за́няло
+      past_pl: за́няли
+  "заняться=to take up":
+    cefr_level: A2
+    accented: заня́ться
+    aspect: pf
+    collections:
+      - school
+      - hobbies and pastimes
+      - daily life
+    en_gb:
+      standard: to take up (to start doing an activity)
+      alt:
+        - to start doing
+    conjugation:
+      future:
+        "1sg": займу́сь
+        "2sg": займёшься
+        "3sg": займётся
+        "1pl": займёмся
+        "2pl": займётесь
+        "3pl": займу́тся
+      past_m: заня́лся
+      past_f: занялась́
+      past_n: заня́лось
+      past_pl: заня́лись
+  "заорать=to start yelling":
+    cefr_level: B2
+    accented: заора́ть
+    aspect: pf
+    collections:
+      - feelings and sensations
+      - communication
+    en_gb:
+      standard: to start yelling (to suddenly yell loudly)
+    conjugation:
+      future:
+        "1sg": заору́
+        "2sg": заорёшь
+        "3sg": заорёт
+        "1pl": заорём
+        "2pl": заорёте
+        "3pl": заору́т
+      past_m: заора́л
+      past_f: заора́ла
+      past_n: заора́ло
+      past_pl: заора́ли
+  "запереть=to lock":
+    cefr_level: B1
+    accented: запере́ть
+    aspect: pf
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: to lock (to secure with a key)
+    conjugation:
+      future:
+        "1sg": запру́
+        "2sg": запрёшь
+        "3sg": запрёт
+        "1pl": запрём
+        "2pl": запрёте
+        "3pl": запру́т
+      past_m: за́пер
+      past_f: заперла́
+      past_n: за́перло
+      past_pl: за́перли
+  "записать=to write down":
+    cefr_level: A2
+    accented: записа́ть
+    aspect: pf
+    collections:
+      - school
+      - daily life
+    en_gb:
+      standard: to write down (to record in writing)
+      alt:
+        - to record
+    conjugation:
+      future:
+        "1sg": запишу́
+        "2sg": запи́шешь
+        "3sg": запи́шет
+        "1pl": запи́шем
+        "2pl": запи́шете
+        "3pl": запи́шут
+      past_m: записа́л
+      past_f: записа́ла
+      past_n: записа́ло
+      past_pl: записа́ли
+  "заплакать=to start crying":
+    cefr_level: B1
+    accented: запла́кать
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to start crying (to begin to weep)
+      alt:
+        - to burst into tears
+    conjugation:
+      future:
+        "1sg": запла́чу
+        "2sg": запла́чешь
+        "3sg": запла́чет
+        "1pl": запла́чем
+        "2pl": запла́чете
+        "3pl": запла́чут
+      past_m: запла́кал
+      past_f: запла́кала
+      past_n: запла́кало
+      past_pl: запла́кали
+  "заплатить=to pay":
+    cefr_level: A2
+    accented: заплати́ть
+    aspect: pf
+    collections:
+      - finance
+      - daily life
+    en_gb:
+      standard: to pay (to hand over money)
+    conjugation:
+      future:
+        "1sg": заплачу́
+        "2sg": запла́тишь
+        "3sg": запла́тит
+        "1pl": запла́тим
+        "2pl": запла́тите
+        "3pl": запла́тят
+      past_m: заплати́л
+      past_f: заплати́ла
+      past_n: заплати́ло
+      past_pl: заплати́ли
+  "запомнить=to memorise":
+    cefr_level: A2
+    accented: запо́мнить
+    aspect: pf
+    collections:
+      - school
+      - daily life
+    en_gb:
+      standard: to memorise (to commit to memory)
+      alt:
+        - to remember
+    conjugation:
+      future:
+        "1sg": запо́мню
+        "2sg": запо́мнишь
+        "3sg": запо́мнит
+        "1pl": запо́мним
+        "2pl": запо́мните
+        "3pl": запо́мнят
+      past_m: запо́мнил
+      past_f: запо́мнила
+      past_n: запо́мнило
+      past_pl: запо́мнили
+  "запретить=to forbid":
+    cefr_level: B1
+    accented: запрети́ть
+    aspect: pf
+    collections:
+      - the law
+      - daily life
+    en_gb:
+      standard: to forbid (to officially prohibit)
+      alt:
+        - to ban
+    conjugation:
+      future:
+        "1sg": запрещу́
+        "2sg": запрети́шь
+        "3sg": запрети́т
+        "1pl": запрети́м
+        "2pl": запрети́те
+        "3pl": запретя́т
+      past_m: запрети́л
+      past_f: запрети́ла
+      past_n: запрети́ло
+      past_pl: запрети́ли
   "запрещать=to forbid":
     cefr_level: B2
     accented: запреща́ть
@@ -2959,6 +4600,266 @@ words:
       past_f: зараба́тывала
       past_n: зараба́тывало
       past_pl: зараба́тывали
+  "заработать=to earn":
+    cefr_level: A2
+    accented: зарабо́тать
+    aspect: pf
+    collections:
+      - finance
+      - work
+    en_gb:
+      standard: to earn (to receive money for work)
+      alt:
+        - to start working
+    conjugation:
+      future:
+        "1sg": зарабо́таю
+        "2sg": зарабо́таешь
+        "3sg": зарабо́тает
+        "1pl": зарабо́таем
+        "2pl": зарабо́таете
+        "3pl": зарабо́тают
+      past_m: зарабо́тал
+      past_f: зарабо́тала
+      past_n: зарабо́тало
+      past_pl: зарабо́тали
+  "заслужить=to deserve":
+    cefr_level: B1
+    accented: заслужи́ть
+    aspect: pf
+    collections:
+      - daily life
+      - feelings and sensations
+    en_gb:
+      standard: to deserve (to earn by merit)
+      alt:
+        - to earn
+    conjugation:
+      future:
+        "1sg": заслужу́
+        "2sg": заслу́жишь
+        "3sg": заслу́жит
+        "1pl": заслу́жим
+        "2pl": заслу́жите
+        "3pl": заслу́жат
+      past_m: заслужи́л
+      past_f: заслужи́ла
+      past_n: заслужи́ло
+      past_pl: заслужи́ли
+  "засмеяться=to burst out laughing":
+    cefr_level: B1
+    accented: засмея́ться
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to burst out laughing (to start laughing suddenly)
+    conjugation:
+      future:
+        "1sg": засмею́сь
+        "2sg": засмеёшься
+        "3sg": засмеётся
+        "1pl": засмеёмся
+        "2pl": засмеётесь
+        "3pl": засмею́тся
+      past_m: засмея́лся
+      past_f: засмея́лась
+      past_n: засмея́лось
+      past_pl: засмея́лись
+  "заснуть=to fall asleep":
+    cefr_level: A2
+    accented: засну́ть
+    aspect: pf
+    collections:
+      - daily life
+      - sickness and health
+    en_gb:
+      standard: to fall asleep (to begin sleeping)
+    conjugation:
+      future:
+        "1sg": засну́
+        "2sg": заснёшь
+        "3sg": заснёт
+        "1pl": заснём
+        "2pl": заснёте
+        "3pl": засну́т
+      past_m: засну́л
+      past_f: засну́ла
+      past_n: засну́ло
+      past_pl: засну́ли
+  "заставить=to make":
+    cefr_level: B1
+    accented: заста́вить
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to make (to force someone to do something)
+      alt:
+        - to force
+    conjugation:
+      future:
+        "1sg": заста́влю
+        "2sg": заста́вишь
+        "3sg": заста́вит
+        "1pl": заста́вим
+        "2pl": заста́вите
+        "3pl": заста́вят
+      past_m: заста́вил
+      past_f: заста́вила
+      past_n: заста́вило
+      past_pl: заста́вили
+  "заставлять=to make":
+    cefr_level: B1
+    accented: заставля́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to make (to force someone to do something repeatedly)
+      alt:
+        - to force
+    conjugation:
+      present:
+        "1sg": заставля́ю
+        "2sg": заставля́ешь
+        "3sg": заставля́ет
+        "1pl": заставля́ем
+        "2pl": заставля́ете
+        "3pl": заставля́ют
+      past_m: заставля́л
+      past_f: заставля́ла
+      past_n: заставля́ло
+      past_pl: заставля́ли
+  "застыть=to freeze":
+    cefr_level: B1
+    accented: засты́ть
+    aspect: pf
+    collections:
+      - daily life
+      - feelings and sensations
+    en_gb:
+      standard: to freeze (to become solid or stand completely still)
+      alt:
+        - to congeal
+        - to stand still
+    conjugation:
+      future:
+        "1sg": засты́ну
+        "2sg": засты́нешь
+        "3sg": засты́нет
+        "1pl": засты́нем
+        "2pl": засты́нете
+        "3pl": засты́нут
+      past_m: засты́л
+      past_f: засты́ла
+      past_n: засты́ло
+      past_pl: засты́ли
+  "засыпать=to fall asleep":
+    cefr_level: B1
+    accented: засыпа́ть
+    aspect: impf
+    collections:
+      - daily life
+      - sickness and health
+    en_gb:
+      standard: to fall asleep (to drift off to sleep habitually)
+    conjugation:
+      present:
+        "1sg": засыпа́ю
+        "2sg": засыпа́ешь
+        "3sg": засыпа́ет
+        "1pl": засыпа́ем
+        "2pl": засыпа́ете
+        "3pl": засыпа́ют
+      past_m: засыпа́л
+      past_f: засыпа́ла
+      past_n: засыпа́ло
+      past_pl: засыпа́ли
+  "захватить=to seize":
+    cefr_level: B1
+    accented: захвати́ть
+    aspect: pf
+    collections:
+      - military
+      - war and peace
+    en_gb:
+      standard: to seize (to capture by force)
+      alt:
+        - to capture
+    conjugation:
+      future:
+        "1sg": захвачу́
+        "2sg": захва́тишь
+        "3sg": захва́тит
+        "1pl": захва́тим
+        "2pl": захва́тите
+        "3pl": захва́тят
+      past_m: захвати́л
+      past_f: захвати́ла
+      past_n: захвати́ло
+      past_pl: захвати́ли
+  "заходить=to drop in":
+    cefr_level: A2
+    accented: захо́дить
+    aspect: impf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to drop in (to enter or visit)
+      alt:
+        - to enter
+    conjugation:
+      present:
+        "1sg": захожу́
+        "2sg": за́ходишь
+        "3sg": за́ходит
+        "1pl": за́ходим
+        "2pl": за́ходите
+        "3pl": за́ходят
+      past_m: захо́дил
+      past_f: захо́дила
+      past_n: захо́дило
+      past_pl: захо́дили
+  "захотеть=to want":
+    cefr_level: A2
+    accented: захоте́ть
+    aspect: pf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to want (to feel a desire for something)
+      alt:
+        - to feel like
+    conjugation:
+      future:
+        "1sg": захочу́
+        "2sg": захо́чешь
+        "3sg": захо́чет
+        "1pl": захоти́м
+        "2pl": захоти́те
+        "3pl": захотя́т
+      past_m: захоте́л
+      past_f: захоте́ла
+      past_n: захоте́ло
+      past_pl: захоте́ли
+  "захотеться=to feel like":
+    cefr_level: A2
+    accented: захоте́ться
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to feel like (impersonal — to have a desire arise)
+    conjugation:
+      future:
+        "3sg": захо́чется
+      past_m: захоте́лось
+      past_f: захоте́лось
+      past_n: захоте́лось
+      past_pl: захоте́лось
   "защищать=to defend":
     cefr_level: B1
     accented: защища́ть
@@ -2985,6 +4886,52 @@ words:
       past_f: защища́ла
       past_n: защища́ло
       past_pl: защища́ли
+  "заявить=to declare":
+    cefr_level: B1
+    accented: заяви́ть
+    aspect: pf
+    collections:
+      - communication
+      - politics
+    en_gb:
+      standard: to declare (to state officially)
+      alt:
+        - to state
+    conjugation:
+      future:
+        "1sg": заявлю́
+        "2sg": заяви́шь
+        "3sg": заяви́т
+        "1pl": заяви́м
+        "2pl": заяви́те
+        "3pl": заявя́т
+      past_m: заяви́л
+      past_f: заяви́ла
+      past_n: заяви́ло
+      past_pl: заяви́ли
+  "звать=to call":
+    cefr_level: A1
+    accented: звать
+    aspect: impf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to call (to summon or invite someone)
+      alt:
+        - to invite
+    conjugation:
+      present:
+        "1sg": зову́
+        "2sg": зовёшь
+        "3sg": зовёт
+        "1pl": зовём
+        "2pl": зовёте
+        "3pl": зову́т
+      past_m: звал
+      past_f: звала́
+      past_n: зва́ло
+      past_pl: зва́ли
   "звонить=to call":
     cefr_level: A1
     accented: звони́ть
@@ -3011,6 +4958,50 @@ words:
       past_f: звони́ла
       past_n: звони́ло
       past_pl: звони́ли
+  "звучать=to sound":
+    cefr_level: B1
+    accented: звуча́ть
+    aspect: impf
+    collections:
+      - daily life
+      - the arts
+    en_gb:
+      standard: to sound (to produce a sound)
+      alt:
+        - to ring
+    conjugation:
+      present:
+        "1sg": звучу́
+        "2sg": звучи́шь
+        "3sg": звучи́т
+        "1pl": звучи́м
+        "2pl": звучи́те
+        "3pl": звуча́т
+      past_m: звуча́л
+      past_f: звуча́ла
+      past_n: звуча́ло
+      past_pl: звуча́ли
+  "здравствовать=to be well":
+    cefr_level: B1
+    accented: здра́вствовать
+    aspect: impf
+    collections:
+      - daily life
+      - sickness and health
+    en_gb:
+      standard: to be well (used in the greeting здравствуйте)
+    conjugation:
+      present:
+        "1sg": здра́вствую
+        "2sg": здра́вствуешь
+        "3sg": здра́вствует
+        "1pl": здра́вствуем
+        "2pl": здра́вствуете
+        "3pl": здра́вствуют
+      past_m: здра́вствовал
+      past_f: здра́вствовала
+      past_n: здра́вствовало
+      past_pl: здра́вствовали
   "знать=to know":
     cefr_level: A1
     accented: знать
@@ -3032,6 +5023,29 @@ words:
       past_f: зна́ла
       past_n: зна́ло
       past_pl: зна́ли
+  "значить=to mean":
+    cefr_level: A2
+    accented: зна́чить
+    aspect: impf
+    collections:
+      - daily life
+      - school
+    en_gb:
+      standard: to mean (to signify or have a meaning)
+      alt:
+        - to signify
+    conjugation:
+      present:
+        "1sg": зна́чу
+        "2sg": зна́чишь
+        "3sg": зна́чит
+        "1pl": зна́чим
+        "2pl": зна́чите
+        "3pl": зна́чат
+      past_m: зна́чил
+      past_f: зна́чила
+      past_n: зна́чило
+      past_pl: зна́чили
   "играть=to play":
     cefr_level: A1
     accented: игра́ть
@@ -6094,3 +8108,1474 @@ words:
       past_f: чу́вствовала
       past_n: чу́вствовало
       past_pl: чу́вствовали
+  "поехать=to set off by vehicle":
+    cefr_level: A2
+    accented: пое́хать
+    aspect: pf
+    collections:
+      - motion
+      - travel
+      - public transport
+    en_gb:
+      standard: to set off by vehicle (to depart by transport)
+    conjugation:
+      future:
+        "1sg": пое́ду
+        "2sg": пое́дешь
+        "3sg": пое́дет
+        "1pl": пое́дем
+        "2pl": пое́дете
+        "3pl": пое́дут
+      past_m: пое́хал
+      past_f: пое́хала
+      past_n: пое́хало
+      past_pl: пое́хали
+  "пожать=to shake":
+    cefr_level: B1
+    accented: пожа́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to shake (a hand — to grip and pump in greeting)
+    conjugation:
+      future:
+        "1sg": пожму́
+        "2sg": пожмёшь
+        "3sg": пожмёт
+        "1pl": пожмём
+        "2pl": пожмёте
+        "3pl": пожму́т
+      past_m: пожа́л
+      past_f: пожа́ла
+      past_n: пожа́ло
+      past_pl: пожа́ли
+  "пожалеть=to feel sorry":
+    cefr_level: B1
+    accented: пожале́ть
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to feel sorry (to regret or show pity)
+      alt:
+        - to regret
+    conjugation:
+      future:
+        "1sg": пожале́ю
+        "2sg": пожале́ешь
+        "3sg": пожале́ет
+        "1pl": пожале́ем
+        "2pl": пожале́ете
+        "3pl": пожале́ют
+      past_m: пожале́л
+      past_f: пожале́ла
+      past_n: пожале́ло
+      past_pl: пожале́ли
+  "позвать=to call":
+    cefr_level: A2
+    accented: позва́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to call (to summon or invite)
+      alt:
+        - to invite
+    conjugation:
+      future:
+        "1sg": позову́
+        "2sg": позовёшь
+        "3sg": позовёт
+        "1pl": позовём
+        "2pl": позовёте
+        "3pl": позову́т
+      past_m: позва́л
+      past_f: позвала́
+      past_n: позва́ло
+      past_pl: позва́ли
+  "позволить=to allow":
+    cefr_level: A2
+    accented: позво́лить
+    aspect: pf
+    collections:
+      - daily life
+      - communication
+    en_gb:
+      standard: to allow (to give permission, on one occasion)
+      alt:
+        - to permit
+    conjugation:
+      future:
+        "1sg": позво́лю
+        "2sg": позво́лишь
+        "3sg": позво́лит
+        "1pl": позво́лим
+        "2pl": позво́лите
+        "3pl": позво́лят
+      past_m: позво́лил
+      past_f: позво́лила
+      past_n: позво́лило
+      past_pl: позво́лили
+  "позволять=to allow":
+    cefr_level: A2
+    accented: позволя́ть
+    aspect: impf
+    collections:
+      - daily life
+      - communication
+    en_gb:
+      standard: to allow (to give permission, habitually)
+      alt:
+        - to permit
+    conjugation:
+      present:
+        "1sg": позволя́ю
+        "2sg": позволя́ешь
+        "3sg": позволя́ет
+        "1pl": позволя́ем
+        "2pl": позволя́ете
+        "3pl": позволя́ют
+      past_m: позволя́л
+      past_f: позволя́ла
+      past_n: позволя́ло
+      past_pl: позволя́ли
+  "познакомиться=to get acquainted":
+    cefr_level: A1
+    accented: познако́миться
+    aspect: pf
+    collections:
+      - daily life
+      - people
+    en_gb:
+      standard: to get acquainted (to meet someone for the first time)
+      alt:
+        - to meet
+    conjugation:
+      future:
+        "1sg": познако́млюсь
+        "2sg": познако́мишься
+        "3sg": познако́мится
+        "1pl": познако́мимся
+        "2pl": познако́митесь
+        "3pl": познако́мятся
+      past_m: познако́мился
+      past_f: познако́милась
+      past_n: познако́милось
+      past_pl: познако́мились
+  "поинтересоваться=to inquire":
+    cefr_level: B1
+    accented: поинтересова́ться
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to inquire (to ask about or take an interest in)
+      alt:
+        - to wonder
+    conjugation:
+      future:
+        "1sg": поинтересу́юсь
+        "2sg": поинтересу́ешься
+        "3sg": поинтересу́ется
+        "1pl": поинтересу́емся
+        "2pl": поинтересу́етесь
+        "3pl": поинтересу́ются
+      past_m: поинтересова́лся
+      past_f: поинтересова́лась
+      past_n: поинтересова́лось
+      past_pl: поинтересова́лись
+  "поймать=to catch":
+    cefr_level: B1
+    accented: пойма́ть
+    aspect: pf
+    collections:
+      - daily life
+      - sport
+    en_gb:
+      standard: to catch (to seize something moving)
+    conjugation:
+      future:
+        "1sg": пойма́ю
+        "2sg": пойма́ешь
+        "3sg": пойма́ет
+        "1pl": пойма́ем
+        "2pl": пойма́ете
+        "3pl": пойма́ют
+      past_m: пойма́л
+      past_f: пойма́ла
+      past_n: пойма́ло
+      past_pl: пойма́ли
+  "пойти=to go":
+    cefr_level: A1
+    accented: пойти́
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to go (to set off on foot)
+      alt:
+        - to set off
+    conjugation:
+      future:
+        "1sg": пойду́
+        "2sg": пойдёшь
+        "3sg": пойдёт
+        "1pl": пойдём
+        "2pl": пойдёте
+        "3pl": пойду́т
+      past_m: пошёл
+      past_f: пошла́
+      past_n: пошло́
+      past_pl: пошли́
+  "показывать=to show":
+    cefr_level: A2
+    accented: пока́зывать
+    aspect: impf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to show (to display or demonstrate, habitually)
+    conjugation:
+      present:
+        "1sg": пока́зываю
+        "2sg": пока́зываешь
+        "3sg": пока́зывает
+        "1pl": пока́зываем
+        "2pl": пока́зываете
+        "3pl": пока́зывают
+      past_m: пока́зывал
+      past_f: пока́зывала
+      past_n: пока́зывало
+      past_pl: пока́зывали
+  "показать=to show":
+    cefr_level: A2
+    accented: показа́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to show (to display or demonstrate, on one occasion)
+    conjugation:
+      future:
+        "1sg": покажу́
+        "2sg": пока́жешь
+        "3sg": пока́жет
+        "1pl": пока́жем
+        "2pl": пока́жете
+        "3pl": пока́жут
+      past_m: показа́л
+      past_f: показа́ла
+      past_n: показа́ло
+      past_pl: показа́ли
+  "показаться=to seem":
+    cefr_level: B1
+    accented: показа́ться
+    aspect: pf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to seem (to appear or show oneself)
+      alt:
+        - to appear
+    conjugation:
+      future:
+        "1sg": покажу́сь
+        "2sg": пока́жешься
+        "3sg": пока́жется
+        "1pl": пока́жемся
+        "2pl": пока́жетесь
+        "3pl": пока́жутся
+      past_m: показа́лся
+      past_f: показа́лась
+      past_n: показа́лось
+      past_pl: показа́лись
+  "покачать=to rock":
+    cefr_level: B1
+    accented: пока́чать
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to rock (to shake or sway briefly)
+      alt:
+        - to shake
+    conjugation:
+      future:
+        "1sg": пока́чаю
+        "2sg": пока́чаешь
+        "3sg": пока́чает
+        "1pl": пока́чаем
+        "2pl": пока́чаете
+        "3pl": пока́чают
+      past_m: пока́чал
+      past_f: пока́чала
+      past_n: пока́чало
+      past_pl: пока́чали
+  "покинуть=to leave":
+    cefr_level: B1
+    accented: поки́нуть
+    aspect: pf
+    collections:
+      - daily life
+      - travel
+    en_gb:
+      standard: to leave (to abandon or depart from)
+      alt:
+        - to abandon
+    conjugation:
+      future:
+        "1sg": поки́ну
+        "2sg": поки́нешь
+        "3sg": поки́нет
+        "1pl": поки́нем
+        "2pl": поки́нете
+        "3pl": поки́нут
+      past_m: поки́нул
+      past_f: поки́нула
+      past_n: поки́нуло
+      past_pl: поки́нули
+  "покраснеть=to blush":
+    cefr_level: B1
+    accented: покрасне́ть
+    aspect: pf
+    collections:
+      - feelings and sensations
+      - people
+    en_gb:
+      standard: to blush (to go red in the face)
+      alt:
+        - to redden
+    conjugation:
+      future:
+        "1sg": покрасне́ю
+        "2sg": покрасне́ешь
+        "3sg": покрасне́ет
+        "1pl": покрасне́ем
+        "2pl": покрасне́ете
+        "3pl": покрасне́ют
+      past_m: покрасне́л
+      past_f: покрасне́ла
+      past_n: покрасне́ло
+      past_pl: покрасне́ли
+  "покрыть=to cover":
+    cefr_level: B1
+    accented: покры́ть
+    aspect: pf
+    collections:
+      - daily life
+      - home
+    en_gb:
+      standard: to cover (to place over or coat)
+    conjugation:
+      future:
+        "1sg": покро́ю
+        "2sg": покро́ешь
+        "3sg": покро́ет
+        "1pl": покро́ем
+        "2pl": покро́ете
+        "3pl": покро́ют
+      past_m: покры́л
+      past_f: покры́ла
+      past_n: покры́ло
+      past_pl: покры́ли
+  "полагать=to suppose":
+    cefr_level: B1
+    accented: пола́гать
+    aspect: impf
+    collections:
+      - communication
+    en_gb:
+      standard: to suppose (to think or assume, habitually)
+      alt:
+        - to think
+    conjugation:
+      present:
+        "1sg": пола́гаю
+        "2sg": пола́гаешь
+        "3sg": пола́гает
+        "1pl": пола́гаем
+        "2pl": пола́гаете
+        "3pl": пола́гают
+      past_m: пола́гал
+      past_f: пола́гала
+      past_n: пола́гало
+      past_pl: пола́гали
+  "полагаться=to rely on":
+    cefr_level: B1
+    accented: пола́гаться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to rely on (to depend on; to be due)
+      alt:
+        - to be due
+    conjugation:
+      present:
+        "1sg": пола́гаюсь
+        "2sg": пола́гаешься
+        "3sg": пола́гается
+        "1pl": пола́гаемся
+        "2pl": пола́гаетесь
+        "3pl": пола́гаются
+      past_m: пола́гался
+      past_f: пола́галась
+      past_n: пола́галось
+      past_pl: пола́гались
+  "полезть=to climb":
+    cefr_level: B1
+    accented: поле́зть
+    aspect: pf
+    collections:
+      - motion
+    en_gb:
+      standard: to climb (to start climbing or crawling)
+    conjugation:
+      future:
+        "1sg": поле́зу
+        "2sg": поле́зешь
+        "3sg": поле́зет
+        "1pl": поле́зем
+        "2pl": поле́зете
+        "3pl": поле́зут
+      past_m: поле́з
+      past_f: поле́зла
+      past_n: поле́зло
+      past_pl: поле́зли
+  "полететь=to fly off":
+    cefr_level: B1
+    accented: полете́ть
+    aspect: pf
+    collections:
+      - motion
+      - travel
+    en_gb:
+      standard: to fly off (to set off flying)
+      alt:
+        - to start flying
+    conjugation:
+      future:
+        "1sg": полечу́
+        "2sg": полети́шь
+        "3sg": полети́т
+        "1pl": полети́м
+        "2pl": полети́те
+        "3pl": полетя́т
+      past_m: полете́л
+      past_f: полете́ла
+      past_n: полете́ло
+      past_pl: полете́ли
+  "положить=to put":
+    cefr_level: A2
+    accented: положи́ть
+    aspect: pf
+    collections:
+      - daily life
+      - home
+    en_gb:
+      standard: to put (to place in a horizontal position)
+      alt:
+        - to lay down
+    conjugation:
+      future:
+        "1sg": положу́
+        "2sg": поло́жишь
+        "3sg": поло́жит
+        "1pl": поло́жим
+        "2pl": поло́жите
+        "3pl": поло́жат
+      past_m: положи́л
+      past_f: положи́ла
+      past_n: положи́ло
+      past_pl: положи́ли
+  "получать=to receive":
+    cefr_level: A2
+    accented: получа́ть
+    aspect: impf
+    collections:
+      - daily life
+      - work
+      - finance
+    en_gb:
+      standard: to receive (to get something, habitually)
+      alt:
+        - to get
+    conjugation:
+      present:
+        "1sg": получа́ю
+        "2sg": получа́ешь
+        "3sg": получа́ет
+        "1pl": получа́ем
+        "2pl": получа́ете
+        "3pl": получа́ют
+      past_m: получа́л
+      past_f: получа́ла
+      past_n: получа́ло
+      past_pl: получа́ли
+  "получаться=to turn out":
+    cefr_level: B1
+    accented: получа́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to turn out (to result or work out, habitually)
+      alt:
+        - to work out
+    conjugation:
+      present:
+        "3sg": получа́ется
+        "3pl": получа́ются
+      past_m: получа́лся
+      past_f: получа́лась
+      past_n: получа́лось
+      past_pl: получа́лись
+  "получить=to receive":
+    cefr_level: A2
+    accented: получи́ть
+    aspect: pf
+    collections:
+      - daily life
+      - work
+      - finance
+    en_gb:
+      standard: to receive (to get something, on one occasion)
+      alt:
+        - to get
+    conjugation:
+      future:
+        "1sg": получу́
+        "2sg": полу́чишь
+        "3sg": полу́чит
+        "1pl": полу́чим
+        "2pl": полу́чите
+        "3pl": полу́чат
+      past_m: получи́л
+      past_f: получи́ла
+      past_n: получи́ло
+      past_pl: получи́ли
+  "получиться=to turn out":
+    cefr_level: B1
+    accented: получи́ться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to turn out (to result or work out, on one occasion)
+      alt:
+        - to work out
+    conjugation:
+      future:
+        "3sg": полу́чится
+        "3pl": полу́чатся
+      past_m: получи́лся
+      past_f: получи́лась
+      past_n: получи́лось
+      past_pl: получи́лись
+  "полюбить=to come to love":
+    cefr_level: A2
+    accented: полюби́ть
+    aspect: pf
+    collections:
+      - romance and dating
+      - feelings and sensations
+    en_gb:
+      standard: to come to love (to develop love for someone or something)
+    conjugation:
+      future:
+        "1sg": полюблю́
+        "2sg": полю́бишь
+        "3sg": полю́бит
+        "1pl": полю́бим
+        "2pl": полю́бите
+        "3pl": полю́бят
+      past_m: полюби́л
+      past_f: полюби́ла
+      past_n: полюби́ло
+      past_pl: полюби́ли
+  "помешать=to prevent":
+    cefr_level: B1
+    accented: помеша́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to prevent (to interfere or get in the way)
+      alt:
+        - to interfere
+    conjugation:
+      future:
+        "1sg": помеша́ю
+        "2sg": помеша́ешь
+        "3sg": помеша́ет
+        "1pl": помеша́ем
+        "2pl": помеша́ете
+        "3pl": помеша́ют
+      past_m: помеша́л
+      past_f: помеша́ла
+      past_n: помеша́ло
+      past_pl: помеша́ли
+  "помочь=to help":
+    cefr_level: A2
+    accented: помо́чь
+    aspect: pf
+    collections:
+      - daily life
+      - communication
+    en_gb:
+      standard: to help (to assist on one occasion)
+    conjugation:
+      future:
+        "1sg": помогу́
+        "2sg": помо́жешь
+        "3sg": помо́жет
+        "1pl": помо́жем
+        "2pl": помо́жете
+        "3pl": помо́гут
+      past_m: помо́г
+      past_f: помогла́
+      past_n: помогло́
+      past_pl: помогли́
+  "помолчать=to be silent for a while":
+    cefr_level: B1
+    accented: помолча́ть
+    aspect: pf
+    collections:
+      - communication
+    en_gb:
+      standard: to be silent for a while (to stay quiet briefly)
+    conjugation:
+      future:
+        "1sg": помолчу́
+        "2sg": помо́лчишь
+        "3sg": помо́лчит
+        "1pl": помо́лчим
+        "2pl": помо́лчите
+        "3pl": помо́лчат
+      past_m: помолча́л
+      past_f: помолча́ла
+      past_n: помолча́ло
+      past_pl: помолча́ли
+  "понадобиться=to be needed":
+    cefr_level: B1
+    accented: понадо́биться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to be needed (to become necessary)
+    conjugation:
+      future:
+        "3sg": понадо́бится
+        "3pl": понадо́бятся
+      past_m: понадо́бился
+      past_f: понадо́билась
+      past_n: понадо́билось
+      past_pl: понадо́бились
+  "понести=to carry off":
+    cefr_level: B1
+    accented: понести́
+    aspect: pf
+    collections:
+      - motion
+      - daily life
+    en_gb:
+      standard: to carry off (to start carrying or take away)
+    conjugation:
+      future:
+        "1sg": понесу́
+        "2sg": понесёшь
+        "3sg": понесёт
+        "1pl": понесём
+        "2pl": понесёте
+        "3pl": понесу́т
+      past_m: понёс
+      past_f: понесла́
+      past_n: понесло́
+      past_pl: понесли́
+  "понравиться=to be liked":
+    cefr_level: A2
+    accented: понра́виться
+    aspect: pf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to be liked (to please someone)
+      alt:
+        - to please
+    conjugation:
+      future:
+        "1sg": понра́влюсь
+        "2sg": понра́вишься
+        "3sg": понра́вится
+        "1pl": понра́вимся
+        "2pl": понра́витесь
+        "3pl": понра́вятся
+      past_m: понра́вился
+      past_f: понра́вилась
+      past_n: понра́вилось
+      past_pl: понра́вились
+  "попадать=to get into":
+    cefr_level: B1
+    accented: попада́ть
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to get into (to end up in or hit a target, habitually)
+      alt:
+        - to hit
+    conjugation:
+      present:
+        "1sg": попада́ю
+        "2sg": попада́ешь
+        "3sg": попада́ет
+        "1pl": попада́ем
+        "2pl": попада́ете
+        "3pl": попада́ют
+      past_m: попада́л
+      past_f: попада́ла
+      past_n: попада́ло
+      past_pl: попада́ли
+  "попасть=to get into":
+    cefr_level: B1
+    accented: попа́сть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to get into (to end up in or hit a target)
+      alt:
+        - to hit
+    conjugation:
+      future:
+        "1sg": попаду́
+        "2sg": попадёшь
+        "3sg": попадёт
+        "1pl": попадём
+        "2pl": попадёте
+        "3pl": попаду́т
+      past_m: попа́л
+      past_f: попа́ла
+      past_n: попа́ло
+      past_pl: попа́ли
+  "попасться=to be caught":
+    cefr_level: B1
+    accented: попа́сться
+    aspect: pf
+    collections:
+      - daily life
+      - the law
+    en_gb:
+      standard: to be caught (to get caught or come across)
+      alt:
+        - to come across
+    conjugation:
+      future:
+        "1sg": попаду́сь
+        "2sg": попадёшься
+        "3sg": попадётся
+        "1pl": попадёмся
+        "2pl": попадётесь
+        "3pl": попаду́тся
+      past_m: попа́лся
+      past_f: попа́лась
+      past_n: попа́лось
+      past_pl: попа́лись
+  "попадаться=to get caught":
+    cefr_level: B1
+    accented: попада́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to get caught (to be caught or come across, habitually)
+      alt:
+        - to come across
+    conjugation:
+      present:
+        "1sg": попада́юсь
+        "2sg": попада́ешься
+        "3sg": попада́ется
+        "1pl": попада́емся
+        "2pl": попада́етесь
+        "3pl": попада́ются
+      past_m: попада́лся
+      past_f: попада́лась
+      past_n: попада́лось
+      past_pl: попада́лись
+  "поправить=to correct":
+    cefr_level: B1
+    accented: попра́вить
+    aspect: pf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to correct (to fix or put right)
+      alt:
+        - to fix
+    conjugation:
+      future:
+        "1sg": попра́влю
+        "2sg": попра́вишь
+        "3sg": попра́вит
+        "1pl": попра́вим
+        "2pl": попра́вите
+        "3pl": попра́вят
+      past_m: попра́вил
+      past_f: попра́вила
+      past_n: попра́вило
+      past_pl: попра́вили
+  "попробовать=to try":
+    cefr_level: A2
+    accented: попро́бовать
+    aspect: pf
+    collections:
+      - daily life
+      - food and drink
+    en_gb:
+      standard: to try (to attempt or taste)
+      alt:
+        - to taste
+    conjugation:
+      future:
+        "1sg": попро́бую
+        "2sg": попро́буешь
+        "3sg": попро́бует
+        "1pl": попро́буем
+        "2pl": попро́буете
+        "3pl": попро́буют
+      past_m: попро́бовал
+      past_f: попро́бовала
+      past_n: попро́бовало
+      past_pl: попро́бовали
+  "попытаться=to attempt":
+    cefr_level: B1
+    accented: попыта́ться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to attempt (to try to do something)
+    conjugation:
+      future:
+        "1sg": попыта́юсь
+        "2sg": попыта́ешься
+        "3sg": попыта́ется
+        "1pl": попыта́емся
+        "2pl": попыта́етесь
+        "3pl": попыта́ются
+      past_m: попыта́лся
+      past_f: попыта́лась
+      past_n: попыта́лось
+      past_pl: попыта́лись
+  "поразить=to strike":
+    cefr_level: B1
+    accented: порази́ть
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to strike (to amaze or astonish)
+      alt:
+        - to amaze
+    conjugation:
+      future:
+        "1sg": поражу́
+        "2sg": порази́шь
+        "3sg": порази́т
+        "1pl": порази́м
+        "2pl": порази́те
+        "3pl": поразя́т
+      past_m: порази́л
+      past_f: порази́ла
+      past_n: порази́ло
+      past_pl: порази́ли
+  "посадить=to seat":
+    cefr_level: B1
+    accented: посади́ть
+    aspect: pf
+    collections:
+      - daily life
+      - nature
+    en_gb:
+      standard: to seat (to place someone seated; or to plant)
+      alt:
+        - to plant
+    conjugation:
+      future:
+        "1sg": посажу́
+        "2sg": поса́дишь
+        "3sg": поса́дит
+        "1pl": поса́дим
+        "2pl": поса́дите
+        "3pl": поса́дят
+      past_m: поса́дил
+      past_f: поса́дила
+      past_n: поса́дило
+      past_pl: поса́дили
+  "посвятить=to dedicate":
+    cefr_level: B1
+    accented: посвяти́ть
+    aspect: pf
+    collections:
+      - the arts
+      - daily life
+    en_gb:
+      standard: to dedicate (to devote to a person or cause)
+    conjugation:
+      future:
+        "1sg": посвящу́
+        "2sg": посвяти́шь
+        "3sg": посвяти́т
+        "1pl": посвяти́м
+        "2pl": посвяти́те
+        "3pl": посвятя́т
+      past_m: посвяти́л
+      past_f: посвяти́ла
+      past_n: посвяти́ло
+      past_pl: посвяти́ли
+  "посидеть=to sit for a while":
+    cefr_level: A2
+    accented: посиде́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to sit for a while (to remain seated briefly)
+    conjugation:
+      future:
+        "1sg": посижу́
+        "2sg": поси́дишь
+        "3sg": поси́дит
+        "1pl": поси́дим
+        "2pl": поси́дите
+        "3pl": поси́дят
+      past_m: посиде́л
+      past_f: посиде́ла
+      past_n: посиде́ло
+      past_pl: посиде́ли
+  "послать=to send":
+    cefr_level: A2
+    accented: посла́ть
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to send (to dispatch, on one occasion)
+    conjugation:
+      future:
+        "1sg": пошлю́
+        "2sg": пошлёшь
+        "3sg": пошлёт
+        "1pl": пошлём
+        "2pl": пошлёте
+        "3pl": пошлю́т
+      past_m: посла́л
+      past_f: посла́ла
+      past_n: посла́ло
+      past_pl: посла́ли
+  "последовать=to follow":
+    cefr_level: B1
+    accented: после́довать
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to follow (to come after or take after)
+    conjugation:
+      future:
+        "1sg": после́дую
+        "2sg": после́дуешь
+        "3sg": после́дует
+        "1pl": после́дуем
+        "2pl": после́дуете
+        "3pl": после́дуют
+      past_m: после́довал
+      past_f: после́довала
+      past_n: после́довало
+      past_pl: после́довали
+  "послушать=to listen to":
+    cefr_level: A2
+    accented: послу́шать
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to listen to (to hear attentively, on one occasion)
+    conjugation:
+      future:
+        "1sg": послу́шаю
+        "2sg": послу́шаешь
+        "3sg": послу́шает
+        "1pl": послу́шаем
+        "2pl": послу́шаете
+        "3pl": послу́шают
+      past_m: послу́шал
+      past_f: послу́шала
+      past_n: послу́шало
+      past_pl: послу́шали
+  "послышаться=to be heard":
+    cefr_level: B1
+    accented: послы́шаться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to be heard (to seem to be audible)
+    conjugation:
+      future:
+        "3sg": послы́шится
+        "3pl": послы́шатся
+      past_m: послы́шался
+      past_f: послы́шалась
+      past_n: послы́шалось
+      past_pl: послы́шались
+  "посмотреть=to look":
+    cefr_level: A2
+    accented: посмотре́ть
+    aspect: pf
+    collections:
+      - daily life
+      - the arts
+    en_gb:
+      standard: to look (to watch or glance, on one occasion)
+      alt:
+        - to watch
+    conjugation:
+      future:
+        "1sg": посмотрю́
+        "2sg": посмо́тришь
+        "3sg": посмо́трит
+        "1pl": посмо́трим
+        "2pl": посмо́трите
+        "3pl": посмо́трят
+      past_m: посмотре́л
+      past_f: посмотре́ла
+      past_n: посмотре́ло
+      past_pl: посмотре́ли
+  "посоветовать=to advise":
+    cefr_level: B1
+    accented: посове́товать
+    aspect: pf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to advise (to give a recommendation)
+    conjugation:
+      future:
+        "1sg": посове́тую
+        "2sg": посове́туешь
+        "3sg": посове́тует
+        "1pl": посове́туем
+        "2pl": посове́туете
+        "3pl": посове́туют
+      past_m: посове́товал
+      past_f: посове́товала
+      past_n: посове́товало
+      past_pl: посове́товали
+  "поставить=to put":
+    cefr_level: A2
+    accented: поста́вить
+    aspect: pf
+    collections:
+      - daily life
+      - home
+    en_gb:
+      standard: to put (to place in an upright position)
+      alt:
+        - to place
+        - to set
+    conjugation:
+      future:
+        "1sg": поста́влю
+        "2sg": поста́вишь
+        "3sg": поста́вит
+        "1pl": поста́вим
+        "2pl": поста́вите
+        "3pl": поста́вят
+      past_m: поста́вил
+      past_f: поста́вила
+      past_n: поста́вило
+      past_pl: поста́вили
+  "постараться=to try hard":
+    cefr_level: B1
+    accented: постара́ться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to try hard (to make an effort)
+    conjugation:
+      future:
+        "1sg": постара́юсь
+        "2sg": постара́ешься
+        "3sg": постара́ется
+        "1pl": постара́емся
+        "2pl": постара́етесь
+        "3pl": постара́ются
+      past_m: постара́лся
+      past_f: постара́лась
+      past_n: постара́лось
+      past_pl: постара́лись
+  "построить=to build":
+    cefr_level: A2
+    accented: постро́ить
+    aspect: pf
+    collections:
+      - work
+      - home
+    en_gb:
+      standard: to build (to construct, on one occasion)
+    conjugation:
+      future:
+        "1sg": постро́ю
+        "2sg": постро́ишь
+        "3sg": постро́ит
+        "1pl": постро́им
+        "2pl": постро́ите
+        "3pl": постро́ят
+      past_m: постро́ил
+      past_f: постро́ила
+      past_n: постро́ило
+      past_pl: постро́или
+  "поступать=to act":
+    cefr_level: B1
+    accented: поступа́ть
+    aspect: impf
+    collections:
+      - daily life
+      - school
+    en_gb:
+      standard: to act (to behave; to enrol, habitually)
+      alt:
+        - to enrol
+    conjugation:
+      present:
+        "1sg": поступа́ю
+        "2sg": поступа́ешь
+        "3sg": поступа́ет
+        "1pl": поступа́ем
+        "2pl": поступа́ете
+        "3pl": поступа́ют
+      past_m: поступа́л
+      past_f: поступа́ла
+      past_n: поступа́ло
+      past_pl: поступа́ли
+  "поступить=to act":
+    cefr_level: B1
+    accented: поступи́ть
+    aspect: pf
+    collections:
+      - daily life
+      - school
+    en_gb:
+      standard: to act (to behave or enrol, on one occasion)
+      alt:
+        - to enrol
+    conjugation:
+      future:
+        "1sg": поступлю́
+        "2sg": посту́пишь
+        "3sg": посту́пит
+        "1pl": посту́пим
+        "2pl": посту́пите
+        "3pl": посту́пят
+      past_m: поступи́л
+      past_f: поступи́ла
+      past_n: поступи́ло
+      past_pl: поступи́ли
+  "постучать=to knock":
+    cefr_level: A2
+    accented: постуча́ть
+    aspect: pf
+    collections:
+      - daily life
+      - home
+    en_gb:
+      standard: to knock (to tap on a door)
+    conjugation:
+      future:
+        "1sg": постучу́
+        "2sg": посту́чишь
+        "3sg": посту́чит
+        "1pl": посту́чим
+        "2pl": посту́чите
+        "3pl": посту́чат
+      past_m: постуча́л
+      past_f: постуча́ла
+      past_n: постуча́ло
+      past_pl: постуча́ли
+  "посылать=to send":
+    cefr_level: A2
+    accented: посыла́ть
+    aspect: impf
+    collections:
+      - communication
+      - daily life
+    en_gb:
+      standard: to send (to dispatch, habitually)
+    conjugation:
+      present:
+        "1sg": посыла́ю
+        "2sg": посыла́ешь
+        "3sg": посыла́ет
+        "1pl": посыла́ем
+        "2pl": посыла́ете
+        "3pl": посыла́ют
+      past_m: посыла́л
+      past_f: посыла́ла
+      past_n: посыла́ло
+      past_pl: посыла́ли
+  "потерять=to lose":
+    cefr_level: A2
+    accented: потеря́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to lose (to misplace or cease to have)
+    conjugation:
+      future:
+        "1sg": потеря́ю
+        "2sg": потеря́ешь
+        "3sg": потеря́ет
+        "1pl": потеря́ем
+        "2pl": потеря́ете
+        "3pl": потеря́ют
+      past_m: потеря́л
+      past_f: потеря́ла
+      past_n: потеря́ло
+      past_pl: потеря́ли
+  "потребовать=to demand":
+    cefr_level: B1
+    accented: потре́бовать
+    aspect: pf
+    collections:
+      - communication
+      - work
+      - the law
+    en_gb:
+      standard: to demand (to insist on or require)
+      alt:
+        - to require
+    conjugation:
+      future:
+        "1sg": потре́бую
+        "2sg": потре́буешь
+        "3sg": потре́бует
+        "1pl": потре́буем
+        "2pl": потре́буете
+        "3pl": потре́буют
+      past_m: потре́бовал
+      past_f: потре́бовала
+      past_n: потре́бовало
+      past_pl: потре́бовали
+  "потрясти=to shake":
+    cefr_level: B1
+    accented: потрясти́
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to shake (to shatter or astound)
+      alt:
+        - to astound
+    conjugation:
+      future:
+        "1sg": потрясу́
+        "2sg": потрясёшь
+        "3sg": потрясёт
+        "1pl": потрясём
+        "2pl": потрясёте
+        "3pl": потрясу́т
+      past_m: потря́с
+      past_f: потрясла́
+      past_n: потрясло́
+      past_pl: потрясли́
+  "потянуть=to pull":
+    cefr_level: B1
+    accented: потяну́ть
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to pull (to tug or draw towards oneself)
+      alt:
+        - to tug
+    conjugation:
+      future:
+        "1sg": потяну́
+        "2sg": потя́нешь
+        "3sg": потя́нет
+        "1pl": потя́нем
+        "2pl": потя́нете
+        "3pl": потяну́т
+      past_m: потяну́л
+      past_f: потяну́ла
+      past_n: потяну́ло
+      past_pl: потяну́ли
+  "потянуться=to stretch":
+    cefr_level: B1
+    accented: потяну́ться
+    aspect: pf
+    collections:
+      - daily life
+      - sport
+    en_gb:
+      standard: to stretch (to extend one's body or reach for something)
+      alt:
+        - to reach for
+    conjugation:
+      future:
+        "1sg": потяну́сь
+        "2sg": потя́нешься
+        "3sg": потя́нется
+        "1pl": потя́немся
+        "2pl": потя́нетесь
+        "3pl": потяну́тся
+      past_m: потяну́лся
+      past_f: потяну́лась
+      past_n: потяну́лось
+      past_pl: потяну́лись
+  "походить=to be like":
+    cefr_level: B1
+    accented: похо́дить
+    aspect: impf
+    collections:
+      - people
+      - daily life
+    en_gb:
+      standard: to be like (to resemble)
+      alt:
+        - to resemble
+    conjugation:
+      present:
+        "1sg": похожу́
+        "2sg": похо́дишь
+        "3sg": похо́дит
+        "1pl": похо́дим
+        "2pl": похо́дите
+        "3pl": похо́дят
+      past_m: похо́дил
+      past_f: похо́дила
+      past_n: похо́дило
+      past_pl: похо́дили
+  "поцеловать=to kiss":
+    cefr_level: A2
+    accented: поцелова́ть
+    aspect: pf
+    collections:
+      - romance and dating
+      - family
+    en_gb:
+      standard: to kiss (to press lips to, on one occasion)
+    conjugation:
+      future:
+        "1sg": поцелу́ю
+        "2sg": поцелу́ешь
+        "3sg": поцелу́ет
+        "1pl": поцелу́ем
+        "2pl": поцелу́ете
+        "3pl": поцелу́ют
+      past_m: поцелова́л
+      past_f: поцелова́ла
+      past_n: поцелова́ло
+      past_pl: поцелова́ли
+  "почувствовать=to feel":
+    cefr_level: A2
+    accented: почу́вствовать
+    aspect: pf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to feel (to sense an emotion or sensation, on one occasion)
+    conjugation:
+      future:
+        "1sg": почу́вствую
+        "2sg": почу́вствуешь
+        "3sg": почу́вствует
+        "1pl": почу́вствуем
+        "2pl": почу́вствуете
+        "3pl": почу́вствуют
+      past_m: почу́вствовал
+      past_f: почу́вствовала
+      past_n: почу́вствовало
+      past_pl: почу́вствовали
+  "появиться=to appear":
+    cefr_level: A2
+    accented: появи́ться
+    aspect: pf
+    collections:
+      - daily life
+    en_gb:
+      standard: to appear (to show up or come into view)
+      alt:
+        - to show up
+    conjugation:
+      future:
+        "1sg": появлю́сь
+        "2sg": появи́шься
+        "3sg": появи́тся
+        "1pl": появи́мся
+        "2pl": появи́тесь
+        "3pl": появя́тся
+      past_m: появи́лся
+      past_f: появи́лась
+      past_n: появи́лось
+      past_pl: появи́лись
+  "появляться=to appear":
+    cefr_level: A2
+    accented: появля́ться
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to appear (to show up habitually)
+    conjugation:
+      present:
+        "1sg": появля́юсь
+        "2sg": появля́ешься
+        "3sg": появля́ется
+        "1pl": появля́емся
+        "2pl": появля́етесь
+        "3pl": появля́ются
+      past_m: появля́лся
+      past_f: появля́лась
+      past_n: появля́лось
+      past_pl: появля́лись
+  "пояснить=to explain":
+    cefr_level: B1
+    accented: поясни́ть
+    aspect: pf
+    collections:
+      - communication
+      - school
+    en_gb:
+      standard: to explain (to clarify a point)
+      alt:
+        - to clarify
+    conjugation:
+      future:
+        "1sg": поясню́
+        "2sg": поясни́шь
+        "3sg": поясни́т
+        "1pl": поясни́м
+        "2pl": поясни́те
+        "3pl": поясня́т
+      past_m: поясни́л
+      past_f: поясни́ла
+      past_n: поясни́ло
+      past_pl: поясни́ли
