@@ -3,11 +3,12 @@
 // cell (desktop) or tap a form then tap a cell (touch). A form is correct in a
 // cell when their normalised spellings match, so syncretic forms work anywhere
 // they legitimately fit.
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 
 import { cellKey } from '../../lib/paradigm.js'
 import { shuffle } from '../../lib/quiz.js'
 import { normalize } from '../../lib/text.js'
+import { speak } from '../../lib/speech.js'
 
 const props = defineProps({ paradigm: { type: Object, required: true } })
 const emit = defineEmits(['graded'])
@@ -48,6 +49,7 @@ function onCellClick(key) {
 
 function onChipClick(id) {
   if (checked.value) return
+  speak(chipById.get(id).form)
   picked.value = picked.value === id ? null : id
 }
 
@@ -61,6 +63,8 @@ function isCorrect(key) {
   const chip = chipById.get(placed[key])
   return cell && chip && normalize(chip.form) === normalize(cell.form)
 }
+
+onMounted(() => speak(props.paradigm.lemma))
 
 function check() {
   if (checked.value || !allPlaced.value) return
