@@ -71,6 +71,15 @@ words:
         en_gb: He runs quickly.
     forms:
       comparative: быстре́е
+  "важно=importantly":
+    cefr_level: B1
+    accented: ва́жно
+    en_gb:
+      standard: importantly (in an important manner)
+      alt:
+        - it is important
+    forms:
+      comparative: важне́е
   "вверх=up":
     cefr_level: A2
     accented: вверх
@@ -104,6 +113,16 @@ words:
     accented: везде́
     en_gb:
       standard: everywhere (in all places)
+  "верно=correctly":
+    cefr_level: A2
+    accented: ве́рно
+    en_gb:
+      standard: correctly (in the right way)
+      alt:
+        - truly
+        - faithfully
+    forms:
+      comparative: ве́рнее
   "вероятно=probably":
     cefr_level: B1
     accented: вероя́тно
@@ -128,6 +147,14 @@ words:
       standard: "eternally (for ever; also: constantly, always)"
       alt:
         - always (informally, of annoying habits)
+  "видно=evidently":
+    cefr_level: B1
+    accented: ви́дно
+    en_gb:
+      standard: evidently (it is evident, one can see)
+      alt:
+        - apparently
+        - it seems
   "вкусно=deliciously":
     cefr_level: A2
     accented: вку́сно
@@ -202,6 +229,14 @@ words:
       standard: inward (towards the inside)
       alt:
         - inwards
+  "возможно=possibly":
+    cefr_level: B1
+    accented: возмо́жно
+    en_gb:
+      standard: possibly (it is possible)
+      alt:
+        - perhaps
+        - maybe
   "вокруг=around":
     cefr_level: B1
     accented: вокру́г
@@ -298,6 +333,13 @@ words:
     usage:
       - ru: Вчера́ мы бы́ли в теа́тре.
         en_gb: Yesterday we were at the theatre.
+  "высоко=high":
+    cefr_level: A2
+    accented: высо́ко
+    en_gb:
+      standard: high (at or to a great height)
+    forms:
+      comparative: вы́ше
   "глубоко=deeply":
     cefr_level: B1
     accented: глубоко́
@@ -358,6 +400,11 @@ words:
         en_gb: The school is far from home.
     forms:
       comparative: да́льше
+  "дважды=twice":
+    cefr_level: B1
+    accented: два́жды
+    en_gb:
+      standard: twice (two times)
   "действительно=really":
     cefr_level: B1
     accented: действи́тельно
@@ -386,6 +433,13 @@ words:
       alt:
         - rather
         - enough
+  "долго=for a long time":
+    cefr_level: A2
+    accented: до́лго
+    en_gb:
+      standard: for a long time (over a long period)
+    forms:
+      comparative: до́льше
   "дорого=expensively":
     cefr_level: A2
     accented: до́рого
@@ -414,6 +468,22 @@ words:
       standard: naturally (of course; in a natural way)
       alt:
         - of course
+  "жалко=it is a pity":
+    cefr_level: B1
+    accented: жа́лко
+    en_gb:
+      standard: it is a pity (expressing regret)
+      alt:
+        - a shame
+  "жарко=hotly":
+    cefr_level: A2
+    accented: жа́рко
+    en_gb:
+      standard: hotly (in a hot manner, it is hot)
+      alt:
+        - it is hot
+    forms:
+      comparative: жа́рче
   "завтра=tomorrow":
     cefr_level: A1
     accented: за́втра
@@ -424,6 +494,15 @@ words:
     usage:
       - ru: За́втра бу́дет хоро́шая пого́да.
         en_gb: The weather will be good tomorrow.
+  "заметно=noticeably":
+    cefr_level: B1
+    accented: заме́тно
+    en_gb:
+      standard: noticeably (in a way that is easily noticed)
+      alt:
+        - evidently
+    forms:
+      comparative: заме́тнее
   "заранее=in advance":
     cefr_level: B1
     accented: зара́нее
@@ -507,6 +586,32 @@ words:
     accented: и́скренне
     en_gb:
       standard: sincerely (genuinely, from the heart)
+  "испуганно=fearfully":
+    cefr_level: B2
+    accented: испу́ганно
+    en_gb:
+      standard: fearfully (in a frightened way)
+      alt:
+        - in a frightened way
+  "коротко=briefly":
+    cefr_level: B1
+    accented: ко́ротко
+    en_gb:
+      standard: briefly (in a short way)
+      alt:
+        - shortly
+    forms:
+      comparative: коро́че
+  "крепко=firmly":
+    cefr_level: B1
+    accented: кре́пко
+    en_gb:
+      standard: firmly (in a strong, tight way)
+      alt:
+        - tightly
+        - soundly
+    forms:
+      comparative: кре́пче
   "кстати=by the way":
     cefr_level: B1
     accented: кста́ти
@@ -545,6 +650,16 @@ words:
         en_gb: He solved the problem easily.
     forms:
       comparative: ле́гче
+  "ловко=deftly":
+    cefr_level: B2
+    accented: ло́вко
+    en_gb:
+      standard: deftly (in a skilful, nimble way)
+      alt:
+        - nimbly
+        - cleverly
+    forms:
+      comparative: ло́вче
   "мало=little":
     cefr_level: A2
     accented: ма́ло
@@ -593,6 +708,14 @@ words:
         en_gb: He works a lot.
     forms:
       comparative: бо́льше
+  "можно=one may":
+    cefr_level: A1
+    accented: мо́жно
+    en_gb:
+      standard: one may (it is permitted, it is possible)
+      alt:
+        - it is possible
+        - may I
   "молча=silently":
     cefr_level: B1
     accented: мо́лча
@@ -600,6 +723,15 @@ words:
       standard: silently (without speaking)
       alt:
         - in silence
+  "мягко=softly":
+    cefr_level: B1
+    accented: мя́гко
+    en_gb:
+      standard: softly (in a soft or gentle way)
+      alt:
+        - gently
+    forms:
+      comparative: мя́гче
   "наверно=probably":
     cefr_level: B2
     accented: наве́рно
@@ -723,6 +855,55 @@ words:
       standard: so much (to such a degree)
       alt:
         - to such an extent
+  "невозможно=impossibly":
+    cefr_level: B1
+    accented: невозмо́жно
+    en_gb:
+      standard: impossibly (it is impossible)
+      alt:
+        - it is impossible
+  "невольно=involuntarily":
+    cefr_level: B2
+    accented: нево́льно
+    en_gb:
+      standard: involuntarily (without intending to)
+      alt:
+        - unwittingly
+  "негромко=quietly":
+    cefr_level: B2
+    accented: негро́мко
+    en_gb:
+      standard: quietly (not loudly, in a low voice)
+      alt:
+        - softly
+  "недавно=recently":
+    cefr_level: A2
+    accented: неда́вно
+    en_gb:
+      standard: recently (not long ago)
+      alt:
+        - not long ago
+  "недалеко=not far":
+    cefr_level: A2
+    accented: недалеко́
+    en_gb:
+      standard: not far (a short distance away)
+      alt:
+        - nearby
+  "незаметно=imperceptibly":
+    cefr_level: B2
+    accented: незаме́тно
+    en_gb:
+      standard: imperceptibly (without being noticed)
+      alt:
+        - unnoticeably
+  "неловко=awkwardly":
+    cefr_level: B2
+    accented: нело́вко
+    en_gb:
+      standard: awkwardly (in an awkward, clumsy way)
+      alt:
+        - clumsily
   "немедленно=immediately":
     cefr_level: B1
     accented: неме́дленно
@@ -754,6 +935,29 @@ words:
       standard: not badly (rather well, passably)
       alt:
         - not bad
+  "непонятно=incomprehensibly":
+    cefr_level: B1
+    accented: непоня́тно
+    en_gb:
+      standard: incomprehensibly (it is unclear)
+      alt:
+        - it is unclear
+  "непременно=without fail":
+    cefr_level: B1
+    accented: непреме́нно
+    en_gb:
+      standard: without fail (certainly, definitely)
+      alt:
+        - certainly
+        - definitely
+  "несколько=a few":
+    cefr_level: A2
+    accented: не́сколько
+    en_gb:
+      standard: a few (some, a small number of; also used as a numeral)
+      alt:
+        - several
+        - somewhat
   "несомненно=undoubtedly":
     cefr_level: B1
     accented: несомне́нно
@@ -768,6 +972,13 @@ words:
       standard: unhurriedly (without rushing)
       alt:
         - slowly and deliberately
+  "нечего=there is nothing":
+    cefr_level: B1
+    accented: не́чего
+    en_gb:
+      standard: there is nothing (nothing to do or say)
+      alt:
+        - nothing
   "нигде=nowhere":
     cefr_level: B1
     accented: нигде́
@@ -790,6 +1001,16 @@ words:
     accented: никуда́
     en_gb:
       standard: nowhere (to no place)
+  "нормально=normally":
+    cefr_level: A2
+    accented: норма́льно
+    en_gb:
+      standard: normally (in a normal way, fine)
+      alt:
+        - fine
+        - OK
+    forms:
+      comparative: норма́льнее
   "обратно=back":
     cefr_level: B1
     accented: обра́тно
@@ -807,6 +1028,14 @@ words:
     usage:
       - ru: Обы́чно я встаю́ в семь.
         en_gb: I usually get up at seven.
+  "обязательно=definitely":
+    cefr_level: B1
+    accented: обяза́тельно
+    en_gb:
+      standard: definitely (without fail, necessarily)
+      alt:
+        - necessarily
+        - without fail
   "однажды=one day":
     cefr_level: A2
     accented: одна́жды
@@ -852,6 +1081,28 @@ words:
       alt:
         - great
         - excellent
+  "относительно=relatively":
+    cefr_level: B1
+    accented: относи́тельно
+    en_gb:
+      standard: relatively (in comparison with something else)
+      alt:
+        - comparatively
+  "охотно=willingly":
+    cefr_level: B2
+    accented: охо́тно
+    en_gb:
+      standard: willingly (with willingness)
+      alt:
+        - gladly
+  "очевидно=obviously":
+    cefr_level: B1
+    accented: очеви́дно
+    en_gb:
+      standard: obviously (it is obvious)
+      alt:
+        - clearly
+        - evidently
   "плохо=badly":
     cefr_level: A1
     accented: пло́хо
@@ -862,6 +1113,11 @@ words:
         en_gb: He feels bad.
     forms:
       comparative: ху́же
+  "по-русски=in Russian":
+    cefr_level: A1
+    accented: по-ру́сски
+    en_gb:
+      standard: in Russian (in the Russian language or manner)
   "повсюду=everywhere":
     cefr_level: B1
     accented: повсю́ду
@@ -887,6 +1143,14 @@ words:
       standard: at first (in the beginning)
       alt:
         - initially
+  "понятно=clearly":
+    cefr_level: A2
+    accented: поня́тно
+    en_gb:
+      standard: clearly (it is clear, understandably)
+      alt:
+        - I see
+        - understood
   "поспешно=hastily":
     cefr_level: B1
     accented: поспе́шно
@@ -922,6 +1186,16 @@ words:
       standard: almost (very nearly)
       alt:
         - nearly
+  "правильно=correctly":
+    cefr_level: A2
+    accented: пра́вильно
+    en_gb:
+      standard: correctly (in the right way)
+      alt:
+        - right
+        - properly
+    forms:
+      comparative: пра́вильнее
   "практически=practically":
     cefr_level: B1
     accented: практи́чески
@@ -929,6 +1203,33 @@ words:
       standard: practically (virtually, almost)
       alt:
         - virtually
+  "прекрасно=wonderfully":
+    cefr_level: B1
+    accented: прекра́сно
+    en_gb:
+      standard: wonderfully (in a beautiful or excellent way)
+      alt:
+        - splendidly
+        - beautifully
+    forms:
+      comparative: прекра́снее
+  "примерно=approximately":
+    cefr_level: B1
+    accented: при́мерно
+    en_gb:
+      standard: approximately (roughly, about)
+      alt:
+        - roughly
+        - about
+  "приятно=pleasantly":
+    cefr_level: A2
+    accented: прия́тно
+    en_gb:
+      standard: pleasantly (in a pleasant way)
+      alt:
+        - nicely
+    forms:
+      comparative: прия́тнее
   "прямо=straight ahead":
     cefr_level: A2
     accented: пря́мо
@@ -941,6 +1242,22 @@ words:
     usage:
       - ru: Иди́те пря́мо до све́тофора.
         en_gb: Go straight ahead to the traffic light.
+  "равно=equally":
+    cefr_level: B1
+    accented: равно́
+    en_gb:
+      standard: equally (in an equal manner)
+      alt:
+        - just the same
+  "радостно=joyfully":
+    cefr_level: B1
+    accented: ра́достно
+    en_gb:
+      standard: joyfully (in a joyful way)
+      alt:
+        - happily
+    forms:
+      comparative: ра́достнее
   "разве=really":
     cefr_level: A2
     accented: ра́зве
@@ -974,6 +1291,16 @@ words:
         en_gb: We rarely watch television.
     forms:
       comparative: ре́же
+  "резко=sharply":
+    cefr_level: B1
+    accented: ре́зко
+    en_gb:
+      standard: sharply (in a sharp or sudden way)
+      alt:
+        - abruptly
+        - harshly
+    forms:
+      comparative: ре́зче
   "решительно=resolutely":
     cefr_level: B1
     accented: реши́тельно
@@ -981,6 +1308,16 @@ words:
       standard: resolutely (with determination)
       alt:
         - decisively
+  "ровно=exactly":
+    cefr_level: B1
+    accented: ро́вно
+    en_gb:
+      standard: exactly (precisely, evenly)
+      alt:
+        - evenly
+        - smoothly
+    forms:
+      comparative: ро́внее
   "сбоку=from the side":
     cefr_level: B1
     accented: сбо́ку
@@ -1010,6 +1347,15 @@ words:
         en_gb: In the morning it is light outside.
     forms:
       comparative: светле́е
+  "свободно=freely":
+    cefr_level: B1
+    accented: свобо́дно
+    en_gb:
+      standard: freely (without restriction)
+      alt:
+        - easily
+    forms:
+      comparative: свобо́днее
   "сегодня=today":
     cefr_level: A1
     accented: сего́дня
@@ -1030,6 +1376,15 @@ words:
     usage:
       - ru: Я сейча́с за́нят.
         en_gb: I am busy now.
+  "серьёзно=seriously":
+    cefr_level: B1
+    accented: серьёзно
+    en_gb:
+      standard: seriously (in a serious manner)
+      alt:
+        - gravely
+    forms:
+      comparative: серьёзнее
   "сзади=from behind":
     cefr_level: B1
     accented: сза́ди
@@ -1037,6 +1392,16 @@ words:
       standard: from behind (at the back)
       alt:
         - from the rear
+  "сильно=strongly":
+    cefr_level: A2
+    accented: си́льно
+    en_gb:
+      standard: strongly (with great force or intensity)
+      alt:
+        - very much
+        - hard
+    forms:
+      comparative: си́льнее
   "скучно=boringly":
     cefr_level: A2
     accented: ску́чно
@@ -1057,6 +1422,28 @@ words:
     accented: сле́ва
     en_gb:
       standard: on the left (on the left-hand side)
+  "случайно=by chance":
+    cefr_level: B1
+    accented: случа́йно
+    en_gb:
+      standard: by chance (accidentally, at random)
+      alt:
+        - accidentally
+        - randomly
+  "слышно=audibly":
+    cefr_level: B1
+    accented: слы́шно
+    en_gb:
+      standard: audibly (it can be heard)
+      alt:
+        - one can hear
+  "смешно=funnily":
+    cefr_level: B1
+    accented: смешно́
+    en_gb:
+      standard: funnily (it is funny)
+      alt:
+        - ridiculously
   "снаружи=from the outside":
     cefr_level: B1
     accented: снару́жи
@@ -1084,6 +1471,13 @@ words:
       standard: again (one more time)
       alt:
         - once more
+  "собственно=actually":
+    cefr_level: B2
+    accented: со́бственно
+    en_gb:
+      standard: actually (strictly speaking, in point of fact)
+      alt:
+        - properly speaking
   "совершенно=completely":
     cefr_level: B1
     accented: соверше́нно
@@ -1100,6 +1494,21 @@ words:
       alt:
         - at all
         - quite
+  "согласно=according to":
+    cefr_level: B1
+    accented: согла́сно
+    en_gb:
+      standard: according to (in accordance with)
+      alt:
+        - in accordance with
+  "специально=specially":
+    cefr_level: B1
+    accented: специа́льно
+    en_gb:
+      standard: specially (for a special purpose)
+      alt:
+        - on purpose
+        - deliberately
   "спокойно=calmly":
     cefr_level: B1
     accented: споко́йно
@@ -1128,6 +1537,13 @@ words:
       standard: urgently (as a matter of urgency)
       alt:
         - without delay
+  "столько=so many":
+    cefr_level: A2
+    accented: сто́лько
+    en_gb:
+      standard: so many (so much, that many; also used as a numeral)
+      alt:
+        - so much
   "странно=strangely":
     cefr_level: B1
     accented: стра́нно
@@ -1142,6 +1558,15 @@ words:
       standard: terribly (in a frightening or very intense way)
       alt:
         - it is frightening
+  "строго=strictly":
+    cefr_level: B1
+    accented: стро́го
+    en_gb:
+      standard: strictly (in a strict manner)
+      alt:
+        - severely
+    forms:
+      comparative: стро́же
   "сюда=here":
     cefr_level: A1
     accented: сюда́
@@ -1265,6 +1690,34 @@ words:
         en_gb: After the illness it is hard for him to walk.
     forms:
       comparative: тяжеле́е
+  "уверенно=confidently":
+    cefr_level: B1
+    accented: уве́ренно
+    en_gb:
+      standard: confidently (with confidence)
+      alt:
+        - surely
+    forms:
+      comparative: уве́реннее
+  "удивительно=surprisingly":
+    cefr_level: B1
+    accented: удиви́тельно
+    en_gb:
+      standard: surprisingly (in an amazing way)
+      alt:
+        - amazingly
+    forms:
+      comparative: удиви́тельнее
+  "ужасно=terribly":
+    cefr_level: B1
+    accented: ужа́сно
+    en_gb:
+      standard: terribly (in a terrible way)
+      alt:
+        - awfully
+        - dreadfully
+    forms:
+      comparative: ужа́снее
   "холодно=coldly":
     cefr_level: A2
     accented: хо́лодно
@@ -1302,3 +1755,65 @@ words:
         en_gb: We often go to the cinema.
     forms:
       comparative: ча́ще
+  "честно=honestly":
+    cefr_level: B1
+    accented: че́стно
+    en_gb:
+      standard: honestly (in an honest way)
+      alt:
+        - sincerely
+        - frankly
+    forms:
+      comparative: честне́е
+  "чётко=clearly":
+    cefr_level: B1
+    accented: чётко
+    en_gb:
+      standard: clearly (in a precise, distinct way)
+      alt:
+        - precisely
+        - distinctly
+    forms:
+      comparative: чётче
+  "чрезвычайно=extremely":
+    cefr_level: B2
+    accented: чрезвыча́йно
+    en_gb:
+      standard: extremely (to a very great degree)
+      alt:
+        - exceedingly
+  "широко=widely":
+    cefr_level: B1
+    accented: широко́
+    en_gb:
+      standard: widely (over a wide area, to a great extent)
+      alt:
+        - broadly
+    forms:
+      comparative: шире́
+  "явно=obviously":
+    cefr_level: B1
+    accented: я́вно
+    en_gb:
+      standard: obviously (clearly, evidently)
+      alt:
+        - evidently
+  "ярко=brightly":
+    cefr_level: B1
+    accented: я́рко
+    en_gb:
+      standard: brightly (with bright colour or light)
+      alt:
+        - vividly
+    forms:
+      comparative: я́рче
+  "ясно=clearly":
+    cefr_level: A2
+    accented: я́сно
+    en_gb:
+      standard: clearly (it is clear, plainly)
+      alt:
+        - I see
+        - understood
+    forms:
+      comparative: я́снее
