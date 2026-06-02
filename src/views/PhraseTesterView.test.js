@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import PhraseTesterView from './PhraseTesterView.vue'
 import { state } from '../stores/vocab.js'
+import { phraseTokens } from '../lib/phrases.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab so the phrase bank is populated.
@@ -58,6 +59,29 @@ describe('PhraseTesterView', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.answered).toBe(false)
     expect(wrapper.vm.celebrating).toBe(false)
+  })
+
+  it('accepts duplicate-word tokens placed in swapped positions (easy mode)', async () => {
+    const wrapper = mount(PhraseTesterView)
+    await wrapper.findAll('button.card')[0].trigger('click')
+
+    // Override with a phrase that has two identical words so we can test equivalence.
+    const dupePhrase = { id: 'dupe-test', ru: 'кот сидит рядом с котом', en: 'the cat sees the cat' }
+    wrapper.vm.current = dupePhrase
+    wrapper.vm.bank = phraseTokens(dupePhrase.en).map((text, id) => ({ id, text }))
+    // bank: [{id:0,'the'},{id:1,'cat'},{id:2,'sees'},{id:3,'the'},{id:4,'cat'}]
+    await wrapper.vm.$nextTick()
+
+    // Place tokens to form the correct phrase but using swapped IDs for the two 'the' tiles:
+    // use id=3 (second 'the') for the first position, id=0 (first 'the') for the fourth.
+    wrapper.vm.placeToken({ id: 3, text: 'the' })   // first slot — wrong ID, same text
+    wrapper.vm.placeToken({ id: 1, text: 'cat' })
+    wrapper.vm.placeToken({ id: 2, text: 'sees' })
+    wrapper.vm.placeToken({ id: 0, text: 'the' })   // fourth slot — wrong ID, same text
+    wrapper.vm.placeToken({ id: 4, text: 'cat' })
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.wasCorrect).toBe(true)
   })
 
   it('grades a guided-keyboard answer that omits punctuation and stress', async () => {

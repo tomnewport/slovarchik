@@ -57,6 +57,36 @@ describe('ListeningView', () => {
     expect(wrapper.text()).toContain('Correct')
   })
 
+  it('accepts duplicate-word tiles placed with swapped IDs as correct', async () => {
+    const wrapper = mount(ListeningView)
+    await startDrill(wrapper)
+
+    // Inject a phrase with a repeated word so both occurrences get separate tiles.
+    const dupePhrase = { id: 'dupe-listen', ru: 'кот видит кота', en: 'the cat sees the cat' }
+    wrapper.vm.current = dupePhrase
+    // Build the bank directly: five real tiles (two 'the', two 'cat', one 'sees'), no decoys.
+    wrapper.vm.bank = [
+      { id: 0, text: 'the', decoy: false },
+      { id: 1, text: 'cat', decoy: false },
+      { id: 2, text: 'sees', decoy: false },
+      { id: 3, text: 'the', decoy: false },
+      { id: 4, text: 'cat', decoy: false },
+    ]
+    await wrapper.vm.$nextTick()
+
+    // Place tokens using swapped IDs for the duplicate words:
+    // use tile id=3 (second 'the') in the first 'the' position, id=0 for the fourth slot.
+    wrapper.vm.place({ id: 3, text: 'the', decoy: false })
+    wrapper.vm.place({ id: 1, text: 'cat', decoy: false })
+    wrapper.vm.place({ id: 2, text: 'sees', decoy: false })
+    wrapper.vm.place({ id: 0, text: 'the', decoy: false })
+    wrapper.vm.place({ id: 4, text: 'cat', decoy: false })
+    await wrapper.vm.$nextTick()
+
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.vm.wasCorrect).toBe(true)
+  })
+
   it('marks a wrong order incorrect and reveals the answer', async () => {
     vi.useFakeTimers()
     const wrapper = mount(ListeningView)

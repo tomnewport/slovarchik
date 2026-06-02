@@ -127,4 +127,11 @@ describe('buildListeningBank', () => {
     const bank = buildListeningBank('a b c', ['x', 'y'], 2, seededRng(2))
     expect(new Set(bank.map((t) => t.id)).size).toBe(bank.length)
   })
+  it('creates a separate tile for each occurrence of a repeated word', () => {
+    const bank = buildListeningBank('the cat sat on the mat', [], 0, seededRng(1))
+    const theTiles = bank.filter((t) => t.text === 'the')
+    expect(theTiles).toHaveLength(2)
+    expect(new Set(theTiles.map((t) => t.id)).size).toBe(2)
+    expect(bank).toHaveLength(6) // six words, two of which are 'the'
+  })
 })
