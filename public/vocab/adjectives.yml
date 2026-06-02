@@ -885,7 +885,7 @@ words:
       f: ве́жливая
       n: ве́жливое
       pl: ве́жливые
-      comparative: ве́жливее
+      comparative: вежли́вее
     declension:
       m_nom: ве́жливый
       m_gen: ве́жливого
@@ -1450,7 +1450,7 @@ words:
     en_gb:
       standard: internal (relating to the inside)
     usage:
-      - ru: Вну́тренний го́лос сказа́л ему́ остановиться.
+      - ru: Вну́тренний го́лос сказа́л ему́ останови́ться.
         en_gb: His inner voice told him to stop.
     forms:
       m: вну́тренний
@@ -2937,7 +2937,7 @@ words:
       f: далёкая
       n: далёкое
       pl: далёкие
-      comparative: дальше
+      comparative: да́льше
     declension:
       m_nom: далёкий
       m_gen: далёкого
@@ -6921,7 +6921,7 @@ words:
       f: ми́лая
       n: ми́лое
       pl: ми́лые
-      comparative: мила́
+      comparative: миле́е
     declension:
       m_nom: ми́лый
       m_gen: ми́лого
@@ -12277,7 +12277,7 @@ words:
       - colours and textures
       - nature
     en_gb:
-      standard: blue (the colour of a clear sky)
+      standard: blue (dark or deep blue)
     usage:
       - ru: Над на́ми си́нее не́бо.
         en_gb: Above us is the blue sky.
@@ -13621,13 +13621,15 @@ words:
       pl_acc: стальны́е
       pl_ins: стальны́ми
       pl_pre: стальны́х
-  "старинный=ancient":
+  "старинный=antique":
     cefr_level: B1
     accented: стари́нный
     collections:
       - history
     en_gb:
-      standard: ancient (very old or antique)
+      standard: antique (old, from a former era)
+      alt:
+        - old-fashioned
     forms:
       m: стари́нный
       f: стари́нная
@@ -15661,16 +15663,16 @@ words:
       pl_acc: ца́рские
       pl_ins: ца́рскими
       pl_pre: ца́рских
-  "цветной=colourful":
+  "цветной=coloured":
     cefr_level: B1
     accented: цветно́й
     collections:
       - colours and textures
       - the arts
     en_gb:
-      standard: colourful (having many colours)
+      standard: coloured (in colour, as opposed to black-and-white)
       alt:
-        - coloured
+        - colourful
     usage:
       - ru: Де́ти рису́ют цветны́ми карандаша́ми.
         en_gb: The children draw with coloured pencils.
