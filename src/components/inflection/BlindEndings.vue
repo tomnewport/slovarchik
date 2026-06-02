@@ -62,7 +62,10 @@ onMounted(() => speak(props.paradigm.lemma))
             <small v-if="row.sub" class="muted">{{ row.sub }}</small>
           </th>
           <td v-for="col in paradigm.cols" :key="col.key">
-            <div v-if="cellAt(row.key, col.key)" class="ecell">
+            <div
+              v-if="cellAt(row.key, col.key) && (!checked || correctCell(cellKey(row.key, col.key)))"
+              class="ecell"
+            >
               <span class="muted" lang="ru">{{ stems[cellKey(row.key, col.key)] }}</span>
               <input
                 v-model="entries[cellKey(row.key, col.key)]"
@@ -71,20 +74,24 @@ onMounted(() => speak(props.paradigm.lemma))
                 class="ending-input"
                 :disabled="checked"
                 :style="{
-                  borderColor: checked
-                    ? correctCell(cellKey(row.key, col.key))
-                      ? 'var(--good)'
-                      : 'var(--bad)'
-                    : undefined,
+                  borderColor: checked ? 'var(--good)' : undefined,
                 }"
                 autocomplete="off"
                 autocapitalize="off"
                 spellcheck="false"
               />
             </div>
-            <div v-if="checked && cellAt(row.key, col.key) && !correctCell(cellKey(row.key, col.key))" class="speak-row muted" style="font-size: 0.8rem">
-              <span lang="ru">{{ endings[cellKey(row.key, col.key)] || '∅' }}</span>
-              <SpeakButton :text="cellAt(row.key, col.key).form" />
+            <div
+              v-if="checked && cellAt(row.key, col.key) && !correctCell(cellKey(row.key, col.key))"
+              class="correction"
+            >
+              <div class="wrong-attempt" lang="ru">
+                <span class="muted">{{ stems[cellKey(row.key, col.key)] }}</span><span>{{ entries[cellKey(row.key, col.key)] || '∅' }}</span>
+              </div>
+              <div class="correct-form speak-row">
+                <span lang="ru">{{ cellAt(row.key, col.key).form }}</span>
+                <SpeakButton :text="cellAt(row.key, col.key).form" />
+              </div>
             </div>
           </td>
         </tr>
@@ -129,5 +136,20 @@ onMounted(() => speak(props.paradigm.lemma))
   border: 1px solid var(--border);
   background: var(--bg-soft);
   color: var(--text);
+}
+.correction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+.wrong-attempt {
+  font-size: 0.8rem;
+  text-decoration: line-through;
+  color: var(--bad);
+}
+.correct-form {
+  font-size: 1.2rem;
 }
 </style>

@@ -119,7 +119,15 @@ function check() {
               @dragover.prevent
               @drop.prevent="(e) => onDrop(e, cellKey(row.key, col.key))"
             >
-              <span v-if="placed[cellKey(row.key, col.key)] != null" lang="ru">
+              <div
+                v-if="checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key))"
+                class="correction"
+                lang="ru"
+              >
+                <span class="wrong-attempt">{{ chipById.get(placed[cellKey(row.key, col.key)]).form }}</span>
+                <span class="correct-form">{{ cellAt(row.key, col.key).form }}</span>
+              </div>
+              <span v-else-if="placed[cellKey(row.key, col.key)] != null" lang="ru">
                 {{ chipById.get(placed[cellKey(row.key, col.key)]).form }}
               </span>
               <span v-else class="muted">·</span>
@@ -200,5 +208,20 @@ function check() {
 .drop.wrong {
   border-color: var(--bad);
   background: color-mix(in srgb, var(--bad) 18%, var(--card));
+}
+.correction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+.wrong-attempt {
+  font-size: 0.75rem;
+  text-decoration: line-through;
+  color: var(--bad);
+  opacity: 0.9;
+}
+.correct-form {
+  font-size: 1.1rem;
 }
 </style>
