@@ -40,6 +40,13 @@ words:
         en_gb: The shop is very near.
     forms:
       comparative: бли́же
+  "более=more":
+    cefr_level: A2
+    accented: бо́лее
+    en_gb:
+      standard: more (to a greater degree; comparative particle)
+      alt:
+        - more so
   "больно=painfully":
     cefr_level: B1
     accented: бо́льно
@@ -147,6 +154,13 @@ words:
       standard: "eternally (for ever; also: constantly, always)"
       alt:
         - always (informally, of annoying habits)
+  "видимо=apparently":
+    cefr_level: B1
+    accented: ви́димо
+    en_gb:
+      standard: apparently (it seems; evidently)
+      alt:
+        - evidently
   "видно=evidently":
     cefr_level: B1
     accented: ви́дно
@@ -303,6 +317,14 @@ words:
       alt:
         - though
         - incidentally
+  "вроде=sort of":
+    cefr_level: B1
+    accented: вро́де
+    en_gb:
+      standard: sort of (like; approximately; it seems)
+      alt:
+        - like
+        - it seems
   "всегда=always":
     cefr_level: A1
     accented: всегда́
@@ -340,6 +362,14 @@ words:
       standard: high (at or to a great height)
     forms:
       comparative: вы́ше
+  "где=where":
+    cefr_level: A1
+    accented: где
+    en_gb:
+      standard: where (at what place)
+    usage:
+      - ru: Где ты живёшь?
+        en_gb: Where do you live?
   "глубоко=deeply":
     cefr_level: B1
     accented: глубоко́
@@ -440,6 +470,14 @@ words:
       standard: for a long time (over a long period)
     forms:
       comparative: до́льше
+  "домой=home":
+    cefr_level: A1
+    accented: домо́й
+    en_gb:
+      standard: home (to one's home; homeward)
+    usage:
+      - ru: Я иду́ домо́й.
+        en_gb: I am going home.
   "дорого=expensively":
     cefr_level: A2
     accented: до́рого
@@ -468,6 +506,18 @@ words:
       standard: naturally (of course; in a natural way)
       alt:
         - of course
+  "ещё=still":
+    cefr_level: A1
+    accented: ещё
+    en_gb:
+      standard: still (continuing up to now)
+      alt:
+        - yet
+        - more
+        - another
+    usage:
+      - ru: Она́ ещё спит.
+        en_gb: She is still sleeping.
   "жалко=it is a pity":
     cefr_level: B1
     accented: жа́лко
@@ -619,6 +669,14 @@ words:
       standard: by the way (introducing a related remark)
       alt:
         - incidentally
+  "куда=where to":
+    cefr_level: A1
+    accented: куда́
+    en_gb:
+      standard: where to (to what place; whither)
+    usage:
+      - ru: Куда́ ты идёшь?
+        en_gb: Where are you going?
   "ладно=alright":
     cefr_level: A2
     accented: ла́дно
@@ -650,6 +708,13 @@ words:
         en_gb: He solved the problem easily.
     forms:
       comparative: ле́гче
+  "лишь=only":
+    cefr_level: B1
+    accented: лишь
+    en_gb:
+      standard: only (merely, no more than)
+      alt:
+        - merely
   "ловко=deftly":
     cefr_level: B2
     accented: ло́вко
@@ -767,6 +832,17 @@ words:
       standard: forever (for all time)
       alt:
         - for good
+  "надо=necessary":
+    cefr_level: A1
+    accented: на́до
+    en_gb:
+      standard: necessary (one must; it is necessary)
+      alt:
+        - one must
+        - it is necessary
+    usage:
+      - ru: На́до идти́ домо́й.
+        en_gb: One must go home.
   "назад=back":
     cefr_level: A2
     accented: наза́д
@@ -855,6 +931,14 @@ words:
       standard: so much (to such a degree)
       alt:
         - to such an extent
+  "не=not":
+    cefr_level: A1
+    accented: не
+    en_gb:
+      standard: not (negation particle)
+    usage:
+      - ru: Я не зна́ю.
+        en_gb: I do not know.
   "невозможно=impossibly":
     cefr_level: B1
     accented: невозмо́жно
@@ -1057,6 +1141,14 @@ words:
       standard: finally (definitively, once and for all)
       alt:
         - definitively
+  "опять=again":
+    cefr_level: A2
+    accented: опя́ть
+    en_gb:
+      standard: again (once more)
+    usage:
+      - ru: Ты опя́ть опозда́л!
+        en_gb: You are late again!
   "особенно=especially":
     cefr_level: A2
     accented: осо́бенно
@@ -1123,6 +1215,13 @@ words:
     accented: повсю́ду
     en_gb:
       standard: everywhere (all around, in every place)
+  "позади=behind":
+    cefr_level: B1
+    accented: позади́
+    en_gb:
+      standard: behind (at the back; in the rear)
+      alt:
+        - in the back
   "поздно=late":
     cefr_level: A2
     accented: по́здно
@@ -1172,6 +1271,17 @@ words:
       standard: constantly (all the time, without stopping)
       alt:
         - continuously
+  "потом=then":
+    cefr_level: A1
+    accented: пото́м
+    en_gb:
+      standard: then (afterwards; later)
+      alt:
+        - afterwards
+        - later
+    usage:
+      - ru: Снача́ла поешь, пото́м иди́.
+        en_gb: Eat first, then go.
   "потому=therefore":
     cefr_level: A2
     accented: потому́
@@ -1179,6 +1289,14 @@ words:
       standard: therefore (for that reason, usually in "потому что")
       alt:
         - that is why
+  "почему=why":
+    cefr_level: A1
+    accented: почему́
+    en_gb:
+      standard: why (for what reason)
+    usage:
+      - ru: Почему́ ты гру́стный?
+        en_gb: Why are you sad?
   "почти=almost":
     cefr_level: B1
     accented: почти́
@@ -1230,6 +1348,16 @@ words:
         - nicely
     forms:
       comparative: прия́тнее
+  "просто=simply":
+    cefr_level: A1
+    accented: про́сто
+    en_gb:
+      standard: simply (in a simple way; just)
+      alt:
+        - just
+    usage:
+      - ru: Э́то про́сто невероя́тно.
+        en_gb: It is simply unbelievable.
   "прямо=straight ahead":
     cefr_level: A2
     accented: пря́мо
@@ -1636,6 +1764,16 @@ words:
       standard: quietly (very softly, gently)
       alt:
         - softly
+  "только=only":
+    cefr_level: A1
+    accented: то́лько
+    en_gb:
+      standard: only (no more than; exclusively)
+      alt:
+        - just
+    usage:
+      - ru: Я то́лько что пришёл.
+        en_gb: I have just arrived.
   "точно=exactly":
     cefr_level: B1
     accented: то́чно
@@ -1718,6 +1856,14 @@ words:
         - dreadfully
     forms:
       comparative: ужа́снее
+  "уже=already":
+    cefr_level: A1
+    accented: уже́
+    en_gb:
+      standard: already (by now; so soon)
+    usage:
+      - ru: Он уже́ до́ма.
+        en_gb: He is already at home.
   "холодно=coldly":
     cefr_level: A2
     accented: хо́лодно
