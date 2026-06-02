@@ -445,6 +445,44 @@ words:
       pl_acc: ближа́йшие
       pl_ins: ближа́йшими
       pl_pre: ближа́йших
+  "близкий=close":
+    cefr_level: A2
+    accented: бли́зкий
+    en_gb:
+      standard: close (near in space or time)
+      alt:
+        - near
+    forms:
+      m: бли́зкий
+      f: бли́зкая
+      n: бли́зкое
+      pl: бли́зкие
+      comparative: бли́же
+    declension:
+      m_nom: бли́зкий
+      m_gen: бли́зкого
+      m_dat: бли́зкому
+      m_acc: бли́зкий
+      m_ins: бли́зким
+      m_pre: бли́зком
+      n_nom: бли́зкое
+      n_gen: бли́зкого
+      n_dat: бли́зкому
+      n_acc: бли́зкое
+      n_ins: бли́зким
+      n_pre: бли́зком
+      f_nom: бли́зкая
+      f_gen: бли́зкой
+      f_dat: бли́зкой
+      f_acc: бли́зкую
+      f_ins: бли́зкой
+      f_pre: бли́зкой
+      pl_nom: бли́зкие
+      pl_gen: бли́зких
+      pl_dat: бли́зким
+      pl_acc: бли́зкие
+      pl_ins: бли́зкими
+      pl_pre: бли́зких
   "богатый=rich":
     cefr_level: B1
     accented: бога́тый
@@ -714,6 +752,44 @@ words:
       pl_acc: бы́вшие
       pl_ins: бы́вшими
       pl_pre: бы́вших
+  "быстрый=fast":
+    cefr_level: A2
+    accented: бы́стрый
+    en_gb:
+      standard: fast (moving quickly)
+      alt:
+        - quick
+    forms:
+      m: бы́стрый
+      f: бы́страя
+      n: бы́строе
+      pl: бы́стрые
+      comparative: быстре́е
+    declension:
+      m_nom: бы́стрый
+      m_gen: бы́строго
+      m_dat: бы́строму
+      m_acc: бы́стрый
+      m_ins: бы́стрым
+      m_pre: бы́стром
+      n_nom: бы́строе
+      n_gen: бы́строго
+      n_dat: бы́строму
+      n_acc: бы́строе
+      n_ins: бы́стрым
+      n_pre: бы́стром
+      f_nom: бы́страя
+      f_gen: бы́строй
+      f_dat: бы́строй
+      f_acc: бы́струю
+      f_ins: бы́строй
+      f_pre: бы́строй
+      pl_nom: бы́стрые
+      pl_gen: бы́стрых
+      pl_dat: бы́стрым
+      pl_acc: бы́стрые
+      pl_ins: бы́стрыми
+      pl_pre: бы́стрых
   "важный=important":
     cefr_level: A2
     accented: ва́жный
@@ -1053,6 +1129,80 @@ words:
       pl_acc: ве́чные
       pl_ins: ве́чными
       pl_pre: ве́чных
+  "взрослый=adult":
+    cefr_level: A2
+    accented: взро́слый
+    en_gb:
+      standard: adult (fully grown)
+      alt:
+        - grown-up
+    forms:
+      m: взро́слый
+      f: взро́слая
+      n: взро́слое
+      pl: взро́слые
+    declension:
+      m_nom: взро́слый
+      m_gen: взро́слого
+      m_dat: взро́слому
+      m_acc: взро́слый
+      m_ins: взро́слым
+      m_pre: взро́слом
+      n_nom: взро́слое
+      n_gen: взро́слого
+      n_dat: взро́слому
+      n_acc: взро́слое
+      n_ins: взро́слым
+      n_pre: взро́слом
+      f_nom: взро́слая
+      f_gen: взро́слой
+      f_dat: взро́слой
+      f_acc: взро́слую
+      f_ins: взро́слой
+      f_pre: взро́слой
+      pl_nom: взро́слые
+      pl_gen: взро́слых
+      pl_dat: взро́слым
+      pl_acc: взро́слые
+      pl_ins: взро́слыми
+      pl_pre: взро́слых
+  "видимый=visible":
+    cefr_level: B2
+    accented: ви́димый
+    en_gb:
+      standard: visible (able to be seen)
+      alt:
+        - apparent
+    forms:
+      m: ви́димый
+      f: ви́димая
+      n: ви́димое
+      pl: ви́димые
+    declension:
+      m_nom: ви́димый
+      m_gen: ви́димого
+      m_dat: ви́димому
+      m_acc: ви́димый
+      m_ins: ви́димым
+      m_pre: ви́димом
+      n_nom: ви́димое
+      n_gen: ви́димого
+      n_dat: ви́димому
+      n_acc: ви́димое
+      n_ins: ви́димым
+      n_pre: ви́димом
+      f_nom: ви́димая
+      f_gen: ви́димой
+      f_dat: ви́димой
+      f_acc: ви́димую
+      f_ins: ви́димой
+      f_pre: ви́димой
+      pl_nom: ви́димые
+      pl_gen: ви́димых
+      pl_dat: ви́димым
+      pl_acc: ви́димые
+      pl_ins: ви́димыми
+      pl_pre: ви́димых
   "виноватый=guilty":
     cefr_level: B1
     accented: вино́ватый
@@ -1172,6 +1322,45 @@ words:
       pl_acc: вку́сные
       pl_ins: вку́сными
       pl_pre: вку́сных
+  "влажный=damp":
+    cefr_level: B1
+    accented: вла́жный
+    en_gb:
+      standard: damp (slightly wet)
+      alt:
+        - humid
+        - moist
+    forms:
+      m: вла́жный
+      f: вла́жная
+      n: вла́жное
+      pl: вла́жные
+      comparative: вла́жнее
+    declension:
+      m_nom: вла́жный
+      m_gen: вла́жного
+      m_dat: вла́жному
+      m_acc: вла́жный
+      m_ins: вла́жным
+      m_pre: вла́жном
+      n_nom: вла́жное
+      n_gen: вла́жного
+      n_dat: вла́жному
+      n_acc: вла́жное
+      n_ins: вла́жным
+      n_pre: вла́жном
+      f_nom: вла́жная
+      f_gen: вла́жной
+      f_dat: вла́жной
+      f_acc: вла́жную
+      f_ins: вла́жной
+      f_pre: вла́жной
+      pl_nom: вла́жные
+      pl_gen: вла́жных
+      pl_dat: вла́жным
+      pl_acc: вла́жные
+      pl_ins: вла́жными
+      pl_pre: вла́жных
   "военный=military":
     cefr_level: B2
     accented: вое́нный
@@ -1213,6 +1402,44 @@ words:
       pl_acc: вое́нные
       pl_ins: вое́нными
       pl_pre: вое́нных
+  "воздушный=aerial":
+    cefr_level: B1
+    accented: возду́шный
+    en_gb:
+      standard: aerial (of the air)
+      alt:
+        - air (as modifier)
+        - airy
+    forms:
+      m: возду́шный
+      f: возду́шная
+      n: возду́шное
+      pl: возду́шные
+    declension:
+      m_nom: возду́шный
+      m_gen: возду́шного
+      m_dat: возду́шному
+      m_acc: возду́шный
+      m_ins: возду́шным
+      m_pre: возду́шном
+      n_nom: возду́шное
+      n_gen: возду́шного
+      n_dat: возду́шному
+      n_acc: возду́шное
+      n_ins: возду́шным
+      n_pre: возду́шном
+      f_nom: возду́шная
+      f_gen: возду́шной
+      f_dat: возду́шной
+      f_acc: возду́шную
+      f_ins: возду́шной
+      f_pre: возду́шной
+      pl_nom: возду́шные
+      pl_gen: возду́шных
+      pl_dat: возду́шным
+      pl_acc: возду́шные
+      pl_ins: возду́шными
+      pl_pre: возду́шных
   "возможный=possible":
     cefr_level: B1
     accented: возмо́жный
@@ -1283,6 +1510,43 @@ words:
       pl_acc: волше́бные
       pl_ins: волше́бными
       pl_pre: волше́бных
+  "вольный=free":
+    cefr_level: B2
+    accented: во́льный
+    en_gb:
+      standard: free (unconstrained, at liberty)
+      alt:
+        - unrestrained
+    forms:
+      m: во́льный
+      f: во́льная
+      n: во́льное
+      pl: во́льные
+    declension:
+      m_nom: во́льный
+      m_gen: во́льного
+      m_dat: во́льному
+      m_acc: во́льный
+      m_ins: во́льным
+      m_pre: во́льном
+      n_nom: во́льное
+      n_gen: во́льного
+      n_dat: во́льному
+      n_acc: во́льное
+      n_ins: во́льным
+      n_pre: во́льном
+      f_nom: во́льная
+      f_gen: во́льной
+      f_dat: во́льной
+      f_acc: во́льную
+      f_ins: во́льной
+      f_pre: во́льной
+      pl_nom: во́льные
+      pl_gen: во́льных
+      pl_dat: во́льным
+      pl_acc: во́льные
+      pl_ins: во́льными
+      pl_pre: во́льных
   "вооружённый=armed":
     cefr_level: B2
     accented: вооружённый
@@ -1320,6 +1584,44 @@ words:
       pl_acc: вооружённые
       pl_ins: вооружёнными
       pl_pre: вооружённых
+  "восточный=eastern":
+    cefr_level: A2
+    accented: восто́чный
+    en_gb:
+      standard: eastern (in or towards the east)
+      alt:
+        - oriental
+        - east (as modifier)
+    forms:
+      m: восто́чный
+      f: восто́чная
+      n: восто́чное
+      pl: восто́чные
+    declension:
+      m_nom: восто́чный
+      m_gen: восто́чного
+      m_dat: восто́чному
+      m_acc: восто́чный
+      m_ins: восто́чным
+      m_pre: восто́чном
+      n_nom: восто́чное
+      n_gen: восто́чного
+      n_dat: восто́чному
+      n_acc: восто́чное
+      n_ins: восто́чным
+      n_pre: восто́чном
+      f_nom: восто́чная
+      f_gen: восто́чной
+      f_dat: восто́чной
+      f_acc: восто́чную
+      f_ins: восто́чной
+      f_pre: восто́чной
+      pl_nom: восто́чные
+      pl_gen: восто́чных
+      pl_dat: восто́чным
+      pl_acc: восто́чные
+      pl_ins: восто́чными
+      pl_pre: восто́чных
   "временный=temporary":
     cefr_level: B1
     accented: вре́менный
@@ -1390,6 +1692,44 @@ words:
       pl_acc: всео́бщие
       pl_ins: всео́бщими
       pl_pre: всео́бщих
+  "всякий=any":
+    cefr_level: B1
+    accented: вся́кий
+    en_gb:
+      standard: any (every, all kinds of)
+      alt:
+        - every
+        - various
+    forms:
+      m: вся́кий
+      f: вся́кая
+      n: вся́кое
+      pl: вся́кие
+    declension:
+      m_nom: вся́кий
+      m_gen: вся́кого
+      m_dat: вся́кому
+      m_acc: вся́кий
+      m_ins: вся́ким
+      m_pre: вся́ком
+      n_nom: вся́кое
+      n_gen: вся́кого
+      n_dat: вся́кому
+      n_acc: вся́кое
+      n_ins: вся́ким
+      n_pre: вся́ком
+      f_nom: вся́кая
+      f_gen: вся́кой
+      f_dat: вся́кой
+      f_acc: вся́кую
+      f_ins: вся́кой
+      f_pre: вся́кой
+      pl_nom: вся́кие
+      pl_gen: вся́ких
+      pl_dat: вся́ким
+      pl_acc: вся́кие
+      pl_ins: вся́кими
+      pl_pre: вся́ких
   "вчерашний=yesterday's":
     cefr_level: A2
     accented: вчера́шний
@@ -1427,6 +1767,43 @@ words:
       pl_acc: вчера́шние
       pl_ins: вчера́шними
       pl_pre: вчера́шних
+  "вынужденный=forced":
+    cefr_level: B2
+    accented: вы́нужденный
+    en_gb:
+      standard: forced (compelled by circumstances)
+      alt:
+        - compelled
+    forms:
+      m: вы́нужденный
+      f: вы́нужденная
+      n: вы́нужденное
+      pl: вы́нужденные
+    declension:
+      m_nom: вы́нужденный
+      m_gen: вы́нужденного
+      m_dat: вы́нужденному
+      m_acc: вы́нужденный
+      m_ins: вы́нужденным
+      m_pre: вы́нужденном
+      n_nom: вы́нужденное
+      n_gen: вы́нужденного
+      n_dat: вы́нужденному
+      n_acc: вы́нужденное
+      n_ins: вы́нужденным
+      n_pre: вы́нужденном
+      f_nom: вы́нужденная
+      f_gen: вы́нужденной
+      f_dat: вы́нужденной
+      f_acc: вы́нужденную
+      f_ins: вы́нужденной
+      f_pre: вы́нужденной
+      pl_nom: вы́нужденные
+      pl_gen: вы́нужденных
+      pl_dat: вы́нужденным
+      pl_acc: вы́нужденные
+      pl_ins: вы́нужденными
+      pl_pre: вы́нужденных
   "высокий=tall":
     cefr_level: A2
     accented: высо́кий
@@ -1471,6 +1848,41 @@ words:
       pl_acc: высо́кие
       pl_ins: высо́кими
       pl_pre: высо́ких
+  "генеральный=general":
+    cefr_level: B1
+    accented: генера́льный
+    en_gb:
+      standard: general (chief, main)
+    forms:
+      m: генера́льный
+      f: генера́льная
+      n: генера́льное
+      pl: генера́льные
+    declension:
+      m_nom: генера́льный
+      m_gen: генера́льного
+      m_dat: генера́льному
+      m_acc: генера́льный
+      m_ins: генера́льным
+      m_pre: генера́льном
+      n_nom: генера́льное
+      n_gen: генера́льного
+      n_dat: генера́льному
+      n_acc: генера́льное
+      n_ins: генера́льным
+      n_pre: генера́льном
+      f_nom: генера́льная
+      f_gen: генера́льной
+      f_dat: генера́льной
+      f_acc: генера́льную
+      f_ins: генера́льной
+      f_pre: генера́льной
+      pl_nom: генера́льные
+      pl_gen: генера́льных
+      pl_dat: генера́льным
+      pl_acc: генера́льные
+      pl_ins: генера́льными
+      pl_pre: генера́льных
   "германский=German":
     cefr_level: B1
     accented: герма́нский
@@ -1707,6 +2119,44 @@ words:
       pl_acc: глу́пые
       pl_ins: глу́пыми
       pl_pre: глу́пых
+  "глухой=deaf":
+    cefr_level: B1
+    accented: глухо́й
+    en_gb:
+      standard: deaf (unable to hear)
+      alt:
+        - muffled (of sounds)
+        - remote (of places)
+    forms:
+      m: глухо́й
+      f: глуха́я
+      n: глухо́е
+      pl: глухи́е
+    declension:
+      m_nom: глухо́й
+      m_gen: глухо́го
+      m_dat: глухо́му
+      m_acc: глухо́й
+      m_ins: глухи́м
+      m_pre: глухо́м
+      n_nom: глухо́е
+      n_gen: глухо́го
+      n_dat: глухо́му
+      n_acc: глухо́е
+      n_ins: глухи́м
+      n_pre: глухо́м
+      f_nom: глуха́я
+      f_gen: глухо́й
+      f_dat: глухо́й
+      f_acc: глуху́ю
+      f_ins: глухо́й
+      f_pre: глухо́й
+      pl_nom: глухи́е
+      pl_gen: глухи́х
+      pl_dat: глухи́м
+      pl_acc: глухи́е
+      pl_ins: глухи́ми
+      pl_pre: глухи́х
   "голодный=hungry":
     cefr_level: A2
     accented: голо́дный
@@ -1789,6 +2239,44 @@ words:
       pl_acc: голубы́е
       pl_ins: голубы́ми
       pl_pre: голубы́х
+  "голый=naked":
+    cefr_level: B1
+    accented: го́лый
+    en_gb:
+      standard: naked (without clothes)
+      alt:
+        - bare
+        - nude
+    forms:
+      m: го́лый
+      f: го́лая
+      n: го́лое
+      pl: го́лые
+    declension:
+      m_nom: го́лый
+      m_gen: го́лого
+      m_dat: го́лому
+      m_acc: го́лый
+      m_ins: го́лым
+      m_pre: го́лом
+      n_nom: го́лое
+      n_gen: го́лого
+      n_dat: го́лому
+      n_acc: го́лое
+      n_ins: го́лым
+      n_pre: го́лом
+      f_nom: го́лая
+      f_gen: го́лой
+      f_dat: го́лой
+      f_acc: го́лую
+      f_ins: го́лой
+      f_pre: го́лой
+      pl_nom: го́лые
+      pl_gen: го́лых
+      pl_dat: го́лым
+      pl_acc: го́лые
+      pl_ins: го́лыми
+      pl_pre: го́лых
   "гордый=proud":
     cefr_level: B1
     accented: го́рдый
@@ -1829,6 +2317,79 @@ words:
       pl_acc: го́рдые
       pl_ins: го́рдыми
       pl_pre: го́рдых
+  "горный=mountain":
+    cefr_level: B1
+    accented: го́рный
+    en_gb:
+      standard: mountain (of or in the mountains)
+    forms:
+      m: го́рный
+      f: го́рная
+      n: го́рное
+      pl: го́рные
+    declension:
+      m_nom: го́рный
+      m_gen: го́рного
+      m_dat: го́рному
+      m_acc: го́рный
+      m_ins: го́рным
+      m_pre: го́рном
+      n_nom: го́рное
+      n_gen: го́рного
+      n_dat: го́рному
+      n_acc: го́рное
+      n_ins: го́рным
+      n_pre: го́рном
+      f_nom: го́рная
+      f_gen: го́рной
+      f_dat: го́рной
+      f_acc: го́рную
+      f_ins: го́рной
+      f_pre: го́рной
+      pl_nom: го́рные
+      pl_gen: го́рных
+      pl_dat: го́рным
+      pl_acc: го́рные
+      pl_ins: го́рными
+      pl_pre: го́рных
+  "горький=bitter":
+    cefr_level: B1
+    accented: го́рький
+    en_gb:
+      standard: bitter (having a sharp, unpleasant taste)
+      alt:
+        - harsh
+    forms:
+      m: го́рький
+      f: го́рькая
+      n: го́рькое
+      pl: го́рькие
+      comparative: горче́
+    declension:
+      m_nom: го́рький
+      m_gen: го́рького
+      m_dat: го́рькому
+      m_acc: го́рький
+      m_ins: го́рьким
+      m_pre: го́рьком
+      n_nom: го́рькое
+      n_gen: го́рького
+      n_dat: го́рькому
+      n_acc: го́рькое
+      n_ins: го́рьким
+      n_pre: го́рьком
+      f_nom: го́рькая
+      f_gen: го́рькой
+      f_dat: го́рькой
+      f_acc: го́рькую
+      f_ins: го́рькой
+      f_pre: го́рькой
+      pl_nom: го́рькие
+      pl_gen: го́рьких
+      pl_dat: го́рьким
+      pl_acc: го́рькие
+      pl_ins: го́рькими
+      pl_pre: го́рьких
   "горячий=hot":
     cefr_level: A2
     accented: горя́чий
@@ -1907,6 +2468,43 @@ words:
       pl_acc: госуда́рственные
       pl_ins: госуда́рственными
       pl_pre: госуда́рственных
+  "готовый=ready":
+    cefr_level: A2
+    accented: гото́вый
+    en_gb:
+      standard: ready (prepared)
+      alt:
+        - willing
+    forms:
+      m: гото́вый
+      f: гото́вая
+      n: гото́вое
+      pl: гото́вые
+    declension:
+      m_nom: гото́вый
+      m_gen: гото́вого
+      m_dat: гото́вому
+      m_acc: гото́вый
+      m_ins: гото́вым
+      m_pre: гото́вом
+      n_nom: гото́вое
+      n_gen: гото́вого
+      n_dat: гото́вому
+      n_acc: гото́вое
+      n_ins: гото́вым
+      n_pre: гото́вом
+      f_nom: гото́вая
+      f_gen: гото́вой
+      f_dat: гото́вой
+      f_acc: гото́вую
+      f_ins: гото́вой
+      f_pre: гото́вой
+      pl_nom: гото́вые
+      pl_gen: гото́вых
+      pl_dat: гото́вым
+      pl_acc: гото́вые
+      pl_ins: гото́выми
+      pl_pre: гото́вых
   "гражданский=civil":
     cefr_level: B1
     accented: гражда́нский
@@ -2314,6 +2912,43 @@ words:
       pl_acc: да́нные
       pl_ins: да́нными
       pl_pre: да́нных
+  "дежурный=on duty":
+    cefr_level: B1
+    accented: дежу́рный
+    en_gb:
+      standard: on duty (currently responsible)
+      alt:
+        - duty (as modifier)
+    forms:
+      m: дежу́рный
+      f: дежу́рная
+      n: дежу́рное
+      pl: дежу́рные
+    declension:
+      m_nom: дежу́рный
+      m_gen: дежу́рного
+      m_dat: дежу́рному
+      m_acc: дежу́рный
+      m_ins: дежу́рным
+      m_pre: дежу́рном
+      n_nom: дежу́рное
+      n_gen: дежу́рного
+      n_dat: дежу́рному
+      n_acc: дежу́рное
+      n_ins: дежу́рным
+      n_pre: дежу́рном
+      f_nom: дежу́рная
+      f_gen: дежу́рной
+      f_dat: дежу́рной
+      f_acc: дежу́рную
+      f_ins: дежу́рной
+      f_pre: дежу́рной
+      pl_nom: дежу́рные
+      pl_gen: дежу́рных
+      pl_dat: дежу́рным
+      pl_acc: дежу́рные
+      pl_ins: дежу́рными
+      pl_pre: дежу́рных
   "деловой=business":
     cefr_level: B1
     accented: делово́й
@@ -2665,6 +3300,120 @@ words:
       pl_acc: до́брые
       pl_ins: до́брыми
       pl_pre: до́брых
+  "довольный=satisfied":
+    cefr_level: B1
+    accented: дово́льный
+    en_gb:
+      standard: satisfied (pleased with something)
+      alt:
+        - content
+        - pleased
+    forms:
+      m: дово́льный
+      f: дово́льная
+      n: дово́льное
+      pl: дово́льные
+      comparative: дово́льнее
+    declension:
+      m_nom: дово́льный
+      m_gen: дово́льного
+      m_dat: дово́льному
+      m_acc: дово́льный
+      m_ins: дово́льным
+      m_pre: дово́льном
+      n_nom: дово́льное
+      n_gen: дово́льного
+      n_dat: дово́льному
+      n_acc: дово́льное
+      n_ins: дово́льным
+      n_pre: дово́льном
+      f_nom: дово́льная
+      f_gen: дово́льной
+      f_dat: дово́льной
+      f_acc: дово́льную
+      f_ins: дово́льной
+      f_pre: дово́льной
+      pl_nom: дово́льные
+      pl_gen: дово́льных
+      pl_dat: дово́льным
+      pl_acc: дово́льные
+      pl_ins: дово́льными
+      pl_pre: дово́льных
+  "долгий=long":
+    cefr_level: A2
+    accented: до́лгий
+    en_gb:
+      standard: long (lasting a long time)
+      alt:
+        - lengthy
+    forms:
+      m: до́лгий
+      f: до́лгая
+      n: до́лгое
+      pl: до́лгие
+    declension:
+      m_nom: до́лгий
+      m_gen: до́лгого
+      m_dat: до́лгому
+      m_acc: до́лгий
+      m_ins: до́лгим
+      m_pre: до́лгом
+      n_nom: до́лгое
+      n_gen: до́лгого
+      n_dat: до́лгому
+      n_acc: до́лгое
+      n_ins: до́лгим
+      n_pre: до́лгом
+      f_nom: до́лгая
+      f_gen: до́лгой
+      f_dat: до́лгой
+      f_acc: до́лгую
+      f_ins: до́лгой
+      f_pre: до́лгой
+      pl_nom: до́лгие
+      pl_gen: до́лгих
+      pl_dat: до́лгим
+      pl_acc: до́лгие
+      pl_ins: до́лгими
+      pl_pre: до́лгих
+  "должный=proper":
+    cefr_level: B1
+    accented: до́лжный
+    en_gb:
+      standard: proper (due, as required)
+      alt:
+        - due
+        - appropriate
+    forms:
+      m: до́лжный
+      f: до́лжная
+      n: до́лжное
+      pl: до́лжные
+    declension:
+      m_nom: до́лжный
+      m_gen: до́лжного
+      m_dat: до́лжному
+      m_acc: до́лжный
+      m_ins: до́лжным
+      m_pre: до́лжном
+      n_nom: до́лжное
+      n_gen: до́лжного
+      n_dat: до́лжному
+      n_acc: до́лжное
+      n_ins: до́лжным
+      n_pre: до́лжном
+      f_nom: до́лжная
+      f_gen: до́лжной
+      f_dat: до́лжной
+      f_acc: до́лжную
+      f_ins: до́лжной
+      f_pre: до́лжной
+      pl_nom: до́лжные
+      pl_gen: до́лжных
+      pl_dat: до́лжным
+      pl_acc: до́лжные
+      pl_ins: до́лжными
+      pl_pre: до́лжных
   "дополнительный=additional":
     cefr_level: B1
     accented: дополни́тельный
@@ -2780,6 +3529,44 @@ words:
       pl_acc: дороги́е
       pl_ins: дороги́ми
       pl_pre: дороги́х
+  "достойный=worthy":
+    cefr_level: B1
+    accented: досто́йный
+    en_gb:
+      standard: worthy (deserving respect)
+      alt:
+        - decent
+        - dignified
+    forms:
+      m: досто́йный
+      f: досто́йная
+      n: досто́йное
+      pl: досто́йные
+    declension:
+      m_nom: досто́йный
+      m_gen: досто́йного
+      m_dat: досто́йному
+      m_acc: досто́йный
+      m_ins: досто́йным
+      m_pre: досто́йном
+      n_nom: досто́йное
+      n_gen: досто́йного
+      n_dat: досто́йному
+      n_acc: досто́йное
+      n_ins: досто́йным
+      n_pre: досто́йном
+      f_nom: досто́йная
+      f_gen: досто́йной
+      f_dat: досто́йной
+      f_acc: досто́йную
+      f_ins: досто́йной
+      f_pre: досто́йной
+      pl_nom: досто́йные
+      pl_gen: досто́йных
+      pl_dat: досто́йным
+      pl_acc: досто́йные
+      pl_ins: досто́йными
+      pl_pre: досто́йных
   "древний=ancient":
     cefr_level: B1
     accented: дре́вний
@@ -2817,6 +3604,44 @@ words:
       pl_acc: дре́вние
       pl_ins: дре́вними
       pl_pre: дре́вних
+  "дурной=bad":
+    cefr_level: B1
+    accented: дурно́й
+    en_gb:
+      standard: bad (of poor quality or character)
+      alt:
+        - nasty
+        - ill
+    forms:
+      m: дурно́й
+      f: дурна́я
+      n: дурно́е
+      pl: дурны́е
+    declension:
+      m_nom: дурно́й
+      m_gen: дурно́го
+      m_dat: дурно́му
+      m_acc: дурно́й
+      m_ins: дурны́м
+      m_pre: дурно́м
+      n_nom: дурно́е
+      n_gen: дурно́го
+      n_dat: дурно́му
+      n_acc: дурно́е
+      n_ins: дурны́м
+      n_pre: дурно́м
+      f_nom: дурна́я
+      f_gen: дурно́й
+      f_dat: дурно́й
+      f_acc: дурну́ю
+      f_ins: дурно́й
+      f_pre: дурно́й
+      pl_nom: дурны́е
+      pl_gen: дурны́х
+      pl_dat: дурны́м
+      pl_acc: дурны́е
+      pl_ins: дурны́ми
+      pl_pre: дурны́х
   "духовный=spiritual":
     cefr_level: B2
     accented: духо́вный
@@ -2854,6 +3679,114 @@ words:
       pl_acc: духо́вные
       pl_ins: духо́вными
       pl_pre: духо́вных
+  "душевный=heartfelt":
+    cefr_level: B2
+    accented: душе́вный
+    en_gb:
+      standard: heartfelt (sincere, from the soul)
+      alt:
+        - soulful
+        - warm-hearted
+    forms:
+      m: душе́вный
+      f: душе́вная
+      n: душе́вное
+      pl: душе́вные
+    declension:
+      m_nom: душе́вный
+      m_gen: душе́вного
+      m_dat: душе́вному
+      m_acc: душе́вный
+      m_ins: душе́вным
+      m_pre: душе́вном
+      n_nom: душе́вное
+      n_gen: душе́вного
+      n_dat: душе́вному
+      n_acc: душе́вное
+      n_ins: душе́вным
+      n_pre: душе́вном
+      f_nom: душе́вная
+      f_gen: душе́вной
+      f_dat: душе́вной
+      f_acc: душе́вную
+      f_ins: душе́вной
+      f_pre: душе́вной
+      pl_nom: душе́вные
+      pl_gen: душе́вных
+      pl_dat: душе́вным
+      pl_acc: душе́вные
+      pl_ins: душе́вными
+      pl_pre: душе́вных
+  "еврейский=Jewish":
+    cefr_level: B1
+    accented: евре́йский
+    en_gb:
+      standard: Jewish (relating to Jews or Judaism)
+    forms:
+      m: евре́йский
+      f: евре́йская
+      n: евре́йское
+      pl: евре́йские
+    declension:
+      m_nom: евре́йский
+      m_gen: евре́йского
+      m_dat: евре́йскому
+      m_acc: евре́йский
+      m_ins: евре́йским
+      m_pre: евре́йском
+      n_nom: евре́йское
+      n_gen: евре́йского
+      n_dat: евре́йскому
+      n_acc: евре́йское
+      n_ins: евре́йским
+      n_pre: евре́йском
+      f_nom: евре́йская
+      f_gen: евре́йской
+      f_dat: евре́йской
+      f_acc: евре́йскую
+      f_ins: евре́йской
+      f_pre: евре́йской
+      pl_nom: евре́йские
+      pl_gen: евре́йских
+      pl_dat: евре́йским
+      pl_acc: евре́йские
+      pl_ins: евре́йскими
+      pl_pre: евре́йских
+  "европейский=European":
+    cefr_level: A2
+    accented: европе́йский
+    en_gb:
+      standard: European (of or from Europe)
+    forms:
+      m: европе́йский
+      f: европе́йская
+      n: европе́йское
+      pl: европе́йские
+    declension:
+      m_nom: европе́йский
+      m_gen: европе́йского
+      m_dat: европе́йскому
+      m_acc: европе́йский
+      m_ins: европе́йским
+      m_pre: европе́йском
+      n_nom: европе́йское
+      n_gen: европе́йского
+      n_dat: европе́йскому
+      n_acc: европе́йское
+      n_ins: европе́йским
+      n_pre: европе́йском
+      f_nom: европе́йская
+      f_gen: европе́йской
+      f_dat: европе́йской
+      f_acc: европе́йскую
+      f_ins: европе́йской
+      f_pre: европе́йской
+      pl_nom: европе́йские
+      pl_gen: европе́йских
+      pl_dat: европе́йским
+      pl_acc: европе́йские
+      pl_ins: европе́йскими
+      pl_pre: европе́йских
   "единственный=only":
     cefr_level: B1
     accented: еди́нственный
@@ -2961,6 +3894,44 @@ words:
       pl_acc: есте́ственные
       pl_ins: есте́ственными
       pl_pre: есте́ственных
+  "жалкий=pitiful":
+    cefr_level: B1
+    accented: жа́лкий
+    en_gb:
+      standard: pitiful (deserving or arousing pity)
+      alt:
+        - pathetic
+        - miserable
+    forms:
+      m: жа́лкий
+      f: жа́лкая
+      n: жа́лкое
+      pl: жа́лкие
+    declension:
+      m_nom: жа́лкий
+      m_gen: жа́лкого
+      m_dat: жа́лкому
+      m_acc: жа́лкий
+      m_ins: жа́лким
+      m_pre: жа́лком
+      n_nom: жа́лкое
+      n_gen: жа́лкого
+      n_dat: жа́лкому
+      n_acc: жа́лкое
+      n_ins: жа́лким
+      n_pre: жа́лком
+      f_nom: жа́лкая
+      f_gen: жа́лкой
+      f_dat: жа́лкой
+      f_acc: жа́лкую
+      f_ins: жа́лкой
+      f_pre: жа́лкой
+      pl_nom: жа́лкие
+      pl_gen: жа́лких
+      pl_dat: жа́лким
+      pl_acc: жа́лкие
+      pl_ins: жа́лкими
+      pl_pre: жа́лких
   "жаркий=hot":
     cefr_level: A2
     accented: жа́ркий
@@ -2999,6 +3970,43 @@ words:
       pl_acc: жа́ркие
       pl_ins: жа́ркими
       pl_pre: жа́рких
+  "железнодорожный=railway":
+    cefr_level: B1
+    accented: железнодоро́жный
+    en_gb:
+      standard: railway (relating to rail transport)
+      alt:
+        - railroad
+    forms:
+      m: железнодоро́жный
+      f: железнодоро́жная
+      n: железнодоро́жное
+      pl: железнодоро́жные
+    declension:
+      m_nom: железнодоро́жный
+      m_gen: железнодоро́жного
+      m_dat: железнодоро́жному
+      m_acc: железнодоро́жный
+      m_ins: железнодоро́жным
+      m_pre: железнодоро́жном
+      n_nom: железнодоро́жное
+      n_gen: железнодоро́жного
+      n_dat: железнодоро́жному
+      n_acc: железнодоро́жное
+      n_ins: железнодоро́жным
+      n_pre: железнодоро́жном
+      f_nom: железнодоро́жная
+      f_gen: железнодоро́жной
+      f_dat: железнодоро́жной
+      f_acc: железнодоро́жную
+      f_ins: железнодоро́жной
+      f_pre: железнодоро́жной
+      pl_nom: железнодоро́жные
+      pl_gen: железнодоро́жных
+      pl_dat: железнодоро́жным
+      pl_acc: железнодоро́жные
+      pl_ins: железнодоро́жными
+      pl_pre: железнодоро́жных
   "железный=iron":
     cefr_level: B1
     accented: желе́зный
@@ -3076,6 +4084,44 @@ words:
       pl_acc: жёлтые
       pl_ins: жёлтыми
       pl_pre: жёлтых
+  "женский=female":
+    cefr_level: A2
+    accented: же́нский
+    en_gb:
+      standard: female (of or for women)
+      alt:
+        - women's
+        - feminine
+    forms:
+      m: же́нский
+      f: же́нская
+      n: же́нское
+      pl: же́нские
+    declension:
+      m_nom: же́нский
+      m_gen: же́нского
+      m_dat: же́нскому
+      m_acc: же́нский
+      m_ins: же́нским
+      m_pre: же́нском
+      n_nom: же́нское
+      n_gen: же́нского
+      n_dat: же́нскому
+      n_acc: же́нское
+      n_ins: же́нским
+      n_pre: же́нском
+      f_nom: же́нская
+      f_gen: же́нской
+      f_dat: же́нской
+      f_acc: же́нскую
+      f_ins: же́нской
+      f_pre: же́нской
+      pl_nom: же́нские
+      pl_gen: же́нских
+      pl_dat: же́нским
+      pl_acc: же́нские
+      pl_ins: же́нскими
+      pl_pre: же́нских
   "жёсткий=hard":
     cefr_level: B1
     accented: жёсткий
@@ -3155,6 +4201,43 @@ words:
       pl_acc: жесто́кие
       pl_ins: жесто́кими
       pl_pre: жесто́ких
+  "животный=animal":
+    cefr_level: B1
+    accented: живо́тный
+    en_gb:
+      standard: animal (of or relating to animals)
+      alt:
+        - bestial
+    forms:
+      m: живо́тный
+      f: живо́тная
+      n: живо́тное
+      pl: живо́тные
+    declension:
+      m_nom: живо́тный
+      m_gen: живо́тного
+      m_dat: живо́тному
+      m_acc: живо́тный
+      m_ins: живо́тным
+      m_pre: живо́тном
+      n_nom: живо́тное
+      n_gen: живо́тного
+      n_dat: живо́тному
+      n_acc: живо́тное
+      n_ins: живо́тным
+      n_pre: живо́тном
+      f_nom: живо́тная
+      f_gen: живо́тной
+      f_dat: живо́тной
+      f_acc: живо́тную
+      f_ins: живо́тной
+      f_pre: живо́тной
+      pl_nom: живо́тные
+      pl_gen: живо́тных
+      pl_dat: живо́тным
+      pl_acc: живо́тные
+      pl_ins: живо́тными
+      pl_pre: живо́тных
   "жизненный=vital":
     cefr_level: B2
     accented: жи́зненный
@@ -3262,6 +4345,80 @@ words:
       pl_acc: зага́дочные
       pl_ins: зага́дочными
       pl_pre: зага́дочных
+  "задний=rear":
+    cefr_level: B1
+    accented: за́дний
+    en_gb:
+      standard: rear (at the back)
+      alt:
+        - back (as modifier)
+    forms:
+      m: за́дний
+      f: за́дняя
+      n: за́днее
+      pl: за́дние
+    declension:
+      m_nom: за́дний
+      m_gen: за́днего
+      m_dat: за́днему
+      m_acc: за́дний
+      m_ins: за́дним
+      m_pre: за́днем
+      n_nom: за́днее
+      n_gen: за́днего
+      n_dat: за́днему
+      n_acc: за́днее
+      n_ins: за́дним
+      n_pre: за́днем
+      f_nom: за́дняя
+      f_gen: за́дней
+      f_dat: за́дней
+      f_acc: за́днюю
+      f_ins: за́дней
+      f_pre: за́дней
+      pl_nom: за́дние
+      pl_gen: за́дних
+      pl_dat: за́дним
+      pl_acc: за́дние
+      pl_ins: за́дними
+      pl_pre: за́дних
+  "заключённый=imprisoned":
+    cefr_level: B1
+    accented: заключённый
+    en_gb:
+      standard: imprisoned (locked up, detained)
+      alt:
+        - confined
+    forms:
+      m: заключённый
+      f: заключённая
+      n: заключённое
+      pl: заключённые
+    declension:
+      m_nom: заключённый
+      m_gen: заключённого
+      m_dat: заключённому
+      m_acc: заключённый
+      m_ins: заключённым
+      m_pre: заключённом
+      n_nom: заключённое
+      n_gen: заключённого
+      n_dat: заключённому
+      n_acc: заключённое
+      n_ins: заключённым
+      n_pre: заключённом
+      f_nom: заключённая
+      f_gen: заключённой
+      f_dat: заключённой
+      f_acc: заключённую
+      f_ins: заключённой
+      f_pre: заключённой
+      pl_nom: заключённые
+      pl_gen: заключённых
+      pl_dat: заключённым
+      pl_acc: заключённые
+      pl_ins: заключёнными
+      pl_pre: заключённых
   "законный=legal":
     cefr_level: B2
     accented: зако́нный
@@ -3304,6 +4461,82 @@ words:
       pl_acc: зако́нные
       pl_ins: зако́нными
       pl_pre: зако́нных
+  "закрытый=closed":
+    cefr_level: A2
+    accented: закры́тый
+    en_gb:
+      standard: closed (not open)
+      alt:
+        - shut
+    forms:
+      m: закры́тый
+      f: закры́тая
+      n: закры́тое
+      pl: закры́тые
+    declension:
+      m_nom: закры́тый
+      m_gen: закры́того
+      m_dat: закры́тому
+      m_acc: закры́тый
+      m_ins: закры́тым
+      m_pre: закры́том
+      n_nom: закры́тое
+      n_gen: закры́того
+      n_dat: закры́тому
+      n_acc: закры́тое
+      n_ins: закры́тым
+      n_pre: закры́том
+      f_nom: закры́тая
+      f_gen: закры́той
+      f_dat: закры́той
+      f_acc: закры́тую
+      f_ins: закры́той
+      f_pre: закры́той
+      pl_nom: закры́тые
+      pl_gen: закры́тых
+      pl_dat: закры́тым
+      pl_acc: закры́тые
+      pl_ins: закры́тыми
+      pl_pre: закры́тых
+  "заметный=noticeable":
+    cefr_level: B1
+    accented: заме́тный
+    en_gb:
+      standard: noticeable (easily seen or noticed)
+      alt:
+        - conspicuous
+        - significant
+    forms:
+      m: заме́тный
+      f: заме́тная
+      n: заме́тное
+      pl: заме́тные
+      comparative: заме́тнее
+    declension:
+      m_nom: заме́тный
+      m_gen: заме́тного
+      m_dat: заме́тному
+      m_acc: заме́тный
+      m_ins: заме́тным
+      m_pre: заме́тном
+      n_nom: заме́тное
+      n_gen: заме́тного
+      n_dat: заме́тному
+      n_acc: заме́тное
+      n_ins: заме́тным
+      n_pre: заме́тном
+      f_nom: заме́тная
+      f_gen: заме́тной
+      f_dat: заме́тной
+      f_acc: заме́тную
+      f_ins: заме́тной
+      f_pre: заме́тной
+      pl_nom: заме́тные
+      pl_gen: заме́тных
+      pl_dat: заме́тным
+      pl_acc: заме́тные
+      pl_ins: заме́тными
+      pl_pre: заме́тных
   "замечательный=wonderful":
     cefr_level: B1
     accented: замеча́тельный
@@ -3501,6 +4734,44 @@ words:
       pl_acc: зелёные
       pl_ins: зелёными
       pl_pre: зелёных
+  "земной=earthly":
+    cefr_level: B1
+    accented: земно́й
+    en_gb:
+      standard: earthly (of or on the earth)
+      alt:
+        - terrestrial
+        - worldly
+    forms:
+      m: земно́й
+      f: земна́я
+      n: земно́е
+      pl: земны́е
+    declension:
+      m_nom: земно́й
+      m_gen: земно́го
+      m_dat: земно́му
+      m_acc: земно́й
+      m_ins: земны́м
+      m_pre: земно́м
+      n_nom: земно́е
+      n_gen: земно́го
+      n_dat: земно́му
+      n_acc: земно́е
+      n_ins: земны́м
+      n_pre: земно́м
+      f_nom: земна́я
+      f_gen: земно́й
+      f_dat: земно́й
+      f_acc: земну́ю
+      f_ins: земно́й
+      f_pre: земно́й
+      pl_nom: земны́е
+      pl_gen: земны́х
+      pl_dat: земны́м
+      pl_acc: земны́е
+      pl_ins: земны́ми
+      pl_pre: земны́х
   "зимний=winter":
     cefr_level: A2
     accented: зи́мний
@@ -3582,6 +4853,43 @@ words:
       pl_acc: злы́е
       pl_ins: злы́ми
       pl_pre: злых
+  "знакомый=familiar":
+    cefr_level: A2
+    accented: знако́мый
+    en_gb:
+      standard: familiar (well known, recognisable)
+      alt:
+        - acquainted
+    forms:
+      m: знако́мый
+      f: знако́мая
+      n: знако́мое
+      pl: знако́мые
+    declension:
+      m_nom: знако́мый
+      m_gen: знако́мого
+      m_dat: знако́мому
+      m_acc: знако́мый
+      m_ins: знако́мым
+      m_pre: знако́мом
+      n_nom: знако́мое
+      n_gen: знако́мого
+      n_dat: знако́мому
+      n_acc: знако́мое
+      n_ins: знако́мым
+      n_pre: знако́мом
+      f_nom: знако́мая
+      f_gen: знако́мой
+      f_dat: знако́мой
+      f_acc: знако́мую
+      f_ins: знако́мой
+      f_pre: знако́мой
+      pl_nom: знако́мые
+      pl_gen: знако́мых
+      pl_dat: знако́мым
+      pl_acc: знако́мые
+      pl_ins: знако́мыми
+      pl_pre: знако́мых
   "знаменитый=famous":
     cefr_level: B1
     accented: знамени́тый
@@ -3617,6 +4925,44 @@ words:
       pl_acc: знамени́тые
       pl_ins: знамени́тыми
       pl_pre: знамени́тых
+  "значительный=significant":
+    cefr_level: B1
+    accented: значи́тельный
+    en_gb:
+      standard: significant (large or important)
+      alt:
+        - considerable
+    forms:
+      m: значи́тельный
+      f: значи́тельная
+      n: значи́тельное
+      pl: значи́тельные
+      comparative: значи́тельнее
+    declension:
+      m_nom: значи́тельный
+      m_gen: значи́тельного
+      m_dat: значи́тельному
+      m_acc: значи́тельный
+      m_ins: значи́тельным
+      m_pre: значи́тельном
+      n_nom: значи́тельное
+      n_gen: значи́тельного
+      n_dat: значи́тельному
+      n_acc: значи́тельное
+      n_ins: значи́тельным
+      n_pre: значи́тельном
+      f_nom: значи́тельная
+      f_gen: значи́тельной
+      f_dat: значи́тельной
+      f_acc: значи́тельную
+      f_ins: значи́тельной
+      f_pre: значи́тельной
+      pl_nom: значи́тельные
+      pl_gen: значи́тельных
+      pl_dat: значи́тельным
+      pl_acc: значи́тельные
+      pl_ins: значи́тельными
+      pl_pre: значи́тельных
   "золотой=golden":
     cefr_level: B1
     accented: золото́й
@@ -3703,6 +5049,43 @@ words:
       pl_acc: изве́стные
       pl_ins: изве́стными
       pl_pre: изве́стных
+  "иной=other":
+    cefr_level: B1
+    accented: ино́й
+    en_gb:
+      standard: other (different, another)
+      alt:
+        - different
+    forms:
+      m: ино́й
+      f: ина́я
+      n: ино́е
+      pl: ины́е
+    declension:
+      m_nom: ино́й
+      m_gen: ино́го
+      m_dat: ино́му
+      m_acc: ино́й
+      m_ins: ины́м
+      m_pre: ино́м
+      n_nom: ино́е
+      n_gen: ино́го
+      n_dat: ино́му
+      n_acc: ино́е
+      n_ins: ины́м
+      n_pre: ино́м
+      f_nom: ина́я
+      f_gen: ино́й
+      f_dat: ино́й
+      f_acc: ину́ю
+      f_ins: ино́й
+      f_pre: ино́й
+      pl_nom: ины́е
+      pl_gen: ины́х
+      pl_dat: ины́м
+      pl_acc: ины́е
+      pl_ins: ины́ми
+      pl_pre: ины́х
   "иностранный=foreign":
     cefr_level: A2
     accented: иностра́нный
@@ -3819,6 +5202,44 @@ words:
       pl_acc: иску́сственные
       pl_ins: иску́сственными
       pl_pre: иску́сственных
+  "истинный=true":
+    cefr_level: B1
+    accented: и́стинный
+    en_gb:
+      standard: true (genuine, real)
+      alt:
+        - genuine
+        - authentic
+    forms:
+      m: и́стинный
+      f: и́стинная
+      n: и́стинное
+      pl: и́стинные
+    declension:
+      m_nom: и́стинный
+      m_gen: и́стинного
+      m_dat: и́стинному
+      m_acc: и́стинный
+      m_ins: и́стинным
+      m_pre: и́стинном
+      n_nom: и́стинное
+      n_gen: и́стинного
+      n_dat: и́стинному
+      n_acc: и́стинное
+      n_ins: и́стинным
+      n_pre: и́стинном
+      f_nom: и́стинная
+      f_gen: и́стинной
+      f_dat: и́стинной
+      f_acc: и́стинную
+      f_ins: и́стинной
+      f_pre: и́стинной
+      pl_nom: и́стинные
+      pl_gen: и́стинных
+      pl_dat: и́стинным
+      pl_acc: и́стинные
+      pl_ins: и́стинными
+      pl_pre: и́стинных
   "исторический=historical":
     cefr_level: B1
     accented: истори́ческий
@@ -3856,6 +5277,43 @@ words:
       pl_acc: истори́ческие
       pl_ins: истори́ческими
       pl_pre: истори́ческих
+  "каменный=stone":
+    cefr_level: B1
+    accented: ка́менный
+    en_gb:
+      standard: stone (made of stone)
+      alt:
+        - rocky
+    forms:
+      m: ка́менный
+      f: ка́менная
+      n: ка́менное
+      pl: ка́менные
+    declension:
+      m_nom: ка́менный
+      m_gen: ка́менного
+      m_dat: ка́менному
+      m_acc: ка́менный
+      m_ins: ка́менным
+      m_pre: ка́менном
+      n_nom: ка́менное
+      n_gen: ка́менного
+      n_dat: ка́менному
+      n_acc: ка́менное
+      n_ins: ка́менным
+      n_pre: ка́менном
+      f_nom: ка́менная
+      f_gen: ка́менной
+      f_dat: ка́менной
+      f_acc: ка́менную
+      f_ins: ка́менной
+      f_pre: ка́менной
+      pl_nom: ка́менные
+      pl_gen: ка́менных
+      pl_dat: ка́менным
+      pl_acc: ка́менные
+      pl_ins: ка́менными
+      pl_pre: ка́менных
   "квадратный=square":
     cefr_level: B1
     accented: квадра́тный
@@ -3976,6 +5434,41 @@ words:
       pl_acc: кита́йские
       pl_ins: кита́йскими
       pl_pre: кита́йских
+  "кожаный=leather":
+    cefr_level: B1
+    accented: ко́жаный
+    en_gb:
+      standard: leather (made of leather)
+    forms:
+      m: ко́жаный
+      f: ко́жаная
+      n: ко́жаное
+      pl: ко́жаные
+    declension:
+      m_nom: ко́жаный
+      m_gen: ко́жаного
+      m_dat: ко́жаному
+      m_acc: ко́жаный
+      m_ins: ко́жаным
+      m_pre: ко́жаном
+      n_nom: ко́жаное
+      n_gen: ко́жаного
+      n_dat: ко́жаному
+      n_acc: ко́жаное
+      n_ins: ко́жаным
+      n_pre: ко́жаном
+      f_nom: ко́жаная
+      f_gen: ко́жаной
+      f_dat: ко́жаной
+      f_acc: ко́жаную
+      f_ins: ко́жаной
+      f_pre: ко́жаной
+      pl_nom: ко́жаные
+      pl_gen: ко́жаных
+      pl_dat: ко́жаным
+      pl_acc: ко́жаные
+      pl_ins: ко́жаными
+      pl_pre: ко́жаных
   "коммунистический=communist":
     cefr_level: B2
     accented: коммунисти́ческий
@@ -4505,6 +5998,45 @@ words:
       pl_acc: ле́вые
       pl_ins: ле́выми
       pl_pre: ле́вых
+  "лёгкий=light":
+    cefr_level: A2
+    accented: лёгкий
+    en_gb:
+      standard: light (not heavy)
+      alt:
+        - easy
+        - slight
+    forms:
+      m: лёгкий
+      f: лёгкая
+      n: лёгкое
+      pl: лёгкие
+      comparative: ле́гче
+    declension:
+      m_nom: лёгкий
+      m_gen: лёгкого
+      m_dat: лёгкому
+      m_acc: лёгкий
+      m_ins: лёгким
+      m_pre: лёгком
+      n_nom: лёгкое
+      n_gen: лёгкого
+      n_dat: лёгкому
+      n_acc: лёгкое
+      n_ins: лёгким
+      n_pre: лёгком
+      f_nom: лёгкая
+      f_gen: лёгкой
+      f_dat: лёгкой
+      f_acc: лёгкую
+      f_ins: лёгкой
+      f_pre: лёгкой
+      pl_nom: лёгкие
+      pl_gen: лёгких
+      pl_dat: лёгким
+      pl_acc: лёгкие
+      pl_ins: лёгкими
+      pl_pre: лёгких
   "ледяной=icy":
     cefr_level: B1
     accented: ледяно́й
@@ -4809,6 +6341,152 @@ words:
       pl_acc: ма́ленькие
       pl_ins: ма́ленькими
       pl_pre: ма́леньких
+  "малый=small":
+    cefr_level: A2
+    accented: ма́лый
+    en_gb:
+      standard: small (little in size or amount)
+      alt:
+        - little
+    forms:
+      m: ма́лый
+      f: ма́лая
+      n: ма́лое
+      pl: ма́лые
+    declension:
+      m_nom: ма́лый
+      m_gen: ма́лого
+      m_dat: ма́лому
+      m_acc: ма́лый
+      m_ins: ма́лым
+      m_pre: ма́лом
+      n_nom: ма́лое
+      n_gen: ма́лого
+      n_dat: ма́лому
+      n_acc: ма́лое
+      n_ins: ма́лым
+      n_pre: ма́лом
+      f_nom: ма́лая
+      f_gen: ма́лой
+      f_dat: ма́лой
+      f_acc: ма́лую
+      f_ins: ма́лой
+      f_pre: ма́лой
+      pl_nom: ма́лые
+      pl_gen: ма́лых
+      pl_dat: ма́лым
+      pl_acc: ма́лые
+      pl_ins: ма́лыми
+      pl_pre: ма́лых
+  "массовый=mass":
+    cefr_level: B1
+    accented: ма́ссовый
+    en_gb:
+      standard: mass (involving large numbers of people)
+      alt:
+        - popular
+    forms:
+      m: ма́ссовый
+      f: ма́ссовая
+      n: ма́ссовое
+      pl: ма́ссовые
+    declension:
+      m_nom: ма́ссовый
+      m_gen: ма́ссового
+      m_dat: ма́ссовому
+      m_acc: ма́ссовый
+      m_ins: ма́ссовым
+      m_pre: ма́ссовом
+      n_nom: ма́ссовое
+      n_gen: ма́ссового
+      n_dat: ма́ссовому
+      n_acc: ма́ссовое
+      n_ins: ма́ссовым
+      n_pre: ма́ссовом
+      f_nom: ма́ссовая
+      f_gen: ма́ссовой
+      f_dat: ма́ссовой
+      f_acc: ма́ссовую
+      f_ins: ма́ссовой
+      f_pre: ма́ссовой
+      pl_nom: ма́ссовые
+      pl_gen: ма́ссовых
+      pl_dat: ма́ссовым
+      pl_acc: ма́ссовые
+      pl_ins: ма́ссовыми
+      pl_pre: ма́ссовых
+  "материальный=material":
+    cefr_level: B1
+    accented: материа́льный
+    en_gb:
+      standard: material (relating to physical or financial matters)
+      alt:
+        - financial
+    forms:
+      m: материа́льный
+      f: материа́льная
+      n: материа́льное
+      pl: материа́льные
+    declension:
+      m_nom: материа́льный
+      m_gen: материа́льного
+      m_dat: материа́льному
+      m_acc: материа́льный
+      m_ins: материа́льным
+      m_pre: материа́льном
+      n_nom: материа́льное
+      n_gen: материа́льного
+      n_dat: материа́льному
+      n_acc: материа́льное
+      n_ins: материа́льным
+      n_pre: материа́льном
+      f_nom: материа́льная
+      f_gen: материа́льной
+      f_dat: материа́льной
+      f_acc: материа́льную
+      f_ins: материа́льной
+      f_pre: материа́льной
+      pl_nom: материа́льные
+      pl_gen: материа́льных
+      pl_dat: материа́льным
+      pl_acc: материа́льные
+      pl_ins: материа́льными
+      pl_pre: материа́льных
+  "медицинский=medical":
+    cefr_level: B1
+    accented: меди́цинский
+    en_gb:
+      standard: medical (of or relating to medicine)
+    forms:
+      m: меди́цинский
+      f: меди́цинская
+      n: меди́цинское
+      pl: меди́цинские
+    declension:
+      m_nom: меди́цинский
+      m_gen: меди́цинского
+      m_dat: меди́цинскому
+      m_acc: меди́цинский
+      m_ins: меди́цинским
+      m_pre: меди́цинском
+      n_nom: меди́цинское
+      n_gen: меди́цинского
+      n_dat: меди́цинскому
+      n_acc: меди́цинское
+      n_ins: меди́цинским
+      n_pre: меди́цинском
+      f_nom: меди́цинская
+      f_gen: меди́цинской
+      f_dat: меди́цинской
+      f_acc: меди́цинскую
+      f_ins: меди́цинской
+      f_pre: меди́цинской
+      pl_nom: меди́цинские
+      pl_gen: меди́цинских
+      pl_dat: меди́цинским
+      pl_acc: меди́цинские
+      pl_ins: меди́цинскими
+      pl_pre: меди́цинских
   "медленный=slow":
     cefr_level: A2
     accented: ме́дленный
@@ -5027,6 +6705,45 @@ words:
       pl_acc: металли́ческие
       pl_ins: металли́ческими
       pl_pre: металли́ческих
+  "милый=dear":
+    cefr_level: A2
+    accented: ми́лый
+    en_gb:
+      standard: dear (sweet, loveable)
+      alt:
+        - sweet
+        - cute
+    forms:
+      m: ми́лый
+      f: ми́лая
+      n: ми́лое
+      pl: ми́лые
+      comparative: мила́
+    declension:
+      m_nom: ми́лый
+      m_gen: ми́лого
+      m_dat: ми́лому
+      m_acc: ми́лый
+      m_ins: ми́лым
+      m_pre: ми́лом
+      n_nom: ми́лое
+      n_gen: ми́лого
+      n_dat: ми́лому
+      n_acc: ми́лое
+      n_ins: ми́лым
+      n_pre: ми́лом
+      f_nom: ми́лая
+      f_gen: ми́лой
+      f_dat: ми́лой
+      f_acc: ми́лую
+      f_ins: ми́лой
+      f_pre: ми́лой
+      pl_nom: ми́лые
+      pl_gen: ми́лых
+      pl_dat: ми́лым
+      pl_acc: ми́лые
+      pl_ins: ми́лыми
+      pl_pre: ми́лых
   "мирный=peaceful":
     cefr_level: B2
     accented: ми́рный
@@ -5531,6 +7248,45 @@ words:
       pl_acc: мя́гкие
       pl_ins: мя́гкими
       pl_pre: мя́гких
+  "надёжный=reliable":
+    cefr_level: B1
+    accented: надёжный
+    en_gb:
+      standard: reliable (dependable, trustworthy)
+      alt:
+        - dependable
+        - trustworthy
+    forms:
+      m: надёжный
+      f: надёжная
+      n: надёжное
+      pl: надёжные
+      comparative: надёжнее
+    declension:
+      m_nom: надёжный
+      m_gen: надёжного
+      m_dat: надёжному
+      m_acc: надёжный
+      m_ins: надёжным
+      m_pre: надёжном
+      n_nom: надёжное
+      n_gen: надёжного
+      n_dat: надёжному
+      n_acc: надёжное
+      n_ins: надёжным
+      n_pre: надёжном
+      f_nom: надёжная
+      f_gen: надёжной
+      f_dat: надёжной
+      f_acc: надёжную
+      f_ins: надёжной
+      f_pre: надёжной
+      pl_nom: надёжные
+      pl_gen: надёжных
+      pl_dat: надёжным
+      pl_acc: надёжные
+      pl_ins: надёжными
+      pl_pre: надёжных
   "народный=folk":
     cefr_level: B2
     accented: наро́дный
@@ -6050,6 +7806,115 @@ words:
       pl_acc: неизве́стные
       pl_ins: неизве́стными
       pl_pre: неизве́стных
+  "некий=certain":
+    cefr_level: B2
+    accented: не́кий
+    en_gb:
+      standard: certain (a certain, some)
+      alt:
+        - some
+    forms:
+      m: не́кий
+      f: не́кая
+      n: не́кое
+      pl: не́кие
+    declension:
+      m_nom: не́кий
+      m_gen: не́кого
+      m_dat: не́кому
+      m_acc: не́кий
+      m_ins: не́ким
+      m_pre: не́ком
+      n_nom: не́кое
+      n_gen: не́кого
+      n_dat: не́кому
+      n_acc: не́кое
+      n_ins: не́ким
+      n_pre: не́ком
+      f_nom: не́кая
+      f_gen: не́кой
+      f_dat: не́кой
+      f_acc: не́кую
+      f_ins: не́кой
+      f_pre: не́кой
+      pl_nom: не́кие
+      pl_gen: не́ких
+      pl_dat: не́ким
+      pl_acc: не́кие
+      pl_ins: не́кими
+      pl_pre: не́ких
+  "некоторый=some":
+    cefr_level: A2
+    accented: не́который
+    en_gb:
+      standard: some (a number of, certain ones)
+      alt:
+        - certain
+    forms:
+      m: не́который
+      f: не́которая
+      n: не́которое
+      pl: не́которые
+    declension:
+      m_nom: не́который
+      m_gen: не́которого
+      m_dat: не́которому
+      m_acc: не́который
+      m_ins: не́которым
+      m_pre: не́котором
+      n_nom: не́которое
+      n_gen: не́которого
+      n_dat: не́которому
+      n_acc: не́которое
+      n_ins: не́которым
+      n_pre: не́котором
+      f_nom: не́которая
+      f_gen: не́которой
+      f_dat: не́которой
+      f_acc: не́которую
+      f_ins: не́которой
+      f_pre: не́которой
+      pl_nom: не́которые
+      pl_gen: не́которых
+      pl_dat: не́которым
+      pl_acc: не́которые
+      pl_ins: не́которыми
+      pl_pre: не́которых
+  "немецкий=German":
+    cefr_level: A2
+    accented: неме́цкий
+    en_gb:
+      standard: German (of or from Germany)
+    forms:
+      m: неме́цкий
+      f: неме́цкая
+      n: неме́цкое
+      pl: неме́цкие
+    declension:
+      m_nom: неме́цкий
+      m_gen: неме́цкого
+      m_dat: неме́цкому
+      m_acc: неме́цкий
+      m_ins: неме́цким
+      m_pre: неме́цком
+      n_nom: неме́цкое
+      n_gen: неме́цкого
+      n_dat: неме́цкому
+      n_acc: неме́цкое
+      n_ins: неме́цким
+      n_pre: неме́цком
+      f_nom: неме́цкая
+      f_gen: неме́цкой
+      f_dat: неме́цкой
+      f_acc: неме́цкую
+      f_ins: неме́цкой
+      f_pre: неме́цкой
+      pl_nom: неме́цкие
+      pl_gen: неме́цких
+      pl_dat: неме́цким
+      pl_acc: неме́цкие
+      pl_ins: неме́цкими
+      pl_pre: неме́цких
   "необходимый=necessary":
     cefr_level: B1
     accented: необходи́мый
@@ -6336,6 +8201,43 @@ words:
       pl_acc: несча́стные
       pl_ins: несча́стными
       pl_pre: несча́стных
+  "неторопливый=unhurried":
+    cefr_level: B2
+    accented: неторопли́вый
+    en_gb:
+      standard: unhurried (not in a hurry)
+      alt:
+        - leisurely
+    forms:
+      m: неторопли́вый
+      f: неторопли́вая
+      n: неторопли́вое
+      pl: неторопли́вые
+    declension:
+      m_nom: неторопли́вый
+      m_gen: неторопли́вого
+      m_dat: неторопли́вому
+      m_acc: неторопли́вый
+      m_ins: неторопли́вым
+      m_pre: неторопли́вом
+      n_nom: неторопли́вое
+      n_gen: неторопли́вого
+      n_dat: неторопли́вому
+      n_acc: неторопли́вое
+      n_ins: неторопли́вым
+      n_pre: неторопли́вом
+      f_nom: неторопли́вая
+      f_gen: неторопли́вой
+      f_dat: неторопли́вой
+      f_acc: неторопли́вую
+      f_ins: неторопли́вой
+      f_pre: неторопли́вой
+      pl_nom: неторопли́вые
+      pl_gen: неторопли́вых
+      pl_dat: неторопли́вым
+      pl_acc: неторопли́вые
+      pl_ins: неторопли́выми
+      pl_pre: неторопли́вых
   "нижний=lower":
     cefr_level: B1
     accented: ни́жний
@@ -6489,6 +8391,80 @@ words:
       pl_acc: норма́льные
       pl_ins: норма́льными
       pl_pre: норма́льных
+  "ночной=nocturnal":
+    cefr_level: B1
+    accented: ночно́й
+    en_gb:
+      standard: nocturnal (of or at night)
+      alt:
+        - night (as modifier)
+    forms:
+      m: ночно́й
+      f: ночна́я
+      n: ночно́е
+      pl: ночны́е
+    declension:
+      m_nom: ночно́й
+      m_gen: ночно́го
+      m_dat: ночно́му
+      m_acc: ночно́й
+      m_ins: ночны́м
+      m_pre: ночно́м
+      n_nom: ночно́е
+      n_gen: ночно́го
+      n_dat: ночно́му
+      n_acc: ночно́е
+      n_ins: ночны́м
+      n_pre: ночно́м
+      f_nom: ночна́я
+      f_gen: ночно́й
+      f_dat: ночно́й
+      f_acc: ночну́ю
+      f_ins: ночно́й
+      f_pre: ночно́й
+      pl_nom: ночны́е
+      pl_gen: ночны́х
+      pl_dat: ночны́м
+      pl_acc: ночны́е
+      pl_ins: ночны́ми
+      pl_pre: ночны́х
+  "нужный=necessary":
+    cefr_level: A2
+    accented: ну́жный
+    en_gb:
+      standard: necessary (needed, required)
+      alt:
+        - needed
+    forms:
+      m: ну́жный
+      f: ну́жная
+      n: ну́жное
+      pl: ну́жные
+    declension:
+      m_nom: ну́жный
+      m_gen: ну́жного
+      m_dat: ну́жному
+      m_acc: ну́жный
+      m_ins: ну́жным
+      m_pre: ну́жном
+      n_nom: ну́жное
+      n_gen: ну́жного
+      n_dat: ну́жному
+      n_acc: ну́жное
+      n_ins: ну́жным
+      n_pre: ну́жном
+      f_nom: ну́жная
+      f_gen: ну́жной
+      f_dat: ну́жной
+      f_acc: ну́жную
+      f_ins: ну́жной
+      f_pre: ну́жной
+      pl_nom: ну́жные
+      pl_gen: ну́жных
+      pl_dat: ну́жным
+      pl_acc: ну́жные
+      pl_ins: ну́жными
+      pl_pre: ну́жных
   "нынешний=current":
     cefr_level: B1
     accented: ны́нешний
@@ -6632,6 +8608,81 @@ words:
       pl_acc: обыкнове́нные
       pl_ins: обыкнове́нными
       pl_pre: обыкнове́нных
+  "обычный=ordinary":
+    cefr_level: A2
+    accented: обы́чный
+    en_gb:
+      standard: ordinary (normal, not special)
+      alt:
+        - usual
+        - common
+    forms:
+      m: обы́чный
+      f: обы́чная
+      n: обы́чное
+      pl: обы́чные
+    declension:
+      m_nom: обы́чный
+      m_gen: обы́чного
+      m_dat: обы́чному
+      m_acc: обы́чный
+      m_ins: обы́чным
+      m_pre: обы́чном
+      n_nom: обы́чное
+      n_gen: обы́чного
+      n_dat: обы́чному
+      n_acc: обы́чное
+      n_ins: обы́чным
+      n_pre: обы́чном
+      f_nom: обы́чная
+      f_gen: обы́чной
+      f_dat: обы́чной
+      f_acc: обы́чную
+      f_ins: обы́чной
+      f_pre: обы́чной
+      pl_nom: обы́чные
+      pl_gen: обы́чных
+      pl_dat: обы́чным
+      pl_acc: обы́чные
+      pl_ins: обы́чными
+      pl_pre: обы́чных
+  "обязанный=obliged":
+    cefr_level: B1
+    accented: обя́занный
+    en_gb:
+      standard: obliged (duty-bound)
+      alt:
+        - duty-bound
+    forms:
+      m: обя́занный
+      f: обя́занная
+      n: обя́занное
+      pl: обя́занные
+    declension:
+      m_nom: обя́занный
+      m_gen: обя́занного
+      m_dat: обя́занному
+      m_acc: обя́занный
+      m_ins: обя́занным
+      m_pre: обя́занном
+      n_nom: обя́занное
+      n_gen: обя́занного
+      n_dat: обя́занному
+      n_acc: обя́занное
+      n_ins: обя́занным
+      n_pre: обя́занном
+      f_nom: обя́занная
+      f_gen: обя́занной
+      f_dat: обя́занной
+      f_acc: обя́занную
+      f_ins: обя́занной
+      f_pre: обя́занной
+      pl_nom: обя́занные
+      pl_gen: обя́занных
+      pl_dat: обя́занным
+      pl_acc: обя́занные
+      pl_ins: обя́занными
+      pl_pre: обя́занных
   "огромный=enormous":
     cefr_level: A2
     accented: огро́мный
@@ -6667,6 +8718,41 @@ words:
       pl_acc: огро́мные
       pl_ins: огро́мными
       pl_pre: огро́мных
+  "одетый=dressed":
+    cefr_level: B1
+    accented: оде́тый
+    en_gb:
+      standard: dressed (wearing clothes)
+    forms:
+      m: оде́тый
+      f: оде́тая
+      n: оде́тое
+      pl: оде́тые
+    declension:
+      m_nom: оде́тый
+      m_gen: оде́того
+      m_dat: оде́тому
+      m_acc: оде́тый
+      m_ins: оде́тым
+      m_pre: оде́том
+      n_nom: оде́тое
+      n_gen: оде́того
+      n_dat: оде́тому
+      n_acc: оде́тое
+      n_ins: оде́тым
+      n_pre: оде́том
+      f_nom: оде́тая
+      f_gen: оде́той
+      f_dat: оде́той
+      f_acc: оде́тую
+      f_ins: оде́той
+      f_pre: оде́той
+      pl_nom: оде́тые
+      pl_gen: оде́тых
+      pl_dat: оде́тым
+      pl_acc: оде́тые
+      pl_ins: оде́тыми
+      pl_pre: оде́тых
   "одинаковый=identical":
     cefr_level: B1
     accented: одина́ковый
@@ -6858,6 +8944,43 @@ words:
       pl_acc: определённые
       pl_ins: определёнными
       pl_pre: определённых
+  "опытный=experienced":
+    cefr_level: B1
+    accented: о́пытный
+    en_gb:
+      standard: experienced (having much experience)
+      alt:
+        - skilled
+    forms:
+      m: о́пытный
+      f: о́пытная
+      n: о́пытное
+      pl: о́пытные
+    declension:
+      m_nom: о́пытный
+      m_gen: о́пытного
+      m_dat: о́пытному
+      m_acc: о́пытный
+      m_ins: о́пытным
+      m_pre: о́пытном
+      n_nom: о́пытное
+      n_gen: о́пытного
+      n_dat: о́пытному
+      n_acc: о́пытное
+      n_ins: о́пытным
+      n_pre: о́пытном
+      f_nom: о́пытная
+      f_gen: о́пытной
+      f_dat: о́пытной
+      f_acc: о́пытную
+      f_ins: о́пытной
+      f_pre: о́пытной
+      pl_nom: о́пытные
+      pl_gen: о́пытных
+      pl_dat: о́пытным
+      pl_acc: о́пытные
+      pl_ins: о́пытными
+      pl_pre: о́пытных
   "оранжевый=orange":
     cefr_level: A2
     accented: ора́нжевый
@@ -7003,6 +9126,43 @@ words:
       pl_acc: осо́бые
       pl_ins: осо́быми
       pl_pre: осо́бых
+  "остальной=remaining":
+    cefr_level: B1
+    accented: остально́й
+    en_gb:
+      standard: remaining (the rest of)
+      alt:
+        - rest (the rest)
+    forms:
+      m: остально́й
+      f: остальна́я
+      n: остально́е
+      pl: остальны́е
+    declension:
+      m_nom: остально́й
+      m_gen: остально́го
+      m_dat: остально́му
+      m_acc: остально́й
+      m_ins: остальны́м
+      m_pre: остально́м
+      n_nom: остально́е
+      n_gen: остально́го
+      n_dat: остально́му
+      n_acc: остально́е
+      n_ins: остальны́м
+      n_pre: остально́м
+      f_nom: остальна́я
+      f_gen: остально́й
+      f_dat: остально́й
+      f_acc: остальну́ю
+      f_ins: остально́й
+      f_pre: остально́й
+      pl_nom: остальны́е
+      pl_gen: остальны́х
+      pl_dat: остальны́м
+      pl_acc: остальны́е
+      pl_ins: остальны́ми
+      pl_pre: остальны́х
   "острый=sharp":
     cefr_level: B1
     accented: о́стрый
@@ -7120,6 +9280,80 @@ words:
       pl_acc: оте́чественные
       pl_ins: оте́чественными
       pl_pre: оте́чественных
+  "открытый=open":
+    cefr_level: A2
+    accented: откры́тый
+    en_gb:
+      standard: open (not closed)
+      alt:
+        - opened
+    forms:
+      m: откры́тый
+      f: откры́тая
+      n: откры́тое
+      pl: откры́тые
+    declension:
+      m_nom: откры́тый
+      m_gen: откры́того
+      m_dat: откры́тому
+      m_acc: откры́тый
+      m_ins: откры́тым
+      m_pre: откры́том
+      n_nom: откры́тое
+      n_gen: откры́того
+      n_dat: откры́тому
+      n_acc: откры́тое
+      n_ins: откры́тым
+      n_pre: откры́том
+      f_nom: откры́тая
+      f_gen: откры́той
+      f_dat: откры́той
+      f_acc: откры́тую
+      f_ins: откры́той
+      f_pre: откры́той
+      pl_nom: откры́тые
+      pl_gen: откры́тых
+      pl_dat: откры́тым
+      pl_acc: откры́тые
+      pl_ins: откры́тыми
+      pl_pre: откры́тых
+  "отличный=excellent":
+    cefr_level: B1
+    accented: отли́чный
+    en_gb:
+      standard: excellent (very good)
+      alt:
+        - great
+    forms:
+      m: отли́чный
+      f: отли́чная
+      n: отли́чное
+      pl: отли́чные
+    declension:
+      m_nom: отли́чный
+      m_gen: отли́чного
+      m_dat: отли́чному
+      m_acc: отли́чный
+      m_ins: отли́чным
+      m_pre: отли́чном
+      n_nom: отли́чное
+      n_gen: отли́чного
+      n_dat: отли́чному
+      n_acc: отли́чное
+      n_ins: отли́чным
+      n_pre: отли́чном
+      f_nom: отли́чная
+      f_gen: отли́чной
+      f_dat: отли́чной
+      f_acc: отли́чную
+      f_ins: отли́чной
+      f_pre: отли́чной
+      pl_nom: отли́чные
+      pl_gen: отли́чных
+      pl_dat: отли́чным
+      pl_acc: отли́чные
+      pl_ins: отли́чными
+      pl_pre: отли́чных
   "официальный=official":
     cefr_level: B1
     accented: официа́льный
@@ -7158,6 +9392,44 @@ words:
       pl_acc: официа́льные
       pl_ins: официа́льными
       pl_pre: официа́льных
+  "очередной=next":
+    cefr_level: B1
+    accented: очередно́й
+    en_gb:
+      standard: next (due, in the regular sequence)
+      alt:
+        - another
+        - scheduled
+    forms:
+      m: очередно́й
+      f: очередна́я
+      n: очередно́е
+      pl: очередны́е
+    declension:
+      m_nom: очередно́й
+      m_gen: очередно́го
+      m_dat: очередно́му
+      m_acc: очередно́й
+      m_ins: очередны́м
+      m_pre: очередно́м
+      n_nom: очередно́е
+      n_gen: очередно́го
+      n_dat: очередно́му
+      n_acc: очередно́е
+      n_ins: очередны́м
+      n_pre: очередно́м
+      f_nom: очередна́я
+      f_gen: очередно́й
+      f_dat: очередно́й
+      f_acc: очередну́ю
+      f_ins: очередно́й
+      f_pre: очередно́й
+      pl_nom: очередны́е
+      pl_gen: очередны́х
+      pl_dat: очередны́м
+      pl_acc: очередны́е
+      pl_ins: очередны́ми
+      pl_pre: очередны́х
   "партийный=party":
     cefr_level: B2
     accented: парти́йный
@@ -7195,6 +9467,43 @@ words:
       pl_acc: парти́йные
       pl_ins: парти́йными
       pl_pre: парти́йных
+  "передний=front":
+    cefr_level: B1
+    accented: пере́дний
+    en_gb:
+      standard: front (at the front)
+      alt:
+        - fore (as modifier)
+    forms:
+      m: пере́дний
+      f: пере́дняя
+      n: пере́днее
+      pl: пере́дние
+    declension:
+      m_nom: пере́дний
+      m_gen: пере́днего
+      m_dat: пере́днему
+      m_acc: пере́дний
+      m_ins: пере́дним
+      m_pre: пере́днем
+      n_nom: пере́днее
+      n_gen: пере́днего
+      n_dat: пере́днему
+      n_acc: пере́днее
+      n_ins: пере́дним
+      n_pre: пере́днем
+      f_nom: пере́дняя
+      f_gen: пере́дней
+      f_dat: пере́дней
+      f_acc: пере́днюю
+      f_ins: пере́дней
+      f_pre: пере́дней
+      pl_nom: пере́дние
+      pl_gen: пере́дних
+      pl_dat: пере́дним
+      pl_acc: пере́дние
+      pl_ins: пере́дними
+      pl_pre: пере́дних
   "петербургский=of Saint Petersburg":
     cefr_level: B1
     accented: петербу́ргский
@@ -7232,6 +9541,45 @@ words:
       pl_acc: петербу́ргские
       pl_ins: петербу́ргскими
       pl_pre: петербу́ргских
+  "печальный=sad":
+    cefr_level: B1
+    accented: печа́льный
+    en_gb:
+      standard: sad (unhappy, sorrowful)
+      alt:
+        - melancholy
+        - mournful
+    forms:
+      m: печа́льный
+      f: печа́льная
+      n: печа́льное
+      pl: печа́льные
+      comparative: печа́льнее
+    declension:
+      m_nom: печа́льный
+      m_gen: печа́льного
+      m_dat: печа́льному
+      m_acc: печа́льный
+      m_ins: печа́льным
+      m_pre: печа́льном
+      n_nom: печа́льное
+      n_gen: печа́льного
+      n_dat: печа́льному
+      n_acc: печа́льное
+      n_ins: печа́льным
+      n_pre: печа́льном
+      f_nom: печа́льная
+      f_gen: печа́льной
+      f_dat: печа́льной
+      f_acc: печа́льную
+      f_ins: печа́льной
+      f_pre: печа́льной
+      pl_nom: печа́льные
+      pl_gen: печа́льных
+      pl_dat: печа́льным
+      pl_acc: печа́льные
+      pl_ins: печа́льными
+      pl_pre: печа́льных
   "плоский=flat":
     cefr_level: B1
     accented: пло́ский
@@ -7385,6 +9733,43 @@ words:
       pl_acc: подзе́мные
       pl_ins: подзе́мными
       pl_pre: подзе́мных
+  "подобный=similar":
+    cefr_level: B1
+    accented: подо́бный
+    en_gb:
+      standard: similar (like, of the same kind)
+      alt:
+        - such
+    forms:
+      m: подо́бный
+      f: подо́бная
+      n: подо́бное
+      pl: подо́бные
+    declension:
+      m_nom: подо́бный
+      m_gen: подо́бного
+      m_dat: подо́бному
+      m_acc: подо́бный
+      m_ins: подо́бным
+      m_pre: подо́бном
+      n_nom: подо́бное
+      n_gen: подо́бного
+      n_dat: подо́бному
+      n_acc: подо́бное
+      n_ins: подо́бным
+      n_pre: подо́бном
+      f_nom: подо́бная
+      f_gen: подо́бной
+      f_dat: подо́бной
+      f_acc: подо́бную
+      f_ins: подо́бной
+      f_pre: подо́бной
+      pl_nom: подо́бные
+      pl_gen: подо́бных
+      pl_dat: подо́бным
+      pl_acc: подо́бные
+      pl_ins: подо́бными
+      pl_pre: подо́бных
   "подходящий=suitable":
     cefr_level: B1
     accented: подходя́щий
@@ -7494,6 +9879,79 @@ words:
       pl_acc: по́здние
       pl_ins: по́здними
       pl_pre: по́здних
+  "полезный=useful":
+    cefr_level: A2
+    accented: поле́зный
+    en_gb:
+      standard: useful (serving a practical purpose)
+      alt:
+        - beneficial
+    forms:
+      m: поле́зный
+      f: поле́зная
+      n: поле́зное
+      pl: поле́зные
+      comparative: поле́знее
+    declension:
+      m_nom: поле́зный
+      m_gen: поле́зного
+      m_dat: поле́зному
+      m_acc: поле́зный
+      m_ins: поле́зным
+      m_pre: поле́зном
+      n_nom: поле́зное
+      n_gen: поле́зного
+      n_dat: поле́зному
+      n_acc: поле́зное
+      n_ins: поле́зным
+      n_pre: поле́зном
+      f_nom: поле́зная
+      f_gen: поле́зной
+      f_dat: поле́зной
+      f_acc: поле́зную
+      f_ins: поле́зной
+      f_pre: поле́зной
+      pl_nom: поле́зные
+      pl_gen: поле́зных
+      pl_dat: поле́зным
+      pl_acc: поле́зные
+      pl_ins: поле́зными
+      pl_pre: поле́зных
+  "политический=political":
+    cefr_level: B1
+    accented: полити́ческий
+    en_gb:
+      standard: political (of or relating to politics)
+    forms:
+      m: полити́ческий
+      f: полити́ческая
+      n: полити́ческое
+      pl: полити́ческие
+    declension:
+      m_nom: полити́ческий
+      m_gen: полити́ческого
+      m_dat: полити́ческому
+      m_acc: полити́ческий
+      m_ins: полити́ческим
+      m_pre: полити́ческом
+      n_nom: полити́ческое
+      n_gen: полити́ческого
+      n_dat: полити́ческому
+      n_acc: полити́ческое
+      n_ins: полити́ческим
+      n_pre: полити́ческом
+      f_nom: полити́ческая
+      f_gen: полити́ческой
+      f_dat: полити́ческой
+      f_acc: полити́ческую
+      f_ins: полити́ческой
+      f_pre: полити́ческой
+      pl_nom: полити́ческие
+      pl_gen: полити́ческих
+      pl_dat: полити́ческим
+      pl_acc: полити́ческие
+      pl_ins: полити́ческими
+      pl_pre: полити́ческих
   "полный=full":
     cefr_level: B1
     accented: по́лный
@@ -7536,6 +9994,82 @@ words:
       pl_acc: по́лные
       pl_ins: по́лными
       pl_pre: по́лных
+  "положенный=prescribed":
+    cefr_level: B2
+    accented: поло́женный
+    en_gb:
+      standard: prescribed (laid down, appointed)
+      alt:
+        - due
+        - appointed
+    forms:
+      m: поло́женный
+      f: поло́женная
+      n: поло́женное
+      pl: поло́женные
+    declension:
+      m_nom: поло́женный
+      m_gen: поло́женного
+      m_dat: поло́женному
+      m_acc: поло́женный
+      m_ins: поло́женным
+      m_pre: поло́женном
+      n_nom: поло́женное
+      n_gen: поло́женного
+      n_dat: поло́женному
+      n_acc: поло́женное
+      n_ins: поло́женным
+      n_pre: поло́женном
+      f_nom: поло́женная
+      f_gen: поло́женной
+      f_dat: поло́женной
+      f_acc: поло́женную
+      f_ins: поло́женной
+      f_pre: поло́женной
+      pl_nom: поло́женные
+      pl_gen: поло́женных
+      pl_dat: поло́женным
+      pl_acc: поло́женные
+      pl_ins: поло́женными
+      pl_pre: поло́женных
+  "понятный=understandable":
+    cefr_level: B1
+    accented: поня́тный
+    en_gb:
+      standard: understandable (easy to comprehend)
+      alt:
+        - clear
+        - comprehensible
+    forms:
+      m: поня́тный
+      f: поня́тная
+      n: поня́тное
+      pl: поня́тные
+    declension:
+      m_nom: поня́тный
+      m_gen: поня́тного
+      m_dat: поня́тному
+      m_acc: поня́тный
+      m_ins: поня́тным
+      m_pre: поня́тном
+      n_nom: поня́тное
+      n_gen: поня́тного
+      n_dat: поня́тному
+      n_acc: поня́тное
+      n_ins: поня́тным
+      n_pre: поня́тном
+      f_nom: поня́тная
+      f_gen: поня́тной
+      f_dat: поня́тной
+      f_acc: поня́тную
+      f_ins: поня́тной
+      f_pre: поня́тной
+      pl_nom: поня́тные
+      pl_gen: поня́тных
+      pl_dat: поня́тным
+      pl_acc: поня́тные
+      pl_ins: поня́тными
+      pl_pre: поня́тных
   "последний=last":
     cefr_level: A2
     accented: после́дний
@@ -7606,6 +10140,44 @@ words:
       pl_acc: постоя́нные
       pl_ins: постоя́нными
       pl_pre: постоя́нных
+  "похожий=similar":
+    cefr_level: A2
+    accented: похо́жий
+    en_gb:
+      standard: similar (looking or seeming like)
+      alt:
+        - alike
+        - resembling
+    forms:
+      m: похо́жий
+      f: похо́жая
+      n: похо́жее
+      pl: похо́жие
+    declension:
+      m_nom: похо́жий
+      m_gen: похо́жего
+      m_dat: похо́жему
+      m_acc: похо́жий
+      m_ins: похо́жим
+      m_pre: похо́жем
+      n_nom: похо́жее
+      n_gen: похо́жего
+      n_dat: похо́жему
+      n_acc: похо́жее
+      n_ins: похо́жим
+      n_pre: похо́жем
+      f_nom: похо́жая
+      f_gen: похо́жей
+      f_dat: похо́жей
+      f_acc: похо́жую
+      f_ins: похо́жей
+      f_pre: похо́жей
+      pl_nom: похо́жие
+      pl_gen: похо́жих
+      pl_dat: похо́жим
+      pl_acc: похо́жие
+      pl_ins: похо́жими
+      pl_pre: похо́жих
   "правильный=correct":
     cefr_level: A2
     accented: пра́вильный
@@ -7641,6 +10213,44 @@ words:
       pl_acc: пра́вильные
       pl_ins: пра́вильными
       pl_pre: пра́вильных
+  "правый=right":
+    cefr_level: B1
+    accented: пра́вый
+    en_gb:
+      standard: right (on the right side)
+      alt:
+        - right-wing
+        - righteous
+    forms:
+      m: пра́вый
+      f: пра́вая
+      n: пра́вое
+      pl: пра́вые
+    declension:
+      m_nom: пра́вый
+      m_gen: пра́вого
+      m_dat: пра́вому
+      m_acc: пра́вый
+      m_ins: пра́вым
+      m_pre: пра́вом
+      n_nom: пра́вое
+      n_gen: пра́вого
+      n_dat: пра́вому
+      n_acc: пра́вое
+      n_ins: пра́вым
+      n_pre: пра́вом
+      f_nom: пра́вая
+      f_gen: пра́вой
+      f_dat: пра́вой
+      f_acc: пра́вую
+      f_ins: пра́вой
+      f_pre: пра́вой
+      pl_nom: пра́вые
+      pl_gen: пра́вых
+      pl_dat: пра́вым
+      pl_acc: пра́вые
+      pl_ins: пра́выми
+      pl_pre: пра́вых
   "прежний=former":
     cefr_level: B1
     accented: пре́жний
@@ -7711,6 +10321,196 @@ words:
       pl_acc: прекра́сные
       pl_ins: прекра́сными
       pl_pre: прекра́сных
+  "привычный=habitual":
+    cefr_level: B1
+    accented: привы́чный
+    en_gb:
+      standard: habitual (customary, usual)
+      alt:
+        - customary
+        - familiar
+    forms:
+      m: привы́чный
+      f: привы́чная
+      n: привы́чное
+      pl: привы́чные
+    declension:
+      m_nom: привы́чный
+      m_gen: привы́чного
+      m_dat: привы́чному
+      m_acc: привы́чный
+      m_ins: привы́чным
+      m_pre: привы́чном
+      n_nom: привы́чное
+      n_gen: привы́чного
+      n_dat: привы́чному
+      n_acc: привы́чное
+      n_ins: привы́чным
+      n_pre: привы́чном
+      f_nom: привы́чная
+      f_gen: привы́чной
+      f_dat: привы́чной
+      f_acc: привы́чную
+      f_ins: привы́чной
+      f_pre: привы́чной
+      pl_nom: привы́чные
+      pl_gen: привы́чных
+      pl_dat: привы́чным
+      pl_acc: привы́чные
+      pl_ins: привы́чными
+      pl_pre: привы́чных
+  "приёмный=reception":
+    cefr_level: B2
+    accented: приёмный
+    en_gb:
+      standard: reception (receiving or admitting)
+      alt:
+        - adoptive (of parents)
+        - foster
+    forms:
+      m: приёмный
+      f: приёмная
+      n: приёмное
+      pl: приёмные
+    declension:
+      m_nom: приёмный
+      m_gen: приёмного
+      m_dat: приёмному
+      m_acc: приёмный
+      m_ins: приёмным
+      m_pre: приёмном
+      n_nom: приёмное
+      n_gen: приёмного
+      n_dat: приёмному
+      n_acc: приёмное
+      n_ins: приёмным
+      n_pre: приёмном
+      f_nom: приёмная
+      f_gen: приёмной
+      f_dat: приёмной
+      f_acc: приёмную
+      f_ins: приёмной
+      f_pre: приёмной
+      pl_nom: приёмные
+      pl_gen: приёмных
+      pl_dat: приёмным
+      pl_acc: приёмные
+      pl_ins: приёмными
+      pl_pre: приёмных
+  "приличный=decent":
+    cefr_level: B1
+    accented: прили́чный
+    en_gb:
+      standard: decent (proper, respectable)
+      alt:
+        - proper
+        - respectable
+    forms:
+      m: прили́чный
+      f: прили́чная
+      n: прили́чное
+      pl: прили́чные
+    declension:
+      m_nom: прили́чный
+      m_gen: прили́чного
+      m_dat: прили́чному
+      m_acc: прили́чный
+      m_ins: прили́чным
+      m_pre: прили́чном
+      n_nom: прили́чное
+      n_gen: прили́чного
+      n_dat: прили́чному
+      n_acc: прили́чное
+      n_ins: прили́чным
+      n_pre: прили́чном
+      f_nom: прили́чная
+      f_gen: прили́чной
+      f_dat: прили́чной
+      f_acc: прили́чную
+      f_ins: прили́чной
+      f_pre: прили́чной
+      pl_nom: прили́чные
+      pl_gen: прили́чных
+      pl_dat: прили́чным
+      pl_acc: прили́чные
+      pl_ins: прили́чными
+      pl_pre: прили́чных
+  "принятый=accepted":
+    cefr_level: B1
+    accented: при́нятый
+    en_gb:
+      standard: accepted (adopted, agreed upon)
+      alt:
+        - adopted
+    forms:
+      m: при́нятый
+      f: при́нятая
+      n: при́нятое
+      pl: при́нятые
+    declension:
+      m_nom: при́нятый
+      m_gen: при́нятого
+      m_dat: при́нятому
+      m_acc: при́нятый
+      m_ins: при́нятым
+      m_pre: при́нятом
+      n_nom: при́нятое
+      n_gen: при́нятого
+      n_dat: при́нятому
+      n_acc: при́нятое
+      n_ins: при́нятым
+      n_pre: при́нятом
+      f_nom: при́нятая
+      f_gen: при́нятой
+      f_dat: при́нятой
+      f_acc: при́нятую
+      f_ins: при́нятой
+      f_pre: при́нятой
+      pl_nom: при́нятые
+      pl_gen: при́нятых
+      pl_dat: при́нятым
+      pl_acc: при́нятые
+      pl_ins: при́нятыми
+      pl_pre: при́нятых
+  "приятный=pleasant":
+    cefr_level: A2
+    accented: прия́тный
+    en_gb:
+      standard: pleasant (giving a sense of enjoyment)
+      alt:
+        - nice
+        - agreeable
+    forms:
+      m: прия́тный
+      f: прия́тная
+      n: прия́тное
+      pl: прия́тные
+      comparative: прия́тнее
+    declension:
+      m_nom: прия́тный
+      m_gen: прия́тного
+      m_dat: прия́тному
+      m_acc: прия́тный
+      m_ins: прия́тным
+      m_pre: прия́тном
+      n_nom: прия́тное
+      n_gen: прия́тного
+      n_dat: прия́тному
+      n_acc: прия́тное
+      n_ins: прия́тным
+      n_pre: прия́тном
+      f_nom: прия́тная
+      f_gen: прия́тной
+      f_dat: прия́тной
+      f_acc: прия́тную
+      f_ins: прия́тной
+      f_pre: прия́тной
+      pl_nom: прия́тные
+      pl_gen: прия́тных
+      pl_dat: прия́тным
+      pl_acc: прия́тные
+      pl_ins: прия́тными
+      pl_pre: прия́тных
   "прозрачный=transparent":
     cefr_level: B1
     accented: прозра́чный
@@ -7746,6 +10546,43 @@ words:
       pl_acc: прозра́чные
       pl_ins: прозра́чными
       pl_pre: прозра́чных
+  "проклятый=damned":
+    cefr_level: B1
+    accented: прокля́тый
+    en_gb:
+      standard: damned (cursed)
+      alt:
+        - cursed
+    forms:
+      m: прокля́тый
+      f: прокля́тая
+      n: прокля́тое
+      pl: прокля́тые
+    declension:
+      m_nom: прокля́тый
+      m_gen: прокля́того
+      m_dat: прокля́тому
+      m_acc: прокля́тый
+      m_ins: прокля́тым
+      m_pre: прокля́том
+      n_nom: прокля́тое
+      n_gen: прокля́того
+      n_dat: прокля́тому
+      n_acc: прокля́тое
+      n_ins: прокля́тым
+      n_pre: прокля́том
+      f_nom: прокля́тая
+      f_gen: прокля́той
+      f_dat: прокля́той
+      f_acc: прокля́тую
+      f_ins: прокля́той
+      f_pre: прокля́той
+      pl_nom: прокля́тые
+      pl_gen: прокля́тых
+      pl_dat: прокля́тым
+      pl_acc: прокля́тые
+      pl_ins: прокля́тыми
+      pl_pre: прокля́тых
   "простой=simple":
     cefr_level: A2
     accented: просто́й
@@ -7790,6 +10627,41 @@ words:
       pl_acc: просты́е
       pl_ins: просты́ми
       pl_pre: просты́х
+  "противоположный=opposite":
+    cefr_level: B1
+    accented: противополо́жный
+    en_gb:
+      standard: opposite (completely different, facing)
+    forms:
+      m: противополо́жный
+      f: противополо́жная
+      n: противополо́жное
+      pl: противополо́жные
+    declension:
+      m_nom: противополо́жный
+      m_gen: противополо́жного
+      m_dat: противополо́жному
+      m_acc: противополо́жный
+      m_ins: противополо́жным
+      m_pre: противополо́жном
+      n_nom: противополо́жное
+      n_gen: противополо́жного
+      n_dat: противополо́жному
+      n_acc: противополо́жное
+      n_ins: противополо́жным
+      n_pre: противополо́жном
+      f_nom: противополо́жная
+      f_gen: противополо́жной
+      f_dat: противополо́жной
+      f_acc: противополо́жную
+      f_ins: противополо́жной
+      f_pre: противополо́жной
+      pl_nom: противополо́жные
+      pl_gen: противополо́жных
+      pl_dat: противополо́жным
+      pl_acc: противополо́жные
+      pl_ins: противополо́жными
+      pl_pre: противополо́жных
   "профессиональный=professional":
     cefr_level: B1
     accented: профессиона́льный
@@ -7827,6 +10699,44 @@ words:
       pl_acc: профессиона́льные
       pl_ins: профессиона́льными
       pl_pre: профессиона́льных
+  "прошлый=past":
+    cefr_level: A2
+    accented: про́шлый
+    en_gb:
+      standard: past (of a previous time)
+      alt:
+        - last
+        - previous
+    forms:
+      m: про́шлый
+      f: про́шлая
+      n: про́шлое
+      pl: про́шлые
+    declension:
+      m_nom: про́шлый
+      m_gen: про́шлого
+      m_dat: про́шлому
+      m_acc: про́шлый
+      m_ins: про́шлым
+      m_pre: про́шлом
+      n_nom: про́шлое
+      n_gen: про́шлого
+      n_dat: про́шлому
+      n_acc: про́шлое
+      n_ins: про́шлым
+      n_pre: про́шлом
+      f_nom: про́шлая
+      f_gen: про́шлой
+      f_dat: про́шлой
+      f_acc: про́шлую
+      f_ins: про́шлой
+      f_pre: про́шлой
+      pl_nom: про́шлые
+      pl_gen: про́шлых
+      pl_dat: про́шлым
+      pl_acc: про́шлые
+      pl_ins: про́шлыми
+      pl_pre: про́шлых
   "прямой=straight":
     cefr_level: B1
     accented: прямо́й
@@ -7947,6 +10857,43 @@ words:
       pl_acc: пусты́е
       pl_ins: пусты́ми
       pl_pre: пусты́х
+  "пьяный=drunk":
+    cefr_level: B1
+    accented: пья́ный
+    en_gb:
+      standard: drunk (intoxicated with alcohol)
+      alt:
+        - intoxicated
+    forms:
+      m: пья́ный
+      f: пья́ная
+      n: пья́ное
+      pl: пья́ные
+    declension:
+      m_nom: пья́ный
+      m_gen: пья́ного
+      m_dat: пья́ному
+      m_acc: пья́ный
+      m_ins: пья́ным
+      m_pre: пья́ном
+      n_nom: пья́ное
+      n_gen: пья́ного
+      n_dat: пья́ному
+      n_acc: пья́ное
+      n_ins: пья́ным
+      n_pre: пья́ном
+      f_nom: пья́ная
+      f_gen: пья́ной
+      f_dat: пья́ной
+      f_acc: пья́ную
+      f_ins: пья́ной
+      f_pre: пья́ной
+      pl_nom: пья́ные
+      pl_gen: пья́ных
+      pl_dat: пья́ным
+      pl_acc: пья́ные
+      pl_ins: пья́ными
+      pl_pre: пья́ных
   "равный=equal":
     cefr_level: B2
     accented: ра́вный
@@ -7987,6 +10934,119 @@ words:
       pl_acc: ра́вные
       pl_ins: ра́вными
       pl_pre: ра́вных
+  "радостный=joyful":
+    cefr_level: B1
+    accented: ра́достный
+    en_gb:
+      standard: joyful (feeling or showing great joy)
+      alt:
+        - glad
+        - delighted
+    forms:
+      m: ра́достный
+      f: ра́достная
+      n: ра́достное
+      pl: ра́достные
+    declension:
+      m_nom: ра́достный
+      m_gen: ра́достного
+      m_dat: ра́достному
+      m_acc: ра́достный
+      m_ins: ра́достным
+      m_pre: ра́достном
+      n_nom: ра́достное
+      n_gen: ра́достного
+      n_dat: ра́достному
+      n_acc: ра́достное
+      n_ins: ра́достным
+      n_pre: ра́достном
+      f_nom: ра́достная
+      f_gen: ра́достной
+      f_dat: ра́достной
+      f_acc: ра́достную
+      f_ins: ра́достной
+      f_pre: ра́достной
+      pl_nom: ра́достные
+      pl_gen: ра́достных
+      pl_dat: ра́достным
+      pl_acc: ра́достные
+      pl_ins: ра́достными
+      pl_pre: ра́достных
+  "разбитый=broken":
+    cefr_level: B1
+    accented: разби́тый
+    en_gb:
+      standard: broken (smashed, defeated)
+      alt:
+        - smashed
+    forms:
+      m: разби́тый
+      f: разби́тая
+      n: разби́тое
+      pl: разби́тые
+    declension:
+      m_nom: разби́тый
+      m_gen: разби́того
+      m_dat: разби́тому
+      m_acc: разби́тый
+      m_ins: разби́тым
+      m_pre: разби́том
+      n_nom: разби́тое
+      n_gen: разби́того
+      n_dat: разби́тому
+      n_acc: разби́тое
+      n_ins: разби́тым
+      n_pre: разби́том
+      f_nom: разби́тая
+      f_gen: разби́той
+      f_dat: разби́той
+      f_acc: разби́тую
+      f_ins: разби́той
+      f_pre: разби́той
+      pl_nom: разби́тые
+      pl_gen: разби́тых
+      pl_dat: разби́тым
+      pl_acc: разби́тые
+      pl_ins: разби́тыми
+      pl_pre: разби́тых
+  "различный=various":
+    cefr_level: B1
+    accented: разли́чный
+    en_gb:
+      standard: various (of different kinds)
+      alt:
+        - diverse
+        - different
+    forms:
+      m: разли́чный
+      f: разли́чная
+      n: разли́чное
+      pl: разли́чные
+    declension:
+      m_nom: разли́чный
+      m_gen: разли́чного
+      m_dat: разли́чному
+      m_acc: разли́чный
+      m_ins: разли́чным
+      m_pre: разли́чном
+      n_nom: разли́чное
+      n_gen: разли́чного
+      n_dat: разли́чному
+      n_acc: разли́чное
+      n_ins: разли́чным
+      n_pre: разли́чном
+      f_nom: разли́чная
+      f_gen: разли́чной
+      f_dat: разли́чной
+      f_acc: разли́чную
+      f_ins: разли́чной
+      f_pre: разли́чной
+      pl_nom: разли́чные
+      pl_gen: разли́чных
+      pl_dat: разли́чным
+      pl_acc: разли́чные
+      pl_ins: разли́чными
+      pl_pre: разли́чных
   "разноцветный=multicoloured":
     cefr_level: B1
     accented: разноцве́тный
@@ -8028,6 +11088,120 @@ words:
       pl_acc: разноцве́тные
       pl_ins: разноцве́тными
       pl_pre: разноцве́тных
+  "разный=different":
+    cefr_level: A2
+    accented: ра́зный
+    en_gb:
+      standard: different (not the same)
+      alt:
+        - various
+        - diverse
+    forms:
+      m: ра́зный
+      f: ра́зная
+      n: ра́зное
+      pl: ра́зные
+    declension:
+      m_nom: ра́зный
+      m_gen: ра́зного
+      m_dat: ра́зному
+      m_acc: ра́зный
+      m_ins: ра́зным
+      m_pre: ра́зном
+      n_nom: ра́зное
+      n_gen: ра́зного
+      n_dat: ра́зному
+      n_acc: ра́зное
+      n_ins: ра́зным
+      n_pre: ра́зном
+      f_nom: ра́зная
+      f_gen: ра́зной
+      f_dat: ра́зной
+      f_acc: ра́зную
+      f_ins: ра́зной
+      f_pre: ра́зной
+      pl_nom: ра́зные
+      pl_gen: ра́зных
+      pl_dat: ра́зным
+      pl_acc: ра́зные
+      pl_ins: ра́зными
+      pl_pre: ра́зных
+  "разумный=reasonable":
+    cefr_level: B1
+    accented: разу́мный
+    en_gb:
+      standard: reasonable (sensible, logical)
+      alt:
+        - sensible
+        - rational
+    forms:
+      m: разу́мный
+      f: разу́мная
+      n: разу́мное
+      pl: разу́мные
+      comparative: разу́мнее
+    declension:
+      m_nom: разу́мный
+      m_gen: разу́много
+      m_dat: разу́мному
+      m_acc: разу́мный
+      m_ins: разу́мным
+      m_pre: разу́мном
+      n_nom: разу́мное
+      n_gen: разу́много
+      n_dat: разу́мному
+      n_acc: разу́мное
+      n_ins: разу́мным
+      n_pre: разу́мном
+      f_nom: разу́мная
+      f_gen: разу́мной
+      f_dat: разу́мной
+      f_acc: разу́мную
+      f_ins: разу́мной
+      f_pre: разу́мной
+      pl_nom: разу́мные
+      pl_gen: разу́мных
+      pl_dat: разу́мным
+      pl_acc: разу́мные
+      pl_ins: разу́мными
+      pl_pre: разу́мных
+  "раненый=wounded":
+    cefr_level: B1
+    accented: ра́неный
+    en_gb:
+      standard: wounded (injured in battle or by violence)
+      alt:
+        - injured
+    forms:
+      m: ра́неный
+      f: ра́неная
+      n: ра́неное
+      pl: ра́неные
+    declension:
+      m_nom: ра́неный
+      m_gen: ра́неного
+      m_dat: ра́неному
+      m_acc: ра́неный
+      m_ins: ра́неным
+      m_pre: ра́неном
+      n_nom: ра́неное
+      n_gen: ра́неного
+      n_dat: ра́неному
+      n_acc: ра́неное
+      n_ins: ра́неным
+      n_pre: ра́неном
+      f_nom: ра́неная
+      f_gen: ра́неной
+      f_dat: ра́неной
+      f_acc: ра́неную
+      f_ins: ра́неной
+      f_pre: ра́неной
+      pl_nom: ра́неные
+      pl_gen: ра́неных
+      pl_dat: ра́неным
+      pl_acc: ра́неные
+      pl_ins: ра́неными
+      pl_pre: ра́неных
   "реальный=real":
     cefr_level: B1
     accented: реа́льный
@@ -8331,6 +11505,81 @@ words:
       pl_acc: ру́сские
       pl_ins: ру́сскими
       pl_pre: ру́сских
+  "рыжий=red-haired":
+    cefr_level: B1
+    accented: ры́жий
+    en_gb:
+      standard: red-haired (having red or ginger hair)
+      alt:
+        - ginger
+        - auburn
+    forms:
+      m: ры́жий
+      f: ры́жая
+      n: ры́жее
+      pl: ры́жие
+    declension:
+      m_nom: ры́жий
+      m_gen: ры́жего
+      m_dat: ры́жему
+      m_acc: ры́жий
+      m_ins: ры́жим
+      m_pre: ры́жем
+      n_nom: ры́жее
+      n_gen: ры́жего
+      n_dat: ры́жему
+      n_acc: ры́жее
+      n_ins: ры́жим
+      n_pre: ры́жем
+      f_nom: ры́жая
+      f_gen: ры́жей
+      f_dat: ры́жей
+      f_acc: ры́жую
+      f_ins: ры́жей
+      f_pre: ры́жей
+      pl_nom: ры́жие
+      pl_gen: ры́жих
+      pl_dat: ры́жим
+      pl_acc: ры́жие
+      pl_ins: ры́жими
+      pl_pre: ры́жих
+  "самый=the most":
+    cefr_level: A1
+    accented: са́мый
+    en_gb:
+      standard: the most (used to form superlatives)
+      alt:
+        - very (emphasising identity)
+    forms:
+      m: са́мый
+      f: са́мая
+      n: са́мое
+      pl: са́мые
+    declension:
+      m_nom: са́мый
+      m_gen: са́мого
+      m_dat: са́мому
+      m_acc: са́мый
+      m_ins: са́мым
+      m_pre: са́мом
+      n_nom: са́мое
+      n_gen: са́мого
+      n_dat: са́мому
+      n_acc: са́мое
+      n_ins: са́мым
+      n_pre: са́мом
+      f_nom: са́мая
+      f_gen: са́мой
+      f_dat: са́мой
+      f_acc: са́мую
+      f_ins: са́мой
+      f_pre: са́мой
+      pl_nom: са́мые
+      pl_gen: са́мых
+      pl_dat: са́мым
+      pl_acc: са́мые
+      pl_ins: са́мыми
+      pl_pre: са́мых
   "свежий=fresh":
     cefr_level: A2
     accented: све́жий
@@ -8460,6 +11709,115 @@ words:
       pl_acc: свобо́дные
       pl_ins: свобо́дными
       pl_pre: свобо́дных
+  "северный=northern":
+    cefr_level: A2
+    accented: се́верный
+    en_gb:
+      standard: northern (in or towards the north)
+      alt:
+        - north (as modifier)
+    forms:
+      m: се́верный
+      f: се́верная
+      n: се́верное
+      pl: се́верные
+    declension:
+      m_nom: се́верный
+      m_gen: се́верного
+      m_dat: се́верному
+      m_acc: се́верный
+      m_ins: се́верным
+      m_pre: се́верном
+      n_nom: се́верное
+      n_gen: се́верного
+      n_dat: се́верному
+      n_acc: се́верное
+      n_ins: се́верным
+      n_pre: се́верном
+      f_nom: се́верная
+      f_gen: се́верной
+      f_dat: се́верной
+      f_acc: се́верную
+      f_ins: се́верной
+      f_pre: се́верной
+      pl_nom: се́верные
+      pl_gen: се́верных
+      pl_dat: се́верным
+      pl_acc: се́верные
+      pl_ins: се́верными
+      pl_pre: се́верных
+  "секретный=secret":
+    cefr_level: B1
+    accented: секре́тный
+    en_gb:
+      standard: secret (kept hidden from others)
+      alt:
+        - classified
+    forms:
+      m: секре́тный
+      f: секре́тная
+      n: секре́тное
+      pl: секре́тные
+    declension:
+      m_nom: секре́тный
+      m_gen: секре́тного
+      m_dat: секре́тному
+      m_acc: секре́тный
+      m_ins: секре́тным
+      m_pre: секре́тном
+      n_nom: секре́тное
+      n_gen: секре́тного
+      n_dat: секре́тному
+      n_acc: секре́тное
+      n_ins: секре́тным
+      n_pre: секре́тном
+      f_nom: секре́тная
+      f_gen: секре́тной
+      f_dat: секре́тной
+      f_acc: секре́тную
+      f_ins: секре́тной
+      f_pre: секре́тной
+      pl_nom: секре́тные
+      pl_gen: секре́тных
+      pl_dat: секре́тным
+      pl_acc: секре́тные
+      pl_ins: секре́тными
+      pl_pre: секре́тных
+  "семейный=family":
+    cefr_level: A2
+    accented: семе́йный
+    en_gb:
+      standard: family (of or relating to family)
+    forms:
+      m: семе́йный
+      f: семе́йная
+      n: семе́йное
+      pl: семе́йные
+    declension:
+      m_nom: семе́йный
+      m_gen: семе́йного
+      m_dat: семе́йному
+      m_acc: семе́йный
+      m_ins: семе́йным
+      m_pre: семе́йном
+      n_nom: семе́йное
+      n_gen: семе́йного
+      n_dat: семе́йному
+      n_acc: семе́йное
+      n_ins: семе́йным
+      n_pre: семе́йном
+      f_nom: семе́йная
+      f_gen: семе́йной
+      f_dat: семе́йной
+      f_acc: семе́йную
+      f_ins: семе́йной
+      f_pre: семе́йной
+      pl_nom: семе́йные
+      pl_gen: семе́йных
+      pl_dat: семе́йным
+      pl_acc: семе́йные
+      pl_ins: семе́йными
+      pl_pre: семе́йных
   "серебряный=silver":
     cefr_level: B1
     accented: сере́бряный
@@ -8666,6 +12024,45 @@ words:
       pl_acc: си́ние
       pl_ins: си́ними
       pl_pre: си́них
+  "скорый=fast":
+    cefr_level: B1
+    accented: ско́рый
+    en_gb:
+      standard: fast (swift, speedy)
+      alt:
+        - quick
+        - soon
+    forms:
+      m: ско́рый
+      f: ско́рая
+      n: ско́рое
+      pl: ско́рые
+      comparative: скоре́е
+    declension:
+      m_nom: ско́рый
+      m_gen: ско́рого
+      m_dat: ско́рому
+      m_acc: ско́рый
+      m_ins: ско́рым
+      m_pre: ско́ром
+      n_nom: ско́рое
+      n_gen: ско́рого
+      n_dat: ско́рому
+      n_acc: ско́рое
+      n_ins: ско́рым
+      n_pre: ско́ром
+      f_nom: ско́рая
+      f_gen: ско́рой
+      f_dat: ско́рой
+      f_acc: ско́рую
+      f_ins: ско́рой
+      f_pre: ско́рой
+      pl_nom: ско́рые
+      pl_gen: ско́рых
+      pl_dat: ско́рым
+      pl_acc: ско́рые
+      pl_ins: ско́рыми
+      pl_pre: ско́рых
   "скромный=modest":
     cefr_level: B1
     accented: скро́мный
@@ -8978,6 +12375,82 @@ words:
       pl_acc: сло́жные
       pl_ins: сло́жными
       pl_pre: сло́жных
+  "служебный=official":
+    cefr_level: B1
+    accented: слу́жебный
+    en_gb:
+      standard: official (relating to one's job or duties)
+      alt:
+        - work (as modifier)
+        - service (as modifier)
+    forms:
+      m: слу́жебный
+      f: слу́жебная
+      n: слу́жебное
+      pl: слу́жебные
+    declension:
+      m_nom: слу́жебный
+      m_gen: слу́жебного
+      m_dat: слу́жебному
+      m_acc: слу́жебный
+      m_ins: слу́жебным
+      m_pre: слу́жебном
+      n_nom: слу́жебное
+      n_gen: слу́жебного
+      n_dat: слу́жебному
+      n_acc: слу́жебное
+      n_ins: слу́жебным
+      n_pre: слу́жебном
+      f_nom: слу́жебная
+      f_gen: слу́жебной
+      f_dat: слу́жебной
+      f_acc: слу́жебную
+      f_ins: слу́жебной
+      f_pre: слу́жебной
+      pl_nom: слу́жебные
+      pl_gen: слу́жебных
+      pl_dat: слу́жебным
+      pl_acc: слу́жебные
+      pl_ins: слу́жебными
+      pl_pre: слу́жебных
+  "случайный=accidental":
+    cefr_level: B1
+    accented: случа́йный
+    en_gb:
+      standard: accidental (happening by chance)
+      alt:
+        - random
+        - chance
+    forms:
+      m: случа́йный
+      f: случа́йная
+      n: случа́йное
+      pl: случа́йные
+    declension:
+      m_nom: случа́йный
+      m_gen: случа́йного
+      m_dat: случа́йному
+      m_acc: случа́йный
+      m_ins: случа́йным
+      m_pre: случа́йном
+      n_nom: случа́йное
+      n_gen: случа́йного
+      n_dat: случа́йному
+      n_acc: случа́йное
+      n_ins: случа́йным
+      n_pre: случа́йном
+      f_nom: случа́йная
+      f_gen: случа́йной
+      f_dat: случа́йной
+      f_acc: случа́йную
+      f_ins: случа́йной
+      f_pre: случа́йной
+      pl_nom: случа́йные
+      pl_gen: случа́йных
+      pl_dat: случа́йным
+      pl_acc: случа́йные
+      pl_ins: случа́йными
+      pl_pre: случа́йных
   "смелый=brave":
     cefr_level: B1
     accented: сме́лый
@@ -9022,6 +12495,118 @@ words:
       pl_acc: сме́лые
       pl_ins: сме́лыми
       pl_pre: сме́лых
+  "смешной=funny":
+    cefr_level: B1
+    accented: смешно́й
+    en_gb:
+      standard: funny (causing laughter)
+      alt:
+        - ridiculous
+        - comic
+    forms:
+      m: смешно́й
+      f: смешна́я
+      n: смешно́е
+      pl: смешны́е
+    declension:
+      m_nom: смешно́й
+      m_gen: смешно́го
+      m_dat: смешно́му
+      m_acc: смешно́й
+      m_ins: смешны́м
+      m_pre: смешно́м
+      n_nom: смешно́е
+      n_gen: смешно́го
+      n_dat: смешно́му
+      n_acc: смешно́е
+      n_ins: смешны́м
+      n_pre: смешно́м
+      f_nom: смешна́я
+      f_gen: смешно́й
+      f_dat: смешно́й
+      f_acc: смешну́ю
+      f_ins: смешно́й
+      f_pre: смешно́й
+      pl_nom: смешны́е
+      pl_gen: смешны́х
+      pl_dat: смешны́м
+      pl_acc: смешны́е
+      pl_ins: смешны́ми
+      pl_pre: смешны́х
+  "снежный=snowy":
+    cefr_level: B1
+    accented: сне́жный
+    en_gb:
+      standard: snowy (covered with or resembling snow)
+      alt:
+        - snow (as modifier)
+    forms:
+      m: сне́жный
+      f: сне́жная
+      n: сне́жное
+      pl: сне́жные
+    declension:
+      m_nom: сне́жный
+      m_gen: сне́жного
+      m_dat: сне́жному
+      m_acc: сне́жный
+      m_ins: сне́жным
+      m_pre: сне́жном
+      n_nom: сне́жное
+      n_gen: сне́жного
+      n_dat: сне́жному
+      n_acc: сне́жное
+      n_ins: сне́жным
+      n_pre: сне́жном
+      f_nom: сне́жная
+      f_gen: сне́жной
+      f_dat: сне́жной
+      f_acc: сне́жную
+      f_ins: сне́жной
+      f_pre: сне́жной
+      pl_nom: сне́жные
+      pl_gen: сне́жных
+      pl_dat: сне́жным
+      pl_acc: сне́жные
+      pl_ins: сне́жными
+      pl_pre: сне́жных
+  "собственный=own":
+    cefr_level: B1
+    accented: со́бственный
+    en_gb:
+      standard: own (belonging to oneself)
+      alt:
+        - personal
+    forms:
+      m: со́бственный
+      f: со́бственная
+      n: со́бственное
+      pl: со́бственные
+    declension:
+      m_nom: со́бственный
+      m_gen: со́бственного
+      m_dat: со́бственному
+      m_acc: со́бственный
+      m_ins: со́бственным
+      m_pre: со́бственном
+      n_nom: со́бственное
+      n_gen: со́бственного
+      n_dat: со́бственному
+      n_acc: со́бственное
+      n_ins: со́бственным
+      n_pre: со́бственном
+      f_nom: со́бственная
+      f_gen: со́бственной
+      f_dat: со́бственной
+      f_acc: со́бственную
+      f_ins: со́бственной
+      f_pre: со́бственной
+      pl_nom: со́бственные
+      pl_gen: со́бственных
+      pl_dat: со́бственным
+      pl_acc: со́бственные
+      pl_ins: со́бственными
+      pl_pre: со́бственных
   "советский=Soviet":
     cefr_level: B1
     accented: сове́тский
@@ -9060,6 +12645,44 @@ words:
       pl_acc: сове́тские
       pl_ins: сове́тскими
       pl_pre: сове́тских
+  "совместный=joint":
+    cefr_level: B1
+    accented: совме́стный
+    en_gb:
+      standard: joint (done together, combined)
+      alt:
+        - combined
+        - shared
+    forms:
+      m: совме́стный
+      f: совме́стная
+      n: совме́стное
+      pl: совме́стные
+    declension:
+      m_nom: совме́стный
+      m_gen: совме́стного
+      m_dat: совме́стному
+      m_acc: совме́стный
+      m_ins: совме́стным
+      m_pre: совме́стном
+      n_nom: совме́стное
+      n_gen: совме́стного
+      n_dat: совме́стному
+      n_acc: совме́стное
+      n_ins: совме́стным
+      n_pre: совме́стном
+      f_nom: совме́стная
+      f_gen: совме́стной
+      f_dat: совме́стной
+      f_acc: совме́стную
+      f_ins: совме́стной
+      f_pre: совме́стной
+      pl_nom: совме́стные
+      pl_gen: совме́стных
+      pl_dat: совме́стным
+      pl_acc: совме́стные
+      pl_ins: совме́стными
+      pl_pre: совме́стных
   "современный=modern":
     cefr_level: B1
     accented: совреме́нный
@@ -9102,6 +12725,80 @@ words:
       pl_acc: совреме́нные
       pl_ins: совреме́нными
       pl_pre: совреме́нных
+  "согласный=agreeable":
+    cefr_level: B1
+    accented: согла́сный
+    en_gb:
+      standard: agreeable (in agreement, consonant)
+      alt:
+        - willing
+    forms:
+      m: согла́сный
+      f: согла́сная
+      n: согла́сное
+      pl: согла́сные
+    declension:
+      m_nom: согла́сный
+      m_gen: согла́сного
+      m_dat: согла́сному
+      m_acc: согла́сный
+      m_ins: согла́сным
+      m_pre: согла́сном
+      n_nom: согла́сное
+      n_gen: согла́сного
+      n_dat: согла́сному
+      n_acc: согла́сное
+      n_ins: согла́сным
+      n_pre: согла́сном
+      f_nom: согла́сная
+      f_gen: согла́сной
+      f_dat: согла́сной
+      f_acc: согла́сную
+      f_ins: согла́сной
+      f_pre: согла́сной
+      pl_nom: согла́сные
+      pl_gen: согла́сных
+      pl_dat: согла́сным
+      pl_acc: согла́сные
+      pl_ins: согла́сными
+      pl_pre: согла́сных
+  "солдатский=soldier's":
+    cefr_level: B1
+    accented: солда́тский
+    en_gb:
+      standard: soldier's (of or relating to soldiers)
+      alt:
+        - military
+    forms:
+      m: солда́тский
+      f: солда́тская
+      n: солда́тское
+      pl: солда́тские
+    declension:
+      m_nom: солда́тский
+      m_gen: солда́тского
+      m_dat: солда́тскому
+      m_acc: солда́тский
+      m_ins: солда́тским
+      m_pre: солда́тском
+      n_nom: солда́тское
+      n_gen: солда́тского
+      n_dat: солда́тскому
+      n_acc: солда́тское
+      n_ins: солда́тским
+      n_pre: солда́тском
+      f_nom: солда́тская
+      f_gen: солда́тской
+      f_dat: солда́тской
+      f_acc: солда́тскую
+      f_ins: солда́тской
+      f_pre: солда́тской
+      pl_nom: солда́тские
+      pl_gen: солда́тских
+      pl_dat: солда́тским
+      pl_acc: солда́тские
+      pl_ins: солда́тскими
+      pl_pre: солда́тских
   "солёный=salty":
     cefr_level: B1
     accented: солёный
@@ -9225,6 +12922,44 @@ words:
       pl_acc: со́нные
       pl_ins: со́нными
       pl_pre: со́нных
+  "соседний=neighbouring":
+    cefr_level: B1
+    accented: сосе́дний
+    en_gb:
+      standard: neighbouring (next door, adjacent)
+      alt:
+        - adjacent
+        - next-door
+    forms:
+      m: сосе́дний
+      f: сосе́дняя
+      n: сосе́днее
+      pl: сосе́дние
+    declension:
+      m_nom: сосе́дний
+      m_gen: сосе́днего
+      m_dat: сосе́днему
+      m_acc: сосе́дний
+      m_ins: сосе́дним
+      m_pre: сосе́днем
+      n_nom: сосе́днее
+      n_gen: сосе́днего
+      n_dat: сосе́днему
+      n_acc: сосе́днее
+      n_ins: сосе́дним
+      n_pre: сосе́днем
+      f_nom: сосе́дняя
+      f_gen: сосе́дней
+      f_dat: сосе́дней
+      f_acc: сосе́днюю
+      f_ins: сосе́дней
+      f_pre: сосе́дней
+      pl_nom: сосе́дние
+      pl_gen: сосе́дних
+      pl_dat: сосе́дним
+      pl_acc: сосе́дние
+      pl_ins: сосе́дними
+      pl_pre: сосе́дних
   "социалистический=socialist":
     cefr_level: B2
     accented: социалисти́ческий
@@ -9335,6 +13070,44 @@ words:
       pl_acc: специа́льные
       pl_ins: специа́льными
       pl_pre: специа́льных
+  "сплошной=continuous":
+    cefr_level: B2
+    accented: сплошно́й
+    en_gb:
+      standard: continuous (solid, uninterrupted)
+      alt:
+        - solid
+        - unbroken
+    forms:
+      m: сплошно́й
+      f: сплошна́я
+      n: сплошно́е
+      pl: сплошны́е
+    declension:
+      m_nom: сплошно́й
+      m_gen: сплошно́го
+      m_dat: сплошно́му
+      m_acc: сплошно́й
+      m_ins: сплошны́м
+      m_pre: сплошно́м
+      n_nom: сплошно́е
+      n_gen: сплошно́го
+      n_dat: сплошно́му
+      n_acc: сплошно́е
+      n_ins: сплошны́м
+      n_pre: сплошно́м
+      f_nom: сплошна́я
+      f_gen: сплошно́й
+      f_dat: сплошно́й
+      f_acc: сплошну́ю
+      f_ins: сплошно́й
+      f_pre: сплошно́й
+      pl_nom: сплошны́е
+      pl_gen: сплошны́х
+      pl_dat: сплошны́м
+      pl_acc: сплошны́е
+      pl_ins: сплошны́ми
+      pl_pre: сплошны́х
   "спокойный=calm":
     cefr_level: B1
     accented: споко́йный
@@ -9376,6 +13149,44 @@ words:
       pl_acc: споко́йные
       pl_ins: споко́йными
       pl_pre: споко́йных
+  "спортивный=sports":
+    cefr_level: A2
+    accented: спорти́вный
+    en_gb:
+      standard: sports (relating to sport)
+      alt:
+        - athletic
+        - sporting
+    forms:
+      m: спорти́вный
+      f: спорти́вная
+      n: спорти́вное
+      pl: спорти́вные
+    declension:
+      m_nom: спорти́вный
+      m_gen: спорти́вного
+      m_dat: спорти́вному
+      m_acc: спорти́вный
+      m_ins: спорти́вным
+      m_pre: спорти́вном
+      n_nom: спорти́вное
+      n_gen: спорти́вного
+      n_dat: спорти́вному
+      n_acc: спорти́вное
+      n_ins: спорти́вным
+      n_pre: спорти́вном
+      f_nom: спорти́вная
+      f_gen: спорти́вной
+      f_dat: спорти́вной
+      f_acc: спорти́вную
+      f_ins: спорти́вной
+      f_pre: спорти́вной
+      pl_nom: спорти́вные
+      pl_gen: спорти́вных
+      pl_dat: спорти́вным
+      pl_acc: спорти́вные
+      pl_ins: спорти́вными
+      pl_pre: спорти́вных
   "способный=capable":
     cefr_level: B1
     accented: спосо́бный
@@ -9448,6 +13259,44 @@ words:
       pl_acc: справедли́вые
       pl_ins: справедли́выми
       pl_pre: справедли́вых
+  "средний=average":
+    cefr_level: A2
+    accented: сре́дний
+    en_gb:
+      standard: average (in the middle, moderate)
+      alt:
+        - middle
+        - medium
+    forms:
+      m: сре́дний
+      f: сре́дняя
+      n: сре́днее
+      pl: сре́дние
+    declension:
+      m_nom: сре́дний
+      m_gen: сре́днего
+      m_dat: сре́днему
+      m_acc: сре́дний
+      m_ins: сре́дним
+      m_pre: сре́днем
+      n_nom: сре́днее
+      n_gen: сре́днего
+      n_dat: сре́днему
+      n_acc: сре́днее
+      n_ins: сре́дним
+      n_pre: сре́днем
+      f_nom: сре́дняя
+      f_gen: сре́дней
+      f_dat: сре́дней
+      f_acc: сре́днюю
+      f_ins: сре́дней
+      f_pre: сре́дней
+      pl_nom: сре́дние
+      pl_gen: сре́дних
+      pl_dat: сре́дним
+      pl_acc: сре́дние
+      pl_ins: сре́дними
+      pl_pre: сре́дних
   "стальной=steel":
     cefr_level: B1
     accented: стально́й
@@ -9561,6 +13410,78 @@ words:
       pl_acc: ста́рые
       pl_ins: ста́рыми
       pl_pre: ста́рых
+  "стеклянный=glass":
+    cefr_level: B1
+    accented: стекля́нный
+    en_gb:
+      standard: glass (made of glass)
+    forms:
+      m: стекля́нный
+      f: стекля́нная
+      n: стекля́нное
+      pl: стекля́нные
+    declension:
+      m_nom: стекля́нный
+      m_gen: стекля́нного
+      m_dat: стекля́нному
+      m_acc: стекля́нный
+      m_ins: стекля́нным
+      m_pre: стекля́нном
+      n_nom: стекля́нное
+      n_gen: стекля́нного
+      n_dat: стекля́нному
+      n_acc: стекля́нное
+      n_ins: стекля́нным
+      n_pre: стекля́нном
+      f_nom: стекля́нная
+      f_gen: стекля́нной
+      f_dat: стекля́нной
+      f_acc: стекля́нную
+      f_ins: стекля́нной
+      f_pre: стекля́нной
+      pl_nom: стекля́нные
+      pl_gen: стекля́нных
+      pl_dat: стекля́нным
+      pl_acc: стекля́нные
+      pl_ins: стекля́нными
+      pl_pre: стекля́нных
+  "столовый=dining":
+    cefr_level: B1
+    accented: столо́вый
+    en_gb:
+      standard: dining (for eating, table-related)
+      alt:
+        - table (as modifier)
+    forms:
+      m: столо́вый
+      f: столо́вая
+      n: столо́вое
+      pl: столо́вые
+    declension:
+      m_nom: столо́вый
+      m_gen: столо́вого
+      m_dat: столо́вому
+      m_acc: столо́вый
+      m_ins: столо́вым
+      m_pre: столо́вом
+      n_nom: столо́вое
+      n_gen: столо́вого
+      n_dat: столо́вому
+      n_acc: столо́вое
+      n_ins: столо́вым
+      n_pre: столо́вом
+      f_nom: столо́вая
+      f_gen: столо́вой
+      f_dat: столо́вой
+      f_acc: столо́вую
+      f_ins: столо́вой
+      f_pre: столо́вой
+      pl_nom: столо́вые
+      pl_gen: столо́вых
+      pl_dat: столо́вым
+      pl_acc: столо́вые
+      pl_ins: столо́выми
+      pl_pre: столо́вых
   "странный=strange":
     cefr_level: B1
     accented: стра́нный
@@ -9671,6 +13592,43 @@ words:
       pl_acc: стро́гие
       pl_ins: стро́гими
       pl_pre: стро́гих
+  "стыдный=shameful":
+    cefr_level: B2
+    accented: сты́дный
+    en_gb:
+      standard: shameful (causing shame)
+      alt:
+        - disgraceful
+    forms:
+      m: сты́дный
+      f: сты́дная
+      n: сты́дное
+      pl: сты́дные
+    declension:
+      m_nom: сты́дный
+      m_gen: сты́дного
+      m_dat: сты́дному
+      m_acc: сты́дный
+      m_ins: сты́дным
+      m_pre: сты́дном
+      n_nom: сты́дное
+      n_gen: сты́дного
+      n_dat: сты́дному
+      n_acc: сты́дное
+      n_ins: сты́дным
+      n_pre: сты́дном
+      f_nom: сты́дная
+      f_gen: сты́дной
+      f_dat: сты́дной
+      f_acc: сты́дную
+      f_ins: сты́дной
+      f_pre: сты́дной
+      pl_nom: сты́дные
+      pl_gen: сты́дных
+      pl_dat: сты́дным
+      pl_acc: сты́дные
+      pl_ins: сты́дными
+      pl_pre: сты́дных
   "суровый=harsh":
     cefr_level: B1
     accented: суро́вый
@@ -9793,6 +13751,43 @@ words:
       pl_acc: счастли́вые
       pl_ins: счастли́выми
       pl_pre: счастли́вых
+  "таинственный=mysterious":
+    cefr_level: B1
+    accented: таи́нственный
+    en_gb:
+      standard: mysterious (full of mystery)
+      alt:
+        - enigmatic
+    forms:
+      m: таи́нственный
+      f: таи́нственная
+      n: таи́нственное
+      pl: таи́нственные
+    declension:
+      m_nom: таи́нственный
+      m_gen: таи́нственного
+      m_dat: таи́нственному
+      m_acc: таи́нственный
+      m_ins: таи́нственным
+      m_pre: таи́нственном
+      n_nom: таи́нственное
+      n_gen: таи́нственного
+      n_dat: таи́нственному
+      n_acc: таи́нственное
+      n_ins: таи́нственным
+      n_pre: таи́нственном
+      f_nom: таи́нственная
+      f_gen: таи́нственной
+      f_dat: таи́нственной
+      f_acc: таи́нственную
+      f_ins: таи́нственной
+      f_pre: таи́нственной
+      pl_nom: таи́нственные
+      pl_gen: таи́нственных
+      pl_dat: таи́нственным
+      pl_acc: таи́нственные
+      pl_ins: таи́нственными
+      pl_pre: таи́нственных
   "тайный=secret":
     cefr_level: B1
     accented: та́йный
@@ -9870,6 +13865,80 @@ words:
       pl_acc: твёрдые
       pl_ins: твёрдыми
       pl_pre: твёрдых
+  "творческий=creative":
+    cefr_level: B1
+    accented: тво́рческий
+    en_gb:
+      standard: creative (involving imagination and invention)
+      alt:
+        - artistic
+    forms:
+      m: тво́рческий
+      f: тво́рческая
+      n: тво́рческое
+      pl: тво́рческие
+    declension:
+      m_nom: тво́рческий
+      m_gen: тво́рческого
+      m_dat: тво́рческому
+      m_acc: тво́рческий
+      m_ins: тво́рческим
+      m_pre: тво́рческом
+      n_nom: тво́рческое
+      n_gen: тво́рческого
+      n_dat: тво́рческому
+      n_acc: тво́рческое
+      n_ins: тво́рческим
+      n_pre: тво́рческом
+      f_nom: тво́рческая
+      f_gen: тво́рческой
+      f_dat: тво́рческой
+      f_acc: тво́рческую
+      f_ins: тво́рческой
+      f_pre: тво́рческой
+      pl_nom: тво́рческие
+      pl_gen: тво́рческих
+      pl_dat: тво́рческим
+      pl_acc: тво́рческие
+      pl_ins: тво́рческими
+      pl_pre: тво́рческих
+  "телефонный=telephone":
+    cefr_level: A2
+    accented: телефо́нный
+    en_gb:
+      standard: telephone (of or by telephone)
+      alt:
+        - phone (as modifier)
+    forms:
+      m: телефо́нный
+      f: телефо́нная
+      n: телефо́нное
+      pl: телефо́нные
+    declension:
+      m_nom: телефо́нный
+      m_gen: телефо́нного
+      m_dat: телефо́нному
+      m_acc: телефо́нный
+      m_ins: телефо́нным
+      m_pre: телефо́нном
+      n_nom: телефо́нное
+      n_gen: телефо́нного
+      n_dat: телефо́нному
+      n_acc: телефо́нное
+      n_ins: телефо́нным
+      n_pre: телефо́нном
+      f_nom: телефо́нная
+      f_gen: телефо́нной
+      f_dat: телефо́нной
+      f_acc: телефо́нную
+      f_ins: телефо́нной
+      f_pre: телефо́нной
+      pl_nom: телефо́нные
+      pl_gen: телефо́нных
+      pl_dat: телефо́нным
+      pl_acc: телефо́нные
+      pl_ins: телефо́нными
+      pl_pre: телефо́нных
   "тёмный=dark":
     cefr_level: A2
     accented: тёмный
@@ -9990,6 +14059,41 @@ words:
       pl_acc: те́сные
       pl_ins: те́сными
       pl_pre: те́сных
+  "технический=technical":
+    cefr_level: B1
+    accented: техни́ческий
+    en_gb:
+      standard: technical (of or relating to technology)
+    forms:
+      m: техни́ческий
+      f: техни́ческая
+      n: техни́ческое
+      pl: техни́ческие
+    declension:
+      m_nom: техни́ческий
+      m_gen: техни́ческого
+      m_dat: техни́ческому
+      m_acc: техни́ческий
+      m_ins: техни́ческим
+      m_pre: техни́ческом
+      n_nom: техни́ческое
+      n_gen: техни́ческого
+      n_dat: техни́ческому
+      n_acc: техни́ческое
+      n_ins: техни́ческим
+      n_pre: техни́ческом
+      f_nom: техни́ческая
+      f_gen: техни́ческой
+      f_dat: техни́ческой
+      f_acc: техни́ческую
+      f_ins: техни́ческой
+      f_pre: техни́ческой
+      pl_nom: техни́ческие
+      pl_gen: техни́ческих
+      pl_dat: техни́ческим
+      pl_acc: техни́ческие
+      pl_ins: техни́ческими
+      pl_pre: техни́ческих
   "тихий=quiet":
     cefr_level: A2
     accented: ти́хий
@@ -10151,6 +14255,44 @@ words:
       pl_acc: торго́вые
       pl_ins: торго́выми
       pl_pre: торго́вых
+  "торопливый=hasty":
+    cefr_level: B2
+    accented: торопли́вый
+    en_gb:
+      standard: hasty (acting too quickly)
+      alt:
+        - hurried
+        - rushed
+    forms:
+      m: торопли́вый
+      f: торопли́вая
+      n: торопли́вое
+      pl: торопли́вые
+    declension:
+      m_nom: торопли́вый
+      m_gen: торопли́вого
+      m_dat: торопли́вому
+      m_acc: торопли́вый
+      m_ins: торопли́вым
+      m_pre: торопли́вом
+      n_nom: торопли́вое
+      n_gen: торопли́вого
+      n_dat: торопли́вому
+      n_acc: торопли́вое
+      n_ins: торопли́вым
+      n_pre: торопли́вом
+      f_nom: торопли́вая
+      f_gen: торопли́вой
+      f_dat: торопли́вой
+      f_acc: торопли́вую
+      f_ins: торопли́вой
+      f_pre: торопли́вой
+      pl_nom: торопли́вые
+      pl_gen: торопли́вых
+      pl_dat: торопли́вым
+      pl_acc: торопли́вые
+      pl_ins: торопли́выми
+      pl_pre: торопли́вых
   "точный=exact":
     cefr_level: B1
     accented: то́чный
@@ -10303,6 +14445,80 @@ words:
       pl_acc: тяжёлые
       pl_ins: тяжёлыми
       pl_pre: тяжёлых
+  "убитый=killed":
+    cefr_level: B1
+    accented: уби́тый
+    en_gb:
+      standard: killed (having been killed)
+      alt:
+        - dead
+    forms:
+      m: уби́тый
+      f: уби́тая
+      n: уби́тое
+      pl: уби́тые
+    declension:
+      m_nom: уби́тый
+      m_gen: уби́того
+      m_dat: уби́тому
+      m_acc: уби́тый
+      m_ins: уби́тым
+      m_pre: уби́том
+      n_nom: уби́тое
+      n_gen: уби́того
+      n_dat: уби́тому
+      n_acc: уби́тое
+      n_ins: уби́тым
+      n_pre: уби́том
+      f_nom: уби́тая
+      f_gen: уби́той
+      f_dat: уби́той
+      f_acc: уби́тую
+      f_ins: уби́той
+      f_pre: уби́той
+      pl_nom: уби́тые
+      pl_gen: уби́тых
+      pl_dat: уби́тым
+      pl_acc: уби́тые
+      pl_ins: уби́тыми
+      pl_pre: уби́тых
+  "уважаемый=respected":
+    cefr_level: B1
+    accented: уважа́емый
+    en_gb:
+      standard: respected (held in high regard)
+      alt:
+        - dear (as a form of address)
+    forms:
+      m: уважа́емый
+      f: уважа́емая
+      n: уважа́емое
+      pl: уважа́емые
+    declension:
+      m_nom: уважа́емый
+      m_gen: уважа́емого
+      m_dat: уважа́емому
+      m_acc: уважа́емый
+      m_ins: уважа́емым
+      m_pre: уважа́емом
+      n_nom: уважа́емое
+      n_gen: уважа́емого
+      n_dat: уважа́емому
+      n_acc: уважа́емое
+      n_ins: уважа́емым
+      n_pre: уважа́емом
+      f_nom: уважа́емая
+      f_gen: уважа́емой
+      f_dat: уважа́емой
+      f_acc: уважа́емую
+      f_ins: уважа́емой
+      f_pre: уважа́емой
+      pl_nom: уважа́емые
+      pl_gen: уважа́емых
+      pl_dat: уважа́емым
+      pl_acc: уважа́емые
+      pl_ins: уважа́емыми
+      pl_pre: уважа́емых
   "уверенный=confident":
     cefr_level: B1
     accented: уве́ренный
@@ -10341,6 +14557,43 @@ words:
       pl_acc: уве́ренные
       pl_ins: уве́ренными
       pl_pre: уве́ренных
+  "угодный=pleasing":
+    cefr_level: B2
+    accented: уго́дный
+    en_gb:
+      standard: pleasing (acceptable, welcome)
+      alt:
+        - acceptable
+    forms:
+      m: уго́дный
+      f: уго́дная
+      n: уго́дное
+      pl: уго́дные
+    declension:
+      m_nom: уго́дный
+      m_gen: уго́дного
+      m_dat: уго́дному
+      m_acc: уго́дный
+      m_ins: уго́дным
+      m_pre: уго́дном
+      n_nom: уго́дное
+      n_gen: уго́дного
+      n_dat: уго́дному
+      n_acc: уго́дное
+      n_ins: уго́дным
+      n_pre: уго́дном
+      f_nom: уго́дная
+      f_gen: уго́дной
+      f_dat: уго́дной
+      f_acc: уго́дную
+      f_ins: уго́дной
+      f_pre: уго́дной
+      pl_nom: уго́дные
+      pl_gen: уго́дных
+      pl_dat: уго́дным
+      pl_acc: уго́дные
+      pl_ins: уго́дными
+      pl_pre: уго́дных
   "уголовный=criminal":
     cefr_level: B2
     accented: уголо́вный
@@ -10624,6 +14877,119 @@ words:
       pl_acc: уста́лые
       pl_ins: уста́лыми
       pl_pre: уста́лых
+  "учебный=educational":
+    cefr_level: B1
+    accented: уче́бный
+    en_gb:
+      standard: educational (for study or training)
+      alt:
+        - academic
+        - school (as modifier)
+    forms:
+      m: уче́бный
+      f: уче́бная
+      n: уче́бное
+      pl: уче́бные
+    declension:
+      m_nom: уче́бный
+      m_gen: уче́бного
+      m_dat: уче́бному
+      m_acc: уче́бный
+      m_ins: уче́бным
+      m_pre: уче́бном
+      n_nom: уче́бное
+      n_gen: уче́бного
+      n_dat: уче́бному
+      n_acc: уче́бное
+      n_ins: уче́бным
+      n_pre: уче́бном
+      f_nom: уче́бная
+      f_gen: уче́бной
+      f_dat: уче́бной
+      f_acc: уче́бную
+      f_ins: уче́бной
+      f_pre: уче́бной
+      pl_nom: уче́бные
+      pl_gen: уче́бных
+      pl_dat: уче́бным
+      pl_acc: уче́бные
+      pl_ins: уче́бными
+      pl_pre: уче́бных
+  "учёный=scholarly":
+    cefr_level: B1
+    accented: учёный
+    en_gb:
+      standard: scholarly (learned, educated)
+      alt:
+        - learned
+    forms:
+      m: учёный
+      f: учёная
+      n: учёное
+      pl: учёные
+    declension:
+      m_nom: учёный
+      m_gen: учёного
+      m_dat: учёному
+      m_acc: учёный
+      m_ins: учёным
+      m_pre: учёном
+      n_nom: учёное
+      n_gen: учёного
+      n_dat: учёному
+      n_acc: учёное
+      n_ins: учёным
+      n_pre: учёном
+      f_nom: учёная
+      f_gen: учёной
+      f_dat: учёной
+      f_acc: учёную
+      f_ins: учёной
+      f_pre: учёной
+      pl_nom: учёные
+      pl_gen: учёных
+      pl_dat: учёным
+      pl_acc: учёные
+      pl_ins: учёными
+      pl_pre: учёных
+  "уютный=cosy":
+    cefr_level: B1
+    accented: ую́тный
+    en_gb:
+      standard: cosy (comfortable and warm)
+      alt:
+        - comfortable
+    forms:
+      m: ую́тный
+      f: ую́тная
+      n: ую́тное
+      pl: ую́тные
+      comparative: ую́тнее
+    declension:
+      m_nom: ую́тный
+      m_gen: ую́тного
+      m_dat: ую́тному
+      m_acc: ую́тный
+      m_ins: ую́тным
+      m_pre: ую́тном
+      n_nom: ую́тное
+      n_gen: ую́тного
+      n_dat: ую́тному
+      n_acc: ую́тное
+      n_ins: ую́тным
+      n_pre: ую́тном
+      f_nom: ую́тная
+      f_gen: ую́тной
+      f_dat: ую́тной
+      f_acc: ую́тную
+      f_ins: ую́тной
+      f_pre: ую́тной
+      pl_nom: ую́тные
+      pl_gen: ую́тных
+      pl_dat: ую́тным
+      pl_acc: ую́тные
+      pl_ins: ую́тными
+      pl_pre: ую́тных
   "физический=physical":
     cefr_level: B1
     accented: физи́ческий
@@ -10662,6 +15028,41 @@ words:
       pl_acc: физи́ческие
       pl_ins: физи́ческими
       pl_pre: физи́ческих
+  "финансовый=financial":
+    cefr_level: B1
+    accented: фина́нсовый
+    en_gb:
+      standard: financial (of or relating to finance)
+    forms:
+      m: фина́нсовый
+      f: фина́нсовая
+      n: фина́нсовое
+      pl: фина́нсовые
+    declension:
+      m_nom: фина́нсовый
+      m_gen: фина́нсового
+      m_dat: фина́нсовому
+      m_acc: фина́нсовый
+      m_ins: фина́нсовым
+      m_pre: фина́нсовом
+      n_nom: фина́нсовое
+      n_gen: фина́нсового
+      n_dat: фина́нсовому
+      n_acc: фина́нсовое
+      n_ins: фина́нсовым
+      n_pre: фина́нсовом
+      f_nom: фина́нсовая
+      f_gen: фина́нсовой
+      f_dat: фина́нсовой
+      f_acc: фина́нсовую
+      f_ins: фина́нсовой
+      f_pre: фина́нсовой
+      pl_nom: фина́нсовые
+      pl_gen: фина́нсовых
+      pl_dat: фина́нсовым
+      pl_acc: фина́нсовые
+      pl_ins: фина́нсовыми
+      pl_pre: фина́нсовых
   "фиолетовый=purple":
     cefr_level: B1
     accented: фиоле́товый
@@ -10776,6 +15177,45 @@ words:
       pl_acc: хара́ктерные
       pl_ins: хара́ктерными
       pl_pre: хара́ктерных
+  "хитрый=cunning":
+    cefr_level: B1
+    accented: хи́трый
+    en_gb:
+      standard: cunning (clever in a crafty way)
+      alt:
+        - sly
+        - crafty
+    forms:
+      m: хи́трый
+      f: хи́трая
+      n: хи́трое
+      pl: хи́трые
+      comparative: хитре́е
+    declension:
+      m_nom: хи́трый
+      m_gen: хи́трого
+      m_dat: хи́трому
+      m_acc: хи́трый
+      m_ins: хи́трым
+      m_pre: хи́тром
+      n_nom: хи́трое
+      n_gen: хи́трого
+      n_dat: хи́трому
+      n_acc: хи́трое
+      n_ins: хи́трым
+      n_pre: хи́тром
+      f_nom: хи́трая
+      f_gen: хи́трой
+      f_dat: хи́трой
+      f_acc: хи́трую
+      f_ins: хи́трой
+      f_pre: хи́трой
+      pl_nom: хи́трые
+      pl_gen: хи́трых
+      pl_dat: хи́трым
+      pl_acc: хи́трые
+      pl_ins: хи́трыми
+      pl_pre: хи́трых
   "холодный=cold":
     cefr_level: A1
     accented: холо́дный
@@ -10977,6 +15417,80 @@ words:
       pl_acc: цветны́е
       pl_ins: цветны́ми
       pl_pre: цветны́х
+  "целый=whole":
+    cefr_level: A2
+    accented: це́лый
+    en_gb:
+      standard: whole (entire, complete)
+      alt:
+        - entire
+    forms:
+      m: це́лый
+      f: це́лая
+      n: це́лое
+      pl: це́лые
+    declension:
+      m_nom: це́лый
+      m_gen: це́лого
+      m_dat: це́лому
+      m_acc: це́лый
+      m_ins: це́лым
+      m_pre: це́лом
+      n_nom: це́лое
+      n_gen: це́лого
+      n_dat: це́лому
+      n_acc: це́лое
+      n_ins: це́лым
+      n_pre: це́лом
+      f_nom: це́лая
+      f_gen: це́лой
+      f_dat: це́лой
+      f_acc: це́лую
+      f_ins: це́лой
+      f_pre: це́лой
+      pl_nom: це́лые
+      pl_gen: це́лых
+      pl_dat: це́лым
+      pl_acc: це́лые
+      pl_ins: це́лыми
+      pl_pre: це́лых
+  "ценный=valuable":
+    cefr_level: B1
+    accented: це́нный
+    en_gb:
+      standard: valuable (of great value or worth)
+      alt:
+        - precious
+    forms:
+      m: це́нный
+      f: це́нная
+      n: це́нное
+      pl: це́нные
+    declension:
+      m_nom: це́нный
+      m_gen: це́нного
+      m_dat: це́нному
+      m_acc: це́нный
+      m_ins: це́нным
+      m_pre: це́нном
+      n_nom: це́нное
+      n_gen: це́нного
+      n_dat: це́нному
+      n_acc: це́нное
+      n_ins: це́нным
+      n_pre: це́нном
+      f_nom: це́нная
+      f_gen: це́нной
+      f_dat: це́нной
+      f_acc: це́нную
+      f_ins: це́нной
+      f_pre: це́нной
+      pl_nom: це́нные
+      pl_gen: це́нных
+      pl_dat: це́нным
+      pl_acc: це́нные
+      pl_ins: це́нными
+      pl_pre: це́нных
   "центральный=central":
     cefr_level: A2
     accented: центра́льный
@@ -11014,6 +15528,116 @@ words:
       pl_acc: центра́льные
       pl_ins: центра́льными
       pl_pre: центра́льных
+  "частный=private":
+    cefr_level: B1
+    accented: ча́стный
+    en_gb:
+      standard: private (not public, personal)
+      alt:
+        - personal
+    forms:
+      m: ча́стный
+      f: ча́стная
+      n: ча́стное
+      pl: ча́стные
+    declension:
+      m_nom: ча́стный
+      m_gen: ча́стного
+      m_dat: ча́стному
+      m_acc: ча́стный
+      m_ins: ча́стным
+      m_pre: ча́стном
+      n_nom: ча́стное
+      n_gen: ча́стного
+      n_dat: ча́стному
+      n_acc: ча́стное
+      n_ins: ча́стным
+      n_pre: ча́стном
+      f_nom: ча́стная
+      f_gen: ча́стной
+      f_dat: ча́стной
+      f_acc: ча́стную
+      f_ins: ча́стной
+      f_pre: ча́стной
+      pl_nom: ча́стные
+      pl_gen: ча́стных
+      pl_dat: ча́стным
+      pl_acc: ча́стные
+      pl_ins: ча́стными
+      pl_pre: ча́стных
+  "частый=frequent":
+    cefr_level: A2
+    accented: ча́стый
+    en_gb:
+      standard: frequent (happening often)
+      alt:
+        - dense (of a forest, crowd)
+    forms:
+      m: ча́стый
+      f: ча́стая
+      n: ча́стое
+      pl: ча́стые
+      comparative: ча́ще
+    declension:
+      m_nom: ча́стый
+      m_gen: ча́стого
+      m_dat: ча́стому
+      m_acc: ча́стый
+      m_ins: ча́стым
+      m_pre: ча́стом
+      n_nom: ча́стое
+      n_gen: ча́стого
+      n_dat: ча́стому
+      n_acc: ча́стое
+      n_ins: ча́стым
+      n_pre: ча́стом
+      f_nom: ча́стая
+      f_gen: ча́стой
+      f_dat: ча́стой
+      f_acc: ча́стую
+      f_ins: ча́стой
+      f_pre: ча́стой
+      pl_nom: ча́стые
+      pl_gen: ча́стых
+      pl_dat: ча́стым
+      pl_acc: ча́стые
+      pl_ins: ча́стыми
+      pl_pre: ча́стых
+  "человеческий=human":
+    cefr_level: B1
+    accented: челове́ческий
+    en_gb:
+      standard: human (of or relating to people)
+    forms:
+      m: челове́ческий
+      f: челове́ческая
+      n: челове́ческое
+      pl: челове́ческие
+    declension:
+      m_nom: челове́ческий
+      m_gen: челове́ческого
+      m_dat: челове́ческому
+      m_acc: челове́ческий
+      m_ins: челове́ческим
+      m_pre: челове́ческом
+      n_nom: челове́ческое
+      n_gen: челове́ческого
+      n_dat: челове́ческому
+      n_acc: челове́ческое
+      n_ins: челове́ческим
+      n_pre: челове́ческом
+      f_nom: челове́ческая
+      f_gen: челове́ческой
+      f_dat: челове́ческой
+      f_acc: челове́ческую
+      f_ins: челове́ческой
+      f_pre: челове́ческой
+      pl_nom: челове́ческие
+      pl_gen: челове́ческих
+      pl_dat: челове́ческим
+      pl_acc: челове́ческие
+      pl_ins: челове́ческими
+      pl_pre: челове́ческих
   "чёрный=black":
     cefr_level: A1
     accented: чёрный
@@ -11100,6 +15724,43 @@ words:
       pl_acc: чи́стые
       pl_ins: чи́стыми
       pl_pre: чи́стых
+  "чудесный=wonderful":
+    cefr_level: B1
+    accented: чуде́сный
+    en_gb:
+      standard: wonderful (marvellous, amazing)
+      alt:
+        - marvellous
+    forms:
+      m: чуде́сный
+      f: чуде́сная
+      n: чуде́сное
+      pl: чуде́сные
+    declension:
+      m_nom: чуде́сный
+      m_gen: чуде́сного
+      m_dat: чуде́сному
+      m_acc: чуде́сный
+      m_ins: чуде́сным
+      m_pre: чуде́сном
+      n_nom: чуде́сное
+      n_gen: чуде́сного
+      n_dat: чуде́сному
+      n_acc: чуде́сное
+      n_ins: чуде́сным
+      n_pre: чуде́сном
+      f_nom: чуде́сная
+      f_gen: чуде́сной
+      f_dat: чуде́сной
+      f_acc: чуде́сную
+      f_ins: чуде́сной
+      f_pre: чуде́сной
+      pl_nom: чуде́сные
+      pl_gen: чуде́сных
+      pl_dat: чуде́сным
+      pl_acc: чуде́сные
+      pl_ins: чуде́сными
+      pl_pre: чуде́сных
   "широкий=wide":
     cefr_level: A2
     accented: широ́кий
@@ -11292,6 +15953,81 @@ words:
       pl_acc: ю́жные
       pl_ins: ю́жными
       pl_pre: ю́жных
+  "юный=young":
+    cefr_level: B1
+    accented: ю́ный
+    en_gb:
+      standard: young (youthful)
+      alt:
+        - youthful
+    forms:
+      m: ю́ный
+      f: ю́ная
+      n: ю́ное
+      pl: ю́ные
+    declension:
+      m_nom: ю́ный
+      m_gen: ю́ного
+      m_dat: ю́ному
+      m_acc: ю́ный
+      m_ins: ю́ным
+      m_pre: ю́ном
+      n_nom: ю́ное
+      n_gen: ю́ного
+      n_dat: ю́ному
+      n_acc: ю́ное
+      n_ins: ю́ным
+      n_pre: ю́ном
+      f_nom: ю́ная
+      f_gen: ю́ной
+      f_dat: ю́ной
+      f_acc: ю́ную
+      f_ins: ю́ной
+      f_pre: ю́ной
+      pl_nom: ю́ные
+      pl_gen: ю́ных
+      pl_dat: ю́ным
+      pl_acc: ю́ные
+      pl_ins: ю́ными
+      pl_pre: ю́ных
+  "явный=obvious":
+    cefr_level: B1
+    accented: я́вный
+    en_gb:
+      standard: obvious (clear, evident)
+      alt:
+        - evident
+        - apparent
+    forms:
+      m: я́вный
+      f: я́вная
+      n: я́вное
+      pl: я́вные
+    declension:
+      m_nom: я́вный
+      m_gen: я́вного
+      m_dat: я́вному
+      m_acc: я́вный
+      m_ins: я́вным
+      m_pre: я́вном
+      n_nom: я́вное
+      n_gen: я́вного
+      n_dat: я́вному
+      n_acc: я́вное
+      n_ins: я́вным
+      n_pre: я́вном
+      f_nom: я́вная
+      f_gen: я́вной
+      f_dat: я́вной
+      f_acc: я́вную
+      f_ins: я́вной
+      f_pre: я́вной
+      pl_nom: я́вные
+      pl_gen: я́вных
+      pl_dat: я́вным
+      pl_acc: я́вные
+      pl_ins: я́вными
+      pl_pre: я́вных
   "японский=Japanese":
     cefr_level: A2
     accented: япо́нский
