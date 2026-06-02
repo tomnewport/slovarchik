@@ -39,6 +39,12 @@ words:
     governs: ["gen"]
     en_gb:
       standard: along (following the length of something)
+  "включая=including":
+    cefr_level: B1
+    accented: включа́я
+    governs: ["acc"]
+    en_gb:
+      standard: including (with the inclusion of)
   "вместо=instead of":
     cefr_level: B1
     accented: вме́сто
@@ -59,6 +65,18 @@ words:
       standard: in (variant of "в" used before certain consonant clusters)
       alt:
         - into
+  "возле=near":
+    cefr_level: A2
+    accented: во́зле
+    governs: ["gen"]
+    en_gb:
+      standard: near (close to something)
+      alt:
+        - beside
+        - next to
+    usage:
+      - ru: Он стои́т во́зле до́ма.
+        en_gb: He is standing near the house.
   "вокруг=around (prep)":
     cefr_level: A2
     accented: вокру́г
@@ -106,7 +124,7 @@ words:
         - made of
   "изо=from":
     cefr_level: A2
-    accented: изо
+    accented: и́зо
     governs: ["gen"]
     en_gb:
       standard: from (variant of "из" before certain clusters)
@@ -199,7 +217,7 @@ words:
         - against (with the accusative)
   "обо=about":
     cefr_level: A2
-    accented: обо
+    accented: о́бо
     governs: ["acc", "pre"]
     en_gb:
       standard: about (variant of "о" used in certain fixed phrases)
@@ -241,6 +259,18 @@ words:
     usage:
       - ru: Мы гуля́ем по па́рку.
         en_gb: We are walking around the park.
+  "под=under":
+    cefr_level: A2
+    accented: под
+    governs: ["acc", "ins"]
+    en_gb:
+      standard: under (below something; beneath)
+      alt:
+        - beneath
+        - below
+    usage:
+      - ru: Кот сиди́т под столо́м.
+        en_gb: The cat is sitting under the table.
   "при=at":
     cefr_level: B1
     accented: при

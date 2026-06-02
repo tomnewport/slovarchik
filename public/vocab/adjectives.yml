@@ -564,6 +564,46 @@ words:
       pl_acc: боевы́е
       pl_ins: боевы́ми
       pl_pre: боевы́х
+  "божий=divine":
+    cefr_level: B1
+    accented: бо́жий
+    collections:
+      - religion
+    en_gb:
+      standard: divine (of or relating to God)
+    usage:
+      - ru: Бо́жья во́ля неизве́стна нам.
+        en_gb: God's will is unknown to us.
+    forms:
+      m: бо́жий
+      f: бо́жья
+      n: бо́жье
+      pl: бо́жьи
+    declension:
+      m_nom: бо́жий
+      m_gen: бо́жьего
+      m_dat: бо́жьему
+      m_acc: бо́жий
+      m_ins: бо́жьим
+      m_pre: бо́жьем
+      n_nom: бо́жье
+      n_gen: бо́жьего
+      n_dat: бо́жьему
+      n_acc: бо́жье
+      n_ins: бо́жьим
+      n_pre: бо́жьем
+      f_nom: бо́жья
+      f_gen: бо́жьей
+      f_dat: бо́жьей
+      f_acc: бо́жью
+      f_ins: бо́жьей
+      f_pre: бо́жьей
+      pl_nom: бо́жьи
+      pl_gen: бо́жьих
+      pl_dat: бо́жьим
+      pl_acc: бо́жьи
+      pl_ins: бо́жьими
+      pl_pre: бо́жьих
   "больной=ill":
     cefr_level: A2
     accented: больно́й
@@ -845,7 +885,7 @@ words:
       f: ве́жливая
       n: ве́жливое
       pl: ве́жливые
-      comparative: ве́жливее
+      comparative: вежли́вее
     declension:
       m_nom: ве́жливый
       m_gen: ве́жливого
@@ -1361,6 +1401,87 @@ words:
       pl_acc: вла́жные
       pl_ins: вла́жными
       pl_pre: вла́жных
+  "внешний=external":
+    cefr_level: B1
+    accented: вне́шний
+    collections:
+      - abstract
+      - character
+    en_gb:
+      standard: external (relating to the outside)
+    usage:
+      - ru: Вне́шний вид ва́жен на собесе́довании.
+        en_gb: Appearance matters at an interview.
+    forms:
+      m: вне́шний
+      f: вне́шняя
+      n: вне́шнее
+      pl: вне́шние
+    declension:
+      m_nom: вне́шний
+      m_gen: вне́шнего
+      m_dat: вне́шнему
+      m_acc: вне́шний
+      m_ins: вне́шним
+      m_pre: вне́шнем
+      n_nom: вне́шнее
+      n_gen: вне́шнего
+      n_dat: вне́шнему
+      n_acc: вне́шнее
+      n_ins: вне́шним
+      n_pre: вне́шнем
+      f_nom: вне́шняя
+      f_gen: вне́шней
+      f_dat: вне́шней
+      f_acc: вне́шнюю
+      f_ins: вне́шней
+      f_pre: вне́шней
+      pl_nom: вне́шние
+      pl_gen: вне́шних
+      pl_dat: вне́шним
+      pl_acc: вне́шние
+      pl_ins: вне́шними
+      pl_pre: вне́шних
+  "внутренний=internal":
+    cefr_level: B1
+    accented: вну́тренний
+    collections:
+      - abstract
+    en_gb:
+      standard: internal (relating to the inside)
+    usage:
+      - ru: Вну́тренний го́лос сказа́л ему́ останови́ться.
+        en_gb: His inner voice told him to stop.
+    forms:
+      m: вну́тренний
+      f: вну́тренняя
+      n: вну́треннее
+      pl: вну́тренние
+    declension:
+      m_nom: вну́тренний
+      m_gen: вну́треннего
+      m_dat: вну́треннему
+      m_acc: вну́тренний
+      m_ins: вну́тренним
+      m_pre: вну́треннем
+      n_nom: вну́треннее
+      n_gen: вну́треннего
+      n_dat: вну́треннему
+      n_acc: вну́треннее
+      n_ins: вну́тренним
+      n_pre: вну́треннем
+      f_nom: вну́тренняя
+      f_gen: вну́тренней
+      f_dat: вну́тренней
+      f_acc: вну́треннюю
+      f_ins: вну́тренней
+      f_pre: вну́тренней
+      pl_nom: вну́тренние
+      pl_gen: вну́тренних
+      pl_dat: вну́тренним
+      pl_acc: вну́тренние
+      pl_ins: вну́тренними
+      pl_pre: вну́тренних
   "военный=military":
     cefr_level: B2
     accented: вое́нный
@@ -2816,7 +2937,7 @@ words:
       f: далёкая
       n: далёкое
       pl: далёкие
-      comparative: дальше
+      comparative: да́льше
     declension:
       m_nom: далёкий
       m_gen: далёкого
@@ -2877,6 +2998,47 @@ words:
       pl_acc: дальне́йшие
       pl_ins: дальне́йшими
       pl_pre: дальне́йших
+  "дальний=distant":
+    cefr_level: B1
+    accented: да́льний
+    collections:
+      - travel
+      - places
+    en_gb:
+      standard: distant (far away)
+    usage:
+      - ru: Он мечта́л о да́льних стра́нах.
+        en_gb: He dreamed of distant lands.
+    forms:
+      m: да́льний
+      f: да́льняя
+      n: да́льнее
+      pl: да́льние
+    declension:
+      m_nom: да́льний
+      m_gen: да́льнего
+      m_dat: да́льнему
+      m_acc: да́льний
+      m_ins: да́льним
+      m_pre: да́льнем
+      n_nom: да́льнее
+      n_gen: да́льнего
+      n_dat: да́льнему
+      n_acc: да́льнее
+      n_ins: да́льним
+      n_pre: да́льнем
+      f_nom: да́льняя
+      f_gen: да́льней
+      f_dat: да́льней
+      f_acc: да́льнюю
+      f_ins: да́льней
+      f_pre: да́льней
+      pl_nom: да́льние
+      pl_gen: да́льних
+      pl_dat: да́льним
+      pl_acc: да́льние
+      pl_ins: да́льними
+      pl_pre: да́льних
   "данный=given":
     cefr_level: B1
     accented: да́нный
@@ -4201,6 +4363,47 @@ words:
       pl_acc: жесто́кие
       pl_ins: жесто́кими
       pl_pre: жесто́ких
+  "живой=alive":
+    cefr_level: A2
+    accented: живо́й
+    collections:
+      - life and death
+      - nature
+    en_gb:
+      standard: alive (living, not dead)
+    usage:
+      - ru: Она́ была́ ещё жива́.
+        en_gb: She was still alive.
+    forms:
+      m: живо́й
+      f: жива́я
+      n: живо́е
+      pl: живы́е
+    declension:
+      m_nom: живо́й
+      m_gen: живо́го
+      m_dat: живо́му
+      m_acc: живо́й
+      m_ins: живы́м
+      m_pre: живо́м
+      n_nom: живо́е
+      n_gen: живо́го
+      n_dat: живо́му
+      n_acc: живо́е
+      n_ins: живы́м
+      n_pre: живо́м
+      f_nom: жива́я
+      f_gen: живо́й
+      f_dat: живо́й
+      f_acc: живу́ю
+      f_ins: живо́й
+      f_pre: живо́й
+      pl_nom: живы́е
+      pl_gen: живы́х
+      pl_dat: живы́м
+      pl_acc: живы́е
+      pl_ins: живы́ми
+      pl_pre: живы́х
   "животный=animal":
     cefr_level: B1
     accented: живо́тный
@@ -6718,7 +6921,7 @@ words:
       f: ми́лая
       n: ми́лое
       pl: ми́лые
-      comparative: мила́
+      comparative: миле́е
     declension:
       m_nom: ми́лый
       m_gen: ми́лого
@@ -6784,6 +6987,47 @@ words:
       pl_acc: ми́рные
       pl_ins: ми́рными
       pl_pre: ми́рных
+  "мировой=world":
+    cefr_level: B1
+    accented: мирово́й
+    collections:
+      - geopolitics
+      - society
+    en_gb:
+      standard: world (relating to the whole world)
+    usage:
+      - ru: Мирова́я война́ измени́ла всё.
+        en_gb: The world war changed everything.
+    forms:
+      m: мирово́й
+      f: мирова́я
+      n: мирово́е
+      pl: мировы́е
+    declension:
+      m_nom: мирово́й
+      m_gen: мирово́го
+      m_dat: мирово́му
+      m_acc: мирово́й
+      m_ins: мировы́м
+      m_pre: мирово́м
+      n_nom: мирово́е
+      n_gen: мирово́го
+      n_dat: мирово́му
+      n_acc: мирово́е
+      n_ins: мировы́м
+      n_pre: мирово́м
+      f_nom: мирова́я
+      f_gen: мирово́й
+      f_dat: мирово́й
+      f_acc: мирову́ю
+      f_ins: мирово́й
+      f_pre: мирово́й
+      pl_nom: мировы́е
+      pl_gen: мировы́х
+      pl_dat: мировы́м
+      pl_acc: мировы́е
+      pl_ins: мировы́ми
+      pl_pre: мировы́х
   "младший=younger":
     cefr_level: A2
     accented: мла́дший
@@ -7330,6 +7574,49 @@ words:
       pl_acc: наро́дные
       pl_ins: наро́дными
       pl_pre: наро́дных
+  "настоящий=real":
+    cefr_level: B1
+    accented: настоя́щий
+    collections:
+      - abstract
+      - values
+    en_gb:
+      standard: real (genuine, not fake)
+      alt:
+        - present (referring to current time)
+    usage:
+      - ru: Он настоя́щий друг.
+        en_gb: He is a real friend.
+    forms:
+      m: настоя́щий
+      f: настоя́щая
+      n: настоя́щее
+      pl: настоя́щие
+    declension:
+      m_nom: настоя́щий
+      m_gen: настоя́щего
+      m_dat: настоя́щему
+      m_acc: настоя́щий
+      m_ins: настоя́щим
+      m_pre: настоя́щем
+      n_nom: настоя́щее
+      n_gen: настоя́щего
+      n_dat: настоя́щему
+      n_acc: настоя́щее
+      n_ins: настоя́щим
+      n_pre: настоя́щем
+      f_nom: настоя́щая
+      f_gen: настоя́щей
+      f_dat: настоя́щей
+      f_acc: настоя́щую
+      f_ins: настоя́щей
+      f_pre: настоя́щей
+      pl_nom: настоя́щие
+      pl_gen: настоя́щих
+      pl_dat: настоя́щим
+      pl_acc: настоя́щие
+      pl_ins: настоя́щими
+      pl_pre: настоя́щих
   "научный=scientific":
     cefr_level: B1
     accented: нау́чный
@@ -11990,7 +12277,7 @@ words:
       - colours and textures
       - nature
     en_gb:
-      standard: blue (the colour of a clear sky)
+      standard: blue (dark or deep blue)
     usage:
       - ru: Над на́ми си́нее не́бо.
         en_gb: Above us is the blue sky.
@@ -13334,13 +13621,15 @@ words:
       pl_acc: стальны́е
       pl_ins: стальны́ми
       pl_pre: стальны́х
-  "старинный=ancient":
+  "старинный=antique":
     cefr_level: B1
     accented: стари́нный
     collections:
       - history
     en_gb:
-      standard: ancient (very old or antique)
+      standard: antique (old, from a former era)
+      alt:
+        - old-fashioned
     forms:
       m: стари́нный
       f: стари́нная
@@ -15374,16 +15663,16 @@ words:
       pl_acc: ца́рские
       pl_ins: ца́рскими
       pl_pre: ца́рских
-  "цветной=colourful":
+  "цветной=coloured":
     cefr_level: B1
     accented: цветно́й
     collections:
       - colours and textures
       - the arts
     en_gb:
-      standard: colourful (having many colours)
+      standard: coloured (in colour, as opposed to black-and-white)
       alt:
-        - coloured
+        - colourful
     usage:
       - ru: Де́ти рису́ют цветны́ми карандаша́ми.
         en_gb: The children draw with coloured pencils.
@@ -15761,6 +16050,47 @@ words:
       pl_acc: чуде́сные
       pl_ins: чуде́сными
       pl_pre: чуде́сных
+  "чужой=foreign":
+    cefr_level: B1
+    accented: чужо́й
+    collections:
+      - abstract
+      - society
+    en_gb:
+      standard: foreign (belonging to someone else, alien)
+    usage:
+      - ru: Не бери́ чужо́е.
+        en_gb: Don't take what's not yours.
+    forms:
+      m: чужо́й
+      f: чужа́я
+      n: чужо́е
+      pl: чужи́е
+    declension:
+      m_nom: чужо́й
+      m_gen: чужо́го
+      m_dat: чужо́му
+      m_acc: чужо́й
+      m_ins: чужи́м
+      m_pre: чужо́м
+      n_nom: чужо́е
+      n_gen: чужо́го
+      n_dat: чужо́му
+      n_acc: чужо́е
+      n_ins: чужи́м
+      n_pre: чужо́м
+      f_nom: чужа́я
+      f_gen: чужо́й
+      f_dat: чужо́й
+      f_acc: чужу́ю
+      f_ins: чужо́й
+      f_pre: чужо́й
+      pl_nom: чужи́е
+      pl_gen: чужи́х
+      pl_dat: чужи́м
+      pl_acc: чужи́е
+      pl_ins: чужи́ми
+      pl_pre: чужи́х
   "широкий=wide":
     cefr_level: A2
     accented: широ́кий

@@ -139,6 +139,23 @@ words:
       f: кака́я
       n: како́е
       pl: каки́е
+  "который=which":
+    cefr_level: A2
+    type: inter
+    accented: кото́рый
+    en_gb:
+      standard: which (relative or interrogative pronoun; also "who" in relative clauses)
+      alt:
+        - who
+        - that
+    usage:
+      - ru: Кни́га, кото́рую я чита́ю, о́чень интере́сна.
+        en_gb: The book that I am reading is very interesting.
+    forms:
+      m: кото́рый
+      f: кото́рая
+      n: кото́рое
+      pl: кото́рые
   "кто=who":
     cefr_level: A1
     type: inter
@@ -155,6 +172,24 @@ words:
       acc: кого́
       ins: кем
       pre: ком
+  "любой=any":
+    cefr_level: A2
+    type: det
+    accented: любо́й
+    en_gb:
+      standard: any (whichever one; every)
+      alt:
+        - every
+        - whichever
+        - anyone
+    usage:
+      - ru: Любо́й мо́жет научи́ться.
+        en_gb: Anyone can learn.
+    forms:
+      m: любо́й
+      f: люба́я
+      n: любо́е
+      pl: любы́е
   "мой=my":
     cefr_level: A1
     type: poss
@@ -220,7 +255,7 @@ words:
       dat: никому́
       acc: никого́
       ins: нике́м
-      pre: ни о ком
+      pre: ни о ко́м
   "ничто=nothing":
     cefr_level: B1
     type: neg
@@ -363,6 +398,23 @@ words:
     usage:
       - ru: Ско́лько э́то сто́ит?
         en_gb: How much does this cost?
+  "такой=such":
+    cefr_level: A1
+    type: demo
+    accented: тако́й
+    en_gb:
+      standard: such (of this kind; so great)
+      alt:
+        - so
+        - what a
+    usage:
+      - ru: Тако́й краси́вый го́род!
+        en_gb: What a beautiful city!
+    forms:
+      m: тако́й
+      f: така́я
+      n: тако́е
+      pl: таки́е
   "твой=your":
     cefr_level: A1
     type: poss

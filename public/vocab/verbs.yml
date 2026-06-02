@@ -3737,7 +3737,7 @@ words:
     en_gb:
       standard: to forget (to fail to remember)
     usage:
-      - ru: Он часто забыва́ет ключи́ до́ма.
+      - ru: Он ча́сто забыва́ет ключи́ до́ма.
         en_gb: He often forgets his keys at home.
     conjugation:
       present:
@@ -4944,7 +4944,7 @@ words:
       alt:
         - to ring
     usage:
-      - ru: Я звоню́ маме ка́ждый день.
+      - ru: Я звоню́ ма́ме ка́ждый день.
         en_gb: I call my mum every day.
     conjugation:
       present:
@@ -5263,12 +5263,12 @@ words:
         - to exist
     conjugation:
       present:
-        "3sg": имеется
-        "3pl": имеются
-      past_m: имелся
-      past_f: имелась
-      past_n: имелось
-      past_pl: имелись
+        "3sg": име́ется
+        "3pl": име́ются
+      past_m: име́лся
+      past_f: име́лась
+      past_n: име́лось
+      past_pl: име́лись
   "интересовать=to interest":
     cefr_level: B1
     accented: интересова́ть
@@ -6159,7 +6159,7 @@ words:
     en_gb:
       standard: to lie down (to go into a horizontal position, habitually)
     usage:
-      - ru: Я ложу́сь спать в одиннадцать.
+      - ru: Я ложу́сь спать в оди́ннадцать.
         en_gb: I go to bed at eleven.
     conjugation:
       present:
@@ -6823,7 +6823,7 @@ words:
         "3sg": нальёт
         "1pl": нальём
         "2pl": нальёте
-        "3pl": нальют
+        "3pl": налью́т
       past_m: нали́л
       past_f: нали́ла
       past_n: нали́ло
@@ -7105,7 +7105,7 @@ words:
     en_gb:
       standard: to begin (to start)
     usage:
-      - ru: Мы на́чали занима́ться в девять.
+      - ru: Мы на́чали занима́ться в де́вять.
         en_gb: We began studying at nine.
     conjugation:
       future:
@@ -7134,7 +7134,7 @@ words:
         "3sg": начнётся
         "3pl": начну́тся
       past_m: нача́лся
-      past_f: началась
+      past_f: начала́сь
       past_n: нача́лось
       past_pl: нача́лись
   "начинать=to begin":
@@ -7244,7 +7244,7 @@ words:
         "2pl": несётесь
         "3pl": несу́тся
       past_m: нёсся
-      past_f: неслась
+      past_f: несла́сь
       past_n: несло́сь
       past_pl: несли́сь
   "носить=to wear":
@@ -7491,10 +7491,10 @@ words:
     conjugation:
       future:
         "1sg": обниму́
-        "2sg": обнимешь
-        "3sg": обнимет
-        "1pl": обнимем
-        "2pl": обнимете
+        "2sg": обни́мешь
+        "3sg": обни́мет
+        "1pl": обни́мем
+        "2pl": обни́мете
         "3pl": обниму́т
       past_m: обня́л
       past_f: обняла́
@@ -7536,7 +7536,7 @@ words:
         - to cost
     conjugation:
       future:
-        "1sg": обойдусь
+        "1sg": обойду́сь
         "2sg": обойдёшься
         "3sg": обойдётся
         "1pl": обойдёмся
@@ -9131,7 +9131,7 @@ words:
         "1pl": ошибёмся
         "2pl": ошибётесь
         "3pl": ошибу́тся
-      past_m: ошибся
+      past_m: оши́бся
       past_f: ошибла́сь
       past_n: ошибло́сь
       past_pl: ошибли́сь
@@ -9909,9 +9909,9 @@ words:
         "2pl": поги́бнете
         "3pl": поги́бнут
       past_m: поги́б
-      past_f: погибла
-      past_n: погибло
-      past_pl: погибли
+      past_f: поги́бла
+      past_n: поги́бло
+      past_pl: поги́бли
   "поглядеть=to look":
     cefr_level: B1
     accented: погляде́ть
@@ -9998,6 +9998,29 @@ words:
       past_f: поднима́лась
       past_n: поднима́лось
       past_pl: поднима́лись
+  "поднять=to raise":
+    cefr_level: B1
+    accented: подня́ть
+    aspect: pf
+    collections:
+      - movement
+      - actions
+    en_gb:
+      standard: to raise (to lift something upwards)
+      alt:
+        - to lift
+    conjugation:
+      future:
+        "1sg": подниму́
+        "2sg": подни́мешь
+        "3sg": подни́мет
+        "1pl": подни́мем
+        "2pl": подни́мете
+        "3pl": подни́мут
+      past_m: подня́л
+      past_f: подняла́
+      past_n: подня́ло
+      past_pl: подня́ли
   "подняться=to go up":
     cefr_level: B1
     accented: подня́ться
@@ -10612,7 +10635,7 @@ words:
     en_gb:
       standard: to crawl (to move on hands and knees, or to creep)
     usage:
-      - ru: Улитка по́лзет по листу́.
+      - ru: Ули́тка по́лзет по листу́.
         en_gb: The snail is crawling along the leaf.
     conjugation:
       present:
@@ -11964,6 +11987,29 @@ words:
       past_f: прие́хала
       past_n: прие́хало
       past_pl: прие́хали
+  "признать=to acknowledge":
+    cefr_level: B1
+    accented: призна́ть
+    aspect: pf
+    collections:
+      - communication
+      - emotions
+    en_gb:
+      standard: to acknowledge (to admit or recognise something)
+      alt:
+        - to recognise
+    conjugation:
+      future:
+        "1sg": призна́ю
+        "2sg": призна́ешь
+        "3sg": призна́ет
+        "1pl": призна́ем
+        "2pl": призна́ете
+        "3pl": призна́ют
+      past_m: при́знал
+      past_f: признала́
+      past_n: призна́ло
+      past_pl: призна́ли
   "прийти=to come":
     cefr_level: A2
     accented: прийти́
@@ -11988,6 +12034,30 @@ words:
       past_f: пришла́
       past_n: пришло́
       past_pl: пришли́
+  "приказать=to order":
+    cefr_level: B1
+    accented: приказа́ть
+    aspect: pf
+    collections:
+      - authority
+      - communication
+      - military
+    en_gb:
+      standard: to order (to command someone to do something)
+      alt:
+        - to command
+    conjugation:
+      future:
+        "1sg": прикажу́
+        "2sg": прика́жешь
+        "3sg": прика́жет
+        "1pl": прика́жем
+        "2pl": прика́жете
+        "3pl": прика́жут
+      past_m: прика́зал
+      past_f: прика́зала
+      past_n: прика́зало
+      past_pl: прика́зали
   "принести=to bring":
     cefr_level: A2
     accented: принести́
@@ -12075,6 +12145,30 @@ words:
       past_f: приходи́ла
       past_n: приходи́ло
       past_pl: приходи́ли
+  "проверить=to check":
+    cefr_level: B1
+    accented: прове́рить
+    aspect: pf
+    collections:
+      - work
+      - study
+      - actions
+    en_gb:
+      standard: to check (to verify or examine something)
+      alt:
+        - to verify
+    conjugation:
+      future:
+        "1sg": прове́рю
+        "2sg": прове́ришь
+        "3sg": прове́рит
+        "1pl": прове́рим
+        "2pl": прове́рите
+        "3pl": прове́рят
+      past_m: прове́рил
+      past_f: прове́рила
+      past_n: прове́рило
+      past_pl: прове́рили
   "провести=to spend":
     cefr_level: B1
     accented: провести́
@@ -12162,6 +12256,29 @@ words:
       past_f: продолжа́ла
       past_n: продолжа́ло
       past_pl: продолжа́ли
+  "продолжаться=to continue":
+    cefr_level: B1
+    accented: продолжа́ться
+    aspect: impf
+    collections:
+      - time
+      - actions
+    en_gb:
+      standard: to continue (to go on happening; to last)
+      alt:
+        - to last
+    conjugation:
+      present:
+        "1sg": продолжа́юсь
+        "2sg": продолжа́ешься
+        "3sg": продолжа́ется
+        "1pl": продолжа́емся
+        "2pl": продолжа́етесь
+        "3pl": продолжа́ются
+      past_m: продолжа́лся
+      past_f: продолжа́лась
+      past_n: продолжа́лось
+      past_pl: продолжа́лись
   "продолжить=to continue":
     cefr_level: A2
     accented: продо́лжить
@@ -12222,6 +12339,29 @@ words:
       past_f: происходи́ла
       past_n: происходи́ло
       past_pl: происходи́ли
+  "пройти=to pass":
+    cefr_level: B1
+    accented: пройти́
+    aspect: pf
+    collections:
+      - movement
+      - travel
+    en_gb:
+      standard: to pass (to go through or by something)
+      alt:
+        - to go through
+    conjugation:
+      future:
+        "1sg": пройду́
+        "2sg": пройдёшь
+        "3sg": пройдёт
+        "1pl": пройдём
+        "2pl": пройдёте
+        "3pl": пройду́т
+      past_m: прошёл
+      past_f: прошла́
+      past_n: прошло́
+      past_pl: прошли́
   "просить=to ask for":
     cefr_level: A2
     accented: проси́ть
@@ -12267,6 +12407,29 @@ words:
       past_f: прости́ла
       past_n: прости́ло
       past_pl: прости́ли
+  "проходить=to pass":
+    cefr_level: B1
+    accented: проходи́ть
+    aspect: impf
+    collections:
+      - movement
+      - travel
+    en_gb:
+      standard: to pass (to go through or by something, repeatedly or in progress)
+      alt:
+        - to walk past
+    conjugation:
+      present:
+        "1sg": прохожу́
+        "2sg": прохо́дишь
+        "3sg": прохо́дит
+        "1pl": прохо́дим
+        "2pl": прохо́дите
+        "3pl": прохо́дят
+      past_m: проходи́л
+      past_f: проходи́ла
+      past_n: проходи́ло
+      past_pl: проходи́ли
   "прочитать=to read":
     cefr_level: A1
     accented: прочита́ть
@@ -12855,7 +13018,7 @@ words:
     en_gb:
       standard: to tell (to narrate)
     usage:
-      - ru: Ба́бушка расска́зывает сказки дет́ям.
+      - ru: Ба́бушка расска́зывает ска́зки де́тям.
         en_gb: Grandmother tells fairy tales to the children.
     conjugation:
       present:
@@ -14085,10 +14248,10 @@ words:
     conjugation:
       future:
         "1sg": сниму́
-        "2sg": снимешь
-        "3sg": снимет
-        "1pl": снимем
-        "2pl": снимете
+        "2sg": сни́мешь
+        "3sg": сни́мет
+        "1pl": сни́мем
+        "2pl": сни́мете
         "3pl": сни́мут
       past_m: снял
       past_f: сняла́
@@ -14756,7 +14919,7 @@ words:
         "2sg": спишь
         "3sg": спит
         "1pl": спим
-        "2pl": спите
+        "2pl": спи́те
         "3pl": спят
       past_m: спал
       past_f: спала́
@@ -15643,9 +15806,9 @@ words:
         "2pl": трясётесь
         "3pl": трясу́тся
       past_m: тря́сся
-      past_f: тряслась
-      past_n: тряслось
-      past_pl: тряслись
+      past_f: трясла́сь
+      past_n: трясло́сь
+      past_pl: трясли́сь
   "тянуть=to pull":
     cefr_level: B1
     accented: тяну́ть
@@ -16542,6 +16705,30 @@ words:
       past_f: установи́ла
       past_n: установи́ло
       past_pl: установи́ли
+  "устать=to get tired":
+    cefr_level: A2
+    accented: уста́ть
+    aspect: pf
+    collections:
+      - health
+      - emotions
+      - daily life
+    en_gb:
+      standard: to get tired (to become weary or fatigued)
+      alt:
+        - to tire
+    conjugation:
+      future:
+        "1sg": уста́ну
+        "2sg": уста́нешь
+        "3sg": уста́нет
+        "1pl": уста́нем
+        "2pl": уста́нете
+        "3pl": уста́нут
+      past_m: уста́л
+      past_f: уста́ла
+      past_n: уста́ло
+      past_pl: уста́ли
   "устраивать=to arrange":
     cefr_level: B1
     accented: устра́ивать
@@ -17054,7 +17241,7 @@ words:
         "3sg": шевели́тся
         "1pl": шевели́мся
         "2pl": шевели́тесь
-        "3pl": шевелятся
+        "3pl": шевеля́тся
       past_m: шевели́лся
       past_f: шевели́лась
       past_n: шевели́лось
