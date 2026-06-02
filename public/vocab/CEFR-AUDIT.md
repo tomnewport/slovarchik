@@ -61,11 +61,40 @@ mislabels, not to relitigate every judgement call.
 B1 is no longer half the corpus, the A1–A2 core holds the everyday words a
 beginner actually meets first, and specialist vocabulary has moved up.
 
+## Coverage pass (missing A1–B2 vocabulary)
+
+A second pass cross-checked the corpus against the standard frequency list
+(`node scripts/check_standard_vocab.js`) and found core A1–B2 words missing
+entirely — including A1 staples like `очень` (very), `теперь` (now), `кофе`,
+`письмо` and `минута`. **187 entries were added** with full, hand-verified
+grammar:
+
+- **59 function words / adverbs** — adverbs (`очень`, `теперь`, `скоро`,
+  `слишком`, `вовремя`, `лучше`…), prepositions (`после`, `против`, `насчёт`,
+  `помимо`, `спустя`…), an interjection (`господи`) and indefinite pronouns
+  (`кто-то`, `что-то`, `никакой`).
+- **83 nouns** with complete 6-case × number declension tables (`письмо`,
+  `минута`, `кровать`, `свет`, `помощь`, `случай`, `связь`, `область`,
+  `способность`, the `-ость` abstract series, indeclinables `кофе`/`такси`/`меню`,
+  pluralia tantum `сутки`/`дрова`, …).
+- **45 verbs** with full conjugation (non-past 6 + past 4), covering the
+  high-frequency `при-`/`про-`/`пред-`/`под-` families (`пробовать`, `подумать`,
+  `пригласить`, `продать`, `проснуться`, `пользоваться`, `предупредить`…),
+  including consonant mutations and mobile stress.
+
+Standard-list coverage rose from **88.2% → 93.7%**; the corpus grew from 3,322
+to 3,509 words. Every added noun/verb form was machine-checked for completeness
+and stress marking, then validated by the existing data-integrity tests.
+
 ## Still open
 
 - **No C2, and C1 is still thin.** This is expected for a corpus aimed at
   A1–B2 learners; the few genuinely C2 items aren't in the word lists yet.
-- **Function words** (prepositions, conjunctions, pronouns, numerals) and the
-  remaining mid-band A2↔B1 / B1↔B2 nouns were not exhaustively re-judged. The
+- **~203 standard-list words still missing**, but the remainder is mostly
+  non-core: set phrases (`доброе утро`), slang/loanwords (`вай-фай`, `хобби`),
+  abbreviations (`нквд`, `цк`), proper nouns, derived forms already present in
+  their base, and a tail of specialist or literary nouns/verbs.
+- **Function words** (conjunctions, numerals) and the remaining mid-band
+  A2↔B1 / B1↔B2 nouns were not exhaustively re-judged. The
   `scripts/audit-cefr.js` anchors are a small high-confidence seed — extend the
   `REFERENCE` map there to widen automated flagging.
