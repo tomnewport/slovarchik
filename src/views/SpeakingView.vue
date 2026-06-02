@@ -17,7 +17,10 @@ import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the ✓ celebration shows before the hands-free loop moves on.
-const CELEBRATE_MS = 1100
+const CELEBRATE_MS = 2500
+// How long to pause after the model answer is read aloud (incorrect / passed),
+// giving enough time to read the phrase and attempt to repeat it.
+const REVIEW_MS = 4000
 
 // The three speaking challenges. `recLang` is what the recogniser listens for;
 // `target` is the field of the phrase the spoken answer is graded against;
@@ -264,7 +267,7 @@ function reveal({ correct, passed, similarity, diff, heard }) {
   const cue = correct ? 'Correct.' : passed ? 'Passed.' : 'Not quite.'
   const advance = onceForQuestion(() => {
     if (handsFree.value && phase.value === 'graded') {
-      later(nextQuestion, correct ? CELEBRATE_MS : 1400)
+      later(nextQuestion, correct ? CELEBRATE_MS : REVIEW_MS)
     }
   }, estimateSpeechMs(cue) + estimateSpeechMs(current.value.ru) + 1500)
   const spoke = speakSequence(
