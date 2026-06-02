@@ -61,27 +61,33 @@ describe('PhraseTesterView', () => {
     expect(wrapper.vm.celebrating).toBe(false)
   })
 
-  it('accepts duplicate-word tokens placed in swapped positions (easy mode)', async () => {
-    const wrapper = mount(PhraseTesterView)
-    await wrapper.findAll('button.card')[0].trigger('click')
+  it('accepts duplicate-word tiles built through the real bank in any order (easy mode)', async () => {
+    // Swap the store down to a single phrase that repeats a word, so starting the
+    // drill is guaranteed to land on it and the bank is built by the real path
+    // (nextQuestion → phraseTokens → shuffle), giving each occurrence its own tile.
+    const saved = state.words
+    state.words = [{ key: 'dupe', usage: [{ ru: 'кот видит кота', en_gb: 'the cat sees the cat' }] }]
+    try {
+      const wrapper = mount(PhraseTesterView)
+      await wrapper.findAll('button.card')[0].trigger('click') // easy mode builds the bank
+      expect(wrapper.vm.current.en).toBe('the cat sees the cat')
 
-    // Override with a phrase that has two identical words so we can test equivalence.
-    const dupePhrase = { id: 'dupe-test', ru: 'кот сидит рядом с котом', en: 'the cat sees the cat' }
-    wrapper.vm.current = dupePhrase
-    wrapper.vm.bank = phraseTokens(dupePhrase.en).map((text, id) => ({ id, text }))
-    // bank: [{id:0,'the'},{id:1,'cat'},{id:2,'sees'},{id:3,'the'},{id:4,'cat'}]
-    await wrapper.vm.$nextTick()
+      // Tap pool tiles by text in the correct order. For the repeated words, take
+      // the *last* matching tile each time, so the physical tiles fill positions
+      // in a different order than they sit in the bank — the grade must come from
+      // tile text alone, not which tile (id) lands where.
+      for (const word of phraseTokens(wrapper.vm.current.en)) {
+        const tiles = wrapper
+          .findAll('button.tile')
+          .filter((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
+        await tiles[tiles.length - 1].trigger('click')
+      }
+      await wrapper.vm.$nextTick()
 
-    // Place tokens to form the correct phrase but using swapped IDs for the two 'the' tiles:
-    // use id=3 (second 'the') for the first position, id=0 (first 'the') for the fourth.
-    wrapper.vm.placeToken({ id: 3, text: 'the' })   // first slot — wrong ID, same text
-    wrapper.vm.placeToken({ id: 1, text: 'cat' })
-    wrapper.vm.placeToken({ id: 2, text: 'sees' })
-    wrapper.vm.placeToken({ id: 0, text: 'the' })   // fourth slot — wrong ID, same text
-    wrapper.vm.placeToken({ id: 4, text: 'cat' })
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.wasCorrect).toBe(true)
+      expect(wrapper.vm.wasCorrect).toBe(true)
+    } finally {
+      state.words = saved
+    }
   })
 
   it('grades a guided-keyboard answer that omits punctuation and stress', async () => {
