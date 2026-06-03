@@ -42,16 +42,15 @@ eslint.config.js        # flat config: js.recommended + eslint-plugin-vue
 src/
   main.js               # entry: createApp(App).use(router).mount('#app')
   App.vue               # shell: header nav + <RouterView> + global RussianKeyboard
-  router/index.js       # routes → views (/, /vocab, /declension, /numbers, /phrases, /listening, /progress)
-  views/*.vue           # one screen per route (the drills + Progress page)
+  router/index.js       # routes → views (/, /vocab, /declension, /numbers, /phrases, /listening, /speaking)
+  views/*.vue           # one screen per route (the drills)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintKeyboard, CelebrationBurst)
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
-    progress.js         #   IndexedDB-backed attempt history + live queries
     keyboard.js         #   tiny shared hint state between drills + keyboard
   lib/                  # framework-free pure modules (unit-tested in isolation):
                         #   declension, quiz, phrases, numerals, numberDrill, text,
-                        #   progress (model/queries), skills, practice, vocabBuild, idb, speech, collections
+                        #   vocabBuild, idb, speech, collections
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
@@ -84,8 +83,7 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, then `build` on every push.
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store).
 - **Routing/nav** → `src/router/index.js` + the `<nav>` in `App.vue`.
 
-See `README.md` for the deeper architecture (vocab loading, progress model,
-skills/mastery/exam-readiness).
+See `README.md` for the deeper architecture (vocab loading, offline caching).
 </content>
 </invoke>
 
