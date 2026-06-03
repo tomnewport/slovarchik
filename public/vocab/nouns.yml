@@ -8889,6 +8889,20 @@ words:
       pl_acc: жела́ния
       pl_ins: жела́ниями
       pl_pre: жела́ниях
+  "железо=iron":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: iron (the metal)
+    declension:
+      sg_nom: желе́зо
+      sg_gen: желе́за
+      sg_dat: желе́зу
+      sg_acc: желе́зо
+      sg_ins: желе́зом
+      sg_pre: желе́зе
   "желудок=stomach":
     cefr_level: B1
     gender: m
@@ -9791,6 +9805,26 @@ words:
       sg_acc: за́пад
       sg_ins: за́падом
       sg_pre: за́паде
+  "запас=stock":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: stock (a reserve or supply)
+    declension:
+      sg_nom: запа́с
+      sg_gen: запа́са
+      sg_dat: запа́су
+      sg_acc: запа́с
+      sg_ins: запа́сом
+      sg_pre: запа́се
+      pl_nom: запа́сы
+      pl_gen: запа́сов
+      pl_dat: запа́сам
+      pl_acc: запа́сы
+      pl_ins: запа́сами
+      pl_pre: запа́сах
   "запах=smell":
     cefr_level: B1
     gender: m
@@ -13895,6 +13929,26 @@ words:
       pl_acc: коньки́
       pl_ins: конька́ми
       pl_pre: конька́х
+  "коньяк=cognac":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: cognac (brandy)
+    declension:
+      sg_nom: конья́к
+      sg_gen: коньяка́
+      sg_dat: коньяку́
+      sg_acc: конья́к
+      sg_ins: коньяко́м
+      sg_pre: коньяке́
+      pl_nom: коньяки́
+      pl_gen: коньяко́в
+      pl_dat: коньяка́м
+      pl_acc: коньяки́
+      pl_ins: коньяка́ми
+      pl_pre: коньяка́х
   "копейка=kopek":
     cefr_level: A2
     gender: f
@@ -14743,6 +14797,26 @@ words:
       sg_acc: креще́ние
       sg_ins: креще́нием
       sg_pre: креще́нии
+  "крик=shout":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: shout (a loud cry)
+    declension:
+      sg_nom: крик
+      sg_gen: кри́ка
+      sg_dat: кри́ку
+      sg_acc: крик
+      sg_ins: кри́ком
+      sg_pre: кри́ке
+      pl_nom: кри́ки
+      pl_gen: кри́ков
+      pl_dat: кри́кам
+      pl_acc: кри́ки
+      pl_ins: кри́ками
+      pl_pre: кри́ках
   "кровать=bed":
     cefr_level: A2
     gender: f
@@ -14838,6 +14912,26 @@ words:
       pl_acc: круги́
       pl_ins: круга́ми
       pl_pre: круга́х
+  "кружок=circle":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: circle (a small group or club)
+    declension:
+      sg_nom: кружо́к
+      sg_gen: кружка́
+      sg_dat: кружку́
+      sg_acc: кружо́к
+      sg_ins: кружко́м
+      sg_pre: кружке́
+      pl_nom: кружки́
+      pl_gen: кружко́в
+      pl_dat: кружка́м
+      pl_acc: кружки́
+      pl_ins: кружка́ми
+      pl_pre: кружка́х
   "круиз=cruise":
     cefr_level: B2
     gender: m
@@ -16106,6 +16200,26 @@ words:
       pl_acc: листы́
       pl_ins: листа́ми
       pl_pre: листа́х
+  "листок=leaf":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: leaf (a small leaf or sheet of paper)
+    declension:
+      sg_nom: листо́к
+      sg_gen: листка́
+      sg_dat: листку́
+      sg_acc: листо́к
+      sg_ins: листко́м
+      sg_pre: листке́
+      pl_nom: листки́
+      pl_gen: листко́в
+      pl_dat: листка́м
+      pl_acc: листки́
+      pl_ins: листка́ми
+      pl_pre: листка́х
   "литература=literature":
     cefr_level: A2
     gender: f
@@ -16649,6 +16763,26 @@ words:
       pl_acc: майо́ров
       pl_ins: майо́рами
       pl_pre: майо́рах
+  "малыш=kid":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: kid (a little child)
+    declension:
+      sg_nom: малы́ш
+      sg_gen: малыша́
+      sg_dat: малышу́
+      sg_acc: малыша́
+      sg_ins: малышо́м
+      sg_pre: малыше́
+      pl_nom: малыши́
+      pl_gen: малыше́й
+      pl_dat: малыша́м
+      pl_acc: малыше́й
+      pl_ins: малыша́ми
+      pl_pre: малыша́х
   "мальчик=boy":
     cefr_level: A1
     gender: m
@@ -17603,6 +17737,26 @@ words:
       pl_acc: ми́ны
       pl_ins: ми́нами
       pl_pre: ми́нах
+  "минимум=minimum":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: minimum (the least amount)
+    declension:
+      sg_nom: ми́нимум
+      sg_gen: ми́нимума
+      sg_dat: ми́нимуму
+      sg_acc: ми́нимум
+      sg_ins: ми́нимумом
+      sg_pre: ми́нимуме
+      pl_nom: ми́нимумы
+      pl_gen: ми́нимумов
+      pl_dat: ми́нимумам
+      pl_acc: ми́нимумы
+      pl_ins: ми́нимумами
+      pl_pre: ми́нимумах
   "министерство=ministry":
     cefr_level: B1
     gender: n
@@ -18185,6 +18339,26 @@ words:
       pl_acc: моне́ты
       pl_ins: моне́тами
       pl_pre: моне́тах
+  "морда=muzzle":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: muzzle (an animal's snout)
+    declension:
+      sg_nom: мо́рда
+      sg_gen: мо́рды
+      sg_dat: мо́рде
+      sg_acc: мо́рду
+      sg_ins: мо́рдой
+      sg_pre: мо́рде
+      pl_nom: мо́рды
+      pl_gen: морд
+      pl_dat: мо́рдам
+      pl_acc: мо́рды
+      pl_ins: мо́рдами
+      pl_pre: мо́рдах
   "море=sea":
     cefr_level: A2
     gender: n
@@ -18916,6 +19090,20 @@ words:
       pl_acc: наказа́ния
       pl_ins: наказа́ниями
       pl_pre: наказа́ниях
+  "наличие=presence":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: presence (the fact of being available)
+    declension:
+      sg_nom: нали́чие
+      sg_gen: нали́чия
+      sg_dat: нали́чию
+      sg_acc: нали́чие
+      sg_ins: нали́чием
+      sg_pre: нали́чии
   "наличные=cash":
     cefr_level: B2
     animacy: i
@@ -21849,6 +22037,20 @@ words:
       pl_acc: отря́ды
       pl_ins: отря́дами
       pl_pre: отря́дах
+  "отсутствие=absence":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: absence (the state of being away or missing)
+    declension:
+      sg_nom: отсу́тствие
+      sg_gen: отсу́тствия
+      sg_dat: отсу́тствию
+      sg_acc: отсу́тствие
+      sg_ins: отсу́тствием
+      sg_pre: отсу́тствии
   "оттенок=shade":
     cefr_level: B2
     gender: m
@@ -23068,6 +23270,20 @@ words:
       pl_acc: перево́ды
       pl_ins: перево́дами
       pl_pre: перево́дах
+  "переговоры=negotiations":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["pl"]
+    en_gb:
+      standard: negotiations (formal talks)
+    declension:
+      pl_nom: перегово́ры
+      pl_gen: перегово́ров
+      pl_dat: перегово́рам
+      pl_acc: перегово́ры
+      pl_ins: перегово́рами
+      pl_pre: перегово́рах
   "передача=broadcast":
     cefr_level: B1
     gender: f
@@ -24646,6 +24862,26 @@ words:
       pl_acc: подозре́ния
       pl_ins: подозре́ниями
       pl_pre: подозре́ниях
+  "подоконник=windowsill":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: windowsill (the ledge below a window)
+    declension:
+      sg_nom: подоко́нник
+      sg_gen: подоко́нника
+      sg_dat: подоко́ннику
+      sg_acc: подоко́нник
+      sg_ins: подоко́нником
+      sg_pre: подоко́ннике
+      pl_nom: подоко́нники
+      pl_gen: подоко́нников
+      pl_dat: подоко́нникам
+      pl_acc: подоко́нники
+      pl_ins: подоко́нниками
+      pl_pre: подоко́нниках
   "подпись=signature":
     cefr_level: B2
     gender: f
@@ -26673,6 +26909,26 @@ words:
       pl_acc: президе́нтов
       pl_ins: президе́нтами
       pl_pre: президе́нтах
+  "препарат=preparation":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: preparation (a medicinal or chemical product)
+    declension:
+      sg_nom: препара́т
+      sg_gen: препара́та
+      sg_dat: препара́ту
+      sg_acc: препара́т
+      sg_ins: препара́том
+      sg_pre: препара́те
+      pl_nom: препара́ты
+      pl_gen: препара́тов
+      pl_dat: препара́там
+      pl_acc: препара́ты
+      pl_ins: препара́тами
+      pl_pre: препара́тах
   "пресса=press":
     cefr_level: B1
     gender: f
@@ -30138,6 +30394,26 @@ words:
       pl_acc: рты
       pl_ins: рта́ми
       pl_pre: рта́х
+  "рота=company":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: company (a military unit)
+    declension:
+      sg_nom: ро́та
+      sg_gen: ро́ты
+      sg_dat: ро́те
+      sg_acc: ро́ту
+      sg_ins: ро́той
+      sg_pre: ро́те
+      pl_nom: ро́ты
+      pl_gen: рот
+      pl_dat: ро́там
+      pl_acc: ро́ты
+      pl_ins: ро́тами
+      pl_pre: ро́тах
   "рубаха=shirt":
     cefr_level: B1
     gender: f
@@ -30357,6 +30633,26 @@ words:
       sg_acc: руково́дство
       sg_ins: руково́дством
       sg_pre: руково́дстве
+  "рукопись=manuscript":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: manuscript (a handwritten or original text)
+    declension:
+      sg_nom: ру́копись
+      sg_gen: ру́кописи
+      sg_dat: ру́кописи
+      sg_acc: ру́копись
+      sg_ins: ру́кописью
+      sg_pre: ру́кописи
+      pl_nom: ру́кописи
+      pl_gen: ру́кописей
+      pl_dat: ру́кописям
+      pl_acc: ру́кописи
+      pl_ins: ру́кописями
+      pl_pre: ру́кописях
   "рулетка=tape measure":
     cefr_level: B2
     gender: f
@@ -31364,6 +31660,20 @@ words:
       pl_acc: се́мьи
       pl_ins: се́мьями
       pl_pre: се́мьях
+  "сено=hay":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: hay (dried grass for animals)
+    declension:
+      sg_nom: се́но
+      sg_gen: се́на
+      sg_dat: се́ну
+      sg_acc: се́но
+      sg_ins: се́ном
+      sg_pre: се́не
   "сердце=heart":
     cefr_level: A2
     gender: n
@@ -32269,6 +32579,26 @@ words:
       pl_acc: слоно́в
       pl_ins: слона́ми
       pl_pre: слона́х
+  "слуга=servant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: servant (a person who serves a household)
+    declension:
+      sg_nom: слуга́
+      sg_gen: слуги́
+      sg_dat: слуге́
+      sg_acc: слугу́
+      sg_ins: слуго́й
+      sg_pre: слуге́
+      pl_nom: слу́ги
+      pl_gen: слуг
+      pl_dat: слу́гам
+      pl_acc: слуг
+      pl_ins: слу́гами
+      pl_pre: слу́гах
   "служба=service":
     cefr_level: B1
     gender: f
@@ -36737,6 +37067,26 @@ words:
       pl_acc: тру́сов
       pl_ins: тру́сами
       pl_pre: тру́сах
+  "тряпка=rag":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: rag (a piece of old cloth)
+    declension:
+      sg_nom: тря́пка
+      sg_gen: тря́пки
+      sg_dat: тря́пке
+      sg_acc: тря́пку
+      sg_ins: тря́пкой
+      sg_pre: тря́пке
+      pl_nom: тря́пки
+      pl_gen: тря́пок
+      pl_dat: тря́пкам
+      pl_acc: тря́пки
+      pl_ins: тря́пками
+      pl_pre: тря́пках
   "туалет=toilet":
     cefr_level: A1
     gender: m
@@ -37816,6 +38166,20 @@ words:
       pl_acc: у́ши
       pl_ins: уша́ми
       pl_pre: уша́х
+  "уход=care":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: care (looking after; also departure)
+    declension:
+      sg_nom: ухо́д
+      sg_gen: ухо́да
+      sg_dat: ухо́ду
+      sg_acc: ухо́д
+      sg_ins: ухо́дом
+      sg_pre: ухо́де
   "участие=participation":
     cefr_level: B1
     gender: n
@@ -37908,6 +38272,26 @@ words:
       pl_acc: ученико́в
       pl_ins: ученика́ми
       pl_pre: ученика́х
+  "училище=college":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: college (a vocational school)
+    declension:
+      sg_nom: учи́лище
+      sg_gen: учи́лища
+      sg_dat: учи́лищу
+      sg_acc: учи́лище
+      sg_ins: учи́лищем
+      sg_pre: учи́лище
+      pl_nom: учи́лища
+      pl_gen: учи́лищ
+      pl_dat: учи́лищам
+      pl_acc: учи́лища
+      pl_ins: учи́лищами
+      pl_pre: учи́лищах
   "учитель=teacher":
     cefr_level: A1
     gender: m
@@ -40363,6 +40747,20 @@ words:
       pl_acc: шо́рты
       pl_ins: шо́ртами
       pl_pre: шо́ртах
+  "шоссе=highway":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: highway (a main road; indeclinable)
+    declension:
+      sg_nom: шоссе́
+      sg_gen: шоссе́
+      sg_dat: шоссе́
+      sg_acc: шоссе́
+      sg_ins: шоссе́
+      sg_pre: шоссе́
   "шофёр=chauffeur":
     cefr_level: B1
     gender: m
@@ -40441,6 +40839,60 @@ words:
       pl_acc: шта́бы
       pl_ins: шта́бами
       pl_pre: шта́бах
+  "штаны=trousers":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["pl"]
+    en_gb:
+      standard: trousers (a garment for the legs)
+    declension:
+      pl_nom: штаны́
+      pl_gen: штано́в
+      pl_dat: штана́м
+      pl_acc: штаны́
+      pl_ins: штана́ми
+      pl_pre: штана́х
+  "штат=state":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: state (a federal state; also staff)
+    declension:
+      sg_nom: штат
+      sg_gen: шта́та
+      sg_dat: шта́ту
+      sg_acc: штат
+      sg_ins: шта́том
+      sg_pre: шта́те
+      pl_nom: шта́ты
+      pl_gen: шта́тов
+      pl_dat: шта́там
+      pl_acc: шта́ты
+      pl_ins: шта́тами
+      pl_pre: шта́тах
+  "шторм=storm":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: storm (a violent storm, especially at sea)
+    declension:
+      sg_nom: шторм
+      sg_gen: што́рма
+      sg_dat: што́рму
+      sg_acc: шторм
+      sg_ins: што́рмом
+      sg_pre: што́рме
+      pl_nom: што́рмы
+      pl_gen: што́рмов
+      pl_dat: што́рмам
+      pl_acc: што́рмы
+      pl_ins: што́рмами
+      pl_pre: што́рмах
   "штраф=fine":
     cefr_level: B1
     gender: m
