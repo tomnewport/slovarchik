@@ -77,10 +77,10 @@ import { RouterLink } from 'vue-router'
     <RouterLink to="/progress" class="card" style="text-decoration: none; color: inherit">
       <h2 style="margin-top: 0">📈 Progress</h2>
       <p>
-        See your strongest and weakest words, forms, genders and collections, track exam readiness
-        for a collection, and preview a tailored practice session.
+        Track the words you've learned and mastered over time. Being rebuilt as part of the
+        new progression system.
       </p>
-      <span class="pill">skills · mastery · exam</span>
+      <span class="pill">learned · mastered</span>
     </RouterLink>
   </section>
 </template>

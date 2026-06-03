@@ -7,8 +7,6 @@ import { computed, reactive, ref, onUnmounted } from 'vue'
 import { state } from '../stores/vocab.js'
 import { buildParadigms, POS_TITLES } from '../lib/paradigm.js'
 import { sample } from '../lib/quiz.js'
-import { record as recordAttempt } from '../stores/progress.js'
-import { gradeFor } from '../lib/progress.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 import IdentifyForm from '../components/inflection/IdentifyForm.vue'
@@ -64,19 +62,11 @@ function newRound() {
   round.value += 1
 }
 
-function onGraded(correct, records = []) {
+function onGraded(correct) {
   if (lastResult.value) return
   lastResult.value = { correct }
   score.total += 1
   if (correct) score.right += 1
-  const level = activeMode.value?.level ?? 'easy'
-  for (const r of records) {
-    recordAttempt(
-      { kind: 'form', key: paradigm.value.key, slot: r.slot },
-      gradeFor(level, r.correct),
-      { level },
-    )
-  }
   if (correct) {
     celebrating.value = true
     advanceTimer = setTimeout(newRound, CELEBRATE_MS)
