@@ -12,11 +12,10 @@ beforeAll(() => {
 })
 
 describe('PhraseTesterView', () => {
-  it('shows the three difficulty options on the menu', () => {
+  it('shows the difficulty options on the menu', () => {
     const wrapper = mount(PhraseTesterView)
     expect(wrapper.text()).toContain('Easy')
-    expect(wrapper.text()).toContain('Intermediate')
-    expect(wrapper.text()).toContain('Hard')
+    expect(wrapper.text()).toContain('Type it')
   })
 
   it('builds a sentence from tiles and scores it correct', async () => {
@@ -90,9 +89,9 @@ describe('PhraseTesterView', () => {
     }
   })
 
-  it('grades a guided-keyboard answer that omits punctuation and stress', async () => {
+  it('grades a typed answer that omits punctuation and stress', async () => {
     const wrapper = mount(PhraseTesterView)
-    // Start intermediate mode (second level card).
+    // Start typing mode (second level card).
     await wrapper.findAll('button.card')[1].trigger('click')
 
     // Type the bare letter/space sequence — phraseCorrect forgives the rest.

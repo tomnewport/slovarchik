@@ -2,17 +2,10 @@
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import {
-  phraseTokens,
-  phraseCorrect,
-  nextChar,
-  hintKeys,
-  RU_LETTERS,
-  EN_LETTERS,
-} from '../lib/phrases.js'
+import { resetHint } from '../stores/keyboard.js'
+import { phraseTokens, phraseCorrect } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
-import HintKeyboard from '../components/HintKeyboard.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing to the next phrase.
@@ -22,8 +15,7 @@ const ready = computed(() => phrases.value.length > 0)
 
 const LEVELS = [
   { id: 'easy', label: 'Easy · build', help: 'Tap the words in the right order.' },
-  { id: 'intermediate', label: 'Intermediate · guided', help: 'Type it; the keyboard hints each letter.' },
-  { id: 'hard', label: 'Hard · blind', help: 'Type the whole translation, no help.' },
+  { id: 'type', label: 'Type it', help: 'Type the translation — tap the keyboard’s 💡 if you’re stuck.' },
 ]
 
 const level = ref(null)
@@ -44,13 +36,14 @@ const placed = ref([])
 
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
-// The translation's alphabet — drives the guided keyboard and Russian input.
+// The translation's alphabet — drives the Russian input and on-screen keyboard.
 const targetLang = computed(() => (direction.value === 'ru-en' ? 'en' : 'ru'))
 
 function start(levelId) {
   level.value = levelId
   score.right = 0
   score.total = 0
+  resetHint() // each lesson starts with the keyboard hint off
   nextQuestion()
 }
 
@@ -66,7 +59,7 @@ function nextQuestion() {
   if (level.value === 'easy') {
     const tokens = phraseTokens(targetOf(current.value)).map((text, id) => ({ id, text }))
     bank.value = sample(tokens, tokens.length) // shuffle
-  } else if (level.value === 'hard') {
+  } else {
     nextTick(() => inputEl.value?.focus())
   }
 }
@@ -102,24 +95,7 @@ function removeToken(token) {
   placed.value = placed.value.filter((t) => t.id !== token.id)
 }
 
-// --- Intermediate: guided keyboard --------------------------------------------
-const highlight = computed(() => {
-  if (level.value !== 'intermediate' || !current.value || answered.value) return []
-  const letters = targetLang.value === 'ru' ? RU_LETTERS : EN_LETTERS
-  return hintKeys(nextChar(targetOf(current.value), typed.value), letters)
-})
-
-function typeKey(ch) {
-  if (!answered.value) typed.value += ch
-}
-function typeSpace() {
-  if (!answered.value) typed.value += ' '
-}
-function typeBackspace() {
-  if (!answered.value) typed.value = typed.value.slice(0, -1)
-}
-
-// --- Shared answer submission (intermediate + hard) ---------------------------
+// --- Type it: free-text answer ------------------------------------------------
 function submitTyped() {
   if (answered.value) {
     nextQuestion()
@@ -130,12 +106,16 @@ function submitTyped() {
 
 function quit() {
   clearTimeout(advanceTimer)
+  resetHint()
   celebrating.value = false
   level.value = null
   current.value = null
 }
 
-onUnmounted(() => clearTimeout(advanceTimer))
+onUnmounted(() => {
+  clearTimeout(advanceTimer)
+  resetHint()
+})
 </script>
 
 <template>
@@ -213,29 +193,14 @@ onUnmounted(() => clearTimeout(advanceTimer))
       </div>
     </template>
 
-    <!-- Intermediate: guided on-screen keyboard -->
-    <template v-else-if="level === 'intermediate'">
-      <div class="answer-box" :lang="targetLang">
-        {{ typed }}<span class="caret" :class="{ on: !answered }">|</span>
-      </div>
-      <HintKeyboard
-        :layout="targetLang"
-        :highlight="highlight"
-        @press="typeKey"
-        @space="typeSpace"
-        @backspace="typeBackspace"
-        @enter="submitTyped"
-      />
-      <button v-if="!answered" class="primary" @click="submitTyped">Check</button>
-    </template>
-
-    <!-- Hard: type the whole translation -->
+    <!-- Type it: the on-screen keyboard's 💡 reveals the next letter on demand -->
     <form v-else @submit.prevent="submitTyped" class="grid">
       <input
         ref="inputEl"
         v-model="typed"
         type="text"
         :lang="targetLang"
+        :data-answer="targetLang === 'ru' && current ? targetOf(current) : null"
         :disabled="answered"
         :placeholder="targetLang === 'ru' ? 'наберите по-русски' : 'type in English'"
         autocomplete="off"
@@ -280,37 +245,5 @@ onUnmounted(() => clearTimeout(advanceTimer))
   padding: 0.5rem 0.6rem;
   border: 1px dashed var(--border);
   border-radius: var(--radius);
-}
-
-.answer-box {
-  min-height: 2.6rem;
-  padding: 0.6rem 0.8rem;
-  font-size: 1.25rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--bg-soft);
-  word-break: break-word;
-}
-
-.caret {
-  color: var(--muted);
-  opacity: 0;
-}
-
-.caret.on {
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .caret.on {
-    animation: none;
-    opacity: 1;
-  }
 }
 </style>

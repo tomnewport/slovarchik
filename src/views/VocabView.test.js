@@ -2,8 +2,6 @@ import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import VocabView from './VocabView.vue'
 import { state } from '../stores/vocab.js'
-import { keyboardHint } from '../stores/keyboard.js'
-import { hintLetters } from '../lib/quiz.js'
 import { shapeVocab } from '../lib/vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
@@ -14,11 +12,10 @@ beforeAll(() => {
 })
 
 describe('VocabView', () => {
-  it('shows the three difficulty options on the menu', () => {
+  it('shows the difficulty options on the menu', () => {
     const wrapper = mount(VocabView)
     expect(wrapper.text()).toContain('Easy')
-    expect(wrapper.text()).toContain('Intermediate')
-    expect(wrapper.text()).toContain('Advanced')
+    expect(wrapper.text()).toContain('Type it')
   })
 
   it('runs an easy-mode round and scores a correct match', async () => {
@@ -67,8 +64,8 @@ describe('VocabView', () => {
   it('celebrates and auto-advances after a correct answer', async () => {
     vi.useFakeTimers()
     const wrapper = mount(VocabView)
-    // Start advanced (typing) mode — celebration applies to the typing drills.
-    await wrapper.findAll('button.card')[2].trigger('click')
+    // Start typing mode — celebration applies to the typing drill.
+    await wrapper.findAll('button.card')[1].trigger('click')
 
     // Type the correct answer and submit.
     const want = wrapper.vm.current
@@ -92,8 +89,8 @@ describe('VocabView', () => {
   it('shows a heteronym reminder and waits, even on a correct answer', async () => {
     vi.useFakeTimers()
     const wrapper = mount(VocabView)
-    // Advanced (typing) mode so the answer flows through record().
-    await wrapper.findAll('button.card')[2].trigger('click')
+    // Typing mode so the answer flows through record().
+    await wrapper.findAll('button.card')[1].trigger('click')
 
     // Force the question to a known heteronym (сто́ить "to cost").
     const cost = shapeVocab(loadFixtureWords()).find((w) => w.id === 'стоить=to cost')
@@ -139,34 +136,31 @@ describe('VocabView', () => {
     expect(wrapper.text()).not.toContain('Heteronym')
   })
 
-  it('highlights the Russian answer letters on the keyboard in intermediate EN → RU', async () => {
+  it('marks the typing input with the answer in EN → RU so the keyboard can hint it', async () => {
     const wrapper = mount(VocabView)
     // Switch to EN → RU so the answer is Russian (the on-screen keyboard case).
     await wrapper.find('button:nth-of-type(2)').trigger('click')
-    // Start intermediate mode (second level card).
-    await wrapper.findAll('button.card')[1].trigger('click')
+    await wrapper.findAll('button.card')[1].trigger('click') // Type it
 
-    const expected = hintLetters(wrapper.vm.current.ru)
-    expect(keyboardHint.letters).toEqual(expected)
-    expect(keyboardHint.letters.size).toBeGreaterThan(0)
-
-    // Leaving the drill (Change mode) clears the hint.
-    const back = wrapper.findAll('button').find((b) => b.text() === 'Change mode')
-    await back.trigger('click')
-    expect(keyboardHint.letters.size).toBe(0)
+    const input = wrapper.find('input[type="text"]')
+    expect(input.attributes('lang')).toBe('ru')
+    expect(input.attributes('data-answer')).toBe(wrapper.vm.current.ru)
   })
 
-  it('leaves the keyboard hint empty in intermediate RU → EN (English answer)', async () => {
+  it('leaves the typing input unmarked in RU → EN (English answer, device keyboard)', async () => {
     const wrapper = mount(VocabView)
-    // Default direction is RU → EN; start intermediate mode.
+    // Default direction is RU → EN; start typing mode.
     await wrapper.findAll('button.card')[1].trigger('click')
-    expect(keyboardHint.letters.size).toBe(0)
+
+    const input = wrapper.find('input[type="text"]')
+    expect(input.attributes('lang')).toBe('en')
+    expect(input.attributes('data-answer')).toBeUndefined()
   })
 
   it('waits for the user after a wrong answer', async () => {
     const wrapper = mount(VocabView)
-    // Start advanced (typing) mode.
-    await wrapper.findAll('button.card')[2].trigger('click')
+    // Start typing mode.
+    await wrapper.findAll('button.card')[1].trigger('click')
 
     // Submit an answer that is definitely wrong.
     await wrapper.find('input[type="text"]').setValue('definitely-not-correct')

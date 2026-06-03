@@ -72,6 +72,7 @@ onMounted(() => speak(props.paradigm.lemma))
                 type="text"
                 lang="ru"
                 class="ending-input"
+                :data-answer="endings[cellKey(row.key, col.key)]"
                 :disabled="checked"
                 :style="{
                   borderColor: checked ? 'var(--good)' : undefined,
