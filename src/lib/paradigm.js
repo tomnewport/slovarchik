@@ -32,7 +32,7 @@ function hasCyrillic(value) {
   return /[а-яё]/i.test(value)
 }
 
-// Person × number rows for verb conjugation (present tense).
+// Person × number rows for the finite (present/future) verb conjugation.
 const VERB_PERSONS = [
   { key: '1sg', label: '1st singular', sub: 'я' },
   { key: '2sg', label: '2nd singular', sub: 'ты' },
@@ -40,6 +40,16 @@ const VERB_PERSONS = [
   { key: '1pl', label: '1st plural', sub: 'мы' },
   { key: '2pl', label: '2nd plural', sub: 'вы' },
   { key: '3pl', label: '3rd plural', sub: 'они' },
+]
+
+// Past-tense rows: Russian past tense drops person and agrees by gender (in the
+// singular) and number instead, so it gets its own row axis alongside the
+// person rows above.
+const VERB_PAST_ROWS = [
+  { key: 'past_m', label: 'Past masc.', sub: 'он' },
+  { key: 'past_f', label: 'Past fem.', sub: 'она' },
+  { key: 'past_n', label: 'Past neut.', sub: 'оно' },
+  { key: 'past_pl', label: 'Past plural', sub: 'они' },
 ]
 
 // Gender × number agreement rows. Adjectives and the adjective-like pronouns
@@ -135,8 +145,19 @@ export function buildParadigm(word) {
       break
     }
     case 'verb': {
-      const raw = word.extra?.conjugation?.present ?? {}
-      paradigm = assemble(meta, VERB_PERSONS, SINGLE_COL('Present'), (row) => raw[row])
+      // Imperfective verbs carry a present tense; perfective verbs a simple
+      // future. Either way it is the finite, person-conjugated paradigm — it
+      // becomes one column, with the gender/number past tense as a second.
+      const conj = word.extra?.conjugation ?? {}
+      const finite = conj.present ?? conj.future ?? {}
+      const cols = [
+        { key: 'finite', label: conj.present ? 'Present' : 'Future' },
+        { key: 'past', label: 'Past' },
+      ]
+      const rows = [...VERB_PERSONS, ...VERB_PAST_ROWS]
+      paradigm = assemble(meta, rows, cols, (row, col) =>
+        col === 'finite' ? finite[row] : conj[row],
+      )
       break
     }
     case 'adjective': {
