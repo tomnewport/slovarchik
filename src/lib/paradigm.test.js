@@ -53,6 +53,27 @@ const chitat = {
   extra: {
     conjugation: {
       present: { '1sg': 'чита́ю', '2sg': 'чита́ешь', '3sg': 'чита́ет', '1pl': 'чита́ем', '2pl': 'чита́ете', '3pl': 'чита́ют' },
+      past_m: 'чита́л',
+      past_f: 'чита́ла',
+      past_n: 'чита́ло',
+      past_pl: 'чита́ли',
+    },
+  },
+}
+
+// Perfective verb — the finite paradigm is a simple future, not a present.
+const prochitat = {
+  key: 'прочитать=to read through',
+  pos: 'verb',
+  headword: 'прочита́ть',
+  meaning: 'to read through',
+  extra: {
+    conjugation: {
+      future: { '1sg': 'прочита́ю', '2sg': 'прочита́ешь', '3sg': 'прочита́ет', '1pl': 'прочита́ем', '2pl': 'прочита́ете', '3pl': 'прочита́ют' },
+      past_m: 'прочита́л',
+      past_f: 'прочита́ла',
+      past_n: 'прочита́ло',
+      past_pl: 'прочита́ли',
     },
   },
 }
@@ -138,11 +159,30 @@ describe('buildParadigm — pronoun', () => {
 
 describe('buildParadigm — verb', () => {
   const p = buildParadigm(chitat)
-  it('has six present-tense cells and a clean stem', () => {
-    expect(p.cells).toHaveLength(6)
+  it('combines the finite and past tenses in one table', () => {
+    // 6 present (person) + 4 past (gender/number) cells across two columns.
+    expect(p.cells).toHaveLength(10)
+    expect(p.cols.map((c) => c.key)).toEqual(['finite', 'past'])
+    expect(p.cols[0].label).toBe('Present')
+    expect(p.cols[1].label).toBe('Past')
+    expect(isMultiColumn(p)).toBe(true)
     expect(p.stem).toBe('чита')
-    const first = p.cells.find((c) => c.row === '1sg')
+  })
+  it('derives endings for both tenses', () => {
+    const first = p.cells.find((c) => c.row === '1sg' && c.col === 'finite')
     expect(endingOf(p, first)).toBe('ю')
+    const pastM = p.cells.find((c) => c.row === 'past_m' && c.col === 'past')
+    expect(pastM.form).toBe('чита́л')
+    expect(endingOf(p, pastM)).toBe('л')
+  })
+  it('labels finite and past cells with both axes', () => {
+    const pastF = p.cells.find((c) => c.row === 'past_f' && c.col === 'past')
+    expect(cellLabel(p, pastF)).toBe('Past fem. · Past')
+  })
+  it('labels the perfective finite tense as Future', () => {
+    const pf = buildParadigm(prochitat)
+    expect(pf.cells).toHaveLength(10)
+    expect(pf.cols[0].label).toBe('Future')
   })
 })
 

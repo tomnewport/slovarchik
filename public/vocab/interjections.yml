@@ -196,6 +196,39 @@ words:
         en_gb: Goodbye, thank you for everything.
       - ru: Ну, до свида́ния!
         en_gb: Well, goodbye!
+  "доброе утро=good morning":
+    cefr_level: A1
+    type: greet
+    accented: до́брое у́тро
+    en_gb:
+      standard: good morning (a greeting used in the morning)
+    usage:
+      - ru: До́брое у́тро! Как спа́лось?
+        en_gb: Good morning! How did you sleep?
+      - ru: До́брое у́тро, проходи́те, пожа́луйста.
+        en_gb: Good morning, please come in.
+  "добрый вечер=good evening":
+    cefr_level: A1
+    type: greet
+    accented: до́брый ве́чер
+    en_gb:
+      standard: good evening (a greeting used in the evening)
+    usage:
+      - ru: До́брый ве́чер, рад вас ви́деть.
+        en_gb: Good evening, glad to see you.
+      - ru: До́брый ве́чер! Сто́лик на двои́х, пожа́луйста.
+        en_gb: Good evening! A table for two, please.
+  "добрый день=good afternoon":
+    cefr_level: A1
+    type: greet
+    accented: до́брый день
+    en_gb:
+      standard: good afternoon (a daytime greeting)
+    usage:
+      - ru: До́брый день, чем могу́ помо́чь?
+        en_gb: Good afternoon, how can I help?
+      - ru: До́брый день, мы зака́зывали сто́лик.
+        en_gb: Good afternoon, we booked a table.
   "же=after all":
     cefr_level: B1
     type: particle
@@ -332,6 +365,17 @@ words:
         en_gb: She nods, as if to say she agrees.
       - ru: Они́ пи́шут, мол, всё хорошо́.
         en_gb: They write, reportedly, that all is well.
+  "небось=probably":
+    cefr_level: B2
+    type: particle
+    accented: небо́сь
+    en_gb:
+      standard: probably (colloquial; I dare say, I suppose)
+    usage:
+      - ru: Ты, небо́сь, уста́л с доро́ги.
+        en_gb: You're probably tired from the journey.
+      - ru: Небо́сь опя́ть забы́л ключи́.
+        en_gb: You've probably forgotten your keys again.
   "нет=no":
     cefr_level: A1
     type: resp
@@ -345,6 +389,28 @@ words:
         en_gb: No, I can't today.
       - ru: Ты уста́л? — Нет.
         en_gb: Are you tired? — No.
+  "нету=there isn't":
+    cefr_level: B1
+    type: particle
+    accented: не́ту
+    en_gb:
+      standard: there isn't (colloquial for "нет", there is none)
+    usage:
+      - ru: У меня́ не́ту вре́мени.
+        en_gb: I don't have any time.
+      - ru: Молока́ в холоди́льнике не́ту.
+        en_gb: There isn't any milk in the fridge.
+  "неужели=really":
+    cefr_level: B1
+    type: particle
+    accented: неуже́ли
+    en_gb:
+      standard: really (expressing surprise or disbelief)
+    usage:
+      - ru: Неуже́ли э́то пра́вда?
+        en_gb: Is this really true?
+      - ru: Неуже́ли ты не по́нял?
+        en_gb: Did you really not understand?
   "ни=not a single":
     cefr_level: B1
     type: particle
@@ -444,6 +510,17 @@ words:
         en_gb: Hi, glad to see you!
       - ru: Приве́т, дава́й встре́тимся.
         en_gb: Hi, let's meet up.
+  "пусть=let":
+    cefr_level: B1
+    type: particle
+    accented: пусть
+    en_gb:
+      standard: let (let someone do; even if)
+    usage:
+      - ru: Пусть он сам реши́т.
+        en_gb: Let him decide for himself.
+      - ru: Пусть бу́дет так.
+        en_gb: Let it be so.
   "спасибо=thank you":
     cefr_level: A1
     type: polite

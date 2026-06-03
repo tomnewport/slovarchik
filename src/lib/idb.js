@@ -1,11 +1,9 @@
-// Tiny promise-based IndexedDB wrapper. Three object stores:
+// Tiny promise-based IndexedDB wrapper. Two object stores:
 //   'vocab-files' (keyed by filename)  — cached vocab YAML: { file, pos, updated, content }
-//   'progress'    (keyed by subject id) — per-subject attempt history (see lib/progress.js)
 //   'meta'        (keyed by name)       — small app settings: { key, value }
 
 const DB_NAME = 'slovarchik'
 const FILES_STORE = 'vocab-files'
-const PROGRESS_STORE = 'progress'
 const META_STORE = 'meta'
 const VERSION = 3
 
@@ -20,9 +18,6 @@ function openDb() {
       // Create only what's missing so existing caches survive the upgrade.
       if (!db.objectStoreNames.contains(FILES_STORE)) {
         db.createObjectStore(FILES_STORE, { keyPath: 'file' })
-      }
-      if (!db.objectStoreNames.contains(PROGRESS_STORE)) {
-        db.createObjectStore(PROGRESS_STORE, { keyPath: 'id' })
       }
       if (!db.objectStoreNames.contains(META_STORE)) {
         db.createObjectStore(META_STORE, { keyPath: 'key' })
@@ -75,27 +70,6 @@ export function putFile(record) {
 /** Remove all cached files (used by "reset" / tests). */
 export function clearFiles() {
   return tx(FILES_STORE, 'readwrite', (store) => {
-    store.clear()
-    return { value: undefined }
-  })
-}
-
-/** Read every stored progress record. */
-export function getAllProgress() {
-  return getAll(PROGRESS_STORE)
-}
-
-/** Insert or replace one subject's progress record. */
-export function putProgress(record) {
-  return tx(PROGRESS_STORE, 'readwrite', (store) => {
-    store.put(record)
-    return { value: record }
-  })
-}
-
-/** Remove all progress records (used by "reset" / tests). */
-export function clearProgress() {
-  return tx(PROGRESS_STORE, 'readwrite', (store) => {
     store.clear()
     return { value: undefined }
   })

@@ -2,8 +2,6 @@
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { record as recordAttempt } from '../stores/progress.js'
-import { gradeFor } from '../lib/progress.js'
 import { resetHint } from '../stores/keyboard.js'
 import { phraseTokens, phraseCorrect } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
@@ -38,7 +36,7 @@ const placed = ref([])
 
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
-// The translation's alphabet — drives the guided keyboard and Russian input.
+// The translation's alphabet — drives the Russian input and on-screen keyboard.
 const targetLang = computed(() => (direction.value === 'ru-en' ? 'en' : 'ru'))
 
 function start(levelId) {
@@ -71,11 +69,6 @@ function record(correct) {
   answered.value = true
   wasCorrect.value = correct
   score.total += 1
-  // Spelling/word-order success or error for a phrase. The on-screen hint is
-  // free, so a typed answer always counts at the top tier; building the
-  // sentence from tiles stays the assisted "easy" tier.
-  const tier = level.value === 'easy' ? 'easy' : 'advanced'
-  recordAttempt({ kind: 'phrase', key: current.value.id }, gradeFor(tier, correct), { level: tier })
   if (correct) {
     score.right += 1
     // Celebrate, then move straight to the next phrase.
@@ -253,5 +246,4 @@ onUnmounted(() => {
   border: 1px dashed var(--border);
   border-radius: var(--radius);
 }
-
 </style>

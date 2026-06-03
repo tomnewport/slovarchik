@@ -177,7 +177,7 @@ function ordinalEn(n) {
 
 export const GENERATORS = { year, cardinal, age, price, date, caseForm }
 
-/** Human labels for each exercise kind (used by the progress dashboard too). */
+/** Human labels for each exercise kind. */
 export const TOPIC_LABELS = {
   year: 'Years',
   cardinal: 'Whole numbers',
