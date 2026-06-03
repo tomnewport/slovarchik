@@ -956,6 +956,27 @@ words:
         en_gb: There are thirteen chapters in the book.
       - ru: Мы говори́ли о трина́дцати ученика́х.
         en_gb: We talked about thirteen pupils.
+  "триста=three hundred":
+    cefr_level: B1
+    type: cardinal
+    value: 300
+    accented: три́ста
+    en_gb:
+      standard: three hundred (both halves of the word decline)
+    usage:
+      - ru: До це́нтра три́ста ме́тров.
+        en_gb: It is three hundred metres to the centre.
+      - ru: Библиоте́ка из трёхсо́т книг.
+        en_gb: A library of three hundred books.
+      - ru: Зал на триста челове́к.
+        en_gb: A hall for three hundred people.
+    forms:
+      nom: три́ста
+      gen: трёхсо́т
+      dat: трёмста́м
+      acc: три́ста
+      ins: тремяста́ми
+      pre: трёхста́х
   "трое=three together":
     cefr_level: B1
     type: collective
@@ -1315,3 +1336,24 @@ words:
       acc: шесть
       ins: шестью́
       pre: шести́
+  "шестьдесят=sixty":
+    cefr_level: A2
+    type: cardinal
+    value: 60
+    accented: шестьдеся́т
+    en_gb:
+      standard: sixty (both halves of the word decline)
+    usage:
+      - ru: Ему́ уже́ шестьдеся́т лет.
+        en_gb: He is already sixty years old.
+      - ru: Уро́к дли́тся шестьдеся́т мину́т.
+        en_gb: The lesson lasts sixty minutes.
+      - ru: Кни́га о шести́десяти геро́ях.
+        en_gb: A book about sixty heroes.
+    forms:
+      nom: шестьдеся́т
+      gen: шести́десяти
+      dat: шести́десяти
+      acc: шестьдеся́т
+      ins: шестью́десятью
+      pre: шести́десяти

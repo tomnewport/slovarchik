@@ -86,6 +86,27 @@ Standard-list coverage rose from **88.2% → 93.7%**; the corpus grew from 3,322
 to 3,509 words. Every added noun/verb form was machine-checked for completeness
 and stress marking, then validated by the existing data-integrity tests.
 
+### Second coverage pass
+
+A follow-up pass added a further **92 high-confidence A1–B2 words**, lifting
+standard-list coverage from **93.7% → 96.5%**:
+
+- **25 adjectives** (`общий`, `следующий`, `ранний`, `старший`, `городской`,
+  `крайний`, `лишний`, `сырой`, `высший`…) — full 24-form tables generated and
+  validated by `scripts/gen-adjective-declension.mjs`.
+- **32 verbs** (`поднимать`/`поднять`, `подавать`/`подать`, `поддержать`,
+  `прибыть`, `пустить`, `пропасть`, `произвести`, `печь`, `завести`…) with full
+  conjugation, including consonant mutations, mobile past stress (`подала́`,
+  `подобрала́`) and the irregular `подать`.
+- **25 nouns** (`железо`, `запас`, `крик`, `минимум`, `наличие`, `отсутствие`,
+  `шоссе`, `штаны`, `рукопись`, `препарат`…) with complete case tables.
+- **8 adverbs** (`нельзя`, `далее`, `крайне`, `навстречу`, `якобы`, `отнюдь`…)
+  and **2 numerals** (`триста`, `шестьдесят`).
+
+The ~113 words still missing from the standard list are non-core: abbreviations
+(`нквд`, `цк`, `др`), proper nouns, slang/loanwords (`вай-фай`, `хобби`), set
+phrases (`доброе утро`), and a tail of specialist/literary items.
+
 ## Still open
 
 - **No C2, and C1 is still thin.** This is expected for a corpus aimed at

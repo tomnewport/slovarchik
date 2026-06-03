@@ -10616,6 +10616,27 @@ words:
         en_gb: He fulfilled all my wishes.
       - ru: Она́ загада́ла жела́ние под звездо́й.
         en_gb: She made a wish under the star.
+  "железо=iron":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: iron (the metal)
+    declension:
+      sg_nom: желе́зо
+      sg_gen: желе́за
+      sg_dat: желе́зу
+      sg_acc: желе́зо
+      sg_ins: желе́зом
+      sg_pre: желе́зе
+    usage:
+      - ru: Магни́т притя́гивает желе́зо.
+        en_gb: A magnet attracts iron.
+      - ru: Э́тот мост сде́лан из желе́за.
+        en_gb: This bridge is made of iron.
+      - ru: В крови́ не хвата́ет желе́за.
+        en_gb: There is not enough iron in the blood.
   "желудок=stomach":
     cefr_level: B1
     gender: m
@@ -11709,6 +11730,33 @@ words:
       sg_acc: за́пад
       sg_ins: за́падом
       sg_pre: за́паде
+  "запас=stock":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: stock (a reserve or supply)
+    declension:
+      sg_nom: запа́с
+      sg_gen: запа́са
+      sg_dat: запа́су
+      sg_acc: запа́с
+      sg_ins: запа́сом
+      sg_pre: запа́се
+      pl_nom: запа́сы
+      pl_gen: запа́сов
+      pl_dat: запа́сам
+      pl_acc: запа́сы
+      pl_ins: запа́сами
+      pl_pre: запа́сах
+    usage:
+      - ru: У нас большо́й запа́с воды́.
+        en_gb: We have a large stock of water.
+      - ru: Мы оста́лись без запа́са еды́.
+        en_gb: We were left without a stock of food.
+      - ru: На зи́му де́лают запа́сы дров.
+        en_gb: Stocks of firewood are made for winter.
   "запах=smell":
     cefr_level: B1
     gender: m
@@ -16645,6 +16693,33 @@ words:
       pl_acc: коньки́
       pl_ins: конька́ми
       pl_pre: конька́х
+  "коньяк=cognac":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: cognac (brandy)
+    declension:
+      sg_nom: конья́к
+      sg_gen: коньяка́
+      sg_dat: коньяку́
+      sg_acc: конья́к
+      sg_ins: коньяко́м
+      sg_pre: коньяке́
+      pl_nom: коньяки́
+      pl_gen: коньяко́в
+      pl_dat: коньяка́м
+      pl_acc: коньяки́
+      pl_ins: коньяка́ми
+      pl_pre: коньяка́х
+    usage:
+      - ru: Он вы́пил рю́мку коньяка́.
+        en_gb: He drank a glass of cognac.
+      - ru: Я заказа́л хоро́ший конья́к.
+        en_gb: I ordered a good cognac.
+      - ru: В шка́фу стоя́ли ста́рые коньяки́.
+        en_gb: Old cognacs stood in the cabinet.
   "копейка=kopek":
     cefr_level: A2
     gender: f
@@ -17645,6 +17720,33 @@ words:
       sg_acc: креще́ние
       sg_ins: креще́нием
       sg_pre: креще́нии
+  "крик=shout":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: shout (a loud cry)
+    declension:
+      sg_nom: крик
+      sg_gen: кри́ка
+      sg_dat: кри́ку
+      sg_acc: крик
+      sg_ins: кри́ком
+      sg_pre: кри́ке
+      pl_nom: кри́ки
+      pl_gen: кри́ков
+      pl_dat: кри́кам
+      pl_acc: кри́ки
+      pl_ins: кри́ками
+      pl_pre: кри́ках
+    usage:
+      - ru: Вдруг разда́лся гро́мкий крик.
+        en_gb: Suddenly a loud shout rang out.
+      - ru: Она́ просну́лась от кри́ка.
+        en_gb: She woke up from a shout.
+      - ru: С у́лицы доноси́лись кри́ки дете́й.
+        en_gb: Children's shouts came from the street.
   "кровать=bed":
     cefr_level: A2
     gender: f
@@ -17756,6 +17858,33 @@ words:
       pl_acc: круги́
       pl_ins: круга́ми
       pl_pre: круга́х
+  "кружок=circle":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: circle (a small group or club)
+    declension:
+      sg_nom: кружо́к
+      sg_gen: кружка́
+      sg_dat: кружку́
+      sg_acc: кружо́к
+      sg_ins: кружко́м
+      sg_pre: кружке́
+      pl_nom: кружки́
+      pl_gen: кружко́в
+      pl_dat: кружка́м
+      pl_acc: кружки́
+      pl_ins: кружка́ми
+      pl_pre: кружка́х
+    usage:
+      - ru: Сын хо́дит в кружо́к рисова́ния.
+        en_gb: My son goes to a drawing club.
+      - ru: Она́ запи́салась в шахма́тный кружо́к.
+        en_gb: She signed up for the chess club.
+      - ru: В шко́ле мно́го интере́сных кружко́в.
+        en_gb: There are many interesting clubs at school.
   "круиз=cruise":
     cefr_level: B2
     gender: m
@@ -19255,6 +19384,33 @@ words:
       pl_acc: листы́
       pl_ins: листа́ми
       pl_pre: листа́х
+  "листок=leaf":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: leaf (a small leaf or sheet of paper)
+    declension:
+      sg_nom: листо́к
+      sg_gen: листка́
+      sg_dat: листку́
+      sg_acc: листо́к
+      sg_ins: листко́м
+      sg_pre: листке́
+      pl_nom: листки́
+      pl_gen: листко́в
+      pl_dat: листка́м
+      pl_acc: листки́
+      pl_ins: листка́ми
+      pl_pre: листка́х
+    usage:
+      - ru: На столе́ лежи́т ма́ленький листо́к.
+        en_gb: A small sheet lies on the table.
+      - ru: Запиши́ а́дрес на листке́.
+        en_gb: Write the address on the sheet.
+      - ru: Осе́нние листки́ кружа́тся в во́здухе.
+        en_gb: The autumn leaves whirl in the air.
   "литература=literature":
     cefr_level: A2
     gender: f
@@ -19908,6 +20064,33 @@ words:
       pl_acc: майо́ров
       pl_ins: майо́рами
       pl_pre: майо́рах
+  "малыш=kid":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: kid (a little child)
+    declension:
+      sg_nom: малы́ш
+      sg_gen: малыша́
+      sg_dat: малышу́
+      sg_acc: малыша́
+      sg_ins: малышо́м
+      sg_pre: малыше́
+      pl_nom: малыши́
+      pl_gen: малыше́й
+      pl_dat: малыша́м
+      pl_acc: малыше́й
+      pl_ins: малыша́ми
+      pl_pre: малыша́х
+    usage:
+      - ru: Малы́ш кре́пко спит.
+        en_gb: The kid is sleeping soundly.
+      - ru: Она́ корми́ла малыша́ ка́шей.
+        en_gb: She fed the kid porridge.
+      - ru: В па́рке игра́ли весёлые малыши́.
+        en_gb: Cheerful kids played in the park.
   "мальчик=boy":
     cefr_level: A1
     gender: m
@@ -21038,6 +21221,33 @@ words:
         en_gb: The field was strewn with mines.
       - ru: Он сде́лал недово́льную ми́ну.
         en_gb: He made a displeased expression.
+  "минимум=minimum":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: minimum (the least amount)
+    declension:
+      sg_nom: ми́нимум
+      sg_gen: ми́нимума
+      sg_dat: ми́нимуму
+      sg_acc: ми́нимум
+      sg_ins: ми́нимумом
+      sg_pre: ми́нимуме
+      pl_nom: ми́нимумы
+      pl_gen: ми́нимумов
+      pl_dat: ми́нимумам
+      pl_acc: ми́нимумы
+      pl_ins: ми́нимумами
+      pl_pre: ми́нимумах
+    usage:
+      - ru: Нам ну́жен прожи́точный ми́нимум.
+        en_gb: We need a subsistence minimum.
+      - ru: Сведи́ расхо́ды к ми́нимуму.
+        en_gb: Reduce the expenses to a minimum.
+      - ru: Он рабо́тает с ми́нимумом усту́пок.
+        en_gb: He works with a minimum of concessions.
   "министерство=ministry":
     cefr_level: B1
     gender: n
@@ -21747,6 +21957,33 @@ words:
       pl_acc: моне́ты
       pl_ins: моне́тами
       pl_pre: моне́тах
+  "морда=muzzle":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: muzzle (an animal's snout)
+    declension:
+      sg_nom: мо́рда
+      sg_gen: мо́рды
+      sg_dat: мо́рде
+      sg_acc: мо́рду
+      sg_ins: мо́рдой
+      sg_pre: мо́рде
+      pl_nom: мо́рды
+      pl_gen: морд
+      pl_dat: мо́рдам
+      pl_acc: мо́рды
+      pl_ins: мо́рдами
+      pl_pre: мо́рдах
+    usage:
+      - ru: У соба́ки добра́я мо́рда.
+        en_gb: The dog has a kind muzzle.
+      - ru: Ло́шадь тяну́лась мо́рдой к траве́.
+        en_gb: The horse reached for the grass with its muzzle.
+      - ru: Ко́шка умыва́ла свою́ мо́рду.
+        en_gb: The cat was washing its muzzle.
   "море=sea":
     cefr_level: A2
     gender: n
@@ -22623,6 +22860,27 @@ words:
       pl_acc: наказа́ния
       pl_ins: наказа́ниями
       pl_pre: наказа́ниях
+  "наличие=presence":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: presence (the fact of being available)
+    declension:
+      sg_nom: нали́чие
+      sg_gen: нали́чия
+      sg_dat: нали́чию
+      sg_acc: нали́чие
+      sg_ins: нали́чием
+      sg_pre: нали́чии
+    usage:
+      - ru: Нали́чие де́нег реша́ет всё.
+        en_gb: The presence of money decides everything.
+      - ru: Прове́рьте нали́чие това́ра.
+        en_gb: Check the availability of the goods.
+      - ru: Реше́ние зави́сит от нали́чия вре́мени.
+        en_gb: The decision depends on the availability of time.
   "наличные=cash":
     cefr_level: B2
     animacy: i
@@ -26217,6 +26475,27 @@ words:
         en_gb: The commander of the detachment gave the order.
       - ru: В лесу́ дви́гались два отря́да.
         en_gb: Two detachments were moving in the forest.
+  "отсутствие=absence":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: absence (the state of being away or missing)
+    declension:
+      sg_nom: отсу́тствие
+      sg_gen: отсу́тствия
+      sg_dat: отсу́тствию
+      sg_acc: отсу́тствие
+      sg_ins: отсу́тствием
+      sg_pre: отсу́тствии
+    usage:
+      - ru: Его́ отсу́тствие всех удиви́ло.
+        en_gb: His absence surprised everyone.
+      - ru: В отсу́тствие нача́льника рабо́та останови́лась.
+        en_gb: In the boss's absence the work stopped.
+      - ru: Мы заме́тили отсу́тствие ключе́й.
+        en_gb: We noticed the absence of the keys.
   "оттенок=shade":
     cefr_level: B2
     gender: m
@@ -27673,6 +27952,27 @@ words:
       pl_acc: перево́ды
       pl_ins: перево́дами
       pl_pre: перево́дах
+  "переговоры=negotiations":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["pl"]
+    en_gb:
+      standard: negotiations (formal talks)
+    declension:
+      pl_nom: перегово́ры
+      pl_gen: перегово́ров
+      pl_dat: перегово́рам
+      pl_acc: перегово́ры
+      pl_ins: перегово́рами
+      pl_pre: перегово́рах
+    usage:
+      - ru: Перегово́ры продолжа́лись весь день.
+        en_gb: The negotiations lasted all day.
+      - ru: Резу́льтат перегово́ров был успе́шным.
+        en_gb: The result of the negotiations was successful.
+      - ru: Стра́ны пришли́ к перегово́рам.
+        en_gb: The countries came to negotiations.
   "передача=broadcast":
     cefr_level: B1
     gender: f
@@ -29595,6 +29895,33 @@ words:
         en_gb: His look is full of suspicion.
       - ru: Её аресто́вали по подозре́нию в кра́же.
         en_gb: She was arrested on suspicion of theft.
+  "подоконник=windowsill":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: windowsill (the ledge below a window)
+    declension:
+      sg_nom: подоко́нник
+      sg_gen: подоко́нника
+      sg_dat: подоко́ннику
+      sg_acc: подоко́нник
+      sg_ins: подоко́нником
+      sg_pre: подоко́ннике
+      pl_nom: подоко́нники
+      pl_gen: подоко́нников
+      pl_dat: подоко́нникам
+      pl_acc: подоко́нники
+      pl_ins: подоко́нниками
+      pl_pre: подоко́нниках
+    usage:
+      - ru: На подоко́ннике стои́т цвето́к.
+        en_gb: A flower stands on the windowsill.
+      - ru: Ко́шка пры́гнула на подоко́нник.
+        en_gb: The cat jumped onto the windowsill.
+      - ru: Она́ протёрла пыль с подоко́нника.
+        en_gb: She wiped the dust off the windowsill.
   "подпись=signature":
     cefr_level: B2
     gender: f
@@ -32101,6 +32428,33 @@ words:
       pl_acc: президе́нтов
       pl_ins: президе́нтами
       pl_pre: президе́нтах
+  "препарат=preparation":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: preparation (a medicinal or chemical product)
+    declension:
+      sg_nom: препара́т
+      sg_gen: препара́та
+      sg_dat: препара́ту
+      sg_acc: препара́т
+      sg_ins: препара́том
+      sg_pre: препара́те
+      pl_nom: препара́ты
+      pl_gen: препара́тов
+      pl_dat: препара́там
+      pl_acc: препара́ты
+      pl_ins: препара́тами
+      pl_pre: препара́тах
+    usage:
+      - ru: Врач назна́чил но́вый препара́т.
+        en_gb: The doctor prescribed a new preparation.
+      - ru: Без э́того препара́та лечи́ться тру́дно.
+        en_gb: It is hard to be treated without this preparation.
+      - ru: В апте́ке мно́го разли́чных препара́тов.
+        en_gb: There are many different preparations in the pharmacy.
   "пресса=press":
     cefr_level: B1
     gender: f
@@ -36353,6 +36707,33 @@ words:
       pl_acc: рты
       pl_ins: рта́ми
       pl_pre: рта́х
+  "рота=company":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: company (a military unit)
+    declension:
+      sg_nom: ро́та
+      sg_gen: ро́ты
+      sg_dat: ро́те
+      sg_acc: ро́ту
+      sg_ins: ро́той
+      sg_pre: ро́те
+      pl_nom: ро́ты
+      pl_gen: рот
+      pl_dat: ро́там
+      pl_acc: ро́ты
+      pl_ins: ро́тами
+      pl_pre: ро́тах
+    usage:
+      - ru: Ро́та вы́шла на уче́ния.
+        en_gb: The company went out for exercises.
+      - ru: Команди́р прика́зал ро́те отступи́ть.
+        en_gb: The commander ordered the company to retreat.
+      - ru: В полку́ бы́ло не́сколько рот.
+        en_gb: There were several companies in the regiment.
   "рубаха=shirt":
     cefr_level: B1
     gender: f
@@ -36617,6 +36998,33 @@ words:
         en_gb: The employees trust the leadership.
       - ru: Под его́ руково́дством кома́нда победи́ла.
         en_gb: Under his leadership the team won.
+  "рукопись=manuscript":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: manuscript (a handwritten or original text)
+    declension:
+      sg_nom: ру́копись
+      sg_gen: ру́кописи
+      sg_dat: ру́кописи
+      sg_acc: ру́копись
+      sg_ins: ру́кописью
+      sg_pre: ру́кописи
+      pl_nom: ру́кописи
+      pl_gen: ру́кописей
+      pl_dat: ру́кописям
+      pl_acc: ру́кописи
+      pl_ins: ру́кописями
+      pl_pre: ру́кописях
+    usage:
+      - ru: Ста́рая ру́копись лежа́ла в архи́ве.
+        en_gb: The old manuscript lay in the archive.
+      - ru: Реда́ктор изучи́л ру́копись писа́теля.
+        en_gb: The editor studied the writer's manuscript.
+      - ru: В библиоте́ке храня́тся ре́дкие ру́кописи.
+        en_gb: Rare manuscripts are kept in the library.
   "рулетка=tape measure":
     cefr_level: B2
     gender: f
@@ -37818,6 +38226,27 @@ words:
       pl_acc: се́мьи
       pl_ins: се́мьями
       pl_pre: се́мьях
+  "сено=hay":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: hay (dried grass for animals)
+    declension:
+      sg_nom: се́но
+      sg_gen: се́на
+      sg_dat: се́ну
+      sg_acc: се́но
+      sg_ins: се́ном
+      sg_pre: се́не
+    usage:
+      - ru: Коро́ва жуёт се́но.
+        en_gb: The cow is chewing hay.
+      - ru: В сара́е мно́го све́жего се́на.
+        en_gb: There is a lot of fresh hay in the barn.
+      - ru: Ло́шадь накорми́ли се́ном.
+        en_gb: The horse was fed with hay.
   "сердце=heart":
     cefr_level: A2
     gender: n
@@ -38919,6 +39348,33 @@ words:
       pl_acc: слоно́в
       pl_ins: слона́ми
       pl_pre: слона́х
+  "слуга=servant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: servant (a person who serves a household)
+    declension:
+      sg_nom: слуга́
+      sg_gen: слуги́
+      sg_dat: слуге́
+      sg_acc: слугу́
+      sg_ins: слуго́й
+      sg_pre: слуге́
+      pl_nom: слу́ги
+      pl_gen: слуг
+      pl_dat: слу́гам
+      pl_acc: слуг
+      pl_ins: слу́гами
+      pl_pre: слу́гах
+    usage:
+      - ru: Ста́рый слуга́ откры́л дверь.
+        en_gb: The old servant opened the door.
+      - ru: Хозя́ин позва́л слугу́.
+        en_gb: The master called the servant.
+      - ru: В до́ме рабо́тали мно́гие слу́ги.
+        en_gb: Many servants worked in the house.
   "служба=service":
     cefr_level: B1
     gender: f
@@ -44456,6 +44912,33 @@ words:
         en_gb: Nobody respects a coward.
       - ru: В э́той исто́рии нет тру́сов.
         en_gb: There are no cowards in this story.
+  "тряпка=rag":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: rag (a piece of old cloth)
+    declension:
+      sg_nom: тря́пка
+      sg_gen: тря́пки
+      sg_dat: тря́пке
+      sg_acc: тря́пку
+      sg_ins: тря́пкой
+      sg_pre: тря́пке
+      pl_nom: тря́пки
+      pl_gen: тря́пок
+      pl_dat: тря́пкам
+      pl_acc: тря́пки
+      pl_ins: тря́пками
+      pl_pre: тря́пках
+    usage:
+      - ru: Возьми́ тря́пку и вы́три стол.
+        en_gb: Take a rag and wipe the table.
+      - ru: Она́ протира́ла окно́ мо́крой тря́пкой.
+        en_gb: She wiped the window with a wet rag.
+      - ru: В ведре́ лежа́ли гря́зные тря́пки.
+        en_gb: Dirty rags lay in the bucket.
   "туалет=toilet":
     cefr_level: A1
     gender: m
@@ -45799,6 +46282,27 @@ words:
       pl_acc: у́ши
       pl_ins: уша́ми
       pl_pre: уша́х
+  "уход=care":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: care (looking after; also departure)
+    declension:
+      sg_nom: ухо́д
+      sg_gen: ухо́да
+      sg_dat: ухо́ду
+      sg_acc: ухо́д
+      sg_ins: ухо́дом
+      sg_pre: ухо́де
+    usage:
+      - ru: Больно́му ну́жен хоро́ший ухо́д.
+        en_gb: The patient needs good care.
+      - ru: Расте́ния тре́буют ежедне́вного ухо́да.
+        en_gb: The plants require daily care.
+      - ru: Его́ ухо́д был неожи́данным.
+        en_gb: His departure was unexpected.
   "участие=participation":
     cefr_level: B1
     gender: n
@@ -45913,6 +46417,33 @@ words:
       pl_acc: ученико́в
       pl_ins: ученика́ми
       pl_pre: ученика́х
+  "училище=college":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: college (a vocational school)
+    declension:
+      sg_nom: учи́лище
+      sg_gen: учи́лища
+      sg_dat: учи́лищу
+      sg_acc: учи́лище
+      sg_ins: учи́лищем
+      sg_pre: учи́лище
+      pl_nom: учи́лища
+      pl_gen: учи́лищ
+      pl_dat: учи́лищам
+      pl_acc: учи́лища
+      pl_ins: учи́лищами
+      pl_pre: учи́лищах
+    usage:
+      - ru: Он у́чится в музыка́льном учи́лище.
+        en_gb: He studies at a music college.
+      - ru: По́сле учи́лища она́ ста́ла медсестро́й.
+        en_gb: After college she became a nurse.
+      - ru: В го́роде не́сколько вое́нных учи́лищ.
+        en_gb: There are several military colleges in the city.
   "учитель=teacher":
     cefr_level: A1
     gender: m
@@ -48873,6 +49404,27 @@ words:
       pl_acc: шо́рты
       pl_ins: шо́ртами
       pl_pre: шо́ртах
+  "шоссе=highway":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: highway (a main road; indeclinable)
+    declension:
+      sg_nom: шоссе́
+      sg_gen: шоссе́
+      sg_dat: шоссе́
+      sg_acc: шоссе́
+      sg_ins: шоссе́
+      sg_pre: шоссе́
+    usage:
+      - ru: Маши́на е́дет по шоссе́.
+        en_gb: The car is driving along the highway.
+      - ru: На шоссе́ была́ авари́я.
+        en_gb: There was an accident on the highway.
+      - ru: Наш дом стои́т у шоссе́.
+        en_gb: Our house stands by the highway.
   "шофёр=chauffeur":
     cefr_level: B1
     gender: m
@@ -48963,6 +49515,81 @@ words:
       pl_acc: шта́бы
       pl_ins: шта́бами
       pl_pre: шта́бах
+  "штаны=trousers":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["pl"]
+    en_gb:
+      standard: trousers (a garment for the legs)
+    declension:
+      pl_nom: штаны́
+      pl_gen: штано́в
+      pl_dat: штана́м
+      pl_acc: штаны́
+      pl_ins: штана́ми
+      pl_pre: штана́х
+    usage:
+      - ru: Он наде́л но́вые штаны́.
+        en_gb: He put on new trousers.
+      - ru: У штано́в порва́лся карма́н.
+        en_gb: The pocket of the trousers tore.
+      - ru: На штана́х появи́лось пятно́.
+        en_gb: A stain appeared on the trousers.
+  "штат=state":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: state (a federal state; also staff)
+    declension:
+      sg_nom: штат
+      sg_gen: шта́та
+      sg_dat: шта́ту
+      sg_acc: штат
+      sg_ins: шта́том
+      sg_pre: шта́те
+      pl_nom: шта́ты
+      pl_gen: шта́тов
+      pl_dat: шта́там
+      pl_acc: шта́ты
+      pl_ins: шта́тами
+      pl_pre: шта́тах
+    usage:
+      - ru: Он живёт в со́лнечном шта́те.
+        en_gb: He lives in a sunny state.
+      - ru: Грани́ца шта́та прохо́дит по реке́.
+        en_gb: The state border runs along the river.
+      - ru: В США пятьдеся́т шта́тов.
+        en_gb: There are fifty states in the USA.
+  "шторм=storm":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: storm (a violent storm, especially at sea)
+    declension:
+      sg_nom: шторм
+      sg_gen: што́рма
+      sg_dat: што́рму
+      sg_acc: шторм
+      sg_ins: што́рмом
+      sg_pre: што́рме
+      pl_nom: што́рмы
+      pl_gen: што́рмов
+      pl_dat: што́рмам
+      pl_acc: што́рмы
+      pl_ins: што́рмами
+      pl_pre: што́рмах
+    usage:
+      - ru: На мо́ре начался́ си́льный шторм.
+        en_gb: A strong storm began at sea.
+      - ru: Кора́бль попа́л в шторм.
+        en_gb: The ship got caught in a storm.
+      - ru: По́сле што́рма мо́ре успоко́илось.
+        en_gb: After the storm the sea calmed down.
   "штраф=fine":
     cefr_level: B1
     gender: m
