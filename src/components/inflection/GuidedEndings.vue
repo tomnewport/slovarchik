@@ -30,8 +30,8 @@ const decoyPool = [...new Set(Object.values(endings).flatMap((e) => [...e]))]
 const typed = reactive({}) // cellKey -> built ending
 const active = ref(0)
 const finished = ref(typable.length === 0)
-// Cells where the learner pressed a wrong key — recorded per-slot so progress
-// tracking reflects which endings were actually struggled with, not just the
+// Cells where the learner pressed a wrong key — tracked per-slot so the grading
+// result reflects which endings were actually struggled with, not just the
 // table-wide pass/fail.
 const mistakeCells = new Set()
 

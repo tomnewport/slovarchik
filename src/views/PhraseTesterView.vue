@@ -2,8 +2,6 @@
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { record as recordAttempt } from '../stores/progress.js'
-import { gradeFor } from '../lib/progress.js'
 import {
   phraseTokens,
   phraseCorrect,
@@ -78,10 +76,6 @@ function record(correct) {
   answered.value = true
   wasCorrect.value = correct
   score.total += 1
-  // Spelling/word-order success or error for a phrase.
-  recordAttempt({ kind: 'phrase', key: current.value.id }, gradeFor(level.value, correct), {
-    level: level.value,
-  })
   if (correct) {
     score.right += 1
     // Celebrate, then move straight to the next phrase.

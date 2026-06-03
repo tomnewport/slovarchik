@@ -2,8 +2,6 @@
 import { computed, reactive, ref, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { record as recordAttempt } from '../stores/progress.js'
-import { gradeFor } from '../lib/progress.js'
 import { speak, speakSequence, cancelSpeech } from '../lib/speech.js'
 import {
   listen,
@@ -255,11 +253,6 @@ function reveal({ correct, passed, similarity, diff, heard }) {
     score.right += 1
     celebrating.value = true
   }
-  // A speaking attempt is an intermediate-difficulty production task.
-  recordAttempt({ kind: 'phrase', key: current.value.id }, gradeFor('intermediate', correct), {
-    level: 'speaking',
-    mode: mode.value,
-  })
 
   // Spoken feedback: a short English cue, then the Russian phrase so you always
   // hear the model answer — the heart of the hands-free loop. A watchdog advances
