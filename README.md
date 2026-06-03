@@ -157,61 +157,20 @@ The store exposes reactive `vocab` and `nouns` lists (sorted alphabetically by
 Russian) plus a `state` with the current `status`. Add a new part of speech by
 dropping a `.yml` file in `public/vocab/` and adding it to the manifest.
 
-## Progress tracking
+## Progress & progression
 
-Every drill records each attempt through one shared module so the history can be
-ranked and aggregated consistently (the foundation for the progression system in
-[issue #12](https://github.com/tomnewport/slovarchik/issues/12)). Grading uses a
-0/1/2 scale — incorrect (`0`), correct in an assisted *easy* mode (`1`), correct
-unaided (`2`) — and only the **last 10 attempts** per subject are kept.
+> **Being rebuilt.** The previous progress-tracking and exam-readiness system has
+> been removed. A new progression system — word states (unknown → learning →
+> learned → mastered) across four dimensions, themed learning/mastery batches, and
+> guided practice sessions — is being built fresh under
+> [issue #79](https://github.com/tomnewport/slovarchik/issues/79).
 
-A *subject* is a word, a single declension form (e.g. `pl.gen` of a noun) or a
-phrase. Drills record an attempt with one call:
-
-```js
-import { record } from './stores/progress.js'
-import { gradeFor, GRADES } from './lib/progress.js'
-
-record({ kind: 'word', key }, gradeFor(level, correct))         // typed a word
-record({ kind: 'form', key, slot: 'pl.gen' }, GRADES.INCORRECT) // missed a form
-record({ kind: 'phrase', key }, gradeFor(level, correct))       // built a phrase
-```
-
-Facets (gender, case, collection, CEFR …) are **derived at query time** from the
-live vocab, so the stored history stays tiny and any attribute — even one added
-later — can be aggregated. The pure model and query engine live in
-[`src/lib/progress.js`](src/lib/progress.js); the IndexedDB-backed reactive store
-in [`src/stores/progress.js`](src/stores/progress.js) exposes the headline
-queries:
-
-```js
-import { progressQueries as q } from './stores/progress.js'
-
-q.words() //         most mistaken words
-q.forms() //         most mistaken word-forms
-q.byFacet('gender') // worst noun genders (or any facet / kind)
-q.collections() //   most mistaken collections
-// arbitrary slice → one error rate, e.g. nominative forms of neuter nouns:
-q.combined((s) => s.kind === 'form' && s.facets.gender === 'n' && s.facets.case === 'nom')
-```
-
-### Skills, mastery & exam readiness
-
-[`src/lib/skills.js`](src/lib/skills.js) turns that history into **skills** — a
-word, a grammatical form (e.g. *genitive plural*), a word type (*masculine
-nouns*) or a collection. Each skill knows its **breadth** (how many vocab words
-it covers — a word is 1, a collection its members, a gender every such noun), so
-they group into bands: **100+ / 10+ / 1+ words**. A correct attempt earns mastery
-credit by difficulty (10× easy ≈ 3× intermediate ≈ 1× hard = mastered, per #12),
-which drives per-collection **exam readiness** (an average that fills as you near
-it; the exam unlocks when every word is mastered).
-[`src/lib/practice.js`](src/lib/practice.js) composes a practice session from
-#12's sections (recap / current / grammar / weakest-25% / new).
-
-The store exposes these live: `skills`, `skillsByBreadth`, `weakSkills`,
-`examReadiness`, `currentCollection` / `setCurrentCollection`, and
-`composePractice(size)`. The **Progress** page (`/progress`) surfaces the four
-rankings, exam readiness, skills grouped by breadth, and a session preview.
+For now the drills run **standalone**: each keeps its own round score but records
+nothing, and the **Progress** page (`/progress`) is a placeholder until the new
+progress screen lands. The new word-state / batch / session logic will live in
+framework-free modules under [`src/lib`](src/lib) with an IndexedDB-backed
+reactive store in `src/stores`, following the same separation as the rest of the
+app.
 
 ## Develop
 

@@ -47,11 +47,10 @@ src/
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintKeyboard, CelebrationBurst)
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
-    progress.js         #   IndexedDB-backed attempt history + live queries
     keyboard.js         #   tiny shared hint state between drills + keyboard
   lib/                  # framework-free pure modules (unit-tested in isolation):
-                        #   declension, quiz, phrases, numerals, numberDrill, text,
-                        #   progress (model/queries), skills, practice, vocabBuild, idb, speech, collections
+                        #   declension, paradigm, quiz, phrases, numerals, numberDrill,
+                        #   text, vocabBuild, idb, speech, recognition, collections
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
@@ -84,12 +83,10 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, then `build` on every push.
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store).
 - **Routing/nav** → `src/router/index.js` + the `<nav>` in `App.vue`.
 
-See `README.md` for the deeper architecture (vocab loading, progress model,
-skills/mastery/exam-readiness).
-</content>
-</invoke>
+See `README.md` for the deeper architecture (vocab loading, the drills).
 
-
-<result>
-<name>File not found</result>
-</invoke>
+> **Progression system is being rebuilt.** The old progress store, skills and
+> exam-readiness modules have been removed (see issue #79). Drills currently run
+> standalone — they keep their own round score but record nothing. The new
+> word-state / batch / session system is being built fresh in `src/lib` +
+> `src/stores`; don't reintroduce the old `progress`/`skills`/`practice` modules.
