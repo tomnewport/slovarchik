@@ -7364,6 +7364,24 @@ words:
       past_f: оберну́лась
       past_n: оберну́лось
       past_pl: оберну́лись
+  "обеспечить=to provide":
+    cefr_level: B1
+    accented: обеспе́чить
+    aspect: pf
+    en_gb:
+      standard: to provide; to ensure
+    conjugation:
+      future:
+        "1sg": обеспе́чу
+        "2sg": обеспе́чишь
+        "3sg": обеспе́чит
+        "1pl": обеспе́чим
+        "2pl": обеспе́чите
+        "3pl": обеспе́чат
+      past_m: обеспе́чил
+      past_f: обеспе́чила
+      past_n: обеспе́чило
+      past_pl: обеспе́чили
   "обещать=to promise":
     cefr_level: A2
     accented: обеща́ть
@@ -9973,6 +9991,42 @@ words:
       past_f: поговори́ла
       past_n: поговори́ло
       past_pl: поговори́ли
+  "подарить=to give a present":
+    cefr_level: A2
+    accented: подари́ть
+    aspect: pf
+    en_gb:
+      standard: to give (something) as a present
+    conjugation:
+      future:
+        "1sg": подарю́
+        "2sg": пода́ришь
+        "3sg": пода́рит
+        "1pl": пода́рим
+        "2pl": пода́рите
+        "3pl": пода́рят
+      past_m: подари́л
+      past_f: подари́ла
+      past_n: подари́ло
+      past_pl: подари́ли
+  "подготовить=to prepare":
+    cefr_level: B1
+    accented: подгото́вить
+    aspect: pf
+    en_gb:
+      standard: to prepare (something in advance)
+    conjugation:
+      future:
+        "1sg": подгото́влю
+        "2sg": подгото́вишь
+        "3sg": подгото́вит
+        "1pl": подгото́вим
+        "2pl": подгото́вите
+        "3pl": подгото́вят
+      past_m: подгото́вил
+      past_f: подгото́вила
+      past_n: подгото́вило
+      past_pl: подгото́вили
   "подниматься=to go up":
     cefr_level: B1
     accented: поднима́ться
@@ -10087,6 +10141,63 @@ words:
       past_f: подошла́
       past_n: подошло́
       past_pl: подошли́
+  "подписать=to sign":
+    cefr_level: B1
+    accented: подписа́ть
+    aspect: pf
+    en_gb:
+      standard: to sign (a document)
+    conjugation:
+      future:
+        "1sg": подпишу́
+        "2sg": подпи́шешь
+        "3sg": подпи́шет
+        "1pl": подпи́шем
+        "2pl": подпи́шете
+        "3pl": подпи́шут
+      past_m: подписа́л
+      past_f: подписа́ла
+      past_n: подписа́ло
+      past_pl: подписа́ли
+  "подтвердить=to confirm":
+    cefr_level: B1
+    accented: подтверди́ть
+    aspect: pf
+    en_gb:
+      standard: to confirm; to corroborate
+    conjugation:
+      future:
+        "1sg": подтвержу́
+        "2sg": подтверди́шь
+        "3sg": подтверди́т
+        "1pl": подтверди́м
+        "2pl": подтверди́те
+        "3pl": подтвердя́т
+      past_m: подтверди́л
+      past_f: подтверди́ла
+      past_n: подтверди́ло
+      past_pl: подтверди́ли
+  "подумать=to think":
+    cefr_level: A2
+    accented: поду́мать
+    aspect: pf
+    en_gb:
+      standard: to think (to give something some thought)
+    usage:
+      - ru: Я поду́маю об э́том.
+        en_gb: I will think about it.
+    conjugation:
+      future:
+        "1sg": поду́маю
+        "2sg": поду́маешь
+        "3sg": поду́мает
+        "1pl": поду́маем
+        "2pl": поду́маете
+        "3pl": поду́мают
+      past_m: поду́мал
+      past_f: поду́мала
+      past_n: поду́мало
+      past_pl: поду́мали
   "подходить=to approach":
     cefr_level: B1
     accented: подходи́ть
@@ -10110,6 +10221,26 @@ words:
       past_f: подходи́ла
       past_n: подходи́ло
       past_pl: подходи́ли
+  "подчеркнуть=to underline":
+    cefr_level: B1
+    accented: подчеркну́ть
+    aspect: pf
+    en_gb:
+      standard: to underline; to emphasise
+      alt:
+        - to emphasise
+    conjugation:
+      future:
+        "1sg": подчеркну́
+        "2sg": подчеркнёшь
+        "3sg": подчеркнёт
+        "1pl": подчеркнём
+        "2pl": подчеркнёте
+        "3pl": подчеркну́т
+      past_m: подчеркну́л
+      past_f: подчеркну́ла
+      past_n: подчеркну́ло
+      past_pl: подчеркну́ли
   "поехать=to set off by vehicle":
     cefr_level: A2
     accented: пое́хать
@@ -10779,6 +10910,27 @@ words:
       past_f: получи́лась
       past_n: получи́лось
       past_pl: получи́лись
+  "пользоваться=to use":
+    cefr_level: B1
+    accented: по́льзоваться
+    aspect: impf
+    en_gb:
+      standard: to use; to make use of
+    usage:
+      - ru: Я по́льзуюсь словарём.
+        en_gb: I use a dictionary.
+    conjugation:
+      present:
+        "1sg": по́льзуюсь
+        "2sg": по́льзуешься
+        "3sg": по́льзуется
+        "1pl": по́льзуемся
+        "2pl": по́льзуетесь
+        "3pl": по́льзуются
+      past_m: по́льзовался
+      past_f: по́льзовалась
+      past_n: по́льзовалось
+      past_pl: по́льзовались
   "полюбить=to come to love":
     cefr_level: A2
     accented: полюби́ть
@@ -11847,6 +11999,24 @@ words:
       past_f: пра́вила
       past_n: пра́вило
       past_pl: пра́вили
+  "превратиться=to turn into":
+    cefr_level: B1
+    accented: преврати́ться
+    aspect: pf
+    en_gb:
+      standard: to turn into; to become
+    conjugation:
+      future:
+        "1sg": превращу́сь
+        "2sg": преврати́шься
+        "3sg": преврати́тся
+        "1pl": преврати́мся
+        "2pl": преврати́тесь
+        "3pl": превратя́тся
+      past_m: преврати́лся
+      past_f: преврати́лась
+      past_n: преврати́лось
+      past_pl: преврати́лись
   "предлагать=to suggest":
     cefr_level: B1
     accented: предлага́ть
@@ -11897,6 +12067,60 @@ words:
       past_f: предложи́ла
       past_n: предложи́ло
       past_pl: предложи́ли
+  "предполагать=to assume":
+    cefr_level: B1
+    accented: предполага́ть
+    aspect: impf
+    en_gb:
+      standard: to assume; to suppose
+    conjugation:
+      present:
+        "1sg": предполага́ю
+        "2sg": предполага́ешь
+        "3sg": предполага́ет
+        "1pl": предполага́ем
+        "2pl": предполага́ете
+        "3pl": предполага́ют
+      past_m: предполага́л
+      past_f: предполага́ла
+      past_n: предполага́ло
+      past_pl: предполага́ли
+  "предположить=to suppose":
+    cefr_level: B1
+    accented: предположи́ть
+    aspect: pf
+    en_gb:
+      standard: to suppose; to make an assumption
+    conjugation:
+      future:
+        "1sg": предположу́
+        "2sg": предполо́жишь
+        "3sg": предполо́жит
+        "1pl": предполо́жим
+        "2pl": предполо́жите
+        "3pl": предполо́жат
+      past_m: предположи́л
+      past_f: предположи́ла
+      past_n: предположи́ло
+      past_pl: предположи́ли
+  "предпочитать=to prefer":
+    cefr_level: B1
+    accented: предпочита́ть
+    aspect: impf
+    en_gb:
+      standard: to prefer (one thing to another)
+    conjugation:
+      present:
+        "1sg": предпочита́ю
+        "2sg": предпочита́ешь
+        "3sg": предпочита́ет
+        "1pl": предпочита́ем
+        "2pl": предпочита́ете
+        "3pl": предпочита́ют
+      past_m: предпочита́л
+      past_f: предпочита́ла
+      past_n: предпочита́ло
+      past_pl: предпочита́ли
   "представить=to present":
     cefr_level: B1
     accented: предста́вить
@@ -11939,6 +12163,249 @@ words:
       past_f: представля́ла
       past_n: представля́ло
       past_pl: представля́ли
+  "предупредить=to warn":
+    cefr_level: B1
+    accented: предупреди́ть
+    aspect: pf
+    en_gb:
+      standard: to warn; to let know in advance
+    conjugation:
+      future:
+        "1sg": предупрежу́
+        "2sg": предупреди́шь
+        "3sg": предупреди́т
+        "1pl": предупреди́м
+        "2pl": предупреди́те
+        "3pl": предупредя́т
+      past_m: предупреди́л
+      past_f: предупреди́ла
+      past_n: предупреди́ло
+      past_pl: предупреди́ли
+  "предупреждать=to warn":
+    cefr_level: B1
+    accented: предупрежда́ть
+    aspect: impf
+    en_gb:
+      standard: to warn; to let know in advance
+    conjugation:
+      present:
+        "1sg": предупрежда́ю
+        "2sg": предупрежда́ешь
+        "3sg": предупрежда́ет
+        "1pl": предупрежда́ем
+        "2pl": предупрежда́ете
+        "3pl": предупрежда́ют
+      past_m: предупрежда́л
+      past_f: предупрежда́ла
+      past_n: предупрежда́ло
+      past_pl: предупрежда́ли
+  "прекратить=to stop":
+    cefr_level: B1
+    accented: прекрати́ть
+    aspect: pf
+    en_gb:
+      standard: to stop; to put an end to
+      alt:
+        - to cease
+    conjugation:
+      future:
+        "1sg": прекращу́
+        "2sg": прекрати́шь
+        "3sg": прекрати́т
+        "1pl": прекрати́м
+        "2pl": прекрати́те
+        "3pl": прекратя́т
+      past_m: прекрати́л
+      past_f: прекрати́ла
+      past_n: прекрати́ло
+      past_pl: прекрати́ли
+  "прервать=to interrupt":
+    cefr_level: B1
+    accented: прерва́ть
+    aspect: pf
+    en_gb:
+      standard: to interrupt; to break off
+    conjugation:
+      future:
+        "1sg": прерву́
+        "2sg": прервёшь
+        "3sg": прервёт
+        "1pl": прервём
+        "2pl": прервёте
+        "3pl": прерву́т
+      past_m: прерва́л
+      past_f: прервала́
+      past_n: прерва́ло
+      past_pl: прерва́ли
+  "приближаться=to approach":
+    cefr_level: B1
+    accented: приближа́ться
+    aspect: impf
+    en_gb:
+      standard: to approach; to draw near
+    conjugation:
+      present:
+        "1sg": приближа́юсь
+        "2sg": приближа́ешься
+        "3sg": приближа́ется
+        "1pl": приближа́емся
+        "2pl": приближа́етесь
+        "3pl": приближа́ются
+      past_m: приближа́лся
+      past_f: приближа́лась
+      past_n: приближа́лось
+      past_pl: приближа́лись
+  "привезти=to bring":
+    cefr_level: B1
+    accented: привезти́
+    aspect: pf
+    en_gb:
+      standard: to bring (something by transport)
+    conjugation:
+      future:
+        "1sg": привезу́
+        "2sg": привезёшь
+        "3sg": привезёт
+        "1pl": привезём
+        "2pl": привезёте
+        "3pl": привезу́т
+      past_m: привёз
+      past_f: привезла́
+      past_n: привезло́
+      past_pl: привезли́
+  "привести=to bring":
+    cefr_level: B1
+    accented: привести́
+    aspect: pf
+    en_gb:
+      standard: to bring (someone on foot); to lead to
+    conjugation:
+      future:
+        "1sg": приведу́
+        "2sg": приведёшь
+        "3sg": приведёт
+        "1pl": приведём
+        "2pl": приведёте
+        "3pl": приведу́т
+      past_m: привёл
+      past_f: привела́
+      past_n: привело́
+      past_pl: привели́
+  "приводить=to bring":
+    cefr_level: B1
+    accented: приводи́ть
+    aspect: impf
+    en_gb:
+      standard: to bring (someone on foot); to lead to
+    conjugation:
+      present:
+        "1sg": привожу́
+        "2sg": приво́дишь
+        "3sg": приво́дит
+        "1pl": приво́дим
+        "2pl": приво́дите
+        "3pl": приво́дят
+      past_m: приводи́л
+      past_f: приводи́ла
+      past_n: приводи́ло
+      past_pl: приводи́ли
+  "привыкнуть=to get used to":
+    cefr_level: B1
+    accented: привы́кнуть
+    aspect: pf
+    en_gb:
+      standard: to get used to (something)
+    conjugation:
+      future:
+        "1sg": привы́кну
+        "2sg": привы́кнешь
+        "3sg": привы́кнет
+        "1pl": привы́кнем
+        "2pl": привы́кнете
+        "3pl": привы́кнут
+      past_m: привы́к
+      past_f: привы́кла
+      past_n: привы́кло
+      past_pl: привы́кли
+  "пригласить=to invite":
+    cefr_level: A2
+    accented: пригласи́ть
+    aspect: pf
+    en_gb:
+      standard: to invite (someone somewhere)
+    usage:
+      - ru: Я хочу́ пригласи́ть тебя́ в кино́.
+        en_gb: I want to invite you to the cinema.
+    conjugation:
+      future:
+        "1sg": приглашу́
+        "2sg": пригласи́шь
+        "3sg": пригласи́т
+        "1pl": пригласи́м
+        "2pl": пригласи́те
+        "3pl": приглася́т
+      past_m: пригласи́л
+      past_f: пригласи́ла
+      past_n: пригласи́ло
+      past_pl: пригласи́ли
+  "приглашать=to invite":
+    cefr_level: B1
+    accented: приглаша́ть
+    aspect: impf
+    en_gb:
+      standard: to invite (someone somewhere)
+    conjugation:
+      present:
+        "1sg": приглаша́ю
+        "2sg": приглаша́ешь
+        "3sg": приглаша́ет
+        "1pl": приглаша́ем
+        "2pl": приглаша́ете
+        "3pl": приглаша́ют
+      past_m: приглаша́л
+      past_f: приглаша́ла
+      past_n: приглаша́ло
+      past_pl: приглаша́ли
+  "приготовить=to prepare":
+    cefr_level: A2
+    accented: пригото́вить
+    aspect: pf
+    en_gb:
+      standard: to prepare; to cook
+      alt:
+        - to cook
+    conjugation:
+      future:
+        "1sg": пригото́влю
+        "2sg": пригото́вишь
+        "3sg": пригото́вит
+        "1pl": пригото́вим
+        "2pl": пригото́вите
+        "3pl": пригото́вят
+      past_m: пригото́вил
+      past_f: пригото́вила
+      past_n: пригото́вило
+      past_pl: пригото́вили
+  "придумать=to think up":
+    cefr_level: A2
+    accented: приду́мать
+    aspect: pf
+    en_gb:
+      standard: to think up; to invent
+      alt:
+        - to invent
+    conjugation:
+      future:
+        "1sg": приду́маю
+        "2sg": приду́маешь
+        "3sg": приду́мает
+        "1pl": приду́маем
+        "2pl": приду́маете
+        "3pl": приду́мают
+      past_m: приду́мал
+      past_f: приду́мала
+      past_n: приду́мало
+      past_pl: приду́мали
   "приезжать=to arrive by transport":
     cefr_level: A2
     accented: приезжа́ть
@@ -12010,6 +12477,24 @@ words:
       past_f: признала́
       past_n: призна́ло
       past_pl: призна́ли
+  "признаться=to confess":
+    cefr_level: B1
+    accented: призна́ться
+    aspect: pf
+    en_gb:
+      standard: to confess; to admit
+    conjugation:
+      future:
+        "1sg": призна́юсь
+        "2sg": призна́ешься
+        "3sg": призна́ется
+        "1pl": призна́емся
+        "2pl": призна́етесь
+        "3pl": призна́ются
+      past_m: призна́лся
+      past_f: призна́лась
+      past_n: призна́лось
+      past_pl: призна́лись
   "прийти=to come":
     cefr_level: A2
     accented: прийти́
@@ -12058,6 +12543,24 @@ words:
       past_f: прика́зала
       past_n: прика́зало
       past_pl: прика́зали
+  "принадлежать=to belong":
+    cefr_level: B1
+    accented: принадлежа́ть
+    aspect: impf
+    en_gb:
+      standard: to belong (to someone)
+    conjugation:
+      present:
+        "1sg": принадлежу́
+        "2sg": принадлежи́шь
+        "3sg": принадлежи́т
+        "1pl": принадлежи́м
+        "2pl": принадлежи́те
+        "3pl": принадлежа́т
+      past_m: принадлежа́л
+      past_f: принадлежа́ла
+      past_n: принадлежа́ло
+      past_pl: принадлежа́ли
   "принести=to bring":
     cefr_level: A2
     accented: принести́
@@ -12100,6 +12603,24 @@ words:
       past_f: принима́ла
       past_n: принима́ло
       past_pl: принима́ли
+  "приносить=to bring":
+    cefr_level: B1
+    accented: приноси́ть
+    aspect: impf
+    en_gb:
+      standard: to bring (on foot)
+    conjugation:
+      present:
+        "1sg": приношу́
+        "2sg": прино́сишь
+        "3sg": прино́сит
+        "1pl": прино́сим
+        "2pl": прино́сите
+        "3pl": прино́сят
+      past_m: приноси́л
+      past_f: приноси́ла
+      past_n: приноси́ло
+      past_pl: приноси́ли
   "принять=to accept":
     cefr_level: B1
     accented: приня́ть
@@ -12121,6 +12642,78 @@ words:
       past_f: приняла́
       past_n: при́няло
       past_pl: при́няли
+  "приобрести=to acquire":
+    cefr_level: B2
+    accented: приобрести́
+    aspect: pf
+    en_gb:
+      standard: to acquire; to obtain
+    conjugation:
+      future:
+        "1sg": приобрету́
+        "2sg": приобретёшь
+        "3sg": приобретёт
+        "1pl": приобретём
+        "2pl": приобретёте
+        "3pl": приобрету́т
+      past_m: приобрёл
+      past_f: приобрела́
+      past_n: приобрело́
+      past_pl: приобрели́
+  "присесть=to sit down":
+    cefr_level: B1
+    accented: присе́сть
+    aspect: pf
+    en_gb:
+      standard: to sit down (for a short while)
+    conjugation:
+      future:
+        "1sg": прися́ду
+        "2sg": прися́дешь
+        "3sg": прися́дет
+        "1pl": прися́дем
+        "2pl": прися́дете
+        "3pl": прися́дут
+      past_m: присе́л
+      past_f: присе́ла
+      past_n: присе́ло
+      past_pl: присе́ли
+  "прислать=to send":
+    cefr_level: B1
+    accented: присла́ть
+    aspect: pf
+    en_gb:
+      standard: to send (something to someone)
+    conjugation:
+      future:
+        "1sg": пришлю́
+        "2sg": пришлёшь
+        "3sg": пришлёт
+        "1pl": пришлём
+        "2pl": пришлёте
+        "3pl": пришлю́т
+      past_m: присла́л
+      past_f: присла́ла
+      past_n: присла́ло
+      past_pl: присла́ли
+  "присутствовать=to be present":
+    cefr_level: B1
+    accented: прису́тствовать
+    aspect: impf
+    en_gb:
+      standard: to be present (at an event)
+    conjugation:
+      present:
+        "1sg": прису́тствую
+        "2sg": прису́тствуешь
+        "3sg": прису́тствует
+        "1pl": прису́тствуем
+        "2pl": прису́тствуете
+        "3pl": прису́тствуют
+      past_m: прису́тствовал
+      past_f: прису́тствовала
+      past_n: прису́тствовало
+      past_pl: прису́тствовали
   "приходить=to come":
     cefr_level: A2
     accented: приходи́ть
@@ -12145,6 +12738,29 @@ words:
       past_f: приходи́ла
       past_n: приходи́ло
       past_pl: приходи́ли
+  "пробовать=to try":
+    cefr_level: A2
+    accented: про́бовать
+    aspect: impf
+    en_gb:
+      standard: to try; to taste
+      alt:
+        - to taste
+    usage:
+      - ru: Я про́бую но́вое блю́до.
+        en_gb: I am tasting a new dish.
+    conjugation:
+      present:
+        "1sg": про́бую
+        "2sg": про́буешь
+        "3sg": про́бует
+        "1pl": про́буем
+        "2pl": про́буете
+        "3pl": про́буют
+      past_m: про́бовал
+      past_f: про́бовала
+      past_n: про́бовало
+      past_pl: про́бовали
   "проверить=to check":
     cefr_level: B1
     accented: прове́рить
@@ -12169,6 +12785,24 @@ words:
       past_f: прове́рила
       past_n: прове́рило
       past_pl: прове́рили
+  "проверять=to check":
+    cefr_level: B1
+    accented: проверя́ть
+    aspect: impf
+    en_gb:
+      standard: to check; to test
+    conjugation:
+      present:
+        "1sg": проверя́ю
+        "2sg": проверя́ешь
+        "3sg": проверя́ет
+        "1pl": проверя́ем
+        "2pl": проверя́ете
+        "3pl": проверя́ют
+      past_m: проверя́л
+      past_f: проверя́ла
+      past_n: проверя́ло
+      past_pl: проверя́ли
   "провести=to spend":
     cefr_level: B1
     accented: провести́
@@ -12211,6 +12845,24 @@ words:
       past_f: проводи́ла
       past_n: проводи́ло
       past_pl: проводи́ли
+  "провожать=to see off":
+    cefr_level: B1
+    accented: провожа́ть
+    aspect: impf
+    en_gb:
+      standard: to see (someone) off; to accompany
+    conjugation:
+      present:
+        "1sg": провожа́ю
+        "2sg": провожа́ешь
+        "3sg": провожа́ет
+        "1pl": провожа́ем
+        "2pl": провожа́ете
+        "3pl": провожа́ют
+      past_m: провожа́л
+      past_f: провожа́ла
+      past_n: провожа́ло
+      past_pl: провожа́ли
   "продавать=to sell":
     cefr_level: A2
     accented: продава́ть
@@ -12236,6 +12888,27 @@ words:
       past_f: продава́ла
       past_n: продава́ло
       past_pl: продава́ли
+  "продать=to sell":
+    cefr_level: A2
+    accented: прода́ть
+    aspect: pf
+    en_gb:
+      standard: to sell (something to someone)
+    usage:
+      - ru: Он хо́чет прода́ть маши́ну.
+        en_gb: He wants to sell the car.
+    conjugation:
+      future:
+        "1sg": прода́м
+        "2sg": прода́шь
+        "3sg": прода́ст
+        "1pl": продади́м
+        "2pl": продади́те
+        "3pl": продаду́т
+      past_m: про́дал
+      past_f: продала́
+      past_n: про́дало
+      past_pl: про́дали
   "продолжать=to continue":
     cefr_level: A2
     accented: продолжа́ть
@@ -12299,6 +12972,78 @@ words:
       past_f: продо́лжила
       past_n: продо́лжило
       past_pl: продо́лжили
+  "прожить=to live":
+    cefr_level: B1
+    accented: прожи́ть
+    aspect: pf
+    en_gb:
+      standard: to live (for a stated time)
+    conjugation:
+      future:
+        "1sg": проживу́
+        "2sg": проживёшь
+        "3sg": проживёт
+        "1pl": проживём
+        "2pl": проживёте
+        "3pl": проживу́т
+      past_m: про́жил
+      past_f: прожила́
+      past_n: про́жило
+      past_pl: про́жили
+  "производить=to produce":
+    cefr_level: B1
+    accented: производи́ть
+    aspect: impf
+    en_gb:
+      standard: to produce; to manufacture
+    conjugation:
+      present:
+        "1sg": произвожу́
+        "2sg": произво́дишь
+        "3sg": произво́дит
+        "1pl": произво́дим
+        "2pl": произво́дите
+        "3pl": произво́дят
+      past_m: производи́л
+      past_f: производи́ла
+      past_n: производи́ло
+      past_pl: производи́ли
+  "произнести=to pronounce":
+    cefr_level: B1
+    accented: произнести́
+    aspect: pf
+    en_gb:
+      standard: to pronounce; to utter
+    conjugation:
+      future:
+        "1sg": произнесу́
+        "2sg": произнесёшь
+        "3sg": произнесёт
+        "1pl": произнесём
+        "2pl": произнесёте
+        "3pl": произнесу́т
+      past_m: произнёс
+      past_f: произнесла́
+      past_n: произнесло́
+      past_pl: произнесли́
+  "произносить=to pronounce":
+    cefr_level: B1
+    accented: произноси́ть
+    aspect: impf
+    en_gb:
+      standard: to pronounce; to utter
+    conjugation:
+      present:
+        "1sg": произношу́
+        "2sg": произно́сишь
+        "3sg": произно́сит
+        "1pl": произно́сим
+        "2pl": произно́сите
+        "3pl": произно́сят
+      past_m: произноси́л
+      past_f: произноси́ла
+      past_n: произноси́ло
+      past_pl: произноси́ли
   "произойти=to happen":
     cefr_level: B1
     accented: произойти́
@@ -12362,6 +13107,24 @@ words:
       past_f: прошла́
       past_n: прошло́
       past_pl: прошли́
+  "пропустить=to miss":
+    cefr_level: B1
+    accented: пропусти́ть
+    aspect: pf
+    en_gb:
+      standard: to miss; to let pass
+    conjugation:
+      future:
+        "1sg": пропущу́
+        "2sg": пропу́стишь
+        "3sg": пропу́стит
+        "1pl": пропу́стим
+        "2pl": пропу́стите
+        "3pl": пропу́стят
+      past_m: пропусти́л
+      past_f: пропусти́ла
+      past_n: пропусти́ло
+      past_pl: пропусти́ли
   "просить=to ask for":
     cefr_level: A2
     accented: проси́ть
@@ -12386,6 +13149,27 @@ words:
       past_f: проси́ла
       past_n: проси́ло
       past_pl: проси́ли
+  "проснуться=to wake up":
+    cefr_level: A2
+    accented: просну́ться
+    aspect: pf
+    en_gb:
+      standard: to wake up
+    usage:
+      - ru: Я просну́лся ра́но у́тром.
+        en_gb: I woke up early in the morning.
+    conjugation:
+      future:
+        "1sg": просну́сь
+        "2sg": проснёшься
+        "3sg": проснётся
+        "1pl": проснёмся
+        "2pl": проснётесь
+        "3pl": просну́тся
+      past_m: просну́лся
+      past_f: просну́лась
+      past_n: просну́лось
+      past_pl: просну́лись
   "простить=to forgive":
     cefr_level: B1
     accented: прости́ть
@@ -12407,6 +13191,24 @@ words:
       past_f: прости́ла
       past_n: прости́ло
       past_pl: прости́ли
+  "протянуть=to stretch out":
+    cefr_level: B1
+    accented: протяну́ть
+    aspect: pf
+    en_gb:
+      standard: to stretch out; to hold out
+    conjugation:
+      future:
+        "1sg": протяну́
+        "2sg": протя́нешь
+        "3sg": протя́нет
+        "1pl": протя́нем
+        "2pl": протя́нете
+        "3pl": протя́нут
+      past_m: протяну́л
+      past_f: протяну́ла
+      past_n: протяну́ло
+      past_pl: протяну́ли
   "проходить=to pass":
     cefr_level: B1
     accented: проходи́ть
@@ -12475,6 +13277,24 @@ words:
       past_f: проща́ла
       past_n: проща́ло
       past_pl: проща́ли
+  "проявить=to show":
+    cefr_level: B1
+    accented: прояви́ть
+    aspect: pf
+    en_gb:
+      standard: to show; to display (a quality)
+    conjugation:
+      future:
+        "1sg": проявлю́
+        "2sg": проя́вишь
+        "3sg": проя́вит
+        "1pl": проя́вим
+        "2pl": проя́вите
+        "3pl": проя́вят
+      past_m: прояви́л
+      past_f: прояви́ла
+      past_n: прояви́ло
+      past_pl: прояви́ли
   "прыгать=to jump":
     cefr_level: A2
     accented: пры́гать
@@ -12518,6 +13338,24 @@ words:
       past_f: пря́тала
       past_n: пря́тало
       past_pl: пря́тали
+  "прятаться=to hide":
+    cefr_level: B1
+    accented: пря́таться
+    aspect: impf
+    en_gb:
+      standard: to hide (oneself)
+    conjugation:
+      present:
+        "1sg": пря́чусь
+        "2sg": пря́чешься
+        "3sg": пря́чется
+        "1pl": пря́чемся
+        "2pl": пря́четесь
+        "3pl": пря́чутся
+      past_m: пря́тался
+      past_f: пря́талась
+      past_n: пря́талось
+      past_pl: пря́тались
   "путешествовать=to travel":
     cefr_level: A2
     accented: путеше́ствовать

@@ -83,6 +83,12 @@ words:
     governs: ["gen"]
     en_gb:
       standard: around (encircling something, governs genitive)
+  "вслед=after":
+    cefr_level: B1
+    accented: вслед
+    governs: ["dat"]
+    en_gb:
+      standard: after (looking or moving in the wake of someone)
   "для=for":
     cefr_level: A2
     accented: для
@@ -170,6 +176,12 @@ words:
       standard: between (in the space separating two things)
       alt:
         - among
+  "мимо=past":
+    cefr_level: B1
+    accented: ми́мо
+    governs: ["gen"]
+    en_gb:
+      standard: past (going by something)
   "на=on":
     cefr_level: A1
     accented: на
@@ -190,6 +202,12 @@ words:
       standard: above (higher than something)
       alt:
         - over
+  "насчёт=regarding":
+    cefr_level: B1
+    accented: насчёт
+    governs: ["gen"]
+    en_gb:
+      standard: regarding (about, concerning)
   "несмотря=despite":
     cefr_level: B1
     accented: несмотря́
@@ -271,6 +289,27 @@ words:
     usage:
       - ru: Кот сиди́т под столо́м.
         en_gb: The cat is sitting under the table.
+  "помимо=besides":
+    cefr_level: B2
+    accented: поми́мо
+    governs: ["gen"]
+    en_gb:
+      standard: besides (apart from, in addition to)
+  "после=after":
+    cefr_level: A2
+    accented: по́сле
+    governs: ["gen"]
+    en_gb:
+      standard: after (later than)
+    usage:
+      - ru: По́сле уро́ка я иду́ домо́й.
+        en_gb: After the lesson I go home.
+  "посреди=in the middle of":
+    cefr_level: B2
+    accented: посреди́
+    governs: ["gen"]
+    en_gb:
+      standard: in the middle of (amid)
   "при=at":
     cefr_level: B1
     accented: при
@@ -286,6 +325,21 @@ words:
     governs: ["acc"]
     en_gb:
       standard: "about (colloquial: concerning, on the subject of)"
+  "против=against":
+    cefr_level: B1
+    accented: про́тив
+    governs: ["gen"]
+    en_gb:
+      standard: against (opposed to)
+    usage:
+      - ru: Я ничего́ не име́ю про́тив.
+        en_gb: I have nothing against it.
+  "путём=by means of":
+    cefr_level: B2
+    accented: путём
+    governs: ["gen"]
+    en_gb:
+      standard: by means of (through, via)
   "ради=for the sake of":
     cefr_level: B1
     accented: ра́ди
@@ -309,6 +363,12 @@ words:
     governs: ["acc"]
     en_gb:
       standard: through (passing all the way through something)
+  "спустя=after":
+    cefr_level: B2
+    accented: спустя́
+    governs: ["acc"]
+    en_gb:
+      standard: after (a stated period of time later)
   "среди=among":
     cefr_level: A2
     accented: среди́

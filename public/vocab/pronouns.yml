@@ -172,6 +172,22 @@ words:
       acc: кого́
       ins: кем
       pre: ком
+  "кто-то=someone":
+    cefr_level: A2
+    type: indef
+    accented: кто́-то
+    en_gb:
+      standard: someone (an unspecified person)
+    usage:
+      - ru: Тебе́ кто́-то звони́л.
+        en_gb: Someone called you.
+    forms:
+      nom: кто́-то
+      gen: кого́-то
+      dat: кому́-то
+      acc: кого́-то
+      ins: ке́м-то
+      pre: ко́м-то
   "любой=any":
     cefr_level: A2
     type: det
@@ -238,6 +254,19 @@ words:
       f: на́ша
       n: на́ше
       pl: на́ши
+  "никакой=no":
+    cefr_level: A2
+    type: neg
+    accented: никако́й
+    en_gb:
+      standard: no (not any — used with a negative)
+      alt:
+        - none at all
+    forms:
+      m: никако́й
+      f: никака́я
+      n: никако́е
+      pl: никаки́е
   "никто=nobody":
     cefr_level: A2
     type: neg
@@ -491,6 +520,22 @@ words:
       acc: что
       ins: чем
       pre: чём
+  "что-то=something":
+    cefr_level: A2
+    type: indef
+    accented: что́-то
+    en_gb:
+      standard: something (an unspecified thing)
+    usage:
+      - ru: Я хочу́ тебе́ что́-то сказа́ть.
+        en_gb: I want to tell you something.
+    forms:
+      nom: что́-то
+      gen: чего́-то
+      dat: чему́-то
+      acc: что́-то
+      ins: че́м-то
+      pre: чём-то
   "этот=this":
     cefr_level: A1
     type: demo
