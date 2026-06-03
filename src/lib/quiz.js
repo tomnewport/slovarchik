@@ -1,7 +1,7 @@
 // Pure, framework-free quiz helpers. Kept side-effect free so they are easy to
 // unit test and reuse across the vocab and declension drills.
 
-import { normalize, stripStress } from './text.js'
+import { normalize } from './text.js'
 
 export { normalize }
 
@@ -67,17 +67,3 @@ export function buildChoices(correct, pool, choices, keyOf, rng = Math.random) {
   return shuffle([correct, ...distractors], rng)
 }
 
-/**
- * The set of distinct letters a target word uses, lowercased and with stress
- * marks removed — used by the "intermediate" mode to light up the matching keys
- * on the on-screen keyboard. Spaces, punctuation and digits are dropped.
- * @param {string} target
- * @returns {Set<string>}
- */
-export function hintLetters(target) {
-  const out = new Set()
-  for (const ch of stripStress(String(target)).toLowerCase()) {
-    if (/\p{Letter}/u.test(ch)) out.add(ch)
-  }
-  return out
-}

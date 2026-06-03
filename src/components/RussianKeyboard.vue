@@ -1,7 +1,8 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
-import { keyboardHint } from '../stores/keyboard.js'
+import { keyboard, toggleHint } from '../stores/keyboard.js'
+import { nextChar, hintKeys, RU_LETTERS } from '../lib/phrases.js'
 
 // Standard ЙЦУКЕН layout — the same arrangement as a physical Russian keyboard.
 const ROWS = [
@@ -14,6 +15,10 @@ const ROWS = [
 // lang="ru"; we follow focus so a single shared keyboard serves every field.
 const target = ref(null)
 const shift = ref(false)
+// Reactive mirror of the focused field used to drive the next-letter hint: the
+// expected answer (from data-answer) and what the learner has typed so far.
+const answer = ref('')
+const typed = ref('')
 
 function isRussianInput(el) {
   return (
@@ -27,6 +32,8 @@ function isRussianInput(el) {
 function onFocusIn(e) {
   if (isRussianInput(e.target)) {
     target.value = e.target
+    answer.value = e.target.dataset.answer ?? ''
+    typed.value = e.target.value
     // Suppress the device's native virtual keyboard so only ours shows on
     // touch screens; physical keys (backspace, arrows…) keep working.
     e.target.setAttribute('inputmode', 'none')
@@ -40,17 +47,38 @@ function onFocusOut(e) {
     e.target.removeAttribute('inputmode')
     target.value = null
     shift.value = false
+    answer.value = ''
+    typed.value = ''
+  }
+}
+
+// Keep the hint in step with the field as the learner types — on-screen taps
+// and physical keys both fire `input`, and data-answer can change per question.
+function onInput(e) {
+  if (e.target === target.value) {
+    typed.value = e.target.value
+    answer.value = e.target.dataset.answer ?? ''
   }
 }
 
 onMounted(() => {
   document.addEventListener('focusin', onFocusIn)
   document.addEventListener('focusout', onFocusOut)
+  document.addEventListener('input', onInput)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('focusin', onFocusIn)
   document.removeEventListener('focusout', onFocusOut)
+  document.removeEventListener('input', onInput)
+})
+
+// Keys to light when the hint is switched on: the next correct character plus a
+// couple of decoys. Empty unless the learner turned the hint on and the focused
+// field declares the answer it expects (via data-answer).
+const hint = computed(() => {
+  if (!keyboard.on || !answer.value) return new Set()
+  return new Set(hintKeys(nextChar(answer.value, typed.value), RU_LETTERS))
 })
 
 // Replace the current selection (or insert at the caret) and let Vue's v-model
@@ -118,7 +146,7 @@ function keep(e) {
           :key="letter"
           type="button"
           class="kbd-key"
-          :class="{ hint: keyboardHint.letters.has(letter) }"
+          :class="{ hint: hint.has(letter) }"
           @click="press(letter)"
         >
           {{ shift ? letter.toUpperCase() : letter }}
@@ -134,7 +162,19 @@ function keep(e) {
         >
           ⇧
         </button>
-        <button type="button" class="kbd-key kbd-space" @click="space">␣</button>
+        <button
+          type="button"
+          class="kbd-key kbd-mod"
+          :class="{ active: keyboard.on }"
+          :aria-pressed="keyboard.on"
+          aria-label="Toggle hint"
+          @click="toggleHint"
+        >
+          💡
+        </button>
+        <button type="button" class="kbd-key kbd-space" :class="{ hint: hint.has(' ') }" @click="space">
+          ␣
+        </button>
         <button type="button" class="kbd-key kbd-mod" aria-label="Backspace" @click="backspace">
           ⌫
         </button>
@@ -189,7 +229,7 @@ function keep(e) {
   color: white;
 }
 
-/* Letters that appear in the answer — the "intermediate" mode hint. */
+/* The next character to type (and its decoys) when the hint is switched on. */
 .kbd-key.hint {
   background: color-mix(in srgb, var(--primary) 22%, var(--card));
   border-color: var(--primary);

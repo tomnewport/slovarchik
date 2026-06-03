@@ -1,22 +1,22 @@
-// Shared on-screen keyboard hint.
+// Shared on-screen keyboard hint state.
 //
-// A drill can ask the keyboard to highlight a set of letters — the vocab
-// "intermediate" mode uses this to show which letters the answer is made of
-// without revealing their order. The keyboard lives globally in App.vue while
-// the drills live in routed views, so this tiny reactive store is how they talk.
+// The on-screen keyboard (RussianKeyboard) carries a "hint" button. Once the
+// learner switches it on it stays on for the rest of the lesson and the
+// keyboard lights up the next character to type (plus a couple of decoys) for
+// whichever field is focused. The keyboard lives globally in App.vue while the
+// drills live in routed views, so this tiny reactive store is how they share
+// the toggle — the drills reset it when a lesson starts or ends.
 import { reactive } from 'vue'
 
-import { hintLetters } from '../lib/quiz.js'
+// `on` is the sticky hint toggle, flipped by the keyboard's hint button.
+export const keyboard = reactive({ on: false })
 
-// `letters` is a Set of lowercased, stress-free letters to light up.
-export const keyboardHint = reactive({ letters: new Set() })
-
-/** Highlight the letters that make up `word` (replaces any previous hint). */
-export function setHintLetters(word) {
-  keyboardHint.letters = hintLetters(word)
+/** Flip the keyboard hint on/off (the keyboard's hint button). */
+export function toggleHint() {
+  keyboard.on = !keyboard.on
 }
 
-/** Clear the keyboard hint. */
-export function clearHintLetters() {
-  if (keyboardHint.letters.size) keyboardHint.letters = new Set()
+/** Turn the hint off — drills call this when a lesson starts or ends. */
+export function resetHint() {
+  keyboard.on = false
 }

@@ -4,7 +4,7 @@ import { vocab, state } from '../stores/vocab.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
 import { record as recordAttempt } from '../stores/progress.js'
 import { GRADES, gradeFor } from '../lib/progress.js'
-import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
+import { resetHint } from '../stores/keyboard.js'
 import { speak, speechSupported } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
@@ -17,11 +17,10 @@ const ready = computed(() => vocab.value.length > 0)
 const LEVELS = [
   { id: 'easy', label: 'Easy · match', help: 'Pair up Russian and English.' },
   {
-    id: 'intermediate',
-    label: 'Intermediate · hint',
-    help: 'Type it — the keyboard highlights the letters it uses.',
+    id: 'type',
+    label: 'Type it',
+    help: 'Type the answer — tap the keyboard’s 💡 if you need a hint.',
   },
-  { id: 'advanced', label: 'Advanced · blind', help: 'Type it with no help.' },
 ]
 
 // How many pairs to show on the easy-mode matching board at once.
@@ -71,6 +70,7 @@ function start(levelId) {
   level.value = levelId
   score.right = 0
   score.total = 0
+  resetHint() // each lesson starts with the keyboard hint off
   if (levelId === 'easy') {
     nextBoard()
   } else {
@@ -86,7 +86,6 @@ function nextQuestion() {
   typed.value = ''
   current.value = sample(vocab.value, 1)[0]
   nextTick(() => inputEl.value?.focus())
-  applyKeyboardHint()
   if (direction.value === 'ru-en') speak(current.value.ru)
 }
 
@@ -153,18 +152,6 @@ function resolveMatch() {
   }
 }
 
-// Intermediate mode highlights the answer's letters on the on-screen Russian
-// keyboard instead of revealing them as text. That keyboard only exists for
-// Russian, so the hint applies when the answer is Russian (EN → RU); otherwise
-// there is no hint.
-function applyKeyboardHint() {
-  if (level.value === 'intermediate' && direction.value === 'en-ru' && current.value) {
-    setHintLetters(answerOf(current.value))
-  } else {
-    clearHintLetters()
-  }
-}
-
 function leftClass(word) {
   if (matched.has(word.id)) return 'matched'
   if (word.id === selectedLeft.value) return 'selected'
@@ -184,9 +171,10 @@ function record(correct) {
   answered.value = true
   wasCorrect.value = correct
   score.total += 1
-  // Typed answer (intermediate/advanced) → spelling success or error for a word.
-  recordAttempt({ kind: 'word', key: current.value.id }, gradeFor(level.value, correct), {
-    level: level.value,
+  // Typed answer → spelling success or error for a word. The on-screen hint
+  // carries no penalty, so a typed answer always counts at the top tier.
+  recordAttempt({ kind: 'word', key: current.value.id }, gradeFor('advanced', correct), {
+    level: 'advanced',
   })
   if (correct) {
     score.right += 1
@@ -210,7 +198,7 @@ function submitTyped() {
 function quit() {
   clearWrong()
   clearTimeout(advanceTimer)
-  clearHintLetters()
+  resetHint()
   celebrating.value = false
   level.value = null
   current.value = null
@@ -221,7 +209,7 @@ function quit() {
 
 onUnmounted(() => {
   clearTimeout(advanceTimer)
-  clearHintLetters()
+  resetHint()
 })
 </script>
 
@@ -312,13 +300,14 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Intermediate / advanced: typing -->
+    <!-- Type it: the on-screen keyboard's 💡 reveals the next letter on demand -->
     <form v-else @submit.prevent="submitTyped" class="grid">
       <input
         ref="inputEl"
         v-model="typed"
         type="text"
         :lang="direction === 'en-ru' ? 'ru' : 'en'"
+        :data-answer="direction === 'en-ru' && current ? answerOf(current) : null"
         :disabled="answered"
         :placeholder="direction === 'ru-en' ? 'type in English' : 'наберите по-русски'"
         autocomplete="off"

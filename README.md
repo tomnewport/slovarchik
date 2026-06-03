@@ -17,14 +17,12 @@ Everything runs in your browser and works fully offline once loaded.
 
 ### 📚 Vocabulary
 
-Translate words in either direction (RU → EN / EN → RU) across three difficulty
-levels:
+Translate words in either direction (RU → EN / EN → RU):
 
-| Level        | How it works                                         |
-| ------------ | ---------------------------------------------------- |
-| Easy         | **Match** — pick the right translation (4 choices).  |
-| Intermediate | **Hinted typing** — type it; the on-screen keyboard lights up the letters it uses (RU answers). |
-| Advanced     | **Blind typing** — type it with no help.             |
+| Level   | How it works                                                                 |
+| ------- | ---------------------------------------------------------------------------- |
+| Easy    | **Match** — pick the right translation (4 choices).                          |
+| Type it | **Type the answer.** Stuck? Tap the on-screen keyboard's 💡 to light up the next letter (plus a couple of decoys) — see [The keyboard hint](#the-keyboard-hint). |
 
 ### 🧩 Inflection drills
 
@@ -43,8 +41,7 @@ against hand-checked golden paradigms and every curated nominative.
 | --------------- | ---------------------------------------------------------------------------- |
 | Identify        | Given one form, select every cell it could fill (handles syncretism).        |
 | Build the table | Drag (or tap) each shuffled form into the right cell of an empty table.       |
-| Guided endings  | The stem is shown; add each ending one letter at a time — the on-screen keyboard lights up the correct next letter alongside a couple of decoys. |
-| Type the endings| The stem is shown; type every ending with no help at all.                    |
+| Type the endings| The stem is shown; type every ending. Stuck? Tap the on-screen keyboard's 💡 to light up the next letter — see [The keyboard hint](#the-keyboard-hint). |
 
 The identify exercise understands syncretism — e.g. *книге* matches both dative
 **and** prepositional, and *стол* matches nominative **and** accusative singular.
@@ -87,6 +84,20 @@ it isn't available. The recogniser wrapper and grading live in
 > Chrome/Edge the Web Speech API streams your microphone audio to the browser
 > maker's cloud service for transcription (which is why it needs a network
 > connection). The app surfaces this in the UI before you start.
+
+### ⌨️ The keyboard hint
+
+Every typing drill — vocabulary, phrases and the *type the endings* inflection
+exercise — shares one on-screen Russian keyboard
+([`RussianKeyboard.vue`](src/components/RussianKeyboard.vue)) with a **💡 hint
+button**. Tap it and the keyboard lights up the **next character to type plus a
+couple of decoys**; it stays on for the rest of the lesson so you can lean on it
+whenever you're stuck. There's **no scoring penalty** for using it — a typed
+answer always counts at the top mastery tier either way. A field opts in by
+declaring the answer it expects via a `data-answer` attribute; the keyboard
+reads that, follows what you've typed, and walks the hint forward letter by
+letter. English answers fall back to the device keyboard, so the hint applies
+wherever the on-screen Russian keyboard is shown.
 
 ## Tech
 

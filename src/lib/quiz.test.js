@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { normalize, checkAnswer, shuffle, sample, buildChoices, hintLetters } from './quiz.js'
+import { normalize, checkAnswer, shuffle, sample, buildChoices } from './quiz.js'
 
 // A deterministic pseudo-rng so shuffle/sample assertions are stable.
 function seededRng(seed) {
@@ -66,18 +66,5 @@ describe('buildChoices', () => {
     const choices = buildChoices(correct, pool, 3, keyOf, seededRng(9))
     expect(choices).toHaveLength(3)
     expect(choices.filter((c) => c.id === 'a')).toHaveLength(1)
-  })
-})
-
-describe('hintLetters', () => {
-  it('returns the distinct lowercased letters of a word', () => {
-    expect(hintLetters('Привет')).toEqual(new Set(['п', 'р', 'и', 'в', 'е', 'т']))
-  })
-  it('drops spaces, punctuation and duplicates', () => {
-    expect(hintLetters('мама, papa')).toEqual(new Set(['м', 'а', 'p', 'a']))
-  })
-  it('strips stress marks so the bare letter is highlighted', () => {
-    // дома́ carries a combining acute accent on the final а.
-    expect(hintLetters('до́ма')).toEqual(new Set(['д', 'о', 'м', 'а']))
   })
 })

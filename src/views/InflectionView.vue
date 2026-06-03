@@ -9,11 +9,11 @@ import { buildParadigms, POS_TITLES } from '../lib/paradigm.js'
 import { sample } from '../lib/quiz.js'
 import { record as recordAttempt } from '../stores/progress.js'
 import { gradeFor } from '../lib/progress.js'
+import { resetHint } from '../stores/keyboard.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 import IdentifyForm from '../components/inflection/IdentifyForm.vue'
 import DragTable from '../components/inflection/DragTable.vue'
-import GuidedEndings from '../components/inflection/GuidedEndings.vue'
 import BlindEndings from '../components/inflection/BlindEndings.vue'
 
 const props = defineProps({ pos: { type: String, default: 'noun' } })
@@ -24,8 +24,7 @@ const CELEBRATE_MS = 1000
 const MODES = [
   { id: 'identify', label: 'Identify the form', help: 'Which slot(s) could a form be?', comp: IdentifyForm, level: 'easy' },
   { id: 'drag', label: 'Build the table', help: 'Drag each form into the right cell.', comp: DragTable, level: 'intermediate' },
-  { id: 'guided', label: 'Guided endings', help: 'Add the endings with on-screen hints.', comp: GuidedEndings, level: 'intermediate' },
-  { id: 'blind', label: 'Type the endings', help: 'Type every ending with no help.', comp: BlindEndings, level: 'advanced' },
+  { id: 'endings', label: 'Type the endings', help: 'Type each ending — tap the keyboard’s 💡 if you’re stuck.', comp: BlindEndings, level: 'advanced' },
 ]
 
 const title = computed(() => POS_TITLES[props.pos] ?? 'Inflection')
@@ -41,12 +40,13 @@ const lastResult = ref(null)
 let advanceTimer = null
 
 const activeMode = computed(() => MODES.find((m) => m.id === mode.value) ?? null)
-const showStem = computed(() => mode.value === 'guided' || mode.value === 'blind')
+const showStem = computed(() => mode.value === 'endings')
 
 function start(modeId) {
   mode.value = modeId
   score.right = 0
   score.total = 0
+  resetHint() // each lesson starts with the keyboard hint off
   newRound()
 }
 
@@ -85,12 +85,16 @@ function onGraded(correct, records = []) {
 
 function quit() {
   clearTimeout(advanceTimer)
+  resetHint()
   celebrating.value = false
   mode.value = null
   paradigm.value = null
 }
 
-onUnmounted(() => clearTimeout(advanceTimer))
+onUnmounted(() => {
+  clearTimeout(advanceTimer)
+  resetHint()
+})
 </script>
 
 <template>
