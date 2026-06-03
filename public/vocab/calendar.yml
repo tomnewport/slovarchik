@@ -24,8 +24,7 @@ meta:
     ins: instrumental
     pre: prepositional
 words:
-  # ── Days of the week ───────────────────────────────────────────────
-  "понедельник=Monday":
+  "август=August":
     cefr_level: A1
     gender: m
     animacy: i
@@ -33,24 +32,28 @@ words:
     collections:
       - the calendar
     en_gb:
-      standard: Monday (the first day of the week)
+      standard: August (the eighth month)
     usage:
-      - ru: В понеде́льник я иду́ на рабо́ту.
-        en_gb: On Monday I go to work.
+      - ru: В а́вгусте мы е́здили на мо́ре.
+        en_gb: In August we went to the seaside.
+      - ru: А́вгуст — после́дний ме́сяц ле́та.
+        en_gb: August is the last month of summer.
+      - ru: К а́вгусту созрева́ют фру́кты.
+        en_gb: By August the fruit ripens.
     declension:
-      sg_nom: понеде́льник
-      sg_gen: понеде́льника
-      sg_dat: понеде́льнику
-      sg_acc: понеде́льник
-      sg_ins: понеде́льником
-      sg_pre: понеде́льнике
-      pl_nom: понеде́льники
-      pl_gen: понеде́льников
-      pl_dat: понеде́льникам
-      pl_acc: понеде́льники
-      pl_ins: понеде́льниками
-      pl_pre: понеде́льниках
-  "вторник=Tuesday":
+      sg_nom: а́вгуст
+      sg_gen: а́вгуста
+      sg_dat: а́вгусту
+      sg_acc: а́вгуст
+      sg_ins: а́вгустом
+      sg_pre: а́вгусте
+      pl_nom: а́вгусты
+      pl_gen: а́вгустов
+      pl_dat: а́вгустам
+      pl_acc: а́вгусты
+      pl_ins: а́вгустами
+      pl_pre: а́вгустах
+  "апрель=April":
     cefr_level: A1
     gender: m
     animacy: i
@@ -58,123 +61,27 @@ words:
     collections:
       - the calendar
     en_gb:
-      standard: Tuesday (the second day of the week)
+      standard: April (the fourth month)
     usage:
-      - ru: Во вто́рник у нас уро́к ру́сского.
-        en_gb: On Tuesday we have a Russian lesson.
+      - ru: В апре́ле цвету́т дере́вья.
+        en_gb: In April the trees blossom.
+      - ru: Апре́ль ча́сто быва́ет дождли́вым.
+        en_gb: April is often rainy.
+      - ru: К апре́лю та́ет снег.
+        en_gb: By April the snow melts.
     declension:
-      sg_nom: вто́рник
-      sg_gen: вто́рника
-      sg_dat: вто́рнику
-      sg_acc: вто́рник
-      sg_ins: вто́рником
-      sg_pre: вто́рнике
-      pl_nom: вто́рники
-      pl_gen: вто́рников
-      pl_dat: вто́рникам
-      pl_acc: вто́рники
-      pl_ins: вто́рниками
-      pl_pre: вто́рниках
-  "среда=Wednesday":
-    cefr_level: A1
-    gender: f
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: Wednesday (the third day of the week)
-    usage:
-      - ru: По среда́м я хожу́ в бассе́йн.
-        en_gb: On Wednesdays I go to the swimming pool.
-    declension:
-      sg_nom: среда́
-      sg_gen: среды́
-      sg_dat: среде́
-      sg_acc: сре́ду
-      sg_ins: средо́й
-      sg_pre: среде́
-      pl_nom: сре́ды
-      pl_gen: сред
-      pl_dat: среда́м
-      pl_acc: сре́ды
-      pl_ins: среда́ми
-      pl_pre: среда́х
-  "четверг=Thursday":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: Thursday (the fourth day of the week)
-    usage:
-      - ru: В четве́рг мы встре́тимся.
-        en_gb: On Thursday we will meet.
-    declension:
-      sg_nom: четве́рг
-      sg_gen: четверга́
-      sg_dat: четвергу́
-      sg_acc: четве́рг
-      sg_ins: четверго́м
-      sg_pre: четверге́
-      pl_nom: четверги́
-      pl_gen: четверго́в
-      pl_dat: четверга́м
-      pl_acc: четверги́
-      pl_ins: четверга́ми
-      pl_pre: четверга́х
-  "пятница=Friday":
-    cefr_level: A1
-    gender: f
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: Friday (the fifth day of the week)
-    usage:
-      - ru: В пя́тницу мы идём в кино́.
-        en_gb: On Friday we are going to the cinema.
-    declension:
-      sg_nom: пя́тница
-      sg_gen: пя́тницы
-      sg_dat: пя́тнице
-      sg_acc: пя́тницу
-      sg_ins: пя́тницей
-      sg_pre: пя́тнице
-      pl_nom: пя́тницы
-      pl_gen: пя́тниц
-      pl_dat: пя́тницам
-      pl_acc: пя́тницы
-      pl_ins: пя́тницами
-      pl_pre: пя́тницах
-  "суббота=Saturday":
-    cefr_level: A1
-    gender: f
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: Saturday (the sixth day of the week)
-    usage:
-      - ru: В суббо́ту я отдыха́ю.
-        en_gb: On Saturday I rest.
-    declension:
-      sg_nom: суббо́та
-      sg_gen: суббо́ты
-      sg_dat: суббо́те
-      sg_acc: суббо́ту
-      sg_ins: суббо́той
-      sg_pre: суббо́те
-      pl_nom: суббо́ты
-      pl_gen: суббо́т
-      pl_dat: суббо́там
-      pl_acc: суббо́ты
-      pl_ins: суббо́тами
-      pl_pre: суббо́тах
+      sg_nom: апре́ль
+      sg_gen: апре́ля
+      sg_dat: апре́лю
+      sg_acc: апре́ль
+      sg_ins: апре́лем
+      sg_pre: апре́ле
+      pl_nom: апре́ли
+      pl_gen: апре́лей
+      pl_dat: апре́лям
+      pl_acc: апре́ли
+      pl_ins: апре́лями
+      pl_pre: апре́лях
   "воскресенье=Sunday":
     cefr_level: A1
     gender: n
@@ -187,6 +94,10 @@ words:
     usage:
       - ru: В воскресе́нье мы гуля́ем в па́рке.
         en_gb: On Sunday we walk in the park.
+      - ru: Воскресе́нье — после́дний день неде́ли.
+        en_gb: Sunday is the last day of the week.
+      - ru: По воскресе́ньям мы отдыха́ем до́ма.
+        en_gb: On Sundays we rest at home.
     declension:
       sg_nom: воскресе́нье
       sg_gen: воскресе́нья
@@ -201,7 +112,7 @@ words:
       pl_ins: воскресе́ньями
       pl_pre: воскресе́ньях
   # ── Months ─────────────────────────────────────────────────────────
-  "январь=January":
+  "вторник=Tuesday":
     cefr_level: A1
     gender: m
     animacy: i
@@ -209,273 +120,27 @@ words:
     collections:
       - the calendar
     en_gb:
-      standard: January (the first month)
+      standard: Tuesday (the second day of the week)
     usage:
-      - ru: В январе́ ча́сто идёт снег.
-        en_gb: In January it often snows.
+      - ru: Во вто́рник у нас уро́к ру́сского.
+        en_gb: On Tuesday we have a Russian lesson.
+      - ru: Вто́рник был о́чень дли́нным.
+        en_gb: Tuesday was very long.
+      - ru: До вто́рника оста́лось два дня.
+        en_gb: There are two days left until Tuesday.
     declension:
-      sg_nom: янва́рь
-      sg_gen: января́
-      sg_dat: январю́
-      sg_acc: янва́рь
-      sg_ins: январём
-      sg_pre: январе́
-      pl_nom: январи́
-      pl_gen: январе́й
-      pl_dat: января́м
-      pl_acc: январи́
-      pl_ins: января́ми
-      pl_pre: января́х
-  "февраль=February":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: February (the second month)
-    usage:
-      - ru: Февра́ль — са́мый коро́ткий ме́сяц.
-        en_gb: February is the shortest month.
-    declension:
-      sg_nom: февра́ль
-      sg_gen: февраля́
-      sg_dat: февралю́
-      sg_acc: февра́ль
-      sg_ins: февралём
-      sg_pre: феврале́
-      pl_nom: феврали́
-      pl_gen: февра́лей
-      pl_dat: февраля́м
-      pl_acc: феврали́
-      pl_ins: февраля́ми
-      pl_pre: февраля́х
-  "март=March":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: March (the third month)
-    usage:
-      - ru: В ма́рте начина́ется весна́.
-        en_gb: Spring begins in March.
-    declension:
-      sg_nom: март
-      sg_gen: ма́рта
-      sg_dat: ма́рту
-      sg_acc: март
-      sg_ins: ма́ртом
-      sg_pre: ма́рте
-      pl_nom: ма́рты
-      pl_gen: ма́ртов
-      pl_dat: ма́ртам
-      pl_acc: ма́рты
-      pl_ins: ма́ртами
-      pl_pre: ма́ртах
-  "апрель=April":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: April (the fourth month)
-    usage:
-      - ru: В апре́ле цвету́т дере́вья.
-        en_gb: In April the trees blossom.
-    declension:
-      sg_nom: апре́ль
-      sg_gen: апре́ля
-      sg_dat: апре́лю
-      sg_acc: апре́ль
-      sg_ins: апре́лем
-      sg_pre: апре́ле
-      pl_nom: апре́ли
-      pl_gen: апре́лей
-      pl_dat: апре́лям
-      pl_acc: апре́ли
-      pl_ins: апре́лями
-      pl_pre: апре́лях
-  "май=May":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: May (the fifth month)
-    usage:
-      - ru: В ма́е тепло́ и со́лнечно.
-        en_gb: In May it is warm and sunny.
-    declension:
-      sg_nom: май
-      sg_gen: ма́я
-      sg_dat: ма́ю
-      sg_acc: май
-      sg_ins: ма́ем
-      sg_pre: ма́е
-      pl_nom: ма́и
-      pl_gen: ма́ев
-      pl_dat: ма́ям
-      pl_acc: ма́и
-      pl_ins: ма́ями
-      pl_pre: ма́ях
-  "июнь=June":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: June (the sixth month)
-    usage:
-      - ru: В ию́не начина́ются кани́кулы.
-        en_gb: The holidays begin in June.
-    declension:
-      sg_nom: ию́нь
-      sg_gen: ию́ня
-      sg_dat: ию́ню
-      sg_acc: ию́нь
-      sg_ins: ию́нем
-      sg_pre: ию́не
-      pl_nom: ию́ни
-      pl_gen: ию́ней
-      pl_dat: ию́ням
-      pl_acc: ию́ни
-      pl_ins: ию́нями
-      pl_pre: ию́нях
-  "июль=July":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: July (the seventh month)
-    usage:
-      - ru: В ию́ле о́чень жа́рко.
-        en_gb: In July it is very hot.
-    declension:
-      sg_nom: ию́ль
-      sg_gen: ию́ля
-      sg_dat: ию́лю
-      sg_acc: ию́ль
-      sg_ins: ию́лем
-      sg_pre: ию́ле
-      pl_nom: ию́ли
-      pl_gen: ию́лей
-      pl_dat: ию́лям
-      pl_acc: ию́ли
-      pl_ins: ию́лями
-      pl_pre: ию́лях
-  "август=August":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: August (the eighth month)
-    usage:
-      - ru: В а́вгусте мы е́здили на мо́ре.
-        en_gb: In August we went to the seaside.
-    declension:
-      sg_nom: а́вгуст
-      sg_gen: а́вгуста
-      sg_dat: а́вгусту
-      sg_acc: а́вгуст
-      sg_ins: а́вгустом
-      sg_pre: а́вгусте
-      pl_nom: а́вгусты
-      pl_gen: а́вгустов
-      pl_dat: а́вгустам
-      pl_acc: а́вгусты
-      pl_ins: а́вгустами
-      pl_pre: а́вгустах
-  "сентябрь=September":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: September (the ninth month)
-    usage:
-      - ru: В сентябре́ начина́ется уче́бный год.
-        en_gb: The school year begins in September.
-    declension:
-      sg_nom: сентя́брь
-      sg_gen: сентября́
-      sg_dat: сентябрю́
-      sg_acc: сентя́брь
-      sg_ins: сентябрём
-      sg_pre: сентябре́
-      pl_nom: сентябри́
-      pl_gen: сентябре́й
-      pl_dat: сентября́м
-      pl_acc: сентябри́
-      pl_ins: сентября́ми
-      pl_pre: сентября́х
-  "октябрь=October":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: October (the tenth month)
-    usage:
-      - ru: В октябре́ па́дают ли́стья.
-        en_gb: In October the leaves fall.
-    declension:
-      sg_nom: октя́брь
-      sg_gen: октября́
-      sg_dat: октябрю́
-      sg_acc: октя́брь
-      sg_ins: октябрём
-      sg_pre: октябре́
-      pl_nom: октябри́
-      pl_gen: октябре́й
-      pl_dat: октября́м
-      pl_acc: октябри́
-      pl_ins: октября́ми
-      pl_pre: октября́х
-  "ноябрь=November":
-    cefr_level: A1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - the calendar
-    en_gb:
-      standard: November (the eleventh month)
-    usage:
-      - ru: В ноябре́ ча́сто идёт дождь.
-        en_gb: In November it often rains.
-    declension:
-      sg_nom: ноя́брь
-      sg_gen: ноября́
-      sg_dat: ноябрю́
-      sg_acc: ноя́брь
-      sg_ins: ноябрём
-      sg_pre: ноябре́
-      pl_nom: ноябри́
-      pl_gen: ноябре́й
-      pl_dat: ноября́м
-      pl_acc: ноябри́
-      pl_ins: ноября́ми
-      pl_pre: ноября́х
+      sg_nom: вто́рник
+      sg_gen: вто́рника
+      sg_dat: вто́рнику
+      sg_acc: вто́рник
+      sg_ins: вто́рником
+      sg_pre: вто́рнике
+      pl_nom: вто́рники
+      pl_gen: вто́рников
+      pl_dat: вто́рникам
+      pl_acc: вто́рники
+      pl_ins: вто́рниками
+      pl_pre: вто́рниках
   "декабрь=December":
     cefr_level: A1
     gender: m
@@ -488,6 +153,10 @@ words:
     usage:
       - ru: В декабре́ мы пра́зднуем Но́вый год.
         en_gb: In December we celebrate the New Year.
+      - ru: Дека́брь — пе́рвый ме́сяц зимы́.
+        en_gb: December is the first month of winter.
+      - ru: К декабрю́ выпада́ет снег.
+        en_gb: By December snow falls.
     declension:
       sg_nom: дека́брь
       sg_gen: декабря́
@@ -502,25 +171,6 @@ words:
       pl_ins: декабря́ми
       pl_pre: декабря́х
   # ── Festivals and celebrations ─────────────────────────────────────
-  "Новый год=New Year":
-    cefr_level: A2
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - holiday
-    en_gb:
-      standard: New Year (the holiday on 1 January)
-    usage:
-      - ru: На Но́вый год мы наряжа́ем ёлку.
-        en_gb: At New Year we decorate the fir tree.
-    declension:
-      sg_nom: Но́вый год
-      sg_gen: Но́вого го́да
-      sg_dat: Но́вому го́ду
-      sg_acc: Но́вый год
-      sg_ins: Но́вым го́дом
-      sg_pre: Но́вом году́
   "день рождения=birthday":
     cefr_level: A2
     gender: m
@@ -533,6 +183,10 @@ words:
     usage:
       - ru: У меня́ день рожде́ния в ма́е.
         en_gb: My birthday is in May.
+      - ru: Я жду свой день рожде́ния.
+        en_gb: I am looking forward to my birthday.
+      - ru: Она́ пригото́вила пода́рок ко дню рожде́ния.
+        en_gb: She prepared a present for the birthday.
     declension:
       sg_nom: день рожде́ния
       sg_gen: дня рожде́ния
@@ -546,44 +200,122 @@ words:
       pl_acc: дни рожде́ния
       pl_ins: дня́ми рожде́ния
       pl_pre: днях рожде́ния
-  "Рождество=Christmas":
-    cefr_level: A2
-    gender: n
+  "июль=July":
+    cefr_level: A1
+    gender: m
     animacy: i
-    number: ["sg"]
+    number: ["sg", "pl"]
     collections:
-      - holiday
+      - the calendar
     en_gb:
-      standard: Christmas (celebrated on 7 January in Russia)
+      standard: July (the seventh month)
     usage:
-      - ru: На Рождество́ вся семья́ собира́ется вме́сте.
-        en_gb: At Christmas the whole family gathers together.
+      - ru: В ию́ле о́чень жа́рко.
+        en_gb: In July it is very hot.
+      - ru: Ию́ль — са́мый тёплый ме́сяц.
+        en_gb: July is the warmest month.
+      - ru: По́сле ию́ля наступа́ет а́вгуст.
+        en_gb: After July comes August.
     declension:
-      sg_nom: Рождество́
-      sg_gen: Рождества́
-      sg_dat: Рождеству́
-      sg_acc: Рождество́
-      sg_ins: Рождество́м
-      sg_pre: Рождестве́
-  "Пасха=Easter":
-    cefr_level: A2
-    gender: f
+      sg_nom: ию́ль
+      sg_gen: ию́ля
+      sg_dat: ию́лю
+      sg_acc: ию́ль
+      sg_ins: ию́лем
+      sg_pre: ию́ле
+      pl_nom: ию́ли
+      pl_gen: ию́лей
+      pl_dat: ию́лям
+      pl_acc: ию́ли
+      pl_ins: ию́лями
+      pl_pre: ию́лях
+  "июнь=June":
+    cefr_level: A1
+    gender: m
     animacy: i
-    number: ["sg"]
+    number: ["sg", "pl"]
     collections:
-      - holiday
+      - the calendar
     en_gb:
-      standard: Easter (the Orthodox spring festival)
+      standard: June (the sixth month)
     usage:
-      - ru: На Па́сху пеку́т кули́ч.
-        en_gb: At Easter people bake a kulich.
+      - ru: В ию́не начина́ются кани́кулы.
+        en_gb: The holidays begin in June.
+      - ru: Ию́нь — пе́рвый ме́сяц ле́та.
+        en_gb: June is the first month of summer.
+      - ru: К ию́ню зака́нчивается шко́ла.
+        en_gb: By June school ends.
     declension:
-      sg_nom: Па́сха
-      sg_gen: Па́схи
-      sg_dat: Па́схе
-      sg_acc: Па́сху
-      sg_ins: Па́схой
-      sg_pre: Па́схе
+      sg_nom: ию́нь
+      sg_gen: ию́ня
+      sg_dat: ию́ню
+      sg_acc: ию́нь
+      sg_ins: ию́нем
+      sg_pre: ию́не
+      pl_nom: ию́ни
+      pl_gen: ию́ней
+      pl_dat: ию́ням
+      pl_acc: ию́ни
+      pl_ins: ию́нями
+      pl_pre: ию́нях
+  "май=May":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: May (the fifth month)
+    usage:
+      - ru: В ма́е тепло́ и со́лнечно.
+        en_gb: In May it is warm and sunny.
+      - ru: Май — мой люби́мый ме́сяц.
+        en_gb: May is my favourite month.
+      - ru: По́сле ма́я начина́ется ле́то.
+        en_gb: After May summer begins.
+    declension:
+      sg_nom: май
+      sg_gen: ма́я
+      sg_dat: ма́ю
+      sg_acc: май
+      sg_ins: ма́ем
+      sg_pre: ма́е
+      pl_nom: ма́и
+      pl_gen: ма́ев
+      pl_dat: ма́ям
+      pl_acc: ма́и
+      pl_ins: ма́ями
+      pl_pre: ма́ях
+  "март=March":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: March (the third month)
+    usage:
+      - ru: В ма́рте начина́ется весна́.
+        en_gb: Spring begins in March.
+      - ru: Март — пе́рвый ме́сяц весны́.
+        en_gb: March is the first month of spring.
+      - ru: По́сле ма́рта стано́вится тепле́е.
+        en_gb: After March it becomes warmer.
+    declension:
+      sg_nom: март
+      sg_gen: ма́рта
+      sg_dat: ма́рту
+      sg_acc: март
+      sg_ins: ма́ртом
+      sg_pre: ма́рте
+      pl_nom: ма́рты
+      pl_gen: ма́ртов
+      pl_dat: ма́ртам
+      pl_acc: ма́рты
+      pl_ins: ма́ртами
+      pl_pre: ма́ртах
   "Масленица=Maslenitsa":
     cefr_level: B1
     gender: f
@@ -599,6 +331,10 @@ words:
     usage:
       - ru: На Ма́сленицу пеку́т блины́.
         en_gb: At Maslenitsa people make pancakes.
+      - ru: Ма́сленица дли́тся це́лую неде́лю.
+        en_gb: Maslenitsa lasts a whole week.
+      - ru: Перед Ма́сленицей мы покупа́ем муку́.
+        en_gb: Before Maslenitsa we buy flour.
     declension:
       sg_nom: Ма́сленица
       sg_gen: Ма́сленицы
@@ -606,6 +342,336 @@ words:
       sg_acc: Ма́сленицу
       sg_ins: Ма́сленицей
       sg_pre: Ма́сленице
+  "Новый год=New Year":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - holiday
+    en_gb:
+      standard: New Year (the holiday on 1 January)
+    usage:
+      - ru: На Но́вый год мы наряжа́ем ёлку.
+        en_gb: At New Year we decorate the fir tree.
+      - ru: Мы лю́бим Но́вый год.
+        en_gb: We love New Year.
+      - ru: По́сле Но́вого го́да начина́ются кани́кулы.
+        en_gb: After New Year the holidays begin.
+    declension:
+      sg_nom: Но́вый год
+      sg_gen: Но́вого го́да
+      sg_dat: Но́вому го́ду
+      sg_acc: Но́вый год
+      sg_ins: Но́вым го́дом
+      sg_pre: Но́вом году́
+  "ноябрь=November":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: November (the eleventh month)
+    usage:
+      - ru: В ноябре́ ча́сто идёт дождь.
+        en_gb: In November it often rains.
+      - ru: Ноя́брь — холо́дный и тёмный ме́сяц.
+        en_gb: November is a cold and dark month.
+      - ru: По́сле ноября́ начина́ется зима́.
+        en_gb: After November winter begins.
+    declension:
+      sg_nom: ноя́брь
+      sg_gen: ноября́
+      sg_dat: ноябрю́
+      sg_acc: ноя́брь
+      sg_ins: ноябрём
+      sg_pre: ноябре́
+      pl_nom: ноябри́
+      pl_gen: ноябре́й
+      pl_dat: ноября́м
+      pl_acc: ноябри́
+      pl_ins: ноября́ми
+      pl_pre: ноября́х
+  "октябрь=October":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: October (the tenth month)
+    usage:
+      - ru: В октябре́ па́дают ли́стья.
+        en_gb: In October the leaves fall.
+      - ru: Октя́брь — золота́я о́сень.
+        en_gb: October is golden autumn.
+      - ru: К октябрю́ дере́вья желте́ют.
+        en_gb: By October the trees turn yellow.
+    declension:
+      sg_nom: октя́брь
+      sg_gen: октября́
+      sg_dat: октябрю́
+      sg_acc: октя́брь
+      sg_ins: октябрём
+      sg_pre: октябре́
+      pl_nom: октябри́
+      pl_gen: октябре́й
+      pl_dat: октября́м
+      pl_acc: октябри́
+      pl_ins: октября́ми
+      pl_pre: октября́х
+  "Пасха=Easter":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - holiday
+    en_gb:
+      standard: Easter (the Orthodox spring festival)
+    usage:
+      - ru: На Па́сху пеку́т кули́ч.
+        en_gb: At Easter people bake a kulich.
+      - ru: Па́сха — ва́жный весе́нний пра́здник.
+        en_gb: Easter is an important spring holiday.
+      - ru: Перед Па́схой красят я́йца.
+        en_gb: Before Easter people dye eggs.
+    declension:
+      sg_nom: Па́сха
+      sg_gen: Па́схи
+      sg_dat: Па́схе
+      sg_acc: Па́сху
+      sg_ins: Па́схой
+      sg_pre: Па́схе
+  "понедельник=Monday":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: Monday (the first day of the week)
+    usage:
+      - ru: В понеде́льник я иду́ на рабо́ту.
+        en_gb: On Monday I go to work.
+      - ru: Понеде́льник — тяжёлый день.
+        en_gb: Monday is a hard day.
+      - ru: По понеде́льникам у нас собра́ние.
+        en_gb: On Mondays we have a meeting.
+    declension:
+      sg_nom: понеде́льник
+      sg_gen: понеде́льника
+      sg_dat: понеде́льнику
+      sg_acc: понеде́льник
+      sg_ins: понеде́льником
+      sg_pre: понеде́льнике
+      pl_nom: понеде́льники
+      pl_gen: понеде́льников
+      pl_dat: понеде́льникам
+      pl_acc: понеде́льники
+      pl_ins: понеде́льниками
+      pl_pre: понеде́льниках
+  "пятница=Friday":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: Friday (the fifth day of the week)
+    usage:
+      - ru: В пя́тницу мы идём в кино́.
+        en_gb: On Friday we are going to the cinema.
+      - ru: Пя́тница — коне́ц рабо́чей неде́ли.
+        en_gb: Friday is the end of the working week.
+      - ru: По пя́тницам мы у́жинаем вме́сте.
+        en_gb: On Fridays we have dinner together.
+    declension:
+      sg_nom: пя́тница
+      sg_gen: пя́тницы
+      sg_dat: пя́тнице
+      sg_acc: пя́тницу
+      sg_ins: пя́тницей
+      sg_pre: пя́тнице
+      pl_nom: пя́тницы
+      pl_gen: пя́тниц
+      pl_dat: пя́тницам
+      pl_acc: пя́тницы
+      pl_ins: пя́тницами
+      pl_pre: пя́тницах
+  "Рождество=Christmas":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - holiday
+    en_gb:
+      standard: Christmas (celebrated on 7 January in Russia)
+    usage:
+      - ru: На Рождество́ вся семья́ собира́ется вме́сте.
+        en_gb: At Christmas the whole family gathers together.
+      - ru: Рождество́ — све́тлый пра́здник.
+        en_gb: Christmas is a bright holiday.
+      - ru: Перед Рождество́м все убира́ют дом.
+        en_gb: Before Christmas everyone tidies the house.
+    declension:
+      sg_nom: Рождество́
+      sg_gen: Рождества́
+      sg_dat: Рождеству́
+      sg_acc: Рождество́
+      sg_ins: Рождество́м
+      sg_pre: Рождестве́
+  "сентябрь=September":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: September (the ninth month)
+    usage:
+      - ru: В сентябре́ начина́ется уче́бный год.
+        en_gb: The school year begins in September.
+      - ru: Сентя́брь — пе́рвый ме́сяц о́сени.
+        en_gb: September is the first month of autumn.
+      - ru: По́сле сентября́ стано́вится прохла́днее.
+        en_gb: After September it gets cooler.
+    declension:
+      sg_nom: сентя́брь
+      sg_gen: сентября́
+      sg_dat: сентябрю́
+      sg_acc: сентя́брь
+      sg_ins: сентябрём
+      sg_pre: сентябре́
+      pl_nom: сентябри́
+      pl_gen: сентябре́й
+      pl_dat: сентября́м
+      pl_acc: сентябри́
+      pl_ins: сентября́ми
+      pl_pre: сентября́х
+  "среда=Wednesday":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: Wednesday (the third day of the week)
+    usage:
+      - ru: По среда́м я хожу́ в бассе́йн.
+        en_gb: On Wednesdays I go to the swimming pool.
+      - ru: Среда́ — середи́на неде́ли.
+        en_gb: Wednesday is the middle of the week.
+      - ru: В сре́ду я был за́нят.
+        en_gb: On Wednesday I was busy.
+    declension:
+      sg_nom: среда́
+      sg_gen: среды́
+      sg_dat: среде́
+      sg_acc: сре́ду
+      sg_ins: средо́й
+      sg_pre: среде́
+      pl_nom: сре́ды
+      pl_gen: сред
+      pl_dat: среда́м
+      pl_acc: сре́ды
+      pl_ins: среда́ми
+      pl_pre: среда́х
+  "суббота=Saturday":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: Saturday (the sixth day of the week)
+    usage:
+      - ru: В суббо́ту я отдыха́ю.
+        en_gb: On Saturday I rest.
+      - ru: Суббо́та — выходно́й день.
+        en_gb: Saturday is a day off.
+      - ru: По суббо́там я хожу́ на ры́нок.
+        en_gb: On Saturdays I go to the market.
+    declension:
+      sg_nom: суббо́та
+      sg_gen: суббо́ты
+      sg_dat: суббо́те
+      sg_acc: суббо́ту
+      sg_ins: суббо́той
+      sg_pre: суббо́те
+      pl_nom: суббо́ты
+      pl_gen: суббо́т
+      pl_dat: суббо́там
+      pl_acc: суббо́ты
+      pl_ins: суббо́тами
+      pl_pre: суббо́тах
+  "февраль=February":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: February (the second month)
+    usage:
+      - ru: Февра́ль — са́мый коро́ткий ме́сяц.
+        en_gb: February is the shortest month.
+      - ru: В феврале́ ещё хо́лодно.
+        en_gb: In February it is still cold.
+      - ru: К февралю́ всё бу́дет гото́во.
+        en_gb: Everything will be ready by February.
+    declension:
+      sg_nom: февра́ль
+      sg_gen: февраля́
+      sg_dat: февралю́
+      sg_acc: февра́ль
+      sg_ins: февралём
+      sg_pre: феврале́
+      pl_nom: феврали́
+      pl_gen: февра́лей
+      pl_dat: февраля́м
+      pl_acc: феврали́
+      pl_ins: февраля́ми
+      pl_pre: февраля́х
+  "четверг=Thursday":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: Thursday (the fourth day of the week)
+    usage:
+      - ru: В четве́рг мы встре́тимся.
+        en_gb: On Thursday we will meet.
+      - ru: Четве́рг — мой люби́мый день.
+        en_gb: Thursday is my favourite day.
+      - ru: По четверга́м рабо́тает ры́нок.
+        en_gb: The market is open on Thursdays.
+    declension:
+      sg_nom: четве́рг
+      sg_gen: четверга́
+      sg_dat: четвергу́
+      sg_acc: четве́рг
+      sg_ins: четверго́м
+      sg_pre: четверге́
+      pl_nom: четверги́
+      pl_gen: четверго́в
+      pl_dat: четверга́м
+      pl_acc: четверги́
+      pl_ins: четверга́ми
+      pl_pre: четверга́х
   "юбилей=anniversary":
     cefr_level: B1
     gender: m
@@ -620,6 +686,10 @@ words:
     usage:
       - ru: Мы отмеча́ем юбиле́й ба́бушки.
         en_gb: We are celebrating grandmother's jubilee.
+      - ru: Ско́ро у шко́лы большо́й юбиле́й.
+        en_gb: The school will soon have a big anniversary.
+      - ru: Го́сти пришли́ на юбиле́е де́душки.
+        en_gb: The guests came to grandfather's jubilee.
     declension:
       sg_nom: юбиле́й
       sg_gen: юбиле́я
@@ -633,3 +703,32 @@ words:
       pl_acc: юбиле́и
       pl_ins: юбиле́ями
       pl_pre: юбиле́ях
+  "январь=January":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the calendar
+    en_gb:
+      standard: January (the first month)
+    usage:
+      - ru: В январе́ ча́сто идёт снег.
+        en_gb: In January it often snows.
+      - ru: Янва́рь — са́мый холо́дный ме́сяц.
+        en_gb: January is the coldest month.
+      - ru: По́сле января́ наступа́ет февра́ль.
+        en_gb: After January comes February.
+    declension:
+      sg_nom: янва́рь
+      sg_gen: января́
+      sg_dat: январю́
+      sg_acc: янва́рь
+      sg_ins: январём
+      sg_pre: январе́
+      pl_nom: январи́
+      pl_gen: январе́й
+      pl_dat: января́м
+      pl_acc: январи́
+      pl_ins: января́ми
+      pl_pre: января́х

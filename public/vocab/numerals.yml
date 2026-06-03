@@ -39,45 +39,86 @@ meta:
     ins: instrumental
     pre: prepositional
 words:
-  # ── Cardinal numbers ───────────────────────────────────────────────
-  "ноль=zero":
+  "восемнадцать=eighteen":
     cefr_level: A1
     type: cardinal
-    value: 0
-    accented: ноль
+    value: 18
+    accented: восемна́дцать
     en_gb:
-      standard: zero (nought)
-      alt:
-        - nought
+      standard: eighteen
     usage:
-      - ru: Температу́ра — ноль гра́дусов.
-        en_gb: The temperature is zero degrees.
+      - ru: Ему́ восемна́дцать лет.
+        en_gb: He is eighteen years old.
+      - ru: В авто́бусе восемна́дцать мест.
+        en_gb: There are eighteen seats on the bus.
+      - ru: Голосова́ть мо́жно с восемна́дцати лет.
+        en_gb: One can vote from the age of eighteen.
     forms:
-      nom: ноль
-      gen: ноля́
-      dat: нолю́
-      acc: ноль
-      ins: нолём
-      pre: ноле́
-  "один=one":
+      nom: восемна́дцать
+      gen: восемна́дцати
+      dat: восемна́дцати
+      acc: восемна́дцать
+      ins: восемна́дцатью
+      pre: восемна́дцати
+  "восемь=eight":
     cefr_level: A1
     type: cardinal
-    value: 1
-    accented: оди́н
+    value: 8
+    accented: во́семь
     en_gb:
-      standard: one (feminine "одна", neuter "одно", plural "одни")
+      standard: eight
     usage:
-      - ru: У меня́ оди́н брат.
-        en_gb: I have one brother.
-      - ru: У меня́ нет ни одного́ рубля́.
-        en_gb: I do not have a single rouble.
+      - ru: Магази́н рабо́тает во́семь часо́в.
+        en_gb: The shop is open for eight hours.
+      - ru: У меня́ во́семь рубле́й.
+        en_gb: I have eight roubles.
+      - ru: Мы шли к восьми́ часа́м.
+        en_gb: We were heading there for eight o'clock.
     forms:
-      nom: { m: оди́н, f: одна́, n: одно́, pl: одни́ }
-      gen: { m: одного́, f: одно́й, n: одного́, pl: одни́х }
-      dat: { m: одному́, f: одно́й, n: одному́, pl: одни́м }
-      acc: { m: оди́н, f: одну́, n: одно́, pl: одни́ }
-      ins: { m: одни́м, f: одно́й, n: одни́м, pl: одни́ми }
-      pre: { m: одно́м, f: одно́й, n: одно́м, pl: одни́х }
+      nom: во́семь
+      gen: восьми́
+      dat: восьми́
+      acc: во́семь
+      ins: восемью́
+      pre: восьми́
+  "восьмой=eighth":
+    cefr_level: A2
+    type: ordinal
+    value: 8
+    accented: восьмо́й
+    en_gb:
+      standard: eighth
+    usage:
+      - ru: Восьмо́е ма́рта — большо́й пра́здник.
+        en_gb: The eighth of March is a big holiday.
+      - ru: Он живёт на восьмо́м этаже́.
+        en_gb: He lives on the eighth floor.
+      - ru: Э́то восьма́я неде́ля ку́рса.
+        en_gb: This is the eighth week of the course.
+    forms:
+      m: восьмо́й
+      f: восьма́я
+      n: восьмо́е
+      pl: восьмы́е
+  "второй=second":
+    cefr_level: A1
+    type: ordinal
+    value: 2
+    accented: второ́й
+    en_gb:
+      standard: second
+    usage:
+      - ru: Он живёт на второ́м этаже́.
+        en_gb: He lives on the second floor.
+      - ru: Э́то его́ втора́я попы́тка.
+        en_gb: This is his second attempt.
+      - ru: Возьми́ второ́е я́блоко.
+        en_gb: Take the second apple.
+    forms:
+      m: второ́й
+      f: втора́я
+      n: второ́е
+      pl: вторы́е
   "два=two":
     cefr_level: A1
     type: cardinal
@@ -90,6 +131,8 @@ words:
         en_gb: She has two sons.
       - ru: Мы говори́ли о двух кни́гах.
         en_gb: We talked about two books.
+      - ru: Дай мне два я́блока.
+        en_gb: Give me two apples.
     forms:
       nom: два
       gen: двух
@@ -97,161 +140,144 @@ words:
       acc: два
       ins: двумя́
       pre: двух
-  "три=three":
+  "двадцатый=twentieth":
+    cefr_level: B1
+    type: ordinal
+    value: 20
+    accented: двадца́тый
+    en_gb:
+      standard: twentieth
+    usage:
+      - ru: Э́то бы́ло в двадца́том ве́ке.
+        en_gb: That was in the twentieth century.
+      - ru: Он живёт в двадца́той кварти́ре.
+        en_gb: He lives in flat number twenty.
+      - ru: Сего́дня двадца́тое ию́ля.
+        en_gb: Today is the twentieth of July.
+    forms:
+      m: двадца́тый
+      f: двадца́тая
+      n: двадца́тое
+      pl: двадца́тые
+  "двадцать=twenty":
     cefr_level: A1
     type: cardinal
-    value: 3
-    accented: три
+    value: 20
+    accented: два́дцать
     en_gb:
-      standard: three
+      standard: twenty
     usage:
-      - ru: В ко́мнате три окна́.
-        en_gb: There are three windows in the room.
+      - ru: В гру́ппе два́дцать студе́нтов.
+        en_gb: There are twenty students in the group.
+      - ru: Мне два́дцать лет.
+        en_gb: I am twenty years old.
+      - ru: Кни́га о двадцати́ года́х жи́зни.
+        en_gb: A book about twenty years of life.
     forms:
-      nom: три
-      gen: трёх
-      dat: трём
-      acc: три
-      ins: тремя́
-      pre: трёх
-  "четыре=four":
-    cefr_level: A1
-    type: cardinal
-    value: 4
-    accented: четы́ре
+      nom: два́дцать
+      gen: двадцати́
+      dat: двадцати́
+      acc: два́дцать
+      ins: двадцатью́
+      pre: двадцати́
+  "две тысячи=2000":
+    cefr_level: B1
+    type: year
+    value: 2000
+    accented: две ты́сячи
     en_gb:
-      standard: four
+      standard: the year two thousand
     usage:
-      - ru: Я зна́ю четы́ре языка́.
-        en_gb: I know four languages.
-    forms:
-      nom: четы́ре
-      gen: четырёх
-      dat: четырём
-      acc: четы́ре
-      ins: четырьмя́
-      pre: четырёх
-  "пять=five":
-    cefr_level: A1
-    type: cardinal
-    value: 5
-    accented: пять
+      - ru: Э́то случи́лось в двухты́сячном году́.
+        en_gb: It happened in the year two thousand.
+      - ru: Мы встре́тили две ты́сячи с ра́достью.
+        en_gb: We greeted the year two thousand with joy.
+      - ru: Э́то бы́ло до двухты́сячного го́да.
+        en_gb: This was before the year two thousand.
+  "две тысячи восемь=2008":
+    cefr_level: B1
+    type: year
+    value: 2008
+    accented: две ты́сячи во́семь
     en_gb:
-      standard: five
+      standard: two thousand and eight (the year 2008)
     usage:
-      - ru: У меня́ пять рубле́й.
-        en_gb: I have five roubles.
-      - ru: К пяти́ часа́м я бу́ду до́ма.
-        en_gb: By five o'clock I will be at home.
-    forms:
-      nom: пять
-      gen: пяти́
-      dat: пяти́
-      acc: пять
-      ins: пятью́
-      pre: пяти́
-  "шесть=six":
-    cefr_level: A1
-    type: cardinal
-    value: 6
-    accented: шесть
+      - ru: Кри́зис начался́ в две ты́сячи восьмо́м году́.
+        en_gb: The crisis began in two thousand and eight.
+      - ru: Э́то случи́лось в две ты́сячи восьмо́м году́.
+        en_gb: This happened in two thousand and eight.
+      - ru: Ле́то две ты́сячи во́семь бы́ло дождли́вым.
+        en_gb: The summer of two thousand and eight was rainy.
+  "две тысячи двадцать=2020":
+    cefr_level: B1
+    type: year
+    value: 2020
+    accented: две ты́сячи два́дцать
     en_gb:
-      standard: six
+      standard: twenty twenty (the year 2020)
     usage:
-      - ru: Сейча́с шесть часо́в.
-        en_gb: It is six o'clock now.
-    forms:
-      nom: шесть
-      gen: шести́
-      dat: шести́
-      acc: шесть
-      ins: шестью́
-      pre: шести́
-  "семь=seven":
-    cefr_level: A1
-    type: cardinal
-    value: 7
-    accented: семь
+      - ru: Пандеми́я начала́сь в две ты́сячи двадца́том году́.
+        en_gb: The pandemic began in twenty twenty.
+      - ru: Мно́гое измени́лось в две ты́сячи двадца́том году́.
+        en_gb: A lot changed in twenty twenty.
+      - ru: Весна́ две ты́сячи два́дцать была́ необы́чной.
+        en_gb: The spring of twenty twenty was unusual.
+  "две тысячи двадцать пять=2025":
+    cefr_level: B1
+    type: year
+    value: 2025
+    accented: две ты́сячи два́дцать пять
     en_gb:
-      standard: seven
+      standard: twenty twenty-five (the year 2025)
     usage:
-      - ru: В неде́ле семь дней.
-        en_gb: There are seven days in a week.
-    forms:
-      nom: семь
-      gen: семи́
-      dat: семи́
-      acc: семь
-      ins: семью́
-      pre: семи́
-  "восемь=eight":
-    cefr_level: A1
-    type: cardinal
-    value: 8
-    accented: во́семь
+      - ru: Сейча́с две ты́сячи два́дцать пя́тый год.
+        en_gb: It is now twenty twenty-five.
+      - ru: Э́то произошло́ в две ты́сячи два́дцать пя́том году́.
+        en_gb: This happened in twenty twenty-five.
+      - ru: Ле́то две ты́сячи два́дцать пять бу́дет жа́рким.
+        en_gb: The summer of twenty twenty-five will be hot.
+  "две тысячи двадцать четыре=2024":
+    cefr_level: B1
+    type: year
+    value: 2024
+    accented: две ты́сячи два́дцать четы́ре
     en_gb:
-      standard: eight
+      standard: twenty twenty-four (the year 2024)
     usage:
-      - ru: Магази́н рабо́тает во́семь часо́в.
-        en_gb: The shop is open for eight hours.
-    forms:
-      nom: во́семь
-      gen: восьми́
-      dat: восьми́
-      acc: во́семь
-      ins: восемью́
-      pre: восьми́
-  "девять=nine":
-    cefr_level: A1
-    type: cardinal
-    value: 9
-    accented: де́вять
+      - ru: Мы встре́тились в две ты́сячи два́дцать четвёртом году́.
+        en_gb: We met in twenty twenty-four.
+      - ru: Э́то случи́лось в две ты́сячи два́дцать четвёртом году́.
+        en_gb: This happened in twenty twenty-four.
+      - ru: Зима́ две ты́сячи два́дцать четы́ре была́ сне́жной.
+        en_gb: The winter of twenty twenty-four was snowy.
+  "две тысячи четырнадцать=2014":
+    cefr_level: B1
+    type: year
+    value: 2014
+    accented: две ты́сячи четы́рнадцать
     en_gb:
-      standard: nine
+      standard: two thousand and fourteen (the year 2014)
     usage:
-      - ru: Ему́ де́вять лет.
-        en_gb: He is nine years old.
-    forms:
-      nom: де́вять
-      gen: девяти́
-      dat: девяти́
-      acc: де́вять
-      ins: девятью́
-      pre: девяти́
-  "десять=ten":
-    cefr_level: A1
-    type: cardinal
-    value: 10
-    accented: де́сять
+      - ru: Олимпиа́да прошла́ в две ты́сячи четы́рнадцатом году́.
+        en_gb: The Olympics took place in two thousand and fourteen.
+      - ru: Э́то бы́ло в две ты́сячи четы́рнадцатом году́.
+        en_gb: This was in two thousand and fourteen.
+      - ru: Зима́ две ты́сячи четы́рнадцать была́ тёплой.
+        en_gb: The winter of two thousand and fourteen was warm.
+  "две тысячи шестнадцать=2016":
+    cefr_level: B1
+    type: year
+    value: 2016
+    accented: две ты́сячи шестна́дцать
     en_gb:
-      standard: ten
+      standard: twenty sixteen (the year 2016)
     usage:
-      - ru: Да́йте мне де́сять рубле́й.
-        en_gb: Give me ten roubles.
-    forms:
-      nom: де́сять
-      gen: десяти́
-      dat: десяти́
-      acc: де́сять
-      ins: десятью́
-      pre: десяти́
-  "одиннадцать=eleven":
-    cefr_level: A1
-    type: cardinal
-    value: 11
-    accented: оди́ннадцать
-    en_gb:
-      standard: eleven
-    usage:
-      - ru: В кла́ссе оди́ннадцать ученико́в.
-        en_gb: There are eleven pupils in the class.
-    forms:
-      nom: оди́ннадцать
-      gen: оди́ннадцати
-      dat: оди́ннадцати
-      acc: оди́ннадцать
-      ins: оди́ннадцатью
-      pre: оди́ннадцати
+      - ru: Э́то бы́ло в две ты́сячи шестна́дцатом году́.
+        en_gb: That was in twenty sixteen.
+      - ru: Я зако́нчил шко́лу в две ты́сячи шестна́дцатом году́.
+        en_gb: I finished school in twenty sixteen.
+      - ru: Ле́то две ты́сячи шестна́дцать бы́ло жа́рким.
+        en_gb: The summer of twenty sixteen was hot.
   "двенадцать=twelve":
     cefr_level: A1
     type: cardinal
@@ -262,6 +288,10 @@ words:
     usage:
       - ru: В году́ двена́дцать ме́сяцев.
         en_gb: There are twelve months in a year.
+      - ru: Часы́ пока́зывают двена́дцать.
+        en_gb: The clock shows twelve.
+      - ru: Уро́к начался́ в двена́дцать часо́в.
+        en_gb: The lesson started at twelve o'clock.
     forms:
       nom: двена́дцать
       gen: двена́дцати
@@ -269,96 +299,41 @@ words:
       acc: двена́дцать
       ins: двена́дцатью
       pre: двена́дцати
-  "тринадцать=thirteen":
-    cefr_level: A1
+  "двести=two hundred":
+    cefr_level: B1
     type: cardinal
-    value: 13
-    accented: трина́дцать
+    value: 200
+    accented: две́сти
     en_gb:
-      standard: thirteen
-    forms:
-      nom: трина́дцать
-      gen: трина́дцати
-      dat: трина́дцати
-      acc: трина́дцать
-      ins: трина́дцатью
-      pre: трина́дцати
-  "четырнадцать=fourteen":
-    cefr_level: A1
-    type: cardinal
-    value: 14
-    accented: четы́рнадцать
-    en_gb:
-      standard: fourteen
-    forms:
-      nom: четы́рнадцать
-      gen: четы́рнадцати
-      dat: четы́рнадцати
-      acc: четы́рнадцать
-      ins: четы́рнадцатью
-      pre: четы́рнадцати
-  "пятнадцать=fifteen":
-    cefr_level: A1
-    type: cardinal
-    value: 15
-    accented: пятна́дцать
-    en_gb:
-      standard: fifteen
+      standard: two hundred (both halves of the word decline)
     usage:
-      - ru: Уро́к дли́тся пятна́дцать мину́т.
-        en_gb: The lesson lasts fifteen minutes.
+      - ru: Две́сти лет наза́д здесь был лес.
+        en_gb: Two hundred years ago there was a forest here.
+      - ru: Биле́т сто́ит две́сти рубле́й.
+        en_gb: The ticket costs two hundred roubles.
+      - ru: В зда́нии о́коло двухсо́т ко́мнат.
+        en_gb: There are about two hundred rooms in the building.
     forms:
-      nom: пятна́дцать
-      gen: пятна́дцати
-      dat: пятна́дцати
-      acc: пятна́дцать
-      ins: пятна́дцатью
-      pre: пятна́дцати
-  "шестнадцать=sixteen":
-    cefr_level: A1
-    type: cardinal
-    value: 16
-    accented: шестна́дцать
+      nom: две́сти
+      gen: двухсо́т
+      dat: двумста́м
+      acc: две́сти
+      ins: двумяста́ми
+      pre: двухста́х
+  "двое=two together":
+    cefr_level: B1
+    type: collective
+    value: 2
+    accented: дво́е
     en_gb:
-      standard: sixteen
-    forms:
-      nom: шестна́дцать
-      gen: шестна́дцати
-      dat: шестна́дцати
-      acc: шестна́дцать
-      ins: шестна́дцатью
-      pre: шестна́дцати
-  "семнадцать=seventeen":
-    cefr_level: A1
-    type: cardinal
-    value: 17
-    accented: семна́дцать
-    en_gb:
-      standard: seventeen
-    forms:
-      nom: семна́дцать
-      gen: семна́дцати
-      dat: семна́дцати
-      acc: семна́дцать
-      ins: семна́дцатью
-      pre: семна́дцати
-  "восемнадцать=eighteen":
-    cefr_level: A1
-    type: cardinal
-    value: 18
-    accented: восемна́дцать
-    en_gb:
-      standard: eighteen
+      standard: two (a group of two, especially people)
     usage:
-      - ru: Ему́ восемна́дцать лет.
-        en_gb: He is eighteen years old.
-    forms:
-      nom: восемна́дцать
-      gen: восемна́дцати
-      dat: восемна́дцати
-      acc: восемна́дцать
-      ins: восемна́дцатью
-      pre: восемна́дцати
+      - ru: У них дво́е дете́й.
+        en_gb: They have two children.
+      - ru: Нас бы́ло дво́е.
+        en_gb: There were two of us.
+      - ru: В ко́мнате остаётся дво́е друзе́й.
+        en_gb: Two friends remain in the room.
   "девятнадцать=nineteen":
     cefr_level: A1
     type: cardinal
@@ -373,254 +348,13 @@ words:
       acc: девятна́дцать
       ins: девятна́дцатью
       pre: девятна́дцати
-  "двадцать=twenty":
-    cefr_level: A1
-    type: cardinal
-    value: 20
-    accented: два́дцать
-    en_gb:
-      standard: twenty
     usage:
-      - ru: В гру́ппе два́дцать студе́нтов.
-        en_gb: There are twenty students in the group.
-    forms:
-      nom: два́дцать
-      gen: двадцати́
-      dat: двадцати́
-      acc: два́дцать
-      ins: двадцатью́
-      pre: двадцати́
-  "тридцать=thirty":
-    cefr_level: A2
-    type: cardinal
-    value: 30
-    accented: три́дцать
-    en_gb:
-      standard: thirty
-    usage:
-      - ru: В ме́сяце три́дцать дней.
-        en_gb: There are thirty days in the month.
-    forms:
-      nom: три́дцать
-      gen: тридцати́
-      dat: тридцати́
-      acc: три́дцать
-      ins: тридцатью́
-      pre: тридцати́
-  "сорок=forty":
-    cefr_level: A2
-    type: cardinal
-    value: 40
-    accented: со́рок
-    en_gb:
-      standard: forty
-    usage:
-      - ru: Ему́ со́рок лет.
-        en_gb: He is forty years old.
-    forms:
-      nom: со́рок
-      gen: сорока́
-      dat: сорока́
-      acc: со́рок
-      ins: сорока́
-      pre: сорока́
-  "пятьдесят=fifty":
-    cefr_level: A2
-    type: cardinal
-    value: 50
-    accented: пятьдеся́т
-    en_gb:
-      standard: fifty (both halves of the word decline)
-    usage:
-      - ru: Биле́т сто́ит пятьдеся́т рубле́й.
-        en_gb: The ticket costs fifty roubles.
-    forms:
-      nom: пятьдеся́т
-      gen: пяти́десяти
-      dat: пяти́десяти
-      acc: пятьдеся́т
-      ins: пятью́десятью
-      pre: пяти́десяти
-  "сто=hundred":
-    cefr_level: A2
-    type: cardinal
-    value: 100
-    accented: сто
-    en_gb:
-      standard: a hundred
-    usage:
-      - ru: У меня́ сто рубле́й.
-        en_gb: I have a hundred roubles.
-    forms:
-      nom: сто
-      gen: ста
-      dat: ста
-      acc: сто
-      ins: ста
-      pre: ста
-  "двести=two hundred":
-    cefr_level: B1
-    type: cardinal
-    value: 200
-    accented: две́сти
-    en_gb:
-      standard: two hundred (both halves of the word decline)
-    usage:
-      - ru: Две́сти лет наза́д здесь был лес.
-        en_gb: Two hundred years ago there was a forest here.
-    forms:
-      nom: две́сти
-      gen: двухсо́т
-      dat: двумста́м
-      acc: две́сти
-      ins: двумяста́ми
-      pre: двухста́х
-  "тысяча=thousand":
-    cefr_level: A2
-    type: cardinal
-    value: 1000
-    accented: ты́сяча
-    en_gb:
-      standard: a thousand (declines like a feminine noun)
-    usage:
-      - ru: В го́роде ты́сяча жи́телей.
-        en_gb: There are a thousand inhabitants in the town.
-    forms:
-      nom: ты́сяча
-      gen: ты́сячи
-      dat: ты́сяче
-      acc: ты́сячу
-      ins: ты́сячей
-      pre: ты́сяче
-  "миллион=million":
-    cefr_level: B1
-    type: cardinal
-    value: 1000000
-    accented: миллио́н
-    en_gb:
-      standard: a million (declines like a masculine noun)
-    usage:
-      - ru: Э́та карти́на сто́ит миллио́н рубле́й.
-        en_gb: This painting costs a million roubles.
-    forms:
-      nom: миллио́н
-      gen: миллио́на
-      dat: миллио́ну
-      acc: миллио́н
-      ins: миллио́ном
-      pre: миллио́не
-  # ── Ordinal numbers (decline like adjectives) ──────────────────────
-  "первый=first":
-    cefr_level: A1
-    type: ordinal
-    value: 1
-    accented: пе́рвый
-    en_gb:
-      standard: first
-    usage:
-      - ru: Сего́дня пе́рвое ма́я.
-        en_gb: Today is the first of May.
-    forms:
-      m: пе́рвый
-      f: пе́рвая
-      n: пе́рвое
-      pl: пе́рвые
-  "второй=second":
-    cefr_level: A1
-    type: ordinal
-    value: 2
-    accented: второ́й
-    en_gb:
-      standard: second
-    usage:
-      - ru: Он живёт на второ́м этаже́.
-        en_gb: He lives on the second floor.
-    forms:
-      m: второ́й
-      f: втора́я
-      n: второ́е
-      pl: вторы́е
-  "третий=third":
-    cefr_level: A1
-    type: ordinal
-    value: 3
-    accented: тре́тий
-    en_gb:
-      standard: third
-    usage:
-      - ru: Э́то её тре́тий ребёнок.
-        en_gb: This is her third child.
-    forms:
-      m: тре́тий
-      f: тре́тья
-      n: тре́тье
-      pl: тре́тьи
-  "четвёртый=fourth":
-    cefr_level: A2
-    type: ordinal
-    value: 4
-    accented: четвёртый
-    en_gb:
-      standard: fourth
-    forms:
-      m: четвёртый
-      f: четвёртая
-      n: четвёртое
-      pl: четвёртые
-  "пятый=fifth":
-    cefr_level: A2
-    type: ordinal
-    value: 5
-    accented: пя́тый
-    en_gb:
-      standard: fifth
-    usage:
-      - ru: Мы у́чимся в пя́том кла́ссе.
-        en_gb: We are in the fifth grade.
-    forms:
-      m: пя́тый
-      f: пя́тая
-      n: пя́тое
-      pl: пя́тые
-  "шестой=sixth":
-    cefr_level: A2
-    type: ordinal
-    value: 6
-    accented: шесто́й
-    en_gb:
-      standard: sixth
-    forms:
-      m: шесто́й
-      f: шеста́я
-      n: шесто́е
-      pl: шесты́е
-  "седьмой=seventh":
-    cefr_level: A2
-    type: ordinal
-    value: 7
-    accented: седьмо́й
-    en_gb:
-      standard: seventh
-    forms:
-      m: седьмо́й
-      f: седьма́я
-      n: седьмо́е
-      pl: седьмы́е
-  "восьмой=eighth":
-    cefr_level: A2
-    type: ordinal
-    value: 8
-    accented: восьмо́й
-    en_gb:
-      standard: eighth
-    usage:
-      - ru: Восьмо́е ма́рта — большо́й пра́здник.
-        en_gb: The eighth of March is a big holiday.
-    forms:
-      m: восьмо́й
-      f: восьма́я
-      n: восьмо́е
-      pl: восьмы́е
+      - ru: Ему́ девятна́дцать лет.
+        en_gb: He is nineteen years old.
+      - ru: В кни́ге девятна́дцать стра́ниц.
+        en_gb: There are nineteen pages in the book.
+      - ru: Мы говори́ли о девятна́дцати студе́нтах.
+        en_gb: We talked about nineteen students.
   "девятый=ninth":
     cefr_level: A2
     type: ordinal
@@ -633,6 +367,48 @@ words:
       f: девя́тая
       n: девя́тое
       pl: девя́тые
+    usage:
+      - ru: Мы на девя́том этаже́.
+        en_gb: We are on the ninth floor.
+      - ru: Э́то девя́тая глава́.
+        en_gb: This is the ninth chapter.
+      - ru: Сего́дня девя́тое число́.
+        en_gb: Today is the ninth.
+  "девять=nine":
+    cefr_level: A1
+    type: cardinal
+    value: 9
+    accented: де́вять
+    en_gb:
+      standard: nine
+    usage:
+      - ru: Ему́ де́вять лет.
+        en_gb: He is nine years old.
+      - ru: В кла́ссе де́вять ученико́в.
+        en_gb: There are nine pupils in the class.
+      - ru: Магази́н закрыва́ется в де́вять.
+        en_gb: The shop closes at nine.
+    forms:
+      nom: де́вять
+      gen: девяти́
+      dat: девяти́
+      acc: де́вять
+      ins: девятью́
+      pre: девяти́
+  "десяток=ten of":
+    cefr_level: B1
+    type: quantity
+    value: 10
+    accented: деся́ток
+    en_gb:
+      standard: a ten (a batch of ten, e.g. of eggs)
+    usage:
+      - ru: Да́йте, пожа́луйста, деся́ток яи́ц.
+        en_gb: Please give me ten eggs.
+      - ru: Я купи́л деся́ток я́блок.
+        en_gb: I bought ten apples.
+      - ru: В корзи́не нет и деся́тка яи́ц.
+        en_gb: There aren't even ten eggs in the basket.
   "десятый=tenth":
     cefr_level: A2
     type: ordinal
@@ -643,26 +419,421 @@ words:
     usage:
       - ru: Он зако́нчил деся́тый класс.
         en_gb: He finished the tenth grade.
+      - ru: Сего́дня деся́тое ма́я.
+        en_gb: Today is the tenth of May.
+      - ru: Э́то деся́тая попы́тка.
+        en_gb: This is the tenth attempt.
     forms:
       m: деся́тый
       f: деся́тая
       n: деся́тое
       pl: деся́тые
-  "двадцатый=twentieth":
-    cefr_level: B1
-    type: ordinal
-    value: 20
-    accented: двадца́тый
+  "десять=ten":
+    cefr_level: A1
+    type: cardinal
+    value: 10
+    accented: де́сять
     en_gb:
-      standard: twentieth
+      standard: ten
     usage:
-      - ru: Э́то бы́ло в двадца́том ве́ке.
-        en_gb: That was in the twentieth century.
+      - ru: Да́йте мне де́сять рубле́й.
+        en_gb: Give me ten roubles.
+      - ru: У меня́ де́сять рубле́й.
+        en_gb: I have ten roubles.
+      - ru: Мы говори́ли о десяти́ кни́гах.
+        en_gb: We talked about ten books.
     forms:
-      m: двадца́тый
-      f: двадца́тая
-      n: двадца́тое
-      pl: двадца́тые
+      nom: де́сять
+      gen: десяти́
+      dat: десяти́
+      acc: де́сять
+      ins: десятью́
+      pre: десяти́
+  "дюжина=dozen":
+    cefr_level: B1
+    type: quantity
+    value: 12
+    accented: дю́жина
+    en_gb:
+      standard: a dozen (twelve of something)
+    usage:
+      - ru: Я купи́л дю́жину яи́ц.
+        en_gb: I bought a dozen eggs.
+      - ru: На столе́ лежи́т дю́жина роз.
+        en_gb: A dozen roses lie on the table.
+      - ru: У нас нет и дю́жины я́блок.
+        en_gb: We do not even have a dozen apples.
+  "миллион=million":
+    cefr_level: B1
+    type: cardinal
+    value: 1000000
+    accented: миллио́н
+    en_gb:
+      standard: a million (declines like a masculine noun)
+    usage:
+      - ru: Э́та карти́на сто́ит миллио́н рубле́й.
+        en_gb: This painting costs a million roubles.
+      - ru: Он мечта́ет о миллио́не.
+        en_gb: He dreams of a million.
+      - ru: В го́роде живёт о́коло миллио́на люде́й.
+        en_gb: About a million people live in the city.
+    forms:
+      nom: миллио́н
+      gen: миллио́на
+      dat: миллио́ну
+      acc: миллио́н
+      ins: миллио́ном
+      pre: миллио́не
+  # ── Ordinal numbers (decline like adjectives) ──────────────────────
+  "ноль=zero":
+    cefr_level: A1
+    type: cardinal
+    value: 0
+    accented: ноль
+    en_gb:
+      standard: zero (nought)
+      alt:
+        - nought
+    usage:
+      - ru: Температу́ра — ноль гра́дусов.
+        en_gb: The temperature is zero degrees.
+      - ru: От ноля́ до десяти́.
+        en_gb: From zero to ten.
+      - ru: Чи́сло равно́ нолю́.
+        en_gb: The number equals zero.
+    forms:
+      nom: ноль
+      gen: ноля́
+      dat: нолю́
+      acc: ноль
+      ins: нолём
+      pre: ноле́
+  "оба=both":
+    cefr_level: B1
+    type: collective
+    value: 2
+    accented: о́ба
+    en_gb:
+      standard: both (with masculine or neuter nouns; the feminine is "обе")
+    usage:
+      - ru: О́ба бра́та живу́т здесь.
+        en_gb: Both brothers live here.
+      - ru: О́ба окна́ откры́ты.
+        en_gb: Both windows are open.
+      - ru: Я зна́ю о́бо́их ма́льчиков.
+        en_gb: I know both boys.
+  "обе=both":
+    cefr_level: B1
+    type: collective
+    value: 2
+    accented: о́бе
+    en_gb:
+      standard: both (with feminine nouns)
+    usage:
+      - ru: О́бе сестры́ у́чатся в шко́ле.
+        en_gb: Both sisters study at school.
+      - ru: О́бе кни́ги интере́сные.
+        en_gb: Both books are interesting.
+      - ru: Я ви́жу о́беих де́вочек.
+        en_gb: I see both girls.
+  # ── Quantity words and non-standard units ──────────────────────────
+  "один=one":
+    cefr_level: A1
+    type: cardinal
+    value: 1
+    accented: оди́н
+    en_gb:
+      standard: one (feminine "одна", neuter "одно", plural "одни")
+    usage:
+      - ru: У меня́ оди́н брат.
+        en_gb: I have one brother.
+      - ru: У меня́ нет ни одного́ рубля́.
+        en_gb: I do not have a single rouble.
+      - ru: Оста́лась то́лько одна́ кни́га.
+        en_gb: Only one book is left.
+    forms:
+      nom: { m: оди́н, f: одна́, n: одно́, pl: одни́ }
+      gen: { m: одного́, f: одно́й, n: одного́, pl: одни́х }
+      dat: { m: одному́, f: одно́й, n: одному́, pl: одни́м }
+      acc: { m: оди́н, f: одну́, n: одно́, pl: одни́ }
+      ins: { m: одни́м, f: одно́й, n: одни́м, pl: одни́ми }
+      pre: { m: одно́м, f: одно́й, n: одно́м, pl: одни́х }
+  "одиннадцать=eleven":
+    cefr_level: A1
+    type: cardinal
+    value: 11
+    accented: оди́ннадцать
+    en_gb:
+      standard: eleven
+    usage:
+      - ru: В кла́ссе оди́ннадцать ученико́в.
+        en_gb: There are eleven pupils in the class.
+      - ru: Сейча́с оди́ннадцать часо́в.
+        en_gb: It is eleven o'clock now.
+      - ru: Ему́ оди́ннадцать лет.
+        en_gb: He is eleven years old.
+    forms:
+      nom: оди́ннадцать
+      gen: оди́ннадцати
+      dat: оди́ннадцати
+      acc: оди́ннадцать
+      ins: оди́ннадцатью
+      pre: оди́ннадцати
+  "пара=pair":
+    cefr_level: A2
+    type: quantity
+    value: 2
+    accented: па́ра
+    en_gb:
+      standard: a pair (two of something, or a couple)
+    usage:
+      - ru: Я купи́л па́ру боти́нок.
+        en_gb: I bought a pair of boots.
+      - ru: У меня́ но́вая па́ра ту́фель.
+        en_gb: I have a new pair of shoes.
+      - ru: Им ну́жно две па́ры носко́в.
+        en_gb: They need two pairs of socks.
+  "первый=first":
+    cefr_level: A1
+    type: ordinal
+    value: 1
+    accented: пе́рвый
+    en_gb:
+      standard: first
+    usage:
+      - ru: Сего́дня пе́рвое ма́я.
+        en_gb: Today is the first of May.
+      - ru: Я живу́ на пе́рвом этаже́.
+        en_gb: I live on the first floor.
+      - ru: Э́то моя́ пе́рвая кни́га.
+        en_gb: This is my first book.
+    forms:
+      m: пе́рвый
+      f: пе́рвая
+      n: пе́рвое
+      pl: пе́рвые
+  "полтора=one and a half":
+    cefr_level: B1
+    type: quantity
+    value: 1.5
+    accented: полтора́
+    en_gb:
+      standard: one and a half (the feminine is "полторы")
+    usage:
+      - ru: Я ждал полтора́ часа́.
+        en_gb: I waited for one and a half hours.
+      - ru: Я купи́л полтора́ килогра́мма я́блок.
+        en_gb: I bought one and a half kilograms of apples.
+      - ru: Доро́га заняла́ полторы́ неде́ли.
+        en_gb: The journey took a week and a half.
+  # ── Years (spelled out as cardinals) ───────────────────────────────
+  # In context the final word becomes an ordinal: "в … году́".
+  "пятеро=five together":
+    cefr_level: B2
+    type: collective
+    value: 5
+    accented: пя́теро
+    en_gb:
+      standard: five (a group of five, especially people)
+    usage:
+      - ru: Нас бы́ло пя́теро.
+        en_gb: There were five of us.
+      - ru: У них пя́теро дете́й.
+        en_gb: They have five children.
+      - ru: В ко́мнате сиде́ло пя́теро ребя́т.
+        en_gb: Five kids were sitting in the room.
+  "пятнадцать=fifteen":
+    cefr_level: A1
+    type: cardinal
+    value: 15
+    accented: пятна́дцать
+    en_gb:
+      standard: fifteen
+    usage:
+      - ru: Уро́к дли́тся пятна́дцать мину́т.
+        en_gb: The lesson lasts fifteen minutes.
+      - ru: Сейча́с пятна́дцать мину́т тре́тьего.
+        en_gb: It is a quarter past two now.
+      - ru: Мы говори́ли о пятна́дцати книгах.
+        en_gb: We talked about fifteen books.
+    forms:
+      nom: пятна́дцать
+      gen: пятна́дцати
+      dat: пятна́дцати
+      acc: пятна́дцать
+      ins: пятна́дцатью
+      pre: пятна́дцати
+  "пятый=fifth":
+    cefr_level: A2
+    type: ordinal
+    value: 5
+    accented: пя́тый
+    en_gb:
+      standard: fifth
+    usage:
+      - ru: Мы у́чимся в пя́том кла́ссе.
+        en_gb: We are in the fifth grade.
+      - ru: Сего́дня пя́тое число́.
+        en_gb: Today is the fifth.
+      - ru: Э́то моя́ пя́тая попы́тка.
+        en_gb: This is my fifth attempt.
+    forms:
+      m: пя́тый
+      f: пя́тая
+      n: пя́тое
+      pl: пя́тые
+  "пять=five":
+    cefr_level: A1
+    type: cardinal
+    value: 5
+    accented: пять
+    en_gb:
+      standard: five
+    usage:
+      - ru: У меня́ пять рубле́й.
+        en_gb: I have five roubles.
+      - ru: К пяти́ часа́м я бу́ду до́ма.
+        en_gb: By five o'clock I will be at home.
+      - ru: Купи́ пять я́блок.
+        en_gb: Buy five apples.
+    forms:
+      nom: пять
+      gen: пяти́
+      dat: пяти́
+      acc: пять
+      ins: пятью́
+      pre: пяти́
+  "пятьдесят=fifty":
+    cefr_level: A2
+    type: cardinal
+    value: 50
+    accented: пятьдеся́т
+    en_gb:
+      standard: fifty (both halves of the word decline)
+    usage:
+      - ru: Биле́т сто́ит пятьдеся́т рубле́й.
+        en_gb: The ticket costs fifty roubles.
+      - ru: В кни́ге пятьдеся́т стра́ниц.
+        en_gb: There are fifty pages in the book.
+      - ru: К пяти́десяти года́м он стал учи́телем.
+        en_gb: By the age of fifty he became a teacher.
+    forms:
+      nom: пятьдеся́т
+      gen: пяти́десяти
+      dat: пяти́десяти
+      acc: пятьдеся́т
+      ins: пятью́десятью
+      pre: пяти́десяти
+  "седьмой=seventh":
+    cefr_level: A2
+    type: ordinal
+    value: 7
+    accented: седьмо́й
+    en_gb:
+      standard: seventh
+    forms:
+      m: седьмо́й
+      f: седьма́я
+      n: седьмо́е
+      pl: седьмы́е
+    usage:
+      - ru: Мы на седьмо́м этаже́.
+        en_gb: We are on the seventh floor.
+      - ru: Э́то седьма́я страни́ца.
+        en_gb: This is the seventh page.
+      - ru: Сего́дня седьмо́е число́.
+        en_gb: Today is the seventh.
+  "семеро=seven together":
+    cefr_level: B2
+    type: collective
+    value: 7
+    accented: се́меро
+    en_gb:
+      standard: seven (a group of seven, especially people)
+    usage:
+      - ru: Се́меро одного́ не ждут.
+        en_gb: Seven do not wait for one. (a proverb)
+      - ru: Нас бы́ло се́меро.
+        en_gb: There were seven of us.
+      - ru: У ма́тери бы́ло се́меро дете́й.
+        en_gb: The mother had seven children.
+  "семнадцать=seventeen":
+    cefr_level: A1
+    type: cardinal
+    value: 17
+    accented: семна́дцать
+    en_gb:
+      standard: seventeen
+    forms:
+      nom: семна́дцать
+      gen: семна́дцати
+      dat: семна́дцати
+      acc: семна́дцать
+      ins: семна́дцатью
+      pre: семна́дцати
+    usage:
+      - ru: Мне семна́дцать лет.
+        en_gb: I am seventeen years old.
+      - ru: По́езд ухо́дит в семна́дцать часо́в.
+        en_gb: The train leaves at seventeen hundred.
+      - ru: В спи́ске семна́дцать имён.
+        en_gb: There are seventeen names on the list.
+  "семь=seven":
+    cefr_level: A1
+    type: cardinal
+    value: 7
+    accented: семь
+    en_gb:
+      standard: seven
+    usage:
+      - ru: В неде́ле семь дней.
+        en_gb: There are seven days in a week.
+      - ru: Купи́ семь я́блок.
+        en_gb: Buy seven apples.
+      - ru: К семи́ часа́м я верну́сь.
+        en_gb: I will be back by seven o'clock.
+    forms:
+      nom: семь
+      gen: семи́
+      dat: семи́
+      acc: семь
+      ins: семью́
+      pre: семи́
+  "сорок=forty":
+    cefr_level: A2
+    type: cardinal
+    value: 40
+    accented: со́рок
+    en_gb:
+      standard: forty
+    usage:
+      - ru: Ему́ со́рок лет.
+        en_gb: He is forty years old.
+      - ru: В за́ле со́рок сту́льев.
+        en_gb: There are forty chairs in the hall.
+      - ru: Мы говори́ли о сорока́ ученика́х.
+        en_gb: We talked about forty pupils.
+    forms:
+      nom: со́рок
+      gen: сорока́
+      dat: сорока́
+      acc: со́рок
+      ins: сорока́
+      pre: сорока́
+  "сотня=hundred of":
+    cefr_level: B1
+    type: quantity
+    value: 100
+    accented: со́тня
+    en_gb:
+      standard: a hundred (an informal batch of about a hundred)
+    usage:
+      - ru: На пло́щади была́ со́тня люде́й.
+        en_gb: There were about a hundred people in the square.
+      - ru: Я заплати́л со́тню рубле́й.
+        en_gb: I paid a hundred roubles.
+      - ru: У него́ бо́льше со́тни книг.
+        en_gb: He has more than a hundred books.
   "сотый=hundredth":
     cefr_level: B1
     type: ordinal
@@ -675,6 +846,305 @@ words:
       f: со́тая
       n: со́тое
       pl: со́тые
+    usage:
+      - ru: Э́то его́ со́тый матч.
+        en_gb: This is his hundredth match.
+      - ru: Сего́дня со́тый день го́да.
+        en_gb: Today is the hundredth day of the year.
+      - ru: Мы отмеча́ем со́тую годовщи́ну.
+        en_gb: We are celebrating the hundredth anniversary.
+  "сто=hundred":
+    cefr_level: A2
+    type: cardinal
+    value: 100
+    accented: сто
+    en_gb:
+      standard: a hundred
+    usage:
+      - ru: У меня́ сто рубле́й.
+        en_gb: I have a hundred roubles.
+      - ru: До ста́нции сто ме́тров.
+        en_gb: It is a hundred metres to the station.
+      - ru: Кни́га о ста зна́менитых лю́дях.
+        en_gb: A book about a hundred famous people.
+    forms:
+      nom: сто
+      gen: ста
+      dat: ста
+      acc: сто
+      ins: ста
+      pre: ста
+  "третий=third":
+    cefr_level: A1
+    type: ordinal
+    value: 3
+    accented: тре́тий
+    en_gb:
+      standard: third
+    usage:
+      - ru: Э́то её тре́тий ребёнок.
+        en_gb: This is her third child.
+      - ru: Я живу́ на тре́тьем этаже́.
+        en_gb: I live on the third floor.
+      - ru: Э́то тре́тья у́лица напра́во.
+        en_gb: It is the third street on the right.
+    forms:
+      m: тре́тий
+      f: тре́тья
+      n: тре́тье
+      pl: тре́тьи
+  "три=three":
+    cefr_level: A1
+    type: cardinal
+    value: 3
+    accented: три
+    en_gb:
+      standard: three
+    usage:
+      - ru: В ко́мнате три окна́.
+        en_gb: There are three windows in the room.
+      - ru: У нас три соба́ки.
+        en_gb: We have three dogs.
+      - ru: Я подели́л торт на трёх друзе́й.
+        en_gb: I divided the cake among three friends.
+    forms:
+      nom: три
+      gen: трёх
+      dat: трём
+      acc: три
+      ins: тремя́
+      pre: трёх
+  "тридцать=thirty":
+    cefr_level: A2
+    type: cardinal
+    value: 30
+    accented: три́дцать
+    en_gb:
+      standard: thirty
+    usage:
+      - ru: В ме́сяце три́дцать дней.
+        en_gb: There are thirty days in the month.
+      - ru: Ему́ три́дцать лет.
+        en_gb: He is thirty years old.
+      - ru: Уро́к дли́тся три́дцать мину́т.
+        en_gb: The lesson lasts thirty minutes.
+    forms:
+      nom: три́дцать
+      gen: тридцати́
+      dat: тридцати́
+      acc: три́дцать
+      ins: тридцатью́
+      pre: тридцати́
+  "тринадцать=thirteen":
+    cefr_level: A1
+    type: cardinal
+    value: 13
+    accented: трина́дцать
+    en_gb:
+      standard: thirteen
+    forms:
+      nom: трина́дцать
+      gen: трина́дцати
+      dat: трина́дцати
+      acc: трина́дцать
+      ins: трина́дцатью
+      pre: трина́дцати
+    usage:
+      - ru: Ей трина́дцать лет.
+        en_gb: She is thirteen years old.
+      - ru: В кни́ге трина́дцать глав.
+        en_gb: There are thirteen chapters in the book.
+      - ru: Мы говори́ли о трина́дцати ученика́х.
+        en_gb: We talked about thirteen pupils.
+  "трое=three together":
+    cefr_level: B1
+    type: collective
+    value: 3
+    accented: тро́е
+    en_gb:
+      standard: three (a group of three, especially people)
+    usage:
+      - ru: В ко́мнате тро́е мужчи́н.
+        en_gb: There are three men in the room.
+      - ru: Нас бы́ло тро́е.
+        en_gb: There were three of us.
+      - ru: У сосе́дей тро́е дете́й.
+        en_gb: The neighbours have three children.
+  "тысяча=thousand":
+    cefr_level: A2
+    type: cardinal
+    value: 1000
+    accented: ты́сяча
+    en_gb:
+      standard: a thousand (declines like a feminine noun)
+    usage:
+      - ru: В го́роде ты́сяча жи́телей.
+        en_gb: There are a thousand inhabitants in the town.
+      - ru: Я заплати́л ты́сячу рубле́й.
+        en_gb: I paid a thousand roubles.
+      - ru: В кни́ге бо́льше ты́сячи слов.
+        en_gb: There are more than a thousand words in the book.
+    forms:
+      nom: ты́сяча
+      gen: ты́сячи
+      dat: ты́сяче
+      acc: ты́сячу
+      ins: ты́сячей
+      pre: ты́сяче
+  "тысяча восемьсот двенадцать=1812":
+    cefr_level: B2
+    type: year
+    value: 1812
+    accented: ты́сяча восемьсо́т двена́дцать
+    en_gb:
+      standard: eighteen twelve (the year 1812)
+    usage:
+      - ru: Война́ начала́сь в ты́сяча восемьсо́т двена́дцатом году́.
+        en_gb: The war began in eighteen twelve.
+      - ru: Война́ ты́сяча восемьсо́т двена́дцать была́ тяжёлой.
+        en_gb: The war of eighteen twelve was hard.
+      - ru: Э́то собы́тие отно́сится к ты́сяча восемьсо́т двена́дцать.
+        en_gb: This event belongs to eighteen twelve.
+  "тысяча восемьсот шестьдесят один=1861":
+    cefr_level: B2
+    type: year
+    value: 1861
+    accented: ты́сяча восемьсо́т шестьдеся́т оди́н
+    en_gb:
+      standard: eighteen sixty-one (the year 1861)
+    usage:
+      - ru: Крепостно́е пра́во отмени́ли в ты́сяча восемьсо́т шестьдеся́т пе́рвом году́.
+        en_gb: Serfdom was abolished in eighteen sixty-one.
+      - ru: Э́то произошло́ в ты́сяча восемьсо́т шестьдеся́т пе́рвом году́.
+        en_gb: This happened in eighteen sixty-one.
+      - ru: Рефо́рма ты́сяча восемьсо́т шестьдеся́т оди́н измени́ла страну́.
+        en_gb: The reform of eighteen sixty-one changed the country.
+  "тысяча девятьсот восемьдесят=1980":
+    cefr_level: B2
+    type: year
+    value: 1980
+    accented: ты́сяча девятьсо́т во́семьдесят
+    en_gb:
+      standard: nineteen eighty (the year 1980)
+    usage:
+      - ru: Олимпиа́да прошла́ в ты́сяча девятьсо́т восьмидеся́том году́.
+        en_gb: The Olympics took place in nineteen eighty.
+      - ru: Э́то бы́ло в ты́сяча девятьсо́т восьмидеся́том году́.
+        en_gb: This was in nineteen eighty.
+      - ru: Ле́то ты́сяча девятьсо́т во́семьдесят бы́ло жа́рким.
+        en_gb: The summer of nineteen eighty was hot.
+  "тысяча девятьсот девяносто девять=1999":
+    cefr_level: B1
+    type: year
+    value: 1999
+    accented: ты́сяча девятьсо́т девяно́сто де́вять
+    en_gb:
+      standard: nineteen ninety-nine (the year 1999)
+    usage:
+      - ru: Я роди́лся в ты́сяча девятьсо́т девяно́сто девя́том году́.
+        en_gb: I was born in nineteen ninety-nine.
+      - ru: Э́то случи́лось в ты́сяча девятьсо́т девяно́сто девя́том году́.
+        en_gb: This happened in nineteen ninety-nine.
+      - ru: Ле́то ты́сяча девятьсо́т девяно́сто де́вять бы́ло до́лгим.
+        en_gb: The summer of nineteen ninety-nine was long.
+  "тысяча девятьсот девяносто один=1991":
+    cefr_level: B2
+    type: year
+    value: 1991
+    accented: ты́сяча девятьсо́т девяно́сто оди́н
+    en_gb:
+      standard: nineteen ninety-one (the year 1991)
+    usage:
+      - ru: Сове́тский Сою́з распа́лся в ты́сяча девятьсо́т девяно́сто пе́рвом году́.
+        en_gb: The Soviet Union broke up in nineteen ninety-one.
+      - ru: Э́то произошло́ в ты́сяча девятьсо́т девяно́сто пе́рвом году́.
+        en_gb: This happened in nineteen ninety-one.
+      - ru: Зима́ ты́сяча девятьсо́т девяно́сто оди́н была́ тру́дной.
+        en_gb: The winter of nineteen ninety-one was hard.
+  "тысяча девятьсот пять=1905":
+    cefr_level: B2
+    type: year
+    value: 1905
+    accented: ты́сяча девятьсо́т пять
+    en_gb:
+      standard: nineteen oh five (the year 1905)
+    usage:
+      - ru: Револю́ция начала́сь в ты́сяча девятьсо́т пя́том году́.
+        en_gb: The revolution began in nineteen oh five.
+      - ru: Э́то бы́ло в ты́сяча девятьсо́т пя́том году́.
+        en_gb: This was in nineteen oh five.
+      - ru: Собы́тия ты́сяча девятьсо́т пять потрясли́ страну́.
+        en_gb: The events of nineteen oh five shook the country.
+  "тысяча девятьсот семнадцать=1917":
+    cefr_level: B2
+    type: year
+    value: 1917
+    accented: ты́сяча девятьсо́т семна́дцать
+    en_gb:
+      standard: nineteen seventeen (the year 1917)
+    usage:
+      - ru: Револю́ция произошла́ в ты́сяча девятьсо́т семна́дцатом году́.
+        en_gb: The revolution took place in nineteen seventeen.
+      - ru: Царь о́трёкся в ты́сяча девятьсо́т семна́дцатом году́.
+        en_gb: The tsar abdicated in nineteen seventeen.
+      - ru: Э́то собы́тие отно́сится к ты́сяча девятьсо́т семна́дцать.
+        en_gb: This event belongs to nineteen seventeen.
+  "тысяча девятьсот сорок один=1941":
+    cefr_level: B2
+    type: year
+    value: 1941
+    accented: ты́сяча девятьсо́т со́рок оди́н
+    en_gb:
+      standard: nineteen forty-one (the year 1941)
+    usage:
+      - ru: Война́ начала́сь в ты́сяча девятьсо́т со́рок пе́рвом году́.
+        en_gb: The war began in nineteen forty-one.
+      - ru: Враг напа́л в ты́сяча девятьсо́т со́рок пе́рвом году́.
+        en_gb: The enemy attacked in nineteen forty-one.
+      - ru: О́сень ты́сяча девятьсо́т со́рок оди́н была́ тру́дной.
+        en_gb: The autumn of nineteen forty-one was difficult.
+  "тысяча девятьсот сорок пять=1945":
+    cefr_level: B1
+    type: year
+    value: 1945
+    accented: ты́сяча девятьсо́т со́рок пять
+    en_gb:
+      standard: nineteen forty-five (the year 1945)
+    usage:
+      - ru: Война́ зако́нчилась в ты́сяча девятьсо́т со́рок пя́том году́.
+        en_gb: The war ended in nineteen forty-five.
+      - ru: Побе́да пришла́ в ты́сяча девятьсо́т со́рок пя́том году́.
+        en_gb: Victory came in nineteen forty-five.
+      - ru: Весна́ ты́сяча девятьсо́т со́рок пять запо́мнилась всем.
+        en_gb: The spring of nineteen forty-five was remembered by everyone.
+  "тысяча девятьсот четырнадцать=1914":
+    cefr_level: B2
+    type: year
+    value: 1914
+    accented: ты́сяча девятьсо́т четы́рнадцать
+    en_gb:
+      standard: nineteen fourteen (the year 1914)
+    usage:
+      - ru: Война́ начала́сь в ты́сяча девятьсо́т четы́рнадцатом году́.
+        en_gb: The war began in nineteen fourteen.
+      - ru: Э́то произошло́ в ты́сяча девятьсо́т четы́рнадцатом году́.
+        en_gb: This happened in nineteen fourteen.
+      - ru: Ле́то ты́сяча девятьсо́т четы́рнадцать бы́ло жа́рким.
+        en_gb: The summer of nineteen fourteen was hot.
+  "тысяча девятьсот шестьдесят один=1961":
+    cefr_level: B2
+    type: year
+    value: 1961
+    accented: ты́сяча девятьсо́т шестьдеся́т оди́н
+    en_gb:
+      standard: nineteen sixty-one (the year 1961)
+    usage:
+      - ru: Гага́рин полете́л в ко́смос в ты́сяча девятьсо́т шестьдеся́т пе́рвом году́.
+        en_gb: Gagarin flew into space in nineteen sixty-one.
+      - ru: Э́то случи́лось в ты́сяча девятьсо́т шестьдеся́т пе́рвом году́.
+        en_gb: This happened in nineteen sixty-one.
+      - ru: Ле́то ты́сяча девятьсо́т шестьдеся́т оди́н бы́ло ра́достным.
+        en_gb: The summer of nineteen sixty-one was joyful.
   "тысячный=thousandth":
     cefr_level: B1
     type: ordinal
@@ -688,26 +1158,13 @@ words:
       n: ты́сячное
       pl: ты́сячные
   # ── Collective numbers (groups) ────────────────────────────────────
-  "двое=two together":
-    cefr_level: B1
-    type: collective
-    value: 2
-    accented: дво́е
-    en_gb:
-      standard: two (a group of two, especially people)
     usage:
-      - ru: У них дво́е дете́й.
-        en_gb: They have two children.
-  "трое=three together":
-    cefr_level: B1
-    type: collective
-    value: 3
-    accented: тро́е
-    en_gb:
-      standard: three (a group of three, especially people)
-    usage:
-      - ru: В ко́мнате тро́е мужчи́н.
-        en_gb: There are three men in the room.
+      - ru: Э́то ты́сячный покупа́тель.
+        en_gb: This is the thousandth customer.
+      - ru: Магази́н прода́л ты́сячную кни́гу.
+        en_gb: The shop sold its thousandth book.
+      - ru: Мы отмеча́ем ты́сячный день.
+        en_gb: We are marking the thousandth day.
   "четверо=four together":
     cefr_level: B1
     type: collective
@@ -718,13 +1175,71 @@ words:
     usage:
       - ru: У нас че́тверо друзе́й.
         en_gb: We have four friends.
-  "пятеро=five together":
-    cefr_level: B2
-    type: collective
-    value: 5
-    accented: пя́теро
+      - ru: Нас бы́ло че́тверо.
+        en_gb: There were four of us.
+      - ru: В семье́ че́тверо сынове́й.
+        en_gb: There are four sons in the family.
+  "четвёртый=fourth":
+    cefr_level: A2
+    type: ordinal
+    value: 4
+    accented: четвёртый
     en_gb:
-      standard: five (a group of five, especially people)
+      standard: fourth
+    forms:
+      m: четвёртый
+      f: четвёртая
+      n: четвёртое
+      pl: четвёртые
+    usage:
+      - ru: Он у́чится в четвёртом кла́ссе.
+        en_gb: He studies in the fourth grade.
+      - ru: Э́то четвёртая глава́.
+        en_gb: This is the fourth chapter.
+      - ru: Сего́дня четвёртое ию́ня.
+        en_gb: Today is the fourth of June.
+  "четыре=four":
+    cefr_level: A1
+    type: cardinal
+    value: 4
+    accented: четы́ре
+    en_gb:
+      standard: four
+    usage:
+      - ru: Я зна́ю четы́ре языка́.
+        en_gb: I know four languages.
+      - ru: На столе́ четы́ре ча́шки.
+        en_gb: There are four cups on the table.
+      - ru: Кни́га о четырёх сёстрах.
+        en_gb: A book about four sisters.
+    forms:
+      nom: четы́ре
+      gen: четырёх
+      dat: четырём
+      acc: четы́ре
+      ins: четырьмя́
+      pre: четырёх
+  "четырнадцать=fourteen":
+    cefr_level: A1
+    type: cardinal
+    value: 14
+    accented: четы́рнадцать
+    en_gb:
+      standard: fourteen
+    forms:
+      nom: четы́рнадцать
+      gen: четы́рнадцати
+      dat: четы́рнадцати
+      acc: четы́рнадцать
+      ins: четы́рнадцатью
+      pre: четы́рнадцати
+    usage:
+      - ru: Ему́ четы́рнадцать лет.
+        en_gb: He is fourteen years old.
+      - ru: В гру́ппе четы́рнадцать челове́к.
+        en_gb: There are fourteen people in the group.
+      - ru: К четы́рнадцати года́м он вы́рос.
+        en_gb: By the age of fourteen he had grown up.
   "шестеро=six together":
     cefr_level: B2
     type: collective
@@ -732,245 +1247,71 @@ words:
     accented: ше́стеро
     en_gb:
       standard: six (a group of six, especially people)
-  "семеро=seven together":
-    cefr_level: B2
-    type: collective
-    value: 7
-    accented: се́меро
-    en_gb:
-      standard: seven (a group of seven, especially people)
     usage:
-      - ru: Се́меро одного́ не ждут.
-        en_gb: Seven do not wait for one. (a proverb)
-  "оба=both":
-    cefr_level: B1
-    type: collective
-    value: 2
-    accented: о́ба
+      - ru: Нас бы́ло ше́стеро.
+        en_gb: There were six of us.
+      - ru: У него́ ше́стеро вну́ков.
+        en_gb: He has six grandchildren.
+      - ru: За столо́м сиде́ло ше́стеро госте́й.
+        en_gb: Six guests were sitting at the table.
+  "шестнадцать=sixteen":
+    cefr_level: A1
+    type: cardinal
+    value: 16
+    accented: шестна́дцать
     en_gb:
-      standard: both (with masculine or neuter nouns; the feminine is "обе")
+      standard: sixteen
+    forms:
+      nom: шестна́дцать
+      gen: шестна́дцати
+      dat: шестна́дцати
+      acc: шестна́дцать
+      ins: шестна́дцатью
+      pre: шестна́дцати
     usage:
-      - ru: О́ба бра́та живу́т здесь.
-        en_gb: Both brothers live here.
-  "обе=both":
-    cefr_level: B1
-    type: collective
-    value: 2
-    accented: о́бе
-    en_gb:
-      standard: both (with feminine nouns)
-    usage:
-      - ru: О́бе сестры́ у́чатся в шко́ле.
-        en_gb: Both sisters study at school.
-  # ── Quantity words and non-standard units ──────────────────────────
-  "дюжина=dozen":
-    cefr_level: B1
-    type: quantity
-    value: 12
-    accented: дю́жина
-    en_gb:
-      standard: a dozen (twelve of something)
-    usage:
-      - ru: Я купи́л дю́жину яи́ц.
-        en_gb: I bought a dozen eggs.
-  "пара=pair":
+      - ru: Ей шестна́дцать лет.
+        en_gb: She is sixteen years old.
+      - ru: В кла́ссе шестна́дцать ученико́в.
+        en_gb: There are sixteen pupils in the class.
+      - ru: Я живу́ в кварти́ре но́мер шестна́дцать.
+        en_gb: I live in flat number sixteen.
+  "шестой=sixth":
     cefr_level: A2
-    type: quantity
-    value: 2
-    accented: па́ра
+    type: ordinal
+    value: 6
+    accented: шесто́й
     en_gb:
-      standard: a pair (two of something, or a couple)
+      standard: sixth
+    forms:
+      m: шесто́й
+      f: шеста́я
+      n: шесто́е
+      pl: шесты́е
     usage:
-      - ru: Я купи́л па́ру боти́нок.
-        en_gb: I bought a pair of boots.
-  "десяток=ten of":
-    cefr_level: B1
-    type: quantity
-    value: 10
-    accented: деся́ток
+      - ru: Он живёт на шесто́м этаже́.
+        en_gb: He lives on the sixth floor.
+      - ru: Э́то шеста́я кни́га в се́рии.
+        en_gb: This is the sixth book in the series.
+      - ru: Сего́дня шесто́е ма́я.
+        en_gb: Today is the sixth of May.
+  "шесть=six":
+    cefr_level: A1
+    type: cardinal
+    value: 6
+    accented: шесть
     en_gb:
-      standard: a ten (a batch of ten, e.g. of eggs)
+      standard: six
     usage:
-      - ru: Да́йте, пожа́луйста, деся́ток яи́ц.
-        en_gb: Please give me ten eggs.
-  "сотня=hundred of":
-    cefr_level: B1
-    type: quantity
-    value: 100
-    accented: со́тня
-    en_gb:
-      standard: a hundred (an informal batch of about a hundred)
-    usage:
-      - ru: На пло́щади была́ со́тня люде́й.
-        en_gb: There were about a hundred people in the square.
-  "полтора=one and a half":
-    cefr_level: B1
-    type: quantity
-    value: 1.5
-    accented: полтора́
-    en_gb:
-      standard: one and a half (the feminine is "полторы")
-    usage:
-      - ru: Я ждал полтора́ часа́.
-        en_gb: I waited for one and a half hours.
-  # ── Years (spelled out as cardinals) ───────────────────────────────
-  # In context the final word becomes an ordinal: "в … году́".
-  "тысяча восемьсот двенадцать=1812":
-    cefr_level: B2
-    type: year
-    value: 1812
-    accented: ты́сяча восемьсо́т двена́дцать
-    en_gb:
-      standard: eighteen twelve (the year 1812)
-    usage:
-      - ru: Война́ начала́сь в ты́сяча восемьсо́т двена́дцатом году́.
-        en_gb: The war began in eighteen twelve.
-  "тысяча восемьсот шестьдесят один=1861":
-    cefr_level: B2
-    type: year
-    value: 1861
-    accented: ты́сяча восемьсо́т шестьдеся́т оди́н
-    en_gb:
-      standard: eighteen sixty-one (the year 1861)
-  "тысяча девятьсот пять=1905":
-    cefr_level: B2
-    type: year
-    value: 1905
-    accented: ты́сяча девятьсо́т пять
-    en_gb:
-      standard: nineteen oh five (the year 1905)
-  "тысяча девятьсот четырнадцать=1914":
-    cefr_level: B2
-    type: year
-    value: 1914
-    accented: ты́сяча девятьсо́т четы́рнадцать
-    en_gb:
-      standard: nineteen fourteen (the year 1914)
-  "тысяча девятьсот семнадцать=1917":
-    cefr_level: B2
-    type: year
-    value: 1917
-    accented: ты́сяча девятьсо́т семна́дцать
-    en_gb:
-      standard: nineteen seventeen (the year 1917)
-    usage:
-      - ru: Револю́ция произошла́ в ты́сяча девятьсо́т семна́дцатом году́.
-        en_gb: The revolution took place in nineteen seventeen.
-  "тысяча девятьсот сорок один=1941":
-    cefr_level: B2
-    type: year
-    value: 1941
-    accented: ты́сяча девятьсо́т со́рок оди́н
-    en_gb:
-      standard: nineteen forty-one (the year 1941)
-    usage:
-      - ru: Война́ начала́сь в ты́сяча девятьсо́т со́рок пе́рвом году́.
-        en_gb: The war began in nineteen forty-one.
-  "тысяча девятьсот сорок пять=1945":
-    cefr_level: B1
-    type: year
-    value: 1945
-    accented: ты́сяча девятьсо́т со́рок пять
-    en_gb:
-      standard: nineteen forty-five (the year 1945)
-    usage:
-      - ru: Война́ зако́нчилась в ты́сяча девятьсо́т со́рок пя́том году́.
-        en_gb: The war ended in nineteen forty-five.
-  "тысяча девятьсот шестьдесят один=1961":
-    cefr_level: B2
-    type: year
-    value: 1961
-    accented: ты́сяча девятьсо́т шестьдеся́т оди́н
-    en_gb:
-      standard: nineteen sixty-one (the year 1961)
-    usage:
-      - ru: Гага́рин полете́л в ко́смос в ты́сяча девятьсо́т шестьдеся́т пе́рвом году́.
-        en_gb: Gagarin flew into space in nineteen sixty-one.
-  "тысяча девятьсот восемьдесят=1980":
-    cefr_level: B2
-    type: year
-    value: 1980
-    accented: ты́сяча девятьсо́т во́семьдесят
-    en_gb:
-      standard: nineteen eighty (the year 1980)
-  "тысяча девятьсот девяносто один=1991":
-    cefr_level: B2
-    type: year
-    value: 1991
-    accented: ты́сяча девятьсо́т девяно́сто оди́н
-    en_gb:
-      standard: nineteen ninety-one (the year 1991)
-    usage:
-      - ru: Сове́тский Сою́з распа́лся в ты́сяча девятьсо́т девяно́сто пе́рвом году́.
-        en_gb: The Soviet Union broke up in nineteen ninety-one.
-  "тысяча девятьсот девяносто девять=1999":
-    cefr_level: B1
-    type: year
-    value: 1999
-    accented: ты́сяча девятьсо́т девяно́сто де́вять
-    en_gb:
-      standard: nineteen ninety-nine (the year 1999)
-    usage:
-      - ru: Я роди́лся в ты́сяча девятьсо́т девяно́сто девя́том году́.
-        en_gb: I was born in nineteen ninety-nine.
-  "две тысячи=2000":
-    cefr_level: B1
-    type: year
-    value: 2000
-    accented: две ты́сячи
-    en_gb:
-      standard: the year two thousand
-    usage:
-      - ru: Э́то случи́лось в двухты́сячном году́.
-        en_gb: It happened in the year two thousand.
-  "две тысячи восемь=2008":
-    cefr_level: B1
-    type: year
-    value: 2008
-    accented: две ты́сячи во́семь
-    en_gb:
-      standard: two thousand and eight (the year 2008)
-  "две тысячи четырнадцать=2014":
-    cefr_level: B1
-    type: year
-    value: 2014
-    accented: две ты́сячи четы́рнадцать
-    en_gb:
-      standard: two thousand and fourteen (the year 2014)
-  "две тысячи шестнадцать=2016":
-    cefr_level: B1
-    type: year
-    value: 2016
-    accented: две ты́сячи шестна́дцать
-    en_gb:
-      standard: twenty sixteen (the year 2016)
-    usage:
-      - ru: Э́то бы́ло в две ты́сячи шестна́дцатом году́.
-        en_gb: That was in twenty sixteen.
-  "две тысячи двадцать=2020":
-    cefr_level: B1
-    type: year
-    value: 2020
-    accented: две ты́сячи два́дцать
-    en_gb:
-      standard: twenty twenty (the year 2020)
-    usage:
-      - ru: Пандеми́я начала́сь в две ты́сячи двадца́том году́.
-        en_gb: The pandemic began in twenty twenty.
-  "две тысячи двадцать четыре=2024":
-    cefr_level: B1
-    type: year
-    value: 2024
-    accented: две ты́сячи два́дцать четы́ре
-    en_gb:
-      standard: twenty twenty-four (the year 2024)
-  "две тысячи двадцать пять=2025":
-    cefr_level: B1
-    type: year
-    value: 2025
-    accented: две ты́сячи два́дцать пять
-    en_gb:
-      standard: twenty twenty-five (the year 2025)
-    usage:
-      - ru: Сейча́с две ты́сячи два́дцать пя́тый год.
-        en_gb: It is now twenty twenty-five.
+      - ru: Сейча́с шесть часо́в.
+        en_gb: It is six o'clock now.
+      - ru: У па́ука шесть ног и ещё две.
+        en_gb: A spider has six legs and two more.
+      - ru: Мы говори́ли о шести́ страна́х.
+        en_gb: We talked about six countries.
+    forms:
+      nom: шесть
+      gen: шести́
+      dat: шести́
+      acc: шесть
+      ins: шестью́
+      pre: шести́
