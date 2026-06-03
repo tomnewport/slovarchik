@@ -15,12 +15,26 @@ words:
     governs: ["gen"]
     en_gb:
       standard: without (not having something)
+    usage:
+      - ru: Я пью́ ко́фе без са́хара.
+        en_gb: I drink coffee without sugar.
+      - ru: Он ушёл без слова.
+        en_gb: He left without a word.
+      - ru: Мы оста́лись без де́нег.
+        en_gb: We were left without money.
   "благодаря=thanks to":
     cefr_level: B1
     accented: благодаря́
     governs: ["dat"]
     en_gb:
       standard: thanks to (as a result of something positive)
+    usage:
+      - ru: Благодаря́ тебе́ я сдал экза́мен.
+        en_gb: Thanks to you I passed the exam.
+      - ru: Благодаря́ по́мощи мы зако́нчили во́время.
+        en_gb: Thanks to the help we finished on time.
+      - ru: Благодаря́ дождю́ трава́ зелёная.
+        en_gb: Thanks to the rain the grass is green.
   "в=in":
     cefr_level: A1
     accented: в
@@ -33,30 +47,62 @@ words:
     usage:
       - ru: Я живу́ в Москве́.
         en_gb: I live in Moscow.
+      - ru: Положи́ кни́гу в су́мку.
+        en_gb: Put the book in the bag.
+      - ru: Де́ти игра́ют в саду́.
+        en_gb: The children are playing in the garden.
   "вдоль=along":
     cefr_level: B1
     accented: вдоль
     governs: ["gen"]
     en_gb:
       standard: along (following the length of something)
+    usage:
+      - ru: Мы шли́ вдоль реки́.
+        en_gb: We walked along the river.
+      - ru: Вдоль доро́ги расту́т дере́вья.
+        en_gb: Trees grow along the road.
+      - ru: Маши́ны стоя́т вдоль у́лицы.
+        en_gb: Cars are parked along the street.
   "включая=including":
     cefr_level: B1
     accented: включа́я
     governs: ["acc"]
     en_gb:
       standard: including (with the inclusion of)
+    usage:
+      - ru: Все пришли́, включа́я учи́теля.
+        en_gb: Everyone came, including the teacher.
+      - ru: Биле́т сто́ит сто рубле́й, включа́я нало́г.
+        en_gb: The ticket costs a hundred roubles, including tax.
+      - ru: Магази́н рабо́тает ка́ждый день, включа́я воскресе́нье.
+        en_gb: The shop is open every day, including Sunday.
   "вместо=instead of":
     cefr_level: B1
     accented: вме́сто
     governs: ["gen"]
     en_gb:
       standard: instead of (as a substitute for)
+    usage:
+      - ru: Я вы́пил ча́й вме́сто ко́фе.
+        en_gb: I drank tea instead of coffee.
+      - ru: Вме́сто отве́та он улыбну́лся.
+        en_gb: Instead of an answer he smiled.
+      - ru: Пойди́ на собра́ние вме́сто меня́.
+        en_gb: Go to the meeting instead of me.
   "вне=outside of":
     cefr_level: B2
     accented: вне
     governs: ["gen"]
     en_gb:
       standard: outside of (beyond the limits of)
+    usage:
+      - ru: Он живёт вне го́рода.
+        en_gb: He lives outside the city.
+      - ru: Э́то вне мои́х си́л.
+        en_gb: This is beyond my powers.
+      - ru: Кури́ть мо́жно то́лько вне зда́ния.
+        en_gb: Smoking is allowed only outside the building.
   "во=in":
     cefr_level: A1
     accented: во
@@ -65,6 +111,13 @@ words:
       standard: in (variant of "в" used before certain consonant clusters)
       alt:
         - into
+    usage:
+      - ru: Я роди́лся во вто́рник.
+        en_gb: I was born on a Tuesday.
+      - ru: Во сне я ви́дел мо́ре.
+        en_gb: In my dream I saw the sea.
+      - ru: Во дворе́ игра́ют де́ти.
+        en_gb: Children are playing in the yard.
   "возле=near":
     cefr_level: A2
     accented: во́зле
@@ -77,18 +130,36 @@ words:
     usage:
       - ru: Он стои́т во́зле до́ма.
         en_gb: He is standing near the house.
+      - ru: Дава́й встре́тимся во́зле шко́лы.
+        en_gb: Let's meet near the school.
+      - ru: Скамья́ нахо́дится во́зле фонта́на.
+        en_gb: The bench is near the fountain.
   "вокруг=around (prep)":
     cefr_level: A2
     accented: вокру́г
     governs: ["gen"]
     en_gb:
       standard: around (encircling something, governs genitive)
+    usage:
+      - ru: Земля́ враща́ется вокру́г Со́лнца.
+        en_gb: The Earth revolves around the Sun.
+      - ru: Вокру́г до́ма растёт сад.
+        en_gb: A garden grows around the house.
+      - ru: Мы сиде́ли вокру́г костра́.
+        en_gb: We sat around the campfire.
   "вслед=after":
     cefr_level: B1
     accented: вслед
     governs: ["dat"]
     en_gb:
       standard: after (looking or moving in the wake of someone)
+    usage:
+      - ru: Он посмотре́л вслед по́езду.
+        en_gb: He looked after the train.
+      - ru: Соба́ка побежа́ла вслед хозя́ину.
+        en_gb: The dog ran after its owner.
+      - ru: Она́ маха́ла руко́й вслед маши́не.
+        en_gb: She waved her hand after the car.
   "для=for":
     cefr_level: A2
     accented: для
@@ -98,6 +169,10 @@ words:
     usage:
       - ru: Э́тот пода́рок для тебя́.
         en_gb: This present is for you.
+      - ru: Я купи́л цветы́ для ма́мы.
+        en_gb: I bought flowers for Mum.
+      - ru: Э́то упражне́ние для нача́льного у́ровня.
+        en_gb: This exercise is for the beginner level.
   "до=until":
     cefr_level: A2
     accented: до
@@ -110,6 +185,10 @@ words:
     usage:
       - ru: Магази́н рабо́тает до девяти́.
         en_gb: The shop is open until nine.
+      - ru: Я бу́ду ждать до утра́.
+        en_gb: I will wait until morning.
+      - ru: Мы дое́хали до го́рода бы́стро.
+        en_gb: We got to the city quickly.
   "за=behind":
     cefr_level: A1
     accented: за
@@ -119,6 +198,13 @@ words:
       alt:
         - for (with the accusative)
         - in exchange for
+    usage:
+      - ru: Со́лнце спря́талось за ту́чу.
+        en_gb: The sun hid behind a cloud.
+      - ru: За до́мом растёт сад.
+        en_gb: Behind the house grows a garden.
+      - ru: Мы сиде́ли за столо́м.
+        en_gb: We were sitting at the table.
   "из=from":
     cefr_level: A1
     accented: из
@@ -128,6 +214,13 @@ words:
       alt:
         - out of
         - made of
+    usage:
+      - ru: Он прие́хал из Москвы́.
+        en_gb: He came from Moscow.
+      - ru: Я доста́л кни́гу из су́мки.
+        en_gb: I took the book out of the bag.
+      - ru: Оди́н из друзе́й опозда́л.
+        en_gb: One of the friends was late.
   "изо=from":
     cefr_level: A2
     accented: и́зо
@@ -136,6 +229,13 @@ words:
       standard: from (variant of "из" before certain clusters)
       alt:
         - out of
+    usage:
+      - ru: Он крича́л изо все́х си́л.
+        en_gb: He shouted with all his might.
+      - ru: Изо рта́ шёл пар.
+        en_gb: Steam came from his mouth.
+      - ru: Она́ рабо́тала изо дня́ в день.
+        en_gb: She worked day in, day out.
   "к=towards":
     cefr_level: A2
     accented: к
@@ -147,12 +247,23 @@ words:
     usage:
       - ru: Я иду́ к врачу́.
         en_gb: I am going to the doctor.
+      - ru: Подойди́ к окну́.
+        en_gb: Come over to the window.
+      - ru: Мы верну́лись домо́й к ве́черу.
+        en_gb: We returned home by evening.
   "ко=towards":
     cefr_level: A2
     accented: ко
     governs: ["dat"]
     en_gb:
       standard: towards (variant of "к" before certain clusters)
+    usage:
+      - ru: Подойди́ ко мне́.
+        en_gb: Come over to me.
+      - ru: Го́сти пришли́ ко второ́му ча́су.
+        en_gb: The guests came by two o'clock.
+      - ru: Он привы́к ко всему́.
+        en_gb: He has got used to everything.
   "кроме=except":
     cefr_level: B1
     accented: кро́ме
@@ -162,12 +273,26 @@ words:
       alt:
         - besides
         - apart from
+    usage:
+      - ru: Все согла́сны, кро́ме меня́.
+        en_gb: Everyone agrees except me.
+      - ru: Кро́ме хле́ба, ничего́ нет.
+        en_gb: Apart from bread, there is nothing.
+      - ru: Магази́н откры́т кро́ме понеде́льника.
+        en_gb: The shop is open except on Monday.
   "меж=between":
     cefr_level: B2
     accented: меж
     governs: ["ins"]
     en_gb:
       standard: between (variant of "между", literary or poetic)
+    usage:
+      - ru: Меж дере́вьями свети́ло со́лнце.
+        en_gb: The sun shone between the trees.
+      - ru: Меж на́ми не́ было та́йн.
+        en_gb: There were no secrets between us.
+      - ru: Тропа́ вила́сь меж холма́ми.
+        en_gb: The path wound between the hills.
   "между=between":
     cefr_level: A2
     accented: ме́жду
@@ -176,12 +301,26 @@ words:
       standard: between (in the space separating two things)
       alt:
         - among
+    usage:
+      - ru: Стол стои́т ме́жду окна́ми.
+        en_gb: The table stands between the windows.
+      - ru: Ме́жду на́ми бы́ла стена́.
+        en_gb: There was a wall between us.
+      - ru: Ме́жду друзья́ми не́ было ссо́р.
+        en_gb: There were no quarrels between the friends.
   "мимо=past":
     cefr_level: B1
     accented: ми́мо
     governs: ["gen"]
     en_gb:
       standard: past (going by something)
+    usage:
+      - ru: Авто́бус прое́хал ми́мо остано́вки.
+        en_gb: The bus drove past the stop.
+      - ru: Мы прошли́ ми́мо магази́на.
+        en_gb: We walked past the shop.
+      - ru: Он прошёл ми́мо меня́.
+        en_gb: He walked past me.
   "на=on":
     cefr_level: A1
     accented: на
@@ -194,6 +333,10 @@ words:
     usage:
       - ru: Кни́га на столе́.
         en_gb: The book is on the table.
+      - ru: Положи́ ча́шку на стол.
+        en_gb: Put the cup on the table.
+      - ru: Карти́на виси́т на стене́.
+        en_gb: The picture hangs on the wall.
   "над=above":
     cefr_level: A2
     accented: над
@@ -202,12 +345,26 @@ words:
       standard: above (higher than something)
       alt:
         - over
+    usage:
+      - ru: Над го́родом лети́т самолёт.
+        en_gb: A plane is flying above the city.
+      - ru: Ла́мпа виси́т над столо́м.
+        en_gb: The lamp hangs above the table.
+      - ru: Над реко́й стоя́л тума́н.
+        en_gb: Fog hung above the river.
   "насчёт=regarding":
     cefr_level: B1
     accented: насчёт
     governs: ["gen"]
     en_gb:
       standard: regarding (about, concerning)
+    usage:
+      - ru: Поговори́м насчёт рабо́ты.
+        en_gb: Let's talk regarding the job.
+      - ru: Что ты ду́маешь насчёт пое́здки?
+        en_gb: What do you think regarding the trip?
+      - ru: У меня́ есть вопро́с насчёт пла́на.
+        en_gb: I have a question regarding the plan.
   "несмотря=despite":
     cefr_level: B1
     accented: несмотря́
@@ -216,6 +373,13 @@ words:
       standard: despite (usually "несмотря на" — in spite of)
       alt:
         - in spite of
+    usage:
+      - ru: Несмотря́ на дождь, мы гуля́ли.
+        en_gb: Despite the rain, we went for a walk.
+      - ru: Он пришёл несмотря́ на боле́знь.
+        en_gb: He came despite his illness.
+      - ru: Несмотря́ на уста́лость, она́ улыба́лась.
+        en_gb: Despite her tiredness, she was smiling.
   "о=about":
     cefr_level: A2
     accented: о
@@ -225,6 +389,10 @@ words:
     usage:
       - ru: Мы говори́м о фи́льме.
         en_gb: We are talking about the film.
+      - ru: Расскажи́ мне о себе́.
+        en_gb: Tell me about yourself.
+      - ru: Я ду́маю о бу́дущем.
+        en_gb: I am thinking about the future.
   "об=about":
     cefr_level: A2
     accented: об
@@ -233,12 +401,26 @@ words:
       standard: about (variant of "о" used before vowels)
       alt:
         - against (with the accusative)
+    usage:
+      - ru: Я ду́маю об отпуске́.
+        en_gb: I am thinking about the holiday.
+      - ru: Расскажи́ об э́том случае.
+        en_gb: Tell me about this incident.
+      - ru: Он споткну́лся об ка́мень.
+        en_gb: He tripped over a stone.
   "обо=about":
     cefr_level: A2
     accented: о́бо
     governs: ["acc", "pre"]
     en_gb:
       standard: about (variant of "о" used in certain fixed phrases)
+    usage:
+      - ru: Не беспоко́йся обо мне́.
+        en_gb: Don't worry about me.
+      - ru: Я ча́сто ду́маю обо всём.
+        en_gb: I often think about everything.
+      - ru: Она́ забо́тится обо все́х.
+        en_gb: She cares about everyone.
   "около=near":
     cefr_level: A2
     accented: о́коло
@@ -248,6 +430,13 @@ words:
       alt:
         - approximately
         - about (quantity)
+    usage:
+      - ru: Маши́на стои́т о́коло до́ма.
+        en_gb: The car is parked near the house.
+      - ru: Мы жда́ли о́коло часа́.
+        en_gb: We waited for about an hour.
+      - ru: О́коло шко́лы есть парк.
+        en_gb: There is a park near the school.
   "от=from":
     cefr_level: A2
     accented: от
@@ -257,6 +446,10 @@ words:
     usage:
       - ru: Я получи́л письмо́ от дру́га.
         en_gb: I received a letter from a friend.
+      - ru: Ключи́ от кварти́ры у меня́.
+        en_gb: I have the keys to the flat.
+      - ru: Он дрожа́л от хо́лода.
+        en_gb: He was shivering from the cold.
   "перед=in front of":
     cefr_level: A2
     accented: пе́ред
@@ -265,6 +458,13 @@ words:
       standard: in front of (directly ahead of)
       alt:
         - before (a time or event)
+    usage:
+      - ru: Маши́на стои́т пе́ред до́мом.
+        en_gb: The car stands in front of the house.
+      - ru: Пе́ред сном я чита́ю кни́гу.
+        en_gb: Before sleep I read a book.
+      - ru: Он вы́ступил пе́ред кла́ссом.
+        en_gb: He spoke in front of the class.
   "по=along":
     cefr_level: B1
     accented: по
@@ -277,6 +477,10 @@ words:
     usage:
       - ru: Мы гуля́ем по па́рку.
         en_gb: We are walking around the park.
+      - ru: Де́ти бе́гают по двору́.
+        en_gb: The children run about the yard.
+      - ru: Я скуча́ю по до́му.
+        en_gb: I miss home.
   "под=under":
     cefr_level: A2
     accented: под
@@ -289,12 +493,23 @@ words:
     usage:
       - ru: Кот сиди́т под столо́м.
         en_gb: The cat is sitting under the table.
+      - ru: Мяч закати́лся под крова́ть.
+        en_gb: The ball rolled under the bed.
+      - ru: Под де́ревом стои́т скамья́.
+        en_gb: There is a bench under the tree.
   "помимо=besides":
     cefr_level: B2
     accented: поми́мо
     governs: ["gen"]
     en_gb:
       standard: besides (apart from, in addition to)
+    usage:
+      - ru: Поми́мо рабо́ты, он у́чится.
+        en_gb: Besides work, he studies.
+      - ru: Поми́мо ча́я, есть ко́фе.
+        en_gb: Besides tea, there is coffee.
+      - ru: Поми́мо неё, никто́ не зна́ет.
+        en_gb: Besides her, no one knows.
   "после=after":
     cefr_level: A2
     accented: по́сле
@@ -304,12 +519,23 @@ words:
     usage:
       - ru: По́сле уро́ка я иду́ домо́й.
         en_gb: After the lesson I go home.
+      - ru: По́сле обе́да мы отдыха́ем.
+        en_gb: After lunch we rest.
+      - ru: По́сле дождя́ вы́шло со́лнце.
+        en_gb: After the rain the sun came out.
   "посреди=in the middle of":
     cefr_level: B2
     accented: посреди́
     governs: ["gen"]
     en_gb:
       standard: in the middle of (amid)
+    usage:
+      - ru: Стол стои́т посреди́ ко́мнаты.
+        en_gb: The table stands in the middle of the room.
+      - ru: Он останови́лся посреди́ доро́ги.
+        en_gb: He stopped in the middle of the road.
+      - ru: Посреди́ пло́щади есть фонта́н.
+        en_gb: In the middle of the square there is a fountain.
   "при=at":
     cefr_level: B1
     accented: при
@@ -319,12 +545,26 @@ words:
       alt:
         - under (a ruler or era)
         - in the presence of
+    usage:
+      - ru: При мне́ он молча́л.
+        en_gb: In my presence he was silent.
+      - ru: Шко́ла рабо́тает при це́ркви.
+        en_gb: The school operates at the church.
+      - ru: При жела́нии всё возмо́жно.
+        en_gb: With a bit of will, anything is possible.
   "про=about":
     cefr_level: A2
     accented: про
     governs: ["acc"]
     en_gb:
       standard: "about (colloquial: concerning, on the subject of)"
+    usage:
+      - ru: Расскажи́ мне про свой день.
+        en_gb: Tell me about your day.
+      - ru: Я чита́ю кни́гу про живо́тных.
+        en_gb: I am reading a book about animals.
+      - ru: Он забы́л про встре́чу.
+        en_gb: He forgot about the meeting.
   "против=against":
     cefr_level: B1
     accented: про́тив
@@ -334,18 +574,36 @@ words:
     usage:
       - ru: Я ничего́ не име́ю про́тив.
         en_gb: I have nothing against it.
+      - ru: Все проголосова́ли про́тив зако́на.
+        en_gb: Everyone voted against the law.
+      - ru: Он плыл про́тив тече́ния.
+        en_gb: He swam against the current.
   "путём=by means of":
     cefr_level: B2
     accented: путём
     governs: ["gen"]
     en_gb:
       standard: by means of (through, via)
+    usage:
+      - ru: Зада́чу реши́ли путём перегово́ров.
+        en_gb: The problem was solved by means of negotiations.
+      - ru: Он добился це́ли путём труда́.
+        en_gb: He achieved his goal by means of hard work.
+      - ru: Они́ нашли́ отве́т путём о́пыта.
+        en_gb: They found the answer by means of experiment.
   "ради=for the sake of":
     cefr_level: B1
     accented: ра́ди
     governs: ["gen"]
     en_gb:
       standard: for the sake of (in order to benefit someone)
+    usage:
+      - ru: Он сде́лал э́то ра́ди дете́й.
+        en_gb: He did it for the sake of the children.
+      - ru: Ра́ди дру́жбы я промолча́л.
+        en_gb: For the sake of friendship I kept silent.
+      - ru: Ра́ди тебя́ я гото́в на всё.
+        en_gb: For your sake I am ready for anything.
   "с=with":
     cefr_level: A1
     accented: с
@@ -357,18 +615,36 @@ words:
     usage:
       - ru: Я пью́ ча́й с са́харом.
         en_gb: I drink tea with sugar.
+      - ru: Я иду́ в кино́ с дру́гом.
+        en_gb: I am going to the cinema with a friend.
+      - ru: Она́ говори́т с улы́бкой.
+        en_gb: She speaks with a smile.
   "сквозь=through":
     cefr_level: B1
     accented: сквозь
     governs: ["acc"]
     en_gb:
       standard: through (passing all the way through something)
+    usage:
+      - ru: Свет проходи́л сквозь окно́.
+        en_gb: The light passed through the window.
+      - ru: Мы шли́ сквозь толпу́.
+        en_gb: We walked through the crowd.
+      - ru: Сквозь тума́н ничего́ не ви́дно.
+        en_gb: Through the fog nothing is visible.
   "спустя=after":
     cefr_level: B2
     accented: спустя́
     governs: ["acc"]
     en_gb:
       standard: after (a stated period of time later)
+    usage:
+      - ru: Он верну́лся спустя́ год.
+        en_gb: He returned a year later.
+      - ru: Спустя́ неде́лю пришло́ письмо́.
+        en_gb: A week later a letter arrived.
+      - ru: Спустя́ час дождь зако́нчился.
+        en_gb: An hour later the rain stopped.
   "среди=among":
     cefr_level: A2
     accented: среди́
@@ -377,6 +653,13 @@ words:
       standard: among (in the middle of a group)
       alt:
         - in the middle of
+    usage:
+      - ru: Среди́ друзе́й он са́мый весёлый.
+        en_gb: Among his friends he is the merriest.
+      - ru: Среди́ книг я нашёл слова́рь.
+        en_gb: Among the books I found a dictionary.
+      - ru: Она́ просну́лась среди́ но́чи.
+        en_gb: She woke up in the middle of the night.
   "у=at":
     cefr_level: A1
     accented: у
@@ -388,6 +671,10 @@ words:
     usage:
       - ru: У меня́ есть соба́ка.
         en_gb: I have a dog.
+      - ru: Я был в гостя́х у ба́бушки.
+        en_gb: I was visiting at Grandma's.
+      - ru: Маши́на стои́т у воро́т.
+        en_gb: The car is parked by the gate.
   "через=through":
     cefr_level: A2
     accented: че́рез
@@ -397,3 +684,10 @@ words:
       alt:
         - across
         - in (after a period of time)
+    usage:
+      - ru: Мы перешли́ че́рез доро́гу.
+        en_gb: We crossed the road.
+      - ru: По́езд прие́дет че́рез час.
+        en_gb: The train will arrive in an hour.
+      - ru: Он пры́гнул че́рез забо́р.
+        en_gb: He jumped over the fence.

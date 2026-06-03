@@ -20,12 +20,26 @@ words:
       alt:
         - uh-huh
         - yeah
+    usage:
+      - ru: Ага́, я по́нял тебя́.
+        en_gb: Uh-huh, I understood you.
+      - ru: Ты придёшь? — Ага́.
+        en_gb: Are you coming? — Yeah.
+      - ru: Ага́, вот где ты был!
+        en_gb: Aha, so that's where you were!
   "ай=oh":
     cefr_level: A2
     type: excl
     accented: ай
     en_gb:
       standard: oh (exclamation of pain or mild surprise)
+    usage:
+      - ru: Ай, как бо́льно!
+        en_gb: Ow, that hurts!
+      - ru: Ай, я не зна́л э́того.
+        en_gb: Oh, I didn't know that.
+      - ru: Ай, кака́я больша́я соба́ка!
+        en_gb: Oh, what a big dog!
   "алло=hello":
     cefr_level: A1
     type: greet
@@ -35,6 +49,10 @@ words:
     usage:
       - ru: Алло́! Кто говори́т?
         en_gb: Hello! Who is speaking?
+      - ru: Алло́, я вас слу́шаю.
+        en_gb: Hello, I'm listening.
+      - ru: Алло́, э́то рестора́н?
+        en_gb: Hello, is this the restaurant?
   "ах=ah":
     cefr_level: A2
     type: excl
@@ -46,6 +64,10 @@ words:
     usage:
       - ru: Ах, кака́я красота́!
         en_gb: Ah, what beauty!
+      - ru: Ах, как жаль!
+        en_gb: Ah, what a pity!
+      - ru: Ах, я совсе́м забы́л!
+        en_gb: Oh, I completely forgot!
   "боже=oh God":
     cefr_level: B1
     type: excl
@@ -58,6 +80,10 @@ words:
     usage:
       - ru: Бо́же мой, что случи́лось?
         en_gb: Oh God, what happened?
+      - ru: Бо́же, кака́я жара́!
+        en_gb: Oh God, what heat!
+      - ru: Бо́же, помоги́ нам.
+        en_gb: Oh God, help us.
   "бы=would":
     cefr_level: B1
     type: particle
@@ -66,6 +92,13 @@ words:
       standard: would (subjunctive or conditional particle)
       alt:
         - if only
+    usage:
+      - ru: Я бы хоте́л ча́шку ча́я.
+        en_gb: I would like a cup of tea.
+      - ru: Без тебя́ я бы не спра́вился.
+        en_gb: Without you I wouldn't have managed.
+      - ru: Пошли́ бы мы домо́й.
+        en_gb: We should go home.
   "ведь=after all":
     cefr_level: B1
     type: particle
@@ -74,6 +107,13 @@ words:
       standard: after all (emphasising a reason or reminding)
       alt:
         - you know (seeking agreement)
+    usage:
+      - ru: Ты ведь зна́ешь э́то.
+        en_gb: You know this, after all.
+      - ru: Мы ведь друзья́.
+        en_gb: We're friends, after all.
+      - ru: Ведь уже́ по́здно.
+        en_gb: It's late, you know.
   "вон=there":
     cefr_level: A2
     type: particle
@@ -82,6 +122,13 @@ words:
       standard: "there (pointing particle: look, over there)"
       alt:
         - look (directing attention)
+    usage:
+      - ru: Вон тот дом на углу́.
+        en_gb: There's that house on the corner.
+      - ru: Вон, посмотри́ напра́во.
+        en_gb: Over there, look to the right.
+      - ru: Вон она́ идёт.
+        en_gb: There she comes.
   "господи=good lord":
     cefr_level: B1
     type: excl
@@ -90,6 +137,13 @@ words:
       standard: good lord (exclamation of surprise, dismay or relief)
       alt:
         - good heavens
+    usage:
+      - ru: Го́споди, как я уста́л!
+        en_gb: Good lord, how tired I am!
+      - ru: Го́споди, что за шум?
+        en_gb: Good lord, what is this noise?
+      - ru: Го́споди, наконе́ц-то ты до́ма.
+        en_gb: Good lord, you're finally home.
   "да=yes":
     cefr_level: A1
     type: resp
@@ -99,18 +153,36 @@ words:
     usage:
       - ru: Ты гото́в? — Да.
         en_gb: Are you ready? — Yes.
+      - ru: Да, я согла́сен с тобо́й.
+        en_gb: Yes, I agree with you.
+      - ru: Э́то твоя́ кни́га? — Да.
+        en_gb: Is this your book? — Yes.
   "даже=even":
     cefr_level: A2
     type: particle
     accented: да́же
     en_gb:
       standard: even (emphatic particle adding emphasis or surprise)
+    usage:
+      - ru: Да́же де́ти э́то зна́ют.
+        en_gb: Even children know this.
+      - ru: Он не сказа́л да́же сло́ва.
+        en_gb: He didn't say even a word.
+      - ru: Да́же сего́дня иде́т дождь.
+        en_gb: Even today it's raining.
   "де=reportedly":
     cefr_level: B2
     type: particle
     accented: де
     en_gb:
       standard: reportedly (archaic particle indicating reported speech)
+    usage:
+      - ru: Он, де, прие́дет за́втра.
+        en_gb: He, reportedly, will arrive tomorrow.
+      - ru: Она́, де, ничего́ не зна́ла.
+        en_gb: She, supposedly, knew nothing.
+      - ru: Они́, де, уже́ ушли́.
+        en_gb: They, reportedly, have already left.
   "до свидания=goodbye":
     cefr_level: A1
     type: greet
@@ -120,6 +192,10 @@ words:
     usage:
       - ru: До свида́ния, до за́втра!
         en_gb: Goodbye, see you tomorrow!
+      - ru: До свида́ния, спаси́бо за всё.
+        en_gb: Goodbye, thank you for everything.
+      - ru: Ну, до свида́ния!
+        en_gb: Well, goodbye!
   "же=after all":
     cefr_level: B1
     type: particle
@@ -129,6 +205,13 @@ words:
       alt:
         - but (the very same)
         - do (emphatic)
+    usage:
+      - ru: Что же ты молчи́шь?
+        en_gb: Why are you silent, then?
+      - ru: Я же говори́л тебе́!
+        en_gb: I told you, didn't I!
+      - ru: Где же мои́ ключи́?
+        en_gb: Where on earth are my keys?
   "зато=but at least":
     cefr_level: B1
     type: particle
@@ -137,6 +220,13 @@ words:
       standard: but at least (on the other hand, compensating)
       alt:
         - on the other hand
+    usage:
+      - ru: До́рого, зато́ ка́чественно.
+        en_gb: Expensive, but at least good quality.
+      - ru: Хо́лодно, зато́ со́лнечно.
+        en_gb: Cold, but at least sunny.
+      - ru: Ма́ленький, зато́ ую́тный.
+        en_gb: Small, but cosy at least.
   "здравствуйте=hello":
     cefr_level: A1
     type: greet
@@ -146,6 +236,10 @@ words:
     usage:
       - ru: Здра́вствуйте, как ва́ши дела́?
         en_gb: Hello, how are you?
+      - ru: Здра́вствуйте, рад вас ви́деть.
+        en_gb: Hello, glad to see you.
+      - ru: Здра́вствуйте, проходи́те, пожа́луйста.
+        en_gb: Hello, please come in.
   "ибо=because":
     cefr_level: B2
     type: particle
@@ -154,6 +248,13 @@ words:
       standard: "because (bookish or archaic: for, since)"
       alt:
         - for
+    usage:
+      - ru: Я молчу́, и́бо уста́л.
+        en_gb: I am silent, for I am tired.
+      - ru: Мы ушли́, и́бо ста́ло по́здно.
+        en_gb: We left, for it had grown late.
+      - ru: Он ра́достен, и́бо побе́да близка́.
+        en_gb: He is joyful, for victory is near.
   "извините=excuse me":
     cefr_level: A1
     type: polite
@@ -165,6 +266,10 @@ words:
     usage:
       - ru: Извини́те, где метро́?
         en_gb: Excuse me, where is the metro?
+      - ru: Извини́те за опозда́ние.
+        en_gb: Sorry for being late.
+      - ru: Извини́те, я вас не по́нял.
+        en_gb: Excuse me, I didn't understand you.
   "итак=so":
     cefr_level: B1
     type: particle
@@ -174,6 +279,13 @@ words:
       alt:
         - thus
         - well then
+    usage:
+      - ru: Ита́к, начнём уро́к.
+        en_gb: So, let's begin the lesson.
+      - ru: Ита́к, всё гото́во.
+        en_gb: So, everything is ready.
+      - ru: Ита́к, каки́е у нас пла́ны?
+        en_gb: So, what are our plans?
   "конечно=of course":
     cefr_level: A2
     type: resp
@@ -185,6 +297,10 @@ words:
     usage:
       - ru: Ты помо́жешь мне? — Коне́чно!
         en_gb: Will you help me? — Of course!
+      - ru: Коне́чно, я тебе́ ве́рю.
+        en_gb: Of course I believe you.
+      - ru: Мы коне́чно придём.
+        en_gb: We will of course come.
   "ли=whether":
     cefr_level: A2
     type: particle
@@ -193,6 +309,13 @@ words:
       standard: whether (question particle, or indirect question)
       alt:
         - if (in indirect questions)
+    usage:
+      - ru: Не зна́ю, придёт ли он.
+        en_gb: I don't know whether he'll come.
+      - ru: Бу́дет ли за́втра дождь?
+        en_gb: Will it rain tomorrow?
+      - ru: Спроси́, гото́в ли обе́д.
+        en_gb: Ask whether lunch is ready.
   "мол=reportedly":
     cefr_level: B2
     type: particle
@@ -202,6 +325,13 @@ words:
       alt:
         - supposedly
         - they say
+    usage:
+      - ru: Он сказа́л, мол, занят.
+        en_gb: He said, supposedly, that he's busy.
+      - ru: 'Она́ кива́ет: мол, согла́сна.'
+        en_gb: She nods, as if to say she agrees.
+      - ru: Они́ пи́шут, мол, всё хорошо́.
+        en_gb: They write, reportedly, that all is well.
   "нет=no":
     cefr_level: A1
     type: resp
@@ -211,6 +341,10 @@ words:
     usage:
       - ru: Хо́чешь ча́ю? — Нет, спаси́бо.
         en_gb: Do you want tea? — No, thank you.
+      - ru: Нет, я не могу́ сего́дня.
+        en_gb: No, I can't today.
+      - ru: Ты уста́л? — Нет.
+        en_gb: Are you tired? — No.
   "ни=not a single":
     cefr_level: B1
     type: particle
@@ -219,6 +353,13 @@ words:
       standard: not a single (negative intensifier, reinforcing negation)
       alt:
         - neither … nor
+    usage:
+      - ru: Ни сло́ва бо́льше!
+        en_gb: Not a single word more!
+      - ru: У меня́ нет ни рубля́.
+        en_gb: I haven't a single rouble.
+      - ru: На не́бе ни о́блачка.
+        en_gb: Not a cloud in the sky.
   "ну=well":
     cefr_level: A2
     type: excl
@@ -230,6 +371,10 @@ words:
     usage:
       - ru: Ну, что бу́дем де́лать?
         en_gb: Well, what shall we do?
+      - ru: Ну, расскажи́ мне всё.
+        en_gb: Well, tell me everything.
+      - ru: Ну и пого́да сего́дня!
+        en_gb: Well, what weather today!
   "ой=oh":
     cefr_level: A2
     type: excl
@@ -239,12 +384,23 @@ words:
     usage:
       - ru: Ой, я забы́л ключи́!
         en_gb: Oh, I forgot the keys!
+      - ru: Ой, как краси́во!
+        en_gb: Oh, how beautiful!
+      - ru: Ой, кто там стучи́т?
+        en_gb: Oh, who's knocking there?
   "ох=oh":
     cefr_level: A2
     type: excl
     accented: ох
     en_gb:
       standard: oh (exclamation of pain, weariness or dismay)
+    usage:
+      - ru: Ох, как я уста́ла.
+        en_gb: Oh, how tired I am.
+      - ru: Ох, опя́ть э́тот дождь.
+        en_gb: Oh, this rain again.
+      - ru: Ох, тяжёлый был день.
+        en_gb: Oh, it was a hard day.
   "пожалуйста=please":
     cefr_level: A1
     type: polite
@@ -254,6 +410,10 @@ words:
     usage:
       - ru: Да́йте, пожа́луйста, во́ду.
         en_gb: Please give me some water.
+      - ru: Помоги́те мне, пожа́луйста.
+        en_gb: Please help me.
+      - ru: Спаси́бо! — Пожа́луйста.
+        en_gb: Thank you! — You're welcome.
   "пока=bye":
     cefr_level: A1
     type: greet
@@ -265,6 +425,10 @@ words:
     usage:
       - ru: Пока́! Уви́димся за́втра.
         en_gb: Bye! See you tomorrow.
+      - ru: Пока́, мне пора́ идти́.
+        en_gb: Bye, I have to go.
+      - ru: Ну ла́дно, пока́!
+        en_gb: All right then, bye!
   "привет=hi":
     cefr_level: A1
     type: greet
@@ -276,6 +440,10 @@ words:
     usage:
       - ru: Приве́т! Как дела́?
         en_gb: Hi! How are you?
+      - ru: Приве́т, ра́да тебя́ ви́деть!
+        en_gb: Hi, glad to see you!
+      - ru: Приве́т, дава́й встре́тимся.
+        en_gb: Hi, let's meet up.
   "спасибо=thank you":
     cefr_level: A1
     type: polite
@@ -287,6 +455,10 @@ words:
     usage:
       - ru: Большо́е спаси́бо за по́мощь!
         en_gb: Thank you very much for the help!
+      - ru: Спаси́бо вам за всё.
+        en_gb: Thank you for everything.
+      - ru: Спаси́бо, э́то о́чень ми́ло.
+        en_gb: Thanks, that's very kind.
   "таки=after all":
     cefr_level: B2
     type: particle
@@ -295,6 +467,13 @@ words:
       standard: "after all (emphatic particle: still, all the same)"
       alt:
         - still
+    usage:
+      - ru: Он та́ки прие́хал.
+        en_gb: He came after all.
+      - ru: Мы та́ки успе́ли на по́езд.
+        en_gb: We made the train after all.
+      - ru: Она́ та́ки была́ права́.
+        en_gb: She was right after all.
   "тут=here":
     cefr_level: A2
     type: particle
@@ -303,12 +482,26 @@ words:
       standard: here (at this place or point; colloquial for "here")
       alt:
         - at this point
+    usage:
+      - ru: Тут о́чень ти́хо.
+        en_gb: It's very quiet here.
+      - ru: Кто тут живёт?
+        en_gb: Who lives here?
+      - ru: Подожди́ меня́ тут.
+        en_gb: Wait for me here.
   "увы=alas":
     cefr_level: B1
     type: excl
     accented: увы́
     en_gb:
       standard: alas (expressing regret or sorrow)
+    usage:
+      - ru: Увы́, э́то невозмо́жно.
+        en_gb: Alas, it's impossible.
+      - ru: Увы́, мы опозда́ли.
+        en_gb: Alas, we were late.
+      - ru: Увы́, у меня́ нет вре́мени.
+        en_gb: Alas, I have no time.
   "уж=indeed":
     cefr_level: B1
     type: particle
@@ -317,6 +510,13 @@ words:
       standard: "indeed (emphatic particle: already, certainly)"
       alt:
         - already (emphatic)
+    usage:
+      - ru: Уж ты-то зна́ешь!
+        en_gb: You of all people know, indeed!
+      - ru: Не так уж и тру́дно.
+        en_gb: It's not so hard, really.
+      - ru: Уж по́здно возвраща́ться.
+        en_gb: It's already too late to return.
   "ура=hurray":
     cefr_level: A2
     type: excl
@@ -326,12 +526,23 @@ words:
     usage:
       - ru: Ура́! Мы вы́играли!
         en_gb: Hurray! We won!
+      - ru: Ура́, кани́кулы начались́!
+        en_gb: Hurray, the holidays have begun!
+      - ru: Ура́! Наконе́ц-то ле́то.
+        en_gb: Hurray! Summer at last.
   "ха=ha":
     cefr_level: B2
     type: excl
     accented: ха
     en_gb:
       standard: ha (laughter or triumph)
+    usage:
+      - ru: Ха, кака́я смешна́я шу́тка!
+        en_gb: Ha, what a funny joke!
+      - ru: Ха, я так и знал!
+        en_gb: Ha, I knew it!
+      - ru: Ха, ты ду́маешь, э́то про́сто?
+        en_gb: Ha, you think it's easy?
   "хоть=at least":
     cefr_level: B1
     type: particle
@@ -340,6 +551,13 @@ words:
       standard: "at least (particle: even, if only)"
       alt:
         - even
+    usage:
+      - ru: Дай мне хоть мину́ту.
+        en_gb: Give me at least a minute.
+      - ru: Позвони́ мне хоть и́ногда.
+        en_gb: Call me at least sometimes.
+      - ru: Хоть бы дождь переста́л.
+        en_gb: If only the rain would stop.
   "чуть=barely":
     cefr_level: A2
     type: particle
@@ -349,9 +567,23 @@ words:
       alt:
         - almost
         - just a little
+    usage:
+      - ru: Я чуть не упа́л.
+        en_gb: I almost fell.
+      - ru: Подожди́ чуть-чуть.
+        en_gb: Wait just a little.
+      - ru: Он говори́т чуть гро́мче.
+        en_gb: He speaks a little louder.
   "эй=hey":
     cefr_level: A1
     type: excl
     accented: эй
     en_gb:
       standard: hey (calling attention or expressing surprise)
+    usage:
+      - ru: Эй, подожди́ меня́!
+        en_gb: Hey, wait for me!
+      - ru: Эй, ты меня́ слы́шишь?
+        en_gb: Hey, can you hear me?
+      - ru: Эй, кто там?
+        en_gb: Hey, who's there?
