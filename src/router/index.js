@@ -6,6 +6,11 @@ import HomeView from '../views/HomeView.vue'
 export const routes = [
   { path: '/', name: 'home', component: HomeView },
   {
+    path: '/session',
+    name: 'session',
+    component: () => import('../views/SessionView.vue'),
+  },
+  {
     path: '/vocab',
     name: 'vocab',
     component: () => import('../views/VocabView.vue'),
