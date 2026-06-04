@@ -19,7 +19,6 @@ import RussianKeyboard from './components/RussianKeyboard.vue'
       <RouterLink to="/phrases">Phrases</RouterLink>
       <RouterLink to="/listening">Listening</RouterLink>
       <RouterLink to="/speaking">Speaking</RouterLink>
-      <RouterLink to="/progress">Progress</RouterLink>
     </nav>
   </header>
 

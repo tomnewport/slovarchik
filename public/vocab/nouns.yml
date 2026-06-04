@@ -3482,6 +3482,27 @@ words:
       pl_acc: ваго́ны
       pl_ins: ваго́нами
       pl_pre: ваго́нах
+  "вай-фай=Wi-Fi":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - technology
+    en_gb:
+      standard: Wi-Fi (wireless internet; indeclinable)
+    usage:
+      - ru: В кафе́ есть беспла́тный вай-фа́й.
+        en_gb: There is free Wi-Fi in the cafe.
+      - ru: Вай-фа́й сего́дня о́чень ме́дленный.
+        en_gb: The Wi-Fi is very slow today.
+    declension:
+      sg_nom: вай-фа́й
+      sg_gen: вай-фа́й
+      sg_dat: вай-фа́й
+      sg_acc: вай-фа́й
+      sg_ins: вай-фа́й
+      sg_pre: вай-фа́й
   "валюта=currency":
     cefr_level: B2
     gender: f
@@ -6455,6 +6476,33 @@ words:
       pl_acc: гво́зди
       pl_ins: гвоздя́ми
       pl_pre: гвоздя́х
+  "ген=gene":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: gene (a unit of heredity)
+    usage:
+      - ru: Э́тот ген отвеча́ет за цвет глаз.
+        en_gb: This gene is responsible for eye colour.
+      - ru: Учёные изуча́ют ге́ны челове́ка.
+        en_gb: Scientists study human genes.
+    declension:
+      sg_nom: ген
+      sg_gen: ге́на
+      sg_dat: ге́ну
+      sg_acc: ген
+      sg_ins: ге́ном
+      sg_pre: ге́не
+      pl_nom: ге́ны
+      pl_gen: ге́нов
+      pl_dat: ге́нам
+      pl_acc: ге́ны
+      pl_ins: ге́нами
+      pl_pre: ге́нах
   "генерал=general":
     cefr_level: B2
     gender: m
@@ -9260,6 +9308,55 @@ words:
       sg_acc: длину́
       sg_ins: длино́й
       sg_pre: длине́
+  "дно=bottom":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - nautical
+    en_gb:
+      standard: bottom (the lowest part of a sea, river or vessel)
+    usage:
+      - ru: Ло́дка опусти́лась на дно.
+        en_gb: The boat sank to the bottom.
+      - ru: На дне реки́ лежа́т ка́мни.
+        en_gb: There are stones on the river bottom.
+    declension:
+      sg_nom: дно
+      sg_gen: дна
+      sg_dat: дну
+      sg_acc: дно
+      sg_ins: дном
+      sg_pre: дне
+      pl_nom: до́нья
+      pl_gen: до́ньев
+      pl_dat: до́ньям
+      pl_acc: до́нья
+      pl_ins: до́ньями
+      pl_pre: до́ньях
+  "добро=goodness":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - values
+    en_gb:
+      standard: goodness (the good, as opposed to evil)
+    usage:
+      - ru: Добро́ всегда́ побежда́ет зло.
+        en_gb: Good always defeats evil.
+      - ru: Он сде́лал мно́го добра́ лю́дям.
+        en_gb: He did a lot of good for people.
+    declension:
+      sg_nom: добро́
+      sg_gen: добра́
+      sg_dat: добру́
+      sg_acc: добро́
+      sg_ins: добро́м
+      sg_pre: добре́
   "договор=contract":
     cefr_level: B1
     gender: m
@@ -16077,6 +16174,33 @@ words:
       pl_acc: комаро́в
       pl_ins: комара́ми
       pl_pre: комара́х
+  "комбат=battalion commander":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - military
+    en_gb:
+      standard: battalion commander (the officer in charge of a battalion)
+    usage:
+      - ru: Комба́т отда́л прика́з наступа́ть.
+        en_gb: The battalion commander gave the order to advance.
+      - ru: Солда́ты уважа́ли своего́ комба́та.
+        en_gb: The soldiers respected their battalion commander.
+    declension:
+      sg_nom: комба́т
+      sg_gen: комба́та
+      sg_dat: комба́ту
+      sg_acc: комба́та
+      sg_ins: комба́том
+      sg_pre: комба́те
+      pl_nom: комба́ты
+      pl_gen: комба́тов
+      pl_dat: комба́там
+      pl_acc: комба́тов
+      pl_ins: комба́тами
+      pl_pre: комба́тах
   "комиссар=commissar":
     cefr_level: B2
     gender: m
@@ -19941,6 +20065,34 @@ words:
         en_gb: Children are full of curiosity.
       - ru: Она́ смотре́ла на меня́ с любопы́тством.
         en_gb: She looked at me with curiosity.
+  "люк=hatch":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nautical
+      - technology
+    en_gb:
+      standard: hatch (a covered opening, e.g. a manhole or deck hatch)
+    usage:
+      - ru: Матро́с откры́л люк на па́лубе.
+        en_gb: The sailor opened the hatch on the deck.
+      - ru: Маши́на прова́лилась в откры́тый люк.
+        en_gb: The car fell into an open manhole.
+    declension:
+      sg_nom: люк
+      sg_gen: лю́ка
+      sg_dat: лю́ку
+      sg_acc: люк
+      sg_ins: лю́ком
+      sg_pre: лю́ке
+      pl_nom: лю́ки
+      pl_gen: лю́ков
+      pl_dat: лю́кам
+      pl_acc: лю́ки
+      pl_ins: лю́ками
+      pl_pre: лю́ках
   "лягушка=frog":
     cefr_level: B1
     gender: f
@@ -20064,6 +20216,34 @@ words:
       pl_acc: майо́ров
       pl_ins: майо́рами
       pl_pre: майо́рах
+  "мак=poppy":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - food and drink
+    en_gb:
+      standard: poppy (the flower, or its seeds used in cooking)
+    usage:
+      - ru: В по́ле расцвёл кра́сный мак.
+        en_gb: A red poppy bloomed in the field.
+      - ru: Она́ испекла́ бу́лочки с ма́ком.
+        en_gb: She baked buns with poppy seeds.
+    declension:
+      sg_nom: мак
+      sg_gen: ма́ка
+      sg_dat: ма́ку
+      sg_acc: мак
+      sg_ins: ма́ком
+      sg_pre: ма́ке
+      pl_nom: ма́ки
+      pl_gen: ма́ков
+      pl_dat: ма́кам
+      pl_acc: ма́ки
+      pl_ins: ма́ками
+      pl_pre: ма́ках
   "малыш=kid":
     cefr_level: A2
     gender: m
@@ -20897,6 +21077,34 @@ words:
       pl_acc: мета́ллы
       pl_ins: мета́ллами
       pl_pre: мета́ллах
+  "метод=method":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+      - study
+    en_gb:
+      standard: method (a systematic way of doing something)
+    usage:
+      - ru: Учёный приду́мал но́вый ме́тод.
+        en_gb: The scientist devised a new method.
+      - ru: Э́ти ме́тоды бо́льше не рабо́тают.
+        en_gb: These methods no longer work.
+    declension:
+      sg_nom: ме́тод
+      sg_gen: ме́тода
+      sg_dat: ме́тоду
+      sg_acc: ме́тод
+      sg_ins: ме́тодом
+      sg_pre: ме́тоде
+      pl_nom: ме́тоды
+      pl_gen: ме́тодов
+      pl_dat: ме́тодам
+      pl_acc: ме́тоды
+      pl_ins: ме́тодами
+      pl_pre: ме́тодах
   "метр=metre":
     cefr_level: A2
     gender: m
@@ -21367,6 +21575,33 @@ words:
       pl_acc: миры́
       pl_ins: мира́ми
       pl_pre: мира́х
+  "мистер=mister":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: mister (a title for an English-speaking man)
+    usage:
+      - ru: До́брый день, ми́стер Смит.
+        en_gb: Good afternoon, Mister Smith.
+      - ru: Ми́стер Браун прие́хал из Ло́ндона.
+        en_gb: Mister Brown arrived from London.
+    declension:
+      sg_nom: ми́стер
+      sg_gen: ми́стера
+      sg_dat: ми́стеру
+      sg_acc: ми́стера
+      sg_ins: ми́стером
+      sg_pre: ми́стере
+      pl_nom: ми́стеры
+      pl_gen: ми́стеров
+      pl_dat: ми́стерам
+      pl_acc: ми́стеров
+      pl_ins: ми́стерами
+      pl_pre: ми́стерах
   "миф=myth":
     cefr_level: B2
     gender: m
@@ -26942,6 +27177,33 @@ words:
       pl_acc: о́череди
       pl_ins: о́чередями
       pl_pre: о́чередях
+  "очко=point":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sport
+    en_gb:
+      standard: point (a unit of score in a game)
+    usage:
+      - ru: На́ша кома́нда набрала́ де́сять очко́в.
+        en_gb: Our team scored ten points.
+      - ru: Он вы́играл всего́ на одно́ очко́.
+        en_gb: He won by just one point.
+    declension:
+      sg_nom: очко́
+      sg_gen: очка́
+      sg_dat: очку́
+      sg_acc: очко́
+      sg_ins: очко́м
+      sg_pre: очке́
+      pl_nom: очки́
+      pl_gen: очко́в
+      pl_dat: очка́м
+      pl_acc: очки́
+      pl_ins: очка́ми
+      pl_pre: очка́х
   "ошибка=mistake":
     cefr_level: A2
     gender: f
@@ -31552,6 +31814,27 @@ words:
       sg_acc: посу́ду
       sg_ins: посу́дой
       sg_pre: посу́де
+  "пот=sweat":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - body
+    en_gb:
+      standard: sweat (the salty liquid produced by the skin)
+    usage:
+      - ru: По его́ лицу́ тёк пот.
+        en_gb: Sweat ran down his face.
+      - ru: Руба́шка промо́кла от по́та.
+        en_gb: The shirt was soaked with sweat.
+    declension:
+      sg_nom: пот
+      sg_gen: по́та
+      sg_dat: по́ту
+      sg_acc: пот
+      sg_ins: по́том
+      sg_pre: по́те
   "потеря=loss":
     cefr_level: B1
     gender: f
@@ -42586,6 +42869,33 @@ words:
       pl_acc: суды́
       pl_ins: суда́ми
       pl_pre: суда́х
+  "судно=vessel":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nautical
+    en_gb:
+      standard: vessel (a ship or large boat)
+    usage:
+      - ru: Торго́вое су́дно вошло́ в порт.
+        en_gb: The merchant vessel entered the port.
+      - ru: В га́вани стоя́ли больши́е суда́.
+        en_gb: Large vessels stood in the harbour.
+    declension:
+      sg_nom: су́дно
+      sg_gen: су́дна
+      sg_dat: су́дну
+      sg_acc: су́дно
+      sg_ins: су́дном
+      sg_pre: су́дне
+      pl_nom: суда́
+      pl_gen: судо́в
+      pl_dat: суда́м
+      pl_acc: суда́
+      pl_ins: суда́ми
+      pl_pre: суда́х
   "судьба=fate":
     cefr_level: B2
     gender: f
@@ -43250,6 +43560,33 @@ words:
       pl_acc: сыры́
       pl_ins: сыра́ми
       pl_pre: сыра́х
+  "сэр=sir":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: sir (a polite term of address for a man)
+    usage:
+      - ru: Чем могу́ помо́чь, сэр?
+        en_gb: How can I help you, sir?
+      - ru: Сэр, ваш сто́лик гото́в.
+        en_gb: Sir, your table is ready.
+    declension:
+      sg_nom: сэр
+      sg_gen: сэ́ра
+      sg_dat: сэ́ру
+      sg_acc: сэ́ра
+      sg_ins: сэ́ром
+      sg_pre: сэ́ре
+      pl_nom: сэ́ры
+      pl_gen: сэ́ров
+      pl_dat: сэ́рам
+      pl_acc: сэ́ров
+      pl_ins: сэ́рами
+      pl_pre: сэ́рах
   "тайга=taiga":
     cefr_level: B2
     gender: f
@@ -44295,6 +44632,33 @@ words:
         en_gb: He got lost in the crowd.
       - ru: По́лиция сде́рживала то́лпы люде́й.
         en_gb: The police held back the crowds of people.
+  "тон=tone":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - communication
+    en_gb:
+      standard: tone (the quality of a sound or of someone's voice)
+    usage:
+      - ru: Он говори́л споко́йным то́ном.
+        en_gb: He spoke in a calm tone.
+      - ru: Мне не нра́вятся таки́е то́ны в разгово́ре.
+        en_gb: I don't like such tones in a conversation.
+    declension:
+      sg_nom: тон
+      sg_gen: то́на
+      sg_dat: то́ну
+      sg_acc: тон
+      sg_ins: то́ном
+      sg_pre: то́не
+      pl_nom: то́ны
+      pl_gen: то́нов
+      pl_dat: то́нам
+      pl_acc: то́ны
+      pl_ins: то́нами
+      pl_pre: то́нах
   "топор=axe":
     cefr_level: B2
     gender: m
@@ -45149,6 +45513,33 @@ words:
       pl_acc: тю́рьмы
       pl_ins: тю́рьмами
       pl_pre: тю́рьмах
+  "тяжесть=weight":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - measurement and calculation
+    en_gb:
+      standard: weight (heaviness, or a heavy load)
+    usage:
+      - ru: Он почу́вствовал тя́жесть су́мки.
+        en_gb: He felt the weight of the bag.
+      - ru: Она́ не могла́ подня́ть таку́ю тя́жесть.
+        en_gb: She could not lift such a heavy weight.
+    declension:
+      sg_nom: тя́жесть
+      sg_gen: тя́жести
+      sg_dat: тя́жести
+      sg_acc: тя́жесть
+      sg_ins: тя́жестью
+      sg_pre: тя́жести
+      pl_nom: тя́жести
+      pl_gen: тяже́стей
+      pl_dat: тяже́стям
+      pl_acc: тя́жести
+      pl_ins: тяже́стями
+      pl_pre: тяже́стях
   "убийство=murder":
     cefr_level: B2
     gender: n
@@ -46806,6 +47197,28 @@ words:
         en_gb: This firm produces furniture.
       - ru: Дире́ктор фи́рмы прие́хал на встре́чу.
         en_gb: The director of the firm came to the meeting.
+  "фитнес=fitness":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+      - health
+    en_gb:
+      standard: fitness (physical exercise to keep healthy)
+    usage:
+      - ru: Она́ хо́дит на фи́тнес три ра́за в неде́лю.
+        en_gb: She goes to fitness classes three times a week.
+      - ru: Фи́тнес помога́ет ему́ держа́ть себя́ в фо́рме.
+        en_gb: Fitness helps him stay in shape.
+    declension:
+      sg_nom: фи́тнес
+      sg_gen: фи́тнеса
+      sg_dat: фи́тнесу
+      sg_acc: фи́тнес
+      sg_ins: фи́тнесом
+      sg_pre: фи́тнесе
   "флаг=flag":
     cefr_level: B1
     gender: m
@@ -47446,6 +47859,33 @@ words:
       pl_acc: хлопки́
       pl_ins: хлопка́ми
       pl_pre: хлопка́х
+  "хобби=hobby":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - hobbies and pastimes
+    en_gb:
+      standard: hobby (a pastime; indeclinable)
+    usage:
+      - ru: Моё хо́бби — рисова́ние.
+        en_gb: My hobby is drawing.
+      - ru: У него́ мно́го ра́зных хо́бби.
+        en_gb: He has many different hobbies.
+    declension:
+      sg_nom: хо́бби
+      sg_gen: хо́бби
+      sg_dat: хо́бби
+      sg_acc: хо́бби
+      sg_ins: хо́бби
+      sg_pre: хо́бби
+      pl_nom: хо́бби
+      pl_gen: хо́бби
+      pl_dat: хо́бби
+      pl_acc: хо́бби
+      pl_ins: хо́бби
+      pl_pre: хо́бби
   "ход=move":
     cefr_level: B1
     gender: m
@@ -47708,6 +48148,27 @@ words:
       pl_acc: хра́мы
       pl_ins: хра́мами
       pl_pre: хра́мах
+  "хрен=horseradish":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: horseradish (a pungent root used as a condiment)
+    usage:
+      - ru: Он лю́бит мя́со с хре́ном.
+        en_gb: He likes meat with horseradish.
+      - ru: Хрен растёт в огоро́де.
+        en_gb: Horseradish grows in the vegetable garden.
+    declension:
+      sg_nom: хрен
+      sg_gen: хре́на
+      sg_dat: хре́ну
+      sg_acc: хрен
+      sg_ins: хре́ном
+      sg_pre: хре́не
   "художник=artist":
     cefr_level: B1
     gender: m
@@ -48646,6 +49107,33 @@ words:
       pl_acc: четве́рти
       pl_ins: четвертя́ми
       pl_pre: четвертя́х
+  "чеченец=Chechen":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Chechen (a man from Chechnya)
+    usage:
+      - ru: Мой сосе́д — чече́нец.
+        en_gb: My neighbour is a Chechen.
+      - ru: В го́роде живёт мно́го чече́нцев.
+        en_gb: Many Chechens live in the city.
+    declension:
+      sg_nom: чече́нец
+      sg_gen: чече́нца
+      sg_dat: чече́нцу
+      sg_acc: чече́нца
+      sg_ins: чече́нцем
+      sg_pre: чече́нце
+      pl_nom: чече́нцы
+      pl_gen: чече́нцев
+      pl_dat: чече́нцам
+      pl_acc: чече́нцев
+      pl_ins: чече́нцами
+      pl_pre: чече́нцах
   "чечня=Chechnya":
     cefr_level: B2
     gender: f
@@ -49142,6 +49630,33 @@ words:
       sg_acc: шерсть
       sg_ins: ше́рстью
       sg_pre: ше́рсти
+  "шеф=boss":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: boss (the head or chief at work)
+    usage:
+      - ru: Шеф вы́звал меня́ в кабине́т.
+        en_gb: The boss called me into his office.
+      - ru: На́ши ше́фы провели́ совеща́ние.
+        en_gb: Our bosses held a meeting.
+    declension:
+      sg_nom: шеф
+      sg_gen: ше́фа
+      sg_dat: ше́фу
+      sg_acc: ше́фа
+      sg_ins: ше́фом
+      sg_pre: ше́фе
+      pl_nom: ше́фы
+      pl_gen: ше́фов
+      pl_dat: ше́фам
+      pl_acc: ше́фов
+      pl_ins: ше́фами
+      pl_pre: ше́фах
   "шея=neck":
     cefr_level: B1
     gender: f

@@ -17,14 +17,12 @@ Everything runs in your browser and works fully offline once loaded.
 
 ### 📚 Vocabulary
 
-Translate words in either direction (RU → EN / EN → RU) across three difficulty
-levels:
+Translate words in either direction (RU → EN / EN → RU):
 
-| Level        | How it works                                         |
-| ------------ | ---------------------------------------------------- |
-| Easy         | **Match** — pick the right translation (4 choices).  |
-| Intermediate | **Hinted typing** — type it; the on-screen keyboard lights up the letters it uses (RU answers). |
-| Advanced     | **Blind typing** — type it with no help.             |
+| Level   | How it works                                                                 |
+| ------- | ---------------------------------------------------------------------------- |
+| Easy    | **Match** — pick the right translation (4 choices).                          |
+| Type it | **Type the answer.** Stuck? Tap the on-screen keyboard's 💡 to light up the next letter (plus a couple of decoys) — see [The keyboard hint](#the-keyboard-hint). |
 
 ### 🧩 Inflection drills
 
@@ -43,8 +41,7 @@ against hand-checked golden paradigms and every curated nominative.
 | --------------- | ---------------------------------------------------------------------------- |
 | Identify        | Given one form, select every cell it could fill (handles syncretism).        |
 | Build the table | Drag (or tap) each shuffled form into the right cell of an empty table.       |
-| Guided endings  | The stem is shown; add each ending one letter at a time — the on-screen keyboard lights up the correct next letter alongside a couple of decoys. |
-| Type the endings| The stem is shown; type every ending with no help at all.                    |
+| Type the endings| The stem is shown; type every ending. Stuck? Tap the on-screen keyboard's 💡 to light up the next letter — see [The keyboard hint](#the-keyboard-hint). |
 
 The identify exercise understands syncretism — e.g. *книге* matches both dative
 **and** prepositional, and *стол* matches nominative **and** accusative singular.
@@ -87,6 +84,19 @@ it isn't available. The recogniser wrapper and grading live in
 > Chrome/Edge the Web Speech API streams your microphone audio to the browser
 > maker's cloud service for transcription (which is why it needs a network
 > connection). The app surfaces this in the UI before you start.
+
+### ⌨️ The keyboard hint
+
+Every typing drill — vocabulary, phrases and the *type the endings* inflection
+exercise — shares one on-screen Russian keyboard
+([`RussianKeyboard.vue`](src/components/RussianKeyboard.vue)) with a **💡 hint
+button**. Tap it and the keyboard lights up the **next character to type plus a
+couple of decoys**; it stays on for the rest of the lesson so you can lean on it
+whenever you're stuck — there's no penalty for using it. A field opts in by
+declaring the answer it expects via a `data-answer` attribute; the keyboard
+reads that, follows what you've typed, and walks the hint forward letter by
+letter. English answers fall back to the device keyboard, so the hint applies
+wherever the on-screen Russian keyboard is shown.
 
 ## Tech
 
@@ -157,21 +167,6 @@ The store exposes reactive `vocab` and `nouns` lists (sorted alphabetically by
 Russian) plus a `state` with the current `status`. Add a new part of speech by
 dropping a `.yml` file in `public/vocab/` and adding it to the manifest.
 
-## Progress & progression
-
-> **Being rebuilt.** The previous progress-tracking and exam-readiness system has
-> been removed. A new progression system — word states (unknown → learning →
-> learned → mastered) across four dimensions, themed learning/mastery batches, and
-> guided practice sessions — is being built fresh under
-> [issue #79](https://github.com/tomnewport/slovarchik/issues/79).
-
-For now the drills run **standalone**: each keeps its own round score but records
-nothing, and the **Progress** page (`/progress`) is a placeholder until the new
-progress screen lands. The new word-state / batch / session logic will live in
-framework-free modules under [`src/lib`](src/lib) with an IndexedDB-backed
-reactive store in `src/stores`, following the same separation as the rest of the
-app.
-
 ## Develop
 
 ```bash
@@ -191,7 +186,7 @@ the schema above (keep each file sorted alphabetically by Russian) and bump its
 `updated` timestamp in `manifest.json`. The `vocabBuild.test.js` and
 `declension.test.js` suites guard the shape — unique keys, a valid CEFR level, a
 meaning, accepted answers, and complete case tables for nouns. Noun endings (for
-the advanced drill) are derived automatically from the forms.
+the *type the endings* drill) are derived automatically from the forms.
 
 📖 **Full reference:** [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md)
 documents every field, the per-part-of-speech schemas, stress marks, heteronyms,

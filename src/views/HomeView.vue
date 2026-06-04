@@ -73,14 +73,5 @@ import { RouterLink } from 'vue-router'
       </p>
       <span class="pill">echo → produce → interpret</span>
     </RouterLink>
-
-    <RouterLink to="/progress" class="card" style="text-decoration: none; color: inherit">
-      <h2 style="margin-top: 0">📈 Progress</h2>
-      <p>
-        Track the words you've learned and mastered over time. Being rebuilt as part of the
-        new progression system.
-      </p>
-      <span class="pill">learned · mastered</span>
-    </RouterLink>
   </section>
 </template>

@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import RussianKeyboard from './RussianKeyboard.vue'
-import { setHintLetters, clearHintLetters } from '../stores/keyboard.js'
+import { resetHint } from '../stores/keyboard.js'
 
 // A Russian input lives in the document; the keyboard follows focus to it.
 function makeInput(lang = 'ru') {
@@ -14,7 +14,7 @@ function makeInput(lang = 'ru') {
 
 afterEach(() => {
   document.body.innerHTML = ''
-  clearHintLetters()
+  resetHint()
 })
 
 describe('RussianKeyboard', () => {
@@ -58,19 +58,31 @@ describe('RussianKeyboard', () => {
     wrapper.unmount()
   })
 
-  it('highlights the hinted letters of the answer', async () => {
+  it('lights the next letter to type (plus decoys) once the hint is switched on', async () => {
     const wrapper = mount(RussianKeyboard, { attachTo: document.body })
     const input = makeInput()
+    // The field declares the answer it expects via data-answer.
+    input.dataset.answer = 'дом'
     input.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
-    setHintLetters('дом')
     await wrapper.vm.$nextTick()
 
-    const hinted = wrapper.findAll('.kbd-key.hint').map((k) => k.text())
-    expect(new Set(hinted)).toEqual(new Set(['д', 'о', 'м']))
+    // Nothing is lit until the learner presses the 💡 hint key.
+    expect(wrapper.findAll('.kbd-key.hint')).toHaveLength(0)
 
-    // Clearing the hint removes every highlight.
-    clearHintLetters()
+    await wrapper.find('[aria-label="Toggle hint"]').trigger('click')
+    let lit = wrapper.findAll('.kbd-key.hint').map((k) => k.text())
+    expect(lit).toContain('д') // the next letter to type …
+    expect(lit).toHaveLength(3) // … plus two decoys
+
+    // Typing the first letter advances the hint to the next one.
+    input.value = 'д'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
     await wrapper.vm.$nextTick()
+    lit = wrapper.findAll('.kbd-key.hint').map((k) => k.text())
+    expect(lit).toContain('о')
+
+    // Switching the hint back off clears every highlight.
+    await wrapper.find('[aria-label="Toggle hint"]').trigger('click')
     expect(wrapper.findAll('.kbd-key.hint')).toHaveLength(0)
     wrapper.unmount()
   })
