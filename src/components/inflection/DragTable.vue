@@ -53,6 +53,23 @@ function onChipClick(id) {
   picked.value = picked.value === id ? null : id
 }
 
+function nextEmptySlot() {
+  for (const row of props.paradigm.rows) {
+    for (const col of props.paradigm.cols) {
+      if (cellAt(row.key, col.key) && placed[cellKey(row.key, col.key)] == null) {
+        return cellKey(row.key, col.key)
+      }
+    }
+  }
+  return null
+}
+
+function onChipDblClick(id) {
+  if (checked.value) return
+  const slot = nextEmptySlot()
+  if (slot != null) place(slot, id)
+}
+
 function onDrop(e, key) {
   const id = Number(e.dataTransfer.getData('text/plain'))
   place(key, id)
@@ -90,6 +107,7 @@ function check() {
         draggable="true"
         lang="ru"
         @click="onChipClick(chip.id)"
+        @dblclick="onChipDblClick(chip.id)"
         @dragstart="(e) => e.dataTransfer.setData('text/plain', String(chip.id))"
       >
         {{ chip.form }}

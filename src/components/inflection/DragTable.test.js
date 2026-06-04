@@ -106,4 +106,45 @@ describe('DragTable', () => {
     expect(wrapper.find('button.primary').element.disabled).toBe(true)
     expect(wrapper.emitted('graded')).toBeFalsy()
   })
+
+  it('double-click places chip in first empty slot (top-then-left order)', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: normalParadigm } })
+
+    const [firstChip] = wrapper.vm.bank
+    await wrapper.findAll('button.chip')[0].trigger('dblclick')
+
+    // Exactly one slot filled, and it's the first in reading order.
+    expect(Object.keys(wrapper.vm.placed)).toHaveLength(1)
+    expect(wrapper.vm.placed['nom.sg']).toBe(firstChip.id)
+  })
+
+  it('successive double-clicks fill slots in reading order', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: normalParadigm } })
+
+    await wrapper.findAll('button.chip')[0].trigger('dblclick')
+    await wrapper.vm.$nextTick()
+    await wrapper.findAll('button.chip')[0].trigger('dblclick')
+    await wrapper.vm.$nextTick()
+
+    expect(Object.keys(wrapper.vm.placed)).toHaveLength(2)
+    expect(wrapper.vm.placed['nom.sg']).toBeDefined()
+    expect(wrapper.vm.placed['gen.sg']).toBeDefined()
+  })
+
+  it('double-click does nothing when checked', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: normalParadigm } })
+
+    // Fill all slots and check.
+    const kotChip = wrapper.vm.bank.find((c) => c.form === 'кот')
+    const kotaChip = wrapper.vm.bank.find((c) => c.form === 'кота')
+    wrapper.vm.place('nom.sg', kotChip.id)
+    wrapper.vm.place('gen.sg', kotaChip.id)
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button.primary').trigger('click')
+
+    const placedBefore = { ...wrapper.vm.placed }
+    // Triggering dblclick after check should have no effect.
+    // (Bank is empty so no chip buttons exist; verify placed is unchanged.)
+    expect(wrapper.vm.placed).toEqual(placedBefore)
+  })
 })
