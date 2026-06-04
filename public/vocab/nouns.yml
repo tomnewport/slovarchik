@@ -3563,6 +3563,36 @@ words:
       pl_acc: ва́нные
       pl_ins: ва́нными
       pl_pre: ва́нных
+  "варежка=mitten":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - clothing
+    en_gb:
+      standard: mitten (a glove with no separate fingers)
+    usage:
+      - ru: Она́ потеря́ла одну́ варе́жку.
+        en_gb: She lost one mitten.
+      - ru: Зимо́й де́ти но́сят варе́жки.
+        en_gb: In winter children wear mittens.
+      - ru: Положи́ варе́жки на ба́тарею.
+        en_gb: Put the mittens on the radiator.
+    declension:
+      sg_nom: варе́жка
+      sg_gen: варе́жки
+      sg_dat: варе́жке
+      sg_acc: варе́жку
+      sg_ins: варе́жкой
+      sg_pre: варе́жке
+      pl_nom: варе́жки
+      pl_gen: варе́жек
+      pl_dat: варе́жкам
+      pl_acc: варе́жки
+      pl_ins: варе́жками
+      pl_pre: варе́жках
   "вариант=variant":
     cefr_level: B1
     gender: m
@@ -11009,6 +11039,38 @@ words:
       pl_acc: жи́зни
       pl_ins: жи́знями
       pl_pre: жи́знях
+  "жилет=waistcoat":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - clothing
+    en_gb:
+      standard: waistcoat (a sleeveless garment worn over a shirt)
+      alt:
+        - vest
+    usage:
+      - ru: Он наде́л костю́м с жиле́том.
+        en_gb: He put on a suit with a waistcoat.
+      - ru: Дело́вой жиле́т смо́трится стро́го.
+        en_gb: A business waistcoat looks formal.
+      - ru: Ба́бушка связа́ла мне тёплый жиле́т.
+        en_gb: Grandma knitted me a warm waistcoat.
+    declension:
+      sg_nom: жиле́т
+      sg_gen: жиле́та
+      sg_dat: жиле́ту
+      sg_acc: жиле́т
+      sg_ins: жиле́том
+      sg_pre: жиле́те
+      pl_nom: жиле́ты
+      pl_gen: жиле́тов
+      pl_dat: жиле́там
+      pl_acc: жиле́ты
+      pl_ins: жиле́тами
+      pl_pre: жиле́тах
   "жир=fat":
     cefr_level: B1
     gender: m
@@ -15787,6 +15849,31 @@ words:
         en_gb: The sausage is in the fridge.
       - ru: Он сде́лал бутербро́д с колбасо́й.
         en_gb: He made a sandwich with sausage.
+  "колготки=tights":
+    cefr_level: B1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - clothes
+      - clothing
+    en_gb:
+      standard: tights (a close-fitting garment covering the legs and waist)
+      alt:
+        - pantyhose
+    usage:
+      - ru: Она́ наде́ла ко́лготки и ю́бку.
+        en_gb: She put on tights and a skirt.
+      - ru: Зимо́й ношу́ тёплые ко́лготки.
+        en_gb: In winter I wear thick tights.
+      - ru: На ко́лготках появи́лась стре́лка.
+        en_gb: A ladder appeared in the tights.
+    declension:
+      pl_nom: ко́лготки
+      pl_gen: ко́лготок
+      pl_dat: ко́лготкам
+      pl_acc: ко́лготки
+      pl_ins: ко́лготками
+      pl_pre: ко́лготках
   "колдун=sorcerer":
     cefr_level: B2
     gender: m
@@ -17392,6 +17479,38 @@ words:
       sg_acc: ко́фе
       sg_ins: ко́фе
       sg_pre: ко́фе
+  "кофта=knitted top":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - clothing
+    en_gb:
+      standard: knitted top (a loose knitted or woven garment for the upper body)
+      alt:
+        - cardigan
+    usage:
+      - ru: Она́ вяза́ла ко́фту весь ве́чер.
+        en_gb: She knitted the cardigan all evening.
+      - ru: Наде́нь ко́фту, на у́лице хо́лодно.
+        en_gb: Put on a cardigan, it's cold outside.
+      - ru: Ба́бушка пода́рила мне но́вую ко́фту.
+        en_gb: Grandma gave me a new cardigan.
+    declension:
+      sg_nom: ко́фта
+      sg_gen: ко́фты
+      sg_dat: ко́фте
+      sg_acc: ко́фту
+      sg_ins: ко́фтой
+      sg_pre: ко́фте
+      pl_nom: ко́фты
+      pl_gen: ко́фт
+      pl_dat: ко́фтам
+      pl_acc: ко́фты
+      pl_ins: ко́фтами
+      pl_pre: ко́фтах
   "кошелёк=wallet":
     cefr_level: B1
     gender: m
@@ -47016,6 +47135,37 @@ words:
       pl_acc: фами́лии
       pl_ins: фами́лиями
       pl_pre: фами́лиях
+  "фартук=apron":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - clothing
+      - in the kitchen
+    en_gb:
+      standard: apron (a protective garment worn over clothes when cooking or working)
+    usage:
+      - ru: Она́ гото́вила в фа́ртуке.
+        en_gb: She cooked wearing an apron.
+      - ru: Наде́нь фа́ртук, что́бы не запа́чкаться.
+        en_gb: Put on an apron so you don't get dirty.
+      - ru: Шко́льный фа́ртук был чёрного цве́та.
+        en_gb: The school apron was black.
+    declension:
+      sg_nom: фа́ртук
+      sg_gen: фа́ртука
+      sg_dat: фа́ртуку
+      sg_acc: фа́ртук
+      sg_ins: фа́ртуком
+      sg_pre: фа́ртуке
+      pl_nom: фа́ртуки
+      pl_gen: фа́ртуков
+      pl_dat: фа́ртукам
+      pl_acc: фа́ртуки
+      pl_ins: фа́ртуками
+      pl_pre: фа́ртуках
   "федерация=federation":
     cefr_level: B1
     gender: f
