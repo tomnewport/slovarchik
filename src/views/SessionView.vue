@@ -25,6 +25,7 @@ import WordBankExercise from '../components/exercises/WordBankExercise.vue'
 import MatchExercise from '../components/exercises/MatchExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
+import CelebrationBurst from '../components/CelebrationBurst.vue'
 
 const COMPONENTS = {
   type: TypeExercise,
@@ -154,6 +155,19 @@ function durationLabel(ms) {
   return m > 0 ? `${m}m ${s % 60}s` : `${s}s`
 }
 
+// Batches the learner just finished (every word at or above its target state).
+const completedBatches = computed(() => {
+  if (runner.phase !== 'summary') return []
+  return ['learning', 'mastery']
+    .filter((level) => progress.state[level] && progress.batchComplete(level))
+    .map((level) => ({ level, batch: progress.state[level] }))
+})
+
+async function nextBatch(level) {
+  await progress.advanceBatch(level)
+  router.push({ path: '/batch', query: { level } })
+}
+
 function confirmClose() {
   showConfirm.value = false
   router.push('/')
@@ -203,18 +217,36 @@ function confirmClose() {
 
     <!-- Summary -->
     <div v-else class="summary card">
-      <h2>Session complete</h2>
-      <p class="score">{{ summary.percent }}% correct</p>
-      <p class="muted">
-        {{ summary.correct }} / {{ summary.total }} first try · {{ durationLabel(summary.durationMs) }}
-      </p>
-      <div v-if="summary.slipped.length" class="slipped">
-        <p class="muted">Slipped — worth another look:</p>
-        <ul>
-          <li v-for="key in summary.slipped" :key="key" lang="ru">{{ key }}</li>
-        </ul>
+      <!-- Batch completion celebration takes over the summary when earned. -->
+      <div v-if="completedBatches.length" class="celebration" :class="completedBatches[0].level">
+        <CelebrationBurst :show="true" />
+        <div class="heart" aria-hidden="true">💚</div>
+        <h2>Batch complete!</h2>
+        <p>
+          You {{ completedBatches[0].level === 'mastery' ? 'mastered' : 'learned' }}
+          <strong class="batch-name">{{ completedBatches[0].batch.name }}</strong>.
+        </p>
+        <button class="primary next-batch" @click="nextBatch(completedBatches[0].level)">
+          Choose the next batch →
+        </button>
+        <button class="ghost" @click="router.push('/')">Back home</button>
       </div>
-      <button class="primary done" @click="router.push('/')">Done</button>
+
+      <template v-else>
+        <h2>Session complete</h2>
+        <p class="score">{{ summary.percent }}% correct</p>
+        <p class="muted">
+          {{ summary.correct }} / {{ summary.total }} first try ·
+          {{ durationLabel(summary.durationMs) }}
+        </p>
+        <div v-if="summary.slipped.length" class="slipped">
+          <p class="muted">Slipped — worth another look:</p>
+          <ul>
+            <li v-for="key in summary.slipped" :key="key" lang="ru">{{ key }}</li>
+          </ul>
+        </div>
+        <button class="primary done" @click="router.push('/')">Done</button>
+      </template>
     </div>
 
     <!-- Close confirmation -->
@@ -299,6 +331,25 @@ function confirmClose() {
 .score {
   font-size: 2rem;
   font-weight: 700;
+}
+.celebration {
+  position: relative;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+  padding: 1rem 0;
+}
+.celebration .heart {
+  font-size: 3rem;
+}
+.celebration.mastery h2 {
+  color: var(--gold);
+}
+.batch-name {
+  text-transform: capitalize;
+}
+.next-batch {
+  margin-top: 0.5rem;
 }
 .slipped ul {
   list-style: none;
