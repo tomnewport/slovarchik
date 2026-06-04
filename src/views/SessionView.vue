@@ -62,12 +62,20 @@ async function setup() {
 
   const type = String(route.query.type ?? 'standard')
   const size = route.query.size ? String(route.query.size) : undefined
-  session = progress.startSession({ type, size })
+  // A focused session restricts the whole session to words matching a skill.
+  const focusKeys = route.query.focus ? progress.focusKeysFor(String(route.query.focus)) : null
+  session = progress.startSession({ type, size, focusKeys })
 
-  const exercises = buildExercises(session, {
-    words: vocabState.words,
-    phrases: vocabPhrases.value,
-  })
+  // For a focused session, draw (and top up) only from the filtered words.
+  let words = vocabState.words
+  let phrases = vocabPhrases.value
+  if (focusKeys) {
+    const set = new Set(focusKeys)
+    words = vocabState.words.filter((w) => set.has(w.key))
+    phrases = vocabPhrases.value.filter((p) => set.has(p.source))
+  }
+
+  const exercises = buildExercises(session, { words, phrases })
   for (const ex of exercises) {
     for (const key of ex.targets) {
       if (!startStates.has(key)) startStates.set(key, progress.stateOf(key))

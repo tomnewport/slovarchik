@@ -22,6 +22,14 @@ import {
   startSession,
   loadProgress,
   resetProgress,
+  history,
+  learnedWords,
+  masteredWords,
+  weakestSkills,
+  focusKeysFor,
+  exportData,
+  validateImport,
+  importData,
 } from './progress.js'
 
 // A small synthetic vocabulary; `hasInflections` short-circuits the paradigm
@@ -241,6 +249,80 @@ describe('persistence', () => {
     await idb.putProgress({ word: 'x', events: [], learnedAt: null, masteredAt: null, peak: 0 })
     const all = await idb.getAllProgress()
     expect(all.map((r) => r.word)).toContain('x')
+  })
+})
+
+describe('analytics', () => {
+  it('reports learned and mastered word lists', async () => {
+    setVocab(makeWords(2, { hasInflections: false }))
+    await learn('w0')
+    expect(learnedWords()).toContain('w0')
+    expect(masteredWords()).toContain('w0') // uninflected → mastered
+    expect(learnedWords()).not.toContain('w1')
+  })
+
+  it('builds a cumulative words-known-by-day history', async () => {
+    setVocab(makeWords(3, { hasInflections: false }))
+    await learn('w0', Date.parse('2026-06-01T10:00:00Z'))
+    await learn('w1', Date.parse('2026-06-01T12:00:00Z'))
+    await learn('w2', Date.parse('2026-06-03T09:00:00Z'))
+    const h = history()
+    expect(h).toHaveLength(2) // two distinct days
+    expect(h[0]).toMatchObject({ day: '2026-06-01', learned: 2 })
+    expect(h[1]).toMatchObject({ day: '2026-06-03', learned: 3 }) // cumulative
+  })
+
+  it('ranks weakest skills and resolves their focus keys', async () => {
+    const nouns = ['n0', 'n1', 'n2'].map((key) => ({ key, pos: 'noun', gender: 'm', hasInflections: false }))
+    setVocab(nouns)
+    for (const n of nouns) {
+      await recordAttempt({ word: n.key, dimension: 'usage', level: 'learning', correct: true })
+    }
+    const skills = weakestSkills()
+    expect(skills.some((s) => s.id === 'noun:m')).toBe(true)
+    const keys = focusKeysFor('noun:m')
+    expect(keys).toEqual(expect.arrayContaining(['n0', 'n1', 'n2']))
+  })
+
+  it('restricts a focused session to the filtered words', () => {
+    setVocab(makeWords(5, { hasInflections: false }))
+    const session = startSession({ type: 'words', focusKeys: ['w0', 'w1'] }, seededRng(9))
+    expect(session.focusKeys).toEqual(['w0', 'w1'])
+    expect(session.pools.current).toEqual(['w0', 'w1'])
+  })
+})
+
+describe('export / import', () => {
+  it('validates import payloads', () => {
+    expect(validateImport(null).ok).toBe(false)
+    expect(validateImport({ app: 'other', version: 1, records: [] }).ok).toBe(false)
+    expect(validateImport({ app: 'slovarchik', version: 1, records: [{ word: 1 }] }).ok).toBe(false)
+    expect(validateImport({ app: 'slovarchik', version: 1, records: [] }).ok).toBe(true)
+  })
+
+  it('round-trips all progress through export → reset → import', async () => {
+    setVocab(makeWords(2, { hasInflections: false }))
+    await learn('w0', 1234)
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 })
+
+    const snapshot = exportData()
+    expect(snapshot.app).toBe('slovarchik')
+    expect(JSON.parse(JSON.stringify(snapshot))).toEqual(snapshot) // serialisable
+
+    await resetProgress()
+    expect(learnedWords()).toHaveLength(0)
+
+    await importData(snapshot)
+    expect(stateOf('w0')).toBe('mastered')
+    expect(state.records.w0.learnedAt).toBe(1234)
+    expect(state.learning.name).toBe('animals')
+  })
+
+  it('rejects a malformed import without touching existing data', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    await expect(importData({ app: 'nope' })).rejects.toThrow()
+    expect(stateOf('w0')).toBe('mastered') // unchanged
   })
 })
 
