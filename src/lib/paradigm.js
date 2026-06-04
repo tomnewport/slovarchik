@@ -132,11 +132,19 @@ export function buildParadigm(word) {
       break
     }
     case 'pronoun': {
-      // Raw YAML `forms` (word.forms is only populated for nouns). Two shapes:
-      // personal/reflexive/кто-что decline by case; possessives, determiners,
-      // demonstratives and какой/чей agree by gender like adjectives.
+      // Raw YAML `forms`/`declension` (word.forms is only populated for nouns).
+      // Three shapes, in priority order: the adjective-like pronouns
+      // (possessives, determiners, demonstratives, какой/чей) carry a full
+      // case × gender `declension` block; personal/reflexive/кто-что decline by
+      // case only; anything left falls back to the nominative gender forms.
+      const decl = word.extra?.declension
       const raw = word.extra?.forms ?? {}
-      if (CASES.some((c) => raw[c] != null)) {
+      if (decl && Object.keys(decl).length) {
+        // Full case × gender/number grid: cases are rows, genders are columns.
+        // declension keys are "<gender>_<case>" (same layout as adjectives).
+        const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
+        paradigm = assemble(meta, rows, GENDER_COLS, (row, col) => decl[`${col}_${row}`])
+      } else if (CASES.some((c) => raw[c] != null)) {
         const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
         paradigm = assemble(meta, rows, SINGLE_COL('Form'), (row) => raw[row])
       } else {

@@ -36,13 +36,33 @@ const ya = {
   extra: { type: 'pers', forms: { nom: 'я', gen: 'меня́', dat: 'мне', acc: 'меня́', ins: 'мной', pre: 'мне' } },
 }
 
-// Possessive pronoun — agrees by gender/number (m / f / n / pl), like adjectives.
+// Possessive pronoun with only the legacy nominative agreement forms
+// (m / f / n / pl) and no declension block — must fall back to the gender table.
 const moy = {
   key: 'мой=my',
   pos: 'pronoun',
   headword: 'мой',
   meaning: 'my',
   extra: { type: 'poss', forms: { m: 'мой', f: 'моя́', n: 'моё', pl: 'мои́' } },
+}
+
+// Possessive pronoun carrying the full case × gender/number declension block —
+// drills the adjective-style grid. declension keys are "<gender>_<case>".
+const moyFull = {
+  key: 'мой=my',
+  pos: 'pronoun',
+  headword: 'мой',
+  meaning: 'my',
+  extra: {
+    type: 'poss',
+    forms: { m: 'мой', f: 'моя́', n: 'моё', pl: 'мои́' },
+    declension: {
+      m_nom: 'мой', m_gen: 'моего́', m_dat: 'моему́', m_acc: 'мой', m_ins: 'мои́м', m_pre: 'моём',
+      n_nom: 'моё', n_gen: 'моего́', n_dat: 'моему́', n_acc: 'моё', n_ins: 'мои́м', n_pre: 'моём',
+      f_nom: 'моя́', f_gen: 'мое́й', f_dat: 'мое́й', f_acc: 'мою́', f_ins: 'мое́й', f_pre: 'мое́й',
+      pl_nom: 'мои́', pl_gen: 'мои́х', pl_dat: 'мои́м', pl_acc: 'мои́', pl_ins: 'мои́ми', pl_pre: 'мои́х',
+    },
+  },
 }
 
 const chitat = {
@@ -148,12 +168,22 @@ describe('buildParadigm — pronoun', () => {
     expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
     expect(isMultiColumn(p)).toBe(false)
   })
-  it('builds a gender table for possessive pronouns', () => {
+  it('falls back to a gender table when there is no declension block', () => {
     const p = buildParadigm(moy)
     expect(p.rows.map((r) => r.key)).toEqual(['m', 'f', 'n', 'pl'])
     expect(p.cells).toHaveLength(4)
     expect(p.stem).toBe('мо')
     expect(endingOf(p, p.cells.find((c) => c.row === 'f'))).toBe('я')
+  })
+  it('builds the full case × gender/number grid when a declension block exists', () => {
+    const p = buildParadigm(moyFull)
+    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
+    expect(p.cols.map((c) => c.key)).toEqual(['m', 'n', 'f', 'pl'])
+    expect(p.cells).toHaveLength(24)
+    expect(isMultiColumn(p)).toBe(true)
+    const fGen = p.cells.find((c) => c.row === 'gen' && c.col === 'f')
+    expect(fGen.form).toBe('мое́й')
+    expect(cellLabel(p, fGen)).toBe('Genitive · Fem.')
   })
 })
 
@@ -260,5 +290,20 @@ describe('buildParadigms over the shipped vocabulary', () => {
     expect(paradigms.length).toBeGreaterThanOrEqual(min)
     // Every paradigm must carry at least three filled cells to be drillable.
     for (const p of paradigms) expect(p.cells.length).toBeGreaterThanOrEqual(3)
+  })
+
+  it('drills the adjective-like pronouns as a full case × gender grid', () => {
+    // Pronouns that agree by gender (мой, этот, какой, …) now ship a declension
+    // block, so their paradigm has both axes — cases as rows, genders as columns.
+    const adjLike = words.filter((w) => w.pos === 'pronoun' && w.extra?.forms?.m)
+    expect(adjLike.length).toBeGreaterThanOrEqual(15)
+    for (const w of adjLike) {
+      const p = buildParadigm(w)
+      expect(p, w.key).not.toBeNull()
+      expect(isMultiColumn(p), w.key).toBe(true)
+      expect(p.rows.map((r) => r.key), w.key).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
+      expect(p.cols.map((c) => c.key), w.key).toEqual(['m', 'n', 'f', 'pl'])
+      expect(p.cells, w.key).toHaveLength(24)
+    }
   })
 })
