@@ -8,6 +8,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
 import { STATES } from '../lib/progression.js'
+import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
 import { buildExercises } from '../lib/exerciseBuild.js'
 import {
   initRunner,
@@ -59,6 +60,10 @@ function rank(stateName) {
 async function setup() {
   if (!vocabState.words.length) await initVocab()
   if (!progress.state.loaded) await progress.loadProgress()
+  // Auto-commit a mastery batch if the learner qualifies but none is active.
+  if (progress.learnedCount.value >= MASTERY_UNLOCK_AT && !progress.state.mastery) {
+    await progress.autoCommitMasteryBatch()
+  }
 
   const type = String(route.query.type ?? 'standard')
   const size = route.query.size ? String(route.query.size) : undefined
@@ -109,6 +114,10 @@ function finalizeIfDone() {
     .filter((level) => progress.state[level] && progress.batchComplete(level))
     .map((level) => ({ level, batch: progress.state[level] }))
   for (const { level } of celebrated.value) progress.advanceBatch(level)
+  // Auto-commit next mastery batch so it is ready when the learner returns home.
+  if (celebrated.value.some((c) => c.level === 'mastery')) {
+    progress.autoCommitMasteryBatch()
+  }
 }
 
 function onDone(result) {
@@ -185,10 +194,15 @@ function durationLabel(ms) {
   return m > 0 ? `${m}m ${s % 60}s` : `${s}s`
 }
 
-// The completed batches are already advanced in finalizeIfDone(); this just
-// routes the learner on to choose the next one for that level.
+// After a learning batch completes, route to batch selection so the learner
+// can choose what to study next. Mastery batches are auto-committed in
+// finalizeIfDone(), so just return home.
 function nextBatch(level) {
-  router.push({ path: '/batch', query: { level } })
+  if (level === 'mastery') {
+    router.push('/')
+  } else {
+    router.push({ path: '/batch', query: { level } })
+  }
 }
 
 function confirmClose() {
@@ -250,7 +264,7 @@ function confirmClose() {
           <strong class="batch-name">{{ done.batch.name }}</strong>.
         </p>
         <button class="primary next-batch" @click="nextBatch(celebrated[0].level)">
-          Choose the next batch →
+          {{ celebrated[0].level === 'mastery' ? 'Keep going →' : 'Choose the next batch →' }}
         </button>
         <button class="ghost" @click="router.push('/')">Back home</button>
       </div>

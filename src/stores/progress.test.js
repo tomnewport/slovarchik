@@ -20,6 +20,7 @@ import {
   advanceBatch,
   dimensionWeakness,
   encounterCount,
+  autoCommitMasteryBatch,
   startSession,
   loadProgress,
   resetProgress,
@@ -200,6 +201,24 @@ describe('batches', () => {
     setVocab(makeWords(5, { hasInflections: true }))
     // No words learned yet → no mastery options regardless.
     expect(getBatchOptions('mastery', seededRng(2))).toEqual([])
+  })
+
+  it('autoCommitMasteryBatch returns null when mastery is locked', async () => {
+    setVocab(makeWords(5, { hasInflections: true }))
+    const result = await autoCommitMasteryBatch(seededRng(3))
+    expect(result).toBeNull()
+    expect(state.mastery).toBeNull()
+  })
+
+  it('autoCommitMasteryBatch picks and commits a random mastery batch', async () => {
+    const words = makeWords(120, { hasInflections: true })
+    setVocab(words)
+    // Learn (and master for uninflected-equivalent) enough words to unlock mastery.
+    for (const w of words.slice(0, 100)) await learn(w.key)
+    const result = await autoCommitMasteryBatch(seededRng(4))
+    expect(result).not.toBeNull()
+    expect(result.level).toBe('mastery')
+    expect(state.mastery).toEqual(result)
   })
 })
 

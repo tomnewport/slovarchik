@@ -27,6 +27,17 @@ export const BATCH_OPTIONS = 5
 /** A named batch must draw at least this fraction from one collection. */
 export const SAME_COLLECTION_RATIO = 0.75
 
+/**
+ * Parts of speech treated as "glue" words — pronouns, conjunctions,
+ * prepositions and interjections. A few of these are always mixed into
+ * learning batches so the learner picks them up naturally alongside the
+ * main vocabulary.
+ */
+export const GLUE_POS = Object.freeze(['pronoun', 'conjunction', 'preposition', 'interjection'])
+
+/** How many glue words to append to each learning batch option. */
+export const GLUE_PER_BATCH = 3
+
 /** Batch accent colours: learning is green, mastery is gold. */
 export const BATCH_COLORS = Object.freeze({ learning: 'green', mastery: 'gold' })
 
@@ -114,6 +125,17 @@ function makeOption(collection, words, level) {
   }
 }
 
+/** Append a sample of glue words to a batch option. */
+function addGlue(option, refinedGlue, rng) {
+  if (!refinedGlue.length) return option
+  const picked = sample(refinedGlue, GLUE_PER_BATCH, rng)
+  return {
+    ...option,
+    words: [...option.words, ...picked.map((w) => w.key)],
+    size: option.size + picked.length,
+  }
+}
+
 /** A stable signature for a batch's word set, used to drop duplicate options. */
 function signature(option) {
   return option.words.slice().sort().join('|')
@@ -181,7 +203,21 @@ export function buildBatchOptions({
   if (level === 'mastery' && learnedCount < MASTERY_UNLOCK_AT) return []
   const size = batchSize(level)
   const eligible = words.filter((w) => isEligible(stateOf(w), level))
-  if (eligible.length === 0) return []
-  const pool = refineToLowest(eligible, size, rng)
-  return assembleOptions(pool, size, level, rng)
+
+  // For learning batches only: separate glue words (pronouns, conjunctions,
+  // prepositions, interjections) from main vocabulary so they are always mixed
+  // into every batch option regardless of which collection anchors it.
+  let mainEligible = eligible
+  let refinedGlue = []
+  if (level === 'learning') {
+    const isGlue = (w) => GLUE_POS.includes(w.pos)
+    const glueEligible = eligible.filter(isGlue)
+    mainEligible = eligible.filter((w) => !isGlue(w))
+    if (glueEligible.length) refinedGlue = refineToLowest(glueEligible, GLUE_PER_BATCH, rng)
+  }
+
+  if (mainEligible.length === 0) return []
+  const pool = refineToLowest(mainEligible, size, rng)
+  const options = assembleOptions(pool, size, level, rng)
+  return options.map((opt) => addGlue(opt, refinedGlue, rng))
 }

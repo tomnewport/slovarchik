@@ -226,6 +226,19 @@ export function getBatchOptions(level = 'learning', rng = Math.random) {
   })
 }
 
+/**
+ * Randomly pick one of the available mastery batch options and commit it.
+ * Returns the committed option, or null if mastery is not yet unlocked or no
+ * eligible words remain.
+ */
+export async function autoCommitMasteryBatch(rng = Math.random) {
+  const options = getBatchOptions('mastery', rng)
+  if (options.length === 0) return null
+  const pick = options[Math.floor(rng() * options.length)]
+  await commitBatch(pick)
+  return pick
+}
+
 /** Commit a chosen batch as the current batch for its level; persist it. */
 export async function commitBatch(option) {
   if (!option) return

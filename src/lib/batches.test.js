@@ -6,6 +6,8 @@ import {
   MASTERY_UNLOCK_AT,
   BATCH_OPTIONS,
   BATCH_COLORS,
+  GLUE_POS,
+  GLUE_PER_BATCH,
   cefrRank,
   isEligible,
   batchSize,
@@ -164,5 +166,52 @@ describe('buildBatchOptions', () => {
     expect(
       buildBatchOptions({ words: all, stateOf: stateOf(mastered), level: 'learning', rng: seededRng(10) }),
     ).toEqual([])
+  })
+
+  it('mixes glue words into each learning batch option', () => {
+    const mainWords = words('n', 20, 'A1', ['animals'])
+    const glueWords = GLUE_POS.map((pos, i) => ({ key: `g${i}`, cefr: 'A1', collections: [], pos }))
+    const options = buildBatchOptions({
+      words: [...mainWords, ...glueWords],
+      stateOf: stateOf({}),
+      level: 'learning',
+      rng: seededRng(11),
+    })
+    expect(options.length).toBeGreaterThan(0)
+    for (const opt of options) {
+      const glueInBatch = opt.words.filter((k) => k.startsWith('g')).length
+      expect(glueInBatch).toBe(Math.min(GLUE_PER_BATCH, glueWords.length))
+      expect(opt.size).toBe(LEARNING_BATCH_SIZE + glueInBatch)
+    }
+  })
+
+  it('keeps all batch words in main vocabulary when no glue pos words are present', () => {
+    const all = words('n', 20, 'A1', ['animals']) // no pos field → not treated as glue
+    const options = buildBatchOptions({ words: all, stateOf: stateOf({}), level: 'learning', rng: seededRng(12) })
+    expect(options.length).toBeGreaterThan(0)
+    expect(options[0].size).toBe(LEARNING_BATCH_SIZE)
+    expect(options[0].words.every((k) => k.startsWith('n'))).toBe(true)
+  })
+
+  it('glue words without inflections stay out of mastery batches (they are mastered, not learned)', () => {
+    const mainWords = words('n', 20, 'A1', ['animals'])
+    const glueWords = GLUE_POS.map((pos, i) => ({ key: `g${i}`, cefr: 'A1', collections: [], pos }))
+    // Uninflected glue words transition directly to 'mastered' when learned, so
+    // isEligible('mastered', 'mastery') === false — they never enter mastery batches.
+    const states = {
+      ...Object.fromEntries(mainWords.map((w) => [w.key, 'learned'])),
+      ...Object.fromEntries(glueWords.map((w) => [w.key, 'mastered'])),
+    }
+    const options = buildBatchOptions({
+      words: [...mainWords, ...glueWords],
+      stateOf: stateOf(states),
+      level: 'mastery',
+      learnedCount: MASTERY_UNLOCK_AT,
+      rng: seededRng(13),
+    })
+    expect(options.length).toBeGreaterThan(0)
+    for (const opt of options) {
+      expect(opt.words.some((k) => k.startsWith('g'))).toBe(false)
+    }
   })
 })

@@ -1,20 +1,20 @@
 <script setup>
 // Home: the launchpad for every session type, plus the current learning /
-// mastery batch status (with prompts to choose a batch when none is set).
+// mastery batch status. The learning batch is chosen by the user (on first
+// visit and after completing a batch); the mastery batch is auto-selected.
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { state as progress, learnedCount } from '../stores/progress.js'
-import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
+import { state as progress } from '../stores/progress.js'
 
 const router = useRouter()
 
 function startSession(type, size) {
+  if (!progress.learning) {
+    router.push({ path: '/batch', query: { level: 'learning' } })
+    return
+  }
   router.push({ path: '/session', query: size ? { type, size } : { type } })
-}
-
-function chooseBatch(level) {
-  router.push({ path: '/batch', query: { level } })
 }
 
 // Open-ended standalone drills (no progress tracking) — kept reachable as free
@@ -35,9 +35,9 @@ function openDrill(to) {
   router.push(to)
 }
 
+
 const learningBatch = computed(() => progress.learning)
 const masteryBatch = computed(() => progress.mastery)
-const masteryUnlocked = computed(() => learnedCount.value >= MASTERY_UNLOCK_AT)
 
 const FOCUSED = [
   { type: 'speaking', label: 'Speaking', icon: '🗣️' },
@@ -52,21 +52,25 @@ const FOCUSED = [
   <section class="grid" style="gap: 1.25rem">
     <!-- Current batches -->
     <div class="batches">
-      <button class="batch-card learn" @click="chooseBatch('learning')">
-        <span class="batch-kind">Learning</span>
-        <strong v-if="learningBatch">{{ learningBatch.name }}</strong>
-        <span v-else class="muted">Choose words to learn →</span>
-      </button>
-
+      <!-- Learning: prompt to choose when none is set; display-only when active -->
       <button
-        v-if="masteryUnlocked || masteryBatch"
-        class="batch-card master"
-        @click="chooseBatch('mastery')"
+        v-if="!learningBatch"
+        class="batch-card learn"
+        @click="router.push({ path: '/batch', query: { level: 'learning' } })"
       >
-        <span class="batch-kind">Mastering</span>
-        <strong v-if="masteryBatch">{{ masteryBatch.name }}</strong>
-        <span v-else class="muted">Choose words to master →</span>
+        <span class="batch-kind">Learning</span>
+        <span class="muted">Choose words to learn →</span>
       </button>
+      <div v-else class="batch-card learn">
+        <span class="batch-kind">Learning</span>
+        <strong>{{ learningBatch.name }}</strong>
+      </div>
+
+      <!-- Mastery: display-only, auto-selected from learned words -->
+      <div v-if="masteryBatch" class="batch-card master">
+        <span class="batch-kind">Mastering</span>
+        <strong>{{ masteryBatch.name }}</strong>
+      </div>
     </div>
 
     <!-- Standard session: Quick / Normal / Super -->
