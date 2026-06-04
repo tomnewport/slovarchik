@@ -22,12 +22,19 @@ let flashTimer = null
 
 const done = computed(() => matched.value.size === props.exercise.pairs.length)
 
+// After 80% of pairs are matched the remaining ones can be identified by
+// elimination alone, so auto-complete them instead of requiring clicks.
+const autoCompleteAt = Math.ceil(props.exercise.pairs.length * 0.8)
+
 function tryMatch() {
   if (pickedRu.value == null || pickedEn.value == null) return
   if (pickedRu.value === pickedEn.value) {
     matched.value = new Set([...matched.value, pickedRu.value])
     pickedRu.value = null
     pickedEn.value = null
+    if (matched.value.size >= autoCompleteAt) {
+      matched.value = new Set(props.exercise.pairs.map((p) => p.key))
+    }
   } else {
     mistakes++
     const miss = [pickedRu.value, pickedEn.value]
