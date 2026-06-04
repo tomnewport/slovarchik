@@ -41,6 +41,14 @@ describe('HomeView', () => {
     expect(push).toHaveBeenCalledWith({ path: '/batch', query: { level: 'learning' } })
   })
 
+  it('links to the standalone free-practice drills', async () => {
+    const wrapper = mount(HomeView)
+    const drills = wrapper.findAll('.drill')
+    expect(drills.length).toBe(9)
+    await drills[0].trigger('click') // Vocabulary
+    expect(push).toHaveBeenCalledWith('/vocab')
+  })
+
   it('shows the committed batch name and hides mastery until unlocked', () => {
     progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)

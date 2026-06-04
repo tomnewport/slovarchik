@@ -17,6 +17,24 @@ function chooseBatch(level) {
   router.push({ path: '/batch', query: { level } })
 }
 
+// Open-ended standalone drills (no progress tracking) — kept reachable as free
+// practice alongside the tracked session flow.
+const DRILLS = [
+  { to: '/vocab', label: 'Vocabulary' },
+  { to: '/declension', label: 'Nouns' },
+  { to: '/adjectives', label: 'Adjectives' },
+  { to: '/pronouns', label: 'Pronouns' },
+  { to: '/verbs', label: 'Verbs' },
+  { to: '/numbers', label: 'Numbers' },
+  { to: '/phrases', label: 'Phrases' },
+  { to: '/listening', label: 'Listening' },
+  { to: '/speaking', label: 'Speaking' },
+]
+
+function openDrill(to) {
+  router.push(to)
+}
+
 const learningBatch = computed(() => progress.learning)
 const masteryBatch = computed(() => progress.mastery)
 const masteryUnlocked = computed(() => learnedCount.value >= MASTERY_UNLOCK_AT)
@@ -79,6 +97,17 @@ const FOCUSED = [
         <span class="icon">{{ f.icon }}</span>{{ f.label }}
       </button>
     </div>
+
+    <!-- Open-ended free-practice drills -->
+    <details class="free">
+      <summary>Free practice</summary>
+      <p class="muted">Open-ended drills — these don't track progress.</p>
+      <div class="row links">
+        <button v-for="d in DRILLS" :key="d.to" class="pill drill" @click="openDrill(d.to)">
+          {{ d.label }}
+        </button>
+      </div>
+    </details>
   </section>
 </template>
 
@@ -143,5 +172,18 @@ const FOCUSED = [
 }
 .icon {
   font-size: 1.3rem;
+}
+.free summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+.free .links {
+  margin-top: 0.5rem;
+  gap: 0.4rem;
+}
+.drill {
+  cursor: pointer;
+  background: var(--bg-soft);
+  color: var(--text);
 }
 </style>
