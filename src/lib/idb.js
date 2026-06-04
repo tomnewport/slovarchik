@@ -1,11 +1,13 @@
-// Tiny promise-based IndexedDB wrapper. Two object stores:
+// Tiny promise-based IndexedDB wrapper. Three object stores:
 //   'vocab-files' (keyed by filename)  — cached vocab YAML: { file, pos, updated, content }
 //   'meta'        (keyed by name)       — small app settings: { key, value }
+//   'progress'    (keyed by word)       — per-word learning record (see stores/progress.js)
 
 const DB_NAME = 'slovarchik'
 const FILES_STORE = 'vocab-files'
 const META_STORE = 'meta'
-const VERSION = 3
+const PROGRESS_STORE = 'progress'
+const VERSION = 4
 
 let dbPromise = null
 
@@ -21,6 +23,11 @@ function openDb() {
       }
       if (!db.objectStoreNames.contains(META_STORE)) {
         db.createObjectStore(META_STORE, { keyPath: 'key' })
+      }
+      // New for the progression model (v4). A fresh store — the old progress
+      // records no longer exist, so there is nothing to migrate.
+      if (!db.objectStoreNames.contains(PROGRESS_STORE)) {
+        db.createObjectStore(PROGRESS_STORE, { keyPath: 'word' })
       }
     }
     req.onsuccess = () => resolve(req.result)
@@ -70,6 +77,27 @@ export function putFile(record) {
 /** Remove all cached files (used by "reset" / tests). */
 export function clearFiles() {
   return tx(FILES_STORE, 'readwrite', (store) => {
+    store.clear()
+    return { value: undefined }
+  })
+}
+
+/** Read every per-word progress record. */
+export function getAllProgress() {
+  return getAll(PROGRESS_STORE)
+}
+
+/** Insert or replace a per-word progress record. */
+export function putProgress(record) {
+  return tx(PROGRESS_STORE, 'readwrite', (store) => {
+    store.put(record)
+    return { value: record }
+  })
+}
+
+/** Remove all progress records (used by "reset" / tests). */
+export function clearProgress() {
+  return tx(PROGRESS_STORE, 'readwrite', (store) => {
     store.clear()
     return { value: undefined }
   })
