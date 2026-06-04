@@ -4,6 +4,7 @@
 // release date of the running code plus when the dictionaries were last
 // updated (with actions to fetch the latest).
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import * as progress from '../stores/progress.js'
 import { getAllFiles } from '../lib/idb.js'
@@ -11,11 +12,13 @@ import { syncFromNetwork } from '../stores/vocab.js'
 
 const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : null
 
+const router = useRouter()
 const files = ref([])
 const importText = ref('')
 const importStatus = ref(null) // { ok, message }
 const updating = ref(false)
 const updateStatus = ref(null)
+const resetConfirm = ref(false)
 
 const exportText = computed(() => JSON.stringify(progress.exportData(), null, 2))
 const downloadHref = computed(
@@ -82,6 +85,11 @@ function reloadApp() {
   window.location.reload()
 }
 
+async function doReset() {
+  await progress.resetProgress()
+  router.push('/')
+}
+
 onMounted(async () => {
   if (!progress.state.loaded) await progress.loadProgress()
   await loadFiles()
@@ -122,6 +130,21 @@ onMounted(async () => {
         <span v-if="importStatus" class="status" :class="importStatus.ok ? 'ok' : 'no'">
           {{ importStatus.message }}
         </span>
+      </div>
+    </div>
+
+    <!-- Reset -->
+    <div class="card">
+      <h2>Reset</h2>
+      <p class="muted">Permanently delete all your progress and start over from scratch. This cannot be undone.</p>
+      <div class="row">
+        <template v-if="!resetConfirm">
+          <button class="reset-btn" @click="resetConfirm = true">Reset all progress</button>
+        </template>
+        <template v-else>
+          <button class="reset-confirm" @click="doReset">Yes, delete everything</button>
+          <button class="reset-cancel" @click="resetConfirm = false">Cancel</button>
+        </template>
       </div>
     </div>
 
@@ -180,5 +203,15 @@ onMounted(async () => {
 .dicts {
   margin: 0.5rem 0;
   padding-left: 1.2rem;
+}
+.reset-btn,
+.reset-confirm {
+  background: var(--bad);
+  color: #fff;
+  border: none;
+}
+.reset-btn:hover,
+.reset-confirm:hover {
+  opacity: 0.85;
 }
 </style>

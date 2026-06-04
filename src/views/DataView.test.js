@@ -7,7 +7,8 @@ import * as idb from '../lib/idb.js'
 import { state as vocabState } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
 
-vi.mock('vue-router', () => ({ useRouter: () => ({ push: vi.fn() }) }))
+const mockPush = vi.fn()
+vi.mock('vue-router', () => ({ useRouter: () => ({ push: mockPush }) }))
 
 const { default: DataView } = await import('./DataView.vue')
 
@@ -25,6 +26,7 @@ beforeEach(async () => {
   globalThis.indexedDB = new IDBFactory()
   idb._resetForTests()
   vocabState.words = [{ key: 'w0', pos: 'noun', hasInflections: false }]
+  mockPush.mockClear()
   await progress.resetProgress()
   await progress.loadProgress()
 })
@@ -68,6 +70,36 @@ describe('DataView', () => {
 
     expect(wrapper.find('.status.ok').exists()).toBe(true)
     expect(progress.stateOf('w0')).toBe('mastered')
+  })
+
+  it('requires confirmation before resetting and navigates home', async () => {
+    await progress.recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: true })
+    expect(Object.keys(progress.state.records).length).toBe(1)
+
+    const wrapper = mount(DataView)
+    await settle()
+
+    // First click reveals the confirm button
+    await wrapper.find('.reset-btn').trigger('click')
+    expect(wrapper.find('.reset-confirm').exists()).toBe(true)
+    expect(wrapper.find('.reset-btn').exists()).toBe(false)
+
+    // Confirm click wipes progress and pushes home
+    await wrapper.find('.reset-confirm').trigger('click')
+    await settle()
+
+    expect(Object.keys(progress.state.records).length).toBe(0)
+    expect(progress.state.firstUseAt).toBeNull()
+    expect(mockPush).toHaveBeenCalledWith('/')
+  })
+
+  it('cancel on reset confirm restores the initial button', async () => {
+    const wrapper = mount(DataView)
+    await settle()
+    await wrapper.find('.reset-btn').trigger('click')
+    await wrapper.find('.reset-cancel').trigger('click')
+    expect(wrapper.find('.reset-btn').exists()).toBe(true)
+    expect(wrapper.find('.reset-confirm').exists()).toBe(false)
   })
 
   it('shows cached dictionary update dates', async () => {

@@ -432,14 +432,16 @@ export async function loadProgress() {
   return state
 }
 
-/** Wipe all progress (records + batches). For the Data screen's reset/tests. */
+/** Wipe all progress (records + batches + first-use timestamp). For the Data screen's reset/tests. */
 export async function resetProgress() {
   await idb.clearProgress()
   await idb.setMeta(BATCH_META_KEY('learning'), null)
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
+  await idb.setMeta('firstUseAt', null)
   state.records = {}
   state.learning = null
   state.mastery = null
+  state.firstUseAt = null
 }
 
 /** Expose whether a word has an inflection table (used by the UI badges). */
