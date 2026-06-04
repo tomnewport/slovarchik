@@ -11,6 +11,21 @@ export const routes = [
     component: () => import('../views/SessionView.vue'),
   },
   {
+    path: '/batch',
+    name: 'batch',
+    component: () => import('../views/BatchSelectView.vue'),
+  },
+  {
+    path: '/progress',
+    name: 'progress',
+    component: () => import('../views/ProgressView.vue'),
+  },
+  {
+    path: '/data',
+    name: 'data',
+    component: () => import('../views/DataView.vue'),
+  },
+  {
     path: '/vocab',
     name: 'vocab',
     component: () => import('../views/VocabView.vue'),

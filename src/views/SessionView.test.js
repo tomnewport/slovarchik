@@ -43,6 +43,17 @@ async function answer(wrapper, text) {
   await flushPromises()
 }
 
+// A record satisfying every learning criterion (→ mastered for an uninflected
+// word), so a batch of such words counts as complete.
+function masteredRecord(word) {
+  const events = []
+  for (const d of ['identification', 'usage', 'hearing']) {
+    for (let i = 0; i < 3; i++) events.push({ dimension: d, level: 'learning', correct: true, ts: 1 })
+  }
+  for (let i = 0; i < 3; i++) events.push({ dimension: 'speaking', level: 'learning', correct: true, ts: 1 })
+  return { word, events, learnedAt: 1, masteredAt: 1, peak: 3 }
+}
+
 describe('SessionView', () => {
   it('runs a session to completion, reports results and shows a summary', async () => {
     const wrapper = mount(SessionView)
@@ -76,6 +87,33 @@ describe('SessionView', () => {
     expect(wrapper.text()).toContain('Session complete')
     // First-attempt score: 1 of 2 correct.
     expect(wrapper.text()).toContain('50%')
+  })
+
+  it('celebrates a completed batch, advances it, and routes to the next', async () => {
+    // The session's two target words make up the committed learning batch and
+    // are already at mastery, so finishing the session completes the batch.
+    progress.state.records = { t1: masteredRecord('t1'), t2: masteredRecord('t2') }
+    await progress.commitBatch({
+      name: 'animals',
+      collection: 'animals',
+      level: 'learning',
+      color: 'green',
+      words: ['t1', 't2'],
+      size: 2,
+    })
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await answer(wrapper, 'дом')
+    await answer(wrapper, 'кот')
+
+    expect(wrapper.text()).toContain('Batch complete')
+    expect(wrapper.text()).toContain('animals')
+    // The completed batch is advanced (cleared) on entry to the summary.
+    expect(progress.state.learning).toBe(null)
+
+    await wrapper.find('.next-batch').trigger('click')
+    expect(push).toHaveBeenCalledWith({ path: '/batch', query: { level: 'learning' } })
   })
 
   it('asks for confirmation before closing', async () => {

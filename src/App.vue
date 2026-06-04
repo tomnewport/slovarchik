@@ -1,34 +1,58 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+
 import RussianKeyboard from './components/RussianKeyboard.vue'
+import ProgressPill from './components/ProgressPill.vue'
+
+// The session runner carries its own header (close + progress bar), so the app
+// chrome steps out of the way while a session is in progress.
+const route = useRoute()
+const showHeader = computed(() => route.name !== 'session')
 </script>
 
 <template>
-  <header class="row" style="justify-content: space-between; margin-bottom: 1.5rem">
-    <RouterLink to="/" style="text-decoration: none; color: inherit">
-      <h1 style="margin: 0; font-size: 1.6rem">
-        Словарчик <span class="muted" style="font-size: 1rem">· Slovarchik</span>
-      </h1>
+  <header v-if="showHeader" class="app-header">
+    <RouterLink to="/" class="logo" aria-label="Home — Slovarchik">
+      Словарчик
     </RouterLink>
-    <nav class="row">
-      <RouterLink to="/vocab">Vocab</RouterLink>
-      <RouterLink to="/declension">Nouns</RouterLink>
-      <RouterLink to="/adjectives">Adjectives</RouterLink>
-      <RouterLink to="/pronouns">Pronouns</RouterLink>
-      <RouterLink to="/verbs">Verbs</RouterLink>
-      <RouterLink to="/phrases">Phrases</RouterLink>
-      <RouterLink to="/listening">Listening</RouterLink>
-      <RouterLink to="/speaking">Speaking</RouterLink>
-    </nav>
+    <ProgressPill />
+    <RouterLink to="/data" class="avatar" aria-label="Your data">🧑‍🚀</RouterLink>
   </header>
 
   <main>
     <RouterView />
   </main>
 
-  <footer class="muted" style="margin-top: 3rem; font-size: 0.85rem; text-align: center">
-    Works offline · installable · no tracking, no backend.
-  </footer>
-
   <RussianKeyboard />
 </template>
+
+<style scoped>
+.app-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.logo {
+  justify-self: start;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+.avatar {
+  justify-self: end;
+  font-size: 1.5rem;
+  text-decoration: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+}
+</style>

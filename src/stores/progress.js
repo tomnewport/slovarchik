@@ -221,8 +221,13 @@ export function getBatchOptions(level = 'learning', rng = Math.random) {
 /** Commit a chosen batch as the current batch for its level; persist it. */
 export async function commitBatch(option) {
   if (!option) return
-  state[option.level] = option
-  await idb.setMeta(BATCH_META_KEY(option.level), option)
+  // Store a plain, fully-unwrapped clone: the option may arrive as a Vue
+  // reactive proxy (incl. nested arrays), which IndexedDB's structured clone
+  // cannot serialise. A JSON round-trip drops the proxies and stays correct if
+  // the option shape ever gains a field.
+  const plainOption = JSON.parse(JSON.stringify(option))
+  state[plainOption.level] = plainOption
+  await idb.setMeta(BATCH_META_KEY(plainOption.level), plainOption)
 }
 
 /** Target state a word must reach for a batch of the given level to count it. */
