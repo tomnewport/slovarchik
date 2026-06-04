@@ -15,7 +15,10 @@ import * as idb from '../lib/idb.js'
 import { state as vocabState } from './vocab.js'
 import {
   DIMENSIONS,
+  LEVELS,
   STATES,
+  CRITERIA,
+  dimensionsForLevel,
   wordState,
   wordHasInflections,
   dimensionProgress,
@@ -27,7 +30,8 @@ import { buildSession } from '../lib/session.js'
 // Keep storage bounded: only the most recent attempts per (level, dimension)
 // matter to the model (windows of four; speaking needs three). Ten is plenty.
 const MAX_EVENTS_PER_DIM = 10
-// How many of the most recent attempts feed the dimension-weakness weighting.
+// How many of each word's most recent attempts feed the dimension-weakness
+// weighting (applied per word, then aggregated across all words).
 const WEAKNESS_WINDOW = 40
 // How many freshly-learned words `recentlyLearned` surfaces.
 const RECENT_LIMIT = 12
@@ -106,11 +110,19 @@ export const atRisk = computed(() =>
 
 function isBorderline(key) {
   const evs = events(key)
-  for (const dim of DIMENSIONS) {
-    const p = dimensionProgress(evs, 'learning', dim)
-    if (!p.met) continue
-    const recent = evs.filter((e) => e.level === 'learning' && e.dimension === dim)
-    if (recent.length && recent[recent.length - 1].correct === false) return true
+  // Check every graded ratio criterion at both levels: a met criterion whose
+  // most recent attempt was wrong is one more miss from un-meeting. We skip
+  // `attempts`-type criteria (speaking) — those never un-meet once reached, so
+  // a wrong attempt there can't put a word at risk. Covering the mastery level
+  // too means a mastered word one wrong hearing answer from dropping back to
+  // learned is surfaced, not just learning-level slips.
+  for (const level of LEVELS) {
+    for (const dim of dimensionsForLevel(level)) {
+      if (CRITERIA[level][dim].type !== 'ratio') continue
+      if (!dimensionProgress(evs, level, dim).met) continue
+      const recent = evs.filter((e) => e.level === level && e.dimension === dim)
+      if (recent.length && recent[recent.length - 1].correct === false) return true
+    }
   }
   return false
 }

@@ -132,6 +132,25 @@ describe('demotion, at-risk and recently-learned', () => {
     expect(atRisk.value).toContain('w0')
   })
 
+  it('does not flag a word at-risk for a wrong speaking attempt', async () => {
+    // Speaking is an attempts-based criterion: correctness never affects it, so
+    // a wrong speaking answer cannot put the word one slip from dropping.
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    await recordAttempt({ word: 'w0', dimension: 'speaking', level: 'learning', correct: false })
+    expect(stateOf('w0')).toBe('mastered')
+    expect(atRisk.value).not.toContain('w0')
+  })
+
+  it('flags a mastered word one wrong hearing answer from dropping to learned', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await master('w0')
+    // Mastery hearing window: T,T,T then one F → 3/4 still met, but last is wrong.
+    await recordAttempt({ word: 'w0', dimension: 'hearing', level: 'mastery', correct: false })
+    expect(stateOf('w0')).toBe('mastered')
+    expect(atRisk.value).toContain('w0')
+  })
+
   it('lists recently-learned words newest first', async () => {
     setVocab(makeWords(3, { hasInflections: false }))
     await learn('w0', 100)
