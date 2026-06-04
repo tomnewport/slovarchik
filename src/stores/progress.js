@@ -22,6 +22,7 @@ import {
   wordState,
   wordHasInflections,
   dimensionProgress,
+  levelMet,
   lastAttemptAt,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
@@ -376,6 +377,24 @@ export async function loadProgress() {
       peak: r.peak ?? 0,
     }
   }
+  // Backfill first-learned / first-mastered timestamps for any record that
+  // qualifies but predates timestamp stamping, so the history chart can't fall
+  // behind the live learned/mastered counts. These criteria are inflection-
+  // independent, so they're safe to compute before the vocab is loaded.
+  for (const rec of Object.values(map)) {
+    let changed = false
+    const when = lastAttemptAt(rec.events) ?? Date.now()
+    if (rec.learnedAt == null && levelMet(rec.events, 'learning')) {
+      rec.learnedAt = when
+      changed = true
+    }
+    if (rec.masteredAt == null && levelMet(rec.events, 'mastery')) {
+      rec.masteredAt = when
+      changed = true
+    }
+    if (changed) await persist(rec)
+  }
+
   state.records = map
   state.learning = (await idb.getMeta(BATCH_META_KEY('learning'))) ?? null
   state.mastery = (await idb.getMeta(BATCH_META_KEY('mastery'))) ?? null

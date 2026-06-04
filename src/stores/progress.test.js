@@ -261,6 +261,24 @@ describe('analytics', () => {
     expect(learnedWords()).not.toContain('w1')
   })
 
+  it('backfills missing learnedAt on load so history matches the live counts', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    // A learned record persisted without a learnedAt (pre-dating stamping).
+    const events = []
+    for (const d of ['identification', 'usage', 'hearing']) {
+      for (let i = 0; i < 3; i++) events.push({ dimension: d, level: 'learning', correct: true, ts: 7000 })
+    }
+    for (let i = 0; i < 3; i++) events.push({ dimension: 'speaking', level: 'learning', correct: true, ts: 7000 })
+    await idb.putProgress({ word: 'w0', events, learnedAt: null, masteredAt: null, peak: 0 })
+
+    state.records = {}
+    await loadProgress()
+
+    expect(state.records.w0.learnedAt).toBe(7000) // last attempt timestamp
+    expect(history().length).toBeGreaterThan(0)
+    expect(learnedWords()).toContain('w0')
+  })
+
   it('builds a cumulative words-known-by-day history', async () => {
     setVocab(makeWords(3, { hasInflections: false }))
     await learn('w0', Date.parse('2026-06-01T10:00:00Z'))

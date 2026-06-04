@@ -27,7 +27,9 @@ const chart = computed(() => {
   const x = (i) => (n === 1 ? W / 2 : (i / (n - 1)) * W)
   const y = (v) => H - (v / max) * H
   const line = (key) => pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(p[key]).toFixed(1)}`).join(' ')
-  return { learned: line('learned'), mastered: line('mastered'), max, last: pts[pts.length - 1] }
+  // A single day has no segment to stroke, so expose a point to render as a dot.
+  const dot = n === 1 ? { x: x(0), learned: y(pts[0].learned), mastered: y(pts[0].mastered) } : null
+  return { learned: line('learned'), mastered: line('mastered'), dot, max, last: pts[pts.length - 1] }
 })
 
 function focus(id) {
@@ -54,6 +56,10 @@ function toggle(which) {
       <svg v-if="chart" class="chart" :viewBox="`0 0 ${W} ${H}`" preserveAspectRatio="none" role="img" aria-label="Words known over time">
         <path :d="chart.learned" class="line-learned" fill="none" />
         <path v-if="chart.mastered" :d="chart.mastered" class="line-mastered" fill="none" />
+        <template v-if="chart.dot">
+          <circle :cx="chart.dot.x" :cy="chart.dot.learned" r="3" class="dot-learned" />
+          <circle :cx="chart.dot.x" :cy="chart.dot.mastered" r="3" class="dot-mastered" />
+        </template>
       </svg>
       <p v-else class="muted">No history yet — finish a session to start your chart.</p>
     </div>
@@ -107,6 +113,12 @@ function toggle(which) {
 .line-mastered {
   stroke: var(--gold);
   stroke-width: 2;
+}
+.dot-learned {
+  fill: var(--good);
+}
+.dot-mastered {
+  fill: var(--gold);
 }
 .toggle.active {
   border-color: var(--primary);

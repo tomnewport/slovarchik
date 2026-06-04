@@ -37,6 +37,8 @@ describe('ProgressView', () => {
 
     await wrapper.findAll('.toggle')[0].trigger('click') // Show learned
     expect(wrapper.find('.words').text()).toContain('дом=house')
+    // A single history day draws a dot (a lone line has nothing to stroke).
+    expect(wrapper.find('.dot-learned').exists()).toBe(true)
   })
 
   it('lists weakest skills and launches a focused session on tap', async () => {

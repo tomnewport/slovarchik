@@ -63,7 +63,10 @@ async function setup() {
   const type = String(route.query.type ?? 'standard')
   const size = route.query.size ? String(route.query.size) : undefined
   // A focused session restricts the whole session to words matching a skill.
-  const focusKeys = route.query.focus ? progress.focusKeysFor(String(route.query.focus)) : null
+  // An unknown skill (or one with no eligible words) yields an empty list —
+  // normalise that to null so we fall back to a normal session, not an empty one.
+  const resolved = route.query.focus ? progress.focusKeysFor(String(route.query.focus)) : null
+  const focusKeys = resolved && resolved.length ? resolved : null
   session = progress.startSession({ type, size, focusKeys })
 
   // For a focused session, draw (and top up) only from the filtered words.
