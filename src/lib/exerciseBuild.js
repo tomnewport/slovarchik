@@ -38,6 +38,13 @@ export const PRACTICE_KIND = Object.freeze({
 /** Pairs shown in a single matching board. */
 export const MATCH_PAIRS = 10
 
+/**
+ * Minimum identification encounters a word must have before it is eligible for
+ * a spelling (type-kind) exercise. Prevents asking a learner to spell a word
+ * they have barely seen.
+ */
+export const MIN_ENCOUNTERS_FOR_SPELLING = 2
+
 /** The primary English gloss for a shaped vocab word. */
 function enText(en) {
   return Array.isArray(en) ? (en[0] ?? '') : (en ?? '')
@@ -98,7 +105,12 @@ function buildMatch(practice, pi, ctx, make) {
 }
 
 function buildWordType(practice, pi, ctx, make, kind) {
-  const { pool, rest } = splitWords(practice.pool, ctx.vocab)
+  let { pool, rest } = splitWords(practice.pool, ctx.vocab)
+  if (kind === 'type' && ctx.encounterCount) {
+    const met = (w) => ctx.encounterCount(w.id) >= MIN_ENCOUNTERS_FOR_SPELLING
+    pool = pool.filter(met)
+    rest = rest.filter(met)
+  }
   const picked = drawN(pool, rest, practice.exercises, ctx.rng)
   return picked.map((w) =>
     make({
@@ -113,7 +125,12 @@ function buildWordType(practice, pi, ctx, make, kind) {
 }
 
 function buildPhrase(practice, pi, ctx, make, kind) {
-  const { pool, rest } = splitPhrases(practice.pool, ctx.phrases)
+  let { pool, rest } = splitPhrases(practice.pool, ctx.phrases)
+  if (kind === 'type' && ctx.encounterCount) {
+    const met = (p) => !p.source || ctx.encounterCount(p.source) >= MIN_ENCOUNTERS_FOR_SPELLING
+    pool = pool.filter(met)
+    rest = rest.filter(met)
+  }
   const picked = drawN(pool, rest, practice.exercises, ctx.rng)
   return picked.map((p) =>
     make({
@@ -175,10 +192,10 @@ function generate(practice, pi, ctx, make) {
  * @param {() => number} [sources.rng]
  * @returns {object[]} exercise descriptors (each with a unique `id`)
  */
-export function buildExercises(session, { words = [], phrases = [], rng = Math.random } = {}) {
+export function buildExercises(session, { words = [], phrases = [], rng = Math.random, encounterCount = null } = {}) {
   const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
   const recordByKey = new Map(words.map((w) => [w.key, w]))
-  const ctx = { vocab, recordByKey, phrases, rng }
+  const ctx = { vocab, recordByKey, phrases, rng, encounterCount }
 
   const out = []
   let seq = 0

@@ -88,8 +88,9 @@ function weightedPick(items, weightOf, rng) {
  * @param {() => number} [args.rng]
  * @returns {{type, size, buckets, practices: object[]}}
  */
-export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, rng = Math.random } = {}) {
-  const eligible = practicesForSession(type)
+export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, rng = Math.random, levels = null } = {}) {
+  const all = practicesForSession(type)
+  const eligible = levels ? all.filter((p) => levels.includes(p.level)) : all
   const size = sessionSize(type, sizeKey)
   const counts = allocateBuckets(size)
   const slots = shuffle(bucketSlots(counts), rng)

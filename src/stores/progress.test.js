@@ -19,6 +19,7 @@ import {
   batchComplete,
   advanceBatch,
   dimensionWeakness,
+  encounterCount,
   startSession,
   loadProgress,
   resetProgress,
@@ -225,6 +226,31 @@ describe('sessions', () => {
     }
     // The committed-but-unlearned batch words are the current pool.
     expect(session.pools.current).toContain('w1')
+  })
+
+  it('excludes mastery practices when no mastery batch is active', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0'], size: 1 })
+    // No mastery batch committed.
+    const session = startSession({ type: 'standard', size: 'super' }, seededRng(4))
+    expect(session.practices.every((p) => p.level === 'learning')).toBe(true)
+  })
+
+  it('includes mastery practices when mastery batch has unmastered words', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    // Commit a mastery batch with a word that has not yet been mastered.
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0'], size: 1 })
+    const session = startSession({ type: 'standard', size: 'super' }, seededRng(5))
+    expect(session.practices.some((p) => p.level === 'mastery')).toBe(true)
+  })
+
+  it('counts identification events for encounterCount', async () => {
+    setVocab(makeWords(2, { hasInflections: false }))
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: true })
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    expect(encounterCount('w0')).toBe(2) // only identification events
+    expect(encounterCount('w1')).toBe(0) // never attempted
   })
 })
 

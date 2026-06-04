@@ -73,6 +73,11 @@ describe('buildSession', () => {
     const usage = s.practices.filter((p) => p.dimension === 'usage').length
     expect(usage).toBeGreaterThanOrEqual(15)
   })
+  it('restricts practice levels when levels parameter is supplied', () => {
+    const s = buildSession({ type: 'standard', size: 'super', levels: ['learning'], rng: seededRng(5) })
+    expect(s.practices.every((p) => p.level === 'learning')).toBe(true)
+    expect(s.practices).toHaveLength(20)
+  })
 })
 
 describe('runRepeatMistakes', () => {
