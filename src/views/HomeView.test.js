@@ -16,7 +16,14 @@ beforeEach(() => {
 })
 
 describe('HomeView', () => {
-  it('launches the three standard session sizes', async () => {
+  it('redirects to batch selection when starting a session with no batch', async () => {
+    const wrapper = mount(HomeView)
+    await wrapper.find('.size.quick').trigger('click')
+    expect(push).toHaveBeenCalledWith({ path: '/batch', query: { level: 'learning' } })
+  })
+
+  it('launches the three standard session sizes once a batch is set', async () => {
+    progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)
     await wrapper.find('.size.quick').trigger('click')
     await wrapper.find('.size.normal').trigger('click')
@@ -26,7 +33,8 @@ describe('HomeView', () => {
     expect(push).toHaveBeenNthCalledWith(3, { path: '/session', query: { type: 'standard', size: 'super' } })
   })
 
-  it('launches each focused session type', async () => {
+  it('launches each focused session type once a batch is set', async () => {
+    progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)
     const buttons = wrapper.findAll('.focus-btn')
     expect(buttons).toHaveLength(5)
@@ -36,8 +44,10 @@ describe('HomeView', () => {
 
   it('prompts to choose a learning batch when none is set', async () => {
     const wrapper = mount(HomeView)
-    expect(wrapper.find('.batch-card.learn').text()).toContain('Choose words to learn')
-    await wrapper.find('.batch-card.learn').trigger('click')
+    const card = wrapper.find('.batch-card.learn')
+    expect(card.element.tagName).toBe('BUTTON')
+    expect(card.text()).toContain('Choose words to learn')
+    await card.trigger('click')
     expect(push).toHaveBeenCalledWith({ path: '/batch', query: { level: 'learning' } })
   })
 
@@ -49,11 +59,21 @@ describe('HomeView', () => {
     expect(push).toHaveBeenCalledWith('/vocab')
   })
 
-  it('shows the committed batch name and hides mastery until unlocked', () => {
+  it('shows the committed batch name as a non-clickable card', () => {
     progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)
-    expect(wrapper.find('.batch-card.learn').text()).toContain('animals')
-    // Fewer than 100 words learned → no mastery card.
+    const card = wrapper.find('.batch-card.learn')
+    expect(card.element.tagName).toBe('DIV')
+    expect(card.text()).toContain('animals')
+  })
+
+  it('shows mastery card only when a mastery batch is active', () => {
+    const wrapper = mount(HomeView)
     expect(wrapper.find('.batch-card.master').exists()).toBe(false)
+
+    progress.mastery = { name: 'Random', level: 'mastery', words: [], size: 10 }
+    const wrapper2 = mount(HomeView)
+    expect(wrapper2.find('.batch-card.master').exists()).toBe(true)
+    expect(wrapper2.find('.batch-card.master').text()).toContain('Random')
   })
 })
