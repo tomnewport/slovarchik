@@ -84,7 +84,8 @@ function common(practice, practiceIndex) {
 
 function buildMatch(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
-  const picked = drawN(pool, rest, MATCH_PAIRS, ctx.rng)
+  // Board size comes from the practice catalogue (`items`), defaulting to MATCH_PAIRS.
+  const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng)
   if (picked.length < 2) return []
   return [
     make({

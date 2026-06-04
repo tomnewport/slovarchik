@@ -3,7 +3,7 @@
 // of English. Covers match-vocab (Russian shown) and listen-match (Russian
 // hidden behind a speaker, heard not seen). Tap one tile in each column to pair
 // them; a wrong pairing flashes and counts against a perfect score.
-import { computed, ref } from 'vue'
+import { computed, onBeforeUnmount, ref } from 'vue'
 
 import { shuffle } from '../../lib/quiz.js'
 import SpeakButton from '../SpeakButton.vue'
@@ -18,6 +18,7 @@ const pickedRu = ref(null)
 const pickedEn = ref(null)
 const wrongFlash = ref(null)
 let mistakes = 0
+let flashTimer = null
 
 const done = computed(() => matched.value.size === props.exercise.pairs.length)
 
@@ -31,7 +32,8 @@ function tryMatch() {
     mistakes++
     const miss = [pickedRu.value, pickedEn.value]
     wrongFlash.value = miss
-    setTimeout(() => {
+    clearTimeout(flashTimer)
+    flashTimer = setTimeout(() => {
       if (wrongFlash.value === miss) wrongFlash.value = null
     }, 500)
     pickedRu.value = null
@@ -57,6 +59,8 @@ function next() {
 function flashing(key) {
   return wrongFlash.value?.includes(key)
 }
+
+onBeforeUnmount(() => clearTimeout(flashTimer))
 </script>
 
 <template>

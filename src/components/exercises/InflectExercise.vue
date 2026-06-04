@@ -28,7 +28,10 @@ function onGraded(correct) {
 }
 
 function next() {
-  emit('done', { correct: wasCorrect.value })
+  // No paradigm to drill (shouldn't happen — the builder filters these out) is
+  // an auto-pass, not a wrong answer, so the runner can't get stuck re-queuing
+  // an unanswerable exercise forever.
+  emit('done', { correct: paradigm.value ? wasCorrect.value : true })
 }
 </script>
 

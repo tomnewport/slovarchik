@@ -78,12 +78,20 @@ export function skipDimension(s, dimension, makeReplacement = () => null) {
 
   for (let i = s.pos; i < s.queue.length; i++) {
     if (s.queue[i].dimension !== dimension) continue
-    const rep = makeReplacement(s.queue[i])
+    const original = s.queue[i]
+    const rep = makeReplacement(original)
+    // Keep the plan in sync so the segmented progress bar stays consistent, but
+    // only for items not yet attempted — an item being repeated has already had
+    // its plan cell marked and must keep that status.
+    const attempted = original.id in s.firstAttempt
+    const planIdx = s.plan.findIndex((e) => e.id === original.id)
     if (rep) {
       s.queue[i] = rep
+      if (!attempted && planIdx !== -1) s.plan[planIdx] = rep
     } else {
       s.queue.splice(i, 1)
       i--
+      if (!attempted && planIdx !== -1) s.plan.splice(planIdx, 1)
     }
   }
   s.wrong = s.wrong.filter((e) => e.dimension !== dimension)

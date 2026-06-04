@@ -137,6 +137,30 @@ describe('skipDimension', () => {
     expect(s.phase).toBe('summary')
   })
 
+  it('keeps the plan in sync so the progress bar reflects replacements', () => {
+    const s = initRunner(plan())
+    submit(s, true) // a done
+    skipDimension(s, 'hearing', (e) => ex(`rep-${e.id}`, 'usage', e.practiceIndex))
+    // The hearing exercise (c) was never attempted, so its plan cell becomes
+    // the replacement — answering it will flip the segment to done.
+    const segs = practiceSegments(s)
+    const ids = segs.flatMap((p) => p.exercises.map((e) => e.id))
+    expect(ids).toContain('rep-c')
+    expect(ids).not.toContain('c')
+  })
+
+  it('does not disturb an already-completed plan cell when skipping a repeat', () => {
+    const s = initRunner(plan())
+    submit(s, true) // a
+    submit(s, true) // b
+    submit(s, false) // c (hearing) wrong → attempted, queued for repeat
+    submit(s, true) // d
+    skipDimension(s, 'hearing', (e) => ex(`rep-${e.id}`, 'usage', e.practiceIndex))
+    // c stays in the plan (already attempted/done); it is not swapped out.
+    const ids = practiceSegments(s).flatMap((p) => p.exercises.map((e) => e.id))
+    expect(ids).toContain('c')
+  })
+
   it('is idempotent for a dimension already skipped', () => {
     const s = initRunner(plan())
     skipDimension(s, 'hearing')

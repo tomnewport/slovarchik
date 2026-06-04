@@ -102,6 +102,7 @@ export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, 
       level: pt.level,
       content: pt.content,
       exercises: pt.exercises,
+      items: pt.items, // e.g. matching-board size; undefined for most types
       bucket,
     }
   })
