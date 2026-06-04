@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, PRACTICE_KIND, MATCH_PAIRS } from './exerciseBuild.js'
+import { buildExercises, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
@@ -114,5 +114,41 @@ describe('buildExercises', () => {
     const poolKey = words[0].key
     const ex = build([practice('spell-word', { exercises: 1, pool: [poolKey] })])
     expect(ex[0].targets).toContain(poolKey)
+  })
+
+  describe('spelling encounter prerequisite', () => {
+    it('skips words with too few identification encounters for spell-word', () => {
+      const eligibleKey = words[0].key
+      const encounterCount = (key) => (key === eligibleKey ? MIN_ENCOUNTERS_FOR_SPELLING : 0)
+      const ex = buildExercises(
+        { practices: [practice('spell-word', { exercises: 5 })] },
+        { words, phrases, rng: seededRng(1), encounterCount },
+      )
+      expect(ex.length).toBeGreaterThan(0)
+      for (const e of ex) expect(e.targets[0]).toBe(eligibleKey)
+    })
+
+    it('produces no spelling exercises when no word has enough encounters', () => {
+      const encounterCount = () => 0
+      const ex = buildExercises(
+        { practices: [practice('spell-word'), practice('spell-phrase'), practice('dictation')] },
+        { words, phrases, rng: seededRng(2), encounterCount },
+      )
+      expect(ex).toHaveLength(0)
+    })
+
+    it('does not filter non-spelling exercises by encounter count', () => {
+      const encounterCount = () => 0
+      const ex = buildExercises(
+        { practices: [practice('match-vocab'), practice('translate-phrase')] },
+        { words, phrases, rng: seededRng(3), encounterCount },
+      )
+      expect(ex.length).toBeGreaterThan(0)
+    })
+
+    it('applies no encounter filter when encounterCount is not supplied', () => {
+      const ex = build([practice('spell-word')])
+      expect(ex.length).toBeGreaterThan(0)
+    })
   })
 })

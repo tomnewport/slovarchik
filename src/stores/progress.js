@@ -27,6 +27,7 @@ import {
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
 import { buildSession } from '../lib/session.js'
+import { practicesForSession } from '../lib/practices.js'
 import { rankSkills, skillById, focusedKeys } from '../lib/focus.js'
 
 /** Bumped if the export schema ever changes; guards imports. */
@@ -322,6 +323,19 @@ function untestedPool() {
 }
 
 /**
+ * True when the mastery batch exists and has at least one word that has not yet
+ * been mastered. Mastery-level practices are only included in sessions when this
+ * is true, so a learner is never presented with mastery exercises before they
+ * have words actively being mastered.
+ */
+function masteryBatchActive() {
+  const batch = state.mastery
+  if (!batch) return false
+  const target = rank(batchTarget('mastery'))
+  return batch.words.some((key) => rank(stateOf(key)) < target)
+}
+
+/**
  * Start a session of a given type. Returns the Phase-1 session plan (practices
  * tagged with their 25/25/50 bucket and weighted to the weakest dimension),
  * augmented with the candidate word pool for each bucket so the session runner
@@ -330,7 +344,12 @@ function untestedPool() {
  * "half learn" half.
  */
 export function startSession({ type = 'standard', size, focusKeys = null } = {}, rng = Math.random) {
-  const session = buildSession({ type, size, weakness: dimensionWeakness(), rng })
+  // Restrict to learning-level practices when no mastery batch is active —
+  // but only if that leaves at least one eligible practice (e.g. a grammar
+  // session has no learning-level practices and would otherwise become empty).
+  const hasLearningPractices = practicesForSession(type).some((p) => p.level === 'learning')
+  const levels = !masteryBatchActive() && hasLearningPractices ? ['learning'] : null
+  const session = buildSession({ type, size, weakness: dimensionWeakness(), rng, levels })
   let pools
   if (focusKeys) {
     // Focused session: every bucket is restricted to the filtered words, which
@@ -346,6 +365,11 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
   }
   for (const practice of session.practices) practice.pool = pools[practice.bucket] ?? []
   return { ...session, focusKeys: focusKeys ?? null, pools }
+}
+
+/** Number of identification events recorded for a word (across all levels). */
+export function encounterCount(key) {
+  return (state.records[key]?.events ?? []).filter((e) => e.dimension === 'identification').length
 }
 
 /** Keys of the non-unknown words matching a skill id (focused-session pool). */

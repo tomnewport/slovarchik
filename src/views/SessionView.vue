@@ -78,7 +78,7 @@ async function setup() {
     phrases = vocabPhrases.value.filter((p) => set.has(p.source))
   }
 
-  const exercises = buildExercises(session, { words, phrases })
+  const exercises = buildExercises(session, { words, phrases, encounterCount: progress.encounterCount })
   for (const ex of exercises) {
     for (const key of ex.targets) {
       if (!startStates.has(key)) startStates.set(key, progress.stateOf(key))
@@ -141,6 +141,7 @@ function makeReplacement(skipped) {
   const [rep] = buildExercises({ practices: [practice] }, {
     words: vocabState.words,
     phrases: vocabPhrases.value,
+    encounterCount: progress.encounterCount,
   })
   if (!rep) return null
   rep.id = `rep${repSeq++}`
