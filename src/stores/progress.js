@@ -22,10 +22,15 @@ import {
   wordState,
   wordHasInflections,
   dimensionProgress,
+  levelMet,
   lastAttemptAt,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
 import { buildSession } from '../lib/session.js'
+import { rankSkills, skillById, focusedKeys } from '../lib/focus.js'
+
+/** Bumped if the export schema ever changes; guards imports. */
+export const EXPORT_VERSION = 1
 
 // Keep storage bounded: only the most recent attempts per (level, dimension)
 // matter to the model (windows of four; speaking needs three). Ten is plenty.
@@ -45,6 +50,8 @@ export const state = reactive({
   /** the committed current batches, or null */
   learning: null,
   mastery: null,
+  /** epoch ms of first use (for the "how long" stat on the Data screen) */
+  firstUseAt: null,
 })
 
 // ---------------------------------------------------------------------------
@@ -322,15 +329,35 @@ function untestedPool() {
  * the "half reinforce" half of #79's time split; the 50% current batch is the
  * "half learn" half.
  */
-export function startSession({ type = 'standard', size } = {}, rng = Math.random) {
+export function startSession({ type = 'standard', size, focusKeys = null } = {}, rng = Math.random) {
   const session = buildSession({ type, size, weakness: dimensionWeakness(), rng })
-  const pools = {
-    atRisk: reinforcePool(),
-    untested: untestedPool(),
-    current: currentPool(),
+  let pools
+  if (focusKeys) {
+    // Focused session: every bucket is restricted to the filtered words, which
+    // also become the "current" focus.
+    const set = new Set(focusKeys)
+    pools = {
+      atRisk: reinforcePool().filter((k) => set.has(k)),
+      untested: untestedPool().filter((k) => set.has(k)),
+      current: [...focusKeys],
+    }
+  } else {
+    pools = { atRisk: reinforcePool(), untested: untestedPool(), current: currentPool() }
   }
   for (const practice of session.practices) practice.pool = pools[practice.bucket] ?? []
-  return { ...session, pools }
+  return { ...session, focusKeys: focusKeys ?? null, pools }
+}
+
+/** Keys of the non-unknown words matching a skill id (focused-session pool). */
+export function focusKeysFor(skillId) {
+  const skill = skillById(skillId)
+  if (!skill) return []
+  return focusedKeys(vocabWords(), skill, (k) => stateOf(k))
+}
+
+/** The learner's weakest skills, weakest first (for the Progress screen). */
+export function weakestSkills() {
+  return rankSkills(vocabWords(), { stateOf: (k) => stateOf(k) })
 }
 
 // ---------------------------------------------------------------------------
@@ -350,9 +377,33 @@ export async function loadProgress() {
       peak: r.peak ?? 0,
     }
   }
+  // Backfill first-learned / first-mastered timestamps for any record that
+  // qualifies but predates timestamp stamping, so the history chart can't fall
+  // behind the live learned/mastered counts. These criteria are inflection-
+  // independent, so they're safe to compute before the vocab is loaded.
+  for (const rec of Object.values(map)) {
+    let changed = false
+    const when = lastAttemptAt(rec.events) ?? Date.now()
+    if (rec.learnedAt == null && levelMet(rec.events, 'learning')) {
+      rec.learnedAt = when
+      changed = true
+    }
+    if (rec.masteredAt == null && levelMet(rec.events, 'mastery')) {
+      rec.masteredAt = when
+      changed = true
+    }
+    if (changed) await persist(rec)
+  }
+
   state.records = map
   state.learning = (await idb.getMeta(BATCH_META_KEY('learning'))) ?? null
   state.mastery = (await idb.getMeta(BATCH_META_KEY('mastery'))) ?? null
+  // Stamp first use the first time we ever load.
+  state.firstUseAt = (await idb.getMeta('firstUseAt')) ?? null
+  if (state.firstUseAt == null) {
+    state.firstUseAt = Date.now()
+    await idb.setMeta('firstUseAt', state.firstUseAt)
+  }
   state.loaded = true
   return state
 }
@@ -370,4 +421,114 @@ export async function resetProgress() {
 /** Expose whether a word has an inflection table (used by the UI badges). */
 export function hasInflections(key) {
   return wordHasInflections(wordRecord(key))
+}
+
+// ---------------------------------------------------------------------------
+// Analytics for the Progress screen.
+// ---------------------------------------------------------------------------
+
+/** Keys currently at (or above) `learned`. */
+export function learnedWords() {
+  return Object.keys(state.records).filter((k) => rank(stateOf(k)) >= rank('learned'))
+}
+
+/** Keys currently `mastered`. */
+export function masteredWords() {
+  return Object.keys(state.records).filter((k) => stateOf(k) === 'mastered')
+}
+
+/**
+ * Cumulative words-known-by-day history, derived from each record's first
+ * learned / mastered timestamps. One point per day on which something changed.
+ * @returns {Array<{day: string, learned: number, mastered: number}>}
+ */
+export function history() {
+  const dayOf = (ts) => new Date(ts).toISOString().slice(0, 10)
+  const learnedByDay = new Map()
+  const masteredByDay = new Map()
+  for (const rec of Object.values(state.records)) {
+    if (rec.learnedAt != null) {
+      const d = dayOf(rec.learnedAt)
+      learnedByDay.set(d, (learnedByDay.get(d) ?? 0) + 1)
+    }
+    if (rec.masteredAt != null) {
+      const d = dayOf(rec.masteredAt)
+      masteredByDay.set(d, (masteredByDay.get(d) ?? 0) + 1)
+    }
+  }
+  const days = [...new Set([...learnedByDay.keys(), ...masteredByDay.keys()])].sort()
+  let learned = 0
+  let mastered = 0
+  return days.map((day) => {
+    learned += learnedByDay.get(day) ?? 0
+    mastered += masteredByDay.get(day) ?? 0
+    return { day, learned, mastered }
+  })
+}
+
+// ---------------------------------------------------------------------------
+// Data export / import (the Data screen's JSON backup).
+// ---------------------------------------------------------------------------
+
+/** A serialisable snapshot of all progress data (plain, proxy-free). */
+export function exportData() {
+  const snapshot = {
+    app: 'slovarchik',
+    version: EXPORT_VERSION,
+    exportedAt: Date.now(),
+    firstUseAt: state.firstUseAt,
+    records: Object.values(state.records).map(plain),
+    batches: { learning: state.learning, mastery: state.mastery },
+  }
+  // Round-trip to strip any Vue reactive proxies (e.g. on the batches).
+  return JSON.parse(JSON.stringify(snapshot))
+}
+
+/** Validate a parsed import payload. Returns `{ ok, error }`. */
+export function validateImport(data) {
+  if (!data || typeof data !== 'object') return { ok: false, error: 'Not a backup object.' }
+  if (data.app !== 'slovarchik') return { ok: false, error: 'Not a Slovarchik backup.' }
+  if (typeof data.version !== 'number') return { ok: false, error: 'Missing version.' }
+  if (data.version > EXPORT_VERSION) return { ok: false, error: 'Backup is from a newer version.' }
+  if (!Array.isArray(data.records)) return { ok: false, error: 'Missing records.' }
+  for (const r of data.records) {
+    if (!r || typeof r.word !== 'string' || !Array.isArray(r.events)) {
+      return { ok: false, error: 'A record is malformed.' }
+    }
+  }
+  return { ok: true }
+}
+
+/** Replace all progress with an imported snapshot (validated first). */
+export async function importData(data) {
+  const check = validateImport(data)
+  if (!check.ok) throw new Error(check.error)
+
+  await idb.clearProgress()
+  const map = {}
+  for (const r of data.records) {
+    const rec = {
+      word: r.word,
+      events: r.events,
+      learnedAt: r.learnedAt ?? null,
+      masteredAt: r.masteredAt ?? null,
+      peak: r.peak ?? 0,
+    }
+    map[r.word] = rec
+    await idb.putProgress(rec)
+  }
+  // Use the plain source values for persistence — reading them back off the
+  // reactive `state` would hand IndexedDB a Vue proxy it can't clone.
+  const learningBatch = data.batches?.learning ?? null
+  const masteryBatch = data.batches?.mastery ?? null
+  state.records = map
+  state.learning = learningBatch
+  state.mastery = masteryBatch
+  await idb.setMeta(BATCH_META_KEY('learning'), learningBatch)
+  await idb.setMeta(BATCH_META_KEY('mastery'), masteryBatch)
+  if (data.firstUseAt) {
+    state.firstUseAt = data.firstUseAt
+    await idb.setMeta('firstUseAt', data.firstUseAt)
+  }
+  return true
 }

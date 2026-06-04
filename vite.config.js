@@ -8,6 +8,10 @@ const base = '/slovarchik/'
 
 export default defineConfig({
   base,
+  // The date the running app code was built, surfaced on the Data screen.
+  define: {
+    __APP_BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+  },
   plugins: [
     vue(),
     VitePWA({
