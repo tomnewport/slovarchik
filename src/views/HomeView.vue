@@ -34,11 +34,7 @@ const FOCUSED = [
   <section class="grid" style="gap: 1.25rem">
     <!-- Current batches -->
     <div class="batches">
-      <button
-        class="batch-card learn"
-        :class="{ empty: !learningBatch }"
-        @click="chooseBatch('learning')"
-      >
+      <button class="batch-card learn" @click="chooseBatch('learning')">
         <span class="batch-kind">Learning</span>
         <strong v-if="learningBatch">{{ learningBatch.name }}</strong>
         <span v-else class="muted">Choose words to learn →</span>
@@ -47,7 +43,6 @@ const FOCUSED = [
       <button
         v-if="masteryUnlocked || masteryBatch"
         class="batch-card master"
-        :class="{ empty: !masteryBatch }"
         @click="chooseBatch('mastery')"
       >
         <span class="batch-kind">Mastering</span>

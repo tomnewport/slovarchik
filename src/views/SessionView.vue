@@ -77,10 +77,28 @@ async function setup() {
   Object.assign(runner, initRunner(exercises))
   startedAt.value = Date.now()
   ready.value = true
-  if (runner.phase === 'summary') finishedAt.value = Date.now()
+  finalizeIfDone()
 }
 
 setup()
+
+// Snapshot of the batches finished this session (cleared from the store on
+// entry to the summary, so leaving via "Back home" can't strand a completed
+// batch and re-trigger the celebration next time).
+const celebrated = ref([])
+let finalized = false
+
+function finalizeIfDone() {
+  if (runner.phase !== 'summary' || finalized) return
+  finalized = true
+  finishedAt.value = Date.now()
+  // Capture and advance every completed batch (a session can finish both the
+  // learning and the mastery batch at once).
+  celebrated.value = ['learning', 'mastery']
+    .filter((level) => progress.state[level] && progress.batchComplete(level))
+    .map((level) => ({ level, batch: progress.state[level] }))
+  for (const { level } of celebrated.value) progress.advanceBatch(level)
+}
 
 function onDone(result) {
   const ex = current.value
@@ -94,7 +112,7 @@ function onDone(result) {
     })
   }
   submit(runner, result.correct)
-  if (runner.phase === 'summary') finishedAt.value = Date.now()
+  finalizeIfDone()
 }
 
 // --- Skipping a modality (listening / speaking) -----------------------------
@@ -131,7 +149,7 @@ const canSkipSpeaking = computed(
 
 function skip(dimension) {
   skipDimension(runner, dimension, makeReplacement)
-  if (runner.phase === 'summary') finishedAt.value = Date.now()
+  finalizeIfDone()
 }
 
 // --- Progress bar + summary -------------------------------------------------
@@ -155,16 +173,9 @@ function durationLabel(ms) {
   return m > 0 ? `${m}m ${s % 60}s` : `${s}s`
 }
 
-// Batches the learner just finished (every word at or above its target state).
-const completedBatches = computed(() => {
-  if (runner.phase !== 'summary') return []
-  return ['learning', 'mastery']
-    .filter((level) => progress.state[level] && progress.batchComplete(level))
-    .map((level) => ({ level, batch: progress.state[level] }))
-})
-
-async function nextBatch(level) {
-  await progress.advanceBatch(level)
+// The completed batches are already advanced in finalizeIfDone(); this just
+// routes the learner on to choose the next one for that level.
+function nextBatch(level) {
   router.push({ path: '/batch', query: { level } })
 }
 
@@ -218,15 +229,15 @@ function confirmClose() {
     <!-- Summary -->
     <div v-else class="summary card">
       <!-- Batch completion celebration takes over the summary when earned. -->
-      <div v-if="completedBatches.length" class="celebration" :class="completedBatches[0].level">
+      <div v-if="celebrated.length" class="celebration" :class="celebrated[0].level">
         <CelebrationBurst :show="true" />
         <div class="heart" aria-hidden="true">💚</div>
         <h2>Batch complete!</h2>
-        <p>
-          You {{ completedBatches[0].level === 'mastery' ? 'mastered' : 'learned' }}
-          <strong class="batch-name">{{ completedBatches[0].batch.name }}</strong>.
+        <p v-for="done in celebrated" :key="done.level">
+          You {{ done.level === 'mastery' ? 'mastered' : 'learned' }}
+          <strong class="batch-name">{{ done.batch.name }}</strong>.
         </p>
-        <button class="primary next-batch" @click="nextBatch(completedBatches[0].level)">
+        <button class="primary next-batch" @click="nextBatch(celebrated[0].level)">
           Choose the next batch →
         </button>
         <button class="ghost" @click="router.push('/')">Back home</button>
