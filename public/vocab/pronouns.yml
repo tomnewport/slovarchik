@@ -7,7 +7,10 @@
 #     single pronoun (reflexive себя has no nominative).
 #   poss / demo / det / inter (какой, чей) — the nominative agreement forms
 #     m / f / n / pl, because these decline like adjectives. The `accented`
-#     headword is the masculine nominative.
+#     headword is the masculine nominative. They also carry a `declension` block
+#     with the full case × gender/number table (keys "<gender>_<case>", e.g.
+#     m_gen, f_acc, pl_ins), curated and validated by
+#     scripts/gen-pronoun-declension.mjs.
 #   A few pronouns (его, её, их, сколько) take no `forms` block: the possessives
 #     его/её/их never change, and сколько is quantitative.
 ---
@@ -48,6 +51,31 @@ words:
       f: ва́ша
       n: ва́ше
       pl: ва́ши
+    declension:
+      m_nom: ваш
+      m_gen: ва́шего
+      m_dat: ва́шему
+      m_acc: ваш
+      m_ins: ва́шим
+      m_pre: ва́шем
+      n_nom: ва́ше
+      n_gen: ва́шего
+      n_dat: ва́шему
+      n_acc: ва́ше
+      n_ins: ва́шим
+      n_pre: ва́шем
+      f_nom: ва́ша
+      f_gen: ва́шей
+      f_dat: ва́шей
+      f_acc: ва́шу
+      f_ins: ва́шей
+      f_pre: ва́шей
+      pl_nom: ва́ши
+      pl_gen: ва́ших
+      pl_dat: ва́шим
+      pl_acc: ва́ши
+      pl_ins: ва́шими
+      pl_pre: ва́ших
   "весь=all":
     cefr_level: A2
     type: det
@@ -68,6 +96,31 @@ words:
       f: вся
       n: всё
       pl: все
+    declension:
+      m_nom: весь
+      m_gen: всего́
+      m_dat: всему́
+      m_acc: весь
+      m_ins: всем
+      m_pre: всём
+      n_nom: всё
+      n_gen: всего́
+      n_dat: всему́
+      n_acc: всё
+      n_ins: всем
+      n_pre: всём
+      f_nom: вся
+      f_gen: всей
+      f_dat: всей
+      f_acc: всю
+      f_ins: всей
+      f_pre: всей
+      pl_nom: все
+      pl_gen: всех
+      pl_dat: всем
+      pl_acc: все
+      pl_ins: все́ми
+      pl_pre: всех
   "вы=you":
     cefr_level: A1
     type: pers
@@ -151,6 +204,31 @@ words:
       f: ка́ждая
       n: ка́ждое
       pl: ка́ждые
+    declension:
+      m_nom: ка́ждый
+      m_gen: ка́ждого
+      m_dat: ка́ждому
+      m_acc: ка́ждый
+      m_ins: ка́ждым
+      m_pre: ка́ждом
+      n_nom: ка́ждое
+      n_gen: ка́ждого
+      n_dat: ка́ждому
+      n_acc: ка́ждое
+      n_ins: ка́ждым
+      n_pre: ка́ждом
+      f_nom: ка́ждая
+      f_gen: ка́ждой
+      f_dat: ка́ждой
+      f_acc: ка́ждую
+      f_ins: ка́ждой
+      f_pre: ка́ждой
+      pl_nom: ка́ждые
+      pl_gen: ка́ждых
+      pl_dat: ка́ждым
+      pl_acc: ка́ждые
+      pl_ins: ка́ждыми
+      pl_pre: ка́ждых
   "какой=which":
     cefr_level: A2
     type: inter
@@ -171,6 +249,31 @@ words:
       f: кака́я
       n: како́е
       pl: каки́е
+    declension:
+      m_nom: како́й
+      m_gen: како́го
+      m_dat: како́му
+      m_acc: како́й
+      m_ins: каки́м
+      m_pre: како́м
+      n_nom: како́е
+      n_gen: како́го
+      n_dat: како́му
+      n_acc: како́е
+      n_ins: каки́м
+      n_pre: како́м
+      f_nom: кака́я
+      f_gen: како́й
+      f_dat: како́й
+      f_acc: каку́ю
+      f_ins: како́й
+      f_pre: како́й
+      pl_nom: каки́е
+      pl_gen: каки́х
+      pl_dat: каки́м
+      pl_acc: каки́е
+      pl_ins: каки́ми
+      pl_pre: каки́х
   "который=which":
     cefr_level: A2
     type: inter
@@ -192,6 +295,31 @@ words:
       f: кото́рая
       n: кото́рое
       pl: кото́рые
+    declension:
+      m_nom: кото́рый
+      m_gen: кото́рого
+      m_dat: кото́рому
+      m_acc: кото́рый
+      m_ins: кото́рым
+      m_pre: кото́ром
+      n_nom: кото́рое
+      n_gen: кото́рого
+      n_dat: кото́рому
+      n_acc: кото́рое
+      n_ins: кото́рым
+      n_pre: кото́ром
+      f_nom: кото́рая
+      f_gen: кото́рой
+      f_dat: кото́рой
+      f_acc: кото́рую
+      f_ins: кото́рой
+      f_pre: кото́рой
+      pl_nom: кото́рые
+      pl_gen: кото́рых
+      pl_dat: кото́рым
+      pl_acc: кото́рые
+      pl_ins: кото́рыми
+      pl_pre: кото́рых
   "кто=who":
     cefr_level: A1
     type: inter
@@ -254,6 +382,31 @@ words:
       f: люба́я
       n: любо́е
       pl: любы́е
+    declension:
+      m_nom: любо́й
+      m_gen: любо́го
+      m_dat: любо́му
+      m_acc: любо́й
+      m_ins: любы́м
+      m_pre: любо́м
+      n_nom: любо́е
+      n_gen: любо́го
+      n_dat: любо́му
+      n_acc: любо́е
+      n_ins: любы́м
+      n_pre: любо́м
+      f_nom: люба́я
+      f_gen: любо́й
+      f_dat: любо́й
+      f_acc: любу́ю
+      f_ins: любо́й
+      f_pre: любо́й
+      pl_nom: любы́е
+      pl_gen: любы́х
+      pl_dat: любы́м
+      pl_acc: любы́е
+      pl_ins: любы́ми
+      pl_pre: любы́х
   "мой=my":
     cefr_level: A1
     type: poss
@@ -274,6 +427,31 @@ words:
       f: моя́
       n: моё
       pl: мои́
+    declension:
+      m_nom: мой
+      m_gen: моего́
+      m_dat: моему́
+      m_acc: мой
+      m_ins: мои́м
+      m_pre: моём
+      n_nom: моё
+      n_gen: моего́
+      n_dat: моему́
+      n_acc: моё
+      n_ins: мои́м
+      n_pre: моём
+      f_nom: моя́
+      f_gen: мое́й
+      f_dat: мое́й
+      f_acc: мою́
+      f_ins: мое́й
+      f_pre: мое́й
+      pl_nom: мои́
+      pl_gen: мои́х
+      pl_dat: мои́м
+      pl_acc: мои́
+      pl_ins: мои́ми
+      pl_pre: мои́х
   "мы=we":
     cefr_level: A1
     type: pers
@@ -314,6 +492,31 @@ words:
       f: на́ша
       n: на́ше
       pl: на́ши
+    declension:
+      m_nom: наш
+      m_gen: на́шего
+      m_dat: на́шему
+      m_acc: наш
+      m_ins: на́шим
+      m_pre: на́шем
+      n_nom: на́ше
+      n_gen: на́шего
+      n_dat: на́шему
+      n_acc: на́ше
+      n_ins: на́шим
+      n_pre: на́шем
+      f_nom: на́ша
+      f_gen: на́шей
+      f_dat: на́шей
+      f_acc: на́шу
+      f_ins: на́шей
+      f_pre: на́шей
+      pl_nom: на́ши
+      pl_gen: на́ших
+      pl_dat: на́шим
+      pl_acc: на́ши
+      pl_ins: на́шими
+      pl_pre: на́ших
   "никакой=no":
     cefr_level: A2
     type: neg
@@ -327,6 +530,31 @@ words:
       f: никака́я
       n: никако́е
       pl: никаки́е
+    declension:
+      m_nom: никако́й
+      m_gen: никако́го
+      m_dat: никако́му
+      m_acc: никако́й
+      m_ins: никаки́м
+      m_pre: никако́м
+      n_nom: никако́е
+      n_gen: никако́го
+      n_dat: никако́му
+      n_acc: никако́е
+      n_ins: никаки́м
+      n_pre: никако́м
+      f_nom: никака́я
+      f_gen: никако́й
+      f_dat: никако́й
+      f_acc: никаку́ю
+      f_ins: никако́й
+      f_pre: никако́й
+      pl_nom: никаки́е
+      pl_gen: никаки́х
+      pl_dat: никаки́м
+      pl_acc: никаки́е
+      pl_ins: никаки́ми
+      pl_pre: никаки́х
     usage:
       - ru: У меня́ нет никако́го пла́на.
         en_gb: I have no plan at all.
@@ -478,6 +706,31 @@ words:
       f: сама́
       n: само́
       pl: са́ми
+    declension:
+      m_nom: сам
+      m_gen: самого́
+      m_dat: самому́
+      m_acc: сам
+      m_ins: сами́м
+      m_pre: само́м
+      n_nom: само́
+      n_gen: самого́
+      n_dat: самому́
+      n_acc: само́
+      n_ins: сами́м
+      n_pre: само́м
+      f_nom: сама́
+      f_gen: само́й
+      f_dat: само́й
+      f_acc: саму́
+      f_ins: само́й
+      f_pre: само́й
+      pl_nom: са́ми
+      pl_gen: сами́х
+      pl_dat: сами́м
+      pl_acc: са́ми
+      pl_ins: сами́ми
+      pl_pre: сами́х
   "свой=one's own":
     cefr_level: B1
     type: poss
@@ -496,6 +749,31 @@ words:
       f: своя́
       n: своё
       pl: свои́
+    declension:
+      m_nom: свой
+      m_gen: своего́
+      m_dat: своему́
+      m_acc: свой
+      m_ins: свои́м
+      m_pre: своём
+      n_nom: своё
+      n_gen: своего́
+      n_dat: своему́
+      n_acc: своё
+      n_ins: свои́м
+      n_pre: своём
+      f_nom: своя́
+      f_gen: свое́й
+      f_dat: свое́й
+      f_acc: свою́
+      f_ins: свое́й
+      f_pre: свое́й
+      pl_nom: свои́
+      pl_gen: свои́х
+      pl_dat: свои́м
+      pl_acc: свои́
+      pl_ins: свои́ми
+      pl_pre: свои́х
   "себя=oneself":
     cefr_level: B1
     type: refl
@@ -555,6 +833,31 @@ words:
       f: така́я
       n: тако́е
       pl: таки́е
+    declension:
+      m_nom: тако́й
+      m_gen: тако́го
+      m_dat: тако́му
+      m_acc: тако́й
+      m_ins: таки́м
+      m_pre: тако́м
+      n_nom: тако́е
+      n_gen: тако́го
+      n_dat: тако́му
+      n_acc: тако́е
+      n_ins: таки́м
+      n_pre: тако́м
+      f_nom: така́я
+      f_gen: тако́й
+      f_dat: тако́й
+      f_acc: таку́ю
+      f_ins: тако́й
+      f_pre: тако́й
+      pl_nom: таки́е
+      pl_gen: таки́х
+      pl_dat: таки́м
+      pl_acc: таки́е
+      pl_ins: таки́ми
+      pl_pre: таки́х
   "твой=your":
     cefr_level: A1
     type: poss
@@ -575,6 +878,31 @@ words:
       f: твоя́
       n: твоё
       pl: твои́
+    declension:
+      m_nom: твой
+      m_gen: твоего́
+      m_dat: твоему́
+      m_acc: твой
+      m_ins: твои́м
+      m_pre: твоём
+      n_nom: твоё
+      n_gen: твоего́
+      n_dat: твоему́
+      n_acc: твоё
+      n_ins: твои́м
+      n_pre: твоём
+      f_nom: твоя́
+      f_gen: твое́й
+      f_dat: твое́й
+      f_acc: твою́
+      f_ins: твое́й
+      f_pre: твое́й
+      pl_nom: твои́
+      pl_gen: твои́х
+      pl_dat: твои́м
+      pl_acc: твои́
+      pl_ins: твои́ми
+      pl_pre: твои́х
   "тот=that":
     cefr_level: A1
     type: demo
@@ -593,6 +921,31 @@ words:
       f: та
       n: то
       pl: те
+    declension:
+      m_nom: тот
+      m_gen: того́
+      m_dat: тому́
+      m_acc: тот
+      m_ins: тем
+      m_pre: том
+      n_nom: то
+      n_gen: того́
+      n_dat: тому́
+      n_acc: то
+      n_ins: тем
+      n_pre: том
+      f_nom: та
+      f_gen: той
+      f_dat: той
+      f_acc: ту
+      f_ins: той
+      f_pre: той
+      pl_nom: те
+      pl_gen: тех
+      pl_dat: тем
+      pl_acc: те
+      pl_ins: те́ми
+      pl_pre: тех
   "ты=you":
     cefr_level: A1
     type: pers
@@ -631,6 +984,31 @@ words:
       f: чья
       n: чьё
       pl: чьи
+    declension:
+      m_nom: чей
+      m_gen: чьего́
+      m_dat: чьему́
+      m_acc: чей
+      m_ins: чьим
+      m_pre: чьём
+      n_nom: чьё
+      n_gen: чьего́
+      n_dat: чьему́
+      n_acc: чьё
+      n_ins: чьим
+      n_pre: чьём
+      f_nom: чья
+      f_gen: чьей
+      f_dat: чьей
+      f_acc: чью
+      f_ins: чьей
+      f_pre: чьей
+      pl_nom: чьи
+      pl_gen: чьих
+      pl_dat: чьим
+      pl_acc: чьи
+      pl_ins: чьи́ми
+      pl_pre: чьих
   "что=what":
     cefr_level: A1
     type: inter
@@ -689,6 +1067,31 @@ words:
       f: э́та
       n: э́то
       pl: э́ти
+    declension:
+      m_nom: э́тот
+      m_gen: э́того
+      m_dat: э́тому
+      m_acc: э́тот
+      m_ins: э́тим
+      m_pre: э́том
+      n_nom: э́то
+      n_gen: э́того
+      n_dat: э́тому
+      n_acc: э́то
+      n_ins: э́тим
+      n_pre: э́том
+      f_nom: э́та
+      f_gen: э́той
+      f_dat: э́той
+      f_acc: э́ту
+      f_ins: э́той
+      f_pre: э́той
+      pl_nom: э́ти
+      pl_gen: э́тих
+      pl_dat: э́тим
+      pl_acc: э́ти
+      pl_ins: э́тими
+      pl_pre: э́тих
   "я=I":
     cefr_level: A1
     type: pers

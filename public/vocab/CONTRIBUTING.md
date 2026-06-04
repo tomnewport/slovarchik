@@ -189,8 +189,11 @@ Set `type` (`pers refl poss demo det inter neg`); the `forms` block depends on i
 - `pers` / `refl` / `neg` / interrogative `кто`,`что` → the six cases
   `nom…pre` of the single pronoun (reflexive `себя` has no `nom`).
 - `poss` / `demo` / `det` / interrogative `какой`,`чей` → they decline like
-  adjectives, so give nominative agreement forms `m f n pl`; `accented` is the
-  masculine nominative.
+  adjectives, so give nominative agreement forms `m f n pl` (`accented` is the
+  masculine nominative) **plus** a `declension` block with the full case ×
+  gender/number table (flat `<gender>_<case>` keys, e.g. `m_gen`, `f_acc`,
+  `pl_ins`). The blocks are curated and validated by
+  `scripts/gen-pronoun-declension.mjs` (`node scripts/gen-pronoun-declension.mjs`).
 - A few (`его`, `её`, `их`, `сколько`) take **no** `forms` block.
 
 ### Numerals (`numerals.yml`)
