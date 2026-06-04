@@ -107,7 +107,7 @@ describe('DragTable', () => {
     expect(wrapper.emitted('graded')).toBeFalsy()
   })
 
-  it('double-click places chip in first empty slot (top-then-left order)', async () => {
+  it('double-click places chip in first empty slot (left-to-right, top-to-bottom order)', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: normalParadigm } })
 
     const [firstChip] = wrapper.vm.bank
@@ -143,8 +143,9 @@ describe('DragTable', () => {
     await wrapper.find('button.primary').trigger('click')
 
     const placedBefore = { ...wrapper.vm.placed }
-    // Triggering dblclick after check should have no effect.
-    // (Bank is empty so no chip buttons exist; verify placed is unchanged.)
+    // Directly invoke the handler — the checked guard should block any change.
+    wrapper.vm.onChipDblClick(kotChip.id)
+    await wrapper.vm.$nextTick()
     expect(wrapper.vm.placed).toEqual(placedBefore)
   })
 })
