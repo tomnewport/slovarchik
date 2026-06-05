@@ -98,4 +98,47 @@ describe('SpeakExercise', () => {
     expect(wrapper.emitted('done')).toBeFalsy()
     expect(wrapper.find('button.mic').exists()).toBe(true)
   })
+
+  it('🐢 Slow while listening pauses recognition and returns to the prompt', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+
+    await wrapper.find('button.mic').trigger('click')
+    expect(wrapper.text()).toContain('Listening')
+
+    const slowBtn = wrapper.findAll('button').find((b) => b.text().includes('Slow'))
+    await slowBtn.trigger('click')
+
+    // Recognition paused: phase is now 'prompt' with the mic button visible
+    expect(wrapper.find('button.mic').exists()).toBe(true)
+    expect(wrapper.text()).not.toContain('Listening')
+  })
+
+  it('try-again clears the wrong result and re-opens the mic after slow readback', async () => {
+    vi.useFakeTimers()
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+
+    await wrapper.find('button.mic').trigger('click')
+    lastRec.fireResult('кошка')
+    lastRec.stop()
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.text()).toContain('Not quite')
+
+    const tryAgainBtn = wrapper.findAll('button').find((b) => b.text().includes('Try again'))
+    await tryAgainBtn.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    // Result cleared immediately; waiting for slow readback watchdog
+    expect(wrapper.text()).not.toContain('Not quite')
+    expect(wrapper.find('button.mic').exists()).toBe(true)
+
+    // Slow readback watchdog fires → beginListen() reopens the mic
+    vi.advanceTimersByTime(6000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.text()).toContain('Listening')
+
+    vi.useRealTimers()
+  })
 })
