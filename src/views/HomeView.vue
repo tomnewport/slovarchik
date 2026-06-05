@@ -11,7 +11,11 @@ const router = useRouter()
 
 function startSession(type, size) {
   if (!progress.learning) {
-    router.push({ path: '/batch', query: { level: 'learning' } })
+    // Carry the session intent so batch selection continues into practice
+    // rather than dropping the learner back on the home screen.
+    const query = { level: 'learning', next: 'session', type }
+    if (size) query.size = size
+    router.push({ path: '/batch', query })
     return
   }
   router.push({ path: '/session', query: size ? { type, size } : { type } })

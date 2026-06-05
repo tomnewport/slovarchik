@@ -25,6 +25,15 @@ load()
 
 async function pick(option) {
   await progress.commitBatch(option)
+  // If we arrived here mid-launch (the learner asked to start a session but had
+  // no batch yet), continue straight into that session. Otherwise — the usual
+  // case of choosing the next batch after finishing one — return home.
+  if (route.query.next === 'session') {
+    const query = { type: String(route.query.type ?? 'standard') }
+    if (route.query.size) query.size = String(route.query.size)
+    router.push({ path: '/session', query })
+    return
+  }
   router.push('/')
 }
 </script>
