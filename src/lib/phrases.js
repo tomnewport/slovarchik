@@ -34,11 +34,24 @@ export function typingSequence(phrase) {
     .trim()
 }
 
-// Strip standalone English articles ("a", "an", "the") from a normalised
-// sequence. Russian has no articles, so wrong or missing articles in English
-// translations should never count as errors.
+/**
+ * Strip standalone English articles ("a", "an", "the") from a normalised
+ * sequence so that wrong or missing articles in English translations of Russian
+ * phrases are never counted as errors (Russian has no articles).
+ *
+ * `seq` is expected to be the output of {@link typingSequence}: already
+ * lowercased, stress-stripped and whitespace-collapsed — so the regex only
+ * needs to handle clean lowercase ASCII/Cyrillic input.
+ *
+ * If the entire phrase collapses to an empty string (e.g. a target of just
+ * "a"), the original sequence is returned so that a single-article phrase can
+ * still be answered correctly.
+ * @param {string} seq
+ * @returns {string}
+ */
 function stripArticles(seq) {
-  return seq.replace(/\b(a|an|the)\b\s*/g, '').replace(/\s+/g, ' ').trim()
+  const stripped = seq.replace(/\b(a|an|the)\b\s*/g, '').replace(/\s+/g, ' ').trim()
+  return stripped || seq
 }
 
 /**

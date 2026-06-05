@@ -59,6 +59,9 @@ describe('phraseCorrect', () => {
     expect(phraseCorrect('theorem', 'theorem')).toBe(true)
     expect(phraseCorrect('theory', 'theory')).toBe(true)
   })
+  it('can still answer a single-article phrase correctly', () => {
+    expect(phraseCorrect('a', 'a')).toBe(true)
+  })
 })
 
 describe('nextChar', () => {
