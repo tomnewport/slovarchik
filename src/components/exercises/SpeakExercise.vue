@@ -133,8 +133,8 @@ function grade(finalText, alternatives = []) {
   transcript.value = best || transcript.value
   result.value = { correct, similarity }
   phase.value = 'graded'
-  playFeedback(correct)
   speakTarget() // hear the model answer alongside the result
+  playFeedback(correct)
 }
 
 function tryAgain() {
