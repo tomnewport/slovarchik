@@ -2,12 +2,14 @@
 // Mastery exercise: fill an inflection table. Reuses the existing inflection
 // sub-components — DragTable for the word-bank variant (inflect-bank) and
 // BlindEndings for the keyboard variant (inflect-keyboard).
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import { state as vocabState } from '../../stores/vocab.js'
 import { buildParadigm } from '../../lib/paradigm.js'
+import { speak } from '../../lib/speech.js'
 import DragTable from '../inflection/DragTable.vue'
 import BlindEndings from '../inflection/BlindEndings.vue'
+import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -33,6 +35,11 @@ function next() {
   // an unanswerable exercise forever.
   emit('done', { correct: paradigm.value ? wasCorrect.value : true })
 }
+
+onMounted(() => {
+  // The lemma is the subject of the table — read it aloud as it appears.
+  speak(props.exercise.lemma)
+})
 </script>
 
 <template>
@@ -40,6 +47,7 @@ function next() {
     <div class="prompt">
       <span class="muted">Complete the table for</span>
       <strong lang="ru">{{ exercise.lemma }}</strong>
+      <SpeakButton :text="exercise.lemma" />
     </div>
 
     <!-- Re-key on the exercise id so the sub-component fully resets per item. -->

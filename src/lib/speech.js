@@ -10,6 +10,25 @@ export function speechSupported() {
   )
 }
 
+// Pick the best installed voice for a BCP-47 tag (e.g. 'ru-RU' → any ru voice),
+// preferring an exact match. Returns null when voices aren't enumerable yet
+// (they load asynchronously) so the browser falls back to its default — which is
+// why this is best-effort, not required.
+function voiceFor(lang) {
+  try {
+    const voices = window.speechSynthesis.getVoices?.() ?? []
+    if (!voices.length) return null
+    const base = String(lang).slice(0, 2).toLowerCase()
+    return (
+      voices.find((v) => v.lang?.toLowerCase() === lang.toLowerCase()) ??
+      voices.find((v) => v.lang?.toLowerCase().startsWith(base)) ??
+      null
+    )
+  } catch {
+    return null
+  }
+}
+
 // Speak `text` in `lang` (defaults to Russian). The combining stress mark
 // (U+0301) is kept so Russian voices place the stress on the right vowel —
 // this is what tells heteronyms like сто́ит (costs) from стои́т (stands) apart
@@ -25,6 +44,8 @@ export function speak(text, lang = 'ru-RU', rate = 0.9, opts = {}) {
     const utter = new window.SpeechSynthesisUtterance(clean)
     utter.lang = lang
     utter.rate = rate
+    const voice = voiceFor(lang)
+    if (voice) utter.voice = voice
     if (opts.onStart) utter.onstart = () => opts.onStart()
     if (opts.onEnd) utter.onend = () => opts.onEnd()
     window.speechSynthesis.speak(utter)
@@ -66,6 +87,8 @@ export function speakSequence(parts, { onEnd } = {}) {
       const utter = new window.SpeechSynthesisUtterance(String(part.text).trim())
       utter.lang = part.lang || 'ru-RU'
       utter.rate = part.rate || 0.9
+      const voice = voiceFor(utter.lang)
+      if (voice) utter.voice = voice
       if (i === items.length - 1 && onEnd) utter.onend = () => onEnd()
       window.speechSynthesis.speak(utter)
     })
