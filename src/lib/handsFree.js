@@ -222,17 +222,15 @@ function words(text) {
     .filter(Boolean)
 }
 
-/** Words that begin the session from the welcome screen. */
+/** Words that begin the session from the welcome screen. The welcome mic
+ * listens in Russian (`ru-RU`), so only Russian "let's go" cues belong here. */
 const START_WORDS = new Set([
   'давай',
   'давайте',
   'поехали',
   'начали',
   'начать',
-  'start',
-  'go',
-  'begin',
-  'ready',
+  'погнали',
 ])
 
 /** Words that end the whole session. */

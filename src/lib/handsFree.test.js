@@ -133,11 +133,12 @@ describe('availableTypes / nextActivity', () => {
 })
 
 describe('spoken control words', () => {
-  it('recognises start cues', () => {
+  it('recognises Russian start cues (the welcome mic listens in ru-RU)', () => {
     expect(isStart('давай')).toBe(true)
     expect(isStart('давай!')).toBe(true)
-    expect(isStart("let's go")).toBe(false)
-    expect(isStart('go')).toBe(true)
+    expect(isStart('поехали')).toBe(true)
+    // English cues aren't recognised in Russian mode, so they aren't accepted.
+    expect(isStart('go')).toBe(false)
     expect(isStart('молоко')).toBe(false)
   })
 

@@ -116,6 +116,25 @@ describe('PracticeView', () => {
     expect(wrapper.vm.score.right).toBeGreaterThanOrEqual(1)
   })
 
+  it('does not count a spoken "pass" against the score', async () => {
+    const instances = []
+    stubSpeech()
+    stubRecognition(instances)
+
+    const wrapper = mount(PracticeView)
+    await flushPromises()
+    wrapper.vm.beginSession()
+    await flushPromises()
+    expect(wrapper.vm.phase).toBe('listening')
+
+    // The learner skips this item — it should not add to total or right.
+    feed(instances[instances.length - 1], 'pass')
+    await flushPromises()
+
+    expect(wrapper.vm.score.total).toBe(0)
+    expect(wrapper.vm.score.right).toBe(0)
+  })
+
   it('quits the session when the user says "quit"', async () => {
     const instances = []
     stubSpeech()

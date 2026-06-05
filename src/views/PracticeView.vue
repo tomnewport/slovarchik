@@ -339,6 +339,7 @@ function onWrong() {
   phase.value = 'feedback'
   if (attempts < activity.value.maxAttempts) {
     // Read the model answer slowly, then listen again for another try.
+    silenceRetries = 0
     readThen(activity.value.model, () => {
       if (phase.value === 'feedback') beginListen()
     })
@@ -354,16 +355,20 @@ function onPass() {
   readThen(activity.value.model, () => finishItem(false))
 }
 
+// `record` is false for a deliberate "pass": a skip shouldn't count toward the
+// session ratio or be recorded as a missed attempt.
 function finishItem(record) {
-  score.total += 1
-  if (gotCorrect) score.right += 1
-  if (record && activity.value?.recordKey) {
-    progress.recordAttempt({
-      word: activity.value.recordKey,
-      dimension: activity.value.dimension,
-      level: activity.value.level,
-      correct: gotCorrect,
-    })
+  if (record) {
+    score.total += 1
+    if (gotCorrect) score.right += 1
+    if (activity.value?.recordKey) {
+      progress.recordAttempt({
+        word: activity.value.recordKey,
+        dimension: activity.value.dimension,
+        level: activity.value.level,
+        correct: gotCorrect,
+      })
+    }
   }
   later(nextItem, ADVANCE_MS)
 }
@@ -454,7 +459,8 @@ const statusLine = computed(() => {
       </p>
       <p v-if="transcript" class="heard">“{{ transcript }}”</p>
       <p v-if="errorMessage" class="feedback bad">{{ errorMessage }}</p>
-      <button class="primary start" @click="manualStart">Start</button>
+      <button v-if="paused" class="primary start" @click="resume">🎤 Resume</button>
+      <button v-else class="primary start" @click="manualStart">Start</button>
     </div>
 
     <!-- Ended -->
