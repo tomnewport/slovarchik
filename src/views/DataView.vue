@@ -27,7 +27,7 @@ function chooseSuccess(id) {
 }
 function chooseError(id) {
   setErrorSound(id)
-  if (id !== OFF) playSound('error', id)
+  if (id !== OFF) playSound('neutral', id)
 }
 
 const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : null

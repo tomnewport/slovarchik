@@ -61,6 +61,9 @@ function rank(stateName) {
 async function setup() {
   if (!vocabState.words.length) await initVocab()
   if (!progress.state.loaded) await progress.loadProgress()
+  // Settings are preloaded at app boot (main.js); ensure them here too for a
+  // deep link straight into a session. Non-blocking — the read resolves long
+  // before the first answer, and playFeedback falls back to defaults until then.
   loadSettings()
   // Auto-commit a mastery batch if the learner qualifies but none is active.
   if (progress.learnedCount.value >= MASTERY_UNLOCK_AT && !progress.state.mastery) {
@@ -125,7 +128,6 @@ function finalizeIfDone() {
 function onDone(result) {
   const ex = current.value
   if (!ex) return
-  // A short bright sound when the exercise was correct, a softer one on a slip.
   playFeedback(result.correct)
   for (const key of ex.targets ?? []) {
     progress.recordAttempt({

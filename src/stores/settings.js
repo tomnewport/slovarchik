@@ -26,12 +26,15 @@ function valid(kind, id) {
   return list.some((s) => s.id === id)
 }
 
+// The slot played after a slip is the "neutral" kind throughout (the
+// NEUTRAL_SOUNDS list); the UI labels it "with mistakes".
+
 /** Load saved preferences (defaults stay in place when nothing is stored). */
 export async function loadSettings() {
   if (settings.loaded) return settings
   const stored = (await idb.getMeta(META_KEY)) ?? {}
   if (valid('success', stored.successSound)) settings.successSound = stored.successSound
-  if (valid('error', stored.errorSound)) settings.errorSound = stored.errorSound
+  if (valid('neutral', stored.errorSound)) settings.errorSound = stored.errorSound
   settings.loaded = true
   return settings
 }
@@ -52,7 +55,7 @@ export async function setSuccessSound(id) {
 
 /** Choose the sound played after a slip (or OFF to disable it). */
 export async function setErrorSound(id) {
-  if (!valid('error', id)) return
+  if (!valid('neutral', id)) return
   settings.errorSound = id
   await persist()
 }
@@ -65,5 +68,5 @@ export async function setErrorSound(id) {
 export function playFeedback(correct) {
   const id = correct ? settings.successSound : settings.errorSound
   if (!id || id === OFF) return false
-  return playSound(correct ? 'success' : 'error', id)
+  return playSound(correct ? 'success' : 'neutral', id)
 }

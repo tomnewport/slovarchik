@@ -41,13 +41,13 @@ describe('feedbackSound presets', () => {
 })
 
 describe('feedbackSound playback', () => {
-  it('reports unsupported and no-ops without the Web Audio API', () => {
+  it('reports unsupported and no-ops without the Web Audio API', async () => {
     expect(audioSupported()).toBe(false)
-    expect(playNotes([{ freq: 440 }])).toBe(false)
-    expect(playSound('success', SUCCESS_SOUNDS[0].id)).toBe(false)
+    expect(await playNotes([{ freq: 440 }])).toBe(false)
+    expect(await playSound('success', SUCCESS_SOUNDS[0].id)).toBe(false)
   })
 
-  it('schedules one oscillator per note when audio is available', () => {
+  it('schedules one oscillator per note when audio is available', async () => {
     const started = []
     function fakeNode() {
       return {
@@ -80,12 +80,12 @@ describe('feedbackSound playback', () => {
 
     expect(audioSupported()).toBe(true)
     const sound = SUCCESS_SOUNDS.find((s) => s.id === 'sparkle')
-    expect(playSound('success', sound.id)).toBe(true)
+    expect(await playSound('success', sound.id)).toBe(true)
     // Sparkle is four notes → four oscillators started.
     expect(started).toHaveLength(sound.notes.length)
   })
 
-  it('resumes a suspended context before playing', () => {
+  it('resumes a suspended context before playing', async () => {
     const resume = vi.fn()
     window.AudioContext = class {
       constructor() {
@@ -115,11 +115,11 @@ describe('feedbackSound playback', () => {
       }
     }
 
-    expect(playNotes([{ freq: 440, dur: 0.1 }])).toBe(true)
+    expect(await playNotes([{ freq: 440, dur: 0.1 }])).toBe(true)
     expect(resume).toHaveBeenCalled()
   })
 
-  it('returns false for an unknown sound id without touching audio', () => {
+  it('returns false for an unknown sound id without touching audio', async () => {
     window.AudioContext = class {
       createOscillator() {
         throw new Error('should not be called')
@@ -128,6 +128,6 @@ describe('feedbackSound playback', () => {
         throw new Error('should not be called')
       }
     }
-    expect(playSound('success', 'does-not-exist')).toBe(false)
+    expect(await playSound('success', 'does-not-exist')).toBe(false)
   })
 })

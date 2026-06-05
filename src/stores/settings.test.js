@@ -64,7 +64,7 @@ describe('settings store', () => {
     playFeedback(true)
     expect(playSound).toHaveBeenLastCalledWith('success', 'bell')
     playFeedback(false)
-    expect(playSound).toHaveBeenLastCalledWith('error', 'tap')
+    expect(playSound).toHaveBeenLastCalledWith('neutral', 'tap')
   })
 
   it('stays silent when a slot is turned off', () => {

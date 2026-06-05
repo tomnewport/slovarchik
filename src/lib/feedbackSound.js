@@ -113,15 +113,17 @@ function audioContext() {
 }
 
 /**
- * Play a sequence of synthesised notes. Returns true if playback was scheduled.
- * A no-op (returning false) when the Web Audio API is unavailable.
+ * Play a sequence of synthesised notes. Resolves to true if playback was
+ * scheduled. A no-op (resolving to false) when the Web Audio API is unavailable.
  */
-export function playNotes(notes) {
+export async function playNotes(notes) {
   if (!Array.isArray(notes) || !notes.length) return false
   const ac = audioContext()
   if (!ac) return false
   try {
-    if (ac.state === 'suspended') ac.resume?.()
+    // Wait for a suspended context (e.g. backgrounded tab) to actually resume
+    // before reading currentTime, or the notes would be scheduled in the past.
+    if (ac.state === 'suspended') await ac.resume?.()
     const t0 = ac.currentTime
     for (const note of notes) {
       const osc = ac.createOscillator()
@@ -149,13 +151,13 @@ export function playNotes(notes) {
   }
 }
 
-/** Look up a sound by kind ('success' → bright, anything else → neutral) and id. */
+/** Look up a sound by kind ('success' → bright, 'neutral' → soft) and id. */
 export function soundById(kind, id) {
   const list = kind === 'success' ? SUCCESS_SOUNDS : NEUTRAL_SOUNDS
   return list.find((s) => s.id === id) ?? null
 }
 
-/** Play a named feedback sound. Returns true if playback was scheduled. */
+/** Play a named feedback sound. Resolves to true if playback was scheduled. */
 export function playSound(kind, id) {
   const sound = soundById(kind, id)
   if (!sound) return false

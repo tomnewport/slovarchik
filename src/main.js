@@ -3,6 +3,7 @@ import App from './App.vue'
 import { router } from './router/index.js'
 import { initVocab } from './stores/vocab.js'
 import { loadProgress } from './stores/progress.js'
+import { loadSettings } from './stores/settings.js'
 import './style.css'
 
 createApp(App).use(router).mount('#app')
@@ -11,3 +12,5 @@ createApp(App).use(router).mount('#app')
 initVocab()
 // Load the learner's progress (counts, batches) so the pill and home reflect it.
 loadProgress()
+// Load feedback-sound preferences so they're ready before the first answer.
+loadSettings()
