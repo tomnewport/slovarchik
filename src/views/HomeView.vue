@@ -32,6 +32,7 @@ const DRILLS = [
   { to: '/verbs', label: 'Verbs' },
   { to: '/numbers', label: 'Numbers' },
   { to: '/phrases', label: 'Phrases' },
+  { to: '/phrase-fix', label: 'Fix phrases' },
   { to: '/listening', label: 'Listening' },
   { to: '/speaking', label: 'Speaking' },
 ]

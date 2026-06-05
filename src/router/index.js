@@ -75,6 +75,11 @@ export const routes = [
     component: () => import('../views/SpeakingView.vue'),
   },
   {
+    path: '/phrase-fix',
+    name: 'phrase-fix',
+    component: () => import('../views/PhraseFixView.vue'),
+  },
+  {
     path: '/practice',
     name: 'practice',
     component: () => import('../views/PracticeView.vue'),
