@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 
 import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
+import AchievementBadge from '../components/AchievementBadge.vue'
 
 const router = useRouter()
 
@@ -32,8 +33,7 @@ const chart = computed(() => {
   return { learned: line('learned'), mastered: line('mastered'), dot, max, last: pts[pts.length - 1] }
 })
 
-const earned = computed(() => earnedAchievements.value)
-const earnedCount = computed(() => earned.value.size)
+const earnedCount = computed(() => earnedAchievements.value.size)
 
 function focus(id) {
   router.push({ path: '/session', query: { type: 'standard', focus: id } })
@@ -57,16 +57,14 @@ function toggle(which) {
     <div class="card achievements">
       <h2>Achievements <span class="ach-count muted">{{ earnedCount }} / {{ ACHIEVEMENTS.length }}</span></h2>
       <div class="badge-grid">
-        <div
+        <AchievementBadge
           v-for="a in ACHIEVEMENTS"
           :key="a.id"
-          class="badge-item"
-          :class="{ unlocked: earned.has(a.id) }"
-          :title="a.desc"
-        >
-          <span class="badge-icon">{{ a.icon }}</span>
-          <span class="badge-label">{{ a.label }}</span>
-        </div>
+          :icon="a.icon"
+          :label="a.label"
+          :desc="a.desc"
+          :unlocked="earnedAchievements.has(a.id)"
+        />
       </div>
     </div>
 
@@ -180,35 +178,5 @@ function toggle(which) {
   grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
   gap: 0.5rem;
   margin-top: 0.75rem;
-}
-.badge-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-  padding: 0.6rem 0.3rem;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  opacity: 0.35;
-  transition: opacity 0.2s, border-color 0.2s;
-}
-.badge-item.unlocked {
-  opacity: 1;
-  border-color: var(--gold);
-  background: color-mix(in srgb, var(--gold) 8%, var(--card));
-}
-.badge-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-.badge-label {
-  font-size: 0.65rem;
-  text-align: center;
-  color: var(--muted);
-  line-height: 1.2;
-}
-.badge-item.unlocked .badge-label {
-  color: var(--text);
 }
 </style>

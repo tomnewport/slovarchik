@@ -613,5 +613,8 @@ export async function importData(data) {
   const seenIds = Array.isArray(data.seenAchievements) ? data.seenAchievements : []
   state.seenAchievements = new Set(seenIds)
   await idb.setMeta('seenAchievements', seenIds)
+  // Silently acknowledge any achievements already earned in the imported data so
+  // they don't all fire as notifications at the end of the very next session.
+  await acknowledgeAchievements()
   return true
 }

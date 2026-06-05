@@ -28,6 +28,7 @@ import MatchExercise from '../components/exercises/MatchExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import AchievementBadge from '../components/AchievementBadge.vue'
 
 const COMPONENTS = {
   type: TypeExercise,
@@ -98,7 +99,7 @@ async function setup() {
   Object.assign(runner, initRunner(exercises))
   startedAt.value = Date.now()
   ready.value = true
-  finalizeIfDone()
+  await finalizeIfDone()
 }
 
 setup()
@@ -131,7 +132,7 @@ async function finalizeIfDone() {
   await progress.acknowledgeAchievements()
 }
 
-function onDone(result) {
+async function onDone(result) {
   const ex = current.value
   if (!ex) return
   // result.wrong (matching exercises) lists the specific missed keys; everything
@@ -146,7 +147,7 @@ function onDone(result) {
     })
   }
   submit(runner, result.correct)
-  finalizeIfDone()
+  await finalizeIfDone()
 }
 
 // --- Skipping a modality (listening / speaking) -----------------------------
@@ -182,9 +183,9 @@ const canSkipSpeaking = computed(
   () => !runner.skipped.includes('speaking') && upcomingHas('speaking'),
 )
 
-function skip(dimension) {
+async function skip(dimension) {
   skipDimension(runner, dimension, makeReplacement)
-  finalizeIfDone()
+  await finalizeIfDone()
 }
 
 // --- Progress bar + summary -------------------------------------------------
@@ -278,10 +279,15 @@ function confirmClose() {
           <strong class="batch-name">{{ done.batch.name }}</strong>.
         </p>
         <div v-if="newAchievements.length" class="achievements-row">
-          <span v-for="a in newAchievements" :key="a.id" class="achievement-badge new" :title="a.desc">
-            <span class="badge-icon">{{ a.icon }}</span>
-            <span class="badge-label">{{ a.label }}</span>
-          </span>
+          <AchievementBadge
+            v-for="a in newAchievements"
+            :key="a.id"
+            :icon="a.icon"
+            :label="a.label"
+            :desc="a.desc"
+            :unlocked="true"
+            variant="inline"
+          />
         </div>
         <button class="primary next-batch" @click="nextBatch(celebrated[0].level)">
           {{ celebrated[0].level === 'mastery' ? 'Keep going →' : 'Choose the next batch →' }}
@@ -297,10 +303,15 @@ function confirmClose() {
             <div class="fanfare-icon">{{ newAchievements[0].icon }}</div>
             <h2>{{ newAchievements.length === 1 ? 'Achievement unlocked!' : 'Achievements unlocked!' }}</h2>
             <div class="achievements-row">
-              <span v-for="a in newAchievements" :key="a.id" class="achievement-badge new" :title="a.desc">
-                <span class="badge-icon">{{ a.icon }}</span>
-                <span class="badge-label">{{ a.label }}</span>
-              </span>
+              <AchievementBadge
+                v-for="a in newAchievements"
+                :key="a.id"
+                :icon="a.icon"
+                :label="a.label"
+                :desc="a.desc"
+                :unlocked="true"
+                variant="inline"
+              />
             </div>
           </div>
         </template>
@@ -436,30 +447,6 @@ function confirmClose() {
   gap: 0.5rem;
   justify-content: center;
   margin: 0.25rem 0;
-}
-.achievement-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-  padding: 0.5rem 0.7rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  font-size: 0.8rem;
-}
-.achievement-badge.new {
-  border-color: var(--gold);
-  background: color-mix(in srgb, var(--gold) 10%, var(--card));
-}
-.badge-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-.badge-label {
-  font-size: 0.7rem;
-  text-align: center;
-  color: var(--muted);
 }
 .achievement-fanfare {
   display: grid;
