@@ -61,7 +61,7 @@ describe('HomeView', () => {
 
   it('prompts to choose a learning batch when none is set', async () => {
     const wrapper = mount(HomeView)
-    const card = wrapper.find('.batch-card.learn')
+    const card = wrapper.find('.choose-batch')
     expect(card.element.tagName).toBe('BUTTON')
     expect(card.text()).toContain('Choose words to learn')
     await card.trigger('click')
@@ -79,18 +79,19 @@ describe('HomeView', () => {
   it('shows the committed batch name as a non-clickable card', () => {
     progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)
-    const card = wrapper.find('.batch-card.learn')
+    const card = wrapper.find('.batches-card')
     expect(card.element.tagName).toBe('DIV')
     expect(card.text()).toContain('animals')
   })
 
-  it('shows mastery card only when a mastery batch is active', () => {
+  it('shows mastery batch only when a mastery batch is active', () => {
     const wrapper = mount(HomeView)
-    expect(wrapper.find('.batch-card.master').exists()).toBe(false)
+    expect(wrapper.find('.master-kind').exists()).toBe(false)
 
+    progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     progress.mastery = { name: 'Random', level: 'mastery', words: [], size: 10 }
     const wrapper2 = mount(HomeView)
-    expect(wrapper2.find('.batch-card.master').exists()).toBe(true)
-    expect(wrapper2.find('.batch-card.master').text()).toContain('Random')
+    expect(wrapper2.find('.master-kind').exists()).toBe(true)
+    expect(wrapper2.find('.batches-card').text()).toContain('Random')
   })
 })

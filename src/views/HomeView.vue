@@ -5,7 +5,7 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { state as progress } from '../stores/progress.js'
+import { state as progress, batchProgress } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 
 const router = useRouter()
@@ -48,6 +48,10 @@ onMounted(() => {
 
 const learningBatch = computed(() => progress.learning)
 const masteryBatch = computed(() => progress.mastery)
+const learningProgress = computed(() => batchProgress('learning'))
+const masteryProgress = computed(() => batchProgress('mastery'))
+const learningDone = computed(() => learningProgress.value.filter((w) => w.done).length)
+const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
 
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
@@ -81,25 +85,42 @@ const FOCUSED = [
     </div>
 
     <!-- Current batches -->
-    <div class="batches">
-      <!-- Learning: prompt to choose when none is set; display-only when active -->
-      <button
-        v-if="!learningBatch"
-        class="batch-card learn"
-        @click="router.push({ path: '/batch', query: { level: 'learning' } })"
-      >
-        <span class="batch-kind">Learning</span>
-        <span class="muted">Choose words to learn →</span>
-      </button>
-      <div v-else class="batch-card learn">
-        <span class="batch-kind">Learning</span>
-        <strong>{{ learningBatch.name }}</strong>
-      </div>
-
-      <!-- Mastery: display-only, auto-selected from learned words -->
-      <div v-if="masteryBatch" class="batch-card master">
-        <span class="batch-kind">Mastering</span>
-        <strong>{{ masteryBatch.name }}</strong>
+    <button
+      v-if="!learningBatch"
+      class="card choose-batch"
+      @click="router.push({ path: '/batch', query: { level: 'learning' } })"
+    >
+      <span class="batch-kind learn-kind">Learning</span>
+      <span class="muted">Choose words to learn →</span>
+    </button>
+    <div v-else class="card batches-card">
+      <div class="batch-list">
+        <div class="batch-row">
+          <div class="batch-meta">
+            <span class="batch-kind learn-kind">Learning</span>
+            <span class="batch-name">{{ learningBatch.name }}</span>
+            <span class="batch-count muted">{{ learningDone }} / {{ learningBatch.size }}</span>
+          </div>
+          <div class="batch-bar">
+            <div
+              class="batch-fill learn-fill"
+              :style="{ width: (learningBatch.size ? (learningDone / learningBatch.size) * 100 : 0) + '%' }"
+            />
+          </div>
+        </div>
+        <div v-if="masteryBatch" class="batch-row">
+          <div class="batch-meta">
+            <span class="batch-kind master-kind">Mastering</span>
+            <span class="batch-name">{{ masteryBatch.name }}</span>
+            <span class="batch-count muted">{{ masteryDone }} / {{ masteryBatch.size }}</span>
+          </div>
+          <div class="batch-bar">
+            <div
+              class="batch-fill master-fill"
+              :style="{ width: (masteryBatch.size ? (masteryDone / masteryBatch.size) * 100 : 0) + '%' }"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -155,34 +176,63 @@ const FOCUSED = [
 </template>
 
 <style scoped>
-.batches {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-}
-.batch-card {
+.choose-batch {
   display: grid;
   gap: 0.2rem;
   text-align: left;
-  padding: 0.9rem 1rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: var(--card);
-}
-.batch-card.learn {
+  cursor: pointer;
   border-left: 4px solid var(--good);
 }
-.batch-card.master {
-  border-left: 4px solid var(--gold);
+.batch-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.batch-row {
+  display: grid;
+  gap: 0.35rem;
+}
+.batch-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 .batch-kind {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--muted);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  flex-shrink: 0;
 }
-.batch-card strong {
-  font-size: 1.1rem;
+.learn-kind {
+  color: var(--good);
+}
+.master-kind {
+  color: var(--gold);
+}
+.batch-name {
+  font-weight: 500;
+  flex: 1;
+}
+.batch-count {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.batch-bar {
+  height: 6px;
+  background: var(--bg-soft);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.batch-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.learn-fill {
+  background: var(--good);
+}
+.master-fill {
+  background: var(--gold);
 }
 .standard h2 {
   margin: 0 0 0.25rem;
