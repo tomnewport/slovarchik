@@ -32,6 +32,10 @@ import {
   exportData,
   validateImport,
   importData,
+  cefrStats,
+  earnedAchievements,
+  pendingAchievements,
+  acknowledgeAchievements,
 } from './progress.js'
 
 // A small synthetic vocabulary; `hasInflections` short-circuits the paradigm
@@ -386,6 +390,92 @@ describe('export / import', () => {
     await learn('w0')
     await expect(importData({ app: 'nope' })).rejects.toThrow()
     expect(stateOf('w0')).toBe('mastered') // unchanged
+  })
+})
+
+describe('achievements', () => {
+  it('cefrStats tallies total and learned words per CEFR level', async () => {
+    const a1Words = makeWords(3, { cefr: 'A1', hasInflections: false })
+    // Give the A2 words distinct keys by offsetting the index manually.
+    const a2Words = [
+      { key: 'a2_0', cefr: 'A2', collections: [], hasInflections: false },
+      { key: 'a2_1', cefr: 'A2', collections: [], hasInflections: false },
+    ]
+    setVocab([...a1Words, ...a2Words])
+    // Learn 2 of the 3 A1 words; leave A2 untouched.
+    await learn('w0')
+    await learn('w1')
+    const stats = cefrStats.value
+    expect(stats.A1.total).toBe(3)
+    expect(stats.A1.learned).toBe(2)
+    expect(stats.A2.total).toBe(2)
+    expect(stats.A2.learned).toBe(0)
+  })
+
+  it('earnedAchievements grants learn-1 after learning the first word', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    expect(earnedAchievements.value.has('learn-1')).toBe(false)
+    await learn('w0')
+    expect(earnedAchievements.value.has('learn-1')).toBe(true)
+  })
+
+  it('earnedAchievements grants master-1 only when a word is mastered', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    expect(earnedAchievements.value.has('master-1')).toBe(false)
+    await learn('w0') // uninflected → mastered immediately
+    expect(earnedAchievements.value.has('master-1')).toBe(true)
+  })
+
+  it('earnedAchievements grants cefr-A1 when all A1 words are learned', async () => {
+    setVocab(makeWords(2, { cefr: 'A1', hasInflections: false }))
+    await learn('w0')
+    expect(earnedAchievements.value.has('cefr-A1')).toBe(false)
+    await learn('w1')
+    expect(earnedAchievements.value.has('cefr-A1')).toBe(true)
+  })
+
+  it('pendingAchievements excludes already-seen achievements', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    // Before acknowledge: pending should include learn-1.
+    expect(pendingAchievements.value.some((a) => a.id === 'learn-1')).toBe(true)
+    await acknowledgeAchievements()
+    // After acknowledge: pending should be empty.
+    expect(pendingAchievements.value).toHaveLength(0)
+  })
+
+  it('acknowledgeAchievements persists seen IDs through a reload', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    await acknowledgeAchievements()
+
+    // Simulate reload.
+    state.seenAchievements = new Set()
+    await loadProgress()
+
+    expect(state.seenAchievements.has('learn-1')).toBe(true)
+    expect(pendingAchievements.value).toHaveLength(0)
+  })
+
+  it('importData silently acknowledges achievements so they do not re-fire', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    const snapshot = exportData()
+
+    await resetProgress()
+    await importData(snapshot)
+
+    // After import, learn-1 should already be acknowledged.
+    expect(pendingAchievements.value.some((a) => a.id === 'learn-1')).toBe(false)
+  })
+
+  it('resetProgress clears seen achievements', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    await acknowledgeAchievements()
+    expect(state.seenAchievements.size).toBeGreaterThan(0)
+    await resetProgress()
+    expect(state.seenAchievements.size).toBe(0)
   })
 })
 

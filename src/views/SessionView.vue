@@ -28,6 +28,7 @@ import MatchExercise from '../components/exercises/MatchExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import AchievementBadge from '../components/AchievementBadge.vue'
 import ReportButton from '../components/ReportButton.vue'
 
 const COMPONENTS = {
@@ -99,7 +100,7 @@ async function setup() {
   Object.assign(runner, initRunner(exercises))
   startedAt.value = Date.now()
   ready.value = true
-  finalizeIfDone()
+  await finalizeIfDone()
 }
 
 setup()
@@ -108,12 +109,16 @@ setup()
 // entry to the summary, so leaving via "Back home" can't strand a completed
 // batch and re-trigger the celebration next time).
 const celebrated = ref([])
+// New achievements unlocked during this session.
+const newAchievements = ref([])
 let finalized = false
 
-function finalizeIfDone() {
+async function finalizeIfDone() {
   if (runner.phase !== 'summary' || finalized) return
   finalized = true
   finishedAt.value = Date.now()
+  // Capture pending achievements before acknowledging so they show in the summary.
+  newAchievements.value = [...progress.pendingAchievements.value]
   // Capture and advance every completed batch (a session can finish both the
   // learning and the mastery batch at once).
   celebrated.value = ['learning', 'mastery']
@@ -125,9 +130,11 @@ function finalizeIfDone() {
   if (celebrated.value.some((c) => c.level === 'mastery')) {
     progress.autoCommitMasteryBatch()
   }
+  // Mark all earned achievements as seen so they won't re-appear.
+  await progress.acknowledgeAchievements()
 }
 
-function onDone(result) {
+async function onDone(result) {
   const ex = current.value
   if (!ex) return
   // result.wrong (matching exercises) lists the specific missed keys; everything
@@ -142,7 +149,7 @@ function onDone(result) {
     })
   }
   submit(runner, result.correct)
-  finalizeIfDone()
+  await finalizeIfDone()
 }
 
 // --- Skipping a modality (listening / speaking) -----------------------------
@@ -178,9 +185,9 @@ const canSkipSpeaking = computed(
   () => !runner.skipped.includes('speaking') && upcomingHas('speaking'),
 )
 
-function skip(dimension) {
+async function skip(dimension) {
   skipDimension(runner, dimension, makeReplacement)
-  finalizeIfDone()
+  await finalizeIfDone()
 }
 
 // --- Progress bar + summary -------------------------------------------------
@@ -278,6 +285,17 @@ function confirmClose() {
           You {{ done.level === 'mastery' ? 'mastered' : 'learned' }}
           <strong class="batch-name">{{ done.batch.name }}</strong>.
         </p>
+        <div v-if="newAchievements.length" class="achievements-row">
+          <AchievementBadge
+            v-for="a in newAchievements"
+            :key="a.id"
+            :icon="a.icon"
+            :label="a.label"
+            :desc="a.desc"
+            :unlocked="true"
+            variant="inline"
+          />
+        </div>
         <button class="primary next-batch" @click="nextBatch(celebrated[0].level)">
           {{ celebrated[0].level === 'mastery' ? 'Keep going →' : 'Choose the next batch →' }}
         </button>
@@ -285,7 +303,26 @@ function confirmClose() {
       </div>
 
       <template v-else>
-        <h2>Session complete</h2>
+        <!-- Achievement-only celebration when milestones were reached. -->
+        <template v-if="newAchievements.length">
+          <CelebrationBurst :show="true" />
+          <div class="achievement-fanfare" aria-live="polite">
+            <div class="fanfare-icon">{{ newAchievements[0].icon }}</div>
+            <h2>{{ newAchievements.length === 1 ? 'Achievement unlocked!' : 'Achievements unlocked!' }}</h2>
+            <div class="achievements-row">
+              <AchievementBadge
+                v-for="a in newAchievements"
+                :key="a.id"
+                :icon="a.icon"
+                :label="a.label"
+                :desc="a.desc"
+                :unlocked="true"
+                variant="inline"
+              />
+            </div>
+          </div>
+        </template>
+        <h2 v-else>Session complete</h2>
         <p class="score">{{ summary.percent }}% correct</p>
         <p class="muted">
           {{ summary.correct }} / {{ summary.total }} first try ·
@@ -410,6 +447,22 @@ function confirmClose() {
   flex-wrap: wrap;
   gap: 0.4rem;
   justify-content: center;
+}
+.achievements-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.25rem 0;
+}
+.achievement-fanfare {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+}
+.fanfare-icon {
+  font-size: 3rem;
+  line-height: 1;
 }
 .modal-backdrop {
   position: fixed;

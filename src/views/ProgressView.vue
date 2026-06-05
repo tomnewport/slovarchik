@@ -1,11 +1,12 @@
 <script setup>
 // Progress screen: a words-known-by-day chart, expandable learned/mastered word
-// lists, and the learner's weakest skills — each a chip that launches a focused
-// session over the matching words.
+// lists, the learner's weakest skills, and achievement badges.
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements } from '../stores/progress.js'
+import { ACHIEVEMENTS } from '../lib/achievements.js'
+import AchievementBadge from '../components/AchievementBadge.vue'
 
 const router = useRouter()
 
@@ -32,6 +33,8 @@ const chart = computed(() => {
   return { learned: line('learned'), mastered: line('mastered'), dot, max, last: pts[pts.length - 1] }
 })
 
+const earnedCount = computed(() => earnedAchievements.value.size)
+
 function focus(id) {
   router.push({ path: '/session', query: { type: 'standard', focus: id } })
 }
@@ -48,6 +51,21 @@ function toggle(which) {
     <div class="row counts">
       <span class="pill learn">💚 {{ learnedCount }} learned</span>
       <span class="pill master">🏆 {{ masteredCount }} mastered</span>
+    </div>
+
+    <!-- Achievement badges -->
+    <div class="card achievements">
+      <h2>Achievements <span class="ach-count muted">{{ earnedCount }} / {{ ACHIEVEMENTS.length }}</span></h2>
+      <div class="badge-grid">
+        <AchievementBadge
+          v-for="a in ACHIEVEMENTS"
+          :key="a.id"
+          :icon="a.icon"
+          :label="a.label"
+          :desc="a.desc"
+          :unlocked="earnedAchievements.has(a.id)"
+        />
+      </div>
     </div>
 
     <!-- Words-known-by-day chart -->
@@ -145,5 +163,20 @@ function toggle(which) {
 .chip small {
   opacity: 0.7;
   margin-left: 0.3rem;
+}
+.achievements h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.ach-count {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
 }
 </style>
