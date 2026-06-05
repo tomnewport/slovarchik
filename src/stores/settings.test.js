@@ -10,13 +10,15 @@ vi.mock('../lib/feedbackSound.js', async (importOriginal) => {
 })
 
 import * as idb from '../lib/idb.js'
-import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, playSound } from '../lib/feedbackSound.js'
+import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound } from '../lib/feedbackSound.js'
 import {
   settings,
   loadSettings,
   setSuccessSound,
   setErrorSound,
+  setCelebrationSound,
   playFeedback,
+  playCelebration,
   OFF,
 } from './settings.js'
 
@@ -26,6 +28,7 @@ beforeEach(() => {
   idb._resetForTests()
   settings.successSound = SUCCESS_SOUNDS[0].id
   settings.errorSound = NEUTRAL_SOUNDS[0].id
+  settings.celebrationSound = CELEBRATION_SOUNDS[0].id
   settings.loaded = false
   playSound.mockClear()
 })
@@ -35,26 +38,32 @@ describe('settings store', () => {
     await loadSettings()
     expect(settings.successSound).toBe(SUCCESS_SOUNDS[0].id)
     expect(settings.errorSound).toBe(NEUTRAL_SOUNDS[0].id)
+    expect(settings.celebrationSound).toBe(CELEBRATION_SOUNDS[0].id)
   })
 
   it('persists choices across a reload', async () => {
     await loadSettings()
     await setSuccessSound('bell')
     await setErrorSound(OFF)
+    await setCelebrationSound('jingle')
 
     // Simulate a fresh page load: reset the in-memory store, reload from idb.
     settings.loaded = false
     settings.successSound = SUCCESS_SOUNDS[0].id
     settings.errorSound = NEUTRAL_SOUNDS[0].id
+    settings.celebrationSound = CELEBRATION_SOUNDS[0].id
     await loadSettings()
 
     expect(settings.successSound).toBe('bell')
     expect(settings.errorSound).toBe(OFF)
+    expect(settings.celebrationSound).toBe('jingle')
   })
 
   it('ignores unknown sound ids', async () => {
     await setSuccessSound('not-a-sound')
     expect(settings.successSound).toBe(SUCCESS_SOUNDS[0].id)
+    await setCelebrationSound('not-a-sound')
+    expect(settings.celebrationSound).toBe(CELEBRATION_SOUNDS[0].id)
   })
 
   it('plays the success sound on a correct result and the neutral one on a slip', () => {
@@ -67,9 +76,19 @@ describe('settings store', () => {
     expect(playSound).toHaveBeenLastCalledWith('neutral', 'tap')
   })
 
+  it('plays the configured celebration sound', () => {
+    settings.celebrationSound = 'jingle'
+    playCelebration()
+    expect(playSound).toHaveBeenLastCalledWith('celebration', 'jingle')
+  })
+
   it('stays silent when a slot is turned off', () => {
     settings.successSound = OFF
     expect(playFeedback(true)).toBe(false)
+    expect(playSound).not.toHaveBeenCalled()
+
+    settings.celebrationSound = OFF
+    expect(playCelebration()).toBe(false)
     expect(playSound).not.toHaveBeenCalled()
   })
 })

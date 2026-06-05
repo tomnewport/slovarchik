@@ -55,6 +55,76 @@ export const SUCCESS_SOUNDS = [
   },
 ]
 
+// Five longer, triumphant sounds for completing a whole batch — noticeably more
+// celebratory than the per-exercise chimes (issue #127).
+export const CELEBRATION_SOUNDS = [
+  {
+    id: 'triumph',
+    label: 'Triumph',
+    notes: [
+      { freq: 261.63, start: 0,    dur: 0.2,  type: 'triangle', gain: 0.22 },
+      { freq: 329.63, start: 0.18, dur: 0.2,  type: 'triangle', gain: 0.22 },
+      { freq: 392.0,  start: 0.36, dur: 0.2,  type: 'triangle', gain: 0.22 },
+      { freq: 523.25, start: 0.54, dur: 0.5,  type: 'triangle', gain: 0.24 },
+      { freq: 783.99, start: 0.6,  dur: 0.5,  type: 'triangle', gain: 0.18 },
+    ],
+  },
+  {
+    id: 'fireworks',
+    label: 'Fireworks',
+    notes: [
+      { freq: 523.25,  start: 0,    dur: 0.08, type: 'triangle', gain: 0.18 },
+      { freq: 659.25,  start: 0.07, dur: 0.08, type: 'triangle', gain: 0.18 },
+      { freq: 783.99,  start: 0.14, dur: 0.08, type: 'triangle', gain: 0.18 },
+      { freq: 1046.5,  start: 0.21, dur: 0.08, type: 'triangle', gain: 0.2  },
+      { freq: 1318.51, start: 0.28, dur: 0.08, type: 'triangle', gain: 0.18 },
+      { freq: 1046.5,  start: 0.5,  dur: 0.12, type: 'triangle', gain: 0.15 },
+      { freq: 783.99,  start: 0.55, dur: 0.12, type: 'triangle', gain: 0.15 },
+      { freq: 1046.5,  start: 0.6,  dur: 0.12, type: 'triangle', gain: 0.15 },
+      { freq: 1318.51, start: 0.65, dur: 0.22, type: 'triangle', gain: 0.14 },
+    ],
+  },
+  {
+    id: 'jingle',
+    label: 'Jingle',
+    notes: [
+      { freq: 523.25,  start: 0,    dur: 0.12, type: 'triangle', gain: 0.2  },
+      { freq: 659.25,  start: 0.12, dur: 0.12, type: 'triangle', gain: 0.2  },
+      { freq: 783.99,  start: 0.24, dur: 0.12, type: 'triangle', gain: 0.2  },
+      { freq: 1046.5,  start: 0.36, dur: 0.22, type: 'triangle', gain: 0.22 },
+      { freq: 783.99,  start: 0.6,  dur: 0.12, type: 'triangle', gain: 0.18 },
+      { freq: 1046.5,  start: 0.72, dur: 0.12, type: 'triangle', gain: 0.18 },
+      { freq: 1318.51, start: 0.84, dur: 0.3,  type: 'triangle', gain: 0.2  },
+    ],
+  },
+  {
+    id: 'cascade',
+    label: 'Cascade',
+    notes: [
+      { freq: 1318.51, start: 0,    dur: 0.15, type: 'triangle', gain: 0.2  },
+      { freq: 1174.66, start: 0.1,  dur: 0.15, type: 'triangle', gain: 0.2  },
+      { freq: 1046.5,  start: 0.2,  dur: 0.15, type: 'triangle', gain: 0.2  },
+      { freq: 880.0,   start: 0.3,  dur: 0.15, type: 'triangle', gain: 0.2  },
+      { freq: 783.99,  start: 0.4,  dur: 0.15, type: 'triangle', gain: 0.2  },
+      { freq: 659.25,  start: 0.5,  dur: 0.15, type: 'triangle', gain: 0.2  },
+      { freq: 523.25,  start: 0.6,  dur: 0.35, type: 'triangle', gain: 0.22 },
+      { freq: 783.99,  start: 0.65, dur: 0.3,  type: 'triangle', gain: 0.16 },
+    ],
+  },
+  {
+    id: 'victory',
+    label: 'Victory',
+    notes: [
+      { freq: 659.25, start: 0,    dur: 0.1,  type: 'triangle', gain: 0.22 },
+      { freq: 659.25, start: 0.12, dur: 0.1,  type: 'triangle', gain: 0.22 },
+      { freq: 659.25, start: 0.24, dur: 0.14, type: 'triangle', gain: 0.24 },
+      { freq: 523.25, start: 0.42, dur: 0.12, type: 'triangle', gain: 0.2  },
+      { freq: 659.25, start: 0.54, dur: 0.18, type: 'triangle', gain: 0.24 },
+      { freq: 783.99, start: 0.74, dur: 0.4,  type: 'triangle', gain: 0.26 },
+    ],
+  },
+]
+
 // Five soft, neutral options for when mistakes were made — gentle, never harsh.
 export const NEUTRAL_SOUNDS = [
   {
@@ -151,9 +221,12 @@ export async function playNotes(notes) {
   }
 }
 
-/** Look up a sound by kind ('success' → bright, 'neutral' → soft) and id. */
+/** Look up a sound by kind ('success' → bright, 'neutral' → soft, 'celebration' → long) and id. */
 export function soundById(kind, id) {
-  const list = kind === 'success' ? SUCCESS_SOUNDS : NEUTRAL_SOUNDS
+  const list =
+    kind === 'success' ? SUCCESS_SOUNDS :
+    kind === 'celebration' ? CELEBRATION_SOUNDS :
+    NEUTRAL_SOUNDS
   return list.find((s) => s.id === id) ?? null
 }
 

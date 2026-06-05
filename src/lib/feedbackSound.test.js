@@ -3,6 +3,7 @@ import { describe, it, expect, afterEach, vi } from 'vitest'
 import {
   SUCCESS_SOUNDS,
   NEUTRAL_SOUNDS,
+  CELEBRATION_SOUNDS,
   audioSupported,
   playNotes,
   playSound,
@@ -18,24 +19,34 @@ afterEach(() => {
 })
 
 describe('feedbackSound presets', () => {
-  it('offers exactly five distinct success and five distinct neutral sounds', () => {
+  it('offers exactly five distinct sounds in each category', () => {
     expect(SUCCESS_SOUNDS).toHaveLength(5)
     expect(NEUTRAL_SOUNDS).toHaveLength(5)
-    const ids = [...SUCCESS_SOUNDS, ...NEUTRAL_SOUNDS].map((s) => s.id)
+    expect(CELEBRATION_SOUNDS).toHaveLength(5)
+    const ids = [...SUCCESS_SOUNDS, ...NEUTRAL_SOUNDS, ...CELEBRATION_SOUNDS].map((s) => s.id)
     expect(new Set(ids).size).toBe(ids.length)
   })
 
   it('every preset has a label and at least one note', () => {
-    for (const s of [...SUCCESS_SOUNDS, ...NEUTRAL_SOUNDS]) {
+    for (const s of [...SUCCESS_SOUNDS, ...NEUTRAL_SOUNDS, ...CELEBRATION_SOUNDS]) {
       expect(typeof s.label).toBe('string')
       expect(s.notes.length).toBeGreaterThan(0)
       for (const n of s.notes) expect(typeof n.freq).toBe('number')
     }
   })
 
+  it('celebration sounds are longer than success sounds', () => {
+    const celebEnd = (s) => Math.max(...s.notes.map((n) => (n.start || 0) + (n.dur || 0.15)))
+    const successEnd = (s) => Math.max(...s.notes.map((n) => (n.start || 0) + (n.dur || 0.15)))
+    const avgCelebDur = CELEBRATION_SOUNDS.reduce((sum, s) => sum + celebEnd(s), 0) / CELEBRATION_SOUNDS.length
+    const avgSuccessDur = SUCCESS_SOUNDS.reduce((sum, s) => sum + successEnd(s), 0) / SUCCESS_SOUNDS.length
+    expect(avgCelebDur).toBeGreaterThan(avgSuccessDur)
+  })
+
   it('looks sounds up by kind and id', () => {
     expect(soundById('success', SUCCESS_SOUNDS[0].id)).toBe(SUCCESS_SOUNDS[0])
     expect(soundById('error', NEUTRAL_SOUNDS[0].id)).toBe(NEUTRAL_SOUNDS[0])
+    expect(soundById('celebration', CELEBRATION_SOUNDS[0].id)).toBe(CELEBRATION_SOUNDS[0])
     expect(soundById('success', 'nope')).toBeNull()
   })
 })
