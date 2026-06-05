@@ -5,6 +5,11 @@ import { state as progress } from '../stores/progress.js'
 
 const push = vi.fn()
 vi.mock('vue-router', () => ({ useRouter: () => ({ push }) }))
+vi.mock('../stores/reports.js', () => ({
+  state: { pending: [], loaded: true },
+  loadReports: vi.fn(),
+  removeReport: vi.fn(),
+}))
 
 const { default: HomeView } = await import('./HomeView.vue')
 

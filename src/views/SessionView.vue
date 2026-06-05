@@ -7,7 +7,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
-import { loadSettings } from '../stores/settings.js'
+import { loadSettings, playCelebration } from '../stores/settings.js'
 import { STATES } from '../lib/progression.js'
 import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
 import { buildExercises } from '../lib/exerciseBuild.js'
@@ -29,6 +29,7 @@ import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import AchievementBadge from '../components/AchievementBadge.vue'
+import ReportButton from '../components/ReportButton.vue'
 
 const COMPONENTS = {
   type: TypeExercise,
@@ -124,6 +125,7 @@ async function finalizeIfDone() {
     .filter((level) => progress.state[level] && progress.batchComplete(level))
     .map((level) => ({ level, batch: progress.state[level] }))
   for (const { level } of celebrated.value) progress.advanceBatch(level)
+  if (celebrated.value.length) playCelebration()
   // Auto-commit next mastery batch so it is ready when the learner returns home.
   if (celebrated.value.some((c) => c.level === 'mastery')) {
     progress.autoCommitMasteryBatch()
@@ -264,6 +266,11 @@ function confirmClose() {
       <div class="skips row">
         <button v-if="canSkipListening" class="skip" @click="skip('hearing')">Skip listening</button>
         <button v-if="canSkipSpeaking" class="skip" @click="skip('speaking')">Skip speaking</button>
+        <ReportButton
+          :exercise="current"
+          :vocab-version="vocabState.vocabVersion"
+          :last-synced-at="vocabState.lastSyncedAt"
+        />
       </div>
     </div>
 

@@ -14,9 +14,10 @@ import {
   loadSettings,
   setSuccessSound,
   setErrorSound,
+  setCelebrationSound,
   OFF,
 } from '../stores/settings.js'
-import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
+import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
 
 const soundsSupported = audioSupported()
 
@@ -28,6 +29,10 @@ function chooseSuccess(id) {
 function chooseError(id) {
   setErrorSound(id)
   if (id !== OFF) playSound('neutral', id)
+}
+function chooseCelebration(id) {
+  setCelebrationSound(id)
+  if (id !== OFF) playSound('celebration', id)
 }
 
 const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : null
@@ -184,6 +189,30 @@ onMounted(async () => {
               class="chip off"
               :class="{ on: settings.errorSound === OFF }"
               @click="chooseError(OFF)"
+            >
+              Off
+            </button>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <span class="sound-label">Batch complete</span>
+          <div class="chips">
+            <button
+              v-for="s in CELEBRATION_SOUNDS"
+              :key="s.id"
+              type="button"
+              class="chip"
+              :class="{ on: settings.celebrationSound === s.id }"
+              @click="chooseCelebration(s.id)"
+            >
+              {{ s.label }}
+            </button>
+            <button
+              type="button"
+              class="chip off"
+              :class="{ on: settings.celebrationSound === OFF }"
+              @click="chooseCelebration(OFF)"
             >
               Off
             </button>

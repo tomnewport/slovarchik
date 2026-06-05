@@ -17,6 +17,7 @@ export const state = reactive({
   status: 'idle',
   words: [],
   lastSyncedAt: null,
+  vocabVersion: null,
   error: null,
 })
 
@@ -33,6 +34,8 @@ function rebuild(records) {
 export async function loadFromCache() {
   const records = await idb.getAllFiles()
   if (records.length) rebuild(records)
+  const version = await idb.getMeta('vocabVersion')
+  if (version != null) state.vocabVersion = version
   return records
 }
 
@@ -63,6 +66,8 @@ export async function syncFromNetwork() {
     rebuild(await idb.getAllFiles())
   }
   state.lastSyncedAt = Date.now()
+  state.vocabVersion = manifest.version ?? null
+  if (state.vocabVersion != null) await idb.setMeta('vocabVersion', state.vocabVersion)
   return changed
 }
 
