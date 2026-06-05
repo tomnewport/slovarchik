@@ -12,6 +12,7 @@
 
 import { SLOW_RATE } from './speech.js'
 import { gradeSpoken, isPass } from './recognition.js'
+import { sample } from './quiz.js'
 
 export { isPass }
 
@@ -110,7 +111,9 @@ export function buildActivity(type, item) {
       }
     }
     case 'repeat-phrase': {
-      // Hear English, Russian, then Russian slowly — repeat the Russian.
+      // Hear Russian, English, then Russian slowly — repeat the Russian. The
+      // Russian comes first (and again, slowly) so there's a clear model to
+      // echo before the learner has to produce it.
       return {
         type,
         recordKey: item.source,
@@ -119,7 +122,7 @@ export function buildActivity(type, item) {
         recLang: RU,
         targets: [item.ru],
         maxAttempts: 3,
-        prompt: [part(item.en, EN), part(item.ru, RU), part(item.ru, RU, SLOW_RATE)],
+        prompt: [part(item.ru, RU), part(item.en, EN), part(item.ru, RU, SLOW_RATE)],
         model: [part(item.ru, RU, SLOW_RATE)],
         display: { ru: item.ru, en: item.en },
         say: 'ru',
@@ -184,6 +187,18 @@ export function gradeActivity(activity, guesses) {
     if (r.correct) correct = true
   }
   return { correct, similarity, best }
+}
+
+/**
+ * Build a short "warm-up" of `new-words` activities drawn from the current
+ * batch, so every session opens by easing the learner in with familiar words
+ * before the random mix begins. Picks up to `count` distinct words; returns an
+ * empty array when the pool is empty.
+ */
+export function warmupActivities(items, count, rng = Math.random) {
+  return sample(items ?? [], count, rng)
+    .map((item) => buildActivity('new-words', item))
+    .filter(Boolean)
 }
 
 /** Activity types that currently have at least one eligible item. */

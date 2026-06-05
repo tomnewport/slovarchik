@@ -21,6 +21,7 @@ import { speakSequence, cancelSpeech, speechSupported } from '../lib/speech.js'
 import { recognitionSupported, recognitionErrorMessage, listen } from '../lib/recognition.js'
 import {
   nextActivity,
+  warmupActivities,
   availableTypes,
   gradeActivity,
   isStart,
@@ -37,6 +38,8 @@ const CORRECT_MS = 1100
 const ADVANCE_MS = 700
 // Patient, but not infinite: a blocked mic mustn't spin forever on silence.
 const MAX_SILENCE = 60
+// How many current-batch words to open each session with as a gentle warm-up.
+const WARMUP_COUNT = 3
 // Errors that won't fix themselves — pause the loop instead of auto-retrying.
 const FATAL_ERRORS = new Set([
   'not-allowed',
@@ -62,6 +65,8 @@ let attempts = 0
 let gotCorrect = false
 let silenceRetries = 0
 let lastKey = null
+// New-words activities to run before the random mix — a current-batch warm-up.
+let warmup = []
 
 const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
@@ -251,6 +256,8 @@ function beginSession() {
   score.total = 0
   silenceRetries = 0
   lastKey = null
+  // Open with a few words from the current batch as a gentle warm-up.
+  warmup = warmupActivities(newWordsPool.value, WARMUP_COUNT)
   acquireWakeLock()
   nextItem()
 }
@@ -267,7 +274,8 @@ function nextItem() {
   recError.value = ''
   paused.value = false
 
-  const next = nextActivity(pools.value, Math.random, lastKey)
+  // Run the warm-up first, then fall back to the random mix.
+  const next = warmup.length ? warmup.shift() : nextActivity(pools.value, Math.random, lastKey)
   if (!next) {
     endSession()
     return

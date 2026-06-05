@@ -116,6 +116,28 @@ describe('PracticeView', () => {
     expect(wrapper.vm.score.right).toBeGreaterThanOrEqual(1)
   })
 
+  it('warms up with words from the current batch before the random mix', async () => {
+    const instances = []
+    stubSpeech()
+    stubRecognition(instances)
+
+    // Put a couple of real vocab words in the learning batch.
+    const batchWords = vocabState.words.slice(0, 2).map((w) => w.key)
+    progressState.learning = { level: 'learning', name: 'Test batch', words: batchWords }
+
+    const wrapper = mount(PracticeView)
+    await flushPromises()
+    wrapper.vm.beginSession()
+    await flushPromises()
+
+    // The very first item is a "repeat after me" new-words activity drawn from
+    // the batch.
+    expect(wrapper.vm.activity.type).toBe('new-words')
+    expect(batchWords).toContain(wrapper.vm.activity.recordKey)
+
+    progressState.learning = null
+  })
+
   it('does not count a spoken "pass" against the score', async () => {
     const instances = []
     stubSpeech()
