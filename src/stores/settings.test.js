@@ -28,7 +28,7 @@ beforeEach(() => {
   idb._resetForTests()
   settings.successSound = SUCCESS_SOUNDS[0].id
   settings.errorSound = NEUTRAL_SOUNDS[0].id
-  settings.celebrationSound = CELEBRATION_SOUNDS[0].id
+  settings.celebrationSound = OFF
   settings.loaded = false
   playSound.mockClear()
 })
@@ -38,7 +38,7 @@ describe('settings store', () => {
     await loadSettings()
     expect(settings.successSound).toBe(SUCCESS_SOUNDS[0].id)
     expect(settings.errorSound).toBe(NEUTRAL_SOUNDS[0].id)
-    expect(settings.celebrationSound).toBe(CELEBRATION_SOUNDS[0].id)
+    expect(settings.celebrationSound).toBe(OFF)
   })
 
   it('persists choices across a reload', async () => {
@@ -51,7 +51,7 @@ describe('settings store', () => {
     settings.loaded = false
     settings.successSound = SUCCESS_SOUNDS[0].id
     settings.errorSound = NEUTRAL_SOUNDS[0].id
-    settings.celebrationSound = CELEBRATION_SOUNDS[0].id
+    settings.celebrationSound = OFF
     await loadSettings()
 
     expect(settings.successSound).toBe('bell')
@@ -63,7 +63,7 @@ describe('settings store', () => {
     await setSuccessSound('not-a-sound')
     expect(settings.successSound).toBe(SUCCESS_SOUNDS[0].id)
     await setCelebrationSound('not-a-sound')
-    expect(settings.celebrationSound).toBe(CELEBRATION_SOUNDS[0].id)
+    expect(settings.celebrationSound).toBe(OFF)
   })
 
   it('plays the success sound on a correct result and the neutral one on a slip', () => {

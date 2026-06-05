@@ -56,7 +56,7 @@ export const SUCCESS_SOUNDS = [
 ]
 
 // Five longer, triumphant sounds for completing a whole batch — noticeably more
-// celebratory than the per-exercise chimes (issue #127).
+// celebratory than the per-exercise chimes.
 export const CELEBRATION_SOUNDS = [
   {
     id: 'triumph',

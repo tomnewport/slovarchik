@@ -17,7 +17,7 @@ export const OFF = 'off'
 export const settings = reactive({
   successSound: SUCCESS_SOUNDS[0].id,
   errorSound: NEUTRAL_SOUNDS[0].id,
-  celebrationSound: CELEBRATION_SOUNDS[0].id,
+  celebrationSound: OFF,
   loaded: false,
 })
 

@@ -36,10 +36,9 @@ describe('feedbackSound presets', () => {
   })
 
   it('celebration sounds are longer than success sounds', () => {
-    const celebEnd = (s) => Math.max(...s.notes.map((n) => (n.start || 0) + (n.dur || 0.15)))
-    const successEnd = (s) => Math.max(...s.notes.map((n) => (n.start || 0) + (n.dur || 0.15)))
-    const avgCelebDur = CELEBRATION_SOUNDS.reduce((sum, s) => sum + celebEnd(s), 0) / CELEBRATION_SOUNDS.length
-    const avgSuccessDur = SUCCESS_SOUNDS.reduce((sum, s) => sum + successEnd(s), 0) / SUCCESS_SOUNDS.length
+    const soundEnd = (s) => Math.max(...s.notes.map((n) => (n.start || 0) + (n.dur || 0.15)))
+    const avgCelebDur = CELEBRATION_SOUNDS.reduce((sum, s) => sum + soundEnd(s), 0) / CELEBRATION_SOUNDS.length
+    const avgSuccessDur = SUCCESS_SOUNDS.reduce((sum, s) => sum + soundEnd(s), 0) / SUCCESS_SOUNDS.length
     expect(avgCelebDur).toBeGreaterThan(avgSuccessDur)
   })
 
