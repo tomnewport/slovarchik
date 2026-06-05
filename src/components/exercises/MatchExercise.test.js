@@ -29,13 +29,21 @@ function tile(wrapper, col, text) {
 }
 
 describe('MatchExercise', () => {
-  it('audio mode: clicking anywhere on the tile speaks and selects it', async () => {
+  it('audio mode: tiles show only the speaker icon and have an aria-label', () => {
+    const wrapper = mount(MatchExercise, { props: { exercise: audioExercise } })
+    const ruTiles = wrapper.findAll('.col')[0].findAll('button')
+    // No Russian text rendered — only the icon span with aria-hidden.
+    expect(ruTiles[0].find('span[lang="ru"]').exists()).toBe(false)
+    expect(ruTiles[0].find('span[aria-hidden="true"]').exists()).toBe(true)
+    // Accessible name comes from aria-label, not visible text.
+    expect(ruTiles[0].attributes('aria-label')).toBe(exercise.pairs[0].ru)
+  })
+
+  it('audio mode: clicking the tile speaks and selects it', async () => {
     vi.clearAllMocks()
     const wrapper = mount(MatchExercise, { props: { exercise: audioExercise } })
-    // Tiles show 🔊 not Russian text; find them by column position.
     const ruTiles = wrapper.findAll('.col')[0].findAll('button')
     await ruTiles[0].trigger('click')
-    // Speech must fire and the tile must be selected (has 'picked' class).
     expect(speak).toHaveBeenCalled()
     expect(ruTiles[0].classes()).toContain('picked')
   })

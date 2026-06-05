@@ -97,6 +97,7 @@ onBeforeUnmount(() => clearTimeout(flashTimer))
           class="tile"
           :class="{ matched: matched.has(p.key), picked: pickedRu === p.key, flash: wrongRu === p.key }"
           :disabled="matched.has(p.key)"
+          :aria-label="exercise.audio ? p.ru : undefined"
           @click="pickRu(p)"
         >
           <span v-if="exercise.audio" aria-hidden="true">🔊</span>
