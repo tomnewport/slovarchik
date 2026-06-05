@@ -152,3 +152,39 @@ describe('buildExercises', () => {
     })
   })
 })
+
+describe('CEFR-aware top-up', () => {
+  const cefrByKey = new Map(words.map((w) => [w.key, w.cefr]))
+
+  it('fills a thin pool with the lowest level only — no advanced words for a beginner', () => {
+    // Empty pool → the whole vocabulary is the top-up source. A brand-new
+    // learner (empty at-risk / untested buckets) must never be shown B1/B2/C1
+    // words while A1 words remain to draw from.
+    const ex = build([practice('match-vocab')])
+    expect(ex).toHaveLength(1)
+    const levels = ex[0].targets.map((k) => cefrByKey.get(k))
+    expect(levels.length).toBeGreaterThan(0)
+    expect(levels.every((l) => l === 'A1')).toBe(true)
+  })
+
+  it('only spills into the next level once the lower level is exhausted', () => {
+    const synth = (i, cefr) => ({ key: `w${i}=${i}`, ru: `w${i}`, english: `${i}`, pos: 'noun', cefr })
+    const synthWords = [
+      ...Array.from({ length: 3 }, (_, i) => synth(i, 'A1')),
+      ...Array.from({ length: 20 }, (_, i) => synth(100 + i, 'B1')),
+      ...Array.from({ length: 20 }, (_, i) => synth(200 + i, 'B2')),
+    ]
+    const cefrOf = new Map(synthWords.map((w) => [w.key, w.cefr]))
+
+    const ex = buildExercises(
+      { practices: [practice('match-vocab')] },
+      { words: synthWords, phrases: [], rng: seededRng(1) },
+    )
+    const levels = ex[0].targets.map((k) => cefrOf.get(k))
+    // All three A1 words are used, the rest come from B1, and B2 is never
+    // touched while B1 can still fill the gap (one level up only, when exhausted).
+    expect(levels.filter((l) => l === 'A1')).toHaveLength(3)
+    expect(levels).toContain('B1')
+    expect(levels).not.toContain('B2')
+  })
+})
