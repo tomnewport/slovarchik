@@ -68,15 +68,18 @@ export function wordForms(word) {
 
 /**
  * Build a lookup from a normalised surface form to a hint entry
- * `{ key, ru, en }` for the word that can appear as that form. The word list is
- * sorted (alphabetically by headword), so on a collision the earlier word wins —
- * a stable, deterministic choice rather than whichever happened to load last.
+ * `{ key, ru, en }` for the word that can appear as that form. On a collision
+ * (two words share an inflected form) the alphabetically earlier headword wins —
+ * a stable, deterministic choice regardless of load order.
  * @param {object[]} words   normalised word records (from buildWords)
  * @returns {Map<string, {key: string, ru: string, en: string}>}
  */
 export function buildFormIndex(words) {
+  const sorted = (words ?? [])
+    .slice()
+    .sort((a, b) => stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru'))
   const index = new Map()
-  for (const w of words ?? []) {
+  for (const w of sorted) {
     const entry = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
     if (!entry.en) continue // nothing useful to show — skip
     for (const form of wordForms(w)) {
