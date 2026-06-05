@@ -98,7 +98,11 @@ const wakeLock = ref(null)
 async function acquireWakeLock() {
   if (!('wakeLock' in navigator) || wakeLock.value) return
   try {
-    wakeLock.value = await navigator.wakeLock.request('screen')
+    const lock = await navigator.wakeLock.request('screen')
+    // If quit() fired while we were awaiting, release immediately rather than
+    // leaving an orphaned lock with no owner to clean it up.
+    if (!mode.value) { lock.release(); return }
+    wakeLock.value = lock
     wakeLock.value.addEventListener('release', () => { wakeLock.value = null })
   } catch {
     // Permission denied or API unavailable — safe to ignore.
