@@ -41,7 +41,9 @@ function next() {
 }
 
 onMounted(() => {
-  if (props.exercise.audio) speak(props.exercise.ru)
+  // The Russian is the subject here whether it's heard (listen-translate) or
+  // shown (translate-phrase), so read it aloud as soon as the exercise appears.
+  speak(props.exercise.ru)
 })
 </script>
 

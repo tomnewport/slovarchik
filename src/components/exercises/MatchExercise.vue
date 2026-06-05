@@ -6,6 +6,7 @@
 import { computed, onBeforeUnmount, ref } from 'vue'
 
 import { shuffle } from '../../lib/quiz.js'
+import { speak } from '../../lib/speech.js'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -48,9 +49,12 @@ function tryMatch() {
   }
 }
 
-function pickRu(key) {
-  if (matched.value.has(key)) return
-  pickedRu.value = pickedRu.value === key ? null : key
+function pickRu(pair) {
+  if (matched.value.has(pair.key)) return
+  // Read the Russian aloud on every tap — the word is the thing being learned,
+  // and in listen-match its text is hidden behind the speaker.
+  speak(pair.ru)
+  pickedRu.value = pickedRu.value === pair.key ? null : pair.key
   tryMatch()
 }
 function pickEn(key) {
@@ -82,7 +86,7 @@ onBeforeUnmount(() => clearTimeout(flashTimer))
           class="tile"
           :class="{ matched: matched.has(p.key), picked: pickedRu === p.key, flash: flashing(p.key) }"
           :disabled="matched.has(p.key)"
-          @click="pickRu(p.key)"
+          @click="pickRu(p)"
         >
           <template v-if="exercise.audio">
             <SpeakButton :text="p.ru" />
