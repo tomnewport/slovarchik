@@ -59,6 +59,12 @@ const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
 )
 
+// Rough upper bound on how long the prompt takes to read aloud, so the watchdog
+// that opens the mic can wait out a long phrase rather than cut in mid-speech.
+function estimateSpeechMs(text) {
+  return Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
+}
+
 function speakTarget() {
   if (speechSupported()) speak(props.exercise.ru)
 }
@@ -156,7 +162,9 @@ onMounted(() => {
       beginListen()
     }
     speak(props.exercise.ru, 'ru-RU', 0.9, { onEnd: open })
-    later(open, 4000)
+    // Scale the fallback to how long the prompt should take to read, so it can't
+    // open the mic mid-speech on a long phrase when onEnd is slow to fire.
+    later(open, estimateSpeechMs(props.exercise.ru) + 1500)
   } else {
     speakTarget()
   }

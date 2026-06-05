@@ -51,10 +51,12 @@ function tryMatch() {
 
 function pickRu(pair) {
   if (matched.value.has(pair.key)) return
-  // Read the Russian aloud on every tap — the word is the thing being learned,
-  // and in listen-match its text is hidden behind the speaker.
-  speak(pair.ru)
-  pickedRu.value = pickedRu.value === pair.key ? null : pair.key
+  // Read the Russian aloud when selecting — the word is the thing being learned,
+  // and in listen-match its text is hidden behind the speaker. Tapping again to
+  // deselect stays silent so toggling isn't noisy.
+  const selecting = pickedRu.value !== pair.key
+  if (selecting) speak(pair.ru)
+  pickedRu.value = selecting ? pair.key : null
   tryMatch()
 }
 function pickEn(key) {
