@@ -17,6 +17,7 @@ export const state = reactive({
   status: 'idle',
   words: [],
   lastSyncedAt: null,
+  vocabVersion: null,
   error: null,
 })
 
@@ -63,6 +64,7 @@ export async function syncFromNetwork() {
     rebuild(await idb.getAllFiles())
   }
   state.lastSyncedAt = Date.now()
+  state.vocabVersion = manifest.version ?? null
   return changed
 }
 
