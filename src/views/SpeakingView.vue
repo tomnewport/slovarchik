@@ -317,6 +317,20 @@ function reveal({ correct, passed, similarity, diff, heard }) {
   if (!spoke) advance()
 }
 
+function tryAgain() {
+  seq += 1
+  clearTimers()
+  stopRecognition()
+  cancelSpeech()
+  celebrating.value = false
+  emptyRetries = 0
+  phase.value = 'prompt'
+  transcript.value = ''
+  recError.value = ''
+  result.value = null
+  beginListen()
+}
+
 function quit() {
   seq += 1
   clearTimers()
@@ -473,7 +487,7 @@ onUnmounted(() => {
 
       <div class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
-        <button v-if="canRecognize && !result.correct" @click="phase = 'prompt'; beginListen()">
+        <button v-if="canRecognize && !result.correct" @click="tryAgain">
           🎤 Try again
         </button>
         <button style="margin-left: auto" @click="quit">Change mode</button>
