@@ -107,12 +107,16 @@ setup()
 // entry to the summary, so leaving via "Back home" can't strand a completed
 // batch and re-trigger the celebration next time).
 const celebrated = ref([])
+// New achievements unlocked during this session.
+const newAchievements = ref([])
 let finalized = false
 
-function finalizeIfDone() {
+async function finalizeIfDone() {
   if (runner.phase !== 'summary' || finalized) return
   finalized = true
   finishedAt.value = Date.now()
+  // Capture pending achievements before acknowledging so they show in the summary.
+  newAchievements.value = [...progress.pendingAchievements.value]
   // Capture and advance every completed batch (a session can finish both the
   // learning and the mastery batch at once).
   celebrated.value = ['learning', 'mastery']
@@ -123,6 +127,8 @@ function finalizeIfDone() {
   if (celebrated.value.some((c) => c.level === 'mastery')) {
     progress.autoCommitMasteryBatch()
   }
+  // Mark all earned achievements as seen so they won't re-appear.
+  await progress.acknowledgeAchievements()
 }
 
 function onDone(result) {
@@ -271,6 +277,12 @@ function confirmClose() {
           You {{ done.level === 'mastery' ? 'mastered' : 'learned' }}
           <strong class="batch-name">{{ done.batch.name }}</strong>.
         </p>
+        <div v-if="newAchievements.length" class="achievements-row">
+          <span v-for="a in newAchievements" :key="a.id" class="achievement-badge new" :title="a.desc">
+            <span class="badge-icon">{{ a.icon }}</span>
+            <span class="badge-label">{{ a.label }}</span>
+          </span>
+        </div>
         <button class="primary next-batch" @click="nextBatch(celebrated[0].level)">
           {{ celebrated[0].level === 'mastery' ? 'Keep going →' : 'Choose the next batch →' }}
         </button>
@@ -278,7 +290,21 @@ function confirmClose() {
       </div>
 
       <template v-else>
-        <h2>Session complete</h2>
+        <!-- Achievement-only celebration when milestones were reached. -->
+        <template v-if="newAchievements.length">
+          <CelebrationBurst :show="true" />
+          <div class="achievement-fanfare" aria-live="polite">
+            <div class="fanfare-icon">{{ newAchievements[0].icon }}</div>
+            <h2>{{ newAchievements.length === 1 ? 'Achievement unlocked!' : 'Achievements unlocked!' }}</h2>
+            <div class="achievements-row">
+              <span v-for="a in newAchievements" :key="a.id" class="achievement-badge new" :title="a.desc">
+                <span class="badge-icon">{{ a.icon }}</span>
+                <span class="badge-label">{{ a.label }}</span>
+              </span>
+            </div>
+          </div>
+        </template>
+        <h2 v-else>Session complete</h2>
         <p class="score">{{ summary.percent }}% correct</p>
         <p class="muted">
           {{ summary.correct }} / {{ summary.total }} first try ·
@@ -403,6 +429,46 @@ function confirmClose() {
   flex-wrap: wrap;
   gap: 0.4rem;
   justify-content: center;
+}
+.achievements-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.25rem 0;
+}
+.achievement-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  font-size: 0.8rem;
+}
+.achievement-badge.new {
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 10%, var(--card));
+}
+.badge-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.badge-label {
+  font-size: 0.7rem;
+  text-align: center;
+  color: var(--muted);
+}
+.achievement-fanfare {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+}
+.fanfare-icon {
+  font-size: 3rem;
+  line-height: 1;
 }
 .modal-backdrop {
   position: fixed;

@@ -29,6 +29,7 @@ import { buildBatchOptions } from '../lib/batches.js'
 import { buildSession } from '../lib/session.js'
 import { practicesForSession } from '../lib/practices.js'
 import { rankSkills, skillById, focusedKeys } from '../lib/focus.js'
+import { earnedSet, buildCefrStats, achievementById } from '../lib/achievements.js'
 
 /** Bumped if the export schema ever changes; guards imports. */
 export const EXPORT_VERSION = 1
@@ -53,6 +54,8 @@ export const state = reactive({
   mastery: null,
   /** epoch ms of first use (for the "how long" stat on the Data screen) */
   firstUseAt: null,
+  /** Set of achievement IDs the user has already been notified about. */
+  seenAchievements: new Set(),
 })
 
 // ---------------------------------------------------------------------------
@@ -93,6 +96,29 @@ export const learnedCount = computed(
 export const masteredCount = computed(
   () => Object.keys(state.records).filter((k) => stateOf(k) === 'mastered').length,
 )
+
+/** CEFR-level stats (total words / learned words) derived from vocab + progress. */
+export const cefrStats = computed(() =>
+  buildCefrStats(vocabState.words, stateOf),
+)
+
+/** All achievement IDs the learner has currently earned (reactive). */
+export const earnedAchievements = computed(() =>
+  earnedSet(learnedCount.value, masteredCount.value, cefrStats.value),
+)
+
+/**
+ * Achievements earned but not yet shown to the user.
+ * Returns an array of achievement objects (not just IDs).
+ */
+export const pendingAchievements = computed(() => {
+  const earned = earnedAchievements.value
+  const seen = state.seenAchievements
+  return [...earned]
+    .filter((id) => !seen.has(id))
+    .map((id) => achievementById(id))
+    .filter(Boolean)
+})
 
 /**
  * Words that have slipped below the highest state they ever reached — these are
@@ -190,6 +216,16 @@ export async function recordAttempt({ word, dimension, level, correct, ts = Date
 
   await persist(rec)
   return next
+}
+
+/**
+ * Mark all currently earned achievements as seen so they won't be shown again.
+ * Persists to IndexedDB.
+ */
+export async function acknowledgeAchievements() {
+  const ids = [...earnedAchievements.value]
+  state.seenAchievements = new Set(ids)
+  await idb.setMeta('seenAchievements', ids)
 }
 
 function plain(rec) {
@@ -441,6 +477,8 @@ export async function loadProgress() {
     state.firstUseAt = Date.now()
     await idb.setMeta('firstUseAt', state.firstUseAt)
   }
+  const seenIds = (await idb.getMeta('seenAchievements')) ?? []
+  state.seenAchievements = new Set(Array.isArray(seenIds) ? seenIds : [])
   state.loaded = true
   return state
 }
@@ -451,10 +489,12 @@ export async function resetProgress() {
   await idb.setMeta(BATCH_META_KEY('learning'), null)
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
   await idb.setMeta('firstUseAt', null)
+  await idb.setMeta('seenAchievements', [])
   state.records = {}
   state.learning = null
   state.mastery = null
   state.firstUseAt = null
+  state.seenAchievements = new Set()
 }
 
 /** Expose whether a word has an inflection table (used by the UI badges). */
@@ -518,6 +558,7 @@ export function exportData() {
     firstUseAt: state.firstUseAt,
     records: Object.values(state.records).map(plain),
     batches: { learning: state.learning, mastery: state.mastery },
+    seenAchievements: [...state.seenAchievements],
   }
   // Round-trip to strip any Vue reactive proxies (e.g. on the batches).
   return JSON.parse(JSON.stringify(snapshot))
@@ -569,5 +610,8 @@ export async function importData(data) {
     state.firstUseAt = data.firstUseAt
     await idb.setMeta('firstUseAt', data.firstUseAt)
   }
+  const seenIds = Array.isArray(data.seenAchievements) ? data.seenAchievements : []
+  state.seenAchievements = new Set(seenIds)
+  await idb.setMeta('seenAchievements', seenIds)
   return true
 }

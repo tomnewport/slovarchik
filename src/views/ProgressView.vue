@@ -1,11 +1,11 @@
 <script setup>
 // Progress screen: a words-known-by-day chart, expandable learned/mastered word
-// lists, and the learner's weakest skills — each a chip that launches a focused
-// session over the matching words.
+// lists, the learner's weakest skills, and achievement badges.
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements } from '../stores/progress.js'
+import { ACHIEVEMENTS } from '../lib/achievements.js'
 
 const router = useRouter()
 
@@ -32,6 +32,9 @@ const chart = computed(() => {
   return { learned: line('learned'), mastered: line('mastered'), dot, max, last: pts[pts.length - 1] }
 })
 
+const earned = computed(() => earnedAchievements.value)
+const earnedCount = computed(() => earned.value.size)
+
 function focus(id) {
   router.push({ path: '/session', query: { type: 'standard', focus: id } })
 }
@@ -48,6 +51,23 @@ function toggle(which) {
     <div class="row counts">
       <span class="pill learn">💚 {{ learnedCount }} learned</span>
       <span class="pill master">🏆 {{ masteredCount }} mastered</span>
+    </div>
+
+    <!-- Achievement badges -->
+    <div class="card achievements">
+      <h2>Achievements <span class="ach-count muted">{{ earnedCount }} / {{ ACHIEVEMENTS.length }}</span></h2>
+      <div class="badge-grid">
+        <div
+          v-for="a in ACHIEVEMENTS"
+          :key="a.id"
+          class="badge-item"
+          :class="{ unlocked: earned.has(a.id) }"
+          :title="a.desc"
+        >
+          <span class="badge-icon">{{ a.icon }}</span>
+          <span class="badge-label">{{ a.label }}</span>
+        </div>
+      </div>
     </div>
 
     <!-- Words-known-by-day chart -->
@@ -145,5 +165,50 @@ function toggle(which) {
 .chip small {
   opacity: 0.7;
   margin-left: 0.3rem;
+}
+.achievements h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.ach-count {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.badge-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.6rem 0.3rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  opacity: 0.35;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.badge-item.unlocked {
+  opacity: 1;
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 8%, var(--card));
+}
+.badge-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.badge-label {
+  font-size: 0.65rem;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.2;
+}
+.badge-item.unlocked .badge-label {
+  color: var(--text);
 }
 </style>
