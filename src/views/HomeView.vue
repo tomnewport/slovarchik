@@ -50,7 +50,6 @@ const masteryBatch = computed(() => progress.mastery)
 
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
-  removeReport(report.id)
 }
 
 const FOCUSED = [
@@ -72,7 +71,10 @@ const FOCUSED = [
       <ul class="report-list">
         <li v-for="r in reports.pending" :key="r.id" class="report-row">
           <span class="report-label">{{ r.ru ?? '(unknown)' }} — {{ r.en ?? '' }}</span>
-          <button class="submit-report" @click="submitPendingReport(r)">Submit →</button>
+          <div class="report-actions">
+            <button class="submit-report" @click="submitPendingReport(r)">Submit →</button>
+            <button class="dismiss-report" :aria-label="`Dismiss report for ${r.ru ?? 'unknown'}`" @click="removeReport(r.id)">✕</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -218,7 +220,7 @@ const FOCUSED = [
   color: var(--text);
 }
 .pending-reports {
-  border-left: 4px solid var(--bad);
+  border-left: 4px solid var(--muted);
   padding: 0.9rem 1rem;
   display: grid;
   gap: 0.5rem;
@@ -240,6 +242,11 @@ const FOCUSED = [
   justify-content: space-between;
   gap: 0.5rem;
 }
+.report-actions {
+  display: flex;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+}
 .report-label {
   font-size: 0.85rem;
   color: var(--muted);
@@ -258,6 +265,19 @@ const FOCUSED = [
   cursor: pointer;
 }
 .submit-report:hover {
+  border-color: var(--muted);
+}
+.dismiss-report {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.dismiss-report:hover {
+  color: var(--text);
   border-color: var(--muted);
 }
 </style>

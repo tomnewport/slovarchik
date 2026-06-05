@@ -34,6 +34,8 @@ function rebuild(records) {
 export async function loadFromCache() {
   const records = await idb.getAllFiles()
   if (records.length) rebuild(records)
+  const version = await idb.getMeta('vocabVersion')
+  if (version != null) state.vocabVersion = version
   return records
 }
 
@@ -65,6 +67,7 @@ export async function syncFromNetwork() {
   }
   state.lastSyncedAt = Date.now()
   state.vocabVersion = manifest.version ?? null
+  if (state.vocabVersion != null) await idb.setMeta('vocabVersion', state.vocabVersion)
   return changed
 }
 

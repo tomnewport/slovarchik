@@ -13,7 +13,7 @@ export async function loadReports() {
 }
 
 export async function queueReport(reportData) {
-  const record = { id: Date.now(), ...reportData, queuedAt: Date.now() }
+  const record = { id: crypto.randomUUID(), ...reportData, queuedAt: Date.now() }
   await idb.putReport(record)
   state.pending = [...state.pending, record]
   return record

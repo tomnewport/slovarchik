@@ -1,0 +1,71 @@
+import { describe, it, expect } from 'vitest'
+import { buildIssueUrl } from './reportIssue.js'
+
+const BASE = 'https://github.com/tomnewport/slovarchik/issues/new'
+
+function parseUrl(url) {
+  const [base, qs] = url.split('?')
+  const params = new URLSearchParams(qs)
+  return { base, title: params.get('title'), body: params.get('body') }
+}
+
+describe('buildIssueUrl', () => {
+  it('produces a valid GitHub issues/new URL', () => {
+    const url = buildIssueUrl({ ru: 'кот', en: 'cat', kind: 'type', dimension: 'usage' })
+    expect(url).toMatch(/^https:\/\/github\.com\/tomnewport\/slovarchik\/issues\/new\?/)
+    const { base } = parseUrl(url)
+    expect(base).toBe(BASE)
+  })
+
+  it('uses "word" in the title for non-phrase exercises', () => {
+    const { title } = parseUrl(
+      buildIssueUrl({ ru: 'кот', en: 'cat', kind: 'type', dimension: 'usage' }),
+    )
+    expect(title).toBe('Issue with word: кот')
+  })
+
+  it('uses "phrase" in the title when content is phrase', () => {
+    const { title } = parseUrl(
+      buildIssueUrl({ ru: 'как дела', en: 'how are you', kind: 'type', content: 'phrase' }),
+    )
+    expect(title).toBe('Issue with phrase: как дела')
+  })
+
+  it('uses "phrase" in the title for wordbank kind regardless of content field', () => {
+    const { title } = parseUrl(
+      buildIssueUrl({ ru: 'я иду', en: 'I go', kind: 'wordbank' }),
+    )
+    expect(title).toBe('Issue with phrase: я иду')
+  })
+
+  it('formats lastSyncedAt as a UTC date string in the body', () => {
+    const ts = new Date('2026-01-15T10:30:00Z').getTime()
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', kind: 'type', lastSyncedAt: ts }))
+    expect(body).toContain('2026-01-15 10:30:00 UTC')
+  })
+
+  it('shows "unknown" when lastSyncedAt is absent', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', kind: 'type' }))
+    expect(body).toContain('**Vocab last synced:** unknown')
+  })
+
+  it('falls back to the raw string for unknown kind', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', kind: 'mystery-kind' }))
+    expect(body).toContain('mystery-kind')
+  })
+
+  it('falls back to the raw string for unknown dimension', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', dimension: 'mystery-dim' }))
+    expect(body).toContain('mystery-dim')
+  })
+
+  it('includes vocabVersion in the body', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', kind: 'type', vocabVersion: 3 }))
+    expect(body).toContain('**Vocab version:** 3')
+  })
+
+  it('includes a placeholder comment for the user', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот' }))
+    expect(body).toContain('Please describe the issue here')
+  })
+})
