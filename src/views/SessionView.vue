@@ -28,6 +28,7 @@ import MatchExercise from '../components/exercises/MatchExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import ReportButton from '../components/ReportButton.vue'
 
 const COMPONENTS = {
   type: TypeExercise,
@@ -258,6 +259,11 @@ function confirmClose() {
       <div class="skips row">
         <button v-if="canSkipListening" class="skip" @click="skip('hearing')">Skip listening</button>
         <button v-if="canSkipSpeaking" class="skip" @click="skip('speaking')">Skip speaking</button>
+        <ReportButton
+          :exercise="current"
+          :vocab-version="vocabState.vocabVersion"
+          :last-synced-at="vocabState.lastSyncedAt"
+        />
       </div>
     </div>
 

@@ -2,10 +2,11 @@
 // Home: the launchpad for every session type, plus the current learning /
 // mastery batch status. The learning batch is chosen by the user (on first
 // visit and after completing a batch); the mastery batch is auto-selected.
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { state as progress } from '../stores/progress.js'
+import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 
 const router = useRouter()
 
@@ -40,8 +41,16 @@ function openDrill(to) {
 }
 
 
+onMounted(() => {
+  if (!reports.loaded) loadReports()
+})
+
 const learningBatch = computed(() => progress.learning)
 const masteryBatch = computed(() => progress.mastery)
+
+function submitPendingReport(report) {
+  window.open(report.url, '_blank', 'noopener')
+}
 
 const FOCUSED = [
   { type: 'speaking', label: 'Speaking', icon: '🗣️' },
@@ -54,6 +63,22 @@ const FOCUSED = [
 
 <template>
   <section class="grid" style="gap: 1.25rem">
+    <!-- Pending offline issue reports -->
+    <div v-if="reports.pending.length" class="pending-reports card">
+      <p class="pending-title">
+        You have {{ reports.pending.length }} issue report{{ reports.pending.length === 1 ? '' : 's' }} waiting to submit.
+      </p>
+      <ul class="report-list">
+        <li v-for="r in reports.pending" :key="r.id" class="report-row">
+          <span class="report-label">{{ r.ru ?? '(unknown)' }} — {{ r.en ?? '' }}</span>
+          <div class="report-actions">
+            <button class="submit-report" @click="submitPendingReport(r)">Submit →</button>
+            <button class="dismiss-report" :aria-label="`Dismiss report for ${r.ru ?? 'unknown'}`" @click="removeReport(r.id)">✕</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <!-- Current batches -->
     <div class="batches">
       <!-- Learning: prompt to choose when none is set; display-only when active -->
@@ -193,5 +218,66 @@ const FOCUSED = [
   cursor: pointer;
   background: var(--bg-soft);
   color: var(--text);
+}
+.pending-reports {
+  border-left: 4px solid var(--muted);
+  padding: 0.9rem 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.pending-title {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.report-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.report-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.report-actions {
+  display: flex;
+  gap: 0.35rem;
+  flex: 0 0 auto;
+}
+.report-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.submit-report {
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+}
+.submit-report:hover {
+  border-color: var(--muted);
+}
+.dismiss-report {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.dismiss-report:hover {
+  color: var(--text);
+  border-color: var(--muted);
 }
 </style>

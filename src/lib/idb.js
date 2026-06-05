@@ -7,7 +7,8 @@ const DB_NAME = 'slovarchik'
 const FILES_STORE = 'vocab-files'
 const META_STORE = 'meta'
 const PROGRESS_STORE = 'progress'
-const VERSION = 4
+const REPORTS_STORE = 'issue-reports'
+const VERSION = 5
 
 let dbPromise = null
 
@@ -28,6 +29,9 @@ function openDb() {
       // records no longer exist, so there is nothing to migrate.
       if (!db.objectStoreNames.contains(PROGRESS_STORE)) {
         db.createObjectStore(PROGRESS_STORE, { keyPath: 'word' })
+      }
+      if (!db.objectStoreNames.contains(REPORTS_STORE)) {
+        db.createObjectStore(REPORTS_STORE, { keyPath: 'id' })
       }
     }
     req.onsuccess = () => resolve(req.result)
@@ -119,6 +123,27 @@ export function setMeta(key, value) {
   return tx(META_STORE, 'readwrite', (store) => {
     store.put({ key, value })
     return { value }
+  })
+}
+
+/** Read every queued issue report. */
+export function getAllReports() {
+  return getAll(REPORTS_STORE)
+}
+
+/** Insert or replace a queued issue report. */
+export function putReport(record) {
+  return tx(REPORTS_STORE, 'readwrite', (store) => {
+    store.put(record)
+    return { value: record }
+  })
+}
+
+/** Delete a queued issue report by id. */
+export function deleteReport(id) {
+  return tx(REPORTS_STORE, 'readwrite', (store) => {
+    store.delete(id)
+    return { value: id }
   })
 }
 
