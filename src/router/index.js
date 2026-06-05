@@ -74,6 +74,11 @@ export const routes = [
     name: 'speaking',
     component: () => import('../views/SpeakingView.vue'),
   },
+  {
+    path: '/practice',
+    name: 'practice',
+    component: () => import('../views/PracticeView.vue'),
+  },
 ]
 
 export const router = createRouter({
