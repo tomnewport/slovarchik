@@ -35,14 +35,35 @@ export function typingSequence(phrase) {
 }
 
 /**
- * Grade a phrase answer, ignoring punctuation, case, stress and ё/е.
+ * Strip standalone English articles ("a", "an", "the") from a normalised
+ * sequence so that wrong or missing articles in English translations of Russian
+ * phrases are never counted as errors (Russian has no articles).
+ *
+ * `seq` is expected to be the output of {@link typingSequence}: already
+ * lowercased, stress-stripped and whitespace-collapsed — so the regex only
+ * needs to handle clean lowercase ASCII/Cyrillic input.
+ *
+ * If the entire phrase collapses to an empty string (e.g. a target of just
+ * "a"), the original sequence is returned so that a single-article phrase can
+ * still be answered correctly.
+ * @param {string} seq
+ * @returns {string}
+ */
+function stripArticles(seq) {
+  const stripped = seq.replace(/\b(a|an|the)\b\s*/g, '').replace(/\s+/g, ' ').trim()
+  return stripped || seq
+}
+
+/**
+ * Grade a phrase answer, ignoring punctuation, case, stress, ё/е and English
+ * articles (since Russian has no articles, any choice of article is acceptable).
  * @param {string} input
  * @param {string} target
  * @returns {boolean}
  */
 export function phraseCorrect(input, target) {
-  const wanted = typingSequence(target)
-  return wanted.length > 0 && typingSequence(input) === wanted
+  const wanted = stripArticles(typingSequence(target))
+  return wanted.length > 0 && stripArticles(typingSequence(input)) === wanted
 }
 
 /**
