@@ -122,8 +122,12 @@ function clearTimers() {
   timers.clear()
 }
 
-function estimateSpeechMs(text) {
-  return Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
+// Rough upper bound on how long a part takes to read aloud. Divide by the
+// playback rate: a slow (0.5×) read takes about twice as long, so the watchdog
+// must wait for it — otherwise the mic opens mid-sentence.
+function estimateSpeechMs(text, rate = 1) {
+  const base = Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
+  return base / (rate || 1)
 }
 
 // Run `action` once for the current step — whichever fires first, the speech
@@ -142,7 +146,8 @@ function onceForStep(action, watchdogMs) {
 
 // Read a sequence of spoken parts, then call `cb` once they finish.
 function readThen(parts, cb) {
-  const watchdog = (parts ?? []).reduce((s, p) => s + estimateSpeechMs(p.text), 0) + 1500
+  const watchdog =
+    (parts ?? []).reduce((s, p) => s + estimateSpeechMs(p.text, p.rate), 0) + 1500
   const run = onceForStep(cb, watchdog)
   const spoke = speakSequence(parts, { onEnd: run })
   if (!spoke) run()
