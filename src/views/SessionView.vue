@@ -123,9 +123,8 @@ function finalizeIfDone() {
 function onDone(result) {
   const ex = current.value
   if (!ex) return
-  // Some exercises (matching) report which specific words were missed, so only
-  // those count as incorrect; the rest are credited as correct. Others report a
-  // single overall result that applies to every target.
+  // result.wrong (matching exercises) lists the specific missed keys; everything
+  // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
   for (const key of ex.targets ?? []) {
     progress.recordAttempt({

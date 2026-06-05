@@ -44,7 +44,7 @@ describe('MatchExercise', () => {
 
     await tile(wrapper, 0, 'весна').trigger('click')
     await tile(wrapper, 1, 'month').trigger('click') // wrong: a vs b
-    // Now clear the board with correct matches (autocompletes at 80%).
+    // Now clear the board with correct matches.
     await tile(wrapper, 0, 'весна').trigger('click')
     await tile(wrapper, 1, 'spring').trigger('click')
     await tile(wrapper, 0, 'месяц').trigger('click')
