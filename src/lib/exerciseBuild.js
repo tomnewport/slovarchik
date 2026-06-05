@@ -16,7 +16,8 @@
 // Every descriptor carries `targets` (the word keys it should report to the
 // progress store) plus `dimension`/`level` so results map back to the model.
 
-import { sample } from './quiz.js'
+import { sample, shuffle } from './quiz.js'
+import { cefrRank } from './batches.js'
 import { shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 
@@ -51,14 +52,37 @@ function enText(en) {
 }
 
 /**
+ * Take up to `n` items from `rest`, lowest CEFR level first: a level is fully
+ * exhausted before any of the next level up is touched, and items within a
+ * level are shuffled so the fillers vary. This keeps top-up words at (or, only
+ * once a level runs dry, just above) the learner's level instead of pulling
+ * random advanced vocabulary into an otherwise low-level exercise.
+ */
+function topUpByLevel(rest, n, rng) {
+  if (n <= 0) return []
+  const byRank = new Map()
+  for (const w of rest) {
+    const r = cefrRank(w.cefr)
+    if (!byRank.has(r)) byRank.set(r, [])
+    byRank.get(r).push(w)
+  }
+  const out = []
+  for (const r of [...byRank.keys()].sort((a, b) => a - b)) {
+    if (out.length >= n) break
+    out.push(...shuffle(byRank.get(r), rng).slice(0, n - out.length))
+  }
+  return out
+}
+
+/**
  * Draw up to `n` items, preferring the pool and only then topping up from the
- * rest. Both lists are sampled (so order is randomised) but pool items always
- * win when there are enough of them.
+ * rest. Pool items always win when there are enough of them; the top-up draws
+ * the lowest available CEFR level first (see {@link topUpByLevel}).
  */
 function drawN(pool, rest, n, rng) {
   const chosen = sample(pool, n, rng)
   if (chosen.length >= n) return chosen
-  return [...chosen, ...sample(rest, n - chosen.length, rng)]
+  return [...chosen, ...topUpByLevel(rest, n - chosen.length, rng)]
 }
 
 /** Split shaped vocab into pool words and the rest. */
