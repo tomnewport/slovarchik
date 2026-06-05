@@ -34,15 +34,23 @@ export function typingSequence(phrase) {
     .trim()
 }
 
+// Strip standalone English articles ("a", "an", "the") from a normalised
+// sequence. Russian has no articles, so wrong or missing articles in English
+// translations should never count as errors.
+function stripArticles(seq) {
+  return seq.replace(/\b(a|an|the)\b\s*/g, '').replace(/\s+/g, ' ').trim()
+}
+
 /**
- * Grade a phrase answer, ignoring punctuation, case, stress and ё/е.
+ * Grade a phrase answer, ignoring punctuation, case, stress, ё/е and English
+ * articles (since Russian has no articles, any choice of article is acceptable).
  * @param {string} input
  * @param {string} target
  * @returns {boolean}
  */
 export function phraseCorrect(input, target) {
-  const wanted = typingSequence(target)
-  return wanted.length > 0 && typingSequence(input) === wanted
+  const wanted = stripArticles(typingSequence(target))
+  return wanted.length > 0 && stripArticles(typingSequence(input)) === wanted
 }
 
 /**

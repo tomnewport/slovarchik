@@ -49,6 +49,16 @@ describe('phraseCorrect', () => {
   it('rejects an empty answer', () => {
     expect(phraseCorrect('', 'дом')).toBe(false)
   })
+  it('accepts an answer with a different article than the target', () => {
+    expect(phraseCorrect('a cat eats a fish', 'The cat eats the fish.')).toBe(true)
+  })
+  it('accepts an answer with articles omitted', () => {
+    expect(phraseCorrect('cat eats fish', 'The cat eats the fish.')).toBe(true)
+  })
+  it('does not strip "the" from inside a word', () => {
+    expect(phraseCorrect('theorem', 'theorem')).toBe(true)
+    expect(phraseCorrect('theory', 'theory')).toBe(true)
+  })
 })
 
 describe('nextChar', () => {
