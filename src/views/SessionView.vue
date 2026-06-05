@@ -7,6 +7,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
+import { loadSettings, playFeedback } from '../stores/settings.js'
 import { STATES } from '../lib/progression.js'
 import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
 import { buildExercises } from '../lib/exerciseBuild.js'
@@ -60,6 +61,10 @@ function rank(stateName) {
 async function setup() {
   if (!vocabState.words.length) await initVocab()
   if (!progress.state.loaded) await progress.loadProgress()
+  // Settings are preloaded at app boot (main.js); ensure them here too for a
+  // deep link straight into a session. Non-blocking — the read resolves long
+  // before the first answer, and playFeedback falls back to defaults until then.
+  loadSettings()
   // Auto-commit a mastery batch if the learner qualifies but none is active.
   if (progress.learnedCount.value >= MASTERY_UNLOCK_AT && !progress.state.mastery) {
     await progress.autoCommitMasteryBatch()
@@ -123,6 +128,7 @@ function finalizeIfDone() {
 function onDone(result) {
   const ex = current.value
   if (!ex) return
+  playFeedback(result.correct)
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
