@@ -25,6 +25,17 @@ function stubSpeech() {
   }
 }
 
+// Like stubSpeech, but never fires `onend` — simulating a browser where
+// speechSynthesis doesn't report completion, so the watchdog drives timing.
+function stubSilentSpeech() {
+  window.speechSynthesis = { speak() {}, cancel() {}, getVoices: () => [] }
+  window.SpeechSynthesisUtterance = class {
+    constructor(text) {
+      this.text = text
+    }
+  }
+}
+
 // A recognition stub that records every instance so a test can drive onend().
 function stubRecognition(instances) {
   window.webkitSpeechRecognition = class {
@@ -134,6 +145,47 @@ describe('PracticeView', () => {
     // the batch.
     expect(wrapper.vm.activity.type).toBe('new-words')
     expect(batchWords).toContain(wrapper.vm.activity.recordKey)
+
+    progressState.learning = null
+  })
+
+  it('waits for the slow read before listening (watchdog accounts for rate)', async () => {
+    const instances = []
+    stubSilentSpeech() // onEnd never fires → the watchdog drives the timing
+    stubRecognition(instances)
+    vi.useFakeTimers()
+
+    // One batch word → a deterministic new-words warm-up (ru / en / slow-ru).
+    progressState.learning = {
+      level: 'learning',
+      name: 'Test',
+      words: [vocabState.words[0].key],
+    }
+
+    const wrapper = mount(PracticeView)
+    await flushPromises()
+    wrapper.vm.beginSession()
+    await flushPromises()
+
+    expect(wrapper.vm.phase).toBe('reading')
+    const parts = wrapper.vm.activity.prompt
+    const base = (t) => Math.min(12000, Math.max(2500, String(t).length * 90 + 1200))
+    const oldWatchdog = parts.reduce((s, p) => s + base(p.text), 0) + 1500
+    const rateAware = parts.reduce((s, p) => s + base(p.text) / (p.rate || 1), 0) + 1500
+    expect(rateAware).toBeGreaterThan(oldWatchdog + 500)
+
+    // At the old (rate-unaware) deadline the slow read isn't done — the mic must
+    // still be closed. Before the fix it would already be listening here.
+    vi.advanceTimersByTime(oldWatchdog + 200)
+    await flushPromises()
+    expect(wrapper.vm.phase).toBe('reading')
+    expect(instances.length).toBe(0) // mic not opened yet
+
+    // Past the rate-aware deadline the mic finally opens.
+    vi.advanceTimersByTime(rateAware - (oldWatchdog + 200) + 300)
+    await flushPromises()
+    expect(wrapper.vm.phase).toBe('listening')
+    expect(instances.length).toBe(1)
 
     progressState.learning = null
   })
