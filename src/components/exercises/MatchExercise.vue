@@ -7,6 +7,7 @@ import { computed, onBeforeUnmount, ref } from 'vue'
 
 import { shuffle } from '../../lib/quiz.js'
 import { speak } from '../../lib/speech.js'
+import { playFeedback } from '../../stores/settings.js'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -45,6 +46,7 @@ function tryMatch() {
     pickedEn.value = null
     if (matched.value.size >= autoCompleteAt) {
       matched.value = new Set(props.exercise.pairs.map((p) => p.key))
+      playFeedback(mistakes === 0)
     }
   } else {
     mistakes++

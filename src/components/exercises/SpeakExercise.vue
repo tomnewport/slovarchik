@@ -15,6 +15,7 @@ import {
   recognitionSupported,
   recognitionErrorMessage,
 } from '../../lib/recognition.js'
+import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -132,6 +133,7 @@ function grade(finalText, alternatives = []) {
   transcript.value = best || transcript.value
   result.value = { correct, similarity }
   phase.value = 'graded'
+  playFeedback(correct)
   speakTarget() // hear the model answer alongside the result
 }
 

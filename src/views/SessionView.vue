@@ -7,7 +7,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
-import { loadSettings, playFeedback } from '../stores/settings.js'
+import { loadSettings } from '../stores/settings.js'
 import { STATES } from '../lib/progression.js'
 import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
 import { buildExercises } from '../lib/exerciseBuild.js'
@@ -128,7 +128,6 @@ function finalizeIfDone() {
 function onDone(result) {
   const ex = current.value
   if (!ex) return
-  playFeedback(result.correct)
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null

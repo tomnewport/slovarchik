@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue'
 import { phraseCorrect, typingSequence } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
 import { resetHint } from '../../stores/keyboard.js'
+import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -22,6 +23,7 @@ function check() {
   if (checked.value) return
   wasCorrect.value = phraseCorrect(typed.value, props.exercise.ru)
   checked.value = true
+  playFeedback(wasCorrect.value)
 }
 
 function next() {
