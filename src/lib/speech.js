@@ -2,6 +2,8 @@
 // phrases aloud. Speech is a progressive enhancement: when the API is
 // unavailable (older browsers, tests, SSR) every call is a safe no-op.
 
+export const SLOW_RATE = 0.5
+
 export function speechSupported() {
   return (
     typeof window !== 'undefined' &&

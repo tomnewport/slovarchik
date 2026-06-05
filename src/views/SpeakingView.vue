@@ -2,7 +2,7 @@
 import { computed, reactive, ref, onMounted, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { speak, speakSequence, cancelSpeech } from '../lib/speech.js'
+import { speak, speakSequence, cancelSpeech, SLOW_RATE } from '../lib/speech.js'
 import {
   listen,
   gradeSpoken,
@@ -51,7 +51,7 @@ const MODES = [
     id: 'interpret',
     emoji: '🎧',
     label: 'Interpret · translate into English',
-    help: 'Hear a Russian phrase, say the English — or say “pass”. Hands-free with spoken feedback.',
+    help: 'Hear a Russian phrase, say the English — or say "pass". Hands-free with spoken feedback.',
     recLang: 'en-GB',
     target: 'en',
     promptRu: true,
@@ -210,6 +210,21 @@ function replayPrompt() {
   if (modeCfg.value?.promptRu) speak(current.value.ru)
 }
 
+// Read the prompt slowly: pause recognition (if active), speak at SLOW_RATE,
+// then resume listening once the slow read finishes (hands-free mode only).
+function replaySlowPrompt() {
+  if (!current.value || !modeCfg.value?.promptRu) return
+  const wasListening = phase.value === 'listening'
+  stopRecognition()
+  clearTimers()
+  phase.value = 'prompt'
+  const onEnd = onceForQuestion(() => {
+    if (handsFree.value && phase.value === 'prompt' && wasListening) beginListen()
+  }, estimateSpeechMs(current.value.ru) * 2 + 1500)
+  const spoke = speak(current.value.ru, 'ru-RU', SLOW_RATE, { onEnd })
+  if (!spoke) onEnd()
+}
+
 function beginListen() {
   if (!canRecognize || phase.value === 'graded') return
   stopRecognition()
@@ -284,6 +299,9 @@ function reveal({ correct, passed, similarity, diff, heard }) {
   // hear the model answer — the heart of the hands-free loop. A watchdog advances
   // even if speechSynthesis never reports the sequence finishing.
   const cue = correct ? 'Correct.' : passed ? 'Passed.' : 'Not quite.'
+  // Play the Russian feedback slowly when the answer was wrong so the learner
+  // gets a clear model to echo before the next attempt.
+  const ruRate = correct ? 0.9 : SLOW_RATE
   const advance = onceForQuestion(() => {
     if (handsFree.value && phase.value === 'graded') {
       later(nextQuestion, correct ? CELEBRATE_MS : REVIEW_MS)
@@ -292,7 +310,7 @@ function reveal({ correct, passed, similarity, diff, heard }) {
   const spoke = speakSequence(
     [
       { text: cue, lang: 'en-GB', rate: 1 },
-      { text: current.value.ru, lang: 'ru-RU', rate: 0.9 },
+      { text: current.value.ru, lang: 'ru-RU', rate: ruRate },
     ],
     { onEnd: advance },
   )
@@ -335,12 +353,12 @@ onUnmounted(() => {
 
     <p v-if="canRecognize" class="muted" style="margin: 0; font-size: 0.85rem">
       🔒 Heads-up: in Chrome and Edge, speech recognition sends your microphone audio to the
-      browser maker’s cloud service to transcribe it — it isn’t processed on your device.
+      browser maker's cloud service to transcribe it — it isn't processed on your device.
     </p>
 
     <p v-if="!canRecognize" class="feedback bad">
-      This browser can’t recognise speech. Speaking drills need Chrome or Edge (and a network
-      connection); they won’t work here.
+      This browser can't recognise speech. Speaking drills need Chrome or Edge (and a network
+      connection); they won't work here.
     </p>
 
     <p v-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
@@ -390,12 +408,13 @@ onUnmounted(() => {
       </div>
       <!-- Interpret mode hides everything until you've answered. -->
       <p v-if="!modeCfg.showRu && !modeCfg.showEn" class="muted" style="margin: 0.5rem 0">
-        🎧 Listen, then say the English translation — or say “pass”.
+        🎧 Listen, then say the English translation — or say "pass".
       </p>
 
-      <button v-if="modeCfg.promptRu" class="primary replay" @click="replayPrompt">
-        🔊 Replay
-      </button>
+      <div v-if="modeCfg.promptRu" class="replay-row">
+        <button class="primary replay" @click="replayPrompt">🔊 Replay</button>
+        <button class="replay" @click="replaySlowPrompt">🐢 Slow</button>
+      </div>
     </div>
 
     <!-- Microphone / status -->
@@ -404,7 +423,7 @@ onUnmounted(() => {
 
       <template v-if="phase === 'listening'">
         <p class="listening">🎤 Listening…</p>
-        <p v-if="transcript" class="heard" :lang="modeCfg.recLang.slice(0, 2)">“{{ transcript }}”</p>
+        <p v-if="transcript" class="heard" :lang="modeCfg.recLang.slice(0, 2)">"{{ transcript }}"</p>
         <button class="primary" @click="finishListening">Done</button>
       </template>
 
@@ -440,14 +459,14 @@ onUnmounted(() => {
       </p>
 
       <p v-if="transcript" class="muted heard" style="margin: 0">
-        Heard: “{{ transcript }}”
+        Heard: "{{ transcript }}"
       </p>
 
       <div class="card" style="text-align: left">
         <div class="muted" style="font-size: 0.85rem">Answer</div>
         <div class="row" style="gap: 0.4rem; align-items: center">
           <span lang="ru" style="font-size: 1.25rem">{{ current.ru }}</span>
-          <SpeakButton :text="current.ru" />
+          <SpeakButton :text="current.ru" :slow="true" />
         </div>
         <div lang="en" class="muted" style="margin-top: 0.25rem">{{ current.en }}</div>
       </div>
@@ -466,8 +485,14 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.replay-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
 .replay {
-  margin: 0.5rem auto 0;
   font-size: 1.05rem;
 }
 

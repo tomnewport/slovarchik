@@ -8,7 +8,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { typingSequence } from '../../lib/phrases.js'
-import { speak, speechSupported, cancelSpeech } from '../../lib/speech.js'
+import { speak, speechSupported, cancelSpeech, SLOW_RATE } from '../../lib/speech.js'
 import {
   listen,
   gradeSpoken,
@@ -137,10 +137,37 @@ function grade(finalText, alternatives = []) {
   playFeedback(correct)
 }
 
+// Stop recognition (if active), read aloud slowly, then resume listening.
+// Gives the learner a clearer model to echo before the next attempt.
+function speakSlow() {
+  const wasListening = phase.value === 'listening'
+  stopRecognition()
+  clearTimers()
+  earlyTimer = null
+  phase.value = 'prompt'
+  let opened = false
+  const open = () => {
+    if (opened || cancelled) return
+    opened = true
+    if (canRecognize && wasListening) beginListen()
+  }
+  speak(props.exercise.ru, 'ru-RU', SLOW_RATE, { onEnd: open })
+  later(open, estimateSpeechMs(props.exercise.ru) * 2 + 500)
+}
+
 function tryAgain() {
   result.value = null
   recError.value = ''
-  beginListen()
+  phase.value = 'prompt'
+  // Play the slow version first so the learner hears a clear model before retrying.
+  let opened = false
+  const open = () => {
+    if (opened || cancelled) return
+    opened = true
+    beginListen()
+  }
+  speak(props.exercise.ru, 'ru-RU', SLOW_RATE, { onEnd: open })
+  later(open, estimateSpeechMs(props.exercise.ru) * 2 + 500)
 }
 
 // Self-assessment fallback (no recognition): the attempt counts.
@@ -185,7 +212,7 @@ onBeforeUnmount(() => {
     <p class="muted">Say it aloud</p>
     <div class="target">
       <span lang="ru" class="ru">{{ exercise.ru }}</span>
-      <SpeakButton :text="exercise.ru" />
+      <SpeakButton :text="exercise.ru" :slow="true" />
     </div>
     <p class="muted en">{{ exercise.en }}</p>
 
@@ -197,12 +224,18 @@ onBeforeUnmount(() => {
 
       <template v-if="phase === 'listening'">
         <p class="listening">🎤 Listening…</p>
-        <p v-if="transcript" lang="ru" class="heard">“{{ transcript }}”</p>
-        <button class="primary done" @click="recCtl?.stop()">Done</button>
+        <p v-if="transcript" lang="ru" class="heard">"{{ transcript }}"</p>
+        <div class="row">
+          <button class="primary done" @click="recCtl?.stop()">Done</button>
+          <button @click="speakSlow">🐢 Slow</button>
+        </div>
       </template>
 
       <template v-else-if="phase === 'prompt'">
-        <button class="primary mic" @click="beginListen">🎤 Speak</button>
+        <div class="row">
+          <button class="primary mic" @click="beginListen">🎤 Speak</button>
+          <button @click="speakSlow">🐢 Slow</button>
+        </div>
       </template>
 
       <template v-else>
@@ -211,7 +244,7 @@ onBeforeUnmount(() => {
           <template v-else>✗ Not quite</template>
           <span class="match-score">· {{ Math.round(result.similarity * 100) }}% letters</span>
         </p>
-        <p v-if="transcript" class="muted heard" style="margin: 0">Heard: “{{ transcript }}”</p>
+        <p v-if="transcript" class="muted heard" style="margin: 0">Heard: "{{ transcript }}"</p>
         <div class="row">
           <button class="primary next" @click="next">Next →</button>
           <button v-if="!result.correct" @click="tryAgain">🎤 Try again</button>
@@ -222,7 +255,7 @@ onBeforeUnmount(() => {
     <!-- No recognition: self-assess (the attempt counts). -->
     <template v-else>
       <p class="muted info">
-        Speech recognition isn’t available in this browser (try Chrome or Edge) — listen, say it
+        Speech recognition isn't available in this browser (try Chrome or Edge) — listen, say it
         aloud, then mark it done yourself.
       </p>
       <div class="row">

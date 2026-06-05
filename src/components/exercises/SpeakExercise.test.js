@@ -48,7 +48,7 @@ afterEach(() => {
 describe('SpeakExercise', () => {
   it('falls back to self-assessment when recognition is unavailable', async () => {
     const wrapper = mount(SpeakExercise, { props: { exercise } })
-    expect(wrapper.text()).toContain('Speech recognition isn’t available')
+    expect(wrapper.text()).toContain("Speech recognition isn't available")
 
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })

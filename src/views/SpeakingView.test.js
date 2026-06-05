@@ -29,7 +29,7 @@ describe('SpeakingView', () => {
 
   it('warns and disables drills when recognition is unavailable', () => {
     const wrapper = mount(SpeakingView)
-    expect(wrapper.text()).toMatch(/can’t recognise speech/i)
+    expect(wrapper.text()).toMatch(/can't recognise speech/i)
     // Every mode card is disabled when the browser can't recognise speech.
     const cards = wrapper.findAll('button.card')
     expect(cards.length).toBe(3)
