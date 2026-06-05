@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 
-// shuffle is identity-friendly here; stub speech so jsdom doesn't choke on TTS.
+// Stub speech so jsdom doesn't choke on TTS. The component shuffles each
+// column with the real `shuffle`, so the assertions below are order-independent.
 vi.mock('../../lib/speech.js', () => ({ speak: vi.fn() }))
 
 import { speak } from '../../lib/speech.js'
@@ -35,8 +36,10 @@ describe('MatchExercise', () => {
     // No Russian text rendered — only the icon span with aria-hidden.
     expect(ruTiles[0].find('span[lang="ru"]').exists()).toBe(false)
     expect(ruTiles[0].find('span[aria-hidden="true"]').exists()).toBe(true)
-    // Accessible name comes from aria-label, not visible text.
-    expect(ruTiles[0].attributes('aria-label')).toBe(exercise.pairs[0].ru)
+    // Accessible name comes from aria-label, not visible text. The column is
+    // shuffled, so compare the full set rather than a positional match.
+    const labels = ruTiles.map((t) => t.attributes('aria-label')).sort()
+    expect(labels).toEqual(exercise.pairs.map((p) => p.ru).sort())
   })
 
   it('audio mode: clicking the tile speaks and selects it', async () => {
