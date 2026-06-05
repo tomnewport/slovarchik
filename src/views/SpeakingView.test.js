@@ -149,4 +149,51 @@ describe('SpeakingView', () => {
     expect(wrapper.vm.result.correct).toBe(false)
     expect(wrapper.text()).toContain('Passed')
   })
+
+  it('try again clears the result and starts listening without jumping to next question', async () => {
+    const instances = []
+    window.webkitSpeechRecognition = class {
+      constructor() { instances.push(this) }
+      start() {}
+      stop() {}
+      abort() {}
+    }
+    vi.useFakeTimers()
+
+    const wrapper = mount(SpeakingView)
+    await wrapper.find('input[type="checkbox"]').setValue(false)
+    await wrapper.findAll('button.card')[0].trigger('click') // echo mode
+
+    // Grade wrong so try-again button appears.
+    wrapper.vm.grade('wrong answer xyz')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.phase).toBe('graded')
+    const firstQuestion = wrapper.vm.current
+
+    // Simulate hands-free advance timer having been scheduled already.
+    const seqBefore = wrapper.vm.seq
+
+    // Click try again.
+    const tryAgainBtn = wrapper.findAll('button').find((b) => b.text().includes('Try again'))
+    expect(tryAgainBtn).toBeTruthy()
+    await tryAgainBtn.trigger('click')
+    await wrapper.vm.$nextTick()
+
+    // seq must have incremented so any stale callbacks are invalidated.
+    expect(wrapper.vm.seq).toBeGreaterThan(seqBefore)
+    // Phase should now be listening (beginListen was called).
+    expect(wrapper.vm.phase).toBe('listening')
+    // Result should be cleared.
+    expect(wrapper.vm.result).toBeNull()
+    // Same question — try again doesn't skip.
+    expect(wrapper.vm.current).toBe(firstQuestion)
+    // A new recognition instance should have been started.
+    expect(instances.length).toBeGreaterThan(0)
+
+    // Advancing time past REVIEW_MS should NOT jump to the next question
+    // because tryAgain cleared the timer.
+    vi.advanceTimersByTime(5000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.current).toBe(firstQuestion)
+  })
 })
