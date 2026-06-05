@@ -421,6 +421,11 @@ export function encounterCount(key) {
   return (state.records[key]?.events ?? []).filter((e) => e.dimension === 'identification').length
 }
 
+/** True when a word has ever been answered correctly (any dimension/level). */
+export function hasBeenCorrect(key) {
+  return (state.records[key]?.events ?? []).some((e) => e.correct)
+}
+
 /** Keys of the non-unknown words matching a skill id (focused-session pool). */
 export function focusKeysFor(skillId) {
   const skill = skillById(skillId)

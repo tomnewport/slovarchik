@@ -119,6 +119,15 @@ const FOCUSED = [
       </div>
     </div>
 
+    <!-- Hands-free spoken practice -->
+    <button class="card handsfree" @click="router.push('/practice')">
+      <span class="hf-icon">🎤</span>
+      <span class="hf-text">
+        <strong>Hands-free</strong>
+        <span class="muted">Eyes-up, voice-only spoken practice — just say “давай”.</span>
+      </span>
+    </button>
+
     <!-- Focused sessions -->
     <div class="row focused">
       <button
@@ -191,6 +200,21 @@ const FOCUSED = [
 .size small {
   opacity: 0.8;
   font-weight: 400;
+}
+.handsfree {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  border-left: 4px solid var(--primary);
+}
+.hf-icon {
+  font-size: 1.8rem;
+}
+.hf-text {
+  display: grid;
+  gap: 0.15rem;
 }
 .focused {
   gap: 0.5rem;
