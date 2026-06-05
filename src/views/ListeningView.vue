@@ -3,7 +3,7 @@ import { computed, reactive, ref, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
 import { buildListeningBank, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
-import { speak, speechSupported } from '../lib/speech.js'
+import { speak, speechSupported, SLOW_RATE } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
@@ -35,6 +35,10 @@ const pool = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id))
 
 function replay() {
   if (current.value) speak(current.value.ru)
+}
+
+function replaySlow() {
+  if (current.value) speak(current.value.ru, 'ru-RU', SLOW_RATE)
 }
 
 function start() {
@@ -107,7 +111,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
       translation. A few decoy words are mixed in.
     </p>
     <p v-if="!canSpeak" class="feedback bad">
-      Your browser can’t read text aloud, so the Russian will be shown as text instead.
+      Your browser can't read text aloud, so the Russian will be shown as text instead.
     </p>
     <p v-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
     <p v-else-if="!ready" class="feedback bad">
@@ -127,9 +131,12 @@ onUnmounted(() => clearTimeout(advanceTimer))
 
     <div class="card" style="text-align: center">
       <div class="muted">Listen</div>
-      <button class="primary replay" :disabled="!canSpeak" @click="replay">
-        🔊 Play phrase
-      </button>
+      <div class="replay-row">
+        <button class="primary replay" :disabled="!canSpeak" @click="replay">
+          🔊 Play phrase
+        </button>
+        <button class="replay" :disabled="!canSpeak" @click="replaySlow">🐢 Slow</button>
+      </div>
       <!-- Without speech the drill degrades to translating the shown text. -->
       <p v-if="!canSpeak" lang="ru" class="ru">{{ current.ru }}</p>
     </div>
@@ -208,8 +215,14 @@ onUnmounted(() => clearTimeout(advanceTimer))
   border-radius: var(--radius);
 }
 
+.replay-row {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
 .replay {
-  margin: 0.5rem auto 0;
   font-size: 1.1rem;
 }
 
