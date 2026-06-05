@@ -12,12 +12,23 @@ import SpeakButton from '../SpeakButton.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
+// How long a wrong pairing stays highlighted before it clears itself. The board
+// stays interactive throughout — the learner can keep picking while it flashes.
+const FLASH_MS = 1000
+
 const left = ref(shuffle(props.exercise.pairs)) // Russian
 const right = ref(shuffle(props.exercise.pairs)) // English
 const matched = ref(new Set())
 const pickedRu = ref(null)
 const pickedEn = ref(null)
-const wrongFlash = ref(null)
+// Tracked per column: the same key appears in both columns, so a single shared
+// flag would light up a word *and* its translation. Flag each side separately
+// so only the two tapped tiles flash red.
+const wrongRu = ref(null)
+const wrongEn = ref(null)
+// Keys that were part of a wrong pairing, reported back so each gets an
+// incorrect attempt — without penalising the words that were matched cleanly.
+const missed = new Set()
 let mistakes = 0
 let flashTimer = null
 
@@ -38,14 +49,17 @@ function tryMatch() {
     }
   } else {
     mistakes++
-    const miss = [pickedRu.value, pickedEn.value]
-    wrongFlash.value = miss
-    clearTimeout(flashTimer)
-    flashTimer = setTimeout(() => {
-      if (wrongFlash.value === miss) wrongFlash.value = null
-    }, 500)
+    missed.add(pickedRu.value)
+    missed.add(pickedEn.value)
+    wrongRu.value = pickedRu.value
+    wrongEn.value = pickedEn.value
     pickedRu.value = null
     pickedEn.value = null
+    clearTimeout(flashTimer)
+    flashTimer = setTimeout(() => {
+      wrongRu.value = null
+      wrongEn.value = null
+    }, FLASH_MS)
   }
 }
 
@@ -66,11 +80,7 @@ function pickEn(key) {
 }
 
 function next() {
-  emit('done', { correct: mistakes === 0 })
-}
-
-function flashing(key) {
-  return wrongFlash.value?.includes(key)
+  emit('done', { correct: mistakes === 0, wrong: [...missed] })
 }
 
 onBeforeUnmount(() => clearTimeout(flashTimer))
@@ -86,7 +96,7 @@ onBeforeUnmount(() => clearTimeout(flashTimer))
           :key="'ru' + p.key"
           type="button"
           class="tile"
-          :class="{ matched: matched.has(p.key), picked: pickedRu === p.key, flash: flashing(p.key) }"
+          :class="{ matched: matched.has(p.key), picked: pickedRu === p.key, flash: wrongRu === p.key }"
           :disabled="matched.has(p.key)"
           @click="pickRu(p)"
         >
@@ -102,7 +112,7 @@ onBeforeUnmount(() => clearTimeout(flashTimer))
           :key="'en' + p.key"
           type="button"
           class="tile"
-          :class="{ matched: matched.has(p.key), picked: pickedEn === p.key, flash: flashing(p.key) }"
+          :class="{ matched: matched.has(p.key), picked: pickedEn === p.key, flash: wrongEn === p.key }"
           :disabled="matched.has(p.key)"
           @click="pickEn(p.key)"
         >

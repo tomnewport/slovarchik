@@ -129,12 +129,15 @@ function onDone(result) {
   const ex = current.value
   if (!ex) return
   playFeedback(result.correct)
+  // result.wrong (matching exercises) lists the specific missed keys; everything
+  // else reports a single result.correct that applies to every target.
+  const wrong = result.wrong ? new Set(result.wrong) : null
   for (const key of ex.targets ?? []) {
     progress.recordAttempt({
       word: key,
       dimension: ex.dimension,
       level: ex.level,
-      correct: result.correct,
+      correct: wrong ? !wrong.has(key) : result.correct,
     })
   }
   submit(runner, result.correct)
