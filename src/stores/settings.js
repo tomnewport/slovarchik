@@ -7,7 +7,7 @@
 import { reactive } from 'vue'
 
 import * as idb from '../lib/idb.js'
-import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, playSound } from '../lib/feedbackSound.js'
+import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound } from '../lib/feedbackSound.js'
 
 const META_KEY = 'feedbackSounds'
 
@@ -17,12 +17,16 @@ export const OFF = 'off'
 export const settings = reactive({
   successSound: SUCCESS_SOUNDS[0].id,
   errorSound: NEUTRAL_SOUNDS[0].id,
+  celebrationSound: OFF,
   loaded: false,
 })
 
 function valid(kind, id) {
   if (id === OFF) return true
-  const list = kind === 'success' ? SUCCESS_SOUNDS : NEUTRAL_SOUNDS
+  const list =
+    kind === 'success' ? SUCCESS_SOUNDS :
+    kind === 'celebration' ? CELEBRATION_SOUNDS :
+    NEUTRAL_SOUNDS
   return list.some((s) => s.id === id)
 }
 
@@ -35,6 +39,7 @@ export async function loadSettings() {
   const stored = (await idb.getMeta(META_KEY)) ?? {}
   if (valid('success', stored.successSound)) settings.successSound = stored.successSound
   if (valid('neutral', stored.errorSound)) settings.errorSound = stored.errorSound
+  if (valid('celebration', stored.celebrationSound)) settings.celebrationSound = stored.celebrationSound
   settings.loaded = true
   return settings
 }
@@ -43,6 +48,7 @@ function persist() {
   return idb.setMeta(META_KEY, {
     successSound: settings.successSound,
     errorSound: settings.errorSound,
+    celebrationSound: settings.celebrationSound,
   })
 }
 
@@ -60,6 +66,13 @@ export async function setErrorSound(id) {
   await persist()
 }
 
+/** Choose the sound played when a whole batch is completed (or OFF to disable it). */
+export async function setCelebrationSound(id) {
+  if (!valid('celebration', id)) return
+  settings.celebrationSound = id
+  await persist()
+}
+
 /**
  * Play the configured feedback for an exercise result: the bright sound when
  * `correct`, the neutral one otherwise. Returns false (no-op) when that slot is
@@ -69,4 +82,14 @@ export function playFeedback(correct) {
   const id = correct ? settings.successSound : settings.errorSound
   if (!id || id === OFF) return false
   return playSound(correct ? 'success' : 'neutral', id)
+}
+
+/**
+ * Play the configured celebration sound on batch completion. Returns false
+ * (no-op) when that slot is disabled or audio isn't available.
+ */
+export function playCelebration() {
+  const id = settings.celebrationSound
+  if (!id || id === OFF) return false
+  return playSound('celebration', id)
 }
