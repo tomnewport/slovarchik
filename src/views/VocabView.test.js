@@ -67,6 +67,12 @@ describe('VocabView', () => {
     // Start typing mode — celebration applies to the typing drill.
     await wrapper.findAll('button.card')[1].trigger('click')
 
+    // Pin to a non-heteronym word: a correct heteronym answer intentionally shows
+    // a "Next" reminder instead of auto-advancing (covered by its own test), so
+    // leaving the question to the random sample makes this assertion flaky.
+    wrapper.vm.current = shapeVocab(loadFixtureWords()).find((w) => !w.heteronyms?.length)
+    await wrapper.vm.$nextTick()
+
     // Type the correct answer and submit.
     const want = wrapper.vm.current
     const answer = Array.isArray(want.en) ? want.en[0] : want.en
