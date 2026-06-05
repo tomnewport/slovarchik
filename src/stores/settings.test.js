@@ -10,7 +10,7 @@ vi.mock('../lib/feedbackSound.js', async (importOriginal) => {
 })
 
 import * as idb from '../lib/idb.js'
-import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound } from '../lib/feedbackSound.js'
+import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, playSound } from '../lib/feedbackSound.js'
 import {
   settings,
   loadSettings,
