@@ -71,7 +71,7 @@ describe('HomeView', () => {
   it('links to the standalone free-practice drills', async () => {
     const wrapper = mount(HomeView)
     const drills = wrapper.findAll('.drill')
-    expect(drills.length).toBe(9)
+    expect(drills.length).toBe(10)
     await drills[0].trigger('click') // Vocabulary
     expect(push).toHaveBeenCalledWith('/vocab')
   })

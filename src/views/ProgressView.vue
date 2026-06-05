@@ -4,7 +4,7 @@
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
 import AchievementBadge from '../components/AchievementBadge.vue'
 
@@ -35,6 +35,13 @@ const chart = computed(() => {
 
 const earnedCount = computed(() => earnedAchievements.value.size)
 
+const learningBatch = computed(() => progressState.learning)
+const masteryBatch = computed(() => progressState.mastery)
+const learningProgress = computed(() => batchProgress('learning'))
+const masteryProgress = computed(() => batchProgress('mastery'))
+const learningDone = computed(() => learningProgress.value.filter((w) => w.done).length)
+const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
+
 function focus(id) {
   router.push({ path: '/session', query: { type: 'standard', focus: id } })
 }
@@ -51,6 +58,39 @@ function toggle(which) {
     <div class="row counts">
       <span class="pill learn">💚 {{ learnedCount }} learned</span>
       <span class="pill master">🏆 {{ masteredCount }} mastered</span>
+    </div>
+
+    <!-- Current learning / mastery batches -->
+    <div v-if="learningBatch || masteryBatch" class="card batches-card">
+      <h2>Current batches</h2>
+      <div class="batch-list">
+        <div v-if="learningBatch" class="batch-row">
+          <div class="batch-meta">
+            <span class="batch-kind learn-kind">Learning</span>
+            <span class="batch-name">{{ learningBatch.name }}</span>
+            <span class="batch-count muted">{{ learningDone }} / {{ learningBatch.size }}</span>
+          </div>
+          <div class="batch-bar">
+            <div
+              class="batch-fill learn-fill"
+              :style="{ width: (learningBatch.size ? (learningDone / learningBatch.size) * 100 : 0) + '%' }"
+            />
+          </div>
+        </div>
+        <div v-if="masteryBatch" class="batch-row">
+          <div class="batch-meta">
+            <span class="batch-kind master-kind">Mastering</span>
+            <span class="batch-name">{{ masteryBatch.name }}</span>
+            <span class="batch-count muted">{{ masteryDone }} / {{ masteryBatch.size }}</span>
+          </div>
+          <div class="batch-bar">
+            <div
+              class="batch-fill master-fill"
+              :style="{ width: (masteryBatch.size ? (masteryDone / masteryBatch.size) * 100 : 0) + '%' }"
+            />
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Achievement badges -->
@@ -111,6 +151,60 @@ function toggle(which) {
 </template>
 
 <style scoped>
+.batches-card h2 {
+  margin: 0 0 0.75rem;
+}
+.batch-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.batch-row {
+  display: grid;
+  gap: 0.35rem;
+}
+.batch-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.batch-kind {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.learn-kind {
+  color: var(--good);
+}
+.master-kind {
+  color: var(--gold);
+}
+.batch-name {
+  font-weight: 500;
+  flex: 1;
+}
+.batch-count {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.batch-bar {
+  height: 6px;
+  background: var(--bg-soft);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.batch-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.learn-fill {
+  background: var(--good);
+}
+.master-fill {
+  background: var(--gold);
+}
 .pill.learn {
   border-color: var(--good);
   color: var(--good);
