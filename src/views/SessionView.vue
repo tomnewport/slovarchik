@@ -7,6 +7,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
+import { loadSettings, playFeedback } from '../stores/settings.js'
 import { STATES } from '../lib/progression.js'
 import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
 import { buildExercises } from '../lib/exerciseBuild.js'
@@ -60,6 +61,7 @@ function rank(stateName) {
 async function setup() {
   if (!vocabState.words.length) await initVocab()
   if (!progress.state.loaded) await progress.loadProgress()
+  loadSettings()
   // Auto-commit a mastery batch if the learner qualifies but none is active.
   if (progress.learnedCount.value >= MASTERY_UNLOCK_AT && !progress.state.mastery) {
     await progress.autoCommitMasteryBatch()
@@ -123,6 +125,8 @@ function finalizeIfDone() {
 function onDone(result) {
   const ex = current.value
   if (!ex) return
+  // A short bright sound when the exercise was correct, a softer one on a slip.
+  playFeedback(result.correct)
   for (const key of ex.targets ?? []) {
     progress.recordAttempt({
       word: key,

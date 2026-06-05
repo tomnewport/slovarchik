@@ -9,6 +9,26 @@ import { useRouter } from 'vue-router'
 import * as progress from '../stores/progress.js'
 import { getAllFiles } from '../lib/idb.js'
 import { syncFromNetwork } from '../stores/vocab.js'
+import {
+  settings,
+  loadSettings,
+  setSuccessSound,
+  setErrorSound,
+  OFF,
+} from '../stores/settings.js'
+import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
+
+const soundsSupported = audioSupported()
+
+// Picking a sound previews it (unless turning it off) and saves the choice.
+function chooseSuccess(id) {
+  setSuccessSound(id)
+  if (id !== OFF) playSound('success', id)
+}
+function chooseError(id) {
+  setErrorSound(id)
+  if (id !== OFF) playSound('error', id)
+}
 
 const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : null
 
@@ -92,6 +112,7 @@ async function doReset() {
 
 onMounted(async () => {
   if (!progress.state.loaded) await progress.loadProgress()
+  await loadSettings()
   await loadFiles()
 })
 </script>
@@ -108,6 +129,67 @@ onMounted(async () => {
         backup to keep it safe.
       </p>
       <p class="muted" v-if="daysUsing">You've been learning here for {{ daysUsing }} day{{ daysUsing === 1 ? '' : 's' }}.</p>
+    </div>
+
+    <!-- Feedback sounds -->
+    <div class="card">
+      <h2>Feedback sounds</h2>
+      <p class="muted">
+        A short sound plays when you finish an exercise — a bright one when it's
+        all correct, a softer one when you slipped. Tap an option to preview it.
+      </p>
+      <p v-if="!soundsSupported" class="muted">
+        This browser can't play these sounds.
+      </p>
+      <template v-else>
+        <div class="sound-group">
+          <span class="sound-label">Correct</span>
+          <div class="chips">
+            <button
+              v-for="s in SUCCESS_SOUNDS"
+              :key="s.id"
+              type="button"
+              class="chip"
+              :class="{ on: settings.successSound === s.id }"
+              @click="chooseSuccess(s.id)"
+            >
+              {{ s.label }}
+            </button>
+            <button
+              type="button"
+              class="chip off"
+              :class="{ on: settings.successSound === OFF }"
+              @click="chooseSuccess(OFF)"
+            >
+              Off
+            </button>
+          </div>
+        </div>
+
+        <div class="sound-group">
+          <span class="sound-label">With mistakes</span>
+          <div class="chips">
+            <button
+              v-for="s in NEUTRAL_SOUNDS"
+              :key="s.id"
+              type="button"
+              class="chip"
+              :class="{ on: settings.errorSound === s.id }"
+              @click="chooseError(s.id)"
+            >
+              {{ s.label }}
+            </button>
+            <button
+              type="button"
+              class="chip off"
+              :class="{ on: settings.errorSound === OFF }"
+              @click="chooseError(OFF)"
+            >
+              Off
+            </button>
+          </div>
+        </div>
+      </template>
     </div>
 
     <!-- Export -->
@@ -203,6 +285,36 @@ onMounted(async () => {
 .dicts {
   margin: 0.5rem 0;
   padding-left: 1.2rem;
+}
+.sound-group {
+  margin-top: 0.75rem;
+}
+.sound-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.chip {
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.chip.on {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 20%, var(--card));
+}
+.chip.off.on {
+  border-color: var(--muted);
+  background: color-mix(in srgb, var(--muted) 20%, var(--card));
 }
 .reset-btn,
 .reset-confirm {
