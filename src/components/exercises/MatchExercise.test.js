@@ -4,6 +4,7 @@ import { mount } from '@vue/test-utils'
 // shuffle is identity-friendly here; stub speech so jsdom doesn't choke on TTS.
 vi.mock('../../lib/speech.js', () => ({ speak: vi.fn() }))
 
+import { speak } from '../../lib/speech.js'
 import MatchExercise from './MatchExercise.vue'
 
 const exercise = {
@@ -19,6 +20,8 @@ const exercise = {
   targets: ['a', 'b'],
 }
 
+const audioExercise = { ...exercise, audio: true }
+
 // Locate a tile by its visible text in a given column (0 = Russian, 1 = English).
 function tile(wrapper, col, text) {
   const buttons = wrapper.findAll('.col')[col].findAll('button')
@@ -26,6 +29,17 @@ function tile(wrapper, col, text) {
 }
 
 describe('MatchExercise', () => {
+  it('audio mode: clicking anywhere on the tile speaks and selects it', async () => {
+    vi.clearAllMocks()
+    const wrapper = mount(MatchExercise, { props: { exercise: audioExercise } })
+    // Tiles show 🔊 not Russian text; find them by column position.
+    const ruTiles = wrapper.findAll('.col')[0].findAll('button')
+    await ruTiles[0].trigger('click')
+    // Speech must fire and the tile must be selected (has 'picked' class).
+    expect(speak).toHaveBeenCalled()
+    expect(ruTiles[0].classes()).toContain('picked')
+  })
+
   it('flashes only the two tapped tiles on a wrong pairing, not their partners', async () => {
     const wrapper = mount(MatchExercise, { props: { exercise } })
 

@@ -7,7 +7,6 @@ import { computed, onBeforeUnmount, ref } from 'vue'
 
 import { shuffle } from '../../lib/quiz.js'
 import { speak } from '../../lib/speech.js'
-import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -100,9 +99,7 @@ onBeforeUnmount(() => clearTimeout(flashTimer))
           :disabled="matched.has(p.key)"
           @click="pickRu(p)"
         >
-          <template v-if="exercise.audio">
-            <SpeakButton :text="p.ru" />
-          </template>
+          <span v-if="exercise.audio" aria-hidden="true">🔊</span>
           <span v-else lang="ru">{{ p.ru }}</span>
         </button>
       </div>
