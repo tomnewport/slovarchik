@@ -6,6 +6,7 @@ import {
   gradeActivity,
   availableTypes,
   nextActivity,
+  warmupActivities,
   isStart,
   isQuit,
   isPass,
@@ -50,6 +51,13 @@ describe('buildActivity', () => {
     expect(a.recLang).toBe('en-GB')
     expect(a.targets).toEqual(['milk', 'dairy'])
     expect(a.dimension).toBe('hearing')
+  })
+
+  it('repeat-phrase reads Russian, English, then slow Russian', () => {
+    const a = buildActivity('repeat-phrase', phrase)
+    expect(a.prompt.map((p) => p.lang)).toEqual(['ru-RU', 'en-GB', 'ru-RU'])
+    expect(a.prompt[0].text).toBe('Я люблю молоко')
+    expect(a.prompt[2].rate).toBe(SLOW_RATE) // slow Russian = 50%
   })
 
   it('phrase activities record against the source word', () => {
@@ -129,6 +137,22 @@ describe('availableTypes / nextActivity', () => {
       const item = type.includes('phrase') ? phrase : word
       expect(buildActivity(type, item)).not.toBe(null)
     }
+  })
+})
+
+describe('warmupActivities', () => {
+  const a = { id: 'a=a', ru: 'а', en: ['a'] }
+  const b = { id: 'b=b', ru: 'б', en: ['b'] }
+
+  it('builds new-words activities for up to `count` distinct words', () => {
+    const out = warmupActivities([a, b], 2, () => 0)
+    expect(out).toHaveLength(2)
+    expect(out.every((x) => x.type === 'new-words')).toBe(true)
+  })
+
+  it('caps at the pool size and returns [] for an empty pool', () => {
+    expect(warmupActivities([a], 3, () => 0)).toHaveLength(1)
+    expect(warmupActivities([], 3)).toEqual([])
   })
 })
 
