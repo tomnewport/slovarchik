@@ -25,6 +25,9 @@ beforeEach(async () => {
   await progress.resetProgress()
   await progress.loadProgress()
   query.level = 'learning'
+  delete query.next
+  delete query.type
+  delete query.size
   push.mockClear()
 })
 
@@ -45,6 +48,25 @@ describe('BatchSelectView', () => {
     expect(progress.state.learning).toBeTruthy()
     expect(progress.state.learning.level).toBe('learning')
     expect(push).toHaveBeenCalledWith('/')
+  })
+
+  it('continues into the session when launched mid-session-start', async () => {
+    query.next = 'session'
+    query.type = 'standard'
+    query.size = 'quick'
+    const wrapper = mount(BatchSelectView)
+    await flushPromises()
+
+    await wrapper.findAll('.option')[0].trigger('click')
+    await flushPromises()
+    await new Promise((r) => setTimeout(r)) // let the IndexedDB write settle
+    await flushPromises()
+
+    expect(progress.state.learning).toBeTruthy()
+    expect(push).toHaveBeenCalledWith({
+      path: '/session',
+      query: { type: 'standard', size: 'quick' },
+    })
   })
 
   it('explains the lock when no mastery options are available', async () => {

@@ -16,10 +16,22 @@ beforeEach(() => {
 })
 
 describe('HomeView', () => {
-  it('redirects to batch selection when starting a session with no batch', async () => {
+  it('redirects to batch selection (carrying the session intent) when starting a session with no batch', async () => {
     const wrapper = mount(HomeView)
     await wrapper.find('.size.quick').trigger('click')
-    expect(push).toHaveBeenCalledWith({ path: '/batch', query: { level: 'learning' } })
+    expect(push).toHaveBeenCalledWith({
+      path: '/batch',
+      query: { level: 'learning', next: 'session', type: 'standard', size: 'quick' },
+    })
+  })
+
+  it('carries a focused session intent through batch selection', async () => {
+    const wrapper = mount(HomeView)
+    await wrapper.findAll('.focus-btn')[0].trigger('click') // Speaking
+    expect(push).toHaveBeenCalledWith({
+      path: '/batch',
+      query: { level: 'learning', next: 'session', type: 'speaking' },
+    })
   })
 
   it('launches the three standard session sizes once a batch is set', async () => {
