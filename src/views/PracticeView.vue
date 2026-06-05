@@ -188,12 +188,18 @@ function welcome() {
   transcript.value = ''
   recError.value = ''
   paused.value = false
-  const line =
-    'Let’s start learning! Say "pass" to skip a word, or "quit" to stop. ' +
-    'When you’re ready, say: давай!'
+  // Read the instructions in English, but the Russian cue «давай» in a Russian
+  // voice — otherwise an English voice mangles it.
   readThen(
     [
-      { text: line, lang: 'en-GB', rate: 1 },
+      {
+        text:
+          'Let’s start learning! Say "pass" to skip a word, or "quit" to stop. ' +
+          'When you’re ready, say:',
+        lang: 'en-GB',
+        rate: 1,
+      },
+      { text: 'давай!', lang: 'ru-RU', rate: 0.9 },
     ],
     () => {
       if (phase.value === 'welcome') listenForStart()
