@@ -6,6 +6,7 @@ import { resetHint } from '../stores/keyboard.js'
 import { phraseTokens, phraseCorrect } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import HintablePhrase from '../components/HintablePhrase.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing to the next phrase.
@@ -161,7 +162,8 @@ onUnmounted(() => {
         style="font-size: 1.5rem; margin: 0.5rem 0"
         :lang="direction === 'ru-en' ? 'ru' : 'en'"
       >
-        {{ sourceOf(current) }}
+        <HintablePhrase v-if="direction === 'ru-en'" :text="sourceOf(current)" />
+        <template v-else>{{ sourceOf(current) }}</template>
       </div>
       <SpeakButton v-if="direction === 'ru-en'" :text="sourceOf(current)" />
     </div>

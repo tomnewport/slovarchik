@@ -5,6 +5,7 @@ import { sample } from '../lib/quiz.js'
 import { buildListeningBank, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
 import { speak, speechSupported, SLOW_RATE } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import HintablePhrase from '../components/HintablePhrase.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
 // How long the celebration plays before auto-advancing to the next phrase.
@@ -138,7 +139,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
         <button class="replay" :disabled="!canSpeak" @click="replaySlow">🐢 Slow</button>
       </div>
       <!-- Without speech the drill degrades to translating the shown text. -->
-      <p v-if="!canSpeak" lang="ru" class="ru">{{ current.ru }}</p>
+      <HintablePhrase v-if="!canSpeak" :text="current.ru" class="ru" />
     </div>
 
     <!-- Answer line: the words placed so far (tap to send one back). -->
@@ -173,7 +174,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + current.en }}
       </p>
       <div class="muted" style="display: flex; align-items: center; gap: 0.4rem; margin: 0">
-        <span lang="ru">{{ current.ru }}</span>
+        <HintablePhrase :text="current.ru" />
         <SpeakButton :text="current.ru" />
       </div>
       <!-- Correct answers advance on their own; only wrong answers wait. -->

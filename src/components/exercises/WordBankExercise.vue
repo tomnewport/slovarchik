@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue'
 import { buildListeningBank, listeningTokens, phraseCorrect } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
 import { playFeedback } from '../../stores/settings.js'
+import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -56,7 +57,7 @@ onMounted(() => {
         <span class="muted">Translate what you hear</span>
         <SpeakButton :text="exercise.ru" />
       </template>
-      <span v-else lang="ru" class="cue">{{ exercise.ru }}</span>
+      <HintablePhrase v-else :text="exercise.ru" mode="inline" class="cue" />
     </div>
 
     <div class="answer-line card" :aria-label="assembled">
