@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue'
 import { state as vocabState } from '../../stores/vocab.js'
 import { buildParadigm } from '../../lib/paradigm.js'
 import { speak } from '../../lib/speech.js'
+import { playFeedback } from '../../stores/settings.js'
 import DragTable from '../inflection/DragTable.vue'
 import BlindEndings from '../inflection/BlindEndings.vue'
 import SpeakButton from '../SpeakButton.vue'
@@ -27,6 +28,7 @@ const wasCorrect = ref(false)
 function onGraded(correct) {
   graded.value = true
   wasCorrect.value = !!correct
+  playFeedback(!!correct)
 }
 
 function next() {

@@ -6,6 +6,7 @@ import { computed, onMounted, ref } from 'vue'
 
 import { buildListeningBank, listeningTokens, phraseCorrect } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
+import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -34,6 +35,7 @@ function check() {
   if (checked.value) return
   wasCorrect.value = phraseCorrect(assembled.value, props.exercise.en)
   checked.value = true
+  playFeedback(wasCorrect.value)
 }
 
 function next() {
