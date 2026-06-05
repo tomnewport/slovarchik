@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref, onUnmounted } from 'vue'
+import { computed, reactive, ref, onMounted, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
 import { speak, speakSequence, cancelSpeech } from '../lib/speech.js'
@@ -93,6 +93,27 @@ const FATAL_ERRORS = new Set([
   'unsupported',
 ])
 
+// Screen Wake Lock — keeps the display on during active drills.
+const wakeLock = ref(null)
+async function acquireWakeLock() {
+  if (!('wakeLock' in navigator) || wakeLock.value) return
+  try {
+    wakeLock.value = await navigator.wakeLock.request('screen')
+    wakeLock.value.addEventListener('release', () => { wakeLock.value = null })
+  } catch {
+    // Permission denied or API unavailable — safe to ignore.
+  }
+}
+function releaseWakeLock() {
+  wakeLock.value?.release()
+  wakeLock.value = null
+}
+// The browser silently releases the lock when the tab is hidden; re-acquire on
+// return if a drill is still running.
+function onVisibilityChange() {
+  if (document.visibilityState === 'visible' && mode.value) acquireWakeLock()
+}
+
 // Pending timers (watchdogs + advance delays), all cleared on any transition.
 const timers = new Set()
 function later(fn, ms) {
@@ -138,6 +159,7 @@ function start(modeId) {
   mode.value = modeId
   score.right = 0
   score.total = 0
+  acquireWakeLock()
   nextQuestion()
 }
 
@@ -282,12 +304,19 @@ function quit() {
   mode.value = null
   current.value = null
   result.value = null
+  releaseWakeLock()
 }
+
+onMounted(() => {
+  document.addEventListener('visibilitychange', onVisibilityChange)
+})
 
 onUnmounted(() => {
   clearTimers()
   stopRecognition()
   cancelSpeech()
+  releaseWakeLock()
+  document.removeEventListener('visibilitychange', onVisibilityChange)
 })
 </script>
 
