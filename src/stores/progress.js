@@ -413,7 +413,13 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
   } else {
     pools = { atRisk: reinforcePool(), untested: untestedPool(), current: currentPool() }
   }
-  for (const practice of session.practices) practice.pool = pools[practice.bucket] ?? []
+  for (const practice of session.practices) {
+    const bucketPool = pools[practice.bucket] ?? []
+    // When a non-current bucket pool is empty (e.g. no at-risk words yet),
+    // fall back to the current batch pool so exercises stay within known
+    // vocabulary rather than drawing random unknown words as filler.
+    practice.pool = bucketPool.length > 0 ? bucketPool : pools.current
+  }
   return { ...session, focusKeys: focusKeys ?? null, pools }
 }
 
