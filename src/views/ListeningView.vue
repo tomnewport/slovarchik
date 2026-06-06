@@ -4,9 +4,11 @@ import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
 import { buildListeningBank, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
 import { speak, speechSupported, SLOW_RATE } from '../lib/speech.js'
+import { makeVisualReplacement } from '../lib/exerciseBuild.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import HintablePhrase from '../components/HintablePhrase.vue'
 import SpeakButton from '../components/SpeakButton.vue'
+import WordBankExercise from '../components/exercises/WordBankExercise.vue'
 
 // How long the celebration plays before auto-advancing to the next phrase.
 const CELEBRATE_MS = 1000
@@ -26,6 +28,8 @@ const answered = ref(false)
 const wasCorrect = ref(false)
 const celebrating = ref(false)
 let advanceTimer = null
+let visSeq = 0
+const visualExercise = ref(null)
 
 // Decoy candidates are the same for every question, so cache them and only
 // recompute when the phrase list itself changes.
@@ -92,6 +96,27 @@ function check() {
   record(phraseCorrect(placed.value.map((t) => t.text).join(' '), current.value.en))
 }
 
+function skipToVisual() {
+  const phrase = current.value
+  if (!phrase) { nextQuestion(); return }
+  const rep = makeVisualReplacement(
+    { ru: phrase.ru, en: phrase.en, content: 'phrase', targets: phrase.source ? [phrase.source] : [] },
+    visSeq++,
+  )
+  if (!rep) { nextQuestion(); return }
+  clearTimeout(advanceTimer)
+  celebrating.value = false
+  answered.value = false
+  visualExercise.value = rep
+}
+
+function onVisualDone({ correct }) {
+  score.total += 1
+  if (correct) score.right += 1
+  visualExercise.value = null
+  nextQuestion()
+}
+
 function quit() {
   clearTimeout(advanceTimer)
   celebrating.value = false
@@ -99,6 +124,7 @@ function quit() {
   current.value = null
   placed.value = []
   bank.value = []
+  visualExercise.value = null
 }
 
 onUnmounted(() => clearTimeout(advanceTimer))
@@ -130,67 +156,76 @@ onUnmounted(() => clearTimeout(advanceTimer))
       <span class="muted">Score: {{ score.right }} / {{ score.total }}</span>
     </div>
 
-    <div class="card" style="text-align: center">
-      <div class="muted">Listen</div>
-      <div class="replay-row">
-        <button class="primary replay" :disabled="!canSpeak" @click="replay">
-          🔊 Play phrase
+    <!-- Visual replacement exercise shown after skipping a phrase -->
+    <template v-if="visualExercise">
+      <p class="muted" style="margin: 0; font-size: 0.85rem">Skipped — now translate it visually</p>
+      <WordBankExercise :key="visualExercise.id" :exercise="visualExercise" @done="onVisualDone" />
+      <button style="justify-self: start" @click="quit">Stop</button>
+    </template>
+
+    <template v-else>
+      <div class="card" style="text-align: center">
+        <div class="muted">Listen</div>
+        <div class="replay-row">
+          <button class="primary replay" :disabled="!canSpeak" @click="replay">
+            🔊 Play phrase
+          </button>
+          <button class="replay" :disabled="!canSpeak" @click="replaySlow">🐢 Slow</button>
+        </div>
+        <!-- Without speech the drill degrades to translating the shown text. -->
+        <HintablePhrase v-if="!canSpeak" :text="current.ru" class="ru" />
+      </div>
+
+      <!-- Answer line: the words placed so far (tap to send one back). -->
+      <div class="answer-line" lang="en">
+        <button
+          v-for="tile in placed"
+          :key="tile.id"
+          class="tile placed"
+          :disabled="answered"
+          @click="remove(tile)"
+        >
+          {{ tile.text }}
         </button>
-        <button class="replay" :disabled="!canSpeak" @click="replaySlow">🐢 Slow</button>
+        <span v-if="!placed.length" class="muted">Tap the words below…</span>
       </div>
-      <!-- Without speech the drill degrades to translating the shown text. -->
-      <HintablePhrase v-if="!canSpeak" :text="current.ru" class="ru" />
-    </div>
 
-    <!-- Answer line: the words placed so far (tap to send one back). -->
-    <div class="answer-line" lang="en">
-      <button
-        v-for="tile in placed"
-        :key="tile.id"
-        class="tile placed"
-        :disabled="answered"
-        @click="remove(tile)"
-      >
-        {{ tile.text }}
-      </button>
-      <span v-if="!placed.length" class="muted">Tap the words below…</span>
-    </div>
-
-    <!-- Word bank: real words plus decoys, shuffled together. -->
-    <div class="bank row" style="flex-wrap: wrap" lang="en">
-      <button
-        v-for="tile in pool"
-        :key="tile.id"
-        class="tile"
-        :disabled="answered"
-        @click="place(tile)"
-      >
-        {{ tile.text }}
-      </button>
-    </div>
-
-    <div v-if="answered" class="grid">
-      <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
-        {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + current.en }}
-      </p>
-      <div class="muted" style="display: flex; align-items: center; gap: 0.4rem; margin: 0">
-        <HintablePhrase :text="current.ru" />
-        <SpeakButton :text="current.ru" />
+      <!-- Word bank: real words plus decoys, shuffled together. -->
+      <div class="bank row" style="flex-wrap: wrap" lang="en">
+        <button
+          v-for="tile in pool"
+          :key="tile.id"
+          class="tile"
+          :disabled="answered"
+          @click="place(tile)"
+        >
+          {{ tile.text }}
+        </button>
       </div>
-      <!-- Correct answers advance on their own; only wrong answers wait. -->
-      <div v-if="!wasCorrect" class="row">
-        <button class="primary" @click="nextQuestion">Next →</button>
-        <button @click="quit">Stop</button>
+
+      <div v-if="answered" class="grid">
+        <p class="feedback" :class="wasCorrect ? 'good' : 'bad'">
+          {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + current.en }}
+        </p>
+        <div class="muted" style="display: flex; align-items: center; gap: 0.4rem; margin: 0">
+          <HintablePhrase :text="current.ru" />
+          <SpeakButton :text="current.ru" />
+        </div>
+        <!-- Correct answers advance on their own; only wrong answers wait. -->
+        <div v-if="!wasCorrect" class="row">
+          <button class="primary" @click="nextQuestion">Next →</button>
+          <button @click="quit">Stop</button>
+        </div>
       </div>
-    </div>
-    <div v-else class="row">
-      <button class="primary check" :disabled="!placed.length" @click="check">
-        Check
-      </button>
-      <button :disabled="!placed.length" @click="clear">Clear</button>
-      <button @click="nextQuestion">Skip</button>
-      <button style="margin-left: auto" @click="quit">Stop</button>
-    </div>
+      <div v-else class="row">
+        <button class="primary check" :disabled="!placed.length" @click="check">
+          Check
+        </button>
+        <button :disabled="!placed.length" @click="clear">Clear</button>
+        <button @click="skipToVisual">Skip</button>
+        <button style="margin-left: auto" @click="quit">Stop</button>
+      </div>
+    </template>
   </section>
 </template>
 
