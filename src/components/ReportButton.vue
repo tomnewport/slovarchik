@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { buildIssueUrl } from '../lib/reportIssue.js'
-import { queueReport } from '../stores/reports.js'
+import { submitReport } from '../stores/reports.js'
 
 const props = defineProps({
   exercise: { type: Object, required: true },
@@ -25,13 +24,8 @@ function getContext() {
 }
 
 async function report() {
-  const ctx = getContext()
-  const url = buildIssueUrl(ctx)
-
-  if (navigator.onLine) {
-    window.open(url, '_blank', 'noopener')
-  } else {
-    await queueReport({ ...ctx, url })
+  const { queued: wasQueued } = await submitReport(getContext())
+  if (wasQueued) {
     queued.value = true
     setTimeout(() => {
       queued.value = false

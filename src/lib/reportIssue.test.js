@@ -68,4 +68,24 @@ describe('buildIssueUrl', () => {
     const { body } = parseUrl(buildIssueUrl({ ru: 'кот' }))
     expect(body).toContain('Please describe the issue here')
   })
+
+  it('templates a disputed-grading body when a submitted answer is given', () => {
+    const { body } = parseUrl(
+      buildIssueUrl({
+        ru: 'Э́то большо́й го́род.',
+        en: 'This is a big city.',
+        kind: 'wordbank',
+        submitted: 'This city is big',
+      }),
+    )
+    expect(body).toContain('marked incorrect')
+    expect(body).toContain('**My answer:** This city is big')
+    expect(body).toContain('**Expected answer:** This is a big city.')
+    expect(body).not.toContain('Please describe the issue here')
+  })
+
+  it('ignores a blank submitted answer and keeps the default placeholder', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', submitted: '   ' }))
+    expect(body).toContain('Please describe the issue here')
+  })
 })

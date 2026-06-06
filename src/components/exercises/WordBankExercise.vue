@@ -11,7 +11,7 @@ import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
-const emit = defineEmits(['done'])
+const emit = defineEmits(['done', 'dispute'])
 
 // A small decoy pool: the other words of the phrase plus a few generic fillers.
 const DECOYS = ['the', 'a', 'and', 'to', 'is', 'in', 'of', 'it', 'you', 'we']
@@ -19,6 +19,10 @@ const bank = ref(buildListeningBank(props.exercise.en, DECOYS, 3))
 const placed = ref([])
 const checked = ref(false)
 const wasCorrect = ref(false)
+// Honesty system: a phrase can have several valid English renderings we don't
+// all store. If the learner believes a "wrong" grade was actually right, they
+// can override it — crediting the attempt and reporting it for curation.
+const overridden = ref(false)
 
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
@@ -37,6 +41,16 @@ function check() {
   wasCorrect.value = phraseCorrect(assembled.value, props.exercise.en)
   checked.value = true
   playFeedback(wasCorrect.value)
+}
+
+function markCorrect() {
+  if (!checked.value || wasCorrect.value) return
+  overridden.value = true
+  wasCorrect.value = true
+  playFeedback(true)
+  // Report the disputed grading so a genuinely-missing translation can be
+  // folded into the vocab data later.
+  emit('dispute', { submitted: assembled.value })
 }
 
 function next() {
@@ -88,9 +102,14 @@ onMounted(() => {
     </div>
 
     <div v-if="checked" class="feedback" :class="wasCorrect ? 'ok' : 'no'">
-      <strong>{{ wasCorrect ? 'Correct' : 'Answer:' }}</strong>
+      <strong>{{ overridden ? 'Marked correct' : wasCorrect ? 'Correct' : 'Answer:' }}</strong>
       <span>{{ listeningTokens(exercise.en).join(' ') }}</span>
     </div>
+
+    <p v-if="checked && !wasCorrect" class="dispute">
+      Sure your translation also works?
+      <button type="button" class="link" @click="markCorrect">I was right →</button>
+    </p>
 
     <div class="row">
       <button v-if="!checked" class="primary check" :disabled="!placed.length" @click="check">
@@ -136,5 +155,19 @@ onMounted(() => {
 }
 .feedback.no strong {
   color: var(--bad);
+}
+.dispute {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.dispute .link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--primary);
+  cursor: pointer;
+  text-decoration: underline;
 }
 </style>

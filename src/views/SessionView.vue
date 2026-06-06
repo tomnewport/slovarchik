@@ -30,6 +30,7 @@ import InflectExercise from '../components/exercises/InflectExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import AchievementBadge from '../components/AchievementBadge.vue'
 import ReportButton from '../components/ReportButton.vue'
+import { submitReport } from '../stores/reports.js'
 
 const COMPONENTS = {
   type: TypeExercise,
@@ -152,6 +153,24 @@ async function onDone(result) {
   await finalizeIfDone()
 }
 
+// Honesty system: the learner overrode a "wrong" word-bank grade, claiming a
+// valid alternative translation. Open a pre-filled report so it can be curated.
+function onDispute({ submitted }) {
+  const ex = current.value
+  if (!ex) return
+  submitReport({
+    ru: ex.ru ?? ex.lemma,
+    en: ex.en,
+    kind: ex.kind,
+    dimension: ex.dimension,
+    content: ex.content,
+    practiceType: ex.practiceType,
+    submitted,
+    vocabVersion: vocabState.vocabVersion,
+    lastSyncedAt: vocabState.lastSyncedAt,
+  })
+}
+
 // --- Skipping a modality (listening / speaking) -----------------------------
 
 function makeReplacement(skipped) {
@@ -261,6 +280,7 @@ function confirmClose() {
         :key="current.id + ':' + runner.log.length"
         :exercise="current"
         @done="onDone"
+        @dispute="onDispute"
       />
 
       <div class="skips row">
