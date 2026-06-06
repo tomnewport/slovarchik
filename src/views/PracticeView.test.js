@@ -89,6 +89,9 @@ describe('PracticeView', () => {
     stubSpeech()
     stubRecognition(instances)
 
+    // Need a learning batch so there are eligible activities to show the welcome screen.
+    progressState.learning = { level: 'learning', name: 'Test', words: [vocabState.words[0].key] }
+
     const wrapper = mount(PracticeView)
     await flushPromises()
 
@@ -96,6 +99,8 @@ describe('PracticeView', () => {
     expect(wrapper.text()).toMatch(/давай/i)
     expect(wrapper.vm.phase).toBe('welcome')
     expect(instances.length).toBe(1)
+
+    progressState.learning = null
   })
 
   it('grades a correct spoken answer and scores it', async () => {
@@ -103,6 +108,9 @@ describe('PracticeView', () => {
     stubSpeech()
     stubRecognition(instances)
     vi.useFakeTimers()
+
+    // Need a learning batch so there are eligible activities (newWordsPool is non-empty).
+    progressState.learning = { level: 'learning', name: 'Test', words: [vocabState.words[0].key] }
 
     const wrapper = mount(PracticeView)
     await flushPromises()
@@ -125,6 +133,8 @@ describe('PracticeView', () => {
 
     expect(wrapper.vm.score.total).toBeGreaterThanOrEqual(1)
     expect(wrapper.vm.score.right).toBeGreaterThanOrEqual(1)
+
+    progressState.learning = null
   })
 
   it('warms up with words from the current batch before the random mix', async () => {
@@ -195,6 +205,8 @@ describe('PracticeView', () => {
     stubSpeech()
     stubRecognition(instances)
 
+    progressState.learning = { level: 'learning', name: 'Test', words: [vocabState.words[0].key] }
+
     const wrapper = mount(PracticeView)
     await flushPromises()
     wrapper.vm.beginSession()
@@ -207,12 +219,16 @@ describe('PracticeView', () => {
 
     expect(wrapper.vm.score.total).toBe(0)
     expect(wrapper.vm.score.right).toBe(0)
+
+    progressState.learning = null
   })
 
   it('quits the session when the user says "quit"', async () => {
     const instances = []
     stubSpeech()
     stubRecognition(instances)
+
+    progressState.learning = { level: 'learning', name: 'Test', words: [vocabState.words[0].key] }
 
     const wrapper = mount(PracticeView)
     await flushPromises()
@@ -226,5 +242,7 @@ describe('PracticeView', () => {
 
     expect(wrapper.vm.phase).toBe('ended')
     expect(wrapper.text()).toMatch(/nice work/i)
+
+    progressState.learning = null
   })
 })

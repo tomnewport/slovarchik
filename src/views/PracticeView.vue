@@ -95,12 +95,21 @@ const phraseToRuPool = computed(() =>
   phrases.value.filter((p) => rank(progress.stateOf(p.source)) >= rank('learned')),
 )
 
+// Phrase listening/repetition practice is gated to phrases whose source word
+// is in the current learning batch or has been answered correctly at least
+// once — prevents drilling completely unknown vocabulary.
+const phrasePool = computed(() =>
+  phrases.value.filter(
+    (p) => learningKeys.value.has(p.source) || progress.hasBeenCorrect(p.source),
+  ),
+)
+
 const pools = computed(() => ({
   'new-words': newWordsPool.value,
   'word-test': knownWords.value,
   'translate-word': knownWords.value,
-  'repeat-phrase': phrases.value,
-  'translate-phrase': phrases.value,
+  'repeat-phrase': phrasePool.value,
+  'translate-phrase': phrasePool.value,
   'phrase-to-russian': phraseToRuPool.value,
 }))
 
