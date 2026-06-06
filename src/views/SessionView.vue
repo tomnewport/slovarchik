@@ -142,7 +142,7 @@ async function onDone(result) {
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
   for (const key of ex.targets ?? []) {
-    progress.recordAttempt({
+    await progress.recordAttempt({
       word: key,
       dimension: ex.dimension,
       level: ex.level,

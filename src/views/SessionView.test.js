@@ -41,6 +41,7 @@ async function answer(wrapper, text) {
   await wrapper.find('button.check').trigger('click')
   await wrapper.find('button.next').trigger('click')
   await flushPromises()
+  await flushPromises() // second flush: fake-indexeddb uses setImmediate for oncomplete
 }
 
 // A record satisfying every learning criterion (→ mastered for an uninflected
