@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+import { execSync } from 'node:child_process'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -6,11 +7,20 @@ import { VitePWA } from 'vite-plugin-pwa'
 // Deployed under https://<user>.github.io/slovarchik/ so assets need this base.
 const base = '/slovarchik/'
 
+function gitCommitHash() {
+  try {
+    return execSync('git rev-parse --short HEAD').toString().trim()
+  } catch {
+    return null
+  }
+}
+
 export default defineConfig({
   base,
-  // The date the running app code was built, surfaced on the Data screen.
+  // Build-time constants surfaced on the Data screen.
   define: {
     __APP_BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+    __APP_COMMIT_HASH__: JSON.stringify(gitCommitHash()),
   },
   plugins: [
     vue(),

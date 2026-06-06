@@ -16,8 +16,9 @@ export default [
         window: 'readonly',
         navigator: 'readonly',
         console: 'readonly',
-        // Build-time constant injected by Vite (see vite.config.js `define`).
+        // Build-time constants injected by Vite (see vite.config.js `define`).
         __APP_BUILD_DATE__: 'readonly',
+        __APP_COMMIT_HASH__: 'readonly',
       },
     },
     rules: {
