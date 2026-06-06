@@ -227,6 +227,24 @@ function generate(practice, pi, ctx, make) {
  * @returns {object|null}   exercise descriptor, or null if content is missing
  */
 export function makeVisualReplacement(skipped, seq) {
+  // Match exercises bundle multiple pairs with no top-level ru/en —
+  // expand each pair into an individual type (spell-word) exercise.
+  if (skipped?.kind === 'match' && skipped.pairs?.length) {
+    return skipped.pairs.map((pair, i) => ({
+      id: `vis${seq}_${i}`,
+      practiceIndex: skipped.practiceIndex ?? 0,
+      practiceType: 'spell-word',
+      dimension: 'identification',
+      level: skipped.level ?? 'learning',
+      content: 'word',
+      bucket: skipped.bucket ?? 'current',
+      audio: false,
+      kind: 'type',
+      targets: [pair.key].filter(Boolean),
+      ru: pair.ru,
+      en: pair.en,
+    }))
+  }
   if (!skipped?.ru || !skipped?.en) return null
   const kind = skipped.content === 'word' ? 'type' : 'wordbank'
   return {

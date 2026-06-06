@@ -85,9 +85,13 @@ export function skipDimension(s, dimension, makeReplacement = () => null) {
     // its plan cell marked and must keep that status.
     const attempted = original.id in s.firstAttempt
     const planIdx = s.plan.findIndex((e) => e.id === original.id)
-    if (rep) {
-      s.queue[i] = rep
-      if (!attempted && planIdx !== -1) s.plan[planIdx] = rep
+    // makeReplacement may return a single exercise, an array (e.g. a match
+    // board expanded into individual type exercises), or null to drop the item.
+    const reps = rep == null ? [] : Array.isArray(rep) ? rep : [rep]
+    if (reps.length) {
+      s.queue.splice(i, 1, ...reps)
+      if (!attempted && planIdx !== -1) s.plan.splice(planIdx, 1, ...reps)
+      i += reps.length - 1
     } else {
       s.queue.splice(i, 1)
       i--

@@ -168,4 +168,35 @@ describe('skipDimension', () => {
     skipDimension(s, 'hearing')
     expect(s.queue.length).toBe(before)
   })
+
+  it('expands array replacements inline (e.g. match board → multiple type exercises)', () => {
+    const s = initRunner(plan())
+    submit(s, true) // a done
+    // makeReplacement returns an array of two for the hearing exercise (c)
+    skipDimension(s, 'hearing', (e) => [
+      ex(`${e.id}-0`, 'usage', e.practiceIndex),
+      ex(`${e.id}-1`, 'usage', e.practiceIndex),
+    ])
+    const ids = s.queue.map((e) => e.id)
+    expect(ids).toContain('c-0')
+    expect(ids).toContain('c-1')
+    expect(ids).not.toContain('c')
+    // Progress bar reflects both replacements in the same practice segment.
+    const segs = practiceSegments(s)
+    const segIds = segs.flatMap((p) => p.exercises.map((e) => e.id))
+    expect(segIds).toContain('c-0')
+    expect(segIds).toContain('c-1')
+    expect(segIds).not.toContain('c')
+  })
+
+  it('does not jump to summary when all remaining are match exercises replaced by arrays', () => {
+    const matchExercise = { id: 'm', dimension: 'hearing', practiceIndex: 0 }
+    const s = initRunner([matchExercise])
+    skipDimension(s, 'hearing', (e) => [
+      ex(`${e.id}-0`, 'identification', e.practiceIndex),
+      ex(`${e.id}-1`, 'identification', e.practiceIndex),
+    ])
+    expect(s.phase).toBe('exercise')
+    expect(s.queue.map((e) => e.id)).toEqual(['m-0', 'm-1'])
+  })
 })
