@@ -7,6 +7,7 @@ import {
   wordDiff,
   isPass,
   gradeSpoken,
+  expandNumbers,
   recognitionErrorMessage,
   listen,
 } from './recognition.js'
@@ -15,6 +16,36 @@ afterEach(() => {
   delete window.SpeechRecognition
   delete window.webkitSpeechRecognition
   vi.restoreAllMocks()
+})
+
+describe('expandNumbers', () => {
+  it('converts a time with :00 minutes to the hour cardinal', () => {
+    expect(expandNumbers('в 09:00')).toBe('в де́вять')
+    expect(expandNumbers('в 12:00')).toBe('в двена́дцать')
+  })
+
+  it('converts a time with non-zero minutes to hour + minute cardinals', () => {
+    expect(expandNumbers('9:15')).toBe('де́вять пятна́дцать')
+  })
+
+  it('converts bare digit sequences to Russian cardinals', () => {
+    expect(expandNumbers('5 кошек')).toBe('пять кошек')
+  })
+
+  it('leaves text without digits unchanged', () => {
+    expect(expandNumbers('привет')).toBe('привет')
+  })
+})
+
+describe('gradeSpoken', () => {
+  it('accepts a time-format transcript for a Russian numeral target', () => {
+    // The Web Speech API sometimes returns "09:00" instead of "де́вять".
+    const { correct } = gradeSpoken(
+      ['урок русского начинается в 09:00'],
+      'Уро́к ру́сского начина́ется в де́вять.',
+    )
+    expect(correct).toBe(true)
+  })
 })
 
 describe('recognitionSupported', () => {

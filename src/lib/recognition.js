@@ -4,6 +4,34 @@
 // Edge, behind the `webkit` prefix, and online) so every entry point degrades
 // to a safe no-op when it's missing.
 import { typingSequence, phraseTokens } from './phrases.js'
+import { cardinalNominative } from './numerals.js'
+
+/**
+ * Expand digit and time patterns in a speech-recognition transcript to their
+ * Russian cardinal equivalents. The Web Speech API sometimes returns numeric
+ * forms (e.g. "09:00" for "де́вять") instead of spelled-out words, causing
+ * letter-level comparison against the Russian target to fail. Applying this
+ * before comparison keeps grading correct.
+ *
+ * "HH:MM" where MM is 00 → cardinal of the hour ("09:00" → "де́вять").
+ * "HH:MM" where MM ≠ 00  → hour + minute cardinals ("9:15" → "де́вять пятна́дцать").
+ * Remaining bare digit sequences → their cardinal ("5" → "пять").
+ * @param {string} text
+ * @returns {string}
+ */
+export function expandNumbers(text) {
+  return String(text ?? '')
+    .replace(/\b(\d{1,2}):(\d{2})\b/g, (_, h, m) => {
+      const hours = parseInt(h, 10)
+      const mins = parseInt(m, 10)
+      if (mins === 0) return cardinalNominative(hours)
+      return `${cardinalNominative(hours)} ${cardinalNominative(mins)}`
+    })
+    .replace(/\b(\d+)\b/g, (_, n) => {
+      const v = parseInt(n, 10)
+      return v <= 999_999_999 ? cardinalNominative(v) : n
+    })
+}
 
 /** True when the browser exposes a SpeechRecognition implementation. */
 export function recognitionSupported() {
@@ -136,9 +164,9 @@ export function isPass(transcript) {
  * @returns {{ correct: boolean, similarity: number, best: string }}
  */
 export function gradeSpoken(transcripts, target, threshold = 0.9) {
-  const candidates = (Array.isArray(transcripts) ? transcripts : [transcripts]).filter(
-    (c) => c != null && String(c).trim(),
-  )
+  const candidates = (Array.isArray(transcripts) ? transcripts : [transcripts])
+    .filter((c) => c != null && String(c).trim())
+    .map(expandNumbers)
   let similarity = 0
   let best = candidates[0] ?? ''
   for (const candidate of candidates) {
@@ -163,8 +191,9 @@ export function gradeSpoken(transcripts, target, threshold = 0.9) {
  * @returns {{ score: number, words: Array<{ text: string, hit: boolean, skip?: boolean }>, extra: string[] }}
  */
 export function wordDiff(transcript, target) {
+  const expanded = expandNumbers(transcript)
   const counts = new Map()
-  for (const t of tokens(transcript)) counts.set(t, (counts.get(t) ?? 0) + 1)
+  for (const t of tokens(expanded)) counts.set(t, (counts.get(t) ?? 0) + 1)
 
   const words = phraseTokens(target).map((display) => {
     const norm = typingSequence(display)
@@ -181,7 +210,7 @@ export function wordDiff(transcript, target) {
   const extra = []
   for (const [word, n] of counts) for (let i = 0; i < n; i += 1) extra.push(word)
 
-  return { score: spokenSimilarity(transcript, target), words, extra }
+  return { score: spokenSimilarity(expanded, target), words, extra }
 }
 
 /**
