@@ -18,6 +18,11 @@ export const POS_BY_FILE = {
   prepositions: 'preposition',
   conjunctions: 'conjunction',
   interjections: 'interjection',
+  // Auto-generated gloss-only entries (all `learn: false`). Not a real part of
+  // speech and deliberately absent from `partsOfSpeech`: these words exist only
+  // so phrase hints can translate every tappable word, and are filtered out of
+  // every drill by learnableWords.
+  glossary: 'glossary',
 }
 
 /** Parts of speech in a stable display order. */

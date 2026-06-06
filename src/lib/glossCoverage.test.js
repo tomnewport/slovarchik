@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import { buildWords } from './vocabBuild.js'
 import { unglossedExampleForms } from './glossCoverage.js'
+import { loadFixtureWords } from '../test/fixtures.js'
 
 describe('unglossedExampleForms', () => {
   // A noun whose usage example leans on a word that has no dictionary entry.
@@ -49,5 +50,17 @@ words:
 `
     const holes = unglossedExampleForms(buildWords([{ pos: 'adjective', text: withGloss }]))
     expect(holes.map((h) => h.form)).not.toContain('большой')
+  })
+})
+
+describe('the bundled vocabulary', () => {
+  // Every word a learner can tap inside a phrase must resolve to a gloss. Words
+  // that aren't part of the curriculum live in public/vocab/glossary.yml as
+  // gloss-only (learn: false) entries; add the missing one there (or its inflected
+  // form to an existing entry) to clear a failure here.
+  it('glosses every word in the phrase bank', () => {
+    const holes = unglossedExampleForms(loadFixtureWords())
+    const sample = holes.slice(0, 25).map((h) => `${h.sample} (${h.form}) e.g. «${h.phrases[0]}»`)
+    expect(holes.length, `unglossed phrase words:\n${sample.join('\n')}`).toBe(0)
   })
 })
