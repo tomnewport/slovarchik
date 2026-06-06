@@ -206,6 +206,7 @@ function capEvents(rec) {
  * @returns {string} the word's new state
  */
 export async function recordAttempt({ word, dimension, level, correct, ts = Date.now() }) {
+  if (!word) throw new Error(`recordAttempt: word key required, got ${JSON.stringify(word)}`)
   const rec = ensureRecord(word)
   rec.events.push({ dimension, level, correct: !!correct, ts })
   capEvents(rec)
