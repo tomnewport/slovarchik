@@ -4,9 +4,17 @@ import { router } from './router/index.js'
 import { initVocab } from './stores/vocab.js'
 import { loadProgress } from './stores/progress.js'
 import { loadSettings } from './stores/settings.js'
+import { raiseError } from './stores/errorToast.js'
 import './style.css'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+
+app.config.errorHandler = (err, _instance, info) => {
+  console.error('[Slovarchik]', info, err)
+  raiseError(err)
+}
+
+app.use(router).mount('#app')
 
 // Kick off the cache load + (online) refresh; views react as words arrive.
 initVocab()
