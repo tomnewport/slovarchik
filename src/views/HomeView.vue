@@ -7,6 +7,8 @@ import { useRouter } from 'vue-router'
 
 import { state as progress, batchProgress } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
+import { parseKey } from '../lib/vocabBuild.js'
+import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
 
 const router = useRouter()
 
@@ -52,6 +54,35 @@ const learningProgress = computed(() => batchProgress('learning'))
 const masteryProgress = computed(() => batchProgress('mastery'))
 const learningDone = computed(() => learningProgress.value.filter((w) => w.done).length)
 const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
+
+const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
+const DIM_LABEL = { identification: 'I', usage: 'U', hearing: 'H', speaking: 'S' }
+
+const topLearningWords = computed(() =>
+  learningProgress.value
+    .map((w) => ({
+      ...w,
+      lastAt: lastAttemptAt(progress.records[w.word]?.events ?? []) ?? 0,
+    }))
+    .filter((w) => w.lastAt > 0)
+    .sort((a, b) => b.lastAt - a.lastAt)
+    .slice(0, 3)
+    .map((w) => {
+      const events = progress.records[w.word]?.events ?? []
+      const { ru, en } = parseKey(w.word)
+      return {
+        key: w.word,
+        ru,
+        en,
+        done: w.done,
+        dims: LEARNING_DIMS.map((d) => ({
+          label: DIM_LABEL[d],
+          name: d,
+          ...dimensionProgress(events, 'learning', d),
+        })),
+      }
+    }),
+)
 
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
@@ -106,6 +137,23 @@ const FOCUSED = [
               class="batch-fill learn-fill"
               :style="{ width: (learningBatch.size ? (learningDone / learningBatch.size) * 100 : 0) + '%' }"
             />
+          </div>
+        </div>
+        <div v-if="topLearningWords.length" class="top-words">
+          <div v-for="w in topLearningWords" :key="w.key" class="word-row">
+            <div class="word-label">
+              <span class="word-ru">{{ w.ru }}</span>
+              <span class="word-en muted">{{ w.en }}</span>
+            </div>
+            <div class="word-dims">
+              <span
+                v-for="d in w.dims"
+                :key="d.name"
+                class="dim-pip"
+                :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
+                :title="d.name"
+              >{{ d.label }}</span>
+            </div>
           </div>
         </div>
         <div v-if="masteryBatch" class="batch-row">
@@ -233,6 +281,68 @@ const FOCUSED = [
 }
 .master-fill {
   background: var(--gold);
+}
+.top-words {
+  display: grid;
+  gap: 0.45rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.1rem;
+}
+.word-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.word-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  min-width: 0;
+  overflow: hidden;
+}
+.word-ru {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+.word-en {
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.word-dims {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+.dim-pip {
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+.dim-met {
+  background: var(--good);
+  color: #0b1021;
+}
+.dim-partial {
+  background: transparent;
+  color: var(--good);
+  border: 1px solid var(--good);
+  opacity: 0.7;
+}
+.dim-empty {
+  background: var(--bg-soft);
+  color: var(--muted);
 }
 .standard h2 {
   margin: 0 0 0.25rem;
