@@ -26,6 +26,7 @@ import {
   lastAttemptAt,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
+import { learnableWords } from '../lib/vocabBuild.js'
 import { buildSession } from '../lib/session.js'
 import { practicesForSession } from '../lib/practices.js'
 import { rankSkills, skillById, focusedKeys } from '../lib/focus.js'
@@ -99,7 +100,7 @@ export const masteredCount = computed(
 
 /** CEFR-level stats (total words / learned words) derived from vocab + progress. */
 export const cefrStats = computed(() =>
-  buildCefrStats(vocabState.words, stateOf),
+  buildCefrStats(learnableWords(vocabState.words), stateOf),
 )
 
 /** All achievement IDs the learner has currently earned (reactive). */
@@ -246,9 +247,9 @@ function persist(rec) {
 // Batches.
 // ---------------------------------------------------------------------------
 
-/** All vocab words as the batch engine expects them. */
+/** All learnable vocab words as the batch engine expects them. */
 function vocabWords() {
-  return vocabState.words
+  return learnableWords(vocabState.words)
 }
 
 /** Offer up to five batch options for the next learning or mastery journey. */

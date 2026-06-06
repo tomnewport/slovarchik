@@ -121,6 +121,10 @@ function normalizeWord(pos, key, word) {
     ru, // bare Russian (no stress marks) — the key's identity
     en, // bare English from the key
     headword, // accented dictionary form for display
+    // Gloss-only entries (`learn: false`) stay in the dictionary so their forms
+    // can be hinted inside phrases, but are kept out of every drill and the
+    // learning curriculum. Default true.
+    learnable: word.learn !== false,
     cefr: word.cefr_level ?? null,
     meaning: shortGloss(std),
     meaningNote: glossNote(std),
@@ -188,9 +192,19 @@ export function buildWords(files) {
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
 
+/**
+ * Keep only words that are part of the learning curriculum. Gloss-only entries
+ * (`learn: false`) are filtered out of every drill, the phrase bank, and the
+ * batch/progress engine — but remain in the full word list so {@link
+ * buildFormIndex} can still hint their forms inside phrases.
+ */
+export function learnableWords(words) {
+  return (words ?? []).filter((w) => w.learnable !== false)
+}
+
 /** Shape words for the vocabulary (translation) drill. */
 export function shapeVocab(words) {
-  return words.map((w) => ({
+  return learnableWords(words).map((w) => ({
     id: w.key,
     ru: w.headword || w.ru,
     en: w.english,
@@ -209,7 +223,7 @@ export function shapeVocab(words) {
 export function shapePhrases(words) {
   const seen = new Set()
   const out = []
-  for (const w of words) {
+  for (const w of learnableWords(words)) {
     for (const ex of w.usage ?? []) {
       const ru = String(ex?.ru ?? '').trim()
       const en = String(ex?.en_gb ?? '').trim()
@@ -225,7 +239,7 @@ export function shapePhrases(words) {
 
 /** Shape declinable nouns for the declension drill. */
 export function shapeNouns(words) {
-  return words
+  return learnableWords(words)
     .filter((w) => w.pos === 'noun' && Object.keys(w.forms).length > 0)
     .map((w) => ({
       id: w.key,
