@@ -249,6 +249,32 @@ describe('makeVisualReplacement', () => {
     expect(makeVisualReplacement(wordEx, 0).targets).toEqual(['word-key'])
   })
 
+  it('expands a match exercise into individual type exercises', () => {
+    const matchEx = {
+      id: 'ex1',
+      kind: 'match',
+      practiceIndex: 1,
+      dimension: 'hearing',
+      level: 'learning',
+      content: 'word',
+      bucket: 'current',
+      pairs: [
+        { key: 'кот', ru: 'кот', en: 'cat' },
+        { key: 'собака', ru: 'собака', en: 'dog' },
+      ],
+      targets: ['кот', 'собака'],
+    }
+    const reps = makeVisualReplacement(matchEx, 3)
+    expect(Array.isArray(reps)).toBe(true)
+    expect(reps).toHaveLength(2)
+    expect(reps[0]).toMatchObject({ kind: 'type', ru: 'кот', en: 'cat', id: 'vis3_0', dimension: 'identification', audio: false })
+    expect(reps[1]).toMatchObject({ kind: 'type', ru: 'собака', en: 'dog', id: 'vis3_1' })
+    expect(reps[0].targets).toEqual(['кот'])
+    expect(reps[1].targets).toEqual(['собака'])
+    expect(reps.every((r) => r.practiceIndex === 1)).toBe(true)
+    expect(reps.every((r) => r.level === 'learning')).toBe(true)
+  })
+
   it('returns null when ru is missing', () => {
     expect(makeVisualReplacement({ en: 'hello' }, 0)).toBeNull()
   })
