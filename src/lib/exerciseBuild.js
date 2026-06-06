@@ -46,6 +46,13 @@ export const MATCH_PAIRS = 10
  */
 export const MIN_ENCOUNTERS_FOR_SPELLING = 2
 
+/**
+ * Minimum number of eligible words/phrases required to run any spelling
+ * practice at all. When the pool is smaller than this the session would repeat
+ * the same word too many times, so spelling is skipped until more words qualify.
+ */
+export const MIN_WORDS_FOR_SPELLING = 3
+
 /** The primary English gloss for a shaped vocab word. */
 function enText(en) {
   return Array.isArray(en) ? (en[0] ?? '') : (en ?? '')
@@ -135,6 +142,7 @@ function buildWordType(practice, pi, ctx, make, kind) {
     pool = pool.filter(met)
     rest = rest.filter(met)
   }
+  if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
   const picked = drawN(pool, rest, practice.exercises, ctx.rng)
   return picked.map((w) =>
     make({
@@ -155,6 +163,7 @@ function buildPhrase(practice, pi, ctx, make, kind) {
     pool = pool.filter(met)
     rest = rest.filter(met)
   }
+  if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
   const picked = drawN(pool, rest, practice.exercises, ctx.rng)
   return picked.map((p) =>
     make({
