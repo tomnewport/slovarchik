@@ -172,6 +172,7 @@ function buildPhrase(practice, pi, ctx, make, kind) {
       targets: [p.source].filter(Boolean),
       ru: p.ru,
       en: p.en,
+      ...(p.enAlt?.length ? { enAlt: p.enAlt } : {}),
     }),
   )
 }
@@ -241,6 +242,7 @@ export function makeVisualReplacement(skipped, seq) {
     targets: skipped.targets ?? [],
     ru: skipped.ru,
     en: skipped.en,
+    ...(skipped.enAlt?.length ? { enAlt: skipped.enAlt } : {}),
     ...(skipped.note !== undefined ? { note: skipped.note } : {}),
   }
 }

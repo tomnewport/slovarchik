@@ -28,6 +28,27 @@ async function assembleExpected(wrapper) {
   }
 }
 
+describe('WordBankExercise alternate translations', () => {
+  it('accepts a curated alternate rendering without an override (#145)', async () => {
+    const wrapper = mount(WordBankExercise, {
+      props: { exercise: { ...exercise, enAlt: ['This city is big'] } },
+    })
+    // Assemble the alternate word order from the same bank of tiles.
+    for (const word of ['this', 'city', 'is', 'big']) {
+      const tile = wrapper
+        .findAll('.bank .tile')
+        .find((b) => b.text().toLowerCase() === word && !b.attributes('disabled'))
+      await tile.trigger('click')
+    }
+    await wrapper.find('button.check').trigger('click')
+
+    expect(wrapper.text()).toContain('Correct')
+    expect(wrapper.find('.dispute').exists()).toBe(false)
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+  })
+})
+
 describe('WordBankExercise honesty system', () => {
   it('does not offer the override when the answer is correct', async () => {
     const wrapper = mount(WordBankExercise, { props: { exercise } })

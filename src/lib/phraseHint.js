@@ -82,10 +82,34 @@ export function wordForms(word) {
 }
 
 /**
+ * The normalised *dictionary* forms of a word — its headword and bare key form.
+ * These are the lemma a learner would look up, as opposed to the oblique
+ * inflected forms also returned by {@link wordForms}.
+ * @param {object} word
+ * @returns {Set<string>}
+ */
+export function baseForms(word) {
+  const out = new Set()
+  for (const s of [word?.headword, word?.ru]) {
+    const trimmed = String(s ?? '').trim()
+    if (!trimmed || /\s/.test(trimmed)) continue
+    const n = normToken(trimmed)
+    if (n) out.add(n)
+  }
+  return out
+}
+
+/**
  * Build a lookup from a normalised surface form to a hint entry
- * `{ key, ru, en }` for the word that can appear as that form. On a collision
- * (two words share an inflected form) the alphabetically earlier headword wins —
- * a stable, deterministic choice regardless of load order.
+ * `{ key, ru, en }` for the word that can appear as that form.
+ *
+ * Collisions are resolved in two passes. First every word claims its own
+ * **dictionary form** (headword/key), so a word whose lemma *is* the surface
+ * token always beats another word for which the token is merely an oblique
+ * inflected form — e.g. «дорого́й» glosses as the adjective "expensive" rather
+ * than the instrumental of «доро́га» "road" (#173). Only then do inflected forms
+ * fill the remaining gaps. Within each pass the alphabetically earlier headword
+ * wins, a stable choice regardless of load order.
  * @param {object[]} words   normalised word records (from buildWords)
  * @returns {Map<string, {key: string, ru: string, en: string}>}
  */
@@ -94,13 +118,15 @@ export function buildFormIndex(words) {
     .slice()
     .sort((a, b) => stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru'))
   const index = new Map()
-  for (const w of sorted) {
+  const claim = (w, forms) => {
     const entry = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
-    if (!entry.en) continue // nothing useful to show — skip
-    for (const form of wordForms(w)) {
+    if (!entry.en) return // nothing useful to show — skip
+    for (const form of forms) {
       if (!index.has(form)) index.set(form, entry)
     }
   }
+  for (const w of sorted) claim(w, baseForms(w))
+  for (const w of sorted) claim(w, wordForms(w))
   return index
 }
 

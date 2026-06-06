@@ -62,6 +62,14 @@ describe('phraseCorrect', () => {
   it('can still answer a single-article phrase correctly', () => {
     expect(phraseCorrect('a', 'a')).toBe(true)
   })
+  it('accepts a match against any of several allowed renderings', () => {
+    const targets = ['In summer the grass is green.', 'The grass is green in summer.']
+    expect(phraseCorrect('the grass is green in summer', targets)).toBe(true)
+    expect(phraseCorrect('in summer the grass is green', targets)).toBe(true)
+  })
+  it('rejects an answer that matches none of the allowed renderings', () => {
+    expect(phraseCorrect('the sky is blue', ['this city is big', 'this is a big city'])).toBe(false)
+  })
 })
 
 describe('nextChar', () => {

@@ -247,5 +247,27 @@ describe('the bundled vocabulary fixtures', () => {
     }
     // Phrases are deduplicated by their russian=english pair.
     expect(new Set(ph.map((p) => p.id)).size).toBe(ph.length)
+    // Every phrase carries an (possibly empty) list of alternate renderings.
+    for (const p of ph) expect(Array.isArray(p.enAlt)).toBe(true)
+  })
+
+  it('shapePhrases carries en_alt as extra accepted renderings', () => {
+    const text = `
+words:
+  "город=city":
+    cefr_level: A1
+    accented: го́род
+    en_gb: { standard: city (a large town) }
+    usage:
+      - ru: Э́то большо́й го́род.
+        en_gb: This is a big city.
+        en_alt:
+          - This city is big.
+          - ""
+`
+    const ph = shapePhrases(buildWords([{ pos: 'noun', text }]))
+    expect(ph).toHaveLength(1)
+    // Blank entries are dropped; real alternates are kept.
+    expect(ph[0].enAlt).toEqual(['This city is big.'])
   })
 })

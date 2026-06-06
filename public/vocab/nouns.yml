@@ -10324,6 +10324,32 @@ words:
       pl_acc: ду́хов
       pl_ins: ду́хами
       pl_pre: ду́хах
+  "душ=shower":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: shower (washing under sprayed water, or the device for it)
+    usage:
+      - ru: Она́ приняла́ душ в ва́нной.
+        en_gb: She had a shower in the bathroom.
+    declension:
+      sg_nom: душ
+      sg_gen: ду́ша
+      sg_dat: ду́шу
+      sg_acc: душ
+      sg_ins: ду́шем
+      sg_pre: ду́ше
+      pl_nom: ду́ши
+      pl_gen: ду́шей
+      pl_dat: ду́шам
+      pl_acc: ду́ши
+      pl_ins: ду́шами
+      pl_pre: ду́шах
   "душа=soul":
     cefr_level: B1
     gender: f
@@ -47964,6 +47990,9 @@ words:
     usage:
       - ru: Купи́, пожа́луйста, све́жий хлеб.
         en_gb: Please buy some fresh bread.
+        en_alt:
+          - Buy some fresh bread please.
+          - Please buy fresh bread.
       - ru: На столе́ лежи́т кусо́к хле́ба.
         en_gb: A piece of bread lies on the table.
       - ru: Она́ накорми́ла птиц хле́бом.
