@@ -28,6 +28,8 @@ const DIMENSION_LABELS = {
  * @param {string} [ctx.practiceType]  Raw practice type string
  * @param {number|null} [ctx.vocabVersion]   Manifest version number
  * @param {number|null} [ctx.lastSyncedAt]   Epoch ms of last vocab sync
+ * @param {string} [ctx.submitted]   Learner's answer when disputing a grading
+ *                                   (the "honesty system" mark-as-correct flow)
  */
 export function buildIssueUrl(ctx) {
   const isPhrase = ctx.content === 'phrase' || ctx.kind === 'wordbank'
@@ -60,7 +62,16 @@ export function buildIssueUrl(ctx) {
   lines.push('')
   lines.push('## What seems wrong?')
   lines.push('')
-  lines.push('<!-- Please describe the issue here -->')
+  if (ctx.submitted != null && String(ctx.submitted).trim() !== '') {
+    lines.push('My answer was marked incorrect, but I believe it is also a valid translation.')
+    lines.push('')
+    lines.push(`**My answer:** ${ctx.submitted}`)
+    lines.push(`**Expected answer:** ${ctx.en ?? '—'}`)
+    lines.push('')
+    lines.push('<!-- Add any extra detail here -->')
+  } else {
+    lines.push('<!-- Please describe the issue here -->')
+  }
 
   const params = new URLSearchParams({ title, body: lines.join('\n') })
   return `${BASE_URL}?${params.toString()}`
