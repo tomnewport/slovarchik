@@ -11,8 +11,10 @@ import {
   recognitionSupported,
   recognitionErrorMessage,
 } from '../lib/recognition.js'
+import { makeVisualReplacement } from '../lib/exerciseBuild.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
+import WordBankExercise from '../components/exercises/WordBankExercise.vue'
 
 // How long the ✓ celebration shows before the hands-free loop moves on.
 const CELEBRATE_MS = 2500
@@ -81,6 +83,8 @@ let recCtl = null
 // question (a late recogniser result, or a `speechSynthesis.cancel()` that
 // retro-fires the old utterance's `onend`) bail instead of acting on the new one.
 let seq = 0
+let visSeq = 0
+const visualExercise = ref(null)
 // Auto re-listens after a silent result, capped so a blocked mic can't spin.
 let emptyRetries = 0
 const MAX_EMPTY_RETRIES = 5
@@ -331,6 +335,33 @@ function tryAgain() {
   beginListen()
 }
 
+function skipToVisual() {
+  const phrase = current.value
+  if (!phrase) { nextQuestion(); return }
+  const rep = makeVisualReplacement(
+    { ru: phrase.ru, en: phrase.en, content: 'phrase', targets: phrase.source ? [phrase.source] : [] },
+    visSeq++,
+  )
+  if (!rep) { nextQuestion(); return }
+  seq += 1
+  clearTimers()
+  stopRecognition()
+  cancelSpeech()
+  celebrating.value = false
+  phase.value = 'prompt'
+  transcript.value = ''
+  recError.value = ''
+  result.value = null
+  visualExercise.value = rep
+}
+
+function onVisualDone({ correct }) {
+  score.total += 1
+  if (correct) score.right += 1
+  visualExercise.value = null
+  nextQuestion()
+}
+
 function quit() {
   seq += 1
   clearTimers()
@@ -340,6 +371,7 @@ function quit() {
   mode.value = null
   current.value = null
   result.value = null
+  visualExercise.value = null
   releaseWakeLock()
 }
 
@@ -408,93 +440,102 @@ onUnmounted(() => {
       <span class="muted">Score: {{ score.right }} / {{ score.total }}</span>
     </div>
 
-    <!-- Prompt card: what to say -->
-    <div class="card" style="text-align: center">
-      <div class="muted">
-        {{ modeCfg.target === 'ru' ? 'Say this in Russian' : 'Say this in English' }}
-      </div>
+    <!-- Visual replacement exercise shown after skipping a phrase -->
+    <template v-if="visualExercise">
+      <p class="muted" style="margin: 0; font-size: 0.85rem">Skipped — now translate it visually</p>
+      <WordBankExercise :key="visualExercise.id" :exercise="visualExercise" @done="onVisualDone" />
+      <button style="justify-self: start" @click="quit">Change mode</button>
+    </template>
 
-      <div v-if="modeCfg.showRu" lang="ru" style="font-size: 1.5rem; margin: 0.5rem 0">
-        {{ current.ru }}
-      </div>
-      <div v-if="modeCfg.showEn" lang="en" style="font-size: 1.35rem; margin: 0.4rem 0">
-        {{ current.en }}
-      </div>
-      <!-- Interpret mode hides everything until you've answered. -->
-      <p v-if="!modeCfg.showRu && !modeCfg.showEn" class="muted" style="margin: 0.5rem 0">
-        🎧 Listen, then say the English translation — or say "pass".
-      </p>
-
-      <div v-if="modeCfg.promptRu" class="replay-row">
-        <button class="primary replay" @click="replayPrompt">🔊 Replay</button>
-        <button class="replay" @click="replaySlowPrompt">🐢 Slow</button>
-      </div>
-    </div>
-
-    <!-- Microphone / status -->
-    <div class="mic-area">
-      <p v-if="errorMessage" class="feedback bad" style="margin: 0">{{ errorMessage }}</p>
-
-      <template v-if="phase === 'listening'">
-        <p class="listening">🎤 Listening…</p>
-        <p v-if="transcript" class="heard" :lang="modeCfg.recLang.slice(0, 2)">"{{ transcript }}"</p>
-        <button class="primary" @click="finishListening">Done</button>
-      </template>
-
-      <template v-else-if="phase === 'prompt'">
-        <button v-if="canRecognize" class="primary mic" @click="beginListen">🎤 Speak</button>
-        <button @click="nextQuestion">Skip →</button>
-      </template>
-    </div>
-
-    <!-- Result -->
-    <div v-if="phase === 'graded'" class="grid">
-      <p
-        class="feedback"
-        :class="result.correct ? 'good' : 'bad'"
-      >
-        <template v-if="result.correct">✓ Correct!</template>
-        <template v-else-if="result.passed">↷ Passed</template>
-        <template v-else>✗ Not quite</template>
-        <span v-if="!result.passed" class="match-score">· {{ Math.round(result.similarity * 100) }}% letters</span>
-      </p>
-
-      <!-- Per-word breakdown: which words landed (green) and which were missed
-           or misheard (struck through) against what you were asked to say. -->
-      <div v-if="result.diff && result.diff.words.length" class="word-diff" :lang="result.targetLang">
-        <span
-          v-for="(w, i) in result.diff.words"
-          :key="i"
-          :class="w.skip ? '' : w.hit ? 'word-hit' : 'word-miss'"
-        >{{ w.text }}</span>
-      </div>
-      <p v-if="result.diff && result.diff.extra.length" class="muted extra-words" style="margin: 0">
-        Extra heard: {{ result.diff.extra.join(', ') }}
-      </p>
-
-      <p v-if="transcript" class="muted heard" style="margin: 0">
-        Heard: "{{ transcript }}"
-      </p>
-
-      <div class="card" style="text-align: left">
-        <div class="muted" style="font-size: 0.85rem">Answer</div>
-        <div class="row" style="gap: 0.4rem; align-items: center">
-          <span lang="ru" style="font-size: 1.25rem">{{ current.ru }}</span>
-          <SpeakButton :text="current.ru" :slow="true" />
+    <template v-else>
+      <!-- Prompt card: what to say -->
+      <div class="card" style="text-align: center">
+        <div class="muted">
+          {{ modeCfg.target === 'ru' ? 'Say this in Russian' : 'Say this in English' }}
         </div>
-        <div lang="en" class="muted" style="margin-top: 0.25rem">{{ current.en }}</div>
+
+        <div v-if="modeCfg.showRu" lang="ru" style="font-size: 1.5rem; margin: 0.5rem 0">
+          {{ current.ru }}
+        </div>
+        <div v-if="modeCfg.showEn" lang="en" style="font-size: 1.35rem; margin: 0.4rem 0">
+          {{ current.en }}
+        </div>
+        <!-- Interpret mode hides everything until you've answered. -->
+        <p v-if="!modeCfg.showRu && !modeCfg.showEn" class="muted" style="margin: 0.5rem 0">
+          🎧 Listen, then say the English translation — or say "pass".
+        </p>
+
+        <div v-if="modeCfg.promptRu" class="replay-row">
+          <button class="primary replay" @click="replayPrompt">🔊 Replay</button>
+          <button class="replay" @click="replaySlowPrompt">🐢 Slow</button>
+        </div>
       </div>
 
-      <div class="row">
-        <button class="primary" @click="nextQuestion">Next →</button>
-        <button v-if="canRecognize && !result.correct" @click="tryAgain">
-          🎤 Try again
-        </button>
-        <button style="margin-left: auto" @click="quit">Change mode</button>
-      </div>
-    </div>
+      <!-- Microphone / status -->
+      <div class="mic-area">
+        <p v-if="errorMessage" class="feedback bad" style="margin: 0">{{ errorMessage }}</p>
 
-    <button v-else style="justify-self: start" @click="quit">Change mode</button>
+        <template v-if="phase === 'listening'">
+          <p class="listening">🎤 Listening…</p>
+          <p v-if="transcript" class="heard" :lang="modeCfg.recLang.slice(0, 2)">"{{ transcript }}"</p>
+          <button class="primary" @click="finishListening">Done</button>
+        </template>
+
+        <template v-else-if="phase === 'prompt'">
+          <button v-if="canRecognize" class="primary mic" @click="beginListen">🎤 Speak</button>
+          <button @click="skipToVisual">Skip →</button>
+        </template>
+      </div>
+
+      <!-- Result -->
+      <div v-if="phase === 'graded'" class="grid">
+        <p
+          class="feedback"
+          :class="result.correct ? 'good' : 'bad'"
+        >
+          <template v-if="result.correct">✓ Correct!</template>
+          <template v-else-if="result.passed">↷ Passed</template>
+          <template v-else>✗ Not quite</template>
+          <span v-if="!result.passed" class="match-score">· {{ Math.round(result.similarity * 100) }}% letters</span>
+        </p>
+
+        <!-- Per-word breakdown: which words landed (green) and which were missed
+             or misheard (struck through) against what you were asked to say. -->
+        <div v-if="result.diff && result.diff.words.length" class="word-diff" :lang="result.targetLang">
+          <span
+            v-for="(w, i) in result.diff.words"
+            :key="i"
+            :class="w.skip ? '' : w.hit ? 'word-hit' : 'word-miss'"
+          >{{ w.text }}</span>
+        </div>
+        <p v-if="result.diff && result.diff.extra.length" class="muted extra-words" style="margin: 0">
+          Extra heard: {{ result.diff.extra.join(', ') }}
+        </p>
+
+        <p v-if="transcript" class="muted heard" style="margin: 0">
+          Heard: "{{ transcript }}"
+        </p>
+
+        <div class="card" style="text-align: left">
+          <div class="muted" style="font-size: 0.85rem">Answer</div>
+          <div class="row" style="gap: 0.4rem; align-items: center">
+            <span lang="ru" style="font-size: 1.25rem">{{ current.ru }}</span>
+            <SpeakButton :text="current.ru" :slow="true" />
+          </div>
+          <div lang="en" class="muted" style="margin-top: 0.25rem">{{ current.en }}</div>
+        </div>
+
+        <div class="row">
+          <button class="primary" @click="nextQuestion">Next →</button>
+          <button v-if="canRecognize && !result.correct" @click="tryAgain">
+            🎤 Try again
+          </button>
+          <button style="margin-left: auto" @click="quit">Change mode</button>
+        </div>
+      </div>
+
+      <button v-else style="justify-self: start" @click="quit">Change mode</button>
+    </template>
   </section>
 </template>
 

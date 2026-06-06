@@ -217,6 +217,35 @@ function generate(practice, pi, ctx, make) {
 }
 
 /**
+ * Build a visual replacement exercise for a skipped speaking/listening item.
+ * The replacement is a word-bank (phrase) or type (word) exercise covering
+ * exactly the same content, requiring no audio input or output.
+ *
+ * @param {object} skipped  exercise or phrase-like descriptor; must have `ru` and `en`
+ * @param {number} seq      monotonically-increasing counter for unique ids
+ * @returns {object|null}   exercise descriptor, or null if content is missing
+ */
+export function makeVisualReplacement(skipped, seq) {
+  if (!skipped?.ru || !skipped?.en) return null
+  const kind = skipped.content === 'word' ? 'type' : 'wordbank'
+  return {
+    id: `vis${seq}`,
+    practiceIndex: skipped.practiceIndex ?? 0,
+    practiceType: kind === 'wordbank' ? 'translate-phrase' : 'spell-word',
+    dimension: 'identification',
+    level: skipped.level ?? 'learning',
+    content: kind === 'wordbank' ? 'phrase' : 'word',
+    bucket: skipped.bucket ?? 'current',
+    audio: false,
+    kind,
+    targets: skipped.targets ?? [],
+    ru: skipped.ru,
+    en: skipped.en,
+    ...(skipped.note !== undefined ? { note: skipped.note } : {}),
+  }
+}
+
+/**
  * Build the flat exercise list for a session.
  * @param {object} session   from store.startSession (has `.practices`)
  * @param {object} sources

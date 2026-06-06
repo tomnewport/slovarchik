@@ -10,7 +10,7 @@ import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration } from '../stores/settings.js'
 import { STATES } from '../lib/progression.js'
 import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
-import { buildExercises } from '../lib/exerciseBuild.js'
+import { buildExercises, makeVisualReplacement } from '../lib/exerciseBuild.js'
 import {
   initRunner,
   currentExercise,
@@ -174,24 +174,7 @@ function onDispute({ submitted }) {
 // --- Skipping a modality (listening / speaking) -----------------------------
 
 function makeReplacement(skipped) {
-  const practice = {
-    practiceType: 'spell-word',
-    dimension: 'usage',
-    level: 'learning',
-    content: 'word',
-    bucket: 'current',
-    exercises: 1,
-    pool: session?.pools?.current ?? [],
-  }
-  const [rep] = buildExercises({ practices: [practice] }, {
-    words: vocabState.words,
-    phrases: vocabPhrases.value,
-    encounterCount: progress.encounterCount,
-  })
-  if (!rep) return null
-  rep.id = `rep${repSeq++}`
-  rep.practiceIndex = skipped.practiceIndex
-  return rep
+  return makeVisualReplacement(skipped, repSeq++)
 }
 
 function upcomingHas(dimension) {

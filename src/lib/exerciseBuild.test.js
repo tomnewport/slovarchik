@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
+import { buildExercises, makeVisualReplacement, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
@@ -173,6 +173,97 @@ describe('buildExercises', () => {
       )
       expect(ex.length).toBeGreaterThan(0)
     })
+  })
+})
+
+describe('makeVisualReplacement', () => {
+  const phraseEx = {
+    id: 'ex1',
+    practiceIndex: 2,
+    practiceType: 'repeat-phrase',
+    dimension: 'speaking',
+    level: 'learning',
+    content: 'phrase',
+    bucket: 'current',
+    audio: false,
+    kind: 'speak',
+    targets: ['source-key'],
+    ru: 'Привет мир',
+    en: 'Hello world',
+  }
+
+  const wordEx = {
+    id: 'ex2',
+    practiceIndex: 1,
+    practiceType: 'repeat-word',
+    dimension: 'speaking',
+    level: 'mastery',
+    content: 'word',
+    bucket: 'current',
+    audio: false,
+    kind: 'speak',
+    targets: ['word-key'],
+    ru: 'яблоко',
+    en: 'apple',
+    note: 'fruit',
+  }
+
+  it('returns a wordbank exercise for a phrase', () => {
+    const rep = makeVisualReplacement(phraseEx, 0)
+    expect(rep).not.toBeNull()
+    expect(rep.kind).toBe('wordbank')
+    expect(rep.practiceType).toBe('translate-phrase')
+    expect(rep.content).toBe('phrase')
+    expect(rep.ru).toBe('Привет мир')
+    expect(rep.en).toBe('Hello world')
+  })
+
+  it('returns a type exercise for a word', () => {
+    const rep = makeVisualReplacement(wordEx, 0)
+    expect(rep).not.toBeNull()
+    expect(rep.kind).toBe('type')
+    expect(rep.practiceType).toBe('spell-word')
+    expect(rep.content).toBe('word')
+    expect(rep.ru).toBe('яблоко')
+    expect(rep.en).toBe('apple')
+    expect(rep.note).toBe('fruit')
+  })
+
+  it('always has audio: false', () => {
+    expect(makeVisualReplacement(phraseEx, 0).audio).toBe(false)
+    expect(makeVisualReplacement(wordEx, 1).audio).toBe(false)
+  })
+
+  it('preserves practiceIndex from the skipped exercise', () => {
+    expect(makeVisualReplacement(phraseEx, 0).practiceIndex).toBe(2)
+    expect(makeVisualReplacement(wordEx, 0).practiceIndex).toBe(1)
+  })
+
+  it('uses seq to generate a unique id', () => {
+    expect(makeVisualReplacement(phraseEx, 0).id).toBe('vis0')
+    expect(makeVisualReplacement(phraseEx, 7).id).toBe('vis7')
+  })
+
+  it('preserves targets from the skipped exercise', () => {
+    expect(makeVisualReplacement(phraseEx, 0).targets).toEqual(['source-key'])
+    expect(makeVisualReplacement(wordEx, 0).targets).toEqual(['word-key'])
+  })
+
+  it('returns null when ru is missing', () => {
+    expect(makeVisualReplacement({ en: 'hello' }, 0)).toBeNull()
+  })
+
+  it('returns null when en is missing', () => {
+    expect(makeVisualReplacement({ ru: 'привет' }, 0)).toBeNull()
+  })
+
+  it('returns null for null input', () => {
+    expect(makeVisualReplacement(null, 0)).toBeNull()
+  })
+
+  it('defaults content to phrase when not specified', () => {
+    const rep = makeVisualReplacement({ ru: 'Привет мир', en: 'Hello world' }, 0)
+    expect(rep.kind).toBe('wordbank')
   })
 })
 
