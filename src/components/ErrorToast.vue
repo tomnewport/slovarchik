@@ -5,6 +5,13 @@ import { errorToastState, dismissToast } from '../stores/errorToast.js'
 const REPO = 'tomnewport/slovarchik'
 const BASE = `https://github.com/${REPO}/issues/new`
 
+// Build identifiers (injected by Vite — see vite.config.js). Stamping them into
+// every error report is what tells us which build a crash came from, so a
+// report against an already-fixed bug can be spotted as a stale (un-updated
+// PWA) cache rather than a live regression.
+const APP_COMMIT = typeof __APP_COMMIT_HASH__ === 'string' ? __APP_COMMIT_HASH__ : 'unknown'
+const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : 'unknown'
+
 const reportUrl = computed(() => {
   const err = errorToastState.error
   if (!err) return '#'
@@ -20,6 +27,7 @@ const reportUrl = computed(() => {
     stack,
     '```',
     '',
+    `**App version:** \`${APP_COMMIT}\` (built ${APP_BUILD})`,
     `**Browser:** ${navigator?.userAgent ?? 'unknown'}`,
     '',
     '**What were you doing when this happened?**',
