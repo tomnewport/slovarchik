@@ -36,6 +36,7 @@ function chooseCelebration(id) {
 }
 
 const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : null
+const APP_COMMIT = typeof __APP_COMMIT_HASH__ === 'string' ? __APP_COMMIT_HASH__ : null
 
 const router = useRouter()
 const files = ref([])
@@ -262,7 +263,7 @@ onMounted(async () => {
     <!-- Versions -->
     <div class="card">
       <h2>Versions</h2>
-      <p>App code released: <strong>{{ fmtDate(APP_BUILD) }}</strong></p>
+      <p>App code released: <strong>{{ fmtDate(APP_BUILD) }}</strong><template v-if="APP_COMMIT"> ({{ APP_COMMIT }})</template></p>
       <ul class="dicts">
         <li v-for="f in files" :key="f.file">
           {{ f.file }} — updated {{ fmtDate(f.updated) }}
