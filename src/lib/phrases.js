@@ -57,13 +57,20 @@ function stripArticles(seq) {
 /**
  * Grade a phrase answer, ignoring punctuation, case, stress, ё/е and English
  * articles (since Russian has no articles, any choice of article is acceptable).
+ * `target` may be a single string or a list of accepted renderings (a phrase
+ * can have several valid English translations — see `en_alt` in the vocab); the
+ * answer is correct if it matches any of them.
  * @param {string} input
- * @param {string} target
+ * @param {string|string[]} target
  * @returns {boolean}
  */
 export function phraseCorrect(input, target) {
-  const wanted = stripArticles(typingSequence(target))
-  return wanted.length > 0 && stripArticles(typingSequence(input)) === wanted
+  const got = stripArticles(typingSequence(input))
+  const targets = Array.isArray(target) ? target : [target]
+  return targets.some((t) => {
+    const wanted = stripArticles(typingSequence(t))
+    return wanted.length > 0 && got === wanted
+  })
 }
 
 /**

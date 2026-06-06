@@ -236,7 +236,13 @@ export function shapePhrases(words) {
       const id = `${ru}=${en}`
       if (seen.has(id)) continue
       seen.add(id)
-      out.push({ id, ru, en, source: w.key, cefr: w.cefr })
+      // Extra accepted English renderings (word order / optional words) so the
+      // word-bank drill credits a valid translation it doesn't shape the tiles
+      // from. Russian has no articles, so word order often varies in English.
+      const enAlt = Array.isArray(ex?.en_alt)
+        ? ex.en_alt.map((s) => String(s ?? '').trim()).filter(Boolean)
+        : []
+      out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr })
     }
   }
   return out

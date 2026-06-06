@@ -98,6 +98,20 @@ Every `{ ru, en_gb }` pair is flattened (and de-duplicated) into the **Phrases**
 drill bank, so good example sentences improve two drills at once. Mark stress in
 the `ru` sentence.
 
+A usage example may also carry **`en_alt`** — a list of additional English
+renderings that should be accepted in the word-bank (assemble-the-translation)
+drill. Russian has no articles and a freer word order, so one Russian sentence
+often has several equally valid English translations. List the extras here so a
+correct answer isn't graded wrong (the `en_gb` line stays the primary one shown):
+
+```yaml
+usage:
+  - ru: Э́то большо́й го́род.
+    en_gb: This is a big city.
+    en_alt:
+      - This city is big.
+```
+
 ### Gloss-only entries (`learn: false`) and `glossary.yml`
 
 When a learner reads a phrase they can tap any word they haven't learned to see

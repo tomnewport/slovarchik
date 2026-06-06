@@ -38,7 +38,10 @@ function unpick(tile) {
 
 function check() {
   if (checked.value) return
-  wasCorrect.value = phraseCorrect(assembled.value, props.exercise.en)
+  // Accept the primary translation or any curated alternate rendering (#145,
+  // #168, #169) — a phrase often has more than one valid English word order.
+  const accepted = [props.exercise.en, ...(props.exercise.enAlt ?? [])]
+  wasCorrect.value = phraseCorrect(assembled.value, accepted)
   checked.value = true
   playFeedback(wasCorrect.value)
 }

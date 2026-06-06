@@ -106,6 +106,27 @@ describe('buildFormIndex', () => {
     expect(index.get(normToken('него'))?.en).toBe('he')
     expect(index.get(normToken('неё'))?.en).toBe('she')
   })
+
+  it('prefers the word whose dictionary form is the token over an oblique form (#173)', () => {
+    // «дорого́й» is the adjective "expensive" (its headword) but also the
+    // instrumental of the noun «доро́га» "road". The lemma must win.
+    const road = {
+      key: 'дорога=road',
+      headword: 'доро́га',
+      ru: 'дорога',
+      meaning: 'road',
+      extra: { declension: { sg_ins: 'дорого́й' } },
+    }
+    const expensive = {
+      key: 'дорогой=expensive',
+      headword: 'дорого́й',
+      ru: 'дорогой',
+      meaning: 'expensive',
+      extra: { forms: { m: 'дорого́й', f: 'дорога́я' } },
+    }
+    const index = buildFormIndex([road, expensive])
+    expect(index.get(normToken('дорого́й'))?.en).toBe('expensive')
+  })
 })
 
 describe('phraseHintTokens', () => {
