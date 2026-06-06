@@ -111,6 +111,19 @@ describe('recording attempts & states', () => {
     expect(masteredCount.value).toBe(1)
   })
 
+  it('skips an attempt with a missing word key without throwing or persisting', async () => {
+    // Regression for #185 / #190: a falsy key must not reach the IndexedDB
+    // `put` (which would throw an opaque DataError that resurfaces as a global
+    // error toast). It is swallowed, nothing is recorded, and the call resolves.
+    for (const bad of [undefined, null, '']) {
+      await expect(
+        recordAttempt({ word: bad, dimension: 'usage', level: 'learning', correct: true }),
+      ).resolves.toBe('unknown')
+    }
+    expect(Object.keys(state.records)).toHaveLength(0)
+    expect(await idb.getAllProgress()).toHaveLength(0)
+  })
+
   it('caps stored attempts per dimension to keep records bounded', async () => {
     setVocab(makeWords(1, { hasInflections: true }))
     for (let i = 0; i < 25; i++) {

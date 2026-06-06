@@ -206,7 +206,18 @@ function capEvents(rec) {
  * @returns {string} the word's new state
  */
 export async function recordAttempt({ word, dimension, level, correct, ts = Date.now() }) {
-  if (!word) throw new Error(`recordAttempt: word key required, got ${JSON.stringify(word)}`)
+  // A missing word key means there is nothing meaningful to record (e.g. a
+  // phrase exercise with no source word, or a vocab entry that lacks a key).
+  // Skip it gracefully rather than letting it reach the IndexedDB `put`, whose
+  // keyed `progress` store would otherwise throw the opaque
+  //   "Failed to execute 'put' ... key path did not yield a value"
+  // DataError (#185, #190). Throwing here is no better: any such error bubbles
+  // to the global handler and resurfaces as the same "unexpected error" toast
+  // and auto-filed report we are trying to avoid. The caller still advances.
+  if (!word) {
+    console.warn('recordAttempt: skipping attempt with no word key', { dimension, level })
+    return stateOf(word)
+  }
   const rec = ensureRecord(word)
   rec.events.push({ dimension, level, correct: !!correct, ts })
   capEvents(rec)
