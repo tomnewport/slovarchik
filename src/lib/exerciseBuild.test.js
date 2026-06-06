@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING } from './exerciseBuild.js'
+import { buildExercises, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
@@ -118,14 +118,16 @@ describe('buildExercises', () => {
 
   describe('spelling encounter prerequisite', () => {
     it('skips words with too few identification encounters for spell-word', () => {
-      const eligibleKey = words[0].key
-      const encounterCount = (key) => (key === eligibleKey ? MIN_ENCOUNTERS_FOR_SPELLING : 0)
+      // Make exactly MIN_WORDS_FOR_SPELLING words eligible so the pool-size gate
+      // is satisfied, but all other words are locked out.
+      const eligibleKeys = new Set(words.slice(0, MIN_WORDS_FOR_SPELLING).map((w) => w.key))
+      const encounterCount = (key) => (eligibleKeys.has(key) ? MIN_ENCOUNTERS_FOR_SPELLING : 0)
       const ex = buildExercises(
         { practices: [practice('spell-word', { exercises: 5 })] },
         { words, phrases, rng: seededRng(1), encounterCount },
       )
       expect(ex.length).toBeGreaterThan(0)
-      for (const e of ex) expect(e.targets[0]).toBe(eligibleKey)
+      for (const e of ex) expect(eligibleKeys.has(e.targets[0])).toBe(true)
     })
 
     it('produces no spelling exercises when no word has enough encounters', () => {
@@ -148,6 +150,27 @@ describe('buildExercises', () => {
 
     it('applies no encounter filter when encounterCount is not supplied', () => {
       const ex = build([practice('spell-word')])
+      expect(ex.length).toBeGreaterThan(0)
+    })
+
+    it('skips spell-word when fewer than MIN_WORDS_FOR_SPELLING words qualify', () => {
+      // Only MIN_WORDS_FOR_SPELLING - 1 words are eligible → spelling is skipped.
+      const eligibleKeys = new Set(words.slice(0, MIN_WORDS_FOR_SPELLING - 1).map((w) => w.key))
+      const encounterCount = (key) => (eligibleKeys.has(key) ? MIN_ENCOUNTERS_FOR_SPELLING : 0)
+      const ex = buildExercises(
+        { practices: [practice('spell-word', { exercises: 5 })] },
+        { words, phrases, rng: seededRng(1), encounterCount },
+      )
+      expect(ex).toHaveLength(0)
+    })
+
+    it('allows spelling once MIN_WORDS_FOR_SPELLING words qualify', () => {
+      const eligibleKeys = words.slice(0, MIN_WORDS_FOR_SPELLING).map((w) => w.key)
+      const encounterCount = (key) => (eligibleKeys.includes(key) ? MIN_ENCOUNTERS_FOR_SPELLING : 0)
+      const ex = buildExercises(
+        { practices: [practice('spell-word', { exercises: 5 })] },
+        { words, phrases, rng: seededRng(1), encounterCount },
+      )
       expect(ex.length).toBeGreaterThan(0)
     })
   })
