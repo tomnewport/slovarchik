@@ -20,6 +20,7 @@ function getContext() {
     practiceType: props.exercise.practiceType,
     vocabVersion: props.vocabVersion,
     lastSyncedAt: props.lastSyncedAt,
+    commitHash: __APP_COMMIT_HASH__,
   }
 }
 

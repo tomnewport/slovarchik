@@ -30,6 +30,7 @@ const DIMENSION_LABELS = {
  * @param {number|null} [ctx.lastSyncedAt]   Epoch ms of last vocab sync
  * @param {string} [ctx.submitted]   Learner's answer when disputing a grading
  *                                   (the "honesty system" mark-as-correct flow)
+ * @param {string} [ctx.commitHash]  Git commit hash for reproducibility
  */
 export function buildIssueUrl(ctx) {
   const isPhrase = ctx.content === 'phrase' || ctx.kind === 'wordbank'
@@ -59,6 +60,7 @@ export function buildIssueUrl(ctx) {
 
   lines.push(`**Vocab version:** ${ctx.vocabVersion ?? 'unknown'}`)
   lines.push(`**Vocab last synced:** ${syncedDate}`)
+  lines.push(`**App commit:** ${ctx.commitHash ?? 'unknown'}`)
   lines.push('')
   lines.push('## What seems wrong?')
   lines.push('')
