@@ -10,7 +10,7 @@ vi.mock('../lib/feedbackSound.js', async (importOriginal) => {
 })
 
 import * as idb from '../lib/idb.js'
-import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, playSound } from '../lib/feedbackSound.js'
+import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound } from '../lib/feedbackSound.js'
 import {
   settings,
   loadSettings,
@@ -28,7 +28,7 @@ beforeEach(() => {
   idb._resetForTests()
   settings.successSound = SUCCESS_SOUNDS[0].id
   settings.errorSound = NEUTRAL_SOUNDS[0].id
-  settings.celebrationSound = OFF
+  settings.celebrationSound = CELEBRATION_SOUNDS[0].id
   settings.loaded = false
   playSound.mockClear()
 })
@@ -38,7 +38,7 @@ describe('settings store', () => {
     await loadSettings()
     expect(settings.successSound).toBe(SUCCESS_SOUNDS[0].id)
     expect(settings.errorSound).toBe(NEUTRAL_SOUNDS[0].id)
-    expect(settings.celebrationSound).toBe(OFF)
+    expect(settings.celebrationSound).toBe(CELEBRATION_SOUNDS[0].id)
   })
 
   it('persists choices across a reload', async () => {
@@ -63,7 +63,7 @@ describe('settings store', () => {
     await setSuccessSound('not-a-sound')
     expect(settings.successSound).toBe(SUCCESS_SOUNDS[0].id)
     await setCelebrationSound('not-a-sound')
-    expect(settings.celebrationSound).toBe(OFF)
+    expect(settings.celebrationSound).toBe(CELEBRATION_SOUNDS[0].id)
   })
 
   it('plays the success sound on a correct result and the neutral one on a slip', () => {
