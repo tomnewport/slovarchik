@@ -9,6 +9,7 @@ import { useRouter } from 'vue-router'
 import * as progress from '../stores/progress.js'
 import { getAllFiles } from '../lib/idb.js'
 import { syncFromNetwork } from '../stores/vocab.js'
+import { pwaState, initPwa, checkForUpdate } from '../stores/pwa.js'
 import {
   settings,
   loadSettings,
@@ -45,6 +46,7 @@ const importStatus = ref(null) // { ok, message }
 const updating = ref(false)
 const updateStatus = ref(null)
 const resetConfirm = ref(false)
+const checkMsg = ref(null)
 
 const exportText = computed(() => JSON.stringify(progress.exportData(), null, 2))
 const downloadHref = computed(
@@ -61,6 +63,12 @@ function fmtDate(value) {
   if (!value) return 'unknown'
   const d = typeof value === 'number' ? new Date(value) : new Date(String(value))
   return Number.isNaN(d.getTime()) ? 'unknown' : d.toLocaleDateString()
+}
+
+function fmtDateTime(value) {
+  if (!value) return 'unknown'
+  const d = typeof value === 'number' ? new Date(value) : new Date(String(value))
+  return Number.isNaN(d.getTime()) ? 'unknown' : d.toLocaleString()
 }
 
 async function loadFiles() {
@@ -107,18 +115,21 @@ async function updateDictionaries() {
   }
 }
 
-async function reloadApp() {
-  // A bare reload is served the old shell by the still-controlling service
-  // worker. Ask the worker to check for a new version first: if one is
-  // deployed it activates (skipWaiting) and claims the page, and the
-  // controllerchange listener in main.js reloads us onto the fresh build.
-  // Fall through to a plain reload when there's no worker or no update.
-  try {
-    const reg = await navigator.serviceWorker?.getRegistration()
-    if (reg) await reg.update()
-  } catch {
-    // Ignore — a failed update check should still let the user reload.
-  }
+async function onCheckUpdate() {
+  checkMsg.value = null
+  const before = pwaState.updateAvailable
+  await checkForUpdate()
+  // If a new worker was found it activates and the controllerchange listener
+  // in main.js reloads us onto it — so if we're still here either an update is
+  // applying or we were already current.
+  checkMsg.value =
+    pwaState.updateAvailable && !before
+      ? 'Update found — applying…'
+      : "You're on the latest version."
+}
+
+// A waiting worker that hasn't auto-claimed: a plain reload lets it take over.
+function applyUpdate() {
   window.location.reload()
 }
 
@@ -131,6 +142,7 @@ onMounted(async () => {
   if (!progress.state.loaded) await progress.loadProgress()
   await loadSettings()
   await loadFiles()
+  initPwa()
 })
 </script>
 
@@ -271,10 +283,46 @@ onMounted(async () => {
       </div>
     </div>
 
-    <!-- Versions -->
+    <!-- App / PWA status -->
     <div class="card">
-      <h2>Versions</h2>
-      <p>App code released: <strong>{{ fmtDate(APP_BUILD) }}</strong><template v-if="APP_COMMIT"> ({{ APP_COMMIT }})</template></p>
+      <h2>App</h2>
+      <dl class="pwa-status">
+        <div>
+          <dt>Version</dt>
+          <dd>{{ APP_COMMIT ?? 'dev build' }}</dd>
+        </div>
+        <div>
+          <dt>Released</dt>
+          <dd>{{ fmtDateTime(APP_BUILD) }}</dd>
+        </div>
+        <div>
+          <dt>Offline</dt>
+          <dd>
+            <template v-if="!pwaState.supported">Not supported by this browser</template>
+            <template v-else-if="pwaState.offlineReady">Ready — works offline</template>
+            <template v-else>Caching…</template>
+          </dd>
+        </div>
+        <div>
+          <dt>Last checked</dt>
+          <dd>{{ pwaState.lastChecked ? fmtDateTime(pwaState.lastChecked) : 'Never' }}</dd>
+        </div>
+      </dl>
+      <p v-if="pwaState.updateAvailable" class="status">An update is ready to install.</p>
+      <div class="row">
+        <button class="update-app" :disabled="pwaState.checking || !pwaState.supported" @click="onCheckUpdate">
+          {{ pwaState.checking ? 'Checking…' : 'Check for updates' }}
+        </button>
+        <button v-if="pwaState.updateAvailable" class="update-app" @click="applyUpdate">
+          Update now
+        </button>
+        <span v-if="checkMsg" class="status muted">{{ checkMsg }}</span>
+      </div>
+    </div>
+
+    <!-- Dictionaries -->
+    <div class="card">
+      <h2>Dictionaries</h2>
       <ul class="dicts">
         <li v-for="f in files" :key="f.file">
           {{ f.file }} — updated {{ fmtDate(f.updated) }}
@@ -285,7 +333,6 @@ onMounted(async () => {
         <button class="update-dicts" :disabled="updating" @click="updateDictionaries">
           {{ updating ? 'Checking…' : 'Update dictionaries' }}
         </button>
-        <button class="update-app" @click="reloadApp">Reload for latest app</button>
         <span v-if="updateStatus" class="status muted">{{ updateStatus }}</span>
       </div>
     </div>
@@ -326,6 +373,24 @@ onMounted(async () => {
 .dicts {
   margin: 0.5rem 0;
   padding-left: 1.2rem;
+}
+.pwa-status {
+  margin: 0.5rem 0 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+}
+.pwa-status > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.pwa-status dt {
+  color: var(--muted);
+}
+.pwa-status dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 .sound-group {
   margin-top: 0.75rem;
