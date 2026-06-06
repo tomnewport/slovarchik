@@ -141,16 +141,25 @@ async function onDone(result) {
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
+  let firstError = null
   for (const key of ex.targets ?? []) {
-    await progress.recordAttempt({
-      word: key,
-      dimension: ex.dimension,
-      level: ex.level,
-      correct: wrong ? !wrong.has(key) : result.correct,
-    })
+    try {
+      await progress.recordAttempt({
+        word: key,
+        dimension: ex.dimension,
+        level: ex.level,
+        correct: wrong ? !wrong.has(key) : result.correct,
+      })
+    } catch (e) {
+      if (!firstError) firstError = e
+    }
   }
+  // Always advance the session even if a persistence write failed, so the
+  // exercise doesn't freeze. The error is re-thrown afterwards so Vue's global
+  // errorHandler can surface it to the user.
   submit(runner, result.correct)
   await finalizeIfDone()
+  if (firstError) throw firstError
 }
 
 // Honesty system: the learner overrode a "wrong" word-bank grade, claiming a

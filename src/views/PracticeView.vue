@@ -377,19 +377,25 @@ function onPass() {
 // `record` is false for a deliberate "pass": a skip shouldn't count toward the
 // session ratio or be recorded as a missed attempt.
 async function finishItem(record) {
+  let firstError = null
   if (record) {
     score.total += 1
     if (gotCorrect) score.right += 1
     if (activity.value?.recordKey) {
-      await progress.recordAttempt({
-        word: activity.value.recordKey,
-        dimension: activity.value.dimension,
-        level: activity.value.level,
-        correct: gotCorrect,
-      })
+      try {
+        await progress.recordAttempt({
+          word: activity.value.recordKey,
+          dimension: activity.value.dimension,
+          level: activity.value.level,
+          correct: gotCorrect,
+        })
+      } catch (e) {
+        firstError = e
+      }
     }
   }
   later(nextItem, ADVANCE_MS)
+  if (firstError) throw firstError
 }
 
 function endSession() {

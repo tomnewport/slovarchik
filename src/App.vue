@@ -4,6 +4,7 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 
 import RussianKeyboard from './components/RussianKeyboard.vue'
 import ProgressPill from './components/ProgressPill.vue'
+import ErrorToast from './components/ErrorToast.vue'
 
 // The session runner carries its own header (close + progress bar), so the app
 // chrome steps out of the way while a session is in progress.
@@ -25,6 +26,7 @@ const showHeader = computed(() => route.name !== 'session')
   </main>
 
   <RussianKeyboard />
+  <ErrorToast />
 </template>
 
 <style scoped>
