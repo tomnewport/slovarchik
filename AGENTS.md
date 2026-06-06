@@ -84,6 +84,15 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, then `build` on every push.
 - **Routing/nav** → `src/router/index.js` + the `<nav>` in `App.vue`.
 
 See `README.md` for the deeper architecture (vocab loading, offline caching).
+
+## Agent workflow (GitHub issues)
+
+When working from a GitHub issue:
+
+1. **Branch name** — create a branch that reflects the issue, e.g. `fix/123-short-description` or `feat/123-short-description`. Do not use random suffixes.
+2. **Implement** the changes on that branch and push.
+3. **Raise a PR** when the work is complete — do not wait to be asked.
+4. **Reference the issue** in the PR body with `Closes #<issue-number>` so GitHub auto-closes it on merge.
 </content>
 </invoke>
 
