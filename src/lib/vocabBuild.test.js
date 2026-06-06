@@ -1,5 +1,13 @@
 import { describe, it, expect } from 'vitest'
-import { parseKey, buildWords, shapeVocab, shapePhrases, partsOfSpeech } from './vocabBuild.js'
+import {
+  parseKey,
+  buildWords,
+  shapeVocab,
+  shapePhrases,
+  shapeNouns,
+  learnableWords,
+  partsOfSpeech,
+} from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 describe('parseKey', () => {
@@ -38,6 +46,69 @@ words:
     expect(gate.meaning).toBe('gate')
     expect(gate.meaningNote).toContain('doorlike')
     expect(gate.english).toContain('gate')
+  })
+})
+
+describe('learn: false (gloss-only entries)', () => {
+  const text = `
+words:
+  "дом=house":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    en_gb: { standard: house }
+    usage:
+      - { ru: Большо́й дом, en_gb: A big house. }
+    declension:
+      sg_nom: дом
+      sg_gen: до́ма
+      sg_dat: до́му
+      sg_acc: дом
+      sg_ins: до́мом
+      sg_pre: до́ме
+      pl_nom: дома́
+      pl_gen: домо́в
+      pl_dat: дома́м
+      pl_acc: дома́
+      pl_ins: дома́ми
+      pl_pre: дома́х
+  "полдень=noon":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    learn: false
+    en_gb: { standard: noon }
+    usage:
+      - { ru: До полу́дня, en_gb: Until noon. }
+    declension:
+      sg_nom: по́лдень
+      sg_gen: полу́дня
+      sg_dat: полу́дню
+      sg_acc: по́лдень
+      sg_ins: полу́днем
+      sg_pre: полу́дне
+`
+  const words = buildWords([{ pos: 'noun', text }])
+  const noon = words.find((w) => w.key === 'полдень=noon')
+  const house = words.find((w) => w.key === 'дом=house')
+
+  it('flags the entry not-learnable but keeps it in the word list', () => {
+    expect(noon.learnable).toBe(false)
+    expect(house.learnable).toBe(true)
+    expect(words).toHaveLength(2) // still present — buildFormIndex can hint it
+  })
+
+  it('learnableWords drops gloss-only entries', () => {
+    expect(learnableWords(words).map((w) => w.key)).toEqual(['дом=house'])
+  })
+
+  it('excludes gloss-only entries from every drill', () => {
+    expect(shapeVocab(words).map((v) => v.id)).toEqual(['дом=house'])
+    expect(shapeNouns(words).map((n) => n.id)).toEqual(['дом=house'])
+    // …and their usage examples never enter the phrase bank.
+    const phraseRu = shapePhrases(words).map((p) => p.ru)
+    expect(phraseRu).toContain('Большо́й дом')
+    expect(phraseRu).not.toContain('До полу́дня')
   })
 })
 

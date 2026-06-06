@@ -58,9 +58,24 @@ export function wordForms(word) {
 
   const forms = new Set()
   for (const s of raw) {
-    for (const piece of String(s).split(/\s+/)) {
-      const n = normToken(piece)
-      if (n) forms.add(n)
+    // Only single-word forms can ever match a phrase token. Indexing the pieces
+    // of a multi-word form (e.g. the year «две ты́сячи») would leak its component
+    // words as standalone glosses — that's how «две» came to mean "two thousand"
+    // (see #155). Skip anything with internal whitespace.
+    const trimmed = String(s).trim()
+    if (!trimmed || /\s/.test(trimmed)) continue
+    const n = normToken(trimmed)
+    if (n) forms.add(n)
+  }
+  // Third-person personal pronouns take an n- prefix after a preposition
+  // (его→него, ему→нему, её→неё, им→ним, их→них, ими→ними). These surface forms
+  // never appear in the curated tables, so derive them here for hinting only.
+  // The rule is purely phonological: oblique forms beginning with е/и gain a
+  // leading н. Restricted to `pers` so the indeclinable possessives его/её/их
+  // don't shadow «него»/«неё» with "his"/"her".
+  if (word?.pos === 'pronoun' && extra.type === 'pers') {
+    for (const f of [...forms]) {
+      if (/^[еи]/.test(f)) forms.add(`н${f}`)
     }
   }
   return forms

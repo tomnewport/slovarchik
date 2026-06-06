@@ -30868,6 +30868,25 @@ words:
       pl_acc: полы́
       pl_ins: пола́ми
       pl_pre: пола́х
+  "полдень=noon":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: noon (twelve o'clock in the daytime)
+    usage:
+      - ru: За́втра я бу́ду спать до полу́дня.
+        en_gb: Tomorrow I will sleep until noon.
+      - ru: Мы встре́тимся в по́лдень.
+        en_gb: We will meet at noon.
+    declension:
+      sg_nom: по́лдень
+      sg_gen: полу́дня
+      sg_dat: полу́дню
+      sg_acc: по́лдень
+      sg_ins: полу́днем
+      sg_pre: полу́дне
   "поле=field":
     cefr_level: A2
     gender: n

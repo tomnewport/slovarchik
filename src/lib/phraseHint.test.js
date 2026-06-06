@@ -50,6 +50,36 @@ describe('wordForms', () => {
     expect(forms.has('арестует')).toBe(true)
     expect(forms.has('арестовала')).toBe(true)
   })
+
+  it('does not index the component words of a multi-word form (#155)', () => {
+    // The year «две ты́сячи» must not leak «две»/«ты́сячи» as standalone glosses.
+    const year = {
+      key: 'две тысячи=2000',
+      headword: 'две ты́сячи',
+      ru: 'две тысячи',
+      meaning: '2000',
+      forms: {},
+      extra: { type: 'year', accented: 'две ты́сячи' },
+    }
+    const forms = wordForms(year)
+    expect(forms.has('две')).toBe(false)
+    expect(forms.has('тысячи')).toBe(false)
+  })
+
+  it('derives the n-prefixed forms of third-person personal pronouns', () => {
+    const on = {
+      pos: 'pronoun',
+      headword: 'он',
+      ru: 'он',
+      meaning: 'he',
+      forms: {},
+      extra: { type: 'pers', forms: { gen: 'его́', dat: 'ему́', ins: 'им', pre: 'нём' } },
+    }
+    const forms = wordForms(on)
+    expect(forms.has('него')).toBe(true) // genitive/accusative after a preposition
+    expect(forms.has('нему')).toBe(true) // dative
+    expect(forms.has('ним')).toBe(true) // instrumental
+  })
 })
 
 describe('buildFormIndex', () => {
@@ -64,6 +94,17 @@ describe('buildFormIndex', () => {
   it('skips entries with no English gloss to show', () => {
     const index = buildFormIndex([{ key: 'x', headword: 'икс', ru: 'икс', meaning: '' }])
     expect(index.size).toBe(0)
+  })
+
+  it('glosses feminine «две» as "two", not the year (#155)', () => {
+    const index = buildFormIndex(loadFixtureWords())
+    expect(index.get(normToken('две'))?.en).toBe('two')
+  })
+
+  it('glosses n-prefixed pronoun forms from the bundled vocab', () => {
+    const index = buildFormIndex(loadFixtureWords())
+    expect(index.get(normToken('него'))?.en).toBe('he')
+    expect(index.get(normToken('неё'))?.en).toBe('she')
   })
 })
 

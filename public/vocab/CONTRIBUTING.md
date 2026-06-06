@@ -67,6 +67,7 @@ cells, conjugations, `forms`, `accented`). The bare key stays unaccented.
 | `accented`    | usually  | The stressed dictionary (headword) form. Required wherever there's no declension table to derive it from. |
 | `usage`       | no       | Example sentences — see below. These also feed the **Phrases** drill. |
 | `collections` | no       | Free-form topic tags (`[travel, daily life]`) used for grouping/skills. |
+| `learn`       | no       | Set `false` to make a **gloss-only** entry: kept in the dictionary so phrase hints can translate it, but excluded from every drill, the phrase bank and the batch/progress engine. Defaults to `true`. See below. |
 
 ### `en_gb` — meaning and accepted answers
 
@@ -96,6 +97,38 @@ usage:
 Every `{ ru, en_gb }` pair is flattened (and de-duplicated) into the **Phrases**
 drill bank, so good example sentences improve two drills at once. Mark stress in
 the `ru` sentence.
+
+### Gloss-only entries (`learn: false`) and `glossary.yml`
+
+When a learner reads a phrase they can tap any word they haven't learned to see
+its meaning. Those hints resolve through a form index built from **every**
+dictionary entry — so a word can only be hinted if it has an entry.
+
+Example sentences naturally use words beyond the curriculum. To keep every
+tappable word translatable without dragging those words into the drills, add a
+**gloss-only** entry with `learn: false`:
+
+```yaml
+"полдень=noon":
+  cefr_level: B1
+  learn: false
+  en_gb: { standard: noon (twelve o'clock in the daytime) }
+  accented: по́лдень        # plus any inflected forms that occur, under `forms:`
+```
+
+A `learn: false` entry is indexed for hints but filtered out of the vocab,
+declension and phrase drills and the batch/progress engine (see `learnableWords`
+in `vocabBuild.js`). It needs only the usual `cefr_level` + `en_gb`, an
+`accented`/`forms` entry for each surface form that appears, and **no** full
+declension table.
+
+The bulk of these live in **[`glossary.yml`](glossary.yml)** — an
+auto-generated, alphabetised bank of gloss-only entries (its own `glossary`
+"part of speech") covering the long tail of example-sentence words. The test
+`glossCoverage.test.js` **fails if any phrase-bank word has no gloss**, so when
+you add a usage example that introduces a new word, give that word an entry
+(ideally in the right per-POS file, or as a gloss-only entry in `glossary.yml`).
+Run `node scripts/coverage-gloss.js` to list any gaps.
 
 ---
 
