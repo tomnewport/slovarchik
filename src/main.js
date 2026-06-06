@@ -27,6 +27,24 @@ window.addEventListener('error', (event) => {
   raiseError(event.error)
 })
 
+// Auto-reload when an updated service worker takes control, so a deployed fix
+// actually reaches an already-open PWA instead of running stale cached code
+// until the next cold start (#190). registerSW.js (injected by vite-plugin-pwa)
+// only registers the worker; the Workbox SW uses skipWaiting + clientsClaim, so
+// a new version activates and claims this page — we just have to reload on that.
+if ('serviceWorker' in navigator) {
+  // Only an *update* should trigger a reload. On a first-ever visit the page is
+  // not yet controlled, so the worker claiming it for the first time is not a
+  // stale-code swap and must not bounce the user.
+  const hadController = Boolean(navigator.serviceWorker.controller)
+  let reloading = false
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloading || !hadController) return
+    reloading = true
+    window.location.reload()
+  })
+}
+
 app.use(router).mount('#app')
 
 // Kick off the cache load + (online) refresh; views react as words arrive.

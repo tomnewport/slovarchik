@@ -107,7 +107,18 @@ async function updateDictionaries() {
   }
 }
 
-function reloadApp() {
+async function reloadApp() {
+  // A bare reload is served the old shell by the still-controlling service
+  // worker. Ask the worker to check for a new version first: if one is
+  // deployed it activates (skipWaiting) and claims the page, and the
+  // controllerchange listener in main.js reloads us onto the fresh build.
+  // Fall through to a plain reload when there's no worker or no update.
+  try {
+    const reg = await navigator.serviceWorker?.getRegistration()
+    if (reg) await reg.update()
+  } catch {
+    // Ignore — a failed update check should still let the user reload.
+  }
   window.location.reload()
 }
 
