@@ -88,4 +88,14 @@ describe('buildIssueUrl', () => {
     const { body } = parseUrl(buildIssueUrl({ ru: 'кот', submitted: '   ' }))
     expect(body).toContain('Please describe the issue here')
   })
+
+  it('includes the commit hash in the body', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', kind: 'type', commitHash: 'abc1234' }))
+    expect(body).toContain('**App commit:** abc1234')
+  })
+
+  it('shows "unknown" when commitHash is absent', () => {
+    const { body } = parseUrl(buildIssueUrl({ ru: 'кот', kind: 'type' }))
+    expect(body).toContain('**App commit:** unknown')
+  })
 })

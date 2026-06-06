@@ -177,6 +177,7 @@ function onDispute({ submitted }) {
     submitted,
     vocabVersion: vocabState.vocabVersion,
     lastSyncedAt: vocabState.lastSyncedAt,
+    commitHash: __APP_COMMIT_HASH__,
   })
 }
 
