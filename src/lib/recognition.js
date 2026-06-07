@@ -4,6 +4,7 @@
 // Edge, behind the `webkit` prefix, and online) so every entry point degrades
 // to a safe no-op when it's missing.
 import { typingSequence, phraseTokens } from './phrases.js'
+import { foldYo } from './text.js'
 import { cardinalNominative } from './numerals.js'
 
 /**
@@ -41,16 +42,16 @@ export function recognitionSupported() {
   )
 }
 
-/** Content tokens of a spoken string, normalised the same way typed answers are
- * (stress stripped, lowercased, ё→е, punctuation dropped). */
+/** Content tokens of a spoken string, normalised for comparison (stress
+ * stripped, lowercased, punctuation dropped, ё folded onto е). */
 function tokens(text) {
-  return typingSequence(text).split(' ').filter(Boolean)
+  return foldYo(typingSequence(text)).split(' ').filter(Boolean)
 }
 
 /** Just the letters of an utterance — normalised and with spaces removed — so
  * comparisons count letters, not word boundaries the recogniser may guess. */
 function lettersOnly(text) {
-  return typingSequence(text).replace(/\s+/g, '')
+  return foldYo(typingSequence(text)).replace(/\s+/g, '')
 }
 
 /**
@@ -196,7 +197,7 @@ export function wordDiff(transcript, target) {
   for (const t of tokens(expanded)) counts.set(t, (counts.get(t) ?? 0) + 1)
 
   const words = phraseTokens(target).map((display) => {
-    const norm = typingSequence(display)
+    const norm = foldYo(typingSequence(display))
     if (!norm) return { text: display, hit: true, skip: true } // pure punctuation
     const have = counts.get(norm) ?? 0
     if (have > 0) {

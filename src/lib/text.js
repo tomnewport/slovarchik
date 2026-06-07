@@ -14,15 +14,23 @@ export function stripStress(value) {
 }
 
 /**
+ * Fold ё onto е. The two letters are written interchangeably (ё is routinely
+ * printed as е in everyday Russian), so for *comparison* — grading what a
+ * learner typed or said — they're treated as equal. Display and pronunciation
+ * keep the original ё; only the matching key folds.
+ * @param {string} value
+ * @returns {string}
+ */
+export function foldYo(value) {
+  return String(value ?? '').replace(/ё/g, 'е')
+}
+
+/**
  * Normalise an answer for comparison: drop stress marks, trim, lowercase,
  * collapse whitespace and treat ё/е as equivalent (a common typing slip).
  * @param {string} value
  * @returns {string}
  */
 export function normalize(value) {
-  return stripStress(value)
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, ' ')
-    .replace(/ё/g, 'е')
+  return foldYo(stripStress(value).trim().toLowerCase().replace(/\s+/g, ' '))
 }

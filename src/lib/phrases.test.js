@@ -31,8 +31,8 @@ describe('phraseTokens', () => {
 })
 
 describe('typingSequence', () => {
-  it('drops stress, punctuation and case, and folds ё→е', () => {
-    expect(typingSequence('Всё хорошо́!')).toBe('все хорошо')
+  it('drops stress, punctuation and case but preserves ё', () => {
+    expect(typingSequence('Всё хорошо́!')).toBe('всё хорошо')
   })
   it('collapses whitespace', () => {
     expect(typingSequence('I  go   to school')).toBe('i go to school')
@@ -70,6 +70,11 @@ describe('phraseCorrect', () => {
   it('rejects an answer that matches none of the allowed renderings', () => {
     expect(phraseCorrect('the sky is blue', ['this city is big', 'this is a big city'])).toBe(false)
   })
+  it('treats ё and е as interchangeable in either direction', () => {
+    expect(phraseCorrect('все', 'всё')).toBe(true)
+    expect(phraseCorrect('всё', 'все')).toBe(true)
+    expect(phraseCorrect('у нее нет пальто', 'У неё нет пальто́.')).toBe(true)
+  })
 })
 
 describe('nextChar', () => {
@@ -85,6 +90,9 @@ describe('nextChar', () => {
   })
   it('returns empty once complete', () => {
     expect(nextChar('дом', 'дом')).toBe('')
+  })
+  it('walks the learner through ё rather than folding it to е', () => {
+    expect(nextChar('всё', 'вс')).toBe('ё')
   })
 })
 
