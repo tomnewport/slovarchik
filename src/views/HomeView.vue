@@ -56,17 +56,11 @@ const learningDone = computed(() => learningProgress.value.filter((w) => w.done)
 const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
 
 const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
-const DIM_LABEL = { identification: 'I', usage: 'U', hearing: 'H', speaking: 'S' }
+const MASTERY_DIMS = ['identification', 'usage', 'hearing']
+const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️' }
 
-const topLearningWords = computed(() =>
-  learningProgress.value
-    .map((w) => ({
-      ...w,
-      lastAt: lastAttemptAt(progress.records[w.word]?.events ?? []) ?? 0,
-    }))
-    .filter((w) => w.lastAt > 0)
-    .sort((a, b) => b.lastAt - a.lastAt)
-    .slice(0, 3)
+function buildWordList(batchWords, level, dims) {
+  return batchWords
     .map((w) => {
       const events = progress.records[w.word]?.events ?? []
       const { ru, en } = parseKey(w.word)
@@ -75,14 +69,22 @@ const topLearningWords = computed(() =>
         ru,
         en,
         done: w.done,
-        dims: LEARNING_DIMS.map((d) => ({
+        lastAt: lastAttemptAt(events) ?? 0,
+        dims: dims.map((d) => ({
           label: DIM_LABEL[d],
           name: d,
-          ...dimensionProgress(events, 'learning', d),
+          ...dimensionProgress(events, level, d),
         })),
       }
-    }),
-)
+    })
+    .sort((a, b) => {
+      if (a.done !== b.done) return a.done ? 1 : -1
+      return b.lastAt - a.lastAt
+    })
+}
+
+const allLearningWords = computed(() => buildWordList(learningProgress.value, 'learning', LEARNING_DIMS))
+const allMasteryWords = computed(() => buildWordList(masteryProgress.value, 'mastery', MASTERY_DIMS))
 
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
@@ -139,8 +141,8 @@ const FOCUSED = [
             />
           </div>
         </div>
-        <div v-if="topLearningWords.length" class="top-words">
-          <div v-for="w in topLearningWords" :key="w.key" class="word-row">
+        <div v-if="allLearningWords.length" class="word-scroll">
+          <div v-for="w in allLearningWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
             <div class="word-label">
               <span class="word-ru">{{ w.ru }}</span>
               <span class="word-en muted">{{ w.en }}</span>
@@ -167,6 +169,23 @@ const FOCUSED = [
               class="batch-fill master-fill"
               :style="{ width: (masteryBatch.size ? (masteryDone / masteryBatch.size) * 100 : 0) + '%' }"
             />
+          </div>
+        </div>
+        <div v-if="masteryBatch && allMasteryWords.length" class="word-scroll">
+          <div v-for="w in allMasteryWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
+            <div class="word-label">
+              <span class="word-ru">{{ w.ru }}</span>
+              <span class="word-en muted">{{ w.en }}</span>
+            </div>
+            <div class="word-dims">
+              <span
+                v-for="d in w.dims"
+                :key="d.name"
+                class="dim-pip"
+                :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
+                :title="d.name"
+              >{{ d.label }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -282,12 +301,19 @@ const FOCUSED = [
 .master-fill {
   background: var(--gold);
 }
-.top-words {
+.word-scroll {
   display: grid;
   gap: 0.45rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--border);
   margin-top: 0.1rem;
+  max-height: 13rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+.word-done .word-ru,
+.word-done .word-en {
+  opacity: 0.4;
 }
 .word-row {
   display: flex;
@@ -321,28 +347,21 @@ const FOCUSED = [
   flex-shrink: 0;
 }
 .dim-pip {
-  font-size: 0.65rem;
-  font-weight: 700;
-  width: 1.2rem;
-  height: 1.2rem;
+  font-size: 0.9rem;
+  width: 1.4rem;
+  height: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
 }
 .dim-met {
-  background: var(--good);
-  color: #0b1021;
+  opacity: 1;
 }
 .dim-partial {
-  background: transparent;
-  color: var(--good);
-  border: 1px solid var(--good);
-  opacity: 0.7;
+  opacity: 0.55;
 }
 .dim-empty {
-  background: var(--bg-soft);
-  color: var(--muted);
+  opacity: 0.2;
 }
 .standard h2 {
   margin: 0 0 0.25rem;
