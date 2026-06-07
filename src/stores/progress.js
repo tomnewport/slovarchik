@@ -270,15 +270,14 @@ export function getBatchOptions(level = 'learning', rng = Math.random) {
     words: vocabWords(),
     stateOf: (w) => stateOf(w.key),
     level,
-    learnedCount: learnedCount.value,
     rng,
   })
 }
 
 /**
  * Randomly pick one of the available mastery batch options and commit it.
- * Returns the committed option, or null if mastery is not yet unlocked or no
- * eligible words remain.
+ * Returns the committed option, or null if no full mastery batch can be formed
+ * (fewer than MASTERY_BATCH_SIZE learned-but-unmastered words remain).
  */
 export async function autoCommitMasteryBatch(rng = Math.random) {
   const options = getBatchOptions('mastery', rng)
@@ -286,6 +285,20 @@ export async function autoCommitMasteryBatch(rng = Math.random) {
   const pick = options[Math.floor(rng() * options.length)]
   await commitBatch(pick)
   return pick
+}
+
+/**
+ * Ensure a mastery batch is active and being worked on, assembling a fresh one
+ * as soon as enough words are learned — without waiting for the previous batch's
+ * completion to be celebrated. If the active batch is already complete (every
+ * word mastered) it is cleared first so a new one can take its place.
+ * @returns {Promise<object|null>} the newly committed batch, or null if none was
+ *   committed (one is still in progress, or too few words are ready to master).
+ */
+export async function ensureMasteryBatch(rng = Math.random) {
+  if (state.mastery && !batchComplete('mastery')) return null
+  if (state.mastery) await advanceBatch('mastery')
+  return autoCommitMasteryBatch(rng)
 }
 
 /** Commit a chosen batch as the current batch for its level; persist it. */
@@ -356,7 +369,27 @@ export function dimensionWeakness() {
   return weakness
 }
 
-/** Words in the current batches that have not yet reached their target. */
+/**
+ * How well a word is understood, lowest (worst) first. Counts the learning-level
+ * dimension criteria it meets and adds its recent accuracy as a tiebreaker, so
+ * the least-understood words sort to the front of the current pool.
+ */
+function understanding(key) {
+  const evs = events(key)
+  let met = 0
+  for (const dim of dimensionsForLevel('learning')) {
+    if (dimensionProgress(evs, 'learning', dim).met) met++
+  }
+  const recent = evs.slice(-WEAKNESS_WINDOW)
+  const accuracy = recent.length ? recent.filter((e) => e.correct).length / recent.length : 0
+  return met + accuracy
+}
+
+/**
+ * Words in the current batches that have not yet reached their target, ordered
+ * worst-understood first. The exercise builder front-biases the current bucket,
+ * so this ordering makes the half-learn time favour the worst-understood word.
+ */
 function currentPool() {
   const out = []
   for (const level of ['learning', 'mastery']) {
@@ -369,18 +402,27 @@ function currentPool() {
   if (out.length === 0) {
     for (const k of Object.keys(state.records)) if (stateOf(k) === 'learning') out.push(k)
   }
-  return [...new Set(out)]
+  return [...new Set(out)].sort((a, b) => understanding(a) - understanding(b))
 }
 
-/** At-risk + lost words — the reinforcement priorities. */
+/**
+ * At-risk + lost words — the reinforcement priorities. Restricted to words
+ * currently learned or mastered: the refresh half of a session is for retaining
+ * words already known, not for words still being learned.
+ */
 function reinforcePool() {
-  return [...new Set([...atRisk.value, ...lost.value])]
+  return [...new Set([...atRisk.value, ...lost.value])].filter(
+    (k) => rank(stateOf(k)) >= rank('learned'),
+  )
 }
 
-/** Non-unknown words ordered by how long since they were last tested. */
+/**
+ * Learned/mastered words ordered by how long since they were last tested. Like
+ * {@link reinforcePool}, this refresh pool excludes words still being learned.
+ */
 function untestedPool() {
   return Object.keys(state.records)
-    .filter((k) => stateOf(k) !== 'unknown')
+    .filter((k) => rank(stateOf(k)) >= rank('learned'))
     .sort((a, b) => (lastAttemptAt(events(a)) ?? 0) - (lastAttemptAt(events(b)) ?? 0))
 }
 
@@ -401,9 +443,9 @@ function masteryBatchActive() {
  * Start a session of a given type. Returns the Phase-1 session plan (practices
  * tagged with their 25/25/50 bucket and weighted to the weakest dimension),
  * augmented with the candidate word pool for each bucket so the session runner
- * (Phase 3) can draw exercises. The 25% at-risk + 25% untested split realises
- * the "half reinforce" half of #79's time split; the 50% current batch is the
- * "half learn" half.
+ * (Phase 3) can draw exercises. The 25% at-risk + 25% untested split is the 50%
+ * "refresh" half — both pools draw only from learned/mastered words; the 50%
+ * current batch is the "learn" half, ordered worst-understood first.
  */
 export function startSession({ type = 'standard', size, focusKeys = null } = {}, rng = Math.random) {
   // Restrict to learning-level practices when no mastery batch is active —

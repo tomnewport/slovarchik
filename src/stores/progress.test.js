@@ -21,6 +21,7 @@ import {
   dimensionWeakness,
   encounterCount,
   autoCommitMasteryBatch,
+  ensureMasteryBatch,
   startSession,
   loadProgress,
   resetProgress,
@@ -214,13 +215,24 @@ describe('batches', () => {
     expect(state.learning).toBe(null)
   })
 
-  it('gates mastery batch options behind 100 learned words', async () => {
-    setVocab(makeWords(5, { hasInflections: true }))
-    // No words learned yet → no mastery options regardless.
+  it('offers no mastery options until a full batch of learned words exists', async () => {
+    const words = makeWords(15, { hasInflections: true })
+    setVocab(words)
+    // Nine learned-but-unmastered words is not yet a full mastery batch.
+    for (const w of words.slice(0, 9)) await learn(w.key)
     expect(getBatchOptions('mastery', seededRng(2))).toEqual([])
   })
 
-  it('autoCommitMasteryBatch returns null when mastery is locked', async () => {
+  it('offers mastery options once a full batch of words is learned', async () => {
+    const words = makeWords(15, { hasInflections: true })
+    setVocab(words)
+    for (const w of words.slice(0, 10)) await learn(w.key)
+    const options = getBatchOptions('mastery', seededRng(2))
+    expect(options.length).toBeGreaterThan(0)
+    expect(options[0].level).toBe('mastery')
+  })
+
+  it('autoCommitMasteryBatch returns null when too few words are learned', async () => {
     setVocab(makeWords(5, { hasInflections: true }))
     const result = await autoCommitMasteryBatch(seededRng(3))
     expect(result).toBeNull()
@@ -228,14 +240,55 @@ describe('batches', () => {
   })
 
   it('autoCommitMasteryBatch picks and commits a random mastery batch', async () => {
-    const words = makeWords(120, { hasInflections: true })
+    const words = makeWords(20, { hasInflections: true })
     setVocab(words)
-    // Learn (and master for uninflected-equivalent) enough words to unlock mastery.
-    for (const w of words.slice(0, 100)) await learn(w.key)
+    // Learning a full batch's worth of words is enough to start mastering.
+    for (const w of words.slice(0, 10)) await learn(w.key)
     const result = await autoCommitMasteryBatch(seededRng(4))
     expect(result).not.toBeNull()
     expect(result.level).toBe('mastery')
     expect(state.mastery).toEqual(result)
+  })
+
+  it('ensureMasteryBatch assembles one as soon as enough words are learned', async () => {
+    const words = makeWords(20, { hasInflections: true })
+    setVocab(words)
+    // Too few learned yet → nothing committed.
+    for (const w of words.slice(0, 9)) await learn(w.key)
+    expect(await ensureMasteryBatch(seededRng(5))).toBeNull()
+    expect(state.mastery).toBeNull()
+    // The tenth learned word tips it over: a batch is assembled immediately,
+    // without waiting for any learning batch to complete.
+    await learn(words[9].key)
+    const batch = await ensureMasteryBatch(seededRng(5))
+    expect(batch).not.toBeNull()
+    expect(state.mastery).toEqual(batch)
+  })
+
+  it('ensureMasteryBatch leaves an in-progress mastery batch untouched', async () => {
+    const words = makeWords(20, { hasInflections: true })
+    setVocab(words)
+    for (const w of words.slice(0, 10)) await learn(w.key)
+    const first = await ensureMasteryBatch(seededRng(5))
+    expect(first).not.toBeNull()
+    // It still has unmastered words, so a second call is a no-op.
+    expect(await ensureMasteryBatch(seededRng(6))).toBeNull()
+    expect(state.mastery).toEqual(first)
+  })
+
+  it('ensureMasteryBatch refreshes a completed batch without waiting for celebration', async () => {
+    const words = makeWords(30, { hasInflections: true })
+    setVocab(words)
+    for (const w of words.slice(0, 20)) await learn(w.key)
+    const first = await ensureMasteryBatch(seededRng(5))
+    expect(first).not.toBeNull()
+    // Master every word in the active batch so it is complete.
+    for (const key of first.words) await master(key)
+    expect(batchComplete('mastery')).toBe(true)
+    // A fresh batch is assembled from the remaining learned-but-unmastered words.
+    const next = await ensureMasteryBatch(seededRng(7))
+    expect(next).not.toBeNull()
+    expect(next.words.some((k) => first.words.includes(k))).toBe(false)
   })
 })
 

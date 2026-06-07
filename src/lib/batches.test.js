@@ -3,7 +3,6 @@ import {
   CEFR_ORDER,
   LEARNING_BATCH_SIZE,
   MASTERY_BATCH_SIZE,
-  MASTERY_UNLOCK_AT,
   BATCH_OPTIONS,
   BATCH_COLORS,
   GLUE_POS,
@@ -136,22 +135,22 @@ describe('buildBatchOptions', () => {
     expect(options[0].level).toBe('learning')
   })
 
-  it('returns no mastery options until 100 words are learned', () => {
-    const all = words('an', 20, 'A1', ['animals'])
+  it('offers no mastery options until a full batch of learned words exists', () => {
+    // Fewer than MASTERY_BATCH_SIZE learned-but-unmastered words → nothing yet.
+    const all = words('an', MASTERY_BATCH_SIZE - 1, 'A1', ['animals'])
     const learned = Object.fromEntries(all.map((w) => [w.key, 'learned']))
     expect(
-      buildBatchOptions({ words: all, stateOf: stateOf(learned), level: 'mastery', learnedCount: 99, rng: seededRng(8) }),
+      buildBatchOptions({ words: all, stateOf: stateOf(learned), level: 'mastery', rng: seededRng(8) }),
     ).toEqual([])
   })
 
-  it('unlocks mastery options at exactly 100 learned words', () => {
-    const all = words('an', 20, 'A1', ['animals'])
+  it('offers mastery options once MASTERY_BATCH_SIZE words are learned', () => {
+    const all = words('an', MASTERY_BATCH_SIZE, 'A1', ['animals'])
     const learned = Object.fromEntries(all.map((w) => [w.key, 'learned']))
     const options = buildBatchOptions({
       words: all,
       stateOf: stateOf(learned),
       level: 'mastery',
-      learnedCount: MASTERY_UNLOCK_AT,
       rng: seededRng(9),
     })
     expect(options.length).toBeGreaterThan(0)
@@ -206,7 +205,6 @@ describe('buildBatchOptions', () => {
       words: [...mainWords, ...glueWords],
       stateOf: stateOf(states),
       level: 'mastery',
-      learnedCount: MASTERY_UNLOCK_AT,
       rng: seededRng(13),
     })
     expect(options.length).toBeGreaterThan(0)
