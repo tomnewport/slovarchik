@@ -99,7 +99,7 @@ describe('RussianKeyboard', () => {
     await wrapper.find('[aria-label="Toggle hint"]').trigger('click')
     let lit = wrapper.findAll('.kbd-key.hint').map((k) => k.text())
     expect(lit).toContain('д') // the next letter to type …
-    expect(lit).toHaveLength(3) // … plus two decoys
+    expect(lit).toHaveLength(5) // … plus four decoys
 
     // Typing the first letter advances the hint to the next one.
     input.value = 'д'

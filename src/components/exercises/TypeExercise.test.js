@@ -1,6 +1,9 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import TypeExercise from './TypeExercise.vue'
+import { keyboard, resetHint } from '../../stores/keyboard.js'
+
+afterEach(() => resetHint())
 
 const exercise = {
   id: 'ex0',
@@ -25,7 +28,33 @@ describe('TypeExercise', () => {
 
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')).toBeTruthy()
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+    // Correct without touching the hint → counts double, with a 🔥 burst.
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true })
+  })
+
+  it('fires a burst and counts double when correct without the hint', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('дом')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(true)
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true })
+  })
+
+  it('does not count double (or burst) once the hint has been switched on', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    keyboard.on = true // learner reaches for the hint
+    await wrapper.vm.$nextTick()
+
+    await wrapper.find('input[lang="ru"]').setValue('дом')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false })
   })
 
   it('offers a retry on the first wrong answer, then reveals on the second', async () => {
@@ -42,7 +71,7 @@ describe('TypeExercise', () => {
     expect(wrapper.text()).toContain('Answer:')
 
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false, double: false })
   })
 
   it('accepts an alsoRu synonym as correct', async () => {

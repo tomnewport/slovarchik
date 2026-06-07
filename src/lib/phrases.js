@@ -86,19 +86,21 @@ export function nextChar(target, typed) {
 
 /**
  * Keys to highlight on the guided keyboard: the correct next letter plus
- * `extra` random decoys drawn from `letters`. A space hint stands alone since
- * word boundaries are obvious. `rng` is injectable for deterministic tests.
+ * `extra` random decoys. The space is just another key — it can be the correct
+ * next key (a word boundary) or one of the decoys — so it joins `letters` in the
+ * candidate pool and the spacebar lights up like any other hint. `rng` is
+ * injectable for deterministic tests.
  * @param {string} next
  * @param {string[]} letters
  * @param {number} [extra]
  * @param {() => number} [rng]
  * @returns {string[]}
  */
-export function hintKeys(next, letters, extra = 2, rng = Math.random) {
+export function hintKeys(next, letters, extra = 4, rng = Math.random) {
   if (!next) return []
-  if (next === ' ') return [' ']
+  const pool = [...letters, ' ']
   const decoys = shuffle(
-    letters.filter((l) => l !== next),
+    pool.filter((l) => l !== next),
     rng,
   ).slice(0, Math.max(0, extra))
   return shuffle([next, ...decoys], rng)

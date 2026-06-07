@@ -124,8 +124,13 @@ function backspace() {
 function enter() {
   const el = target.value
   if (!el) return
-  // Submit the surrounding form if there is one (the typing quiz checks here).
-  el.closest('form')?.requestSubmit?.()
+  // Give the focused field a chance to handle Enter itself — an inflection table
+  // advances to its next empty box (and cancels the event). If nothing cancels
+  // it, fall back to submitting the surrounding form (the typing quiz checks).
+  const handled = !el.dispatchEvent(
+    new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, cancelable: true }),
+  )
+  if (!handled) el.closest('form')?.requestSubmit?.()
 }
 
 function hide() {

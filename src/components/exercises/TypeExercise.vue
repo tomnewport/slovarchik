@@ -2,13 +2,14 @@
 // Usage / dictation exercise: spell the Russian with the hintable on-screen
 // keyboard. Covers spell-word, spell-phrase and dictation (where the prompt is
 // heard, not seen). Hints never penalise — grading only looks at the answer.
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 import { phraseCorrect, typingSequence } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
-import { resetHint } from '../../stores/keyboard.js'
+import { keyboard, resetHint } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
+import CelebrationBurst from '../CelebrationBurst.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -19,6 +20,18 @@ const wasCorrect = ref(false)
 // On a first wrong answer offer one retry before revealing. Once the learner
 // has retried (or they got it right), this stays true so we don't loop.
 const retried = ref(false)
+// Whether the learner switched the keyboard hint on at any point this exercise.
+// A correct answer with the hint untouched counts double (and gets a little 🔥).
+const hintUsed = ref(false)
+const showFire = ref(false)
+watch(
+  () => keyboard.on,
+  (on) => {
+    if (on) hintUsed.value = true
+  },
+)
+// Correct and never reached for the hint — the answer the learner truly knew.
+const double = computed(() => wasCorrect.value && !hintUsed.value)
 
 const answer = computed(() => typingSequence(props.exercise.ru))
 
@@ -34,10 +47,11 @@ function check() {
   }
   checked.value = true
   playFeedback(wasCorrect.value)
+  if (double.value) showFire.value = true
 }
 
 function next() {
-  emit('done', { correct: wasCorrect.value })
+  emit('done', { correct: wasCorrect.value, double: double.value })
 }
 
 onMounted(() => {
@@ -82,7 +96,8 @@ onMounted(() => {
       <SpeakButton :text="exercise.ru" />
     </div>
 
-    <div class="row">
+    <div class="row check-row">
+      <CelebrationBurst :show="showFire" emoji="🔥" />
       <button v-if="!checked" class="primary check" :disabled="!typed.trim()" @click="check">
         Check
       </button>
@@ -125,5 +140,9 @@ onMounted(() => {
 }
 .answer-text {
   font-size: 1.2rem;
+}
+/* Anchor the 🔥 burst over the Check/Next button. */
+.check-row {
+  position: relative;
 }
 </style>

@@ -43,6 +43,16 @@ function check() {
   emit('graded', allCorrect.value, records)
 }
 
+// Enter jumps to the next still-empty ending box (wrapping around), so the
+// learner can fill the whole table without reaching for each cell. Works for
+// both a physical Enter and the on-screen keyboard's ⏎ (which dispatches one).
+function focusNext(e) {
+  const inputs = [...e.target.closest('table').querySelectorAll('input.ending-input:not([disabled])')]
+  const i = inputs.indexOf(e.target)
+  const order = [...inputs.slice(i + 1), ...inputs.slice(0, i + 1)]
+  order.find((el) => !el.value.trim())?.focus()
+}
+
 onMounted(() => speak(props.paradigm.lemma))
 </script>
 
@@ -80,6 +90,7 @@ onMounted(() => speak(props.paradigm.lemma))
                 autocomplete="off"
                 autocapitalize="off"
                 spellcheck="false"
+                @keydown.enter.prevent="focusNext"
               />
             </div>
             <div
