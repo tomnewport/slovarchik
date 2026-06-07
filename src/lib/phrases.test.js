@@ -97,18 +97,36 @@ describe('nextChar', () => {
 })
 
 describe('hintKeys', () => {
-  it('includes the correct next letter plus two decoys', () => {
+  it('includes the correct next letter plus the requested decoys', () => {
     const keys = hintKeys('п', RU_LETTERS, 2, seededRng(3))
     expect(keys).toHaveLength(3)
     expect(keys).toContain('п')
     expect(new Set(keys).size).toBe(3)
   })
-  it('draws decoys from the requested alphabet', () => {
-    const keys = hintKeys('a', EN_LETTERS, 2, seededRng(5))
-    for (const k of keys) expect(EN_LETTERS).toContain(k)
+  it('defaults to four decoys (five keys lit)', () => {
+    const keys = hintKeys('п', RU_LETTERS, undefined, seededRng(3))
+    expect(keys).toHaveLength(5)
+    expect(keys).toContain('п')
+    expect(new Set(keys).size).toBe(5)
   })
-  it('highlights the space bar alone at a word boundary', () => {
-    expect(hintKeys(' ', RU_LETTERS)).toEqual([' '])
+  it('draws decoys from the requested alphabet plus the space', () => {
+    const keys = hintKeys('a', EN_LETTERS, 2, seededRng(5))
+    for (const k of keys) expect([...EN_LETTERS, ' ']).toContain(k)
+  })
+  it('treats the space as a normal key, decoyed by letters at a word boundary', () => {
+    const keys = hintKeys(' ', RU_LETTERS, 4, seededRng(7))
+    expect(keys).toHaveLength(5)
+    expect(keys).toContain(' ')
+    // The four decoys are real letters, never another space.
+    expect(keys.filter((k) => k === ' ')).toHaveLength(1)
+    for (const k of keys.filter((k) => k !== ' ')) expect(RU_LETTERS).toContain(k)
+  })
+  it('offers the space as a candidate decoy when a letter is next', () => {
+    // Across many draws the space turns up among the decoys for a letter target,
+    // proving it is in the candidate pool rather than special-cased out.
+    const seen = new Set()
+    for (let s = 0; s < 50; s++) for (const k of hintKeys('п', RU_LETTERS, 4, seededRng(s))) seen.add(k)
+    expect(seen.has(' ')).toBe(true)
   })
   it('returns nothing once the phrase is complete', () => {
     expect(hintKeys('', RU_LETTERS)).toEqual([])

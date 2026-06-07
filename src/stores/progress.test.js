@@ -98,6 +98,13 @@ describe('recording attempts & states', () => {
     expect(masteredCount.value).toBe(0)
   })
 
+  it('records an attempt `times` over in a single write (unhinted answers count double)', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, times: 2 })
+    expect(state.records.w0.events).toHaveLength(2)
+    expect(state.records.w0.events.every((e) => e.correct)).toBe(true)
+  })
+
   it('an uninflected word is mastered as soon as it is learned', async () => {
     setVocab(makeWords(1, { hasInflections: false }))
     await learn('w0')

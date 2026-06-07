@@ -139,6 +139,10 @@ async function onDone(result) {
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
+  // A correct answer typed without the keyboard hint counts double: record the
+  // attempt twice (in one write) so the word advances toward learned/mastered
+  // faster (#210).
+  const times = result.double ? 2 : 1
   let firstError = null
   for (const key of (ex.targets ?? []).filter(Boolean)) {
     try {
@@ -147,6 +151,7 @@ async function onDone(result) {
         dimension: ex.dimension,
         level: ex.level,
         correct: wrong ? !wrong.has(key) : result.correct,
+        times,
       })
     } catch (e) {
       if (!firstError) firstError = e

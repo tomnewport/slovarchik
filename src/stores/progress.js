@@ -203,9 +203,11 @@ function capEvents(rec) {
 /**
  * Record one attempt and update derived bookkeeping (first-learned / first-
  * mastered timestamps, peak state for slip detection), then persist the word.
+ * `times` records the same outcome more than once in a single persist — an
+ * unhinted correct answer counts double (#210) without a second IndexedDB write.
  * @returns {string} the word's new state
  */
-export async function recordAttempt({ word, dimension, level, correct, ts = Date.now() }) {
+export async function recordAttempt({ word, dimension, level, correct, ts = Date.now(), times = 1 }) {
   // A missing word key means there is nothing meaningful to record (e.g. a
   // phrase exercise with no source word, or a vocab entry that lacks a key).
   // Skip it gracefully rather than letting it reach the IndexedDB `put`, whose
@@ -219,7 +221,9 @@ export async function recordAttempt({ word, dimension, level, correct, ts = Date
     return stateOf(word)
   }
   const rec = ensureRecord(word)
-  rec.events.push({ dimension, level, correct: !!correct, ts })
+  for (let i = 0; i < Math.max(1, times); i++) {
+    rec.events.push({ dimension, level, correct: !!correct, ts })
+  }
   capEvents(rec)
 
   const next = stateOf(word)
