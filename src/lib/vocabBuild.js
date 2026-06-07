@@ -136,6 +136,9 @@ function normalizeWord(pos, key, word) {
     meaningFull: std,
     meaningsAlt: alts,
     english,
+    // Alternative Russian spellings accepted as correct answers (synonyms, e.g.
+    // маши́на and автомоби́ль both mean "car"). Graded the same as the primary.
+    alsoRu: (word.also_ru ?? []).map((s) => String(s ?? '').trim()).filter(Boolean),
     usage: word.usage ?? [],
     collections: word.collections ?? [],
     gender: word.gender ?? null,
@@ -217,6 +220,7 @@ export function shapeVocab(words) {
     cefr: w.cefr,
     note: w.meaningNote,
     heteronyms: w.heteronyms,
+    alsoRu: w.alsoRu,
   }))
 }
 

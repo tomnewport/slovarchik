@@ -107,6 +107,37 @@ describe('buildFormIndex', () => {
     expect(index.get(normToken('неё'))?.en).toBe('she')
   })
 
+  it('combines heteronym glosses for forms that are ambiguous after stress-stripping (#198)', () => {
+    // стоить (to cost) has 3sg сто́ит; стоять (to stand) has 3sg стои́т.
+    // After stress-stripping both normalise to "стоит", so the hint should show both.
+    const cost = {
+      key: 'стоить=to cost',
+      headword: 'сто́ить',
+      ru: 'стоить',
+      meaning: 'to cost',
+      heteronyms: [
+        { ru: 'сто́ит', gloss: 'it costs' },
+        { ru: 'стои́т', gloss: 'it stands' },
+      ],
+      extra: { conjugation: { present: { '3sg': 'сто́ит' } } },
+    }
+    const stand = {
+      key: 'стоять=to stand',
+      headword: 'стоя́ть',
+      ru: 'стоять',
+      meaning: 'to stand',
+      heteronyms: [
+        { ru: 'стои́т', gloss: 'it stands' },
+        { ru: 'сто́ит', gloss: 'it costs' },
+      ],
+      extra: { conjugation: { present: { '3sg': 'стои́т' } } },
+    }
+    const index = buildFormIndex([cost, stand])
+    const gloss = index.get(normToken('стои́т'))?.en
+    expect(gloss).toContain('it costs')
+    expect(gloss).toContain('it stands')
+  })
+
   it('prefers the word whose dictionary form is the token over an oblique form (#173)', () => {
     // «дорого́й» is the adjective "expensive" (its headword) but also the
     // instrumental of the noun «доро́га» "road". The lemma must win.

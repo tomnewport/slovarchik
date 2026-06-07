@@ -118,15 +118,40 @@ export function buildFormIndex(words) {
     .slice()
     .sort((a, b) => stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru'))
   const index = new Map()
-  const claim = (w, forms) => {
+
+  // Pass 1: base (dictionary) forms — a word whose lemma *is* the surface form
+  // always beats another word for which the token is merely an oblique form.
+  for (const w of sorted) {
     const entry = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
-    if (!entry.en) return // nothing useful to show — skip
-    for (const form of forms) {
+    if (!entry.en) continue
+    for (const form of baseForms(w)) {
       if (!index.has(form)) index.set(form, entry)
     }
   }
-  for (const w of sorted) claim(w, baseForms(w))
-  for (const w of sorted) claim(w, wordForms(w))
+
+  // Pass 2: inflected forms. When a word has heteronym annotations, use the
+  // per-form gloss (e.g. "it stands" for стои́т vs "it costs" for сто́ит) instead
+  // of the generic headword meaning. When two heteronymic inflected forms collapse
+  // to the same normalised string (stress stripped + ё→е), combine both glosses
+  // so the hint shows both possibilities.
+  for (const w of sorted) {
+    const baseEn = w.meaning || w.en
+    if (!baseEn) continue
+    for (const form of wordForms(w)) {
+      const hetEntry = w.heteronyms?.find((h) => normToken(h.ru) === form)
+      const en = hetEntry?.gloss || baseEn
+      if (!index.has(form)) {
+        index.set(form, { key: w.key, ru: w.headword || w.ru, en })
+      } else if (hetEntry) {
+        // Heteronym collision: append this side's gloss if it is new information.
+        const existing = index.get(form)
+        if (en !== existing.en && !existing.en.includes(en)) {
+          index.set(form, { ...existing, en: `${existing.en} / ${en}` })
+        }
+      }
+    }
+  }
+
   return index
 }
 

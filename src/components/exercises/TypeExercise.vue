@@ -16,12 +16,22 @@ const emit = defineEmits(['done'])
 const typed = ref('')
 const checked = ref(false)
 const wasCorrect = ref(false)
+// On a first wrong answer offer one retry before revealing. Once the learner
+// has retried (or they got it right), this stays true so we don't loop.
+const retried = ref(false)
 
 const answer = computed(() => typingSequence(props.exercise.ru))
 
 function check() {
   if (checked.value) return
-  wasCorrect.value = phraseCorrect(typed.value, props.exercise.ru)
+  const targets = [props.exercise.ru, ...(props.exercise.alsoRu ?? [])]
+  wasCorrect.value = phraseCorrect(typed.value, targets)
+  if (!wasCorrect.value && !retried.value) {
+    retried.value = true
+    typed.value = ''
+    playFeedback(false)
+    return
+  }
   checked.value = true
   playFeedback(wasCorrect.value)
 }
@@ -64,6 +74,8 @@ onMounted(() => {
       />
     </form>
 
+    <p v-if="retried && !checked" class="retry-hint">Not quite — try again</p>
+
     <div v-if="checked" class="feedback" :class="wasCorrect ? 'ok' : 'no'">
       <strong>{{ wasCorrect ? 'Correct' : 'Answer:' }}</strong>
       <span lang="ru" class="answer-text">{{ exercise.ru }}</span>
@@ -94,6 +106,11 @@ onMounted(() => {
   border: 1px solid var(--border);
   background: var(--bg-soft);
   color: var(--text);
+}
+.retry-hint {
+  margin: 0;
+  color: var(--bad);
+  font-size: 0.9rem;
 }
 .feedback {
   display: flex;
