@@ -56,7 +56,7 @@ const learningDone = computed(() => learningProgress.value.filter((w) => w.done)
 const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
 
 const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
-const DIM_LABEL = { identification: 'I', usage: 'U', hearing: 'H', speaking: 'S' }
+const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️' }
 
 const topLearningWords = computed(() =>
   learningProgress.value
@@ -66,7 +66,7 @@ const topLearningWords = computed(() =>
     }))
     .filter((w) => w.lastAt > 0)
     .sort((a, b) => b.lastAt - a.lastAt)
-    .slice(0, 3)
+    .slice(0, 5)
     .map((w) => {
       const events = progress.records[w.word]?.events ?? []
       const { ru, en } = parseKey(w.word)
@@ -321,28 +321,21 @@ const FOCUSED = [
   flex-shrink: 0;
 }
 .dim-pip {
-  font-size: 0.65rem;
-  font-weight: 700;
-  width: 1.2rem;
-  height: 1.2rem;
+  font-size: 0.9rem;
+  width: 1.4rem;
+  height: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
 }
 .dim-met {
-  background: var(--good);
-  color: #0b1021;
+  opacity: 1;
 }
 .dim-partial {
-  background: transparent;
-  color: var(--good);
-  border: 1px solid var(--good);
-  opacity: 0.7;
+  opacity: 0.55;
 }
 .dim-empty {
-  background: var(--bg-soft);
-  color: var(--muted);
+  opacity: 0.2;
 }
 .standard h2 {
   margin: 0 0 0.25rem;
