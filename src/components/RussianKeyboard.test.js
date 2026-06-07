@@ -48,13 +48,40 @@ describe('RussianKeyboard', () => {
     input.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
     await wrapper.vm.$nextTick()
 
-    // Press the first key (й), then backspace, then space + another key.
-    await wrapper.findAll('.kbd-key')[0].trigger('click')
+    // The ё key leads the layout (top-left, standard ЙЦУКЕН); й follows it.
+    await wrapper.findAll('.kbd-key')[1].trigger('click')
     expect(input.value).toBe('й')
     expect(lastValue).toBe('й')
 
     await wrapper.find('[aria-label="Backspace"]').trigger('click')
     expect(input.value).toBe('')
+    wrapper.unmount()
+  })
+
+  it('types ё from its dedicated top-left key', async () => {
+    const wrapper = mount(RussianKeyboard, { attachTo: document.body })
+    const input = makeInput()
+    input.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
+    await wrapper.vm.$nextTick()
+
+    const yo = wrapper.find('.kbd-yo')
+    expect(yo.exists()).toBe(true)
+    expect(yo.text()).toBe('ё')
+    await yo.trigger('click')
+    expect(input.value).toBe('ё')
+    wrapper.unmount()
+  })
+
+  it('lights the ё key when it is the next letter to type', async () => {
+    const wrapper = mount(RussianKeyboard, { attachTo: document.body })
+    const input = makeInput()
+    input.dataset.answer = 'всё'
+    input.value = 'вс'
+    input.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
+    await wrapper.vm.$nextTick()
+
+    await wrapper.find('[aria-label="Toggle hint"]').trigger('click')
+    expect(wrapper.find('.kbd-yo').classes()).toContain('hint')
     wrapper.unmount()
   })
 
@@ -94,8 +121,8 @@ describe('RussianKeyboard', () => {
     await wrapper.vm.$nextTick()
 
     await wrapper.find('[aria-pressed]').trigger('click') // shift on
-    await wrapper.findAll('.kbd-key')[0].trigger('click') // й -> Й
-    await wrapper.findAll('.kbd-key')[1].trigger('click') // ц (shift reset)
+    await wrapper.findAll('.kbd-key')[1].trigger('click') // й -> Й (index 0 is ё)
+    await wrapper.findAll('.kbd-key')[2].trigger('click') // ц (shift reset)
     expect(input.value).toBe('Йц')
     wrapper.unmount()
   })

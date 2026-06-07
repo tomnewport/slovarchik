@@ -58,6 +58,15 @@ single vowel is always stressed): `в`, `два`, `ах`.
 Put the accented spelling wherever the schema asks for a *form* (declension
 cells, conjugations, `forms`, `accented`). The bare key stays unaccented.
 
+## The letter ё
+
+Always write **ё** where the word has it — `неё`, `тёплый`, `пошёл` — in keys,
+forms and example sentences alike. It's shown and pronounced as written, and the
+guided keyboard walks learners through the real letter. Grading still accepts a
+typed or spoken **е** in its place (a common everyday substitution), so writing
+ё never makes an answer harder to get right. ё carries its own stress, so it
+never also takes a combining accent.
+
 ## Fields every word can have
 
 | Field         | Required | Notes                                                                 |

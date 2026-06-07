@@ -3,7 +3,7 @@
 // into the pieces each level needs — word tokens for the build-the-sentence
 // game and a letter-by-letter sequence for the guided keyboard — and grade
 // answers leniently, forgiving punctuation, case, stress and the usual ё/е slip.
-import { stripStress } from './text.js'
+import { stripStress, foldYo } from './text.js'
 import { sample, shuffle } from './quiz.js'
 
 /** Lowercase alphabets offered by the guided keyboards. */
@@ -20,15 +20,15 @@ export function phraseTokens(phrase) {
 
 /**
  * The lowercase letter/space sequence a learner actually types: stress marks
- * removed, ё→е, punctuation dropped and whitespace collapsed. This is what the
- * guided keyboard walks through and what answers are compared against.
+ * removed, punctuation dropped and whitespace collapsed. ё is *preserved* so the
+ * guided keyboard walks the learner through the real letter; the leniency that
+ * treats ё/е as equal is applied separately at grading time (see foldYo).
  * @param {string} phrase
  * @returns {string}
  */
 export function typingSequence(phrase) {
   return stripStress(String(phrase ?? ''))
     .toLowerCase()
-    .replace(/ё/g, 'е')
     .replace(/[^\p{L}\s]/gu, '')
     .replace(/\s+/g, ' ')
     .trim()
@@ -65,10 +65,10 @@ function stripArticles(seq) {
  * @returns {boolean}
  */
 export function phraseCorrect(input, target) {
-  const got = stripArticles(typingSequence(input))
+  const got = foldYo(stripArticles(typingSequence(input)))
   const targets = Array.isArray(target) ? target : [target]
   return targets.some((t) => {
-    const wanted = stripArticles(typingSequence(t))
+    const wanted = foldYo(stripArticles(typingSequence(t)))
     return wanted.length > 0 && got === wanted
   })
 }

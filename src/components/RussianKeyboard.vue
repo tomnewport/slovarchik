@@ -4,11 +4,13 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { keyboard, toggleHint } from '../stores/keyboard.js'
 import { nextChar, hintKeys, RU_LETTERS } from '../lib/phrases.js'
 
-// Standard ЙЦУКЕН layout — the same arrangement as a physical Russian keyboard.
+// Standard ЙЦУКЕН layout — the same arrangement as a physical Russian keyboard,
+// where ё sits on its own key in the top-left corner (rendered as its own row
+// below), above the йцукен row.
 const ROWS = [
   ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
   ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'],
-  ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'ё'],
+  ['я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю'],
 ]
 
 // The input the keyboard currently types into. Russian inputs opt in with
@@ -140,6 +142,16 @@ function keep(e) {
 <template>
   <div v-if="target" class="kbd" role="group" aria-label="Russian keyboard" @mousedown="keep">
     <div class="kbd-inner">
+      <div class="kbd-row kbd-row-yo">
+        <button
+          type="button"
+          class="kbd-key kbd-yo"
+          :class="{ hint: hint.has('ё') }"
+          @click="press('ё')"
+        >
+          {{ shift ? 'Ё' : 'ё' }}
+        </button>
+      </div>
       <div v-for="(row, i) in ROWS" :key="i" class="kbd-row">
         <button
           v-for="letter in row"
@@ -254,5 +266,16 @@ function keep(e) {
 
 .kbd-space {
   flex: 2 1 0;
+}
+
+/* ё lives on its own key in the top-left corner of a physical Russian keyboard,
+   so it sits left-aligned at normal key width rather than stretching the row. */
+.kbd-row-yo {
+  justify-content: flex-start;
+}
+
+.kbd-yo {
+  flex: 0 0 auto;
+  min-width: 2.6rem;
 }
 </style>
