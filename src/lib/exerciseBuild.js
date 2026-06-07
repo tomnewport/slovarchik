@@ -82,12 +82,41 @@ function topUpByLevel(rest, n, rng) {
 }
 
 /**
+ * Draw up to `n` distinct items, biased toward the front of `items`. The store
+ * orders the current-batch pool worst-understood first, so this favours the
+ * least-understood words. Linear weights: the first item is weighted by the
+ * list length, the last by 1.
+ */
+function frontBiasedSample(items, n, rng) {
+  const remaining = items.slice()
+  const take = Math.min(Math.max(0, n), remaining.length)
+  const out = []
+  while (out.length < take) {
+    const len = remaining.length
+    const total = (len * (len + 1)) / 2
+    let r = rng() * total
+    let idx = len - 1
+    for (let i = 0; i < len; i++) {
+      r -= len - i
+      if (r < 0) {
+        idx = i
+        break
+      }
+    }
+    out.push(remaining.splice(idx, 1)[0])
+  }
+  return out
+}
+
+/**
  * Draw up to `n` items, preferring the pool and only then topping up from the
  * rest. Pool items always win when there are enough of them; the top-up draws
- * the lowest available CEFR level first (see {@link topUpByLevel}).
+ * the lowest available CEFR level first (see {@link topUpByLevel}). When
+ * `frontBias` is set (the current bucket) pool items are drawn worst-first
+ * rather than uniformly, so the worst-understood words get the most practice.
  */
-function drawN(pool, rest, n, rng) {
-  const chosen = sample(pool, n, rng)
+function drawN(pool, rest, n, rng, frontBias = false) {
+  const chosen = frontBias ? frontBiasedSample(pool, n, rng) : sample(pool, n, rng)
   if (chosen.length >= n) return chosen
   return [...chosen, ...topUpByLevel(rest, n - chosen.length, rng)]
 }
@@ -123,7 +152,7 @@ function common(practice, practiceIndex) {
 function buildMatch(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
   // Board size comes from the practice catalogue (`items`), defaulting to MATCH_PAIRS.
-  const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng)
+  const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng, practice.bucket === 'current')
   if (picked.length < 2) return []
   return [
     make({
@@ -143,7 +172,7 @@ function buildWordType(practice, pi, ctx, make, kind) {
     rest = rest.filter(met)
   }
   if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
-  const picked = drawN(pool, rest, practice.exercises, ctx.rng)
+  const picked = drawN(pool, rest, practice.exercises, ctx.rng, practice.bucket === 'current')
   return picked.map((w) =>
     make({
       ...common(practice, pi),
@@ -165,7 +194,7 @@ function buildPhrase(practice, pi, ctx, make, kind) {
     rest = rest.filter(met)
   }
   if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
-  const picked = drawN(pool, rest, practice.exercises, ctx.rng)
+  const picked = drawN(pool, rest, practice.exercises, ctx.rng, practice.bucket === 'current')
   return picked.map((p) =>
     make({
       ...common(practice, pi),
@@ -182,7 +211,13 @@ function buildInflect(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
   const inflectable = (list) =>
     list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && buildParadigm(r))
-  const picked = drawN(inflectable(pool), inflectable(rest), practice.exercises, ctx.rng)
+  const picked = drawN(
+    inflectable(pool),
+    inflectable(rest),
+    practice.exercises,
+    ctx.rng,
+    practice.bucket === 'current',
+  )
   const mode = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
   return picked.map((r) =>
     make({

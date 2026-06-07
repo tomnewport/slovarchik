@@ -59,7 +59,7 @@ async function pick(option) {
 
     <div v-else class="card empty">
       <p v-if="level === 'mastery'" class="muted">
-        Mastery unlocks once you've learned 100 words. Keep learning!
+        Mastery begins once you've learned enough words to fill a batch. Keep learning!
       </p>
       <p v-else class="muted">Nothing left to learn here — great work!</p>
       <button class="primary" @click="router.push('/')">Back home</button>

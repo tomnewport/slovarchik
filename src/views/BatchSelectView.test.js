@@ -75,6 +75,6 @@ describe('BatchSelectView', () => {
     await flushPromises()
 
     expect(wrapper.find('.option').exists()).toBe(false)
-    expect(wrapper.text()).toContain('Mastery unlocks')
+    expect(wrapper.text()).toContain('Mastery begins')
   })
 })

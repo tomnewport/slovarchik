@@ -9,7 +9,6 @@ import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stor
 import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration } from '../stores/settings.js'
 import { STATES } from '../lib/progression.js'
-import { MASTERY_UNLOCK_AT } from '../lib/batches.js'
 import { buildExercises, makeVisualReplacement } from '../lib/exerciseBuild.js'
 import {
   initRunner,
@@ -68,10 +67,9 @@ async function setup() {
   // deep link straight into a session. Non-blocking — the read resolves long
   // before the first answer, and playFeedback falls back to defaults until then.
   loadSettings()
-  // Auto-commit a mastery batch if the learner qualifies but none is active.
-  if (progress.learnedCount.value >= MASTERY_UNLOCK_AT && !progress.state.mastery) {
-    await progress.autoCommitMasteryBatch()
-  }
+  // Assemble a mastery batch as soon as enough words are learned — this does not
+  // wait for the learning batch (or a previous mastery batch) to be completed.
+  await progress.ensureMasteryBatch()
 
   const type = String(route.query.type ?? 'standard')
   const size = route.query.size ? String(route.query.size) : undefined

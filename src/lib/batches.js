@@ -20,8 +20,6 @@ export const CEFR_ORDER = Object.freeze(['A1', 'A2', 'B1', 'B2', 'C1'])
 
 export const LEARNING_BATCH_SIZE = 20
 export const MASTERY_BATCH_SIZE = 10
-/** Mastery batches only unlock once the learner has learned this many words. */
-export const MASTERY_UNLOCK_AT = 100
 /** How many batch options to offer. */
 export const BATCH_OPTIONS = 5
 /** A named batch must draw at least this fraction from one collection. */
@@ -189,7 +187,6 @@ export function assembleOptions(pool, size, level, rng = Math.random) {
  *   `collections`)
  * @param {(word: object) => string} args.stateOf current state per word
  * @param {'learning'|'mastery'} [args.level]
- * @param {number} [args.learnedCount] total learned words (gates mastery)
  * @param {() => number} [args.rng]
  * @returns {object[]} up to five batch options
  */
@@ -197,12 +194,15 @@ export function buildBatchOptions({
   words = [],
   stateOf = () => 'unknown',
   level = 'learning',
-  learnedCount = 0,
   rng = Math.random,
 } = {}) {
-  if (level === 'mastery' && learnedCount < MASTERY_UNLOCK_AT) return []
   const size = batchSize(level)
   const eligible = words.filter((w) => isEligible(stateOf(w), level))
+  // Mastery only begins once a full batch's worth of learned-but-unmastered
+  // words exists. There is no global "learned this many words first" gate: a
+  // learner starts mastering as soon as the first MASTERY_BATCH_SIZE words are
+  // learned, regardless of how far through any learning batch they are.
+  if (level === 'mastery' && eligible.length < size) return []
 
   // For learning batches only: separate glue words (pronouns, conjunctions,
   // prepositions, interjections) from main vocabulary so they are always mixed
