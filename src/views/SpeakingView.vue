@@ -21,6 +21,9 @@ const CELEBRATE_MS = 2500
 // How long to pause after the model answer is read aloud (incorrect / passed),
 // giving enough time to read the phrase and attempt to repeat it.
 const REVIEW_MS = 4000
+// Phrases with this many Russian words or more get a word-by-word warm-up in
+// hands-free mode before the first full-phrase listening attempt.
+const LONG_PHRASE_WORDS = 5
 
 // The three speaking challenges. `recLang` is what the recogniser listens for;
 // `target` is the field of the phrase the spoken answer is graded against;
@@ -199,6 +202,13 @@ function nextQuestion() {
 // `onend` never arrives.
 function presentPrompt() {
   if (modeCfg.value?.promptRu) {
+    // For long phrases in hands-free mode, run a word-by-word warm-up sequence
+    // before the first listening attempt so the learner has heard each part.
+    const ruWords = (current.value.ru ?? '').split(/\s+/).filter(Boolean)
+    if (handsFree.value && ruWords.length >= LONG_PHRASE_WORDS) {
+      presentWithWarmUp(ruWords)
+      return
+    }
     const onEnd = onceForQuestion(() => {
       if (handsFree.value && phase.value === 'prompt') beginListen()
     }, estimateSpeechMs(current.value.ru) + 1500)
@@ -207,6 +217,29 @@ function presentPrompt() {
   } else if (handsFree.value) {
     beginListen()
   }
+}
+
+// Warm-up sequence for long phrases: full Russian → English → slow Russian →
+// "Repeat each word:" → each word individually. Begins listening afterwards.
+function presentWithWarmUp(ruWords) {
+  const wordItems = ruWords.map((w) => ({
+    text: w.replace(/[^\p{L}]/gu, ''),
+    lang: 'ru-RU',
+    rate: 0.7,
+  })).filter((item) => item.text)
+  const sequence = [
+    { text: current.value.ru, lang: 'ru-RU', rate: 0.9 },
+    { text: current.value.en, lang: 'en-GB', rate: 1 },
+    { text: current.value.ru, lang: 'ru-RU', rate: SLOW_RATE },
+    { text: 'Repeat each word:', lang: 'en-GB', rate: 1 },
+    ...wordItems,
+  ]
+  const totalMs = sequence.reduce((ms, s) => ms + estimateSpeechMs(s.text), 0)
+  const onEnd = onceForQuestion(() => {
+    if (handsFree.value && phase.value === 'prompt') beginListen()
+  }, totalMs + 2000)
+  const spoke = speakSequence(sequence, { onEnd })
+  if (!spoke) onEnd()
 }
 
 function replayPrompt() {

@@ -39,6 +39,12 @@ beforeEach(async () => {
 async function answer(wrapper, text) {
   await wrapper.find('input[lang="ru"]').setValue(text)
   await wrapper.find('button.check').trigger('click')
+  // If the first wrong attempt shows a retry hint instead of revealing the
+  // answer, submit once more so we reach the state where 'next' is visible.
+  if (!wrapper.find('button.next').exists()) {
+    await wrapper.find('input[lang="ru"]').setValue(text)
+    await wrapper.find('button.check').trigger('click')
+  }
   await wrapper.find('button.next').trigger('click')
   await flushPromises()
   await flushPromises() // second flush: fake-indexeddb uses setImmediate for oncomplete

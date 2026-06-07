@@ -28,14 +28,30 @@ describe('TypeExercise', () => {
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
   })
 
-  it('marks a wrong answer incorrect and reveals the answer', async () => {
+  it('offers a retry on the first wrong answer, then reveals on the second', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
+    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('button.check').trigger('click')
+    // First wrong attempt → retry hint shown, answer not yet revealed.
+    expect(wrapper.text()).toContain('Not quite')
+    expect(wrapper.text()).not.toContain('Answer:')
+
+    // Second wrong attempt → answer revealed.
     await wrapper.find('input[lang="ru"]').setValue('кот')
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.text()).toContain('Answer:')
 
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+  })
+
+  it('accepts an alsoRu synonym as correct', async () => {
+    const wrapper = mount(TypeExercise, {
+      props: { exercise: { ...exercise, ru: 'автомобиль', alsoRu: ['маши́на'] } },
+    })
+    await wrapper.find('input[lang="ru"]').setValue('машина')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.text()).toContain('Correct')
   })
 
   it('ignores stress, case and ё/е when grading (hints never penalise)', async () => {

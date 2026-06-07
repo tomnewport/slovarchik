@@ -152,6 +152,7 @@ function buildWordType(practice, pi, ctx, make, kind) {
       ru: w.ru,
       en: enText(w.en),
       note: w.note,
+      ...(w.alsoRu?.length ? { alsoRu: w.alsoRu } : {}),
     }),
   )
 }
