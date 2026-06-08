@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { buildExercises, makeVisualReplacement, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
+import { buildParadigm } from './paradigm.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 function seededRng(seed) {
@@ -13,6 +14,9 @@ function seededRng(seed) {
 
 const words = loadFixtureWords()
 const phrases = shapePhrases(words)
+
+/** Word keys from the fixture that have a usable inflection paradigm. */
+const inflectableKeys = words.filter((w) => buildParadigm(w) != null).map((w) => w.key)
 
 // One practice per catalogue entry, each with an empty pool (so the builder
 // tops up from the whole vocabulary).
@@ -54,7 +58,9 @@ function build(practices, seed = 1) {
 describe('buildExercises', () => {
   it('maps every practice type to a renderable kind', () => {
     for (const type of Object.keys(PRACTICE_KIND)) {
-      const ex = build([practice(type)])
+      // Mastery inflect exercises require pool words (no top-up outside the batch).
+      const overrides = type.startsWith('inflect') ? { pool: inflectableKeys.slice(0, 5) } : {}
+      const ex = build([practice(type, overrides)])
       expect(ex.length).toBeGreaterThan(0)
       expect(ex.every((e) => e.kind === PRACTICE_KIND[type])).toBe(true)
     }
@@ -95,14 +101,28 @@ describe('buildExercises', () => {
   })
 
   it('only builds inflection exercises for words that have a paradigm', () => {
-    const ex = build([practice('inflect-bank', { exercises: 5 })])
+    // Mastery exercises require pool words — no top-up from outside the batch.
+    const pool = inflectableKeys.slice(0, 5)
+    const ex = build([practice('inflect-bank', { exercises: 5, pool })])
     expect(ex.length).toBeGreaterThan(0)
     for (const e of ex) {
       expect(e.kind).toBe('inflect')
       expect(e.mode).toBe('bank')
       expect(e.wordKey).toBeTruthy()
     }
-    expect(build([practice('inflect-keyboard')])[0].mode).toBe('keyboard')
+    const exKb = build([practice('inflect-keyboard', { pool: inflectableKeys.slice(0, 3) })])
+    expect(exKb[0].mode).toBe('keyboard')
+  })
+
+  it('mastery inflect exercises never include words outside the pool', () => {
+    const pool = inflectableKeys.slice(0, 3)
+    const poolSet = new Set(pool)
+    // Request more exercises than pool words; without top-up the result stays
+    // within the pool.
+    const ex = build([practice('inflect-bank', { exercises: 10, pool })])
+    expect(ex.length).toBeGreaterThan(0)
+    expect(ex.length).toBeLessThanOrEqual(pool.length)
+    for (const e of ex) expect(poolSet.has(e.targets[0])).toBe(true)
   })
 
   it('preserves the practice index across a multi-practice session', () => {

@@ -211,9 +211,14 @@ function buildInflect(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
   const inflectable = (list) =>
     list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && buildParadigm(r))
+  // Mastery exercises must never pull in words from outside the committed mastery
+  // batch: doing so records mastery-level events on non-batch words, corrupting
+  // their progression state. If the batch has fewer inflectable words than the
+  // practice needs, produce fewer exercises rather than widening the scope.
+  const topUpSource = practice.level === 'mastery' ? [] : rest
   const picked = drawN(
     inflectable(pool),
-    inflectable(rest),
+    inflectable(topUpSource),
     practice.exercises,
     ctx.rng,
     practice.bucket === 'current',
