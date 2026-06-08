@@ -35,15 +35,16 @@ describe('constants', () => {
     expect(STATES).toEqual(['unknown', 'learning', 'learned', 'mastered'])
     expect(LEVELS).toEqual(['learning', 'mastery'])
   })
-  it('learning grades all four dimensions; mastery has no speaking', () => {
+  it('learning grades all four dimensions; mastery only grades identification and usage', () => {
     expect(dimensionsForLevel('learning')).toEqual([
       'identification',
       'usage',
       'hearing',
       'speaking',
     ])
-    expect(dimensionsForLevel('mastery')).toEqual(['identification', 'usage', 'hearing'])
+    expect(dimensionsForLevel('mastery')).toEqual(['identification', 'usage'])
     expect(CRITERIA.mastery.speaking).toBeUndefined()
+    expect(CRITERIA.mastery.hearing).toBeUndefined()
   })
 })
 
@@ -132,17 +133,14 @@ describe('wordState — mastery gating', () => {
       ...fullyLearned(),
       ...attempts('mastery', 'identification', [true]),
       ...attempts('mastery', 'usage', [true]),
-      ...attempts('mastery', 'hearing', [true, true, true]),
     ]
     expect(wordState(events, { hasInflections: true })).toBe('mastered')
   })
   it('stays learned if a mastery dimension is incomplete', () => {
     const events = [
       ...fullyLearned(),
+      // identification met but usage missing
       ...attempts('mastery', 'identification', [true]),
-      ...attempts('mastery', 'usage', [true]),
-      // hearing mastery only 2/4 — not enough
-      ...attempts('mastery', 'hearing', [true, true]),
     ]
     expect(wordState(events, { hasInflections: true })).toBe('learned')
   })
@@ -154,7 +152,6 @@ describe('wordState — mastery gating', () => {
       ...attempts('learning', 'speaking', [true, true, true]),
       ...attempts('mastery', 'identification', [true]),
       ...attempts('mastery', 'usage', [true]),
-      ...attempts('mastery', 'hearing', [true, true, true]),
     ]
     // Learning identification has slipped, so the word is no longer even learned.
     expect(levelMet(events, 'mastery')).toBe(true)

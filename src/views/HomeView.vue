@@ -56,7 +56,7 @@ const learningDone = computed(() => learningProgress.value.filter((w) => w.done)
 const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
 
 const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
-const MASTERY_DIMS = ['identification', 'usage', 'hearing']
+const MASTERY_DIMS = ['identification', 'usage']
 const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️' }
 
 function buildWordList(batchWords, level, dims) {
