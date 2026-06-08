@@ -36,9 +36,10 @@ export const LEVELS = Object.freeze(['learning', 'mastery'])
  *  - `{ type: 'attempts', need }` — at least `need` attempts, regardless of
  *    correctness (speaking: "attempt to speak the word correctly three times").
  *
- * Learning needs all four dimensions. Mastery needs identification + usage (a
- * complete inflection table, modelled as a single correct most-recent attempt)
- * plus hearing 3/4. Mastery has no speaking requirement.
+ * Learning needs all four dimensions. Mastery needs only identification + usage
+ * (a complete inflection table, modelled as a single correct most-recent
+ * attempt). Mastery has no speaking or hearing requirement — those dimensions
+ * have no mastery-level practice types.
  */
 export const CRITERIA = Object.freeze({
   learning: {
@@ -50,7 +51,6 @@ export const CRITERIA = Object.freeze({
   mastery: {
     identification: { type: 'ratio', need: 1, window: 1 },
     usage: { type: 'ratio', need: 1, window: 1 },
-    hearing: { type: 'ratio', need: 3, window: 4 },
   },
 })
 

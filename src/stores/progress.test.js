@@ -70,9 +70,6 @@ async function master(word, ts = 1) {
   await learn(word, ts)
   await recordAttempt({ word, dimension: 'identification', level: 'mastery', correct: true, ts })
   await recordAttempt({ word, dimension: 'usage', level: 'mastery', correct: true, ts })
-  for (let i = 0; i < 3; i++) {
-    await recordAttempt({ word, dimension: 'hearing', level: 'mastery', correct: true, ts })
-  }
 }
 
 beforeEach(async () => {
@@ -177,13 +174,15 @@ describe('demotion, at-risk and recently-learned', () => {
     expect(atRisk.value).not.toContain('w0')
   })
 
-  it('flags a mastered word one wrong hearing answer from dropping to learned', async () => {
+  it('drops a mastered inflected word back to learned on a wrong mastery attempt', async () => {
+    // Mastery identification and usage have window=1, so one wrong answer
+    // immediately un-meets the criterion — there is no borderline/at-risk state.
     setVocab(makeWords(1, { hasInflections: true }))
     await master('w0')
-    // Mastery hearing window: T,T,T then one F → 3/4 still met, but last is wrong.
-    await recordAttempt({ word: 'w0', dimension: 'hearing', level: 'mastery', correct: false })
     expect(stateOf('w0')).toBe('mastered')
-    expect(atRisk.value).toContain('w0')
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
+    expect(stateOf('w0')).toBe('learned')
+    expect(lost.value).toContain('w0')
   })
 
   it('lists recently-learned words newest first', async () => {
