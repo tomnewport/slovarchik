@@ -339,6 +339,23 @@ describe('sessions', () => {
     expect(session.practices.some((p) => p.level === 'mastery')).toBe(true)
   })
 
+  it('restricts mastery-level practice pools to mastery-batch words', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    // Learning batch: w0, w1 (not yet learned).
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 })
+    // Mastery batch: w2 (not yet mastered).
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w2'], size: 1 })
+    const session = startSession({ type: 'grammar', size: 'super' }, seededRng(6))
+    const masteryPractices = session.practices.filter((p) => p.level === 'mastery')
+    expect(masteryPractices.length).toBeGreaterThan(0)
+    for (const p of masteryPractices) {
+      // No learning-batch word should appear in a mastery-level practice pool.
+      expect(p.pool).not.toContain('w0')
+      expect(p.pool).not.toContain('w1')
+      expect(p.pool).toContain('w2')
+    }
+  })
+
   it('boosts dimension weights for unmet criteria in the current pool', async () => {
     setVocab(makeWords(20, { hasInflections: false }))
     await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0'], size: 1 })
