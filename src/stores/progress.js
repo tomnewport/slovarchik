@@ -457,7 +457,19 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
   // session has no learning-level practices and would otherwise become empty).
   const hasLearningPractices = practicesForSession(type).some((p) => p.level === 'learning')
   const levels = !masteryBatchActive() && hasLearningPractices ? ['learning'] : null
-  const session = buildSession({ type, size, weakness: dimensionWeakness(), rng, levels })
+  const weakness = dimensionWeakness()
+  // Boost dimensions still unmet for current-pool words so sessions stay
+  // targeted at what's blocking batch completion, not just the global
+  // accuracy average (which masks remaining gaps when most words are learned).
+  for (const key of currentPool()) {
+    const evs = events(key)
+    for (const d of dimensionsForLevel('learning')) {
+      if (!dimensionProgress(evs, 'learning', d).met) {
+        weakness[d] = Math.max(weakness[d], 2)
+      }
+    }
+  }
+  const session = buildSession({ type, size, weakness, rng, levels })
   let pools
   if (focusKeys) {
     // Focused session: every bucket is restricted to the filtered words, which
