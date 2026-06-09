@@ -339,6 +339,25 @@ describe('sessions', () => {
     expect(session.practices.some((p) => p.level === 'mastery')).toBe(true)
   })
 
+  it('boosts dimension weights for unmet criteria in the current pool', async () => {
+    setVocab(makeWords(20, { hasInflections: false }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0'], size: 1 })
+    // Meet identification, usage, hearing — leave speaking one attempt short (need 3).
+    for (const d of ['identification', 'usage', 'hearing']) {
+      for (let i = 0; i < 3; i++) {
+        await recordAttempt({ word: 'w0', dimension: d, level: 'learning', correct: true })
+      }
+    }
+    await recordAttempt({ word: 'w0', dimension: 'speaking', level: 'learning', correct: true })
+    // Over several super sessions, speaking should dominate because it's the only
+    // unmet dimension and its weakness weight gets boosted above the others.
+    const practices = Array.from({ length: 5 }, (_, i) =>
+      startSession({ type: 'standard', size: 'super' }, seededRng(i + 100)).practices,
+    ).flat()
+    const speakingFraction = practices.filter((p) => p.dimension === 'speaking').length / practices.length
+    expect(speakingFraction).toBeGreaterThan(0.5)
+  })
+
   it('counts identification events for encounterCount', async () => {
     setVocab(makeWords(2, { hasInflections: false }))
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: true })
