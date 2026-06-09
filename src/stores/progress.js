@@ -483,12 +483,19 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
   } else {
     pools = { atRisk: reinforcePool(), untested: untestedPool(), current: currentPool() }
   }
+  const masterySet = state.mastery ? new Set(state.mastery.words) : null
   for (const practice of session.practices) {
     const bucketPool = pools[practice.bucket] ?? []
     // When a non-current bucket pool is empty (e.g. no at-risk words yet),
     // fall back to the current batch pool so exercises stay within known
     // vocabulary rather than drawing random unknown words as filler.
-    practice.pool = bucketPool.length > 0 ? bucketPool : pools.current
+    const base = bucketPool.length > 0 ? bucketPool : pools.current
+    // Mastery-level practices must only draw from the mastery batch to avoid
+    // recording mastery-level events on non-batch words (which corrupts their
+    // progression state — see exerciseBuild.buildInflect for the same guard
+    // on the top-up path).
+    practice.pool =
+      practice.level === 'mastery' && masterySet ? base.filter((k) => masterySet.has(k)) : base
   }
   return { ...session, focusKeys: focusKeys ?? null, pools }
 }
