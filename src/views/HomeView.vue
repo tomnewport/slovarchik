@@ -9,6 +9,7 @@ import { state as progress, batchProgress } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
 import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
+import BatchSearchAdd from '../components/BatchSearchAdd.vue'
 
 const router = useRouter()
 
@@ -158,6 +159,7 @@ const FOCUSED = [
             </div>
           </div>
         </div>
+        <BatchSearchAdd level="learning" />
         <div v-if="masteryBatch" class="batch-row">
           <div class="batch-meta">
             <span class="batch-kind master-kind">Mastering</span>
