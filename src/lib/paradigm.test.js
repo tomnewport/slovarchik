@@ -209,10 +209,10 @@ describe('buildParadigm — verb', () => {
     const pastF = p.cells.find((c) => c.row === 'past_f' && c.col === 'past')
     expect(cellLabel(p, pastF)).toBe('Past fem. · Past')
   })
-  it('labels the perfective finite tense as Future', () => {
+  it('labels the perfective finite tense as Simple Future', () => {
     const pf = buildParadigm(prochitat)
     expect(pf.cells).toHaveLength(10)
-    expect(pf.cols[0].label).toBe('Future')
+    expect(pf.cols[0].label).toBe('Simple Future')
   })
 })
 

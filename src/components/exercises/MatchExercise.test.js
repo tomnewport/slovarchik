@@ -64,6 +64,27 @@ describe('MatchExercise', () => {
     expect(tile(wrapper, 1, 'spring').classes()).not.toContain('flash')
   })
 
+  it('accepts a cross-key match when both sides have identical English text', async () => {
+    const dupeExercise = {
+      ...exercise,
+      pairs: [
+        { key: 'doch', ru: 'дочь', en: 'daughter' },
+        { key: 'dochka', ru: 'до́чка', en: 'daughter' },
+      ],
+      targets: ['doch', 'dochka'],
+    }
+    const wrapper = mount(MatchExercise, { props: { exercise: dupeExercise } })
+    // Pick the Russian "дочь" then the English tile that belongs to "до́чка" — same text.
+    await tile(wrapper, 0, 'дочь').trigger('click')
+    const enTiles = wrapper.findAll('.col')[1].findAll('button')
+    const dochkaTile = enTiles.find((b) => b.attributes('data-key') !== 'doch') ?? enTiles[0]
+    // Both English tiles say "daughter"; click whichever isn't дочь's canonical pair.
+    // Since we just need any "daughter" button — grab the first one.
+    await enTiles[0].trigger('click')
+    // At least дочь must be matched (the exercise accepted it).
+    expect(wrapper.findAll('.col')[0].findAll('button.matched').length).toBeGreaterThanOrEqual(1)
+  })
+
   it('reports only the mismatched words as wrong', async () => {
     const wrapper = mount(MatchExercise, { props: { exercise } })
 

@@ -159,7 +159,7 @@ export function buildParadigm(word) {
       const conj = word.extra?.conjugation ?? {}
       const finite = conj.present ?? conj.future ?? {}
       const cols = [
-        { key: 'finite', label: conj.present ? 'Present' : 'Future' },
+        { key: 'finite', label: conj.present ? 'Present' : 'Simple Future' },
         { key: 'past', label: 'Past' },
       ]
       const rows = [...VERB_PERSONS, ...VERB_PAST_ROWS]
