@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { keyboard, toggleHint } from '../stores/keyboard.js'
 import { nextChar, hintKeys, RU_LETTERS } from '../lib/phrases.js'
@@ -16,6 +16,7 @@ const ROWS = [
 // The input the keyboard currently types into. Russian inputs opt in with
 // lang="ru"; we follow focus so a single shared keyboard serves every field.
 const target = ref(null)
+const kbdEl = ref(null)
 const shift = ref(false)
 // Reactive mirror of the focused field used to drive the next-letter hint: the
 // expected answer (from data-answer) and what the learner has typed so far.
@@ -31,6 +32,22 @@ function isRussianInput(el) {
   )
 }
 
+function scrollAboveKeyboard(el) {
+  if (!el) return
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      const rect = el.getBoundingClientRect()
+      const kbdHeight = kbdEl.value?.offsetHeight ?? 0
+      const visibleBottom = window.innerHeight - kbdHeight - 16
+      if (rect.bottom > visibleBottom) {
+        window.scrollBy({ top: rect.bottom - visibleBottom, behavior: 'smooth' })
+      } else if (rect.top < 0) {
+        el.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      }
+    })
+  })
+}
+
 function onFocusIn(e) {
   if (isRussianInput(e.target)) {
     target.value = e.target
@@ -39,8 +56,6 @@ function onFocusIn(e) {
     // Suppress the device's native virtual keyboard so only ours shows on
     // touch screens; physical keys (backspace, arrows…) keep working.
     e.target.setAttribute('inputmode', 'none')
-    // Make sure the field isn't hidden behind the fixed keyboard panel.
-    requestAnimationFrame(() => e.target.scrollIntoView?.({ block: 'center' }))
   }
 }
 
@@ -63,6 +78,21 @@ function onInput(e) {
   }
 }
 
+// When the keyboard appears, expand #app's bottom padding so content can scroll
+// above the fixed panel. When it disappears, restore the default.
+watch(target, async (el) => {
+  const app = document.getElementById('app')
+  if (!app) return
+  if (el) {
+    await nextTick()
+    const h = kbdEl.value?.offsetHeight ?? 0
+    app.style.paddingBottom = h ? `${h + 8}px` : ''
+    scrollAboveKeyboard(el)
+  } else {
+    app.style.paddingBottom = ''
+  }
+})
+
 onMounted(() => {
   document.addEventListener('focusin', onFocusIn)
   document.addEventListener('focusout', onFocusOut)
@@ -73,6 +103,8 @@ onBeforeUnmount(() => {
   document.removeEventListener('focusin', onFocusIn)
   document.removeEventListener('focusout', onFocusOut)
   document.removeEventListener('input', onInput)
+  const app = document.getElementById('app')
+  if (app) app.style.paddingBottom = ''
 })
 
 // Keys to light when the hint is switched on: the next correct character plus a
@@ -145,7 +177,7 @@ function keep(e) {
 </script>
 
 <template>
-  <div v-if="target" class="kbd" role="group" aria-label="Russian keyboard" @mousedown="keep">
+  <div v-if="target" ref="kbdEl" class="kbd" role="group" aria-label="Russian keyboard" @mousedown="keep">
     <div class="kbd-inner">
       <div class="kbd-row kbd-row-yo">
         <button
@@ -207,19 +239,21 @@ function keep(e) {
 <style scoped>
 .kbd {
   position: fixed;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 540px;
   z-index: 50;
   background: var(--bg-soft);
-  border-top: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
   padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .kbd-inner {
-  max-width: 760px;
-  margin: 0 auto;
   display: grid;
   gap: 0.35rem;
 }
