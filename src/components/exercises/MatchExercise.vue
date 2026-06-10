@@ -32,7 +32,7 @@ const missed = new Set()
 let mistakes = 0
 let flashTimer = null
 
-const done = computed(() => matched.value.size === props.exercise.pairs.length)
+const done = computed(() => matched.value.size >= props.exercise.pairs.length)
 
 // After 80% of pairs are matched the remaining ones can be identified by
 // elimination alone, so auto-complete them instead of requiring clicks.
@@ -40,8 +40,15 @@ const autoCompleteAt = Math.ceil(props.exercise.pairs.length * 0.8)
 
 function tryMatch() {
   if (pickedRu.value == null || pickedEn.value == null) return
-  if (pickedRu.value === pickedEn.value) {
-    matched.value = new Set([...matched.value, pickedRu.value])
+  const ruPair = left.value.find((p) => p.key === pickedRu.value)
+  const enPair = right.value.find((p) => p.key === pickedEn.value)
+  // Accept a match if keys are the same OR if both sides share identical English
+  // text (e.g. дочь and дочка both translate as "daughter" — either button is valid).
+  const isMatch =
+    pickedRu.value === pickedEn.value ||
+    (ruPair && enPair && ruPair.en.toLowerCase() === enPair.en.toLowerCase())
+  if (isMatch) {
+    matched.value = new Set([...matched.value, pickedRu.value, pickedEn.value])
     pickedRu.value = null
     pickedEn.value = null
     if (matched.value.size >= autoCompleteAt) {

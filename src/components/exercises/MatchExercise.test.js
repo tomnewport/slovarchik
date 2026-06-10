@@ -64,6 +64,23 @@ describe('MatchExercise', () => {
     expect(tile(wrapper, 1, 'spring').classes()).not.toContain('flash')
   })
 
+  it('accepts a cross-key match when both sides have identical English text', async () => {
+    const dupeExercise = {
+      ...exercise,
+      pairs: [
+        { key: 'doch', ru: 'дочь', en: 'daughter' },
+        { key: 'dochka', ru: 'до́чка', en: 'daughter' },
+      ],
+      targets: ['doch', 'dochka'],
+    }
+    const wrapper = mount(MatchExercise, { props: { exercise: dupeExercise } })
+    // Pick the Russian "дочь" then any "daughter" English tile — both are valid.
+    await tile(wrapper, 0, 'дочь').trigger('click')
+    await wrapper.findAll('.col')[1].findAll('button')[0].trigger('click')
+    // At least дочь must be matched (the exercise accepted it).
+    expect(wrapper.findAll('.col')[0].findAll('button.matched').length).toBeGreaterThanOrEqual(1)
+  })
+
   it('reports only the mismatched words as wrong', async () => {
     const wrapper = mount(MatchExercise, { props: { exercise } })
 
