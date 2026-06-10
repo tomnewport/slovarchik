@@ -10,9 +10,10 @@ defineProps({
 </script>
 
 <template>
-  <div class="badge" :class="[variant, { unlocked }]" :title="desc">
+  <div class="badge" :class="[variant, { unlocked }]">
     <span class="badge-icon">{{ icon }}</span>
     <span class="badge-label">{{ label }}</span>
+    <span v-if="desc" class="badge-desc">{{ desc }}</span>
   </div>
 </template>
 
@@ -47,15 +48,25 @@ defineProps({
 .badge.unlocked .badge-label {
   color: var(--text);
 }
+.badge-desc {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.3;
+}
 /* Slightly larger when shown inline in a session fanfare */
 .badge.inline {
   padding: 0.5rem 0.7rem;
   border-radius: 12px;
+  max-width: 10rem;
 }
 .badge.inline .badge-icon {
   font-size: 1.5rem;
 }
 .badge.inline .badge-label {
+  font-size: 0.75rem;
+}
+.badge.inline .badge-desc {
   font-size: 0.7rem;
 }
 </style>

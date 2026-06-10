@@ -8,6 +8,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration } from '../stores/settings.js'
+import { warmAudio } from '../lib/feedbackSound.js'
 import { STATES } from '../lib/progression.js'
 import { buildExercises, makeVisualReplacement } from '../lib/exerciseBuild.js'
 import {
@@ -124,7 +125,7 @@ async function finalizeIfDone() {
     .filter((level) => progress.state[level] && progress.batchComplete(level))
     .map((level) => ({ level, batch: progress.state[level] }))
   for (const { level } of celebrated.value) progress.advanceBatch(level)
-  if (celebrated.value.length) playCelebration()
+  if (celebrated.value.length || newAchievements.value.length) playCelebration()
   // Auto-commit next mastery batch so it is ready when the learner returns home.
   if (celebrated.value.some((c) => c.level === 'mastery')) {
     progress.autoCommitMasteryBatch()
@@ -134,6 +135,9 @@ async function finalizeIfDone() {
 }
 
 async function onDone(result) {
+  // Unlock/resume the AudioContext while still inside the user-gesture callback,
+  // before any awaits. This ensures the celebration sound can fire later (#214).
+  warmAudio()
   const ex = current.value
   if (!ex) return
   // result.wrong (matching exercises) lists the specific missed keys; everything
