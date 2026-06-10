@@ -239,19 +239,21 @@ function keep(e) {
 <style scoped>
 .kbd {
   position: fixed;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 540px;
   z-index: 50;
   background: var(--bg-soft);
-  border-top: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 14px 14px 0 0;
   padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .kbd-inner {
-  max-width: 760px;
-  margin: 0 auto;
   display: grid;
   gap: 0.35rem;
 }
