@@ -78,6 +78,17 @@ describe('buildSession', () => {
     expect(s.practices.every((p) => p.level === 'learning')).toBe(true)
     expect(s.practices).toHaveLength(20)
   })
+  it('mastery identification always comes before mastery usage', () => {
+    // Force max weight on mastery dimensions to guarantee both types appear.
+    const weakness = { identification: 1000, usage: 1000, hearing: 0, speaking: 0 }
+    const s = buildSession({ type: 'grammar', size: 'normal', weakness, rng: seededRng(6) })
+    const masteryPractices = s.practices.filter((p) => p.level === 'mastery')
+    const firstUsageIdx = masteryPractices.findIndex((p) => p.dimension === 'usage')
+    const lastIdIdx = [...masteryPractices].map((p, i) => p.dimension === 'identification' ? i : -1).filter(i => i >= 0).at(-1) ?? -1
+    if (firstUsageIdx >= 0 && lastIdIdx >= 0) {
+      expect(lastIdIdx).toBeLessThan(firstUsageIdx)
+    }
+  })
 })
 
 describe('runRepeatMistakes', () => {

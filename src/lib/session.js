@@ -108,6 +108,15 @@ export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, 
     }
   })
 
+  // Mastery identification (word-bank table) must come before mastery usage
+  // (keyboard typing) so every word gets at least one easier identification
+  // drill before being asked to type from memory (#220).
+  practices.sort((a, b) => {
+    if (a.level !== 'mastery' || b.level !== 'mastery') return 0
+    const order = { identification: 0, usage: 1 }
+    return (order[a.dimension] ?? 0) - (order[b.dimension] ?? 0)
+  })
+
   return { type, size, buckets: counts, practices }
 }
 

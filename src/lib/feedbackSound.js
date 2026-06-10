@@ -160,6 +160,17 @@ export const NEUTRAL_SOUNDS = [
   },
 ]
 
+/**
+ * Ensure the shared AudioContext exists and is running. Call this
+ * synchronously inside a user-gesture handler (before any awaits) so the
+ * context is in 'running' state by the time a celebration sound fires later
+ * in the same async chain (#214).
+ */
+export function warmAudio() {
+  const ac = audioContext()
+  if (ac && ac.state !== 'running') ac.resume?.()
+}
+
 /** True when the browser can synthesise audio. */
 export function audioSupported() {
   return (

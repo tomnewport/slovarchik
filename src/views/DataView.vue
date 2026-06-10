@@ -7,7 +7,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import * as progress from '../stores/progress.js'
-import { getAllFiles } from '../lib/idb.js'
+import { getAllFiles, getMeta, setMeta } from '../lib/idb.js'
 import { syncFromNetwork } from '../stores/vocab.js'
 import {
   settings,
@@ -45,11 +45,25 @@ const importStatus = ref(null) // { ok, message }
 const updating = ref(false)
 const updateStatus = ref(null)
 const resetConfirm = ref(false)
+const lastBackupAt = ref(null)
 
 const exportText = computed(() => JSON.stringify(progress.exportData(), null, 2))
 const downloadHref = computed(
   () => 'data:application/json;charset=utf-8,' + encodeURIComponent(exportText.value),
 )
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000
+const showBackupReminder = computed(() => {
+  const since = progress.state.firstUseAt
+  if (!since || Date.now() - since < WEEK_MS) return false
+  if (!lastBackupAt.value) return true
+  return Date.now() - lastBackupAt.value > WEEK_MS
+})
+
+async function recordBackup() {
+  lastBackupAt.value = Date.now()
+  await setMeta('lastBackupAt', lastBackupAt.value)
+}
 
 const daysUsing = computed(() => {
   const since = progress.state.firstUseAt
@@ -75,6 +89,7 @@ async function copyExport() {
   } catch {
     /* clipboard may be unavailable; the textarea is still selectable */
   }
+  await recordBackup()
 }
 
 async function doImport() {
@@ -123,6 +138,7 @@ async function reloadApp() {
 }
 
 async function doReset() {
+  await setMeta('lastBackupAt', null)
   await progress.resetProgress()
   router.push('/')
 }
@@ -131,6 +147,7 @@ onMounted(async () => {
   if (!progress.state.loaded) await progress.loadProgress()
   await loadSettings()
   await loadFiles()
+  lastBackupAt.value = (await getMeta('lastBackupAt')) ?? null
 })
 </script>
 
@@ -146,6 +163,14 @@ onMounted(async () => {
         backup to keep it safe.
       </p>
       <p class="muted" v-if="daysUsing">You've been learning here for {{ daysUsing }} day{{ daysUsing === 1 ? '' : 's' }}.</p>
+    </div>
+
+    <div v-if="showBackupReminder" class="card backup-reminder">
+      <p>
+        <strong>Time for a backup!</strong>
+        It's been over a week since your last export — scroll down to the Export
+        section and download a copy before anything can go wrong.
+      </p>
     </div>
 
     <!-- Feedback sounds -->
@@ -239,7 +264,7 @@ onMounted(async () => {
       <textarea class="json" readonly :value="exportText" rows="6" aria-label="Backup JSON" />
       <div class="row">
         <button class="primary copy" @click="copyExport">Copy</button>
-        <a class="download" :href="downloadHref" download="slovarchik-backup.json">Download .json</a>
+        <a class="download" :href="downloadHref" download="slovarchik-backup.json" @click="recordBackup">Download .json</a>
       </div>
     </div>
 
@@ -294,6 +319,13 @@ onMounted(async () => {
 
 <style scoped>
 .warn strong {
+  color: var(--text);
+}
+.backup-reminder {
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 8%, var(--card));
+}
+.backup-reminder strong {
   color: var(--text);
 }
 .json {
