@@ -5,7 +5,7 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { state as progress, batchProgress } from '../stores/progress.js'
+import { state as progress, batchProgress, atRisk, lost, stateOf } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
 import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
@@ -87,6 +87,24 @@ function buildWordList(batchWords, level, dims) {
 const allLearningWords = computed(() => buildWordList(learningProgress.value, 'learning', LEARNING_DIMS))
 const allMasteryWords = computed(() => buildWordList(masteryProgress.value, 'mastery', MASTERY_DIMS))
 
+function buildStatusWordList(keys) {
+  return keys.map((key) => {
+    const evs = progress.records[key]?.events ?? []
+    const { ru, en } = parseKey(key)
+    const state = stateOf(key)
+    const level = state === 'mastered' ? 'mastery' : 'learning'
+    const dims = (level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS).map((d) => ({
+      label: DIM_LABEL[d],
+      name: d,
+      ...dimensionProgress(evs, level, d),
+    }))
+    return { key, ru, en, state, dims }
+  })
+}
+
+const atRiskWords = computed(() => buildStatusWordList(atRisk.value))
+const slippedWords = computed(() => buildStatusWordList(lost.value))
+
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
 }
@@ -118,7 +136,7 @@ const FOCUSED = [
       </ul>
     </div>
 
-    <!-- Current batches -->
+    <!-- Batch overview: progress bars only -->
     <button
       v-if="!learningBatch"
       class="card choose-batch"
@@ -142,24 +160,6 @@ const FOCUSED = [
             />
           </div>
         </div>
-        <div v-if="allLearningWords.length" class="word-scroll">
-          <div v-for="w in allLearningWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
-            <div class="word-label">
-              <span class="word-ru">{{ w.ru }}</span>
-              <span class="word-en muted">{{ w.en }}</span>
-            </div>
-            <div class="word-dims">
-              <span
-                v-for="d in w.dims"
-                :key="d.name"
-                class="dim-pip"
-                :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
-                :title="d.name"
-              >{{ d.label }}</span>
-            </div>
-          </div>
-        </div>
-        <BatchSearchAdd level="learning" />
         <div v-if="masteryBatch" class="batch-row">
           <div class="batch-meta">
             <span class="batch-kind master-kind">Mastering</span>
@@ -171,23 +171,6 @@ const FOCUSED = [
               class="batch-fill master-fill"
               :style="{ width: (masteryBatch.size ? (masteryDone / masteryBatch.size) * 100 : 0) + '%' }"
             />
-          </div>
-        </div>
-        <div v-if="masteryBatch && allMasteryWords.length" class="word-scroll">
-          <div v-for="w in allMasteryWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
-            <div class="word-label">
-              <span class="word-ru">{{ w.ru }}</span>
-              <span class="word-en muted">{{ w.en }}</span>
-            </div>
-            <div class="word-dims">
-              <span
-                v-for="d in w.dims"
-                :key="d.name"
-                class="dim-pip"
-                :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
-                :title="d.name"
-              >{{ d.label }}</span>
-            </div>
           </div>
         </div>
       </div>
@@ -215,7 +198,7 @@ const FOCUSED = [
       <span class="hf-icon">🎤</span>
       <span class="hf-text">
         <strong>Hands-free</strong>
-        <span class="muted">Eyes-up, voice-only spoken practice — just say “давай”.</span>
+        <span class="muted">Eyes-up, voice-only spoken practice — just say "давай".</span>
       </span>
     </button>
 
@@ -229,6 +212,105 @@ const FOCUSED = [
       >
         <span class="icon">{{ f.icon }}</span>{{ f.label }}
       </button>
+    </div>
+
+    <!-- At-risk words -->
+    <div v-if="atRiskWords.length" class="card status-card risk-card">
+      <div class="status-header">
+        <span class="status-label risk-label">At risk</span>
+        <span class="muted status-count">{{ atRiskWords.length }} word{{ atRiskWords.length === 1 ? '' : 's' }} — one wrong answer from slipping</span>
+      </div>
+      <div class="word-scroll">
+        <div v-for="w in atRiskWords" :key="w.key" class="word-row">
+          <div class="word-label">
+            <span class="word-ru">{{ w.ru }}</span>
+            <span class="word-en muted">{{ w.en }}</span>
+          </div>
+          <div class="word-dims">
+            <span
+              v-for="d in w.dims"
+              :key="d.name"
+              class="dim-pip"
+              :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
+              :title="d.name"
+            >{{ d.label }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slipped words -->
+    <div v-if="slippedWords.length" class="card status-card slipped-card">
+      <div class="status-header">
+        <span class="status-label slipped-label">Slipped</span>
+        <span class="muted status-count">{{ slippedWords.length }} word{{ slippedWords.length === 1 ? '' : 's' }} — dropped below their best state</span>
+      </div>
+      <div class="word-scroll">
+        <div v-for="w in slippedWords" :key="w.key" class="word-row">
+          <div class="word-label">
+            <span class="word-ru">{{ w.ru }}</span>
+            <span class="word-en muted">{{ w.en }}</span>
+          </div>
+          <div class="word-dims">
+            <span
+              v-for="d in w.dims"
+              :key="d.name"
+              class="dim-pip"
+              :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
+              :title="d.name"
+            >{{ d.label }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current batch word lists -->
+    <div v-if="learningBatch && allLearningWords.length" class="card word-list-card">
+      <div class="status-header">
+        <span class="status-label learn-kind">Learning</span>
+        <span class="batch-name">{{ learningBatch.name }}</span>
+      </div>
+      <div class="word-scroll">
+        <div v-for="w in allLearningWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
+          <div class="word-label">
+            <span class="word-ru">{{ w.ru }}</span>
+            <span class="word-en muted">{{ w.en }}</span>
+          </div>
+          <div class="word-dims">
+            <span
+              v-for="d in w.dims"
+              :key="d.name"
+              class="dim-pip"
+              :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
+              :title="d.name"
+            >{{ d.label }}</span>
+          </div>
+        </div>
+      </div>
+      <BatchSearchAdd level="learning" />
+    </div>
+    <div v-if="masteryBatch && allMasteryWords.length" class="card word-list-card">
+      <div class="status-header">
+        <span class="status-label master-kind">Mastering</span>
+        <span class="batch-name">{{ masteryBatch.name }}</span>
+      </div>
+      <div class="word-scroll">
+        <div v-for="w in allMasteryWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
+          <div class="word-label">
+            <span class="word-ru">{{ w.ru }}</span>
+            <span class="word-en muted">{{ w.en }}</span>
+          </div>
+          <div class="word-dims">
+            <span
+              v-for="d in w.dims"
+              :key="d.name"
+              class="dim-pip"
+              :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
+              :title="d.name"
+            >{{ d.label }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Open-ended free-practice drills -->
@@ -485,5 +567,41 @@ const FOCUSED = [
 .dismiss-report:hover {
   color: var(--text);
   border-color: var(--muted);
+}
+.status-card {
+  display: grid;
+  gap: 0.6rem;
+}
+.risk-card {
+  border-left: 4px solid var(--warn, #f59e0b);
+}
+.slipped-card {
+  border-left: 4px solid var(--bad, #ef4444);
+}
+.word-list-card {
+  display: grid;
+  gap: 0.6rem;
+}
+.status-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.status-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.risk-label {
+  color: var(--warn, #f59e0b);
+}
+.slipped-label {
+  color: var(--bad, #ef4444);
+}
+.status-count {
+  font-size: 0.82rem;
 }
 </style>
