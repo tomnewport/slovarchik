@@ -2,6 +2,7 @@ import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import VocabView from './VocabView.vue'
 import { state } from '../stores/vocab.js'
+import { state as progressState } from '../stores/progress.js'
 import { shapeVocab } from '../lib/vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
@@ -197,6 +198,89 @@ describe('VocabView', () => {
     await left[0].trigger('click')
     await right[rightIndex].trigger('click')
     expect(wrapper.vm.score.right).toBe(1)
+  })
+})
+
+describe('weighted vocab selection', () => {
+  // Minimum events that push a word into the 'learned' state:
+  // 3-of-4 correct for identification/usage/hearing, 3 speaking attempts.
+  function makeLearnedEvents() {
+    return [
+      ...['identification', 'usage', 'hearing'].flatMap((dim) => [
+        { level: 'learning', dimension: dim, correct: false, ts: 0 },
+        { level: 'learning', dimension: dim, correct: true, ts: 1 },
+        { level: 'learning', dimension: dim, correct: true, ts: 2 },
+        { level: 'learning', dimension: dim, correct: true, ts: 3 },
+      ]),
+      { level: 'learning', dimension: 'speaking', correct: true, ts: 4 },
+      { level: 'learning', dimension: 'speaking', correct: true, ts: 5 },
+      { level: 'learning', dimension: 'speaking', correct: true, ts: 6 },
+    ]
+  }
+
+  function learnedRecord(id, events = makeLearnedEvents()) {
+    return { word: id, events, peak: 2, learnedAt: 1, masteredAt: null }
+  }
+
+  afterEach(() => {
+    progressState.records = {}
+  })
+
+  it('falls back to all vocab when no words are learned yet', async () => {
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[1].trigger('click')
+    const allWords = shapeVocab(loadFixtureWords())
+    expect(allWords.some((w) => w.id === wrapper.vm.current?.id)).toBe(true)
+  })
+
+  it('restricts selection to learned words when progress exists', async () => {
+    const words = shapeVocab(loadFixtureWords())
+    const learnedWord = words[0]
+    progressState.records = { [learnedWord.id]: learnedRecord(learnedWord.id) }
+
+    // Only one word in the learned pool — every pick must return it.
+    for (let i = 0; i < 5; i++) {
+      const wrapper = mount(VocabView)
+      await wrapper.findAll('button.card')[1].trigger('click')
+      expect(wrapper.vm.current?.id).toBe(learnedWord.id)
+    }
+  })
+
+  it('includes slipped (lost) words in the pool even when their state dropped below learned', async () => {
+    const words = shapeVocab(loadFixtureWords())
+    const slippedWord = words[0]
+    // peak=2 (learned rank) with no events → stateOf returns 'unknown' → lost
+    progressState.records = {
+      [slippedWord.id]: { word: slippedWord.id, events: [], peak: 2, learnedAt: 1, masteredAt: null },
+    }
+
+    for (let i = 0; i < 5; i++) {
+      const wrapper = mount(VocabView)
+      await wrapper.findAll('button.card')[1].trigger('click')
+      expect(wrapper.vm.current?.id).toBe(slippedWord.id)
+    }
+  })
+
+  it('selects slipped words significantly more often than normal learned words', async () => {
+    const words = shapeVocab(loadFixtureWords())
+    const slippedWord = words[0]
+    const learnedWord = words[1]
+    // slipped → weight 20; learnedWord is the only non-priority so cutoff=1 → stale → weight 5
+    // P(slipped) = 20/25 = 80 %, P(learned) = 5/25 = 20 %
+    progressState.records = {
+      [slippedWord.id]: { word: slippedWord.id, events: [], peak: 2, learnedAt: 1, masteredAt: null },
+      [learnedWord.id]: learnedRecord(learnedWord.id),
+    }
+
+    const counts = { [slippedWord.id]: 0, [learnedWord.id]: 0 }
+    for (let i = 0; i < 60; i++) {
+      const wrapper = mount(VocabView)
+      await wrapper.findAll('button.card')[1].trigger('click')
+      const id = wrapper.vm.current?.id
+      if (id in counts) counts[id]++
+    }
+    // With 80 % vs 20 % probability the slipped word must dominate.
+    expect(counts[slippedWord.id]).toBeGreaterThan(counts[learnedWord.id])
   })
 })
 
