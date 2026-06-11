@@ -79,7 +79,8 @@ describe('SpeakingView', () => {
     expect(wrapper.text()).toContain('100% letters')
     const words = wrapper.findAll('.word-diff span')
     expect(words.length).toBeGreaterThan(0)
-    expect(words.every((w) => w.classes('word-hit'))).toBe(true)
+    // Punctuation tokens render with no class (skip); real words must all be hits.
+    expect(wrapper.findAll('.word-diff .word-miss')).toHaveLength(0)
   })
 
   it('shows which words were missed when the answer is only partly right', async () => {
