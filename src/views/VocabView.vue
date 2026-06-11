@@ -4,6 +4,8 @@ import { vocab, state } from '../stores/vocab.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
 import { resetHint } from '../stores/keyboard.js'
 import { speak, speechSupported } from '../lib/speech.js'
+import { atRisk, lost, state as progressState, stateOf } from '../stores/progress.js'
+import { lastAttemptAt } from '../lib/progression.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
@@ -64,6 +66,66 @@ function firstEn(w) {
 // the current word has any, we surface a reminder after it's answered.
 const heteronyms = computed(() => current.value?.heteronyms ?? [])
 
+// Build a weighted pool of known (learned+) words for drilling.
+// Returns null when no learned words exist yet (new user → fall back to all vocab).
+// Weights: 20x for slipped (lost) or at-risk words; 5x for the 25% of remaining
+// learned vocab drilled least recently; 1x for everything else.
+function buildWeightedPool() {
+  const records = progressState.records
+  const lostSet = new Set(lost.value)
+  const atRiskSet = new Set(atRisk.value)
+
+  const words = vocab.value.filter((w) => {
+    const st = stateOf(w.id)
+    return st === 'learned' || st === 'mastered' || lostSet.has(w.id)
+  })
+  if (words.length === 0) return null
+
+  // Find the 25% of non-priority learned words drilled longest ago.
+  const nonPriority = words.filter((w) => !lostSet.has(w.id) && !atRiskSet.has(w.id))
+  const cutoff = Math.ceil(nonPriority.length * 0.25)
+  const sorted = [...nonPriority].sort(
+    (a, b) =>
+      (lastAttemptAt(records[a.id]?.events) ?? 0) -
+      (lastAttemptAt(records[b.id]?.events) ?? 0),
+  )
+  const staleSet = new Set(sorted.slice(0, cutoff).map((w) => w.id))
+
+  const weights = words.map((w) => {
+    if (lostSet.has(w.id) || atRiskSet.has(w.id)) return 20
+    if (staleSet.has(w.id)) return 5
+    return 1
+  })
+  return { words, weights }
+}
+
+// Weighted pick of a single word (with replacement).
+function weightedPickWord() {
+  const pool = buildWeightedPool()
+  if (!pool) return sample(vocab.value, 1)[0]
+  const total = pool.weights.reduce((a, b) => a + b, 0)
+  let r = Math.random() * total
+  for (let i = 0; i < pool.words.length; i++) {
+    r -= pool.weights[i]
+    if (r < 0) return pool.words[i]
+  }
+  return pool.words[pool.words.length - 1]
+}
+
+// Weighted sample of n distinct words (without replacement) using reservoir
+// scoring: score = -log(U) / weight gives each item a proportional selection
+// probability while keeping picks distinct.
+function weightedSampleWords(n) {
+  const pool = buildWeightedPool()
+  if (!pool) return sample(vocab.value, n)
+  const scored = pool.words.map((w, i) => ({
+    word: w,
+    score: -Math.log(Math.random()) / pool.weights[i],
+  }))
+  scored.sort((a, b) => b.score - a.score)
+  return scored.slice(0, Math.min(n, scored.length)).map((s) => s.word)
+}
+
 function start(levelId) {
   level.value = levelId
   score.right = 0
@@ -82,7 +144,7 @@ function nextQuestion() {
   answered.value = false
   wasCorrect.value = false
   typed.value = ''
-  current.value = sample(vocab.value, 1)[0]
+  current.value = weightedPickWord()
   nextTick(() => inputEl.value?.focus())
   if (direction.value === 'ru-en') speak(current.value.ru)
 }
@@ -94,7 +156,7 @@ function nextBoard() {
   matched.clear()
   selectedLeft.value = null
   selectedRight.value = null
-  const words = sample(vocab.value, Math.min(BOARD_PAIRS, vocab.value.length))
+  const words = weightedSampleWords(Math.min(BOARD_PAIRS, vocab.value.length))
   boardLeft.value = shuffle(words)
   boardRight.value = shuffle(words)
 }
