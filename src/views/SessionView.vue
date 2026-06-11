@@ -214,6 +214,19 @@ async function skip(dimension) {
 const segments = computed(() => practiceSegments(runner))
 const overall = computed(() => Math.round(firstPassProgress(runner) * 100))
 
+const wordStatus = computed(() => {
+  if (!current.value?.targets?.length) return null
+  const lostSet = new Set(progress.lost.value)
+  const riskSet = new Set(progress.atRisk.value)
+  for (const key of current.value.targets) {
+    if (lostSet.has(key)) return 'slipped'
+  }
+  for (const key of current.value.targets) {
+    if (riskSet.has(key)) return 'at-risk'
+  }
+  return null
+})
+
 const summary = computed(() => {
   const base = runnerSummary(runner)
   const slipped = []
@@ -273,6 +286,9 @@ function confirmClose() {
 
     <!-- Active exercise -->
     <div v-else-if="runner.phase === 'exercise' && current" class="exercise">
+      <span v-if="wordStatus" class="word-status" :class="wordStatus">
+        {{ wordStatus === 'slipped' ? 'Slipped' : 'At risk' }}
+      </span>
       <!-- Fold the submission count into the key so a repeated exercise (same
            id) remounts fresh instead of keeping its previous graded state. -->
       <component
@@ -418,6 +434,26 @@ function confirmClose() {
 .repeat {
   flex: 0 0 auto;
   font-size: 0.85rem;
+}
+.word-status {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.75rem;
+}
+.word-status.slipped {
+  background: rgba(255, 92, 92, 0.15);
+  color: var(--bad);
+  border: 1px solid rgba(255, 92, 92, 0.3);
+}
+.word-status.at-risk {
+  background: rgba(255, 209, 102, 0.12);
+  color: var(--gold);
+  border: 1px solid rgba(255, 209, 102, 0.3);
 }
 .skips {
   margin-top: 1.5rem;
