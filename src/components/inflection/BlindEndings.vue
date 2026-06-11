@@ -58,57 +58,59 @@ onMounted(() => speak(props.paradigm.lemma))
 
 <template>
   <div class="grid" style="gap: 1rem">
-    <table class="ptable">
-      <thead>
-        <tr>
-          <th></th>
-          <th v-for="col in paradigm.cols" :key="col.key">{{ col.label }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="row in paradigm.rows" :key="row.key">
-          <th class="rowhead">
-            {{ row.label }}
-            <small v-if="row.sub" class="muted">{{ row.sub }}</small>
-          </th>
-          <td v-for="col in paradigm.cols" :key="col.key">
-            <div
-              v-if="cellAt(row.key, col.key) && (!checked || correctCell(cellKey(row.key, col.key)))"
-              class="ecell"
-            >
-              <span class="muted" lang="ru">{{ stems[cellKey(row.key, col.key)] }}</span>
-              <input
-                v-model="entries[cellKey(row.key, col.key)]"
-                type="text"
-                lang="ru"
-                class="ending-input"
-                :data-answer="endings[cellKey(row.key, col.key)]"
-                :disabled="checked"
-                :style="{
-                  borderColor: checked ? 'var(--good)' : undefined,
-                }"
-                autocomplete="off"
-                autocapitalize="off"
-                spellcheck="false"
-                @keydown.enter.prevent="focusNext"
-              />
-            </div>
-            <div
-              v-if="checked && cellAt(row.key, col.key) && !correctCell(cellKey(row.key, col.key))"
-              class="correction"
-            >
-              <div class="wrong-attempt" lang="ru">
-                <span class="muted">{{ stems[cellKey(row.key, col.key)] }}</span><span>{{ entries[cellKey(row.key, col.key)] || '∅' }}</span>
+    <div class="table-scroll">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th></th>
+            <th v-for="col in paradigm.cols" :key="col.key">{{ col.label }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="row in paradigm.rows" :key="row.key">
+            <th class="rowhead">
+              {{ row.label }}
+              <small v-if="row.sub" class="muted">{{ row.sub }}</small>
+            </th>
+            <td v-for="col in paradigm.cols" :key="col.key">
+              <div
+                v-if="cellAt(row.key, col.key) && (!checked || correctCell(cellKey(row.key, col.key)))"
+                class="ecell"
+              >
+                <span class="muted" lang="ru">{{ stems[cellKey(row.key, col.key)] }}</span>
+                <input
+                  v-model="entries[cellKey(row.key, col.key)]"
+                  type="text"
+                  lang="ru"
+                  class="ending-input"
+                  :data-answer="endings[cellKey(row.key, col.key)]"
+                  :disabled="checked"
+                  :style="{
+                    borderColor: checked ? 'var(--good)' : undefined,
+                  }"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  @keydown.enter.prevent="focusNext"
+                />
               </div>
-              <div class="correct-form speak-row">
-                <span lang="ru">{{ cellAt(row.key, col.key).form }}</span>
-                <SpeakButton :text="cellAt(row.key, col.key).form" />
+              <div
+                v-if="checked && cellAt(row.key, col.key) && !correctCell(cellKey(row.key, col.key))"
+                class="correction"
+              >
+                <div class="wrong-attempt" lang="ru">
+                  <span class="muted">{{ stems[cellKey(row.key, col.key)] }}</span><span>{{ entries[cellKey(row.key, col.key)] || '∅' }}</span>
+                </div>
+                <div class="correct-form speak-row">
+                  <span lang="ru">{{ cellAt(row.key, col.key).form }}</span>
+                  <SpeakButton :text="cellAt(row.key, col.key).form" />
+                </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="row">
       <button v-if="!checked" class="primary" @click="check">Check</button>
@@ -117,6 +119,9 @@ onMounted(() => speak(props.paradigm.lemma))
 </template>
 
 <style scoped>
+.table-scroll {
+  overflow-x: auto;
+}
 .ptable {
   width: 100%;
   border-collapse: collapse;

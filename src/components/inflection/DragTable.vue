@@ -114,50 +114,52 @@ function check() {
       </button>
     </div>
 
-    <table class="ptable">
-      <thead>
-        <tr>
-          <th></th>
-          <th v-for="col in paradigm.cols" :key="col.key">{{ col.label }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="row in paradigm.rows" :key="row.key">
-          <th class="rowhead">
-            {{ row.label }}
-            <small v-if="row.sub" class="muted">{{ row.sub }}</small>
-          </th>
-          <td v-for="col in paradigm.cols" :key="col.key">
-            <div
-              v-if="cellAt(row.key, col.key)"
-              class="drop"
-              :class="{
-                filled: placed[cellKey(row.key, col.key)] != null,
-                correct: checked && isCorrect(cellKey(row.key, col.key)),
-                wrong: checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key)),
-                droppable: picked != null && placed[cellKey(row.key, col.key)] == null,
-              }"
-              @click="onCellClick(cellKey(row.key, col.key))"
-              @dragover.prevent
-              @drop.prevent="(e) => onDrop(e, cellKey(row.key, col.key))"
-            >
+    <div class="table-scroll">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th></th>
+            <th v-for="col in paradigm.cols" :key="col.key">{{ col.label }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="row in paradigm.rows" :key="row.key">
+            <th class="rowhead">
+              {{ row.label }}
+              <small v-if="row.sub" class="muted">{{ row.sub }}</small>
+            </th>
+            <td v-for="col in paradigm.cols" :key="col.key">
               <div
-                v-if="checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key))"
-                class="correction"
-                lang="ru"
+                v-if="cellAt(row.key, col.key)"
+                class="drop"
+                :class="{
+                  filled: placed[cellKey(row.key, col.key)] != null,
+                  correct: checked && isCorrect(cellKey(row.key, col.key)),
+                  wrong: checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key)),
+                  droppable: picked != null && placed[cellKey(row.key, col.key)] == null,
+                }"
+                @click="onCellClick(cellKey(row.key, col.key))"
+                @dragover.prevent
+                @drop.prevent="(e) => onDrop(e, cellKey(row.key, col.key))"
               >
-                <span class="wrong-attempt">{{ chipById.get(placed[cellKey(row.key, col.key)]).form }}</span>
-                <span class="correct-form">{{ cellAt(row.key, col.key).form }}</span>
+                <div
+                  v-if="checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key))"
+                  class="correction"
+                  lang="ru"
+                >
+                  <span class="wrong-attempt">{{ chipById.get(placed[cellKey(row.key, col.key)]).form }}</span>
+                  <span class="correct-form">{{ cellAt(row.key, col.key).form }}</span>
+                </div>
+                <span v-else-if="placed[cellKey(row.key, col.key)] != null" lang="ru">
+                  {{ chipById.get(placed[cellKey(row.key, col.key)]).form }}
+                </span>
+                <span v-else class="muted">·</span>
               </div>
-              <span v-else-if="placed[cellKey(row.key, col.key)] != null" lang="ru">
-                {{ chipById.get(placed[cellKey(row.key, col.key)]).form }}
-              </span>
-              <span v-else class="muted">·</span>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="row">
       <button v-if="!checked" class="primary" :disabled="!allPlaced" @click="check">Check</button>
@@ -187,6 +189,9 @@ function check() {
 .chip.picked {
   border-color: var(--primary);
   background: color-mix(in srgb, var(--primary) 22%, var(--card));
+}
+.table-scroll {
+  overflow-x: auto;
 }
 .ptable {
   width: 100%;
