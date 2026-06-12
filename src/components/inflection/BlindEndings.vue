@@ -134,11 +134,21 @@ onMounted(() => speak(props.paradigm.lemma))
   text-align: left;
   white-space: nowrap;
   vertical-align: top;
+  position: sticky;
+  left: 0;
+  background: var(--card);
+  z-index: 1;
 }
 .rowhead small {
   display: block;
   font-weight: 400;
   font-size: 0.7rem;
+}
+.ptable thead th:first-child {
+  position: sticky;
+  left: 0;
+  background: var(--card);
+  z-index: 1;
 }
 .ecell {
   display: flex;
