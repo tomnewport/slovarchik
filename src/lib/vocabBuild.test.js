@@ -204,6 +204,69 @@ words:
   })
 })
 
+describe('ambiguousEn', () => {
+  const text = `
+words:
+  "дочка=daughter":
+    cefr_level: A1
+    en_gb:
+      standard: daughter (an informal term)
+  "дочь=daughter":
+    cefr_level: A1
+    en_gb:
+      standard: daughter (a female child)
+  "дом=house":
+    cefr_level: A1
+    en_gb:
+      standard: house
+`
+  const words = buildWords([{ pos: 'noun', text }])
+
+  it('marks words that share a base English meaning', () => {
+    const dochka = words.find((w) => w.key === 'дочка=daughter')
+    const doch = words.find((w) => w.key === 'дочь=daughter')
+    expect(dochka.ambiguousEn).toHaveLength(1)
+    expect(dochka.ambiguousEn[0].ru).toBe('дочь')
+    expect(doch.ambiguousEn).toHaveLength(1)
+    expect(doch.ambiguousEn[0].ru).toBe('дочка')
+  })
+
+  it('leaves non-colliding words with an empty ambiguousEn', () => {
+    const house = words.find((w) => w.key === 'дом=house')
+    expect(house.ambiguousEn).toEqual([])
+  })
+
+  it('carries the sibling disambiguating note', () => {
+    const dochka = words.find((w) => w.key === 'дочка=daughter')
+    expect(dochka.ambiguousEn[0].note).toBe('a female child')
+  })
+
+  it('shapeVocab exposes ambiguousEn as an array on every word', () => {
+    const shaped = shapeVocab(words)
+    for (const w of shaped) expect(Array.isArray(w.ambiguousEn)).toBe(true)
+    const dochka = shaped.find((w) => w.id === 'дочка=daughter')
+    expect(dochka.ambiguousEn).toHaveLength(1)
+  })
+
+  it('does not include non-learnable words in collision groups', () => {
+    const gloss = `
+words:
+  "шить=to sew":
+    cefr_level: A2
+    en_gb:
+      standard: to sew
+  "шить2=to sew":
+    learn: false
+    cefr_level: A2
+    en_gb:
+      standard: to sew
+`
+    const ws = buildWords([{ pos: 'verb', text: gloss }])
+    const sew = ws.find((w) => w.key === 'шить=to sew')
+    expect(sew.ambiguousEn).toEqual([])
+  })
+})
+
 describe('the bundled vocabulary fixtures', () => {
   const words = loadFixtureWords()
 

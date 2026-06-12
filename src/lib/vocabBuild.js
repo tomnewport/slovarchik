@@ -150,6 +150,9 @@ function normalizeWord(pos, key, word) {
     // explicit annotation wins; otherwise buildWords fills this in for headword
     // collisions (за́мок "castle" vs замо́к "lock").
     heteronyms: normalizeHeteronyms(word.heteronyms),
+    // Other learnable words that share the same base English meaning — filled in
+    // by linkAmbiguousEn after all words are built.
+    ambiguousEn: [],
     extra: word,
   }
 }
@@ -182,6 +185,30 @@ function linkHeteronyms(words) {
 }
 
 /**
+ * Mark learnable words that share the same base English meaning so drills can
+ * surface a disambiguation note. Entries whose `meaning` collides with at least
+ * one other learnable word get an `ambiguousEn` array listing the other members
+ * of the group (Russian headword + distinguishing note, if any).
+ */
+function linkAmbiguousEn(words) {
+  const byMeaning = new Map()
+  for (const w of words) {
+    if (!w.learnable || !w.meaning) continue
+    const key = w.meaning.toLowerCase()
+    if (!byMeaning.has(key)) byMeaning.set(key, [])
+    byMeaning.get(key).push(w)
+  }
+  for (const group of byMeaning.values()) {
+    if (group.length < 2) continue
+    for (const w of group) {
+      w.ambiguousEn = group
+        .filter((m) => m !== w)
+        .map((m) => ({ ru: m.headword || m.ru, note: m.meaningNote || '' }))
+    }
+  }
+}
+
+/**
  * Build the full, sorted word list from raw file contents.
  * @param {Array<{pos: string, text: string}>} files
  * @returns {object[]}
@@ -196,6 +223,7 @@ export function buildWords(files) {
     }
   }
   linkHeteronyms(out)
+  linkAmbiguousEn(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
@@ -221,6 +249,7 @@ export function shapeVocab(words) {
     note: w.meaningNote,
     heteronyms: w.heteronyms,
     alsoRu: w.alsoRu,
+    ambiguousEn: w.ambiguousEn ?? [],
   }))
 }
 

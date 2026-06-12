@@ -182,6 +182,7 @@ function buildWordType(practice, pi, ctx, make, kind) {
       en: enText(w.en),
       note: w.note,
       ...(w.alsoRu?.length ? { alsoRu: w.alsoRu } : {}),
+      ...(w.ambiguousEn?.length ? { ambiguousEn: w.ambiguousEn } : {}),
     }),
   )
 }
