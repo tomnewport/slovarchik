@@ -48,6 +48,9 @@ function check() {
   checked.value = true
   playFeedback(wasCorrect.value)
   if (double.value) showFire.value = true
+  // Read the Russian aloud once the answer is resolved so the learner hears the
+  // correct pronunciation — especially helpful after a spelling exercise.
+  if (!props.exercise.audio) speak(props.exercise.ru)
 }
 
 function next() {
@@ -70,6 +73,9 @@ onMounted(() => {
       <template v-else>
         <span class="cue">{{ exercise.en }}</span>
         <small v-if="exercise.note" class="muted">({{ exercise.note }})</small>
+        <small v-else-if="exercise.ambiguousEn?.length" class="muted">
+          (one of {{ exercise.ambiguousEn.length + 1 }} Russian words for this)
+        </small>
       </template>
     </div>
 

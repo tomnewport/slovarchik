@@ -235,6 +235,9 @@ function record(correct) {
       advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
     }
   }
+  // Read the Russian word aloud once the EN→RU answer is resolved so the
+  // learner hears the correct pronunciation alongside the revealed spelling.
+  if (direction.value === 'en-ru') speak(current.value.ru)
 }
 
 function submitTyped() {
@@ -314,6 +317,12 @@ onUnmounted(() => {
     <div v-if="level !== 'easy'" class="card" style="text-align: center">
       <div class="muted">Translate</div>
       <div style="font-size: 2rem; margin: 0.5rem 0" lang="ru">{{ promptOf(current) }}</div>
+      <template v-if="direction === 'en-ru'">
+        <small v-if="current.note" class="muted">({{ current.note }})</small>
+        <small v-else-if="current.ambiguousEn?.length" class="muted">
+          (one of {{ current.ambiguousEn.length + 1 }} Russian words for this)
+        </small>
+      </template>
       <SpeakButton v-if="direction === 'ru-en'" :text="promptOf(current)" />
     </div>
 
