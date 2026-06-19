@@ -402,6 +402,13 @@ function currentPool() {
     const target = rank(batchTarget(level))
     for (const key of batch.words) if (rank(stateOf(key)) < target) out.push(key)
   }
+  // Words that have slipped below `learned` need re-learning, but they fall
+  // through every other pool: the reinforce pools (at-risk / untested) keep only
+  // learned-or-better words, and a slipped word is usually no longer in any
+  // committed batch. Fold them into the current batch so they get tested again
+  // instead of sitting in `lost` forever. They sort to the front via
+  // `understanding`, so they get the most practice.
+  for (const key of lost.value) if (rank(stateOf(key)) < rank('learned')) out.push(key)
   // Fall back to anything actively being learned if no batch is committed.
   if (out.length === 0) {
     for (const k of Object.keys(state.records)) if (stateOf(k) === 'learning') out.push(k)
@@ -466,6 +473,23 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
     for (const d of dimensionsForLevel('learning')) {
       if (!dimensionProgress(evs, 'learning', d).met) {
         weakness[d] = Math.max(weakness[d], 2)
+      }
+    }
+  }
+  // Likewise boost dimensions still unmet at the *mastery* level for the words
+  // currently being mastered. Without this, a near-complete mastery batch can
+  // stall on its last word: if the dimension that word still needs (e.g. the
+  // inflection word-bank for identification) has high global accuracy, its
+  // weakness weight collapses to ~0 and the practice that would finish the word
+  // is almost never chosen.
+  if (state.mastery) {
+    for (const key of state.mastery.words) {
+      if (stateOf(key) !== 'learned') continue
+      const evs = events(key)
+      for (const d of dimensionsForLevel('mastery')) {
+        if (!dimensionProgress(evs, 'mastery', d).met) {
+          weakness[d] = Math.max(weakness[d], 2)
+        }
       }
     }
   }
