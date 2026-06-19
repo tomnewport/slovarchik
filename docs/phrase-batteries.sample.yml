@@ -1,0 +1,154 @@
+# phrase-batteries.sample.yml — proposed themed "batteries" (DRAFT for review).
+#
+# A *battery* is a themed family of carrier phrases. Each word is tagged (in its
+# own YAML) with the batteries it can sit in "without sounding weird"; at drill
+# time we pick one of its batteries and use that battery's carrier for the target
+# slot. ~10 batteries per part of speech.
+#
+# Two structural decisions that keep authoring small and correct:
+#
+#  1. NOUN batteries author the 6 case-frames directly — the slot *is* the noun,
+#     so there is nothing else to inflect.
+#  2. ADJECTIVE batteries only choose 4 *carrier nouns* (one per gender/number),
+#     referenced BY THEIR EXISTING VOCAB KEY. The carrier's forms come straight
+#     from nouns.yml (single source of truth — no hand-declension, no drift), and
+#     a small set of shared case-frames is reused across every battery. So an
+#     adjective battery is just a theme + 4 noun keys.
+#
+# Per-word tagging field (added to each word in its own file):
+#     batteries: [people, animals]      # ids from the matching POS list below
+# Bootstrap: each battery lists `from_collections:`; a script seeds `batteries:`
+# from a word's existing `collections:`, then LLM judgement refines/trims.
+#
+# Caveats:
+#  - Nominative carriers are number-neutral (Это / Вот / Скоро / "есть") so one
+#    frame serves sg and pl without verb-agreement.
+#  - Animate accusative = genitive: for animate-carrier adjective batteries
+#    (people, animals) the resolver fills the acc slot from the adjective's GEN
+#    cell (data only stores the inanimate acc). Flagged per battery with `animate: true`.
+#  - в/на and о/об alternations live only in the *carrier* (never the graded
+#    token), so they don't affect grading.
+
+# ───────────────────────────── NOUNS ──────────────────────────────
+nouns:
+  batteries:
+    - id: people
+      label: People & family
+      from_collections: [people, family]
+      animate: true
+      frames: { nom: "Э́то ___.", gen: "Я жду ___.", dat: "Я звоню́ ___.", acc: "Я ви́жу ___.", ins: "Я горжу́сь ___.", pre: "Я ду́маю о ___." }
+      en:     { nom: "This is ___.", gen: "I'm waiting for ___.", dat: "I'm calling ___.", acc: "I see ___.", ins: "I'm proud of ___.", pre: "I'm thinking about ___." }
+    - id: animals
+      label: Animals
+      from_collections: [animals, nature]
+      animate: true
+      frames: { nom: "Э́то ___.", gen: "Я бою́сь ___.", dat: "Я дал корм ___.", acc: "Я ви́жу ___.", ins: "Я любу́юсь ___.", pre: "Я чита́ю о ___." }
+      en:     { nom: "This is ___.", gen: "I'm afraid of ___.", dat: "I fed ___.", acc: "I see ___.", ins: "I'm admiring ___.", pre: "I'm reading about ___." }
+    - id: places
+      label: Places & travel
+      from_collections: [places, travel, geography, architecture, home]
+      frames: { nom: "Здесь есть ___.", gen: "Я е́ду из ___.", dat: "Я е́ду к ___.", acc: "Я е́ду в ___.", ins: "Я любу́юсь ___.", pre: "Я живу́ в ___." }
+      en:     { nom: "There is ___ here.", gen: "I'm coming from ___.", dat: "I'm heading towards ___.", acc: "I'm going to ___.", ins: "I'm admiring ___.", pre: "I live in ___." }
+    - id: work_study
+      label: Work & study
+      from_collections: [work, school, study, reading]
+      frames: { nom: "Э́то ___.", gen: "Э́то зави́сит от ___.", dat: "Я гото́влюсь к ___.", acc: "Я начина́ю ___.", ins: "Я занима́юсь ___.", pre: "Я ду́маю о ___." }
+      en:     { nom: "This is ___.", gen: "It depends on ___.", dat: "I'm preparing for ___.", acc: "I'm starting ___.", ins: "I'm busy with ___.", pre: "I'm thinking about ___." }
+    - id: objects
+      label: Objects & tech
+      from_collections: [technology, home, clothes, clothing, shopping]
+      frames: { nom: "Э́то ___.", gen: "У меня́ нет ___.", dat: "Я ищу́ инстру́кцию к ___.", acc: "Я купи́л ___.", ins: "Я по́льзуюсь ___.", pre: "Я забы́л о ___." }
+      en:     { nom: "This is ___.", gen: "I don't have ___.", dat: "I'm looking for a manual for ___.", acc: "I bought ___.", ins: "I use ___.", pre: "I forgot about ___." }
+    - id: nature
+      label: Nature & weather
+      from_collections: [nature, weather, geography]
+      frames: { nom: "Здесь есть ___.", gen: "Я жду ___.", dat: "Я рад ___.", acc: "Я люблю́ ___.", ins: "Я любу́юсь ___.", pre: "Мы говори́м о ___." }
+      en:     { nom: "There is ___ here.", gen: "I'm waiting for ___.", dat: "I'm glad of ___.", acc: "I love ___.", ins: "I'm admiring ___.", pre: "We're talking about ___." }
+    - id: communication
+      label: Communication & media
+      from_collections: [communication, reading]
+      frames: { nom: "Э́то ___.", gen: "Я жду ___.", dat: "Я рад ___.", acc: "Я чита́ю ___.", ins: "Я интересу́юсь ___.", pre: "Мы говори́м о ___." }
+      en:     { nom: "This is ___.", gen: "I'm waiting for ___.", dat: "I'm glad of ___.", acc: "I'm reading ___.", ins: "I'm interested in ___.", pre: "We're talking about ___." }
+    - id: abstract
+      label: Abstract & feelings
+      from_collections: [abstract, values, faith, character, society]
+      frames: { nom: "Э́то ___.", gen: "Я жела́ю тебе́ ___.", dat: "Я рад ___.", acc: "Я чу́вствую ___.", ins: "Я наслажда́юсь ___.", pre: "Я мечта́ю о ___." }
+      en:     { nom: "This is ___.", gen: "I wish you ___.", dat: "I'm glad of ___.", acc: "I feel ___.", ins: "I'm enjoying ___.", pre: "I dream about ___." }
+    - id: society
+      label: Money, politics & society
+      from_collections: [finance, politics, military, history]
+      frames: { nom: "Э́то ___.", gen: "Э́то зави́сит от ___.", dat: "Я доверя́ю ___.", acc: "Мы обсужда́ем ___.", ins: "Я интересу́юсь ___.", pre: "Мы говори́м о ___." }
+      en:     { nom: "This is ___.", gen: "It depends on ___.", dat: "I trust ___.", acc: "We're discussing ___.", ins: "I'm interested in ___.", pre: "We're talking about ___." }
+    - id: time_events
+      label: Time & events
+      from_collections: [time, holiday, history, sport]
+      frames: { nom: "Ско́ро ___.", gen: "Я жду ___.", dat: "Я гото́влюсь к ___.", acc: "Я люблю́ ___.", ins: "Я наслажда́юсь ___.", pre: "Мы говори́м о ___." }
+      en:     { nom: "Soon there is ___.", gen: "I'm waiting for ___.", dat: "I'm preparing for ___.", acc: "I love ___.", ins: "I'm enjoying ___.", pre: "We're talking about ___." }
+
+# ─────────────────────────── ADJECTIVES ───────────────────────────
+# Shared case-frames (carrier noun N pulled from its own vocab entry & inflected).
+# `{adj}` is the slot; `{N.<case>}` is the carrier noun's stored form.
+adjectives:
+  shared_frames:
+    nom: { ru: "Э́то {adj} {N.nom}.",          en: "This is a {adj} {N}." }
+    gen: { ru: "У меня́ нет {adj} {N.gen}.",    en: "I don't have a {adj} {N}." }
+    dat: { ru: "Я рад {adj} {N.dat}.",         en: "I'm glad of the {adj} {N}." }
+    acc: { ru: "Я ви́жу {adj} {N.acc}.",        en: "I see a {adj} {N}." }   # animate ⇒ adj from GEN cell
+    ins: { ru: "Я дово́лен {adj} {N.ins}.",      en: "I'm pleased with the {adj} {N}." }
+    pre: { ru: "Мы говори́м о {adj} {N.pre}.",   en: "We're talking about the {adj} {N}." }
+  batteries:
+    - { id: people,   label: Describing people,   from_collections: [people, character, family], animate: true,
+        carriers: { m: "челове́к=person", f: "же́нщина=woman", n: "лицо́=face", pl: "лю́ди=people" } }
+    - { id: animals,  label: Describing animals,  from_collections: [animals, nature], animate: true,
+        carriers: { m: "кот=cat", f: "соба́ка=dog", n: "живо́тное=animal", pl: "живо́тные=animals" } }
+    - { id: places,   label: Describing places,   from_collections: [places, travel, geography, architecture, home],
+        carriers: { m: "го́род=city", f: "у́лица=street", n: "зда́ние=building", pl: "места́=places" } }
+    - { id: food,     label: Describing food,     from_collections: [shopping],
+        carriers: { m: "суп=soup", f: "еда́=food", n: "блю́до=dish", pl: "проду́кты=groceries" } }
+    - { id: objects,  label: Describing objects,  from_collections: [technology, home, shopping],
+        carriers: { m: "стол=table", f: "вещь=thing", n: "окно́=window", pl: "ве́щи=things" } }
+    - { id: nature,   label: Describing nature,   from_collections: [nature, weather],
+        carriers: { m: "день=day", f: "пого́да=weather", n: "не́бо=sky", pl: "цветы́=flowers" } }
+    - { id: clothes,  label: Describing clothes,  from_collections: [clothes, clothing],
+        carriers: { m: "пиджа́к=jacket", f: "руба́шка=shirt", n: "пла́тье=dress", pl: "ту́фли=shoes" } }
+    - { id: texts,    label: Describing texts & ideas, from_collections: [reading, communication, school],
+        carriers: { m: "расска́з=story", f: "кни́га=book", n: "сло́во=word", pl: "мы́сли=thoughts" } }
+    - { id: time,     label: Describing time & events, from_collections: [time, holiday, history],
+        carriers: { m: "день=day", f: "неде́ля=week", n: "у́тро=morning", pl: "го́ды=years" } }
+    - { id: feelings, label: Describing feelings & qualities, from_collections: [abstract, values, faith],
+        carriers: { m: "хара́ктер=character", f: "улы́бка=smile", n: "чу́вство=feeling", pl: "эмо́ции=emotions" } }
+
+# ────────────────────────────── VERBS ─────────────────────────────
+# Carriers = subject + a themed adverbial/complement that stays intransitive-safe
+# for the theme. The lemma (infinitive) is the prompt; person/tense/past select
+# the paradigm cell. Imperfective ⇒ present, perfective ⇒ future (matched by aspect).
+verbs:
+  # subject phrasings reused by every battery; the battery supplies the tail.
+  subjects:
+    present: { "1sg": "Я", "2sg": "Ты", "3sg": "Он", "1pl": "Мы", "2pl": "Вы", "3pl": "Они́" }
+    future:  { "1sg": "За́втра я", "3sg": "За́втра он", "3pl": "За́втра они́" }
+    past:    { past_m: "Вчера́ он", past_f: "Вчера́ она́", past_n: "Вчера́ всё", past_pl: "Вчера́ они́" }
+  batteries:
+    - { id: routine,       label: Daily routine,     from_collections: [home, family, work],          tail: "ка́ждый день ___" }
+    - { id: motion,        label: Motion & travel,   from_collections: [motion, movement, travel],     tail: "___ на рабо́ту" }
+    - { id: communication, label: Speaking & writing, from_collections: [communication, reading],      tail: "___ с друзья́ми" }
+    - { id: work_study,    label: Work & study,      from_collections: [work, school, study],          tail: "___ весь день" }
+    - { id: senses,        label: Thinking & feeling, from_collections: [abstract, character, faith],  tail: "ча́сто ___" }
+    - { id: cooking,       label: Cooking & home,    from_collections: [home, shopping],               tail: "___ на ку́хне" }
+    - { id: sport,         label: Sport & activity,  from_collections: [sport, nature],                tail: "___ по утра́м" }
+    - { id: society,       label: Society & money,   from_collections: [finance, politics, society],   tail: "ча́сто ___" }
+    - { id: generic,       label: Generic,           from_collections: [],                             tail: "ча́сто ___" }
+  # Resolved RU = "<subject> <tail-with-___-as-conjugated-verb>".
+  # e.g. motion/1sg/present → "Я ___ на рабо́ту" → "Я е́зжу на рабо́ту".
+
+# ──────────────────────────── PRONOUNS ────────────────────────────
+# Adjective-like pronouns (мой, э́тот, како́й, чей, весь, сам, …) reuse the
+# adjective batteries above (assign them like adjectives). Personal + кто/что
+# (35 words total) are a fixed closed set — one "personal" battery is enough:
+pronouns:
+  batteries:
+    - id: personal
+      label: Personal & interrogative
+      from_collections: [personal]
+      frames: { nom: "___ уже́ здесь.", gen: "___ нет до́ма.", dat: "Да́йте ___ кни́гу.", acc: "Я ви́жу ___.", ins: "Я горжу́сь ___.", pre: "Я ду́маю о ___." }
+      en:     { nom: "___ is/are already here.", gen: "___ is/are not home.", dat: "Give ___ the book.", acc: "I see ___.", ins: "I'm proud of ___.", pre: "I'm thinking about ___." }
