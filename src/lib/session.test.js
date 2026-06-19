@@ -57,11 +57,30 @@ describe('buildSession', () => {
     expect(s.practices).toHaveLength(20)
     expect(s.size).toBe(20)
   })
-  it('tags practices with buckets matching the 25/25/50 allocation', () => {
-    const s = buildSession({ type: 'standard', size: 'normal', rng: seededRng(2) })
+  it('tags learning-only sessions with buckets matching the 25/25/50 allocation', () => {
+    const s = buildSession({ type: 'standard', size: 'normal', levels: ['learning'], rng: seededRng(2) })
     const counts = { atRisk: 0, untested: 0, current: 0 }
     for (const p of s.practices) counts[p.bucket]++
     expect(counts).toEqual(allocateBuckets(12))
+  })
+  it('reserves a guaranteed mastery share when both levels are available', () => {
+    // Both learning and mastery practices eligible (no `levels` filter).
+    const s = buildSession({ type: 'standard', size: 'normal', rng: seededRng(2) })
+    expect(s.practices).toHaveLength(12)
+    const mastery = s.practices.filter((p) => p.level === 'mastery')
+    // ~25% of 12 = 3 mastery slots, all targeting the current batch.
+    expect(mastery).toHaveLength(3)
+    expect(mastery.every((p) => p.bucket === 'current')).toBe(true)
+    // The remaining nine learning slots keep the 25/25/50 split.
+    const learning = s.practices.filter((p) => p.level === 'learning')
+    const counts = { atRisk: 0, untested: 0, current: 0 }
+    for (const p of learning) counts[p.bucket]++
+    expect(counts).toEqual(allocateBuckets(9))
+  })
+  it('always reserves at least one mastery slot in a small session', () => {
+    const s = buildSession({ type: 'standard', size: 'quick', rng: seededRng(7) })
+    expect(s.practices).toHaveLength(4)
+    expect(s.practices.filter((p) => p.level === 'mastery').length).toBeGreaterThanOrEqual(1)
   })
   it('only uses practices eligible for the session type', () => {
     const s = buildSession({ type: 'grammar', rng: seededRng(3) })

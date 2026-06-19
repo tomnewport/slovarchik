@@ -2,10 +2,13 @@
 // following the construction algorithm in #79:
 //
 //   1. Filter practices by the requested session type.
-//   2. 25% of practices target at-risk / lost words.
-//   3. 25% target words not tested for a long time.
-//   4. 50% target the current learning / mastery batch.
-//   5. Choose each practice's type at random, weighted to the weakest dimension.
+//   2. When both learning and mastery practices are available, reserve a fixed
+//      share of the session (MASTERY_SESSION_SHARE) for mastery so it is always
+//      practised regardless of weakness weighting. The rest are learning slots.
+//   3. Learning slots split 25% at-risk / 25% not-tested-recently / 50% current
+//      batch; mastery slots all target the current mastery batch.
+//   4. Choose each slot's practice type at random, weighted to the weakest
+//      dimension.
 //
 // Plus two run-time helpers: a repeat-mistakes loop that re-queues wrong items
 // until none remain, and an end-of-session summary.
@@ -32,6 +35,15 @@ export const SESSION_TYPES = Object.freeze({
 /** The three word buckets and their share of a session. */
 export const BUCKETS = Object.freeze(['atRisk', 'untested', 'current'])
 export const BUCKET_SHARES = Object.freeze({ atRisk: 0.25, untested: 0.25, current: 0.5 })
+
+/**
+ * When both learning and mastery practices are on offer, this fraction of the
+ * session is reserved for mastery (at least one practice). This guarantees
+ * mastery is always exercised, independent of how weakly it is weighted against
+ * learning by dimension weakness — otherwise a near-complete mastery batch can
+ * be starved when learning dimensions dominate the weighting.
+ */
+export const MASTERY_SESSION_SHARE = 0.25
 
 /** Resolve the practice count for a session type (+ size key for standard). */
 export function sessionSize(type, sizeKey) {
@@ -92,11 +104,30 @@ export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, 
   const all = practicesForSession(type)
   const eligible = levels ? all.filter((p) => levels.includes(p.level)) : all
   const size = sessionSize(type, sizeKey)
-  const counts = allocateBuckets(size)
-  const slots = shuffle(bucketSlots(counts), rng)
 
-  const practices = slots.map((bucket) => {
-    const pt = weightedPick(eligible, (p) => weakness[p.dimension] ?? 1, rng)
+  const masteryPractices = eligible.filter((p) => p.level === 'mastery')
+  const learningPractices = eligible.filter((p) => p.level === 'learning')
+
+  // Reserve a guaranteed share of the session for mastery whenever both levels
+  // are available. When only one level is on offer (a grammar session is all
+  // mastery; a speaking session has none) that level takes the whole session.
+  let masterySize
+  if (masteryPractices.length === 0) masterySize = 0
+  else if (learningPractices.length === 0) masterySize = size
+  else masterySize = Math.min(size, Math.max(1, Math.round(size * MASTERY_SESSION_SHARE)))
+  const learningSize = size - masterySize
+
+  // Learning slots keep the 25/25/50 at-risk/untested/current split. Mastery
+  // slots all target the words actively being mastered (the current mastery
+  // batch), so they use the current bucket — there is no refresh split for
+  // mastery. Each slot remembers the practice set it must draw from.
+  const counts = allocateBuckets(learningSize)
+  const learningSlots = bucketSlots(counts).map((bucket) => ({ bucket, pool: learningPractices }))
+  const masterySlots = Array.from({ length: masterySize }, () => ({ bucket: 'current', pool: masteryPractices }))
+  const slots = shuffle([...learningSlots, ...masterySlots], rng)
+
+  const practices = slots.map(({ bucket, pool }) => {
+    const pt = weightedPick(pool, (p) => weakness[p.dimension] ?? 1, rng)
     return {
       practiceType: pt.id,
       dimension: pt.dimension,

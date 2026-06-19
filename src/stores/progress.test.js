@@ -383,6 +383,45 @@ describe('sessions', () => {
     expect(encounterCount('w0')).toBe(2) // only identification events
     expect(encounterCount('w1')).toBe(0) // never attempted
   })
+
+  it('folds a word that slipped below learned into the current pool', async () => {
+    setVocab(makeWords(20, { hasInflections: false }))
+    // A committed learning batch keeps the current pool non-empty, so the
+    // "nothing committed" fallback can't be what surfaces the slipped word.
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 })
+    // w5 reaches learned (== mastered for an uninflected word) then slips below
+    // it: two wrong identification answers drop the 3/4 window under threshold.
+    await learn('w5')
+    expect(stateOf('w5')).toBe('mastered')
+    await recordAttempt({ word: 'w5', dimension: 'identification', level: 'learning', correct: false })
+    await recordAttempt({ word: 'w5', dimension: 'identification', level: 'learning', correct: false })
+    expect(stateOf('w5')).toBe('learning')
+    expect(lost.value).toContain('w5')
+    // w5 is in no committed batch and is below `learned`, so the reinforce pools
+    // exclude it — only the current-pool fold gets it tested again.
+    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(11))
+    expect(session.pools.current).toContain('w5')
+  })
+
+  it('boosts the unmet mastery dimension for a near-complete mastery batch', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    // A mastery batch whose only word is learned but still needs its mastery
+    // identification (the inflection word-bank) to be mastered.
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0'], size: 1 })
+    await learn('w0')
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true })
+    expect(stateOf('w0')).toBe('learned') // mastery usage met, identification not
+    // Grammar sessions draw only inflection practices (mastery identification vs
+    // usage). With everything answered correctly, both dimensions' global
+    // weakness is ~0; only the unmet-mastery boost tips selection toward the
+    // identification practice that would finish the word.
+    const practices = Array.from({ length: 5 }, (_, i) =>
+      startSession({ type: 'grammar', size: 'super' }, seededRng(i + 200)).practices,
+    ).flat()
+    const idFraction =
+      practices.filter((p) => p.dimension === 'identification').length / practices.length
+    expect(idFraction).toBeGreaterThan(0.5)
+  })
 })
 
 describe('persistence', () => {
