@@ -99,6 +99,40 @@ export function dimensionProgress(events, level, dimension) {
   }
 }
 
+/**
+ * Minimum number of additional correct attempts a list must gain to satisfy a
+ * criterion, assuming every added attempt is answered correctly. Zero when the
+ * criterion is already met. This is the "best case" distance to done — used to
+ * size a batch's exercises-to-go progress bar.
+ * @param {Array<{correct?: boolean}>} attempts chronological attempts
+ * @param {{type: string, need: number, window?: number}} crit
+ */
+export function minCorrectToMeet(attempts, crit) {
+  if (!crit) return 0
+  const list = attempts ?? []
+  // 'attempts' (speaking): any attempt counts, so it is just the shortfall.
+  if (crit.type === 'attempts') return Math.max(0, crit.need - list.length)
+  // 'ratio': append correct attempts until the most-recent `window` slice holds
+  // `need` correct. At k = window every windowed attempt is an appended correct
+  // one (need ≤ window), so this always terminates.
+  for (let k = 0; k <= crit.window; k++) {
+    if (criterionMet([...list, ...Array(k).fill({ correct: true })], crit)) return k
+  }
+  return crit.window
+}
+
+/**
+ * Minimum number of correct exercises a word still needs for every applicable
+ * dimension of a level to be met (best case — each answered correctly). Summed
+ * across a batch's words this is the "exercises to go" until the batch is done.
+ */
+export function minExercisesToLevel(events, level, word = {}) {
+  return applicableDimensions(level, word).reduce(
+    (sum, dim) => sum + minCorrectToMeet(attemptsFor(events, level, dim), CRITERIA[level]?.[dim]),
+    0,
+  )
+}
+
 /** Parts of speech that carry the phrase-completion (context) drill. */
 const CONTEXT_DRILL_POS = new Set(['noun', 'verb', 'adjective'])
 

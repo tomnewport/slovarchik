@@ -84,6 +84,18 @@ describe('HomeView', () => {
     expect(card.text()).toContain('animals')
   })
 
+  it('renders the exercise-progress bar at the top of each batch', () => {
+    progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
+    progress.mastery = { name: 'Random', level: 'mastery', words: [], size: 10 }
+    const wrapper = mount(HomeView)
+    const bars = wrapper.findAll('.exercise-bar')
+    expect(bars).toHaveLength(2)
+    // The exercise bar precedes the words-done bar within its row.
+    const firstRow = wrapper.find('.batch-row')
+    const children = [...firstRow.element.children].map((el) => el.className)
+    expect(children[0]).toContain('exercise-bar')
+  })
+
   it('shows mastery batch only when a mastery batch is active', () => {
     const wrapper = mount(HomeView)
     expect(wrapper.find('.master-kind').exists()).toBe(false)
