@@ -57,8 +57,15 @@ const learningDone = computed(() => learningProgress.value.filter((w) => w.done)
 const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
 
 const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
-const MASTERY_DIMS = ['identification', 'usage']
-const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️' }
+const MASTERY_DIMS = ['identification', 'usage', 'context']
+const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️', context: '🛠️' }
+
+// The context (phrase-completion) requirement only applies to words that have a
+// drill, so drop its dot for words it doesn't gate (keeps "done" words tidy).
+function dimsFor(key, level, dims) {
+  if (level !== 'mastery') return dims
+  return dims.filter((d) => d !== 'context' || progress.hasContextDrill(key))
+}
 
 function buildWordList(batchWords, level, dims) {
   return batchWords
@@ -71,7 +78,7 @@ function buildWordList(batchWords, level, dims) {
         en,
         done: w.done,
         lastAt: lastAttemptAt(events) ?? 0,
-        dims: dims.map((d) => ({
+        dims: dimsFor(w.word, level, dims).map((d) => ({
           label: DIM_LABEL[d],
           name: d,
           ...dimensionProgress(events, level, d),
@@ -93,7 +100,7 @@ function buildStatusWordList(keys) {
     const { ru, en } = parseKey(key)
     const state = stateOf(key)
     const level = state === 'mastered' ? 'mastery' : 'learning'
-    const dims = (level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS).map((d) => ({
+    const dims = dimsFor(key, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS).map((d) => ({
       label: DIM_LABEL[d],
       name: d,
       ...dimensionProgress(evs, level, d),

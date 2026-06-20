@@ -12,6 +12,7 @@
 //   type     spell with the hintable keyboard (spell-word, spell-phrase, dictation)
 //   speak    repeat aloud                     (repeat-word, repeat-phrase)
 //   inflect  fill an inflection table         (inflect-bank, inflect-keyboard)
+//   phrase-fix restore an inflection in a phrase (inflect-context)
 //
 // Every descriptor carries `targets` (the word keys it should report to the
 // progress store) plus `dimension`/`level` so results map back to the model.
@@ -20,6 +21,7 @@ import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
+import { buildContextExercise, canBuildContext } from './phraseBattery.js'
 
 /** Render `kind` for each practice type. */
 export const PRACTICE_KIND = Object.freeze({
@@ -34,6 +36,7 @@ export const PRACTICE_KIND = Object.freeze({
   'repeat-phrase': 'speak',
   'inflect-bank': 'inflect',
   'inflect-keyboard': 'inflect',
+  'inflect-context': 'phrase-fix',
 })
 
 /** Pairs shown in a single matching board. */
@@ -237,11 +240,35 @@ function buildInflect(practice, pi, ctx, make) {
   )
 }
 
+function buildContext(practice, pi, ctx, make) {
+  const { pool, rest } = splitWords(practice.pool, ctx.vocab)
+  const bctx = { batteries: ctx.batteries, wordByKey: ctx.recordByKey }
+  const resolvable = (list) =>
+    list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && canBuildContext(r, bctx))
+  // Like buildInflect, mastery exercises never widen beyond the committed batch.
+  const topUpSource = practice.level === 'mastery' ? [] : rest
+  const picked = drawN(
+    resolvable(pool),
+    resolvable(topUpSource),
+    practice.exercises,
+    ctx.rng,
+    practice.bucket === 'current',
+  )
+  const out = []
+  for (const r of picked) {
+    const ex = buildContextExercise(r, { ...bctx, rng: ctx.rng })
+    if (ex) out.push(make({ ...common(practice, pi), ...ex, targets: [r.key] }))
+  }
+  return out
+}
+
 function generate(practice, pi, ctx, make) {
   const kind = PRACTICE_KIND[practice.practiceType]
   switch (kind) {
     case 'match':
       return buildMatch(practice, pi, ctx, make)
+    case 'phrase-fix':
+      return buildContext(practice, pi, ctx, make)
     case 'wordbank':
       return buildPhrase(practice, pi, ctx, make, 'wordbank')
     case 'type':
@@ -313,13 +340,17 @@ export function makeVisualReplacement(skipped, seq) {
  * @param {object} sources
  * @param {object[]} sources.words   normalised word records (vocab store)
  * @param {object[]} sources.phrases shaped phrases ({ id, ru, en, source, cefr })
+ * @param {object} [sources.batteries] parsed phrase-batteries.yml (context drill)
  * @param {() => number} [sources.rng]
  * @returns {object[]} exercise descriptors (each with a unique `id`)
  */
-export function buildExercises(session, { words = [], phrases = [], rng = Math.random, encounterCount = null } = {}) {
+export function buildExercises(
+  session,
+  { words = [], phrases = [], rng = Math.random, encounterCount = null, batteries = null } = {},
+) {
   const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
   const recordByKey = new Map(words.map((w) => [w.key, w]))
-  const ctx = { vocab, recordByKey, phrases, rng, encounterCount }
+  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, batteries }
 
   const out = []
   let seq = 0

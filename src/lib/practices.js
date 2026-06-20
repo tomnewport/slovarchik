@@ -111,6 +111,15 @@ export const PRACTICE_TYPES = Object.freeze([
     exercises: 2,
     label: 'Type the table',
   },
+  // Context — mastering (restore the right inflection inside a natural phrase)
+  {
+    id: 'inflect-context',
+    dimension: 'context',
+    level: 'mastery',
+    content: 'inflection',
+    exercises: 2,
+    label: 'Use it in a phrase',
+  },
 ])
 
 /** Fast lookup by id. */

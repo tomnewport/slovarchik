@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { buildExercises, makeVisualReplacement, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
-import { loadFixtureWords } from '../test/fixtures.js'
+import { loadFixtureWords, loadFixtureBatteries } from '../test/fixtures.js'
 
 function seededRng(seed) {
   let s = seed >>> 0
@@ -14,9 +14,14 @@ function seededRng(seed) {
 
 const words = loadFixtureWords()
 const phrases = shapePhrases(words)
+const batteries = loadFixtureBatteries()
 
 /** Word keys from the fixture that have a usable inflection paradigm. */
 const inflectableKeys = words.filter((w) => buildParadigm(w) != null).map((w) => w.key)
+/** Inflectable words that also carry a phrase-completion (context) drill. */
+const contextKeys = words
+  .filter((w) => ['noun', 'verb', 'adjective'].includes(w.pos) && buildParadigm(w) != null)
+  .map((w) => w.key)
 
 // One practice per catalogue entry, each with an empty pool (so the builder
 // tops up from the whole vocabulary).
@@ -33,6 +38,7 @@ function practice(practiceType, overrides = {}) {
     'repeat-phrase': 'speaking',
     'inflect-bank': 'identification',
     'inflect-keyboard': 'usage',
+    'inflect-context': 'context',
   }
   const content = practiceType.includes('phrase') || practiceType === 'translate-phrase' || practiceType === 'dictation' || practiceType === 'listen-translate'
     ? 'phrase'
@@ -52,14 +58,19 @@ function practice(practiceType, overrides = {}) {
 }
 
 function build(practices, seed = 1) {
-  return buildExercises({ practices }, { words, phrases, rng: seededRng(seed) })
+  return buildExercises({ practices }, { words, phrases, batteries, rng: seededRng(seed) })
 }
 
 describe('buildExercises', () => {
   it('maps every practice type to a renderable kind', () => {
     for (const type of Object.keys(PRACTICE_KIND)) {
       // Mastery inflect exercises require pool words (no top-up outside the batch).
-      const overrides = type.startsWith('inflect') ? { pool: inflectableKeys.slice(0, 5) } : {}
+      const overrides =
+        type === 'inflect-context'
+          ? { pool: contextKeys.slice(0, 5) }
+          : type.startsWith('inflect')
+            ? { pool: inflectableKeys.slice(0, 5) }
+            : {}
       const ex = build([practice(type, overrides)])
       expect(ex.length).toBeGreaterThan(0)
       expect(ex.every((e) => e.kind === PRACTICE_KIND[type])).toBe(true)
