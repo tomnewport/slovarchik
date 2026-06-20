@@ -20,8 +20,9 @@
 
 import { buildParadigm } from './paradigm.js'
 
-/** The four dimensions of learning a word. */
-export const DIMENSIONS = Object.freeze(['identification', 'usage', 'hearing', 'speaking'])
+/** The dimensions of learning a word. `context` (the phrase-completion drill)
+ *  only gates mastery, so it is deliberately absent from the learning criteria. */
+export const DIMENSIONS = Object.freeze(['identification', 'usage', 'hearing', 'speaking', 'context'])
 
 /** The ordered word states. A higher index is more advanced. */
 export const STATES = Object.freeze(['unknown', 'learning', 'learned', 'mastered'])
@@ -36,10 +37,10 @@ export const LEVELS = Object.freeze(['learning', 'mastery'])
  *  - `{ type: 'attempts', need }` — at least `need` attempts, regardless of
  *    correctness (speaking: "attempt to speak the word correctly three times").
  *
- * Learning needs all four dimensions. Mastery needs only identification + usage
- * (a complete inflection table, modelled as a single correct most-recent
- * attempt). Mastery has no speaking or hearing requirement — those dimensions
- * have no mastery-level practice types.
+ * Learning needs all four dimensions. Mastery needs identification + usage (a
+ * complete inflection table) plus `context` — restoring the correct inflection
+ * inside a natural phrase — modelled, like the others, as a single correct
+ * most-recent attempt. Mastery has no speaking or hearing requirement.
  */
 export const CRITERIA = Object.freeze({
   learning: {
@@ -51,6 +52,7 @@ export const CRITERIA = Object.freeze({
   mastery: {
     identification: { type: 'ratio', need: 1, window: 1 },
     usage: { type: 'ratio', need: 1, window: 1 },
+    context: { type: 'ratio', need: 1, window: 1 },
   },
 })
 
@@ -97,9 +99,35 @@ export function dimensionProgress(events, level, dimension) {
   }
 }
 
-/** Are every dimension's criteria for a level met? */
-export function levelMet(events, level) {
-  return dimensionsForLevel(level).every((d) =>
+/** Parts of speech that carry the phrase-completion (context) drill. */
+const CONTEXT_DRILL_POS = new Set(['noun', 'verb', 'adjective'])
+
+/**
+ * Whether the `context` mastery requirement applies to a word. Accepts a
+ * precomputed boolean (`word.hasContextDrill`, stamped by the vocab store once
+ * the phrase batteries are known); otherwise falls back to the part-of-speech +
+ * inflection heuristic so the model stays usable without the battery data.
+ */
+export function wordHasContextDrill(word) {
+  if (!word) return false
+  if (typeof word.hasContextDrill === 'boolean') return word.hasContextDrill
+  return CONTEXT_DRILL_POS.has(word.pos) && wordHasInflections(word)
+}
+
+/**
+ * The dimensions graded for a level, narrowed to those that apply to `word`.
+ * Drops the mastery `context` requirement for words with no phrase-completion
+ * drill (so they aren't left permanently un-masterable).
+ */
+export function applicableDimensions(level, word = {}) {
+  const dims = dimensionsForLevel(level)
+  if (level !== 'mastery') return dims
+  return dims.filter((d) => d !== 'context' || wordHasContextDrill(word))
+}
+
+/** Are every applicable dimension's criteria for a level met? */
+export function levelMet(events, level, word = {}) {
+  return applicableDimensions(level, word).every((d) =>
     criterionMet(attemptsFor(events, level, d), CRITERIA[level][d]),
   )
 }
@@ -131,7 +159,7 @@ export function wordState(events, word = {}) {
   if (!levelMet(events, 'learning')) return 'learning'
   // Learned. Words without an inflection table have nothing more to master.
   if (!wordHasInflections(word)) return 'mastered'
-  return levelMet(events, 'mastery') ? 'mastered' : 'learned'
+  return levelMet(events, 'mastery', word) ? 'mastered' : 'learned'
 }
 
 /**
@@ -142,17 +170,17 @@ export function wordState(events, word = {}) {
 export function wordProgress(events, word = {}) {
   const detail = (level) => {
     const dims = {}
-    for (const d of dimensionsForLevel(level)) dims[d] = dimensionProgress(events, level, d)
+    for (const d of applicableDimensions(level, word)) dims[d] = dimensionProgress(events, level, d)
     return dims
   }
   const masteryApplicable = wordHasInflections(word)
   return {
     state: wordState(events, word),
-    learning: { dimensions: detail('learning'), met: levelMet(events, 'learning') },
+    learning: { dimensions: detail('learning'), met: levelMet(events, 'learning', word) },
     mastery: {
       dimensions: detail('mastery'),
       applicable: masteryApplicable,
-      met: masteryApplicable ? levelMet(events, 'mastery') : levelMet(events, 'learning'),
+      met: masteryApplicable ? levelMet(events, 'mastery', word) : levelMet(events, 'learning', word),
     },
   }
 }

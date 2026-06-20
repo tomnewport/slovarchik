@@ -5,10 +5,12 @@ import {
   LEVELS,
   CRITERIA,
   dimensionsForLevel,
+  applicableDimensions,
   criterionMet,
   dimensionProgress,
   levelMet,
   wordHasInflections,
+  wordHasContextDrill,
   wordState,
   wordProgress,
   lastAttemptAt,
@@ -30,19 +32,19 @@ function fullyLearned() {
 }
 
 describe('constants', () => {
-  it('defines the four dimensions and four states', () => {
-    expect(DIMENSIONS).toEqual(['identification', 'usage', 'hearing', 'speaking'])
+  it('defines the learning dimensions plus the context mastery dimension', () => {
+    expect(DIMENSIONS).toEqual(['identification', 'usage', 'hearing', 'speaking', 'context'])
     expect(STATES).toEqual(['unknown', 'learning', 'learned', 'mastered'])
     expect(LEVELS).toEqual(['learning', 'mastery'])
   })
-  it('learning grades all four dimensions; mastery only grades identification and usage', () => {
+  it('learning grades all four dimensions; mastery grades identification, usage and context', () => {
     expect(dimensionsForLevel('learning')).toEqual([
       'identification',
       'usage',
       'hearing',
       'speaking',
     ])
-    expect(dimensionsForLevel('mastery')).toEqual(['identification', 'usage'])
+    expect(dimensionsForLevel('mastery')).toEqual(['identification', 'usage', 'context'])
     expect(CRITERIA.mastery.speaking).toBeUndefined()
     expect(CRITERIA.mastery.hearing).toBeUndefined()
   })
@@ -166,7 +168,41 @@ describe('wordProgress', () => {
     expect(p.learning.met).toBe(true)
     expect(p.mastery.applicable).toBe(false)
     expect(p.mastery.met).toBe(true) // collapses onto the learning criteria
-    expect(Object.keys(p.learning.dimensions)).toEqual(DIMENSIONS)
+    expect(Object.keys(p.learning.dimensions)).toEqual(dimensionsForLevel('learning'))
+  })
+})
+
+describe('context mastery requirement', () => {
+  const noun = { pos: 'noun', hasInflections: true }
+  it('applies the context dimension to inflecting noun/verb/adjective words', () => {
+    expect(wordHasContextDrill(noun)).toBe(true)
+    expect(wordHasContextDrill({ pos: 'pronoun', hasInflections: true })).toBe(false)
+    expect(applicableDimensions('mastery', noun)).toEqual(['identification', 'usage', 'context'])
+    expect(applicableDimensions('mastery', { pos: 'pronoun', hasInflections: true })).toEqual([
+      'identification',
+      'usage',
+    ])
+  })
+  it('honours an explicit hasContextDrill flag (stamped by the vocab store)', () => {
+    expect(wordHasContextDrill({ pos: 'noun', hasInflections: true, hasContextDrill: false })).toBe(false)
+  })
+  it('a context-drill word stays learned until the phrase drill is passed', () => {
+    const events = [
+      ...fullyLearned(),
+      ...attempts('mastery', 'identification', [true]),
+      ...attempts('mastery', 'usage', [true]),
+    ]
+    expect(wordState(events, noun)).toBe('learned')
+    const withContext = [...events, ...attempts('mastery', 'context', [true])]
+    expect(wordState(withContext, noun)).toBe('mastered')
+  })
+  it('a word without a context drill masters on identification + usage alone', () => {
+    const events = [
+      ...fullyLearned(),
+      ...attempts('mastery', 'identification', [true]),
+      ...attempts('mastery', 'usage', [true]),
+    ]
+    expect(wordState(events, { pos: 'pronoun', hasInflections: true })).toBe('mastered')
   })
 })
 

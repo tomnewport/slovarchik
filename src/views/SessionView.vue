@@ -27,6 +27,7 @@ import WordBankExercise from '../components/exercises/WordBankExercise.vue'
 import MatchExercise from '../components/exercises/MatchExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
+import PhraseFixExercise from '../components/exercises/PhraseFixExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import AchievementBadge from '../components/AchievementBadge.vue'
 import ReportButton from '../components/ReportButton.vue'
@@ -38,6 +39,7 @@ const COMPONENTS = {
   match: MatchExercise,
   speak: SpeakExercise,
   inflect: InflectExercise,
+  'phrase-fix': PhraseFixExercise,
 }
 
 const route = useRoute()
@@ -90,7 +92,12 @@ async function setup() {
     phrases = vocabPhrases.value.filter((p) => set.has(p.source))
   }
 
-  const exercises = buildExercises(session, { words, phrases, encounterCount: progress.encounterCount })
+  const exercises = buildExercises(session, {
+    words,
+    phrases,
+    encounterCount: progress.encounterCount,
+    batteries: vocabState.batteries,
+  })
   for (const ex of exercises) {
     for (const key of ex.targets) {
       if (!startStates.has(key)) startStates.set(key, progress.stateOf(key))

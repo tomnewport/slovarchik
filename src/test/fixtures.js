@@ -3,6 +3,7 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import yaml from 'js-yaml'
 
 import { buildWords, shapeNouns, POS_BY_FILE } from '../lib/vocabBuild.js'
 
@@ -26,4 +27,9 @@ export function loadFixtureWords() {
 
 export function loadFixtureNouns() {
   return shapeNouns(loadFixtureWords())
+}
+
+/** The parsed phrase-completion carrier batteries (public/vocab/phrase-batteries.yml). */
+export function loadFixtureBatteries() {
+  return yaml.load(readFileSync(resolve(vocabDir, 'phrase-batteries.yml'), 'utf8'))
 }

@@ -19,8 +19,10 @@ import {
   STATES,
   CRITERIA,
   dimensionsForLevel,
+  applicableDimensions,
   wordState,
   wordHasInflections,
+  wordHasContextDrill,
   dimensionProgress,
   levelMet,
   lastAttemptAt,
@@ -486,7 +488,7 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
     for (const key of state.mastery.words) {
       if (stateOf(key) !== 'learned') continue
       const evs = events(key)
-      for (const d of dimensionsForLevel('mastery')) {
+      for (const d of applicableDimensions('mastery', wordRecord(key))) {
         if (!dimensionProgress(evs, 'mastery', d).met) {
           weakness[d] = Math.max(weakness[d], 2)
         }
@@ -613,6 +615,11 @@ export async function resetProgress() {
 /** Expose whether a word has an inflection table (used by the UI badges). */
 export function hasInflections(key) {
   return wordHasInflections(wordRecord(key))
+}
+
+/** Whether the phrase-completion (context) mastery requirement applies to a word. */
+export function hasContextDrill(key) {
+  return wordHasContextDrill(wordRecord(key))
 }
 
 // ---------------------------------------------------------------------------

@@ -4,9 +4,14 @@
 // — if online — fetch the manifest and download any files whose `updated`
 // timestamp is newer than the cached copy, storing them back in IndexedDB.
 import { computed, reactive } from 'vue'
+import yaml from 'js-yaml'
 
 import { buildWords, shapeVocab, shapeNouns, shapePhrases } from '../lib/vocabBuild.js'
+import { canBuildContext } from '../lib/phraseBattery.js'
 import * as idb from '../lib/idb.js'
+
+/** File (and manifest `pos`) holding the phrase-completion carrier batteries. */
+const BATTERIES_FILE = 'phrase-batteries.yml'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const manifestUrl = () => `${BASE}vocab/manifest.json`
@@ -16,6 +21,8 @@ const fileUrl = (file) => `${BASE}vocab/${file}`
 export const state = reactive({
   status: 'idle',
   words: [],
+  /** Parsed phrase-batteries.yml (carrier phrases for the context drill), or null. */
+  batteries: null,
   lastSyncedAt: null,
   vocabVersion: null,
   error: null,
@@ -26,8 +33,37 @@ export const nouns = computed(() => shapeNouns(state.words))
 export const phrases = computed(() => shapePhrases(state.words))
 export const isReady = computed(() => state.words.length > 0)
 
+/**
+ * Stamp `hasContextDrill` on every word so the progression model knows whether
+ * the phrase-completion mastery requirement applies. A word qualifies only if a
+ * carrier phrase can actually be built for it from the loaded batteries; without
+ * the batteries file no word does (the requirement stays dormant).
+ */
+function stampContextDrill(words, batteries) {
+  if (!batteries) {
+    for (const w of words) w.hasContextDrill = false
+    return
+  }
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  for (const w of words) w.hasContextDrill = canBuildContext(w, { batteries, wordByKey: byKey })
+}
+
 function rebuild(records) {
-  state.words = buildWords(records.map((r) => ({ pos: r.pos, text: r.content })))
+  const words = buildWords(
+    records.filter((r) => r.file !== BATTERIES_FILE).map((r) => ({ pos: r.pos, text: r.content })),
+  )
+  const batRec = records.find((r) => r.file === BATTERIES_FILE)
+  let batteries = null
+  if (batRec) {
+    try {
+      batteries = yaml.load(batRec.content) ?? null
+    } catch {
+      batteries = null
+    }
+  }
+  stampContextDrill(words, batteries)
+  state.words = words
+  state.batteries = batteries
 }
 
 /** Populate the store from the IndexedDB cache. Returns the cached records. */
