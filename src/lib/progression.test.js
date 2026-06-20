@@ -7,6 +7,8 @@ import {
   dimensionsForLevel,
   applicableDimensions,
   criterionMet,
+  minCorrectToMeet,
+  minExercisesToLevel,
   dimensionProgress,
   levelMet,
   wordHasInflections,
@@ -69,6 +71,48 @@ describe('criterionMet', () => {
     const crit = CRITERIA.learning.speaking
     expect(criterionMet(attempts('learning', 'speaking', [false, false, false]), crit)).toBe(true)
     expect(criterionMet(attempts('learning', 'speaking', [true, true]), crit)).toBe(false)
+  })
+})
+
+describe('minCorrectToMeet', () => {
+  it('ratio: a fresh dimension needs `need` correct answers', () => {
+    expect(minCorrectToMeet([], CRITERIA.learning.identification)).toBe(3)
+  })
+  it('ratio: counts only the correct answers still missing from the window', () => {
+    const crit = CRITERIA.learning.usage
+    // One correct already in the window → two more correct answers finish it.
+    expect(minCorrectToMeet(attempts('learning', 'usage', [true]), crit)).toBe(2)
+    // Two correct + a wrong fill the window at 2/3; one more correct slides the
+    // wrong one out of the last-4 window and meets 3/4.
+    expect(minCorrectToMeet(attempts('learning', 'usage', [true, true, false]), crit)).toBe(1)
+  })
+  it('ratio: zero when already met', () => {
+    const crit = CRITERIA.learning.hearing
+    expect(minCorrectToMeet(attempts('learning', 'hearing', [true, true, true]), crit)).toBe(0)
+  })
+  it('attempts: just the shortfall of total tries', () => {
+    const crit = CRITERIA.learning.speaking
+    expect(minCorrectToMeet([], crit)).toBe(3)
+    expect(minCorrectToMeet(attempts('learning', 'speaking', [false, false]), crit)).toBe(1)
+    expect(minCorrectToMeet(attempts('learning', 'speaking', [true, true, true, true]), crit)).toBe(0)
+  })
+  it('treats a missing criterion as already satisfied', () => {
+    expect(minCorrectToMeet([], null)).toBe(0)
+  })
+})
+
+describe('minExercisesToLevel', () => {
+  it('a fresh word needs every learning dimension filled (3+3+3+3)', () => {
+    expect(minExercisesToLevel([], 'learning')).toBe(12)
+  })
+  it('shrinks as dimensions are met, reaching zero once learned', () => {
+    expect(minExercisesToLevel(fullyLearned(), 'learning')).toBe(0)
+  })
+  it('mastery counts identification + usage + context for a word with a drill', () => {
+    expect(minExercisesToLevel([], 'mastery', { hasContextDrill: true })).toBe(3)
+  })
+  it('mastery drops the context exercise for words without a drill', () => {
+    expect(minExercisesToLevel([], 'mastery', { hasContextDrill: false })).toBe(2)
   })
 })
 

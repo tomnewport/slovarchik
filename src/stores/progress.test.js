@@ -16,6 +16,7 @@ import {
   getBatchOptions,
   commitBatch,
   batchProgress,
+  batchExerciseProgress,
   batchComplete,
   advanceBatch,
   dimensionWeakness,
@@ -212,6 +213,26 @@ describe('batches', () => {
     await learn('w1')
     expect(batchProgress('learning').every((p) => p.done)).toBe(true)
     expect(batchComplete('learning')).toBe(true)
+  })
+
+  it('measures exercise progress from fresh (0) to complete (1)', async () => {
+    setVocab(makeWords(20, { hasInflections: false }))
+    const batch = { name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 }
+    await commitBatch(batch)
+    // Fresh: two words × 12 minimum exercises each, none done yet.
+    const fresh = batchExerciseProgress('learning')
+    expect(fresh).toMatchObject({ remaining: 24, fresh: 24, done: 0, fraction: 0 })
+    // Learning one word chips the bar half-way (12 of 24 exercises done).
+    await learn('w0')
+    const half = batchExerciseProgress('learning')
+    expect(half).toMatchObject({ remaining: 12, fresh: 24, done: 12, fraction: 0.5 })
+    // Finishing the batch fills it.
+    await learn('w1')
+    expect(batchExerciseProgress('learning').fraction).toBe(1)
+  })
+
+  it('reports a full bar when no batch is committed', () => {
+    expect(batchExerciseProgress('learning')).toMatchObject({ remaining: 0, fraction: 1 })
   })
 
   it('advances by clearing the current batch', async () => {

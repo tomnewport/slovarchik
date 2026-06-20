@@ -5,7 +5,7 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { state as progress, batchProgress, atRisk, lost, stateOf } from '../stores/progress.js'
+import { state as progress, batchProgress, batchExerciseProgress, atRisk, lost, stateOf } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
 import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
@@ -55,6 +55,10 @@ const learningProgress = computed(() => batchProgress('learning'))
 const masteryProgress = computed(() => batchProgress('mastery'))
 const learningDone = computed(() => learningProgress.value.filter((w) => w.done).length)
 const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).length)
+// Exercise-based progress: how close the batch is to done, measured in the
+// minimum exercises still needed now versus when it was freshly committed.
+const learningExercise = computed(() => batchExerciseProgress('learning'))
+const masteryExercise = computed(() => batchExerciseProgress('mastery'))
 
 const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
 const MASTERY_DIMS = ['identification', 'usage', 'context']
@@ -155,6 +159,22 @@ const FOCUSED = [
     <div v-else class="card batches-card">
       <div class="batch-list">
         <div class="batch-row">
+          <div
+            class="exercise-bar"
+            role="progressbar"
+            :aria-valuenow="Math.round(learningExercise.fraction * 100)"
+            :aria-valuemin="0"
+            :aria-valuemax="100"
+            :aria-label="`Learning batch ${learningExercise.remaining} exercises remaining`"
+            :title="learningExercise.remaining
+              ? `${learningExercise.remaining} of ${learningExercise.fresh} exercises to go`
+              : 'All exercises complete'"
+          >
+            <div
+              class="exercise-fill learn-fill"
+              :style="{ width: Math.round(learningExercise.fraction * 100) + '%' }"
+            />
+          </div>
           <div class="batch-meta">
             <span class="batch-kind learn-kind">Learning</span>
             <span class="batch-name">{{ learningBatch.name }}</span>
@@ -168,6 +188,22 @@ const FOCUSED = [
           </div>
         </div>
         <div v-if="masteryBatch" class="batch-row">
+          <div
+            class="exercise-bar"
+            role="progressbar"
+            :aria-valuenow="Math.round(masteryExercise.fraction * 100)"
+            :aria-valuemin="0"
+            :aria-valuemax="100"
+            :aria-label="`Mastery batch ${masteryExercise.remaining} exercises remaining`"
+            :title="masteryExercise.remaining
+              ? `${masteryExercise.remaining} of ${masteryExercise.fresh} exercises to go`
+              : 'All exercises complete'"
+          >
+            <div
+              class="exercise-fill master-fill"
+              :style="{ width: Math.round(masteryExercise.fraction * 100) + '%' }"
+            />
+          </div>
           <div class="batch-meta">
             <span class="batch-kind master-kind">Mastering</span>
             <span class="batch-name">{{ masteryBatch.name }}</span>
@@ -348,6 +384,18 @@ const FOCUSED = [
 .batch-row {
   display: grid;
   gap: 0.35rem;
+}
+.exercise-bar {
+  height: 10px;
+  background: var(--bg-soft);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.exercise-fill {
+  height: 100%;
+  border-radius: 5px;
+  opacity: 0.85;
+  transition: width 0.3s ease;
 }
 .batch-meta {
   display: flex;

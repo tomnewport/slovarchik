@@ -26,6 +26,7 @@ import {
   dimensionProgress,
   levelMet,
   lastAttemptAt,
+  minExercisesToLevel,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
 import { learnableWords } from '../lib/vocabBuild.js'
@@ -330,6 +331,28 @@ export function batchProgress(level) {
   if (!batch) return []
   const target = rank(batchTarget(level))
   return batch.words.map((key) => ({ word: key, state: stateOf(key), done: rank(stateOf(key)) >= target }))
+}
+
+/**
+ * Exercise-based completion of a level's current batch. Measures the minimum
+ * number of correct exercises still needed to finish the batch (`remaining`)
+ * against the number a brand-new batch of the same words would have needed
+ * (`fresh`), so a smooth bar can fill from 0 (just committed) to 1 (complete)
+ * as each dimension is chipped away — finer-grained than the words-done count.
+ * @returns {{remaining: number, fresh: number, done: number, fraction: number}}
+ */
+export function batchExerciseProgress(level) {
+  const batch = state[level]
+  if (!batch || batch.words.length === 0) return { remaining: 0, fresh: 0, done: 0, fraction: 1 }
+  let remaining = 0
+  let fresh = 0
+  for (const key of batch.words) {
+    const word = wordRecord(key)
+    remaining += minExercisesToLevel(events(key), level, word)
+    fresh += minExercisesToLevel([], level, word)
+  }
+  const done = Math.max(0, fresh - remaining)
+  return { remaining, fresh, done, fraction: fresh ? done / fresh : 1 }
 }
 
 /** Is every word in a level's current batch at (or above) its target state? */
