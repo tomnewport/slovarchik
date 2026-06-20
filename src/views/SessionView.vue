@@ -2,7 +2,7 @@
 // The session runner screen. Builds a session from the progress store, steps
 // through its exercises, repeats mistakes until none remain, reports each
 // result back to the store per dimension, and shows an end-of-session summary.
-import { computed, reactive, ref } from 'vue'
+import { computed, nextTick, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
@@ -52,6 +52,9 @@ const finishedAt = ref(0)
 
 // Snapshot of each target word's state before the session, to spot slips.
 const startStates = new Map()
+// Snapshot of each batch's exercise-progress fraction before the session, so we
+// can show how far the bar moved this session.
+const startExercise = { learning: 1, mastery: 1 }
 let session = null
 let repSeq = 0
 
@@ -73,6 +76,10 @@ async function setup() {
   // Assemble a mastery batch as soon as enough words are learned — this does not
   // wait for the learning batch (or a previous mastery batch) to be completed.
   await progress.ensureMasteryBatch()
+  // Baseline the batch bars before any answers land this session.
+  for (const level of ['learning', 'mastery']) {
+    startExercise[level] = progress.batchExerciseProgress(level).fraction
+  }
 
   const type = String(route.query.type ?? 'standard')
   const size = route.query.size ? String(route.query.size) : undefined
@@ -118,6 +125,13 @@ setup()
 const celebrated = ref([])
 // New achievements unlocked during this session.
 const newAchievements = ref([])
+// Batches whose exercise-progress bar moved more than this fraction get an
+// animated "look how far you came" bar (and the celebration sound) in the
+// summary. Completed batches are excluded — they get the full celebration.
+const BATCH_GAIN_THRESHOLD = 0.05
+const batchGains = ref([])
+// Live width (%) the animated gain bars are tweening toward, keyed by level.
+const gainWidth = reactive({ learning: 0, mastery: 0 })
 let finalized = false
 
 async function finalizeIfDone() {
@@ -131,8 +145,32 @@ async function finalizeIfDone() {
   celebrated.value = ['learning', 'mastery']
     .filter((level) => progress.state[level] && progress.batchComplete(level))
     .map((level) => ({ level, batch: progress.state[level] }))
+  // Before advancing, note any still-open batch whose bar climbed enough this
+  // session to be worth celebrating in its own right.
+  batchGains.value = ['learning', 'mastery']
+    .filter((level) => progress.state[level] && !progress.batchComplete(level))
+    .map((level) => ({
+      level,
+      name: progress.state[level].name,
+      from: startExercise[level],
+      to: progress.batchExerciseProgress(level).fraction,
+    }))
+    .filter((g) => g.to - g.from > BATCH_GAIN_THRESHOLD)
   for (const { level } of celebrated.value) progress.advanceBatch(level)
-  if (celebrated.value.length || newAchievements.value.length) playCelebration()
+  if (celebrated.value.length || newAchievements.value.length || batchGains.value.length) {
+    playCelebration()
+  }
+  // Tween each gain bar from its start fraction up to its new one. Render at the
+  // start width first, then bump to the target on the next frame so the CSS
+  // width transition animates the climb.
+  if (batchGains.value.length) {
+    for (const g of batchGains.value) gainWidth[g.level] = g.from * 100
+    nextTick(() => {
+      requestAnimationFrame(() => {
+        for (const g of batchGains.value) gainWidth[g.level] = g.to * 100
+      })
+    })
+  }
   // Auto-commit next mastery batch so it is ready when the learner returns home.
   if (celebrated.value.some((c) => c.level === 'mastery')) {
     progress.autoCommitMasteryBatch()
@@ -371,6 +409,27 @@ function confirmClose() {
           {{ summary.correct }} / {{ summary.total }} first try ·
           {{ durationLabel(summary.durationMs) }}
         </p>
+
+        <!-- Batch bars that climbed more than the threshold this session. -->
+        <div v-if="batchGains.length" class="batch-gains">
+          <div v-for="g in batchGains" :key="g.level" class="gain-row">
+            <div class="gain-head">
+              <span class="gain-kind" :class="g.level === 'mastery' ? 'master-kind' : 'learn-kind'">
+                {{ g.level === 'mastery' ? 'Mastering' : 'Learning' }}
+              </span>
+              <span class="gain-name">{{ g.name }}</span>
+              <span class="gain-delta">+{{ Math.round((g.to - g.from) * 100) }}%</span>
+            </div>
+            <div class="gain-bar">
+              <div
+                class="gain-fill"
+                :class="g.level === 'mastery' ? 'master-fill' : 'learn-fill'"
+                :style="{ width: gainWidth[g.level] + '%' }"
+              />
+            </div>
+          </div>
+        </div>
+
         <div v-if="summary.slipped.length" class="slipped">
           <p class="muted">Slipped — worth another look:</p>
           <ul>
@@ -502,6 +561,64 @@ function confirmClose() {
 }
 .next-batch {
   margin-top: 0.5rem;
+}
+.batch-gains {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.75rem 0 0.25rem;
+}
+.gain-row {
+  display: grid;
+  gap: 0.3rem;
+  text-align: left;
+}
+.gain-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.gain-kind {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.learn-kind {
+  color: var(--good);
+}
+.master-kind {
+  color: var(--gold);
+}
+.gain-name {
+  flex: 1;
+  font-weight: 500;
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gain-delta {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--good);
+}
+.gain-bar {
+  height: 10px;
+  background: var(--bg-soft);
+  border-radius: 5px;
+  overflow: hidden;
+}
+.gain-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 1s ease;
+}
+.gain-fill.learn-fill {
+  background: var(--good);
+}
+.gain-fill.master-fill {
+  background: var(--gold);
 }
 .slipped ul {
   list-style: none;

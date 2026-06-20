@@ -123,6 +123,53 @@ describe('SessionView', () => {
     expect(push).toHaveBeenCalledWith({ path: '/batch', query: { level: 'learning' } })
   })
 
+  it('shows an animated batch-progress gain when a batch climbs enough', async () => {
+    // A fresh learning batch of the two session words: answering both nudges the
+    // exercise bar up well past the 5% threshold without completing the batch.
+    await progress.commitBatch({
+      name: 'animals',
+      collection: 'animals',
+      level: 'learning',
+      color: 'green',
+      words: ['t1', 't2'],
+      size: 2,
+    })
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await answer(wrapper, 'дом')
+    await answer(wrapper, 'кот')
+
+    expect(wrapper.text()).toContain('Session complete')
+    // The batch did not complete, so it shows the climbing gain bar, not the
+    // batch-complete celebration.
+    expect(wrapper.text()).not.toContain('Batch complete')
+    const gains = wrapper.find('.batch-gains')
+    expect(gains.exists()).toBe(true)
+    expect(gains.find('.gain-fill').exists()).toBe(true)
+    expect(gains.text()).toContain('animals')
+  })
+
+  it('shows no gain bar when a batch barely moves', async () => {
+    // A 20-word batch: two answered words is under the 5% threshold.
+    await progress.commitBatch({
+      name: 'animals',
+      collection: 'animals',
+      level: 'learning',
+      color: 'green',
+      words: Array.from({ length: 20 }, (_, i) => (i < 2 ? `t${i + 1}` : `pad${i}`)),
+      size: 20,
+    })
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await answer(wrapper, 'дом')
+    await answer(wrapper, 'кот')
+
+    expect(wrapper.text()).toContain('Session complete')
+    expect(wrapper.find('.batch-gains').exists()).toBe(false)
+  })
+
   it('asks for confirmation before closing', async () => {
     const wrapper = mount(SessionView)
     await flushPromises()
