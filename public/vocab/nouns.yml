@@ -358,6 +358,7 @@ words:
       pl_ins: адреса́ми
       pl_pre: адреса́х
   "Азия=Asia":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -742,6 +743,7 @@ words:
       pl_ins: америка́нцами
       pl_pre: америка́нцах
   "американка=American (f)":
+    batteries: [people]
     cefr_level: A2
     gender: f
     animacy: a
@@ -831,6 +833,7 @@ words:
       pl_ins: а́нгелами
       pl_pre: а́нгелах
   "англичанин=Englishman":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -940,6 +943,7 @@ words:
       pl_ins: анте́ннами
       pl_pre: анте́ннах
   "апельсин=orange":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -1126,6 +1130,7 @@ words:
       pl_ins: арти́стами
       pl_pre: арти́стах
   "архитектор=architect":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -1210,6 +1215,7 @@ words:
       - ru: Солда́ты отби́ли две ата́ки.
         en_gb: The soldiers repelled two attacks.
   "атеист=atheist":
+    batteries: [society]
     cefr_level: B2
     gender: m
     animacy: a
@@ -1325,6 +1331,7 @@ words:
       - ru: Мне нра́вится атмосфе́ра э́того кафе́.
         en_gb: I like the atmosphere of this cafe.
   "атом=atom":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: i
@@ -1354,6 +1361,7 @@ words:
       pl_ins: а́томами
       pl_pre: а́томах
   "аудитория=lecture hall":
+    batteries: [work_study]
     cefr_level: B1
     gender: f
     animacy: i
@@ -1602,6 +1610,7 @@ words:
       - ru: Учёные постро́или две ба́зы в Аркти́ке.
         en_gb: Scientists built two bases in the Arctic.
   "Байкал=Lake Baikal":
+    batteries: [places]
     cefr_level: B1
     gender: m
     animacy: i
@@ -1625,6 +1634,7 @@ words:
       sg_ins: Байка́лом
       sg_pre: Байка́ле
   "балерина=ballerina":
+    batteries: [communication, work_study]
     cefr_level: B1
     gender: f
     animacy: a
@@ -1655,6 +1665,7 @@ words:
       pl_ins: балери́нами
       pl_pre: балери́нах
   "балет=ballet":
+    batteries: [communication]
     cefr_level: B1
     gender: m
     animacy: i
@@ -1745,6 +1756,7 @@ words:
       pl_ins: балко́нами
       pl_pre: балко́нах
   "банан=banana":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -2023,6 +2035,7 @@ words:
       pl_ins: баро́нами
       pl_pre: баро́нах
   "баскетбол=basketball":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -2046,6 +2059,7 @@ words:
       sg_ins: баскетбо́лом
       sg_pre: баскетбо́ле
   "баскетболист=basketball player":
+    batteries: [everyday]
     cefr_level: B1
     gender: m
     animacy: a
@@ -2515,6 +2529,7 @@ words:
       pl_ins: берега́ми
       pl_pre: берега́х
   "берёза=birch":
+    batteries: [nature]
     cefr_level: B1
     gender: f
     animacy: i
@@ -2683,6 +2698,7 @@ words:
       sg_ins: би́знесом
       sg_pre: би́знесе
   "бизнесмен=businessman":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -2939,6 +2955,7 @@ words:
       pl_ins: близнеца́ми
       pl_pre: близнеца́х
   "блог=blog":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -3586,6 +3603,7 @@ words:
       pl_ins: бо́цманами
       pl_pre: бо́цманах
   "Бразилия=Brazil":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -3821,6 +3839,7 @@ words:
       pl_ins: брю́ками
       pl_pre: брю́ках
   "буддист=Buddhist":
+    batteries: [society]
     cefr_level: B1
     gender: m
     animacy: a
@@ -5224,6 +5243,7 @@ words:
       pl_ins: виде́ниями
       pl_pre: виде́ниях
   "видео=video":
+    batteries: [objects]
     cefr_level: A2
     gender: n
     animacy: i
@@ -5889,6 +5909,7 @@ words:
       - ru: Го́сти пришли́ с буты́лкой во́дки.
         en_gb: The guests came with a bottle of vodka.
   "водород=hydrogen":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: i
@@ -6264,6 +6285,7 @@ words:
       - ru: Мы прие́хали к Во́лге на зака́те.
         en_gb: We came to the Volga at sunset.
   "волейбол=volleyball":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -6411,6 +6433,7 @@ words:
       pl_ins: волоса́ми
       pl_pre: волоса́х
   "волшебник=wizard":
+    batteries: [communication]
     cefr_level: B1
     gender: m
     animacy: a
@@ -6663,6 +6686,7 @@ words:
       - ru: Ста́рые фотогра́фии бу́дят воспомина́ния.
         en_gb: Old photographs awaken memories.
   "восстание=uprising":
+    batteries: [society]
     cefr_level: B2
     gender: n
     animacy: i
@@ -6874,6 +6898,7 @@ words:
       pl_ins: времена́ми
       pl_pre: времена́х
   "вселенная=universe":
+    batteries: [work_study]
     cefr_level: B2
     gender: f
     animacy: i
@@ -6929,6 +6954,7 @@ words:
       pl_ins: встре́чами
       pl_pre: встре́чах
   "вулкан=volcano":
+    batteries: [nature]
     cefr_level: B1
     gender: m
     animacy: i
@@ -7946,6 +7972,7 @@ words:
       - ru: В гне́ве он сказа́л ли́шнее.
         en_gb: In anger he said too much.
   "гнездо=nest":
+    batteries: [nature]
     cefr_level: B1
     gender: n
     animacy: i
@@ -8718,6 +8745,7 @@ words:
       pl_ins: греха́ми
       pl_pre: греха́х
   "Греция=Greece":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -9455,6 +9483,7 @@ words:
       pl_ins: движе́ниями
       pl_pre: движе́ниях
   "двойка=a two":
+    batteries: [work_study]
     cefr_level: B1
     gender: f
     animacy: i
@@ -10444,6 +10473,7 @@ words:
       pl_ins: дире́кторами
       pl_pre: дире́кторах
   "диск=disc":
+    batteries: [objects]
     usage:
       - ru: Вот диск.
         en_gb: Here is the disc.
@@ -12198,6 +12228,7 @@ words:
       pl_ins: же́стами
       pl_pre: же́стах
   "живопись=painting":
+    batteries: [communication]
     cefr_level: B2
     gender: f
     animacy: i
@@ -12285,6 +12316,7 @@ words:
       pl_ins: живо́тными
       pl_pre: живо́тных
   "жидкость=liquid":
+    batteries: [work_study]
     cefr_level: B2
     gender: f
     animacy: i
@@ -13402,6 +13434,7 @@ words:
       pl_ins: запре́тами
       pl_pre: запре́тах
   "запуск=launch":
+    batteries: [objects, work_study]
     cefr_level: B2
     gender: m
     animacy: i
@@ -13462,6 +13495,7 @@ words:
       pl_ins: запя́стьями
       pl_pre: запя́стьях
   "запятая=comma":
+    batteries: [communication]
     cefr_level: B1
     gender: f
     animacy: i
@@ -14724,6 +14758,7 @@ words:
       pl_ins: ико́нами
       pl_pre: ико́нах
   "икра=caviar":
+    batteries: [everyday]
     cefr_level: B2
     gender: f
     animacy: i
@@ -14868,6 +14903,7 @@ words:
       pl_ins: инжене́рами
       pl_pre: инжене́рах
   "инопланетянин=alien":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -15025,6 +15061,7 @@ words:
       pl_ins: инструме́нтами
       pl_pre: инструме́нтах
   "интеллект=intelligence":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: i
@@ -15324,6 +15361,7 @@ words:
       sg_ins: иску́сством
       sg_pre: иску́сстве
   "испанец=Spaniard":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -15353,6 +15391,7 @@ words:
       pl_ins: испа́нцами
       pl_pre: испа́нцах
   "Испания=Spain":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -15667,6 +15706,7 @@ words:
       - ru: Мы давно́ мечта́ли об Ита́лии.
         en_gb: We had long dreamed of Italy.
   "итальянец=Italian":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -15696,6 +15736,7 @@ words:
       pl_ins: италья́нцами
       pl_pre: италья́нцах
   "итальянка=Italian (f)":
+    batteries: [people]
     cefr_level: A2
     gender: f
     animacy: a
@@ -15910,6 +15951,7 @@ words:
       pl_ins: ка́драми
       pl_pre: ка́драх
   "Казань=Kazan":
+    batteries: [places]
     cefr_level: B1
     gender: f
     animacy: i
@@ -15933,6 +15975,7 @@ words:
       sg_ins: Каза́нью
       sg_pre: Каза́ни
   "Казахстан=Kazakhstan":
+    batteries: [places]
     cefr_level: A2
     gender: m
     animacy: i
@@ -16020,6 +16063,7 @@ words:
       pl_ins: ка́мерами
       pl_pre: ка́мерах
   "Канада=Canada":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -16938,6 +16982,7 @@ words:
       pl_ins: кино́
       pl_pre: кино́
   "кинотеатр=cinema":
+    batteries: [places]
     cefr_level: A2
     gender: m
     animacy: i
@@ -16999,6 +17044,7 @@ words:
       pl_ins: кирпича́ми
       pl_pre: кирпича́х
   "кислород=oxygen":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: i
@@ -17055,6 +17101,7 @@ words:
       pl_ins: кистя́ми
       pl_pre: кистя́х
   "кит=whale":
+    batteries: [nature]
     cefr_level: B1
     gender: m
     animacy: a
@@ -17084,6 +17131,7 @@ words:
       pl_ins: кита́ми
       pl_pre: кита́х
   "китаец=Chinese man":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -17191,6 +17239,7 @@ words:
       pl_ins: клавиату́рами
       pl_pre: клавиату́рах
   "клавиша=key":
+    batteries: [objects]
     cefr_level: B1
     gender: f
     animacy: i
@@ -17947,6 +17996,7 @@ words:
       pl_ins: колле́гами
       pl_pre: колле́гах
   "колледж=college":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: i
@@ -18257,6 +18307,7 @@ words:
       pl_ins: комба́тами
       pl_pre: комба́тах
   "комедия=comedy":
+    batteries: [communication]
     cefr_level: B1
     gender: f
     animacy: i
@@ -18381,6 +18432,7 @@ words:
       pl_ins: комите́тами
       pl_pre: комите́тах
   "комментарий=comment":
+    batteries: [objects, communication]
     cefr_level: B1
     gender: m
     animacy: i
@@ -18561,6 +18613,7 @@ words:
       pl_ins: ко́мплексами
       pl_pre: ко́мплексах
   "композитор=composer":
+    batteries: [communication, work_study]
     cefr_level: B2
     gender: m
     animacy: a
@@ -18771,6 +18824,7 @@ words:
       - ru: Учи́тель держа́л класс под контро́лем.
         en_gb: The teacher kept the class under control.
   "контрольная=test":
+    batteries: [work_study]
     cefr_level: B1
     gender: f
     animacy: i
@@ -19071,6 +19125,7 @@ words:
       - ru: Он подобра́л копе́йку с по́ла.
         en_gb: He picked up a kopek from the floor.
   "копьё=spear":
+    batteries: [objects]
     cefr_level: B2
     gender: n
     animacy: i
@@ -19463,6 +19518,7 @@ words:
       pl_ins: корреспонде́нтами
       pl_pre: корреспонде́нтах
   "космонавт=cosmonaut":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -19699,6 +19755,7 @@ words:
       pl_ins: ко́фтами
       pl_pre: ко́фтах
   "кофточка=blouse":
+    batteries: [objects]
     cefr_level: B1
     gender: f
     animacy: i
@@ -20223,6 +20280,7 @@ words:
       - ru: С у́лицы доноси́лись кри́ки дете́й.
         en_gb: Children's shouts came from the street.
   "кристалл=crystal":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: i
@@ -20305,6 +20363,7 @@ words:
       sg_ins: кро́вью
       sg_pre: кро́ви
   "крокодил=crocodile":
+    batteries: [nature]
     cefr_level: B1
     gender: m
     animacy: a
@@ -22181,6 +22240,7 @@ words:
       pl_ins: лба́ми
       pl_pre: лбах
   "логин=login":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -22768,6 +22828,7 @@ words:
       pl_ins: ма́ками
       pl_pre: ма́ках
   "макароны=pasta":
+    batteries: [everyday]
     cefr_level: B1
     animacy: i
     number: ["pl"]
@@ -22944,6 +23005,7 @@ words:
       - ru: Ма́рки не хвати́ло для письма́.
         en_gb: There was not enough on the stamp for the letter.
   "Марс=Mars":
+    batteries: [work_study, places]
     cefr_level: B1
     gender: m
     animacy: i
@@ -23530,6 +23592,7 @@ words:
       - ru: Он храни́т ме́лочь в коро́бке.
         en_gb: He keeps small change in a box.
   "менеджер=manager":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -23890,6 +23953,7 @@ words:
       pl_ins: меча́ми
       pl_pre: меча́х
   "мечеть=mosque":
+    batteries: [places]
     cefr_level: B1
     gender: f
     animacy: i
@@ -24009,6 +24073,7 @@ words:
       - ru: Сча́стье состои́т из таки́х ми́гов.
         en_gb: Happiness consists of such instants.
   "микроскоп=microscope":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: i
@@ -24038,6 +24103,7 @@ words:
       pl_ins: микроско́пами
       pl_pre: микроско́пах
   "микрофон=microphone":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -24246,6 +24312,7 @@ words:
       pl_ins: мини́страми
       pl_pre: мини́страх
   "минус=minus":
+    batteries: [work_study]
     cefr_level: A2
     gender: m
     animacy: i
@@ -24337,6 +24404,7 @@ words:
       pl_ins: мира́ми
       pl_pre: мира́х
   "миска=bowl":
+    batteries: [objects]
     cefr_level: B1
     gender: f
     animacy: i
@@ -24458,6 +24526,7 @@ words:
       pl_ins: младе́нцами
       pl_pre: младе́нцах
   "млекопитающее=mammal":
+    batteries: [nature, work_study]
     cefr_level: B2
     gender: n
     animacy: a
@@ -24659,6 +24728,7 @@ words:
       pl_ins: мозга́ми
       pl_pre: мозга́х
   "молекула=molecule":
+    batteries: [work_study]
     cefr_level: B2
     gender: f
     animacy: i
@@ -25074,6 +25144,7 @@ words:
       pl_ins: моне́тами
       pl_pre: моне́тах
   "монитор=monitor":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -25665,6 +25736,7 @@ words:
       sg_ins: муко́й
       sg_pre: муке́
   "муравей=ant":
+    batteries: [nature]
     cefr_level: B1
     gender: m
     animacy: a
@@ -25694,6 +25766,7 @@ words:
       pl_ins: муравья́ми
       pl_pre: муравья́х
   "мусульманин=Muslim":
+    batteries: [society]
     cefr_level: B1
     gender: m
     animacy: a
@@ -26447,6 +26520,7 @@ words:
       - ru: Я до́лго выбира́л наря́д на ве́чер.
         en_gb: I spent a long time choosing an outfit for the evening.
   "насекомое=insect":
+    batteries: [nature]
     cefr_level: B1
     gender: n
     animacy: a
@@ -26591,6 +26665,7 @@ words:
       pl_ins: настрое́ниями
       pl_pre: настрое́ниях
   "настройки=settings":
+    batteries: [objects]
     cefr_level: B1
     animacy: i
     number: ["pl"]
@@ -27155,6 +27230,7 @@ words:
       - ru: Жизнь полна́ ра́достей и несча́стий.
         en_gb: Life is full of joys and misfortunes.
   "низ=bottom":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -27360,6 +27436,7 @@ words:
       - ru: Мы живём в сосе́днем но́мере.
         en_gb: We are staying in the next room.
   "Норвегия=Norway":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -28890,6 +28967,7 @@ words:
       pl_ins: опа́сностями
       pl_pre: опа́сностях
   "опера=opera":
+    batteries: [communication]
     cefr_level: B1
     gender: f
     animacy: i
@@ -28951,6 +29029,7 @@ words:
       pl_ins: опера́циями
       pl_pre: опера́циях
   "оппозиция=opposition":
+    batteries: [society]
     cefr_level: B2
     gender: f
     animacy: i
@@ -31553,6 +31632,7 @@ words:
       pl_ins: перево́дами
       pl_pre: перево́дах
   "переводчик=translator":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -31765,6 +31845,7 @@ words:
       pl_ins: перехо́дами
       pl_pre: перехо́дах
   "перец=pepper":
+    batteries: [everyday]
     cefr_level: B1
     gender: m
     animacy: i
@@ -32205,6 +32286,7 @@ words:
       - ru: В гора́х мно́го глубо́ких пеще́р.
         en_gb: There are many deep caves in the mountains.
   "пианист=pianist":
+    batteries: [communication, work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -32385,6 +32467,7 @@ words:
       pl_ins: пи́лами
       pl_pre: пи́лах
   "пингвин=penguin":
+    batteries: [nature]
     cefr_level: B1
     gender: m
     animacy: a
@@ -32705,6 +32788,7 @@ words:
       - ru: Вокру́г Со́лнца дви́жется во́семь плане́т.
         en_gb: Eight planets move around the Sun.
   "планшет=tablet":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -34755,6 +34839,7 @@ words:
       - ru: Они́ де́йствуют ра́ди о́бщей по́льзы.
         en_gb: They act for the common benefit.
   "Польша=Poland":
+    batteries: [places]
     cefr_level: A2
     gender: f
     animacy: i
@@ -34778,6 +34863,7 @@ words:
       sg_ins: По́льшей
       sg_pre: По́льше
   "полюс=pole":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: i
@@ -36424,6 +36510,7 @@ words:
       pl_ins: президе́нтами
       pl_pre: президе́нтах
   "премьер=prime minister":
+    batteries: [society]
     cefr_level: B2
     gender: m
     animacy: a
@@ -36481,6 +36568,7 @@ words:
       - ru: В апте́ке мно́го разли́чных препара́тов.
         en_gb: There are many different preparations in the pharmacy.
   "преподаватель=lecturer":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: a
@@ -36653,6 +36741,7 @@ words:
       sg_ins: при́былью
       sg_pre: при́были
   "привидение=ghost":
+    batteries: [places]
     cefr_level: B1
     gender: n
     animacy: i
@@ -38238,6 +38327,7 @@ words:
       - ru: Врач изуча́ет ра́зные проявле́ния боле́зни.
         en_gb: The doctor studies the various manifestations of the illness.
   "прямоугольник=rectangle":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: i
@@ -38267,6 +38357,7 @@ words:
       pl_ins: прямоуго́льниками
       pl_pre: прямоуго́льниках
   "психолог=psychologist":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: a
@@ -38720,6 +38811,7 @@ words:
       - ru: Стол покры́т то́лстым сло́ем пы́ли.
         en_gb: The table is covered with a thick layer of dust.
   "пьеса=play":
+    batteries: [communication]
     cefr_level: B1
     gender: f
     animacy: i
@@ -38749,6 +38841,7 @@ words:
       pl_ins: пье́сами
       pl_pre: пье́сах
   "пятёрка=a five":
+    batteries: [work_study]
     cefr_level: B1
     gender: f
     animacy: i
@@ -39564,6 +39657,7 @@ words:
       pl_ins: расска́зами
       pl_pre: расска́зах
   "расследование=investigation":
+    batteries: [society]
     cefr_level: B2
     gender: n
     animacy: i
@@ -40525,6 +40619,7 @@ words:
       - ru: Мастера́ покра́сили ста́рые реше́тки.
         en_gb: The craftsmen painted the old gratings.
   "Рим=Rome":
+    batteries: [places]
     cefr_level: A2
     gender: m
     animacy: i
@@ -40548,6 +40643,7 @@ words:
       sg_ins: Ри́мом
       sg_pre: Ри́ме
   "рис=rice":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -40929,6 +41025,7 @@ words:
       pl_ins: розе́тками
       pl_pre: розе́тках
   "рок=rock music":
+    batteries: [communication]
     cefr_level: B1
     gender: m
     animacy: i
@@ -41097,6 +41194,7 @@ words:
       - ru: Он живёт в Росси́и уже́ давно́.
         en_gb: He has lived in Russia for a long time already.
   "россиянин=Russian":
+    batteries: [people]
     cefr_level: B1
     gender: m
     animacy: a
@@ -42611,6 +42709,7 @@ words:
       pl_ins: свяще́нниками
       pl_pre: свяще́нниках
   "сдача=change":
+    batteries: [society]
     cefr_level: B1
     gender: f
     animacy: i
@@ -42902,6 +43001,7 @@ words:
       pl_ins: сержа́нтами
       pl_pre: сержа́нтах
   "сериал=TV series":
+    batteries: [communication]
     cefr_level: B1
     gender: m
     animacy: i
@@ -43216,6 +43316,7 @@ words:
       pl_ins: симпто́мами
       pl_pre: симпто́мах
   "симфония=symphony":
+    batteries: [communication]
     cefr_level: B2
     gender: f
     animacy: i
@@ -43245,6 +43346,7 @@ words:
       pl_ins: симфо́ниями
       pl_pre: симфо́ниях
   "синагога=synagogue":
+    batteries: [places]
     cefr_level: B1
     gender: f
     animacy: i
@@ -44249,6 +44351,7 @@ words:
       pl_ins: смертя́ми
       pl_pre: смертя́х
   "сметана=sour cream":
+    batteries: [everyday]
     cefr_level: B1
     gender: f
     animacy: i
@@ -45317,6 +45420,7 @@ words:
       pl_ins: сотру́дниками
       pl_pre: сотру́дниках
   "соус=sauce":
+    batteries: [everyday]
     cefr_level: B1
     gender: m
     animacy: i
@@ -47290,6 +47394,7 @@ words:
       pl_ins: студе́нтами
       pl_pre: студе́нтах
   "студентка=student (f)":
+    batteries: [work_study]
     cefr_level: A2
     gender: f
     animacy: a
@@ -47798,6 +47903,7 @@ words:
       sg_ins: су́тью
       sg_pre: су́ти
   "суши=sushi":
+    batteries: [everyday]
     cefr_level: B1
     gender: n
     animacy: i
@@ -48236,6 +48342,7 @@ words:
       pl_ins: сэ́рами
       pl_pre: сэ́рах
   "сюжет=plot":
+    batteries: [communication]
     cefr_level: B2
     gender: m
     animacy: i
@@ -48439,6 +48546,7 @@ words:
       pl_ins: та́нками
       pl_pre: та́нках
   "тапочки=slippers":
+    batteries: [objects]
     cefr_level: B1
     animacy: i
     number: ["pl"]
@@ -49396,6 +49504,7 @@ words:
       pl_ins: то́нами
       pl_pre: то́нах
   "тонна=tonne":
+    batteries: [work_study]
     cefr_level: B1
     gender: f
     animacy: i
@@ -50430,6 +50539,7 @@ words:
       - ru: Ме́жду ни́ми нет уваже́ния.
         en_gb: There is no respect between them.
   "увеличение=increase":
+    batteries: [work_study]
     cefr_level: B2
     gender: n
     animacy: i
@@ -50963,6 +51073,7 @@ words:
       - ru: Они́ интересу́ются исто́рией Украи́ной.
         en_gb: They are interested in the history connected with Ukraine.
   "украинец=Ukrainian":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -51299,6 +51410,7 @@ words:
       - ru: Благодаря́ о́бщим уси́лииям мы победи́ли.
         en_gb: Thanks to common efforts we won.
   "ускорение=acceleration":
+    batteries: [work_study]
     cefr_level: B2
     gender: n
     animacy: i
@@ -51507,6 +51619,7 @@ words:
       - ru: Магази́н прода́л мно́го электро́нных устро́йств.
         en_gb: The shop sold many electronic devices.
   "утверждение=statement":
+    batteries: [communication]
     cefr_level: B2
     gender: n
     animacy: i
@@ -51772,6 +51885,7 @@ words:
       pl_ins: ученика́ми
       pl_pre: ученика́х
   "ученица=pupil (f)":
+    batteries: [work_study]
     cefr_level: A2
     gender: f
     animacy: a
@@ -51983,6 +52097,7 @@ words:
       - ru: Учёные изуча́ют ра́зные фа́кторы ри́ска.
         en_gb: Scientists study various risk factors.
   "факультет=faculty":
+    batteries: [work_study]
     cefr_level: B1
     gender: m
     animacy: i
@@ -52138,6 +52253,7 @@ words:
       pl_ins: фейерве́рками
       pl_pre: фейерве́рках
   "Фейсбук=Facebook":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -52341,6 +52457,7 @@ words:
       pl_ins: фла́гами
       pl_pre: фла́гах
   "флешка=USB stick":
+    batteries: [objects]
     cefr_level: B1
     gender: f
     animacy: i
@@ -52555,6 +52672,7 @@ words:
       pl_ins: фо́рмами
       pl_pre: фо́рмах
   "фотоаппарат=camera":
+    batteries: [objects]
     cefr_level: B1
     gender: m
     animacy: i
@@ -52697,6 +52815,7 @@ words:
       - ru: Он восхища́ется Фра́нцией.
         en_gb: He admires France.
   "француз=Frenchman":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -52852,6 +52971,7 @@ words:
       - ru: Се́рдце выполня́ет ва́жную фу́нкцию.
         en_gb: The heart performs an important function.
   "футболист=footballer":
+    batteries: [everyday]
     cefr_level: B1
     gender: m
     animacy: a
@@ -53239,6 +53359,7 @@ words:
       - ru: Война́ нанесла́ уще́рб хозя́йству страны́.
         en_gb: The war caused damage to the country's economy.
   "хоккей=hockey":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -53435,6 +53556,7 @@ words:
       sg_ins: хре́ном
       sg_pre: хре́не
   "христианин=Christian":
+    batteries: [society]
     cefr_level: B1
     gender: m
     animacy: a
@@ -54018,6 +54140,7 @@ words:
       pl_ins: чая́ми
       pl_pre: чая́х
   "чайка=seagull":
+    batteries: [nature]
     cefr_level: B1
     gender: f
     animacy: a
@@ -54342,6 +54465,7 @@ words:
       pl_ins: чемпио́нами
       pl_pre: чемпио́нах
   "черепаха=tortoise":
+    batteries: [nature]
     cefr_level: B1
     gender: f
     animacy: a
@@ -54461,6 +54585,7 @@ words:
       - ru: Они́ боро́лись за честь шко́лы.
         en_gb: They fought for the honour of the school.
   "четвёрка=a four":
+    batteries: [work_study]
     cefr_level: B1
     gender: f
     animacy: i
@@ -55177,6 +55302,7 @@ words:
       sg_ins: ширино́й
       sg_pre: ширине́
   "шкала=scale":
+    batteries: [work_study]
     cefr_level: B2
     gender: f
     animacy: i
@@ -55367,6 +55493,7 @@ words:
       pl_ins: шнурка́ми
       pl_pre: шнурка́х
   "шоколад=chocolate":
+    batteries: [everyday]
     cefr_level: A2
     gender: m
     animacy: i
@@ -55847,6 +55974,7 @@ words:
       - ru: Свет проника́л че́рез у́зкие ще́ли.
         en_gb: Light came through the narrow cracks.
   "щенок=puppy":
+    batteries: [nature]
     cefr_level: B1
     gender: m
     animacy: a
@@ -55876,6 +56004,7 @@ words:
       pl_ins: щенка́ми
       pl_pre: щенка́х
   "щи=shchi":
+    batteries: [everyday]
     cefr_level: B2
     animacy: i
     number: ["pl"]
@@ -56013,6 +56142,7 @@ words:
       sg_ins: эконо́микой
       sg_pre: эконо́мике
   "экономист=economist":
+    batteries: [work_study]
     cefr_level: B2
     gender: m
     animacy: a
@@ -56275,6 +56405,7 @@ words:
       - ru: Она́ рабо́тает с больши́м запа́сом эне́ргии.
         en_gb: She works with a great store of energy.
   "энциклопедия=encyclopedia":
+    batteries: [communication]
     cefr_level: B1
     gender: f
     animacy: i
@@ -56736,6 +56867,7 @@ words:
       - ru: На доро́ге мно́го ям.
         en_gb: There are many pits on the road.
   "японец=Japanese man":
+    batteries: [people]
     cefr_level: A2
     gender: m
     animacy: a
@@ -56765,6 +56897,7 @@ words:
       pl_ins: япо́нцами
       pl_pre: япо́нцах
   "японка=Japanese (f)":
+    batteries: [people]
     cefr_level: A2
     gender: f
     animacy: a
