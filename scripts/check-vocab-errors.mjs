@@ -214,6 +214,19 @@ for (const file of files) {
           break;
         }
       }
+      // every multisyllabic word in the corpus carries a stress mark; an
+      // unmarked one is almost always a typo (the missing accent). Exception:
+      // Russian retracts stress onto a monosyllabic preposition (на́ пол, по́
+      // снегу, на́ зиму, ни́ ветра), genuinely leaving the noun unstressed.
+      const toks = (ru.match(/[\u0301А-Яа-яЁё-]+/gu) || []);
+      const stressedProclitic = (t) => syllableCount(t) === 1 && countStress(t) >= 1;
+      for (let t = 0; t < toks.length; t++) {
+        const tok = toks[t];
+        if (syllableCount(tok) >= 2 && countStress(tok) === 0) {
+          if (t > 0 && stressedProclitic(toks[t - 1])) continue;
+          report(file, key, 'phrase-no-stress', `unstressed word "${tok}" in: "${ru}"`);
+        }
+      }
     }
 
     // --- consistency maps ---
@@ -274,6 +287,7 @@ const order = [
   'stressed-key',
   'stray-acute',
   'phrase-stray-acute',
+  'phrase-no-stress',
   'no-stress',
   'multi-stress',
   'mono-stress',
