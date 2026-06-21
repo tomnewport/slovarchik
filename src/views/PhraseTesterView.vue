@@ -3,7 +3,7 @@ import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
 import { resetHint } from '../stores/keyboard.js'
-import { phraseTokens, phraseCorrect } from '../lib/phrases.js'
+import { phraseTokens, phraseCorrect, buildAssemblyBank } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import HintablePhrase from '../components/HintablePhrase.vue'
@@ -31,9 +31,10 @@ const inputEl = ref(null)
 const celebrating = ref(false)
 let advanceTimer = null
 
-// Easy mode: a shuffled bank of word tokens and the learner's placed sequence.
+// Easy mode: a shuffled bank of word tokens (+ decoys) and the learner's placed sequence.
 const bank = ref([])
 const placed = ref([])
+const answerTokenCount = ref(0)
 
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
@@ -58,8 +59,10 @@ function nextQuestion() {
   current.value = sample(phrases.value, 1)[0]
   if (direction.value === 'ru-en') speak(current.value.ru)
   if (level.value === 'easy') {
-    const tokens = phraseTokens(targetOf(current.value)).map((text, id) => ({ id, text }))
-    bank.value = sample(tokens, tokens.length) // shuffle
+    const target = targetOf(current.value)
+    answerTokenCount.value = phraseTokens(target).length
+    const otherTargets = phrases.value.filter((p) => p !== current.value).map((p) => targetOf(p))
+    bank.value = buildAssemblyBank(target, otherTargets)
   } else {
     nextTick(() => inputEl.value?.focus())
   }
@@ -86,7 +89,7 @@ function placeToken(token) {
   if (answered.value) return
   if (targetLang.value === 'ru') speak(token.text)
   placed.value = [...placed.value, token]
-  if (placed.value.length === bank.value.length) {
+  if (placed.value.length === answerTokenCount.value) {
     record(phraseCorrect(placed.value.map((t) => t.text).join(' '), targetOf(current.value)))
   }
 }

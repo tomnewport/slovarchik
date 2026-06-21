@@ -10,6 +10,7 @@ import {
   listeningTokens,
   listeningWordPool,
   buildListeningBank,
+  buildAssemblyBank,
 } from './phrases.js'
 
 // A deterministic pseudo-rng so hintKeys assertions are stable.
@@ -151,6 +152,44 @@ describe('listeningWordPool', () => {
     expect(pool).toContain('go')
     expect(pool.filter((w) => w === 'go')).toHaveLength(1)
     expect(new Set(pool).size).toBe(pool.length)
+  })
+})
+
+describe('buildAssemblyBank', () => {
+  it('contains all target tokens and rounds total size to ~2.5× phrase length', () => {
+    const pool = ['the dog runs fast', 'she reads a book', 'we eat lunch']
+    const bank = buildAssemblyBank('I go home', pool, 2.5, seededRng(1))
+    const texts = bank.map((t) => t.text)
+    for (const w of ['I', 'go', 'home']) expect(texts).toContain(w)
+    // 3 words × 1.5 = 4.5 → rounds to 5 decoys → 8 total
+    expect(bank.filter((t) => !t.decoy)).toHaveLength(3)
+    expect(bank.filter((t) => t.decoy)).toHaveLength(5)
+    expect(bank).toHaveLength(8)
+  })
+  it('never includes a decoy that appears in the target phrase (case-insensitive)', () => {
+    const pool = ['go to school', 'home is nice']
+    const bank = buildAssemblyBank('I go home', pool, 2.5, seededRng(2))
+    const decoyTexts = bank.filter((t) => t.decoy).map((t) => t.text.toLowerCase())
+    expect(decoyTexts).not.toContain('go')
+    expect(decoyTexts).not.toContain('home')
+    expect(decoyTexts).not.toContain('i')
+  })
+  it('gives every tile a unique id', () => {
+    const pool = ['she runs fast', 'he eats lunch']
+    const bank = buildAssemblyBank('I go home', pool, 2.5, seededRng(3))
+    expect(new Set(bank.map((t) => t.id)).size).toBe(bank.length)
+  })
+  it('clamps decoys to the available pool when pool is small', () => {
+    const pool = ['one two'] // only 2 unique non-target words
+    const bank = buildAssemblyBank('I go home', pool, 2.5, seededRng(4))
+    expect(bank.filter((t) => t.decoy)).toHaveLength(2)
+    expect(bank).toHaveLength(5)
+  })
+  it('returns just the target tokens when pool is empty', () => {
+    const bank = buildAssemblyBank('I go home', [], 2.5, seededRng(5))
+    expect(bank.filter((t) => !t.decoy)).toHaveLength(3)
+    expect(bank.filter((t) => t.decoy)).toHaveLength(0)
+    expect(bank).toHaveLength(3)
   })
 })
 

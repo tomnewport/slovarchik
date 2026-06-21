@@ -140,6 +140,43 @@ export function listeningWordPool(phrases) {
 }
 
 /**
+ * Build a shuffled word bank for the phrase-assembly (easy) drill: the real
+ * tokens of `target` plus enough decoys drawn from `pool` phrases so the total
+ * tile count is `factor` × the phrase length (default 2.5×). Decoys are taken
+ * from any word that doesn't already appear in the target (case-insensitive).
+ * Each tile has `{ id, text, decoy }`. `rng` is injectable for deterministic tests.
+ * @param {string}   target  the phrase to assemble
+ * @param {string[]} pool    other phrase strings to draw decoy words from
+ * @param {number}   [factor]
+ * @param {() => number} [rng]
+ * @returns {Array<{id: number, text: string, decoy: boolean}>}
+ */
+export function buildAssemblyBank(target, pool, factor = 2.5, rng = Math.random) {
+  const words = phraseTokens(target)
+  const decoyCount = Math.round(words.length * (factor - 1))
+  const have = new Set(words.map((w) => w.toLowerCase()))
+
+  const seen = new Set()
+  const candidates = []
+  for (const phrase of pool ?? []) {
+    for (const w of phraseTokens(phrase)) {
+      const key = w.toLowerCase()
+      if (!have.has(key) && !seen.has(key)) {
+        seen.add(key)
+        candidates.push(w)
+      }
+    }
+  }
+
+  const decoys = sample(candidates, Math.max(0, decoyCount), rng)
+  const tiles = [
+    ...words.map((text) => ({ text, decoy: false })),
+    ...decoys.map((text) => ({ text, decoy: true })),
+  ].map((t, id) => ({ id, ...t }))
+  return shuffle(tiles, rng)
+}
+
+/**
  * Build a shuffled word bank for the listening drill: every word of the target
  * English phrase plus up to `decoyCount` random decoys drawn from `pool`
  * (skipping any word that already appears in the phrase, so there's never an
