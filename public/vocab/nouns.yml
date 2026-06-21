@@ -357,6 +357,22 @@ words:
       pl_acc: адреса́
       pl_ins: адреса́ми
       pl_pre: адреса́х
+  "Азия=Asia":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Asia (the largest continent)
+    declension:
+      sg_nom: А́зия
+      sg_gen: А́зии
+      sg_dat: А́зии
+      sg_acc: А́зию
+      sg_ins: А́зией
+      sg_pre: А́зии
   "академик=academician":
     batteries: [people]
     cefr_level: B2
@@ -718,6 +734,28 @@ words:
       pl_acc: америка́нцев
       pl_ins: америка́нцами
       pl_pre: америка́нцах
+  "американка=American (f)":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: American (a woman from America)
+    declension:
+      sg_nom: америка́нка
+      sg_gen: америка́нки
+      sg_dat: америка́нке
+      sg_acc: америка́нку
+      sg_ins: америка́нкой
+      sg_pre: америка́нке
+      pl_nom: америка́нки
+      pl_gen: америка́нок
+      pl_dat: америка́нкам
+      pl_acc: америка́нок
+      pl_ins: америка́нками
+      pl_pre: америка́нках
   "анализ=analysis":
     batteries: [work_study]
     cefr_level: B2
@@ -778,6 +816,28 @@ words:
       pl_acc: а́нгелов
       pl_ins: а́нгелами
       pl_pre: а́нгелах
+  "англичанин=Englishman":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Englishman (a man from England)
+    declension:
+      sg_nom: англича́нин
+      sg_gen: англича́нина
+      sg_dat: англича́нину
+      sg_acc: англича́нина
+      sg_ins: англича́нином
+      sg_pre: англича́нине
+      pl_nom: англича́не
+      pl_gen: англича́н
+      pl_dat: англича́нам
+      pl_acc: англича́н
+      pl_ins: англича́нами
+      pl_pre: англича́нах
   "англия=England":
     batteries: [places]
     cefr_level: A2
@@ -858,6 +918,28 @@ words:
       pl_acc: анте́нны
       pl_ins: анте́ннами
       pl_pre: анте́ннах
+  "апельсин=orange":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: orange (a round citrus fruit)
+    declension:
+      sg_nom: апельси́н
+      sg_gen: апельси́на
+      sg_dat: апельси́ну
+      sg_acc: апельси́н
+      sg_ins: апельси́ном
+      sg_pre: апельси́не
+      pl_nom: апельси́ны
+      pl_gen: апельси́нов
+      pl_dat: апельси́нам
+      pl_acc: апельси́ны
+      pl_ins: апельси́нами
+      pl_pre: апельси́нах
   "аппарат=apparatus":
     batteries: [objects]
     cefr_level: B2
@@ -1015,6 +1097,28 @@ words:
       pl_acc: арти́стов
       pl_ins: арти́стами
       pl_pre: арти́стах
+  "архитектор=architect":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: architect (a person who designs buildings)
+    declension:
+      sg_nom: архите́ктор
+      sg_gen: архите́ктора
+      sg_dat: архите́ктору
+      sg_acc: архите́ктора
+      sg_ins: архите́ктором
+      sg_pre: архите́кторе
+      pl_nom: архите́кторы
+      pl_gen: архите́кторов
+      pl_dat: архите́кторам
+      pl_acc: архите́кторов
+      pl_ins: архите́кторами
+      pl_pre: архите́кторах
   "асфальт=asphalt":
     batteries: [objects, places]
     cefr_level: B1
@@ -1070,6 +1174,28 @@ words:
         en_gb: The team was preparing for an attack.
       - ru: Солда́ты отби́ли две ата́ки.
         en_gb: The soldiers repelled two attacks.
+  "атеист=atheist":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - society
+    en_gb:
+      standard: atheist (a person who believes in no god)
+    declension:
+      sg_nom: атеи́ст
+      sg_gen: атеи́ста
+      sg_dat: атеи́сту
+      sg_acc: атеи́ста
+      sg_ins: атеи́стом
+      sg_pre: атеи́сте
+      pl_nom: атеи́сты
+      pl_gen: атеи́стов
+      pl_dat: атеи́стам
+      pl_acc: атеи́стов
+      pl_ins: атеи́стами
+      pl_pre: атеи́стах
   "атлас=atlas":
     batteries: [communication, work_study]
     cefr_level: B1
@@ -1156,6 +1282,50 @@ words:
         en_gb: There was a warm atmosphere in the house.
       - ru: Мне нра́вится атмосфе́ра э́того кафе́.
         en_gb: I like the atmosphere of this cafe.
+  "атом=atom":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: atom (the smallest unit of a chemical element)
+    declension:
+      sg_nom: а́том
+      sg_gen: а́тома
+      sg_dat: а́тому
+      sg_acc: а́том
+      sg_ins: а́томом
+      sg_pre: а́томе
+      pl_nom: а́томы
+      pl_gen: а́томов
+      pl_dat: а́томам
+      pl_acc: а́томы
+      pl_ins: а́томами
+      pl_pre: а́томах
+  "аудитория=lecture hall":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: lecture hall (a room for lectures; an audience)
+    declension:
+      sg_nom: аудито́рия
+      sg_gen: аудито́рии
+      sg_dat: аудито́рии
+      sg_acc: аудито́рию
+      sg_ins: аудито́рией
+      sg_pre: аудито́рии
+      pl_nom: аудито́рии
+      pl_gen: аудито́рий
+      pl_dat: аудито́риям
+      pl_acc: аудито́рии
+      pl_ins: аудито́риями
+      pl_pre: аудито́риях
   "аэропорт=airport":
     batteries: [places]
     cefr_level: A2
@@ -1375,6 +1545,67 @@ words:
         en_gb: Supplies were stored at the base.
       - ru: Учёные постро́или две ба́зы в Аркти́ке.
         en_gb: Scientists built two bases in the Arctic.
+  "Байкал=Lake Baikal":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Lake Baikal (a large lake in Siberia)
+    declension:
+      sg_nom: Байка́л
+      sg_gen: Байка́ла
+      sg_dat: Байка́лу
+      sg_acc: Байка́л
+      sg_ins: Байка́лом
+      sg_pre: Байка́ле
+  "балерина=ballerina":
+    cefr_level: B1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - work
+    en_gb:
+      standard: ballerina (a female ballet dancer)
+    declension:
+      sg_nom: балери́на
+      sg_gen: балери́ны
+      sg_dat: балери́не
+      sg_acc: балери́ну
+      sg_ins: балери́ной
+      sg_pre: балери́не
+      pl_nom: балери́ны
+      pl_gen: балери́н
+      pl_dat: балери́нам
+      pl_acc: балери́н
+      pl_ins: балери́нами
+      pl_pre: балери́нах
+  "балет=ballet":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: ballet (a classical dance form)
+    declension:
+      sg_nom: бале́т
+      sg_gen: бале́та
+      sg_dat: бале́ту
+      sg_acc: бале́т
+      sg_ins: бале́том
+      sg_pre: бале́те
+      pl_nom: бале́ты
+      pl_gen: бале́тов
+      pl_dat: бале́там
+      pl_acc: бале́ты
+      pl_ins: бале́тами
+      pl_pre: бале́тах
   "балка=beam":
     batteries: [objects]
     cefr_level: B2
@@ -1436,6 +1667,28 @@ words:
       pl_acc: балко́ны
       pl_ins: балко́нами
       pl_pre: балко́нах
+  "банан=banana":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: banana (a long curved yellow fruit)
+    declension:
+      sg_nom: бана́н
+      sg_gen: бана́на
+      sg_dat: бана́ну
+      sg_acc: бана́н
+      sg_ins: бана́ном
+      sg_pre: бана́не
+      pl_nom: бана́ны
+      pl_gen: бана́нов
+      pl_dat: бана́нам
+      pl_acc: бана́ны
+      pl_ins: бана́нами
+      pl_pre: бана́нах
   "бандит=bandit":
     batteries: [people]
     cefr_level: B1
@@ -1685,6 +1938,44 @@ words:
       pl_acc: баро́нов
       pl_ins: баро́нами
       pl_pre: баро́нах
+  "баскетбол=basketball":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+    en_gb:
+      standard: basketball (a ball game with hoops)
+    declension:
+      sg_nom: баскетбо́л
+      sg_gen: баскетбо́ла
+      sg_dat: баскетбо́лу
+      sg_acc: баскетбо́л
+      sg_ins: баскетбо́лом
+      sg_pre: баскетбо́ле
+  "баскетболист=basketball player":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - sport
+    en_gb:
+      standard: basketball player (a person who plays basketball)
+    declension:
+      sg_nom: баскетболи́ст
+      sg_gen: баскетболи́ста
+      sg_dat: баскетболи́сту
+      sg_acc: баскетболи́ста
+      sg_ins: баскетболи́стом
+      sg_pre: баскетболи́сте
+      pl_nom: баскетболи́сты
+      pl_gen: баскетболи́стов
+      pl_dat: баскетболи́стам
+      pl_acc: баскетболи́стов
+      pl_ins: баскетболи́стами
+      pl_pre: баскетболи́стах
   "бассейн=swimming pool":
     batteries: [places]
     cefr_level: A2
@@ -2125,6 +2416,28 @@ words:
       pl_acc: берега́
       pl_ins: берега́ми
       pl_pre: берега́х
+  "берёза=birch":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: birch (a tree with white bark)
+    declension:
+      sg_nom: берёза
+      sg_gen: берёзы
+      sg_dat: берёзе
+      sg_acc: берёзу
+      sg_ins: берёзой
+      sg_pre: берёзе
+      pl_nom: берёзы
+      pl_gen: берёз
+      pl_dat: берёзам
+      pl_acc: берёзы
+      pl_ins: берёзами
+      pl_pre: берёзах
   "беседа=conversation":
     batteries: [communication]
     cefr_level: B1
@@ -2264,6 +2577,28 @@ words:
       sg_acc: би́знес
       sg_ins: би́знесом
       sg_pre: би́знесе
+  "бизнесмен=businessman":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: businessman (a man who runs a business)
+    declension:
+      sg_nom: бизнесме́н
+      sg_gen: бизнесме́на
+      sg_dat: бизнесме́ну
+      sg_acc: бизнесме́на
+      sg_ins: бизнесме́ном
+      sg_pre: бизнесме́не
+      pl_nom: бизнесме́ны
+      pl_gen: бизнесме́нов
+      pl_dat: бизнесме́нам
+      pl_acc: бизнесме́нов
+      pl_ins: бизнесме́нами
+      pl_pre: бизнесме́нах
   "билет=ticket":
     batteries: [objects]
     cefr_level: A1
@@ -2491,6 +2826,28 @@ words:
       pl_acc: близнецо́в
       pl_ins: близнеца́ми
       pl_pre: близнеца́х
+  "блог=blog":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: blog (a personal website with regular posts)
+    declension:
+      sg_nom: блог
+      sg_gen: бло́га
+      sg_dat: бло́гу
+      sg_acc: блог
+      sg_ins: бло́гом
+      sg_pre: бло́ге
+      pl_nom: бло́ги
+      pl_gen: бло́гов
+      pl_dat: бло́гам
+      pl_acc: бло́ги
+      pl_ins: бло́гами
+      pl_pre: бло́гах
   "блок=block":
     batteries: [objects, society]
     cefr_level: B1
@@ -3109,6 +3466,22 @@ words:
       pl_acc: бо́цманов
       pl_ins: бо́цманами
       pl_pre: бо́цманах
+  "Бразилия=Brazil":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Brazil (a country in South America)
+    declension:
+      sg_nom: Брази́лия
+      sg_gen: Брази́лии
+      sg_dat: Брази́лии
+      sg_acc: Брази́лию
+      sg_ins: Брази́лией
+      sg_pre: Брази́лии
   "брак=marriage":
     batteries: [abstract, society]
     cefr_level: B2
@@ -3321,6 +3694,28 @@ words:
       pl_acc: брю́ки
       pl_ins: брю́ками
       pl_pre: брю́ках
+  "буддист=Buddhist":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - society
+    en_gb:
+      standard: Buddhist (a follower of Buddhism)
+    declension:
+      sg_nom: будди́ст
+      sg_gen: будди́ста
+      sg_dat: будди́сту
+      sg_acc: будди́ста
+      sg_ins: будди́стом
+      sg_pre: будди́сте
+      pl_nom: будди́сты
+      pl_gen: будди́стов
+      pl_dat: будди́стам
+      pl_acc: будди́стов
+      pl_ins: будди́стами
+      pl_pre: будди́стах
   "буква=letter":
     batteries: [communication]
     cefr_level: A2
@@ -4627,6 +5022,8 @@ words:
       pl_ins: ви́дами
       pl_pre: ви́дах
     usage:
+      - ru: Что ты име́ешь в виду́?
+        en_gb: What do you have in mind?
       - ru: Из окна́ открыва́ется краси́вый вид.
         en_gb: A beautiful view opens from the window.
       - ru: У него́ уста́лый вид.
@@ -4693,6 +5090,22 @@ words:
       pl_acc: виде́ния
       pl_ins: виде́ниями
       pl_pre: виде́ниях
+  "видео=video":
+    cefr_level: A2
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - technology
+    en_gb:
+      standard: video (a recording of moving images)
+    declension:
+      sg_nom: ви́део
+      sg_gen: ви́део
+      sg_dat: ви́део
+      sg_acc: ви́део
+      sg_ins: ви́део
+      sg_pre: ви́део
   "виза=visa":
     batteries: [objects, society]
     cefr_level: A2
@@ -5335,6 +5748,22 @@ words:
         en_gb: There is a little vodka in the bottle.
       - ru: Го́сти пришли́ с буты́лкой во́дки.
         en_gb: The guests came with a bottle of vodka.
+  "водород=hydrogen":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - science
+    en_gb:
+      standard: hydrogen (a chemical element, gas)
+    declension:
+      sg_nom: водоро́д
+      sg_gen: водоро́да
+      sg_dat: водоро́ду
+      sg_acc: водоро́д
+      sg_ins: водоро́дом
+      sg_pre: водоро́де
   "вождь=leader":
     batteries: [people]
     cefr_level: B2
@@ -5687,6 +6116,22 @@ words:
         en_gb: The tourists admire the Volga from the hill.
       - ru: Мы прие́хали к Во́лге на зака́те.
         en_gb: We came to the Volga at sunset.
+  "волейбол=volleyball":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+    en_gb:
+      standard: volleyball (a ball game over a net)
+    declension:
+      sg_nom: волейбо́л
+      sg_gen: волейбо́ла
+      sg_dat: волейбо́лу
+      sg_acc: волейбо́л
+      sg_ins: волейбо́лом
+      sg_pre: волейбо́ле
   "волк=wolf":
     batteries: [animals, nature]
     cefr_level: A2
@@ -5811,6 +6256,28 @@ words:
       pl_acc: во́лосы
       pl_ins: волоса́ми
       pl_pre: волоса́х
+  "волшебник=wizard":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: wizard (a man with magical powers)
+    declension:
+      sg_nom: волше́бник
+      sg_gen: волше́бника
+      sg_dat: волше́бнику
+      sg_acc: волше́бника
+      sg_ins: волше́бником
+      sg_pre: волше́бнике
+      pl_nom: волше́бники
+      pl_gen: волше́бников
+      pl_dat: волше́бникам
+      pl_acc: волше́бников
+      pl_ins: волше́бниками
+      pl_pre: волше́бниках
   "воля=will":
     batteries: [abstract]
     cefr_level: B1
@@ -6034,6 +6501,28 @@ words:
         en_gb: He shared with me a memory of the war.
       - ru: Ста́рые фотогра́фии бу́дят воспомина́ния.
         en_gb: Old photographs awaken memories.
+  "восстание=uprising":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - history
+    en_gb:
+      standard: uprising (a revolt against authority)
+    declension:
+      sg_nom: восста́ние
+      sg_gen: восста́ния
+      sg_dat: восста́нию
+      sg_acc: восста́ние
+      sg_ins: восста́нием
+      sg_pre: восста́нии
+      pl_nom: восста́ния
+      pl_gen: восста́ний
+      pl_dat: восста́ниям
+      pl_acc: восста́ния
+      pl_ins: восста́ниями
+      pl_pre: восста́ниях
   "восток=east":
     batteries: [places]
     cefr_level: A2
@@ -6191,6 +6680,8 @@ words:
     en_gb:
       standard: time (the ongoing sequence of events)
     usage:
+      - ru: Со вре́менем ты всё поймёшь.
+        en_gb: Over time you will understand everything.
       - ru: У меня́ нет вре́мени.
         en_gb: I have no time.
       - ru: Со вре́менем всё нала́дится.
@@ -6214,6 +6705,22 @@ words:
       pl_acc: времена́
       pl_ins: времена́ми
       pl_pre: времена́х
+  "вселенная=universe":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - science
+    en_gb:
+      standard: universe (all of space and everything in it)
+    declension:
+      sg_nom: вселе́нная
+      sg_gen: вселе́нной
+      sg_dat: вселе́нной
+      sg_acc: вселе́нную
+      sg_ins: вселе́нной
+      sg_pre: вселе́нной
   "встреча=meeting":
     batteries: [time_events, communication]
     cefr_level: A2
@@ -6246,6 +6753,28 @@ words:
       pl_acc: встре́чи
       pl_ins: встре́чами
       pl_pre: встре́чах
+  "вулкан=volcano":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: volcano (a mountain that can erupt)
+    declension:
+      sg_nom: вулка́н
+      sg_gen: вулка́на
+      sg_dat: вулка́ну
+      sg_acc: вулка́н
+      sg_ins: вулка́ном
+      sg_pre: вулка́не
+      pl_nom: вулка́ны
+      pl_gen: вулка́нов
+      pl_dat: вулка́нам
+      pl_acc: вулка́ны
+      pl_ins: вулка́нами
+      pl_pre: вулка́нах
   "вход=entrance":
     batteries: [places, objects]
     cefr_level: A2
@@ -7234,6 +7763,28 @@ words:
         en_gb: She could not hold back her anger.
       - ru: В гне́ве он сказа́л ли́шнее.
         en_gb: In anger he said too much.
+  "гнездо=nest":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: nest (a structure a bird builds for its eggs)
+    declension:
+      sg_nom: гнездо́
+      sg_gen: гнезда́
+      sg_dat: гнезду́
+      sg_acc: гнездо́
+      sg_ins: гнездо́м
+      sg_pre: гнезде́
+      pl_nom: гнёзда
+      pl_gen: гнёзд
+      pl_dat: гнёздам
+      pl_acc: гнёзда
+      pl_ins: гнёздами
+      pl_pre: гнёздах
   "год=year":
     batteries: [time_events]
     cefr_level: A1
@@ -7259,6 +7810,8 @@ words:
       pl_ins: го́дами
       pl_pre: го́дах
     usage:
+      - ru: С Но́вым го́дом!
+        en_gb: Happy New Year!
       - ru: В э́том году́ бы́ло жа́ркое ле́то.
         en_gb: This year there was a hot summer.
       - ru: Про́шло мно́го лет.
@@ -7975,6 +8528,22 @@ words:
       pl_acc: грехи́
       pl_ins: греха́ми
       pl_pre: греха́х
+  "Греция=Greece":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Greece (a country in southern Europe)
+    declension:
+      sg_nom: Гре́ция
+      sg_gen: Гре́ции
+      sg_dat: Гре́ции
+      sg_acc: Гре́цию
+      sg_ins: Гре́цией
+      sg_pre: Гре́ции
   "грешник=sinner":
     batteries: [people]
     cefr_level: B2
@@ -8689,6 +9258,28 @@ words:
       pl_acc: движе́ния
       pl_ins: движе́ниями
       pl_pre: движе́ниях
+  "двойка=a two":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: a two (the school grade 'D'/fail; the number two)
+    declension:
+      sg_nom: дво́йка
+      sg_gen: дво́йки
+      sg_dat: дво́йке
+      sg_acc: дво́йку
+      sg_ins: дво́йкой
+      sg_pre: дво́йке
+      pl_nom: дво́йки
+      pl_gen: дво́ек
+      pl_dat: дво́йкам
+      pl_acc: дво́йки
+      pl_ins: дво́йками
+      pl_pre: дво́йках
   "двор=courtyard":
     batteries: [places]
     cefr_level: A2
@@ -9039,6 +9630,10 @@ words:
     en_gb:
       standard: matter (an affair, business, or task)
     usage:
+      - ru: Приве́т! Как дела́?
+        en_gb: Hi! How are you doing?
+      - ru: Де́ло в том, что я опозда́л.
+        en_gb: The thing is that I was late.
       - ru: Э́то ва́жное де́ло.
         en_gb: This is an important matter.
       - ru: У меня́ к тебе́ ва́жное де́ло.
@@ -9645,6 +10240,31 @@ words:
       pl_acc: дире́кторов
       pl_ins: дире́кторами
       pl_pre: дире́кторах
+  "диск=disc":
+    usage:
+      - ru: Я купи́л но́вый жёсткий диск.
+        en_gb: I bought a new hard drive.
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: disc (a flat round object; a CD or disk)
+    declension:
+      sg_nom: диск
+      sg_gen: ди́ска
+      sg_dat: ди́ску
+      sg_acc: диск
+      sg_ins: ди́ском
+      sg_pre: ди́ске
+      pl_nom: ди́ски
+      pl_gen: ди́сков
+      pl_dat: ди́скам
+      pl_acc: ди́ски
+      pl_ins: ди́сками
+      pl_pre: ди́сках
   "длина=length":
     batteries: [everyday]
     cefr_level: B1
@@ -9710,6 +10330,8 @@ words:
     en_gb:
       standard: goodness (the good, as opposed to evil)
     usage:
+      - ru: Добро́ пожа́ловать в Москву́!
+        en_gb: Welcome to Moscow!
       - ru: Добро́ всегда́ побежда́ет зло.
         en_gb: Good always defeats evil.
       - ru: Он сде́лал мно́го добра́ лю́дям.
@@ -10493,6 +11115,8 @@ words:
     en_gb:
       standard: friend (someone you like and trust)
     usage:
+      - ru: Они́ лю́бят друг дру́га.
+        en_gb: They love each other.
       - ru: Он мой лу́чший друг.
         en_gb: He is my best friend.
       - ru: Я доверя́ю своему́ дру́гу.
@@ -11364,6 +11988,22 @@ words:
       pl_acc: же́сты
       pl_ins: же́стами
       pl_pre: же́стах
+  "живопись=painting":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+    en_gb:
+      standard: painting (the art of making pictures)
+    declension:
+      sg_nom: жи́вопись
+      sg_gen: жи́вописи
+      sg_dat: жи́вописи
+      sg_acc: жи́вопись
+      sg_ins: жи́вописью
+      sg_pre: жи́вописи
   "живот=stomach":
     batteries: [everyday]
     cefr_level: B1
@@ -11428,6 +12068,28 @@ words:
       pl_acc: живо́тных
       pl_ins: живо́тными
       pl_pre: живо́тных
+  "жидкость=liquid":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: liquid (a substance that flows, e.g. water)
+    declension:
+      sg_nom: жи́дкость
+      sg_gen: жи́дкости
+      sg_dat: жи́дкости
+      sg_acc: жи́дкость
+      sg_ins: жи́дкостью
+      sg_pre: жи́дкости
+      pl_nom: жи́дкости
+      pl_gen: жи́дкостей
+      pl_dat: жи́дкостям
+      pl_acc: жи́дкости
+      pl_ins: жи́дкостями
+      pl_pre: жи́дкостях
   "жизнь=life":
     batteries: [abstract]
     cefr_level: A1
@@ -12516,6 +13178,29 @@ words:
       pl_acc: запре́ты
       pl_ins: запре́тами
       pl_pre: запре́тах
+  "запуск=launch":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+      - science
+    en_gb:
+      standard: launch (the start of something, e.g. a rocket)
+    declension:
+      sg_nom: за́пуск
+      sg_gen: за́пуска
+      sg_dat: за́пуску
+      sg_acc: за́пуск
+      sg_ins: за́пуском
+      sg_pre: за́пуске
+      pl_nom: за́пуски
+      pl_gen: за́пусков
+      pl_dat: за́пускам
+      pl_acc: за́пуски
+      pl_ins: за́пусками
+      pl_pre: за́пусках
   "запястье=wrist":
     batteries: [everyday]
     cefr_level: B2
@@ -12546,6 +13231,28 @@ words:
       pl_acc: запя́стья
       pl_ins: запя́стьями
       pl_pre: запя́стьях
+  "запятая=comma":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - reading
+    en_gb:
+      standard: comma (the punctuation mark ,)
+    declension:
+      sg_nom: запята́я
+      sg_gen: запято́й
+      sg_dat: запято́й
+      sg_acc: запяту́ю
+      sg_ins: запято́й
+      sg_pre: запято́й
+      pl_nom: запяты́е
+      pl_gen: запяты́х
+      pl_dat: запяты́м
+      pl_acc: запяты́е
+      pl_ins: запяты́ми
+      pl_pre: запяты́х
   "зарплата=salary":
     batteries: [society]
     cefr_level: B1
@@ -13779,6 +14486,22 @@ words:
       pl_acc: ико́ны
       pl_ins: ико́нами
       pl_pre: ико́нах
+  "икра=caviar":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: caviar (fish eggs eaten as food)
+    declension:
+      sg_nom: икра́
+      sg_gen: икры́
+      sg_dat: икре́
+      sg_acc: икру́
+      sg_ins: икро́й
+      sg_pre: икре́
   "император=emperor":
     batteries: [people]
     cefr_level: B1
@@ -13900,6 +14623,28 @@ words:
       pl_acc: инжене́ров
       pl_ins: инжене́рами
       pl_pre: инжене́рах
+  "инопланетянин=alien":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: alien (a being from another planet)
+    declension:
+      sg_nom: инопланетя́нин
+      sg_gen: инопланетя́нина
+      sg_dat: инопланетя́нину
+      sg_acc: инопланетя́нина
+      sg_ins: инопланетя́нином
+      sg_pre: инопланетя́нине
+      pl_nom: инопланетя́не
+      pl_gen: инопланетя́н
+      pl_dat: инопланетя́нам
+      pl_acc: инопланетя́н
+      pl_ins: инопланетя́нами
+      pl_pre: инопланетя́нах
   "иностранец=foreigner":
     batteries: [people]
     cefr_level: A2
@@ -14028,6 +14773,22 @@ words:
       pl_acc: инструме́нты
       pl_ins: инструме́нтами
       pl_pre: инструме́нтах
+  "интеллект=intelligence":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - science
+    en_gb:
+      standard: intelligence (the ability to think and learn)
+    declension:
+      sg_nom: интелле́кт
+      sg_gen: интелле́кта
+      sg_dat: интелле́кту
+      sg_acc: интелле́кт
+      sg_ins: интелле́ктом
+      sg_pre: интелле́кте
   "интеллигенция=intelligentsia":
     batteries: [society, people]
     cefr_level: B2
@@ -14304,6 +15065,44 @@ words:
       sg_acc: иску́сство
       sg_ins: иску́сством
       sg_pre: иску́сстве
+  "испанец=Spaniard":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Spaniard (a man from Spain)
+    declension:
+      sg_nom: испа́нец
+      sg_gen: испа́нца
+      sg_dat: испа́нцу
+      sg_acc: испа́нца
+      sg_ins: испа́нцем
+      sg_pre: испа́нце
+      pl_nom: испа́нцы
+      pl_gen: испа́нцев
+      pl_dat: испа́нцам
+      pl_acc: испа́нцев
+      pl_ins: испа́нцами
+      pl_pre: испа́нцах
+  "Испания=Spain":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Spain (a country in southern Europe)
+    declension:
+      sg_nom: Испа́ния
+      sg_gen: Испа́нии
+      sg_dat: Испа́нии
+      sg_acc: Испа́нию
+      sg_ins: Испа́нией
+      sg_pre: Испа́нии
   "исповедь=confession":
     batteries: [abstract, communication]
     cefr_level: B2
@@ -14595,6 +15394,50 @@ words:
         en_gb: It is very warm in Italy.
       - ru: Мы давно́ мечта́ли об Ита́лии.
         en_gb: We had long dreamed of Italy.
+  "итальянец=Italian":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Italian (a man from Italy)
+    declension:
+      sg_nom: италья́нец
+      sg_gen: италья́нца
+      sg_dat: италья́нцу
+      sg_acc: италья́нца
+      sg_ins: италья́нцем
+      sg_pre: италья́нце
+      pl_nom: италья́нцы
+      pl_gen: италья́нцев
+      pl_dat: италья́нцам
+      pl_acc: италья́нцев
+      pl_ins: италья́нцами
+      pl_pre: италья́нцах
+  "итальянка=Italian (f)":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Italian (a woman from Italy)
+    declension:
+      sg_nom: италья́нка
+      sg_gen: италья́нки
+      sg_dat: италья́нке
+      sg_acc: италья́нку
+      sg_ins: италья́нкой
+      sg_pre: италья́нке
+      pl_nom: италья́нки
+      pl_gen: италья́нок
+      pl_dat: италья́нкам
+      pl_acc: италья́нок
+      pl_ins: италья́нками
+      pl_pre: италья́нках
   "итог=total":
     batteries: [abstract, everyday]
     cefr_level: B1
@@ -14780,6 +15623,38 @@ words:
       pl_acc: ка́дры
       pl_ins: ка́драми
       pl_pre: ка́драх
+  "Казань=Kazan":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Kazan (a city in Russia)
+    declension:
+      sg_nom: Каза́нь
+      sg_gen: Каза́ни
+      sg_dat: Каза́ни
+      sg_acc: Каза́нь
+      sg_ins: Каза́нью
+      sg_pre: Каза́ни
+  "Казахстан=Kazakhstan":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Kazakhstan (a country in Central Asia)
+    declension:
+      sg_nom: Казахста́н
+      sg_gen: Казахста́на
+      sg_dat: Казахста́ну
+      sg_acc: Казахста́н
+      sg_ins: Казахста́ном
+      sg_pre: Казахста́не
   "камень=stone":
     batteries: [objects, nature]
     cefr_level: A2
@@ -14844,6 +15719,22 @@ words:
       pl_acc: ка́меры
       pl_ins: ка́мерами
       pl_pre: ка́мерах
+  "Канада=Canada":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Canada (a country in North America)
+    declension:
+      sg_nom: Кана́да
+      sg_gen: Кана́ды
+      sg_dat: Кана́де
+      sg_acc: Кана́ду
+      sg_ins: Кана́дой
+      sg_pre: Кана́де
   "канал=canal":
     batteries: [places]
     cefr_level: B1
@@ -15739,6 +16630,28 @@ words:
       pl_acc: кино́
       pl_ins: кино́
       pl_pre: кино́
+  "кинотеатр=cinema":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+    en_gb:
+      standard: cinema (a place to watch films)
+    declension:
+      sg_nom: кинотеа́тр
+      sg_gen: кинотеа́тра
+      sg_dat: кинотеа́тру
+      sg_acc: кинотеа́тр
+      sg_ins: кинотеа́тром
+      sg_pre: кинотеа́тре
+      pl_nom: кинотеа́тры
+      pl_gen: кинотеа́тров
+      pl_dat: кинотеа́трам
+      pl_acc: кинотеа́тры
+      pl_ins: кинотеа́трами
+      pl_pre: кинотеа́трах
   "кирпич=brick":
     batteries: [objects]
     cefr_level: B1
@@ -15771,6 +16684,22 @@ words:
       pl_acc: кирпичи́
       pl_ins: кирпича́ми
       pl_pre: кирпича́х
+  "кислород=oxygen":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - science
+    en_gb:
+      standard: oxygen (a chemical element, gas)
+    declension:
+      sg_nom: кислоро́д
+      sg_gen: кислоро́да
+      sg_dat: кислоро́ду
+      sg_acc: кислоро́д
+      sg_ins: кислоро́дом
+      sg_pre: кислоро́де
   "кисть=brush":
     batteries: [objects]
     cefr_level: B1
@@ -15804,6 +16733,50 @@ words:
       pl_acc: ки́сти
       pl_ins: кистя́ми
       pl_pre: кистя́х
+  "кит=whale":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: whale (a very large sea mammal)
+    declension:
+      sg_nom: кит
+      sg_gen: кита́
+      sg_dat: киту́
+      sg_acc: кита́
+      sg_ins: кито́м
+      sg_pre: ките́
+      pl_nom: киты́
+      pl_gen: кито́в
+      pl_dat: кита́м
+      pl_acc: кито́в
+      pl_ins: кита́ми
+      pl_pre: кита́х
+  "китаец=Chinese man":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Chinese (a man from China)
+    declension:
+      sg_nom: кита́ец
+      sg_gen: кита́йца
+      sg_dat: кита́йцу
+      sg_acc: кита́йца
+      sg_ins: кита́йцем
+      sg_pre: кита́йце
+      pl_nom: кита́йцы
+      pl_gen: кита́йцев
+      pl_dat: кита́йцам
+      pl_acc: кита́йцев
+      pl_ins: кита́йцами
+      pl_pre: кита́йцах
   "китай=China":
     batteries: [places]
     cefr_level: A2
@@ -15882,6 +16855,28 @@ words:
       pl_acc: клавиату́ры
       pl_ins: клавиату́рами
       pl_pre: клавиату́рах
+  "клавиша=key":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: key (a button on a keyboard)
+    declension:
+      sg_nom: кла́виша
+      sg_gen: кла́виши
+      sg_dat: кла́више
+      sg_acc: кла́вишу
+      sg_ins: кла́вишей
+      sg_pre: кла́више
+      pl_nom: кла́виши
+      pl_gen: кла́виш
+      pl_dat: кла́вишам
+      pl_acc: кла́виши
+      pl_ins: кла́вишами
+      pl_pre: кла́вишах
   "кладбище=cemetery":
     batteries: [places]
     cefr_level: B1
@@ -16609,6 +17604,28 @@ words:
       pl_acc: колле́г
       pl_ins: колле́гами
       pl_pre: колле́гах
+  "колледж=college":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: college (a place of higher education)
+    declension:
+      sg_nom: ко́лледж
+      sg_gen: ко́лледжа
+      sg_dat: ко́лледжу
+      sg_acc: ко́лледж
+      sg_ins: ко́лледжем
+      sg_pre: ко́лледже
+      pl_nom: ко́лледжи
+      pl_gen: ко́лледжей
+      pl_dat: ко́лледжам
+      pl_acc: ко́лледжи
+      pl_ins: ко́лледжами
+      pl_pre: ко́лледжах
   "коллектив=collective":
     batteries: [people, society]
     cefr_level: B2
@@ -16890,6 +17907,28 @@ words:
       pl_acc: комба́тов
       pl_ins: комба́тами
       pl_pre: комба́тах
+  "комедия=comedy":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: comedy (a funny play or film)
+    declension:
+      sg_nom: коме́дия
+      sg_gen: коме́дии
+      sg_dat: коме́дии
+      sg_acc: коме́дию
+      sg_ins: коме́дией
+      sg_pre: коме́дии
+      pl_nom: коме́дии
+      pl_gen: коме́дий
+      pl_dat: коме́диям
+      pl_acc: коме́дии
+      pl_ins: коме́диями
+      pl_pre: коме́диях
   "комиссар=commissar":
     batteries: [people]
     cefr_level: B2
@@ -16985,6 +18024,29 @@ words:
       pl_acc: комите́ты
       pl_ins: комите́тами
       pl_pre: комите́тах
+  "комментарий=comment":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+      - communication
+    en_gb:
+      standard: comment (a remark, especially online)
+    declension:
+      sg_nom: коммента́рий
+      sg_gen: коммента́рия
+      sg_dat: коммента́рию
+      sg_acc: коммента́рий
+      sg_ins: коммента́рием
+      sg_pre: коммента́рие
+      pl_nom: коммента́рии
+      pl_gen: коммента́риев
+      pl_dat: коммента́риям
+      pl_acc: коммента́рии
+      pl_ins: коммента́риями
+      pl_pre: коммента́риях
   "коммунизм=communism":
     batteries: [society]
     cefr_level: B2
@@ -17135,6 +18197,29 @@ words:
       pl_acc: ко́мплексы
       pl_ins: ко́мплексами
       pl_pre: ко́мплексах
+  "композитор=composer":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - work
+    en_gb:
+      standard: composer (a person who writes music)
+    declension:
+      sg_nom: компози́тор
+      sg_gen: компози́тора
+      sg_dat: компози́тору
+      sg_acc: компози́тора
+      sg_ins: компози́тором
+      sg_pre: компози́торе
+      pl_nom: компози́торы
+      pl_gen: компози́торов
+      pl_dat: компози́торам
+      pl_acc: компози́торов
+      pl_ins: компози́торами
+      pl_pre: компози́торах
   "компьютер=computer":
     batteries: [objects]
     cefr_level: A1
@@ -17315,6 +18400,28 @@ words:
         en_gb: The situation got out of control.
       - ru: Учи́тель держа́л класс под контро́лем.
         en_gb: The teacher kept the class under control.
+  "контрольная=test":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: test (a class test, контрольная работа)
+    declension:
+      sg_nom: контро́льная
+      sg_gen: контро́льной
+      sg_dat: контро́льной
+      sg_acc: контро́льную
+      sg_ins: контро́льной
+      sg_pre: контро́льной
+      pl_nom: контро́льные
+      pl_gen: контро́льных
+      pl_dat: контро́льным
+      pl_acc: контро́льные
+      pl_ins: контро́льными
+      pl_pre: контро́льных
   "конус=cone":
     batteries: [everyday]
     cefr_level: B2
@@ -17586,6 +18693,28 @@ words:
         en_gb: A rouble consists of a hundred kopeks.
       - ru: Он подобра́л копе́йку с по́ла.
         en_gb: He picked up a kopek from the floor.
+  "копьё=spear":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - history
+    en_gb:
+      standard: spear (a long pole with a sharp point)
+    declension:
+      sg_nom: копьё
+      sg_gen: копья́
+      sg_dat: копью́
+      sg_acc: копьё
+      sg_ins: копьём
+      sg_pre: копье́
+      pl_nom: ко́пья
+      pl_gen: ко́пий
+      pl_dat: ко́пьям
+      pl_acc: ко́пья
+      pl_ins: ко́пьями
+      pl_pre: ко́пьях
   "корабль=ship":
     batteries: [objects, places]
     cefr_level: A2
@@ -17949,6 +19078,29 @@ words:
       pl_acc: корреспонде́нтов
       pl_ins: корреспонде́нтами
       pl_pre: корреспонде́нтах
+  "космонавт=cosmonaut":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - science
+    en_gb:
+      standard: cosmonaut (a Russian astronaut)
+    declension:
+      sg_nom: космона́вт
+      sg_gen: космона́вта
+      sg_dat: космона́вту
+      sg_acc: космона́вта
+      sg_ins: космона́втом
+      sg_pre: космона́вте
+      pl_nom: космона́вты
+      pl_gen: космона́втов
+      pl_dat: космона́втам
+      pl_acc: космона́втов
+      pl_ins: космона́втами
+      pl_pre: космона́втах
   "костёр=campfire":
     batteries: [nature]
     cefr_level: B1
@@ -18155,6 +19307,28 @@ words:
       pl_acc: ко́фты
       pl_ins: ко́фтами
       pl_pre: ко́фтах
+  "кофточка=blouse":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+    en_gb:
+      standard: blouse (a light women's top)
+    declension:
+      sg_nom: ко́фточка
+      sg_gen: ко́фточки
+      sg_dat: ко́фточке
+      sg_acc: ко́фточку
+      sg_ins: ко́фточкой
+      sg_pre: ко́фточке
+      pl_nom: ко́фточки
+      pl_gen: ко́фточек
+      pl_dat: ко́фточкам
+      pl_acc: ко́фточки
+      pl_ins: ко́фточками
+      pl_pre: ко́фточках
   "кошелёк=wallet":
     batteries: [objects]
     cefr_level: B1
@@ -18650,6 +19824,28 @@ words:
         en_gb: She woke up from a shout.
       - ru: С у́лицы доноси́лись кри́ки дете́й.
         en_gb: Children's shouts came from the street.
+  "кристалл=crystal":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: crystal (a solid with a regular structure)
+    declension:
+      sg_nom: криста́лл
+      sg_gen: криста́лла
+      sg_dat: криста́ллу
+      sg_acc: криста́лл
+      sg_ins: криста́ллом
+      sg_pre: криста́лле
+      pl_nom: криста́ллы
+      pl_gen: криста́ллов
+      pl_dat: криста́ллам
+      pl_acc: криста́ллы
+      pl_ins: криста́ллами
+      pl_pre: криста́ллах
   "кровать=bed":
     batteries: [objects]
     cefr_level: A2
@@ -18703,6 +19899,28 @@ words:
       sg_acc: кровь
       sg_ins: кро́вью
       sg_pre: кро́ви
+  "крокодил=crocodile":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: crocodile (a large reptile with strong jaws)
+    declension:
+      sg_nom: крокоди́л
+      sg_gen: крокоди́ла
+      sg_dat: крокоди́лу
+      sg_acc: крокоди́ла
+      sg_ins: крокоди́лом
+      sg_pre: крокоди́ле
+      pl_nom: крокоди́лы
+      pl_gen: крокоди́лов
+      pl_dat: крокоди́лам
+      pl_acc: крокоди́лов
+      pl_ins: крокоди́лами
+      pl_pre: крокоди́лах
   "кролик=rabbit":
     batteries: [animals]
     cefr_level: A2
@@ -20550,6 +21768,28 @@ words:
       pl_acc: лбы
       pl_ins: лба́ми
       pl_pre: лбах
+  "логин=login":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: login (a username for an account)
+    declension:
+      sg_nom: логи́н
+      sg_gen: логи́на
+      sg_dat: логи́ну
+      sg_acc: логи́н
+      sg_ins: логи́ном
+      sg_pre: логи́не
+      pl_nom: логи́ны
+      pl_gen: логи́нов
+      pl_dat: логи́нам
+      pl_acc: логи́ны
+      pl_ins: логи́нами
+      pl_pre: логи́нах
   "лодка=boat":
     batteries: [objects, places]
     cefr_level: A2
@@ -21108,6 +22348,21 @@ words:
       pl_acc: ма́ки
       pl_ins: ма́ками
       pl_pre: ма́ках
+  "макароны=pasta":
+    cefr_level: B1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pasta (Italian wheat food such as macaroni)
+    declension:
+      pl_nom: макаро́ны
+      pl_gen: макаро́н
+      pl_dat: макаро́нам
+      pl_acc: макаро́ны
+      pl_ins: макаро́нами
+      pl_pre: макаро́нах
   "малыш=kid":
     batteries: [people]
     cefr_level: A2
@@ -21262,6 +22517,23 @@ words:
         en_gb: He collects old stamps.
       - ru: Ма́рки не хвати́ло для письма́.
         en_gb: There was not enough on the stamp for the letter.
+  "Марс=Mars":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - science
+      - geography
+    en_gb:
+      standard: Mars (the fourth planet from the Sun)
+    declension:
+      sg_nom: Марс
+      sg_gen: Ма́рса
+      sg_dat: Ма́рсу
+      sg_acc: Марс
+      sg_ins: Ма́рсом
+      sg_pre: Ма́рсе
   "маршрут=route":
     batteries: [places]
     cefr_level: B1
@@ -21824,6 +23096,28 @@ words:
         en_gb: Don't worry about such a trifle.
       - ru: Он храни́т ме́лочь в коро́бке.
         en_gb: He keeps small change in a box.
+  "менеджер=manager":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: manager (a person in charge of work or staff)
+    declension:
+      sg_nom: ме́неджер
+      sg_gen: ме́неджера
+      sg_dat: ме́неджеру
+      sg_acc: ме́неджера
+      sg_ins: ме́неджером
+      sg_pre: ме́неджере
+      pl_nom: ме́неджеры
+      pl_gen: ме́неджеров
+      pl_dat: ме́неджерам
+      pl_acc: ме́неджеров
+      pl_ins: ме́неджерами
+      pl_pre: ме́неджерах
   "меню=menu":
     batteries: [communication, objects]
     cefr_level: A2
@@ -22155,6 +23449,28 @@ words:
       pl_acc: мечи́
       pl_ins: меча́ми
       pl_pre: меча́х
+  "мечеть=mosque":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+    en_gb:
+      standard: mosque (a Muslim place of worship)
+    declension:
+      sg_nom: мече́ть
+      sg_gen: мече́ти
+      sg_dat: мече́ти
+      sg_acc: мече́ть
+      sg_ins: мече́тью
+      sg_pre: мече́ти
+      pl_nom: мече́ти
+      pl_gen: мече́тей
+      pl_dat: мече́тям
+      pl_acc: мече́ти
+      pl_ins: мече́тями
+      pl_pre: мече́тях
   "мечта=dream":
     batteries: [abstract]
     cefr_level: B1
@@ -22245,6 +23561,50 @@ words:
         en_gb: At that instant the telephone rang.
       - ru: Сча́стье состои́т из таки́х ми́гов.
         en_gb: Happiness consists of such instants.
+  "микроскоп=microscope":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: microscope (an instrument for seeing tiny things)
+    declension:
+      sg_nom: микроско́п
+      sg_gen: микроско́па
+      sg_dat: микроско́пу
+      sg_acc: микроско́п
+      sg_ins: микроско́пом
+      sg_pre: микроско́пе
+      pl_nom: микроско́пы
+      pl_gen: микроско́пов
+      pl_dat: микроско́пам
+      pl_acc: микроско́пы
+      pl_ins: микроско́пами
+      pl_pre: микроско́пах
+  "микрофон=microphone":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: microphone (a device that captures sound)
+    declension:
+      sg_nom: микрофо́н
+      sg_gen: микрофо́на
+      sg_dat: микрофо́ну
+      sg_acc: микрофо́н
+      sg_ins: микрофо́ном
+      sg_pre: микрофо́не
+      pl_nom: микрофо́ны
+      pl_gen: микрофо́нов
+      pl_dat: микрофо́нам
+      pl_acc: микрофо́ны
+      pl_ins: микрофо́нами
+      pl_pre: микрофо́нах
   "милиционер=militiaman":
     batteries: [people]
     cefr_level: B2
@@ -22424,6 +23784,28 @@ words:
       pl_acc: мини́стров
       pl_ins: мини́страми
       pl_pre: мини́страх
+  "минус=minus":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: minus (the sign for subtraction; a drawback)
+    declension:
+      sg_nom: ми́нус
+      sg_gen: ми́нуса
+      sg_dat: ми́нусу
+      sg_acc: ми́нус
+      sg_ins: ми́нусом
+      sg_pre: ми́нусе
+      pl_nom: ми́нусы
+      pl_gen: ми́нусов
+      pl_dat: ми́нусам
+      pl_acc: ми́нусы
+      pl_ins: ми́нусами
+      pl_pre: ми́нусах
   "минута=minute":
     batteries: [time_events]
     cefr_level: A1
@@ -22486,6 +23868,28 @@ words:
       pl_acc: миры́
       pl_ins: мира́ми
       pl_pre: мира́х
+  "миска=bowl":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: bowl (a round deep dish)
+    declension:
+      sg_nom: ми́ска
+      sg_gen: ми́ски
+      sg_dat: ми́ске
+      sg_acc: ми́ску
+      sg_ins: ми́ской
+      sg_pre: ми́ске
+      pl_nom: ми́ски
+      pl_gen: ми́сок
+      pl_dat: ми́скам
+      pl_acc: ми́ски
+      pl_ins: ми́сками
+      pl_pre: ми́сках
   "мистер=mister":
     batteries: [people]
     cefr_level: B1
@@ -22578,6 +23982,29 @@ words:
       pl_acc: младе́нцев
       pl_ins: младе́нцами
       pl_pre: младе́нцах
+  "млекопитающее=mammal":
+    cefr_level: B2
+    gender: n
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - science
+    en_gb:
+      standard: mammal (a warm-blooded animal that feeds its young milk)
+    declension:
+      sg_nom: млекопита́ющее
+      sg_gen: млекопита́ющего
+      sg_dat: млекопита́ющему
+      sg_acc: млекопита́ющее
+      sg_ins: млекопита́ющим
+      sg_pre: млекопита́ющем
+      pl_nom: млекопита́ющие
+      pl_gen: млекопита́ющих
+      pl_dat: млекопита́ющим
+      pl_acc: млекопита́ющих
+      pl_ins: млекопита́ющими
+      pl_pre: млекопита́ющих
   "мнение=opinion":
     batteries: [abstract, communication]
     cefr_level: A2
@@ -22602,6 +24029,8 @@ words:
       pl_ins: мне́ниями
       pl_pre: мне́ниях
     usage:
+      - ru: По мне́нию враче́й, э́то пло́хо.
+        en_gb: In the doctors' opinion, this is bad.
       - ru: Я уважа́ю ва́ше мне́ние.
         en_gb: I respect your opinion.
       - ru: По мо́ему мне́нию, он прав.
@@ -22747,6 +24176,28 @@ words:
       pl_acc: мозги́
       pl_ins: мозга́ми
       pl_pre: мозга́х
+  "молекула=molecule":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: molecule (a group of atoms bonded together)
+    declension:
+      sg_nom: моле́кула
+      sg_gen: моле́кулы
+      sg_dat: моле́куле
+      sg_acc: моле́кулу
+      sg_ins: моле́кулой
+      sg_pre: моле́куле
+      pl_nom: моле́кулы
+      pl_gen: моле́кул
+      pl_dat: моле́кулам
+      pl_acc: моле́кулы
+      pl_ins: моле́кулами
+      pl_pre: моле́кулах
   "молитва=prayer":
     batteries: [abstract, communication]
     cefr_level: B2
@@ -22895,6 +24346,8 @@ words:
     en_gb:
       standard: milk (the white drink from cows)
     usage:
+      - ru: Я люблю́ ко́фе с молоко́м.
+        en_gb: I like coffee with milk.
       - ru: Я пью́ ко́фе с молоко́м.
         en_gb: I drink coffee with milk.
       - ru: Молоко́ ско́ро ско́нчится.
@@ -23131,6 +24584,28 @@ words:
       pl_acc: моне́ты
       pl_ins: моне́тами
       pl_pre: моне́тах
+  "монитор=monitor":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: monitor (a computer screen)
+    declension:
+      sg_nom: монито́р
+      sg_gen: монито́ра
+      sg_dat: монито́ру
+      sg_acc: монито́р
+      sg_ins: монито́ром
+      sg_pre: монито́ре
+      pl_nom: монито́ры
+      pl_gen: монито́ров
+      pl_dat: монито́рам
+      pl_acc: монито́ры
+      pl_ins: монито́рами
+      pl_pre: монито́рах
   "морда=muzzle":
     batteries: [everyday, animals]
     cefr_level: B1
@@ -23693,6 +25168,50 @@ words:
       sg_acc: муку́
       sg_ins: муко́й
       sg_pre: муке́
+  "муравей=ant":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: ant (a small social insect)
+    declension:
+      sg_nom: мураве́й
+      sg_gen: муравья́
+      sg_dat: муравью́
+      sg_acc: муравья́
+      sg_ins: муравьём
+      sg_pre: муравье́
+      pl_nom: муравьи́
+      pl_gen: муравьёв
+      pl_dat: муравья́м
+      pl_acc: муравьёв
+      pl_ins: муравья́ми
+      pl_pre: муравья́х
+  "мусульманин=Muslim":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - society
+    en_gb:
+      standard: Muslim (a follower of Islam)
+    declension:
+      sg_nom: мусульма́нин
+      sg_gen: мусульма́нина
+      sg_dat: мусульма́нину
+      sg_acc: мусульма́нина
+      sg_ins: мусульма́нином
+      sg_pre: мусульма́нине
+      pl_nom: мусульма́не
+      pl_gen: мусульма́н
+      pl_dat: мусульма́нам
+      pl_acc: мусульма́н
+      pl_ins: мусульма́нами
+      pl_pre: мусульма́нах
   "муха=fly":
     batteries: [animals, nature]
     cefr_level: B1
@@ -24417,6 +25936,28 @@ words:
         en_gb: Festive outfits hung in the wardrobe.
       - ru: Я до́лго выбира́л наря́д на ве́чер.
         en_gb: I spent a long time choosing an outfit for the evening.
+  "насекомое=insect":
+    cefr_level: B1
+    gender: n
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: insect (a small animal with six legs)
+    declension:
+      sg_nom: насеко́мое
+      sg_gen: насеко́мого
+      sg_dat: насеко́мому
+      sg_acc: насеко́мое
+      sg_ins: насеко́мым
+      sg_pre: насеко́мом
+      pl_nom: насеко́мые
+      pl_gen: насеко́мых
+      pl_dat: насеко́мым
+      pl_acc: насеко́мых
+      pl_ins: насеко́мыми
+      pl_pre: насеко́мых
   "население=population":
     batteries: [society, people]
     cefr_level: B1
@@ -24511,6 +26052,8 @@ words:
     en_gb:
       standard: mood (the way you feel)
     usage:
+      - ru: Я измени́л настро́йки телефо́на.
+        en_gb: I changed the phone's settings.
       - ru: У меня́ сего́дня хоро́шее настрое́ние.
         en_gb: I am in a good mood today.
       - ru: Он был в плохо́м настрое́нии.
@@ -24530,6 +26073,21 @@ words:
       pl_acc: настрое́ния
       pl_ins: настрое́ниями
       pl_pre: настрое́ниях
+  "настройки=settings":
+    cefr_level: B1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: settings (configuration options)
+    declension:
+      pl_nom: настро́йки
+      pl_gen: настро́ек
+      pl_dat: настро́йкам
+      pl_acc: настро́йки
+      pl_ins: настро́йками
+      pl_pre: настро́йках
   "наступление=offensive":
     batteries: [society]
     cefr_level: B2
@@ -25072,6 +26630,22 @@ words:
         en_gb: They help each other in misfortune.
       - ru: Жизнь полна́ ра́достей и несча́стий.
         en_gb: Life is full of joys and misfortunes.
+  "низ=bottom":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - home
+    en_gb:
+      standard: bottom (the lowest part of something)
+    declension:
+      sg_nom: низ
+      sg_gen: ни́за
+      sg_dat: ни́зу
+      sg_acc: низ
+      sg_ins: ни́зом
+      sg_pre: ни́зе
   "новость=news":
     batteries: [communication]
     cefr_level: A2
@@ -25254,6 +26828,22 @@ words:
         en_gb: There are no free rooms at the hotel.
       - ru: Мы живём в сосе́днем но́мере.
         en_gb: We are staying in the next room.
+  "Норвегия=Norway":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Norway (a country in northern Europe)
+    declension:
+      sg_nom: Норве́гия
+      sg_gen: Норве́гии
+      sg_dat: Норве́гии
+      sg_acc: Норве́гию
+      sg_ins: Норве́гией
+      sg_pre: Норве́гии
   "норма=norm":
     batteries: [abstract, society]
     cefr_level: B1
@@ -25385,6 +26975,8 @@ words:
     en_gb:
       standard: night
     usage:
+      - ru: Споко́йной но́чи!
+        en_gb: Good night!
       - ru: Но́чью го́род осо́бенно краси́в.
         en_gb: At night the city is especially beautiful.
       - ru: Они́ разговари́вали до глубо́кой но́чи.
@@ -26759,6 +28351,28 @@ words:
       pl_acc: опа́сности
       pl_ins: опа́сностями
       pl_pre: опа́сностях
+  "опера=opera":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: opera (a drama set to music)
+    declension:
+      sg_nom: о́пера
+      sg_gen: о́перы
+      sg_dat: о́пере
+      sg_acc: о́перу
+      sg_ins: о́перой
+      sg_pre: о́пере
+      pl_nom: о́перы
+      pl_gen: о́пер
+      pl_dat: о́перам
+      pl_acc: о́перы
+      pl_ins: о́перами
+      pl_pre: о́перах
   "операция=operation":
     batteries: [abstract, work_study]
     cefr_level: B1
@@ -26791,6 +28405,22 @@ words:
       pl_acc: опера́ции
       pl_ins: опера́циями
       pl_pre: опера́циях
+  "оппозиция=opposition":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - society
+    en_gb:
+      standard: opposition (those who oppose the government)
+    declension:
+      sg_nom: оппози́ция
+      sg_gen: оппози́ции
+      sg_dat: оппози́ции
+      sg_acc: оппози́цию
+      sg_ins: оппози́цией
+      sg_pre: оппози́ции
   "опыт=experience":
     batteries: [abstract, work_study]
     cefr_level: B1
@@ -29370,6 +31000,28 @@ words:
       pl_acc: перево́ды
       pl_ins: перево́дами
       pl_pre: перево́дах
+  "переводчик=translator":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: translator (a person who translates languages)
+    declension:
+      sg_nom: перево́дчик
+      sg_gen: перево́дчика
+      sg_dat: перево́дчику
+      sg_acc: перево́дчика
+      sg_ins: перево́дчиком
+      sg_pre: перево́дчике
+      pl_nom: перево́дчики
+      pl_gen: перево́дчиков
+      pl_dat: перево́дчикам
+      pl_acc: перево́дчиков
+      pl_ins: перево́дчиками
+      pl_pre: перево́дчиках
   "переговоры=negotiations":
     batteries: [society, communication]
     cefr_level: B1
@@ -29553,6 +31205,28 @@ words:
       pl_acc: перехо́ды
       pl_ins: перехо́дами
       pl_pre: перехо́дах
+  "перец=pepper":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pepper (a spice or a vegetable)
+    declension:
+      sg_nom: пе́рец
+      sg_gen: пе́рца
+      sg_dat: пе́рцу
+      sg_acc: пе́рец
+      sg_ins: пе́рцем
+      sg_pre: пе́рце
+      pl_nom: пе́рцы
+      pl_gen: пе́рцев
+      pl_dat: пе́рцам
+      pl_acc: пе́рцы
+      pl_ins: пе́рцами
+      pl_pre: пе́рцах
   "период=period":
     batteries: [time_events]
     cefr_level: B1
@@ -29964,6 +31638,29 @@ words:
         en_gb: Bats lived in the cave.
       - ru: В гора́х мно́го глубо́ких пеще́р.
         en_gb: There are many deep caves in the mountains.
+  "пианист=pianist":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - work
+    en_gb:
+      standard: pianist (a person who plays the piano)
+    declension:
+      sg_nom: пиани́ст
+      sg_gen: пиани́ста
+      sg_dat: пиани́сту
+      sg_acc: пиани́ста
+      sg_ins: пиани́стом
+      sg_pre: пиани́сте
+      pl_nom: пиани́сты
+      pl_gen: пиани́стов
+      pl_dat: пиани́стам
+      pl_acc: пиани́стов
+      pl_ins: пиани́стами
+      pl_pre: пиани́стах
   "пиво=beer":
     batteries: [objects]
     cefr_level: A2
@@ -30114,6 +31811,28 @@ words:
       pl_acc: пи́лы
       pl_ins: пи́лами
       pl_pre: пи́лах
+  "пингвин=penguin":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: penguin (a flightless seabird)
+    declension:
+      sg_nom: пингви́н
+      sg_gen: пингви́на
+      sg_dat: пингви́ну
+      sg_acc: пингви́на
+      sg_ins: пингви́ном
+      sg_pre: пингви́не
+      pl_nom: пингви́ны
+      pl_gen: пингви́нов
+      pl_dat: пингви́нам
+      pl_acc: пингви́нов
+      pl_ins: пингви́нами
+      pl_pre: пингви́нах
   "пирог=pie":
     batteries: [objects]
     cefr_level: A2
@@ -30405,6 +32124,28 @@ words:
         en_gb: Scientists are studying a distant planet.
       - ru: Вокру́г Со́лнца дви́жется во́семь плане́т.
         en_gb: Eight planets move around the Sun.
+  "планшет=tablet":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: tablet (a flat touchscreen computer)
+    declension:
+      sg_nom: планше́т
+      sg_gen: планше́та
+      sg_dat: планше́ту
+      sg_acc: планше́т
+      sg_ins: планше́том
+      sg_pre: планше́те
+      pl_nom: планше́ты
+      pl_gen: планше́тов
+      pl_dat: планше́там
+      pl_acc: планше́ты
+      pl_ins: планше́тами
+      pl_pre: планше́тах
   "пластырь=plaster":
     batteries: [objects]
     cefr_level: B2
@@ -32426,6 +34167,44 @@ words:
         en_gb: This advice was to my benefit.
       - ru: Они́ де́йствуют ра́ди о́бщей по́льзы.
         en_gb: They act for the common benefit.
+  "Польша=Poland":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Poland (a country in central Europe)
+    declension:
+      sg_nom: По́льша
+      sg_gen: По́льши
+      sg_dat: По́льше
+      sg_acc: По́льшу
+      sg_ins: По́льшей
+      sg_pre: По́льше
+  "полюс=pole":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: pole (the northern or southern end of the Earth)
+    declension:
+      sg_nom: по́люс
+      sg_gen: по́люса
+      sg_dat: по́люсу
+      sg_acc: по́люс
+      sg_ins: по́люсом
+      sg_pre: по́люсе
+      pl_nom: по́люсы
+      pl_gen: по́люсов
+      pl_dat: по́люсам
+      pl_acc: по́люсы
+      pl_ins: по́люсами
+      pl_pre: по́люсах
   "помещение=premises":
     batteries: [places]
     cefr_level: B1
@@ -32682,6 +34461,8 @@ words:
       pl_ins: по́рами
       pl_pre: по́рах
     usage:
+      - ru: До сих по́р я его́ не ви́дел.
+        en_gb: Up to now I haven't seen him.
       - ru: Наста́ла пора́ собира́ть урожа́й.
         en_gb: The time has come to gather the harvest.
       - ru: До той поры́ мы не встреча́лись.
@@ -34041,6 +35822,28 @@ words:
       pl_acc: президе́нтов
       pl_ins: президе́нтами
       pl_pre: президе́нтах
+  "премьер=prime minister":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - society
+    en_gb:
+      standard: prime minister (the head of a government)
+    declension:
+      sg_nom: премье́р
+      sg_gen: премье́ра
+      sg_dat: премье́ру
+      sg_acc: премье́ра
+      sg_ins: премье́ром
+      sg_pre: премье́ре
+      pl_nom: премье́ры
+      pl_gen: премье́ров
+      pl_dat: премье́рам
+      pl_acc: премье́ров
+      pl_ins: премье́рами
+      pl_pre: премье́рах
   "препарат=preparation":
     batteries: [objects]
     cefr_level: B2
@@ -34069,6 +35872,29 @@ words:
         en_gb: It is hard to be treated without this preparation.
       - ru: В апте́ке мно́го разли́чных препара́тов.
         en_gb: There are many different preparations in the pharmacy.
+  "преподаватель=lecturer":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - study
+      - work
+    en_gb:
+      standard: lecturer (a teacher at a university)
+    declension:
+      sg_nom: преподава́тель
+      sg_gen: преподава́теля
+      sg_dat: преподава́телю
+      sg_acc: преподава́теля
+      sg_ins: преподава́телем
+      sg_pre: преподава́теле
+      pl_nom: преподава́тели
+      pl_gen: преподава́телей
+      pl_dat: преподава́телям
+      pl_acc: преподава́телей
+      pl_ins: преподава́телями
+      pl_pre: преподава́телях
   "пресса=press":
     batteries: [communication, society]
     cefr_level: B1
@@ -34211,6 +36037,28 @@ words:
       sg_acc: при́быль
       sg_ins: при́былью
       sg_pre: при́были
+  "привидение=ghost":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+    en_gb:
+      standard: ghost (the spirit of a dead person)
+    declension:
+      sg_nom: привиде́ние
+      sg_gen: привиде́ния
+      sg_dat: привиде́нию
+      sg_acc: привиде́ние
+      sg_ins: привиде́нием
+      sg_pre: привиде́нии
+      pl_nom: привиде́ния
+      pl_gen: привиде́ний
+      pl_dat: привиде́ниям
+      pl_acc: привиде́ния
+      pl_ins: привиде́ниями
+      pl_pre: привиде́ниях
   "привычка=habit":
     batteries: [abstract]
     cefr_level: B1
@@ -35767,6 +37615,50 @@ words:
         en_gb: We are grateful for the show of care.
       - ru: Врач изуча́ет ра́зные проявле́ния боле́зни.
         en_gb: The doctor studies the various manifestations of the illness.
+  "прямоугольник=rectangle":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: rectangle (a four-sided shape with right angles)
+    declension:
+      sg_nom: прямоуго́льник
+      sg_gen: прямоуго́льника
+      sg_dat: прямоуго́льнику
+      sg_acc: прямоуго́льник
+      sg_ins: прямоуго́льником
+      sg_pre: прямоуго́льнике
+      pl_nom: прямоуго́льники
+      pl_gen: прямоуго́льников
+      pl_dat: прямоуго́льникам
+      pl_acc: прямоуго́льники
+      pl_ins: прямоуго́льниками
+      pl_pre: прямоуго́льниках
+  "психолог=psychologist":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: psychologist (an expert in the mind)
+    declension:
+      sg_nom: психо́лог
+      sg_gen: психо́лога
+      sg_dat: психо́логу
+      sg_acc: психо́лога
+      sg_ins: психо́логом
+      sg_pre: психо́логе
+      pl_nom: психо́логи
+      pl_gen: психо́логов
+      pl_dat: психо́логам
+      pl_acc: психо́логов
+      pl_ins: психо́логами
+      pl_pre: психо́логах
   "птица=bird":
     batteries: [animals, nature]
     cefr_level: A2
@@ -36191,6 +38083,50 @@ words:
         en_gb: The car raised a cloud of dust.
       - ru: Стол покры́т то́лстым сло́ем пы́ли.
         en_gb: The table is covered with a thick layer of dust.
+  "пьеса=play":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: play (a work written for the theatre)
+    declension:
+      sg_nom: пье́са
+      sg_gen: пье́сы
+      sg_dat: пье́се
+      sg_acc: пье́су
+      sg_ins: пье́сой
+      sg_pre: пье́се
+      pl_nom: пье́сы
+      pl_gen: пьес
+      pl_dat: пье́сам
+      pl_acc: пье́сы
+      pl_ins: пье́сами
+      pl_pre: пье́сах
+  "пятёрка=a five":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: a five (the top school grade 'A'; the number five)
+    declension:
+      sg_nom: пятёрка
+      sg_gen: пятёрки
+      sg_dat: пятёрке
+      sg_acc: пятёрку
+      sg_ins: пятёркой
+      sg_pre: пятёрке
+      pl_nom: пятёрки
+      pl_gen: пятёрок
+      pl_dat: пятёркам
+      pl_acc: пятёрки
+      pl_ins: пятёрками
+      pl_pre: пятёрках
   "пятка=heel":
     batteries: [everyday]
     cefr_level: B2
@@ -36977,6 +38913,28 @@ words:
       pl_acc: расска́зы
       pl_ins: расска́зами
       pl_pre: расска́зах
+  "расследование=investigation":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - society
+    en_gb:
+      standard: investigation (an official inquiry)
+    declension:
+      sg_nom: рассле́дование
+      sg_gen: рассле́дования
+      sg_dat: рассле́дованию
+      sg_acc: рассле́дование
+      sg_ins: рассле́дованием
+      sg_pre: рассле́довании
+      pl_nom: рассле́дования
+      pl_gen: рассле́дований
+      pl_dat: рассле́дованиям
+      pl_acc: рассле́дования
+      pl_ins: рассле́дованиями
+      pl_pre: рассле́дованиях
   "расставание=break-up":
     batteries: [abstract]
     cefr_level: B2
@@ -37909,6 +39867,38 @@ words:
         en_gb: The bird sat behind the grating.
       - ru: Мастера́ покра́сили ста́рые реше́тки.
         en_gb: The craftsmen painted the old gratings.
+  "Рим=Rome":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Rome (the capital of Italy)
+    declension:
+      sg_nom: Рим
+      sg_gen: Ри́ма
+      sg_dat: Ри́му
+      sg_acc: Рим
+      sg_ins: Ри́мом
+      sg_pre: Ри́ме
+  "рис=rice":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: rice (a grain eaten as food)
+    declension:
+      sg_nom: рис
+      sg_gen: ри́са
+      sg_dat: ри́су
+      sg_acc: рис
+      sg_ins: ри́сом
+      sg_pre: ри́се
   "рисунок=drawing":
     batteries: [objects, communication]
     cefr_level: A2
@@ -38267,6 +40257,22 @@ words:
       pl_acc: розе́тки
       pl_ins: розе́тками
       pl_pre: розе́тках
+  "рок=rock music":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+    en_gb:
+      standard: rock (a style of loud guitar music)
+    declension:
+      sg_nom: рок
+      sg_gen: ро́ка
+      sg_dat: ро́ку
+      sg_acc: рок
+      sg_ins: ро́ком
+      sg_pre: ро́ке
   "роль=role":
     batteries: [abstract, communication]
     cefr_level: B1
@@ -38412,6 +40418,28 @@ words:
         en_gb: The capital of Russia is Moscow.
       - ru: Он живёт в Росси́и уже́ давно́.
         en_gb: He has lived in Russia for a long time already.
+  "россиянин=Russian":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Russian (a citizen of Russia)
+    declension:
+      sg_nom: россия́нин
+      sg_gen: россия́нина
+      sg_dat: россия́нину
+      sg_acc: россия́нина
+      sg_ins: россия́нином
+      sg_pre: россия́нине
+      pl_nom: россия́не
+      pl_gen: россия́н
+      pl_dat: россия́нам
+      pl_acc: россия́н
+      pl_ins: россия́нами
+      pl_pre: россия́нах
   "рост=growth":
     batteries: [abstract, everyday]
     cefr_level: A2
@@ -39765,6 +41793,10 @@ words:
       alt:
         - liberty
     usage:
+      - ru: Престу́пник всё ещё на свобо́де.
+        en_gb: The criminal is still at large.
+      - ru: Да здра́вствует свобо́да!
+        en_gb: Long live freedom!
       - ru: Лю́ди боро́лись за свобо́ду.
         en_gb: People fought for freedom.
       - ru: Он ра́дуется свобо́де.
@@ -39893,6 +41925,28 @@ words:
       pl_acc: свяще́нников
       pl_ins: свяще́нниками
       pl_pre: свяще́нниках
+  "сдача=change":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - shopping
+    en_gb:
+      standard: change (money returned after paying)
+    declension:
+      sg_nom: сда́ча
+      sg_gen: сда́чи
+      sg_dat: сда́че
+      sg_acc: сда́чу
+      sg_ins: сда́чей
+      sg_pre: сда́че
+      pl_nom: сда́чи
+      pl_gen: сдач
+      pl_dat: сда́чам
+      pl_acc: сда́чи
+      pl_ins: сда́чами
+      pl_pre: сда́чах
   "север=north":
     batteries: [places]
     cefr_level: A2
@@ -40155,6 +42209,28 @@ words:
       pl_acc: сержа́нтов
       pl_ins: сержа́нтами
       pl_pre: сержа́нтах
+  "сериал=TV series":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: TV series (a show with many episodes)
+    declension:
+      sg_nom: сериа́л
+      sg_gen: сериа́ла
+      sg_dat: сериа́лу
+      sg_acc: сериа́л
+      sg_ins: сериа́лом
+      sg_pre: сериа́ле
+      pl_nom: сериа́лы
+      pl_gen: сериа́лов
+      pl_dat: сериа́лам
+      pl_acc: сериа́лы
+      pl_ins: сериа́лами
+      pl_pre: сериа́лах
   "сестра=sister":
     batteries: [people]
     cefr_level: A1
@@ -40440,6 +42516,50 @@ words:
       pl_acc: симпто́мы
       pl_ins: симпто́мами
       pl_pre: симпто́мах
+  "симфония=symphony":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: symphony (a large work for orchestra)
+    declension:
+      sg_nom: симфо́ния
+      sg_gen: симфо́нии
+      sg_dat: симфо́нии
+      sg_acc: симфо́нию
+      sg_ins: симфо́нией
+      sg_pre: симфо́нии
+      pl_nom: симфо́нии
+      pl_gen: симфо́ний
+      pl_dat: симфо́ниям
+      pl_acc: симфо́нии
+      pl_ins: симфо́ниями
+      pl_pre: симфо́ниях
+  "синагога=synagogue":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+    en_gb:
+      standard: synagogue (a Jewish place of worship)
+    declension:
+      sg_nom: синаго́га
+      sg_gen: синаго́ги
+      sg_dat: синаго́ге
+      sg_acc: синаго́гу
+      sg_ins: синаго́гой
+      sg_pre: синаго́ге
+      pl_nom: синаго́ги
+      pl_gen: синаго́г
+      pl_dat: синаго́гам
+      pl_acc: синаго́ги
+      pl_ins: синаго́гами
+      pl_pre: синаго́гах
   "синяк=bruise":
     batteries: [everyday]
     cefr_level: B2
@@ -41120,6 +43240,8 @@ words:
     en_gb:
       standard: word (a unit of language)
     usage:
+      - ru: По слова́м сосе́да, дом продаётся.
+        en_gb: According to the neighbour, the house is for sale.
       - ru: Я не зна́ю э́то сло́во.
         en_gb: I don't know this word.
       - ru: Он сказа́л до́брое сло́во.
@@ -41413,6 +43535,22 @@ words:
       pl_acc: сме́рти
       pl_ins: смертя́ми
       pl_pre: смертя́х
+  "сметана=sour cream":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: sour cream (a soured dairy product)
+    declension:
+      sg_nom: смета́на
+      sg_gen: смета́ны
+      sg_dat: смета́не
+      sg_acc: смета́ну
+      sg_ins: смета́ной
+      sg_pre: смета́не
   "смех=laughter":
     batteries: [abstract]
     cefr_level: B1
@@ -41880,6 +44018,8 @@ words:
       sg_ins: сожале́нием
       sg_pre: сожале́нии
     usage:
+      - ru: К сожале́нию, я не могу́ прийти́.
+        en_gb: Unfortunately, I can't come.
       - ru: Он смотре́л на меня́ с сожале́нием.
         en_gb: He looked at me with regret.
       - ru: К сожале́нию, я не могу́ прийти́.
@@ -42456,6 +44596,28 @@ words:
       pl_acc: сотру́дников
       pl_ins: сотру́дниками
       pl_pre: сотру́дниках
+  "соус=sauce":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: sauce (a liquid served with food)
+    declension:
+      sg_nom: со́ус
+      sg_gen: со́уса
+      sg_dat: со́усу
+      sg_acc: со́ус
+      sg_ins: со́усом
+      sg_pre: со́усе
+      pl_nom: со́усы
+      pl_gen: со́усов
+      pl_dat: со́усам
+      pl_acc: со́усы
+      pl_ins: со́усами
+      pl_pre: со́усах
   "социализм=socialism":
     batteries: [society]
     cefr_level: B2
@@ -44400,6 +46562,28 @@ words:
       pl_acc: студе́нтов
       pl_ins: студе́нтами
       pl_pre: студе́нтах
+  "студентка=student (f)":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: student (a female university student)
+    declension:
+      sg_nom: студе́нтка
+      sg_gen: студе́нтки
+      sg_dat: студе́нтке
+      sg_acc: студе́нтку
+      sg_ins: студе́нткой
+      sg_pre: студе́нтке
+      pl_nom: студе́нтки
+      pl_gen: студе́нток
+      pl_dat: студе́нткам
+      pl_acc: студе́нток
+      pl_ins: студе́нтками
+      pl_pre: студе́нтках
   "стук=knock":
     batteries: [abstract, nature]
     cefr_level: B1
@@ -44879,6 +47063,22 @@ words:
       sg_acc: суть
       sg_ins: су́тью
       sg_pre: су́ти
+  "суши=sushi":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: sushi (a Japanese rice-and-fish dish)
+    declension:
+      sg_nom: су́ши
+      sg_gen: су́ши
+      sg_dat: су́ши
+      sg_acc: су́ши
+      sg_ins: су́ши
+      sg_pre: су́ши
   "существо=creature":
     batteries: [animals, nature]
     cefr_level: B1
@@ -45294,6 +47494,28 @@ words:
       pl_acc: сэ́ров
       pl_ins: сэ́рами
       pl_pre: сэ́рах
+  "сюжет=plot":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: plot (the story of a book or film)
+    declension:
+      sg_nom: сюже́т
+      sg_gen: сюже́та
+      sg_dat: сюже́ту
+      sg_acc: сюже́т
+      sg_ins: сюже́том
+      sg_pre: сюже́те
+      pl_nom: сюже́ты
+      pl_gen: сюже́тов
+      pl_dat: сюже́там
+      pl_acc: сюже́ты
+      pl_ins: сюже́тами
+      pl_pre: сюже́тах
   "тайга=taiga":
     batteries: [nature, places]
     cefr_level: B2
@@ -45468,6 +47690,21 @@ words:
       pl_acc: та́нки
       pl_ins: та́нками
       pl_pre: та́нках
+  "тапочки=slippers":
+    cefr_level: B1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - clothes
+    en_gb:
+      standard: slippers (soft indoor shoes)
+    declension:
+      pl_nom: та́почки
+      pl_gen: та́почек
+      pl_dat: та́почкам
+      pl_acc: та́почки
+      pl_ins: та́почками
+      pl_pre: та́почках
   "тарелка=plate":
     batteries: [objects]
     cefr_level: A2
@@ -46403,6 +48640,28 @@ words:
       pl_acc: то́ны
       pl_ins: то́нами
       pl_pre: то́нах
+  "тонна=tonne":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: tonne (a metric unit of 1000 kilograms)
+    declension:
+      sg_nom: то́нна
+      sg_gen: то́нны
+      sg_dat: то́нне
+      sg_acc: то́нну
+      sg_ins: то́нной
+      sg_pre: то́нне
+      pl_nom: то́нны
+      pl_gen: тонн
+      pl_dat: то́ннам
+      pl_acc: то́нны
+      pl_ins: то́ннами
+      pl_pre: то́ннах
   "топор=axe":
     batteries: [objects]
     cefr_level: B2
@@ -47408,6 +49667,28 @@ words:
         en_gb: The teacher earned the respect of the pupils.
       - ru: Ме́жду ни́ми нет уваже́ния.
         en_gb: There is no respect between them.
+  "увеличение=increase":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: increase (a rise in amount or size)
+    declension:
+      sg_nom: увеличе́ние
+      sg_gen: увеличе́ния
+      sg_dat: увеличе́нию
+      sg_acc: увеличе́ние
+      sg_ins: увеличе́нием
+      sg_pre: увеличе́нии
+      pl_nom: увеличе́ния
+      pl_gen: увеличе́ний
+      pl_dat: увеличе́ниям
+      pl_acc: увеличе́ния
+      pl_ins: увеличе́ниями
+      pl_pre: увеличе́ниях
   "уверенность=confidence":
     batteries: [abstract]
     cefr_level: B1
@@ -47669,6 +49950,8 @@ words:
       pl_ins: удово́льствиями
       pl_pre: удово́льствиях
     usage:
+      - ru: Я с удово́льствием тебе́ помогу́.
+        en_gb: I will gladly help you.
       - ru: Я чита́ю э́ту кни́гу с удово́льствием.
         en_gb: I read this book with pleasure.
       - ru: Путеше́ствие доста́вило нам мно́го удово́льствия.
@@ -47910,6 +50193,28 @@ words:
         en_gb: He returned to Ukraine.
       - ru: Они́ интересу́ются исто́рией Украи́ной.
         en_gb: They are interested in the history connected with Ukraine.
+  "украинец=Ukrainian":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Ukrainian (a man from Ukraine)
+    declension:
+      sg_nom: украи́нец
+      sg_gen: украи́нца
+      sg_dat: украи́нцу
+      sg_acc: украи́нца
+      sg_ins: украи́нцем
+      sg_pre: украи́нце
+      pl_nom: украи́нцы
+      pl_gen: украи́нцев
+      pl_dat: украи́нцам
+      pl_acc: украи́нцев
+      pl_ins: украи́нцами
+      pl_pre: украи́нцах
   "улица=street":
     batteries: [places]
     cefr_level: A1
@@ -48217,6 +50522,28 @@ words:
         en_gb: Nothing will work out without effort.
       - ru: Благодаря́ о́бщим уси́лииям мы победи́ли.
         en_gb: Thanks to common efforts we won.
+  "ускорение=acceleration":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: acceleration (an increase in speed)
+    declension:
+      sg_nom: ускоре́ние
+      sg_gen: ускоре́ния
+      sg_dat: ускоре́нию
+      sg_acc: ускоре́ние
+      sg_ins: ускоре́нием
+      sg_pre: ускоре́нии
+      pl_nom: ускоре́ния
+      pl_gen: ускоре́ний
+      pl_dat: ускоре́ниям
+      pl_acc: ускоре́ния
+      pl_ins: ускоре́ниями
+      pl_pre: ускоре́ниях
   "условие=condition":
     batteries: [abstract]
     cefr_level: B1
@@ -48396,6 +50723,28 @@ words:
         en_gb: He understands the workings of the car.
       - ru: Магази́н прода́л мно́го электро́нных устро́йств.
         en_gb: The shop sold many electronic devices.
+  "утверждение=statement":
+    cefr_level: B2
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - communication
+    en_gb:
+      standard: statement (something said to be true)
+    declension:
+      sg_nom: утвержде́ние
+      sg_gen: утвержде́ния
+      sg_dat: утвержде́нию
+      sg_acc: утвержде́ние
+      sg_ins: утвержде́нием
+      sg_pre: утвержде́нии
+      pl_nom: утвержде́ния
+      pl_gen: утвержде́ний
+      pl_dat: утвержде́ниям
+      pl_acc: утвержде́ния
+      pl_ins: утвержде́ниями
+      pl_pre: утвержде́ниях
   "утка=duck":
     batteries: [animals]
     cefr_level: B1
@@ -48632,6 +50981,28 @@ words:
       pl_acc: ученико́в
       pl_ins: ученика́ми
       pl_pre: ученика́х
+  "ученица=pupil (f)":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: pupil (a schoolgirl)
+    declension:
+      sg_nom: учени́ца
+      sg_gen: учени́цы
+      sg_dat: учени́це
+      sg_acc: учени́цу
+      sg_ins: учени́цей
+      sg_pre: учени́це
+      pl_nom: учени́цы
+      pl_gen: учени́ц
+      pl_dat: учени́цам
+      pl_acc: учени́ц
+      pl_ins: учени́цами
+      pl_pre: учени́цах
   "училище=college":
     batteries: [places, work_study]
     cefr_level: B1
@@ -48814,6 +51185,28 @@ words:
         en_gb: Many factors influenced the decision.
       - ru: Учёные изуча́ют ра́зные фа́кторы ри́ска.
         en_gb: Scientists study various risk factors.
+  "факультет=faculty":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: faculty (a department of a university)
+    declension:
+      sg_nom: факульте́т
+      sg_gen: факульте́та
+      sg_dat: факульте́ту
+      sg_acc: факульте́т
+      sg_ins: факульте́том
+      sg_pre: факульте́те
+      pl_nom: факульте́ты
+      pl_gen: факульте́тов
+      pl_dat: факульте́там
+      pl_acc: факульте́ты
+      pl_ins: факульте́тами
+      pl_pre: факульте́тах
   "фамилия=surname":
     batteries: [communication, everyday]
     cefr_level: A2
@@ -48940,6 +51333,22 @@ words:
       pl_acc: фейерве́рки
       pl_ins: фейерве́рками
       pl_pre: фейерве́рках
+  "Фейсбук=Facebook":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - technology
+    en_gb:
+      standard: Facebook (a social media website)
+    declension:
+      sg_nom: Фейсбу́к
+      sg_gen: Фейсбу́ка
+      sg_dat: Фейсбу́ку
+      sg_acc: Фейсбу́к
+      sg_ins: Фейсбу́ком
+      sg_pre: Фейсбу́ке
   "фестиваль=festival":
     batteries: [time_events]
     cefr_level: B1
@@ -49120,6 +51529,28 @@ words:
       pl_acc: фла́ги
       pl_ins: фла́гами
       pl_pre: фла́гах
+  "флешка=USB stick":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: USB stick (a small portable memory drive)
+    declension:
+      sg_nom: фле́шка
+      sg_gen: фле́шки
+      sg_dat: фле́шке
+      sg_acc: фле́шку
+      sg_ins: фле́шкой
+      sg_pre: фле́шке
+      pl_nom: фле́шки
+      pl_gen: фле́шек
+      pl_dat: фле́шкам
+      pl_acc: фле́шки
+      pl_ins: фле́шками
+      pl_pre: фле́шках
   "флирт=flirting":
     batteries: [abstract]
     cefr_level: B2
@@ -49305,6 +51736,28 @@ words:
       pl_acc: фо́рмы
       pl_ins: фо́рмами
       pl_pre: фо́рмах
+  "фотоаппарат=camera":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: camera (a device for taking photographs)
+    declension:
+      sg_nom: фотоаппара́т
+      sg_gen: фотоаппара́та
+      sg_dat: фотоаппара́ту
+      sg_acc: фотоаппара́т
+      sg_ins: фотоаппара́том
+      sg_pre: фотоаппара́те
+      pl_nom: фотоаппара́ты
+      pl_gen: фотоаппара́тов
+      pl_dat: фотоаппара́там
+      pl_acc: фотоаппара́ты
+      pl_ins: фотоаппара́тами
+      pl_pre: фотоаппара́тах
   "фотография=photograph":
     batteries: [objects, communication]
     cefr_level: A2
@@ -49418,6 +51871,28 @@ words:
         en_gb: She returned from France.
       - ru: Он восхища́ется Фра́нцией.
         en_gb: He admires France.
+  "француз=Frenchman":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Frenchman (a man from France)
+    declension:
+      sg_nom: францу́з
+      sg_gen: францу́за
+      sg_dat: францу́зу
+      sg_acc: францу́за
+      sg_ins: францу́зом
+      sg_pre: францу́зе
+      pl_nom: францу́зы
+      pl_gen: францу́зов
+      pl_dat: францу́зам
+      pl_acc: францу́зов
+      pl_ins: францу́зами
+      pl_pre: францу́зах
   "фронт=front":
     batteries: [society, places]
     cefr_level: B1
@@ -49544,6 +52019,28 @@ words:
         en_gb: The phone has many functions.
       - ru: Се́рдце выполня́ет ва́жную фу́нкцию.
         en_gb: The heart performs an important function.
+  "футболист=footballer":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - sport
+    en_gb:
+      standard: footballer (a person who plays football)
+    declension:
+      sg_nom: футболи́ст
+      sg_gen: футболи́ста
+      sg_dat: футболи́сту
+      sg_acc: футболи́ста
+      sg_ins: футболи́стом
+      sg_pre: футболи́сте
+      pl_nom: футболи́сты
+      pl_gen: футболи́стов
+      pl_dat: футболи́стам
+      pl_acc: футболи́стов
+      pl_ins: футболи́стами
+      pl_pre: футболи́стах
   "футболка=t-shirt":
     batteries: [objects]
     cefr_level: A2
@@ -49902,6 +52399,22 @@ words:
         en_gb: She takes care of the household.
       - ru: Война́ нанесла́ уще́рб хозя́йству страны́.
         en_gb: The war caused damage to the country's economy.
+  "хоккей=hockey":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+    en_gb:
+      standard: hockey (a team game played with sticks)
+    declension:
+      sg_nom: хокке́й
+      sg_gen: хокке́я
+      sg_dat: хокке́ю
+      sg_acc: хокке́й
+      sg_ins: хокке́ем
+      sg_pre: хокке́е
   "холм=hill":
     batteries: [nature, places]
     cefr_level: B1
@@ -50075,6 +52588,28 @@ words:
       sg_acc: хрен
       sg_ins: хре́ном
       sg_pre: хре́не
+  "христианин=Christian":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - society
+    en_gb:
+      standard: Christian (a follower of Christianity)
+    declension:
+      sg_nom: христиани́н
+      sg_gen: христиани́на
+      sg_dat: христиани́ну
+      sg_acc: христиани́на
+      sg_ins: христиани́ном
+      sg_pre: христиани́не
+      pl_nom: христиа́не
+      pl_gen: христиа́н
+      pl_dat: христиа́нам
+      pl_acc: христиа́н
+      pl_ins: христиа́нами
+      pl_pre: христиа́нах
   "художник=artist":
     batteries: [people]
     cefr_level: B1
@@ -50629,6 +53164,28 @@ words:
       pl_acc: чаи́
       pl_ins: чая́ми
       pl_pre: чая́х
+  "чайка=seagull":
+    cefr_level: B1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: seagull (a sea bird)
+    declension:
+      sg_nom: ча́йка
+      sg_gen: ча́йки
+      sg_dat: ча́йке
+      sg_acc: ча́йку
+      sg_ins: ча́йкой
+      sg_pre: ча́йке
+      pl_nom: ча́йки
+      pl_gen: ча́ек
+      pl_dat: ча́йкам
+      pl_acc: ча́ек
+      pl_ins: ча́йками
+      pl_pre: ча́йках
   "час=hour":
     batteries: [time_events]
     cefr_level: A1
@@ -50924,6 +53481,28 @@ words:
       pl_acc: чемпио́нов
       pl_ins: чемпио́нами
       pl_pre: чемпио́нах
+  "черепаха=tortoise":
+    cefr_level: B1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: tortoise (a slow reptile with a shell)
+    declension:
+      sg_nom: черепа́ха
+      sg_gen: черепа́хи
+      sg_dat: черепа́хе
+      sg_acc: черепа́ху
+      sg_ins: черепа́хой
+      sg_pre: черепа́хе
+      pl_nom: черепа́хи
+      pl_gen: черепа́х
+      pl_dat: черепа́хам
+      pl_acc: черепа́х
+      pl_ins: черепа́хами
+      pl_pre: черепа́хах
   "чёрт=devil":
     batteries: [people, abstract]
     cefr_level: B2
@@ -51014,6 +53593,28 @@ words:
         en_gb: He is proud of his honour.
       - ru: Они́ боро́лись за честь шко́лы.
         en_gb: They fought for the honour of the school.
+  "четвёрка=a four":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - study
+    en_gb:
+      standard: a four (the school grade 'B'; the number four)
+    declension:
+      sg_nom: четвёрка
+      sg_gen: четвёрки
+      sg_dat: четвёрке
+      sg_acc: четвёрку
+      sg_ins: четвёркой
+      sg_pre: четвёрке
+      pl_nom: четвёрки
+      pl_gen: четвёрок
+      pl_dat: четвёркам
+      pl_acc: четвёрки
+      pl_ins: четвёрками
+      pl_pre: четвёрках
   "четверть=quarter":
     batteries: [time_events, everyday]
     cefr_level: B1
@@ -51701,6 +54302,28 @@ words:
       sg_acc: ширину́
       sg_ins: ширино́й
       sg_pre: ширине́
+  "шкала=scale":
+    cefr_level: B2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - science
+    en_gb:
+      standard: scale (a range of marks for measuring)
+    declension:
+      sg_nom: шкала́
+      sg_gen: шкалы́
+      sg_dat: шкале́
+      sg_acc: шкалу́
+      sg_ins: шкало́й
+      sg_pre: шкале́
+      pl_nom: шка́лы
+      pl_gen: шкал
+      pl_dat: шка́лам
+      pl_acc: шка́лы
+      pl_ins: шка́лами
+      pl_pre: шка́лах
   "шкаф=cupboard":
     batteries: [objects]
     cefr_level: A2
@@ -51862,6 +54485,22 @@ words:
       pl_acc: шнурки́
       pl_ins: шнурка́ми
       pl_pre: шнурка́х
+  "шоколад=chocolate":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: chocolate (a sweet made from cocoa)
+    declension:
+      sg_nom: шокола́д
+      sg_gen: шокола́да
+      sg_dat: шокола́ду
+      sg_acc: шокола́д
+      sg_ins: шокола́дом
+      sg_pre: шокола́де
   "шорты=shorts":
     batteries: [objects]
     cefr_level: A2
@@ -52319,6 +54958,43 @@ words:
         en_gb: Wind blows from the crack.
       - ru: Свет проника́л че́рез у́зкие ще́ли.
         en_gb: Light came through the narrow cracks.
+  "щенок=puppy":
+    cefr_level: B1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: puppy (a young dog)
+    declension:
+      sg_nom: щено́к
+      sg_gen: щенка́
+      sg_dat: щенку́
+      sg_acc: щенка́
+      sg_ins: щенко́м
+      sg_pre: щенке́
+      pl_nom: щенки́
+      pl_gen: щенко́в
+      pl_dat: щенка́м
+      pl_acc: щенко́в
+      pl_ins: щенка́ми
+      pl_pre: щенка́х
+  "щи=shchi":
+    cefr_level: B2
+    animacy: i
+    number: ["pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: shchi (a Russian cabbage soup)
+    declension:
+      pl_nom: щи
+      pl_gen: щей
+      pl_dat: щам
+      pl_acc: щи
+      pl_ins: ща́ми
+      pl_pre: щах
   "щит=shield":
     batteries: [objects, society]
     cefr_level: B2
@@ -52434,6 +55110,28 @@ words:
       sg_acc: эконо́мику
       sg_ins: эконо́микой
       sg_pre: эконо́мике
+  "экономист=economist":
+    cefr_level: B2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: economist (an expert in the economy)
+    declension:
+      sg_nom: экономи́ст
+      sg_gen: экономи́ста
+      sg_dat: экономи́сту
+      sg_acc: экономи́ста
+      sg_ins: экономи́стом
+      sg_pre: экономи́сте
+      pl_nom: экономи́сты
+      pl_gen: экономи́стов
+      pl_dat: экономи́стам
+      pl_acc: экономи́стов
+      pl_ins: экономи́стами
+      pl_pre: экономи́стах
   "экран=screen":
     batteries: [objects]
     cefr_level: B1
@@ -52667,6 +55365,28 @@ words:
         en_gb: The sun gives us energy.
       - ru: Она́ рабо́тает с больши́м запа́сом эне́ргии.
         en_gb: She works with a great store of energy.
+  "энциклопедия=encyclopedia":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - reading
+    en_gb:
+      standard: encyclopedia (a reference book of knowledge)
+    declension:
+      sg_nom: энциклопе́дия
+      sg_gen: энциклопе́дии
+      sg_dat: энциклопе́дии
+      sg_acc: энциклопе́дию
+      sg_ins: энциклопе́дией
+      sg_pre: энциклопе́дии
+      pl_nom: энциклопе́дии
+      pl_gen: энциклопе́дий
+      pl_dat: энциклопе́диям
+      pl_acc: энциклопе́дии
+      pl_ins: энциклопе́диями
+      pl_pre: энциклопе́диях
   "эпоха=era":
     batteries: [time_events, society]
     cefr_level: B2
@@ -53099,6 +55819,50 @@ words:
         en_gb: The car got stuck in a pit.
       - ru: На доро́ге мно́го ям.
         en_gb: There are many pits on the road.
+  "японец=Japanese man":
+    cefr_level: A2
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Japanese (a man from Japan)
+    declension:
+      sg_nom: япо́нец
+      sg_gen: япо́нца
+      sg_dat: япо́нцу
+      sg_acc: япо́нца
+      sg_ins: япо́нцем
+      sg_pre: япо́нце
+      pl_nom: япо́нцы
+      pl_gen: япо́нцев
+      pl_dat: япо́нцам
+      pl_acc: япо́нцев
+      pl_ins: япо́нцами
+      pl_pre: япо́нцах
+  "японка=Japanese (f)":
+    cefr_level: A2
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - nationalities
+    en_gb:
+      standard: Japanese (a woman from Japan)
+    declension:
+      sg_nom: япо́нка
+      sg_gen: япо́нки
+      sg_dat: япо́нке
+      sg_acc: япо́нку
+      sg_ins: япо́нкой
+      sg_pre: япо́нке
+      pl_nom: япо́нки
+      pl_gen: япо́нок
+      pl_dat: япо́нкам
+      pl_acc: япо́нок
+      pl_ins: япо́нками
+      pl_pre: япо́нках
   "ящерица=lizard":
     batteries: [animals, nature]
     cefr_level: B2
