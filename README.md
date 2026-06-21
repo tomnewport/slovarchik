@@ -10,8 +10,9 @@ Everything runs in your browser and works fully offline once loaded.
 > app — there's no JSX or hooks. Agents and contributors: start with
 > [`AGENTS.md`](AGENTS.md) for a fast orientation. Details in [Tech](#tech) below.
 
-> **Status:** skeleton app. The core drills work end-to-end; the word/noun data
-> sets are intentionally small and meant to grow.
+> **Status:** working app, actively developed. All drills run end-to-end, backed
+> by a spaced-repetition engine that tracks per-word mastery and assembles
+> practice sessions. The vocabulary keeps growing.
 
 ## What it does
 
@@ -105,12 +106,14 @@ wherever the on-screen Russian keyboard is shown.
 - **Vitest** + **@vue/test-utils** for tests
 - Deployed to **GitHub Pages** via GitHub Actions
 
-The quiz/declension logic lives in framework-free modules under
+The quiz/declension/progression logic lives in framework-free modules under
 [`src/lib`](src/lib) so it can be unit-tested in isolation. The vocabulary is
-**not bundled** — it's a set of human-editable **YAML files** served as static
-assets from [`public/vocab`](public/vocab) (one per part of speech), downloaded
-on demand and cached in IndexedDB. This keeps the JS bundle small and constant
-as the word lists grow.
+**not part of the JS bundle** — it's a set of human-editable **YAML files**
+served as static assets from [`public/vocab`](public/vocab) (one per part of
+speech), parsed in the browser and cached in IndexedDB. This keeps the JS bundle
+small and constant as the word lists grow. (The service worker currently also
+precaches the YAML so the first launch works offline — see
+[How loading works](#how-loading-works) below.)
 
 ## The vocabulary database
 

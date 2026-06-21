@@ -24,39 +24,66 @@ A few signals here look React-ish at a glance. Here's what each one actually is:
 
 ## What this is
 
-**Slovarchik** — an offline-first **PWA** for drilling Russian vocabulary and
-noun declensions. No backend, no accounts; everything runs in the browser and
-works offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
+**Slovarchik** — an offline-first **PWA** for practising Russian: vocabulary
+(both directions), inflection drills for every inflecting part of speech (nouns,
+adjectives, pronouns, verbs), phrases, listening and speaking. A
+spaced-repetition engine tracks per-word mastery and assembles practice
+sessions. No backend, no accounts; everything runs in the browser and works
+offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
 
 - **Vue 3** (`<script setup>` SFCs) + **Vue Router** (hash history)
 - **Vite 6** build, **vite-plugin-pwa** (Workbox) for the service worker/offline cache
-- **Vitest** + **@vue/test-utils** + jsdom for tests
-- Vocabulary is **YAML files** in `public/vocab/`, loaded on demand and cached in **IndexedDB** — not bundled. (`js-yaml` is a **runtime** dependency, not a devDep: the app parses the YAML in the browser.)
+- **Vitest** + **@vue/test-utils** + jsdom for unit tests; **Playwright** for e2e
+- Vocabulary is **YAML files** in `public/vocab/`, cached in **IndexedDB** (and
+  precached by the service worker for first-launch offline) — not part of the JS
+  bundle. (`js-yaml` is a **runtime** dependency, not a devDep: the app parses
+  the YAML in the browser.)
 
 ## Project map
 
 ```
 index.html              # app shell — mounts #app, loads src/main.js
 vite.config.js          # Vite + Vue plugin + PWA + Vitest config; base = /slovarchik/
+playwright.config.js    # e2e config (serves the preview build)
 eslint.config.js        # flat config: js.recommended + eslint-plugin-vue
 src/
   main.js               # entry: createApp(App).use(router).mount('#app')
-  App.vue               # shell: header nav + <RouterView> + global RussianKeyboard
-  router/index.js       # routes → views (/, /vocab, /declension, /numbers, /phrases, /listening, /speaking)
-  views/*.vue           # one screen per route (the drills)
-  components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintKeyboard, CelebrationBurst)
+  App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
+                        #   + global RussianKeyboard + ErrorToast. Navigation is
+                        #   session-driven from HomeView, not a route bar.
+  router/index.js       # ~17 routes → views. Highlights: / (home), /session, /batch,
+                        #   /practice, /progress, /data, /vocab, /phrases, /phrase-fix,
+                        #   /listening, /speaking, /numbers, and the shared inflection
+                        #   view at /declension /verbs /pronouns /adjectives (one
+                        #   InflectionView fed a different `pos` prop).
+  views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
+  components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
+                        #   ProgressPill, ReportButton, CelebrationBurst, …)
+    exercises/*.vue     #   per-exercise UIs (Match, Type, WordBank, Inflect, Speak, PhraseFix)
+    inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
-    keyboard.js         #   tiny shared hint state between drills + keyboard
-  lib/                  # framework-free pure modules (unit-tested in isolation):
-                        #   declension, quiz, phrases, numerals, numberDrill, text,
-                        #   vocabBuild, idb, speech, collections
+    progress.js         #   the core engine — per-word attempts → states, batches, sessions
+    settings.js         #   user preferences (not learning progress)
+    reports.js          #   offline-queued issue reports
+    keyboard.js         #   shared on-screen keyboard hint state
+    hints.js            #   in-phrase word-hint glue
+    errorToast.js       #   transient error toast state
+  lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
+                        #   progression/batches/session/sessionRunner/practices/
+                        #     exerciseBuild/focus/achievements  — the learning engine
+                        #   declension/paradigm/numerals/numberDrill  — inflection & numbers
+                        #   phrases/phraseHint/phraseFix/phraseBattery/glossCoverage  — phrases
+                        #   quiz/recognition/handsFree/speech/feedbackSound  — drills & speech
+                        #   vocabBuild/idb/text/collections/reportIssue  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
+e2e/                    # Playwright specs
+docs/                   # design notes for in-flight features
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
 ```
 
-Tests live next to their source as `*.test.js`.
+Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
 
 ## Commands
 
@@ -68,9 +95,11 @@ npm run test:watch  # watch mode
 npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
 npm run build       # production build into dist/
 npm run preview     # serve the production build
+npm run test:e2e    # Playwright end-to-end tests
 ```
 
-CI (`.github/workflows/ci.yml`) runs `lint`, `test`, then `build` on every push.
+CI (`.github/workflows/ci.yml`) runs `lint`, `test`, `build`, and the Playwright
+`e2e` job on every push.
 
 ## Where to make common changes
 
@@ -80,8 +109,12 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, then `build` on every push.
 - **Add/edit words** → the YAML in `public/vocab/` + bump `updated` in
   `manifest.json`. `vocabBuild.test.js`/`declension.test.js` guard the shape.
   Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
-- **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store).
-- **Routing/nav** → `src/router/index.js` + the `<nav>` in `App.vue`.
+- **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store);
+  most learning state lives in `progress.js`, delegating to the pure `lib` engine.
+- **The session/practice flow** → `src/views/SessionView.vue` +
+  `src/lib/sessionRunner.js` / `session.js` / `exerciseBuild.js`.
+- **Routing** → `src/router/index.js`. There's no nav bar; the user navigates
+  from `HomeView` (the header in `App.vue` is just the Home logo + Data avatar).
 
 See `README.md` for the deeper architecture (vocab loading, offline caching).
 
@@ -93,10 +126,3 @@ When working from a GitHub issue:
 2. **Implement** the changes on that branch and push.
 3. **Raise a PR** when the work is complete — do not wait to be asked.
 4. **Reference the issue** in the PR body with `Closes #<issue-number>` so GitHub auto-closes it on merge.
-</content>
-</invoke>
-
-
-<result>
-<name>File not found</result>
-</invoke>
