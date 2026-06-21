@@ -1303,6 +1303,8 @@ words:
         en_gb: I often call my grandmother.
       - ru: Я живу́ у ба́бушки в дере́вне.
         en_gb: I live at my grandmother's in the village.
+        en_alt:
+          - I live in the village at my grandmother's
     declension:
       sg_nom: ба́бушка
       sg_gen: ба́бушки
@@ -4262,6 +4264,8 @@ words:
         en_gb: Spring is early this year.
       - ru: Весно́й та́ет снег.
         en_gb: In spring the snow melts.
+        en_alt:
+          - snow melts in spring
       - ru: Мы ждём прихо́да весны́.
         en_gb: We are waiting for the arrival of spring.
   "ветер=wind":
@@ -6191,8 +6195,12 @@ words:
         en_gb: I have no time.
       - ru: Со вре́менем всё нала́дится.
         en_gb: In time everything will get better.
+        en_alt:
+          - everything will get better in time
       - ru: В дре́вние времена́ лю́ди жи́ли ина́че.
         en_gb: In ancient times people lived differently.
+        en_alt:
+          - people lived differently in ancient times
     declension:
       sg_nom: вре́мя
       sg_gen: вре́мени
@@ -12891,6 +12899,8 @@ words:
         en_gb: He was frightened by the loud sound.
       - ru: Но́чью бы́ло мно́го стра́нных зву́ков.
         en_gb: There were many strange sounds at night.
+        en_alt:
+          - at night there were many strange sounds
     declension:
       sg_nom: звук
       sg_gen: зву́ка
@@ -13042,6 +13052,8 @@ words:
         en_gb: In winter there is a lot of snow here.
       - ru: Зима́ в э́том году́ холо́дная.
         en_gb: The winter this year is cold.
+        en_alt:
+          - winter is cold this year
       - ru: Мы с нетерпе́нием ждём зи́му.
         en_gb: We are eagerly waiting for winter.
     declension:
@@ -19329,6 +19341,8 @@ words:
     usage:
       - ru: На у́лице хо́лодно, наде́нь ку́ртку.
         en_gb: It's cold outside, put on a jacket.
+        en_alt:
+          - it's cold outside, put a jacket on
       - ru: Моя́ ку́ртка виси́т в шкафу́.
         en_gb: My jacket is hanging in the wardrobe.
       - ru: Он пришёл в чёрной ку́ртке.
@@ -21019,6 +21033,8 @@ words:
         en_gb: This T-shirt is too small for you.
       - ru: Он хо́дит ле́том в ма́йках.
         en_gb: In summer he goes about in T-shirts.
+        en_alt:
+          - he goes about in T-shirts in summer
     declension:
       sg_nom: ма́йка
       sg_gen: ма́йки
@@ -23452,7 +23468,7 @@ words:
       - ru: Её муж рабо́тает врачо́м.
         en_gb: Her husband works as a doctor.
       - ru: Она́ ждёт му́жа с рабо́ты.
-        en_gb: She is waiting for her husband from work.
+        en_gb: She is waiting for her husband to come home from work.
       - ru: Мно́гие мужья́ помога́ют по до́му.
         en_gb: Many husbands help around the house.
     declension:
@@ -45105,6 +45121,7 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    accented: "С.Ш.А."
     collections:
       - history
       - geography
@@ -45136,6 +45153,7 @@ words:
     gender: n
     animacy: i
     number: ["pl"]
+    accented: "С.Ш.А."
     collections:
       - geography
     en_gb:
