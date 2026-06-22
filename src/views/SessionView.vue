@@ -10,14 +10,14 @@ import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration } from '../stores/settings.js'
 import { warmAudio } from '../lib/feedbackSound.js'
 import { STATES } from '../lib/progression.js'
-import { buildExercises, makeVisualReplacement } from '../lib/exerciseBuild.js'
+import { buildExercises, makeVisualReplacement, makeReplacementPicker } from '../lib/exerciseBuild.js'
+import { shapeVocab } from '../lib/vocabBuild.js'
 import {
   initRunner,
   currentExercise,
   submit,
   skipDimension,
   runnerSummary,
-  practiceSegments,
   firstPassProgress,
   isRepeating,
 } from '../lib/sessionRunner.js'
@@ -57,6 +57,9 @@ const startStates = new Map()
 const startExercise = { learning: 1, mastery: 1 }
 let session = null
 let repSeq = 0
+// Vocab/phrase sources for re-prioritised skip replacements (set in setup()).
+let vocabById = new Map()
+let sessionPhrases = []
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -98,6 +101,11 @@ async function setup() {
     words = vocabState.words.filter((w) => set.has(w.key))
     phrases = vocabPhrases.value.filter((p) => set.has(p.source))
   }
+
+  // Keep the shaped vocab + phrases around so skipping a modality can draw
+  // re-prioritised replacement content (see buildReplacementPicker).
+  vocabById = new Map(shapeVocab(words).map((v) => [v.id, v]))
+  sessionPhrases = phrases
 
   const exercises = buildExercises(session, {
     words,
@@ -235,8 +243,20 @@ function onDispute({ submitted }) {
 
 // --- Skipping a modality (listening / speaking) -----------------------------
 
-function makeReplacement(skipped) {
-  return makeVisualReplacement(skipped, repSeq++)
+// Recalculate the highest-priority words for the visual replacement exercises:
+// draw from the current batch worst-understood first (the same pool the builder
+// front-biases), preferring words not already covered this session so a skip
+// steers practice toward what still needs doing rather than re-skinning the
+// skipped word. Phrases are ordered by their source word's priority.
+function buildReplacementPicker() {
+  const wordKeys = session?.pools?.current ?? []
+  const exclude = new Set()
+  for (const e of runner.plan) for (const k of e.targets ?? []) exclude.add(k)
+  const order = new Map(wordKeys.map((k, i) => [k, i]))
+  const phrases = sessionPhrases
+    .slice()
+    .sort((a, b) => (order.get(a.source) ?? Infinity) - (order.get(b.source) ?? Infinity))
+  return makeReplacementPicker({ wordKeys, phrases, vocabById, exclude })
 }
 
 function upcomingHas(dimension) {
@@ -250,13 +270,13 @@ const canSkipSpeaking = computed(
 )
 
 async function skip(dimension) {
-  skipDimension(runner, dimension, makeReplacement)
+  const picker = buildReplacementPicker()
+  skipDimension(runner, dimension, (skipped) => makeVisualReplacement(skipped, repSeq++, picker))
   await finalizeIfDone()
 }
 
 // --- Progress bar + summary -------------------------------------------------
 
-const segments = computed(() => practiceSegments(runner))
 const overall = computed(() => Math.round(firstPassProgress(runner) * 100))
 
 const wordStatus = computed(() => {
@@ -309,20 +329,14 @@ function confirmClose() {
   <section class="session">
     <header class="session-head">
       <button class="close" aria-label="Close session" @click="showConfirm = true">✕</button>
-      <div class="bar" role="progressbar" :aria-valuenow="overall">
-        <div v-for="seg in segments" :key="seg.practiceIndex" class="seg">
-          <span
-            v-for="cell in seg.exercises"
-            :key="cell.id"
-            class="cell"
-            :class="{
-              done: cell.done,
-              ok: cell.correct === true,
-              no: cell.correct === false,
-              now: current && cell.id === current.id,
-            }"
-          />
-        </div>
+      <div
+        class="bar"
+        role="progressbar"
+        :aria-valuenow="overall"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="bar-fill" :style="{ width: overall + '%' }" />
       </div>
       <span v-if="isRepeating(runner)" class="repeat muted">Fixing mistakes…</span>
     </header>
@@ -471,31 +485,16 @@ function confirmClose() {
 }
 .bar {
   flex: 1 1 auto;
-  display: flex;
-  gap: 0.4rem;
-}
-.seg {
-  flex: 1 1 0;
-  display: flex;
-  gap: 0.15rem;
-}
-.cell {
-  flex: 1 1 0;
   height: 0.5rem;
-  border-radius: 3px;
   background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
 }
-.cell.done {
-  background: var(--muted);
-}
-.cell.ok {
-  background: var(--good);
-}
-.cell.no {
-  background: var(--bad);
-}
-.cell.now {
-  outline: 2px solid var(--primary);
+.bar-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 3px;
+  transition: width 0.3s ease;
 }
 .repeat {
   flex: 0 0 auto;
