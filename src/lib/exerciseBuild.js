@@ -62,13 +62,31 @@ function enText(en) {
 }
 
 /**
- * Take up to `n` items from `rest`, lowest CEFR level first: a level is fully
- * exhausted before any of the next level up is touched, and items within a
- * level are shuffled so the fillers vary. This keeps top-up words at (or, only
- * once a level runs dry, just above) the learner's level instead of pulling
- * random advanced vocabulary into an otherwise low-level exercise.
+ * Group items into tiers by how many times they have already been drawn this
+ * session (the 0-used tier first, then 1-used, …), preserving the incoming
+ * order within each tier. Drawing tier-by-tier guarantees a word is never used
+ * an Nth time until every other candidate has been used N−1 times, so a single
+ * lesson can't drill the same word over and over.
  */
-function topUpByLevel(rest, n, rng) {
+function bucketByUsage(items, used, keyOf) {
+  const tiers = new Map()
+  for (const it of items) {
+    const u = used.get(keyOf(it)) ?? 0
+    if (!tiers.has(u)) tiers.set(u, [])
+    tiers.get(u).push(it)
+  }
+  return [...tiers.keys()].sort((a, b) => a - b).map((u) => tiers.get(u))
+}
+
+/**
+ * Take up to `n` items from `rest`, lowest CEFR level first: a level is fully
+ * exhausted before any of the next level up is touched. Within a level the
+ * least-session-used items come first (shuffled within a usage tier) so the
+ * fillers vary and spread across the lesson instead of repeating. This keeps
+ * top-up words at (or, only once a level runs dry, just above) the learner's
+ * level instead of pulling random advanced vocabulary into a low-level exercise.
+ */
+function topUpByLevel(rest, n, rng, used, keyOf) {
   if (n <= 0) return []
   const byRank = new Map()
   for (const w of rest) {
@@ -79,7 +97,10 @@ function topUpByLevel(rest, n, rng) {
   const out = []
   for (const r of [...byRank.keys()].sort((a, b) => a - b)) {
     if (out.length >= n) break
-    out.push(...shuffle(byRank.get(r), rng).slice(0, n - out.length))
+    for (const tier of bucketByUsage(byRank.get(r), used, keyOf)) {
+      if (out.length >= n) break
+      out.push(...shuffle(tier, rng).slice(0, n - out.length))
+    }
   }
   return out
 }
@@ -112,16 +133,44 @@ function frontBiasedSample(items, n, rng) {
 }
 
 /**
+ * Draw up to `n` distinct items, least-session-used first, and within the
+ * least-used tier biased toward the front (worst-understood) when `frontBias`
+ * is set, otherwise drawn uniformly at random. Spreading by usage is what stops
+ * a single worst-understood word from being picked by every practice in a row.
+ */
+function sampleSpread(items, n, rng, used, keyOf, frontBias) {
+  if (n <= 0) return []
+  const out = []
+  for (const tier of bucketByUsage(items, used, keyOf)) {
+    if (out.length >= n) break
+    const need = n - out.length
+    out.push(...(frontBias ? frontBiasedSample(tier, need, rng) : sample(tier, need, rng)))
+  }
+  return out
+}
+
+/**
  * Draw up to `n` items, preferring the pool and only then topping up from the
  * rest. Pool items always win when there are enough of them; the top-up draws
  * the lowest available CEFR level first (see {@link topUpByLevel}). When
  * `frontBias` is set (the current bucket) pool items are drawn worst-first
  * rather than uniformly, so the worst-understood words get the most practice.
+ *
+ * Every drawn key is recorded in the session-wide `used` map so later practices
+ * spread onto other words instead of repeating these (mid-lesson re-prioritised
+ * spacing): a word recurs only once the rest of its pool has had a turn.
  */
-function drawN(pool, rest, n, rng, frontBias = false) {
-  const chosen = frontBias ? frontBiasedSample(pool, n, rng) : sample(pool, n, rng)
-  if (chosen.length >= n) return chosen
-  return [...chosen, ...topUpByLevel(rest, n - chosen.length, rng)]
+function drawN(pool, rest, n, rng, { frontBias = false, used, keyOf }) {
+  const chosen = sampleSpread(pool, n, rng, used, keyOf, frontBias)
+  const result =
+    chosen.length >= n
+      ? chosen
+      : [...chosen, ...topUpByLevel(rest, n - chosen.length, rng, used, keyOf)]
+  for (const it of result) {
+    const k = keyOf(it)
+    if (k != null) used.set(k, (used.get(k) ?? 0) + 1)
+  }
+  return result
 }
 
 /** Split shaped vocab into pool words and the rest. */
@@ -155,7 +204,11 @@ function common(practice, practiceIndex) {
 function buildMatch(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
   // Board size comes from the practice catalogue (`items`), defaulting to MATCH_PAIRS.
-  const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng, practice.bucket === 'current')
+  const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng, {
+    frontBias: practice.bucket === 'current',
+    used: ctx.used,
+    keyOf: (w) => w.id,
+  })
   if (picked.length < 2) return []
   return [
     make({
@@ -180,7 +233,11 @@ function buildWordType(practice, pi, ctx, make, kind) {
     rest = rest.filter((w) => !ctx.skipsSpeaking(w.id))
   }
   if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
-  const picked = drawN(pool, rest, practice.exercises, ctx.rng, practice.bucket === 'current')
+  const picked = drawN(pool, rest, practice.exercises, ctx.rng, {
+    frontBias: practice.bucket === 'current',
+    used: ctx.used,
+    keyOf: (w) => w.id,
+  })
   return picked.map((w) =>
     make({
       ...common(practice, pi),
@@ -203,7 +260,11 @@ function buildPhrase(practice, pi, ctx, make, kind) {
     rest = rest.filter(met)
   }
   if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
-  const picked = drawN(pool, rest, practice.exercises, ctx.rng, practice.bucket === 'current')
+  const picked = drawN(pool, rest, practice.exercises, ctx.rng, {
+    frontBias: practice.bucket === 'current',
+    used: ctx.used,
+    keyOf: (p) => p.source,
+  })
   return picked.map((p) =>
     make({
       ...common(practice, pi),
@@ -225,13 +286,11 @@ function buildInflect(practice, pi, ctx, make) {
   // their progression state. If the batch has fewer inflectable words than the
   // practice needs, produce fewer exercises rather than widening the scope.
   const topUpSource = practice.level === 'mastery' ? [] : rest
-  const picked = drawN(
-    inflectable(pool),
-    inflectable(topUpSource),
-    practice.exercises,
-    ctx.rng,
-    practice.bucket === 'current',
-  )
+  const picked = drawN(inflectable(pool), inflectable(topUpSource), practice.exercises, ctx.rng, {
+    frontBias: practice.bucket === 'current',
+    used: ctx.used,
+    keyOf: (r) => r.key,
+  })
   const mode = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
   return picked.map((r) =>
     make({
@@ -252,13 +311,11 @@ function buildContext(practice, pi, ctx, make) {
     list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && canBuildContext(r, bctx))
   // Like buildInflect, mastery exercises never widen beyond the committed batch.
   const topUpSource = practice.level === 'mastery' ? [] : rest
-  const picked = drawN(
-    resolvable(pool),
-    resolvable(topUpSource),
-    practice.exercises,
-    ctx.rng,
-    practice.bucket === 'current',
-  )
+  const picked = drawN(resolvable(pool), resolvable(topUpSource), practice.exercises, ctx.rng, {
+    frontBias: practice.bucket === 'current',
+    used: ctx.used,
+    keyOf: (r) => r.key,
+  })
   const out = []
   for (const r of picked) {
     const ex = buildContextExercise(r, { ...bctx, rng: ctx.rng })
@@ -291,52 +348,127 @@ function generate(practice, pi, ctx, make) {
   }
 }
 
-/**
- * Build a visual replacement exercise for a skipped speaking/listening item.
- * The replacement is a word-bank (phrase) or type (word) exercise covering
- * exactly the same content, requiring no audio input or output.
- *
- * @param {object} skipped  exercise or phrase-like descriptor; must have `ru` and `en`
- * @param {number} seq      monotonically-increasing counter for unique ids
- * @returns {object|null}   exercise descriptor, or null if content is missing
- */
-export function makeVisualReplacement(skipped, seq) {
-  // Match exercises bundle multiple pairs with no top-level ru/en —
-  // expand each pair into an individual type (spell-word) exercise.
-  if (skipped?.kind === 'match' && skipped.pairs?.length) {
-    return skipped.pairs.map((pair, i) => ({
-      id: `vis${seq}_${i}`,
-      practiceIndex: skipped.practiceIndex ?? 0,
-      practiceType: 'spell-word',
-      dimension: 'identification',
-      level: skipped.level ?? 'learning',
-      content: 'word',
-      bucket: skipped.bucket ?? 'current',
-      audio: false,
-      kind: 'type',
-      targets: [pair.key].filter(Boolean),
-      ru: pair.ru,
-      en: pair.en,
-    }))
-  }
-  if (!skipped?.ru || !skipped?.en) return null
-  const kind = skipped.content === 'word' ? 'type' : 'wordbank'
+/** A visual (no-audio) type/spell descriptor for one word's content. */
+function visType(content, skipped, id) {
   return {
-    id: `vis${seq}`,
+    id,
     practiceIndex: skipped.practiceIndex ?? 0,
-    practiceType: kind === 'wordbank' ? 'translate-phrase' : 'spell-word',
+    practiceType: 'spell-word',
     dimension: 'identification',
     level: skipped.level ?? 'learning',
-    content: kind === 'wordbank' ? 'phrase' : 'word',
+    content: 'word',
     bucket: skipped.bucket ?? 'current',
     audio: false,
-    kind,
-    targets: skipped.targets ?? [],
-    ru: skipped.ru,
-    en: skipped.en,
-    ...(skipped.enAlt?.length ? { enAlt: skipped.enAlt } : {}),
-    ...(skipped.note !== undefined ? { note: skipped.note } : {}),
+    kind: 'type',
+    targets: [content.key].filter(Boolean),
+    ru: content.ru,
+    en: content.en,
+    ...(content.note !== undefined ? { note: content.note } : {}),
   }
+}
+
+/** A visual (no-audio) word-bank descriptor for one phrase's content. */
+function visWordbank(content, skipped, id) {
+  return {
+    id,
+    practiceIndex: skipped.practiceIndex ?? 0,
+    practiceType: 'translate-phrase',
+    dimension: 'identification',
+    level: skipped.level ?? 'learning',
+    content: 'phrase',
+    bucket: skipped.bucket ?? 'current',
+    audio: false,
+    kind: 'wordbank',
+    targets: [content.source].filter(Boolean),
+    ru: content.ru,
+    en: content.en,
+    ...(content.enAlt?.length ? { enAlt: content.enAlt } : {}),
+  }
+}
+
+/** Cycle through a list, wrapping at the end (null for an empty list). */
+function cyclePicker(list) {
+  let i = 0
+  return () => (list.length ? list[i++ % list.length] : null)
+}
+
+/**
+ * Create a picker that hands out the highest-priority replacement content for a
+ * skipped modality, recalculated from the current pools rather than reusing the
+ * skipped word. `wordKeys`/`phrases` arrive already in priority order (worst
+ * understood first); words/phrases already covered this session (`exclude`) are
+ * dropped so a backfill targets fresh priorities, and each candidate is yielded
+ * round-robin so a long backfill never drills the same word repeatedly.
+ *
+ * @returns {{word: () => object|null, phrase: () => object|null}}
+ */
+export function makeReplacementPicker({
+  wordKeys = [],
+  phrases = [],
+  vocabById = new Map(),
+  exclude = new Set(),
+} = {}) {
+  const words = wordKeys.filter((k) => vocabById.has(k))
+  const freshWords = words.filter((k) => !exclude.has(k))
+  const nextWordKey = cyclePicker(freshWords.length ? freshWords : words)
+
+  const usable = phrases.filter((p) => p?.source && p?.ru && p?.en)
+  const freshPhrases = usable.filter((p) => !exclude.has(p.source))
+  const nextPhrase = cyclePicker(freshPhrases.length ? freshPhrases : usable)
+
+  return {
+    word() {
+      const k = nextWordKey()
+      if (k == null) return null
+      const v = vocabById.get(k)
+      return v ? { key: k, ru: v.ru, en: enText(v.en), note: v.note } : null
+    },
+    phrase() {
+      const p = nextPhrase()
+      return p ? { source: p.source, ru: p.ru, en: p.en, enAlt: p.enAlt } : null
+    },
+  }
+}
+
+/**
+ * Build a visual replacement exercise for a skipped speaking/listening item: a
+ * word-bank (phrase) or type (word) exercise needing no audio input or output.
+ *
+ * With a `picker` the replacement targets the *recalculated* highest-priority
+ * words/phrases for the visual exercise type (not just the skipped word), so
+ * skipping a modality steers practice toward what still needs doing. Without one
+ * (or once the picker's priority pool is exhausted) it falls back to covering
+ * exactly the skipped item's own content.
+ *
+ * @param {object} skipped  exercise/phrase-like descriptor (the fallback content)
+ * @param {number} seq      monotonically-increasing counter for unique ids
+ * @param {object} [picker] from {@link makeReplacementPicker}
+ * @returns {object|object[]|null} descriptor(s), or null if no content is available
+ */
+export function makeVisualReplacement(skipped, seq, picker = null) {
+  const pick = (isWord) => (picker ? (isWord ? picker.word() : picker.phrase()) : null)
+
+  // Match exercises bundle multiple pairs with no top-level ru/en — expand each
+  // into an individual type (spell-word) exercise, re-prioritised when possible.
+  if (skipped?.kind === 'match' && skipped.pairs?.length) {
+    return skipped.pairs
+      .map((pair, i) => {
+        const content = pick(true) || { key: pair.key, ru: pair.ru, en: pair.en }
+        return content.ru && content.en ? visType(content, skipped, `vis${seq}_${i}`) : null
+      })
+      .filter(Boolean)
+  }
+
+  const isWord = skipped?.content === 'word'
+  const content =
+    pick(isWord) ||
+    (skipped?.ru && skipped?.en
+      ? isWord
+        ? { key: (skipped.targets ?? [])[0], ru: skipped.ru, en: skipped.en, note: skipped.note }
+        : { source: (skipped.targets ?? [])[0], ru: skipped.ru, en: skipped.en, enAlt: skipped.enAlt }
+      : null)
+  if (!content) return null
+  return isWord ? visType(content, skipped, `vis${seq}`) : visWordbank(content, skipped, `vis${seq}`)
 }
 
 /**
@@ -364,7 +496,10 @@ export function buildExercises(
 ) {
   const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
   const recordByKey = new Map(words.map((w) => [w.key, w]))
-  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, batteries, skipsSpeaking }
+  // Shared across every practice so draws spread over the whole lesson: a word
+  // recurs only once the rest of its pool has had a turn (mid-lesson spacing).
+  const used = new Map()
+  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, batteries, used, skipsSpeaking }
 
   const out = []
   let seq = 0

@@ -66,8 +66,10 @@ describe('SessionView', () => {
     const wrapper = mount(SessionView)
     await flushPromises()
 
-    // Progress bar segmented by practice (two practices here).
-    expect(wrapper.findAll('.seg')).toHaveLength(2)
+    // Linear progress meter: a single fill bar, starting empty.
+    const fill = wrapper.find('.bar-fill')
+    expect(fill.exists()).toBe(true)
+    expect(fill.attributes('style')).toContain('width: 0%')
 
     await answer(wrapper, 'дом') // ex0 correct
     await answer(wrapper, 'кот') // ex1 correct
