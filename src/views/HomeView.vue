@@ -5,7 +5,16 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { state as progress, batchProgress, batchExerciseProgress, atRisk, lost, stateOf } from '../stores/progress.js'
+import {
+  state as progress,
+  batchProgress,
+  batchExerciseProgress,
+  atRisk,
+  lost,
+  stateOf,
+  hasContextDrill,
+  skipsSpeaking,
+} from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
 import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
@@ -64,11 +73,15 @@ const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
 const MASTERY_DIMS = ['identification', 'usage', 'context']
 const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️', context: '🛠️' }
 
-// The context (phrase-completion) requirement only applies to words that have a
-// drill, so drop its dot for words it doesn't gate (keeps "done" words tidy).
+// Drop dots a word isn't actually graded on, so "done" words stay tidy:
+//  - speaking, at the learning level, for words the learner has waived (the
+//    recogniser couldn't hear them);
+//  - context, at the mastery level, for words with no phrase-completion drill.
 function dimsFor(key, level, dims) {
-  if (level !== 'mastery') return dims
-  return dims.filter((d) => d !== 'context' || progress.hasContextDrill(key))
+  if (level !== 'mastery') {
+    return dims.filter((d) => d !== 'speaking' || !skipsSpeaking(key))
+  }
+  return dims.filter((d) => d !== 'context' || hasContextDrill(key))
 }
 
 function buildWordList(batchWords, level, dims) {

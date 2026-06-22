@@ -227,6 +227,11 @@ function buildWordType(practice, pi, ctx, make, kind) {
     pool = pool.filter(met)
     rest = rest.filter(met)
   }
+  // Never draw a word the learner has skipped speaking for into a speak exercise.
+  if (kind === 'speak' && ctx.skipsSpeaking) {
+    pool = pool.filter((w) => !ctx.skipsSpeaking(w.id))
+    rest = rest.filter((w) => !ctx.skipsSpeaking(w.id))
+  }
   if (kind === 'type' && pool.length + rest.length < MIN_WORDS_FOR_SPELLING) return []
   const picked = drawN(pool, rest, practice.exercises, ctx.rng, {
     frontBias: practice.bucket === 'current',
@@ -474,18 +479,27 @@ export function makeVisualReplacement(skipped, seq, picker = null) {
  * @param {object[]} sources.phrases shaped phrases ({ id, ru, en, source, cefr })
  * @param {object} [sources.batteries] parsed phrase-batteries.yml (context drill)
  * @param {() => number} [sources.rng]
+ * @param {(key: string) => boolean} [sources.skipsSpeaking] whether the learner
+ *   has waived speaking for a word — such words are kept out of speak exercises.
  * @returns {object[]} exercise descriptors (each with a unique `id`)
  */
 export function buildExercises(
   session,
-  { words = [], phrases = [], rng = Math.random, encounterCount = null, batteries = null } = {},
+  {
+    words = [],
+    phrases = [],
+    rng = Math.random,
+    encounterCount = null,
+    batteries = null,
+    skipsSpeaking = null,
+  } = {},
 ) {
   const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
   const recordByKey = new Map(words.map((w) => [w.key, w]))
   // Shared across every practice so draws spread over the whole lesson: a word
   // recurs only once the rest of its pool has had a turn (mid-lesson spacing).
   const used = new Map()
-  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, batteries, used }
+  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, batteries, used, skipsSpeaking }
 
   const out = []
   let seq = 0

@@ -175,6 +175,13 @@ function selfAssessed() {
   emit('done', { correct: true })
 }
 
+// Give up on this word's speaking. Some words (very short ones like год or май)
+// are effectively impossible for the recogniser; skipping waives the speaking
+// requirement for the word so it can still be learned.
+function skip() {
+  emit('done', { skipSpeaking: true })
+}
+
 function next() {
   emit('done', { correct: result.value?.correct ?? false })
 }
@@ -250,6 +257,10 @@ onBeforeUnmount(() => {
           <button v-if="!result.correct" @click="tryAgain">🎤 Try again</button>
         </div>
       </template>
+
+      <!-- Escape hatch for words the recogniser can't reliably hear (short words
+           like год or май): waive speaking for this word and move on. -->
+      <button class="skip-word" @click="skip">Can't catch this word? Skip it</button>
     </template>
 
     <!-- No recognition: self-assess (the attempt counts). -->
@@ -295,6 +306,15 @@ onBeforeUnmount(() => {
   margin-left: 0.4rem;
   font-weight: 400;
   opacity: 0.85;
+}
+.skip-word {
+  justify-self: start;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  text-decoration: underline;
 }
 @keyframes pulse {
   50% {
