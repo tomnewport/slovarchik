@@ -26,6 +26,96 @@ meta:
     ins: instrumental
     pre: prepositional
 words:
+  "автобусный=bus":
+    batteries: [places]
+    cefr_level: B1
+    accented: авто́бусный
+    en_gb:
+      standard: bus (relating to buses)
+    collections:
+      - travel
+    forms:
+      m: авто́бусный
+      f: авто́бусная
+      n: авто́бусное
+      pl: авто́бусные
+    usage:
+      - ru: Я купи́л авто́бусный биле́т.
+        en_gb: I bought a bus ticket.
+      - ru: Авто́бусная остано́вка ря́дом с до́мом.
+        en_gb: The bus stop is near the house.
+      - ru: Здесь то́лько авто́бусные биле́ты.
+        en_gb: There are only bus tickets here.
+    declension:
+      m_nom: авто́бусный
+      m_gen: авто́бусного
+      m_dat: авто́бусному
+      m_acc: авто́бусный
+      m_ins: авто́бусным
+      m_pre: авто́бусном
+      n_nom: авто́бусное
+      n_gen: авто́бусного
+      n_dat: авто́бусному
+      n_acc: авто́бусное
+      n_ins: авто́бусным
+      n_pre: авто́бусном
+      f_nom: авто́бусная
+      f_gen: авто́бусной
+      f_dat: авто́бусной
+      f_acc: авто́бусную
+      f_ins: авто́бусной
+      f_pre: авто́бусной
+      pl_nom: авто́бусные
+      pl_gen: авто́бусных
+      pl_dat: авто́бусным
+      pl_acc: авто́бусные
+      pl_ins: авто́бусными
+      pl_pre: авто́бусных
+  "азиатский=Asian":
+    batteries: [places]
+    cefr_level: B1
+    accented: азиа́тский
+    en_gb:
+      standard: Asian (relating to Asia)
+    collections:
+      - geography
+    forms:
+      m: азиа́тский
+      f: азиа́тская
+      n: азиа́тское
+      pl: азиа́тские
+    usage:
+      - ru: Мне нра́вится азиа́тская ку́хня.
+        en_gb: I like Asian cuisine.
+      - ru: Э́то азиа́тский го́род.
+        en_gb: This is an Asian city.
+      - ru: Мы изуча́ем азиа́тские стра́ны.
+        en_gb: We are studying Asian countries.
+    declension:
+      m_nom: азиа́тский
+      m_gen: азиа́тского
+      m_dat: азиа́тскому
+      m_acc: азиа́тский
+      m_ins: азиа́тским
+      m_pre: азиа́тском
+      n_nom: азиа́тское
+      n_gen: азиа́тского
+      n_dat: азиа́тскому
+      n_acc: азиа́тское
+      n_ins: азиа́тским
+      n_pre: азиа́тском
+      f_nom: азиа́тская
+      f_gen: азиа́тской
+      f_dat: азиа́тской
+      f_acc: азиа́тскую
+      f_ins: азиа́тской
+      f_pre: азиа́тской
+      pl_nom: азиа́тские
+      pl_gen: азиа́тских
+      pl_dat: азиа́тским
+      pl_acc: азиа́тские
+      pl_ins: азиа́тскими
+      pl_pre: азиа́тских
   "активный=active":
     batteries: [people, feelings]
     cefr_level: B1
@@ -160,6 +250,49 @@ words:
         en_gb: She is reading an English book.
       - ru: Мне нра́вятся англи́йские тради́ции.
         en_gb: I like English traditions.
+  "англо-русский=English-Russian":
+    batteries: [texts]
+    cefr_level: B1
+    accented: англо-ру́сский
+    en_gb:
+      standard: English-Russian (e.g. a dictionary)
+    collections:
+      - reading
+    forms:
+      m: англо-ру́сский
+      f: англо-ру́сская
+      n: англо-ру́сское
+      pl: англо-ру́сские
+    usage:
+      - ru: Мне ну́жен англо-ру́сский слова́рь.
+        en_gb: I need an English-Russian dictionary.
+      - ru: Я купи́л англо-ру́сскую кни́гу.
+        en_gb: I bought an English-Russian book.
+    declension:
+      m_nom: англо-ру́сский
+      m_gen: англо-ру́сского
+      m_dat: англо-ру́сскому
+      m_acc: англо-ру́сский
+      m_ins: англо-ру́сским
+      m_pre: англо-ру́сском
+      n_nom: англо-ру́сское
+      n_gen: англо-ру́сского
+      n_dat: англо-ру́сскому
+      n_acc: англо-ру́сское
+      n_ins: англо-ру́сским
+      n_pre: англо-ру́сском
+      f_nom: англо-ру́сская
+      f_gen: англо-ру́сской
+      f_dat: англо-ру́сской
+      f_acc: англо-ру́сскую
+      f_ins: англо-ру́сской
+      f_pre: англо-ру́сской
+      pl_nom: англо-ру́сские
+      pl_gen: англо-ру́сских
+      pl_dat: англо-ру́сским
+      pl_acc: англо-ру́сские
+      pl_ins: англо-ру́сскими
+      pl_pre: англо-ру́сских
   "бедный=poor":
     batteries: [people, places]
     cefr_level: A2
@@ -341,6 +474,96 @@ words:
         en_gb: It was an endless argument.
       - ru: Меня́ утомля́ют бесконе́чные вопро́сы.
         en_gb: Endless questions tire me out.
+  "бесполезный=useless":
+    batteries: [feelings]
+    cefr_level: B1
+    accented: бесполе́зный
+    en_gb:
+      standard: useless (having no use)
+    collections:
+      - people
+    forms:
+      m: бесполе́зный
+      f: бесполе́зная
+      n: бесполе́зное
+      pl: бесполе́зные
+    usage:
+      - ru: Э́то бесполе́зный сове́т.
+        en_gb: This is useless advice.
+      - ru: Така́я бесполе́зная вещь.
+        en_gb: Such a useless thing.
+      - ru: Э́то бесполе́зные ве́щи.
+        en_gb: These are useless things.
+    declension:
+      m_nom: бесполе́зный
+      m_gen: бесполе́зного
+      m_dat: бесполе́зному
+      m_acc: бесполе́зный
+      m_ins: бесполе́зным
+      m_pre: бесполе́зном
+      n_nom: бесполе́зное
+      n_gen: бесполе́зного
+      n_dat: бесполе́зному
+      n_acc: бесполе́зное
+      n_ins: бесполе́зным
+      n_pre: бесполе́зном
+      f_nom: бесполе́зная
+      f_gen: бесполе́зной
+      f_dat: бесполе́зной
+      f_acc: бесполе́зную
+      f_ins: бесполе́зной
+      f_pre: бесполе́зной
+      pl_nom: бесполе́зные
+      pl_gen: бесполе́зных
+      pl_dat: бесполе́зным
+      pl_acc: бесполе́зные
+      pl_ins: бесполе́зными
+      pl_pre: бесполе́зных
+  "биологический=biological":
+    batteries: [texts]
+    cefr_level: B2
+    accented: биологи́ческий
+    en_gb:
+      standard: biological (relating to biology)
+    collections:
+      - science
+    forms:
+      m: биологи́ческий
+      f: биологи́ческая
+      n: биологи́ческое
+      pl: биологи́ческие
+    usage:
+      - ru: Он у́чится на биологи́ческом факульте́те.
+        en_gb: He studies at the biology faculty.
+      - ru: Э́то биологи́ческая нау́ка.
+        en_gb: This is a biological science.
+      - ru: Мы прово́дим биологи́ческие о́пыты.
+        en_gb: We conduct biological experiments.
+    declension:
+      m_nom: биологи́ческий
+      m_gen: биологи́ческого
+      m_dat: биологи́ческому
+      m_acc: биологи́ческий
+      m_ins: биологи́ческим
+      m_pre: биологи́ческом
+      n_nom: биологи́ческое
+      n_gen: биологи́ческого
+      n_dat: биологи́ческому
+      n_acc: биологи́ческое
+      n_ins: биологи́ческим
+      n_pre: биологи́ческом
+      f_nom: биологи́ческая
+      f_gen: биологи́ческой
+      f_dat: биологи́ческой
+      f_acc: биологи́ческую
+      f_ins: биологи́ческой
+      f_pre: биологи́ческой
+      pl_nom: биологи́ческие
+      pl_gen: биологи́ческих
+      pl_dat: биологи́ческим
+      pl_acc: биологи́ческие
+      pl_ins: биологи́ческими
+      pl_pre: биологи́ческих
   "благородный=noble":
     batteries: [people, feelings]
     cefr_level: B2
@@ -4943,6 +5166,49 @@ words:
         en_gb: They worked out a single strategy.
       - ru: Существу́ют еди́ные пра́вила.
         en_gb: There are unified rules.
+  "ежедневный=daily":
+    batteries: [time]
+    cefr_level: B1
+    accented: ежедне́вный
+    en_gb:
+      standard: daily (happening every day)
+    collections:
+      - time
+    forms:
+      m: ежедне́вный
+      f: ежедне́вная
+      n: ежедне́вное
+      pl: ежедне́вные
+    usage:
+      - ru: Я чита́ю ежедне́вную газе́ту.
+        en_gb: I read a daily newspaper.
+      - ru: Э́то моя́ ежедне́вная рабо́та.
+        en_gb: This is my daily work.
+    declension:
+      m_nom: ежедне́вный
+      m_gen: ежедне́вного
+      m_dat: ежедне́вному
+      m_acc: ежедне́вный
+      m_ins: ежедне́вным
+      m_pre: ежедне́вном
+      n_nom: ежедне́вное
+      n_gen: ежедне́вного
+      n_dat: ежедне́вному
+      n_acc: ежедне́вное
+      n_ins: ежедне́вным
+      n_pre: ежедне́вном
+      f_nom: ежедне́вная
+      f_gen: ежедне́вной
+      f_dat: ежедне́вной
+      f_acc: ежедне́вную
+      f_ins: ежедне́вной
+      f_pre: ежедне́вной
+      pl_nom: ежедне́вные
+      pl_gen: ежедне́вных
+      pl_dat: ежедне́вным
+      pl_acc: ежедне́вные
+      pl_ins: ежедне́вными
+      pl_pre: ежедне́вных
   "естественный=natural":
     batteries: [nature, feelings]
     cefr_level: B1
@@ -6586,6 +6852,51 @@ words:
         en_gb: They built an artificial lake.
       - ru: На ёлке иску́сственные ве́тки.
         en_gb: The tree has artificial branches.
+  "испанский=Spanish":
+    batteries: [people]
+    cefr_level: A2
+    accented: испа́нский
+    en_gb:
+      standard: Spanish (relating to Spain)
+    collections:
+      - nationalities
+    forms:
+      m: испа́нский
+      f: испа́нская
+      n: испа́нское
+      pl: испа́нские
+    usage:
+      - ru: Я учу́ испа́нский язы́к.
+        en_gb: I am learning the Spanish language.
+      - ru: Мне нра́вится испа́нская му́зыка.
+        en_gb: I like Spanish music.
+      - ru: Мы лю́бим испа́нские пе́сни.
+        en_gb: We love Spanish songs.
+    declension:
+      m_nom: испа́нский
+      m_gen: испа́нского
+      m_dat: испа́нскому
+      m_acc: испа́нский
+      m_ins: испа́нским
+      m_pre: испа́нском
+      n_nom: испа́нское
+      n_gen: испа́нского
+      n_dat: испа́нскому
+      n_acc: испа́нское
+      n_ins: испа́нским
+      n_pre: испа́нском
+      f_nom: испа́нская
+      f_gen: испа́нской
+      f_dat: испа́нской
+      f_acc: испа́нскую
+      f_ins: испа́нской
+      f_pre: испа́нской
+      pl_nom: испа́нские
+      pl_gen: испа́нских
+      pl_dat: испа́нским
+      pl_acc: испа́нские
+      pl_ins: испа́нскими
+      pl_pre: испа́нских
   "истинный=true":
     batteries: [texts, feelings]
     cefr_level: B2
@@ -6677,6 +6988,51 @@ words:
         en_gb: We visited a historical place.
       - ru: В музе́е истори́ческие докуме́нты.
         en_gb: There are historical documents in the museum.
+  "итальянский=Italian":
+    batteries: [people]
+    cefr_level: A2
+    accented: италья́нский
+    en_gb:
+      standard: Italian (relating to Italy)
+    collections:
+      - nationalities
+    forms:
+      m: италья́нский
+      f: италья́нская
+      n: италья́нское
+      pl: италья́нские
+    usage:
+      - ru: Здесь хоро́ший италья́нский рестора́н.
+        en_gb: There is a good Italian restaurant here.
+      - ru: Я люблю́ италья́нскую еду́.
+        en_gb: I love Italian food.
+      - ru: Э́то италья́нские маши́ны.
+        en_gb: These are Italian cars.
+    declension:
+      m_nom: италья́нский
+      m_gen: италья́нского
+      m_dat: италья́нскому
+      m_acc: италья́нский
+      m_ins: италья́нским
+      m_pre: италья́нском
+      n_nom: италья́нское
+      n_gen: италья́нского
+      n_dat: италья́нскому
+      n_acc: италья́нское
+      n_ins: италья́нским
+      n_pre: италья́нском
+      f_nom: италья́нская
+      f_gen: италья́нской
+      f_dat: италья́нской
+      f_acc: италья́нскую
+      f_ins: италья́нской
+      f_pre: италья́нской
+      pl_nom: италья́нские
+      pl_gen: италья́нских
+      pl_dat: италья́нским
+      pl_acc: италья́нские
+      pl_ins: италья́нскими
+      pl_pre: италья́нских
   "каменный=stone":
     batteries: [places, objects]
     cefr_level: B1
@@ -6860,6 +7216,49 @@ words:
         en_gb: We ate Chinese food.
       - ru: Здесь продаю́т кита́йские това́ры.
         en_gb: They sell Chinese goods here.
+  "классический=classical":
+    batteries: [texts]
+    cefr_level: B1
+    accented: класси́ческий
+    en_gb:
+      standard: classical (traditional, e.g. music)
+    collections:
+      - the arts
+    forms:
+      m: класси́ческий
+      f: класси́ческая
+      n: класси́ческое
+      pl: класси́ческие
+    usage:
+      - ru: Я слу́шаю класси́ческую му́зыку.
+        en_gb: I listen to classical music.
+      - ru: Э́то класси́ческий рома́н.
+        en_gb: This is a classic novel.
+    declension:
+      m_nom: класси́ческий
+      m_gen: класси́ческого
+      m_dat: класси́ческому
+      m_acc: класси́ческий
+      m_ins: класси́ческим
+      m_pre: класси́ческом
+      n_nom: класси́ческое
+      n_gen: класси́ческого
+      n_dat: класси́ческому
+      n_acc: класси́ческое
+      n_ins: класси́ческим
+      n_pre: класси́ческом
+      f_nom: класси́ческая
+      f_gen: класси́ческой
+      f_dat: класси́ческой
+      f_acc: класси́ческую
+      f_ins: класси́ческой
+      f_pre: класси́ческой
+      pl_nom: класси́ческие
+      pl_gen: класси́ческих
+      pl_dat: класси́ческим
+      pl_acc: класси́ческие
+      pl_ins: класси́ческими
+      pl_pre: класси́ческих
   "кожаный=leather":
     batteries: [clothes, objects]
     cefr_level: B1
@@ -9692,6 +10091,49 @@ words:
         en_gb: She felt an unknown force.
       - ru: Они́ откры́ли неве́домые зе́мли.
         en_gb: They discovered unknown lands.
+  "неверный=incorrect":
+    batteries: [texts]
+    cefr_level: B1
+    accented: неве́рный
+    en_gb:
+      standard: incorrect (wrong, mistaken)
+    collections:
+      - communication
+    forms:
+      m: неве́рный
+      f: неве́рная
+      n: неве́рное
+      pl: неве́рные
+    usage:
+      - ru: Э́то неве́рный отве́т.
+        en_gb: This is an incorrect answer.
+      - ru: Ты вы́брал неве́рную доро́гу.
+        en_gb: You chose the wrong road.
+    declension:
+      m_nom: неве́рный
+      m_gen: неве́рного
+      m_dat: неве́рному
+      m_acc: неве́рный
+      m_ins: неве́рным
+      m_pre: неве́рном
+      n_nom: неве́рное
+      n_gen: неве́рного
+      n_dat: неве́рному
+      n_acc: неве́рное
+      n_ins: неве́рным
+      n_pre: неве́рном
+      f_nom: неве́рная
+      f_gen: неве́рной
+      f_dat: неве́рной
+      f_acc: неве́рную
+      f_ins: неве́рной
+      f_pre: неве́рной
+      pl_nom: неве́рные
+      pl_gen: неве́рных
+      pl_dat: неве́рным
+      pl_acc: неве́рные
+      pl_ins: неве́рными
+      pl_pre: неве́рных
   "невероятный=incredible":
     batteries: [texts, feelings]
     cefr_level: B1
@@ -11999,6 +12441,49 @@ words:
         en_gb: We had excellent weather.
       - ru: Он сдал экза́мен на отли́чную оце́нку.
         en_gb: He passed the exam with an excellent mark.
+  "отрицательный=negative":
+    batteries: [texts]
+    cefr_level: B2
+    accented: отрица́тельный
+    en_gb:
+      standard: negative (expressing 'no'; below zero)
+    collections:
+      - science
+    forms:
+      m: отрица́тельный
+      f: отрица́тельная
+      n: отрица́тельное
+      pl: отрица́тельные
+    usage:
+      - ru: Он дал отрица́тельный отве́т.
+        en_gb: He gave a negative answer.
+      - ru: Э́то отрица́тельное число́.
+        en_gb: This is a negative number.
+    declension:
+      m_nom: отрица́тельный
+      m_gen: отрица́тельного
+      m_dat: отрица́тельному
+      m_acc: отрица́тельный
+      m_ins: отрица́тельным
+      m_pre: отрица́тельном
+      n_nom: отрица́тельное
+      n_gen: отрица́тельного
+      n_dat: отрица́тельному
+      n_acc: отрица́тельное
+      n_ins: отрица́тельным
+      n_pre: отрица́тельном
+      f_nom: отрица́тельная
+      f_gen: отрица́тельной
+      f_dat: отрица́тельной
+      f_acc: отрица́тельную
+      f_ins: отрица́тельной
+      f_pre: отрица́тельной
+      pl_nom: отрица́тельные
+      pl_gen: отрица́тельных
+      pl_dat: отрица́тельным
+      pl_acc: отрица́тельные
+      pl_ins: отрица́тельными
+      pl_pre: отрица́тельных
   "официальный=official":
     batteries: [society, texts]
     cefr_level: B1
@@ -12941,6 +13426,92 @@ words:
         en_gb: We received the prescribed amount.
       - ru: Рабо́тники получа́ют поло́женные льго́ты.
         en_gb: The workers receive the prescribed benefits.
+  "положительный=positive":
+    batteries: [texts]
+    cefr_level: B2
+    accented: положи́тельный
+    en_gb:
+      standard: positive (favourable; above zero)
+    collections:
+      - science
+    forms:
+      m: положи́тельный
+      f: положи́тельная
+      n: положи́тельное
+      pl: положи́тельные
+    usage:
+      - ru: Я получи́л положи́тельный отве́т.
+        en_gb: I received a positive answer.
+      - ru: Э́то положи́тельный результа́т.
+        en_gb: This is a positive result.
+    declension:
+      m_nom: положи́тельный
+      m_gen: положи́тельного
+      m_dat: положи́тельному
+      m_acc: положи́тельный
+      m_ins: положи́тельным
+      m_pre: положи́тельном
+      n_nom: положи́тельное
+      n_gen: положи́тельного
+      n_dat: положи́тельному
+      n_acc: положи́тельное
+      n_ins: положи́тельным
+      n_pre: положи́тельном
+      f_nom: положи́тельная
+      f_gen: положи́тельной
+      f_dat: положи́тельной
+      f_acc: положи́тельную
+      f_ins: положи́тельной
+      f_pre: положи́тельной
+      pl_nom: положи́тельные
+      pl_gen: положи́тельных
+      pl_dat: положи́тельным
+      pl_acc: положи́тельные
+      pl_ins: положи́тельными
+      pl_pre: положи́тельных
+  "польский=Polish":
+    batteries: [people]
+    cefr_level: A2
+    accented: по́льский
+    en_gb:
+      standard: Polish (relating to Poland)
+    collections:
+      - nationalities
+    forms:
+      m: по́льский
+      f: по́льская
+      n: по́льское
+      pl: по́льские
+    usage:
+      - ru: Он зна́ет по́льский язы́к.
+        en_gb: He knows the Polish language.
+      - ru: Э́то по́льская кни́га.
+        en_gb: This is a Polish book.
+    declension:
+      m_nom: по́льский
+      m_gen: по́льского
+      m_dat: по́льскому
+      m_acc: по́льский
+      m_ins: по́льским
+      m_pre: по́льском
+      n_nom: по́льское
+      n_gen: по́льского
+      n_dat: по́льскому
+      n_acc: по́льское
+      n_ins: по́льским
+      n_pre: по́льском
+      f_nom: по́льская
+      f_gen: по́льской
+      f_dat: по́льской
+      f_acc: по́льскую
+      f_ins: по́льской
+      f_pre: по́льской
+      pl_nom: по́льские
+      pl_gen: по́льских
+      pl_dat: по́льским
+      pl_acc: по́льские
+      pl_ins: по́льскими
+      pl_pre: по́льских
   "понятный=understandable":
     batteries: [texts]
     cefr_level: B1
@@ -13292,6 +13863,49 @@ words:
         en_gb: This is the correct road.
       - ru: Мы при́няли пра́вильные реше́ния.
         en_gb: We made the correct decisions.
+  "православный=Orthodox":
+    batteries: [society]
+    cefr_level: B2
+    accented: правосла́вный
+    en_gb:
+      standard: Orthodox (of the Eastern Christian church)
+    collections:
+      - society
+    forms:
+      m: правосла́вный
+      f: правосла́вная
+      n: правосла́вное
+      pl: правосла́вные
+    usage:
+      - ru: Мы бы́ли в правосла́вной це́ркви.
+        en_gb: We were in an Orthodox church.
+      - ru: Э́то правосла́вный пра́здник.
+        en_gb: This is an Orthodox holiday.
+    declension:
+      m_nom: правосла́вный
+      m_gen: правосла́вного
+      m_dat: правосла́вному
+      m_acc: правосла́вный
+      m_ins: правосла́вным
+      m_pre: правосла́вном
+      n_nom: правосла́вное
+      n_gen: правосла́вного
+      n_dat: правосла́вному
+      n_acc: правосла́вное
+      n_ins: правосла́вным
+      n_pre: правосла́вном
+      f_nom: правосла́вная
+      f_gen: правосла́вной
+      f_dat: правосла́вной
+      f_acc: правосла́вную
+      f_ins: правосла́вной
+      f_pre: правосла́вной
+      pl_nom: правосла́вные
+      pl_gen: правосла́вных
+      pl_dat: правосла́вным
+      pl_acc: правосла́вные
+      pl_ins: правосла́вными
+      pl_pre: правосла́вных
   "правый=right":
     batteries: [places, objects]
     cefr_level: B1
@@ -18554,6 +19168,49 @@ words:
         en_gb: We need the exact date.
       - ru: Учёный сде́лал то́чные расчёты.
         en_gb: The scientist made exact calculations.
+  "треугольный=triangular":
+    batteries: [texts]
+    cefr_level: B1
+    accented: треуго́льный
+    en_gb:
+      standard: triangular (shaped like a triangle)
+    collections:
+      - science
+    forms:
+      m: треуго́льный
+      f: треуго́льная
+      n: треуго́льное
+      pl: треуго́льные
+    usage:
+      - ru: Э́то треуго́льная фо́рма.
+        en_gb: This is a triangular shape.
+      - ru: Э́то треуго́льный знак.
+        en_gb: This is a triangular sign.
+    declension:
+      m_nom: треуго́льный
+      m_gen: треуго́льного
+      m_dat: треуго́льному
+      m_acc: треуго́льный
+      m_ins: треуго́льным
+      m_pre: треуго́льном
+      n_nom: треуго́льное
+      n_gen: треуго́льного
+      n_dat: треуго́льному
+      n_acc: треуго́льное
+      n_ins: треуго́льным
+      n_pre: треуго́льном
+      f_nom: треуго́льная
+      f_gen: треуго́льной
+      f_dat: треуго́льной
+      f_acc: треуго́льную
+      f_ins: треуго́льной
+      f_pre: треуго́льной
+      pl_nom: треуго́льные
+      pl_gen: треуго́льных
+      pl_dat: треуго́льным
+      pl_acc: треуго́льные
+      pl_ins: треуго́льными
+      pl_pre: треуго́льных
   "трудный=difficult":
     batteries: [texts, feelings]
     cefr_level: A2
@@ -19603,6 +20260,51 @@ words:
         en_gb: We love French cuisine.
       - ru: Она́ изуча́ет францу́зские слова́.
         en_gb: She studies French words.
+  "футбольный=football":
+    batteries: [everyday]
+    cefr_level: A2
+    accented: футбо́льный
+    en_gb:
+      standard: football (relating to football)
+    collections:
+      - sport
+    forms:
+      m: футбо́льный
+      f: футбо́льная
+      n: футбо́льное
+      pl: футбо́льные
+    usage:
+      - ru: Мы смотре́ли футбо́льный матч.
+        en_gb: We watched a football match.
+      - ru: Э́то на́ша футбо́льная кома́нда.
+        en_gb: This is our football team.
+      - ru: Здесь футбо́льные по́ля.
+        en_gb: There are football fields here.
+    declension:
+      m_nom: футбо́льный
+      m_gen: футбо́льного
+      m_dat: футбо́льному
+      m_acc: футбо́льный
+      m_ins: футбо́льным
+      m_pre: футбо́льном
+      n_nom: футбо́льное
+      n_gen: футбо́льного
+      n_dat: футбо́льному
+      n_acc: футбо́льное
+      n_ins: футбо́льным
+      n_pre: футбо́льном
+      f_nom: футбо́льная
+      f_gen: футбо́льной
+      f_dat: футбо́льной
+      f_acc: футбо́льную
+      f_ins: футбо́льной
+      f_pre: футбо́льной
+      pl_nom: футбо́льные
+      pl_gen: футбо́льных
+      pl_dat: футбо́льным
+      pl_acc: футбо́льные
+      pl_ins: футбо́льными
+      pl_pre: футбо́льных
   "характерный=characteristic":
     batteries: [people, feelings, texts]
     cefr_level: B1
@@ -20698,6 +21400,49 @@ words:
         en_gb: This is a young actress.
       - ru: На сце́не выступа́ют ю́ные арти́сты.
         en_gb: Young performers appear on the stage.
+  "юридический=legal":
+    batteries: [society]
+    cefr_level: B2
+    accented: юриди́ческий
+    en_gb:
+      standard: legal (relating to law)
+    collections:
+      - society
+    forms:
+      m: юриди́ческий
+      f: юриди́ческая
+      n: юриди́ческое
+      pl: юриди́ческие
+    usage:
+      - ru: Она́ у́чится на юриди́ческом факульте́те.
+        en_gb: She studies at the law faculty.
+      - ru: Нам нужна́ юриди́ческая по́мощь.
+        en_gb: We need legal help.
+    declension:
+      m_nom: юриди́ческий
+      m_gen: юриди́ческого
+      m_dat: юриди́ческому
+      m_acc: юриди́ческий
+      m_ins: юриди́ческим
+      m_pre: юриди́ческом
+      n_nom: юриди́ческое
+      n_gen: юриди́ческого
+      n_dat: юриди́ческому
+      n_acc: юриди́ческое
+      n_ins: юриди́ческим
+      n_pre: юриди́ческом
+      f_nom: юриди́ческая
+      f_gen: юриди́ческой
+      f_dat: юриди́ческой
+      f_acc: юриди́ческую
+      f_ins: юриди́ческой
+      f_pre: юриди́ческой
+      pl_nom: юриди́ческие
+      pl_gen: юриди́ческих
+      pl_dat: юриди́ческим
+      pl_acc: юриди́ческие
+      pl_ins: юриди́ческими
+      pl_pre: юриди́ческих
   "явный=obvious":
     batteries: [texts, feelings]
     cefr_level: B1

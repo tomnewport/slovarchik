@@ -558,6 +558,32 @@ words:
         en_gb: Tomorrow we will be taking on a new project.
       - ru: Я бы не бра́лся за э́то де́ло оди́н.
         en_gb: I would not take on this task alone.
+  "бриться=to shave":
+    batteries: [routine]
+    cefr_level: B1
+    accented: бри́ться
+    aspect: impf
+    en_gb:
+      standard: to shave (oneself with a razor)
+    collections:
+      - daily life
+    usage:
+      - ru: Оте́ц бре́ется ка́ждое у́тро.
+        en_gb: Father shaves every morning.
+      - ru: Я не люблю́ бри́ться.
+        en_gb: I don't like to shave.
+    conjugation:
+      present:
+        "1sg": бре́юсь
+        "2sg": бре́ешься
+        "3sg": бре́ется
+        "1pl": бре́емся
+        "2pl": бре́етесь
+        "3pl": бре́ются
+      past_m: бри́лся
+      past_f: бри́лась
+      past_n: бри́лось
+      past_pl: бри́лись
   "бродить=to wander":
     batteries: [motion]
     cefr_level: B1
@@ -768,6 +794,8 @@ words:
     en_gb:
       standard: to be (to exist or to equal)
     usage:
+      - ru: Мо́жет быть, за́втра бу́дет дождь.
+        en_gb: Maybe it will rain tomorrow.
       - ru: За́втра я бу́ду до́ма.
         en_gb: Tomorrow I will be at home.
       - ru: Вчера́ я был на рабо́те.
@@ -1939,6 +1967,32 @@ words:
         en_gb: If there were a chance, I would make use of it.
       - ru: За́втра мы воспо́льзуемся ски́дкой в магази́не.
         en_gb: Tomorrow we will make use of the discount in the shop.
+  "восстановить=to restore":
+    batteries: [work_study]
+    cefr_level: B2
+    accented: восстанови́ть
+    aspect: pf
+    en_gb:
+      standard: to restore (to bring back, repair)
+    collections:
+      - work
+    usage:
+      - ru: Я восстановлю́ паро́ль за́втра.
+        en_gb: I'll restore the password tomorrow.
+      - ru: Ма́стер восстанови́л ста́рую карти́ну.
+        en_gb: The craftsman restored the old painting.
+    conjugation:
+      future:
+        "1sg": восстановлю́
+        "2sg": восстано́вишь
+        "3sg": восстано́вит
+        "1pl": восстано́вим
+        "2pl": восстано́вите
+        "3pl": восстано́вят
+      past_m: восстанови́л
+      past_f: восстанови́ла
+      past_n: восстанови́ло
+      past_pl: восстанови́ли
   "врать=to lie":
     batteries: [communication]
     cefr_level: B1
@@ -2909,6 +2963,32 @@ words:
       past_f: вы́шла
       past_n: вы́шло
       past_pl: вы́шли
+  "выключить=to turn off":
+    batteries: [work_study]
+    cefr_level: A2
+    accented: вы́ключить
+    aspect: pf
+    en_gb:
+      standard: to turn off (a device or light)
+    collections:
+      - technology
+    usage:
+      - ru: Вы́ключи, пожа́луйста, свет.
+        en_gb: Please turn off the light.
+      - ru: Я вы́ключил компью́тер и лёг спать.
+        en_gb: I turned off the computer and went to bed.
+    conjugation:
+      future:
+        "1sg": вы́ключу
+        "2sg": вы́ключишь
+        "3sg": вы́ключит
+        "1pl": вы́ключим
+        "2pl": вы́ключите
+        "3pl": вы́ключат
+      past_m: вы́ключил
+      past_f: вы́ключила
+      past_n: вы́ключило
+      past_pl: вы́ключили
   "вылезть=to climb out":
     batteries: [motion]
     cefr_level: B1
@@ -5648,6 +5728,32 @@ words:
       past_f: жила́
       past_n: жи́ло
       past_pl: жи́ли
+  "заботиться=to take care":
+    batteries: [senses]
+    cefr_level: B2
+    accented: забо́титься
+    aspect: impf
+    en_gb:
+      standard: to take care (to look after someone)
+    collections:
+      - people
+    usage:
+      - ru: Она́ забо́тится о больно́й ма́тери.
+        en_gb: She takes care of her sick mother.
+      - ru: Роди́тели забо́тятся о де́тях.
+        en_gb: Parents take care of their children.
+    conjugation:
+      present:
+        "1sg": забо́чусь
+        "2sg": забо́тишься
+        "3sg": забо́тится
+        "1pl": забо́тимся
+        "2pl": забо́титесь
+        "3pl": забо́тятся
+      past_m: забо́тился
+      past_f: забо́тилась
+      past_n: забо́тилось
+      past_pl: забо́тились
   "забрать=to take away":
     batteries: [routine]
     cefr_level: B1
@@ -5806,6 +5912,32 @@ words:
         en_gb: Success will depend on your efforts.
       - ru: Я бы не зави́сел от чужо́го мне́ния.
         en_gb: I wouldn't depend on others' opinions.
+  "завтракать=to have breakfast":
+    batteries: [cooking]
+    cefr_level: A2
+    accented: за́втракать
+    aspect: impf
+    en_gb:
+      standard: to have breakfast
+    collections:
+      - food and drink
+    usage:
+      - ru: Мы за́втракаем в во́семь утра́.
+        en_gb: We have breakfast at eight in the morning.
+      - ru: Я обы́чно за́втракаю ка́шей.
+        en_gb: I usually have porridge for breakfast.
+    conjugation:
+      present:
+        "1sg": за́втракаю
+        "2sg": за́втракаешь
+        "3sg": за́втракает
+        "1pl": за́втракаем
+        "2pl": за́втракаете
+        "3pl": за́втракают
+      past_m: за́втракал
+      past_f: за́втракала
+      past_n: за́втракало
+      past_pl: за́втракали
   "заглядывать=to peep in":
     batteries: [routine]
     cefr_level: B1
@@ -5908,6 +6040,32 @@ words:
         en_gb: If they had asked him, he would have started speaking.
       - ru: Ско́ро ребёнок загово́рит це́лыми фра́зами.
         en_gb: Soon the child will start speaking in full phrases.
+  "загорать=to sunbathe":
+    batteries: [routine]
+    cefr_level: B1
+    accented: загора́ть
+    aspect: impf
+    en_gb:
+      standard: to sunbathe (to lie in the sun)
+    collections:
+      - holiday
+    usage:
+      - ru: Ле́том она́ лю́бит загора́ть на пля́же.
+        en_gb: In summer she likes to sunbathe on the beach.
+      - ru: Не загора́й сли́шком до́лго.
+        en_gb: Don't sunbathe too long.
+    conjugation:
+      present:
+        "1sg": загора́ю
+        "2sg": загора́ешь
+        "3sg": загора́ет
+        "1pl": загора́ем
+        "2pl": загора́ете
+        "3pl": загора́ют
+      past_m: загора́л
+      past_f: загора́ла
+      past_n: загора́ло
+      past_pl: загора́ли
   "задавать=to assign":
     batteries: [work_study]
     cefr_level: A2
@@ -6047,6 +6205,32 @@ words:
         en_gb: I would think hard about this.
       - ru: Ско́ро ты заду́маешься о бу́дущем.
         en_gb: Soon you'll start thinking about the future.
+  "зайти=to drop by":
+    batteries: [routine]
+    cefr_level: B1
+    accented: зайти́
+    aspect: pf
+    en_gb:
+      standard: to drop by (to call in briefly)
+    collections:
+      - daily life
+    usage:
+      - ru: Зайди́ ко мне по́сле рабо́ты.
+        en_gb: Drop by to see me after work.
+      - ru: Я зашёл в магази́н за хле́бом.
+        en_gb: I dropped into the shop for bread.
+    conjugation:
+      future:
+        "1sg": зайду́
+        "2sg": зайдёшь
+        "3sg": зайдёт
+        "1pl": зайдём
+        "2pl": зайдёте
+        "3pl": зайду́т
+      past_m: зашёл
+      past_f: зашла́
+      past_n: зашло́
+      past_pl: зашли́
   "заказать=to order":
     batteries: [cooking, society]
     cefr_level: A2
@@ -6081,6 +6265,32 @@ words:
         en_gb: I would order pizza if everyone agreed.
       - ru: Ско́ро мы зака́жем но́вую ме́бель.
         en_gb: Soon we'll order new furniture.
+  "заказывать=to order":
+    batteries: [cooking]
+    cefr_level: B1
+    accented: зака́зывать
+    aspect: impf
+    en_gb:
+      standard: to order (to ask for goods or food)
+    collections:
+      - restaurants and cafes
+    usage:
+      - ru: В кафе́ я зака́зываю ко́фе и торт.
+        en_gb: At the café I order coffee and cake.
+      - ru: Они́ зака́зывают пи́ццу по пя́тницам.
+        en_gb: They order pizza on Fridays.
+    conjugation:
+      present:
+        "1sg": зака́зываю
+        "2sg": зака́зываешь
+        "3sg": зака́зывает
+        "1pl": зака́зываем
+        "2pl": зака́зываете
+        "3pl": зака́зывают
+      past_m: зака́зывал
+      past_f: зака́зывала
+      past_n: зака́зывало
+      past_pl: зака́зывали
   "заканчивать=to finish":
     batteries: [work_study, routine]
     cefr_level: A2
@@ -6312,6 +6522,32 @@ words:
         en_gb: From tomorrow I'll be closing the shop earlier.
       - ru: Я бы закрыва́л окно́ на́ ночь.
         en_gb: I would close the window at night.
+  "закрываться=to close":
+    batteries: [routine]
+    cefr_level: B1
+    accented: закрыва́ться
+    aspect: impf
+    en_gb:
+      standard: to close (to shut, of itself)
+    collections:
+      - daily life
+    usage:
+      - ru: Магази́н закрыва́ется в де́сять вечера́.
+        en_gb: The shop closes at ten in the evening.
+      - ru: Дверь закрыва́ется ме́дленно.
+        en_gb: The door closes slowly.
+    conjugation:
+      present:
+        "1sg": закрыва́юсь
+        "2sg": закрыва́ешься
+        "3sg": закрыва́ется
+        "1pl": закрыва́емся
+        "2pl": закрыва́етесь
+        "3pl": закрыва́ются
+      past_m: закрыва́лся
+      past_f: закрыва́лась
+      past_n: закрыва́лось
+      past_pl: закрыва́лись
   "закрыть=to close":
     batteries: [routine]
     cefr_level: A2
@@ -6347,6 +6583,32 @@ words:
         en_gb: I would close the door, but I've lost the key.
       - ru: Ско́ро они́ закро́ют ста́рый заво́д.
         en_gb: Soon they'll close the old factory.
+  "закрыться=to shut":
+    batteries: [routine]
+    cefr_level: B1
+    accented: закры́ться
+    aspect: pf
+    en_gb:
+      standard: to shut (to become closed)
+    collections:
+      - daily life
+    usage:
+      - ru: Музе́й закро́ется че́рез час.
+        en_gb: The museum will close in an hour.
+      - ru: Окно́ закры́лось от ветра́.
+        en_gb: The window shut from the wind.
+    conjugation:
+      future:
+        "1sg": закро́юсь
+        "2sg": закро́ешься
+        "3sg": закро́ется
+        "1pl": закро́емся
+        "2pl": закро́етесь
+        "3pl": закро́ются
+      past_m: закры́лся
+      past_f: закры́лась
+      past_n: закры́лось
+      past_pl: закры́лись
   "закурить=to light up":
     batteries: [routine]
     cefr_level: B1
@@ -6828,6 +7090,32 @@ words:
         en_gb: I would write down the address if I had a pen.
       - ru: Ско́ро секрета́рь запи́шет реше́ние.
         en_gb: Soon the secretary will write down the decision.
+  "записывать=to write down":
+    batteries: [communication]
+    cefr_level: B1
+    accented: запи́сывать
+    aspect: impf
+    en_gb:
+      standard: to write down (to note or record)
+    collections:
+      - communication
+    usage:
+      - ru: Студе́нт запи́сывает слова́ учи́теля.
+        en_gb: The student writes down the teacher's words.
+      - ru: Я запи́сываю ва́жные мы́сли в блокно́т.
+        en_gb: I write down important thoughts in a notebook.
+    conjugation:
+      present:
+        "1sg": запи́сываю
+        "2sg": запи́сываешь
+        "3sg": запи́сывает
+        "1pl": запи́сываем
+        "2pl": запи́сываете
+        "3pl": запи́сывают
+      past_m: запи́сывал
+      past_f: запи́сывала
+      past_n: запи́сывало
+      past_pl: запи́сывали
   "заплакать=to start crying":
     batteries: [senses]
     cefr_level: B1
@@ -6999,6 +7287,33 @@ words:
       past_f: запреща́ла
       past_n: запреща́ло
       past_pl: запреща́ли
+  "запустить=to launch":
+    batteries: [work_study]
+    cefr_level: B2
+    accented: запусти́ть
+    aspect: pf
+    en_gb:
+      standard: to launch (to start, e.g. a rocket or program)
+    collections:
+      - technology
+      - science
+    usage:
+      - ru: Компа́ния запу́стит но́вый сайт весно́й.
+        en_gb: The company will launch a new website in spring.
+      - ru: Инжене́ры запусти́ли раке́ту.
+        en_gb: The engineers launched the rocket.
+    conjugation:
+      future:
+        "1sg": запущу́
+        "2sg": запу́стишь
+        "3sg": запу́стит
+        "1pl": запу́стим
+        "2pl": запу́стите
+        "3pl": запу́стят
+      past_m: запусти́л
+      past_f: запусти́ла
+      past_n: запусти́ло
+      past_pl: запусти́ли
   "зарабатывать=to earn":
     batteries: [society, work_study]
     cefr_level: B1
@@ -7599,6 +7914,10 @@ words:
       past_n: зва́ло
       past_pl: зва́ли
     usage:
+      - ru: Как тебя́ зову́т?
+        en_gb: What is your name? (informal)
+      - ru: Как вас зову́т?
+        en_gb: What is your name?
       - ru: Ма́ма зовёт нас обе́дать.
         en_gb: Mum is calling us to lunch.
       - ru: Я зову́ дру́га на по́мощь.
@@ -8073,6 +8392,8 @@ words:
       past_n: име́ло
       past_pl: име́ли
     usage:
+      - ru: У меня́ есть вопро́с.
+        en_gb: I have a question.
       - ru: Она́ име́ет большо́й о́пыт.
         en_gb: She has a lot of experience.
       - ru: Мы име́ем пра́во на о́тдых.
@@ -9089,6 +9410,32 @@ words:
         en_gb: I would have shouted if I had seen danger.
       - ru: Она́ кри́кнет тебе́ из окна́.
         en_gb: She will shout to you from the window.
+  "критиковать=to criticize":
+    batteries: [communication]
+    cefr_level: B2
+    accented: критикова́ть
+    aspect: impf
+    en_gb:
+      standard: to criticize (to find fault with)
+    collections:
+      - communication
+    usage:
+      - ru: Не критику́й други́х без причи́ны.
+        en_gb: Don't criticize others without reason.
+      - ru: Газе́ты критику́ют но́вый зако́н.
+        en_gb: The newspapers criticize the new law.
+    conjugation:
+      present:
+        "1sg": критику́ю
+        "2sg": критику́ешь
+        "3sg": критику́ет
+        "1pl": критику́ем
+        "2pl": критику́ете
+        "3pl": критику́ют
+      past_m: критикова́л
+      past_f: критикова́ла
+      past_n: критикова́ло
+      past_pl: критикова́ли
   "кричать=to shout":
     batteries: [communication]
     cefr_level: A2
@@ -9995,6 +10342,32 @@ words:
       past_f: мы́ла
       past_n: мы́ло
       past_pl: мы́ли
+  "мыться=to wash":
+    batteries: [routine]
+    cefr_level: B1
+    accented: мы́ться
+    aspect: impf
+    en_gb:
+      standard: to wash (oneself)
+    collections:
+      - daily life
+    usage:
+      - ru: Де́ти мо́ются пе́ред сном.
+        en_gb: The children wash before bed.
+      - ru: Я мо́юсь тёплой водо́й.
+        en_gb: I wash with warm water.
+    conjugation:
+      present:
+        "1sg": мо́юсь
+        "2sg": мо́ешься
+        "3sg": мо́ется
+        "1pl": мо́емся
+        "2pl": мо́етесь
+        "3pl": мо́ются
+      past_m: мы́лся
+      past_f: мы́лась
+      past_n: мы́лось
+      past_pl: мы́лись
   "наблюдать=to observe":
     batteries: [routine]
     cefr_level: B1
@@ -10066,6 +10439,32 @@ words:
         en_gb: I would have gathered mushrooms if I had gone to the forest.
       - ru: Они́ наберу́т кома́нду к ле́ту.
         en_gb: They will recruit a team by summer.
+  "надевать=to put on":
+    batteries: [routine]
+    cefr_level: B1
+    accented: надева́ть
+    aspect: impf
+    en_gb:
+      standard: to put on (clothing)
+    collections:
+      - clothes
+    usage:
+      - ru: Я надева́ю ку́ртку, когда́ хо́лодно.
+        en_gb: I put on a jacket when it's cold.
+      - ru: Надева́й ша́пку, на у́лице моро́з.
+        en_gb: Put on a hat, it's freezing outside.
+    conjugation:
+      present:
+        "1sg": надева́ю
+        "2sg": надева́ешь
+        "3sg": надева́ет
+        "1pl": надева́ем
+        "2pl": надева́ете
+        "3pl": надева́ют
+      past_m: надева́л
+      past_f: надева́ла
+      past_n: надева́ло
+      past_pl: надева́ли
   "надеть=to put on":
     batteries: [routine]
     cefr_level: A2
@@ -10465,6 +10864,32 @@ words:
         en_gb: I would pour you coffee if there were any.
       - ru: Официа́нт нальёт вино́ в бока́лы.
         en_gb: The waiter will pour wine into the glasses.
+  "напечатать=to print":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: напеча́тать
+    aspect: pf
+    en_gb:
+      standard: to print (to produce on paper; to type)
+    collections:
+      - technology
+    usage:
+      - ru: Я напеча́таю письмо́ и отпра́влю его́.
+        en_gb: I'll print the letter and send it.
+      - ru: Она́ напеча́тала дли́нный отчёт.
+        en_gb: She printed a long report.
+    conjugation:
+      future:
+        "1sg": напеча́таю
+        "2sg": напеча́таешь
+        "3sg": напеча́тает
+        "1pl": напеча́таем
+        "2pl": напеча́таете
+        "3pl": напеча́тают
+      past_m: напеча́тал
+      past_f: напеча́тала
+      past_n: напеча́тало
+      past_pl: напеча́тали
   "написать=to write":
     batteries: [work_study, communication]
     cefr_level: A1
@@ -10636,6 +11061,58 @@ words:
         en_gb: After lunch I would head home.
       - ru: За́втра гру́ппа напра́вится в столи́цу.
         en_gb: Tomorrow the group will head to the capital.
+  "нарезать=to slice":
+    batteries: [cooking]
+    cefr_level: B1
+    accented: наре́зать
+    aspect: pf
+    en_gb:
+      standard: to slice (to cut into pieces)
+    collections:
+      - food and drink
+    usage:
+      - ru: Наре́жь хлеб то́нкими куска́ми.
+        en_gb: Slice the bread into thin pieces.
+      - ru: Ма́ма наре́зала о́вощи для сала́та.
+        en_gb: Mum sliced the vegetables for the salad.
+    conjugation:
+      future:
+        "1sg": наре́жу
+        "2sg": наре́жешь
+        "3sg": наре́жет
+        "1pl": наре́жем
+        "2pl": наре́жете
+        "3pl": наре́жут
+      past_m: наре́зал
+      past_f: наре́зала
+      past_n: наре́зало
+      past_pl: наре́зали
+  "нарисовать=to draw":
+    batteries: [communication]
+    cefr_level: A2
+    accented: нарисова́ть
+    aspect: pf
+    en_gb:
+      standard: to draw (to make a picture)
+    collections:
+      - the arts
+    usage:
+      - ru: Ребёнок нарисова́л дом и со́лнце.
+        en_gb: The child drew a house and the sun.
+      - ru: Нарису́й мне ка́рту, пожа́луйста.
+        en_gb: Draw me a map, please.
+    conjugation:
+      future:
+        "1sg": нарису́ю
+        "2sg": нарису́ешь
+        "3sg": нарису́ет
+        "1pl": нарису́ем
+        "2pl": нарису́ете
+        "3pl": нарису́ют
+      past_m: нарисова́л
+      past_f: нарисова́ла
+      past_n: нарисова́ло
+      past_pl: нарисова́ли
   "нарушить=to violate":
     batteries: [society]
     cefr_level: B1
@@ -11817,6 +12294,32 @@ words:
         en_gb: I will address you by your name.
       - ru: Я бы обраща́лся с ним мя́гче.
         en_gb: I would treat him more gently.
+  "обсудить=to discuss":
+    batteries: [communication]
+    cefr_level: B1
+    accented: обсуди́ть
+    aspect: pf
+    en_gb:
+      standard: to discuss (to talk something over)
+    collections:
+      - communication
+    usage:
+      - ru: Дава́й обсу́дим э́тот вопро́с за́втра.
+        en_gb: Let's discuss this question tomorrow.
+      - ru: Мы обсуди́ли план на собра́нии.
+        en_gb: We discussed the plan at the meeting.
+    conjugation:
+      future:
+        "1sg": обсужу́
+        "2sg": обсу́дишь
+        "3sg": обсу́дит
+        "1pl": обсу́дим
+        "2pl": обсу́дите
+        "3pl": обсу́дят
+      past_m: обсуди́л
+      past_f: обсуди́ла
+      past_n: обсуди́ло
+      past_pl: обсуди́ли
   "обсуждать=to discuss":
     batteries: [communication]
     cefr_level: B1
@@ -12261,6 +12764,32 @@ words:
         en_gb: His advice will turn out to be useful.
       - ru: На твоём ме́сте я бы ока́зывался гото́в.
         en_gb: In your place I would turn out to be ready.
+  "окончить=to graduate":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: око́нчить
+    aspect: pf
+    en_gb:
+      standard: to finish (to complete, e.g. a course)
+    collections:
+      - study
+    usage:
+      - ru: Он око́нчит университе́т че́рез год.
+        en_gb: He will graduate from university in a year.
+      - ru: Она́ око́нчила шко́лу с золото́й меда́лью.
+        en_gb: She finished school with a gold medal.
+    conjugation:
+      future:
+        "1sg": око́нчу
+        "2sg": око́нчишь
+        "3sg": око́нчит
+        "1pl": око́нчим
+        "2pl": око́нчите
+        "3pl": око́нчат
+      past_m: око́нчил
+      past_f: око́нчила
+      past_n: око́нчило
+      past_pl: око́нчили
   "окружить=to surround":
     batteries: [society, motion]
     cefr_level: B1
@@ -12364,6 +12893,58 @@ words:
         en_gb: I would describe this differently.
       - ru: За́втра писа́тель опи́шет свой путь.
         en_gb: Tomorrow the writer will describe his journey.
+  "описывать=to describe":
+    batteries: [communication]
+    cefr_level: B1
+    accented: опи́сывать
+    aspect: impf
+    en_gb:
+      standard: to describe (to give details of)
+    collections:
+      - communication
+    usage:
+      - ru: А́втор опи́сывает жизнь в дере́вне.
+        en_gb: The author describes life in the village.
+      - ru: Свиде́тель опи́сывает престу́пника.
+        en_gb: The witness describes the criminal.
+    conjugation:
+      present:
+        "1sg": опи́сываю
+        "2sg": опи́сываешь
+        "3sg": опи́сывает
+        "1pl": опи́сываем
+        "2pl": опи́сываете
+        "3pl": опи́сывают
+      past_m: опи́сывал
+      past_f: опи́сывала
+      past_n: опи́сывало
+      past_pl: опи́сывали
+  "опоздать=to be late":
+    batteries: [routine]
+    cefr_level: B1
+    accented: опозда́ть
+    aspect: pf
+    en_gb:
+      standard: to be late (to arrive after the time)
+    collections:
+      - time
+    usage:
+      - ru: Я бою́сь опозда́ть на по́езд.
+        en_gb: I'm afraid of being late for the train.
+      - ru: Он опозда́л на рабо́ту и́з-за про́бки.
+        en_gb: He was late for work because of a traffic jam.
+    conjugation:
+      future:
+        "1sg": опозда́ю
+        "2sg": опозда́ешь
+        "3sg": опозда́ет
+        "1pl": опозда́ем
+        "2pl": опозда́ете
+        "3pl": опозда́ют
+      past_m: опозда́л
+      past_f: опозда́ла
+      past_n: опозда́ло
+      past_pl: опозда́ли
   "определить=to determine":
     batteries: [work_study]
     cefr_level: B1
@@ -12640,6 +13221,32 @@ words:
         en_gb: I would free the bird from the cage.
       - ru: Ско́ро рабо́чие освободя́т прохо́д.
         en_gb: Soon the workers will clear the passage.
+  "осматривать=to examine":
+    batteries: [routine]
+    cefr_level: B2
+    accented: осма́тривать
+    aspect: impf
+    en_gb:
+      standard: to examine (to look over carefully)
+    collections:
+      - health
+    usage:
+      - ru: Врач осма́тривает больно́го.
+        en_gb: The doctor examines the patient.
+      - ru: Тури́сты осма́тривают ста́рый замо́к.
+        en_gb: The tourists examine the old castle.
+    conjugation:
+      present:
+        "1sg": осма́триваю
+        "2sg": осма́триваешь
+        "3sg": осма́тривает
+        "1pl": осма́триваем
+        "2pl": осма́триваете
+        "3pl": осма́тривают
+      past_m: осма́тривал
+      past_f: осма́тривала
+      past_n: осма́тривало
+      past_pl: осма́тривали
   "осмотреть=to examine":
     batteries: [routine, work_study]
     cefr_level: B1
@@ -13934,6 +14541,32 @@ words:
         en_gb: Horror would seize me in your place.
       - ru: Ско́ро рефо́рма охва́тит всю страну́.
         en_gb: Soon the reform will encompass the whole country.
+  "охотиться=to hunt":
+    batteries: [motion]
+    cefr_level: B2
+    accented: охо́титься
+    aspect: impf
+    en_gb:
+      standard: to hunt (to chase wild animals)
+    collections:
+      - nature
+    usage:
+      - ru: Во́лки охо́тятся но́чью.
+        en_gb: Wolves hunt at night.
+      - ru: Кот охо́тится на мыше́й.
+        en_gb: The cat hunts mice.
+    conjugation:
+      present:
+        "1sg": охо́чусь
+        "2sg": охо́тишься
+        "3sg": охо́тится
+        "1pl": охо́тимся
+        "2pl": охо́титесь
+        "3pl": охо́тятся
+      past_m: охо́тился
+      past_f: охо́тилась
+      past_n: охо́тилось
+      past_pl: охо́тились
   "оценить=to evaluate":
     batteries: [society, work_study]
     cefr_level: B1
@@ -14370,6 +15003,32 @@ words:
         en_gb: I would translate this differently.
       - ru: Ско́ро она́ переведёт после́днюю главу́.
         en_gb: Soon she will translate the last chapter.
+  "переводить=to translate":
+    batteries: [communication]
+    cefr_level: B1
+    accented: переводи́ть
+    aspect: impf
+    en_gb:
+      standard: to translate (to put into another language)
+    collections:
+      - communication
+    usage:
+      - ru: Она́ перево́дит кни́ги с англи́йского.
+        en_gb: She translates books from English.
+      - ru: Переведи́ э́то сло́во на ру́сский.
+        en_gb: Translate this word into Russian.
+    conjugation:
+      present:
+        "1sg": перевожу́
+        "2sg": перево́дишь
+        "3sg": перево́дит
+        "1pl": перево́дим
+        "2pl": перево́дите
+        "3pl": перево́дят
+      past_m: переводи́л
+      past_f: переводи́ла
+      past_n: переводи́ло
+      past_pl: переводи́ли
   "передавать=to pass on":
     batteries: [communication]
     cefr_level: B1
@@ -14436,6 +15095,32 @@ words:
         en_gb: I would pass on your words to him.
       - ru: Ско́ро курье́р переда́ст докуме́нты.
         en_gb: Soon the courier will hand over the documents.
+  "передумать=to change one's mind":
+    batteries: [communication]
+    cefr_level: B1
+    accented: переду́мать
+    aspect: pf
+    en_gb:
+      standard: to change one's mind
+    collections:
+      - communication
+    usage:
+      - ru: Я хоте́л уйти́, но переду́мал.
+        en_gb: I wanted to leave, but I changed my mind.
+      - ru: Е́сли переду́маешь, позвони́ мне.
+        en_gb: If you change your mind, call me.
+    conjugation:
+      future:
+        "1sg": переду́маю
+        "2sg": переду́маешь
+        "3sg": переду́мает
+        "1pl": переду́маем
+        "2pl": переду́маете
+        "3pl": переду́мают
+      past_m: переду́мал
+      past_f: переду́мала
+      past_n: переду́мало
+      past_pl: переду́мали
   "переживать=to experience":
     batteries: [senses]
     cefr_level: B1
@@ -14502,6 +15187,32 @@ words:
         en_gb: I would get through this more calmly.
       - ru: Ско́ро мы переживём тру́дные дни.
         en_gb: Soon we will live through the hard days.
+  "перезвонить=to call back":
+    batteries: [communication]
+    cefr_level: B1
+    accented: перезвони́ть
+    aspect: pf
+    en_gb:
+      standard: to call back (to phone again)
+    collections:
+      - communication
+    usage:
+      - ru: Я перезвоню́ тебе́ че́рез час.
+        en_gb: I'll call you back in an hour.
+      - ru: Перезвони́ мне, когда́ освободи́шься.
+        en_gb: Call me back when you're free.
+    conjugation:
+      future:
+        "1sg": перезвоню́
+        "2sg": перезвони́шь
+        "3sg": перезвони́т
+        "1pl": перезвони́м
+        "2pl": перезвони́те
+        "3pl": перезвоня́т
+      past_m: перезвони́л
+      past_f: перезвони́ла
+      past_n: перезвони́ло
+      past_pl: перезвони́ли
   "перейти=to cross":
     batteries: [motion]
     cefr_level: B1
@@ -15070,6 +15781,32 @@ words:
       past_f: побежда́ла
       past_n: побежда́ло
       past_pl: побежда́ли
+  "поблагодарить=to thank":
+    batteries: [communication]
+    cefr_level: B1
+    accented: поблагодари́ть
+    aspect: pf
+    en_gb:
+      standard: to thank (to express gratitude)
+    collections:
+      - communication
+    usage:
+      - ru: Я хочу́ поблагодари́ть вас за по́мощь.
+        en_gb: I want to thank you for your help.
+      - ru: Она́ поблагодари́ла учи́теля.
+        en_gb: She thanked the teacher.
+    conjugation:
+      future:
+        "1sg": поблагодарю́
+        "2sg": поблагодари́шь
+        "3sg": поблагодари́т
+        "1pl": поблагодари́м
+        "2pl": поблагодари́те
+        "3pl": поблагодаря́т
+      past_m: поблагодари́л
+      past_f: поблагодари́ла
+      past_n: поблагодари́ло
+      past_pl: поблагодари́ли
   "побывать=to visit":
     batteries: [motion]
     cefr_level: B1
@@ -15992,6 +16729,8 @@ words:
     en_gb:
       standard: to think (to give something some thought)
     usage:
+      - ru: Он отве́тил, не поду́мав.
+        en_gb: He answered without thinking.
       - ru: Я поду́маю об э́том.
         en_gb: I will think about it.
       - ru: Поду́май хороше́нько, пре́жде чем отвеча́ть.
@@ -16209,6 +16948,32 @@ words:
         en_gb: I would gladly shake his hand.
       - ru: При встре́че мы пожмём друг дру́гу ру́ки.
         en_gb: When we meet we will shake hands.
+  "позавтракать=to have breakfast":
+    batteries: [cooking]
+    cefr_level: A2
+    accented: поза́втракать
+    aspect: pf
+    en_gb:
+      standard: to have breakfast
+    collections:
+      - food and drink
+    usage:
+      - ru: Я поза́втракал и пое́хал на рабо́ту.
+        en_gb: I had breakfast and went to work.
+      - ru: Поза́втракай пе́ред уро́ками.
+        en_gb: Have breakfast before your lessons.
+    conjugation:
+      future:
+        "1sg": поза́втракаю
+        "2sg": поза́втракаешь
+        "3sg": поза́втракает
+        "1pl": поза́втракаем
+        "2pl": поза́втракаете
+        "3pl": поза́втракают
+      past_m: поза́втракал
+      past_f: поза́втракала
+      past_n: поза́втракало
+      past_pl: поза́втракали
   "позвать=to call":
     batteries: [communication]
     cefr_level: A2
@@ -16349,6 +17114,32 @@ words:
       past_f: позвони́ла
       past_n: позвони́ло
       past_pl: позвони́ли
+  "поздравлять=to congratulate":
+    batteries: [communication]
+    cefr_level: B1
+    accented: поздравля́ть
+    aspect: impf
+    en_gb:
+      standard: to congratulate (to wish someone well)
+    collections:
+      - communication
+    usage:
+      - ru: Мы поздравля́ем тебя́ с днём рожде́ния!
+        en_gb: We congratulate you on your birthday!
+      - ru: Друзья́ поздравля́ют его́ с побе́дой.
+        en_gb: His friends congratulate him on the victory.
+    conjugation:
+      present:
+        "1sg": поздравля́ю
+        "2sg": поздравля́ешь
+        "3sg": поздравля́ет
+        "1pl": поздравля́ем
+        "2pl": поздравля́ете
+        "3pl": поздравля́ют
+      past_m: поздравля́л
+      past_f: поздравля́ла
+      past_n: поздравля́ло
+      past_pl: поздравля́ли
   "познакомиться=to get acquainted":
     batteries: [communication]
     cefr_level: A1
@@ -17517,6 +18308,32 @@ words:
       past_f: поняла́
       past_n: по́няло
       past_pl: по́няли
+  "пообедать=to have lunch":
+    batteries: [cooking]
+    cefr_level: A2
+    accented: пообе́дать
+    aspect: pf
+    en_gb:
+      standard: to have lunch
+    collections:
+      - food and drink
+    usage:
+      - ru: Дава́й пообе́даем в э́том кафе́.
+        en_gb: Let's have lunch in this café.
+      - ru: Мы пообе́дали и пошли́ гуля́ть.
+        en_gb: We had lunch and went for a walk.
+    conjugation:
+      future:
+        "1sg": пообе́даю
+        "2sg": пообе́даешь
+        "3sg": пообе́дает
+        "1pl": пообе́даем
+        "2pl": пообе́даете
+        "3pl": пообе́дают
+      past_m: пообе́дал
+      past_f: пообе́дала
+      past_n: пообе́дало
+      past_pl: пообе́дали
   "пообещать=to promise":
     batteries: [communication]
     cefr_level: A2
@@ -18218,6 +19035,32 @@ words:
         en_gb: I would try hard to get everything done.
       - ru: Ско́ро де́ти постара́ются вы́учить стихи́.
         en_gb: Soon the children will try hard to learn the poem.
+  "постирать=to do laundry":
+    batteries: [routine]
+    cefr_level: B1
+    accented: постира́ть
+    aspect: pf
+    en_gb:
+      standard: to wash (clothes), to do laundry
+    collections:
+      - daily life
+    usage:
+      - ru: Мне ну́жно постира́ть руба́шку.
+        en_gb: I need to wash a shirt.
+      - ru: Она́ постира́ла всё бельё.
+        en_gb: She washed all the laundry.
+    conjugation:
+      future:
+        "1sg": постира́ю
+        "2sg": постира́ешь
+        "3sg": постира́ет
+        "1pl": постира́ем
+        "2pl": постира́ете
+        "3pl": постира́ют
+      past_m: постира́л
+      past_f: постира́ла
+      past_n: постира́ло
+      past_pl: постира́ли
   "построить=to build":
     batteries: [work_study]
     cefr_level: A2
@@ -18419,6 +19262,32 @@ words:
         en_gb: Soon you will lose interest in this game.
       - ru: Без па́пки я бы потеря́л все докуме́нты.
         en_gb: Without a folder I would lose all the documents.
+  "потратить=to spend":
+    batteries: [society]
+    cefr_level: B1
+    accented: потра́тить
+    aspect: pf
+    en_gb:
+      standard: to spend (money or time)
+    collections:
+      - shopping
+    usage:
+      - ru: Я потра́тил всё де́ньги на кни́ги.
+        en_gb: I spent all my money on books.
+      - ru: Не трать сто́лько вре́мени на и́гры.
+        en_gb: Don't spend so much time on games.
+    conjugation:
+      future:
+        "1sg": потра́чу
+        "2sg": потра́тишь
+        "3sg": потра́тит
+        "1pl": потра́тим
+        "2pl": потра́тите
+        "3pl": потра́тят
+      past_m: потра́тил
+      past_f: потра́тила
+      past_n: потра́тило
+      past_pl: потра́тили
   "потребовать=to demand":
     batteries: [communication, society]
     cefr_level: B1
@@ -18626,6 +19495,32 @@ words:
         en_gb: I would kiss you goodbye.
       - ru: Ско́ро ма́ма поцелу́ет дочь пе́ред сном.
         en_gb: Soon mum will kiss her daughter before bed.
+  "поцеловаться=to kiss":
+    batteries: [senses]
+    cefr_level: B1
+    accented: поцелова́ться
+    aspect: pf
+    en_gb:
+      standard: to kiss (each other)
+    collections:
+      - feelings
+    usage:
+      - ru: На проща́ние они́ поцелова́лись.
+        en_gb: They kissed goodbye.
+      - ru: Молоды́е лю́ди поцелова́лись.
+        en_gb: The young people kissed.
+    conjugation:
+      future:
+        "1sg": поцелу́юсь
+        "2sg": поцелу́ешься
+        "3sg": поцелу́ется
+        "1pl": поцелу́емся
+        "2pl": поцелу́етесь
+        "3pl": поцелу́ются
+      past_m: поцелова́лся
+      past_f: поцелова́лась
+      past_n: поцелова́лось
+      past_pl: поцелова́лись
   "почувствовать=to feel":
     batteries: [senses]
     cefr_level: A2
@@ -19226,6 +20121,32 @@ words:
         en_gb: Soon I will put a stop to these arguments.
       - ru: Он бы прекрати́л шум, е́сли бы мог.
         en_gb: He would stop the noise if he could.
+  "преподавать=to teach":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: преподава́ть
+    aspect: impf
+    en_gb:
+      standard: to teach (at a school or university)
+    collections:
+      - study
+    usage:
+      - ru: Она́ преподаёт ру́сский язы́к в шко́ле.
+        en_gb: She teaches Russian at school.
+      - ru: Профе́ссор преподаёт уже́ два́дцать лет.
+        en_gb: The professor has been teaching for twenty years.
+    conjugation:
+      present:
+        "1sg": преподаю́
+        "2sg": преподаёшь
+        "3sg": преподаёт
+        "1pl": преподаём
+        "2pl": преподаёте
+        "3pl": преподаю́т
+      past_m: преподава́л
+      past_f: преподава́ла
+      past_n: преподава́ло
+      past_pl: преподава́ли
   "прервать=to interrupt":
     batteries: [communication]
     cefr_level: B1
@@ -19848,6 +20769,32 @@ words:
         en_gb: I will cover the door against the draught now.
       - ru: Она́ бы прикры́ла окно́ от со́лнца.
         en_gb: She would cover the window from the sun.
+  "прилететь=to arrive by air":
+    batteries: [motion]
+    cefr_level: B1
+    accented: прилете́ть
+    aspect: pf
+    en_gb:
+      standard: to arrive by air (to fly in)
+    collections:
+      - travel
+    usage:
+      - ru: Самолёт прилети́т в по́лдень.
+        en_gb: The plane will arrive at noon.
+      - ru: Го́сти прилете́ли из Москвы́.
+        en_gb: The guests arrived from Moscow.
+    conjugation:
+      future:
+        "1sg": прилечу́
+        "2sg": прилети́шь
+        "3sg": прилети́т
+        "1pl": прилети́м
+        "2pl": прилети́те
+        "3pl": прилетя́т
+      past_m: прилете́л
+      past_f: прилете́ла
+      past_n: прилете́ло
+      past_pl: прилете́ли
   "применить=to apply":
     batteries: [work_study]
     cefr_level: B1
@@ -20342,6 +21289,32 @@ words:
         en_gb: I would sew on the button if I found a needle.
       - ru: За́втра я пришью́ наши́вку к фо́рме.
         en_gb: Tomorrow I will sew the badge onto the uniform.
+  "пробежать=to run":
+    batteries: [sport]
+    cefr_level: B1
+    accented: пробежа́ть
+    aspect: pf
+    en_gb:
+      standard: to run (a distance, quickly)
+    collections:
+      - sport
+    usage:
+      - ru: Спортсме́н пробежа́л де́сять киломе́тров.
+        en_gb: The athlete ran ten kilometres.
+      - ru: Я пробегу́ э́тот путь за час.
+        en_gb: I'll run this route in an hour.
+    conjugation:
+      future:
+        "1sg": пробегу́
+        "2sg": пробежи́шь
+        "3sg": пробежи́т
+        "1pl": пробежи́м
+        "2pl": пробежи́те
+        "3pl": пробегу́т
+      past_m: пробежа́л
+      past_f: пробежа́ла
+      past_n: пробежа́ло
+      past_pl: пробежа́ли
   "пробовать=to try":
     batteries: [cooking, routine]
     cefr_level: A2
@@ -20630,6 +21603,32 @@ words:
       past_f: продава́ла
       past_n: продава́ло
       past_pl: продава́ли
+  "продаваться=to be sold":
+    batteries: [society]
+    cefr_level: B2
+    accented: продава́ться
+    aspect: impf
+    en_gb:
+      standard: to be sold (to be on sale)
+    collections:
+      - shopping
+    usage:
+      - ru: Э́тот дом продаётся уже́ год.
+        en_gb: This house has been for sale for a year.
+      - ru: Биле́ты продаю́тся в ка́ссе.
+        en_gb: The tickets are sold at the box office.
+    conjugation:
+      present:
+        "1sg": продаю́сь
+        "2sg": продаёшься
+        "3sg": продаётся
+        "1pl": продаёмся
+        "2pl": продаётесь
+        "3pl": продаю́тся
+      past_m: продава́лся
+      past_f: продава́лась
+      past_n: продава́лось
+      past_pl: продава́лись
   "продать=to sell":
     batteries: [society]
     cefr_level: A2
@@ -20759,6 +21758,32 @@ words:
         en_gb: Tomorrow I will continue reading the novel.
       - ru: Она́ бы продо́лжила расска́з, но усну́ла.
         en_gb: She would continue the story, but she fell asleep.
+  "проехать=to drive past":
+    batteries: [motion]
+    cefr_level: B1
+    accented: прое́хать
+    aspect: pf
+    en_gb:
+      standard: to drive past (or through a place)
+    collections:
+      - travel
+    usage:
+      - ru: Мы прое́хали ми́мо ста́рой це́ркви.
+        en_gb: We drove past the old church.
+      - ru: Маши́на прое́хала че́рез мост.
+        en_gb: The car drove across the bridge.
+    conjugation:
+      future:
+        "1sg": прое́ду
+        "2sg": прое́дешь
+        "3sg": прое́дет
+        "1pl": прое́дем
+        "2pl": прое́дете
+        "3pl": прое́дут
+      past_m: прое́хал
+      past_f: прое́хала
+      past_n: прое́хало
+      past_pl: прое́хали
   "прожить=to live":
     batteries: [routine]
     cefr_level: B1
@@ -20789,6 +21814,32 @@ words:
         en_gb: I will spend the summer living at my grandmother's.
       - ru: Он бы про́жил до́льше, е́сли бы бере́г здоро́вье.
         en_gb: He would live longer if he looked after his health.
+  "проиграть=to lose":
+    batteries: [sport]
+    cefr_level: B1
+    accented: проигра́ть
+    aspect: pf
+    en_gb:
+      standard: to lose (a game); to play (through)
+    collections:
+      - sport
+    usage:
+      - ru: На́ша кома́нда проигра́ла матч.
+        en_gb: Our team lost the match.
+      - ru: Е́сли проигра́ешь, не расстра́ивайся.
+        en_gb: If you lose, don't be upset.
+    conjugation:
+      future:
+        "1sg": проигра́ю
+        "2sg": проигра́ешь
+        "3sg": проигра́ет
+        "1pl": проигра́ем
+        "2pl": проигра́ете
+        "3pl": проигра́ют
+      past_m: проигра́л
+      past_f: проигра́ла
+      past_n: проигра́ло
+      past_pl: проигра́ли
   "произвести=to produce":
     batteries: [work_study]
     cefr_level: B2
@@ -21161,6 +22212,32 @@ words:
       past_f: просну́лась
       past_n: просну́лось
       past_pl: просну́лись
+  "проспать=to oversleep":
+    batteries: [routine]
+    cefr_level: B1
+    accented: проспа́ть
+    aspect: pf
+    en_gb:
+      standard: to oversleep (to sleep too long)
+    collections:
+      - daily life
+    usage:
+      - ru: Я проспа́л и опозда́л на рабо́ту.
+        en_gb: I overslept and was late for work.
+      - ru: Не проспи́ за́втра экза́мен!
+        en_gb: Don't oversleep your exam tomorrow!
+    conjugation:
+      future:
+        "1sg": просплю́
+        "2sg": проспи́шь
+        "3sg": проспи́т
+        "1pl": проспи́м
+        "2pl": проспи́те
+        "3pl": проспя́т
+      past_m: проспа́л
+      past_f: проспа́ла
+      past_n: проспа́ло
+      past_pl: проспа́ли
   "простить=to forgive":
     batteries: [senses]
     cefr_level: B1
@@ -21996,6 +23073,32 @@ words:
         en_gb: The children get undressed before bed.
       - ru: Она́ раздева́ется ме́дленно.
         en_gb: She undresses slowly.
+  "разделить=to divide":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: раздели́ть
+    aspect: pf
+    en_gb:
+      standard: to divide (to split or share)
+    collections:
+      - science
+    usage:
+      - ru: Раздели́ пиро́г на шесть часте́й.
+        en_gb: Divide the pie into six parts.
+      - ru: Учи́тель раздели́л класс на гру́ппы.
+        en_gb: The teacher divided the class into groups.
+    conjugation:
+      future:
+        "1sg": разделю́
+        "2sg": разде́лишь
+        "3sg": разде́лит
+        "1pl": разде́лим
+        "2pl": разде́лите
+        "3pl": разде́лят
+      past_m: раздели́л
+      past_f: раздели́ла
+      past_n: раздели́ло
+      past_pl: раздели́ли
   "разделиться=to divide":
     batteries: [routine]
     cefr_level: B1
@@ -22152,6 +23255,33 @@ words:
         en_gb: After the concert we will part and go home.
       - ru: Го́сти разошли́сь бы ра́ньше без му́зыки.
         en_gb: The guests would part earlier without the music.
+  "разработать=to develop":
+    batteries: [work_study]
+    cefr_level: B2
+    accented: разрабо́тать
+    aspect: pf
+    en_gb:
+      standard: to develop (to create or design)
+    collections:
+      - work
+      - technology
+    usage:
+      - ru: Кома́нда разрабо́тала но́вую програ́мму.
+        en_gb: The team developed a new program.
+      - ru: Мы разрабо́таем план на неде́лю.
+        en_gb: We'll develop a plan for the week.
+    conjugation:
+      future:
+        "1sg": разрабо́таю
+        "2sg": разрабо́таешь
+        "3sg": разрабо́тает
+        "1pl": разрабо́таем
+        "2pl": разрабо́таете
+        "3pl": разрабо́тают
+      past_m: разрабо́тал
+      past_f: разрабо́тала
+      past_n: разрабо́тало
+      past_pl: разрабо́тали
   "разрешать=to allow":
     batteries: [society, routine]
     cefr_level: B1
@@ -22609,6 +23739,32 @@ words:
         en_gb: The enemies will shoot the hostages soon.
       - ru: Без суда́ они́ бы расстреля́ли всех.
         en_gb: Without a trial they would have shot everyone.
+  "расстроиться=to get upset":
+    batteries: [senses]
+    cefr_level: B1
+    accented: расстро́иться
+    aspect: pf
+    en_gb:
+      standard: to get upset (to become sad)
+    collections:
+      - feelings
+    usage:
+      - ru: Она́ расстро́илась и́з-за плохо́й оце́нки.
+        en_gb: She got upset because of the bad grade.
+      - ru: Не расстра́ивайся, всё бу́дет хорошо́.
+        en_gb: Don't get upset, everything will be fine.
+    conjugation:
+      future:
+        "1sg": расстро́юсь
+        "2sg": расстро́ишься
+        "3sg": расстро́ится
+        "1pl": расстро́имся
+        "2pl": расстро́итесь
+        "3pl": расстро́ятся
+      past_m: расстро́ился
+      past_f: расстро́илась
+      past_n: расстро́илось
+      past_pl: расстро́ились
   "рассуждать=to reason":
     batteries: [communication, senses]
     cefr_level: B1
@@ -23325,6 +24481,32 @@ words:
         en_gb: Tomorrow I will throw the old things down into the cellar.
       - ru: Я бы сбро́сил ли́шний вес к ле́ту.
         en_gb: I would lose the excess weight by summer.
+  "сварить=to boil":
+    batteries: [cooking]
+    cefr_level: B1
+    accented: свари́ть
+    aspect: pf
+    en_gb:
+      standard: to boil (to cook in water)
+    collections:
+      - food and drink
+    usage:
+      - ru: Свари́ мне, пожа́луйста, ко́фе.
+        en_gb: Please make me some coffee.
+      - ru: Она́ свари́ла суп на обе́д.
+        en_gb: She cooked soup for lunch.
+    conjugation:
+      future:
+        "1sg": сварю́
+        "2sg": сва́ришь
+        "3sg": сва́рит
+        "1pl": сва́рим
+        "2pl": сва́рите
+        "3pl": сва́рят
+      past_m: свари́л
+      past_f: свари́ла
+      past_n: свари́ло
+      past_pl: свари́ли
   "свернуть=to turn":
     batteries: [motion]
     cefr_level: B1
@@ -23389,6 +24571,32 @@ words:
         en_gb: At night the windows will glow in the dark.
       - ru: Без электри́чества дом не свети́лся бы во́все.
         en_gb: Without electricity the house would not glow at all.
+  "сдавать=to hand in":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: сдава́ть
+    aspect: impf
+    en_gb:
+      standard: to hand in (to submit; to sit an exam)
+    collections:
+      - study
+    usage:
+      - ru: За́втра студе́нты сдаю́т экза́мен.
+        en_gb: Tomorrow the students take an exam.
+      - ru: Я сдаю́ э́ту кварти́ру друзья́м.
+        en_gb: I rent this flat to friends.
+    conjugation:
+      present:
+        "1sg": сдаю́
+        "2sg": сдаёшь
+        "3sg": сдаёт
+        "1pl": сдаём
+        "2pl": сдаёте
+        "3pl": сдаю́т
+      past_m: сдава́л
+      past_f: сдава́ла
+      past_n: сдава́ло
+      past_pl: сдава́ли
   "сдать=to hand in":
     batteries: [work_study]
     cefr_level: A2
@@ -23649,6 +24857,58 @@ words:
       past_f: сказа́ла
       past_n: сказа́ло
       past_pl: сказа́ли
+  "скачать=to download":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: скача́ть
+    aspect: pf
+    en_gb:
+      standard: to download (to save from the internet)
+    collections:
+      - technology
+    usage:
+      - ru: Я скача́ю э́ту пе́сню на телефо́н.
+        en_gb: I'll download this song to my phone.
+      - ru: Скача́й приложе́ние из интерне́та.
+        en_gb: Download the app from the internet.
+    conjugation:
+      future:
+        "1sg": скача́ю
+        "2sg": скача́ешь
+        "3sg": скача́ет
+        "1pl": скача́ем
+        "2pl": скача́ете
+        "3pl": скача́ют
+      past_m: скача́л
+      past_f: скача́ла
+      past_n: скача́ло
+      past_pl: скача́ли
+  "скопировать=to copy":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: скопи́ровать
+    aspect: pf
+    en_gb:
+      standard: to copy (to make a duplicate)
+    collections:
+      - technology
+    usage:
+      - ru: Скопи́руй файл на фле́шку.
+        en_gb: Copy the file onto a USB stick.
+      - ru: Он скопи́ровал докуме́нт два́жды.
+        en_gb: He copied the document twice.
+    conjugation:
+      future:
+        "1sg": скопи́рую
+        "2sg": скопи́руешь
+        "3sg": скопи́рует
+        "1pl": скопи́руем
+        "2pl": скопи́руете
+        "3pl": скопи́руют
+      past_m: скопи́ровал
+      past_f: скопи́ровала
+      past_n: скопи́ровало
+      past_pl: скопи́ровали
   "скрывать=to hide":
     batteries: [routine]
     cefr_level: B1
@@ -24299,6 +25559,32 @@ words:
         en_gb: I would be able to help if I were free.
       - ru: Без ка́рты мы бы не смогли́ найти́ доро́гу.
         en_gb: Without a map we would not be able to find the way.
+  "снизить=to reduce":
+    batteries: [work_study]
+    cefr_level: B2
+    accented: сни́зить
+    aspect: pf
+    en_gb:
+      standard: to reduce (to lower an amount)
+    collections:
+      - work
+    usage:
+      - ru: Магази́н сни́зил це́ны на оде́жду.
+        en_gb: The shop reduced the prices on clothes.
+      - ru: Ну́жно сни́зить ско́рость на поворо́те.
+        en_gb: You need to reduce speed on the bend.
+    conjugation:
+      future:
+        "1sg": сни́жу
+        "2sg": сни́зишь
+        "3sg": сни́зит
+        "1pl": сни́зим
+        "2pl": сни́зите
+        "3pl": сни́зят
+      past_m: сни́зил
+      past_f: сни́зила
+      past_n: сни́зило
+      past_pl: сни́зили
   "снимать=to take off":
     batteries: [routine]
     cefr_level: A2
@@ -25691,6 +26977,32 @@ words:
         en_gb: Soon I will go down to the ground floor.
       - ru: Без ли́фта я бы спусти́лся по ле́стнице.
         en_gb: Without a lift I would descend by the stairs.
+  "ссориться=to quarrel":
+    batteries: [senses]
+    cefr_level: B1
+    accented: ссо́риться
+    aspect: impf
+    en_gb:
+      standard: to quarrel (to argue)
+    collections:
+      - feelings
+    usage:
+      - ru: Они́ ча́сто ссо́рятся и́з-за де́нег.
+        en_gb: They often quarrel over money.
+      - ru: Не ссо́рься с бра́том.
+        en_gb: Don't quarrel with your brother.
+    conjugation:
+      present:
+        "1sg": ссо́рюсь
+        "2sg": ссо́ришься
+        "3sg": ссо́рится
+        "1pl": ссо́римся
+        "2pl": ссо́ритесь
+        "3pl": ссо́рятся
+      past_m: ссо́рился
+      past_f: ссо́рилась
+      past_n: ссо́рилось
+      past_pl: ссо́рились
   "ставить=to place":
     batteries: [routine]
     cefr_level: A2
@@ -25822,6 +27134,32 @@ words:
         en_gb: I would become a teacher if I could.
       - ru: Без трениро́вок он бы не стал чемпио́ном.
         en_gb: Without training he would not have become a champion.
+  "стереть=to erase":
+    batteries: [work_study]
+    cefr_level: B2
+    accented: стере́ть
+    aspect: pf
+    en_gb:
+      standard: to erase (to rub out or delete)
+    collections:
+      - technology
+    usage:
+      - ru: Сотри́ оши́бку и напиши́ сно́ва.
+        en_gb: Erase the mistake and write again.
+      - ru: Я случа́йно стёр ва́жный файл.
+        en_gb: I accidentally erased an important file.
+    conjugation:
+      future:
+        "1sg": сотру́
+        "2sg": сотрёшь
+        "3sg": сотрёт
+        "1pl": сотрём
+        "2pl": сотрёте
+        "3pl": сотру́т
+      past_m: стёр
+      past_f: стёрла
+      past_n: стёрло
+      past_pl: стёрли
   "стоить=to cost":
     batteries: [society]
     cefr_level: A2
@@ -26080,6 +27418,8 @@ words:
       past_n: суди́ло
       past_pl: суди́ли
     usage:
+      - ru: Су́дя по всему́, бу́дет дождь.
+        en_gb: Judging by everything, it will rain.
       - ru: Не суди́ люде́й по вне́шности.
         en_gb: Don't judge people by their appearance.
       - ru: Он су́дит о́бо всём сли́шком стро́го.
@@ -26740,6 +28080,32 @@ words:
         en_gb: For the project, time will be required.
       - ru: Без согла́сия тре́бовалась бы по́дпись дире́ктора.
         en_gb: Without consent, the director's signature would be required.
+  "тренироваться=to train":
+    batteries: [sport]
+    cefr_level: B1
+    accented: тренирова́ться
+    aspect: impf
+    en_gb:
+      standard: to train (to exercise, practise)
+    collections:
+      - sport
+    usage:
+      - ru: Спортсме́ны трениру́ются ка́ждый день.
+        en_gb: The athletes train every day.
+      - ru: Я трениру́юсь в за́ле по утра́м.
+        en_gb: I train at the gym in the mornings.
+    conjugation:
+      present:
+        "1sg": трениру́юсь
+        "2sg": трениру́ешься
+        "3sg": трениру́ется
+        "1pl": трениру́емся
+        "2pl": трениру́етесь
+        "3pl": трениру́ются
+      past_m: тренирова́лся
+      past_f: тренирова́лась
+      past_n: тренирова́лось
+      past_pl: тренирова́лись
   "трогать=to touch":
     batteries: [routine]
     cefr_level: A2
@@ -27160,6 +28526,32 @@ words:
         en_gb: Tomorrow we will see the sea for the first time.
       - ru: Я бы уви́дел бо́льше, будь све́тлее.
         en_gb: I would see more if it were lighter.
+  "уволить=to fire":
+    batteries: [work_study]
+    cefr_level: B2
+    accented: уво́лить
+    aspect: pf
+    en_gb:
+      standard: to fire (to dismiss from a job)
+    collections:
+      - work
+    usage:
+      - ru: Дире́ктор реши́л уво́лить плохо́го рабо́тника.
+        en_gb: The director decided to fire the bad worker.
+      - ru: Его́ уво́лили за опозда́ния.
+        en_gb: He was fired for being late.
+    conjugation:
+      future:
+        "1sg": уво́лю
+        "2sg": уво́лишь
+        "3sg": уво́лит
+        "1pl": уво́лим
+        "2pl": уво́лите
+        "3pl": уво́лят
+      past_m: уво́лил
+      past_f: уво́лила
+      past_n: уво́лило
+      past_pl: уво́лили
   "угадать=to guess":
     batteries: [senses]
     cefr_level: A2
@@ -27224,6 +28616,32 @@ words:
         en_gb: With practice, you will succeed in everything.
       - ru: Без по́мощи мне не удава́лось бы э́то.
         en_gb: Without help, I would not be succeeding at this.
+  "удалить=to delete":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: удали́ть
+    aspect: pf
+    en_gb:
+      standard: to delete (to remove)
+    collections:
+      - technology
+    usage:
+      - ru: Удали́ э́то сообще́ние, пожа́луйста.
+        en_gb: Please delete this message.
+      - ru: Я удали́л ста́рые фотогра́фии.
+        en_gb: I deleted the old photos.
+    conjugation:
+      future:
+        "1sg": удалю́
+        "2sg": удали́шь
+        "3sg": удали́т
+        "1pl": удали́м
+        "2pl": удали́те
+        "3pl": удаля́т
+      past_m: удали́л
+      past_f: удали́ла
+      past_n: удали́ло
+      past_pl: удали́ли
   "ударить=to hit":
     batteries: [routine]
     cefr_level: B1
@@ -27649,6 +29067,32 @@ words:
         en_gb: Without a lock, thieves will steal the bicycle.
       - ru: Я бы никогда́ не укра́л чужо́е.
         en_gb: I would never steal what belongs to others.
+  "укусить=to bite":
+    batteries: [routine]
+    cefr_level: B1
+    accented: укуси́ть
+    aspect: pf
+    en_gb:
+      standard: to bite (to nip with the teeth)
+    collections:
+      - nature
+    usage:
+      - ru: Осторо́жно, соба́ка мо́жет укуси́ть.
+        en_gb: Careful, the dog might bite.
+      - ru: Меня́ укуси́л кома́р.
+        en_gb: A mosquito bit me.
+    conjugation:
+      future:
+        "1sg": укушу́
+        "2sg": уку́сишь
+        "3sg": уку́сит
+        "1pl": уку́сим
+        "2pl": уку́сите
+        "3pl": уку́сят
+      past_m: укуси́л
+      past_f: укуси́ла
+      past_n: укуси́ло
+      past_pl: укуси́ли
   "уложить=to put to bed":
     batteries: [routine]
     cefr_level: B1
@@ -27842,6 +29286,32 @@ words:
         en_gb: Without care the trees will be dying.
       - ru: Я бы умира́л со ску́ки на тако́й рабо́те.
         en_gb: I would be dying of boredom in such a job.
+  "умножить=to multiply":
+    batteries: [work_study]
+    cefr_level: B1
+    accented: умно́жить
+    aspect: pf
+    en_gb:
+      standard: to multiply (in arithmetic)
+    collections:
+      - science
+    usage:
+      - ru: Умно́жь пять на три.
+        en_gb: Multiply five by three.
+      - ru: Что́бы найти́ пло́щадь, умно́жь длину́ на ширину́.
+        en_gb: To find the area, multiply length by width.
+    conjugation:
+      future:
+        "1sg": умно́жу
+        "2sg": умно́жишь
+        "3sg": умно́жит
+        "1pl": умно́жим
+        "2pl": умно́жите
+        "3pl": умно́жат
+      past_m: умно́жил
+      past_f: умно́жила
+      past_n: умно́жило
+      past_pl: умно́жили
   "уничтожить=to destroy":
     batteries: [society]
     cefr_level: B1
@@ -28554,6 +30024,32 @@ words:
       past_f: учи́лась
       past_n: учи́лось
       past_pl: учи́лись
+  "фотографировать=to photograph":
+    batteries: [communication]
+    cefr_level: B1
+    accented: фотографи́ровать
+    aspect: impf
+    en_gb:
+      standard: to photograph (to take pictures)
+    collections:
+      - the arts
+    usage:
+      - ru: Тури́ст фотографи́рует краси́вый зака́т.
+        en_gb: The tourist photographs the beautiful sunset.
+      - ru: Она́ лю́бит фотографи́ровать приро́ду.
+        en_gb: She loves to photograph nature.
+    conjugation:
+      present:
+        "1sg": фотографи́рую
+        "2sg": фотографи́руешь
+        "3sg": фотографи́рует
+        "1pl": фотографи́руем
+        "2pl": фотографи́руете
+        "3pl": фотографи́руют
+      past_m: фотографи́ровал
+      past_f: фотографи́ровала
+      past_n: фотографи́ровало
+      past_pl: фотографи́ровали
   "хватать=to grab":
     batteries: [routine]
     cefr_level: B1
@@ -29046,6 +30542,32 @@ words:
         en_gb: In the wind the leaves will be stirring quietly.
       - ru: Я бы не шевели́лся во вре́мя съёмки.
         en_gb: I would not stir during the photo.
+  "шептать=to whisper":
+    batteries: [communication]
+    cefr_level: B2
+    accented: шепта́ть
+    aspect: impf
+    en_gb:
+      standard: to whisper (to speak very quietly)
+    collections:
+      - communication
+    usage:
+      - ru: Де́ти шепта́ли что́-то на у́хо.
+        en_gb: The children whispered something in his ear.
+      - ru: Не шепчи́, говори́ гро́мче.
+        en_gb: Don't whisper, speak louder.
+    conjugation:
+      present:
+        "1sg": шепчу́
+        "2sg": ше́пчешь
+        "3sg": ше́пчет
+        "1pl": ше́пчем
+        "2pl": ше́пчете
+        "3pl": ше́пчут
+      past_m: шепта́л
+      past_f: шепта́ла
+      past_n: шепта́ло
+      past_pl: шепта́ли
   "шить=to sew":
     batteries: [work_study]
     cefr_level: B1
