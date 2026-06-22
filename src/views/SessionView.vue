@@ -104,6 +104,7 @@ async function setup() {
     phrases,
     encounterCount: progress.encounterCount,
     batteries: vocabState.batteries,
+    skipsSpeaking: progress.skipsSpeaking,
   })
   for (const ex of exercises) {
     for (const key of ex.targets) {
@@ -185,6 +186,23 @@ async function onDone(result) {
   warmAudio()
   const ex = current.value
   if (!ex) return
+  // The learner gave up on this word's speaking (the recogniser can't hear it):
+  // waive speaking for every target so it's never drilled aloud again, and
+  // advance without marking the exercise wrong (so it isn't re-queued).
+  if (result.skipSpeaking) {
+    let skipError = null
+    for (const key of (ex.targets ?? []).filter(Boolean)) {
+      try {
+        await progress.recordSpeakingSkip(key)
+      } catch (e) {
+        if (!skipError) skipError = e
+      }
+    }
+    submit(runner, true)
+    await finalizeIfDone()
+    if (skipError) throw skipError
+    return
+  }
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null

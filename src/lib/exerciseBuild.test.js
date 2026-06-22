@@ -205,6 +205,28 @@ describe('buildExercises', () => {
       expect(ex.length).toBeGreaterThan(0)
     })
   })
+
+  it('keeps speaking-waived words out of speak exercises', () => {
+    const wordKeys = words.filter((w) => w.pos !== 'glossary').map((w) => w.key)
+    const skipped = new Set(wordKeys.slice(0, Math.ceil(wordKeys.length / 2)))
+    const ex = buildExercises({ practices: [practice('repeat-word', { exercises: 8 })] }, {
+      words,
+      phrases,
+      batteries,
+      rng: seededRng(3),
+      skipsSpeaking: (key) => skipped.has(key),
+    })
+    expect(ex.length).toBeGreaterThan(0)
+    for (const e of ex) {
+      for (const key of e.targets) expect(skipped.has(key)).toBe(false)
+    }
+  })
+
+  it('does not filter speak exercises when no waiver predicate is given', () => {
+    const ex = build([practice('repeat-word')])
+    expect(ex.length).toBeGreaterThan(0)
+    expect(ex.every((e) => e.kind === 'speak')).toBe(true)
+  })
 })
 
 describe('makeVisualReplacement', () => {
