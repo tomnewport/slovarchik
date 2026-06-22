@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, makeVisualReplacement, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
+import { buildExercises, makeVisualReplacement, makeReplacementPicker, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 import { loadFixtureWords, loadFixtureBatteries } from '../test/fixtures.js'
@@ -204,6 +204,75 @@ describe('buildExercises', () => {
       )
       expect(ex.length).toBeGreaterThan(0)
     })
+  })
+})
+
+describe('mid-lesson spacing', () => {
+  it('spreads repeated draws across the pool instead of drilling one word', () => {
+    // Three spell-word practices sharing a small pool: without session-wide
+    // spacing the worst-understood word would be front-biased into every
+    // practice. Tiered usage forces the draws to spread evenly instead.
+    const pool = words.slice(0, 6).map((w) => w.key)
+    const practices = [
+      practice('spell-word', { exercises: 5, pool }),
+      practice('spell-word', { exercises: 5, pool }),
+      practice('spell-word', { exercises: 5, pool }),
+    ]
+    const ex = buildExercises({ practices }, { words, phrases, rng: seededRng(7) })
+    const counts = {}
+    for (const e of ex) counts[e.targets[0]] = (counts[e.targets[0]] ?? 0) + 1
+    const vals = Object.values(counts)
+    // 15 draws over 6 words → an even 3/3/3/2/2/2 spread (never the same word 5×).
+    expect(Math.max(...vals) - Math.min(...vals)).toBeLessThanOrEqual(1)
+    expect(Math.max(...vals)).toBeLessThanOrEqual(3)
+  })
+
+  it('spreads thin top-up fillers too, not just pool words', () => {
+    // Empty pools → everything comes from the top-up. Two matching boards must
+    // not both surface the same handful of low-CEFR words.
+    const synth = (i) => ({ key: `w${i}=${i}`, ru: `w${i}`, english: [`${i}`], pos: 'noun', cefr: 'A1' })
+    const synthWords = Array.from({ length: 14 }, (_, i) => synth(i))
+    const ex = buildExercises(
+      { practices: [practice('match-vocab'), practice('match-vocab')] },
+      { words: synthWords, phrases: [], rng: seededRng(3) },
+    )
+    const counts = {}
+    for (const e of ex) for (const t of e.targets) counts[t] = (counts[t] ?? 0) + 1
+    expect(Math.max(...Object.values(counts))).toBeLessThanOrEqual(2)
+  })
+})
+
+describe('makeReplacementPicker', () => {
+  const vocabById = new Map([
+    ['a=a', { ru: 'А', en: ['a'], note: 'first' }],
+    ['b=b', { ru: 'Б', en: ['b'] }],
+  ])
+
+  it('draws fresh priority words for replacements, not the skipped word', () => {
+    const picker = makeReplacementPicker({
+      wordKeys: ['a=a', 'b=b'],
+      vocabById,
+      exclude: new Set(['a=a']), // already covered this session
+    })
+    const skipped = { kind: 'speak', content: 'word', targets: ['z=z'], ru: 'Я', en: 'z', practiceIndex: 0 }
+    const rep = makeVisualReplacement(skipped, 0, picker)
+    expect(rep.targets).toEqual(['b=b']) // fresh priority, not skipped z=z
+    expect(rep.ru).toBe('Б')
+    expect(rep.dimension).toBe('identification')
+  })
+
+  it('cycles through priority words round-robin across a backfill', () => {
+    const picker = makeReplacementPicker({ wordKeys: ['a=a', 'b=b'], vocabById })
+    expect(picker.word().key).toBe('a=a')
+    expect(picker.word().key).toBe('b=b')
+    expect(picker.word().key).toBe('a=a') // wraps, never stuck on one word
+  })
+
+  it('falls back to the skipped content when the priority pool is empty', () => {
+    const picker = makeReplacementPicker({ wordKeys: [], vocabById })
+    const skipped = { kind: 'speak', content: 'word', targets: ['z=z'], ru: 'Я', en: 'z', practiceIndex: 0 }
+    const rep = makeVisualReplacement(skipped, 0, picker)
+    expect(rep.targets).toEqual(['z=z'])
   })
 })
 
