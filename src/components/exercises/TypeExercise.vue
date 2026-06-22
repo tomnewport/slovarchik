@@ -96,10 +96,13 @@ onMounted(() => {
 
     <p v-if="retried && !checked" class="retry-hint">Not quite — try again</p>
 
-    <div v-if="checked" class="feedback" :class="wasCorrect ? 'ok' : 'no'">
-      <strong>{{ wasCorrect ? 'Correct' : 'Answer:' }}</strong>
-      <span lang="ru" class="answer-text">{{ exercise.ru }}</span>
-      <SpeakButton :text="exercise.ru" />
+    <div v-if="checked" class="feedback-block">
+      <div class="feedback" :class="wasCorrect ? 'ok' : 'no'">
+        <strong>{{ wasCorrect ? 'Correct' : 'Answer:' }}</strong>
+        <span lang="ru" class="answer-text">{{ exercise.ru }}</span>
+        <SpeakButton :text="exercise.ru" />
+      </div>
+      <p v-if="exercise.audio && exercise.en" class="translation-hint">{{ exercise.en }}</p>
     </div>
 
     <div class="row check-row">
@@ -133,10 +136,20 @@ onMounted(() => {
   color: var(--bad);
   font-size: 0.9rem;
 }
+.feedback-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 .feedback {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+.translation-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 .feedback.ok strong {
   color: var(--good);
