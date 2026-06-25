@@ -46,7 +46,7 @@ onMounted(() => {
 
     <div class="phrase-line" lang="ru">
       <template v-for="(tok, i) in exercise.tokens" :key="i">
-        <span v-if="i > 0"> </span>
+        <span v-if="i > 0">{{ ' ' }}</span>
         <button
           v-if="i === exercise.targetIndex && !answered"
           class="target-btn"
