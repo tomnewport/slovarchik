@@ -11848,6 +11848,9 @@ words:
       pl_ins: обя́занными
       pl_pre: обя́занных
     usage:
+      - ru: Обя́занная сторона́ подписа́ла догово́р.
+        en_gb: The obligated party signed the contract.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я обя́зан тебе́ по́мощью.
         en_gb: I am obliged to you for your help.
       - ru: Она́ обя́зана отвеча́ть за дете́й.
@@ -12171,6 +12174,7 @@ words:
         en_gb: I have a definite plan.
       - ru: Есть определённая причи́на.
         en_gb: There is a definite reason.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы дости́гли определённых результа́тов.
         en_gb: We achieved definite results.
   "опытный=experienced":
@@ -12216,6 +12220,7 @@ words:
         en_gb: He is an experienced doctor.
       - ru: Нас учи́ла о́пытная учи́тельница.
         en_gb: An experienced teacher taught us.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В кома́нде рабо́тают о́пытные специали́сты.
         en_gb: Experienced specialists work in the team.
   "оранжевый=orange":
@@ -12233,6 +12238,7 @@ words:
         en_gb: I bought an orange scarf.
       - ru: На столе́ лежи́т ора́нжевое я́блоко.
         en_gb: An orange apple lies on the table.
+        inflect: { token: 4, case: nom, number: sg, gender: n, rule: adj-agreement }
     forms:
       m: ора́нжевый
       f: ора́нжевая
@@ -12302,6 +12308,7 @@ words:
     usage:
       - ru: Осе́нняя пого́да быва́ет дождли́вой.
         en_gb: Autumn weather can be rainy.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я наде́л осе́ннее пальто́.
         en_gb: I put on my autumn coat.
       - ru: Осе́нние ли́стья па́дают на зе́млю.
@@ -12347,6 +12354,7 @@ words:
         en_gb: This is our main question.
       - ru: Кака́я основна́я причи́на?
         en_gb: What is the main reason?
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы обсуди́ли основны́е иде́и.
         en_gb: We discussed the main ideas.
   "особенный=special":
@@ -12392,6 +12400,7 @@ words:
         en_gb: The soup has a special taste.
       - ru: У неё осо́бенное чу́вство ю́мора.
         en_gb: She has a special sense of humour.
+        inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
   "особый=particular":
     batteries: [texts, objects]
     cefr_level: B1
@@ -12433,6 +12442,7 @@ words:
         en_gb: This is a particular case.
       - ru: Нужна́ осо́бая осторо́жность.
         en_gb: Particular caution is needed.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У него́ осо́бое мне́ние.
         en_gb: He has a particular opinion.
   "остальной=remaining":
@@ -12478,6 +12488,7 @@ words:
         en_gb: I gave the remaining bread to the birds.
       - ru: Остальна́я рабо́та подождёт.
         en_gb: The remaining work can wait.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Остальны́е де́ти ушли́ домо́й.
         en_gb: The remaining children went home.
   "острый=sharp":
@@ -12497,6 +12508,7 @@ words:
         en_gb: Be careful, the knife is sharp.
       - ru: Мне нра́вится о́страя еда́.
         en_gb: I like spicy food.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У ножа́ о́строе ле́звие.
         en_gb: The knife has a sharp blade.
     forms:
@@ -12571,6 +12583,7 @@ words:
         en_gb: Everyone has their own separate desk.
       - ru: Э́то отде́льная ко́мната.
         en_gb: This is a separate room.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы живём в отде́льных кварти́рах.
         en_gb: We live in separate flats.
   "отечественный=domestic":
@@ -12616,6 +12629,7 @@ words:
         en_gb: He bought a domestic car.
       - ru: Э́то оте́чественная промы́шленность.
         en_gb: This is domestic industry.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы предпочита́ем оте́чественные проду́кты.
         en_gb: We prefer domestic products.
   "открытый=open":
@@ -12661,6 +12675,7 @@ words:
         en_gb: The shop is open now.
       - ru: Че́рез откры́тую дверь дул ве́тер.
         en_gb: The wind blew through the open door.
+        inflect: { token: 2, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы сиде́ли у откры́того окна́.
         en_gb: We sat by the open window.
   "отличный=excellent":
@@ -12706,6 +12721,7 @@ words:
         en_gb: This is an excellent result.
       - ru: У нас была́ отли́чная пого́да.
         en_gb: We had excellent weather.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он сдал экза́мен на отли́чную оце́нку.
         en_gb: He passed the exam with an excellent mark.
   "отрицательный=negative":
@@ -12726,6 +12742,7 @@ words:
         en_gb: He gave a negative answer.
       - ru: Э́то отрица́тельное число́.
         en_gb: This is a negative number.
+        inflect: { token: 2, case: nom, number: sg, gender: n, rule: adj-agreement }
     declension:
       m_nom: отрица́тельный
       m_gen: отрица́тельного
@@ -12795,6 +12812,7 @@ words:
         en_gb: I received an official answer.
       - ru: Э́то официа́льная информа́ция.
         en_gb: This is official information.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы подписа́ли официа́льные докуме́нты.
         en_gb: We signed the official documents.
   "очередной=next":
@@ -12841,6 +12859,7 @@ words:
         en_gb: The next crisis arrived.
       - ru: Начала́сь очередна́я неде́ля.
         en_gb: The next week began.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он зада́л очередно́й вопро́с.
         en_gb: He asked the next question.
   "партийный=party":
@@ -12886,6 +12905,7 @@ words:
         en_gb: He is an old party worker.
       - ru: Состоя́лась парти́йная конфере́нция.
         en_gb: A party conference took place.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы обсуди́ли парти́йные дела́.
         en_gb: We discussed party affairs.
   "передний=front":
@@ -12931,6 +12951,7 @@ words:
         en_gb: He is sitting in the front seat.
       - ru: Пере́дняя дверь была́ закры́та.
         en_gb: The front door was closed.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Пере́дние ря́ды бы́ли пусты́.
         en_gb: The front rows were empty.
   "петербургский=of Saint Petersburg":
@@ -12976,6 +12997,7 @@ words:
         en_gb: I like the Saint Petersburg climate.
       - ru: Э́то петербу́ргская архитекту́ра.
         en_gb: This is Saint Petersburg architecture.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы гуля́ли по петербу́ргским у́лицам.
         en_gb: We walked along the Saint Petersburg streets.
   "печальный=sad":
@@ -13023,6 +13045,7 @@ words:
         en_gb: This is a sad film.
       - ru: У неё была́ печа́льная исто́рия.
         en_gb: She had a sad story.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали печа́льное изве́стие.
         en_gb: We heard sad news.
   "письменный=written":
@@ -13064,6 +13087,7 @@ words:
     usage:
       - ru: Учи́тель дал пи́сьменное зада́ние.
         en_gb: The teacher gave a written assignment.
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Нам ну́жен пи́сьменный отве́т.
         en_gb: We need a written answer.
       - ru: Он сдал все пи́сьменные экза́мены.
@@ -13079,6 +13103,7 @@ words:
     usage:
       - ru: У стола́ пло́ская пове́рхность.
         en_gb: The table has a flat surface.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас пло́ский потоло́к.
         en_gb: We have a flat ceiling.
       - ru: Доро́га шла по пло́ской равни́не.
@@ -13155,6 +13180,7 @@ words:
         en_gb: A dense fog hangs over the city.
       - ru: У па́льто пло́тная ткань.
         en_gb: The coat has dense fabric.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В лесу́ расту́т пло́тные куста́рники.
         en_gb: Dense bushes grow in the forest.
   "плохой=bad":
@@ -13166,6 +13192,7 @@ words:
     usage:
       - ru: Сего́дня плоха́я пого́да.
         en_gb: The weather is bad today.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У меня́ плохо́е настрое́ние.
         en_gb: I am in a bad mood.
       - ru: Э́то плохи́е но́вости.
@@ -13245,6 +13272,7 @@ words:
         en_gb: An underground passage runs here.
       - ru: Маши́ну поста́вили на подзе́мную парко́вку.
         en_gb: The car was put in the underground car park.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Из земли́ бьют подзе́мные во́ды.
         en_gb: Underground waters gush from the earth.
   "подлинный=genuine":
@@ -13286,6 +13314,7 @@ words:
     usage:
       - ru: Э́то по́длинная карти́на изве́стного худо́жника.
         en_gb: This is a genuine painting by a famous artist.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы уви́дели по́длинное письмо́ поэ́та.
         en_gb: We saw the poet's genuine letter.
       - ru: В музе́е храня́тся по́длинные докуме́нты.
@@ -13333,6 +13362,7 @@ words:
         en_gb: I have seen a similar case.
       - ru: Возни́кла подо́бная пробле́ма.
         en_gb: A similar problem arose.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ча́сто слы́шим подо́бные вопро́сы.
         en_gb: We often hear similar questions.
   "подходящий=suitable":
@@ -13376,6 +13406,7 @@ words:
         en_gb: This is a suitable moment.
       - ru: Мы нашли́ подходя́щую кварти́ру.
         en_gb: We found a suitable flat.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Подбери́ подходя́щие слова́.
         en_gb: Choose the suitable words.
   "пожилой=elderly":
@@ -13421,6 +13452,7 @@ words:
         en_gb: An elderly man sat on the bus.
       - ru: Ему́ помогла́ пожила́я же́нщина.
         en_gb: An elderly woman helped him.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Пожилы́е лю́ди лю́бят споко́йствие.
         en_gb: Elderly people love peace and quiet.
   "поздний=late":
@@ -13466,6 +13498,7 @@ words:
         en_gb: It was already late evening.
       - ru: Стои́т по́здняя о́сень.
         en_gb: It is late autumn.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы пое́хали по́здним по́ездом.
         en_gb: We went by a late train.
   "полевой=field":
@@ -13511,6 +13544,7 @@ words:
         en_gb: The soldiers ate from the field kitchen.
       - ru: Учёные собира́ли полевы́е тра́вы.
         en_gb: The scientists gathered field herbs.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "полезный=useful":
     batteries: [objects, food, texts]
     cefr_level: A2
@@ -13555,6 +13589,7 @@ words:
         en_gb: This is a very useful piece of advice.
       - ru: Прогу́лка — поле́зная привы́чка.
         en_gb: A walk is a useful habit.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: О́вощи — поле́зные проду́кты.
         en_gb: Vegetables are useful foods.
   "политический=political":
@@ -13598,6 +13633,7 @@ words:
         en_gb: This is an important political question.
       - ru: Начала́сь полити́ческая кампа́ния.
         en_gb: A political campaign began.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ обсужда́ют полити́ческие но́вости.
         en_gb: They are discussing political news.
   "полный=full":
@@ -13616,6 +13652,7 @@ words:
         en_gb: The hall was full of people.
       - ru: У меня́ по́лная су́мка проду́ктов.
         en_gb: I have a bag full of groceries.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: по́лный
       f: по́лная
@@ -13689,6 +13726,7 @@ words:
     usage:
       - ru: Он сде́лал всё в поло́женный срок.
         en_gb: He did everything within the prescribed time.
+        inflect: { token: 5, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы получи́ли поло́женную су́мму.
         en_gb: We received the prescribed amount.
       - ru: Рабо́тники получа́ют поло́женные льго́ты.
@@ -13711,6 +13749,7 @@ words:
         en_gb: I received a positive answer.
       - ru: Э́то положи́тельный результа́т.
         en_gb: This is a positive result.
+        inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
     declension:
       m_nom: положи́тельный
       m_gen: положи́тельного
@@ -13754,6 +13793,7 @@ words:
         en_gb: He knows the Polish language.
       - ru: Э́то по́льская кни́га.
         en_gb: This is a Polish book.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
     declension:
       m_nom: по́льский
       m_gen: по́льского
@@ -13823,6 +13863,7 @@ words:
         en_gb: The teacher gave an understandable answer.
       - ru: Э́то поня́тная инстру́кция.
         en_gb: This is an understandable instruction.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он говори́т поня́тными слова́ми.
         en_gb: He speaks in understandable words.
   "последний=last":
@@ -13866,6 +13907,7 @@ words:
         en_gb: This is our last chance.
       - ru: Мы е́хали в после́днем ваго́не.
         en_gb: We rode in the last carriage.
+        inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
       - ru: После́дние дни бы́ли тёплыми.
         en_gb: The last days were warm.
   "последующий=subsequent":
