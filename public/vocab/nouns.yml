@@ -58600,6 +58600,7 @@ words:
     usage:
       - ru: Рабо́чие вы́копали глубо́кую я́му.
         en_gb: The workers dug a deep pit.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Маши́на застря́ла в я́ме.
         en_gb: The car got stuck in a pit.
       - ru: На доро́ге мно́го ям.
@@ -58615,6 +58616,9 @@ words:
     en_gb:
       standard: Japanese (a man from Japan)
     usage:
+      - ru: Я познако́мился с япо́нцем.
+        en_gb: I got to know a Japanese man.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Япо́нец ве́жливо поклони́лся.
         en_gb: The Japanese man bowed politely.
       - ru: Э́тот япо́нец говори́т по-ру́сски.
@@ -58643,6 +58647,9 @@ words:
     en_gb:
       standard: Japanese (a woman from Japan)
     usage:
+      - ru: Я познако́мился с япо́нкой.
+        en_gb: I got to know a Japanese woman.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Япо́нка наде́ла краси́вое пла́тье.
         en_gb: The Japanese woman put on a beautiful dress.
       - ru: Э́та япо́нка рабо́тает врачо́м.
@@ -58676,6 +58683,7 @@ words:
         en_gb: A lizard was basking on the stone.
       - ru: Я пойма́л ма́ленькую я́щерицу.
         en_gb: I caught a small lizard.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В пусты́не живёт мно́го я́щериц.
         en_gb: Many lizards live in the desert.
     declension:
@@ -58720,5 +58728,6 @@ words:
         en_gb: He put the heavy box on the floor.
       - ru: В я́щике лежа́т ста́рые письма́.
         en_gb: Old letters lie in the box.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На скла́де мно́го пусты́х я́щиков.
         en_gb: There are many empty boxes in the warehouse.

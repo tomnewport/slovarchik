@@ -36,6 +36,7 @@ words:
     usage:
       - ru: В а́вгусте мы е́здили на мо́ре.
         en_gb: In August we went to the seaside.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: А́вгуст — после́дний ме́сяц ле́та.
         en_gb: August is the last month of summer.
       - ru: К а́вгусту созрева́ют фру́кты.
@@ -65,6 +66,7 @@ words:
     usage:
       - ru: В апре́ле цвету́т дере́вья.
         en_gb: In April the trees blossom.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Апре́ль ча́сто быва́ет дождли́вым.
         en_gb: April is often rainy.
       - ru: К апре́лю та́ет снег.
@@ -98,6 +100,7 @@ words:
         en_gb: Sunday is the last day of the week.
       - ru: По воскресе́ньям мы отдыха́ем до́ма.
         en_gb: On Sundays we rest at home.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: воскресе́нье
       sg_gen: воскресе́нья
@@ -124,6 +127,7 @@ words:
     usage:
       - ru: Во вто́рник у нас уро́к ру́сского.
         en_gb: On Tuesday we have a Russian lesson.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вто́рник был о́чень дли́нным.
         en_gb: Tuesday was very long.
       - ru: До вто́рника оста́лось два дня.
@@ -153,6 +157,7 @@ words:
     usage:
       - ru: В декабре́ мы пра́зднуем Но́вый год.
         en_gb: In December we celebrate the New Year.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дека́брь — пе́рвый ме́сяц зимы́.
         en_gb: December is the first month of winter.
       - ru: К декабрю́ выпада́ет снег.
@@ -212,6 +217,7 @@ words:
     usage:
       - ru: В ию́ле о́чень жа́рко.
         en_gb: In July it is very hot.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ию́ль — са́мый тёплый ме́сяц.
         en_gb: July is the warmest month.
       - ru: По́сле ию́ля наступа́ет а́вгуст.
@@ -241,6 +247,7 @@ words:
     usage:
       - ru: В ию́не начина́ются кани́кулы.
         en_gb: The holidays begin in June.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ию́нь — пе́рвый ме́сяц ле́та.
         en_gb: June is the first month of summer.
       - ru: К ию́ню зака́нчивается шко́ла.
@@ -270,6 +277,7 @@ words:
     usage:
       - ru: В ма́е тепло́ и со́лнечно.
         en_gb: In May it is warm and sunny.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Май — мой люби́мый ме́сяц.
         en_gb: May is my favourite month.
       - ru: По́сле ма́я начина́ется ле́то.
@@ -301,6 +309,7 @@ words:
     usage:
       - ru: В ма́рте начина́ется весна́.
         en_gb: Spring begins in March.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Март — пе́рвый ме́сяц весны́.
         en_gb: March is the first month of spring.
       - ru: По́сле ма́рта стано́вится тепле́е.
@@ -333,6 +342,7 @@ words:
     usage:
       - ru: На Ма́сленицу пеку́т блины́.
         en_gb: At Maslenitsa people make pancakes.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́сленица дли́тся це́лую неде́лю.
         en_gb: Maslenitsa lasts a whole week.
       - ru: Пе́ред Ма́сленицей мы покупа́ем муку́.
@@ -379,6 +389,7 @@ words:
     usage:
       - ru: В ноябре́ ча́сто идёт дождь.
         en_gb: In November it often rains.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ноя́брь — холо́дный и тёмный ме́сяц.
         en_gb: November is a cold and dark month.
       - ru: По́сле ноября́ начина́ется зима́.
@@ -408,6 +419,7 @@ words:
     usage:
       - ru: В октябре́ па́дают ли́стья.
         en_gb: In October the leaves fall.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Октя́брь — золота́я о́сень.
         en_gb: October is golden autumn.
       - ru: К октябрю́ дере́вья желте́ют.
@@ -437,6 +449,7 @@ words:
     usage:
       - ru: На Па́сху пеку́т кули́ч.
         en_gb: At Easter people bake a kulich.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Па́сха — ва́жный весе́нний пра́здник.
         en_gb: Easter is an important spring holiday.
       - ru: Пе́ред Па́схой кра́сят я́йца.
@@ -460,6 +473,7 @@ words:
     usage:
       - ru: В понеде́льник я иду́ на рабо́ту.
         en_gb: On Monday I go to work.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Понеде́льник — тяжёлый день.
         en_gb: Monday is a hard day.
       - ru: По понеде́льникам у нас собра́ние.
@@ -489,6 +503,7 @@ words:
     usage:
       - ru: В пя́тницу мы идём в кино́.
         en_gb: On Friday we are going to the cinema.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Пя́тница — коне́ц рабо́чей неде́ли.
         en_gb: Friday is the end of the working week.
       - ru: По пя́тницам мы у́жинаем вме́сте.
@@ -518,6 +533,7 @@ words:
     usage:
       - ru: На Рождество́ вся семья́ собира́ется вме́сте.
         en_gb: At Christmas the whole family gathers together.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Рождество́ — све́тлый пра́здник.
         en_gb: Christmas is a bright holiday.
       - ru: Пе́ред Рождество́м все убира́ют дом.
@@ -541,6 +557,7 @@ words:
     usage:
       - ru: В сентябре́ начина́ется уче́бный год.
         en_gb: The school year begins in September.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Сентя́брь — пе́рвый ме́сяц о́сени.
         en_gb: September is the first month of autumn.
       - ru: По́сле сентября́ стано́вится прохла́днее.
@@ -570,6 +587,7 @@ words:
     usage:
       - ru: По среда́м я хожу́ в бассе́йн.
         en_gb: On Wednesdays I go to the swimming pool.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Среда́ — середи́на неде́ли.
         en_gb: Wednesday is the middle of the week.
       - ru: В сре́ду я был за́нят.
@@ -599,6 +617,7 @@ words:
     usage:
       - ru: В суббо́ту я отдыха́ю.
         en_gb: On Saturday I rest.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Суббо́та — выходно́й день.
         en_gb: Saturday is a day off.
       - ru: По суббо́там я хожу́ на ры́нок.
@@ -630,6 +649,7 @@ words:
         en_gb: February is the shortest month.
       - ru: В феврале́ ещё хо́лодно.
         en_gb: In February it is still cold.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: К февралю́ всё бу́дет гото́во.
         en_gb: Everything will be ready by February.
     declension:
@@ -657,6 +677,7 @@ words:
     usage:
       - ru: В четве́рг мы встре́тимся.
         en_gb: On Thursday we will meet.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
         en_alt:
           - we will meet on Thursday
       - ru: Четве́рг — мой люби́мый день.
@@ -694,6 +715,7 @@ words:
         en_gb: The school will soon have a big anniversary.
       - ru: Го́сти пришли́ на юбиле́е де́душки.
         en_gb: The guests came to grandfather's jubilee.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: юбиле́й
       sg_gen: юбиле́я
@@ -719,6 +741,7 @@ words:
     usage:
       - ru: В январе́ ча́сто идёт снег.
         en_gb: In January it often snows.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Янва́рь — са́мый холо́дный ме́сяц.
         en_gb: January is the coldest month.
       - ru: По́сле января́ наступа́ет февра́ль.
