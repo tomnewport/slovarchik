@@ -10335,6 +10335,7 @@ words:
         en_gb: This is an incorrect answer.
       - ru: Ты вы́брал неве́рную доро́гу.
         en_gb: You chose the wrong road.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
     declension:
       m_nom: неве́рный
       m_gen: неве́рного
@@ -10401,6 +10402,7 @@ words:
         en_gb: This is an incredible case.
       - ru: Она́ рассказа́ла невероя́тную исто́рию.
         en_gb: She told an incredible story.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы уви́дели невероя́тные ве́щи.
         en_gb: We saw incredible things.
   "невидимый=invisible":
@@ -10444,6 +10446,7 @@ words:
         en_gb: This is an invisible enemy.
       - ru: Их свя́зывает неви́димая нить.
         en_gb: An invisible thread connects them.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В во́здухе неви́димые части́цы.
         en_gb: There are invisible particles in the air.
   "недавний=recent":
@@ -10489,6 +10492,7 @@ words:
         en_gb: This is a recent event.
       - ru: Мы вспо́мнили неда́внюю встре́чу.
         en_gb: We recalled the recent meeting.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Неда́вние собы́тия удиви́ли всех.
         en_gb: The recent events surprised everyone.
   "недалёкий=not far":
@@ -10532,6 +10536,7 @@ words:
         en_gb: This is not a far journey.
       - ru: Они́ живу́т в недалёкой дере́вне.
         en_gb: They live in a village not far away.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы говори́м о недалёких времена́х.
         en_gb: We are speaking of not-distant times.
   "недовольный=dissatisfied":
@@ -10577,6 +10582,7 @@ words:
         en_gb: He is a dissatisfied customer.
       - ru: Учи́тель сде́лал недово́льное лицо́.
         en_gb: The teacher made a displeased face.
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Недово́льные лю́ди ушли́ ра́но.
         en_gb: The dissatisfied people left early.
   "нежный=gentle":
@@ -10598,6 +10604,7 @@ words:
         en_gb: She has a gentle voice.
       - ru: Они́ обменя́лись не́жными слова́ми.
         en_gb: They exchanged tender words.
+        inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: не́жный
       f: не́жная
@@ -10670,6 +10677,7 @@ words:
         en_gb: This is an unfamiliar city.
       - ru: Она́ уви́дела незнако́мую же́нщину.
         en_gb: She saw an unfamiliar woman.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: К нам подошли́ незнако́мые лю́ди.
         en_gb: Unfamiliar people approached us.
   "неизвестный=unknown":
@@ -10713,6 +10721,7 @@ words:
         en_gb: An unknown person wrote the letter.
       - ru: Они́ пошли́ по неизве́стной доро́ге.
         en_gb: They went down an unknown road.
+        inflect: { token: 4, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Учёные изуча́ют неизве́стные явле́ния.
         en_gb: Scientists study unknown phenomena.
   "некий=certain":
@@ -10758,6 +10767,7 @@ words:
         en_gb: A certain gentleman was waiting for him.
       - ru: Она́ почу́вствовала не́кую трево́гу.
         en_gb: She felt a certain anxiety.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В э́том есть не́кое очарова́ние.
         en_gb: There is a certain charm in this.
   "некоторый=some":
@@ -10801,6 +10811,7 @@ words:
     usage:
       - ru: Че́рез не́которое вре́мя он верну́лся.
         en_gb: After some time he returned.
+        inflect: { token: 2, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: У меня́ есть не́которые сомне́ния.
         en_gb: I have some doubts.
       - ru: Не́которые лю́ди не согла́сны.
@@ -10846,6 +10857,7 @@ words:
         en_gb: He studies German.
       - ru: Она́ води́т неме́цкую маши́ну.
         en_gb: She drives a German car.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь продаю́т неме́цкие това́ры.
         en_gb: They sell German goods here.
   "необходимый=necessary":
@@ -10889,6 +10901,7 @@ words:
         en_gb: This is a necessary step.
       - ru: У нас есть необходи́мая инфо́рмация.
         en_gb: We have the necessary information.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ купи́ли необходи́мые проду́кты.
         en_gb: They bought the necessary groceries.
   "необыкновенный=extraordinary":
@@ -10932,6 +10945,7 @@ words:
         en_gb: This is an extraordinary person.
       - ru: Она́ облада́ет необыкнове́нной красото́й.
         en_gb: She possesses extraordinary beauty.
+        inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дели необыкнове́нные ве́щи.
         en_gb: We saw extraordinary things.
   "неожиданный=unexpected":
@@ -10975,6 +10989,7 @@ words:
         en_gb: It was an unexpected visit.
       - ru: Мы получи́ли нео́жиданную но́вость.
         en_gb: We received unexpected news.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Произошли́ нео́жиданные собы́тия.
         en_gb: Unexpected events occurred.
   "непонятный=incomprehensible":
@@ -11020,6 +11035,7 @@ words:
         en_gb: He asked an unclear question.
       - ru: Она́ говори́ла непоня́тные слова́.
         en_gb: She spoke incomprehensible words.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "неправильный=incorrect":
     batteries: [texts]
     cefr_level: B1
@@ -11061,6 +11077,7 @@ words:
         en_gb: This is an incorrect answer.
       - ru: Ты вы́брал непра́вильную доро́гу.
         en_gb: You chose the wrong road.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы испра́вили непра́вильные слова́.
         en_gb: We corrected the wrong words.
   "неприятный=unpleasant":
@@ -11106,6 +11123,7 @@ words:
         en_gb: It was an unpleasant conversation.
       - ru: У неё неприя́тная привы́чка.
         en_gb: She has an unpleasant habit.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали неприя́тные но́вости.
         en_gb: We heard unpleasant news.
   "нервный=nervous":
@@ -11151,6 +11169,7 @@ words:
         en_gb: He is a very nervous person.
       - ru: У неё не́рвная улы́бка.
         en_gb: She has a nervous smile.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Пе́ред экза́меном все не́рвные.
         en_gb: Before the exam everyone is nervous.
   "несчастный=unhappy":
@@ -11194,6 +11213,7 @@ words:
     usage:
       - ru: Он вы́глядел несча́стным.
         en_gb: He looked unhappy.
+        inflect: { token: 3, case: ins, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ ро́сла несча́стной де́вочкой.
         en_gb: She grew up an unhappy girl.
       - ru: Э́то несча́стное живо́тное оста́лось одно́.
@@ -11241,6 +11261,7 @@ words:
         en_gb: He has an unhurried step.
       - ru: Мы вели́ неторопли́вую бесе́ду.
         en_gb: We had an unhurried conversation.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мне нра́вятся неторопли́вые у́тра.
         en_gb: I like unhurried mornings.
   "нижний=lower":
@@ -11282,6 +11303,7 @@ words:
     usage:
       - ru: Кни́га лежи́т на ни́жней по́лке.
         en_gb: The book is on the lower shelf.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Откро́й ни́жний я́щик стола́.
         en_gb: Open the lower drawer of the desk.
       - ru: Ни́жние этажи́ уже́ за́няты.
@@ -11304,6 +11326,7 @@ words:
         en_gb: He has a low voice.
       - ru: Зимо́й здесь ни́зкие температу́ры.
         en_gb: In winter there are low temperatures here.
+        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: ни́зкий
       f: ни́зкая
@@ -11346,6 +11369,7 @@ words:
         en_gb: I have a new phone.
       - ru: Мы купи́ли но́вую маши́ну.
         en_gb: We bought a new car.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У них но́вые сосе́ди.
         en_gb: They have new neighbours.
     forms:
@@ -11418,6 +11442,7 @@ words:
     usage:
       - ru: Э́то соверше́нно норма́льная реа́кция.
         en_gb: This is a completely normal reaction.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У больно́го норма́льное давле́ние.
         en_gb: The patient has normal blood pressure.
       - ru: Они́ веду́т норма́льный о́браз жи́зни.
@@ -11465,6 +11490,7 @@ words:
         en_gb: I heard a nocturnal noise.
       - ru: Нас разбуди́ла ночна́я гроза́.
         en_gb: A nocturnal storm woke us up.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Сова́ — ночна́я пти́ца.
         en_gb: The owl is a nocturnal bird.
   "нужный=necessary":
@@ -11508,6 +11534,7 @@ words:
     usage:
       - ru: Я нашёл ну́жную кни́гу.
         en_gb: I found the necessary book.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Вот тебе́ ну́жный инструме́нт.
         en_gb: Here is the necessary tool for you.
       - ru: Возьми́ все ну́жные ве́щи.
@@ -11553,6 +11580,7 @@ words:
         en_gb: The current director is very strict.
       - ru: Ны́нешняя пого́да непредсказу́ема.
         en_gb: The current weather is unpredictable.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ны́нешнее поколе́ние лю́бит техноло́гии.
         en_gb: The current generation loves technology.
   "обратный=reverse":
@@ -11596,6 +11624,7 @@ words:
         en_gb: We bought a return ticket.
       - ru: Маши́на пое́хала в обра́тную сто́рону.
         en_gb: The car drove in the reverse direction.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Назови́ чи́сла в обра́тном поря́дке.
         en_gb: Name the numbers in reverse order.
   "общественный=public":
@@ -11642,6 +11671,7 @@ words:
         en_gb: I travel by public transport.
       - ru: Здесь нахо́дится обще́ственная библиоте́ка.
         en_gb: The public library is located here.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он занима́ется обще́ственной рабо́той.
         en_gb: He is engaged in public work.
   "общий=general":
@@ -11683,6 +11713,7 @@ words:
     usage:
       - ru: У нас о́бщая цель.
         en_gb: We have a common goal.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ живу́т в о́бщем до́ме.
         en_gb: They live in a shared house.
       - ru: Мы обсуди́ли о́бщие вопро́сы.
@@ -11728,6 +11759,7 @@ words:
         en_gb: It was an ordinary day.
       - ru: У нас обыкнове́нная семья́.
         en_gb: We are an ordinary family.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мне нужны́ обыкнове́нные карандаши́.
         en_gb: I need ordinary pencils.
   "обычный=ordinary":
@@ -11774,6 +11806,7 @@ words:
         en_gb: Today is an ordinary working day.
       - ru: Э́то обы́чная исто́рия.
         en_gb: It is an ordinary story.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы говори́ли обы́чными слова́ми.
         en_gb: We spoke in ordinary words.
   "обязанный=obliged":
@@ -11862,6 +11895,7 @@ words:
         en_gb: An enormous oak grows in the garden.
       - ru: Э́то огро́мная отве́тственность.
         en_gb: This is an enormous responsibility.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы прошли́ огро́мное расстоя́ние.
         en_gb: We covered an enormous distance.
   "одетый=dressed":
@@ -11901,6 +11935,9 @@ words:
       pl_ins: оде́тыми
       pl_pre: оде́тых
     usage:
+      - ru: Тепло́ оде́тый ма́льчик игра́л в снегу́.
+        en_gb: A warmly dressed boy was playing in the snow.
+        inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Он был тепло́ оде́т.
         en_gb: He was warmly dressed.
       - ru: Де́вочка пришла́ хорошо́ оде́та.
@@ -11948,6 +11985,7 @@ words:
         en_gb: They have identical height.
       - ru: На сёстрах одина́ковая оде́жда.
         en_gb: The sisters have identical clothes on.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вы́брали одина́ковые телефо́ны.
         en_gb: We chose identical phones.
   "одинокий=lonely":
@@ -11966,6 +12004,7 @@ words:
         en_gb: He feels lonely.
       - ru: На холме́ стои́т одино́кое де́рево.
         en_gb: A lonely tree stands on the hill.
+        inflect: { token: 4, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: В дере́вне живу́т одино́кие лю́ди.
         en_gb: Lonely people live in the village.
     forms:
@@ -12011,6 +12050,7 @@ words:
     usage:
       - ru: Э́то о́чень опа́сная доро́га.
         en_gb: This is a very dangerous road.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то опа́сный зверь.
         en_gb: This is a dangerous animal.
       - ru: Мы избежа́ли опа́сного пути́.
@@ -12089,6 +12129,7 @@ words:
         en_gb: The police took prompt measures.
       - ru: Э́то операти́вная информа́ция.
         en_gb: This is prompt information.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
   "определённый=definite":
     batteries: [texts]
     cefr_level: B1
