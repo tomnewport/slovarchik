@@ -129,19 +129,40 @@ right first time.
 
 ## Coverage strategy
 
-Hand-authored, **partial per word, systematic per inflection type**. The initial
-bank covers, across several subjects:
+Hand-authored, **systematic per inflection type**. Coverage is now effectively
+complete for every inflecting part of speech — each drillable word carries at
+least one annotated phrase, and the dataset as a whole spans every form:
 
 - **Nouns:** all six cases in singular and plural, spanning the main gender /
   ending classes, and the typical *reasons* each case appears (direct object,
-  possession/absence, indirect object, with/by, location/topic, motion).
-- **Adjectives:** agreement across genders and cases.
-- **Verbs:** present/future persons and the past-tense gender/number forms.
+  possession/absence, indirect object, with/by, location/topic, motion). The
+  handful of un-annotated nouns are indeclinable (кафе, метро, пальто, США …).
+- **Adjectives:** agreement across genders and cases (100%).
+- **Verbs:** present/future persons and the past-tense gender/number forms (100%).
+- **Pronouns:** personal/reflexive (suppletive, flat by case), interrogative /
+  indefinite / negative (кто, что, никто …), and the gender·case-agreeing
+  possessives and demonstratives (мой, этот, какой, чей …). The four left out
+  are indeclinable (его/её/их as possessives, and ско́лько).
 
 Each phrase links to a rule, and the rule set deliberately covers the awkward
 bits — fleeting vowels, the к/г/х and ж/ш/щ/ч spelling rules, animate accusative
-= genitive, feminine -ь nouns, etc. Expanding coverage (more subjects, more
-exceptions) is ongoing content work; the mechanism does not depend on it.
+= genitive, feminine -ь nouns, suppletive pronoun stems, the н- prefix on
+prepositional он/она́/они́, etc.
+
+`scripts/coverage.mjs` is the content tool: `dump <pos>` proposes annotations
+(auto where unambiguous, `# MANUAL` where a human must read the sentence),
+`apply <file>` inserts them surgically, and `stat` reports per-POS coverage.
+
+### Pronoun forms
+
+Pronoun forms don't live in the noun `forms[number][case]` shape: personal,
+reflexive and interrogative pronouns are flat by case (`forms[case]` on the raw
+entry), while possessives / demonstratives decline like adjectives
+(`declension[gender_case]`). The resolver reads the answer straight off the
+annotated token, so it needs no per-shape logic; only the data-integrity test's
+`storedForm` branches on this to cross-check the stored form. Annotate a flat
+pronoun with `{ case, number }` and a gendered one with `{ case, number, gender }`
+(gender drives the agreement step, exactly as for adjectives).
 
 ### Exception weighting
 

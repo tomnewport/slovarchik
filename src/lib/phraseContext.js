@@ -136,7 +136,8 @@ function agreementStep(target, word, rng) {
     { id: `${target.gender}.${target.case}`, label: agreementLabel(target.gender, target.case), correct: true },
     ...decoys.map((s) => ({ id: `${s.g}.${s.c}`, label: agreementLabel(s.g, s.c), correct: false })),
   ]
-  return { kind: 'agreement', prompt: 'Which form does the adjective need to agree with?', options: shuffle(options, rng) }
+  const what = word?.pos === 'pronoun' ? 'pronoun' : 'adjective'
+  return { kind: 'agreement', prompt: `Which form does the ${what} need to agree with?`, options: shuffle(options, rng) }
 }
 
 /**

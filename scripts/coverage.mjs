@@ -165,7 +165,7 @@ function dump(pos, offset, limit) {
 }
 
 function stat() {
-  for (const pos of ['noun', 'verb', 'adjective']) {
+  for (const pos of ['noun', 'verb', 'adjective', 'pronoun']) {
     const ws = allWords(pos)
     const done = ws.filter(([, , w]) => annotated(w)).length
     console.log(`${pos}: ${done}/${ws.length} (${(100 * done / ws.length).toFixed(1)}%)`)

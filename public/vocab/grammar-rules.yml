@@ -188,3 +188,42 @@ rules:
       Feminine singular endings are the clearest: -ая (nominative) → -ую
       (accusative). Hard stems take -ый/-ой, -ая, -ое, -ые; soft stems and
       stems after к/г/х and ж/ш/щ/ч take -ий, -яя, -ее, -ие.
+
+  # ── Pronouns ────────────────────────────────────────────────────────────
+  pronoun-personal:
+    title: "Personal pronoun"
+    formula: "я → меня́/мне · ты → тебя́/тебе́ · он → его́/ему́/нём"
+    explanation: >
+      Personal pronouns (я, ты, он, она́, оно́, мы, вы, они́) change shape by
+      case, often suppletively — the oblique stem is unrelated to the
+      nominative. After a preposition the third-person forms add н-: у него́, о
+      ней, с ни́ми. The reflexive себя́ has no nominative and refers back to the
+      subject.
+    exceptions:
+      - "After prepositions он/она́/они́ start with н-: о нём, к ней, с ни́ми."
+  pronoun-possessive:
+    title: "Possessive pronoun"
+    formula: "мой, твой, наш, свой agree like adjectives · его́/её/их never change"
+    explanation: >
+      Possessives мой, твой, наш, ваш and reflexive свой agree in gender, number
+      and case with the thing possessed, just like adjectives: моя́ кни́га → мою́
+      кни́гу → мое́й кни́ги. The third-person его́, её, их are invariable — they
+      never inflect.
+    exceptions:
+      - "его́, её, их (his/her/their) are indeclinable: его́ дом, его́ до́ма, его́ до́му."
+  pronoun-demonstrative:
+    title: "Demonstrative / determiner"
+    formula: "э́тот, тот, весь, сам, ка́ждый, любо́й, како́й, кото́рый, чей agree like adjectives"
+    explanation: >
+      Demonstratives (э́тот, тот) and determiners (весь, сам, ка́ждый, любо́й,
+      никако́й) and the relative/interrogative како́й, кото́рый, чей agree in
+      gender, number and case with their noun: э́та кни́га → э́ту кни́гу; в ка́ждом
+      до́ме; кото́рую я чита́ю.
+  pronoun-interrogative:
+    title: "Interrogative / indefinite"
+    formula: "кто → кого́/кому́/кем · что → чего́/чему́/чем"
+    explanation: >
+      Question words кто and что and their indefinite (кто́-то, что́-то) and
+      negative (никто́, ничто́) relatives decline by case only: кому́ ты пи́шешь;
+      чего́ ты бои́шься; ниче́м не интересу́ется. The negatives split around a
+      preposition: ни с кем, ни о чём.

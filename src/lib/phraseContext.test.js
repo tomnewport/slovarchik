@@ -22,6 +22,22 @@ const adjPhrase = {
   target: { key: 'новый=new', token: 3, case: 'acc', number: 'sg', gender: 'f', rule: 'adj-agreement' },
 }
 
+// personal pronoun (flat by case, no gender) and a possessive (declines by
+// gender·case like an adjective)
+const ya = { key: 'я=I', pos: 'pronoun', headword: 'я', ru: 'я' }
+const moy = {
+  key: 'мой=my', pos: 'pronoun', headword: 'мой', ru: 'мой',
+  extra: { declension: { m_nom: 'мой', f_nom: 'моя́', f_acc: 'мою́', n_nom: 'моё', pl_nom: 'мои́' } },
+}
+const yaPhrase = {
+  id: 'zhdet-menya', ru: 'Он ждёт меня́ у вхо́да.', en: 'He is waiting for me at the entrance.',
+  target: { key: 'я=I', token: 3, case: 'acc', number: 'sg', rule: 'pronoun-personal' },
+}
+const moyPhrase = {
+  id: 'moya-sestra', ru: 'Моя́ сестра́ живёт в Пари́же.', en: 'My sister lives in Paris.',
+  target: { key: 'мой=my', token: 1, case: 'nom', number: 'sg', gender: 'f', rule: 'pronoun-possessive' },
+}
+
 const accPhrase = {
   id: 'vizhu-sobaku',
   ru: 'Я ви́жу соба́ку.',
@@ -102,6 +118,21 @@ describe('buildFromPhrase', () => {
 
   it('returns null for an out-of-range token index', () => {
     expect(buildFromPhrase({ ...accPhrase, target: { ...accPhrase.target, token: 9 } }, sobaka)).toBeNull()
+  })
+
+  it('builds a case step for a personal pronoun', () => {
+    const ex = buildFromPhrase(yaPhrase, ya)
+    expect(ex.step1.kind).toBe('case')
+    expect(ex.answer).toBe('меня')
+    expect(ex.slotLabel).toContain('Accusative')
+  })
+
+  it('builds an agreement step for a possessive pronoun (says "pronoun")', () => {
+    const ex = buildFromPhrase(moyPhrase, moy, { rng: () => 0 })
+    expect(ex.step1.kind).toBe('agreement')
+    expect(ex.step1.prompt).toContain('pronoun')
+    expect(ex.answer).toBe('моя')
+    expect(ex.slotLabel).toBe('Feminine · Nominative')
   })
 })
 
