@@ -28,26 +28,28 @@ that not every word has a phrase for every case, and instead make sure each
 
 ## Data model
 
-### `public/vocab/phrases.yml` (new)
+### `inflect:` annotations on existing `usage:` examples
 
-A curated bank of annotated example phrases. Each entry is a correct sentence
-plus an annotation of the single token being drilled.
+Words already carry `usage:` example sentences that teach them. Rather than
+maintain a parallel phrase bank, we **annotate those examples in place**: an
+optional `inflect:` block marks which token is the word being taught and how it
+is inflected. The target word is the example's owner, so its key is implicit.
+One annotated sentence now feeds both the translation/spelling/listening drills
+and the context-inflection drill.
 
 ```yaml
-phrases:
-  - id: vizhu-sobaku
-    ru: "Я ви́жу соба́ку."          # correct, stress-marked, with punctuation
-    en: "I see the dog."            # natural English, number-explicit
-    subject: animals                # coverage bucket (mirrors `collections`)
-    target:
-      key: "собака=dog"             # vocab key of the word being taught
-      token: 3                      # 1-based index of the target token in `ru`
-      case: acc                     # nouns / adjectives / pronouns
-      number: sg
-      rule: noun-acc-fem-a          # → grammar-rules.yml (optional)
+"собака=dog":
+  ...
+  usage:
+    - ru: Я ви́жу соба́ку.            # correct, stress-marked, number-explicit en
+      en_gb: I see the dog.
+      inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
 ```
 
-Part-of-speech-specific `target` fields:
+`vocabBuild.shapeContextPhrases(words)` turns every annotated example into the
+phrase descriptor the resolver consumes (`{ id, ru, en, subject, target }`,
+where `subject` comes from the word's first `collection`). Part-of-speech fields
+on `inflect`:
 
 | POS | fields | notes |
 | --- | --- | --- |
@@ -62,18 +64,18 @@ caught.
 
 ### `public/vocab/grammar-rules.yml` (new)
 
-Short rule/formula explanations, keyed by id, shown when the answer is revealed.
+Short rule/formula explanations, keyed by id (referenced by `inflect.rule`),
+shown when the answer is revealed. Loaded separately — it has no `words:` block.
 
 ```yaml
 rules:
-  noun-acc-fem-a:
-    title: "Accusative singular — feminine nouns in -а"
-    formula: "-а → -у   (-я → -ю)"
+  noun-acc-sg:
+    title: "Accusative singular"
+    formula: "f -а → -у · inanimate m/n = nominative · animate m = genitive"
     explanation: >
-      Feminine nouns ending in -а take -у in the accusative singular (the
-      direct-object case). соба́ка → соба́ку.
+      The accusative is the direct object and follows в/на for motion…
     exceptions:
-      - "Nouns in -ь (feminine 3rd declension) don't change: мать → мать."
+      - "Feminine -ь nouns don't change: мать → мать."
 ```
 
 ## Interaction: two steps
@@ -101,8 +103,9 @@ right first time.
   targetIndex, answer/answerAccented, case, number, caseOptions, slotLabel, `ru`
   full sentence, `en`, `rule`). `canBuildContext(word, { phrasesByKey })` = the
   word has ≥1 annotated phrase.
-- `src/stores/vocab.js` loads `phrases.yml` + `grammar-rules.yml`, builds a
-  `key → [phrase]` index, and stamps `hasContextDrill` from it (replacing the
+- `src/stores/vocab.js` builds the `key → [phrase]` index from
+  `shapeContextPhrases(words)` (the `inflect:` annotations), loads
+  `grammar-rules.yml`, and stamps `hasContextDrill` from the index (replacing the
   battery check). The `context` mastery dimension in `progression.js` is
   unchanged — only its *source* of truth moves.
 - `src/lib/exerciseBuild.js`: `buildContext` resolves via `phraseContext.js`; the
@@ -133,7 +136,7 @@ exceptions) is ongoing content work; the mechanism does not depend on it.
 ## Testing & conventions
 
 - All logic in framework-free `src/lib/*` with co-located `*.test.js`.
-- A data test asserts every `phrases.yml` entry resolves: target token exists,
-  its word core matches the answer, and any `rule` id exists in
-  `grammar-rules.yml`.
+- A data test (`phrasesData.test.js`) asserts every `inflect:` annotation
+  resolves: its token core matches the word's stored form for the annotated slot,
+  and any `rule` id exists in `grammar-rules.yml`.
 - `npm run lint && npm test && npm run build` before pushing.

@@ -6,14 +6,13 @@
 import { computed, reactive } from 'vue'
 import yaml from 'js-yaml'
 
-import { buildWords, shapeVocab, shapeNouns, shapePhrases } from '../lib/vocabBuild.js'
+import { buildWords, shapeVocab, shapeNouns, shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import * as idb from '../lib/idb.js'
 
-/** Files (and manifest `pos`) holding context-drill data rather than words. */
-const PHRASES_FILE = 'phrases.yml'
+/** File (and manifest `pos`) holding the grammar-rule explanations, not words. */
 const RULES_FILE = 'grammar-rules.yml'
-const NON_WORD_FILES = new Set([PHRASES_FILE, RULES_FILE])
+const NON_WORD_FILES = new Set([RULES_FILE])
 
 const BASE = import.meta.env.BASE_URL || '/'
 const manifestUrl = () => `${BASE}vocab/manifest.json`
@@ -23,7 +22,7 @@ const fileUrl = (file) => `${BASE}vocab/${file}`
 export const state = reactive({
   status: 'idle',
   words: [],
-  /** key → annotated context phrases (from phrases.yml), built by indexPhrases. */
+  /** key → annotated context phrases (from usage `inflect:` blocks), indexed. */
   contextPhrases: new Map(),
   /** Parsed grammar-rules.yml `rules` map (rule id → explanation), or {}. */
   rules: {},
@@ -40,8 +39,8 @@ export const isReady = computed(() => state.words.length > 0)
 /**
  * Stamp `hasContextDrill` on every word so the progression model knows whether
  * the phrase-completion mastery requirement applies. A word qualifies only if at
- * least one annotated phrase teaches it; without phrases.yml no word does (the
- * requirement stays dormant).
+ * least one annotated usage example teaches it; without any `inflect:`
+ * annotations no word does (the requirement stays dormant).
  */
 function stampContextDrill(words, phrasesByKey) {
   for (const w of words) w.hasContextDrill = canBuildContext(w, { phrasesByKey })
@@ -64,7 +63,7 @@ function rebuild(records) {
       .filter((r) => !NON_WORD_FILES.has(r.file))
       .map((r) => ({ pos: r.pos, text: r.content })),
   )
-  const phrasesByKey = indexPhrases(parseRecord(records, PHRASES_FILE, 'phrases') ?? [])
+  const phrasesByKey = indexPhrases(shapeContextPhrases(words))
   const rules = parseRecord(records, RULES_FILE, 'rules') ?? {}
   stampContextDrill(words, phrasesByKey)
   state.words = words

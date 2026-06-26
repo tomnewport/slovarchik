@@ -248,6 +248,7 @@ words:
         en_gb: I am learning the English language.
       - ru: Она́ чита́ет англи́йскую кни́гу.
         en_gb: She is reading an English book.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мне нра́вятся англи́йские тради́ции.
         en_gb: I like English traditions.
   "англо-русский=English-Russian":
@@ -492,6 +493,7 @@ words:
         en_gb: This is useless advice.
       - ru: Така́я бесполе́зная вещь.
         en_gb: Such a useless thing.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то бесполе́зные ве́щи.
         en_gb: These are useless things.
     declension:
@@ -537,6 +539,7 @@ words:
         en_gb: He studies at the biology faculty.
       - ru: Э́то биологи́ческая нау́ка.
         en_gb: This is a biological science.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы прово́дим биологи́ческие о́пыты.
         en_gb: We conduct biological experiments.
     declension:
@@ -1378,6 +1381,7 @@ words:
         en_gb: A magnificent view opened up before us.
       - ru: Э́то великоле́пная карти́на.
         en_gb: This is a magnificent painting.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы жи́ли в великоле́пном до́ме.
         en_gb: We lived in a magnificent house.
   "верный=faithful":
@@ -3945,6 +3949,7 @@ words:
         en_gb: At the given moment I am busy.
       - ru: Реши́те да́нную зада́чу.
         en_gb: Solve the given problem.
+        inflect: { token: 2, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В да́нном слу́чае он прав.
         en_gb: In the given case he is right.
   "дежурный=on duty":
@@ -17329,6 +17334,7 @@ words:
     usage:
       - ru: Запо́лните соотве́тствующую гра́фу.
         en_gb: Fill in the corresponding box.
+        inflect: { token: 2, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Бы́ли при́няты соотве́тствующие ме́ры.
         en_gb: Corresponding measures were taken.
     forms:

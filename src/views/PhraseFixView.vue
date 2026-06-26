@@ -1,7 +1,7 @@
 <script setup>
 // Standalone free-practice entry for the in-context inflection drill. It reuses
 // the same resolver (lib/phraseContext.js) and renderer (PhraseFixExercise.vue)
-// as the session version, drawing from the annotated phrase bank (phrases.yml).
+// as the session version, drawing from the usage `inflect:` annotations.
 import { computed, ref } from 'vue'
 import { state as vocabState } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'

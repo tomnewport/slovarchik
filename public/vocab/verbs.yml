@@ -476,6 +476,7 @@ words:
         en_gb: The small child is afraid of the dark.
       - ru: Я бою́сь высоты́.
         en_gb: I am afraid of heights.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Соба́ка боя́лась гро́ма.
         en_gb: The dog was afraid of thunder.
       - ru: Без све́та ребёнок бу́дет боя́ться.
@@ -748,6 +749,7 @@ words:
         en_gb: I will rush for help.
       - ru: Де́ти бро́сились бежа́ть.
         en_gb: The children rushed to run.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Е́сли бу́дет ну́жно, я бы бро́сился в во́ду.
         en_gb: If needed, I would rush into the water.
       - ru: Ско́ро спаса́тель бро́сится на по́мощь.
@@ -844,6 +846,7 @@ words:
     usage:
       - ru: Ве́тер ва́лит дере́вья.
         en_gb: The wind topples the trees.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Рабо́чие вали́ли ста́рый сара́й.
         en_gb: The workers were felling the old shed.
       - ru: Сне́г вали́т весь день.
@@ -1824,6 +1827,7 @@ words:
     usage:
       - ru: Он возрази́л учи́телю.
         en_gb: He objected to the teacher.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я возражу́, е́сли ну́жно.
         en_gb: I will object if necessary.
       - ru: Никто́ не возрази́л про́тив реше́ния.
@@ -2854,6 +2858,7 @@ words:
     usage:
       - ru: Я вы́зову врача́.
         en_gb: I will call the doctor.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Учи́тель вы́звал ученика́ к доске́.
         en_gb: The teacher called the pupil to the board.
       - ru: Вы́зовите ско́рую по́мощь!
@@ -3218,6 +3223,7 @@ words:
         en_gb: Don't let the dog out onto the street.
       - ru: Изда́тельство выпуска́ло журна́лы.
         en_gb: The publishing house used to release magazines.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: С весны́ заво́д бу́дет выпуска́ть но́вую моде́ль.
         en_gb: From spring the factory will be producing a new model.
       - ru: Без разреше́ния я бы не выпуска́л соба́ку.
@@ -4329,6 +4335,7 @@ words:
     usage:
       - ru: Что ты де́лаешь?
         en_gb: What are you doing?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Я де́лаю дома́шнее зада́ние.
         en_gb: I am doing my homework.
       - ru: Они́ де́лали всё пра́вильно.
@@ -6985,6 +6992,7 @@ words:
         en_gb: She took up drawing.
       - ru: Дава́й займёмся де́лом.
         en_gb: Let's get down to business.
+        inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я бы заня́лся спо́ртом, е́сли бы не лень.
         en_gb: I would take up sport if it weren't for laziness.
       - ru: Ско́ро мы займёмся ремо́нтом.
@@ -21722,6 +21730,7 @@ words:
         en_gb: The meeting went on for a long time.
       - ru: Перегово́ры продолжа́ются.
         en_gb: The negotiations are continuing.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Дождь бу́дет продолжа́ться всю ночь.
         en_gb: The rain will continue all night.
       - ru: Спор продолжа́лся бы без конца́.
@@ -28702,6 +28711,7 @@ words:
         en_gb: I hope everything will work out.
       - ru: Опера́ция удала́сь.
         en_gb: The operation was a success.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Наде́юсь, за́втра план уда́стся.
         en_gb: I hope the plan will succeed tomorrow.
       - ru: С деньга́ми нам уда́лось бы бо́льше.
@@ -30108,6 +30118,7 @@ words:
         en_gb: We will have enough money for the tickets.
       - ru: Хвати́т спо́рить!
         en_gb: Stop arguing!
+        inflect: { token: 1, tense: future, person: 3sg, rule: verb-future }
       - ru: Воды́ хвати́ло на всех.
         en_gb: There was enough water for everyone.
       - ru: За́втра нам хва́тит де́нег на биле́ты.

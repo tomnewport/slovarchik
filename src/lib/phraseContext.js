@@ -1,8 +1,9 @@
 // Pure resolver for the in-context inflection drill.
 //
-// The drill is driven by hand-authored, fully-annotated phrases
-// (public/vocab/phrases.yml). Each phrase is a correct, stress-marked sentence
-// with one token annotated as the word being taught — its case/number (nouns,
+// The drill is driven by annotated usage examples: an `inflect:` block on a
+// word's usage sentence (in the vocab YAML), shaped into phrase descriptors by
+// vocabBuild.shapeContextPhrases. Each is a correct, stress-marked sentence with
+// one token annotated as the word being taught — its case/number (nouns,
 // adjectives, pronouns) or tense/person (verbs) and an optional rule id linking
 // to a grammar explanation.
 //
@@ -42,7 +43,7 @@ function pickOne(arr, rng) {
 
 /**
  * Build an index from a word key to the list of phrases that teach it.
- * @param {Array} phrases parsed phrases.yml `phrases` list
+ * @param {Array} phrases context phrases (see vocabBuild.shapeContextPhrases)
  * @returns {Map<string, object[]>}
  */
 export function indexPhrases(phrases) {

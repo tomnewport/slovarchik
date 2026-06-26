@@ -158,10 +158,12 @@ words:
     usage:
       - ru: Он е́дет на автомоби́ле.
         en_gb: He is travelling by car.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мой автомоби́ль стои́т во дворе́.
         en_gb: My car is parked in the yard.
       - ru: На у́лице мно́го автомоби́лей.
         en_gb: There are many cars in the street.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: автомоби́ль
       sg_gen: автомоби́ля
@@ -254,6 +256,7 @@ words:
         en_gb: In hell, fire awaits the sinners.
       - ru: Гре́шники боя́тся а́да.
         en_gb: Sinners fear hell.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Э́та жара́ — настоя́щий ад.
         en_gb: This heat is real hell.
     declension:
@@ -616,6 +619,7 @@ words:
         en_gb: The young couple approached the altar.
       - ru: На алтаре́ лежа́ла кни́га.
         en_gb: A book lay on the altar.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: алта́рь
       sg_gen: алтаря́
@@ -921,6 +925,7 @@ words:
         en_gb: There is an aerial on the roof.
       - ru: Ве́тер слома́л анте́нну.
         en_gb: The wind broke the aerial.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Без анте́нны телеви́зор не рабо́тает.
         en_gb: Without an aerial the television does not work.
     declension:
@@ -1046,6 +1051,7 @@ words:
         en_gb: The arrest of the criminal pleased the residents.
       - ru: Судья́ говори́л об аре́сте.
         en_gb: The judge spoke about the arrest.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: аре́ст
       sg_gen: аре́ста
@@ -1106,6 +1112,7 @@ words:
         en_gb: The performer came out on stage.
       - ru: Зри́тели аплоди́ровали арти́сту.
         en_gb: The audience applauded the performer.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В ци́рке выступа́ют молоды́е арти́сты.
         en_gb: Young performers appear at the circus.
     declension:
@@ -1486,6 +1493,7 @@ words:
         en_gb: A butterfly flies over the flowers.
       - ru: Де́вочка пойма́ла ба́бочку.
         en_gb: The girl caught a butterfly.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В саду́ мно́го я́рких ба́бочек.
         en_gb: There are many bright butterflies in the garden.
     declension:
@@ -1716,10 +1724,12 @@ words:
     usage:
       - ru: Цветы́ стоя́т на балко́не.
         en_gb: The flowers are on the balcony.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: С балко́на ви́дно мо́ре.
         en_gb: The sea is visible from the balcony.
       - ru: Они́ ку́рят на балко́нах.
         en_gb: They smoke on the balconies.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: балко́н
       sg_gen: балко́на
@@ -2314,6 +2324,7 @@ words:
         en_gb: The refugee asked for help.
       - ru: Во́лонтёры помога́ют бе́женцам.
         en_gb: Volunteers help the refugees.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: бе́женец
       sg_gen: бе́женца
@@ -2915,6 +2926,7 @@ words:
         en_gb: I cannot tell these twins apart.
       - ru: Учи́тельница ра́да близнеца́м.
         en_gb: The teacher is glad to have the twins.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       pl_nom: близнецы́
       pl_gen: близнецо́в
@@ -3401,6 +3413,7 @@ words:
         en_gb: The bomb destroyed the bridge.
       - ru: Самолёт сбро́сил бо́мбу.
         en_gb: The plane dropped a bomb.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Сапёры обезвре́дили две бо́мбы.
         en_gb: The sappers defused two bombs.
     declension:
@@ -3795,6 +3808,7 @@ words:
         en_gb: These trousers are too big for me.
       - ru: На брю́ках появи́лось пятно́.
         en_gb: A stain appeared on the trousers.
+        inflect: { token: 2, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       pl_nom: брю́ки
       pl_gen: брюк
@@ -4015,6 +4029,7 @@ words:
     usage:
       - ru: Купи́ буты́лку молока́.
         en_gb: Buy a bottle of milk.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В буты́лке оста́лось немно́го воды́.
         en_gb: A little water is left in the bottle.
       - ru: На по́лке стоя́т пусты́е буты́лки.
@@ -4773,6 +4788,7 @@ words:
         en_gb: Spring is early this year.
       - ru: Весно́й та́ет снег.
         en_gb: In spring the snow melts.
+        inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
         en_alt:
           - snow melts in spring
       - ru: Мы ждём прихо́да весны́.
@@ -4795,6 +4811,7 @@ words:
         en_gb: There is not a breath of wind outside.
       - ru: Ло́дку несёт ве́тром.
         en_gb: The boat is carried by the wind.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ве́тер
       sg_gen: ве́тра
@@ -5067,6 +5084,7 @@ words:
         en_gb: After the explosion there was silence.
       - ru: Зда́ние разру́шено взры́вом.
         en_gb: The building was destroyed by the explosion.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: взрыв
       sg_gen: взры́ва
@@ -5426,6 +5444,7 @@ words:
         en_gb: They found an old rifle in the basement.
       - ru: Охо́тник чи́стит винто́вку.
         en_gb: The hunter cleans his rifle.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: винто́вка
       sg_gen: винто́вки
@@ -5457,6 +5476,7 @@ words:
         en_gb: Scientists are studying a new virus.
       - ru: Компью́тер зарази́лся ви́русом.
         en_gb: The computer was infected with a virus.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ви́рус
       sg_gen: ви́руса
@@ -6324,6 +6344,7 @@ words:
         en_gb: The wave crashed against the rocks.
       - ru: Ло́дка кача́ется на волна́х.
         en_gb: The boat rocks on the waves.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Высо́кие во́лны напуга́ли купа́льщиков.
         en_gb: The high waves frightened the swimmers.
   "волнение=excitement":
@@ -7562,6 +7583,7 @@ words:
         en_gb: Germany is a large country.
       - ru: Мы интересу́емся Герма́нией.
         en_gb: We are interested in Germany.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
   "герой=hero":
     batteries: [people]
     cefr_level: A2
@@ -8356,6 +8378,7 @@ words:
     usage:
       - ru: Лю́ди мо́лятся Го́споду.
         en_gb: People pray to the Lord.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Он ве́рил в Го́спода всем се́рдцем.
         en_gb: He believed in the Lord with all his heart.
       - ru: Сла́ва Го́споду за э́тот день.
@@ -8726,6 +8749,7 @@ words:
     usage:
       - ru: Свяще́нник говори́л о гре́шниках.
         en_gb: The priest spoke about sinners.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Гре́шник проси́л проще́ния.
         en_gb: The sinner asked for forgiveness.
       - ru: Бог проща́ет ка́ющегося гре́шника.
@@ -14300,6 +14324,7 @@ words:
         en_gb: There were many spectators in the hall.
       - ru: Фильм понра́вился зри́телям.
         en_gb: The film pleased the spectators.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
   "зуб=tooth":
     batteries: [everyday]
     cefr_level: A2
@@ -14737,6 +14762,7 @@ words:
         en_gb: The emperor ruled for many years.
       - ru: Солда́ты служи́ли импера́тору.
         en_gb: The soldiers served the emperor.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Карти́на изобража́ет ру́сских импера́торов.
         en_gb: The painting depicts Russian emperors.
   "империя=empire":
@@ -16079,6 +16105,7 @@ words:
         en_gb: The summer holidays start in June.
       - ru: Де́ти ра́дуются кани́кулам.
         en_gb: The children are glad about the holidays.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: На кани́кулах мы е́здили к ба́бушке.
         en_gb: During the holidays we visited grandmother.
     declension:
@@ -16635,6 +16662,7 @@ words:
     usage:
       - ru: Това́р высо́кого ка́чества.
         en_gb: The goods are of high quality.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы дово́льны ка́чеством рабо́ты.
         en_gb: We are pleased with the quality of the work.
       - ru: Он це́нит ка́чество вы́ше цены́.
@@ -18251,6 +18279,7 @@ words:
         en_gb: The commissar monitored morale in the unit.
       - ru: Солда́ты ве́рили комисса́ру.
         en_gb: The soldiers trusted the commissar.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В по́лку присла́ли но́вых комисса́ров.
         en_gb: New commissars were sent to the regiment.
     declension:
@@ -19204,6 +19233,7 @@ words:
         en_gb: The office is at the end of the corridor.
       - ru: В коридо́ре темно́.
         en_gb: It is dark in the corridor.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Де́ти бе́гали по коридо́ру.
         en_gb: The children ran along the corridor.
     declension:
@@ -21203,6 +21233,7 @@ words:
         en_gb: He covered the table with varnish.
       - ru: Купи́ ба́нку ла́ка.
         en_gb: Buy a tin of varnish.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ме́бель блести́т от ла́ка.
         en_gb: The furniture shines with varnish.
     declension:
@@ -21446,6 +21477,7 @@ words:
         en_gb: The lieutenant reported on the situation.
       - ru: Прика́з отда́л лейтена́нту.
         en_gb: The order was given to the lieutenant.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Молоды́е лейтена́нты стоя́ли в строю́.
         en_gb: The young lieutenants stood in formation.
     declension:
@@ -22518,6 +22550,7 @@ words:
         en_gb: Curiosity led him to the strange house.
       - ru: Де́ти полны́ любопы́тства.
         en_gb: Children are full of curiosity.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ смотре́ла на меня́ с любопы́тством.
         en_gb: She looked at me with curiosity.
   "люк=hatch":
@@ -25584,6 +25617,7 @@ words:
         en_gb: You need flour for bread.
       - ru: Купи́ килогра́мм муки́.
         en_gb: Buy a kilogram of flour.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ обсы́пала стол муко́й.
         en_gb: She dusted the table with flour.
     declension:
@@ -26062,6 +26096,7 @@ words:
     usage:
       - ru: Я плачу́ нали́чными.
         en_gb: I pay in cash.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
       - ru: У меня́ нет нали́чных.
         en_gb: I have no cash.
       - ru: Мы храни́м немно́го нали́чных до́ма.
@@ -27680,6 +27715,7 @@ words:
         en_gb: He was born in a northern region.
       - ru: Грани́цы областе́й измени́лись.
         en_gb: The borders of the regions have changed.
+        inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Э́то откры́тие в о́бласти медици́ны.
         en_gb: This is a discovery in the field of medicine.
   "облегчение=relief":
@@ -32849,6 +32885,7 @@ words:
         en_gb: My shoulder hurts.
       - ru: Он пожа́л плеча́ми.
         en_gb: He shrugged his shoulders.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: плечо́
       sg_gen: плеча́
@@ -34104,6 +34141,7 @@ words:
         en_gb: A young admirer sent flowers.
       - ru: Актри́са окружена́ покло́нниками.
         en_gb: The actress is surrounded by admirers.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: покло́нник
       sg_gen: покло́нника
@@ -34415,6 +34453,7 @@ words:
     usage:
       - ru: Вы́зовите поли́цию!
         en_gb: Call the police!
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Поли́ция прие́хала бы́стро.
         en_gb: The police arrived quickly.
       - ru: Он рабо́тает в поли́ции.
@@ -36577,6 +36616,7 @@ words:
     usage:
       - ru: Де́ти боя́тся привиде́ний.
         en_gb: The children are afraid of ghosts.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Говоря́т, в замке́ живёт привиде́ние.
         en_gb: They say a ghost lives in the castle.
     declension:
@@ -45010,6 +45050,7 @@ words:
         en_gb: I pulled out a big weed.
       - ru: Сад заро́с сорняка́ми.
         en_gb: The garden is overgrown with weeds.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: сорня́к
       sg_gen: сорняка́
@@ -50789,6 +50830,7 @@ words:
         en_gb: The nurse gave me an injection.
       - ru: Он бои́тся уко́лов.
         en_gb: He is afraid of injections.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
       - ru: По́сле уко́ла боль прошла́.
         en_gb: After the injection the pain went away.
     declension:
@@ -54670,6 +54712,7 @@ words:
         en_gb: Everyone believed in a miracle.
       - ru: Приро́да полна́ чуде́с.
         en_gb: Nature is full of miracles.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: чу́до
       sg_gen: чу́да

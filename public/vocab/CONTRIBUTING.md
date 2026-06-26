@@ -317,29 +317,24 @@ Two mechanisms, pick the one that fits:
 
 ---
 
-## Context-drill data (`phrases.yml` + `grammar-rules.yml`)
+## Context-drill annotations (`inflect:` on usage + `grammar-rules.yml`)
 
-These two files are **not** word files — they have no `words:` block and are
-loaded separately by the vocab store. They power the in-context inflection drill
-("fix the phrase"): pick the case a slot needs, then spell the form. See
+The in-context inflection drill ("fix the phrase": pick the case a slot needs,
+then spell the form) is driven by the **`usage:` examples words already carry** —
+just annotated. See
 [`docs/phrase-context-redesign.md`](../../docs/phrase-context-redesign.md).
 
-**`phrases.yml`** — a curated bank of annotated example sentences. Each entry is
-a correct, stress-marked sentence plus an annotation of the single token being
-taught:
+Add an optional **`inflect:`** block to any usage example to mark which token is
+the word being taught and how it's inflected. The target word is the example's
+owner, so its key is implicit:
 
 ```yaml
-phrases:
-  - id: n-13                         # unique id
-    ru: "Де́вочка пойма́ла ба́бочку."  # correct, stress-marked, with punctuation
-    en: "The girl caught a butterfly." # natural English; make number explicit
-    subject: animals                 # coverage bucket (mirrors `collections`)
-    target:
-      key: "бабочка=butterfly"       # vocab natural key of the word taught
-      token: 3                       # 1-based index of the target in `ru`
-      case: acc                      # noun/adjective/pronoun
-      number: sg
-      rule: noun-acc-sg              # → grammar-rules.yml (optional)
+"бабочка=butterfly":
+  ...
+  usage:
+    - ru: Де́вочка пойма́ла ба́бочку.
+      en_gb: The girl caught a butterfly.   # natural English; make number explicit
+      inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
 ```
 
 - **Nouns / pronouns:** `case` + `number`.
@@ -349,13 +344,20 @@ phrases:
 - **Verbs:** `tense` (`present`/`future`/`past`) + `person`
   (`1sg 2sg 3sg 1pl 2pl 3pl`, or `past_m/f/n/pl`). Verbs skip the case step.
 
-`token` counts whitespace-split tokens (punctuation stays attached to its word);
-the token's letters must equal the word's stored form for that exact slot.
-`phrasesData.test.js` asserts this for every entry — a mis-counted index or a
-wrong case/number fails the test.
+`token` is the 1-based index of the target in the whitespace-split `ru`
+(punctuation stays attached to its word); the token's letters must equal the
+word's stored form for that exact slot. `phrasesData.test.js` asserts this for
+every annotation — a mis-counted index or a wrong case/number fails the test.
 
-**`grammar-rules.yml`** — short rule/formula explanations keyed by id, shown when
-the answer is revealed:
+Coverage is per-**inflection-type**, not per word: not every word needs an
+annotation for every case, but each kind of inflection should be represented
+across subjects. Annotating the example also leaves the sentence available to
+the translation/spelling/listening drills, so a good example improves several
+drills at once.
+
+**`grammar-rules.yml`** — short rule/formula explanations keyed by id (referenced
+by `inflect.rule`), shown when the answer is revealed. It is loaded separately
+(it has no `words:` block):
 
 ```yaml
 rules:
@@ -368,10 +370,8 @@ rules:
       - "Feminine -ь nouns don't change: мать → мать."
 ```
 
-Coverage is per-**inflection-type**, not per word: not every word needs a phrase
-for every case, but each kind of inflection should be represented across
-subjects. Both files are listed in `manifest.json` (bump `updated` when you
-change them).
+`grammar-rules.yml` is listed in `manifest.json` (bump its `updated` when you
+change it; bump a word file's `updated` when you add `inflect:` annotations).
 
 ---
 

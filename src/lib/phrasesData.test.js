@@ -1,6 +1,6 @@
-// Data-integrity guard for the hand-authored context-drill data
-// (public/vocab/phrases.yml + grammar-rules.yml). Every phrase must:
-//   - target a real, learnable word
+// Data-integrity guard for the in-context inflection drill. The drill is driven
+// by `inflect:` annotations on words' usage examples (in the vocab YAML) plus the
+// grammar-rules.yml explanations. Every annotated example must:
 //   - point its `token` at a token whose core equals the word's stored form for
 //     the annotated slot (catches a mis-counted index or a wrong case/number)
 //   - reference a rule id that exists
@@ -11,15 +11,16 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import { loadFixtureWords } from '../test/fixtures.js'
+import { shapeContextPhrases } from './vocabBuild.js'
 import { normalize } from './text.js'
 import { buildFromPhrase, indexPhrases } from './phraseContext.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
-const phrases = yaml.load(readFileSync(resolve(vocabDir, 'phrases.yml'), 'utf8')).phrases
 const rules = yaml.load(readFileSync(resolve(vocabDir, 'grammar-rules.yml'), 'utf8')).rules
 
 const words = loadFixtureWords()
 const byKey = new Map(words.map((w) => [w.key, w]))
+const phrases = shapeContextPhrases(words)
 
 /** The word's stored form for an annotated slot, or null if not found. */
 function storedForm(word, t) {
@@ -36,17 +37,13 @@ function storedForm(word, t) {
   return null
 }
 
-describe('phrases.yml integrity', () => {
-  it('has phrases', () => expect(phrases.length).toBeGreaterThan(0))
-
-  it.each(phrases.map((p) => [p.id, p]))('%s targets a real learnable word', (_id, p) => {
-    const w = byKey.get(p.target.key)
-    expect(w, `unknown key ${p.target.key}`).toBeTruthy()
-    expect(w.learnable, `${p.target.key} is not learnable`).not.toBe(false)
-  })
+describe('usage `inflect` annotations', () => {
+  it('produces context phrases', () => expect(phrases.length).toBeGreaterThan(0))
 
   it.each(phrases.map((p) => [p.id, p]))('%s token matches the stored form for its slot', (_id, p) => {
     const w = byKey.get(p.target.key)
+    expect(w, `unknown key ${p.target.key}`).toBeTruthy()
+    expect(w.learnable, `${p.target.key} is not learnable`).not.toBe(false)
     const ex = buildFromPhrase(p, w, { rules })
     expect(ex, `${p.id} did not resolve`).toBeTruthy()
     const stored = storedForm(w, p.target)

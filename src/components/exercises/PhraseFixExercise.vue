@@ -3,9 +3,10 @@
 // one word collapsed to its dictionary form. The learner works in two steps:
 //   1. pick the CASE the slot requires (skipped for verbs — no case to choose)
 //   2. SPELL the correctly inflected form
-// The descriptor is built by lib/phraseContext.js from an annotated phrase
-// (public/vocab/phrases.yml). The full sentence is NEVER spoken until the form
-// is correct — we never voice the ungrammatical lemma-in-slot version.
+// The descriptor is built by lib/phraseContext.js from an annotated usage
+// example (an `inflect:` block in the vocab YAML). The full sentence is NEVER
+// spoken until the form is correct — we never voice the ungrammatical
+// lemma-in-slot version.
 import { computed, nextTick, ref, onMounted } from 'vue'
 
 import { normalize } from '../../lib/text.js'
