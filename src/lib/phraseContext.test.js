@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   indexPhrases,
-  caseOptions,
+  buildStep1,
   buildFromPhrase,
   buildContextExercise,
   canBuildContext,
@@ -9,6 +9,18 @@ import {
 
 const sobaka = { key: 'собака=dog', pos: 'noun', headword: 'соба́ка', ru: 'собака' }
 const dumat = { key: 'думать=to think', pos: 'verb', headword: 'ду́мать', ru: 'думать' }
+// adjective with a full declension grid (a few cells suffice for decoys)
+const noviy = {
+  key: 'новый=new', pos: 'adjective', headword: 'но́вый', ru: 'новый',
+  extra: { declension: {
+    m_nom: 'но́вый', m_gen: 'но́вого', f_nom: 'но́вая', f_acc: 'но́вую', f_gen: 'но́вой',
+    n_nom: 'но́вое', pl_nom: 'но́вые', pl_gen: 'но́вых', pl_ins: 'но́выми',
+  } },
+}
+const adjPhrase = {
+  id: 'novuyu-knigu', ru: 'Я чита́ю но́вую кни́гу.', en: 'I am reading a new book.',
+  target: { key: 'новый=new', token: 3, case: 'acc', number: 'sg', gender: 'f', rule: 'adj-agreement' },
+}
 
 const accPhrase = {
   id: 'vizhu-sobaku',
@@ -37,16 +49,27 @@ describe('indexPhrases', () => {
   })
 })
 
-describe('caseOptions', () => {
-  it('returns six options with one correct for a cased target', () => {
-    const opts = caseOptions(accPhrase.target)
-    expect(opts).toHaveLength(6)
-    expect(opts.filter((o) => o.correct)).toEqual([
-      expect.objectContaining({ case: 'acc' }),
-    ])
+describe('buildStep1', () => {
+  it('returns six case options (one correct) for a noun', () => {
+    const s = buildStep1(accPhrase.target)
+    expect(s.kind).toBe('case')
+    expect(s.options).toHaveLength(6)
+    expect(s.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'acc' })])
   })
-  it('returns none for a verb (no case)', () => {
-    expect(caseOptions(verbPhrase.target)).toEqual([])
+  it('returns null for a verb (no selection step)', () => {
+    expect(buildStep1(verbPhrase.target)).toBeNull()
+  })
+  it('returns gender·case agreement options for an adjective', () => {
+    const s = buildStep1(adjPhrase.target, noviy, () => 0)
+    expect(s.kind).toBe('agreement')
+    expect(s.options.length).toBeGreaterThanOrEqual(2)
+    expect(s.options.length).toBeLessThanOrEqual(4)
+    const correct = s.options.filter((o) => o.correct)
+    expect(correct).toHaveLength(1)
+    expect(correct[0]).toMatchObject({ id: 'f.acc', label: 'Feminine · Accusative' })
+    // decoys are distinct real (gender·case) slots, never the correct one
+    const ids = s.options.map((o) => o.id)
+    expect(new Set(ids).size).toBe(ids.length)
   })
 })
 
@@ -59,16 +82,22 @@ describe('buildFromPhrase', () => {
     expect(ex.answerAccented).toBe('соба́ку')
     expect(ex.answer).toBe('собаку')
     expect(ex.ru).toBe('Я ви́жу соба́ку.')
-    expect(ex.correctCase).toBe('acc')
+    expect(ex.step1.kind).toBe('case')
     expect(ex.rule).toMatchObject({ id: 'noun-acc-fem-a', formula: '-а → -у' })
   })
 
-  it('handles verbs (no case options, person slot label)', () => {
+  it('handles verbs (no selection step, person slot label)', () => {
     const ex = buildFromPhrase(verbPhrase, dumat)
-    expect(ex.caseOptions).toEqual([])
-    expect(ex.correctCase).toBeNull()
+    expect(ex.step1).toBeNull()
     expect(ex.answerAccented).toBe('ду́маю')
     expect(ex.slotLabel).toContain('Present')
+  })
+
+  it('builds an agreement step for an adjective', () => {
+    const ex = buildFromPhrase(adjPhrase, noviy, { rng: () => 0 })
+    expect(ex.step1.kind).toBe('agreement')
+    expect(ex.answerAccented).toBe('но́вую')
+    expect(ex.slotLabel).toBe('Feminine · Accusative')
   })
 
   it('returns null for an out-of-range token index', () => {

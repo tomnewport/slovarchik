@@ -83,10 +83,20 @@ rules:
 The renderer (`components/exercises/PhraseFixExercise.vue`) runs the drill in two
 graded steps:
 
-1. **Select the case.** The phrase shows with the target collapsed to its lemma.
-   The learner picks the case the slot requires (six case buttons with the
-   `CASE_HINTS` glosses). Graded against the annotated `case`. (Verbs skip this
-   step — there is no case to choose — and go straight to spelling.)
+1. **Select the slot.** The phrase shows with the target collapsed to its lemma.
+   - **Nouns / pronouns:** pick the *case* the slot requires (six case buttons
+     with the `CASE_HINTS` glosses).
+   - **Adjectives:** pick the *agreement* — the gender · case the adjective must
+     match (the correct `gender·case` plus up to three decoys drawn from the
+     adjective's own paradigm, prioritising near-misses). Because adjective
+     endings are heavily syncretic, "which case" alone is a poor question; the
+     real skill is reading gender + case off the carrier noun, so that is what we
+     test.
+   - **Verbs** skip this step — there is no case to choose — and go straight to
+     spelling.
+   `lib/phraseContext.js` builds the options as a generic `step1` descriptor
+   (`{ kind, prompt, options: [{ id, label, hint?, correct }] }`); the component
+   grades the clicked option's `correct` flag.
 2. **Spell the form.** The learner types the correctly inflected form. Graded
    leniently (`normalize` + `foldYo`: stress- and ё/е-insensitive).
 

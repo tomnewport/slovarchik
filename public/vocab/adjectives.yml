@@ -540,6 +540,7 @@ words:
     usage:
       - ru: Он у́чится на биологи́ческом факульте́те.
         en_gb: He studies at the biology faculty.
+        inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то биологи́ческая нау́ка.
         en_gb: This is a biological science.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -1040,6 +1041,7 @@ words:
           - This city is big.
       - ru: Они́ живу́т в большо́м до́ме.
         en_gb: They live in a big house.
+        inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
       - ru: У нас больша́я семья́.
         en_gb: We have a big family.
     forms:
@@ -2842,6 +2844,7 @@ words:
     usage:
       - ru: Э́то о́чень глубо́кое о́зеро.
         en_gb: This is a very deep lake.
+        inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Он упа́л в глубо́кую я́му.
         en_gb: He fell into a deep pit.
       - ru: Я погрузи́лся в глубо́кий сон.
@@ -7149,6 +7152,7 @@ words:
         en_gb: This lemon is very sour.
       - ru: Э́то ки́слое я́блоко.
         en_gb: This is a sour apple.
+        inflect: { token: 2, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Мне нра́вятся ки́слые я́годы.
         en_gb: I like sour berries.
     forms:
@@ -16053,6 +16057,7 @@ words:
     usage:
       - ru: Не́бо ста́ло се́рым пе́ред дождём.
         en_gb: The sky turned grey before the rain.
+        inflect: { token: 3, case: ins, number: sg, gender: n, rule: adj-agreement }
       - ru: На нём се́рый пиджа́к.
         en_gb: He is wearing a grey jacket.
       - ru: По двору́ хо́дит се́рая ко́шка.
@@ -17736,6 +17741,7 @@ words:
         en_gb: She is a capable girl.
       - ru: В кла́ссе мно́го спосо́бных дете́й.
         en_gb: There are many capable children in the class.
+        inflect: { token: 4, case: gen, number: pl, gender: pl, rule: adj-agreement }
   "справедливый=just":
     batteries: [people, society]
     cefr_level: B1
@@ -19446,6 +19452,7 @@ words:
         en_gb: The killed soldier lay in the field.
       - ru: Она́ сиде́ла с уби́тым ви́дом.
         en_gb: She sat with a crushed look.
+        inflect: { token: 4, case: ins, number: sg, gender: m, rule: adj-agreement }
       - ru: Уби́тые зве́ри лежа́ли на земле́.
         en_gb: The killed animals lay on the ground.
   "уважаемый=respected":
@@ -20091,6 +20098,7 @@ words:
         en_gb: We sat in a cosy room.
       - ru: Здесь мно́го ую́тных кафе́.
         en_gb: There are many cosy cafes here.
+        inflect: { token: 3, case: gen, number: pl, gender: pl, rule: adj-agreement }
   "физический=physical":
     batteries: [people, texts]
     cefr_level: B1

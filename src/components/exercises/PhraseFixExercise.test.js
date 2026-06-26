@@ -19,12 +19,15 @@ const nounExercise = {
   lemma: 'ба́бочка',
   answerAccented: 'ба́бочку',
   answer: 'бабочку',
-  caseOptions: [
-    { case: 'nom', label: 'Nominative', hint: 'who / what', correct: false },
-    { case: 'acc', label: 'Accusative', hint: 'whom / what', correct: true },
-    { case: 'gen', label: 'Genitive', hint: 'of', correct: false },
-  ],
-  correctCase: 'acc',
+  step1: {
+    kind: 'case',
+    prompt: 'Which case does the highlighted word need?',
+    options: [
+      { id: 'nom', label: 'Nominative', hint: 'who / what', correct: false },
+      { id: 'acc', label: 'Accusative', hint: 'whom / what', correct: true },
+      { id: 'gen', label: 'Genitive', hint: 'of', correct: false },
+    ],
+  },
   number: 'sg',
   slotLabel: 'Singular · Accusative',
   ru: 'Де́вочка пойма́ла ба́бочку.',
@@ -41,8 +44,7 @@ const verbExercise = {
   lemma: 'боя́ться',
   answerAccented: 'бою́сь',
   answer: 'боюсь',
-  caseOptions: [],
-  correctCase: null,
+  step1: null,
   slotLabel: 'Present · I',
   ru: 'Я бою́сь высоты́.',
   en: 'I am afraid of heights.',
@@ -111,6 +113,38 @@ describe('PhraseFixExercise', () => {
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
     await wrapper.find('form').trigger('submit')
     expect(wrapper.find('.exc-badge').exists()).toBe(false)
+  })
+
+  it('runs the agreement step for adjectives (pick gender·case, then spell)', async () => {
+    const adj = {
+      id: 'ex2', kind: 'phrase-fix',
+      tokens: ['Я', 'чита́ю', 'но́вую', 'кни́гу.'],
+      targetIndex: 2, lemma: 'но́вый', answerAccented: 'но́вую', answer: 'новую',
+      step1: {
+        kind: 'agreement',
+        prompt: 'Which form does the adjective need to agree with?',
+        options: [
+          { id: 'm.nom', label: 'Masculine · Nominative', correct: false },
+          { id: 'f.acc', label: 'Feminine · Accusative', correct: true },
+          { id: 'f.nom', label: 'Feminine · Nominative', correct: false },
+        ],
+      },
+      slotLabel: 'Feminine · Accusative',
+      ru: 'Я чита́ю но́вую кни́гу.', en: 'I am reading a new book.',
+      rule: { id: 'adj-agreement', title: 'Adjective agreement' }, targets: ['новый=new'],
+    }
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: adj } })
+    expect(wrapper.text()).toContain('Which form does the adjective need to agree with?')
+    expect(speak).not.toHaveBeenCalled()
+    const opt = wrapper.findAll('.case-btn').find((b) => b.text().includes('Feminine · Accusative'))
+    await opt.trigger('click')
+    expect(speak).not.toHaveBeenCalled()
+    await wrapper.find('input[lang="ru"]').setValue('новую')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.text()).toContain('Correct')
+    expect(speak).toHaveBeenCalledWith('Я чита́ю но́вую кни́гу.')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
   })
 
   it('skips the case step for verbs', async () => {

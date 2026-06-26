@@ -17,17 +17,20 @@ import SpeakButton from '../SpeakButton.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
-const hasCaseStep = computed(() => (props.exercise.caseOptions?.length ?? 0) > 0)
+// step1 holds the "select" stage: case options (nouns) or gender·case agreement
+// options (adjectives), or null for verbs (no selection step).
+const step1 = computed(() => props.exercise.step1 ?? null)
+const hasStep1 = computed(() => (step1.value?.options?.length ?? 0) > 0)
 
-// step: 'case' → 'spell' → 'done'. Verbs start at 'spell'.
-const step = ref(hasCaseStep.value ? 'case' : 'spell')
-const chosenCase = ref(null)
-const caseCorrect = ref(true) // n/a (true) when there is no case step
+// step: 'select' → 'spell' → 'done'. Verbs start at 'spell'.
+const step = ref(hasStep1.value ? 'select' : 'spell')
+const selected = ref(false)
+const selectCorrect = ref(true) // n/a (true) when there is no select step
 const typed = ref('')
 const spellCorrect = ref(false)
 const inputEl = ref(null)
 
-const overallCorrect = computed(() => caseCorrect.value && spellCorrect.value)
+const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
 
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
 // so the slot doesn't drop it when we swap in the lemma / answer.
@@ -45,10 +48,10 @@ const slotText = computed(() => {
   return slotAffix.value.lead + core + slotAffix.value.trail
 })
 
-function chooseCase(c) {
-  if (step.value !== 'case') return
-  chosenCase.value = c
-  caseCorrect.value = c === props.exercise.correctCase
+function chooseOption(opt) {
+  if (step.value !== 'select') return
+  selected.value = true
+  selectCorrect.value = opt.correct === true
   step.value = 'spell'
   nextTick(() => inputEl.value?.focus())
 }
@@ -67,7 +70,7 @@ function next() {
 }
 
 onMounted(() => {
-  if (!hasCaseStep.value) nextTick(() => inputEl.value?.focus())
+  if (!hasStep1.value) nextTick(() => inputEl.value?.focus())
 })
 </script>
 
@@ -91,19 +94,19 @@ onMounted(() => {
       </template>
     </div>
 
-    <!-- Step 1 — pick the case -->
-    <div v-if="step === 'case'" class="grid" style="gap: 0.6rem">
-      <p class="step-label muted">Which case does the highlighted word need?</p>
+    <!-- Step 1 — pick the case (noun) or the agreement (adjective) -->
+    <div v-if="step === 'select'" class="grid" style="gap: 0.6rem">
+      <p class="step-label muted">{{ step1.prompt }}</p>
       <div class="case-grid">
         <button
-          v-for="opt in exercise.caseOptions"
-          :key="opt.case"
+          v-for="opt in step1.options"
+          :key="opt.id"
           type="button"
           class="case-btn"
-          @click="chooseCase(opt.case)"
+          @click="chooseOption(opt)"
         >
           <strong>{{ opt.label }}</strong>
-          <small class="muted">{{ opt.hint }}</small>
+          <small v-if="opt.hint" class="muted">{{ opt.hint }}</small>
         </button>
       </div>
     </div>
@@ -112,8 +115,8 @@ onMounted(() => {
     <template v-else>
       <p class="slot-label muted">
         <em lang="ru">{{ exercise.lemma }}</em> → {{ exercise.slotLabel }}
-        <span v-if="chosenCase && !caseCorrect" class="case-miss">
-          (you picked the wrong case)
+        <span v-if="selected && !selectCorrect" class="case-miss">
+          (you picked the wrong {{ step1?.kind === 'agreement' ? 'form' : 'case' }})
         </span>
       </p>
 

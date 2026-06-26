@@ -15,6 +15,7 @@
 
 import { normalize } from './text.js'
 import { CASES, CASE_LABELS, CASE_HINTS, NUMBER_LABELS } from './declension.js'
+import { shuffle } from './quiz.js'
 
 /** Parts of speech that carry a context drill. */
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
@@ -74,12 +75,17 @@ export function indexPhrases(phrases) {
   return byKey
 }
 
+/** Gender · case label for an adjective slot (gender already encodes number). */
+function agreementLabel(gender, c) {
+  return `${GENDER_LABEL[gender] ?? gender} · ${CASE_LABELS[c] ?? c}`
+}
+
 /** Human-readable label for the grammatical slot a phrase drills. */
 function slotLabelFor(target) {
   if (target.case) {
+    if (target.gender) return agreementLabel(target.gender, target.case)
     const num = NUMBER_LABELS[target.number] ?? target.number
-    const gen = target.gender ? `${GENDER_LABEL[target.gender] ?? target.gender} · ` : ''
-    return `${gen}${num ? num + ' · ' : ''}${CASE_LABELS[target.case] ?? target.case}`
+    return `${num ? num + ' · ' : ''}${CASE_LABELS[target.case] ?? target.case}`
   }
   if (target.person) {
     const tense = TENSE_LABEL[target.tense] ?? target.tense ?? ''
@@ -89,18 +95,57 @@ function slotLabelFor(target) {
   return ''
 }
 
+/** Step-1 options for a noun/pronoun: pick the case (six options + hints). */
+function caseStep(target) {
+  return {
+    kind: 'case',
+    prompt: 'Which case does the highlighted word need?',
+    options: CASES.map((c) => ({
+      id: c,
+      label: CASE_LABELS[c],
+      hint: CASE_HINTS[c],
+      correct: c === target.case,
+    })),
+  }
+}
+
 /**
- * The clickable case options for step 1 (nouns / adjectives / pronouns). Each is
- * `{ case, label, hint, correct }`. Verbs return [] (no case to choose).
+ * Step-1 options for an adjective: pick the agreement (gender · case) the slot
+ * demands. The correct slot plus up to three decoys drawn from the adjective's
+ * own paradigm — prioritising instructive near-misses (same case other gender,
+ * same gender other case) so the choice tests reading gender + case off the
+ * carrier noun, not surface-form recognition.
  */
-export function caseOptions(target) {
-  if (!target.case) return []
-  return CASES.map((c) => ({
-    case: c,
-    label: CASE_LABELS[c],
-    hint: CASE_HINTS[c],
-    correct: c === target.case,
-  }))
+function agreementStep(target, word, rng) {
+  const decl = word?.extra?.declension ?? {}
+  const has = (g, c) => Boolean(decl[`${g}_${c}`])
+  const all = []
+  for (const g of ['m', 'n', 'f', 'pl']) {
+    for (const c of CASES) {
+      if (g === target.gender && c === target.case) continue
+      if (!has(g, c)) continue
+      all.push({ g, c })
+    }
+  }
+  const sameCase = all.filter((s) => s.c === target.case)
+  const sameGender = all.filter((s) => s.g === target.gender)
+  const rest = all.filter((s) => s.c !== target.case && s.g !== target.gender)
+  const ordered = [...shuffle(sameCase, rng), ...shuffle(sameGender, rng), ...shuffle(rest, rng)]
+  const decoys = ordered.slice(0, 3)
+  const options = [
+    { id: `${target.gender}.${target.case}`, label: agreementLabel(target.gender, target.case), correct: true },
+    ...decoys.map((s) => ({ id: `${s.g}.${s.c}`, label: agreementLabel(s.g, s.c), correct: false })),
+  ]
+  return { kind: 'agreement', prompt: 'Which form does the adjective need to agree with?', options: shuffle(options, rng) }
+}
+
+/**
+ * The clickable step-1 options. Nouns/pronouns pick the case; adjectives pick
+ * the gender · case agreement; verbs have no step 1 (null).
+ */
+export function buildStep1(target, word, rng = Math.random) {
+  if (!target?.case) return null
+  return target.gender ? agreementStep(target, word, rng) : caseStep(target)
 }
 
 /**
@@ -108,7 +153,7 @@ export function caseOptions(target) {
  * record it teaches. Returns null if the annotation is malformed (token out of
  * range or empty).
  */
-export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
+export function buildFromPhrase(phrase, word, { rules = {}, rng = Math.random } = {}) {
   const target = phrase?.target
   if (!target) return null
   const tokens = tokenize(phrase.ru)
@@ -136,9 +181,9 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     lemma,
     answerAccented: core,
     answer: normalize(core),
-    // Step 1 (case) data — empty for verbs.
-    caseOptions: caseOptions(target),
-    correctCase: target.case ?? null,
+    // Step 1 — pick the case (noun) or the gender·case agreement (adjective);
+    // null for verbs (no selection step). The component grades option.correct.
+    step1: buildStep1(target, word, rng),
     number: target.number ?? null,
     slotLabel: slotLabelFor(target),
     // The full, correct sentence — safe to speak only after a correct answer.
@@ -175,7 +220,7 @@ export function buildContextExercise(word, { phrasesByKey, rules = {}, rng = Mat
     rng,
   )
   if (!phrase) return null
-  return buildFromPhrase(phrase, word, { rules })
+  return buildFromPhrase(phrase, word, { rules, rng })
 }
 
 /** Whether a context exercise can be built for a word (deterministic). */
