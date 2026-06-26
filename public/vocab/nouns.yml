@@ -40918,6 +40918,7 @@ words:
         en_gb: The break-up was very hard.
       - ru: По́сле расстава́ния он до́лго грусти́л.
         en_gb: After the break-up he was sad for a long time.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Они́ боя́лись бли́зкого расстава́ния.
         en_gb: They feared the coming separation.
     declension:
@@ -40948,6 +40949,7 @@ words:
         en_gb: The distance to the city is five kilometres.
       - ru: На большо́м расстоя́нии ничего́ не ви́дно.
         en_gb: At a great distance nothing can be seen.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ держа́лись на расстоя́нии.
         en_gb: They kept their distance.
     declension:
@@ -40987,6 +40989,7 @@ words:
     usage:
       - ru: Хими́к пригото́вил раство́р со́ли.
         en_gb: The chemist prepared a salt solution.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ка́менщик заме́шивал раство́р.
         en_gb: The bricklayer was mixing the mortar.
       - ru: В буты́лках бы́ли ра́зные раство́ры.
@@ -41010,6 +41013,7 @@ words:
         en_gb: This expense was too big.
       - ru: Она́ ведёт учёт расхо́дов.
         en_gb: She keeps track of expenses.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: расхо́д
       sg_gen: расхо́да
@@ -41052,6 +41056,7 @@ words:
         en_gb: The engineer checked the calculation.
       - ru: Он де́йствовал по холо́дному расчёту.
         en_gb: He acted by cold calculation.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В расчётах была́ оши́бка.
         en_gb: There was a mistake in the calculations.
   "реакция=reaction":
@@ -41082,6 +41087,7 @@ words:
         en_gb: His reaction was calm.
       - ru: Я удиви́лся тако́й реа́кции.
         en_gb: I was surprised by such a reaction.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Учёные изуча́ют хими́ческие реа́кции.
         en_gb: Scientists study chemical reactions.
   "реальность=reality":
@@ -41104,6 +41110,7 @@ words:
         en_gb: Reality turned out to be harsh.
       - ru: Его́ мечта́ ста́ла реа́льностью.
         en_gb: His dream became reality.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мы живём в но́вой реа́льности.
         en_gb: We live in a new reality.
   "ребёнок=child":
@@ -41146,6 +41153,9 @@ words:
     en_gb:
       standard: guys (kids; lads; a friendly address to a group)
     usage:
+      - ru: Я горжу́сь на́шими ребя́тами.
+        en_gb: I am proud of our guys.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Ребя́та, пора́ домо́й!
         en_gb: Guys, it's time to go home!
       - ru: Ребя́та сыгра́ли в футбо́л во дворе́.
@@ -41177,6 +41187,7 @@ words:
         en_gb: Jealousy destroyed their family.
       - ru: Он не мог спра́виться с ре́вностью.
         en_gb: He could not cope with his jealousy.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ре́вность
       sg_gen: ре́вности
@@ -41202,6 +41213,7 @@ words:
         en_gb: The revolution began in the autumn.
       - ru: Мно́гие поги́бли во вре́мя револю́ции.
         en_gb: Many died during the revolution.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: револю́ция
       sg_gen: револю́ции
@@ -41232,6 +41244,7 @@ words:
         en_gb: The editor corrected the mistakes in the text.
       - ru: Я отпра́вил статью́ реда́ктору.
         en_gb: I sent the article to the editor.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В журна́ле рабо́тают о́пытные реда́кторы.
         en_gb: Experienced editors work at the magazine.
     declension:
@@ -41274,6 +41287,7 @@ words:
     usage:
       - ru: Письмо́ пришло́ в реда́кцию.
         en_gb: The letter arrived at the editorial office.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Журнали́ст рабо́тает в реда́кции.
         en_gb: The journalist works in the editorial office.
       - ru: Реда́кция вы́пустила но́вый но́мер.
@@ -41307,6 +41321,7 @@ words:
         en_gb: The doctor prescribed a strict regime.
       - ru: Он живёт по жёсткому режи́му.
         en_gb: He lives by a strict regime.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В стране́ смени́лось не́сколько режи́мов.
         en_gb: Several regimes have changed in the country.
   "режиссёр=director":
@@ -41328,6 +41343,7 @@ words:
         en_gb: The actors listened to the director.
       - ru: Пре́мию вручи́ли молоды́м режиссёрам.
         en_gb: The prize was given to young directors.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: режиссёр
       sg_gen: режиссёра
@@ -41356,6 +41372,7 @@ words:
     usage:
       - ru: Мы дово́льны результа́том ма́тча.
         en_gb: We are pleased with the result of the match.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мы жда́ли результа́т экза́мена.
         en_gb: We awaited the result of the exam.
       - ru: Учёные изучи́ли все результа́ты.
@@ -41389,6 +41406,7 @@ words:
         en_gb: Our flight is delayed by an hour.
       - ru: Мы опозда́ли на наш рейс.
         en_gb: We were late for our flight.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Все ре́йсы отмени́ли и́з-за бу́ри.
         en_gb: All flights were cancelled because of the storm.
     declension:
@@ -41419,6 +41437,7 @@ words:
     usage:
       - ru: Ло́дка плывёт по реке́.
         en_gb: A boat floats along the river.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Де́ти купа́ются в реке́.
         en_gb: The children are swimming in the river.
       - ru: Вода́ в ре́ках о́чень холо́дная.
@@ -41450,6 +41469,7 @@ words:
     usage:
       - ru: В ми́ре мно́го разли́чных рели́гий.
         en_gb: There are many different religions in the world.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он изуча́ет исто́рию рели́гии.
         en_gb: He studies the history of religion.
       - ru: Лю́ди исповеду́ют ра́зную рели́гию.
@@ -41481,6 +41501,7 @@ words:
     usage:
       - ru: По́езд сошёл с ре́льсов.
         en_gb: The train came off the rails.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Рабо́чие ремонти́руют ре́льсы.
         en_gb: The workers are repairing the rails.
       - ru: По ре́льсам е́дет трамва́й.
@@ -41509,6 +41530,7 @@ words:
         en_gb: Fasten your seat belts.
       - ru: На ремне́ блестя́щая пря́жка.
         en_gb: There is a shiny buckle on the belt.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: реме́нь
       sg_gen: ремня́
@@ -41540,6 +41562,7 @@ words:
         en_gb: The flat is being renovated.
       - ru: Маши́на нужда́ется в ремо́нте.
         en_gb: The car needs repair.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ зако́нчили ремо́нт за ме́сяц.
         en_gb: They finished the repair in a month.
     declension:
@@ -41572,6 +41595,7 @@ words:
         en_gb: An eyelash got into her eye.
       - ru: Она́ кра́сит ресни́цы ту́шью.
         en_gb: She paints her eyelashes with mascara.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: ресни́ца
       sg_gen: ресни́цы
@@ -41613,6 +41637,7 @@ words:
         en_gb: France is a republic.
       - ru: Он роди́лся в небольшо́й респу́блике.
         en_gb: He was born in a small republic.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В стране́ мно́го автоно́мных респу́блик.
         en_gb: There are many autonomous republics in the country.
   "ресторан=restaurant":
@@ -41630,6 +41655,7 @@ words:
     usage:
       - ru: Мы у́жинаем в рестора́не.
         en_gb: We are having dinner at the restaurant.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ откры́ли но́вый рестора́н.
         en_gb: They opened a new restaurant.
       - ru: В э́том го́роде мно́го рестора́нов.
@@ -41673,6 +41699,7 @@ words:
     usage:
       - ru: Прави́тельство гото́вит но́вую рефо́рму.
         en_gb: The government is preparing a new reform.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Лю́ди ждут ва́жных рефо́рм.
         en_gb: People are waiting for important reforms.
       - ru: Рефо́рма помогла́ эконо́мике.
@@ -41697,6 +41724,7 @@ words:
         en_gb: Mum gave me her recipe.
       - ru: В кни́ге мно́го вку́сных реце́птов.
         en_gb: There are many tasty recipes in the book.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: реце́пт
       sg_gen: реце́пта
@@ -41741,6 +41769,7 @@ words:
         en_gb: A small river flows behind the house.
       - ru: Де́ти игра́ют у ре́чки.
         en_gb: The children are playing by the small river.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы перешли́ ре́чку по мо́стику.
         en_gb: We crossed the small river by the little bridge.
   "речь=speech":
@@ -41767,6 +41796,7 @@ words:
     usage:
       - ru: Президе́нт произнёс речь.
         en_gb: The president gave a speech.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В свое́й ре́чи он благодари́л госте́й.
         en_gb: In his speech he thanked the guests.
       - ru: Мы внима́тельно слу́шали ре́чи ора́торов.
@@ -41785,6 +41815,7 @@ words:
         en_gb: He made the right decision.
       - ru: Ему́ тру́дно прийти́ к реше́нию.
         en_gb: It is hard for him to come to a decision.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Они́ обсуди́ли все возмо́жные реше́ния.
         en_gb: They discussed all the possible decisions.
     declension:
@@ -41831,6 +41862,7 @@ words:
         en_gb: There is an iron grating on the window.
       - ru: Пти́ца сиде́ла за реше́ткой.
         en_gb: The bird sat behind the grating.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мастера́ покра́сили ста́рые реше́тки.
         en_gb: The craftsmen painted the old gratings.
   "Рим=Rome":
@@ -41848,6 +41880,7 @@ words:
         en_gb: Rome is the capital of Italy.
       - ru: В Ри́ме мно́го дре́вних па́мятников.
         en_gb: There are many ancient monuments in Rome.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: Рим
       sg_gen: Ри́ма
@@ -41870,6 +41903,7 @@ words:
         en_gb: There was rice with vegetables for dinner.
       - ru: Свари́, пожа́луйста, рис.
         en_gb: Please cook the rice.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: рис
       sg_gen: ри́са
@@ -41894,6 +41928,7 @@ words:
         en_gb: The child showed his drawing.
       - ru: Учи́тель похвали́л за рису́нок.
         en_gb: The teacher praised the drawing.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На стене́ ви́сят де́тские рису́нки.
         en_gb: Children's drawings hang on the wall.
     declension:
@@ -41926,6 +41961,7 @@ words:
         en_gb: Robots work at the factory.
       - ru: Инжене́р упра́вляет ро́ботом.
         en_gb: The engineer controls the robot.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ро́бот
       sg_gen: ро́бота
@@ -41968,6 +42004,7 @@ words:
         en_gb: The bull has sharp horns.
       - ru: Оле́нь уда́рил врага́ ро́гом.
         en_gb: The deer struck the enemy with its horn.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Из ро́га де́лают краси́вые изде́лия.
         en_gb: Beautiful items are made from horn.
   "род=family":
@@ -41997,6 +42034,7 @@ words:
     usage:
       - ru: Он происхо́дит из дре́внего ро́да.
         en_gb: He comes from an ancient family.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Э́то сло́во же́нского ро́да.
         en_gb: This word is feminine in gender.
       - ru: В на́шем ро́ду все до́лго живу́т.
@@ -42018,6 +42056,7 @@ words:
     usage:
       - ru: Он лю́бит свою́ ро́дину.
         en_gb: He loves his homeland.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он ско́ро вернётся на ро́дину.
         en_gb: He will soon return to his homeland.
       - ru: Солда́ты служи́ли свое́й ро́дине.
@@ -42044,6 +42083,7 @@ words:
         en_gb: My parents live in Moscow.
       - ru: Я скуча́ю по роди́телям.
         en_gb: I miss my parents.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Де́ти слу́шаются свои́х роди́телей.
         en_gb: The children obey their parents.
     declension:
@@ -42081,6 +42121,7 @@ words:
         en_gb: Every parent loves their child.
       - ru: Учи́тель поговори́л с роди́телем.
         en_gb: The teacher spoke with the parent.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Реше́ние оста́лось за роди́телями.
         en_gb: The decision was left to the parents.
   "родня=kin":
@@ -42100,6 +42141,7 @@ words:
         en_gb: All the relatives came for the holiday.
       - ru: У него́ родни́ почти́ нет.
         en_gb: He has almost no kin.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы помога́ем свое́й родне́.
         en_gb: We help our kin.
     declension:
@@ -42127,6 +42169,7 @@ words:
         en_gb: He is a distant relative of mine.
       - ru: Я гощу́ у ро́дственников.
         en_gb: I am staying with relatives.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: ро́дственник
       sg_gen: ро́дственника
@@ -42153,6 +42196,7 @@ words:
     usage:
       - ru: С днём рожде́ния!
         en_gb: Happy birthday!
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы пра́зднуем день рожде́ния.
         en_gb: We are celebrating the birthday.
       - ru: Роди́тели ра́довались рожде́нию сы́на.
@@ -42198,6 +42242,7 @@ words:
     usage:
       - ru: Он подари́л ей кра́сную ро́зу.
         en_gb: He gave her a red rose.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В саду́ растёт мно́го роз.
         en_gb: Many roses grow in the garden.
       - ru: Ва́за с ро́зами стои́т на столе́.
@@ -42218,6 +42263,7 @@ words:
     usage:
       - ru: Заря́дка включена́ в розе́тку.
         en_gb: The charger is plugged into the socket.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В стене́ есть свобо́дная розе́тка.
         en_gb: There is a free socket in the wall.
       - ru: Все розе́тки в ко́мнате за́няты.
@@ -42250,6 +42296,7 @@ words:
         en_gb: He plays rock on the guitar.
       - ru: Молодёжь лю́бит рок.
         en_gb: Young people love rock.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: рок
       sg_gen: ро́ка
@@ -42285,6 +42332,7 @@ words:
         en_gb: She plays the main role.
       - ru: Он отли́чно спра́вился с ро́лью.
         en_gb: He coped excellently with the role.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Актри́са испо́лнила мно́го ро́лей.
         en_gb: The actress performed many roles.
   "роман=novel":
@@ -42308,6 +42356,7 @@ words:
         en_gb: I am reading an interesting novel.
       - ru: Писа́тель написа́л де́сять рома́нов.
         en_gb: The writer wrote ten novels.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: рома́н
       sg_gen: рома́на
@@ -42337,6 +42386,7 @@ words:
     usage:
       - ru: На ткани́ узо́р из ро́мбов.
         en_gb: The fabric has a pattern of rhombuses.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Учи́тель нарисова́л ромб на доске́.
         en_gb: The teacher drew a rhombus on the board.
       - ru: Пло́щадь ро́мба легко́ посчита́ть.
@@ -42376,6 +42426,7 @@ words:
         en_gb: Russia is a huge country.
       - ru: Он мно́го е́здил по Росси́и.
         en_gb: He travelled a lot around Russia.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Тури́сты прие́хали в Росси́ю ле́том.
         en_gb: The tourists came to Russia in summer.
   "Россия=Russia":
@@ -42402,6 +42453,7 @@ words:
         en_gb: The capital of Russia is Moscow.
       - ru: Он живёт в Росси́и уже́ давно́.
         en_gb: He has lived in Russia for a long time already.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
   "россиянин=Russian":
     batteries: [people]
     cefr_level: B1
@@ -42413,6 +42465,9 @@ words:
     en_gb:
       standard: Russian (a citizen of Russia)
     usage:
+      - ru: Я познако́мился с россия́нином.
+        en_gb: I got to know a Russian.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Ка́ждый россия́нин име́ет па́спорт.
         en_gb: Every Russian has a passport.
       - ru: Э́тот россия́нин живёт за грани́цей.
@@ -42469,6 +42524,7 @@ words:
     usage:
       - ru: Не говори́ с по́лным ртом.
         en_gb: Don't talk with your mouth full.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Откро́й рот, сказа́л врач.
         en_gb: Open your mouth, said the doctor.
       - ru: У ребёнка ка́ша во рту.
@@ -42514,6 +42570,7 @@ words:
         en_gb: The commander ordered the company to retreat.
       - ru: В полку́ бы́ло не́сколько рот.
         en_gb: There were several companies in the regiment.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "рубаха=shirt":
     batteries: [objects]
     cefr_level: B1
@@ -42528,6 +42585,7 @@ words:
     usage:
       - ru: Он наде́л бе́лую руба́ху.
         en_gb: He put on a white shirt.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Рука́в руба́хи испа́чкан.
         en_gb: The sleeve of the shirt is dirty.
       - ru: В шкафу́ виси́т мно́го руба́х.
@@ -42559,6 +42617,7 @@ words:
     usage:
       - ru: Он погла́дил бе́лую руба́шку.
         en_gb: He ironed the white shirt.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У руба́шки оторва́лась пу́говица.
         en_gb: A button came off the shirt.
       - ru: Он купи́л две но́вые руба́шки.
@@ -42606,6 +42665,7 @@ words:
         en_gb: The troops occupied an important frontier.
       - ru: Он мно́го лет жил за рубежо́м.
         en_gb: He lived abroad for many years.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Защи́тники держа́лись на свои́х рубежа́х.
         en_gb: The defenders held their frontiers.
   "рубль=rouble":
@@ -42622,6 +42682,7 @@ words:
     usage:
       - ru: Э́то сто́ит сто рубле́й.
         en_gb: This costs a hundred roubles.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: У меня́ оста́лся оди́н рубль.
         en_gb: I have one rouble left.
       - ru: Курс рубля́ сего́дня вы́рос.
@@ -42668,6 +42729,7 @@ words:
         en_gb: The hunter loaded the rifle.
       - ru: Без ружья́ на охо́ту не хо́дят.
         en_gb: One does not go hunting without a rifle.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В музе́е храня́тся ста́рые ру́жья.
         en_gb: Old rifles are kept in the museum.
   "рука=hand":
@@ -42685,6 +42747,7 @@ words:
     usage:
       - ru: Он держа́л кни́гу в руке́.
         en_gb: He held the book in his hand.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Помо́й ру́ки пе́ред едо́й.
         en_gb: Wash your hands before eating.
       - ru: Он маха́л руко́й на проща́ние.
@@ -42717,6 +42780,7 @@ words:
         en_gb: He rolled up the sleeves of his shirt.
       - ru: На рукаве́ появи́лось пятно́.
         en_gb: A stain appeared on the sleeve.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он вы́тер лицо́ рукаво́м.
         en_gb: He wiped his face with his sleeve.
     declension:
@@ -42748,6 +42812,7 @@ words:
         en_gb: The manager held a meeting.
       - ru: Мы обрати́лись к руководи́телю отде́ла.
         en_gb: We turned to the head of the department.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На встре́че бы́ли все руководи́тели.
         en_gb: All the managers were at the meeting.
     declension:
@@ -42785,6 +42850,7 @@ words:
         en_gb: The company's leadership made a decision.
       - ru: Сотру́дники дове́ряют руково́дству.
         en_gb: The employees trust the leadership.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Под его́ руково́дством кома́нда победи́ла.
         en_gb: Under his leadership the team won.
   "рукопись=manuscript":
@@ -42813,6 +42879,7 @@ words:
         en_gb: The old manuscript lay in the archive.
       - ru: Реда́ктор изучи́л ру́копись писа́теля.
         en_gb: The editor studied the writer's manuscript.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В библиоте́ке храня́тся ре́дкие ру́кописи.
         en_gb: Rare manuscripts are kept in the library.
   "рулетка=tape measure":
@@ -42829,6 +42896,7 @@ words:
     usage:
       - ru: Изме́рь стол руле́ткой.
         en_gb: Measure the table with a tape measure.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У ма́стера в карма́не руле́тка.
         en_gb: The craftsman has a tape measure in his pocket.
       - ru: Без руле́тки тру́дно изме́рить ко́мнату.
@@ -42862,6 +42930,7 @@ words:
         en_gb: He held the steering wheel firmly.
       - ru: Не отрыва́й рук от руля́.
         en_gb: Do not take your hands off the steering wheel.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: За рулём сиди́т о́пытный води́тель.
         en_gb: An experienced driver sits at the steering wheel.
     declension:
@@ -42903,6 +42972,7 @@ words:
         en_gb: A stream babbles in the forest.
       - ru: Мы напи́лись воды́ из ручья́.
         en_gb: We drank water from the stream.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: По́сле дождя́ побежа́ли ручьи́.
         en_gb: After the rain streams started running.
   "ручка=pen":
@@ -42921,6 +42991,7 @@ words:
     usage:
       - ru: Да́й мне ру́чку, пожа́луйста.
         en_gb: Give me a pen, please.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я пишу́ ру́чкой в тетра́ди.
         en_gb: I write with a pen in the notebook.
       - ru: На столе́ лежа́т три ру́чки.
@@ -42956,6 +43027,7 @@ words:
         en_gb: A big fish is swimming in the river.
       - ru: Кот лю́бит есть ры́бу.
         en_gb: The cat loves to eat fish.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Рыбаки́ пойма́ли мно́го рыб.
         en_gb: The fishermen caught many fish.
     declension:
@@ -42984,6 +43056,9 @@ words:
     en_gb:
       standard: fisherman (a person who catches fish)
     usage:
+      - ru: Я разгова́ривал с рыбако́м.
+        en_gb: I talked with a fisherman.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Рыба́к сиде́л на берегу́ с у́дочкой.
         en_gb: The fisherman sat on the bank with a fishing rod.
       - ru: Ло́дку купи́л ста́рый рыба́к.
@@ -43018,6 +43093,7 @@ words:
     usage:
       - ru: По суббо́там мы хо́дим на ры́нок.
         en_gb: On Saturdays we go to the market.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ры́нке продаю́т све́жие о́вощи.
         en_gb: Fresh vegetables are sold at the market.
       - ru: Цены́ на ры́нке ни́же, чем в магази́не.
@@ -43051,6 +43127,7 @@ words:
         en_gb: The knight fought for the king.
       - ru: Де́ти чита́ют про сме́лого ры́царя.
         en_gb: The children read about the brave knight.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В за́мке жи́ли ры́цари.
         en_gb: Knights lived in the castle.
     declension:
@@ -43081,6 +43158,7 @@ words:
     usage:
       - ru: Он нали́л во́дку в рю́мку.
         en_gb: He poured vodka into the shot glass.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ стои́т пуста́я рю́мка.
         en_gb: An empty shot glass stands on the table.
       - ru: Го́сти подня́ли рю́мки за здоро́вье.
@@ -43117,6 +43195,7 @@ words:
         en_gb: We sat in the last row.
       - ru: Дере́вья посади́ли ро́вными ряда́ми.
         en_gb: The trees were planted in even rows.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: ряд
       sg_gen: ря́да
@@ -43148,6 +43227,7 @@ words:
         en_gb: In summer the garden is full of flowers.
       - ru: Вокру́г до́ма мно́го фрукто́вых садо́в.
         en_gb: There are many fruit gardens around the house.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: сад
       sg_gen: са́да
