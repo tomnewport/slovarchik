@@ -144,6 +144,7 @@ words:
     usage:
       - ru: Мы бесе́дуем о пого́де.
         en_gb: We are chatting about the weather.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Учи́тель бесе́дует с роди́телями.
         en_gb: The teacher is talking with the parents.
       - ru: Они́ до́лго бесе́довали ве́чером.
@@ -1404,6 +1405,7 @@ words:
         en_gb: I see a big house.
       - ru: Ты ви́дишь э́тот знак?
         en_gb: Do you see this sign?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Мы ви́дели интере́сный фильм.
         en_gb: We saw an interesting film.
       - ru: С балко́на ты бу́дешь ви́деть всё мо́ре.
@@ -2760,6 +2762,7 @@ words:
         en_gb: The director allocated a new office.
       - ru: Они́ вы́делят ва́жные слова́ кра́сным.
         en_gb: They will highlight the important words in red.
+        inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Е́сли бы бы́ли сре́дства, мы бы вы́делили де́ньги.
         en_gb: If there were funds, we would allocate the money.
       - ru: За́втра дире́ктор вы́делит ну́жную су́мму.
@@ -2931,6 +2934,7 @@ words:
         en_gb: I hope to win a prize.
       - ru: Ты вы́играешь, е́сли постара́ешься.
         en_gb: You will win if you try hard.
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Е́сли бы повезло́, мы бы вы́играли матч.
         en_gb: If we were lucky, we would win the match.
       - ru: За́втра на́ша кома́нда вы́играет фина́л.
@@ -5633,6 +5637,7 @@ words:
         en_gb: They wished us happiness.
       - ru: Что вы жела́ете на за́втрак?
         en_gb: What would you like for breakfast?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Я всегда́ бу́ду жела́ть тебе́ добра́.
         en_gb: I'll always wish you well.
       - ru: Я бы жела́л тебе́ то́лько сча́стья.

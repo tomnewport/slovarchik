@@ -63,6 +63,53 @@ rules:
       In the plural the accusative copies the nominative for inanimate nouns and
       the genitive for animate nouns, regardless of gender.
 
+  # ── Noun exceptions / irregulars ─────────────────────────────────────────
+  noun-acc-animate:
+    title: "Accusative of animate nouns = genitive"
+    formula: "animate acc = genitive (sg & pl)"
+    explanation: >
+      For animate nouns (people, animals) the accusative copies the GENITIVE, not
+      the nominative — in both numbers. Я люблю́ отца́ (= gen отца́), Я ви́жу
+      друзе́й (= gen pl друзе́й). This is how Russian marks "who did what to whom"
+      when word order is free.
+    exceptions:
+      - "Feminine -а animates still take -у in the singular: ма́му, соба́ку."
+
+  noun-genpl-fleeting:
+    title: "Genitive plural — zero ending & fleeting vowel"
+    formula: "-а/-о → ∅, often inserting -о-/-е-"
+    explanation: >
+      Feminine -а and neuter -о nouns usually take a ZERO ending in the genitive
+      plural. When the bare stem ends in an awkward consonant cluster, a fleeting
+      -о- or -е- is inserted: письмо́ → пи́сем, де́вушка → де́вушек, копе́йка →
+      копе́ек, де́ньги → де́нег.
+
+  noun-fem-soft:
+    title: "Feminine -ь nouns (3rd declension)"
+    formula: "ins sg → -ью · gen/dat/pre sg → -и"
+    explanation: >
+      Feminine nouns ending in -ь decline differently: the instrumental singular
+      is -ью (но́чью, две́рью, до́черью) and the genitive/dative/prepositional
+      singular is -и (но́чи). They never take -а endings.
+    exceptions:
+      - "мать and дочь insert -ер- in every form but nom/acc sg: ма́тери, до́черью."
+
+  noun-mya-neuter:
+    title: "Neuter -мя nouns"
+    formula: "stem gains -ен- before endings"
+    explanation: >
+      The ten neuter nouns in -мя (и́мя, вре́мя, пле́мя…) insert -ен- before their
+      endings: вре́мя → со вре́менем (ins), и́мени (gen/dat/pre). The plural keeps
+      it too: имена́, времена́.
+
+  noun-irregular-plural:
+    title: "Irregular plural stems"
+    formula: "друг → друзья́ · сын → сыновья́ · ребёнок → де́ти"
+    explanation: >
+      Some nouns switch to a different stem in the plural and decline from there:
+      друг → друзья́, друзе́й, друзья́ми; брат → бра́тья; сын → сыновья́; ребёнок
+      → де́ти, дете́й, детьми́; челове́к → лю́ди, люде́й, людьми́.
+
   noun-ins-sg:
     title: "Instrumental singular"
     formula: "m/n → -ом / -ем · f → -ой / -ей"

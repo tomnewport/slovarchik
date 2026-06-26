@@ -158,6 +158,7 @@ words:
         en_gb: He is an active and energetic person.
       - ru: У нас акти́вная гру́ппа студе́нтов.
         en_gb: We have an active group of students.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти ста́ли бо́лее акти́вными.
         en_gb: The children have become more active.
   "американский=American":
@@ -203,6 +204,7 @@ words:
         en_gb: He bought an American car.
       - ru: Мне нра́вится америка́нская му́зыка.
         en_gb: I like American music.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы смотре́ли америка́нское кино́.
         en_gb: We watched an American film.
   "английский=English":
@@ -399,6 +401,7 @@ words:
         en_gb: A white sheet of paper lies on the table.
       - ru: Она́ наде́ла бе́лую руба́шку.
         en_gb: She put on a white shirt.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В ва́зе стоя́т бе́лые цветы́.
         en_gb: There are white flowers in the vase.
     forms:
@@ -1802,6 +1805,7 @@ words:
         en_gb: This is a very tasty soup.
       - ru: Ма́ма пригото́вила вку́сную ка́шу.
         en_gb: Mum cooked a tasty porridge.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В кафе́ подаю́т вку́сные пирожки́.
         en_gb: They serve tasty pies at the cafe.
     forms:
@@ -3296,6 +3300,7 @@ words:
         en_gb: I am drinking hot tea.
       - ru: Будь осторо́жен с горя́чими блю́дами.
         en_gb: Be careful with the hot dishes.
+        inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: горя́чий
       f: горя́чая
@@ -4132,6 +4137,7 @@ words:
         en_gb: They built a wooden bathhouse.
       - ru: Де́ти игра́ли деревя́нными игру́шками.
         en_gb: The children played with wooden toys.
+        inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
   "детский=children's":
     batteries: [people, objects, texts]
     cefr_level: A2
