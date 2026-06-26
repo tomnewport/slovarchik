@@ -17676,6 +17676,7 @@ words:
         en_gb: In the morning I am always sleepy.
       - ru: Она́ верну́лась домо́й со́нная.
         en_gb: She came home sleepy.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ребёнок смотре́л со́нными глаза́ми.
         en_gb: The child looked with sleepy eyes.
     forms:
@@ -17796,6 +17797,7 @@ words:
         en_gb: He lives in the neighbouring house.
       - ru: Мы зашли́ в сосе́днюю ко́мнату.
         en_gb: We went into the next room.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: На сосе́дней у́лице есть магази́н.
         en_gb: There is a shop on the neighbouring street.
   "социалистический=socialist":
@@ -17841,6 +17843,7 @@ words:
         en_gb: This is a socialist slogan.
       - ru: Они́ строи́ли социалисти́ческое о́бщество.
         en_gb: They were building a socialist society.
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: В кни́ге опи́саны социалисти́ческие иде́и.
         en_gb: The book describes socialist ideas.
   "социальный=social":
@@ -17887,6 +17890,7 @@ words:
         en_gb: This is an important social question.
       - ru: Госуда́рство ока́зывает социа́льную по́мощь.
         en_gb: The state provides social assistance.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем социа́льные пробле́мы.
         en_gb: We study social problems.
   "специальный=special":
@@ -17930,6 +17934,7 @@ words:
         en_gb: He needs a special tool.
       - ru: У них специа́льная програ́мма.
         en_gb: They have a special programme.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Нам да́ли специа́льное зада́ние.
         en_gb: We were given a special task.
   "сплошной=continuous":
@@ -17976,6 +17981,7 @@ words:
         en_gb: There is continuous fog in the sky.
       - ru: Э́то была́ сплошна́я стена́.
         en_gb: It was a solid wall.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: За окно́м сплошны́е ту́чи.
         en_gb: Outside the window there are unbroken clouds.
   "спокойный=calm":
@@ -17991,6 +17997,7 @@ words:
         en_gb: He has a calm voice.
       - ru: Сего́дня споко́йное мо́ре.
         en_gb: The sea is calm today.
+        inflect: { token: 2, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Мы провели́ споко́йный ве́чер.
         en_gb: We spent a calm evening.
     forms:
@@ -18068,6 +18075,7 @@ words:
         en_gb: He put on a sports suit.
       - ru: Ря́дом откры́ли спорти́вную шко́лу.
         en_gb: A sports school opened nearby.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти лю́бят спорти́вные и́гры.
         en_gb: Children love sports games.
   "способный=capable":
@@ -18157,6 +18165,7 @@ words:
         en_gb: We have a just teacher.
       - ru: Суд при́нял справедли́вое реше́ние.
         en_gb: The court made a just decision.
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Мы хоти́м справедли́вых зако́нов.
         en_gb: We want just laws.
   "средний=average":
@@ -18203,6 +18212,7 @@ words:
         en_gb: He is of average height.
       - ru: Э́то сре́дняя температу́ра за́ год.
         en_gb: This is the average temperature for the year.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Учи́тель рабо́тает в сре́дней шко́ле.
         en_gb: The teacher works at a secondary school.
   "стальной=steel":
@@ -18248,6 +18258,7 @@ words:
         en_gb: There is a steel lock on the door.
       - ru: У него́ стальна́я во́ля.
         en_gb: He has a will of steel.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Рабо́чие де́лают стальны́е тру́бы.
         en_gb: The workers make steel pipes.
   "старинный=antique":
@@ -18295,6 +18306,7 @@ words:
         en_gb: There is an antique cupboard in the hall.
       - ru: Она́ купи́ла стари́нную ва́зу.
         en_gb: She bought an antique vase.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы слу́шали стари́нные пе́сни.
         en_gb: We listened to old songs.
   "старший=senior":
@@ -18338,6 +18350,7 @@ words:
         en_gb: My elder brother works as a doctor.
       - ru: Ста́ршая сестра́ помога́ет мне с уро́ками.
         en_gb: My elder sister helps me with lessons.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ста́ршие ученики́ ушли́ домо́й.
         en_gb: The senior pupils went home.
   "старый=old":
@@ -18351,6 +18364,7 @@ words:
         en_gb: This is a very old house.
       - ru: Она́ потеря́ла ста́рую кни́гу.
         en_gb: She lost the old book.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вспомина́ем ста́рых друзе́й.
         en_gb: We remember old friends.
     forms:
@@ -18425,6 +18439,7 @@ words:
         en_gb: There is a glass tumbler on the table.
       - ru: Она́ разби́ла стекля́нную ва́зу.
         en_gb: She broke a glass vase.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В до́ме больши́е стекля́нные две́ри.
         en_gb: The house has large glass doors.
   "столовый=dining":
@@ -18470,6 +18485,7 @@ words:
         en_gb: We need a dinner knife.
       - ru: Она́ купи́ла столо́вую посу́ду.
         en_gb: She bought tableware.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: На по́лке столо́вые ло́жки.
         en_gb: There are tablespoons on the shelf.
   "странный=strange":
@@ -18514,6 +18530,7 @@ words:
         en_gb: I heard a strange sound.
       - ru: Э́то о́чень стра́нная исто́рия.
         en_gb: This is a very strange story.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У него́ стра́нные привы́чки.
         en_gb: He has strange habits.
   "страшный=terrible":
@@ -18560,6 +18577,7 @@ words:
         en_gb: It was a terrible dream.
       - ru: Мы слы́шали стра́шную исто́рию.
         en_gb: We heard a terrible story.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: На у́лице стра́шные моро́зы.
         en_gb: There are terrible frosts outside.
   "строгий=strict":
@@ -18604,6 +18622,7 @@ words:
         en_gb: We have a strict director.
       - ru: Э́то стро́гая учи́тельница.
         en_gb: She is a strict teacher.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В шко́ле стро́гие пра́вила.
         en_gb: There are strict rules at school.
   "стыдный=shameful":
@@ -18649,6 +18668,7 @@ words:
         en_gb: This is a shameful act.
       - ru: Он за́дал сты́дный вопро́с.
         en_gb: He asked an embarrassing question.
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Мне сты́дно за э́то сты́дное де́ло.
         en_gb: I am ashamed of this shameful matter.
   "сумасшедший=crazy":
@@ -18690,6 +18710,7 @@ words:
     usage:
       - ru: Э́то была́ сумасше́дшая иде́я.
         en_gb: That was a crazy idea.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У него́ сумасше́дший рабо́чий гра́фик.
         en_gb: He has a crazy work schedule.
       - ru: Мы е́хали с сумасше́дшей ско́ростью.
@@ -18736,6 +18757,7 @@ words:
         en_gb: In the north the climate is harsh.
       - ru: Их жда́ла суро́вая зима́.
         en_gb: A harsh winter awaited them.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ жи́ли в суро́вых усло́виях.
         en_gb: They lived in harsh conditions.
   "сухой=dry":
@@ -18753,6 +18775,7 @@ words:
         en_gb: Take a dry towel.
       - ru: Ле́том здесь суха́я земля́.
         en_gb: In summer the ground here is dry.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы шли по сухи́м ли́стьям.
         en_gb: We walked over the dry leaves.
     forms:
@@ -18799,6 +18822,7 @@ words:
     usage:
       - ru: Они́ о́чень счастли́вая семья́.
         en_gb: They are a very happy family.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он счастли́вый челове́к.
         en_gb: He is a happy man.
       - ru: Э́то был счастли́вый день.
@@ -18877,6 +18901,7 @@ words:
         en_gb: After the rain the ground became damp.
       - ru: В сыро́м подва́ле бы́ло хо́лодно.
         en_gb: It was cold in the damp cellar.
+        inflect: { token: 2, case: pre, number: sg, gender: m, rule: adj-agreement }
   "таинственный=mysterious":
     batteries: [people, places, feelings]
     cefr_level: B1
@@ -18920,6 +18945,7 @@ words:
         en_gb: We heard a mysterious voice.
       - ru: Э́то была́ таи́нственная исто́рия.
         en_gb: It was a mysterious story.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В до́ме таи́нственные зву́ки.
         en_gb: There are mysterious sounds in the house.
   "тайный=secret":
@@ -18963,6 +18989,7 @@ words:
         en_gb: He has a secret plan.
       - ru: Она́ храни́т та́йную запи́ску.
         en_gb: She keeps a secret note.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ зна́ли та́йные хо́ды.
         en_gb: They knew the secret passages.
   "твёрдый=hard":
@@ -18979,6 +19006,7 @@ words:
         en_gb: Stone is a hard material.
       - ru: У неё твёрдая рука́.
         en_gb: She has a firm hand.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы шли по твёрдой земле́.
         en_gb: We walked on hard ground.
     forms:
@@ -19055,6 +19083,7 @@ words:
         en_gb: He is a creative person.
       - ru: У неё тво́рческая профе́ссия.
         en_gb: She has a creative profession.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти посеща́ют тво́рческие кружки́.
         en_gb: The children attend creative clubs.
   "телефонный=telephone":
@@ -19100,6 +19129,7 @@ words:
         en_gb: I wrote down the telephone number.
       - ru: У нас была́ телефо́нная бесе́да.
         en_gb: We had a telephone conversation.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В кни́ге телефо́нные номера́.
         en_gb: There are telephone numbers in the book.
   "тёмный=dark":
@@ -19117,6 +19147,7 @@ words:
         en_gb: She put on a dark coat.
       - ru: Мы шли по тёмным у́лицам.
         en_gb: We walked along the dark streets.
+        inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: тёмный
       f: тёмная
@@ -19163,6 +19194,7 @@ words:
         en_gb: Today is a warm day.
       - ru: Она́ наде́ла тёплую ку́ртку.
         en_gb: She put on a warm jacket.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Нам ну́жны тёплые но́ски.
         en_gb: We need warm socks.
     forms:
@@ -19238,6 +19270,7 @@ words:
         en_gb: This jacket is tight on me.
       - ru: У нас те́сная кварти́ра.
         en_gb: We have a cramped flat.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ шли те́сными у́лочками.
         en_gb: They walked through narrow lanes.
   "технический=technical":
@@ -19281,6 +19314,7 @@ words:
         en_gb: This is a technical question.
       - ru: Он чита́ет техни́ческую кни́гу.
         en_gb: He is reading a technical book.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас техни́ческие пробле́мы.
         en_gb: We have technical problems.
   "тихий=quiet":
@@ -19325,6 +19359,7 @@ words:
         en_gb: This is a quiet town.
       - ru: Мы жда́ли ти́хую но́чь.
         en_gb: We waited for a quiet night.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ говори́ли ти́хими голоса́ми.
         en_gb: They spoke in quiet voices.
   "толстый=thick":
@@ -19341,6 +19376,7 @@ words:
     usage:
       - ru: Он чита́ет то́лстую кни́гу.
         en_gb: He is reading a thick book.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У стены́ то́лстый ковёр.
         en_gb: There is a thick carpet by the wall.
       - ru: Зимо́й мы но́сим то́лстые сви́теры.
@@ -19389,6 +19425,7 @@ words:
     usage:
       - ru: Она́ ре́жет хлеб то́нкими куска́ми.
         en_gb: She cuts the bread into thin slices.
+        inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
       - ru: На столе́ то́нкий лист бума́ги.
         en_gb: There is a thin sheet of paper on the table.
       - ru: У неё то́нкая та́лия.
@@ -19466,6 +19503,7 @@ words:
     usage:
       - ru: Мы пошли́ в торго́вый центр.
         en_gb: We went to the shopping centre.
+        inflect: { token: 4, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: У них торго́вая компа́ния.
         en_gb: They have a trading company.
       - ru: Страна́ заключи́ла торго́вые догово́ры.
@@ -19514,6 +19552,7 @@ words:
         en_gb: He cast a hasty glance.
       - ru: У неё была́ торопли́вая похо́дка.
         en_gb: She had a hurried walk.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы слы́шали торопли́вые шаги́.
         en_gb: We heard hasty footsteps.
   "точный=exact":
@@ -19558,6 +19597,7 @@ words:
         en_gb: Give me an exact answer.
       - ru: Нам нужна́ то́чная да́та.
         en_gb: We need the exact date.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Учёный сде́лал то́чные расчёты.
         en_gb: The scientist made exact calculations.
   "треугольный=triangular":
@@ -19576,6 +19616,7 @@ words:
     usage:
       - ru: Э́то треуго́льная фо́рма.
         en_gb: This is a triangular shape.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то треуго́льный знак.
         en_gb: This is a triangular sign.
     declension:
@@ -19620,6 +19661,7 @@ words:
         en_gb: This is a very difficult exam.
       - ru: Э́то была́ тру́дная зада́ча.
         en_gb: That was a difficult task.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы пережи́ли тру́дные времена́.
         en_gb: We went through difficult times.
     forms:
@@ -19694,6 +19736,7 @@ words:
         en_gb: He has a long working day.
       - ru: Она́ получи́ла трудову́ю кни́жку.
         en_gb: She received her employment record book.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Трудовы́е бу́дни прохо́дят бы́стро.
         en_gb: The working days pass quickly.
   "тупой=blunt":
@@ -19737,6 +19780,7 @@ words:
         en_gb: I have a blunt knife.
       - ru: Э́то была́ тупа́я игла́.
         en_gb: It was a blunt needle.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Каранда́ш ста́л тупы́м.
         en_gb: The pencil became blunt.
   "тяжёлый=heavy":
@@ -19781,6 +19825,7 @@ words:
         en_gb: I am carrying a heavy suitcase.
       - ru: У неё тяжёлая су́мка.
         en_gb: She has a heavy bag.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ поднима́ли тяжёлые я́щики.
         en_gb: They were lifting heavy boxes.
   "убитый=killed":
@@ -19872,6 +19917,7 @@ words:
         en_gb: He is a respected doctor.
       - ru: Уважа́емая госпожа́, здра́вствуйте.
         en_gb: Dear madam, hello.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь живу́т уважа́емые лю́ди.
         en_gb: Respected people live here.
   "уверенный=confident":
@@ -19918,6 +19964,7 @@ words:
         en_gb: He is a confident person.
       - ru: У неё уве́ренная похо́дка.
         en_gb: She has a confident walk.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы слы́шали уве́ренные слова́.
         en_gb: We heard confident words.
   "угодный=pleasing":
@@ -19963,6 +20010,7 @@ words:
         en_gb: He does whatever pleases.
       - ru: Э́то де́ло, уго́дное всем.
         en_gb: This is a matter agreeable to all.
+        inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Выбира́й любы́е уго́дные тебе́ кни́ги.
         en_gb: Choose any books that please you.
   "уголовный=criminal":
@@ -20008,6 +20056,7 @@ words:
         en_gb: This is the criminal code.
       - ru: Откры́ли уголо́вное де́ло.
         en_gb: A criminal case was opened.
+        inflect: { token: 2, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Юри́ст изуча́ет уголо́вные зако́ны.
         en_gb: The lawyer studies criminal laws.
   "удивительный=amazing":
@@ -20051,6 +20100,7 @@ words:
         en_gb: This is an amazing city.
       - ru: У нас была́ удиви́тельная встре́ча.
         en_gb: We had an amazing meeting.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дели удиви́тельные ме́ста.
         en_gb: We saw amazing places.
   "удобный=comfortable":
