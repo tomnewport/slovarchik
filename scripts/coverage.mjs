@@ -109,11 +109,29 @@ function dump(pos, offset, limit) {
       // conjugation — never a real "you will…". Send those to MANUAL.
       // Resolve a hit to a single slot using context (verbs: single-slot only).
       const resolve = (h) => {
-        if (pos !== 'noun') {
+        if (pos === 'verb') {
           if (h.slots.length !== 1) return null
           const s = h.slots[0]
           if (h.token === 1 && /\.(2sg|2pl)$/.test(s)) return null // imperative
           return s
+        }
+        if (pos === 'adjective') {
+          // Form fixes gender+number; only propose when gender is unambiguous and
+          // the case is single (e.g. -ая → f_nom, -ую → f_acc) or a preposition
+          // resolves it. Multi-gender forms (-ом, -ому, -ым…) need the carrier
+          // noun's gender → MANUAL.
+          const genders = [...new Set(h.slots.map((s) => s.split('_')[0]))]
+          if (genders.length !== 1) return null
+          const g = genders[0]
+          const cases = h.slots.map((s) => s.split('_')[1])
+          if (cases.length === 1) return `${g}_${cases[0]}`
+          const prev = norm(coreT(toks[h.token - 2] ?? ''))
+          const pc = PREP[prev]
+          if (pc) {
+            const cc = cases.filter((c) => pc.includes(c))
+            if (cc.length === 1) return `${g}_${cc[0]}`
+          }
+          return null
         }
         const prev = norm(coreT(toks[h.token - 2] ?? ''))
         const prevPrev = norm(coreT(toks[h.token - 3] ?? ''))
@@ -137,7 +155,7 @@ function dump(pos, offset, limit) {
       if (clean && !best && !conditional) best = { ru, ...clean }
       manual.push(`    "${ru}" => ${hits.map((h) => `t${h.token}=${h.form}[${h.slots.join('|')}]`).join('  ') || '(none)'}`)
     }
-    if (best && pos !== 'adjective') {
+    if (best) {
       console.log(JSON.stringify(decisionFor(pos, best.slot, key, best.ru, best.token)))
     } else {
       console.log(`# MANUAL ${key}`)
