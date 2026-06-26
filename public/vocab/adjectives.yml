@@ -4774,6 +4774,7 @@ words:
         en_gb: This is a permissible noise level.
       - ru: Мы превы́сили допусти́мую ско́рость.
         en_gb: We exceeded the permissible speed.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Существу́ют допусти́мые отклоне́ния.
         en_gb: There are permissible deviations.
   "дорогой=expensive":
@@ -4791,6 +4792,7 @@ words:
     usage:
       - ru: Э́та маши́на о́чень дорога́я.
         en_gb: This car is very expensive.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он купи́л дорого́й телефо́н.
         en_gb: He bought an expensive phone.
       - ru: В дороги́х магази́нах я не покупа́ю.
@@ -4870,6 +4872,7 @@ words:
         en_gb: He is a worthy person.
       - ru: Она́ получи́ла досто́йную награ́ду.
         en_gb: She received a worthy reward.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас досто́йные сопе́рники.
         en_gb: We have worthy rivals.
   "древний=ancient":
@@ -4915,6 +4918,7 @@ words:
         en_gb: We visited the ancient city.
       - ru: В музе́е храни́тся дре́вняя руко́пись.
         en_gb: An ancient manuscript is kept in the museum.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Учёные изуча́ют дре́вние языки́.
         en_gb: Scholars study ancient languages.
   "дурацкий=foolish":
@@ -4956,6 +4960,7 @@ words:
     usage:
       - ru: Э́то была́ дура́цкая оши́бка.
         en_gb: That was a foolish mistake.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Не задава́й дура́цких вопро́сов.
         en_gb: Don't ask foolish questions.
       - ru: У него́ дура́цкое выраже́ние лица́.
@@ -5004,6 +5009,7 @@ words:
         en_gb: He has a bad character.
       - ru: Э́то дурна́я привы́чка.
         en_gb: This is a bad habit.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Не сле́дуй дурны́м приме́рам.
         en_gb: Do not follow bad examples.
   "духовный=spiritual":
@@ -5049,6 +5055,7 @@ words:
         en_gb: He is seeking a spiritual path.
       - ru: Му́зыка даёт духо́вную пи́щу.
         en_gb: Music gives spiritual nourishment.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы цени́м духо́вные це́нности.
         en_gb: We value spiritual values.
   "душевный=heartfelt":
@@ -5095,6 +5102,7 @@ words:
         en_gb: He said heartfelt words.
       - ru: У нас была́ душе́вная бесе́да.
         en_gb: We had a heartfelt conversation.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я чу́вствую душе́вное споко́йствие.
         en_gb: I feel a heartfelt calm.
   "еврейский=Jewish":
@@ -5140,6 +5148,7 @@ words:
         en_gb: They observe Jewish traditions.
       - ru: В го́роде есть евре́йская общи́на.
         en_gb: There is a Jewish community in the city.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
   "европейский=European":
     batteries: [people, places, texts]
     cefr_level: A2
@@ -5181,6 +5190,7 @@ words:
         en_gb: This is a European city.
       - ru: Мы изуча́ем европе́йскую исто́рию.
         en_gb: We study European history.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ посети́ли европе́йские столи́цы.
         en_gb: They visited European capitals.
   "единственный=only":
@@ -5224,6 +5234,7 @@ words:
         en_gb: He is my only son.
       - ru: Э́то еди́нственная возмо́жность.
         en_gb: This is the only opportunity.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы потеря́ли еди́нственный шанс.
         en_gb: We lost the only chance.
   "единый=single":
@@ -5267,6 +5278,7 @@ words:
         en_gb: We have a single plan.
       - ru: Они́ вы́работали еди́ную страте́гию.
         en_gb: They worked out a single strategy.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Существу́ют еди́ные пра́вила.
         en_gb: There are unified rules.
   "ежедневный=daily":
@@ -5285,6 +5297,7 @@ words:
     usage:
       - ru: Я чита́ю ежедне́вную газе́ту.
         en_gb: I read a daily newspaper.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то моя́ ежедне́вная рабо́та.
         en_gb: This is my daily work.
     declension:
@@ -5355,6 +5368,7 @@ words:
         en_gb: This is a natural process.
       - ru: У неё есте́ственная красота́.
         en_gb: She has a natural beauty.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы це́ним есте́ственные ресу́рсы.
         en_gb: We value natural resources.
   "жалкий=pitiful":
@@ -5401,6 +5415,7 @@ words:
         en_gb: He had a pitiful appearance.
       - ru: Э́то жа́лкая отгово́рка.
         en_gb: This is a pitiful excuse.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ получи́ли жа́лкие гроши́.
         en_gb: They received pitiful pennies.
   "жаркий=hot":
@@ -5447,6 +5462,7 @@ words:
         en_gb: Today is a hot day.
       - ru: Была́ жа́ркая пого́да.
         en_gb: The weather was hot.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы пережи́ли жа́ркие дни.
         en_gb: We lived through hot days.
   "железнодорожный=railway":
@@ -5492,6 +5508,7 @@ words:
         en_gb: He works at the railway station.
       - ru: Мы перешли́ железнодоро́жную ли́нию.
         en_gb: We crossed the railway line.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь стро́ят железнодоро́жные пути́.
         en_gb: Railway tracks are being built here.
   "железный=iron":
@@ -5537,6 +5554,7 @@ words:
         en_gb: An iron lock hung on the door.
       - ru: У неё желе́зная во́ля.
         en_gb: She has an iron will.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы перелезли́ че́рез желе́зные воро́та.
         en_gb: We climbed over the iron gates.
   "жёлтый=yellow":
@@ -5550,6 +5568,7 @@ words:
     usage:
       - ru: О́сенью ли́стья стано́вятся жёлтыми.
         en_gb: In autumn the leaves turn yellow.
+        inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
       - ru: У неё жёлтое пла́тье.
         en_gb: She has a yellow dress.
       - ru: На столе́ лежи́т жёлтый каранда́ш.
@@ -5628,6 +5647,7 @@ words:
         en_gb: This is a women's magazine.
       - ru: Она́ но́сит же́нскую су́мку.
         en_gb: She carries a women's bag.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь продаю́т же́нские ту́фли.
         en_gb: They sell women's shoes here.
   "жёсткий=hard":
@@ -5647,6 +5667,7 @@ words:
         en_gb: I have a hard chair.
       - ru: Они́ спа́ли на жёсткой крова́ти.
         en_gb: They slept on a hard bed.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: жёсткий
       f: жёсткая
@@ -5720,6 +5741,7 @@ words:
         en_gb: He is a cruel man.
       - ru: Э́то была́ жесто́кая шу́тка.
         en_gb: That was a cruel joke.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ боя́тся жесто́ких слов.
         en_gb: They are afraid of cruel words.
   "живой=alive":
@@ -5738,6 +5760,7 @@ words:
         en_gb: This flower is still alive.
       - ru: В саду́ мно́го живы́х птиц.
         en_gb: There are many living birds in the garden.
+        inflect: { token: 4, case: gen, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: живо́й
       f: жива́я
@@ -5811,6 +5834,7 @@ words:
         en_gb: This is the animal world of the forest.
       - ru: Она́ изуча́ет живо́тную жизнь.
         en_gb: She studies animal life.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь живу́т живо́тные ра́зных ви́дов.
         en_gb: Animals of various kinds live here.
   "жизненный=vital":
@@ -5856,6 +5880,7 @@ words:
         en_gb: He has rich life experience.
       - ru: Они́ обсужда́ют жи́зненные пробле́мы.
         en_gb: They discuss vital problems.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "жирный=fatty":
     batteries: [food]
     cefr_level: B1
@@ -5899,6 +5924,7 @@ words:
         en_gb: This is a very fatty soup.
       - ru: Я не ем жи́рную пи́щу.
         en_gb: I do not eat fatty food.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Он лю́бит жи́рное мя́со.
         en_gb: He likes fatty meat.
   "загадочный=mysterious":
@@ -5942,6 +5968,7 @@ words:
         en_gb: He is a mysterious person.
       - ru: Она́ улыбну́лась зага́дочной улы́бкой.
         en_gb: She smiled a mysterious smile.
+        inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали зага́дочные зву́ки.
         en_gb: We heard mysterious sounds.
   "задний=rear":
@@ -5987,6 +6014,7 @@ words:
         en_gb: The car’s rear wheel went flat.
       - ru: Мы се́ли на за́дние места́.
         en_gb: We sat in the rear seats.
+        inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: За́дний вход был закры́т.
         en_gb: The rear entrance was closed.
   "заключённый=imprisoned":
@@ -6032,6 +6060,7 @@ words:
         en_gb: An imprisoned man dreams of freedom.
       - ru: Заключённая жда́ла суда́.
         en_gb: The imprisoned woman awaited the trial.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Заключённые рабо́тали в по́ле.
         en_gb: The prisoners worked in the field.
   "законный=legal":
@@ -6051,6 +6080,7 @@ words:
         en_gb: This is a legal method.
       - ru: Она́ его́ зако́нная жена́.
         en_gb: She is his lawful wife.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: зако́нный
       f: зако́нная
@@ -6120,6 +6150,9 @@ words:
       pl_ins: закры́тыми
       pl_pre: закры́тых
     usage:
+      - ru: Он постуча́л в закры́тую дверь.
+        en_gb: He knocked on a closed door.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Магази́н сего́дня закры́т.
         en_gb: The shop is closed today.
       - ru: Дверь была́ закры́та.
@@ -6171,6 +6204,7 @@ words:
         en_gb: There is a noticeable mark on the wall.
       - ru: Произошла́ заме́тная переме́на.
         en_gb: A noticeable change occurred.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дим заме́тные результа́ты.
         en_gb: We see noticeable results.
   "замечательный=wonderful":
@@ -6214,6 +6248,7 @@ words:
         en_gb: He is a wonderful teacher.
       - ru: Э́то была́ замеча́тельная иде́я.
         en_gb: That was a wonderful idea.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас замеча́тельное настрое́ние.
         en_gb: We are in a wonderful mood.
   "занятый=busy":
@@ -6230,6 +6265,7 @@ words:
         en_gb: I am very busy today.
       - ru: Она́ о́чень за́нятая же́нщина.
         en_gb: She is a very busy woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У меня́ за́нятые ру́ки.
         en_gb: My hands are full.
     forms:
@@ -6305,6 +6341,7 @@ words:
         en_gb: This is a western wind.
       - ru: Мы е́дем в за́падную часть го́рода.
         en_gb: We are going to the western part of the city.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: За́падные стра́ны бога́ты.
         en_gb: The western countries are wealthy.
   "здоровый=healthy":
@@ -6320,6 +6357,7 @@ words:
         en_gb: He is strong and healthy.
       - ru: У неё здоро́вая улы́бка.
         en_gb: She has a healthy smile.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти едя́т здоро́вую пи́щу.
         en_gb: The children eat healthy food.
     forms:
@@ -6366,6 +6404,7 @@ words:
     usage:
       - ru: Ле́том трава́ зелёная.
         en_gb: In summer the grass is green.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
         en_alt:
           - The grass is green in summer.
       - ru: На де́реве зелёные ли́стья.
@@ -6447,6 +6486,7 @@ words:
         en_gb: This is the terrestrial globe.
       - ru: Она́ ду́мает о земны́х забо́тах.
         en_gb: She thinks about earthly cares.
+        inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
       - ru: Земна́я жизнь коротка́.
         en_gb: Earthly life is short.
   "зимний=winter":
@@ -6493,6 +6533,7 @@ words:
         en_gb: A winter day has come.
       - ru: Она́ наде́ла зи́мнюю ша́пку.
         en_gb: She put on a winter hat.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мне нра́вятся зи́мние ве́чера.
         en_gb: I like winter evenings.
   "злой=angry":
@@ -6510,6 +6551,7 @@ words:
         en_gb: Don't be so angry.
       - ru: У них зла́я соба́ка.
         en_gb: They have an angry dog.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он сказа́л э́то злы́м го́лосом.
         en_gb: He said it in an angry voice.
     forms:
