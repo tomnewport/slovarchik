@@ -10955,6 +10955,7 @@ words:
         en_gb: It is raining outside.
       - ru: По́сле дождя́ вы́шло со́лнце.
         en_gb: After the rain the sun came out.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы спря́тались от дождя́ под де́ревом.
         en_gb: We sheltered from the rain under a tree.
     declension:
@@ -10985,6 +10986,7 @@ words:
     usage:
       - ru: У поли́ции нет доказа́тельства.
         en_gb: The police have no proof.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Учёный предста́вил ва́жное доказа́тельство.
         en_gb: The scientist presented important proof.
       - ru: Суд потре́бовал серьёзных доказа́тельств.
@@ -11005,6 +11007,7 @@ words:
         en_gb: The director gave a report on the results.
       - ru: Студе́нт гото́вится к докла́ду.
         en_gb: The student is preparing for the report.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На конфере́нции прозвуча́ло мно́го докла́дов.
         en_gb: Many reports were given at the conference.
     declension:
@@ -11037,6 +11040,7 @@ words:
         en_gb: Doctor, my head hurts.
       - ru: Я записа́лся к до́ктору на за́втра.
         en_gb: I made an appointment with the doctor for tomorrow.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В больни́це рабо́тают о́пытные доктора́.
         en_gb: Experienced doctors work in the hospital.
     declension:
@@ -11071,6 +11075,7 @@ words:
         en_gb: He left the document at home.
       - ru: Без докуме́нтов вас не пу́стят.
         en_gb: Without documents they will not let you in.
+        inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: докуме́нт
       sg_gen: докуме́нта
@@ -11101,6 +11106,7 @@ words:
         en_gb: He paid back all his debts.
       - ru: Он взя́л де́ньги в долг.
         en_gb: He took the money as a loan.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Защища́ть Ро́дину — его́ долг.
         en_gb: Defending the homeland is his duty.
     declension:
@@ -11142,6 +11148,7 @@ words:
         en_gb: He holds a high post.
       - ru: Её назна́чили на но́вую до́лжность.
         en_gb: She was appointed to a new post.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В фи́рме откры́ли не́сколько до́лжностей.
         en_gb: Several posts were opened in the firm.
   "долина=valley":
@@ -11171,6 +11178,7 @@ words:
     usage:
       - ru: В доли́не течёт ти́хая река́.
         en_gb: A quiet river flows in the valley.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы спусти́лись в зелёную доли́ну.
         en_gb: We descended into the green valley.
       - ru: С горы́ видны́ широ́кие доли́ны.
@@ -11188,6 +11196,7 @@ words:
     usage:
       - ru: Биле́т сто́ит пятьдеся́т до́лларов.
         en_gb: The ticket costs fifty dollars.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Курс до́ллара сего́дня вы́рос.
         en_gb: The dollar's exchange rate rose today.
       - ru: Он заплати́л оди́н до́ллар.
@@ -11234,6 +11243,7 @@ words:
     usage:
       - ru: Ка́ждый получи́л свою́ до́лю.
         en_gb: Everyone received their share.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том де́ле есть до́ля пра́вды.
         en_gb: There is a grain of truth in this matter.
       - ru: Бра́тья раздели́ли насле́дство на ра́вные до́ли.
@@ -11324,6 +11334,7 @@ words:
         en_gb: The road to the city was long.
       - ru: Мы до́лго е́хали по доро́ге.
         en_gb: We drove along the road for a long time.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На доро́гах сего́дня мно́го маши́н.
         en_gb: There are many cars on the roads today.
     declension:
@@ -11370,6 +11381,7 @@ words:
         en_gb: A narrow path led to the house.
       - ru: Мы гуля́ли по доро́жке в па́рке.
         en_gb: We walked along the path in the park.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В саду́ мно́го краси́вых доро́жек.
         en_gb: There are many beautiful paths in the garden.
   "досада=annoyance":
@@ -11398,6 +11410,7 @@ words:
     usage:
       - ru: Он почу́вствовал доса́ду и́з-за оши́бки.
         en_gb: He felt annoyance because of the mistake.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ покрасне́ла от доса́ды.
         en_gb: She blushed with annoyance.
       - ru: К мое́й доса́де, по́езд опозда́л.
@@ -11419,6 +11432,7 @@ words:
     usage:
       - ru: Учи́тель пи́шет на доске́.
         en_gb: The teacher is writing on the board.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он прибива́ет до́ску к стене́.
         en_gb: He is nailing a board to the wall.
       - ru: На доске́ висе́ли ста́рые объявле́ния.
@@ -11463,6 +11477,7 @@ words:
         en_gb: This is her main achievement.
       - ru: Мы горди́мся его́ достиже́ниями.
         en_gb: We are proud of his achievements.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Учёный посвяти́л жизнь нау́чным достиже́ниям.
         en_gb: The scientist devoted his life to scientific achievements.
   "достоинство=dignity":
@@ -11485,6 +11500,7 @@ words:
     usage:
       - ru: Он держа́лся с больши́м досто́инством.
         en_gb: He behaved with great dignity.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Она́ не теря́ла досто́инства да́же в беде́.
         en_gb: She did not lose her dignity even in trouble.
       - ru: Челове́к до́лжен сохраня́ть досто́инство.
@@ -11507,6 +11523,7 @@ words:
         en_gb: His income grew over the year.
       - ru: Часть дохо́да они́ откла́дывают.
         en_gb: They set aside part of their income.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: дохо́д
       sg_gen: дохо́да
@@ -11630,6 +11647,7 @@ words:
     usage:
       - ru: Он сде́лал дре́лью дыру́ в стене́.
         en_gb: He made a hole in the wall with the drill.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Дрель лежи́т в я́щике.
         en_gb: The drill is lying in the drawer.
       - ru: Ему́ нужна́ но́вая дрель для рабо́ты.
@@ -11666,6 +11684,7 @@ words:
         en_gb: We bought firewood for the winter.
       - ru: В сара́е не оста́лось дров.
         en_gb: There was no firewood left in the shed.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он положи́л в пе́чку немно́го дров.
         en_gb: He put a little firewood into the stove.
   "друг=friend":
@@ -11725,6 +11744,7 @@ words:
         en_gb: Their friendship has lasted many years.
       - ru: Мы дорожи́м на́шей дру́жбой.
         en_gb: We value our friendship.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он рассказа́л о дру́жбе с сосе́дом.
         en_gb: He spoke about his friendship with his neighbour.
   "дуга=arc":
@@ -11744,6 +11764,7 @@ words:
         en_gb: The bridge has the shape of a beautiful arc.
       - ru: Мяч пролете́л по дуге́.
         en_gb: The ball flew along an arc.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: дуга́
       sg_gen: дуги́
@@ -11788,6 +11809,7 @@ words:
         en_gb: Heavy thoughts tormented him.
       - ru: Она́ сиде́ла в глубо́кой ду́ме.
         en_gb: She sat deep in thought.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Депута́ты собрали́сь в Ду́ме.
         en_gb: The deputies gathered in the Duma.
   "дура=fool":
@@ -11803,6 +11825,7 @@ words:
     usage:
       - ru: Не будь ду́рой — поду́май хорошо́.
         en_gb: Don't be a fool — think it over.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Она́ назвала́ себя́ ду́рой.
         en_gb: She called herself a fool.
       - ru: Така́я ду́ра ничего́ не понима́ет.
@@ -11833,6 +11856,7 @@ words:
     usage:
       - ru: Не будь дурако́м.
         en_gb: Don't be a fool.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он поступи́л как настоя́щий дура́к.
         en_gb: He acted like a real fool.
       - ru: Не слу́шай э́тих дурако́в.
@@ -11866,6 +11890,7 @@ words:
         en_gb: A strong spirit helps in trouble.
       - ru: Он па́л ду́хом по́сле неуда́чи.
         en_gb: He lost spirit after the failure.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В ста́ром до́ме жи́ли злы́е ду́хи.
         en_gb: Evil spirits lived in the old house.
     declension:
@@ -12071,6 +12096,7 @@ words:
     usage:
       - ru: Его́ де́душка был евре́ем.
         en_gb: His grandfather was a Jew.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Э́тот пра́здник ва́жен для евре́ев.
         en_gb: This holiday is important for Jews.
       - ru: Он познако́мился с молоды́м евре́ем.
@@ -12108,6 +12134,7 @@ words:
     usage:
       - ru: Он мно́го путеше́ствовал по Евро́пе.
         en_gb: He travelled a lot around Europe.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Столи́цы Евро́пы о́чень краси́вы.
         en_gb: The capitals of Europe are very beautiful.
       - ru: Они́ перее́хали в Евро́пу.
@@ -12132,6 +12159,7 @@ words:
     usage:
       - ru: Кли́мат в Евро́пе мя́гкий.
         en_gb: The climate in Europe is mild.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы лети́м в Евро́пу ле́том.
         en_gb: We are flying to Europe in summer.
       - ru: Исто́рия Евро́пы о́чень бога́та.
@@ -12154,6 +12182,7 @@ words:
         en_gb: This food is very tasty.
       - ru: Без еды́ челове́к не мо́жет жить.
         en_gb: A person cannot live without food.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ лю́бит вку́сную еду́.
         en_gb: She loves tasty food.
     declension:
@@ -12180,6 +12209,7 @@ words:
         en_gb: A little hedgehog lives in the garden.
       - ru: У ежа́ о́строе иго́лки.
         en_gb: A hedgehog has sharp needles.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лесу́ мы ви́дели не́сколько ежо́в.
         en_gb: In the forest we saw several hedgehogs.
     declension:
@@ -12212,6 +12242,7 @@ words:
     usage:
       - ru: На Но́вый год мы наряжа́ем ёлку.
         en_gb: At New Year we decorate the fir tree.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Под ёлкой лежа́ли пода́рки.
         en_gb: Presents lay under the fir tree.
       - ru: В лесу́ растёт мно́го ёлок.
@@ -12243,6 +12274,7 @@ words:
     usage:
       - ru: Он написа́л жа́лобу дире́ктору.
         en_gb: He wrote a complaint to the director.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го жа́лоб от клие́нтов.
         en_gb: There are many complaints from customers in the book.
       - ru: Он пришёл с жа́лобой на сосе́да.
@@ -12286,6 +12318,7 @@ words:
     usage:
       - ru: Она́ смотре́ла на него́ с жа́лостью.
         en_gb: She looked at him with pity.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Меня́ охвати́ла жа́лость к щенку́.
         en_gb: Pity for the puppy came over me.
       - ru: Из жа́лости он отда́л после́дние де́ньги.
@@ -12461,6 +12494,7 @@ words:
         en_gb: Everyone congratulated the groom.
       - ru: Неве́ста подошла́ к жениху́.
         en_gb: The bride approached the groom.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: жени́х
       sg_gen: жениха́
@@ -12555,6 +12589,7 @@ words:
         en_gb: He made a wide gesture with his hand.
       - ru: Она́ поняла́ его́ по же́сту.
         en_gb: She understood him by his gesture.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Актёр игра́л живы́ми же́стами.
         en_gb: The actor performed with lively gestures.
     declension:
@@ -12583,6 +12618,7 @@ words:
     usage:
       - ru: Она́ увлека́ется жи́вописью.
         en_gb: She is keen on painting.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В музе́е мно́го стари́нной жи́вописи.
         en_gb: There is a lot of old painting in the museum.
     declension:
@@ -12610,6 +12646,7 @@ words:
         en_gb: After lunch he has a stomach ache.
       - ru: Ребёнок лежи́т на животе́.
         en_gb: The child is lying on his stomach.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он схвати́лся за живо́т от сме́ха.
         en_gb: He grabbed his stomach from laughing.
     declension:
@@ -12771,6 +12808,7 @@ words:
     usage:
       - ru: В э́том мя́се мно́го жи́ра.
         en_gb: There is a lot of fat in this meat.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ жа́рит карто́шку на жи́ре.
         en_gb: She fries potatoes in fat.
       - ru: Гусь покры́т то́лстым жи́ром.
@@ -12897,6 +12935,7 @@ words:
         en_gb: The journalist asked a difficult question.
       - ru: Она́ мечта́ет стать журнали́стом.
         en_gb: She dreams of becoming a journalist.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На пресс-конфере́нции бы́ло мно́го журнали́стов.
         en_gb: There were many journalists at the press conference.
   "заболевание=disease":
@@ -12929,6 +12968,7 @@ words:
         en_gb: Doctors are studying a new disease.
       - ru: Он страда́ет от тяжёлых заболева́ний.
         en_gb: He suffers from serious diseases.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "забор=fence":
     batteries: [objects, places]
     cefr_level: B1
@@ -12943,6 +12983,7 @@ words:
     usage:
       - ru: Соба́ка переско́чила че́рез забо́р.
         en_gb: The dog jumped over the fence.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ покра́сили забо́р в зелёный цвет.
         en_gb: They painted the fence green.
       - ru: Кот сиди́т на забо́ре.
@@ -12989,6 +13030,7 @@ words:
     usage:
       - ru: Она́ окружи́ла мать забо́той.
         en_gb: She surrounded her mother with care.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У него́ мно́го забо́т по до́му.
         en_gb: He has many cares around the house.
       - ru: Де́ти тре́буют постоя́нной забо́ты.
@@ -13016,6 +13058,7 @@ words:
     usage:
       - ru: Он бо́рется с зави́симостью.
         en_gb: He is fighting his dependence.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Э́то реше́ние зави́сит от мно́гого.
         en_gb: This is dependence on many factors.
       - ru: Врачи́ говори́ли о зави́симости от табака́.
@@ -13034,6 +13077,7 @@ words:
     usage:
       - ru: Он рабо́тает на заво́де.
         en_gb: He works at the factory.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Заво́д выпуска́ет автомоби́ли.
         en_gb: The factory produces cars.
       - ru: Ми́мо заво́да идёт доро́га.
@@ -13066,6 +13110,7 @@ words:
     usage:
       - ru: На за́втрак я ем ка́шу.
         en_gb: For breakfast I eat porridge.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: За́втрак был о́чень сы́тным.
         en_gb: The breakfast was very filling.
       - ru: По́сле за́втрака мы пошли́ гуля́ть.
@@ -13098,6 +13143,7 @@ words:
         en_gb: After the seaside she has a lovely suntan.
       - ru: Он горди́тся свои́м зага́ром.
         en_gb: He is proud of his suntan.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: К о́сени зага́р исче́з.
         en_gb: By autumn the suntan faded.
     declension:
@@ -13126,6 +13172,7 @@ words:
         en_gb: I read only the headlines of the newspapers.
       - ru: В заголо́вке была́ оши́бка.
         en_gb: There was a mistake in the headline.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: заголо́вок
       sg_gen: заголо́вка
@@ -13160,6 +13207,7 @@ words:
     usage:
       - ru: Маши́на уда́рилась за́дом о сте́ну.
         en_gb: The car hit the wall with its back.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он сел на са́мый зад авто́буса.
         en_gb: He sat at the very back of the bus.
       - ru: В заде́ за́ла бы́ло свобо́дно.
@@ -13194,6 +13242,7 @@ words:
         en_gb: The teacher gave a difficult task.
       - ru: Он спра́вился со все́ми зада́ниями.
         en_gb: He coped with all the tasks.
+        inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
       - ru: В зада́нии бы́ло три вопро́са.
         en_gb: There were three questions in the task.
   "задание=assignment":
@@ -13225,6 +13274,7 @@ words:
     usage:
       - ru: Она́ забы́ла про дома́шнее зада́ние.
         en_gb: She forgot about the homework assignment.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы рабо́таем над но́вым зада́нием.
         en_gb: We are working on a new assignment.
       - ru: Студе́нты сдаю́т зада́ния в пя́тницу.
@@ -13261,6 +13311,7 @@ words:
         en_gb: He solved all the problems in the textbook.
       - ru: В зада́че не хвата́ет да́нных.
         en_gb: There is not enough data in the problem.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
   "задача=task":
     batteries: [work_study]
     cefr_level: A2
@@ -13292,6 +13343,7 @@ words:
         en_gb: An important task lies before us.
       - ru: Он подошёл к зада́че серьёзно.
         en_gb: He approached the task seriously.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У кома́нды мно́го зада́ч.
         en_gb: The team has many tasks.
   "заказ=order":
@@ -13311,6 +13363,7 @@ words:
         en_gb: Your order will be ready in an hour.
       - ru: Официа́нт при́нял наш зака́з.
         en_gb: The waiter took our order.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ лежа́т но́вые зака́зы.
         en_gb: New orders are lying on the table.
     declension:
@@ -13352,6 +13405,7 @@ words:
     usage:
       - ru: В заключе́нии он поблагодари́л всех.
         en_gb: In conclusion he thanked everyone.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Врач написа́л своё заключе́ние.
         en_gb: The doctor wrote his conclusion.
       - ru: Экспе́рты пришли́ к ва́жным заключе́ниям.
@@ -13373,6 +13427,7 @@ words:
         en_gb: The parliament passed a new law.
       - ru: Он нару́шил не́сколько зако́нов.
         en_gb: He broke several laws.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: зако́н
       sg_gen: зако́на
@@ -13402,6 +13457,7 @@ words:
     usage:
       - ru: На заку́ску пода́ли сала́т.
         en_gb: A salad was served as a starter.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы заказа́ли холо́дную заку́ску.
         en_gb: We ordered a cold starter.
       - ru: На столе́ бы́ло мно́го заку́сок.
@@ -13449,6 +13505,7 @@ words:
         en_gb: The hall was full of spectators.
       - ru: Мы вошли́ в большо́й зал.
         en_gb: We entered the large hall.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В за́ле игра́ла му́зыка.
         en_gb: Music was playing in the hall.
   "заместитель=deputy":
@@ -13479,6 +13536,7 @@ words:
         en_gb: The deputy director arrived in the morning.
       - ru: Я говори́л с его́ замести́телем.
         en_gb: I spoke with his deputy.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На собра́нии бы́ло не́сколько замести́телей.
         en_gb: There were several deputies at the meeting.
   "замок=lock":
@@ -13494,6 +13552,7 @@ words:
     usage:
       - ru: Он вста́вил ключ в замо́к.
         en_gb: He put the key in the lock.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Замо́к на двери́ слома́лся.
         en_gb: The lock on the door broke.
       - ru: Он купи́л но́вые замки́.
@@ -13528,6 +13587,7 @@ words:
         en_gb: An old castle stands on the hill.
       - ru: Тури́сты любу́ются за́мком.
         en_gb: The tourists admire the castle.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В Евро́пе мно́го ста́рых за́мков.
         en_gb: There are many old castles in Europe.
     declension:
@@ -13561,6 +13621,7 @@ words:
         en_gb: Reading is his favourite activity.
       - ru: Она́ опозда́ла на заня́тие.
         en_gb: She was late for the activity.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: заня́тие
       sg_gen: заня́тия
@@ -13588,6 +13649,7 @@ words:
     usage:
       - ru: Со́лнце захо́дит на за́паде.
         en_gb: The sun sets in the west.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ е́хали на за́пад три дня.
         en_gb: They travelled west for three days.
       - ru: Ве́тер ду́ет с за́пада.
@@ -13625,6 +13687,7 @@ words:
         en_gb: We have a large stock of water.
       - ru: Мы оста́лись без запа́са еды́.
         en_gb: We were left without a stock of food.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На зи́му де́лают запа́сы дров.
         en_gb: Stocks of firewood are made for winter.
   "запах=smell":
@@ -13643,6 +13706,7 @@ words:
         en_gb: A pleasant smell of flowers hung in the room.
       - ru: Она́ узна́ла его́ по за́паху.
         en_gb: She recognised him by his smell.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: По ку́хне разнёсся за́пах хле́ба.
         en_gb: The smell of bread spread through the kitchen.
     declension:
@@ -13685,6 +13749,7 @@ words:
     usage:
       - ru: Он оста́вил мне коро́ткую запи́ску.
         en_gb: He left me a short note.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В запи́ске бы́ло то́лько одно́ сло́во.
         en_gb: There was only one word in the note.
       - ru: Учени́к передава́л запи́ски на уро́ке.
@@ -13717,6 +13782,7 @@ words:
         en_gb: We listened to an old recording of the concert.
       - ru: В кни́ге мно́го ва́жных за́писей.
         en_gb: There are many important records in the book.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "заповедь=commandment":
     batteries: [abstract, communication]
     cefr_level: B2
@@ -13731,6 +13797,7 @@ words:
     usage:
       - ru: Не лги — одна́ из за́поведей.
         en_gb: Do not lie is one of the commandments.
+        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Э́та за́поведь у́чит люби́ть бли́жнего.
         en_gb: This commandment teaches loving one's neighbour.
       - ru: Он соблюда́ет все за́поведи.
@@ -13766,6 +13833,7 @@ words:
         en_gb: The import ban was lifted.
       - ru: Они́ протесту́ют про́тив запре́тов.
         en_gb: They protest against the bans.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: запре́т
       sg_gen: запре́та
@@ -13795,6 +13863,7 @@ words:
         en_gb: The launch of the rocket was successful.
       - ru: Мы ждём за́пуск но́вого са́йта.
         en_gb: We are waiting for the launch of the new website.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: за́пуск
       sg_gen: за́пуска
@@ -13825,6 +13894,7 @@ words:
         en_gb: He injured his wrist at training.
       - ru: Брасле́т блесте́л на её запя́стьях.
         en_gb: The bracelet shone on her wrists.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: запя́стье
       sg_gen: запя́стья
@@ -13851,6 +13921,7 @@ words:
     usage:
       - ru: Ты забы́л поста́вить запяту́ю.
         en_gb: You forgot to put a comma.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том ме́сте нужна́ запята́я.
         en_gb: A comma is needed in this place.
     declension:
@@ -13882,6 +13953,7 @@ words:
     usage:
       - ru: Он получа́ет хоро́шую зарпла́ту.
         en_gb: He earns a good salary.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Зарпла́та прихо́дит в нача́ле ме́сяца.
         en_gb: The salary arrives at the beginning of the month.
       - ru: Он недово́лен свое́й зарпла́той.
@@ -13929,6 +14001,7 @@ words:
         en_gb: The meeting began on time.
       - ru: Дире́ктор вы́ступил на заседа́нии.
         en_gb: The director spoke at the meeting.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Все вопро́сы реша́ют на заседа́ниях.
         en_gb: All matters are decided at meetings.
   "затылок=back of the head":
@@ -13957,6 +14030,7 @@ words:
         en_gb: He scratched the back of his head.
       - ru: У него́ боль в заты́лке.
         en_gb: He has a pain in the back of his head.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ве́тер ду́л ей в заты́лок.
         en_gb: The wind blew at the back of her head.
   "защита=defence":
@@ -13975,6 +14049,7 @@ words:
     usage:
       - ru: Адвока́т вы́строил си́льную защи́ту.
         en_gb: The lawyer built a strong defence.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Солда́ты вста́ли на защи́ту го́рода.
         en_gb: The soldiers stood up for the defence of the city.
       - ru: Кре́пкие сте́ны слу́жат защи́той.
@@ -14016,6 +14091,7 @@ words:
         en_gb: He wrote a resignation statement.
       - ru: В заявле́нии бы́ло мно́го оши́бок.
         en_gb: There were many mistakes in the statement.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мини́стр сде́лал ва́жные заявле́ния.
         en_gb: The minister made important statements.
   "заяц=hare":
@@ -14036,6 +14112,7 @@ words:
         en_gb: The hare quickly ran off into the field.
       - ru: Соба́ка погнала́сь за за́йцем.
         en_gb: The dog chased after the hare.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На по́ле мы ви́дели двух за́йцев.
         en_gb: We saw two hares in the field.
     declension:
@@ -14080,6 +14157,7 @@ words:
         en_gb: He was given a new rank.
       - ru: Он горди́тся свои́м зва́нием.
         en_gb: He is proud of his rank.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В а́рмии мно́го разли́чных зва́ний.
         en_gb: In the army there are many different ranks.
   "звезда=star":
@@ -14099,6 +14177,7 @@ words:
         en_gb: The stars lit up in the sky.
       - ru: Он смотре́л на я́ркую звезду́.
         en_gb: He looked at the bright star.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Не́бо бы́ло полно́ звёзд.
         en_gb: The sky was full of stars.
     declension:
