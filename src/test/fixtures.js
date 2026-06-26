@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import { buildWords, shapeNouns, POS_BY_FILE } from '../lib/vocabBuild.js'
+import { indexPhrases } from '../lib/phraseContext.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
 
@@ -29,7 +30,13 @@ export function loadFixtureNouns() {
   return shapeNouns(loadFixtureWords())
 }
 
-/** The parsed phrase-completion carrier batteries (public/vocab/phrase-batteries.yml). */
-export function loadFixtureBatteries() {
-  return yaml.load(readFileSync(resolve(vocabDir, 'phrase-batteries.yml'), 'utf8'))
+/** key → annotated context phrases (public/vocab/phrases.yml), via indexPhrases. */
+export function loadFixtureContextPhrases() {
+  const doc = yaml.load(readFileSync(resolve(vocabDir, 'phrases.yml'), 'utf8'))
+  return indexPhrases(doc?.phrases ?? [])
+}
+
+/** The parsed grammar-rules map (public/vocab/grammar-rules.yml). */
+export function loadFixtureRules() {
+  return yaml.load(readFileSync(resolve(vocabDir, 'grammar-rules.yml'), 'utf8'))?.rules ?? {}
 }

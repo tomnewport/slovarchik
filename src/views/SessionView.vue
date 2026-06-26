@@ -111,7 +111,8 @@ async function setup() {
     words,
     phrases,
     encounterCount: progress.encounterCount,
-    batteries: vocabState.batteries,
+    contextPhrases: vocabState.contextPhrases,
+    rules: vocabState.rules,
     skipsSpeaking: progress.skipsSpeaking,
   })
   for (const ex of exercises) {

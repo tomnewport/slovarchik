@@ -1,0 +1,138 @@
+# grammar-rules.yml — short rule / formula explanations for the in-context
+# inflection drill. Each phrase in phrases.yml may carry a `rule:` id pointing
+# here; the explanation is shown when the answer is revealed.
+#
+# Keep each rule to a one-line formula plus a couple of sentences and the most
+# common exceptions — enough to remind the learner *why* the form is what it is.
+---
+rules:
+  # ── Nouns ───────────────────────────────────────────────────────────────
+  noun-gen-sg:
+    title: "Genitive singular"
+    formula: "m/n → -а / -я · f → -ы / -и"
+    explanation: >
+      The genitive marks possession ("of"), absence ("there is no…"), quantity
+      ("a kilo of…") and follows из, от, до, без, у, для. Masculine and neuter
+      nouns take -а/-я; feminine -а nouns take -ы (-и after к, г, х, ж, ш, щ, ч).
+    exceptions:
+      - "Feminine -ь nouns take -и: но́чь → но́чи."
+      - "Some masculine nouns use a partitive -у: ча́ю, са́хару."
+
+  noun-gen-pl:
+    title: "Genitive plural"
+    formula: "m → -ов/-ев/-ей · f, n → zero ending"
+    explanation: >
+      The hardest case to form. Masculine nouns usually add -ов (-ев after soft
+      stems, -ей after ж, ш, щ, ч, ь). Feminine -а and neuter -о nouns most often
+      take a ZERO ending, which can insert a fleeting vowel: окно́ → о́кон,
+      де́вушка → де́вушек.
+    exceptions:
+      - "Soft feminine/neuter stems take -ей: но́чь → ноче́й, мо́ре → море́й."
+      - "Irregulars: челове́к → люде́й, ребёнок → дете́й."
+
+  noun-dat-sg:
+    title: "Dative singular"
+    formula: "m/n → -у / -ю · f → -е / -и"
+    explanation: >
+      The dative is the recipient ("to/for whom") and follows к ("towards") and
+      по. Masculine and neuter take -у/-ю; feminine -а nouns take -е.
+    exceptions:
+      - "Feminine -ия and -ь nouns take -и: ле́кция → ле́кции, мать → ма́тери."
+
+  noun-dat-pl:
+    title: "Dative plural"
+    formula: "→ -ам / -ям"
+    explanation: >
+      All genders take -ам in the dative plural (-ям after soft stems). Used for
+      the recipient and after к and по.
+
+  noun-acc-sg:
+    title: "Accusative singular"
+    formula: "f -а → -у · inanimate m/n = nominative · animate m = genitive"
+    explanation: >
+      The accusative is the direct object and follows в/на for motion. Feminine
+      -а nouns take -у (-я → -ю). Inanimate masculine and neuter nouns look like
+      the nominative; animate masculine nouns look like the genitive.
+    exceptions:
+      - "Feminine -ь nouns don't change: мать → мать, ночь → ночь."
+
+  noun-acc-pl:
+    title: "Accusative plural"
+    formula: "inanimate = nominative pl · animate = genitive pl"
+    explanation: >
+      In the plural the accusative copies the nominative for inanimate nouns and
+      the genitive for animate nouns, regardless of gender.
+
+  noun-ins-sg:
+    title: "Instrumental singular"
+    formula: "m/n → -ом / -ем · f → -ой / -ей"
+    explanation: >
+      The instrumental is the means ("with/by") and follows с ("together with"),
+      за, под, над, пе́ред. Masculine/neuter take -ом; feminine -а nouns take -ой
+      (-ей after soft stems and after ж, ш, щ, ч, ц when unstressed).
+    exceptions:
+      - "Feminine -ь nouns take -ью: но́чь → но́чью."
+
+  noun-ins-pl:
+    title: "Instrumental plural"
+    formula: "→ -ами / -ями"
+    explanation: >
+      All genders take -ами in the instrumental plural (-ями after soft stems).
+    exceptions:
+      - "A few keep -ьми: детьми́, людьми́."
+
+  noun-pre-sg:
+    title: "Prepositional singular"
+    formula: "→ -е (some -и / -у)"
+    explanation: >
+      Always used with a preposition — в/на (location), о/об (about). Most nouns
+      take -е.
+    exceptions:
+      - "Nouns in -ий/-ие/-ия and feminine -ь take -и: ле́кция → о ле́кции."
+      - "Some masculine nouns take a stressed -у́ after в/на: в лесу́, в саду́."
+
+  noun-pre-pl:
+    title: "Prepositional plural"
+    formula: "→ -ах / -ях"
+    explanation: >
+      All genders take -ах in the prepositional plural (-ях after soft stems),
+      after в/на and о/об.
+
+  # ── Verbs ───────────────────────────────────────────────────────────────
+  verb-present:
+    title: "Present tense (imperfective)"
+    formula: "1st conj. -ешь, -ет, … · 2nd conj. -ишь, -ит, …"
+    explanation: >
+      Imperfective verbs conjugate in the present. First-conjugation verbs take
+      -ю/-у, -ешь, -ет, -ем, -ете, -ют/-ут; second-conjugation (mostly -ить
+      verbs) take -ю/-у, -ишь, -ит, -им, -ите, -ят/-ат.
+    exceptions:
+      - "Consonant mutations in the 1st person: люби́ть → люблю́, ходи́ть → хожу́."
+
+  verb-future:
+    title: "Future tense"
+    formula: "perfective: present-type endings · imperfective: бу́ду + infinitive"
+    explanation: >
+      A perfective verb has no present tense — its present-type endings express
+      the (single, completed) future: я напишу́ = "I will write". Imperfective
+      verbs form the future with бу́ду, бу́дешь… + the infinitive.
+
+  verb-past:
+    title: "Past tense"
+    formula: "stem + -л / -ла / -ло / -ли"
+    explanation: >
+      The past tense agrees with the SUBJECT's gender and number, not person:
+      -л (he), -ла (she), -ло (it), -ли (plural). Formed from the infinitive
+      stem: чита́ть → чита́л, чита́ла, чита́ло, чита́ли.
+    exceptions:
+      - "Some masculine forms drop -л: нести́ → нёс, мочь → мог."
+
+  # ── Adjectives ──────────────────────────────────────────────────────────
+  adj-agreement:
+    title: "Adjective agreement"
+    formula: "agrees in gender · number · case with its noun"
+    explanation: >
+      An adjective copies the gender, number and case of the noun it modifies.
+      Feminine singular endings are the clearest: -ая (nominative) → -ую
+      (accusative). Hard stems take -ый/-ой, -ая, -ое, -ые; soft stems and
+      stems after к/г/х and ж/ш/щ/ч take -ий, -яя, -ее, -ие.
