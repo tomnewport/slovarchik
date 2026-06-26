@@ -93,6 +93,26 @@ describe('PhraseFixExercise', () => {
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
   })
 
+  it('shows an Exception badge when the rule is flagged', async () => {
+    const exEx = { ...nounExercise, exception: true, rule: { id: 'noun-acc-animate', title: 'Animate accusative' } }
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: exEx } })
+    const accBtn = wrapper.findAll('.case-btn').find((b) => b.text().includes('Accusative'))
+    await accBtn.trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('бабочку')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.find('.exc-badge').exists()).toBe(true)
+    expect(wrapper.find('details.rule.exception').exists()).toBe(true)
+  })
+
+  it('shows no Exception badge for a regular rule', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
+    const accBtn = wrapper.findAll('.case-btn').find((b) => b.text().includes('Accusative'))
+    await accBtn.trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('бабочку')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.find('.exc-badge').exists()).toBe(false)
+  })
+
   it('skips the case step for verbs', async () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: verbExercise } })
     expect(wrapper.findAll('.case-btn')).toHaveLength(0)

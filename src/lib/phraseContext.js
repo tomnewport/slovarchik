@@ -37,8 +37,25 @@ function tokenize(ru) {
   return String(ru ?? '').trim().split(/\s+/).filter(Boolean)
 }
 
-function pickOne(arr, rng) {
-  return arr.length ? arr[Math.floor(rng() * arr.length)] : null
+/**
+ * How much more likely an exception phrase is to be drawn than a regular one.
+ * Exceptions are the hard, easily-forgotten forms, so once a word carries one we
+ * want it to surface more often — but not exclusively, so regular forms still
+ * appear.
+ */
+export const EXCEPTION_WEIGHT = 4
+
+/** Weighted pick: each item's weight comes from `weightOf(item)` (min 1). */
+function weightedPick(items, weightOf, rng) {
+  if (!items.length) return null
+  const weights = items.map((it) => Math.max(1, weightOf(it)))
+  const total = weights.reduce((a, b) => a + b, 0)
+  let r = rng() * total
+  for (let i = 0; i < items.length; i++) {
+    r -= weights[i]
+    if (r < 0) return items[i]
+  }
+  return items[items.length - 1]
 }
 
 /**
@@ -128,9 +145,16 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     ru: phrase.ru,
     en: phrase.en,
     rule: rule ? { id: target.rule, ...rule } : null,
+    exception: rule?.exception === true,
     subject: phrase.subject ?? null,
     targets: [target.key],
   }
+}
+
+/** Whether an annotated phrase teaches an exception/irregular form. */
+function isException(phrase, rules) {
+  const id = phrase?.target?.rule
+  return !!id && rules[id]?.exception === true
 }
 
 /**
@@ -143,7 +167,13 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
  */
 export function buildContextExercise(word, { phrasesByKey, rules = {}, rng = Math.random } = {}) {
   if (!word || !phrasesByKey) return null
-  const phrase = pickOne(phrasesByKey.get(word.key) ?? [], rng)
+  const candidates = phrasesByKey.get(word.key) ?? []
+  // Bias toward exception/irregular phrases so the hard forms surface more often.
+  const phrase = weightedPick(
+    candidates,
+    (p) => (isException(p, rules) ? EXCEPTION_WEIGHT : 1),
+    rng,
+  )
   if (!phrase) return null
   return buildFromPhrase(phrase, word, { rules })
 }

@@ -144,8 +144,11 @@ onMounted(() => {
           <SpeakButton :text="exercise.ru" />
         </p>
 
-        <details v-if="exercise.rule" class="rule" open>
-          <summary>{{ exercise.rule.title }}</summary>
+        <details v-if="exercise.rule" class="rule" :class="{ exception: exercise.exception }" open>
+          <summary>
+            <span v-if="exercise.exception" class="exc-badge">Exception</span>
+            {{ exercise.rule.title }}
+          </summary>
           <p v-if="exercise.rule.formula" class="formula" lang="ru">{{ exercise.rule.formula }}</p>
           <p v-if="exercise.rule.explanation" class="muted">{{ exercise.rule.explanation }}</p>
           <ul v-if="exercise.rule.exceptions?.length" class="exceptions muted">
@@ -242,9 +245,26 @@ onMounted(() => {
   padding: 0.5rem 0.75rem;
   background: color-mix(in srgb, var(--primary) 5%, var(--card));
 }
+.rule.exception {
+  border-color: var(--warn, #c9962b);
+  background: color-mix(in srgb, var(--warn, #c9962b) 8%, var(--card));
+}
 .rule summary {
   cursor: pointer;
   font-weight: 600;
+}
+.exc-badge {
+  display: inline-block;
+  margin-right: 0.4rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #fff;
+  background: var(--warn, #c9962b);
+  vertical-align: middle;
 }
 .formula {
   font-weight: 600;

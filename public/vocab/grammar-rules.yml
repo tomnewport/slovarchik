@@ -65,6 +65,7 @@ rules:
 
   # ── Noun exceptions / irregulars ─────────────────────────────────────────
   noun-acc-animate:
+    exception: true
     title: "Accusative of animate nouns = genitive"
     formula: "animate acc = genitive (sg & pl)"
     explanation: >
@@ -76,6 +77,7 @@ rules:
       - "Feminine -а animates still take -у in the singular: ма́му, соба́ку."
 
   noun-genpl-fleeting:
+    exception: true
     title: "Genitive plural — zero ending & fleeting vowel"
     formula: "-а/-о → ∅, often inserting -о-/-е-"
     explanation: >
@@ -85,6 +87,7 @@ rules:
       копе́ек, де́ньги → де́нег.
 
   noun-fem-soft:
+    exception: true
     title: "Feminine -ь nouns (3rd declension)"
     formula: "ins sg → -ью · gen/dat/pre sg → -и"
     explanation: >
@@ -95,6 +98,7 @@ rules:
       - "мать and дочь insert -ер- in every form but nom/acc sg: ма́тери, до́черью."
 
   noun-mya-neuter:
+    exception: true
     title: "Neuter -мя nouns"
     formula: "stem gains -ен- before endings"
     explanation: >
@@ -103,6 +107,7 @@ rules:
       it too: имена́, времена́.
 
   noun-irregular-plural:
+    exception: true
     title: "Irregular plural stems"
     formula: "друг → друзья́ · сын → сыновья́ · ребёнок → де́ти"
     explanation: >

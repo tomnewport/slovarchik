@@ -133,6 +133,16 @@ bits — fleeting vowels, the к/г/х and ж/ш/щ/ч spelling rules, animate a
 = genitive, feminine -ь nouns, etc. Expanding coverage (more subjects, more
 exceptions) is ongoing content work; the mechanism does not depend on it.
 
+### Exception weighting
+
+Rules that describe an irregular/exception pattern carry `exception: true` in
+`grammar-rules.yml` (e.g. `noun-acc-animate`, `noun-genpl-fleeting`,
+`noun-fem-soft`, `noun-mya-neuter`, `noun-irregular-plural`). When a word has
+several annotated phrases, `buildContextExercise` draws them with a weighted
+pick (`EXCEPTION_WEIGHT`, currently 4×) so the hard forms surface more often —
+but not exclusively, so regular forms still appear. The renderer badges an
+exception ("Exception" pill on the rule panel) when the answer is revealed.
+
 ## Testing & conventions
 
 - All logic in framework-free `src/lib/*` with co-located `*.test.js`.

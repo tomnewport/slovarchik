@@ -87,3 +87,41 @@ describe('buildContextExercise / canBuildContext', () => {
     expect(canBuildContext({ key: 'нет=no' }, { phrasesByKey })).toBe(false)
   })
 })
+
+describe('exception weighting', () => {
+  // Two phrases for one word: one regular, one flagged as an exception.
+  const regular = {
+    id: 'reg', ru: 'У меня́ нет соба́ки.', en: "I don't have a dog.",
+    target: { key: 'собака=dog', token: 3, case: 'gen', number: 'sg', rule: 'noun-gen-sg' },
+  }
+  const exc = {
+    id: 'exc', ru: 'Я ви́жу соба́ку.', en: 'I see the dog.',
+    target: { key: 'собака=dog', token: 3, case: 'acc', number: 'sg', rule: 'noun-acc-animate' },
+  }
+  const excRules = {
+    'noun-gen-sg': { title: 'Genitive singular' },
+    'noun-acc-animate': { title: 'Animate accusative', exception: true },
+  }
+  const byKey = indexPhrases([regular, exc])
+
+  it('flags the exception on the descriptor', () => {
+    expect(buildFromPhrase(exc, sobaka, { rules: excRules }).exception).toBe(true)
+    expect(buildFromPhrase(regular, sobaka, { rules: excRules }).exception).toBe(false)
+  })
+
+  it('draws the exception more often than the regular phrase', () => {
+    let excCount = 0
+    let seed = 1
+    const rng = () => { // deterministic LCG, well-spread in [0,1)
+      seed = (seed * 1664525 + 1013904223) >>> 0
+      return seed / 0x100000000
+    }
+    for (let i = 0; i < 1000; i++) {
+      const ex = buildContextExercise(sobaka, { phrasesByKey: byKey, rules: excRules, rng })
+      if (ex.exception) excCount++
+    }
+    // weight 4 vs 1 → ~80% exception. Assert a clear majority (not exact).
+    expect(excCount).toBeGreaterThan(650)
+    expect(excCount).toBeLessThan(1000) // regular still appears sometimes
+  })
+})
