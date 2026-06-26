@@ -193,7 +193,7 @@ function apply(file) {
       const start = ls.findIndex((l) => l === `  "${d.key}":`)
       if (start === -1) continue
       let end = ls.length
-      for (let i = start + 1; i < ls.length; i++) if (/^  "/.test(ls[i])) { end = i; break }
+      for (let i = start + 1; i < ls.length; i++) if (/^ {2}"/.test(ls[i])) { end = i; break }
       if (d.newRu) {
         // insert a new usage item at the top of the usage list
         let uLine = -1

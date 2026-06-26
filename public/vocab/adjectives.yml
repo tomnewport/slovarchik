@@ -20122,6 +20122,7 @@ words:
         en_gb: He bought a comfortable sofa.
       - ru: У меня́ удо́бная о́бувь.
         en_gb: I have comfortable shoes.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: удо́бный
       f: удо́бная
@@ -20197,6 +20198,7 @@ words:
         en_gb: Today is a terrible day.
       - ru: У нас была́ ужа́сная пого́да.
         en_gb: We had terrible weather.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ жи́ли в ужа́сных усло́виях.
         en_gb: They lived in terrible conditions.
   "узкий=narrow":
@@ -20211,6 +20213,7 @@ words:
     usage:
       - ru: Они́ шли по у́зкой у́лице.
         en_gb: They walked along a narrow street.
+        inflect: { token: 4, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то у́зкий коридо́р.
         en_gb: This is a narrow corridor.
       - ru: Че́рез у́зкое окно́ све́тит со́лнце.
@@ -20263,6 +20266,7 @@ words:
         en_gb: He is a very clever student.
       - ru: Она́ о́чень у́мная же́нщина.
         en_gb: She is a very clever woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он дал у́мный сове́т.
         en_gb: He gave clever advice.
     forms:
@@ -20310,6 +20314,7 @@ words:
         en_gb: After work he is tired.
       - ru: Она́ верну́лась уста́лая.
         en_gb: She came back tired.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Уста́лые де́ти бы́стро усну́ли.
         en_gb: The tired children fell asleep quickly.
     forms:
@@ -20381,6 +20386,7 @@ words:
     usage:
       - ru: Я люблю́ у́треннюю заря́дку.
         en_gb: I love morning exercise.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У́треннее со́лнце све́тит в окно́.
         en_gb: The morning sun shines into the window.
       - ru: У́тренние газе́ты лежа́т на столе́.
@@ -20429,6 +20435,7 @@ words:
         en_gb: The new school year has begun.
       - ru: Я купи́л уче́бную кни́гу.
         en_gb: I bought a textbook.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В шко́ле есть уче́бные кла́ссы.
         en_gb: The school has classrooms.
   "учёный=scholarly":
@@ -20474,6 +20481,7 @@ words:
         en_gb: He is a learned man.
       - ru: Она́ написа́ла учёную статью́.
         en_gb: She wrote a scholarly article.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы чита́ли учёные кни́ги.
         en_gb: We read scholarly books.
   "уютный=cosy":
@@ -20567,6 +20575,7 @@ words:
         en_gb: This is hard physical labour.
       - ru: Ему́ нужна́ физи́ческая нагру́зка.
         en_gb: He needs physical exercise.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ де́лают физи́ческие упражне́ния.
         en_gb: They do physical exercises.
   "финансовый=financial":
@@ -20610,6 +20619,7 @@ words:
         en_gb: They have a financial crisis.
       - ru: Банк ока́зывает фина́нсовую по́мощь.
         en_gb: The bank provides financial assistance.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы реша́ем фина́нсовые вопро́сы.
         en_gb: We are dealing with financial matters.
   "фиолетовый=purple":
@@ -20627,6 +20637,7 @@ words:
         en_gb: Purple flowers grow in the garden.
       - ru: Она́ наде́ла фиоле́товое пла́тье.
         en_gb: She put on a purple dress.
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: У него́ фиоле́товый шарф.
         en_gb: He has a purple scarf.
     forms:
@@ -20702,6 +20713,7 @@ words:
         en_gb: He is reading a French novel.
       - ru: Мы лю́бим францу́зскую ку́хню.
         en_gb: We love French cuisine.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Она́ изуча́ет францу́зские слова́.
         en_gb: She studies French words.
   "футбольный=football":
@@ -20722,6 +20734,7 @@ words:
         en_gb: We watched a football match.
       - ru: Э́то на́ша футбо́льная кома́нда.
         en_gb: This is our football team.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь футбо́льные по́ля.
         en_gb: There are football fields here.
     declension:
@@ -20790,6 +20803,7 @@ words:
         en_gb: This is a characteristic gesture.
       - ru: У него́ хара́ктерная улы́бка.
         en_gb: He has a characteristic smile.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У ме́ста есть хара́ктерные черты́.
         en_gb: The place has characteristic features.
   "хитрый=cunning":
@@ -20837,6 +20851,7 @@ words:
         en_gb: The fox is a cunning animal.
       - ru: У неё была́ хи́трая улы́бка.
         en_gb: She had a cunning smile.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он приду́мал хи́трые пла́ны.
         en_gb: He came up with cunning plans.
   "холодный=cold":
@@ -20852,6 +20867,7 @@ words:
     usage:
       - ru: Я пью́ холо́дную во́ду.
         en_gb: I drink cold water.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Сего́дня холо́дный ве́тер.
         en_gb: There is a cold wind today.
       - ru: Мы шли по холо́дным у́лицам.
@@ -20900,6 +20916,7 @@ words:
         en_gb: He is a good friend.
       - ru: Э́то хоро́шая иде́я.
         en_gb: This is a good idea.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас хоро́шие сосе́ди.
         en_gb: We have good neighbours.
     forms:
@@ -20976,6 +20993,7 @@ words:
         en_gb: This is a feature film.
       - ru: Она́ око́нчила худо́жественную шко́лу.
         en_gb: She finished art school.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В музе́е худо́жественные рабо́ты.
         en_gb: There are artistic works in the museum.
   "худой=thin":
@@ -21019,6 +21037,7 @@ words:
         en_gb: He has become very thin.
       - ru: Худа́я ко́шка проси́ла еды́.
         en_gb: The thin cat was begging for food.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У худо́го ма́льчика дли́нные но́ги.
         en_gb: The thin boy has long legs.
   "царский=royal":
@@ -21064,6 +21083,7 @@ words:
         en_gb: This is an old royal palace.
       - ru: Мы ви́дели ца́рскую коро́ну.
         en_gb: We saw the tsar's crown.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В музе́е ца́рские наря́ды.
         en_gb: There are royal outfits in the museum.
   "цветной=coloured":
@@ -21080,6 +21100,7 @@ words:
     usage:
       - ru: Де́ти рису́ют цветны́ми карандаша́ми.
         en_gb: The children draw with coloured pencils.
+        inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
       - ru: У него́ цветно́й телеви́зор.
         en_gb: He has a colour television.
       - ru: Она́ купи́ла цветну́ю бума́гу.
@@ -21157,6 +21178,7 @@ words:
         en_gb: He ate a whole cake.
       - ru: Мы жда́ли це́лую неде́лю.
         en_gb: We waited a whole week.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ рабо́тали це́лые дни.
         en_gb: They worked whole days.
   "ценный=valuable":
@@ -21202,6 +21224,7 @@ words:
         en_gb: This is a very valuable gift.
       - ru: Она́ дала́ це́нную информа́цию.
         en_gb: She gave valuable information.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В музе́е це́нные карти́ны.
         en_gb: There are valuable paintings in the museum.
   "центральный=central":
@@ -21247,6 +21270,7 @@ words:
         en_gb: We live in the central district.
       - ru: Э́то центра́льная у́лица го́рода.
         en_gb: This is the central street of the city.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ откры́ли центра́льные воро́та.
         en_gb: They opened the central gates.
   "частный=private":
@@ -21292,6 +21316,7 @@ words:
         en_gb: He has a private house.
       - ru: Она́ откры́ла ча́стную шко́лу.
         en_gb: She opened a private school.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то их ча́стные дела́.
         en_gb: These are their private affairs.
   "частый=frequent":
@@ -21336,7 +21361,8 @@ words:
     usage:
       - ru: Э́то ча́стый гость в на́шем до́ме.
         en_gb: This is a frequent guest in our house.
-      - ru: У него́ ча́стая ка́шель.
+        inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
+      - ru: У него́ ча́стый ка́шель.
         en_gb: He has a frequent cough.
       - ru: Зимо́й здесь ча́стые дожди́.
         en_gb: In winter there are frequent rains here.
@@ -21381,6 +21407,7 @@ words:
         en_gb: This is a human voice.
       - ru: У него́ челове́ческая доброта́.
         en_gb: He has human kindness.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем челове́ческие чу́вства.
         en_gb: We study human feelings.
   "чёрный=black":
@@ -21396,6 +21423,7 @@ words:
         en_gb: I have a black cat.
       - ru: Она́ наде́ла чёрное пла́тье.
         en_gb: She put on a black dress.
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Он лю́бит чёрный ко́фе.
         en_gb: He likes black coffee.
     forms:
@@ -21444,6 +21472,7 @@ words:
     usage:
       - ru: В реке́ чи́стая вода́.
         en_gb: There is clean water in the river.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: На нём чи́стая руба́шка.
         en_gb: He is wearing a clean shirt.
       - ru: Мы дыша́ли чи́стым во́здухом.
@@ -21522,6 +21551,7 @@ words:
         en_gb: This is a wonderful day.
       - ru: У нас была́ чуде́сная пое́здка.
         en_gb: We had a wonderful trip.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дели чуде́сные ме́ста.
         en_gb: We saw wonderful places.
   "чужой=foreign":
@@ -21540,6 +21570,7 @@ words:
         en_gb: He is a stranger in our city.
       - ru: Я живу́ в чужо́й стране́.
         en_gb: I live in a foreign country.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: чужо́й
       f: чужа́я
@@ -21586,6 +21617,7 @@ words:
         en_gb: A wide bridge crosses the river.
       - ru: Э́то широ́кая доро́га.
         en_gb: This is a wide road.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ шли по широ́кому по́лю.
         en_gb: They walked across the wide field.
     forms:
@@ -21662,6 +21694,7 @@ words:
         en_gb: He has an old school bag.
       - ru: Она́ наде́ла шко́льную фо́рму.
         en_gb: She put on the school uniform.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вспомина́ем шко́льные го́ды.
         en_gb: We remember our school years.
   "экономический=economic":
@@ -21707,6 +21740,7 @@ words:
         en_gb: There is an economic crisis in the country.
       - ru: Мы изуча́ем экономи́ческую тео́рию.
         en_gb: We study economic theory.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Госуда́рство реша́ет экономи́ческие пробле́мы.
         en_gb: The state solves economic problems.
   "электрический=electric":
@@ -21752,6 +21786,7 @@ words:
         en_gb: There is an electric kettle on the table.
       - ru: Она́ купи́ла электри́ческую ла́мпу.
         en_gb: She bought an electric lamp.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В до́ме электри́ческие прибо́ры.
         en_gb: There are electric appliances in the house.
   "южный=southern":
@@ -21797,6 +21832,7 @@ words:
         en_gb: They live in a southern city.
       - ru: Мне нра́вится ю́жная пого́да.
         en_gb: I like the southern weather.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы посети́ли ю́жные стра́ны.
         en_gb: We visited southern countries.
   "юный=young":
@@ -21842,6 +21878,7 @@ words:
         en_gb: He is still a young musician.
       - ru: Э́то ю́ная актри́са.
         en_gb: This is a young actress.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: На сце́не выступа́ют ю́ные арти́сты.
         en_gb: Young performers appear on the stage.
   "юридический=legal":
@@ -21862,6 +21899,7 @@ words:
         en_gb: She studies at the law faculty.
       - ru: Нам нужна́ юриди́ческая по́мощь.
         en_gb: We need legal help.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     declension:
       m_nom: юриди́ческий
       m_gen: юриди́ческого
@@ -21931,6 +21969,7 @@ words:
         en_gb: This is an obvious deception.
       - ru: У него́ я́вная оши́бка.
         en_gb: He has an obvious mistake.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У них я́вные преиму́щества.
         en_gb: They have obvious advantages.
   "японский=Japanese":
@@ -21976,6 +22015,7 @@ words:
         en_gb: He bought a Japanese car.
       - ru: Мы лю́бим япо́нскую ку́хню.
         en_gb: We love Japanese cuisine.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Она́ изуча́ет япо́нские иеро́глифы.
         en_gb: She studies Japanese characters.
   "яркий=bright":
@@ -21993,6 +22033,7 @@ words:
         en_gb: There is a bright sun in the sky.
       - ru: Она́ лю́бит я́ркие цвета́.
         en_gb: She likes bright colours.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: я́ркий
       f: я́ркая
@@ -22040,6 +22081,7 @@ words:
         en_gb: Today is a clear day.
       - ru: У нас я́сная цель.
         en_gb: We have a clear goal.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: я́сный
       f: я́сная
