@@ -15763,6 +15763,7 @@ words:
         en_gb: He gave a pink flower.
       - ru: На столе́ стои́т ро́зовая ча́шка.
         en_gb: A pink cup stands on the table.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: ро́зовый
       f: ро́зовая
@@ -15836,6 +15837,7 @@ words:
         en_gb: This is a Russian passport.
       - ru: Мы изуча́ем росси́йскую исто́рию.
         en_gb: We study Russian history.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь продаю́т росси́йские това́ры.
         en_gb: Russian goods are sold here.
   "русский=Russian":
@@ -15849,6 +15851,7 @@ words:
         en_gb: He is reading a Russian magazine.
       - ru: Она́ изуча́ет ру́сскую литерату́ру.
         en_gb: She studies Russian literature.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мне нра́вятся ру́сские пе́сни.
         en_gb: I like Russian songs.
     forms:
@@ -15925,6 +15928,7 @@ words:
         en_gb: He has a ginger cat.
       - ru: Ря́дом стоя́ла ры́жая де́вочка.
         en_gb: A red-haired girl stood nearby.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У бра́тьев ры́жие во́лосы.
         en_gb: The brothers have red hair.
   "самый=the most":
@@ -15970,6 +15974,7 @@ words:
         en_gb: This is the tallest house.
       - ru: Она́ са́мая до́брая учи́тельница.
         en_gb: She is the kindest teacher.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы купи́ли са́мые дешёвые биле́ты.
         en_gb: We bought the cheapest tickets.
   "свежий=fresh":
@@ -15989,6 +15994,7 @@ words:
         en_gb: There is fresh fruit on the table.
       - ru: У нас све́жая ры́ба.
         en_gb: We have fresh fish.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: све́жий
       f: све́жая
@@ -16033,6 +16039,7 @@ words:
     usage:
       - ru: У них све́тлая ко́мната.
         en_gb: They have a light room.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У неё све́тлые во́лосы.
         en_gb: She has light hair.
       - ru: Я купи́л све́тлый костю́м.
@@ -16085,6 +16092,7 @@ words:
         en_gb: I have a free day today.
       - ru: Есть ли свобо́дные места́?
         en_gb: Are there any free seats?
+        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: свобо́дный
       f: свобо́дная
@@ -16159,6 +16167,7 @@ words:
         en_gb: A cold northern wind blew.
       - ru: Э́то се́верная часть страны́.
         en_gb: This is the northern part of the country.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы посети́ли се́верные города́.
         en_gb: We visited the northern towns.
   "сегодняшний=today's":
@@ -16200,6 +16209,7 @@ words:
     usage:
       - ru: Я прочита́л сего́дняшнюю газе́ту.
         en_gb: I read today's newspaper.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Сего́дняшнее собра́ние бы́ло коро́тким.
         en_gb: Today's meeting was short.
       - ru: Сего́дняшние но́вости меня́ удиви́ли.
@@ -16245,6 +16255,7 @@ words:
         en_gb: A grey-haired old man sat on the bench.
       - ru: У неё была́ седа́я голова́.
         en_gb: She had a grey head of hair.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Седы́е во́лосы блесте́ли на со́лнце.
         en_gb: The grey hair shone in the sun.
   "секретный=secret":
@@ -16290,6 +16301,7 @@ words:
         en_gb: He has a secret plan.
       - ru: Э́то секре́тная информа́ция.
         en_gb: This is secret information.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ храня́т секре́тные докуме́нты.
         en_gb: They keep secret documents.
   "семейный=family":
@@ -16333,6 +16345,7 @@ words:
         en_gb: Today is a family celebration.
       - ru: У нас семе́йная тради́ция.
         en_gb: We have a family tradition.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы храни́м семе́йные фотогра́фии.
         en_gb: We keep family photographs.
   "серебряный=silver":
@@ -16350,6 +16363,7 @@ words:
         en_gb: He gave a silver bracelet.
       - ru: На столе́ лежи́т сере́бряная ло́жка.
         en_gb: A silver spoon lies on the table.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: сере́бряный
       f: сере́бряная
@@ -16440,6 +16454,7 @@ words:
         en_gb: We are having a serious conversation.
       - ru: Э́то серьёзная оши́бка.
         en_gb: This is a serious mistake.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он серьёзный челове́к.
         en_gb: He is a serious person.
     forms:
@@ -16490,6 +16505,7 @@ words:
         en_gb: A strong wind blew.
       - ru: У неё си́льная во́ля.
         en_gb: She has a strong will.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: си́льный
       f: си́льная
@@ -16537,6 +16553,7 @@ words:
         en_gb: He put on a blue jumper.
       - ru: У неё си́няя су́мка.
         en_gb: She has a blue bag.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: си́ний
       f: си́няя
@@ -16612,6 +16629,7 @@ words:
         en_gb: We are travelling on a fast train.
       - ru: Я жду ско́рую по́мощь.
         en_gb: I am waiting for the ambulance.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Жела́ю тебе́ ско́рого выздоровле́ния.
         en_gb: I wish you a fast recovery.
   "скромный=modest":
@@ -16658,6 +16676,7 @@ words:
         en_gb: He is a very modest person.
       - ru: У них скро́мная кварти́ра.
         en_gb: They have a modest flat.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы получи́ли скро́мные результа́ты.
         en_gb: We obtained modest results.
   "скрытый=hidden":
@@ -16701,6 +16720,7 @@ words:
         en_gb: It has a hidden meaning.
       - ru: Здесь устано́влена скры́тая ка́мера.
         en_gb: A hidden camera is installed here.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У неё скры́тые тала́нты.
         en_gb: She has hidden talents.
   "скучный=boring":
@@ -16721,6 +16741,7 @@ words:
         en_gb: This film is very boring.
       - ru: Э́то была́ ску́чная ле́кция.
         en_gb: It was a boring lecture.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас ску́чные сосе́ди.
         en_gb: We have boring neighbours.
     forms:
@@ -16770,6 +16791,7 @@ words:
         en_gb: She has a weak voice.
       - ru: Я пью сла́бый чай.
         en_gb: I drink weak tea.
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
     forms:
       m: сла́бый
       f: сла́бая
@@ -16842,6 +16864,7 @@ words:
         en_gb: The country has a glorious path.
       - ru: Э́то сла́вная побе́да.
         en_gb: This is a glorious victory.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы помина́ем сла́вные дела́.
         en_gb: We commemorate glorious deeds.
   "сладкий=sweet":
@@ -16858,6 +16881,7 @@ words:
         en_gb: The tea is too sweet.
       - ru: Она́ испекла́ сла́дкий пиро́г.
         en_gb: She baked a sweet pie.
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Де́ти лю́бят сла́дкие я́блоки.
         en_gb: Children love sweet apples.
     forms:
@@ -16930,6 +16954,7 @@ words:
     usage:
       - ru: Мы вы́йдем на сле́дующей остано́вке.
         en_gb: We will get off at the next stop.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Сле́дующий по́езд пое́дет че́рез час.
         en_gb: The next train will leave in an hour.
       - ru: В сле́дующем году́ я пое́ду в Москву́.
@@ -16978,6 +17003,7 @@ words:
         en_gb: The blind old man walked with a dog.
       - ru: Она́ помогла́ слепо́й же́нщине.
         en_gb: She helped the blind woman.
+        inflect: { token: 3, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Слепы́е чита́ют рука́ми.
         en_gb: Blind people read with their hands.
   "сложный=complex":
@@ -17022,6 +17048,7 @@ words:
         en_gb: This is a very complex question.
       - ru: Мы реша́ем сло́жную зада́чу.
         en_gb: We are solving a complex problem.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У него́ сло́жные пла́ны.
         en_gb: He has complex plans.
   "служебный=official":
@@ -17068,6 +17095,7 @@ words:
         en_gb: He wears an official suit.
       - ru: Э́то слу́жебная маши́на.
         en_gb: This is an official car.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас слу́жебные обя́занности.
         en_gb: We have official duties.
   "случайный=accidental":
@@ -17114,6 +17142,7 @@ words:
         en_gb: That was an accidental guest.
       - ru: Произошла́ случа́йная оши́бка.
         en_gb: An accidental mistake occurred.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы встре́тили случа́йных люде́й.
         en_gb: We met some random people.
   "смелый=brave":
@@ -17132,6 +17161,7 @@ words:
         en_gb: He is a brave soldier.
       - ru: Она́ сме́лая де́вушка.
         en_gb: She is a brave girl.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим сме́лых геро́ев.
         en_gb: We love brave heroes.
     forms:
@@ -17209,6 +17239,7 @@ words:
         en_gb: He told a funny joke.
       - ru: Э́то была́ смешна́я исто́рия.
         en_gb: It was a funny story.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти смотре́ли смешны́е мультфи́льмы.
         en_gb: The children watched funny cartoons.
   "снежный=snowy":
@@ -17254,6 +17285,7 @@ words:
         en_gb: There is a snowy forest outside the window.
       - ru: Сего́дня сне́жная пого́да.
         en_gb: The weather is snowy today.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти лепи́ли сне́жную ба́бу.
         en_gb: The children made a snowman.
   "собственный=own":
@@ -17299,6 +17331,7 @@ words:
         en_gb: He has his own house.
       - ru: Э́то моя́ со́бственная иде́я.
         en_gb: This is my own idea.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У них со́бственные пра́вила.
         en_gb: They have their own rules.
   "советский=Soviet":
@@ -17345,6 +17378,7 @@ words:
         en_gb: This is an old Soviet film.
       - ru: В музе́е есть сове́тская маши́на.
         en_gb: There is a Soviet car in the museum.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ба́бушка храни́т сове́тские моне́ты.
         en_gb: Grandma keeps Soviet coins.
   "совместный=joint":
@@ -17391,6 +17425,7 @@ words:
         en_gb: We started a joint project.
       - ru: У нас была́ совме́стная рабо́та.
         en_gb: We had joint work.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ при́няли совме́стное реше́ние.
         en_gb: They made a joint decision.
   "современный=modern":
@@ -17405,6 +17440,7 @@ words:
     usage:
       - ru: У них совреме́нная ку́хня.
         en_gb: They have a modern kitchen.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то совреме́нный го́род.
         en_gb: This is a modern city.
       - ru: Мне нра́вятся совреме́нные карти́ны.
@@ -17483,6 +17519,7 @@ words:
         en_gb: I agree with you.
       - ru: В сло́ве есть согла́сная бу́ква.
         en_gb: There is a consonant letter in the word.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Все бы́ли согла́сны с пла́ном.
         en_gb: Everyone agreed with the plan.
   "солдатский=soldier's":
@@ -17528,6 +17565,7 @@ words:
         en_gb: He put on the soldier's belt.
       - ru: Э́то солда́тская ка́ша.
         en_gb: This is soldier's porridge.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дели солда́тские пала́тки.
         en_gb: We saw soldiers' tents.
   "солёный=salty":
@@ -17546,6 +17584,7 @@ words:
         en_gb: I like salty cucumbers.
       - ru: Э́то о́чень солёная ры́ба.
         en_gb: This is very salty fish.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: солёный
       f: солёная
@@ -17590,6 +17629,7 @@ words:
         en_gb: Today is a clear sunny day.
       - ru: Мы гуля́ли в со́лнечную пого́ду.
         en_gb: We walked in sunny weather.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас со́лнечное у́тро.
         en_gb: We have a sunny morning.
     forms:
