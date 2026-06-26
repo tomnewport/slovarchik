@@ -24259,6 +24259,7 @@ words:
         en_gb: The nurse took the temperature.
       - ru: Больно́й позва́л медсестру́.
         en_gb: The patient called the nurse.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: медсестра́
       sg_gen: медсестры́
@@ -24298,6 +24299,7 @@ words:
         en_gb: I have no small change for a ticket.
       - ru: Не волну́йся и́з-за тако́й ме́лочи.
         en_gb: Don't worry about such a trifle.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он храни́т ме́лочь в коро́бке.
         en_gb: He keeps small change in a box.
   "менеджер=manager":
@@ -24315,6 +24317,7 @@ words:
         en_gb: The manager answered all the questions.
       - ru: Она́ рабо́тает ме́неджером в ба́нке.
         en_gb: She works as a manager at a bank.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ме́неджер
       sg_gen: ме́неджера
@@ -24381,6 +24384,7 @@ words:
         en_gb: Such a measure was not enough.
       - ru: Всё хорошо́ в ме́ру.
         en_gb: Everything is good in moderation.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "место=place":
     batteries: [places]
     cefr_level: A1
@@ -24397,6 +24401,7 @@ words:
         en_gb: This is a good place for a picnic.
       - ru: В авто́бусе не бы́ло свобо́дных мест.
         en_gb: There were no free seats on the bus.
+        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Я ищу́ свобо́дное ме́сто.
         en_gb: I am looking for a free place.
     declension:
@@ -24426,6 +24431,7 @@ words:
     usage:
       - ru: В го́ду двена́дцать ме́сяцев.
         en_gb: There are twelve months in a year.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Она́ не была́ до́ма це́лый ме́сяц.
         en_gb: She was away from home for a whole month.
       - ru: Че́рез ме́сяц начну́тся кани́кулы.
@@ -24458,6 +24464,7 @@ words:
     usage:
       - ru: Э́та дета́ль из мета́лла.
         en_gb: This part is made of metal.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Э́тот мост сде́лан из мета́лла.
         en_gb: This bridge is made of metal.
       - ru: Зо́лото — дорого́й мета́лл.
@@ -24489,6 +24496,7 @@ words:
     usage:
       - ru: Учёный приду́мал но́вый ме́тод.
         en_gb: The scientist devised a new method.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́ти ме́тоды бо́льше не рабо́тают.
         en_gb: These methods no longer work.
     declension:
@@ -24517,6 +24525,7 @@ words:
     usage:
       - ru: До магази́на сто ме́тров.
         en_gb: It is a hundred metres to the shop.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Ко́мната длино́й шесть ме́тров.
         en_gb: The room is six metres long.
       - ru: Отре́жьте оди́н метр тка́ни.
@@ -24583,6 +24592,7 @@ words:
         en_gb: The fox has soft red fur.
       - ru: Э́та ша́пка из натура́льного ме́ха.
         en_gb: This hat is made of natural fur.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Зимо́й живо́тные покрыва́ются густы́м ме́хом.
         en_gb: In winter the animals are covered with thick fur.
     declension:
@@ -24613,6 +24623,7 @@ words:
         en_gb: The mechanism of the clock broke.
       - ru: Инжене́р объясни́л при́нцип механи́зма.
         en_gb: The engineer explained the principle of the mechanism.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В маши́не мно́го сло́жных механи́змов.
         en_gb: There are many complex mechanisms in the machine.
     declension:
@@ -24646,6 +24657,7 @@ words:
         en_gb: An old sword is kept in the museum.
       - ru: Во́ин срази́лся с враго́м мечо́м.
         en_gb: The warrior fought the enemy with a sword.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: меч
       sg_gen: меча́
@@ -24674,6 +24686,7 @@ words:
         en_gb: A mosque is located near the market.
       - ru: Мы ви́дели краси́вую мече́ть.
         en_gb: We saw a beautiful mosque.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: мече́ть
       sg_gen: мече́ти
@@ -24706,6 +24719,7 @@ words:
         en_gb: His dream is to become a doctor.
       - ru: Она́ живёт свое́й мечто́й.
         en_gb: She lives by her dream.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он наконе́ц дости́г свое́й мечты́.
         en_gb: He finally reached his dream.
     declension:
@@ -24733,6 +24747,7 @@ words:
         en_gb: A heavy sack lies in the corner.
       - ru: Они́ загрузи́ли маши́ну мешка́ми.
         en_gb: They loaded the car with sacks.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: мешо́к
       sg_gen: мешка́
@@ -24773,6 +24788,7 @@ words:
     usage:
       - ru: Он реши́л за оди́н миг.
         en_gb: He decided in an instant.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́тот миг зазвони́л телефо́н.
         en_gb: At that instant the telephone rang.
       - ru: Сча́стье состои́т из таки́х ми́гов.
@@ -24790,6 +24806,7 @@ words:
     usage:
       - ru: Учёный смо́трит в микроско́п.
         en_gb: The scientist looks into the microscope.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Учи́тель принёс но́вый микроско́п.
         en_gb: The teacher brought a new microscope.
     declension:
@@ -24820,6 +24837,7 @@ words:
         en_gb: He took the microphone in his hands.
       - ru: Говори́те, пожа́луйста, в микрофо́н.
         en_gb: Please speak into the microphone.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: микрофо́н
       sg_gen: микрофо́на
@@ -24852,6 +24870,7 @@ words:
         en_gb: The militiaman was checking documents.
       - ru: Мы спроси́ли доро́гу у милиционе́ра.
         en_gb: We asked the militiaman for directions.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: милиционе́р
       sg_gen: милиционе́ра
@@ -24886,6 +24905,7 @@ words:
     usage:
       - ru: Он рабо́тает в мили́ции.
         en_gb: He works in the police.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На́до позвони́ть в мили́цию.
         en_gb: We need to call the police.
       - ru: Мили́ция прие́хала о́чень бы́стро.
@@ -24919,6 +24939,7 @@ words:
     usage:
       - ru: Сапёр обезвре́дил ми́ну.
         en_gb: The sapper defused the mine.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́ле бы́ло усе́яно ми́нами.
         en_gb: The field was strewn with mines.
       - ru: Он сде́лал недово́льную ми́ну.
@@ -24949,6 +24970,7 @@ words:
         en_gb: We need a subsistence minimum.
       - ru: Сведи́ расхо́ды к ми́нимуму.
         en_gb: Reduce the expenses to a minimum.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Он рабо́тает с ми́нимумом усту́пок.
         en_gb: He works with a minimum of concessions.
   "министерство=ministry":
@@ -24979,6 +25001,7 @@ words:
         en_gb: The ministry adopted a new law.
       - ru: Он рабо́тает в министе́рстве образова́ния.
         en_gb: He works at the ministry of education.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы написа́ли письмо́ в министе́рство.
         en_gb: We wrote a letter to the ministry.
   "министр=minister":
@@ -24999,6 +25022,7 @@ words:
         en_gb: The journalists are waiting for the minister.
       - ru: Прези́дент встре́тился с мини́страми.
         en_gb: The president met with the ministers.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: мини́стр
       sg_gen: мини́стра
@@ -25027,6 +25051,7 @@ words:
         en_gb: The main drawback of this job is low pay.
       - ru: На у́лице ми́нус де́сять гра́дусов.
         en_gb: It is minus ten degrees outside.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: ми́нус
       sg_gen: ми́нуса
@@ -25051,6 +25076,7 @@ words:
     usage:
       - ru: Подожди́ одну́ мину́ту.
         en_gb: Wait one minute.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Уро́к дли́тся со́рок мину́т.
         en_gb: The lesson lasts forty minutes.
       - ru: Че́рез мину́ту по́езд отправля́ется.
@@ -25085,6 +25111,7 @@ words:
     usage:
       - ru: Все наро́ды хотя́т ми́ра.
         en_gb: All peoples want peace.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он объе́хал весь мир.
         en_gb: He travelled around the whole world.
       - ru: В э́том ми́ре мно́го чуде́с.
@@ -25115,6 +25142,7 @@ words:
     usage:
       - ru: Нале́й су́па в ми́ску.
         en_gb: Pour some soup into the bowl.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ко́шка ест из свое́й ми́ски.
         en_gb: The cat eats from its bowl.
     declension:
@@ -25141,6 +25169,9 @@ words:
     en_gb:
       standard: mister (a title for an English-speaking man)
     usage:
+      - ru: Я поздоро́вался с ми́стером.
+        en_gb: I greeted the mister.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: До́брый день, ми́стер Смит.
         en_gb: Good afternoon, Mister Smith.
       - ru: Ми́стер Бра́ун прие́хал из Ло́ндона.
@@ -25176,6 +25207,7 @@ words:
         en_gb: This is just a myth.
       - ru: В дре́внем ми́фе расска́зано о геро́е.
         en_gb: An ancient myth tells of a hero.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: миф
       sg_gen: ми́фа
@@ -25207,6 +25239,7 @@ words:
         en_gb: The baby is sleeping soundly.
       - ru: Мать держа́ла младе́нца на рука́х.
         en_gb: The mother held the baby in her arms.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В пала́те три но́вых младе́нца.
         en_gb: There are three new babies in the ward.
     declension:
@@ -25234,6 +25267,9 @@ words:
     en_gb:
       standard: mammal (a warm-blooded animal that feeds its young milk)
     usage:
+      - ru: Учёные изуча́ют ре́дкое млекопита́ющее.
+        en_gb: Scientists study a rare mammal.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Кит — э́то млекопита́ющее, а не ры́ба.
         en_gb: A whale is a mammal, not a fish.
       - ru: Кит и соба́ка — млекопита́ющие.
@@ -25277,6 +25313,7 @@ words:
     usage:
       - ru: По мне́нию враче́й, э́то пло́хо.
         en_gb: In the doctors' opinion, this is bad.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Я уважа́ю ва́ше мне́ние.
         en_gb: I respect your opinion.
       - ru: По мо́ему мне́нию, он прав.
@@ -25302,6 +25339,7 @@ words:
     usage:
       - ru: В кни́ге мно́жество интере́сных приме́ров.
         en_gb: In the book there is a multitude of interesting examples.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он реши́л зада́чу мно́жеством спо́собов.
         en_gb: He solved the problem in a multitude of ways.
       - ru: На не́бе мно́жество звёзд.
@@ -25333,6 +25371,7 @@ words:
     usage:
       - ru: Они́ принесли́ цветы́ на моги́лу.
         en_gb: They brought flowers to the grave.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У ста́рой моги́лы росло́ де́рево.
         en_gb: A tree grew by the old grave.
       - ru: На кла́дбище мно́го ста́рых моги́л.
@@ -25351,6 +25390,7 @@ words:
     usage:
       - ru: Э́тот стиль сейча́с в мо́де.
         en_gb: This style is in fashion now.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ всегда́ следи́т за мо́дой.
         en_gb: She always follows fashion.
       - ru: Таки́е шля́пы вы́шли из мо́ды.
@@ -25392,6 +25432,7 @@ words:
         en_gb: A new model of phone appeared in the shop.
       - ru: Учёные рабо́тают над моде́лью кли́мата.
         en_gb: The scientists are working on a model of the climate.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
   "мозг=brain":
     batteries: [everyday]
     cefr_level: B1
@@ -25407,6 +25448,7 @@ words:
         en_gb: The brain controls the whole body.
       - ru: Сон поле́зен для мо́зга.
         en_gb: Sleep is good for the brain.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Врачи́ изуча́ют челове́ческий мозг.
         en_gb: Doctors study the human brain.
     declension:
@@ -25433,6 +25475,9 @@ words:
     en_gb:
       standard: molecule (a group of atoms bonded together)
     usage:
+      - ru: Учёный изуча́ет моле́кулу.
+        en_gb: The scientist studies a molecule.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Моле́кула во́ды состои́т из трёх а́томов.
         en_gb: A water molecule consists of three atoms.
       - ru: Э́ти моле́кулы о́чень ма́ленькие.
@@ -25463,6 +25508,7 @@ words:
     usage:
       - ru: Она́ прочита́ла ти́хую моли́тву.
         en_gb: She said a quiet prayer.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У́тро начина́ется с моли́твы.
         en_gb: The morning begins with a prayer.
       - ru: Лю́ди слу́шали моли́твы в хра́ме.
@@ -25498,6 +25544,7 @@ words:
         en_gb: I am afraid of lightning during a storm.
       - ru: Не́бо освети́лось я́ркими мо́лниями.
         en_gb: The sky was lit by bright lightning.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: мо́лния
       sg_gen: мо́лнии
@@ -25533,6 +25580,7 @@ words:
         en_gb: Modern youth love sport.
       - ru: Го́род стро́ит жильё для молодёжи.
         en_gb: The city is building housing for the youth.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Учи́тель горди́тся свое́й молодёжью.
         en_gb: The teacher is proud of his young people.
   "молодец=well done":
@@ -25561,6 +25609,7 @@ words:
         en_gb: Well done, you did everything correctly!
       - ru: Учи́тель назва́л ученика́ молодцо́м.
         en_gb: The teacher called the pupil a fine fellow.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Все ребя́та сего́дня молодцы́.
         en_gb: All the lads did well today.
   "молодость=youth":
@@ -25581,6 +25630,7 @@ words:
     usage:
       - ru: В мо́лодости он мно́го путеше́ствовал.
         en_gb: In his youth he travelled a lot.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ вспомина́ет свою́ мо́лодость.
         en_gb: She remembers her youth.
       - ru: Мо́лодость прохо́дит бы́стро.
@@ -25600,6 +25650,7 @@ words:
     usage:
       - ru: Я люблю́ ко́фе с молоко́м.
         en_gb: I like coffee with milk.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Я пью́ ко́фе с молоко́м.
         en_gb: I drink coffee with milk.
       - ru: Молоко́ ско́ро ско́нчится.
@@ -25638,6 +25689,7 @@ words:
         en_gb: The hammer is in the drawer.
       - ru: Он заби́л гвоздь молотко́м.
         en_gb: He drove in the nail with a hammer.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: молото́к
       sg_gen: молотка́
@@ -25681,6 +25733,7 @@ words:
         en_gb: His silence surprised me.
       - ru: Все слу́шали в по́лном молча́нии.
         en_gb: Everyone listened in complete silence.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "момент=moment":
     batteries: [time_events]
     cefr_level: A2
@@ -25696,6 +25749,7 @@ words:
         en_gb: Wait a moment.
       - ru: В э́тот моме́нт зазвони́л телефо́н.
         en_gb: At that moment the telephone rang.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Дава́й подождём подходя́щего моме́нта.
         en_gb: Let us wait for the right moment.
     declension:
@@ -25728,6 +25782,7 @@ words:
         en_gb: The old monastery stands on a hill.
       - ru: К монастырю́ ведёт у́зкая доро́га.
         en_gb: A narrow road leads to the monastery.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Тури́сты гуля́ли по монастырю́.
         en_gb: The tourists walked around the monastery.
     declension:
@@ -25759,6 +25814,7 @@ words:
         en_gb: The monk lives in a monastery.
       - ru: Мона́ха уважа́ют все жи́тели.
         en_gb: All the residents respect the monk.
+        inflect: { token: 1, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В монастыре́ живу́т мона́хи.
         en_gb: Monks live in the monastery.
     declension:
@@ -25786,6 +25842,9 @@ words:
     en_gb:
       standard: nun (a woman who lives a religious life)
     usage:
+      - ru: Я говори́л с мона́хиней.
+        en_gb: I spoke with a nun.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мона́хиня живёт в монастыре́.
         en_gb: The nun lives in a monastery.
       - ru: Мона́хиня помога́ла больны́м.
@@ -25819,6 +25878,7 @@ words:
     usage:
       - ru: Он бро́сил моне́ту в фонта́н.
         en_gb: He threw a coin into the fountain.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ лежа́ла стари́нная моне́та.
         en_gb: An ancient coin lay on the table.
       - ru: Он собира́ет ре́дкие моне́ты.
@@ -25851,6 +25911,7 @@ words:
         en_gb: He bought a big monitor for work.
       - ru: На монито́ре появи́лось сообще́ние.
         en_gb: A message appeared on the monitor.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: монито́р
       sg_gen: монито́ра
@@ -25890,6 +25951,7 @@ words:
         en_gb: The dog has a kind muzzle.
       - ru: Ло́шадь тяну́лась мо́рдой к траве́.
         en_gb: The horse reached for the grass with its muzzle.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Ко́шка умыва́ла свою́ мо́рду.
         en_gb: The cat was washing its muzzle.
   "море=sea":
@@ -25910,6 +25972,7 @@ words:
         en_gb: We looked at the sea for a long time.
       - ru: Кора́бль плывёт по мо́рю.
         en_gb: The ship sails across the sea.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: мо́ре
       sg_gen: мо́ря
@@ -25937,6 +26000,7 @@ words:
     usage:
       - ru: Кро́лик лю́бит морко́вь.
         en_gb: The rabbit loves carrots.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы посади́ли морко́вь в огоро́де.
         en_gb: We planted carrots in the garden.
       - ru: В су́пе мно́го морко́ви.
@@ -25966,6 +26030,7 @@ words:
         en_gb: There is a hard frost outside.
       - ru: При моро́зе вода́ замерза́ет.
         en_gb: In the frost water freezes.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: моро́з
       sg_gen: моро́за
@@ -25995,6 +26060,7 @@ words:
         en_gb: The sailor returned from a long voyage.
       - ru: Моряка́ ждала́ семья́ на берегу́.
         en_gb: The sailor's family waited for him on the shore.
+        inflect: { token: 1, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На корабле́ рабо́тают о́пытные моряки́.
         en_gb: Experienced sailors work on the ship.
     declension:
@@ -26030,6 +26096,7 @@ words:
     usage:
       - ru: Я давно́ мечта́ю уви́деть Москву́.
         en_gb: I have long dreamed of seeing Moscow.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он живёт в Москве́ де́сять лет.
         en_gb: He has lived in Moscow for ten years.
       - ru: У́лицы Москвы́ всегда́ полны́ люде́й.
@@ -26054,6 +26121,7 @@ words:
     usage:
       - ru: По́езд прибыва́ет в Москву́ у́тром.
         en_gb: The train arrives in Moscow in the morning.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Над Москво́й сия́ло я́ркое со́лнце.
         en_gb: A bright sun shone over Moscow.
       - ru: Мы подъезжа́ем к Москве́.
@@ -26076,6 +26144,7 @@ words:
         en_gb: Muscovites are used to the noise of the city.
       - ru: Я спроси́л доро́гу у москвича́.
         en_gb: I asked a Muscovite for directions.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: москви́ч
       sg_gen: москвича́
@@ -26104,6 +26173,7 @@ words:
     usage:
       - ru: Мы перешли́ че́рез мост.
         en_gb: We crossed the bridge.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Под мосто́м течёт река́.
         en_gb: A river flows under the bridge.
       - ru: Че́рез ре́ку постро́или но́вый мост.
@@ -26133,6 +26203,9 @@ words:
     en_gb:
       standard: motor (an engine that provides power)
     usage:
+      - ru: Меха́ник чи́нит мото́р.
+        en_gb: The mechanic repairs the motor.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мото́р ло́дки слома́лся.
         en_gb: The motor of the boat broke down.
       - ru: Мото́р рабо́тает ти́хо.
@@ -26168,6 +26241,7 @@ words:
     usage:
       - ru: Он е́здит на рабо́ту на мотоци́кле.
         en_gb: He rides a motorcycle to work.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У бра́та но́вый мотоци́кл.
         en_gb: My brother has a new motorcycle.
       - ru: По доро́ге е́хали два мотоци́кла.
@@ -26202,6 +26276,7 @@ words:
         en_gb: Her husband works as a doctor.
       - ru: Она́ ждёт му́жа с рабо́ты.
         en_gb: She is waiting for her husband to come home from work.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Мно́гие мужья́ помога́ют по до́му.
         en_gb: Many husbands help around the house.
     declension:
@@ -26228,6 +26303,9 @@ words:
     en_gb:
       standard: fellow (a man, informal Russian term)
     usage:
+      - ru: Я поговори́л с мужико́м.
+        en_gb: I had a chat with the fellow.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Ну ты и мужи́к! Сам почини́л.
         en_gb: What a fellow! He fixed it himself.
       - ru: Како́й-то мужи́к стоя́л у воро́т.
@@ -26269,6 +26347,7 @@ words:
           - A tall man is stood at the entrance.
       - ru: В о́череди бы́ло мно́го мужчи́н.
         en_gb: There were many men in the queue.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: мужчи́на
       sg_gen: мужчи́ны
@@ -26298,6 +26377,7 @@ words:
     usage:
       - ru: В музе́е мно́го стари́нных карти́н.
         en_gb: There are many old paintings in the museum.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Му́зей закры́т по понеде́льникам.
         en_gb: The museum is closed on Mondays.
       - ru: Мы пошли́ в музе́й с кла́ссом.
@@ -26329,6 +26409,7 @@ words:
     usage:
       - ru: Она́ слу́шает му́зыку.
         en_gb: She is listening to music.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Му́зыка звучи́т о́чень гро́мко.
         en_gb: The music is playing very loudly.
       - ru: Он та́нцевал под весёлую му́зыку.
@@ -26385,6 +26466,7 @@ words:
     usage:
       - ru: Ожида́ние бы́ло настоя́щей му́кой.
         en_gb: The waiting was real torment.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он терпе́л а́дские му́ки.
         en_gb: He endured hellish torments.
       - ru: Ждать но́вости бы́ло настоя́щей му́кой.
@@ -26439,6 +26521,9 @@ words:
     en_gb:
       standard: ant (a small social insect)
     usage:
+      - ru: Пти́ца съе́ла муравья́.
+        en_gb: The bird ate an ant.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Ма́ленький мураве́й нёс кусо́к хле́ба.
         en_gb: A small ant was carrying a piece of bread.
       - ru: Муравьи́ стро́ят большо́й дом.
@@ -26467,6 +26552,9 @@ words:
     en_gb:
       standard: Muslim (a follower of Islam)
     usage:
+      - ru: Я разгова́ривал с мусульма́нином.
+        en_gb: I talked with a Muslim.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мусульма́нин мо́лится пять раз в день.
         en_gb: A Muslim prays five times a day.
       - ru: Мой друг — мусульма́нин.
@@ -26502,6 +26590,7 @@ words:
         en_gb: An annoying fly is flying around the room.
       - ru: Ле́том в до́ме мно́го мух.
         en_gb: In summer there are many flies in the house.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: му́ха
       sg_gen: му́хи
@@ -26533,6 +26622,7 @@ words:
     usage:
       - ru: Помо́й ру́ки с мы́лом.
         en_gb: Wash your hands with soap.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В ва́нной зако́нчилось мы́ло.
         en_gb: The soap ran out in the bathroom.
       - ru: Э́то мы́ло па́хнет ла́вандой.
@@ -26553,6 +26643,7 @@ words:
         en_gb: This thought gives me no peace.
       - ru: Он подели́лся свои́ми мы́слями.
         en_gb: He shared his thoughts.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: мысль
       sg_gen: мы́сли
