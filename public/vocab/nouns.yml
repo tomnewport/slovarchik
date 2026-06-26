@@ -29059,6 +29059,7 @@ words:
     usage:
       - ru: Он живёт в совреме́нном о́бществе.
         en_gb: He lives in modern society.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Зако́ны защища́ют о́бщество.
         en_gb: Laws protect society.
       - ru: Он стал поле́зным чле́ном о́бщества.
@@ -29100,6 +29101,7 @@ words:
         en_gb: The builders completed the new facility.
       - ru: На фотогра́фии мно́го стра́нных объе́ктов.
         en_gb: There are many strange objects in the photo.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "объём=volume":
     batteries: [everyday]
     cefr_level: B1
@@ -29128,6 +29130,7 @@ words:
         en_gb: The volume of work is very large.
       - ru: Бо́чку напо́лнили до по́лного объёма.
         en_gb: The barrel was filled to its full volume.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы изме́рили объёмы всех коро́бок.
         en_gb: We measured the volumes of all the boxes.
   "объяснение=explanation":
@@ -29159,6 +29162,7 @@ words:
         en_gb: I am waiting for an explanation.
       - ru: Учи́тель дал не́сколько объясне́ний.
         en_gb: The teacher gave several explanations.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
   "объятия=embrace":
     batteries: [abstract]
     cefr_level: B2
@@ -29174,6 +29178,7 @@ words:
     usage:
       - ru: Она́ упа́ла в его́ объя́тия.
         en_gb: She fell into his embrace.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Они́ заме́рли в объя́тиях.
         en_gb: They froze in an embrace.
       - ru: Ма́ма раскры́ла свои́ объя́тия.
@@ -29213,6 +29218,7 @@ words:
         en_gb: He honestly fulfils his duties.
       - ru: К свои́м обя́занностям он отно́сится серьёзно.
         en_gb: He takes his duties seriously.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
   "овал=oval":
     batteries: [everyday]
     cefr_level: B2
@@ -29228,6 +29234,7 @@ words:
         en_gb: Draw an oval instead of a circle.
       - ru: Стол име́ет фо́рму ова́ла.
         en_gb: The table has the shape of an oval.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На карти́не худо́жник нарисова́л не́сколько ова́лов.
         en_gb: The artist drew several ovals in the picture.
     declension:
@@ -29261,6 +29268,7 @@ words:
         en_gb: They sell fresh vegetables at the market.
       - ru: Я ем мно́го овоще́й.
         en_gb: I eat a lot of vegetables.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: В су́пе пла́вает оди́н о́вощ.
         en_gb: One vegetable is floating in the soup.
     declension:
@@ -29294,6 +29302,7 @@ words:
         en_gb: The shepherd grazes the sheep in the meadow.
       - ru: Мы подошли́ к овце́ побли́же.
         en_gb: We came closer to the sheep.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: овца́
       sg_gen: овцы́
@@ -29336,6 +29345,7 @@ words:
         en_gb: A little flame burned in the distance.
       - ru: Мы пошли́ на огонёк в окне́.
         en_gb: We went towards the little light in the window.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В его́ глаза́х был весёлый огонёк.
         en_gb: There was a cheerful spark in his eyes.
   "огонь=fire":
@@ -29354,6 +29364,7 @@ words:
         en_gb: The fire burned all night.
       - ru: Не игра́й с огнём.
         en_gb: Do not play with fire.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Пожа́рные боро́лись с огнём.
         en_gb: The firefighters fought the fire.
     declension:
@@ -29396,6 +29407,7 @@ words:
     usage:
       - ru: Ба́бушка рабо́тает в огоро́де.
         en_gb: Grandma is working in the vegetable garden.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: За до́мом большо́й огоро́д.
         en_gb: There is a large vegetable garden behind the house.
       - ru: Мы сажа́ем морко́вь в огоро́де.
@@ -29414,6 +29426,7 @@ words:
     usage:
       - ru: В сала́те мно́го огурцо́в.
         en_gb: There are a lot of cucumbers in the salad.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Я наре́зал све́жий огуре́ц.
         en_gb: I sliced a fresh cucumber.
       - ru: Ле́том мы со́лим огурцы́.
@@ -29449,6 +29462,7 @@ words:
         en_gb: In winter you need warm clothes.
       - ru: Я суши́ла оде́жду на балко́не.
         en_gb: I dried the clothes on the balcony.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́той оде́жде о́чень жа́рко.
         en_gb: It is very hot in these clothes.
     declension:
@@ -29472,6 +29486,7 @@ words:
     usage:
       - ru: Она́ уку́талась в одея́ло.
         en_gb: She wrapped herself in the blanket.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Под одея́лом бы́ло тепло́.
         en_gb: It was warm under the blanket.
       - ru: На крова́ти лежа́т два одея́ла.
@@ -29511,6 +29526,7 @@ words:
     usage:
       - ru: Он стра́шно боя́лся одино́чества.
         en_gb: He was terribly afraid of loneliness.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В одино́честве она́ чита́ла кни́ги.
         en_gb: In her loneliness she read books.
       - ru: Одино́чество тяготи́ло его́.
@@ -29545,6 +29561,7 @@ words:
         en_gb: The result exceeded all expectations.
       - ru: Он то́мился в ожида́нии письма́.
         en_gb: He languished in expectation of the letter.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Её ожида́ние оказа́лось напра́сным.
         en_gb: Her expectation turned out to be in vain.
   "ожог=burn":
@@ -29561,6 +29578,7 @@ words:
     usage:
       - ru: Он получи́л ожо́г руки́.
         en_gb: He got a burn on his hand.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ожо́г бы́стро зажи́л.
         en_gb: The burn healed quickly.
       - ru: Врач обрабо́тал её ожо́ги.
@@ -29593,6 +29611,7 @@ words:
     usage:
       - ru: В э́том о́зере чи́стая вода́.
         en_gb: The water in this lake is clean.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы купа́лись в о́зере.
         en_gb: We swam in the lake.
       - ru: Вокру́г мно́го лесны́х озёр.
@@ -29637,6 +29656,7 @@ words:
     usage:
       - ru: Кора́бль плывёт че́рез океа́н.
         en_gb: The ship is sailing across the ocean.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В океа́не живу́т огро́мные ки́ты.
         en_gb: Huge whales live in the ocean.
       - ru: Учёные изуча́ют глубины́ океа́нов.
@@ -29658,6 +29678,7 @@ words:
         en_gb: Open the window, please.
       - ru: Из окна́ ви́ден сад.
         en_gb: The garden is visible from the window.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В до́ме све́тятся все о́кна.
         en_gb: All the windows in the house are lit.
     declension:
@@ -29701,6 +29722,7 @@ words:
         en_gb: I liked the ending of the film.
       - ru: По́сле оконча́ния шко́лы он уе́хал.
         en_gb: After finishing school he left.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В ру́сском языке́ мно́го паде́жных оконча́ний.
         en_gb: In Russian there are many case endings.
   "окоп=trench":
@@ -29732,6 +29754,7 @@ words:
         en_gb: The soldiers dug a deep trench.
       - ru: Бойцы́ сиде́ли в око́пе.
         en_gb: The fighters sat in the trench.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Вдоль фро́нта тяну́лись око́пы.
         en_gb: Trenches stretched along the front.
   "окружение=surroundings":
@@ -29754,6 +29777,7 @@ words:
     usage:
       - ru: Он вы́рос в споко́йном окруже́нии.
         en_gb: He grew up in calm surroundings.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: А́рмия оказа́лась в окруже́нии.
         en_gb: The army found itself surrounded.
       - ru: Челове́к зави́сит от своего́ окруже́ния.
@@ -29772,6 +29796,7 @@ words:
     usage:
       - ru: В лесу́ мы уви́дели оле́ня.
         en_gb: In the forest we saw a deer.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Оле́нь пьёт во́ду у реки́.
         en_gb: The deer is drinking water by the river.
       - ru: На се́вере пасу́т оле́ней.
@@ -29805,6 +29830,7 @@ words:
         en_gb: He did not notice the danger around him.
       - ru: Туристо́в предупреди́ли об опа́сностях в го́рах.
         en_gb: The tourists were warned about the dangers in the mountains.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Мы вме́сте встре́тили опа́сность.
         en_gb: We faced the danger together.
     declension:
@@ -29833,6 +29859,7 @@ words:
     usage:
       - ru: Вчера́ мы слу́шали о́перу.
         en_gb: Yesterday we listened to an opera.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́та о́пера дли́тся три ча́са.
         en_gb: This opera lasts three hours.
     declension:
@@ -29865,6 +29892,7 @@ words:
         en_gb: The operation was successful.
       - ru: Ему́ сде́лали сло́жную опера́цию.
         en_gb: He had a complicated operation.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́сле опера́ции он бы́стро попра́вился.
         en_gb: After the operation he recovered quickly.
     declension:
@@ -29895,6 +29923,7 @@ words:
         en_gb: The opposition spoke out against the law.
       - ru: Ли́дер оппози́ции дал интервью́.
         en_gb: The leader of the opposition gave an interview.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: оппози́ция
       sg_gen: оппози́ции
@@ -29930,6 +29959,7 @@ words:
         en_gb: The pupil carried out an interesting experiment.
       - ru: Мы у́чимся на свои́х о́пытах.
         en_gb: We learn from our own experiences.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
   "орган=bodily organ":
     batteries: [everyday]
     cefr_level: B1
@@ -29950,6 +29980,7 @@ words:
         en_gb: The doctor checked the internal organs.
       - ru: Здоро́вье ка́ждого о́ргана ва́жно.
         en_gb: The health of each organ is important.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: о́рган
       sg_gen: о́ргана
@@ -29980,6 +30011,7 @@ words:
         en_gb: The organ was playing in the cathedral.
       - ru: Она́ у́чится игра́ть на орга́не.
         en_gb: She is learning to play the organ.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Звук орга́на напо́лнил зал.
         en_gb: The sound of the organ filled the hall.
     declension:
@@ -30021,6 +30053,7 @@ words:
     usage:
       - ru: Он рабо́тает в междунаро́дной организа́ции.
         en_gb: He works for an international organisation.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Э́та организа́ция помога́ет де́тям.
         en_gb: This organisation helps children.
       - ru: Мно́гие организа́ции подписа́ли догово́р.
@@ -30053,6 +30086,7 @@ words:
         en_gb: Tiny organisms live in the water.
       - ru: Витами́ны поле́зны для органи́зма.
         en_gb: Vitamins are good for the body.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
   "орден=order":
     batteries: [objects, society]
     cefr_level: B1
@@ -30080,6 +30114,7 @@ words:
     usage:
       - ru: Геро́я награди́ли о́рденом.
         en_gb: The hero was awarded an order.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На груди́ у него́ блесте́л о́рден.
         en_gb: An order shone on his chest.
       - ru: Музе́й храни́т ста́рые ордена́.
@@ -30099,6 +30134,7 @@ words:
         en_gb: The orchestra began to play beautiful music.
       - ru: Он игра́ет в шко́льном орке́стре.
         en_gb: He plays in the school orchestra.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дирижёр управля́ет орке́стром.
         en_gb: The conductor directs the orchestra.
     declension:
@@ -30141,6 +30177,7 @@ words:
     usage:
       - ru: Кре́стьяне рабо́тали просты́ми оруди́ями.
         en_gb: The peasants worked with simple tools.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: На пло́щади стоя́ло ста́рое оруди́е.
         en_gb: An old artillery piece stood in the square.
       - ru: Кисть — гла́вное оруди́е худо́жника.
@@ -30165,6 +30202,7 @@ words:
         en_gb: The police found the weapon.
       - ru: Он угрожа́л ору́жием.
         en_gb: He threatened with a weapon.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ору́жие
       sg_gen: ору́жия
@@ -30187,6 +30225,7 @@ words:
         en_gb: The donkey pulls a heavy cart.
       - ru: Кре́стьянин ведёт осла́ за верёвку.
         en_gb: The peasant leads the donkey by a rope.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На по́ле пасли́сь ослы́.
         en_gb: Donkeys were grazing in the field.
     declension:
@@ -30216,6 +30255,7 @@ words:
     usage:
       - ru: О́сенью лу́жи везде́.
         en_gb: In autumn puddles are everywhere.
+        inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Я люблю́ золоту́ю о́сень.
         en_gb: I love the golden autumn.
       - ru: О́сени в э́том году́ ждём ра́но.
@@ -30245,6 +30285,7 @@ words:
         en_gb: The sappers found shell fragments in the field.
       - ru: Он наступи́л на о́сколок.
         en_gb: He stepped on a shard.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: оско́лок
       sg_gen: оско́лка
@@ -30289,6 +30330,7 @@ words:
         en_gb: Trust is the basis of friendship.
       - ru: Тео́рия стро́ится на про́чной осно́ве.
         en_gb: The theory is built on a solid basis.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Э́ти при́нципы ста́ли осно́вой зако́на.
         en_gb: These principles became the basis of the law.
   "основание=foundation":
@@ -30319,6 +30361,7 @@ words:
         en_gb: The house has a strong foundation.
       - ru: Без основа́ния нельзя́ обвиня́ть люде́й.
         en_gb: You cannot accuse people without foundation.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Учёные изучи́ли основа́ния зда́ния.
         en_gb: The scientists studied the foundations of the building.
   "особенность=peculiarity":
@@ -30338,6 +30381,7 @@ words:
         en_gb: Every person has their own peculiarities.
       - ru: Я не зна́ю об э́той осо́бенности.
         en_gb: I do not know about this peculiarity.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: осо́бенность
       sg_gen: осо́бенности
@@ -30364,6 +30408,7 @@ words:
     usage:
       - ru: Нам выходи́ть на сле́дующей остано́вке.
         en_gb: We get off at the next stop.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Авто́бус подъе́хал к остано́вке.
         en_gb: The bus pulled up to the stop.
       - ru: Ме́жду остано́вками всего́ две мину́ты.
@@ -30410,6 +30455,7 @@ words:
         en_gb: He gave the remainder of the money to his brother.
       - ru: Мы дое́ли оста́ток у́жина.
         en_gb: We finished off the remainder of the dinner.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В холоди́льнике лежа́т оста́тки су́па.
         en_gb: The remains of the soup are in the fridge.
   "остров=island":
@@ -30427,6 +30473,7 @@ words:
     usage:
       - ru: Они́ живу́т на ма́леньком о́строве.
         en_gb: They live on a small island.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы поплы́ли на да́льний о́стров.
         en_gb: We sailed to the far island.
       - ru: В океа́не мно́го ма́леньких острово́в.
@@ -30460,6 +30507,7 @@ words:
         en_gb: I need a small screwdriver.
       - ru: Он закрути́л винт отвёрткой.
         en_gb: He tightened the screw with a screwdriver.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В я́щике лежа́т ра́зные отвёртки.
         en_gb: There are various screwdrivers in the drawer.
     declension:
@@ -30489,6 +30537,7 @@ words:
     usage:
       - ru: Я жду твоего́ отве́та.
         en_gb: I am waiting for your answer.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Его́ отве́т был пра́вильным.
         en_gb: His answer was correct.
       - ru: Учени́к зна́ет все отве́ты.
@@ -30526,6 +30575,7 @@ words:
         en_gb: He feels a great responsibility.
       - ru: Э́то рабо́та с большо́й отве́тственностью.
         en_gb: This is a job with great responsibility.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Она́ отно́сится к отве́тственности серьёзно.
         en_gb: She takes responsibility seriously.
   "отдел=department":
@@ -30587,6 +30637,7 @@ words:
     usage:
       - ru: Письмо́ ждёт вас в отделе́нии по́чты.
         en_gb: The letter is waiting for you at the post office department.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Больно́го перевели́ в друго́е отделе́ние.
         en_gb: The patient was moved to another department.
       - ru: В ба́нке откры́ли но́вые отделе́ния.
@@ -30609,6 +30660,7 @@ words:
         en_gb: After work you need a good rest.
       - ru: По́сле прогу́лки мы зашли́ в кафе́ для о́тдыха.
         en_gb: After the walk we went to a cafe for a rest.
+        inflect: { token: 8, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он мечта́ет об о́тдыхе на мо́ре.
         en_gb: He dreams of a rest by the sea.
     declension:
@@ -30632,6 +30684,7 @@ words:
     usage:
       - ru: Мы останови́лись в хоро́шем оте́ле.
         en_gb: We stayed in a good hotel.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Оте́ль стои́т у са́мого мо́ря.
         en_gb: The hotel stands right by the sea.
       - ru: Мы вы́брали оте́ль в це́нтре го́рода.
@@ -30710,6 +30763,7 @@ words:
         en_gb: His refusal surprised everyone.
       - ru: Мы не ожида́ли тако́го отка́за.
         en_gb: We did not expect such a refusal.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ отве́тила реши́тельным отка́зом.
         en_gb: She answered with a firm refusal.
   "открытие=discovery":
@@ -30741,6 +30795,7 @@ words:
         en_gb: This is an important scientific discovery.
       - ru: Учёный го́рдится свои́м откры́тием.
         en_gb: The scientist is proud of his discovery.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В кни́ге расска́зано о вели́ких откры́тиях.
         en_gb: The book tells of great discoveries.
   "открытка=postcard":
@@ -30758,6 +30813,7 @@ words:
     usage:
       - ru: Из Пари́жа она́ присла́ла откры́тку.
         en_gb: She sent a postcard from Paris.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ лежи́т кра́сочная откры́тка.
         en_gb: A colourful postcard lies on the table.
       - ru: Я отпра́вил две откры́тки друзья́м.
@@ -30802,6 +30858,7 @@ words:
     usage:
       - ru: В чём отли́чие э́тих слов?
         en_gb: What is the distinction between these words?
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он зако́нчил шко́лу с отли́чием.
         en_gb: He finished school with distinction.
       - ru: Я не ви́жу больши́х отли́чий.
@@ -30822,6 +30879,7 @@ words:
         en_gb: His attitude surprised me.
       - ru: С таки́м отноше́нием тру́дно рабо́тать.
         en_gb: It is hard to work with such an attitude.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: отноше́ние
       sg_gen: отноше́ния
@@ -30851,6 +30909,7 @@ words:
         en_gb: They have a good relationship.
       - ru: Они́ дорожа́т свои́ми отноше́ниями.
         en_gb: They value their relationship.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: В их отноше́ниях появи́лось дове́рие.
         en_gb: Trust has appeared in their relationship.
     declension:
@@ -30878,6 +30937,7 @@ words:
     usage:
       - ru: Ле́том я бу́ду в о́тпуске.
         en_gb: In summer I will be on leave.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он взял о́тпуск на неде́лю.
         en_gb: He took a week's leave.
       - ru: Без о́тпуска рабо́тать тяжело́.
@@ -30924,6 +30984,7 @@ words:
         en_gb: The detachment set out at dawn.
       - ru: Команди́р отря́да отда́л прика́з.
         en_gb: The commander of the detachment gave the order.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лесу́ дви́гались два отря́да.
         en_gb: Two detachments were moving in the forest.
   "отсутствие=absence":
@@ -30946,6 +31007,7 @@ words:
         en_gb: His absence surprised everyone.
       - ru: В отсу́тствие нача́льника рабо́та останови́лась.
         en_gb: In the boss's absence the work stopped.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы заме́тили отсу́тствие ключе́й.
         en_gb: We noticed the absence of the keys.
   "оттенок=shade":
@@ -30964,6 +31026,7 @@ words:
     usage:
       - ru: Сте́ны покра́шены в све́тлый отте́нок.
         en_gb: The walls are painted a light shade.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мне нра́вится э́тот не́жный отте́нок.
         en_gb: I like this gentle shade.
       - ru: В её го́лосе был отте́нок гру́сти.
@@ -31024,6 +31087,7 @@ words:
         en_gb: I have forgotten his patronymic.
       - ru: К учи́телю обраща́ются по о́тчеству.
         en_gb: One addresses the teacher by his patronymic.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: о́тчество
       sg_gen: о́тчества
@@ -31066,6 +31130,7 @@ words:
         en_gb: The accountant is writing the annual report.
       - ru: В отчёте бы́ло мно́го оши́бок.
         en_gb: There were many mistakes in the report.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Нача́льник тре́бует не́сколько отчётов.
         en_gb: The boss demands several reports.
   "отчим=stepfather":
@@ -31084,6 +31149,7 @@ words:
         en_gb: He was raised by his stepfather.
       - ru: Он живёт с о́тчимом.
         en_gb: He lives with his stepfather.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Она́ подари́ла о́тчиму кни́гу.
         en_gb: She gave her stepfather a book.
     declension:
@@ -31115,6 +31181,7 @@ words:
         en_gb: Our office is in the centre.
       - ru: У́тром я е́ду в о́фис.
         en_gb: In the morning I go to the office.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том зда́нии мно́го о́фисов.
         en_gb: There are many offices in this building.
     declension:
@@ -31147,6 +31214,7 @@ words:
         en_gb: The officer gave the order to the soldiers.
       - ru: Солда́ты слу́шают офице́ра.
         en_gb: The soldiers are listening to the officer.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На пара́де шли мо́лодые офице́ры.
         en_gb: Young officers marched in the parade.
     declension:
@@ -31179,6 +31247,7 @@ words:
         en_gb: The waiter brought the menu.
       - ru: Мы попроси́ли счёт у официа́нта.
         en_gb: We asked the waiter for the bill.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В кафе́ рабо́тают два официа́нта.
         en_gb: Two waiters work in the cafe.
     declension:
@@ -31211,6 +31280,7 @@ words:
         en_gb: The waitress brought us the menu.
       - ru: Мы поблагодари́ли официа́нтку.
         en_gb: We thanked the waitress.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Официа́нтки убра́ли посу́ду со стола́.
         en_gb: The waitresses cleared the dishes from the table.
     declension:
@@ -31240,6 +31310,7 @@ words:
     usage:
       - ru: Они́ верну́лись с охо́ты.
         en_gb: They returned from the hunt.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Охо́та начина́ется ра́нним у́тром.
         en_gb: The hunting begins early in the morning.
       - ru: Они́ гото́вятся к охо́те.
@@ -31268,6 +31339,7 @@ words:
         en_gb: The hunter returned with his catch.
       - ru: В лесу́ мы встре́тили охо́тника.
         en_gb: In the forest we met a hunter.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Охо́тники развели́ костёр.
         en_gb: The hunters lit a fire.
     declension:
@@ -31314,6 +31386,7 @@ words:
         en_gb: The security stands at the gate.
       - ru: Мы обрати́лись к охра́не за по́мощью.
         en_gb: We turned to the security for help.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Зда́ние под кру́глосуточной охра́ной.
         en_gb: The building is under round-the-clock security.
   "охранник=security guard":
@@ -31332,6 +31405,7 @@ words:
         en_gb: The security guard checked the passes.
       - ru: Мы спроси́ли доро́гу у охра́нника.
         en_gb: We asked the security guard for directions.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Но́чью в магази́не дежу́рят два охра́нника.
         en_gb: Two security guards are on duty in the shop at night.
     declension:
@@ -31363,6 +31437,7 @@ words:
     usage:
       - ru: Он получи́л отли́чную оце́нку.
         en_gb: He got an excellent mark.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Учи́тель поста́вил высо́кую оце́нку.
         en_gb: The teacher gave a high mark.
       - ru: Она́ дово́льна свои́ми оце́нками.
