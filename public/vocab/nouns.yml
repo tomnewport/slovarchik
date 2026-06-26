@@ -19247,6 +19247,7 @@ words:
     usage:
       - ru: В конце́ фи́льма все засмея́лись.
         en_gb: At the end of the film everyone laughed.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы дошли́ до конца́ доро́ги.
         en_gb: We reached the end of the road.
       - ru: Коне́ц был о́чень неожи́данный.
@@ -19280,6 +19281,7 @@ words:
         en_gb: Everyone in this city knows Constantine.
       - ru: Она́ написа́ла письмо́ Константи́ну.
         en_gb: She wrote a letter to Constantine.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Я ви́дел Константи́на вчера́.
         en_gb: I saw Constantine yesterday.
     declension:
@@ -19305,6 +19307,7 @@ words:
         en_gb: He lost contact with his family.
       - ru: Мы оста́лись в конта́кте.
         en_gb: We stayed in contact.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У меня́ есть поле́зные конта́кты.
         en_gb: I have useful contacts.
     declension:
@@ -19334,6 +19337,7 @@ words:
     usage:
       - ru: Он пришёл в нота́риальную конто́ру.
         en_gb: He came to the notary's office.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Конто́ра закрыва́ется в шесть.
         en_gb: The office closes at six.
       - ru: Он рабо́тает в ма́ленькой конто́ре.
@@ -19380,6 +19384,7 @@ words:
         en_gb: He lost control of the car.
       - ru: Ситуа́ция вы́шла и́з-под контро́ля.
         en_gb: The situation got out of control.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Учи́тель держа́л класс под контро́лем.
         en_gb: The teacher kept the class under control.
   "контрольная=test":
@@ -19393,6 +19398,9 @@ words:
     en_gb:
       standard: test (a class test, контрольная работа)
     usage:
+      - ru: Учи́тель прове́рил контро́льную.
+        en_gb: The teacher checked the test.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: За́втра у нас контро́льная по матема́тике.
         en_gb: Tomorrow we have a test in mathematics.
       - ru: Контро́льная была́ о́чень тру́дной.
@@ -19424,6 +19432,7 @@ words:
     usage:
       - ru: Моро́женое подаю́т в ко́нусе.
         en_gb: The ice cream is served in a cone.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Нарису́й высо́кий ко́нус.
         en_gb: Draw a tall cone.
       - ru: По доро́ге стоя́ли кра́сные ко́нусы.
@@ -19470,6 +19479,7 @@ words:
         en_gb: The conference began at nine.
       - ru: Он выступа́ет на конфере́нции.
         en_gb: He is speaking at the conference.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ е́здят на ра́зные конфере́нции.
         en_gb: They travel to various conferences.
   "конфета=sweet":
@@ -19490,6 +19500,7 @@ words:
         en_gb: Children love chocolate sweets.
       - ru: Дай мне одну́ конфе́ту.
         en_gb: Give me one sweet.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Коро́бка конфе́т стои́т на столе́.
         en_gb: A box of sweets is on the table.
     declension:
@@ -19535,6 +19546,7 @@ words:
         en_gb: They resolved the conflict peacefully.
       - ru: Он избега́ет конфли́ктов на рабо́те.
         en_gb: He avoids conflicts at work.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
   "концерт=concert":
     batteries: [time_events]
     cefr_level: A2
@@ -19550,6 +19562,7 @@ words:
     usage:
       - ru: Вчера́ мы бы́ли на конце́рте.
         en_gb: Yesterday we were at a concert.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Конце́рт начнётся в семь.
         en_gb: The concert will start at seven.
       - ru: Мы купи́ли биле́ты на конце́рт.
@@ -19581,6 +19594,7 @@ words:
     usage:
       - ru: Он ска́чет на коне́.
         en_gb: He is riding on a horse.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Бе́лый конь стои́т в по́ле.
         en_gb: A white horse stands in the field.
       - ru: В коню́шне мно́го коне́й.
@@ -19611,6 +19625,7 @@ words:
     usage:
       - ru: Зимо́й мы ката́емся на конька́х.
         en_gb: In winter we skate.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Он купи́л но́вые коньки́.
         en_gb: He bought new skates.
       - ru: Она́ оста́вила коньки́ до́ма.
@@ -19646,6 +19661,7 @@ words:
     usage:
       - ru: Он вы́пил рю́мку коньяка́.
         en_gb: He drank a glass of cognac.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Я заказа́л хоро́ший конья́к.
         en_gb: I ordered a good cognac.
       - ru: В шка́фу стоя́ли ста́рые коньяки́.
@@ -19695,6 +19711,7 @@ words:
     usage:
       - ru: Дре́вний во́ин держа́л копьё.
         en_gb: The ancient warrior held a spear.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он держа́л копьё в руке́.
         en_gb: He held the spear in his hand.
     declension:
@@ -19727,6 +19744,7 @@ words:
         en_gb: The ship set out to sea.
       - ru: На корабле́ бы́ло мно́го люде́й.
         en_gb: There were many people on the ship.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В порту́ стоя́т больши́е корабли́.
         en_gb: Big ships stand in the harbour.
     declension:
@@ -19760,6 +19778,7 @@ words:
         en_gb: He dug a root out of the ground.
       - ru: Зимо́й живо́тные едя́т корня́ми.
         en_gb: In winter the animals feed on roots.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: ко́рень
       sg_gen: ко́рня
@@ -19793,6 +19812,7 @@ words:
     usage:
       - ru: Он е́дет в Коре́ю на рабо́ту.
         en_gb: He is going to Korea for work.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Столи́ца Коре́и о́чень больша́я.
         en_gb: The capital of Korea is very large.
       - ru: Они́ живу́т в Коре́е.
@@ -19817,6 +19837,7 @@ words:
     usage:
       - ru: Мы лета́ли в Коре́ю ле́том.
         en_gb: We flew to Korea in the summer.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: О Коре́е написа́ли в газе́те.
         en_gb: They wrote about Korea in the newspaper.
       - ru: Он давно́ мечта́л о Коре́е.
@@ -19836,6 +19857,7 @@ words:
     usage:
       - ru: Она́ несла́ корзи́ну с фру́ктами.
         en_gb: She was carrying a basket of fruit.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В корзи́не лежа́т гри́бы.
         en_gb: There are mushrooms in the basket.
       - ru: Она́ купи́ла две корзи́ны я́блок.
@@ -19915,6 +19937,7 @@ words:
         en_gb: The box is standing on the floor.
       - ru: Он положи́л кни́ги в коро́бку.
         en_gb: He put the books in the box.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В шкафу́ мно́го пусты́х коро́бок.
         en_gb: There are many empty boxes in the cupboard.
   "корова=cow":
@@ -19933,6 +19956,7 @@ words:
         en_gb: The cow gives milk.
       - ru: Он ку́пит коро́ву на я́рмарке.
         en_gb: He will buy a cow at the fair.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В по́ле пасу́тся коро́вы.
         en_gb: Cows are grazing in the field.
     declension:
@@ -19965,6 +19989,7 @@ words:
         en_gb: The queen came out to the people.
       - ru: Все говори́ли о короле́ве.
         en_gb: Everyone was talking about the queen.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дворе́ц короле́вы о́чень краси́в.
         en_gb: The queen's palace is very beautiful.
     declension:
@@ -19997,6 +20022,7 @@ words:
         en_gb: The king ruled for forty years.
       - ru: Наро́д лю́бит своего́ короля́.
         en_gb: The people love their king.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: За столо́м сиде́ли два короля́.
         en_gb: Two kings sat at the table.
     declension:
@@ -20026,6 +20052,7 @@ words:
     usage:
       - ru: Ле́кция проходи́ла во второ́м ко́рпусе.
         en_gb: The lecture took place in the second building.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Больни́ца занима́ет три ко́рпуса.
         en_gb: The hospital occupies three buildings.
       - ru: Общежи́тие нахо́дится в сосе́днем ко́рпусе.
@@ -20061,6 +20088,7 @@ words:
         en_gb: The correspondents gathered at the entrance.
       - ru: Газе́та посла́ла корреспонде́нта на войну́.
         en_gb: The newspaper sent a correspondent to the war.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
     declension:
       sg_nom: корреспонде́нт
       sg_gen: корреспонде́нта
@@ -20090,6 +20118,7 @@ words:
         en_gb: The cosmonaut returned to Earth.
       - ru: Ма́льчик мечта́ет стать космона́втом.
         en_gb: The boy dreams of becoming a cosmonaut.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: космона́вт
       sg_gen: космона́вта
@@ -20119,6 +20148,7 @@ words:
     usage:
       - ru: Ве́чером мы сиде́ли у костра́.
         en_gb: In the evening we sat by the campfire.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы разожгли́ костёр на берегу́.
         en_gb: We lit a campfire on the shore.
       - ru: Тури́сты гре́лись у костро́в.
@@ -20153,6 +20183,7 @@ words:
         en_gb: He broke a bone in his arm.
       - ru: В су́пе мно́го косте́й.
         en_gb: There are many bones in the soup.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: кость
       sg_gen: ко́сти
@@ -20184,6 +20215,7 @@ words:
         en_gb: He bought a new suit.
       - ru: Он пришёл на сва́дьбу в костю́ме.
         en_gb: He came to the wedding in a suit.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: костю́м
       sg_gen: костю́ма
@@ -20213,6 +20245,7 @@ words:
         en_gb: Kostya, are you home?
       - ru: Все называ́ли его́ про́сто Ко́стей.
         en_gb: Everyone called him simply Kostya.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Я позвони́л Ко́сте у́тром.
         en_gb: I called Kostya in the morning.
     declension:
@@ -20241,6 +20274,7 @@ words:
         en_gb: I fed the tomcat.
       - ru: Де́ти игра́ют с кото́м.
         en_gb: The children are playing with the tomcat.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: кот
       sg_gen: кота́
@@ -20269,6 +20303,7 @@ words:
         en_gb: He likes coffee with milk.
       - ru: Без ко́фе я не просыпа́юсь.
         en_gb: Without coffee I don't wake up.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: ко́фе
       sg_gen: ко́фе
@@ -20292,6 +20327,7 @@ words:
     usage:
       - ru: Она́ вяза́ла ко́фту весь ве́чер.
         en_gb: She knitted the cardigan all evening.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Наде́нь ко́фту, на у́лице хо́лодно.
         en_gb: Put on a cardigan, it's cold outside.
       - ru: Ба́бушка пода́рила мне но́вую ко́фту.
@@ -20322,6 +20358,7 @@ words:
     usage:
       - ru: Она́ наде́ла тёплую ко́фточку.
         en_gb: She put on a warm blouse.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́та ко́фточка хорошо́ тебе́ идёт.
         en_gb: This blouse suits you well.
     declension:
@@ -20355,6 +20392,7 @@ words:
         en_gb: I left my wallet at home.
       - ru: В кошельке́ нет де́нег.
         en_gb: There is no money in the wallet.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У меня́ укра́ли кошелёк.
         en_gb: My wallet was stolen.
     declension:
@@ -20385,6 +20423,7 @@ words:
         en_gb: Our cat likes to sleep on the sofa.
       - ru: Я даю́ ко́шке молоко́.
         en_gb: I give the cat milk.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У сосе́дей три ко́шки.
         en_gb: The neighbours have three cats.
     declension:
@@ -20413,6 +20452,7 @@ words:
     usage:
       - ru: Поли́ция рассле́дует кра́жу.
         en_gb: The police are investigating the theft.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Его́ обвини́ли в кра́же.
         en_gb: He was accused of theft.
       - ru: В райо́не уча́стились кра́жи.
@@ -20446,6 +20486,7 @@ words:
     usage:
       - ru: Не ставь ча́шку на край стола́.
         en_gb: Don't put the cup on the edge of the table.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он стоя́л на краю́ обры́ва.
         en_gb: He stood on the edge of the cliff.
       - ru: Кни́га лежи́т у кра́я по́лки.
@@ -20481,6 +20522,7 @@ words:
         en_gb: Turn off the tap, the water is running.
       - ru: Из кра́на течёт горя́чая вода́.
         en_gb: Hot water flows from the tap.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На стро́йке рабо́тают высо́кие кра́ны.
         en_gb: Tall cranes are working at the building site.
     declension:
@@ -20525,6 +20567,7 @@ words:
         en_gb: She is a real beauty.
       - ru: Он влюби́лся в ю́ную краса́вицу.
         en_gb: He fell in love with a young beauty.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ба́лу бы́ло мно́го краса́виц.
         en_gb: There were many beauties at the ball.
   "краска=paint":
@@ -20543,6 +20586,7 @@ words:
     usage:
       - ru: Он купи́л бе́лую кра́ску для стен.
         en_gb: He bought white paint for the walls.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Кра́ска ещё не вы́сохла.
         en_gb: The paint has not dried yet.
       - ru: Худо́жник рабо́тает я́ркими кра́сками.
@@ -20587,6 +20631,7 @@ words:
     usage:
       - ru: Все восхища́лись её красото́й.
         en_gb: Everyone admired her beauty.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Кака́я красота́ вокру́г!
         en_gb: What beauty all around!
       - ru: Он рисова́л ра́ди красоты́.
@@ -20610,6 +20655,7 @@ words:
         en_gb: The bank gave him a loan.
       - ru: Он пла́тит по двум креди́там.
         en_gb: He is paying off two loans.
+        inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: креди́т
       sg_gen: креди́та
@@ -20637,6 +20683,7 @@ words:
     usage:
       - ru: Они́ гуля́ли у стен кремля́.
         en_gb: They walked by the walls of the kremlin.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Тури́сты фотографи́руют кремль.
         en_gb: Tourists are photographing the kremlin.
       - ru: Мы вошли́ в кремль че́рез воро́та.
@@ -20672,6 +20719,7 @@ words:
         en_gb: The old fortress stands on the shore.
       - ru: Враги́ не взя́ли кре́пость.
         en_gb: The enemies did not take the fortress.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ жи́ли в ста́рой кре́пости.
         en_gb: They lived in an old fortress.
     declension:
@@ -20701,6 +20749,7 @@ words:
     usage:
       - ru: Де́душка дре́млет в кре́сле.
         en_gb: Grandfather is dozing in the armchair.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Купи́ мя́гкое кре́сло.
         en_gb: Buy a soft armchair.
       - ru: В ко́мнате стоя́т два кре́сла.
@@ -20730,6 +20779,9 @@ words:
     en_gb:
       standard: cross (an upright shape with a crossbar)
     usage:
+      - ru: Я ношу́ ма́ленький крест.
+        en_gb: I wear a small cross.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На це́ркви золото́й крест.
         en_gb: There is a golden cross on the church.
       - ru: На цепо́чке ма́ленький крест.
@@ -20767,6 +20819,7 @@ words:
         en_gb: The peasants went out to the field at dawn.
       - ru: По́мощь оказа́ли бе́дному крестья́нину.
         en_gb: Help was given to the poor peasant.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: крестья́нин
       sg_gen: крестья́нина
@@ -20793,6 +20846,7 @@ words:
     usage:
       - ru: На креще́нии ребёнку даю́т и́мя.
         en_gb: At the baptism the child is given a name.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Креще́ние состои́тся в воскресе́нье.
         en_gb: The baptism will take place on Sunday.
       - ru: По́сле креще́ния был пра́здник.
@@ -20830,6 +20884,7 @@ words:
         en_gb: Suddenly a loud shout rang out.
       - ru: Она́ просну́лась от кри́ка.
         en_gb: She woke up from a shout.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: С у́лицы доноси́лись кри́ки дете́й.
         en_gb: Children's shouts came from the street.
   "кристалл=crystal":
@@ -20843,6 +20898,9 @@ words:
     en_gb:
       standard: crystal (a solid with a regular structure)
     usage:
+      - ru: Учёный изуча́ет криста́лл.
+        en_gb: The scientist studies the crystal.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На окне́ появи́лись криста́ллы льда.
         en_gb: Crystals of ice appeared on the window.
       - ru: Э́тот криста́лл о́чень краси́вый.
@@ -20873,6 +20931,7 @@ words:
         en_gb: I am lying on the bed.
       - ru: Под крова́тью спря́тался кот.
         en_gb: A cat hid under the bed.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мы купи́ли но́вую крова́ть.
         en_gb: We bought a new bed.
     declension:
@@ -20906,6 +20965,7 @@ words:
         en_gb: The doctor took a blood sample.
       - ru: Руба́шка была́ в крови́.
         en_gb: The shirt was covered in blood.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: кровь
       sg_gen: кро́ви
@@ -20924,6 +20984,9 @@ words:
     en_gb:
       standard: crocodile (a large reptile with strong jaws)
     usage:
+      - ru: Тури́сты фотографи́руют крокоди́ла.
+        en_gb: The tourists photograph the crocodile.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В реке́ живёт опа́сный крокоди́л.
         en_gb: A dangerous crocodile lives in the river.
       - ru: Крокоди́л спал на бе́регу.
@@ -20957,6 +21020,7 @@ words:
         en_gb: The rabbit is gnawing a carrot.
       - ru: Де́ти ко́рмят кро́лика.
         en_gb: The children are feeding the rabbit.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На фе́рме мно́го кро́ликов.
         en_gb: There are many rabbits on the farm.
     declension:
@@ -20988,6 +21052,7 @@ words:
         en_gb: Draw a big circle.
       - ru: Де́ти вста́ли в круг.
         en_gb: The children stood in a circle.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Бегу́н сде́лал не́сколько круго́в.
         en_gb: The runner did several laps.
     declension:
@@ -21027,6 +21092,7 @@ words:
     usage:
       - ru: Сын хо́дит в кружо́к рисова́ния.
         en_gb: My son goes to a drawing club.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ запи́салась в шахма́тный кружо́к.
         en_gb: She signed up for the chess club.
       - ru: В шко́ле мно́го интере́сных кружко́в.
@@ -21045,6 +21111,7 @@ words:
     usage:
       - ru: Они́ отпра́вились в морско́й круи́з.
         en_gb: They set off on a sea cruise.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы мечта́ем о круи́зе.
         en_gb: We dream of a cruise.
       - ru: В круи́зе бы́ло мно́го развлече́ний.
@@ -21079,6 +21146,7 @@ words:
         en_gb: The bird has a broken wing.
       - ru: Самолёт поверну́л на пра́вое крыло́.
         en_gb: The plane banked onto its right wing.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Пти́ца распра́вила кры́лья.
         en_gb: The bird spread its wings.
     declension:
@@ -21108,6 +21176,7 @@ words:
     usage:
       - ru: Он стоя́л на крыльце́ и ждал госте́й.
         en_gb: He stood on the porch waiting for guests.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На крыльце́ лежа́л снег.
         en_gb: There was snow on the porch.
       - ru: Она́ помы́ла крыльцо́.
@@ -21140,6 +21209,7 @@ words:
         en_gb: A rat lives in the basement.
       - ru: Я уви́дел большу́ю кры́су.
         en_gb: I saw a big rat.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В амба́ре завели́сь кры́сы.
         en_gb: Rats appeared in the barn.
     declension:
@@ -21169,6 +21239,7 @@ words:
     usage:
       - ru: На кры́ше лежи́т снег.
         en_gb: There is snow on the roof.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ра́бочие чи́нят кры́шу.
         en_gb: The workers are repairing the roof.
       - ru: Ко́шка сиди́т на кры́ше.
@@ -21215,6 +21286,7 @@ words:
     usage:
       - ru: Закро́й кастрю́лю кры́шкой.
         en_gb: Cover the pot with the lid.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Кры́шка от ба́нки потеря́лась.
         en_gb: The lid of the jar got lost.
       - ru: В я́щике лежа́т ра́зные кры́шки.
@@ -21232,6 +21304,7 @@ words:
     usage:
       - ru: Пове́сь пальто́ на крючо́к.
         en_gb: Hang the coat on the hook.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На крючке́ виси́т поло́тенце.
         en_gb: A towel hangs on the hook.
       - ru: Ры́ба сорвала́сь с крючка́.
@@ -21263,6 +21336,7 @@ words:
     usage:
       - ru: Ка́ждая сторона́ ку́ба ра́вная.
         en_gb: Every side of the cube is equal.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Реши́те зада́чу про куб.
         en_gb: Solve the problem about a cube.
       - ru: Де́ти стро́или ба́шню из ку́бов.
@@ -21299,6 +21373,7 @@ words:
         en_gb: The captain lifted the cup above his head.
       - ru: В музе́е мно́го спорти́вных ку́бков.
         en_gb: There are many sports cups in the museum.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: ку́бок
       sg_gen: ку́бка
@@ -21325,6 +21400,7 @@ words:
     usage:
       - ru: Он сжал ру́ку в кула́к.
         en_gb: He clenched his hand into a fist.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он сту́кнул кулако́м по столу́.
         en_gb: He banged his fist on the table.
       - ru: Боксёр сжал кулаки́.
@@ -21368,6 +21444,7 @@ words:
     usage:
       - ru: Он изуча́ет ру́сскую культу́ру.
         en_gb: He studies Russian culture.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В культу́ре наро́да мно́го тради́ций.
         en_gb: There are many traditions in the people's culture.
       - ru: Мы интересу́емся ра́зными культу́рами.
@@ -21390,6 +21467,7 @@ words:
         en_gb: She bought a red swimsuit.
       - ru: Де́вочка пла́вает в но́вом купа́льнике.
         en_gb: The girl is swimming in a new swimsuit.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: купа́льник
       sg_gen: купа́льника
@@ -21421,6 +21499,7 @@ words:
         en_gb: The dome of the church gleams with gold.
       - ru: Под ку́полом ле́тали го́луби.
         en_gb: Pigeons flew under the dome.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ку́пол
       sg_gen: ку́пола
@@ -21454,6 +21533,7 @@ words:
         en_gb: The banknote turned out to be fake.
       - ru: Он расплати́лся кру́пной купю́рой.
         en_gb: He paid with a large banknote.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: купю́ра
       sg_gen: купю́ры
@@ -21486,6 +21566,7 @@ words:
         en_gb: The hen lays eggs.
       - ru: Ку́рицу зажа́рили на обе́д.
         en_gb: The hen was roasted for dinner.
+        inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Во дворе́ хо́дят ку́ры.
         en_gb: Hens are walking around the yard.
     declension:
@@ -21516,6 +21597,7 @@ words:
     usage:
       - ru: Они́ отдыха́ли на морско́м куро́рте.
         en_gb: They holidayed at a seaside resort.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Куро́рт был по́лон тури́стов.
         en_gb: The resort was full of tourists.
       - ru: Они́ е́дут на горнолы́жный куро́рт.
@@ -21548,6 +21630,7 @@ words:
     usage:
       - ru: Он запи́сался на курс ру́сского языка́.
         en_gb: He enrolled in a Russian language course.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я зако́нчил э́тот курс.
         en_gb: I finished this course.
       - ru: Курс до́ллара сего́дня вы́рос.
@@ -21579,6 +21662,7 @@ words:
     usage:
       - ru: На у́лице хо́лодно, наде́нь ку́ртку.
         en_gb: It's cold outside, put on a jacket.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
         en_alt:
           - it's cold outside, put a jacket on
       - ru: Моя́ ку́ртка виси́т в шкафу́.
@@ -21616,6 +21700,7 @@ words:
         en_gb: He ate a big piece of cake.
       - ru: Разре́жь сыр на куски́.
         en_gb: Cut the cheese into pieces.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: кусо́к
       sg_gen: куска́
