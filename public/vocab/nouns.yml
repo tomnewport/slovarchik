@@ -52209,6 +52209,7 @@ words:
     usage:
       - ru: В э́том уголке́ са́да расту́т ро́зы.
         en_gb: Roses grow in this corner of the garden.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я нашёл ую́тный уголо́к для чте́ния.
         en_gb: I found a cosy corner for reading.
       - ru: Кот спря́тался за свои́м люби́мым уголко́м.
@@ -52236,6 +52237,7 @@ words:
         en_gb: Coal is burning in the stove.
       - ru: Шахтёры добыва́ют мно́го угля́.
         en_gb: The miners extract a lot of coal.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он нарисова́л портре́т углём.
         en_gb: He drew the portrait with charcoal.
   "угроза=threat":
@@ -52267,6 +52269,7 @@ words:
         en_gb: That was a serious threat.
       - ru: Го́род живёт под угро́зой наводне́ния.
         en_gb: The town lives under the threat of flooding.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Поли́ция не реаги́рует на пусты́е угро́зы.
         en_gb: The police do not react to empty threats.
   "удар=blow":
@@ -52299,6 +52302,7 @@ words:
         en_gb: He received a strong blow to the head.
       - ru: От уда́ра ва́за разби́лась.
         en_gb: The vase shattered from the blow.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Боксёр нанёс не́сколько бы́стрых уда́ров.
         en_gb: The boxer landed several quick blows.
   "удача=luck":
@@ -52334,6 +52338,7 @@ words:
         en_gb: Such luck happens rarely.
       - ru: Он по́льзуется уда́чей в дела́х.
         en_gb: He enjoys luck in his affairs.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
   "удивление=surprise":
     batteries: [abstract]
     cefr_level: A2
@@ -52356,6 +52361,7 @@ words:
     usage:
       - ru: Она́ откры́ла рот от удивле́ния.
         en_gb: She opened her mouth in surprise.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: К моему́ удивле́нию, он согласи́лся.
         en_gb: To my surprise, he agreed.
       - ru: Де́ти смотре́ли с удивле́нием.
@@ -52387,6 +52393,7 @@ words:
     usage:
       - ru: Я с удово́льствием тебе́ помогу́.
         en_gb: I will gladly help you.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Я чита́ю э́ту кни́гу с удово́льствием.
         en_gb: I read this book with pleasure.
       - ru: Путеше́ствие доста́вило нам мно́го удово́льствия.
@@ -52407,6 +52414,7 @@ words:
     usage:
       - ru: Она́ смотре́ла на э́то с у́жасом.
         en_gb: She looked at it with horror.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У́жасы войны́ невозмо́жно забы́ть.
         en_gb: The horrors of war cannot be forgotten.
       - ru: Он за́мер от у́жаса.
@@ -52441,6 +52449,7 @@ words:
     usage:
       - ru: На у́жин мы е́ли ры́бу.
         en_gb: For dinner we ate fish.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я пригото́вил вку́сный у́жин.
         en_gb: I prepared a tasty dinner.
       - ru: По́сле у́жина мы пошли́ гуля́ть.
@@ -52486,6 +52495,7 @@ words:
         en_gb: I cannot untie this knot.
       - ru: Верёвка соста́влена из не́скольких узло́в.
         en_gb: The rope is made up of several knots.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "узор=pattern":
     batteries: [objects, abstract]
     cefr_level: B2
@@ -52505,6 +52515,7 @@ words:
         en_gb: The frost drew patterns on the window.
       - ru: Ба́бушка вы́шила салфе́тку с узо́рами.
         en_gb: Grandmother embroidered a cloth with patterns.
+        inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: узо́р
       sg_gen: узо́ра
@@ -52604,6 +52615,7 @@ words:
         en_gb: Ukraine is in eastern Europe.
       - ru: Мы е́здили по Украи́не ле́том.
         en_gb: We travelled around Ukraine in the summer.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Он мно́го расска́зывал об Украи́не.
         en_gb: He told a lot about Ukraine.
   "Украина=Ukraine":
@@ -52626,6 +52638,7 @@ words:
     usage:
       - ru: Столи́ца Украи́ны — Ки́ев.
         en_gb: The capital of Ukraine is Kyiv.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он верну́лся на Украи́ну.
         en_gb: He returned to Ukraine.
       - ru: Они́ интересу́ются исто́рией Украи́ной.
@@ -52641,6 +52654,9 @@ words:
     en_gb:
       standard: Ukrainian (a man from Ukraine)
     usage:
+      - ru: Я познако́мился с украи́нцем.
+        en_gb: I got to know a Ukrainian.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Украи́нец рассказа́л о своём го́роде.
         en_gb: The Ukrainian told us about his city.
       - ru: Мой колле́га — украи́нец.
@@ -52673,6 +52689,7 @@ words:
     usage:
       - ru: На у́лице идёт дождь.
         en_gb: It is raining in the street.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я живу́ на ти́хой у́лице.
         en_gb: I live on a quiet street.
       - ru: Де́ти игра́ют на у́лицах го́рода.
@@ -52706,6 +52723,7 @@ words:
         en_gb: She has a beautiful smile.
       - ru: Он встре́тил нас с тёплой улы́бкой.
         en_gb: He greeted us with a warm smile.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Её улы́бки хвата́ет на всех.
         en_gb: Her smile is enough for everyone.
     declension:
@@ -52744,6 +52762,7 @@ words:
         en_gb: He has a sharp mind.
       - ru: Он челове́к большо́го ума́.
         en_gb: He is a man of great intellect.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Реши́ э́ту зада́чу в уме́.
         en_gb: Solve this problem in your head.
   "университет=university":
@@ -52761,6 +52780,7 @@ words:
     usage:
       - ru: Она́ у́чится в университе́те.
         en_gb: She studies at the university.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мой брат поступи́л в университе́т.
         en_gb: My brother got into university.
       - ru: Э́тот университе́т о́чень изве́стный.
@@ -52808,6 +52828,7 @@ words:
         en_gb: The management of a company requires experience.
       - ru: Он рабо́тает в управле́нии городски́м тра́нспортом.
         en_gb: He works in the management of city transport.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Хоро́шее управле́ние ва́жно для успе́ха.
         en_gb: Good management is important for success.
   "уровень=level":
@@ -52826,6 +52847,7 @@ words:
         en_gb: The water level in the river rose.
       - ru: Он зна́ет язы́к на высо́ком у́ровне.
         en_gb: He knows the language at a high level.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы перешли́ на но́вый у́ровень.
         en_gb: We moved on to a new level.
     declension:
@@ -52860,6 +52882,7 @@ words:
         en_gb: The peasants are gathering the harvest.
       - ru: От урожа́я зави́сит дохо́д фе́рмы.
         en_gb: The farm's income depends on the harvest.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: урожа́й
       sg_gen: урожа́я
@@ -52889,6 +52912,7 @@ words:
         en_gb: The Russian lesson starts at nine.
       - ru: По́сле уро́ка мы пошли́ домо́й.
         en_gb: After the lesson we went home.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На уро́ках он всегда́ внима́телен.
         en_gb: He is always attentive in lessons.
         en_alt:
@@ -52947,23 +52971,24 @@ words:
     en_gb:
       standard: effort (a determined attempt)
     declension:
-      sg_nom: уси́лиие
-      sg_gen: уси́лиия
-      sg_dat: уси́лиию
-      sg_acc: уси́лиие
-      sg_ins: уси́лиием
-      sg_pre: уси́лиии
-      pl_nom: уси́лиия
-      pl_gen: уси́лиий
-      pl_dat: уси́лииям
-      pl_acc: уси́лиия
-      pl_ins: уси́лииями
-      pl_pre: уси́лииях
+      sg_nom: уси́лие
+      sg_gen: уси́лия
+      sg_dat: уси́лию
+      sg_acc: уси́лие
+      sg_ins: уси́лием
+      sg_pre: уси́лии
+      pl_nom: уси́лия
+      pl_gen: уси́лий
+      pl_dat: уси́лиям
+      pl_acc: уси́лия
+      pl_ins: уси́лиями
+      pl_pre: уси́лиях
     usage:
       - ru: Он сде́лал большо́е уси́лиие.
         en_gb: He made a great effort.
-      - ru: Без уси́лиия ничего́ не вы́йдет.
+      - ru: Без уси́лия ничего́ не вы́йдет.
         en_gb: Nothing will work out without effort.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Благодаря́ о́бщим уси́лииям мы победи́ли.
         en_gb: Thanks to common efforts we won.
   "ускорение=acceleration":
@@ -52979,6 +53004,7 @@ words:
     usage:
       - ru: Маши́на е́дет с ускоре́нием.
         en_gb: The car moves with acceleration.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Учёные изуча́ют ускоре́ние.
         en_gb: Scientists study acceleration.
     declension:
@@ -53022,6 +53048,7 @@ words:
     usage:
       - ru: Я согла́сен на э́то усло́вие.
         en_gb: I agree to this condition.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ рабо́тают в тяжёлых усло́виях.
         en_gb: They work in difficult conditions.
       - ru: Догово́р зави́сит от не́скольких усло́вий.
@@ -53055,6 +53082,7 @@ words:
     usage:
       - ru: Он оказа́л мне большу́ю услу́гу.
         en_gb: He did me a great service.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Цена́ за услу́ги вы́росла.
         en_gb: The price for the services has risen.
       - ru: Я благода́рен ему́ за услу́гу.
@@ -53088,6 +53116,7 @@ words:
         en_gb: Great success awaited him.
       - ru: Мы ра́ды твои́м успе́хам.
         en_gb: We are glad about your successes.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Он добива́ется успе́ха упо́рным трудо́м.
         en_gb: He achieves success through hard work.
   "усталость=tiredness":
@@ -53114,6 +53143,7 @@ words:
         en_gb: After work he feels tiredness.
       - ru: От уста́лости она́ засну́ла сра́зу.
         en_gb: Out of tiredness she fell asleep at once.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он бо́рется с уста́лостью.
         en_gb: He fights against tiredness.
   "установка=installation":
@@ -53149,6 +53179,7 @@ words:
         en_gb: The price of the air conditioner installation is high.
       - ru: Мы рабо́таем над но́выми устано́вками.
         en_gb: We are working on new installations.
+        inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
   "устройство=device":
     batteries: [objects]
     cefr_level: B1
@@ -53171,6 +53202,7 @@ words:
         en_gb: This is a very convenient device.
       - ru: Он разбира́ется в устро́йстве маши́ны.
         en_gb: He understands the workings of the car.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Магази́н прода́л мно́го электро́нных устро́йств.
         en_gb: The shop sold many electronic devices.
   "утверждение=statement":
@@ -53188,6 +53220,7 @@ words:
         en_gb: This statement is hard to prove.
       - ru: Я не согла́сен с его́ утвержде́нием.
         en_gb: I disagree with his statement.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: утвержде́ние
       sg_gen: утвержде́ния
@@ -53219,6 +53252,7 @@ words:
         en_gb: The children feed the ducks at the pond.
       - ru: Ма́ма пригото́вила у́тку с я́блоками.
         en_gb: Mum cooked duck with apples.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: у́тка
       sg_gen: у́тки
@@ -53250,6 +53284,7 @@ words:
         en_gb: He wakes up early every morning.
       - ru: С утра́ до ве́чера он рабо́тает.
         en_gb: He works from morning till evening.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
         en_alt:
           - From morning till evening he works.
           - He works from morning to evening.
@@ -53280,6 +53315,7 @@ words:
     usage:
       - ru: Он шепну́л мне на́ ухо.
         en_gb: He whispered in my ear.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У соба́ки дли́нные у́ши.
         en_gb: The dog has long ears.
       - ru: У меня́ боли́т у́хо.
@@ -53317,6 +53353,7 @@ words:
         en_gb: The patient needs good care.
       - ru: Расте́ния тре́буют ежедне́вного ухо́да.
         en_gb: The plants require daily care.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Его́ ухо́д был неожи́данным.
         en_gb: His departure was unexpected.
   "участие=participation":
@@ -53341,6 +53378,7 @@ words:
     usage:
       - ru: Спаси́бо за уча́стие в прое́кте.
         en_gb: Thank you for your participation in the project.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он при́нял уча́стие в ко́нкурсе.
         en_gb: He took part in the contest.
       - ru: Без ва́шего уча́стия мы не спра́вимся.
@@ -53360,6 +53398,7 @@ words:
         en_gb: The competition participants prepared.
       - ru: Ка́ждому уча́стнику вручи́ли меда́ль.
         en_gb: Each participant was given a medal.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Он стал акти́вным уча́стником клу́ба.
         en_gb: He became an active participant in the club.
     declension:
@@ -53404,6 +53443,7 @@ words:
         en_gb: They bought a plot outside the town.
       - ru: На уча́стке стои́т ма́ленький дом.
         en_gb: There is a small house on the plot.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Доро́га прохо́дит че́рез не́сколько уча́стков.
         en_gb: The road passes through several sections.
   "ученик=pupil":
@@ -53424,6 +53464,7 @@ words:
         en_gb: The teacher praised the pupil.
       - ru: Он был лу́чшим ученико́м в кла́ссе.
         en_gb: He was the best pupil in the class.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: учени́к
       sg_gen: ученика́
@@ -53448,6 +53489,9 @@ words:
     en_gb:
       standard: pupil (a schoolgirl)
     usage:
+      - ru: Учи́тель похвали́л учени́цу.
+        en_gb: The teacher praised the pupil.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Учени́ца подняла́ ру́ку на уро́ке.
         en_gb: The pupil raised her hand in the lesson.
       - ru: Э́та учени́ца лу́чшая в кла́ссе.
@@ -53491,6 +53535,7 @@ words:
         en_gb: He studies at a music college.
       - ru: По́сле учи́лища она́ ста́ла медсестро́й.
         en_gb: After college she became a nurse.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В го́роде не́сколько вое́нных учи́лищ.
         en_gb: There are several military colleges in the city.
   "учитель=teacher":
@@ -53542,6 +53587,7 @@ words:
         en_gb: This is a government institution.
       - ru: Он рабо́тает в нау́чном учрежде́нии.
         en_gb: He works at a scientific institution.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В го́роде мно́го госуда́рственных учрежде́ний.
         en_gb: There are many state institutions in the town.
     declension:
@@ -53575,6 +53621,7 @@ words:
         en_gb: I cannot open this file.
       - ru: В э́той па́пке мно́го фа́йлов.
         en_gb: There are many files in this folder.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: файл
       sg_gen: фа́йла
@@ -53616,6 +53663,7 @@ words:
         en_gb: This is a well-known fact.
       - ru: Не спорь с фа́ктами.
         en_gb: Do not argue with the facts.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Статья́ осно́вана на фа́ктах.
         en_gb: The article is based on facts.
   "фактор=factor":
@@ -53646,6 +53694,7 @@ words:
         en_gb: Weather is an important factor in agriculture.
       - ru: На реше́ние повлия́ло мно́го фа́кторов.
         en_gb: Many factors influenced the decision.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Учёные изуча́ют ра́зные фа́кторы ри́ска.
         en_gb: Scientists study various risk factors.
   "факультет=faculty":
@@ -53661,6 +53710,7 @@ words:
     usage:
       - ru: Он у́чится на истори́ческом факульте́те.
         en_gb: He studies at the history faculty.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На на́шем факульте́те мно́го студе́нтов.
         en_gb: There are many students at our faculty.
     declension:
@@ -53692,6 +53742,7 @@ words:
     usage:
       - ru: Напиши́те своё и́мя и фами́лию.
         en_gb: Write your first name and surname.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я не по́мню его́ фами́лию.
         en_gb: I do not remember his surname.
       - ru: На спи́ске мно́го одина́ковых фами́лий.
@@ -53724,6 +53775,7 @@ words:
     usage:
       - ru: Она́ гото́вила в фа́ртуке.
         en_gb: She cooked wearing an apron.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Наде́нь фа́ртук, что́бы не запа́чкаться.
         en_gb: Put on an apron so you don't get dirty.
       - ru: Шко́льный фа́ртук был чёрного цве́та.
@@ -53772,6 +53824,7 @@ words:
         en_gb: He works in the sports federation.
       - ru: В ми́ре существу́ет мно́го футбо́льных федера́ций.
         en_gb: There are many football federations in the world.
+        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
   "фейерверк=firework":
     batteries: [time_events]
     cefr_level: B1
@@ -53787,6 +53840,7 @@ words:
         en_gb: At midnight the fireworks began.
       - ru: Мы любова́лись я́рким фейерве́рком.
         en_gb: We admired the bright firework display.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На пло́щади запусти́ли мно́го фейерве́рков.
         en_gb: Many fireworks were set off in the square.
     declension:
@@ -53815,6 +53869,7 @@ words:
     usage:
       - ru: Она́ нашла́ ста́рых друзе́й в Фейсбу́ке.
         en_gb: She found old friends on Facebook.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я смотрю́ но́вости в Фейсбу́ке.
         en_gb: I read the news on Facebook.
     declension:
@@ -53842,6 +53897,7 @@ words:
         en_gb: We went to the film festival.
       - ru: На фестива́ле выступа́ли изве́стные музыка́нты.
         en_gb: Famous musicians performed at the festival.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: фестива́ль
       sg_gen: фестива́ля
@@ -53884,6 +53940,7 @@ words:
         en_gb: She has a slim figure.
       - ru: Реши́ зада́чу с геометри́ческими фигу́рами.
         en_gb: Solve the problem with geometric figures.
+        inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Вдали́ я уви́дел тёмную фигу́ру.
         en_gb: In the distance I saw a dark figure.
   "фильм=film":
@@ -53917,6 +53974,7 @@ words:
         en_gb: I love old films.
       - ru: В э́том фи́льме игра́ет изве́стный актёр.
         en_gb: A famous actor plays in this film.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
   "фирма=firm":
     batteries: [society]
     cefr_level: B1
@@ -53946,6 +54004,7 @@ words:
     usage:
       - ru: Он рабо́тает в большо́й фи́рме.
         en_gb: He works at a large firm.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Э́та фи́рма произво́дит ме́бель.
         en_gb: This firm produces furniture.
       - ru: Дире́ктор фи́рмы прие́хал на встре́чу.
@@ -53964,6 +54023,7 @@ words:
     usage:
       - ru: Она́ хо́дит на фи́тнес три ра́за в неде́лю.
         en_gb: She goes to fitness classes three times a week.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Фи́тнес помога́ет ему́ держа́ть себя́ в фо́рме.
         en_gb: Fitness helps him stay in shape.
     declension:
@@ -53991,6 +54051,7 @@ words:
         en_gb: The athletes carried their flags.
       - ru: Де́ти маха́ли ма́ленькими фла́гами.
         en_gb: The children waved little flags.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: флаг
       sg_gen: фла́га
@@ -54017,6 +54078,7 @@ words:
     usage:
       - ru: Я сохрани́л докуме́нты на фле́шку.
         en_gb: I saved the documents onto a USB stick.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Где моя́ фле́шка?
         en_gb: Where is my USB stick?
     declension:
@@ -54047,6 +54109,7 @@ words:
         en_gb: It was light, harmless flirting.
       - ru: Их разгово́р похо́ж на фли́рт.
         en_gb: Their conversation looks like flirting.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ устала́ от его́ постоя́нного фли́рта.
         en_gb: She got tired of his constant flirting.
     declension:
@@ -54074,6 +54137,7 @@ words:
         en_gb: The navy defends the coast.
       - ru: Он слу́жит на фло́те.
         en_gb: He serves in the navy.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Страна́ горди́тся свои́м фло́том.
         en_gb: The country is proud of its fleet.
     declension:
@@ -54116,6 +54180,7 @@ words:
     usage:
       - ru: На бе́лом фо́не текст ви́ден лу́чше.
         en_gb: Against a white background the text is more visible.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он вы́брал краси́вый фон для фотогра́фии.
         en_gb: He chose a beautiful background for the photo.
       - ru: Собы́тия развива́лись на фо́не войны́.
@@ -54151,6 +54216,7 @@ words:
         en_gb: The lanterns are lit in the street.
       - ru: Он шёл по тропи́нке с фонарём.
         en_gb: He walked along the path with a lantern.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Свет фонаря́ освеща́л доро́гу.
         en_gb: The light of the lantern lit the road.
   "фонд=fund":
@@ -54179,6 +54245,7 @@ words:
     usage:
       - ru: Они́ собира́ют де́ньги в благотвори́тельный фонд.
         en_gb: They collect money for a charity fund.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Из э́того фо́нда помога́ют де́тям.
         en_gb: Children are helped from this fund.
       - ru: Госуда́рство создало́ не́сколько но́вых фо́ндов.
@@ -54202,6 +54269,7 @@ words:
         en_gb: This is an object of a round shape.
       - ru: О́блако напомина́ет фо́рму живо́тного.
         en_gb: The cloud resembles the shape of an animal.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Существу́ют ра́зные геометри́ческие фо́рмы.
         en_gb: There are various geometric shapes.
     declension:
@@ -54230,6 +54298,7 @@ words:
     usage:
       - ru: Я взял фотоаппара́т в путеше́ствие.
         en_gb: I took a camera on the trip.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́тот фотоаппара́т де́лает хоро́шие фотогра́фии.
         en_gb: This camera takes good photographs.
     declension:
@@ -54264,6 +54333,7 @@ words:
         en_gb: An old photograph hangs on the wall.
       - ru: Я сде́лал краси́вую фотогра́фию.
         en_gb: I took a beautiful photograph.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он показа́л мне свои́ ста́рые фотогра́фии.
         en_gb: He showed me his old photographs.
     declension:
@@ -54293,6 +54363,7 @@ words:
     usage:
       - ru: Повтори́те э́ту фра́зу за мной.
         en_gb: Repeat this phrase after me.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́та фра́за зна́чит «спаси́бо».
         en_gb: This phrase means "thank you".
       - ru: Я вы́учил не́сколько ну́жных фраз.
@@ -54332,6 +54403,7 @@ words:
         en_gb: France is famous for its cheese.
       - ru: Мы прилете́ли во Фра́нцию весно́й.
         en_gb: We flew to France in spring.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он мно́го лет жил во Фра́нции.
         en_gb: He lived in France for many years.
   "Франция=France":
