@@ -54428,6 +54428,7 @@ words:
         en_gb: The capital of France is Paris.
       - ru: Она́ верну́лась из Фра́нции.
         en_gb: She returned from France.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он восхища́ется Фра́нцией.
         en_gb: He admires France.
   "француз=Frenchman":
@@ -54441,6 +54442,9 @@ words:
     en_gb:
       standard: Frenchman (a man from France)
     usage:
+      - ru: Я познако́мился с францу́зом.
+        en_gb: I got to know a Frenchman.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Францу́з заказа́л бока́л вина́.
         en_gb: The Frenchman ordered a glass of wine.
       - ru: Э́тот францу́з живёт в Пари́же.
@@ -54485,6 +54489,7 @@ words:
     usage:
       - ru: Солда́ты ушли́ на фронт.
         en_gb: The soldiers went to the front.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Письмо́ пришло́ с фро́нта.
         en_gb: The letter came from the front.
       - ru: Бои́ шли на двух фронта́х.
@@ -54507,6 +54512,7 @@ words:
         en_gb: I eat fruit every day.
       - ru: Я купи́л ки́ло фру́ктов.
         en_gb: I bought a kilo of fruit.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Э́тот фрукт о́чень сла́дкий.
         en_gb: This fruit is very sweet.
     declension:
@@ -54538,6 +54544,7 @@ words:
         en_gb: First they build the foundation of the house.
       - ru: На про́чном фунда́менте дом простои́т века́.
         en_gb: On a solid foundation the house will stand for centuries.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Тре́щина появи́лась в фунда́менте.
         en_gb: A crack appeared in the foundation.
     declension:
@@ -54582,6 +54589,7 @@ words:
         en_gb: This function is very convenient.
       - ru: Телефо́н име́ет мно́го фу́нкций.
         en_gb: The phone has many functions.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Се́рдце выполня́ет ва́жную фу́нкцию.
         en_gb: The heart performs an important function.
   "футболист=footballer":
@@ -54599,6 +54607,7 @@ words:
         en_gb: This footballer scored three goals.
       - ru: Сын хо́чет стать футболи́стом.
         en_gb: My son wants to become a footballer.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: футболи́ст
       sg_gen: футболи́ста
@@ -54626,6 +54635,7 @@ words:
     usage:
       - ru: Ле́том он но́сит футбо́лку и шо́рты.
         en_gb: In summer he wears a t-shirt and shorts.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я купи́л но́вую футбо́лку.
         en_gb: I bought a new t-shirt.
       - ru: В шкафу́ лежи́т мно́го футбо́лок.
@@ -54673,6 +54683,7 @@ words:
         en_gb: The doctor put on a white coat.
       - ru: У́тром она́ хо́дит в хала́те.
         en_gb: In the morning she walks around in a robe.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В шкафу́ виси́т не́сколько хала́тов.
         en_gb: Several robes hang in the wardrobe.
   "характер=character":
@@ -54704,6 +54715,7 @@ words:
         en_gb: She has a kind character.
       - ru: Лю́ди с твёрдым хара́ктером ре́дко сдаю́тся.
         en_gb: People with a firm character rarely give up.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В кни́ге опи́сано мно́го интере́сных хара́ктеров.
         en_gb: Many interesting characters are described in the book.
   "хвост=tail":
@@ -54720,6 +54732,7 @@ words:
     usage:
       - ru: Соба́ка виля́ет хвосто́м.
         en_gb: The dog is wagging its tail.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У ли́сы пуши́стый хвост.
         en_gb: The fox has a fluffy tail.
       - ru: Я уви́дел рыб с дли́нными хвоста́ми.
@@ -54758,6 +54771,7 @@ words:
           - Please buy fresh bread.
       - ru: На столе́ лежи́т кусо́к хле́ба.
         en_gb: A piece of bread lies on the table.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ накорми́ла птиц хле́бом.
         en_gb: She fed the birds with bread.
     declension:
@@ -54781,6 +54795,7 @@ words:
     usage:
       - ru: Э́та руба́шка из хло́пка.
         en_gb: This shirt is made of cotton.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Хло́пок — мя́гкий и натура́льный материа́л.
         en_gb: Cotton is a soft and natural material.
       - ru: В э́том регио́не выра́щивают мно́го хло́пка.
@@ -54807,6 +54822,7 @@ words:
         en_gb: A loud clap rang out.
       - ru: За хлопко́м после́довала тишина́.
         en_gb: Silence followed the clap.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Вдали́ слы́шались гро́мкие хлопки́.
         en_gb: Loud bangs could be heard in the distance.
     declension:
@@ -54879,6 +54895,7 @@ words:
         en_gb: Now it is your move.
       - ru: По́езд шёл по́лным хо́дом.
         en_gb: The train was going at full speed.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он обду́мал не́сколько хо́дов вперёд.
         en_gb: He thought through several moves ahead.
   "хозяин=host":
@@ -54899,6 +54916,7 @@ words:
         en_gb: The owners of the farm work from dawn to dusk.
       - ru: Соба́ка ждала́ своего́ хозя́ина.
         en_gb: The dog waited for its master.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
     declension:
       sg_nom: хозя́ин
       sg_gen: хозя́ина
@@ -54943,6 +54961,7 @@ words:
         en_gb: The hostess prepared a tasty dinner.
       - ru: Мы поблагодари́ли хозя́йку за приём.
         en_gb: We thanked the hostess for the welcome.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Все хозя́йки до́ма со́брались во дворе́.
         en_gb: All the landladies of the building gathered in the yard.
   "хозяйство=economy":
@@ -54968,6 +54987,7 @@ words:
         en_gb: Agriculture is developing fast.
       - ru: Она́ занима́ется дома́шним хозя́йством.
         en_gb: She takes care of the household.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Война́ нанесла́ уще́рб хозя́йству страны́.
         en_gb: The war caused damage to the country's economy.
   "хоккей=hockey":
@@ -54985,6 +55005,7 @@ words:
         en_gb: In winter we watch hockey.
       - ru: Росси́я вы́играла матч по хокке́ю.
         en_gb: Russia won the hockey match.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: хокке́й
       sg_gen: хокке́я
@@ -55019,6 +55040,7 @@ words:
     usage:
       - ru: На холме́ стои́т ста́рый за́мок.
         en_gb: On the hill stands an old castle.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы подняли́сь на высо́кий холм.
         en_gb: We climbed a high hill.
       - ru: Вокру́г дере́вни мно́го зелёных холмо́в.
@@ -55046,6 +55068,7 @@ words:
         en_gb: In winter there is severe cold here.
       - ru: Он дрожа́л от хо́лода.
         en_gb: He was trembling from the cold.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Расте́ния поги́бли и́з-за хо́лода.
         en_gb: The plants died because of the cold.
   "холодильник=fridge":
@@ -55064,6 +55087,7 @@ words:
     usage:
       - ru: Молоко́ стои́т в холоди́льнике.
         en_gb: The milk is in the fridge.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Купи́ молоко́ и поста́вь в холоди́льник.
         en_gb: Buy milk and put it in the fridge.
       - ru: На ку́хне стои́т большо́й холоди́льник.
@@ -55098,6 +55122,7 @@ words:
         en_gb: The hamster sleeps all day.
       - ru: Она́ ко́рмит хомяка́ зёрнами.
         en_gb: She feeds the hamster with grains.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
     declension:
       sg_nom: хомя́к
       sg_gen: хомяка́
@@ -55126,6 +55151,7 @@ words:
     usage:
       - ru: Они́ вошли́ в дре́вний храм.
         en_gb: They entered the ancient temple.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Тури́сты фотографи́руют дре́вний храм.
         en_gb: The tourists photograph the ancient temple.
       - ru: В го́роде мно́го ста́рых хра́мов.
@@ -55156,6 +55182,7 @@ words:
     usage:
       - ru: Он лю́бит мя́со с хре́ном.
         en_gb: He likes meat with horseradish.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Хрен растёт в огоро́де.
         en_gb: Horseradish grows in the vegetable garden.
     declension:
@@ -55176,6 +55203,9 @@ words:
     en_gb:
       standard: Christian (a follower of Christianity)
     usage:
+      - ru: Я разгова́ривал с христиани́ном.
+        en_gb: I talked with a Christian.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Христиани́н ве́рит в бо́га.
         en_gb: A Christian believes in god.
       - ru: Он ве́рующий христиани́н.
@@ -55212,6 +55242,7 @@ words:
         en_gb: The artist is painting a portrait.
       - ru: Я познако́мился с изве́стным худо́жником.
         en_gb: I met a famous artist.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На вы́ставке рабо́тают молоды́е худо́жники.
         en_gb: Young artists are working at the exhibition.
     declension:
@@ -55245,6 +55276,7 @@ words:
         en_gb: The people loved their tsar.
       - ru: Дворе́ц был постро́ен при ца́рях.
         en_gb: The palace was built in the times of the tsars.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: царь
       sg_gen: царя́
@@ -55278,6 +55310,7 @@ words:
         en_gb: I like bright colours.
       - ru: Стены́ покра́шены в зелёный цвет.
         en_gb: The walls are painted green.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: цвет
       sg_gen: цве́та
@@ -55307,6 +55340,7 @@ words:
     usage:
       - ru: Он подари́л ей буке́т цвето́в.
         en_gb: He gave her a bouquet of flowers.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: На окне́ стои́т кра́сный цвето́к.
         en_gb: A red flower stands on the windowsill.
       - ru: В саду́ цвету́т весе́нние цветы́.
@@ -55340,6 +55374,7 @@ words:
         en_gb: He has a clear goal.
       - ru: Он идёт к свои́м це́лям ка́ждый день.
         en_gb: He moves towards his goals every day.
+        inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: цель
       sg_gen: це́ли
@@ -55367,6 +55402,7 @@ words:
     usage:
       - ru: Рабо́чие купи́ли мешо́к цеме́нта.
         en_gb: The workers bought a bag of cement.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Цеме́нт смеша́ли с песко́м.
         en_gb: The cement was mixed with sand.
       - ru: Стены́ скрепи́ли цеме́нтом.
@@ -55398,6 +55434,7 @@ words:
         en_gb: The prices of bread have risen.
       - ru: Он купи́л маши́ну по ни́зкой цене́.
         en_gb: He bought the car at a low price.
+        inflect: { token: 6, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: цена́
       sg_gen: цены́
@@ -55429,6 +55466,7 @@ words:
         en_gb: Spiritual values are more important than material ones.
       - ru: Э́та карти́на име́ет большу́ю це́нность.
         en_gb: This painting has great value.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: це́нность
       sg_gen: це́нности
@@ -55458,6 +55496,7 @@ words:
     usage:
       - ru: Магази́н нахо́дится в це́нтре го́рода.
         en_gb: The shop is in the centre of the city.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Центр го́рода о́чень краси́вый.
         en_gb: The centre of the town is very beautiful.
       - ru: Он идёт к це́нтру пло́щади.
@@ -55491,6 +55530,7 @@ words:
         en_gb: The dog is on a chain.
       - ru: Воро́та закры́ли тяжёлой це́пью.
         en_gb: The gate was closed with a heavy chain.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Цепь велосипе́да порвала́сь.
         en_gb: The bicycle chain broke.
     declension:
@@ -55523,6 +55563,7 @@ words:
         en_gb: An old church stands in the town centre.
       - ru: Они́ обвенча́лись в ма́ленькой це́ркви.
         en_gb: They got married in a small church.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В дере́вне есть две ста́рые це́ркви.
         en_gb: There are two old churches in the village.
     declension:
@@ -55552,6 +55593,7 @@ words:
     usage:
       - ru: Рабо́чие труди́лись в це́хе.
         en_gb: The workers laboured in the workshop.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дире́ктор осмотре́л но́вый цех.
         en_gb: The director inspected the new workshop.
       - ru: На заво́де откры́ли не́сколько совреме́нных цехо́в.
@@ -55593,6 +55635,7 @@ words:
         en_gb: Scientists study the history of civilisation.
       - ru: Лю́ди мечта́ют о вне́шней цивилиза́ции.
         en_gb: People dream of an alien civilisation.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "цилиндр=cylinder":
     batteries: [everyday]
     cefr_level: B2
@@ -55607,6 +55650,7 @@ words:
     usage:
       - ru: Ба́нка име́ет фо́рму цили́ндра.
         en_gb: The tin has the shape of a cylinder.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Цили́ндр кати́тся по столу́.
         en_gb: The cylinder rolls across the table.
       - ru: Дви́гатель рабо́тает на четырёх цили́ндрах.
@@ -55641,6 +55685,7 @@ words:
     usage:
       - ru: Он привёл цита́ту из кни́ги.
         en_gb: He gave a quote from the book.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́та цита́та ста́ла о́чень изве́стной.
         en_gb: This quote has become very famous.
       - ru: В докла́де мно́го цита́т из газе́т.
@@ -55687,6 +55732,7 @@ words:
     usage:
       - ru: Напиши́ э́ту ци́фру кру́пно.
         en_gb: Write this digit large.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Паро́ль состои́т из шести́ цифр.
         en_gb: The password consists of six digits.
       - ru: Ребёнок у́чится писа́ть ци́фры.
@@ -55708,6 +55754,7 @@ words:
         en_gb: Tips are not obligatory here.
       - ru: Он живёт на чаевы́х.
         en_gb: He lives on tips.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       pl_nom: чаевы́е
       pl_gen: чаевы́х
@@ -55730,6 +55777,7 @@ words:
     usage:
       - ru: Хо́чешь ча́шку ча́я?
         en_gb: Would you like a cup of tea?
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У́тром я пью чёрный чай.
         en_gb: In the morning I drink black tea.
       - ru: В ча́е сли́шком мно́го са́хара.
@@ -55758,6 +55806,9 @@ words:
     en_gb:
       standard: seagull (a sea bird)
     usage:
+      - ru: Я наблюда́ю за ча́йкой.
+        en_gb: I watch the seagull.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Над мо́рем лета́ла бе́лая ча́йка.
         en_gb: A white seagull was flying over the sea.
       - ru: Ча́йки крича́т у во́ды.
@@ -55804,6 +55855,7 @@ words:
         en_gb: I waited for you for a whole hour.
       - ru: Уро́к дли́тся два часа́.
         en_gb: The lesson lasts two hours.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы встре́тимся в шесть часо́в.
         en_gb: We will meet at six o'clock.
   "часовня=chapel":
@@ -55822,6 +55874,7 @@ words:
         en_gb: A small chapel stands on the hill.
       - ru: Они́ помоли́лись в ти́хой часо́вне.
         en_gb: They prayed in the quiet chapel.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В лесу́ стоя́т ста́рые часо́вни.
         en_gb: Old chapels stand in the forest.
     declension:
@@ -55855,6 +55908,7 @@ words:
         en_gb: We will consider this question in the next part.
       - ru: Он отда́л мне свою́ часть рабо́ты.
         en_gb: He gave me his part of the work.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: часть
       sg_gen: ча́сти
@@ -55882,6 +55936,7 @@ words:
     usage:
       - ru: Она́ разби́ла люби́мую ча́шку.
         en_gb: She broke her favourite cup.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Нале́й мне ча́шку ча́я.
         en_gb: Pour me a cup of tea.
       - ru: На по́лке стоя́т чи́стые ча́шки.
@@ -55919,6 +55974,7 @@ words:
         en_gb: The cashier gave me a receipt.
       - ru: Без че́ка обме́н невозмо́жен.
         en_gb: Without a receipt an exchange is impossible.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: чек
       sg_gen: че́ка
@@ -55949,6 +56005,7 @@ words:
         en_gb: He is a very good person.
       - ru: Я доверя́ю э́тому челове́ку.
         en_gb: I trust this person.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: челове́к
       sg_gen: челове́ка
@@ -55980,6 +56037,7 @@ words:
         en_gb: Science serves the good of humanity.
       - ru: Э́то откры́тие ва́жно для всего́ челове́чества.
         en_gb: This discovery is important for all of humanity.
+        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
   "челюсть=jaw":
     batteries: [everyday]
     cefr_level: B1
@@ -56006,6 +56064,7 @@ words:
         en_gb: His jaw dropped in surprise.
       - ru: Врач осмотре́л больну́ю че́люсть.
         en_gb: The doctor examined the painful jaw.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У аку́лы о́стрые зу́бы в мо́щной че́люсти.
         en_gb: The shark has sharp teeth in its powerful jaw.
   "чемодан=suitcase":
@@ -56026,6 +56085,7 @@ words:
         en_gb: My suitcase is too heavy.
       - ru: В чемода́не лежа́т ле́тние ве́щи.
         en_gb: Summer clothes lie in the suitcase.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: чемода́н
       sg_gen: чемода́на
@@ -56053,6 +56113,7 @@ words:
     usage:
       - ru: Он стал чемпио́ном ми́ра.
         en_gb: He became the world champion.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Чемпио́н получи́л золоту́ю меда́ль.
         en_gb: The champion received a gold medal.
       - ru: Боле́льщики приве́тствовали чемпио́нов.
@@ -56081,6 +56142,9 @@ words:
     en_gb:
       standard: tortoise (a slow reptile with a shell)
     usage:
+      - ru: Де́ти наблюда́ют за черепа́хой.
+        en_gb: The children watch the tortoise.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Черепа́ха дви́гается о́чень ме́дленно.
         en_gb: A tortoise moves very slowly.
       - ru: Черепа́ха живёт о́чень до́лго.
@@ -56115,6 +56179,7 @@ words:
         en_gb: In the fairy tale the devil tricked the peasant.
       - ru: Не помина́й чёрта на́ ночь.
         en_gb: Do not mention the devil at night.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Де́ти боя́лись расска́зов о черте́й.
         en_gb: The children were afraid of stories about devils.
     declension:
@@ -56160,6 +56225,7 @@ words:
         en_gb: Kindness is her main trait.
       - ru: В нём мно́го хоро́ших черт.
         en_gb: He has many good traits.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он облада́ет ре́дкой черто́й хара́ктера.
         en_gb: He has a rare character trait.
   "честь=honour":
@@ -56186,6 +56252,7 @@ words:
         en_gb: For me this is a great honour.
       - ru: Он горди́тся свое́й че́стью.
         en_gb: He is proud of his honour.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Они́ боро́лись за честь шко́лы.
         en_gb: They fought for the honour of the school.
   "четвёрка=a four":
@@ -56201,6 +56268,7 @@ words:
     usage:
       - ru: За сочине́ние я получи́л четвёрку.
         en_gb: I got a four for the essay.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Четвёрка — хоро́шая оце́нка.
         en_gb: A four is a good grade.
     declension:
@@ -56234,6 +56302,7 @@ words:
         en_gb: In the first quarter the pupils received their grades.
       - ru: Он съел че́тверть пирога́.
         en_gb: He ate a quarter of the pie.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: че́тверть
       sg_gen: четве́рти
@@ -56262,6 +56331,7 @@ words:
         en_gb: My neighbour is a Chechen.
       - ru: В го́роде живёт мно́го чече́нцев.
         en_gb: Many Chechens live in the city.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: чече́нец
       sg_gen: чече́нца
@@ -56295,6 +56365,7 @@ words:
     usage:
       - ru: Он роди́лся в Чечне́.
         en_gb: He was born in Chechnya.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ верну́лись из Чечни́.
         en_gb: They returned from Chechnya.
       - ru: Журнали́ст пое́хал в Чечню́.
@@ -56321,6 +56392,7 @@ words:
         en_gb: Chechnya is in the south of Russia.
       - ru: Мы говори́ли о Чечне́.
         en_gb: We talked about Chechnya.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Доро́га ведёт к Чечне́.
         en_gb: The road leads to Chechnya.
   "чиновник=official":
@@ -56339,6 +56411,7 @@ words:
         en_gb: The official signed the permit.
       - ru: Я говори́л с чино́вником в мэ́рии.
         en_gb: I spoke with an official at the city hall.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мно́гие чино́вники пришли́ на собра́ние.
         en_gb: Many officials came to the meeting.
     declension:
@@ -56372,6 +56445,7 @@ words:
         en_gb: Name any number.
       - ru: Раздели́ э́то на два числа́.
         en_gb: Divide this by two numbers.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Я записа́л все чи́сла в тетра́дь.
         en_gb: I wrote all the numbers in my notebook.
     declension:
@@ -56401,6 +56475,7 @@ words:
     usage:
       - ru: Э́та кни́га нра́вится мно́гим чита́телям.
         en_gb: Many readers like this book.
+        inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Чита́тель оста́вил отзы́в о кни́ге.
         en_gb: The reader left a review of the book.
       - ru: У писа́теля мно́го ве́рных чита́телей.
