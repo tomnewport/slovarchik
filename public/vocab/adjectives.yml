@@ -13923,6 +13923,7 @@ words:
         en_gb: Subsequent events changed everything.
       - ru: Об э́том мы поговори́м в после́дующей главе́.
         en_gb: We will talk about this in a subsequent chapter.
+        inflect: { token: 6, case: pre, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: после́дующий
       f: после́дующая
@@ -13996,6 +13997,7 @@ words:
         en_gb: I heard an extraneous sound.
       - ru: Не вмеши́вайся в посторо́нние дела́.
         en_gb: Don't interfere in other people's affairs.
+        inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "постоянный=permanent":
     batteries: [time, feelings]
     cefr_level: B1
@@ -14037,6 +14039,7 @@ words:
         en_gb: He has a permanent address.
       - ru: Ей нужна́ постоя́нная рабо́та.
         en_gb: She needs a permanent job.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы их постоя́нные клие́нты.
         en_gb: We are their permanent customers.
   "похожий=similar":
@@ -14083,6 +14086,7 @@ words:
         en_gb: He is similar to his father.
       - ru: У них похо́жая судьба́.
         en_gb: They have a similar fate.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́ти карти́ны о́чень похо́жи.
         en_gb: These paintings are very similar.
   "пошлый=vulgar":
@@ -14098,6 +14102,7 @@ words:
         en_gb: He told a vulgar joke.
       - ru: Мне не нра́вится э́та по́шлая му́зыка.
         en_gb: I don't like this vulgar music.
+        inflect: { token: 5, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: по́шлый
       f: по́шлая
@@ -14170,6 +14175,7 @@ words:
         en_gb: You gave the correct answer.
       - ru: Э́то пра́вильная доро́га.
         en_gb: This is the correct road.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы при́няли пра́вильные реше́ния.
         en_gb: We made the correct decisions.
   "православный=Orthodox":
@@ -14188,6 +14194,7 @@ words:
     usage:
       - ru: Мы бы́ли в правосла́вной це́ркви.
         en_gb: We were in an Orthodox church.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то правосла́вный пра́здник.
         en_gb: This is an Orthodox holiday.
     declension:
@@ -14259,6 +14266,7 @@ words:
         en_gb: Raise your right finger.
       - ru: У него́ боли́т пра́вая нога́.
         en_gb: His right leg hurts.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Поверни́ на пра́вой стороне́.
         en_gb: Turn on the right side.
   "прежний=former":
@@ -14302,6 +14310,7 @@ words:
         en_gb: This is our former director.
       - ru: Верни́сь к пре́жней жи́зни.
         en_gb: Return to your former life.
+        inflect: { token: 3, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Я встре́тил пре́жних друзе́й.
         en_gb: I met former friends.
   "прекрасный=beautiful":
@@ -14345,6 +14354,7 @@ words:
         en_gb: Today is a beautiful day.
       - ru: Мы уви́дели прекра́сную карти́ну.
         en_gb: We saw a beautiful painting.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В саду́ цвету́т прекра́сные цветы́.
         en_gb: Beautiful flowers bloom in the garden.
   "привычный=habitual":
@@ -14391,6 +14401,7 @@ words:
         en_gb: This is his habitual route.
       - ru: У неё привы́чная улы́бка.
         en_gb: She has a habitual smile.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы де́лаем привы́чные дела́.
         en_gb: We do our habitual tasks.
   "приёмный=reception":
@@ -14435,6 +14446,7 @@ words:
     usage:
       - ru: Зайди́те в приёмный кабине́т.
         en_gb: Go into the reception room.
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Сейча́с приёмная за́ла полна́.
         en_gb: The reception hall is full now.
       - ru: Сего́дня приёмные часы́ ко́роткие.
@@ -14483,6 +14495,7 @@ words:
         en_gb: He wore a decent suit.
       - ru: Они́ живу́т в прили́чной кварти́ре.
         en_gb: They live in a decent flat.
+        inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас прили́чные результа́ты.
         en_gb: We have decent results.
   "принятый=accepted":
@@ -14528,6 +14541,7 @@ words:
         en_gb: This is a generally accepted procedure.
       - ru: Така́я при́нятая фо́рма обще́ния.
         en_gb: Such is the accepted form of communication.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы соблюда́ем при́нятые пра́вила.
         en_gb: We follow the accepted rules.
   "приятный=pleasant":
@@ -14575,6 +14589,7 @@ words:
         en_gb: He has a pleasant voice.
       - ru: Э́то была́ прия́тная неожи́данность.
         en_gb: It was a pleasant surprise.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы провели́ прия́тный ве́чер.
         en_gb: We spent a pleasant evening.
   "прозрачный=transparent":
@@ -14618,6 +14633,7 @@ words:
         en_gb: The water has a transparent colour.
       - ru: В руке́ прозра́чная буты́лка.
         en_gb: There is a transparent bottle in the hand.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: На о́кнах прозра́чные занаве́ски.
         en_gb: There are transparent curtains on the windows.
   "проклятый=damned":
@@ -14663,6 +14679,7 @@ words:
         en_gb: This damned rain never ends.
       - ru: Прокля́тая две́рь сно́ва закры́та.
         en_gb: The damned door is closed again.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Прокля́тые комары́ меша́ют спать.
         en_gb: The damned mosquitoes stop me sleeping.
   "простой=simple":
@@ -14681,6 +14698,7 @@ words:
         en_gb: This is a very simple question.
       - ru: У зада́чи просто́е реше́ние.
         en_gb: The task has a simple solution.
+        inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Они́ живу́т просто́й жи́знью.
         en_gb: They live a simple life.
     forms:
@@ -14753,6 +14771,7 @@ words:
     usage:
       - ru: Они́ пошли́ в противополо́жную сто́рону.
         en_gb: They went in the opposite direction.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас противополо́жное мне́ние.
         en_gb: We have the opposite opinion.
       - ru: Дом стои́т на противополо́жном берегу́.
@@ -14800,6 +14819,7 @@ words:
         en_gb: He is a professional musician.
       - ru: Нам нужна́ профессиона́льная по́мощь.
         en_gb: We need professional help.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У них профессиона́льные на́выки.
         en_gb: They have professional skills.
   "прочий=other":
@@ -14813,6 +14833,7 @@ words:
     usage:
       - ru: Возьми́ кни́ги, тетра́ди и про́чие ве́щи.
         en_gb: Take books, notebooks and other things.
+        inflect: { token: 5, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Всё про́чее мы обсу́дим по́зже.
         en_gb: We will discuss everything else later.
     forms:
@@ -14887,6 +14908,7 @@ words:
     usage:
       - ru: Э́то бы́ло в про́шлый раз.
         en_gb: It happened last time.
+        inflect: { token: 4, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: На про́шлой неде́ле шёл дождь.
         en_gb: Last week it rained.
       - ru: Мы вспомина́ем про́шлые го́ды.
@@ -14906,6 +14928,7 @@ words:
         en_gb: Draw a straight segment.
       - ru: У неё прямы́е во́лосы.
         en_gb: She has straight hair.
+        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́то прямо́й путь к до́му.
         en_gb: This is a straight way to the house.
     forms:
@@ -14981,6 +15004,7 @@ words:
         en_gb: He needs mental rest.
       - ru: У него́ психи́ческая уста́лость.
         en_gb: He has mental fatigue.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Врач изуча́ет психи́ческие проце́ссы.
         en_gb: The doctor studies mental processes.
   "пустой=empty":
@@ -14995,6 +15019,7 @@ words:
     usage:
       - ru: Буты́лка совсе́м пуста́я.
         en_gb: The bottle is completely empty.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В ко́мнате стои́т пусто́й шкаф.
         en_gb: There is an empty wardrobe in the room.
       - ru: Мы е́хали по пусты́м у́лицам.
@@ -15072,6 +15097,7 @@ words:
         en_gb: A drunk man sat on the bench.
       - ru: Пья́ная компа́ния шуме́ла во дворе́.
         en_gb: A drunk company made noise in the yard.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Пья́ные го́сти разошли́сь по́здно.
         en_gb: The drunk guests left late.
   "равный=equal":
@@ -15085,6 +15111,7 @@ words:
     usage:
       - ru: Раздели́ я́блоко на ра́вные ча́сти.
         en_gb: Divide the apple into equal parts.
+        inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: У нас ра́вный счёт.
         en_gb: We have an equal score.
       - ru: Им предоста́вили ра́вные права́.
@@ -15163,6 +15190,7 @@ words:
         en_gb: It was a joyful day.
       - ru: У неё ра́достная улы́бка.
         en_gb: She has a joyful smile.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали ра́достные но́вости.
         en_gb: We heard joyful news.
   "разбитый=broken":
@@ -15208,6 +15236,7 @@ words:
         en_gb: A broken glass lies on the floor.
       - ru: У маши́ны разби́тая фа́ра.
         en_gb: The car has a broken headlight.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы убра́ли разби́тые таре́лки.
         en_gb: We cleared away the broken plates.
   "различный=various":
@@ -15254,6 +15283,7 @@ words:
         en_gb: There is a various approach to the task.
       - ru: У них разли́чная то́чка зре́ния.
         en_gb: They have a various point of view.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Магази́н продаёт разли́чные това́ры.
         en_gb: The shop sells various goods.
   "разноцветный=multicoloured":
@@ -15270,6 +15300,7 @@ words:
         en_gb: There is a multicoloured pattern on the wall.
       - ru: Де́ти наряди́ли разноцве́тную ёлку.
         en_gb: The children decorated a multicoloured tree.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В не́бе горя́т разноцве́тные огни́.
         en_gb: Multicoloured lights glow in the sky.
     forms:
@@ -15346,6 +15377,7 @@ words:
         en_gb: We have different taste.
       - ru: Они́ говоря́т на ра́зных языка́х.
         en_gb: They speak different languages.
+        inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
       - ru: В ко́мнате ра́зная ме́бель.
         en_gb: There is different furniture in the room.
   "разумный=reasonable":
@@ -15393,6 +15425,7 @@ words:
         en_gb: He gave reasonable advice.
       - ru: Э́то разу́мная цена́.
         en_gb: This is a reasonable price.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы при́няли разу́мные ме́ры.
         en_gb: We took reasonable measures.
   "раненый=wounded":
@@ -15438,6 +15471,7 @@ words:
         en_gb: The wounded soldier lay in the ward.
       - ru: Ра́неную пти́цу принесли́ домо́й.
         en_gb: The wounded bird was brought home.
+        inflect: { token: 1, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Ра́неных бы́стро отвезли́ в больни́цу.
         en_gb: The wounded were quickly taken to hospital.
   "ранний=early":
@@ -15481,6 +15515,7 @@ words:
         en_gb: I woke up early in the morning.
       - ru: Ра́нняя весна́ была́ тёплой.
         en_gb: The early spring was warm.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим ра́нние я́годы.
         en_gb: We love early berries.
   "реальный=real":
@@ -15524,6 +15559,7 @@ words:
         en_gb: This is a real case.
       - ru: У нас реа́льная возмо́жность.
         en_gb: We have a real opportunity.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Расскажи́ о реа́льных собы́тиях.
         en_gb: Tell about the real events.
   "редкий=rare":
@@ -15568,6 +15604,7 @@ words:
         en_gb: This is a very rare animal.
       - ru: У него́ ре́дкая профе́ссия.
         en_gb: He has a rare profession.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы нашли́ ре́дкие моне́ты.
         en_gb: We found rare coins.
   "резкий=sharp":
@@ -15612,6 +15649,7 @@ words:
         en_gb: A sharp wind blew.
       - ru: Произошла́ ре́зкая переме́на.
         en_gb: A sharp change occurred.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он сде́лал ре́зкое движе́ние.
         en_gb: He made a sharp movement.
   "ровный=even":
@@ -15628,6 +15666,7 @@ words:
     usage:
       - ru: Доро́га здесь ро́вная и гла́дкая.
         en_gb: The road here is even and smooth.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У него́ ро́вный по́черк.
         en_gb: He has even handwriting.
       - ru: Положи́ кни́ги ро́вными ряда́ми.
@@ -15706,6 +15745,7 @@ words:
         en_gb: This is my native town.
       - ru: Ру́сский — её родна́я речь.
         en_gb: Russian is her native speech.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы верну́лись в родны́е места́.
         en_gb: We returned to our native places.
   "розовый=pink":
