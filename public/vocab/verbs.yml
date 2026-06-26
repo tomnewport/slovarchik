@@ -6231,6 +6231,9 @@ words:
     collections:
       - holiday
     usage:
+      - ru: Ле́том я загора́ю на пля́же.
+        en_gb: In summer I sunbathe on the beach.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Ле́том она́ лю́бит загора́ть на пля́же.
         en_gb: In summer she likes to sunbathe on the beach.
       - ru: Не загора́й сли́шком до́лго.
@@ -24419,6 +24422,7 @@ words:
     usage:
       - ru: Он расстегну́л пу́говицы на руба́шке.
         en_gb: He unbuttoned the buttons on his shirt.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Расстегни́ пальто́, здесь тепло́.
         en_gb: Undo your coat, it's warm here.
       - ru: Она́ расстегну́ла молни́ю на ку́ртке.
@@ -24452,6 +24456,7 @@ words:
     usage:
       - ru: Солда́т расстреля́ли пле́нных.
         en_gb: The soldiers shot the prisoners.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Их расстреля́ли на рассве́те.
         en_gb: They were shot at dawn.
       - ru: Враг угрожа́л расстреля́ть жи́телей.
@@ -24472,6 +24477,7 @@ words:
     usage:
       - ru: Она́ расстро́илась и́з-за плохо́й оце́нки.
         en_gb: She got upset because of the bad grade.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Не расстра́ивайся, всё бу́дет хорошо́.
         en_gb: Don't get upset, everything will be fine.
     conjugation:
@@ -24512,6 +24518,7 @@ words:
         en_gb: He likes to reason about politics.
       - ru: Мы рассужда́ем логи́чно.
         en_gb: We reason logically.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Она́ рассужда́ла споко́йно.
         en_gb: She reasoned calmly.
       - ru: За́втра мы бу́дем рассужда́ть об э́том вме́сте.
@@ -24542,6 +24549,7 @@ words:
     usage:
       - ru: Я рассчи́тываю на твою́ по́мощь.
         en_gb: I am counting on your help.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он рассчи́тывал на уда́чу.
         en_gb: He was counting on luck.
       - ru: Мы рассчи́тываем на побе́ду.
@@ -24574,6 +24582,7 @@ words:
     usage:
       - ru: Она́ растеря́лась от неожи́данности.
         en_gb: She was at a loss from the surprise.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Не растеря́йся на экза́мене.
         en_gb: Don't get flustered at the exam.
       - ru: Я растеря́юсь от тако́го вопро́са.
@@ -24595,6 +24604,7 @@ words:
     usage:
       - ru: В саду́ растёт высо́кая я́блоня.
         en_gb: A tall apple tree grows in the garden.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Де́ти бы́стро расту́т.
         en_gb: Children grow quickly.
       - ru: Цветы́ росли́ у доро́ги.
@@ -24641,6 +24651,7 @@ words:
         en_gb: Don't tear the paper!
       - ru: Ве́тер рвёт ли́стья с дере́вьев.
         en_gb: The wind tears the leaves from the trees.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Она́ рвала́ ста́рые письма́.
         en_gb: She was tearing up the old letters.
       - ru: За́втра я бу́ду рвать ста́рые газе́ты.
@@ -24671,6 +24682,7 @@ words:
     usage:
       - ru: Соба́ка рвётся с поводка́.
         en_gb: The dog is straining at the lead.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Он рва́лся в бой.
         en_gb: He was eager to fight.
       - ru: Ни́тки легко́ рву́тся.
@@ -24693,6 +24705,7 @@ words:
     usage:
       - ru: Она́ ре́жет хлеб ножо́м.
         en_gb: She is cutting the bread with a knife.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я ре́жу о́вощи для сала́та.
         en_gb: I am cutting vegetables for the salad.
       - ru: Он ре́зал бума́гу но́жницами.
@@ -24727,6 +24740,7 @@ words:
     usage:
       - ru: Мы реша́ем, куда́ пойти́.
         en_gb: We are deciding where to go.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Я реша́ю зада́чу по матема́тике.
         en_gb: I am solving a maths problem.
       - ru: Он реша́л, что де́лать да́льше.
@@ -24771,6 +24785,7 @@ words:
     usage:
       - ru: Я не реша́юсь спроси́ть.
         en_gb: I cannot bring myself to ask.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Он до́лго реша́лся на э́тот шаг.
         en_gb: He took a long time to decide on this step.
       - ru: Судьба́ реша́ется сего́дня.
@@ -24793,6 +24808,7 @@ words:
     usage:
       - ru: Он реши́л уе́хать за грани́цу.
         en_gb: He decided to go abroad.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я решу́ э́ту зада́чу сам.
         en_gb: I will solve this problem myself.
       - ru: Мы реши́ли оста́ться до́ма.
@@ -24837,6 +24853,7 @@ words:
     usage:
       - ru: Она́ реши́лась перее́хать в столи́цу.
         en_gb: She made up her mind to move to the capital.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я наконе́ц решу́сь поговори́ть с ним.
         en_gb: I will finally make up my mind to speak with him.
       - ru: Он не реши́лся призна́ться.
@@ -24869,6 +24886,7 @@ words:
     usage:
       - ru: Я не рискую́ свои́ми деньга́ми.
         en_gb: I do not risk my money.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Он рискова́л жи́знью ра́ди друзе́й.
         en_gb: He risked his life for his friends.
       - ru: Они́ рискую́т потеря́ть всё.
@@ -24891,6 +24909,7 @@ words:
     usage:
       - ru: Ребёнок рису́ет дом и де́рево.
         en_gb: The child is drawing a house and a tree.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я рису́ю портре́т ма́мы.
         en_gb: I am drawing a portrait of my mum.
       - ru: Она́ рисова́ла пейза́ж кра́сками.
@@ -24935,6 +24954,7 @@ words:
     usage:
       - ru: Она́ родила́ здоро́вого ма́льчика.
         en_gb: She gave birth to a healthy boy.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Жена́ ско́ро роди́т.
         en_gb: My wife will give birth soon.
       - ru: Ко́шка родила́ котя́т.
@@ -24968,6 +24988,7 @@ words:
     usage:
       - ru: Я роди́лся в Москве́.
         en_gb: I was born in Moscow.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: У них роди́лась до́чка.
         en_gb: A daughter was born to them.
       - ru: Ско́ро роди́тся мла́денец.
@@ -25000,6 +25021,7 @@ words:
     usage:
       - ru: Они́ ча́сто руга́ются и́з-за пустяко́в.
         en_gb: They often quarrel over trifles.
+        inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не руга́йся при де́тях.
         en_gb: Don't swear in front of the children.
       - ru: Сосе́ди руга́лись всю ночь.
@@ -25032,6 +25054,7 @@ words:
     usage:
       - ru: Ста́рый мост ру́хнул.
         en_gb: The old bridge collapsed.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Зда́ние мо́жет ру́хнуть.
         en_gb: The building may collapse.
       - ru: Все его́ пла́ны ру́хнули.
@@ -25053,6 +25076,7 @@ words:
     usage:
       - ru: Он всегда́ сади́тся у окна́.
         en_gb: He always sits down by the window.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Сади́сь, пожа́луйста.
         en_gb: Please sit down.
       - ru: Мы сади́мся за стол.
@@ -25086,6 +25110,7 @@ words:
     usage:
       - ru: Весно́й мы сажа́ем о́вощи.
         en_gb: In spring we plant vegetables.
+        inflect: { token: 3, tense: present, person: 1pl, rule: verb-present }
       - ru: Я сажа́ю цветы́ в саду́.
         en_gb: I am planting flowers in the garden.
       - ru: Он сажа́л дере́вья ка́ждый год.
@@ -25130,6 +25155,7 @@ words:
     usage:
       - ru: Соба́ка сбежа́ла из до́ма.
         en_gb: The dog ran away from home.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я сбегу́ с уро́ка.
         en_gb: I will run away from the lesson.
       - ru: Пле́нные сбежа́ли но́чью.
@@ -25162,6 +25188,7 @@ words:
     usage:
       - ru: Маши́на сби́ла пешехо́да.
         en_gb: The car knocked down a pedestrian.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ве́тер собьёт я́блоки.
         en_gb: The wind will knock down the apples.
       - ru: Они́ сби́ли вра́жеский самолёт.
@@ -25194,6 +25221,7 @@ words:
     usage:
       - ru: Он сбро́сил пальто́ на стул.
         en_gb: He threw off his coat onto the chair.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я сбро́шу ли́шний вес.
         en_gb: I will lose the extra weight.
       - ru: Самолёт сбро́сил груз.
@@ -25216,6 +25244,7 @@ words:
         en_gb: Please make me some coffee.
       - ru: Она́ свари́ла суп на обе́д.
         en_gb: She cooked soup for lunch.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
     conjugation:
       future:
         "1sg": сварю́
@@ -25254,6 +25283,7 @@ words:
         en_gb: Turn right at the shop.
       - ru: Я сверну́ ковёр.
         en_gb: I will roll up the carpet.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Маши́на сверну́ла за́ угол.
         en_gb: The car turned around the corner.
       - ru: У моста́ мы ско́ро свернём напра́во.
@@ -25284,6 +25314,7 @@ words:
     usage:
       - ru: Звёзды све́тятся в не́бе.
         en_gb: The stars are glowing in the sky.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Окно́ свети́лось в темноте́.
         en_gb: The window glowed in the dark.
       - ru: Её лицо́ свети́тся от сча́стья.
@@ -25304,6 +25335,7 @@ words:
     usage:
       - ru: За́втра студе́нты сдаю́т экза́мен.
         en_gb: Tomorrow the students take an exam.
+        inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Я сдаю́ э́ту кварти́ру друзья́м.
         en_gb: I rent this flat to friends.
     conjugation:
@@ -25343,6 +25375,7 @@ words:
     usage:
       - ru: Я сдам экза́мен в ию́не.
         en_gb: I will pass the exam in June.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он сдал докуме́нты вчера́.
         en_gb: He handed in the documents yesterday.
       - ru: Они́ сдаду́т кварти́ру в аре́нду.
@@ -25365,6 +25398,7 @@ words:
     usage:
       - ru: Я сде́лал до́машнее зада́ние.
         en_gb: I did my homework.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я сде́лаю э́то за́втра.
         en_gb: I will do this tomorrow.
       - ru: Она́ сде́лала вку́сный торт.
@@ -25409,6 +25443,7 @@ words:
     usage:
       - ru: Ему́ сде́лалось пло́хо.
         en_gb: He became unwell.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: На у́лице сде́лалось темно́.
         en_gb: It became dark outside.
       - ru: Она́ вдруг сде́лалась гру́стной.
@@ -25430,6 +25465,7 @@ words:
     usage:
       - ru: Она́ се́ла на скаме́йку.
         en_gb: She sat down on the bench.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я ся́ду у окна́.
         en_gb: I will sit down by the window.
       - ru: Де́ти се́ли за стол.
@@ -25474,6 +25510,7 @@ words:
     usage:
       - ru: Они́ сожгли́ ста́рые пи́сьма.
         en_gb: They burnt the old letters.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я сожгу́ э́ти бума́ги за́втра.
         en_gb: I will burn these papers tomorrow.
       - ru: Ого́нь сжёг весь лес.
@@ -25506,6 +25543,7 @@ words:
     usage:
       - ru: Я сижу́ на дива́не.
         en_gb: I am sitting on the sofa.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ко́шка сиди́т на окне́.
         en_gb: The cat is sitting on the window.
       - ru: Мы сиде́ли в саду́ ве́чером.
@@ -25538,6 +25576,7 @@ words:
     usage:
       - ru: Со́лнце я́рко сия́ет.
         en_gb: The sun is shining brightly.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Звёзды сия́ли над на́ми.
         en_gb: The stars were shining above us.
       - ru: Её глаза́ сия́ют от ра́дости.
@@ -25558,6 +25597,7 @@ words:
     usage:
       - ru: Он сказа́л пра́вду.
         en_gb: He said the truth.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я скажу́ тебе́ оди́н секре́т.
         en_gb: I will tell you one secret.
       - ru: Что ты ска́жешь учи́телю?
@@ -25590,6 +25630,7 @@ words:
     usage:
       - ru: Я скача́ю э́ту пе́сню на телефо́н.
         en_gb: I'll download this song to my phone.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Скача́й приложе́ние из интерне́та.
         en_gb: Download the app from the internet.
     conjugation:
@@ -25618,6 +25659,7 @@ words:
         en_gb: Copy the file onto a USB stick.
       - ru: Он скопи́ровал докуме́нт два́жды.
         en_gb: He copied the document twice.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
     conjugation:
       future:
         "1sg": скопи́рую
@@ -25654,6 +25696,7 @@ words:
     usage:
       - ru: Она́ скрыва́ет свои́ чу́вства.
         en_gb: She hides her feelings.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я ничего́ не скрыва́ю от друзе́й.
         en_gb: I hide nothing from my friends.
       - ru: Тума́н скрыва́л го́ры.
@@ -25686,6 +25729,7 @@ words:
     usage:
       - ru: Вор скры́лся в темноте́.
         en_gb: The thief disappeared into the darkness.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Со́лнце скро́ется за ту́чей.
         en_gb: The sun will hide behind a cloud.
       - ru: Они́ скры́лись от дождя́ под де́ревом.
@@ -25718,6 +25762,7 @@ words:
     usage:
       - ru: Я шлю́ тебе́ приве́т.
         en_gb: I send you my greetings.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ шлёт пи́сьма ка́ждую неде́лю.
         en_gb: She sends letters every week.
       - ru: Мы сла́ли им откры́тки из го́рода.
@@ -25750,6 +25795,7 @@ words:
     usage:
       - ru: Я слежу́ за детьми́ в па́рке.
         en_gb: I keep an eye on the children in the park.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Соба́ка следи́т за ко́шкой.
         en_gb: The dog is watching the cat.
       - ru: Они́ следи́ли за пого́дой.
@@ -25782,6 +25828,7 @@ words:
     usage:
       - ru: Я сле́дую за гру́ппой.
         en_gb: I follow the group.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он всегда́ сле́дует пра́вилам.
         en_gb: He always follows the rules.
       - ru: Мы сле́довали сове́ту врача́.
@@ -25814,6 +25861,7 @@ words:
     usage:
       - ru: Я сложу́ оде́жду в шкаф.
         en_gb: I will fold the clothes into the wardrobe.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ сложи́ла письмо́ попола́м.
         en_gb: She folded the letter in half.
       - ru: Сло́жите э́ти чи́сла вме́сте.
@@ -25846,6 +25894,7 @@ words:
     usage:
       - ru: Так сложи́лась его́ судьба́.
         en_gb: That is how his fate took shape.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ситуа́ция сло́жится в на́шу по́льзу.
         en_gb: The situation will work out in our favour.
       - ru: Мы сложи́лись на пода́рок.
@@ -25878,6 +25927,7 @@ words:
     usage:
       - ru: Я случа́йно слома́л стул.
         en_gb: I accidentally broke the chair.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Ты слома́ешь игру́шку.
         en_gb: You will break the toy.
       - ru: Они́ слома́ли ста́рую огра́ду.
@@ -25911,6 +25961,7 @@ words:
     usage:
       - ru: Он слу́жит в а́рмии.
         en_gb: He serves in the army.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я служу́ в ма́ленькой фи́рме.
         en_gb: I work at a small firm.
       - ru: Они́ служи́ли вме́сте мно́го лет.
@@ -25943,6 +25994,7 @@ words:
     usage:
       - ru: Тако́е случа́ется ре́дко.
         en_gb: That happens rarely.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Со мной случа́ются стра́нные ве́щи.
         en_gb: Strange things happen to me.
       - ru: Несча́стья случа́лись и ра́ньше.
@@ -25975,6 +26027,7 @@ words:
     usage:
       - ru: Что случи́лось с тобо́й?
         en_gb: What happened to you?
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Наде́юсь, ничего́ не случи́тся.
         en_gb: I hope nothing will happen.
       - ru: Беда́ случи́лась внеза́пно.
@@ -25997,6 +26050,7 @@ words:
     usage:
       - ru: Мы слу́шаем му́зыку.
         en_gb: We are listening to music.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Я слу́шаю ра́дио по утра́м.
         en_gb: I listen to the radio in the mornings.
       - ru: Де́ти внима́тельно слу́шали учи́теля.
@@ -26041,6 +26095,7 @@ words:
     usage:
       - ru: Ты слыха́л э́ту но́вость?
         en_gb: Have you heard this news?
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я не слыха́л о таки́х веща́х.
         en_gb: I have not heard of such things.
       - ru: Лю́ди слыха́ли стра́нные слу́хи.
@@ -26073,6 +26128,7 @@ words:
     usage:
       - ru: Я слы́шу твой го́лос.
         en_gb: I hear your voice.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты слы́шишь э́тот шум?
         en_gb: Do you hear this noise?
       - ru: Мы слы́шали гро́мкую му́зыку.
@@ -26108,6 +26164,7 @@ words:
     usage:
       - ru: Издалека́ слы́шится пе́сня.
         en_gb: A song can be heard from afar.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: В его́ слова́х слы́шалась грусть.
         en_gb: Sadness could be heard in his words.
       - ru: Из ле́са слы́шались голоса́.
@@ -26140,6 +26197,7 @@ words:
     usage:
       - ru: Я сменю́ ста́рые ши́ны.
         en_gb: I will replace the old tyres.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ смени́ла рабо́ту в про́шлом году́.
         en_gb: She changed jobs last year.
       - ru: Но́чью охра́нники сменя́т друг дру́га.
@@ -26172,6 +26230,7 @@ words:
     usage:
       - ru: Я не сме́ю с ним спо́рить.
         en_gb: I dare not argue with him.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Как ты сме́ешь так говори́ть?
         en_gb: How dare you speak like that?
       - ru: Никто́ не смел возража́ть.
@@ -26192,6 +26251,7 @@ words:
     usage:
       - ru: Все гро́мко смея́лись над шу́ткой.
         en_gb: Everyone laughed loudly at the joke.
+        inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Я смею́сь над его́ шу́ткой.
         en_gb: I am laughing at his joke.
       - ru: Почему́ ты смеёшься?
@@ -26228,6 +26288,7 @@ words:
     usage:
       - ru: Ве́чером мы смо́трим фильм.
         en_gb: In the evening we watch a film.
+        inflect: { token: 3, tense: present, person: 1pl, rule: verb-present }
       - ru: Я смотрю́ на ка́рту.
         en_gb: I am looking at the map.
       - ru: Она́ смо́трит в окно́.
@@ -26272,6 +26333,7 @@ words:
     usage:
       - ru: Я смогу́ помо́чь за́втра.
         en_gb: I will be able to help tomorrow.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты смо́жешь прийти́ во́время?
         en_gb: Will you be able to come on time?
       - ru: Они́ не смогли́ откры́ть дверь.
@@ -26292,6 +26354,7 @@ words:
     usage:
       - ru: Магази́н сни́зил це́ны на оде́жду.
         en_gb: The shop reduced the prices on clothes.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ну́жно сни́зить ско́рость на поворо́те.
         en_gb: You need to reduce speed on the bend.
     conjugation:
@@ -26331,6 +26394,7 @@ words:
     usage:
       - ru: Я снима́ю пальто́ в прихо́жей.
         en_gb: I take off my coat in the hallway.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он снима́ет фильм о приро́де.
         en_gb: He is filming a documentary about nature.
       - ru: Они́ снима́ли кварти́ру в це́нтре.
@@ -26364,6 +26428,7 @@ words:
     usage:
       - ru: Я сниму́ ту́фли у две́ри.
         en_gb: I will take off my shoes by the door.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ сняла́ ша́пку в ко́мнате.
         en_gb: She took off her hat in the room.
       - ru: Они́ сня́ли дом на ле́то.
@@ -26388,6 +26453,7 @@ words:
     usage:
       - ru: Он собира́ет ста́рые ма́рки.
         en_gb: He collects old stamps.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Мы собира́ем грибы́ в лесу́.
         en_gb: We are collecting mushrooms in the forest.
       - ru: Де́ти собира́ли цветы́ на лугу́.
@@ -26432,6 +26498,7 @@ words:
     usage:
       - ru: Я собира́юсь в о́тпуск.
         en_gb: I am getting ready for a holiday.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Госте́й собира́ется всё бо́льше.
         en_gb: More and more guests are gathering.
       - ru: Они́ собира́лись уе́хать ра́но.
@@ -26464,6 +26531,7 @@ words:
     usage:
       - ru: Я соберу́ все докуме́нты.
         en_gb: I will collect all the documents.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ собрала́ ве́щи в доро́гу.
         en_gb: She packed her things for the trip.
       - ru: Мы соберём кома́нду к ма́ю.
@@ -26496,6 +26564,7 @@ words:
     usage:
       - ru: Лю́ди собрали́сь на пло́щади.
         en_gb: People gathered in the square.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я соберу́сь с мы́слями.
         en_gb: I will collect my thoughts.
       - ru: Семья́ соберётся на у́жин.
@@ -26528,6 +26597,7 @@ words:
     usage:
       - ru: Он соверша́ет оши́бку.
         en_gb: He is making a mistake.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Мы соверша́ем до́лгую прогу́лку.
         en_gb: We are taking a long walk.
       - ru: Они́ соверша́ли сме́лые посту́пки.
@@ -26560,6 +26630,7 @@ words:
     usage:
       - ru: Я не соверши́л ничего́ плохо́го.
         en_gb: I did nothing bad.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ соверша́т большо́е путеше́ствие.
         en_gb: They will make a great journey.
       - ru: Она́ соверши́ла настоя́щий по́двиг.
@@ -26592,6 +26663,7 @@ words:
     usage:
       - ru: Я сове́тую тебе́ отдохну́ть.
         en_gb: I advise you to rest.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Врач сове́тует мно́го пить.
         en_gb: The doctor advises drinking a lot.
       - ru: Друзья́ сове́товали мне согласи́ться.
@@ -26612,6 +26684,7 @@ words:
     usage:
       - ru: Он согласи́лся помо́чь нам.
         en_gb: He agreed to help us.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я соглашу́сь на твои́ усло́вия.
         en_gb: I will agree to your conditions.
       - ru: Они́ согласи́лись подожда́ть.
@@ -26644,6 +26717,7 @@ words:
     usage:
       - ru: Она́ всегда́ соглаша́ется с ним.
         en_gb: She always agrees with him.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Я не соглаша́юсь с тобо́й.
         en_gb: I do not agree with you.
       - ru: Лю́ди ре́дко соглаша́лись с ним.
@@ -26688,6 +26762,7 @@ words:
     usage:
       - ru: Кни́га соде́ржит мно́го фа́ктов.
         en_gb: The book contains many facts.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я содержу́ большу́ю семью́.
         en_gb: I support a large family.
       - ru: Э́ти проду́кты содержа́ли вита́мины.
@@ -26720,6 +26795,7 @@ words:
     usage:
       - ru: Мост соедини́т два бе́рега.
         en_gb: The bridge will join the two banks.
+        inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Я соединю́ э́ти два прово́да.
         en_gb: I will connect these two wires.
       - ru: Доро́га соедини́ла дере́вни.
@@ -26752,6 +26828,7 @@ words:
     usage:
       - ru: Худо́жник создаёт карти́ну.
         en_gb: The artist is creating a painting.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я создаю́ но́вый прое́кт.
         en_gb: I am creating a new project.
       - ru: Они́ создава́ли му́зыку вме́сте.
@@ -26784,6 +26861,7 @@ words:
     usage:
       - ru: Я созда́м удо́бную програ́мму.
         en_gb: I will create a convenient program.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ созда́ли но́вую компа́нию.
         en_gb: They created a new company.
       - ru: Учёный созда́ст но́вый прибо́р.
@@ -26817,6 +26895,7 @@ words:
     usage:
       - ru: Я сойду́ на сле́дующей остано́вке.
         en_gb: I will get off at the next stop.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он сошёл с по́езда в по́лночь.
         en_gb: He got off the train at midnight.
       - ru: Пассажи́ры сошли́ на бе́рег.
@@ -26849,6 +26928,7 @@ words:
     usage:
       - ru: Я сомнева́юсь в его́ слова́х.
         en_gb: I doubt his words.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты напра́сно сомнева́ешься.
         en_gb: You doubt in vain.
       - ru: Мы не сомнева́лись в успе́хе.
@@ -26881,6 +26961,7 @@ words:
     usage:
       - ru: Я пло́хо сообража́ю у́тром.
         en_gb: I think poorly in the morning.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Он бы́стро сообража́ет.
         en_gb: He is quick on the uptake.
       - ru: Мы до́лго не сообража́ли, куда́ идти́.
@@ -26913,6 +26994,7 @@ words:
     usage:
       - ru: Я сра́зу сообрази́л, в чём де́ло.
         en_gb: I immediately figured out what was going on.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Ты бы́стро сообрази́шь отве́т.
         en_gb: You will quickly figure out the answer.
       - ru: Они́ сообрази́ли, как откры́ть замо́к.
@@ -26935,6 +27017,7 @@ words:
     usage:
       - ru: Газе́та сообща́ет о но́вых собы́тиях.
         en_gb: The newspaper reports on new events.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я сообща́ю вам ва́жную но́вость.
         en_gb: I am informing you of important news.
       - ru: Учителя́ сообща́ли роди́телям об оце́нках.
@@ -26967,6 +27050,7 @@ words:
     usage:
       - ru: Она́ сообщи́ла нам об э́том.
         en_gb: She informed us about this.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я сообщу́ тебе́ результа́т ве́чером.
         en_gb: I will inform you of the result in the evening.
       - ru: Дире́ктор сообщи́т о реше́нии за́втра.
@@ -27011,6 +27095,7 @@ words:
     usage:
       - ru: Отве́т соотве́тствует вопро́су.
         en_gb: The answer corresponds to the question.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Това́р не соотве́тствует описа́нию.
         en_gb: The goods do not match the description.
       - ru: Результа́ты соотве́тствовали ожида́ниям.
@@ -27043,6 +27128,7 @@ words:
     usage:
       - ru: Я сопровожда́ю госте́й по го́роду.
         en_gb: I accompany the guests around the city.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Му́зыка сопровожда́ет фильм.
         en_gb: Music accompanies the film.
       - ru: Охра́на сопровожда́ла мини́стра.
@@ -27075,6 +27161,7 @@ words:
     usage:
       - ru: Я сорву́ я́блоко с де́рева.
         en_gb: I will pluck an apple from the tree.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ве́тер сорва́л кры́шу.
         en_gb: The wind tore off the roof.
       - ru: Они́ сорва́ли на́ши пла́ны.
@@ -27107,6 +27194,7 @@ words:
     usage:
       - ru: Соба́ка сорвала́сь с цепи́.
         en_gb: The dog broke free of its chain.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я бою́сь, что я сорву́сь с обры́ва.
         en_gb: I am afraid I will fall off the cliff.
       - ru: Встре́ча сорва́лась и́з-за дождя́.
@@ -27139,6 +27227,7 @@ words:
     usage:
       - ru: Я соста́влю спи́сок поку́пок.
         en_gb: I will make a shopping list.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ соста́вила план уро́ка.
         en_gb: She drew up a lesson plan.
       - ru: Они́ соста́вят но́вый догово́р.
@@ -27171,6 +27260,7 @@ words:
     usage:
       - ru: Я составля́ю расписа́ние.
         en_gb: I am compiling a timetable.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Цена́ составля́ет сто рубле́й.
         en_gb: The price amounts to a hundred roubles.
       - ru: Они́ составля́ли отчёт всю неде́лю.
@@ -27203,6 +27293,7 @@ words:
     usage:
       - ru: Кома́нда состои́т из пяти́ челове́к.
         en_gb: The team consists of five people.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я состою́ в клу́бе люби́телей кни́г.
         en_gb: I am a member of a book lovers' club.
       - ru: Зада́ча состоя́ла в одно́м.
@@ -27235,6 +27326,7 @@ words:
     usage:
       - ru: Конце́рт состои́тся в суббо́ту.
         en_gb: The concert will take place on Saturday.
+        inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Встре́ча состоя́лась во́время.
         en_gb: The meeting took place on time.
       - ru: Перегово́ры состоя́тся за́втра.
@@ -27267,6 +27359,7 @@ words:
     usage:
       - ru: Я сохраню́ э́то письмо́ навсегда́.
         en_gb: I will keep this letter forever.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ сохрани́ла фотогра́фии де́тства.
         en_gb: She kept the photographs of her childhood.
       - ru: Мы сохрани́м тра́диции пре́дков.
@@ -27299,6 +27392,7 @@ words:
     usage:
       - ru: Ста́рый дом хорошо́ сохрани́лся.
         en_gb: The old house has been well preserved.
+        inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
       - ru: Докуме́нты сохрани́лись в архи́ве.
         en_gb: The documents survived in the archive.
       - ru: Наде́юсь, тра́диция сохрани́тся.
@@ -27332,6 +27426,7 @@ words:
     usage:
       - ru: Пожа́рные спаса́ют люде́й.
         en_gb: Firefighters save people.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я спаса́ю кни́ги от воды́.
         en_gb: I am saving the books from the water.
       - ru: Врачи́ спаса́ли больно́го всю ночь.
@@ -27365,6 +27460,7 @@ words:
     usage:
       - ru: Я спасу́ котёнка с де́рева.
         en_gb: I will save the kitten from the tree.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он спас ребёнка из огня́.
         en_gb: He saved the child from the fire.
       - ru: Они́ спасли́ тону́щего челове́ка.
@@ -27386,6 +27482,7 @@ words:
     usage:
       - ru: Ребёнок спит в свое́й крова́ти.
         en_gb: The child is sleeping in his bed.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я сплю во́семь часо́в.
         en_gb: I sleep eight hours.
       - ru: Но́чью мы кре́пко спа́ли.
@@ -27430,6 +27527,7 @@ words:
     usage:
       - ru: Я спешу́ на рабо́ту.
         en_gb: I am hurrying to work.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Куда́ ты так спеши́шь?
         en_gb: Where are you hurrying to?
       - ru: Мы спеши́ли на по́езд.
@@ -27462,6 +27560,7 @@ words:
     usage:
       - ru: Я не спо́рю с роди́телями.
         en_gb: I do not argue with my parents.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ ча́сто спо́рят о поли́тике.
         en_gb: They often argue about politics.
       - ru: Мы до́лго спо́рили о фи́льме.
@@ -27494,6 +27593,7 @@ words:
     usage:
       - ru: Спорт спосо́бствует здоро́вью.
         en_gb: Sport contributes to health.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Хоро́шая пого́да спосо́бствовала о́тдыху.
         en_gb: The good weather was conducive to rest.
       - ru: Э́ти ме́ры спосо́бствуют разви́тию.
@@ -27526,6 +27626,7 @@ words:
     usage:
       - ru: Я спра́влюсь с э́той зада́чей.
         en_gb: I will cope with this task.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ спра́вилась с волне́нием.
         en_gb: She coped with her nervousness.
       - ru: Они́ спра́вятся без на́шей по́мощи.
@@ -27547,6 +27648,7 @@ words:
     usage:
       - ru: Он спра́шивает, где нахо́дится вокза́л.
         en_gb: He is asking where the station is.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я спра́шиваю доро́гу у прохо́жих.
         en_gb: I ask passers-by for directions.
       - ru: Де́ти ча́сто спра́шивали о приро́де.
@@ -27580,6 +27682,7 @@ words:
     usage:
       - ru: Она́ спроси́ла меня́ о пла́нах.
         en_gb: She asked me about my plans.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я спрошу́ учи́теля об уро́ке.
         en_gb: I will ask the teacher about the lesson.
       - ru: Спроси́ его́ о вре́мени.
@@ -27624,6 +27727,7 @@ words:
     usage:
       - ru: Я спря́чу пода́рок в шкаф.
         en_gb: I will hide the present in the wardrobe.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ спря́тала ключ под ковёр.
         en_gb: She hid the key under the rug.
       - ru: Де́ти спря́тали игру́шки.
@@ -27657,6 +27761,7 @@ words:
     usage:
       - ru: Я спуска́юсь по ле́стнице.
         en_gb: I am going down the stairs.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Со́лнце спуска́ется за́ горы.
         en_gb: The sun is descending behind the mountains.
       - ru: Тури́сты спуска́лись в доли́ну.
@@ -27690,6 +27795,7 @@ words:
     usage:
       - ru: Я спущу́сь в подва́л за ва́реньем.
         en_gb: I will go down to the cellar for jam.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ спусти́лась на пе́рвый эта́ж.
         en_gb: She went down to the ground floor.
       - ru: Тума́н спусти́тся к ве́черу.
@@ -27710,6 +27816,7 @@ words:
     usage:
       - ru: Они́ ча́сто ссо́рятся и́з-за де́нег.
         en_gb: They often quarrel over money.
+        inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не ссо́рься с бра́том.
         en_gb: Don't quarrel with your brother.
     conjugation:
@@ -27748,6 +27855,7 @@ words:
     usage:
       - ru: Я ста́влю ва́зу на стол.
         en_gb: I am placing the vase on the table.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ ста́вит кни́ги на по́лку.
         en_gb: She is putting the books on the shelf.
       - ru: Они́ ста́вили пала́тку у реки́.
@@ -27780,6 +27888,7 @@ words:
     usage:
       - ru: Дни стано́вятся длинне́е.
         en_gb: The days are becoming longer.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: На у́лице стано́вится темно́.
         en_gb: It is getting dark outside.
       - ru: Пого́да станови́лась ху́же.
@@ -27803,6 +27912,7 @@ words:
     usage:
       - ru: Она́ стара́ется хорошо́ учи́ться.
         en_gb: She tries hard to study well.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я стара́юсь говори́ть пра́вильно.
         en_gb: I try to speak correctly.
       - ru: Они́ стара́лись не шуме́ть.
@@ -27847,6 +27957,7 @@ words:
     usage:
       - ru: Я ста́ну врачо́м.
         en_gb: I will become a doctor.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ ста́ла изве́стной актри́сой.
         en_gb: She became a famous actress.
       - ru: Ско́ро ста́нет холодне́е.
@@ -27869,6 +27980,7 @@ words:
         en_gb: Erase the mistake and write again.
       - ru: Я случа́йно стёр ва́жный файл.
         en_gb: I accidentally erased an important file.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
     conjugation:
       future:
         "1sg": сотру́
@@ -27899,6 +28011,7 @@ words:
     usage:
       - ru: Ско́лько сто́ит э́та кни́га?
         en_gb: How much does this book cost?
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Биле́ты сто́ят недёшево.
         en_gb: The tickets cost a fair bit.
       - ru: Э́то пла́тье сто́ило мно́го де́нег.
@@ -27936,6 +28049,7 @@ words:
     usage:
       - ru: Он стои́т у окна́.
         en_gb: He is standing by the window.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я стою́ в о́череди.
         en_gb: I am standing in the queue.
       - ru: Маши́ны стоя́ли вдоль доро́ги.
@@ -27981,6 +28095,7 @@ words:
     usage:
       - ru: Я страда́ю от головно́й бо́ли.
         en_gb: I am suffering from a headache.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Расте́ния страда́ют без воды́.
         en_gb: The plants suffer without water.
       - ru: Он до́лго страда́л от боле́зни.
@@ -28003,6 +28118,7 @@ words:
         en_gb: The soldier did not want to shoot.
       - ru: Охо́тник стреля́ет в у́тку.
         en_gb: The hunter shoots at the duck.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Они́ стреля́ли по мише́ни.
         en_gb: They were shooting at the target.
       - ru: На уче́ниях солда́ты бу́дут стреля́ть по мише́ням.
@@ -28045,6 +28161,7 @@ words:
     usage:
       - ru: Я стремлю́сь к успе́ху.
         en_gb: I strive for success.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он стреми́тся ста́ть лу́чшим.
         en_gb: He strives to become the best.
       - ru: Они́ стреми́лись к свобо́де.
@@ -28067,6 +28184,7 @@ words:
     usage:
       - ru: Они́ стро́ят но́вый дом.
         en_gb: They are building a new house.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я стро́ю пла́ны на ле́то.
         en_gb: I am making plans for the summer.
       - ru: Рабо́чие стро́или мост два го́да.
@@ -28111,6 +28229,7 @@ words:
     usage:
       - ru: Кто́-то стучи́т в дверь.
         en_gb: Someone is knocking at the door.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я стучу́, но никто́ не отвеча́ет.
         en_gb: I am knocking, but no one answers.
       - ru: Дождь стуча́л по кры́ше.
@@ -28145,6 +28264,7 @@ words:
         en_gb: Don't judge people by their appearance.
       - ru: Он су́дит о́бо всём сли́шком стро́го.
         en_gb: He judges everything too strictly.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Они́ суди́ли уча́стников ко́нкурса.
         en_gb: They judged the competition participants.
       - ru: За́втра он бу́дет суди́ть фина́льный матч.
@@ -28173,6 +28293,7 @@ words:
     usage:
       - ru: Я суме́ю реши́ть э́ту зада́чу.
         en_gb: I will manage to solve this problem.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ суме́ла найти́ ве́рный отве́т.
         en_gb: She managed to find the right answer.
       - ru: Они́ суме́ют договори́ться ми́рно.
@@ -28205,6 +28326,7 @@ words:
     usage:
       - ru: Я су́ну ру́ки в карма́ны.
         en_gb: I will shove my hands into my pockets.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он су́нул запи́ску в карма́н.
         en_gb: He stuck the note into his pocket.
       - ru: Не су́нь па́льцы в ро́зетку.
@@ -28237,6 +28359,7 @@ words:
     usage:
       - ru: Тако́й го́род действи́тельно существу́ет.
         en_gb: Such a city really exists.
+        inflect: { token: 4, tense: present, person: 3sg, rule: verb-present }
       - ru: Э́ти прави́ла существу́ют давно́.
         en_gb: These rules have existed for a long time.
       - ru: Ра́ньше существова́л друго́й поря́док.
@@ -28269,6 +28392,7 @@ words:
     usage:
       - ru: Я схвачу́ соба́ку за поводо́к.
         en_gb: I will grab the dog by the lead.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он схвати́л меня́ за́ руку.
         en_gb: He seized me by the hand.
       - ru: Они́ схвати́ли во́ра на у́лице.
@@ -28295,6 +28419,7 @@ words:
         en_gb: The child is learning to count to ten.
       - ru: Я счита́ю до десяти́.
         en_gb: I count to ten.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Касси́р счита́л де́ньги.
         en_gb: The cashier was counting the money.
       - ru: За́втра я бу́ду счита́ть голоса́.
@@ -28337,6 +28462,7 @@ words:
     usage:
       - ru: Он счита́ется лу́чшим ученико́м.
         en_gb: He is considered the best pupil.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Э́тот го́род счита́ется краси́вым.
         en_gb: This city is considered beautiful.
       - ru: Ра́ньше э́то счита́лось но́рмой.
@@ -28371,6 +28497,7 @@ words:
     usage:
       - ru: Она́ сши́ла пла́тье к пра́зднику.
         en_gb: She sewed a dress for the celebration.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ма́стер сошьёт костю́м за неде́лю.
         en_gb: The tailor will sew the suit in a week.
       - ru: Я сошью́ што́ры из э́той тка́ни.
@@ -28403,6 +28530,7 @@ words:
     usage:
       - ru: Я съем весь суп.
         en_gb: I will eat up all the soup.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ребёнок съел ка́шу.
         en_gb: The child ate up the porridge.
       - ru: Они́ съедя́т то́рт за ве́чер.
@@ -28436,6 +28564,7 @@ words:
     usage:
       - ru: Я сыгра́ю на гита́ре.
         en_gb: I will play the guitar.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ сыгра́ли ва́жный матч.
         en_gb: They played an important match.
       - ru: Актри́са сыгра́ет гла́вную роль.
@@ -28458,6 +28587,7 @@ words:
     usage:
       - ru: Они́ танцу́ют на сва́дьбе.
         en_gb: They are dancing at the wedding.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я танцу́ю с подру́гой.
         en_gb: I am dancing with a friend.
       - ru: Она́ танцева́ла весь ве́чер.
@@ -28492,6 +28622,7 @@ words:
     usage:
       - ru: Он тащи́т тяжёлый чемода́н.
         en_gb: He is dragging a heavy suitcase.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я тащу́ су́мку по сне́гу.
         en_gb: I am dragging the bag through the snow.
       - ru: Они́ тащи́ли ло́дку к воде́.
@@ -28536,6 +28667,7 @@ words:
     usage:
       - ru: Я терплю́ боль молча́.
         en_gb: I endure the pain silently.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он не те́рпит лжи.
         en_gb: He cannot stand lies.
       - ru: Мы до́лго терпе́ли хо́лод.
@@ -28568,6 +28700,7 @@ words:
     usage:
       - ru: Я ча́сто теря́ю ключи́.
         en_gb: I often lose my keys.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты теря́ешь вре́мя зря.
         en_gb: You are wasting your time.
       - ru: Они́ теря́ли наде́жду ка́ждый день.
@@ -28600,6 +28733,7 @@ words:
     usage:
       - ru: Река́ течёт к мо́рю.
         en_gb: The river flows to the sea.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Слёзы текли́ по щека́м.
         en_gb: Tears were running down the cheeks.
       - ru: Ручьи́ теку́т весно́й.
@@ -28632,6 +28766,7 @@ words:
     usage:
       - ru: Я толкну́ дверь руко́й.
         en_gb: I will push the door with my hand.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он случа́йно толкну́л меня́.
         en_gb: He accidentally pushed me.
       - ru: Они́ толкну́ли маши́ну вперёд.
@@ -28664,6 +28799,7 @@ words:
     usage:
       - ru: Я тороплю́сь на встре́чу.
         en_gb: I am hurrying to a meeting.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Не торопи́сь, у нас есть вре́мя.
         en_gb: Do not hurry, we have time.
       - ru: Они́ торопи́лись на по́езд.
@@ -28696,6 +28832,7 @@ words:
     usage:
       - ru: Гвоздь торчи́т из доски́.
         en_gb: A nail is sticking out of the board.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Из карма́на торчи́т газе́та.
         en_gb: A newspaper is sticking out of the pocket.
       - ru: Мы це́лый день торча́ли до́ма.
@@ -28717,6 +28854,7 @@ words:
     usage:
       - ru: Он тра́тит мно́го де́нег на кни́ги.
         en_gb: He spends a lot of money on books.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я тра́чу мно́го вре́мени на доро́гу.
         en_gb: I spend a lot of time on the journey.
       - ru: Не тра́ть де́ньги на ерунду́.
@@ -28761,6 +28899,7 @@ words:
     usage:
       - ru: Я тре́бую объясне́ния.
         en_gb: I demand an explanation.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Рабо́та тре́бует терпе́ния.
         en_gb: The work requires patience.
       - ru: Они́ тре́бовали отве́та.
@@ -28793,6 +28932,7 @@ words:
     usage:
       - ru: Для э́того тре́буется вре́мя.
         en_gb: Time is required for this.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Нам тре́буется по́мощь.
         en_gb: We need help.
       - ru: Ра́ньше тре́бовался специа́льный про́пуск.
@@ -28813,6 +28953,7 @@ words:
     usage:
       - ru: Спортсме́ны трениру́ются ка́ждый день.
         en_gb: The athletes train every day.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я трениру́юсь в за́ле по утра́м.
         en_gb: I train at the gym in the mornings.
     conjugation:
@@ -28853,6 +28994,7 @@ words:
         en_gb: Do not touch the hot stove.
       - ru: Э́та исто́рия тро́гает се́рдце.
         en_gb: This story touches the heart.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Де́ти тро́гали мя́гкую шерсть.
         en_gb: The children were touching the soft wool.
       - ru: Не бу́дешь же ты тро́гать прово́д!
@@ -28883,6 +29025,7 @@ words:
     usage:
       - ru: Её слова́ тро́нули меня́.
         en_gb: Her words touched me.
+        inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Я не тро́ну твои́ ве́щи.
         en_gb: I will not touch your things.
       - ru: Пода́рок тро́нет её до слёз.
@@ -28915,6 +29058,7 @@ words:
     usage:
       - ru: Я трясу́сь от хо́лода.
         en_gb: I am shaking from the cold.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Авто́бус трясётся на я́мах.
         en_gb: The bus shakes over the potholes.
       - ru: Его́ ру́ки трясли́сь от стра́ха.
@@ -28947,6 +29091,7 @@ words:
     usage:
       - ru: Я тяну́ верёвку к себе́.
         en_gb: I am pulling the rope towards me.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ло́шадь тя́нет тяжёлую теле́гу.
         en_gb: The horse is pulling a heavy cart.
       - ru: Они́ тяну́ли ло́дку на бе́рег.
@@ -28979,6 +29124,7 @@ words:
     usage:
       - ru: Доро́га тя́нется до горизо́нта.
         en_gb: The road stretches to the horizon.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я тяну́сь к по́лке с кни́гами.
         en_gb: I am reaching for the shelf with books.
       - ru: Дни тяну́лись о́чень ме́дленно.
@@ -29011,6 +29157,7 @@ words:
     usage:
       - ru: Я убежду́сь, что дверь закры́та.
         en_gb: I will make sure the door is closed.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ убеди́лась в его́ правоте́.
         en_gb: She convinced herself of his rightness.
       - ru: Мы убеди́лись в успе́хе пла́на.
@@ -29043,6 +29190,7 @@ words:
     usage:
       - ru: Я убегу́ от соба́ки.
         en_gb: I will run away from the dog.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ко́шка убежа́ла в сад.
         en_gb: The cat ran away into the garden.
       - ru: Де́ти убежа́ли от дождя́.
@@ -29075,6 +29223,7 @@ words:
     usage:
       - ru: Ску́ка убива́ет вре́мя.
         en_gb: Boredom kills time.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Мо́роз убива́ет расте́ния.
         en_gb: The frost kills plants.
       - ru: Боле́знь убива́ла люде́й бы́стро.
@@ -29098,6 +29247,7 @@ words:
     usage:
       - ru: По суббо́там я убира́ю кварти́ру.
         en_gb: On Saturdays I tidy the flat.
+        inflect: { token: 4, tense: present, person: 1sg, rule: verb-present }
       - ru: Я убира́ю со стола́ посу́ду.
         en_gb: I am clearing the dishes from the table.
       - ru: Они́ убира́ли двор всё у́тро.
@@ -29142,6 +29292,7 @@ words:
     usage:
       - ru: Мо́роз убьёт цветы́.
         en_gb: The frost will kill the flowers.
+        inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Охо́тник уби́л во́лка.
         en_gb: The hunter killed the wolf.
       - ru: Э́та но́вость убила́ её наде́жду.
@@ -29175,6 +29326,7 @@ words:
     usage:
       - ru: Я уберу́ кни́ги со стола́.
         en_gb: I will clear the books off the table.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ убрала́ ко́мнату пе́ред госте́й.
         en_gb: She tidied the room before the guests.
       - ru: Они́ уберу́т му́сор у́тром.
@@ -29207,6 +29359,7 @@ words:
     usage:
       - ru: Я уважа́ю ста́рших.
         en_gb: I respect my elders.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ученики́ уважа́ют учи́теля.
         en_gb: The pupils respect the teacher.
       - ru: Мы всегда́ уважа́ли его́ мне́ние.
@@ -29239,6 +29392,7 @@ words:
     usage:
       - ru: Я уви́жу тебя́ за́втра.
         en_gb: I will see you tomorrow.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ уви́дела ста́рого дру́га.
         en_gb: She saw an old friend.
       - ru: Мы уви́дим мо́ре с горы́.
@@ -29261,6 +29415,7 @@ words:
         en_gb: The director decided to fire the bad worker.
       - ru: Его́ уво́лили за опозда́ния.
         en_gb: He was fired for being late.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
     conjugation:
       future:
         "1sg": уво́лю
@@ -29297,6 +29452,7 @@ words:
     usage:
       - ru: Ты ника́к не угада́ешь моё и́мя.
         en_gb: You will never guess my name.
+        inflect: { token: 4, tense: future, person: 2sg, rule: verb-future }
       - ru: Она́ угада́ла отве́т сра́зу.
         en_gb: She guessed the answer at once.
       - ru: Де́ти угада́ли зага́дку бы́стро.
@@ -29329,6 +29485,7 @@ words:
     usage:
       - ru: Мне ре́дко удаётся вы́спаться.
         en_gb: I rarely manage to get enough sleep.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Ра́ньше всё удава́лось легко́.
         en_gb: Earlier everything used to work out easily.
       - ru: Им удаю́тся са́мые тру́дные зада́чи.
@@ -29351,6 +29508,7 @@ words:
         en_gb: Please delete this message.
       - ru: Я удали́л ста́рые фотогра́фии.
         en_gb: I deleted the old photos.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
     conjugation:
       future:
         "1sg": удалю́
@@ -29387,6 +29545,7 @@ words:
     usage:
       - ru: Он случа́йно уда́рил меня́ ло́ктем.
         en_gb: He accidentally hit me with his elbow.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Не уда́рься голово́й о две́рь.
         en_gb: Don't hit your head on the door.
       - ru: Мяч уда́рит в окно́.
@@ -29452,6 +29611,7 @@ words:
     usage:
       - ru: Я не удержа́лся и засмея́лся.
         en_gb: I couldn't hold back and laughed.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Удержи́сь от ли́шних слов.
         en_gb: Restrain yourself from extra words.
       - ru: Она́ едва́ удержа́лась на нога́х.
@@ -29484,6 +29644,7 @@ words:
     usage:
       - ru: Я удивлю́сь, е́сли он придёт.
         en_gb: I will be surprised if he comes.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Все удиви́лись её отве́ту.
         en_gb: Everyone was surprised at her answer.
       - ru: Не удиви́сь, уви́дев меня́.
@@ -29516,6 +29677,7 @@ words:
     usage:
       - ru: Я ча́сто удивля́юсь его́ па́мяти.
         en_gb: I often marvel at his memory.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Не удивля́йся, э́то норма́льно.
         en_gb: Don't be surprised, it's normal.
       - ru: Тури́сты удивля́лись краси́вым гора́м.
@@ -29537,6 +29699,7 @@ words:
     usage:
       - ru: Он уезжа́ет из го́рода ка́ждую пя́тницу.
         en_gb: He leaves the city by transport every Friday.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Мы уезжа́ем за́втра ра́но у́тром.
         en_gb: We are leaving early tomorrow morning.
       - ru: Они́ уезжа́ли ка́ждое ле́то на мо́ре.
@@ -29570,6 +29733,7 @@ words:
     usage:
       - ru: Она́ уе́хала в Петербу́рг вчера́.
         en_gb: She left for St Petersburg yesterday.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я уе́ду в дере́вню на неде́лю.
         en_gb: I will leave for the village for a week.
       - ru: Друзья́ уе́хали ра́но у́тром.
@@ -29605,6 +29769,7 @@ words:
     usage:
       - ru: Она́ всегда́ узнаёт но́вости пе́рвой.
         en_gb: She always finds out the news first.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Я узнаю́ расписа́ние на са́йте.
         en_gb: I find out the timetable on the website.
       - ru: Мы постепе́нно узнава́ли пра́вду.
@@ -29640,6 +29805,7 @@ words:
     usage:
       - ru: Я узна́л об э́том то́лько вчера́.
         en_gb: I found out about this only yesterday.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ты ско́ро узна́ешь результа́т.
         en_gb: You will soon find out the result.
       - ru: Мы узна́ем но́вости за́втра.
@@ -29673,6 +29839,7 @@ words:
     usage:
       - ru: Он ушёл не попроща́вшись.
         en_gb: He left without saying goodbye.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я уйду́ ро́вно в шесть.
         en_gb: I will leave at exactly six.
       - ru: Они́ ушли́ ра́ньше нас.
@@ -29717,6 +29884,7 @@ words:
     usage:
       - ru: Он указа́л на оши́бку в те́ксте.
         en_gb: He pointed out the mistake in the text.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Пожа́луйста, укажи́те ваш а́дрес.
         en_gb: Please indicate your address.
       - ru: Она́ ука́жет нам доро́гу.
@@ -29749,6 +29917,7 @@ words:
     usage:
       - ru: Стре́лка ука́зывает на се́вер.
         en_gb: The arrow points to the north.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я не люблю́ ука́зывать други́м.
         en_gb: I don't like ordering others about.
       - ru: Зна́ки ука́зывали ве́рную доро́гу.
@@ -29781,6 +29950,7 @@ words:
     usage:
       - ru: Кто́-то укра́л мой велосипе́д.
         en_gb: Someone stole my bicycle.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Во́ры украду́т всё це́нное.
         en_gb: The thieves will steal everything valuable.
       - ru: Она́ боя́лась, что у неё укра́ли су́мку.
@@ -29803,6 +29973,7 @@ words:
         en_gb: Careful, the dog might bite.
       - ru: Меня́ укуси́л кома́р.
         en_gb: A mosquito bit me.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
     conjugation:
       future:
         "1sg": укушу́
@@ -29839,6 +30010,7 @@ words:
     usage:
       - ru: Ма́ма уложи́ла дете́й спать.
         en_gb: Mum put the children to bed.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я уложу́ ве́щи в чемода́н.
         en_gb: I will pack the things into the suitcase.
       - ru: Уложи́ ма́лыша поскоре́е.
@@ -29860,6 +30032,7 @@ words:
     usage:
       - ru: Она́ всегда́ улыба́ется незнако́мцам.
         en_gb: She always smiles at strangers.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Я улыба́юсь, когда́ ви́жу тебя́.
         en_gb: I smile when I see you.
       - ru: Де́ти улыба́лись фотогра́фу.
@@ -29904,6 +30077,7 @@ words:
     usage:
       - ru: Она́ улыбну́лась мне в отве́т.
         en_gb: She smiled at me in reply.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Улыбни́сь, всё бу́дет хорошо́.
         en_gb: Smile, everything will be fine.
       - ru: Я улыбну́сь, уви́дев их.
@@ -29936,6 +30110,7 @@ words:
     usage:
       - ru: Стари́к у́мер ти́хо во сне.
         en_gb: The old man died quietly in his sleep.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Без воды́ расте́ния умру́т.
         en_gb: Without water the plants will die.
       - ru: Она́ боя́лась умере́ть в одино́честве.
@@ -29968,6 +30143,7 @@ words:
     usage:
       - ru: Я уме́ю гото́вить борщ.
         en_gb: I know how to cook borscht.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты уме́ешь пла́вать?
         en_gb: Can you swim?
       - ru: Они́ уме́ли слу́шать друг дру́га.
@@ -30000,6 +30176,7 @@ words:
     usage:
       - ru: Я умира́ю от любопы́тства.
         en_gb: I am dying of curiosity.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ста́рые дере́вья умира́ют ме́дленно.
         en_gb: Old trees die slowly.
       - ru: Геро́й умира́л в после́дней сце́не.
@@ -30018,6 +30195,9 @@ words:
     collections:
       - science
     usage:
+      - ru: Я умно́жу пять на три.
+        en_gb: I will multiply five by three.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Умно́жь пять на три.
         en_gb: Multiply five by three.
       - ru: Что́бы найти́ пло́щадь, умно́жь длину́ на ширину́.
@@ -30058,6 +30238,7 @@ words:
     usage:
       - ru: Ого́нь уничто́жил весь дом.
         en_gb: The fire destroyed the whole house.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Мы уничто́жим все ста́рые бума́ги.
         en_gb: We will destroy all the old papers.
       - ru: Уничто́жь э́тот файл.
@@ -30090,6 +30271,7 @@ words:
     usage:
       - ru: Ребёнок упа́л на пол.
         en_gb: The child fell on the floor.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Осторо́жно, не упади́!
         en_gb: Careful, don't fall!
       - ru: Ли́стья упаду́т о́сенью.
@@ -30122,6 +30304,7 @@ words:
     usage:
       - ru: Он усе́лся в кре́сло у окна́.
         en_gb: He settled into the armchair by the window.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я уся́дусь побли́же к огню́.
         en_gb: I will settle closer to the fire.
       - ru: Го́сти усе́лись за стол.
@@ -30154,6 +30337,7 @@ words:
     usage:
       - ru: Я услы́шал стра́нный шум.
         en_gb: I heard a strange noise.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ты услы́шишь звоно́к в дверь.
         en_gb: You will hear the doorbell.
       - ru: Они́ услы́шали хоро́шие но́вости.
@@ -30186,6 +30370,7 @@ words:
     usage:
       - ru: Он усмехну́лся, гля́дя на меня́.
         en_gb: He smirked, looking at me.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я лишь усмехну́сь в отве́т.
         en_gb: I will only smirk in reply.
       - ru: Она́ ехи́дно усмехну́лась.
@@ -30218,6 +30403,7 @@ words:
     usage:
       - ru: Ребёнок усну́л на рука́х у ма́мы.
         en_gb: The child fell asleep in his mother's arms.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я не могу́ усну́ть от шу́ма.
         en_gb: I can't fall asleep because of the noise.
       - ru: Ско́ро ты уснёшь.
@@ -30250,6 +30436,7 @@ words:
     usage:
       - ru: Я не всегда́ успева́ю на по́езд.
         en_gb: I don't always make the train.
+        inflect: { token: 4, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты успева́ешь де́лать уро́ки?
         en_gb: Do you manage to do your homework?
       - ru: Они́ не успева́ли за ли́дером.
@@ -30282,6 +30469,7 @@ words:
     usage:
       - ru: Я успе́ю зако́нчить рабо́ту.
         en_gb: I will manage to finish the work.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Мы успе́ли на после́дний авто́бус.
         en_gb: We caught the last bus.
       - ru: Ты успе́ешь к нача́лу фи́льма.
@@ -30314,6 +30502,7 @@ words:
     usage:
       - ru: Ма́ма успоко́ила пла́чущего ребёнка.
         en_gb: Mum calmed the crying child.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Твои́ слова́ успоко́ят его́.
         en_gb: Your words will calm him.
       - ru: Я успоко́ю её одни́м зво́нком.
@@ -30348,6 +30537,7 @@ words:
         en_gb: Calm down and breathe out.
       - ru: Он успоко́ился по́сле разгово́ра.
         en_gb: He calmed down after the conversation.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я успоко́юсь, когда́ узна́ю пра́вду.
         en_gb: I will calm down when I learn the truth.
       - ru: За́втра он успоко́ится и всё пойму́т.
@@ -30378,6 +30568,7 @@ words:
     usage:
       - ru: Он уста́вился на экра́н.
         en_gb: He stared at the screen.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не уста́вься так на люде́й.
         en_gb: Don't stare at people like that.
       - ru: Де́ти уста́вились на фо́кусника.
@@ -30411,6 +30602,7 @@ words:
     usage:
       - ru: Я установлю́ но́вую програ́мму.
         en_gb: I will install the new programme.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Рабо́чие установи́ли но́вую дверь.
         en_gb: The workers installed a new door.
       - ru: Установи́те прило́жение на телефо́н.
@@ -30447,6 +30639,7 @@ words:
     usage:
       - ru: Я о́чень уста́л за день.
         en_gb: I got very tired during the day.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Ты уста́нешь от тако́й рабо́ты.
         en_gb: You will get tired from such work.
       - ru: Де́ти уста́ли и захоте́ли спать.
@@ -30479,6 +30672,7 @@ words:
     usage:
       - ru: Мы устра́иваем пра́здник в суббо́ту.
         en_gb: We are arranging a party on Saturday.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Меня́ устра́ивает э́та цена́.
         en_gb: This price suits me.
       - ru: Они́ ча́сто устра́ивали встре́чи.
@@ -30511,6 +30705,7 @@ words:
     usage:
       - ru: Я устро́ю тебе́ сюрпри́з.
         en_gb: I will arrange a surprise for you.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ устро́или шу́мную вечери́нку.
         en_gb: They threw a noisy party.
       - ru: Тако́е реше́ние устро́ит всех.
@@ -30544,6 +30739,7 @@ words:
     usage:
       - ru: Он устро́ился на но́вую рабо́ту.
         en_gb: He got a new job.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я устро́юсь поудо́бнее на дива́не.
         en_gb: I will settle more comfortably on the sofa.
       - ru: Они́ хорошо́ устро́ились в но́вом го́роде.
@@ -30576,6 +30772,7 @@ words:
     usage:
       - ru: Он утвержда́ет, что прав.
         en_gb: He asserts that he is right.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Учёные утвержда́ют э́ту тео́рию.
         en_gb: Scientists support this theory.
       - ru: Свиде́тель утвержда́л обра́тное.
@@ -30597,6 +30794,7 @@ words:
     usage:
       - ru: Он ухо́дит на рабо́ту в во́семь.
         en_gb: He leaves for work at eight.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я ухожу́, уви́димся за́втра.
         en_gb: I am leaving, see you tomorrow.
       - ru: Го́сти уходи́ли по́здно но́чью.
@@ -30641,6 +30839,7 @@ words:
     usage:
       - ru: Я уча́ствую в конку́рсе.
         en_gb: I am taking part in the contest.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ уча́ствовали в ма́рше.
         en_gb: They took part in the march.
       - ru: Ты уча́ствуешь в игре́?
@@ -30673,6 +30872,7 @@ words:
     usage:
       - ru: Мы учтём ва́ши пожела́ния.
         en_gb: We will take your wishes into account.
+        inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я учёл все расхо́ды.
         en_gb: I took all the expenses into account.
       - ru: Учти́ э́тот ва́жный факт.
@@ -30705,6 +30905,7 @@ words:
     usage:
       - ru: Я учу́ стихотворе́ние наизу́сть.
         en_gb: I am learning the poem by heart.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ у́чит дете́й му́зыке.
         en_gb: She teaches the children music.
       - ru: Мы учи́ли но́вые слова́ вме́сте.
@@ -30726,6 +30927,7 @@ words:
     usage:
       - ru: Я учу́сь в университе́те.
         en_gb: I study at university.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он у́чится на врача́.
         en_gb: He is studying to be a doctor.
       - ru: Мы учи́лись в одно́й шко́ле.
@@ -30758,6 +30960,7 @@ words:
     usage:
       - ru: Тури́ст фотографи́рует краси́вый зака́т.
         en_gb: The tourist photographs the beautiful sunset.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Она́ лю́бит фотографи́ровать приро́ду.
         en_gb: She loves to photograph nature.
     conjugation:
@@ -30796,6 +30999,7 @@ words:
     usage:
       - ru: Соба́ка хвата́ет мяч зуба́ми.
         en_gb: The dog grabs the ball with its teeth.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Мне не хвата́ет вре́мени.
         en_gb: I don't have enough time.
       - ru: Не хвата́й всё подря́д.
@@ -30861,6 +31065,7 @@ words:
     usage:
       - ru: Он зло хло́пнул две́рью.
         en_gb: He angrily slammed the door.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Я хло́пну в ладо́ши.
         en_gb: I will clap my hands.
       - ru: Ве́тер хло́пнул окно́м.
@@ -30882,6 +31087,7 @@ words:
     usage:
       - ru: Он хо́дит в спортза́л три ра́за в неде́лю.
         en_gb: He goes to the gym three times a week.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я хожу́ на рабо́ту пешко́м.
         en_gb: I walk to work on foot.
       - ru: В де́тстве мы ходи́ли в э́тот парк.
@@ -30917,6 +31123,7 @@ words:
     usage:
       - ru: Я хочу́ ча́шку ча́я.
         en_gb: I want a cup of tea.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он хо́чет ста́ть врачо́м.
         en_gb: He wants to become a doctor.
       - ru: Мы хоти́м отдохну́ть.
@@ -30961,6 +31168,7 @@ words:
     usage:
       - ru: Мне хо́чется споко́йно посиде́ть.
         en_gb: I feel like sitting quietly.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Ей хоте́лось пла́кать.
         en_gb: She felt like crying.
       - ru: Нам о́чень хо́чется пить.
@@ -30993,6 +31201,7 @@ words:
     usage:
       - ru: Де́ти хохо́чут над кло́уном.
         en_gb: The children are laughing loudly at the clown.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Мы хохота́ли весь ве́чер.
         en_gb: We laughed loudly all evening.
       - ru: Я хохочу́ от его́ шу́ток.
@@ -31025,6 +31234,7 @@ words:
     usage:
       - ru: Я храню́ ста́рые пи́сьма.
         en_gb: I keep old letters.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ храни́ла фотогра́фии в коро́бке.
         en_gb: She kept the photographs in a box.
       - ru: Храни́те молоко́ в холоди́льнике.
@@ -31046,6 +31256,7 @@ words:
     usage:
       - ru: Ма́ма целу́ет ребёнка пе́ред сном.
         en_gb: Mum kisses the child before sleep.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я целу́ю тебя́ на проща́ние.
         en_gb: I kiss you goodbye.
       - ru: Они́ не́жно целова́ли друг дру́га.
@@ -31081,6 +31292,7 @@ words:
     usage:
       - ru: Оте́ц чи́нит сло́манный стул.
         en_gb: Father is mending the broken chair.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я чиню́ свой велосипе́д.
         en_gb: I am mending my bicycle.
       - ru: Они́ чини́ли кры́шу всё ле́то.
@@ -31117,6 +31329,7 @@ words:
         en_gb: I like to read books.
       - ru: Она́ чита́ет газе́ту по утра́м.
         en_gb: She reads the newspaper in the mornings.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Вчера́ мы чита́ли интере́сный расска́з.
         en_gb: Yesterday we read an interesting story.
       - ru: За́втра ве́чером я бу́ду чита́ть кни́гу.
@@ -31149,6 +31362,7 @@ words:
     usage:
       - ru: Я чу́вствую себя́ хорошо́.
         en_gb: I feel well.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он чу́вствует уста́лость.
         en_gb: He feels tired.
       - ru: Мы чу́вствовали хо́лод но́чью.
@@ -31193,6 +31407,7 @@ words:
     usage:
       - ru: Солда́ты шага́ют по у́лице.
         en_gb: The soldiers march down the street.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я шага́ю по тропи́нке в лесу́.
         en_gb: I stride along the path in the forest.
       - ru: Он бо́дро шага́л впере́д.
@@ -31225,6 +31440,7 @@ words:
     usage:
       - ru: Он шагну́л впере́д сме́ло.
         en_gb: He boldly stepped forward.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я шагну́ че́рез лу́жу.
         en_gb: I will step over the puddle.
       - ru: Она́ шагну́ла в сто́рону.
@@ -31257,6 +31473,7 @@ words:
     usage:
       - ru: Ли́стья ти́хо шевеля́тся на ве́тре.
         en_gb: The leaves stir quietly in the wind.
+        inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не шевели́сь, я фотографи́рую.
         en_gb: Don't move, I'm taking a photo.
       - ru: Котёнок едва́ шевели́лся во сне.
@@ -31277,6 +31494,7 @@ words:
     usage:
       - ru: Де́ти шепта́ли что́-то на у́хо.
         en_gb: The children whispered something in his ear.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Не шепчи́, говори́ гро́мче.
         en_gb: Don't whisper, speak louder.
     conjugation:
@@ -31317,6 +31535,7 @@ words:
     usage:
       - ru: Она́ хорошо́ шьёт.
         en_gb: She sews well.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Ба́бушка ши́ла пла́тья на зака́з.
         en_gb: Grandma used to sew dresses to order.
       - ru: Я учу́сь шить на маши́нке.
@@ -31349,6 +31568,7 @@ words:
     usage:
       - ru: Де́ти шумя́т во дворе́.
         en_gb: The children are making noise in the yard.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Не шуми́, все спят.
         en_gb: Don't make noise, everyone is asleep.
       - ru: Мо́ре шуме́ло всю ночь.
@@ -31383,6 +31603,7 @@ words:
         en_gb: He likes to joke at work.
       - ru: Ты шу́тишь и́ли серьёзно?
         en_gb: Are you joking or serious?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Мы шути́ли весь ве́чер.
         en_gb: We joked all evening.
       - ru: За́втра на вечери́нке мы бу́дем шути́ть.
@@ -31413,6 +31634,7 @@ words:
     usage:
       - ru: Он щёлкнул вы́ключателем.
         en_gb: He clicked the switch.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Щёлкни по э́той кно́пке.
         en_gb: Click on this button.
       - ru: Я щёлкну па́льцами.
@@ -31445,6 +31667,7 @@ words:
     usage:
       - ru: Он яви́лся на собра́ние без опозда́ния.
         en_gb: He turned up to the meeting without delay.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я явлю́сь к девяти́ часа́м.
         en_gb: I will appear by nine o'clock.
       - ru: Го́сти яви́лись неожи́данно.
@@ -31477,6 +31700,7 @@ words:
     usage:
       - ru: Он явля́ется дире́ктором фи́рмы.
         en_gb: He is the director of the firm.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Э́ти кни́ги явля́ются ре́дкими.
         en_gb: These books are rare.
       - ru: Она́ явля́лась гла́вным свиде́телем.
