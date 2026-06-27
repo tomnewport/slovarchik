@@ -28,9 +28,13 @@ const PERSON_LABEL = {
 const PAST_LABEL = { past_m: 'he (past)', past_f: 'she (past)', past_n: 'it (past)', past_pl: 'they (past)' }
 const TENSE_LABEL = { present: 'Present', future: 'Future', past: 'Past' }
 
-/** Strip leading/trailing non-letter characters from a token (keeps inner letters). */
+/**
+ * Strip leading/trailing punctuation from a token, keeping inner letters and any
+ * combining marks (notably the U+0301 stress accent, which is \p{M} not \p{L}, so
+ * an end-stressed form like `беру́` must not lose its mark here).
+ */
 function wordCore(token) {
-  return String(token ?? '').replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')
+  return String(token ?? '').replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '')
 }
 
 /** Split a phrase into whitespace tokens (punctuation stays attached to its word). */
@@ -165,19 +169,16 @@ export function buildFromPhrase(phrase, word, { rules = {}, rng = Math.random } 
   const core = wordCore(origToken)
   if (!core) return null
 
-  // The slot shows the dictionary form before answering; surrounding punctuation
-  // (e.g. a trailing full stop) is preserved.
+  // The slot shows the dictionary form before answering; the component
+  // (PhraseFixExercise) re-attaches the token's surrounding punctuation around
+  // the lemma / answer when it renders, so we only need the lemma here.
   const lemma = word?.headword || word?.ru || core
-  const leadPunct = origToken.match(/^[^\p{L}]*/u)?.[0] ?? ''
-  const trailPunct = origToken.match(/[^\p{L}]*$/u)?.[0] ?? ''
-  const displayToken = leadPunct + lemma + trailPunct
 
   const rule = target.rule ? (rules[target.rule] ?? null) : null
 
   return {
     kind: 'phrase-fix',
     tokens, // the correct sentence tokens
-    displayTokens: tokens.map((t, i) => (i === idx ? displayToken : t)),
     targetIndex: idx,
     lemma,
     answerAccented: core,

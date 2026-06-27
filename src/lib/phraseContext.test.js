@@ -94,7 +94,7 @@ describe('buildFromPhrase', () => {
     const ex = buildFromPhrase(accPhrase, sobaka, { rules })
     expect(ex.targetIndex).toBe(2)
     expect(ex.tokens).toEqual(['Я', 'ви́жу', 'соба́ку.'])
-    expect(ex.displayTokens[2]).toBe('соба́ка.') // lemma + preserved punctuation
+    expect(ex.lemma).toBe('соба́ка') // dictionary form shown in the slot before answering
     expect(ex.answerAccented).toBe('соба́ку')
     expect(ex.answer).toBe('собаку')
     expect(ex.ru).toBe('Я ви́жу соба́ку.')
@@ -124,6 +124,8 @@ describe('buildFromPhrase', () => {
     const ex = buildFromPhrase(yaPhrase, ya)
     expect(ex.step1.kind).toBe('case')
     expect(ex.answer).toBe('меня')
+    // End-stressed form keeps its stress mark (мен-я́, accent on the last letter).
+    expect(ex.answerAccented).toBe('меня́')
     expect(ex.slotLabel).toContain('Accusative')
   })
 

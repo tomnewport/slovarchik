@@ -1,6 +1,7 @@
 # grammar-rules.yml — short rule / formula explanations for the in-context
-# inflection drill. Each phrase in phrases.yml may carry a `rule:` id pointing
-# here; the explanation is shown when the answer is revealed.
+# inflection drill. Each `inflect:` annotation on a word's usage example (in the
+# per-part-of-speech vocab files) may carry a `rule:` id pointing here; the
+# explanation is shown when the answer is revealed.
 #
 # Keep each rule to a one-line `formula` (how the ending is built) plus a short
 # `explanation` and the most common exceptions. The explanation should lead with

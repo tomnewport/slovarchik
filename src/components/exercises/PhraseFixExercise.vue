@@ -33,12 +33,13 @@ const inputEl = ref(null)
 const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
 
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
-// so the slot doesn't drop it when we swap in the lemma / answer.
+// so the slot doesn't drop it when we swap in the lemma / answer. Combining marks
+// (the stress accent) stay with the word core, so they're excluded from the affix.
 const slotAffix = computed(() => {
   const orig = props.exercise.tokens?.[props.exercise.targetIndex] ?? ''
   return {
-    lead: orig.match(/^[^\p{L}]*/u)?.[0] ?? '',
-    trail: orig.match(/[^\p{L}]*$/u)?.[0] ?? '',
+    lead: orig.match(/^[^\p{L}\p{M}]*/u)?.[0] ?? '',
+    trail: orig.match(/[^\p{L}\p{M}]*$/u)?.[0] ?? '',
   }
 })
 

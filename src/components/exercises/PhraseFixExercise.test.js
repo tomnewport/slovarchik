@@ -14,7 +14,6 @@ const nounExercise = {
   id: 'ex0',
   kind: 'phrase-fix',
   tokens: ['Де́вочка', 'пойма́ла', 'ба́бочку.'],
-  displayTokens: ['Де́вочка', 'пойма́ла', 'ба́бочка.'],
   targetIndex: 2,
   lemma: 'ба́бочка',
   answerAccented: 'ба́бочку',
@@ -145,6 +144,29 @@ describe('PhraseFixExercise', () => {
     expect(speak).toHaveBeenCalledWith('Я чита́ю но́вую кни́гу.')
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+  })
+
+  it('keeps the stress mark on an end-stressed answer (reveal and inline slot)', async () => {
+    // меня́ — accent on the final letter; the affix must not steal the mark, and
+    // the inline slot must not double it.
+    const endStressed = {
+      ...verbExercise,
+      tokens: ['Он', 'ждёт', 'меня́.'],
+      targetIndex: 2,
+      lemma: 'я',
+      answerAccented: 'меня́',
+      answer: 'меня',
+      ru: 'Он ждёт меня́.',
+      en: 'He is waiting for me.',
+    }
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: endStressed } })
+    await wrapper.find('input[lang="ru"]').setValue('хобана') // wrong on purpose
+    await wrapper.find('form').trigger('submit')
+    // The reveal chip shows the correct accented form, stress intact.
+    expect(wrapper.find('.feedback.bad').text()).toContain('меня́')
+    // The inline slot reattaches the trailing full stop without doubling the mark.
+    expect(wrapper.find('.phrase-line').text()).toContain('меня́.')
+    expect(wrapper.find('.phrase-line').text()).not.toContain('меня́́')
   })
 
   it('skips the case step for verbs', async () => {
