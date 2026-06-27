@@ -526,7 +526,16 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
   // session has no learning-level practices and would otherwise become empty).
   const hasLearningPractices = practicesForSession(type).some((p) => p.level === 'learning')
   const levels = !masteryBatchActive() && hasLearningPractices ? ['learning'] : null
-  const weakness = dimensionWeakness()
+  // Weakness is computed *per level* so the two levels never steal each other's
+  // practice-selection probability. Both start from the same global per-dimension
+  // accuracy, then each level boosts only the dimensions still blocking its own
+  // words. Crucially the mastery boost (e.g. lifting `identification` to fund the
+  // inflection word-bank) lands only in the mastery map, so it can't pull an
+  // identification drill into a learning slot whose word finished identification
+  // long ago — which previously halved the share of usage drills the unlearned
+  // current-batch words actually need.
+  const learningWeakness = dimensionWeakness()
+  const masteryWeakness = dimensionWeakness()
   // Boost dimensions still unmet for current-pool words so sessions stay
   // targeted at what's blocking batch completion, not just the global
   // accuracy average (which masks remaining gaps when most words are learned).
@@ -536,7 +545,7 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
     // waived doesn't keep boosting speaking weight it can no longer satisfy.
     for (const d of applicableDimensions('learning', wordRecord(key))) {
       if (!dimensionProgress(evs, 'learning', d).met) {
-        weakness[d] = Math.max(weakness[d], 2)
+        learningWeakness[d] = Math.max(learningWeakness[d], 2)
       }
     }
   }
@@ -552,11 +561,12 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
       const evs = events(key)
       for (const d of applicableDimensions('mastery', wordRecord(key))) {
         if (!dimensionProgress(evs, 'mastery', d).met) {
-          weakness[d] = Math.max(weakness[d], 2)
+          masteryWeakness[d] = Math.max(masteryWeakness[d], 2)
         }
       }
     }
   }
+  const weakness = { learning: learningWeakness, mastery: masteryWeakness }
   const session = buildSession({ type, size, weakness, rng, levels })
   let pools
   if (focusKeys) {

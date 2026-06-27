@@ -45,6 +45,20 @@ describe('allocateBuckets', () => {
     expect(allocateBuckets(12)).toEqual({ atRisk: 3, untested: 3, current: 6 })
     expect(allocateBuckets(20)).toEqual({ atRisk: 5, untested: 5, current: 10 })
   })
+  it('never rounds the current bucket away in a short session', () => {
+    // Refresh buckets round down, so the current batch keeps at least ⌈size/2⌉
+    // slots — a one- or two-slot learning portion is spent on the current batch
+    // rather than lost to retention.
+    expect(allocateBuckets(1)).toEqual({ atRisk: 0, untested: 0, current: 1 })
+    expect(allocateBuckets(2)).toEqual({ atRisk: 0, untested: 0, current: 2 })
+    expect(allocateBuckets(3)).toEqual({ atRisk: 0, untested: 0, current: 3 })
+    expect(allocateBuckets(0)).toEqual({ atRisk: 0, untested: 0, current: 0 })
+    for (const size of [1, 2, 3, 5, 6, 9, 10]) {
+      const b = allocateBuckets(size)
+      expect(b.atRisk + b.untested + b.current).toBe(size)
+      expect(b.current).toBeGreaterThanOrEqual(Math.ceil(size / 2))
+    }
+  })
   it('the shares are a quarter, a quarter and a half', () => {
     expect(BUCKET_SHARES).toEqual({ atRisk: 0.25, untested: 0.25, current: 0.5 })
     expect(BUCKETS).toEqual(['atRisk', 'untested', 'current'])
@@ -63,19 +77,19 @@ describe('buildSession', () => {
     for (const p of s.practices) counts[p.bucket]++
     expect(counts).toEqual(allocateBuckets(12))
   })
-  it('reserves a guaranteed mastery share when both levels are available', () => {
+  it('splits the session evenly between levels when both are available', () => {
     // Both learning and mastery practices eligible (no `levels` filter).
     const s = buildSession({ type: 'standard', size: 'normal', rng: seededRng(2) })
     expect(s.practices).toHaveLength(12)
     const mastery = s.practices.filter((p) => p.level === 'mastery')
-    // ~25% of 12 = 3 mastery slots, all targeting the current batch.
-    expect(mastery).toHaveLength(3)
+    // 50% of 12 = 6 mastery slots, all targeting the current batch.
+    expect(mastery).toHaveLength(6)
     expect(mastery.every((p) => p.bucket === 'current')).toBe(true)
-    // The remaining nine learning slots keep the 25/25/50 split.
+    // The remaining six learning slots keep the 25/25/50 split.
     const learning = s.practices.filter((p) => p.level === 'learning')
     const counts = { atRisk: 0, untested: 0, current: 0 }
     for (const p of learning) counts[p.bucket]++
-    expect(counts).toEqual(allocateBuckets(9))
+    expect(counts).toEqual(allocateBuckets(6))
   })
   it('always reserves at least one mastery slot in a small session', () => {
     const s = buildSession({ type: 'standard', size: 'quick', rng: seededRng(7) })
@@ -91,6 +105,27 @@ describe('buildSession', () => {
     const s = buildSession({ type: 'standard', size: 'super', weakness, rng: seededRng(4) })
     const usage = s.practices.filter((p) => p.dimension === 'usage').length
     expect(usage).toBeGreaterThanOrEqual(15)
+  })
+  it('weights each level by its own needs when given a per-level weakness map', () => {
+    // identification is heavy only for mastery; usage heavy only for learning.
+    // A flat map would let the mastery identification boost bleed into learning
+    // slots; the per-level map must keep them isolated.
+    const weakness = {
+      learning: { identification: 0.05, usage: 1000, hearing: 0.05, speaking: 0.05 },
+      mastery: { identification: 1000, usage: 0.05, context: 0.05 },
+    }
+    const s = buildSession({ type: 'standard', size: 'super', weakness, rng: seededRng(8) })
+    const learning = s.practices.filter((p) => p.level === 'learning')
+    const mastery = s.practices.filter((p) => p.level === 'mastery')
+    // Learning slots favour usage (its heavy dimension), not identification.
+    expect(learning.filter((p) => p.dimension === 'usage').length).toBeGreaterThan(
+      learning.filter((p) => p.dimension === 'identification').length,
+    )
+    // Mastery slots favour identification, not usage — the learning usage boost
+    // does not leak across.
+    expect(mastery.filter((p) => p.dimension === 'identification').length).toBeGreaterThan(
+      mastery.filter((p) => p.dimension === 'usage').length,
+    )
   })
   it('restricts practice levels when levels parameter is supplied', () => {
     const s = buildSession({ type: 'standard', size: 'super', levels: ['learning'], rng: seededRng(5) })
