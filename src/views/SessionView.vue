@@ -215,12 +215,18 @@ async function onDone(result) {
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
+  // Collateral-damage guard: a phrase spelled wrong only *outside* the word being
+  // assessed still counts as a wrong exercise, but the word itself was produced
+  // correctly — so don't record (and possibly slip) it. TypeExercise reports this
+  // via result.wordCorrect; it's only set for phrase spelling.
+  const spareWord = result.correct === false && result.wordCorrect === true
   // A correct answer typed without the keyboard hint counts double: record the
   // attempt twice (in one write) so the word advances toward learned/mastered
   // faster (#210).
   const times = result.double ? 2 : 1
   let firstError = null
   for (const key of (ex.targets ?? []).filter(Boolean)) {
+    if (spareWord) continue
     try {
       await progress.recordAttempt({
         word: key,

@@ -100,6 +100,24 @@ export function baseForms(word) {
 }
 
 /**
+ * The normalised surface tokens of `phrase` that are inflected forms of `word`.
+ * Tells which token(s) in a phrase belong to a particular word — used to spare
+ * the word being assessed from a penalty when a phrase-spelling answer goes wrong
+ * only elsewhere in the phrase (collateral damage). Order follows the phrase;
+ * a word appearing twice yields two entries.
+ * @param {string} phrase
+ * @param {object} word   a normalised word record (from buildWords)
+ * @returns {string[]}    normalised tokens (possibly empty)
+ */
+export function wordTokensInPhrase(phrase, word) {
+  const forms = wordForms(word)
+  if (!forms.size) return []
+  return phraseTokens(phrase)
+    .map(normToken)
+    .filter((t) => t && forms.has(t))
+}
+
+/**
  * Build a lookup from a normalised surface form to a hint entry
  * `{ key, ru, en }` for the word that can appear as that form.
  *

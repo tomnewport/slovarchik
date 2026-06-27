@@ -1,6 +1,12 @@
 import { describe, it, expect } from 'vitest'
 
-import { normToken, wordForms, buildFormIndex, phraseHintTokens } from './phraseHint.js'
+import {
+  normToken,
+  wordForms,
+  wordTokensInPhrase,
+  buildFormIndex,
+  phraseHintTokens,
+} from './phraseHint.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 describe('normToken', () => {
@@ -79,6 +85,29 @@ describe('wordForms', () => {
     expect(forms.has('него')).toBe(true) // genitive/accusative after a preposition
     expect(forms.has('нему')).toBe(true) // dative
     expect(forms.has('ним')).toBe(true) // instrumental
+  })
+})
+
+describe('wordTokensInPhrase', () => {
+  const noun = {
+    key: 'абзац=paragraph',
+    headword: 'абза́ц',
+    ru: 'абзац',
+    meaning: 'paragraph',
+    forms: { sg: { nom: 'абза́ц', pre: 'абза́це' }, pl: { nom: 'абза́цы' } },
+    extra: { declension: { sg_ins: 'абза́цем' } },
+  }
+
+  it('finds the normalised tokens of a phrase that are forms of the word', () => {
+    expect(wordTokensInPhrase('в пе́рвом абза́це.', noun)).toEqual(['абзаце'])
+  })
+
+  it('returns an entry per occurrence when the word repeats', () => {
+    expect(wordTokensInPhrase('абза́ц за абза́цем', noun)).toEqual(['абзац', 'абзацем'])
+  })
+
+  it('returns an empty array when the word does not appear', () => {
+    expect(wordTokensInPhrase('я иду домой', noun)).toEqual([])
   })
 })
 

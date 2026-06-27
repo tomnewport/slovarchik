@@ -29,7 +29,7 @@ describe('TypeExercise', () => {
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')).toBeTruthy()
     // Correct without touching the hint → counts double, with a 🔥 burst.
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true, wordCorrect: true })
   })
 
   it('fires a burst and counts double when correct without the hint', async () => {
@@ -41,7 +41,7 @@ describe('TypeExercise', () => {
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(true)
 
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true, wordCorrect: true })
   })
 
   it('does not count double (or burst) once the hint has been switched on', async () => {
@@ -54,7 +54,7 @@ describe('TypeExercise', () => {
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
 
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false, wordCorrect: true })
   })
 
   it('offers a retry on the first wrong answer, then reveals on the second', async () => {
@@ -71,7 +71,9 @@ describe('TypeExercise', () => {
     expect(wrapper.text()).toContain('Answer:')
 
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false, double: false })
+    // A word (no targetTokens): the slip is necessarily in the word, so it is
+    // penalised — wordCorrect mirrors the failed grade.
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false, double: false, wordCorrect: false })
   })
 
   it('accepts an alsoRu synonym as correct', async () => {
@@ -90,5 +92,47 @@ describe('TypeExercise', () => {
     await wrapper.find('input[lang="ru"]').setValue('ВСЕ')
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.text()).toContain('Correct')
+  })
+
+  // Collateral-damage guard for phrase spelling: a phrase carries targetTokens
+  // naming the word being assessed, so a slip elsewhere doesn't penalise the word.
+  const phrase = {
+    ...exercise,
+    content: 'phrase',
+    targets: ['школа=school'],
+    ru: 'я иду в школу',
+    en: 'I am going to school',
+    targetTokens: ['школу'],
+  }
+
+  it('reports the phrase wrong but the word right when the slip is elsewhere', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // Mis-spell a different word ("ыду") but spell the assessed word correctly.
+    await wrapper.find('input[lang="ru"]').setValue('я ыду в школу')
+    await wrapper.find('button.check').trigger('click') // first wrong → retry
+    await wrapper.find('input[lang="ru"]').setValue('я ыду в школу')
+    await wrapper.find('button.check').trigger('click') // second wrong → revealed
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      double: false,
+      wordCorrect: true,
+    })
+  })
+
+  it('reports both the phrase and the word wrong when the slip is in the word', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click')
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      double: false,
+      wordCorrect: false,
+    })
   })
 })
