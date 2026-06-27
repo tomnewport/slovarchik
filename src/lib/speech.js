@@ -2,6 +2,8 @@
 // phrases aloud. Speech is a progressive enhancement: when the API is
 // unavailable (older browsers, tests, SSR) every call is a safe no-op.
 
+import { spellOutInitialisms } from './initialism.js'
+
 export const SLOW_RATE = 0.5
 
 export function speechSupported() {
@@ -43,7 +45,7 @@ export function speak(text, lang = 'ru-RU', rate = 0.9, opts = {}) {
   if (!clean) return false
   try {
     window.speechSynthesis.cancel()
-    const utter = new window.SpeechSynthesisUtterance(clean)
+    const utter = new window.SpeechSynthesisUtterance(spellOutInitialisms(clean))
     utter.lang = lang
     utter.rate = rate
     const voice = voiceFor(lang)
@@ -86,7 +88,7 @@ export function speakSequence(parts, { onEnd } = {}) {
   try {
     window.speechSynthesis.cancel()
     items.forEach((part, i) => {
-      const utter = new window.SpeechSynthesisUtterance(String(part.text).trim())
+      const utter = new window.SpeechSynthesisUtterance(spellOutInitialisms(String(part.text).trim()))
       utter.lang = part.lang || 'ru-RU'
       utter.rate = part.rate || 0.9
       const voice = voiceFor(utter.lang)
