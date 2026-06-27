@@ -5069,6 +5069,7 @@ words:
     usage:
       - ru: Ве́чером мы пьём чай вме́сте.
         en_gb: In the evening we drink tea together.
+        inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Ка́ждый ве́чер он чита́ет пе́ред сном.
         en_gb: Every evening he reads before bed.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
