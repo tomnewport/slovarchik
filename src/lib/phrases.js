@@ -74,6 +74,33 @@ export function phraseCorrect(input, target) {
 }
 
 /**
+ * Whether the word being assessed in a phrase-spelling exercise was itself
+ * spelled correctly, regardless of mistakes elsewhere in the phrase.
+ * `targetTokens` are the word's normalised surface form(s) as they appear in the
+ * target phrase (see {@link wordTokensInPhrase}); the answer must contain each of
+ * them at least as many times (so a word appearing twice must be right both
+ * times). Stress, case and ё/е are folded exactly as in {@link phraseCorrect}.
+ *
+ * Returns `null` when there are no target tokens to check against, so the caller
+ * can fall back to the whole-phrase grade rather than wrongly sparing the word.
+ * @param {string} input             the learner's typed answer
+ * @param {string[]} [targetTokens]  the assessed word's normalised forms
+ * @returns {boolean|null}
+ */
+export function assessedWordCorrect(input, targetTokens) {
+  if (!targetTokens?.length) return null
+  const typed = foldYo(typingSequence(input)).split(' ').filter(Boolean)
+  const have = new Map()
+  for (const t of typed) have.set(t, (have.get(t) ?? 0) + 1)
+  const need = new Map()
+  for (const t of targetTokens) need.set(t, (need.get(t) ?? 0) + 1)
+  for (const [t, n] of need) {
+    if ((have.get(t) ?? 0) < n) return false
+  }
+  return true
+}
+
+/**
  * The next character the learner should type given what they have so far.
  * Returns '' once the phrase is complete; ' ' at a word boundary.
  * @param {string} target

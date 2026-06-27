@@ -4,7 +4,7 @@
 // heard, not seen). Hints never penalise — grading only looks at the answer.
 import { computed, onMounted, ref, watch } from 'vue'
 
-import { phraseCorrect, typingSequence } from '../../lib/phrases.js'
+import { assessedWordCorrect, phraseCorrect, typingSequence } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
@@ -17,6 +17,11 @@ const emit = defineEmits(['done'])
 const typed = ref('')
 const checked = ref(false)
 const wasCorrect = ref(false)
+// For a phrase, whether the *word being assessed* was spelled right — true even
+// when the whole phrase is wrong if the only slip was elsewhere. Lets the session
+// spare the word a penalty while still counting the exercise as incorrect. For a
+// single word (no targetTokens) this always tracks wasCorrect.
+const wordCorrect = ref(false)
 // On a first wrong answer offer one retry before revealing. Once the learner
 // has retried (or they got it right), this stays true so we don't loop.
 const retried = ref(false)
@@ -46,6 +51,11 @@ function check() {
     return
   }
   checked.value = true
+  // A phrase can be wrong overall yet the assessed word spelled right (a slip
+  // elsewhere); coerce to a clean boolean (assessedWordCorrect → null for a
+  // single word, where the whole answer *is* the word).
+  wordCorrect.value =
+    wasCorrect.value || assessedWordCorrect(typed.value, props.exercise.targetTokens) === true
   playFeedback(wasCorrect.value)
   if (double.value) showFire.value = true
   // Read the Russian aloud once the answer is resolved so the learner hears the
@@ -54,7 +64,7 @@ function check() {
 }
 
 function next() {
-  emit('done', { correct: wasCorrect.value, double: double.value })
+  emit('done', { correct: wasCorrect.value, double: double.value, wordCorrect: wordCorrect.value })
 }
 
 onMounted(() => {

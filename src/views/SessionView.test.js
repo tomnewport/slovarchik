@@ -9,12 +9,17 @@ import * as progress from '../stores/progress.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // A fixed two-exercise session so the runner flow is deterministic; both are
-// keyboard-typing exercises so we can drive them through the real DOM.
-vi.mock('../lib/exerciseBuild.js', () => ({
-  buildExercises: () => [
+// keyboard-typing exercises so we can drive them through the real DOM. The list
+// is mutable (via vi.hoisted) so a test can swap in a phrase exercise.
+const { mockExercises, defaultExercises } = vi.hoisted(() => {
+  const defaultExercises = [
     { id: 'ex0', kind: 'type', dimension: 'usage', level: 'learning', content: 'word', practiceIndex: 0, audio: false, targets: ['t1'], ru: 'дом', en: 'house' },
     { id: 'ex1', kind: 'type', dimension: 'usage', level: 'learning', content: 'word', practiceIndex: 1, audio: false, targets: ['t2'], ru: 'кот', en: 'cat' },
-  ],
+  ]
+  return { mockExercises: { value: defaultExercises }, defaultExercises }
+})
+vi.mock('../lib/exerciseBuild.js', () => ({
+  buildExercises: () => mockExercises.value,
 }))
 
 const push = vi.fn()
@@ -34,6 +39,7 @@ beforeEach(async () => {
   await progress.resetProgress()
   await progress.loadProgress()
   push.mockClear()
+  mockExercises.value = defaultExercises
 })
 
 async function answer(wrapper, text) {
@@ -170,6 +176,78 @@ describe('SessionView', () => {
 
     expect(wrapper.text()).toContain('Session complete')
     expect(wrapper.find('.batch-gains').exists()).toBe(false)
+  })
+
+  it('spares the assessed word a penalty when a phrase slips only elsewhere', async () => {
+    // One phrase exercise: the word being assessed is школа (form школу); a slip
+    // elsewhere in the phrase must not record (and slip) the word.
+    mockExercises.value = [
+      {
+        id: 'ex0',
+        kind: 'type',
+        dimension: 'usage',
+        level: 'learning',
+        content: 'phrase',
+        practiceIndex: 0,
+        audio: false,
+        targets: ['t1'],
+        ru: 'я иду в школу',
+        en: 'I am going to school',
+        targetTokens: ['школу'],
+      },
+    ]
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    // Spell the assessed word right but slip elsewhere ("ыду"): the exercise is
+    // wrong (re-queued — "Fixing mistakes"), but no attempt is recorded for t1.
+    await wrapper.find('input[lang="ru"]').setValue('я ыду в школу')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('я ыду в школу')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('button.next').trigger('click')
+    await flushPromises()
+    await flushPromises()
+
+    expect(wrapper.text()).toContain('Fixing mistakes')
+    // The word was not penalised — it has no recorded attempts and stays unknown.
+    expect(progress.stateOf('t1')).toBe('unknown')
+    expect(progress.state.records.t1).toBeUndefined()
+  })
+
+  it('penalises the assessed word when the slip is in the word itself', async () => {
+    mockExercises.value = [
+      {
+        id: 'ex0',
+        kind: 'type',
+        dimension: 'usage',
+        level: 'learning',
+        content: 'phrase',
+        practiceIndex: 0,
+        audio: false,
+        targets: ['t1'],
+        ru: 'я иду в школу',
+        en: 'I am going to school',
+        targetTokens: ['школу'],
+      },
+    ]
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    // Mis-spell the assessed word ("школе"): the word is penalised as normal.
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('button.next').trigger('click')
+    await flushPromises()
+    await flushPromises()
+
+    const rec = progress.state.records.t1
+    expect(rec).toBeDefined()
+    expect(rec.events.some((e) => e.dimension === 'usage' && e.correct === false)).toBe(true)
   })
 
   it('asks for confirmation before closing', async () => {

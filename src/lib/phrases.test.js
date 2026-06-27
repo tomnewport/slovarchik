@@ -3,6 +3,7 @@ import {
   phraseTokens,
   typingSequence,
   phraseCorrect,
+  assessedWordCorrect,
   nextChar,
   hintKeys,
   RU_LETTERS,
@@ -75,6 +76,33 @@ describe('phraseCorrect', () => {
     expect(phraseCorrect('все', 'всё')).toBe(true)
     expect(phraseCorrect('всё', 'все')).toBe(true)
     expect(phraseCorrect('у нее нет пальто', 'У неё нет пальто́.')).toBe(true)
+  })
+})
+
+describe('assessedWordCorrect', () => {
+  // Target phrase "Я иду́ в шко́лу." with the assessed word школа (form: школу).
+  it('is true when the assessed word is spelled right despite a slip elsewhere', () => {
+    expect(assessedWordCorrect('я иду в школу', ['школу'])).toBe(true)
+    // Wrong elsewhere ("ыду") but the word школу is still present and correct.
+    expect(assessedWordCorrect('я ыду в школу', ['школу'])).toBe(true)
+  })
+  it('is false when the slip is in the assessed word itself', () => {
+    expect(assessedWordCorrect('я иду в школе', ['школу'])).toBe(false)
+    expect(assessedWordCorrect('я иду в', ['школу'])).toBe(false)
+  })
+  it('folds stress and ё/е in the answer (target tokens arrive normalised)', () => {
+    // wordTokensInPhrase already folds ё→е and strips stress, so target tokens
+    // are normalised; only the learner's answer needs folding here.
+    expect(assessedWordCorrect('у неё нет пальто́', ['нее'])).toBe(true)
+    expect(assessedWordCorrect('у нее нет пальто', ['нее'])).toBe(true)
+  })
+  it('requires every occurrence of a repeated word to be right', () => {
+    expect(assessedWordCorrect('дом и дом', ['дом', 'дом'])).toBe(true)
+    expect(assessedWordCorrect('дом и дам', ['дом', 'дом'])).toBe(false)
+  })
+  it('returns null when there are no target tokens to check', () => {
+    expect(assessedWordCorrect('что угодно', [])).toBe(null)
+    expect(assessedWordCorrect('что угодно', undefined)).toBe(null)
   })
 })
 

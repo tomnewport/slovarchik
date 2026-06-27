@@ -22,6 +22,7 @@ import { cefrRank } from './batches.js'
 import { shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 import { buildContextExercise, canBuildContext } from './phraseContext.js'
+import { wordTokensInPhrase } from './phraseHint.js'
 
 /** Render `kind` for each practice type. */
 export const PRACTICE_KIND = Object.freeze({
@@ -265,16 +266,24 @@ function buildPhrase(practice, pi, ctx, make, kind) {
     used: ctx.used,
     keyOf: (p) => p.source,
   })
-  return picked.map((p) =>
-    make({
+  return picked.map((p) => {
+    const base = {
       ...common(practice, pi),
       kind,
       targets: [p.source].filter(Boolean),
       ru: p.ru,
       en: p.en,
       ...(p.enAlt?.length ? { enAlt: p.enAlt } : {}),
-    }),
-  )
+    }
+    // For spelling (type) a phrase, record which token(s) are the word being
+    // assessed so a wrong answer only penalises the word if the slip was in it.
+    if (kind === 'type' && p.source) {
+      const record = ctx.recordByKey.get(p.source)
+      const tokens = record ? wordTokensInPhrase(p.ru, record) : []
+      if (tokens.length) base.targetTokens = tokens
+    }
+    return make(base)
+  })
 }
 
 function buildInflect(practice, pi, ctx, make) {

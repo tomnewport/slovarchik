@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { buildExercises, makeVisualReplacement, makeReplacementPicker, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
+import { normToken } from './phraseHint.js'
+import { phraseTokens } from './phrases.js'
 import { loadFixtureWords, loadFixtureContextPhrases, loadFixtureRules } from '../test/fixtures.js'
 
 function seededRng(seed) {
@@ -202,6 +204,26 @@ describe('buildExercises', () => {
         { words, phrases, rng: seededRng(1), encounterCount },
       )
       expect(ex.length).toBeGreaterThan(0)
+    })
+  })
+
+  describe('phrase-spelling assessed-word tokens', () => {
+    it('tags spell-phrase exercises with the source word forms found in the phrase', () => {
+      const ex = build([practice('spell-phrase', { exercises: 8 })])
+      expect(ex.length).toBeGreaterThan(0)
+      // At least one descriptor should locate its source word inside the phrase.
+      const tagged = ex.filter((e) => e.targetTokens?.length)
+      expect(tagged.length).toBeGreaterThan(0)
+      for (const e of tagged) {
+        const inPhrase = new Set(phraseTokens(e.ru).map(normToken))
+        for (const t of e.targetTokens) expect(inPhrase.has(t)).toBe(true)
+      }
+    })
+
+    it('does not tag non-spelling phrase exercises (translate-phrase)', () => {
+      const ex = build([practice('translate-phrase', { exercises: 5 })])
+      expect(ex.length).toBeGreaterThan(0)
+      for (const e of ex) expect(e.targetTokens).toBeUndefined()
     })
   })
 
