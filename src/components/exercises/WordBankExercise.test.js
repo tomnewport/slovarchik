@@ -49,6 +49,37 @@ describe('WordBankExercise alternate translations', () => {
   })
 })
 
+describe('WordBankExercise type-ahead', () => {
+  const press = (key) => window.dispatchEvent(new window.KeyboardEvent('keydown', { key }))
+
+  it('types a prefix and places the matching tile with Enter', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    // Type "ci" to single out "city", then commit it with Enter.
+    for (const ch of 'ci') press(ch)
+    press('Enter')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.answer-line').text().toLowerCase()).toContain('city')
+    wrapper.unmount()
+  })
+
+  it('ignores a keystroke that matches no available tile', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    press('z') // no English tile starts with "z"
+    await wrapper.vm.$nextTick()
+    // Nothing typed sticks, so the idle hint is still shown.
+    expect(wrapper.find('.typeahead').text()).toContain('Tap a word')
+    wrapper.unmount()
+  })
+
+  it('still places tiles by clicking', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleExpected(wrapper)
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.text()).toContain('Correct')
+    wrapper.unmount()
+  })
+})
+
 describe('WordBankExercise honesty system', () => {
   it('does not offer the override when the answer is correct', async () => {
     const wrapper = mount(WordBankExercise, { props: { exercise } })

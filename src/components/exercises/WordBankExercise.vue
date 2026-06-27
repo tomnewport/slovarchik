@@ -2,10 +2,11 @@
 // Identification / hearing exercise: rebuild the English translation of a
 // Russian phrase by tapping word tiles from a bank (with decoys). Covers
 // translate-phrase (source shown) and listen-translate (source heard).
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-import { buildListeningBank, listeningTokens, phraseCorrect } from '../../lib/phrases.js'
+import { buildListeningBank, listeningTokens, listeningWordPool, phraseCorrect } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
+import { phrases } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
@@ -13,12 +14,27 @@ import SpeakButton from '../SpeakButton.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done', 'dispute'])
 
-// A small decoy pool: the other words of the phrase plus a few generic fillers.
-const DECOYS = ['the', 'a', 'and', 'to', 'is', 'in', 'of', 'it', 'you', 'we']
-const bank = ref(buildListeningBank(props.exercise.en, DECOYS, 3))
+// How many decoy tiles to mix in. Tripled from the original 3 so the bank has
+// markedly more distractors to find the target words among.
+const DECOY_COUNT = 9
+// Generic fillers used as a fallback when the real phrase vocabulary is thin
+// (e.g. in unit tests, where the vocab store is empty). Kept large enough to
+// satisfy DECOY_COUNT on its own.
+const FILLERS = [
+  'the', 'a', 'and', 'to', 'is', 'in', 'of', 'it', 'you', 'we',
+  'on', 'at', 'for', 'with', 'this', 'that', 'they', 'not', 'he', 'she',
+]
+// Draw decoys from every known phrase's English so the distractors look like
+// real vocabulary, falling back to the generic fillers. Deduplicated because
+// buildListeningBank samples without dedup.
+const decoyPool = [...new Set([...listeningWordPool(phrases.value), ...FILLERS])]
+const bank = ref(buildListeningBank(props.exercise.en, decoyPool, DECOY_COUNT))
 const placed = ref([])
 const checked = ref(false)
 const wasCorrect = ref(false)
+// What the learner is currently typing to find a tile (type-ahead). Lowercased
+// prefix matched against the available (not-yet-placed) tiles.
+const typed = ref('')
 // Honesty system: a phrase can have several valid English renderings we don't
 // all store. If the learner believes a "wrong" grade was actually right, they
 // can override it — crediting the attempt and reporting it for curation.
@@ -27,13 +43,62 @@ const overridden = ref(false)
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
 
+// Tiles still available to place, in bank order.
+const available = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id)))
+// The available tiles whose text begins with the typed prefix.
+const matches = computed(() =>
+  typed.value ? available.value.filter((t) => t.text.toLowerCase().startsWith(typed.value)) : [],
+)
+const matchIds = computed(() => new Set(matches.value.map((t) => t.id)))
+// The tile Enter/Space would place — the first match in bank order.
+const firstMatch = computed(() => matches.value[0] ?? null)
+
 function pick(tile) {
   if (checked.value || placedIds.value.has(tile.id)) return
   placed.value.push(tile)
+  typed.value = ''
 }
 function unpick(tile) {
   if (checked.value) return
   placed.value = placed.value.filter((t) => t.id !== tile.id)
+}
+
+// Physical-keyboard type-ahead: typing letters narrows the highlighted tiles;
+// Enter or Space places the first match; Backspace/Escape edit the prefix.
+// Clicking tiles still works exactly as before — this only speeds up finding
+// the right word in a large bank.
+function onKey(e) {
+  if (checked.value || e.metaKey || e.ctrlKey || e.altKey) return
+  const tag = e.target?.tagName
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable) return
+  const k = e.key
+  if (k === 'Enter' || k === ' ') {
+    if (firstMatch.value) {
+      e.preventDefault()
+      pick(firstMatch.value)
+    }
+    return
+  }
+  if (k === 'Backspace') {
+    if (typed.value) {
+      e.preventDefault()
+      typed.value = typed.value.slice(0, -1)
+    }
+    return
+  }
+  if (k === 'Escape') {
+    typed.value = ''
+    return
+  }
+  // Accept a letter (or contraction apostrophe) only if it keeps at least one
+  // matching tile, so the prefix can't wander off into something unplaceable.
+  if (k.length === 1 && /[a-z']/i.test(k)) {
+    const next = typed.value + k.toLowerCase()
+    if (available.value.some((t) => t.text.toLowerCase().startsWith(next))) {
+      e.preventDefault()
+      typed.value = next
+    }
+  }
 }
 
 function check() {
@@ -64,6 +129,11 @@ onMounted(() => {
   // The Russian is the subject here whether it's heard (listen-translate) or
   // shown (translate-phrase), so read it aloud as soon as the exercise appears.
   speak(props.exercise.ru)
+  window.addEventListener('keydown', onKey)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', onKey)
 })
 </script>
 
@@ -97,12 +167,22 @@ onMounted(() => {
         :key="tile.id"
         type="button"
         class="tile"
+        :class="{ match: matchIds.has(tile.id), 'match-first': firstMatch && firstMatch.id === tile.id }"
         :disabled="checked || placedIds.has(tile.id)"
         @click="pick(tile)"
       >
         {{ tile.text }}
       </button>
     </div>
+
+    <p v-if="!checked" class="typeahead muted">
+      <template v-if="typed">
+        Typing <strong>{{ typed }}</strong
+        ><span v-if="!firstMatch"> — no match</span>
+        <span v-else> · press Enter to place</span>
+      </template>
+      <template v-else>Tap a word, or just type to find it.</template>
+    </p>
 
     <div v-if="checked" class="feedback" :class="wasCorrect ? 'ok' : 'no'">
       <strong>{{ overridden ? 'Marked correct' : wasCorrect ? 'Correct' : 'Answer:' }}</strong>
@@ -152,6 +232,23 @@ onMounted(() => {
 }
 .tile.placed {
   border-color: var(--primary);
+}
+.tile.match {
+  border-color: var(--primary);
+  background: var(--bg-soft);
+}
+.tile.match-first {
+  background: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+}
+.typeahead {
+  margin: 0;
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+}
+.typeahead strong {
+  color: var(--primary);
 }
 .feedback.ok strong {
   color: var(--good);
