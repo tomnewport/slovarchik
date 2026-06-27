@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { buildExercises, makeVisualReplacement, makeReplacementPicker, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
 import { shapePhrases } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
-import { loadFixtureWords, loadFixtureBatteries } from '../test/fixtures.js'
+import { loadFixtureWords, loadFixtureContextPhrases, loadFixtureRules } from '../test/fixtures.js'
 
 function seededRng(seed) {
   let s = seed >>> 0
@@ -14,14 +14,13 @@ function seededRng(seed) {
 
 const words = loadFixtureWords()
 const phrases = shapePhrases(words)
-const batteries = loadFixtureBatteries()
+const contextPhrases = loadFixtureContextPhrases()
+const rules = loadFixtureRules()
 
 /** Word keys from the fixture that have a usable inflection paradigm. */
 const inflectableKeys = words.filter((w) => buildParadigm(w) != null).map((w) => w.key)
-/** Inflectable words that also carry a phrase-completion (context) drill. */
-const contextKeys = words
-  .filter((w) => ['noun', 'verb', 'adjective'].includes(w.pos) && buildParadigm(w) != null)
-  .map((w) => w.key)
+/** Words that carry a phrase-completion (context) drill — i.e. have a phrase. */
+const contextKeys = words.filter((w) => contextPhrases.has(w.key)).map((w) => w.key)
 
 // One practice per catalogue entry, each with an empty pool (so the builder
 // tops up from the whole vocabulary).
@@ -58,7 +57,7 @@ function practice(practiceType, overrides = {}) {
 }
 
 function build(practices, seed = 1) {
-  return buildExercises({ practices }, { words, phrases, batteries, rng: seededRng(seed) })
+  return buildExercises({ practices }, { words, phrases, contextPhrases, rules, rng: seededRng(seed) })
 }
 
 describe('buildExercises', () => {
@@ -212,7 +211,8 @@ describe('buildExercises', () => {
     const ex = buildExercises({ practices: [practice('repeat-word', { exercises: 8 })] }, {
       words,
       phrases,
-      batteries,
+      contextPhrases,
+      rules,
       rng: seededRng(3),
       skipsSpeaking: (key) => skipped.has(key),
     })

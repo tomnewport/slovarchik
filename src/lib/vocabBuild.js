@@ -281,6 +281,41 @@ export function shapePhrases(words) {
   return out
 }
 
+/**
+ * Shape the in-context inflection drill bank from the `inflect:` annotations on
+ * words' usage examples. Every usage example may carry an `inflect` block naming
+ * the token being taught and its grammatical slot; here we turn each annotated
+ * example into a phrase descriptor the context resolver (lib/phraseContext.js)
+ * understands — the target word is the example's owner, so its key is implicit.
+ */
+export function shapeContextPhrases(words) {
+  const out = []
+  for (const w of learnableWords(words)) {
+    w.usage?.forEach((ex, i) => {
+      const a = ex?.inflect
+      const ru = String(ex?.ru ?? '').trim()
+      if (!a || !ru || !a.token) return
+      out.push({
+        id: `${w.key}#${i}`,
+        ru,
+        en: String(ex?.en_gb ?? '').trim(),
+        subject: w.collections?.[0] ?? null,
+        target: {
+          key: w.key,
+          token: a.token,
+          case: a.case ?? null,
+          number: a.number ?? null,
+          gender: a.gender ?? null,
+          tense: a.tense ?? null,
+          person: a.person ?? null,
+          rule: a.rule ?? null,
+        },
+      })
+    })
+  }
+  return out
+}
+
 /** Shape declinable nouns for the declension drill. */
 export function shapeNouns(words) {
   return learnableWords(words)

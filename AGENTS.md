@@ -73,7 +73,7 @@ src/
                         #   progression/batches/session/sessionRunner/practices/
                         #     exerciseBuild/focus/achievements  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
-                        #   phrases/phraseHint/phraseFix/phraseBattery/glossCoverage  — phrases
+                        #   phrases/phraseHint/phraseContext/glossCoverage  — phrases
                         #   quiz/recognition/handsFree/speech/feedbackSound  — drills & speech
                         #   vocabBuild/idb/text/collections/reportIssue  — data & utilities
   test/fixtures.js      # shared test fixtures

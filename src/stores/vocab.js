@@ -6,12 +6,13 @@
 import { computed, reactive } from 'vue'
 import yaml from 'js-yaml'
 
-import { buildWords, shapeVocab, shapeNouns, shapePhrases } from '../lib/vocabBuild.js'
-import { canBuildContext } from '../lib/phraseBattery.js'
+import { buildWords, shapeVocab, shapeNouns, shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
+import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import * as idb from '../lib/idb.js'
 
-/** File (and manifest `pos`) holding the phrase-completion carrier batteries. */
-const BATTERIES_FILE = 'phrase-batteries.yml'
+/** File (and manifest `pos`) holding the grammar-rule explanations, not words. */
+const RULES_FILE = 'grammar-rules.yml'
+const NON_WORD_FILES = new Set([RULES_FILE])
 
 const BASE = import.meta.env.BASE_URL || '/'
 const manifestUrl = () => `${BASE}vocab/manifest.json`
@@ -21,8 +22,10 @@ const fileUrl = (file) => `${BASE}vocab/${file}`
 export const state = reactive({
   status: 'idle',
   words: [],
-  /** Parsed phrase-batteries.yml (carrier phrases for the context drill), or null. */
-  batteries: null,
+  /** key → annotated context phrases (from usage `inflect:` blocks), indexed. */
+  contextPhrases: new Map(),
+  /** Parsed grammar-rules.yml `rules` map (rule id → explanation), or {}. */
+  rules: {},
   lastSyncedAt: null,
   vocabVersion: null,
   error: null,
@@ -35,35 +38,37 @@ export const isReady = computed(() => state.words.length > 0)
 
 /**
  * Stamp `hasContextDrill` on every word so the progression model knows whether
- * the phrase-completion mastery requirement applies. A word qualifies only if a
- * carrier phrase can actually be built for it from the loaded batteries; without
- * the batteries file no word does (the requirement stays dormant).
+ * the phrase-completion mastery requirement applies. A word qualifies only if at
+ * least one annotated usage example teaches it; without any `inflect:`
+ * annotations no word does (the requirement stays dormant).
  */
-function stampContextDrill(words, batteries) {
-  if (!batteries) {
-    for (const w of words) w.hasContextDrill = false
-    return
+function stampContextDrill(words, phrasesByKey) {
+  for (const w of words) w.hasContextDrill = canBuildContext(w, { phrasesByKey })
+}
+
+/** Parse a cached YAML record's top-level key, tolerating a missing/bad file. */
+function parseRecord(records, file, key) {
+  const rec = records.find((r) => r.file === file)
+  if (!rec) return null
+  try {
+    return yaml.load(rec.content)?.[key] ?? null
+  } catch {
+    return null
   }
-  const byKey = new Map(words.map((w) => [w.key, w]))
-  for (const w of words) w.hasContextDrill = canBuildContext(w, { batteries, wordByKey: byKey })
 }
 
 function rebuild(records) {
   const words = buildWords(
-    records.filter((r) => r.file !== BATTERIES_FILE).map((r) => ({ pos: r.pos, text: r.content })),
+    records
+      .filter((r) => !NON_WORD_FILES.has(r.file))
+      .map((r) => ({ pos: r.pos, text: r.content })),
   )
-  const batRec = records.find((r) => r.file === BATTERIES_FILE)
-  let batteries = null
-  if (batRec) {
-    try {
-      batteries = yaml.load(batRec.content) ?? null
-    } catch {
-      batteries = null
-    }
-  }
-  stampContextDrill(words, batteries)
+  const phrasesByKey = indexPhrases(shapeContextPhrases(words))
+  const rules = parseRecord(records, RULES_FILE, 'rules') ?? {}
+  stampContextDrill(words, phrasesByKey)
   state.words = words
-  state.batteries = batteries
+  state.contextPhrases = phrasesByKey
+  state.rules = rules
 }
 
 /** Populate the store from the IndexedDB cache. Returns the cached records. */

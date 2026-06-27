@@ -21,7 +21,7 @@ import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
-import { buildContextExercise, canBuildContext } from './phraseBattery.js'
+import { buildContextExercise, canBuildContext } from './phraseContext.js'
 
 /** Render `kind` for each practice type. */
 export const PRACTICE_KIND = Object.freeze({
@@ -306,7 +306,7 @@ function buildInflect(practice, pi, ctx, make) {
 
 function buildContext(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
-  const bctx = { batteries: ctx.batteries, wordByKey: ctx.recordByKey }
+  const bctx = { phrasesByKey: ctx.contextPhrases, rules: ctx.rules }
   const resolvable = (list) =>
     list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && canBuildContext(r, bctx))
   // Like buildInflect, mastery exercises never widen beyond the committed batch.
@@ -477,7 +477,8 @@ export function makeVisualReplacement(skipped, seq, picker = null) {
  * @param {object} sources
  * @param {object[]} sources.words   normalised word records (vocab store)
  * @param {object[]} sources.phrases shaped phrases ({ id, ru, en, source, cefr })
- * @param {object} [sources.batteries] parsed phrase-batteries.yml (context drill)
+ * @param {Map} [sources.contextPhrases] key → annotated context phrases (drill)
+ * @param {object} [sources.rules] grammar-rules map (rule id → explanation)
  * @param {() => number} [sources.rng]
  * @param {(key: string) => boolean} [sources.skipsSpeaking] whether the learner
  *   has waived speaking for a word — such words are kept out of speak exercises.
@@ -490,7 +491,8 @@ export function buildExercises(
     phrases = [],
     rng = Math.random,
     encounterCount = null,
-    batteries = null,
+    contextPhrases = new Map(),
+    rules = {},
     skipsSpeaking = null,
   } = {},
 ) {
@@ -499,7 +501,7 @@ export function buildExercises(
   // Shared across every practice so draws spread over the whole lesson: a word
   // recurs only once the rest of its pool has had a turn (mid-lesson spacing).
   const used = new Map()
-  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, batteries, used, skipsSpeaking }
+  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, contextPhrases, rules, used, skipsSpeaking }
 
   const out = []
   let seq = 0

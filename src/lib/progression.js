@@ -138,9 +138,10 @@ const CONTEXT_DRILL_POS = new Set(['noun', 'verb', 'adjective'])
 
 /**
  * Whether the `context` mastery requirement applies to a word. Accepts a
- * precomputed boolean (`word.hasContextDrill`, stamped by the vocab store once
- * the phrase batteries are known); otherwise falls back to the part-of-speech +
- * inflection heuristic so the model stays usable without the battery data.
+ * precomputed boolean (`word.hasContextDrill`, stamped by the vocab store from
+ * whether an annotated phrase teaches the word); otherwise falls back to the
+ * part-of-speech + inflection heuristic so the model stays usable without the
+ * phrase data loaded.
  */
 export function wordHasContextDrill(word) {
   if (!word) return false

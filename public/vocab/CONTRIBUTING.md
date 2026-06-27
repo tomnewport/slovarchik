@@ -317,6 +317,64 @@ Two mechanisms, pick the one that fits:
 
 ---
 
+## Context-drill annotations (`inflect:` on usage + `grammar-rules.yml`)
+
+The in-context inflection drill ("fix the phrase": pick the case a slot needs,
+then spell the form) is driven by the **`usage:` examples words already carry** —
+just annotated. See
+[`docs/phrase-context-redesign.md`](../../docs/phrase-context-redesign.md).
+
+Add an optional **`inflect:`** block to any usage example to mark which token is
+the word being taught and how it's inflected. The target word is the example's
+owner, so its key is implicit:
+
+```yaml
+"бабочка=butterfly":
+  ...
+  usage:
+    - ru: Де́вочка пойма́ла ба́бочку.
+      en_gb: The girl caught a butterfly.   # natural English; make number explicit
+      inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+```
+
+- **Nouns / pronouns:** `case` + `number`.
+- **Adjectives:** add `gender` (`m`/`n`/`f`/`pl`). Case-selection only works for
+  forms with a distinctive ending (mainly feminine `-ая`/`-ую`), since most
+  adjective forms are syncretic.
+- **Verbs:** `tense` (`present`/`future`/`past`) + `person`
+  (`1sg 2sg 3sg 1pl 2pl 3pl`, or `past_m/f/n/pl`). Verbs skip the case step.
+
+`token` is the 1-based index of the target in the whitespace-split `ru`
+(punctuation stays attached to its word); the token's letters must equal the
+word's stored form for that exact slot. `phrasesData.test.js` asserts this for
+every annotation — a mis-counted index or a wrong case/number fails the test.
+
+Coverage is per-**inflection-type**, not per word: not every word needs an
+annotation for every case, but each kind of inflection should be represented
+across subjects. Annotating the example also leaves the sentence available to
+the translation/spelling/listening drills, so a good example improves several
+drills at once.
+
+**`grammar-rules.yml`** — short rule/formula explanations keyed by id (referenced
+by `inflect.rule`), shown when the answer is revealed. It is loaded separately
+(it has no `words:` block):
+
+```yaml
+rules:
+  noun-acc-sg:
+    title: "Accusative singular"
+    formula: "f -а → -у · inanimate m/n = nominative · animate m = genitive"
+    explanation: >
+      The accusative is the direct object…
+    exceptions:
+      - "Feminine -ь nouns don't change: мать → мать."
+```
+
+`grammar-rules.yml` is listed in `manifest.json` (bump its `updated` when you
+change it; bump a word file's `updated` when you add `inflect:` annotations).
+
+---
+
 ## What the tests check (so you don't have to guess)
 
 `npm test` runs, among others, `vocabBuild.test.js` and `declension.test.js`,
