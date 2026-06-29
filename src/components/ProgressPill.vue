@@ -6,7 +6,7 @@
 import { ref, watch, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount } from '../stores/progress.js'
+import { learnedCount, masteredCount, currentStreak } from '../stores/progress.js'
 
 const router = useRouter()
 
@@ -50,7 +50,10 @@ function open() {
 </script>
 
 <template>
-  <button class="pill-btn" :class="{ pulse }" aria-label="Your progress" @click="open">
+  <button class="pill-btn" :class="{ pulse }" :aria-label="`Your progress — ${currentStreak}-day streak`" @click="open">
+    <span class="count streak" :class="{ lit: currentStreak > 0 }" :title="`${currentStreak}-day streak`">
+      <span class="flame" aria-hidden="true">🔥</span>{{ currentStreak }}
+    </span>
     <span class="count learn"><span class="dot" />{{ learnedCount }}</span>
     <span class="count master"><span class="dot" />{{ masteredCount }}</span>
     <span v-if="heart" class="particle heart" aria-hidden="true">💚</span>
@@ -78,6 +81,19 @@ function open() {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+}
+.count.streak {
+  gap: 0.15rem;
+}
+.streak .flame {
+  font-size: 0.95rem;
+  filter: grayscale(1) opacity(0.5);
+}
+.streak.lit .flame {
+  filter: none;
+}
+.streak:not(.lit) {
+  opacity: 0.55;
 }
 .dot {
   width: 0.6rem;

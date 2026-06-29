@@ -38,7 +38,13 @@ import {
   earnedAchievements,
   pendingAchievements,
   acknowledgeAchievements,
+  currentStreak,
+  longestStreak,
+  dailyRecord,
+  totalExercises,
+  activityCalendar,
 } from './progress.js'
+import { dayKey } from '../lib/streak.js'
 
 // A small synthetic vocabulary; `hasInflections` short-circuits the paradigm
 // lookup so we can control mastery eligibility precisely.
@@ -644,6 +650,112 @@ describe('achievements', () => {
     expect(state.seenAchievements.size).toBeGreaterThan(0)
     await resetProgress()
     expect(state.seenAchievements.size).toBe(0)
+  })
+})
+
+describe('streak & activity calendar', () => {
+  // A fixed local-noon timestamp so day keys are timezone-stable.
+  const at = (y, m, d) => new Date(y, m - 1, d, 12).getTime()
+
+  it('logs an exercise into today\'s activity', async () => {
+    setVocab(makeWords(1))
+    const today = dayKey(Date.now())
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    expect(state.activity[today]).toMatchObject({ count: 1, correct: 1 })
+    expect(state.activity[today].hue).toBeTypeOf('number')
+    expect(totalExercises.value).toBe(1)
+  })
+
+  it('counts an unhinted double answer (times) once per attempt', async () => {
+    setVocab(makeWords(1))
+    const today = dayKey(Date.now())
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, times: 2 })
+    expect(state.activity[today]).toMatchObject({ count: 2, correct: 2 })
+  })
+
+  it('tracks correct vs incorrect separately', async () => {
+    setVocab(makeWords(1))
+    const today = dayKey(Date.now())
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: false })
+    expect(state.activity[today]).toMatchObject({ count: 2, correct: 1 })
+  })
+
+  it('computes the current streak across consecutive days', async () => {
+    setVocab(makeWords(1))
+    const today = dayKey(Date.now())
+    const now = Date.now()
+    const day = 24 * 60 * 60 * 1000
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: now - 2 * day })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: now - day })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: now })
+    expect(state.activity[today].count).toBeGreaterThan(0)
+    expect(currentStreak.value).toBe(3)
+    expect(longestStreak.value).toBe(3)
+  })
+
+  it('tracks the busiest-day record', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: at(2026, 1, 1) })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: at(2026, 1, 2) })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: at(2026, 1, 2) })
+    expect(dailyRecord.value).toBe(2)
+  })
+
+  it('rerolls the hue when the active batch changes', async () => {
+    setVocab(makeWords(4))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    const sigA = state.batchSig
+    await commitBatch({ name: 'A', collection: 'animals', level: 'learning', words: ['w0', 'w1'], size: 2 })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    expect(state.batchSig).not.toBe(sigA)
+  })
+
+  it('back-populates activity from existing events on load', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: at(2026, 1, 1) })
+    // Wipe the persisted activity log but keep the per-word events, simulating a
+    // learner whose data predates the streak system.
+    await idb.setMeta('streak:activity', {})
+    state.activity = {}
+    await loadProgress()
+    expect(state.activity['2026-01-01']).toMatchObject({ count: 1, correct: 1 })
+  })
+
+  it('does not double-count days already in the persisted log on load', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: at(2026, 1, 1) })
+    await loadProgress()
+    expect(state.activity['2026-01-01'].count).toBe(1)
+  })
+
+  it('exposes a contribution calendar grid', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    const cal = activityCalendar(4)
+    expect(cal.weeks).toHaveLength(4)
+    const today = cal.weeks.flat().find((c) => c.day === dayKey(Date.now()))
+    expect(today.color).toMatch(/^#[0-9a-f]{6}$/)
+  })
+
+  it('round-trips activity through export/import', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: at(2026, 1, 1) })
+    const snapshot = exportData()
+    expect(snapshot.activity['2026-01-01']).toMatchObject({ count: 1, correct: 1 })
+    await resetProgress()
+    expect(state.activity).toEqual({})
+    await importData(snapshot)
+    expect(state.activity['2026-01-01']).toMatchObject({ count: 1, correct: 1 })
+  })
+
+  it('resetProgress clears the activity log', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    expect(totalExercises.value).toBe(1)
+    await resetProgress()
+    expect(state.activity).toEqual({})
+    expect(currentStreak.value).toBe(0)
   })
 })
 

@@ -1,10 +1,10 @@
 <script setup>
 // Progress screen: a words-known-by-day chart, expandable learned/mastered word
 // lists, the learner's weakest skills, and achievement badges.
-import { computed, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
 import AchievementBadge from '../components/AchievementBadge.vue'
 
@@ -35,6 +35,31 @@ const chart = computed(() => {
 
 const earnedCount = computed(() => earnedAchievements.value.size)
 
+// Contribution calendar (GitHub-style). `currentStreak`/`dailyRecord` etc. are
+// reactive computeds; reference them so the grid re-renders as activity lands.
+const calendar = computed(() => {
+  void progressState.activity
+  return activityCalendar()
+})
+const streak = computed(() => currentStreak.value)
+const best = computed(() => longestStreak.value)
+const record = computed(() => dailyRecord.value)
+const total = computed(() => totalExercises.value)
+
+// Open the calendar scrolled to the most recent week, the way GitHub does.
+const calScroll = ref(null)
+onMounted(async () => {
+  await nextTick()
+  if (calScroll.value) calScroll.value.scrollLeft = calScroll.value.scrollWidth
+})
+
+function cellTitle(cell) {
+  if (cell.future) return ''
+  if (cell.count === 0) return `${cell.day}: no exercises`
+  const pct = Math.round((cell.correct / cell.count) * 100)
+  return `${cell.day}: ${cell.count} exercise${cell.count === 1 ? '' : 's'}, ${pct}% correct`
+}
+
 const learningBatch = computed(() => progressState.learning)
 const masteryBatch = computed(() => progressState.mastery)
 const learningProgress = computed(() => batchProgress('learning'))
@@ -58,6 +83,43 @@ function toggle(which) {
     <div class="row counts">
       <span class="pill learn">💚 {{ learnedCount }} learned</span>
       <span class="pill master">🏆 {{ masteredCount }} mastered</span>
+    </div>
+
+    <!-- Streak + contribution calendar -->
+    <div class="card streak-card">
+      <div class="streak-head">
+        <div class="streak-now" :class="{ lit: streak > 0 }">
+          <span class="big-flame" aria-hidden="true">🔥</span>
+          <span class="streak-num">{{ streak }}</span>
+          <span class="streak-label">day streak</span>
+        </div>
+        <dl class="streak-stats">
+          <div><dt>Best</dt><dd>{{ best }} days</dd></div>
+          <div><dt>Record</dt><dd>{{ record }} / day</dd></div>
+          <div><dt>Total</dt><dd>{{ total }}</dd></div>
+        </dl>
+      </div>
+      <p class="streak-hint muted">
+        Do at least one exercise every day to keep your streak alive. Each day's
+        colour is your batch; brighter means more exercises, more vivid means more correct.
+      </p>
+      <div ref="calScroll" class="cal-scroll">
+        <div class="cal-months" aria-hidden="true">
+          <span v-for="m in calendar.months" :key="m.index" class="cal-month" :style="{ gridColumnStart: m.index + 1 }">{{ m.label }}</span>
+        </div>
+        <div class="cal-grid" role="img" aria-label="Daily exercise activity calendar">
+          <div v-for="(week, wi) in calendar.weeks" :key="wi" class="cal-week">
+            <span
+              v-for="cell in week"
+              :key="cell.day"
+              class="cal-cell"
+              :class="{ empty: !cell.color, future: cell.future }"
+              :style="cell.color ? { background: cell.color } : null"
+              :title="cellTitle(cell)"
+            />
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Current learning / mastery batches -->
@@ -204,6 +266,104 @@ function toggle(which) {
 }
 .master-fill {
   background: var(--gold);
+}
+.streak-card {
+  display: grid;
+  gap: 0.75rem;
+}
+.streak-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.streak-now {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  opacity: 0.5;
+}
+.streak-now.lit {
+  opacity: 1;
+}
+.big-flame {
+  font-size: 1.5rem;
+  filter: grayscale(1);
+}
+.streak-now.lit .big-flame {
+  filter: none;
+}
+.streak-num {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.streak-label {
+  font-size: 0.9rem;
+  color: var(--muted, inherit);
+}
+.streak-stats {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+}
+.streak-stats div {
+  display: grid;
+  gap: 0.1rem;
+}
+.streak-stats dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+}
+.streak-stats dd {
+  margin: 0;
+  font-weight: 600;
+}
+.streak-hint {
+  margin: 0;
+  font-size: 0.85rem;
+}
+.cal-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+.cal-months {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 14px;
+  height: 1rem;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  min-width: max-content;
+}
+.cal-month {
+  white-space: nowrap;
+  grid-row: 1;
+}
+.cal-grid {
+  display: flex;
+  gap: 3px;
+  min-width: max-content;
+}
+.cal-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.cal-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: var(--bg-soft);
+}
+.cal-cell.empty {
+  background: var(--bg-soft);
+}
+.cal-cell.future {
+  visibility: hidden;
 }
 .pill.learn {
   border-color: var(--good);
