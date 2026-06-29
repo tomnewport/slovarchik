@@ -14,8 +14,7 @@
 // Framework-free; randomness is injectable for deterministic tests.
 
 import { normalize } from './text.js'
-import { CASES, CASE_LABELS, CASE_HINTS, NUMBER_LABELS } from './declension.js'
-import { shuffle } from './quiz.js'
+import { CASES, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
 
 /** Parts of speech that carry a context drill. */
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
@@ -104,7 +103,10 @@ function slotLabelFor(target) {
   return ''
 }
 
-/** Step-1 options for a noun/pronoun: pick the case (six options + hints). */
+/** Genders an adjective/possessive can agree with (gender already encodes number). */
+const GENDERS = ['m', 'n', 'f', 'pl']
+
+/** Selection step: pick the case (six options + hints). */
 function caseStep(target) {
   return {
     kind: 'case',
@@ -118,44 +120,56 @@ function caseStep(target) {
   }
 }
 
-/**
- * Step-1 options for an adjective: pick the agreement (gender · case) the slot
- * demands. The correct slot plus up to three decoys drawn from the adjective's
- * own paradigm — prioritising instructive near-misses (same case other gender,
- * same gender other case) so the choice tests reading gender + case off the
- * carrier noun, not surface-form recognition.
- */
-function agreementStep(target, word, rng) {
-  const decl = word?.extra?.declension ?? {}
-  const has = (g, c) => Boolean(decl[`${g}_${c}`])
-  const all = []
-  for (const g of ['m', 'n', 'f', 'pl']) {
-    for (const c of CASES) {
-      if (g === target.gender && c === target.case) continue
-      if (!has(g, c)) continue
-      all.push({ g, c })
-    }
+/** Selection step: pick the number (Singular / Plural) — nouns. */
+function numberStep(target) {
+  return {
+    kind: 'number',
+    prompt: 'Is it singular or plural?',
+    options: NUMBERS.map((n) => ({
+      id: n,
+      label: NUMBER_LABELS[n],
+      correct: n === target.number,
+    })),
   }
-  const sameCase = all.filter((s) => s.c === target.case)
-  const sameGender = all.filter((s) => s.g === target.gender)
-  const rest = all.filter((s) => s.c !== target.case && s.g !== target.gender)
-  const ordered = [...shuffle(sameCase, rng), ...shuffle(sameGender, rng), ...shuffle(rest, rng)]
-  const decoys = ordered.slice(0, 3)
-  const options = [
-    { id: `${target.gender}.${target.case}`, label: agreementLabel(target.gender, target.case), correct: true },
-    ...decoys.map((s) => ({ id: `${s.g}.${s.c}`, label: agreementLabel(s.g, s.c), correct: false })),
-  ]
-  const what = word?.pos === 'pronoun' ? 'pronoun' : 'adjective'
-  return { kind: 'agreement', prompt: `Which form does the ${what} need to agree with?`, options: shuffle(options, rng) }
 }
 
 /**
- * The clickable step-1 options. Nouns/pronouns pick the case; adjectives pick
- * the gender · case agreement; verbs have no step 1 (null).
+ * Selection step: pick the gender + number the adjective/possessive must agree
+ * with (its `pl` value carries the plural, so this single choice covers number
+ * too). Offers the genders the word actually declines for, falling back to all
+ * four when the paradigm isn't available.
  */
-export function buildStep1(target, word, rng = Math.random) {
-  if (!target?.case) return null
-  return target.gender ? agreementStep(target, word, rng) : caseStep(target)
+function genderStep(target, word) {
+  const decl = word?.extra?.declension ?? {}
+  const present = GENDERS.filter((g) => CASES.some((c) => decl[`${g}_${c}`]))
+  const genders = present.length ? present : GENDERS
+  return {
+    kind: 'gender',
+    prompt: 'Which gender / number must it agree with?',
+    options: genders.map((g) => ({
+      id: g,
+      label: GENDER_LABEL[g] ?? g,
+      correct: g === target.gender,
+    })),
+  }
+}
+
+/**
+ * The ordered selection steps the learner works through before spelling — case
+ * always first, then the other dimension:
+ *   - adjectives / possessive pronouns (gender-bearing): case → gender + number
+ *   - nouns: case → number (singular / plural)
+ *   - personal pronouns: case only (number is fixed by the lemma — я is always
+ *     singular, so there's nothing to choose)
+ *   - verbs (no case): no selection steps — straight to spelling
+ * Each step is `{ kind, prompt, options: [{ id, label, hint?, correct }] }`; the
+ * component grades each clicked option's `correct` flag.
+ */
+export function buildSelectSteps(target, word) {
+  if (!target?.case) return []
+  if (target.gender) return [caseStep(target), genderStep(target, word)]
+  if (word?.pos === 'noun') return [caseStep(target), numberStep(target)]
+  return [caseStep(target)]
 }
 
 /**
@@ -163,7 +177,7 @@ export function buildStep1(target, word, rng = Math.random) {
  * record it teaches. Returns null if the annotation is malformed (token out of
  * range or empty).
  */
-export function buildFromPhrase(phrase, word, { rules = {}, rng = Math.random } = {}) {
+export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   const target = phrase?.target
   if (!target) return null
   const tokens = tokenize(phrase.ru)
@@ -188,9 +202,9 @@ export function buildFromPhrase(phrase, word, { rules = {}, rng = Math.random } 
     lemma,
     answerAccented: core,
     answer: normalize(core),
-    // Step 1 — pick the case (noun) or the gender·case agreement (adjective);
-    // null for verbs (no selection step). The component grades option.correct.
-    step1: buildStep1(target, word, rng),
+    // The ordered selection steps (case first, then number / gender + number);
+    // empty for verbs. The component grades each clicked option's `correct`.
+    selectSteps: buildSelectSteps(target, word),
     number: target.number ?? null,
     slotLabel: slotLabelFor(target),
     // The full, correct sentence — safe to speak only after a correct answer.

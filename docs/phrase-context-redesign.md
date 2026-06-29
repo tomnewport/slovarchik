@@ -84,19 +84,23 @@ The renderer (`components/exercises/PhraseFixExercise.vue`) runs the drill in tw
 graded steps:
 
 1. **Select the slot.** The phrase shows with the target collapsed to its lemma.
-   - **Nouns / pronouns:** pick the *case* the slot requires (six case buttons
-     with the `CASE_HINTS` glosses).
-   - **Adjectives:** pick the *agreement* — the gender · case the adjective must
-     match (the correct `gender·case` plus up to three decoys drawn from the
-     adjective's own paradigm, prioritising near-misses). Because adjective
-     endings are heavily syncretic, "which case" alone is a poor question; the
-     real skill is reading gender + case off the carrier noun, so that is what we
-     test.
-   - **Verbs** skip this step — there is no case to choose — and go straight to
+   The learner works through a *sequence* of picks — **case always first**, then
+   the dimension that disambiguates the form:
+   - **Nouns:** case (six buttons with the `CASE_HINTS` glosses) → number
+     (Singular / Plural). Both are free choices the learner must read off the
+     sentence, so both are asked.
+   - **Adjectives / possessive pronouns:** case → gender + number (Masculine /
+     Neuter / Feminine / Plural, where the `pl` option carries the plural). The
+     real skill is reading case *and* the agreeing gender/number off the carrier
+     noun, so each is its own pick.
+   - **Personal pronouns:** case only — number is fixed by the lemma (я is always
+     singular), so there's nothing to choose.
+   - **Verbs** skip this stage — there is no case to choose — and go straight to
      spelling.
-   `lib/phraseContext.js` builds the options as a generic `step1` descriptor
-   (`{ kind, prompt, options: [{ id, label, hint?, correct }] }`); the component
-   grades the clicked option's `correct` flag.
+   `lib/phraseContext.js` builds an ordered `selectSteps` array, each a generic
+   descriptor (`{ kind, prompt, options: [{ id, label, hint?, correct }] }`); the
+   component grades each clicked option's `correct` flag and counts the selection
+   right only if every step was.
 2. **Spell the form.** The learner types the correctly inflected form. Graded
    leniently (`normalize` + `foldYo`: stress- and ё/е-insensitive).
 
@@ -110,7 +114,7 @@ right first time.
 - `src/lib/phraseContext.js` (new, pure, tested) replaces `phraseBattery.js`.
   `buildContextExercise(word, { phrasesByKey, rules, rng })` picks one annotated
   phrase for the word and returns the exercise descriptor (tokens, lemma,
-  targetIndex, answer/answerAccented, case, number, caseOptions, slotLabel, `ru`
+  targetIndex, answer/answerAccented, number, selectSteps, slotLabel, `ru`
   full sentence, `en`, `rule`). `canBuildContext(word, { phrasesByKey })` = the
   word has ≥1 annotated phrase.
 - `src/stores/vocab.js` builds the `key → [phrase]` index from
