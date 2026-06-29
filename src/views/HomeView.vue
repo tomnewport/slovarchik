@@ -13,7 +13,6 @@ import {
   lost,
   stateOf,
   hasContextDrill,
-  skipsSpeaking,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
@@ -74,13 +73,9 @@ const MASTERY_DIMS = ['identification', 'usage', 'context']
 const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️', context: '🛠️' }
 
 // Drop dots a word isn't actually graded on, so "done" words stay tidy:
-//  - speaking, at the learning level, for words the learner has waived (the
-//    recogniser couldn't hear them);
 //  - context, at the mastery level, for words with no phrase-completion drill.
 function dimsFor(key, level, dims) {
-  if (level !== 'mastery') {
-    return dims.filter((d) => d !== 'speaking' || !skipsSpeaking(key))
-  }
+  if (level !== 'mastery') return dims
   return dims.filter((d) => d !== 'context' || hasContextDrill(key))
 }
 
@@ -312,9 +307,9 @@ const FOCUSED = [
               v-for="d in w.dims"
               :key="d.name"
               class="dim-pip"
-              :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
-              :title="d.name"
-            >{{ d.label }}</span>
+              :class="[d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty', { 'dim-missing': !d.met }]"
+              :title="d.met ? d.name : `${d.name} — needs practice to recover`"
+            ><span class="dim-glyph">{{ d.label }}</span></span>
           </div>
         </div>
       </div>
@@ -499,6 +494,7 @@ const FOCUSED = [
   flex-shrink: 0;
 }
 .dim-pip {
+  position: relative;
   font-size: 0.9rem;
   width: 1.4rem;
   height: 1.4rem;
@@ -514,6 +510,34 @@ const FOCUSED = [
 }
 .dim-empty {
   opacity: 0.2;
+}
+/* Slipped words: spotlight the skills that still need recovering. Keep the pip
+   itself at full opacity (so the badge stays crisp — opacity would dim it too)
+   and fade only the glyph, then stamp a red ✕ in the corner. */
+.dim-missing {
+  opacity: 1;
+}
+.dim-missing .dim-glyph {
+  opacity: 0.4;
+  filter: grayscale(0.5);
+}
+.dim-missing::after {
+  content: '✕';
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--bad, #ff5c5c);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px var(--card, #1d2745);
 }
 .standard h2 {
   margin: 0 0 0.25rem;

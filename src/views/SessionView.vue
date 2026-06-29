@@ -113,7 +113,6 @@ async function setup() {
     encounterCount: progress.encounterCount,
     contextPhrases: vocabState.contextPhrases,
     rules: vocabState.rules,
-    skipsSpeaking: progress.skipsSpeaking,
   })
   for (const ex of exercises) {
     for (const key of ex.targets) {
@@ -195,21 +194,13 @@ async function onDone(result) {
   warmAudio()
   const ex = current.value
   if (!ex) return
-  // The learner gave up on this word's speaking (the recogniser can't hear it):
-  // waive speaking for every target so it's never drilled aloud again, and
-  // advance without marking the exercise wrong (so it isn't re-queued).
-  if (result.skipSpeaking) {
-    let skipError = null
-    for (const key of (ex.targets ?? []).filter(Boolean)) {
-      try {
-        await progress.recordSpeakingSkip(key)
-      } catch (e) {
-        if (!skipError) skipError = e
-      }
-    }
+  // One-off speaking skip: recognition is misbehaving on this word right now.
+  // Advance past just this exercise without recording an attempt — so it isn't
+  // marked wrong or re-queued, and nothing is waived permanently. The word stays
+  // eligible for speaking again in a later session.
+  if (result.skip) {
     submit(runner, true)
     await finalizeIfDone()
-    if (skipError) throw skipError
     return
   }
   // result.wrong (matching exercises) lists the specific missed keys; everything

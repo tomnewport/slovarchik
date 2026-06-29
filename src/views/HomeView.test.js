@@ -96,6 +96,28 @@ describe('HomeView', () => {
     expect(children[0]).toContain('exercise-bar')
   })
 
+  it('flags the unmet skills on a slipped word with a missing badge', () => {
+    // A word that reached "learned" (peak 2) but whose attempts now only place
+    // it back at "learning" shows up under Slipped. Its not-yet-recovered
+    // dimensions should be marked so the learner sees what to practise.
+    progress.records = {
+      'кот=cat': {
+        word: 'кот=cat',
+        events: [{ dimension: 'identification', level: 'learning', correct: true, ts: 1 }],
+        learnedAt: null,
+        masteredAt: null,
+        peak: 2,
+      },
+    }
+    const wrapper = mount(HomeView)
+    const card = wrapper.find('.slipped-card')
+    expect(card.exists()).toBe(true)
+    // At least one dimension is missing, and missing pips carry the badge class.
+    const missing = card.findAll('.dim-missing')
+    expect(missing.length).toBeGreaterThan(0)
+    expect(missing[0].classes()).toContain('dim-pip')
+  })
+
   it('shows mastery batch only when a mastery batch is active', () => {
     const wrapper = mount(HomeView)
     expect(wrapper.find('.master-kind').exists()).toBe(false)
