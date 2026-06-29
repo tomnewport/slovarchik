@@ -79,17 +79,22 @@ export function indexPhrases(phrases) {
   return byKey
 }
 
-/** Gender · case label for an adjective slot (gender already encodes number). */
+/**
+ * Case · gender label for an adjective slot (gender already encodes number).
+ * Case leads — it's the dimension the learner picks first — with the agreeing
+ * gender·number after it.
+ */
 function agreementLabel(gender, c) {
-  return `${GENDER_LABEL[gender] ?? gender} · ${CASE_LABELS[c] ?? c}`
+  return `${CASE_LABELS[c] ?? c} · ${GENDER_LABEL[gender] ?? gender}`
 }
 
 /** Human-readable label for the grammatical slot a phrase drills. */
 function slotLabelFor(target) {
   if (target.case) {
     if (target.gender) return agreementLabel(target.gender, target.case)
+    // Case first, then number — the order the learner reasons in.
     const num = NUMBER_LABELS[target.number] ?? target.number
-    return `${num ? num + ' · ' : ''}${CASE_LABELS[target.case] ?? target.case}`
+    return `${CASE_LABELS[target.case] ?? target.case}${num ? ' · ' + num : ''}`
   }
   if (target.person) {
     const tense = TENSE_LABEL[target.tense] ?? target.tense ?? ''

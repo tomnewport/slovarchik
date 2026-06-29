@@ -28,7 +28,7 @@ const nounExercise = {
     ],
   },
   number: 'sg',
-  slotLabel: 'Singular · Accusative',
+  slotLabel: 'Accusative · Singular',
   ru: 'Де́вочка пойма́ла ба́бочку.',
   en: 'The girl caught a butterfly.',
   rule: { id: 'noun-acc-sg', title: 'Accusative singular', formula: '-а → -у' },
@@ -82,6 +82,25 @@ describe('PhraseFixExercise', () => {
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
   })
 
+  it('makes clear when the spelling was right but the case was wrong', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
+    const genBtn = wrapper.findAll('.case-btn').find((b) => b.text().includes('Genitive'))
+    await genBtn.trigger('click') // wrong case
+    await wrapper.find('input[lang="ru"]').setValue('бабочку') // right spelling
+    await wrapper.find('form').trigger('submit')
+    // Not flagged as an outright miss — the spelling is acknowledged as correct…
+    expect(wrapper.find('.feedback.bad').exists()).toBe(false)
+    const feedback = wrapper.find('.feedback.warn')
+    expect(feedback.exists()).toBe(true)
+    expect(feedback.text()).toContain('Spelling right')
+    expect(feedback.text()).toContain('wrong case')
+    // …and it restates the slot the word actually needed (case first).
+    expect(feedback.text()).toContain('Accusative · Singular')
+    // The in-sentence form (the correct one) is warn-highlighted, not error-red.
+    expect(wrapper.find('.phrase-line .mark-warn').exists()).toBe(true)
+    expect(wrapper.find('.phrase-line .mark-err').exists()).toBe(false)
+  })
+
   it('grades leniently (stress/ё) and reveals the rule', async () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
     const accBtn = wrapper.findAll('.case-btn').find((b) => b.text().includes('Accusative'))
@@ -123,19 +142,19 @@ describe('PhraseFixExercise', () => {
         kind: 'agreement',
         prompt: 'Which form does the adjective need to agree with?',
         options: [
-          { id: 'm.nom', label: 'Masculine · Nominative', correct: false },
-          { id: 'f.acc', label: 'Feminine · Accusative', correct: true },
-          { id: 'f.nom', label: 'Feminine · Nominative', correct: false },
+          { id: 'm.nom', label: 'Nominative · Masculine', correct: false },
+          { id: 'f.acc', label: 'Accusative · Feminine', correct: true },
+          { id: 'f.nom', label: 'Nominative · Feminine', correct: false },
         ],
       },
-      slotLabel: 'Feminine · Accusative',
+      slotLabel: 'Accusative · Feminine',
       ru: 'Я чита́ю но́вую кни́гу.', en: 'I am reading a new book.',
       rule: { id: 'adj-agreement', title: 'Adjective agreement' }, targets: ['новый=new'],
     }
     const wrapper = mount(PhraseFixExercise, { props: { exercise: adj } })
     expect(wrapper.text()).toContain('Which form does the adjective need to agree with?')
     expect(speak).not.toHaveBeenCalled()
-    const opt = wrapper.findAll('.case-btn').find((b) => b.text().includes('Feminine · Accusative'))
+    const opt = wrapper.findAll('.case-btn').find((b) => b.text().includes('Accusative · Feminine'))
     await opt.trigger('click')
     expect(speak).not.toHaveBeenCalled()
     await wrapper.find('input[lang="ru"]').setValue('новую')
