@@ -82,7 +82,7 @@ describe('buildStep1', () => {
     expect(s.options.length).toBeLessThanOrEqual(4)
     const correct = s.options.filter((o) => o.correct)
     expect(correct).toHaveLength(1)
-    expect(correct[0]).toMatchObject({ id: 'f.acc', label: 'Feminine · Accusative' })
+    expect(correct[0]).toMatchObject({ id: 'f.acc', label: 'Accusative · Feminine' })
     // decoys are distinct real (gender·case) slots, never the correct one
     const ids = s.options.map((o) => o.id)
     expect(new Set(ids).size).toBe(ids.length)
@@ -113,7 +113,7 @@ describe('buildFromPhrase', () => {
     const ex = buildFromPhrase(adjPhrase, noviy, { rng: () => 0 })
     expect(ex.step1.kind).toBe('agreement')
     expect(ex.answerAccented).toBe('но́вую')
-    expect(ex.slotLabel).toBe('Feminine · Accusative')
+    expect(ex.slotLabel).toBe('Accusative · Feminine')
   })
 
   it('returns null for an out-of-range token index', () => {
@@ -134,7 +134,7 @@ describe('buildFromPhrase', () => {
     expect(ex.step1.kind).toBe('agreement')
     expect(ex.step1.prompt).toContain('pronoun')
     expect(ex.answer).toBe('моя')
-    expect(ex.slotLabel).toBe('Feminine · Nominative')
+    expect(ex.slotLabel).toBe('Nominative · Feminine')
   })
 })
 

@@ -32,6 +32,17 @@ const inputEl = ref(null)
 
 const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
 
+// The word it asks the learner to pick in step 1: "case" for nouns/pronouns,
+// "form" for adjective/pronoun agreement (gender·case).
+const selectKind = computed(() => (step1.value?.kind === 'agreement' ? 'form' : 'case'))
+
+// The instructive near-miss: the spelling matched but the wrong case/form was
+// chosen. Worth calling out clearly so the learner doesn't think their (correct)
+// spelling was rejected.
+const spellingOnlyMiss = computed(
+  () => selected.value && !selectCorrect.value && spellCorrect.value,
+)
+
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
 // so the slot doesn't drop it when we swap in the lemma / answer. Combining marks
 // (the stress accent) stay with the word core, so they're excluded from the affix.
@@ -89,7 +100,7 @@ onMounted(() => {
         >{{ slotText }}</button>
         <mark
           v-else-if="i === exercise.targetIndex"
-          :class="overallCorrect ? 'mark-ok' : 'mark-err'"
+          :class="overallCorrect ? 'mark-ok' : spellingOnlyMiss ? 'mark-warn' : 'mark-err'"
         >{{ slotText }}</mark>
         <span v-else>{{ tok }}</span>
       </template>
@@ -116,9 +127,6 @@ onMounted(() => {
     <template v-else>
       <p class="slot-label muted">
         <em lang="ru">{{ exercise.lemma }}</em> → {{ exercise.slotLabel }}
-        <span v-if="selected && !selectCorrect" class="case-miss">
-          (you picked the wrong {{ step1?.kind === 'agreement' ? 'form' : 'case' }})
-        </span>
       </p>
 
       <form v-if="step === 'spell'" @submit.prevent="submitSpell" class="grid">
@@ -137,8 +145,12 @@ onMounted(() => {
       </form>
 
       <div v-else class="grid" style="gap: 0.75rem">
-        <p class="feedback" :class="overallCorrect ? 'good' : 'bad'">
+        <p class="feedback" :class="overallCorrect ? 'good' : spellingOnlyMiss ? 'warn' : 'bad'">
           <template v-if="overallCorrect">✓ Correct!</template>
+          <template v-else-if="spellingOnlyMiss">
+            ✓ Spelling right — but you picked the wrong {{ selectKind }}.
+            It needed <strong>{{ exercise.slotLabel }}</strong>.
+          </template>
           <template v-else>✗ {{ exercise.answerAccented }}</template>
         </p>
 
@@ -206,6 +218,18 @@ onMounted(() => {
   color: var(--bad);
   font-weight: 600;
 }
+/* Spelling was right, only the case/form choice missed — the word shown in the
+   sentence is the correct form, so don't flag it red as if it were wrong. */
+.mark-warn {
+  background: color-mix(in srgb, var(--warn, #c9962b) 18%, transparent);
+  border-radius: 3px;
+  padding: 0 0.15rem;
+  color: var(--warn, #c9962b);
+  font-weight: 600;
+}
+.feedback.warn {
+  color: var(--warn, #c9962b);
+}
 .step-label {
   font-size: 0.95rem;
 }
@@ -232,9 +256,6 @@ onMounted(() => {
 }
 .slot-label {
   font-size: 0.9rem;
-}
-.case-miss {
-  color: var(--bad);
 }
 .full-ru {
   font-size: 1.2rem;
