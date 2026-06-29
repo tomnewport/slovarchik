@@ -13,7 +13,6 @@ import {
   lost,
   stateOf,
   hasContextDrill,
-  skipsSpeaking,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
@@ -74,13 +73,9 @@ const MASTERY_DIMS = ['identification', 'usage', 'context']
 const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️', context: '🛠️' }
 
 // Drop dots a word isn't actually graded on, so "done" words stay tidy:
-//  - speaking, at the learning level, for words the learner has waived (the
-//    recogniser couldn't hear them);
 //  - context, at the mastery level, for words with no phrase-completion drill.
 function dimsFor(key, level, dims) {
-  if (level !== 'mastery') {
-    return dims.filter((d) => d !== 'speaking' || !skipsSpeaking(key))
-  }
+  if (level !== 'mastery') return dims
   return dims.filter((d) => d !== 'context' || hasContextDrill(key))
 }
 

@@ -175,11 +175,13 @@ function selfAssessed() {
   emit('done', { correct: true })
 }
 
-// Give up on this word's speaking. Some words (very short ones like год or май)
-// are effectively impossible for the recogniser; skipping waives the speaking
-// requirement for the word so it can still be learned.
+// One-off skip for when speech recognition is misbehaving on this word right
+// now (mis-hearing it, or it's a very short word like год the recogniser keeps
+// dropping). Skips just this exercise — the attempt isn't marked wrong and the
+// word stays eligible for speaking again in a later session; nothing is waived
+// permanently.
 function skip() {
-  emit('done', { skipSpeaking: true })
+  emit('done', { skip: true })
 }
 
 function next() {
@@ -258,9 +260,10 @@ onBeforeUnmount(() => {
         </div>
       </template>
 
-      <!-- Escape hatch for words the recogniser can't reliably hear (short words
-           like год or май): waive speaking for this word and move on. -->
-      <button class="skip-word" @click="skip">Can't catch this word? Skip it</button>
+      <!-- One-off escape hatch for when the recogniser is misbehaving on this
+           word right now: skip just this exercise and move on. The word will
+           come round again for speaking in a later session. -->
+      <button class="skip-word" @click="skip">Speech not working? Skip for now</button>
     </template>
 
     <!-- No recognition: self-assess (the attempt counts). -->

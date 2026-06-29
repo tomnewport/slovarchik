@@ -151,16 +151,11 @@ export function wordHasContextDrill(word) {
 
 /**
  * The dimensions graded for a level, narrowed to those that apply to `word`.
- * - At the learning level, drops `speaking` for words flagged `skip_speaking`
- *   (short words that speech recognition cannot reliably detect).
  * - At the mastery level, drops `context` for words with no phrase-completion
  *   drill (so they aren't left permanently un-masterable).
  */
 export function applicableDimensions(level, word = {}) {
   const dims = dimensionsForLevel(level)
-  if (level === 'learning') {
-    return dims.filter((d) => d !== 'speaking' || !wordSkipsSpeaking(word))
-  }
   if (level !== 'mastery') return dims
   return dims.filter((d) => d !== 'context' || wordHasContextDrill(word))
 }
@@ -170,16 +165,6 @@ export function levelMet(events, level, word = {}) {
   return applicableDimensions(level, word).every((d) =>
     criterionMet(attemptsFor(events, level, d), CRITERIA[level][d]),
   )
-}
-
-/**
- * Whether the speaking learning requirement is waived for a word. Set via
- * `skip_speaking: true` in the vocab YAML for words that speech recognition
- * cannot reliably detect (e.g. very short words like год or май).
- */
-export function wordSkipsSpeaking(word) {
-  if (!word) return false
-  return word.skipSpeaking === true
 }
 
 /**

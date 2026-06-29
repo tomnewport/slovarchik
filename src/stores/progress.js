@@ -23,7 +23,6 @@ import {
   wordState,
   wordHasInflections,
   wordHasContextDrill,
-  wordSkipsSpeaking,
   dimensionProgress,
   levelMet,
   lastAttemptAt,
@@ -74,10 +73,7 @@ const wordIndex = computed(() => {
 })
 
 function wordRecord(key) {
-  const word = wordIndex.value.get(key) ?? { key, hasInflections: false }
-  // A learner-set speaking waiver lives on the progress record, not the vocab
-  // word; merge it in so the pure model sees it (without mutating shared vocab).
-  return state.records[key]?.skipSpeaking ? { ...word, skipSpeaking: true } : word
+  return wordIndex.value.get(key) ?? { key, hasInflections: false }
 }
 
 // ---------------------------------------------------------------------------
@@ -190,7 +186,6 @@ function ensureRecord(key) {
       learnedAt: null,
       masteredAt: null,
       peak: 0,
-      skipSpeaking: false,
     }
   }
   return state.records[key]
@@ -250,29 +245,6 @@ export async function recordAttempt({ word, dimension, level, correct, ts = Date
 }
 
 /**
- * Waive the speaking learning requirement for a word. The learner presses
- * "skip" on a speaking exercise when speech recognition simply can't pick the
- * word up (very short words like год or май). The waiver is persisted, so the
- * word is never drawn into another speaking exercise and can reach `learned`
- * without a speaking attempt. Idempotent.
- * @returns {string} the word's new state
- */
-export async function recordSpeakingSkip(word, ts = Date.now()) {
-  if (!word) return stateOf(word)
-  const rec = ensureRecord(word)
-  if (rec.skipSpeaking) return stateOf(word)
-  rec.skipSpeaking = true
-
-  const next = stateOf(word)
-  if (rec.learnedAt == null && rank(next) >= rank('learned')) rec.learnedAt = ts
-  if (rec.masteredAt == null && next === 'mastered') rec.masteredAt = ts
-  rec.peak = Math.max(rec.peak ?? 0, rank(next))
-
-  await persist(rec)
-  return next
-}
-
-/**
  * Mark all currently earned achievements as seen so they won't be shown again.
  * Persists to IndexedDB.
  */
@@ -289,7 +261,6 @@ function plain(rec) {
     learnedAt: rec.learnedAt,
     masteredAt: rec.masteredAt,
     peak: rec.peak ?? 0,
-    skipSpeaking: rec.skipSpeaking === true,
   }
 }
 
@@ -635,7 +606,6 @@ export async function loadProgress() {
       learnedAt: r.learnedAt ?? null,
       masteredAt: r.masteredAt ?? null,
       peak: r.peak ?? 0,
-      skipSpeaking: r.skipSpeaking === true,
     }
   }
   // Backfill first-learned / first-mastered timestamps for any record that
@@ -693,11 +663,6 @@ export function hasInflections(key) {
 /** Whether the phrase-completion (context) mastery requirement applies to a word. */
 export function hasContextDrill(key) {
   return wordHasContextDrill(wordRecord(key))
-}
-
-/** Whether the speaking learning requirement is waived for a word. */
-export function skipsSpeaking(key) {
-  return wordSkipsSpeaking(wordRecord(key))
 }
 
 // ---------------------------------------------------------------------------
