@@ -13,7 +13,6 @@ import {
   levelMet,
   wordHasInflections,
   wordHasContextDrill,
-  wordSkipsSpeaking,
   wordState,
   wordProgress,
   lastAttemptAt,
@@ -251,48 +250,14 @@ describe('context mastery requirement', () => {
   })
 })
 
-describe('speaking waiver (skip_speaking)', () => {
-  // The three non-speaking learning dimensions met, with no speaking attempts.
-  const noSpeaking = [
-    ...attempts('learning', 'identification', [false, true, true, true]),
-    ...attempts('learning', 'usage', [false, true, true, true]),
-    ...attempts('learning', 'hearing', [false, true, true, true]),
-  ]
-
-  it('reads the skipSpeaking flag off a word', () => {
-    expect(wordSkipsSpeaking({ skipSpeaking: true })).toBe(true)
-    expect(wordSkipsSpeaking({ skipSpeaking: false })).toBe(false)
-    expect(wordSkipsSpeaking({})).toBe(false)
-    expect(wordSkipsSpeaking(null)).toBe(false)
-  })
-
-  it('drops speaking from the learning dimensions for a waived word', () => {
+describe('learning dimensions', () => {
+  it('always grades all four learning dimensions', () => {
     expect(applicableDimensions('learning', {})).toEqual([
       'identification',
       'usage',
       'hearing',
       'speaking',
     ])
-    expect(applicableDimensions('learning', { skipSpeaking: true })).toEqual([
-      'identification',
-      'usage',
-      'hearing',
-    ])
-  })
-
-  it('lets a word learn without any speaking attempt once waived', () => {
-    // Without the waiver the missing speaking dimension keeps it in 'learning'.
-    expect(wordState(noSpeaking, { hasInflections: true })).toBe('learning')
-    expect(levelMet(noSpeaking, 'learning', { hasInflections: true })).toBe(false)
-    // With the waiver the three remaining dimensions are enough to learn it.
-    expect(levelMet(noSpeaking, 'learning', { hasInflections: true, skipSpeaking: true })).toBe(true)
-    expect(wordState(noSpeaking, { hasInflections: true, skipSpeaking: true })).toBe('learned')
-  })
-
-  it('omits speaking from a waived word’s learning progress breakdown', () => {
-    const p = wordProgress(noSpeaking, { hasInflections: true, skipSpeaking: true })
-    expect(Object.keys(p.learning.dimensions)).toEqual(['identification', 'usage', 'hearing'])
-    expect(p.learning.met).toBe(true)
   })
 })
 

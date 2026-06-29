@@ -99,14 +99,14 @@ describe('SpeakExercise', () => {
     expect(wrapper.find('button.mic').exists()).toBe(true)
   })
 
-  it('offers a skip for words recognition can’t catch, emitting a waiver', async () => {
+  it('offers a one-off skip when recognition misbehaves on a word', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
 
     const skipBtn = wrapper.find('button.skip-word')
     expect(skipBtn.exists()).toBe(true)
     await skipBtn.trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ skipSpeaking: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ skip: true })
   })
 
   it('🐢 Slow while listening pauses recognition and returns to the prompt', async () => {

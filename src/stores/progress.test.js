@@ -13,8 +13,6 @@ import {
   atRisk,
   recentlyLearned,
   recordAttempt,
-  recordSpeakingSkip,
-  skipsSpeaking,
   getBatchOptions,
   commitBatch,
   batchProgress,
@@ -130,38 +128,6 @@ describe('recording attempts & states', () => {
     }
     expect(Object.keys(state.records)).toHaveLength(0)
     expect(await idb.getAllProgress()).toHaveLength(0)
-  })
-
-  it('lets a learner waive speaking so a word learns without it', async () => {
-    setVocab(makeWords(1, { hasInflections: false }))
-    // Satisfy every learning dimension except speaking — the word stalls.
-    for (const d of ['identification', 'usage', 'hearing']) {
-      for (let i = 0; i < 3; i++) {
-        await recordAttempt({ word: 'w0', dimension: d, level: 'learning', correct: true })
-      }
-    }
-    expect(stateOf('w0')).toBe('learning')
-    expect(skipsSpeaking('w0')).toBe(false)
-
-    await recordSpeakingSkip('w0')
-    expect(skipsSpeaking('w0')).toBe(true)
-    // With speaking waived the three remaining dimensions are enough.
-    expect(stateOf('w0')).toBe('mastered')
-    expect(state.records.w0.learnedAt).not.toBeNull()
-
-    // The waiver survives a reload from IndexedDB.
-    await loadProgress()
-    expect(skipsSpeaking('w0')).toBe(true)
-    expect(stateOf('w0')).toBe('mastered')
-  })
-
-  it('recordSpeakingSkip is idempotent and tolerates a missing key', async () => {
-    setVocab(makeWords(1, { hasInflections: false }))
-    await expect(recordSpeakingSkip('')).resolves.toBe('unknown')
-    expect(Object.keys(state.records)).toHaveLength(0)
-    await recordSpeakingSkip('w0')
-    await recordSpeakingSkip('w0')
-    expect(skipsSpeaking('w0')).toBe(true)
   })
 
   it('caps stored attempts per dimension to keep records bounded', async () => {
