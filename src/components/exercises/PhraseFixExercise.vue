@@ -1,7 +1,9 @@
 <script setup>
 // In-context inflection drill (mastery). A real, correct sentence is shown with
-// one word collapsed to its dictionary form. The learner works in two steps:
-//   1. pick the CASE the slot requires (skipped for verbs — no case to choose)
+// one word collapsed to its dictionary form. The learner works in two stages:
+//   1. SELECT the grammatical slot — a sequence of picks, case first, then the
+//      other dimension: number for nouns, gender + number for adjectives /
+//      possessive pronouns. Personal pronouns pick case only; verbs skip it.
 //   2. SPELL the correctly inflected form
 // The descriptor is built by lib/phraseContext.js from an annotated usage
 // example (an `inflect:` block in the vocab YAML). The full sentence is NEVER
@@ -17,30 +19,50 @@ import SpeakButton from '../SpeakButton.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
-// step1 holds the "select" stage: case options (nouns) or gender·case agreement
-// options (adjectives), or null for verbs (no selection step).
-const step1 = computed(() => props.exercise.step1 ?? null)
-const hasStep1 = computed(() => (step1.value?.options?.length ?? 0) > 0)
+// The ordered selection steps (case → number, or case → gender + number); empty
+// for verbs. Each is { kind, prompt, options: [{ id, label, hint?, correct }] }.
+const selectSteps = computed(() => props.exercise.selectSteps ?? [])
+const hasSelect = computed(() => selectSteps.value.length > 0)
 
 // step: 'select' → 'spell' → 'done'. Verbs start at 'spell'.
-const step = ref(hasStep1.value ? 'select' : 'spell')
-const selected = ref(false)
-const selectCorrect = ref(true) // n/a (true) when there is no select step
+const step = ref(hasSelect.value ? 'select' : 'spell')
+const selectIdx = ref(0) // which selection step the learner is on
+const chosen = ref([]) // the option clicked at each selection step, in order
 const typed = ref('')
 const spellCorrect = ref(false)
 const inputEl = ref(null)
 
+const currentSelect = computed(() => selectSteps.value[selectIdx.value] ?? null)
+// What the learner has picked so far, e.g. "Accusative" then "Accusative · Singular".
+const pickedSoFar = computed(() => chosen.value.map((o) => o.label).join(' · '))
+
+// Every selection step answered, and every one correct.
+const selectCorrect = computed(
+  () =>
+    chosen.value.length === selectSteps.value.length &&
+    chosen.value.every((o) => o.correct),
+)
 const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
 
-// The word it asks the learner to pick in step 1: "case" for nouns/pronouns,
-// "form" for adjective/pronoun agreement (gender·case).
-const selectKind = computed(() => (step1.value?.kind === 'agreement' ? 'form' : 'case'))
+// The dimensions the learner got wrong (case / number / gender), worded for the
+// feedback line — e.g. "case", "number", or "case and number".
+const wrongDimsLabel = computed(() => {
+  const names = selectSteps.value
+    .map((s, i) => (chosen.value[i] && !chosen.value[i].correct ? s.kind : null))
+    .filter(Boolean)
+  if (names.length <= 1) return names[0] ?? ''
+  return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]
+})
 
-// The instructive near-miss: the spelling matched but the wrong case/form was
-// chosen. Worth calling out clearly so the learner doesn't think their (correct)
-// spelling was rejected.
+// The instructive near-miss: every slot was selected and the spelling matched,
+// but at least one selection was wrong. Worth calling out clearly so the learner
+// doesn't think their (correct) spelling was rejected.
 const spellingOnlyMiss = computed(
-  () => selected.value && !selectCorrect.value && spellCorrect.value,
+  () =>
+    hasSelect.value &&
+    chosen.value.length === selectSteps.value.length &&
+    !selectCorrect.value &&
+    spellCorrect.value,
 )
 
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
@@ -62,10 +84,13 @@ const slotText = computed(() => {
 
 function chooseOption(opt) {
   if (step.value !== 'select') return
-  selected.value = true
-  selectCorrect.value = opt.correct === true
-  step.value = 'spell'
-  nextTick(() => inputEl.value?.focus())
+  chosen.value = [...chosen.value, opt]
+  if (selectIdx.value < selectSteps.value.length - 1) {
+    selectIdx.value += 1 // advance to the next selection step (e.g. case → number)
+  } else {
+    step.value = 'spell'
+    nextTick(() => inputEl.value?.focus())
+  }
 }
 
 function submitSpell() {
@@ -82,7 +107,7 @@ function next() {
 }
 
 onMounted(() => {
-  if (!hasStep1.value) nextTick(() => inputEl.value?.focus())
+  if (!hasSelect.value) nextTick(() => inputEl.value?.focus())
 })
 </script>
 
@@ -106,12 +131,15 @@ onMounted(() => {
       </template>
     </div>
 
-    <!-- Step 1 — pick the case (noun) or the agreement (adjective) -->
+    <!-- Stage 1 — work through the selection steps: case, then number / gender -->
     <div v-if="step === 'select'" class="grid" style="gap: 0.6rem">
-      <p class="step-label muted">{{ step1.prompt }}</p>
+      <p v-if="pickedSoFar" class="picked muted">
+        <em lang="ru">{{ exercise.lemma }}</em> → {{ pickedSoFar }} · …
+      </p>
+      <p class="step-label muted">{{ currentSelect.prompt }}</p>
       <div class="case-grid">
         <button
-          v-for="opt in step1.options"
+          v-for="opt in currentSelect.options"
           :key="opt.id"
           type="button"
           class="case-btn"
@@ -148,7 +176,7 @@ onMounted(() => {
         <p class="feedback" :class="overallCorrect ? 'good' : spellingOnlyMiss ? 'warn' : 'bad'">
           <template v-if="overallCorrect">✓ Correct!</template>
           <template v-else-if="spellingOnlyMiss">
-            ✓ Spelling right — but you picked the wrong {{ selectKind }}.
+            ✓ Spelling right — but you picked the wrong {{ wrongDimsLabel }}.
             It needed <strong>{{ exercise.slotLabel }}</strong>.
           </template>
           <template v-else>✗ {{ exercise.answerAccented }}</template>
@@ -232,6 +260,9 @@ onMounted(() => {
 }
 .step-label {
   font-size: 0.95rem;
+}
+.picked {
+  font-size: 0.9rem;
 }
 .case-grid {
   display: grid;

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   indexPhrases,
-  buildStep1,
+  buildSelectSteps,
   buildFromPhrase,
   buildContextExercise,
   canBuildContext,
@@ -65,27 +65,34 @@ describe('indexPhrases', () => {
   })
 })
 
-describe('buildStep1', () => {
-  it('returns six case options (one correct) for a noun', () => {
-    const s = buildStep1(accPhrase.target)
-    expect(s.kind).toBe('case')
-    expect(s.options).toHaveLength(6)
-    expect(s.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'acc' })])
+describe('buildSelectSteps', () => {
+  it('returns case then number for a noun (one correct option each)', () => {
+    const steps = buildSelectSteps(accPhrase.target, sobaka)
+    expect(steps.map((s) => s.kind)).toEqual(['case', 'number'])
+    const [caseStep, numberStep] = steps
+    expect(caseStep.options).toHaveLength(6)
+    expect(caseStep.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'acc' })])
+    expect(numberStep.options.map((o) => o.id)).toEqual(['sg', 'pl'])
+    expect(numberStep.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'sg' })])
   })
-  it('returns null for a verb (no selection step)', () => {
-    expect(buildStep1(verbPhrase.target)).toBeNull()
+  it('returns no selection steps for a verb', () => {
+    expect(buildSelectSteps(verbPhrase.target, dumat)).toEqual([])
   })
-  it('returns gender·case agreement options for an adjective', () => {
-    const s = buildStep1(adjPhrase.target, noviy, () => 0)
-    expect(s.kind).toBe('agreement')
-    expect(s.options.length).toBeGreaterThanOrEqual(2)
-    expect(s.options.length).toBeLessThanOrEqual(4)
-    const correct = s.options.filter((o) => o.correct)
-    expect(correct).toHaveLength(1)
-    expect(correct[0]).toMatchObject({ id: 'f.acc', label: 'Accusative · Feminine' })
-    // decoys are distinct real (gender·case) slots, never the correct one
-    const ids = s.options.map((o) => o.id)
+  it('returns case then gender + number for an adjective', () => {
+    const steps = buildSelectSteps(adjPhrase.target, noviy)
+    expect(steps.map((s) => s.kind)).toEqual(['case', 'gender'])
+    const genderStep = steps[1]
+    expect(genderStep.options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ id: 'f', label: 'Feminine' }),
+    ])
+    // only genders the word actually declines for are offered, each once
+    const ids = genderStep.options.map((o) => o.id)
     expect(new Set(ids).size).toBe(ids.length)
+    expect(ids).toContain('f')
+  })
+  it('returns case only for a personal pronoun (number is fixed by the lemma)', () => {
+    const steps = buildSelectSteps(yaPhrase.target, ya)
+    expect(steps.map((s) => s.kind)).toEqual(['case'])
   })
 })
 
@@ -98,20 +105,20 @@ describe('buildFromPhrase', () => {
     expect(ex.answerAccented).toBe('соба́ку')
     expect(ex.answer).toBe('собаку')
     expect(ex.ru).toBe('Я ви́жу соба́ку.')
-    expect(ex.step1.kind).toBe('case')
+    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['case', 'number'])
     expect(ex.rule).toMatchObject({ id: 'noun-acc-fem-a', formula: '-а → -у' })
   })
 
-  it('handles verbs (no selection step, person slot label)', () => {
+  it('handles verbs (no selection steps, person slot label)', () => {
     const ex = buildFromPhrase(verbPhrase, dumat)
-    expect(ex.step1).toBeNull()
+    expect(ex.selectSteps).toEqual([])
     expect(ex.answerAccented).toBe('ду́маю')
     expect(ex.slotLabel).toContain('Present')
   })
 
-  it('builds an agreement step for an adjective', () => {
-    const ex = buildFromPhrase(adjPhrase, noviy, { rng: () => 0 })
-    expect(ex.step1.kind).toBe('agreement')
+  it('builds case + gender steps for an adjective', () => {
+    const ex = buildFromPhrase(adjPhrase, noviy)
+    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['case', 'gender'])
     expect(ex.answerAccented).toBe('но́вую')
     expect(ex.slotLabel).toBe('Accusative · Feminine')
   })
@@ -120,19 +127,18 @@ describe('buildFromPhrase', () => {
     expect(buildFromPhrase({ ...accPhrase, target: { ...accPhrase.target, token: 9 } }, sobaka)).toBeNull()
   })
 
-  it('builds a case step for a personal pronoun', () => {
+  it('builds a case-only step for a personal pronoun', () => {
     const ex = buildFromPhrase(yaPhrase, ya)
-    expect(ex.step1.kind).toBe('case')
+    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['case'])
     expect(ex.answer).toBe('меня')
     // End-stressed form keeps its stress mark (мен-я́, accent on the last letter).
     expect(ex.answerAccented).toBe('меня́')
     expect(ex.slotLabel).toContain('Accusative')
   })
 
-  it('builds an agreement step for a possessive pronoun (says "pronoun")', () => {
-    const ex = buildFromPhrase(moyPhrase, moy, { rng: () => 0 })
-    expect(ex.step1.kind).toBe('agreement')
-    expect(ex.step1.prompt).toContain('pronoun')
+  it('builds case + gender steps for a possessive pronoun', () => {
+    const ex = buildFromPhrase(moyPhrase, moy)
+    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['case', 'gender'])
     expect(ex.answer).toBe('моя')
     expect(ex.slotLabel).toBe('Nominative · Feminine')
   })
