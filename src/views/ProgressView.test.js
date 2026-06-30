@@ -23,6 +23,7 @@ function learningRecord(word) {
 
 beforeEach(() => {
   progress.records = {}
+  progress.activity = {}
   vocabState.words = []
   push.mockClear()
 })
@@ -39,6 +40,28 @@ describe('ProgressView', () => {
     expect(wrapper.find('.words').text()).toContain('дом=house')
     // A single history day draws a dot (a lone line has nothing to stroke).
     expect(wrapper.find('.dot-learned').exists()).toBe(true)
+  })
+
+  it('renders the streak calendar with the current streak and coloured cells', async () => {
+    const today = new Date()
+    const key = (d) => {
+      const dt = new Date(today)
+      dt.setDate(today.getDate() - d)
+      return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`
+    }
+    progress.activity = {
+      [key(0)]: { count: 5, correct: 5, hue: 120 },
+      [key(1)]: { count: 2, correct: 1, hue: 120 },
+    }
+
+    const wrapper = mount(ProgressView)
+    expect(wrapper.find('.streak-card').exists()).toBe(true)
+    // Two consecutive active days ending today → a 2-day streak.
+    expect(wrapper.find('.streak-num').text()).toBe('2')
+    expect(wrapper.find('.streak-now').classes()).toContain('lit')
+    // At least one cell has been painted with an HSV colour.
+    const painted = wrapper.findAll('.cal-cell').filter((c) => c.attributes('style')?.includes('background'))
+    expect(painted.length).toBeGreaterThanOrEqual(2)
   })
 
   it('lists weakest skills and launches a focused session on tap', async () => {

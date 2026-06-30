@@ -34,6 +34,17 @@ import { buildSession } from '../lib/session.js'
 import { practicesForSession } from '../lib/practices.js'
 import { rankSkills, skillById, focusedKeys } from '../lib/focus.js'
 import { earnedSet, buildCefrStats, achievementById } from '../lib/achievements.js'
+import {
+  dayKey,
+  buildActivityFromEvents,
+  currentStreak as computeStreak,
+  longestStreak as computeLongestStreak,
+  maxDailyCount,
+  totalExercises as computeTotalExercises,
+  randomHue,
+  hueForDay,
+  buildCalendar,
+} from '../lib/streak.js'
 
 /** Bumped if the export schema ever changes; guards imports. */
 export const EXPORT_VERSION = 1
@@ -60,6 +71,12 @@ export const state = reactive({
   firstUseAt: null,
   /** Set of achievement IDs the user has already been notified about. */
   seenAchievements: new Set(),
+  /** day key → { count, correct, hue } — the contribution calendar / streak. */
+  activity: {},
+  /** Hue (0..359) currently assigned to days; rerolled when the batch changes. */
+  streakHue: 0,
+  /** Signature of the active batches when the hue was last rerolled. */
+  batchSig: '',
 })
 
 // ---------------------------------------------------------------------------
@@ -241,7 +258,73 @@ export async function recordAttempt({ word, dimension, level, correct, ts = Date
   rec.peak = Math.max(rec.peak ?? 0, rank(next))
 
   await persist(rec)
+  // Update the streak/calendar reactively now; persist it without blocking the
+  // caller so recording an attempt stays a single awaited write (the session
+  // runner awaits this per target, and the activity log is recoverable from the
+  // events anyway).
+  logActivity(ts, correct, Math.max(1, times))
   return next
+}
+
+// ---------------------------------------------------------------------------
+// Streak + activity calendar (#streak-system).
+// ---------------------------------------------------------------------------
+
+/** A stable signature of the active batches; changes when either batch does. */
+function batchSignature() {
+  const sig = (b) => (b ? `${b.name}:${(b.words ?? []).join(',')}` : '-')
+  return `${sig(state.learning)}|${sig(state.mastery)}`
+}
+
+function plainActivity() {
+  return JSON.parse(JSON.stringify(state.activity))
+}
+
+/** Fire-and-forget meta write — swallow errors so it never becomes unhandled. */
+function saveMeta(key, value) {
+  idb.setMeta(key, value).catch(() => {})
+}
+
+/**
+ * Record one day's worth of exercise effort: bump today's count/correct and
+ * stamp it with the current batch hue, rerolling that hue whenever the active
+ * batch has changed since the last attempt. Reactive state updates synchronously
+ * (so the streak and calendar are instantly live); persistence is fire-and-forget
+ * so the calendar survives the event-window capping that discards old attempts
+ * without adding an awaited write to the hot recording path.
+ */
+function logActivity(ts, correct, times) {
+  const sig = batchSignature()
+  if (sig !== state.batchSig) {
+    state.batchSig = sig
+    state.streakHue = randomHue()
+    saveMeta('streak:batchSig', sig)
+    saveMeta('streak:hue', state.streakHue)
+  }
+  const day = dayKey(ts)
+  const rec = state.activity[day] ?? { count: 0, correct: 0, hue: state.streakHue }
+  rec.count += times
+  if (correct) rec.correct += times
+  rec.hue = state.streakHue
+  state.activity[day] = rec
+  saveMeta('streak:activity', plainActivity())
+}
+
+/** Current streak length in days (today, or a yesterday-grace day, backwards). */
+export const currentStreak = computed(() => computeStreak(state.activity, dayKey(Date.now())))
+
+/** Longest run of consecutive active days ever achieved. */
+export const longestStreak = computed(() => computeLongestStreak(state.activity))
+
+/** Personal record: the most exercises done in a single day. */
+export const dailyRecord = computed(() => maxDailyCount(state.activity))
+
+/** Total exercises ever done (across all days). */
+export const totalExercises = computed(() => computeTotalExercises(state.activity))
+
+/** GitHub-style contribution grid for the Progress screen. */
+export function activityCalendar(weeks = 53) {
+  return buildCalendar(state.activity, dayKey(Date.now()), weeks)
 }
 
 /**
@@ -637,6 +720,27 @@ export async function loadProgress() {
   }
   const seenIds = (await idb.getMeta('seenAchievements')) ?? []
   state.seenAchievements = new Set(Array.isArray(seenIds) ? seenIds : [])
+
+  // Activity calendar / streak. The forward-logged store is authoritative; on
+  // first run (or for any day it lacks) back-populate from the surviving per-
+  // word events so existing learners keep their history. Capping means old days
+  // may undercount, but it's the best available — and we never overwrite a day
+  // already logged, so no day is double-counted.
+  state.streakHue = (await idb.getMeta('streak:hue')) ?? randomHue()
+  state.batchSig = (await idb.getMeta('streak:batchSig')) ?? batchSignature()
+  const storedActivity = (await idb.getMeta('streak:activity')) ?? {}
+  const activity = { ...storedActivity }
+  const derived = buildActivityFromEvents(state.records)
+  let backfilled = false
+  for (const [day, d] of Object.entries(derived)) {
+    if (!activity[day]) {
+      activity[day] = { count: d.count, correct: d.correct, hue: hueForDay(day) }
+      backfilled = true
+    }
+  }
+  state.activity = activity
+  if (backfilled) await idb.setMeta('streak:activity', plainActivity())
+
   state.loaded = true
   return state
 }
@@ -648,11 +752,17 @@ export async function resetProgress() {
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
   await idb.setMeta('firstUseAt', null)
   await idb.setMeta('seenAchievements', [])
+  await idb.setMeta('streak:activity', {})
+  await idb.setMeta('streak:hue', null)
+  await idb.setMeta('streak:batchSig', null)
   state.records = {}
   state.learning = null
   state.mastery = null
   state.firstUseAt = null
   state.seenAchievements = new Set()
+  state.activity = {}
+  state.streakHue = randomHue()
+  state.batchSig = ''
 }
 
 /** Expose whether a word has an inflection table (used by the UI badges). */
@@ -722,6 +832,9 @@ export function exportData() {
     records: Object.values(state.records).map(plain),
     batches: { learning: state.learning, mastery: state.mastery },
     seenAchievements: [...state.seenAchievements],
+    activity: state.activity,
+    streakHue: state.streakHue,
+    batchSig: state.batchSig,
   }
   // Round-trip to strip any Vue reactive proxies (e.g. on the batches).
   return JSON.parse(JSON.stringify(snapshot))
@@ -776,6 +889,18 @@ export async function importData(data) {
   const seenIds = Array.isArray(data.seenAchievements) ? data.seenAchievements : []
   state.seenAchievements = new Set(seenIds)
   await idb.setMeta('seenAchievements', seenIds)
+  // Restore the activity calendar / streak, falling back to whatever the events
+  // imply for backups that predate the streak system.
+  const importedActivity =
+    data.activity && typeof data.activity === 'object'
+      ? data.activity
+      : buildActivityFromEvents(map)
+  state.activity = JSON.parse(JSON.stringify(importedActivity))
+  state.streakHue = typeof data.streakHue === 'number' ? data.streakHue : randomHue()
+  state.batchSig = typeof data.batchSig === 'string' ? data.batchSig : batchSignature()
+  await idb.setMeta('streak:activity', plainActivity())
+  await idb.setMeta('streak:hue', state.streakHue)
+  await idb.setMeta('streak:batchSig', state.batchSig)
   // Silently acknowledge any achievements already earned in the imported data so
   // they don't all fire as notifications at the end of the very next session.
   await acknowledgeAchievements()
