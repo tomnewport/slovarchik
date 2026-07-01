@@ -12,6 +12,8 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { assessedWordCorrect, phraseCorrect, spellingDiff, typingSequence } from '../../lib/phrases.js'
+import { normToken } from '../../lib/phraseHint.js'
+import { stripStress } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { hintTokensFor } from '../../stores/hints.js'
@@ -58,14 +60,21 @@ const double = computed(() => wasCorrect.value && !hintUsed.value)
 const answer = computed(() => typingSequence(props.exercise.ru))
 
 // The unlearned words of a phrase, each with its meaning, for the Dictionary:
-// words the learner hasn't learned and isn't actively drilling (the assessed
-// word is in the current batch, so it's excluded — you still spell that one).
+// words the learner hasn't learned and isn't actively drilling. The word this
+// exercise is testing is always excluded — belt and braces, since the shared
+// hint index could in principle attribute its inflected surface form to another
+// entry — so the answer is never handed out. Sorted alphabetically like a real
+// dictionary.
 const dictionary = computed(() => {
   if (!isPhrase.value) return []
+  const assessedKeys = new Set(props.exercise.targets ?? [])
+  const assessedTokens = new Set(props.exercise.targetTokens ?? [])
   const seen = new Set()
   const out = []
   for (const { text, hint } of hintTokensFor(props.exercise.ru)) {
     if (!hint) continue
+    // Never reveal the assessed word, however its form is recognised.
+    if (assessedKeys.has(hint.key) || assessedTokens.has(normToken(text))) continue
     // Drop any surrounding punctuation so an end-of-phrase word reads cleanly.
     const ru = text.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')
     const key = ru.toLowerCase()
@@ -73,7 +82,7 @@ const dictionary = computed(() => {
     seen.add(key)
     out.push({ ru, en: hint.en })
   }
-  return out
+  return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 })
 
 // Did the first unaided phrase attempt land close enough to be worth showing
