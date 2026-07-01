@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import RussianKeyboard from './RussianKeyboard.vue'
-import { resetHint } from '../stores/keyboard.js'
+import { resetHint, setHintAllowed } from '../stores/keyboard.js'
 
 // A Russian input lives in the document; the keyboard follows focus to it.
 function makeInput(lang = 'ru') {
@@ -99,7 +99,7 @@ describe('RussianKeyboard', () => {
     await wrapper.find('[aria-label="Toggle hint"]').trigger('click')
     let lit = wrapper.findAll('.kbd-key.hint').map((k) => k.text())
     expect(lit).toContain('д') // the next letter to type …
-    expect(lit).toHaveLength(5) // … plus four decoys
+    expect(lit).toHaveLength(6) // … plus five decoys
 
     // Typing the first letter advances the hint to the next one.
     input.value = 'д'
@@ -111,6 +111,30 @@ describe('RussianKeyboard', () => {
     // Switching the hint back off clears every highlight.
     await wrapper.find('[aria-label="Toggle hint"]').trigger('click')
     expect(wrapper.findAll('.kbd-key.hint')).toHaveLength(0)
+    wrapper.unmount()
+  })
+
+  it('withholds the hint (inert 💡, nothing lit) until it is allowed', async () => {
+    const wrapper = mount(RussianKeyboard, { attachTo: document.body })
+    const input = makeInput()
+    input.dataset.answer = 'дом'
+    input.dispatchEvent(new FocusEvent('focusin', { bubbles: true }))
+    await wrapper.vm.$nextTick()
+
+    setHintAllowed(false)
+    await wrapper.vm.$nextTick()
+    const bulb = wrapper.find('[aria-label="Toggle hint"]')
+    expect(bulb.attributes('disabled')).toBeDefined()
+
+    // Pressing the disabled hint key does nothing — no keys light up.
+    await bulb.trigger('click')
+    expect(wrapper.findAll('.kbd-key.hint')).toHaveLength(0)
+
+    // Once allowed, the hint works as before.
+    setHintAllowed(true)
+    await wrapper.vm.$nextTick() // let the disabled binding clear first
+    await bulb.trigger('click')
+    expect(wrapper.findAll('.kbd-key.hint').length).toBeGreaterThan(0)
     wrapper.unmount()
   })
 

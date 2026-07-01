@@ -1,9 +1,22 @@
-import { describe, it, expect, afterEach } from 'vitest'
+import { describe, it, expect, afterEach, beforeAll } from 'vitest'
 import { mount } from '@vue/test-utils'
 import TypeExercise from './TypeExercise.vue'
 import { keyboard, resetHint } from '../../stores/keyboard.js'
+import { state as vocabState } from '../../stores/vocab.js'
+import { state as progressState } from '../../stores/progress.js'
+import { loadFixtureWords } from '../../test/fixtures.js'
 
-afterEach(() => resetHint())
+beforeAll(() => {
+  vocabState.words = loadFixtureWords()
+  vocabState.status = 'ready'
+})
+
+afterEach(() => {
+  resetHint()
+  progressState.records = {}
+  progressState.learning = null
+  progressState.mastery = null
+})
 
 const exercise = {
   id: 'ex0',
@@ -134,5 +147,79 @@ describe('TypeExercise', () => {
       double: false,
       wordCorrect: false,
     })
+  })
+
+  it('withholds the keyboard hint on a phrase until the first attempt is made', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // Withheld while the first, unaided attempt is in progress.
+    expect(keyboard.allowed).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click') // first wrong → unlock
+    // Now the learner may reach for the hint on the retry.
+    expect(keyboard.allowed).toBe(true)
+  })
+
+  it('leaves the hint available from the start for a single word', () => {
+    mount(TypeExercise, { props: { exercise } })
+    expect(keyboard.allowed).toBe(true)
+  })
+
+  it('maps where a close phrase attempt went wrong, without revealing the letters', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // One slip (школе for школу) → close enough to show the error map.
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click')
+
+    const map = wrapper.find('.error-map')
+    expect(map.exists()).toBe(true)
+    // The single slip (е typed for у) is flagged showing what the learner
+    // typed — never the correct letter, so the retry is still a spelling.
+    const wrong = map.findAll('.cell.wrong')
+    expect(wrong).toHaveLength(1)
+    expect(wrong[0].text()).toBe('е')
+  })
+
+  it('shows no error map when the attempt is nowhere near', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    await wrapper.find('input[lang="ru"]').setValue('нет')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.error-map').exists()).toBe(false)
+    // The retry is still offered — just without the map.
+    expect(wrapper.text()).toContain('Not quite')
+  })
+
+  // Dictionary: the unlearned words of a phrase, revealed with no penalty.
+  const dictPhrase = {
+    ...phrase,
+    targets: ['абзац=paragraph'],
+    ru: 'В э́том абза́це две оши́бки.',
+    en: 'There are two mistakes in this paragraph.',
+    targetTokens: ['абзаце'],
+  }
+  // Combining stress marks stripped so assertions don't depend on exact codepoints.
+  const bare = (s) =>
+    s
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+
+  it("lists the phrase's unlearned words alphabetically, never the assessed word", async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: dictPhrase } })
+    await wrapper.find('.dict-toggle').trigger('click')
+    const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
+    // абзац (the assessed word) is excluded; the rest appear, alphabetised.
+    expect(words).toEqual(['в', 'две', 'ошибки', 'этом'])
+  })
+
+  it('would reveal a recognised word unless it is the exercise subject', async () => {
+    // Same phrase, but nothing marked as the assessed word: абзац now shows,
+    // proving the explicit guard (not the batch filter) is what hides it above.
+    const wrapper = mount(TypeExercise, {
+      props: { exercise: { ...dictPhrase, targets: [], targetTokens: [] } },
+    })
+    await wrapper.find('.dict-toggle').trigger('click')
+    const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
+    expect(words).toContain('абзаце')
   })
 })

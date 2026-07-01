@@ -6,6 +6,8 @@ import {
   assessedWordCorrect,
   nextChar,
   hintKeys,
+  spellingDiff,
+  spellingDistance,
   RU_LETTERS,
   EN_LETTERS,
   listeningTokens,
@@ -132,11 +134,11 @@ describe('hintKeys', () => {
     expect(keys).toContain('п')
     expect(new Set(keys).size).toBe(3)
   })
-  it('defaults to four decoys (five keys lit)', () => {
+  it('defaults to five decoys (six keys lit)', () => {
     const keys = hintKeys('п', RU_LETTERS, undefined, seededRng(3))
-    expect(keys).toHaveLength(5)
+    expect(keys).toHaveLength(6)
     expect(keys).toContain('п')
-    expect(new Set(keys).size).toBe(5)
+    expect(new Set(keys).size).toBe(6)
   })
   it('draws decoys from the requested alphabet plus the space', () => {
     const keys = hintKeys('a', EN_LETTERS, 2, seededRng(5))
@@ -159,6 +161,38 @@ describe('hintKeys', () => {
   })
   it('returns nothing once the phrase is complete', () => {
     expect(hintKeys('', RU_LETTERS)).toEqual([])
+  })
+})
+
+describe('spellingDiff / spellingDistance', () => {
+  const types = (typed, answer) => spellingDiff(typed, answer).map((c) => c.type)
+
+  it('marks every character ok for a correct spelling', () => {
+    expect(types('дом', 'дом')).toEqual(['ok', 'ok', 'ok'])
+    expect(spellingDistance('дом', 'дом')).toBe(0)
+  })
+  it('flags a substituted letter without revealing the correct one', () => {
+    const cells = spellingDiff('дам', 'дом')
+    expect(cells.map((c) => c.type)).toEqual(['ok', 'wrong', 'ok'])
+    // The wrong cell shows what the learner typed, not the answer letter.
+    expect(cells[1].char).toBe('а')
+    expect(spellingDistance('дам', 'дом')).toBe(1)
+  })
+  it('inserts a gap where a letter is missing', () => {
+    expect(types('дм', 'дом')).toEqual(['ok', 'gap', 'ok'])
+    expect(spellingDistance('дм', 'дом')).toBe(1)
+  })
+  it('flags an extra typed letter as wrong', () => {
+    // One of the two identical о's is the extra one — either alignment is valid.
+    const cells = types('доом', 'дом')
+    expect(cells).toHaveLength(4)
+    expect(cells.filter((t) => t === 'wrong')).toHaveLength(1)
+    expect(cells.filter((t) => t === 'ok')).toHaveLength(3)
+    expect(spellingDistance('доом', 'дом')).toBe(1)
+  })
+  it('folds ё/е and case so neither counts as a spelling error', () => {
+    expect(spellingDistance('ВСЕ', 'всё')).toBe(0)
+    expect(types('ВСЕ', 'всё')).toEqual(['ok', 'ok', 'ok'])
   })
 })
 
