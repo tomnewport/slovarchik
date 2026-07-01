@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
 // couple of decoys. Empty unless the learner turned the hint on and the focused
 // field declares the answer it expects (via data-answer).
 const hint = computed(() => {
-  if (!keyboard.on || !answer.value) return new Set()
+  if (!keyboard.on || !keyboard.allowed || !answer.value) return new Set()
   return new Set(hintKeys(nextChar(answer.value, typed.value), RU_LETTERS))
 })
 
@@ -216,7 +216,9 @@ function keep(e) {
           class="kbd-key kbd-mod"
           :class="{ active: keyboard.on }"
           :aria-pressed="keyboard.on"
+          :disabled="!keyboard.allowed"
           aria-label="Toggle hint"
+          title="Hint unlocks after your first try"
           @click="toggleHint"
         >
           💡
@@ -301,6 +303,11 @@ function keep(e) {
   background: var(--primary);
   border-color: var(--primary);
   color: white;
+}
+
+/* The hint key while it's withheld (phrase spelling, first attempt). */
+.kbd-key:disabled {
+  opacity: 0.4;
 }
 
 .kbd-space {

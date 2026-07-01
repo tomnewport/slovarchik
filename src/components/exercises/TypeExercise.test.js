@@ -135,4 +135,44 @@ describe('TypeExercise', () => {
       wordCorrect: false,
     })
   })
+
+  it('withholds the keyboard hint on a phrase until the first attempt is made', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // Withheld while the first, unaided attempt is in progress.
+    expect(keyboard.allowed).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click') // first wrong → unlock
+    // Now the learner may reach for the hint on the retry.
+    expect(keyboard.allowed).toBe(true)
+  })
+
+  it('leaves the hint available from the start for a single word', () => {
+    mount(TypeExercise, { props: { exercise } })
+    expect(keyboard.allowed).toBe(true)
+  })
+
+  it('maps where a close phrase attempt went wrong, without revealing the letters', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // One slip (школе for школу) → close enough to show the error map.
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школе')
+    await wrapper.find('button.check').trigger('click')
+
+    const map = wrapper.find('.error-map')
+    expect(map.exists()).toBe(true)
+    // The single slip (е typed for у) is flagged showing what the learner
+    // typed — never the correct letter, so the retry is still a spelling.
+    const wrong = map.findAll('.cell.wrong')
+    expect(wrong).toHaveLength(1)
+    expect(wrong[0].text()).toBe('е')
+  })
+
+  it('shows no error map when the attempt is nowhere near', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    await wrapper.find('input[lang="ru"]').setValue('нет')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.error-map').exists()).toBe(false)
+    // The retry is still offered — just without the map.
+    expect(wrapper.text()).toContain('Not quite')
+  })
 })

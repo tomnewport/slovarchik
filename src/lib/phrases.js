@@ -116,14 +116,15 @@ export function nextChar(target, typed) {
  * `extra` random decoys. The space is just another key — it can be the correct
  * next key (a word boundary) or one of the decoys — so it joins `letters` in the
  * candidate pool and the spacebar lights up like any other hint. `rng` is
- * injectable for deterministic tests.
+ * injectable for deterministic tests. Five decoys (six keys lit) keeps the hint
+ * a nudge rather than a giveaway now that it's only offered on the second try.
  * @param {string} next
  * @param {string[]} letters
  * @param {number} [extra]
  * @param {() => number} [rng]
  * @returns {string[]}
  */
-export function hintKeys(next, letters, extra = 4, rng = Math.random) {
+export function hintKeys(next, letters, extra = 5, rng = Math.random) {
   if (!next) return []
   const pool = [...letters, ' ']
   const decoys = shuffle(
@@ -131,6 +132,73 @@ export function hintKeys(next, letters, extra = 4, rng = Math.random) {
     rng,
   ).slice(0, Math.max(0, extra))
   return shuffle([next, ...decoys], rng)
+}
+
+/** ё/е-folding, case-insensitive character equality — the same leniency the
+ * grader applies, so a ё/е slip is never flagged as a spelling error. */
+function sameLetter(a, b) {
+  return foldYo(String(a).toLowerCase()) === foldYo(String(b).toLowerCase())
+}
+
+/**
+ * Align a learner's typed attempt against the correct answer and mark where it
+ * went wrong — without revealing the correct letters, so a second attempt is
+ * still a spelling. Returns one cell per character of the *typed* attempt, plus
+ * a gap cell for each letter the learner omitted:
+ *
+ *   { type: 'ok',    char }  — a character typed correctly
+ *   { type: 'wrong', char }  — a wrong or extra character the learner typed
+ *   { type: 'gap',   char: '' } — a letter is missing here
+ *
+ * The number of non-`ok` cells equals the Levenshtein distance between the two
+ * strings (substitutions, insertions and deletions each cost 1). ё/е and case
+ * are folded so neither counts as an error.
+ * @param {string} typed
+ * @param {string} answer
+ * @returns {Array<{type: 'ok'|'wrong'|'gap', char: string}>}
+ */
+export function spellingDiff(typed, answer) {
+  const a = [...String(typed ?? '')]
+  const b = [...String(answer ?? '')]
+  const m = a.length
+  const n = b.length
+  // Full edit-distance matrix so we can backtrace an optimal alignment.
+  const d = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0))
+  for (let i = 0; i <= m; i++) d[i][0] = i
+  for (let j = 0; j <= n; j++) d[0][j] = j
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      const cost = sameLetter(a[i - 1], b[j - 1]) ? 0 : 1
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost)
+    }
+  }
+  const cells = []
+  let i = m
+  let j = n
+  while (i > 0 || j > 0) {
+    const match = i > 0 && j > 0 && sameLetter(a[i - 1], b[j - 1])
+    if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + (match ? 0 : 1)) {
+      cells.push({ type: match ? 'ok' : 'wrong', char: a[i - 1] })
+      i--
+      j--
+    } else if (i > 0 && d[i][j] === d[i - 1][j] + 1) {
+      // An extra character the learner typed that the answer doesn't have.
+      cells.push({ type: 'wrong', char: a[i - 1] })
+      i--
+    } else {
+      // A letter the answer has that the learner left out.
+      cells.push({ type: 'gap', char: '' })
+      j--
+    }
+  }
+  cells.reverse()
+  return cells
+}
+
+/** Number of single-character edits between the two strings (folding ё/е and
+ * case), derived from the {@link spellingDiff} alignment. */
+export function spellingDistance(typed, answer) {
+  return spellingDiff(typed, answer).filter((c) => c.type !== 'ok').length
 }
 
 /**
