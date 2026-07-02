@@ -158,6 +158,33 @@ describe('buildParadigm — noun', () => {
     const gen = p.cells.find((c) => c.row === 'gen' && c.col === 'sg')
     expect(cellLabel(p, gen)).toBe('Genitive · Singular')
   })
+  it('has no locative row when the noun declares none', () => {
+    expect(p.rows.some((r) => r.key === 'loc')).toBe(false)
+  })
+})
+
+describe('buildParadigm — noun with a second locative', () => {
+  const les = {
+    key: 'лес=forest',
+    pos: 'noun',
+    headword: 'лес',
+    meaning: 'forest',
+    forms: {
+      sg: { nom: 'лес', gen: 'ле́са', dat: 'ле́су', acc: 'лес', ins: 'ле́сом', pre: 'ле́се', loc: 'лесу́' },
+      pl: { nom: 'леса́', gen: 'лесо́в', dat: 'леса́м', acc: 'леса́', ins: 'леса́ми', pre: 'леса́х' },
+    },
+  }
+  const p = buildParadigm(les)
+  it('adds a singular-only locative row with an explanatory note', () => {
+    const loc = p.rows.find((r) => r.key === 'loc')
+    expect(loc.label).toBe('Locative')
+    expect(loc.note).toMatch(/locative/i)
+    expect(p.cells.filter((c) => c.row === 'loc').map((c) => c.col)).toEqual(['sg'])
+  })
+  it('treats the locative as syncretic with the dative in spelling', () => {
+    const keys = matchingCells(p, 'лесу').map((c) => cellKey(c.row, c.col)).sort()
+    expect(keys).toEqual(['dat.sg', 'loc.sg'])
+  })
 })
 
 describe('buildParadigm — pronoun', () => {

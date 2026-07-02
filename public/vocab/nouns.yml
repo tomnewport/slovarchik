@@ -264,6 +264,7 @@ words:
       sg_acc: ад
       sg_ins: а́дом
       sg_pre: а́де
+      sg_loc: аду́
   "адвокат=lawyer":
     cefr_level: B1
     gender: m
@@ -2304,6 +2305,7 @@ words:
       sg_acc: бег
       sg_ins: бе́гом
       sg_pre: бе́ге
+      sg_loc: бегу́
   "беда=misfortune":
     cefr_level: B1
     gender: f
@@ -2589,6 +2591,7 @@ words:
       sg_acc: бе́рег
       sg_ins: бе́регом
       sg_pre: бе́реге
+      sg_loc: берегу́
       pl_nom: берега́
       pl_gen: берего́в
       pl_dat: берега́м
@@ -3284,7 +3287,8 @@ words:
       sg_dat: бо́ку
       sg_acc: бок
       sg_ins: бо́ком
-      sg_pre: боку́
+      sg_pre: бо́ке
+      sg_loc: боку́
       pl_nom: бока́
       pl_gen: бо́ков
       pl_dat: бока́м
@@ -3602,6 +3606,7 @@ words:
       sg_acc: борт
       sg_ins: бо́ртом
       sg_pre: бо́рте
+      sg_loc: борту́
       pl_nom: борта́
       pl_gen: борто́в
       pl_dat: борта́м
@@ -4568,6 +4573,7 @@ words:
       sg_acc: век
       sg_ins: ве́ком
       sg_pre: ве́ке
+      sg_loc: веку́
       pl_nom: века́
       pl_gen: веко́в
       pl_dat: века́м
@@ -4898,7 +4904,8 @@ words:
       sg_dat: верху́
       sg_acc: верх
       sg_ins: верхо́м
-      sg_pre: верху́
+      sg_pre: ве́рхе
+      sg_loc: верху́
       pl_nom: верхи́
       pl_gen: верхо́в
       pl_dat: верха́м
@@ -5347,6 +5354,7 @@ words:
       sg_acc: вид
       sg_ins: ви́дом
       sg_pre: ви́де
+      sg_loc: виду́
       pl_nom: ви́ды
       pl_gen: ви́дов
       pl_dat: ви́дам
@@ -8186,6 +8194,7 @@ words:
       sg_acc: глаз
       sg_ins: гла́зом
       sg_pre: гла́зе
+      sg_loc: глазу́
       pl_nom: глаза́
       pl_gen: глаз
       pl_dat: глаза́м
@@ -8380,7 +8389,8 @@ words:
       sg_dat: го́ду
       sg_acc: год
       sg_ins: го́дом
-      sg_pre: году́
+      sg_pre: го́де
+      sg_loc: году́
       pl_nom: го́ды
       pl_gen: го́дов
       pl_dat: го́дам
@@ -9371,6 +9381,7 @@ words:
       sg_acc: гроб
       sg_ins: гро́бом
       sg_pre: гро́бе
+      sg_loc: гробу́
       pl_nom: гробы́
       pl_gen: гробо́в
       pl_dat: гроба́м
@@ -9427,6 +9438,7 @@ words:
       sg_acc: грудь
       sg_ins: гру́дью
       sg_pre: груди́
+      sg_loc: груди́
       pl_nom: гру́ди
       pl_gen: груде́й
       pl_dat: грудя́м
@@ -9609,6 +9621,7 @@ words:
       sg_acc: грязь
       sg_ins: гря́зью
       sg_pre: гря́зи
+      sg_loc: грязи́
   "губа=lip":
     cefr_level: A2
     gender: f
@@ -9742,6 +9755,7 @@ words:
       sg_acc: даль
       sg_ins: да́лью
       sg_pre: да́ли
+      sg_loc: дали́
     usage:
       - ru: Она́ до́лго смотре́ла в даль.
         en_gb: She gazed into the distance for a long time.
@@ -9902,6 +9916,7 @@ words:
       sg_acc: дверь
       sg_ins: две́рью
       sg_pre: две́ри
+      sg_loc: двери́
       pl_nom: две́ри
       pl_gen: двере́й
       pl_dat: дверя́м
@@ -11274,6 +11289,7 @@ words:
       sg_acc: долг
       sg_ins: до́лгом
       sg_pre: до́лге
+      sg_loc: долгу́
       pl_nom: долги́
       pl_gen: долго́в
       pl_dat: долга́м
@@ -11429,6 +11445,7 @@ words:
       sg_acc: дом
       sg_ins: до́мом
       sg_pre: до́ме
+      sg_loc: дому́
       pl_nom: дома́
       pl_gen: домо́в
       pl_dat: дома́м
@@ -12167,6 +12184,7 @@ words:
       sg_acc: дым
       sg_ins: ды́мом
       sg_pre: ды́ме
+      sg_loc: дыму́
     usage:
       - ru: Из трубы́ идёт дым.
         en_gb: Smoke is coming from the chimney.
@@ -12570,6 +12588,7 @@ words:
       sg_acc: жар
       sg_ins: жа́ром
       sg_pre: жа́ре
+      sg_loc: жару́
     usage:
       - ru: Больно́й страда́л от жа́ра.
         en_gb: The patient suffered from the fever.
@@ -13433,6 +13452,7 @@ words:
       sg_acc: зад
       sg_ins: за́дом
       sg_pre: заде́
+      sg_loc: заду́
     usage:
       - ru: Маши́на уда́рилась за́дом о сте́ну.
         en_gb: The car hit the wall with its back.
@@ -18160,6 +18180,7 @@ words:
       sg_acc: клей
       sg_ins: кле́ем
       sg_pre: кле́е
+      sg_loc: клею́
   "клён=maple":
     cefr_level: B1
     gender: m
@@ -20454,6 +20475,7 @@ words:
       sg_acc: кость
       sg_ins: ко́стью
       sg_pre: ко́сти
+      sg_loc: кости́
       pl_nom: ко́сти
       pl_gen: косте́й
       pl_dat: костя́м
@@ -20751,6 +20773,7 @@ words:
       sg_acc: край
       sg_ins: кра́ем
       sg_pre: кра́е
+      sg_loc: краю́
       pl_nom: края́
       pl_gen: краёв
       pl_dat: края́м
@@ -21234,6 +21257,7 @@ words:
       sg_acc: кровь
       sg_ins: кро́вью
       sg_pre: кро́ви
+      sg_loc: крови́
   "крокодил=crocodile":
     cefr_level: B1
     gender: m
@@ -21320,6 +21344,7 @@ words:
       sg_acc: круг
       sg_ins: кру́гом
       sg_pre: кру́ге
+      sg_loc: кругу́
       pl_nom: круги́
       pl_gen: круго́в
       pl_dat: круга́м
@@ -22850,6 +22875,7 @@ words:
       sg_acc: лес
       sg_ins: ле́сом
       sg_pre: ле́се
+      sg_loc: лесу́
       pl_nom: леса́
       pl_gen: лесо́в
       pl_dat: леса́м
@@ -23361,6 +23387,7 @@ words:
       sg_acc: лоб
       sg_ins: лбом
       sg_pre: лбе
+      sg_loc: лбу
       pl_nom: лбы
       pl_gen: лбов
       pl_dat: лбам
@@ -25034,6 +25061,7 @@ words:
       sg_acc: мех
       sg_ins: ме́хом
       sg_pre: ме́хе
+      sg_loc: меху́
       pl_nom: меха́
       pl_gen: мехо́в
       pl_dat: меха́м
@@ -25891,6 +25919,7 @@ words:
       sg_acc: мозг
       sg_ins: мо́згом
       sg_pre: мо́зге
+      sg_loc: мозгу́
       pl_nom: мозги́
       pl_gen: мозго́в
       pl_dat: мозга́м
@@ -26593,7 +26622,8 @@ words:
       sg_dat: мосту́
       sg_acc: мост
       sg_ins: мосто́м
-      sg_pre: мосту́
+      sg_pre: мосте́
+      sg_loc: мосту́
       pl_nom: мосты́
       pl_gen: мосто́в
       pl_dat: моста́м
@@ -28748,6 +28778,7 @@ words:
       sg_acc: нос
       sg_ins: но́сом
       sg_pre: но́се
+      sg_loc: носу́
       pl_nom: носы́
       pl_gen: носо́в
       pl_dat: носа́м
@@ -28842,6 +28873,7 @@ words:
       sg_acc: ночь
       sg_ins: но́чью
       sg_pre: но́чи
+      sg_loc: ночи́
       pl_nom: но́чи
       pl_gen: ноче́й
       pl_dat: ноча́м
@@ -35762,7 +35794,8 @@ words:
       sg_dat: по́лу
       sg_acc: пол
       sg_ins: по́лом
-      sg_pre: полу́
+      sg_pre: по́ле
+      sg_loc: полу́
       pl_nom: полы́
       pl_gen: поло́в
       pl_dat: пола́м
@@ -35976,7 +36009,8 @@ words:
       sg_dat: полку́
       sg_acc: полк
       sg_ins: полко́м
-      sg_pre: полку́
+      sg_pre: полке́
+      sg_loc: полку́
       pl_nom: полки́
       pl_gen: полко́в
       pl_dat: полка́м
@@ -35988,9 +36022,9 @@ words:
         en_gb: The regiment set off for the front.
       - ru: Он служи́л в э́том полку́.
         en_gb: He served in this regiment.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На пара́де бы́ло не́сколько полко́в.
         en_gb: There were several regiments at the parade.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "полка=shelf":
     cefr_level: B1
     gender: f
@@ -36602,6 +36636,7 @@ words:
       sg_acc: порт
       sg_ins: по́ртом
       sg_pre: по́рте
+      sg_loc: порту́
       pl_nom: порты́
       pl_gen: порто́в
       pl_dat: порта́м
@@ -36848,6 +36883,7 @@ words:
       sg_acc: пост
       sg_ins: посто́м
       sg_pre: посте́
+      sg_loc: посту́
       pl_nom: посты́
       pl_gen: посто́в
       pl_dat: поста́м
@@ -39740,6 +39776,7 @@ words:
       sg_acc: пруд
       sg_ins: прудо́м
       sg_pre: пруде́
+      sg_loc: пруду́
       pl_nom: пруды́
       pl_gen: прудо́в
       pl_dat: пруда́м
@@ -40243,6 +40280,7 @@ words:
       sg_acc: пыль
       sg_ins: пы́лью
       sg_pre: пы́ли
+      sg_loc: пыли́
     usage:
       - ru: На по́лке мно́го пы́ли.
         en_gb: There is a lot of dust on the shelf.
@@ -40897,6 +40935,7 @@ words:
       sg_acc: рай
       sg_ins: ра́ем
       sg_pre: ра́е
+      sg_loc: раю́
   "район=district":
     cefr_level: A2
     gender: m
@@ -42263,6 +42302,7 @@ words:
       sg_acc: род
       sg_ins: ро́дом
       sg_pre: ро́де
+      sg_loc: роду́
       pl_nom: роды́
       pl_gen: родо́в
       pl_dat: рода́м
@@ -42840,6 +42880,7 @@ words:
       sg_acc: рот
       sg_ins: ртом
       sg_pre: рте
+      sg_loc: рту
       pl_nom: рты
       pl_gen: ртов
       pl_dat: ртам
@@ -43546,6 +43587,7 @@ words:
       sg_acc: ряд
       sg_ins: ря́дом
       sg_pre: ря́де
+      sg_loc: ряду́
       pl_nom: ряды́
       pl_gen: рядо́в
       pl_dat: ряда́м
@@ -43577,6 +43619,7 @@ words:
       sg_acc: сад
       sg_ins: са́дом
       sg_pre: са́де
+      sg_loc: саду́
       pl_nom: сады́
       pl_gen: садо́в
       pl_dat: сада́м
@@ -44293,6 +44336,7 @@ words:
       sg_acc: связь
       sg_ins: свя́зью
       sg_pre: свя́зи
+      sg_loc: связи́
       pl_nom: свя́зи
       pl_gen: свя́зей
       pl_dat: свя́зям
@@ -44837,6 +44881,7 @@ words:
       sg_acc: сеть
       sg_ins: се́тью
       sg_pre: се́ти
+      sg_loc: сети́
       pl_nom: се́ти
       pl_gen: сете́й
       pl_dat: сетя́м
@@ -46245,6 +46290,7 @@ words:
       sg_acc: снег
       sg_ins: сне́гом
       sg_pre: сне́ге
+      sg_loc: снегу́
   "собака=dog":
     cefr_level: A1
     gender: f
@@ -46757,6 +46803,7 @@ words:
       sg_acc: сок
       sg_ins: со́ком
       sg_pre: со́ке
+      sg_loc: соку́
       pl_nom: со́ки
       pl_gen: со́ков
       pl_dat: со́кам
@@ -48553,6 +48600,7 @@ words:
       sg_acc: степь
       sg_ins: сте́пью
       sg_pre: сте́пи
+      sg_loc: степи́
       pl_nom: сте́пи
       pl_gen: сте́пей
       pl_dat: сте́пям
@@ -49223,6 +49271,7 @@ words:
       sg_acc: строй
       sg_ins: стро́ем
       sg_pre: стро́е
+      sg_loc: строю́
       pl_nom: строи́
       pl_gen: строёв
       pl_dat: строя́м
@@ -50880,6 +50929,7 @@ words:
       sg_acc: тень
       sg_ins: те́нью
       sg_pre: те́ни
+      sg_loc: тени́
       pl_nom: те́ни
       pl_gen: те́ней
       pl_dat: те́ням
@@ -52298,7 +52348,8 @@ words:
       sg_dat: ты́лу
       sg_acc: тыл
       sg_ins: ты́лом
-      sg_pre: тылу́
+      sg_pre: ты́ле
+      sg_loc: тылу́
       pl_nom: ты́лы
       pl_gen: ты́лов
       pl_dat: ты́лам
@@ -52604,6 +52655,7 @@ words:
       sg_acc: у́гол
       sg_ins: угло́м
       sg_pre: угле́
+      sg_loc: углу́
       pl_nom: углы́
       pl_gen: угло́в
       pl_dat: угла́м
@@ -55305,6 +55357,7 @@ words:
       sg_acc: ход
       sg_ins: хо́дом
       sg_pre: хо́де
+      sg_loc: ходу́
       pl_nom: хо́ды
       pl_gen: хо́дов
       pl_dat: хо́дам
@@ -55725,6 +55778,7 @@ words:
       sg_acc: цвет
       sg_ins: цве́том
       sg_pre: цве́те
+      sg_loc: цвету́
       pl_nom: цвета́
       pl_gen: цвето́в
       pl_dat: цвета́м
@@ -55940,6 +55994,7 @@ words:
       sg_acc: цепь
       sg_ins: це́пью
       sg_pre: це́пи
+      sg_loc: цепи́
       pl_nom: це́пи
       pl_gen: цепе́й
       pl_dat: цепя́м
@@ -56234,6 +56289,7 @@ words:
       sg_acc: час
       sg_ins: ча́сом
       sg_pre: часе́
+      sg_loc: часу́
       pl_nom: часы́
       pl_gen: часо́в
       pl_dat: часа́м
@@ -56624,6 +56680,7 @@ words:
       sg_acc: честь
       sg_ins: че́стью
       sg_pre: че́сти
+      sg_loc: чести́
     usage:
       - ru: Для меня́ э́то большая́ честь.
         en_gb: For me this is a great honour.
@@ -56996,6 +57053,7 @@ words:
       sg_acc: шаг
       sg_ins: ша́гом
       sg_pre: ша́ге
+      sg_loc: шагу́
       pl_nom: шаги́
       pl_gen: шаго́в
       pl_dat: шага́м
@@ -57463,6 +57521,7 @@ words:
       sg_acc: шкаф
       sg_ins: шка́фом
       sg_pre: шка́фе
+      sg_loc: шкафу́
       pl_nom: шкафы́
       pl_gen: шкафо́в
       pl_dat: шкафа́м
@@ -58061,6 +58120,7 @@ words:
       sg_acc: щель
       sg_ins: ще́лью
       sg_pre: ще́ли
+      sg_loc: щели́
       pl_nom: ще́ли
       pl_gen: ще́лей
       pl_dat: ще́лям

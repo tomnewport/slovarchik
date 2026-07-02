@@ -203,6 +203,30 @@ Run `node scripts/coverage-gloss.js` to list any gaps.
   or animate `acc pl` = `gen pl`). The drills compute it from the forms.
 - Endings for the "endings only" advanced drill are derived automatically from
   the forms — no need to list them.
+- **Second locative (`sg_loc`) — optional.** Some nouns take a special stressed
+  *in/at* form after `в`/`на` that differs from the ordinary prepositional:
+  `в лесу́` (locative) vs `о ле́се` (prepositional), `на берегу́`, `в году́`,
+  `в тени́`. Add it **only** where that distinct form exists, as an extra
+  `sg_loc` cell alongside the six cases:
+
+  ```yaml
+  declension:
+    sg_nom: лес
+    sg_gen: ле́са
+    sg_dat: ле́су
+    sg_acc: лес
+    sg_ins: ле́сом
+    sg_pre: ле́се      # ordinary prepositional (о ле́се)
+    sg_loc: лесу́      # second locative (в лесу́)
+    # …pl_* as usual
+  ```
+
+  It is **singular only** and always spelled like another case (the dative for
+  masculines; the genitive/dative/prepositional for feminine `-ь` nouns),
+  differing only in end stress — so it never changes grading, it just adds the
+  correctly-stressed form and a "Locative" row (with an explanatory tooltip) to
+  the declension table. Keep the real prepositional in `sg_pre`; don't put the
+  `-у́` locative there.
 
 ### Verbs (`verbs.yml`)
 
