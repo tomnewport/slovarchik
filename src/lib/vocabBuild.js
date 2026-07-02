@@ -3,7 +3,7 @@
 // stays trivially testable; the store layer feeds it raw text.
 import yaml from 'js-yaml'
 
-import { CASES, NUMBERS } from './declension.js'
+import { CASES, LOCATIVE, NUMBERS } from './declension.js'
 import { stripStress } from './text.js'
 
 /** Map a vocab filename (without extension) to its part of speech. */
@@ -84,9 +84,10 @@ function normalizeHeteronyms(raw) {
 /** Convert a flat declension map (sg_nom, pl_gen, …) into nested forms. */
 function nestForms(declension, numbers) {
   const forms = {}
+  // The optional second locative (`sg_loc`) rides alongside the six core cases.
   for (const num of numbers) {
     const slot = {}
-    for (const c of CASES) {
+    for (const c of [...CASES, LOCATIVE]) {
       const key = `${num}_${c}`
       if (declension && declension[key] != null) slot[c] = declension[key]
     }

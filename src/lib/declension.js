@@ -8,6 +8,15 @@ import { stripStress } from './text.js'
 
 export const CASES = ['nom', 'gen', 'dat', 'acc', 'ins', 'pre']
 
+// The second locative ("местный"/second prepositional). It is *not* one of the
+// six core CASES: only a subset of nouns have a distinct one, it is singular
+// only, and it is always spelled like another case (the dative for masculines,
+// the genitive/dative/prepositional for feminine -ь nouns) — differing only in
+// its end stress (в лесу́, not в ле́се). Keeping it out of CASES means grading,
+// completeness checks and the context drill stay on the six-case system, while
+// the declension table can still surface it as an extra optional row.
+export const LOCATIVE = 'loc'
+
 export const CASE_LABELS = {
   nom: 'Nominative',
   gen: 'Genitive',
@@ -15,6 +24,7 @@ export const CASE_LABELS = {
   acc: 'Accusative',
   ins: 'Instrumental',
   pre: 'Prepositional',
+  loc: 'Locative',
 }
 
 /** Short hint of the question each case answers, handy for learners. */
@@ -25,6 +35,12 @@ export const CASE_HINTS = {
   acc: 'whom / what (object)',
   ins: 'with / by whom / what',
   pre: 'about whom / what',
+  loc: 'in / at — after в / на',
+}
+
+/** Longer explanations, shown as a tooltip on the rare cases learners may not know. */
+export const CASE_NOTES = {
+  loc: 'Locative (a second prepositional): the special “in/at” form some nouns take after в or на — в лесу́ “in the forest”, not в ле́се. It is spelled like the dative but stressed on the ending.',
 }
 
 export const NUMBERS = ['sg', 'pl']

@@ -125,7 +125,13 @@ function check() {
         <tbody>
           <tr v-for="row in paradigm.rows" :key="row.key">
             <th class="rowhead">
-              {{ row.label }}
+              {{ row.label }}<button
+                v-if="row.note"
+                type="button"
+                class="info"
+                :title="row.note"
+                :aria-label="row.note"
+              >ⓘ</button>
               <small v-if="row.sub" class="muted">{{ row.sub }}</small>
             </th>
             <td v-for="col in paradigm.cols" :key="col.key">
@@ -214,6 +220,17 @@ function check() {
   display: block;
   font-weight: 400;
   font-size: 0.7rem;
+}
+.info {
+  border: none;
+  background: none;
+  padding: 0 0 0 0.2rem;
+  margin: 0;
+  color: var(--primary);
+  font-size: 0.8rem;
+  cursor: help;
+  vertical-align: super;
+  line-height: 1;
 }
 .ptable thead th:first-child {
   position: sticky;

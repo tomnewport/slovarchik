@@ -78,6 +78,12 @@ never also takes a combining accent.
 | `collections` | no       | Free-form topic tags (`[travel, daily life]`) used for grouping/skills. |
 | `learn`       | no       | Set `false` to make a **gloss-only** entry: kept in the dictionary so phrase hints can translate it, but excluded from every drill, the phrase bank and the batch/progress engine. Defaults to `true`. See below. |
 
+> **Do not add a `batteries:` field.** Older entries carried an experimental
+> `batteries:` grouping tag. Nothing in the app ever read it — it duplicated
+> `collections:` — so it has been removed from every entry. Use `collections:`
+> (above) for topical grouping. If you are copying an old entry as a template
+> and see `batteries:`, drop that line.
+
 ### `en_gb` — meaning and accepted answers
 
 ```yaml
@@ -197,6 +203,30 @@ Run `node scripts/coverage-gloss.js` to list any gaps.
   or animate `acc pl` = `gen pl`). The drills compute it from the forms.
 - Endings for the "endings only" advanced drill are derived automatically from
   the forms — no need to list them.
+- **Second locative (`sg_loc`) — optional.** Some nouns take a special stressed
+  *in/at* form after `в`/`на` that differs from the ordinary prepositional:
+  `в лесу́` (locative) vs `о ле́се` (prepositional), `на берегу́`, `в году́`,
+  `в тени́`. Add it **only** where that distinct form exists, as an extra
+  `sg_loc` cell alongside the six cases:
+
+  ```yaml
+  declension:
+    sg_nom: лес
+    sg_gen: ле́са
+    sg_dat: ле́су
+    sg_acc: лес
+    sg_ins: ле́сом
+    sg_pre: ле́се      # ordinary prepositional (о ле́се)
+    sg_loc: лесу́      # second locative (в лесу́)
+    # …pl_* as usual
+  ```
+
+  It is **singular only** and always spelled like another case (the dative for
+  masculines; the genitive/dative/prepositional for feminine `-ь` nouns),
+  differing only in end stress — so it never changes grading, it just adds the
+  correctly-stressed form and a "Locative" row (with an explanatory tooltip) to
+  the declension table. Keep the real prepositional in `sg_pre`; don't put the
+  `-у́` locative there.
 
 ### Verbs (`verbs.yml`)
 

@@ -11,10 +11,21 @@ import {
   CASES,
   CASE_LABELS,
   CASE_HINTS,
+  CASE_NOTES,
+  LOCATIVE,
   NUMBERS,
   NUMBER_LABELS,
   commonStem,
 } from './declension.js'
+
+// Noun rows: the six core cases plus the optional second locative. The locative
+// row is pruned automatically for nouns that don't declare one (see assemble).
+const NOUN_ROWS = [...CASES, LOCATIVE].map((c) => ({
+  key: c,
+  label: CASE_LABELS[c],
+  sub: CASE_HINTS[c],
+  note: CASE_NOTES[c],
+}))
 
 /**
  * Strip a parenthetical hint and collapse whitespace, e.g. "(о) столе́" → "столе́"
@@ -125,10 +136,9 @@ export function buildParadigm(word) {
   let paradigm = null
   switch (word.pos) {
     case 'noun': {
-      const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
       const cols = NUMBERS.map((n) => ({ key: n, label: NUMBER_LABELS[n] }))
       // forms is nested number → case, columns are numbers and rows are cases.
-      paradigm = assemble(meta, rows, cols, (row, col) => word.forms?.[col]?.[row])
+      paradigm = assemble(meta, NOUN_ROWS, cols, (row, col) => word.forms?.[col]?.[row])
       break
     }
     case 'pronoun': {
