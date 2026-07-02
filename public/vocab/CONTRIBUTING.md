@@ -78,6 +78,12 @@ never also takes a combining accent.
 | `collections` | no       | Free-form topic tags (`[travel, daily life]`) used for grouping/skills. |
 | `learn`       | no       | Set `false` to make a **gloss-only** entry: kept in the dictionary so phrase hints can translate it, but excluded from every drill, the phrase bank and the batch/progress engine. Defaults to `true`. See below. |
 
+> **Do not add a `batteries:` field.** Older entries carried an experimental
+> `batteries:` grouping tag. Nothing in the app ever read it — it duplicated
+> `collections:` — so it has been removed from every entry. Use `collections:`
+> (above) for topical grouping. If you are copying an old entry as a template
+> and see `batteries:`, drop that line.
+
 ### `en_gb` — meaning and accepted answers
 
 ```yaml
