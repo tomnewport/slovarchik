@@ -9,7 +9,7 @@
 import { reactive } from 'vue'
 
 // `on` is the sticky hint toggle, flipped by the keyboard's hint button.
-// `allowed` gates whether the hint may be used at all: phrase spelling withholds
+// `allowed` gates whether the hint may be used at all: spelling drills withhold
 // it until the learner has tried the spelling once unaided (see TypeExercise),
 // so the 💡 key is inert (and lights nothing) on that first attempt.
 export const keyboard = reactive({ on: false, allowed: true })
@@ -30,7 +30,7 @@ export function resetHint() {
 
 /**
  * Withhold or permit the keyboard hint. Withholding also switches any active
- * hint off, so a phrase's first attempt is always unaided.
+ * hint off, so a spelling's first attempt is always unaided.
  * @param {boolean} allowed
  */
 export function setHintAllowed(allowed) {

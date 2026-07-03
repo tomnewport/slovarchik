@@ -160,8 +160,12 @@ describe('TypeExercise', () => {
     expect(keyboard.allowed).toBe(true)
   })
 
-  it('leaves the hint available from the start for a single word', () => {
-    mount(TypeExercise, { props: { exercise } })
+  it('withholds the keyboard hint on a single word until the first attempt is made', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    expect(keyboard.allowed).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('button.check').trigger('click') // first wrong → unlock
     expect(keyboard.allowed).toBe(true)
   })
 
@@ -178,6 +182,21 @@ describe('TypeExercise', () => {
     const wrong = map.findAll('.cell.wrong')
     expect(wrong).toHaveLength(1)
     expect(wrong[0].text()).toBe('е')
+  })
+
+  it('maps where a close single-word attempt went wrong', async () => {
+    const wrapper = mount(TypeExercise, {
+      props: { exercise: { ...exercise, ru: 'автомобиль' } },
+    })
+    // One slip (автамобиль for автомобиль) → close enough to show the map.
+    await wrapper.find('input[lang="ru"]').setValue('автамобиль')
+    await wrapper.find('button.check').trigger('click')
+
+    const map = wrapper.find('.error-map')
+    expect(map.exists()).toBe(true)
+    const wrong = map.findAll('.cell.wrong')
+    expect(wrong).toHaveLength(1)
+    expect(wrong[0].text()).toBe('а')
   })
 
   it('shows no error map when the attempt is nowhere near', async () => {

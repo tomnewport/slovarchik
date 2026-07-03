@@ -3,12 +3,13 @@
 // keyboard. Covers spell-word, spell-phrase and dictation (where the prompt is
 // heard, not seen). Hints never penalise — grading only looks at the answer.
 //
-// Phrase spelling (#keyboard-hints-word-bank) nudges the learner to spell
-// unaided first: the keyboard hint is withheld on the opening attempt, and a
-// ❓ Dictionary reveals — with no penalty — the phrase words they haven't
-// learned yet (the ones they can't be expected to spell). If that first try
-// lands close to the answer we mark *where* it went wrong (without giving the
-// letters away), then unlock the keyboard hint for a second, aided try.
+// Spelling (#keyboard-hints-word-bank) nudges the learner to spell unaided
+// first: the keyboard hint is withheld on the opening attempt — for phrases
+// and single words alike. If that first try lands close to the answer we mark
+// *where* it went wrong (without giving the letters away), then unlock the
+// keyboard hint for a second, aided try. Phrases additionally get a
+// ❓ Dictionary revealing — with no penalty — the phrase words the learner
+// hasn't learned yet (the ones they can't be expected to spell).
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { assessedWordCorrect, phraseCorrect, spellingDiff, typingSequence } from '../../lib/phrases.js'
@@ -24,8 +25,8 @@ import CelebrationBurst from '../CelebrationBurst.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
-// Phrase spelling gets the withhold-then-hint flow and the Dictionary; single
-// words keep the classic behaviour (hint available from the start).
+// Only phrases get the Dictionary (a single word's dictionary entry would be
+// the answer); the withhold-then-hint flow applies to words and phrases alike.
 const isPhrase = computed(() => props.exercise.content === 'phrase')
 
 const typed = ref('')
@@ -100,13 +101,11 @@ function check() {
   wasCorrect.value = phraseCorrect(typed.value, targets)
   if (!wasCorrect.value && !retried.value) {
     retried.value = true
-    if (isPhrase.value) {
-      // Mark where the unaided attempt slipped (when close), then unlock the
-      // keyboard hint so the second try can be aided.
-      const cells = spellingDiff(typingSequence(typed.value), answer.value)
-      if (closeEnough(cells)) errorCells.value = cells
-      setHintAllowed(true)
-    }
+    // Mark where the unaided attempt slipped (when close), then unlock the
+    // keyboard hint so the second try can be aided.
+    const cells = spellingDiff(typingSequence(typed.value), answer.value)
+    if (closeEnough(cells)) errorCells.value = cells
+    setHintAllowed(true)
     typed.value = ''
     playFeedback(false)
     return
@@ -130,8 +129,8 @@ function next() {
 
 onMounted(() => {
   resetHint()
-  // Withhold the keyboard hint for a phrase's first, unaided attempt.
-  if (isPhrase.value) setHintAllowed(false)
+  // Withhold the keyboard hint for the first, unaided attempt.
+  setHintAllowed(false)
   if (props.exercise.audio) speak(props.exercise.ru)
 })
 
