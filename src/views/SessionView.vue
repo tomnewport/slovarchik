@@ -52,6 +52,9 @@ const finishedAt = ref(0)
 
 // Snapshot of each target word's state before the session, to spot slips.
 const startStates = new Map()
+// Words that entered the session still pending their confirmation review
+// (#313) — so the summary can celebrate the ones confirmed this session.
+const startPending = new Set()
 // Snapshot of each batch's exercise-progress fraction before the session, so we
 // can show how far the bar moved this session.
 const startExercise = { learning: 1, mastery: 1 }
@@ -117,6 +120,7 @@ async function setup() {
   for (const ex of exercises) {
     for (const key of ex.targets) {
       if (!startStates.has(key)) startStates.set(key, progress.stateOf(key))
+      if (progress.isPendingConfirmation(key)) startPending.add(key)
     }
   }
 
@@ -213,7 +217,8 @@ async function onDone(result) {
   const spareWord = result.correct === false && result.wordCorrect === true
   // A correct answer typed without the keyboard hint counts double: record the
   // attempt twice (in one write) so the word advances toward learned/mastered
-  // faster (#210).
+  // faster (#210). The same signal feeds the memory scheduler (#313): only an
+  // unhinted answer demonstrates unaided recall, so it grows stability more.
   const times = result.double ? 2 : 1
   let firstError = null
   for (const key of (ex.targets ?? []).filter(Boolean)) {
@@ -225,6 +230,7 @@ async function onDone(result) {
         level: ex.level,
         correct: wrong ? !wrong.has(key) : result.correct,
         times,
+        hinted: !result.double,
       })
     } catch (e) {
       if (!firstError) firstError = e
@@ -314,8 +320,13 @@ const summary = computed(() => {
   for (const [key, before] of startStates) {
     if (rank(progress.stateOf(key)) < rank(before)) slipped.push(key)
   }
+  // Words that arrived pending and passed their spaced confirmation review
+  // this session — the "you still knew these the next day" beat (#313).
+  const confirmed = [...startPending].filter(
+    (key) => progress.state.records[key]?.confirmedAt != null,
+  )
   const durationMs = finishedAt.value && startedAt.value ? finishedAt.value - startedAt.value : 0
-  return { ...base, slipped, durationMs }
+  return { ...base, slipped, confirmed, durationMs }
 })
 
 function durationLabel(ms) {
@@ -458,6 +469,17 @@ function confirmClose() {
               />
             </div>
           </div>
+        </div>
+
+        <!-- Words that passed their spaced confirmation review this session. -->
+        <div v-if="summary.confirmed.length" class="confirmed">
+          <p class="confirmed-line">
+            ✓ {{ summary.confirmed.length }} word{{ summary.confirmed.length === 1 ? '' : 's' }}
+            confirmed — still remembered a day later
+          </p>
+          <ul>
+            <li v-for="key in summary.confirmed" :key="key" lang="ru">{{ key }}</li>
+          </ul>
         </div>
 
         <div v-if="summary.slipped.length" class="slipped">
@@ -635,13 +657,19 @@ function confirmClose() {
 .gain-fill.master-fill {
   background: var(--gold);
 }
-.slipped ul {
+.slipped ul,
+.confirmed ul {
   list-style: none;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
   justify-content: center;
+}
+.confirmed-line {
+  margin: 0;
+  color: var(--good);
+  font-weight: 600;
 }
 .achievements-row {
   display: flex;

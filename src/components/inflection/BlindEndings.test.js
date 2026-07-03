@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import BlindEndings from './BlindEndings.vue'
 
-vi.mock('../../lib/speech.js', () => ({ speak: vi.fn() }))
+vi.mock('../../lib/speech.js', () => ({ speak: vi.fn(), speechSupported: () => false }))
 
 // A three-cell paradigm (stem "кот") so there are three ending boxes to move
 // between. endingOf strips the stem off each form: '' / 'а' / 'у'.
@@ -21,6 +21,56 @@ const paradigm = {
     { row: 'dat', col: 'sg', form: 'коту' },
   ],
 }
+
+describe('BlindEndings — try-before-hint retry (allowRetry)', () => {
+  async function fill(inputs, values) {
+    for (let i = 0; i < values.length; i++) await inputs[i].setValue(values[i])
+  }
+
+  it('grades a wrong table immediately when retry is not allowed (default)', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm } })
+    await fill(wrapper.findAll('input.ending-input'), ['х', 'а', 'у'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.emitted('graded')).toBeTruthy()
+    expect(wrapper.emitted('retry')).toBeUndefined()
+  })
+
+  it('marks the slipped cells and asks for a retry instead of grading', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm, allowRetry: true } })
+    const inputs = wrapper.findAll('input.ending-input')
+    await fill(inputs, ['х', 'а', 'у']) // nominative wrong (zero ending)
+    await wrapper.find('button.primary').trigger('click')
+
+    expect(wrapper.emitted('graded')).toBeUndefined()
+    expect(wrapper.emitted('retry')).toBeTruthy()
+    expect(wrapper.text()).toContain('Not quite')
+    // Only the wrong cell is marked — and never with the correct letters.
+    expect(inputs[0].classes()).toContain('first-try-wrong')
+    expect(inputs[1].classes()).not.toContain('first-try-wrong')
+
+    // The second check grades for real.
+    await inputs[0].setValue('')
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.emitted('graded')[0][0]).toBe(true)
+  })
+
+  it('spends only one retry: a second wrong check is graded wrong', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm, allowRetry: true } })
+    const inputs = wrapper.findAll('input.ending-input')
+    await fill(inputs, ['х', 'а', 'у'])
+    await wrapper.find('button.primary').trigger('click') // retry
+    await wrapper.find('button.primary').trigger('click') // still wrong → graded
+    expect(wrapper.emitted('graded')[0][0]).toBe(false)
+  })
+
+  it('grades a correct first try straight away, without a retry round', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm, allowRetry: true } })
+    await fill(wrapper.findAll('input.ending-input'), ['', 'а', 'у'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.emitted('graded')[0][0]).toBe(true)
+    expect(wrapper.emitted('retry')).toBeUndefined()
+  })
+})
 
 describe('BlindEndings — Enter advances to the next empty box', () => {
   it('jumps to the next still-empty ending input on Enter', async () => {

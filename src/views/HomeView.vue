@@ -13,6 +13,7 @@ import {
   lost,
   stateOf,
   hasContextDrill,
+  isPendingConfirmation,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
 import { parseKey } from '../lib/vocabBuild.js'
@@ -89,6 +90,8 @@ function buildWordList(batchWords, level, dims) {
         ru,
         en,
         done: w.done,
+        // Done by criteria but awaiting the spaced confirmation review (#313).
+        pending: w.done && isPendingConfirmation(w.word),
         lastAt: lastAttemptAt(events) ?? 0,
         dims: dimsFor(w.word, level, dims).map((d) => ({
           label: DIM_LABEL[d],
@@ -322,10 +325,15 @@ const FOCUSED = [
         <span class="batch-name">{{ learningBatch.name }}</span>
       </div>
       <div class="word-scroll">
-        <div v-for="w in allLearningWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
+        <div v-for="w in allLearningWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done, 'word-pending': w.pending }">
           <div class="word-label">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
+            <span
+              v-if="w.pending"
+              class="pending-mark"
+              title="Learned — a review tomorrow will confirm it"
+            >⏳</span>
           </div>
           <div class="word-dims">
             <span
@@ -346,10 +354,15 @@ const FOCUSED = [
         <span class="batch-name">{{ masteryBatch.name }}</span>
       </div>
       <div class="word-scroll">
-        <div v-for="w in allMasteryWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done }">
+        <div v-for="w in allMasteryWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done, 'word-pending': w.pending }">
           <div class="word-label">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
+            <span
+              v-if="w.pending"
+              class="pending-mark"
+              title="Learned — a review tomorrow will confirm it"
+            >⏳</span>
           </div>
           <div class="word-dims">
             <span
@@ -461,6 +474,16 @@ const FOCUSED = [
 .word-done .word-ru,
 .word-done .word-en {
   opacity: 0.4;
+}
+/* Done by criteria but awaiting the overnight confirmation review (#313):
+   dimmed like done, with an hourglass instead of full fade. */
+.word-pending .word-ru,
+.word-pending .word-en {
+  opacity: 0.6;
+}
+.pending-mark {
+  font-size: 0.75rem;
+  cursor: help;
 }
 .word-row {
   display: flex;

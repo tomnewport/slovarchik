@@ -70,7 +70,7 @@ src/
     hints.js            #   in-phrase word-hint glue
     errorToast.js       #   transient error toast state
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
-                        #   progression/batches/session/sessionRunner/practices/
+                        #   progression/schedule/batches/session/sessionRunner/practices/
                         #     exerciseBuild/focus/achievements  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
                         #   phrases/phraseHint/phraseContext/glossCoverage  — phrases

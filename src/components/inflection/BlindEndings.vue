@@ -1,6 +1,11 @@
 <script setup>
 // Exercise 4 — type every ending with no assistance. Stems are shown; the
 // learner fills one input per cell. A blank input is correct for a zero ending.
+//
+// With `allowRetry` (the in-session mastery drill), a first imperfect check is
+// not graded: the wrong cells are marked — without revealing the answers — and
+// a `retry` event lets the parent unlock the keyboard hint for a second, aided
+// try, mirroring TypeExercise's try-before-hint flow (#keyboard-hints).
 import { computed, onMounted, reactive, ref } from 'vue'
 
 import { cellKey, endingOf } from '../../lib/paradigm.js'
@@ -8,8 +13,11 @@ import { stripStress, normalize } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
 import SpeakButton from '../SpeakButton.vue'
 
-const props = defineProps({ paradigm: { type: Object, required: true } })
-const emit = defineEmits(['graded'])
+const props = defineProps({
+  paradigm: { type: Object, required: true },
+  allowRetry: { type: Boolean, default: false },
+})
+const emit = defineEmits(['graded', 'retry'])
 
 const endings = {}
 const stems = {}
@@ -22,6 +30,10 @@ for (const cell of props.paradigm.cells) {
 
 const entries = reactive({})
 const checked = ref(false)
+// One unaided attempt has been spent; the second check grades for real.
+const retried = ref(false)
+// Cells wrong at the first check — marked (not corrected) while retrying.
+const firstTryWrong = ref(new Set())
 
 function cellAt(row, col) {
   return props.paradigm.cells.find((c) => c.row === row && c.col === col)
@@ -35,6 +47,14 @@ const allCorrect = computed(() => props.paradigm.cells.every((c) => correctCell(
 
 function check() {
   if (checked.value) return
+  if (!allCorrect.value && props.allowRetry && !retried.value) {
+    retried.value = true
+    firstTryWrong.value = new Set(
+      props.paradigm.cells.map((c) => cellKey(c.row, c.col)).filter((k) => !correctCell(k)),
+    )
+    emit('retry')
+    return
+  }
   checked.value = true
   const records = props.paradigm.cells.map((c) => ({
     slot: cellKey(c.row, c.col),
@@ -89,6 +109,7 @@ onMounted(() => speak(props.paradigm.lemma))
                   type="text"
                   lang="ru"
                   class="ending-input"
+                  :class="{ 'first-try-wrong': retried && !checked && firstTryWrong.has(cellKey(row.key, col.key)) }"
                   :data-answer="endings[cellKey(row.key, col.key)]"
                   :disabled="checked"
                   :style="{
@@ -117,6 +138,10 @@ onMounted(() => speak(props.paradigm.lemma))
         </tbody>
       </table>
     </div>
+
+    <p v-if="retried && !checked" class="retry-hint">
+      Not quite — fix the marked endings and try again
+    </p>
 
     <div class="row">
       <button v-if="!checked" class="primary" @click="check">Check</button>
@@ -180,6 +205,14 @@ onMounted(() => speak(props.paradigm.lemma))
   border: 1px solid var(--border);
   background: var(--bg-soft);
   color: var(--text);
+}
+.ending-input.first-try-wrong {
+  border-color: var(--bad);
+}
+.retry-hint {
+  margin: 0;
+  color: var(--bad);
+  font-size: 0.9rem;
 }
 .correction {
   display: flex;

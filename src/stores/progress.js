@@ -29,6 +29,7 @@ import {
   minExercisesToLevel,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
+import { reviewSchedule, wordOverdueness, confirmationOutcome } from '../lib/schedule.js'
 import { learnableWords } from '../lib/vocabBuild.js'
 import { buildSession } from '../lib/session.js'
 import { practicesForSession } from '../lib/practices.js'
@@ -62,7 +63,8 @@ const BATCH_META_KEY = (level) => `batch:${level}`
 
 export const state = reactive({
   loaded: false,
-  /** word key → { word, events, learnedAt, masteredAt, peak } */
+  /** word key → { word, events, learnedAt, masteredAt, peak, confirmedAt,
+   *  confirmFailedAt, schedule, agg } */
   records: {},
   /** the committed current batches, or null */
   learning: null,
@@ -182,6 +184,22 @@ function isBorderline(key) {
   return false
 }
 
+/**
+ * Learned by criteria, but not yet confirmed by a spaced review (#313): the
+ * word completed its batch checkmarks, which only proves working memory. It
+ * graduates once a review ≥1 day after reaching `learned` lands correct.
+ */
+export function isPendingConfirmation(key) {
+  const rec = state.records[key]
+  if (!rec || rec.confirmedAt != null) return false
+  return rank(stateOf(key)) >= rank('learned')
+}
+
+/** All words currently pending their confirmation review. */
+export const pendingConfirmation = computed(() =>
+  Object.keys(state.records).filter((k) => isPendingConfirmation(k)),
+)
+
 /** Recently-learned words, most recent first. */
 export const recentlyLearned = computed(() =>
   Object.values(state.records)
@@ -203,9 +221,38 @@ function ensureRecord(key) {
       learnedAt: null,
       masteredAt: null,
       peak: 0,
+      // Confirmation review (#313): set once a spaced review ≥1 day after
+      // reaching `learned` lands correct; until then the word is "pending".
+      confirmedAt: null,
+      // Set when a pending word's confirmation review fails, folding it back
+      // into the current pool; cleared when it is finally confirmed.
+      confirmFailedAt: null,
+      /** dimension → { stability, due, lastReview } (see lib/schedule.js). */
+      schedule: {},
+      /** Lifetime aggregates (#314): counters survive the event-window cap. */
+      agg: { firstSeenAt: null, lastSeenAt: null, dims: {} },
     }
   }
   return state.records[key]
+}
+
+/** Update a record's lifetime aggregate counters for one real attempt (#314).
+ *  Deliberately ignores `times` double-credit: aggregates record what actually
+ *  happened, so a future scheduler can estimate difficulty from true counts. */
+function updateAggregates(rec, { dimension, level, correct, ts }) {
+  const agg = rec.agg ?? (rec.agg = { firstSeenAt: null, lastSeenAt: null, dims: {} })
+  if (agg.firstSeenAt == null || ts < agg.firstSeenAt) agg.firstSeenAt = ts
+  if (agg.lastSeenAt == null || ts > agg.lastSeenAt) agg.lastSeenAt = ts
+  const bucket = `${level}:${dimension}`
+  const dims = agg.dims[bucket] ?? (agg.dims[bucket] = { attempts: 0, correct: 0, streak: 0, bestStreak: 0 })
+  dims.attempts++
+  if (correct) {
+    dims.correct++
+    dims.streak++
+    if (dims.streak > dims.bestStreak) dims.bestStreak = dims.streak
+  } else {
+    dims.streak = 0
+  }
 }
 
 /** Drop all but the most recent attempts within each (level, dimension). */
@@ -231,9 +278,20 @@ function capEvents(rec) {
  * mastered timestamps, peak state for slip detection), then persist the word.
  * `times` records the same outcome more than once in a single persist — an
  * unhinted correct answer counts double (#210) without a second IndexedDB write.
+ * `hinted` marks answers produced with the keyboard hint available-and-used (or
+ * any exercise that can't demonstrate unaided recall); the memory scheduler
+ * grows stability less for those (#313).
  * @returns {string} the word's new state
  */
-export async function recordAttempt({ word, dimension, level, correct, ts = Date.now(), times = 1 }) {
+export async function recordAttempt({
+  word,
+  dimension,
+  level,
+  correct,
+  ts = Date.now(),
+  times = 1,
+  hinted = true,
+}) {
   // A missing word key means there is nothing meaningful to record (e.g. a
   // phrase exercise with no source word, or a vocab entry that lacks a key).
   // Skip it gracefully rather than letting it reach the IndexedDB `put`, whose
@@ -251,11 +309,33 @@ export async function recordAttempt({ word, dimension, level, correct, ts = Date
     rec.events.push({ dimension, level, correct: !!correct, ts })
   }
   capEvents(rec)
+  // Lifetime aggregates and the memory schedule fold in the attempt exactly
+  // once — `times` is a criteria device, not extra evidence.
+  updateAggregates(rec, { dimension, level, correct: !!correct, ts })
+  if (!rec.schedule) rec.schedule = {}
+  rec.schedule[dimension] = reviewSchedule(rec.schedule[dimension] ?? null, {
+    correct: !!correct,
+    hinted,
+    ts,
+  })
 
   const next = stateOf(word)
   if (rec.learnedAt == null && rank(next) >= rank('learned')) rec.learnedAt = ts
   if (rec.masteredAt == null && next === 'mastered') rec.masteredAt = ts
   rec.peak = Math.max(rec.peak ?? 0, rank(next))
+  // Confirmation review (#313): while the word still meets its criteria, a
+  // spaced attempt ≥1 day after it reached `learned` either confirms it (real
+  // learned) or folds it back into the current pool for re-drilling. A word
+  // that slips below `learned` is handled by the lost-word plumbing instead.
+  if (rec.confirmedAt == null && rank(next) >= rank('learned')) {
+    const outcome = confirmationOutcome(rec, { correct: !!correct, ts })
+    if (outcome === 'confirmed') {
+      rec.confirmedAt = ts
+      rec.confirmFailedAt = null
+    } else if (outcome === 'failed') {
+      rec.confirmFailedAt = ts
+    }
+  }
 
   await persist(rec)
   // Update the streak/calendar reactively now; persist it without blocking the
@@ -344,6 +424,12 @@ function plain(rec) {
     learnedAt: rec.learnedAt,
     masteredAt: rec.masteredAt,
     peak: rec.peak ?? 0,
+    confirmedAt: rec.confirmedAt ?? null,
+    confirmFailedAt: rec.confirmFailedAt ?? null,
+    // JSON round-trip strips Vue proxies from the nested maps so IndexedDB's
+    // structured clone can serialise them.
+    schedule: JSON.parse(JSON.stringify(rec.schedule ?? {})),
+    agg: JSON.parse(JSON.stringify(rec.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} })),
   }
 }
 
@@ -362,8 +448,12 @@ function vocabWords() {
 
 /** Offer up to five batch options for the next learning or mastery journey. */
 export function getBatchOptions(level = 'learning', rng = Math.random) {
+  // Mastery builds on confirmed memory: a word still pending its spaced
+  // confirmation review (#313) is not yet eligible to enter a mastery batch.
+  const words =
+    level === 'mastery' ? vocabWords().filter((w) => !isPendingConfirmation(w.key)) : vocabWords()
   return buildBatchOptions({
-    words: vocabWords(),
+    words,
     stateOf: (w) => stateOf(w.key),
     level,
     rng,
@@ -525,6 +615,14 @@ function currentPool() {
   // instead of sitting in `lost` forever. They sort to the front via
   // `understanding`, so they get the most practice.
   for (const key of lost.value) if (rank(stateOf(key)) < rank('learned')) out.push(key)
+  // A word that failed its confirmation review (#313) is still `learned` by
+  // criteria but demonstrably not retained overnight — fold it back into the
+  // current pool for focused re-drilling until a later spaced review confirms it.
+  for (const [key, rec] of Object.entries(state.records)) {
+    if (rec.confirmedAt == null && rec.confirmFailedAt != null && rank(stateOf(key)) >= rank('learned')) {
+      out.push(key)
+    }
+  }
   // Fall back to anything actively being learned if no batch is committed.
   if (out.length === 0) {
     for (const k of Object.keys(state.records)) if (stateOf(k) === 'learning') out.push(k)
@@ -544,13 +642,17 @@ function reinforcePool() {
 }
 
 /**
- * Learned/mastered words ordered by how long since they were last tested. Like
+ * The due pool (#313): learned/mastered words ordered by how overdue their
+ * scheduled review is — the word whose weakest dimension is closest to being
+ * forgotten first, not merely the least-recently-tested. Records that predate
+ * the scheduler fall back to last-attempt recency (see lib/schedule.js). Like
  * {@link reinforcePool}, this refresh pool excludes words still being learned.
  */
-function untestedPool() {
-  return Object.keys(state.records)
+function duePool(now = Date.now()) {
+  const scored = Object.keys(state.records)
     .filter((k) => rank(stateOf(k)) >= rank('learned'))
-    .sort((a, b) => (lastAttemptAt(events(a)) ?? 0) - (lastAttemptAt(events(b)) ?? 0))
+    .map((k) => [k, wordOverdueness(state.records[k]?.schedule, lastAttemptAt(events(k)), now)])
+  return scored.sort((a, b) => b[1] - a[1]).map(([k]) => k)
 }
 
 /**
@@ -629,11 +731,14 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
     const set = new Set(focusKeys)
     pools = {
       atRisk: reinforcePool().filter((k) => set.has(k)),
-      untested: untestedPool().filter((k) => set.has(k)),
+      untested: duePool().filter((k) => set.has(k)),
       current: [...focusKeys],
     }
   } else {
-    pools = { atRisk: reinforcePool(), untested: untestedPool(), current: currentPool() }
+    // The `untested` bucket keeps its historical name in the session shape, but
+    // it is fed by the scheduler's due queue (most-overdue first) — this is the
+    // refresh half that makes the practice spaced repetition (#313).
+    pools = { atRisk: reinforcePool(), untested: duePool(), current: currentPool() }
   }
   const masterySet = state.mastery ? new Set(state.mastery.words) : null
   for (const practice of session.practices) {
@@ -682,13 +787,22 @@ export function weakestSkills() {
 export async function loadProgress() {
   const records = await idb.getAllProgress()
   const map = {}
+  // Records persisted before the scheduler existed carry no `schedule` field.
+  // Their learned words are grandfathered as already confirmed below — the
+  // learner shouldn't wake up to every known word suddenly "pending" (#313).
+  const legacy = new Set()
   for (const r of records) {
+    if (r.schedule === undefined) legacy.add(r.word)
     map[r.word] = {
       word: r.word,
       events: Array.isArray(r.events) ? r.events : [],
       learnedAt: r.learnedAt ?? null,
       masteredAt: r.masteredAt ?? null,
       peak: r.peak ?? 0,
+      confirmedAt: r.confirmedAt ?? null,
+      confirmFailedAt: r.confirmFailedAt ?? null,
+      schedule: r.schedule ?? {},
+      agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
     }
   }
   // Backfill first-learned / first-mastered timestamps for any record that
@@ -704,6 +818,10 @@ export async function loadProgress() {
     }
     if (rec.masteredAt == null && levelMet(rec.events, 'mastery')) {
       rec.masteredAt = when
+      changed = true
+    }
+    if (legacy.has(rec.word) && rec.learnedAt != null && rec.confirmedAt == null) {
+      rec.confirmedAt = rec.learnedAt
       changed = true
     }
     if (changed) await persist(rec)
@@ -869,6 +987,12 @@ export async function importData(data) {
       learnedAt: r.learnedAt ?? null,
       masteredAt: r.masteredAt ?? null,
       peak: r.peak ?? 0,
+      // Backups from before the scheduler carry no `schedule`: grandfather
+      // their learned words as confirmed, same as loadProgress does (#313).
+      confirmedAt: r.confirmedAt ?? (r.schedule === undefined ? (r.learnedAt ?? null) : null),
+      confirmFailedAt: r.confirmFailedAt ?? null,
+      schedule: r.schedule ?? {},
+      agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
     }
     map[r.word] = rec
     await idb.putProgress(rec)
