@@ -19,6 +19,8 @@
 // from its attempt history each time, so words can also slip back down.
 
 import { buildParadigm } from './paradigm.js'
+import { DAY_MS } from './schedule.js'
+import { dayKey } from './streak.js'
 
 /** The dimensions of learning a word. `context` (the phrase-completion drill)
  *  only gates mastery, so it is deliberately absent from the learning criteria. */
@@ -32,15 +34,18 @@ export const LEVELS = Object.freeze(['learning', 'mastery'])
 
 /**
  * The criteria from #79, per level and dimension. Each criterion is one of:
- *  - `{ type: 'ratio', need, window }` — at least `need` of the last `window`
- *    attempts were correct (so it can slip back down as recent attempts fail).
+ *  - `{ type: 'ratio', need, window, days? }` — at least `need` of the last
+ *    `window` attempts were correct (so it can slip back down as recent
+ *    attempts fail). With `days`, the correct attempts must additionally span
+ *    at least that many distinct calendar days (#313) — proof of memory across
+ *    a night, not of a lucky streak within one sitting.
  *  - `{ type: 'attempts', need }` — at least `need` attempts, regardless of
  *    correctness (speaking: "attempt to speak the word correctly three times").
  *
  * Learning needs all four dimensions. Mastery needs identification + usage (a
  * complete inflection table) plus `context` — restoring the correct inflection
- * inside a natural phrase — modelled, like the others, as a single correct
- * most-recent attempt. Mastery has no speaking or hearing requirement.
+ * inside a natural phrase — each requiring two correct answers of the last
+ * three, on two distinct days. Mastery has no speaking or hearing requirement.
  */
 export const CRITERIA = Object.freeze({
   learning: {
@@ -50,9 +55,9 @@ export const CRITERIA = Object.freeze({
     speaking: { type: 'attempts', need: 3 },
   },
   mastery: {
-    identification: { type: 'ratio', need: 1, window: 1 },
-    usage: { type: 'ratio', need: 1, window: 1 },
-    context: { type: 'ratio', need: 1, window: 1 },
+    identification: { type: 'ratio', need: 2, window: 3, days: 2 },
+    usage: { type: 'ratio', need: 2, window: 3, days: 2 },
+    context: { type: 'ratio', need: 2, window: 3, days: 2 },
   },
 })
 
@@ -79,7 +84,17 @@ export function criterionMet(attempts, crit) {
   // 'ratio': count correct within the most recent `window` attempts.
   const recent = list.slice(-crit.window)
   const correct = recent.filter((a) => a.correct).length
-  return correct >= crit.need
+  if (correct < crit.need) return false
+  // Day-spacing requirement (#313): the correct attempts must span at least
+  // `days` distinct calendar days. Counted over every stored attempt — not
+  // just the window — so further successes can never un-meet it (a burst of
+  // same-day correct answers must not demote a word the day after it earned
+  // its spaced second data point).
+  if (crit.days) {
+    const days = new Set(list.filter((a) => a.correct).map((a) => dayKey(a.ts ?? 0)))
+    if (days.size < crit.days) return false
+  }
+  return true
 }
 
 /**
@@ -112,13 +127,18 @@ export function minCorrectToMeet(attempts, crit) {
   const list = attempts ?? []
   // 'attempts' (speaking): any attempt counts, so it is just the shortfall.
   if (crit.type === 'attempts') return Math.max(0, crit.need - list.length)
-  // 'ratio': append correct attempts until the most-recent `window` slice holds
-  // `need` correct. At k = window every windowed attempt is an appended correct
-  // one (need ≤ window), so this always terminates.
-  for (let k = 0; k <= crit.window; k++) {
-    if (criterionMet([...list, ...Array(k).fill({ correct: true })], crit)) return k
+  // 'ratio': append correct attempts until the criterion is met. Simulated
+  // attempts land on successive *future* days (best case), so a `days`-spaced
+  // criterion counts them as distinct days. At k = window every windowed
+  // attempt is an appended correct one (need ≤ window) and by then k ≥ days
+  // future days have accrued, so this always terminates.
+  const base = lastAttemptAt(list) ?? 0
+  const bound = crit.window + (crit.days ?? 0)
+  for (let k = 0; k <= bound; k++) {
+    const future = Array.from({ length: k }, (_, i) => ({ correct: true, ts: base + (i + 1) * DAY_MS }))
+    if (criterionMet([...list, ...future], crit)) return k
   }
-  return crit.window
+  return bound
 }
 
 /**

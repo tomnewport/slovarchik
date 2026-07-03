@@ -47,8 +47,13 @@ import {
   buildCalendar,
 } from '../lib/streak.js'
 
-/** Bumped if the export schema ever changes; guards imports. */
-export const EXPORT_VERSION = 1
+/**
+ * Bumped if the export schema (or the meaning of its data) changes; guards
+ * imports. v2: mastery criteria tightened to two spaced correct answers per
+ * dimension (#313) — pre-v2 backups get their mastered peaks re-checked on
+ * import (see {@link recheckMasteredPeak}).
+ */
+export const EXPORT_VERSION = 2
 
 // Keep storage bounded: only the most recent attempts per (level, dimension)
 // matter to the model (windows of four; speaking needs three). Ten is plenty.
@@ -437,6 +442,24 @@ function persist(rec) {
   return idb.putProgress(plain(rec))
 }
 
+/**
+ * One-time re-check when the mastery criteria tightened (#313): a word
+ * "mastered" under the old single-correct-answer rule no longer meets the
+ * spaced two-answer criteria, so its state drops back to `learned` — that is
+ * the point of the change — but its recorded peak would then flag it as
+ * slipped and flood the reinforce pools. Cap the peak instead, so the word
+ * quietly re-enters mastery batches to earn its second data point. Checked
+ * without the word record (context inapplicable), which can only over-cap —
+ * and the peak self-heals on the word's next attempt.
+ * @returns {boolean} whether the record changed
+ */
+function recheckMasteredPeak(rec) {
+  if ((rec.peak ?? 0) < rank('mastered')) return false
+  if (levelMet(rec.events, 'mastery')) return false
+  rec.peak = rank('learned')
+  return true
+}
+
 // ---------------------------------------------------------------------------
 // Batches.
 // ---------------------------------------------------------------------------
@@ -809,6 +832,7 @@ export async function loadProgress() {
   // qualifies but predates timestamp stamping, so the history chart can't fall
   // behind the live learned/mastered counts. These criteria are inflection-
   // independent, so they're safe to compute before the vocab is loaded.
+  const masteryRechecked = (await idb.getMeta('migration:mastery-recheck')) ?? false
   for (const rec of Object.values(map)) {
     let changed = false
     const when = lastAttemptAt(rec.events) ?? Date.now()
@@ -824,8 +848,10 @@ export async function loadProgress() {
       rec.confirmedAt = rec.learnedAt
       changed = true
     }
+    if (!masteryRechecked && recheckMasteredPeak(rec)) changed = true
     if (changed) await persist(rec)
   }
+  if (!masteryRechecked) await idb.setMeta('migration:mastery-recheck', true)
 
   state.records = map
   state.learning = (await idb.getMeta(BATCH_META_KEY('learning'))) ?? null
@@ -994,6 +1020,9 @@ export async function importData(data) {
       schedule: r.schedule ?? {},
       agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
     }
+    // Backups exported before the mastery criteria tightened (v1) carry peaks
+    // earned under the old single-answer rule — re-check them (#313).
+    if (data.version < 2) recheckMasteredPeak(rec)
     map[r.word] = rec
     await idb.putProgress(rec)
   }
