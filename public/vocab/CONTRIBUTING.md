@@ -231,27 +231,47 @@ Run `node scripts/coverage-gloss.js` to list any gaps.
 ### Verbs (`verbs.yml`)
 
 ```yaml
-"бегать=to run":
+"покупать=to buy":
   cefr_level: A2
-  accented: бе́гать      # the infinitive (dictionary form), stressed
+  accented: покупа́ть    # the infinitive (dictionary form), stressed
   aspect: impf          # impf | pf
+  pair: "купить=to buy" # natural key of the aspect partner (see below)
   en_gb:
-    standard: to run (to move fast on foot)
+    standard: to buy (to get something by paying)
   conjugation:
+    imperative:         # command forms (optional; sg = ты, pl = вы)
+      sg: покупа́й
+      pl: покупа́йте
     present:            # use `future` instead for perfective verbs
-      "1sg": бе́гаю
-      "2sg": бе́гаешь
-      "3sg": бе́гает
-      "1pl": бе́гаем
-      "2pl": бе́гаете
-      "3pl": бе́гают
-    past_m: бе́гал
-    past_f: бе́гала
-    past_n: бе́гало
-    past_pl: бе́гали
+      "1sg": покупа́ю
+      "2sg": покупа́ешь
+      "3sg": покупа́ет
+      "1pl": покупа́ем
+      "2pl": покупа́ете
+      "3pl": покупа́ют
+    past_m: покупа́л
+    past_f: покупа́ла
+    past_n: покупа́ло
+    past_pl: покупа́ли
 ```
 
 Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
+
+- **`pair` — aspect partner (optional).** When both members of an aspect pair
+  are in the lexicon (говори́ть/сказа́ть, покупа́ть/купи́ть), link them with
+  `pair:` on **both** entries, each naming the other's natural key. The link
+  must be reciprocal and connect one imperfective to one perfective
+  (`verbsData.test.js` enforces this). Linked verbs show their partner in the
+  vocabulary drill and power the choose-the-aspect step of the in-context
+  drill. Don't link mere prefixed derivatives (проговори́ть, заговори́ть) or
+  motion-verb directionality partners (бе́гать/бежа́ть — both imperfective) —
+  only true aspect pairs.
+- **`imperative` — command forms (optional).** An `imperative:` block with the
+  accented `sg` (ты) and `pl` (вы) forms adds an Imperative column to the verb's
+  inflection table and lets usage examples drill it. The plural is always
+  `sg + те` (reflexives: `-ся` → `-тесь`), but both are stored explicitly.
+  Leave the block off verbs with no natural command (мочь, хоте́ть, зна́чить,
+  impersonals like хоте́ться).
 
 ### Adjectives (`adjectives.yml`)
 
@@ -371,8 +391,11 @@ owner, so its key is implicit:
 - **Adjectives:** add `gender` (`m`/`n`/`f`/`pl`). Case-selection only works for
   forms with a distinctive ending (mainly feminine `-ая`/`-ую`), since most
   adjective forms are syncretic.
-- **Verbs:** `tense` (`present`/`future`/`past`) + `person`
-  (`1sg 2sg 3sg 1pl 2pl 3pl`, or `past_m/f/n/pl`). Verbs skip the case step.
+- **Verbs:** `tense` (`present`/`future`/`past`/`imperative`) + `person`
+  (`1sg 2sg 3sg 1pl 2pl 3pl`, `past_m/f/n/pl`, or `imp_sg`/`imp_pl` for the
+  imperative). Verbs skip the case step — but a verb with a `pair:` link gets a
+  **choose-the-aspect** step first: the sentence is shown with both partners as
+  options and the learner picks the one the context needs.
 
 `token` is the 1-based index of the target in the whitespace-split `ru`
 (punctuation stays attached to its word); the token's letters must equal the

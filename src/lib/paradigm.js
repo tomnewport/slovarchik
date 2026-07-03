@@ -63,6 +63,15 @@ const VERB_PAST_ROWS = [
   { key: 'past_pl', label: 'Past plural', sub: 'они' },
 ]
 
+// Imperative rows: the command forms address ты (singular/informal) or вы
+// (plural/formal). They live under `conjugation.imperative: { sg, pl }` in the
+// data and are pruned automatically for verbs that don't carry them.
+const VERB_IMPERATIVE_ROWS = [
+  { key: 'imp_sg', label: 'Imperative sg.', sub: 'ты' },
+  { key: 'imp_pl', label: 'Imperative pl.', sub: 'вы' },
+]
+const IMPERATIVE_KEY = { imp_sg: 'sg', imp_pl: 'pl' }
+
 // Gender × number agreement rows. Adjectives and the adjective-like pronouns
 // (possessives, determiners, demonstratives, какой/чей) decline like this: the
 // data gives the nominative form for each gender plus the shared plural.
@@ -165,16 +174,23 @@ export function buildParadigm(word) {
     case 'verb': {
       // Imperfective verbs carry a present tense; perfective verbs a simple
       // future. Either way it is the finite, person-conjugated paradigm — it
-      // becomes one column, with the gender/number past tense as a second.
+      // becomes one column, with the gender/number past tense as a second and
+      // the imperative (where the data carries one) as a third.
       const conj = word.extra?.conjugation ?? {}
       const finite = conj.present ?? conj.future ?? {}
+      const imperative = conj.imperative ?? {}
       const cols = [
         { key: 'finite', label: conj.present ? 'Present' : 'Simple Future' },
         { key: 'past', label: 'Past' },
+        { key: 'imper', label: 'Imperative' },
       ]
-      const rows = [...VERB_PERSONS, ...VERB_PAST_ROWS]
+      const rows = [...VERB_PERSONS, ...VERB_PAST_ROWS, ...VERB_IMPERATIVE_ROWS]
       paradigm = assemble(meta, rows, cols, (row, col) =>
-        col === 'finite' ? finite[row] : conj[row],
+        col === 'finite'
+          ? finite[row]
+          : col === 'imper'
+            ? imperative[IMPERATIVE_KEY[row]]
+            : conj[row],
       )
       break
     }
@@ -243,6 +259,10 @@ export function cellLabel(paradigm, cell) {
   const row = paradigm.rows.find((r) => r.key === cell.row)
   const col = paradigm.cols.find((c) => c.key === cell.col)
   const rowLabel = row?.label ?? cell.row
-  if (paradigm.cols.length > 1 && col) return `${rowLabel} · ${col.label}`
+  // Skip a column whose label the row already spells out ("Past fem." needs no
+  // "· Past"; "Imperative sg." needs no "· Imperative").
+  if (paradigm.cols.length > 1 && col && !rowLabel.startsWith(col.label)) {
+    return `${rowLabel} · ${col.label}`
+  }
   return rowLabel
 }

@@ -9,6 +9,21 @@ import {
 
 const sobaka = { key: 'собака=dog', pos: 'noun', headword: 'соба́ка', ru: 'собака' }
 const dumat = { key: 'думать=to think', pos: 'verb', headword: 'ду́мать', ru: 'думать' }
+
+// A verb linked to its aspect partner (as built by vocabBuild.linkAspectPairs)
+// gets a choose-the-aspect step before spelling.
+const skazat = {
+  key: 'сказать=to say', pos: 'verb', headword: 'сказа́ть', ru: 'сказать', aspect: 'pf',
+  aspectPair: { key: 'говорить=to speak', ru: 'говори́ть', aspect: 'impf', gloss: 'to speak' },
+}
+const skazatPhrase = {
+  id: 'on-skazal', ru: 'Он сказа́л пра́вду.', en: 'He said the truth.',
+  target: { key: 'сказать=to say', token: 2, tense: 'past', person: 'past_m', rule: 'verb-past' },
+}
+const impPhrase = {
+  id: 'skazhite', ru: 'Скажи́те, пожа́луйста, где вокза́л?', en: 'Tell me please, where is the station?',
+  target: { key: 'сказать=to say', token: 1, tense: 'imperative', person: 'imp_pl', rule: 'verb-imperative' },
+}
 // adjective with a full declension grid (a few cells suffice for decoys)
 const noviy = {
   key: 'новый=new', pos: 'adjective', headword: 'но́вый', ru: 'новый',
@@ -75,8 +90,20 @@ describe('buildSelectSteps', () => {
     expect(numberStep.options.map((o) => o.id)).toEqual(['sg', 'pl'])
     expect(numberStep.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'sg' })])
   })
-  it('returns no selection steps for a verb', () => {
+  it('returns no selection steps for a verb without an aspect partner', () => {
     expect(buildSelectSteps(verbPhrase.target, dumat)).toEqual([])
+  })
+  it('returns a choose-the-aspect step for a verb with an aspect partner', () => {
+    const steps = buildSelectSteps(skazatPhrase.target, skazat)
+    expect(steps.map((s) => s.kind)).toEqual(['aspect'])
+    const [aspect] = steps
+    // Both infinitives offered, imperfective first; the phrase's owner wins.
+    expect(aspect.options.map((o) => o.label)).toEqual(['говори́ть', 'сказа́ть'])
+    expect(aspect.options.map((o) => o.id)).toEqual(['impf', 'pf'])
+    expect(aspect.options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ label: 'сказа́ть' }),
+    ])
+    for (const o of aspect.options) expect(o.hint).toMatch(/imperfective|perfective/)
   })
   it('returns case then gender + number for an adjective', () => {
     const steps = buildSelectSteps(adjPhrase.target, noviy)
@@ -112,8 +139,28 @@ describe('buildFromPhrase', () => {
   it('handles verbs (no selection steps, person slot label)', () => {
     const ex = buildFromPhrase(verbPhrase, dumat)
     expect(ex.selectSteps).toEqual([])
+    expect(ex.lemmaOptions).toBeNull()
     expect(ex.answerAccented).toBe('ду́маю')
     expect(ex.slotLabel).toContain('Present')
+  })
+
+  it('offers both lemmas and the aspect rule for a paired verb', () => {
+    const aspectRules = { 'verb-aspect': { title: 'Aspect', formula: 'impf vs pf' } }
+    const ex = buildFromPhrase(skazatPhrase, skazat, { rules: aspectRules })
+    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['aspect'])
+    // The slot must not leak which partner is correct before the choice.
+    expect(ex.lemmaOptions).toEqual(['говори́ть', 'сказа́ть'])
+    expect(ex.lemma).toBe('сказа́ть')
+    expect(ex.answerAccented).toBe('сказа́л')
+    expect(ex.aspectRule).toMatchObject({ id: 'verb-aspect', title: 'Aspect' })
+  })
+
+  it('labels an imperative slot', () => {
+    const ex = buildFromPhrase(impPhrase, skazat)
+    expect(ex.answerAccented).toBe('Скажи́те')
+    expect(ex.answer).toBe('скажите')
+    expect(ex.slotLabel).toBe('Imperative · вы (command)')
+    expect(ex.aspectRule).toBeNull() // no rules map supplied
   })
 
   it('builds case + gender steps for an adjective', () => {

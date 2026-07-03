@@ -68,10 +68,13 @@ describe('VocabView', () => {
     // Start typing mode — celebration applies to the typing drill.
     await wrapper.findAll('button.card')[1].trigger('click')
 
-    // Pin to a non-heteronym word: a correct heteronym answer intentionally shows
-    // a "Next" reminder instead of auto-advancing (covered by its own test), so
-    // leaving the question to the random sample makes this assertion flaky.
-    wrapper.vm.current = shapeVocab(loadFixtureWords()).find((w) => !w.heteronyms?.length)
+    // Pin to a word with no post-answer reminder: a correct heteronym or
+    // aspect-pair answer intentionally shows a "Next" prompt instead of
+    // auto-advancing (each covered by its own test), so leaving the question to
+    // the random sample makes this assertion flaky.
+    wrapper.vm.current = shapeVocab(loadFixtureWords()).find(
+      (w) => !w.heteronyms?.length && !w.aspectPair,
+    )
     await wrapper.vm.$nextTick()
 
     // Type the correct answer and submit.
@@ -114,6 +117,33 @@ describe('VocabView', () => {
     expect(wrapper.text()).toContain('Heteronym')
     expect(wrapper.text()).toContain('it stands')
     // … and a correct heteronym answer does NOT auto-advance: it waits.
+    vi.advanceTimersByTime(2000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.answered).toBe(true)
+    expect(wrapper.text()).toContain('Next')
+  })
+
+  it('shows the aspect partner and waits, even on a correct answer', async () => {
+    vi.useFakeTimers()
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[1].trigger('click') // typing mode
+
+    // Force the question to a verb with a linked aspect partner.
+    const govorit = shapeVocab(loadFixtureWords()).find((w) => w.id === 'говорить=to speak')
+    expect(govorit.aspectPair).toMatchObject({ ru: 'сказа́ть', aspect: 'pf' })
+    wrapper.vm.current = govorit
+    await wrapper.vm.$nextTick()
+
+    const answer = Array.isArray(govorit.en) ? govorit.en[0] : govorit.en
+    await wrapper.find('input[type="text"]').setValue(answer)
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.vm.wasCorrect).toBe(true)
+    // The partner is spelled out with its aspect and gloss …
+    expect(wrapper.text()).toContain('Aspect pair')
+    expect(wrapper.text()).toContain('imperfective')
+    expect(wrapper.text()).toContain('сказа́ть')
+    // … and the correct answer does NOT auto-advance: it waits to be read.
     vi.advanceTimersByTime(2000)
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.answered).toBe(true)

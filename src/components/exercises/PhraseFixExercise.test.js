@@ -236,4 +236,69 @@ describe('PhraseFixExercise', () => {
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
   })
+
+  // The choose-the-aspect drill: a verb with a linked aspect partner opens with
+  // a pick between the two infinitives (see lib/phraseContext.js).
+  const aspectExercise = {
+    id: 'ex3',
+    kind: 'phrase-fix',
+    tokens: ['Он', 'сказа́л', 'пра́вду.'],
+    targetIndex: 1,
+    lemma: 'сказа́ть',
+    lemmaOptions: ['говори́ть', 'сказа́ть'],
+    answerAccented: 'сказа́л',
+    answer: 'сказал',
+    selectSteps: [
+      {
+        kind: 'aspect',
+        prompt: 'Which verb does this sentence need?',
+        options: [
+          { id: 'impf', label: 'говори́ть', hint: 'imperfective — a process, habit or repeated action', correct: false },
+          { id: 'pf', label: 'сказа́ть', hint: 'perfective — a single completed action or its result', correct: true },
+        ],
+      },
+    ],
+    slotLabel: 'Past · he (past)',
+    ru: 'Он сказа́л пра́вду.',
+    en: 'He said the truth.',
+    rule: { id: 'verb-past', title: 'Past tense' },
+    aspectRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
+    targets: ['сказать=to say'],
+  }
+
+  it('hides which aspect partner is correct until the learner picks', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: aspectExercise } })
+    expect(wrapper.text()).toContain('Which verb does this sentence need?')
+    // The slot shows both candidate infinitives, not the answer.
+    expect(wrapper.find('.target-btn').text()).toContain('говори́ть / сказа́ть')
+    await pickSelections(wrapper, 'сказа́ть')
+    // Chosen → the slot collapses to the correct lemma for the spelling stage.
+    expect(wrapper.find('.target-btn').text()).not.toContain('говори́ть')
+    await wrapper.find('input[lang="ru"]').setValue('сказал')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.text()).toContain('Correct')
+    // Both the slot rule and the aspect explanation are offered.
+    expect(wrapper.text()).toContain('Past tense')
+    expect(wrapper.text()).toContain('Aspect: imperfective or perfective?')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+  })
+
+  it('flags a wrong aspect pick and names the verb it needed', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: aspectExercise } })
+    await pickSelections(wrapper, 'говори́ть') // wrong partner
+    await wrapper.find('input[lang="ru"]').setValue('сказал') // right spelling
+    await wrapper.find('form').trigger('submit')
+    const feedback = wrapper.find('.feedback.warn')
+    expect(feedback.exists()).toBe(true)
+    expect(feedback.text()).toContain('wrong aspect')
+    expect(feedback.text()).toContain('сказа́ть')
+    // The aspect explanation opens when the aspect choice missed.
+    const aspectDetails = wrapper
+      .findAll('details.rule')
+      .find((d) => d.text().includes('Aspect: imperfective or perfective?'))
+    expect(aspectDetails.attributes('open')).toBeDefined()
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+  })
 })

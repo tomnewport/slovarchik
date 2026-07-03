@@ -5,9 +5,13 @@ meta:
   aspect:
     impf: imperfective
     pf: perfective
+  pair: natural key of the verb's aspect partner (reciprocal)
   conjugation:
     present: present tense (imperfective)
     future: simple future (быть)
+    imperative:
+      sg: "command form for ты (informal)"
+      pl: "command form for вы (plural / polite)"
     "1sg": "I"
     "2sg": "you (informal)"
     "3sg": "he / she / it"
@@ -74,6 +78,9 @@ words:
       - ru: Без трениро́вки я бы не бе́гал так бы́стро.
         en_gb: Without training I would not run so fast.
     conjugation:
+      imperative:
+        sg: бе́гай
+        pl: бе́гайте
       present:
         "1sg": бе́гаю
         "2sg": бе́гаешь
@@ -107,6 +114,9 @@ words:
       - ru: Е́сли бы я опа́здывал, я бы бежа́л.
         en_gb: If I were late, I would run.
     conjugation:
+      imperative:
+        sg: беги́
+        pl: беги́те
       present:
         "1sg": бегу́
         "2sg": бежи́шь
@@ -197,6 +207,9 @@ words:
       alt:
         - to beat
     conjugation:
+      imperative:
+        sg: бей
+        pl: бе́йте
       present:
         "1sg": бью
         "2sg": бьёшь
@@ -258,12 +271,16 @@ words:
     cefr_level: A2
     accented: благодари́ть
     aspect: impf
+    pair: "поблагодарить=to thank"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to thank (to express gratitude)
     conjugation:
+      imperative:
+        sg: благодари́
+        pl: благодари́те
       present:
         "1sg": благодарю́
         "2sg": благода́ришь
@@ -346,6 +363,9 @@ words:
       - ru: Про́шлой зимо́й я до́лго боле́л.
         en_gb: Last winter I was ill for a long time.
     conjugation:
+      imperative:
+        sg: боле́й
+        pl: боле́йте
       present:
         "1sg": боле́ю
         "2sg": боле́ешь
@@ -368,6 +388,9 @@ words:
       alt:
         - to chatter
     conjugation:
+      imperative:
+        sg: болта́й
+        pl: болта́йте
       present:
         "1sg": болта́ю
         "2sg": болта́ешь
@@ -385,6 +408,7 @@ words:
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Не болта́й на уро́ке!
         en_gb: Don't chatter in class!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Мы болта́ли всю ночь.
         en_gb: We chatted all night.
       - ru: За́втра мы бу́дем болта́ть весь ве́чер.
@@ -395,6 +419,7 @@ words:
     cefr_level: B2
     accented: бормота́ть
     aspect: impf
+    pair: "пробормотать=to mutter"
     collections:
       - communication
     en_gb:
@@ -483,6 +508,9 @@ words:
       - ru: Я бы не боя́лся, е́сли бы ты был ря́дом.
         en_gb: I would not be afraid if you were near.
     conjugation:
+      imperative:
+        sg: бо́йся
+        pl: бо́йтесь
       present:
         "1sg": бою́сь
         "2sg": бои́шься
@@ -498,6 +526,7 @@ words:
     cefr_level: A1
     accented: брать
     aspect: impf
+    pair: "взять=to take"
     collections:
       - daily life
     en_gb:
@@ -515,6 +544,9 @@ words:
       - ru: Я бы брал кни́ги в библиоте́ке ча́ще.
         en_gb: I would take books from the library more often.
     conjugation:
+      imperative:
+        sg: бери́
+        pl: бери́те
       present:
         "1sg": беру́
         "2sg": берёшь
@@ -530,6 +562,7 @@ words:
     cefr_level: B1
     accented: бра́ться
     aspect: impf
+    pair: "взяться=to take hold of"
     collections:
       - daily life
     en_gb:
@@ -622,6 +655,7 @@ words:
     cefr_level: A2
     accented: броса́ть
     aspect: impf
+    pair: "бросить=to throw"
     collections:
       - sport
       - daily life
@@ -630,6 +664,9 @@ words:
       alt:
         - to abandon
     conjugation:
+      imperative:
+        sg: броса́й
+        pl: броса́йте
       present:
         "1sg": броса́ю
         "2sg": броса́ешь
@@ -647,6 +684,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не броса́й му́сор на у́лице!
         en_gb: Don't throw rubbish on the street!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Они́ броса́ли мяч друг дру́гу.
         en_gb: They were throwing the ball to each other.
       - ru: За́втра де́ти бу́дут броса́ть мяч во дворе́.
@@ -657,6 +695,7 @@ words:
     cefr_level: B1
     accented: броса́ться
     aspect: impf
+    pair: "броситься=to rush"
     collections:
       - motion
     en_gb:
@@ -689,6 +728,7 @@ words:
     cefr_level: A2
     accented: бро́сить
     aspect: pf
+    pair: "бросать=to throw"
     collections:
       - sport
       - daily life
@@ -697,6 +737,9 @@ words:
       alt:
         - to abandon
     conjugation:
+      imperative:
+        sg: брось
+        pl: бро́сьте
       future:
         "1sg": бро́шу
         "2sg": бро́сишь
@@ -716,6 +759,7 @@ words:
         en_gb: She gave up smoking last year.
       - ru: Бро́сьте э́ту привы́чку!
         en_gb: Give up this habit!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Е́сли бы я мог, я бы бро́сил кури́ть сра́зу.
         en_gb: If I could, I would give up smoking at once.
       - ru: За́втра он бро́сит ста́рую привы́чку.
@@ -724,6 +768,7 @@ words:
     cefr_level: B1
     accented: бро́ситься
     aspect: pf
+    pair: "бросаться=to rush"
     collections:
       - motion
     en_gb:
@@ -763,6 +808,9 @@ words:
       alt:
         - to happen
     conjugation:
+      imperative:
+        sg: быва́й
+        pl: быва́йте
       present:
         "1sg": быва́ю
         "2sg": быва́ешь
@@ -807,6 +855,9 @@ words:
       - ru: Без тебя́ ве́чер был бы ску́чным.
         en_gb: Without you the evening would be dull.
     conjugation:
+      imperative:
+        sg: будь
+        pl: бу́дьте
       future:
         "1sg": бу́ду
         "2sg": бу́дешь
@@ -888,6 +939,7 @@ words:
     cefr_level: A2
     accented: вари́ть
     aspect: impf
+    pair: "сварить=to boil"
     collections:
       - food and drink
       - daily life
@@ -896,6 +948,9 @@ words:
       alt:
         - to cook
     conjugation:
+      imperative:
+        sg: вари́
+        pl: вари́те
       present:
         "1sg": варю́
         "2sg": ва́ришь
@@ -1026,6 +1081,7 @@ words:
     cefr_level: A2
     accented: ве́рить
     aspect: impf
+    pair: "поверить=to believe"
     collections:
       - faith
       - feelings and sensations
@@ -1044,6 +1100,9 @@ words:
       - ru: Я бы ве́рил тебе́, е́сли бы ты не врал.
         en_gb: I would believe you if you did not lie.
     conjugation:
+      imperative:
+        sg: верь
+        pl: ве́рьте
       present:
         "1sg": ве́рю
         "2sg": ве́ришь
@@ -1066,6 +1125,9 @@ words:
       alt:
         - to give back
     conjugation:
+      imperative:
+        sg: верни́
+        pl: верни́те
       future:
         "1sg": верну́
         "2sg": вернёшь
@@ -1085,6 +1147,7 @@ words:
         en_gb: He returned the money to me.
       - ru: Верни́ ключи́ на ме́сто!
         en_gb: Put the keys back in their place!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Е́сли бы я мог, я бы верну́л э́ти дни.
         en_gb: If I could, I would bring back those days.
       - ru: Ско́ро он вернёт долг.
@@ -1093,6 +1156,7 @@ words:
     cefr_level: A2
     accented: верну́ться
     aspect: pf
+    pair: "возвращаться=to return"
     collections:
       - daily life
       - motion
@@ -1101,6 +1165,9 @@ words:
       alt:
         - to come back
     conjugation:
+      imperative:
+        sg: верни́сь
+        pl: верни́тесь
       future:
         "1sg": верну́сь
         "2sg": вернёшься
@@ -1297,6 +1364,7 @@ words:
     cefr_level: A1
     accented: взять
     aspect: pf
+    pair: "брать=to take"
     collections:
       - daily life
     en_gb:
@@ -1304,6 +1372,7 @@ words:
     usage:
       - ru: Возьми́ зо́нтик — бу́дет дождь.
         en_gb: Take an umbrella — it will rain.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я возьму́ э́ту кни́гу.
         en_gb: I will take this book.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -1314,6 +1383,9 @@ words:
       - ru: Без де́нег я бы не взял такси́.
         en_gb: Without money I would not take a taxi.
     conjugation:
+      imperative:
+        sg: возьми́
+        pl: возьми́те
       future:
         "1sg": возьму́
         "2sg": возьмёшь
@@ -1329,6 +1401,7 @@ words:
     cefr_level: B1
     accented: взя́ться
     aspect: pf
+    pair: "браться=to take hold of"
     collections:
       - daily life
     en_gb:
@@ -1393,6 +1466,7 @@ words:
     cefr_level: A2
     accented: ви́деть
     aspect: impf
+    pair: "увидеть=to see"
     en_gb:
       standard: to see (to notice with your eyes)
     usage:
@@ -1429,6 +1503,9 @@ words:
     en_gb:
       standard: to hang (to be suspended)
     conjugation:
+      imperative:
+        sg: виси́
+        pl: виси́те
       present:
         "1sg": вишу́
         "2sg": виси́шь
@@ -1464,6 +1541,9 @@ words:
       alt:
         - to include
     conjugation:
+      imperative:
+        sg: включи́
+        pl: включи́те
       future:
         "1sg": включу́
         "2sg": включи́шь
@@ -1483,6 +1563,7 @@ words:
         en_gb: She switched on the television.
       - ru: Включи́те, пожа́луйста, ра́дио.
         en_gb: Please switch on the radio.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Е́сли ста́нет темно́, я бы включи́л свет.
         en_gb: If it got dark, I would switch on the light.
       - ru: За́втра он включи́т но́вый компью́тер.
@@ -1600,6 +1681,7 @@ words:
     cefr_level: A2
     accented: возвраща́ться
     aspect: impf
+    pair: "вернуться=to return"
     collections:
       - motion
       - daily life
@@ -1608,6 +1690,9 @@ words:
       alt:
         - to come back
     conjugation:
+      imperative:
+        sg: возвраща́йся
+        pl: возвраща́йтесь
       present:
         "1sg": возвраща́юсь
         "2sg": возвраща́ешься
@@ -1706,6 +1791,7 @@ words:
     cefr_level: B1
     accented: возника́ть
     aspect: impf
+    pair: "возникнуть=to arise"
     collections:
       - daily life
     en_gb:
@@ -1740,6 +1826,7 @@ words:
     cefr_level: B1
     accented: возни́кнуть
     aspect: pf
+    pair: "возникать=to arise"
     collections:
       - daily life
     en_gb:
@@ -1772,6 +1859,7 @@ words:
     cefr_level: B1
     accented: возража́ть
     aspect: impf
+    pair: "возразить=to object"
     collections:
       - communication
     en_gb:
@@ -1804,6 +1892,7 @@ words:
     cefr_level: B1
     accented: возрази́ть
     aspect: pf
+    pair: "возражать=to object"
     collections:
       - communication
     en_gb:
@@ -1836,6 +1925,7 @@ words:
     cefr_level: A2
     accented: войти́
     aspect: pf
+    pair: "входить=to enter"
     collections:
       - motion
       - daily life
@@ -1849,6 +1939,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Войди́те, пожа́луйста!
         en_gb: Please come in!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он войдёт в зал по́сле звонка́.
         en_gb: He will enter the hall after the bell.
       - ru: Е́сли бы две́рь была́ откры́та, я бы вошёл.
@@ -1856,6 +1947,9 @@ words:
       - ru: Без про́пуска ты не войдёшь в зда́ние.
         en_gb: Without a pass you will not enter the building.
     conjugation:
+      imperative:
+        sg: войди́
+        pl: войди́те
       future:
         "1sg": войду́
         "2sg": войдёшь
@@ -1937,6 +2031,7 @@ words:
     cefr_level: B1
     accented: воспо́льзоваться
     aspect: pf
+    pair: "пользоваться=to use"
     collections:
       - daily life
     en_gb:
@@ -2066,6 +2161,7 @@ words:
     cefr_level: A2
     accented: вспомина́ть
     aspect: impf
+    pair: "вспомнить=to remember"
     collections:
       - daily life
     en_gb:
@@ -2073,6 +2169,9 @@ words:
       alt:
         - to recall
     conjugation:
+      imperative:
+        sg: вспомина́й
+        pl: вспомина́йте
       present:
         "1sg": вспомина́ю
         "2sg": вспомина́ешь
@@ -2100,11 +2199,15 @@ words:
     cefr_level: A2
     accented: вспо́мнить
     aspect: pf
+    pair: "вспоминать=to remember"
     collections:
       - daily life
     en_gb:
       standard: to remember (to recall on one occasion)
     conjugation:
+      imperative:
+        sg: вспо́мни
+        pl: вспо́мните
       future:
         "1sg": вспо́мню
         "2sg": вспо́мнишь
@@ -2124,6 +2227,7 @@ words:
         en_gb: She will remember about it later.
       - ru: Вспо́мни, где ты оста́вил ключи́.
         en_gb: Remember where you left the keys.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Е́сли уви́жу его́, я сра́зу вспо́мню и́мя.
         en_gb: If I see him, I will remember his name at once.
       - ru: Без подска́зки я бы не вспо́мнил а́дрес.
@@ -2166,6 +2270,7 @@ words:
     cefr_level: A2
     accented: встава́ть
     aspect: impf
+    pair: "встать=to stand up"
     collections:
       - daily life
     en_gb:
@@ -2183,6 +2288,9 @@ words:
       - ru: Без буди́льника я бы встава́л по́здно.
         en_gb: Without an alarm I would get up late.
     conjugation:
+      imperative:
+        sg: встава́й
+        pl: встава́йте
       present:
         "1sg": встаю́
         "2sg": встаёшь
@@ -2232,6 +2340,7 @@ words:
     cefr_level: A2
     accented: встать
     aspect: pf
+    pair: "вставать=to get up"
     collections:
       - daily life
     en_gb:
@@ -2239,6 +2348,7 @@ words:
     usage:
       - ru: Пожа́луйста, вста́ньте.
         en_gb: Please stand up.
+        inflect: { token: 2, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я вста́ну ра́но за́втра.
         en_gb: I will get up early tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -2249,6 +2359,9 @@ words:
       - ru: За́втра я вста́ну с рассве́том.
         en_gb: Tomorrow I will get up at dawn.
     conjugation:
+      imperative:
+        sg: встань
+        pl: вста́ньте
       future:
         "1sg": вста́ну
         "2sg": вста́нешь
@@ -2264,6 +2377,7 @@ words:
     cefr_level: A2
     accented: встре́тить
     aspect: pf
+    pair: "встречать=to meet"
     collections:
       - daily life
       - people
@@ -2282,6 +2396,9 @@ words:
       - ru: За́втра я встре́чу го́стя в аэропорту́.
         en_gb: Tomorrow I will meet the guest at the airport.
     conjugation:
+      imperative:
+        sg: встреть
+        pl: встре́тьте
       future:
         "1sg": встре́чу
         "2sg": встре́тишь
@@ -2303,6 +2420,9 @@ words:
     en_gb:
       standard: to meet (to encounter on one occasion)
     conjugation:
+      imperative:
+        sg: встре́ться
+        pl: встре́тьтесь
       future:
         "1sg": встре́чусь
         "2sg": встре́тишься
@@ -2330,6 +2450,7 @@ words:
     cefr_level: A2
     accented: встреча́ть
     aspect: impf
+    pair: "встретить=to meet"
     collections:
       - daily life
       - people
@@ -2348,6 +2469,9 @@ words:
       - ru: Без расписа́ния я бы встреча́л по́езд науга́д.
         en_gb: Without a timetable I would meet the train at random.
     conjugation:
+      imperative:
+        sg: встреча́й
+        pl: встреча́йте
       present:
         "1sg": встреча́ю
         "2sg": встреча́ешь
@@ -2432,6 +2556,7 @@ words:
     cefr_level: A2
     accented: входи́ть
     aspect: impf
+    pair: "войти=to enter"
     collections:
       - motion
       - daily life
@@ -2450,6 +2575,9 @@ words:
       - ru: Без сту́ка я бы не входи́л в чужо́й кабине́т.
         en_gb: Without knocking I would not enter someone else's office.
     conjugation:
+      imperative:
+        sg: входи́
+        pl: входи́те
       present:
         "1sg": вхожу́
         "2sg": вхо́дишь
@@ -2465,6 +2593,7 @@ words:
     cefr_level: A2
     accented: выбира́ть
     aspect: impf
+    pair: "выбрать=to choose"
     collections:
       - daily life
     en_gb:
@@ -2472,6 +2601,9 @@ words:
       alt:
         - to select
     conjugation:
+      imperative:
+        sg: выбира́й
+        pl: выбира́йте
       present:
         "1sg": выбира́ю
         "2sg": выбира́ешь
@@ -2499,11 +2631,15 @@ words:
     cefr_level: A2
     accented: вы́брать
     aspect: pf
+    pair: "выбирать=to choose"
     collections:
       - daily life
     en_gb:
       standard: to choose (to select on one occasion)
     conjugation:
+      imperative:
+        sg: вы́бери
+        pl: вы́берите
       future:
         "1sg": вы́беру
         "2sg": вы́берешь
@@ -2523,6 +2659,7 @@ words:
         en_gb: He chose an interesting book.
       - ru: Вы́бери, что тебе́ нра́вится.
         en_gb: Choose what you like.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Е́сли бы вы́бор был мой, я бы вы́брал си́нее.
         en_gb: If the choice were mine, I would choose the blue one.
       - ru: За́втра он вы́берет себе́ но́вый телефо́н.
@@ -2668,6 +2805,7 @@ words:
     cefr_level: B1
     accented: выдава́ть
     aspect: impf
+    pair: "выдать=to give out"
     collections:
       - daily life
     en_gb:
@@ -2702,6 +2840,7 @@ words:
     cefr_level: B1
     accented: вы́дать
     aspect: pf
+    pair: "выдавать=to give out"
     collections:
       - daily life
     en_gb:
@@ -2804,6 +2943,9 @@ words:
     en_gb:
       standard: to drive out (to ride or drive out on one occasion)
     conjugation:
+      imperative:
+        sg: вы́езжай
+        pl: вы́езжайте
       future:
         "1sg": вы́еду
         "2sg": вы́едешь
@@ -2831,6 +2973,7 @@ words:
     cefr_level: B1
     accented: вы́звать
     aspect: pf
+    pair: "вызывать=to call"
     collections:
       - communication
       - daily life
@@ -2866,6 +3009,7 @@ words:
     cefr_level: B1
     accented: вызыва́ть
     aspect: impf
+    pair: "вызвать=to call"
     collections:
       - communication
       - daily life
@@ -2907,6 +3051,9 @@ words:
     en_gb:
       standard: to win (to be the winner on one occasion)
     conjugation:
+      imperative:
+        sg: вы́играй
+        pl: вы́играйте
       future:
         "1sg": вы́играю
         "2sg": вы́играешь
@@ -2934,6 +3081,7 @@ words:
     cefr_level: A2
     accented: вы́йти
     aspect: pf
+    pair: "выходить=to go out"
     collections:
       - motion
       - daily life
@@ -2952,6 +3100,9 @@ words:
       - ru: За́втра она́ вы́йдет на рабо́ту по́сле о́тпуска.
         en_gb: Tomorrow she will go back to work after the holiday.
     conjugation:
+      imperative:
+        sg: вы́йди
+        pl: вы́йдите
       future:
         "1sg": вы́йду
         "2sg": вы́йдешь
@@ -2974,10 +3125,14 @@ words:
     usage:
       - ru: Вы́ключи, пожа́луйста, свет.
         en_gb: Please turn off the light.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я вы́ключил компью́тер и лёг спать.
         en_gb: I turned off the computer and went to bed.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
     conjugation:
+      imperative:
+        sg: вы́ключи
+        pl: вы́ключите
       future:
         "1sg": вы́ключу
         "2sg": вы́ключишь
@@ -3064,6 +3219,9 @@ words:
     en_gb:
       standard: to take out (to extract on one occasion)
     conjugation:
+      imperative:
+        sg: вынь
+        pl: вы́ньте
       future:
         "1sg": вы́ну
         "2sg": вы́нешь
@@ -3083,6 +3241,7 @@ words:
         en_gb: She took the letter out of the envelope.
       - ru: Вы́нь ру́ки из карма́нов.
         en_gb: Take your hands out of your pockets.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Е́сли бы пона́добилось, я бы вы́нул но́жницы.
         en_gb: If needed, I would take out the scissors.
       - ru: Че́рез мину́ту я вы́ну пиро́г из ду́ховки.
@@ -3091,6 +3250,7 @@ words:
     cefr_level: A2
     accented: вы́пить
     aspect: pf
+    pair: "пить=to drink"
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -3109,6 +3269,9 @@ words:
       - ru: За́втра у́тром я вы́пью ча́шку ко́фе.
         en_gb: Tomorrow morning I will drink a cup of coffee.
     conjugation:
+      imperative:
+        sg: вы́пей
+        pl: вы́пейте
       future:
         "1sg": вы́пью
         "2sg": вы́пьешь
@@ -3124,6 +3287,7 @@ words:
     cefr_level: B1
     accented: вы́полнить
     aspect: pf
+    pair: "выполнять=to fulfil"
     collections:
       - work
       - daily life
@@ -3159,6 +3323,7 @@ words:
     cefr_level: B1
     accented: выполня́ть
     aspect: impf
+    pair: "выполнить=to fulfil"
     collections:
       - work
       - daily life
@@ -3192,6 +3357,7 @@ words:
     cefr_level: B1
     accented: выпуска́ть
     aspect: impf
+    pair: "выпустить=to release"
     collections:
       - daily life
     en_gb:
@@ -3226,6 +3392,7 @@ words:
     cefr_level: B1
     accented: вы́пустить
     aspect: pf
+    pair: "выпускать=to release"
     collections:
       - daily life
     en_gb:
@@ -3258,6 +3425,7 @@ words:
     cefr_level: B1
     accented: выража́ть
     aspect: impf
+    pair: "выразить=to express"
     collections:
       - communication
     en_gb:
@@ -3290,6 +3458,7 @@ words:
     cefr_level: B1
     accented: вы́разить
     aspect: pf
+    pair: "выражать=to express"
     collections:
       - communication
     en_gb:
@@ -3322,6 +3491,7 @@ words:
     cefr_level: A2
     accented: вы́расти
     aspect: pf
+    pair: "расти=to grow"
     collections:
       - nature
       - daily life
@@ -3330,6 +3500,9 @@ words:
       alt:
         - to grow
     conjugation:
+      imperative:
+        sg: вы́расти
+        pl: вы́растите
       future:
         "1sg": вы́расту
         "2sg": вы́растешь
@@ -3521,6 +3694,7 @@ words:
     cefr_level: B1
     accented: выступа́ть
     aspect: impf
+    pair: "выступить=to perform"
     collections:
       - the arts
       - work
@@ -3556,6 +3730,7 @@ words:
     cefr_level: B1
     accented: вы́ступить
     aspect: pf
+    pair: "выступать=to perform"
     collections:
       - the arts
       - work
@@ -3657,6 +3832,7 @@ words:
     cefr_level: A2
     accented: выходи́ть
     aspect: impf
+    pair: "выйти=to go out"
     collections:
       - motion
       - daily life
@@ -3675,6 +3851,9 @@ words:
       - ru: Без зо́нта я бы не выходи́л в дождь.
         en_gb: Without an umbrella I would not go out in the rain.
     conjugation:
+      imperative:
+        sg: выходи́
+        pl: выходи́те
       present:
         "1sg": выхожу́
         "2sg": выхо́дишь
@@ -3752,6 +3931,7 @@ words:
     cefr_level: B1
     accented: гляде́ть
     aspect: impf
+    pair: "поглядеть=to look"
     collections:
       - daily life
     en_gb:
@@ -3852,6 +4032,7 @@ words:
     cefr_level: A1
     accented: говори́ть
     aspect: impf
+    pair: "сказать=to say"
     en_gb:
       standard: to speak (to say words)
       alt:
@@ -3869,6 +4050,9 @@ words:
       - ru: В де́тстве он говори́л о́чень ти́хо.
         en_gb: As a child he spoke very quietly.
     conjugation:
+      imperative:
+        sg: говори́
+        pl: говори́те
       present:
         "1sg": говорю́
         "2sg": говори́шь
@@ -3981,6 +4165,7 @@ words:
     cefr_level: A2
     accented: гото́вить
     aspect: impf
+    pair: "приготовить=to prepare"
     collections:
       - in the kitchen
       - daily life
@@ -4001,6 +4186,9 @@ words:
       - ru: Я бы гото́вил ча́ще, е́сли бы́ло вре́мя.
         en_gb: I would cook more often if there were time.
     conjugation:
+      imperative:
+        sg: гото́вь
+        pl: гото́вьте
       present:
         "1sg": гото́влю
         "2sg": гото́вишь
@@ -4024,6 +4212,9 @@ words:
       alt:
         - to get ready
     conjugation:
+      imperative:
+        sg: гото́вься
+        pl: гото́вьтесь
       present:
         "1sg": гото́влюсь
         "2sg": гото́вишься
@@ -4140,6 +4331,9 @@ words:
       - ru: Я бы гуля́л до́льше, е́сли бы не дождь.
         en_gb: I would stroll longer if it weren't for the rain.
     conjugation:
+      imperative:
+        sg: гуля́й
+        pl: гуля́йте
       present:
         "1sg": гуля́ю
         "2sg": гуля́ешь
@@ -4155,6 +4349,7 @@ words:
     cefr_level: A1
     accented: дава́ть
     aspect: impf
+    pair: "дать=to give"
     collections:
       - daily life
     en_gb:
@@ -4172,6 +4367,9 @@ words:
       - ru: Я бы дава́л бо́льше, е́сли бы мог.
         en_gb: I would give more if I could.
     conjugation:
+      imperative:
+        sg: дава́й
+        pl: дава́йте
       present:
         "1sg": даю́
         "2sg": даёшь
@@ -4187,6 +4385,7 @@ words:
     cefr_level: A1
     accented: дать
     aspect: pf
+    pair: "давать=to give"
     collections:
       - daily life
     en_gb:
@@ -4194,6 +4393,7 @@ words:
     usage:
       - ru: Дай мне, пожа́луйста, каранда́ш.
         en_gb: Please give me a pencil.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я дам тебе́ отве́т за́втра.
         en_gb: I will give you an answer tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -4204,6 +4404,9 @@ words:
       - ru: Ско́ро он даст нам отве́т.
         en_gb: Soon he'll give us an answer.
     conjugation:
+      imperative:
+        sg: дай
+        pl: да́йте
       future:
         "1sg": дам
         "2sg": дашь
@@ -4219,6 +4422,7 @@ words:
     cefr_level: B1
     accented: дви́гаться
     aspect: impf
+    pair: "двинуться=to move"
     collections:
       - motion
     en_gb:
@@ -4251,6 +4455,7 @@ words:
     cefr_level: B1
     accented: дви́нуться
     aspect: pf
+    pair: "двигаться=to move"
     collections:
       - motion
     en_gb:
@@ -4321,6 +4526,7 @@ words:
     cefr_level: A1
     accented: де́лать
     aspect: impf
+    pair: "сделать=to do/make"
     en_gb:
       standard: to do (to perform an action)
       alt:
@@ -4338,6 +4544,9 @@ words:
       - ru: Я бы де́лал э́то по-друго́му.
         en_gb: I would do this differently.
     conjugation:
+      imperative:
+        sg: де́лай
+        pl: де́лайте
       present:
         "1sg": де́лаю
         "2sg": де́лаешь
@@ -4353,6 +4562,7 @@ words:
     cefr_level: B1
     accented: де́латься
     aspect: impf
+    pair: "сделаться=to become"
     collections:
       - daily life
     en_gb:
@@ -4394,6 +4604,9 @@ words:
       alt:
         - to keep
     conjugation:
+      imperative:
+        sg: держи́
+        pl: держи́те
       present:
         "1sg": держу́
         "2sg": де́ржишь
@@ -4626,6 +4839,7 @@ words:
     cefr_level: B1
     accented: дога́даться
     aspect: pf
+    pair: "догадываться=to guess"
     collections:
       - daily life
     en_gb:
@@ -4660,6 +4874,7 @@ words:
     cefr_level: B1
     accented: дога́дываться
     aspect: impf
+    pair: "догадаться=to guess"
     collections:
       - daily life
     en_gb:
@@ -4761,6 +4976,7 @@ words:
     cefr_level: B1
     accented: дожда́ться
     aspect: pf
+    pair: "дожидаться=to wait for"
     collections:
       - daily life
     en_gb:
@@ -4795,6 +5011,7 @@ words:
     cefr_level: B1
     accented: дожида́ться
     aspect: impf
+    pair: "дождаться=to wait for"
     collections:
       - daily life
     en_gb:
@@ -4827,6 +5044,7 @@ words:
     cefr_level: A2
     accented: дойти́
     aspect: pf
+    pair: "доходить=to reach"
     collections:
       - motion
       - travel
@@ -4835,6 +5053,9 @@ words:
       alt:
         - to walk to
     conjugation:
+      imperative:
+        sg: дойди́
+        pl: дойди́те
       future:
         "1sg": дойду́
         "2sg": дойдёшь
@@ -4862,6 +5083,7 @@ words:
     cefr_level: B1
     accented: доказа́ть
     aspect: pf
+    pair: "доказывать=to prove"
     collections:
       - the law
       - school
@@ -4895,6 +5117,7 @@ words:
     cefr_level: B1
     accented: дока́зывать
     aspect: impf
+    pair: "доказать=to prove"
     collections:
       - the law
       - school
@@ -4928,6 +5151,7 @@ words:
     cefr_level: B2
     accented: докла́дывать
     aspect: impf
+    pair: "доложить=to report"
     collections:
       - communication
       - work
@@ -4957,6 +5181,7 @@ words:
     cefr_level: B1
     accented: доложи́ть
     aspect: pf
+    pair: "докладывать=to report"
     collections:
       - work
       - military
@@ -5056,6 +5281,7 @@ words:
     cefr_level: B1
     accented: достава́ть
     aspect: impf
+    pair: "достать=to get"
     collections:
       - daily life
     en_gb:
@@ -5126,6 +5352,7 @@ words:
     cefr_level: A2
     accented: доста́ть
     aspect: pf
+    pair: "доставать=to get"
     collections:
       - daily life
     en_gb:
@@ -5134,6 +5361,9 @@ words:
         - to obtain
         - to reach
     conjugation:
+      imperative:
+        sg: доста́нь
+        pl: доста́ньте
       future:
         "1sg": доста́ну
         "2sg": доста́нешь
@@ -5153,6 +5383,7 @@ words:
         en_gb: He got tickets for the concert.
       - ru: Доста́нь, пожа́луйста, таре́лки.
         en_gb: Get the plates out, please.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы доста́л биле́ты, е́сли бы попроси́л.
         en_gb: I would have got tickets if I had asked.
       - ru: Ско́ро я доста́ну но́вый телефо́н.
@@ -5226,6 +5457,7 @@ words:
     cefr_level: B1
     accented: дохо́дить
     aspect: impf
+    pair: "дойти=to reach"
     collections:
       - motion
     en_gb:
@@ -5329,6 +5561,7 @@ words:
     cefr_level: A1
     accented: ду́мать
     aspect: impf
+    pair: "подумать=to think"
     collections:
       - daily life
       - school
@@ -5348,6 +5581,9 @@ words:
       - ru: Я бы ду́мал о тебе́ ка́ждый день.
         en_gb: I would think about you every day.
     conjugation:
+      imperative:
+        sg: ду́май
+        pl: ду́майте
       present:
         "1sg": ду́маю
         "2sg": ду́маешь
@@ -5368,6 +5604,9 @@ words:
     en_gb:
       standard: to breathe (to take air in and out)
     conjugation:
+      imperative:
+        sg: дыши́
+        pl: дыши́те
       present:
         "1sg": дышу́
         "2sg": ды́шишь
@@ -5387,6 +5626,7 @@ words:
         en_gb: The patient breathed with difficulty.
       - ru: Дыши́те глубоко́ и споко́йно.
         en_gb: Breathe deeply and calmly.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: В гора́х ты бу́дешь дыша́ть све́жим во́здухом.
         en_gb: In the mountains you'll be breathing fresh air.
       - ru: Без ма́ски бы́ло бы тру́дно дыша́ть.
@@ -5414,6 +5654,9 @@ words:
       - ru: Я бы е́здил на рабо́ту на велосипе́де.
         en_gb: I would go to work by bicycle.
     conjugation:
+      imperative:
+        sg: е́зди
+        pl: е́здите
       present:
         "1sg": е́зжу
         "2sg": е́здишь
@@ -5429,6 +5672,7 @@ words:
     cefr_level: A1
     accented: есть
     aspect: impf
+    pair: "съесть=to eat up"
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -5448,6 +5692,9 @@ words:
       - ru: Я бы ел ме́ньше сла́дкого.
         en_gb: I would eat less sweet food.
     conjugation:
+      imperative:
+        sg: ешь
+        pl: е́шьте
       present:
         "1sg": ем
         "2sg": ешь
@@ -5463,6 +5710,7 @@ words:
     cefr_level: A1
     accented: е́хать
     aspect: impf
+    pair: "поехать=to set off by vehicle"
     collections:
       - public transport
       - travel
@@ -5484,6 +5732,9 @@ words:
       - ru: Я бы е́хал ме́дленнее по тако́й доро́ге.
         en_gb: I would drive more slowly on such a road.
     conjugation:
+      imperative:
+        sg: поезжа́й
+        pl: поезжа́йте
       present:
         "1sg": е́ду
         "2sg": е́дешь
@@ -5499,6 +5750,7 @@ words:
     cefr_level: B1
     accented: жале́ть
     aspect: impf
+    pair: "пожалеть=to feel sorry"
     collections:
       - feelings and sensations
     en_gb:
@@ -5567,6 +5819,7 @@ words:
     cefr_level: A1
     accented: ждать
     aspect: impf
+    pair: "подождать=to wait"
     collections:
       - daily life
     en_gb:
@@ -5584,6 +5837,9 @@ words:
       - ru: Я бы ждал тебя́ хоть весь ве́чер.
         en_gb: I would wait for you all evening.
     conjugation:
+      imperative:
+        sg: жди
+        pl: жди́те
       present:
         "1sg": жду
         "2sg": ждёшь
@@ -5607,6 +5863,9 @@ words:
       alt:
         - to desire
     conjugation:
+      imperative:
+        sg: жела́й
+        pl: жела́йте
       present:
         "1sg": жела́ю
         "2sg": жела́ешь
@@ -5717,6 +5976,9 @@ words:
       - ru: Я бы жил в дере́вне, е́сли бы мог.
         en_gb: I would live in the countryside if I could.
     conjugation:
+      imperative:
+        sg: живи́
+        pl: живи́те
       present:
         "1sg": живу́
         "2sg": живёшь
@@ -5790,6 +6052,7 @@ words:
     cefr_level: A2
     accented: забыва́ть
     aspect: impf
+    pair: "забыть=to forget"
     collections:
       - daily life
     en_gb:
@@ -5807,6 +6070,9 @@ words:
       - ru: Я бы не забыва́л об э́том, е́сли бы запи́сывал.
         en_gb: I wouldn't forget this if I wrote it down.
     conjugation:
+      imperative:
+        sg: забыва́й
+        pl: забыва́йте
       present:
         "1sg": забыва́ю
         "2sg": забыва́ешь
@@ -5822,6 +6088,7 @@ words:
     cefr_level: A2
     accented: забы́ть
     aspect: pf
+    pair: "забывать=to forget"
     collections:
       - daily life
     en_gb:
@@ -5839,6 +6106,9 @@ words:
       - ru: Ско́ро ты забу́дешь э́ту неприя́тность.
         en_gb: Soon you'll forget this unpleasantness.
     conjugation:
+      imperative:
+        sg: забу́дь
+        pl: забу́дьте
       future:
         "1sg": забу́ду
         "2sg": забу́дешь
@@ -5916,6 +6186,7 @@ words:
     cefr_level: A2
     accented: за́втракать
     aspect: impf
+    pair: "позавтракать=to have breakfast"
     en_gb:
       standard: to have breakfast
     collections:
@@ -5927,6 +6198,9 @@ words:
       - ru: Я обы́чно за́втракаю ка́шей.
         en_gb: I usually have porridge for breakfast.
     conjugation:
+      imperative:
+        sg: за́втракай
+        pl: за́втракайте
       present:
         "1sg": за́втракаю
         "2sg": за́втракаешь
@@ -6072,6 +6346,7 @@ words:
     cefr_level: A2
     accented: задава́ть
     aspect: impf
+    pair: "задать=to assign"
     collections:
       - school
       - daily life
@@ -6080,6 +6355,9 @@ words:
       alt:
         - to set
     conjugation:
+      imperative:
+        sg: задава́й
+        pl: задава́йте
       present:
         "1sg": задаю́
         "2sg": задаёшь
@@ -6107,6 +6385,7 @@ words:
     cefr_level: A2
     accented: зада́ть
     aspect: pf
+    pair: "задавать=to assign"
     collections:
       - school
       - daily life
@@ -6115,6 +6394,9 @@ words:
       alt:
         - to set
     conjugation:
+      imperative:
+        sg: зада́й
+        pl: зада́йте
       future:
         "1sg": зада́м
         "2sg": зада́шь
@@ -6237,6 +6519,7 @@ words:
     cefr_level: A2
     accented: заказа́ть
     aspect: pf
+    pair: "заказывать=to order"
     collections:
       - restaurants and cafes
       - food and drink
@@ -6244,6 +6527,9 @@ words:
     en_gb:
       standard: to order (to request a product or service)
     conjugation:
+      imperative:
+        sg: закажи́
+        pl: закажи́те
       future:
         "1sg": закажу́
         "2sg": зака́жешь
@@ -6271,6 +6557,7 @@ words:
     cefr_level: B1
     accented: зака́зывать
     aspect: impf
+    pair: "заказать=to order"
     en_gb:
       standard: to order (to ask for goods or food)
     collections:
@@ -6297,6 +6584,7 @@ words:
     cefr_level: A2
     accented: зака́нчивать
     aspect: impf
+    pair: "закончить=to finish"
     collections:
       - daily life
       - work
@@ -6315,6 +6603,9 @@ words:
       - ru: Я бы зака́нчивал рабо́ту ра́ньше.
         en_gb: I would finish work earlier.
     conjugation:
+      imperative:
+        sg: зака́нчивай
+        pl: зака́нчивайте
       present:
         "1sg": зака́нчиваю
         "2sg": зака́нчиваешь
@@ -6395,6 +6686,7 @@ words:
     cefr_level: A2
     accented: зако́нчить
     aspect: pf
+    pair: "заканчивать=to finish"
     collections:
       - daily life
       - work
@@ -6413,6 +6705,9 @@ words:
       - ru: Ско́ро он зако́нчит шко́лу.
         en_gb: Soon he'll finish school.
     conjugation:
+      imperative:
+        sg: зако́нчи
+        pl: зако́нчите
       future:
         "1sg": зако́нчу
         "2sg": зако́нчишь
@@ -6493,6 +6788,7 @@ words:
     cefr_level: A2
     accented: закрыва́ть
     aspect: impf
+    pair: "закрыть=to close"
     collections:
       - daily life
       - home
@@ -6501,6 +6797,9 @@ words:
       alt:
         - to shut
     conjugation:
+      imperative:
+        sg: закрыва́й
+        pl: закрыва́йте
       present:
         "1sg": закрыва́ю
         "2sg": закрыва́ешь
@@ -6528,6 +6827,7 @@ words:
     cefr_level: B1
     accented: закрыва́ться
     aspect: impf
+    pair: "закрыться=to shut"
     en_gb:
       standard: to close (to shut, of itself)
     collections:
@@ -6554,6 +6854,7 @@ words:
     cefr_level: A2
     accented: закры́ть
     aspect: pf
+    pair: "закрывать=to close"
     collections:
       - daily life
       - home
@@ -6562,6 +6863,9 @@ words:
       alt:
         - to shut
     conjugation:
+      imperative:
+        sg: закро́й
+        pl: закро́йте
       future:
         "1sg": закро́ю
         "2sg": закро́ешь
@@ -6576,6 +6880,7 @@ words:
     usage:
       - ru: Закро́й, пожа́луйста, дверь.
         en_gb: Please close the door.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я закро́ю окно́, здесь хо́лодно.
         en_gb: I will close the window, it is cold here.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -6589,6 +6894,7 @@ words:
     cefr_level: B1
     accented: закры́ться
     aspect: pf
+    pair: "закрываться=to close"
     en_gb:
       standard: to shut (to become closed)
     collections:
@@ -6754,11 +7060,15 @@ words:
     cefr_level: A2
     accented: заме́тить
     aspect: pf
+    pair: "замечать=to notice"
     collections:
       - daily life
     en_gb:
       standard: to notice (to become aware of something on one occasion)
     conjugation:
+      imperative:
+        sg: заме́ть
+        pl: заме́тьте
       future:
         "1sg": заме́чу
         "2sg": заме́тишь
@@ -6786,11 +7096,15 @@ words:
     cefr_level: A2
     accented: замеча́ть
     aspect: impf
+    pair: "заметить=to notice"
     collections:
       - daily life
     en_gb:
       standard: to notice (to become aware of something)
     conjugation:
+      imperative:
+        sg: замеча́й
+        pl: замеча́йте
       present:
         "1sg": замеча́ю
         "2sg": замеча́ешь
@@ -6853,6 +7167,7 @@ words:
     cefr_level: B1
     accented: занима́ть
     aspect: impf
+    pair: "занять=to occupy"
     collections:
       - daily life
       - finance
@@ -6888,6 +7203,7 @@ words:
     cefr_level: A2
     accented: занима́ться
     aspect: impf
+    pair: "заняться=to take up"
     collections:
       - school
       - hobbies and pastimes
@@ -6897,6 +7213,9 @@ words:
       alt:
         - to be engaged in
     conjugation:
+      imperative:
+        sg: занима́йся
+        pl: занима́йтесь
       present:
         "1sg": занима́юсь
         "2sg": занима́ешься
@@ -6924,6 +7243,7 @@ words:
     cefr_level: B1
     accented: заня́ть
     aspect: pf
+    pair: "занимать=to occupy"
     collections:
       - daily life
       - finance
@@ -6959,6 +7279,7 @@ words:
     cefr_level: A2
     accented: заня́ться
     aspect: pf
+    pair: "заниматься=to study"
     collections:
       - school
       - hobbies and pastimes
@@ -6968,6 +7289,9 @@ words:
       alt:
         - to start doing
     conjugation:
+      imperative:
+        sg: займи́сь
+        pl: займи́тесь
       future:
         "1sg": займу́сь
         "2sg": займёшься
@@ -7061,6 +7385,7 @@ words:
     cefr_level: A2
     accented: записа́ть
     aspect: pf
+    pair: "записывать=to write down"
     collections:
       - school
       - daily life
@@ -7069,6 +7394,9 @@ words:
       alt:
         - to record
     conjugation:
+      imperative:
+        sg: запиши́
+        pl: запиши́те
       future:
         "1sg": запишу́
         "2sg": запи́шешь
@@ -7088,6 +7416,7 @@ words:
         en_gb: She wrote down the phone number.
       - ru: Запиши́те э́то в тетра́дь.
         en_gb: Write this down in your notebook.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы записа́л а́дрес, е́сли бы́ла ру́чка.
         en_gb: I would write down the address if I had a pen.
       - ru: Ско́ро секрета́рь запи́шет реше́ние.
@@ -7096,6 +7425,7 @@ words:
     cefr_level: B1
     accented: запи́сывать
     aspect: impf
+    pair: "записать=to write down"
     en_gb:
       standard: to write down (to note or record)
     collections:
@@ -7156,12 +7486,16 @@ words:
     cefr_level: A2
     accented: заплати́ть
     aspect: pf
+    pair: "платить=to pay"
     collections:
       - finance
       - daily life
     en_gb:
       standard: to pay (to hand over money)
     conjugation:
+      imperative:
+        sg: заплати́
+        pl: заплати́те
       future:
         "1sg": заплачу́
         "2sg": запла́тишь
@@ -7197,6 +7531,9 @@ words:
       alt:
         - to remember
     conjugation:
+      imperative:
+        sg: запо́мни
+        pl: запо́мните
       future:
         "1sg": запо́мню
         "2sg": запо́мнишь
@@ -7216,6 +7553,7 @@ words:
         en_gb: She memorised all the words.
       - ru: Запо́мни мой а́дрес.
         en_gb: Memorise my address.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы запо́мнил твой но́мер, е́сли бы повтори́л.
         en_gb: I would memorise your number if I repeated it.
       - ru: Ско́ро де́ти запо́мнят но́вые слова́.
@@ -7224,6 +7562,7 @@ words:
     cefr_level: B1
     accented: запрети́ть
     aspect: pf
+    pair: "запрещать=to forbid"
     collections:
       - the law
       - daily life
@@ -7259,6 +7598,7 @@ words:
     cefr_level: B2
     accented: запреща́ть
     aspect: impf
+    pair: "запретить=to forbid"
     collections:
       - the law
     en_gb:
@@ -7320,6 +7660,7 @@ words:
     cefr_level: B1
     accented: зараба́тывать
     aspect: impf
+    pair: "заработать=to earn"
     collections:
       - finance
       - work
@@ -7353,6 +7694,7 @@ words:
     cefr_level: A2
     accented: зарабо́тать
     aspect: pf
+    pair: "зарабатывать=to earn"
     collections:
       - finance
       - work
@@ -7361,6 +7703,9 @@ words:
       alt:
         - to start working
     conjugation:
+      imperative:
+        sg: зарабо́тай
+        pl: зарабо́тайте
       future:
         "1sg": зарабо́таю
         "2sg": зарабо́таешь
@@ -7455,12 +7800,16 @@ words:
     cefr_level: A2
     accented: засну́ть
     aspect: pf
+    pair: "засыпать=to fall asleep"
     collections:
       - daily life
       - sickness and health
     en_gb:
       standard: to fall asleep (to begin sleeping)
     conjugation:
+      imperative:
+        sg: засни́
+        pl: засни́те
       future:
         "1sg": засну́
         "2sg": заснёшь
@@ -7488,6 +7837,7 @@ words:
     cefr_level: B1
     accented: заста́вить
     aspect: pf
+    pair: "заставлять=to make"
     collections:
       - daily life
     en_gb:
@@ -7522,6 +7872,7 @@ words:
     cefr_level: B1
     accented: заставля́ть
     aspect: impf
+    pair: "заставить=to make"
     collections:
       - daily life
     en_gb:
@@ -7556,6 +7907,7 @@ words:
     cefr_level: B1
     accented: застёгивать
     aspect: impf
+    pair: "застегнуть=to fasten"
     collections:
       - clothes
       - clothing
@@ -7588,6 +7940,7 @@ words:
     cefr_level: B1
     accented: застегну́ть
     aspect: pf
+    pair: "застёгивать=to fasten"
     collections:
       - clothes
       - clothing
@@ -7660,6 +8013,7 @@ words:
     cefr_level: B1
     accented: засыпа́ть
     aspect: impf
+    pair: "заснуть=to fall asleep"
     collections:
       - daily life
       - sickness and health
@@ -7736,6 +8090,9 @@ words:
       alt:
         - to enter
     conjugation:
+      imperative:
+        sg: заходи́
+        pl: заходи́те
       present:
         "1sg": захожу́
         "2sg": за́ходишь
@@ -7763,6 +8120,7 @@ words:
     cefr_level: A2
     accented: захоте́ть
     aspect: pf
+    pair: "хотеть=to want"
     collections:
       - feelings and sensations
       - daily life
@@ -7798,6 +8156,7 @@ words:
     cefr_level: A2
     accented: захоте́ться
     aspect: pf
+    pair: "хотеться=to feel like"
     collections:
       - feelings and sensations
     en_gb:
@@ -7895,6 +8254,7 @@ words:
     cefr_level: A1
     accented: звать
     aspect: impf
+    pair: "позвать=to call"
     collections:
       - communication
       - daily life
@@ -7903,6 +8263,9 @@ words:
       alt:
         - to invite
     conjugation:
+      imperative:
+        sg: зови́
+        pl: зови́те
       present:
         "1sg": зову́
         "2sg": зовёшь
@@ -7934,6 +8297,7 @@ words:
     cefr_level: A1
     accented: звони́ть
     aspect: impf
+    pair: "позвонить=to call"
     collections:
       - communication
       - daily life
@@ -7954,6 +8318,9 @@ words:
       - ru: Я бы звони́л ча́ще, но нет вре́мени.
         en_gb: I would call more often, but there is no time.
     conjugation:
+      imperative:
+        sg: звони́
+        pl: звони́те
       present:
         "1sg": звоню́
         "2sg": звони́шь
@@ -8052,6 +8419,9 @@ words:
       - ru: Е́сли бы я знал, я бы сказа́л.
         en_gb: If I had known, I would have told you.
     conjugation:
+      imperative:
+        sg: знай
+        pl: зна́йте
       present:
         "1sg": зна́ю
         "2sg": зна́ешь
@@ -8102,6 +8472,7 @@ words:
     cefr_level: A1
     accented: игра́ть
     aspect: impf
+    pair: "сыграть=to play"
     collections:
       - hobbies and pastimes
       - daily life
@@ -8121,6 +8492,9 @@ words:
       - ru: Я бы игра́л на скри́пке, е́сли бы уме́л.
         en_gb: I would play the violin if I could.
     conjugation:
+      imperative:
+        sg: игра́й
+        pl: игра́йте
       present:
         "1sg": игра́ю
         "2sg": игра́ешь
@@ -8136,6 +8510,7 @@ words:
     cefr_level: A1
     accented: идти́
     aspect: impf
+    pair: "пойти=to go"
     en_gb:
       standard: to go (on foot, in one direction)
       alt:
@@ -8152,7 +8527,13 @@ words:
         en_gb: Tomorrow I will be going on foot.
       - ru: Я бы шёл бы́стрее, но уста́л.
         en_gb: I would walk faster, but I am tired.
+      - ru: Иди́ сюда́, пожа́луйста.
+        en_gb: Come here, please.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
+      imperative:
+        sg: иди́
+        pl: иди́те
       present:
         "1sg": иду́
         "2sg": идёшь
@@ -8176,6 +8557,9 @@ words:
       alt:
         - to forgive
     conjugation:
+      imperative:
+        sg: извини́
+        pl: извини́те
       future:
         "1sg": извиню́
         "2sg": извини́шь
@@ -8190,6 +8574,7 @@ words:
     usage:
       - ru: Извини́те меня́, пожа́луйста.
         en_gb: Excuse me, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я извиню́ тебя́ на э́тот раз.
         en_gb: I will excuse you this time.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -8347,6 +8732,9 @@ words:
       alt:
         - to learn
     conjugation:
+      imperative:
+        sg: изуча́й
+        pl: изуча́йте
       present:
         "1sg": изуча́ю
         "2sg": изуча́ешь
@@ -8381,6 +8769,9 @@ words:
       alt:
         - to possess
     conjugation:
+      imperative:
+        sg: име́й
+        pl: име́йте
       present:
         "1sg": име́ю
         "2sg": име́ешь
@@ -8513,6 +8904,9 @@ words:
       alt:
         - to look for
     conjugation:
+      imperative:
+        sg: ищи́
+        pl: ищи́те
       present:
         "1sg": ищу́
         "2sg": и́щешь
@@ -8646,6 +9040,9 @@ words:
       alt:
         - to be scared
     conjugation:
+      imperative:
+        sg: испуга́йся
+        pl: испуга́йтесь
       future:
         "1sg": испуга́юсь
         "2sg": испуга́ешься
@@ -8673,6 +9070,7 @@ words:
     cefr_level: B1
     accented: испыта́ть
     aspect: pf
+    pair: "испытывать=to experience"
     collections:
       - feelings and sensations
     en_gb:
@@ -8708,6 +9106,7 @@ words:
     cefr_level: B1
     accented: испы́тывать
     aspect: impf
+    pair: "испытать=to experience"
     collections:
       - feelings and sensations
     en_gb:
@@ -8743,6 +9142,7 @@ words:
     cefr_level: B1
     accented: исчеза́ть
     aspect: impf
+    pair: "исчезнуть=to disappear"
     collections:
       - daily life
     en_gb:
@@ -8777,6 +9177,7 @@ words:
     cefr_level: B1
     accented: исче́знуть
     aspect: pf
+    pair: "исчезать=to disappear"
     collections:
       - daily life
     en_gb:
@@ -8811,6 +9212,7 @@ words:
     cefr_level: A2
     accented: каза́ться
     aspect: impf
+    pair: "показаться=to seem"
     collections:
       - daily life
       - feelings and sensations
@@ -8950,12 +9352,16 @@ words:
     cefr_level: A2
     accented: кива́ть
     aspect: impf
+    pair: "кивнуть=to nod"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to nod (to move one's head up and down)
     conjugation:
+      imperative:
+        sg: кива́й
+        pl: кива́йте
       present:
         "1sg": кива́ю
         "2sg": кива́ешь
@@ -8983,12 +9389,16 @@ words:
     cefr_level: A2
     accented: кивну́ть
     aspect: pf
+    pair: "кивать=to nod"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to nod (to give a single nod)
     conjugation:
+      imperative:
+        sg: кивни́
+        pl: кивни́те
       future:
         "1sg": кивну́
         "2sg": кивнёшь
@@ -9050,6 +9460,7 @@ words:
     cefr_level: A2
     accented: класть
     aspect: impf
+    pair: "положить=to put"
     collections:
       - daily life
     en_gb:
@@ -9069,6 +9480,9 @@ words:
       - ru: Я бы клал де́ньги в банк.
         en_gb: I would put my money in the bank.
     conjugation:
+      imperative:
+        sg: клади́
+        pl: клади́те
       present:
         "1sg": кладу́
         "2sg": кладёшь
@@ -9152,6 +9566,7 @@ words:
     cefr_level: A2
     accented: конча́ть
     aspect: impf
+    pair: "кончить=to finish"
     collections:
       - daily life
     en_gb:
@@ -9159,6 +9574,9 @@ words:
       alt:
         - to end
     conjugation:
+      imperative:
+        sg: конча́й
+        pl: конча́йте
       present:
         "1sg": конча́ю
         "2sg": конча́ешь
@@ -9186,6 +9604,7 @@ words:
     cefr_level: A2
     accented: конча́ться
     aspect: impf
+    pair: "кончиться=to end"
     collections:
       - daily life
     en_gb:
@@ -9216,6 +9635,7 @@ words:
     cefr_level: A2
     accented: ко́нчить
     aspect: pf
+    pair: "кончать=to finish"
     collections:
       - daily life
     en_gb:
@@ -9223,6 +9643,9 @@ words:
       alt:
         - to end
     conjugation:
+      imperative:
+        sg: ко́нчи
+        pl: ко́нчите
       future:
         "1sg": ко́нчу
         "2sg": ко́нчишь
@@ -9250,6 +9673,7 @@ words:
     cefr_level: A2
     accented: ко́нчиться
     aspect: pf
+    pair: "кончаться=to end"
     collections:
       - daily life
     en_gb:
@@ -9320,6 +9744,9 @@ words:
     en_gb:
       standard: to feed (to give food to)
     conjugation:
+      imperative:
+        sg: корми́
+        pl: корми́те
       present:
         "1sg": кормлю́
         "2sg": ко́рмишь
@@ -9382,6 +9809,7 @@ words:
     cefr_level: A2
     accented: кри́кнуть
     aspect: pf
+    pair: "кричать=to shout"
     collections:
       - communication
     en_gb:
@@ -9389,6 +9817,9 @@ words:
       alt:
         - to cry out
     conjugation:
+      imperative:
+        sg: кри́кни
+        pl: кри́кните
       future:
         "1sg": кри́кну
         "2sg": кри́кнешь
@@ -9442,6 +9873,7 @@ words:
     cefr_level: A2
     accented: крича́ть
     aspect: impf
+    pair: "крикнуть=to shout"
     collections:
       - communication
       - feelings and sensations
@@ -9452,6 +9884,7 @@ words:
     usage:
       - ru: Не кричи́! Говори́ споко́йно.
         en_gb: Don't shout! Speak calmly.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он кричи́т на дете́й.
         en_gb: He shouts at the children.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -9462,6 +9895,9 @@ words:
       - ru: Я бы не крича́л на дете́й.
         en_gb: I would not shout at the children.
     conjugation:
+      imperative:
+        sg: кричи́
+        pl: кричи́те
       present:
         "1sg": кричу́
         "2sg": кричи́шь
@@ -9477,6 +9913,7 @@ words:
     cefr_level: A2
     accented: купи́ть
     aspect: pf
+    pair: "покупать=to buy"
     collections:
       - shopping
       - finance
@@ -9496,6 +9933,9 @@ words:
       - ru: Мы ку́пим биле́ты на по́езд за́втра.
         en_gb: We will buy the train tickets tomorrow.
     conjugation:
+      imperative:
+        sg: купи́
+        pl: купи́те
       future:
         "1sg": куплю́
         "2sg": ку́пишь
@@ -9517,6 +9957,9 @@ words:
     en_gb:
       standard: to smoke (to inhale tobacco smoke)
     conjugation:
+      imperative:
+        sg: кури́
+        pl: кури́те
       present:
         "1sg": курю́
         "2sg": ку́ришь
@@ -9550,6 +9993,9 @@ words:
     en_gb:
       standard: to eat (polite form used with children and guests)
     conjugation:
+      imperative:
+        sg: ку́шай
+        pl: ку́шайте
       present:
         "1sg": ку́шаю
         "2sg": ку́шаешь
@@ -9564,6 +10010,7 @@ words:
     usage:
       - ru: Ку́шайте, пожа́луйста!
         en_gb: Please, eat!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Ребёнок ку́шает ка́шу.
         en_gb: The child is eating porridge.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -9594,6 +10041,9 @@ words:
       - ru: Я бы лежа́л в гамаке́ весь день.
         en_gb: I would lie in the hammock all day.
     conjugation:
+      imperative:
+        sg: лежи́
+        pl: лежи́те
       present:
         "1sg": лежу́
         "2sg": лежи́шь
@@ -9660,6 +10110,9 @@ words:
       - ru: Я бы лета́л ча́ще, е́сли бы не боя́лся.
         en_gb: I would fly more often if I were not afraid.
     conjugation:
+      imperative:
+        sg: лета́й
+        pl: лета́йте
       present:
         "1sg": лета́ю
         "2sg": лета́ешь
@@ -9693,6 +10146,9 @@ words:
       - ru: Я бы лете́л пе́рвым кла́ссом.
         en_gb: I would fly first class.
     conjugation:
+      imperative:
+        sg: лети́
+        pl: лети́те
       present:
         "1sg": лечу́
         "2sg": лети́шь
@@ -9743,6 +10199,7 @@ words:
     cefr_level: A2
     accented: лечь
     aspect: pf
+    pair: "ложиться=to lie down"
     collections:
       - daily life
     en_gb:
@@ -9760,6 +10217,9 @@ words:
       - ru: Сего́дня де́ти ля́гут спать в де́вять.
         en_gb: Today the children will lie down to sleep at nine.
     conjugation:
+      imperative:
+        sg: ляг
+        pl: ля́гте
       future:
         "1sg": ля́гу
         "2sg": ля́жешь
@@ -9775,6 +10235,7 @@ words:
     cefr_level: B1
     accented: лови́ть
     aspect: impf
+    pair: "поймать=to catch"
     collections:
       - daily life
       - hobbies and pastimes
@@ -9808,6 +10269,7 @@ words:
     cefr_level: A2
     accented: ложи́ться
     aspect: impf
+    pair: "лечь=to lie down"
     collections:
       - daily life
     en_gb:
@@ -9827,6 +10289,9 @@ words:
       - ru: Я бы ложи́лся ра́ньше, е́сли бы успева́л.
         en_gb: I would go to bed earlier if I had time.
     conjugation:
+      imperative:
+        sg: ложи́сь
+        pl: ложи́тесь
       present:
         "1sg": ложу́сь
         "2sg": ложи́шься
@@ -9842,6 +10307,7 @@ words:
     cefr_level: B1
     accented: лома́ть
     aspect: impf
+    pair: "сломать=to break"
     collections:
       - daily life
     en_gb:
@@ -9874,6 +10340,7 @@ words:
     cefr_level: A1
     accented: люби́ть
     aspect: impf
+    pair: "полюбить=to come to love"
     collections:
       - romance and dating
       - feelings and sensations
@@ -9895,6 +10362,9 @@ words:
       - ru: Я бы люби́л э́тот го́род бо́льше без шу́ма.
         en_gb: I would love this city more without the noise.
     conjugation:
+      imperative:
+        sg: люби́
+        pl: люби́те
       present:
         "1sg": люблю́
         "2sg": лю́бишь
@@ -9910,6 +10380,7 @@ words:
     cefr_level: B1
     accented: маха́ть
     aspect: impf
+    pair: "махнуть=to wave once"
     collections:
       - communication
       - daily life
@@ -9943,6 +10414,7 @@ words:
     cefr_level: B1
     accented: махну́ть
     aspect: pf
+    pair: "махать=to wave"
     collections:
       - communication
       - daily life
@@ -10018,6 +10490,9 @@ words:
       alt:
         - to exchange
     conjugation:
+      imperative:
+        sg: меня́й
+        pl: меня́йте
       present:
         "1sg": меня́ю
         "2sg": меня́ешь
@@ -10050,6 +10525,9 @@ words:
     en_gb:
       standard: to change (to become different; to exchange with each other)
     conjugation:
+      imperative:
+        sg: меня́йся
+        pl: меня́йтесь
       present:
         "1sg": меня́юсь
         "2sg": меня́ешься
@@ -10096,6 +10574,9 @@ words:
       - ru: В де́тстве он мечта́л стать лётчиком.
         en_gb: As a child he dreamed of becoming a pilot.
     conjugation:
+      imperative:
+        sg: мечта́й
+        pl: мечта́йте
       present:
         "1sg": мечта́ю
         "2sg": мечта́ешь
@@ -10111,6 +10592,7 @@ words:
     cefr_level: B1
     accented: меша́ть
     aspect: impf
+    pair: "помешать=to prevent"
     collections:
       - daily life
     en_gb:
@@ -10232,6 +10714,9 @@ words:
       - ru: Я бы молча́л на твоём ме́сте.
         en_gb: I would keep silent in your place.
     conjugation:
+      imperative:
+        sg: молчи́
+        pl: молчи́те
       present:
         "1sg": молчу́
         "2sg": молчи́шь
@@ -10247,6 +10732,7 @@ words:
     cefr_level: A1
     accented: мочь
     aspect: impf
+    pair: "смочь=to be able"
     collections:
       - daily life
     en_gb:
@@ -10333,6 +10819,9 @@ words:
       - ru: Я бы мыл посу́ду ча́ще, е́сли бы успева́л.
         en_gb: I would wash the dishes more often if I had time.
     conjugation:
+      imperative:
+        sg: мой
+        pl: мо́йте
       present:
         "1sg": мо́ю
         "2sg": мо́ешь
@@ -10445,6 +10934,7 @@ words:
     cefr_level: B1
     accented: надева́ть
     aspect: impf
+    pair: "надеть=to put on"
     en_gb:
       standard: to put on (clothing)
     collections:
@@ -10471,12 +10961,16 @@ words:
     cefr_level: A2
     accented: наде́ть
     aspect: pf
+    pair: "надевать=to put on"
     collections:
       - daily life
       - home
     en_gb:
       standard: to put on (to dress oneself in clothing)
     conjugation:
+      imperative:
+        sg: наде́нь
+        pl: наде́ньте
       future:
         "1sg": наде́ну
         "2sg": наде́нешь
@@ -10496,6 +10990,7 @@ words:
         en_gb: She put on a red dress.
       - ru: Наде́нь ша́пку, на у́лице хо́лодно.
         en_gb: Put on a hat, it's cold outside.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы наде́л пальто́, е́сли бы зна́л о хо́лоде.
         en_gb: I would have put on a coat if I had known it was cold.
       - ru: За́втра она́ наде́нет но́вые ту́фли.
@@ -10521,6 +11016,9 @@ words:
       - ru: Я бы наде́ялся на по́мощь друзе́й.
         en_gb: I would hope for the help of friends.
     conjugation:
+      imperative:
+        sg: наде́йся
+        pl: наде́йтесь
       present:
         "1sg": наде́юсь
         "2sg": наде́ешься
@@ -10606,6 +11104,7 @@ words:
     cefr_level: B1
     accented: назва́ть
     aspect: pf
+    pair: "называть=to call/name"
     collections:
       - communication
     en_gb:
@@ -10675,6 +11174,7 @@ words:
     cefr_level: B1
     accented: называ́ть
     aspect: impf
+    pair: "назвать=to call/name"
     collections:
       - communication
     en_gb:
@@ -10740,11 +11240,15 @@ words:
     cefr_level: A1
     accented: найти́
     aspect: pf
+    pair: "находить=to find"
     collections:
       - daily life
     en_gb:
       standard: to find (to discover or locate)
     conjugation:
+      imperative:
+        sg: найди́
+        pl: найди́те
       future:
         "1sg": найду́
         "2sg": найдёшь
@@ -10843,6 +11347,9 @@ words:
     en_gb:
       standard: to pour (to pour a liquid into something)
     conjugation:
+      imperative:
+        sg: нале́й
+        pl: нале́йте
       future:
         "1sg": налью́
         "2sg": нальёшь
@@ -10862,6 +11369,7 @@ words:
         en_gb: She poured milk into the glass.
       - ru: Нале́й воды́ в ча́йник.
         en_gb: Pour some water into the kettle.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы нали́л тебе́ ко́фе, е́сли бы он был.
         en_gb: I would pour you coffee if there were any.
       - ru: Официа́нт нальёт вино́ в бока́лы.
@@ -10896,6 +11404,7 @@ words:
     cefr_level: A1
     accented: написа́ть
     aspect: pf
+    pair: "писать=to write"
     collections:
       - school
       - communication
@@ -10914,6 +11423,9 @@ words:
       - ru: Они́ напи́шут отчёт к концу́ неде́ли.
         en_gb: They will write the report by the end of the week.
     conjugation:
+      imperative:
+        sg: напиши́
+        pl: напиши́те
       future:
         "1sg": напишу́
         "2sg": напи́шешь
@@ -10929,6 +11441,7 @@ words:
     cefr_level: A2
     accented: напомина́ть
     aspect: impf
+    pair: "напомнить=to remind"
     collections:
       - communication
       - daily life
@@ -10937,6 +11450,9 @@ words:
       alt:
         - to resemble
     conjugation:
+      imperative:
+        sg: напомина́й
+        pl: напомина́йте
       present:
         "1sg": напомина́ю
         "2sg": напомина́ешь
@@ -10964,12 +11480,16 @@ words:
     cefr_level: A2
     accented: напо́мнить
     aspect: pf
+    pair: "напоминать=to remind"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to remind (to cause someone to remember)
     conjugation:
+      imperative:
+        sg: напо́мни
+        pl: напо́мните
       future:
         "1sg": напо́мню
         "2sg": напо́мнишь
@@ -10984,6 +11504,7 @@ words:
     usage:
       - ru: Напо́мни мне купи́ть хлеб.
         en_gb: Remind me to buy bread.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я напо́мню тебе́ ве́чером.
         en_gb: I will remind you in the evening.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -11093,6 +11614,7 @@ words:
     cefr_level: A2
     accented: нарисова́ть
     aspect: pf
+    pair: "рисовать=to draw"
     en_gb:
       standard: to draw (to make a picture)
     collections:
@@ -11103,7 +11625,11 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Нарису́й мне ка́рту, пожа́луйста.
         en_gb: Draw me a map, please.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
+      imperative:
+        sg: нарису́й
+        pl: нарису́йте
       future:
         "1sg": нарису́ю
         "2sg": нарису́ешь
@@ -11224,12 +11750,16 @@ words:
     cefr_level: A2
     accented: научи́ть
     aspect: pf
+    pair: "учить=to teach"
     collections:
       - school
       - daily life
     en_gb:
       standard: to teach (to instruct someone in a skill)
     conjugation:
+      imperative:
+        sg: научи́
+        pl: научи́те
       future:
         "1sg": научу́
         "2sg": научи́шь
@@ -11257,6 +11787,7 @@ words:
     cefr_level: A2
     accented: научи́ться
     aspect: pf
+    pair: "учиться=to study"
     collections:
       - school
       - daily life
@@ -11265,6 +11796,9 @@ words:
       alt:
         - to teach oneself
     conjugation:
+      imperative:
+        sg: научи́сь
+        pl: научи́тесь
       future:
         "1sg": научу́сь
         "2sg": научи́шься
@@ -11292,11 +11826,15 @@ words:
     cefr_level: A2
     accented: находи́ть
     aspect: impf
+    pair: "найти=to find"
     collections:
       - daily life
     en_gb:
       standard: to find (to discover repeatedly or habitually)
     conjugation:
+      imperative:
+        sg: находи́
+        pl: находи́те
       present:
         "1sg": нахожу́
         "2sg": нахо́дишь
@@ -11357,6 +11895,7 @@ words:
     cefr_level: A1
     accented: нача́ть
     aspect: pf
+    pair: "начинать=to begin"
     collections:
       - daily life
     en_gb:
@@ -11374,6 +11913,9 @@ words:
       - ru: Они́ начну́т строи́тельство весно́й.
         en_gb: They will begin construction in spring.
     conjugation:
+      imperative:
+        sg: начни́
+        pl: начни́те
       future:
         "1sg": начну́
         "2sg": начнёшь
@@ -11389,6 +11931,7 @@ words:
     cefr_level: A1
     accented: нача́ться
     aspect: pf
+    pair: "начинаться=to begin"
     collections:
       - daily life
     en_gb:
@@ -11419,6 +11962,7 @@ words:
     cefr_level: A1
     accented: начина́ть
     aspect: impf
+    pair: "начать=to begin"
     collections:
       - daily life
     en_gb:
@@ -11436,6 +11980,9 @@ words:
       - ru: Я бы начина́л рабо́ту пора́ньше.
         en_gb: I would start work a little earlier.
     conjugation:
+      imperative:
+        sg: начина́й
+        pl: начина́йте
       present:
         "1sg": начина́ю
         "2sg": начина́ешь
@@ -11451,6 +11998,7 @@ words:
     cefr_level: A1
     accented: начина́ться
     aspect: impf
+    pair: "начаться=to begin"
     collections:
       - daily life
     en_gb:
@@ -11602,6 +12150,9 @@ words:
       - ru: Я бы носи́л очки́, е́сли бы пло́хо ви́дел.
         en_gb: I would wear glasses if my sight were poor.
     conjugation:
+      imperative:
+        sg: носи́
+        pl: носи́те
       present:
         "1sg": ношу́
         "2sg": но́сишь
@@ -11651,6 +12202,7 @@ words:
     cefr_level: A2
     accented: нра́виться
     aspect: impf
+    pair: "понравиться=to be liked"
     collections:
       - feelings and sensations
       - daily life
@@ -11721,6 +12273,7 @@ words:
     cefr_level: B1
     accented: оберну́ться
     aspect: pf
+    pair: "оборачиваться=to turn around"
     collections:
       - motion
       - daily life
@@ -11786,6 +12339,7 @@ words:
     cefr_level: A2
     accented: обеща́ть
     aspect: impf
+    pair: "пообещать=to promise"
     collections:
       - communication
       - daily life
@@ -11804,6 +12358,9 @@ words:
       - ru: Я бы обеща́л, е́сли был уве́рен.
         en_gb: I would promise if I were sure.
     conjugation:
+      imperative:
+        sg: обеща́й
+        pl: обеща́йте
       present:
         "1sg": обеща́ю
         "2sg": обеща́ешь
@@ -11964,6 +12521,9 @@ words:
       alt:
         - to hug
     conjugation:
+      imperative:
+        sg: обними́
+        pl: обними́те
       future:
         "1sg": обниму́
         "2sg": обни́мешь
@@ -12061,6 +12621,7 @@ words:
     cefr_level: B1
     accented: обора́чиваться
     aspect: impf
+    pair: "обернуться=to turn around"
     collections:
       - motion
       - daily life
@@ -12094,6 +12655,7 @@ words:
     cefr_level: B1
     accented: обра́доваться
     aspect: pf
+    pair: "радоваться=to be glad"
     collections:
       - feelings and sensations
     en_gb:
@@ -12158,6 +12720,7 @@ words:
     cefr_level: B1
     accented: обрати́ть
     aspect: pf
+    pair: "обращать=to turn"
     collections:
       - communication
       - daily life
@@ -12193,6 +12756,7 @@ words:
     cefr_level: B1
     accented: обрати́ться
     aspect: pf
+    pair: "обращаться=to address"
     collections:
       - communication
       - daily life
@@ -12229,6 +12793,7 @@ words:
     cefr_level: B1
     accented: обраща́ть
     aspect: impf
+    pair: "обратить=to turn"
     collections:
       - communication
       - daily life
@@ -12264,6 +12829,7 @@ words:
     cefr_level: B1
     accented: обраща́ться
     aspect: impf
+    pair: "обратиться=to address"
     collections:
       - communication
       - daily life
@@ -12300,6 +12866,7 @@ words:
     cefr_level: B1
     accented: обсуди́ть
     aspect: pf
+    pair: "обсуждать=to discuss"
     en_gb:
       standard: to discuss (to talk something over)
     collections:
@@ -12326,6 +12893,7 @@ words:
     cefr_level: B1
     accented: обсужда́ть
     aspect: impf
+    pair: "обсудить=to discuss"
     collections:
       - communication
       - daily life
@@ -12394,6 +12962,7 @@ words:
     cefr_level: A2
     accented: объясни́ть
     aspect: pf
+    pair: "объяснять=to explain"
     collections:
       - communication
       - school
@@ -12412,6 +12981,9 @@ words:
       - ru: За́втра он объясни́т нам зада́чу.
         en_gb: Tomorrow he will explain the task to us.
     conjugation:
+      imperative:
+        sg: объясни́
+        pl: объясни́те
       future:
         "1sg": объясню́
         "2sg": объясни́шь
@@ -12427,6 +12999,7 @@ words:
     cefr_level: A2
     accented: объясня́ть
     aspect: impf
+    pair: "объяснить=to explain"
     collections:
       - communication
       - school
@@ -12445,6 +13018,9 @@ words:
       - ru: Я бы объясня́л ме́дленнее на твоём ме́сте.
         en_gb: I would explain more slowly in your place.
     conjugation:
+      imperative:
+        sg: объясня́й
+        pl: объясня́йте
       present:
         "1sg": объясня́ю
         "2sg": объясня́ешь
@@ -12564,6 +13140,7 @@ words:
     cefr_level: A2
     accented: одева́ться
     aspect: impf
+    pair: "одеться=to get dressed"
     collections:
       - clothes
       - clothing
@@ -12571,6 +13148,9 @@ words:
     en_gb:
       standard: to get dressed (to put on one's clothes, habitually)
     conjugation:
+      imperative:
+        sg: одева́йся
+        pl: одева́йтесь
       present:
         "1sg": одева́юсь
         "2sg": одева́ешься
@@ -12592,12 +13172,14 @@ words:
         en_gb: I get dressed every morning in ten minutes.
       - ru: Бу́дет хо́лодно — одева́йся тепле́е.
         en_gb: It will be cold — dress more warmly.
+        inflect: { token: 4, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы одева́лся ти́ше, что́бы не разбуди́ть всех.
         en_gb: I would get dressed more quietly so as not to wake everyone.
   "одеться=to get dressed":
     cefr_level: A2
     accented: оде́ться
     aspect: pf
+    pair: "одеваться=to get dressed"
     collections:
       - clothes
       - clothing
@@ -12605,6 +13187,9 @@ words:
     en_gb:
       standard: to get dressed (to put on one's clothes, on one occasion)
     conjugation:
+      imperative:
+        sg: оде́нься
+        pl: оде́ньтесь
       future:
         "1sg": оде́нусь
         "2sg": оде́нешься
@@ -12619,6 +13204,7 @@ words:
     usage:
       - ru: Оде́нься потепле́е, на у́лице моро́з.
         en_gb: Dress more warmly, it's frosty outside.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ оде́лась и вы́шла из до́ма.
         en_gb: She got dressed and left the house.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -12704,6 +13290,7 @@ words:
     cefr_level: B1
     accented: оказа́ться
     aspect: pf
+    pair: "оказываться=to turn out"
     collections:
       - daily life
     en_gb:
@@ -12738,6 +13325,7 @@ words:
     cefr_level: B1
     accented: ока́зываться
     aspect: impf
+    pair: "оказаться=to turn out"
     collections:
       - daily life
     en_gb:
@@ -12866,6 +13454,7 @@ words:
     cefr_level: B1
     accented: описа́ть
     aspect: pf
+    pair: "описывать=to describe"
     collections:
       - communication
       - reading
@@ -12899,6 +13488,7 @@ words:
     cefr_level: B1
     accented: опи́сывать
     aspect: impf
+    pair: "описать=to describe"
     en_gb:
       standard: to describe (to give details of)
     collections:
@@ -12951,6 +13541,7 @@ words:
     cefr_level: B1
     accented: определи́ть
     aspect: pf
+    pair: "определять=to determine"
     collections:
       - daily life
     en_gb:
@@ -12985,6 +13576,7 @@ words:
     cefr_level: B1
     accented: определя́ть
     aspect: impf
+    pair: "определить=to determine"
     collections:
       - daily life
     en_gb:
@@ -13227,6 +13819,7 @@ words:
     cefr_level: B2
     accented: осма́тривать
     aspect: impf
+    pair: "осмотреть=to examine"
     en_gb:
       standard: to examine (to look over carefully)
     collections:
@@ -13253,6 +13846,7 @@ words:
     cefr_level: B1
     accented: осмотре́ть
     aspect: pf
+    pair: "осматривать=to examine"
     collections:
       - daily life
       - sickness and health
@@ -13288,6 +13882,7 @@ words:
     cefr_level: A2
     accented: остава́ться
     aspect: impf
+    pair: "остаться=to stay"
     collections:
       - daily life
       - motion
@@ -13296,6 +13891,9 @@ words:
       alt:
         - to remain
     conjugation:
+      imperative:
+        sg: остава́йся
+        pl: остава́йтесь
       present:
         "1sg": остаю́сь
         "2sg": остаёшься
@@ -13323,6 +13921,7 @@ words:
     cefr_level: A2
     accented: оста́вить
     aspect: pf
+    pair: "оставлять=to leave"
     collections:
       - daily life
       - motion
@@ -13331,6 +13930,9 @@ words:
       alt:
         - to abandon
     conjugation:
+      imperative:
+        sg: оста́вь
+        pl: оста́вьте
       future:
         "1sg": оста́влю
         "2sg": оста́вишь
@@ -13358,6 +13960,7 @@ words:
     cefr_level: A2
     accented: оставля́ть
     aspect: impf
+    pair: "оставить=to leave"
     collections:
       - daily life
       - motion
@@ -13366,6 +13969,9 @@ words:
       alt:
         - to abandon
     conjugation:
+      imperative:
+        sg: оставля́й
+        pl: оставля́йте
       present:
         "1sg": оставля́ю
         "2sg": оставля́ешь
@@ -13393,12 +13999,16 @@ words:
     cefr_level: A2
     accented: остана́вливаться
     aspect: impf
+    pair: "остановиться=to stop"
     collections:
       - daily life
       - motion
     en_gb:
       standard: to stop (to come to a halt; to stay somewhere)
     conjugation:
+      imperative:
+        sg: остана́вливайся
+        pl: остана́вливайтесь
       present:
         "1sg": остана́вливаюсь
         "2sg": остана́вливаешься
@@ -13432,6 +14042,9 @@ words:
     en_gb:
       standard: to stop (to bring to a halt)
     conjugation:
+      imperative:
+        sg: останови́
+        pl: останови́те
       future:
         "1sg": остановлю́
         "2sg": останови́шь
@@ -13459,12 +14072,16 @@ words:
     cefr_level: A2
     accented: останови́ться
     aspect: pf
+    pair: "останавливаться=to stop"
     collections:
       - daily life
       - motion
     en_gb:
       standard: to stop (to come to a halt)
     conjugation:
+      imperative:
+        sg: останови́сь
+        pl: останови́тесь
       future:
         "1sg": остановлю́сь
         "2sg": останови́шься
@@ -13492,6 +14109,7 @@ words:
     cefr_level: A2
     accented: оста́ться
     aspect: pf
+    pair: "оставаться=to stay"
     collections:
       - daily life
       - motion
@@ -13500,6 +14118,9 @@ words:
       alt:
         - to remain
     conjugation:
+      imperative:
+        sg: оста́нься
+        pl: оста́ньтесь
       future:
         "1sg": оста́нусь
         "2sg": оста́нешься
@@ -13596,6 +14217,7 @@ words:
     cefr_level: A1
     accented: отве́тить
     aspect: pf
+    pair: "отвечать=to answer"
     collections:
       - communication
       - school
@@ -13614,6 +14236,9 @@ words:
       - ru: Ско́ро она́ отве́тит на письмо́.
         en_gb: Soon she will answer the letter.
     conjugation:
+      imperative:
+        sg: отве́ть
+        pl: отве́тьте
       future:
         "1sg": отве́чу
         "2sg": отве́тишь
@@ -13629,6 +14254,7 @@ words:
     cefr_level: A1
     accented: отвеча́ть
     aspect: impf
+    pair: "ответить=to answer"
     collections:
       - communication
       - school
@@ -13647,6 +14273,9 @@ words:
       - ru: Я бы отвеча́л споко́йнее.
         en_gb: I would answer more calmly.
     conjugation:
+      imperative:
+        sg: отвеча́й
+        pl: отвеча́йте
       present:
         "1sg": отвеча́ю
         "2sg": отвеча́ешь
@@ -13662,6 +14291,7 @@ words:
     cefr_level: A2
     accented: отдава́ть
     aspect: impf
+    pair: "отдать=to give back"
     collections:
       - daily life
       - finance
@@ -13670,6 +14300,9 @@ words:
       alt:
         - to hand over
     conjugation:
+      imperative:
+        sg: отдава́й
+        pl: отдава́йте
       present:
         "1sg": отдаю́
         "2sg": отдаёшь
@@ -13697,6 +14330,7 @@ words:
     cefr_level: A2
     accented: отда́ть
     aspect: pf
+    pair: "отдавать=to give back"
     collections:
       - daily life
       - finance
@@ -13705,6 +14339,9 @@ words:
       alt:
         - to hand over
     conjugation:
+      imperative:
+        sg: отда́й
+        pl: отда́йте
       future:
         "1sg": отда́м
         "2sg": отда́шь
@@ -13732,6 +14369,7 @@ words:
     cefr_level: A2
     accented: отдохну́ть
     aspect: pf
+    pair: "отдыхать=to rest"
     collections:
       - holiday
       - daily life
@@ -13740,6 +14378,9 @@ words:
       alt:
         - to take a break
     conjugation:
+      imperative:
+        sg: отдохни́
+        pl: отдохни́те
       future:
         "1sg": отдохну́
         "2sg": отдо́хнешь
@@ -13767,6 +14408,7 @@ words:
     cefr_level: A2
     accented: отдыха́ть
     aspect: impf
+    pair: "отдохнуть=to rest"
     collections:
       - holiday
       - daily life
@@ -13785,6 +14427,9 @@ words:
       - ru: Я бы отдыха́л ча́ще на твоём ме́сте.
         en_gb: I would rest more often in your place.
     conjugation:
+      imperative:
+        sg: отдыха́й
+        pl: отдыха́йте
       present:
         "1sg": отдыха́ю
         "2sg": отдыха́ешь
@@ -13800,6 +14445,7 @@ words:
     cefr_level: B1
     accented: отказа́ться
     aspect: pf
+    pair: "отказываться=to refuse"
     collections:
       - communication
       - daily life
@@ -13835,6 +14481,7 @@ words:
     cefr_level: B1
     accented: отка́зываться
     aspect: impf
+    pair: "отказаться=to refuse"
     collections:
       - communication
       - daily life
@@ -13870,12 +14517,16 @@ words:
     cefr_level: A1
     accented: открыва́ть
     aspect: impf
+    pair: "открыть=to open"
     collections:
       - daily life
       - home
     en_gb:
       standard: to open (to make accessible)
     conjugation:
+      imperative:
+        sg: открыва́й
+        pl: открыва́йте
       present:
         "1sg": открыва́ю
         "2sg": открыва́ешь
@@ -13903,6 +14554,7 @@ words:
     cefr_level: B1
     accented: открыва́ться
     aspect: impf
+    pair: "открыться=to open"
     collections:
       - daily life
       - home
@@ -13932,12 +14584,16 @@ words:
     cefr_level: A1
     accented: откры́ть
     aspect: pf
+    pair: "открывать=to open"
     collections:
       - daily life
       - home
     en_gb:
       standard: to open (to make accessible)
     conjugation:
+      imperative:
+        sg: откро́й
+        pl: откро́йте
       future:
         "1sg": откро́ю
         "2sg": откро́ешь
@@ -13965,6 +14621,7 @@ words:
     cefr_level: B1
     accented: откры́ться
     aspect: pf
+    pair: "открываться=to open"
     collections:
       - daily life
       - home
@@ -14244,6 +14901,9 @@ words:
       alt:
         - to dispatch
     conjugation:
+      imperative:
+        sg: отпра́вь
+        pl: отпра́вьте
       future:
         "1sg": отпра́влю
         "2sg": отпра́вишь
@@ -14271,6 +14931,7 @@ words:
     cefr_level: A2
     accented: отпра́виться
     aspect: pf
+    pair: "отправляться=to set off"
     collections:
       - motion
       - travel
@@ -14279,6 +14940,9 @@ words:
       alt:
         - to depart
     conjugation:
+      imperative:
+        sg: отпра́вься
+        pl: отпра́вьтесь
       future:
         "1sg": отпра́влюсь
         "2sg": отпра́вишься
@@ -14306,6 +14970,7 @@ words:
     cefr_level: A2
     accented: отправля́ться
     aspect: impf
+    pair: "отправиться=to set off"
     collections:
       - motion
       - travel
@@ -14314,6 +14979,9 @@ words:
       alt:
         - to depart
     conjugation:
+      imperative:
+        sg: отправля́йся
+        pl: отправля́йтесь
       present:
         "1sg": отправля́юсь
         "2sg": отправля́ешься
@@ -14643,6 +15311,7 @@ words:
     cefr_level: B1
     accented: ошиба́ться
     aspect: impf
+    pair: "ошибиться=to make a mistake"
     collections:
       - daily life
       - school
@@ -14678,6 +15347,7 @@ words:
     cefr_level: B1
     accented: ошиби́ться
     aspect: pf
+    pair: "ошибаться=to make a mistake"
     collections:
       - daily life
       - school
@@ -14713,6 +15383,7 @@ words:
     cefr_level: B1
     accented: ощути́ть
     aspect: pf
+    pair: "ощущать=to feel"
     collections:
       - feelings and sensations
       - sickness and health
@@ -14748,6 +15419,7 @@ words:
     cefr_level: B1
     accented: ощуща́ть
     aspect: impf
+    pair: "ощутить=to feel"
     collections:
       - feelings and sensations
       - sickness and health
@@ -14783,6 +15455,7 @@ words:
     cefr_level: A2
     accented: па́дать
     aspect: impf
+    pair: "упасть=to fall"
     collections:
       - motion
       - daily life
@@ -14801,6 +15474,9 @@ words:
       - ru: Без опо́ры де́рево па́дало бы.
         en_gb: Without support the tree would fall.
     conjugation:
+      imperative:
+        sg: па́дай
+        pl: па́дайте
       present:
         "1sg": па́даю
         "2sg": па́даешь
@@ -14976,6 +15652,7 @@ words:
     cefr_level: B1
     accented: перевести́
     aspect: pf
+    pair: "переводить=to translate"
     collections:
       - communication
       - reading
@@ -15009,6 +15686,7 @@ words:
     cefr_level: B1
     accented: переводи́ть
     aspect: impf
+    pair: "перевести=to translate"
     en_gb:
       standard: to translate (to put into another language)
     collections:
@@ -15035,6 +15713,7 @@ words:
     cefr_level: B1
     accented: передава́ть
     aspect: impf
+    pair: "передать=to pass on"
     collections:
       - communication
       - daily life
@@ -15068,6 +15747,7 @@ words:
     cefr_level: B1
     accented: переда́ть
     aspect: pf
+    pair: "передавать=to pass on"
     collections:
       - communication
       - daily life
@@ -15127,6 +15807,7 @@ words:
     cefr_level: B1
     accented: пережива́ть
     aspect: impf
+    pair: "пережить=to experience"
     collections:
       - feelings and sensations
       - daily life
@@ -15160,6 +15841,7 @@ words:
     cefr_level: B1
     accented: пережи́ть
     aspect: pf
+    pair: "переживать=to experience"
     collections:
       - feelings and sensations
       - daily life
@@ -15219,6 +15901,7 @@ words:
     cefr_level: B1
     accented: перейти́
     aspect: pf
+    pair: "переходить=to cross"
     collections:
       - motion
       - daily life
@@ -15285,6 +15968,7 @@ words:
     cefr_level: B1
     accented: переодева́ться
     aspect: impf
+    pair: "переодеться=to change clothes"
     collections:
       - clothes
       - clothing
@@ -15315,6 +15999,7 @@ words:
     cefr_level: B1
     accented: переоде́ться
     aspect: pf
+    pair: "переодеваться=to change clothes"
     collections:
       - clothes
       - clothing
@@ -15381,6 +16066,7 @@ words:
     cefr_level: B1
     accented: переходи́ть
     aspect: impf
+    pair: "перейти=to cross"
     collections:
       - motion
       - daily life
@@ -15433,6 +16119,9 @@ words:
       - ru: Я бы пел гро́мче, е́сли б знал слова́.
         en_gb: I would sing louder if I knew the words.
     conjugation:
+      imperative:
+        sg: пой
+        pl: по́йте
       present:
         "1sg": пою́
         "2sg": поёшь
@@ -15478,6 +16167,7 @@ words:
     cefr_level: A1
     accented: писа́ть
     aspect: impf
+    pair: "написать=to write"
     en_gb:
       standard: to write (to put words on paper)
     usage:
@@ -15493,6 +16183,9 @@ words:
       - ru: Я бы писа́л письмо́ от руки́.
         en_gb: I would write the letter by hand.
     conjugation:
+      imperative:
+        sg: пиши́
+        pl: пиши́те
       present:
         "1sg": пишу́
         "2sg": пи́шешь
@@ -15508,6 +16201,7 @@ words:
     cefr_level: A1
     accented: пить
     aspect: impf
+    pair: "выпить=to drink up"
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -15527,6 +16221,9 @@ words:
       - ru: Я бы пил бо́льше воды́.
         en_gb: I would drink more water.
     conjugation:
+      imperative:
+        sg: пей
+        pl: пе́йте
       present:
         "1sg": пью
         "2sg": пьёшь
@@ -15561,6 +16258,9 @@ words:
       - ru: Я бы пла́вал лу́чше с трене́ром.
         en_gb: I would swim better with a coach.
     conjugation:
+      imperative:
+        sg: пла́вай
+        pl: пла́вайте
       present:
         "1sg": пла́ваю
         "2sg": пла́ваешь
@@ -15591,6 +16291,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не плачь, всё бу́дет хорошо́.
         en_gb: Don't cry, everything will be fine.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Они́ пла́кали от сча́стья.
         en_gb: They cried from happiness.
       - ru: Я бы пла́кал от ра́дости.
@@ -15598,6 +16299,9 @@ words:
       - ru: Без му́зыки фильм не был бы таки́м гру́стным.
         en_gb: Without the music the film would not be so sad.
     conjugation:
+      imperative:
+        sg: плачь
+        pl: пла́чьте
       present:
         "1sg": пла́чу
         "2sg": пла́чешь
@@ -15613,6 +16317,7 @@ words:
     cefr_level: A2
     accented: плати́ть
     aspect: impf
+    pair: "заплатить=to pay"
     heteronyms:
       - ru: плачу́
         gloss: I pay
@@ -15637,6 +16342,9 @@ words:
       - ru: Я бы плати́л ка́ртой, а не нали́чными.
         en_gb: I would pay by card rather than cash.
     conjugation:
+      imperative:
+        sg: плати́
+        pl: плати́те
       present:
         "1sg": плачу́
         "2sg": пла́тишь
@@ -15672,6 +16380,9 @@ words:
       - ru: Без тече́ния ло́дка плыла́ бы ме́дленнее.
         en_gb: Without the current the boat would float more slowly.
     conjugation:
+      imperative:
+        sg: плыви́
+        pl: плыви́те
       present:
         "1sg": плыву́
         "2sg": плывёшь
@@ -15687,6 +16398,7 @@ words:
     cefr_level: B1
     accented: победи́ть
     aspect: pf
+    pair: "побеждать=to win"
     collections:
       - sport
       - war and peace
@@ -15752,6 +16464,7 @@ words:
     cefr_level: B2
     accented: побежда́ть
     aspect: impf
+    pair: "победить=to win"
     collections:
       - war and peace
       - hobbies and pastimes
@@ -15787,6 +16500,7 @@ words:
     cefr_level: B1
     accented: поблагодари́ть
     aspect: pf
+    pair: "благодарить=to thank"
     en_gb:
       standard: to thank (to express gratitude)
     collections:
@@ -15874,6 +16588,7 @@ words:
     cefr_level: B1
     accented: пове́рить
     aspect: pf
+    pair: "верить=to believe"
     collections:
       - feelings and sensations
       - faith
@@ -16006,12 +16721,16 @@ words:
     cefr_level: A2
     accented: повтори́ть
     aspect: pf
+    pair: "повторять=to repeat"
     collections:
       - communication
       - school
     en_gb:
       standard: to repeat (to say or do again, on one occasion)
     conjugation:
+      imperative:
+        sg: повтори́
+        pl: повтори́те
       future:
         "1sg": повторю́
         "2sg": повтори́шь
@@ -16031,6 +16750,7 @@ words:
         en_gb: The teacher repeated the question loudly.
       - ru: Повтори́те, пожа́луйста, после́днее сло́во.
         en_gb: Please repeat the last word.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: За́втра я повторю́ все слова́.
         en_gb: Tomorrow I will repeat all the words.
       - ru: Я бы повтори́л вопро́с, е́сли ну́жно.
@@ -16039,12 +16759,16 @@ words:
     cefr_level: A2
     accented: повторя́ть
     aspect: impf
+    pair: "повторить=to repeat"
     collections:
       - communication
       - school
     en_gb:
       standard: to repeat (to say or do again)
     conjugation:
+      imperative:
+        sg: повторя́й
+        pl: повторя́йте
       present:
         "1sg": повторя́ю
         "2sg": повторя́ешь
@@ -16105,6 +16829,7 @@ words:
     cefr_level: B1
     accented: погляде́ть
     aspect: pf
+    pair: "глядеть=to look"
     collections:
       - daily life
     en_gb:
@@ -16175,6 +16900,9 @@ words:
     en_gb:
       standard: to have a talk (to chat for a while, on one occasion)
     conjugation:
+      imperative:
+        sg: поговори́
+        pl: поговори́те
       future:
         "1sg": поговорю́
         "2sg": поговори́шь
@@ -16202,6 +16930,7 @@ words:
     cefr_level: B1
     accented: подава́ть
     aspect: impf
+    pair: "подать=to serve"
     en_gb:
       standard: to serve (to give or submit)
     conjugation:
@@ -16235,6 +16964,9 @@ words:
     en_gb:
       standard: to give (something) as a present
     conjugation:
+      imperative:
+        sg: подари́
+        pl: подари́те
       future:
         "1sg": подарю́
         "2sg": пода́ришь
@@ -16262,6 +16994,7 @@ words:
     cefr_level: B1
     accented: пода́ть
     aspect: pf
+    pair: "подавать=to serve"
     en_gb:
       standard: to serve (to give or submit)
     conjugation:
@@ -16322,6 +17055,7 @@ words:
     cefr_level: B1
     accented: поддержа́ть
     aspect: pf
+    pair: "поддерживать=to support"
     en_gb:
       standard: to support (to back or hold up)
     conjugation:
@@ -16352,6 +17086,7 @@ words:
     cefr_level: B1
     accented: подде́рживать
     aspect: impf
+    pair: "поддержать=to support"
     en_gb:
       standard: to support (to back or hold up)
     conjugation:
@@ -16382,9 +17117,13 @@ words:
     cefr_level: A2
     accented: поднима́ть
     aspect: impf
+    pair: "поднять=to lift"
     en_gb:
       standard: to lift (to raise something up)
     conjugation:
+      imperative:
+        sg: поднима́й
+        pl: поднима́йте
       present:
         "1sg": поднима́ю
         "2sg": поднима́ешь
@@ -16412,6 +17151,7 @@ words:
     cefr_level: B1
     accented: поднима́ться
     aspect: impf
+    pair: "подняться=to go up"
     collections:
       - motion
     en_gb:
@@ -16481,9 +17221,13 @@ words:
     cefr_level: A2
     accented: подня́ть
     aspect: pf
+    pair: "поднимать=to lift"
     en_gb:
       standard: to lift (to raise something up)
     conjugation:
+      imperative:
+        sg: подними́
+        pl: подними́те
       future:
         "1sg": подниму́
         "2sg": подни́мешь
@@ -16511,6 +17255,7 @@ words:
     cefr_level: B1
     accented: подня́ться
     aspect: pf
+    pair: "подниматься=to go up"
     collections:
       - motion
     en_gb:
@@ -16573,11 +17318,15 @@ words:
     cefr_level: A2
     accented: подожда́ть
     aspect: pf
+    pair: "ждать=to wait"
     collections:
       - daily life
     en_gb:
       standard: to wait (to wait for a while, on one occasion)
     conjugation:
+      imperative:
+        sg: подожди́
+        pl: подожди́те
       future:
         "1sg": подожду́
         "2sg": подождёшь
@@ -16592,6 +17341,7 @@ words:
     usage:
       - ru: Подожди́ меня́ у вхо́да.
         en_gb: Wait for me at the entrance.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я подожду́ ещё пять мину́т.
         en_gb: I will wait another five minutes.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -16635,6 +17385,7 @@ words:
     cefr_level: B1
     accented: подойти́
     aspect: pf
+    pair: "подходить=to approach"
     collections:
       - motion
     en_gb:
@@ -16727,6 +17478,7 @@ words:
     cefr_level: A2
     accented: поду́мать
     aspect: pf
+    pair: "думать=to think"
     en_gb:
       standard: to think (to give something some thought)
     usage:
@@ -16737,6 +17489,7 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Поду́май хороше́нько, пре́жде чем отвеча́ть.
         en_gb: Think carefully before answering.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он поду́мал и согласи́лся.
         en_gb: He thought and agreed.
       - ru: Я бы поду́мал об э́том ещё раз.
@@ -16744,6 +17497,9 @@ words:
       - ru: За́втра я поду́маю над твои́м предложе́нием.
         en_gb: Tomorrow I will think over your proposal.
     conjugation:
+      imperative:
+        sg: поду́май
+        pl: поду́майте
       future:
         "1sg": поду́маю
         "2sg": поду́маешь
@@ -16789,6 +17545,7 @@ words:
     cefr_level: B1
     accented: подходи́ть
     aspect: impf
+    pair: "подойти=to approach"
     collections:
       - motion
     en_gb:
@@ -16853,6 +17610,7 @@ words:
     cefr_level: A2
     accented: пое́хать
     aspect: pf
+    pair: "ехать=to go by transport"
     collections:
       - motion
       - travel
@@ -16860,6 +17618,9 @@ words:
     en_gb:
       standard: to set off by vehicle (to depart by transport)
     conjugation:
+      imperative:
+        sg: поезжа́й
+        pl: поезжа́йте
       future:
         "1sg": пое́ду
         "2sg": пое́дешь
@@ -16887,6 +17648,7 @@ words:
     cefr_level: B1
     accented: пожале́ть
     aspect: pf
+    pair: "жалеть=to feel sorry"
     collections:
       - feelings and sensations
     en_gb:
@@ -16954,6 +17716,7 @@ words:
     cefr_level: A2
     accented: поза́втракать
     aspect: pf
+    pair: "завтракать=to have breakfast"
     en_gb:
       standard: to have breakfast
     collections:
@@ -16964,7 +17727,11 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Поза́втракай пе́ред уро́ками.
         en_gb: Have breakfast before your lessons.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
+      imperative:
+        sg: поза́втракай
+        pl: поза́втракайте
       future:
         "1sg": поза́втракаю
         "2sg": поза́втракаешь
@@ -16980,6 +17747,7 @@ words:
     cefr_level: A2
     accented: позва́ть
     aspect: pf
+    pair: "звать=to call"
     collections:
       - communication
       - daily life
@@ -16988,6 +17756,9 @@ words:
       alt:
         - to invite
     conjugation:
+      imperative:
+        sg: позови́
+        pl: позови́те
       future:
         "1sg": позову́
         "2sg": позовёшь
@@ -17002,6 +17773,7 @@ words:
     usage:
       - ru: Позови́ бра́та к телефо́ну.
         en_gb: Call your brother to the phone.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я позову́ дете́й к столу́.
         en_gb: I will call the children to the table.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -17015,6 +17787,7 @@ words:
     cefr_level: A2
     accented: позво́лить
     aspect: pf
+    pair: "позволять=to allow"
     collections:
       - daily life
       - communication
@@ -17023,6 +17796,9 @@ words:
       alt:
         - to permit
     conjugation:
+      imperative:
+        sg: позво́ль
+        pl: позво́льте
       future:
         "1sg": позво́лю
         "2sg": позво́лишь
@@ -17050,6 +17826,7 @@ words:
     cefr_level: A2
     accented: позволя́ть
     aspect: impf
+    pair: "позволить=to allow"
     collections:
       - daily life
       - communication
@@ -17058,6 +17835,9 @@ words:
       alt:
         - to permit
     conjugation:
+      imperative:
+        sg: позволя́й
+        pl: позволя́йте
       present:
         "1sg": позволя́ю
         "2sg": позволя́ешь
@@ -17085,6 +17865,7 @@ words:
     cefr_level: A1
     accented: позвони́ть
     aspect: pf
+    pair: "звонить=to call"
     collections:
       - communication
       - daily life
@@ -17095,6 +17876,7 @@ words:
     usage:
       - ru: Позвони́ мне ве́чером.
         en_gb: Call me in the evening.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я позвоню́ тебе́ за́втра у́тром.
         en_gb: I will call you tomorrow morning.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -17105,6 +17887,9 @@ words:
       - ru: Ско́ро врач позвони́т с результа́тами.
         en_gb: Soon the doctor will call with the results.
     conjugation:
+      imperative:
+        sg: позвони́
+        pl: позвони́те
       future:
         "1sg": позвоню́
         "2sg": позвони́шь
@@ -17154,6 +17939,9 @@ words:
       alt:
         - to meet
     conjugation:
+      imperative:
+        sg: познако́мься
+        pl: познако́мьтесь
       future:
         "1sg": познако́млюсь
         "2sg": познако́мишься
@@ -17215,6 +18003,7 @@ words:
     cefr_level: B1
     accented: пойма́ть
     aspect: pf
+    pair: "ловить=to catch"
     collections:
       - daily life
       - sport
@@ -17248,6 +18037,7 @@ words:
     cefr_level: A1
     accented: пойти́
     aspect: pf
+    pair: "идти=to go"
     collections:
       - motion
       - daily life
@@ -17256,6 +18046,9 @@ words:
       alt:
         - to set off
     conjugation:
+      imperative:
+        sg: пойди́
+        pl: пойди́те
       future:
         "1sg": пойду́
         "2sg": пойдёшь
@@ -17285,12 +18078,16 @@ words:
     cefr_level: A2
     accented: показа́ть
     aspect: pf
+    pair: "показывать=to show"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to show (to display or demonstrate, on one occasion)
     conjugation:
+      imperative:
+        sg: покажи́
+        pl: покажи́те
       future:
         "1sg": покажу́
         "2sg": пока́жешь
@@ -17310,6 +18107,7 @@ words:
         en_gb: He showed his ticket to the inspector.
       - ru: Покажи́те доро́гу к вокза́лу.
         en_gb: Show the way to the station.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы показа́л тебе́ э́тот го́род.
         en_gb: I would show you this city.
       - ru: Ско́ро гид пока́жет нам музе́й.
@@ -17318,6 +18116,7 @@ words:
     cefr_level: B1
     accented: показа́ться
     aspect: pf
+    pair: "казаться=to seem"
     collections:
       - feelings and sensations
       - daily life
@@ -17353,12 +18152,16 @@ words:
     cefr_level: A2
     accented: пока́зывать
     aspect: impf
+    pair: "показать=to show"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to show (to display or demonstrate, habitually)
     conjugation:
+      imperative:
+        sg: пока́зывай
+        pl: пока́зывайте
       present:
         "1sg": пока́зываю
         "2sg": пока́зываешь
@@ -17523,6 +18326,7 @@ words:
     cefr_level: A2
     accented: покупа́ть
     aspect: impf
+    pair: "купить=to buy"
     collections:
       - shopping
       - finance
@@ -17542,6 +18346,9 @@ words:
       - ru: Без ски́док я бы покупа́л ме́ньше.
         en_gb: Without discounts I would buy less.
     conjugation:
+      imperative:
+        sg: покупа́й
+        pl: покупа́йте
       present:
         "1sg": покупа́ю
         "2sg": покупа́ешь
@@ -17757,6 +18564,7 @@ words:
     cefr_level: A2
     accented: положи́ть
     aspect: pf
+    pair: "класть=to put"
     collections:
       - daily life
       - home
@@ -17765,6 +18573,9 @@ words:
       alt:
         - to lay down
     conjugation:
+      imperative:
+        sg: положи́
+        pl: положи́те
       future:
         "1sg": положу́
         "2sg": поло́жишь
@@ -17779,6 +18590,7 @@ words:
     usage:
       - ru: Положи́ кни́гу на по́лку.
         en_gb: Put the book on the shelf.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я положу́ де́ньги в карма́н.
         en_gb: I will put the money in my pocket.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -17792,6 +18604,7 @@ words:
     cefr_level: A2
     accented: получа́ть
     aspect: impf
+    pair: "получить=to receive"
     collections:
       - daily life
       - work
@@ -17801,6 +18614,9 @@ words:
       alt:
         - to get
     conjugation:
+      imperative:
+        sg: получа́й
+        pl: получа́йте
       present:
         "1sg": получа́ю
         "2sg": получа́ешь
@@ -17828,6 +18644,7 @@ words:
     cefr_level: B1
     accented: получа́ться
     aspect: impf
+    pair: "получиться=to turn out"
     collections:
       - daily life
     en_gb:
@@ -17858,6 +18675,7 @@ words:
     cefr_level: A2
     accented: получи́ть
     aspect: pf
+    pair: "получать=to receive"
     collections:
       - daily life
       - work
@@ -17867,6 +18685,9 @@ words:
       alt:
         - to get
     conjugation:
+      imperative:
+        sg: получи́
+        pl: получи́те
       future:
         "1sg": получу́
         "2sg": полу́чишь
@@ -17894,6 +18715,7 @@ words:
     cefr_level: B1
     accented: получи́ться
     aspect: pf
+    pair: "получаться=to turn out"
     collections:
       - daily life
     en_gb:
@@ -17924,6 +18746,7 @@ words:
     cefr_level: B1
     accented: по́льзоваться
     aspect: impf
+    pair: "воспользоваться=to make use of"
     en_gb:
       standard: to use; to make use of
     usage:
@@ -17954,12 +18777,16 @@ words:
     cefr_level: A2
     accented: полюби́ть
     aspect: pf
+    pair: "любить=to love"
     collections:
       - romance and dating
       - feelings and sensations
     en_gb:
       standard: to come to love (to develop love for someone or something)
     conjugation:
+      imperative:
+        sg: полюби́
+        pl: полюби́те
       future:
         "1sg": полюблю́
         "2sg": полю́бишь
@@ -17987,6 +18814,7 @@ words:
     cefr_level: B1
     accented: помеша́ть
     aspect: pf
+    pair: "мешать=to hinder"
     collections:
       - daily life
     en_gb:
@@ -18038,6 +18866,9 @@ words:
       - ru: Без запи́сей я бы не по́мнил дета́ли.
         en_gb: Without notes I would not remember the details.
     conjugation:
+      imperative:
+        sg: по́мни
+        pl: по́мните
       present:
         "1sg": по́мню
         "2sg": по́мнишь
@@ -18053,6 +18884,7 @@ words:
     cefr_level: A2
     accented: помога́ть
     aspect: impf
+    pair: "помочь=to help"
     collections:
       - daily life
       - people
@@ -18072,6 +18904,9 @@ words:
       - ru: Без вас я бы не помога́л так мно́гим.
         en_gb: Without you I would not help so many people.
     conjugation:
+      imperative:
+        sg: помога́й
+        pl: помога́йте
       present:
         "1sg": помога́ю
         "2sg": помога́ешь
@@ -18119,12 +18954,16 @@ words:
     cefr_level: A2
     accented: помо́чь
     aspect: pf
+    pair: "помогать=to help"
     collections:
       - daily life
       - communication
     en_gb:
       standard: to help (to assist on one occasion)
     conjugation:
+      imperative:
+        sg: помоги́
+        pl: помоги́те
       future:
         "1sg": помогу́
         "2sg": помо́жешь
@@ -18144,6 +18983,7 @@ words:
         en_gb: The neighbour helped us fix the car.
       - ru: Помоги́те мне поднести́ чемода́н.
         en_gb: Help me carry the suitcase.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы помо́г тебе́ с перее́здом.
         en_gb: I would help you with the move.
       - ru: Ско́ро сосе́д помо́жет нам с ремо́нтом.
@@ -18213,6 +19053,7 @@ words:
     cefr_level: A1
     accented: понима́ть
     aspect: impf
+    pair: "понять=to understand"
     collections:
       - daily life
       - school
@@ -18231,6 +19072,9 @@ words:
       - ru: Без слова́ря я бы не понима́л текст.
         en_gb: Without a dictionary I would not understand the text.
     conjugation:
+      imperative:
+        sg: понима́й
+        pl: понима́йте
       present:
         "1sg": понима́ю
         "2sg": понима́ешь
@@ -18246,6 +19090,7 @@ words:
     cefr_level: A2
     accented: понра́виться
     aspect: pf
+    pair: "нравиться=to be liked"
     collections:
       - feelings and sensations
       - daily life
@@ -18281,6 +19126,7 @@ words:
     cefr_level: A1
     accented: поня́ть
     aspect: pf
+    pair: "понимать=to understand"
     collections:
       - school
       - daily life
@@ -18299,6 +19145,9 @@ words:
       - ru: Ско́ро ты поймёшь всю пра́вду.
         en_gb: Soon you will understand the whole truth.
     conjugation:
+      imperative:
+        sg: пойми́
+        pl: пойми́те
       future:
         "1sg": пойму́
         "2sg": поймёшь
@@ -18325,6 +19174,9 @@ words:
       - ru: Мы пообе́дали и пошли́ гуля́ть.
         en_gb: We had lunch and went for a walk.
     conjugation:
+      imperative:
+        sg: пообе́дай
+        pl: пообе́дайте
       future:
         "1sg": пообе́даю
         "2sg": пообе́даешь
@@ -18340,6 +19192,7 @@ words:
     cefr_level: A2
     accented: пообеща́ть
     aspect: pf
+    pair: "обещать=to promise"
     collections:
       - communication
       - daily life
@@ -18358,6 +19211,9 @@ words:
       - ru: Ско́ро он пообеща́ет нам подде́ржку.
         en_gb: Soon he will promise us support.
     conjugation:
+      imperative:
+        sg: пообеща́й
+        pl: пообеща́йте
       future:
         "1sg": пообеща́ю
         "2sg": пообеща́ешь
@@ -18373,6 +19229,7 @@ words:
     cefr_level: B1
     accented: попада́ть
     aspect: impf
+    pair: "попасть=to get into"
     collections:
       - daily life
     en_gb:
@@ -18441,6 +19298,7 @@ words:
     cefr_level: B1
     accented: попа́сть
     aspect: pf
+    pair: "попадать=to get into"
     collections:
       - daily life
     en_gb:
@@ -18545,6 +19403,7 @@ words:
     cefr_level: A2
     accented: попро́бовать
     aspect: pf
+    pair: "пробовать=to try"
     collections:
       - daily life
       - food and drink
@@ -18553,6 +19412,9 @@ words:
       alt:
         - to taste
     conjugation:
+      imperative:
+        sg: попро́буй
+        pl: попро́буйте
       future:
         "1sg": попро́бую
         "2sg": попро́буешь
@@ -18567,6 +19429,7 @@ words:
     usage:
       - ru: Попро́буй э́тот вку́сный суп.
         en_gb: Try this tasty soup.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я попро́бую реши́ть зада́чу сам.
         en_gb: I will try to solve the problem myself.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -18580,6 +19443,7 @@ words:
     cefr_level: A2
     accented: попроси́ть
     aspect: pf
+    pair: "просить=to ask for"
     collections:
       - communication
       - daily life
@@ -18593,11 +19457,15 @@ words:
         en_gb: I will ask him for help.
       - ru: Попроси́ официа́нта принести́ счёт.
         en_gb: Ask the waiter to bring the bill.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы попроси́л тебя́ о небольшо́й услу́ге.
         en_gb: I would ask you for a small favour.
       - ru: Ско́ро она́ попро́сит сове́та у врача́.
         en_gb: Soon she will ask the doctor for advice.
     conjugation:
+      imperative:
+        sg: попроси́
+        pl: попроси́те
       future:
         "1sg": попрошу́
         "2sg": попро́сишь
@@ -18613,6 +19481,7 @@ words:
     cefr_level: B1
     accented: попыта́ться
     aspect: pf
+    pair: "пытаться=to attempt"
     collections:
       - daily life
     en_gb:
@@ -18752,6 +19621,9 @@ words:
     en_gb:
       standard: to sit for a while (to remain seated briefly)
     conjugation:
+      imperative:
+        sg: посиди́
+        pl: посиди́те
       future:
         "1sg": посижу́
         "2sg": поси́дишь
@@ -18779,12 +19651,16 @@ words:
     cefr_level: A2
     accented: посла́ть
     aspect: pf
+    pair: "посылать=to send"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to send (to dispatch, on one occasion)
     conjugation:
+      imperative:
+        sg: пошли́
+        pl: пошли́те
       future:
         "1sg": пошлю́
         "2sg": пошлёшь
@@ -18804,6 +19680,7 @@ words:
         en_gb: She sent the children for bread.
       - ru: Пошли́ ему́ сообще́ние пря́мо сейча́с.
         en_gb: Send him a message right now.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы посла́л ему́ письмо́ сего́дня.
         en_gb: I would send him a letter today.
       - ru: Ско́ро мы пошлём посы́лку ба́бушке.
@@ -18812,6 +19689,7 @@ words:
     cefr_level: B1
     accented: после́довать
     aspect: pf
+    pair: "следовать=to follow"
     collections:
       - daily life
     en_gb:
@@ -18844,12 +19722,16 @@ words:
     cefr_level: A2
     accented: послу́шать
     aspect: pf
+    pair: "слушать=to listen"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to listen to (to hear attentively, on one occasion)
     conjugation:
+      imperative:
+        sg: послу́шай
+        pl: послу́шайте
       future:
         "1sg": послу́шаю
         "2sg": послу́шаешь
@@ -18867,6 +19749,7 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Послу́шай, что я тебе́ скажу́.
         en_gb: Listen to what I am going to tell you.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Они́ послу́шали ле́кцию с интере́сом.
         en_gb: They listened to the lecture with interest.
       - ru: Я бы послу́шал э́ту ле́кцию ещё раз.
@@ -18877,6 +19760,7 @@ words:
     cefr_level: B1
     accented: послы́шаться
     aspect: pf
+    pair: "слышаться=to be heard"
     collections:
       - daily life
     en_gb:
@@ -18905,6 +19789,7 @@ words:
     cefr_level: A2
     accented: посмотре́ть
     aspect: pf
+    pair: "смотреть=to watch"
     collections:
       - daily life
       - the arts
@@ -18913,6 +19798,9 @@ words:
       alt:
         - to watch
     conjugation:
+      imperative:
+        sg: посмотри́
+        pl: посмотри́те
       future:
         "1sg": посмотрю́
         "2sg": посмо́тришь
@@ -18932,6 +19820,7 @@ words:
         en_gb: She looked at the clock and stood up.
       - ru: Посмотри́те напра́во, там музе́й.
         en_gb: Look to the right, there is the museum.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы посмотре́л э́тот фильм с тобо́й.
         en_gb: I would watch this film with you.
       - ru: Ско́ро мы посмо́трим на но́вую вы́ставку.
@@ -18940,6 +19829,7 @@ words:
     cefr_level: B1
     accented: посове́товать
     aspect: pf
+    pair: "советовать=to advise"
     collections:
       - communication
       - daily life
@@ -18973,6 +19863,7 @@ words:
     cefr_level: A2
     accented: поста́вить
     aspect: pf
+    pair: "ставить=to place"
     collections:
       - daily life
       - home
@@ -18982,6 +19873,9 @@ words:
         - to place
         - to set
     conjugation:
+      imperative:
+        sg: поста́вь
+        pl: поста́вьте
       future:
         "1sg": поста́влю
         "2sg": поста́вишь
@@ -18996,6 +19890,7 @@ words:
     usage:
       - ru: Поста́вь ва́зу на стол.
         en_gb: Put the vase on the table.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я поста́влю маши́ну в гара́ж.
         en_gb: I will put the car in the garage.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -19009,6 +19904,7 @@ words:
     cefr_level: B1
     accented: постара́ться
     aspect: pf
+    pair: "стараться=to try hard"
     collections:
       - daily life
     en_gb:
@@ -19067,12 +19963,16 @@ words:
     cefr_level: A2
     accented: постро́ить
     aspect: pf
+    pair: "строить=to build"
     collections:
       - work
       - home
     en_gb:
       standard: to build (to construct, on one occasion)
     conjugation:
+      imperative:
+        sg: постро́й
+        pl: постро́йте
       future:
         "1sg": постро́ю
         "2sg": постро́ишь
@@ -19170,12 +20070,16 @@ words:
     cefr_level: A2
     accented: постуча́ть
     aspect: pf
+    pair: "стучать=to knock"
     collections:
       - daily life
       - home
     en_gb:
       standard: to knock (to tap on a door)
     conjugation:
+      imperative:
+        sg: постучи́
+        pl: постучи́те
       future:
         "1sg": постучу́
         "2sg": посту́чишь
@@ -19195,6 +20099,7 @@ words:
         en_gb: I will knock on the window to wake you.
       - ru: Постучи́те, пре́жде чем войти́.
         en_gb: Knock before you come in.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы постуча́л гро́мче в дверь.
         en_gb: I would knock louder on the door.
       - ru: Ско́ро почтальо́н постучи́т в окно́.
@@ -19203,12 +20108,16 @@ words:
     cefr_level: A2
     accented: посыла́ть
     aspect: impf
+    pair: "послать=to send"
     collections:
       - communication
       - daily life
     en_gb:
       standard: to send (to dispatch, habitually)
     conjugation:
+      imperative:
+        sg: посыла́й
+        pl: посыла́йте
       present:
         "1sg": посыла́ю
         "2sg": посыла́ешь
@@ -19236,11 +20145,15 @@ words:
     cefr_level: A2
     accented: потеря́ть
     aspect: pf
+    pair: "терять=to lose"
     collections:
       - daily life
     en_gb:
       standard: to lose (to misplace or cease to have)
     conjugation:
+      imperative:
+        sg: потеря́й
+        pl: потеря́йте
       future:
         "1sg": потеря́ю
         "2sg": потеря́ешь
@@ -19258,6 +20171,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не потеря́й биле́т на по́езд.
         en_gb: Don't lose your train ticket.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ потеря́ла наде́жду на успе́х.
         en_gb: She lost hope of success.
       - ru: Ско́ро ты поте́ряешь интере́с к э́той игре́.
@@ -19268,6 +20182,7 @@ words:
     cefr_level: B1
     accented: потра́тить
     aspect: pf
+    pair: "тратить=to spend"
     en_gb:
       standard: to spend (money or time)
     collections:
@@ -19294,6 +20209,7 @@ words:
     cefr_level: B1
     accented: потре́бовать
     aspect: pf
+    pair: "требовать=to demand"
     collections:
       - communication
       - work
@@ -19468,12 +20384,16 @@ words:
     cefr_level: A2
     accented: поцелова́ть
     aspect: pf
+    pair: "целовать=to kiss"
     collections:
       - romance and dating
       - family
     en_gb:
       standard: to kiss (to press lips to, on one occasion)
     conjugation:
+      imperative:
+        sg: поцелу́й
+        pl: поцелу́йте
       future:
         "1sg": поцелу́ю
         "2sg": поцелу́ешь
@@ -19527,11 +20447,15 @@ words:
     cefr_level: A2
     accented: почу́вствовать
     aspect: pf
+    pair: "чувствовать=to feel"
     collections:
       - feelings and sensations
     en_gb:
       standard: to feel (to sense an emotion or sensation, on one occasion)
     conjugation:
+      imperative:
+        sg: почу́вствуй
+        pl: почу́вствуйте
       future:
         "1sg": почу́вствую
         "2sg": почу́вствуешь
@@ -19559,6 +20483,7 @@ words:
     cefr_level: A2
     accented: появи́ться
     aspect: pf
+    pair: "появляться=to appear"
     collections:
       - daily life
     en_gb:
@@ -19566,6 +20491,9 @@ words:
       alt:
         - to show up
     conjugation:
+      imperative:
+        sg: появи́сь
+        pl: появи́тесь
       future:
         "1sg": появлю́сь
         "2sg": появи́шься
@@ -19593,11 +20521,15 @@ words:
     cefr_level: A2
     accented: появля́ться
     aspect: impf
+    pair: "появиться=to appear"
     collections:
       - daily life
     en_gb:
       standard: to appear (to show up habitually)
     conjugation:
+      imperative:
+        sg: появля́йся
+        pl: появля́йтесь
       present:
         "1sg": появля́юсь
         "2sg": появля́ешься
@@ -19693,6 +20625,7 @@ words:
     cefr_level: B1
     accented: преврати́ться
     aspect: pf
+    pair: "превращаться=to turn into"
     en_gb:
       standard: to turn into; to become
     conjugation:
@@ -19723,6 +20656,7 @@ words:
     cefr_level: B1
     accented: превраща́ться
     aspect: impf
+    pair: "превратиться=to turn into"
     en_gb:
       standard: to turn into (to become something else)
     conjugation:
@@ -19753,6 +20687,7 @@ words:
     cefr_level: B1
     accented: предлага́ть
     aspect: impf
+    pair: "предложить=to suggest"
     collections:
       - communication
     en_gb:
@@ -19787,6 +20722,7 @@ words:
     cefr_level: B1
     accented: предложи́ть
     aspect: pf
+    pair: "предлагать=to suggest"
     collections:
       - communication
     en_gb:
@@ -19911,6 +20847,7 @@ words:
     cefr_level: B1
     accented: предста́вить
     aspect: pf
+    pair: "представлять=to present"
     collections:
       - communication
       - daily life
@@ -19944,6 +20881,7 @@ words:
     cefr_level: B1
     accented: представля́ть
     aspect: impf
+    pair: "представить=to present"
     collections:
       - communication
       - daily life
@@ -20035,6 +20973,7 @@ words:
     cefr_level: B1
     accented: предупреди́ть
     aspect: pf
+    pair: "предупреждать=to warn"
     en_gb:
       standard: to warn; to let know in advance
     conjugation:
@@ -20065,6 +21004,7 @@ words:
     cefr_level: B1
     accented: предупрежда́ть
     aspect: impf
+    pair: "предупредить=to warn"
     en_gb:
       standard: to warn; to let know in advance
     conjugation:
@@ -20273,6 +21213,7 @@ words:
     cefr_level: B1
     accented: привести́
     aspect: pf
+    pair: "приводить=to bring"
     en_gb:
       standard: to bring (someone on foot); to lead to
     conjugation:
@@ -20303,6 +21244,7 @@ words:
     cefr_level: B1
     accented: приводи́ть
     aspect: impf
+    pair: "привести=to bring"
     en_gb:
       standard: to bring (someone on foot); to lead to
     conjugation:
@@ -20363,6 +21305,7 @@ words:
     cefr_level: A2
     accented: пригласи́ть
     aspect: pf
+    pair: "приглашать=to invite"
     en_gb:
       standard: to invite (someone somewhere)
     usage:
@@ -20378,6 +21321,9 @@ words:
       - ru: Я бы пригласи́л всех, но ме́ста ма́ло.
         en_gb: I would invite everyone, but there is little room.
     conjugation:
+      imperative:
+        sg: пригласи́
+        pl: пригласи́те
       future:
         "1sg": приглашу́
         "2sg": пригласи́шь
@@ -20393,6 +21339,7 @@ words:
     cefr_level: B1
     accented: приглаша́ть
     aspect: impf
+    pair: "пригласить=to invite"
     en_gb:
       standard: to invite (someone somewhere)
     conjugation:
@@ -20423,11 +21370,15 @@ words:
     cefr_level: A2
     accented: пригото́вить
     aspect: pf
+    pair: "готовить=to cook"
     en_gb:
       standard: to prepare; to cook
       alt:
         - to cook
     conjugation:
+      imperative:
+        sg: пригото́вь
+        pl: пригото́вьте
       future:
         "1sg": пригото́влю
         "2sg": пригото́вишь
@@ -20460,6 +21411,9 @@ words:
       alt:
         - to invent
     conjugation:
+      imperative:
+        sg: приду́май
+        pl: приду́майте
       future:
         "1sg": приду́маю
         "2sg": приду́маешь
@@ -20487,6 +21441,7 @@ words:
     cefr_level: A2
     accented: приезжа́ть
     aspect: impf
+    pair: "приехать=to arrive by transport"
     collections:
       - motion
       - travel
@@ -20505,6 +21460,9 @@ words:
       - ru: Он приезжа́л бы ка́ждый год, е́сли бы мог.
         en_gb: He would come every year if he could.
     conjugation:
+      imperative:
+        sg: приезжа́й
+        pl: приезжа́йте
       present:
         "1sg": приезжа́ю
         "2sg": приезжа́ешь
@@ -20520,6 +21478,7 @@ words:
     cefr_level: A2
     accented: прие́хать
     aspect: pf
+    pair: "приезжать=to arrive by transport"
     collections:
       - motion
       - travel
@@ -20538,6 +21497,9 @@ words:
       - ru: Она́ бы прие́хала, но нет биле́тов.
         en_gb: She would come, but there are no tickets.
     conjugation:
+      imperative:
+        sg: приезжа́й
+        pl: приезжа́йте
       future:
         "1sg": прие́ду
         "2sg": прие́дешь
@@ -20648,6 +21610,7 @@ words:
     cefr_level: A2
     accented: прийти́
     aspect: pf
+    pair: "приходить=to come"
     collections:
       - motion
       - daily life
@@ -20666,6 +21629,9 @@ words:
       - ru: Он бы пришёл, е́сли бы его́ позва́ли.
         en_gb: He would come if he were invited.
     conjugation:
+      imperative:
+        sg: приди́
+        pl: приди́те
       future:
         "1sg": приду́
         "2sg": придёшь
@@ -20681,6 +21647,7 @@ words:
     cefr_level: B1
     accented: прийти́сь
     aspect: pf
+    pair: "приходиться=to have to"
     collections:
       - daily life
     en_gb:
@@ -20801,6 +21768,7 @@ words:
     cefr_level: B1
     accented: примени́ть
     aspect: pf
+    pair: "применять=to apply"
     en_gb:
       standard: to apply (to put to use)
     conjugation:
@@ -20831,6 +21799,7 @@ words:
     cefr_level: B1
     accented: применя́ть
     aspect: impf
+    pair: "применить=to apply"
     en_gb:
       standard: to apply (to put to use)
     conjugation:
@@ -20891,12 +21860,16 @@ words:
     cefr_level: A2
     accented: принести́
     aspect: pf
+    pair: "приносить=to bring"
     collections:
       - motion
       - daily life
     en_gb:
       standard: to bring (to carry here, on one occasion)
     conjugation:
+      imperative:
+        sg: принеси́
+        pl: принеси́те
       future:
         "1sg": принесу́
         "2sg": принесёшь
@@ -20911,6 +21884,7 @@ words:
     usage:
       - ru: Принеси́ мне стака́н воды́.
         en_gb: Bring me a glass of water.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я принесу́ кни́гу за́втра.
         en_gb: I will bring the book tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -20924,6 +21898,7 @@ words:
     cefr_level: B1
     accented: принима́ть
     aspect: impf
+    pair: "принять=to accept"
     collections:
       - daily life
       - communication
@@ -20957,6 +21932,7 @@ words:
     cefr_level: B1
     accented: приноси́ть
     aspect: impf
+    pair: "принести=to bring"
     en_gb:
       standard: to bring (on foot)
     conjugation:
@@ -20987,6 +21963,7 @@ words:
     cefr_level: B1
     accented: приня́ть
     aspect: pf
+    pair: "принимать=to accept"
     collections:
       - daily life
       - communication
@@ -21170,6 +22147,7 @@ words:
     cefr_level: A2
     accented: приходи́ть
     aspect: impf
+    pair: "прийти=to come"
     collections:
       - motion
       - daily life
@@ -21188,6 +22166,9 @@ words:
       - ru: Он приходи́л бы ча́ще, е́сли бы жил бли́же.
         en_gb: He would come more often if he lived closer.
     conjugation:
+      imperative:
+        sg: приходи́
+        pl: приходи́те
       present:
         "1sg": прихожу́
         "2sg": прихо́дишь
@@ -21203,6 +22184,7 @@ words:
     cefr_level: B1
     accented: приходи́ться
     aspect: impf
+    pair: "прийтись=to have to"
     collections:
       - daily life
     en_gb:
@@ -21231,6 +22213,7 @@ words:
     cefr_level: B2
     accented: пришива́ть
     aspect: impf
+    pair: "пришить=to sew on"
     collections:
       - clothes
       - clothing
@@ -21261,6 +22244,7 @@ words:
     cefr_level: B2
     accented: приши́ть
     aspect: pf
+    pair: "пришивать=to sew on"
     collections:
       - clothes
       - clothing
@@ -21321,6 +22305,7 @@ words:
     cefr_level: A2
     accented: про́бовать
     aspect: impf
+    pair: "попробовать=to try"
     en_gb:
       standard: to try; to taste
       alt:
@@ -21338,6 +22323,9 @@ words:
       - ru: Я бы про́бовал ещё раз, е́сли бы не уста́л.
         en_gb: I would try again if I were not tired.
     conjugation:
+      imperative:
+        sg: про́буй
+        pl: про́буйте
       present:
         "1sg": про́бую
         "2sg": про́буешь
@@ -21353,6 +22341,7 @@ words:
     cefr_level: B2
     accented: пробормота́ть
     aspect: pf
+    pair: "бормотать=to mutter"
     en_gb:
       standard: to mutter (to say in a low, unclear voice)
     conjugation:
@@ -21383,6 +22372,7 @@ words:
     cefr_level: B1
     accented: прове́рить
     aspect: pf
+    pair: "проверять=to check"
     collections:
       - work
       - study
@@ -21419,6 +22409,7 @@ words:
     cefr_level: B1
     accented: проверя́ть
     aspect: impf
+    pair: "проверить=to check"
     en_gb:
       standard: to check; to test
     conjugation:
@@ -21575,6 +22566,7 @@ words:
     cefr_level: A2
     accented: продава́ть
     aspect: impf
+    pair: "продать=to sell"
     collections:
       - shopping
       - finance
@@ -21594,6 +22586,9 @@ words:
       - ru: Я продава́л бы деше́вле, е́сли бы спро́с был ме́ньше.
         en_gb: I would sell cheaper if demand were lower.
     conjugation:
+      imperative:
+        sg: продава́й
+        pl: продава́йте
       present:
         "1sg": продаю́
         "2sg": продаёшь
@@ -21635,6 +22630,7 @@ words:
     cefr_level: A2
     accented: прода́ть
     aspect: pf
+    pair: "продавать=to sell"
     en_gb:
       standard: to sell (something to someone)
     usage:
@@ -21650,6 +22646,9 @@ words:
       - ru: Он бы про́дал дом доро́же.
         en_gb: He would sell the house for more.
     conjugation:
+      imperative:
+        sg: прода́й
+        pl: прода́йте
       future:
         "1sg": прода́м
         "2sg": прода́шь
@@ -21665,11 +22664,15 @@ words:
     cefr_level: A2
     accented: продолжа́ть
     aspect: impf
+    pair: "продолжить=to continue"
     collections:
       - daily life
     en_gb:
       standard: to continue (to carry on)
     conjugation:
+      imperative:
+        sg: продолжа́й
+        pl: продолжа́йте
       present:
         "1sg": продолжа́ю
         "2sg": продолжа́ешь
@@ -21732,13 +22735,17 @@ words:
     cefr_level: A2
     accented: продо́лжить
     aspect: pf
+    pair: "продолжать=to continue"
     collections:
       - daily life
     en_gb:
       standard: to continue (to carry on, on one occasion)
     conjugation:
+      imperative:
+        sg: продо́лжи
+        pl: продо́лжите
       future:
-        "1sg": продолжу́
+        "1sg": продо́лжу
         "2sg": продо́лжишь
         "3sg": продо́лжит
         "1pl": продо́лжим
@@ -21846,6 +22853,7 @@ words:
     cefr_level: B2
     accented: произвести́
     aspect: pf
+    pair: "производить=to produce"
     en_gb:
       standard: to produce (to make or carry out)
     conjugation:
@@ -21876,6 +22884,7 @@ words:
     cefr_level: B1
     accented: производи́ть
     aspect: impf
+    pair: "произвести=to produce"
     en_gb:
       standard: to produce; to manufacture
     conjugation:
@@ -21906,6 +22915,7 @@ words:
     cefr_level: B1
     accented: произнести́
     aspect: pf
+    pair: "произносить=to pronounce"
     en_gb:
       standard: to pronounce; to utter
     conjugation:
@@ -21936,6 +22946,7 @@ words:
     cefr_level: B1
     accented: произноси́ть
     aspect: impf
+    pair: "произнести=to pronounce"
     en_gb:
       standard: to pronounce; to utter
     conjugation:
@@ -21966,6 +22977,7 @@ words:
     cefr_level: B1
     accented: произойти́
     aspect: pf
+    pair: "происходить=to happen"
     collections:
       - daily life
     en_gb:
@@ -21998,6 +23010,7 @@ words:
     cefr_level: B1
     accented: происходи́ть
     aspect: impf
+    pair: "произойти=to happen"
     collections:
       - daily life
     en_gb:
@@ -22030,6 +23043,7 @@ words:
     cefr_level: B1
     accented: пройти́
     aspect: pf
+    pair: "проходить=to pass"
     collections:
       - movement
       - travel
@@ -22155,6 +23169,7 @@ words:
     cefr_level: A2
     accented: проси́ть
     aspect: impf
+    pair: "попросить=to ask for"
     collections:
       - communication
       - daily life
@@ -22173,6 +23188,9 @@ words:
       - ru: Я бы проси́л о бо́льшем, но не сме́ю.
         en_gb: I would ask for more, but I dare not.
     conjugation:
+      imperative:
+        sg: проси́
+        pl: проси́те
       present:
         "1sg": прошу́
         "2sg": про́сишь
@@ -22203,6 +23221,9 @@ words:
       - ru: Я бы просну́лся ра́ньше без шу́ма.
         en_gb: I would wake up earlier without the noise.
     conjugation:
+      imperative:
+        sg: просни́сь
+        pl: просни́тесь
       future:
         "1sg": просну́сь
         "2sg": проснёшься
@@ -22244,6 +23265,7 @@ words:
     cefr_level: B1
     accented: прости́ть
     aspect: pf
+    pair: "прощать=to forgive"
     collections:
       - feelings and sensations
       - daily life
@@ -22307,6 +23329,7 @@ words:
     cefr_level: B1
     accented: проходи́ть
     aspect: impf
+    pair: "пройти=to pass"
     collections:
       - movement
       - travel
@@ -22342,6 +23365,7 @@ words:
     cefr_level: A1
     accented: прочита́ть
     aspect: pf
+    pair: "читать=to read"
     collections:
       - reading
       - school
@@ -22360,6 +23384,9 @@ words:
       - ru: Я бы прочита́л э́ту кни́гу за ночь.
         en_gb: I would read this book in one night.
     conjugation:
+      imperative:
+        sg: прочита́й
+        pl: прочита́йте
       future:
         "1sg": прочита́ю
         "2sg": прочита́ешь
@@ -22375,6 +23402,7 @@ words:
     cefr_level: B2
     accented: прошепта́ть
     aspect: pf
+    pair: "шептать=to whisper"
     en_gb:
       standard: to whisper (to speak very softly)
     conjugation:
@@ -22405,6 +23433,7 @@ words:
     cefr_level: B1
     accented: проща́ть
     aspect: impf
+    pair: "простить=to forgive"
     collections:
       - feelings and sensations
       - daily life
@@ -22485,6 +23514,9 @@ words:
       - ru: Я бы пры́гал вы́ше с трениро́вкой.
         en_gb: I would jump higher with training.
     conjugation:
+      imperative:
+        sg: пры́гай
+        pl: пры́гайте
       present:
         "1sg": пры́гаю
         "2sg": пры́гаешь
@@ -22500,6 +23532,7 @@ words:
     cefr_level: B1
     accented: пря́тать
     aspect: impf
+    pair: "спрятать=to hide"
     collections:
       - daily life
     en_gb:
@@ -22562,6 +23595,7 @@ words:
     cefr_level: B1
     accented: пуска́ть
     aspect: impf
+    pair: "пустить=to let"
     en_gb:
       standard: to let (to allow or release)
     conjugation:
@@ -22592,6 +23626,7 @@ words:
     cefr_level: B1
     accented: пусти́ть
     aspect: pf
+    pair: "пускать=to let"
     en_gb:
       standard: to let (to allow or release)
     conjugation:
@@ -22641,6 +23676,9 @@ words:
       - ru: Я путеше́ствовал бы бо́льше, е́сли бы бы́ли де́ньги.
         en_gb: I would travel more if I had money.
     conjugation:
+      imperative:
+        sg: путеше́ствуй
+        pl: путеше́ствуйте
       present:
         "1sg": путеше́ствую
         "2sg": путеше́ствуешь
@@ -22656,6 +23694,7 @@ words:
     cefr_level: B1
     accented: пыта́ться
     aspect: impf
+    pair: "попытаться=to attempt"
     collections:
       - feelings and sensations
       - daily life
@@ -22709,6 +23748,9 @@ words:
       - ru: Я рабо́тал бы ме́ньше, е́сли бы мог.
         en_gb: I would work less if I could.
     conjugation:
+      imperative:
+        sg: рабо́тай
+        pl: рабо́тайте
       present:
         "1sg": рабо́таю
         "2sg": рабо́таешь
@@ -22724,6 +23766,7 @@ words:
     cefr_level: A2
     accented: ра́доваться
     aspect: impf
+    pair: "обрадоваться=to be glad"
     collections:
       - feelings and sensations
     en_gb:
@@ -22743,6 +23786,9 @@ words:
       - ru: Я ра́довался бы бо́льше без забо́т.
         en_gb: I would be gladder without worries.
     conjugation:
+      imperative:
+        sg: ра́дуйся
+        pl: ра́дуйтесь
       present:
         "1sg": ра́дуюсь
         "2sg": ра́дуешься
@@ -22795,6 +23841,9 @@ words:
     en_gb:
       standard: to wake (someone) up
     conjugation:
+      imperative:
+        sg: разбуди́
+        pl: разбуди́те
       future:
         "1sg": разбужу́
         "2sg": разбу́дишь
@@ -22809,6 +23858,7 @@ words:
     usage:
       - ru: Разбуди́ меня́ в шесть утра́.
         en_gb: Wake me up at six in the morning.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Шум разбуди́л ребёнка.
         en_gb: The noise woke the child.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -22988,6 +24038,9 @@ words:
     en_gb:
       standard: to talk (to converse)
     conjugation:
+      imperative:
+        sg: разгова́ривай
+        pl: разгова́ривайте
       present:
         "1sg": разгова́риваю
         "2sg": разгова́риваешь
@@ -23047,6 +24100,7 @@ words:
     cefr_level: B1
     accented: раздева́ться
     aspect: impf
+    pair: "раздеться=to get undressed"
     collections:
       - clothes
       - clothing
@@ -23129,6 +24183,7 @@ words:
     cefr_level: B1
     accented: разде́ться
     aspect: pf
+    pair: "раздеваться=to get undressed"
     collections:
       - clothes
       - clothing
@@ -23288,6 +24343,7 @@ words:
     cefr_level: B1
     accented: разреша́ть
     aspect: impf
+    pair: "разрешить=to allow"
     collections:
       - the law
       - daily life
@@ -23323,11 +24379,15 @@ words:
     cefr_level: A2
     accented: разреши́ть
     aspect: pf
+    pair: "разрешать=to allow"
     collections:
       - daily life
     en_gb:
       standard: to allow (to permit; to solve)
     conjugation:
+      imperative:
+        sg: разреши́
+        pl: разреши́те
       future:
         "1sg": разрешу́
         "2sg": разреши́шь
@@ -23342,6 +24402,7 @@ words:
     usage:
       - ru: Разреши́те мне войти́.
         en_gb: Allow me to come in.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я разрешу́ тебе́ оста́ться.
         en_gb: I will allow you to stay.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -23484,6 +24545,7 @@ words:
     cefr_level: A2
     accented: рассказа́ть
     aspect: pf
+    pair: "рассказывать=to tell"
     collections:
       - communication
     en_gb:
@@ -23494,6 +24556,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Расскажи́ мне о свое́й семье́.
         en_gb: Tell me about your family.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я расскажу́ интере́сную исто́рию.
         en_gb: I will tell an interesting story.
       - ru: За́втра я расскажу́ тебе́ всю исто́рию.
@@ -23501,6 +24564,9 @@ words:
       - ru: Он бы рассказа́л пра́вду, е́сли бы спроси́ли.
         en_gb: He would tell the truth if asked.
     conjugation:
+      imperative:
+        sg: расскажи́
+        pl: расскажи́те
       future:
         "1sg": расскажу́
         "2sg": расска́жешь
@@ -23516,6 +24582,7 @@ words:
     cefr_level: A2
     accented: расска́зывать
     aspect: impf
+    pair: "рассказать=to tell"
     collections:
       - communication
     en_gb:
@@ -23533,6 +24600,9 @@ words:
       - ru: Он расска́зывал бы о войне́ ре́же, е́сли бы мог забы́ть.
         en_gb: He would tell about the war less often if he could forget.
     conjugation:
+      imperative:
+        sg: расска́зывай
+        pl: расска́зывайте
       present:
         "1sg": расска́зываю
         "2sg": расска́зываешь
@@ -23644,6 +24714,7 @@ words:
     cefr_level: B1
     accented: расстёгивать
     aspect: impf
+    pair: "расстегнуть=to unfasten"
     collections:
       - clothes
       - clothing
@@ -23676,6 +24747,7 @@ words:
     cefr_level: B1
     accented: расстегну́ть
     aspect: pf
+    pair: "расстёгивать=to unfasten"
     collections:
       - clothes
       - clothing
@@ -23867,6 +24939,7 @@ words:
     cefr_level: B1
     accented: расти́
     aspect: impf
+    pair: "вырасти=to grow up"
     collections:
       - in the garden
       - nature
@@ -23998,6 +25071,7 @@ words:
     cefr_level: A2
     accented: реша́ть
     aspect: impf
+    pair: "решить=to decide"
     collections:
       - daily life
     en_gb:
@@ -24017,6 +25091,9 @@ words:
       - ru: На твоём ме́сте я бы реша́л сам.
         en_gb: In your place I would decide for myself.
     conjugation:
+      imperative:
+        sg: реша́й
+        pl: реша́йте
       present:
         "1sg": реша́ю
         "2sg": реша́ешь
@@ -24032,6 +25109,7 @@ words:
     cefr_level: B1
     accented: реша́ться
     aspect: impf
+    pair: "решиться=to make up one's mind"
     collections:
       - daily life
     en_gb:
@@ -24064,6 +25142,7 @@ words:
     cefr_level: A2
     accented: реши́ть
     aspect: pf
+    pair: "решать=to decide"
     collections:
       - daily life
     en_gb:
@@ -24083,6 +25162,9 @@ words:
       - ru: Я бы реши́л э́ту зада́чу по-друго́му.
         en_gb: I would solve this problem differently.
     conjugation:
+      imperative:
+        sg: реши́
+        pl: реши́те
       future:
         "1sg": решу́
         "2sg": реши́шь
@@ -24098,6 +25180,7 @@ words:
     cefr_level: B1
     accented: реши́ться
     aspect: pf
+    pair: "решаться=to decide"
     collections:
       - daily life
     en_gb:
@@ -24162,6 +25245,7 @@ words:
     cefr_level: A2
     accented: рисова́ть
     aspect: impf
+    pair: "нарисовать=to draw"
     collections:
       - the arts
       - hobbies and pastimes
@@ -24181,6 +25265,9 @@ words:
       - ru: Я бы рисова́л ка́ждый день, бу́дь у меня́ вре́мя.
         en_gb: I would draw every day if I had the time.
     conjugation:
+      imperative:
+        sg: рису́й
+        pl: рису́йте
       present:
         "1sg": рису́ю
         "2sg": рису́ешь
@@ -24325,6 +25412,7 @@ words:
     cefr_level: A2
     accented: сади́ться
     aspect: impf
+    pair: "сесть=to sit down"
     collections:
       - motion
       - daily life
@@ -24336,6 +25424,7 @@ words:
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Сади́сь, пожа́луйста.
         en_gb: Please sit down.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Мы сади́мся за стол.
         en_gb: We are sitting down at the table.
       - ru: Ра́ньше он сади́лся всегда́ у окна́.
@@ -24343,6 +25432,9 @@ words:
       - ru: За́втра я бу́ду сади́ться в пе́рвый ваго́н.
         en_gb: Tomorrow I will be getting on in the first carriage.
     conjugation:
+      imperative:
+        sg: сади́сь
+        pl: сади́тесь
       present:
         "1sg": сажу́сь
         "2sg": сади́шься
@@ -24487,6 +25579,7 @@ words:
     cefr_level: B1
     accented: свари́ть
     aspect: pf
+    pair: "варить=to boil"
     en_gb:
       standard: to boil (to cook in water)
     collections:
@@ -24577,6 +25670,7 @@ words:
     cefr_level: B1
     accented: сдава́ть
     aspect: impf
+    pair: "сдать=to hand in"
     en_gb:
       standard: to hand in (to submit; to sit an exam)
     collections:
@@ -24603,12 +25697,16 @@ words:
     cefr_level: A2
     accented: сдать
     aspect: pf
+    pair: "сдавать=to hand in"
     collections:
       - school
       - daily life
     en_gb:
       standard: to hand in (to pass an exam; to surrender)
     conjugation:
+      imperative:
+        sg: сдай
+        pl: сда́йте
       future:
         "1sg": сдам
         "2sg": сдашь
@@ -24636,6 +25734,7 @@ words:
     cefr_level: A1
     accented: сде́лать
     aspect: pf
+    pair: "делать=to do"
     collections:
       - daily life
     en_gb:
@@ -24655,6 +25754,9 @@ words:
       - ru: Е́сли бы вре́мя бы́ло, я бы всё сде́лал.
         en_gb: If there were time, I would do everything.
     conjugation:
+      imperative:
+        sg: сде́лай
+        pl: сде́лайте
       future:
         "1sg": сде́лаю
         "2sg": сде́лаешь
@@ -24670,6 +25772,7 @@ words:
     cefr_level: B1
     accented: сде́латься
     aspect: pf
+    pair: "делаться=to become"
     collections:
       - daily life
     en_gb:
@@ -24702,6 +25805,7 @@ words:
     cefr_level: A2
     accented: сесть
     aspect: pf
+    pair: "садиться=to sit down"
     collections:
       - motion
       - daily life
@@ -24720,6 +25824,9 @@ words:
       - ru: Без би́лета он бы не сел в по́езд.
         en_gb: Without a ticket he would not get on the train.
     conjugation:
+      imperative:
+        sg: сядь
+        pl: ся́дьте
       future:
         "1sg": ся́ду
         "2sg": ся́дешь
@@ -24772,6 +25879,9 @@ words:
     en_gb:
       standard: to sit (to be seated)
     conjugation:
+      imperative:
+        sg: сиди́
+        pl: сиди́те
       present:
         "1sg": сижу́
         "2sg": сиди́шь
@@ -24831,6 +25941,7 @@ words:
     cefr_level: A1
     accented: сказа́ть
     aspect: pf
+    pair: "говорить=to speak"
     collections:
       - communication
     en_gb:
@@ -24843,11 +25954,17 @@ words:
         en_gb: I will tell you one secret.
       - ru: Что ты ска́жешь учи́телю?
         en_gb: What will you say to the teacher?
+      - ru: Скажи́те, пожа́луйста, где вокза́л?
+        en_gb: Tell me please, where is the station?
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: На твоём ме́сте я бы сказа́л пра́вду.
         en_gb: In your place I would tell the truth.
       - ru: Е́сли бы я знал, я бы сказа́л ра́ньше.
         en_gb: If I had known, I would have said so earlier.
     conjugation:
+      imperative:
+        sg: скажи́
+        pl: скажи́те
       future:
         "1sg": скажу́
         "2sg": ска́жешь
@@ -25043,6 +26160,7 @@ words:
     cefr_level: B1
     accented: сле́довать
     aspect: impf
+    pair: "последовать=to follow"
     collections:
       - daily life
     en_gb:
@@ -25139,11 +26257,15 @@ words:
     cefr_level: A2
     accented: слома́ть
     aspect: pf
+    pair: "ломать=to break"
     collections:
       - daily life
     en_gb:
       standard: to break (to smash)
     conjugation:
+      imperative:
+        sg: слома́й
+        pl: слома́йте
       future:
         "1sg": слома́ю
         "2sg": слома́ешь
@@ -25177,6 +26299,9 @@ words:
     en_gb:
       standard: to serve (to work)
     conjugation:
+      imperative:
+        sg: служи́
+        pl: служи́те
       present:
         "1sg": служу́
         "2sg": слу́жишь
@@ -25204,6 +26329,7 @@ words:
     cefr_level: A2
     accented: случа́ться
     aspect: impf
+    pair: "случиться=to happen"
     collections:
       - daily life
     en_gb:
@@ -25236,6 +26362,7 @@ words:
     cefr_level: A2
     accented: случи́ться
     aspect: pf
+    pair: "случаться=to happen"
     collections:
       - daily life
     en_gb:
@@ -25268,6 +26395,7 @@ words:
     cefr_level: A1
     accented: слу́шать
     aspect: impf
+    pair: "послушать=to listen to"
     collections:
       - the arts
       - hobbies and pastimes
@@ -25287,6 +26415,9 @@ words:
       - ru: Я бы слу́шал э́ту му́зыку часа́ми.
         en_gb: I would listen to this music for hours.
     conjugation:
+      imperative:
+        sg: слу́шай
+        pl: слу́шайте
       present:
         "1sg": слу́шаю
         "2sg": слу́шаешь
@@ -25334,6 +26465,7 @@ words:
     cefr_level: A1
     accented: слы́шать
     aspect: impf
+    pair: "услышать=to hear"
     collections:
       - daily life
     en_gb:
@@ -25369,6 +26501,7 @@ words:
     cefr_level: B1
     accented: слы́шаться
     aspect: impf
+    pair: "послышаться=to be heard"
     collections:
       - daily life
     en_gb:
@@ -25482,6 +26615,9 @@ words:
       - ru: Я бы смея́лся, но бы́ло не до сме́ха.
         en_gb: I would laugh, but it was no laughing matter.
     conjugation:
+      imperative:
+        sg: сме́йся
+        pl: сме́йтесь
       present:
         "1sg": смею́сь
         "2sg": смеёшься
@@ -25497,6 +26633,7 @@ words:
     cefr_level: A1
     accented: смотре́ть
     aspect: impf
+    pair: "посмотреть=to look"
     collections:
       - the arts
       - hobbies and pastimes
@@ -25518,6 +26655,9 @@ words:
       - ru: Ве́чером я бу́ду смотре́ть но́вости.
         en_gb: In the evening I will be watching the news.
     conjugation:
+      imperative:
+        sg: смотри́
+        pl: смотри́те
       present:
         "1sg": смотрю́
         "2sg": смо́тришь
@@ -25533,6 +26673,7 @@ words:
     cefr_level: A2
     accented: смочь
     aspect: pf
+    pair: "мочь=to be able"
     collections:
       - daily life
     en_gb:
@@ -25591,12 +26732,16 @@ words:
     cefr_level: A2
     accented: снима́ть
     aspect: impf
+    pair: "снять=to take off"
     collections:
       - daily life
       - clothes
     en_gb:
       standard: to take off (to remove; to film)
     conjugation:
+      imperative:
+        sg: снима́й
+        pl: снима́йте
       present:
         "1sg": снима́ю
         "2sg": снима́ешь
@@ -25624,12 +26769,16 @@ words:
     cefr_level: A2
     accented: снять
     aspect: pf
+    pair: "снимать=to take off"
     collections:
       - daily life
       - clothes
     en_gb:
       standard: to take off (to remove; to film)
     conjugation:
+      imperative:
+        sg: сними́
+        pl: сними́те
       future:
         "1sg": сниму́
         "2sg": сни́мешь
@@ -25657,6 +26806,7 @@ words:
     cefr_level: A2
     accented: собира́ть
     aspect: impf
+    pair: "собрать=to collect"
     collections:
       - hobbies and pastimes
       - in the garden
@@ -25678,6 +26828,9 @@ words:
       - ru: Я бы собира́л ста́рые моне́ты.
         en_gb: I would collect old coins.
     conjugation:
+      imperative:
+        sg: собира́й
+        pl: собира́йте
       present:
         "1sg": собира́ю
         "2sg": собира́ешь
@@ -25693,11 +26846,15 @@ words:
     cefr_level: A2
     accented: собира́ться
     aspect: impf
+    pair: "собраться=to gather"
     collections:
       - daily life
     en_gb:
       standard: to gather (to be going to; to get ready)
     conjugation:
+      imperative:
+        sg: собира́йся
+        pl: собира́йтесь
       present:
         "1sg": собира́юсь
         "2sg": собира́ешься
@@ -25725,11 +26882,15 @@ words:
     cefr_level: A2
     accented: собра́ть
     aspect: pf
+    pair: "собирать=to collect"
     collections:
       - daily life
     en_gb:
       standard: to collect (to gather; to assemble)
     conjugation:
+      imperative:
+        sg: собери́
+        pl: собери́те
       future:
         "1sg": соберу́
         "2sg": соберёшь
@@ -25757,6 +26918,7 @@ words:
     cefr_level: B1
     accented: собра́ться
     aspect: pf
+    pair: "собираться=to gather"
     collections:
       - daily life
     en_gb:
@@ -25789,6 +26951,7 @@ words:
     cefr_level: B1
     accented: соверша́ть
     aspect: impf
+    pair: "совершить=to commit"
     collections:
       - daily life
     en_gb:
@@ -25821,6 +26984,7 @@ words:
     cefr_level: B1
     accented: соверши́ть
     aspect: pf
+    pair: "совершать=to commit"
     collections:
       - daily life
     en_gb:
@@ -25853,6 +27017,7 @@ words:
     cefr_level: B1
     accented: сове́товать
     aspect: impf
+    pair: "посоветовать=to advise"
     collections:
       - communication
     en_gb:
@@ -25885,6 +27050,7 @@ words:
     cefr_level: B1
     accented: согласи́ться
     aspect: pf
+    pair: "соглашаться=to agree"
     collections:
       - communication
     en_gb:
@@ -25917,6 +27083,7 @@ words:
     cefr_level: B1
     accented: соглаша́ться
     aspect: impf
+    pair: "согласиться=to agree"
     collections:
       - communication
     en_gb:
@@ -26206,6 +27373,7 @@ words:
     cefr_level: B1
     accented: сообща́ть
     aspect: impf
+    pair: "сообщить=to inform"
     collections:
       - communication
     en_gb:
@@ -26240,6 +27408,7 @@ words:
     cefr_level: B1
     accented: сообщи́ть
     aspect: pf
+    pair: "сообщать=to inform"
     collections:
       - communication
     en_gb:
@@ -26400,6 +27569,7 @@ words:
     cefr_level: B1
     accented: соста́вить
     aspect: pf
+    pair: "составлять=to compile"
     collections:
       - daily life
     en_gb:
@@ -26432,6 +27602,7 @@ words:
     cefr_level: B1
     accented: составля́ть
     aspect: impf
+    pair: "составить=to compile"
     collections:
       - daily life
     en_gb:
@@ -26528,6 +27699,7 @@ words:
     cefr_level: B1
     accented: сохрани́ть
     aspect: pf
+    pair: "хранить=to keep"
     collections:
       - daily life
     en_gb:
@@ -26592,12 +27764,16 @@ words:
     cefr_level: A2
     accented: спаса́ть
     aspect: impf
+    pair: "спасти=to save"
     collections:
       - daily life
       - sickness and health
     en_gb:
       standard: to save (to rescue)
     conjugation:
+      imperative:
+        sg: спаса́й
+        pl: спаса́йте
       present:
         "1sg": спаса́ю
         "2sg": спаса́ешь
@@ -26625,12 +27801,16 @@ words:
     cefr_level: A2
     accented: спасти́
     aspect: pf
+    pair: "спасать=to save"
     collections:
       - daily life
       - sickness and health
     en_gb:
       standard: to save (to rescue)
     conjugation:
+      imperative:
+        sg: спаси́
+        pl: спаси́те
       future:
         "1sg": спасу́
         "2sg": спасёшь
@@ -26676,6 +27856,9 @@ words:
       - ru: Без шу́ма я бы спал кре́пче.
         en_gb: Without the noise I would sleep more soundly.
     conjugation:
+      imperative:
+        sg: спи
+        pl: спи́те
       present:
         "1sg": сплю
         "2sg": спишь
@@ -26696,6 +27879,9 @@ words:
     en_gb:
       standard: to hurry (to rush)
     conjugation:
+      imperative:
+        sg: спеши́
+        pl: спеши́те
       present:
         "1sg": спешу́
         "2sg": спеши́шь
@@ -26819,6 +28005,7 @@ words:
     cefr_level: A1
     accented: спра́шивать
     aspect: impf
+    pair: "спросить=to ask"
     collections:
       - communication
       - school
@@ -26837,6 +28024,9 @@ words:
       - ru: Любопы́тный ребёнок спра́шивал бы без конца́.
         en_gb: A curious child would ask endlessly.
     conjugation:
+      imperative:
+        sg: спра́шивай
+        pl: спра́шивайте
       present:
         "1sg": спра́шиваю
         "2sg": спра́шиваешь
@@ -26852,6 +28042,7 @@ words:
     cefr_level: A1
     accented: спроси́ть
     aspect: pf
+    pair: "спрашивать=to ask"
     collections:
       - communication
       - school
@@ -26865,11 +28056,15 @@ words:
         en_gb: I will ask the teacher about the lesson.
       - ru: Спроси́ его́ о вре́мени.
         en_gb: Ask him about the time.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра я спрошу́ учи́теля об уро́ке.
         en_gb: Tomorrow I will ask the teacher about the lesson.
       - ru: На твоём ме́сте я бы спроси́л пря́мо.
         en_gb: In your place I would ask directly.
     conjugation:
+      imperative:
+        sg: спроси́
+        pl: спроси́те
       future:
         "1sg": спрошу́
         "2sg": спро́сишь
@@ -26885,11 +28080,15 @@ words:
     cefr_level: A2
     accented: спря́тать
     aspect: pf
+    pair: "прятать=to hide"
     collections:
       - daily life
     en_gb:
       standard: to hide (to conceal)
     conjugation:
+      imperative:
+        sg: спрячь
+        pl: спря́чьте
       future:
         "1sg": спря́чу
         "2sg": спря́чешь
@@ -26917,12 +28116,16 @@ words:
     cefr_level: A2
     accented: спуска́ться
     aspect: impf
+    pair: "спуститься=to descend"
     collections:
       - motion
       - daily life
     en_gb:
       standard: to descend (to go down)
     conjugation:
+      imperative:
+        sg: спуска́йся
+        pl: спуска́йтесь
       present:
         "1sg": спуска́юсь
         "2sg": спуска́ешься
@@ -26950,12 +28153,16 @@ words:
     cefr_level: A2
     accented: спусти́ться
     aspect: pf
+    pair: "спускаться=to descend"
     collections:
       - motion
       - daily life
     en_gb:
       standard: to descend (to go down)
     conjugation:
+      imperative:
+        sg: спусти́сь
+        pl: спусти́тесь
       future:
         "1sg": спущу́сь
         "2sg": спусти́шься
@@ -27009,11 +28216,15 @@ words:
     cefr_level: A2
     accented: ста́вить
     aspect: impf
+    pair: "поставить=to put"
     collections:
       - daily life
     en_gb:
       standard: to place (to put upright)
     conjugation:
+      imperative:
+        sg: ставь
+        pl: ста́вьте
       present:
         "1sg": ста́влю
         "2sg": ста́вишь
@@ -27041,13 +28252,17 @@ words:
     cefr_level: A2
     accented: станови́ться
     aspect: impf
+    pair: "стать=to become"
     collections:
       - daily life
     en_gb:
       standard: to become (to turn into)
     conjugation:
+      imperative:
+        sg: станови́сь
+        pl: станови́тесь
       present:
-        "1sg": станови́тесь
+        "1sg": становлю́сь
         "2sg": стано́вишься
         "3sg": стано́вится
         "1pl": стано́вимся
@@ -27073,6 +28288,7 @@ words:
     cefr_level: A2
     accented: стара́ться
     aspect: impf
+    pair: "постараться=to try hard"
     collections:
       - daily life
       - feelings and sensations
@@ -27093,6 +28309,9 @@ words:
       - ru: Я бы стара́лся ещё бо́льше ра́ди тебя́.
         en_gb: I would try even harder for you.
     conjugation:
+      imperative:
+        sg: стара́йся
+        pl: стара́йтесь
       present:
         "1sg": стара́юсь
         "2sg": стара́ешься
@@ -27108,11 +28327,15 @@ words:
     cefr_level: A2
     accented: стать
     aspect: pf
+    pair: "становиться=to become"
     collections:
       - daily life
     en_gb:
       standard: to become (to start; to stand)
     conjugation:
+      imperative:
+        sg: стань
+        pl: ста́ньте
       future:
         "1sg": ста́ну
         "2sg": ста́нешь
@@ -27226,6 +28449,9 @@ words:
       - ru: Без подде́ржки сте́на не стоя́ла бы до́лго.
         en_gb: Without support the wall would not stand long.
     conjugation:
+      imperative:
+        sg: стой
+        pl: сто́йте
       present:
         "1sg": стою́
         "2sg": стои́шь
@@ -27338,6 +28564,7 @@ words:
     cefr_level: A2
     accented: стро́ить
     aspect: impf
+    pair: "построить=to build"
     collections:
       - craft and construction
       - DIY
@@ -27357,6 +28584,9 @@ words:
       - ru: С деньга́ми я бы стро́ил большо́й дом.
         en_gb: With money I would build a big house.
     conjugation:
+      imperative:
+        sg: строй
+        pl: стро́йте
       present:
         "1sg": стро́ю
         "2sg": стро́ишь
@@ -27372,11 +28602,15 @@ words:
     cefr_level: A2
     accented: стуча́ть
     aspect: impf
+    pair: "постучать=to knock"
     collections:
       - daily life
     en_gb:
       standard: to knock (to tap)
     conjugation:
+      imperative:
+        sg: стучи́
+        pl: стучи́те
       present:
         "1sg": стучу́
         "2sg": стучи́шь
@@ -27436,6 +28670,7 @@ words:
     cefr_level: B1
     accented: суме́ть
     aspect: pf
+    pair: "уметь=to be able"
     en_gb:
       standard: to manage (to be able to do something)
     conjugation:
@@ -27583,6 +28818,9 @@ words:
       - ru: Я бы счита́л де́ньги внима́тельнее.
         en_gb: I would count the money more carefully.
     conjugation:
+      imperative:
+        sg: счита́й
+        pl: счита́йте
       present:
         "1sg": счита́ю
         "2sg": счита́ешь
@@ -27630,6 +28868,7 @@ words:
     cefr_level: B1
     accented: сшить
     aspect: pf
+    pair: "шить=to sew"
     collections:
       - clothes
       - clothing
@@ -27664,11 +28903,15 @@ words:
     cefr_level: A2
     accented: съесть
     aspect: pf
+    pair: "есть=to eat"
     collections:
       - food and drink
     en_gb:
       standard: to eat up (to consume)
     conjugation:
+      imperative:
+        sg: съешь
+        pl: съе́шьте
       future:
         "1sg": съем
         "2sg": съешь
@@ -27696,12 +28939,16 @@ words:
     cefr_level: A2
     accented: сыгра́ть
     aspect: pf
+    pair: "играть=to play"
     collections:
       - hobbies and pastimes
       - the arts
     en_gb:
       standard: to play (to perform)
     conjugation:
+      imperative:
+        sg: сыгра́й
+        pl: сыгра́йте
       future:
         "1sg": сыгра́ю
         "2sg": сыгра́ешь
@@ -27748,6 +28995,9 @@ words:
       - ru: Я бы танцева́ла, е́сли б уме́ла.
         en_gb: I would dance if I knew how.
     conjugation:
+      imperative:
+        sg: танцу́й
+        pl: танцу́йте
       present:
         "1sg": танцу́ю
         "2sg": танцу́ешь
@@ -27829,11 +29079,15 @@ words:
     cefr_level: A2
     accented: теря́ть
     aspect: impf
+    pair: "потерять=to lose"
     collections:
       - daily life
     en_gb:
       standard: to lose (to misplace)
     conjugation:
+      imperative:
+        sg: теря́й
+        pl: теря́йте
       present:
         "1sg": теря́ю
         "2sg": теря́ешь
@@ -27930,6 +29184,9 @@ words:
     en_gb:
       standard: to hurry (to rush)
     conjugation:
+      imperative:
+        sg: торопи́сь
+        pl: торопи́тесь
       present:
         "1sg": тороплю́сь
         "2sg": торопи́шься
@@ -27947,6 +29204,7 @@ words:
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Не торопи́сь, у нас есть вре́мя.
         en_gb: Do not hurry, we have time.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Они́ торопи́лись на по́езд.
         en_gb: They were hurrying for the train.
       - ru: За́втра я бу́ду торопи́ться на по́езд.
@@ -27989,6 +29247,7 @@ words:
     cefr_level: B1
     accented: тра́тить
     aspect: impf
+    pair: "потратить=to spend"
     collections:
       - finance
       - shopping
@@ -28022,6 +29281,7 @@ words:
     cefr_level: B1
     accented: тре́бовать
     aspect: impf
+    pair: "потребовать=to demand"
     collections:
       - daily life
     en_gb:
@@ -28112,11 +29372,15 @@ words:
     cefr_level: A2
     accented: тро́гать
     aspect: impf
+    pair: "тронуть=to touch"
     collections:
       - daily life
     en_gb:
       standard: to touch (to move emotionally)
     conjugation:
+      imperative:
+        sg: тро́гай
+        pl: тро́гайте
       present:
         "1sg": тро́гаю
         "2sg": тро́гаешь
@@ -28131,6 +29395,7 @@ words:
     usage:
       - ru: Не тро́гай горя́чую плиту́.
         en_gb: Do not touch the hot stove.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Э́та исто́рия тро́гает се́рдце.
         en_gb: This story touches the heart.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
@@ -28144,6 +29409,7 @@ words:
     cefr_level: B1
     accented: тро́нуть
     aspect: pf
+    pair: "трогать=to touch"
     collections:
       - daily life
     en_gb:
@@ -28336,6 +29602,7 @@ words:
     cefr_level: B1
     accented: убива́ть
     aspect: impf
+    pair: "убить=to kill"
     collections:
       - war and peace
     en_gb:
@@ -28368,6 +29635,7 @@ words:
     cefr_level: B1
     accented: убира́ть
     aspect: impf
+    pair: "убрать=to remove"
     collections:
       - daily life
       - DIY
@@ -28403,6 +29671,7 @@ words:
     cefr_level: B1
     accented: уби́ть
     aspect: pf
+    pair: "убивать=to kill"
     collections:
       - war and peace
     en_gb:
@@ -28435,12 +29704,16 @@ words:
     cefr_level: A2
     accented: убра́ть
     aspect: pf
+    pair: "убирать=to tidy"
     collections:
       - daily life
       - home
     en_gb:
       standard: to remove (to clear away; to tidy)
     conjugation:
+      imperative:
+        sg: убери́
+        pl: убери́те
       future:
         "1sg": уберу́
         "2sg": уберёшь
@@ -28500,6 +29773,7 @@ words:
     cefr_level: A1
     accented: уви́деть
     aspect: pf
+    pair: "видеть=to see"
     collections:
       - daily life
     en_gb:
@@ -28563,6 +29837,9 @@ words:
     en_gb:
       standard: to guess (to figure out)
     conjugation:
+      imperative:
+        sg: угада́й
+        pl: угада́йте
       future:
         "1sg": угада́ю
         "2sg": угада́ешь
@@ -28590,6 +29867,7 @@ words:
     cefr_level: B1
     accented: удава́ться
     aspect: impf
+    pair: "удаться=to succeed"
     collections:
       - daily life
     en_gb:
@@ -28680,6 +29958,7 @@ words:
     cefr_level: B1
     accented: уда́ться
     aspect: pf
+    pair: "удаваться=to succeed"
     collections:
       - daily life
     en_gb:
@@ -28744,6 +30023,7 @@ words:
     cefr_level: B1
     accented: удиви́ться
     aspect: pf
+    pair: "удивляться=to be surprised"
     collections:
       - feelings and sensations
     en_gb:
@@ -28776,6 +30056,7 @@ words:
     cefr_level: B1
     accented: удивля́ться
     aspect: impf
+    pair: "удивиться=to be surprised"
     collections:
       - feelings and sensations
     en_gb:
@@ -28808,6 +30089,7 @@ words:
     cefr_level: A2
     accented: уезжа́ть
     aspect: impf
+    pair: "уехать=to leave by transport"
     collections:
       - motion
       - travel
@@ -28826,6 +30108,9 @@ words:
       - ru: Я бы не уезжа́л так ра́но.
         en_gb: I would not leave so early.
     conjugation:
+      imperative:
+        sg: уезжа́й
+        pl: уезжа́йте
       present:
         "1sg": уезжа́ю
         "2sg": уезжа́ешь
@@ -28841,6 +30126,7 @@ words:
     cefr_level: A2
     accented: уе́хать
     aspect: pf
+    pair: "уезжать=to leave by transport"
     collections:
       - motion
       - travel
@@ -28859,6 +30145,9 @@ words:
       - ru: Я бы уе́хал на мо́ре, будь де́ньги.
         en_gb: I would leave for the seaside if I had the money.
     conjugation:
+      imperative:
+        sg: уезжа́й
+        pl: уезжа́йте
       future:
         "1sg": уе́ду
         "2sg": уе́дешь
@@ -28874,6 +30163,7 @@ words:
     cefr_level: A2
     accented: узнава́ть
     aspect: impf
+    pair: "узнать=to find out"
     collections:
       - daily life
       - communication
@@ -28894,6 +30184,9 @@ words:
       - ru: Без газе́т я не узнава́л бы но́вости.
         en_gb: Without newspapers I would not be finding out the news.
     conjugation:
+      imperative:
+        sg: узнава́й
+        pl: узнава́йте
       present:
         "1sg": узнаю́
         "2sg": узнаёшь
@@ -28909,6 +30202,7 @@ words:
     cefr_level: A2
     accented: узна́ть
     aspect: pf
+    pair: "узнавать=to find out"
     collections:
       - daily life
       - communication
@@ -28929,6 +30223,9 @@ words:
       - ru: Я бы узна́л пра́вду, е́сли б спроси́л.
         en_gb: I would find out the truth if I asked.
     conjugation:
+      imperative:
+        sg: узна́й
+        pl: узна́йте
       future:
         "1sg": узна́ю
         "2sg": узна́ешь
@@ -28944,6 +30241,7 @@ words:
     cefr_level: A2
     accented: уйти́
     aspect: pf
+    pair: "уходить=to leave"
     collections:
       - motion
       - daily life
@@ -28962,6 +30260,9 @@ words:
       - ru: Я бы ушёл, е́сли б ста́ло ску́чно.
         en_gb: I would leave if it got boring.
     conjugation:
+      imperative:
+        sg: уйди́
+        pl: уйди́те
       future:
         "1sg": уйду́
         "2sg": уйдёшь
@@ -28977,6 +30278,7 @@ words:
     cefr_level: B1
     accented: указа́ть
     aspect: pf
+    pair: "указывать=to indicate"
     collections:
       - communication
     en_gb:
@@ -29009,6 +30311,7 @@ words:
     cefr_level: B1
     accented: ука́зывать
     aspect: impf
+    pair: "указать=to indicate"
     collections:
       - communication
     en_gb:
@@ -29131,6 +30434,7 @@ words:
     cefr_level: A2
     accented: улыба́ться
     aspect: impf
+    pair: "улыбнуться=to smile"
     collections:
       - feelings and sensations
       - romance and dating
@@ -29149,6 +30453,9 @@ words:
       - ru: Я бы улыба́лся ча́ще, будь побо́льше ра́дости.
         en_gb: I would smile more often if there were more joy.
     conjugation:
+      imperative:
+        sg: улыба́йся
+        pl: улыба́йтесь
       present:
         "1sg": улыба́юсь
         "2sg": улыба́ешься
@@ -29164,11 +30471,15 @@ words:
     cefr_level: A2
     accented: улыбну́ться
     aspect: pf
+    pair: "улыбаться=to smile"
     collections:
       - feelings and sensations
     en_gb:
       standard: to smile (to give a smile)
     conjugation:
+      imperative:
+        sg: улыбни́сь
+        pl: улыбни́тесь
       future:
         "1sg": улыбну́сь
         "2sg": улыбнёшься
@@ -29186,6 +30497,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Улыбни́сь, всё бу́дет хорошо́.
         en_gb: Smile, everything will be fine.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я улыбну́сь, уви́дев их.
         en_gb: I will smile when I see them.
       - ru: Я бы улыбну́лся, е́сли б не уста́л.
@@ -29196,6 +30508,7 @@ words:
     cefr_level: B1
     accented: умере́ть
     aspect: pf
+    pair: "умирать=to die"
     collections:
       - daily life
     en_gb:
@@ -29228,11 +30541,15 @@ words:
     cefr_level: A1
     accented: уме́ть
     aspect: impf
+    pair: "суметь=to manage"
     collections:
       - daily life
     en_gb:
       standard: to be able (to know how to)
     conjugation:
+      imperative:
+        sg: уме́й
+        pl: уме́йте
       present:
         "1sg": уме́ю
         "2sg": уме́ешь
@@ -29260,6 +30577,7 @@ words:
     cefr_level: B1
     accented: умира́ть
     aspect: impf
+    pair: "умереть=to die"
     collections:
       - daily life
     en_gb:
@@ -29352,11 +30670,15 @@ words:
     cefr_level: A2
     accented: упа́сть
     aspect: pf
+    pair: "падать=to fall"
     collections:
       - daily life
     en_gb:
       standard: to fall (to tumble)
     conjugation:
+      imperative:
+        sg: упади́
+        pl: упади́те
       future:
         "1sg": упаду́
         "2sg": упадёшь
@@ -29374,6 +30696,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Осторо́жно, не упади́!
         en_gb: Careful, don't fall!
+        inflect: { token: 3, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ли́стья упаду́т о́сенью.
         en_gb: The leaves will fall in autumn.
       - ru: Ско́ро пе́рвый снег упадёт на зе́млю.
@@ -29416,6 +30739,7 @@ words:
     cefr_level: A1
     accented: услы́шать
     aspect: pf
+    pair: "слышать=to hear"
     collections:
       - daily life
     en_gb:
@@ -29485,6 +30809,9 @@ words:
     en_gb:
       standard: to fall asleep
     conjugation:
+      imperative:
+        sg: усни́
+        pl: усни́те
       future:
         "1sg": усну́
         "2sg": уснёшь
@@ -29512,6 +30839,7 @@ words:
     cefr_level: B1
     accented: успева́ть
     aspect: impf
+    pair: "успеть=to manage"
     collections:
       - daily life
     en_gb:
@@ -29544,6 +30872,7 @@ words:
     cefr_level: B1
     accented: успе́ть
     aspect: pf
+    pair: "успевать=to manage"
     collections:
       - daily life
     en_gb:
@@ -29714,6 +31043,9 @@ words:
       alt:
         - to tire
     conjugation:
+      imperative:
+        sg: уста́нь
+        pl: уста́ньте
       future:
         "1sg": уста́ну
         "2sg": уста́нешь
@@ -29741,6 +31073,7 @@ words:
     cefr_level: B1
     accented: устра́ивать
     aspect: impf
+    pair: "устроить=to arrange"
     collections:
       - daily life
     en_gb:
@@ -29773,6 +31106,7 @@ words:
     cefr_level: B1
     accented: устро́ить
     aspect: pf
+    pair: "устраивать=to arrange"
     collections:
       - daily life
     en_gb:
@@ -29870,6 +31204,7 @@ words:
     cefr_level: A2
     accented: уходи́ть
     aspect: impf
+    pair: "уйти=to leave"
     collections:
       - motion
       - daily life
@@ -29888,6 +31223,9 @@ words:
       - ru: Я бы не уходи́л так по́здно.
         en_gb: I would not leave so late.
     conjugation:
+      imperative:
+        sg: уходи́
+        pl: уходи́те
       present:
         "1sg": ухожу́
         "2sg": ухо́дишь
@@ -29967,11 +31305,15 @@ words:
     cefr_level: A1
     accented: учи́ть
     aspect: impf
+    pair: "научить=to teach"
     collections:
       - school
     en_gb:
       standard: to teach (to learn)
     conjugation:
+      imperative:
+        sg: учи́
+        pl: учи́те
       present:
         "1sg": учу́
         "2sg": у́чишь
@@ -29999,6 +31341,7 @@ words:
     cefr_level: A1
     accented: учи́ться
     aspect: impf
+    pair: "научиться=to learn"
     collections:
       - school
       - daily life
@@ -30017,6 +31360,9 @@ words:
       - ru: Я бы учи́лся за грани́цей, будь возмо́жность.
         en_gb: I would study abroad if I had the chance.
     conjugation:
+      imperative:
+        sg: учи́сь
+        pl: учи́тесь
       present:
         "1sg": учу́сь
         "2sg": у́чишься
@@ -30174,6 +31520,9 @@ words:
         en_alt:
           - I would walk if it were closer.
     conjugation:
+      imperative:
+        sg: ходи́
+        pl: ходи́те
       present:
         "1sg": хожу́
         "2sg": хо́дишь
@@ -30189,6 +31538,7 @@ words:
     cefr_level: A1
     accented: хоте́ть
     aspect: impf
+    pair: "захотеть=to want"
     collections:
       - daily life
       - feelings and sensations
@@ -30222,6 +31572,7 @@ words:
     cefr_level: A2
     accented: хоте́ться
     aspect: impf
+    pair: "захотеться=to feel like"
     collections:
       - daily life
     en_gb:
@@ -30286,6 +31637,7 @@ words:
     cefr_level: B1
     accented: храни́ть
     aspect: impf
+    pair: "сохранить=to preserve"
     collections:
       - daily life
     en_gb:
@@ -30318,6 +31670,7 @@ words:
     cefr_level: A2
     accented: целова́ть
     aspect: impf
+    pair: "поцеловать=to kiss"
     collections:
       - romance and dating
       - feelings and sensations
@@ -30336,6 +31689,9 @@ words:
       - ru: Я бы целова́л её ру́ки.
         en_gb: I would kiss her hands.
     conjugation:
+      imperative:
+        sg: целу́й
+        pl: целу́йте
       present:
         "1sg": целу́ю
         "2sg": целу́ешь
@@ -30386,6 +31742,7 @@ words:
     cefr_level: A1
     accented: чита́ть
     aspect: impf
+    pair: "прочитать=to read"
     collections:
       - reading
       - school
@@ -30405,6 +31762,9 @@ words:
       - ru: Я бы чита́л бо́льше, будь у меня́ вре́мя.
         en_gb: I would read more if I had time.
     conjugation:
+      imperative:
+        sg: чита́й
+        pl: чита́йте
       present:
         "1sg": чита́ю
         "2sg": чита́ешь
@@ -30420,6 +31780,7 @@ words:
     cefr_level: A2
     accented: чу́вствовать
     aspect: impf
+    pair: "почувствовать=to feel"
     collections:
       - feelings and sensations
       - sickness and health
@@ -30439,6 +31800,9 @@ words:
       - ru: Я бы чу́вствовал себя́ споко́йнее до́ма.
         en_gb: I would feel calmer at home.
     conjugation:
+      imperative:
+        sg: чу́вствуй
+        pl: чу́вствуйте
       present:
         "1sg": чу́вствую
         "2sg": чу́вствуешь
@@ -30550,6 +31914,7 @@ words:
     cefr_level: B2
     accented: шепта́ть
     aspect: impf
+    pair: "прошептать=to whisper"
     en_gb:
       standard: to whisper (to speak very quietly)
     collections:
@@ -30576,6 +31941,7 @@ words:
     cefr_level: B1
     accented: шить
     aspect: impf
+    pair: "сшить=to sew"
     collections:
       - clothes
       - clothing
@@ -30615,6 +31981,9 @@ words:
     en_gb:
       standard: to make noise (to be noisy)
     conjugation:
+      imperative:
+        sg: шуми́
+        pl: шуми́те
       present:
         "1sg": шумлю́
         "2sg": шуми́шь
@@ -30632,6 +32001,7 @@ words:
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Не шуми́, все спят.
         en_gb: Don't make noise, everyone is asleep.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Мо́ре шуме́ло всю ночь.
         en_gb: The sea was roaring all night.
       - ru: Всю ночь мо́ре бу́дет шуме́ть за окно́м.
@@ -30647,6 +32017,9 @@ words:
     en_gb:
       standard: to joke (to jest)
     conjugation:
+      imperative:
+        sg: шути́
+        pl: шути́те
       present:
         "1sg": шучу́
         "2sg": шути́шь

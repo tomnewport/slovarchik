@@ -215,6 +215,37 @@ rules:
     exceptions:
       - "Some masculine forms drop -л: нести́ → нёс, мочь → мог."
 
+  verb-imperative:
+    title: "Imperative (command form)"
+    formula: "3pl stem + -й / -и́ / -ь · plural adds -те"
+    explanation: >
+      The imperative gives a command or request: скажи́(те) "say", дай(те)
+      "give", иди́(те) "go". Use the bare form with ты (someone you address
+      informally) and add -те for вы (plural, or one person politely). Formed
+      from the present/future stem: vowel stems take -й (чита́й), stems with
+      end-stress take -и́ (скажи́, пиши́), stem-stressed consonant stems take -ь
+      (гото́вь, встань). With пожа́луйста it turns into a polite request.
+    exceptions:
+      - "дать → дай · есть → ешь · лечь → ляг · пить → пей."
+      - "е́хать/пое́хать borrow поезжа́й — there is no *едь."
+      - "-авать verbs keep -ва́й: дава́й, встава́й, узнава́й."
+
+  verb-aspect:
+    title: "Aspect: imperfective or perfective?"
+    formula: "impf = process / habit / repetition · pf = one completed action"
+    explanation: >
+      Most Russian verbs come in pairs that share a meaning but differ in
+      aspect. The IMPERFECTIVE (говори́ть, чита́ть) presents the action as a
+      process, a habit or a repetition — anything ongoing or unfinished; it is
+      the only aspect with a true present tense. The PERFECTIVE (сказа́ть,
+      прочита́ть) presents one whole, completed action or its result, so it has
+      only past and future. Signals in the sentence decide: ка́ждый день,
+      ча́сто, до́лго point to the imperfective; уже́, вдруг, one-off results and
+      chains of consecutive events point to the perfective.
+    exceptions:
+      - "After начина́ть/конча́ть ('begin/finish doing') only the imperfective infinitive follows."
+      - "A negated imperative usually goes imperfective: не говори́!"
+
   # ── Adjectives ──────────────────────────────────────────────────────────
   adj-agreement:
     title: "Adjective agreement"

@@ -147,6 +147,11 @@ function normalizeWord(pos, key, word) {
     animate: word.animacy === 'a',
     numbers,
     forms,
+    // Verbal aspect (impf | pf) and the natural key of the aspect partner, as
+    // authored. buildWords resolves `pairKey` into the full `aspectPair` link.
+    aspect: word.aspect ?? null,
+    pairKey: word.pair ?? null,
+    aspectPair: null,
     // Confusable same-spelling forms whose stress carries the meaning. An
     // explicit annotation wins; otherwise buildWords fills this in for headword
     // collisions (за́мок "castle" vs замо́к "lock").
@@ -210,6 +215,28 @@ function linkAmbiguousEn(words) {
 }
 
 /**
+ * Resolve verbs' `pair:` annotations (the natural key of the aspect partner)
+ * into a display-ready link: the partner's accented headword, aspect and gloss.
+ * A dangling key resolves to nothing — the data tests enforce that pairs exist
+ * and are reciprocal, so silence here only ever hides an authoring typo from
+ * the runtime, not from CI.
+ */
+function linkAspectPairs(words) {
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  for (const w of words) {
+    if (!w.pairKey) continue
+    const partner = byKey.get(w.pairKey)
+    if (!partner) continue
+    w.aspectPair = {
+      key: partner.key,
+      ru: partner.headword || partner.ru,
+      aspect: partner.aspect,
+      gloss: partner.meaning || partner.en,
+    }
+  }
+}
+
+/**
  * Build the full, sorted word list from raw file contents.
  * @param {Array<{pos: string, text: string}>} files
  * @returns {object[]}
@@ -225,6 +252,7 @@ export function buildWords(files) {
   }
   linkHeteronyms(out)
   linkAmbiguousEn(out)
+  linkAspectPairs(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
@@ -251,6 +279,8 @@ export function shapeVocab(words) {
     heteronyms: w.heteronyms,
     alsoRu: w.alsoRu,
     ambiguousEn: w.ambiguousEn ?? [],
+    aspect: w.aspect ?? null,
+    aspectPair: w.aspectPair ?? null,
   }))
 }
 
