@@ -99,6 +99,59 @@ describe('currentStreak', () => {
     const gapped = { '2026-06-25': { count: 1 }, '2026-06-28': { count: 1 }, '2026-06-29': { count: 1 } }
     expect(currentStreak(gapped, '2026-06-29')).toBe(2)
   })
+
+  it('forgives one idle day per calendar week', () => {
+    // 2026-06-29 is a Monday; skip Wednesday the 24th, active every other day
+    // back through the previous week.
+    const withSkip = {
+      '2026-06-22': { count: 1 },
+      '2026-06-23': { count: 1 },
+      // 2026-06-24 idle — forgiven, one skip for this week (Sun 21–Sat 27)
+      '2026-06-25': { count: 1 },
+      '2026-06-26': { count: 1 },
+      '2026-06-27': { count: 1 },
+      '2026-06-28': { count: 1 },
+      '2026-06-29': { count: 1 },
+    }
+    expect(currentStreak(withSkip, '2026-06-29')).toBe(7)
+  })
+
+  it('does not forgive a second idle day in the same week', () => {
+    const twoSkips = {
+      '2026-06-22': { count: 1 },
+      // 2026-06-23, 2026-06-24 both idle, same week (Sun 21–Sat 27)
+      '2026-06-25': { count: 1 },
+      '2026-06-26': { count: 1 },
+      '2026-06-27': { count: 1 },
+      '2026-06-28': { count: 1 },
+      '2026-06-29': { count: 1 },
+    }
+    // Walking back from 06-29, the run breaks once a second idle day (06-24)
+    // is hit in the already-skipped week, so only 06-25..06-29 count.
+    expect(currentStreak(twoSkips, '2026-06-29')).toBe(5)
+  })
+
+  it('grants a fresh forgiven day each week', () => {
+    // One idle day in each of two consecutive weeks should still chain.
+    const twoWeeklySkips = {
+      '2026-06-15': { count: 1 },
+      '2026-06-16': { count: 1 },
+      // 2026-06-17 idle — week of Sun 14–Sat 20
+      '2026-06-18': { count: 1 },
+      '2026-06-19': { count: 1 },
+      '2026-06-20': { count: 1 },
+      '2026-06-21': { count: 1 },
+      // 2026-06-22 idle — week of Sun 21–Sat 27
+      '2026-06-23': { count: 1 },
+      '2026-06-24': { count: 1 },
+      '2026-06-25': { count: 1 },
+      '2026-06-26': { count: 1 },
+      '2026-06-27': { count: 1 },
+      '2026-06-28': { count: 1 },
+      '2026-06-29': { count: 1 },
+    }
+    expect(currentStreak(twoWeeklySkips, '2026-06-29')).toBe(13)
+  })
 })
 
 describe('longestStreak', () => {
@@ -115,6 +168,28 @@ describe('longestStreak', () => {
 
   it('is zero with no activity', () => {
     expect(longestStreak({})).toBe(0)
+  })
+
+  it('forgives one idle day per calendar week within a run', () => {
+    const withSkip = {
+      '2026-06-22': { count: 1 },
+      '2026-06-23': { count: 1 },
+      // 2026-06-24 idle — forgiven (week of Sun 21–Sat 27)
+      '2026-06-25': { count: 1 },
+      '2026-06-26': { count: 1 },
+      '2026-06-27': { count: 1 },
+    }
+    expect(longestStreak(withSkip)).toBe(5)
+  })
+
+  it('breaks the run on a second idle day in the same week', () => {
+    const twoSkips = {
+      '2026-06-22': { count: 1 },
+      // 2026-06-23, 2026-06-24 idle — same week, only one is forgiven
+      '2026-06-25': { count: 1 },
+      '2026-06-26': { count: 1 },
+    }
+    expect(longestStreak(twoSkips)).toBe(2)
   })
 })
 
