@@ -100,8 +100,9 @@ function toggle(which) {
         </dl>
       </div>
       <p class="streak-hint muted">
-        Do at least one exercise every day to keep your streak alive. Each day's
-        colour is your batch; brighter means more exercises, more vivid means more correct.
+        Do at least one exercise every day to keep your streak alive — you can skip one
+        day a week without breaking it. Each day's colour is your batch; brighter means
+        more exercises, more vivid means more correct.
       </p>
       <div ref="calScroll" class="cal-scroll">
         <div class="cal-months" aria-hidden="true">

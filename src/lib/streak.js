@@ -33,6 +33,18 @@ export function weekday(key) {
   return new Date(y, m - 1, d).getDay()
 }
 
+/** The Sunday that starts the calendar week containing `key`. */
+function weekStart(key) {
+  return shiftDay(key, -weekday(key))
+}
+
+/** Whole days from `a` to `b` (positive when `b` is later). */
+function dayDiff(a, b) {
+  const [ay, am, ad] = a.split('-').map(Number)
+  const [by, bm, bd] = b.split('-').map(Number)
+  return Math.round((new Date(by, bm - 1, bd) - new Date(ay, am - 1, ad)) / 86400000)
+}
+
 /** Aggregate every record's attempt events into per-day { count, correct }. */
 export function buildActivityFromEvents(records) {
   const byDay = {}
@@ -61,6 +73,10 @@ export function activeDays(activity) {
  * Length of the current streak: consecutive days with activity ending today,
  * or yesterday (a grace day — today's exercise isn't done *yet* but the streak
  * is still alive until midnight).
+ *
+ * One idle day per calendar week (Sunday–Saturday) is forgiven and doesn't
+ * break the chain — it just doesn't add to the count. A second idle day in
+ * the same week, or two idle days in a row, ends the streak.
  */
 export function currentStreak(activity, todayKey) {
   const set = activeDays(activity)
@@ -70,21 +86,42 @@ export function currentStreak(activity, todayKey) {
     if (!set.has(cursor)) return 0
   }
   let streak = 0
-  while (set.has(cursor)) {
-    streak++
+  let skippedWeek = null
+  while (true) {
+    if (set.has(cursor)) {
+      streak++
+      cursor = shiftDay(cursor, -1)
+      continue
+    }
+    const week = weekStart(cursor)
+    if (week === skippedWeek) break
+    skippedWeek = week
     cursor = shiftDay(cursor, -1)
   }
   return streak
 }
 
-/** The longest run of consecutive active days ever achieved. */
+/**
+ * The longest run of active days ever achieved, allowing one forgiven idle
+ * day per calendar week (see `currentStreak`).
+ */
 export function longestStreak(activity) {
   const days = [...activeDays(activity)].sort()
   let best = 0
   let run = 0
+  let skipWeeks = new Set()
   let prev = null
   for (const day of days) {
-    run = prev != null && shiftDay(prev, 1) === day ? run + 1 : 1
+    const gap = prev == null ? null : dayDiff(prev, day)
+    if (gap === 1) {
+      run += 1
+    } else if (gap === 2 && !skipWeeks.has(weekStart(shiftDay(prev, 1)))) {
+      skipWeeks.add(weekStart(shiftDay(prev, 1)))
+      run += 1
+    } else {
+      run = 1
+      skipWeeks = new Set()
+    }
     if (run > best) best = run
     prev = day
   }
