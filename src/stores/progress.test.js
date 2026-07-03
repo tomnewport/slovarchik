@@ -61,6 +61,8 @@ function makeWords(n, { cefr = 'A1', collection = 'animals', hasInflections = fa
   }))
 }
 
+const DAY = 24 * 60 * 60 * 1000
+
 // Record the attempts needed to satisfy every learning criterion.
 async function learn(word, ts = 1) {
   for (const d of ['identification', 'usage', 'hearing']) {
@@ -71,6 +73,17 @@ async function learn(word, ts = 1) {
   for (let i = 0; i < 3; i++) {
     await recordAttempt({ word, dimension: 'speaking', level: 'learning', correct: true, ts })
   }
+}
+
+// One correct spaced review ≥1 day after learning: the confirmation (#313).
+async function confirm(word, ts = 1 + DAY) {
+  await recordAttempt({ word, dimension: 'identification', level: 'learning', correct: true, ts })
+}
+
+// Learn + confirm, so the word counts as reliably learned (e.g. for mastery).
+async function learnConfirmed(word, ts = 1) {
+  await learn(word, ts)
+  await confirm(word, ts + DAY)
 }
 
 async function master(word, ts = 1) {
@@ -251,15 +264,15 @@ describe('batches', () => {
   it('offers no mastery options until a full batch of learned words exists', async () => {
     const words = makeWords(15, { hasInflections: true })
     setVocab(words)
-    // Nine learned-but-unmastered words is not yet a full mastery batch.
-    for (const w of words.slice(0, 9)) await learn(w.key)
+    // Nine confirmed learned-but-unmastered words is not yet a full mastery batch.
+    for (const w of words.slice(0, 9)) await learnConfirmed(w.key)
     expect(getBatchOptions('mastery', seededRng(2))).toEqual([])
   })
 
   it('offers mastery options once a full batch of words is learned', async () => {
     const words = makeWords(15, { hasInflections: true })
     setVocab(words)
-    for (const w of words.slice(0, 10)) await learn(w.key)
+    for (const w of words.slice(0, 10)) await learnConfirmed(w.key)
     const options = getBatchOptions('mastery', seededRng(2))
     expect(options.length).toBeGreaterThan(0)
     expect(options[0].level).toBe('mastery')
@@ -275,8 +288,8 @@ describe('batches', () => {
   it('autoCommitMasteryBatch picks and commits a random mastery batch', async () => {
     const words = makeWords(20, { hasInflections: true })
     setVocab(words)
-    // Learning a full batch's worth of words is enough to start mastering.
-    for (const w of words.slice(0, 10)) await learn(w.key)
+    // Learning (and confirming) a full batch's worth of words starts mastery.
+    for (const w of words.slice(0, 10)) await learnConfirmed(w.key)
     const result = await autoCommitMasteryBatch(seededRng(4))
     expect(result).not.toBeNull()
     expect(result.level).toBe('mastery')
@@ -287,12 +300,12 @@ describe('batches', () => {
     const words = makeWords(20, { hasInflections: true })
     setVocab(words)
     // Too few learned yet → nothing committed.
-    for (const w of words.slice(0, 9)) await learn(w.key)
+    for (const w of words.slice(0, 9)) await learnConfirmed(w.key)
     expect(await ensureMasteryBatch(seededRng(5))).toBeNull()
     expect(state.mastery).toBeNull()
     // The tenth learned word tips it over: a batch is assembled immediately,
     // without waiting for any learning batch to complete.
-    await learn(words[9].key)
+    await learnConfirmed(words[9].key)
     const batch = await ensureMasteryBatch(seededRng(5))
     expect(batch).not.toBeNull()
     expect(state.mastery).toEqual(batch)
@@ -301,7 +314,7 @@ describe('batches', () => {
   it('ensureMasteryBatch leaves an in-progress mastery batch untouched', async () => {
     const words = makeWords(20, { hasInflections: true })
     setVocab(words)
-    for (const w of words.slice(0, 10)) await learn(w.key)
+    for (const w of words.slice(0, 10)) await learnConfirmed(w.key)
     const first = await ensureMasteryBatch(seededRng(5))
     expect(first).not.toBeNull()
     // It still has unmastered words, so a second call is a no-op.
@@ -312,7 +325,7 @@ describe('batches', () => {
   it('ensureMasteryBatch refreshes a completed batch without waiting for celebration', async () => {
     const words = makeWords(30, { hasInflections: true })
     setVocab(words)
-    for (const w of words.slice(0, 20)) await learn(w.key)
+    for (const w of words.slice(0, 20)) await learnConfirmed(w.key)
     const first = await ensureMasteryBatch(seededRng(5))
     expect(first).not.toBeNull()
     // Master every word in the active batch so it is complete.
@@ -448,6 +461,204 @@ describe('sessions', () => {
     const idFraction =
       practices.filter((p) => p.dimension === 'identification').length / practices.length
     expect(idFraction).toBeGreaterThan(0.5)
+  })
+})
+
+describe('lifetime aggregates (#314)', () => {
+  it('tallies per-dimension attempts and correct counts across the event cap', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    for (let i = 0; i < 25; i++) {
+      await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: i % 2 === 0, ts: i + 1 })
+    }
+    // Events are capped at 10 per dimension, but the aggregates keep the truth.
+    const agg = state.records.w0.agg
+    expect(agg.dims['learning:usage']).toMatchObject({ attempts: 25, correct: 13 })
+    expect(agg.firstSeenAt).toBe(1)
+    expect(agg.lastSeenAt).toBe(25)
+  })
+
+  it('counts a double-credit (times: 2) answer as one real attempt', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, times: 2 })
+    expect(state.records.w0.events).toHaveLength(2) // criteria still get both
+    expect(state.records.w0.agg.dims['learning:usage']).toMatchObject({ attempts: 1, correct: 1 })
+  })
+
+  it('tracks current and best correct streaks per dimension', async () => {
+    setVocab(makeWords(1))
+    const outcomes = [true, true, true, false, true]
+    for (const correct of outcomes) {
+      await recordAttempt({ word: 'w0', dimension: 'hearing', level: 'learning', correct })
+    }
+    expect(state.records.w0.agg.dims['learning:hearing']).toMatchObject({
+      streak: 1,
+      bestStreak: 3,
+    })
+  })
+
+  it('round-trips aggregates through persistence and export/import', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: 42 })
+    state.records = {}
+    await loadProgress()
+    expect(state.records.w0.agg.dims['learning:usage']).toMatchObject({ attempts: 1, correct: 1 })
+
+    const snapshot = exportData()
+    await resetProgress()
+    await importData(snapshot)
+    expect(state.records.w0.agg).toMatchObject({ firstSeenAt: 42, lastSeenAt: 42 })
+  })
+})
+
+describe('memory scheduler (#313)', () => {
+  it('gives each attempted dimension a schedule with a future due date', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: 1000 })
+    const sch = state.records.w0.schedule.usage
+    expect(sch.lastReview).toBe(1000)
+    expect(sch.due).toBeGreaterThan(1000)
+  })
+
+  it('makes a failed dimension due immediately and halves its stability', async () => {
+    setVocab(makeWords(1))
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: 1000 })
+    const before = state.records.w0.schedule.usage.stability
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: false, ts: 2000 })
+    const after = state.records.w0.schedule.usage
+    expect(after.stability).toBeLessThan(before)
+    expect(after.due).toBe(2000)
+  })
+
+  it('grows stability more for an unhinted (double-credit) spaced answer', async () => {
+    setVocab(makeWords(2))
+    for (const [word, hinted] of [['w0', true], ['w1', false]]) {
+      await recordAttempt({ word, dimension: 'usage', level: 'learning', correct: true, ts: 1 })
+      await recordAttempt({ word, dimension: 'usage', level: 'learning', correct: true, ts: 1 + 2 * DAY, hinted })
+    }
+    expect(state.records.w1.schedule.usage.stability).toBeGreaterThan(
+      state.records.w0.schedule.usage.stability,
+    )
+  })
+
+  it('orders the session refresh pool by overdueness, most overdue first', async () => {
+    setVocab(makeWords(5, { hasInflections: false }))
+    // Both learned (and confirmed) on day 1-2; then w1's memory is refreshed
+    // much later, so at "now" w0 is the more overdue of the two.
+    await learnConfirmed('w0', 1)
+    await learnConfirmed('w1', 1)
+    const now = Date.now()
+    for (const d of ['identification', 'usage', 'hearing']) {
+      await recordAttempt({ word: 'w1', dimension: d, level: 'learning', correct: true, ts: now - DAY })
+    }
+    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(21))
+    const pool = session.pools.untested
+    expect(pool.indexOf('w0')).toBeGreaterThanOrEqual(0)
+    expect(pool.indexOf('w0')).toBeLessThan(pool.indexOf('w1'))
+  })
+
+  it('still ranks legacy records (no schedule) by last-attempt recency', async () => {
+    setVocab(makeWords(3, { hasInflections: false }))
+    await learnConfirmed('w0', 1)
+    // Simulate a legacy record: strip the schedule the attempts created.
+    state.records.w0.schedule = {}
+    await learnConfirmed('w1', Date.now() - DAY)
+    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(22))
+    const pool = session.pools.untested
+    // w0's last attempt is ancient → more overdue than w1 even without a schedule.
+    expect(pool.indexOf('w0')).toBeLessThan(pool.indexOf('w1'))
+  })
+})
+
+describe('confirmation reviews (#313)', () => {
+  it('a freshly-learned word is pending until a spaced review confirms it', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await learn('w0', 1)
+    expect(stateOf('w0')).toBe('learned')
+    expect(state.records.w0.confirmedAt).toBeNull()
+    // Same-day success does not confirm…
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: 2 })
+    expect(state.records.w0.confirmedAt).toBeNull()
+    // …a correct review a day later does.
+    await confirm('w0', 1 + DAY)
+    expect(state.records.w0.confirmedAt).toBe(1 + DAY)
+  })
+
+  it('a failed confirmation folds the word back into the current pool', async () => {
+    setVocab(makeWords(20, { hasInflections: false }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 })
+    await learn('w5', 1)
+    // One wrong answer a day later: still `learned` by the 3-of-4 window, but
+    // the confirmation failed — the word needs re-drilling, not retention.
+    await recordAttempt({ word: 'w5', dimension: 'usage', level: 'learning', correct: false, ts: 1 + DAY })
+    expect(stateOf('w5')).toBe('mastered') // criteria still met (uninflected)
+    expect(state.records.w5.confirmFailedAt).toBe(1 + DAY)
+    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(23))
+    expect(session.pools.current).toContain('w5')
+    // A later correct spaced review finally confirms it and releases it.
+    await recordAttempt({ word: 'w5', dimension: 'usage', level: 'learning', correct: true, ts: 2 + DAY })
+    expect(state.records.w5.confirmedAt).toBe(2 + DAY)
+    expect(state.records.w5.confirmFailedAt).toBeNull()
+    const after = startSession({ type: 'standard', size: 'normal' }, seededRng(24))
+    expect(after.pools.current).not.toContain('w5')
+  })
+
+  it('excludes pending words from mastery batch options', async () => {
+    const words = makeWords(15, { hasInflections: true })
+    setVocab(words)
+    // Ten words learned, but only nine confirmed → not a full mastery batch.
+    for (const w of words.slice(0, 9)) await learnConfirmed(w.key)
+    await learn(words[9].key)
+    expect(getBatchOptions('mastery', seededRng(25))).toEqual([])
+    await confirm(words[9].key)
+    expect(getBatchOptions('mastery', seededRng(25)).length).toBeGreaterThan(0)
+  })
+
+  it('grandfathers pre-scheduler learned records as confirmed on load', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    // A legacy record: learned, but persisted without a schedule field.
+    const events = []
+    for (const d of ['identification', 'usage', 'hearing']) {
+      for (let i = 0; i < 3; i++) events.push({ dimension: d, level: 'learning', correct: true, ts: 7000 })
+    }
+    for (let i = 0; i < 3; i++) events.push({ dimension: 'speaking', level: 'learning', correct: true, ts: 7000 })
+    await idb.putProgress({ word: 'w0', events, learnedAt: 7000, masteredAt: null, peak: 2 })
+
+    state.records = {}
+    await loadProgress()
+    expect(state.records.w0.confirmedAt).toBe(7000)
+
+    // But a post-scheduler record (schedule present) stays pending.
+    await resetProgress()
+    await learn('w0', 1)
+    state.records = {}
+    await loadProgress()
+    expect(state.records.w0.confirmedAt).toBeNull()
+  })
+
+  it('grandfathers pre-scheduler backups as confirmed on import', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0', 1)
+    const snapshot = exportData()
+    // Strip the new fields to simulate a backup from an older app version.
+    for (const r of snapshot.records) {
+      delete r.schedule
+      delete r.agg
+      delete r.confirmedAt
+      delete r.confirmFailedAt
+    }
+    await resetProgress()
+    await importData(snapshot)
+    expect(state.records.w0.confirmedAt).toBe(state.records.w0.learnedAt)
+  })
+
+  it('round-trips confirmation state through export/import', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0', 1)
+    await confirm('w0', 1 + DAY)
+    const snapshot = exportData()
+    await resetProgress()
+    await importData(snapshot)
+    expect(state.records.w0.confirmedAt).toBe(1 + DAY)
   })
 })
 
