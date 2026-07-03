@@ -74,6 +74,48 @@ export function phraseCorrect(input, target) {
 }
 
 /**
+ * Split a normalised, article-stripped sequence into a word → count multiset.
+ * @param {string} phrase
+ * @returns {Map<string, number>}
+ */
+function wordBag(phrase) {
+  const seq = foldYo(stripArticles(typingSequence(phrase)))
+  const bag = new Map()
+  for (const w of seq.split(' ').filter(Boolean)) bag.set(w, (bag.get(w) ?? 0) + 1)
+  return bag
+}
+
+function sameBag(a, b) {
+  if (a.size !== b.size) return false
+  for (const [word, count] of a) {
+    if (b.get(word) !== count) return false
+  }
+  return true
+}
+
+/**
+ * Grade a word-bank "assemble" answer order-insensitively: correct if the
+ * answer uses exactly the same multiset of words as the target (or one of its
+ * alternates), regardless of order. English word order is far freer than
+ * Russian, so when the learner is just placing a fixed bank of tiles — rather
+ * than typing a phrase from scratch, where order is the skill being tested —
+ * any valid reordering should be accepted rather than only the one curated
+ * rendering (see `en_alt`/#267). Punctuation, case, stress, ё/е and articles
+ * are folded exactly as in {@link phraseCorrect}.
+ * @param {string} input
+ * @param {string|string[]} target
+ * @returns {boolean}
+ */
+export function phraseCorrectBagOfWords(input, target) {
+  const got = wordBag(input)
+  const targets = Array.isArray(target) ? target : [target]
+  return targets.some((t) => {
+    const wanted = wordBag(t)
+    return wanted.size > 0 && sameBag(got, wanted)
+  })
+}
+
+/**
  * Whether the word being assessed in a phrase-spelling exercise was itself
  * spelled correctly, regardless of mistakes elsewhere in the phrase.
  * `targetTokens` are the word's normalised surface form(s) as they appear in the

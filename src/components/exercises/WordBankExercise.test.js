@@ -49,6 +49,70 @@ describe('WordBankExercise alternate translations', () => {
   })
 })
 
+// Assemble a valid reordering of the same words (not the curated order).
+async function assembleReordering(wrapper) {
+  for (const word of ['this', 'city', 'is', 'big']) {
+    const tile = wrapper
+      .findAll('.bank .tile')
+      .find((b) => b.text().toLowerCase() === word && !b.attributes('disabled'))
+    await tile.trigger('click')
+  }
+}
+
+describe('WordBankExercise order-insensitive grading (#267)', () => {
+  it('asks the learner to confirm a same-words reordering rather than auto-crediting', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleReordering(wrapper)
+    await wrapper.find('button.check').trigger('click')
+
+    // Not graded outright: a confirmation prompt appears, no Correct/Answer yet.
+    expect(wrapper.find('.confirm').exists()).toBe(true)
+    expect(wrapper.text()).not.toContain('Correct')
+    expect(wrapper.find('button.next').exists()).toBe(false)
+  })
+
+  it('credits the reordering when the learner confirms it', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleReordering(wrapper)
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.findAll('.confirm button').find((b) => b.text().includes('Yes')).trigger('click')
+
+    expect(wrapper.find('.confirm').exists()).toBe(false)
+    expect(wrapper.text()).toContain('Correct')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+  })
+
+  it('marks the reordering wrong when the learner rejects it', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleReordering(wrapper)
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.findAll('.confirm button').find((b) => b.text().includes('No')).trigger('click')
+
+    expect(wrapper.find('.confirm').exists()).toBe(false)
+    expect(wrapper.text()).toContain('Answer:')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+  })
+
+  it('passes an exact-order answer outright without confirmation', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleExpected(wrapper)
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.confirm').exists()).toBe(false)
+    expect(wrapper.text()).toContain('Correct')
+  })
+
+  it('still rejects an answer using the wrong words', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    // Place only a single tile so the assembled answer is missing words.
+    await wrapper.find('.bank .tile').trigger('click')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.confirm').exists()).toBe(false)
+    expect(wrapper.text()).toContain('Answer:')
+  })
+})
+
 describe('WordBankExercise type-ahead', () => {
   const press = (key) => window.dispatchEvent(new window.KeyboardEvent('keydown', { key }))
 

@@ -3,6 +3,7 @@ import {
   phraseTokens,
   typingSequence,
   phraseCorrect,
+  phraseCorrectBagOfWords,
   assessedWordCorrect,
   nextChar,
   hintKeys,
@@ -78,6 +79,39 @@ describe('phraseCorrect', () => {
     expect(phraseCorrect('все', 'всё')).toBe(true)
     expect(phraseCorrect('всё', 'все')).toBe(true)
     expect(phraseCorrect('у нее нет пальто', 'У неё нет пальто́.')).toBe(true)
+  })
+})
+
+describe('phraseCorrectBagOfWords', () => {
+  it('accepts any reordering of the same words (#267)', () => {
+    expect(phraseCorrectBagOfWords('today the weather is good', 'The weather is good today.')).toBe(
+      true,
+    )
+    expect(phraseCorrectBagOfWords('the air is clean in the city', 'The air in the city is clean.')).toBe(
+      true,
+    )
+  })
+  it('still rejects an answer missing a word', () => {
+    expect(phraseCorrectBagOfWords('the weather is good', 'The weather is good today.')).toBe(false)
+  })
+  it('still rejects an answer with an extra word', () => {
+    expect(phraseCorrectBagOfWords('the weather is very good today', 'The weather is good today.')).toBe(
+      false,
+    )
+  })
+  it('still rejects a wrong word even if the count matches', () => {
+    expect(phraseCorrectBagOfWords('the weather is bad today', 'The weather is good today.')).toBe(false)
+  })
+  it('rejects an empty answer', () => {
+    expect(phraseCorrectBagOfWords('', 'дом')).toBe(false)
+  })
+  it('ignores article choice and folds punctuation/case/stress/ё-е regardless of order', () => {
+    expect(phraseCorrectBagOfWords('THE CAT eats a fish', 'a fish eats the cat')).toBe(true)
+    expect(phraseCorrectBagOfWords('cat eats dog', 'The cat eats the fish.')).toBe(false)
+  })
+  it('accepts a match against any of several allowed renderings', () => {
+    const targets = ['In summer the grass is green.', 'The grass is green in summer.']
+    expect(phraseCorrectBagOfWords('green summer the grass in is', targets)).toBe(true)
   })
 })
 
