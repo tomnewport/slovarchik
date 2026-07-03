@@ -69,6 +69,8 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Апре́ль ча́сто быва́ет дождли́вым.
         en_gb: April is often rainy.
+        en_alt:
+          - It is often rainy in April.
       - ru: К апре́лю та́ет снег.
         en_gb: By April the snow melts.
     declension:

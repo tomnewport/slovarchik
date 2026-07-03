@@ -4,7 +4,13 @@
 // translate-phrase (source shown) and listen-translate (source heard).
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
-import { buildListeningBank, listeningTokens, listeningWordPool, phraseCorrect } from '../../lib/phrases.js'
+import {
+  buildListeningBank,
+  listeningTokens,
+  listeningWordPool,
+  phraseCorrect,
+  phraseCorrectBagOfWords,
+} from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
 import { phrases } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
@@ -32,6 +38,11 @@ const bank = ref(buildListeningBank(props.exercise.en, decoyPool, DECOY_COUNT))
 const placed = ref([])
 const checked = ref(false)
 const wasCorrect = ref(false)
+// Set when the answer uses exactly the right words but in a different order
+// (#267). Word order can carry meaning, so instead of auto-crediting we ask the
+// learner to self-confirm their reordering is a faithful translation before it
+// counts. Cleared once they decide either way.
+const needsConfirm = ref(false)
 // What the learner is currently typing to find a tile (type-ahead). Lowercased
 // prefix matched against the available (not-yet-placed) tiles.
 const typed = ref('')
@@ -104,15 +115,44 @@ function onKey(e) {
 function check() {
   if (checked.value) return
   // Accept the primary translation or any curated alternate rendering (#145,
-  // #168, #169) — a phrase often has more than one valid English word order.
+  // #168, #169).
   const accepted = [props.exercise.en, ...(props.exercise.enAlt ?? [])]
-  wasCorrect.value = phraseCorrect(assembled.value, accepted)
   checked.value = true
-  playFeedback(wasCorrect.value)
+  if (phraseCorrect(assembled.value, accepted)) {
+    // Exact match (bar articles/case/stress/punctuation) — pass outright.
+    wasCorrect.value = true
+    playFeedback(true)
+  } else if (phraseCorrectBagOfWords(assembled.value, accepted)) {
+    // Right words, different order (#267). English word order is freer than
+    // Russian so this is *usually* a valid reordering — but not always (word
+    // order can flip the meaning), so let the learner self-confirm rather than
+    // auto-crediting. No feedback sound yet: the grade is still pending.
+    needsConfirm.value = true
+  } else {
+    // Wrong or missing words.
+    wasCorrect.value = false
+    playFeedback(false)
+  }
+}
+
+// Learner self-confirms their reordering is a faithful translation.
+function confirmCorrect() {
+  if (!needsConfirm.value) return
+  needsConfirm.value = false
+  wasCorrect.value = true
+  playFeedback(true)
+}
+
+// Learner realises their reordering changed the meaning — grade it wrong.
+function rejectConfirm() {
+  if (!needsConfirm.value) return
+  needsConfirm.value = false
+  wasCorrect.value = false
+  playFeedback(false)
 }
 
 function markCorrect() {
-  if (!checked.value || wasCorrect.value) return
+  if (!checked.value || wasCorrect.value || needsConfirm.value) return
   overridden.value = true
   wasCorrect.value = true
   playFeedback(true)
@@ -184,21 +224,34 @@ onUnmounted(() => {
       <template v-else>Tap a word, or just type to find it.</template>
     </p>
 
-    <div v-if="checked" class="feedback" :class="wasCorrect ? 'ok' : 'no'">
-      <strong>{{ overridden ? 'Marked correct' : wasCorrect ? 'Correct' : 'Answer:' }}</strong>
-      <span>{{ listeningTokens(exercise.en).join(' ') }}</span>
+    <!-- Right words, different order: ask the learner to self-check meaning. -->
+    <div v-if="needsConfirm" class="confirm">
+      <p class="confirm-q">
+        Same words, different order. Does your translation mean the same thing?
+      </p>
+      <div class="row">
+        <button type="button" class="primary" @click="confirmCorrect">Yes, it's correct</button>
+        <button type="button" @click="rejectConfirm">No, I was wrong</button>
+      </div>
     </div>
 
-    <p v-if="checked && !wasCorrect" class="dispute">
-      Sure your translation also works?
-      <button type="button" class="link" @click="markCorrect">I was right →</button>
-    </p>
+    <template v-else-if="checked">
+      <div class="feedback" :class="wasCorrect ? 'ok' : 'no'">
+        <strong>{{ overridden ? 'Marked correct' : wasCorrect ? 'Correct' : 'Answer:' }}</strong>
+        <span>{{ listeningTokens(exercise.en).join(' ') }}</span>
+      </div>
+
+      <p v-if="!wasCorrect" class="dispute">
+        Sure your translation also works?
+        <button type="button" class="link" @click="markCorrect">I was right →</button>
+      </p>
+    </template>
 
     <div class="row">
       <button v-if="!checked" class="primary check" :disabled="!placed.length" @click="check">
         Check
       </button>
-      <button v-else class="primary next" @click="next">Next →</button>
+      <button v-else-if="!needsConfirm" class="primary next" @click="next">Next →</button>
     </div>
   </div>
 </template>
@@ -249,6 +302,14 @@ onUnmounted(() => {
 }
 .typeahead strong {
   color: var(--primary);
+}
+.confirm {
+  display: grid;
+  gap: 0.6rem;
+}
+.confirm-q {
+  margin: 0;
+  font-size: 0.95rem;
 }
 .feedback.ok strong {
   color: var(--good);
