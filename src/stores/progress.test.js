@@ -88,8 +88,12 @@ async function learnConfirmed(word, ts = 1) {
 
 async function master(word, ts = 1) {
   await learn(word, ts)
-  await recordAttempt({ word, dimension: 'identification', level: 'mastery', correct: true, ts })
-  await recordAttempt({ word, dimension: 'usage', level: 'mastery', correct: true, ts })
+  // The spaced mastery criteria (#313) need two correct answers per dimension
+  // on two distinct days.
+  for (const d of ['identification', 'usage']) {
+    await recordAttempt({ word, dimension: d, level: 'mastery', correct: true, ts })
+    await recordAttempt({ word, dimension: d, level: 'mastery', correct: true, ts: ts + DAY })
+  }
 }
 
 beforeEach(async () => {
@@ -194,12 +198,15 @@ describe('demotion, at-risk and recently-learned', () => {
     expect(atRisk.value).not.toContain('w0')
   })
 
-  it('drops a mastered inflected word back to learned on a wrong mastery attempt', async () => {
-    // Mastery identification and usage have window=1, so one wrong answer
-    // immediately un-meets the criterion — there is no borderline/at-risk state.
+  it('drops a mastered inflected word back to learned after repeated wrong mastery attempts', async () => {
+    // Mastery is 2-of-the-last-3 (#313): one wrong answer leaves the window at
+    // [T, T, F] — still met, but at-risk; a second wrong answer un-meets it.
     setVocab(makeWords(1, { hasInflections: true }))
     await master('w0')
     expect(stateOf('w0')).toBe('mastered')
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
+    expect(stateOf('w0')).toBe('mastered')
+    expect(atRisk.value).toContain('w0')
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
     expect(stateOf('w0')).toBe('learned')
     expect(lost.value).toContain('w0')
@@ -449,7 +456,8 @@ describe('sessions', () => {
     // identification (the inflection word-bank) to be mastered.
     await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0'], size: 1 })
     await learn('w0')
-    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true, ts: 1 })
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true, ts: 1 + DAY })
     expect(stateOf('w0')).toBe('learned') // mastery usage met, identification not
     // Grammar sessions draw only inflection practices (mastery identification vs
     // usage). With everything answered correctly, both dimensions' global
@@ -649,6 +657,77 @@ describe('confirmation reviews (#313)', () => {
     await resetProgress()
     await importData(snapshot)
     expect(state.records.w0.confirmedAt).toBe(state.records.w0.learnedAt)
+  })
+
+  it('re-checks peaks mastered under the old single-answer criteria on load (#313)', async () => {
+    setVocab(makeWords(2, { hasInflections: true }))
+    // A record mastered under the old 1-of-1 rule: one correct mastery answer
+    // per dimension, all in one sitting, with the mastered peak stamped.
+    const events = []
+    for (const d of ['identification', 'usage', 'hearing']) {
+      for (let i = 0; i < 3; i++) events.push({ dimension: d, level: 'learning', correct: true, ts: 7000 })
+    }
+    for (let i = 0; i < 3; i++) events.push({ dimension: 'speaking', level: 'learning', correct: true, ts: 7000 })
+    events.push({ dimension: 'identification', level: 'mastery', correct: true, ts: 7000 })
+    events.push({ dimension: 'usage', level: 'mastery', correct: true, ts: 7000 })
+    await idb.putProgress({
+      word: 'w0', events, learnedAt: 7000, masteredAt: 7000, peak: 3,
+      confirmedAt: 7000, confirmFailedAt: null, schedule: {}, agg: { firstSeenAt: 7000, lastSeenAt: 7000, dims: {} },
+    })
+
+    state.records = {}
+    await loadProgress()
+    // The word drops to learned under the spaced criteria, but its peak was
+    // capped so it re-enters mastery batches instead of flooding `lost`.
+    expect(stateOf('w0')).toBe('learned')
+    expect(state.records.w0.peak).toBe(2)
+    expect(lost.value).not.toContain('w0')
+    expect(state.records.w0.masteredAt).toBe(7000) // history is kept
+
+    // The re-check is one-time: a word that later slips from a *genuine*
+    // mastered peak must still be flagged as lost on subsequent loads.
+    await master('w1', 10_000)
+    expect(state.records.w1.peak).toBe(3)
+    await recordAttempt({ word: 'w1', dimension: 'identification', level: 'mastery', correct: false })
+    await recordAttempt({ word: 'w1', dimension: 'identification', level: 'mastery', correct: false })
+    expect(lost.value).toContain('w1')
+    state.records = {}
+    await loadProgress()
+    expect(state.records.w1.peak).toBe(3)
+    expect(lost.value).toContain('w1')
+  })
+
+  it('re-checks mastered peaks when importing a pre-v2 backup (#313)', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    const events = []
+    for (const d of ['identification', 'usage', 'hearing']) {
+      for (let i = 0; i < 3; i++) events.push({ dimension: d, level: 'learning', correct: true, ts: 7000 })
+    }
+    for (let i = 0; i < 3; i++) events.push({ dimension: 'speaking', level: 'learning', correct: true, ts: 7000 })
+    events.push({ dimension: 'identification', level: 'mastery', correct: true, ts: 7000 })
+    events.push({ dimension: 'usage', level: 'mastery', correct: true, ts: 7000 })
+    const v1Backup = {
+      app: 'slovarchik', version: 1, exportedAt: 8000, firstUseAt: 1,
+      records: [{ word: 'w0', events, learnedAt: 7000, masteredAt: 7000, peak: 3 }],
+      batches: { learning: null, mastery: null },
+      seenAchievements: [], activity: {},
+    }
+    await importData(v1Backup)
+    expect(stateOf('w0')).toBe('learned')
+    expect(state.records.w0.peak).toBe(2)
+    expect(lost.value).not.toContain('w0')
+
+    // A current (v2) backup keeps genuine peaks untouched.
+    await resetProgress()
+    await master('w0', 10_000)
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
+    const snapshot = exportData()
+    expect(snapshot.version).toBe(2)
+    await resetProgress()
+    await importData(snapshot)
+    expect(state.records.w0.peak).toBe(3)
+    expect(lost.value).toContain('w0')
   })
 
   it('round-trips confirmation state through export/import', async () => {

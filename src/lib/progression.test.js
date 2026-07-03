@@ -23,6 +23,20 @@ function attempts(level, dimension, results, startTs = 0) {
   return results.map((correct, i) => ({ level, dimension, correct, ts: startTs + i }))
 }
 
+const DAY = 24 * 60 * 60 * 1000
+
+// Like attempts(), but each attempt lands on its own calendar day — needed by
+// the day-spaced mastery criteria (#313).
+function dayApart(level, dimension, results, startTs = 0) {
+  return results.map((correct, i) => ({ level, dimension, correct, ts: startTs + i * DAY }))
+}
+
+// Every mastery dimension met under the spaced criteria: two correct answers
+// on two distinct days.
+function masteryMet(dimensions = ['identification', 'usage']) {
+  return dimensions.flatMap((d) => dayApart('mastery', d, [true, true]))
+}
+
 // All four learning criteria met (3/4 spelled etc, 3 speaking attempts).
 function fullyLearned() {
   return [
@@ -72,6 +86,35 @@ describe('criterionMet', () => {
     expect(criterionMet(attempts('learning', 'speaking', [false, false, false]), crit)).toBe(true)
     expect(criterionMet(attempts('learning', 'speaking', [true, true]), crit)).toBe(false)
   })
+  it('days: same-day correct answers cannot satisfy a day-spaced criterion', () => {
+    const crit = CRITERIA.mastery.usage // 2 of 3, on 2 distinct days
+    // Two (even three) correct answers within one sitting are not enough…
+    expect(criterionMet(attempts('mastery', 'usage', [true, true]), crit)).toBe(false)
+    expect(criterionMet(attempts('mastery', 'usage', [true, true, true]), crit)).toBe(false)
+    // …but two spanning distinct days are.
+    expect(criterionMet(dayApart('mastery', 'usage', [true, true]), crit)).toBe(true)
+  })
+  it('days: counts distinct days over all attempts, so more successes never un-meet it', () => {
+    const crit = CRITERIA.mastery.usage
+    // Met on day two; a same-day burst then pushes the day-one attempt out of
+    // the 3-attempt window — the criterion must stay met regardless.
+    const met = dayApart('mastery', 'usage', [true, true])
+    const burst = [
+      ...met,
+      { level: 'mastery', dimension: 'usage', correct: true, ts: DAY + 1 },
+      { level: 'mastery', dimension: 'usage', correct: true, ts: DAY + 2 },
+    ]
+    expect(criterionMet(burst, crit)).toBe(true)
+  })
+  it('days: a day-spaced criterion still slips on recent failures', () => {
+    const crit = CRITERIA.mastery.usage
+    const slipped = [
+      ...dayApart('mastery', 'usage', [true, true]),
+      ...attempts('mastery', 'usage', [false, false], 2 * DAY),
+    ]
+    // Window is now [T, F, F] → only one recent correct.
+    expect(criterionMet(slipped, crit)).toBe(false)
+  })
 })
 
 describe('minCorrectToMeet', () => {
@@ -99,6 +142,17 @@ describe('minCorrectToMeet', () => {
   it('treats a missing criterion as already satisfied', () => {
     expect(minCorrectToMeet([], null)).toBe(0)
   })
+  it('days: a fresh day-spaced dimension needs two answers (on future days)', () => {
+    expect(minCorrectToMeet([], CRITERIA.mastery.usage)).toBe(2)
+  })
+  it('days: one more answer finishes a dimension with a correct on an earlier day', () => {
+    expect(minCorrectToMeet(dayApart('mastery', 'usage', [true]), CRITERIA.mastery.usage)).toBe(1)
+  })
+  it('days: two same-day corrects still need one more (spaced) answer', () => {
+    expect(
+      minCorrectToMeet(attempts('mastery', 'usage', [true, true]), CRITERIA.mastery.usage),
+    ).toBe(1)
+  })
 })
 
 describe('minExercisesToLevel', () => {
@@ -109,10 +163,11 @@ describe('minExercisesToLevel', () => {
     expect(minExercisesToLevel(fullyLearned(), 'learning')).toBe(0)
   })
   it('mastery counts identification + usage + context for a word with a drill', () => {
-    expect(minExercisesToLevel([], 'mastery', { hasContextDrill: true })).toBe(3)
+    // Two spaced answers per dimension (#313).
+    expect(minExercisesToLevel([], 'mastery', { hasContextDrill: true })).toBe(6)
   })
   it('mastery drops the context exercise for words without a drill', () => {
-    expect(minExercisesToLevel([], 'mastery', { hasContextDrill: false })).toBe(2)
+    expect(minExercisesToLevel([], 'mastery', { hasContextDrill: false })).toBe(4)
   })
 })
 
@@ -175,18 +230,22 @@ describe('wordState — mastery gating', () => {
     expect(wordState(fullyLearned(), { hasInflections: false })).toBe('mastered')
   })
   it('an inflected word needs the mastery criteria too', () => {
+    const events = [...fullyLearned(), ...masteryMet()]
+    expect(wordState(events, { hasInflections: true })).toBe('mastered')
+  })
+  it('one same-day lucky answer per dimension is not mastery (#313)', () => {
     const events = [
       ...fullyLearned(),
       ...attempts('mastery', 'identification', [true]),
       ...attempts('mastery', 'usage', [true]),
     ]
-    expect(wordState(events, { hasInflections: true })).toBe('mastered')
+    expect(wordState(events, { hasInflections: true })).toBe('learned')
   })
   it('stays learned if a mastery dimension is incomplete', () => {
     const events = [
       ...fullyLearned(),
       // identification met but usage missing
-      ...attempts('mastery', 'identification', [true]),
+      ...masteryMet(['identification']),
     ]
     expect(wordState(events, { hasInflections: true })).toBe('learned')
   })
@@ -196,8 +255,7 @@ describe('wordState — mastery gating', () => {
       ...attempts('learning', 'usage', [true, true, true]),
       ...attempts('learning', 'hearing', [true, true, true]),
       ...attempts('learning', 'speaking', [true, true, true]),
-      ...attempts('mastery', 'identification', [true]),
-      ...attempts('mastery', 'usage', [true]),
+      ...masteryMet(),
     ]
     // Learning identification has slipped, so the word is no longer even learned.
     expect(levelMet(events, 'mastery')).toBe(true)
@@ -231,21 +289,13 @@ describe('context mastery requirement', () => {
     expect(wordHasContextDrill({ pos: 'noun', hasInflections: true, hasContextDrill: false })).toBe(false)
   })
   it('a context-drill word stays learned until the phrase drill is passed', () => {
-    const events = [
-      ...fullyLearned(),
-      ...attempts('mastery', 'identification', [true]),
-      ...attempts('mastery', 'usage', [true]),
-    ]
+    const events = [...fullyLearned(), ...masteryMet()]
     expect(wordState(events, noun)).toBe('learned')
-    const withContext = [...events, ...attempts('mastery', 'context', [true])]
+    const withContext = [...events, ...masteryMet(['context'])]
     expect(wordState(withContext, noun)).toBe('mastered')
   })
   it('a word without a context drill masters on identification + usage alone', () => {
-    const events = [
-      ...fullyLearned(),
-      ...attempts('mastery', 'identification', [true]),
-      ...attempts('mastery', 'usage', [true]),
-    ]
+    const events = [...fullyLearned(), ...masteryMet()]
     expect(wordState(events, { pos: 'pronoun', hasInflections: true })).toBe('mastered')
   })
 })
