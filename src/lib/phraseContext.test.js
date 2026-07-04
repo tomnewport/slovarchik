@@ -5,6 +5,9 @@ import {
   buildFromPhrase,
   buildContextExercise,
   canBuildContext,
+  buildAspectDrill,
+  canBuildAspectDrill,
+  ASPECT_DRILL_ITEMS,
 } from './phraseContext.js'
 
 const sobaka = { key: 'собака=dog', pos: 'noun', headword: 'соба́ка', ru: 'собака' }
@@ -238,5 +241,108 @@ describe('exception weighting', () => {
     // weight 4 vs 1 → ~80% exception. Assert a clear majority (not exact).
     expect(excCount).toBeGreaterThan(650)
     expect(excCount).toBeLessThan(1000) // regular still appears sometimes
+  })
+})
+
+describe('buildAspectDrill / canBuildAspectDrill', () => {
+  // The pf verb (сказа́ть) with usage sentences on both sides of its pair. The
+  // pick stage needs no annotations, only ru/en usage phrases keyed by owner;
+  // the spelling stage draws from the annotated phrases (phrasesByKey).
+  const phrasesByKey = indexPhrases([skazatPhrase])
+  const ownUsage = [
+    { ru: 'Он сказа́л пра́вду.', en: 'He said the truth.', source: 'сказать=to say' },
+    { ru: 'Скажи́те, пожа́луйста, где вокза́л?', en: 'Tell me please, where is the station?', source: 'сказать=to say' },
+    { ru: 'Она́ ска́жет всё за́втра.', en: 'She will say everything tomorrow.', source: 'сказать=to say' },
+  ]
+  const partnerUsage = [
+    { ru: 'Он говори́т по-ру́сски.', en: 'He speaks Russian.', source: 'говорить=to speak' },
+    { ru: 'Мы говори́ли весь ве́чер.', en: 'We were talking all evening.', source: 'говорить=to speak' },
+    { ru: 'Не говори́ так гро́мко.', en: "Don't talk so loudly.", source: 'говорить=to speak' },
+  ]
+  const phrasesBySource = new Map([
+    ['сказать=to say', ownUsage],
+    ['говорить=to speak', partnerUsage],
+  ])
+  const drillRules = {
+    'verb-past': { title: 'Past tense' },
+    'verb-aspect': { title: 'Aspect: imperfective or perfective?' },
+  }
+  const ctx = { phrasesByKey, phrasesBySource, rules: drillRules, rng: () => 0 }
+
+  it('reports availability only for paired verbs with enough sentences', () => {
+    expect(canBuildAspectDrill(skazat, ctx)).toBe(true)
+    // No aspect partner → no drill.
+    expect(canBuildAspectDrill(dumat, ctx)).toBe(false)
+    // Not a verb.
+    expect(canBuildAspectDrill(sobaka, ctx)).toBe(false)
+    // No annotated phrase to spell.
+    expect(canBuildAspectDrill(skazat, { ...ctx, phrasesByKey: new Map() })).toBe(false)
+    // Too few sentences overall (own side reserved one for spelling).
+    expect(
+      canBuildAspectDrill(skazat, {
+        ...ctx,
+        phrasesBySource: new Map([
+          ['сказать=to say', ownUsage.slice(0, 2)],
+          ['говорить=to speak', partnerUsage.slice(0, 1)],
+        ]),
+      }),
+    ).toBe(false)
+  })
+
+  it('builds items from both partners, answered by the owning verb aspect', () => {
+    const drill = buildAspectDrill(skazat, ctx)
+    expect(drill.kind).toBe('aspect-drill')
+    expect(drill.targets).toEqual(['сказать=to say'])
+    // Options are the two infinitives, imperfective first, with usage cues.
+    expect(drill.options.map((o) => o.id)).toEqual(['impf', 'pf'])
+    expect(drill.options.map((o) => o.label)).toEqual(['говори́ть', 'сказа́ть'])
+    expect(drill.options[0].hint).toContain('imperfective')
+    // Every item is answered by the aspect of the verb that owns its sentence.
+    const ownRu = new Set(ownUsage.map((p) => p.ru))
+    for (const item of drill.items) {
+      expect(item.answer).toBe(ownRu.has(item.ru) ? 'pf' : 'impf')
+      expect(item.en).toBeTruthy()
+    }
+    // Both aspects are represented.
+    expect(new Set(drill.items.map((i) => i.answer))).toEqual(new Set(['impf', 'pf']))
+  })
+
+  it('never shows the spelling sentence among the picks', () => {
+    const drill = buildAspectDrill(skazat, ctx)
+    // The only annotated phrase is Он сказа́л пра́вду — it must be the spelling
+    // stage, and must not leak into the pick list.
+    expect(drill.spell.ru).toBe('Он сказа́л пра́вду.')
+    expect(drill.items.map((i) => i.ru)).not.toContain(drill.spell.ru)
+  })
+
+  it('strips the aspect step from the spelling stage but keeps the aspect rule', () => {
+    const drill = buildAspectDrill(skazat, ctx)
+    expect(drill.spell.selectSteps).toEqual([])
+    expect(drill.spell.lemmaOptions).toBeNull()
+    // The generic aspect explanation is still offered after spelling.
+    expect(drill.spell.aspectRule).toEqual(expect.objectContaining({ id: 'verb-aspect' }))
+    expect(drill.aspectRule).toEqual(expect.objectContaining({ id: 'verb-aspect' }))
+  })
+
+  it('caps the pick list at the requested number of items', () => {
+    const many = Array.from({ length: 10 }, (_, i) => ({
+      ru: `Фра́за но́мер ${i}.`, en: `Phrase number ${i}.`, source: 'говорить=to speak',
+    }))
+    const drill = buildAspectDrill(skazat, {
+      ...ctx,
+      phrasesBySource: new Map([
+        ['сказать=to say', ownUsage],
+        ['говорить=to speak', many],
+      ]),
+    })
+    expect(drill.items.length).toBe(ASPECT_DRILL_ITEMS)
+    // Balanced: the short own side contributes everything it has (minus the
+    // spelling sentence), the partner fills the rest.
+    expect(drill.items.filter((i) => i.answer === 'pf').length).toBe(2)
+    expect(drill.items.filter((i) => i.answer === 'impf').length).toBe(4)
+  })
+
+  it('returns null when the drill cannot be built', () => {
+    expect(buildAspectDrill(dumat, ctx)).toBeNull()
   })
 })

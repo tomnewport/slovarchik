@@ -81,11 +81,16 @@ rules:
 ## Interaction: two steps
 
 The renderer (`components/exercises/PhraseFixExercise.vue`) runs the drill in two
-graded steps:
+graded steps. It renders a **set of sentences** (`exercise.items`, one per word;
+a bare single-sentence descriptor is treated as a set of one): the learner works
+the set one sentence at a time, with solved sentences staying visible above, and
+the exercise reports per-word results (`wrong: [keys]`) so a set spanning
+several words grades each on its own. Per sentence:
 
 1. **Select the slot.** The phrase shows with the target collapsed to its lemma.
-   The learner works through a *sequence* of picks — **case always first**, then
-   the dimension that disambiguates the form:
+   Every dimension is picked on **one compact board** (each `selectSteps` group
+   is a chip row) and committed together with a single Check — **case always
+   first**, then the dimension that disambiguates the form:
    - **Nouns:** case (six buttons with the `CASE_HINTS` glosses) → number
      (Singular / Plural). Both are free choices the learner must read off the
      sentence, so both are asked.
@@ -106,8 +111,43 @@ graded steps:
 
 Only **after the form is spelled correctly** do we (a) reveal the full correct
 sentence, (b) speak it, and (c) show the linked grammar rule. The lemma-in-slot
-sentence is never spoken. An exercise counts as correct only if *both* steps were
+sentence is never spoken. A sentence counts as correct only if *both* steps were
 right first time.
+
+## The verb aspect drill (usage · mastery)
+
+How the **usage dimension is mastered for verbs with an aspect partner** —
+replacing the type-the-table drill for those verbs (unpaired or data-thin verbs
+keep the table). Built by `phraseContext.buildAspectDrill`, rendered by
+`components/exercises/AspectDrillExercise.vue`, emitted by
+`exerciseBuild.buildInflect` for the `inflect-keyboard` practice:
+
+1. **Pick the aspect, six sentences at a time.** The learner sees up to
+   `ASPECT_DRILL_ITEMS` (6) *English* sentences that use the pair in different
+   tenses and aspects, with the two infinitives (imperfective first, each with
+   its usage cue) as the answer buttons for every row. Picks grade immediately,
+   revealing and speaking the authored Russian sentence.
+2. **Spell one conjugated form.** The single-sentence context renderer is
+   embedded with one of the verb's *annotated* phrases (aspect step stripped —
+   that skill was stage 1).
+
+Because every usage example is hand-authored around the verb that owns it, a
+sentence's correct answer is simply its owner's aspect — so the pick stage draws
+from **all** usage examples of both partners (no `inflect:` annotation needed),
+balancing the two aspects as evenly as the data allows. Sentences whose English
+appears on *both* sides of the pair ("She thanked the teacher.") cannot
+discriminate the aspect and are excluded from both sides; the spelling sentence
+is likewise excluded from the picks so its revealed form can't leak. The
+exercise is correct only if every pick and the spelling were right.
+
+### Context sets
+
+The `inflect-context` practice now builds **one exercise bundling a small set of
+sentences** (`items: 3` in the catalogue, one sentence per drawn word) instead
+of several single-sentence exercises, so the select-then-spell loop covers more
+of the mastery batch per session. Almost every noun / adjective / pronoun
+carries exactly one annotated phrase, which is why a set spans *words*, not
+repeats of one word.
 
 ## Engine wiring
 

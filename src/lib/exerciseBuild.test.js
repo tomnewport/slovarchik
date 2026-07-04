@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, makeVisualReplacement, makeReplacementPicker, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING } from './exerciseBuild.js'
+import { buildExercises, makeVisualReplacement, makeReplacementPicker, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
+import { ASPECT_DRILL_ITEMS, ASPECT_DRILL_MIN_ITEMS } from './phraseContext.js'
 import { shapePhrases } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 import { normToken } from './phraseHint.js'
@@ -231,6 +232,75 @@ describe('buildExercises', () => {
     const ex = build([practice('repeat-word')])
     expect(ex.length).toBeGreaterThan(0)
     expect(ex.every((e) => e.kind === 'speak')).toBe(true)
+  })
+})
+
+describe('context sentence sets', () => {
+  it('bundles up to `items` sentences from distinct pool words into one set', () => {
+    const pool = contextKeys.slice(0, 5)
+    const ex = build([practice('inflect-context', { exercises: 1, items: CONTEXT_SET_ITEMS, pool })])
+    expect(ex).toHaveLength(1)
+    const set = ex[0]
+    expect(set.kind).toBe('phrase-fix')
+    expect(set.items.length).toBeGreaterThan(1)
+    expect(set.items.length).toBeLessThanOrEqual(CONTEXT_SET_ITEMS)
+    // One sentence per distinct word; the set's targets are their union so the
+    // runner can record a per-word result for each.
+    const keys = set.items.map((it) => it.targets[0])
+    expect(new Set(keys).size).toBe(keys.length)
+    expect(set.targets).toEqual(keys)
+    for (const it of set.items) {
+      expect(it.tokens.length).toBeGreaterThan(0)
+      expect(it.answer).toBeTruthy()
+    }
+  })
+
+  it('never widens a mastery set beyond the pool', () => {
+    const pool = contextKeys.slice(0, 2)
+    const ex = build([practice('inflect-context', { exercises: 1, items: CONTEXT_SET_ITEMS, pool })])
+    expect(ex).toHaveLength(1)
+    expect(ex[0].items.length).toBeLessThanOrEqual(pool.length)
+    for (const it of ex[0].items) expect(pool).toContain(it.targets[0])
+  })
+})
+
+describe('verb aspect drill (usage mastery)', () => {
+  const pairedVerbKeys = words
+    .filter((w) => w.pos === 'verb' && w.aspectPair)
+    .map((w) => w.key)
+
+  it('emits the aspect drill instead of the table for paired verbs', () => {
+    const pool = pairedVerbKeys.slice(0, 5)
+    const ex = build([practice('inflect-keyboard', { exercises: 5, pool })])
+    expect(ex.length).toBeGreaterThan(0)
+    const drills = ex.filter((e) => e.kind === 'aspect-drill')
+    expect(drills.length).toBeGreaterThan(0)
+    for (const d of drills) {
+      expect(d.dimension).toBe('usage')
+      expect(d.level).toBe('mastery')
+      expect(pool).toContain(d.targets[0])
+      expect(d.items.length).toBeGreaterThanOrEqual(ASPECT_DRILL_MIN_ITEMS)
+      expect(d.items.length).toBeLessThanOrEqual(ASPECT_DRILL_ITEMS)
+      expect(d.options.map((o) => o.id)).toEqual(['impf', 'pf'])
+      // The spelling stage is ready to embed: no aspect step, answer resolved,
+      // and its sentence is not leaked among the picks.
+      expect(d.spell.selectSteps).toEqual([])
+      expect(d.spell.answer).toBeTruthy()
+      expect(d.items.map((i) => i.ru)).not.toContain(d.spell.ru)
+    }
+  })
+
+  it('keeps the typed table for unpaired verbs and for inflect-bank', () => {
+    const unpaired = words
+      .filter((w) => w.pos === 'verb' && !w.aspectPair && buildParadigm(w))
+      .map((w) => w.key)
+    const ex = build([practice('inflect-keyboard', { exercises: 3, pool: unpaired.slice(0, 3) })])
+    expect(ex.length).toBeGreaterThan(0)
+    for (const e of ex) expect(e.kind).toBe('inflect')
+    // The identification-mastery table (word bank) is untouched even for pairs.
+    const bank = build([practice('inflect-bank', { exercises: 3, pool: pairedVerbKeys.slice(0, 3) })])
+    expect(bank.length).toBeGreaterThan(0)
+    for (const e of bank) expect(e.kind).toBe('inflect')
   })
 })
 

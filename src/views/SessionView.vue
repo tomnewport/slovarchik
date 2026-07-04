@@ -28,6 +28,7 @@ import MatchExercise from '../components/exercises/MatchExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import PhraseFixExercise from '../components/exercises/PhraseFixExercise.vue'
+import AspectDrillExercise from '../components/exercises/AspectDrillExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import AchievementBadge from '../components/AchievementBadge.vue'
 import ReportButton from '../components/ReportButton.vue'
@@ -40,6 +41,7 @@ const COMPONENTS = {
   speak: SpeakExercise,
   inflect: InflectExercise,
   'phrase-fix': PhraseFixExercise,
+  'aspect-drill': AspectDrillExercise,
 }
 
 const route = useRoute()

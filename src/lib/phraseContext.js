@@ -14,6 +14,7 @@
 // Framework-free; randomness is injectable for deterministic tests.
 
 import { normalize } from './text.js'
+import { sample, shuffle } from './quiz.js'
 import { CASES, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
 
 /** Parts of speech that carry a context drill. */
@@ -166,6 +167,22 @@ function genderStep(target, word) {
   }
 }
 
+/** The two members of a verb's aspect pair, imperfective first. */
+function aspectPairMembers(word) {
+  const self = { ru: word.headword || word.ru, aspect: word.aspect, key: word.key, correct: true }
+  const partner = { ...word.aspectPair, correct: false }
+  return [self, partner].sort((a) => (a.aspect === 'impf' ? -1 : 1))
+}
+
+/** An option button for one member of an aspect pair (its infinitive + cue). */
+function aspectOption(member) {
+  return {
+    id: member.aspect,
+    label: member.ru,
+    hint: `${ASPECT_LABEL[member.aspect] ?? member.aspect} — ${ASPECT_HINT[member.aspect] ?? ''}`,
+  }
+}
+
 /**
  * Selection step: choose between the two members of an aspect pair — the drill
  * from #315. The sentence context (habit vs. single completed action, …)
@@ -174,18 +191,10 @@ function genderStep(target, word) {
  * that owns the phrase (its usage examples are hand-authored around it).
  */
 function aspectStep(word) {
-  const self = { ru: word.headword || word.ru, aspect: word.aspect, correct: true }
-  const partner = { ru: word.aspectPair.ru, aspect: word.aspectPair.aspect, correct: false }
-  const options = [self, partner].sort((a) => (a.aspect === 'impf' ? -1 : 1))
   return {
     kind: 'aspect',
     prompt: 'Which verb does this sentence need?',
-    options: options.map((o) => ({
-      id: o.aspect,
-      label: o.ru,
-      hint: `${ASPECT_LABEL[o.aspect] ?? o.aspect} — ${ASPECT_HINT[o.aspect] ?? ''}`,
-      correct: o.correct,
-    })),
+    options: aspectPairMembers(word).map((m) => ({ ...aspectOption(m), correct: m.correct })),
   }
 }
 
@@ -296,4 +305,122 @@ export function buildContextExercise(word, { phrasesByKey, rules = {}, rng = Mat
 export function canBuildContext(word, { phrasesByKey } = {}) {
   if (!word || !phrasesByKey) return false
   return (phrasesByKey.get(word.key) ?? []).length > 0
+}
+
+// --- Verb aspect drill (usage · mastery) -----------------------------------
+//
+// How the usage dimension is mastered for a verb with an aspect partner: the
+// learner reads a batch of English sentences that use the pair in different
+// tenses and aspects and picks, per sentence, which member (imperfective or
+// perfective infinitive) the Russian would need — then spells one conjugated
+// form. Every usage example is hand-authored around the verb that owns it, so
+// (exactly as for the single-sentence aspect step above) the correct answer for
+// a sentence is simply its owner's aspect. The pick stage needs no `inflect:`
+// annotation, so it draws from ALL usage examples of both partners; only the
+// spelling stage needs an annotated phrase.
+
+/** Sentences an aspect drill aims to show. */
+export const ASPECT_DRILL_ITEMS = 6
+
+/** Fewest sentences a drill may run with (else fall back to the table drill). */
+export const ASPECT_DRILL_MIN_ITEMS = 4
+
+/** English text key for de-duplicating / collision-testing drill sentences. */
+function enKey(p) {
+  return String(p?.en ?? '').trim().toLowerCase()
+}
+
+/**
+ * The candidate sentence pools for a pair's drill: each side de-duplicated by
+ * its English text, then any English that appears on BOTH sides removed from
+ * both. The pair's sentences are sometimes authored as translations of the
+ * same English ("She thanked the teacher." for both благодари́ла and
+ * поблагодари́ла); such a sentence cannot discriminate the aspect, so it is
+ * unanswerable and must not be asked.
+ */
+function aspectDrillPools(word, phrasesBySource) {
+  const dedupe = (list) => {
+    const seen = new Set()
+    return (list ?? []).filter((p) => {
+      const k = enKey(p)
+      if (!k || !p?.ru || seen.has(k)) return false
+      seen.add(k)
+      return true
+    })
+  }
+  const own = dedupe(phrasesBySource.get(word.key))
+  const partner = dedupe(phrasesBySource.get(word.aspectPair.key))
+  const ownEn = new Set(own.map(enKey))
+  const partnerEn = new Set(partner.map(enKey))
+  return {
+    own: own.filter((p) => !partnerEn.has(enKey(p))),
+    partner: partner.filter((p) => !ownEn.has(enKey(p))),
+  }
+}
+
+/**
+ * Whether the aspect drill can be built for a word (deterministic): a verb with
+ * a linked aspect partner, at least one annotated phrase to spell, at least one
+ * unambiguous usage sentence on each side of the pair beyond the spelling one,
+ * and enough sentences overall.
+ * @param {object} word normalised word record
+ * @param {object} ctx
+ * @param {Map} ctx.phrasesByKey    key → annotated phrases (see indexPhrases)
+ * @param {Map} ctx.phrasesBySource key → shaped usage phrases (vocabBuild.shapePhrases)
+ */
+export function canBuildAspectDrill(word, { phrasesByKey, phrasesBySource } = {}) {
+  if (!word || word.pos !== 'verb' || !word.aspectPair?.key || !phrasesBySource) return false
+  if (!canBuildContext(word, { phrasesByKey })) return false
+  const pools = aspectDrillPools(word, phrasesBySource)
+  // One of the word's own sentences is (conservatively) reserved for spelling.
+  const own = pools.own.length - 1
+  const partner = pools.partner.length
+  return own >= 1 && partner >= 1 && own + partner >= ASPECT_DRILL_MIN_ITEMS
+}
+
+/**
+ * Build the aspect drill descriptor for a verb, or null if it can't be made.
+ * The pick stage balances the two aspects as evenly as the data allows and
+ * shuffles the result; the spelling stage reuses the single-sentence context
+ * exercise (its aspect step stripped — the aspect was the pick stage's skill).
+ * @returns {{kind: 'aspect-drill', options, items, spell, targets}|null}
+ */
+export function buildAspectDrill(
+  word,
+  { phrasesByKey, phrasesBySource, rules = {}, rng = Math.random, items = ASPECT_DRILL_ITEMS } = {},
+) {
+  if (!canBuildAspectDrill(word, { phrasesByKey, phrasesBySource })) return null
+  const spell = buildContextExercise(word, { phrasesByKey, rules, rng })
+  if (!spell) return null
+  // The aspect was already exercised across the pick stage; spelling assesses
+  // the conjugation only. The generic aspect explanation still shows at the end.
+  spell.selectSteps = []
+  spell.lemmaOptions = null
+
+  // The spelling sentence must not appear among the picks — its revealed form
+  // would leak the answer (and its aspect answer would be a repeat).
+  const pools = aspectDrillPools(word, phrasesBySource)
+  const own = pools.own.filter((p) => p.ru !== spell.ru)
+  const partner = pools.partner.filter((p) => p.ru !== spell.ru)
+
+  // Half from each side where possible; whichever side is short, the other tops up.
+  const nPartner = Math.min(partner.length, items - Math.min(own.length, Math.ceil(items / 2)))
+  const nOwn = Math.min(own.length, items - nPartner)
+  const picked = [
+    ...sample(own, nOwn, rng).map((p) => ({ ru: p.ru, en: p.en, answer: word.aspect })),
+    ...sample(partner, nPartner, rng).map((p) => ({ ru: p.ru, en: p.en, answer: word.aspectPair.aspect })),
+  ]
+  if (picked.length < ASPECT_DRILL_MIN_ITEMS) return null
+
+  return {
+    kind: 'aspect-drill',
+    // The two infinitives (imperfective first), shown as the answer buttons for
+    // every sentence.
+    options: aspectPairMembers(word).map(aspectOption),
+    items: shuffle(picked, rng).map((it, i) => ({ id: `a${i}`, ...it })),
+    spell,
+    aspectRule:
+      rules['verb-aspect'] ? { id: 'verb-aspect', ...rules['verb-aspect'] } : null,
+    targets: [word.key],
+  }
 }
