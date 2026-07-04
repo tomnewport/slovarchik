@@ -44,8 +44,16 @@ const selectCorrect = computed(
 )
 const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
 
-// The dimensions the learner got wrong (case / number / gender), worded for the
-// feedback line — e.g. "case", "number", or "case and number".
+// Whether the (first-positioned) aspect step was answered wrong — the feedback
+// then names the verb that was needed, not just its grammatical slot.
+const aspectMissed = computed(() =>
+  selectSteps.value.some(
+    (s, i) => s.kind === 'aspect' && chosen.value[i] && !chosen.value[i].correct,
+  ),
+)
+
+// The dimensions the learner got wrong (case / number / gender / aspect),
+// worded for the feedback line — e.g. "case", "number", or "case and number".
 const wrongDimsLabel = computed(() => {
   const names = selectSteps.value
     .map((s, i) => (chosen.value[i] && !chosen.value[i].correct ? s.kind : null))
@@ -76,9 +84,26 @@ const slotAffix = computed(() => {
   }
 })
 
-// The slot token: lemma until solved, the correct form once solved.
+// An aspect drill must not leak which partner is correct, so until the aspect
+// step is answered the slot shows every candidate infinitive (impf / pf).
+const lemmaChoicesVisible = computed(() => {
+  const idx = selectSteps.value.findIndex((s) => s.kind === 'aspect')
+  return (
+    step.value === 'select' &&
+    idx >= 0 &&
+    (props.exercise.lemmaOptions?.length ?? 0) > 0 &&
+    chosen.value.length <= idx
+  )
+})
+
+// The slot token: the candidate lemma(s) until solved, the correct form after.
 const slotText = computed(() => {
-  const core = step.value === 'done' ? props.exercise.answerAccented : props.exercise.lemma
+  const core =
+    step.value === 'done'
+      ? props.exercise.answerAccented
+      : lemmaChoicesVisible.value
+        ? props.exercise.lemmaOptions.join(' / ')
+        : props.exercise.lemma
   return slotAffix.value.lead + core + slotAffix.value.trail
 })
 
@@ -177,7 +202,9 @@ onMounted(() => {
           <template v-if="overallCorrect">✓ Correct!</template>
           <template v-else-if="spellingOnlyMiss">
             ✓ Spelling right — but you picked the wrong {{ wrongDimsLabel }}.
-            It needed <strong>{{ exercise.slotLabel }}</strong>.
+            It needed
+            <strong v-if="aspectMissed" lang="ru">{{ exercise.lemma }}</strong>
+            <strong v-else>{{ exercise.slotLabel }}</strong>.
           </template>
           <template v-else>✗ {{ exercise.answerAccented }}</template>
         </p>
@@ -197,6 +224,17 @@ onMounted(() => {
           <p v-if="exercise.rule.explanation" class="muted">{{ exercise.rule.explanation }}</p>
           <ul v-if="exercise.rule.exceptions?.length" class="exceptions muted">
             <li v-for="(ex, i) in exercise.rule.exceptions" :key="i" lang="ru">{{ ex }}</li>
+          </ul>
+        </details>
+
+        <!-- Why this aspect: shown whenever the exercise opened with an aspect
+             choice, expanded when that choice went wrong. -->
+        <details v-if="exercise.aspectRule" class="rule" :open="aspectMissed">
+          <summary>{{ exercise.aspectRule.title }}</summary>
+          <p v-if="exercise.aspectRule.formula" class="formula" lang="ru">{{ exercise.aspectRule.formula }}</p>
+          <p v-if="exercise.aspectRule.explanation" class="muted">{{ exercise.aspectRule.explanation }}</p>
+          <ul v-if="exercise.aspectRule.exceptions?.length" class="exceptions muted">
+            <li v-for="(ex, i) in exercise.aspectRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
           </ul>
         </details>
 

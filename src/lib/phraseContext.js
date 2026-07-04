@@ -25,7 +25,15 @@ const PERSON_LABEL = {
   '1pl': 'we', '2pl': 'you (pl)', '3pl': 'they',
 }
 const PAST_LABEL = { past_m: 'he (past)', past_f: 'she (past)', past_n: 'it (past)', past_pl: 'they (past)' }
-const TENSE_LABEL = { present: 'Present', future: 'Future', past: 'Past' }
+const IMPERATIVE_LABEL = { imp_sg: 'ты (command)', imp_pl: 'вы (command)' }
+const TENSE_LABEL = { present: 'Present', future: 'Future', past: 'Past', imperative: 'Imperative' }
+
+/** Aspect display names and the short usage cue shown on each aspect option. */
+export const ASPECT_LABEL = Object.freeze({ impf: 'imperfective', pf: 'perfective' })
+const ASPECT_HINT = {
+  impf: 'a process, habit or repeated action',
+  pf: 'a single completed action or its result',
+}
 
 /**
  * Strip leading/trailing punctuation from a token, keeping inner letters and any
@@ -97,7 +105,11 @@ function slotLabelFor(target) {
   }
   if (target.person) {
     const tense = TENSE_LABEL[target.tense] ?? target.tense ?? ''
-    const who = PERSON_LABEL[target.person] ?? PAST_LABEL[target.person] ?? target.person
+    const who =
+      PERSON_LABEL[target.person] ??
+      PAST_LABEL[target.person] ??
+      IMPERATIVE_LABEL[target.person] ??
+      target.person
     return `${tense ? tense + ' · ' : ''}${who}`
   }
   return ''
@@ -155,18 +167,44 @@ function genderStep(target, word) {
 }
 
 /**
+ * Selection step: choose between the two members of an aspect pair — the drill
+ * from #315. The sentence context (habit vs. single completed action, …)
+ * determines which verb fits; the options are the two infinitives, imperfective
+ * first, each with a one-line usage cue. The correct option is always the word
+ * that owns the phrase (its usage examples are hand-authored around it).
+ */
+function aspectStep(word) {
+  const self = { ru: word.headword || word.ru, aspect: word.aspect, correct: true }
+  const partner = { ru: word.aspectPair.ru, aspect: word.aspectPair.aspect, correct: false }
+  const options = [self, partner].sort((a) => (a.aspect === 'impf' ? -1 : 1))
+  return {
+    kind: 'aspect',
+    prompt: 'Which verb does this sentence need?',
+    options: options.map((o) => ({
+      id: o.aspect,
+      label: o.ru,
+      hint: `${ASPECT_LABEL[o.aspect] ?? o.aspect} — ${ASPECT_HINT[o.aspect] ?? ''}`,
+      correct: o.correct,
+    })),
+  }
+}
+
+/**
  * The ordered selection steps the learner works through before spelling — case
  * always first, then the other dimension:
  *   - adjectives / possessive pronouns (gender-bearing): case → gender + number
  *   - nouns: case → number (singular / plural)
  *   - personal pronouns: case only (number is fixed by the lemma — я is always
  *     singular, so there's nothing to choose)
- *   - verbs (no case): no selection steps — straight to spelling
+ *   - verbs (no case): an aspect choice when the verb has a linked aspect
+ *     partner (говори́ть vs сказа́ть), otherwise straight to spelling
  * Each step is `{ kind, prompt, options: [{ id, label, hint?, correct }] }`; the
  * component grades each clicked option's `correct` flag.
  */
 export function buildSelectSteps(target, word) {
-  if (!target?.case) return []
+  if (!target?.case) {
+    return target?.person && word?.aspectPair ? [aspectStep(word)] : []
+  }
   if (target.gender) return [caseStep(target), genderStep(target, word)]
   if (word?.pos === 'noun') return [caseStep(target), numberStep(target)]
   return [caseStep(target)]
@@ -194,23 +232,33 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   const lemma = word?.headword || word?.ru || core
 
   const rule = target.rule ? (rules[target.rule] ?? null) : null
+  const selectSteps = buildSelectSteps(target, word)
+  const aspectSelect = selectSteps.find((s) => s.kind === 'aspect')
 
   return {
     kind: 'phrase-fix',
     tokens, // the correct sentence tokens
     targetIndex: idx,
     lemma,
+    // With an aspect step the slot must not reveal which partner is correct, so
+    // the component shows every candidate lemma (impf first) until it's chosen.
+    lemmaOptions: aspectSelect ? aspectSelect.options.map((o) => o.label) : null,
     answerAccented: core,
     answer: normalize(core),
-    // The ordered selection steps (case first, then number / gender + number);
-    // empty for verbs. The component grades each clicked option's `correct`.
-    selectSteps: buildSelectSteps(target, word),
+    // The ordered selection steps (aspect for paired verbs; otherwise case
+    // first, then number / gender + number). The component grades each clicked
+    // option's `correct`.
+    selectSteps,
     number: target.number ?? null,
     slotLabel: slotLabelFor(target),
     // The full, correct sentence — safe to speak only after a correct answer.
     ru: phrase.ru,
     en: phrase.en,
     rule: rule ? { id: target.rule, ...rule } : null,
+    // The generic aspect-choice explanation, shown whenever the exercise opened
+    // with an aspect step (alongside any slot-specific rule).
+    aspectRule:
+      aspectSelect && rules['verb-aspect'] ? { id: 'verb-aspect', ...rules['verb-aspect'] } : null,
     exception: rule?.exception === true,
     subject: phrase.subject ?? null,
     targets: [target.key],

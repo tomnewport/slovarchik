@@ -66,6 +66,14 @@ function firstEn(w) {
 // the current word has any, we surface a reminder after it's answered.
 const heteronyms = computed(() => current.value?.heteronyms ?? [])
 
+// Verbs linked to their aspect partner (говори́ть ↔ сказа́ть) get a reminder
+// after answering, so the pair is learned as a unit rather than as two
+// unrelated words with similar glosses.
+const aspectPair = computed(() => current.value?.aspectPair ?? null)
+const ASPECT_LABEL = { impf: 'imperfective', pf: 'perfective' }
+// Anything worth reading after a correct answer holds the auto-advance.
+const holdAfterAnswer = computed(() => heteronyms.value.length > 0 || aspectPair.value != null)
+
 // Build a weighted pool of known (learned+) words for drilling.
 // Returns null when no learned words exist yet (new user → fall back to all vocab).
 // Weights: 20x for slipped (lost) or at-risk words; 5x for the 25% of remaining
@@ -229,9 +237,10 @@ function record(correct) {
   if (correct) {
     score.right += 1
     // Celebrate, then move straight to the next question — unless there's a
-    // heteronym reminder to read, in which case wait for the learner to advance.
+    // heteronym or aspect-pair reminder to read, in which case wait for the
+    // learner to advance.
     celebrating.value = true
-    if (heteronyms.value.length === 0) {
+    if (!holdAfterAnswer.value) {
       advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
     }
   }
@@ -398,9 +407,22 @@ onUnmounted(() => {
           <SpeakButton :text="h.ru" />
         </div>
       </div>
-      <!-- Correct answers advance on their own; wrong answers and heteronym
-           reminders wait for the user. -->
-      <div v-if="!wasCorrect || heteronyms.length" class="row">
+      <!-- Aspect-pair reminder: learn the imperfective and perfective partners
+           as a unit (говори́ть ↔ сказа́ть). -->
+      <div v-if="aspectPair" class="card aspect-note">
+        <div class="muted" style="margin-bottom: 0.5rem">
+          Aspect pair — this verb is {{ ASPECT_LABEL[current.aspect] ?? current.aspect }};
+          its {{ ASPECT_LABEL[aspectPair.aspect] ?? aspectPair.aspect }} partner is:
+        </div>
+        <div class="row" style="gap: 0.5rem; align-items: center">
+          <strong lang="ru">{{ aspectPair.ru }}</strong>
+          <span class="muted">— {{ aspectPair.gloss }}</span>
+          <SpeakButton :text="aspectPair.ru" />
+        </div>
+      </div>
+      <!-- Correct answers advance on their own; wrong answers and heteronym /
+           aspect-pair reminders wait for the user. -->
+      <div v-if="!wasCorrect || holdAfterAnswer" class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
         <button @click="quit">Change mode</button>
       </div>
@@ -412,6 +434,10 @@ onUnmounted(() => {
 <style scoped>
 .heteronym-note {
   border-left: 3px solid #d9a400;
+  text-align: left;
+}
+.aspect-note {
+  border-left: 3px solid var(--primary, #4a7dd6);
   text-align: left;
 }
 </style>

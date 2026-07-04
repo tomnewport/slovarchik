@@ -232,14 +232,60 @@ describe('buildParadigm — verb', () => {
     expect(pastM.form).toBe('чита́л')
     expect(endingOf(p, pastM)).toBe('л')
   })
-  it('labels finite and past cells with both axes', () => {
+  it('labels finite cells with both axes, past cells without the redundant column', () => {
+    const first = p.cells.find((c) => c.row === '1sg' && c.col === 'finite')
+    expect(cellLabel(p, first)).toBe('1st singular · Present')
+    // "Past fem." already names the tense — no "· Past" suffix.
     const pastF = p.cells.find((c) => c.row === 'past_f' && c.col === 'past')
-    expect(cellLabel(p, pastF)).toBe('Past fem. · Past')
+    expect(cellLabel(p, pastF)).toBe('Past fem.')
   })
   it('labels the perfective finite tense as Simple Future', () => {
     const pf = buildParadigm(prochitat)
     expect(pf.cells).toHaveLength(10)
     expect(pf.cols[0].label).toBe('Simple Future')
+  })
+  it('omits the imperative column when the data carries no imperative', () => {
+    expect(p.cols.map((c) => c.key)).toEqual(['finite', 'past'])
+    expect(p.rows.some((r) => r.key.startsWith('imp_'))).toBe(false)
+  })
+})
+
+describe('buildParadigm — verb with an imperative', () => {
+  const skazat = {
+    key: 'сказать=to say',
+    pos: 'verb',
+    headword: 'сказа́ть',
+    meaning: 'to say',
+    extra: {
+      conjugation: {
+        imperative: { sg: 'скажи́', pl: 'скажи́те' },
+        future: { '1sg': 'скажу́', '2sg': 'ска́жешь', '3sg': 'ска́жет', '1pl': 'ска́жем', '2pl': 'ска́жете', '3pl': 'ска́жут' },
+        past_m: 'сказа́л',
+        past_f: 'сказа́ла',
+        past_n: 'сказа́ло',
+        past_pl: 'сказа́ли',
+      },
+    },
+  }
+  const p = buildParadigm(skazat)
+  it('adds an Imperative column with the ты and вы rows', () => {
+    expect(p.cols.map((c) => c.key)).toEqual(['finite', 'past', 'imper'])
+    expect(p.cols[2].label).toBe('Imperative')
+    expect(p.cells).toHaveLength(12)
+    const sg = p.cells.find((c) => c.row === 'imp_sg')
+    const pl = p.cells.find((c) => c.row === 'imp_pl')
+    expect(sg).toMatchObject({ col: 'imper', form: 'скажи́' })
+    expect(pl).toMatchObject({ col: 'imper', form: 'скажи́те' })
+  })
+  it('labels imperative cells without the redundant column', () => {
+    const sg = p.cells.find((c) => c.row === 'imp_sg')
+    expect(cellLabel(p, sg)).toBe('Imperative sg.')
+    const row = p.rows.find((r) => r.key === 'imp_sg')
+    expect(row.sub).toBe('ты')
+  })
+  it('folds the imperative into the shared stem computation', () => {
+    // ска́жут / сказа́л / скажи́ share only "ска" once stress is stripped.
+    expect(p.stem).toBe('ска')
   })
 })
 

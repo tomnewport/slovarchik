@@ -40,6 +40,8 @@ function storedForm(word, t) {
     const conj = word.extra?.conjugation
     if (!conj) return null
     if (t.person.startsWith('past')) return conj[t.person] ?? null
+    if (t.person === 'imp_sg') return conj.imperative?.sg ?? null
+    if (t.person === 'imp_pl') return conj.imperative?.pl ?? null
     return conj[t.tense]?.[t.person] ?? null
   }
   return null

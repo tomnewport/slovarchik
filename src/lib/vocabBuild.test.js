@@ -267,6 +267,66 @@ words:
   })
 })
 
+describe('aspect pairs', () => {
+  const text = `
+words:
+  "говорить=to speak":
+    cefr_level: A1
+    accented: говори́ть
+    aspect: impf
+    pair: "сказать=to say"
+    en_gb:
+      standard: to speak (to talk, produce speech)
+  "сказать=to say":
+    cefr_level: A1
+    accented: сказа́ть
+    aspect: pf
+    pair: "говорить=to speak"
+    en_gb:
+      standard: to say (to utter words, on one occasion)
+  "жить=to live":
+    cefr_level: A1
+    accented: жить
+    aspect: impf
+    en_gb:
+      standard: to live
+  "висеть=to hang":
+    cefr_level: A2
+    accented: висе́ть
+    aspect: impf
+    pair: "нет=такого"
+    en_gb:
+      standard: to hang
+`
+  const words = buildWords([{ pos: 'verb', text }])
+  const govorit = words.find((w) => w.key === 'говорить=to speak')
+  const skazat = words.find((w) => w.key === 'сказать=to say')
+
+  it('resolves reciprocal pair links with headword, aspect and gloss', () => {
+    expect(govorit.aspect).toBe('impf')
+    expect(govorit.aspectPair).toEqual({
+      key: 'сказать=to say',
+      ru: 'сказа́ть',
+      aspect: 'pf',
+      gloss: 'to say',
+    })
+    expect(skazat.aspectPair).toMatchObject({ key: 'говорить=to speak', ru: 'говори́ть', aspect: 'impf' })
+  })
+
+  it('leaves unpaired verbs and dangling keys unlinked', () => {
+    expect(words.find((w) => w.key === 'жить=to live').aspectPair).toBeNull()
+    expect(words.find((w) => w.key === 'висеть=to hang').aspectPair).toBeNull()
+  })
+
+  it('shapeVocab exposes aspect and aspectPair', () => {
+    const shaped = shapeVocab(words)
+    const g = shaped.find((v) => v.id === 'говорить=to speak')
+    expect(g.aspect).toBe('impf')
+    expect(g.aspectPair).toMatchObject({ ru: 'сказа́ть', aspect: 'pf' })
+    expect(shaped.find((v) => v.id === 'жить=to live').aspectPair).toBeNull()
+  })
+})
+
 describe('the bundled vocabulary fixtures', () => {
   const words = loadFixtureWords()
 
