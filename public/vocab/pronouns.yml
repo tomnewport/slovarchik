@@ -44,6 +44,7 @@ words:
         en_gb: Is this your house?
       - ru: Ва́ша кварти́ра о́чень больша́я.
         en_gb: Your flat is very big.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Где ва́ши докуме́нты?
         en_gb: Where are your documents?
         inflect: { token: 2, case: nom, number: pl, gender: pl, rule: pronoun-possessive }
@@ -200,6 +201,7 @@ words:
         en_gb: Every day I walk in the park.
       - ru: Ка́ждая страна́ интере́сна по-сво́ему.
         en_gb: Each country is interesting in its own way.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: В ка́ждом до́ме есть телеви́зор.
         en_gb: Each house has a television.
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
@@ -244,6 +246,7 @@ words:
     usage:
       - ru: Кака́я сего́дня пого́да?
         en_gb: What is the weather like today?
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-interrogative }
       - ru: В како́м го́роде ты живёшь?
         en_gb: Which city do you live in?
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-interrogative }
@@ -340,6 +343,7 @@ words:
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-interrogative }
       - ru: С кем ты идёшь в кино́?
         en_gb: Who are you going to the cinema with?
+        inflect: { token: 2, case: ins, rule: pronoun-interrogative }
     forms:
       nom: кто
       gen: кого́
@@ -429,6 +433,7 @@ words:
         en_gb: This is my friend.
       - ru: Моя́ сестра́ живёт в Пари́же.
         en_gb: My sister lives in Paris.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Где мои́ ключи́?
         en_gb: Where are my keys?
         inflect: { token: 2, case: nom, number: pl, gender: pl, rule: pronoun-possessive }
@@ -473,6 +478,7 @@ words:
         en_gb: We live in London.
       - ru: Нам ну́жно идти́ домо́й.
         en_gb: We need to go home.
+        inflect: { token: 1, case: dat, rule: pronoun-personal }
       - ru: Он идёт с на́ми в теа́тр.
         en_gb: He is going to the theatre with us.
         inflect: { token: 4, case: ins, number: pl, rule: pronoun-personal }
@@ -496,6 +502,7 @@ words:
         en_gb: Our house is in the centre.
       - ru: На́ша учи́тельница о́чень до́брая.
         en_gb: Our teacher is very kind.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-possessive }
       - ru: На́ши друзья́ прие́дут за́втра.
         en_gb: Our friends will arrive tomorrow.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: pronoun-possessive }
@@ -572,6 +579,7 @@ words:
         en_gb: I have no plan at all.
       - ru: Никака́я пого́да нас не остано́вит.
         en_gb: No weather will stop us.
+        inflect: { token: 1, case: nom, number: sg, gender: f }
       - ru: Он не зна́ет никаки́х языко́в.
         en_gb: He knows no languages at all.
         inflect: { token: 4, case: gen, number: pl, gender: pl, rule: pronoun-demonstrative }
@@ -609,6 +617,7 @@ words:
         en_gb: Nothing is eternal.
       - ru: Я ничего́ не понима́ю.
         en_gb: I understand nothing.
+        inflect: { token: 2, case: gen }
       - ru: Он ниче́м не интересу́ется.
         en_gb: He is interested in nothing.
         inflect: { token: 2, case: ins, number: sg, rule: pronoun-interrogative }
@@ -655,6 +664,7 @@ words:
         en_gb: She lives in Moscow.
       - ru: Я ча́сто ду́маю о ней.
         en_gb: I often think about her.
+        inflect: { token: 5, case: pre, rule: pronoun-personal }
       - ru: Я подари́л ей цветы́.
         en_gb: I gave her flowers.
         inflect: { token: 3, case: dat, number: sg, rule: pronoun-personal }
@@ -815,6 +825,7 @@ words:
         en_gb: Buy yourself a new jacket.
       - ru: Он недово́лен собо́й.
         en_gb: He is unhappy with himself.
+        inflect: { token: 3, case: ins, rule: pronoun-personal }
     forms:
       gen: себя́
       dat: себе́
@@ -898,6 +909,7 @@ words:
         en_gb: Where is your phone?
       - ru: Твоя́ соба́ка о́чень у́мная.
         en_gb: Your dog is very clever.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Я ви́дел твои́ фотогра́фии.
         en_gb: I saw your photographs.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: pronoun-possessive }
@@ -944,6 +956,7 @@ words:
         en_gb: Who is that person?
       - ru: Та де́вушка моя́ сестра́.
         en_gb: That girl is my sister.
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: В те го́ды жизнь была́ ино́й.
         en_gb: In those years life was different.
         inflect: { token: 2, case: acc, number: pl, gender: pl, rule: pronoun-demonstrative }
@@ -986,6 +999,7 @@ words:
     usage:
       - ru: У тебя́ есть вре́мя?
         en_gb: Do you have time?
+        inflect: { token: 2, case: gen, rule: pronoun-personal }
       - ru: Ты лю́бишь ко́фе?
         en_gb: Do you like coffee?
       - ru: Я тебя́ не слы́шу.
@@ -1060,6 +1074,7 @@ words:
         inflect: { token: 1, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: О чём вы говори́те?
         en_gb: What are you talking about?
+        inflect: { token: 2, case: pre, rule: pronoun-interrogative }
     forms:
       nom: что
       gen: чего́

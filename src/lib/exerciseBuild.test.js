@@ -237,14 +237,20 @@ describe('buildExercises', () => {
 
 describe('context sentence sets', () => {
   const wordByKey = new Map(words.map((w) => [w.key, w]))
-  // A paired verb with annotated sentences on both sides of its pair.
-  const paired = words.find(
-    (w) =>
-      w.pos === 'verb' &&
-      w.aspectPair &&
-      contextPhrases.has(w.key) &&
-      contextPhrases.has(w.aspectPair.key),
-  )
+  // A paired verb that yields a genuine two-member context set: both sides are
+  // annotated AND each side keeps at least one sentence whose English is unique
+  // to it (identical English can't discriminate the aspect, so buildContextSet
+  // drops such sentences from both — see its dedup-by-English logic).
+  const enKey = (p) => String(p?.en ?? '').trim().toLowerCase()
+  const paired = words.find((w) => {
+    if (w.pos !== 'verb' || !w.aspectPair) return false
+    const own = contextPhrases.get(w.key)
+    const partner = contextPhrases.get(w.aspectPair.key)
+    if (!own?.length || !partner?.length) return false
+    const ownEn = new Set(own.map(enKey))
+    const partnerEn = new Set(partner.map(enKey))
+    return own.some((p) => !partnerEn.has(enKey(p))) && partner.some((p) => !ownEn.has(enKey(p)))
+  })
 
   it('drills a single lexical item per set: one word, or its aspect pair', () => {
     const pool = contextKeys.slice(0, 8)
