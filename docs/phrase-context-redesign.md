@@ -81,11 +81,12 @@ rules:
 ## Interaction: two steps
 
 The renderer (`components/exercises/PhraseFixExercise.vue`) runs the drill in two
-graded steps. It renders a **set of sentences** (`exercise.items`, one per word;
-a bare single-sentence descriptor is treated as a set of one): the learner works
-the set one sentence at a time, with solved sentences staying visible above, and
-the exercise reports per-word results (`wrong: [keys]`) so a set spanning
-several words grades each on its own. Per sentence:
+graded steps. It renders a **set of sentences** (`exercise.items`, all drilling
+the same word or aspect pair — see "Context sets" below; a bare single-sentence
+descriptor is treated as a set of one): the learner works the set one sentence
+at a time, with solved sentences staying visible above, and the exercise reports
+per-word results (`wrong: [keys]`) so a set spanning an aspect pair grades each
+member on its own. Per sentence:
 
 1. **Select the slot.** The phrase shows with the target collapsed to its lemma.
    Every dimension is picked on **one compact board** (each `selectSteps` group
@@ -142,12 +143,16 @@ exercise is correct only if every pick and the spelling were right.
 
 ### Context sets
 
-The `inflect-context` practice now builds **one exercise bundling a small set of
-sentences** (`items: 3` in the catalogue, one sentence per drawn word) instead
-of several single-sentence exercises, so the select-then-spell loop covers more
-of the mastery batch per session. Almost every noun / adjective / pronoun
-carries exactly one annotated phrase, which is why a set spans *words*, not
-repeats of one word.
+Each `inflect-context` exercise bundles a **set of sentences that all drill the
+same lexical item** (`phraseContext.buildContextSet`): up to `items: 3` distinct
+annotated sentences of one drawn word — extended, for a verb with an aspect
+partner, by the partner's sentences (same both-sides-English exclusion as the
+aspect drill; partner sentences report against the drawn word when the partner
+is outside the mastery batch). Keeping a set to one root / aspect pair lets the
+learner contrast the English uses of the word against its Russian uses, instead
+of hopping between unrelated words. A set shrinks to the sentences the item
+actually has — most non-verbs carry a single annotated phrase today, so the
+catalogue runs two sets (two roots) per session.
 
 ## Engine wiring
 

@@ -112,15 +112,17 @@ export const PRACTICE_TYPES = Object.freeze([
     label: 'Type the table',
   },
   // Context — mastering (restore the right inflection inside natural phrases).
-  // One exercise bundling a small SET of sentences (one per word), rather than
-  // several single-sentence exercises — see exerciseBuild.CONTEXT_SET_ITEMS.
+  // Each exercise bundles a SET of sentences that all drill the same lexical
+  // item — the drawn word or, for a verb, its aspect pair — so the learner can
+  // contrast the English and Russian uses of that word. See
+  // exerciseBuild.CONTEXT_SET_ITEMS.
   {
     id: 'inflect-context',
     dimension: 'context',
     level: 'mastery',
     content: 'inflection',
-    exercises: 1,
-    items: 3, // sentences per set, each targeting a different word
+    exercises: 2,
+    items: 3, // max sentences per set, all of one word / aspect pair
     label: 'Use it in phrases',
   },
 ])

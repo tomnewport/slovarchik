@@ -23,7 +23,7 @@ import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
-import { buildAspectDrill, buildContextExercise, canBuildContext } from './phraseContext.js'
+import { buildAspectDrill, buildContextSet, canBuildContext } from './phraseContext.js'
 import { wordTokensInPhrase } from './phraseHint.js'
 
 /** Render `kind` for each practice type. */
@@ -46,9 +46,11 @@ export const PRACTICE_KIND = Object.freeze({
 export const MATCH_PAIRS = 10
 
 /**
- * Sentences bundled into one in-context inflection exercise (inflect-context).
- * Each sentence targets a different word, so a set spreads a single exercise's
- * pick-the-slot-then-spell loop over a few of the batch's words at once.
+ * Most sentences bundled into one in-context inflection exercise
+ * (inflect-context). A set drills ONE lexical item — several sentences of the
+ * same drawn word or, for a verb, of its aspect pair — so the learner can
+ * contrast the English uses of the word against its Russian uses. Sets shrink
+ * to the sentences the item actually has.
  */
 export const CONTEXT_SET_ITEMS = 3
 
@@ -337,23 +339,38 @@ function buildContext(practice, pi, ctx, make) {
     list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && canBuildContext(r, bctx))
   // Like buildInflect, mastery exercises never widen beyond the committed batch.
   const topUpSource = practice.level === 'mastery' ? [] : rest
+  const poolKeys = new Set(practice.pool ?? [])
   const out = []
-  // Each exercise is a SET of sentences, one per drawn word (up to `items`), so
-  // the pick-the-slot-then-spell loop runs over a few words back to back. Each
-  // item keeps its own single-word `targets`; the set's `targets` is their
+  // Each exercise is a SET of sentences that all drill the SAME lexical item —
+  // up to `items` sentences of one drawn word (or, for a verb, of its aspect
+  // pair) — so the learner contrasts the English uses of that word against its
+  // Russian uses instead of hopping between unrelated words. Each item keeps
+  // its own single-word `targets`; the set's `targets` is their (deduplicated)
   // union, and the component reports per-word results (`wrong`) against it.
   for (let e = 0; e < (practice.exercises ?? 1); e++) {
-    const picked = drawN(
-      resolvable(pool),
-      resolvable(topUpSource),
-      practice.items ?? CONTEXT_SET_ITEMS,
-      ctx.rng,
-      { frontBias: practice.bucket === 'current', used: ctx.used, keyOf: (r) => r.key },
-    )
-    const items = []
-    for (const r of picked) {
-      const ex = buildContextExercise(r, { ...bctx, rng: ctx.rng })
-      if (ex) items.push(ex)
+    const [word] = drawN(resolvable(pool), resolvable(topUpSource), 1, ctx.rng, {
+      frontBias: practice.bucket === 'current',
+      used: ctx.used,
+      keyOf: (r) => r.key,
+    })
+    if (!word) break
+    const partner = word.aspectPair?.key ? ctx.recordByKey.get(word.aspectPair.key) : null
+    const items = buildContextSet(word, {
+      ...bctx,
+      rng: ctx.rng,
+      items: practice.items ?? CONTEXT_SET_ITEMS,
+      partner,
+    })
+    // Mastery discipline: an aspect partner outside the committed batch must
+    // not record mastery attempts. Its sentences still assess the drawn word's
+    // skill (choosing between the pair IS that skill), so — exactly as the
+    // aspect drill does — report them against the drawn word instead.
+    if (practice.level === 'mastery') {
+      for (const it of items) {
+        if (!(it.targets ?? []).every((k) => k === word.key || poolKeys.has(k))) {
+          it.targets = [word.key]
+        }
+      }
     }
     if (items.length) {
       out.push(
@@ -361,7 +378,7 @@ function buildContext(practice, pi, ctx, make) {
           ...common(practice, pi),
           kind: 'phrase-fix',
           items,
-          targets: items.flatMap((it) => it.targets ?? []),
+          targets: [...new Set(items.flatMap((it) => it.targets ?? []))],
         }),
       )
     }

@@ -307,6 +307,83 @@ export function canBuildContext(word, { phrasesByKey } = {}) {
   return (phrasesByKey.get(word.key) ?? []).length > 0
 }
 
+/** Sample up to `n` distinct items, weighted by `weightOf` (no replacement). */
+function sampleWeighted(list, n, weightOf, rng) {
+  const pool = list.slice()
+  const out = []
+  while (out.length < n && pool.length) {
+    const pick = weightedPick(pool, weightOf, rng)
+    out.push(pick)
+    pool.splice(pool.indexOf(pick), 1)
+  }
+  return out
+}
+
+/**
+ * Build a SET of context exercises that all drill the same lexical item: up to
+ * `items` distinct annotated sentences of `word`, extended — for a verb with a
+ * linked aspect partner (pass its resolved record as `partner`) — by the
+ * partner's sentences. Keeping a set to one root / aspect pair, rather than
+ * hopping between unrelated words, lets the learner contrast how English and
+ * Russian each use that word across several sentences. A set shrinks to the
+ * sentences the item actually has (most words carry a single annotated phrase
+ * today, so non-verb sets are often a single sentence).
+ *
+ * For a pair, a sentence whose English is authored on both sides cannot
+ * discriminate the aspect (its choose-the-verb step would be unanswerable), so
+ * it is dropped from both — unless that would empty the word's own side, in
+ * which case the set stays own-only instead of pairing a duplicate English.
+ *
+ * @param {object} word normalised word record (the drawn word)
+ * @param {object} ctx
+ * @param {Map}    ctx.phrasesByKey key → annotated phrases (see indexPhrases)
+ * @param {object} [ctx.rules]      parsed grammar-rules.yml `rules` map
+ * @param {object} [ctx.partner]    resolved word record of `word.aspectPair`
+ * @param {number} [ctx.items]      max sentences in the set
+ * @param {() => number} [ctx.rng]
+ * @returns {object[]} phrase-fix descriptors, each targeting its own owner
+ */
+export function buildContextSet(
+  word,
+  { phrasesByKey, rules = {}, rng = Math.random, items = 3, partner = null } = {},
+) {
+  if (!word || !phrasesByKey) return []
+  const weightOf = (p) => (isException(p, rules) ? EXCEPTION_WEIGHT : 1)
+  const dedupe = (list) => {
+    const seen = new Set()
+    return (list ?? []).filter((p) => {
+      if (!p?.ru || seen.has(p.ru)) return false
+      seen.add(p.ru)
+      return true
+    })
+  }
+  let own = dedupe(phrasesByKey.get(word.key))
+  const paired = partner && word.aspectPair?.key === partner.key
+  let partners = paired ? dedupe(phrasesByKey.get(partner.key)) : []
+  if (partners.length) {
+    const ownEn = new Set(own.map(enKey))
+    const partnerEn = new Set(partners.map(enKey))
+    const unambiguous = own.filter((p) => !partnerEn.has(enKey(p)))
+    if (unambiguous.length) {
+      own = unambiguous
+      partners = partners.filter((p) => !ownEn.has(enKey(p)))
+    } else {
+      partners = []
+    }
+  }
+  // The word's own sentences take at least half the set; the partner fills
+  // whatever room is left (the same balance as the aspect drill).
+  const nPartner = Math.min(partners.length, items - Math.min(own.length, Math.ceil(items / 2)))
+  const nOwn = Math.min(own.length, items - nPartner)
+  const picked = [
+    ...sampleWeighted(own, nOwn, weightOf, rng).map((p) => ({ p, owner: word })),
+    ...sampleWeighted(partners, nPartner, weightOf, rng).map((p) => ({ p, owner: partner })),
+  ]
+  return shuffle(picked, rng)
+    .map(({ p, owner }) => buildFromPhrase(p, owner, { rules }))
+    .filter(Boolean)
+}
+
 // --- Verb aspect drill (usage · mastery) -----------------------------------
 //
 // How the usage dimension is mastered for a verb with an aspect partner: the

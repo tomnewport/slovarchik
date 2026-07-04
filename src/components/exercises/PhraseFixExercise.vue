@@ -8,8 +8,9 @@
 // Feedback (and the linked grammar rule) follows each sentence; solved
 // sentences stay visible above the current one. The descriptor is built by
 // lib/exerciseBuild.js (a set) or lib/phraseContext.js (a single sentence — a
-// bare descriptor is treated as a set of one). A set may span several words,
-// so the exercise reports per-word results via `wrong`. The full sentence is
+// bare descriptor is treated as a set of one). A set drills one lexical item —
+// a word or its aspect pair, so its items may still span two word keys — and
+// the exercise reports per-word results via `wrong`. The full sentence is
 // NEVER spoken until its form is spelled — we never voice the ungrammatical
 // lemma-in-slot version.
 import { computed, nextTick, ref, onMounted } from 'vue'
