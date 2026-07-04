@@ -159,6 +159,14 @@ you add a usage example that introduces a new word, give that word an entry
 (ideally in the right per-POS file, or as a gloss-only entry in `glossary.yml`).
 Run `node scripts/coverage-gloss.js` to list any gaps.
 
+> **⚠️ `glossary.yml` keys are surface forms, not lemmas.** Because the file is
+> generated from the words that actually occur in example sentences, an entry's
+> key may be an inflected form (`"азии=Asia"`, `"автономных=autonomous"`).
+> That's exactly right for tap-hints, which look up surface forms — but never
+> reuse these keys as dictionary headwords. If glossary entries are ever
+> promoted into the curriculum, they must be lemmatised first (or the file
+> extended with an explicit `lemma:` field).
+
 ---
 
 ## Per-part-of-speech schema
