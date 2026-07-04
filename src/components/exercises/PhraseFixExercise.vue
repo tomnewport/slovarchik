@@ -1,13 +1,16 @@
 <script setup>
-// In-context inflection drill (mastery). A real, correct sentence is shown with
-// one word collapsed to its dictionary form. The learner works in two stages:
-//   1. SELECT the grammatical slot — a sequence of picks, case first, then the
-//      other dimension: number for nouns, gender + number for adjectives /
-//      possessive pronouns. Personal pronouns pick case only; verbs skip it.
+// In-context inflection drill (mastery), run over a small SET of sentences.
+// Each item is a real, correct sentence with one word collapsed to its
+// dictionary form; the learner works through the set one sentence at a time:
+//   1. SELECT the grammatical slot — every dimension (case, number, gender,
+//      aspect) is picked on one compact board and checked together
 //   2. SPELL the correctly inflected form
-// The descriptor is built by lib/phraseContext.js from an annotated usage
-// example (an `inflect:` block in the vocab YAML). The full sentence is NEVER
-// spoken until the form is correct — we never voice the ungrammatical
+// Feedback (and the linked grammar rule) follows each sentence; solved
+// sentences stay visible above the current one. The descriptor is built by
+// lib/exerciseBuild.js (a set) or lib/phraseContext.js (a single sentence — a
+// bare descriptor is treated as a set of one). A set may span several words,
+// so the exercise reports per-word results via `wrong`. The full sentence is
+// NEVER spoken until its form is spelled — we never voice the ungrammatical
 // lemma-in-slot version.
 import { computed, nextTick, ref, onMounted } from 'vue'
 
@@ -19,116 +22,144 @@ import SpeakButton from '../SpeakButton.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
-// The ordered selection steps (case → number, or case → gender + number); empty
-// for verbs. Each is { kind, prompt, options: [{ id, label, hint?, correct }] }.
-const selectSteps = computed(() => props.exercise.selectSteps ?? [])
+// A set descriptor carries `items`; a bare single-sentence descriptor (the
+// standalone /phrase-fix view, or the aspect drill's spelling stage) is a set
+// of one.
+const items = computed(() => props.exercise.items ?? [props.exercise])
+const itemIdx = ref(0)
+const item = computed(() => items.value[itemIdx.value])
+
+// The selection board's groups (case / number / gender / aspect) for the
+// current item. Each is { kind, prompt, options: [{ id, label, hint?, correct }] }.
+const selectSteps = computed(() => item.value.selectSteps ?? [])
 const hasSelect = computed(() => selectSteps.value.length > 0)
 
-// step: 'select' → 'spell' → 'done'. Verbs start at 'spell'.
-const step = ref(hasSelect.value ? 'select' : 'spell')
-const selectIdx = ref(0) // which selection step the learner is on
-const chosen = ref([]) // the option clicked at each selection step, in order
+// Per-item stage: 'select' → 'spell' → 'done'. Items with nothing to select
+// (unpaired verbs) start at 'spell'.
+const stage = ref(hasSelect.value ? 'select' : 'spell')
+const picks = ref([]) // group index → the option currently chosen (re-pickable until Check)
 const typed = ref('')
 const spellCorrect = ref(false)
 const inputEl = ref(null)
+// Finished items, oldest first: { ru, correct, warn } (warn = spelling right,
+// selection wrong — shown amber, not red).
+const results = ref([])
 
-const currentSelect = computed(() => selectSteps.value[selectIdx.value] ?? null)
-// What the learner has picked so far, e.g. "Accusative" then "Accusative · Singular".
-const pickedSoFar = computed(() => chosen.value.map((o) => o.label).join(' · '))
-
-// Every selection step answered, and every one correct.
+// Every group picked (the Check button's gate)…
+const allPicked = computed(() =>
+  selectSteps.value.every((_, i) => picks.value[i] != null),
+)
+// …and, once checked, was every pick correct?
 const selectCorrect = computed(
-  () =>
-    chosen.value.length === selectSteps.value.length &&
-    chosen.value.every((o) => o.correct),
+  () => hasSelect.value === false || selectSteps.value.every((s, i) => picks.value[i]?.correct),
 )
 const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
 
-// Whether the (first-positioned) aspect step was answered wrong — the feedback
-// then names the verb that was needed, not just its grammatical slot.
+// Whether the aspect group was answered wrong — the feedback then names the
+// verb that was needed, not just its grammatical slot.
 const aspectMissed = computed(() =>
-  selectSteps.value.some(
-    (s, i) => s.kind === 'aspect' && chosen.value[i] && !chosen.value[i].correct,
-  ),
+  selectSteps.value.some((s, i) => s.kind === 'aspect' && picks.value[i] && !picks.value[i].correct),
 )
 
 // The dimensions the learner got wrong (case / number / gender / aspect),
 // worded for the feedback line — e.g. "case", "number", or "case and number".
 const wrongDimsLabel = computed(() => {
   const names = selectSteps.value
-    .map((s, i) => (chosen.value[i] && !chosen.value[i].correct ? s.kind : null))
+    .map((s, i) => (picks.value[i] && !picks.value[i].correct ? s.kind : null))
     .filter(Boolean)
   if (names.length <= 1) return names[0] ?? ''
   return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]
 })
 
-// The instructive near-miss: every slot was selected and the spelling matched,
-// but at least one selection was wrong. Worth calling out clearly so the learner
-// doesn't think their (correct) spelling was rejected.
+// The instructive near-miss: the spelling matched but at least one selection
+// was wrong. Worth calling out clearly so the learner doesn't think their
+// (correct) spelling was rejected.
 const spellingOnlyMiss = computed(
-  () =>
-    hasSelect.value &&
-    chosen.value.length === selectSteps.value.length &&
-    !selectCorrect.value &&
-    spellCorrect.value,
+  () => hasSelect.value && !selectCorrect.value && spellCorrect.value,
 )
 
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
 // so the slot doesn't drop it when we swap in the lemma / answer. Combining marks
 // (the stress accent) stay with the word core, so they're excluded from the affix.
 const slotAffix = computed(() => {
-  const orig = props.exercise.tokens?.[props.exercise.targetIndex] ?? ''
+  const orig = item.value.tokens?.[item.value.targetIndex] ?? ''
   return {
     lead: orig.match(/^[^\p{L}\p{M}]*/u)?.[0] ?? '',
     trail: orig.match(/[^\p{L}\p{M}]*$/u)?.[0] ?? '',
   }
 })
 
-// An aspect drill must not leak which partner is correct, so until the aspect
-// step is answered the slot shows every candidate infinitive (impf / pf).
-const lemmaChoicesVisible = computed(() => {
-  const idx = selectSteps.value.findIndex((s) => s.kind === 'aspect')
-  return (
-    step.value === 'select' &&
-    idx >= 0 &&
-    (props.exercise.lemmaOptions?.length ?? 0) > 0 &&
-    chosen.value.length <= idx
-  )
-})
+// An aspect drill must not leak which partner is correct, so until the board is
+// checked the slot shows every candidate infinitive (impf / pf).
+const lemmaChoicesVisible = computed(
+  () =>
+    stage.value === 'select' &&
+    (item.value.lemmaOptions?.length ?? 0) > 0 &&
+    selectSteps.value.some((s) => s.kind === 'aspect'),
+)
 
 // The slot token: the candidate lemma(s) until solved, the correct form after.
 const slotText = computed(() => {
   const core =
-    step.value === 'done'
-      ? props.exercise.answerAccented
+    stage.value === 'done'
+      ? item.value.answerAccented
       : lemmaChoicesVisible.value
-        ? props.exercise.lemmaOptions.join(' / ')
-        : props.exercise.lemma
+        ? item.value.lemmaOptions.join(' / ')
+        : item.value.lemma
   return slotAffix.value.lead + core + slotAffix.value.trail
 })
 
-function chooseOption(opt) {
-  if (step.value !== 'select') return
-  chosen.value = [...chosen.value, opt]
-  if (selectIdx.value < selectSteps.value.length - 1) {
-    selectIdx.value += 1 // advance to the next selection step (e.g. case → number)
-  } else {
-    step.value = 'spell'
-    nextTick(() => inputEl.value?.focus())
-  }
+function pickOption(groupIdx, opt) {
+  if (stage.value !== 'select') return
+  const next = picks.value.slice()
+  next[groupIdx] = opt
+  picks.value = next
+}
+
+// Commit the board: the picks are locked in and the spelling stage opens
+// (showing the slot the sentence actually needs, exactly as before).
+function checkSelection() {
+  if (stage.value !== 'select' || !allPicked.value) return
+  stage.value = 'spell'
+  nextTick(() => inputEl.value?.focus())
 }
 
 function submitSpell() {
-  if (step.value !== 'spell') return
-  spellCorrect.value = normalize(typed.value) === props.exercise.answer
-  step.value = 'done'
+  if (stage.value !== 'spell') return
+  spellCorrect.value = normalize(typed.value) === item.value.answer
+  stage.value = 'done'
   playFeedback(overallCorrect.value)
   // Only now — with the form known correct — is it safe to voice the sentence.
-  speak(props.exercise.ru)
+  speak(item.value.ru)
 }
 
+const isLast = computed(() => itemIdx.value >= items.value.length - 1)
+
 function next() {
-  emit('done', { correct: overallCorrect.value })
+  results.value = [
+    ...results.value,
+    {
+      ru: item.value.ru,
+      key: (item.value.targets ?? [])[0] ?? null,
+      correct: overallCorrect.value,
+      warn: spellingOnlyMiss.value,
+    },
+  ]
+  if (!isLast.value) {
+    itemIdx.value += 1
+    stage.value = (items.value[itemIdx.value].selectSteps ?? []).length ? 'select' : 'spell'
+    picks.value = []
+    typed.value = ''
+    spellCorrect.value = false
+    if (stage.value === 'spell') nextTick(() => inputEl.value?.focus())
+    return
+  }
+  emit('done', {
+    correct: results.value.every((r) => r.correct),
+    // Per-word results: a set spans several words, and only the missed ones
+    // should record a wrong attempt.
+    wrong: results.value.filter((r) => !r.correct && r.key).map((r) => r.key),
+  })
 }
 
 onMounted(() => {
@@ -138,57 +169,79 @@ onMounted(() => {
 
 <template>
   <div class="grid" style="gap: 1rem">
-    <p class="prompt-en muted">{{ exercise.en }}</p>
+    <p v-if="items.length > 1" class="set-progress muted">
+      Sentence {{ itemIdx + 1 }} of {{ items.length }}
+    </p>
+
+    <!-- Sentences already solved this set stay visible for context. -->
+    <ul v-if="results.length" class="done-list">
+      <li
+        v-for="(r, i) in results"
+        :key="i"
+        class="done-item"
+        :class="r.correct ? 'good' : r.warn ? 'warn' : 'bad'"
+        lang="ru"
+      >
+        <span class="done-mark">{{ r.correct ? '✓' : r.warn ? '≈' : '✗' }}</span>
+        {{ r.ru }}
+      </li>
+    </ul>
+
+    <p class="prompt-en muted">{{ item.en }}</p>
 
     <div class="phrase-line" lang="ru">
-      <template v-for="(tok, i) in exercise.tokens" :key="i">
+      <template v-for="(tok, i) in item.tokens" :key="i">
         <button
-          v-if="i === exercise.targetIndex && step !== 'done'"
+          v-if="i === item.targetIndex && stage !== 'done'"
           class="target-btn"
           type="button"
           @click="() => inputEl?.focus()"
         >{{ slotText }}</button>
         <mark
-          v-else-if="i === exercise.targetIndex"
+          v-else-if="i === item.targetIndex"
           :class="overallCorrect ? 'mark-ok' : spellingOnlyMiss ? 'mark-warn' : 'mark-err'"
         >{{ slotText }}</mark>
         <span v-else>{{ tok }}</span>
       </template>
     </div>
 
-    <!-- Stage 1 — work through the selection steps: case, then number / gender -->
-    <div v-if="step === 'select'" class="grid" style="gap: 0.6rem">
-      <p v-if="pickedSoFar" class="picked muted">
-        <em lang="ru">{{ exercise.lemma }}</em> → {{ pickedSoFar }} · …
-      </p>
-      <p class="step-label muted">{{ currentSelect.prompt }}</p>
-      <div class="case-grid">
-        <button
-          v-for="opt in currentSelect.options"
-          :key="opt.id"
-          type="button"
-          class="case-btn"
-          @click="chooseOption(opt)"
-        >
-          <strong>{{ opt.label }}</strong>
-          <small v-if="opt.hint" class="muted">{{ opt.hint }}</small>
-        </button>
-      </div>
+    <!-- Stage 1 — one compact board: every dimension picked, then checked together -->
+    <div v-if="stage === 'select'" class="grid" style="gap: 0.75rem">
+      <fieldset v-for="(step, si) in selectSteps" :key="step.kind" class="select-group">
+        <legend class="step-label muted">{{ step.prompt }}</legend>
+        <div class="case-grid" :class="{ narrow: step.options.length <= 4 && step.kind !== 'aspect' }">
+          <button
+            v-for="opt in step.options"
+            :key="opt.id"
+            type="button"
+            class="case-btn"
+            :class="{ selected: picks[si]?.id === opt.id }"
+            :aria-pressed="picks[si]?.id === opt.id"
+            @click="pickOption(si, opt)"
+          >
+            <strong>{{ opt.label }}</strong>
+            <small v-if="opt.hint" class="muted">{{ opt.hint }}</small>
+          </button>
+        </div>
+      </fieldset>
+      <button type="button" class="primary check-select" :disabled="!allPicked" @click="checkSelection">
+        Check
+      </button>
     </div>
 
-    <!-- Step 2 — spell the form -->
+    <!-- Stage 2 — spell the form -->
     <template v-else>
       <p class="slot-label muted">
-        <em lang="ru">{{ exercise.lemma }}</em> → {{ exercise.slotLabel }}
+        <em lang="ru">{{ item.lemma }}</em> → {{ item.slotLabel }}
       </p>
 
-      <form v-if="step === 'spell'" @submit.prevent="submitSpell" class="grid">
+      <form v-if="stage === 'spell'" @submit.prevent="submitSpell" class="grid">
         <input
           ref="inputEl"
           v-model="typed"
           type="text"
           lang="ru"
-          :data-answer="exercise.answerAccented"
+          :data-answer="item.answerAccented"
           placeholder="наберите правильную форму"
           autocomplete="off"
           autocapitalize="off"
@@ -203,42 +256,44 @@ onMounted(() => {
           <template v-else-if="spellingOnlyMiss">
             ✓ Spelling right — but you picked the wrong {{ wrongDimsLabel }}.
             It needed
-            <strong v-if="aspectMissed" lang="ru">{{ exercise.lemma }}</strong>
-            <strong v-else>{{ exercise.slotLabel }}</strong>.
+            <strong v-if="aspectMissed" lang="ru">{{ item.lemma }}</strong>
+            <strong v-else>{{ item.slotLabel }}</strong>.
           </template>
-          <template v-else>✗ {{ exercise.answerAccented }}</template>
+          <template v-else>✗ {{ item.answerAccented }}</template>
         </p>
 
         <!-- The full, correct sentence — safe to read aloud now. -->
         <p class="full-ru" lang="ru">
-          {{ exercise.ru }}
-          <SpeakButton :text="exercise.ru" />
+          {{ item.ru }}
+          <SpeakButton :text="item.ru" />
         </p>
 
-        <details v-if="exercise.rule" class="rule" :class="{ exception: exercise.exception }" open>
+        <details v-if="item.rule" class="rule" :class="{ exception: item.exception }" open>
           <summary>
-            <span v-if="exercise.exception" class="exc-badge">Exception</span>
-            {{ exercise.rule.title }}
+            <span v-if="item.exception" class="exc-badge">Exception</span>
+            {{ item.rule.title }}
           </summary>
-          <p v-if="exercise.rule.formula" class="formula" lang="ru">{{ exercise.rule.formula }}</p>
-          <p v-if="exercise.rule.explanation" class="muted">{{ exercise.rule.explanation }}</p>
-          <ul v-if="exercise.rule.exceptions?.length" class="exceptions muted">
-            <li v-for="(ex, i) in exercise.rule.exceptions" :key="i" lang="ru">{{ ex }}</li>
+          <p v-if="item.rule.formula" class="formula" lang="ru">{{ item.rule.formula }}</p>
+          <p v-if="item.rule.explanation" class="muted">{{ item.rule.explanation }}</p>
+          <ul v-if="item.rule.exceptions?.length" class="exceptions muted">
+            <li v-for="(ex, i) in item.rule.exceptions" :key="i" lang="ru">{{ ex }}</li>
           </ul>
         </details>
 
-        <!-- Why this aspect: shown whenever the exercise opened with an aspect
-             choice, expanded when that choice went wrong. -->
-        <details v-if="exercise.aspectRule" class="rule" :open="aspectMissed">
-          <summary>{{ exercise.aspectRule.title }}</summary>
-          <p v-if="exercise.aspectRule.formula" class="formula" lang="ru">{{ exercise.aspectRule.formula }}</p>
-          <p v-if="exercise.aspectRule.explanation" class="muted">{{ exercise.aspectRule.explanation }}</p>
-          <ul v-if="exercise.aspectRule.exceptions?.length" class="exceptions muted">
-            <li v-for="(ex, i) in exercise.aspectRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
+        <!-- Why this aspect: shown whenever the item carried an aspect choice,
+             expanded when that choice went wrong. -->
+        <details v-if="item.aspectRule" class="rule" :open="aspectMissed">
+          <summary>{{ item.aspectRule.title }}</summary>
+          <p v-if="item.aspectRule.formula" class="formula" lang="ru">{{ item.aspectRule.formula }}</p>
+          <p v-if="item.aspectRule.explanation" class="muted">{{ item.aspectRule.explanation }}</p>
+          <ul v-if="item.aspectRule.exceptions?.length" class="exceptions muted">
+            <li v-for="(ex, i) in item.aspectRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
           </ul>
         </details>
 
-        <button class="primary next" @click="next">Next →</button>
+        <button class="primary next" @click="next">
+          {{ isLast ? 'Next →' : 'Next sentence →' }}
+        </button>
       </div>
     </template>
   </div>
@@ -247,6 +302,35 @@ onMounted(() => {
 <style scoped>
 .prompt-en {
   font-style: italic;
+}
+.set-progress {
+  font-size: 0.85rem;
+  margin: 0;
+}
+.done-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+.done-item {
+  font-size: 0.95rem;
+  text-align: left;
+}
+.done-item.good {
+  color: var(--good);
+}
+.done-item.warn {
+  color: var(--warn, #c9962b);
+}
+.done-item.bad {
+  color: var(--bad);
+}
+.done-mark {
+  display: inline-block;
+  width: 1.1rem;
+  font-weight: 700;
 }
 /* Flex + gap guarantees a visible space between every word chunk regardless of
    how the template's whitespace is condensed. */
@@ -299,13 +383,25 @@ onMounted(() => {
 .step-label {
   font-size: 0.95rem;
 }
-.picked {
-  font-size: 0.9rem;
+.select-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+  text-align: left;
+}
+.select-group legend {
+  padding: 0;
 }
 .case-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+}
+/* Short single-word options (number / gender chips) sit four to a row. */
+.case-grid.narrow {
+  grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
 }
 .case-btn {
   display: grid;
@@ -320,8 +416,16 @@ onMounted(() => {
 .case-btn:hover {
   border-color: var(--primary);
 }
+.case-btn.selected {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 12%, var(--card));
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
 .case-btn small {
   font-size: 0.75rem;
+}
+.check-select {
+  justify-self: start;
 }
 .slot-label {
   font-size: 0.9rem;

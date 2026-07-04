@@ -111,14 +111,17 @@ export const PRACTICE_TYPES = Object.freeze([
     exercises: 2,
     label: 'Type the table',
   },
-  // Context — mastering (restore the right inflection inside a natural phrase)
+  // Context — mastering (restore the right inflection inside natural phrases).
+  // One exercise bundling a small SET of sentences (one per word), rather than
+  // several single-sentence exercises — see exerciseBuild.CONTEXT_SET_ITEMS.
   {
     id: 'inflect-context',
     dimension: 'context',
     level: 'mastery',
     content: 'inflection',
-    exercises: 2,
-    label: 'Use it in a phrase',
+    exercises: 1,
+    items: 3, // sentences per set, each targeting a different word
+    label: 'Use it in phrases',
   },
 ])
 

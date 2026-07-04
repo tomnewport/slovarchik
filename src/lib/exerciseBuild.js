@@ -12,7 +12,9 @@
 //   type     spell with the hintable keyboard (spell-word, spell-phrase, dictation)
 //   speak    repeat aloud                     (repeat-word, repeat-phrase)
 //   inflect  fill an inflection table         (inflect-bank, inflect-keyboard)
-//   phrase-fix restore an inflection in a phrase (inflect-context)
+//   aspect-drill pick the aspect partner per sentence, then conjugate
+//            (inflect-keyboard, emitted instead of the table for paired verbs)
+//   phrase-fix restore an inflection in a set of phrases (inflect-context)
 //
 // Every descriptor carries `targets` (the word keys it should report to the
 // progress store) plus `dimension`/`level` so results map back to the model.
@@ -21,7 +23,7 @@ import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
-import { buildContextExercise, canBuildContext } from './phraseContext.js'
+import { buildAspectDrill, buildContextExercise, canBuildContext } from './phraseContext.js'
 import { wordTokensInPhrase } from './phraseHint.js'
 
 /** Render `kind` for each practice type. */
@@ -42,6 +44,13 @@ export const PRACTICE_KIND = Object.freeze({
 
 /** Pairs shown in a single matching board. */
 export const MATCH_PAIRS = 10
+
+/**
+ * Sentences bundled into one in-context inflection exercise (inflect-context).
+ * Each sentence targets a different word, so a set spreads a single exercise's
+ * pick-the-slot-then-spell loop over a few of the batch's words at once.
+ */
+export const CONTEXT_SET_ITEMS = 3
 
 /**
  * Minimum identification encounters a word must have before it is eligible for
@@ -296,16 +305,29 @@ function buildInflect(practice, pi, ctx, make) {
     keyOf: (r) => r.key,
   })
   const mode = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
-  return picked.map((r) =>
-    make({
+  return picked.map((r) => {
+    // Usage mastery for a verb with an aspect partner is the aspect drill —
+    // pick the right member of the pair for a batch of English sentences, then
+    // spell one conjugated form — rather than typing the full table. Verbs the
+    // drill can't be built for (no partner, thin data) keep the table.
+    if (mode === 'keyboard' && r.pos === 'verb') {
+      const drill = buildAspectDrill(r, {
+        phrasesByKey: ctx.contextPhrases,
+        phrasesBySource: ctx.phrasesBySource,
+        rules: ctx.rules,
+        rng: ctx.rng,
+      })
+      if (drill) return make({ ...common(practice, pi), ...drill })
+    }
+    return make({
       ...common(practice, pi),
       kind: 'inflect',
       mode,
       targets: [r.key],
       wordKey: r.key,
       lemma: r.headword || r.ru,
-    }),
-  )
+    })
+  })
 }
 
 function buildContext(practice, pi, ctx, make) {
@@ -315,15 +337,34 @@ function buildContext(practice, pi, ctx, make) {
     list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && canBuildContext(r, bctx))
   // Like buildInflect, mastery exercises never widen beyond the committed batch.
   const topUpSource = practice.level === 'mastery' ? [] : rest
-  const picked = drawN(resolvable(pool), resolvable(topUpSource), practice.exercises, ctx.rng, {
-    frontBias: practice.bucket === 'current',
-    used: ctx.used,
-    keyOf: (r) => r.key,
-  })
   const out = []
-  for (const r of picked) {
-    const ex = buildContextExercise(r, { ...bctx, rng: ctx.rng })
-    if (ex) out.push(make({ ...common(practice, pi), ...ex, targets: [r.key] }))
+  // Each exercise is a SET of sentences, one per drawn word (up to `items`), so
+  // the pick-the-slot-then-spell loop runs over a few words back to back. Each
+  // item keeps its own single-word `targets`; the set's `targets` is their
+  // union, and the component reports per-word results (`wrong`) against it.
+  for (let e = 0; e < (practice.exercises ?? 1); e++) {
+    const picked = drawN(
+      resolvable(pool),
+      resolvable(topUpSource),
+      practice.items ?? CONTEXT_SET_ITEMS,
+      ctx.rng,
+      { frontBias: practice.bucket === 'current', used: ctx.used, keyOf: (r) => r.key },
+    )
+    const items = []
+    for (const r of picked) {
+      const ex = buildContextExercise(r, { ...bctx, rng: ctx.rng })
+      if (ex) items.push(ex)
+    }
+    if (items.length) {
+      out.push(
+        make({
+          ...common(practice, pi),
+          kind: 'phrase-fix',
+          items,
+          targets: items.flatMap((it) => it.targets ?? []),
+        }),
+      )
+    }
   }
   return out
 }
@@ -499,10 +540,28 @@ export function buildExercises(
 ) {
   const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
   const recordByKey = new Map(words.map((w) => [w.key, w]))
+  // Usage phrases grouped by the word that owns them — the aspect drill draws a
+  // verb pair's sentences from here (no `inflect:` annotation needed to pick).
+  const phrasesBySource = new Map()
+  for (const p of phrases) {
+    if (!p?.source) continue
+    if (!phrasesBySource.has(p.source)) phrasesBySource.set(p.source, [])
+    phrasesBySource.get(p.source).push(p)
+  }
   // Shared across every practice so draws spread over the whole lesson: a word
   // recurs only once the rest of its pool has had a turn (mid-lesson spacing).
   const used = new Map()
-  const ctx = { vocab, recordByKey, phrases, rng, encounterCount, contextPhrases, rules, used }
+  const ctx = {
+    vocab,
+    recordByKey,
+    phrases,
+    phrasesBySource,
+    rng,
+    encounterCount,
+    contextPhrases,
+    rules,
+    used,
+  }
 
   const out = []
   let seq = 0
