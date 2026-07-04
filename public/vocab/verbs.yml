@@ -358,7 +358,7 @@ words:
       - ru: Сне́г блесте́л на со́лнце.
         en_gb: The snow shone in the sun.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Её глаза́ блести́т от ра́дости.
+      - ru: Её глаз блести́т от ра́дости.
         en_gb: Her eye shines with joy.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: По́сле дождя́ ли́стья бу́дут блесте́ть на со́лнце.
@@ -1429,7 +1429,7 @@ words:
       - ru: Она́ глубоко́ вздохну́ла.
         en_gb: She took a deep breath.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
-      - ru: Я вздохну́ и нача́ло.
+      - ru: Я вздохну́ и начну́.
         en_gb: I will take a breath and begin.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: По́сле экза́мена я наконе́ц вздохну́ споко́йно.
@@ -2456,7 +2456,7 @@ words:
       - ru: Спи́чка вспы́хнет от тре́ния.
         en_gb: The match will flare up from friction.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
-      - ru: От и́скры су́хо́е се́но вспы́хнет момента́льно.
+      - ru: От и́скры сухо́е се́но вспы́хнет момента́льно.
         en_gb: From a spark the dry hay will flare up instantly.
         inflect: { token: 5, tense: future, person: 3sg, rule: verb-future }
       - ru: Без ве́тра ого́нь не вспы́хнул бы так бы́стро.
@@ -9649,9 +9649,9 @@ words:
       - ru: Э́тот вопро́с интересова́л всех.
         en_gb: This question interested everyone.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
-      - ru: Тебя́ интересу́ют спо́рт?
+      - ru: Тебя́ интересу́ет спо́рт?
         en_gb: Are you interested in sports?
-        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Э́та те́ма бу́дет интересова́ть мно́гих.
         en_gb: This topic will interest many people.
       - ru: Тебя́ бы э́то интересова́ло ра́ньше.
@@ -12079,7 +12079,7 @@ words:
       - ru: Я нажму́ на педа́ль.
         en_gb: I will press the pedal.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Он нажа́л на руча́ку две́ри.
+      - ru: Он нажа́л на ру́чку две́ри.
         en_gb: He pressed on the door handle.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я бы нажа́л на кно́пку, е́сли бы знал.
@@ -16861,7 +16861,7 @@ words:
     en_gb:
       standard: to fall (to drop down)
     usage:
-      - ru: Ле́том листья́ не па́дают.
+      - ru: Ле́том ли́стья не па́дают.
         en_gb: In summer the leaves don't fall.
         inflect: { token: 4, tense: present, person: 3pl, rule: verb-present }
       - ru: Снег па́дает на зе́млю.
@@ -22035,7 +22035,7 @@ words:
     collections:
       - shopping
     usage:
-      - ru: Я потра́тил всё де́ньги на кни́ги.
+      - ru: Я потра́тил все де́ньги на кни́ги.
         en_gb: I spent all my money on books.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не трать сто́лько вре́мени на и́гры.
@@ -26474,7 +26474,7 @@ words:
       past_n: разобра́ло
       past_pl: разобра́ли
     usage:
-      - ru: Он разобра́л ста́рый часы́.
+      - ru: Он разобра́л ста́рые часы́.
         en_gb: He took apart the old clock.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я разберу́ э́тот механи́зм.
@@ -31872,7 +31872,7 @@ words:
       - ru: Они́ толкну́ли маши́ну вперёд.
         en_gb: They pushed the car forward.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: За́втра я толкну́ кача́ли посильне́е.
+      - ru: За́втра я толкну́ каче́ли посильне́е.
         en_gb: Tomorrow I will push the swing harder.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Я бы толкну́л дверь, но она́ за́перта.
@@ -32479,7 +32479,7 @@ words:
       - ru: Я уберу́ кни́ги со стола́.
         en_gb: I will clear the books off the table.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Она́ убрала́ ко́мнату пе́ред госте́й.
+      - ru: Она́ убрала́ ко́мнату до прихо́да госте́й.
         en_gb: She tidied the room before the guests.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Они́ уберу́т му́сор у́тром.
@@ -33822,7 +33822,7 @@ words:
       - ru: Я успоко́юсь, когда́ узна́ю пра́вду.
         en_gb: I will calm down when I learn the truth.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: За́втра он успоко́ится и всё пойму́т.
+      - ru: За́втра он успоко́ится и все пойму́т.
         en_gb: Tomorrow he will calm down and everyone will understand.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Я бы успоко́ился, узна́в пра́вду.
