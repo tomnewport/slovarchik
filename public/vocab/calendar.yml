@@ -41,6 +41,7 @@ words:
         en_gb: August is the last month of summer.
       - ru: К а́вгусту созрева́ют фру́кты.
         en_gb: By August the fruit ripens.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: а́вгуст
       sg_gen: а́вгуста
@@ -73,6 +74,7 @@ words:
           - It is often rainy in April.
       - ru: К апре́лю та́ет снег.
         en_gb: By April the snow melts.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: апре́ль
       sg_gen: апре́ля
@@ -134,6 +136,7 @@ words:
         en_gb: Tuesday was very long.
       - ru: До вто́рника оста́лось два дня.
         en_gb: There are two days left until Tuesday.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: вто́рник
       sg_gen: вто́рника
@@ -164,6 +167,7 @@ words:
         en_gb: December is the first month of winter.
       - ru: К декабрю́ выпада́ет снег.
         en_gb: By December snow falls.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: дека́брь
       sg_gen: декабря́
@@ -224,6 +228,7 @@ words:
         en_gb: July is the warmest month.
       - ru: По́сле ию́ля наступа́ет а́вгуст.
         en_gb: After July comes August.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: ию́ль
       sg_gen: ию́ля
@@ -254,6 +259,7 @@ words:
         en_gb: June is the first month of summer.
       - ru: К ию́ню зака́нчивается шко́ла.
         en_gb: By June school ends.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: ию́нь
       sg_gen: ию́ня
@@ -286,6 +292,7 @@ words:
         en_gb: After May summer begins.
         en_alt:
           - summer begins after May
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: май
       sg_gen: ма́я
@@ -316,6 +323,7 @@ words:
         en_gb: March is the first month of spring.
       - ru: По́сле ма́рта стано́вится тепле́е.
         en_gb: After March it becomes warmer.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: март
       sg_gen: ма́рта
@@ -349,6 +357,7 @@ words:
         en_gb: Maslenitsa lasts a whole week.
       - ru: Пе́ред Ма́сленицей мы покупа́ем муку́.
         en_gb: Before Maslenitsa we buy flour.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: Ма́сленица
       sg_gen: Ма́сленицы
@@ -396,6 +405,7 @@ words:
         en_gb: November is a cold and dark month.
       - ru: По́сле ноября́ начина́ется зима́.
         en_gb: After November winter begins.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: ноя́брь
       sg_gen: ноября́
@@ -426,6 +436,7 @@ words:
         en_gb: October is golden autumn.
       - ru: К октябрю́ дере́вья желте́ют.
         en_gb: By October the trees turn yellow.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: октя́брь
       sg_gen: октября́
@@ -456,6 +467,7 @@ words:
         en_gb: Easter is an important spring holiday.
       - ru: Пе́ред Па́схой кра́сят я́йца.
         en_gb: Before Easter people dye eggs.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: Па́сха
       sg_gen: Па́схи
@@ -480,6 +492,7 @@ words:
         en_gb: Monday is a hard day.
       - ru: По понеде́льникам у нас собра́ние.
         en_gb: On Mondays we have a meeting.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: понеде́льник
       sg_gen: понеде́льника
@@ -510,6 +523,7 @@ words:
         en_gb: Friday is the end of the working week.
       - ru: По пя́тницам мы у́жинаем вме́сте.
         en_gb: On Fridays we have dinner together.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: пя́тница
       sg_gen: пя́тницы
@@ -540,6 +554,7 @@ words:
         en_gb: Christmas is a bright holiday.
       - ru: Пе́ред Рождество́м все убира́ют дом.
         en_gb: Before Christmas everyone tidies the house.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: Рождество́
       sg_gen: Рождества́
@@ -564,6 +579,7 @@ words:
         en_gb: September is the first month of autumn.
       - ru: По́сле сентября́ стано́вится прохла́днее.
         en_gb: After September it gets cooler.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: сентя́брь
       sg_gen: сентября́
@@ -594,6 +610,7 @@ words:
         en_gb: Wednesday is the middle of the week.
       - ru: В сре́ду я был за́нят.
         en_gb: On Wednesday I was busy.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: среда́
       sg_gen: среды́
@@ -624,6 +641,7 @@ words:
         en_gb: Saturday is a day off.
       - ru: По суббо́там я хожу́ на ры́нок.
         en_gb: On Saturdays I go to the market.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: суббо́та
       sg_gen: суббо́ты
@@ -654,6 +672,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: К февралю́ всё бу́дет гото́во.
         en_gb: Everything will be ready by February.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: февра́ль
       sg_gen: февраля́
@@ -686,6 +705,7 @@ words:
         en_gb: Thursday is my favourite day.
       - ru: По четверга́м рабо́тает ры́нок.
         en_gb: The market is open on Thursdays.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: четве́рг
       sg_gen: четверга́
@@ -748,6 +768,7 @@ words:
         en_gb: January is the coldest month.
       - ru: По́сле января́ наступа́ет февра́ль.
         en_gb: After January comes February.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: янва́рь
       sg_gen: января́

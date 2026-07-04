@@ -159,6 +159,14 @@ you add a usage example that introduces a new word, give that word an entry
 (ideally in the right per-POS file, or as a gloss-only entry in `glossary.yml`).
 Run `node scripts/coverage-gloss.js` to list any gaps.
 
+> **⚠️ `glossary.yml` keys are surface forms, not lemmas.** Because the file is
+> generated from the words that actually occur in example sentences, an entry's
+> key may be an inflected form (`"азии=Asia"`, `"автономных=autonomous"`).
+> That's exactly right for tap-hints, which look up surface forms — but never
+> reuse these keys as dictionary headwords. If glossary entries are ever
+> promoted into the curriculum, they must be lemmatised first (or the file
+> extended with an explicit `lemma:` field).
+
 ---
 
 ## Per-part-of-speech schema
@@ -407,6 +415,13 @@ annotation for every case, but each kind of inflection should be represented
 across subjects. Annotating the example also leaves the sentence available to
 the translation/spelling/listening drills, so a good example improves several
 drills at once.
+
+**Bulk-annotating.** `node scripts/annotate-inflect.mjs` fills in `inflect:`
+blocks for usage examples that lack them, but only where the grammatical slot is
+provable — the token's form matches exactly one paradigm cell, or a governing
+preposition pins the case. It never annotates nominative subjects and skips
+genuinely ambiguous sentences. Run it (`--apply`) after adding words, then
+review the diff; hand-annotate the ambiguous cases it leaves behind.
 
 **`grammar-rules.yml`** — short rule/formula explanations keyed by id (referenced
 by `inflect.rule`), shown when the answer is revealed. It is loaded separately

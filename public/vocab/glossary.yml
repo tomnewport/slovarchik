@@ -5,6 +5,12 @@
 # can translate every word a learner can tap. Excluded from every drill, the
 # phrase bank and the batch/progress engine (see learnableWords in vocabBuild).
 # Generated from the example corpus; prefer regenerating to hand-editing.
+#
+# INVARIANT: keys are surface forms exactly as they occur in the corpus, NOT
+# lemmas (e.g. "азии" = Asia, "автономных" = autonomous). That is what the
+# tap-hint form index wants, but it means these keys must never be treated as
+# dictionary headwords — anything promoting entries out of this file (e.g. a
+# glossary→curriculum pipeline) must first lemmatise, or add a `lemma:` field.
 ---
 words:
   "авария=accident":
@@ -4153,10 +4159,10 @@ words:
     accented: "кача́ется"
     en_gb:
       standard: "rocks"
-  "качали=swing":
+  "качели=swing":
     cefr_level: B1
     learn: false
-    accented: "кача́ли"
+    accented: "каче́ли"
     en_gb:
       standard: "swing"
   "качественно=with quality":
