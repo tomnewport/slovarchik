@@ -588,6 +588,9 @@ words:
       - ru: Я бы брал кни́ги в библиоте́ке ча́ще.
         en_gb: I would take books from the library more often.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Бери́ кни́гу со стола́.
+        en_gb: Take the book from the table.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: бери́
@@ -1053,6 +1056,9 @@ words:
       - ru: Без реце́пта я бы вари́л суп по-сво́ему.
         en_gb: Without a recipe I would cook the soup my own way.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Вари́ суп на ме́дленном огне́.
+        en_gb: Cook the soup on a low flame.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
   "ввести=to introduce":
     cefr_level: B1
     accented: ввести́
@@ -1191,6 +1197,12 @@ words:
       - ru: Я бы ве́рил тебе́, е́сли бы ты не врал.
         en_gb: I would believe you if you did not lie.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Верь в свои́ си́лы.
+        en_gb: Believe in your own strength.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты мне ве́ришь?
+        en_gb: Do you believe me?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: верь
@@ -2856,6 +2868,9 @@ words:
       - ru: Без сове́та я бы выбира́л до́лго.
         en_gb: Without advice I would choose for a long time.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Выбира́й пода́рок сам.
+        en_gb: Choose the present yourself.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
   "выбрать=to choose":
     cefr_level: A2
     accented: вы́брать
@@ -4420,6 +4435,12 @@ words:
       - ru: В де́тстве он говори́л о́чень ти́хо.
         en_gb: As a child he spoke very quietly.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Говори́ то́лько пра́вду.
+        en_gb: Speak only the truth.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты говори́шь по-англи́йски?
+        en_gb: Do you speak English?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: говори́
@@ -4566,6 +4587,9 @@ words:
       - ru: Я бы гото́вил ча́ще, е́сли бы́ло вре́мя.
         en_gb: I would cook more often if there were time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Гото́вь у́жин, го́сти ско́ро приду́т.
+        en_gb: Cook dinner, the guests will come soon.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: гото́вь
@@ -4762,6 +4786,9 @@ words:
       - ru: Я бы дава́л бо́льше, е́сли бы мог.
         en_gb: I would give more if I could.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Дава́й встре́тимся за́втра ве́чером.
+        en_gb: Let's meet tomorrow evening.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: дава́й
@@ -4953,6 +4980,12 @@ words:
       - ru: Я бы де́лал э́то по-друго́му.
         en_gb: I would do this differently.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Де́лай заря́дку ка́ждое у́тро.
+        en_gb: Do exercises every morning.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Что ты де́лаешь сего́дня ве́чером?
+        en_gb: What are you doing this evening?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: де́лай
@@ -5046,6 +5079,9 @@ words:
       - ru: Я бы держа́л зонт, е́сли бы шёл дождь.
         en_gb: I would hold the umbrella if it were raining.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Держи́ ребёнка за́ руку.
+        en_gb: Hold the child by the hand.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
   "держаться=to hold on":
     cefr_level: B1
     accented: держа́ться
@@ -6089,6 +6125,9 @@ words:
       - ru: Я бы ду́мал о тебе́ ка́ждый день.
         en_gb: I would think about you every day.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ду́май о бу́дущем.
+        en_gb: Think about the future.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: ду́май
@@ -6207,6 +6246,9 @@ words:
       - ru: Я бы ел ме́ньше сла́дкого.
         en_gb: I would eat less sweet food.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ешь бо́льше фру́ктов и о́вощей.
+        en_gb: Eat more fruit and vegetables.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: ешь
@@ -6363,6 +6405,12 @@ words:
       - ru: Я бы ждал тебя́ хоть весь ве́чер.
         en_gb: I would wait for you all evening.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Жди меня́ у вхо́да.
+        en_gb: Wait for me at the entrance.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Кого́ ты ждёшь?
+        en_gb: Who are you waiting for?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: жди
@@ -6513,6 +6561,9 @@ words:
       - ru: Я бы жил в дере́вне, е́сли бы мог.
         en_gb: I would live in the countryside if I could.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Где ты живёшь?
+        en_gb: Where do you live?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: живи́
@@ -9066,6 +9117,9 @@ words:
       - ru: Я бы звони́л ча́ще, но нет вре́мени.
         en_gb: I would call more often, but there is no time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Звони́ роди́телям ча́ще.
+        en_gb: Call your parents more often.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: звони́
@@ -9176,6 +9230,9 @@ words:
       - ru: Е́сли бы я знал, я бы сказа́л.
         en_gb: If I had known, I would have told you.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты зна́ешь его́ а́дрес?
+        en_gb: Do you know his address?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: знай
@@ -9255,6 +9312,9 @@ words:
       - ru: Я бы игра́л на скри́пке, е́сли бы уме́л.
         en_gb: I would play the violin if I could.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты игра́ешь на гита́ре?
+        en_gb: Do you play the guitar?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: игра́й
@@ -10649,6 +10709,9 @@ words:
       - ru: Я бы корми́л ко́шку три ра́за в день.
         en_gb: I would feed the cat three times a day.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Корми́ ко́шку два ра́за в день.
+        en_gb: Feed the cat twice a day.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
   "красить=to paint":
     cefr_level: B1
     accented: кра́сить
@@ -10824,6 +10887,9 @@ words:
       - ru: Мы ку́пим биле́ты на по́езд за́втра.
         en_gb: We will buy the train tickets tomorrow.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
+      - ru: Купи́ хлеб и молоко́.
+        en_gb: Buy bread and milk.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: купи́
@@ -11288,6 +11354,9 @@ words:
       - ru: Я бы люби́л э́тот го́род бо́льше без шу́ма.
         en_gb: I would love this city more without the noise.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты лю́бишь чёрный ко́фе?
+        en_gb: Do you like black coffee?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: люби́
@@ -11785,6 +11854,9 @@ words:
       - ru: Я бы мыл посу́ду ча́ще, е́сли бы успева́л.
         en_gb: I would wash the dishes more often if I had time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Мой ру́ки пе́ред едо́й.
+        en_gb: Wash your hands before eating.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: мой
@@ -17577,6 +17649,9 @@ words:
       - ru: Я бы пел гро́мче, е́сли б знал слова́.
         en_gb: I would sing louder if I knew the words.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Пой свою́ люби́мую пе́сню.
+        en_gb: Sing your favourite song.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: пой
@@ -17647,6 +17722,12 @@ words:
       - ru: Я бы писа́л письмо́ от руки́.
         en_gb: I would write the letter by hand.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Пиши́ аккура́тно и без оши́бок.
+        en_gb: Write neatly and without mistakes.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Кому́ ты пи́шешь письмо́?
+        en_gb: Who are you writing a letter to?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: пиши́
@@ -17688,6 +17769,9 @@ words:
       - ru: Я бы пил бо́льше воды́.
         en_gb: I would drink more water.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты пьёшь чай и́ли ко́фе?
+        en_gb: Do you drink tea or coffee?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: пей
@@ -17817,6 +17901,9 @@ words:
       - ru: Я бы плати́л ка́ртой, а не нали́чными.
         en_gb: I would pay by card rather than cash.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Плати́ по счёту во́время.
+        en_gb: Pay the bill on time.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: плати́
@@ -20588,6 +20675,9 @@ words:
       - ru: Без запи́сей я бы не по́мнил дета́ли.
         en_gb: Without notes I would not remember the details.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты по́мнишь э́тот день?
+        en_gb: Do you remember this day?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: по́мни
@@ -20816,6 +20906,9 @@ words:
       - ru: Без слова́ря я бы не понима́л текст.
         en_gb: Without a dictionary I would not understand the text.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты понима́ешь э́то пра́вило?
+        en_gb: Do you understand this rule?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: понима́й
@@ -25945,6 +26038,9 @@ words:
       - ru: Я рабо́тал бы ме́ньше, е́сли бы мог.
         en_gb: I would work less if I could.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Где ты рабо́таешь?
+        en_gb: Where do you work?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: рабо́тай
@@ -27599,6 +27695,9 @@ words:
       - ru: Я бы рисова́л ка́ждый день, бу́дь у меня́ вре́мя.
         en_gb: I would draw every day if I had the time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Рису́й со́лнце и не́бо.
+        en_gb: Draw the sun and the sky.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: рису́й
@@ -28857,6 +28956,12 @@ words:
       - ru: Я бы слу́шал э́ту му́зыку часа́ми.
         en_gb: I would listen to this music for hours.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Слу́шай меня́ внима́тельно.
+        en_gb: Listen to me carefully.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Каку́ю му́зыку ты слу́шаешь?
+        en_gb: What music do you listen to?
+        inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: слу́шай
@@ -29119,6 +29224,12 @@ words:
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Ве́чером я бу́ду смотре́ть но́вости.
         en_gb: In the evening I will be watching the news.
+      - ru: Смотри́ на доро́гу внима́тельно.
+        en_gb: Watch the road carefully.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты смо́тришь но́вости по утра́м?
+        en_gb: Do you watch the news in the mornings?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: смотри́
@@ -31486,6 +31597,9 @@ words:
       - ru: Я бы счита́л де́ньги внима́тельнее.
         en_gb: I would count the money more carefully.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Счита́й до десяти́ ме́дленно.
+        en_gb: Count to ten slowly.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
       imperative:
         sg: счита́й
@@ -34262,6 +34376,9 @@ words:
       - ru: Я бы учи́лся за грани́цей, будь возмо́жность.
         en_gb: I would study abroad if I had the chance.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты у́чишься в университе́те?
+        en_gb: Do you study at university?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: учи́сь
@@ -34475,6 +34592,9 @@ words:
       - ru: Я бы хоте́л ча́шку ча́я.
         en_gb: I would like a cup of tea.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты хо́чешь ча́шку ча́я?
+        en_gb: Do you want a cup of tea?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       present:
         "1sg": хочу́
@@ -34694,6 +34814,12 @@ words:
       - ru: Я бы чита́л бо́льше, будь у меня́ вре́мя.
         en_gb: I would read more if I had time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Чита́й кни́гу вслух.
+        en_gb: Read the book aloud.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты чита́ешь интере́сную кни́гу?
+        en_gb: Are you reading an interesting book?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: чита́й
