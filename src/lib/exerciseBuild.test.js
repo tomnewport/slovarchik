@@ -236,31 +236,65 @@ describe('buildExercises', () => {
 })
 
 describe('context sentence sets', () => {
-  it('bundles up to `items` sentences from distinct pool words into one set', () => {
-    const pool = contextKeys.slice(0, 5)
+  const wordByKey = new Map(words.map((w) => [w.key, w]))
+  // A paired verb with annotated sentences on both sides of its pair.
+  const paired = words.find(
+    (w) =>
+      w.pos === 'verb' &&
+      w.aspectPair &&
+      contextPhrases.has(w.key) &&
+      contextPhrases.has(w.aspectPair.key),
+  )
+
+  it('drills a single lexical item per set: one word, or its aspect pair', () => {
+    const pool = contextKeys.slice(0, 8)
+    const ex = build([practice('inflect-context', { exercises: 3, items: CONTEXT_SET_ITEMS, pool })])
+    expect(ex.length).toBeGreaterThan(0)
+    for (const set of ex) {
+      expect(set.kind).toBe('phrase-fix')
+      expect(set.items.length).toBeGreaterThan(0)
+      expect(set.items.length).toBeLessThanOrEqual(CONTEXT_SET_ITEMS)
+      // Distinct sentences, every one drilling the same word or its partner.
+      expect(new Set(set.items.map((it) => it.ru)).size).toBe(set.items.length)
+      const keys = [...new Set(set.items.map((it) => it.targets[0]))]
+      expect(keys.length).toBeLessThanOrEqual(2)
+      if (keys.length === 2) {
+        expect(wordByKey.get(keys[0])?.aspectPair?.key).toBe(keys[1])
+      }
+      // The set's targets are the deduplicated union of its items' targets.
+      expect(set.targets).toEqual(keys)
+      for (const it of set.items) {
+        expect(it.tokens.length).toBeGreaterThan(0)
+        expect(it.answer).toBeTruthy()
+      }
+    }
+  })
+
+  it("bundles both members' sentences with per-member targets when the pair is in the batch", () => {
+    const pool = [paired.key, paired.aspectPair.key]
     const ex = build([practice('inflect-context', { exercises: 1, items: CONTEXT_SET_ITEMS, pool })])
     expect(ex).toHaveLength(1)
-    const set = ex[0]
-    expect(set.kind).toBe('phrase-fix')
-    expect(set.items.length).toBeGreaterThan(1)
-    expect(set.items.length).toBeLessThanOrEqual(CONTEXT_SET_ITEMS)
-    // One sentence per distinct word; the set's targets are their union so the
-    // runner can record a per-word result for each.
-    const keys = set.items.map((it) => it.targets[0])
-    expect(new Set(keys).size).toBe(keys.length)
-    expect(set.targets).toEqual(keys)
-    for (const it of set.items) {
-      expect(it.tokens.length).toBeGreaterThan(0)
-      expect(it.answer).toBeTruthy()
-    }
+    const keys = new Set(ex[0].items.map((it) => it.targets[0]))
+    expect(keys).toEqual(new Set(pool))
+    expect(new Set(ex[0].targets)).toEqual(new Set(pool))
+  })
+
+  it('reports partner sentences against the drawn word when the partner is outside the batch', () => {
+    const pool = [paired.key]
+    const ex = build([practice('inflect-context', { exercises: 1, items: CONTEXT_SET_ITEMS, pool })])
+    expect(ex).toHaveLength(1)
+    // The partner's sentences still appear (the pair is one lexical item)…
+    expect(ex[0].items.length).toBeGreaterThanOrEqual(2)
+    // …but a mastery attempt is only ever recorded for the batch word.
+    for (const it of ex[0].items) expect(it.targets).toEqual([paired.key])
+    expect(ex[0].targets).toEqual([paired.key])
   })
 
   it('never widens a mastery set beyond the pool', () => {
     const pool = contextKeys.slice(0, 2)
-    const ex = build([practice('inflect-context', { exercises: 1, items: CONTEXT_SET_ITEMS, pool })])
-    expect(ex).toHaveLength(1)
-    expect(ex[0].items.length).toBeLessThanOrEqual(pool.length)
-    for (const it of ex[0].items) expect(pool).toContain(it.targets[0])
+    const ex = build([practice('inflect-context', { exercises: 2, items: CONTEXT_SET_ITEMS, pool })])
+    expect(ex.length).toBeGreaterThan(0)
+    for (const set of ex) for (const it of set.items) expect(pool).toContain(it.targets[0])
   })
 })
 

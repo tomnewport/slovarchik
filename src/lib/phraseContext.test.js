@@ -4,6 +4,7 @@ import {
   buildSelectSteps,
   buildFromPhrase,
   buildContextExercise,
+  buildContextSet,
   canBuildContext,
   buildAspectDrill,
   canBuildAspectDrill,
@@ -203,6 +204,85 @@ describe('buildContextExercise / canBuildContext', () => {
   it('reports availability', () => {
     expect(canBuildContext(sobaka, { phrasesByKey })).toBe(true)
     expect(canBuildContext({ key: 'нет=no' }, { phrasesByKey })).toBe(false)
+  })
+})
+
+describe('buildContextSet', () => {
+  // The impf partner of skazat, linked back the other way (vocabBuild links
+  // aspect pairs bidirectionally).
+  const govorit = {
+    key: 'говорить=to speak', pos: 'verb', headword: 'говори́ть', ru: 'говорить', aspect: 'impf',
+    aspectPair: { key: 'сказать=to say', ru: 'сказа́ть', aspect: 'pf', gloss: 'to say' },
+  }
+  const govoritPhrase = {
+    id: 'on-govorit', ru: 'Он говори́т по-ру́сски.', en: 'He speaks Russian.',
+    target: { key: 'говорить=to speak', token: 2, tense: 'present', person: '3sg' },
+  }
+  const genPhrase = {
+    id: 'net-sobaki', ru: 'У меня́ нет соба́ки.', en: "I don't have a dog.",
+    target: { key: 'собака=dog', token: 4, case: 'gen', number: 'sg', rule: 'noun-acc-fem-a' },
+  }
+
+  it('bundles several distinct sentences of the same word', () => {
+    const byKey = indexPhrases([accPhrase, genPhrase, verbPhrase])
+    const set = buildContextSet(sobaka, { phrasesByKey: byKey, rules, rng: () => 0 })
+    expect(set).toHaveLength(2)
+    expect(new Set(set.map((it) => it.ru)).size).toBe(2)
+    for (const it of set) expect(it.targets).toEqual(['собака=dog'])
+  })
+
+  it('caps the set at `items` sentences', () => {
+    const byKey = indexPhrases([accPhrase, genPhrase])
+    const set = buildContextSet(sobaka, { phrasesByKey: byKey, rules, rng: () => 0, items: 1 })
+    expect(set).toHaveLength(1)
+  })
+
+  it("extends a paired verb's set with the partner's sentences, each owning its item", () => {
+    const byKey = indexPhrases([skazatPhrase, impPhrase, govoritPhrase])
+    const set = buildContextSet(skazat, {
+      phrasesByKey: byKey, rng: () => 0, items: 3, partner: govorit,
+    })
+    expect(set).toHaveLength(3)
+    const byOwner = Object.groupBy(set, (it) => it.targets[0])
+    expect(byOwner['сказать=to say']).toHaveLength(2)
+    expect(byOwner['говорить=to speak']).toHaveLength(1)
+    // The partner's item is built around the partner: its lemma is the
+    // partner's infinitive and its aspect step is answered by the partner.
+    const partnerItem = byOwner['говорить=to speak'][0]
+    expect(partnerItem.lemma).toBe('говори́ть')
+    const aspect = partnerItem.selectSteps.find((s) => s.kind === 'aspect')
+    expect(aspect.options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ id: 'impf' }),
+    ])
+  })
+
+  it('drops sentences whose English is authored on both sides of the pair', () => {
+    // Same English on both sides — cannot discriminate the aspect.
+    const clash = { ...govoritPhrase, id: 'clash', en: skazatPhrase.en }
+    const byKey = indexPhrases([skazatPhrase, impPhrase, clash])
+    const set = buildContextSet(skazat, {
+      phrasesByKey: byKey, rng: () => 0, items: 3, partner: govorit,
+    })
+    // The clashing own sentence and the partner sentence both go; the
+    // imperative sentence remains.
+    expect(set.map((it) => it.ru)).toEqual([impPhrase.ru])
+  })
+
+  it('keeps the set own-only when the exclusion would empty the own side', () => {
+    const clash = { ...govoritPhrase, id: 'clash', en: skazatPhrase.en }
+    const byKey = indexPhrases([skazatPhrase, clash])
+    const set = buildContextSet(skazat, {
+      phrasesByKey: byKey, rng: () => 0, items: 3, partner: govorit,
+    })
+    expect(set.map((it) => it.targets[0])).toEqual(['сказать=to say'])
+  })
+
+  it('ignores a partner that is not the linked aspect partner', () => {
+    const byKey = indexPhrases([accPhrase, verbPhrase])
+    const set = buildContextSet(sobaka, {
+      phrasesByKey: byKey, rules, rng: () => 0, partner: dumat,
+    })
+    expect(set.map((it) => it.targets[0])).toEqual(['собака=dog'])
   })
 })
 
