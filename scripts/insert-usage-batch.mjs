@@ -65,7 +65,7 @@ const withIdx = additions.map((a) => ({ a, i: lines.findIndex((l) => l === `  "$
   .sort((x, y) => y.i - x.i);
 for (const { a, i } of withIdx) {
   let end = lines.length;
-  for (let j = i + 1; j < lines.length; j++) if (/^  "/.test(lines[j])) { end = j; break; }
+  for (let j = i + 1; j < lines.length; j++) if (/^ {2}"/.test(lines[j])) { end = j; break; }
   const urel = lines.slice(i, end).findIndex((l) => /^ {4}usage:\s*$/.test(l));
   let k = i + urel + 1;
   while (k < end && /^ {6}/.test(lines[k])) k++;

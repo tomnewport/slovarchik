@@ -19,7 +19,6 @@ import yaml from 'js-yaml';
 const norm = (s) => String(s ?? '').replace(/́/g, '').trim().toLowerCase().replace(/ё/g, 'е');
 const core = (t) => String(t ?? '').replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '');
 const tokenize = (ru) => String(ru ?? '').trim().split(/\s+/).filter(Boolean);
-const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
 // Verbs where a «ты/вы» subject is unidiomatic: impersonals, experiencers,
 // statives, natural-phenomenon and positional/emission verbs. Skip.
