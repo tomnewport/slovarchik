@@ -84,6 +84,9 @@ words:
       - ru: Без трениро́вки я бы не бе́гал так бы́стро.
         en_gb: Without training I would not run so fast.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты бе́гаешь в па́рке?
+        en_gb: Do you run in the park?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: бе́гай
@@ -123,6 +126,9 @@ words:
       - ru: Е́сли бы я опа́здывал, я бы бежа́л.
         en_gb: If I were late, I would run.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-past }
+      - ru: Куда́ ты бежи́шь?
+        en_gb: Where are you running to?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: беги́
@@ -329,6 +335,9 @@ words:
       - ru: Я бы благодари́л судьбу́ за э́ту встре́чу.
         en_gb: I would thank fate for this meeting.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты благода́ришь учи́теля?
+        en_gb: Do you thank the teacher?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "блестеть=to shine":
     cefr_level: B1
     accented: блесте́ть
@@ -393,6 +402,9 @@ words:
       - ru: Про́шлой зимо́й я до́лго боле́л.
         en_gb: Last winter I was ill for a long time.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты боле́ешь зимо́й?
+        en_gb: Do you get ill in winter?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: боле́й
@@ -448,6 +460,9 @@ words:
       - ru: Я бы не болта́л так гро́мко в библиоте́ке.
         en_gb: I would not chat so loudly in the library.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы болта́ете по телефо́ну?
+        en_gb: Are you chatting on the phone?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "бормотать=to mutter":
     cefr_level: B2
     accented: бормота́ть
@@ -549,6 +564,9 @@ words:
       - ru: Я бы не боя́лся, е́сли бы ты был ря́дом.
         en_gb: I would not be afraid if you were near.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты бои́шься темноты́?
+        en_gb: Are you afraid of the dark?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: бо́йся
@@ -591,6 +609,12 @@ words:
       - ru: Бери́ кни́гу со стола́.
         en_gb: Take the book from the table.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты берёшь кни́ги в библиоте́ке?
+        en_gb: Do you borrow books from the library?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы берёте зо́нтик в доро́гу?
+        en_gb: Do you take an umbrella on the trip?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: бери́
@@ -747,6 +771,9 @@ words:
       - ru: Я бы не броса́л му́сор на зе́млю.
         en_gb: I would not throw rubbish on the ground.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты броса́ешь ка́мни в во́ду?
+        en_gb: Are you throwing stones into the water?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "бросаться=to rush":
     cefr_level: B1
     accented: броса́ться
@@ -825,6 +852,9 @@ words:
       - ru: За́втра он бро́сит ста́рую привы́чку.
         en_gb: Tomorrow he will give up his old habit.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты бро́сишь кури́ть?
+        en_gb: Will you give up smoking?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "броситься=to rush":
     cefr_level: B1
     accented: бро́ситься
@@ -1059,6 +1089,9 @@ words:
       - ru: Вари́ суп на ме́дленном огне́.
         en_gb: Cook the soup on a low flame.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Вы ва́рите варе́нье ле́том?
+        en_gb: Do you make jam in summer?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "ввести=to introduce":
     cefr_level: B1
     accented: ввести́
@@ -1203,6 +1236,9 @@ words:
       - ru: Ты мне ве́ришь?
         en_gb: Do you believe me?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты ве́ришь слуха́м?
+        en_gb: Do you believe the rumours?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: верь
@@ -1259,6 +1295,9 @@ words:
       - ru: Ско́ро он вернёт долг.
         en_gb: Soon he will return the debt.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты вернёшь кни́гу за́втра?
+        en_gb: Will you return the book tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "вернуться=to return":
     cefr_level: A2
     accented: верну́ться
@@ -1302,6 +1341,9 @@ words:
       - ru: Я обяза́тельно верну́сь сюда́ ле́том.
         en_gb: I will definitely return here in the summer.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты вернёшься че́рез час?
+        en_gb: Will you return in an hour?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "весить=to weigh":
     cefr_level: B1
     accented: ве́сить
@@ -1513,6 +1555,9 @@ words:
       - ru: Без де́нег я бы не взял такси́.
         en_gb: Without money I would not take a taxi.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты возьмёшь такси́ до вокза́ла?
+        en_gb: Will you take a taxi to the station?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: возьми́
@@ -1622,6 +1667,9 @@ words:
       - ru: Без очко́в я бы не ви́дел э́тих букв.
         en_gb: Without glasses I would not see these letters.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ви́дишь большо́й дом?
+        en_gb: Do you see the big house?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       present:
         "1sg": ви́жу
@@ -1715,6 +1763,9 @@ words:
       - ru: За́втра он включи́т но́вый компью́тер.
         en_gb: Tomorrow he will switch on the new computer.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты включи́шь телеви́зор?
+        en_gb: Will you switch on the television?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "владеть=to own":
     cefr_level: B1
     accented: владе́ть
@@ -1874,6 +1925,9 @@ words:
       - ru: Без рабо́ты я бы возвраща́лся домо́й ра́ньше.
         en_gb: Without work I would return home earlier.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты возвраща́ешься домо́й по́здно?
+        en_gb: Do you come home late?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "возить=to transport":
     cefr_level: B1
     accented: вози́ть
@@ -2127,6 +2181,9 @@ words:
       - ru: Без про́пуска ты не войдёшь в зда́ние.
         en_gb: Without a pass you will not enter the building.
         inflect: { token: 5, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты войдёшь в зда́ние?
+        en_gb: Will you enter the building?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: войди́
@@ -2396,6 +2453,9 @@ words:
       - ru: Без фотогра́фий я бы ре́же вспомина́л де́тство.
         en_gb: Without photos I would recall my childhood less often.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты вспомина́ешь де́тство?
+        en_gb: Do you recall your childhood?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "вспомнить=to remember":
     cefr_level: A2
     accented: вспо́мнить
@@ -2436,6 +2496,9 @@ words:
       - ru: Без подска́зки я бы не вспо́мнил а́дрес.
         en_gb: Without a hint I would not remember the address.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты вспо́мнишь и́мя?
+        en_gb: Will you remember the name?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "вспыхнуть=to flare up":
     cefr_level: B2
     accented: вспы́хнуть
@@ -2498,6 +2561,9 @@ words:
       - ru: Без буди́льника я бы встава́л по́здно.
         en_gb: Without an alarm I would get up late.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты встаёшь о́чень ра́но?
+        en_gb: Do you get up very early?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: встава́й
@@ -2575,6 +2641,9 @@ words:
       - ru: За́втра я вста́ну с рассве́том.
         en_gb: Tomorrow I will get up at dawn.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты вста́нешь ра́но за́втра?
+        en_gb: Will you get up early tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: встань
@@ -2616,6 +2685,9 @@ words:
       - ru: За́втра я встре́чу го́стя в аэропорту́.
         en_gb: Tomorrow I will meet the guest at the airport.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты встре́тишь друзе́й в теа́тре?
+        en_gb: Will you meet your friends at the theatre?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: встреть
@@ -2671,6 +2743,9 @@ words:
       - ru: Ско́ро мы встре́тимся в том же кафе́.
         en_gb: Soon we will meet in the same café.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Вы встре́титесь у вхо́да?
+        en_gb: Will you meet at the entrance?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "встречать=to meet":
     cefr_level: A2
     accented: встреча́ть
@@ -2696,6 +2771,9 @@ words:
       - ru: Без расписа́ния я бы встреча́л по́езд науга́д.
         en_gb: Without a timetable I would meet the train at random.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты встреча́ешь друзе́й на вокза́ле?
+        en_gb: Do you meet friends at the station?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: встреча́й
@@ -2812,6 +2890,9 @@ words:
       - ru: Без сту́ка я бы не входи́л в чужо́й кабине́т.
         en_gb: Without knocking I would not enter someone else's office.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты вхо́дишь без сту́ка?
+        en_gb: Do you come in without knocking?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: входи́
@@ -2871,6 +2952,9 @@ words:
       - ru: Выбира́й пода́рок сам.
         en_gb: Choose the present yourself.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты выбира́ешь пла́тье?
+        en_gb: Are you choosing a dress?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "выбрать=to choose":
     cefr_level: A2
     accented: вы́брать
@@ -2911,6 +2995,9 @@ words:
       - ru: За́втра он вы́берет себе́ но́вый телефо́н.
         en_gb: Tomorrow he will choose himself a new phone.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты вы́берешь кра́сное пла́тье?
+        en_gb: Will you choose the red dress?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "выбраться=to get out":
     cefr_level: B1
     accented: вы́браться
@@ -3249,6 +3336,9 @@ words:
       - ru: За́втра они́ вы́едут на рассве́те.
         en_gb: Tomorrow they will set off at dawn.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+      - ru: Вы вы́едете на рассве́те?
+        en_gb: Will you set off at dawn?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "вызвать=to call":
     cefr_level: B1
     accented: вы́звать
@@ -3366,6 +3456,9 @@ words:
       - ru: За́втра на́ша кома́нда вы́играет фина́л.
         en_gb: Tomorrow our team will win the final.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты вы́играешь матч?
+        en_gb: Will you win the match?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "выйти=to go out":
     cefr_level: A2
     accented: вы́йти
@@ -3392,6 +3485,9 @@ words:
       - ru: За́втра она́ вы́йдет на рабо́ту по́сле о́тпуска.
         en_gb: Tomorrow she will go back to work after the holiday.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты вы́йдешь из до́ма ра́но у́тром?
+        en_gb: Will you go out early in the morning?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: вы́йди
@@ -3422,6 +3518,9 @@ words:
       - ru: Я вы́ключил компью́тер и лёг спать.
         en_gb: I turned off the computer and went to bed.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты вы́ключишь компью́тер?
+        en_gb: Will you turn off the computer?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: вы́ключи
@@ -3549,6 +3648,9 @@ words:
       - ru: Че́рез мину́ту я вы́ну пиро́г из ду́ховки.
         en_gb: In a minute I will take the pie out of the oven.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты вы́нешь хлеб из ду́ховки?
+        en_gb: Will you take the bread out of the oven?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "выпить=to drink up":
     cefr_level: A2
     accented: вы́пить
@@ -3575,6 +3677,9 @@ words:
       - ru: За́втра у́тром я вы́пью ча́шку ко́фе.
         en_gb: Tomorrow morning I will drink a cup of coffee.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
+      - ru: Вы вы́пьете стака́н молока́?
+        en_gb: Will you drink a glass of milk?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
     conjugation:
       imperative:
         sg: вы́пей
@@ -4218,6 +4323,9 @@ words:
       - ru: Без зо́нта я бы не выходи́л в дождь.
         en_gb: Without an umbrella I would not go out in the rain.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты выхо́дишь из до́ма ка́ждое у́тро?
+        en_gb: Do you go out of the house every morning?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: выходи́
@@ -4441,6 +4549,9 @@ words:
       - ru: Ты говори́шь по-англи́йски?
         en_gb: Do you speak English?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы хорошо́ говори́те по-ру́сски?
+        en_gb: Do you speak Russian well?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: говори́
@@ -4590,6 +4701,9 @@ words:
       - ru: Гото́вь у́жин, го́сти ско́ро приду́т.
         en_gb: Cook dinner, the guests will come soon.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты гото́вишь у́жин?
+        en_gb: Are you cooking dinner?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: гото́вь
@@ -4646,6 +4760,9 @@ words:
       - ru: Я бы гото́вился усе́рднее, е́сли бы знал.
         en_gb: I would prepare more diligently if I had known.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты гото́вишься к экза́мену?
+        en_gb: Are you preparing for the exam?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "грозить=to threaten":
     cefr_level: B2
     accented: грози́ть
@@ -4747,6 +4864,9 @@ words:
       - ru: Я бы гуля́л до́льше, е́сли бы не дождь.
         en_gb: I would stroll longer if it weren't for the rain.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы гуля́ете по на́бережной?
+        en_gb: Do you stroll along the embankment?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: гуля́й
@@ -4986,6 +5106,12 @@ words:
       - ru: Что ты де́лаешь сего́дня ве́чером?
         en_gb: What are you doing this evening?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Что ты де́лаешь в выходны́е?
+        en_gb: What do you do at the weekend?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы де́лаете заря́дку по утра́м?
+        en_gb: Do you do exercises in the mornings?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: де́лай
@@ -5082,6 +5208,9 @@ words:
       - ru: Держи́ ребёнка за́ руку.
         en_gb: Hold the child by the hand.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты де́ржишь две́рь откры́той?
+        en_gb: Are you holding the door open?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "держаться=to hold on":
     cefr_level: B1
     accented: держа́ться
@@ -5576,6 +5705,9 @@ words:
       - ru: Ско́ро мы дойдём до верши́ны.
         en_gb: Soon we'll reach the summit.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты дойдёшь до магази́на пешко́м?
+        en_gb: Will you walk to the shop?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "доказать=to prove":
     cefr_level: B1
     accented: доказа́ть
@@ -5914,6 +6046,9 @@ words:
       - ru: Ско́ро я доста́ну но́вый телефо́н.
         en_gb: Soon I'll get a new phone.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты доста́нешь де́ньги из ба́нка?
+        en_gb: Will you get the money from the bank?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "достаться=to fall to":
     cefr_level: B1
     accented: доста́ться
@@ -6128,6 +6263,9 @@ words:
       - ru: Ду́май о бу́дущем.
         en_gb: Think about the future.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: О чём ты ду́маешь?
+        en_gb: What are you thinking about?
+        inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: ду́май
@@ -6180,6 +6318,9 @@ words:
         en_gb: In the mountains you'll be breathing fresh air.
       - ru: Без ма́ски бы́ло бы тру́дно дыша́ть.
         en_gb: Without a mask it would be hard to breathe.
+      - ru: Ты ды́шишь све́жим во́здухом?
+        en_gb: Are you breathing fresh air?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "ездить=to go by transport":
     cefr_level: A2
     accented: е́здить
@@ -6205,6 +6346,9 @@ words:
       - ru: Я бы е́здил на рабо́ту на велосипе́де.
         en_gb: I would go to work by bicycle.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты е́здишь в дере́вню?
+        en_gb: Do you go to the village?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: е́зди
@@ -6249,6 +6393,12 @@ words:
       - ru: Ешь бо́льше фру́ктов и о́вощей.
         en_gb: Eat more fruit and vegetables.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты ешь мя́со?
+        en_gb: Do you eat meat?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы еди́те ры́бу?
+        en_gb: Do you eat fish?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: ешь
@@ -6292,6 +6442,9 @@ words:
       - ru: Я бы е́хал ме́дленнее по тако́й доро́ге.
         en_gb: I would drive more slowly on such a road.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы е́дете на по́езде и́ли на маши́не?
+        en_gb: Are you going by train or by car?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: поезжа́й
@@ -6411,6 +6564,9 @@ words:
       - ru: Кого́ ты ждёшь?
         en_gb: Who are you waiting for?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты ждёшь авто́бус на остано́вке?
+        en_gb: Are you waiting for the bus at the stop?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: жди
@@ -6467,6 +6623,9 @@ words:
       - ru: Я бы жела́л тебе́ то́лько сча́стья.
         en_gb: I would wish you only happiness.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Что ты жела́ешь на за́втрак?
+        en_gb: What would you like for breakfast?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
   "женить=to marry off":
     cefr_level: B1
     accented: жени́ть
@@ -6564,6 +6723,12 @@ words:
       - ru: Где ты живёшь?
         en_gb: Where do you live?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты живёшь в це́нтре го́рода?
+        en_gb: Do you live in the city centre?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы живёте в э́том до́ме давно́?
+        en_gb: Have you lived in this building long?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: живи́
@@ -6666,6 +6831,9 @@ words:
       - ru: Я бы не забыва́л об э́том, е́сли бы запи́сывал.
         en_gb: I wouldn't forget this if I wrote it down.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты забыва́ешь имена́?
+        en_gb: Do you forget names?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: забыва́й
@@ -6706,6 +6874,9 @@ words:
       - ru: Ско́ро ты забу́дешь э́ту неприя́тность.
         en_gb: Soon you'll forget this unpleasantness.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты забу́дешь об э́том ско́ро?
+        en_gb: Will you forget about it soon?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: забу́дь
@@ -6805,6 +6976,9 @@ words:
       - ru: Я обы́чно за́втракаю ка́шей.
         en_gb: I usually have porridge for breakfast.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
+      - ru: Ты за́втракаешь ка́шей?
+        en_gb: Do you have porridge for breakfast?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: за́втракай
@@ -7002,6 +7176,9 @@ words:
       - ru: Я бы задава́л ме́ньше вопро́сов.
         en_gb: I would ask fewer questions.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты задаёшь мно́го вопро́сов?
+        en_gb: Do you ask a lot of questions?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "задать=to assign":
     cefr_level: A2
     accented: зада́ть
@@ -7190,6 +7367,9 @@ words:
       - ru: Ско́ро мы зака́жем но́вую ме́бель.
         en_gb: Soon we'll order new furniture.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты зака́жешь биле́ты?
+        en_gb: Will you order the tickets?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "заказывать=to order":
     cefr_level: B1
     accented: зака́зывать
@@ -7243,6 +7423,9 @@ words:
       - ru: Я бы зака́нчивал рабо́ту ра́ньше.
         en_gb: I would finish work earlier.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты зака́нчиваешь письмо́?
+        en_gb: Are you finishing the letter?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: зака́нчивай
@@ -7356,6 +7539,9 @@ words:
       - ru: Ско́ро он зако́нчит шко́лу.
         en_gb: Soon he'll finish school.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты зако́нчишь прое́кт к пя́тнице?
+        en_gb: Will you finish the project by Friday?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: зако́нчи
@@ -7486,6 +7672,9 @@ words:
       - ru: Я бы закрыва́л окно́ на́ ночь.
         en_gb: I would close the window at night.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты закрыва́ешь окно́ на́ ночь?
+        en_gb: Do you close the window at night?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "закрываться=to close":
     cefr_level: B1
     accented: закрыва́ться
@@ -7557,6 +7746,9 @@ words:
       - ru: Ско́ро они́ закро́ют ста́рый заво́д.
         en_gb: Soon they'll close the old factory.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты закро́ешь окно́?
+        en_gb: Will you close the window?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "закрыться=to shut":
     cefr_level: B1
     accented: закры́ться
@@ -7780,6 +7972,9 @@ words:
       - ru: Ско́ро она́ заме́тит переме́ны.
         en_gb: Soon she'll notice the changes.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты заме́тишь переме́ны сра́зу?
+        en_gb: Will you notice the changes at once?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "замечать=to notice":
     cefr_level: A2
     accented: замеча́ть
@@ -7819,6 +8014,9 @@ words:
       - ru: Я бы не замеча́л э́того без подска́зки.
         en_gb: I wouldn't notice this without a hint.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты замеча́ешь ка́ждую ме́лочь?
+        en_gb: Do you notice every little thing?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "замолчать=to fall silent":
     cefr_level: B1
     accented: замолча́ть
@@ -7939,6 +8137,9 @@ words:
       - ru: Я бы занима́лся му́зыкой, е́сли бы́ло вре́мя.
         en_gb: I would study music if there were time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты занима́ешься му́зыкой по вечера́м?
+        en_gb: Do you do music in the evenings?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "занять=to occupy":
     cefr_level: B1
     accented: заня́ть
@@ -8023,6 +8224,9 @@ words:
       - ru: Ско́ро мы займёмся ремо́нтом.
         en_gb: Soon we'll take up the renovation.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты займёшься рисова́нием?
+        en_gb: Will you take up drawing?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "заорать=to start yelling":
     cefr_level: B2
     accented: заора́ть
@@ -8138,6 +8342,9 @@ words:
       - ru: Ско́ро секрета́рь запи́шет реше́ние.
         en_gb: Soon the secretary will write down the decision.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты запи́шешь мой а́дрес?
+        en_gb: Will you write down my address?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "записывать=to write down":
     cefr_level: B1
     accented: запи́сывать
@@ -8245,6 +8452,9 @@ words:
       - ru: Ско́ро клие́нт запла́тит по счёту.
         en_gb: Soon the client will pay the bill.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты запла́тишь за обе́д?
+        en_gb: Will you pay for lunch?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "запомнить=to memorise":
     cefr_level: A2
     accented: запо́мнить
@@ -8287,6 +8497,9 @@ words:
       - ru: Ско́ро де́ти запо́мнят но́вые слова́.
         en_gb: Soon the children will memorise the new words.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты запо́мнишь все слова́?
+        en_gb: Will you memorise all the words?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "запретить=to forbid":
     cefr_level: B1
     accented: запрети́ть
@@ -8473,6 +8686,9 @@ words:
       - ru: Ско́ро она́ зарабо́тает на свою́ мечту́.
         en_gb: Soon she'll earn enough for her dream.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты зарабо́таешь пе́рвые де́ньги ле́том?
+        en_gb: Will you earn your first money in the summer?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "заслужить=to deserve":
     cefr_level: B1
     accented: заслужи́ть
@@ -8589,6 +8805,9 @@ words:
       - ru: Ско́ро ма́льчик заснёт.
         en_gb: Soon the boy will fall asleep.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты заснёшь по́сле полу́ночи?
+        en_gb: Will you fall asleep after midnight?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "заставить=to make":
     cefr_level: B1
     accented: заста́вить
@@ -8937,6 +9156,9 @@ words:
       - ru: Ско́ро ты захо́чешь пое́сть.
         en_gb: Soon you'll want to eat.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты захо́чешь есть че́рез час?
+        en_gb: Will you want to eat in an hour?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "захотеться=to feel like":
     cefr_level: A2
     accented: захоте́ться
@@ -9090,6 +9312,9 @@ words:
         en_gb: Tomorrow I will be calling the guests.
       - ru: Я бы позва́л тебя́, е́сли бы знал.
         en_gb: I would have called you if I had known.
+      - ru: Вы зовёте госте́й на у́жин?
+        en_gb: Are you inviting guests for dinner?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "звонить=to call":
     cefr_level: A1
     accented: звони́ть
@@ -9120,6 +9345,9 @@ words:
       - ru: Звони́ роди́телям ча́ще.
         en_gb: Call your parents more often.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты ча́сто звони́шь роди́телям?
+        en_gb: Do you often call your parents?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: звони́
@@ -9233,6 +9461,9 @@ words:
       - ru: Ты зна́ешь его́ а́дрес?
         en_gb: Do you know his address?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы зна́ете доро́гу к вокза́лу?
+        en_gb: Do you know the way to the station?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: знай
@@ -9315,6 +9546,12 @@ words:
       - ru: Ты игра́ешь на гита́ре?
         en_gb: Do you play the guitar?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты игра́ешь в ша́хматы?
+        en_gb: Do you play chess?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы игра́ете в футбо́л по выходны́м?
+        en_gb: Do you play football at weekends?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: игра́й
@@ -9357,6 +9594,9 @@ words:
       - ru: Иди́ сюда́, пожа́луйста.
         en_gb: Come here, please.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Куда́ ты идёшь так ра́но?
+        en_gb: Where are you going so early?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: иди́
@@ -9606,6 +9846,9 @@ words:
       - ru: Я бы изуча́л биоло́гию с удово́льствием.
         en_gb: I would study biology with pleasure.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты изуча́ешь исто́рию?
+        en_gb: Do you study history?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "иметь=to have":
     cefr_level: A2
     accented: име́ть
@@ -9793,6 +10036,9 @@ words:
       - ru: Я бы иска́л рабо́ту в друго́м го́роде.
         en_gb: I would look for work in another city.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Что ты и́щешь?
+        en_gb: What are you looking for?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
   "исключить=to exclude":
     cefr_level: B1
     accented: исключи́ть
@@ -9941,6 +10187,9 @@ words:
       - ru: Ма́ленький ко́тик испуга́ется гро́зы за́втра.
         en_gb: The little kitten will get frightened by the storm tomorrow.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты испуга́ешься соба́ки?
+        en_gb: Will you get frightened of the dog?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "испытать=to experience":
     cefr_level: B1
     accented: испыта́ть
@@ -10288,6 +10537,9 @@ words:
       - ru: Я бы кива́л, но не согла́сен.
         en_gb: I would nod, but I do not agree.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты кива́ешь ста́рому дру́гу?
+        en_gb: Are you nodding to an old friend?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "кивнуть=to nod":
     cefr_level: A2
     accented: кивну́ть
@@ -10329,6 +10581,9 @@ words:
       - ru: Она́ кивнёт тебе́ при встре́че.
         en_gb: She will nod to you when you meet.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты кивнёшь ученику́?
+        en_gb: Will you nod to the pupil?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "кинуться=to throw oneself":
     cefr_level: B1
     accented: ки́нуться
@@ -10393,6 +10648,9 @@ words:
       - ru: Я бы клал де́ньги в банк.
         en_gb: I would put my money in the bank.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты кладёшь кни́гу на по́лку?
+        en_gb: Are you putting the book on the shelf?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: клади́
@@ -10522,6 +10780,9 @@ words:
       - ru: Я бы конча́л дела́ ра́ньше.
         en_gb: I would finish my tasks earlier.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты конча́ешь уро́к ра́но?
+        en_gb: Do you finish the lesson early?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "кончаться=to end":
     cefr_level: A2
     accented: конча́ться
@@ -10598,6 +10859,9 @@ words:
       - ru: Они́ ко́нчат строи́тельство к зиме́.
         en_gb: They will finish the construction by winter.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты ко́нчишь рабо́ту за́втра?
+        en_gb: Will you finish the work tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "кончиться=to end":
     cefr_level: A2
     accented: ко́нчиться
@@ -10712,6 +10976,9 @@ words:
       - ru: Корми́ ко́шку два ра́за в день.
         en_gb: Feed the cat twice a day.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты ко́рмишь вну́ков?
+        en_gb: Do you feed your grandchildren?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "красить=to paint":
     cefr_level: B1
     accented: кра́сить
@@ -10845,6 +11112,9 @@ words:
       - ru: Я бы не крича́л на дете́й.
         en_gb: I would not shout at the children.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты кричи́шь на дете́й?
+        en_gb: Are you shouting at the children?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: кричи́
@@ -10890,6 +11160,9 @@ words:
       - ru: Купи́ хлеб и молоко́.
         en_gb: Buy bread and milk.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты ку́пишь но́вую кни́гу?
+        en_gb: Will you buy a new book?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: купи́
@@ -10943,6 +11216,9 @@ words:
       - ru: Я бы не кури́л в до́ме.
         en_gb: I would not smoke in the house.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ку́ришь на балко́не?
+        en_gb: Do you smoke on the balcony?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "кушать=to eat":
     cefr_level: A1
     accented: ку́шать
@@ -11080,6 +11356,9 @@ words:
       - ru: Я бы лета́л ча́ще, е́сли бы не боя́лся.
         en_gb: I would fly more often if I were not afraid.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы лета́ете над го́родом?
+        en_gb: Do you fly over the city?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: лета́й
@@ -11119,6 +11398,9 @@ words:
       - ru: Я бы лете́л пе́рвым кла́ссом.
         en_gb: I would fly first class.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты лети́шь в Москву́?
+        en_gb: Are you flying to Moscow?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: лети́
@@ -11197,6 +11479,9 @@ words:
       - ru: Сего́дня де́ти ля́гут спать в де́вять.
         en_gb: Today the children will lie down to sleep at nine.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты ля́жешь спать?
+        en_gb: Will you lie down to sleep?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: ляг
@@ -11276,6 +11561,9 @@ words:
       - ru: Я бы ложи́лся ра́ньше, е́сли бы успева́л.
         en_gb: I would go to bed earlier if I had time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ложи́шься ра́но?
+        en_gb: Do you go to bed early?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: ложи́сь
@@ -11357,6 +11645,9 @@ words:
       - ru: Ты лю́бишь чёрный ко́фе?
         en_gb: Do you like black coffee?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы лю́бите класси́ческую му́зыку?
+        en_gb: Do you like classical music?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: люби́
@@ -11526,6 +11817,9 @@ words:
       - ru: Я бы не меня́л рабо́ту так ча́сто.
         en_gb: I would not change jobs so often.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты меня́ешь де́ньги в ба́нке?
+        en_gb: Do you change money at the bank?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "меняться=to change":
     cefr_level: A2
     accented: меня́ться
@@ -11564,6 +11858,9 @@ words:
       - ru: Без причи́ны лю́ди не меня́лись бы.
         en_gb: Without reason people would not change.
         inflect: { token: 5, tense: past, person: past_pl, rule: verb-past }
+      - ru: Вы меня́етесь места́ми?
+        en_gb: Are you swapping places?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "мечтать=to dream":
     cefr_level: A2
     accented: мечта́ть
@@ -11589,6 +11886,9 @@ words:
       - ru: В де́тстве он мечта́л стать лётчиком.
         en_gb: As a child he dreamed of becoming a pilot.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты мечта́ешь о путеше́ствии?
+        en_gb: Do you dream of travelling?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: мечта́й
@@ -11740,6 +12040,9 @@ words:
       - ru: Я бы молча́л на твоём ме́сте.
         en_gb: I would keep silent in your place.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты молчи́шь всё вре́мя?
+        en_gb: Are you silent the whole time?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: молчи́
@@ -11857,6 +12160,9 @@ words:
       - ru: Мой ру́ки пе́ред едо́й.
         en_gb: Wash your hands before eating.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты мо́ешь посу́ду?
+        en_gb: Are you washing the dishes?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: мой
@@ -12045,6 +12351,9 @@ words:
       - ru: За́втра она́ наде́нет но́вые ту́фли.
         en_gb: Tomorrow she will put on her new shoes.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты наде́нешь тёплую ку́ртку?
+        en_gb: Will you put on a warm jacket?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "надеяться=to hope":
     cefr_level: A2
     accented: наде́яться
@@ -12068,6 +12377,9 @@ words:
       - ru: Я бы наде́ялся на по́мощь друзе́й.
         en_gb: I would hope for the help of friends.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы наде́етесь на побе́ду?
+        en_gb: Do you hope for victory?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: наде́йся
@@ -12349,6 +12661,9 @@ words:
       - ru: Они́ найду́т доро́гу по ка́рте.
         en_gb: They will find the way using the map.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты найдёшь доро́гу по ка́рте?
+        en_gb: Will you find the way with the map?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "найтись=to be found":
     cefr_level: B1
     accented: найти́сь
@@ -12462,6 +12777,9 @@ words:
       - ru: Официа́нт нальёт вино́ в бока́лы.
         en_gb: The waiter will pour wine into the glasses.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты нальёшь молоко́ в стака́н?
+        en_gb: Will you pour milk into the glass?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "напечатать=to print":
     cefr_level: B1
     accented: напеча́тать
@@ -12515,6 +12833,9 @@ words:
       - ru: Они́ напи́шут отчёт к концу́ неде́ли.
         en_gb: They will write the report by the end of the week.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
+      - ru: Вы напи́шете отчёт к пя́тнице?
+        en_gb: Will you write the report by Friday?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
     conjugation:
       imperative:
         sg: напиши́
@@ -12572,6 +12893,9 @@ words:
       - ru: Э́тот за́пах напомина́л бы мне де́тство.
         en_gb: This smell would remind me of childhood.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты напомина́ешь мне о вре́мени?
+        en_gb: Do you remind me of the time?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "напомнить=to remind":
     cefr_level: A2
     accented: напо́мнить
@@ -12733,6 +13057,9 @@ words:
       - ru: Нарису́й мне ка́рту, пожа́луйста.
         en_gb: Draw me a map, please.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты нарису́ешь дом и со́лнце?
+        en_gb: Will you draw a house and the sun?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: нарису́й
@@ -12903,6 +13230,9 @@ words:
       - ru: Тре́нер научи́т нас пла́вать ле́том.
         en_gb: The coach will teach us to swim in summer.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты научи́шь сы́на води́ть маши́ну?
+        en_gb: Will you teach your son to drive?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "научиться=to learn":
     cefr_level: A2
     accented: научи́ться
@@ -12946,6 +13276,9 @@ words:
       - ru: Они́ науча́тся води́ть маши́ну к ле́ту.
         en_gb: They will learn to drive by summer.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты научи́шься гото́вить борщ?
+        en_gb: Will you learn to cook borscht?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "находить=to find":
     cefr_level: A2
     accented: находи́ть
@@ -12985,6 +13318,9 @@ words:
       - ru: Я бы находи́л вре́мя на спорт.
         en_gb: I would find time for sport.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты нахо́дишь моне́ты на у́лице?
+        en_gb: Do you find coins on the street?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "находиться=to be located":
     cefr_level: A2
     accented: находи́ться
@@ -13046,6 +13382,9 @@ words:
       - ru: Они́ начну́т строи́тельство весно́й.
         en_gb: They will begin construction in spring.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
+      - ru: Когда́ ты начнёшь но́вую рабо́ту?
+        en_gb: When will you start your new job?
+        inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: начни́
@@ -13305,6 +13644,9 @@ words:
       - ru: Я бы носи́л очки́, е́сли бы пло́хо ви́дел.
         en_gb: I would wear glasses if my sight were poor.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты но́сишь очки́?
+        en_gb: Do you wear glasses?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: носи́
@@ -13533,6 +13875,9 @@ words:
       - ru: Я бы обеща́л, е́сли был уве́рен.
         en_gb: I would promise if I were sure.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты обеща́ешь прийти́ во́время?
+        en_gb: Do you promise to come on time?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: обеща́й
@@ -13741,6 +14086,9 @@ words:
       - ru: За́втра ма́ма обни́мет дете́й.
         en_gb: Tomorrow mum will embrace the children.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты обни́мешь своего́ сы́на?
+        en_gb: Will you embrace your son?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "обойти=to go around":
     cefr_level: B1
     accented: обойти́
@@ -14218,6 +14566,9 @@ words:
       - ru: За́втра он объясни́т нам зада́чу.
         en_gb: Tomorrow he will explain the task to us.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты объясни́шь но́вое пра́вило?
+        en_gb: Will you explain the new rule?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: объясни́
@@ -14258,6 +14609,9 @@ words:
       - ru: Я бы объясня́л ме́дленнее на твоём ме́сте.
         en_gb: I would explain more slowly in your place.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы объясня́ете зада́ние студе́нтам?
+        en_gb: Do you explain the task to the students?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: объясня́й
@@ -14429,6 +14783,9 @@ words:
       - ru: Я бы одева́лся ти́ше, что́бы не разбуди́ть всех.
         en_gb: I would get dressed more quietly so as not to wake everyone.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты одева́ешься бы́стро?
+        en_gb: Do you get dressed quickly?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "одеться=to get dressed":
     cefr_level: A2
     accented: оде́ться
@@ -14473,6 +14830,9 @@ words:
       - ru: Я бы оде́лся, е́сли бы не опа́здывал.
         en_gb: I would have got dressed if I had not been running late.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты оде́нешься бы́стро?
+        en_gb: Will you get dressed quickly?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "ожидать=to await":
     cefr_level: B1
     accented: ожида́ть
@@ -15234,6 +15594,9 @@ words:
         en_gb: I will stay in touch.
       - ru: Я бы оста́лся, е́сли б ты попроси́л.
         en_gb: I would stay if you asked.
+      - ru: Ты остаёшься споко́йным?
+        en_gb: Do you stay calm?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "оставить=to leave":
     cefr_level: A2
     accented: оста́вить
@@ -15277,6 +15640,9 @@ words:
       - ru: Ско́ро он оста́вит э́ту до́лжность.
         en_gb: Soon he will leave this position.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты оста́вишь су́мку до́ма?
+        en_gb: Will you leave your bag at home?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "оставлять=to leave":
     cefr_level: A2
     accented: оставля́ть
@@ -15319,6 +15685,9 @@ words:
       - ru: Я бы не оставля́л дверь откры́той.
         en_gb: I would not leave the door open.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты оставля́ешь ча́евые?
+        en_gb: Do you leave a tip?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "останавливаться=to stop":
     cefr_level: A2
     accented: остана́вливаться
@@ -15359,6 +15728,9 @@ words:
       - ru: Я бы не остана́вливался на полпути́.
         en_gb: I would not stop halfway.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты остана́вливаешься у све́тофора?
+        en_gb: Do you stop at the traffic light?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "остановить=to stop":
     cefr_level: A2
     accented: останови́ть
@@ -15399,6 +15771,9 @@ words:
       - ru: Ско́ро по́лиция остано́вит наруши́теля.
         en_gb: Soon the police will stop the offender.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты останови́шь маши́ну?
+        en_gb: Will you stop the car?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "остановиться=to stop":
     cefr_level: A2
     accented: останови́ться
@@ -15440,6 +15815,9 @@ words:
       - ru: Ско́ро авто́бус остано́вится у па́рка.
         en_gb: Soon the bus will stop by the park.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты останови́шься у воро́т?
+        en_gb: Will you stop at the gate?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "остаться=to stay":
     cefr_level: A2
     accented: оста́ться
@@ -15483,6 +15861,9 @@ words:
       - ru: Ско́ро мы оста́немся одни́.
         en_gb: Soon we will be left alone.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты оста́нешься до́ма?
+        en_gb: Will you stay at home?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "отвернуться=to turn away":
     cefr_level: B1
     accented: отверну́ться
@@ -15586,6 +15967,9 @@ words:
       - ru: Ско́ро она́ отве́тит на письмо́.
         en_gb: Soon she will answer the letter.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты отве́тишь на моё письмо́?
+        en_gb: Will you answer my letter?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: отве́ть
@@ -15683,6 +16067,9 @@ words:
       - ru: Я бы отдава́л ста́рые ве́щи в прию́т.
         en_gb: I would give old things to the shelter.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты отдаёшь де́ньги ка́ждый ме́сяц?
+        en_gb: Do you give back the money every month?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "отдать=to give back":
     cefr_level: A2
     accented: отда́ть
@@ -15726,6 +16113,9 @@ words:
       - ru: Ско́ро он отда́ст долг по́лностью.
         en_gb: Soon he will give back the debt in full.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты отда́шь кни́гу подру́ге?
+        en_gb: Will you give the book back to your friend?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "отдохнуть=to rest":
     cefr_level: A2
     accented: отдохну́ть
@@ -15769,6 +16159,9 @@ words:
       - ru: Ско́ро мы отдохнём от забо́т.
         en_gb: Soon we will rest from our cares.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты отдо́хнешь по́сле рабо́ты?
+        en_gb: Will you rest after work?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "отдыхать=to rest":
     cefr_level: A2
     accented: отдыха́ть
@@ -15794,6 +16187,9 @@ words:
       - ru: Я бы отдыха́л ча́ще на твоём ме́сте.
         en_gb: I would rest more often in your place.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы отдыха́ете на мо́ре?
+        en_gb: Do you holiday by the sea?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: отдыха́й
@@ -16002,6 +16398,9 @@ words:
       - ru: Ско́ро они́ откро́ют но́вую ста́нцию.
         en_gb: Soon they will open a new station.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты откро́ешь окно́?
+        en_gb: Will you open the window?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "открыться=to open":
     cefr_level: B1
     accented: откры́ться
@@ -16346,6 +16745,9 @@ words:
       - ru: Ско́ро мы отпра́вим прика́з.
         en_gb: Soon we will send the order.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты отпра́вишь письмо́ за́втра?
+        en_gb: Will you send the letter tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "отправиться=to set off":
     cefr_level: A2
     accented: отпра́виться
@@ -16389,6 +16791,9 @@ words:
       - ru: Ско́ро экспеди́ция отпра́вится на се́вер.
         en_gb: Soon the expedition will set off northwards.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Вы отпра́витесь в путь у́тром?
+        en_gb: Will you set off in the morning?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "отправляться=to set off":
     cefr_level: A2
     accented: отправля́ться
@@ -16431,6 +16836,9 @@ words:
       - ru: Я бы отправля́лся в путь на рассве́те.
         en_gb: I would set off at dawn.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты отправля́ешься в во́семь?
+        en_gb: Do you set off at eight?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "отпустить=to let go":
     cefr_level: B1
     accented: отпусти́ть
@@ -17652,6 +18060,9 @@ words:
       - ru: Пой свою́ люби́мую пе́сню.
         en_gb: Sing your favourite song.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты поёшь ста́рую пе́сню?
+        en_gb: Are you singing an old song?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: пой
@@ -17728,6 +18139,9 @@ words:
       - ru: Кому́ ты пи́шешь письмо́?
         en_gb: Who are you writing a letter to?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты пи́шешь пи́сьма от руки́?
+        en_gb: Do you write letters by hand?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: пиши́
@@ -17772,6 +18186,12 @@ words:
       - ru: Ты пьёшь чай и́ли ко́фе?
         en_gb: Do you drink tea or coffee?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты пьёшь ко́фе по утра́м?
+        en_gb: Do you drink coffee in the mornings?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы пьёте чай с са́харом?
+        en_gb: Do you drink tea with sugar?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: пей
@@ -17812,6 +18232,9 @@ words:
       - ru: Я бы пла́вал лу́чше с трене́ром.
         en_gb: I would swim better with a coach.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты пла́ваешь в о́зере?
+        en_gb: Do you swim in the lake?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: пла́вай
@@ -17855,6 +18278,9 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Без му́зыки фильм не был бы таки́м гру́стным.
         en_gb: Without the music the film would not be so sad.
+      - ru: Ты пла́чешь от бо́ли?
+        en_gb: Are you crying from pain?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: плачь
@@ -17904,6 +18330,9 @@ words:
       - ru: Плати́ по счёту во́время.
         en_gb: Pay the bill on time.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты пла́тишь нали́чными?
+        en_gb: Do you pay in cash?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: плати́
@@ -17945,6 +18374,9 @@ words:
       - ru: Без тече́ния ло́дка плыла́ бы ме́дленнее.
         en_gb: Without the current the boat would float more slowly.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-past }
+      - ru: Ты плывёшь по реке́?
+        en_gb: Are you swimming along the river?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: плыви́
@@ -18355,6 +18787,9 @@ words:
       - ru: Я бы повтори́л вопро́с, е́сли ну́жно.
         en_gb: I would repeat the question if necessary.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты повтори́шь вопро́с гро́мко?
+        en_gb: Will you repeat the question loudly?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "повторять=to repeat":
     cefr_level: A2
     accented: повторя́ть
@@ -18395,6 +18830,9 @@ words:
       - ru: Без пра́ктики я бы забыва́л и повторя́л оши́бки.
         en_gb: Without practice I would forget and repeat mistakes.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты повторя́ешь слова́ ка́ждый день?
+        en_gb: Do you repeat the words every day?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "погибнуть=to perish":
     cefr_level: B2
     accented: поги́бнуть
@@ -18542,6 +18980,9 @@ words:
       - ru: Я бы поговори́л с ним споко́йно.
         en_gb: I would have a calm talk with him.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы поговори́те со мной?
+        en_gb: Will you have a talk with me?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "подавать=to serve":
     cefr_level: B1
     accented: подава́ть
@@ -18613,6 +19054,9 @@ words:
       - ru: Ско́ро мы пода́рим ему́ велосипе́д.
         en_gb: Soon we will give him a bicycle as a present.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты пода́ришь вну́чке шарф?
+        en_gb: Will you give your granddaughter a scarf?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "подать=to serve":
     cefr_level: B1
     accented: пода́ть
@@ -18788,6 +19232,9 @@ words:
       - ru: Я бы поднима́л ме́ньше тя́жестей.
         en_gb: I would lift fewer heavy things.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты поднима́ешь тяжёлый груз?
+        en_gb: Are you lifting a heavy load?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "подниматься=to go up":
     cefr_level: B1
     accented: поднима́ться
@@ -18902,6 +19349,9 @@ words:
       - ru: Ско́ро кран подни́мет конте́йнер.
         en_gb: Soon the crane will lift the container.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Вы подни́мете флаг у́тром?
+        en_gb: Will you raise the flag in the morning?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "подняться=to go up":
     cefr_level: B1
     accented: подня́ться
@@ -19013,6 +19463,9 @@ words:
       - ru: Я бы подожда́л ещё немно́го.
         en_gb: I would wait a little longer.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты подождёшь ещё пять мину́т?
+        en_gb: Will you wait another five minutes?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "подозревать=to suspect":
     cefr_level: B1
     accented: подозрева́ть
@@ -19175,6 +19628,9 @@ words:
       - ru: За́втра я поду́маю над твои́м предложе́нием.
         en_gb: Tomorrow I will think over your proposal.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты поду́маешь об э́том?
+        en_gb: Will you think about it?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: поду́май
@@ -19336,6 +19792,9 @@ words:
       - ru: Ско́ро ты пое́дешь на велосипе́де в парк.
         en_gb: Soon you will set off to the park by bike.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты пое́дешь на мо́ре ле́том?
+        en_gb: Will you go to the seaside in summer?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "пожалеть=to feel sorry":
     cefr_level: B1
     accented: пожале́ть
@@ -19428,6 +19887,9 @@ words:
       - ru: Поза́втракай пе́ред уро́ками.
         en_gb: Have breakfast before your lessons.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты поза́втракаешь до́ма?
+        en_gb: Will you have breakfast at home?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: поза́втракай
@@ -19486,6 +19948,9 @@ words:
       - ru: Ско́ро ма́ма позовёт нас у́жинать.
         en_gb: Soon mum will call us to dinner.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты позовёшь дете́й к столу́?
+        en_gb: Will you call the children to the table?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "позволить=to allow":
     cefr_level: A2
     accented: позво́лить
@@ -19529,6 +19994,9 @@ words:
       - ru: Ско́ро врач позво́лит ему́ встава́ть.
         en_gb: Soon the doctor will allow him to get up.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Вы позво́лите вы́йти из кла́сса?
+        en_gb: Will you allow us to leave the classroom?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "позволять=to allow":
     cefr_level: A2
     accented: позволя́ть
@@ -19571,6 +20039,9 @@ words:
       - ru: На твоём ме́сте я бы не позволя́л тако́е.
         en_gb: In your place I would not allow such things.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты позволя́ешь шуме́ть в библиоте́ке?
+        en_gb: Do you allow noise in the library?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "позвонить=to call":
     cefr_level: A1
     accented: позвони́ть
@@ -19845,6 +20316,9 @@ words:
       - ru: Ско́ро гид пока́жет нам музе́й.
         en_gb: Soon the guide will show us the museum.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты пока́жешь биле́т контролёру?
+        en_gb: Will you show your ticket to the inspector?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "показаться=to seem":
     cefr_level: B1
     accented: показа́ться
@@ -19925,6 +20399,9 @@ words:
       - ru: Я бы пока́зывал де́тям бо́льше карти́н.
         en_gb: I would show the children more pictures.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты пока́зываешь биле́т?
+        en_gb: Are you showing your ticket?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "покачать=to rock":
     cefr_level: B1
     accented: пока́чать
@@ -20103,6 +20580,9 @@ words:
       - ru: Без ски́док я бы покупа́л ме́ньше.
         en_gb: Without discounts I would buy less.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты покупа́ешь хлеб ка́ждый день?
+        en_gb: Do you buy bread every day?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: покупа́й
@@ -20381,6 +20861,9 @@ words:
       - ru: Ско́ро она́ поло́жит ве́щи в чемода́н.
         en_gb: Soon she will put her things in the suitcase.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты поло́жишь де́ньги в карма́н?
+        en_gb: Will you put the money in your pocket?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "получать=to receive":
     cefr_level: A2
     accented: получа́ть
@@ -20424,6 +20907,9 @@ words:
       - ru: Без рабо́ты я бы не получа́л дохо́да.
         en_gb: Without a job I would not receive any income.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты получа́ешь пи́сьма ка́ждую неде́лю?
+        en_gb: Do you receive letters every week?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "получаться=to turn out":
     cefr_level: B1
     accented: получа́ться
@@ -20502,6 +20988,9 @@ words:
       - ru: Ско́ро ты полу́чишь отве́т на письмо́.
         en_gb: Soon you will receive a reply to your letter.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты полу́чишь дипло́м в ию́не?
+        en_gb: Will you receive your diploma in June?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "получиться=to turn out":
     cefr_level: B1
     accented: получи́ться
@@ -20613,6 +21102,9 @@ words:
       - ru: Ско́ро ты полю́бишь у́тренние пробе́жки.
         en_gb: Soon you will come to love morning runs.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты полю́бишь э́тот ти́хий го́род?
+        en_gb: Will you come to love this quiet city?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "помешать=to prevent":
     cefr_level: B1
     accented: помеша́ть
@@ -20678,6 +21170,9 @@ words:
       - ru: Ты по́мнишь э́тот день?
         en_gb: Do you remember this day?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты по́мнишь э́тот день?
+        en_gb: Do you remember that day?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: по́мни
@@ -20720,6 +21215,9 @@ words:
       - ru: Без вас я бы не помога́л так мно́гим.
         en_gb: Without you I would not help so many people.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты помога́ешь ма́ме до́ма?
+        en_gb: Do you help your mum at home?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: помога́й
@@ -20909,6 +21407,9 @@ words:
       - ru: Ты понима́ешь э́то пра́вило?
         en_gb: Do you understand this rule?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты понима́ешь по-ру́сски?
+        en_gb: Do you understand Russian?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: понима́й
@@ -20990,6 +21491,9 @@ words:
       - ru: Ско́ро ты поймёшь всю пра́вду.
         en_gb: Soon you will understand the whole truth.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты поймёшь э́ту зада́чу?
+        en_gb: Will you understand this problem?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: пойми́
@@ -21020,6 +21524,9 @@ words:
       - ru: Мы пообе́дали и пошли́ гуля́ть.
         en_gb: We had lunch and went for a walk.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
+      - ru: Вы пообе́даете в э́том кафе́?
+        en_gb: Will you have lunch in this café?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
     conjugation:
       imperative:
         sg: пообе́дай
@@ -21061,6 +21568,9 @@ words:
       - ru: Ско́ро он пообеща́ет нам подде́ржку.
         en_gb: Soon he will promise us support.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты пообеща́ешь верну́ться?
+        en_gb: Will you promise to return?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: пообеща́й
@@ -21309,6 +21819,9 @@ words:
       - ru: Ско́ро мы попро́буем но́вый спо́соб.
         en_gb: Soon we will try a new method.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты попро́буешь но́вое блю́до?
+        en_gb: Will you try the new dish?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "попросить=to ask for":
     cefr_level: A2
     accented: попроси́ть
@@ -21540,6 +22053,9 @@ words:
       - ru: Ско́ро мы посиди́м в ти́хом кафе́.
         en_gb: Soon we will sit for a while in a quiet café.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Вы поси́дите на скаме́йке?
+        en_gb: Will you sit for a while on the bench?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "послать=to send":
     cefr_level: A2
     accented: посла́ть
@@ -21581,6 +22097,9 @@ words:
       - ru: Ско́ро мы пошлём посы́лку ба́бушке.
         en_gb: Soon we will send a parcel to grandmother.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты пошлёшь дете́й за хле́бом?
+        en_gb: Will you send the children for bread?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "последовать=to follow":
     cefr_level: B1
     accented: после́довать
@@ -21659,6 +22178,9 @@ words:
       - ru: Ско́ро мы послу́шаем но́вый альбо́м.
         en_gb: Soon we will listen to the new album.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты послу́шаешь но́вую пе́сню ве́чером?
+        en_gb: Will you listen to the new song in the evening?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "послышаться=to be heard":
     cefr_level: B1
     accented: послы́шаться
@@ -21735,6 +22257,9 @@ words:
       - ru: Ско́ро мы посмо́трим на но́вую вы́ставку.
         en_gb: Soon we will look at the new exhibition.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты посмо́тришь э́тот фильм за́втра?
+        en_gb: Will you watch this film tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "посоветовать=to advise":
     cefr_level: B1
     accented: посове́товать
@@ -21817,6 +22342,9 @@ words:
       - ru: Ско́ро мы поста́вим ёлку в углу́.
         en_gb: Soon we will put the tree in the corner.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
+      - ru: Ты поста́вишь маши́ну в гара́ж?
+        en_gb: Will you put the car in the garage?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "постараться=to try hard":
     cefr_level: B1
     accented: постара́ться
@@ -21920,6 +22448,9 @@ words:
       - ru: Ско́ро они́ постро́ят но́вую шко́лу.
         en_gb: Soon they will build a new school.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+      - ru: Ты постро́ишь дом в лесу́?
+        en_gb: Will you build a house in the forest?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "поступать=to act":
     cefr_level: B1
     accented: поступа́ть
@@ -22038,6 +22569,9 @@ words:
       - ru: Ско́ро почтальо́н постучи́т в окно́.
         en_gb: Soon the postman will knock at the window.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты посту́чишь в дверь?
+        en_gb: Will you knock at the door?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "посылать=to send":
     cefr_level: A2
     accented: посыла́ть
@@ -22078,6 +22612,9 @@ words:
       - ru: Без по́чты я бы посыла́л сообще́ния куре́ром.
         en_gb: Without the post I would send messages by courier.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты посыла́ешь откры́тки друзья́м?
+        en_gb: Do you send postcards to your friends?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "потерять=to lose":
     cefr_level: A2
     accented: потеря́ть
@@ -22118,6 +22655,9 @@ words:
       - ru: Без па́пки я бы потеря́л все докуме́нты.
         en_gb: Without a folder I would lose all the documents.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты потеря́ешь свои́ ключи́?
+        en_gb: Will you lose your keys?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "потратить=to spend":
     cefr_level: B1
     accented: потра́тить
@@ -22380,6 +22920,9 @@ words:
       - ru: Ско́ро ма́ма поцелу́ет дочь пе́ред сном.
         en_gb: Soon mum will kiss her daughter before bed.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Ты поцелу́ешь сы́на пе́ред сном?
+        en_gb: Will you kiss your son before bed?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "поцеловаться=to kiss":
     cefr_level: B1
     accented: поцелова́ться
@@ -22447,6 +22990,9 @@ words:
       - ru: Ско́ро ты почу́вствуешь себя́ лу́чше.
         en_gb: Soon you will feel better.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ты почу́вствуешь уста́лость?
+        en_gb: Will you feel tired?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "появиться=to appear":
     cefr_level: A2
     accented: появи́ться
@@ -23377,6 +23923,9 @@ words:
       - ru: Я бы пригласи́л всех, но ме́ста ма́ло.
         en_gb: I would invite everyone, but there is little room.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы пригласи́те друзе́й на сва́дьбу?
+        en_gb: Will you invite friends to the wedding?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
     conjugation:
       imperative:
         sg: пригласи́
@@ -23466,6 +24015,9 @@ words:
       - ru: Она́ бы пригото́вила пиро́г, е́сли бы успе́ла.
         en_gb: She would prepare a pie if she had time.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+      - ru: Ты пригото́вишь вку́сный обе́д?
+        en_gb: Will you prepare a tasty lunch?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "придумать=to think up":
     cefr_level: A2
     accented: приду́мать
@@ -23505,6 +24057,9 @@ words:
       - ru: Он бы приду́мал отгово́рку, е́сли бы захоте́л.
         en_gb: He would think up an excuse if he wanted to.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты приду́маешь и́мя?
+        en_gb: Will you think up a name?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "приезжать=to arrive by transport":
     cefr_level: A2
     accented: приезжа́ть
@@ -23530,6 +24085,9 @@ words:
       - ru: Он приезжа́л бы ка́ждый год, е́сли бы мог.
         en_gb: He would come every year if he could.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты приезжа́ешь по́здно ве́чером?
+        en_gb: Do you arrive late in the evening?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: приезжа́й
@@ -23571,6 +24129,9 @@ words:
       - ru: Она́ бы прие́хала, но нет биле́тов.
         en_gb: She would come, but there are no tickets.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+      - ru: Ты прие́дешь на по́езде?
+        en_gb: Will you arrive by train?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: приезжа́й
@@ -23719,6 +24280,9 @@ words:
       - ru: Он бы пришёл, е́сли бы его́ позва́ли.
         en_gb: He would come if he were invited.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты придёшь во́время?
+        en_gb: Will you come on time?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: приди́
@@ -24008,6 +24572,9 @@ words:
       - ru: Она́ бы принесла́ цветы́, но магази́н закры́т.
         en_gb: She would bring flowers, but the shop is closed.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+      - ru: Ты принесёшь цветы́?
+        en_gb: Will you bring flowers?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "принимать=to accept":
     cefr_level: B1
     accented: принима́ть
@@ -24309,6 +24876,9 @@ words:
       - ru: Он приходи́л бы ча́ще, е́сли бы жил бли́же.
         en_gb: He would come more often if he lived closer.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты прихо́дишь домо́й по́здно?
+        en_gb: Do you come home late?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: приходи́
@@ -24477,6 +25047,9 @@ words:
       - ru: Я бы про́бовал ещё раз, е́сли бы не уста́л.
         en_gb: I would try again if I were not tired.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты про́буешь но́вое блю́до?
+        en_gb: Are you tasting a new dish?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: про́буй
@@ -24767,6 +25340,9 @@ words:
       - ru: Я продава́л бы деше́вле, е́сли бы спро́с был ме́ньше.
         en_gb: I would sell cheaper if demand were lower.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты продаёшь о́бувь?
+        en_gb: Do you sell shoes?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: продава́й
@@ -24831,6 +25407,9 @@ words:
       - ru: Он бы про́дал дом доро́же.
         en_gb: He would sell the house for more.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты прода́шь кварти́ру весно́й?
+        en_gb: Will you sell the flat in spring?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: прода́й
@@ -24885,6 +25464,9 @@ words:
       - ru: Я бы продолжа́л учи́ться, е́сли бы бы́ло вре́мя.
         en_gb: I would continue studying if I had time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы продолжа́ете наш разгово́р?
+        en_gb: Are you continuing our conversation?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "продолжаться=to continue":
     cefr_level: B1
     accented: продолжа́ться
@@ -24963,6 +25545,9 @@ words:
       - ru: Она́ бы продо́лжила расска́з, но усну́ла.
         en_gb: She would continue the story, but she fell asleep.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+      - ru: Вы продо́лжите уро́к?
+        en_gb: Will you continue the lesson?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "проехать=to drive past":
     cefr_level: B1
     accented: прое́хать
@@ -25426,6 +26011,9 @@ words:
       - ru: Я бы проси́л о бо́льшем, но не сме́ю.
         en_gb: I would ask for more, but I dare not.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты про́сишь разреше́ния уйти́?
+        en_gb: Are you asking permission to leave?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: проси́
@@ -25463,6 +26051,9 @@ words:
       - ru: Я бы просну́лся ра́ньше без шу́ма.
         en_gb: I would wake up earlier without the noise.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты проснёшься ра́но у́тром?
+        en_gb: Will you wake up early in the morning?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: просни́сь
@@ -25640,6 +26231,9 @@ words:
       - ru: Я бы прочита́л э́ту кни́гу за ночь.
         en_gb: I would read this book in one night.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты прочита́ешь э́ту кни́гу за неде́лю?
+        en_gb: Will you read this book in a week?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: прочита́й
@@ -25784,6 +26378,9 @@ words:
       - ru: Я бы пры́гал вы́ше с трениро́вкой.
         en_gb: I would jump higher with training.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты пры́гаешь от ра́дости?
+        en_gb: Are you jumping for joy?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: пры́гай
@@ -25960,6 +26557,9 @@ words:
       - ru: Я путеше́ствовал бы бо́льше, е́сли бы бы́ли де́ньги.
         en_gb: I would travel more if I had money.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты путеше́ствуешь на по́езде?
+        en_gb: Do you travel by train?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: путеше́ствуй
@@ -26041,6 +26641,12 @@ words:
       - ru: Где ты рабо́таешь?
         en_gb: Where do you work?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Кем ты рабо́таешь?
+        en_gb: What do you work as?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы рабо́таете в больни́це?
+        en_gb: Do you work in a hospital?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: рабо́тай
@@ -26082,6 +26688,9 @@ words:
       - ru: Я ра́довался бы бо́льше без забо́т.
         en_gb: I would be gladder without worries.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ра́дуешься но́вым игру́шкам?
+        en_gb: Are you glad about the new toys?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: ра́дуйся
@@ -26171,6 +26780,9 @@ words:
       - ru: Я бы разбуди́л тебя́ ра́ньше, но ты уста́л.
         en_gb: I would wake you earlier, but you are tired.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты разбу́дишь ребёнка?
+        en_gb: Will you wake the child?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "развернуть=to unfold":
     cefr_level: B1
     accented: разверну́ть
@@ -26387,6 +26999,9 @@ words:
       - ru: Мы разгова́ривали бы ча́ще, е́сли бы не рабо́та.
         en_gb: We would talk more often if it were not for work.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
+      - ru: Ты разгова́риваешь по телефо́ну?
+        en_gb: Are you talking on the phone?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "раздаться=to sound":
     cefr_level: B1
     accented: разда́ться
@@ -26764,6 +27379,9 @@ words:
       - ru: Я бы разреши́л тебе́ оста́ться.
         en_gb: I would allow you to stay.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы разреши́те э́тот спор?
+        en_gb: Will you resolve this dispute?
+        inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "ранить=to wound":
     cefr_level: B1
     accented: ра́нить
@@ -26934,6 +27552,9 @@ words:
       - ru: Он бы рассказа́л пра́вду, е́сли бы спроси́ли.
         en_gb: He would tell the truth if asked.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты расска́жешь интере́сную исто́рию?
+        en_gb: Will you tell an interesting story?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: расскажи́
@@ -26973,6 +27594,9 @@ words:
       - ru: Он расска́зывал бы о войне́ ре́же, е́сли бы мог забы́ть.
         en_gb: He would tell about the war less often if he could forget.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты расска́зываешь ска́зки де́тям?
+        en_gb: Do you tell fairy tales to the children?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: расска́зывай
@@ -27504,6 +28128,9 @@ words:
       - ru: На твоём ме́сте я бы реша́л сам.
         en_gb: In your place I would decide for myself.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты реша́ешь куда́ пойти́?
+        en_gb: Are you deciding where to go?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: реша́й
@@ -27582,6 +28209,9 @@ words:
       - ru: Я бы реши́л э́ту зада́чу по-друго́му.
         en_gb: I would solve this problem differently.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты реши́шь оста́ться до́ма?
+        en_gb: Will you decide to stay at home?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: реши́
@@ -27698,6 +28328,9 @@ words:
       - ru: Рису́й со́лнце и не́бо.
         en_gb: Draw the sun and the sky.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты рису́ешь портре́т ма́мы?
+        en_gb: Are you drawing a portrait of your mum?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: рису́й
@@ -27880,6 +28513,9 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: За́втра я бу́ду сади́ться в пе́рвый ваго́н.
         en_gb: Tomorrow I will be getting on in the first carriage.
+      - ru: Ты сади́шься у окна́?
+        en_gb: Do you sit down by the window?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: сади́сь
@@ -28205,6 +28841,9 @@ words:
       - ru: Без подгото́вки он бы не сдал тест.
         en_gb: Without preparation he would not pass the test.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты сдашь докуме́нты за́втра?
+        en_gb: Will you hand in the documents tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "сделать=to do/make":
     cefr_level: A1
     accented: сде́лать
@@ -28310,6 +28949,9 @@ words:
       - ru: Без би́лета он бы не сел в по́езд.
         en_gb: Without a ticket he would not get on the train.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ся́дешь на скаме́йку?
+        en_gb: Will you sit down on the bench?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: сядь
@@ -28462,6 +29104,9 @@ words:
       - ru: Е́сли бы я знал, я бы сказа́л ра́ньше.
         en_gb: If I had known, I would have said so earlier.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ска́жешь мне пра́вду?
+        en_gb: Will you tell me the truth?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: скажи́
@@ -28818,6 +29463,9 @@ words:
       - ru: Неосторо́жный ребёнок слома́л бы игру́шку.
         en_gb: A careless child would break the toy.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты слома́ешь стул?
+        en_gb: Will you break the chair?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "служить=to serve":
     cefr_level: A2
     accented: служи́ть
@@ -28857,6 +29505,9 @@ words:
       - ru: Я бы служи́л на фло́те, е́сли бы мог.
         en_gb: I would serve in the navy if I could.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты слу́жишь в а́рмии?
+        en_gb: Do you serve in the army?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "случаться=to happen":
     cefr_level: A2
     accented: случа́ться
@@ -28962,6 +29613,9 @@ words:
       - ru: Каку́ю му́зыку ты слу́шаешь?
         en_gb: What music do you listen to?
         inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы слу́шаете ра́дио в маши́не?
+        en_gb: Do you listen to the radio in the car?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: слу́шай
@@ -29051,6 +29705,9 @@ words:
       - ru: Без шу́ма я бы слы́шал ка́ждое сло́во.
         en_gb: Without the noise I would hear every word.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты слы́шишь э́тот шум?
+        en_gb: Do you hear this noise?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "слышаться=to be heard":
     cefr_level: B1
     accented: слы́шаться
@@ -29181,6 +29838,9 @@ words:
       - ru: Я бы смея́лся, но бы́ло не до сме́ха.
         en_gb: I would laugh, but it was no laughing matter.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты смеёшься над шу́ткой?
+        en_gb: Are you laughing at the joke?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: сме́йся
@@ -29230,6 +29890,12 @@ words:
       - ru: Ты смо́тришь но́вости по утра́м?
         en_gb: Do you watch the news in the mornings?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Ты ча́сто смо́тришь фи́льмы?
+        en_gb: Do you often watch films?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы смо́трите футбо́л по телеви́зору?
+        en_gb: Do you watch football on TV?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: смотри́
@@ -29282,6 +29948,9 @@ words:
       - ru: Без ка́рты мы бы не смогли́ найти́ доро́гу.
         en_gb: Without a map we would not be able to find the way.
         inflect: { token: 6, tense: past, person: past_pl, rule: verb-past }
+      - ru: Ты смо́жешь помо́чь за́втра?
+        en_gb: Will you be able to help tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "снизить=to reduce":
     cefr_level: B2
     accented: сни́зить
@@ -29348,6 +30017,9 @@ words:
       - ru: Я бы снима́л кварти́ру бли́же к це́нтру.
         en_gb: I would rent a flat closer to the centre.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты снима́ешь пальто́ в прихо́жей?
+        en_gb: Do you take off your coat in the hallway?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "снять=to take off":
     cefr_level: A2
     accented: снять
@@ -29389,6 +30061,9 @@ words:
       - ru: Я бы снял э́тот дом на ле́то.
         en_gb: I would rent this house for the summer.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты сни́мешь ту́фли у две́ри?
+        en_gb: Will you take off your shoes by the door?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "собирать=to collect":
     cefr_level: A2
     accented: собира́ть
@@ -29417,6 +30092,9 @@ words:
       - ru: Я бы собира́л ста́рые моне́ты.
         en_gb: I would collect old coins.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты собира́ешь ста́рые ма́рки?
+        en_gb: Do you collect old stamps?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: собира́й
@@ -29471,6 +30149,9 @@ words:
       - ru: На твоём ме́сте я бы собира́лся в путь.
         en_gb: In your place I would be getting ready for the journey.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты собира́ешься в о́тпуск?
+        en_gb: Are you getting ready for a holiday?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "собрать=to collect":
     cefr_level: A2
     accented: собра́ть
@@ -29511,6 +30192,9 @@ words:
       - ru: Я бы собра́л друзе́й на пра́здник.
         en_gb: I would gather my friends for the celebration.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты соберёшь все докуме́нты?
+        en_gb: Will you collect all the documents?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "собраться=to gather":
     cefr_level: B1
     accented: собра́ться
@@ -30489,6 +31173,9 @@ words:
       - ru: Настоя́щий друг спаса́л бы тебя́ до конца́.
         en_gb: A true friend would save you to the end.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спаса́ешь люде́й?
+        en_gb: Do you save people?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "спасти=to save":
     cefr_level: A2
     accented: спасти́
@@ -30530,6 +31217,9 @@ words:
       - ru: Без по́мощи он бы не спас ребёнка.
         en_gb: Without help he would not have saved the child.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спасёшь челове́ка?
+        en_gb: Will you save the man?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "спать=to sleep":
     cefr_level: A1
     accented: спать
@@ -30554,6 +31244,9 @@ words:
       - ru: Без шу́ма я бы спал кре́пче.
         en_gb: Without the noise I would sleep more soundly.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ско́лько часо́в ты спишь?
+        en_gb: How many hours do you sleep?
+        inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: спи
@@ -30607,6 +31300,9 @@ words:
       - ru: На твоём ме́сте я бы не спеши́л.
         en_gb: In your place I would not hurry.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спеши́шь на рабо́ту?
+        en_gb: Are you hurrying to work?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "спорить=to argue":
     cefr_level: B1
     accented: спо́рить
@@ -30779,6 +31475,9 @@ words:
       - ru: На твоём ме́сте я бы спроси́л пря́мо.
         en_gb: In your place I would ask directly.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спро́сишь учи́теля об уро́ке?
+        en_gb: Will you ask the teacher about the lesson?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: спроси́
@@ -30834,6 +31533,9 @@ words:
       - ru: Я бы спря́тал ключ в друго́м ме́сте.
         en_gb: I would hide the key in another place.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спря́чешь игру́шки?
+        en_gb: Will you hide the toys?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "спускаться=to descend":
     cefr_level: A2
     accented: спуска́ться
@@ -30874,6 +31576,9 @@ words:
       - ru: Без верёвки я бы не спуска́лся туда́.
         en_gb: Without a rope I would not descend there.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спуска́ешься по ле́стнице?
+        en_gb: Are you going down the stairs?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "спуститься=to descend":
     cefr_level: A2
     accented: спусти́ться
@@ -30915,6 +31620,9 @@ words:
       - ru: Без ли́фта я бы спусти́лся по ле́стнице.
         en_gb: Without a lift I would descend by the stairs.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты спусти́шься к ве́черу?
+        en_gb: Will you come down by evening?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "ссориться=to quarrel":
     cefr_level: B1
     accented: ссо́риться
@@ -30980,6 +31688,9 @@ words:
       - ru: Я бы ста́вил кни́ги по поря́дку.
         en_gb: I would place the books in order.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ста́вишь ва́зу на стол?
+        en_gb: Are you placing the vase on the table?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "становиться=to become":
     cefr_level: A2
     accented: станови́ться
@@ -31046,6 +31757,9 @@ words:
       - ru: Я бы стара́лся ещё бо́льше ра́ди тебя́.
         en_gb: I would try even harder for you.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты стара́ешься хорошо́ учи́ться?
+        en_gb: Do you try hard to study well?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: стара́йся
@@ -31101,6 +31815,9 @@ words:
       - ru: Без трениро́вок он бы не стал чемпио́ном.
         en_gb: Without training he would not have become a champion.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ста́нешь врачо́м?
+        en_gb: Will you become a doctor?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "стереть=to erase":
     cefr_level: B2
     accented: стере́ть
@@ -31342,6 +32059,9 @@ words:
       - ru: С деньга́ми я бы стро́ил большо́й дом.
         en_gb: With money I would build a big house.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Вы стро́ите но́вый дом?
+        en_gb: Are you building a new house?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: строй
@@ -31396,6 +32116,9 @@ words:
       - ru: Ве́жливый гость стуча́л бы ти́хо.
         en_gb: A polite guest would knock quietly.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты стучи́шь в дверь?
+        en_gb: Are you knocking at the door?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "судить=to judge":
     cefr_level: B1
     accented: суди́ть
@@ -31600,6 +32323,9 @@ words:
       - ru: Счита́й до десяти́ ме́дленно.
         en_gb: Count to ten slowly.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Ты счита́ешь де́ньги?
+        en_gb: Are you counting the money?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: счита́й
@@ -31729,6 +32455,9 @@ words:
       - ru: Я бы съел ещё кусо́чек то́рта.
         en_gb: I would eat up another little piece of cake.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты съешь ка́шу?
+        en_gb: Will you eat up the porridge?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "сыграть=to play":
     cefr_level: A2
     accented: сыгра́ть
@@ -31770,6 +32499,9 @@ words:
       - ru: Я бы сыгра́л для вас, но забы́л но́ты.
         en_gb: I would play for you, but I forgot the music.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты сыгра́ешь на гита́ре?
+        en_gb: Will you play the guitar?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "танцевать=to dance":
     cefr_level: A2
     accented: танцева́ть
@@ -31795,6 +32527,9 @@ words:
       - ru: Я бы танцева́ла, е́сли б уме́ла.
         en_gb: I would dance if I knew how.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+      - ru: Вы танцу́ете на сва́дьбе?
+        en_gb: Are you dancing at the wedding?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: танцу́й
@@ -31921,6 +32656,9 @@ words:
       - ru: Я бы не теря́л вре́мя на спо́ры.
         en_gb: I would not lose time on arguments.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты теря́ешь ключи́?
+        en_gb: Do you lose your keys?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "течь=to flow":
     cefr_level: B1
     accented: течь
@@ -32030,6 +32768,9 @@ words:
       - ru: Я бы не торопи́лся на твоём ме́сте.
         en_gb: I would not hurry if I were you.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты торопи́шься на встре́чу?
+        en_gb: Are you hurrying to a meeting?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "торчать=to stick out":
     cefr_level: B1
     accented: торча́ть
@@ -32605,6 +33346,9 @@ words:
       - ru: Я бы убра́л э́ти ве́щи в шкаф.
         en_gb: I would put these things away in the cupboard.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уберёшь му́сор у́тром?
+        en_gb: Will you take out the rubbish in the morning?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "уважать=to respect":
     cefr_level: B1
     accented: уважа́ть
@@ -32677,6 +33421,9 @@ words:
       - ru: Я бы уви́дел бо́льше, будь све́тлее.
         en_gb: I would see more if it were lighter.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уви́дишь мо́ре из окна́?
+        en_gb: Will you see the sea from the window?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "уволить=to fire":
     cefr_level: B2
     accented: уво́лить
@@ -32742,6 +33489,9 @@ words:
       - ru: Я бы угада́л зага́дку с трёх раз.
         en_gb: I would guess the riddle in three tries.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты угада́ешь моё и́мя?
+        en_gb: Will you guess my name?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "удаваться=to succeed":
     cefr_level: B1
     accented: удава́ться
@@ -33007,6 +33757,9 @@ words:
       - ru: Я бы не уезжа́л так ра́но.
         en_gb: I would not leave so early.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уезжа́ешь из го́рода?
+        en_gb: Are you leaving the city?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: уезжа́й
@@ -33048,6 +33801,9 @@ words:
       - ru: Я бы уе́хал на мо́ре, будь де́ньги.
         en_gb: I would leave for the seaside if I had the money.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уе́дешь ра́но у́тром?
+        en_gb: Will you leave early in the morning?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: уезжа́й
@@ -33090,6 +33846,9 @@ words:
       - ru: Без газе́т я не узнава́л бы но́вости.
         en_gb: Without newspapers I would not be finding out the news.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты узнаёшь пра́вду?
+        en_gb: Are you finding out the truth?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: узнава́й
@@ -33133,6 +33892,9 @@ words:
       - ru: Я бы узна́л пра́вду, е́сли б спроси́л.
         en_gb: I would find out the truth if I asked.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты узна́ешь но́вости за́втра?
+        en_gb: Will you find out the news tomorrow?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: узна́й
@@ -33174,6 +33936,9 @@ words:
       - ru: Я бы ушёл, е́сли б ста́ло ску́чно.
         en_gb: I would leave if it got boring.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уйдёшь ра́но?
+        en_gb: Will you leave early?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       imperative:
         sg: уйди́
@@ -33382,6 +34147,9 @@ words:
       - ru: Я бы улыба́лся ча́ще, будь побо́льше ра́дости.
         en_gb: I would smile more often if there were more joy.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты улыба́ешься незнако́мцам?
+        en_gb: Do you smile at strangers?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: улыба́йся
@@ -33512,6 +34280,12 @@ words:
       - ru: Я бы уме́л игра́ть, будь у меня́ гита́ра.
         en_gb: I would know how to play if I had a guitar.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уме́ешь пла́вать?
+        en_gb: Can you swim?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы уме́ете води́ть маши́ну?
+        en_gb: Can you drive a car?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "умирать=to die":
     cefr_level: B1
     accented: умира́ть
@@ -34057,6 +34831,9 @@ words:
       - ru: Я бы уста́л от тако́го шу́ма.
         en_gb: I would get tired from such noise.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты уста́нешь за день?
+        en_gb: Will you get tired during the day?
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "устраивать=to arrange":
     cefr_level: B1
     accented: устра́ивать
@@ -34227,6 +35004,9 @@ words:
       - ru: Я бы не уходи́л так по́здно.
         en_gb: I would not leave so late.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты ухо́дишь домо́й?
+        en_gb: Are you leaving for home?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: уходи́
@@ -34351,6 +35131,9 @@ words:
       - ru: Я бы учи́л язы́к ка́ждый день.
         en_gb: I would study the language every day.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты у́чишь но́вые слова́ ка́ждый день?
+        en_gb: Do you learn new words every day?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "учиться=to study":
     cefr_level: A1
     accented: учи́ться
@@ -34379,6 +35162,9 @@ words:
       - ru: Ты у́чишься в университе́те?
         en_gb: Do you study at university?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Где ты у́чишься?
+        en_gb: Where do you study?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: учи́сь
@@ -34552,6 +35338,9 @@ words:
         en_alt:
           - I would walk if it were closer.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты хо́дишь на рабо́ту пешко́м?
+        en_gb: Do you walk to work?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: ходи́
@@ -34820,6 +35609,12 @@ words:
       - ru: Ты чита́ешь интере́сную кни́гу?
         en_gb: Are you reading an interesting book?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Что ты чита́ешь сейча́с?
+        en_gb: What are you reading now?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вы чита́ете газе́ты по утра́м?
+        en_gb: Do you read newspapers in the mornings?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
       imperative:
         sg: чита́й
@@ -34861,6 +35656,9 @@ words:
       - ru: Я бы чу́вствовал себя́ споко́йнее до́ма.
         en_gb: I would feel calmer at home.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты чу́вствуешь уста́лость?
+        en_gb: Do you feel tired?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
         sg: чу́вствуй
@@ -35120,6 +35918,9 @@ words:
       - ru: Я бы не шути́л над э́той те́мой.
         en_gb: I would not joke about this topic.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
+      - ru: Ты шу́тишь и́ли серьёзно?
+        en_gb: Are you joking or serious?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "щёлкнуть=to click":
     cefr_level: B1
     accented: щёлкнуть
