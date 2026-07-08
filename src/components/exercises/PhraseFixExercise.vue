@@ -3,8 +3,13 @@
 // Each item is a real, correct sentence with one word collapsed to its
 // dictionary form; the learner works through the set one sentence at a time:
 //   1. SELECT the grammatical slot — every dimension (case, number, gender,
-//      aspect) is picked on one compact board and checked together
-//   2. SPELL the correctly inflected form
+//      aspect) is picked on one compact board. Each pick is graded THE MOMENT
+//      it's tapped: a right pick locks its group green, a wrong pick flashes red
+//      and the learner tries again — so nobody spells a form for a slot they've
+//      picked wrong. A dimension that took a wrong pick still counts as a miss.
+//   2. SPELL the correctly inflected form. A wrong spelling reveals what was
+//      typed against the correct form, character by character, so a subtle slip
+//      (a stray accent, a look-alike letter) is visible.
 // Feedback (and the linked grammar rule) follows each sentence; solved
 // sentences stay visible above the current one. The descriptor is built by
 // lib/exerciseBuild.js (a set) or lib/phraseContext.js (a single sentence — a
@@ -16,6 +21,7 @@
 import { computed, nextTick, ref, onMounted } from 'vue'
 
 import { normalize } from '../../lib/text.js'
+import { revealDiff } from '../../lib/spellReveal.js'
 import { speak } from '../../lib/speech.js'
 import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
@@ -38,7 +44,14 @@ const hasSelect = computed(() => selectSteps.value.length > 0)
 // Per-item stage: 'select' → 'spell' → 'done'. Items with nothing to select
 // (unpaired verbs) start at 'spell'.
 const stage = ref(hasSelect.value ? 'select' : 'spell')
-const picks = ref([]) // group index → the option currently chosen (re-pickable until Check)
+// group index → the correct option, once the learner has chosen it (the group
+// is then locked). Groups with no entry are still open.
+const resolved = ref([])
+// group index → the ids the learner tapped that were wrong (kept flagged red).
+const wrongTried = ref([])
+// The dimensions (kinds) the learner ever picked wrong — the grade's memory,
+// even though the pick is corrected before spelling.
+const missed = ref([])
 const typed = ref('')
 const spellCorrect = ref(false)
 const inputEl = ref(null)
@@ -46,38 +59,32 @@ const inputEl = ref(null)
 // selection wrong — shown amber, not red).
 const results = ref([])
 
-// Every group picked (the Check button's gate)…
-const allPicked = computed(() =>
-  selectSteps.value.every((_, i) => picks.value[i] != null),
-)
-// …and, once checked, was every pick correct?
-const selectCorrect = computed(
-  () => hasSelect.value === false || selectSteps.value.every((s, i) => picks.value[i]?.correct),
-)
-const overallCorrect = computed(() => selectCorrect.value && spellCorrect.value)
+// Every group has its correct option chosen — the gate to the spelling stage.
+const allResolved = computed(() => selectSteps.value.every((_, i) => resolved.value[i]))
+// A selection dimension was picked wrong at least once this item.
+const selectMissed = computed(() => missed.value.length > 0)
+const overallCorrect = computed(() => !selectMissed.value && spellCorrect.value)
 
-// Whether the aspect group was answered wrong — the feedback then names the
+// Whether the aspect group was ever answered wrong — the feedback then names the
 // verb that was needed, not just its grammatical slot.
-const aspectMissed = computed(() =>
-  selectSteps.value.some((s, i) => s.kind === 'aspect' && picks.value[i] && !picks.value[i].correct),
-)
+const aspectMissed = computed(() => missed.value.includes('aspect'))
 
 // The dimensions the learner got wrong (case / number / gender / aspect),
 // worded for the feedback line — e.g. "case", "number", or "case and number".
 const wrongDimsLabel = computed(() => {
-  const names = selectSteps.value
-    .map((s, i) => (picks.value[i] && !picks.value[i].correct ? s.kind : null))
-    .filter(Boolean)
+  const names = selectSteps.value.map((s) => s.kind).filter((k) => missed.value.includes(k))
   if (names.length <= 1) return names[0] ?? ''
   return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]
 })
 
-// The instructive near-miss: the spelling matched but at least one selection
-// was wrong. Worth calling out clearly so the learner doesn't think their
-// (correct) spelling was rejected.
-const spellingOnlyMiss = computed(
-  () => hasSelect.value && !selectCorrect.value && spellCorrect.value,
-)
+// The instructive near-miss: the spelling matched but a selection was picked
+// wrong. Worth calling out clearly so the learner doesn't think their (correct)
+// spelling was rejected.
+const spellingOnlyMiss = computed(() => selectMissed.value && spellCorrect.value)
+
+// Character-by-character reveal of a wrong spelling: what was typed against the
+// correct accented form, mismatches flagged on both rows.
+const spellReveal = computed(() => revealDiff(typed.value, item.value.answerAccented))
 
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
 // so the slot doesn't drop it when we swap in the lemma / answer. Combining marks
@@ -90,8 +97,8 @@ const slotAffix = computed(() => {
   }
 })
 
-// An aspect drill must not leak which partner is correct, so until the board is
-// checked the slot shows every candidate infinitive (impf / pf).
+// An aspect drill must not leak which partner is correct, so until the aspect is
+// picked the slot shows every candidate infinitive (impf / pf).
 const lemmaChoicesVisible = computed(
   () =>
     stage.value === 'select' &&
@@ -110,19 +117,27 @@ const slotText = computed(() => {
   return slotAffix.value.lead + core + slotAffix.value.trail
 })
 
-function pickOption(groupIdx, opt) {
-  if (stage.value !== 'select') return
-  const next = picks.value.slice()
-  next[groupIdx] = opt
-  picks.value = next
-}
-
-// Commit the board: the picks are locked in and the spelling stage opens
-// (showing the slot the sentence actually needs, exactly as before).
-function checkSelection() {
-  if (stage.value !== 'select' || !allPicked.value) return
-  stage.value = 'spell'
-  nextTick(() => inputEl.value?.focus())
+// Grade a tap the instant it lands. A correct pick locks the group (and, once
+// every group is settled, opens the spelling stage); a wrong pick is flagged red
+// and remembered as a miss, but the group stays open for another try.
+function pickOption(groupIdx, step, opt) {
+  if (stage.value !== 'select' || resolved.value[groupIdx]) return
+  if (opt.correct) {
+    const next = resolved.value.slice()
+    next[groupIdx] = opt
+    resolved.value = next
+    playFeedback(true)
+    if (allResolved.value) {
+      stage.value = 'spell'
+      nextTick(() => inputEl.value?.focus())
+    }
+    return
+  }
+  if (!missed.value.includes(step.kind)) missed.value = [...missed.value, step.kind]
+  const tried = wrongTried.value.slice()
+  tried[groupIdx] = [...(tried[groupIdx] ?? []), opt.id]
+  wrongTried.value = tried
+  playFeedback(false)
 }
 
 function submitSpell() {
@@ -149,7 +164,9 @@ function next() {
   if (!isLast.value) {
     itemIdx.value += 1
     stage.value = (items.value[itemIdx.value].selectSteps ?? []).length ? 'select' : 'spell'
-    picks.value = []
+    resolved.value = []
+    wrongTried.value = []
+    missed.value = []
     typed.value = ''
     spellCorrect.value = false
     if (stage.value === 'spell') nextTick(() => inputEl.value?.focus())
@@ -206,7 +223,7 @@ onMounted(() => {
       </template>
     </div>
 
-    <!-- Stage 1 — one compact board: every dimension picked, then checked together -->
+    <!-- Stage 1 — one compact board: each dimension graded the moment it's tapped -->
     <div v-if="stage === 'select'" class="grid" style="gap: 0.75rem">
       <fieldset v-for="(step, si) in selectSteps" :key="step.kind" class="select-group">
         <legend class="step-label muted">{{ step.prompt }}</legend>
@@ -216,18 +233,30 @@ onMounted(() => {
             :key="opt.id"
             type="button"
             class="case-btn"
-            :class="{ selected: picks[si]?.id === opt.id }"
-            :aria-pressed="picks[si]?.id === opt.id"
-            @click="pickOption(si, opt)"
+            :class="{
+              correct: resolved[si]?.id === opt.id,
+              wrong: (wrongTried[si] ?? []).includes(opt.id),
+            }"
+            :disabled="!!resolved[si]"
+            @click="pickOption(si, step, opt)"
           >
-            <strong>{{ opt.label }}</strong>
-            <small v-if="opt.hint" class="muted">{{ opt.hint }}</small>
+            <span class="case-body">
+              <strong>{{ opt.label }}</strong>
+              <small v-if="opt.hint" class="muted">{{ opt.hint }}</small>
+            </span>
+            <span
+              v-if="resolved[si]?.id === opt.id"
+              class="pick-mark ok"
+              aria-hidden="true"
+            >✓</span>
+            <span
+              v-else-if="(wrongTried[si] ?? []).includes(opt.id)"
+              class="pick-mark no"
+              aria-hidden="true"
+            >✗</span>
           </button>
         </div>
       </fieldset>
-      <button type="button" class="primary check-select" :disabled="!allPicked" @click="checkSelection">
-        Check
-      </button>
     </div>
 
     <!-- Stage 2 — spell the form -->
@@ -252,16 +281,52 @@ onMounted(() => {
       </form>
 
       <div v-else class="grid" style="gap: 0.75rem">
-        <p class="feedback" :class="overallCorrect ? 'good' : spellingOnlyMiss ? 'warn' : 'bad'">
-          <template v-if="overallCorrect">✓ Correct!</template>
-          <template v-else-if="spellingOnlyMiss">
-            ✓ Spelling right — but you picked the wrong {{ wrongDimsLabel }}.
-            It needed
-            <strong v-if="aspectMissed" lang="ru">{{ item.lemma }}</strong>
-            <strong v-else>{{ item.slotLabel }}</strong>.
-          </template>
-          <template v-else>✗ {{ item.answerAccented }}</template>
-        </p>
+        <div class="feedback-block">
+          <p class="feedback" :class="overallCorrect ? 'good' : spellingOnlyMiss ? 'warn' : 'bad'">
+            <template v-if="overallCorrect">✓ Correct!</template>
+            <template v-else-if="spellingOnlyMiss">
+              ✓ Spelling right — but you picked the wrong {{ wrongDimsLabel }}.
+              It needed
+              <strong v-if="aspectMissed" lang="ru">{{ item.lemma }}</strong>
+              <strong v-else>{{ item.slotLabel }}</strong>.
+            </template>
+            <template v-else>✗ Not quite — compare your answer below.</template>
+          </p>
+
+          <!-- Spelling missed: what was typed vs. the correct form, character by
+               character, so a subtle slip (a stray accent, a look-alike letter)
+               is visible where a bare answer reveal could not show it. -->
+          <dl v-if="!spellCorrect" class="spell-diff">
+            <div class="diff-row">
+              <dt class="diff-label muted">You typed</dt>
+              <dd class="diff-text" lang="ru">
+                <template v-if="spellReveal.typed.length">
+                  <span
+                    v-for="(u, k) in spellReveal.typed"
+                    :key="k"
+                    :class="{ off: !u.ok }"
+                  >{{ u.text }}</span>
+                </template>
+                <em v-else class="muted">(nothing)</em>
+              </dd>
+            </div>
+            <div class="diff-row">
+              <dt class="diff-label muted">Correct</dt>
+              <dd class="diff-text" lang="ru">
+                <span
+                  v-for="(u, k) in spellReveal.answer"
+                  :key="k"
+                  :class="{ off: !u.ok }"
+                >{{ u.text }}</span>
+              </dd>
+            </div>
+          </dl>
+
+          <!-- Spelling and a selection both missed: name the slot it needed too. -->
+          <p v-if="!spellCorrect && selectMissed" class="diff-note muted">
+            You also picked the wrong {{ wrongDimsLabel }} — it needed {{ item.slotLabel }}.
+          </p>
+        </div>
 
         <!-- The full, correct sentence — safe to read aloud now. -->
         <p class="full-ru" lang="ru">
@@ -378,8 +443,14 @@ onMounted(() => {
   color: var(--warn, #c9962b);
   font-weight: 600;
 }
+.feedback.good {
+  color: var(--good);
+}
 .feedback.warn {
   color: var(--warn, #c9962b);
+}
+.feedback.bad {
+  color: var(--bad);
 }
 .step-label {
   font-size: 0.95rem;
@@ -405,8 +476,10 @@ onMounted(() => {
   grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
 }
 .case-btn {
-  display: grid;
-  gap: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
   padding: 0.5rem 0.6rem;
   text-align: left;
   border: 1px solid var(--border, #ccc);
@@ -414,21 +487,85 @@ onMounted(() => {
   background: var(--card);
   cursor: pointer;
 }
-.case-btn:hover {
+.case-body {
+  display: grid;
+  gap: 0.1rem;
+}
+.case-btn:hover:not(:disabled) {
   border-color: var(--primary);
 }
-.case-btn.selected {
-  border-color: var(--primary);
-  background: color-mix(in srgb, var(--primary) 12%, var(--card));
-  box-shadow: inset 0 0 0 1px var(--primary);
+/* Graded the instant it's tapped: a right pick locks green, a wrong pick reds. */
+.case-btn.correct {
+  border-color: var(--good);
+  background: color-mix(in srgb, var(--good) 14%, var(--card));
+  box-shadow: inset 0 0 0 1px var(--good);
+  color: var(--good);
+  cursor: default;
+}
+.case-btn.wrong {
+  border-color: var(--bad);
+  background: color-mix(in srgb, var(--bad) 12%, var(--card));
+  color: var(--bad);
+}
+/* A locked (resolved) group's other options fade back. */
+.case-btn:disabled:not(.correct):not(.wrong) {
+  opacity: 0.5;
+  cursor: default;
 }
 .case-btn small {
   font-size: 0.75rem;
 }
-.check-select {
-  justify-self: start;
+.pick-mark {
+  font-weight: 700;
+  font-size: 1.05rem;
+  flex: 0 0 auto;
+}
+.pick-mark.ok {
+  color: var(--good);
+}
+.pick-mark.no {
+  color: var(--bad);
 }
 .slot-label {
+  font-size: 0.9rem;
+}
+.feedback-block {
+  display: grid;
+  gap: 0.5rem;
+  text-align: left;
+}
+/* What the learner typed against the correct form, aligned character by
+   character. Monospace so the two rows line up under each other. */
+.spell-diff {
+  margin: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+.diff-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.diff-label {
+  flex: 0 0 5rem;
+  font-size: 0.8rem;
+}
+.diff-text {
+  font-family: ui-monospace, monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+  word-break: break-word;
+}
+/* The differing characters — a wrong/extra letter typed, or a needed letter the
+   answer has that the attempt didn't line up with. */
+.diff-text .off {
+  color: var(--bad);
+  text-decoration: underline wavy;
+  background: color-mix(in srgb, var(--bad) 12%, transparent);
+  border-radius: 3px;
+}
+.diff-note {
+  margin: 0;
   font-size: 0.9rem;
 }
 .full-ru {

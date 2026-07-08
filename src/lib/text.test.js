@@ -9,6 +9,13 @@ describe('stripStress', () => {
   it('leaves unaccented text untouched', () => {
     expect(stripStress('дом')).toBe('дом')
   })
+  it('also strips a mis-typed spacing/modifier acute accent', () => {
+    // A learner reaching for a stress key can land U+00B4 or U+02CA instead of
+    // the combining accent — neither is meaningful, so both fold away.
+    expect(stripStress('ноябре\u00B4')).toBe('ноябре')
+    expect(stripStress('ноябре\u02CA')).toBe('ноябре')
+    expect(stripStress('ноябре\u0301')).toBe('ноябре')
+  })
 })
 
 describe('normalize', () => {

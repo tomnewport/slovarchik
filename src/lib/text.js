@@ -1,7 +1,11 @@
 // Shared text helpers for Russian strings.
 
-// Combining acute accent (U+0301) used to mark stress in the data files.
-const STRESS_MARK = /́/g
+// Acute-accent marks used (or mis-typed) to mark stress. The data files use the
+// combining acute accent (U+0301); a learner reaching for a stress key on a
+// physical keyboard can instead land a spacing acute (U+00B4 ´), a modifier
+// letter acute (U+02CA ˊ) or the combining acute *tone* mark (U+0341) — none of
+// which are ever meaningful in a Russian answer, so all fold away for grading.
+const STRESS_MARK = /[\u0301\u0341\u00B4\u02CA]/g
 
 /**
  * Remove stress marks so stored (accented) forms can be compared against what a
