@@ -7,6 +7,8 @@ import {
   dimensionsForLevel,
   applicableDimensions,
   criterionMet,
+  correctAdvancesAt,
+  dimensionAdvancesAt,
   minCorrectToMeet,
   minExercisesToLevel,
   dimensionProgress,
@@ -152,6 +154,49 @@ describe('minCorrectToMeet', () => {
     expect(
       minCorrectToMeet(attempts('mastery', 'usage', [true, true]), CRITERIA.mastery.usage),
     ).toBe(1)
+  })
+})
+
+describe('correctAdvancesAt / dimensionAdvancesAt', () => {
+  const NOW = Date.UTC(2026, 6, 12, 12) // a fixed "today", midday UTC
+  const crit = CRITERIA.mastery.usage // 2 of last 3 correct, on 2 distinct days
+
+  it('a fresh day-spaced dimension still advances today (it banks its first day)', () => {
+    expect(correctAdvancesAt([], crit, NOW)).toBe(true)
+  })
+  it('advances when a correct answer from an earlier day is already banked', () => {
+    expect(correctAdvancesAt([{ correct: true, ts: NOW - DAY }], crit, NOW)).toBe(true)
+  })
+  it('is day-blocked once the window is full of today-only correct answers', () => {
+    const today = attempts('mastery', 'usage', [true, true, true], NOW)
+    expect(correctAdvancesAt(today, crit, NOW)).toBe(false)
+  })
+  it('still advances today when the window is failing but the days are banked', () => {
+    // Two spaced corrects long ago, then recent failures broke the window: a
+    // correct answer today re-meets the ratio (days already span two days).
+    const list = [
+      { correct: true, ts: NOW - 10 * DAY },
+      { correct: true, ts: NOW - 9 * DAY },
+      { correct: false, ts: NOW - 1000 },
+      { correct: false, ts: NOW - 500 },
+    ]
+    expect(correctAdvancesAt(list, crit, NOW)).toBe(true)
+  })
+  it('does not advance a criterion that is already met', () => {
+    expect(correctAdvancesAt(dayApart('mastery', 'usage', [true, true]), crit, NOW)).toBe(false)
+  })
+  it('treats a missing criterion as non-advancing', () => {
+    expect(correctAdvancesAt([], null, NOW)).toBe(false)
+    expect(dimensionAdvancesAt([], 'learning', 'context', NOW)).toBe(false)
+  })
+  it('filters a word’s events to the requested level and dimension', () => {
+    // Today-saturated *learning* usage must not block *mastery* usage.
+    const events = [
+      ...attempts('learning', 'usage', [true, true, true, true], NOW),
+      ...attempts('mastery', 'identification', [true, true, true], NOW),
+    ]
+    expect(dimensionAdvancesAt(events, 'mastery', 'usage', NOW)).toBe(true)
+    expect(dimensionAdvancesAt(events, 'mastery', 'identification', NOW)).toBe(false)
   })
 })
 
