@@ -15,6 +15,9 @@ import { phraseTokens } from './phrases.js'
 // out so they can never be matched as a "form".
 const FORM_KEYS = ['accented', 'forms', 'declension', 'conjugation']
 
+// Acute-accent marks used to mark stress (same set stripStress folds away).
+const STRESS_MARKS = /[\u0301\u0341\u00B4\u02CA]/gu
+
 /**
  * Normalise a Russian surface token for matching: stress marks removed, ё→е,
  * lowercased and stripped of everything but letters (so trailing punctuation in
@@ -27,6 +30,27 @@ export function normToken(token) {
     .toLowerCase()
     .replace(/ё/g, 'е')
     .replace(/[^\p{L}]/gu, '')
+}
+
+/**
+ * Like {@link normToken} but keeps the stress mark, so heteronyms that differ
+ * only by stress stay distinct — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т»
+ * (stand) vs «сто́ят» (cost). Accent variants fold to the combining acute so
+ * comparisons are consistent. Returns '' for tokens with no letters.
+ * @param {string} token
+ * @returns {string}
+ */
+export function normTokenStress(token) {
+  return String(token ?? '')
+    .toLowerCase()
+    .replace(/ё/g, 'е')
+    .replace(STRESS_MARKS, '\u0301')
+    .replace(/[^\p{L}\u0301]/gu, '')
+}
+
+/** Whether a surface token carries an acute stress mark. */
+function hasStressMark(token) {
+  return /[\u0301\u0341\u00B4\u02CA]/u.test(String(token ?? ''))
 }
 
 /** Recursively gather every string leaf under a (possibly nested) value. */
@@ -45,9 +69,10 @@ function collectStrings(value, out) {
  * Every normalised surface form a word can appear as in a phrase: its headword
  * and bare key form plus all of its inflected forms.
  * @param {object} word   a normalised word record (from buildWords)
+ * @param {(t: string) => string} [norm]  token normaliser (default {@link normToken})
  * @returns {Set<string>}
  */
-export function wordForms(word) {
+export function wordForms(word, norm = normToken) {
   const raw = []
   if (word?.headword) raw.push(word.headword)
   if (word?.ru) raw.push(word.ru)
@@ -64,7 +89,7 @@ export function wordForms(word) {
     // (see #155). Skip anything with internal whitespace.
     const trimmed = String(s).trim()
     if (!trimmed || /\s/.test(trimmed)) continue
-    const n = normToken(trimmed)
+    const n = norm(trimmed)
     if (n) forms.add(n)
   }
   // Third-person personal pronouns take an n- prefix after a preposition
@@ -86,14 +111,15 @@ export function wordForms(word) {
  * These are the lemma a learner would look up, as opposed to the oblique
  * inflected forms also returned by {@link wordForms}.
  * @param {object} word
+ * @param {(t: string) => string} [norm]  token normaliser (default {@link normToken})
  * @returns {Set<string>}
  */
-export function baseForms(word) {
+export function baseForms(word, norm = normToken) {
   const out = new Set()
   for (const s of [word?.headword, word?.ru]) {
     const trimmed = String(s ?? '').trim()
     if (!trimmed || /\s/.test(trimmed)) continue
-    const n = normToken(trimmed)
+    const n = norm(trimmed)
     if (n) out.add(n)
   }
   return out
@@ -128,13 +154,11 @@ export function wordTokensInPhrase(phrase, word) {
  * than the instrumental of «доро́га» "road" (#173). Only then do inflected forms
  * fill the remaining gaps. Within each pass the alphabetically earlier headword
  * wins, a stable choice regardless of load order.
- * @param {object[]} words   normalised word records (from buildWords)
+ * @param {object[]} sorted   word records, pre-sorted by headword
+ * @param {(t: string) => string} norm  token normaliser keying the index
  * @returns {Map<string, {key: string, ru: string, en: string}>}
  */
-export function buildFormIndex(words) {
-  const sorted = (words ?? [])
-    .slice()
-    .sort((a, b) => stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru'))
+function buildIndex(sorted, norm) {
   const index = new Map()
 
   // Pass 1: base (dictionary) forms — a word whose lemma *is* the surface form
@@ -142,7 +166,7 @@ export function buildFormIndex(words) {
   for (const w of sorted) {
     const entry = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
     if (!entry.en) continue
-    for (const form of baseForms(w)) {
+    for (const form of baseForms(w, norm)) {
       if (!index.has(form)) index.set(form, entry)
     }
   }
@@ -155,8 +179,8 @@ export function buildFormIndex(words) {
   for (const w of sorted) {
     const baseEn = w.meaning || w.en
     if (!baseEn) continue
-    for (const form of wordForms(w)) {
-      const hetEntry = w.heteronyms?.find((h) => normToken(h.ru) === form)
+    for (const form of wordForms(w, norm)) {
+      const hetEntry = w.heteronyms?.find((h) => norm(h.ru) === form)
       const en = hetEntry?.gloss || baseEn
       if (!index.has(form)) {
         index.set(form, { key: w.key, ru: w.headword || w.ru, en })
@@ -174,6 +198,28 @@ export function buildFormIndex(words) {
 }
 
 /**
+ * Build a lookup from a normalised surface form to a hint entry
+ * `{ key, ru, en }` for the word that can appear as that form. See {@link buildIndex}
+ * for the two-pass collision rules.
+ *
+ * The returned Map is keyed by the stress-stripped form (the default lookup). A
+ * companion **stress-aware** index is attached as `.stressIndex`, keyed with the
+ * stress mark kept, so {@link phraseHintTokens} can disambiguate heteronyms that
+ * differ only by stress — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т» (stand)
+ * vs «сто́ят» (cost) — whenever the phrase token carries its stress mark.
+ * @param {object[]} words   normalised word records (from buildWords)
+ * @returns {Map<string, {key: string, ru: string, en: string}> & {stressIndex: Map}}
+ */
+export function buildFormIndex(words) {
+  const sorted = (words ?? [])
+    .slice()
+    .sort((a, b) => stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru'))
+  const index = buildIndex(sorted, normToken)
+  index.stressIndex = buildIndex(sorted, normTokenStress)
+  return index
+}
+
+/**
  * Split a phrase into display tokens, each tagged with the matching hint entry
  * (or null when the token isn't a known word). The raw token is preserved for
  * display (stress marks, capitalisation and punctuation intact); only the lookup
@@ -183,8 +229,16 @@ export function buildFormIndex(words) {
  * @returns {Array<{text: string, hint: object|null}>}
  */
 export function phraseHintTokens(phrase, index) {
-  return phraseTokens(phrase).map((text) => ({
-    text,
-    hint: index?.get(normToken(text)) ?? null,
-  }))
+  const stressIndex = index?.stressIndex
+  return phraseTokens(phrase).map((text) => {
+    // When the token carries a stress mark, prefer a stress-exact match so a
+    // heteronym is disambiguated (по́лке→shelf, not regiment). Fall back to the
+    // stress-stripped index for tokens without stress or with no exact match.
+    const stressed =
+      stressIndex && hasStressMark(text) ? stressIndex.get(normTokenStress(text)) : null
+    return {
+      text,
+      hint: stressed ?? index?.get(normToken(text)) ?? null,
+    }
+  })
 }

@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 
 import {
   normToken,
+  normTokenStress,
   wordForms,
   wordTokensInPhrase,
   buildFormIndex,
@@ -20,6 +21,16 @@ describe('normToken', () => {
     expect(normToken('—')).toBe('')
     expect(normToken('123')).toBe('')
     expect(normToken('')).toBe('')
+  })
+})
+
+describe('normTokenStress', () => {
+  it('keeps the stress mark, distinguishing heteronyms', () => {
+    expect(normTokenStress('по́лке')).not.toBe(normTokenStress('полке́'))
+    expect(normTokenStress('стоя́т')).not.toBe(normTokenStress('сто́ят'))
+    // otherwise behaves like normToken: lowercased, ё→е, punctuation dropped
+    expect(normTokenStress('Всё,')).toBe(normTokenStress('все'))
+    expect(normTokenStress('«по́лке».')).toBe(normTokenStress('по́лке'))
   })
 })
 
@@ -167,6 +178,32 @@ describe('buildFormIndex', () => {
     expect(gloss).toContain('it stands')
   })
 
+  it('disambiguates stress-distinguished heteronyms when the token carries stress', () => {
+    // «по́лке» is the prepositional of «по́лка» (shelf); «полке́» is the
+    // prepositional of «полк» (regiment). Stress-stripped they collide, so the
+    // stress-aware companion index must pick the right one.
+    const regiment = {
+      key: 'полк=regiment',
+      headword: 'полк',
+      ru: 'полк',
+      meaning: 'regiment',
+      extra: { declension: { sg_pre: 'полке́' } },
+    }
+    const shelf = {
+      key: 'полка=shelf',
+      headword: 'по́лка',
+      ru: 'полка',
+      meaning: 'shelf',
+      forms: { sg: { pre: 'по́лке', dat: 'по́лке' } },
+    }
+    const index = buildFormIndex([regiment, shelf])
+    // Stress-stripped lookup is unchanged (alphabetically first lemma wins).
+    expect(index.get(normToken('полке'))?.en).toBe('regiment')
+    // Stress-aware lookup resolves each surface form to its own word.
+    expect(index.stressIndex.get(normTokenStress('по́лке'))?.en).toBe('shelf')
+    expect(index.stressIndex.get(normTokenStress('полке́'))?.en).toBe('regiment')
+  })
+
   it('prefers the word whose dictionary form is the token over an oblique form (#173)', () => {
     // «дорого́й» is the adjective "expensive" (its headword) but also the
     // instrumental of the noun «доро́га» "road". The lemma must win.
@@ -203,5 +240,25 @@ describe('phraseHintTokens', () => {
     const index = buildFormIndex(loadFixtureWords())
     const [first] = phraseHintTokens('к錯誤 zzz', index)
     expect(first.hint).toBeNull()
+  })
+
+  it('picks the stress-matching heteronym for a stressed phrase token', () => {
+    const shelf = {
+      key: 'полка=shelf',
+      headword: 'по́лка',
+      ru: 'полка',
+      meaning: 'shelf',
+      forms: { sg: { pre: 'по́лке' } },
+    }
+    const regiment = {
+      key: 'полк=regiment',
+      headword: 'полк',
+      ru: 'полк',
+      meaning: 'regiment',
+      extra: { declension: { sg_pre: 'полке́' } },
+    }
+    const index = buildFormIndex([shelf, regiment])
+    const tokens = phraseHintTokens('На по́лке стоя́т буты́лки.', index)
+    expect(tokens.find((t) => t.text === 'по́лке').hint?.en).toBe('shelf')
   })
 })
