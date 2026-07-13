@@ -142,6 +142,30 @@ export function minCorrectToMeet(attempts, crit) {
 }
 
 /**
+ * Would one more correct answer, recorded at `now`, move a criterion closer to
+ * being met? False when the criterion is already met — and, crucially, false
+ * when the only thing still missing is a *different calendar day* (#313): a
+ * day-spaced criterion whose recent window is already full of today's correct
+ * answers gains nothing from further same-day drilling. Session assembly uses
+ * this to steer practice away from drills that cannot progress until tomorrow.
+ * (A fresh criterion still advances today — banking today as its first day
+ * shortens the distance left — so only genuinely saturated ones are excluded.)
+ */
+export function correctAdvancesAt(attempts, crit, now) {
+  if (!crit) return false
+  const list = attempts ?? []
+  const before = minCorrectToMeet(list, crit)
+  if (before === 0) return false
+  return minCorrectToMeet([...list, { correct: true, ts: now }], crit) < before
+}
+
+/** {@link correctAdvancesAt} for one `(level, dimension)` of a word's events. */
+export function dimensionAdvancesAt(events, level, dimension, now) {
+  const crit = CRITERIA[level]?.[dimension] ?? null
+  return correctAdvancesAt(attemptsFor(events, level, dimension), crit, now)
+}
+
+/**
  * Minimum number of correct exercises a word still needs for every applicable
  * dimension of a level to be met (best case — each answered correctly). Summed
  * across a batch's words this is the "exercises to go" until the batch is done.

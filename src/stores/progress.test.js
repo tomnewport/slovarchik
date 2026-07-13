@@ -470,6 +470,71 @@ describe('sessions', () => {
       practices.filter((p) => p.dimension === 'identification').length / practices.length
     expect(idFraction).toBeGreaterThan(0.5)
   })
+
+  it('steers a mastery practice pool away from words day-blocked today (#313)', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0', 'w1'], size: 2 })
+    const now = Date.now()
+    await learn('w0', now - 10 * DAY)
+    await learn('w1', now - 10 * DAY)
+    // w0's mastery usage is saturated with today-only correct answers: its
+    // window is met but the day-spacing rule needs another calendar day, so
+    // more drilling today cannot advance it. w1 is untouched and can.
+    for (let i = 0; i < 3; i++) {
+      await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true, ts: now })
+    }
+    const usagePractices = Array.from({ length: 5 }, (_, i) =>
+      startSession({ type: 'grammar', size: 'super', now }, seededRng(i + 300)).practices,
+    )
+      .flat()
+      .filter((p) => p.level === 'mastery' && p.dimension === 'usage')
+    expect(usagePractices.length).toBeGreaterThan(0)
+    for (const p of usagePractices) {
+      expect(p.pool).toContain('w1')
+      expect(p.pool).not.toContain('w0')
+    }
+  })
+
+  it('drops mastery practices when every batch word is day-blocked today (#313)', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0'], size: 1 })
+    const now = Date.now()
+    await learn('w0', now - 10 * DAY)
+    // Mastery identification is fully met (two spaced correct answers); usage
+    // has a full window of today-only corrects, so its only remaining need is
+    // another calendar day. Nothing on this word can progress today.
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: true, ts: now - DAY })
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: true, ts: now })
+    for (let i = 0; i < 3; i++) {
+      await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true, ts: now })
+    }
+    expect(stateOf('w0')).toBe('learned') // still unmastered — but blocked today
+    const session = startSession({ type: 'standard', size: 'super', now }, seededRng(32))
+    expect(session.practices.length).toBeGreaterThan(0)
+    expect(session.practices.every((p) => p.level === 'learning')).toBe(true)
+    // Tomorrow the word can advance again, so mastery practices return.
+    const tomorrow = startSession({ type: 'standard', size: 'super', now: now + DAY }, seededRng(33))
+    expect(tomorrow.practices.some((p) => p.level === 'mastery')).toBe(true)
+  })
+
+  it('keeps an all-mastery session running on blocked words rather than emptying it', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0'], size: 1 })
+    const now = Date.now()
+    await learn('w0', now - 10 * DAY)
+    for (const d of ['identification', 'usage']) {
+      for (let i = 0; i < 3; i++) {
+        await recordAttempt({ word: 'w0', dimension: d, level: 'mastery', correct: true, ts: now })
+      }
+    }
+    // A grammar session has no learning-level practices to retreat to: the
+    // day-blocked batch still fills the session (review beats an empty screen).
+    const session = startSession({ type: 'grammar', size: 'super', now }, seededRng(34))
+    expect(session.practices.length).toBeGreaterThan(0)
+    for (const p of session.practices.filter((x) => x.level === 'mastery')) {
+      expect(p.pool).toContain('w0')
+    }
+  })
 })
 
 describe('lifetime aggregates (#314)', () => {

@@ -24,6 +24,7 @@ import {
   wordHasInflections,
   wordHasContextDrill,
   dimensionProgress,
+  dimensionAdvancesAt,
   levelMet,
   lastAttemptAt,
   minExercisesToLevel,
@@ -680,15 +681,24 @@ function duePool(now = Date.now()) {
 
 /**
  * True when the mastery batch exists and has at least one word that has not yet
- * been mastered. Mastery-level practices are only included in sessions when this
- * is true, so a learner is never presented with mastery exercises before they
- * have words actively being mastered.
+ * been mastered AND can still make progress today. Mastery-level practices are
+ * only included in sessions when this is true, so a learner is never presented
+ * with mastery exercises before they have words actively being mastered — nor
+ * once every remaining criterion is day-blocked (#313): when all a batch still
+ * needs is a correct answer on *another calendar day*, today's session slots
+ * are better spent on learning-level words that can actually move.
  */
-function masteryBatchActive() {
+function masteryBatchActive(now = Date.now()) {
   const batch = state.mastery
   if (!batch) return false
   const target = rank(batchTarget('mastery'))
-  return batch.words.some((key) => rank(stateOf(key)) < target)
+  return batch.words.some((key) => {
+    if (rank(stateOf(key)) >= target) return false
+    const evs = events(key)
+    return applicableDimensions('mastery', wordRecord(key)).some((d) =>
+      dimensionAdvancesAt(evs, 'mastery', d, now),
+    )
+  })
 }
 
 /**
@@ -699,12 +709,12 @@ function masteryBatchActive() {
  * "refresh" half — both pools draw only from learned/mastered words; the 50%
  * current batch is the "learn" half, ordered worst-understood first.
  */
-export function startSession({ type = 'standard', size, focusKeys = null } = {}, rng = Math.random) {
+export function startSession({ type = 'standard', size, focusKeys = null, now = Date.now() } = {}, rng = Math.random) {
   // Restrict to learning-level practices when no mastery batch is active —
   // but only if that leaves at least one eligible practice (e.g. a grammar
   // session has no learning-level practices and would otherwise become empty).
   const hasLearningPractices = practicesForSession(type).some((p) => p.level === 'learning')
-  const levels = !masteryBatchActive() && hasLearningPractices ? ['learning'] : null
+  const levels = !masteryBatchActive(now) && hasLearningPractices ? ['learning'] : null
   // Weakness is computed *per level* so the two levels never steal each other's
   // practice-selection probability. Both start from the same global per-dimension
   // accuracy, then each level boosts only the dimensions still blocking its own
@@ -734,15 +744,25 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
   // inflection word-bank for identification) has high global accuracy, its
   // weakness weight collapses to ~0 and the practice that would finish the word
   // is almost never chosen.
+  // A dimension only earns the boost when a correct answer *today* would move
+  // some word forward. One whose every needing word is day-blocked (#313 — the
+  // remaining requirement is a correct answer on another calendar day) is
+  // instead zeroed, so its practices become a last resort rather than eating
+  // session slots that cannot progress until tomorrow.
   if (state.mastery) {
+    const needed = new Set()
+    const advanceable = new Set()
     for (const key of state.mastery.words) {
       if (stateOf(key) !== 'learned') continue
       const evs = events(key)
       for (const d of applicableDimensions('mastery', wordRecord(key))) {
-        if (!dimensionProgress(evs, 'mastery', d).met) {
-          masteryWeakness[d] = Math.max(masteryWeakness[d], 2)
-        }
+        if (dimensionProgress(evs, 'mastery', d).met) continue
+        needed.add(d)
+        if (dimensionAdvancesAt(evs, 'mastery', d, now)) advanceable.add(d)
       }
+    }
+    for (const d of needed) {
+      masteryWeakness[d] = advanceable.has(d) ? Math.max(masteryWeakness[d], 2) : 0
     }
   }
   const weakness = { learning: learningWeakness, mastery: masteryWeakness }
@@ -774,8 +794,21 @@ export function startSession({ type = 'standard', size, focusKeys = null } = {},
     // recording mastery-level events on non-batch words (which corrupts their
     // progression state — see exerciseBuild.buildInflect for the same guard
     // on the top-up path).
-    practice.pool =
-      practice.level === 'mastery' && masterySet ? base.filter((k) => masterySet.has(k)) : base
+    if (practice.level === 'mastery' && masterySet) {
+      const batchWords = base.filter((k) => masterySet.has(k))
+      // Within the batch, prefer words this practice's dimension can still
+      // advance today: a word whose criterion is met, or day-blocked (#313 —
+      // it just needs another calendar day), gains nothing from more drilling
+      // now. Fall back to the whole batch when nothing can advance (e.g. an
+      // all-mastery grammar session with everything blocked) so the session
+      // still has content.
+      const advancing = batchWords.filter((k) =>
+        dimensionAdvancesAt(events(k), 'mastery', practice.dimension, now),
+      )
+      practice.pool = advancing.length > 0 ? advancing : batchWords
+    } else {
+      practice.pool = base
+    }
   }
   return { ...session, focusKeys: focusKeys ?? null, pools }
 }
