@@ -215,6 +215,22 @@ rules:
     exceptions:
       - "Some masculine forms drop -л: нести́ → нёс, мочь → мог."
 
+  verb-conditional:
+    title: "Conditional (бы + past form)"
+    formula: "бы + past-tense form · agrees with the subject's gender/number"
+    explanation: >
+      «бы» with the past-tense form expresses "would" — or "would have";
+      Russian does not distinguish the two, context decides: Я бы пошёл =
+      "I would go / I would have gone". The verb form is spelled exactly like
+      the past tense and still agrees with the SUBJECT's gender and number
+      (-л / -ла / -ло / -ли). «бы» floats — usually right after the subject
+      or the verb: Я бы пошёл / Я пошёл бы. In an unreal condition BOTH
+      halves take бы: Е́сли бы у меня́ бы́ло вре́мя, я бы пришёл. It also
+      makes polite wishes: Я бы хоте́л ко́фе — "I'd like a coffee".
+    exceptions:
+      - "что́бы already contains бы and takes the same past form — but that is purpose or wish (Я хочу́, что́бы ты знал), not a conditional."
+      - "Never combine бы with a future or present form: я бы бу́ду is impossible."
+
   verb-imperative:
     title: "Imperative (command form)"
     formula: "3pl stem + -й / -и́ / -ь · plural adds -те"

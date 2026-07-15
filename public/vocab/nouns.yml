@@ -2609,7 +2609,7 @@ words:
     en_gb:
       standard: shore (the land along the edge of a body of water)
     usage:
-      - ru: Мы сиде́ли на бе́регу реки́.
+      - ru: Мы сиде́ли на берегу́ реки́.
         en_gb: We sat on the shore of the river.
       - ru: Ло́дка подплыла́ к бе́регу.
         en_gb: The boat sailed up to the shore.
@@ -4955,7 +4955,7 @@ words:
     en_gb:
       standard: top (the upper part of something)
     usage:
-      - ru: Положи́ кни́гу на верх полки́.
+      - ru: Положи́ кни́гу на верх по́лки.
         en_gb: Put the book on the top of the shelf.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: С ве́рха горы́ ви́ден весь го́род.
@@ -16063,8 +16063,8 @@ words:
         en_gb: The Russian intelligentsia loved the theatre.
       - ru: Кни́га посвящена́ интеллиге́нции.
         en_gb: The book is dedicated to the intelligentsia.
-      - ru: Он горди́лся свое́й интеллиге́нцией.
-        en_gb: He was proud of being part of the intelligentsia.
+      - ru: Страна́ горди́лась свое́й интеллиге́нцией.
+        en_gb: The country was proud of its intelligentsia.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
   "интерес=interest":
     cefr_level: A2
@@ -19134,7 +19134,7 @@ words:
       - ru: Нам ну́жно большо́е коли́чество воды́.
         en_gb: We need a large quantity of water.
       - ru: Коли́чество ученико́в растёт.
-        en_gb: The quantity of pupils is growing.
+        en_gb: The number of pupils is growing.
       - ru: Доба́вь са́хар в ма́лом коли́честве.
         en_gb: Add sugar in a small quantity.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -21633,7 +21633,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В реке́ живёт опа́сный крокоди́л.
         en_gb: A dangerous crocodile lives in the river.
-      - ru: Крокоди́л спал на бе́регу.
+      - ru: Крокоди́л спал на берегу́.
         en_gb: The crocodile was sleeping on the bank.
     declension:
       sg_nom: крокоди́л
@@ -23295,7 +23295,7 @@ words:
         en_gb: He went up the stairs.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ле́стница ведёт на второ́й эта́ж.
-        en_gb: The stairs lead to the first floor.
+        en_gb: The stairs lead to the second floor.
       - ru: Он покра́сил ле́стницу.
         en_gb: He painted the stairs.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -23610,8 +23610,9 @@ words:
       - ru: Запиши́ а́дрес на листке́.
         en_gb: Write the address on the sheet.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Осе́нние листки́ кружа́тся в во́здухе.
-        en_gb: The autumn leaves whirl in the air.
+      - ru: Он вы́рвал листо́к из тетра́ди.
+        en_gb: He tore a sheet out of the exercise book.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
   "литература=literature":
     cefr_level: A2
     gender: f
@@ -27438,8 +27439,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Ма́ленький мураве́й нёс кусо́к хле́ба.
         en_gb: A small ant was carrying a piece of bread.
-      - ru: Муравьи́ стро́ят большо́й дом.
-        en_gb: Ants build a big home.
+      - ru: Муравьи́ стро́ят большо́й мураве́йник.
+        en_gb: The ants are building a big anthill.
     declension:
       sg_nom: мураве́й
       sg_gen: муравья́
@@ -33056,7 +33057,7 @@ words:
     usage:
       - ru: Пари́ж — краси́вый го́род.
         en_gb: Paris is a beautiful city.
-      - ru: Мы лю́буемся Пари́жем с ба́шни.
+      - ru: Мы любу́емся Пари́жем с ба́шни.
         en_gb: We are admiring Paris from the tower.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он давно́ мечта́л о Пари́же.
@@ -42478,9 +42479,9 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он изуча́ет исто́рию рели́гии.
         en_gb: He studies the history of religion.
-      - ru: Лю́ди исповеду́ют ра́зную рели́гию.
+      - ru: Лю́ди исповеду́ют ра́зные рели́гии.
         en_gb: People profess different religions.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: рели́гия
       sg_gen: рели́гии
@@ -45312,7 +45313,7 @@ words:
       - ru: Я позвони́л секретарю́ дире́ктора.
         en_gb: I called the director's secretary.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
-      - ru: В прие́мной рабо́тают два секретаря́.
+      - ru: В приёмной рабо́тают два секретаря́.
         en_gb: Two secretaries work in the reception.
   "секунда=second":
     cefr_level: A2
@@ -57837,9 +57838,9 @@ words:
     usage:
       - ru: Назови́те любо́е число́.
         en_gb: Name any number.
-      - ru: Раздели́ э́то на два числа́.
-        en_gb: Divide this by two numbers.
-        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Раздели́ э́то число́ на два.
+        en_gb: Divide this number by two.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я записа́л все чи́сла в тетра́дь.
         en_gb: I wrote all the numbers in my notebook.
     declension:
