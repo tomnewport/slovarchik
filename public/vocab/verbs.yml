@@ -1183,6 +1183,9 @@ words:
     en_gb:
       standard: to believe (to think something is true)
     usage:
+      - ru: Ты мне ве́ришь?
+        en_gb: Do you believe me?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Я ве́рю тебе́.
         en_gb: I believe you.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -1281,6 +1284,9 @@ words:
       past_n: верну́лось
       past_pl: верну́лись
     usage:
+      - ru: Когда́ вы вернётесь?
+        en_gb: When will you come back?
+        inflect: { token: 3, tense: future, person: 2pl, rule: verb-future }
       - ru: Верни́сь до девяти́ часо́в.
         en_gb: Be back by nine o'clock.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -4415,6 +4421,9 @@ words:
       alt:
         - to talk
     usage:
+      - ru: Вы говори́те по-англи́йски?
+        en_gb: Do you speak English?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Говори́те гро́мче, пожа́луйста.
         en_gb: Speak louder, please.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -4954,6 +4963,9 @@ words:
       alt:
         - to make
     usage:
+      - ru: Что ты де́лаешь ве́чером?
+        en_gb: What are you doing this evening?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Де́лай уро́ки ка́ждый день.
         en_gb: Do your homework every day.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -6093,6 +6105,9 @@ words:
     en_gb:
       standard: to think (to have ideas in your mind)
     usage:
+      - ru: Что ты об э́том ду́маешь?
+        en_gb: What do you think about it?
+        inflect: { token: 5, tense: present, person: 2sg, rule: verb-present }
       - ru: Не ду́май об э́том сли́шком мно́го.
         en_gb: Don't think about it too much.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -6214,6 +6229,9 @@ words:
     en_gb:
       standard: to eat (to take in food)
     usage:
+      - ru: Вы еди́те мя́со?
+        en_gb: Do you eat meat?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Ешь бо́льше овоще́й.
         en_gb: Eat more vegetables.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -6260,6 +6278,9 @@ words:
         - to ride
         - to drive
     usage:
+      - ru: Куда́ ты е́дешь?
+        en_gb: Where are you going?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Поезжа́й домо́й, уже́ по́здно.
         en_gb: Drive home, it's already late.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -6376,6 +6397,9 @@ words:
     en_gb:
       standard: to wait (to stay until something happens)
     usage:
+      - ru: Кого́ вы ждёте?
+        en_gb: Who are you waiting for?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Жди меня́ у вхо́да.
         en_gb: Wait for me at the entrance.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -6529,6 +6553,9 @@ words:
     en_gb:
       standard: to live (to be alive, or to reside)
     usage:
+      - ru: Где вы живёте?
+        en_gb: Where do you live?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Они́ живу́т в дере́вне.
         en_gb: They live in a village.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
@@ -9204,6 +9231,9 @@ words:
     en_gb:
       standard: to know (to have information)
     usage:
+      - ru: Вы зна́ете, где метро́?
+        en_gb: Do you know where the metro is?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Зна́йте свои́ права́.
         en_gb: Know your rights.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -9286,6 +9316,9 @@ words:
     en_gb:
       standard: to play (a game, or an instrument)
     usage:
+      - ru: Ты игра́ешь на гита́ре?
+        en_gb: Do you play the guitar?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Не игра́й в футбо́л до́ма!
         en_gb: Don't play football at home!
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -9328,6 +9361,9 @@ words:
       alt:
         - to walk
     usage:
+      - ru: Ты идёшь с на́ми?
+        en_gb: Are you coming with us?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Я иду́ в шко́лу.
         en_gb: I am going to school.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -9767,6 +9803,9 @@ words:
       past_n: иска́ло
       past_pl: иска́ли
     usage:
+      - ru: Что вы и́щете?
+        en_gb: What are you looking for?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Я ищу́ свои́ ключи́.
         en_gb: I am looking for my keys.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -10857,6 +10896,9 @@ words:
     en_gb:
       standard: to buy (to purchase)
     usage:
+      - ru: Что ты ку́пишь ма́ме на пра́здник?
+        en_gb: What will you buy mum for the holiday?
+        inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Купи́те биле́ты зара́нее.
         en_gb: Buy the tickets in advance.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -11325,6 +11367,9 @@ words:
       alt:
         - to like
     usage:
+      - ru: Ты лю́бишь чай и́ли ко́фе?
+        en_gb: Do you like tea or coffee?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Я люблю́ тебя́.
         en_gb: I love you.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -11749,6 +11794,9 @@ words:
       alt:
         - can
     usage:
+      - ru: Вы мо́жете мне помо́чь?
+        en_gb: Can you help me?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Я не могу́ откры́ть дверь.
         en_gb: I can't open the door.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -15759,6 +15807,9 @@ words:
     en_gb:
       standard: to rest (to relax and not work)
     usage:
+      - ru: Как вы отдыха́ете в выходны́е?
+        en_gb: How do you relax at weekends?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Ле́том мы отдыха́ем на мо́ре.
         en_gb: In summer we holiday by the sea.
         inflect: { token: 3, tense: present, person: 1pl, rule: verb-present }
@@ -17731,6 +17782,9 @@ words:
     en_gb:
       standard: to drink (to swallow liquid)
     usage:
+      - ru: Вы пьёте ко́фе с са́харом?
+        en_gb: Do you take your coffee with sugar?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Пе́йте бо́льше воды́.
         en_gb: Drink more water.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -19762,6 +19816,9 @@ words:
       past_n: пошло́
       past_pl: пошли́
     usage:
+      - ru: Куда́ ты пойдёшь по́сле рабо́ты?
+        en_gb: Where will you go after work?
+        inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Пойди́ домо́й и отдохни́.
         en_gb: Go home and have a rest.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -20639,6 +20696,9 @@ words:
     en_gb:
       standard: to remember (to have in one's memory)
     usage:
+      - ru: Ты по́мнишь меня́?
+        en_gb: Do you remember me?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: По́мни о на́шей встре́че.
         en_gb: Remember our meeting.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -20870,6 +20930,9 @@ words:
     en_gb:
       standard: to understand (to know what something means)
     usage:
+      - ru: Ты понима́ешь по-ру́сски?
+        en_gb: Do you understand Russian?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Я не понима́ю э́то пра́вило.
         en_gb: I don't understand this rule.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -23534,6 +23597,9 @@ words:
     en_gb:
       standard: to arrive by transport (to come by vehicle on one occasion)
     usage:
+      - ru: Когда́ ты прие́дешь?
+        en_gb: When will you arrive?
+        inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Они́ прие́хали из Москвы́ вчера́.
         en_gb: They arrived from Moscow yesterday.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -26002,6 +26068,9 @@ words:
     en_gb:
       standard: to work (to do a job)
     usage:
+      - ru: Кем вы рабо́таете?
+        en_gb: What do you do for work?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Не рабо́тай так мно́го.
         en_gb: Don't work so much.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -28428,6 +28497,9 @@ words:
     en_gb:
       standard: to say (to utter words, on one occasion)
     usage:
+      - ru: Что вы ска́жете об э́той иде́е?
+        en_gb: What will you say about this idea?
+        inflect: { token: 3, tense: future, person: 2pl, rule: verb-future }
       - ru: Он сказа́л пра́вду.
         en_gb: He said the truth.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -29015,6 +29087,9 @@ words:
       past_n: слы́шало
       past_pl: слы́шали
     usage:
+      - ru: Ты слы́шишь меня́?
+        en_gb: Can you hear me?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Я слы́шу твой го́лос.
         en_gb: I hear your voice.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -29191,6 +29266,9 @@ words:
       alt:
         - to look
     usage:
+      - ru: Ты смо́тришь э́тот сериа́л?
+        en_gb: Do you watch this series?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Смотри́, како́й краси́вый зака́т!
         en_gb: Look, what a beautiful sunset!
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -34340,6 +34418,9 @@ words:
     en_gb:
       standard: to study (to learn at a school)
     usage:
+      - ru: Где ты у́чишься?
+        en_gb: Where do you study?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Я учу́сь в университе́те.
         en_gb: I study at university.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -34553,6 +34634,9 @@ words:
     en_gb:
       standard: to want (to wish for something)
     usage:
+      - ru: Что вы хоти́те на у́жин?
+        en_gb: What do you want for dinner?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Я хочу́ ча́шку ча́я.
         en_gb: I want a cup of tea.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -34773,6 +34857,9 @@ words:
     en_gb:
       standard: to read (to look at and understand text)
     usage:
+      - ru: Что ты сейча́с чита́ешь?
+        en_gb: What are you reading at the moment?
+        inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
       - ru: Чита́йте вслух ка́ждый день.
         en_gb: Read aloud every day.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -34816,6 +34903,9 @@ words:
     en_gb:
       standard: to feel (to sense an emotion or sensation)
     usage:
+      - ru: Как ты себя́ чу́вствуешь?
+        en_gb: How are you feeling?
+        inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
       - ru: Я чу́вствую себя́ хорошо́.
         en_gb: I feel well.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
