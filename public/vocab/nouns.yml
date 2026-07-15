@@ -42478,9 +42478,9 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он изуча́ет исто́рию рели́гии.
         en_gb: He studies the history of religion.
-      - ru: Лю́ди исповеду́ют ра́зную рели́гию.
+      - ru: Лю́ди исповеду́ют ра́зные рели́гии.
         en_gb: People profess different religions.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: рели́гия
       sg_gen: рели́гии
@@ -57837,9 +57837,9 @@ words:
     usage:
       - ru: Назови́те любо́е число́.
         en_gb: Name any number.
-      - ru: Раздели́ э́то на два числа́.
-        en_gb: Divide this by two numbers.
-        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Раздели́ э́то число́ на два.
+        en_gb: Divide this number by two.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я записа́л все чи́сла в тетра́дь.
         en_gb: I wrote all the numbers in my notebook.
     declension:

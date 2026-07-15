@@ -853,9 +853,9 @@ words:
       - ru: Де́ти бро́сились бежа́ть.
         en_gb: The children rushed to run.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: Е́сли бу́дет ну́жно, я бы бро́сился в во́ду.
-        en_gb: If needed, I would rush into the water.
-        inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
+      - ru: Е́сли бы бы́ло ну́жно, я бы бро́сился в во́ду.
+        en_gb: If it were necessary, I would rush into the water.
+        inflect: { token: 7, tense: past, person: past_m, rule: verb-past }
       - ru: Ско́ро спаса́тель бро́сится на по́мощь.
         en_gb: Soon the rescuer will rush to help.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
@@ -1802,12 +1802,12 @@ words:
         "1pl": вою́ем
         "2pl": вою́ете
         "3pl": вою́ют
-      past_m: вое́вал
-      past_f: вое́вала
-      past_n: вое́вало
-      past_pl: вое́вали
+      past_m: воева́л
+      past_f: воева́ла
+      past_n: воева́ло
+      past_pl: воева́ли
     usage:
-      - ru: Страны́ воюю́т друг с дру́гом.
+      - ru: Стра́ны вою́ют друг с дру́гом.
         en_gb: The countries are at war with each other.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Дед воева́л на фро́нте.
@@ -1815,7 +1815,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я не хочу́ воева́ть.
         en_gb: I do not want to wage war.
-      - ru: Никто́ не хо́чет, что́бы стра́ны бу́дут воева́ть.
+      - ru: Никто́ не хо́чет, что́бы стра́ны воева́ли.
         en_gb: No one wants the countries to be at war.
       - ru: Без причи́ны наро́д не воева́л бы.
         en_gb: Without a reason the people would not wage war.
@@ -19147,7 +19147,7 @@ words:
     en_gb:
       standard: to approach (to walk up to, habitually or repeatedly)
     usage:
-      - ru: Не подходи́ к краю́!
+      - ru: Не подходи́ к кра́ю!
         en_gb: Don't approach the edge!
       - ru: Я подхожу́ к до́му ка́ждый ве́чер.
         en_gb: I approach the house every evening.
