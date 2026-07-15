@@ -128,6 +128,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У ка́ждого солда́та есть автома́т.
         en_gb: Every soldier has a machine gun.
+        en_alt:
+          - Each soldier has a machine gun.
       - ru: Он чи́стил свой автома́т ве́чером.
         en_gb: He cleaned his machine gun in the evening.
     declension:
@@ -858,6 +860,8 @@ words:
         en_gb: The child slept like an angel.
       - ru: На ёлке вися́т а́нгелы.
         en_gb: Angels hang on the Christmas tree.
+        en_alt:
+          - There are angels hanging on the Christmas tree.
     declension:
       sg_nom: а́нгел
       sg_gen: а́нгела
@@ -1033,6 +1037,8 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лаборато́рии стоя́т но́вые аппара́ты.
         en_gb: New apparatuses stand in the laboratory.
+        en_alt:
+          - There are new apparatuses in the laboratory.
     declension:
       sg_nom: аппара́т
       sg_gen: аппара́та
@@ -1307,6 +1313,8 @@ words:
         en_gb: Buy the child a school atlas.
       - ru: В а́тласах есть ка́рты всех стран.
         en_gb: The atlases contain maps of all countries.
+        en_alt:
+          - There are maps of all countries in the atlases.
         inflect: { token: 2, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: а́тлас
@@ -2266,6 +2274,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В я́щике лежа́т ста́рые батаре́и.
         en_gb: Old batteries are lying in the drawer.
+        en_alt:
+          - There are old batteries in the drawer.
     declension:
       sg_nom: батаре́я
       sg_gen: батаре́и
@@ -4150,6 +4160,8 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На столе́ лежи́т ма́ленькая бума́жка.
         en_gb: A small piece of paper lies on the table.
+        en_alt:
+          - There is a small piece of paper on the table.
       - ru: Она́ вы́бросила ста́рые бума́жки.
         en_gb: She threw away the old scraps of paper.
   "бутерброд=sandwich":
@@ -4244,6 +4256,8 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На по́лке стоя́т пусты́е буты́лки.
         en_gb: Empty bottles stand on the shelf.
+        en_alt:
+          - There are empty bottles on the shelf.
   "бык=bull":
     cefr_level: B1
     gender: m
@@ -5159,6 +5173,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ве́тке сиди́т воробе́й.
         en_gb: A sparrow sits on the branch.
+        en_alt:
+          - There is a sparrow sitting on the branch.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ве́тер кача́ет ве́тки дере́вьев.
         en_gb: The wind sways the branches of the trees.
@@ -5462,6 +5478,8 @@ words:
         en_gb: He has a tired look.
       - ru: В э́том лесу́ живу́т ре́дкие ви́ды птиц.
         en_gb: Rare species of birds live in this forest.
+        en_alt:
+          - There are rare species of birds living in this forest.
   "видение=vision":
     cefr_level: B2
     gender: n
@@ -5626,6 +5644,8 @@ words:
         en_gb: The fork fell on the floor.
       - ru: На столе́ лежа́т чи́стые ви́лки.
         en_gb: Clean forks lie on the table.
+        en_alt:
+          - There are clean forks on the table.
     declension:
       sg_nom: ви́лка
       sg_gen: ви́лки
@@ -5740,6 +5760,8 @@ words:
         en_gb: This screw is too long.
       - ru: В коро́бке лежа́т ма́ленькие винты́.
         en_gb: Small screws lie in the box.
+        en_alt:
+          - There are small screws in the box.
     declension:
       sg_nom: винт
       sg_gen: винта́
@@ -6881,6 +6903,8 @@ words:
     usage:
       - ru: У меня́ есть оди́н вопро́с.
         en_gb: I have one question.
+        en_alt:
+          - I have got one question.
       - ru: Учи́тель отве́тил на все вопро́сы.
         en_gb: The teacher answered all the questions.
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
@@ -7271,6 +7295,8 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В больни́це рабо́тают о́пытные врачи́.
         en_gb: Experienced doctors work in the hospital.
+        en_alt:
+          - There are experienced doctors working in the hospital.
     declension:
       sg_nom: врач
       sg_gen: врача́
@@ -7460,6 +7486,8 @@ words:
     usage:
       - ru: У вас есть вы́бор.
         en_gb: You have a choice.
+        en_alt:
+          - You have got a choice.
       - ru: Сде́лай пра́вильный вы́бор.
         en_gb: Make the right choice.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -7900,6 +7928,8 @@ words:
         en_gb: The nut came off the bolt.
       - ru: В коро́бке лежа́т ра́зные га́йки.
         en_gb: Various nuts lie in the box.
+        en_alt:
+          - There are various nuts in the box.
     declension:
       sg_nom: га́йка
       sg_gen: га́йки
@@ -7985,6 +8015,8 @@ words:
         en_gb: He hammered a nail into the wall.
       - ru: На стене́ виси́т карти́на на гвозде́.
         en_gb: A picture hangs on the wall on a nail.
+        en_alt:
+          - There is a picture hanging on a nail on the wall.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он купи́л коро́бку гвозде́й.
         en_gb: He bought a box of nails.
@@ -8253,6 +8285,8 @@ words:
         en_gb: A bright garland decorates the fir tree.
       - ru: На о́кнах вися́т я́ркие гирля́нды.
         en_gb: Bright garlands hang in the windows.
+        en_alt:
+          - There are bright garlands hanging in the windows.
       - ru: Дом украси́ли гирля́ндой огне́й.
         en_gb: The house was decorated with a garland of lights.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -8288,6 +8322,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У стены́ стоя́т две гита́ры.
         en_gb: Two guitars stand by the wall.
+        en_alt:
+          - There are two guitars standing by the wall.
     declension:
       sg_nom: гита́ра
       sg_gen: гита́ры
@@ -8931,6 +8967,8 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На окне́ стои́т горшо́к с цвета́ми.
         en_gb: A flowerpot with flowers stands on the windowsill.
+        en_alt:
+          - There is a flowerpot with flowers on the windowsill.
     declension:
       sg_nom: горшо́к
       sg_gen: горшка́
@@ -9781,6 +9819,8 @@ words:
     usage:
       - ru: На гря́дке расту́т о́вощи.
         en_gb: Vegetables grow in the bed.
+        en_alt:
+          - There are vegetables growing in the bed.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ба́бушка поли́ла гря́дку.
         en_gb: Grandma watered the bed.
@@ -10014,6 +10054,8 @@ words:
     usage:
       - ru: У неё есть да́р к музы́ке.
         en_gb: She has a gift for music.
+        en_alt:
+          - She has got a gift for music.
       - ru: Царь привёз дары́ из да́льних стран.
         en_gb: The tsar brought gifts from distant lands.
       - ru: Худо́жник облада́л ре́дким да́ром.
@@ -10802,6 +10844,8 @@ words:
         inflect: { token: 4, case: gen, number: pl, rule: noun-irregular-plural }
       - ru: В саду́ растёт высо́кое де́рево.
         en_gb: A tall tree grows in the garden.
+        en_alt:
+          - There is a tall tree growing in the garden.
       - ru: Пти́ца сиди́т на де́реве.
         en_gb: A bird is sitting in the tree.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
@@ -11453,6 +11497,8 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В больни́це рабо́тают о́пытные доктора́.
         en_gb: Experienced doctors work in the hospital.
+        en_alt:
+          - There are experienced doctors working in the hospital.
     declension:
       sg_nom: до́ктор
       sg_gen: до́ктора
@@ -12695,6 +12741,8 @@ words:
     usage:
       - ru: В саду́ живёт ма́ленький ёж.
         en_gb: A little hedgehog lives in the garden.
+        en_alt:
+          - There is a little hedgehog living in the garden.
       - ru: У ежа́ о́строе иго́лки.
         en_gb: A hedgehog has sharp needles.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -12735,6 +12783,8 @@ words:
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В лесу́ растёт мно́го ёлок.
         en_gb: Many fir trees grow in the forest.
+        en_alt:
+          - There are many fir trees growing in the forest.
         inflect: { token: 5, case: gen, number: pl, rule: noun-genpl-fleeting }
     declension:
       sg_nom: ёлка
@@ -12898,6 +12948,8 @@ words:
     usage:
       - ru: У меня́ есть одно́ жела́ние.
         en_gb: I have one wish.
+        en_alt:
+          - I have got one wish.
       - ru: Он вы́полнил все мои́ жела́ния.
         en_gb: He fulfilled all my wishes.
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
@@ -13400,6 +13452,8 @@ words:
         en_gb: A big beetle crawled along the ground.
       - ru: На цветке́ сиди́т зелёный жук.
         en_gb: A green beetle sits on the flower.
+        en_alt:
+          - There is a green beetle sitting on the flower.
       - ru: Де́ти лови́ли жуко́в в саду́.
         en_gb: The children were catching beetles in the garden.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
@@ -13899,6 +13953,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ лежа́т но́вые зака́зы.
         en_gb: New orders are lying on the table.
+        en_alt:
+          - There are new orders lying on the table.
     declension:
       sg_nom: зака́з
       sg_gen: зака́за
@@ -14115,6 +14171,8 @@ words:
     usage:
       - ru: На горе́ стои́т ста́рый за́мок.
         en_gb: An old castle stands on the hill.
+        en_alt:
+          - There is an old castle on the hill.
       - ru: Тури́сты любу́ются за́мком.
         en_gb: The tourists admire the castle.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -14733,6 +14791,8 @@ words:
     usage:
       - ru: В лесу́ живёт мно́го ди́ких звере́й.
         en_gb: Many wild beasts live in the forest.
+        en_alt:
+          - There are many wild beasts living in the forest.
       - ru: Хи́щный зверь спря́тался в куста́х.
         en_gb: The predatory beast hid in the bushes.
       - ru: Охо́тник шёл по сле́ду зве́ря.
@@ -15757,8 +15817,10 @@ words:
     en_gb:
       standard: icon (a holy religious painting)
     usage:
-      - ru: В угла́ виси́т ста́рая ико́на.
+      - ru: В углу́ виси́т ста́рая ико́на.
         en_gb: An old icon hangs in the corner.
+        en_alt:
+          - There is an old icon hanging in the corner.
       - ru: Она́ моли́лась пе́ред ико́ной.
         en_gb: She prayed before the icon.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -15916,6 +15978,8 @@ words:
         en_gb: The engineer inspected the bridge.
       - ru: На заво́де рабо́тают о́пытные инжене́ры.
         en_gb: Experienced engineers work at the factory.
+        en_alt:
+          - There are experienced engineers working at the factory.
     declension:
       sg_nom: инжене́р
       sg_gen: инжене́ра
@@ -17474,6 +17538,8 @@ words:
     usage:
       - ru: На стене́ виси́т краси́вая карти́на.
         en_gb: A beautiful painting hangs on the wall.
+        en_alt:
+          - There is a beautiful painting hanging on the wall.
       - ru: Он купи́л дороги́е карти́ны.
         en_gb: He bought expensive pictures.
       - ru: На карти́не изображён лес.
@@ -18028,6 +18094,8 @@ words:
     usage:
       - ru: В тайге́ растёт могу́чий кедр.
         en_gb: A mighty cedar grows in the taiga.
+        en_alt:
+          - There is a mighty cedar growing in the taiga.
       - ru: Из кедро́в добыва́ют вку́сные оре́шки.
         en_gb: Tasty nuts are gathered from cedars.
         inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
@@ -19334,8 +19402,10 @@ words:
         en_gb: The bell rang in the tower.
       - ru: Гро́мкий ко́локол слы́шен издалека́.
         en_gb: The loud bell can be heard from afar.
-      - ru: На колоко́льне ви́сят ста́рые колокола́.
+      - ru: На колоко́льне вися́т ста́рые колокола́.
         en_gb: Old bells hang in the belfry.
+        en_alt:
+          - There are old bells hanging in the belfry.
     declension:
       sg_nom: ко́локол
       sg_gen: ко́локола
@@ -20015,6 +20085,8 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У меня́ есть поле́зные конта́кты.
         en_gb: I have useful contacts.
+        en_alt:
+          - I have got useful contacts.
     declension:
       sg_nom: конта́кт
       sg_gen: конта́кта
@@ -20465,6 +20537,8 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В порту́ стоя́т больши́е корабли́.
         en_gb: Big ships stand in the harbour.
+        en_alt:
+          - There are big ships in the harbour.
     declension:
       sg_nom: кора́бль
       sg_gen: корабля́
@@ -21237,6 +21311,8 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На стро́йке рабо́тают высо́кие кра́ны.
         en_gb: Tall cranes are working at the building site.
+        en_alt:
+          - There are tall cranes working at the building site.
     declension:
       sg_nom: кран
       sg_gen: кра́на
@@ -21488,6 +21564,8 @@ words:
         en_gb: Buy a soft armchair.
       - ru: В ко́мнате стоя́т два кре́сла.
         en_gb: Two armchairs stand in the room.
+        en_alt:
+          - There are two armchairs in the room.
     declension:
       sg_nom: кре́сло
       sg_gen: кре́сла
@@ -21717,6 +21795,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В реке́ живёт опа́сный крокоди́л.
         en_gb: A dangerous crocodile lives in the river.
+        en_alt:
+          - There is a dangerous crocodile living in the river.
       - ru: Крокоди́л спал на берегу́.
         en_gb: The crocodile was sleeping on the bank.
     declension:
@@ -21934,6 +22014,8 @@ words:
     usage:
       - ru: В подва́ле живёт кры́са.
         en_gb: A rat lives in the basement.
+        en_alt:
+          - There is a rat living in the basement.
       - ru: Я уви́дел большу́ю кры́су.
         en_gb: I saw a big rat.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -22033,6 +22115,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На крючке́ виси́т поло́тенце.
         en_gb: A towel hangs on the hook.
+        en_alt:
+          - There is a towel hanging on the hook.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ры́ба сорвала́сь с крючка́.
         en_gb: The fish came off the hook.
@@ -22159,6 +22243,8 @@ words:
     usage:
       - ru: На по́ле растёт высо́кая кукуру́за.
         en_gb: Tall maize grows in the field.
+        en_alt:
+          - There is tall maize growing in the field.
       - ru: Мы вари́ли сла́дкую кукуру́зу.
         en_gb: We boiled sweet maize.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -22508,6 +22594,8 @@ words:
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У забо́ра расту́т кусты́.
         en_gb: Bushes grow by the fence.
+        en_alt:
+          - There are bushes growing by the fence.
       - ru: На кусте́ созре́ли я́годы.
         en_gb: Berries ripened on the bush.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -22653,6 +22741,8 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В саду́ стоя́т деревя́нные ла́вки.
         en_gb: Wooden benches stand in the garden.
+        en_alt:
+          - There are wooden benches in the garden.
       - ru: Он купи́л хлеб в ма́ленькой ла́вке.
         en_gb: He bought bread in a little shop.
   "лагерь=camp":
@@ -23341,6 +23431,8 @@ words:
     usage:
       - ru: В лесу́ живу́т ди́кие зве́ри.
         en_gb: Wild animals live in the forest.
+        en_alt:
+          - There are wild animals living in the forest.
       - ru: Мы пошли́ в лес за гриба́ми.
         en_gb: We went to the forest for mushrooms.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -23588,6 +23680,8 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В лесу́ живу́т ры́жие ли́сы.
         en_gb: Red foxes live in the forest.
+        en_alt:
+          - There are red foxes living in the forest.
     declension:
       sg_nom: лиса́
       sg_gen: лисы́
@@ -23691,6 +23785,8 @@ words:
     usage:
       - ru: На столе́ лежи́т ма́ленький листо́к.
         en_gb: A small sheet lies on the table.
+        en_alt:
+          - There is a small sheet lying on the table.
       - ru: Запиши́ а́дрес на листке́.
         en_gb: Write the address on the sheet.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
@@ -23924,8 +24020,10 @@ words:
       - ru: Они́ плыву́т на ло́дке по реке́.
         en_gb: They are sailing a boat along the river.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: На бе́регу стои́т ма́ленькая ло́дка.
+      - ru: На берегу́ стои́т ма́ленькая ло́дка.
         en_gb: A small boat stands on the shore.
+        en_alt:
+          - There is a small boat on the shore.
       - ru: Рыба́к сиди́т в ло́дке.
         en_gb: The fisherman is sitting in the boat.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
@@ -24363,6 +24461,8 @@ words:
         en_gb: The frog jumped into the water.
       - ru: У пруда́ живёт зелёная лягу́шка.
         en_gb: A green frog lives by the pond.
+        en_alt:
+          - There is a green frog living by the pond.
       - ru: Де́ти лови́ли лягу́шек у реки́.
         en_gb: The children were catching frogs by the river.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
@@ -24891,6 +24991,8 @@ words:
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На заво́де рабо́тают о́пытные мастера́.
         en_gb: Experienced craftsmen work at the factory.
+        en_alt:
+          - There are experienced craftsmen working at the factory.
     declension:
       sg_nom: ма́стер
       sg_gen: ма́стера
@@ -25717,6 +25819,8 @@ words:
         en_gb: He was carrying a sack of potatoes.
       - ru: В углу́ лежи́т тяжёлый мешо́к.
         en_gb: A heavy sack lies in the corner.
+        en_alt:
+          - There is a heavy sack lying in the corner.
       - ru: Они́ загрузи́ли маши́ну мешка́ми.
         en_gb: They loaded the car with sacks.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
@@ -26804,6 +26908,8 @@ words:
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В монастыре́ живу́т мона́хи.
         en_gb: Monks live in the monastery.
+        en_alt:
+          - There are monks living in the monastery.
     declension:
       sg_nom: мона́х
       sg_gen: мона́ха
@@ -27043,6 +27149,8 @@ words:
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На корабле́ рабо́тают о́пытные моряки́.
         en_gb: Experienced sailors work on the ship.
+        en_alt:
+          - There are experienced sailors working on the ship.
     declension:
       sg_nom: моря́к
       sg_gen: моряка́
@@ -27638,6 +27746,8 @@ words:
     usage:
       - ru: У него́ есть интере́сная мысль.
         en_gb: He has an interesting thought.
+        en_alt:
+          - He has got an interesting thought.
       - ru: Э́та мысль не даёт мне поко́я.
         en_gb: This thought gives me no peace.
       - ru: Он подели́лся свои́ми мы́слями.
@@ -28316,8 +28426,10 @@ words:
     usage:
       - ru: Э́то насеко́мое уме́ет лета́ть.
         en_gb: This insect can fly.
-      - ru: В са́ду живёт мно́го насеко́мых.
+      - ru: В саду́ живёт мно́го насеко́мых.
         en_gb: Many insects live in the garden.
+        en_alt:
+          - There are many insects living in the garden.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: насеко́мое
@@ -28850,6 +28962,8 @@ words:
     usage:
       - ru: У ка́ждого есть свои́ недоста́тки.
         en_gb: Everyone has their own shortcomings.
+        en_alt:
+          - Everyone has got their own shortcomings.
       - ru: Мы страда́ем от недоста́тка воды́.
         en_gb: We suffer from a shortage of water.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -28919,6 +29033,8 @@ words:
         en_gb: He is German but speaks Russian without an accent.
       - ru: В го́роде живёт мно́го не́мцев.
         en_gb: Many Germans live in the city.
+        en_alt:
+          - There are many Germans living in the city.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Мой сосе́д — пожило́й не́мец.
         en_gb: My neighbour is an elderly German.
@@ -37373,6 +37489,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В порту́ стоя́т больши́е корабли́.
         en_gb: Big ships are standing in the port.
+        en_alt:
+          - There are big ships in the harbour.
       - ru: Го́род зна́менит свои́ми порта́ми.
         en_gb: The city is famous for its ports.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
