@@ -15,16 +15,14 @@ import * as idb from '../lib/idb.js'
 import { state as vocabState } from './vocab.js'
 import {
   DIMENSIONS,
-  LEVELS,
   STATES,
-  CRITERIA,
-  dimensionsForLevel,
   applicableDimensions,
   wordState,
   wordHasInflections,
   wordHasContextDrill,
   dimensionProgress,
   dimensionAdvancesAt,
+  borderlineDimensions,
   levelMet,
   lastAttemptAt,
   minExercisesToLevel,
@@ -171,23 +169,12 @@ export const atRisk = computed(() =>
   }),
 )
 
+// A word is borderline when any graded ratio criterion — at either level — is
+// met but its most recent attempt was wrong (see lib/progression.js). Covering
+// the mastery level too means a mastered word one wrong answer from dropping
+// back to learned is surfaced, not just learning-level slips.
 function isBorderline(key) {
-  const evs = events(key)
-  // Check every graded ratio criterion at both levels: a met criterion whose
-  // most recent attempt was wrong is one more miss from un-meeting. We skip
-  // `attempts`-type criteria (speaking) — those never un-meet once reached, so
-  // a wrong attempt there can't put a word at risk. Covering the mastery level
-  // too means a mastered word one wrong hearing answer from dropping back to
-  // learned is surfaced, not just learning-level slips.
-  for (const level of LEVELS) {
-    for (const dim of dimensionsForLevel(level)) {
-      if (CRITERIA[level][dim].type !== 'ratio') continue
-      if (!dimensionProgress(evs, level, dim).met) continue
-      const recent = evs.filter((e) => e.level === level && e.dimension === dim)
-      if (recent.length && recent[recent.length - 1].correct === false) return true
-    }
-  }
-  return false
+  return borderlineDimensions(events(key)).length > 0
 }
 
 /**
@@ -710,11 +697,31 @@ function masteryBatchActive(now = Date.now()) {
  * current batch is the "learn" half, ordered worst-understood first.
  */
 export function startSession({ type = 'standard', size, focusKeys = null, now = Date.now() } = {}, rng = Math.random) {
-  // Restrict to learning-level practices when no mastery batch is active —
-  // but only if that leaves at least one eligible practice (e.g. a grammar
-  // session has no learning-level practices and would otherwise become empty).
+  const focusSet = focusKeys ? new Set(focusKeys) : null
+  // Which learned/mastered words are borderline in which (level, dimension) —
+  // the de-risking targets. A word only leaves the at-risk list after a correct
+  // answer in exactly the (level, dimension) whose last attempt was wrong, so
+  // the practice weighting and word pools below both steer to these pairs.
+  const riskByDim = { learning: new Map(), mastery: new Map() }
+  for (const key of Object.keys(state.records)) {
+    if (rank(stateOf(key)) < rank('learned')) continue
+    if (focusSet && !focusSet.has(key)) continue
+    for (const { level, dimension } of borderlineDimensions(events(key))) {
+      const dims = riskByDim[level]
+      if (!dims.has(dimension)) dims.set(dimension, [])
+      dims.get(dimension).push(key)
+    }
+  }
+  // Restrict to learning-level practices when there is neither an active
+  // mastery batch nor a word at risk at the mastery level — but only if that
+  // leaves at least one eligible practice (e.g. a grammar session has no
+  // learning-level practices and would otherwise become empty). Mastery-risky
+  // words keep mastery practices in play because only a mastery-level drill can
+  // de-risk them: a mastered word never re-enters a mastery batch, so without
+  // this it would stay at risk forever.
   const hasLearningPractices = practicesForSession(type).some((p) => p.level === 'learning')
-  const levels = !masteryBatchActive(now) && hasLearningPractices ? ['learning'] : null
+  const masteryActive = masteryBatchActive(now) || riskByDim.mastery.size > 0
+  const levels = !masteryActive && hasLearningPractices ? ['learning'] : null
   // Weakness is computed *per level* so the two levels never steal each other's
   // practice-selection probability. Both start from the same global per-dimension
   // accuracy, then each level boosts only the dimensions still blocking its own
@@ -765,7 +772,21 @@ export function startSession({ type = 'standard', size, focusKeys = null, now = 
       masteryWeakness[d] = advanceable.has(d) ? Math.max(masteryWeakness[d], 2) : 0
     }
   }
+  // Dimensions with mastery-level at-risk words always earn a boost (applied
+  // after the day-blocking zeroing above): a correct answer there de-risks the
+  // word today, so the dimension is never day-blocked.
+  for (const [d, keys] of riskByDim.mastery) {
+    if (keys.length) masteryWeakness[d] = Math.max(masteryWeakness[d] ?? 0, 2)
+  }
   const weakness = { learning: learningWeakness, mastery: masteryWeakness }
+  // At-risk slots get their own weights, proportional to how many words are at
+  // risk in each dimension, so the slot's practice lands on a drill that can
+  // actually de-risk something instead of one whose recent history is clean.
+  if (riskByDim.learning.size > 0) {
+    const atRiskWeakness = {}
+    for (const d of DIMENSIONS) atRiskWeakness[d] = riskByDim.learning.get(d)?.length ?? 0
+    weakness.atRisk = atRiskWeakness
+  }
   const session = buildSession({ type, size, weakness, rng, levels })
   let pools
   if (focusKeys) {
@@ -789,23 +810,37 @@ export function startSession({ type = 'standard', size, focusKeys = null, now = 
     // When a non-current bucket pool is empty (e.g. no at-risk words yet),
     // fall back to the current batch pool so exercises stay within known
     // vocabulary rather than drawing random unknown words as filler.
-    const base = bucketPool.length > 0 ? bucketPool : pools.current
-    // Mastery-level practices must only draw from the mastery batch to avoid
-    // recording mastery-level events on non-batch words (which corrupts their
-    // progression state — see exerciseBuild.buildInflect for the same guard
-    // on the top-up path).
-    if (practice.level === 'mastery' && masterySet) {
-      const batchWords = base.filter((k) => masterySet.has(k))
-      // Within the batch, prefer words this practice's dimension can still
-      // advance today: a word whose criterion is met, or day-blocked (#313 —
-      // it just needs another calendar day), gains nothing from more drilling
-      // now. Fall back to the whole batch when nothing can advance (e.g. an
-      // all-mastery grammar session with everything blocked) so the session
-      // still has content.
-      const advancing = batchWords.filter((k) =>
-        dimensionAdvancesAt(events(k), 'mastery', practice.dimension, now),
+    let base = bucketPool.length > 0 ? bucketPool : pools.current
+    // An at-risk slot narrows to the words at risk in ITS dimension — a correct
+    // answer in any other dimension cannot de-risk them. When no word is at
+    // risk in this dimension the slot keeps the wider reinforce pool.
+    if (practice.bucket === 'atRisk' && practice.level === 'learning') {
+      const risky = riskByDim.learning.get(practice.dimension) ?? []
+      if (risky.length) base = risky
+    }
+    const masteryRisky = riskByDim.mastery.get(practice.dimension) ?? []
+    if (practice.level === 'mastery' && (masterySet || masteryRisky.length)) {
+      // Mastery-level practices must only draw from the mastery batch to avoid
+      // recording mastery-level events on non-batch words (which corrupts their
+      // progression state — see exerciseBuild.buildInflect for the same guard
+      // on the top-up path) — plus the words at risk in this dimension: those
+      // already carry a met mastery criterion, so further mastery attempts are
+      // safe, and a correct one is the only thing that de-risks them.
+      const riskySet = new Set(masteryRisky)
+      const batchWords = masterySet ? base.filter((k) => masterySet.has(k)) : []
+      const candidates = [...new Set([...batchWords, ...masteryRisky])]
+      // Prefer words this practice's dimension can still advance today: a word
+      // whose criterion is met, or day-blocked (#313 — it just needs another
+      // calendar day), gains nothing from more drilling now. An at-risk word
+      // always counts as advanceable — its criterion is met, so
+      // dimensionAdvancesAt says no, but a correct answer still moves it (off
+      // the at-risk list). Fall back to every candidate when nothing can
+      // advance (e.g. an all-mastery grammar session with everything blocked)
+      // so the session still has content.
+      const advancing = candidates.filter(
+        (k) => riskySet.has(k) || dimensionAdvancesAt(events(k), 'mastery', practice.dimension, now),
       )
-      practice.pool = advancing.length > 0 ? advancing : batchWords
+      practice.pool = advancing.length > 0 ? advancing : candidates
     } else {
       practice.pool = base
     }

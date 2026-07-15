@@ -77,19 +77,20 @@ describe('buildSession', () => {
     for (const p of s.practices) counts[p.bucket]++
     expect(counts).toEqual(allocateBuckets(12))
   })
-  it('splits the session evenly between levels when both are available', () => {
+  it('reserves a third of the session for mastery when both levels are available', () => {
     // Both learning and mastery practices eligible (no `levels` filter).
     const s = buildSession({ type: 'standard', size: 'normal', rng: seededRng(2) })
     expect(s.practices).toHaveLength(12)
     const mastery = s.practices.filter((p) => p.level === 'mastery')
-    // 50% of 12 = 6 mastery slots, all targeting the current batch.
-    expect(mastery).toHaveLength(6)
+    // A third of 12 = 4 mastery slots, all targeting the current batch —
+    // learning keeps the majority so new words aren't crowded out.
+    expect(mastery).toHaveLength(4)
     expect(mastery.every((p) => p.bucket === 'current')).toBe(true)
-    // The remaining six learning slots keep the 25/25/50 split.
+    // The remaining eight learning slots keep the 25/25/50 split.
     const learning = s.practices.filter((p) => p.level === 'learning')
     const counts = { atRisk: 0, untested: 0, current: 0 }
     for (const p of learning) counts[p.bucket]++
-    expect(counts).toEqual(allocateBuckets(6))
+    expect(counts).toEqual(allocateBuckets(8))
   })
   it('always reserves at least one mastery slot in a small session', () => {
     const s = buildSession({ type: 'standard', size: 'quick', rng: seededRng(7) })
@@ -125,6 +126,24 @@ describe('buildSession', () => {
     // does not leak across.
     expect(mastery.filter((p) => p.dimension === 'identification').length).toBeGreaterThan(
       mastery.filter((p) => p.dimension === 'usage').length,
+    )
+  })
+  it('weights at-risk slots by the atRisk map without disturbing other slots', () => {
+    // Learning slots are steered hard toward identification; at-risk slots hard
+    // toward hearing. Each must follow its own map.
+    const weakness = {
+      learning: { identification: 1000, usage: 0.05, hearing: 0.05, speaking: 0.05 },
+      atRisk: { identification: 0.05, usage: 0.05, hearing: 1000, speaking: 0.05 },
+    }
+    const s = buildSession({ type: 'standard', size: 'super', levels: ['learning'], weakness, rng: seededRng(9) })
+    const atRisk = s.practices.filter((p) => p.bucket === 'atRisk')
+    expect(atRisk.length).toBeGreaterThan(0)
+    expect(atRisk.filter((p) => p.dimension === 'hearing').length).toBeGreaterThan(
+      atRisk.filter((p) => p.dimension !== 'hearing').length,
+    )
+    const rest = s.practices.filter((p) => p.bucket !== 'atRisk')
+    expect(rest.filter((p) => p.dimension === 'identification').length).toBeGreaterThan(
+      rest.filter((p) => p.dimension === 'hearing').length,
     )
   })
   it('restricts practice levels when levels parameter is supplied', () => {
