@@ -188,6 +188,19 @@ describe('demotion, at-risk and recently-learned', () => {
     expect(atRisk.value).toContain('w0')
   })
 
+  it('clears at-risk only when the risky dimension itself is answered correctly', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    await recordAttempt({ word: 'w0', dimension: 'hearing', level: 'learning', correct: false })
+    expect(atRisk.value).toContain('w0')
+    // A correct answer in a different dimension does not de-risk it…
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: true })
+    expect(atRisk.value).toContain('w0')
+    // …only the risky dimension itself does.
+    await recordAttempt({ word: 'w0', dimension: 'hearing', level: 'learning', correct: true })
+    expect(atRisk.value).not.toContain('w0')
+  })
+
   it('does not flag a word at-risk for a wrong speaking attempt', async () => {
     // Speaking is an attempts-based criterion: correctness never affects it, so
     // a wrong speaking answer cannot put the word one slip from dropping.
@@ -534,6 +547,50 @@ describe('sessions', () => {
     for (const p of session.practices.filter((x) => x.level === 'mastery')) {
       expect(p.pool).toContain('w0')
     }
+  })
+
+  it('points at-risk slots at the dimension the word is actually at risk in', async () => {
+    setVocab(makeWords(20, { hasInflections: false }))
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 })
+    // w5 is learned, then answers one hearing attempt wrong: its hearing window
+    // (T,T,T,F) is still met but borderline — at risk in `hearing` only.
+    await learn('w5')
+    await recordAttempt({ word: 'w5', dimension: 'hearing', level: 'learning', correct: false })
+    expect(atRisk.value).toContain('w5')
+    const atRiskPractices = Array.from({ length: 5 }, (_, i) =>
+      startSession({ type: 'standard', size: 'super' }, seededRng(i + 400)).practices,
+    )
+      .flat()
+      .filter((p) => p.bucket === 'atRisk')
+    expect(atRiskPractices.length).toBeGreaterThan(0)
+    // Every at-risk slot lands on hearing — the only dimension whose correct
+    // answer can de-risk anything — and draws the word that needs it.
+    for (const p of atRiskPractices) {
+      expect(p.dimension).toBe('hearing')
+      expect(p.pool).toEqual(['w5'])
+    }
+  })
+
+  it('lets a mastered word at risk in a mastery dimension be de-risked outside the batch', async () => {
+    setVocab(makeWords(20, { hasInflections: true }))
+    // w0 is fully mastered and belongs to no committed mastery batch. One wrong
+    // mastery identification answer leaves that criterion met-but-borderline.
+    await master('w0')
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
+    expect(stateOf('w0')).toBe('mastered')
+    expect(atRisk.value).toContain('w0')
+    // Mastery practices only ever draw from the current mastery batch, so
+    // without the at-risk carve-out this word could never see the mastery
+    // identification drill again — it would stay at risk forever.
+    const session = startSession({ type: 'standard', size: 'super' }, seededRng(41))
+    const derisking = session.practices.filter(
+      (p) => p.level === 'mastery' && p.dimension === 'identification',
+    )
+    expect(derisking.length).toBeGreaterThan(0)
+    for (const p of derisking) expect(p.pool).toEqual(['w0'])
+    // A correct answer in that (level, dimension) clears the risk.
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: true })
+    expect(atRisk.value).not.toContain('w0')
   })
 })
 

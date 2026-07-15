@@ -38,14 +38,15 @@ export const BUCKET_SHARES = Object.freeze({ atRisk: 0.25, untested: 0.25, curre
 
 /**
  * When both learning and mastery practices are on offer (i.e. there are words in
- * both batches), the session is split evenly between the two levels: half its
- * slots go to mastery, half to learning (at least one mastery practice). An even
- * split keeps the two kinds of work on equal footing so neither starves the
- * other — a near-complete mastery batch is always exercised, and learning slots
- * are never crowded down to a sliver. When only one level is on offer that level
- * takes the whole session.
+ * both batches), a third of the session's slots (at least one) are reserved for
+ * mastery and the rest go to learning. Mastery work consolidates words already
+ * learned, so it deserves a guaranteed share — a near-complete mastery batch
+ * must keep moving — but it stays the minority: learning new words is the
+ * session's main job, and an earlier even split made sessions feel dominated by
+ * inflection-table drilling. When only one level is on offer that level takes
+ * the whole session.
  */
-export const MASTERY_SESSION_SHARE = 0.5
+export const MASTERY_SESSION_SHARE = 1 / 3
 
 /** Resolve the practice count for a session type (+ size key for standard). */
 export function sessionSize(type, sizeKey) {
@@ -84,20 +85,26 @@ function bucketSlots(counts) {
 /**
  * Resolve a per-practice weakness weight. `weakness` may be either:
  *  - a flat `{ dimension: weight }` map applied to every level, or
- *  - a per-level `{ learning: {...}, mastery: {...} }` map, so a level's slots
- *    are weighted only by that level's own needs.
+ *  - a per-level `{ learning: {...}, mastery: {...}, atRisk?: {...} }` map, so
+ *    a level's slots are weighted only by that level's own needs.
  *
  * The per-level form is what keeps the two levels from stealing each other's
  * probability: e.g. boosting `identification` to fund mastery's word-bank drill
  * must not also pull `identification` into a learning slot (whose word may have
- * finished identification long ago). Dimensions and level names are disjoint, so
- * the presence of a `learning`/`mastery` key unambiguously marks the per-level
- * shape.
+ * finished identification long ago). Dimensions and level/bucket names are
+ * disjoint, so the presence of a `learning`/`mastery`/`atRisk` key unambiguously
+ * marks the per-level shape.
+ *
+ * The optional `atRisk` map overrides the level map for slots in the at-risk
+ * bucket: de-risking a word takes a correct answer in exactly the dimension
+ * whose last attempt was wrong, so those slots are pointed at the dimensions
+ * the at-risk words actually need rather than the level's general weakness.
  */
 function weightResolver(weakness = {}) {
-  const perLevel = 'learning' in weakness || 'mastery' in weakness
-  return (level, dimension) => {
-    const map = perLevel ? (weakness[level] ?? {}) : weakness
+  const perLevel = 'learning' in weakness || 'mastery' in weakness || 'atRisk' in weakness
+  return (level, dimension, bucket) => {
+    const key = bucket === 'atRisk' && weakness.atRisk ? 'atRisk' : level
+    const map = perLevel ? (weakness[key] ?? {}) : weakness
     return map[dimension] ?? 1
   }
 }
@@ -124,9 +131,9 @@ function weightedPick(items, weightOf, rng) {
  * @param {string} [args.size] size key for a standard session (quick/normal/super)
  * @param {Partial<Record<string, number>>} [args.weakness] per-dimension weights;
  *   higher means weaker, so that dimension is favoured. Defaults to equal. May
- *   instead be a per-level map `{ learning: {...}, mastery: {...} }` so each
- *   level's slots are weighted only by that level's own needs (see
- *   {@link weightResolver}).
+ *   instead be a per-level map `{ learning: {...}, mastery: {...}, atRisk?: {...} }`
+ *   so each level's slots are weighted only by that level's own needs, with an
+ *   optional override for at-risk-bucket slots (see {@link weightResolver}).
  * @param {() => number} [args.rng]
  * @returns {{type, size, buckets, practices: object[]}}
  */
@@ -158,7 +165,7 @@ export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, 
 
   const weightFor = weightResolver(weakness)
   const practices = slots.map(({ bucket, pool }) => {
-    const pt = weightedPick(pool, (p) => weightFor(p.level, p.dimension), rng)
+    const pt = weightedPick(pool, (p) => weightFor(p.level, p.dimension, bucket), rng)
     return {
       practiceType: pt.id,
       dimension: pt.dimension,

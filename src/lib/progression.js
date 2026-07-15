@@ -166,6 +166,30 @@ export function dimensionAdvancesAt(events, level, dimension, now) {
 }
 
 /**
+ * The `(level, dimension)` pairs where a word is *borderline*: the criterion is
+ * currently met, but its most recent attempt was wrong, so one more miss would
+ * un-meet it. Only ratio criteria can be borderline — an attempts-type
+ * criterion (speaking) never un-meets once reached. De-risking a pair takes a
+ * correct answer in exactly that level and dimension (a correct answer anywhere
+ * else leaves the wrong attempt as the pair's most recent), so session assembly
+ * uses this list to point at-risk practice at the drill that actually helps.
+ * @returns {Array<{level: string, dimension: string}>}
+ */
+export function borderlineDimensions(events) {
+  const out = []
+  for (const level of LEVELS) {
+    for (const dimension of dimensionsForLevel(level)) {
+      const crit = CRITERIA[level][dimension]
+      if (crit.type !== 'ratio') continue
+      const attempts = attemptsFor(events, level, dimension)
+      if (!attempts.length || attempts[attempts.length - 1].correct !== false) continue
+      if (criterionMet(attempts, crit)) out.push({ level, dimension })
+    }
+  }
+  return out
+}
+
+/**
  * Minimum number of correct exercises a word still needs for every applicable
  * dimension of a level to be met (best case — each answered correctly). Summed
  * across a batch's words this is the "exercises to go" until the batch is done.
