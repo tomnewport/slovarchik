@@ -9026,6 +9026,9 @@ words:
       - ru: Как вас зову́т?
         en_gb: What is your name?
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
+      - ru: Меня́ зову́т А́нна. А вас?
+        en_gb: My name is Anna. And yours?
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Ма́ма зовёт нас обе́дать.
         en_gb: Mum is calling us to lunch.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -19584,6 +19587,8 @@ words:
       - ru: Я познако́млюсь с но́выми сосе́дями.
         en_gb: I will get acquainted with the new neighbours.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
+      - ru: О́чень прия́тно познако́миться!
+        en_gb: Very nice to meet you!
       - ru: Мы познако́мились на конце́рте.
         en_gb: We got acquainted at a concert.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }

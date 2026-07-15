@@ -926,6 +926,9 @@ words:
       - ru: Он верну́лся из А́нглии вчера́.
         en_gb: He returned from England yesterday.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я из А́нглии, а вы отку́да?
+        en_gb: I am from England — and where are you from?
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
   "Англия=England":
     cefr_level: A2
     gender: f
@@ -7346,6 +7349,9 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́сле до́лгой разлу́ки они́ ра́довались встре́че.
         en_gb: After a long separation they were glad of the meeting.
+      - ru: Пока́! До встре́чи!
+        en_gb: Bye! See you!
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: встре́ча
       sg_gen: встре́чи
@@ -53766,6 +53772,9 @@ words:
         inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Путеше́ствие доста́вило нам мно́го удово́льствия.
         en_gb: The trip gave us much pleasure.
+      - ru: Пойдёшь с на́ми в кино́? — С удово́льствием!
+        en_gb: Are you coming to the cinema with us? — I'd love to!
+        inflect: { token: 8, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Жизнь полна́ ма́леньких удово́льствий.
         en_gb: Life is full of little pleasures.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
