@@ -2847,6 +2847,9 @@ words:
     en_gb:
       standard: ticket (a card that lets you travel or enter)
     usage:
+      - ru: Она́ забы́ла биле́ты до́ма.
+        en_gb: She left the tickets at home.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Я купи́л биле́т на по́езд.
         en_gb: I bought a train ticket.
       - ru: Цена́ биле́та о́чень высо́кая.
@@ -5183,6 +5186,9 @@ words:
     en_gb:
       standard: evening
     usage:
+      - ru: По вечера́м мы гуля́ем в па́рке.
+        en_gb: In the evenings we stroll in the park.
+        inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Ве́чером мы пьём чай вме́сте.
         en_gb: In the evening we drink tea together.
         inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
@@ -6071,6 +6077,9 @@ words:
     en_gb:
       standard: grandson (the son of your child)
     usage:
+      - ru: Ба́бушка расска́зывает о свои́х вну́ках.
+        en_gb: Grandma talks about her grandchildren.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Внук помога́ет де́душке в саду́.
         en_gb: The grandson helps his grandfather in the garden.
       - ru: Ба́бушка лю́бит своего́ вну́ка.
@@ -7252,6 +7261,9 @@ words:
       alt:
         - physician
     usage:
+      - ru: Лю́ди ве́рят врача́м.
+        en_gb: People trust doctors.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Мне ну́жен хоро́ший врач.
         en_gb: I need a good doctor.
       - ru: Я был у врача́ вчера́.
@@ -8694,6 +8706,9 @@ words:
     en_gb:
       standard: mountain (a very high hill)
     usage:
+      - ru: Ле́том мы отдыха́ем в гора́х.
+        en_gb: In summer we holiday in the mountains.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Верши́на горы́ покры́та сне́гом.
         en_gb: The mountain top is covered with snow.
       - ru: Мы поднима́лись на го́ру весь день.
@@ -8842,6 +8857,9 @@ words:
       alt:
         - town
     usage:
+      - ru: Он расска́зывал о ру́сских города́х.
+        en_gb: He talked about Russian cities.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Москва́ — большо́й и краси́вый го́род.
         en_gb: Moscow is a big and beautiful city.
       - ru: Мы е́дем в го́род на по́езде.
@@ -9062,6 +9080,9 @@ words:
     en_gb:
       standard: guest (a visitor; someone invited)
     usage:
+      - ru: Хозя́йка предложи́ла гостя́м чай.
+        en_gb: The hostess offered the guests tea.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: К нам пришёл незвано́й гость.
         en_gb: An uninvited guest came to us.
       - ru: Мы жда́ли госте́й весь ве́чер.
@@ -11457,6 +11478,9 @@ words:
     en_gb:
       standard: document (an official paper or file)
     usage:
+      - ru: Он рабо́тает с докуме́нтами весь день.
+        en_gb: He works with documents all day.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Подпиши́те, пожа́луйста, докуме́нты.
         en_gb: Please sign the documents.
       - ru: Он забы́л докуме́нт до́ма.
@@ -12104,6 +12128,9 @@ words:
     en_gb:
       standard: friend (someone you like and trust)
     usage:
+      - ru: Мы пригласи́ли друзе́й на да́чу.
+        en_gb: We invited our friends to the dacha.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Я получи́л пи́сьма от друзе́й.
         en_gb: I received letters from my friends.
         inflect: { token: 5, case: gen, number: pl, rule: noun-irregular-plural }
@@ -14667,6 +14694,9 @@ words:
     en_gb:
       standard: star (a bright point of light in the night sky)
     usage:
+      - ru: Но́чью мы смотре́ли на звёзды.
+        en_gb: At night we looked at the stars.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
       - ru: На не́бе зажгли́сь звёзды.
         en_gb: The stars lit up in the sky.
       - ru: Он смотре́л на я́ркую звезду́.
@@ -16036,6 +16066,9 @@ words:
       alt:
         - instrument
     usage:
+      - ru: Ма́стер по́льзуется свои́ми инструме́нтами.
+        en_gb: The craftsman uses his own tools.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Молото́к — поле́зный инструме́нт.
         en_gb: A hammer is a useful tool.
       - ru: Без инструме́нта не почини́ть кран.
@@ -18613,6 +18646,9 @@ words:
     en_gb:
       standard: client (a customer of a business or professional service)
     usage:
+      - ru: Ме́неджер бы́стро отвеча́ет клие́нтам.
+        en_gb: The manager replies to clients quickly.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Клие́нт всегда́ прав.
         en_gb: The client is always right.
       - ru: Мы це́ним ка́ждого клие́нта.
@@ -18771,6 +18807,9 @@ words:
     en_gb:
       standard: book (pages bound together to read)
     usage:
+      - ru: Я сдал кни́ги в библиоте́ку.
+        en_gb: I returned the books to the library.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Э́то о́чень интере́сная кни́га.
         en_gb: This is a very interesting book.
       - ru: Я чита́ю кни́гу ка́ждый ве́чер.
@@ -19192,6 +19231,9 @@ words:
     en_gb:
       standard: colleague (a fellow worker)
     usage:
+      - ru: По́сле рабо́ты я ужина́ю с колле́гами.
+        en_gb: After work I have dinner with colleagues.
+        inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Я познако́мил тебя́ с колле́гой.
         en_gb: I introduced you to my colleague.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
@@ -21086,6 +21128,9 @@ words:
     en_gb:
       standard: cat (a small furry pet)
     usage:
+      - ru: Она́ ча́сто игра́ет с ко́шками.
+        en_gb: She often plays with the cats.
+        inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
       - ru: На́ша ко́шка лю́бит спать на дива́не.
         en_gb: Our cat likes to sleep on the sofa.
       - ru: Я даю́ ко́шке молоко́.
@@ -21272,6 +21317,9 @@ words:
     en_gb:
       standard: paint (coloured liquid for surfaces)
     usage:
+      - ru: Худо́жник рабо́тает кра́сками и ки́стью.
+        en_gb: The artist works with paints and a brush.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Он купи́л бе́лую кра́ску для стен.
         en_gb: He bought white paint for the walls.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -24345,6 +24393,9 @@ words:
       alt:
         - store
     usage:
+      - ru: Це́ны в магази́нах вы́росли.
+        en_gb: Prices in the shops have risen.
+        inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Я иду́ в магази́н за хле́бом.
         en_gb: I am going to the shop for bread.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -27325,6 +27376,9 @@ words:
     en_gb:
       standard: museum (a place that shows objects of interest)
     usage:
+      - ru: В музе́ях нельзя́ шуме́ть.
+        en_gb: One must not make noise in museums.
+        inflect: { token: 2, case: pre, number: pl, rule: noun-pre-pl }
       - ru: В музе́е мно́го стари́нных карти́н.
         en_gb: There are many old paintings in the museum.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -29144,6 +29198,9 @@ words:
     en_gb:
       standard: knife (a tool with a blade for cutting)
     usage:
+      - ru: Мя́со ре́жут остры́ми ножа́ми.
+        en_gb: Meat is cut with sharp knives.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Э́тот нож о́чень о́стрый.
         en_gb: This knife is very sharp.
       - ru: Он ре́жет хлеб ножо́м.
@@ -29578,6 +29635,9 @@ words:
     en_gb:
       standard: cloud
     usage:
+      - ru: Самолёт лети́т в облака́х.
+        en_gb: The plane is flying in the clouds.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: На не́бе плы́ло бе́лое о́блако.
         en_gb: A white cloud floated in the sky.
       - ru: Облака́ закры́ли со́лнце.
@@ -30664,6 +30724,9 @@ words:
     en_gb:
       standard: window (an opening in a wall with glass)
     usage:
+      - ru: Ве́чером я закрыва́ю все о́кна.
+        en_gb: In the evening I close all the windows.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Откро́й окно́, пожа́луйста.
         en_gb: Open the window, please.
       - ru: Из окна́ ви́ден сад.
@@ -32547,6 +32610,9 @@ words:
       alt:
         - error
     usage:
+      - ru: Учи́тель бы́стро нахо́дит оши́бки.
+        en_gb: The teacher quickly finds the mistakes.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: В дикта́нте бы́ло ма́ло оши́бок.
         en_gb: There were few mistakes in the dictation.
         inflect: { token: 5, case: gen, number: pl, rule: noun-genpl-fleeting }
@@ -32713,6 +32779,9 @@ words:
       alt:
         - toe
     usage:
+      - ru: Не тро́гай экра́н па́льцами.
+        en_gb: Don't touch the screen with your fingers.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Она́ поре́зала па́лец ножо́м.
         en_gb: She cut her finger with a knife.
       - ru: Он указа́л па́льцем на ка́рту.
@@ -34590,6 +34659,9 @@ words:
     en_gb:
       standard: letter (a written message)
     usage:
+      - ru: Он писа́л об э́том в пи́сьмах.
+        en_gb: He wrote about this in his letters.
+        inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Я написа́л письмо́ дру́гу.
         en_gb: I wrote a letter to a friend.
       - ru: В письме́ бы́ли хоро́шие но́вости.
@@ -35561,6 +35633,9 @@ words:
       alt:
         - gift
     usage:
+      - ru: Де́ти лю́бят получа́ть пода́рки.
+        en_gb: Children love receiving presents.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Он купи́л ей пода́рок на день рожде́ния.
         en_gb: He bought her a present for her birthday.
       - ru: Спаси́бо за чуде́сный пода́рок!
@@ -36096,6 +36171,9 @@ words:
     en_gb:
       standard: train (a string of railway carriages)
     usage:
+      - ru: Он лю́бит чита́ть в поезда́х.
+        en_gb: He likes reading on trains.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: По́езд идёт в Москву́.
         en_gb: The train goes to Moscow.
       - ru: Мы е́дем на по́езде.
@@ -39773,6 +39851,9 @@ words:
       pl_ins: проду́ктами
       pl_pre: проду́ктах
     usage:
+      - ru: Мы купи́ли проду́кты на всю неде́лю.
+        en_gb: We bought groceries for the whole week.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Молоко́ — све́жий проду́кт.
         en_gb: Milk is a fresh product.
       - ru: Я купи́л проду́кты на неде́лю.
@@ -40574,6 +40655,9 @@ words:
     en_gb:
       standard: bird (an animal with feathers and wings)
     usage:
+      - ru: Зимо́й мы броса́ем хлеб пти́цам.
+        en_gb: In winter we throw bread to the birds.
+        inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Ма́ленькая пти́ца поёт на ве́тке.
         en_gb: A little bird is singing on a branch.
       - ru: На не́бе кружи́ли пти́цы.
@@ -43152,6 +43236,9 @@ words:
       pl_ins: роди́телями
       pl_pre: роди́телях
     usage:
+      - ru: Я ча́сто звоню́ роди́телям.
+        en_gb: I often call my parents.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Ка́ждый роди́тель лю́бит своего́ ребёнка.
         en_gb: Every parent loves their child.
       - ru: Учи́тель поговори́л с роди́телем.
@@ -43885,6 +43972,9 @@ words:
       alt:
         - arm
     usage:
+      - ru: Он рабо́тает рука́ми, а не голово́й.
+        en_gb: He works with his hands, not his head.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Он держа́л кни́гу в руке́.
         en_gb: He held the book in his hand.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -45605,6 +45695,9 @@ words:
     en_gb:
       standard: sister (a female sibling)
     usage:
+      - ru: Он купи́л пода́рки сёстрам.
+        en_gb: He bought presents for his sisters.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Моя́ сестра́ ста́рше меня́.
         en_gb: My sister is older than me.
       - ru: Я подари́л сестре́ кни́гу.
@@ -46683,6 +46776,9 @@ words:
     en_gb:
       standard: word (a unit of language)
     usage:
+      - ru: Тру́дно вы́разить э́то слова́ми.
+        en_gb: It is hard to express this in words.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: По слова́м сосе́да, дом продаётся.
         en_gb: According to the neighbour, the house is for sale.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
@@ -47124,6 +47220,9 @@ words:
     en_gb:
       standard: dog (a common pet that barks)
     usage:
+      - ru: Она́ ко́рмит бездо́мных соба́к.
+        en_gb: She feeds stray dogs.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Соба́ка гро́мко ла́ет на у́лице.
         en_gb: The dog is barking loudly outside.
       - ru: Я гуля́ю с соба́кой ка́ждое у́тро.
@@ -49825,6 +49924,9 @@ words:
     en_gb:
       standard: country (a nation with its own land)
     usage:
+      - ru: Он мно́го зна́ет о ра́зных стра́нах.
+        en_gb: He knows a lot about different countries.
+        inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Я хочу́ посети́ть мно́го стран.
         en_gb: I want to visit many countries.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -50225,6 +50327,9 @@ words:
     en_gb:
       standard: student (a person who studies)
     usage:
+      - ru: Профе́ссор объясня́ет пра́вило студе́нтам.
+        en_gb: The professor explains the rule to the students.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Э́тот студе́нт у́чится в университе́те.
         en_gb: This student studies at the university.
       - ru: Студе́нты сдаю́т экза́мен.
@@ -54887,6 +54992,9 @@ words:
     en_gb:
       standard: pupil (a child at school)
     usage:
+      - ru: Учи́тельница раздала́ тетра́ди ученика́м.
+        en_gb: The teacher handed out the exercise books to the pupils.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Ученики́ сидя́т за па́ртами.
         en_gb: The pupils sit at their desks.
       - ru: Учи́тель похвали́л ученика́.
@@ -54978,6 +55086,9 @@ words:
     en_gb:
       standard: teacher (a person who teaches)
     usage:
+      - ru: Ученики́ задаю́т вопро́сы учителя́м.
+        en_gb: The pupils ask the teachers questions.
+        inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Наш учи́тель о́чень до́брый.
         en_gb: Our teacher is very kind.
       - ru: Я поблагодари́л учи́теля за уро́к.
@@ -56801,6 +56912,9 @@ words:
     en_gb:
       standard: flower (the colourful part of a plant)
     usage:
+      - ru: Мы укра́сили зал цвета́ми.
+        en_gb: We decorated the hall with flowers.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Он подари́л ей буке́т цвето́в.
         en_gb: He gave her a bouquet of flowers.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -58573,6 +58687,9 @@ words:
     en_gb:
       standard: school (a place where children learn)
     usage:
+      - ru: В ру́сских шко́лах у́чат англи́йский.
+        en_gb: In Russian schools they teach English.
+        inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Де́ти иду́т в шко́лу.
         en_gb: The children are going to school.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -59934,6 +60051,9 @@ words:
     en_gb:
       standard: apple (a round fruit that grows on a tree)
     usage:
+      - ru: Мы собира́ем я́блоки в саду́.
+        en_gb: We are picking apples in the orchard.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Она́ съе́ла сла́дкое я́блоко.
         en_gb: She ate a sweet apple.
       - ru: В корзи́не лежа́т кра́сные я́блоки.
