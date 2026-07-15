@@ -16063,8 +16063,8 @@ words:
         en_gb: The Russian intelligentsia loved the theatre.
       - ru: Кни́га посвящена́ интеллиге́нции.
         en_gb: The book is dedicated to the intelligentsia.
-      - ru: Он горди́лся свое́й интеллиге́нцией.
-        en_gb: He was proud of being part of the intelligentsia.
+      - ru: Страна́ горди́лась свое́й интеллиге́нцией.
+        en_gb: The country was proud of its intelligentsia.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
   "интерес=interest":
     cefr_level: A2
@@ -19134,7 +19134,7 @@ words:
       - ru: Нам ну́жно большо́е коли́чество воды́.
         en_gb: We need a large quantity of water.
       - ru: Коли́чество ученико́в растёт.
-        en_gb: The quantity of pupils is growing.
+        en_gb: The number of pupils is growing.
       - ru: Доба́вь са́хар в ма́лом коли́честве.
         en_gb: Add sugar in a small quantity.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -23295,7 +23295,7 @@ words:
         en_gb: He went up the stairs.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ле́стница ведёт на второ́й эта́ж.
-        en_gb: The stairs lead to the first floor.
+        en_gb: The stairs lead to the second floor.
       - ru: Он покра́сил ле́стницу.
         en_gb: He painted the stairs.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -23610,8 +23610,9 @@ words:
       - ru: Запиши́ а́дрес на листке́.
         en_gb: Write the address on the sheet.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Осе́нние листки́ кружа́тся в во́здухе.
-        en_gb: The autumn leaves whirl in the air.
+      - ru: Он вы́рвал листо́к из тетра́ди.
+        en_gb: He tore a sheet out of the exercise book.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
   "литература=literature":
     cefr_level: A2
     gender: f
@@ -27438,8 +27439,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Ма́ленький мураве́й нёс кусо́к хле́ба.
         en_gb: A small ant was carrying a piece of bread.
-      - ru: Муравьи́ стро́ят большо́й дом.
-        en_gb: Ants build a big home.
+      - ru: Муравьи́ стро́ят большо́й мураве́йник.
+        en_gb: The ants are building a big anthill.
     declension:
       sg_nom: мураве́й
       sg_gen: муравья́
