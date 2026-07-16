@@ -5034,7 +5034,7 @@ words:
     usage:
       - ru: Они́ дости́гли верши́ны горы́.
         en_gb: They reached the summit of the mountain.
-        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На верши́не лежи́т снег.
         en_gb: There is snow on the summit.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -5118,8 +5118,8 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Си́льный ве́тер сдул шля́пу.
         en_gb: A strong wind blew off the hat.
-      - ru: На у́лице ни́ ветра.
-        en_gb: There is not a breath of wind outside.
+      - ru: На у́лице совсе́м нет ве́тра.
+        en_gb: There is no wind at all outside.
       - ru: Ло́дку несёт ве́тром.
         en_gb: The boat is carried by the wind.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -5738,8 +5738,8 @@ words:
       - ru: В э́том вине́ мно́го са́хара.
         en_gb: There is a lot of sugar in this wine.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: На пра́здник они́ купи́ли два вина́.
-        en_gb: For the celebration they bought two wines.
+      - ru: На пра́здник они́ купи́ли две буты́лки вина́.
+        en_gb: For the celebration they bought two bottles of wine.
     declension:
       sg_nom: вино́
       sg_gen: вина́
@@ -6073,8 +6073,8 @@ words:
       - ru: Он попа́л под влия́ние ста́ршего бра́та.
         en_gb: He came under the influence of his older brother.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Учёные изуча́ют влия́ния пого́ды.
-        en_gb: Scientists study the effects of the weather.
+      - ru: Учёные изуча́ют влия́ние пого́ды.
+        en_gb: Scientists study the influence of the weather.
   "внимание=attention":
     cefr_level: A2
     gender: n
@@ -6175,7 +6175,7 @@ words:
     en_gb:
       standard: water (the clear liquid you drink)
     usage:
-      - ru: Я пью́ во́ду ка́ждое у́тро.
+      - ru: Я пью во́ду ка́ждое у́тро.
         en_gb: I drink water every morning.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В стака́не нет воды́.
@@ -6398,8 +6398,8 @@ words:
       - ru: Расте́ния стра́дают от возде́йствия хо́лода.
         en_gb: The plants suffer from the impact of the cold.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Учёные изуча́ют возде́йствия шу́ма.
-        en_gb: Scientists study the impacts of noise.
+      - ru: Учёные изуча́ют возде́йствие шу́ма.
+        en_gb: Scientists study the impact of noise.
   "воздух=air":
     cefr_level: A1
     gender: m
@@ -6477,7 +6477,7 @@ words:
       - ru: Лю́ди ра́зного во́зраста лю́бят му́зыку.
         en_gb: People of different ages love music.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: В свои́ во́зрасте он о́чень акти́вен.
+      - ru: В своём во́зрасте он о́чень акти́вен.
         en_gb: At his age he is very active.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
     declension:
@@ -6804,7 +6804,7 @@ words:
         en_gb: She has long fair hair.
       - ru: На пиджаке́ оди́н се́рый во́лос.
         en_gb: There is one grey hair on the jacket.
-      - ru: Она́ ухо́живает за свои́ми волоса́ми.
+      - ru: Она́ уха́живает за свои́ми волоса́ми.
         en_gb: She takes care of her hair.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
     declension:
@@ -7379,7 +7379,7 @@ words:
     en_gb:
       standard: universe (all of space and everything in it)
     usage:
-      - ru: Вселе́нная о́чень бо́льшая.
+      - ru: Вселе́нная о́чень больша́я.
         en_gb: The universe is very big.
       - ru: Мы — ма́ленькая часть вселе́нной.
         en_gb: We are a small part of the universe.
@@ -7875,7 +7875,7 @@ words:
       - ru: По газо́ну ходи́ть нельзя́.
         en_gb: You may not walk on the lawn.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
-      - ru: Сади́тся подстрига́ет газо́н ка́ждую неде́лю.
+      - ru: Садо́вник подстрига́ет газо́н ка́ждую неде́лю.
         en_gb: The gardener mows the lawn every week.
       - ru: Де́ти игра́ли на зелёном газо́не.
         en_gb: The children played on the green lawn.
@@ -8240,9 +8240,9 @@ words:
       - ru: Все скорбе́ли о его́ ги́бели.
         en_gb: Everyone mourned his death.
         inflect: { token: 5, case: pre, number: sg, rule: noun-fem-soft }
-      - ru: Шторм грози́л ги́белью корабля́.
+      - ru: Шторм грози́л кораблю́ ги́белью.
         en_gb: The storm threatened the ship with destruction.
-        inflect: { token: 3, case: ins, number: sg, rule: noun-fem-soft }
+        inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: Ги́бель ле́са — больша́я беда́.
         en_gb: The death of the forest is a great misfortune.
   "гимнастёрка=military shirt":
@@ -9008,28 +9008,28 @@ words:
     en_gb:
       standard: military hospital (a hospital for soldiers)
     usage:
-      - ru: Ра́неного отвезли́ в госпита́ль.
+      - ru: Ра́неного отвезли́ в го́спиталь.
         en_gb: The wounded soldier was taken to the military hospital.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он лечи́лся в госпита́ле три ме́сяца.
+      - ru: Он лечи́лся в го́спитале три ме́сяца.
         en_gb: He was treated in the military hospital for three months.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Врачи́ госпита́ля рабо́тали день и ночь.
+      - ru: Врачи́ го́спиталя рабо́тали день и ночь.
         en_gb: The doctors of the military hospital worked day and night.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
-      sg_nom: госпита́ль
-      sg_gen: госпита́ля
-      sg_dat: госпита́лю
-      sg_acc: госпита́ль
-      sg_ins: госпита́лем
-      sg_pre: госпита́ле
-      pl_nom: госпита́ли
-      pl_gen: госпита́лей
-      pl_dat: госпита́лям
-      pl_acc: госпита́ли
-      pl_ins: госпита́лями
-      pl_pre: госпита́лях
+      sg_nom: го́спиталь
+      sg_gen: го́спиталя
+      sg_dat: го́спиталю
+      sg_acc: го́спиталь
+      sg_ins: го́спиталем
+      sg_pre: го́спитале
+      pl_nom: го́спитали
+      pl_gen: го́спиталей
+      pl_dat: го́спиталям
+      pl_acc: го́спитали
+      pl_ins: го́спиталями
+      pl_pre: го́спиталях
   "господин=mister":
     cefr_level: A2
     gender: m
@@ -9135,7 +9135,7 @@ words:
       - ru: Хозя́йка предложи́ла гостя́м чай.
         en_gb: The hostess offered the guests tea.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
-      - ru: К нам пришёл незвано́й гость.
+      - ru: К нам пришёл незва́ный гость.
         en_gb: An uninvited guest came to us.
       - ru: Мы жда́ли госте́й весь ве́чер.
         en_gb: We were waiting for guests all evening.
