@@ -1,8 +1,9 @@
 // Reactive vocabulary store.
 //
 // Strategy: load whatever is cached in IndexedDB first (instant, offline), then
-// — if online — fetch the manifest and download any files whose `updated`
-// timestamp is newer than the cached copy, storing them back in IndexedDB.
+// — if online — fetch the manifest and download any files whose content `hash`
+// differs from the cached copy (falling back to the `updated` timestamp for
+// older manifests), storing them back in IndexedDB.
 import { computed, reactive } from 'vue'
 import yaml from 'js-yaml'
 
@@ -80,6 +81,9 @@ export async function loadFromCache() {
   return records
 }
 
+/** Per-file cache-invalidation token: content hash if present, else timestamp. */
+const cacheToken = (entry) => entry.hash ?? entry.updated
+
 /**
  * Fetch the manifest and download any new/updated files into IndexedDB.
  * Returns true if anything changed.
@@ -95,11 +99,21 @@ export async function syncFromNetwork() {
   let changed = false
   for (const entry of manifest.files ?? []) {
     const existing = cachedBy.get(entry.file)
-    if (existing && existing.updated === entry.updated) continue // up to date
+    // Invalidate on the content hash when the manifest provides one, falling
+    // back to the `updated` timestamp for older manifests/caches. The hash
+    // changes exactly when the bytes do, so a touched-but-unchanged file no
+    // longer forces a re-download, and a changed file can never be missed.
+    if (existing && cacheToken(existing) === cacheToken(entry)) continue // up to date
     const fileRes = await fetch(fileUrl(entry.file), { cache: 'no-cache' })
     if (!fileRes.ok) continue // skip a single bad file rather than fail the lot
     const content = await fileRes.text()
-    await idb.putFile({ file: entry.file, pos: entry.pos, updated: entry.updated, content })
+    await idb.putFile({
+      file: entry.file,
+      pos: entry.pos,
+      updated: entry.updated,
+      hash: entry.hash,
+      content,
+    })
     changed = true
   }
 

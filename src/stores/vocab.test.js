@@ -78,6 +78,36 @@ describe('vocab store sync', () => {
     manifest.files[0].updated = '2026-05-28T00:00:00Z' // restore
   })
 
+  it('invalidates on the content hash, not the timestamp', async () => {
+    const hashed = {
+      version: 1,
+      files: [{ pos: 'noun', file: 'nouns.yml', updated: '2026-05-28T00:00:00Z', hash: 'aaaa' }],
+    }
+    const build = () =>
+      vi.fn(async (url) => {
+        if (String(url).endsWith('manifest.json')) return { ok: true, json: async () => hashed }
+        if (String(url).endsWith('nouns.yml')) return { ok: true, text: async () => nounsYml }
+        return { ok: false, status: 404 }
+      })
+
+    globalThis.fetch = build()
+    await syncFromNetwork()
+
+    // Timestamp changes but the hash is the same → no re-download.
+    hashed.files[0].updated = '2026-09-09T00:00:00Z'
+    const noop = build()
+    globalThis.fetch = noop
+    expect(await syncFromNetwork()).toBe(false)
+    expect(noop.mock.calls.filter(([u]) => String(u).endsWith('.yml')).length).toBe(0)
+
+    // Hash changes → re-download even if the timestamp is unchanged.
+    hashed.files[0].hash = 'bbbb'
+    const refetch = build()
+    globalThis.fetch = refetch
+    expect(await syncFromNetwork()).toBe(true)
+    expect(refetch.mock.calls.filter(([u]) => String(u).endsWith('.yml')).length).toBe(1)
+  })
+
   it('loads previously cached files without any network', async () => {
     await idb.putFile({
       file: 'nouns.yml',

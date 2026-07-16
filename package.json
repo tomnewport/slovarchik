@@ -6,12 +6,14 @@
   "description": "Offline-first PWA for drilling Russian vocabulary and noun declensions.",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/gen-manifest.mjs && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "lint": "eslint . --ext .js,.vue",
+    "gen:manifest": "node scripts/gen-manifest.mjs",
+    "check:manifest": "node scripts/gen-manifest.mjs --check",
     "gen:icons": "node scripts/gen-icons.mjs",
     "gen:adjectives": "node scripts/gen-adjective-declension.mjs"
   },

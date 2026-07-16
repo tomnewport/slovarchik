@@ -106,8 +106,11 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, `build`, and the Playwright
 - **A drill's behaviour/UI** → the matching `src/views/*View.vue`.
 - **Quiz/declension/grading logic** → the pure module in `src/lib/` (keep it
   framework-free so it stays unit-testable), and add/extend its `*.test.js`.
-- **Add/edit words** → the YAML in `public/vocab/` + bump `updated` in
-  `manifest.json`. `vocabBuild.test.js`/`declension.test.js` guard the shape.
+- **Add/edit words** → the YAML in `public/vocab/`, then run
+  `npm run gen:manifest` to refresh `manifest.json` (content hashes drive the
+  client's cache invalidation — no manual timestamp bump). `npm run build` does
+  this automatically; CI's `check:manifest` fails if a hand-edit drifts.
+  `vocabBuild.test.js`/`declension.test.js` guard the shape.
   Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store);
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
