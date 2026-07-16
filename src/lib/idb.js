@@ -1,5 +1,5 @@
 // Tiny promise-based IndexedDB wrapper. Three object stores:
-//   'vocab-files' (keyed by filename)  — cached vocab YAML: { file, pos, updated, content }
+//   'vocab-files' (keyed by filename)  — cached vocab YAML: { file, pos, updated, hash, content }
 //   'meta'        (keyed by name)       — small app settings: { key, value }
 //   'progress'    (keyed by word)       — per-word learning record (see stores/progress.js)
 

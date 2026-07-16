@@ -8,7 +8,7 @@ version.
 > **TL;DR workflow**
 > 1. Add/edit an entry in the right `*.yml` file (schema below).
 > 2. Keep the file sorted: `node scripts/sort-vocab.js public/vocab/<file>.yml`.
-> 3. Bump that file's `updated` timestamp in [`manifest.json`](manifest.json).
+> 3. Refresh the manifest: `npm run gen:manifest`.
 > 4. `npm test` — the suites guard the shape. Fix anything red.
 
 ---
@@ -17,9 +17,12 @@ version.
 
 - **One file per part of speech** (`nouns.yml`, `verbs.yml`, …). `calendar.yml`
   is also nouns (days/months/festivals), grouped by topic.
-- [`manifest.json`](manifest.json) lists every file, its `pos`, and an `updated`
-  timestamp. The app downloads a file only when its timestamp is newer than the
-  copy cached in IndexedDB, so **you must bump `updated` for changes to ship**.
+- [`manifest.json`](manifest.json) lists every file, its `pos`, an `updated`
+  timestamp (shown in-app) and a content `hash`. The app downloads a file only
+  when its `hash` differs from the copy cached in IndexedDB. **The manifest is
+  generated — run `npm run gen:manifest` after editing any file** (or `npm run
+  build`, which does it); don't hand-edit it. CI's `check:manifest` fails if it
+  drifts from the files.
 - At load time each file is parsed and normalised by
   [`src/lib/vocabBuild.js`](../../src/lib/vocabBuild.js) into the records the
   drills consume. Read that file if you need the exact transformation.
@@ -438,8 +441,9 @@ rules:
       - "Feminine -ь nouns don't change: мать → мать."
 ```
 
-`grammar-rules.yml` is listed in `manifest.json` (bump its `updated` when you
-change it; bump a word file's `updated` when you add `inflect:` annotations).
+`grammar-rules.yml` is listed in `manifest.json` like any other file — run
+`npm run gen:manifest` after changing it (or any word file, e.g. when you add
+`inflect:` annotations) so its content `hash` refreshes and clients re-sync.
 
 ---
 
@@ -464,6 +468,8 @@ preserving the header/`meta` block and each entry verbatim.
 1. Create `public/vocab/<name>.yml` with a `words:` block.
 2. Register the filename → POS in **both** `POS_BY_FILE` and `partsOfSpeech` in
    [`src/lib/vocabBuild.js`](../../src/lib/vocabBuild.js).
-3. Add the file to [`manifest.json`](manifest.json) with its `pos` and `updated`.
+3. Register the filename → POS in the `FILES` list in
+   [`scripts/gen-manifest.mjs`](../../scripts/gen-manifest.mjs), then run
+   `npm run gen:manifest` to add it to [`manifest.json`](manifest.json).
 4. `npm test`.
 </content>
