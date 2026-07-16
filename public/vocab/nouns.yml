@@ -343,6 +343,9 @@ words:
     en_gb:
       standard: address (where someone lives or works)
     usage:
+      - ru: В а́дресе есть оши́бка.
+        en_gb: There is a mistake in the address.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Да́йте мне ваш а́дрес.
         en_gb: Give me your address.
       - ru: Я записа́л его́ а́дрес в блокно́т.
@@ -1585,6 +1588,9 @@ words:
       alt:
         - grandma
     usage:
+      - ru: Я помога́ю ба́бушке по до́му.
+        en_gb: I help grandma around the house.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ба́бушка печёт вку́сные пироги́.
         en_gb: Grandmother bakes tasty pies.
       - ru: Я ча́сто звоню́ ба́бушке.
@@ -5085,6 +5091,9 @@ words:
       pl_ins: вёснами
       pl_pre: вёснах
     usage:
+      - ru: Мы ждём весны́.
+        en_gb: We are waiting for spring.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Весна́ в э́том году́ ра́нняя.
         en_gb: Spring is early this year.
       - ru: Весно́й та́ет снег.
@@ -5105,6 +5114,9 @@ words:
     en_gb:
       standard: wind (moving air)
     usage:
+      - ru: Из-за си́льного ве́тра мы оста́лись до́ма.
+        en_gb: Because of the strong wind we stayed at home.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Си́льный ве́тер сдул шля́пу.
         en_gb: A strong wind blew off the hat.
       - ru: На у́лице ни́ ветра.
@@ -8679,6 +8691,9 @@ words:
     en_gb:
       standard: voice (the sound produced by the vocal cords)
     usage:
+      - ru: Я узна́л твой го́лос сра́зу.
+        en_gb: I recognised your voice at once.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У неё краси́вый го́лос.
         en_gb: She has a beautiful voice.
       - ru: Я узна́л его́ по го́лосу.
@@ -9774,6 +9789,9 @@ words:
       pl_ins: гру́ппами
       pl_pre: гру́ппах
     usage:
+      - ru: В на́шей гру́ппе де́сять студе́нтов.
+        en_gb: There are ten students in our group.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Гру́ппа тури́стов осма́тривает го́род.
         en_gb: A group of tourists is touring the city.
       - ru: Учени́ки раздели́лись на две гру́ппы.
@@ -10418,6 +10436,9 @@ words:
       pl_ins: де́вочками
       pl_pre: де́вочках
     usage:
+      - ru: Я ви́жу де́вочку с соба́кой.
+        en_gb: I see a girl with a dog.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́ленькая де́вочка игра́ет с ку́клой.
         en_gb: A little girl is playing with a doll.
       - ru: Я подари́л де́вочке возду́шный шар.
@@ -10451,6 +10472,9 @@ words:
       pl_ins: де́вушками
       pl_pre: де́вушках
     usage:
+      - ru: Он пригласи́л де́вушку в кино́.
+        en_gb: He invited the young woman to the cinema.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Краси́вая де́вушка чита́ет кни́гу.
         en_gb: A beautiful young woman is reading a book.
       - ru: Он подари́л де́вушке цветы́.
@@ -10533,6 +10557,9 @@ words:
       alt:
         - grandpa
     usage:
+      - ru: Мы бы́ли в гостя́х у де́душки.
+        en_gb: We were visiting grandfather.
+        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Де́душка лю́бит расска́зывать исто́рии.
         en_gb: Grandfather loves to tell stories.
       - ru: Я помога́ю де́душке в саду́.
@@ -10619,6 +10646,9 @@ words:
     en_gb:
       standard: matter (an affair, business, or task)
     usage:
+      - ru: Он рассказа́л мне о своём де́ле.
+        en_gb: He told me about his case.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Приве́т! Как дела́?
         en_gb: Hi! How are you doing?
       - ru: Де́ло в том, что я опозда́л.
@@ -10716,6 +10746,9 @@ words:
     en_gb:
       standard: day
     usage:
+      - ru: Хоро́шего дня!
+        en_gb: Have a good day!
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Сего́дня хоро́ший день.
         en_gb: Today is a good day.
       - ru: Э́ти дни я бу́ду до́ма.
@@ -11406,6 +11439,9 @@ words:
     en_gb:
       standard: rain
     usage:
+      - ru: Мы шли под дождём.
+        en_gb: We walked in the rain.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На у́лице идёт дождь.
         en_gb: It is raining outside.
       - ru: По́сле дождя́ вы́шло со́лнце.
@@ -11718,6 +11754,9 @@ words:
       alt:
         - home
     usage:
+      - ru: О́коло до́ма есть парк.
+        en_gb: There is a park near the house.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Наш дом стои́т у реки́.
         en_gb: Our house stands by the river.
       - ru: Мы верну́лись домо́й по́здно ве́чером.
@@ -12040,6 +12079,9 @@ words:
       pl_ins: до́чками
       pl_pre: до́чках
     usage:
+      - ru: Он встре́тил до́чку по́сле шко́лы.
+        en_gb: He met his daughter after school.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Их до́чка пошла́ в пе́рвый класс.
         en_gb: Their daughter started first grade.
       - ru: Он купи́л до́чке но́вую игру́шку.
@@ -12058,6 +12100,9 @@ words:
     en_gb:
       standard: daughter (a female child)
     usage:
+      - ru: У них нет до́чери, то́лько сын.
+        en_gb: They have no daughter, only a son.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-fem-soft }
       - ru: Их дочь у́чится в шко́ле.
         en_gb: Their daughter goes to school.
       - ru: Он горди́тся свое́й до́черью.
@@ -13129,6 +13174,9 @@ words:
       pl_ins: же́нщинами
       pl_pre: же́нщинах
     usage:
+      - ru: Мы уви́дели же́нщину с ребёнком.
+        en_gb: We saw a woman with a child.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́та же́нщина рабо́тает врачо́м.
         en_gb: This woman works as a doctor.
       - ru: Он по́дал же́нщине ру́ку.
@@ -13326,6 +13374,9 @@ words:
     en_gb:
       standard: life (the period between birth and death)
     usage:
+      - ru: Он мно́го ви́дел в жи́зни.
+        en_gb: He has seen a lot in his life.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-fem-soft }
       - ru: Жизнь прекра́сна.
         en_gb: Life is beautiful.
       - ru: Он посвяти́л жизнь нау́ке.
@@ -17677,6 +17728,9 @@ words:
       pl_ins: карто́шками
       pl_pre: карто́шках
     usage:
+      - ru: Купи́ карто́шку на ры́нке.
+        en_gb: Buy potatoes at the market.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На у́жин у нас жа́реная карто́шка.
         en_gb: We have fried potatoes for supper.
       - ru: Я почи́стил мешо́к карто́шки.
@@ -18923,6 +18977,9 @@ words:
       pl_ins: кни́жками
       pl_pre: кни́жках
     usage:
+      - ru: В э́той кни́жке краси́вые карти́нки.
+        en_gb: There are beautiful pictures in this book.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Купи́ ребёнку де́тскую кни́жку.
         en_gb: Buy the child a children's book.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -19991,6 +20048,9 @@ words:
     en_gb:
       standard: computer (an electronic machine for data)
     usage:
+      - ru: Все да́нные на компью́тере.
+        en_gb: All the data is on the computer.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я рабо́таю за компью́тером.
         en_gb: I work at the computer.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -23499,6 +23559,9 @@ words:
     en_gb:
       standard: summer
     usage:
+      - ru: В нача́ле ле́та мы е́здим на да́чу.
+        en_gb: At the beginning of summer we go to the dacha.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ле́том мы е́здим на мо́ре.
         en_gb: In summer we go to the sea.
         inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
@@ -24671,6 +24734,9 @@ words:
     en_gb:
       standard: boy (a male child)
     usage:
+      - ru: Тре́нер дал ма́льчику мяч.
+        en_gb: The coach gave the boy a ball.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ма́льчик бежи́т по двору́.
         en_gb: The boy is running around the yard.
       - ru: Я ви́дел ма́льчика в па́рке.
@@ -24733,6 +24799,9 @@ words:
     en_gb:
       standard: mum (mother)
     usage:
+      - ru: Я о́чень люблю́ свою́ ма́му.
+        en_gb: I love my mum very much.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́ма, я пришёл домо́й!
         en_gb: Mum, I'm home!
       - ru: Он позвони́л ма́ме ве́чером.
@@ -25115,6 +25184,9 @@ words:
     en_gb:
       standard: mother (a female parent)
     usage:
+      - ru: Он живёт с ма́терью.
+        en_gb: He lives with his mother.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: Моя́ мать рабо́тает в шко́ле.
         en_gb: My mother works at a school.
       - ru: Он написа́л письмо́ ма́тери.
@@ -25475,6 +25547,9 @@ words:
     en_gb:
       standard: place (a spot; a seat; a location)
     usage:
+      - ru: Уступи́ ме́сто ба́бушке.
+        en_gb: Give up your seat to the old lady.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Здесь хоро́шее ме́сто для пикни́ка.
         en_gb: This is a good place for a picnic.
       - ru: В авто́бусе не бы́ло свобо́дных мест.
@@ -27384,6 +27459,9 @@ words:
     en_gb:
       standard: husband (a married man)
     usage:
+      - ru: Она́ пришла́ с му́жем.
+        en_gb: She came with her husband.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Её муж рабо́тает врачо́м.
         en_gb: Her husband works as a doctor.
       - ru: Она́ ждёт му́жа с рабо́ты.
@@ -27446,6 +27524,9 @@ words:
     en_gb:
       standard: man (an adult male person)
     usage:
+      - ru: Э́тому мужчи́не ну́жна по́мощь.
+        en_gb: This man needs help.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Мужчи́на помо́г ей нести́ чемода́н.
         en_gb: The man helped her carry the suitcase.
         en_alt:
@@ -27519,6 +27600,9 @@ words:
     en_gb:
       standard: music (sounds made by instruments or voices)
     usage:
+      - ru: Без му́зыки ску́чно.
+        en_gb: It is boring without music.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ слу́шает му́зыку.
         en_gb: She is listening to music.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -27840,6 +27924,9 @@ words:
     en_gb:
       standard: meat (food from an animal)
     usage:
+      - ru: В э́том блю́де нет мя́са.
+        en_gb: There is no meat in this dish.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он не ест мя́со.
         en_gb: He doesn't eat meat.
       - ru: На у́жин мы пригото́вили мя́со.
@@ -28932,6 +29019,9 @@ words:
       pl_ins: неде́лями
       pl_pre: неде́лях
     usage:
+      - ru: На э́той неде́ле мно́го рабо́ты.
+        en_gb: There is a lot of work this week.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я верну́сь че́рез неде́лю.
         en_gb: I will return in a week.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -29252,6 +29342,9 @@ words:
       alt:
         - foot
     usage:
+      - ru: Он встал с ле́вой ноги́.
+        en_gb: He got out of bed on the wrong side.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У меня́ боли́т нога́.
         en_gb: My leg hurts.
       - ru: Он упа́л и слома́л но́гу.
@@ -29550,6 +29643,9 @@ words:
     en_gb:
       standard: night
     usage:
+      - ru: Среди́ но́чи пошёл дождь.
+        en_gb: In the middle of the night it started to rain.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-fem-soft }
       - ru: Споко́йной но́чи!
         en_gb: Good night!
       - ru: Но́чью го́род осо́бенно краси́в.
@@ -31437,6 +31533,9 @@ words:
     en_gb:
       standard: autumn (the season after summer)
     usage:
+      - ru: В нача́ле о́сени ещё тепло́.
+        en_gb: At the beginning of autumn it is still warm.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-fem-soft }
       - ru: О́сенью лу́жи везде́.
         en_gb: In autumn puddles are everywhere.
         inflect: { token: 1, case: ins, number: sg, rule: noun-fem-soft }
@@ -32795,6 +32894,9 @@ words:
     en_gb:
       standard: bag (a plastic or paper bag for carrying items)
     usage:
+      - ru: В паке́те лежа́т проду́кты.
+        en_gb: There are groceries in the bag.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он нёс паке́т с поку́пками.
         en_gb: He was carrying a bag of shopping.
       - ru: Положи́ хлеб в паке́т.
@@ -33084,6 +33186,9 @@ words:
     en_gb:
       standard: dad (father)
     usage:
+      - ru: У па́пы сего́дня выходно́й.
+        en_gb: Dad has a day off today.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Па́па, помоги́ мне с урока́ми!
         en_gb: Dad, help me with my homework!
       - ru: Все па́пы пришли́ на шко́льный спекта́кль.
@@ -36144,6 +36249,9 @@ words:
       pl_ins: подру́гами
       pl_pre: подру́гах
     usage:
+      - ru: Она́ звони́т подру́ге ка́ждый день.
+        en_gb: She calls her friend every day.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Моя́ подру́га живёт ря́дом.
         en_gb: My friend lives nearby.
       - ru: Я пишу́ письмо́ свое́й подру́ге.
@@ -36192,6 +36300,9 @@ words:
     en_gb:
       standard: pillow (a soft cushion used to rest the head on in bed)
     usage:
+      - ru: Положи́ поду́шку на дива́н.
+        en_gb: Put the pillow on the sofa.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ спала́ на мя́гкой поду́шке.
         en_gb: She slept on a soft pillow.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -37770,6 +37881,9 @@ words:
     en_gb:
       standard: bed (a piece of furniture for sleeping on)
     usage:
+      - ru: Больно́й лежи́т в посте́ли.
+        en_gb: The patient is lying in bed.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
       - ru: Она́ запра́вила посте́ль.
         en_gb: She made the bed.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -43766,6 +43880,9 @@ words:
       sg_ins: Росси́ей
       sg_pre: Росси́и
     usage:
+      - ru: Ле́том они́ е́дут в Росси́ю.
+        en_gb: In summer they are going to Russia.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Росси́я грани́чит со мно́гими стра́нами.
         en_gb: Russia borders many countries.
       - ru: Столи́ца Росси́и — Москва́.
@@ -45605,6 +45722,9 @@ words:
     en_gb:
       standard: family (parents and their children)
     usage:
+      - ru: У на́шей семьи́ есть да́ча.
+        en_gb: Our family has a dacha.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У меня́ больша́я семья́.
         en_gb: I have a big family.
       - ru: Он забо́тится о свое́й семье́.
@@ -47313,6 +47433,9 @@ words:
     en_gb:
       standard: snow
     usage:
+      - ru: В го́роде совсе́м нет сне́га.
+        en_gb: There is no snow at all in the city.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Зимо́й па́дает снег.
         en_gb: In winter snow falls.
       - ru: Де́ти игра́ли в снегу́ весь день.
@@ -47903,6 +48026,9 @@ words:
     en_gb:
       standard: sun (the star that lights the day)
     usage:
+      - ru: Не сиди́ до́лго на со́лнце.
+        en_gb: Don't sit in the sun for long.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Сего́дня я́рко све́тит со́лнце.
         en_gb: The sun is shining brightly today.
       - ru: Мы лежа́ли на со́лнце.
@@ -51871,6 +51997,9 @@ words:
       alt:
         - phone
     usage:
+      - ru: Все фо́то у меня́ в телефо́не.
+        en_gb: All my photos are on my phone.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Где мой телефо́н?
         en_gb: Where is my phone?
       - ru: Я забы́л телефо́н до́ма.
@@ -53372,6 +53501,9 @@ words:
     en_gb:
       standard: toilet (a room with a lavatory)
     usage:
+      - ru: В туале́те гори́т свет.
+        en_gb: The light is on in the toilet.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Где туале́т?
         en_gb: Where is the toilet?
       - ru: Туале́т нахо́дится в конце́ коридо́ра.
@@ -54933,6 +55065,9 @@ words:
     en_gb:
       standard: morning
     usage:
+      - ru: У́тром я пью ко́фе.
+        en_gb: In the morning I drink coffee.
+        inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
       - ru: До́брое у́тро! Как вы спа́ли?
         en_gb: Good morning! How did you sleep?
       - ru: Он просыпа́ется ра́но ка́ждое у́тро.
@@ -55677,6 +55812,9 @@ words:
       pl_ins: фи́льмами
       pl_pre: фи́льмах
     usage:
+      - ru: Я сове́тую тебе́ э́тот фильм.
+        en_gb: I recommend this film to you.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вчера́ мы смотре́ли интере́сный фильм.
         en_gb: Yesterday we watched an interesting film.
       - ru: Я люблю́ ста́рые фи́льмы.
@@ -56996,6 +57134,9 @@ words:
       alt:
         - color
     usage:
+      - ru: Я вы́брал руба́шку друго́го цве́та.
+        en_gb: I chose a shirt of a different colour.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Како́й твой люби́мый цвет?
         en_gb: What is your favourite colour?
       - ru: Мне нра́вятся я́ркие цвета́.
@@ -57685,6 +57826,9 @@ words:
     en_gb:
       standard: person (a human being)
     usage:
+      - ru: Для одного́ челове́ка э́то сли́шком мно́го.
+        en_gb: For one person this is too much.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ка́ждый челове́к заслу́живает уваже́ния.
         en_gb: Every person deserves respect.
       - ru: Он о́чень хоро́ший челове́к.
