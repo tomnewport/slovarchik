@@ -51,6 +51,9 @@ export default defineConfig({
         // Precache the app shell *and* the vocab manifest/YAML so the very first
         // offline launch (after install) still has data to download into IDB.
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,json,yml}'],
+        // nouns.yml has outgrown Workbox's 2 MiB default; keep headroom so the
+        // vocabulary can keep growing without silently dropping out of precache.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },
     }),
   ],
