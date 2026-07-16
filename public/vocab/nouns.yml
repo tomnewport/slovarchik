@@ -376,7 +376,7 @@ words:
     en_gb:
       standard: Asia (the largest continent)
     usage:
-      - ru: А́зия — са́мая бо́льшая часть све́та.
+      - ru: А́зия — са́мая больша́я часть све́та.
         en_gb: Asia is the largest part of the world.
       - ru: Мно́гие стра́ны А́зии о́чень дре́вние.
         en_gb: Many countries of Asia are very ancient.
@@ -433,7 +433,7 @@ words:
         en_gb: The academician spoke at the conference.
       - ru: Я чита́л статью́ изве́стного академи́ка.
         en_gb: I read an article by a famous academician.
-      - ru: Премию́ вручи́ли двум академи́кам.
+      - ru: Пре́мию вручи́ли двум академи́кам.
         en_gb: The prize was awarded to two academicians.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
     declension:
@@ -1195,7 +1195,7 @@ words:
       - ru: Дом постро́ен изве́стным архите́ктором.
         en_gb: The house was built by a famous architect.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Архите́ктор нарисова́л прое́кт дома́.
+      - ru: Архите́ктор нарисова́л прое́кт до́ма.
         en_gb: The architect drew the design of the house.
       - ru: Знамени́тый архите́ктор постро́ил э́тот мост.
         en_gb: A famous architect built this bridge.
@@ -1462,9 +1462,8 @@ words:
       - ru: Самолёт прилете́л в аэропо́рт.
         en_gb: The plane arrived at the airport.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Мы встре́тили друзе́й в аэропо́рту.
+      - ru: Мы встре́тили друзе́й в аэропорту́.
         en_gb: We met our friends at the airport.
-        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: До аэропо́рта далеко́ е́хать.
         en_gb: It is a long drive to the airport.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -1475,6 +1474,7 @@ words:
       sg_acc: аэропо́рт
       sg_ins: аэропо́ртом
       sg_pre: аэропо́рте
+      sg_loc: аэропорту́
       pl_nom: аэропо́рты
       pl_gen: аэропо́ртов
       pl_dat: аэропо́ртам
@@ -1944,7 +1944,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Банкома́т не вы́дал де́ньги.
         en_gb: The ATM did not dispense money.
-      - ru: О́коло ма́газина два банкома́та.
+      - ru: О́коло магази́на два банкома́та.
         en_gb: There are two ATMs near the shop.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
@@ -2067,7 +2067,7 @@ words:
     en_gb:
       standard: master (a Russian nobleman or landlord in tsarist times)
     usage:
-      - ru: Ба́рин прика́зал принести́ ча́й.
+      - ru: Ба́рин прика́зал принести́ чай.
         en_gb: The master ordered tea to be brought.
       - ru: Слу́ги боя́лись стро́гого ба́рина.
         en_gb: The servants feared the stern master.
@@ -2104,7 +2104,7 @@ words:
       - ru: Все уважа́ли ста́рого баро́на.
         en_gb: Everyone respected the old baron.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: На ба́ле бы́ло не́сколько баро́нов.
+      - ru: На балу́ бы́ло не́сколько баро́нов.
         en_gb: There were several barons at the ball.
     declension:
       sg_nom: баро́н
@@ -2457,7 +2457,7 @@ words:
         en_gb: The refugees were looking for a new home.
       - ru: Бе́женец проси́л о по́мощи.
         en_gb: The refugee asked for help.
-      - ru: Во́лонтёры помога́ют бе́женцам.
+      - ru: Волонтёры помога́ют бе́женцам.
         en_gb: Volunteers help the refugees.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
     declension:
@@ -2731,9 +2731,9 @@ words:
     usage:
       - ru: Его́ беспоко́йство легко́ заме́тить.
         en_gb: His anxiety is easy to notice.
-      - ru: Я не находи́л ме́ста от беспоко́йства.
+      - ru: Я не находи́л себе́ ме́ста от беспоко́йства.
         en_gb: I could not settle down out of anxiety.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 7, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Прости́те за беспоко́йство.
         en_gb: Sorry for the trouble.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -2964,7 +2964,7 @@ words:
       - ru: Он де́лал всё для бла́га семьи́.
         en_gb: He did everything for the good of the family.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Все блага́ принадлежа́т наро́ду.
+      - ru: Все бла́га принадлежа́т наро́ду.
         en_gb: All goods belong to the people.
     declension:
       sg_nom: бла́го
@@ -3128,7 +3128,7 @@ words:
       - ru: Тяжёлый блок упа́л на зе́млю.
         en_gb: The heavy block fell to the ground.
       - ru: Две страны́ вступи́ли в вое́нный блок.
-        en_gb: The two countries joined a military block.
+        en_gb: The two countries joined a military bloc.
     declension:
       sg_nom: блок
       sg_gen: бло́ка
@@ -3318,7 +3318,6 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В э́том бою́ поги́бло мно́го люде́й.
         en_gb: Many people died in this battle.
-        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: бой
       sg_gen: бо́я
@@ -3781,7 +3780,7 @@ words:
     en_gb:
       standard: Brazil (a country in South America)
     usage:
-      - ru: Брази́лия — са́мая бо́льшая страна́ Ю́жной Аме́рики.
+      - ru: Брази́лия — са́мая больша́я страна́ Ю́жной Аме́рики.
         en_gb: Brazil is the largest country in South America.
       - ru: В Брази́лии лю́бят футбо́л.
         en_gb: In Brazil they love football.
