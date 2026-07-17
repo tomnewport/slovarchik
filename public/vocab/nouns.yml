@@ -13855,9 +13855,8 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он сел на са́мый зад авто́буса.
         en_gb: He sat at the very back of the bus.
-      - ru: В заде́ за́ла бы́ло свобо́дно.
-        en_gb: It was free at the back of the hall.
-        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Грузови́к подъе́хал за́дом к скла́ду.
+        en_gb: The lorry backed up to the warehouse.
   "задание=task":
     cefr_level: A2
     gender: n
@@ -14048,9 +14047,9 @@ words:
       pl_ins: заключе́ниями
       pl_pre: заключе́ниях
     usage:
-      - ru: В заключе́нии он поблагодари́л всех.
+      - ru: В заключе́ние он поблагодари́л всех.
         en_gb: In conclusion he thanked everyone.
-        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Врач написа́л своё заключе́ние.
         en_gb: The doctor wrote his conclusion.
       - ru: Экспе́рты пришли́ к ва́жным заключе́ниям.
@@ -14265,7 +14264,7 @@ words:
       - ru: Чте́ние — его́ люби́мое заня́тие.
         en_gb: Reading is his favourite activity.
       - ru: Она́ опозда́ла на заня́тие.
-        en_gb: She was late for the activity.
+        en_gb: She was late for the class.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: заня́тие
@@ -14531,8 +14530,8 @@ words:
         en_gb: She wears a watch on her wrist.
       - ru: Он повреди́л запя́стье на трениро́вке.
         en_gb: He injured his wrist at training.
-      - ru: Брасле́т блесте́л на её запя́стьях.
-        en_gb: The bracelet shone on her wrists.
+      - ru: Брасле́ты блесте́ли на её запя́стьях.
+        en_gb: Bracelets shone on her wrists.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: запя́стье
@@ -15101,9 +15100,9 @@ words:
         en_gb: The winter this year is cold.
         en_alt:
           - winter is cold this year
-      - ru: Мы с нетерпе́нием ждём зи́му.
+      - ru: Мы с нетерпе́нием ждём зимы́.
         en_gb: We are eagerly waiting for winter.
-        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: зима́
       sg_gen: зимы́
@@ -15186,7 +15185,7 @@ words:
     usage:
       - ru: Он по́дал знак руко́й.
         en_gb: He gave a sign with his hand.
-      - ru: На доро́ге стои́т знак сто́п.
+      - ru: На доро́ге стои́т знак стоп.
         en_gb: There is a stop sign on the road.
       - ru: Он не понима́ет э́тих зна́ков.
         en_gb: He doesn't understand these signs.
@@ -16934,7 +16933,7 @@ words:
       standard: total (a final result or sum)
     usage:
       - ru: Подведём ито́г встре́чи.
-        en_gb: Let us sum up the total of the meeting.
+        en_gb: Let us sum up the meeting.
       - ru: В ито́ге мы реши́ли оста́ться.
         en_gb: In the end we decided to stay.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -16967,7 +16966,7 @@ words:
       - ru: В лесу́ мы встре́тили ди́кого кабана́.
         en_gb: In the forest we met a wild boar.
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-animate }
-      - ru: Кабаны́ ры́ли зе́млю в поис́ках корне́й.
+      - ru: Кабаны́ ры́ли зе́млю в по́исках корне́й.
         en_gb: The boars dug the ground looking for roots.
     declension:
       sg_nom: каба́н
@@ -16998,7 +16997,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ка́бель лежи́т под по́лом.
         en_gb: The cable lies under the floor.
-      - ru: Под земле́й прово́дят но́вые ка́бели.
+      - ru: Под землёй прово́дят но́вые ка́бели.
         en_gb: New cables are being laid underground.
     declension:
       sg_nom: ка́бель
@@ -17145,7 +17144,7 @@ words:
       standard: frame (a single image on film; a member of staff)
     usage:
       - ru: Фотогра́ф сде́лал кра́сивый кадр.
-        en_gb: The photographer took a beautiful frame.
+        en_gb: The photographer captured a beautiful frame.
       - ru: В э́том ка́дре сли́шком темно́.
         en_gb: It is too dark in this frame.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
@@ -17225,7 +17224,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он бро́сил ка́мень в во́ду.
         en_gb: He threw a stone into the water.
-      - ru: На бе́регу мно́го гла́дких камне́й.
+      - ru: На берегу́ мно́го гла́дких камне́й.
         en_gb: There are many smooth stones on the shore.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
@@ -18396,7 +18395,7 @@ words:
       alt:
         - paintbrush
     usage:
-      - ru: Худо́жник взял ки́сть и кра́ски.
+      - ru: Худо́жник взял кисть и кра́ски.
         en_gb: The artist took a brush and paints.
       - ru: Помо́й ки́сти по́сле рабо́ты.
         en_gb: Wash the brushes after work.
