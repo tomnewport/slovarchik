@@ -9678,8 +9678,8 @@ words:
       alt:
         - breast
     usage:
-      - ru: Он глубоко́ вдохну́л гру́дью.
-        en_gb: He took a deep breath with his chest.
+      - ru: Он вдохну́л по́лной гру́дью.
+        en_gb: He took a deep breath.
         inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: У него́ боли́т в груди́.
         en_gb: He has a pain in his chest.
@@ -9795,7 +9795,7 @@ words:
         en_gb: A group of tourists is touring the city.
       - ru: Учени́ки раздели́лись на две гру́ппы.
         en_gb: The pupils divided into two groups.
-        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он игра́ет в музыка́льной гру́ппе.
         en_gb: He plays in a musical group.
   "грусть=sadness":
@@ -9871,7 +9871,7 @@ words:
     usage:
       - ru: По́сле дождя́ на доро́ге бы́ло мно́го гря́зи.
         en_gb: After the rain there was a lot of mud on the road.
-      - ru: Он вошёл в дом и принёс гря́зь с у́лицы.
+      - ru: Он вошёл в дом и принёс грязь с у́лицы.
         en_gb: He came into the house and brought dirt from the street.
       - ru: Маши́на застря́ла в грязи́.
         en_gb: The car got stuck in the mud.
@@ -11266,7 +11266,7 @@ words:
       - ru: Учителя́ говори́ли с дире́ктором.
         en_gb: The teachers spoke with the director.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: На собра́нии бы́ли все дире́кторы.
+      - ru: На собра́нии бы́ли все директора́.
         en_gb: All the directors were at the meeting.
     declension:
       sg_nom: дире́ктор
@@ -11275,7 +11275,7 @@ words:
       sg_acc: дире́ктора
       sg_ins: дире́ктором
       sg_pre: дире́кторе
-      pl_nom: дире́кторы
+      pl_nom: директора́
       pl_gen: дире́кторов
       pl_dat: дире́кторам
       pl_acc: дире́кторов
@@ -11473,10 +11473,16 @@ words:
       sg_acc: доказа́тельство
       sg_ins: доказа́тельством
       sg_pre: доказа́тельстве
+      pl_nom: доказа́тельства
+      pl_gen: доказа́тельств
+      pl_dat: доказа́тельствам
+      pl_acc: доказа́тельства
+      pl_ins: доказа́тельствами
+      pl_pre: доказа́тельствах
     usage:
-      - ru: У поли́ции нет доказа́тельства.
+      - ru: У поли́ции нет доказа́тельств.
         en_gb: The police have no proof.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Учёный предста́вил ва́жное доказа́тельство.
         en_gb: The scientist presented important proof.
       - ru: Суд потре́бовал серьёзных доказа́тельств.
@@ -11596,7 +11602,7 @@ words:
     usage:
       - ru: Он верну́л все свои́ долги́.
         en_gb: He paid back all his debts.
-      - ru: Он взя́л де́ньги в долг.
+      - ru: Он взял де́ньги в долг.
         en_gb: He took the money as a loan.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Защища́ть Ро́дину — его́ долг.
@@ -11788,9 +11794,8 @@ words:
     en_gb:
       standard: Don (a large river in southern Russia)
     usage:
-      - ru: Каза́ки живу́т на До́не.
+      - ru: Каза́ки живу́т на Дону́.
         en_gb: The Cossacks live on the Don.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дон впада́ет в Азо́вское мо́ре.
         en_gb: The Don flows into the Sea of Azov.
     declension:
@@ -11800,6 +11805,7 @@ words:
       sg_acc: Дон
       sg_ins: До́ном
       sg_pre: До́не
+      sg_loc: Дону́
   "допрос=interrogation":
     cefr_level: B2
     gender: m
@@ -12151,8 +12157,8 @@ words:
       - ru: Он получи́л синя́к в дра́ке.
         en_gb: He got a bruise in the fight.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Учи́тель разня́л мальчи́шеские дра́ки.
-        en_gb: The teacher broke up the boys' fights.
+      - ru: Учи́тель разня́л дра́ку во дворе́.
+        en_gb: The teacher broke up the fight in the yard.
   "дрель=drill":
     cefr_level: B2
     gender: f
@@ -12439,7 +12445,7 @@ words:
     usage:
       - ru: Си́льный дух помога́ет в беде́.
         en_gb: A strong spirit helps in trouble.
-      - ru: Он па́л ду́хом по́сле неуда́чи.
+      - ru: Он пал ду́хом по́сле неуда́чи.
         en_gb: He lost spirit after the failure.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В ста́ром до́ме жи́ли злы́е ду́хи.
@@ -12564,7 +12570,7 @@ words:
         en_gb: After running his breathing went out of rhythm.
       - ru: Врач слу́шает её дыха́ние.
         en_gb: The doctor is listening to her breathing.
-      - ru: Он за́мер с зата́ённым дыха́нием.
+      - ru: Он за́мер с затаённым дыха́нием.
         en_gb: He froze with bated breath.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
   "дьявол=devil":
@@ -12787,7 +12793,7 @@ words:
         en_gb: A little hedgehog lives in the garden.
         en_alt:
           - There is a little hedgehog living in the garden.
-      - ru: У ежа́ о́строе иго́лки.
+      - ru: У ежа́ о́стрые иго́лки.
         en_gb: A hedgehog has sharp needles.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лесу́ мы ви́дели не́сколько ежо́в.
@@ -12963,8 +12969,8 @@ words:
         en_gb: Strong heat came from the stove.
       - ru: У ребёнка си́льный жар.
         en_gb: The child has a high fever.
-      - ru: Они́ рабо́тали в по́лном жа́ру.
-        en_gb: They worked in the full heat.
+      - ru: Он весь горе́л в жару́.
+        en_gb: He was burning up with fever.
   "желание=wish":
     cefr_level: A2
     gender: n
@@ -13381,8 +13387,8 @@ words:
       - ru: Он посвяти́л жизнь нау́ке.
         en_gb: He devoted his life to science.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: В дере́вне мно́го интере́сного в жи́зни.
-        en_gb: There is much interesting in life in the village.
+      - ru: В жи́зни мно́го интере́сного.
+        en_gb: There is much that is interesting in life.
     declension:
       sg_nom: жизнь
       sg_gen: жи́зни
@@ -13698,8 +13704,9 @@ words:
       - ru: Он бо́рется с зави́симостью.
         en_gb: He is fighting his dependence.
         inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
-      - ru: Э́то реше́ние зави́сит от мно́гого.
-        en_gb: This is dependence on many factors.
+      - ru: Мы попа́ли в зави́симость от техноло́гий.
+        en_gb: We have become dependent on technology.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Врачи́ говори́ли о зави́симости от табака́.
         en_gb: The doctors spoke about dependence on tobacco.
         inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
