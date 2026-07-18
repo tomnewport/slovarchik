@@ -94,6 +94,15 @@ describe('buildSelectSteps', () => {
     expect(numberStep.options.map((o) => o.id)).toEqual(['sg', 'pl'])
     expect(numberStep.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'sg' })])
   })
+  it('offers Locative as a seventh case option only for nouns that have one', () => {
+    const les = { key: 'лес=forest', pos: 'noun', headword: 'лес', forms: { sg: { nom: 'лес', loc: 'лесу́' } } }
+    const locTarget = { case: 'loc', number: 'sg', token: 2 }
+    const [caseStep] = buildSelectSteps(locTarget, les)
+    expect(caseStep.options.map((o) => o.id)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre', 'loc'])
+    expect(caseStep.options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'loc' })])
+    // A noun without a locative form still gets the plain six-case step.
+    expect(buildSelectSteps(accPhrase.target, sobaka)[0].options).toHaveLength(6)
+  })
   it('returns no selection steps for a verb without an aspect partner', () => {
     expect(buildSelectSteps(verbPhrase.target, dumat)).toEqual([])
   })

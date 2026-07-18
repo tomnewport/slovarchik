@@ -15,7 +15,7 @@
 
 import { normalize } from './text.js'
 import { sample, shuffle } from './quiz.js'
-import { CASES, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
+import { CASES, LOCATIVE, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
 
 /** Parts of speech that carry a context drill. */
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
@@ -119,12 +119,18 @@ function slotLabelFor(target) {
 /** Genders an adjective/possessive can agree with (gender already encodes number). */
 const GENDERS = ['m', 'n', 'f', 'pl']
 
-/** Selection step: pick the case (six options + hints). */
-function caseStep(target) {
+/**
+ * Selection step: pick the case. The six core cases are always offered; the
+ * second locative (в лесу́, на берегу́) is added as a seventh option only for
+ * nouns that actually have one — mirroring how genderStep offers only the
+ * genders a word declines for, so the option set reflects the real paradigm.
+ */
+function caseStep(target, word) {
+  const cases = word?.forms?.sg?.loc ? [...CASES, LOCATIVE] : CASES
   return {
     kind: 'case',
     prompt: 'Which case does the highlighted word need?',
-    options: CASES.map((c) => ({
+    options: cases.map((c) => ({
       id: c,
       label: CASE_LABELS[c],
       hint: CASE_HINTS[c],
@@ -214,9 +220,9 @@ export function buildSelectSteps(target, word) {
   if (!target?.case) {
     return target?.person && word?.aspectPair ? [aspectStep(word)] : []
   }
-  if (target.gender) return [caseStep(target), genderStep(target, word)]
-  if (word?.pos === 'noun') return [caseStep(target), numberStep(target)]
-  return [caseStep(target)]
+  if (target.gender) return [caseStep(target, word), genderStep(target, word)]
+  if (word?.pos === 'noun') return [caseStep(target, word), numberStep(target)]
+  return [caseStep(target, word)]
 }
 
 /**
