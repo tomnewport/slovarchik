@@ -23572,7 +23572,7 @@ words:
         inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Э́то бы́ло о́чень жа́ркое ле́то.
         en_gb: It was a very hot summer.
-      - ru: Я жду ле́то с нетерпе́нием.
+      - ru: Я жду ле́та с нетерпе́нием.
         en_gb: I am eagerly awaiting summer.
     declension:
       sg_nom: ле́то
@@ -24274,9 +24274,9 @@ words:
         en_gb: A horse grazes in the field.
       - ru: Де́вочка корми́т ло́шадь.
         en_gb: The girl is feeding the horse.
-      - ru: Он подъе́хал на лошадя́х к до́му.
-        en_gb: He rode up to the house on horses.
-        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Они́ подъе́хали к до́му на лошадя́х.
+        en_gb: They rode up to the house on horses.
+        inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: ло́шадь
       sg_gen: ло́шади
@@ -25262,7 +25262,7 @@ words:
     usage:
       - ru: У нас но́вая маши́на.
         en_gb: We have a new car.
-      - ru: Маши́ну надо́ помы́ть.
+      - ru: Маши́ну на́до помы́ть.
         en_gb: The car needs to be washed.
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы прие́хали на маши́не.
@@ -25471,7 +25471,7 @@ words:
     en_gb:
       standard: manager (a person in charge of work or staff)
     usage:
-      - ru: Ме́неджер отве́тил на всё вопро́сы.
+      - ru: Ме́неджер отве́тил на все вопро́сы.
         en_gb: The manager answered all the questions.
       - ru: Она́ рабо́тает ме́неджером в ба́нке.
         en_gb: She works as a manager at a bank.
@@ -26513,8 +26513,8 @@ words:
       sg_ins: мно́жеством
       sg_pre: мно́жестве
     usage:
-      - ru: В кни́ге мно́жество интере́сных приме́ров.
-        en_gb: In the book there is a multitude of interesting examples.
+      - ru: Кни́га соде́ржит мно́жество интере́сных приме́ров.
+        en_gb: The book contains a multitude of interesting examples.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он реши́л зада́чу мно́жеством спо́собов.
         en_gb: He solved the problem in a multitude of ways.
@@ -26823,10 +26823,10 @@ words:
       - ru: Я люблю́ ко́фе с молоко́м.
         en_gb: I like coffee with milk.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Я пью́ ко́фе с молоко́м.
+      - ru: Я пью ко́фе с молоко́м.
         en_gb: I drink coffee with milk.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Молоко́ ско́ро ско́нчится.
+      - ru: Молоко́ ско́ро зако́нчится.
         en_gb: The milk will soon run out.
         en_alt:
           - Milk will soon run out.
