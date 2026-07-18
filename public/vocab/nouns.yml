@@ -28558,7 +28558,7 @@ words:
       - ru: Власть забо́тится о населе́нии.
         en_gb: The authorities care for the population.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Ме́стному населе́нию помогли́ во́лонтёры.
+      - ru: Ме́стному населе́нию помогли́ волонтёры.
         en_gb: Volunteers helped the local population.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
   "наследник=heir":
@@ -28631,8 +28631,9 @@ words:
     en_gb:
       standard: mood (the way you feel)
     usage:
-      - ru: Я измени́л настро́йки телефо́на.
-        en_gb: I changed the phone's settings.
+      - ru: Всё зави́сит от настрое́ния.
+        en_gb: Everything depends on the mood.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У меня́ сего́дня хоро́шее настрое́ние.
         en_gb: I am in a good mood today.
       - ru: Он был в плохо́м настрое́нии.
@@ -28898,8 +28899,8 @@ words:
       - ru: На не́бе нет ни о́блачка.
         en_gb: There is not a single cloud in the sky.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Пти́цы лета́ют высоко́ в не́бо.
-        en_gb: Birds fly high into the sky.
+      - ru: Пти́ца взлете́ла высоко́ в не́бо.
+        en_gb: A bird flew up high into the sky.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы любова́лись звёздным не́бом.
         en_gb: We admired the starry sky.
@@ -29555,12 +29556,12 @@ words:
     usage:
       - ru: На моро́зе нос красне́ет.
         en_gb: In the frost the nose turns red.
-        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он разби́л себе́ нос.
         en_gb: He bashed his nose.
-      - ru: У соба́ки хоро́шее чутьё в но́се.
-        en_gb: A dog has a keen sense in its nose.
-        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он косну́лся ко́нчика но́са.
+        en_gb: He touched the tip of his nose.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: нос
       sg_gen: но́са
@@ -30482,7 +30483,7 @@ words:
     en_gb:
       standard: oats (a grain used for porridge and horse feed)
     usage:
-      - ru: Ло́шади дали́ мешо́к овса́.
+      - ru: Ло́шади да́ли мешо́к овса́.
         en_gb: They gave the horse a sack of oats.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На по́ле рос овёс.
@@ -31096,7 +31097,7 @@ words:
     usage:
       - ru: Он не замеча́л опа́сности во́круг себя́.
         en_gb: He did not notice the danger around him.
-      - ru: Туристо́в предупреди́ли об опа́сностях в го́рах.
+      - ru: Тури́стов предупреди́ли об опа́сностях в го́рах.
         en_gb: The tourists were warned about the dangers in the mountains.
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Мы вме́сте встре́тили опа́сность.
