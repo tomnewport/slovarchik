@@ -45054,7 +45054,7 @@ words:
     en_gb:
       standard: sugar (a sweet substance for food and drink)
     usage:
-      - ru: Я пью́ чай без са́хара.
+      - ru: Я пью чай без са́хара.
         en_gb: I drink tea without sugar.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Положи́ ло́жку са́хара в чай.
@@ -45369,9 +45369,9 @@ words:
         en_gb: A big pig lives on the farm.
       - ru: Фе́рмер ко́рмит свине́й.
         en_gb: The farmer feeds the pigs.
-      - ru: Гря́зи бы́ло как у свиньи́.
-        en_gb: There was as much dirt as on a pig.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Ребёнок испуга́лся большо́й свиньи́.
+        en_gb: The child got frightened of the big pig.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
   "свитер=jumper":
     cefr_level: A2
     gender: m
@@ -45994,7 +45994,7 @@ words:
     usage:
       - ru: Нарису́й табли́цу в ви́де се́тки.
         en_gb: Draw the table as a grid.
-        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мяч попа́л в се́тку.
         en_gb: The ball hit the net.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
