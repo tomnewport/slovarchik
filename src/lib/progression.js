@@ -201,6 +201,32 @@ export function minExercisesToLevel(events, level, word = {}) {
   )
 }
 
+/**
+ * Each learning dimension's remaining *criteria gap*, summed across a set of
+ * word records: for every applicable, still-unmet dimension of a word, its
+ * {@link minCorrectToMeet} (the best-case count of correct answers it still
+ * owes there). Met dimensions contribute nothing, so they are absent from the
+ * result. This is the raw material for gap-proportional session weighting —
+ * a dimension blocking twenty words outweighs one blocking a single word —
+ * which stops the slow, one-word-per-exercise dimensions (speaking, spelling)
+ * from perpetually trailing the blanket ones (a matching or listening board
+ * clears ~ten words at once).
+ *
+ * @param {Array<{events: Array, word?: object}>} records
+ * @param {'learning'|'mastery'} level
+ * @returns {Record<string, number>} dimension → remaining correct answers (>0)
+ */
+export function levelGapByDimension(records, level) {
+  const gap = {}
+  for (const { events, word = {} } of records ?? []) {
+    for (const d of applicableDimensions(level, word)) {
+      const need = minCorrectToMeet(attemptsFor(events, level, d), CRITERIA[level]?.[d])
+      if (need > 0) gap[d] = (gap[d] ?? 0) + need
+    }
+  }
+  return gap
+}
+
 /** Parts of speech that carry the phrase-completion (context) drill. */
 const CONTEXT_DRILL_POS = new Set(['noun', 'verb', 'adjective'])
 

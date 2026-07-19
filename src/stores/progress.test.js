@@ -435,6 +435,33 @@ describe('sessions', () => {
     expect(speakingFraction).toBeGreaterThan(0.5)
   })
 
+  it('weights a deep gap above a shallow one (proportional, not flat)', async () => {
+    // Ten current-batch words, all fresh on speaking (owe 3 each) but only one
+    // still owing identification. A flat "unmet → 2" boost would weight the two
+    // dimensions equally; the gap-proportional boost must favour speaking, which
+    // is blocking far more of the batch.
+    setVocab(makeWords(20, { hasInflections: false }))
+    const batchWords = Array.from({ length: 10 }, (_, i) => `w${i}`)
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: batchWords, size: 10 })
+    for (const w of batchWords) {
+      // Fully meet identification, usage, hearing for every word...
+      for (const d of ['identification', 'usage', 'hearing']) {
+        for (let i = 0; i < 3; i++) {
+          await recordAttempt({ word: w, dimension: d, level: 'learning', correct: true })
+        }
+      }
+    }
+    // ...but knock w0's identification back below threshold so exactly one word
+    // still owes identification, while all ten still owe speaking (0 attempts).
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false })
+    await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false })
+    const practices = Array.from({ length: 8 }, (_, i) =>
+      startSession({ type: 'standard', size: 'super' }, seededRng(i + 300)).practices,
+    ).flat()
+    const count = (dim) => practices.filter((p) => p.dimension === dim).length
+    expect(count('speaking')).toBeGreaterThan(count('identification'))
+  })
+
   it('counts identification events for encounterCount', async () => {
     setVocab(makeWords(2, { hasInflections: false }))
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: true })

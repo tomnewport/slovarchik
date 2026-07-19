@@ -26,6 +26,7 @@ import {
   levelMet,
   lastAttemptAt,
   minExercisesToLevel,
+  levelGapByDimension,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
 import { reviewSchedule, wordOverdueness, confirmationOutcome } from '../lib/schedule.js'
@@ -60,6 +61,13 @@ const MAX_EVENTS_PER_DIM = 10
 // How many of each word's most recent attempts feed the dimension-weakness
 // weighting (applied per word, then aggregated across all words).
 const WEAKNESS_WINDOW = 40
+/**
+ * Scale from a dimension's remaining criteria gap (correct answers still owed
+ * by the current pool) to its session-selection weight. At a gap of one this
+ * reproduces the historical flat boost of 2; larger gaps scale linearly above
+ * it, so practice concentrates on whichever dimension is furthest from done.
+ */
+const GAP_WEIGHT = 2
 // How many freshly-learned words `recentlyLearned` surfaces.
 const RECENT_LIMIT = 12
 
@@ -733,17 +741,24 @@ export function startSession({ type = 'standard', size, focusKeys = null, now = 
   const learningWeakness = dimensionWeakness()
   const masteryWeakness = dimensionWeakness()
   // Boost dimensions still unmet for current-pool words so sessions stay
-  // targeted at what's blocking batch completion, not just the global
-  // accuracy average (which masks remaining gaps when most words are learned).
-  for (const key of currentPool()) {
-    const evs = events(key)
-    // applicableDimensions (not dimensionsForLevel) so a word whose speaking is
-    // waived doesn't keep boosting speaking weight it can no longer satisfy.
-    for (const d of applicableDimensions('learning', wordRecord(key))) {
-      if (!dimensionProgress(evs, 'learning', d).met) {
-        learningWeakness[d] = Math.max(learningWeakness[d], 2)
-      }
-    }
+  // targeted at what's blocking batch completion, not just the global accuracy
+  // average (which masks remaining gaps when most words are learned). The boost
+  // is *proportional* to each dimension's remaining criteria gap — the best-case
+  // count of correct answers the current pool still owes there — so a dimension
+  // blocking twenty words is weighted far above one blocking a single word. A
+  // flat boost (its predecessor) treated those alike, which let slow,
+  // one-word-per-exercise dimensions (speaking, spelling) trail the blanket ones
+  // (a matching or listening board clears ~ten words at once) indefinitely:
+  // every dimension read as merely "unmet" and split the budget evenly, so the
+  // furthest-behind never got the extra practice it needed to catch up. Now
+  // whichever dimension is furthest from done keeps the largest gap and so the
+  // most practice, until it catches up and the weighting rebalances itself.
+  const learningGap = levelGapByDimension(
+    currentPool().map((key) => ({ events: events(key), word: wordRecord(key) })),
+    'learning',
+  )
+  for (const [d, need] of Object.entries(learningGap)) {
+    learningWeakness[d] = Math.max(learningWeakness[d], need * GAP_WEIGHT)
   }
   // Likewise boost dimensions still unmet at the *mastery* level for the words
   // currently being mastered. Without this, a near-complete mastery batch can
