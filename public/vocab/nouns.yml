@@ -703,31 +703,6 @@ words:
       pl_acc: альбо́мы
       pl_ins: альбо́мами
       pl_pre: альбо́мах
-  "америка=America":
-    cefr_level: A1
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: America (the United States of America)
-    declension:
-      sg_nom: Аме́рика
-      sg_gen: Аме́рики
-      sg_dat: Аме́рике
-      sg_acc: Аме́рику
-      sg_ins: Аме́рикой
-      sg_pre: Аме́рике
-    usage:
-      - ru: Аме́рика нахо́дится за океа́ном.
-        en_gb: America lies across the ocean.
-      - ru: Он давно́ мечта́л об Аме́рике.
-        en_gb: He had long dreamed of America.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Мы лети́м в Аме́рику ле́том.
-        en_gb: We are flying to America in the summer.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "Америка=America":
     cefr_level: A1
     gender: f
@@ -754,6 +729,8 @@ words:
       - ru: Он мно́го расска́зывал про Аме́рику.
         en_gb: He told us a lot about America.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Аме́рика нахо́дится за океа́ном.
+        en_gb: America lies across the ocean.
   "американец=American":
     cefr_level: A2
     gender: m
@@ -909,34 +886,6 @@ words:
       pl_acc: англича́н
       pl_ins: англича́нами
       pl_pre: англича́нах
-  "англия=England":
-    cefr_level: A2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: England (a country in the United Kingdom)
-    declension:
-      sg_nom: А́нглия
-      sg_gen: А́нглии
-      sg_dat: А́нглии
-      sg_acc: А́нглию
-      sg_ins: А́нглией
-      sg_pre: А́нглии
-    usage:
-      - ru: А́нглия сла́вится дождли́вой пого́дой.
-        en_gb: England is famous for its rainy weather.
-      - ru: Мы е́дем в А́нглию на ме́сяц.
-        en_gb: We are going to England for a month.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он верну́лся из А́нглии вчера́.
-        en_gb: He returned from England yesterday.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Я из А́нглии, а вы отку́да?
-        en_gb: I am from England — and where are you from?
-        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
   "Англия=England":
     cefr_level: A2
     gender: f
@@ -957,11 +906,17 @@ words:
       - ru: В А́нглии мно́го ста́рых за́мков.
         en_gb: There are many old castles in England.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Она́ изуча́ет исто́рию А́нглии.
-        en_gb: She studies the history of England.
       - ru: Письмо́ пришло́ из А́нглии.
         en_gb: The letter came from England.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: А́нглия сла́вится дождли́вой пого́дой.
+        en_gb: England is famous for its rainy weather.
+      - ru: Мы е́дем в А́нглию на ме́сяц.
+        en_gb: We are going to England for a month.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я из А́нглии, а вы отку́да?
+        en_gb: I am from England — and where are you from?
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
   "антенна=aerial":
     cefr_level: B2
     gender: f
@@ -1673,29 +1628,6 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учёные постро́или две ба́зы в Аркти́ке.
         en_gb: Scientists built two bases in the Arctic.
-  "байкал=Baikal":
-    cefr_level: B1
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-      - places
-    en_gb:
-      standard: Baikal (the deepest lake in the world, in Siberia)
-    usage:
-      - ru: Байка́л — са́мое глубо́кое о́зеро в ми́ре.
-        en_gb: Baikal is the deepest lake in the world.
-      - ru: Вода́ в Байка́ле о́чень чи́стая.
-        en_gb: The water in Baikal is very clean.
-        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
-    declension:
-      sg_nom: Байка́л
-      sg_gen: Байка́ла
-      sg_dat: Байка́лу
-      sg_acc: Байка́л
-      sg_ins: Байка́лом
-      sg_pre: Байка́ле
   "Байкал=Lake Baikal":
     cefr_level: B1
     gender: m
@@ -1711,6 +1643,9 @@ words:
       - ru: Ле́том мы пое́дем на Байка́л.
         en_gb: In summer we will go to Baikal.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Вода́ в Байка́ле о́чень чи́стая.
+        en_gb: The water in Baikal is very clean.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: Байка́л
       sg_gen: Байка́ла
@@ -6628,31 +6563,6 @@ words:
       pl_acc: вокза́лы
       pl_ins: вокза́лами
       pl_pre: вокза́лах
-  "волга=Volga":
-    cefr_level: B1
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Volga (the longest river in Europe, flowing through Russia)
-    declension:
-      sg_nom: Во́лга
-      sg_gen: Во́лги
-      sg_dat: Во́лге
-      sg_acc: Во́лгу
-      sg_ins: Во́лгой
-      sg_pre: Во́лге
-    usage:
-      - ru: Го́род стои́т на берегу́ Во́лги.
-        en_gb: The city stands on the bank of the Volga.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Ле́том мы купа́лись в Во́лге.
-        en_gb: In summer we swam in the Volga.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: По Во́лге плыву́т больши́е суда́.
-        en_gb: Large ships sail along the Volga.
   "Волга=Volga":
     cefr_level: B1
     gender: f
@@ -6678,6 +6588,12 @@ words:
       - ru: Мы прие́хали к Во́лге на зака́те.
         en_gb: We came to the Volga at sunset.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Го́род стои́т на берегу́ Во́лги.
+        en_gb: The city stands on the bank of the Volga.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Ле́том мы купа́лись в Во́лге.
+        en_gb: In summer we swam in the Volga.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "волейбол=volleyball":
     cefr_level: A2
     gender: m
@@ -8143,31 +8059,6 @@ words:
       pl_acc: ге́ниев
       pl_ins: ге́ниями
       pl_pre: ге́ниях
-  "германия=Germany":
-    cefr_level: A2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Germany (a country in central Europe)
-    declension:
-      sg_nom: Герма́ния
-      sg_gen: Герма́нии
-      sg_dat: Герма́нии
-      sg_acc: Герма́нию
-      sg_ins: Герма́нией
-      sg_pre: Герма́нии
-    usage:
-      - ru: Мой брат живёт в Герма́нии.
-        en_gb: My brother lives in Germany.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Ле́том мы е́дем в Герма́нию.
-        en_gb: In summer we are going to Germany.
-        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Столи́ца Герма́нии — Берли́н.
-        en_gb: The capital of Germany is Berlin.
   "Германия=Germany":
     cefr_level: A2
     gender: f
@@ -8193,6 +8084,12 @@ words:
       - ru: Мы интересу́емся Герма́нией.
         en_gb: We are interested in Germany.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Мой брат живёт в Герма́нии.
+        en_gb: My brother lives in Germany.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Ле́том мы е́дем в Герма́нию.
+        en_gb: In summer we are going to Germany.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
   "герой=hero":
     cefr_level: A2
     gender: m
@@ -12705,32 +12602,6 @@ words:
       pl_acc: евре́ев
       pl_ins: евре́ями
       pl_pre: евре́ях
-  "европа=Europe":
-    cefr_level: A2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Europe (the continent west of Asia)
-    declension:
-      sg_nom: Евро́па
-      sg_gen: Евро́пы
-      sg_dat: Евро́пе
-      sg_acc: Евро́пу
-      sg_ins: Евро́пой
-      sg_pre: Евро́пе
-    usage:
-      - ru: Он мно́го путеше́ствовал по Евро́пе.
-        en_gb: He travelled a lot around Europe.
-        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
-      - ru: Столи́цы Евро́пы о́чень краси́вы.
-        en_gb: The capitals of Europe are very beautiful.
-        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Они́ перее́хали в Евро́пу.
-        en_gb: They moved to Europe.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "Европа=Europe":
     cefr_level: A2
     gender: f
@@ -12757,6 +12628,9 @@ words:
       - ru: Исто́рия Евро́пы о́чень бога́та.
         en_gb: The history of Europe is very rich.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он мно́го путеше́ствовал по Евро́пе.
+        en_gb: He travelled a lot around Europe.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
   "еда=food":
     cefr_level: A1
     gender: f
@@ -15820,32 +15694,6 @@ words:
       - ru: Худо́жник рабо́тает над изображе́нием.
         en_gb: The artist is working on the image.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
-  "израиль=Israel":
-    cefr_level: B1
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Israel (a country in the Middle East)
-    declension:
-      sg_nom: Изра́иль
-      sg_gen: Изра́иля
-      sg_dat: Изра́илю
-      sg_acc: Изра́иль
-      sg_ins: Изра́илем
-      sg_pre: Изра́иле
-    usage:
-      - ru: Мы лета́ли в Изра́иль.
-        en_gb: We flew to Israel.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он давно́ живёт в Изра́иле.
-        en_gb: He has lived in Israel for a long time.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Столи́ца Изра́иля — Иерусали́м.
-        en_gb: The capital of Israel is Jerusalem.
-        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
   "Израиль=Israel":
     cefr_level: B1
     gender: m
@@ -15871,6 +15719,9 @@ words:
       - ru: Друзья́ рассказа́ли об Изра́иле.
         en_gb: My friends told me about Israel.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы лета́ли в Изра́иль.
+        en_gb: We flew to Israel.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "икона=icon":
     cefr_level: B2
     gender: f
@@ -16819,31 +16670,6 @@ words:
       - ru: В реке́ мно́го исто́чников воды́.
         en_gb: There are many sources of water in the river.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
-  "италия=Italy":
-    cefr_level: A2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Italy (a country in southern Europe)
-    declension:
-      sg_nom: Ита́лия
-      sg_gen: Ита́лии
-      sg_dat: Ита́лии
-      sg_acc: Ита́лию
-      sg_ins: Ита́лией
-      sg_pre: Ита́лии
-    usage:
-      - ru: Ита́лия знамени́та свое́й ку́хней.
-        en_gb: Italy is famous for its cuisine.
-      - ru: Ле́том мы пое́дем в Ита́лию.
-        en_gb: In summer we will go to Italy.
-        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Она́ мно́го рассказа́ла об Ита́лии.
-        en_gb: She told us a lot about Italy.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "Италия=Italy":
     cefr_level: A2
     gender: f
@@ -16867,9 +16693,11 @@ words:
       - ru: В Ита́лии о́чень тепло́.
         en_gb: It is very warm in Italy.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Мы давно́ мечта́ли об Ита́лии.
-        en_gb: We had long dreamed of Italy.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Ита́лия знамени́та свое́й ку́хней.
+        en_gb: Italy is famous for its cuisine.
+      - ru: Ле́том мы пое́дем в Ита́лию.
+        en_gb: In summer we will go to Italy.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
   "итальянец=Italian":
     cefr_level: A2
     gender: m
@@ -18482,32 +18310,6 @@ words:
       pl_acc: кита́йцев
       pl_ins: кита́йцами
       pl_pre: кита́йцах
-  "китай=China":
-    cefr_level: A2
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: China (a country in East Asia)
-    declension:
-      sg_nom: Кита́й
-      sg_gen: Кита́я
-      sg_dat: Кита́ю
-      sg_acc: Кита́й
-      sg_ins: Кита́ем
-      sg_pre: Кита́е
-    usage:
-      - ru: Мно́гие това́ры сде́ланы в Кита́е.
-        en_gb: Many goods are made in China.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Он е́дет в Кита́й по рабо́те.
-        en_gb: He is going to China for work.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Исто́рия Кита́я о́чень дре́вняя.
-        en_gb: The history of China is very ancient.
-        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
   "Китай=China":
     cefr_level: A2
     gender: m
@@ -18533,6 +18335,9 @@ words:
       - ru: Учи́тель рассказа́л нам о Кита́е.
         en_gb: The teacher told us about China.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он е́дет в Кита́й по рабо́те.
+        en_gb: He is going to China for work.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "клавиатура=keyboard":
     cefr_level: B1
     gender: f
@@ -20657,32 +20462,6 @@ words:
       pl_acc: ко́рни
       pl_ins: корня́ми
       pl_pre: корня́х
-  "корея=Korea":
-    cefr_level: B1
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Korea (a region in East Asia, divided into North and South Korea)
-    declension:
-      sg_nom: Коре́я
-      sg_gen: Коре́и
-      sg_dat: Коре́е
-      sg_acc: Коре́ю
-      sg_ins: Коре́ей
-      sg_pre: Коре́е
-    usage:
-      - ru: Он е́дет в Коре́ю на рабо́ту.
-        en_gb: He is going to Korea for work.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Столи́ца Коре́и о́чень больша́я.
-        en_gb: The capital of Korea is very large.
-        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Они́ живу́т в Коре́е.
-        en_gb: They live in Korea.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
   "Корея=Korea":
     cefr_level: B1
     gender: f
@@ -20706,9 +20485,9 @@ words:
       - ru: О Коре́е написа́ли в газе́те.
         en_gb: They wrote about Korea in the newspaper.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Он давно́ мечта́л о Коре́е.
-        en_gb: He had long dreamed of Korea.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Столи́ца Коре́и о́чень больша́я.
+        en_gb: The capital of Korea is very large.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
   "корзина=basket":
     cefr_level: A2
     gender: f
@@ -23375,33 +23154,6 @@ words:
       pl_acc: ле́кции
       pl_ins: ле́кциями
       pl_pre: ле́кциях
-  "ленинград=Leningrad":
-    cefr_level: B2
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-      - history
-    en_gb:
-      standard: Leningrad (the former name of Saint Petersburg)
-    declension:
-      sg_nom: Ленингра́д
-      sg_gen: Ленингра́да
-      sg_dat: Ленингра́ду
-      sg_acc: Ленингра́д
-      sg_ins: Ленингра́дом
-      sg_pre: Ленингра́де
-    usage:
-      - ru: Мой дед роди́лся в Ленингра́де.
-        en_gb: My grandfather was born in Leningrad.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: По́езд идёт до Ленингра́да.
-        en_gb: The train goes to Leningrad.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Они́ перее́хали в Ленингра́д.
-        en_gb: They moved to Leningrad.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "Ленинград=Leningrad":
     cefr_level: B1
     gender: m
@@ -23428,6 +23180,12 @@ words:
       - ru: Над Ленингра́дом плы́ли облака́.
         en_gb: Clouds drifted over Leningrad.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: По́езд идёт до Ленингра́да.
+        en_gb: The train goes to Leningrad.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Они́ перее́хали в Ленингра́д.
+        en_gb: They moved to Leningrad.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "лента=ribbon":
     cefr_level: B1
     gender: f
@@ -27255,32 +27013,6 @@ words:
       pl_acc: моряко́в
       pl_ins: моряка́ми
       pl_pre: моряка́х
-  "москва=Moscow":
-    cefr_level: A1
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Moscow (the capital city of Russia)
-    declension:
-      sg_nom: Москва́
-      sg_gen: Москвы́
-      sg_dat: Москве́
-      sg_acc: Москву́
-      sg_ins: Москво́й
-      sg_pre: Москве́
-    usage:
-      - ru: Я давно́ мечта́ю уви́деть Москву́.
-        en_gb: I have long dreamed of seeing Moscow.
-        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он живёт в Москве́ де́сять лет.
-        en_gb: He has lived in Moscow for ten years.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: У́лицы Москвы́ всегда́ полны́ люде́й.
-        en_gb: The streets of Moscow are always full of people.
-        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
   "Москва=Moscow":
     cefr_level: A1
     gender: f
@@ -27307,6 +27039,12 @@ words:
       - ru: Мы подъезжа́ем к Москве́.
         en_gb: We are approaching Moscow.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он живёт в Москве́ де́сять лет.
+        en_gb: He has lived in Moscow for ten years.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: У́лицы Москвы́ всегда́ полны́ люде́й.
+        en_gb: The streets of Moscow are always full of people.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
   "москвич=Muscovite":
     cefr_level: B2
     gender: m
@@ -33355,32 +33093,6 @@ words:
       pl_acc: парне́й
       pl_ins: парня́ми
       pl_pre: парня́х
-  "париж=Paris":
-    cefr_level: A2
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Paris (the capital city of France)
-    declension:
-      sg_nom: Пари́ж
-      sg_gen: Пари́жа
-      sg_dat: Пари́жу
-      sg_acc: Пари́ж
-      sg_ins: Пари́жем
-      sg_pre: Пари́же
-    usage:
-      - ru: Мы е́дем в Пари́ж ле́том.
-        en_gb: We are going to Paris in the summer.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Она́ верну́лась из Пари́жа.
-        en_gb: She has returned from Paris.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: В Пари́же мно́го музе́ев.
-        en_gb: There are many museums in Paris.
-        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
   "Париж=Paris":
     cefr_level: A2
     gender: m
@@ -33406,6 +33118,12 @@ words:
       - ru: Он давно́ мечта́л о Пари́же.
         en_gb: He has long dreamed of Paris.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы е́дем в Пари́ж ле́том.
+        en_gb: We are going to Paris in the summer.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ верну́лась из Пари́жа.
+        en_gb: She has returned from Paris.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
   "парк=park":
     cefr_level: A1
     gender: m
@@ -34373,32 +34091,6 @@ words:
       sg_acc: песо́к
       sg_ins: песко́м
       sg_pre: песке́
-  "петербург=Petersburg":
-    cefr_level: A2
-    gender: m
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Petersburg (Saint Petersburg, Russia's second largest city)
-    declension:
-      sg_nom: Петербу́рг
-      sg_gen: Петербу́рга
-      sg_dat: Петербу́ргу
-      sg_acc: Петербу́рг
-      sg_ins: Петербу́ргом
-      sg_pre: Петербу́рге
-    usage:
-      - ru: Мы е́дем в Петербу́рг на по́езде.
-        en_gb: We are going to Petersburg by train.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он роди́лся в Петербу́рге.
-        en_gb: He was born in Petersburg.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Тури́сты лю́буются Петербу́ргом.
-        en_gb: The tourists are admiring Petersburg.
-        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
   "Петербург=Petersburg":
     cefr_level: A2
     gender: m
@@ -34418,12 +34110,21 @@ words:
     usage:
       - ru: Петербу́рг стои́т на Неве́.
         en_gb: Petersburg stands on the Neva.
+      - ru: Мы е́дем в Петербу́рг на по́езде.
+        en_gb: We are going to Petersburg by train.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ верну́лась из Петербу́рга.
         en_gb: She has returned from Petersburg.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы до́лго гото́вились к пое́здке по Петербу́ргу.
         en_gb: We long prepared for the trip around Petersburg.
         inflect: { token: 7, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Тури́сты лю́буются Петербу́ргом.
+        en_gb: The tourists are admiring Petersburg.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Он роди́лся в Петербу́рге.
+        en_gb: He was born in Petersburg.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
   "петух=rooster":
     cefr_level: B1
     gender: m
@@ -43859,31 +43560,6 @@ words:
       pl_acc: ро́мбы
       pl_ins: ро́мбами
       pl_pre: ро́мбах
-  "россия=Russia":
-    cefr_level: A1
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Russia (the largest country in the world)
-    declension:
-      sg_nom: Росси́я
-      sg_gen: Росси́и
-      sg_dat: Росси́и
-      sg_acc: Росси́ю
-      sg_ins: Росси́ей
-      sg_pre: Росси́и
-    usage:
-      - ru: Росси́я — огро́мная страна́.
-        en_gb: Russia is a huge country.
-      - ru: Он мно́го е́здил по Росси́и.
-        en_gb: He travelled a lot around Russia.
-        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
-      - ru: Тури́сты прие́хали в Росси́ю ле́том.
-        en_gb: The tourists came to Russia in summer.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "Россия=Russia":
     cefr_level: A1
     gender: f
@@ -43911,6 +43587,9 @@ words:
       - ru: Он живёт в Росси́и уже́ давно́.
         en_gb: He has lived in Russia for a long time already.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он мно́го е́здил по Росси́и.
+        en_gb: He travelled a lot around Russia.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
   "россиянин=Russian":
     cefr_level: B1
     gender: m
@@ -49196,36 +48875,6 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Нам да́ли коро́ткие сро́ки.
         en_gb: We were given short deadlines.
-  "ссср=USSR":
-    cefr_level: B1
-    gender: m
-    animacy: i
-    number: ["sg", "pl"]
-    collections:
-      - history
-      - geography
-    en_gb:
-      standard: the USSR (Soviet Union)
-    declension:
-      sg_nom: СССР
-      sg_gen: СССР
-      sg_dat: СССР
-      sg_acc: СССР
-      sg_ins: СССР
-      sg_pre: СССР
-      pl_nom: СССР
-      pl_gen: СССР
-      pl_dat: СССР
-      pl_acc: СССР
-      pl_ins: СССР
-      pl_pre: СССР
-    usage:
-      - ru: Мой де́душка роди́лся в СССР.
-        en_gb: My grandfather was born in the USSR.
-      - ru: СССР распа́лся в девяно́сто пе́рвом году́.
-        en_gb: The USSR collapsed in 1991.
-      - ru: В шко́ле мы изуча́ли исто́рию СССР.
-        en_gb: At school we studied the history of the USSR.
   "СССР=USSR":
     cefr_level: B1
     gender: m
@@ -49248,8 +48897,12 @@ words:
         en_gb: This film was made in the USSR.
       - ru: СССР был огро́мной страно́й.
         en_gb: The USSR was an enormous country.
-      - ru: Мно́гие лю́ди по́мнят жизнь в СССР.
-        en_gb: Many people remember life in the USSR.
+      - ru: Мой де́душка роди́лся в СССР.
+        en_gb: My grandfather was born in the USSR.
+      - ru: СССР распа́лся в девяно́сто пе́рвом году́.
+        en_gb: The USSR collapsed in 1991.
+      - ru: В шко́ле мы изуча́ли исто́рию СССР.
+        en_gb: At school we studied the history of the USSR.
   "стадион=stadium":
     cefr_level: B1
     gender: m
@@ -51407,37 +51060,6 @@ words:
       pl_acc: счета́
       pl_ins: счета́ми
       pl_pre: счета́х
-  "сша=USA":
-    cefr_level: A1
-    gender: n
-    animacy: i
-    number: ["sg", "pl"]
-    accented: "С.Ш.А."
-    collections:
-      - history
-      - geography
-    en_gb:
-      standard: the USA (United States of America)
-    declension:
-      sg_nom: США
-      sg_gen: США
-      sg_dat: США
-      sg_acc: США
-      sg_ins: США
-      sg_pre: США
-      pl_nom: США
-      pl_gen: США
-      pl_dat: США
-      pl_acc: США
-      pl_ins: США
-      pl_pre: США
-    usage:
-      - ru: Он роди́лся в США.
-        en_gb: He was born in the USA.
-      - ru: Делега́ция прие́хала из США.
-        en_gb: The delegation came from the USA.
-      - ru: США — больша́я страна́.
-        en_gb: The USA is a big country.
   "США=USA":
     cefr_level: A1
     gender: n
@@ -51462,6 +51084,10 @@ words:
         en_gb: The plane is flying to the USA.
       - ru: Президе́нт США вы́ступил с ре́чью.
         en_gb: The president of the USA gave a speech.
+      - ru: Делега́ция прие́хала из США.
+        en_gb: The delegation came from the USA.
+      - ru: США — больша́я страна́.
+        en_gb: The USA is a big country.
   "съезд=congress":
     cefr_level: B2
     gender: m
@@ -54394,31 +54020,6 @@ words:
       pl_acc: уко́лы
       pl_ins: уко́лами
       pl_pre: уко́лах
-  "украина=Ukraine":
-    cefr_level: A2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Ukraine (a country in eastern Europe)
-    declension:
-      sg_nom: Украи́на
-      sg_gen: Украи́ны
-      sg_dat: Украи́не
-      sg_acc: Украи́ну
-      sg_ins: Украи́ной
-      sg_pre: Украи́не
-    usage:
-      - ru: Украи́на нахо́дится в восто́чной Евро́пе.
-        en_gb: Ukraine is in eastern Europe.
-      - ru: Мы е́здили по Украи́не ле́том.
-        en_gb: We travelled around Ukraine in the summer.
-        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
-      - ru: Он мно́го расска́зывал об Украи́не.
-        en_gb: He told a lot about Ukraine.
-        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "Украина=Ukraine":
     cefr_level: A2
     gender: f
@@ -54436,15 +54037,23 @@ words:
       sg_ins: Украи́ной
       sg_pre: Украи́не
     usage:
+      - ru: Украи́на нахо́дится в восто́чной Евро́пе.
+        en_gb: Ukraine is in eastern Europe.
       - ru: Столи́ца Украи́ны — Ки́ев.
         en_gb: The capital of Ukraine is Kyiv.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Мы е́здили по Украи́не ле́том.
+        en_gb: We travelled around Ukraine in the summer.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Он верну́лся на Украи́ну.
         en_gb: He returned to Ukraine.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он горди́тся свое́й ро́дной Украи́ной.
         en_gb: He is proud of his native Ukraine.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Он мно́го расска́зывал об Украи́не.
+        en_gb: He told a lot about Ukraine.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "украинец=Ukrainian":
     cefr_level: A2
     gender: m
@@ -56250,31 +55859,6 @@ words:
       pl_acc: фра́зы
       pl_ins: фра́зами
       pl_pre: фра́зах
-  "франция=France":
-    cefr_level: A2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: France (a country in western Europe)
-    declension:
-      sg_nom: Фра́нция
-      sg_gen: Фра́нции
-      sg_dat: Фра́нции
-      sg_acc: Фра́нцию
-      sg_ins: Фра́нцией
-      sg_pre: Фра́нции
-    usage:
-      - ru: Фра́нция изве́стна свои́м сы́ром.
-        en_gb: France is famous for its cheese.
-      - ru: Мы прилете́ли во Фра́нцию весно́й.
-        en_gb: We flew to France in spring.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он мно́го лет жил во Фра́нции.
-        en_gb: He lived in France for many years.
-        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
   "Франция=France":
     cefr_level: A2
     gender: f
@@ -56292,14 +55876,20 @@ words:
       sg_ins: Фра́нцией
       sg_pre: Фра́нции
     usage:
-      - ru: Столи́ца Фра́нции — Пари́ж.
-        en_gb: The capital of France is Paris.
+      - ru: Фра́нция изве́стна свои́м сы́ром.
+        en_gb: France is famous for its cheese.
       - ru: Она́ верну́лась из Фра́нции.
         en_gb: She returned from France.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он восхища́ется Фра́нцией.
         en_gb: He admires France.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Мы прилете́ли во Фра́нцию весно́й.
+        en_gb: We flew to France in spring.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он мно́го лет жил во Фра́нции.
+        en_gb: He lived in France for many years.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
   "француз=Frenchman":
     cefr_level: A2
     gender: m
@@ -58197,32 +57787,6 @@ words:
       pl_acc: чече́нцев
       pl_ins: чече́нцами
       pl_pre: чече́нцах
-  "чечня=Chechnya":
-    cefr_level: B2
-    gender: f
-    animacy: i
-    number: ["sg"]
-    collections:
-      - geography
-    en_gb:
-      standard: Chechnya (a republic in the Russian Federation)
-    declension:
-      sg_nom: Чечня́
-      sg_gen: Чечни́
-      sg_dat: Чечне́
-      sg_acc: Чечню́
-      sg_ins: Чечнёй
-      sg_pre: Чечне́
-    usage:
-      - ru: Он роди́лся в Чечне́.
-        en_gb: He was born in Chechnya.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Они́ верну́лись из Чечни́.
-        en_gb: They returned from Chechnya.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Журнали́ст пое́хал в Чечню́.
-        en_gb: The journalist went to Chechnya.
-        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "Чечня=Chechnya":
     cefr_level: B2
     gender: f
@@ -58248,6 +57812,12 @@ words:
       - ru: Доро́га ведёт к Чечне́.
         en_gb: The road leads to Chechnya.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Они́ верну́лись из Чечни́.
+        en_gb: They returned from Chechnya.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Журнали́ст пое́хал в Чечню́.
+        en_gb: The journalist went to Chechnya.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "чиновник=official":
     cefr_level: B2
     gender: m

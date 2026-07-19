@@ -394,3 +394,22 @@ words:
     expect(ph[0].enAlt).toEqual(['This city is big.'])
   })
 })
+
+describe('the bundled vocabulary has no case-only duplicate keys', () => {
+  // Guards against the class of duplicate fixed in #365: the same proper noun
+  // stored twice under a lowercase and a capitalised key (Москва/москва), each
+  // with its own independent learning progress. Grading lowercases anyway, so
+  // two keys differing only by letter case are always the same word.
+  it('no two learnable keys differ only by letter case', () => {
+    const byLower = new Map()
+    for (const w of learnableWords(loadFixtureWords())) {
+      const lower = w.key.toLowerCase()
+      if (!byLower.has(lower)) byLower.set(lower, new Set())
+      byLower.get(lower).add(w.key)
+    }
+    const collisions = [...byLower.values()]
+      .filter((keys) => keys.size > 1)
+      .map((keys) => [...keys].join(' / '))
+    expect(collisions).toEqual([])
+  })
+})
