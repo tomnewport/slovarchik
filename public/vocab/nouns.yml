@@ -52431,7 +52431,7 @@ words:
       - ru: В до́ме мно́го совреме́нной те́хники.
         en_gb: There is a lot of modern technology in the house.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Магази́н продаёт быту́ю те́хнику.
+      - ru: Магази́н продаёт бытову́ю те́хнику.
         en_gb: The shop sells household appliances.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он хорошо́ разбира́ется в те́хнике.
@@ -52709,9 +52709,9 @@ words:
       sg_ins: то́лком
       sg_pre: то́лке
     usage:
-      - ru: От э́того спо́ра нет никако́го то́лку.
-        en_gb: There is no sense in this argument.
-        inflect: { token: 6, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он зна́ет толк в хоро́шем вине́.
+        en_gb: He is a real connoisseur of good wine.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Объясни́ всё то́лком.
         en_gb: Explain everything properly.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -54442,9 +54442,9 @@ words:
       - ru: Он верну́лся на Украи́ну.
         en_gb: He returned to Ukraine.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Они́ интересу́ются исто́рией Украи́ной.
-        en_gb: They are interested in the history connected with Ukraine.
-        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Он горди́тся свое́й ро́дной Украи́ной.
+        en_gb: He is proud of his native Ukraine.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
   "украинец=Ukrainian":
     cefr_level: A2
     gender: m
