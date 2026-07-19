@@ -11,6 +11,7 @@ import {
   dimensionAdvancesAt,
   minCorrectToMeet,
   minExercisesToLevel,
+  levelGapByDimension,
   dimensionProgress,
   levelMet,
   wordHasInflections,
@@ -213,6 +214,47 @@ describe('minExercisesToLevel', () => {
   })
   it('mastery drops the context exercise for words without a drill', () => {
     expect(minExercisesToLevel([], 'mastery', { hasContextDrill: false })).toBe(4)
+  })
+})
+
+describe('levelGapByDimension', () => {
+  it('is empty when every word is fully learned', () => {
+    const gap = levelGapByDimension([{ events: fullyLearned() }, { events: fullyLearned() }], 'learning')
+    expect(gap).toEqual({})
+  })
+
+  it('sums each dimension\'s remaining correct answers across words', () => {
+    // Two fresh words: each owes 3 to every learning dimension.
+    const gap = levelGapByDimension([{ events: [] }, { events: [] }], 'learning')
+    expect(gap).toEqual({ identification: 6, usage: 6, hearing: 6, speaking: 6 })
+  })
+
+  it('weights the furthest-behind dimension highest', () => {
+    // Three words fully learned except speaking, one word fresh. Speaking owes
+    // more than any other dimension, so it dominates the gap.
+    const nearlyDone = () => [
+      ...attempts('learning', 'identification', [false, true, true, true]),
+      ...attempts('learning', 'usage', [false, true, true, true]),
+      ...attempts('learning', 'hearing', [false, true, true, true]),
+      // no speaking attempts → still owes 3
+    ]
+    const gap = levelGapByDimension(
+      [{ events: nearlyDone() }, { events: nearlyDone() }, { events: nearlyDone() }, { events: [] }],
+      'learning',
+    )
+    expect(gap.speaking).toBe(3 * 3 + 3) // three nearly-done + one fresh
+    expect(gap.speaking).toBeGreaterThan(gap.identification)
+    expect(gap.speaking).toBeGreaterThan(gap.usage)
+    expect(gap.speaking).toBeGreaterThan(gap.hearing)
+  })
+
+  it('drops the context gap at mastery for a word without a phrase drill', () => {
+    const withDrill = levelGapByDimension([{ events: [], word: { hasContextDrill: true } }], 'mastery')
+    const noDrill = levelGapByDimension([{ events: [], word: { hasContextDrill: false } }], 'mastery')
+    expect(withDrill.context).toBe(2) // two spaced answers owed (#313)
+    expect(noDrill.context).toBeUndefined()
+    expect(noDrill.identification).toBe(2)
+    expect(noDrill.usage).toBe(2)
   })
 })
 
