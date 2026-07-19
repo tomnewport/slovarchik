@@ -178,6 +178,24 @@ rules:
       - "Nouns in -ий/-ие/-ия and feminine -ь take -и: ле́кция → о ле́кции."
       - "Some masculine nouns take a stressed -у́ after в/на: в лесу́, в саду́."
 
+  noun-locative:
+    exception: true
+    title: "Locative (second prepositional)"
+    formula: "special в/на form · m → stressed -у́ · f -ь → stressed -и́"
+    explanation: >
+      A group of common nouns has a special "second prepositional" — the
+      LOCATIVE — used only after в or на to say WHERE something is: в лесу́ (in
+      the forest), на берегу́ (on the shore), в углу́ (in the corner), на полу́
+      (on the floor), в аэропорту́, во рту́. It is spelled like the dative for
+      masculine nouns and like the genitive/dative for feminine -ь nouns, but is
+      always stressed on the ending — that end stress is what tells it apart
+      from the ordinary prepositional (в лесу́, not в ле́се). Only these nouns
+      have it, only in the singular, and only when в/на means location.
+    exceptions:
+      - "Motion INTO still takes the accusative: в лес (into the forest) vs в лесу́ (in the forest)."
+      - "The topic sense keeps the ordinary prepositional: ду́мать о ле́се (about the forest)."
+      - "Most nouns have no locative and just use the prepositional -е."
+
   noun-pre-pl:
     title: "Prepositional plural"
     formula: "→ -ах / -ях"

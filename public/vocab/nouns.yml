@@ -255,6 +255,7 @@ words:
     usage:
       - ru: В а́ду гре́шников ждёт ого́нь.
         en_gb: In hell, fire awaits the sinners.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
       - ru: Гре́шники боя́тся а́да.
         en_gb: Sinners fear hell.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
@@ -343,6 +344,9 @@ words:
     en_gb:
       standard: address (where someone lives or works)
     usage:
+      - ru: В а́дресе есть оши́бка.
+        en_gb: There is a mistake in the address.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Да́йте мне ваш а́дрес.
         en_gb: Give me your address.
       - ru: Я записа́л его́ а́дрес в блокно́т.
@@ -373,7 +377,7 @@ words:
     en_gb:
       standard: Asia (the largest continent)
     usage:
-      - ru: А́зия — са́мая бо́льшая часть све́та.
+      - ru: А́зия — са́мая больша́я часть све́та.
         en_gb: Asia is the largest part of the world.
       - ru: Мно́гие стра́ны А́зии о́чень дре́вние.
         en_gb: Many countries of Asia are very ancient.
@@ -430,7 +434,7 @@ words:
         en_gb: The academician spoke at the conference.
       - ru: Я чита́л статью́ изве́стного академи́ка.
         en_gb: I read an article by a famous academician.
-      - ru: Премию́ вручи́ли двум академи́кам.
+      - ru: Пре́мию вручи́ли двум академи́кам.
         en_gb: The prize was awarded to two academicians.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
     declension:
@@ -1192,7 +1196,7 @@ words:
       - ru: Дом постро́ен изве́стным архите́ктором.
         en_gb: The house was built by a famous architect.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Архите́ктор нарисова́л прое́кт дома́.
+      - ru: Архите́ктор нарисова́л прое́кт до́ма.
         en_gb: The architect drew the design of the house.
       - ru: Знамени́тый архите́ктор постро́ил э́тот мост.
         en_gb: A famous architect built this bridge.
@@ -1459,9 +1463,9 @@ words:
       - ru: Самолёт прилете́л в аэропо́рт.
         en_gb: The plane arrived at the airport.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Мы встре́тили друзе́й в аэропо́рту.
+      - ru: Мы встре́тили друзе́й в аэропорту́.
         en_gb: We met our friends at the airport.
-        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: До аэропо́рта далеко́ е́хать.
         en_gb: It is a long drive to the airport.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -1472,6 +1476,7 @@ words:
       sg_acc: аэропо́рт
       sg_ins: аэропо́ртом
       sg_pre: аэропо́рте
+      sg_loc: аэропорту́
       pl_nom: аэропо́рты
       pl_gen: аэропо́ртов
       pl_dat: аэропо́ртам
@@ -1585,6 +1590,9 @@ words:
       alt:
         - grandma
     usage:
+      - ru: Я помога́ю ба́бушке по до́му.
+        en_gb: I help grandma around the house.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ба́бушка печёт вку́сные пироги́.
         en_gb: Grandmother bakes tasty pies.
       - ru: Я ча́сто звоню́ ба́бушке.
@@ -1938,7 +1946,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Банкома́т не вы́дал де́ньги.
         en_gb: The ATM did not dispense money.
-      - ru: О́коло ма́газина два банкома́та.
+      - ru: О́коло магази́на два банкома́та.
         en_gb: There are two ATMs near the shop.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
@@ -2061,7 +2069,7 @@ words:
     en_gb:
       standard: master (a Russian nobleman or landlord in tsarist times)
     usage:
-      - ru: Ба́рин прика́зал принести́ ча́й.
+      - ru: Ба́рин прика́зал принести́ чай.
         en_gb: The master ordered tea to be brought.
       - ru: Слу́ги боя́лись стро́гого ба́рина.
         en_gb: The servants feared the stern master.
@@ -2098,7 +2106,7 @@ words:
       - ru: Все уважа́ли ста́рого баро́на.
         en_gb: Everyone respected the old baron.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: На ба́ле бы́ло не́сколько баро́нов.
+      - ru: На балу́ бы́ло не́сколько баро́нов.
         en_gb: There were several barons at the ball.
     declension:
       sg_nom: баро́н
@@ -2451,7 +2459,7 @@ words:
         en_gb: The refugees were looking for a new home.
       - ru: Бе́женец проси́л о по́мощи.
         en_gb: The refugee asked for help.
-      - ru: Во́лонтёры помога́ют бе́женцам.
+      - ru: Волонтёры помога́ют бе́женцам.
         en_gb: Volunteers help the refugees.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
     declension:
@@ -2624,6 +2632,7 @@ words:
     usage:
       - ru: Мы сиде́ли на берегу́ реки́.
         en_gb: We sat on the shore of the river.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Ло́дка подплыла́ к бе́регу.
         en_gb: The boat sailed up to the shore.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -2725,9 +2734,9 @@ words:
     usage:
       - ru: Его́ беспоко́йство легко́ заме́тить.
         en_gb: His anxiety is easy to notice.
-      - ru: Я не находи́л ме́ста от беспоко́йства.
+      - ru: Я не находи́л себе́ ме́ста от беспоко́йства.
         en_gb: I could not settle down out of anxiety.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 7, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Прости́те за беспоко́йство.
         en_gb: Sorry for the trouble.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -2958,7 +2967,7 @@ words:
       - ru: Он де́лал всё для бла́га семьи́.
         en_gb: He did everything for the good of the family.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Все блага́ принадлежа́т наро́ду.
+      - ru: Все бла́га принадлежа́т наро́ду.
         en_gb: All goods belong to the people.
     declension:
       sg_nom: бла́го
@@ -3122,7 +3131,7 @@ words:
       - ru: Тяжёлый блок упа́л на зе́млю.
         en_gb: The heavy block fell to the ground.
       - ru: Две страны́ вступи́ли в вое́нный блок.
-        en_gb: The two countries joined a military block.
+        en_gb: The two countries joined a military bloc.
     declension:
       sg_nom: блок
       sg_gen: бло́ка
@@ -3312,7 +3321,6 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В э́том бою́ поги́бло мно́го люде́й.
         en_gb: Many people died in this battle.
-        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: бой
       sg_gen: бо́я
@@ -3355,6 +3363,7 @@ words:
         en_gb: My right side hurts.
       - ru: Он лежа́л на боку́ и чита́л.
         en_gb: He lay on his side and read.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Ло́шадь повора́чивалась то одни́м бо́ком, то други́м.
         en_gb: The horse turned now one side, now the other.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
@@ -3661,6 +3670,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Капита́н стоя́л на борту́ корабля́.
         en_gb: The captain stood aboard the ship.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
     declension:
       sg_nom: борт
       sg_gen: бо́рта
@@ -3775,7 +3785,7 @@ words:
     en_gb:
       standard: Brazil (a country in South America)
     usage:
-      - ru: Брази́лия — са́мая бо́льшая страна́ Ю́жной Аме́рики.
+      - ru: Брази́лия — са́мая больша́я страна́ Ю́жной Аме́рики.
         en_gb: Brazil is the largest country in South America.
       - ru: В Брази́лии лю́бят футбо́л.
         en_gb: In Brazil they love football.
@@ -5029,7 +5039,7 @@ words:
     usage:
       - ru: Они́ дости́гли верши́ны горы́.
         en_gb: They reached the summit of the mountain.
-        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На верши́не лежи́т снег.
         en_gb: There is snow on the summit.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -5085,6 +5095,9 @@ words:
       pl_ins: вёснами
       pl_pre: вёснах
     usage:
+      - ru: Мы ждём весны́.
+        en_gb: We are waiting for spring.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Весна́ в э́том году́ ра́нняя.
         en_gb: Spring is early this year.
       - ru: Весно́й та́ет снег.
@@ -5105,10 +5118,13 @@ words:
     en_gb:
       standard: wind (moving air)
     usage:
+      - ru: Из-за си́льного ве́тра мы оста́лись до́ма.
+        en_gb: Because of the strong wind we stayed at home.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Си́льный ве́тер сдул шля́пу.
         en_gb: A strong wind blew off the hat.
-      - ru: На у́лице ни́ ветра.
-        en_gb: There is not a breath of wind outside.
+      - ru: На у́лице совсе́м нет ве́тра.
+        en_gb: There is no wind at all outside.
       - ru: Ло́дку несёт ве́тром.
         en_gb: The boat is carried by the wind.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -5472,6 +5488,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Что ты име́ешь в виду́?
         en_gb: What do you have in mind?
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: Из окна́ открыва́ется краси́вый вид.
         en_gb: A beautiful view opens from the window.
       - ru: У него́ уста́лый вид.
@@ -5727,8 +5744,8 @@ words:
       - ru: В э́том вине́ мно́го са́хара.
         en_gb: There is a lot of sugar in this wine.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: На пра́здник они́ купи́ли два вина́.
-        en_gb: For the celebration they bought two wines.
+      - ru: На пра́здник они́ купи́ли две буты́лки вина́.
+        en_gb: For the celebration they bought two bottles of wine.
     declension:
       sg_nom: вино́
       sg_gen: вина́
@@ -6062,8 +6079,8 @@ words:
       - ru: Он попа́л под влия́ние ста́ршего бра́та.
         en_gb: He came under the influence of his older brother.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Учёные изуча́ют влия́ния пого́ды.
-        en_gb: Scientists study the effects of the weather.
+      - ru: Учёные изуча́ют влия́ние пого́ды.
+        en_gb: Scientists study the influence of the weather.
   "внимание=attention":
     cefr_level: A2
     gender: n
@@ -6164,7 +6181,7 @@ words:
     en_gb:
       standard: water (the clear liquid you drink)
     usage:
-      - ru: Я пью́ во́ду ка́ждое у́тро.
+      - ru: Я пью во́ду ка́ждое у́тро.
         en_gb: I drink water every morning.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В стака́не нет воды́.
@@ -6387,8 +6404,8 @@ words:
       - ru: Расте́ния стра́дают от возде́йствия хо́лода.
         en_gb: The plants suffer from the impact of the cold.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Учёные изуча́ют возде́йствия шу́ма.
-        en_gb: Scientists study the impacts of noise.
+      - ru: Учёные изуча́ют возде́йствие шу́ма.
+        en_gb: Scientists study the impact of noise.
   "воздух=air":
     cefr_level: A1
     gender: m
@@ -6466,7 +6483,7 @@ words:
       - ru: Лю́ди ра́зного во́зраста лю́бят му́зыку.
         en_gb: People of different ages love music.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: В свои́ во́зрасте он о́чень акти́вен.
+      - ru: В своём во́зрасте он о́чень акти́вен.
         en_gb: At his age he is very active.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
     declension:
@@ -6793,7 +6810,7 @@ words:
         en_gb: She has long fair hair.
       - ru: На пиджаке́ оди́н се́рый во́лос.
         en_gb: There is one grey hair on the jacket.
-      - ru: Она́ ухо́живает за свои́ми волоса́ми.
+      - ru: Она́ уха́живает за свои́ми волоса́ми.
         en_gb: She takes care of her hair.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
     declension:
@@ -7368,7 +7385,7 @@ words:
     en_gb:
       standard: universe (all of space and everything in it)
     usage:
-      - ru: Вселе́нная о́чень бо́льшая.
+      - ru: Вселе́нная о́чень больша́я.
         en_gb: The universe is very big.
       - ru: Мы — ма́ленькая часть вселе́нной.
         en_gb: We are a small part of the universe.
@@ -7864,7 +7881,7 @@ words:
       - ru: По газо́ну ходи́ть нельзя́.
         en_gb: You may not walk on the lawn.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
-      - ru: Сади́тся подстрига́ет газо́н ка́ждую неде́лю.
+      - ru: Садо́вник подстрига́ет газо́н ка́ждую неде́лю.
         en_gb: The gardener mows the lawn every week.
       - ru: Де́ти игра́ли на зелёном газо́не.
         en_gb: The children played on the green lawn.
@@ -8229,9 +8246,9 @@ words:
       - ru: Все скорбе́ли о его́ ги́бели.
         en_gb: Everyone mourned his death.
         inflect: { token: 5, case: pre, number: sg, rule: noun-fem-soft }
-      - ru: Шторм грози́л ги́белью корабля́.
+      - ru: Шторм грози́л кораблю́ ги́белью.
         en_gb: The storm threatened the ship with destruction.
-        inflect: { token: 3, case: ins, number: sg, rule: noun-fem-soft }
+        inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: Ги́бель ле́са — больша́я беда́.
         en_gb: The death of the forest is a great misfortune.
   "гимнастёрка=military shirt":
@@ -8679,6 +8696,9 @@ words:
     en_gb:
       standard: voice (the sound produced by the vocal cords)
     usage:
+      - ru: Я узна́л твой го́лос сра́зу.
+        en_gb: I recognised your voice at once.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У неё краси́вый го́лос.
         en_gb: She has a beautiful voice.
       - ru: Я узна́л его́ по го́лосу.
@@ -8994,28 +9014,28 @@ words:
     en_gb:
       standard: military hospital (a hospital for soldiers)
     usage:
-      - ru: Ра́неного отвезли́ в госпита́ль.
+      - ru: Ра́неного отвезли́ в го́спиталь.
         en_gb: The wounded soldier was taken to the military hospital.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Он лечи́лся в госпита́ле три ме́сяца.
+      - ru: Он лечи́лся в го́спитале три ме́сяца.
         en_gb: He was treated in the military hospital for three months.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Врачи́ госпита́ля рабо́тали день и ночь.
+      - ru: Врачи́ го́спиталя рабо́тали день и ночь.
         en_gb: The doctors of the military hospital worked day and night.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
-      sg_nom: госпита́ль
-      sg_gen: госпита́ля
-      sg_dat: госпита́лю
-      sg_acc: госпита́ль
-      sg_ins: госпита́лем
-      sg_pre: госпита́ле
-      pl_nom: госпита́ли
-      pl_gen: госпита́лей
-      pl_dat: госпита́лям
-      pl_acc: госпита́ли
-      pl_ins: госпита́лями
-      pl_pre: госпита́лях
+      sg_nom: го́спиталь
+      sg_gen: го́спиталя
+      sg_dat: го́спиталю
+      sg_acc: го́спиталь
+      sg_ins: го́спиталем
+      sg_pre: го́спитале
+      pl_nom: го́спитали
+      pl_gen: го́спиталей
+      pl_dat: го́спиталям
+      pl_acc: го́спитали
+      pl_ins: го́спиталями
+      pl_pre: го́спиталях
   "господин=mister":
     cefr_level: A2
     gender: m
@@ -9121,7 +9141,7 @@ words:
       - ru: Хозя́йка предложи́ла гостя́м чай.
         en_gb: The hostess offered the guests tea.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
-      - ru: К нам пришёл незвано́й гость.
+      - ru: К нам пришёл незва́ный гость.
         en_gb: An uninvited guest came to us.
       - ru: Мы жда́ли госте́й весь ве́чер.
         en_gb: We were waiting for guests all evening.
@@ -9664,11 +9684,12 @@ words:
       alt:
         - breast
     usage:
-      - ru: Он глубоко́ вдохну́л гру́дью.
-        en_gb: He took a deep breath with his chest.
+      - ru: Он вдохну́л по́лной гру́дью.
+        en_gb: He took a deep breath.
         inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: У него́ боли́т в груди́.
         en_gb: He has a pain in his chest.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: Ма́льчик при́жал котёнка к груди́.
         en_gb: The boy pressed the kitten to his chest.
         inflect: { token: 5, case: dat, number: sg, rule: noun-fem-soft }
@@ -9774,11 +9795,14 @@ words:
       pl_ins: гру́ппами
       pl_pre: гру́ппах
     usage:
+      - ru: В на́шей гру́ппе де́сять студе́нтов.
+        en_gb: There are ten students in our group.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Гру́ппа тури́стов осма́тривает го́род.
         en_gb: A group of tourists is touring the city.
       - ru: Учени́ки раздели́лись на две гру́ппы.
         en_gb: The pupils divided into two groups.
-        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он игра́ет в музыка́льной гру́ппе.
         en_gb: He plays in a musical group.
   "грусть=sadness":
@@ -9854,11 +9878,11 @@ words:
     usage:
       - ru: По́сле дождя́ на доро́ге бы́ло мно́го гря́зи.
         en_gb: After the rain there was a lot of mud on the road.
-      - ru: Он вошёл в дом и принёс гря́зь с у́лицы.
+      - ru: Он вошёл в дом и принёс грязь с у́лицы.
         en_gb: He came into the house and brought dirt from the street.
       - ru: Маши́на застря́ла в грязи́.
         en_gb: The car got stuck in the mud.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
     declension:
       sg_nom: грязь
       sg_gen: гря́зи
@@ -10009,7 +10033,7 @@ words:
         en_gb: A forest was visible in the blue distance.
       - ru: Кора́бль исче́з в да́ли.
         en_gb: The ship vanished into the distance.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
   "дама=lady":
     cefr_level: B1
     gender: f
@@ -10418,6 +10442,9 @@ words:
       pl_ins: де́вочками
       pl_pre: де́вочках
     usage:
+      - ru: Я ви́жу де́вочку с соба́кой.
+        en_gb: I see a girl with a dog.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́ленькая де́вочка игра́ет с ку́клой.
         en_gb: A little girl is playing with a doll.
       - ru: Я подари́л де́вочке возду́шный шар.
@@ -10451,6 +10478,9 @@ words:
       pl_ins: де́вушками
       pl_pre: де́вушках
     usage:
+      - ru: Он пригласи́л де́вушку в кино́.
+        en_gb: He invited the young woman to the cinema.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Краси́вая де́вушка чита́ет кни́гу.
         en_gb: A beautiful young woman is reading a book.
       - ru: Он подари́л де́вушке цветы́.
@@ -10533,6 +10563,9 @@ words:
       alt:
         - grandpa
     usage:
+      - ru: Мы бы́ли в гостя́х у де́душки.
+        en_gb: We were visiting grandfather.
+        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Де́душка лю́бит расска́зывать исто́рии.
         en_gb: Grandfather loves to tell stories.
       - ru: Я помога́ю де́душке в саду́.
@@ -10619,6 +10652,9 @@ words:
     en_gb:
       standard: matter (an affair, business, or task)
     usage:
+      - ru: Он рассказа́л мне о своём де́ле.
+        en_gb: He told me about his case.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Приве́т! Как дела́?
         en_gb: Hi! How are you doing?
       - ru: Де́ло в том, что я опозда́л.
@@ -10716,6 +10752,9 @@ words:
     en_gb:
       standard: day
     usage:
+      - ru: Хоро́шего дня!
+        en_gb: Have a good day!
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Сего́дня хоро́ший день.
         en_gb: Today is a good day.
       - ru: Э́ти дни я бу́ду до́ма.
@@ -11234,7 +11273,7 @@ words:
       - ru: Учителя́ говори́ли с дире́ктором.
         en_gb: The teachers spoke with the director.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: На собра́нии бы́ли все дире́кторы.
+      - ru: На собра́нии бы́ли все директора́.
         en_gb: All the directors were at the meeting.
     declension:
       sg_nom: дире́ктор
@@ -11243,7 +11282,7 @@ words:
       sg_acc: дире́ктора
       sg_ins: дире́ктором
       sg_pre: дире́кторе
-      pl_nom: дире́кторы
+      pl_nom: директора́
       pl_gen: дире́кторов
       pl_dat: дире́кторам
       pl_acc: дире́кторов
@@ -11406,6 +11445,9 @@ words:
     en_gb:
       standard: rain
     usage:
+      - ru: Мы шли под дождём.
+        en_gb: We walked in the rain.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На у́лице идёт дождь.
         en_gb: It is raining outside.
       - ru: По́сле дождя́ вы́шло со́лнце.
@@ -11438,10 +11480,16 @@ words:
       sg_acc: доказа́тельство
       sg_ins: доказа́тельством
       sg_pre: доказа́тельстве
+      pl_nom: доказа́тельства
+      pl_gen: доказа́тельств
+      pl_dat: доказа́тельствам
+      pl_acc: доказа́тельства
+      pl_ins: доказа́тельствами
+      pl_pre: доказа́тельствах
     usage:
-      - ru: У поли́ции нет доказа́тельства.
+      - ru: У поли́ции нет доказа́тельств.
         en_gb: The police have no proof.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Учёный предста́вил ва́жное доказа́тельство.
         en_gb: The scientist presented important proof.
       - ru: Суд потре́бовал серьёзных доказа́тельств.
@@ -11561,7 +11609,7 @@ words:
     usage:
       - ru: Он верну́л все свои́ долги́.
         en_gb: He paid back all his debts.
-      - ru: Он взя́л де́ньги в долг.
+      - ru: Он взял де́ньги в долг.
         en_gb: He took the money as a loan.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Защища́ть Ро́дину — его́ долг.
@@ -11718,6 +11766,9 @@ words:
       alt:
         - home
     usage:
+      - ru: О́коло до́ма есть парк.
+        en_gb: There is a park near the house.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Наш дом стои́т у реки́.
         en_gb: Our house stands by the river.
       - ru: Мы верну́лись домо́й по́здно ве́чером.
@@ -11750,9 +11801,9 @@ words:
     en_gb:
       standard: Don (a large river in southern Russia)
     usage:
-      - ru: Каза́ки живу́т на До́не.
+      - ru: Каза́ки живу́т на Дону́.
         en_gb: The Cossacks live on the Don.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Дон впада́ет в Азо́вское мо́ре.
         en_gb: The Don flows into the Sea of Azov.
     declension:
@@ -11762,6 +11813,7 @@ words:
       sg_acc: Дон
       sg_ins: До́ном
       sg_pre: До́не
+      sg_loc: Дону́
   "допрос=interrogation":
     cefr_level: B2
     gender: m
@@ -12040,6 +12092,9 @@ words:
       pl_ins: до́чками
       pl_pre: до́чках
     usage:
+      - ru: Он встре́тил до́чку по́сле шко́лы.
+        en_gb: He met his daughter after school.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Их до́чка пошла́ в пе́рвый класс.
         en_gb: Their daughter started first grade.
       - ru: Он купи́л до́чке но́вую игру́шку.
@@ -12058,6 +12113,9 @@ words:
     en_gb:
       standard: daughter (a female child)
     usage:
+      - ru: У них нет до́чери, то́лько сын.
+        en_gb: They have no daughter, only a son.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-fem-soft }
       - ru: Их дочь у́чится в шко́ле.
         en_gb: Their daughter goes to school.
       - ru: Он горди́тся свое́й до́черью.
@@ -12107,8 +12165,8 @@ words:
       - ru: Он получи́л синя́к в дра́ке.
         en_gb: He got a bruise in the fight.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Учи́тель разня́л мальчи́шеские дра́ки.
-        en_gb: The teacher broke up the boys' fights.
+      - ru: Учи́тель разня́л дра́ку во дворе́.
+        en_gb: The teacher broke up the fight in the yard.
   "дрель=drill":
     cefr_level: B2
     gender: f
@@ -12395,7 +12453,7 @@ words:
     usage:
       - ru: Си́льный дух помога́ет в беде́.
         en_gb: A strong spirit helps in trouble.
-      - ru: Он па́л ду́хом по́сле неуда́чи.
+      - ru: Он пал ду́хом по́сле неуда́чи.
         en_gb: He lost spirit after the failure.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В ста́ром до́ме жи́ли злы́е ду́хи.
@@ -12520,7 +12578,7 @@ words:
         en_gb: After running his breathing went out of rhythm.
       - ru: Врач слу́шает её дыха́ние.
         en_gb: The doctor is listening to her breathing.
-      - ru: Он за́мер с зата́ённым дыха́нием.
+      - ru: Он за́мер с затаённым дыха́нием.
         en_gb: He froze with bated breath.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
   "дьявол=devil":
@@ -12743,7 +12801,7 @@ words:
         en_gb: A little hedgehog lives in the garden.
         en_alt:
           - There is a little hedgehog living in the garden.
-      - ru: У ежа́ о́строе иго́лки.
+      - ru: У ежа́ о́стрые иго́лки.
         en_gb: A hedgehog has sharp needles.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лесу́ мы ви́дели не́сколько ежо́в.
@@ -12919,8 +12977,9 @@ words:
         en_gb: Strong heat came from the stove.
       - ru: У ребёнка си́льный жар.
         en_gb: The child has a high fever.
-      - ru: Они́ рабо́тали в по́лном жа́ру.
-        en_gb: They worked in the full heat.
+      - ru: Он весь горе́л в жару́.
+        en_gb: He was burning up with fever.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
   "желание=wish":
     cefr_level: A2
     gender: n
@@ -13129,6 +13188,9 @@ words:
       pl_ins: же́нщинами
       pl_pre: же́нщинах
     usage:
+      - ru: Мы уви́дели же́нщину с ребёнком.
+        en_gb: We saw a woman with a child.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́та же́нщина рабо́тает врачо́м.
         en_gb: This woman works as a doctor.
       - ru: Он по́дал же́нщине ру́ку.
@@ -13326,13 +13388,16 @@ words:
     en_gb:
       standard: life (the period between birth and death)
     usage:
+      - ru: Он мно́го ви́дел в жи́зни.
+        en_gb: He has seen a lot in his life.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-fem-soft }
       - ru: Жизнь прекра́сна.
         en_gb: Life is beautiful.
       - ru: Он посвяти́л жизнь нау́ке.
         en_gb: He devoted his life to science.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: В дере́вне мно́го интере́сного в жи́зни.
-        en_gb: There is much interesting in life in the village.
+      - ru: В жи́зни мно́го интере́сного.
+        en_gb: There is much that is interesting in life.
     declension:
       sg_nom: жизнь
       sg_gen: жи́зни
@@ -13648,8 +13713,9 @@ words:
       - ru: Он бо́рется с зави́симостью.
         en_gb: He is fighting his dependence.
         inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
-      - ru: Э́то реше́ние зави́сит от мно́гого.
-        en_gb: This is dependence on many factors.
+      - ru: Мы попа́ли в зави́симость от техноло́гий.
+        en_gb: We have become dependent on technology.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Врачи́ говори́ли о зави́симости от табака́.
         en_gb: The doctors spoke about dependence on tobacco.
         inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
@@ -13798,9 +13864,8 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он сел на са́мый зад авто́буса.
         en_gb: He sat at the very back of the bus.
-      - ru: В заде́ за́ла бы́ло свобо́дно.
-        en_gb: It was free at the back of the hall.
-        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Грузови́к подъе́хал за́дом к скла́ду.
+        en_gb: The lorry backed up to the warehouse.
   "задание=task":
     cefr_level: A2
     gender: n
@@ -13991,9 +14056,9 @@ words:
       pl_ins: заключе́ниями
       pl_pre: заключе́ниях
     usage:
-      - ru: В заключе́нии он поблагодари́л всех.
+      - ru: В заключе́ние он поблагодари́л всех.
         en_gb: In conclusion he thanked everyone.
-        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Врач написа́л своё заключе́ние.
         en_gb: The doctor wrote his conclusion.
       - ru: Экспе́рты пришли́ к ва́жным заключе́ниям.
@@ -14208,7 +14273,7 @@ words:
       - ru: Чте́ние — его́ люби́мое заня́тие.
         en_gb: Reading is his favourite activity.
       - ru: Она́ опозда́ла на заня́тие.
-        en_gb: She was late for the activity.
+        en_gb: She was late for the class.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: заня́тие
@@ -14474,8 +14539,8 @@ words:
         en_gb: She wears a watch on her wrist.
       - ru: Он повреди́л запя́стье на трениро́вке.
         en_gb: He injured his wrist at training.
-      - ru: Брасле́т блесте́л на её запя́стьях.
-        en_gb: The bracelet shone on her wrists.
+      - ru: Брасле́ты блесте́ли на её запя́стьях.
+        en_gb: Bracelets shone on her wrists.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: запя́стье
@@ -15044,9 +15109,9 @@ words:
         en_gb: The winter this year is cold.
         en_alt:
           - winter is cold this year
-      - ru: Мы с нетерпе́нием ждём зи́му.
+      - ru: Мы с нетерпе́нием ждём зимы́.
         en_gb: We are eagerly waiting for winter.
-        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: зима́
       sg_gen: зимы́
@@ -15129,7 +15194,7 @@ words:
     usage:
       - ru: Он по́дал знак руко́й.
         en_gb: He gave a sign with his hand.
-      - ru: На доро́ге стои́т знак сто́п.
+      - ru: На доро́ге стои́т знак стоп.
         en_gb: There is a stop sign on the road.
       - ru: Он не понима́ет э́тих зна́ков.
         en_gb: He doesn't understand these signs.
@@ -16877,7 +16942,7 @@ words:
       standard: total (a final result or sum)
     usage:
       - ru: Подведём ито́г встре́чи.
-        en_gb: Let us sum up the total of the meeting.
+        en_gb: Let us sum up the meeting.
       - ru: В ито́ге мы реши́ли оста́ться.
         en_gb: In the end we decided to stay.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -16910,7 +16975,7 @@ words:
       - ru: В лесу́ мы встре́тили ди́кого кабана́.
         en_gb: In the forest we met a wild boar.
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-animate }
-      - ru: Кабаны́ ры́ли зе́млю в поис́ках корне́й.
+      - ru: Кабаны́ ры́ли зе́млю в по́исках корне́й.
         en_gb: The boars dug the ground looking for roots.
     declension:
       sg_nom: каба́н
@@ -16941,7 +17006,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ка́бель лежи́т под по́лом.
         en_gb: The cable lies under the floor.
-      - ru: Под земле́й прово́дят но́вые ка́бели.
+      - ru: Под землёй прово́дят но́вые ка́бели.
         en_gb: New cables are being laid underground.
     declension:
       sg_nom: ка́бель
@@ -17088,7 +17153,7 @@ words:
       standard: frame (a single image on film; a member of staff)
     usage:
       - ru: Фотогра́ф сде́лал кра́сивый кадр.
-        en_gb: The photographer took a beautiful frame.
+        en_gb: The photographer captured a beautiful frame.
       - ru: В э́том ка́дре сли́шком темно́.
         en_gb: It is too dark in this frame.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
@@ -17168,7 +17233,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он бро́сил ка́мень в во́ду.
         en_gb: He threw a stone into the water.
-      - ru: На бе́регу мно́го гла́дких камне́й.
+      - ru: На берегу́ мно́го гла́дких камне́й.
         en_gb: There are many smooth stones on the shore.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
@@ -17677,6 +17742,9 @@ words:
       pl_ins: карто́шками
       pl_pre: карто́шках
     usage:
+      - ru: Купи́ карто́шку на ры́нке.
+        en_gb: Buy potatoes at the market.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На у́жин у нас жа́реная карто́шка.
         en_gb: We have fried potatoes for supper.
       - ru: Я почи́стил мешо́к карто́шки.
@@ -18336,7 +18404,7 @@ words:
       alt:
         - paintbrush
     usage:
-      - ru: Худо́жник взял ки́сть и кра́ски.
+      - ru: Худо́жник взял кисть и кра́ски.
         en_gb: The artist took a brush and paints.
       - ru: Помо́й ки́сти по́сле рабо́ты.
         en_gb: Wash the brushes after work.
@@ -18923,6 +18991,9 @@ words:
       pl_ins: кни́жками
       pl_pre: кни́жках
     usage:
+      - ru: В э́той кни́жке краси́вые карти́нки.
+        en_gb: There are beautiful pictures in this book.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Купи́ ребёнку де́тскую кни́жку.
         en_gb: Buy the child a children's book.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -19158,20 +19229,20 @@ words:
       alt:
         - pantyhose
     usage:
-      - ru: Она́ наде́ла ко́лготки и ю́бку.
+      - ru: Она́ наде́ла колго́тки и ю́бку.
         en_gb: She put on tights and a skirt.
-      - ru: Зимо́й ношу́ тёплые ко́лготки.
+      - ru: Зимо́й ношу́ тёплые колго́тки.
         en_gb: In winter I wear thick tights.
-      - ru: На ко́лготках появи́лась стре́лка.
+      - ru: На колго́тках появи́лась стре́лка.
         en_gb: A ladder appeared in the tights.
         inflect: { token: 2, case: pre, number: pl, rule: noun-pre-pl }
     declension:
-      pl_nom: ко́лготки
-      pl_gen: ко́лготок
-      pl_dat: ко́лготкам
-      pl_acc: ко́лготки
-      pl_ins: ко́лготками
-      pl_pre: ко́лготках
+      pl_nom: колго́тки
+      pl_gen: колго́ток
+      pl_dat: колго́ткам
+      pl_acc: колго́тки
+      pl_ins: колго́тками
+      pl_pre: колго́тках
   "колдун=sorcerer":
     cefr_level: B2
     gender: m
@@ -19464,7 +19535,7 @@ words:
     en_gb:
       standard: collective farm (a Soviet cooperative farm)
     usage:
-      - ru: Де́д рабо́тал на колхо́зе.
+      - ru: Дед рабо́тал в колхо́зе.
         en_gb: Grandfather worked on a collective farm.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Колхо́з вы́растил бога́тый урожа́й.
@@ -19991,6 +20062,9 @@ words:
     en_gb:
       standard: computer (an electronic machine for data)
     usage:
+      - ru: Все да́нные на компью́тере.
+        en_gb: All the data is on the computer.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я рабо́таю за компью́тером.
         en_gb: I work at the computer.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -20204,9 +20278,9 @@ words:
     en_gb:
       standard: cone (a shape with a round base and a point)
     usage:
-      - ru: Моро́женое подаю́т в ко́нусе.
-        en_gb: The ice cream is served in a cone.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Ба́шня име́ет фо́рму ко́нуса.
+        en_gb: The tower has the shape of a cone.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Нарису́й высо́кий ко́нус.
         en_gb: Draw a tall cone.
       - ru: По доро́ге стоя́ли кра́сные ко́нусы.
@@ -20433,8 +20507,8 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Я заказа́л хоро́ший конья́к.
         en_gb: I ordered a good cognac.
-      - ru: В шка́фу стоя́ли ста́рые коньяки́.
-        en_gb: Old cognacs stood in the cabinet.
+      - ru: Э́тот конья́к де́лают во Фра́нции.
+        en_gb: This cognac is made in France.
   "копейка=kopek":
     cefr_level: A2
     gender: f
@@ -20567,7 +20641,7 @@ words:
         en_gb: This tree has deep roots.
       - ru: Он вы́копал ко́рень из земли́.
         en_gb: He dug a root out of the ground.
-      - ru: Зимо́й живо́тные едя́т корня́ми.
+      - ru: Зимо́й живо́тные пита́ются корня́ми.
         en_gb: In winter the animals feed on roots.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
@@ -20726,7 +20800,7 @@ words:
       pl_ins: коро́бками
       pl_pre: коро́бках
     usage:
-      - ru: Коро́бка сто́ит на полу́.
+      - ru: Коро́бка стои́т на полу́.
         en_gb: The box is standing on the floor.
       - ru: Он положи́л кни́ги в коро́бку.
         en_gb: He put the books in the box.
@@ -21054,7 +21128,7 @@ words:
       alt:
         - cat
     usage:
-      - ru: На́ш кот спит на окне́.
+      - ru: Наш кот спит на окне́.
         en_gb: Our cat is sleeping on the window.
       - ru: Я покорми́л кота́.
         en_gb: I fed the tomcat.
@@ -21082,7 +21156,7 @@ words:
     en_gb:
       standard: coffee (the drink; indeclinable)
     usage:
-      - ru: Я пью́ ко́фе ка́ждое у́тро.
+      - ru: Я пью ко́фе ка́ждое у́тро.
         en_gb: I drink coffee every morning.
       - ru: Он лю́бит ко́фе с молоко́м.
         en_gb: He likes coffee with milk.
@@ -21274,6 +21348,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он стоя́л на краю́ обры́ва.
         en_gb: He stood on the edge of the cliff.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Кни́га лежи́т у кра́я по́лки.
         en_gb: The book lies at the edge of the shelf.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -21378,7 +21453,7 @@ words:
       - ru: Он влюби́лся в ю́ную краса́вицу.
         en_gb: He fell in love with a young beauty.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: На ба́лу бы́ло мно́го краса́виц.
+      - ru: На балу́ бы́ло мно́го краса́виц.
         en_gb: There were many beauties at the ball.
   "краска=paint":
     cefr_level: A2
@@ -21771,7 +21846,7 @@ words:
         en_gb: The doctor took a blood sample.
       - ru: Руба́шка была́ в крови́.
         en_gb: The shirt was covered in blood.
-        inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
     declension:
       sg_nom: кровь
       sg_gen: кро́ви
@@ -22048,7 +22123,7 @@ words:
       - ru: На кры́ше лежи́т снег.
         en_gb: There is snow on the roof.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Ра́бочие чи́нят кры́шу.
+      - ru: Рабо́чие чи́нят кры́шу.
         en_gb: The workers are repairing the roof.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ко́шка сиди́т на кры́ше.
@@ -22145,8 +22220,8 @@ words:
     en_gb:
       standard: cube (a solid shape with six square faces)
     usage:
-      - ru: Ка́ждая сторона́ ку́ба ра́вная.
-        en_gb: Every side of the cube is equal.
+      - ru: Все сто́роны ку́ба равны́.
+        en_gb: All the sides of a cube are equal.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Реши́те зада́чу про куб.
         en_gb: Solve the problem about a cube.
@@ -22743,8 +22818,9 @@ words:
         en_gb: Wooden benches stand in the garden.
         en_alt:
           - There are wooden benches in the garden.
-      - ru: Он купи́л хлеб в ма́ленькой ла́вке.
-        en_gb: He bought bread in a little shop.
+      - ru: Мы се́ли на ла́вку у подъе́зда.
+        en_gb: We sat down on the bench by the entrance.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "лагерь=camp":
     cefr_level: B1
     gender: m
@@ -22857,7 +22933,7 @@ words:
       - ru: Включи́ ла́мпу, здесь темно́.
         en_gb: Turn on the lamp, it's dark here.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Ла́мпа сто́ит на столе́.
+      - ru: Ла́мпа стои́т на столе́.
         en_gb: The lamp is on the table.
       - ru: Под ла́мпой удо́бно чита́ть.
         en_gb: It is comfortable to read under the lamp.
@@ -23042,7 +23118,7 @@ words:
       - ru: В зоопа́рке мы ви́дели льва.
         en_gb: We saw a lion at the zoo.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
-      - ru: Льво́в ко́рмят по утра́м.
+      - ru: Львов ко́рмят по утра́м.
         en_gb: The lions are fed in the mornings.
     declension:
       sg_nom: лев
@@ -23147,7 +23223,6 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На льду ката́лись де́ти.
         en_gb: Children were skating on the ice.
-        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
   "ледник=glacier":
     cefr_level: C1
     gender: m
@@ -23431,6 +23506,7 @@ words:
     usage:
       - ru: В лесу́ живу́т ди́кие зве́ри.
         en_gb: Wild animals live in the forest.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
         en_alt:
           - There are wild animals living in the forest.
       - ru: Мы пошли́ в лес за гриба́ми.
@@ -23499,12 +23575,15 @@ words:
     en_gb:
       standard: summer
     usage:
+      - ru: В нача́ле ле́та мы е́здим на да́чу.
+        en_gb: At the beginning of summer we go to the dacha.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ле́том мы е́здим на мо́ре.
         en_gb: In summer we go to the sea.
         inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Э́то бы́ло о́чень жа́ркое ле́то.
         en_gb: It was a very hot summer.
-      - ru: Я жду ле́то с нетерпе́нием.
+      - ru: Я жду ле́та с нетерпе́нием.
         en_gb: I am eagerly awaiting summer.
     declension:
       sg_nom: ле́то
@@ -24206,9 +24285,9 @@ words:
         en_gb: A horse grazes in the field.
       - ru: Де́вочка корми́т ло́шадь.
         en_gb: The girl is feeding the horse.
-      - ru: Он подъе́хал на лошадя́х к до́му.
-        en_gb: He rode up to the house on horses.
-        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Они́ подъе́хали к до́му на лошадя́х.
+        en_gb: They rode up to the house on horses.
+        inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: ло́шадь
       sg_gen: ло́шади
@@ -24671,6 +24750,9 @@ words:
     en_gb:
       standard: boy (a male child)
     usage:
+      - ru: Тре́нер дал ма́льчику мяч.
+        en_gb: The coach gave the boy a ball.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ма́льчик бежи́т по двору́.
         en_gb: The boy is running around the yard.
       - ru: Я ви́дел ма́льчика в па́рке.
@@ -24733,6 +24815,9 @@ words:
     en_gb:
       standard: mum (mother)
     usage:
+      - ru: Я о́чень люблю́ свою́ ма́му.
+        en_gb: I love my mum very much.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́ма, я пришёл домо́й!
         en_gb: Mum, I'm home!
       - ru: Он позвони́л ма́ме ве́чером.
@@ -25115,6 +25200,9 @@ words:
     en_gb:
       standard: mother (a female parent)
     usage:
+      - ru: Он живёт с ма́терью.
+        en_gb: He lives with his mother.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: Моя́ мать рабо́тает в шко́ле.
         en_gb: My mother works at a school.
       - ru: Он написа́л письмо́ ма́тери.
@@ -25185,7 +25273,7 @@ words:
     usage:
       - ru: У нас но́вая маши́на.
         en_gb: We have a new car.
-      - ru: Маши́ну надо́ помы́ть.
+      - ru: Маши́ну на́до помы́ть.
         en_gb: The car needs to be washed.
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы прие́хали на маши́не.
@@ -25394,7 +25482,7 @@ words:
     en_gb:
       standard: manager (a person in charge of work or staff)
     usage:
-      - ru: Ме́неджер отве́тил на всё вопро́сы.
+      - ru: Ме́неджер отве́тил на все вопро́сы.
         en_gb: The manager answered all the questions.
       - ru: Она́ рабо́тает ме́неджером в ба́нке.
         en_gb: She works as a manager at a bank.
@@ -25475,6 +25563,9 @@ words:
     en_gb:
       standard: place (a spot; a seat; a location)
     usage:
+      - ru: Уступи́ ме́сто ба́бушке.
+        en_gb: Give up your seat to the old lady.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Здесь хоро́шее ме́сто для пикни́ка.
         en_gb: This is a good place for a picnic.
       - ru: В авто́бусе не бы́ло свобо́дных мест.
@@ -26433,8 +26524,8 @@ words:
       sg_ins: мно́жеством
       sg_pre: мно́жестве
     usage:
-      - ru: В кни́ге мно́жество интере́сных приме́ров.
-        en_gb: In the book there is a multitude of interesting examples.
+      - ru: Кни́га соде́ржит мно́жество интере́сных приме́ров.
+        en_gb: The book contains a multitude of interesting examples.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он реши́л зада́чу мно́жеством спо́собов.
         en_gb: He solved the problem in a multitude of ways.
@@ -26743,10 +26834,10 @@ words:
       - ru: Я люблю́ ко́фе с молоко́м.
         en_gb: I like coffee with milk.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Я пью́ ко́фе с молоко́м.
+      - ru: Я пью ко́фе с молоко́м.
         en_gb: I drink coffee with milk.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Молоко́ ско́ро ско́нчится.
+      - ru: Молоко́ ско́ро зако́нчится.
         en_gb: The milk will soon run out.
         en_alt:
           - Milk will soon run out.
@@ -27384,6 +27475,9 @@ words:
     en_gb:
       standard: husband (a married man)
     usage:
+      - ru: Она́ пришла́ с му́жем.
+        en_gb: She came with her husband.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Её муж рабо́тает врачо́м.
         en_gb: Her husband works as a doctor.
       - ru: Она́ ждёт му́жа с рабо́ты.
@@ -27446,6 +27540,9 @@ words:
     en_gb:
       standard: man (an adult male person)
     usage:
+      - ru: Э́тому мужчи́не ну́жна по́мощь.
+        en_gb: This man needs help.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Мужчи́на помо́г ей нести́ чемода́н.
         en_gb: The man helped her carry the suitcase.
         en_alt:
@@ -27519,6 +27616,9 @@ words:
     en_gb:
       standard: music (sounds made by instruments or voices)
     usage:
+      - ru: Без му́зыки ску́чно.
+        en_gb: It is boring without music.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Она́ слу́шает му́зыку.
         en_gb: She is listening to music.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -27840,6 +27940,9 @@ words:
     en_gb:
       standard: meat (food from an animal)
     usage:
+      - ru: В э́том блю́де нет мя́са.
+        en_gb: There is no meat in this dish.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он не ест мя́со.
         en_gb: He doesn't eat meat.
       - ru: На у́жин мы пригото́вили мя́со.
@@ -28466,7 +28569,7 @@ words:
       - ru: Власть забо́тится о населе́нии.
         en_gb: The authorities care for the population.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Ме́стному населе́нию помогли́ во́лонтёры.
+      - ru: Ме́стному населе́нию помогли́ волонтёры.
         en_gb: Volunteers helped the local population.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
   "наследник=heir":
@@ -28539,8 +28642,9 @@ words:
     en_gb:
       standard: mood (the way you feel)
     usage:
-      - ru: Я измени́л настро́йки телефо́на.
-        en_gb: I changed the phone's settings.
+      - ru: Всё зави́сит от настрое́ния.
+        en_gb: Everything depends on the mood.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У меня́ сего́дня хоро́шее настрое́ние.
         en_gb: I am in a good mood today.
       - ru: Он был в плохо́м настрое́нии.
@@ -28806,8 +28910,8 @@ words:
       - ru: На не́бе нет ни о́блачка.
         en_gb: There is not a single cloud in the sky.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
-      - ru: Пти́цы лета́ют высоко́ в не́бо.
-        en_gb: Birds fly high into the sky.
+      - ru: Пти́ца взлете́ла высоко́ в не́бо.
+        en_gb: A bird flew up high into the sky.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы любова́лись звёздным не́бом.
         en_gb: We admired the starry sky.
@@ -28932,6 +29036,9 @@ words:
       pl_ins: неде́лями
       pl_pre: неде́лях
     usage:
+      - ru: На э́той неде́ле мно́го рабо́ты.
+        en_gb: There is a lot of work this week.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я верну́сь че́рез неде́лю.
         en_gb: I will return in a week.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -29252,6 +29359,9 @@ words:
       alt:
         - foot
     usage:
+      - ru: Он встал с ле́вой ноги́.
+        en_gb: He got out of bed on the wrong side.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У меня́ боли́т нога́.
         en_gb: My leg hurts.
       - ru: Он упа́л и слома́л но́гу.
@@ -29457,12 +29567,12 @@ words:
     usage:
       - ru: На моро́зе нос красне́ет.
         en_gb: In the frost the nose turns red.
-        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он разби́л себе́ нос.
         en_gb: He bashed his nose.
-      - ru: У соба́ки хоро́шее чутьё в но́се.
-        en_gb: A dog has a keen sense in its nose.
-        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он косну́лся ко́нчика но́са.
+        en_gb: He touched the tip of his nose.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: нос
       sg_gen: но́са
@@ -29550,6 +29660,9 @@ words:
     en_gb:
       standard: night
     usage:
+      - ru: Среди́ но́чи пошёл дождь.
+        en_gb: In the middle of the night it started to rain.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-fem-soft }
       - ru: Споко́йной но́чи!
         en_gb: Good night!
       - ru: Но́чью го́род осо́бенно краси́в.
@@ -30381,7 +30494,7 @@ words:
     en_gb:
       standard: oats (a grain used for porridge and horse feed)
     usage:
-      - ru: Ло́шади дали́ мешо́к овса́.
+      - ru: Ло́шади да́ли мешо́к овса́.
         en_gb: They gave the horse a sack of oats.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На по́ле рос овёс.
@@ -30995,7 +31108,7 @@ words:
     usage:
       - ru: Он не замеча́л опа́сности во́круг себя́.
         en_gb: He did not notice the danger around him.
-      - ru: Туристо́в предупреди́ли об опа́сностях в го́рах.
+      - ru: Тури́стов предупреди́ли об опа́сностях в го́рах.
         en_gb: The tourists were warned about the dangers in the mountains.
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Мы вме́сте встре́тили опа́сность.
@@ -31437,6 +31550,9 @@ words:
     en_gb:
       standard: autumn (the season after summer)
     usage:
+      - ru: В нача́ле о́сени ещё тепло́.
+        en_gb: At the beginning of autumn it is still warm.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-fem-soft }
       - ru: О́сенью лу́жи везде́.
         en_gb: In autumn puddles are everywhere.
         inflect: { token: 1, case: ins, number: sg, rule: noun-fem-soft }
@@ -32795,6 +32911,9 @@ words:
     en_gb:
       standard: bag (a plastic or paper bag for carrying items)
     usage:
+      - ru: В паке́те лежа́т проду́кты.
+        en_gb: There are groceries in the bag.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он нёс паке́т с поку́пками.
         en_gb: He was carrying a bag of shopping.
       - ru: Положи́ хлеб в паке́т.
@@ -33084,6 +33203,9 @@ words:
     en_gb:
       standard: dad (father)
     usage:
+      - ru: У па́пы сего́дня выходно́й.
+        en_gb: Dad has a day off today.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Па́па, помоги́ мне с урока́ми!
         en_gb: Dad, help me with my homework!
       - ru: Все па́пы пришли́ на шко́льный спекта́кль.
@@ -33338,7 +33460,7 @@ words:
         en_gb: I did not find a spot in the car park.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Маши́ну он поста́вил на парко́вку.
-        en_gb: He put the car in the parking.
+        en_gb: He put the car in the car park.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: парко́вка
@@ -33754,7 +33876,7 @@ words:
       - ru: Он живёт на ма́ленькую пе́нсию.
         en_gb: He lives on a small pension.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Скоро́ де́душка вы́йдет на пе́нсию.
+      - ru: Ско́ро де́душка вы́йдет на пе́нсию.
         en_gb: Soon grandfather will retire on a pension.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
   "перевод=translation":
@@ -34528,7 +34650,7 @@ words:
       alt:
         - jacket
     usage:
-      - ru: Он сня́л пиджа́к и сел за стол.
+      - ru: Он снял пиджа́к и сел за стол.
         en_gb: He took off his jacket and sat at the table.
       - ru: На нём но́вый си́ний пиджа́к.
         en_gb: He is wearing a new blue blazer.
@@ -35172,7 +35294,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он провёл год в плену́.
         en_gb: He spent a year in captivity.
-        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: Они́ мечта́ли о побе́ге из пле́на.
         en_gb: They dreamt of escaping from captivity.
         inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
@@ -35183,6 +35305,7 @@ words:
       sg_acc: плен
       sg_ins: пле́ном
       sg_pre: плене́
+      sg_loc: плену́
   "плечо=shoulder":
     cefr_level: B1
     gender: n
@@ -35305,8 +35428,8 @@ words:
     usage:
       - ru: На де́реве со́зрел кру́пный плод.
         en_gb: A large fruit ripened on the tree.
-      - ru: Э́то результа́т до́лгого труда́ и его́ плоды́.
-        en_gb: This is the result of long work and its fruits.
+      - ru: Э́то плоды́ до́лгого труда́.
+        en_gb: These are the fruits of long labour.
       - ru: Де́ти собира́ли спе́лые плоды́.
         en_gb: The children gathered ripe fruit.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
@@ -36144,6 +36267,9 @@ words:
       pl_ins: подру́гами
       pl_pre: подру́гах
     usage:
+      - ru: Она́ звони́т подру́ге ка́ждый день.
+        en_gb: She calls her friend every day.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Моя́ подру́га живёт ря́дом.
         en_gb: My friend lives nearby.
       - ru: Я пишу́ письмо́ свое́й подру́ге.
@@ -36192,6 +36318,9 @@ words:
     en_gb:
       standard: pillow (a soft cushion used to rest the head on in bed)
     usage:
+      - ru: Положи́ поду́шку на дива́н.
+        en_gb: Put the pillow on the sofa.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ спала́ на мя́гкой поду́шке.
         en_gb: She slept on a soft pillow.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -36335,7 +36464,7 @@ words:
       pl_ins: пое́здками
       pl_pre: пое́здках
     usage:
-      - ru: Поэ́здка в дере́вню была́ ве́сёлой.
+      - ru: Пое́здка в дере́вню была́ весёлой.
         en_gb: The trip to the village was fun.
       - ru: Мы гото́вимся к до́лгой пое́здке.
         en_gb: We are preparing for a long trip.
@@ -36634,6 +36763,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Де́ти сидя́т на полу́.
         en_gb: The children are sitting on the floor.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Она́ помы́ла пол в ку́хне.
         en_gb: She washed the floor in the kitchen.
     declension:
@@ -37403,7 +37533,7 @@ words:
       pl_ins: по́рами
       pl_pre: по́рах
     usage:
-      - ru: До сих по́р я его́ не ви́дел.
+      - ru: До сих пор я его́ не ви́дел.
         en_gb: Up to now I haven't seen him.
         inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Наста́ла пора́ собира́ть урожа́й.
@@ -37489,6 +37619,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В порту́ стоя́т больши́е корабли́.
         en_gb: Big ships are standing in the port.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
         en_alt:
           - There are big ships in the harbour.
       - ru: Го́род зна́менит свои́ми порта́ми.
@@ -37770,6 +37901,9 @@ words:
     en_gb:
       standard: bed (a piece of furniture for sleeping on)
     usage:
+      - ru: Больно́й лежи́т в посте́ли.
+        en_gb: The patient is lying in bed.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
       - ru: Она́ запра́вила посте́ль.
         en_gb: She made the bed.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -39074,7 +39208,7 @@ words:
       - ru: Де́ти боя́тся привиде́ний.
         en_gb: The children are afraid of ghosts.
         inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
-      - ru: Говоря́т, в замке́ живёт привиде́ние.
+      - ru: Говоря́т, в за́мке живёт привиде́ние.
         en_gb: They say a ghost lives in the castle.
     declension:
       sg_nom: привиде́ние
@@ -39767,7 +39901,7 @@ words:
       - ru: Он согну́л то́нкую про́волоку.
         en_gb: He bent the thin wire.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: На столе́ лежа́ла мота́лка с про́волокой.
+      - ru: На столе́ лежа́ла кату́шка с про́волокой.
         en_gb: A reel with wire lay on the table.
         inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
     declension:
@@ -40688,6 +40822,7 @@ words:
     usage:
       - ru: В пруду́ пла́вали у́тки.
         en_gb: Ducks were swimming in the pond.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
       - ru: За до́мом вы́копали пруд.
         en_gb: They dug a pond behind the house.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -41512,7 +41647,6 @@ words:
     usage:
       - ru: По ра́дио переда́ли но́вости.
         en_gb: The news was broadcast on the radio.
-        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Включи́ ра́дио, пожа́луйста.
         en_gb: Turn on the radio, please.
       - ru: Мы слу́шали му́зыку по ра́дио.
@@ -41869,6 +42003,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В саду́ бы́ло как в раю́.
         en_gb: It was like paradise in the garden.
+        inflect: { token: 6, case: loc, number: sg, rule: noun-locative }
     declension:
       sg_nom: рай
       sg_gen: ра́я
@@ -43766,6 +43901,9 @@ words:
       sg_ins: Росси́ей
       sg_pre: Росси́и
     usage:
+      - ru: Ле́том они́ е́дут в Росси́ю.
+        en_gb: In summer they are going to Russia.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Росси́я грани́чит со мно́гими стра́нами.
         en_gb: Russia borders many countries.
       - ru: Столи́ца Росси́и — Москва́.
@@ -43846,6 +43984,7 @@ words:
         en_gb: Open your mouth, said the doctor.
       - ru: У ребёнка ка́ша во рту.
         en_gb: The child has porridge in his mouth.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
     declension:
       sg_nom: рот
       sg_gen: рта
@@ -44596,6 +44735,7 @@ words:
     usage:
       - ru: Ба́бушка рабо́тает в саду́.
         en_gb: Grandmother works in the garden.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Ле́том сад по́лон цвето́в.
         en_gb: In summer the garden is full of flowers.
       - ru: Вокру́г до́ма мно́го фрукто́вых садо́в.
@@ -44914,7 +45054,7 @@ words:
     en_gb:
       standard: sugar (a sweet substance for food and drink)
     usage:
-      - ru: Я пью́ чай без са́хара.
+      - ru: Я пью чай без са́хара.
         en_gb: I drink tea without sugar.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Положи́ ло́жку са́хара в чай.
@@ -45229,9 +45369,9 @@ words:
         en_gb: A big pig lives on the farm.
       - ru: Фе́рмер ко́рмит свине́й.
         en_gb: The farmer feeds the pigs.
-      - ru: Гря́зи бы́ло как у свиньи́.
-        en_gb: There was as much dirt as on a pig.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Ребёнок испуга́лся большо́й свиньи́.
+        en_gb: The child got frightened of the big pig.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
   "свитер=jumper":
     cefr_level: A2
     gender: m
@@ -45605,6 +45745,9 @@ words:
     en_gb:
       standard: family (parents and their children)
     usage:
+      - ru: У на́шей семьи́ есть да́ча.
+        en_gb: Our family has a dacha.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У меня́ больша́я семья́.
         en_gb: I have a big family.
       - ru: Он забо́тится о свое́й семье́.
@@ -45851,7 +45994,7 @@ words:
     usage:
       - ru: Нарису́й табли́цу в ви́де се́тки.
         en_gb: Draw the table as a grid.
-        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мяч попа́л в се́тку.
         en_gb: The ball hit the net.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -47313,10 +47456,14 @@ words:
     en_gb:
       standard: snow
     usage:
+      - ru: В го́роде совсе́м нет сне́га.
+        en_gb: There is no snow at all in the city.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Зимо́й па́дает снег.
         en_gb: In winter snow falls.
       - ru: Де́ти игра́ли в снегу́ весь день.
         en_gb: The children played in the snow all day.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Кры́ши покры́ты сне́гом.
         en_gb: The roofs are covered with snow.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -47761,9 +47908,9 @@ words:
       - ru: Он смотре́л на меня́ с сожале́нием.
         en_gb: He looked at me with regret.
         inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: К сожале́нию, я не могу́ прийти́.
-        en_gb: Unfortunately, I cannot come.
-        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он вы́разил своё сожале́ние.
+        en_gb: He expressed his regret.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У меня́ нет никаки́х сожале́ний.
         en_gb: I have no regrets at all.
   "создание=creation":
@@ -47903,6 +48050,9 @@ words:
     en_gb:
       standard: sun (the star that lights the day)
     usage:
+      - ru: Не сиди́ до́лго на со́лнце.
+        en_gb: Don't sit in the sun for long.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Сего́дня я́рко све́тит со́лнце.
         en_gb: The sun is shining brightly today.
       - ru: Мы лежа́ли на со́лнце.
@@ -49682,6 +49832,7 @@ words:
         inflect: { token: 2, case: dat, number: sg, rule: noun-fem-soft }
       - ru: В степи́ ду́ет си́льный ве́тер.
         en_gb: A strong wind blows in the steppe.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
       - ru: Ле́том степь покры́та цвета́ми.
         en_gb: In summer the steppe is covered with flowers.
   "стиль=style":
@@ -51871,6 +52022,9 @@ words:
       alt:
         - phone
     usage:
+      - ru: Все фо́то у меня́ в телефо́не.
+        en_gb: All my photos are on my phone.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Где мой телефо́н?
         en_gb: Where is my phone?
       - ru: Я забы́л телефо́н до́ма.
@@ -52071,6 +52225,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы отдыха́ли в тени́.
         en_gb: We rested in the shade.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Ве́чером те́ни стано́вятся дли́нными.
         en_gb: In the evening the shadows become long.
   "теория=theory":
@@ -52276,7 +52431,7 @@ words:
       - ru: В до́ме мно́го совреме́нной те́хники.
         en_gb: There is a lot of modern technology in the house.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: Магази́н продаёт быту́ю те́хнику.
+      - ru: Магази́н продаёт бытову́ю те́хнику.
         en_gb: The shop sells household appliances.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он хорошо́ разбира́ется в те́хнике.
@@ -52554,9 +52709,9 @@ words:
       sg_ins: то́лком
       sg_pre: то́лке
     usage:
-      - ru: От э́того спо́ра нет никако́го то́лку.
-        en_gb: There is no sense in this argument.
-        inflect: { token: 6, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он зна́ет толк в хоро́шем вине́.
+        en_gb: He is a real connoisseur of good wine.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Объясни́ всё то́лком.
         en_gb: Explain everything properly.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -53372,6 +53527,9 @@ words:
     en_gb:
       standard: toilet (a room with a lavatory)
     usage:
+      - ru: В туале́те гори́т свет.
+        en_gb: The light is on in the toilet.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Где туале́т?
         en_gb: Where is the toilet?
       - ru: Туале́т нахо́дится в конце́ коридо́ра.
@@ -53518,6 +53676,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В тылу́ рабо́тали же́нщины и де́ти.
         en_gb: Women and children worked at the home front.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
       - ru: Враг напа́л с ты́ла.
         en_gb: The enemy attacked from the rear.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -53803,6 +53962,7 @@ words:
     usage:
       - ru: Стол стои́т в углу́ ко́мнаты.
         en_gb: The table is in the corner of the room.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: У́гол ко́мнаты был тёмным.
         en_gb: The corner of the room was dark.
       - ru: Магази́н нахо́дится за угло́м.
@@ -54282,9 +54442,9 @@ words:
       - ru: Он верну́лся на Украи́ну.
         en_gb: He returned to Ukraine.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Они́ интересу́ются исто́рией Украи́ной.
-        en_gb: They are interested in the history connected with Ukraine.
-        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Он горди́тся свое́й ро́дной Украи́ной.
+        en_gb: He is proud of his native Ukraine.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
   "украинец=Ukrainian":
     cefr_level: A2
     gender: m
@@ -54933,6 +55093,9 @@ words:
     en_gb:
       standard: morning
     usage:
+      - ru: У́тром я пью ко́фе.
+        en_gb: In the morning I drink coffee.
+        inflect: { token: 1, case: ins, number: sg, rule: noun-ins-sg }
       - ru: До́брое у́тро! Как вы спа́ли?
         en_gb: Good morning! How did you sleep?
       - ru: Он просыпа́ется ра́но ка́ждое у́тро.
@@ -55677,6 +55840,9 @@ words:
       pl_ins: фи́льмами
       pl_pre: фи́льмах
     usage:
+      - ru: Я сове́тую тебе́ э́тот фильм.
+        en_gb: I recommend this film to you.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вчера́ мы смотре́ли интере́сный фильм.
         en_gb: Yesterday we watched an interesting film.
       - ru: Я люблю́ ста́рые фи́льмы.
@@ -56101,7 +56267,7 @@ words:
       sg_ins: Фра́нцией
       sg_pre: Фра́нции
     usage:
-      - ru: Фра́нция изве́стна свои́м си́ром.
+      - ru: Фра́нция изве́стна свои́м сы́ром.
         en_gb: France is famous for its cheese.
       - ru: Мы прилете́ли во Фра́нцию весно́й.
         en_gb: We flew to France in spring.
@@ -56967,7 +57133,7 @@ words:
         en_gb: The tsar ruled the whole country.
       - ru: Наро́д люби́л своего́ царя́.
         en_gb: The people loved their tsar.
-      - ru: Дворе́ц был постро́ен при ца́рях.
+      - ru: Дворе́ц был постро́ен при царя́х.
         en_gb: The palace was built in the times of the tsars.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
     declension:
@@ -56996,6 +57162,9 @@ words:
       alt:
         - color
     usage:
+      - ru: Я вы́брал руба́шку друго́го цве́та.
+        en_gb: I chose a shirt of a different colour.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Како́й твой люби́мый цвет?
         en_gb: What is your favourite colour?
       - ru: Мне нра́вятся я́ркие цвета́.
@@ -57217,8 +57386,9 @@ words:
     en_gb:
       standard: chain (a line of connected metal rings)
     usage:
-      - ru: Соба́ка сиди́т на це́пи.
+      - ru: Соба́ка сиди́т на цепи́.
         en_gb: The dog is on a chain.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Воро́та закры́ли тяжёлой це́пью.
         en_gb: The gate was closed with a heavy chain.
         inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
@@ -57323,7 +57493,7 @@ words:
         en_gb: The ancient civilisation left us many mysteries.
       - ru: Учёные изуча́ют исто́рию цивилиза́ции.
         en_gb: Scientists study the history of civilisation.
-      - ru: Лю́ди мечта́ют о вне́шней цивилиза́ции.
+      - ru: Лю́ди мечта́ют о внеземно́й цивилиза́ции.
         en_gb: People dream of an alien civilisation.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "цилиндр=cylinder":
@@ -57685,6 +57855,9 @@ words:
     en_gb:
       standard: person (a human being)
     usage:
+      - ru: Для одного́ челове́ка э́то сли́шком мно́го.
+        en_gb: For one person this is too much.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ка́ждый челове́к заслу́живает уваже́ния.
         en_gb: Every person deserves respect.
       - ru: Он о́чень хоро́ший челове́к.
@@ -57861,7 +58034,7 @@ words:
       - ru: Не помина́й чёрта на́ ночь.
         en_gb: Do not mention the devil at night.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
-      - ru: Де́ти боя́лись расска́зов о черте́й.
+      - ru: Де́ти боя́лись расска́зов о чертя́х.
         en_gb: The children were afraid of stories about devils.
     declension:
       sg_nom: чёрт
@@ -57929,7 +58102,7 @@ words:
       sg_pre: че́сти
       sg_loc: чести́
     usage:
-      - ru: Для меня́ э́то большая́ честь.
+      - ru: Для меня́ э́то больша́я честь.
         en_gb: For me this is a great honour.
       - ru: Он горди́тся свое́й че́стью.
         en_gb: He is proud of his honour.
@@ -58774,6 +58947,7 @@ words:
     usage:
       - ru: Посу́да стои́т в шкафу́.
         en_gb: The dishes are in the cupboard.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Он купи́л но́вый шкаф.
         en_gb: He bought a new cupboard.
       - ru: В прихо́жей стоя́т два шка́фа.
@@ -60006,7 +60180,7 @@ words:
     usage:
       - ru: Мы прошли́ пе́рвый эта́п рабо́ты.
         en_gb: We completed the first stage of the work.
-      - ru: На э́том эта́пе всё иду́т по пла́ну.
+      - ru: На э́том эта́пе всё идёт по пла́ну.
         en_gb: At this stage everything is going to plan.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Прое́кт состои́т из трёх эта́пов.
