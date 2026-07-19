@@ -100,6 +100,7 @@ words:
     usage:
       - ru: В воскресе́нье мы гуля́ем в па́рке.
         en_gb: On Sunday we walk in the park.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Воскресе́нье — после́дний день неде́ли.
         en_gb: Sunday is the last day of the week.
       - ru: По воскресе́ньям мы отдыха́ем до́ма.
