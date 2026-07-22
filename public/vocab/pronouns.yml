@@ -23,6 +23,7 @@ meta:
     det: determinative
     inter: interrogative
     neg: negative
+    indef: indefinite
   case:
     nom: nominative
     gen: genitive
@@ -352,9 +353,9 @@ words:
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-interrogative }
       - ru: Кто там?
         en_gb: Who is there?
-      - ru: Кому́ ты пи́шешь письмо́?
-        en_gb: Who are you writing a letter to?
-        inflect: { token: 1, case: dat, number: sg, rule: pronoun-interrogative }
+      - ru: У кого́ есть вопро́с?
+        en_gb: Who has a question?
+        inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: С кем ты идёшь в кино́?
         en_gb: Who are you going to the cinema with?
         inflect: { token: 2, case: ins, rule: pronoun-interrogative }
@@ -602,7 +603,7 @@ words:
         en_gb: I have no plan at all.
       - ru: Никака́я пого́да нас не остано́вит.
         en_gb: No weather will stop us.
-        inflect: { token: 1, case: nom, number: sg, gender: f }
+        inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: Он не зна́ет никаки́х языко́в.
         en_gb: He knows no languages at all.
         inflect: { token: 4, case: gen, number: pl, gender: pl, rule: pronoun-demonstrative }
@@ -648,7 +649,7 @@ words:
         en_gb: Nothing is eternal.
       - ru: Я ничего́ не понима́ю.
         en_gb: I understand nothing.
-        inflect: { token: 2, case: gen }
+        inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Он ниче́м не интересу́ется.
         en_gb: He is interested in nothing.
         inflect: { token: 2, case: ins, number: sg, rule: pronoun-interrogative }
@@ -702,9 +703,9 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: pronoun-personal }
       - ru: Она́ живёт в Москве́.
         en_gb: She lives in Moscow.
-      - ru: Я ча́сто ду́маю о ней.
-        en_gb: I often think about her.
-        inflect: { token: 5, case: pre, rule: pronoun-personal }
+      - ru: Я хорошо́ её зна́ю.
+        en_gb: I know her well.
+        inflect: { token: 3, case: acc, number: sg, rule: pronoun-personal }
       - ru: Я подари́л ей цветы́.
         en_gb: I gave her flowers.
         inflect: { token: 3, case: dat, number: sg, rule: pronoun-personal }
