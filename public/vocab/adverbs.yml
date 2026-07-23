@@ -1152,6 +1152,21 @@ words:
         en_gb: My sister will soon get married.
       - ru: Она́ не хо́чет выходи́ть за́муж.
         en_gb: She doesn't want to get married.
+  "замужем=married":
+    cefr_level: A1
+    accented: за́мужем
+    collections:
+      - people
+      - family
+    en_gb:
+      standard: married (of a woman; a fixed predicative form)
+    usage:
+      - ru: Моя́ ста́ршая сестра́ уже́ за́мужем.
+        en_gb: My older sister is already married.
+      - ru: Она́ за́мужем за врачо́м.
+        en_gb: She is married to a doctor.
+      - ru: Ты за́мужем?
+        en_gb: Are you married?
   "заранее=in advance":
     cefr_level: B1
     accented: зара́нее
@@ -2242,6 +2257,23 @@ words:
         en_gb: He speaks incomprehensibly.
       - ru: Непоня́тно, заче́м э́то ну́жно.
         en_gb: It is unclear why this is needed.
+  "неправильно=incorrectly":
+    cefr_level: A1
+    accented: непра́вильно
+    en_gb:
+      standard: incorrectly (in the wrong way)
+      alt:
+        - wrongly
+        - it is wrong
+    forms:
+      comparative: непра́вильнее
+    usage:
+      - ru: Ты написа́л э́то сло́во непра́вильно.
+        en_gb: You wrote this word incorrectly.
+      - ru: Он непра́вильно по́нял вопро́с.
+        en_gb: He understood the question wrongly.
+      - ru: Так де́лать непра́вильно.
+        en_gb: It is wrong to do it like that.
   "непременно=without fail":
     cefr_level: B1
     accented: непреме́нно
@@ -3432,6 +3464,21 @@ words:
         en_gb: He is very tired.
       - ru: Дождь шёл о́чень си́льно.
         en_gb: The rain fell very heavily.
+  "скорее=rather":
+    cefr_level: A1
+    accented: скоре́е
+    en_gb:
+      standard: rather (more likely; sooner, quicker)
+      alt:
+        - sooner
+        - quicker
+    usage:
+      - ru: Скоре́е всего́, он уже́ до́ма.
+        en_gb: Most likely, he is already home.
+      - ru: Э́то скоре́е шу́тка, чем пра́вда.
+        en_gb: This is rather a joke than the truth.
+      - ru: Иди́ сюда́ скоре́е!
+        en_gb: Come here quicker!
   "скоро=soon":
     cefr_level: A2
     accented: ско́ро
@@ -3836,6 +3883,27 @@ words:
         en_gb: Put the book here.
       - ru: Они́ прие́хали сюда́ вчера́.
         en_gb: They arrived here yesterday.
+  "так=so (adv)":
+    cefr_level: A1
+    accented: так
+    en_gb:
+      standard: so (to such a degree; in this way, thus)
+      alt:
+        - thus
+        - that way
+    usage:
+      - ru: Не так бы́стро!
+        en_gb: Not so fast!
+      - ru: Сде́лай так же, как я.
+        en_gb: Do it the same way as me.
+      - ru: Он так уста́л, что усну́л сра́зу.
+        en_gb: He was so tired that he fell asleep at once.
+      - ru: Так себе́.
+        en_gb: So-so.
+      - ru: Что-то здесь не так.
+        en_gb: Something is wrong here.
+      - ru: У нас и так ма́ло вре́мени.
+        en_gb: We have little time as it is.
   "также=also":
     cefr_level: A2
     accented: та́кже

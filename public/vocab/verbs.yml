@@ -11375,6 +11375,40 @@ words:
       - ru: Ты кома́ндуешь а́рмией?
         en_gb: Do you command the army?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+  "контролировать=to control":
+    cefr_level: A1
+    accented: контроли́ровать
+    aspect: impf
+    collections:
+      - work
+    en_gb:
+      standard: to control (to keep watch over and direct something)
+      alt:
+        - to monitor
+    conjugation:
+      imperative:
+        sg: контроли́руй
+        pl: контроли́руйте
+      present:
+        "1sg": контроли́рую
+        "2sg": контроли́руешь
+        "3sg": контроли́рует
+        "1pl": контроли́руем
+        "2pl": контроли́руете
+        "3pl": контроли́руют
+      past_m: контроли́ровал
+      past_f: контроли́ровала
+      past_n: контроли́ровало
+      past_pl: контроли́ровали
+    usage:
+      - ru: Нача́льник контроли́рует ка́ждый шаг.
+        en_gb: The boss controls every step.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я не могу́ контроли́ровать всё.
+        en_gb: I can't control everything.
+      - ru: Учи́тель контроли́ровал класс во вре́мя экза́мена.
+        en_gb: The teacher monitored the class during the exam.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
   "кончать=to finish":
     cefr_level: A2
     accented: конча́ть
@@ -14908,6 +14942,39 @@ words:
       - ru: Ты обни́мешь своего́ сы́на?
         en_gb: Will you embrace your son?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "обожать=to adore":
+    cefr_level: A1
+    accented: обожа́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: to adore (to love someone or something very much)
+    conjugation:
+      imperative:
+        sg: обожа́й
+        pl: обожа́йте
+      present:
+        "1sg": обожа́ю
+        "2sg": обожа́ешь
+        "3sg": обожа́ет
+        "1pl": обожа́ем
+        "2pl": обожа́ете
+        "3pl": обожа́ют
+      past_m: обожа́л
+      past_f: обожа́ла
+      past_n: обожа́ло
+      past_pl: обожа́ли
+    usage:
+      - ru: Я обожа́ю э́ту пе́сню.
+        en_gb: I adore this song.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Она́ обожа́ет свои́х дете́й.
+        en_gb: She adores her children.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Де́ти обожа́ют моро́женое.
+        en_gb: Children adore ice cream.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
   "обойти=to go around":
     cefr_level: B1
     accented: обойти́
@@ -28434,6 +28501,40 @@ words:
       - ru: Нау́ка развива́лась бы быстре́е без войн.
         en_gb: Science would develop faster without wars.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
+  "разгадывать=to solve":
+    cefr_level: A1
+    accented: разга́дывать
+    aspect: impf
+    collections:
+      - daily life
+    en_gb:
+      standard: to solve (to work out a riddle or puzzle)
+      alt:
+        - to work out
+    conjugation:
+      imperative:
+        sg: разга́дывай
+        pl: разга́дывайте
+      present:
+        "1sg": разга́дываю
+        "2sg": разга́дываешь
+        "3sg": разга́дывает
+        "1pl": разга́дываем
+        "2pl": разга́дываете
+        "3pl": разга́дывают
+      past_m: разга́дывал
+      past_f: разга́дывала
+      past_n: разга́дывало
+      past_pl: разга́дывали
+    usage:
+      - ru: Он разга́дывает кроссво́рд ка́ждое у́тро.
+        en_gb: He solves a crossword every morning.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Она́ лю́бит разга́дывать зага́дки.
+        en_gb: She likes to solve riddles.
+      - ru: Мы до́лго разга́дывали э́ту та́йну.
+        en_gb: We spent a long time working out this mystery.
+        inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
   "разглядеть=to make out":
     cefr_level: B1
     accented: разгляде́ть
