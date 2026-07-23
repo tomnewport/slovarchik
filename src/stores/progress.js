@@ -404,6 +404,44 @@ export async function advanceBatch(level) {
   await idb.setMeta(BATCH_META_KEY(level), null)
 }
 
+/** Delete a word's entire progress record (reactive state + IndexedDB). */
+export async function deleteRecord(key) {
+  if (state.records[key]) delete state.records[key]
+  await idb.deleteProgress(key)
+}
+
+/**
+ * Remove one word from a level's committed batch, persisting the change. If the
+ * batch would be left empty it is cleared entirely so the UI offers a fresh set
+ * of options. No-op when the level has no batch or the word isn't in it.
+ */
+export async function removeFromBatch(level, key) {
+  const batch = state[level]
+  if (!batch || !batch.words.includes(key)) return
+  const words = batch.words.filter((w) => w !== key)
+  if (words.length === 0) {
+    await advanceBatch(level)
+    return
+  }
+  const updated = JSON.parse(JSON.stringify(batch))
+  updated.words = words
+  updated.size = words.length
+  await commitBatch(updated)
+}
+
+/**
+ * "Leave for later": pop a word out of whichever current batch holds it so the
+ * learner can set it aside (e.g. it's being learned elsewhere and shouldn't be
+ * driven by the app). By default all recorded progress for the word is discarded
+ * too, keeping the app's picture of what's known in sync with outside study;
+ * pass `{ keepProgress: true }` to only detach it from the batch.
+ */
+export async function leaveForLater(key, { keepProgress = false } = {}) {
+  await removeFromBatch('learning', key)
+  await removeFromBatch('mastery', key)
+  if (!keepProgress) await deleteRecord(key)
+}
+
 // ---------------------------------------------------------------------------
 // Sessions.
 // ---------------------------------------------------------------------------
@@ -596,6 +634,34 @@ export function encounterCount(key) {
 /** True when a word has ever been answered correctly (any dimension/level). */
 export function hasBeenCorrect(key) {
   return (state.records[key]?.events ?? []).some((e) => e.correct)
+}
+
+/**
+ * A full snapshot of a word's learning progress, for the word-detail modal:
+ * its current and peak state, first-learned / first-mastered timestamps, total
+ * attempts and last-seen time, and per-level dimension progress (only the
+ * dimensions the word is actually graded on). `tracked` is false for a word the
+ * engine has never recorded an attempt against.
+ */
+export function wordProgressDetail(key) {
+  const rec = state.records[key] ?? null
+  const evs = events(key)
+  const word = wordRecord(key)
+  const levels = {}
+  for (const level of LEVELS) {
+    levels[level] = applicableDimensions(level, word).map((d) => dimensionProgress(evs, level, d))
+  }
+  return {
+    tracked: !!rec,
+    state: stateOf(key),
+    peak: STATES[rec?.peak ?? 0],
+    learnedAt: rec?.learnedAt ?? null,
+    masteredAt: rec?.masteredAt ?? null,
+    totalAttempts: evs.length,
+    lastAt: lastAttemptAt(evs),
+    skipSpeaking: rec?.skipSpeaking === true,
+    levels,
+  }
 }
 
 /** Keys of the non-unknown words matching a skill id (focused-session pool). */
