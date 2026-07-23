@@ -486,7 +486,6 @@ words:
       acc: миллио́н
       ins: миллио́ном
       pre: миллио́не
-  # ── Ordinal numbers (decline like adjectives) ──────────────────────
   "ноль=zero":
     cefr_level: A1
     type: cardinal
@@ -538,7 +537,6 @@ words:
         en_gb: Both books are interesting.
       - ru: Я ви́жу о́беих де́вочек.
         en_gb: I see both girls.
-  # ── Quantity words and non-standard units ──────────────────────────
   "один=one":
     cefr_level: A1
     type: cardinal
@@ -630,8 +628,6 @@ words:
         en_gb: I bought one and a half kilograms of apples.
       - ru: Доро́га заняла́ полторы́ неде́ли.
         en_gb: The journey took a week and a half.
-  # ── Years (spelled out as cardinals) ───────────────────────────────
-  # In context the final word becomes an ordinal: "в … году́".
   "пятеро=five together":
     cefr_level: B2
     type: collective
@@ -1110,7 +1106,7 @@ words:
     usage:
       - ru: Револю́ция произошла́ в ты́сяча девятьсо́т семна́дцатом году́.
         en_gb: The revolution took place in nineteen seventeen.
-      - ru: Царь о́трёкся в ты́сяча девятьсо́т семна́дцатом году́.
+      - ru: Царь отрёкся в ты́сяча девятьсо́т семна́дцатом году́.
         en_gb: The tsar abdicated in nineteen seventeen.
       - ru: До ты́сяча девятьсо́т семна́дцатого го́да Росси́я была́ импе́рией.
         en_gb: Before nineteen seventeen Russia was an empire.
@@ -1182,7 +1178,6 @@ words:
       f: ты́сячная
       n: ты́сячное
       pl: ты́сячные
-  # ── Collective numbers (groups) ────────────────────────────────────
     usage:
       - ru: Э́то ты́сячный покупа́тель.
         en_gb: This is the thousandth customer.
@@ -1329,8 +1324,8 @@ words:
     usage:
       - ru: Сейча́с шесть часо́в.
         en_gb: It is six o'clock now.
-      - ru: У па́ука шесть ног и ещё две.
-        en_gb: A spider has six legs and two more.
+      - ru: У жука́ шесть ног.
+        en_gb: A beetle has six legs.
       - ru: Мы говори́ли о шести́ страна́х.
         en_gb: We talked about six countries.
     forms:
