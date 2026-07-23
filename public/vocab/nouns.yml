@@ -2873,6 +2873,35 @@ words:
         inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Прости́те за беспоко́йство.
         en_gb: Sorry for the trouble.
+  "беспорядок=mess":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: mess (an untidy state; disorder)
+      alt:
+        - disorder
+    usage:
+      - ru: Убери́ беспоря́док на столе́!
+        en_gb: Clear up the mess on the table!
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ уста́ла от беспоря́дка.
+        en_gb: She's tired of the mess.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В э́том беспоря́дке ничего́ не найти́.
+        en_gb: You can't find anything in this mess.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: беспоря́док
+      sg_gen: беспоря́дка
+      sg_dat: беспоря́дку
+      sg_acc: беспоря́док
+      sg_ins: беспоря́дком
+      sg_pre: беспоря́дке
   "бетон=concrete":
     batteries: [objects]
     cefr_level: B2
@@ -4474,6 +4503,36 @@ words:
         en_gb: A small piece of paper lies on the table.
       - ru: Она́ вы́бросила ста́рые бума́жки.
         en_gb: She threw away the old scraps of paper.
+  "бунгало=bungalow":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - travel
+    en_gb:
+      standard: bungalow (a single-storey house; indeclinable)
+    usage:
+      - ru: Они́ сня́ли бунга́ло на берегу́ мо́ря.
+        en_gb: They rented a bungalow by the sea.
+      - ru: В бунга́ло всего́ две ко́мнаты.
+        en_gb: The bungalow has just two rooms.
+      - ru: Ты когда́-нибудь жил в бунга́ло?
+        en_gb: Have you ever lived in a bungalow?
+    declension:
+      sg_nom: бунга́ло
+      sg_gen: бунга́ло
+      sg_dat: бунга́ло
+      sg_acc: бунга́ло
+      sg_ins: бунга́ло
+      sg_pre: бунга́ло
+      pl_nom: бунга́ло
+      pl_gen: бунга́ло
+      pl_dat: бунга́ло
+      pl_acc: бунга́ло
+      pl_ins: бунга́ло
+      pl_pre: бунга́ло
   "бутерброд=sandwich":
     batteries: [objects]
     cefr_level: A2
@@ -4690,6 +4749,41 @@ words:
       pl_acc: валю́ты
       pl_ins: валю́тами
       pl_pre: валю́тах
+  "ванна=bath":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: bath (the tub you bathe in)
+      alt:
+        - bathtub
+    usage:
+      - ru: Она́ принима́ет горя́чую ва́нну.
+        en_gb: She's taking a hot bath.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В ва́нне мно́го воды́.
+        en_gb: There's a lot of water in the bath.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Она́ вы́шла из ва́нны.
+        en_gb: She got out of the bath.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ва́нна
+      sg_gen: ва́нны
+      sg_dat: ва́нне
+      sg_acc: ва́нну
+      sg_ins: ва́нной
+      sg_pre: ва́нне
+      pl_nom: ва́нны
+      pl_gen: ванн
+      pl_dat: ва́ннам
+      pl_acc: ва́нны
+      pl_ins: ва́ннами
+      pl_pre: ва́ннах
   "ванная=bathroom":
     batteries: [places]
     cefr_level: A1
@@ -5008,6 +5102,38 @@ words:
       sg_acc: ве́ру
       sg_ins: ве́рой
       sg_pre: ве́ре
+  "веранда=veranda":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: veranda (a roofed open porch along a house)
+    usage:
+      - ru: Мы пьём чай на вера́нде.
+        en_gb: We drink tea on the veranda.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Они́ постро́или большу́ю вера́нду.
+        en_gb: They built a big veranda.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: С вера́нды открыва́ется краси́вый вид.
+        en_gb: A beautiful view opens up from the veranda.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: вера́нда
+      sg_gen: вера́нды
+      sg_dat: вера́нде
+      sg_acc: вера́нду
+      sg_ins: вера́ндой
+      sg_pre: вера́нде
+      pl_nom: вера́нды
+      pl_gen: вера́нд
+      pl_dat: вера́ндам
+      pl_acc: вера́нды
+      pl_ins: вера́ндами
+      pl_pre: вера́ндах
   "верблюд=camel":
     batteries: [animals]
     cefr_level: B1
@@ -9155,6 +9281,40 @@ words:
         en_gb: He believed in the Lord with all his heart.
       - ru: Сла́ва Го́споду за э́тот день.
         en_gb: Glory to the Lord for this day.
+  "гостиная=living room":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: living room (the main room for relaxing and guests)
+      alt:
+        - sitting room
+    usage:
+      - ru: Го́сти собра́лись в гости́ной.
+        en_gb: The guests gathered in the living room.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы купи́ли ди́ван в гости́ную.
+        en_gb: We bought a sofa for the living room.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Окно́ гости́ной выхо́дит в сад.
+        en_gb: The living room window looks onto the garden.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: гости́ная
+      sg_gen: гости́ной
+      sg_dat: гости́ной
+      sg_acc: гости́ную
+      sg_ins: гости́ной
+      sg_pre: гости́ной
+      pl_nom: гости́ные
+      pl_gen: гости́ных
+      pl_dat: гости́ным
+      pl_acc: гости́ные
+      pl_ins: гости́ными
+      pl_pre: гости́ных
   "гостиница=hotel":
     batteries: [places]
     cefr_level: A2
@@ -11077,6 +11237,41 @@ words:
       pl_acc: дете́й
       pl_ins: детьми́
       pl_pre: де́тях
+  "детская=nursery":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - family
+    en_gb:
+      standard: nursery (a child's bedroom or playroom)
+      alt:
+        - children's room
+    usage:
+      - ru: Де́ти игра́ют в де́тской.
+        en_gb: The children are playing in the nursery.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы покра́сили де́тскую в жёлтый цвет.
+        en_gb: We painted the nursery yellow.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Роди́тели вы́шли из де́тской.
+        en_gb: The parents left the nursery.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: де́тская
+      sg_gen: де́тской
+      sg_dat: де́тской
+      sg_acc: де́тскую
+      sg_ins: де́тской
+      sg_pre: де́тской
+      pl_nom: де́тские
+      pl_gen: де́тских
+      pl_dat: де́тским
+      pl_acc: де́тские
+      pl_ins: де́тскими
+      pl_pre: де́тских
   "детство=childhood":
     batteries: [time_events, abstract]
     cefr_level: B1
@@ -17385,6 +17580,38 @@ words:
       pl_acc: ка́меры
       pl_ins: ка́мерами
       pl_pre: ка́мерах
+  "камин=fireplace":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: fireplace (a place in a wall where a fire burns)
+    usage:
+      - ru: В ками́не гори́т ого́нь.
+        en_gb: A fire is burning in the fireplace.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы поста́вили кре́сло у ками́на.
+        en_gb: We put an armchair by the fireplace.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он подошёл к ками́ну.
+        en_gb: He came up to the fireplace.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: ками́н
+      sg_gen: ками́на
+      sg_dat: ками́ну
+      sg_acc: ками́н
+      sg_ins: ками́ном
+      sg_pre: ками́не
+      pl_nom: ками́ны
+      pl_gen: ками́нов
+      pl_dat: ками́нам
+      pl_acc: ками́ны
+      pl_ins: ками́нами
+      pl_pre: ками́нах
   "Канада=Canada":
     batteries: [places]
     cefr_level: A2
@@ -20026,6 +20253,38 @@ words:
       pl_acc: ко́мнаты
       pl_ins: ко́мнатами
       pl_pre: ко́мнатах
+  "комод=chest of drawers":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: chest of drawers (a piece of furniture with drawers)
+    usage:
+      - ru: Я убра́л оде́жду в комо́д.
+        en_gb: I put the clothes away in the chest of drawers.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В комо́де лежа́т ве́щи.
+        en_gb: There are things in the chest of drawers.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Над комо́дом виси́т зе́ркало.
+        en_gb: A mirror hangs above the chest of drawers.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: комо́д
+      sg_gen: комо́да
+      sg_dat: комо́ду
+      sg_acc: комо́д
+      sg_ins: комо́дом
+      sg_pre: комо́де
+      pl_nom: комо́ды
+      pl_gen: комо́дов
+      pl_dat: комо́дам
+      pl_acc: комо́ды
+      pl_ins: комо́дами
+      pl_pre: комо́дах
   "компания=company":
     batteries: [society, work_study]
     cefr_level: A2
@@ -24428,6 +24687,38 @@ words:
       pl_acc: лю́ки
       pl_ins: лю́ками
       pl_pre: лю́ках
+  "люстра=chandelier":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: chandelier (a hanging light with several bulbs)
+    usage:
+      - ru: Мы купи́ли но́вую лю́стру.
+        en_gb: We bought a new chandelier.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Под лю́строй стои́т кру́глый стол.
+        en_gb: A round table stands under the chandelier.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: На лю́стре мно́го пы́ли.
+        en_gb: There's a lot of dust on the chandelier.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: лю́стра
+      sg_gen: лю́стры
+      sg_dat: лю́стре
+      sg_acc: лю́стру
+      sg_ins: лю́строй
+      sg_pre: лю́стре
+      pl_nom: лю́стры
+      pl_gen: люстр
+      pl_dat: лю́страм
+      pl_acc: лю́стры
+      pl_ins: лю́страми
+      pl_pre: лю́страх
   "лягушка=frog":
     batteries: [animals, nature]
     cefr_level: B1
@@ -42616,6 +42907,39 @@ words:
         en_gb: The bricklayer was mixing the mortar.
       - ru: В буты́лках бы́ли ра́зные раство́ры.
         en_gb: There were different solutions in the bottles.
+  "растение=plant":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - in the garden
+    en_gb:
+      standard: plant (a living thing that grows in soil)
+    usage:
+      - ru: Я купи́л но́вое расте́ние.
+        en_gb: I bought a new plant.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На э́том расте́нии появи́лись цветы́.
+        en_gb: Flowers have appeared on this plant.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: В на́шем до́ме мно́го расте́ний.
+        en_gb: There are many plants in our house.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: расте́ние
+      sg_gen: расте́ния
+      sg_dat: расте́нию
+      sg_acc: расте́ние
+      sg_ins: расте́нием
+      sg_pre: расте́нии
+      pl_nom: расте́ния
+      pl_gen: расте́ний
+      pl_dat: расте́ниям
+      pl_acc: расте́ния
+      pl_ins: расте́ниями
+      pl_pre: расте́ниях
   "расход=expense":
     batteries: [society]
     cefr_level: B2
@@ -50179,6 +50503,40 @@ words:
       pl_acc: столи́цы
       pl_ins: столи́цами
       pl_pre: столи́цах
+  "столовая=dining room":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: dining room (a room for eating meals)
+      alt:
+        - canteen
+    usage:
+      - ru: Вся семья́ собира́ется в столо́вой.
+        en_gb: The whole family gathers in the dining room.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы поста́вили большо́й стол в столо́вую.
+        en_gb: We put a big table in the dining room.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: О́кна столо́вой выхо́дят на у́лицу.
+        en_gb: The dining room windows face the street.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: столо́вая
+      sg_gen: столо́вой
+      sg_dat: столо́вой
+      sg_acc: столо́вую
+      sg_ins: столо́вой
+      sg_pre: столо́вой
+      pl_nom: столо́вые
+      pl_gen: столо́вых
+      pl_dat: столо́вым
+      pl_acc: столо́вые
+      pl_ins: столо́выми
+      pl_pre: столо́вых
   "сторона=side":
     batteries: [everyday, abstract]
     cefr_level: B1
@@ -58990,6 +59348,41 @@ words:
       sg_acc: Швейца́рию
       sg_ins: Швейца́рией
       sg_pre: Швейца́рии
+  "шезлонг=deckchair":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - travel
+      - in the garden
+    en_gb:
+      standard: deckchair (a folding chair for relaxing outdoors)
+      alt:
+        - sun lounger
+    usage:
+      - ru: Он лежи́т в шезло́нге у бассе́йна.
+        en_gb: He's lying in a deckchair by the pool.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он купи́л но́вый шезло́нг.
+        en_gb: He bought a new deckchair.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На пля́же мно́го шезло́нгов.
+        en_gb: There are many deckchairs on the beach.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: шезло́нг
+      sg_gen: шезло́нга
+      sg_dat: шезло́нгу
+      sg_acc: шезло́нг
+      sg_ins: шезло́нгом
+      sg_pre: шезло́нге
+      pl_nom: шезло́нги
+      pl_gen: шезло́нгов
+      pl_dat: шезло́нгам
+      pl_acc: шезло́нги
+      pl_ins: шезло́нгами
+      pl_pre: шезло́нгах
   "шёлк=silk":
     batteries: [objects]
     cefr_level: B2
