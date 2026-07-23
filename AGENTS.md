@@ -109,6 +109,9 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, `build`, and the Playwright
 - **Add/edit words** → the YAML in `public/vocab/` + bump `updated` in
   `manifest.json`. `vocabBuild.test.js`/`declension.test.js` guard the shape.
   Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
+  New vocab is held to the **[quality bar](public/vocab/CONTRIBUTING.md#the-quality-bar-for-new-vocabulary)**
+  — hand-authored, natural sentences, breadth of forms, questions/imperatives,
+  rich `inflect:` annotations — not just a schema-valid entry.
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store);
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
 - **The session/practice flow** → `src/views/SessionView.vue` +

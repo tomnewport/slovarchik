@@ -5603,6 +5603,51 @@ words:
       pl_acc: жёлтые
       pl_ins: жёлтыми
       pl_pre: жёлтых
+  "женатый=married":
+    cefr_level: A1
+    accented: жена́тый
+    collections:
+      - family
+    en_gb:
+      standard: married (of a man)
+    usage:
+      - ru: Он жена́тый челове́к.
+        en_gb: He is a married man.
+      - ru: Они́ жена́тая па́ра.
+        en_gb: They are a married couple.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Мой ста́рший брат уже́ жена́т.
+        en_gb: My older brother is already married.
+    forms:
+      m: жена́тый
+      f: жена́тая
+      n: жена́тое
+      pl: жена́тые
+    declension:
+      m_nom: жена́тый
+      m_gen: жена́того
+      m_dat: жена́тому
+      m_acc: жена́тый
+      m_ins: жена́тым
+      m_pre: жена́том
+      n_nom: жена́тое
+      n_gen: жена́того
+      n_dat: жена́тому
+      n_acc: жена́тое
+      n_ins: жена́тым
+      n_pre: жена́том
+      f_nom: жена́тая
+      f_gen: жена́той
+      f_dat: жена́той
+      f_acc: жена́тую
+      f_ins: жена́той
+      f_pre: жена́той
+      pl_nom: жена́тые
+      pl_gen: жена́тых
+      pl_dat: жена́тым
+      pl_acc: жена́тые
+      pl_ins: жена́тыми
+      pl_pre: жена́тых
   "женский=female":
     batteries: [people, clothes]
     cefr_level: A2

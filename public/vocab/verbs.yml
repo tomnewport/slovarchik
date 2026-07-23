@@ -9422,6 +9422,40 @@ words:
         en_gb: Soon he will be commanding the regiment.
       - ru: Я бы не кома́ндовал людьми́ так гру́бо.
         en_gb: I would not command people so rudely.
+  "контролировать=to control":
+    cefr_level: A1
+    accented: контроли́ровать
+    aspect: impf
+    collections:
+      - work
+    en_gb:
+      standard: to control (to check or keep under control)
+      alt:
+        - to monitor
+    usage:
+      - ru: Нача́льник контроли́рует всю рабо́ту.
+        en_gb: The boss oversees all the work.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Ты контроли́руешь ситуа́цию?
+        en_gb: Do you have the situation under control?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Роди́тели контроли́ровали ка́ждый его́ шаг.
+        en_gb: His parents controlled his every move.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
+      - ru: За́втра я сам бу́ду контроли́ровать проце́сс.
+        en_gb: Tomorrow I'll oversee the process myself.
+    conjugation:
+      present:
+        "1sg": контроли́рую
+        "2sg": контроли́руешь
+        "3sg": контроли́рует
+        "1pl": контроли́руем
+        "2pl": контроли́руете
+        "3pl": контроли́руют
+      past_m: контроли́ровал
+      past_f: контроли́ровала
+      past_n: контроли́ровало
+      past_pl: контроли́ровали
   "кончать=to finish":
     batteries: [routine]
     cefr_level: A2
@@ -12347,6 +12381,40 @@ words:
         en_gb: I would embrace you more tightly.
       - ru: За́втра ма́ма обни́мет дете́й.
         en_gb: Tomorrow mum will embrace the children.
+  "обожать=to adore":
+    cefr_level: A1
+    accented: обожа́ть
+    aspect: impf
+    collections:
+      - feelings and sensations
+      - daily life
+    en_gb:
+      standard: to adore (to love very much)
+    usage:
+      - ru: Я обожа́ю шокола́д.
+        en_gb: I adore chocolate.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Де́ти обожа́ют моро́женое.
+        en_gb: Children adore ice cream.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
+      - ru: Ты обожа́ешь путеше́ствовать?
+        en_gb: Do you adore travelling?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: В де́тстве она́ обожа́ла танцева́ть.
+        en_gb: As a child she adored dancing.
+        inflect: { token: 4, tense: past, person: past_f, rule: verb-past }
+    conjugation:
+      present:
+        "1sg": обожа́ю
+        "2sg": обожа́ешь
+        "3sg": обожа́ет
+        "1pl": обожа́ем
+        "2pl": обожа́ете
+        "3pl": обожа́ют
+      past_m: обожа́л
+      past_f: обожа́ла
+      past_n: обожа́ло
+      past_pl: обожа́ли
   "обойти=to go around":
     batteries: [motion]
     cefr_level: B1
@@ -23612,6 +23680,38 @@ words:
         en_gb: The city will be developing very quickly.
       - ru: Нау́ка развива́лась бы быстре́е без войн.
         en_gb: Science would develop faster without wars.
+  "разгадывать=to solve":
+    cefr_level: A1
+    accented: разга́дывать
+    aspect: impf
+    collections:
+      - reading
+    en_gb:
+      standard: to solve (to work out a riddle or puzzle)
+      alt:
+        - to work out
+    usage:
+      - ru: Он разга́дывает кроссво́рд в газе́те.
+        en_gb: He's solving a crossword in the newspaper.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Как ты разга́дываешь э́ти зага́дки?
+        en_gb: How do you work out these riddles?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
+      - ru: Мы до́лго разга́дывали э́ту та́йну.
+        en_gb: We spent a long time unravelling this mystery.
+        inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
+    conjugation:
+      present:
+        "1sg": разга́дываю
+        "2sg": разга́дываешь
+        "3sg": разга́дывает
+        "1pl": разга́дываем
+        "2pl": разга́дываете
+        "3pl": разга́дывают
+      past_m: разга́дывал
+      past_f: разга́дывала
+      past_n: разга́дывало
+      past_pl: разга́дывали
   "разглядеть=to make out":
     batteries: [routine]
     cefr_level: B1

@@ -13,6 +13,100 @@ version.
 
 ---
 
+## The quality bar for new vocabulary
+
+The schema below tells you what is _valid_. This section tells you what is
+_good_. Older entries are mixed quality; **new entries are held to the higher
+standard**, and the goal is to raise the average as we go. The bar exists because
+scripted/templated authoring produced most of the problems catalogued in the
+issue tracker (#345–#359). Every point below is a lesson paid for by a bug.
+
+Author **by hand, one word at a time.** Never batch-generate sentences from a
+template — that is precisely what created the «За́втра я бу́ду…» / «На столе́
+лежи́т…» monoculture (#352, #356). If you catch yourself filling a frame, stop.
+
+**1. Every sentence is one a native speaker would actually say.** Real context,
+real register. No circular sentences invented to force a grammatical slot
+(«Держи́сь за пери́ла, и бу́дешь держа́ться кре́пко.»), no semantically odd
+content (ants building a *house* not a `мураве́йник`; a *personal* intelligentsia
+one can be proud of). Read each aloud; if it reads like a translation exercise or
+textbook filler, rewrite it. (#347)
+
+**2. Grammatically correct — verify, don't assume.** Case government, agreement,
+aspect, motion-vs-location (motion → accusative destination), `что́бы` + **past**
+form (never future), real-vs-unreal conditionals (`бы` on both halves or
+neither). These are the errors that shipped in #345. When in doubt about a
+government or an ending, check it.
+
+**3. Correct orthography, always.** Combining acute **U+0301** on the stressed
+vowel of every polysyllable; **ё spelled ё** in keys, forms and sentences;
+monosyllables carry no mark. (#346)
+
+**4. Breadth of forms per word — not a single slot.** The user-facing goal is
+"a good number of *different* uses for each word." A noun met only ever in the
+accusative teaches one sixth of its declension. Aim for each word's `usage:` set
+to show it in **≥2 distinct grammatical contexts** (3+ is better): a nominative
+subject *plus* an oblique case chosen for naturalness — a kitchen noun in «на
+ку́хне» (prepositional), an instrument in the instrumental, a person in
+dative/accusative, a possessor in «у + genitive». (#356)
+
+**5. Make the bank converse.** The corpus skews to third-person declaratives; a
+learner drilling it never asks anyone anything and is never addressed. Where it
+suits the word, include:
+
+- **questions and second person** (ты/вы): «Где ты живёшь?», «Ско́лько э́то
+  сто́ит?», «Вы говори́те по-англи́йски?» (#350)
+- **imperatives**, biased toward polite -те requests a visitor actually uses:
+  «Скажи́те, пожа́луйста…», «Не забу́дьте биле́ты!» (negated imperatives are
+  imperfective where idiomatic). (#349)
+- **survival formulas** on the word that owns them: «Меня́ зову́т…» (on `звать`),
+  «Мо́жно…?» (on `мо́жно`), «С удово́льствием» (on `удово́льствие`). (#351)
+- for **pronouns**, show the traps the learner needs to meet repeatedly: the
+  н- prefix after prepositions (у него́, с ни́ми), свой vs его́/её/их, dative
+  experiencers (Мне хо́лодно, Ему́ два́дцать лет), negative doubling (Никто́
+  ничего́ не зна́ет), split negatives (ни с кем, ни о чём). (#355)
+
+**6. Annotate inflection richly.** Add an `inflect:` block to every usage where
+the target word sits in a **pin-downable** inflected slot (not a bare nominative
+subject, not an invariable POS). Spread the annotations across a word's examples
+so different cases/tenses/persons are covered, and reference the correct `rule:`
+id. Verify with `node scripts/annotate-inflect.mjs` and `npm test` — a
+mis-counted `token` index or wrong case/number fails `phrasesData.test.js`. (#359)
+
+**7. Accept fair alternate translations (`en_alt`).** Russian has no articles and
+freer word order, so one sentence often has several right English renderings.
+Add them so the word-bank drill doesn't reject a correct answer: existential
+"there is/are…" for «На столе́ лежи́т…», "has got" for «У него́…», "I feel cold"
+for «Мне хо́лодно». Only add renderings a careful translator would accept — a
+wrong `en_alt` silently teaches an error. (Grading already forgives
+articles/punctuation, so don't add variants differing only by "a"/"the".) (#357)
+
+**8. Teach the grammar, not just the ending.** When an example exercises a
+**non-intuitive** use of a case, make sure the `grammar-rules.yml` rule it
+references explains the *function* — instrumental for a profession or the time of
+day, dative for age, prepositional for what someone is wearing — not merely how
+the ending is built. If the use isn't covered by an existing rule, extend it.
+
+**9. Full, correct paradigms.** Nouns: all six cases for every number declared.
+Verbs: `aspect` + full `conjugation` + `imperative`. Adjectives: full agreement
+forms. Watch the traps: substantivised adjectives (`гости́ная`, `столо́вая`,
+`бу́лочная`, `шампа́нское`) decline as **adjectives**, not nouns; indeclinables
+(`бунга́ло`, `спаге́тти`, `та́нго`) take no table; pluralia tantum (`очки́`,
+`часы́`) get only `pl_*`. Scaffold with the `scripts/gen-*.mjs` helpers and
+verify with `npm test`.
+
+**10. Leave no word un-glossable.** Every word you introduce in an example needs
+a dictionary entry so tap-hints can translate it — a real POS entry, or a
+`learn: false` gloss-only entry (usually in `glossary.yml`). Keep `node
+scripts/coverage-gloss.js` at **0**. (#326)
+
+> **Self-check before committing a batch:** would a native speaker say every
+> sentence? Is every word shown in more than one form? Does at least one example
+> ask a question or give a command? Are the `inflect:` annotations present and
+> passing? Is `coverage-gloss.js` at 0 and `npm test` green?
+
+---
+
 ## How the data is organised
 
 - **One file per part of speech** (`nouns.yml`, `verbs.yml`, …). `calendar.yml`

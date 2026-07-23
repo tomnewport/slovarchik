@@ -146,6 +146,38 @@ words:
       pl_acc: автома́ты
       pl_ins: автома́тами
       pl_pre: автома́тах
+  "автомеханик=car mechanic":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: car mechanic (a person who repairs cars)
+    usage:
+      - ru: Я е́ду к автомеха́нику.
+        en_gb: I'm driving to the car mechanic.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он рабо́тает автомеха́ником уже́ де́сять лет.
+        en_gb: He has worked as a car mechanic for ten years.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Хоро́шего автомеха́ника тру́дно найти́.
+        en_gb: A good car mechanic is hard to find.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-animate }
+    declension:
+      sg_nom: автомеха́ник
+      sg_gen: автомеха́ника
+      sg_dat: автомеха́нику
+      sg_acc: автомеха́ника
+      sg_ins: автомеха́ником
+      sg_pre: автомеха́нике
+      pl_nom: автомеха́ники
+      pl_gen: автомеха́ников
+      pl_dat: автомеха́никам
+      pl_acc: автомеха́ников
+      pl_ins: автомеха́никами
+      pl_pre: автомеха́никах
   "автомобиль=car":
     batteries: [objects, places]
     cefr_level: A1
@@ -1070,6 +1102,65 @@ words:
       pl_acc: апте́ки
       pl_ins: апте́ками
       pl_pre: апте́ках
+  "Аргентина=Argentina":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Argentina (a country in South America)
+    usage:
+      - ru: Он мечта́ет пое́хать в Аргенти́ну.
+        en_gb: He dreams of going to Argentina.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В Аргенти́не танцу́ют та́нго.
+        en_gb: In Argentina they dance the tango.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он прие́хал из Аргенти́ны.
+        en_gb: He came from Argentina.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: Аргенти́на
+      sg_gen: Аргенти́ны
+      sg_dat: Аргенти́не
+      sg_acc: Аргенти́ну
+      sg_ins: Аргенти́ной
+      sg_pre: Аргенти́не
+  "аргентинец=Argentinian":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - geography
+    en_gb:
+      standard: Argentinian (a person from Argentina)
+    usage:
+      - ru: Я познако́мился с аргенти́нцем на ку́рсах.
+        en_gb: I met an Argentinian in class.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Мы пригласи́ли аргенти́нца в го́сти.
+        en_gb: We invited an Argentinian round.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: В на́шей гру́ппе два аргенти́нца.
+        en_gb: There are two Argentinians in our group.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: аргенти́нец
+      sg_gen: аргенти́нца
+      sg_dat: аргенти́нцу
+      sg_acc: аргенти́нца
+      sg_ins: аргенти́нцем
+      sg_pre: аргенти́нце
+      pl_nom: аргенти́нцы
+      pl_gen: аргенти́нцев
+      pl_dat: аргенти́нцам
+      pl_acc: аргенти́нцев
+      pl_ins: аргенти́нцами
+      pl_pre: аргенти́нцах
   "арест=arrest":
     batteries: [society]
     cefr_level: B1
@@ -1433,6 +1524,33 @@ words:
       pl_acc: аудито́рии
       pl_ins: аудито́риями
       pl_pre: аудито́риях
+  "аэробика=aerobics":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+      - sickness and health
+    en_gb:
+      standard: aerobics (energetic fitness exercise to music)
+    usage:
+      - ru: Она́ занима́ется аэро́бикой по утра́м.
+        en_gb: She does aerobics in the mornings.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Я хожу́ на аэро́бику два ра́за в неде́лю.
+        en_gb: I go to aerobics twice a week.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: По́сле аэро́бики я о́чень уста́ла.
+        en_gb: After aerobics I'm very tired.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: аэро́бика
+      sg_gen: аэро́бики
+      sg_dat: аэро́бике
+      sg_acc: аэро́бику
+      sg_ins: аэро́бикой
+      sg_pre: аэро́бике
   "аэропорт=airport":
     batteries: [places]
     cefr_level: A2
@@ -1898,6 +2016,39 @@ words:
       pl_acc: ба́нки
       pl_ins: ба́нками
       pl_pre: ба́нках
+  "банкир=banker":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - finance
+    en_gb:
+      standard: banker (a senior person who works in a bank)
+    usage:
+      - ru: Мой оте́ц рабо́тает банки́ром.
+        en_gb: My father works as a banker.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Я встре́тил зна́комого банки́ра.
+        en_gb: I met a banker I know.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Клие́нты доверя́ют э́тому банки́ру.
+        en_gb: Clients trust this banker.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: банки́р
+      sg_gen: банки́ра
+      sg_dat: банки́ру
+      sg_acc: банки́ра
+      sg_ins: банки́ром
+      sg_pre: банки́ре
+      pl_nom: банки́ры
+      pl_gen: банки́ров
+      pl_dat: банки́рам
+      pl_acc: банки́ров
+      pl_ins: банки́рами
+      pl_pre: банки́рах
   "банкомат=ATM":
     batteries: [objects, places]
     cefr_level: A2
@@ -2059,6 +2210,40 @@ words:
       pl_acc: госпо́д
       pl_ins: господа́ми
       pl_pre: господа́х
+  "бармен=barman":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: barman (a person who serves drinks at a bar)
+      alt:
+        - bartender
+    usage:
+      - ru: Все зна́ют на́шего ба́рмена.
+        en_gb: Everyone knows our barman.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Спроси́ у ба́рмена, что он сове́тует.
+        en_gb: Ask the barman what he recommends.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он мечта́ет стать ба́рменом.
+        en_gb: He dreams of becoming a barman.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: ба́рмен
+      sg_gen: ба́рмена
+      sg_dat: ба́рмену
+      sg_acc: ба́рмена
+      sg_ins: ба́рменом
+      sg_pre: ба́рмене
+      pl_nom: ба́рмены
+      pl_gen: ба́рменов
+      pl_dat: ба́рменам
+      pl_acc: ба́рменов
+      pl_ins: ба́рменами
+      pl_pre: ба́рменах
   "барон=baron":
     batteries: [people]
     cefr_level: B2
@@ -2773,6 +2958,38 @@ words:
       sg_acc: би́знес
       sg_ins: би́знесом
       sg_pre: би́знесе
+  "бизнес-конференция=business conference":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: business conference (a formal work meeting)
+    usage:
+      - ru: За́втра он е́дет на би́знес-конфере́нцию.
+        en_gb: Tomorrow he's going to a business conference.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На би́знес-конфере́нции бы́ло мно́го люде́й.
+        en_gb: There were a lot of people at the business conference.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он верну́лся с би́знес-конфере́нции по́здно.
+        en_gb: He returned from the business conference late.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: би́знес-конфере́нция
+      sg_gen: би́знес-конфере́нции
+      sg_dat: би́знес-конфере́нции
+      sg_acc: би́знес-конфере́нцию
+      sg_ins: би́знес-конфере́нцией
+      sg_pre: би́знес-конфере́нции
+      pl_nom: би́знес-конфере́нции
+      pl_gen: би́знес-конфере́нций
+      pl_dat: би́знес-конфере́нциям
+      pl_acc: би́знес-конфере́нции
+      pl_ins: би́знес-конфере́нциями
+      pl_pre: би́знес-конфере́нциях
   "бизнесмен=businessman":
     batteries: [work_study]
     cefr_level: B1
@@ -2838,6 +3055,34 @@ words:
       pl_acc: биле́ты
       pl_ins: биле́тами
       pl_pre: биле́тах
+  "бильярд=billiards":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+    en_gb:
+      standard: billiards (a cue game played on a table)
+      alt:
+        - pool
+    usage:
+      - ru: Ве́чером мы игра́ем в билья́рд.
+        en_gb: In the evening we play billiards.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он настоя́щий ма́стер билья́рда.
+        en_gb: He's a real master of billiards.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В билья́рде мно́го пра́вил.
+        en_gb: There are many rules in billiards.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: билья́рд
+      sg_gen: билья́рда
+      sg_dat: билья́рду
+      sg_acc: билья́рд
+      sg_ins: билья́рдом
+      sg_pre: билья́рде
   "бинт=bandage":
     batteries: [objects]
     cefr_level: B1
@@ -3134,6 +3379,32 @@ words:
       pl_acc: блю́да
       pl_ins: блю́дами
       pl_pre: блю́дах
+  "блюз=blues":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+    en_gb:
+      standard: blues (a slow, soulful music style)
+    usage:
+      - ru: Ве́чером он игра́ет блюз на гита́ре.
+        en_gb: In the evening he plays the blues on the guitar.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В блю́зе мно́го чу́вства.
+        en_gb: There's a lot of feeling in the blues.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он большо́й люби́тель блю́за.
+        en_gb: He's a big fan of the blues.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: блюз
+      sg_gen: блю́за
+      sg_dat: блю́зу
+      sg_acc: блюз
+      sg_ins: блю́зом
+      sg_pre: блю́зе
   "бог=god":
     batteries: [people, abstract]
     cefr_level: B1
@@ -3427,6 +3698,38 @@ words:
       pl_acc: болты́
       pl_ins: болта́ми
       pl_pre: болта́х
+  "болтун=chatterbox":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: chatterbox (a person who talks too much)
+    usage:
+      - ru: Не слу́шай э́того болтуна́.
+        en_gb: Don't listen to that chatterbox.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Все уста́ли от болтуна́.
+        en_gb: Everyone got tired of the chatterbox.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Никто́ не хо́чет рабо́тать с болтуно́м.
+        en_gb: Nobody wants to work with a chatterbox.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: болту́н
+      sg_gen: болтуна́
+      sg_dat: болтуну́
+      sg_acc: болтуна́
+      sg_ins: болтуно́м
+      sg_pre: болтуне́
+      pl_nom: болтуны́
+      pl_gen: болтуно́в
+      pl_dat: болтуна́м
+      pl_acc: болтуно́в
+      pl_ins: болтуна́ми
+      pl_pre: болтуна́х
   "боль=pain":
     batteries: [abstract]
     cefr_level: A2
@@ -3676,6 +3979,32 @@ words:
       pl_acc: боти́нки
       pl_ins: боти́нками
       pl_pre: боти́нках
+  "боулинг=bowling":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+    en_gb:
+      standard: bowling (a game of rolling balls at pins)
+    usage:
+      - ru: В суббо́ту мы идём на бо́улинг.
+        en_gb: On Saturday we're going bowling.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Здесь нет за́ла для бо́улинга.
+        en_gb: There's no bowling alley here.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Мы хорошо́ провели́ вре́мя в бо́улинге.
+        en_gb: We had a good time at the bowling alley.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: бо́улинг
+      sg_gen: бо́улинга
+      sg_dat: бо́улингу
+      sg_acc: бо́улинг
+      sg_ins: бо́улингом
+      sg_pre: бо́улинге
   "боцман=boatswain":
     batteries: [people]
     cefr_level: B2
@@ -4046,6 +4375,39 @@ words:
       pl_acc: буке́ты
       pl_ins: буке́тами
       pl_pre: буке́тах
+  "булочная=bakery":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - shopping
+    en_gb:
+      standard: bakery (a shop selling bread)
+    usage:
+      - ru: Я купи́л хлеб в бу́лочной.
+        en_gb: I bought bread at the bakery.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он зашёл в бу́лочную за хле́бом.
+        en_gb: He popped into the bakery for bread.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Ря́дом с до́мом нет бу́лочной.
+        en_gb: There's no bakery near the house.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: бу́лочная
+      sg_gen: бу́лочной
+      sg_dat: бу́лочной
+      sg_acc: бу́лочную
+      sg_ins: бу́лочной
+      sg_pre: бу́лочной
+      pl_nom: бу́лочные
+      pl_gen: бу́лочных
+      pl_dat: бу́лочным
+      pl_acc: бу́лочные
+      pl_ins: бу́лочными
+      pl_pre: бу́лочных
   "бумага=paper":
     batteries: [objects]
     cefr_level: A2
@@ -5489,6 +5851,38 @@ words:
       pl_acc: визи́ты
       pl_ins: визи́тами
       pl_pre: визи́тах
+  "визитка=business card":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+    en_gb:
+      standard: business card (a small card with contact details)
+    usage:
+      - ru: Да́йте мне ва́шу визи́тку, пожа́луйста.
+        en_gb: Give me your business card, please.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На э́той визи́тке её а́дрес и телефо́н.
+        en_gb: On this business card are her address and phone number.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: У меня́ бо́льше нет визи́ток.
+        en_gb: I have no more business cards.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-genpl-fleeting }
+    declension:
+      sg_nom: визи́тка
+      sg_gen: визи́тки
+      sg_dat: визи́тке
+      sg_acc: визи́тку
+      sg_ins: визи́ткой
+      sg_pre: визи́тке
+      pl_nom: визи́тки
+      pl_gen: визи́ток
+      pl_dat: визи́ткам
+      pl_acc: визи́тки
+      pl_ins: визи́тками
+      pl_pre: визи́тках
   "вилка=fork":
     batteries: [objects]
     cefr_level: A2
@@ -5521,6 +5915,39 @@ words:
       pl_acc: ви́лки
       pl_ins: ви́лками
       pl_pre: ви́лках
+  "вилла=villa":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - travel
+      - home
+    en_gb:
+      standard: villa (a large house, often for holidays)
+    usage:
+      - ru: Они́ сня́ли ви́ллу у мо́ря.
+        en_gb: They rented a villa by the sea.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На ви́лле есть бассе́йн.
+        en_gb: There's a swimming pool at the villa.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Хозя́ин ви́ллы уе́хал в го́род.
+        en_gb: The owner of the villa left for the city.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ви́лла
+      sg_gen: ви́ллы
+      sg_dat: ви́лле
+      sg_acc: ви́ллу
+      sg_ins: ви́ллой
+      sg_pre: ви́лле
+      pl_nom: ви́ллы
+      pl_gen: вилл
+      pl_dat: ви́ллам
+      pl_acc: ви́ллы
+      pl_ins: ви́ллами
+      pl_pre: ви́ллах
   "вина=guilt":
     batteries: [abstract]
     cefr_level: B1
@@ -7669,6 +8096,39 @@ words:
       pl_acc: га́лстуки
       pl_ins: га́лстуками
       pl_pre: га́лстуках
+  "гармония=harmony":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+      - the arts
+    en_gb:
+      standard: harmony (a pleasing agreement or balance)
+    usage:
+      - ru: Они́ живу́т в по́лной гармо́нии.
+        en_gb: They live in complete harmony.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Приро́да у́чит нас гармо́нии.
+        en_gb: Nature teaches us harmony.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Му́зыка создаёт гармо́нию.
+        en_gb: Music creates harmony.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: гармо́ния
+      sg_gen: гармо́нии
+      sg_dat: гармо́нии
+      sg_acc: гармо́нию
+      sg_ins: гармо́нией
+      sg_pre: гармо́нии
+      pl_nom: гармо́нии
+      pl_gen: гармо́ний
+      pl_dat: гармо́ниям
+      pl_acc: гармо́нии
+      pl_ins: гармо́ниями
+      pl_pre: гармо́ниях
   "гвоздь=nail":
     batteries: [objects]
     cefr_level: B1
@@ -8365,6 +8825,32 @@ words:
       pl_acc: голоса́
       pl_ins: голоса́ми
       pl_pre: голоса́х
+  "гольф=golf":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+    en_gb:
+      standard: golf (a game of hitting a ball into holes)
+    usage:
+      - ru: В воскресе́нье он игра́ет в гольф.
+        en_gb: On Sunday he plays golf.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он чемпио́н по го́льфу.
+        en_gb: He's a golf champion.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он не зна́ет пра́вил го́льфа.
+        en_gb: He doesn't know the rules of golf.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: гольф
+      sg_gen: го́льфа
+      sg_dat: го́льфу
+      sg_acc: гольф
+      sg_ins: го́льфом
+      sg_pre: го́льфе
   "гора=mountain":
     batteries: [nature, places]
     cefr_level: A2
@@ -9517,6 +10003,35 @@ words:
       sg_acc: давле́ние
       sg_ins: давле́нием
       sg_pre: давле́нии
+  "дайвинг=diving":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+      - travel
+    en_gb:
+      standard: diving (swimming underwater with breathing gear)
+      alt:
+        - scuba diving
+    usage:
+      - ru: Он увлека́ется да́йвингом.
+        en_gb: He's keen on diving.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Ле́том мы попро́буем да́йвинг.
+        en_gb: In summer we'll try diving.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он мечта́ет научи́ться да́йвингу.
+        en_gb: He dreams of learning to dive.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: да́йвинг
+      sg_gen: да́йвинга
+      sg_dat: да́йвингу
+      sg_acc: да́йвинг
+      sg_ins: да́йвингом
+      sg_pre: да́йвинге
   "даль=distance":
     batteries: [nature, places]
     cefr_level: B2
@@ -10468,6 +10983,72 @@ words:
         en_gb: This detail is very important.
       - ru: Меха́ник заказа́л но́вую дета́ль для маши́ны.
         en_gb: The mechanic ordered a new part for the car.
+  "детектив=detective story":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - reading
+      - the arts
+    en_gb:
+      standard: detective story (a crime novel or film)
+    usage:
+      - ru: Я люблю́ чита́ть детекти́вы.
+        en_gb: I love reading detective stories.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В детекти́ве всегда́ есть та́йна.
+        en_gb: A detective story always has a mystery.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он не чита́л ни одного́ детекти́ва.
+        en_gb: He hasn't read a single detective story.
+        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: детекти́в
+      sg_gen: детекти́ва
+      sg_dat: детекти́ву
+      sg_acc: детекти́в
+      sg_ins: детекти́вом
+      sg_pre: детекти́ве
+      pl_nom: детекти́вы
+      pl_gen: детекти́вов
+      pl_dat: детекти́вам
+      pl_acc: детекти́вы
+      pl_ins: детекти́вами
+      pl_pre: детекти́вах
+  "детектив=detective":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - the law
+    en_gb:
+      standard: detective (a person who investigates crimes)
+    usage:
+      - ru: Поли́ция вы́звала о́пытного детекти́ва.
+        en_gb: The police called in an experienced detective.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Свиде́тель рассказа́л всё детекти́ву.
+        en_gb: The witness told the detective everything.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Престу́пник бои́тся детекти́ва.
+        en_gb: The criminal is afraid of the detective.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: детекти́в
+      sg_gen: детекти́ва
+      sg_dat: детекти́ву
+      sg_acc: детекти́ва
+      sg_ins: детекти́вом
+      sg_pre: детекти́ве
+      pl_nom: детекти́вы
+      pl_gen: детекти́вов
+      pl_dat: детекти́вам
+      pl_acc: детекти́вов
+      pl_ins: детекти́вами
+      pl_pre: детекти́вах
   "дети=children":
     batteries: [people]
     cefr_level: A1
@@ -10577,6 +11158,58 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Без де́ятельности он не мог жить.
         en_gb: He could not live without activity.
+  "джаз=jazz":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+    en_gb:
+      standard: jazz (an improvised music style)
+    usage:
+      - ru: Мы слу́шали джаз всю ночь.
+        en_gb: We listened to jazz all night.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он увлека́ется джа́зом.
+        en_gb: He's keen on jazz.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В джа́зе мно́го свобо́ды.
+        en_gb: There's a lot of freedom in jazz.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: джаз
+      sg_gen: джа́за
+      sg_dat: джа́зу
+      sg_acc: джаз
+      sg_ins: джа́зом
+      sg_pre: джа́зе
+  "джин=gin":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: gin (a clear spirit flavoured with juniper)
+    usage:
+      - ru: Он заказа́л джин с то́ником.
+        en_gb: He ordered a gin and tonic.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я не люблю́ вкус джи́на.
+        en_gb: I don't like the taste of gin.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Что тебе́ нра́вится в джи́не?
+        en_gb: What do you like about gin?
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: джин
+      sg_gen: джи́на
+      sg_dat: джи́ну
+      sg_acc: джин
+      sg_ins: джи́ном
+      sg_pre: джи́не
   "джинсы=jeans":
     batteries: [objects]
     cefr_level: A2
@@ -10602,6 +11235,41 @@ words:
       pl_acc: джи́нсы
       pl_ins: джи́нсами
       pl_pre: джи́нсах
+  "ди-джей=DJ":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - the arts
+    en_gb:
+      standard: DJ (a person who plays recorded music for an audience)
+      alt:
+        - disc jockey
+    usage:
+      - ru: Мы пригласи́ли ди-дже́я на сва́дьбу.
+        en_gb: We invited a DJ to the wedding.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Го́сти танцева́ли под му́зыку ди-дже́я.
+        en_gb: The guests danced to the DJ's music.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он рабо́тает ди-дже́ем в клу́бе.
+        en_gb: He works as a DJ in a club.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: ди-дже́й
+      sg_gen: ди-дже́я
+      sg_dat: ди-дже́ю
+      sg_acc: ди-дже́я
+      sg_ins: ди-дже́ем
+      sg_pre: ди-дже́е
+      pl_nom: ди-дже́и
+      pl_gen: ди-дже́ев
+      pl_dat: ди-дже́ям
+      pl_acc: ди-дже́ев
+      pl_ins: ди-дже́ями
+      pl_pre: ди-дже́ях
   "диван=sofa":
     batteries: [objects]
     cefr_level: A2
@@ -11283,6 +11951,39 @@ words:
       pl_acc: дома́
       pl_ins: дома́ми
       pl_pre: дома́х
+  "домохозяйка=housewife":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - family
+      - daily life
+    en_gb:
+      standard: housewife (a woman who runs the home)
+    usage:
+      - ru: Она́ была́ домохозя́йкой мно́го лет.
+        en_gb: She was a housewife for many years.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: У домохозя́йки мно́го дел.
+        en_gb: A housewife has a lot to do.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я уважа́ю ка́ждую домохозя́йку.
+        en_gb: I respect every housewife.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: домохозя́йка
+      sg_gen: домохозя́йки
+      sg_dat: домохозя́йке
+      sg_acc: домохозя́йку
+      sg_ins: домохозя́йкой
+      sg_pre: домохозя́йке
+      pl_nom: домохозя́йки
+      pl_gen: домохозя́ек
+      pl_dat: домохозя́йкам
+      pl_acc: домохозя́ек
+      pl_ins: домохозя́йками
+      pl_pre: домохозя́йках
   "допрос=interrogation":
     batteries: [society]
     cefr_level: B2
@@ -11634,6 +12335,38 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учи́тель разня́л мальчи́шеские дра́ки.
         en_gb: The teacher broke up the boys' fights.
+  "драма=drama":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: drama (a serious play, film or event)
+    usage:
+      - ru: Мы смотре́ли дра́му в теа́тре.
+        en_gb: We watched a drama at the theatre.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В дра́ме мно́го слёз.
+        en_gb: A drama has a lot of tears.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Ге́рои э́той дра́мы о́чень живы́е.
+        en_gb: The characters of this drama are very lifelike.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: дра́ма
+      sg_gen: дра́мы
+      sg_dat: дра́ме
+      sg_acc: дра́му
+      sg_ins: дра́мой
+      sg_pre: дра́ме
+      pl_nom: дра́мы
+      pl_gen: драм
+      pl_dat: дра́мам
+      pl_acc: дра́мы
+      pl_ins: дра́мами
+      pl_pre: дра́мах
   "дрель=drill":
     batteries: [objects]
     cefr_level: B2
@@ -14753,6 +15486,39 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Го́род раздели́ли на не́сколько зон.
         en_gb: The city was divided into several zones.
+  "зоопарк=zoo":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - animals
+    en_gb:
+      standard: zoo (a park where wild animals are kept)
+    usage:
+      - ru: В воскресе́нье мы идём в зоопа́рк.
+        en_gb: On Sunday we're going to the zoo.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В зоопа́рке живу́т ти́гры и слоны́.
+        en_gb: Tigers and elephants live in the zoo.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Де́ти верну́лись из зоопа́рка счастли́выми.
+        en_gb: The children came back from the zoo happy.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: зоопа́рк
+      sg_gen: зоопа́рка
+      sg_dat: зоопа́рку
+      sg_acc: зоопа́рк
+      sg_ins: зоопа́рком
+      sg_pre: зоопа́рке
+      pl_nom: зоопа́рки
+      pl_gen: зоопа́рков
+      pl_dat: зоопа́ркам
+      pl_acc: зоопа́рки
+      pl_ins: зоопа́рками
+      pl_pre: зоопа́рках
   "зрение=eyesight":
     batteries: [everyday]
     cefr_level: B1
@@ -15237,6 +16003,39 @@ words:
       sg_acc: икру́
       sg_ins: икро́й
       sg_pre: икре́
+  "имейл=email":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+      - communication
+    en_gb:
+      standard: email (an electronic message)
+    usage:
+      - ru: Я отпра́вил тебе́ име́йл.
+        en_gb: I sent you an email.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В твоём име́йле есть оши́бка.
+        en_gb: There's a mistake in your email.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: У меня́ мно́го но́вых име́йлов.
+        en_gb: I have a lot of new emails.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: име́йл
+      sg_gen: име́йла
+      sg_dat: име́йлу
+      sg_acc: име́йл
+      sg_ins: име́йлом
+      sg_pre: име́йле
+      pl_nom: име́йлы
+      pl_gen: име́йлов
+      pl_dat: име́йлам
+      pl_acc: име́йлы
+      pl_ins: име́йлами
+      pl_pre: име́йлах
   "император=emperor":
     batteries: [people]
     cefr_level: B1
@@ -15654,6 +16453,40 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В статье́ мно́го но́вой информа́ции.
         en_gb: There is a lot of new information in the article.
+  "инъекция=injection":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sickness and health
+    en_gb:
+      standard: injection (medicine given with a needle)
+      alt:
+        - jab
+    usage:
+      - ru: Медсестра́ сде́лала мне инъе́кцию.
+        en_gb: The nurse gave me an injection.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я о́чень бою́сь инъе́кций.
+        en_gb: I'm very afraid of injections.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: По́сле инъе́кции мне ста́ло лу́чше.
+        en_gb: After the injection I felt better.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: инъе́кция
+      sg_gen: инъе́кции
+      sg_dat: инъе́кции
+      sg_acc: инъе́кцию
+      sg_ins: инъе́кцией
+      sg_pre: инъе́кции
+      pl_nom: инъе́кции
+      pl_gen: инъе́кций
+      pl_dat: инъе́кциям
+      pl_acc: инъе́кции
+      pl_ins: инъе́кциями
+      pl_pre: инъе́кциях
   "ирис=iris":
     batteries: [nature]
     cefr_level: B2
@@ -16575,6 +17408,39 @@ words:
       sg_acc: Кана́ду
       sg_ins: Кана́дой
       sg_pre: Кана́де
+  "канадец=Canadian":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - geography
+    en_gb:
+      standard: Canadian (a person from Canada)
+    usage:
+      - ru: Она́ вы́шла за́муж за кана́дца.
+        en_gb: She married a Canadian.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Я живу́ ря́дом с кана́дцем.
+        en_gb: I live next to a Canadian.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В кома́нде мно́го кана́дцев.
+        en_gb: There are many Canadians on the team.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: кана́дец
+      sg_gen: кана́дца
+      sg_dat: кана́дцу
+      sg_acc: кана́дца
+      sg_ins: кана́дцем
+      sg_pre: кана́дце
+      pl_nom: кана́дцы
+      pl_gen: кана́дцев
+      pl_dat: кана́дцам
+      pl_acc: кана́дцев
+      pl_ins: кана́дцами
+      pl_pre: кана́дцах
   "канал=canal":
     batteries: [places]
     cefr_level: B1
@@ -17849,6 +18715,32 @@ words:
       pl_acc: кла́ссы
       pl_ins: кла́ссами
       pl_pre: кла́ссах
+  "классика=classical music":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+    en_gb:
+      standard: classical music (serious traditional music; the classics)
+    usage:
+      - ru: Она́ слу́шает то́лько кла́ссику.
+        en_gb: She listens only to classical music.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́тот фильм стал кла́ссикой ки́но.
+        en_gb: This film became a classic of cinema.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Он ниче́го не понима́ет в кла́ссике.
+        en_gb: He understands nothing about classical music.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: кла́ссика
+      sg_gen: кла́ссики
+      sg_dat: кла́ссике
+      sg_acc: кла́ссику
+      sg_ins: кла́ссикой
+      sg_pre: кла́ссике
   "клей=glue":
     batteries: [objects]
     cefr_level: B1
@@ -18326,6 +19218,34 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В каю́те четы́ре у́зких ко́йки.
         en_gb: There are four narrow bunks in the cabin.
+  "кока-кола=Coca-Cola":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: Coca-Cola (a fizzy cola drink)
+      alt:
+        - coke
+    usage:
+      - ru: Он заказа́л ко́ка-ко́лу без льда.
+        en_gb: He ordered a Coca-Cola without ice.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Стака́н ко́ка-ко́лы, пожа́луйста.
+        en_gb: A glass of Coca-Cola, please.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В ко́ка-ко́ле мно́го са́хара.
+        en_gb: There's a lot of sugar in Coca-Cola.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: ко́ка-ко́ла
+      sg_gen: ко́ка-ко́лы
+      sg_dat: ко́ка-ко́ле
+      sg_acc: ко́ка-ко́лу
+      sg_ins: ко́ка-ко́лой
+      sg_pre: ко́ка-ко́ле
   "колбаса=sausage":
     batteries: [objects]
     cefr_level: A2
@@ -19266,6 +20186,41 @@ words:
       pl_acc: концы́
       pl_ins: конца́ми
       pl_pre: конца́х
+  "консерватория=conservatoire":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - places
+      - the arts
+    en_gb:
+      standard: conservatoire (a college of music)
+      alt:
+        - conservatory (music school)
+    usage:
+      - ru: Она́ у́чится в консервато́рии.
+        en_gb: She studies at the conservatoire.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он поступи́л в консервато́рию.
+        en_gb: He got into the conservatoire.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Профе́ссор консервато́рии дал конце́рт.
+        en_gb: A professor of the conservatoire gave a concert.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: консервато́рия
+      sg_gen: консервато́рии
+      sg_dat: консервато́рии
+      sg_acc: консервато́рию
+      sg_ins: консервато́рией
+      sg_pre: консервато́рии
+      pl_nom: консервато́рии
+      pl_gen: консервато́рий
+      pl_dat: консервато́риям
+      pl_acc: консервато́рии
+      pl_ins: консервато́риями
+      pl_pre: консервато́риях
   "Константин=Constantine":
     batteries: [people]
     cefr_level: B1
@@ -20103,6 +21058,35 @@ words:
       pl_acc: корреспонде́нтов
       pl_ins: корреспонде́нтами
       pl_pre: корреспонде́нтах
+  "косметика=cosmetics":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - daily life
+      - shopping
+    en_gb:
+      standard: cosmetics (make-up and beauty products)
+      alt:
+        - make-up
+    usage:
+      - ru: Она́ купи́ла но́вую косме́тику.
+        en_gb: She bought new make-up.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В су́мке мно́го косме́тики.
+        en_gb: There's a lot of make-up in the bag.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ по́льзуется дорого́й косме́тикой.
+        en_gb: She uses expensive cosmetics.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: косме́тика
+      sg_gen: косме́тики
+      sg_dat: косме́тике
+      sg_acc: косме́тику
+      sg_ins: косме́тикой
+      sg_pre: косме́тике
   "космонавт=cosmonaut":
     batteries: [work_study]
     cefr_level: B1
@@ -20440,6 +21424,38 @@ words:
       pl_acc: ко́шек
       pl_ins: ко́шками
       pl_pre: ко́шках
+  "кошмар=nightmare":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: nightmare (a frightening dream; a terrible situation)
+    usage:
+      - ru: Ребёнок просну́лся от кошма́ра.
+        en_gb: The child woke up from a nightmare.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Э́кзамен был для меня́ настоя́щим кошма́ром.
+        en_gb: The exam was a real nightmare for me.
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Ка́ждую ночь она́ ви́дит оди́н и тот же кошма́р.
+        en_gb: Every night she sees the same nightmare.
+        inflect: { token: 9, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: кошма́р
+      sg_gen: кошма́ра
+      sg_dat: кошма́ру
+      sg_acc: кошма́р
+      sg_ins: кошма́ром
+      sg_pre: кошма́ре
+      pl_nom: кошма́ры
+      pl_gen: кошма́ров
+      pl_dat: кошма́рам
+      pl_acc: кошма́ры
+      pl_ins: кошма́рами
+      pl_pre: кошма́рах
   "кража=theft":
     batteries: [society]
     cefr_level: B2
@@ -21945,6 +22961,32 @@ words:
       pl_acc: ладо́ни
       pl_ins: ладо́нями
       pl_pre: ладо́нях
+  "лазанья=lasagne":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: lasagne (a baked pasta dish in layers)
+    usage:
+      - ru: Я пригото́вил лаза́нью на у́жин.
+        en_gb: I made lasagne for dinner.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В лаза́нье мно́го сы́ра.
+        en_gb: There's a lot of cheese in the lasagne.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Кусо́чек лаза́ньи, пожа́луйста.
+        en_gb: A piece of lasagne, please.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: лаза́нья
+      sg_gen: лаза́ньи
+      sg_dat: лаза́нье
+      sg_acc: лаза́нью
+      sg_ins: лаза́ньей
+      sg_pre: лаза́нье
   "лак=varnish":
     batteries: [objects]
     cefr_level: B2
@@ -22566,6 +23608,37 @@ words:
       pl_acc: ли́деров
       pl_ins: ли́дерами
       pl_pre: ли́дерах
+  "ликёр=liqueur":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: liqueur (a sweet alcoholic drink)
+    usage:
+      - ru: Хоти́те лимо́н к ликёру?
+        en_gb: Would you like some lemon with the liqueur?
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Она́ купи́ла буты́лку ликёра.
+        en_gb: She bought a bottle of liqueur.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Э́тот ликёр сли́шком сла́дкий для меня́.
+        en_gb: This liqueur is too sweet for me.
+    declension:
+      sg_nom: ликёр
+      sg_gen: ликёра
+      sg_dat: ликёру
+      sg_acc: ликёр
+      sg_ins: ликёром
+      sg_pre: ликёре
+      pl_nom: ликёры
+      pl_gen: ликёров
+      pl_dat: ликёрам
+      pl_acc: ликёры
+      pl_ins: ликёрами
+      pl_pre: ликёрах
   "линия=line":
     batteries: [everyday]
     cefr_level: A2
@@ -23699,6 +24772,38 @@ words:
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Ма́рки не хвати́ло для письма́.
         en_gb: There was not enough on the stamp for the letter.
+  "маркер=marker":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - school
+    en_gb:
+      standard: marker (a felt-tip pen)
+    usage:
+      - ru: Да́й мне кра́сный ма́ркер.
+        en_gb: Give me the red marker.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Учи́тель пи́шет ма́ркером на доске́.
+        en_gb: The teacher writes on the board with a marker.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Мне нужны́ два ма́ркера.
+        en_gb: I need two markers.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ма́ркер
+      sg_gen: ма́ркера
+      sg_dat: ма́ркеру
+      sg_acc: ма́ркер
+      sg_ins: ма́ркером
+      sg_pre: ма́ркере
+      pl_nom: ма́ркеры
+      pl_gen: ма́ркеров
+      pl_dat: ма́ркерам
+      pl_acc: ма́ркеры
+      pl_ins: ма́ркерами
+      pl_pre: ма́ркерах
   "Марс=Mars":
     batteries: [work_study, places]
     cefr_level: B1
@@ -23884,6 +24989,38 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На пло́щади собрала́сь огро́мная ма́сса люде́й.
         en_gb: A huge mass of people gathered in the square.
+  "массаж=massage":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sickness and health
+    en_gb:
+      standard: massage (rubbing the body to relax muscles)
+    usage:
+      - ru: Врач посове́товал мне масса́ж спины́.
+        en_gb: The doctor recommended a back massage.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: По́сле масса́жа я чу́вствую себя́ отли́чно.
+        en_gb: After the massage I feel great.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я расскажу́ тебе́ о масса́же.
+        en_gb: I'll tell you about the massage.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: масса́ж
+      sg_gen: масса́жа
+      sg_dat: масса́жу
+      sg_acc: масса́ж
+      sg_ins: масса́жем
+      sg_pre: масса́же
+      pl_nom: масса́жи
+      pl_gen: масса́жей
+      pl_dat: масса́жам
+      pl_acc: масса́жи
+      pl_ins: масса́жами
+      pl_pre: масса́жах
   "мастер=craftsman":
     batteries: [people]
     cefr_level: B1
@@ -24241,6 +25378,67 @@ words:
       pl_acc: медве́дей
       pl_ins: медве́дями
       pl_pre: медве́дях
+  "медикамент=medicine":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sickness and health
+    en_gb:
+      standard: medicine (a drug or medical preparation)
+      alt:
+        - medication
+    usage:
+      - ru: Врач вы́писал мне медикаме́нты.
+        en_gb: The doctor prescribed me medication.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В апте́ке мно́го ра́зных медикаме́нтов.
+        en_gb: There are many different medicines at the pharmacy.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Не забыва́йте о медикаме́нтах.
+        en_gb: Don't forget about the medicines.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
+    declension:
+      sg_nom: медикаме́нт
+      sg_gen: медикаме́нта
+      sg_dat: медикаме́нту
+      sg_acc: медикаме́нт
+      sg_ins: медикаме́нтом
+      sg_pre: медикаме́нте
+      pl_nom: медикаме́нты
+      pl_gen: медикаме́нтов
+      pl_dat: медикаме́нтам
+      pl_acc: медикаме́нты
+      pl_ins: медикаме́нтами
+      pl_pre: медикаме́нтах
+  "медицина=medicine":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sickness and health
+      - school
+    en_gb:
+      standard: medicine (the science of treating illness)
+    usage:
+      - ru: Она́ рабо́тает в медици́не.
+        en_gb: She works in medicine.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он мечта́ет изуча́ть медици́ну.
+        en_gb: He dreams of studying medicine.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Благодаря́ медици́не лю́ди живу́т до́льше.
+        en_gb: Thanks to medicine people live longer.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: медици́на
+      sg_gen: медици́ны
+      sg_dat: медици́не
+      sg_acc: медици́ну
+      sg_ins: медици́ной
+      sg_pre: медици́не
   "медсестра=nurse":
     batteries: [people]
     cefr_level: B1
@@ -24274,6 +25472,98 @@ words:
       pl_acc: медсестёр
       pl_ins: медсёстрами
       pl_pre: медсёстрах
+  "Мексика=Mexico":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Mexico (a country in North America)
+    usage:
+      - ru: Ле́том мы е́дем в Ме́ксику.
+        en_gb: In summer we're going to Mexico.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В Ме́ксике о́чень вку́сная еда́.
+        en_gb: The food in Mexico is very tasty.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы прие́хали из Ме́ксики.
+        en_gb: We came from Mexico.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: Ме́ксика
+      sg_gen: Ме́ксики
+      sg_dat: Ме́ксике
+      sg_acc: Ме́ксику
+      sg_ins: Ме́ксикой
+      sg_pre: Ме́ксике
+  "мексиканец=Mexican":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - geography
+    en_gb:
+      standard: Mexican (a person from Mexico)
+    usage:
+      - ru: Я спроси́л мексика́нца о его́ стране́.
+        en_gb: I asked a Mexican about his country.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Он рабо́тает с мексика́нцем в одно́м о́фисе.
+        en_gb: He works with a Mexican in the same office.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: На пра́зднике бы́ло мно́го мексика́нцев.
+        en_gb: There were many Mexicans at the celebration.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: мексика́нец
+      sg_gen: мексика́нца
+      sg_dat: мексика́нцу
+      sg_acc: мексика́нца
+      sg_ins: мексика́нцем
+      sg_pre: мексика́нце
+      pl_nom: мексика́нцы
+      pl_gen: мексика́нцев
+      pl_dat: мексика́нцам
+      pl_acc: мексика́нцев
+      pl_ins: мексика́нцами
+      pl_pre: мексика́нцах
+  "меломан=music lover":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - the arts
+    en_gb:
+      standard: music lover (a person who loves music)
+    usage:
+      - ru: Э́тот конце́рт понра́вится любо́му мелома́ну.
+        en_gb: This concert will appeal to any music lover.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Я знако́м с изве́стным мелома́ном.
+        en_gb: I know a famous music lover.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В за́ле мно́го мелома́нов.
+        en_gb: There are many music lovers in the hall.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: мелома́н
+      sg_gen: мелома́на
+      sg_dat: мелома́ну
+      sg_acc: мелома́на
+      sg_ins: мелома́ном
+      sg_pre: мелома́не
+      pl_nom: мелома́ны
+      pl_gen: мелома́нов
+      pl_dat: мелома́нам
+      pl_acc: мелома́нов
+      pl_ins: мелома́нами
+      pl_pre: мелома́нах
   "мелочь=small change":
     batteries: [objects, everyday]
     cefr_level: B1
@@ -24911,6 +26201,39 @@ words:
         en_gb: We need to call the police.
       - ru: Мили́ция прие́хала о́чень бы́стро.
         en_gb: The police arrived very quickly.
+  "миллионер=millionaire":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - finance
+    en_gb:
+      standard: millionaire (a very rich person)
+    usage:
+      - ru: Он стал миллионе́ром в три́дцать лет.
+        en_gb: He became a millionaire at thirty.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Журнали́ст взял интервью́ у миллионе́ра.
+        en_gb: The journalist interviewed a millionaire.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Э́тому миллионе́ру нра́вится его́ рабо́та.
+        en_gb: This millionaire likes his job.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: миллионе́р
+      sg_gen: миллионе́ра
+      sg_dat: миллионе́ру
+      sg_acc: миллионе́ра
+      sg_ins: миллионе́ром
+      sg_pre: миллионе́ре
+      pl_nom: миллионе́ры
+      pl_gen: миллионе́ров
+      pl_dat: миллионе́рам
+      pl_acc: миллионе́ров
+      pl_ins: миллионе́рами
+      pl_pre: миллионе́рах
   "мина=mine":
     batteries: [society, objects]
     cefr_level: B1
@@ -28380,6 +29703,38 @@ words:
       pl_acc: носки́
       pl_ins: носка́ми
       pl_pre: носка́х
+  "нота=note":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: note (a musical sound or its written sign)
+    usage:
+      - ru: Певи́ца взяла́ высо́кую но́ту.
+        en_gb: The singer hit a high note.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Пиани́ст забы́л но́ты до́ма.
+        en_gb: The pianist left the sheet music at home.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В э́той пе́сне мно́го высо́ких нот.
+        en_gb: There are many high notes in this song.
+        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: но́та
+      sg_gen: но́ты
+      sg_dat: но́те
+      sg_acc: но́ту
+      sg_ins: но́той
+      sg_pre: но́те
+      pl_nom: но́ты
+      pl_gen: нот
+      pl_dat: но́там
+      pl_acc: но́ты
+      pl_ins: но́тами
+      pl_pre: но́тах
   "ноутбук=laptop":
     batteries: [objects]
     cefr_level: A2
@@ -28480,6 +29835,33 @@ words:
         en_gb: He does not call without need.
       - ru: Они́ помога́ют лю́дям в нужде́.
         en_gb: They help people in need.
+  "Нью-Йорк=New York":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+      - travel
+    en_gb:
+      standard: New York (a large city in the USA)
+    usage:
+      - ru: Мы лети́м в Нью-Йо́рк за́втра.
+        en_gb: We're flying to New York tomorrow.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он живёт в Нью-Йо́рке.
+        en_gb: He lives in New York.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Она́ верну́лась из Нью-Йо́рка.
+        en_gb: She came back from New York.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: Нью-Йо́рк
+      sg_gen: Нью-Йо́рка
+      sg_dat: Нью-Йо́рку
+      sg_acc: Нью-Йо́рк
+      sg_ins: Нью-Йо́рком
+      sg_pre: Нью-Йо́рке
   "обвинение=accusation":
     batteries: [society, communication]
     cefr_level: B2
@@ -31487,6 +32869,34 @@ words:
       pl_acc: о́череди
       pl_ins: о́чередями
       pl_pre: о́чередях
+  "очки=glasses":
+    cefr_level: A1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - clothes
+      - daily life
+    en_gb:
+      standard: glasses (spectacles worn to see better)
+      alt:
+        - spectacles
+    usage:
+      - ru: Я забы́л очки́ до́ма.
+        en_gb: I left my glasses at home.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Без очко́в я пло́хо ви́жу.
+        en_gb: Without glasses I see badly.
+        inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: В э́тих очка́х ты отли́чно вы́глядишь.
+        en_gb: You look great in these glasses.
+        inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
+    declension:
+      pl_nom: очки́
+      pl_gen: очко́в
+      pl_dat: очка́м
+      pl_acc: очки́
+      pl_ins: очка́ми
+      pl_pre: очка́х
   "очко=point":
     batteries: [everyday]
     cefr_level: B2
@@ -32537,6 +33947,100 @@ words:
       pl_acc: па́чки
       pl_ins: па́чками
       pl_pre: па́чках
+  "паэлья=paella":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: paella (a Spanish rice dish)
+    usage:
+      - ru: В Испа́нии я впервы́е попро́бовал паэ́лью.
+        en_gb: In Spain I tried paella for the first time.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В паэ́лье мно́го ри́са.
+        en_gb: There's a lot of rice in the paella.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Реце́пт паэ́льи о́чень просто́й.
+        en_gb: The recipe for paella is very simple.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: паэ́лья
+      sg_gen: паэ́льи
+      sg_dat: паэ́лье
+      sg_acc: паэ́лью
+      sg_ins: паэ́льей
+      sg_pre: паэ́лье
+  "пельмень=dumpling":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: dumpling (a Russian meat dumpling, usually plural пельме́ни)
+      alt:
+        - pelmeni
+    usage:
+      - ru: На у́жин мы е́ли пельме́ни.
+        en_gb: For dinner we ate pelmeni.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он съел таре́лку пельме́ней.
+        en_gb: He ate a plate of dumplings.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: В э́тих пельме́нях мно́го мя́са.
+        en_gb: There's a lot of meat in these dumplings.
+        inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
+    declension:
+      sg_nom: пельме́нь
+      sg_gen: пельме́ня
+      sg_dat: пельме́ню
+      sg_acc: пельме́нь
+      sg_ins: пельме́нем
+      sg_pre: пельме́не
+      pl_nom: пельме́ни
+      pl_gen: пельме́ней
+      pl_dat: пельме́ням
+      pl_acc: пельме́ни
+      pl_ins: пельме́нями
+      pl_pre: пельме́нях
+  "пенсионер=pensioner":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: pensioner (a retired person living on a pension)
+      alt:
+        - retiree
+    usage:
+      - ru: Пенсионе́рам ча́сто де́лают ски́дки.
+        en_gb: Pensioners often get discounts.
+        inflect: { token: 1, case: dat, number: pl, rule: noun-dat-pl }
+      - ru: В па́рке мно́го пенсионе́ров.
+        en_gb: There are many pensioners in the park.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Я ча́сто ви́жу э́того пенсионе́ра.
+        en_gb: I often see this pensioner.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
+    declension:
+      sg_nom: пенсионе́р
+      sg_gen: пенсионе́ра
+      sg_dat: пенсионе́ру
+      sg_acc: пенсионе́ра
+      sg_ins: пенсионе́ром
+      sg_pre: пенсионе́ре
+      pl_nom: пенсионе́ры
+      pl_gen: пенсионе́ров
+      pl_dat: пенсионе́рам
+      pl_acc: пенсионе́ров
+      pl_ins: пенсионе́рами
+      pl_pre: пенсионе́рах
   "пенсия=pension":
     batteries: [society]
     cefr_level: B1
@@ -33946,6 +35450,40 @@ words:
       pl_acc: плащи́
       pl_ins: плаща́ми
       pl_pre: плаща́х
+  "плеер=player":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+    en_gb:
+      standard: player (a portable device for playing music)
+      alt:
+        - music player
+    usage:
+      - ru: Я купи́л но́вый пле́ер.
+        en_gb: I bought a new player.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В моём пле́ере мно́го пе́сен.
+        en_gb: There are many songs on my player.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Что не так с твои́м пле́ером?
+        en_gb: What's wrong with your player?
+        inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: пле́ер
+      sg_gen: пле́ера
+      sg_dat: пле́еру
+      sg_acc: пле́ер
+      sg_ins: пле́ером
+      sg_pre: пле́ере
+      pl_nom: пле́еры
+      pl_gen: пле́еров
+      pl_dat: пле́ерам
+      pl_acc: пле́еры
+      pl_ins: пле́ерами
+      pl_pre: пле́ерах
   "племянник=nephew":
     batteries: [people]
     cefr_level: B1
@@ -36129,6 +37667,63 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Де́ти у́чат основны́е поня́тия матема́тики.
         en_gb: The children learn the basic concepts of mathematics.
+  "поп=pop":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: pop (popular music; indeclinable in this sense)
+      alt:
+        - pop music
+    usage:
+      - ru: Я слу́шаю поп и рок.
+        en_gb: I listen to pop and rock.
+      - ru: Она́ лю́бит поп бо́льше всего́.
+        en_gb: She likes pop most of all.
+      - ru: Мно́гие слу́шают поп ка́ждый день.
+        en_gb: Many people listen to pop every day.
+    declension:
+      sg_nom: поп
+      sg_gen: поп
+      sg_dat: поп
+      sg_acc: поп
+      sg_ins: поп
+      sg_pre: поп
+      pl_nom: поп
+      pl_gen: поп
+      pl_dat: поп
+      pl_acc: поп
+      pl_ins: поп
+      pl_pre: поп
+  "попкорн=popcorn":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: popcorn (puffed corn eaten as a snack)
+    usage:
+      - ru: В кино́ мы купи́ли попко́рн.
+        en_gb: At the cinema we bought popcorn.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Па́хнет све́жим попко́рном.
+        en_gb: It smells of fresh popcorn.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Она́ не лю́бит вкус попко́рна.
+        en_gb: She doesn't like the taste of popcorn.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: попко́рн
+      sg_gen: попко́рна
+      sg_dat: попко́рну
+      sg_acc: попко́рн
+      sg_ins: попко́рном
+      sg_pre: попко́рне
   "попугай=parrot":
     batteries: [animals]
     cefr_level: B1
@@ -39560,6 +41155,32 @@ words:
       pl_acc: психо́логов
       pl_ins: психо́логами
       pl_pre: психо́логах
+  "психология=psychology":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - school
+    en_gb:
+      standard: psychology (the study of the mind and behaviour)
+    usage:
+      - ru: Она́ изуча́ет психоло́гию.
+        en_gb: She studies psychology.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он специали́ст по психоло́гии.
+        en_gb: He's a specialist in psychology.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: В психоло́гии мно́го интере́сных тео́рий.
+        en_gb: There are many interesting theories in psychology.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: психоло́гия
+      sg_gen: психоло́гии
+      sg_dat: психоло́гии
+      sg_acc: психоло́гию
+      sg_ins: психоло́гией
+      sg_pre: психоло́гии
   "птица=bird":
     batteries: [animals, nature]
     cefr_level: A2
@@ -43079,6 +44700,33 @@ words:
       pl_acc: рыбако́в
       pl_ins: рыбака́ми
       pl_pre: рыбака́х
+  "рыбалка=fishing":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - sport
+      - nature
+    en_gb:
+      standard: fishing (catching fish as a hobby)
+    usage:
+      - ru: Оте́ц взял меня́ на рыба́лку.
+        en_gb: Dad took me fishing.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На рыба́лке бы́ло ти́хо.
+        en_gb: It was quiet on the fishing trip.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он верну́лся с рыба́лки без ры́бы.
+        en_gb: He came back from fishing without any fish.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: рыба́лка
+      sg_gen: рыба́лки
+      sg_dat: рыба́лке
+      sg_acc: рыба́лку
+      sg_ins: рыба́лкой
+      sg_pre: рыба́лке
   "рынок=market":
     batteries: [places]
     cefr_level: A2
@@ -43275,6 +44923,38 @@ words:
       pl_acc: са́йты
       pl_ins: са́йтами
       pl_pre: са́йтах
+  "саксофон=saxophone":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: saxophone (a curved brass wind instrument)
+    usage:
+      - ru: Он игра́ет на саксофо́не.
+        en_gb: He plays the saxophone.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Роди́тели купи́ли ему́ саксофо́н.
+        en_gb: His parents bought him a saxophone.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он лю́бит звук саксофо́на.
+        en_gb: He loves the sound of the saxophone.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: саксофо́н
+      sg_gen: саксофо́на
+      sg_dat: саксофо́ну
+      sg_acc: саксофо́н
+      sg_ins: саксофо́ном
+      sg_pre: саксофо́не
+      pl_nom: саксофо́ны
+      pl_gen: саксофо́нов
+      pl_dat: саксофо́нам
+      pl_acc: саксофо́ны
+      pl_ins: саксофо́нами
+      pl_pre: саксофо́нах
   "салат=salad":
     batteries: [objects]
     cefr_level: A2
@@ -43307,6 +44987,32 @@ words:
       pl_acc: сала́ты
       pl_ins: сала́тами
       pl_pre: сала́тах
+  "сальса=salsa":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+    en_gb:
+      standard: salsa (a Latin American dance and music style)
+    usage:
+      - ru: Она́ танцу́ет са́льсу ка́ждую пя́тницу.
+        en_gb: She dances salsa every Friday.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он у́чится са́льсе на ку́рсах.
+        en_gb: He's learning salsa in classes.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Э́та пе́сня в сти́ле са́льсы.
+        en_gb: This song is in the salsa style.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: са́льса
+      sg_gen: са́льсы
+      sg_dat: са́льсе
+      sg_acc: са́льсу
+      sg_ins: са́льсой
+      sg_pre: са́льсе
   "салют=fireworks salute":
     batteries: [time_events]
     cefr_level: B2
@@ -45758,6 +47464,38 @@ words:
         inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Де́ти запо́лнили ко́мнату сме́хом.
         en_gb: The children filled the room with laughter.
+  "смс=text message":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - technology
+      - communication
+    en_gb:
+      standard: text message (an SMS; indeclinable)
+      alt:
+        - SMS
+    usage:
+      - ru: Я получи́л смс от дру́га.
+        en_gb: I got a text from a friend.
+      - ru: Отпра́вь мне смс, когда́ прие́дешь.
+        en_gb: Text me when you arrive.
+      - ru: Она́ прочита́ла смс и улыбну́лась.
+        en_gb: She read the text and smiled.
+    declension:
+      sg_nom: смс
+      sg_gen: смс
+      sg_dat: смс
+      sg_acc: смс
+      sg_ins: смс
+      sg_pre: смс
+      pl_nom: смс
+      pl_gen: смс
+      pl_dat: смс
+      pl_acc: смс
+      pl_ins: смс
+      pl_pre: смс
   "смысл=meaning":
     batteries: [abstract]
     cefr_level: B1
@@ -45845,6 +47583,38 @@ words:
       sg_acc: снег
       sg_ins: сне́гом
       sg_pre: сне́ге
+  "сноуборд=snowboard":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - sport
+    en_gb:
+      standard: snowboard (a board for sliding down snow)
+    usage:
+      - ru: Зимо́й он ката́ется на сноубо́рде.
+        en_gb: In winter he rides a snowboard.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он купи́л но́вый сноубо́рд.
+        en_gb: He bought a new snowboard.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он упа́л со сноубо́рда.
+        en_gb: He fell off the snowboard.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: сноубо́рд
+      sg_gen: сноубо́рда
+      sg_dat: сноубо́рду
+      sg_acc: сноубо́рд
+      sg_ins: сноубо́рдом
+      sg_pre: сноубо́рде
+      pl_nom: сноубо́рды
+      pl_gen: сноубо́рдов
+      pl_dat: сноубо́рдам
+      pl_acc: сноубо́рды
+      pl_ins: сноубо́рдами
+      pl_pre: сноубо́рдах
   "собака=dog":
     batteries: [animals]
     cefr_level: A1
@@ -46936,6 +48706,35 @@ words:
         en_gb: The workers joined the trade union.
       - ru: Их сою́з оказа́лся про́чным.
         en_gb: Their union proved to be solid.
+  "спагетти=spaghetti":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: spaghetti (long thin pasta; indeclinable)
+    usage:
+      - ru: Де́ти о́чень лю́бят спаге́тти.
+        en_gb: The children really love spaghetti.
+      - ru: Я свари́л спаге́тти с со́усом.
+        en_gb: I cooked spaghetti with sauce.
+      - ru: Хо́чешь спаге́тти на у́жин?
+        en_gb: Do you want spaghetti for dinner?
+    declension:
+      sg_nom: спаге́тти
+      sg_gen: спаге́тти
+      sg_dat: спаге́тти
+      sg_acc: спаге́тти
+      sg_ins: спаге́тти
+      sg_pre: спаге́тти
+      pl_nom: спаге́тти
+      pl_gen: спаге́тти
+      pl_dat: спаге́тти
+      pl_acc: спаге́тти
+      pl_ins: спаге́тти
+      pl_pre: спаге́тти
   "спальня=bedroom":
     batteries: [places]
     cefr_level: A2
@@ -48973,6 +50772,41 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он спусти́лся по ступе́нькам.
         en_gb: He went down the steps.
+  "стюардесса=stewardess":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - travel
+    en_gb:
+      standard: stewardess (a woman who looks after passengers on a plane)
+      alt:
+        - flight attendant
+    usage:
+      - ru: Она́ мечта́ла стать стюарде́ссой.
+        en_gb: She dreamed of becoming a stewardess.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Пассажи́р попроси́л стюарде́ссу помо́чь.
+        en_gb: A passenger asked the stewardess to help.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я обрати́лся к стюарде́ссе за по́мощью.
+        en_gb: I turned to the stewardess for help.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: стюарде́сса
+      sg_gen: стюарде́ссы
+      sg_dat: стюарде́ссе
+      sg_acc: стюарде́ссу
+      sg_ins: стюарде́ссой
+      sg_pre: стюарде́ссе
+      pl_nom: стюарде́ссы
+      pl_gen: стюарде́сс
+      pl_dat: стюарде́ссам
+      pl_acc: стюарде́сс
+      pl_ins: стюарде́ссами
+      pl_pre: стюарде́ссах
   "сувенир=souvenir":
     batteries: [objects]
     cefr_level: B1
@@ -49942,6 +51776,41 @@ words:
       sg_acc: такси́
       sg_ins: такси́
       sg_pre: такси́
+  "таксист=taxi driver":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - public transport
+    en_gb:
+      standard: taxi driver (a person who drives a taxi)
+      alt:
+        - cabbie
+    usage:
+      - ru: Я дал такси́сту де́ньги.
+        en_gb: I gave the taxi driver the money.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Спроси́ у такси́ста, ско́лько сто́ит.
+        en_gb: Ask the taxi driver how much it costs.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он рабо́тает такси́стом по ноча́м.
+        en_gb: He works as a taxi driver at night.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: такси́ст
+      sg_gen: такси́ста
+      sg_dat: такси́сту
+      sg_acc: такси́ста
+      sg_ins: такси́стом
+      sg_pre: такси́сте
+      pl_nom: такси́сты
+      pl_gen: такси́стов
+      pl_dat: такси́стам
+      pl_acc: такси́стов
+      pl_ins: такси́стами
+      pl_pre: такси́стах
   "талант=talent":
     batteries: [abstract]
     cefr_level: B1
@@ -49974,6 +51843,30 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В шко́ле мно́го ю́ных тала́нтов.
         en_gb: There are many young talents at the school.
+  "танго=tango":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - the arts
+      - sport
+    en_gb:
+      standard: tango (a passionate ballroom dance; indeclinable)
+    usage:
+      - ru: Они́ танцу́ют та́нго на конце́рте.
+        en_gb: They dance the tango at the concert.
+      - ru: Она́ у́чится танцева́ть та́нго.
+        en_gb: She's learning to dance the tango.
+      - ru: Ты уме́ешь танцева́ть та́нго?
+        en_gb: Can you dance the tango?
+    declension:
+      sg_nom: та́нго
+      sg_gen: та́нго
+      sg_dat: та́нго
+      sg_acc: та́нго
+      sg_ins: та́нго
+      sg_pre: та́нго
   "танец=dance":
     batteries: [time_events, communication]
     cefr_level: A2
@@ -50287,6 +52180,36 @@ words:
       pl_acc: телефо́ны
       pl_ins: телефо́нами
       pl_pre: телефо́нах
+  "телешоу=TV show":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - technology
+    en_gb:
+      standard: TV show (a television programme; indeclinable)
+    usage:
+      - ru: Э́то телешо́у лю́бят все.
+        en_gb: Everyone loves this TV show.
+      - ru: Вчера́ бы́ло интере́сное телешо́у.
+        en_gb: There was an interesting TV show yesterday.
+      - ru: Ты ви́дел но́вое телешо́у?
+        en_gb: Have you seen the new TV show?
+    declension:
+      sg_nom: телешо́у
+      sg_gen: телешо́у
+      sg_dat: телешо́у
+      sg_acc: телешо́у
+      sg_ins: телешо́у
+      sg_pre: телешо́у
+      pl_nom: телешо́у
+      pl_gen: телешо́у
+      pl_dat: телешо́у
+      pl_acc: телешо́у
+      pl_ins: телешо́у
+      pl_pre: телешо́у
   "тело=body":
     batteries: [everyday]
     cefr_level: A2
@@ -50998,6 +52921,38 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: По́лиция сде́рживала то́лпы люде́й.
         en_gb: The police held back the crowds of people.
+  "томат=tomato":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: tomato (a red salad vegetable)
+    usage:
+      - ru: Доба́вь в сала́т све́жий тома́т.
+        en_gb: Add a fresh tomato to the salad.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Соу́с из тома́тов о́чень вку́сный.
+        en_gb: The sauce made from tomatoes is very tasty.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: В тома́те мно́го витами́нов.
+        en_gb: There are a lot of vitamins in a tomato.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: тома́т
+      sg_gen: тома́та
+      sg_dat: тома́ту
+      sg_acc: тома́т
+      sg_ins: тома́том
+      sg_pre: тома́те
+      pl_nom: тома́ты
+      pl_gen: тома́тов
+      pl_dat: тома́там
+      pl_acc: тома́ты
+      pl_ins: тома́тами
+      pl_pre: тома́тах
   "тон=tone":
     batteries: [communication, abstract]
     cefr_level: B1
@@ -51027,6 +52982,38 @@ words:
       pl_acc: то́ны
       pl_ins: то́нами
       pl_pre: то́нах
+  "тоник=tonic":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: tonic (tonic water, a fizzy mixer)
+    usage:
+      - ru: Джин с то́ником, пожа́луйста.
+        en_gb: A gin and tonic, please.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В холоди́льнике есть буты́лка то́ника.
+        en_gb: There's a bottle of tonic in the fridge.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ пьёт то́ник со льдом.
+        en_gb: She drinks tonic with ice.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: то́ник
+      sg_gen: то́ника
+      sg_dat: то́нику
+      sg_acc: то́ник
+      sg_ins: то́ником
+      sg_pre: то́нике
+      pl_nom: то́ники
+      pl_gen: то́ников
+      pl_dat: то́никам
+      pl_acc: то́ники
+      pl_ins: то́никами
+      pl_pre: то́никах
   "тонна=tonne":
     batteries: [work_study]
     cefr_level: B1
@@ -51657,6 +53644,39 @@ words:
         en_gb: He earns his living by his labour.
       - ru: Лю́ди горди́лись свои́м трудо́м.
         en_gb: People were proud of their labour.
+  "трудоголик=workaholic":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - people
+    en_gb:
+      standard: workaholic (a person who works too much)
+    usage:
+      - ru: Тру́дно жить с трудого́ликом.
+        en_gb: It's hard to live with a workaholic.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: У трудого́лика ма́ло свобо́дного вре́мени.
+        en_gb: A workaholic has little free time.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я не понима́ю э́того трудого́лика.
+        en_gb: I don't understand this workaholic.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
+    declension:
+      sg_nom: трудого́лик
+      sg_gen: трудого́лика
+      sg_dat: трудого́лику
+      sg_acc: трудого́лика
+      sg_ins: трудого́ликом
+      sg_pre: трудого́лике
+      pl_nom: трудого́лики
+      pl_gen: трудого́ликов
+      pl_dat: трудого́ликам
+      pl_acc: трудого́ликов
+      pl_ins: трудого́ликами
+      pl_pre: трудого́ликах
   "труп=corpse":
     batteries: [everyday]
     cefr_level: B1
@@ -53944,6 +55964,32 @@ words:
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Вдали́ я уви́дел тёмную фигу́ру.
         en_gb: In the distance I saw a dark figure.
+  "философия=philosophy":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - school
+    en_gb:
+      standard: philosophy (the study of knowledge and existence)
+    usage:
+      - ru: Он изуча́ет филосо́фию в университе́те.
+        en_gb: He studies philosophy at university.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я интересу́юсь филосо́фией.
+        en_gb: I'm interested in philosophy.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В филосо́фии мно́го сло́жных вопро́сов.
+        en_gb: There are many difficult questions in philosophy.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: филосо́фия
+      sg_gen: филосо́фии
+      sg_dat: филосо́фии
+      sg_acc: филосо́фию
+      sg_ins: филосо́фией
+      sg_pre: филосо́фии
   "фильм=film":
     batteries: [communication]
     cefr_level: A1
@@ -54066,6 +56112,38 @@ words:
       pl_acc: фла́ги
       pl_ins: фла́гами
       pl_pre: фла́гах
+  "флейта=flute":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+    en_gb:
+      standard: flute (a slender woodwind instrument)
+    usage:
+      - ru: Она́ у́чится игра́ть на фле́йте.
+        en_gb: She's learning to play the flute.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Ма́ленькая де́вочка держа́ла фле́йту.
+        en_gb: The little girl was holding a flute.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он услы́шал звук фле́йты.
+        en_gb: He heard the sound of the flute.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: фле́йта
+      sg_gen: фле́йты
+      sg_dat: фле́йте
+      sg_acc: фле́йту
+      sg_ins: фле́йтой
+      sg_pre: фле́йте
+      pl_nom: фле́йты
+      pl_gen: флейт
+      pl_dat: фле́йтам
+      pl_acc: фле́йты
+      pl_ins: фле́йтами
+      pl_pre: фле́йтах
   "флешка=USB stick":
     batteries: [objects]
     cefr_level: B1
@@ -55923,6 +58001,34 @@ words:
       pl_acc: ча́сти
       pl_ins: частя́ми
       pl_pre: частя́х
+  "часы=watch":
+    cefr_level: A1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - clothes
+      - daily life
+    en_gb:
+      standard: watch (a device worn to tell the time)
+      alt:
+        - clock
+    usage:
+      - ru: Он подари́л мне краси́вые часы́.
+        en_gb: He gave me a beautiful watch.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Ско́лько вре́мени на твои́х часа́х?
+        en_gb: What time is it on your watch?
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Без часо́в я не зна́ю вре́мени.
+        en_gb: Without a watch I don't know the time.
+        inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      pl_nom: часы́
+      pl_gen: часо́в
+      pl_dat: часа́м
+      pl_acc: часы́
+      pl_ins: часа́ми
+      pl_pre: часа́х
   "чашка=cup":
     batteries: [objects]
     cefr_level: A2
@@ -56647,6 +58753,32 @@ words:
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Я услы́шал ти́хие шаги́ за две́рью.
         en_gb: I heard quiet steps behind the door.
+  "шампанское=champagne":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: champagne (a sparkling white wine)
+    usage:
+      - ru: Бока́л шампа́нского, пожа́луйста!
+        en_gb: A glass of champagne, please!
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Дава́й отме́тим э́то шампа́нским!
+        en_gb: Let's celebrate this with champagne!
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: На Но́вый год мы открыва́ем шампа́нское.
+        en_gb: At New Year we open the champagne.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: шампа́нское
+      sg_gen: шампа́нского
+      sg_dat: шампа́нскому
+      sg_acc: шампа́нское
+      sg_ins: шампа́нским
+      sg_pre: шампа́нском
   "шанс=chance":
     batteries: [abstract]
     cefr_level: B1
@@ -56799,6 +58931,65 @@ words:
       pl_acc: ша́хматы
       pl_ins: ша́хматами
       pl_pre: ша́хматах
+  "швейцарец=Swiss":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - geography
+    en_gb:
+      standard: Swiss (a person from Switzerland)
+    usage:
+      - ru: Я доверя́ю э́тому швейца́рцу.
+        en_gb: I trust this Swiss man.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Мы встре́тили швейца́рца в го́рах.
+        en_gb: We met a Swiss man in the mountains.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Сре́ди тури́стов бы́ло не́сколько швейца́рцев.
+        en_gb: Among the tourists were several Swiss people.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: швейца́рец
+      sg_gen: швейца́рца
+      sg_dat: швейца́рцу
+      sg_acc: швейца́рца
+      sg_ins: швейца́рцем
+      sg_pre: швейца́рце
+      pl_nom: швейца́рцы
+      pl_gen: швейца́рцев
+      pl_dat: швейца́рцам
+      pl_acc: швейца́рцев
+      pl_ins: швейца́рцами
+      pl_pre: швейца́рцах
+  "Швейцария=Switzerland":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Switzerland (a mountainous country in Europe)
+    usage:
+      - ru: Ле́том они́ пое́дут в Швейца́рию.
+        en_gb: In summer they'll go to Switzerland.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В Швейца́рии высо́кие го́ры.
+        en_gb: There are high mountains in Switzerland.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Э́тот сыр из Швейца́рии.
+        en_gb: This cheese is from Switzerland.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: Швейца́рия
+      sg_gen: Швейца́рии
+      sg_dat: Швейца́рии
+      sg_acc: Швейца́рию
+      sg_ins: Швейца́рией
+      sg_pre: Швейца́рии
   "шёлк=silk":
     batteries: [objects]
     cefr_level: B2
@@ -56940,6 +59131,34 @@ words:
       pl_acc: ше́и
       pl_ins: ше́ями
       pl_pre: ше́ях
+  "шик=chic":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - clothes
+    en_gb:
+      standard: chic (stylishness, elegance)
+      alt:
+        - style
+    usage:
+      - ru: Она́ одева́ется с ши́ком.
+        en_gb: She dresses with style.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В э́том рестора́не мно́го ши́ка.
+        en_gb: There's a lot of chic in this restaurant.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ лю́бит шик и стиль.
+        en_gb: She loves chic and style.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: шик
+      sg_gen: ши́ка
+      sg_dat: ши́ку
+      sg_acc: шик
+      sg_ins: ши́ком
+      sg_pre: ши́ке
   "шинель=greatcoat":
     batteries: [objects]
     cefr_level: C1
@@ -57095,6 +59314,76 @@ words:
       pl_acc: шко́лы
       pl_ins: шко́лами
       pl_pre: шко́лах
+  "школьник=schoolboy":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - school
+      - people
+    en_gb:
+      standard: schoolboy (a boy who goes to school)
+      alt:
+        - pupil
+    usage:
+      - ru: Учи́тельница объясни́ла шко́льнику зада́чу.
+        en_gb: The teacher explained the problem to the pupil.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: В кла́ссе два́дцать шко́льников.
+        en_gb: There are twenty pupils in the class.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Учи́тель спроси́л шко́льника у доски́.
+        en_gb: The teacher asked the pupil at the board.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+    declension:
+      sg_nom: шко́льник
+      sg_gen: шко́льника
+      sg_dat: шко́льнику
+      sg_acc: шко́льника
+      sg_ins: шко́льником
+      sg_pre: шко́льнике
+      pl_nom: шко́льники
+      pl_gen: шко́льников
+      pl_dat: шко́льникам
+      pl_acc: шко́льников
+      pl_ins: шко́льниками
+      pl_pre: шко́льниках
+  "школьница=schoolgirl":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - school
+      - people
+    en_gb:
+      standard: schoolgirl (a girl who goes to school)
+      alt:
+        - pupil
+    usage:
+      - ru: Он помога́ет шко́льнице с уро́ками.
+        en_gb: He helps the schoolgirl with her homework.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Я ви́жу знако́мую шко́льницу.
+        en_gb: I see a schoolgirl I know.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В на́шем кла́ссе мно́го шко́льниц.
+        en_gb: There are many schoolgirls in our class.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: шко́льница
+      sg_gen: шко́льницы
+      sg_dat: шко́льнице
+      sg_acc: шко́льницу
+      sg_ins: шко́льницей
+      sg_pre: шко́льнице
+      pl_nom: шко́льницы
+      pl_gen: шко́льниц
+      pl_dat: шко́льницам
+      pl_acc: шко́льниц
+      pl_ins: шко́льницами
+      pl_pre: шко́льницах
   "шкура=hide":
     batteries: [objects, animals]
     cefr_level: B2
@@ -57216,6 +59505,33 @@ words:
       sg_acc: шокола́д
       sg_ins: шокола́дом
       sg_pre: шокола́де
+  "шопинг=shopping":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - shopping
+      - daily life
+    en_gb:
+      standard: shopping (going round shops to buy things)
+    usage:
+      - ru: Она́ лю́бит шо́пинг.
+        en_gb: She loves shopping.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: По́сле шо́пинга у меня́ нет де́нег.
+        en_gb: After shopping I have no money.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ увлека́ется шо́пингом.
+        en_gb: She's into shopping.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: шо́пинг
+      sg_gen: шо́пинга
+      sg_dat: шо́пингу
+      sg_acc: шо́пинг
+      sg_ins: шо́пингом
+      sg_pre: шо́пинге
   "шорты=shorts":
     batteries: [objects]
     cefr_level: A2
@@ -58668,6 +60984,38 @@ words:
       pl_acc: япо́нок
       pl_ins: япо́нками
       pl_pre: япо́нках
+  "яхта=yacht":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - travel
+    en_gb:
+      standard: yacht (a boat for sailing or leisure)
+    usage:
+      - ru: Они́ купи́ли большу́ю я́хту.
+        en_gb: They bought a big yacht.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Ты когда́-нибудь отдыха́л на я́хте?
+        en_gb: Have you ever holidayed on a yacht?
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Капита́н уве́ренно управля́ет я́хтой.
+        en_gb: The captain steers the yacht confidently.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: я́хта
+      sg_gen: я́хты
+      sg_dat: я́хте
+      sg_acc: я́хту
+      sg_ins: я́хтой
+      sg_pre: я́хте
+      pl_nom: я́хты
+      pl_gen: яхт
+      pl_dat: я́хтам
+      pl_acc: я́хты
+      pl_ins: я́хтами
+      pl_pre: я́хтах
   "ящерица=lizard":
     batteries: [animals, nature]
     cefr_level: B2

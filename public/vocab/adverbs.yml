@@ -1152,6 +1152,20 @@ words:
         en_gb: My sister will soon get married.
       - ru: Она́ не хо́чет выходи́ть за́муж.
         en_gb: She doesn't want to get married.
+  "замужем=married":
+    cefr_level: A1
+    accented: за́мужем
+    collections:
+      - family
+    en_gb:
+      standard: married (of a woman)
+    usage:
+      - ru: Моя́ ста́ршая сестра́ за́мужем.
+        en_gb: My older sister is married.
+      - ru: Она́ за́мужем за врачо́м.
+        en_gb: She's married to a doctor.
+      - ru: Ты за́мужем?
+        en_gb: Are you married?
   "заранее=in advance":
     cefr_level: B1
     accented: зара́нее
@@ -2242,6 +2256,22 @@ words:
         en_gb: He speaks incomprehensibly.
       - ru: Непоня́тно, заче́м э́то ну́жно.
         en_gb: It is unclear why this is needed.
+  "неправильно=incorrectly":
+    cefr_level: A1
+    accented: непра́вильно
+    collections:
+      - school
+    en_gb:
+      standard: incorrectly (in the wrong way)
+      alt:
+        - wrongly
+    usage:
+      - ru: Ты написа́л э́то сло́во непра́вильно.
+        en_gb: You wrote this word incorrectly.
+      - ru: Он непра́вильно по́нял вопро́с.
+        en_gb: He misunderstood the question.
+      - ru: Так говори́ть непра́вильно.
+        en_gb: It's wrong to speak like that.
   "непременно=without fail":
     cefr_level: B1
     accented: непреме́нно
@@ -3432,6 +3462,23 @@ words:
         en_gb: He is very tired.
       - ru: Дождь шёл о́чень си́льно.
         en_gb: The rain fell very heavily.
+  "скорее=rather":
+    cefr_level: A1
+    accented: скоре́е
+    collections:
+      - daily life
+    en_gb:
+      standard: rather (more likely; sooner)
+      alt:
+        - sooner
+        - quicker
+    usage:
+      - ru: Скоре́е всего́, он опозда́ет.
+        en_gb: Most likely he'll be late.
+      - ru: Идём скоре́е, уже́ по́здно!
+        en_gb: Let's go quicker, it's already late!
+      - ru: Э́то скоре́е шу́тка, чем пра́вда.
+        en_gb: It's more of a joke than the truth.
   "скоро=soon":
     cefr_level: A2
     accented: ско́ро
