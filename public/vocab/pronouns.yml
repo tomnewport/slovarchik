@@ -135,6 +135,12 @@ words:
     en_gb:
       standard: you (plural, or one person politely)
     usage:
+      - ru: Мы ча́сто ду́маем о вас.
+        en_gb: We often think about you.
+        inflect: { token: 5, case: pre, number: pl, rule: pronoun-personal }
+      - ru: У вас есть вопро́сы?
+        en_gb: Do you have questions?
+        inflect: { token: 2, case: gen, number: pl, rule: pronoun-personal }
       - ru: Мы ра́ды вас ви́деть.
         en_gb: We are glad to see you.
         inflect: { token: 3, case: acc, number: pl, rule: pronoun-personal }
@@ -492,6 +498,12 @@ words:
     en_gb:
       standard: we (the speaker and others)
     usage:
+      - ru: Ма́ма ждёт нас до́ма.
+        en_gb: Mum is waiting for us at home.
+        inflect: { token: 3, case: acc, number: pl, rule: pronoun-personal }
+      - ru: Они́ говоря́т о нас то́лько хорошо́.
+        en_gb: They speak about us only well.
+        inflect: { token: 4, case: pre, number: pl, rule: pronoun-personal }
       - ru: Приходи́ к нам в го́сти.
         en_gb: Come and visit us.
         inflect: { token: 3, case: dat, number: pl, rule: pronoun-personal }
@@ -669,6 +681,14 @@ words:
       alt:
         - it (for masculine nouns)
     usage:
+      - ru: Я встре́тил его́ в па́рке.
+        en_gb: I met him in the park.
+        inflect: { token: 3, case: acc, number: sg, rule: pronoun-personal }
+      - ru: Я горжу́сь им.
+        en_gb: I am proud of him.
+        inflect: { token: 3, case: ins, number: sg, rule: pronoun-personal }
+      - ru: У него́ мно́го друзе́й.
+        en_gb: He has many friends.
       - ru: Ему́ два́дцать лет.
         en_gb: He is twenty years old.
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
@@ -695,6 +715,12 @@ words:
       alt:
         - it (for feminine nouns)
     usage:
+      - ru: Я ви́жу её ка́ждое у́тро.
+        en_gb: I see her every morning.
+        inflect: { token: 3, case: acc, number: sg, rule: pronoun-personal }
+      - ru: Ей уже́ три́дцать лет.
+        en_gb: She is already thirty years old.
+        inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
       - ru: Ей нра́вится э́та пе́сня.
         en_gb: She likes this song.
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
@@ -723,6 +749,14 @@ words:
     en_gb:
       standard: they (more than one person or thing)
     usage:
+      - ru: Я хорошо́ зна́ю их.
+        en_gb: I know them well.
+        inflect: { token: 4, case: acc, number: pl, rule: pronoun-personal }
+      - ru: Им нра́вится ру́сская му́зыка.
+        en_gb: They like Russian music.
+        inflect: { token: 1, case: dat, number: pl, rule: pronoun-personal }
+      - ru: Мы е́дем с ни́ми на мо́ре.
+        en_gb: We are going to the sea with them.
       - ru: Мы горди́мся и́ми.
         en_gb: We are proud of them.
         inflect: { token: 3, case: ins, number: pl, rule: pronoun-personal }
@@ -747,6 +781,9 @@ words:
     en_gb:
       standard: it (for neuter nouns)
     usage:
+      - ru: Э́то письмо́ ва́жное, прочита́й его́.
+        en_gb: This letter is important, read it.
+        inflect: { token: 5, case: acc, number: sg, rule: pronoun-personal }
       - ru: Где письмо́? — Оно́ на столе́.
         en_gb: Where is the letter? — It is on the table.
         inflect: { token: 4, case: nom, number: sg, rule: pronoun-personal }
@@ -866,6 +903,12 @@ words:
         - yourself
         - himself
     usage:
+      - ru: Она́ хорошо́ зна́ет себя́.
+        en_gb: She knows herself well.
+        inflect: { token: 4, case: acc, number: sg, rule: pronoun-personal }
+      - ru: Она́ купи́ла себе́ но́вый телефо́н.
+        en_gb: She bought herself a new phone.
+        inflect: { token: 3, case: dat, number: sg, rule: pronoun-personal }
       - ru: Расскажи́те немно́го о себе́.
         en_gb: Tell us a little about yourself.
         inflect: { token: 4, case: pre, number: sg, rule: pronoun-personal }
@@ -1056,6 +1099,12 @@ words:
     en_gb:
       standard: you (one person, informal)
     usage:
+      - ru: Тебе́ ну́жно отдохну́ть.
+        en_gb: You need to rest.
+        inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
+      - ru: Я всё зна́ю о тебе́.
+        en_gb: I know everything about you.
+        inflect: { token: 5, case: pre, number: sg, rule: pronoun-personal }
       - ru: Мы ждём тебя́ к у́жину.
         en_gb: We are expecting you for dinner.
         inflect: { token: 3, case: acc, number: sg, rule: pronoun-personal }
@@ -1225,6 +1274,15 @@ words:
     en_gb:
       standard: I (the speaker)
     usage:
+      - ru: У меня́ есть больша́я соба́ка.
+        en_gb: I have a big dog.
+        inflect: { token: 2, case: gen, number: sg, rule: pronoun-personal }
+      - ru: Он всегда́ ду́мает обо мне.
+        en_gb: He always thinks about me.
+        inflect: { token: 5, case: pre, number: sg, rule: pronoun-personal }
+      - ru: Пойдём со мной в кино́.
+        en_gb: Come to the cinema with me.
+        inflect: { token: 3, case: ins, number: sg, rule: pronoun-personal }
       - ru: Мне хо́лодно, закро́й окно́.
         en_gb: I am cold — close the window.
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
