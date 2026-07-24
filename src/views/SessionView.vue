@@ -24,7 +24,7 @@ import {
 
 import TypeExercise from '../components/exercises/TypeExercise.vue'
 import WordBankExercise from '../components/exercises/WordBankExercise.vue'
-import MatchExercise from '../components/exercises/MatchExercise.vue'
+import FlashcardExercise from '../components/exercises/FlashcardExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import PhraseFixExercise from '../components/exercises/PhraseFixExercise.vue'
@@ -37,7 +37,7 @@ import { submitReport } from '../stores/reports.js'
 const COMPONENTS = {
   type: TypeExercise,
   wordbank: WordBankExercise,
-  match: MatchExercise,
+  match: FlashcardExercise,
   speak: SpeakExercise,
   inflect: InflectExercise,
   'phrase-fix': PhraseFixExercise,
