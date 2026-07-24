@@ -342,6 +342,10 @@ export function shapeContextPhrases(words) {
           case: a.case ?? null,
           number: a.number ?? null,
           gender: a.gender ?? null,
+          // Marks an adjective/pronoun accusative that agrees with an animate
+          // noun, so it takes the genitive form (ви́жу хоро́шего дру́га). The slot
+          // is still graded as the accusative — animacy only selects the form.
+          animate: a.animate ?? null,
           tense: a.tense ?? null,
           person: a.person ?? null,
           rule: a.rule ?? null,
