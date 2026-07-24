@@ -166,6 +166,7 @@ words:
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В э́том гараже́ рабо́тают два автомеха́ника.
         en_gb: Two car mechanics work in this garage.
+        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: автомеха́ник
       sg_gen: автомеха́ника
@@ -1155,6 +1156,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В гру́ппе бы́ло две аргенти́нки.
         en_gb: There were two Argentinian women in the group.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: аргенти́нка
       sg_gen: аргенти́нки
@@ -4306,6 +4308,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У меня́ два ста́рших бра́та.
         en_gb: I have two older brothers.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: брат
       sg_gen: бра́та
@@ -9618,6 +9621,9 @@ words:
     en_gb:
       standard: golf (a game of hitting a ball into holes with clubs)
     usage:
+      - ru: Он мно́го зна́ет о го́льфе.
+        en_gb: He knows a lot about golf.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: По выходны́м он игра́ет в гольф.
         en_gb: At the weekend he plays golf.
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
@@ -11751,6 +11757,7 @@ words:
         en_gb: Today is a good day.
       - ru: Э́ти дни я бу́ду до́ма.
         en_gb: These days I will be at home.
+        inflect: { token: 2, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Че́рез не́сколько дней начнётся о́тпуск.
         en_gb: In a few days the holiday will begin.
         inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
@@ -12011,6 +12018,7 @@ words:
         en_gb: The children are playing in the yard.
       - ru: Роди́тели лю́бят свои́х дете́й.
         en_gb: Parents love their children.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Мы купи́ли де́тям пода́рки.
         en_gb: We bought presents for the children.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
@@ -16194,6 +16202,7 @@ words:
     usage:
       - ru: Я услы́шал стра́нный звук.
         en_gb: I heard a strange sound.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он испуга́лся гро́мкого зву́ка.
         en_gb: He was frightened by the loud sound.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -23135,6 +23144,9 @@ words:
     en_gb:
       standard: nightmare (a frightening dream; a terrible situation)
     usage:
+      - ru: Я ви́дел стра́шный кошма́р но́чью.
+        en_gb: I had a terrible nightmare last night.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мне присни́лся стра́шный кошма́р.
         en_gb: I had a terrible nightmare.
       - ru: Э́та доро́га — про́сто кошма́р.
@@ -27295,6 +27307,9 @@ words:
     en_gb:
       standard: massage (rubbing the body to relax the muscles)
     usage:
+      - ru: Она́ рабо́тает на масса́же.
+        en_gb: She works at the massage parlour.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: По́сле рабо́ты она́ де́лает масса́ж.
         en_gb: After work she does a massage.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
@@ -45658,6 +45673,9 @@ words:
     en_gb:
       standard: guys (kids; lads; a friendly address to a group)
     usage:
+      - ru: Я ви́жу на́ших ребя́т в па́рке.
+        en_gb: I see our guys in the park.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Я горжу́сь на́шими ребя́тами.
         en_gb: I am proud of our guys.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
@@ -46595,6 +46613,9 @@ words:
     en_gb:
       standard: parents (a mother and father)
     usage:
+      - ru: Я о́чень люблю́ свои́х роди́телей.
+        en_gb: I love my parents very much.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Мои́ роди́тели живу́т в Москве́.
         en_gb: My parents live in Moscow.
       - ru: Я скуча́ю по роди́телям.
@@ -49221,6 +49242,9 @@ words:
     en_gb:
       standard: sister (a female sibling)
     usage:
+      - ru: Я люблю́ свою́ мла́дшую сестру́.
+        en_gb: I love my younger sister.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он купи́л пода́рки сёстрам.
         en_gb: He bought presents for his sisters.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
@@ -55121,6 +55145,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У них три сы́на.
         en_gb: They have three sons.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: сын
       sg_gen: сы́на
@@ -58403,6 +58428,9 @@ words:
     en_gb:
       standard: street (a road in a town)
     usage:
+      - ru: Мы вы́шли на у́лицу.
+        en_gb: We went out onto the street.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На у́лице идёт дождь.
         en_gb: It is raining in the street.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -61751,6 +61779,7 @@ words:
     usage:
       - ru: Я ждал тебя́ це́лый час.
         en_gb: I waited for you for a whole hour.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Уро́к дли́тся два часа́.
         en_gb: The lesson lasts two hours.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -62857,6 +62886,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На ку́рсах бы́ло две швейца́рки.
         en_gb: There were two Swiss women on the course.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: швейца́рка
       sg_gen: швейца́рки
