@@ -88,8 +88,13 @@ async function selectCollection(result) {
 function flash(msg) {
   clearTimeout(addedTimer)
   justAdded.value = msg
+  // Clearing the query empties `results`, which closes the dropdown on its own.
+  // We deliberately leave `focused` untouched: the `@mousedown.prevent` on each
+  // item keeps the input focused, so a matching `@focus` event never fires. If
+  // we forced `focused = false` here it would desync from the real DOM focus and
+  // the dropdown would stay hidden on the next keystroke until a manual blur +
+  // re-focus. Leaving it true lets the learner keep adding words in one go.
   query.value = ''
-  focused.value = false
   addedTimer = setTimeout(() => (justAdded.value = ''), 2000)
 }
 
