@@ -3447,6 +3447,38 @@ words:
       pl_acc: бло́ки
       pl_ins: бло́ками
       pl_pre: бло́ках
+  "блузка=blouse":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+    en_gb:
+      standard: blouse (a woman's shirt)
+    usage:
+      - ru: Она́ наде́ла бе́лую блу́зку.
+        en_gb: She put on a white blouse.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В шкафу́ виси́т мно́го блу́зок.
+        en_gb: There are many blouses hanging in the wardrobe.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-genpl-fleeting }
+      - ru: Она́ пришла́ в но́вой блу́зке.
+        en_gb: She came in a new blouse.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: блу́зка
+      sg_gen: блу́зки
+      sg_dat: блу́зке
+      sg_acc: блу́зку
+      sg_ins: блу́зкой
+      sg_pre: блу́зке
+      pl_nom: блу́зки
+      pl_gen: блу́зок
+      pl_dat: блу́зкам
+      pl_acc: блу́зки
+      pl_ins: блу́зками
+      pl_pre: блу́зках
   "блюдо=dish":
     cefr_level: B1
     gender: n
@@ -23510,6 +23542,41 @@ words:
       pl_acc: кро́ликов
       pl_ins: кро́ликами
       pl_pre: кро́ликах
+  "кроссовка=trainer":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+      - sport
+    en_gb:
+      standard: trainer (a sports shoe, usually plural кроссо́вки)
+      alt:
+        - sneaker
+    usage:
+      - ru: Он купи́л но́вые кроссо́вки.
+        en_gb: He bought new trainers.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Я бе́гаю в удо́бных кроссо́вках.
+        en_gb: I run in comfortable trainers.
+        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: В магази́не мно́го кроссо́вок.
+        en_gb: There are many trainers in the shop.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-genpl-fleeting }
+    declension:
+      sg_nom: кроссо́вка
+      sg_gen: кроссо́вки
+      sg_dat: кроссо́вке
+      sg_acc: кроссо́вку
+      sg_ins: кроссо́вкой
+      sg_pre: кроссо́вке
+      pl_nom: кроссо́вки
+      pl_gen: кроссо́вок
+      pl_dat: кроссо́вкам
+      pl_acc: кроссо́вки
+      pl_ins: кроссо́вками
+      pl_pre: кроссо́вках
   "круассан=croissant":
     cefr_level: A1
     gender: m
@@ -31375,6 +31442,29 @@ words:
       - ru: Жизнь полна́ ра́достей и несча́стий.
         en_gb: Life is full of joys and misfortunes.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+  "нижнее бельё=underwear":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - clothes
+    en_gb:
+      standard: underwear (clothing worn next to the skin)
+    usage:
+      - ru: Она́ купи́ла краси́вое ни́жнее бельё.
+        en_gb: She bought pretty underwear.
+      - ru: Ни́жнее бельё лежи́т в шкафу́.
+        en_gb: The underwear is in the wardrobe.
+      - ru: Ты не забы́л ни́жнее бельё?
+        en_gb: Did you forget your underwear?
+    declension:
+      sg_nom: ни́жнее бельё
+      sg_gen: ни́жнего белья́
+      sg_dat: ни́жнему белью́
+      sg_acc: ни́жнее бельё
+      sg_ins: ни́жним бельём
+      sg_pre: ни́жнем белье́
   "низ=bottom":
     cefr_level: B1
     gender: m
@@ -37400,6 +37490,31 @@ words:
       - ru: Жи́вотные и́щут пи́щу в лесу́.
         en_gb: Animals look for food in the forest.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+  "плавки=swimming trunks":
+    cefr_level: A1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - clothes
+    en_gb:
+      standard: swimming trunks (men's swimwear)
+    usage:
+      - ru: Он бы́стро наде́л пла́вки.
+        en_gb: He quickly put on his swimming trunks.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он прие́хал на мо́ре без пла́вок.
+        en_gb: He arrived at the seaside without trunks.
+        inflect: { token: 6, case: gen, number: pl, rule: noun-genpl-fleeting }
+      - ru: В пла́вках удо́бно пла́вать.
+        en_gb: It's comfortable to swim in trunks.
+        inflect: { token: 2, case: pre, number: pl, rule: noun-pre-pl }
+    declension:
+      pl_nom: пла́вки
+      pl_gen: пла́вок
+      pl_dat: пла́вкам
+      pl_acc: пла́вки
+      pl_ins: пла́вками
+      pl_pre: пла́вках
   "пламя=flame":
     cefr_level: B2
     gender: n
@@ -47642,6 +47757,38 @@ words:
       pl_acc: санато́рии
       pl_ins: санато́риями
       pl_pre: санато́риях
+  "сандалия=sandal":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+    en_gb:
+      standard: sandal (an open summer shoe, usually plural санда́лии)
+    usage:
+      - ru: Ле́том я ношу́ санда́лии.
+        en_gb: In summer I wear sandals.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Она́ хо́дит в санда́лиях.
+        en_gb: She walks around in sandals.
+        inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: У меня́ нет ле́тних санда́лий.
+        en_gb: I don't have summer sandals.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: санда́лия
+      sg_gen: санда́лии
+      sg_dat: санда́лии
+      sg_acc: санда́лию
+      sg_ins: санда́лией
+      sg_pre: санда́лии
+      pl_nom: санда́лии
+      pl_gen: санда́лий
+      pl_dat: санда́лиям
+      pl_acc: санда́лии
+      pl_ins: санда́лиями
+      pl_pre: санда́лиях
   "сапог=boot":
     cefr_level: B1
     gender: m
@@ -51856,6 +52003,30 @@ words:
       sg_acc: спорт
       sg_ins: спо́ртом
       sg_pre: спо́рте
+  "спортивный костюм=tracksuit":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - clothes
+      - sport
+    en_gb:
+      standard: tracksuit (matching sports top and trousers)
+    usage:
+      - ru: Он бе́гает в спорти́вном костю́ме.
+        en_gb: He runs in a tracksuit.
+      - ru: Она́ купи́ла но́вый спорти́вный костю́м.
+        en_gb: She bought a new tracksuit.
+      - ru: Тебе́ идёт э́тот спорти́вный костю́м.
+        en_gb: This tracksuit suits you.
+    declension:
+      sg_nom: спорти́вный костю́м
+      sg_gen: спорти́вного костю́ма
+      sg_dat: спорти́вному костю́му
+      sg_acc: спорти́вный костю́м
+      sg_ins: спорти́вным костю́мом
+      sg_pre: спорти́вном костю́ме
   "способ=method":
     cefr_level: B1
     gender: m
@@ -55936,6 +56107,38 @@ words:
       pl_acc: то́нны
       pl_ins: то́ннами
       pl_pre: то́ннах
+  "топ=top":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - clothes
+    en_gb:
+      standard: top (a light upper garment)
+    usage:
+      - ru: Она́ купи́ла но́вый топ.
+        en_gb: She bought a new top.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ пришла́ в кра́сном то́пе.
+        en_gb: She came in a red top.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: У неё нет чёрного то́па.
+        en_gb: She doesn't have a black top.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: топ
+      sg_gen: то́па
+      sg_dat: то́пу
+      sg_acc: топ
+      sg_ins: то́пом
+      sg_pre: то́пе
+      pl_nom: то́пы
+      pl_gen: то́пов
+      pl_dat: то́пам
+      pl_acc: то́пы
+      pl_ins: то́пами
+      pl_pre: то́пах
   "тополь=poplar":
     cefr_level: B2
     gender: m
