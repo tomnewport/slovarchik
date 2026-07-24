@@ -7,3 +7,8 @@ coverage
 .vite
 *.log
 .claude/
+
+# Generated from the vocab YAML on every build (and predev) — see
+# scripts/gen-manifest.mjs. Not committed so parallel vocab edits don't
+# conflict over it.
+public/vocab/manifest.json

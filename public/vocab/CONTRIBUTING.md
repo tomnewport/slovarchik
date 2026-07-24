@@ -8,8 +8,10 @@ version.
 > **TL;DR workflow**
 > 1. Add/edit an entry in the right `*.yml` file (schema below).
 > 2. Keep the file sorted: `node scripts/sort-vocab.js public/vocab/<file>.yml`.
-> 3. Refresh the manifest: `npm run gen:manifest`.
-> 4. `npm test` — the suites guard the shape. Fix anything red.
+> 3. `npm test` — the suites guard the shape. Fix anything red.
+>
+> There's no manifest step: `manifest.json` is generated (and not committed), so
+> just edit the YAML and commit that.
 
 ---
 
@@ -17,12 +19,13 @@ version.
 
 - **One file per part of speech** (`nouns.yml`, `verbs.yml`, …). `calendar.yml`
   is also nouns (days/months/festivals), grouped by topic.
-- [`manifest.json`](manifest.json) lists every file, its `pos`, an `updated`
-  timestamp (shown in-app) and a content `hash`. The app downloads a file only
-  when its `hash` differs from the copy cached in IndexedDB. **The manifest is
-  generated — run `npm run gen:manifest` after editing any file** (or `npm run
-  build`, which does it); don't hand-edit it. CI's `check:manifest` fails if it
-  drifts from the files.
+- `manifest.json` lists every file, its `pos`, an `updated` timestamp (shown
+  in-app, read from git history) and a content `hash`. The app downloads a file
+  only when its `hash` differs from the copy cached in IndexedDB. **The manifest
+  is generated and not committed** — `npm run build` and `npm run dev` rebuild it
+  from the YAML, so you never edit or commit it (that's what stops parallel vocab
+  branches conflicting over it). Run `npm run gen:manifest` if you want to
+  regenerate it by hand.
 - At load time each file is parsed and normalised by
   [`src/lib/vocabBuild.js`](../../src/lib/vocabBuild.js) into the records the
   drills consume. Read that file if you need the exact transformation.
@@ -441,9 +444,9 @@ rules:
       - "Feminine -ь nouns don't change: мать → мать."
 ```
 
-`grammar-rules.yml` is listed in `manifest.json` like any other file — run
-`npm run gen:manifest` after changing it (or any word file, e.g. when you add
-`inflect:` annotations) so its content `hash` refreshes and clients re-sync.
+`grammar-rules.yml` is listed in the manifest like any other file — editing it
+(or any word file, e.g. adding `inflect:` annotations) refreshes its content
+`hash` at the next build, and clients re-sync on that change. Nothing to run.
 
 ---
 
@@ -469,7 +472,7 @@ preserving the header/`meta` block and each entry verbatim.
 2. Register the filename → POS in **both** `POS_BY_FILE` and `partsOfSpeech` in
    [`src/lib/vocabBuild.js`](../../src/lib/vocabBuild.js).
 3. Register the filename → POS in the `FILES` list in
-   [`scripts/gen-manifest.mjs`](../../scripts/gen-manifest.mjs), then run
-   `npm run gen:manifest` to add it to [`manifest.json`](manifest.json).
+   [`scripts/gen-manifest.mjs`](../../scripts/gen-manifest.mjs) — the next build
+   picks it up into the (generated) manifest automatically.
 4. `npm test`.
 </content>

@@ -140,8 +140,9 @@ examples.
 
 1. **`public/vocab/phrase-templates.yml`** — author ~30–60 templates covering
    the gender×number×case combos (adjectives) and number×case combos (nouns) ×
-   a few semantic families, each with a generic fallback per slot. Add to
-   `manifest.json` and `public/vocab/CONTRIBUTING.md`.
+   a few semantic families, each with a generic fallback per slot. Register in
+   the `FILES` list in `scripts/gen-manifest.mjs` and document in
+   `public/vocab/CONTRIBUTING.md`.
 2. **Loading path** — the vocab store's `buildWords` assumes `doc.words`;
    templates are a different shape, so add a small separate load/cache branch in
    `src/stores/vocab.js` + `src/lib/idb.js` (or a `kind: templates` discriminator).
