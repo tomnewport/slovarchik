@@ -91,6 +91,9 @@ words:
     en_gb:
       standard: bus (a large road vehicle for many people)
     usage:
+      - ru: Я жду авто́буса на остано́вке.
+        en_gb: I am waiting for the bus at the stop.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
       - ru: Я е́ду на рабо́ту на авто́бусе.
         en_gb: I go to work by bus.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
@@ -4290,6 +4293,9 @@ words:
     en_gb:
       standard: brother (a male sibling)
     usage:
+      - ru: Ты меша́ешь бра́ту рабо́тать.
+        en_gb: You are disturbing your brother while he works.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
       - ru: Я е́ду в го́сти к бра́тьям.
         en_gb: I am going to visit my brothers.
         inflect: { token: 6, case: dat, number: pl, rule: noun-irregular-plural }
@@ -8077,6 +8083,9 @@ words:
       alt:
         - physician
     usage:
+      - ru: Я ве́рю своему́ врачу́.
+        en_gb: I trust my doctor.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
       - ru: Лю́ди ве́рят врача́м.
         en_gb: People trust doctors.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
@@ -13458,6 +13467,12 @@ words:
     en_gb:
       standard: friend (someone you like and trust)
     usage:
+      - ru: Я звоню́ дру́гу ка́ждый ве́чер.
+        en_gb: I phone my friend every evening.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Я сове́тую дру́гу отдохну́ть.
+        en_gb: I advise my friend to rest.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
       - ru: Мы пригласи́ли друзе́й на да́чу.
         en_gb: We invited our friends to the dacha.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-animate }
@@ -26941,6 +26956,9 @@ words:
     en_gb:
       standard: mum (mother)
     usage:
+      - ru: Я ча́сто помога́ю ма́ме.
+        en_gb: I often help my mum.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
       - ru: Я о́чень люблю́ свою́ ма́му.
         en_gb: I love my mum very much.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
@@ -30106,6 +30124,9 @@ words:
     en_gb:
       standard: music (sounds made by instruments or voices)
     usage:
+      - ru: Она́ о́чень интересу́ется му́зыкой.
+        en_gb: She is very interested in music.
+        inflect: { token: 4, case: ins, number: sg, rule: verb-gov-instrumental }
       - ru: Без му́зыки ску́чно.
         en_gb: It is boring without music.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -50879,6 +50900,9 @@ words:
     en_gb:
       standard: dog (a common pet that barks)
     usage:
+      - ru: Ма́ленький ребёнок бои́тся соба́ки.
+        en_gb: The small child is afraid of the dog.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-genitive }
       - ru: Она́ ко́рмит бездо́мных соба́к.
         en_gb: She feeds stray dogs.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-animate }
@@ -52397,6 +52421,9 @@ words:
     en_gb:
       standard: sport (physical games and exercise)
     usage:
+      - ru: Я ка́ждый день занима́юсь спо́ртом.
+        en_gb: I do sport every day.
+        inflect: { token: 5, case: ins, number: sg, rule: verb-gov-instrumental }
       - ru: Он лю́бит спорт и здоро́вый о́браз жи́зни.
         en_gb: He loves sport and a healthy lifestyle.
       - ru: Он занима́ется спо́ртом ка́ждый день.
@@ -54958,6 +54985,9 @@ words:
     en_gb:
       standard: happiness (a feeling of joy and contentment)
     usage:
+      - ru: Я жела́ю тебе́ сча́стья.
+        en_gb: I wish you happiness.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-genitive }
       - ru: Жела́ю тебе́ сча́стья!
         en_gb: I wish you happiness!
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
@@ -55078,6 +55108,9 @@ words:
     en_gb:
       standard: son (a male child)
     usage:
+      - ru: Мать горди́тся свои́м сы́ном.
+        en_gb: The mother is proud of her son.
+        inflect: { token: 4, case: ins, number: sg, rule: verb-gov-instrumental }
       - ru: Оте́ц горди́тся свои́ми сыновья́ми.
         en_gb: The father is proud of his sons.
         inflect: { token: 4, case: ins, number: pl, rule: noun-irregular-plural }
@@ -55685,6 +55718,9 @@ words:
       alt:
         - phone
     usage:
+      - ru: Я по́льзуюсь но́вым телефо́ном.
+        en_gb: I use a new phone.
+        inflect: { token: 4, case: ins, number: sg, rule: verb-gov-instrumental }
       - ru: Все фо́то у меня́ в телефо́не.
         en_gb: All my photos are on my phone.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }

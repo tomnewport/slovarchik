@@ -80,6 +80,12 @@ export const routes = [
     component: () => import('../views/PhraseFixView.vue'),
   },
   {
+    path: '/verb-government',
+    name: 'verb-government',
+    component: () => import('../views/PhraseFixView.vue'),
+    props: { government: true },
+  },
+  {
     path: '/practice',
     name: 'practice',
     component: () => import('../views/PracticeView.vue'),

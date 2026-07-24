@@ -280,6 +280,45 @@ rules:
       - "After начина́ть/конча́ть ('begin/finish doing') only the imperfective infinitive follows."
       - "A negated imperative usually goes imperfective: не говори́!"
 
+  # ── Verb government ──────────────────────────────────────────────────────
+  # Which case a verb puts its object in when it isn't the plain accusative —
+  # a producing-Russian skill an English speaker can't guess. Marked as
+  # exceptions so the drill surfaces them more often.
+  verb-gov-dative:
+    exception: true
+    title: "Verbs that take the dative"
+    formula: "помога́ть · звони́ть · ве́рить · меша́ть · сове́товать + dative"
+    explanation: >
+      Some verbs put their object in the DATIVE where English just uses a direct
+      object: помога́ть (to help), звони́ть (to phone), ве́рить (to believe /
+      trust), меша́ть (to disturb), сове́товать (to advise). Я помога́ю ма́ме (not
+      *ма́му), Я звоню́ дру́гу, Я ве́рю врачу́. Think of them as "give help / a
+      call / trust TO someone".
+    exceptions:
+      - "нра́виться and its subject: the liked thing is nominative, the person dative (мне нра́вится)."
+  verb-gov-genitive:
+    exception: true
+    title: "Verbs that take the genitive"
+    formula: "ждать · боя́ться · жела́ть + genitive"
+    explanation: >
+      A few verbs govern the GENITIVE: боя́ться (to fear), жела́ть (to wish),
+      and ждать (to wait for) with a non-specific or abstract object. Я бою́сь
+      соба́ки, Жела́ю сча́стья, Я жду авто́буса. (With a definite, concrete object
+      ждать can take the accusative — жду ма́му — but the genitive is the safe
+      default for things.)
+    exceptions:
+      - "ждать takes the accusative for a specific person: жду ма́му, жду дру́га."
+  verb-gov-instrumental:
+    exception: true
+    title: "Verbs that take the instrumental"
+    formula: "интересова́ться · занима́ться · горди́ться · по́льзоваться + instrumental"
+    explanation: >
+      Several verbs — many of them reflexive -ся — govern the INSTRUMENTAL with
+      no preposition: интересова́ться (to be interested in), занима́ться (to do /
+      study), горди́ться (to be proud of), по́льзоваться (to use). Она́
+      интересу́ется му́зыкой, Я занима́юсь спо́ртом, Мать горди́тся сы́ном, Я
+      по́льзуюсь телефо́ном.
+
   # ── Adjectives ──────────────────────────────────────────────────────────
   adj-agreement:
     title: "Adjective agreement"

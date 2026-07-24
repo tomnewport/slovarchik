@@ -5,17 +5,35 @@
 import { computed, ref } from 'vue'
 import { state as vocabState } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { buildContextExercise, canBuildContext } from '../lib/phraseContext.js'
+import {
+  buildContextExercise,
+  buildFromPhrase,
+  canBuildContext,
+  governmentPhrases,
+} from '../lib/phraseContext.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import PhraseFixExercise from '../components/exercises/PhraseFixExercise.vue'
 
+// In `government` mode the drill is phrase-centric — it samples verb-government
+// slots (помога́ть + dative, …) directly — instead of picking a word and one of
+// its phrases. Everything else (renderer, scoring, celebration) is shared.
+const props = defineProps({ government: { type: Boolean, default: false } })
+
 const CELEBRATE_MS = 1000
 
-// Words that have at least one annotated phrase, so a drill can be built.
+const title = computed(() => (props.government ? 'Verb government' : 'Fix the phrase'))
+
+// Word-centric pool: words that have at least one annotated phrase.
 const drillable = computed(() =>
   vocabState.words.filter((w) => canBuildContext(w, { phrasesByKey: vocabState.contextPhrases })),
 )
-const ready = computed(() => drillable.value.length > 0)
+// Phrase-centric pool for government mode, with a key→word lookup for the owner.
+const govPhrases = computed(() => governmentPhrases(vocabState.contextPhrases))
+const wordByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
+
+const ready = computed(() =>
+  props.government ? govPhrases.value.length > 0 : drillable.value.length > 0,
+)
 
 const started = ref(false)
 const current = ref(null)
@@ -25,11 +43,17 @@ const score = ref({ right: 0, total: 0 })
 
 function pick() {
   celebrating.value = false
-  const word = sample(drillable.value, 1)[0]
-  current.value = buildContextExercise(word, {
-    phrasesByKey: vocabState.contextPhrases,
-    rules: vocabState.rules,
-  })
+  if (props.government) {
+    const phrase = sample(govPhrases.value, 1)[0]
+    const owner = wordByKey.value.get(phrase?.target?.key)
+    current.value = owner ? buildFromPhrase(phrase, owner, { rules: vocabState.rules }) : null
+  } else {
+    const word = sample(drillable.value, 1)[0]
+    current.value = buildContextExercise(word, {
+      phrasesByKey: vocabState.contextPhrases,
+      rules: vocabState.rules,
+    })
+  }
   exerciseSeq.value++
 }
 
@@ -60,8 +84,13 @@ function quit() {
 <template>
   <!-- Start screen -->
   <section v-if="!started" class="grid">
-    <h2 style="margin: 0">Fix the phrase</h2>
-    <p class="muted">
+    <h2 style="margin: 0">{{ title }}</h2>
+    <p v-if="government" class="muted">
+      Some verbs put their object in a case you can't guess — помога́ть takes the
+      dative, ждать the genitive, горди́ться the instrumental. Pick the case the
+      verb needs, then spell the form.
+    </p>
+    <p v-else class="muted">
       A real sentence appears with one word in its dictionary form. First pick
       the case the sentence needs, then spell the correct form.
     </p>
@@ -77,7 +106,7 @@ function quit() {
     <CelebrationBurst :show="celebrating" />
 
     <div class="row" style="justify-content: space-between">
-      <span class="pill">Fix the phrase</span>
+      <span class="pill">{{ title }}</span>
       <span class="muted">{{ score.right }} / {{ score.total }}</span>
     </div>
 

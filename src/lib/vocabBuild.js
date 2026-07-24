@@ -157,6 +157,11 @@ function normalizeWord(pos, key, word) {
     aspect: word.aspect ?? null,
     pairKey: word.pair ?? null,
     aspectPair: null,
+    // The case a verb governs on its object when it isn't the plain accusative
+    // (помога́ть + dative, ждать + genitive, горди́ться + instrumental). Powers
+    // the verb-government drill; null for ordinary accusative/intransitive verbs.
+    // Verb-only: prepositions carry their own array-valued `governs` in `extra`.
+    governs: pos === 'verb' ? (word.governs ?? null) : null,
     // Confusable same-spelling forms whose stress carries the meaning. An
     // explicit annotation wins; otherwise buildWords fills this in for headword
     // collisions (за́мок "castle" vs замо́к "lock").
