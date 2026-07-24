@@ -16466,6 +16466,32 @@ words:
       sg_acc: зо́лото
       sg_ins: зо́лотом
       sg_pre: зо́лоте
+  "Золушка=Cinderella":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg"]
+    collections:
+      - reading
+    en_gb:
+      standard: Cinderella (the fairy-tale heroine)
+    usage:
+      - ru: Де́ти лю́бят ска́зку про Зо́лушку.
+        en_gb: Children love the fairy tale about Cinderella.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: При́нц танцева́л с Зо́лушкой.
+        en_gb: The prince danced with Cinderella.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Сёстры не помога́ли Зо́лушке.
+        en_gb: The sisters didn't help Cinderella.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: Зо́лушка
+      sg_gen: Зо́лушки
+      sg_dat: Зо́лушке
+      sg_acc: Зо́лушку
+      sg_ins: Зо́лушкой
+      sg_pre: Зо́лушке
   "зона=zone":
     cefr_level: B1
     gender: f
@@ -26712,6 +26738,29 @@ words:
       pl_acc: ма́ркеры
       pl_ins: ма́ркерами
       pl_pre: ма́ркерах
+  "Марокко=Morocco":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Morocco (a country in North Africa; indeclinable)
+    usage:
+      - ru: Ле́том мы пое́дем в Маро́кко.
+        en_gb: In summer we'll go to Morocco.
+      - ru: В Маро́кко о́чень жа́рко.
+        en_gb: It's very hot in Morocco.
+      - ru: Она́ верну́лась из Маро́кко с сувени́рами.
+        en_gb: She came back from Morocco with souvenirs.
+    declension:
+      sg_nom: Маро́кко
+      sg_gen: Маро́кко
+      sg_dat: Маро́кко
+      sg_acc: Маро́кко
+      sg_ins: Маро́кко
+      sg_pre: Маро́кко
   "Марс=Mars":
     cefr_level: B1
     gender: m
@@ -56979,6 +57028,32 @@ words:
       pl_acc: тури́стов
       pl_ins: тури́стами
       pl_pre: тури́стах
+  "Турция=Turkey":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Turkey (a country between Europe and Asia)
+    usage:
+      - ru: Ле́том мы лета́ем в Ту́рцию.
+        en_gb: In summer we fly to Turkey.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В Ту́рции мно́го тури́стов.
+        en_gb: There are many tourists in Turkey.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он прие́хал из Ту́рции.
+        en_gb: He came from Turkey.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: Ту́рция
+      sg_gen: Ту́рции
+      sg_dat: Ту́рции
+      sg_acc: Ту́рцию
+      sg_ins: Ту́рцией
+      sg_pre: Ту́рции
   "туча=storm cloud":
     cefr_level: B1
     gender: f
@@ -62118,6 +62193,39 @@ words:
       pl_acc: ша́хматы
       pl_ins: ша́хматами
       pl_pre: ша́хматах
+  "швед=Swede":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+      - nationalities
+    en_gb:
+      standard: Swede (a person from Sweden)
+    usage:
+      - ru: Я познако́мился со шве́дом в о́тпуске.
+        en_gb: I met a Swede on holiday.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: На конфере́нции я встре́тил шве́да.
+        en_gb: At the conference I met a Swede.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: В гру́ппе бы́ло не́сколько шве́дов.
+        en_gb: There were several Swedes in the group.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: швед
+      sg_gen: шве́да
+      sg_dat: шве́ду
+      sg_acc: шве́да
+      sg_ins: шве́дом
+      sg_pre: шве́де
+      pl_nom: шве́ды
+      pl_gen: шве́дов
+      pl_dat: шве́дам
+      pl_acc: шве́дов
+      pl_ins: шве́дами
+      pl_pre: шве́дах
   "швейцарец=Swiss":
     cefr_level: A1
     gender: m
@@ -62206,6 +62314,32 @@ words:
       pl_acc: швейца́рок
       pl_ins: швейца́рками
       pl_pre: швейца́рках
+  "Швеция=Sweden":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - geography
+    en_gb:
+      standard: Sweden (a country in northern Europe)
+    usage:
+      - ru: Он уе́хал жить в Шве́цию.
+        en_gb: He went to live in Sweden.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В Шве́ции холо́дные зи́мы.
+        en_gb: Sweden has cold winters.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Э́та компа́ния из Шве́ции.
+        en_gb: This company is from Sweden.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: Шве́ция
+      sg_gen: Шве́ции
+      sg_dat: Шве́ции
+      sg_acc: Шве́цию
+      sg_ins: Шве́цией
+      sg_pre: Шве́ции
   "шезлонг=deckchair":
     cefr_level: A1
     gender: m
