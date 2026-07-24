@@ -1773,6 +1773,41 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учёные постро́или две ба́зы в Аркти́ке.
         en_gb: Scientists built two bases in the Arctic.
+  "базар=market":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - shopping
+      - places
+    en_gb:
+      standard: market (an open-air market or bazaar)
+      alt:
+        - bazaar
+    usage:
+      - ru: У́тром мы пошли́ на база́р.
+        en_gb: In the morning we went to the market.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На база́ре продаю́т све́жие о́вощи.
+        en_gb: They sell fresh vegetables at the market.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он верну́лся с база́ра с фру́ктами.
+        en_gb: He came back from the market with fruit.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: база́р
+      sg_gen: база́ра
+      sg_dat: база́ру
+      sg_acc: база́р
+      sg_ins: база́ром
+      sg_pre: база́ре
+      pl_nom: база́ры
+      pl_gen: база́ров
+      pl_dat: база́рам
+      pl_acc: база́ры
+      pl_ins: база́рами
+      pl_pre: база́рах
   "Байкал=Lake Baikal":
     cefr_level: B1
     gender: m
@@ -4980,6 +5015,39 @@ words:
       pl_acc: васильки́
       pl_ins: василька́ми
       pl_pre: василька́х
+  "вегетарианец=vegetarian":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - people
+    en_gb:
+      standard: vegetarian (a person who doesn't eat meat)
+    usage:
+      - ru: Я пригото́вил обе́д для вегетариа́нца.
+        en_gb: I cooked lunch for a vegetarian.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он стал вегетариа́нцем год наза́д.
+        en_gb: He became a vegetarian a year ago.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Я пригласи́л вегетариа́нца на у́жин.
+        en_gb: I invited a vegetarian to dinner.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+    declension:
+      sg_nom: вегетариа́нец
+      sg_gen: вегетариа́нца
+      sg_dat: вегетариа́нцу
+      sg_acc: вегетариа́нца
+      sg_ins: вегетариа́нцем
+      sg_pre: вегетариа́нце
+      pl_nom: вегетариа́нцы
+      pl_gen: вегетариа́нцев
+      pl_dat: вегетариа́нцам
+      pl_acc: вегетариа́нцев
+      pl_ins: вегетариа́нцами
+      pl_pre: вегетариа́нцах
   "ведро=bucket":
     cefr_level: B1
     gender: n
@@ -6292,6 +6360,32 @@ words:
       pl_acc: ви́на
       pl_ins: ви́нами
       pl_pre: ви́нах
+  "виноград=grapes":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: grapes (a bunch of grapes; collective)
+    usage:
+      - ru: Я купи́л зелёный виногра́д.
+        en_gb: I bought green grapes.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В виногра́де мно́го са́хара.
+        en_gb: There's a lot of sugar in grapes.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он съел мно́го виногра́да.
+        en_gb: He ate a lot of grapes.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: виногра́д
+      sg_gen: виногра́да
+      sg_dat: виногра́ду
+      sg_acc: виногра́д
+      sg_ins: виногра́дом
+      sg_pre: виногра́де
   "винт=screw":
     cefr_level: B2
     gender: m
@@ -6850,6 +6944,41 @@ words:
       sg_acc: водоро́д
       sg_ins: водоро́дом
       sg_pre: водоро́де
+  "водоросль=seaweed":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - food and drink
+    en_gb:
+      standard: seaweed (a sea plant; algae)
+      alt:
+        - alga
+    usage:
+      - ru: В мо́ре мно́го во́дорослей.
+        en_gb: There's lots of seaweed in the sea.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он собра́л во́доросли на пля́же.
+        en_gb: He collected seaweed on the beach.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В во́дорослях живёт мно́го рыб.
+        en_gb: A lot of fish live in the seaweed.
+        inflect: { token: 2, case: pre, number: pl, rule: noun-pre-pl }
+    declension:
+      sg_nom: во́доросль
+      sg_gen: во́доросли
+      sg_dat: во́доросли
+      sg_acc: во́доросль
+      sg_ins: во́дорослью
+      sg_pre: во́доросли
+      pl_nom: во́доросли
+      pl_gen: во́дорослей
+      pl_dat: во́дорослям
+      pl_acc: во́доросли
+      pl_ins: во́дорослями
+      pl_pre: во́дорослях
   "вождь=leader":
     cefr_level: B2
     gender: m
@@ -8558,6 +8687,38 @@ words:
       sg_acc: гармо́нию
       sg_ins: гармо́нией
       sg_pre: гармо́нии
+  "гарнир=side dish":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: side dish (an accompaniment to a main course)
+    usage:
+      - ru: На гарни́р я взял рис.
+        en_gb: I had rice as a side dish.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В э́том гарни́ре мно́го овоще́й.
+        en_gb: There are lots of vegetables in this side dish.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мя́со подаю́т с гарни́ром.
+        en_gb: Meat is served with a side dish.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: гарни́р
+      sg_gen: гарни́ра
+      sg_dat: гарни́ру
+      sg_acc: гарни́р
+      sg_ins: гарни́ром
+      sg_pre: гарни́ре
+      pl_nom: гарни́ры
+      pl_gen: гарни́ров
+      pl_dat: гарни́рам
+      pl_acc: гарни́ры
+      pl_ins: гарни́рами
+      pl_pre: гарни́рах
   "гвоздь=nail":
     cefr_level: B1
     gender: m
@@ -9549,6 +9710,29 @@ words:
       pl_acc: горшки́
       pl_ins: горшка́ми
       pl_pre: горшка́х
+  "горячий шоколад=hot chocolate":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: hot chocolate (a hot cocoa drink)
+    usage:
+      - ru: Зимо́й я люблю́ горя́чий шокола́д.
+        en_gb: In winter I love hot chocolate.
+      - ru: Она́ заказа́ла горя́чий шокола́д в кафе́.
+        en_gb: She ordered hot chocolate at the café.
+      - ru: Нет ничего́ лу́чше горя́чего шокола́да в холо́дный день.
+        en_gb: There's nothing better than hot chocolate on a cold day.
+    declension:
+      sg_nom: горя́чий шокола́д
+      sg_gen: горя́чего шокола́да
+      sg_dat: горя́чему шокола́ду
+      sg_acc: горя́чий шокола́д
+      sg_ins: горя́чим шокола́дом
+      sg_pre: горя́чем шокола́де
   "госпиталь=military hospital":
     cefr_level: B2
     gender: m
@@ -18453,6 +18637,32 @@ words:
         inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
       - ru: На траве́ блестя́т ка́пли росы́.
         en_gb: Drops of dew glisten on the grass.
+  "капуста=cabbage":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: cabbage (a leafy green vegetable)
+    usage:
+      - ru: Я купи́л све́жую капу́сту.
+        en_gb: I bought a fresh cabbage.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В су́пе мно́го капу́сты.
+        en_gb: There's a lot of cabbage in the soup.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Пиро́г с капу́стой о́чень вку́сный.
+        en_gb: The cabbage pie is very tasty.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: капу́ста
+      sg_gen: капу́сты
+      sg_dat: капу́сте
+      sg_acc: капу́сту
+      sg_ins: капу́стой
+      sg_pre: капу́сте
   "карандаш=pencil":
     cefr_level: A2
     gender: m
@@ -19144,6 +19354,32 @@ words:
       sg_acc: кварц
       sg_ins: ква́рцем
       sg_pre: ква́рце
+  "квас=kvass":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: kvass (a mildly fermented bread drink)
+    usage:
+      - ru: Ле́том я пью холо́дный квас.
+        en_gb: In summer I drink cold kvass.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он купи́л буты́лку ква́са.
+        en_gb: He bought a bottle of kvass.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Что тебе́ нра́вится в ква́се?
+        en_gb: What do you like about kvass?
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: квас
+      sg_gen: ква́са
+      sg_dat: ква́су
+      sg_acc: квас
+      sg_ins: ква́сом
+      sg_pre: ква́се
   "кедр=cedar":
     cefr_level: B2
     gender: m
@@ -19206,6 +19442,61 @@ words:
       pl_acc: ке́пки
       pl_ins: ке́пками
       pl_pre: ке́пках
+  "кефир=kefir":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: kefir (a tart fermented milk drink)
+    usage:
+      - ru: У́тром я пью кефи́р.
+        en_gb: In the morning I drink kefir.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он вы́пил стака́н кефи́ра.
+        en_gb: He drank a glass of kefir.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В э́том кефи́ре нет са́хара.
+        en_gb: There's no sugar in this kefir.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: кефи́р
+      sg_gen: кефи́ра
+      sg_dat: кефи́ру
+      sg_acc: кефи́р
+      sg_ins: кефи́ром
+      sg_pre: кефи́ре
+  "киви=kiwi":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: kiwi (a green tropical fruit; indeclinable)
+    usage:
+      - ru: Я люблю́ есть ки́ви на за́втрак.
+        en_gb: I love eating kiwi for breakfast.
+      - ru: В ки́ви мно́го витами́нов.
+        en_gb: There are lots of vitamins in kiwi.
+      - ru: Ты про́бовал ки́ви?
+        en_gb: Have you tried kiwi?
+    declension:
+      sg_nom: ки́ви
+      sg_gen: ки́ви
+      sg_dat: ки́ви
+      sg_acc: ки́ви
+      sg_ins: ки́ви
+      sg_pre: ки́ви
+      pl_nom: ки́ви
+      pl_gen: ки́ви
+      pl_dat: ки́ви
+      pl_acc: ки́ви
+      pl_ins: ки́ви
+      pl_pre: ки́ви
   "килограмм=kilogram":
     cefr_level: A2
     gender: m
@@ -28851,6 +29142,32 @@ words:
       pl_acc: моро́зы
       pl_ins: моро́зами
       pl_pre: моро́зах
+  "морс=fruit drink":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: fruit drink (a Russian berry cordial, mors)
+    usage:
+      - ru: Ма́ма сде́лала вку́сный морс.
+        en_gb: Mum made tasty fruit drink.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я вы́пил стака́н мо́рса.
+        en_gb: I drank a glass of fruit drink.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В мо́рсе мно́го витами́нов.
+        en_gb: There are lots of vitamins in the fruit drink.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: морс
+      sg_gen: мо́рса
+      sg_dat: мо́рсу
+      sg_acc: морс
+      sg_ins: мо́рсом
+      sg_pre: мо́рсе
   "моряк=sailor":
     cefr_level: A2
     gender: m
@@ -36253,6 +36570,33 @@ words:
       - ru: Он роди́лся в Петербу́рге.
         en_gb: He was born in Petersburg.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+  "петрушка=parsley":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: parsley (a green herb used in cooking)
+    usage:
+      - ru: Доба́вь в суп немно́го петру́шки.
+        en_gb: Add a little parsley to the soup.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ помы́ла петру́шку.
+        en_gb: She washed the parsley.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́тот сала́т с петру́шкой.
+        en_gb: This salad has parsley in it.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: петру́шка
+      sg_gen: петру́шки
+      sg_dat: петру́шке
+      sg_acc: петру́шку
+      sg_ins: петру́шкой
+      sg_pre: петру́шке
   "петух=rooster":
     cefr_level: B1
     gender: m
@@ -44717,6 +45061,33 @@ words:
         en_gb: The journalist works in the editorial office.
       - ru: Реда́кция вы́пустила но́вый но́мер.
         en_gb: The editorial office released a new issue.
+  "редис=radish":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: radish (a small crunchy red root vegetable)
+    usage:
+      - ru: Я посади́л реди́с в огоро́де.
+        en_gb: I planted radishes in the garden.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он не лю́бит вкус реди́са.
+        en_gb: He doesn't like the taste of radish.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В реди́се мно́го воды́.
+        en_gb: There's a lot of water in radish.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: реди́с
+      sg_gen: реди́са
+      sg_dat: реди́су
+      sg_acc: реди́с
+      sg_ins: реди́сом
+      sg_pre: реди́се
   "режим=regime":
     cefr_level: B1
     gender: m
@@ -47261,6 +47632,33 @@ words:
       - ru: Я узна́л об э́том из надёжных све́дений.
         en_gb: I learned about this from reliable information.
         inflect: { token: 7, case: gen, number: pl, rule: noun-gen-pl }
+  "свёкла=beetroot":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: beetroot (a dark red root vegetable)
+    usage:
+      - ru: Она́ свари́ла свёклу для сала́та.
+        en_gb: She boiled beetroot for the salad.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В су́пе мно́го свёклы.
+        en_gb: There's a lot of beetroot in the soup.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Э́тот сала́т со свёклой.
+        en_gb: This salad has beetroot in it.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: свёкла
+      sg_gen: свёклы
+      sg_dat: свёкле
+      sg_acc: свёклу
+      sg_ins: свёклой
+      sg_pre: свёкле
   "свет=light":
     cefr_level: A2
     gender: m
@@ -48793,6 +49191,38 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Кру́тые скло́ны опа́сны зимо́й.
         en_gb: Steep slopes are dangerous in winter.
+  "сковорода=frying pan":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the kitchen
+    en_gb:
+      standard: frying pan (a flat pan for frying food)
+    usage:
+      - ru: Она́ пригото́вила ры́бу на сковороде́.
+        en_gb: She cooked fish in the frying pan.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Возьми́ большу́ю ско́вороду.
+        en_gb: Take the big frying pan.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: У меня́ нет чи́стой сковороды́.
+        en_gb: I don't have a clean frying pan.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: сковорода́
+      sg_gen: сковороды́
+      sg_dat: сковороде́
+      sg_acc: ско́вороду
+      sg_ins: сковородо́й
+      sg_pre: сковороде́
+      pl_nom: ско́вороды
+      pl_gen: сковоро́д
+      pl_dat: сковорода́м
+      pl_acc: ско́вороды
+      pl_ins: сковорода́ми
+      pl_pre: сковорода́х
   "скорость=speed":
     cefr_level: B1
     gender: f
@@ -58075,6 +58505,32 @@ words:
       pl_acc: фа́ртуки
       pl_ins: фа́ртуками
       pl_pre: фа́ртуках
+  "фасоль=beans":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: beans (kidney beans, haricots)
+    usage:
+      - ru: Я люблю́ кра́сную фасо́ль.
+        en_gb: I love red beans.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В су́пе мно́го фасо́ли.
+        en_gb: There are lots of beans in the soup.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ пригото́вила ры́бу с фасо́лью.
+        en_gb: She cooked fish with beans.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: фасо́ль
+      sg_gen: фасо́ли
+      sg_dat: фасо́ли
+      sg_acc: фасо́ль
+      sg_ins: фасо́лью
+      sg_pre: фасо́ли
   "федерация=federation":
     cefr_level: B1
     gender: f
@@ -59179,6 +59635,33 @@ words:
       pl_acc: хлопки́
       pl_ins: хлопка́ми
       pl_pre: хлопка́х
+  "хлопья=cereal":
+    cefr_level: A1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: cereal (breakfast flakes)
+      alt:
+        - cornflakes
+    usage:
+      - ru: На за́втрак я ем хло́пья с молоко́м.
+        en_gb: For breakfast I eat cereal with milk.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В таре́лке нет хло́пьев.
+        en_gb: There's no cereal in the bowl.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он за́втракает хло́пьями ка́ждый день.
+        en_gb: He has cereal for breakfast every day.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
+    declension:
+      pl_nom: хло́пья
+      pl_gen: хло́пьев
+      pl_dat: хло́пьям
+      pl_acc: хло́пья
+      pl_ins: хло́пьями
+      pl_pre: хло́пьях
   "хобби=hobby":
     cefr_level: A2
     gender: n
@@ -63154,6 +63637,32 @@ words:
       pl_acc: языки́
       pl_ins: языка́ми
       pl_pre: языка́х
+  "яичница=fried eggs":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: fried eggs (eggs fried in a pan)
+    usage:
+      - ru: Я пригото́вил яи́чницу на за́втрак.
+        en_gb: I made some fried eggs for breakfast.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В яи́чнице два яйца́.
+        en_gb: There are two eggs in the fried eggs.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он не лю́бит за́пах яи́чницы.
+        en_gb: He doesn't like the smell of fried eggs.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: яи́чница
+      sg_gen: яи́чницы
+      sg_dat: яи́чнице
+      sg_acc: яи́чницу
+      sg_ins: яи́чницей
+      sg_pre: яи́чнице
   "яйцо=egg":
     cefr_level: A2
     gender: n
