@@ -441,6 +441,8 @@ words:
     usage:
       - ru: На столе́ лежи́т бе́лый лист бума́ги.
         en_gb: A white sheet of paper lies on the table.
+        en_alt:
+          - There is a white sheet of paper on the table.
       - ru: Она́ наде́ла бе́лую руба́шку.
         en_gb: She put on a white shirt.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
@@ -4371,6 +4373,8 @@ words:
     usage:
       - ru: В лесу́ живёт ди́кий каба́н.
         en_gb: A wild boar lives in the forest.
+        en_alt:
+          - There is a wild boar in the forest.
       - ru: На лугу́ растёт ди́кая мали́на.
         en_gb: Wild raspberries grow in the meadow.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -5587,6 +5591,8 @@ words:
         en_gb: She has a yellow dress.
       - ru: На столе́ лежи́т жёлтый каранда́ш.
         en_gb: A yellow pencil lies on the table.
+        en_alt:
+          - There is a yellow pencil on the table.
     forms:
       m: жёлтый
       f: жёлтая
@@ -7371,6 +7377,8 @@ words:
     usage:
       - ru: На полу́ лежи́т квадра́тный ковёр.
         en_gb: A square rug lies on the floor.
+        en_alt:
+          - There is a square rug on the floor.
       - ru: У нас квадра́тный стол.
         en_gb: We have a square table.
       - ru: Она́ нарисова́ла квадра́тное окно́.
@@ -12301,6 +12309,8 @@ words:
     usage:
       - ru: В саду́ растёт огро́мный дуб.
         en_gb: An enormous oak grows in the garden.
+        en_alt:
+          - There is an enormous oak in the garden.
       - ru: Э́то огро́мная отве́тственность.
         en_gb: This is an enormous responsibility.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -12409,6 +12419,8 @@ words:
         en_gb: He feels lonely.
       - ru: На холме́ стои́т одино́кое де́рево.
         en_gb: A lonely tree stands on the hill.
+        en_alt:
+          - There is a lonely tree on the hill.
         inflect: { token: 4, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: В дере́вне живу́т одино́кие лю́ди.
         en_gb: Lonely people live in the village.
@@ -12680,6 +12692,8 @@ words:
         en_gb: I bought an orange scarf.
       - ru: На столе́ лежи́т ора́нжевое я́блоко.
         en_gb: An orange apple lies on the table.
+        en_alt:
+          - There is an orange apple on the table.
         inflect: { token: 4, case: nom, number: sg, gender: n, rule: adj-agreement }
     forms:
       m: ора́нжевый
@@ -13698,6 +13712,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В лесу́ расту́т пло́тные куста́рники.
         en_gb: Dense bushes grow in the forest.
+        en_alt:
+          - There are dense bushes in the forest.
   "плохой=bad":
     cefr_level: A1
     accented: плохо́й
@@ -15816,6 +15832,8 @@ words:
     usage:
       - ru: На полу́ лежи́т разби́тый стака́н.
         en_gb: A broken glass lies on the floor.
+        en_alt:
+          - There is a broken glass on the floor.
       - ru: У маши́ны разби́тая фа́ра.
         en_gb: The car has a broken headlight.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -16380,6 +16398,8 @@ words:
         en_gb: He gave a pink flower.
       - ru: На столе́ стои́т ро́зовая ча́шка.
         en_gb: A pink cup stands on the table.
+        en_alt:
+          - There is a pink cup on the table.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: ро́зовый
@@ -17062,6 +17082,8 @@ words:
         en_gb: He gave a silver bracelet.
       - ru: На столе́ лежи́т сере́бряная ло́жка.
         en_gb: A silver spoon lies on the table.
+        en_alt:
+          - There is a silver spoon on the table.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: сере́бряный
@@ -21344,6 +21366,8 @@ words:
     usage:
       - ru: В саду́ расту́т фиоле́товые цветы́.
         en_gb: Purple flowers grow in the garden.
+        en_alt:
+          - There are purple flowers in the garden.
       - ru: Она́ наде́ла фиоле́товое пла́тье.
         en_gb: She put on a purple dress.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
