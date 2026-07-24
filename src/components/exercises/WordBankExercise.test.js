@@ -3,7 +3,11 @@ import { mount } from '@vue/test-utils'
 import WordBankExercise from './WordBankExercise.vue'
 
 // Speech and feedback sounds are side effects we don't exercise here.
-vi.mock('../../lib/speech.js', () => ({ speak: vi.fn() }))
+vi.mock('../../lib/speech.js', () => ({
+  speak: vi.fn(),
+  speechSupported: () => true,
+  SLOW_RATE: 0.7,
+}))
 vi.mock('../../stores/settings.js', () => ({ playFeedback: vi.fn() }))
 
 const exercise = {
@@ -93,6 +97,26 @@ describe('WordBankExercise order-insensitive grading (#267)', () => {
     expect(wrapper.text()).toContain('Answer:')
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+  })
+
+  it('reveals the heard sentence in the confirm step so a reordering can be checked (#408)', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise: { ...exercise, audio: true } } })
+    await assembleReordering(wrapper)
+    await wrapper.find('button.check').trigger('click')
+
+    // The source sentence — only heard, never shown until now — is revealed so
+    // the learner can judge whether their order still means the same thing.
+    const source = wrapper.find('.confirm-source')
+    expect(source.exists()).toBe(true)
+    expect(source.text()).toContain(exercise.ru)
+  })
+
+  it('does not repeat the source in the confirm step when it is already shown (#408)', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleReordering(wrapper)
+    await wrapper.find('button.check').trigger('click')
+    // In non-audio mode the Russian cue is already visible above, so no reveal.
+    expect(wrapper.find('.confirm-source').exists()).toBe(false)
   })
 
   it('passes an exact-order answer outright without confirmation', async () => {

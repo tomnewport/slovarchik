@@ -22,7 +22,7 @@ export const PRACTICE_TYPES = Object.freeze([
     level: 'learning',
     content: 'word',
     exercises: 5,
-    items: 10, // ten ru/en pairs per matching exercise
+    items: 12, // twelve flashcards per exercise (#412)
     label: 'Match vocabulary',
   },
   {
@@ -57,7 +57,7 @@ export const PRACTICE_TYPES = Object.freeze([
     level: 'learning',
     content: 'word',
     exercises: 5,
-    items: 10, // ten hidden-russian / english pairs
+    items: 12, // twelve heard-word flashcards per exercise (#412)
     label: 'Match what you hear',
   },
   {

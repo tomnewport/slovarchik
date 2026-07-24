@@ -7,7 +7,7 @@
 // from that pool — topping up from the wider vocabulary when a pool is thin —
 // and shape them into descriptors keyed by a render `kind`:
 //
-//   match    click-to-match pairs            (match-vocab, listen-match)
+//   match    flashcards (produce the English)  (match-vocab, listen-match)
 //   wordbank assemble a translation          (translate-phrase, listen-translate)
 //   type     spell with the hintable keyboard (spell-word, spell-phrase, dictation)
 //   speak    repeat aloud                     (repeat-word, repeat-phrase)
@@ -42,8 +42,8 @@ export const PRACTICE_KIND = Object.freeze({
   'inflect-context': 'phrase-fix',
 })
 
-/** Pairs shown in a single matching board. */
-export const MATCH_PAIRS = 10
+/** Flashcards shown in a single identification exercise (#412). */
+export const MATCH_PAIRS = 12
 
 /**
  * Most sentences bundled into one in-context inflection exercise
@@ -215,7 +215,7 @@ function common(practice, practiceIndex) {
 
 function buildMatch(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
-  // Board size comes from the practice catalogue (`items`), defaulting to MATCH_PAIRS.
+  // Card count comes from the practice catalogue (`items`), defaulting to MATCH_PAIRS.
   const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng, {
     frontBias: practice.bucket === 'current',
     used: ctx.used,
