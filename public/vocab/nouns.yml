@@ -5214,6 +5214,38 @@ words:
       pl_acc: века́
       pl_ins: века́ми
       pl_pre: века́х
+  "великан=giant":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - reading
+    en_gb:
+      standard: giant (a huge imaginary person)
+    usage:
+      - ru: Ма́льчик испуга́лся велика́на.
+        en_gb: The boy got scared of the giant.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Де́ти уви́дели огро́много велика́на.
+        en_gb: The children saw a huge giant.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Он стал настоя́щим велика́ном.
+        en_gb: He became a real giant.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: велика́н
+      sg_gen: велика́на
+      sg_dat: велика́ну
+      sg_acc: велика́на
+      sg_ins: велика́ном
+      sg_pre: велика́не
+      pl_nom: велика́ны
+      pl_gen: велика́нов
+      pl_dat: велика́нам
+      pl_acc: велика́нов
+      pl_ins: велика́нами
+      pl_pre: велика́нах
   "величество=majesty":
     cefr_level: B2
     gender: n
@@ -11530,6 +11562,33 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-fem-soft }
       - ru: Кни́га опи́сывает суро́вую действи́тельность.
         en_gb: The book describes a harsh reality.
+  "декрет=maternity leave":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - work
+      - family
+    en_gb:
+      standard: maternity leave (time off work for a new mother)
+    usage:
+      - ru: Она́ ушла́ в декре́т.
+        en_gb: She went on maternity leave.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ сейча́с в декре́те.
+        en_gb: She's on maternity leave now.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: По́сле декре́та она́ верну́лась на рабо́ту.
+        en_gb: After maternity leave she returned to work.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: декре́т
+      sg_gen: декре́та
+      sg_dat: декре́ту
+      sg_acc: декре́т
+      sg_ins: декре́том
+      sg_pre: декре́те
   "дело=matter":
     cefr_level: A1
     gender: n
@@ -13051,6 +13110,38 @@ words:
       pl_acc: до́ски
       pl_ins: доска́ми
       pl_pre: доска́х
+  "доставка=delivery":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - shopping
+    en_gb:
+      standard: delivery (bringing goods to a place)
+    usage:
+      - ru: Я заказа́л доста́вку на́ дом.
+        en_gb: I ordered home delivery.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: При доста́вке была́ оши́бка.
+        en_gb: There was a mistake with the delivery.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: У нас нет бы́строй доста́вки.
+        en_gb: We don't have fast delivery.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: доста́вка
+      sg_gen: доста́вки
+      sg_dat: доста́вке
+      sg_acc: доста́вку
+      sg_ins: доста́вкой
+      sg_pre: доста́вке
+      pl_nom: доста́вки
+      pl_gen: доста́вок
+      pl_dat: доста́вкам
+      pl_acc: доста́вки
+      pl_ins: доста́вками
+      pl_pre: доста́вках
   "достижение=achievement":
     cefr_level: B1
     gender: n
@@ -13963,6 +14054,38 @@ words:
       pl_acc: е́ли
       pl_ins: е́лями
       pl_pre: е́лях
+  "жаворонок=lark":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - animals
+    en_gb:
+      standard: lark (a songbird; figuratively an early riser)
+    usage:
+      - ru: Я слы́шал жа́воронка ра́но у́тром.
+        en_gb: I heard a lark early in the morning.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: В не́бе не́ было ни одного́ жа́воронка.
+        en_gb: There wasn't a single lark in the sky.
+        inflect: { token: 7, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Жа́воронку легко́ встава́ть ра́но.
+        en_gb: It's easy for an early riser to get up early.
+        inflect: { token: 1, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: жа́воронок
+      sg_gen: жа́воронка
+      sg_dat: жа́воронку
+      sg_acc: жа́воронка
+      sg_ins: жа́воронком
+      sg_pre: жа́воронке
+      pl_nom: жа́воронки
+      pl_gen: жа́воронков
+      pl_dat: жа́воронкам
+      pl_acc: жа́воронков
+      pl_ins: жа́воронками
+      pl_pre: жа́воронках
   "жалоба=complaint":
     cefr_level: B2
     gender: f
@@ -21181,6 +21304,39 @@ words:
       pl_acc: команди́ров
       pl_ins: команди́рами
       pl_pre: команди́рах
+  "командировка=business trip":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - travel
+    en_gb:
+      standard: business trip (a work journey away from the office)
+    usage:
+      - ru: Он уе́хал в командиро́вку.
+        en_gb: He went away on a business trip.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он сейча́с в командиро́вке.
+        en_gb: He's on a business trip now.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он верну́лся из командиро́вки вчера́.
+        en_gb: He came back from the business trip yesterday.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: командиро́вка
+      sg_gen: командиро́вки
+      sg_dat: командиро́вке
+      sg_acc: командиро́вку
+      sg_ins: командиро́вкой
+      sg_pre: командиро́вке
+      pl_nom: командиро́вки
+      pl_gen: командиро́вок
+      pl_dat: командиро́вкам
+      pl_acc: командиро́вки
+      pl_ins: командиро́вками
+      pl_pre: командиро́вках
   "комар=mosquito":
     cefr_level: B1
     gender: m
@@ -23994,6 +24150,38 @@ words:
       pl_acc: кузне́чиков
       pl_ins: кузне́чиками
       pl_pre: кузне́чиках
+  "кукла=doll":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: doll (a toy figure of a person)
+    usage:
+      - ru: Де́вочка игра́ет с ку́клой.
+        en_gb: The girl plays with a doll.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Ма́ма купи́ла краси́вую ку́клу.
+        en_gb: Mum bought a beautiful doll.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: У неё мно́го ку́кол.
+        en_gb: She has many dolls.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-genpl-fleeting }
+    declension:
+      sg_nom: ку́кла
+      sg_gen: ку́клы
+      sg_dat: ку́кле
+      sg_acc: ку́клу
+      sg_ins: ку́клой
+      sg_pre: ку́кле
+      pl_nom: ку́клы
+      pl_gen: ку́кол
+      pl_dat: ку́клам
+      pl_acc: ку́клы
+      pl_ins: ку́клами
+      pl_pre: ку́клах
   "кукуруза=maize":
     cefr_level: B1
     gender: f
@@ -26614,6 +26802,40 @@ words:
       - ru: Учи́тель сде́лал мальчи́шке замеча́ние.
         en_gb: The teacher reprimanded the lad.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+  "мальчишник=stag do":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - holiday
+    en_gb:
+      standard: stag do (a party for a man before his wedding)
+      alt:
+        - bachelor party
+    usage:
+      - ru: Друзья́ устро́или ему́ мальчи́шник.
+        en_gb: His friends threw him a stag do.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На мальчи́шнике бы́ло ве́село.
+        en_gb: The stag do was fun.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он верну́лся с мальчи́шника по́здно.
+        en_gb: He came back from the stag do late.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: мальчи́шник
+      sg_gen: мальчи́шника
+      sg_dat: мальчи́шнику
+      sg_acc: мальчи́шник
+      sg_ins: мальчи́шником
+      sg_pre: мальчи́шнике
+      pl_nom: мальчи́шники
+      pl_gen: мальчи́шников
+      pl_dat: мальчи́шникам
+      pl_acc: мальчи́шники
+      pl_ins: мальчи́шниками
+      pl_pre: мальчи́шниках
   "мама=mum":
     cefr_level: A1
     gender: f
@@ -34013,6 +34235,39 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Учёные изучи́ли основа́ния зда́ния.
         en_gb: The scientists studied the foundations of the building.
+  "основатель=founder":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - people
+    en_gb:
+      standard: founder (a person who establishes something)
+    usage:
+      - ru: Все зна́ют основа́теля э́того го́рода.
+        en_gb: Everyone knows the founder of this city.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Па́мятник основа́телю стои́т в це́нтре.
+        en_gb: The monument to the founder stands in the centre.
+        inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Компа́нию назва́ли в честь основа́теля.
+        en_gb: The company was named after the founder.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: основа́тель
+      sg_gen: основа́теля
+      sg_dat: основа́телю
+      sg_acc: основа́теля
+      sg_ins: основа́телем
+      sg_pre: основа́теле
+      pl_nom: основа́тели
+      pl_gen: основа́телей
+      pl_dat: основа́телям
+      pl_acc: основа́телей
+      pl_ins: основа́телями
+      pl_pre: основа́телях
   "особенность=peculiarity":
     cefr_level: B1
     gender: f
@@ -36503,6 +36758,39 @@ words:
       - ru: Мы гото́вы к переме́нам.
         en_gb: We are ready for changes.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
+  "перерыв=break":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - work
+      - daily life
+    en_gb:
+      standard: break (a short pause; an interval)
+    usage:
+      - ru: Дава́й сде́лаем переры́в.
+        en_gb: Let's take a break.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В переры́ве мы вы́пили ко́фе.
+        en_gb: During the break we drank coffee.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: По́сле переры́ва мы верну́лись к рабо́те.
+        en_gb: After the break we got back to work.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: переры́в
+      sg_gen: переры́ва
+      sg_dat: переры́ву
+      sg_acc: переры́в
+      sg_ins: переры́вом
+      sg_pre: переры́ве
+      pl_nom: переры́вы
+      pl_gen: переры́вов
+      pl_dat: переры́вам
+      pl_acc: переры́вы
+      pl_ins: переры́вами
+      pl_pre: переры́вах
   "переулок=lane":
     cefr_level: B1
     gender: m
@@ -54059,6 +54347,38 @@ words:
       pl_acc: су́дей
       pl_ins: су́дьями
       pl_pre: су́дьях
+  "султан=sultan":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - history
+    en_gb:
+      standard: sultan (a Muslim ruler)
+    usage:
+      - ru: Наро́д уважа́л султа́на.
+        en_gb: The people respected the sultan.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: Слуга́ служи́л султа́ну ве́рно.
+        en_gb: The servant served the sultan faithfully.
+        inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Дворе́ц султа́на был о́чень краси́вым.
+        en_gb: The sultan's palace was very beautiful.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: султа́н
+      sg_gen: султа́на
+      sg_dat: султа́ну
+      sg_acc: султа́на
+      sg_ins: султа́ном
+      sg_pre: султа́не
+      pl_nom: султа́ны
+      pl_gen: султа́нов
+      pl_dat: султа́нам
+      pl_acc: султа́нов
+      pl_ins: султа́нами
+      pl_pre: султа́нах
   "сумка=bag":
     cefr_level: A2
     gender: f
@@ -56628,6 +56948,38 @@ words:
       pl_acc: треуго́льники
       pl_ins: треуго́льниками
       pl_pre: треуго́льниках
+  "троллейбус=trolleybus":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - public transport
+    en_gb:
+      standard: trolleybus (an electric bus powered from overhead wires)
+    usage:
+      - ru: Я е́ду на рабо́ту на тролле́йбусе.
+        en_gb: I go to work by trolleybus.
+        inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы се́ли в тролле́йбус.
+        en_gb: We got on the trolleybus.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я жду тролле́йбуса на остано́вке.
+        en_gb: I'm waiting for the trolleybus at the stop.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: тролле́йбус
+      sg_gen: тролле́йбуса
+      sg_dat: тролле́йбусу
+      sg_acc: тролле́йбус
+      sg_ins: тролле́йбусом
+      sg_pre: тролле́йбусе
+      pl_nom: тролле́йбусы
+      pl_gen: тролле́йбусов
+      pl_dat: тролле́йбусам
+      pl_acc: тролле́йбусы
+      pl_ins: тролле́йбусами
+      pl_pre: тролле́йбусах
   "тротуар=pavement":
     cefr_level: B1
     gender: m
@@ -57824,6 +58176,38 @@ words:
       pl_acc: украи́нцев
       pl_ins: украи́нцами
       pl_pre: украи́нцах
+  "украшение=decoration":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - holiday
+    en_gb:
+      standard: decoration (an ornament; a piece of jewellery)
+    usage:
+      - ru: Она́ купи́ла золото́е украше́ние.
+        en_gb: She bought a gold ornament.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На ёлке мно́го украше́ний.
+        en_gb: There are many decorations on the Christmas tree.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: На э́том украше́нии есть ка́мень.
+        en_gb: There's a stone on this ornament.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: украше́ние
+      sg_gen: украше́ния
+      sg_dat: украше́нию
+      sg_acc: украше́ние
+      sg_ins: украше́нием
+      sg_pre: украше́нии
+      pl_nom: украше́ния
+      pl_gen: украше́ний
+      pl_dat: украше́ниям
+      pl_acc: украше́ния
+      pl_ins: украше́ниями
+      pl_pre: украше́ниях
   "улица=street":
     cefr_level: A1
     gender: f
@@ -58348,6 +58732,38 @@ words:
       - ru: Мы рабо́таем над но́выми устано́вками.
         en_gb: We are working on new installations.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
+  "устрица=oyster":
+    cefr_level: A1
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: oyster (an edible shellfish)
+    usage:
+      - ru: В рестора́не мы е́ли у́стриц.
+        en_gb: At the restaurant we ate oysters.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Он заказа́л мно́го у́стриц.
+        en_gb: He ordered a lot of oysters.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он съел одну́ у́стрицу.
+        en_gb: He ate one oyster.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: у́стрица
+      sg_gen: у́стрицы
+      sg_dat: у́стрице
+      sg_acc: у́стрицу
+      sg_ins: у́стрицей
+      sg_pre: у́стрице
+      pl_nom: у́стрицы
+      pl_gen: у́стриц
+      pl_dat: у́стрицам
+      pl_acc: у́стриц
+      pl_ins: у́стрицами
+      pl_pre: у́стрицах
   "устройство=device":
     cefr_level: B1
     gender: n
@@ -61909,6 +62325,38 @@ words:
       pl_acc: чудеса́
       pl_ins: чудеса́ми
       pl_pre: чудеса́х
+  "чучело=scarecrow":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the garden
+    en_gb:
+      standard: scarecrow (a figure set up to frighten birds; an effigy)
+    usage:
+      - ru: Пти́цы боя́тся чу́чела.
+        en_gb: The birds are afraid of the scarecrow.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он поста́вил чу́чело в огоро́де.
+        en_gb: He put a scarecrow in the vegetable garden.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На чу́челе ста́рая ша́пка.
+        en_gb: There's an old hat on the scarecrow.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: чу́чело
+      sg_gen: чу́чела
+      sg_dat: чу́челу
+      sg_acc: чу́чело
+      sg_ins: чу́челом
+      sg_pre: чу́челе
+      pl_nom: чу́чела
+      pl_gen: чу́чел
+      pl_dat: чу́челам
+      pl_acc: чу́чела
+      pl_ins: чу́челами
+      pl_pre: чу́челах
   "шаг=step":
     cefr_level: A2
     gender: m
