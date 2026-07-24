@@ -99,6 +99,14 @@ export function putProgress(record) {
   })
 }
 
+/** Delete a single per-word progress record by its word key. */
+export function deleteProgress(word) {
+  return tx(PROGRESS_STORE, 'readwrite', (store) => {
+    store.delete(word)
+    return { value: word }
+  })
+}
+
 /** Remove all progress records (used by "reset" / tests). */
 export function clearProgress() {
   return tx(PROGRESS_STORE, 'readwrite', (store) => {
