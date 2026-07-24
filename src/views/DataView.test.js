@@ -22,6 +22,17 @@ const settle = async () => {
   await flushPromises()
 }
 
+// Like settle() but keeps draining ticks until `ready()` is true (or a generous
+// cap is hit). The import chain's transaction count isn't fixed, so a hard tick
+// count is racy under CI load — wait for the observable result instead.
+const settleUntil = async (ready) => {
+  for (let i = 0; i < 100 && !ready(); i++) {
+    await flushPromises()
+    await new Promise((r) => setTimeout(r))
+  }
+  await flushPromises()
+}
+
 beforeEach(async () => {
   globalThis.indexedDB = new IDBFactory()
   idb._resetForTests()
@@ -46,7 +57,7 @@ describe('DataView', () => {
     await settle()
     await wrapper.findAll('textarea')[1].setValue('not json{')
     await wrapper.find('.do-import').trigger('click')
-    await settle()
+    await settleUntil(() => wrapper.find('.status.no').exists())
     expect(wrapper.find('.status.no').exists()).toBe(true)
   })
 
@@ -66,7 +77,7 @@ describe('DataView', () => {
     await settle()
     await wrapper.findAll('textarea')[1].setValue(backup)
     await wrapper.find('.do-import').trigger('click')
-    await settle()
+    await settleUntil(() => wrapper.find('.status.ok').exists())
 
     expect(wrapper.find('.status.ok').exists()).toBe(true)
     expect(progress.stateOf('w0')).toBe('mastered')
