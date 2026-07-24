@@ -1,9 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { resolve, join } from 'node:path'
 
-import { buildManifest, findDrift, hashFile, FILES } from './gen-manifest.mjs'
+import { buildManifest, gitUpdated, hashFile, FILES } from './gen-manifest.mjs'
 
 // The generator hashes a fixed set of vocab files; give the temp dir all of
 // them so the file-list guard is satisfied, then vary the ones under test.
@@ -30,46 +31,47 @@ describe('gen-manifest', () => {
     expect(hashFile(dir, 'nouns.yml')).not.toBe(a)
   })
 
-  it('preserves `updated` while a file is unchanged and bumps it when it changes', () => {
-    const first = buildManifest(dir, null, '2026-01-01T00:00:00Z')
-    // Rebuild with unchanged content and a later clock: dates must NOT move.
-    const second = buildManifest(dir, first, '2026-02-02T00:00:00Z')
-    expect(second.files).toEqual(first.files)
-
-    // Change one file; only its `updated` (and hash) should move to `now`.
-    writeFileSync(resolve(dir, 'nouns.yml'), '# nouns.yml v2\n')
-    const third = buildManifest(dir, second, '2026-03-03T00:00:00Z')
-    const noun = third.files.find((f) => f.file === 'nouns.yml')
-    const verb = third.files.find((f) => f.file === 'verbs.yml')
-    expect(noun.updated).toBe('2026-03-03T00:00:00Z')
-    expect(noun.hash).not.toBe(first.files.find((f) => f.file === 'nouns.yml').hash)
-    expect(verb.updated).toBe('2026-01-01T00:00:00Z') // untouched
-  })
-
-  it('migration: adopts a timestamp-only manifest without resetting dates', () => {
-    const legacy = {
-      version: 1,
-      files: FILES.map(({ pos, file }) => ({ pos, file, updated: '2025-12-25T00:00:00Z' })),
-    }
-    const built = buildManifest(dir, legacy, '2026-06-06T00:00:00Z')
-    // Every file keeps its historical date and gains a hash.
-    for (const entry of built.files) {
-      expect(entry.updated).toBe('2025-12-25T00:00:00Z')
+  it('derives `updated` from the injected date source, per file', () => {
+    const dates = { 'nouns.yml': '2026-01-01T00:00:00Z' }
+    const manifest = buildManifest(dir, (file) => dates[file] ?? '2025-12-25T00:00:00Z')
+    const noun = manifest.files.find((f) => f.file === 'nouns.yml')
+    const verb = manifest.files.find((f) => f.file === 'verbs.yml')
+    expect(noun.updated).toBe('2026-01-01T00:00:00Z')
+    expect(verb.updated).toBe('2025-12-25T00:00:00Z')
+    // Every entry carries a content hash and its registered pos.
+    for (const entry of manifest.files) {
       expect(entry.hash).toMatch(/^[0-9a-f]{16}$/)
+      expect(entry.pos).toBe(FILES.find((f) => f.file === entry.file).pos)
     }
   })
 
-  it('findDrift flags a file whose committed hash no longer matches its bytes', () => {
-    const manifest = buildManifest(dir, null, '2026-01-01T00:00:00Z')
-    expect(findDrift(dir, manifest)).toEqual([])
-    writeFileSync(resolve(dir, 'glossary.yml'), '# glossary.yml edited by hand\n')
-    const drift = findDrift(dir, manifest)
-    expect(drift.map((d) => d.file)).toEqual(['glossary.yml'])
+  it('gitUpdated returns the last commit date (as UTC Z), null when untracked', () => {
+    const git = (...args) =>
+      execFileSync('git', args, {
+        cwd: dir,
+        stdio: ['ignore', 'pipe', 'ignore'],
+        env: {
+          ...process.env,
+          GIT_AUTHOR_NAME: 'T',
+          GIT_AUTHOR_EMAIL: 't@example.com',
+          GIT_COMMITTER_NAME: 'T',
+          GIT_COMMITTER_EMAIL: 't@example.com',
+          // Fixed committer date (with an offset) so the normalisation to Z is
+          // deterministic and testable.
+          GIT_COMMITTER_DATE: '2026-03-04T12:00:00+02:00',
+        },
+      })
+    git('init', '-q')
+    git('add', 'nouns.yml')
+    git('commit', '-qm', 'add nouns')
+
+    expect(gitUpdated(dir, 'nouns.yml')).toBe('2026-03-04T10:00:00Z') // +02:00 → UTC
+    // verbs.yml exists on disk but was never committed → no history.
+    expect(gitUpdated(dir, 'verbs.yml')).toBe(null)
   })
 
-  it('the committed manifest matches the real vocab files', () => {
-    const vocabDir = resolve(process.cwd(), 'public/vocab')
-    const committed = JSON.parse(readFileSync(resolve(vocabDir, 'manifest.json'), 'utf8'))
-    expect(findDrift(vocabDir, committed)).toEqual([])
+  it('gitUpdated returns null outside a git repository', () => {
+    // `dir` was never `git init`-ed in this test.
+    expect(gitUpdated(dir, 'nouns.yml')).toBe(null)
   })
 })

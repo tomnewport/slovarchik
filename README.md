@@ -121,9 +121,8 @@ precaches the YAML so the first launch works offline — see
 
 1. On startup the app reads any vocab already cached in **IndexedDB** and renders
    immediately (works fully offline).
-2. If online, it fetches [`vocab/manifest.json`](public/vocab/manifest.json),
-   which lists each file, an `updated` timestamp (shown in the app) and a
-   content `hash`.
+2. If online, it fetches `vocab/manifest.json`, which lists each file, an
+   `updated` timestamp (shown in the app) and a content `hash`.
 3. Any file that is new or whose `hash` differs from the cached copy is
    downloaded, parsed and written back to IndexedDB; the drills update reactively.
 
@@ -133,10 +132,13 @@ offline launch after install has data to load. The flow lives in
 [`src/lib/idb.js`](src/lib/idb.js) (IndexedDB) and
 [`src/lib/vocabBuild.js`](src/lib/vocabBuild.js) (pure YAML → records builder).
 
-To publish updated words, edit the YAML and run `npm run gen:manifest` (or just
-`npm run build`, which does it): the manifest's per-file content `hash` is
-regenerated, so clients re-sync exactly the files whose bytes changed — no manual
-timestamp bump.
+To publish updated words, just edit the YAML and commit it. `manifest.json` is a
+**generated, uncommitted** artifact — `npm run build` (and `npm run dev`)
+regenerate it from the files: the per-file content `hash` comes from the bytes
+and the `updated` date from git history, so clients re-sync exactly the files
+whose bytes changed with no manual step, and parallel edits to different vocab
+files never conflict over the manifest. CI checks out with full history
+(`fetch-depth: 0`) so the dates are accurate.
 
 ### File format
 
@@ -171,7 +173,8 @@ words:
 
 The store exposes reactive `vocab` and `nouns` lists (sorted alphabetically by
 Russian) plus a `state` with the current `status`. Add a new part of speech by
-dropping a `.yml` file in `public/vocab/` and adding it to the manifest.
+dropping a `.yml` file in `public/vocab/` and registering it in the `FILES` list
+in [`scripts/gen-manifest.mjs`](scripts/gen-manifest.mjs).
 
 ## Develop
 
@@ -183,14 +186,14 @@ npm run test:watch # watch mode
 npm run build      # production build into dist/
 npm run preview    # serve the production build locally
 npm run gen:icons  # regenerate the PWA PNG icons
-npm run gen:manifest # regenerate public/vocab/manifest.json from file hashes
+npm run gen:manifest # regenerate the (uncommitted) public/vocab/manifest.json
 ```
 
 ## Adding words
 
 Append entries to the relevant file in [`public/vocab`](public/vocab) following
-the schema above (keep each file sorted alphabetically by Russian), then run
-`npm run gen:manifest` to refresh `manifest.json`. The `vocabBuild.test.js` and
+the schema above (keep each file sorted alphabetically by Russian) and commit —
+the manifest regenerates itself at build time. The `vocabBuild.test.js` and
 `declension.test.js` suites guard the shape — unique keys, a valid CEFR level, a
 meaning, accepted answers, and complete case tables for nouns. Noun endings (for
 the *type the endings* drill) are derived automatically from the forms.
