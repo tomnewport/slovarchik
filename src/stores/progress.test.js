@@ -43,6 +43,10 @@ import {
   dailyRecord,
   totalExercises,
   activityCalendar,
+  deleteRecord,
+  removeFromBatch,
+  leaveForLater,
+  wordProgressDetail,
 } from './progress.js'
 import { dayKey } from '../lib/streak.js'
 
@@ -1195,6 +1199,94 @@ describe('streak & activity calendar', () => {
     await resetProgress()
     expect(state.activity).toEqual({})
     expect(currentStreak.value).toBe(0)
+  })
+})
+
+describe('leaving a word for later', () => {
+  it('removeFromBatch pops a word out and persists, shrinking size', async () => {
+    setVocab(makeWords(3))
+    await commitBatch({ level: 'learning', name: 'Test', size: 3, words: ['w0', 'w1', 'w2'] })
+    await removeFromBatch('learning', 'w1')
+    expect(state.learning.words).toEqual(['w0', 'w2'])
+    expect(state.learning.size).toBe(2)
+    // Persisted to IndexedDB, not just the reactive state.
+    const stored = await idb.getMeta('batch:learning')
+    expect(stored.words).toEqual(['w0', 'w2'])
+  })
+
+  it('removeFromBatch clears the batch entirely when it empties', async () => {
+    setVocab(makeWords(1))
+    await commitBatch({ level: 'learning', name: 'Test', size: 1, words: ['w0'] })
+    await removeFromBatch('learning', 'w0')
+    expect(state.learning).toBeNull()
+  })
+
+  it('removeFromBatch is a no-op for a word not in the batch', async () => {
+    setVocab(makeWords(2))
+    await commitBatch({ level: 'learning', name: 'Test', size: 2, words: ['w0', 'w1'] })
+    await removeFromBatch('learning', 'nope')
+    expect(state.learning.words).toEqual(['w0', 'w1'])
+  })
+
+  it('deleteRecord erases the record from state and IndexedDB', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await learn('w0')
+    expect(state.records.w0).toBeTruthy()
+    await deleteRecord('w0')
+    expect(state.records.w0).toBeUndefined()
+    const all = await idb.getAllProgress()
+    expect(all.find((r) => r.word === 'w0')).toBeUndefined()
+  })
+
+  it('leaveForLater pops the word out of its batch and wipes progress by default', async () => {
+    setVocab(makeWords(2, { hasInflections: true }))
+    await learn('w0')
+    await commitBatch({ level: 'learning', name: 'Test', size: 2, words: ['w0', 'w1'] })
+    await leaveForLater('w0')
+    expect(state.learning.words).toEqual(['w1'])
+    expect(state.records.w0).toBeUndefined()
+    expect(stateOf('w0')).toBe('unknown')
+  })
+
+  it('leaveForLater with keepProgress removes from the batch but keeps the record', async () => {
+    setVocab(makeWords(2, { hasInflections: true }))
+    await learn('w0')
+    await commitBatch({ level: 'learning', name: 'Test', size: 2, words: ['w0', 'w1'] })
+    await leaveForLater('w0', { keepProgress: true })
+    expect(state.learning.words).toEqual(['w1'])
+    expect(stateOf('w0')).toBe('learned')
+  })
+
+  it('leaveForLater removes from whichever level batch holds the word', async () => {
+    setVocab(makeWords(2, { hasInflections: true }))
+    await master('w0')
+    await commitBatch({ level: 'mastery', name: 'M', size: 2, words: ['w0', 'w1'] })
+    await leaveForLater('w0')
+    expect(state.mastery.words).toEqual(['w1'])
+    expect(state.records.w0).toBeUndefined()
+  })
+})
+
+describe('wordProgressDetail', () => {
+  it('reports an untracked word as unknown with no attempts', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    const d = wordProgressDetail('w0')
+    expect(d.tracked).toBe(false)
+    expect(d.state).toBe('unknown')
+    expect(d.totalAttempts).toBe(0)
+    expect(d.levels.learning.length).toBeGreaterThan(0)
+  })
+
+  it('summarises a learned word: state, peak, dates and dimensions met', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await learn('w0', 1000)
+    const d = wordProgressDetail('w0')
+    expect(d.tracked).toBe(true)
+    expect(d.state).toBe('learned')
+    expect(d.peak).toBe('learned')
+    expect(d.learnedAt).toBe(1000)
+    expect(d.totalAttempts).toBe(12)
+    expect(d.levels.learning.every((dim) => dim.met)).toBe(true)
   })
 })
 

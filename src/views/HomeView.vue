@@ -2,7 +2,7 @@
 // Home: the launchpad for every session type, plus the current learning /
 // mastery batch status. The learning batch is chosen by the user (on first
 // visit and after completing a batch); the mastery batch is auto-selected.
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import {
@@ -19,8 +19,12 @@ import { state as reports, loadReports, removeReport } from '../stores/reports.j
 import { parseKey } from '../lib/vocabBuild.js'
 import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
 import BatchSearchAdd from '../components/BatchSearchAdd.vue'
+import WordProgressModal from '../components/WordProgressModal.vue'
 
 const router = useRouter()
+
+// The word whose progress-detail modal is open, or null.
+const selectedWord = ref(null)
 
 function startSession(type, size) {
   if (!progress.learning) {
@@ -325,7 +329,17 @@ const FOCUSED = [
         <span class="batch-name">{{ learningBatch.name }}</span>
       </div>
       <div class="word-scroll">
-        <div v-for="w in allLearningWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done, 'word-pending': w.pending }">
+        <div
+          v-for="w in allLearningWords"
+          :key="w.key"
+          class="word-row clickable"
+          :class="{ 'word-done': w.done, 'word-pending': w.pending }"
+          role="button"
+          tabindex="0"
+          @click="selectedWord = w.key"
+          @keydown.enter="selectedWord = w.key"
+          @keydown.space.prevent="selectedWord = w.key"
+        >
           <div class="word-label">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
@@ -354,7 +368,17 @@ const FOCUSED = [
         <span class="batch-name">{{ masteryBatch.name }}</span>
       </div>
       <div class="word-scroll">
-        <div v-for="w in allMasteryWords" :key="w.key" class="word-row" :class="{ 'word-done': w.done, 'word-pending': w.pending }">
+        <div
+          v-for="w in allMasteryWords"
+          :key="w.key"
+          class="word-row clickable"
+          :class="{ 'word-done': w.done, 'word-pending': w.pending }"
+          role="button"
+          tabindex="0"
+          @click="selectedWord = w.key"
+          @keydown.enter="selectedWord = w.key"
+          @keydown.space.prevent="selectedWord = w.key"
+        >
           <div class="word-label">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
@@ -387,6 +411,13 @@ const FOCUSED = [
         </button>
       </div>
     </details>
+
+    <WordProgressModal
+      v-if="selectedWord"
+      :word-key="selectedWord"
+      @close="selectedWord = null"
+      @left="selectedWord = null"
+    />
   </section>
 </template>
 
@@ -490,6 +521,18 @@ const FOCUSED = [
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+}
+.word-row.clickable {
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 0 -0.35rem;
+  padding: 0.15rem 0.35rem;
+  transition: background 0.1s ease;
+}
+.word-row.clickable:hover,
+.word-row.clickable:focus-visible {
+  background: var(--bg-soft);
+  outline: none;
 }
 .word-label {
   display: flex;
