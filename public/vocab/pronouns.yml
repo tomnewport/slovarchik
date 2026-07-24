@@ -88,6 +88,9 @@ words:
       alt:
         - the whole
     usage:
+      - ru: Во всём ми́ре зна́ют э́ту пе́сню.
+        en_gb: The whole world knows this song.
+        inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Он рабо́тал всю ночь.
         en_gb: He worked all night.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-demonstrative }
@@ -206,6 +209,12 @@ words:
       alt:
         - every
     usage:
+      - ru: Я ви́жу его́ ка́ждую неде́лю.
+        en_gb: I see him every week.
+        inflect: { token: 4, case: acc, number: sg, gender: f, rule: pronoun-demonstrative }
+      - ru: Он помога́ет ка́ждому студе́нту.
+        en_gb: He helps every student.
+        inflect: { token: 3, case: dat, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Ка́ждый день я гуля́ю в па́рке.
         en_gb: Every day I walk in the park.
       - ru: Ка́ждая страна́ интере́сна по-сво́ему.
@@ -253,6 +262,12 @@ words:
       alt:
         - what kind of
     usage:
+      - ru: Каки́м спо́ртом ты занима́ешься?
+        en_gb: What sport do you do?
+        inflect: { token: 1, case: ins, number: sg, gender: m, rule: pronoun-interrogative }
+      - ru: Каку́ю кни́гу ты чита́ешь?
+        en_gb: Which book are you reading?
+        inflect: { token: 1, case: acc, number: sg, gender: f, rule: pronoun-interrogative }
       - ru: Кака́я сего́дня пого́да?
         en_gb: What is the weather like today?
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-interrogative }
@@ -301,6 +316,12 @@ words:
         - who
         - that
     usage:
+      - ru: Друг, кото́рому я звони́л, не отве́тил.
+        en_gb: The friend I called didn't answer.
+        inflect: { token: 2, case: dat, number: sg, gender: m, rule: pronoun-demonstrative }
+      - ru: Кни́га, о кото́рой мы говори́м, о́чень интере́сная.
+        en_gb: The book we are talking about is very interesting.
+        inflect: { token: 3, case: pre, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: Вот дом, в кото́ром я вы́рос.
         en_gb: Here is the house I grew up in.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
@@ -616,6 +637,9 @@ words:
       alt:
         - no one
     usage:
+      - ru: Здесь никого́ нет.
+        en_gb: There is nobody here.
+        inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Я ни с кем не говори́л об э́том.
         en_gb: I have not spoken to anyone about this.
       - ru: Никто́ ничего́ не зна́ет.
@@ -642,6 +666,9 @@ words:
     en_gb:
       standard: nothing (not a single thing)
     usage:
+      - ru: Она́ ничему́ не ве́рит.
+        en_gb: She believes in nothing.
+        inflect: { token: 2, case: dat, number: sg, rule: pronoun-interrogative }
       - ru: Ничто́ не меня́ется в э́том го́роде.
         en_gb: Nothing changes in this town.
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
@@ -815,6 +842,12 @@ words:
     en_gb:
       standard: one's own (belonging to the subject of the clause)
     usage:
+      - ru: Он взял свою́ кни́гу, а не мою́.
+        en_gb: He took his own book, not mine.
+        inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-possessive }
+      - ru: Он горди́тся свои́м го́родом.
+        en_gb: He is proud of his own city.
+        inflect: { token: 3, case: ins, number: sg, gender: m, rule: pronoun-possessive }
       - ru: Ка́ждый расска́зывал о свои́х пла́нах.
         en_gb: Everyone talked about their own plans.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: pronoun-possessive }
@@ -1006,6 +1039,12 @@ words:
     en_gb:
       standard: that (the more distant one)
     usage:
+      - ru: Го́сти из того́ го́рода уже́ уе́хали.
+        en_gb: The guests from that city have already left.
+        inflect: { token: 3, case: gen, number: sg, gender: m, rule: pronoun-demonstrative }
+      - ru: Я помога́ю тому́ студе́нту ка́ждый день.
+        en_gb: I help that student every day.
+        inflect: { token: 3, case: dat, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Мы говори́м о тех времена́х.
         en_gb: We talk about those times.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: pronoun-demonstrative }
@@ -1083,6 +1122,9 @@ words:
     en_gb:
       standard: whose (asking who something belongs to)
     usage:
+      - ru: Чью кни́гу ты взял?
+        en_gb: Whose book did you take?
+        inflect: { token: 1, case: acc, number: sg, gender: f, rule: pronoun-interrogative }
       - ru: Чья э́то кни́га?
         en_gb: Whose book is this?
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-interrogative }
@@ -1178,6 +1220,12 @@ words:
     en_gb:
       standard: this (the nearer one)
     usage:
+      - ru: Я хорошо́ зна́ю э́того челове́ка.
+        en_gb: I know this person well.
+        inflect: { token: 4, case: acc, number: sg, gender: m, animate: true, rule: pronoun-demonstrative }
+      - ru: Я дал э́тому ма́льчику кни́гу.
+        en_gb: I gave this boy a book.
+        inflect: { token: 3, case: dat, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Я живу́ в э́том до́ме уже́ год.
         en_gb: I have lived in this house for a year now.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
