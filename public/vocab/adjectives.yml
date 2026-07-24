@@ -71,6 +71,51 @@ words:
       pl_acc: авто́бусные
       pl_ins: авто́бусными
       pl_pre: авто́бусных
+  "агрессивный=aggressive":
+    cefr_level: A1
+    accented: агресси́вный
+    en_gb:
+      standard: aggressive (behaving in an angry, forceful way)
+    collections:
+      - character
+    forms:
+      m: агресси́вный
+      f: агресси́вная
+      n: агресси́вное
+      pl: агресси́вные
+    declension:
+      m_nom: агресси́вный
+      m_gen: агресси́вного
+      m_dat: агресси́вному
+      m_acc: агресси́вный
+      m_ins: агресси́вным
+      m_pre: агресси́вном
+      n_nom: агресси́вное
+      n_gen: агресси́вного
+      n_dat: агресси́вному
+      n_acc: агресси́вное
+      n_ins: агресси́вным
+      n_pre: агресси́вном
+      f_nom: агресси́вная
+      f_gen: агресси́вной
+      f_dat: агресси́вной
+      f_acc: агресси́вную
+      f_ins: агресси́вной
+      f_pre: агресси́вной
+      pl_nom: агресси́вные
+      pl_gen: агресси́вных
+      pl_dat: агресси́вным
+      pl_acc: агресси́вные
+      pl_ins: агресси́вными
+      pl_pre: агресси́вных
+    usage:
+      - ru: Она́ о́чень агресси́вная же́нщина.
+        en_gb: She is a very aggressive woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он агресси́вный челове́к.
+        en_gb: He is an aggressive person.
+      - ru: Э́тот пёс сли́шком агресси́вный.
+        en_gb: This dog is too aggressive.
   "азиатский=Asian":
     cefr_level: B1
     accented: азиа́тский
@@ -2288,6 +2333,54 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Дул восто́чный ве́тер.
         en_gb: An eastern wind was blowing.
+  "вредный=harmful":
+    cefr_level: A1
+    accented: вре́дный
+    en_gb:
+      standard: harmful (bad for you; of a person, nasty)
+      alt:
+        - nasty
+    collections:
+      - daily life
+      - health
+    forms:
+      m: вре́дный
+      f: вре́дная
+      n: вре́дное
+      pl: вре́дные
+    declension:
+      m_nom: вре́дный
+      m_gen: вре́дного
+      m_dat: вре́дному
+      m_acc: вре́дный
+      m_ins: вре́дным
+      m_pre: вре́дном
+      n_nom: вре́дное
+      n_gen: вре́дного
+      n_dat: вре́дному
+      n_acc: вре́дное
+      n_ins: вре́дным
+      n_pre: вре́дном
+      f_nom: вре́дная
+      f_gen: вре́дной
+      f_dat: вре́дной
+      f_acc: вре́дную
+      f_ins: вре́дной
+      f_pre: вре́дной
+      pl_nom: вре́дные
+      pl_gen: вре́дных
+      pl_dat: вре́дным
+      pl_acc: вре́дные
+      pl_ins: вре́дными
+      pl_pre: вре́дных
+    usage:
+      - ru: Э́то о́чень вре́дная еда́.
+        en_gb: This is very harmful food.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Са́хар — вре́дный проду́кт.
+        en_gb: Sugar is a harmful product.
+      - ru: Он о́чень вре́дный челове́к.
+        en_gb: He is a very nasty person.
   "временный=temporary":
     cefr_level: B1
     accented: вре́менный
@@ -6736,6 +6829,51 @@ words:
       pl_acc: изве́стные
       pl_ins: изве́стными
       pl_pre: изве́стных
+  "импульсивный=impulsive":
+    cefr_level: A1
+    accented: импульси́вный
+    en_gb:
+      standard: impulsive (acting without thinking first)
+    collections:
+      - character
+    forms:
+      m: импульси́вный
+      f: импульси́вная
+      n: импульси́вное
+      pl: импульси́вные
+    declension:
+      m_nom: импульси́вный
+      m_gen: импульси́вного
+      m_dat: импульси́вному
+      m_acc: импульси́вный
+      m_ins: импульси́вным
+      m_pre: импульси́вном
+      n_nom: импульси́вное
+      n_gen: импульси́вного
+      n_dat: импульси́вному
+      n_acc: импульси́вное
+      n_ins: импульси́вным
+      n_pre: импульси́вном
+      f_nom: импульси́вная
+      f_gen: импульси́вной
+      f_dat: импульси́вной
+      f_acc: импульси́вную
+      f_ins: импульси́вной
+      f_pre: импульси́вной
+      pl_nom: импульси́вные
+      pl_gen: импульси́вных
+      pl_dat: импульси́вным
+      pl_acc: импульси́вные
+      pl_ins: импульси́вными
+      pl_pre: импульси́вных
+    usage:
+      - ru: Она́ о́чень импульси́вная де́вушка.
+        en_gb: She is a very impulsive girl.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он импульси́вный челове́к.
+        en_gb: He is an impulsive person.
+      - ru: Он приня́л импульси́вное реше́ние.
+        en_gb: He made an impulsive decision.
   "иной=other":
     cefr_level: B1
     accented: ино́й
@@ -6826,6 +6964,53 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Сюда́ приезжа́ют иностра́нные тури́сты.
         en_gb: Foreign tourists come here.
+  "интеллигентный=cultured":
+    cefr_level: A1
+    accented: интеллиге́нтный
+    en_gb:
+      standard: cultured (well-mannered and refined; a false friend, not "intelligent")
+      alt:
+        - refined
+    collections:
+      - character
+    forms:
+      m: интеллиге́нтный
+      f: интеллиге́нтная
+      n: интеллиге́нтное
+      pl: интеллиге́нтные
+    declension:
+      m_nom: интеллиге́нтный
+      m_gen: интеллиге́нтного
+      m_dat: интеллиге́нтному
+      m_acc: интеллиге́нтный
+      m_ins: интеллиге́нтным
+      m_pre: интеллиге́нтном
+      n_nom: интеллиге́нтное
+      n_gen: интеллиге́нтного
+      n_dat: интеллиге́нтному
+      n_acc: интеллиге́нтное
+      n_ins: интеллиге́нтным
+      n_pre: интеллиге́нтном
+      f_nom: интеллиге́нтная
+      f_gen: интеллиге́нтной
+      f_dat: интеллиге́нтной
+      f_acc: интеллиге́нтную
+      f_ins: интеллиге́нтной
+      f_pre: интеллиге́нтной
+      pl_nom: интеллиге́нтные
+      pl_gen: интеллиге́нтных
+      pl_dat: интеллиге́нтным
+      pl_acc: интеллиге́нтные
+      pl_ins: интеллиге́нтными
+      pl_pre: интеллиге́нтных
+    usage:
+      - ru: Она́ о́чень интеллиге́нтная же́нщина.
+        en_gb: She is a very cultured woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он интеллиге́нтный челове́к.
+        en_gb: He is a cultured person.
+      - ru: Мы познако́мились с интеллиге́нтными людьми́.
+        en_gb: We met some cultured people.
   "интересный=interesting":
     cefr_level: A1
     accented: интере́сный
@@ -7368,6 +7553,53 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Я купи́л ко́жаные перча́тки.
         en_gb: I bought leather gloves.
+  "коммуникабельный=sociable":
+    cefr_level: A1
+    accented: коммуника́бельный
+    en_gb:
+      standard: sociable (good at talking to people)
+      alt:
+        - communicative
+    collections:
+      - character
+    forms:
+      m: коммуника́бельный
+      f: коммуника́бельная
+      n: коммуника́бельное
+      pl: коммуника́бельные
+    declension:
+      m_nom: коммуника́бельный
+      m_gen: коммуника́бельного
+      m_dat: коммуника́бельному
+      m_acc: коммуника́бельный
+      m_ins: коммуника́бельным
+      m_pre: коммуника́бельном
+      n_nom: коммуника́бельное
+      n_gen: коммуника́бельного
+      n_dat: коммуника́бельному
+      n_acc: коммуника́бельное
+      n_ins: коммуника́бельным
+      n_pre: коммуника́бельном
+      f_nom: коммуника́бельная
+      f_gen: коммуника́бельной
+      f_dat: коммуника́бельной
+      f_acc: коммуника́бельную
+      f_ins: коммуника́бельной
+      f_pre: коммуника́бельной
+      pl_nom: коммуника́бельные
+      pl_gen: коммуника́бельных
+      pl_dat: коммуника́бельным
+      pl_acc: коммуника́бельные
+      pl_ins: коммуника́бельными
+      pl_pre: коммуника́бельных
+    usage:
+      - ru: Она́ о́чень коммуника́бельная де́вушка.
+        en_gb: She is a very sociable girl.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он коммуника́бельный челове́к.
+        en_gb: He is a sociable person.
+      - ru: На рабо́те ва́жно быть коммуника́бельным.
+        en_gb: At work it is important to be sociable.
   "коммунистический=communist":
     cefr_level: B2
     accented: коммунисти́ческий
@@ -7456,6 +7688,51 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я жду конкре́тных отве́тов.
         en_gb: I am waiting for concrete answers.
+  "консервативный=conservative":
+    cefr_level: A1
+    accented: консервати́вный
+    en_gb:
+      standard: conservative (preferring old ways; disliking change)
+    collections:
+      - character
+    forms:
+      m: консервати́вный
+      f: консервати́вная
+      n: консервати́вное
+      pl: консервати́вные
+    declension:
+      m_nom: консервати́вный
+      m_gen: консервати́вного
+      m_dat: консервати́вному
+      m_acc: консервати́вный
+      m_ins: консервати́вным
+      m_pre: консервати́вном
+      n_nom: консервати́вное
+      n_gen: консервати́вного
+      n_dat: консервати́вному
+      n_acc: консервати́вное
+      n_ins: консервати́вным
+      n_pre: консервати́вном
+      f_nom: консервати́вная
+      f_gen: консервати́вной
+      f_dat: консервати́вной
+      f_acc: консервати́вную
+      f_ins: консервати́вной
+      f_pre: консервати́вной
+      pl_nom: консервати́вные
+      pl_gen: консервати́вных
+      pl_dat: консервати́вным
+      pl_acc: консервати́вные
+      pl_ins: консервати́вными
+      pl_pre: консервати́вных
+    usage:
+      - ru: Она́ о́чень консервати́вная же́нщина.
+        en_gb: She is a very conservative woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он консервати́вный челове́к.
+        en_gb: He is a conservative person.
+      - ru: Мой де́душка о́чень консервати́вный.
+        en_gb: My grandfather is very conservative.
   "коричневый=brown":
     cefr_level: A2
     accented: кори́чневый
@@ -7728,6 +8005,51 @@ words:
       pl_acc: кра́сные
       pl_ins: кра́сными
       pl_pre: кра́сных
+  "креативный=creative":
+    cefr_level: A1
+    accented: креати́вный
+    en_gb:
+      standard: creative (good at making new ideas)
+    collections:
+      - character
+    forms:
+      m: креати́вный
+      f: креати́вная
+      n: креати́вное
+      pl: креати́вные
+    declension:
+      m_nom: креати́вный
+      m_gen: креати́вного
+      m_dat: креати́вному
+      m_acc: креати́вный
+      m_ins: креати́вным
+      m_pre: креати́вном
+      n_nom: креати́вное
+      n_gen: креати́вного
+      n_dat: креати́вному
+      n_acc: креати́вное
+      n_ins: креати́вным
+      n_pre: креати́вном
+      f_nom: креати́вная
+      f_gen: креати́вной
+      f_dat: креати́вной
+      f_acc: креати́вную
+      f_ins: креати́вной
+      f_pre: креати́вной
+      pl_nom: креати́вные
+      pl_gen: креати́вных
+      pl_dat: креати́вным
+      pl_acc: креати́вные
+      pl_ins: креати́вными
+      pl_pre: креати́вных
+    usage:
+      - ru: Она́ о́чень креати́вная де́вушка.
+        en_gb: She is a very creative girl.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он креати́вный челове́к.
+        en_gb: He is a creative person.
+      - ru: Он о́чень креати́вный студе́нт.
+        en_gb: He is a very creative student.
   "крепкий=strong":
     cefr_level: B1
     accented: кре́пкий
@@ -9249,6 +9571,52 @@ words:
         inflect: { token: 3, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Мла́дшие де́ти игра́ют во дворе́.
         en_gb: The younger children play in the yard.
+  "многофункциональный=multifunctional":
+    cefr_level: A1
+    accented: многофункциона́льный
+    en_gb:
+      standard: multifunctional (able to do many things)
+    collections:
+      - daily life
+      - technology
+    forms:
+      m: многофункциона́льный
+      f: многофункциона́льная
+      n: многофункциона́льное
+      pl: многофункциона́льные
+    declension:
+      m_nom: многофункциона́льный
+      m_gen: многофункциона́льного
+      m_dat: многофункциона́льному
+      m_acc: многофункциона́льный
+      m_ins: многофункциона́льным
+      m_pre: многофункциона́льном
+      n_nom: многофункциона́льное
+      n_gen: многофункциона́льного
+      n_dat: многофункциона́льному
+      n_acc: многофункциона́льное
+      n_ins: многофункциона́льным
+      n_pre: многофункциона́льном
+      f_nom: многофункциона́льная
+      f_gen: многофункциона́льной
+      f_dat: многофункциона́льной
+      f_acc: многофункциона́льную
+      f_ins: многофункциона́льной
+      f_pre: многофункциона́льной
+      pl_nom: многофункциона́льные
+      pl_gen: многофункциона́льных
+      pl_dat: многофункциона́льным
+      pl_acc: многофункциона́льные
+      pl_ins: многофункциона́льными
+      pl_pre: многофункциона́льных
+    usage:
+      - ru: Э́то о́чень многофункциона́льная маши́на.
+        en_gb: This is a very multifunctional machine.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Я купи́л многофункциона́льный телефо́н.
+        en_gb: I bought a multifunctional phone.
+      - ru: Э́ти часы́ о́чень многофункциона́льные.
+        en_gb: This watch is very multifunctional.
   "многочисленный=numerous":
     cefr_level: B2
     accented: многочи́сленный
@@ -10473,6 +10841,51 @@ words:
       pl_acc: не́жные
       pl_ins: не́жными
       pl_pre: не́жных
+  "незабываемый=unforgettable":
+    cefr_level: A1
+    accented: незабыва́емый
+    en_gb:
+      standard: unforgettable (so good you cannot forget it)
+    collections:
+      - daily life
+    forms:
+      m: незабыва́емый
+      f: незабыва́емая
+      n: незабыва́емое
+      pl: незабыва́емые
+    declension:
+      m_nom: незабыва́емый
+      m_gen: незабыва́емого
+      m_dat: незабыва́емому
+      m_acc: незабыва́емый
+      m_ins: незабыва́емым
+      m_pre: незабыва́емом
+      n_nom: незабыва́емое
+      n_gen: незабыва́емого
+      n_dat: незабыва́емому
+      n_acc: незабыва́емое
+      n_ins: незабыва́емым
+      n_pre: незабыва́емом
+      f_nom: незабыва́емая
+      f_gen: незабыва́емой
+      f_dat: незабыва́емой
+      f_acc: незабыва́емую
+      f_ins: незабыва́емой
+      f_pre: незабыва́емой
+      pl_nom: незабыва́емые
+      pl_gen: незабыва́емых
+      pl_dat: незабыва́емым
+      pl_acc: незабыва́емые
+      pl_ins: незабыва́емыми
+      pl_pre: незабыва́емых
+    usage:
+      - ru: Э́то была́ незабыва́емая ночь.
+        en_gb: It was an unforgettable night.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то был незабыва́емый день.
+        en_gb: It was an unforgettable day.
+      - ru: Мы провели́ незабыва́емый ве́чер.
+        en_gb: We spent an unforgettable evening.
   "незнакомый=unfamiliar":
     cefr_level: A2
     accented: незнако́мый
@@ -10778,6 +11191,51 @@ words:
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дели необыкнове́нные ве́щи.
         en_gb: We saw extraordinary things.
+  "необычный=unusual":
+    cefr_level: A1
+    accented: необы́чный
+    en_gb:
+      standard: unusual (different from what is normal)
+    collections:
+      - daily life
+    forms:
+      m: необы́чный
+      f: необы́чная
+      n: необы́чное
+      pl: необы́чные
+    declension:
+      m_nom: необы́чный
+      m_gen: необы́чного
+      m_dat: необы́чному
+      m_acc: необы́чный
+      m_ins: необы́чным
+      m_pre: необы́чном
+      n_nom: необы́чное
+      n_gen: необы́чного
+      n_dat: необы́чному
+      n_acc: необы́чное
+      n_ins: необы́чным
+      n_pre: необы́чном
+      f_nom: необы́чная
+      f_gen: необы́чной
+      f_dat: необы́чной
+      f_acc: необы́чную
+      f_ins: необы́чной
+      f_pre: необы́чной
+      pl_nom: необы́чные
+      pl_gen: необы́чных
+      pl_dat: необы́чным
+      pl_acc: необы́чные
+      pl_ins: необы́чными
+      pl_pre: необы́чных
+    usage:
+      - ru: Э́то была́ необы́чная исто́рия.
+        en_gb: It was an unusual story.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то соверше́нно необы́чный слу́чай.
+        en_gb: This is a completely unusual case.
+      - ru: Здесь продаю́т необы́чные ве́щи.
+        en_gb: They sell unusual things here.
   "неожиданный=unexpected":
     cefr_level: B1
     accented: нео́жиданный
@@ -11087,6 +11545,52 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мне нра́вятся неторопли́вые у́тра.
         en_gb: I like unhurried mornings.
+  "неформальный=informal":
+    cefr_level: A1
+    accented: неформа́льный
+    en_gb:
+      standard: informal (relaxed and not official)
+    collections:
+      - daily life
+      - communication
+    forms:
+      m: неформа́льный
+      f: неформа́льная
+      n: неформа́льное
+      pl: неформа́льные
+    declension:
+      m_nom: неформа́льный
+      m_gen: неформа́льного
+      m_dat: неформа́льному
+      m_acc: неформа́льный
+      m_ins: неформа́льным
+      m_pre: неформа́льном
+      n_nom: неформа́льное
+      n_gen: неформа́льного
+      n_dat: неформа́льному
+      n_acc: неформа́льное
+      n_ins: неформа́льным
+      n_pre: неформа́льном
+      f_nom: неформа́льная
+      f_gen: неформа́льной
+      f_dat: неформа́льной
+      f_acc: неформа́льную
+      f_ins: неформа́льной
+      f_pre: неформа́льной
+      pl_nom: неформа́льные
+      pl_gen: неформа́льных
+      pl_dat: неформа́льным
+      pl_acc: неформа́льные
+      pl_ins: неформа́льными
+      pl_pre: неформа́льных
+    usage:
+      - ru: У нас была́ неформа́льная встре́ча.
+        en_gb: We had an informal meeting.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то был неформа́льный разгово́р.
+        en_gb: It was an informal conversation.
+      - ru: Мы устро́или неформа́льный у́жин.
+        en_gb: We arranged an informal dinner.
   "нижний=lower":
     cefr_level: B1
     accented: ни́жний
@@ -11669,6 +12173,54 @@ words:
         en_gb: She is obliged to answer for the children.
       - ru: Мы обя́заны соблюда́ть пра́вила.
         en_gb: We are obliged to follow the rules.
+  "обязательный=obligatory":
+    cefr_level: A1
+    accented: обяза́тельный
+    en_gb:
+      standard: obligatory (required; of a person, reliable)
+      alt:
+        - reliable
+    collections:
+      - daily life
+      - school
+    forms:
+      m: обяза́тельный
+      f: обяза́тельная
+      n: обяза́тельное
+      pl: обяза́тельные
+    declension:
+      m_nom: обяза́тельный
+      m_gen: обяза́тельного
+      m_dat: обяза́тельному
+      m_acc: обяза́тельный
+      m_ins: обяза́тельным
+      m_pre: обяза́тельном
+      n_nom: обяза́тельное
+      n_gen: обяза́тельного
+      n_dat: обяза́тельному
+      n_acc: обяза́тельное
+      n_ins: обяза́тельным
+      n_pre: обяза́тельном
+      f_nom: обяза́тельная
+      f_gen: обяза́тельной
+      f_dat: обяза́тельной
+      f_acc: обяза́тельную
+      f_ins: обяза́тельной
+      f_pre: обяза́тельной
+      pl_nom: обяза́тельные
+      pl_gen: обяза́тельных
+      pl_dat: обяза́тельным
+      pl_acc: обяза́тельные
+      pl_ins: обяза́тельными
+      pl_pre: обяза́тельных
+    usage:
+      - ru: Э́то обяза́тельная програ́мма.
+        en_gb: This is an obligatory programme.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Ру́сский язы́к — обяза́тельный предме́т.
+        en_gb: Russian is an obligatory subject.
+      - ru: Он о́чень обяза́тельный челове́к.
+        en_gb: He is a very reliable person.
   "огромный=enormous":
     cefr_level: A2
     accented: огро́мный
@@ -11982,6 +12534,51 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы дости́гли определённых результа́тов.
         en_gb: We achieved definite results.
+  "оптимистичный=optimistic":
+    cefr_level: A1
+    accented: оптимисти́чный
+    en_gb:
+      standard: optimistic (expecting good things to happen)
+    collections:
+      - character
+    forms:
+      m: оптимисти́чный
+      f: оптимисти́чная
+      n: оптимисти́чное
+      pl: оптимисти́чные
+    declension:
+      m_nom: оптимисти́чный
+      m_gen: оптимисти́чного
+      m_dat: оптимисти́чному
+      m_acc: оптимисти́чный
+      m_ins: оптимисти́чным
+      m_pre: оптимисти́чном
+      n_nom: оптимисти́чное
+      n_gen: оптимисти́чного
+      n_dat: оптимисти́чному
+      n_acc: оптимисти́чное
+      n_ins: оптимисти́чным
+      n_pre: оптимисти́чном
+      f_nom: оптимисти́чная
+      f_gen: оптимисти́чной
+      f_dat: оптимисти́чной
+      f_acc: оптимисти́чную
+      f_ins: оптимисти́чной
+      f_pre: оптимисти́чной
+      pl_nom: оптимисти́чные
+      pl_gen: оптимисти́чных
+      pl_dat: оптимисти́чным
+      pl_acc: оптимисти́чные
+      pl_ins: оптимисти́чными
+      pl_pre: оптимисти́чных
+    usage:
+      - ru: Она́ о́чень оптимисти́чная же́нщина.
+        en_gb: She is a very optimistic woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он оптимисти́чный челове́к.
+        en_gb: He is an optimistic person.
+      - ru: Все её друзья́ о́чень оптимисти́чные.
+        en_gb: All her friends are very optimistic.
   "опытный=experienced":
     cefr_level: B1
     accented: о́пытный
@@ -12072,6 +12669,51 @@ words:
       pl_acc: ора́нжевые
       pl_ins: ора́нжевыми
       pl_pre: ора́нжевых
+  "оригинальный=original":
+    cefr_level: A1
+    accented: оригина́льный
+    en_gb:
+      standard: original (new and not copied)
+    collections:
+      - daily life
+    forms:
+      m: оригина́льный
+      f: оригина́льная
+      n: оригина́льное
+      pl: оригина́льные
+    declension:
+      m_nom: оригина́льный
+      m_gen: оригина́льного
+      m_dat: оригина́льному
+      m_acc: оригина́льный
+      m_ins: оригина́льным
+      m_pre: оригина́льном
+      n_nom: оригина́льное
+      n_gen: оригина́льного
+      n_dat: оригина́льному
+      n_acc: оригина́льное
+      n_ins: оригина́льным
+      n_pre: оригина́льном
+      f_nom: оригина́льная
+      f_gen: оригина́льной
+      f_dat: оригина́льной
+      f_acc: оригина́льную
+      f_ins: оригина́льной
+      f_pre: оригина́льной
+      pl_nom: оригина́льные
+      pl_gen: оригина́льных
+      pl_dat: оригина́льным
+      pl_acc: оригина́льные
+      pl_ins: оригина́льными
+      pl_pre: оригина́льных
+    usage:
+      - ru: У неё была́ оригина́льная иде́я.
+        en_gb: She had an original idea.
+        inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то о́чень оригина́льный пода́рок.
+        en_gb: This is a very original present.
+      - ru: Он купи́л оригина́льный костю́м.
+        en_gb: He bought an original suit.
   "осенний=autumn":
     cefr_level: A2
     accented: осе́нний
@@ -12698,6 +13340,53 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы обсуди́ли парти́йные дела́.
         en_gb: We discussed party affairs.
+  "педантичный=pedantic":
+    cefr_level: A1
+    accented: педанти́чный
+    en_gb:
+      standard: pedantic (very careful about small details)
+      alt:
+        - meticulous
+    collections:
+      - character
+    forms:
+      m: педанти́чный
+      f: педанти́чная
+      n: педанти́чное
+      pl: педанти́чные
+    declension:
+      m_nom: педанти́чный
+      m_gen: педанти́чного
+      m_dat: педанти́чному
+      m_acc: педанти́чный
+      m_ins: педанти́чным
+      m_pre: педанти́чном
+      n_nom: педанти́чное
+      n_gen: педанти́чного
+      n_dat: педанти́чному
+      n_acc: педанти́чное
+      n_ins: педанти́чным
+      n_pre: педанти́чном
+      f_nom: педанти́чная
+      f_gen: педанти́чной
+      f_dat: педанти́чной
+      f_acc: педанти́чную
+      f_ins: педанти́чной
+      f_pre: педанти́чной
+      pl_nom: педанти́чные
+      pl_gen: педанти́чных
+      pl_dat: педанти́чным
+      pl_acc: педанти́чные
+      pl_ins: педанти́чными
+      pl_pre: педанти́чных
+    usage:
+      - ru: Она́ о́чень педанти́чная же́нщина.
+        en_gb: She is a very meticulous woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он педанти́чный челове́к.
+        en_gb: He is a pedantic person.
+      - ru: Наш учи́тель о́чень педанти́чный.
+        en_gb: Our teacher is very pedantic.
   "передний=front":
     cefr_level: B1
     accented: пере́дний
@@ -13637,6 +14326,51 @@ words:
       - ru: Он говори́т поня́тными слова́ми.
         en_gb: He speaks in understandable words.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
+  "популярный=popular":
+    cefr_level: A1
+    accented: популя́рный
+    en_gb:
+      standard: popular (liked by many people)
+    collections:
+      - daily life
+    forms:
+      m: популя́рный
+      f: популя́рная
+      n: популя́рное
+      pl: популя́рные
+    declension:
+      m_nom: популя́рный
+      m_gen: популя́рного
+      m_dat: популя́рному
+      m_acc: популя́рный
+      m_ins: популя́рным
+      m_pre: популя́рном
+      n_nom: популя́рное
+      n_gen: популя́рного
+      n_dat: популя́рному
+      n_acc: популя́рное
+      n_ins: популя́рным
+      n_pre: популя́рном
+      f_nom: популя́рная
+      f_gen: популя́рной
+      f_dat: популя́рной
+      f_acc: популя́рную
+      f_ins: популя́рной
+      f_pre: популя́рной
+      pl_nom: популя́рные
+      pl_gen: популя́рных
+      pl_dat: популя́рным
+      pl_acc: популя́рные
+      pl_ins: популя́рными
+      pl_pre: популя́рных
+    usage:
+      - ru: Э́то о́чень популя́рная пе́сня.
+        en_gb: This is a very popular song.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то популя́рный фильм.
+        en_gb: This is a popular film.
+      - ru: Здесь продаю́т популя́рные кни́ги.
+        en_gb: They sell popular books here.
   "последний=last":
     cefr_level: A2
     accented: после́дний
@@ -14031,6 +14765,51 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Поверни́ на пра́вой стороне́.
         en_gb: Turn on the right side.
+  "практичный=practical":
+    cefr_level: A1
+    accented: практи́чный
+    en_gb:
+      standard: practical (sensible and useful)
+    collections:
+      - character
+    forms:
+      m: практи́чный
+      f: практи́чная
+      n: практи́чное
+      pl: практи́чные
+    declension:
+      m_nom: практи́чный
+      m_gen: практи́чного
+      m_dat: практи́чному
+      m_acc: практи́чный
+      m_ins: практи́чным
+      m_pre: практи́чном
+      n_nom: практи́чное
+      n_gen: практи́чного
+      n_dat: практи́чному
+      n_acc: практи́чное
+      n_ins: практи́чным
+      n_pre: практи́чном
+      f_nom: практи́чная
+      f_gen: практи́чной
+      f_dat: практи́чной
+      f_acc: практи́чную
+      f_ins: практи́чной
+      f_pre: практи́чной
+      pl_nom: практи́чные
+      pl_gen: практи́чных
+      pl_dat: практи́чным
+      pl_acc: практи́чные
+      pl_ins: практи́чными
+      pl_pre: практи́чных
+    usage:
+      - ru: Она́ о́чень практи́чная же́нщина.
+        en_gb: She is a very practical woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он практи́чный челове́к.
+        en_gb: He is a practical person.
+      - ru: Э́то о́чень практи́чный пода́рок.
+        en_gb: This is a very practical present.
   "прежний=former":
     cefr_level: B1
     accented: пре́жний
@@ -15255,6 +16034,51 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим ра́нние я́годы.
         en_gb: We love early berries.
+  "рациональный=rational":
+    cefr_level: A1
+    accented: рациона́льный
+    en_gb:
+      standard: rational (based on clear thinking, not feelings)
+    collections:
+      - character
+    forms:
+      m: рациона́льный
+      f: рациона́льная
+      n: рациона́льное
+      pl: рациона́льные
+    declension:
+      m_nom: рациона́льный
+      m_gen: рациона́льного
+      m_dat: рациона́льному
+      m_acc: рациона́льный
+      m_ins: рациона́льным
+      m_pre: рациона́льном
+      n_nom: рациона́льное
+      n_gen: рациона́льного
+      n_dat: рациона́льному
+      n_acc: рациона́льное
+      n_ins: рациона́льным
+      n_pre: рациона́льном
+      f_nom: рациона́льная
+      f_gen: рациона́льной
+      f_dat: рациона́льной
+      f_acc: рациона́льную
+      f_ins: рациона́льной
+      f_pre: рациона́льной
+      pl_nom: рациона́льные
+      pl_gen: рациона́льных
+      pl_dat: рациона́льным
+      pl_acc: рациона́льные
+      pl_ins: рациона́льными
+      pl_pre: рациона́льных
+    usage:
+      - ru: Она́ о́чень рациона́льная же́нщина.
+        en_gb: She is a very rational woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он рациона́льный челове́к.
+        en_gb: He is a rational person.
+      - ru: Он приня́л рациона́льное реше́ние.
+        en_gb: He made a rational decision.
   "реальный=real":
     cefr_level: B1
     accented: реа́льный
@@ -15526,6 +16350,51 @@ words:
       pl_acc: ро́зовые
       pl_ins: ро́зовыми
       pl_pre: ро́зовых
+  "романтичный=romantic":
+    cefr_level: A1
+    accented: романти́чный
+    en_gb:
+      standard: romantic (full of feelings of love)
+    collections:
+      - character
+    forms:
+      m: романти́чный
+      f: романти́чная
+      n: романти́чное
+      pl: романти́чные
+    declension:
+      m_nom: романти́чный
+      m_gen: романти́чного
+      m_dat: романти́чному
+      m_acc: романти́чный
+      m_ins: романти́чным
+      m_pre: романти́чном
+      n_nom: романти́чное
+      n_gen: романти́чного
+      n_dat: романти́чному
+      n_acc: романти́чное
+      n_ins: романти́чным
+      n_pre: романти́чном
+      f_nom: романти́чная
+      f_gen: романти́чной
+      f_dat: романти́чной
+      f_acc: романти́чную
+      f_ins: романти́чной
+      f_pre: романти́чной
+      pl_nom: романти́чные
+      pl_gen: романти́чных
+      pl_dat: романти́чным
+      pl_acc: романти́чные
+      pl_ins: романти́чными
+      pl_pre: романти́чных
+    usage:
+      - ru: Она́ о́чень романти́чная де́вушка.
+        en_gb: She is a very romantic girl.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он романти́чный челове́к.
+        en_gb: He is a romantic person.
+      - ru: Э́то был о́чень романти́чный ве́чер.
+        en_gb: It was a very romantic evening.
   "российский=Russian":
     cefr_level: A2
     accented: росси́йский
@@ -16068,6 +16937,51 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы храни́м семе́йные фотогра́фии.
         en_gb: We keep family photographs.
+  "сентиментальный=sentimental":
+    cefr_level: A1
+    accented: сентимента́льный
+    en_gb:
+      standard: sentimental (showing soft, tender feelings)
+    collections:
+      - character
+    forms:
+      m: сентимента́льный
+      f: сентимента́льная
+      n: сентимента́льное
+      pl: сентимента́льные
+    declension:
+      m_nom: сентимента́льный
+      m_gen: сентимента́льного
+      m_dat: сентимента́льному
+      m_acc: сентимента́льный
+      m_ins: сентимента́льным
+      m_pre: сентимента́льном
+      n_nom: сентимента́льное
+      n_gen: сентимента́льного
+      n_dat: сентимента́льному
+      n_acc: сентимента́льное
+      n_ins: сентимента́льным
+      n_pre: сентимента́льном
+      f_nom: сентимента́льная
+      f_gen: сентимента́льной
+      f_dat: сентимента́льной
+      f_acc: сентимента́льную
+      f_ins: сентимента́льной
+      f_pre: сентимента́льной
+      pl_nom: сентимента́льные
+      pl_gen: сентимента́льных
+      pl_dat: сентимента́льным
+      pl_acc: сентимента́льные
+      pl_ins: сентимента́льными
+      pl_pre: сентимента́льных
+    usage:
+      - ru: Она́ о́чень сентимента́льная же́нщина.
+        en_gb: She is a very sentimental woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он сентимента́льный челове́к.
+        en_gb: He is a sentimental person.
+      - ru: Он лю́бит сентимента́льные фи́льмы.
+        en_gb: He loves sentimental films.
   "серебряный=silver":
     cefr_level: B1
     accented: сере́бряный
@@ -18978,6 +19892,51 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас техни́ческие пробле́мы.
         en_gb: We have technical problems.
+  "типичный=typical":
+    cefr_level: A1
+    accented: типи́чный
+    en_gb:
+      standard: typical (having the usual qualities of something)
+    collections:
+      - daily life
+    forms:
+      m: типи́чный
+      f: типи́чная
+      n: типи́чное
+      pl: типи́чные
+    declension:
+      m_nom: типи́чный
+      m_gen: типи́чного
+      m_dat: типи́чному
+      m_acc: типи́чный
+      m_ins: типи́чным
+      m_pre: типи́чном
+      n_nom: типи́чное
+      n_gen: типи́чного
+      n_dat: типи́чному
+      n_acc: типи́чное
+      n_ins: типи́чным
+      n_pre: типи́чном
+      f_nom: типи́чная
+      f_gen: типи́чной
+      f_dat: типи́чной
+      f_acc: типи́чную
+      f_ins: типи́чной
+      f_pre: типи́чной
+      pl_nom: типи́чные
+      pl_gen: типи́чных
+      pl_dat: типи́чным
+      pl_acc: типи́чные
+      pl_ins: типи́чными
+      pl_pre: типи́чных
+    usage:
+      - ru: Э́то типи́чная оши́бка.
+        en_gb: This is a typical mistake.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то типи́чный приме́р.
+        en_gb: This is a typical example.
+      - ru: Э́то типи́чный ру́сский го́род.
+        en_gb: This is a typical Russian city.
   "тихий=quiet":
     cefr_level: A2
     accented: ти́хий
@@ -19258,6 +20217,52 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Учёный сде́лал то́чные расчёты.
         en_gb: The scientist made exact calculations.
+  "традиционный=traditional":
+    cefr_level: A1
+    accented: традицио́нный
+    en_gb:
+      standard: traditional (following old customs)
+    collections:
+      - daily life
+      - the arts
+    forms:
+      m: традицио́нный
+      f: традицио́нная
+      n: традицио́нное
+      pl: традицио́нные
+    declension:
+      m_nom: традицио́нный
+      m_gen: традицио́нного
+      m_dat: традицио́нному
+      m_acc: традицио́нный
+      m_ins: традицио́нным
+      m_pre: традицио́нном
+      n_nom: традицио́нное
+      n_gen: традицио́нного
+      n_dat: традицио́нному
+      n_acc: традицио́нное
+      n_ins: традицио́нным
+      n_pre: традицио́нном
+      f_nom: традицио́нная
+      f_gen: традицио́нной
+      f_dat: традицио́нной
+      f_acc: традицио́нную
+      f_ins: традицио́нной
+      f_pre: традицио́нной
+      pl_nom: традицио́нные
+      pl_gen: традицио́нных
+      pl_dat: традицио́нным
+      pl_acc: традицио́нные
+      pl_ins: традицио́нными
+      pl_pre: традицио́нных
+    usage:
+      - ru: Э́то традицио́нная ру́сская еда́.
+        en_gb: This is traditional Russian food.
+        inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то традицио́нный ру́сский пра́здник.
+        en_gb: This is a traditional Russian holiday.
+      - ru: Мы гото́вим традицио́нные блю́да.
+        en_gb: We cook traditional dishes.
   "треугольный=triangular":
     cefr_level: B1
     accented: треуго́льный
@@ -20438,6 +21443,51 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У ме́ста есть хара́ктерные черты́.
         en_gb: The place has characteristic features.
+  "харизматичный=charismatic":
+    cefr_level: A1
+    accented: харизмати́чный
+    en_gb:
+      standard: charismatic (having a strong personal charm)
+    collections:
+      - character
+    forms:
+      m: харизмати́чный
+      f: харизмати́чная
+      n: харизмати́чное
+      pl: харизмати́чные
+    declension:
+      m_nom: харизмати́чный
+      m_gen: харизмати́чного
+      m_dat: харизмати́чному
+      m_acc: харизмати́чный
+      m_ins: харизмати́чным
+      m_pre: харизмати́чном
+      n_nom: харизмати́чное
+      n_gen: харизмати́чного
+      n_dat: харизмати́чному
+      n_acc: харизмати́чное
+      n_ins: харизмати́чным
+      n_pre: харизмати́чном
+      f_nom: харизмати́чная
+      f_gen: харизмати́чной
+      f_dat: харизмати́чной
+      f_acc: харизмати́чную
+      f_ins: харизмати́чной
+      f_pre: харизмати́чной
+      pl_nom: харизмати́чные
+      pl_gen: харизмати́чных
+      pl_dat: харизмати́чным
+      pl_acc: харизмати́чные
+      pl_ins: харизмати́чными
+      pl_pre: харизмати́чных
+    usage:
+      - ru: Она́ о́чень харизмати́чная же́нщина.
+        en_gb: She is a very charismatic woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он харизмати́чный челове́к.
+        en_gb: He is a charismatic person.
+      - ru: У нас о́чень харизмати́чный дире́ктор.
+        en_gb: We have a very charismatic director.
   "хитрый=cunning":
     cefr_level: B1
     accented: хи́трый
@@ -21402,6 +22452,51 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В до́ме электри́ческие прибо́ры.
         en_gb: There are electric appliances in the house.
+  "эмоциональный=emotional":
+    cefr_level: A1
+    accented: эмоциона́льный
+    en_gb:
+      standard: emotional (having and showing strong feelings)
+    collections:
+      - character
+    forms:
+      m: эмоциона́льный
+      f: эмоциона́льная
+      n: эмоциона́льное
+      pl: эмоциона́льные
+    declension:
+      m_nom: эмоциона́льный
+      m_gen: эмоциона́льного
+      m_dat: эмоциона́льному
+      m_acc: эмоциона́льный
+      m_ins: эмоциона́льным
+      m_pre: эмоциона́льном
+      n_nom: эмоциона́льное
+      n_gen: эмоциона́льного
+      n_dat: эмоциона́льному
+      n_acc: эмоциона́льное
+      n_ins: эмоциона́льным
+      n_pre: эмоциона́льном
+      f_nom: эмоциона́льная
+      f_gen: эмоциона́льной
+      f_dat: эмоциона́льной
+      f_acc: эмоциона́льную
+      f_ins: эмоциона́льной
+      f_pre: эмоциона́льной
+      pl_nom: эмоциона́льные
+      pl_gen: эмоциона́льных
+      pl_dat: эмоциона́льным
+      pl_acc: эмоциона́льные
+      pl_ins: эмоциона́льными
+      pl_pre: эмоциона́льных
+    usage:
+      - ru: Она́ о́чень эмоциона́льная же́нщина.
+        en_gb: She is a very emotional woman.
+        inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Он эмоциона́льный челове́к.
+        en_gb: He is an emotional person.
+      - ru: Он о́чень эмоциона́льный ма́льчик.
+        en_gb: He is a very emotional boy.
   "южный=southern":
     cefr_level: B1
     accented: ю́жный

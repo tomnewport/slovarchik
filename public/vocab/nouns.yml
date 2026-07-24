@@ -1867,6 +1867,40 @@ words:
       sg_acc: Байка́л
       sg_ins: Байка́лом
       sg_pre: Байка́ле
+  "бал=ball":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - the arts
+      - holiday
+    en_gb:
+      standard: ball (a formal dancing party)
+    usage:
+      - ru: На балу́ бы́ло мно́го госте́й.
+        en_gb: There were many guests at the ball.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
+      - ru: Зо́лушка танцева́ла на балу́ с при́нцем.
+        en_gb: Cinderella danced at the ball with the prince.
+        inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
+      - ru: Ве́чером они́ пошли́ на бал.
+        en_gb: In the evening they went to the ball.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: бал
+      sg_gen: ба́ла
+      sg_dat: ба́лу
+      sg_acc: бал
+      sg_ins: ба́лом
+      sg_pre: ба́ле
+      sg_loc: балу́
+      pl_nom: балы́
+      pl_gen: бало́в
+      pl_dat: бала́м
+      pl_acc: балы́
+      pl_ins: бала́ми
+      pl_pre: бала́х
   "балерина=ballerina":
     cefr_level: B1
     gender: f
@@ -9437,6 +9471,7 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В э́том году́ бы́ло жа́ркое ле́то.
         en_gb: This year there was a hot summer.
+        inflect: { token: 3, case: loc, number: sg, rule: noun-locative }
       - ru: Про́шло мно́го лет.
         en_gb: Many years have passed.
       - ru: Ему́ испо́лнилось три го́да.
@@ -26267,6 +26302,39 @@ words:
       pl_acc: лошаде́й
       pl_ins: лошадьми́
       pl_pre: лошадя́х
+  "луг=meadow":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+    en_gb:
+      standard: meadow (a field of grass)
+    usage:
+      - ru: На лугу́ мно́го ярких цвето́в.
+        en_gb: There are many bright flowers in the meadow.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
+      - ru: Де́ти игра́ли на зелёном лугу́.
+        en_gb: The children were playing in the green meadow.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
+      - ru: Мы вы́шли на широ́кий луг.
+        en_gb: We came out onto a wide meadow.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: луг
+      sg_gen: лу́га
+      sg_dat: лу́гу
+      sg_acc: луг
+      sg_ins: лу́гом
+      sg_pre: лу́ге
+      sg_loc: лугу́
+      pl_nom: луга́
+      pl_gen: луго́в
+      pl_dat: луга́м
+      pl_acc: луга́
+      pl_ins: луга́ми
+      pl_pre: луга́х
   "лук=onion":
     cefr_level: A2
     gender: m
@@ -39886,6 +39954,7 @@ words:
         en_gb: The regiment set off for the front.
       - ru: Он служи́л в э́том полку́.
         en_gb: He served in this regiment.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: На пара́де бы́ло не́сколько полко́в.
         en_gb: There were several regiments at the parade.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -46463,8 +46532,9 @@ words:
       - ru: Э́то сло́во же́нского ро́да.
         en_gb: This word is feminine in gender.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: В на́шем ро́ду все до́лго живу́т.
+      - ru: В на́шем роду́ все до́лго живу́т.
         en_gb: In our family everyone lives long.
+        inflect: { token: 3, case: loc, number: sg, rule: noun-locative }
   "родина=homeland":
     cefr_level: B1
     gender: f
@@ -47759,8 +47829,10 @@ words:
     usage:
       - ru: На́ши места́ в пе́рвом ряду́.
         en_gb: Our seats are in the first row.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: Мы сиде́ли в после́днем ряду́.
         en_gb: We sat in the last row.
+        inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: Дере́вья посади́ли ро́вными ряда́ми.
         en_gb: The trees were planted in even rows.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }

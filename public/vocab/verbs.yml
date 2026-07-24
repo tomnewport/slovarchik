@@ -23,6 +23,39 @@ meta:
     past_n: past, neuter subject
     past_pl: past, plural subject
 words:
+  "аплодировать=to applaud":
+    cefr_level: A1
+    accented: аплоди́ровать
+    aspect: impf
+    en_gb:
+      standard: to applaud (to clap your hands; takes the dative)
+    collections:
+      - entertainment
+    usage:
+      - ru: Все гро́мко аплоди́руют.
+        en_gb: Everyone is applauding loudly.
+        inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
+      - ru: Я аплоди́рую тебе́!
+        en_gb: I applaud you!
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: По́сле спекта́кля го́сти до́лго аплоди́ровали.
+        en_gb: After the show the guests applauded for a long time.
+        inflect: { token: 5, tense: past, person: past_pl, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: аплоди́руй
+        pl: аплоди́руйте
+      present:
+        "1sg": аплоди́рую
+        "2sg": аплоди́руешь
+        "3sg": аплоди́рует
+        "1pl": аплоди́руем
+        "2pl": аплоди́руете
+        "3pl": аплоди́руют
+      past_m: аплоди́ровал
+      past_f: аплоди́ровала
+      past_n: аплоди́ровало
+      past_pl: аплоди́ровали
   "арестовать=to arrest":
     cefr_level: B2
     accented: арестова́ть
@@ -1416,6 +1449,40 @@ words:
       - ru: Ты вернёшься че́рез час?
         en_gb: Will you return in an hour?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "веселиться=to have fun":
+    cefr_level: A1
+    accented: весели́ться
+    aspect: impf
+    en_gb:
+      standard: to have fun (to enjoy oneself)
+    collections:
+      - hobbies and pastimes
+      - feelings and sensations
+    usage:
+      - ru: Де́ти веселя́тся на пра́зднике.
+        en_gb: The children are having fun at the party.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
+      - ru: С друзья́ми я всегда́ веселю́сь.
+        en_gb: I always have fun with friends.
+        inflect: { token: 5, tense: present, person: 1sg, rule: verb-present }
+      - ru: Вчера́ мы о́чень весели́лись.
+        en_gb: Yesterday we had a lot of fun.
+        inflect: { token: 4, tense: past, person: past_pl, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: весели́сь
+        pl: весели́тесь
+      present:
+        "1sg": веселю́сь
+        "2sg": весели́шься
+        "3sg": весели́тся
+        "1pl": весели́мся
+        "2pl": весели́тесь
+        "3pl": веселя́тся
+      past_m: весели́лся
+      past_f: весели́лась
+      past_n: весели́лось
+      past_pl: весели́лись
   "весить=to weigh":
     cefr_level: B1
     accented: ве́сить
@@ -5191,6 +5258,41 @@ words:
       past_f: дава́ла
       past_n: дава́ло
       past_pl: дава́ли
+  "дарить=to give":
+    cefr_level: A1
+    accented: дари́ть
+    aspect: impf
+    pair: "подарить=to give a present"
+    en_gb:
+      standard: to give (something as a gift; takes the dative of the recipient)
+    collections:
+      - holiday
+      - daily life
+    usage:
+      - ru: Я дарю́ ма́ме цветы́.
+        en_gb: I give my mum flowers.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Он ча́сто да́рит ей пода́рки.
+        en_gb: He often gives her presents.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
+      - ru: Ра́ньше он дари́л ей цветы́ ка́ждый день.
+        en_gb: He used to give her flowers every day.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: дари́
+        pl: дари́те
+      present:
+        "1sg": дарю́
+        "2sg": да́ришь
+        "3sg": да́рит
+        "1pl": да́рим
+        "2pl": да́рите
+        "3pl": да́рят
+      past_m: дари́л
+      past_f: дари́ла
+      past_n: дари́ло
+      past_pl: дари́ли
   "дать=to give":
     cefr_level: A1
     accented: дать
@@ -5538,6 +5640,36 @@ words:
       - ru: Ты де́ржишься за верёвку?
         en_gb: Are you holding on to the rope?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+  "длиться=to last":
+    cefr_level: A1
+    accented: дли́ться
+    aspect: impf
+    en_gb:
+      standard: to last (to go on for a period of time)
+    collections:
+      - time
+    usage:
+      - ru: Уро́к дли́тся со́рок пять мину́т.
+        en_gb: The lesson lasts forty-five minutes.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Фильм дли́лся почти́ два часа́.
+        en_gb: The film lasted almost two hours.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Уро́ки для́тся весь день.
+        en_gb: The lessons last all day.
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
+    conjugation:
+      present:
+        "1sg": длюсь
+        "2sg": дли́шься
+        "3sg": дли́тся
+        "1pl": дли́мся
+        "2pl": дли́тесь
+        "3pl": для́тся
+      past_m: дли́лся
+      past_f: дли́лась
+      past_n: дли́лось
+      past_pl: дли́лись
   "добавить=to add":
     cefr_level: B1
     accented: доба́вить
@@ -7095,6 +7227,40 @@ words:
       past_f: жени́лась
       past_n: жени́лось
       past_pl: жени́лись
+  "жечь=to burn":
+    cefr_level: A1
+    accented: жечь
+    aspect: impf
+    pair: "сжечь=to burn down"
+    en_gb:
+      standard: to burn (to destroy something with fire)
+    collections:
+      - daily life
+    usage:
+      - ru: Ве́чером мы жжём све́чи.
+        en_gb: In the evening we burn candles.
+        inflect: { token: 3, tense: present, person: 1pl, rule: verb-present }
+      - ru: Он жжёт ста́рые пи́сьма.
+        en_gb: He is burning old letters.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Он до́лго жёг ста́рые пи́сьма.
+        en_gb: He burned old letters for a long time.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: жги
+        pl: жги́те
+      present:
+        "1sg": жгу
+        "2sg": жжёшь
+        "3sg": жжёт
+        "1pl": жжём
+        "2pl": жжёте
+        "3pl": жгут
+      past_m: жёг
+      past_f: жгла
+      past_n: жгло
+      past_pl: жгли
   "жить=to live":
     cefr_level: A1
     accented: жить
@@ -7894,6 +8060,36 @@ words:
       past_f: зака́нчивала
       past_n: зака́нчивало
       past_pl: зака́нчивали
+  "заканчиваться=to end":
+    cefr_level: A1
+    accented: зака́нчиваться
+    aspect: impf
+    en_gb:
+      standard: to end (to come to a finish; intransitive)
+    collections:
+      - time
+    usage:
+      - ru: Уро́к зака́нчивается в три часа́.
+        en_gb: The lesson ends at three o'clock.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Все уро́ки зака́нчиваются в два часа́.
+        en_gb: All the lessons end at two o'clock.
+        inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
+      - ru: Наш разгово́р зака́нчивался всегда́ одина́ково.
+        en_gb: Our conversation always ended the same way.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+    conjugation:
+      present:
+        "1sg": зака́нчиваюсь
+        "2sg": зака́нчиваешься
+        "3sg": зака́нчивается
+        "1pl": зака́нчиваемся
+        "2pl": зака́нчиваетесь
+        "3pl": зака́нчиваются
+      past_m: зака́нчивался
+      past_f: зака́нчивалась
+      past_n: зака́нчивалось
+      past_pl: зака́нчивались
   "заключаться=to consist of":
     cefr_level: B1
     accented: заключа́ться
@@ -10687,6 +10883,37 @@ words:
       - ru: Ты исключи́шь э́тот ва́риант?
         en_gb: Will you rule out this option?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "исполняться=to turn (an age)":
+    cefr_level: A1
+    accented: исполня́ться
+    aspect: impf
+    en_gb:
+      standard: to turn (an age); to be fulfilled (used impersonally with the dative in the age sense)
+    collections:
+      - time
+      - holiday
+    usage:
+      - ru: Ско́ро мне исполня́ется два́дцать лет.
+        en_gb: I am soon turning twenty years old.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
+      - ru: В ма́рте бра́ту исполня́ется три́дцать лет.
+        en_gb: In March my brother turns thirty years old.
+        inflect: { token: 4, tense: present, person: 3sg, rule: verb-present }
+      - ru: Иногда́ на́ши жела́ния исполня́ются.
+        en_gb: Sometimes our wishes come true.
+        inflect: { token: 4, tense: present, person: 3pl, rule: verb-present }
+    conjugation:
+      present:
+        "1sg": исполня́юсь
+        "2sg": исполня́ешься
+        "3sg": исполня́ется
+        "1pl": исполня́емся
+        "2pl": исполня́етесь
+        "3pl": исполня́ются
+      past_m: исполня́лся
+      past_f: исполня́лась
+      past_n: исполня́лось
+      past_pl: исполня́лись
   "использовать=to use":
     cefr_level: B1
     accented: испо́льзовать
@@ -11696,6 +11923,40 @@ words:
       past_f: кра́сила
       past_n: кра́сило
       past_pl: кра́сили
+  "краситься=to put on make-up":
+    cefr_level: A1
+    accented: кра́ситься
+    aspect: impf
+    en_gb:
+      standard: to put on make-up (to apply cosmetics to oneself)
+    collections:
+      - daily life
+      - body
+    usage:
+      - ru: Она́ кра́сится ка́ждое у́тро.
+        en_gb: She puts on make-up every morning.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я обы́чно кра́шусь о́чень бы́стро.
+        en_gb: I usually put on make-up very quickly.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
+      - ru: Она́ до́лго кра́силась пе́ред пра́здником.
+        en_gb: She spent a long time putting on make-up before the party.
+        inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: кра́сься
+        pl: кра́сьтесь
+      present:
+        "1sg": кра́шусь
+        "2sg": кра́сишься
+        "3sg": кра́сится
+        "1pl": кра́симся
+        "2pl": кра́ситесь
+        "3pl": кра́сятся
+      past_m: кра́сился
+      past_f: кра́силась
+      past_n: кра́силось
+      past_pl: кра́сились
   "крикнуть=to shout":
     cefr_level: A2
     accented: кри́кнуть
@@ -12603,6 +12864,42 @@ words:
       - ru: Вы меня́етесь места́ми?
         en_gb: Are you swapping places?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+  "мерить=to try on":
+    cefr_level: A1
+    accented: ме́рить
+    aspect: impf
+    en_gb:
+      standard: to try on (clothes); to measure
+      alt:
+        - to measure
+    collections:
+      - shopping
+      - daily life
+    usage:
+      - ru: Она́ ме́рит пла́тье в магази́не.
+        en_gb: She is trying on a dress in the shop.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я ме́рю но́вую руба́шку.
+        en_gb: I am trying on a new shirt.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Вчера́ она́ до́лго ме́рила пальто́.
+        en_gb: Yesterday she was trying on a coat for a long time.
+        inflect: { token: 4, tense: past, person: past_f, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: ме́рь
+        pl: ме́рьте
+      present:
+        "1sg": ме́рю
+        "2sg": ме́ришь
+        "3sg": ме́рит
+        "1pl": ме́рим
+        "2pl": ме́рите
+        "3pl": ме́рят
+      past_m: ме́рил
+      past_f: ме́рила
+      past_n: ме́рило
+      past_pl: ме́рили
   "мечтать=to dream":
     cefr_level: A2
     accented: мечта́ть
@@ -13930,6 +14227,40 @@ words:
       - ru: Ты нару́шишь пра́вила?
         en_gb: Will you break the rules?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "наслаждаться=to enjoy":
+    cefr_level: A1
+    accented: наслажда́ться
+    aspect: impf
+    en_gb:
+      standard: to enjoy (to take great pleasure in; takes the instrumental)
+    collections:
+      - feelings and sensations
+      - hobbies and pastimes
+    usage:
+      - ru: Я наслажда́юсь му́зыкой.
+        en_gb: I am enjoying the music.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Она́ наслажда́ется со́лнцем на пля́же.
+        en_gb: She is enjoying the sun on the beach.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Ве́чером мы наслажда́лись му́зыкой.
+        en_gb: In the evening we enjoyed the music.
+        inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: наслажда́йся
+        pl: наслажда́йтесь
+      present:
+        "1sg": наслажда́юсь
+        "2sg": наслажда́ешься
+        "3sg": наслажда́ется
+        "1pl": наслажда́емся
+        "2pl": наслажда́етесь
+        "3pl": наслажда́ются
+      past_m: наслажда́лся
+      past_f: наслажда́лась
+      past_n: наслажда́лось
+      past_pl: наслажда́лись
   "наступать=to advance":
     cefr_level: B1
     accented: наступа́ть
@@ -14366,6 +14697,41 @@ words:
       past_f: ненави́дела
       past_n: ненави́дело
       past_pl: ненави́дели
+  "нервничать=to be nervous":
+    cefr_level: A1
+    accented: не́рвничать
+    aspect: impf
+    en_gb:
+      standard: to be nervous (to worry and feel uneasy)
+      alt:
+        - to fret
+    collections:
+      - feelings and sensations
+    usage:
+      - ru: Он не́рвничает пе́ред экза́меном.
+        en_gb: He is nervous before the exam.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Не не́рвничай, всё бу́дет хорошо́!
+        en_gb: Don't be nervous, everything will be fine!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Она́ о́чень не́рвничала пе́ред экза́меном.
+        en_gb: She was very nervous before the exam.
+        inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: не́рвничай
+        pl: не́рвничайте
+      present:
+        "1sg": не́рвничаю
+        "2sg": не́рвничаешь
+        "3sg": не́рвничает
+        "1pl": не́рвничаем
+        "2pl": не́рвничаете
+        "3pl": не́рвничают
+      past_m: не́рвничал
+      past_f: не́рвничала
+      past_n: не́рвничало
+      past_pl: не́рвничали
   "нести=to be carrying":
     cefr_level: B1
     accented: нести́
@@ -15420,6 +15786,42 @@ words:
       - ru: Вы обсужда́ете но́вости?
         en_gb: Are you discussing the news?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+  "общаться=to communicate":
+    cefr_level: A1
+    accented: обща́ться
+    aspect: impf
+    en_gb:
+      standard: to communicate (to talk and spend time with people; takes с + instrumental)
+      alt:
+        - to socialise
+    collections:
+      - communication
+      - daily life
+    usage:
+      - ru: Я ча́сто обща́юсь с друзья́ми.
+        en_gb: I often communicate with friends.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
+      - ru: Она́ ре́дко обща́ется с сосе́дями.
+        en_gb: She rarely socialises with the neighbours.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
+      - ru: Мы до́лго обща́лись по телефо́ну.
+        en_gb: We talked for a long time on the phone.
+        inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: обща́йся
+        pl: обща́йтесь
+      present:
+        "1sg": обща́юсь
+        "2sg": обща́ешься
+        "3sg": обща́ется
+        "1pl": обща́емся
+        "2pl": обща́етесь
+        "3pl": обща́ются
+      past_m: обща́лся
+      past_f: обща́лась
+      past_n: обща́лось
+      past_pl: обща́лись
   "объявить=to announce":
     cefr_level: B1
     accented: объяви́ть
@@ -18505,6 +18907,39 @@ words:
       past_f: пари́ла
       past_n: пари́ло
       past_pl: пари́ли
+  "парковать=to park":
+    cefr_level: A1
+    accented: паркова́ть
+    aspect: impf
+    en_gb:
+      standard: to park (to leave a car in a place)
+    collections:
+      - travel
+    usage:
+      - ru: Он паркова́л маши́ну во дворе́.
+        en_gb: He was parking the car in the yard.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Я всегда́ парку́ю маши́ну здесь.
+        en_gb: I always park the car here.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
+      - ru: Он парку́ет маши́ну о́чень бы́стро.
+        en_gb: He parks the car very quickly.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+    conjugation:
+      imperative:
+        sg: парку́й
+        pl: парку́йте
+      present:
+        "1sg": парку́ю
+        "2sg": парку́ешь
+        "3sg": парку́ет
+        "1pl": парку́ем
+        "2pl": парку́ете
+        "3pl": парку́ют
+      past_m: паркова́л
+      past_f: паркова́ла
+      past_n: паркова́ло
+      past_pl: паркова́ли
   "пасть=to fall":
     cefr_level: B1
     accented: пасть
@@ -20216,6 +20651,7 @@ words:
     cefr_level: A2
     accented: подари́ть
     aspect: pf
+    pair: "дарить=to give"
     en_gb:
       standard: to give (something) as a present
     conjugation:
@@ -23747,6 +24183,7 @@ words:
     cefr_level: B1
     accented: постира́ть
     aspect: pf
+    pair: "стирать=to do laundry"
     en_gb:
       standard: to wash (clothes), to do laundry
     collections:
@@ -24535,6 +24972,39 @@ words:
       past_f: пра́вила
       past_n: пра́вило
       past_pl: пра́вили
+  "праздновать=to celebrate":
+    cefr_level: A1
+    accented: пра́здновать
+    aspect: impf
+    en_gb:
+      standard: to celebrate (to do something special for a happy occasion)
+    collections:
+      - holiday
+    usage:
+      - ru: Мы пра́зднуем Но́вый год до́ма.
+        en_gb: We celebrate New Year at home.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
+      - ru: Она́ пра́зднует день рожде́ния в кафе́.
+        en_gb: She is celebrating her birthday at a café.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: В про́шлом году́ мы пра́здновали в дере́вне.
+        en_gb: Last year we celebrated in the village.
+        inflect: { token: 5, tense: past, person: past_pl, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: пра́зднуй
+        pl: пра́зднуйте
+      present:
+        "1sg": пра́здную
+        "2sg": пра́зднуешь
+        "3sg": пра́зднует
+        "1pl": пра́зднуем
+        "2pl": пра́зднуете
+        "3pl": пра́зднуют
+      past_m: пра́здновал
+      past_f: пра́здновала
+      past_n: пра́здновало
+      past_pl: пра́здновали
   "превратиться=to turn into":
     cefr_level: B1
     accented: преврати́ться
@@ -29813,6 +30283,42 @@ words:
       past_f: ре́зала
       past_n: ре́зало
       past_pl: ре́зали
+  "ремонтировать=to repair":
+    cefr_level: A1
+    accented: ремонти́ровать
+    aspect: impf
+    en_gb:
+      standard: to repair (to fix or renovate something)
+      alt:
+        - to renovate
+    collections:
+      - home
+      - daily life
+    usage:
+      - ru: Он ремонти́рует свою́ маши́ну.
+        en_gb: He is repairing his car.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Мы ремонти́руем ку́хню уже́ ме́сяц.
+        en_gb: We have been renovating the kitchen for a month.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
+      - ru: Он до́лго ремонти́ровал ста́рую маши́ну.
+        en_gb: He repaired the old car for a long time.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: ремонти́руй
+        pl: ремонти́руйте
+      present:
+        "1sg": ремонти́рую
+        "2sg": ремонти́руешь
+        "3sg": ремонти́рует
+        "1pl": ремонти́руем
+        "2pl": ремонти́руете
+        "3pl": ремонти́руют
+      past_m: ремонти́ровал
+      past_f: ремонти́ровала
+      past_n: ремонти́ровало
+      past_pl: ремонти́ровали
   "решать=to decide":
     cefr_level: A2
     accented: реша́ть
@@ -30736,6 +31242,7 @@ words:
     cefr_level: B1
     accented: сжечь
     aspect: pf
+    pair: "жечь=to burn"
     collections:
       - daily life
     en_gb:
@@ -33215,6 +33722,40 @@ words:
       - ru: Ты спеши́шь на рабо́ту?
         en_gb: Are you hurrying to work?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+  "спонсировать=to sponsor":
+    cefr_level: A1
+    accented: спонси́ровать
+    aspect: impf
+    en_gb:
+      standard: to sponsor (to give money to support something)
+    collections:
+      - finance
+      - work
+    usage:
+      - ru: Банк спонси́рует на́шу кома́нду.
+        en_gb: The bank sponsors our team.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Мы спонси́руем ма́ленький теа́тр.
+        en_gb: We sponsor a small theatre.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
+      - ru: Кто спонси́ровал э́тот фильм?
+        en_gb: Who sponsored this film?
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: спонси́руй
+        pl: спонси́руйте
+      present:
+        "1sg": спонси́рую
+        "2sg": спонси́руешь
+        "3sg": спонси́рует
+        "1pl": спонси́руем
+        "2pl": спонси́руете
+        "3pl": спонси́руют
+      past_m: спонси́ровал
+      past_f: спонси́ровала
+      past_n: спонси́ровало
+      past_pl: спонси́ровали
   "спорить=to argue":
     cefr_level: B1
     accented: спо́рить
@@ -33777,6 +34318,43 @@ words:
       past_f: стёрла
       past_n: стёрло
       past_pl: стёрли
+  "стирать=to do laundry":
+    cefr_level: A1
+    accented: стира́ть
+    aspect: impf
+    pair: "постирать=to do laundry"
+    en_gb:
+      standard: to do the laundry (to wash clothes)
+      alt:
+        - to wash
+    collections:
+      - daily life
+      - home
+    usage:
+      - ru: Я стира́ю оде́жду по суббо́там.
+        en_gb: I do the laundry on Saturdays.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Ба́бушка ча́сто стира́ет оде́жду руко́й.
+        en_gb: Grandmother often washes clothes by hand.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
+      - ru: Вчера́ я стира́л це́лый день.
+        en_gb: Yesterday I did the laundry all day.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
+    conjugation:
+      imperative:
+        sg: стира́й
+        pl: стира́йте
+      present:
+        "1sg": стира́ю
+        "2sg": стира́ешь
+        "3sg": стира́ет
+        "1pl": стира́ем
+        "2pl": стира́ете
+        "3pl": стира́ют
+      past_m: стира́л
+      past_f: стира́ла
+      past_n: стира́ло
+      past_pl: стира́ли
   "стоить=to cost":
     cefr_level: A2
     accented: сто́ить
