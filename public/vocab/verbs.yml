@@ -106,6 +106,9 @@ words:
     en_gb:
       standard: to run (to move fast on foot)
     usage:
+      - ru: Бе́гайте в па́рке ка́ждое у́тро.
+        en_gb: Run in the park every morning.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: По утра́м я бе́гаю в па́рке.
         en_gb: In the mornings I run in the park.
         inflect: { token: 4, tense: present, person: 1sg, rule: verb-present }
@@ -372,6 +375,9 @@ words:
       past_n: благодари́ло
       past_pl: благодари́ли
     usage:
+      - ru: Благодари́те люде́й за по́мощь.
+        en_gb: Thank people for their help.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я благодарю́ вас за по́мощь.
         en_gb: I thank you for your help.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -442,6 +448,9 @@ words:
       alt:
         - to hurt
     usage:
+      - ru: Пожа́луйста, не боле́йте!
+        en_gb: Please don't be ill!
+        inflect: { token: 3, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я ча́сто боле́ю зимо́й.
         en_gb: I often get ill in winter.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -5269,6 +5278,9 @@ words:
       - holiday
       - daily life
     usage:
+      - ru: Дари́ цветы́ ма́ме на пра́здник.
+        en_gb: Give your mum flowers for the holiday.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я дарю́ ма́ме цветы́.
         en_gb: I give my mum flowers.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -7268,6 +7280,9 @@ words:
     en_gb:
       standard: to live (to be alive, or to reside)
     usage:
+      - ru: Живи́ здесь, э́то хоро́ший го́род.
+        en_gb: Live here, it is a good city.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Где вы живёте?
         en_gb: Where do you live?
         inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
@@ -10017,6 +10032,9 @@ words:
       past_n: зва́ло
       past_pl: зва́ли
     usage:
+      - ru: Зови́ друзе́й на у́жин.
+        en_gb: Call your friends for dinner.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Как тебя́ зову́т?
         en_gb: What is your name? (informal)
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
@@ -12610,6 +12628,9 @@ words:
       alt:
         - to like
     usage:
+      - ru: Люби́ свою́ семью́.
+        en_gb: Love your family.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты лю́бишь чай и́ли ко́фе?
         en_gb: Do you like tea or coffee?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
@@ -13742,6 +13763,9 @@ words:
       past_n: нашло́
       past_pl: нашли́
     usage:
+      - ru: Найди́те свобо́дное ме́сто, пожа́луйста.
+        en_gb: Find a free seat, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я найду́ реше́ние пробле́мы.
         en_gb: I will find a solution to the problem.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -13920,6 +13944,9 @@ words:
     en_gb:
       standard: to write (to put words on paper, on one occasion)
     usage:
+      - ru: Напиши́те своё и́мя здесь, пожа́луйста.
+        en_gb: Write your name here, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я написа́л письмо́ другу́.
         en_gb: I wrote a letter to a friend.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -14237,6 +14264,9 @@ words:
       - feelings and sensations
       - hobbies and pastimes
     usage:
+      - ru: Наслажда́йтесь ка́ждым днём!
+        en_gb: Enjoy every day!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я наслажда́юсь му́зыкой.
         en_gb: I am enjoying the music.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -14518,6 +14548,9 @@ words:
     en_gb:
       standard: to begin (to start)
     usage:
+      - ru: Начни́те чита́ть, пожа́луйста.
+        en_gb: Start reading, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Мы на́чали занима́ться в де́вять.
         en_gb: We began studying at nine.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -14596,6 +14629,9 @@ words:
     en_gb:
       standard: to begin (to start, habitually)
     usage:
+      - ru: Начина́й у́жин без меня́.
+        en_gb: Start dinner without me.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он начина́ет рабо́ту в де́вять утра́.
         en_gb: He begins work at nine in the morning.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -15798,6 +15834,9 @@ words:
       - communication
       - daily life
     usage:
+      - ru: Обща́йся с друзья́ми ка́ждый день.
+        en_gb: Talk with your friends every day.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я ча́сто обща́юсь с друзья́ми.
         en_gb: I often communicate with friends.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -17339,6 +17378,9 @@ words:
     en_gb:
       standard: to answer (to reply on one occasion)
     usage:
+      - ru: Отве́тьте на письмо́, пожа́луйста.
+        en_gb: Answer the letter, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он отве́тил на все вопро́сы.
         en_gb: He answered all the questions.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -17383,6 +17425,9 @@ words:
     en_gb:
       standard: to answer (to reply)
     usage:
+      - ru: Отвеча́й на вопро́с бы́стро.
+        en_gb: Answer the question quickly.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Студе́нты отвеча́ют на вопро́сы.
         en_gb: The students answer the questions.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
@@ -17718,6 +17763,9 @@ words:
       past_n: открыва́ло
       past_pl: открыва́ли
     usage:
+      - ru: Открыва́йте окно́ ка́ждое у́тро.
+        en_gb: Open the window every morning.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я открыва́ю окно́ у́тром.
         en_gb: I open the window in the morning.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -18916,6 +18964,9 @@ words:
     collections:
       - travel
     usage:
+      - ru: Парку́йте маши́ну во дворе́.
+        en_gb: Park the car in the yard.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он паркова́л маши́ну во дворе́.
         en_gb: He was parking the car in the yard.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -21824,6 +21875,9 @@ words:
       past_n: познако́милось
       past_pl: познако́мились
     usage:
+      - ru: Познако́мьтесь, э́то мой друг.
+        en_gb: Get acquainted, this is my friend.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я познако́млюсь с но́выми сосе́дями.
         en_gb: I will get acquainted with the new neighbours.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -24981,6 +25035,9 @@ words:
     collections:
       - holiday
     usage:
+      - ru: Пра́зднуйте Но́вый год до́ма.
+        en_gb: Celebrate New Year at home.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Мы пра́зднуем Но́вый год до́ма.
         en_gb: We celebrate New Year at home.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
@@ -28246,6 +28303,9 @@ words:
     en_gb:
       standard: to read (to read through to the end)
     usage:
+      - ru: Прочита́йте письмо́ ещё раз, пожа́луйста.
+        en_gb: Read the letter again, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я прочита́л э́ту кни́гу за неде́лю.
         en_gb: I read this book in a week.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -33885,6 +33945,9 @@ words:
     en_gb:
       standard: to ask (to put a question)
     usage:
+      - ru: Спра́шивай учи́теля, е́сли не зна́ешь.
+        en_gb: Ask the teacher if you don't know.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он спра́шивает, где нахо́дится вокза́л.
         en_gb: He is asking where the station is.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -34410,6 +34473,9 @@ words:
     en_gb:
       standard: to stand (to be upright)
     usage:
+      - ru: Стой здесь и жди меня́.
+        en_gb: Stand here and wait for me.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он стои́т у окна́.
         en_gb: He is standing by the window.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -37790,6 +37856,9 @@ words:
       past_n: учи́ло
       past_pl: учи́ли
     usage:
+      - ru: Учи́ но́вые слова́ ка́ждый день.
+        en_gb: Learn new words every day.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я учу́ стихотворе́ние наизу́сть.
         en_gb: I am learning the poem by heart.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -37821,6 +37890,9 @@ words:
     en_gb:
       standard: to study (to learn at a school)
     usage:
+      - ru: Учи́сь хорошо́ в шко́ле.
+        en_gb: Study well at school.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Где ты у́чишься?
         en_gb: Where do you study?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
@@ -38007,6 +38079,9 @@ words:
     en_gb:
       standard: to walk (to go on foot, habitually or in multiple directions)
     usage:
+      - ru: Ходи́ в парк ка́ждое у́тро.
+        en_gb: Go to the park every morning.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он хо́дит в спортза́л три ра́за в неде́лю.
         en_gb: He goes to the gym three times a week.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
