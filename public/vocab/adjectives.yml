@@ -9839,6 +9839,9 @@ words:
     en_gb:
       standard: young (not old)
     usage:
+      - ru: Все лю́бят молодо́го врача́.
+        en_gb: Everyone loves the young doctor.
+        inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: Они́ ещё совсе́м молоды́е.
         en_gb: They are still quite young.
       - ru: Э́то молодо́й врач.
@@ -11720,6 +11723,9 @@ words:
     en_gb:
       standard: new (recently made or bought)
     usage:
+      - ru: Мы встре́тили но́вого сосе́да.
+        en_gb: We met a new neighbour.
+        inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: У меня́ но́вый телефо́н.
         en_gb: I have a new phone.
       - ru: Мы купи́ли но́вую маши́ну.
@@ -19014,6 +19020,9 @@ words:
     en_gb:
       standard: old (not new, or aged)
     usage:
+      - ru: Я хорошо́ зна́ю ста́рого учи́теля.
+        en_gb: I know the old teacher well.
+        inflect: { token: 4, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: Э́то о́чень ста́рый дом.
         en_gb: This is a very old house.
       - ru: Она́ потеря́ла ста́рую кни́гу.
@@ -21651,6 +21660,12 @@ words:
       alt:
         - nice
     usage:
+      - ru: Я ви́жу хоро́шего дру́га.
+        en_gb: I see a good friend.
+        inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
+      - ru: Она́ зна́ет хоро́ших враче́й.
+        en_gb: She knows good doctors.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
       - ru: Он хоро́ший друг.
         en_gb: He is a good friend.
       - ru: Э́то хоро́шая иде́я.

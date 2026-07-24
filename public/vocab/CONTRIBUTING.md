@@ -441,7 +441,12 @@ owner, so its key is implicit:
 - **Nouns / pronouns:** `case` + `number`.
 - **Adjectives:** add `gender` (`m`/`n`/`f`/`pl`). Case-selection only works for
   forms with a distinctive ending (mainly feminine `-ая`/`-ую`), since most
-  adjective forms are syncretic.
+  adjective forms are syncretic. For the **animate accusative** — a masculine or
+  plural adjective agreeing with an animate noun, which copies the genitive form
+  (ви́жу хоро́шего дру́га) — annotate `case: acc` with `animate: true` and
+  `rule: adj-acc-animate`; the slot is still graded as the accusative, animacy
+  just selects the form. (The inflection **table** shows this as a derived
+  "Accusative (animate)" row automatically — no data needed.)
 - **Verbs:** `tense` (`present`/`future`/`past`/`imperative`) + `person`
   (`1sg 2sg 3sg 1pl 2pl 3pl`, `past_m/f/n/pl`, or `imp_sg`/`imp_pl` for the
   imperative). Verbs skip the case step — but a verb with a `pair:` link gets a

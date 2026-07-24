@@ -292,6 +292,21 @@ rules:
       masculine or any plural noun the accusative copies the genitive: ви́жу
       но́вого студе́нта, ста́рых друзе́й.
 
+  adj-acc-animate:
+    exception: true
+    title: "Accusative of adjectives with animate nouns = genitive"
+    formula: "animate acc = genitive (masc sg & all plural)"
+    explanation: >
+      When an adjective agrees with an animate noun (a person or animal), its
+      accusative copies the GENITIVE — for the masculine singular and for the
+      plural of every gender. Ви́жу хоро́шего дру́га (= gen хоро́шего), зна́ю но́вых
+      сосе́дей (= gen pl но́вых). The context — a direct object of a verb like
+      ви́деть or знать — tells you it is the accusative, even though the form
+      looks genitive.
+    exceptions:
+      - "Feminine singular is unchanged: -ую either way (ви́жу но́вую подру́гу)."
+      - "Neuter has no animate class; its accusative always equals the nominative."
+
   # ── Pronouns ────────────────────────────────────────────────────────────
   pronoun-personal:
     title: "Personal pronoun"

@@ -205,9 +205,10 @@ describe('buildParadigm — pronoun', () => {
   })
   it('builds the full case × gender/number grid when a declension block exists', () => {
     const p = buildParadigm(moyFull)
-    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
+    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'acc_anim', 'ins', 'pre'])
     expect(p.cols.map((c) => c.key)).toEqual(['m', 'n', 'f', 'pl'])
-    expect(p.cells).toHaveLength(24)
+    // 24 case×gender cells + the animate-accusative masc & plural.
+    expect(p.cells).toHaveLength(26)
     expect(isMultiColumn(p)).toBe(true)
     const fGen = p.cells.find((c) => c.row === 'gen' && c.col === 'f')
     expect(fGen.form).toBe('мое́й')
@@ -292,13 +293,22 @@ describe('buildParadigm — verb with an imperative', () => {
 
 describe('buildParadigm — adjective', () => {
   const p = buildParadigm(novyy)
-  it('builds the full case × gender/number grid', () => {
-    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
+  it('builds the full case × gender/number grid with the derived animate accusative', () => {
+    expect(p.rows.map((r) => r.key)).toEqual(['nom', 'gen', 'dat', 'acc', 'acc_anim', 'ins', 'pre'])
     expect(p.cols.map((c) => c.key)).toEqual(['m', 'n', 'f', 'pl'])
-    expect(p.cells).toHaveLength(24)
+    // 24 case×gender cells + the animate-accusative masc & plural (n/f pruned).
+    expect(p.cells).toHaveLength(26)
     expect(isMultiColumn(p)).toBe(true)
     expect(p.stem).toBe('нов')
     expect(p.lemma).toBe('но́вый') // accented masculine headword
+  })
+  it('derives the animate accusative (= genitive) for masculine and plural only', () => {
+    const animCells = p.cells.filter((c) => c.row === 'acc_anim')
+    expect(animCells.map((c) => c.col)).toEqual(['m', 'pl'])
+    expect(animCells.find((c) => c.col === 'm').form).toBe('но́вого')
+    expect(animCells.find((c) => c.col === 'pl').form).toBe('но́вых')
+    // The inanimate accusative stays the nominative form.
+    expect(p.cells.find((c) => c.row === 'acc' && c.col === 'm').form).toBe('но́вый')
   })
   it('places oblique forms and derives their endings', () => {
     const fGen = p.cells.find((c) => c.row === 'gen' && c.col === 'f')
@@ -398,9 +408,12 @@ describe('buildParadigms over the shipped vocabulary', () => {
       const p = buildParadigm(w)
       expect(p, w.key).not.toBeNull()
       expect(isMultiColumn(p), w.key).toBe(true)
-      expect(p.rows.map((r) => r.key), w.key).toEqual(['nom', 'gen', 'dat', 'acc', 'ins', 'pre'])
+      expect(p.rows.map((r) => r.key), w.key).toEqual([
+        'nom', 'gen', 'dat', 'acc', 'acc_anim', 'ins', 'pre',
+      ])
       expect(p.cols.map((c) => c.key), w.key).toEqual(['m', 'n', 'f', 'pl'])
-      expect(p.cells, w.key).toHaveLength(24)
+      // 24 case×gender cells + the derived animate-accusative masc & plural.
+      expect(p.cells, w.key).toHaveLength(26)
     }
   })
 })

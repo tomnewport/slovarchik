@@ -13,19 +13,33 @@ import {
   CASE_HINTS,
   CASE_NOTES,
   LOCATIVE,
+  ACC_ANIMATE,
   NUMBERS,
   NUMBER_LABELS,
   commonStem,
 } from './declension.js'
 
+const caseRow = (c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c], note: CASE_NOTES[c] })
+
 // Noun rows: the six core cases plus the optional second locative. The locative
 // row is pruned automatically for nouns that don't declare one (see assemble).
-const NOUN_ROWS = [...CASES, LOCATIVE].map((c) => ({
-  key: c,
-  label: CASE_LABELS[c],
-  sub: CASE_HINTS[c],
-  note: CASE_NOTES[c],
-}))
+const NOUN_ROWS = [...CASES, LOCATIVE].map(caseRow)
+
+// Adjective / adjective-like-pronoun rows: the six cases with a derived
+// animate-accusative row spliced in right after the accusative. Its masculine
+// and plural cells hold the genitive form (ви́жу хоро́шего дру́га); the neuter and
+// feminine cells are empty (unchanged by animacy) and get pruned by `assemble`.
+const ADJ_ROWS = [...CASES.slice(0, 4), ACC_ANIMATE, ...CASES.slice(4)].map(caseRow)
+
+/** Lookup over a `<gender>_<case>` declension map that derives the animate acc. */
+function adjLookup(decl) {
+  return (row, col) =>
+    row === ACC_ANIMATE
+      ? col === 'm' || col === 'pl'
+        ? decl[`${col}_gen`]
+        : null
+      : decl[`${col}_${row}`]
+}
 
 /**
  * Strip a parenthetical hint and collapse whitespace, e.g. "(о) столе́" → "столе́"
@@ -160,9 +174,9 @@ export function buildParadigm(word) {
       const raw = word.extra?.forms ?? {}
       if (decl && Object.keys(decl).length) {
         // Full case × gender/number grid: cases are rows, genders are columns.
-        // declension keys are "<gender>_<case>" (same layout as adjectives).
-        const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
-        paradigm = assemble(meta, rows, GENDER_COLS, (row, col) => decl[`${col}_${row}`])
+        // declension keys are "<gender>_<case>" (same layout as adjectives), with
+        // the derived animate-accusative row.
+        paradigm = assemble(meta, ADJ_ROWS, GENDER_COLS, adjLookup(decl))
       } else if (CASES.some((c) => raw[c] != null)) {
         const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
         paradigm = assemble(meta, rows, SINGLE_COL('Form'), (row) => raw[row])
@@ -197,10 +211,9 @@ export function buildParadigm(word) {
     case 'adjective': {
       const decl = word.extra?.declension
       if (decl && Object.keys(decl).length) {
-        // Full case × gender/number grid: cases are rows, genders are columns.
-        // declension keys are "<gender>_<case>".
-        const rows = CASES.map((c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c] }))
-        paradigm = assemble(meta, rows, GENDER_COLS, (row, col) => decl[`${col}_${row}`])
+        // Full case × gender/number grid: cases are rows, genders are columns
+        // ("<gender>_<case>"), with the derived animate-accusative row.
+        paradigm = assemble(meta, ADJ_ROWS, GENDER_COLS, adjLookup(decl))
       } else {
         // Fallback: just the nominative agreement forms (m / f / n / pl). The
         // comparative is excluded — it is a separate, often suppletive degree

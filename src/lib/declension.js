@@ -17,6 +17,16 @@ export const CASES = ['nom', 'gen', 'dat', 'acc', 'ins', 'pre']
 // the declension table can still surface it as an extra optional row.
 export const LOCATIVE = 'loc'
 
+// The animate accusative for adjectives and adjective-like pronouns. Like the
+// second locative it is *not* one of the six core CASES: it is a derived display
+// slot, not a stored form. For masculine singular and the plural, an adjective
+// agreeing with an animate noun takes its genitive form (ви́жу хоро́шего дру́га,
+// зна́ю но́вых сосе́дей) — feminine (-ую) and neuter (= nominative) don't change.
+// Nouns already store their animate accusative directly, so this pseudo-case is
+// adjective/pronoun-only; keeping it out of CASES leaves grading and the
+// six-case context drill untouched.
+export const ACC_ANIMATE = 'acc_anim'
+
 export const CASE_LABELS = {
   nom: 'Nominative',
   gen: 'Genitive',
@@ -25,6 +35,7 @@ export const CASE_LABELS = {
   ins: 'Instrumental',
   pre: 'Prepositional',
   loc: 'Locative',
+  acc_anim: 'Accusative (animate)',
 }
 
 /** Short hint of the question each case answers, handy for learners. */
@@ -36,11 +47,14 @@ export const CASE_HINTS = {
   ins: 'with / by whom / what',
   pre: 'about whom / what',
   loc: 'in / at — after в / на',
+  acc_anim: 'whom (animate object)',
 }
 
 /** Longer explanations, shown as a tooltip on the rare cases learners may not know. */
 export const CASE_NOTES = {
   loc: 'Locative (a second prepositional): the special “in/at” form some nouns take after в or на — в лесу́ “in the forest”, not в ле́се. It is spelled like the dative but stressed on the ending.',
+  acc_anim:
+    'Accusative with an animate noun: a masculine or plural adjective takes its genitive form when the noun is a person or animal — ви́жу хоро́шего дру́га, зна́ю но́вых сосе́дей. Feminine (-ую) and neuter (= nominative) are unchanged.',
 }
 
 export const NUMBERS = ['sg', 'pl']

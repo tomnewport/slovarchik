@@ -25,13 +25,19 @@ const phrases = shapeContextPhrases(words)
 /** The word's stored form for an annotated slot, or null if not found. */
 function storedForm(word, t) {
   if (t.case) {
-    if (word.pos === 'adjective') return word.extra?.declension?.[`${t.gender}_${t.case}`] ?? null
+    // An adjective/pronoun accusative agreeing with an animate noun takes the
+    // genitive form for masculine and plural (ви́жу хоро́шего дру́га).
+    const animAcc = t.animate && t.case === 'acc' && (t.gender === 'm' || t.gender === 'pl')
+    if (word.pos === 'adjective') {
+      const col = animAcc ? `${t.gender}_gen` : `${t.gender}_${t.case}`
+      return word.extra?.declension?.[col] ?? null
+    }
     if (word.pos === 'pronoun') {
       // Pronoun forms live on the raw entry (`extra`): gendered possessives /
       // demonstratives decline like adjectives (declension[gender_case]); the
       // personal, reflexive and interrogative pronouns are flat by case.
       const ex = word.extra ?? {}
-      if (t.gender) return ex.declension?.[`${t.gender}_${t.case}`] ?? null
+      if (t.gender) return ex.declension?.[animAcc ? `${t.gender}_gen` : `${t.gender}_${t.case}`] ?? null
       return ex.forms?.[t.case] ?? null
     }
     return word.forms?.[t.number]?.[t.case] ?? null // noun
