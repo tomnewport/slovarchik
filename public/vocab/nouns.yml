@@ -2886,6 +2886,35 @@ words:
       - ru: Прости́те за беспоко́йство.
         en_gb: Sorry for the trouble.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+  "беспорядок=mess":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: mess (an untidy state; disorder)
+      alt:
+        - disorder
+    usage:
+      - ru: Убери́ беспоря́док на столе́!
+        en_gb: Clear up the mess on the table!
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ уста́ла от беспоря́дка.
+        en_gb: She's tired of the mess.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В э́том беспоря́дке ничего́ не найти́.
+        en_gb: You can't find anything in this mess.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: беспоря́док
+      sg_gen: беспоря́дка
+      sg_dat: беспоря́дку
+      sg_acc: беспоря́док
+      sg_ins: беспоря́дком
+      sg_pre: беспоря́дке
   "бетон=concrete":
     cefr_level: B2
     gender: m
@@ -4491,6 +4520,36 @@ words:
           - There is a small piece of paper on the table.
       - ru: Она́ вы́бросила ста́рые бума́жки.
         en_gb: She threw away the old scraps of paper.
+  "бунгало=bungalow":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - travel
+    en_gb:
+      standard: bungalow (a single-storey house; indeclinable)
+    usage:
+      - ru: Они́ сня́ли бунга́ло на берегу́ мо́ря.
+        en_gb: They rented a bungalow by the sea.
+      - ru: В бунга́ло всего́ две ко́мнаты.
+        en_gb: The bungalow has just two rooms.
+      - ru: Ты когда́-нибудь жил в бунга́ло?
+        en_gb: Have you ever lived in a bungalow?
+    declension:
+      sg_nom: бунга́ло
+      sg_gen: бунга́ло
+      sg_dat: бунга́ло
+      sg_acc: бунга́ло
+      sg_ins: бунга́ло
+      sg_pre: бунга́ло
+      pl_nom: бунга́ло
+      pl_gen: бунга́ло
+      pl_dat: бунга́ло
+      pl_acc: бунга́ло
+      pl_ins: бунга́ло
+      pl_pre: бунга́ло
   "бутерброд=sandwich":
     cefr_level: A2
     gender: m
@@ -4763,6 +4822,41 @@ words:
       pl_acc: валю́ты
       pl_ins: валю́тами
       pl_pre: валю́тах
+  "ванна=bath":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
+    en_gb:
+      standard: bath (the tub you bathe in)
+      alt:
+        - bathtub
+    usage:
+      - ru: Она́ принима́ет горя́чую ва́нну.
+        en_gb: She's taking a hot bath.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В ва́нне мно́го воды́.
+        en_gb: There's a lot of water in the bath.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Она́ вы́шла из ва́нны.
+        en_gb: She got out of the bath.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ва́нна
+      sg_gen: ва́нны
+      sg_dat: ва́нне
+      sg_acc: ва́нну
+      sg_ins: ва́нной
+      sg_pre: ва́нне
+      pl_nom: ва́нны
+      pl_gen: ванн
+      pl_dat: ва́ннам
+      pl_acc: ва́нны
+      pl_ins: ва́ннами
+      pl_pre: ва́ннах
   "ванная=bathroom":
     cefr_level: A1
     gender: f
@@ -5108,6 +5202,38 @@ words:
       sg_acc: ве́ру
       sg_ins: ве́рой
       sg_pre: ве́ре
+  "веранда=veranda":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: veranda (a roofed open porch along a house)
+    usage:
+      - ru: Мы пьём чай на вера́нде.
+        en_gb: We drink tea on the veranda.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Они́ постро́или большу́ю вера́нду.
+        en_gb: They built a big veranda.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: С вера́нды открыва́ется краси́вый вид.
+        en_gb: A beautiful view opens up from the veranda.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: вера́нда
+      sg_gen: вера́нды
+      sg_dat: вера́нде
+      sg_acc: вера́нду
+      sg_ins: вера́ндой
+      sg_pre: вера́нде
+      pl_nom: вера́нды
+      pl_gen: вера́нд
+      pl_dat: вера́ндам
+      pl_acc: вера́нды
+      pl_ins: вера́ндами
+      pl_pre: вера́ндах
   "верблюд=camel":
     cefr_level: B1
     gender: m
@@ -5524,6 +5650,32 @@ words:
       pl_acc: ве́тки
       pl_ins: ве́тками
       pl_pre: ве́тках
+  "ветчина=ham":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: ham (cured meat from a pig's leg)
+    usage:
+      - ru: Я купи́л ветчину́ в магази́не.
+        en_gb: I bought ham at the shop.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Сде́лай бутербро́д с ветчино́й.
+        en_gb: Make a sandwich with ham.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В холоди́льнике нет ветчины́.
+        en_gb: There's no ham in the fridge.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ветчина́
+      sg_gen: ветчины́
+      sg_dat: ветчине́
+      sg_acc: ветчину́
+      sg_ins: ветчино́й
+      sg_pre: ветчине́
   "вечер=evening":
     cefr_level: A1
     gender: m
@@ -9488,6 +9640,40 @@ words:
       - ru: Сла́ва Го́споду за э́тот день.
         en_gb: Glory to the Lord for this day.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
+  "гостиная=living room":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: living room (the main room for relaxing and guests)
+      alt:
+        - sitting room
+    usage:
+      - ru: Го́сти собра́лись в гости́ной.
+        en_gb: The guests gathered in the living room.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы купи́ли ди́ван в гости́ную.
+        en_gb: We bought a sofa for the living room.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Окно́ гости́ной выхо́дит в сад.
+        en_gb: The living room window looks onto the garden.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: гости́ная
+      sg_gen: гости́ной
+      sg_dat: гости́ной
+      sg_acc: гости́ную
+      sg_ins: гости́ной
+      sg_pre: гости́ной
+      pl_nom: гости́ные
+      pl_gen: гости́ных
+      pl_dat: гости́ным
+      pl_acc: гости́ные
+      pl_ins: гости́ными
+      pl_pre: гости́ных
   "гостиница=hotel":
     cefr_level: A2
     gender: f
@@ -11449,6 +11635,41 @@ words:
       pl_acc: дете́й
       pl_ins: детьми́
       pl_pre: де́тях
+  "детская=nursery":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+      - family
+    en_gb:
+      standard: nursery (a child's bedroom or playroom)
+      alt:
+        - children's room
+    usage:
+      - ru: Де́ти игра́ют в де́тской.
+        en_gb: The children are playing in the nursery.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы покра́сили де́тскую в жёлтый цвет.
+        en_gb: We painted the nursery yellow.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Роди́тели вы́шли из де́тской.
+        en_gb: The parents left the nursery.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: де́тская
+      sg_gen: де́тской
+      sg_dat: де́тской
+      sg_acc: де́тскую
+      sg_ins: де́тской
+      sg_pre: де́тской
+      pl_nom: де́тские
+      pl_gen: де́тских
+      pl_dat: де́тским
+      pl_acc: де́тские
+      pl_ins: де́тскими
+      pl_pre: де́тских
   "детство=childhood":
     cefr_level: B1
     gender: n
@@ -15595,6 +15816,29 @@ words:
       sg_acc: здоро́вье
       sg_ins: здоро́вьем
       sg_pre: здоро́вье
+  "зелёный горошек=green peas":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: green peas (small round green vegetables)
+    usage:
+      - ru: Я доба́вил в сала́т зелёный горо́шек.
+        en_gb: I added green peas to the salad.
+      - ru: Ты лю́бишь зелёный горо́шек?
+        en_gb: Do you like green peas?
+      - ru: В су́пе был зелёный горо́шек.
+        en_gb: There were green peas in the soup.
+    declension:
+      sg_nom: зелёный горо́шек
+      sg_gen: зелёного горо́шка
+      sg_dat: зелёному горо́шку
+      sg_acc: зелёный горо́шек
+      sg_ins: зелёным горо́шком
+      sg_pre: зелёном горо́шке
   "земля=earth":
     cefr_level: A1
     gender: f
@@ -17584,6 +17828,38 @@ words:
       pl_acc: ито́ги
       pl_ins: ито́гами
       pl_pre: ито́гах
+  "йогурт=yoghurt":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: yoghurt (a thick fermented milk food)
+    usage:
+      - ru: На за́втрак я ем йо́гурт.
+        en_gb: For breakfast I eat yoghurt.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В э́том йо́гурте нет са́хара.
+        en_gb: There's no sugar in this yoghurt.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Я купи́л два йо́гурта.
+        en_gb: I bought two yoghurts.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: йо́гурт
+      sg_gen: йо́гурта
+      sg_dat: йо́гурту
+      sg_acc: йо́гурт
+      sg_ins: йо́гуртом
+      sg_pre: йо́гурте
+      pl_nom: йо́гурты
+      pl_gen: йо́гуртов
+      pl_dat: йо́гуртам
+      pl_acc: йо́гурты
+      pl_ins: йо́гуртами
+      pl_pre: йо́гуртах
   "кабан=boar":
     cefr_level: B2
     gender: m
@@ -17904,6 +18180,38 @@ words:
       pl_acc: ка́меры
       pl_ins: ка́мерами
       pl_pre: ка́мерах
+  "камин=fireplace":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: fireplace (a place in a wall where a fire burns)
+    usage:
+      - ru: В ками́не гори́т ого́нь.
+        en_gb: A fire is burning in the fireplace.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы поста́вили кре́сло у ками́на.
+        en_gb: We put an armchair by the fireplace.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он подошёл к ками́ну.
+        en_gb: He came up to the fireplace.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    declension:
+      sg_nom: ками́н
+      sg_gen: ками́на
+      sg_dat: ками́ну
+      sg_acc: ками́н
+      sg_ins: ками́ном
+      sg_pre: ками́не
+      pl_nom: ками́ны
+      pl_gen: ками́нов
+      pl_dat: ками́нам
+      pl_acc: ками́ны
+      pl_ins: ками́нами
+      pl_pre: ками́нах
   "Канада=Canada":
     cefr_level: A2
     gender: f
@@ -19056,6 +19364,29 @@ words:
       pl_acc: кирпичи́
       pl_ins: кирпича́ми
       pl_pre: кирпича́х
+  "кислая капуста=sauerkraut":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: sauerkraut (fermented sour cabbage)
+    usage:
+      - ru: Я о́чень люблю́ ки́слую капу́сту.
+        en_gb: I really love sauerkraut.
+      - ru: Ки́слая капу́ста поле́зна для здоро́вья.
+        en_gb: Sauerkraut is good for your health.
+      - ru: Она́ подала́ мя́со с ки́слой капу́стой.
+        en_gb: She served meat with sauerkraut.
+    declension:
+      sg_nom: ки́слая капу́ста
+      sg_gen: ки́слой капу́сты
+      sg_dat: ки́слой капу́сте
+      sg_acc: ки́слую капу́сту
+      sg_ins: ки́слой капу́стой
+      sg_pre: ки́слой капу́сте
   "кислород=oxygen":
     cefr_level: B2
     gender: m
@@ -20672,6 +21003,38 @@ words:
       pl_acc: ко́мнаты
       pl_ins: ко́мнатами
       pl_pre: ко́мнатах
+  "комод=chest of drawers":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: chest of drawers (a piece of furniture with drawers)
+    usage:
+      - ru: Я убра́л оде́жду в комо́д.
+        en_gb: I put the clothes away in the chest of drawers.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В комо́де лежа́т ве́щи.
+        en_gb: There are things in the chest of drawers.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Над комо́дом виси́т зе́ркало.
+        en_gb: A mirror hangs above the chest of drawers.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: комо́д
+      sg_gen: комо́да
+      sg_dat: комо́ду
+      sg_acc: комо́д
+      sg_ins: комо́дом
+      sg_pre: комо́де
+      pl_nom: комо́ды
+      pl_gen: комо́дов
+      pl_dat: комо́дам
+      pl_acc: комо́ды
+      pl_ins: комо́дами
+      pl_pre: комо́дах
   "компания=company":
     cefr_level: A2
     gender: f
@@ -22698,6 +23061,38 @@ words:
       pl_acc: кро́ликов
       pl_ins: кро́ликами
       pl_pre: кро́ликах
+  "круассан=croissant":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: croissant (a flaky crescent-shaped pastry)
+    usage:
+      - ru: Она́ съе́ла круасса́н с ко́фе.
+        en_gb: She ate a croissant with coffee.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я хочу́ два круасса́на.
+        en_gb: I want two croissants.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ купи́ла све́жих круасса́нов.
+        en_gb: She bought some fresh croissants.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: круасса́н
+      sg_gen: круасса́на
+      sg_dat: круасса́ну
+      sg_acc: круасса́н
+      sg_ins: круасса́ном
+      sg_pre: круасса́не
+      pl_nom: круасса́ны
+      pl_gen: круасса́нов
+      pl_dat: круасса́нам
+      pl_acc: круасса́ны
+      pl_ins: круасса́нами
+      pl_pre: круасса́нах
   "круг=circle":
     cefr_level: A2
     gender: m
@@ -23849,6 +24244,32 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У медве́дя больши́е ла́пы.
         en_gb: The bear has big paws.
+  "лапша=noodles":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: noodles (long thin strips of pasta)
+    usage:
+      - ru: Я пригото́вил вку́сную лапшу́.
+        en_gb: I made tasty noodles.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В су́пе мно́го лапши́.
+        en_gb: There are lots of noodles in the soup.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В лапше́ мно́го со́ли.
+        en_gb: There's a lot of salt in the noodles.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: лапша́
+      sg_gen: лапши́
+      sg_dat: лапше́
+      sg_acc: лапшу́
+      sg_ins: лапшо́й
+      sg_pre: лапше́
   "ласточка=swallow":
     cefr_level: B1
     gender: f
@@ -25340,6 +25761,38 @@ words:
       pl_acc: лю́ки
       pl_ins: лю́ками
       pl_pre: лю́ках
+  "люстра=chandelier":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: chandelier (a hanging light with several bulbs)
+    usage:
+      - ru: Мы купи́ли но́вую лю́стру.
+        en_gb: We bought a new chandelier.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Под лю́строй стои́т кру́глый стол.
+        en_gb: A round table stands under the chandelier.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: На лю́стре мно́го пы́ли.
+        en_gb: There's a lot of dust on the chandelier.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: лю́стра
+      sg_gen: лю́стры
+      sg_dat: лю́стре
+      sg_acc: лю́стру
+      sg_ins: лю́строй
+      sg_pre: лю́стре
+      pl_nom: лю́стры
+      pl_gen: люстр
+      pl_dat: лю́страм
+      pl_acc: лю́стры
+      pl_ins: лю́страми
+      pl_pre: лю́страх
   "лягушка=frog":
     cefr_level: B1
     gender: f
@@ -25445,6 +25898,32 @@ words:
       pl_acc: ма́йки
       pl_ins: ма́йками
       pl_pre: ма́йках
+  "майонез=mayonnaise":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: mayonnaise (a thick cold sauce of egg and oil)
+    usage:
+      - ru: Доба́вь в сала́т немно́го майоне́за.
+        en_gb: Add a little mayonnaise to the salad.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я не люблю́ майоне́з.
+        en_gb: I don't like mayonnaise.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́тот сала́т с майоне́зом.
+        en_gb: This salad has mayonnaise in it.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: майоне́з
+      sg_gen: майоне́за
+      sg_dat: майоне́зу
+      sg_acc: майоне́з
+      sg_ins: майоне́зом
+      sg_pre: майоне́зе
   "майор=major":
     cefr_level: B1
     gender: m
@@ -25839,6 +26318,38 @@ words:
       pl_acc: маскара́ды
       pl_ins: маскара́дами
       pl_pre: маскара́дах
+  "маслина=black olive":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: black olive (a ripe dark olive)
+    usage:
+      - ru: Я люблю́ чёрные масли́ны.
+        en_gb: I love black olives.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В сала́те мно́го масли́н.
+        en_gb: There are lots of olives in the salad.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Сала́т с масли́нами о́чень вку́сный.
+        en_gb: The salad with olives is very tasty.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
+    declension:
+      sg_nom: масли́на
+      sg_gen: масли́ны
+      sg_dat: масли́не
+      sg_acc: масли́ну
+      sg_ins: масли́ной
+      sg_pre: масли́не
+      pl_nom: масли́ны
+      pl_gen: масли́н
+      pl_dat: масли́нам
+      pl_acc: масли́ны
+      pl_ins: масли́нами
+      pl_pre: масли́нах
   "масло=butter":
     cefr_level: A2
     gender: n
@@ -28252,6 +28763,38 @@ words:
       pl_acc: моря́
       pl_ins: моря́ми
       pl_pre: моря́х
+  "морепродукт=seafood":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: seafood (edible sea creatures, usually plural)
+    usage:
+      - ru: Я о́чень люблю́ морепроду́кты.
+        en_gb: I really love seafood.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В э́том рестора́не мно́го морепроду́ктов.
+        en_gb: There's a lot of seafood in this restaurant.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Сала́т с морепроду́ктами о́чень вку́сный.
+        en_gb: The seafood salad is very tasty.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
+    declension:
+      sg_nom: морепроду́кт
+      sg_gen: морепроду́кта
+      sg_dat: морепроду́кту
+      sg_acc: морепроду́кт
+      sg_ins: морепроду́ктом
+      sg_pre: морепроду́кте
+      pl_nom: морепроду́кты
+      pl_gen: морепроду́ктов
+      pl_dat: морепроду́ктам
+      pl_acc: морепроду́кты
+      pl_ins: морепроду́ктами
+      pl_pre: морепроду́ктах
   "морковь=carrot":
     cefr_level: A2
     gender: f
@@ -31661,6 +32204,34 @@ words:
       pl_acc: о́вощи
       pl_ins: овоща́ми
       pl_pre: овоща́х
+  "овсянка=porridge":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: porridge (hot oat cereal)
+      alt:
+        - oatmeal
+    usage:
+      - ru: На за́втрак она́ ест овся́нку.
+        en_gb: For breakfast she eats porridge.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он не лю́бит вкус овся́нки.
+        en_gb: He doesn't like the taste of porridge.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В овся́нке есть я́годы.
+        en_gb: There are berries in the porridge.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: овся́нка
+      sg_gen: овся́нки
+      sg_dat: овся́нке
+      sg_acc: овся́нку
+      sg_ins: овся́нкой
+      sg_pre: овся́нке
   "овца=sheep":
     cefr_level: B1
     gender: f
@@ -32217,6 +32788,38 @@ words:
       pl_acc: оле́ней
       pl_ins: оле́нями
       pl_pre: оле́нях
+  "оливка=green olive":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: green olive (an unripe green olive)
+    usage:
+      - ru: Он доба́вил в пи́ццу оли́вки.
+        en_gb: He added olives to the pizza.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Купи́ ба́нку оли́вок.
+        en_gb: Buy a jar of olives.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-genpl-fleeting }
+      - ru: Сала́т с оли́вками о́чень вку́сный.
+        en_gb: The salad with olives is very tasty.
+        inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
+    declension:
+      sg_nom: оли́вка
+      sg_gen: оли́вки
+      sg_dat: оли́вке
+      sg_acc: оли́вку
+      sg_ins: оли́вкой
+      sg_pre: оли́вке
+      pl_nom: оли́вки
+      pl_gen: оли́вок
+      pl_dat: оли́вкам
+      pl_acc: оли́вки
+      pl_ins: оли́вками
+      pl_pre: оли́вках
   "опасность=danger":
     cefr_level: B1
     gender: f
@@ -34793,6 +35396,32 @@ words:
       pl_acc: пассажи́ров
       pl_ins: пассажи́рами
       pl_pre: пассажи́рах
+  "паста=pasta":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pasta (an Italian food made from dough)
+    usage:
+      - ru: На у́жин я пригото́вил па́сту.
+        en_gb: For dinner I made pasta.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он съел таре́лку па́сты.
+        en_gb: He ate a plate of pasta.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В па́сте мно́го со́уса.
+        en_gb: There's a lot of sauce in the pasta.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: па́ста
+      sg_gen: па́сты
+      sg_dat: па́сте
+      sg_acc: па́сту
+      sg_ins: па́стой
+      sg_pre: па́сте
   "пастух=shepherd":
     cefr_level: B1
     gender: m
@@ -36024,6 +36653,40 @@ words:
       pl_acc: пироги́
       pl_ins: пирога́ми
       pl_pre: пирога́х
+  "пирожок=pie":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pie (a small filled pastry)
+      alt:
+        - pasty
+    usage:
+      - ru: Ба́бушка испекла́ пирожки́.
+        en_gb: Grandma baked some pies.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он съел пирожо́к с капу́стой.
+        en_gb: He ate a cabbage pasty.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ купи́ла де́сять пирожко́в.
+        en_gb: She bought ten pies.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: пирожо́к
+      sg_gen: пирожка́
+      sg_dat: пирожку́
+      sg_acc: пирожо́к
+      sg_ins: пирожко́м
+      sg_pre: пирожке́
+      pl_nom: пирожки́
+      pl_gen: пирожко́в
+      pl_dat: пирожка́м
+      pl_acc: пирожки́
+      pl_ins: пирожка́ми
+      pl_pre: пирожка́х
   "писатель=writer":
     cefr_level: A2
     gender: m
@@ -43731,6 +44394,39 @@ words:
         en_gb: The bricklayer was mixing the mortar.
       - ru: В буты́лках бы́ли ра́зные раство́ры.
         en_gb: There were different solutions in the bottles.
+  "растение=plant":
+    cefr_level: A1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - nature
+      - in the garden
+    en_gb:
+      standard: plant (a living thing that grows in soil)
+    usage:
+      - ru: Я купи́л но́вое расте́ние.
+        en_gb: I bought a new plant.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На э́том расте́нии появи́лись цветы́.
+        en_gb: Flowers have appeared on this plant.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: В на́шем до́ме мно́го расте́ний.
+        en_gb: There are many plants in our house.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: расте́ние
+      sg_gen: расте́ния
+      sg_dat: расте́нию
+      sg_acc: расте́ние
+      sg_ins: расте́нием
+      sg_pre: расте́нии
+      pl_nom: расте́ния
+      pl_gen: расте́ний
+      pl_dat: расте́ниям
+      pl_acc: расте́ния
+      pl_ins: расте́ниями
+      pl_pre: расте́ниях
   "расход=expense":
     cefr_level: B2
     gender: m
@@ -49497,6 +50193,30 @@ words:
       pl_acc: солда́т
       pl_ins: солда́тами
       pl_pre: солда́тах
+  "солёные огурцы=pickled cucumbers":
+    cefr_level: A1
+    animacy: i
+    number: ["pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pickled cucumbers (cucumbers preserved in brine)
+      alt:
+        - gherkins
+    usage:
+      - ru: Ба́бушка сама́ де́лает солёные огурцы́.
+        en_gb: Grandma makes pickled cucumbers herself.
+      - ru: Я люблю́ солёные огурцы́ с карто́шкой.
+        en_gb: I love pickled cucumbers with potatoes.
+      - ru: В ба́нке ещё есть солёные огурцы́.
+        en_gb: There are still pickled cucumbers in the jar.
+    declension:
+      pl_nom: солёные огурцы́
+      pl_gen: солёных огурцо́в
+      pl_dat: солёным огурца́м
+      pl_acc: солёные огурцы́
+      pl_ins: солёными огурца́ми
+      pl_pre: солёных огурца́х
   "солнце=sun":
     cefr_level: A1
     gender: n
@@ -49853,6 +50573,40 @@ words:
       pl_acc: сосе́док
       pl_ins: сосе́дками
       pl_pre: сосе́дках
+  "сосиска=sausage":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: sausage (a boiled frankfurter-style sausage)
+      alt:
+        - frankfurter
+    usage:
+      - ru: Де́ти лю́бят соси́ски.
+        en_gb: Children love sausages.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он съел соси́ску на за́втрак.
+        en_gb: He ate a sausage for breakfast.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В холоди́льнике нет соси́сок.
+        en_gb: There are no sausages in the fridge.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-genpl-fleeting }
+    declension:
+      sg_nom: соси́ска
+      sg_gen: соси́ски
+      sg_dat: соси́ске
+      sg_acc: соси́ску
+      sg_ins: соси́ской
+      sg_pre: соси́ске
+      pl_nom: соси́ски
+      pl_gen: соси́сок
+      pl_dat: соси́скам
+      pl_acc: соси́ски
+      pl_ins: соси́сками
+      pl_pre: соси́сках
   "сосна=pine tree":
     cefr_level: A2
     gender: f
@@ -51572,6 +52326,40 @@ words:
       pl_acc: столи́цы
       pl_ins: столи́цами
       pl_pre: столи́цах
+  "столовая=dining room":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - home
+    en_gb:
+      standard: dining room (a room for eating meals)
+      alt:
+        - canteen
+    usage:
+      - ru: Вся семья́ собира́ется в столо́вой.
+        en_gb: The whole family gathers in the dining room.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы поста́вили большо́й стол в столо́вую.
+        en_gb: We put a big table in the dining room.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: О́кна столо́вой выхо́дят на у́лицу.
+        en_gb: The dining room windows face the street.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: столо́вая
+      sg_gen: столо́вой
+      sg_dat: столо́вой
+      sg_acc: столо́вую
+      sg_ins: столо́вой
+      sg_pre: столо́вой
+      pl_nom: столо́вые
+      pl_gen: столо́вых
+      pl_dat: столо́вым
+      pl_acc: столо́вые
+      pl_ins: столо́выми
+      pl_pre: столо́вых
   "сторона=side":
     cefr_level: B1
     gender: f
@@ -53024,6 +53812,40 @@ words:
       pl_acc: сыры́
       pl_ins: сыра́ми
       pl_pre: сыра́х
+  "сырник=curd fritter":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: curd fritter (a fried quark pancake, syrniki)
+      alt:
+        - syrnik
+    usage:
+      - ru: На за́втрак мы е́ли сы́рники.
+        en_gb: For breakfast we ate syrniki.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он попроси́л ещё сы́рников.
+        en_gb: He asked for more syrniki.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он съел оди́н сы́рник.
+        en_gb: He ate one syrnik.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: сы́рник
+      sg_gen: сы́рника
+      sg_dat: сы́рнику
+      sg_acc: сы́рник
+      sg_ins: сы́рником
+      sg_pre: сы́рнике
+      pl_nom: сы́рники
+      pl_gen: сы́рников
+      pl_dat: сы́рникам
+      pl_acc: сы́рники
+      pl_ins: сы́рниками
+      pl_pre: сы́рниках
   "сэр=sir":
     cefr_level: B1
     gender: m
@@ -60418,6 +61240,41 @@ words:
       pl_acc: швейца́рок
       pl_ins: швейца́рками
       pl_pre: швейца́рках
+  "шезлонг=deckchair":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - travel
+      - in the garden
+    en_gb:
+      standard: deckchair (a folding chair for relaxing outdoors)
+      alt:
+        - sun lounger
+    usage:
+      - ru: Он лежи́т в шезло́нге у бассе́йна.
+        en_gb: He's lying in a deckchair by the pool.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он купи́л но́вый шезло́нг.
+        en_gb: He bought a new deckchair.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На пля́же мно́го шезло́нгов.
+        en_gb: There are many deckchairs on the beach.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: шезло́нг
+      sg_gen: шезло́нга
+      sg_dat: шезло́нгу
+      sg_acc: шезло́нг
+      sg_ins: шезло́нгом
+      sg_pre: шезло́нге
+      pl_nom: шезло́нги
+      pl_gen: шезло́нгов
+      pl_dat: шезло́нгам
+      pl_acc: шезло́нги
+      pl_ins: шезло́нгами
+      pl_pre: шезло́нгах
   "шёлк=silk":
     cefr_level: B2
     gender: m
