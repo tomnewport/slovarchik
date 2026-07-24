@@ -226,6 +226,14 @@ onUnmounted(() => {
 
     <!-- Right words, different order: ask the learner to self-check meaning. -->
     <div v-if="needsConfirm" class="confirm">
+      <!-- The learner can only judge whether their order still fits when they can
+           see the sentence they were translating. In listen mode it was only
+           heard, so reveal it now (with audio) — otherwise there's nothing to
+           check the reordering against (#408). -->
+      <p v-if="exercise.audio" class="confirm-source" lang="ru">
+        {{ exercise.ru }}
+        <SpeakButton :text="exercise.ru" />
+      </p>
       <p class="confirm-q">
         Same words, different order. Does your translation mean the same thing?
       </p>
@@ -306,6 +314,13 @@ onUnmounted(() => {
 .confirm {
   display: grid;
   gap: 0.6rem;
+}
+.confirm-source {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
 }
 .confirm-q {
   margin: 0;
