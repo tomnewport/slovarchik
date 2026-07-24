@@ -218,6 +218,29 @@ export function buildParadigm(word) {
   return paradigm.cells.length >= 3 ? paradigm : null
 }
 
+/**
+ * Build the short-form (predicate) paradigm for an adjective, or null if it
+ * carries no `short:` block. Short forms agree by gender/number only (m/f/n/pl),
+ * so this is a single-column agreement table — the same shape as the personal
+ * pronouns — and drills identically. It is a *separate* paradigm from the full
+ * case × gender declension: a short-only word (рад, до́лжен) has only this one.
+ */
+export function buildShortParadigm(word) {
+  if (word.pos !== 'adjective' || !word.short) return null
+  const meta = {
+    key: `${word.key}#short`,
+    pos: word.pos,
+    lemma: word.headword || word.ru,
+    en: word.meaning || word.en,
+    cefr: word.cefr ?? null,
+    variant: 'short',
+    variantLabel: 'Short form',
+    word,
+  }
+  const paradigm = assemble(meta, GENDER_FORMS, SINGLE_COL('Short form'), (row) => word.short[row])
+  return paradigm.cells.length >= 3 ? paradigm : null
+}
+
 /** Build every usable paradigm of a given part of speech. */
 export function buildParadigms(words, pos) {
   const out = []
@@ -225,6 +248,9 @@ export function buildParadigms(words, pos) {
     if (word.pos !== pos) continue
     const paradigm = buildParadigm(word)
     if (paradigm) out.push(paradigm)
+    // Adjectives with a short-form block contribute an extra short-form table.
+    const short = buildShortParadigm(word)
+    if (short) out.push(short)
   }
   return out
 }

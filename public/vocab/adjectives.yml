@@ -3386,6 +3386,11 @@ words:
       f: гото́вая
       n: гото́вое
       pl: гото́вые
+    short:
+      m: гото́в
+      f: гото́ва
+      n: гото́во
+      pl: гото́вы
     declension:
       m_nom: гото́вый
       m_gen: гото́вого
@@ -4514,6 +4519,27 @@ words:
         inflect: { token: 2, case: gen, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вели́ до́лгие бесе́ды.
         en_gb: We had long conversations.
+  "должен=must":
+    cefr_level: A1
+    accented: до́лжен
+    en_gb:
+      standard: must (be obliged to do something; short-form only, takes an infinitive)
+      alt:
+        - have to
+    collections:
+      - communication
+    short:
+      m: до́лжен
+      f: должна́
+      n: должно́
+      pl: должны́
+    usage:
+      - ru: Я до́лжен идти́ домо́й.
+        en_gb: I must go home.
+      - ru: Она́ должна́ рабо́тать за́втра.
+        en_gb: She has to work tomorrow.
+      - ru: Мы должны́ помога́ть друг дру́гу.
+        en_gb: We must help each other.
   "должный=proper":
     cefr_level: B1
     accented: до́лжный
@@ -6198,6 +6224,11 @@ words:
       f: за́нятая
       n: за́нятое
       pl: за́нятые
+    short:
+      m: за́нят
+      f: занята́
+      n: за́нято
+      pl: за́няты
     declension:
       m_nom: за́нятый
       m_gen: за́нятого
@@ -11324,6 +11355,11 @@ words:
       f: ну́жная
       n: ну́жное
       pl: ну́жные
+    short:
+      m: ну́жен
+      f: нужна́
+      n: ну́жно
+      pl: нужны́
     declension:
       m_nom: ну́жный
       m_gen: ну́жного
@@ -14890,6 +14926,25 @@ words:
       pl_acc: ра́вные
       pl_ins: ра́вными
       pl_pre: ра́вных
+  "рад=glad":
+    cefr_level: A1
+    accented: рад
+    en_gb:
+      standard: glad (pleased about something; short-form only, takes the dative)
+    collections:
+      - feelings and sensations
+    short:
+      m: рад
+      f: ра́да
+      n: ра́до
+      pl: ра́ды
+    usage:
+      - ru: Я о́чень рад тебя́ ви́деть.
+        en_gb: I am very glad to see you.
+      - ru: Она́ ра́да но́вому пода́рку.
+        en_gb: She is glad about the new present.
+      - ru: Мы ра́ды, что вы пришли́.
+        en_gb: We are glad that you came.
   "радостный=joyful":
     cefr_level: B1
     accented: ра́достный
@@ -15823,6 +15878,11 @@ words:
       f: свобо́дная
       n: свобо́дное
       pl: свобо́дные
+    short:
+      m: свобо́ден
+      f: свобо́дна
+      n: свобо́дно
+      pl: свобо́дны
       comparative: свобо́днее
     declension:
       m_nom: свобо́дный

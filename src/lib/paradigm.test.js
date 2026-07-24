@@ -7,6 +7,7 @@ import { buildWords } from './vocabBuild.js'
 import {
   buildParadigm,
   buildParadigms,
+  buildShortParadigm,
   cleanForm,
   endingOf,
   matchingCells,
@@ -365,6 +366,29 @@ describe('buildParadigms over the shipped vocabulary', () => {
     for (const p of paradigms) expect(p.cells.length).toBeGreaterThanOrEqual(3)
   })
 
+  it('ships short-form adjective paradigms and keeps every short: block complete', () => {
+    // Every adjective carrying a `short:` block must yield a 4-cell (m/f/n/pl)
+    // short-form paradigm, with a distinct key so it drills separately from the
+    // full declension.
+    const shortWords = words.filter((w) => w.pos === 'adjective' && w.short)
+    expect(shortWords.length).toBeGreaterThanOrEqual(6)
+    for (const w of shortWords) {
+      for (const g of ['m', 'f', 'n', 'pl']) {
+        expect(typeof w.short[g], `${w.key}.${g}`).toBe('string')
+        expect(w.short[g].length, `${w.key}.${g}`).toBeGreaterThan(0)
+      }
+      const sp = buildShortParadigm(w)
+      expect(sp, w.key).not.toBeNull()
+      expect(sp.variant, w.key).toBe('short')
+      expect(sp.key, w.key).toBe(`${w.key}#short`)
+      expect(sp.cols, w.key).toHaveLength(1)
+      expect(sp.cells.map((c) => c.row), w.key).toEqual(['m', 'f', 'n', 'pl'])
+    }
+    // The short paradigms show up in the adjective rotation alongside declensions.
+    const adjParadigms = buildParadigms(words, 'adjective')
+    expect(adjParadigms.filter((p) => p.variant === 'short').length).toBe(shortWords.length)
+  })
+
   it('drills the adjective-like pronouns as a full case × gender grid', () => {
     // Pronouns that agree by gender (мой, этот, какой, …) now ship a declension
     // block, so their paradigm has both axes — cases as rows, genders as columns.
@@ -378,5 +402,48 @@ describe('buildParadigms over the shipped vocabulary', () => {
       expect(p.cols.map((c) => c.key), w.key).toEqual(['m', 'n', 'f', 'pl'])
       expect(p.cells, w.key).toHaveLength(24)
     }
+  })
+})
+
+describe('buildShortParadigm', () => {
+  // A long adjective that also carries a short form (готовый → гото́в/гото́ва/…).
+  const gotovyy = {
+    key: 'готовый=ready',
+    pos: 'adjective',
+    headword: 'гото́вый',
+    meaning: 'ready',
+    cefr: 'A2',
+    short: { m: 'гото́в', f: 'гото́ва', n: 'гото́во', pl: 'гото́вы' },
+    extra: { forms: { m: 'гото́вый', f: 'гото́вая', n: 'гото́вое', pl: 'гото́вые' } },
+  }
+  // A short-form-only lexeme: no long form / declension at all (рад, до́лжен).
+  const rad = {
+    key: 'рад=glad',
+    pos: 'adjective',
+    headword: 'рад',
+    meaning: 'glad',
+    cefr: 'A1',
+    short: { m: 'рад', f: 'ра́да', n: 'ра́до', pl: 'ра́ды' },
+    extra: {},
+  }
+
+  it('builds a single-column m/f/n/pl table from the short block', () => {
+    const p = buildShortParadigm(gotovyy)
+    expect(p.variant).toBe('short')
+    expect(p.variantLabel).toBe('Short form')
+    expect(p.key).toBe('готовый=ready#short')
+    expect(p.cols).toHaveLength(1)
+    expect(p.cells.map((c) => c.form)).toEqual(['гото́в', 'гото́ва', 'гото́во', 'гото́вы'])
+  })
+
+  it('is the only paradigm a short-only lexeme yields', () => {
+    // рад has no forms/declension, so its full paradigm is null…
+    expect(buildParadigm(rad)).toBeNull()
+    // …but the short-form paradigm still drills.
+    expect(buildShortParadigm(rad).cells).toHaveLength(4)
+  })
+
+  it('returns null for an adjective with no short block', () => {
+    expect(buildShortParadigm(novyy)).toBeNull()
   })
 })

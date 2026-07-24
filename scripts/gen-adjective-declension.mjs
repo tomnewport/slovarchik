@@ -178,6 +178,9 @@ function run() {
   // 2. Every derived nominative must match the curated existing form.
   const derived = {}
   for (const [key, w] of Object.entries(words)) {
+    // Short-form-only lexemes (рад, до́лжен) carry a `short:` block but no
+    // `forms:` / long-form declension — leave them untouched (no grid spliced).
+    if (!w.forms) continue
     const mNom = w.forms?.m ?? w.accented
     const table = declineAdjective(mNom, w.forms)
     derived[key] = table
@@ -254,6 +257,8 @@ function run() {
   // 4. Re-parse and assert each entry has 24 declension keys.
   const reparsed = yaml.load(next)
   for (const [key, w] of Object.entries(reparsed.words)) {
+    // Short-form-only lexemes (no `forms:`) carry no long-form declension.
+    if (!w.forms) continue
     const d = w.declension ?? {}
     if (Object.keys(d).length !== 24) {
       console.error(`POST-SPLICE: ${key} has ${Object.keys(d).length} declension keys, expected 24`)
