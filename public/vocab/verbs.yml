@@ -32,6 +32,9 @@ words:
     collections:
       - entertainment
     usage:
+      - ru: Кому́ вы аплоди́руете?
+        en_gb: Whom are you applauding?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Все гро́мко аплоди́руют.
         en_gb: Everyone is applauding loudly.
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
@@ -1015,6 +1018,9 @@ words:
       past_n: быва́ло
       past_pl: быва́ли
     usage:
+      - ru: Ты ча́сто быва́ешь в теа́тре?
+        en_gb: Do you often go to the theatre?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Я ча́сто быва́ю в теа́тре.
         en_gb: I often go to the theatre.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -1470,6 +1476,9 @@ words:
       - hobbies and pastimes
       - feelings and sensations
     usage:
+      - ru: Как вы весели́тесь на пра́зднике?
+        en_gb: How are you having fun at the party?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Де́ти веселя́тся на пра́зднике.
         en_gb: The children are having fun at the party.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
@@ -5235,6 +5244,9 @@ words:
     en_gb:
       standard: to give (to hand over to someone)
     usage:
+      - ru: Что ты даёшь ребёнку?
+        en_gb: What are you giving the child?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Дава́йте начнём уро́к.
         en_gb: Let's start the lesson.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -5281,6 +5293,9 @@ words:
       - holiday
       - daily life
     usage:
+      - ru: Что ты да́ришь ма́ме на пра́здник?
+        en_gb: What do you give your mum for the holiday?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Дари́ цветы́ ма́ме на пра́здник.
         en_gb: Give your mum flowers for the holiday.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -10690,6 +10705,9 @@ words:
       past_n: име́ло
       past_pl: име́ли
     usage:
+      - ru: Что вы име́ете в виду́?
+        en_gb: What do you mean?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: У меня́ есть вопро́с.
         en_gb: I have a question.
       - ru: Она́ име́ет большо́й о́пыт.
@@ -11654,6 +11672,9 @@ words:
       past_n: контроли́ровало
       past_pl: контроли́ровали
     usage:
+      - ru: Что вы контроли́руете на рабо́те?
+        en_gb: What do you control at work?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Нача́льник контроли́рует ка́ждый шаг.
         en_gb: The boss controls every step.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -11959,6 +11980,9 @@ words:
       - daily life
       - body
     usage:
+      - ru: Вы кра́ситесь ка́ждое у́тро?
+        en_gb: Do you put on make-up every morning?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Она́ кра́сится ка́ждое у́тро.
         en_gb: She puts on make-up every morning.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -12228,6 +12252,9 @@ words:
       past_n: ку́шало
       past_pl: ку́шали
     usage:
+      - ru: Что ты ку́шаешь на за́втрак?
+        en_gb: What do you eat for breakfast?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Ку́шайте, пожа́луйста!
         en_gb: Please, eat!
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -12251,6 +12278,9 @@ words:
     en_gb:
       standard: to lie (to be in a horizontal position)
     usage:
+      - ru: Почему́ ты лежи́шь так до́лго?
+        en_gb: Why are you lying down so long?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Кот лежи́т на дива́не.
         en_gb: The cat is lying on the sofa.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -12905,6 +12935,9 @@ words:
       - shopping
       - daily life
     usage:
+      - ru: Вы ме́рите э́то пла́тье?
+        en_gb: Are you trying on this dress?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Она́ ме́рит пла́тье в магази́не.
         en_gb: She is trying on a dress in the shop.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -14273,6 +14306,9 @@ words:
       - feelings and sensations
       - hobbies and pastimes
     usage:
+      - ru: Чем ты наслажда́ешься ле́том?
+        en_gb: What do you enjoy in summer?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Наслажда́йтесь ка́ждым днём!
         en_gb: Enjoy every day!
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -14533,6 +14569,9 @@ words:
       past_n: нахо́дилось
       past_pl: нахо́дились
     usage:
+      - ru: Где вы нахо́дитесь сейча́с?
+        en_gb: Where are you now?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Музе́й нахо́дится в це́нтре.
         en_gb: The museum is located in the centre.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -14638,6 +14677,9 @@ words:
     en_gb:
       standard: to begin (to start, habitually)
     usage:
+      - ru: Когда́ ты начина́ешь рабо́ту?
+        en_gb: When do you start work?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Начина́й у́жин без меня́.
         en_gb: Start dinner without me.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -14753,6 +14795,9 @@ words:
     collections:
       - feelings and sensations
     usage:
+      - ru: Почему́ ты не́рвничаешь пе́ред экза́меном?
+        en_gb: Why are you nervous before the exam?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Он не́рвничает пе́ред экза́меном.
         en_gb: He is nervous before the exam.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -15377,6 +15422,9 @@ words:
       past_n: обожа́ло
       past_pl: обожа́ли
     usage:
+      - ru: Вы обожа́ете ко́фе?
+        en_gb: Do you adore coffee?
+        inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Я обожа́ю э́ту пе́сню.
         en_gb: I adore this song.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -15843,6 +15891,9 @@ words:
       - communication
       - daily life
     usage:
+      - ru: С кем вы обща́етесь на рабо́те?
+        en_gb: Whom do you talk with at work?
+        inflect: { token: 4, tense: present, person: 2pl, rule: verb-present }
       - ru: Обща́йся с друзья́ми ка́ждый день.
         en_gb: Talk with your friends every day.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -17772,6 +17823,9 @@ words:
       past_n: открыва́ло
       past_pl: открыва́ли
     usage:
+      - ru: Когда́ ты открыва́ешь магази́н?
+        en_gb: When do you open the shop?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Открыва́йте окно́ ка́ждое у́тро.
         en_gb: Open the window every morning.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -18973,6 +19027,9 @@ words:
     collections:
       - travel
     usage:
+      - ru: Где ты парку́ешь маши́ну?
+        en_gb: Where do you park the car?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Парку́йте маши́ну во дворе́.
         en_gb: Park the car in the yard.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -24945,6 +25002,9 @@ words:
       past_n: появля́лось
       past_pl: появля́лись
     usage:
+      - ru: Почему́ ты появля́ешься так по́здно?
+        en_gb: Why do you appear so late?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Он ре́дко появля́ется на собра́ниях.
         en_gb: He rarely appears at the meetings.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
@@ -25046,6 +25106,9 @@ words:
     collections:
       - holiday
     usage:
+      - ru: Как вы пра́зднуете Но́вый год?
+        en_gb: How do you celebrate New Year?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Пра́зднуйте Но́вый год до́ма.
         en_gb: Celebrate New Year at home.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
@@ -29068,6 +29131,9 @@ words:
       past_n: разга́дывало
       past_pl: разга́дывали
     usage:
+      - ru: Что вы разга́дываете?
+        en_gb: What are you solving?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Он разга́дывает кроссво́рд ка́ждое у́тро.
         en_gb: He solves a crossword every morning.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -30366,6 +30432,9 @@ words:
       - home
       - daily life
     usage:
+      - ru: Что вы ремонти́руете до́ма?
+        en_gb: What are you repairing at home?
+        inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
       - ru: Он ремонти́рует свою́ маши́ну.
         en_gb: He is repairing his car.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -31373,6 +31442,9 @@ words:
       past_n: сиде́ло
       past_pl: сиде́ли
     usage:
+      - ru: Где ты сиди́шь на уро́ке?
+        en_gb: Where do you sit in the lesson?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Сиди́ здесь и жди меня́.
         en_gb: Sit here and wait for me.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -33804,6 +33876,9 @@ words:
       - finance
       - work
     usage:
+      - ru: Каку́ю кома́нду вы спонси́руете?
+        en_gb: Which team do you sponsor?
+        inflect: { token: 4, tense: present, person: 2pl, rule: verb-present }
       - ru: Банк спонси́рует на́шу кома́нду.
         en_gb: The bank sponsors our team.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -34406,6 +34481,9 @@ words:
       - daily life
       - home
     usage:
+      - ru: Как ча́сто вы стира́ете?
+        en_gb: How often do you do the laundry?
+        inflect: { token: 4, tense: present, person: 2pl, rule: verb-present }
       - ru: Я стира́ю оде́жду по суббо́там.
         en_gb: I do the laundry on Saturdays.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -34485,6 +34563,9 @@ words:
     en_gb:
       standard: to stand (to be upright)
     usage:
+      - ru: Почему́ ты стои́шь на у́лице?
+        en_gb: Why are you standing outside?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Стой здесь и жди меня́.
         en_gb: Stand here and wait for me.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -35623,6 +35704,9 @@ words:
       past_n: тро́гало
       past_pl: тро́гали
     usage:
+      - ru: Заче́м ты тро́гаешь мою́ кни́гу?
+        en_gb: Why are you touching my book?
+        inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Не тро́гай горя́чую плиту́.
         en_gb: Do not touch the hot stove.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
@@ -38696,6 +38780,9 @@ words:
       past_n: шуме́ло
       past_pl: шуме́ли
     usage:
+      - ru: Почему́ вы так шуми́те?
+        en_gb: Why are you making so much noise?
+        inflect: { token: 4, tense: present, person: 2pl, rule: verb-present }
       - ru: Де́ти шумя́т во дворе́.
         en_gb: The children are making noise in the yard.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
