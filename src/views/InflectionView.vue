@@ -122,6 +122,7 @@ onUnmounted(() => {
       </div>
       <div class="muted">
         {{ paradigm.en }}
+        <span v-if="paradigm.variantLabel" class="pill">{{ paradigm.variantLabel }}</span>
         <span v-if="paradigm.cefr" class="pill">{{ paradigm.cefr }}</span>
         <template v-if="showStem && paradigm.stem"> · stem <b lang="ru">{{ paradigm.stem }}-</b></template>
       </div>

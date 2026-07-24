@@ -13,7 +13,7 @@ import { phraseTokens } from './phrases.js'
 // Raw-record keys that hold inflected Russian forms worth indexing. English
 // glosses and example sentences live under other keys and are deliberately left
 // out so they can never be matched as a "form".
-const FORM_KEYS = ['accented', 'forms', 'declension', 'conjugation']
+const FORM_KEYS = ['accented', 'forms', 'declension', 'conjugation', 'short']
 
 // Acute-accent marks used to mark stress (same set stripStress folds away).
 const STRESS_MARKS = /[\u0301\u0341\u00B4\u02CA]/gu

@@ -147,6 +147,11 @@ function normalizeWord(pos, key, word) {
     animate: word.animacy === 'a',
     numbers,
     forms,
+    // Short-form (predicate) adjective agreement: { m, f, n, pl } accented, as
+    // authored. Present only where the short form is actually used; hand-curated
+    // (stress shifts stored, not derived) and left untouched by the declension
+    // generator. Powers the short-form inflection paradigm.
+    short: word.short ?? null,
     // Verbal aspect (impf | pf) and the natural key of the aspect partner, as
     // authored. buildWords resolves `pairKey` into the full `aspectPair` link.
     aspect: word.aspect ?? null,

@@ -302,6 +302,43 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
     comparative: бедне́е  # optional
 ```
 
+The full case × gender/number `declension` grid is **generated** — run
+`node scripts/gen-adjective-declension.mjs` (or `npm run gen:adjectives`), which
+derives all 24 forms from `forms` and splices them in. Don't hand-write it.
+
+#### Short (predicate) forms — `short:` (optional)
+
+Russian adjectives have a **short form** used as a predicate — «Я гото́в», «Она́
+занята́», «Ты рад». Add a `short:` block with the four accented agreement forms
+where the short form is actually used (many adjectives never take one, so leave
+it off). It sits alongside `forms:`:
+
+```yaml
+"нужный=necessary":
+  ...
+  forms:
+    m: ну́жный
+    f: ну́жная
+    n: ну́жное
+    pl: ну́жные
+  short:            # predicate forms — store the stress, it shifts
+    m: ну́жен
+    f: нужна́
+    n: ну́жно
+    pl: нужны́
+```
+
+- **Store the stress explicitly** — it is mobile and cannot be derived
+  (ну́жен → нужна́, до́лжен → должна́ → должны́), the same "store, don't derive"
+  rule as elsewhere.
+- The short forms are indexed for phrase hints and drive a dedicated **short-form
+  paradigm** in the inflection drill (a separate m/f/n/pl table from the full
+  declension). `scripts/gen-adjective-declension.mjs` leaves `short:` untouched.
+- **Short-form-only lexemes** (рад, до́лжен) have no long form: give them
+  `accented` (the masculine short form) + a `short:` block and **omit** `forms:`
+  and the `declension:` grid entirely. The generator skips them, and they drill
+  as a short-form paradigm only.
+
 ### Pronouns (`pronouns.yml`)
 
 Set `type` (`pers refl poss demo det inter neg`); the `forms` block depends on it:
