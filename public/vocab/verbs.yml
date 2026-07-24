@@ -623,6 +623,9 @@ words:
       alt:
         - to fear
     usage:
+      - ru: Не бо́йся большо́й соба́ки!
+        en_gb: Don't be afraid of the big dog!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ма́ленький ребёнок бои́тся темноты́.
         en_gb: The small child is afraid of the dark.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
@@ -2091,6 +2094,9 @@ words:
       past_n: возвраща́лось
       past_pl: возвраща́лись
     usage:
+      - ru: Возвраща́йся домо́й ра́но.
+        en_gb: Come home early.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я возвраща́юсь домо́й в шесть.
         en_gb: I return home at six.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -2652,6 +2658,9 @@ words:
       past_n: вспомина́ло
       past_pl: вспомина́ли
     usage:
+      - ru: Вспомина́й нас ча́ще!
+        en_gb: Remember us more often!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я ча́сто вспомина́ю де́тство.
         en_gb: I often recall my childhood.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -2760,6 +2769,9 @@ words:
     en_gb:
       standard: to get up (to rise from bed or a seat)
     usage:
+      - ru: Встава́й, уже́ у́тро!
+        en_gb: Get up, it's morning already!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я встаю́ в семь часо́в у́тра.
         en_gb: I get up at seven o'clock in the morning.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -2889,6 +2901,9 @@ words:
     en_gb:
       standard: to meet (to encounter on one occasion)
     usage:
+      - ru: Встре́тьте госте́й в аэропорту́.
+        en_gb: Meet the guests at the airport.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я встре́тил её в кафе́.
         en_gb: I met her in a café.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -2976,6 +2991,9 @@ words:
     en_gb:
       standard: to meet (to greet on arrival)
     usage:
+      - ru: Встреча́й друзе́й в аэропорту́.
+        en_gb: Meet your friends at the airport.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я встреча́ю друзе́й на вокза́ле.
         en_gb: I meet friends at the station.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -3104,6 +3122,9 @@ words:
     en_gb:
       standard: to enter (to go in, habitually or repeatedly)
     usage:
+      - ru: Входи́те, пожа́луйста!
+        en_gb: Come in, please!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он всегда́ вхо́дит без сту́ка.
         en_gb: He always enters without knocking.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
@@ -3725,6 +3746,9 @@ words:
     en_gb:
       standard: to go out (to leave a building)
     usage:
+      - ru: Вы́йдите на у́лицу, пожа́луйста.
+        en_gb: Go outside, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Она́ вы́шла из до́ма ра́но у́тром.
         en_gb: She went out of the house early in the morning.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -3923,6 +3947,9 @@ words:
     en_gb:
       standard: to drink up (to drink completely)
     usage:
+      - ru: Вы́пейте воды́, пожа́луйста.
+        en_gb: Drink some water, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он вы́пил стака́н молока́.
         en_gb: He drank up a glass of milk.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -4600,6 +4627,9 @@ words:
     en_gb:
       standard: to go out (to leave, habitually or repeatedly)
     usage:
+      - ru: Выходи́те из авто́буса здесь.
+        en_gb: Get off the bus here.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он выхо́дит из до́ма ка́ждое у́тро.
         en_gb: He goes out of the house every morning.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -5080,6 +5110,9 @@ words:
       past_n: гото́вилось
       past_pl: гото́вились
     usage:
+      - ru: Гото́вься к уро́ку до́ма.
+        en_gb: Prepare for the lesson at home.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я гото́влюсь к экза́мену.
         en_gb: I am preparing for the exam.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -5187,6 +5220,9 @@ words:
       alt:
         - to walk
     usage:
+      - ru: Гуля́й в па́рке ка́ждый день.
+        en_gb: Walk in the park every day.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ве́чером мы гуля́ем по на́бережной.
         en_gb: In the evening we stroll along the embankment.
         inflect: { token: 3, tense: present, person: 1pl, rule: verb-present }
@@ -6839,6 +6875,9 @@ words:
     en_gb:
       standard: to go by transport (to travel habitually by vehicle)
     usage:
+      - ru: Е́зди ме́дленно в го́роде.
+        en_gb: Drive slowly in the city.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ка́ждый день он е́здит на рабо́ту на метро́.
         en_gb: Every day he goes to work by metro.
         inflect: { token: 4, tense: present, person: 3sg, rule: verb-present }
@@ -7417,6 +7456,9 @@ words:
     en_gb:
       standard: to forget (to fail to remember)
     usage:
+      - ru: Не забыва́й пить во́ду!
+        en_gb: Don't forget to drink water!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он ча́сто забыва́ет ключи́ до́ма.
         en_gb: He often forgets his keys at home.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
@@ -7576,6 +7618,9 @@ words:
     collections:
       - food and drink
     usage:
+      - ru: За́втракай ка́ждое у́тро до́ма.
+        en_gb: Have breakfast at home every morning.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Мы за́втракаем в во́семь утра́.
         en_gb: We have breakfast at eight in the morning.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
@@ -7783,6 +7828,9 @@ words:
       past_n: задава́ло
       past_pl: задава́ли
     usage:
+      - ru: Задава́йте свои́ вопро́сы!
+        en_gb: Ask your questions!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Учи́тель задаёт мно́го вопро́сов.
         en_gb: The teacher asks many questions.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -8048,6 +8096,9 @@ words:
     en_gb:
       standard: to finish (to bring to an end)
     usage:
+      - ru: Зака́нчивайте рабо́ту в шесть.
+        en_gb: Finish work at six.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Он зака́нчивает рабо́ту в шесть.
         en_gb: He finishes work at six.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -8193,6 +8244,9 @@ words:
     en_gb:
       standard: to finish (to complete)
     usage:
+      - ru: Зако́нчите рабо́ту к пяти́ часа́м.
+        en_gb: Finish the work by five.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я зако́нчил рабо́ту и пошёл домо́й.
         en_gb: I finished work and went home.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -8330,6 +8384,9 @@ words:
       past_n: закрыва́ло
       past_pl: закрыва́ли
     usage:
+      - ru: Закрыва́йте о́кна на́ ночь.
+        en_gb: Close the windows for the night.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я закрыва́ю окно́ на́ ночь.
         en_gb: I close the window at night.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -8681,6 +8738,9 @@ words:
       past_n: замеча́ло
       past_pl: замеча́ли
     usage:
+      - ru: Замеча́йте свои́ оши́бки.
+        en_gb: Notice your own mistakes.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я замеча́ю, что ты уста́л.
         en_gb: I notice that you are tired.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -8808,6 +8868,9 @@ words:
       past_n: занима́лось
       past_pl: занима́лись
     usage:
+      - ru: Занима́йся спо́ртом ка́ждый день.
+        en_gb: Do sport every day.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я занима́юсь му́зыкой по вечера́м.
         en_gb: I do music in the evenings.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -9140,6 +9203,9 @@ words:
       past_n: заплати́ло
       past_pl: заплати́ли
     usage:
+      - ru: Заплати́те за ко́фе, пожа́луйста.
+        en_gb: Pay for the coffee, please.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я заплачу́ за обе́д.
         en_gb: I will pay for lunch.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -9841,6 +9907,9 @@ words:
       past_n: захо́дило
       past_pl: захо́дили
     usage:
+      - ru: Заходи́те к нам в го́сти!
+        en_gb: Drop in to visit us!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я ча́сто захожу́ в э́то кафе́.
         en_gb: I often drop into this cafe.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
@@ -10641,6 +10710,9 @@ words:
       past_n: изуча́ло
       past_pl: изуча́ли
     usage:
+      - ru: Изуча́йте ру́сский язы́к ка́ждый день.
+        en_gb: Study Russian every day.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я изуча́ю ру́сский язы́к.
         en_gb: I study the Russian language.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -10844,6 +10916,9 @@ words:
       past_n: иска́ло
       past_pl: иска́ли
     usage:
+      - ru: Ищи́ отве́т в кни́ге.
+        en_gb: Look for the answer in the book.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Что вы и́щете?
         en_gb: What are you looking for?
         inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
