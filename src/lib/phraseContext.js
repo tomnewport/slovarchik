@@ -87,6 +87,31 @@ export function indexPhrases(phrases) {
   return byKey
 }
 
+/** Grammar-rule ids that mark a verb-government slot. */
+export const GOVERNMENT_RULES = Object.freeze(
+  new Set(['verb-gov-dative', 'verb-gov-genitive', 'verb-gov-instrumental']),
+)
+
+/** Whether a context phrase drills a verb-governed object case. */
+export function isGovernmentPhrase(phrase) {
+  return GOVERNMENT_RULES.has(phrase?.target?.rule)
+}
+
+/**
+ * Every verb-government phrase in the bank, flattened across owner keys. Feeds
+ * the dedicated government drill, which is phrase-centric (organised by the
+ * governed object) rather than word-centric like the general phrase-fix drill.
+ * @param {Map<string, object[]>} phrasesByKey from {@link indexPhrases}
+ * @returns {object[]}
+ */
+export function governmentPhrases(phrasesByKey) {
+  const out = []
+  for (const list of phrasesByKey?.values() ?? []) {
+    for (const p of list) if (isGovernmentPhrase(p)) out.push(p)
+  }
+  return out
+}
+
 /**
  * Case · gender label for an adjective slot (gender already encodes number).
  * Case leads — it's the dimension the learner picks first — with the agreeing

@@ -286,6 +286,26 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
   `sg + те` (reflexives: `-ся` → `-тесь`), but both are stored explicitly.
   Leave the block off verbs with no natural command (мочь, хоте́ть, зна́чить,
   impersonals like хоте́ться).
+- **`governs` — object case (optional).** For a verb whose object isn't the
+  plain accusative, name the case it governs: `governs: dat` (помога́ть,
+  звони́ть, ве́рить, меша́ть, сове́товать), `gen` (ждать, боя́ться, жела́ть) or
+  `ins` (интересова́ться, занима́ться, горди́ться, по́льзоваться). One of
+  `dat`/`gen`/`ins`; leave it off ordinary accusative or intransitive verbs.
+  This feeds the **verb-government drill** (`/verb-government`). To exercise a
+  government, annotate the *governed object* in a usage example with that case
+  and the matching rule — e.g. on `мама`:
+
+  ```yaml
+  usage:
+    - ru: Я ча́сто помога́ю ма́ме.
+      en_gb: I often help my mum.
+      inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
+  ```
+
+  The rules (`verb-gov-dative` / `-genitive` / `-instrumental` in
+  `grammar-rules.yml`) are marked `exception: true`, so the drill weights them
+  4×; a data test cross-checks that a matching governing verb really appears in
+  the sentence.
 
 ### Adjectives (`adjectives.yml`)
 
