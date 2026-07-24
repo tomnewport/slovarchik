@@ -1493,6 +1493,40 @@ words:
       pl_acc: а́томы
       pl_ins: а́томами
       pl_pre: а́томах
+  "аттракцион=ride":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - daily life
+    en_gb:
+      standard: ride (a fairground attraction)
+      alt:
+        - attraction
+    usage:
+      - ru: В па́рке постро́или но́вый аттракцио́н.
+        en_gb: A new ride was built in the park.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Де́ти ката́лись на аттракцио́не.
+        en_gb: The children rode on the attraction.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: В па́рке мно́го аттракцио́нов.
+        en_gb: There are many rides in the park.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: аттракцио́н
+      sg_gen: аттракцио́на
+      sg_dat: аттракцио́ну
+      sg_acc: аттракцио́н
+      sg_ins: аттракцио́ном
+      sg_pre: аттракцио́не
+      pl_nom: аттракцио́ны
+      pl_gen: аттракцио́нов
+      pl_dat: аттракцио́нам
+      pl_acc: аттракцио́ны
+      pl_ins: аттракцио́нами
+      pl_pre: аттракцио́нах
   "аудитория=lecture hall":
     cefr_level: B1
     gender: f
@@ -8692,6 +8726,39 @@ words:
       sg_acc: га́льку
       sg_ins: га́лькой
       sg_pre: га́льке
+  "гамак=hammock":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - in the garden
+      - travel
+    en_gb:
+      standard: hammock (a hanging bed of net or cloth)
+    usage:
+      - ru: Он пове́сил гама́к ме́жду дере́вьями.
+        en_gb: He hung a hammock between the trees.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ отдыха́ет в гамаке́.
+        en_gb: She's relaxing in the hammock.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он упа́л из гамака́.
+        en_gb: He fell out of the hammock.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: гама́к
+      sg_gen: гамака́
+      sg_dat: гамаку́
+      sg_acc: гама́к
+      sg_ins: гамако́м
+      sg_pre: гамаке́
+      pl_nom: гамаки́
+      pl_gen: гамако́в
+      pl_dat: гамака́м
+      pl_acc: гамаки́
+      pl_ins: гамака́ми
+      pl_pre: гамака́х
   "гармония=harmony":
     cefr_level: A1
     gender: f
@@ -17395,6 +17462,32 @@ words:
       sg_acc: интерне́т
       sg_ins: интерне́том
       sg_pre: интерне́те
+  "интуиция=intuition":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - feelings and sensations
+    en_gb:
+      standard: intuition (an instinctive sense of what is true)
+    usage:
+      - ru: Я доверя́ю свое́й интуи́ции.
+        en_gb: I trust my intuition.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Слу́шай свою́ интуи́цию.
+        en_gb: Listen to your intuition.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: У него́ нет интуи́ции.
+        en_gb: He has no intuition.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: интуи́ция
+      sg_gen: интуи́ции
+      sg_dat: интуи́ции
+      sg_acc: интуи́цию
+      sg_ins: интуи́цией
+      sg_pre: интуи́ции
   "информация=information":
     cefr_level: A2
     gender: f
@@ -18428,6 +18521,39 @@ words:
       pl_acc: ками́ны
       pl_ins: ками́нами
       pl_pre: ками́нах
+  "кампус=campus":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - school
+      - places
+    en_gb:
+      standard: campus (the grounds of a university)
+    usage:
+      - ru: Университе́т постро́ил но́вый ка́мпус.
+        en_gb: The university built a new campus.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Студе́нты живу́т в ка́мпусе.
+        en_gb: The students live on the campus.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Библиоте́ка нахо́дится в це́нтре ка́мпуса.
+        en_gb: The library is in the centre of the campus.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ка́мпус
+      sg_gen: ка́мпуса
+      sg_dat: ка́мпусу
+      sg_acc: ка́мпус
+      sg_ins: ка́мпусом
+      sg_pre: ка́мпусе
+      pl_nom: ка́мпусы
+      pl_gen: ка́мпусов
+      pl_dat: ка́мпусам
+      pl_acc: ка́мпусы
+      pl_ins: ка́мпусами
+      pl_pre: ка́мпусах
   "Канада=Canada":
     cefr_level: A2
     gender: f
@@ -20556,6 +20682,38 @@ words:
       sg_acc: ко́ка-ко́лу
       sg_ins: ко́ка-ко́лой
       sg_pre: ко́ка-ко́ле
+  "коктейль=cocktail":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: cocktail (a mixed alcoholic drink)
+    usage:
+      - ru: Он пригото́вил вку́сный кокте́йль.
+        en_gb: He made a tasty cocktail.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ вы́пила два кокте́йля.
+        en_gb: She drank two cocktails.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: В э́том кокте́йле мно́го са́хара.
+        en_gb: There's a lot of sugar in this cocktail.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: кокте́йль
+      sg_gen: кокте́йля
+      sg_dat: кокте́йлю
+      sg_acc: кокте́йль
+      sg_ins: кокте́йлем
+      sg_pre: кокте́йле
+      pl_nom: кокте́йли
+      pl_gen: кокте́йлей
+      pl_dat: кокте́йлям
+      pl_acc: кокте́йли
+      pl_ins: кокте́йлями
+      pl_pre: кокте́йлях
   "колбаса=sausage":
     cefr_level: A2
     gender: f
@@ -33340,6 +33498,38 @@ words:
       sg_acc: оппози́цию
       sg_ins: оппози́цией
       sg_pre: оппози́ции
+  "оптимист=optimist":
+    cefr_level: A1
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    collections:
+      - people
+    en_gb:
+      standard: optimist (a person who expects good things)
+    usage:
+      - ru: Я всегда́ был оптими́стом.
+        en_gb: I've always been an optimist.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Все лю́бят э́того оптими́ста.
+        en_gb: Everyone loves this optimist.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
+      - ru: В на́шей кома́нде мно́го оптими́стов.
+        en_gb: There are many optimists on our team.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: оптими́ст
+      sg_gen: оптими́ста
+      sg_dat: оптими́сту
+      sg_acc: оптими́ста
+      sg_ins: оптими́стом
+      sg_pre: оптими́сте
+      pl_nom: оптими́сты
+      pl_gen: оптими́стов
+      pl_dat: оптими́стам
+      pl_acc: оптими́стов
+      pl_ins: оптими́стами
+      pl_pre: оптими́стах
   "опыт=experience":
     cefr_level: B1
     gender: m
@@ -48842,6 +49032,38 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: По́сле бо́лезни он собира́л си́лы.
         en_gb: After the illness he gathered his strength.
+  "символ=symbol":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - communication
+    en_gb:
+      standard: symbol (a sign that stands for something)
+    usage:
+      - ru: Худо́жник нарисова́л си́мвол ми́ра.
+        en_gb: The artist drew a symbol of peace.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́тот флаг стал си́мволом свобо́ды.
+        en_gb: This flag became a symbol of freedom.
+        inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В э́том си́мволе есть глубо́кий смысл.
+        en_gb: There's a deep meaning in this symbol.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: си́мвол
+      sg_gen: си́мвола
+      sg_dat: си́мволу
+      sg_acc: си́мвол
+      sg_ins: си́мволом
+      sg_pre: си́мволе
+      pl_nom: си́мволы
+      pl_gen: си́мволов
+      pl_dat: си́мволам
+      pl_acc: си́мволы
+      pl_ins: си́мволами
+      pl_pre: си́мволах
   "симпатия=liking":
     cefr_level: B2
     gender: f
@@ -49242,6 +49464,38 @@ words:
       pl_acc: ска́терти
       pl_ins: скатертя́ми
       pl_pre: скатертя́х
+  "скелет=skeleton":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - parts of the body
+    en_gb:
+      standard: skeleton (the bones of a body)
+    usage:
+      - ru: На уро́ке мы изуча́ли скеле́т челове́ка.
+        en_gb: In the lesson we studied the human skeleton.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В скеле́те челове́ка мно́го косте́й.
+        en_gb: There are many bones in the human skeleton.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Э́то часть скеле́та.
+        en_gb: This is part of the skeleton.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: скеле́т
+      sg_gen: скеле́та
+      sg_dat: скеле́ту
+      sg_acc: скеле́т
+      sg_ins: скеле́том
+      sg_pre: скеле́те
+      pl_nom: скеле́ты
+      pl_gen: скеле́тов
+      pl_dat: скеле́там
+      pl_acc: скеле́ты
+      pl_ins: скеле́тами
+      pl_pre: скеле́тах
   "скидка=discount":
     cefr_level: B1
     gender: f
@@ -52060,6 +52314,32 @@ words:
         en_gb: The USSR collapsed in 1991.
       - ru: В шко́ле мы изуча́ли исто́рию СССР.
         en_gb: At school we studied the history of the USSR.
+  "стабильность=stability":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - society
+    en_gb:
+      standard: stability (a steady, unchanging state)
+    usage:
+      - ru: Все хотя́т стаби́льности.
+        en_gb: Everyone wants stability.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он це́нит стаби́льность в жи́зни.
+        en_gb: He values stability in life.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он мечта́ет о стаби́льности.
+        en_gb: He dreams of stability.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+    declension:
+      sg_nom: стаби́льность
+      sg_gen: стаби́льности
+      sg_dat: стаби́льности
+      sg_acc: стаби́льность
+      sg_ins: стаби́льностью
+      sg_pre: стаби́льности
   "стадион=stadium":
     cefr_level: B1
     gender: m
@@ -63409,6 +63689,33 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он доба́вил но́вый элеме́нт в схе́му.
         en_gb: He added a new element to the diagram.
+  "энергетика=energy":
+    cefr_level: A1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - technology
+      - work
+    en_gb:
+      standard: energy (the power industry; energetics)
+    usage:
+      - ru: Он рабо́тает в энерге́тике.
+        en_gb: He works in the energy sector.
+        inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Страна́ развива́ет со́лнечную энерге́тику.
+        en_gb: The country is developing solar energy.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он специали́ст в о́бласти энерге́тики.
+        en_gb: He's a specialist in the energy field.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: энерге́тика
+      sg_gen: энерге́тики
+      sg_dat: энерге́тике
+      sg_acc: энерге́тику
+      sg_ins: энерге́тикой
+      sg_pre: энерге́тике
   "энергия=energy":
     cefr_level: B1
     gender: f
