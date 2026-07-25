@@ -48534,6 +48534,7 @@ words:
     usage:
       - ru: Включи́ свет, пожа́луйста.
         en_gb: Turn on the light, please.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Из окна́ льётся я́ркий свет.
         en_gb: Bright light pours from the window.
       - ru: При све́те ла́мпы прия́тно чита́ть.
@@ -48564,6 +48565,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На у́лице поста́вили но́вые светофо́ры.
         en_gb: New traffic lights were installed on the street.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: светофо́р
       sg_gen: светофо́ра
@@ -48734,6 +48736,7 @@ words:
           - There is a big pig on the farm.
       - ru: Фе́рмер ко́рмит свине́й.
         en_gb: The farmer feeds the pigs.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Ребёнок испуга́лся большо́й свиньи́.
         en_gb: The child got frightened of the big pig.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -48752,8 +48755,10 @@ words:
     usage:
       - ru: Ба́бушка связа́ла тёплый сви́тер.
         en_gb: Grandmother knitted a warm jumper.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Зимо́й он но́сит шерстяно́й сви́тер.
         en_gb: In winter he wears a woollen jumper.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В шкафу́ лежи́т мно́го тёплых сви́теров.
         en_gb: Many warm jumpers lie in the wardrobe.
         inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
@@ -49032,6 +49037,7 @@ words:
     usage:
       - ru: Я не вы́дам твой секре́т.
         en_gb: I will not give away your secret.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У ка́ждого есть свои́ секре́ты.
         en_gb: Everyone has their own secrets.
       - ru: Она́ рассказа́ла мне о секре́те.
@@ -49181,6 +49187,7 @@ words:
     usage:
       - ru: Коро́ва жуёт се́но.
         en_gb: The cow is chewing hay.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В сара́е мно́го све́жего се́на.
         en_gb: There is a lot of fresh hay in the barn.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -50478,6 +50485,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я купи́л но́вый слова́рь.
         en_gb: I bought a new dictionary.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В библиоте́ке мно́го словаре́й.
         en_gb: There are many dictionaries in the library.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
@@ -50731,6 +50739,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он купи́л но́вый смартфо́н.
         en_gb: He bought a new smartphone.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Сейча́с у всех есть смартфо́ны.
         en_gb: Everyone has smartphones nowadays.
     declension:
@@ -51248,8 +51257,10 @@ words:
     usage:
       - ru: Дай мне сове́т, что де́лать.
         en_gb: Give me some advice on what to do.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ всегда́ слу́шала сове́ты роди́телей.
         en_gb: She always listened to her parents' advice.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Спаси́бо за поле́зный сове́т.
         en_gb: Thank you for the useful advice.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -51515,6 +51526,7 @@ words:
     usage:
       - ru: У́тром я пью́ апельси́новый сок.
         en_gb: In the morning I drink orange juice.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я купи́л паке́т со́ка.
         en_gb: I bought a carton of juice.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -51632,6 +51644,7 @@ words:
     usage:
       - ru: Переда́й мне соль, пожа́луйста.
         en_gb: Pass me the salt, please.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе сли́шком мно́го со́ли.
         en_gb: There is too much salt in the soup.
       - ru: Посы́пь карто́шку со́лью.
@@ -51749,8 +51762,10 @@ words:
     usage:
       - ru: Я получи́л ва́жное сообще́ние.
         en_gb: I received an important message.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он отпра́вил мне сообще́ние.
         en_gb: He sent me a message.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я отвеча́ю на ва́жные сообще́ния.
         en_gb: I am replying to important messages.
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
@@ -52486,11 +52501,13 @@ words:
     usage:
       - ru: Я соста́вил спи́сок поку́пок.
         en_gb: I made a shopping list.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Твоего́ и́мени нет в спи́ске.
         en_gb: Your name is not on the list.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учи́тель чита́ет спи́ски ученико́в.
         en_gb: The teacher reads the lists of pupils.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
   "спичка=match":
     cefr_level: A2
     gender: f
@@ -52539,6 +52556,7 @@ words:
         inflect: { token: 5, case: ins, number: sg, rule: verb-gov-instrumental }
       - ru: Он лю́бит спорт и здоро́вый о́браз жи́зни.
         en_gb: He loves sport and a healthy lifestyle.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он занима́ется спо́ртом ка́ждый день.
         en_gb: He does sport every day.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -52944,6 +52962,7 @@ words:
           - There is an empty glass on the table.
       - ru: Она́ помы́ла все стака́ны.
         en_gb: She washed all the glasses.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: стака́н
       sg_gen: стака́на
@@ -53726,6 +53745,7 @@ words:
     usage:
       - ru: Мы заказа́ли сто́лик в кафе́.
         en_gb: We booked a table at the café.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: За сто́ликом у окна́ сиде́ла па́ра.
         en_gb: A couple were sitting at the table by the window.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
@@ -54730,6 +54750,7 @@ words:
     usage:
       - ru: Ма́ма сва́рила вку́сный суп.
         en_gb: Mum has made a tasty soup.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го о́вощей.
         en_gb: There are many vegetables in the soup.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -55277,6 +55298,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Положи́ сыр на стол.
         en_gb: Put the cheese on the table.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: сыр
       sg_gen: сы́ра
@@ -55566,6 +55588,7 @@ words:
     usage:
       - ru: Они́ танцу́ют ме́дленный та́нец.
         en_gb: They are dancing a slow dance.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ научи́лась но́вому та́нцу.
         en_gb: She learned a new dance.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -55745,11 +55768,13 @@ words:
     usage:
       - ru: Прочита́йте текст и отве́тьте на вопро́сы.
         en_gb: Read the text and answer the questions.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том те́ксте мно́го но́вых слов.
         en_gb: There are many new words in this text.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ напеча́тала дли́нный текст.
         en_gb: She typed a long text.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: текст
       sg_gen: те́кста
@@ -55779,6 +55804,7 @@ words:
     usage:
       - ru: Ве́чером они́ смо́трят телеви́зор.
         en_gb: In the evening they watch television.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Телеви́зор слома́лся вчера́.
         en_gb: The television broke down yesterday.
       - ru: Что пока́зывают по телеви́зору?
@@ -56844,6 +56870,7 @@ words:
     usage:
       - ru: На день рожде́ния купи́ли большо́й торт.
         en_gb: They bought a big cake for the birthday.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я съел кусо́к то́рта.
         en_gb: I ate a piece of cake.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -58283,6 +58310,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я пригото́вил вку́сный у́жин.
         en_gb: I prepared a tasty dinner.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́сле у́жина мы пошли́ гуля́ть.
         en_gb: After dinner we went for a walk.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -59007,6 +59035,7 @@ words:
     usage:
       - ru: По́сле рабо́ты он чу́вствует уста́лость.
         en_gb: After work he feels tiredness.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: От уста́лости она́ засну́ла сра́зу.
         en_gb: Out of tiredness she fell asleep at once.
         inflect: { token: 2, case: gen, number: sg, rule: noun-fem-soft }
@@ -59360,6 +59389,7 @@ words:
         en_gb: The pupils sit at their desks.
       - ru: Учи́тель похвали́л ученика́.
         en_gb: The teacher praised the pupil.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Он был лу́чшим ученико́м в кла́ссе.
         en_gb: He was the best pupil in the class.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -60526,6 +60556,7 @@ words:
     usage:
       - ru: Я ем фру́кты ка́ждый день.
         en_gb: I eat fruit every day.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Я купи́л ки́ло фру́ктов.
         en_gb: I bought a kilo of fruit.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
@@ -61045,6 +61076,7 @@ words:
     usage:
       - ru: Зимо́й мы смо́трим хокке́й.
         en_gb: In winter we watch hockey.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Росси́я вы́играла матч по хокке́ю.
         en_gb: Russia won the hockey match.
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
@@ -62043,8 +62075,10 @@ words:
     usage:
       - ru: Сохрани́те чек на слу́чай возвра́та.
         en_gb: Keep the receipt in case of a return.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Касси́р дал мне чек.
         en_gb: The cashier gave me a receipt.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Без че́ка обме́н невозмо́жен.
         en_gb: Without a receipt an exchange is impossible.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -62154,6 +62188,7 @@ words:
     usage:
       - ru: Он собра́л чемода́н пе́ред пое́здкой.
         en_gb: He packed his suitcase before the trip.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мой чемода́н сли́шком тяжёлый.
         en_gb: My suitcase is too heavy.
       - ru: В чемода́не лежа́т ле́тние ве́щи.
@@ -62490,6 +62525,7 @@ words:
     usage:
       - ru: Назови́те любо́е число́.
         en_gb: Name any number.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Раздели́ э́то число́ на два.
         en_gb: Divide this number by two.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -62718,11 +62754,13 @@ words:
     usage:
       - ru: Он сде́лал пе́рвый шаг.
         en_gb: He took the first step.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Магази́н в двух шага́х отсю́да.
         en_gb: The shop is two steps from here.
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Я услы́шал ти́хие шаги́ за две́рью.
         en_gb: I heard quiet steps behind the door.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
   "шампанское=champagne":
     cefr_level: A1
     gender: n
@@ -62861,6 +62899,7 @@ words:
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он наде́л тёплый шарф.
         en_gb: He put on a warm scarf.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В ма́газине мно́го кра́сивых ша́рфов.
         en_gb: There are many beautiful scarves in the shop.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -63388,6 +63427,7 @@ words:
         inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Он купи́л но́вый шкаф.
         en_gb: He bought a new cupboard.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В прихо́жей стоя́т два шка́фа.
         en_gb: There are two cupboards in the hallway.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -63617,6 +63657,7 @@ words:
     usage:
       - ru: Де́ти лю́бят моло́чный шокола́д.
         en_gb: Children love milk chocolate.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ подари́ла мне коро́бку шокола́да.
         en_gb: She gave me a box of chocolate.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -63665,6 +63706,7 @@ words:
     usage:
       - ru: Ле́том он но́сит шо́рты.
         en_gb: In summer he wears shorts.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Он игра́ет в футбо́л в шо́ртах.
         en_gb: He plays football in shorts.
         inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
@@ -63813,6 +63855,7 @@ words:
     usage:
       - ru: Он наде́л но́вые штаны́.
         en_gb: He put on new trousers.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: У штано́в порва́лся карма́н.
         en_gb: The pocket of the trousers tore.
         inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
@@ -64219,6 +64262,7 @@ words:
         en_gb: Tomorrow I have a maths exam.
       - ru: Он успе́шно сдал экза́мен.
         en_gb: He passed the exam successfully.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Студе́нты гото́вятся к экза́менам.
         en_gb: The students are preparing for the exams.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
@@ -64909,6 +64953,7 @@ words:
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Она́ съе́ла сла́дкое я́блоко.
         en_gb: She ate a sweet apple.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В корзи́не лежа́т кра́сные я́блоки.
         en_gb: There are red apples in the basket.
       - ru: Из я́блок ба́бушка ва́рит варе́нье.
@@ -64977,6 +65022,7 @@ words:
         en_gb: The Russian language is very rich.
       - ru: Кот обжёг себе́ язы́к.
         en_gb: The cat burnt its tongue.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Врач попроси́л показа́ть язы́к.
         en_gb: The doctor asked me to show my tongue.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -65032,8 +65078,10 @@ words:
     usage:
       - ru: На за́втрак я сва́рил яйцо́.
         en_gb: For breakfast I boiled an egg.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ку́рица снесла́ яйцо́.
         en_gb: The hen laid an egg.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В холоди́льнике де́сять яи́ц.
         en_gb: There are ten eggs in the fridge.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
@@ -65285,6 +65333,7 @@ words:
     usage:
       - ru: Он поста́вил тяжёлый я́щик на пол.
         en_gb: He put the heavy box on the floor.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В я́щике лежа́т ста́рые письма́.
         en_gb: Old letters lie in the box.
         en_alt:
