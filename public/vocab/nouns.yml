@@ -39837,6 +39837,7 @@ words:
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Спаса́тели прекрати́ли по́иски.
         en_gb: The rescuers stopped the search.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
   "показание=testimony":
     cefr_level: B2
     gender: n
@@ -39924,8 +39925,10 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Дай мне поко́й хоть на час.
         en_gb: Give me peace for at least an hour.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он наконе́ц обрёл поко́й.
         en_gb: He finally found peace.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "поколение=generation":
     cefr_level: B2
     gender: n
@@ -40375,6 +40378,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Измени́ положе́ние ла́мпы.
         en_gb: Change the position of the lamp.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ обсужда́ли но́вые положе́ния зако́на.
         en_gb: They discussed the new provisions of the law.
   "полоса=stripe":
@@ -40544,6 +40548,7 @@ words:
         en_gb: The premises were warm and bright.
       - ru: Мы арендова́ли помеще́ние для магази́на.
         en_gb: We rented premises for a shop.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́тих помеще́ниях храня́т докуме́нты.
         en_gb: Documents are kept in these premises.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -40862,6 +40867,7 @@ words:
     usage:
       - ru: Кома́нда потерпе́ла тяжёлое пораже́ние.
         en_gb: The team suffered a heavy defeat.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он не смири́лся с пораже́нием.
         en_gb: He did not accept the defeat.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
@@ -40894,6 +40900,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Не сто́й в дверя́х, переступи́ поро́г.
         en_gb: Do not stand in the doorway, step over the threshold.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он споткну́лся о поро́г.
         en_gb: He tripped over the threshold.
   "порт=port":
@@ -40992,11 +40999,13 @@ words:
     usage:
       - ru: Он забы́л портфе́ль до́ма.
         en_gb: He forgot his briefcase at home.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В портфе́ле лежа́т докуме́нты.
         en_gb: There are documents in the briefcase.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учени́к откры́л свой портфе́ль.
         en_gb: The pupil opened his briefcase.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "порядок=order":
     cefr_level: B1
     gender: m
@@ -41013,6 +41022,7 @@ words:
         en_gb: There is always perfect order on the desk.
       - ru: В ко́мнате ну́жно навести́ поря́док.
         en_gb: Order needs to be put in the room.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Расста́вьте кни́ги в алфави́тном поря́дке.
         en_gb: Arrange the books in alphabetical order.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -41116,6 +41126,7 @@ words:
     usage:
       - ru: Э́тот шаг име́л серьёзное после́дствие.
         en_gb: This step had a serious consequence.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы должны́ ду́мать о после́дствиях.
         en_gb: We must think about the consequences.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
@@ -41250,6 +41261,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: За свои́ посту́пки на́до отвеча́ть.
         en_gb: One must answer for one's acts.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
   "посуда=dishes":
     cefr_level: B1
     gender: f
@@ -41380,6 +41392,7 @@ words:
         en_gb: The ceiling in the hall is very high.
       - ru: Они́ покра́сили потоло́к в бе́лый цвет.
         en_gb: They painted the ceiling white.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: потоло́к
       sg_gen: потолка́
@@ -41502,6 +41515,7 @@ words:
     usage:
       - ru: Он подари́л ей не́жный поцелу́й.
         en_gb: He gave her a gentle kiss.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ улыбну́лась по́сле поцелу́я.
         en_gb: She smiled after the kiss.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -41745,6 +41759,7 @@ words:
     usage:
       - ru: Он затяну́л по́яс ту́же.
         en_gb: He tightened his belt.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вода́ дошла́ мне до по́яса.
         en_gb: The water came up to my waist.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -41857,6 +41872,7 @@ words:
     usage:
       - ru: Ка́ждый име́ет пра́во на образова́ние.
         en_gb: Everyone has the right to education.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ты не име́ешь пра́ва так говори́ть.
         en_gb: You have no right to speak like that.
       - ru: Мы боро́лись за свои́ права́.
@@ -41995,6 +42011,7 @@ words:
     usage:
       - ru: Терпе́ние име́ет преде́л.
         en_gb: Patience has a limit.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он рабо́тал на преде́ле сил.
         en_gb: He worked at the limit of his strength.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
@@ -42017,6 +42034,7 @@ words:
     usage:
       - ru: Соста́вьте предложе́ние с э́тим сло́вом.
         en_gb: Make a sentence with this word.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том предложе́нии есть оши́бка.
         en_gb: There is a mistake in this sentence.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
@@ -42673,11 +42691,13 @@ words:
     usage:
       - ru: Худо́жник получи́л призна́ние по́здно.
         en_gb: The artist received recognition late.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он мечта́ет о всео́бщем призна́нии.
         en_gb: He dreams of universal recognition.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учёный заслужи́л призна́ние свои́м трудо́м.
         en_gb: The scientist earned recognition through his work.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
   "приказ=order":
     cefr_level: B1
     gender: m
@@ -42704,6 +42724,7 @@ words:
     usage:
       - ru: Солда́т вы́полнил прика́з команди́ра.
         en_gb: The soldier carried out the commander's order.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы де́йствовали по прика́зу.
         en_gb: We acted on the order.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -42756,6 +42777,7 @@ words:
     usage:
       - ru: Я скача́л но́вое приложе́ние.
         en_gb: I downloaded a new app.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́то приложе́ние помога́ет учи́ть слова́.
         en_gb: This app helps to learn words.
       - ru: Я по́льзуюсь э́тим приложе́нием ка́ждый день.
@@ -42927,6 +42949,7 @@ words:
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Учи́тель объясни́л основны́е при́нципы.
         en_gb: The teacher explained the basic principles.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
   "природа=nature":
     cefr_level: A2
     gender: f
@@ -42984,6 +43007,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дире́ктор отме́тил прису́тствие всех сотру́дников.
         en_gb: The director noted the presence of all the employees.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
   "причина=reason":
     cefr_level: B1
     gender: f
@@ -43485,6 +43509,7 @@ words:
         en_gb: Our project received an award.
       - ru: Студе́нты предста́вили свои́ прое́кты.
         en_gb: The students presented their projects.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: прое́кт
       sg_gen: прое́кта
@@ -43580,11 +43605,13 @@ words:
     usage:
       - ru: Учёные изуча́ют происхожде́ние жи́зни.
         en_gb: Scientists study the origin of life.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Никто́ не зна́ет о его́ происхожде́нии.
         en_gb: No one knows about his origin.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Сло́во име́ет лати́нское происхожде́ние.
         en_gb: The word has a Latin origin.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
   "прокурор=prosecutor":
     cefr_level: B2
     gender: m
@@ -43723,6 +43750,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Гла́вный проспе́кт укра́сили к пра́зднику.
         en_gb: The main avenue was decorated for the holiday.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: проспе́кт
       sg_gen: проспе́кта
@@ -43853,6 +43881,7 @@ words:
         en_gb: The enemy was strong and experienced.
       - ru: Спортсме́н победи́л своего́ проти́вника.
         en_gb: The athlete defeated his opponent.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Войска́ отступи́ли пе́ред проти́вниками.
         en_gb: The troops retreated before the enemies.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
@@ -43984,6 +44013,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Рабо́чие закры́ли все прохо́ды.
         en_gb: The workers closed all the passages.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
   "процент=per cent":
     cefr_level: B1
     gender: m
@@ -44065,6 +44095,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Про́шлое уже́ не верну́ть.
         en_gb: The past cannot be brought back.
+        inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ ча́сто вспомина́ет о про́шлом.
         en_gb: She often remembers the past.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -44147,6 +44178,7 @@ words:
     usage:
       - ru: Нарису́й прямоуго́льник в тетра́ди.
         en_gb: Draw a rectangle in your notebook.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Стол име́ет фо́рму прямоуго́льника.
         en_gb: The table has the shape of a rectangle.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -44394,6 +44426,7 @@ words:
     usage:
       - ru: Прочита́й пе́рвый пункт догово́ра.
         en_gb: Read the first point of the contract.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы дое́хали до коне́чного пу́нкта.
         en_gb: We reached the final point.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -44805,6 +44838,7 @@ words:
         en_gb: A stain appeared on the shirt.
       - ru: Я не могу́ отстира́ть э́то пятно́.
         en_gb: I cannot wash out this spot.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ска́терти бы́ло мно́го пя́тен.
         en_gb: There were many spots on the tablecloth.
         inflect: { token: 5, case: gen, number: pl, rule: noun-genpl-fleeting }
@@ -45507,6 +45541,7 @@ words:
     usage:
       - ru: Посмотри́ расписа́ние поездо́в.
         en_gb: Look at the train timetable.
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Уро́ки иду́т по расписа́нию.
         en_gb: The lessons go according to the timetable.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -45590,6 +45625,7 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Я люблю́ ти́хие ле́тние рассве́ты.
         en_gb: I love quiet summer dawns.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
   "рассказ=story":
     cefr_level: A2
     gender: m
@@ -45834,6 +45870,7 @@ words:
     usage:
       - ru: Инжене́р прове́рил расчёт.
         en_gb: The engineer checked the calculation.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он де́йствовал по холо́дному расчёту.
         en_gb: He acted by cold calculation.
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
@@ -46122,6 +46159,7 @@ words:
     usage:
       - ru: Врач назна́чил стро́гий режи́м.
         en_gb: The doctor prescribed a strict regime.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он живёт по жёсткому режи́му.
         en_gb: He lives by a strict regime.
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
@@ -46144,6 +46182,7 @@ words:
         en_gb: The director made a new film.
       - ru: Актёры слу́шали режиссёра.
         en_gb: The actors listened to the director.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Пре́мию вручи́ли молоды́м режиссёрам.
         en_gb: The prize was given to young directors.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
@@ -46177,8 +46216,10 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мы жда́ли результа́т экза́мена.
         en_gb: We awaited the result of the exam.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Учёные изучи́ли все результа́ты.
         en_gb: The scientists studied all the results.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: результа́т
       sg_gen: результа́та
@@ -46210,6 +46251,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Все ре́йсы отмени́ли и́з-за бу́ри.
         en_gb: All flights were cancelled because of the storm.
+        inflect: { token: 2, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: рейс
       sg_gen: ре́йса
@@ -46327,8 +46369,10 @@ words:
     usage:
       - ru: Он затяну́л реме́нь поту́же.
         en_gb: He tightened his belt.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Пристегни́те ремни́ безопа́сности.
         en_gb: Fasten your seat belts.
+        inflect: { token: 2, case: acc, number: pl, rule: noun-acc-pl }
       - ru: На ремне́ блестя́щая пря́жка.
         en_gb: There is a shiny buckle on the belt.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -46365,6 +46409,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ зако́нчили ремо́нт за ме́сяц.
         en_gb: They finished the repair in a month.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: ремо́нт
       sg_gen: ремо́нта
