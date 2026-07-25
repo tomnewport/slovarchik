@@ -12149,6 +12149,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я ча́сто вспомина́ю своё де́тство.
         en_gb: I often remember my childhood.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ дру́жат с де́тства.
         en_gb: They have been friends since childhood.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -12520,6 +12521,7 @@ words:
         en_gb: This disc no longer reads.
       - ru: Я купи́л но́вый жёсткий диск.
         en_gb: I bought a new hard drive.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     cefr_level: B1
     gender: m
     animacy: i
@@ -12638,6 +12640,7 @@ words:
     usage:
       - ru: Они́ подписа́ли догово́р.
         en_gb: They signed the contract.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В догово́ре есть ва́жное усло́вие.
         en_gb: There is an important condition in the contract.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -12715,6 +12718,7 @@ words:
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Учёный предста́вил ва́жное доказа́тельство.
         en_gb: The scientist presented important proof.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Суд потре́бовал серьёзных доказа́тельств.
         en_gb: The court demanded serious proof.
   "доклад=report":
@@ -12730,6 +12734,7 @@ words:
     usage:
       - ru: Дире́ктор сде́лал докла́д о результа́тах.
         en_gb: The director gave a report on the results.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Студе́нт гото́вится к докла́ду.
         en_gb: The student is preparing for the report.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -12876,6 +12881,7 @@ words:
     usage:
       - ru: Он занима́ет высо́кую до́лжность.
         en_gb: He holds a high post.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Её назна́чили на но́вую до́лжность.
         en_gb: She was appointed to a new post.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
@@ -13534,6 +13540,7 @@ words:
     usage:
       - ru: Мы купи́ли дрова́ на́ зиму.
         en_gb: We bought firewood for the winter.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: В сара́е не оста́лось дров.
         en_gb: There was no firewood left in the shed.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -13905,6 +13912,7 @@ words:
         en_gb: After running his breathing went out of rhythm.
       - ru: Врач слу́шает её дыха́ние.
         en_gb: The doctor is listening to her breathing.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он за́мер с затаённым дыха́нием.
         en_gb: He froze with bated breath.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
@@ -14486,6 +14494,7 @@ words:
         en_gb: The groom waits for the bride by the church.
       - ru: Все поздравля́ли жениха́.
         en_gb: Everyone congratulated the groom.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Неве́ста подошла́ к жениху́.
         en_gb: The bride approached the groom.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -14583,6 +14592,7 @@ words:
     usage:
       - ru: Он сде́лал широ́кий жест руко́й.
         en_gb: He made a wide gesture with his hand.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ поняла́ его́ по же́сту.
         en_gb: She understood him by his gesture.
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
@@ -14769,6 +14779,7 @@ words:
         en_gb: A business waistcoat looks formal.
       - ru: Ба́бушка связа́ла мне тёплый жиле́т.
         en_gb: Grandma knitted me a warm waistcoat.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: жиле́т
       sg_gen: жиле́та
@@ -14980,6 +14991,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ покра́сили забо́р в зелёный цвет.
         en_gb: They painted the fence green.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Кот сиди́т на забо́ре.
         en_gb: The cat is sitting on the fence.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
@@ -15204,6 +15216,7 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он сел на са́мый зад авто́буса.
         en_gb: He sat at the very back of the bus.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Грузови́к подъе́хал за́дом к скла́ду.
         en_gb: The lorry backed up to the warehouse.
   "задание=task":
@@ -15402,6 +15415,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Врач написа́л своё заключе́ние.
         en_gb: The doctor wrote his conclusion.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Экспе́рты пришли́ к ва́жным заключе́ниям.
         en_gb: The experts came to important conclusions.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
@@ -15417,8 +15431,10 @@ words:
     usage:
       - ru: Все должны́ соблюда́ть зако́н.
         en_gb: Everyone must obey the law.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Парла́мент при́нял но́вый зако́н.
         en_gb: The parliament passed a new law.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он нару́шил не́сколько зако́нов.
         en_gb: He broke several laws.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
@@ -15550,6 +15566,7 @@ words:
         en_gb: The lock on the door broke.
       - ru: Он купи́л но́вые замки́.
         en_gb: He bought new locks.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: замо́к
       sg_gen: замка́
@@ -15684,6 +15701,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На зи́му де́лают запа́сы дров.
         en_gb: Stocks of firewood are made for winter.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
   "запах=smell":
     cefr_level: B1
     gender: m
@@ -15770,6 +15788,7 @@ words:
     usage:
       - ru: Он сде́лал за́пись в дневнике́.
         en_gb: He made a record in his diary.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы слу́шали ста́рую за́пись конце́рта.
         en_gb: We listened to an old recording of the concert.
       - ru: В кни́ге мно́го ва́жных за́писей.
