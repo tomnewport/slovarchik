@@ -1,57 +1,39 @@
 <script setup>
-// Flashcard identification drill (replaces the old two-column matching board,
-// #412). One card at a time: a big Russian word — or, in hearing mode, a speaker
-// to tap — and the learner produces its English. They type into a combo box
-// seeded with the answer plus a large pile of decoy words, or switch to speaking
-// it aloud. The combo box helps quietly: every correct letter typed prunes a
-// random tenth of the surviving decoys, so the answer surfaces the closer they
-// get — but nothing ever announces that a letter was right. A correct answer
-// advances at once; a Pass button fails the card and moves on. The set runs
-// through every card the descriptor carries (12, from the practice catalogue).
+// Flashcard identification drill (#412). One card at a time: a big Russian word
+// — or, in hearing mode, a speaker to tap — and the learner produces its
+// English. They type it into a single always-focused input (so the on-screen
+// keyboard never has to be dismissed between cards), or switch to speaking it
+// aloud.
+//
+// The loop is deliberately fast: a correct answer advances the moment it's
+// typed, no key press needed. A wrong guess — or a Pass — reveals the correct
+// answer so the learner actually learns from the miss, then a single Enter (or
+// the Next button) moves on. There are no clickable decoy options; the input is
+// the only place an answer is produced.
 //
 // Reports like the matching board did: `wrong` lists the keys that were passed
-// or first guessed wrong, so only those record an incorrect attempt.
-import { computed, onBeforeUnmount, ref } from 'vue'
+// or guessed wrong, so only those record an incorrect attempt.
+import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
 
-import { shuffle } from '../../lib/quiz.js'
-import { phraseCorrect, typingSequence } from '../../lib/phrases.js'
+import { phraseCorrect } from '../../lib/phrases.js'
 import { speak } from '../../lib/speech.js'
 import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition.js'
-import { vocab } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
-// The combo box starts stuffed with up to this many decoys, so the answer is a
-// needle in a haystack until the learner types toward it.
-const DECOY_TARGET = 999
-// Fraction of the *remaining* decoys pruned for each new correct letter typed.
-const PRUNE_FRACTION = 0.1
-// The dropdown can't render a thousand options — show at most this many at once.
-const DISPLAY_LIMIT = 40
 // Spoken answers grade on letter overlap, so a mangled article still counts.
 const SPEAK_THRESHOLD = 0.75
-// How long a wrong guess flashes before the card settles back to neutral.
-const FLASH_MS = 700
-
-// Generic English fillers so the combo box still has decoys when the vocab store
-// is empty (unit tests). Production draws hundreds of real glosses instead.
-const FILLERS = [
-  'window', 'table', 'winter', 'summer', 'brother', 'sister', 'water', 'bread',
-  'street', 'house', 'friend', 'evening', 'morning', 'country', 'city', 'letter',
-  'garden', 'school', 'number', 'weather', 'mother', 'father', 'daughter', 'son',
-  'teacher', 'student', 'question', 'answer', 'picture', 'colour', 'animal', 'flower',
-]
 
 const cards = computed(() => props.exercise.pairs ?? [])
 const idx = ref(0)
 const card = computed(() => cards.value[idx.value] ?? null)
 const total = computed(() => cards.value.length)
 
-// Keys the learner failed this exercise (passed, or guessed wrong before landing
-// on the answer). Deduplicated — reported back so only these record a miss.
+// Keys the learner failed this exercise (passed, or guessed wrong). Deduplicated
+// — reported back so only these record a miss.
 const missed = new Set()
 
 const canSpeak = recognitionSupported()
@@ -63,27 +45,6 @@ function enOf(v) {
   return Array.isArray(en) ? (en[0] ?? '') : (en ?? '')
 }
 const answer = computed(() => enOf(card.value))
-
-// The answer as it types out — full, and with a leading article stripped — so
-// "window" earns the same letter credit as "the window".
-const answerSeqs = computed(() => {
-  const full = typingSequence(answer.value)
-  const bare = full.replace(/\b(a|an|the)\b\s*/g, '').replace(/\s+/g, ' ').trim()
-  return bare && bare !== full ? [full, bare] : [full]
-})
-
-// How many leading letters of the typed text march correctly toward the answer
-// (down whichever of the article variants gets furthest).
-function correctPrefixLen(text) {
-  const nt = typingSequence(text)
-  let best = 0
-  for (const seq of answerSeqs.value) {
-    let i = 0
-    while (i < nt.length && i < seq.length && nt[i] === seq[i]) i += 1
-    if (i > best) best = i
-  }
-  return best
-}
 
 // A typed / selected candidate is right when it matches the gloss bar case,
 // punctuation, stress and articles.
@@ -98,113 +59,72 @@ function isSpokenAnswer(guesses) {
   return gradeSpoken(list, answer.value, SPEAK_THRESHOLD).correct
 }
 
-// --- Decoy pool -------------------------------------------------------------
-
-// Every distinct English gloss in the vocabulary, so the decoys read like real
-// words rather than filler. Built once; the answer for each card is excluded
-// when the card's own pile is drawn.
-const decoySource = (() => {
-  const seen = new Set()
-  const out = []
-  const add = (en) => {
-    const text = String(en ?? '').trim()
-    const k = text.toLowerCase()
-    if (text && !seen.has(k)) {
-      seen.add(k)
-      out.push(text)
-    }
-  }
-  for (const v of vocab.value) add(enOf(v))
-  for (const f of FILLERS) add(f)
-  return out
-})()
-
 // --- Per-card state ---------------------------------------------------------
 
 const typed = ref('')
-const decoys = ref([]) // surviving decoy words for the current card
-let prunedFor = 0 // longest correct prefix already pruned against (never re-prunes)
-const wrongThisCard = ref(false)
-const flash = ref(false)
+// Once true, the correct answer is on screen (after a wrong guess or a pass) and
+// the only thing left to do is move on.
+const revealed = ref(false)
 const heard = ref('') // last spoken transcript
 const listening = ref(false)
-let flashTimer = null
 let recCtl = null
+
+const input = ref(null)
+
+// Keep the single input focused across cards so the device keyboard stays up —
+// the whole point of the redesign. Called after every transition.
+function focusInput() {
+  nextTick(() => input.value?.focus())
+}
 
 function startCard() {
   typed.value = ''
-  prunedFor = 0
-  wrongThisCard.value = false
-  flash.value = false
+  revealed.value = false
   heard.value = ''
-  const others = decoySource.filter((w) => w.toLowerCase() !== answer.value.toLowerCase())
-  decoys.value = shuffle(others).slice(0, DECOY_TARGET)
   // In hearing mode the card is heard, not seen — read it out as it appears.
   if (props.exercise.audio && card.value) speak(card.value.ru)
+  focusInput()
 }
 
-// Candidates shown in the combo box: the answer plus surviving decoys, filtered
-// to those containing what's typed, sorted for browsability, capped for the DOM.
-// The answer is always kept in view when it still matches the filter, so it can
-// be found once the pile is small — never floated to the top, which would give
-// it away.
-const candidates = computed(() => {
-  const q = typingSequence(typed.value)
-  const matches = (w) => !q || typingSequence(w).includes(q)
-  const pool = [...new Set([answer.value, ...decoys.value])].filter(matches)
-  pool.sort((a, b) => a.localeCompare(b))
-  const window = pool.slice(0, DISPLAY_LIMIT)
-  if (matches(answer.value) && !window.includes(answer.value) && window.length) {
-    window[window.length - 1] = answer.value
-    window.sort((a, b) => a.localeCompare(b))
-  }
-  return window
-})
-
+// Typing the whole word right advances straight away — no Enter needed.
 function onType() {
-  // Prune a slice of decoys for every newly-reached correct-prefix letter.
-  const reached = correctPrefixLen(typed.value)
-  while (prunedFor < reached && decoys.value.length) {
-    const remove = Math.max(1, Math.floor(decoys.value.length * PRUNE_FRACTION))
-    decoys.value = shuffle(decoys.value).slice(remove)
-    prunedFor += 1
+  if (!revealed.value && isAnswer(typed.value)) succeed()
+}
+
+// Enter drives both phases: check a guess, or (once revealed) move on. Keeping
+// everything on the return key means focus never leaves the input.
+function onSubmit() {
+  if (revealed.value) {
+    advance()
+    return
   }
-  // Typing the whole word right advances straight away.
   if (isAnswer(typed.value)) succeed()
+  else reveal()
 }
 
-function pickCandidate(word) {
-  if (!card.value) return
-  if (isAnswer(word)) succeed()
-  else registerWrong()
-}
-
-// A wrong guess flags the card as missed but leaves it open — the learner can
-// keep hunting for the right word, or pass.
-function registerWrong() {
-  if (!card.value) return
-  wrongThisCard.value = true
+// Show the correct answer and count the card as missed. The learner reads it,
+// then presses Enter / Next to continue.
+function reveal() {
+  if (!card.value || revealed.value) return
+  revealed.value = true
   missed.add(card.value.key)
+  stopMic()
   playFeedback(false)
-  flash.value = true
-  clearTimeout(flashTimer)
-  flashTimer = setTimeout(() => (flash.value = false), FLASH_MS)
+  // Read the Russian aloud so the correct pronunciation lands with the answer —
+  // especially valuable in hearing mode, where the word was never shown.
+  speak(card.value.ru)
+  focusInput()
 }
 
 function succeed() {
   stopMic()
-  // A clean first-time answer chimes; one reached after a wrong guess doesn't
-  // (it's already counted as a miss).
-  playFeedback(!wrongThisCard.value)
+  playFeedback(true)
   advance()
 }
 
+// Pass is just an explicit "I don't know" — reveal the answer like a wrong guess.
 function pass() {
-  if (!card.value) return
-  stopMic()
-  missed.add(card.value.key)
-  playFeedback(false)
-  advance()
+  reveal()
 }
 
 function advance() {
@@ -219,7 +139,7 @@ function advance() {
 // --- Speaking ---------------------------------------------------------------
 
 function startMic() {
-  if (!canSpeak || listening.value) return
+  if (!canSpeak || listening.value || revealed.value) return
   heard.value = ''
   listening.value = true
   recCtl = listen({
@@ -233,7 +153,7 @@ function startMic() {
       if (!finalText) return
       heard.value = finalText
       if (isSpokenAnswer([finalText, ...alternatives])) succeed()
-      else registerWrong()
+      else reveal()
     },
     onError: () => {
       listening.value = false
@@ -249,11 +169,8 @@ function stopMic() {
   }
 }
 
-// Draw the first card's pile up front (not in onMounted) so the combo box is
-// populated on the very first render.
 startCard()
 onBeforeUnmount(() => {
-  clearTimeout(flashTimer)
   stopMic()
 })
 </script>
@@ -274,32 +191,34 @@ onBeforeUnmount(() => {
       </template>
     </div>
 
-    <label class="visually-hidden" :for="'fc-' + idx">Type the English</label>
-    <input
-      :id="'fc-' + idx"
-      v-model="typed"
-      type="text"
-      class="combo-input"
-      :class="{ flash }"
-      placeholder="Type the English…"
-      autocomplete="off"
-      autocapitalize="off"
-      autocorrect="off"
-      spellcheck="false"
-      @input="onType"
-    />
+    <label class="visually-hidden" for="fc-input">Type the English</label>
+    <form @submit.prevent="onSubmit">
+      <input
+        id="fc-input"
+        ref="input"
+        v-model="typed"
+        type="text"
+        class="combo-input"
+        :class="{ revealed }"
+        :readonly="revealed"
+        placeholder="Type the English…"
+        autocomplete="off"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        @input="onType"
+      />
+    </form>
 
-    <p v-if="flash" class="miss muted">Not that one — keep trying, or pass.</p>
-
-    <!-- The combo box: pick the word from the (shrinking) list of candidates. -->
-    <ul class="options" role="listbox">
-      <li v-for="word in candidates" :key="word">
-        <button type="button" class="option" @click="pickCandidate(word)">{{ word }}</button>
-      </li>
-    </ul>
+    <!-- The learning moment: the correct answer after a wrong guess or a pass. -->
+    <div v-if="revealed" class="reveal">
+      <span class="reveal-label">Answer</span>
+      <span class="reveal-en">{{ answer }}</span>
+      <span class="reveal-ru"><span lang="ru">{{ card.ru }}</span><SpeakButton :text="card.ru" /></span>
+    </div>
 
     <!-- Answer by voice instead of typing. -->
-    <div v-if="canSpeak" class="speak-row">
+    <div v-if="canSpeak && !revealed" class="speak-row">
       <button v-if="!listening" type="button" class="speak-toggle" @click="startMic">
         🎤 Speak instead
       </button>
@@ -311,7 +230,8 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="row">
-      <button type="button" class="pass" @click="pass">Pass →</button>
+      <button v-if="revealed" type="button" class="primary next" @click="advance">Next →</button>
+      <button v-else type="button" class="pass" @click="pass">Pass →</button>
     </div>
   </div>
 </template>
@@ -348,35 +268,36 @@ onBeforeUnmount(() => {
   background: var(--card);
   color: var(--text);
 }
-.combo-input.flash {
+.combo-input.revealed {
   border-color: var(--bad);
-  background: color-mix(in srgb, var(--bad) 12%, var(--card));
+  background: color-mix(in srgb, var(--bad) 10%, var(--card));
 }
-.miss {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--bad);
-}
-.options {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.reveal {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  max-height: 14rem;
-  overflow-y: auto;
-}
-.option {
-  padding: 0.45rem 0.7rem;
+  align-items: baseline;
+  gap: 0.5rem 0.7rem;
+  padding: 0.7rem 0.8rem;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--bg-soft);
-  color: var(--text);
-  font-size: 1.02rem;
 }
-.option:hover {
-  border-color: var(--primary);
+.reveal-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bad);
+}
+.reveal-en {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.reveal-ru {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--muted);
 }
 .speak-row {
   display: flex;
