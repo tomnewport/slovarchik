@@ -1746,6 +1746,7 @@ words:
     usage:
       - ru: На не́бе нет ви́димых звёзд.
         en_gb: There are no visible stars in the sky.
+        inflect: { token: 4, case: gen, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́то была́ ви́димая оши́бка.
         en_gb: It was a visible mistake.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
