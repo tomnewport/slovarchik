@@ -46,10 +46,15 @@ const limit = has('--limit') ? Number(val('--limit')) : 40;
 // can propose a concrete annotation for.
 const GROUPS = {
   annotatable: ['single-cell', 'prep-pinned'],
-  // The inventory #359 targets: one bucket per kind of case call a human confirms.
-  hand: ['accusative-object', 'prep-governed', 'number-only'],
+  // Buckets a human confirms — one per kind of case call. Under the exhaustive
+  // policy (#436) this now includes nominative subjects and the genitive
+  // governors, so `--suggest` proposes a case for every one of them.
+  hand: [
+    'accusative-object', 'prep-governed', 'number-only',
+    'nominative-subject', 'genitive-quantity', 'genitive-negation',
+  ],
   leave: [
-    'nominative-subject', 'genuinely-ambiguous', 'multi-token-ambiguous',
+    'genuinely-ambiguous', 'multi-token-ambiguous',
     'no-matching-cell', 'no-paradigm', 'unsupported-pos',
   ],
 };

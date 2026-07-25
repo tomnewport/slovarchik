@@ -44,6 +44,24 @@ export const PREP_CASES = {
   с: ['gen', 'ins'], со: ['gen', 'ins'],
 };
 
+// Words that govern the genitive on the noun to their right (reaching across an
+// agreeing modifier, like a preposition). Two families: quantity words and the
+// negation «нет». Used only to classify skips into confirmable genitive buckets,
+// never to auto-annotate — so this can't change the auto-annotator's output.
+export const GENITIVE_QUANTIFIERS = new Set([
+  'много', 'немного', 'мало', 'немало', 'несколько', 'сколько', 'столько',
+  'больше', 'меньше', 'достаточно', 'полно', 'масса', 'куча', 'пара',
+]);
+// Cardinal numerals (2+) take the genitive: 2–4 → gen sg, 5+ → gen pl. The
+// surface form already encodes which, so we only need to recognise the numeral.
+export const GENITIVE_NUMERALS = new Set([
+  'два', 'две', 'три', 'четыре', 'оба', 'обе',
+  'пять', 'шесть', 'семь', 'восемь', 'девять', 'десять',
+  'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать',
+  'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'сто', 'тысяча',
+]);
+export const GENITIVE_NEGATION = new Set(['нет', 'нету']);
+
 /** Build norm(form) -> list of paradigm cells, from a flat key→form map. */
 function cellsFromFlat(obj, keyRe, shape) {
   const map = new Map();
@@ -238,7 +256,21 @@ export function analyze(pos, word, ru) {
   // candidate annotation for a human to confirm. Each hand bucket carries a
   // `dec` with a `confirm` list naming the judgement the human still owns.
   const oblique = cands.filter((c) => c.oblique.length);
-  if (!oblique.length) return { status: 'skip', bucket: 'nominative-subject', candidates: cands, dec: null };
+  if (!oblique.length) {
+    // Every candidate reads as nominative only — a subject, or a predicate
+    // nominative after «—». Propose case: nom for a lone candidate; the human
+    // confirms it's the subject/predicate (not, say, a vocative). status stays
+    // 'skip' so the auto-annotator (`decide`) never emits nominative.
+    const noms = cands.filter((c) => c.cells.some((x) => x.case === 'nom'));
+    if (noms.length === 1) {
+      const nomCell = noms[0].cells.find((x) => x.case === 'nom');
+      return {
+        status: 'skip', bucket: 'nominative-subject', candidates: cands,
+        dec: { token: noms[0].idx + 1, ...mk(nomCell, { confirm: ['case'] }) },
+      };
+    }
+    return { status: 'skip', bucket: 'nominative-subject', candidates: cands, dec: null };
+  }
   if (oblique.length > 1) return { status: 'skip', bucket: 'multi-token-ambiguous', candidates: cands, dec: null };
 
   const c = oblique[0];
@@ -292,7 +324,44 @@ export function analyze(pos, word, ru) {
       };
     }
   }
+
+  // Genitive governor: a quantity word / numeral («мно́го воды́», «пять книг») or
+  // the negation «нет» («нет вре́мени») to the left forces the genitive. Only
+  // fires when the token actually has a genitive reading and that reading pins a
+  // single number, so the proposal is a light confirm.
+  if (obliqueCases.has('gen')) {
+    const gov = nearestGenitiveGovernor(tokens, c.idx);
+    if (gov) {
+      const genCells = c.oblique.filter((x) => x.case === 'gen');
+      const numbers = new Set(genCells.map((x) => x.number));
+      if (numbers.size === 1) {
+        return {
+          status: 'skip',
+          bucket: gov === 'negation' ? 'genitive-negation' : 'genitive-quantity',
+          candidates: cands,
+          dec: { token: c.idx + 1, ...mk(genCells[0], { confirm: ['case'], gov }) },
+        };
+      }
+    }
+  }
   return { status: 'skip', bucket: 'genuinely-ambiguous', candidates: cands, dec: null };
+}
+
+/**
+ * Nearest genitive-forcing governor to the left of `idx`: a quantity word /
+ * cardinal numeral, or the negation «нет». Reaches across an agreeing modifier
+ * and stops at a clause boundary, mirroring {@link nearestGoverningPrep}.
+ * Returns 'quantity' | 'negation' | null.
+ */
+function nearestGenitiveGovernor(tokens, idx) {
+  for (let j = idx - 1; j >= 0 && j >= idx - 3; j--) {
+    const raw = tokens[j];
+    const n = norm(core(raw));
+    if (GENITIVE_NEGATION.has(n)) return 'negation';
+    if (GENITIVE_QUANTIFIERS.has(n) || GENITIVE_NUMERALS.has(n)) return 'quantity';
+    if (/[,;:—–]/.test(raw)) break;
+  }
+  return null;
 }
 
 /**
@@ -308,6 +377,10 @@ function nearestGoverningPrep(tokens, idx) {
     const raw = tokens[j];
     const n = norm(core(raw));
     if (PREP_CASES[n]) return { tok: n, at: j };
+    // A genitive governor (нет / мно́го / a numeral) between a preposition and
+    // the target claims the target itself, so a preposition further left can't
+    // reach it — «В стака́не нет воды́» is genitive, not в-governed. Stop here.
+    if (GENITIVE_NEGATION.has(n) || GENITIVE_QUANTIFIERS.has(n) || GENITIVE_NUMERALS.has(n)) break;
     // A boundary punctuation clinging to this token sits between it and the
     // token to its right — including right before the target — so stop here.
     if (/[,;:—–]/.test(raw)) break;
