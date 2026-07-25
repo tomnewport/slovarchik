@@ -15,17 +15,13 @@
  * `--file <name>` restricts to one vocab file. `--sample N` prints N decisions.
  */
 import { readFileSync, writeFileSync } from 'fs';
+import { fileURLToPath } from 'url';
 
-const args = process.argv.slice(2);
-const APPLY = args.includes('--apply');
-const onlyFile = args.includes('--file') ? args[args.indexOf('--file') + 1] : null;
-const sampleN = args.includes('--sample') ? Number(args[args.indexOf('--sample') + 1]) : 0;
-
-const dir = 'public/vocab';
-const norm = (s) =>
+export const dir = 'public/vocab';
+export const norm = (s) =>
   String(s ?? '').replace(/́/g, '').trim().toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ');
-const core = (t) => String(t ?? '').replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '');
-const tokenize = (ru) => String(ru ?? '').trim().split(/\s+/).filter(Boolean);
+export const core = (t) => String(t ?? '').replace(/^[^\p{L}\p{M}]+|[^\p{L}\p{M}]+$/gu, '');
+export const tokenize = (ru) => String(ru ?? '').trim().split(/\s+/).filter(Boolean);
 
 
 // Prepositions and the case(s) each can govern (lower-cased, stress-stripped).
@@ -33,14 +29,15 @@ const tokenize = (ru) => String(ru ?? '').trim().split(/\s+/).filter(Boolean);
 // the case is taken to be the single overlap between what the preposition allows
 // and the token's candidate cells. So в + a form that is only ever dat-or-pre
 // (fem `-е`) resolves to prepositional, since в never governs the dative.
-const PREP_CASES = {
+export const PREP_CASES = {
   без: ['gen'], до: ['gen'], из: ['gen'], 'из-за': ['gen'], 'из-под': ['gen'],
   от: ['gen'], ото: ['gen'], у: ['gen'], для: ['gen'], около: ['gen'], возле: ['gen'],
   вокруг: ['gen'], кроме: ['gen'], среди: ['gen'], против: ['gen'], ради: ['gen'],
   мимо: ['gen'], вместо: ['gen'], сверх: ['gen'], насчёт: ['gen'], позади: ['gen'],
   к: ['dat'], ко: ['dat'],
   над: ['ins'], надо: ['ins'], перед: ['ins'], передо: ['ins'], между: ['ins'],
-  о: ['pre'], об: ['pre'], обо: ['pre'], при: ['pre'],
+  // о/об/обо: 'about' (+pre) and the contact sense 'against' (+acc, обжёгся о крапи́ву).
+  о: ['acc', 'pre'], об: ['acc', 'pre'], обо: ['acc', 'pre'], при: ['pre'],
   в: ['acc', 'pre'], во: ['acc', 'pre'], на: ['acc', 'pre'],
   за: ['acc', 'ins'], под: ['acc', 'ins'], подо: ['acc', 'ins'],
   про: ['acc'], через: ['acc'], сквозь: ['acc'],
@@ -60,17 +57,17 @@ function cellsFromFlat(obj, keyRe, shape) {
   return map;
 }
 
-function nounCells(w) {
+export function nounCells(w) {
   return cellsFromFlat(w.declension, /^(sg|pl)_(nom|gen|dat|acc|ins|pre|loc)$/, (m) => ({
     number: m[1], case: m[2],
   }));
 }
-function adjCells(w) {
+export function adjCells(w) {
   return cellsFromFlat(w.declension, /^(m|n|f|pl)_(nom|gen|dat|acc|ins|pre)$/, (m) => ({
     gender: m[1], case: m[2], number: m[1] === 'pl' ? 'pl' : 'sg',
   }));
 }
-function verbCells(w) {
+export function verbCells(w) {
   const c = w.conjugation || {};
   const map = new Map();
   const add = (form, tense, person) => {
@@ -89,7 +86,7 @@ function verbCells(w) {
   }
   return map;
 }
-function pronounCells(w) {
+export function pronounCells(w) {
   if (w.declension) return { map: adjCells(w), gendered: true };
   const map = new Map();
   for (const c of ['nom', 'gen', 'dat', 'acc', 'ins', 'pre']) {
@@ -101,51 +98,93 @@ function pronounCells(w) {
   return { map, gendered: false };
 }
 
-const PRONOUN_RULE = {
+export const PRONOUN_RULE = {
   pers: 'pronoun-personal', refl: 'pronoun-personal',
   poss: 'pronoun-possessive', demo: 'pronoun-demonstrative',
   det: 'pronoun-demonstrative', inter: 'pronoun-interrogative', neg: null,
 };
 
 /**
- * Decide the annotation for one usage sentence of `word`, or null.
- * Returns { token (1-based), fields } where fields is the inflect object.
+ * Build the paradigm view for a word: its form→cells map plus the closures that
+ * name the grammar rule and the inflect fields for a resolved cell. Returns null
+ * for a POS the drill doesn't cover. Shared by `analyze` (below), so the triage
+ * report and the auto-annotator reason about the exact same cells.
  */
-function decide(pos, word, ru) {
-  const tokens = tokenize(ru);
-  let map, gendered = false, ruleFor, extraFields;
+export function paradigmFor(pos, word) {
   if (pos === 'noun') {
-    map = nounCells(word);
     const decl = word.declension || {};
-    ruleFor = (cell) => {
-      // Animate accusative (acc syncretic with genitive) gets its own rule.
-      if (cell.case === 'acc' && word.animacy === 'a' &&
-          norm(decl[`${cell.number}_acc`]) === norm(decl[`${cell.number}_gen`])) {
-        return 'noun-acc-animate';
-      }
-      return `noun-${cell.case}-${cell.number}`;
+    return {
+      map: nounCells(word), gendered: false,
+      ruleFor: (cell) => {
+        // Animate accusative (acc syncretic with genitive) gets its own rule.
+        if (cell.case === 'acc' && word.animacy === 'a' &&
+            norm(decl[`${cell.number}_acc`]) === norm(decl[`${cell.number}_gen`])) {
+          return 'noun-acc-animate';
+        }
+        return `noun-${cell.case}-${cell.number}`;
+      },
+      extraFields: (cell) => ({ case: cell.case, number: cell.number }),
     };
-    extraFields = (cell) => ({ case: cell.case, number: cell.number });
-  } else if (pos === 'adjective') {
-    map = adjCells(word);
-    ruleFor = () => 'adj-agreement';
-    extraFields = (cell) => ({ case: cell.case, number: cell.number, gender: cell.gender });
-  } else if (pos === 'verb') {
-    map = verbCells(word);
-    ruleFor = (cell) => `verb-${cell.tense}`;
-    extraFields = (cell) => ({ tense: cell.tense, person: cell.person });
-  } else if (pos === 'pronoun') {
-    const pc = pronounCells(word);
-    map = pc.map; gendered = pc.gendered;
-    ruleFor = () => PRONOUN_RULE[word.type] ?? null;
-    extraFields = (cell) =>
-      gendered
-        ? { case: cell.case, number: cell.number, gender: cell.gender }
-        : { case: cell.case };
-  } else {
-    return null;
   }
-  if (!map || map.size === 0) return null;
+  if (pos === 'adjective') {
+    return {
+      map: adjCells(word), gendered: true,
+      ruleFor: () => 'adj-agreement',
+      extraFields: (cell) => ({ case: cell.case, number: cell.number, gender: cell.gender }),
+    };
+  }
+  if (pos === 'verb') {
+    return {
+      map: verbCells(word), gendered: false,
+      ruleFor: (cell) => `verb-${cell.tense}`,
+      extraFields: (cell) => ({ tense: cell.tense, person: cell.person }),
+    };
+  }
+  if (pos === 'pronoun') {
+    const pc = pronounCells(word);
+    return {
+      map: pc.map, gendered: pc.gendered,
+      ruleFor: () => PRONOUN_RULE[word.type] ?? null,
+      extraFields: (cell) =>
+        pc.gendered
+          ? { case: cell.case, number: cell.number, gender: cell.gender }
+          : { case: cell.case },
+    };
+  }
+  return null;
+}
+
+/** A cell we never annotate for nouns/pronouns (dictionary form / 2nd locative). */
+function isSkippableCase(pos, gendered, cell) {
+  if (pos === 'noun' && (cell.case === 'nom' || cell.case === 'loc')) return true;
+  if (pos === 'pronoun' && !gendered && cell.case === 'nom') return true;
+  return false;
+}
+
+/**
+ * Classify one usage sentence of `word` for the in-context inflection drill.
+ * Returns { status, bucket, dec?, candidates } where:
+ *   - status: 'annotate' (script can prove the slot) or 'skip'
+ *   - bucket: WHY it lands where it does — the triage key. For 'annotate':
+ *       'single-cell' | 'prep-pinned'. For 'skip':
+ *       'no-paradigm' | 'no-matching-cell' | 'nominative-subject' |
+ *       'prep-pinnable-multi-token' | 'number-only' | 'animate-accusative' |
+ *       'genuinely-ambiguous'.
+ *   - dec: { token, fields, rule } when the case (and, for a suggestion, a
+ *       proposed number) is pinned; the `confirm` array names fields a human
+ *       must still check (e.g. ['number'] for the number-only bucket).
+ * This is the single source of truth: `decide` returns dec only when
+ * status === 'annotate', and the triage tool reads bucket/dec/candidates.
+ */
+export function analyze(pos, word, ru) {
+  const setup = paradigmFor(pos, word);
+  if (!setup) return { status: 'skip', bucket: 'unsupported-pos', candidates: [] };
+  const { map, gendered, ruleFor, extraFields } = setup;
+  if (!map || map.size === 0) return { status: 'skip', bucket: 'no-paradigm', candidates: [] };
+
+  const tokens = tokenize(ru);
+  const canPrep = pos === 'noun' || (pos === 'pronoun' && !gendered);
+  const mk = (cell, extra = {}) => ({ fields: extraFields(cell), rule: ruleFor(cell), ...extra });
 
   // Candidate tokens: those whose form appears in the paradigm at all.
   const cands = [];
@@ -153,45 +192,140 @@ function decide(pos, word, ru) {
     const n = norm(core(tokens[i]));
     if (!n) continue;
     const cells = map.get(n);
-    if (cells) cands.push({ idx: i, n, cells });
+    if (!cells) continue;
+    const prev = i > 0 ? norm(core(tokens[i - 1])) : null;
+    cands.push({ idx: i, n, cells, prep: canPrep && prev && PREP_CASES[prev] ? prev : null });
   }
-  if (!cands.length) return null;
+  if (!cands.length) return { status: 'skip', bucket: 'no-matching-cell', candidates: [] };
 
-  const resolved = [];
+  // Resolve each candidate token to a definite oblique cell where we can.
   for (const c of cands) {
-    let cell = null;
+    c.oblique = c.cells.filter((x) => !isSkippableCase(pos, gendered, x));
     if (c.cells.length === 1) {
-      cell = c.cells[0];
-    } else if (pos === 'noun' || (pos === 'pronoun' && !gendered)) {
-      // Disambiguate by a governing preposition immediately before the token:
-      // take the single case shared by what the preposition allows and the
-      // token's candidate cells.
-      const prev = c.idx > 0 ? norm(core(tokens[c.idx - 1])) : null;
-      const allowed = prev ? PREP_CASES[prev] : null;
-      if (allowed) {
-        const hit = c.cells.filter((x) => allowed.includes(x.case));
-        const cases = new Set(hit.map((x) => x.case));
-        // Exactly one case must survive, and all its cells must share a number.
-        if (cases.size === 1 && hit.every((x) => x.number === hit[0].number)) cell = hit[0];
+      c.cell = isSkippableCase(pos, gendered, c.cells[0]) ? null : c.cells[0];
+      c.via = c.cell ? 'single-cell' : null;
+      continue;
+    }
+    if (c.prep) {
+      // Auto-pin only on an ADJACENT governing preposition that yields a single
+      // case AND a single number — the conservative rule the auto-annotator has
+      // always used. Reaching across modifiers is left to the skip classifier.
+      const allowed = PREP_CASES[c.prep];
+      const hit = c.cells.filter((x) => allowed.includes(x.case) && !isSkippableCase(pos, gendered, x));
+      const cases = new Set(hit.map((x) => x.case));
+      if (cases.size === 1 && hit.every((x) => x.number === hit[0].number)) {
+        c.cell = hit[0]; c.via = 'prep-pinned';
       }
     }
-    if (!cell) continue;
-    // Never annotate nominative for nouns/pronouns (dictionary form; no rule).
-    if ((pos === 'noun') && cell.case === 'nom') continue;
-    if (pos === 'noun' && cell.case === 'loc') continue; // second locative: skip
-    if (pos === 'pronoun' && !gendered && cell.case === 'nom') continue;
-    resolved.push({ idx: c.idx, cell });
   }
-  if (resolved.length !== 1) return null; // 0 or ambiguous → skip
 
-  const { idx, cell } = resolved[0];
-  const fields = extraFields(cell);
-  const rule = ruleFor(cell);
-  return { token: idx + 1, fields, rule };
+  // The auto-annotatable set: candidates pinned to a single definite cell.
+  const pinned = cands.filter((c) => c.cell);
+  if (pinned.length === 1) {
+    const c = pinned[0];
+    return {
+      status: 'annotate',
+      bucket: c.via, // 'single-cell' | 'prep-pinned'
+      dec: { token: c.idx + 1, ...mk(c.cell) },
+      candidates: cands,
+    };
+  }
+  if (pinned.length > 1) {
+    return { status: 'skip', bucket: 'multi-token-ambiguous', candidates: cands, dec: null };
+  }
+
+  // Nothing auto-pinned → classify the skip and, where possible, propose a
+  // candidate annotation for a human to confirm. Each hand bucket carries a
+  // `dec` with a `confirm` list naming the judgement the human still owns.
+  const oblique = cands.filter((c) => c.oblique.length);
+  if (!oblique.length) return { status: 'skip', bucket: 'nominative-subject', candidates: cands, dec: null };
+  if (oblique.length > 1) return { status: 'skip', bucket: 'multi-token-ambiguous', candidates: cands, dec: null };
+
+  const c = oblique[0];
+  const obliqueCases = new Set(c.oblique.map((x) => x.case));
+
+  // Accusative object: the token's only non-nominative reading is accusative —
+  // inanimate nom/acc syncretism (абза́ц, письмо́), or an animate acc=gen form
+  // (дру́га). The form can't tell an object from a nominative subject, so the
+  // human confirms it's a direct object / goal (`case`).
+  const animAcc = (() => {
+    if (!(pos === 'noun' && word.animacy === 'a')) return null;
+    const acc = c.cells.find((x) => x.case === 'acc');
+    const gen = c.cells.find((x) => x.case === 'gen');
+    return acc && gen && acc.number === gen.number ? acc : null;
+  })();
+  if (obliqueCases.size === 1 && obliqueCases.has('acc')) {
+    return {
+      status: 'skip', bucket: 'accusative-object', candidates: cands,
+      dec: { token: c.idx + 1, ...mk(c.oblique.find((x) => x.case === 'acc'), { confirm: ['case'] }) },
+    };
+  }
+  if (animAcc) {
+    return {
+      status: 'skip', bucket: 'accusative-object', candidates: cands,
+      dec: { token: c.idx + 1, ...mk(animAcc, { confirm: ['case'] }) },
+    };
+  }
+
+  // Preposition-governed: a governing preposition — adjacent, or reaching back
+  // across an agreeing modifier (в гражда́нской авиа́ции) — narrows the oblique
+  // cases to exactly one. If the number is also unique it's a light confirm
+  // (the human checks the preposition really governs this token); if the number
+  // is still syncretic it's the number-only bucket.
+  const prep = nearestGoverningPrep(tokens, c.idx);
+  if (prep) {
+    const allowed = PREP_CASES[prep.tok];
+    const hitCases = new Set(c.oblique.filter((x) => allowed.includes(x.case)).map((x) => x.case));
+    if (hitCases.size === 1) {
+      const caseX = [...hitCases][0];
+      const cells = c.oblique.filter((x) => x.case === caseX);
+      const numbers = new Set(cells.map((x) => x.number));
+      if (numbers.size === 1) {
+        return {
+          status: 'skip', bucket: 'prep-governed', candidates: cands,
+          dec: { token: c.idx + 1, ...mk(cells[0], { confirm: ['case'], prep: prep.tok }) },
+        };
+      }
+      return {
+        status: 'skip', bucket: 'number-only', candidates: cands,
+        dec: { token: c.idx + 1, ...mk(cells[0], { confirm: ['number'], prep: prep.tok }) },
+      };
+    }
+  }
+  return { status: 'skip', bucket: 'genuinely-ambiguous', candidates: cands, dec: null };
+}
+
+/**
+ * Nearest preposition governing `idx`, searching left across up to two agreeing
+ * modifiers (adjectives/possessives sit between a preposition and its noun:
+ * «в вое́нной акаде́мии»). Stops at a clause boundary (any comma/dash/colon
+ * clinging to an intervening token) so we never reach past the phrase. Returns
+ * { tok, at } or null. Used only to classify skips, never to auto-annotate, so
+ * the extra reach can't silently change the auto-annotator's output.
+ */
+function nearestGoverningPrep(tokens, idx) {
+  for (let j = idx - 1; j >= 0 && j >= idx - 3; j--) {
+    const raw = tokens[j];
+    const n = norm(core(raw));
+    if (PREP_CASES[n]) return { tok: n, at: j };
+    // A boundary punctuation clinging to this token sits between it and the
+    // token to its right — including right before the target — so stop here.
+    if (/[,;:—–]/.test(raw)) break;
+  }
+  return null;
+}
+
+/**
+ * Decide the annotation for one usage sentence of `word`, or null.
+ * Returns { token (1-based), fields, rule }. Thin wrapper over `analyze`.
+ */
+export function decide(pos, word, ru) {
+  const a = analyze(pos, word, ru);
+  return a.status === 'annotate' ? a.dec : null;
 }
 
 /** Serialize an inflect object in the repo's canonical inline order. */
-function serializeInflect(pos, dec) {
+export function serializeInflect(pos, dec) {
   const f = dec.fields;
   const parts = [`token: ${dec.token}`];
   if (pos === 'verb') {
@@ -205,49 +339,26 @@ function serializeInflect(pos, dec) {
   return `        inflect: { ${parts.join(', ')} }`;
 }
 
-// ---- driver ----------------------------------------------------------------
 import yaml from 'js-yaml';
 
-const FILES = {
+export const FILES = {
   'nouns.yml': 'noun', 'calendar.yml': 'noun', 'verbs.yml': 'verb',
   'adjectives.yml': 'adjective', 'pronouns.yml': 'pronoun',
 };
 
-let grand = { added: 0, alreadyOk: 0, skipped: 0, sentences: 0 };
-const samples = [];
-
-for (const [file, pos] of Object.entries(FILES)) {
-  if (onlyFile && file !== onlyFile) continue;
-  const doc = yaml.load(readFileSync(`${dir}/${file}`, 'utf8'));
-  const words = doc.words || {};
-  const lines = readFileSync(`${dir}/${file}`, 'utf8').split('\n');
-
-  // Walk lines; track current entry key and usage items; compute insertions.
-  const inserts = []; // { afterLine, text }
+/**
+ * Walk a vocab file's lines and return one entry per usage sentence:
+ * { key, ru, ruLine, lastLine, hasInflect }. `lastLine` is where an inflect
+ * line would be inserted; `hasInflect` flags an already-annotated sentence.
+ * Both the auto-annotator and the triage tool iterate over this, so they see
+ * exactly the same sentences.
+ */
+export function parseUsageItems(lines) {
+  const items = [];
   let curKey = null;
   let inUsage = false;
-  let item = null; // { ruLine, ru, lastLine, hasInflect }
-  const flush = () => {
-    if (!item) return;
-    const w = words[curKey];
-    if (w && !item.hasInflect && w.learn !== false) {
-      grand.sentences++;
-      const dec = decide(pos, w, item.ru);
-      if (dec) {
-        inserts.push({ afterLine: item.lastLine, text: serializeInflect(pos, dec) });
-        grand.added++;
-        if (samples.length < sampleN) {
-          samples.push(`${file}  ${curKey}\n   ${item.ru}\n   → ${serializeInflect(pos, dec).trim()}`);
-        }
-      } else {
-        grand.skipped++;
-      }
-    } else if (item.hasInflect) {
-      grand.alreadyOk++;
-    }
-    item = null;
-  };
-
+  let item = null;
+  const flush = () => { if (item) { items.push(item); item = null; } };
   for (let i = 0; i < lines.length; i++) {
     const ln = lines[i];
     const km = ln.match(/^ {2}"([^"]+)":\s*$/);
@@ -259,7 +370,7 @@ for (const [file, pos] of Object.entries(FILES)) {
         flush();
         let ru = rm[1].trim();
         if ((ru.startsWith('"') && ru.endsWith('"')) || (ru.startsWith("'") && ru.endsWith("'"))) ru = ru.slice(1, -1);
-        item = { ruLine: i, ru, lastLine: i, hasInflect: false };
+        item = { key: curKey, ruLine: i, ru, lastLine: i, hasInflect: false };
         continue;
       }
       // a line that is part of the current usage item: any line indented deeper
@@ -274,15 +385,61 @@ for (const [file, pos] of Object.entries(FILES)) {
     }
   }
   flush();
-
-  if (APPLY && inserts.length) {
-    // Apply from bottom to top so line indices stay valid.
-    inserts.sort((a, b) => b.afterLine - a.afterLine);
-    for (const ins of inserts) lines.splice(ins.afterLine + 1, 0, ins.text);
-    writeFileSync(`${dir}/${file}`, lines.join('\n'));
-  }
-  console.log(`${file}: +${inserts.length} annotations`);
+  return items;
 }
 
-console.log(`\nTOTAL: added=${grand.added} skipped=${grand.skipped} alreadyAnnotated=${grand.alreadyOk} unannotatedSentencesSeen=${grand.sentences}`);
-if (samples.length) console.log('\n--- samples ---\n' + samples.join('\n\n'));
+/** Load a vocab file's word map plus its raw lines. */
+export function loadVocabFile(file) {
+  const raw = readFileSync(`${dir}/${file}`, 'utf8');
+  return { words: yaml.load(raw).words || {}, lines: raw.split('\n') };
+}
+
+// ---- driver ----------------------------------------------------------------
+function main(args) {
+  const APPLY = args.includes('--apply');
+  const onlyFile = args.includes('--file') ? args[args.indexOf('--file') + 1] : null;
+  const sampleN = args.includes('--sample') ? Number(args[args.indexOf('--sample') + 1]) : 0;
+
+  const grand = { added: 0, alreadyOk: 0, skipped: 0, sentences: 0 };
+  const samples = [];
+
+  for (const [file, pos] of Object.entries(FILES)) {
+    if (onlyFile && file !== onlyFile) continue;
+    const { words, lines } = loadVocabFile(file);
+
+    const inserts = []; // { afterLine, text }
+    for (const item of parseUsageItems(lines)) {
+      const w = words[item.key];
+      if (w && !item.hasInflect && w.learn !== false) {
+        grand.sentences++;
+        const dec = decide(pos, w, item.ru);
+        if (dec) {
+          inserts.push({ afterLine: item.lastLine, text: serializeInflect(pos, dec) });
+          grand.added++;
+          if (samples.length < sampleN) {
+            samples.push(`${file}  ${item.key}\n   ${item.ru}\n   → ${serializeInflect(pos, dec).trim()}`);
+          }
+        } else {
+          grand.skipped++;
+        }
+      } else if (item.hasInflect) {
+        grand.alreadyOk++;
+      }
+    }
+
+    if (APPLY && inserts.length) {
+      // Apply from bottom to top so line indices stay valid.
+      inserts.sort((a, b) => b.afterLine - a.afterLine);
+      for (const ins of inserts) lines.splice(ins.afterLine + 1, 0, ins.text);
+      writeFileSync(`${dir}/${file}`, lines.join('\n'));
+    }
+    console.log(`${file}: +${inserts.length} annotations`);
+  }
+
+  console.log(`\nTOTAL: added=${grand.added} skipped=${grand.skipped} alreadyAnnotated=${grand.alreadyOk} unannotatedSentencesSeen=${grand.sentences}`);
+  if (samples.length) console.log('\n--- samples ---\n' + samples.join('\n\n'));
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  main(process.argv.slice(2));
+}
