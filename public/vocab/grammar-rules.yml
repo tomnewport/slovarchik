@@ -12,6 +12,26 @@
 ---
 rules:
   # ── Nouns ───────────────────────────────────────────────────────────────
+  noun-nom-sg:
+    title: "Nominative singular"
+    formula: "the dictionary form · marks the subject"
+    explanation: >
+      The nominative is the naming case — the form you find in the dictionary.
+      It marks the subject: who or what does the action (Соба́ка спит), and the
+      predicate after «—» (Москва́ — большо́й го́род). Because Russian word order
+      is free, the nominative — not position — tells you the subject: in Кни́гу
+      чита́ет ма́ма it's ма́ма who reads, even though it comes last. When two
+      nouns share a form (Мать лю́бит дочь), the nominative is the one doing the
+      loving. The singular nominative never changes — it's the base form.
+  noun-nom-pl:
+    title: "Nominative plural"
+    formula: "m/f -а/-ы(-и) · n -а/-я · marks the subject"
+    explanation: >
+      The nominative plural names more than one subject (Де́ти игра́ют).
+      Masculine and feminine nouns usually take -ы/-и (столы́, кни́ги),
+      neuters take -а/-я (о́кна, поля́); a set of masculines take stressed -а́
+      (дома́, города́, учителя́). It marks the subject or the predicate after «—»,
+      just like the singular.
   noun-gen-sg:
     title: "Genitive singular"
     formula: "m/n → -а / -я · f → -ы / -и"

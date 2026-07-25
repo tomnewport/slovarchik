@@ -102,8 +102,32 @@ describe('analyze — bucket classification', () => {
     expect(bucket('noun', kniga, 'Страни́цы кни́ги поте́ряны.')).toBe('genuinely-ambiguous')
   })
 
-  it('classifies a nominative-only match as nominative-subject', () => {
-    expect(bucket('noun', kniga, 'Кни́га лежи́т на столе́.')).toBe('nominative-subject')
+  it('proposes case: nom for a nominative-only subject (confirm the case)', () => {
+    const a = analyze('noun', kniga, 'Кни́га лежи́т на столе́.')
+    expect(a.status).toBe('skip')
+    expect(a.bucket).toBe('nominative-subject')
+    expect(a.dec).toMatchObject({ token: 1, fields: { case: 'nom', number: 'sg' }, confirm: ['case'] })
+    expect(a.dec.rule).toBe('noun-nom-sg')
+  })
+
+  it('routes a genitive form after a quantity word to genitive-quantity', () => {
+    // «мно́го книг» — книг is gen pl uniquely, so it auto-pins; use a syncretic
+    // gen form instead: «пять кни́ги» is unnatural, so test with the stol paradigm
+    // where sg_gen (стола́) is distinct — use кни́ги (sg_gen) after «мно́го».
+    const a = analyze('noun', kniga, 'Мы прочита́ли мно́го кни́ги.')
+    expect(a.bucket).toBe('genitive-quantity')
+    expect(a.dec).toMatchObject({ fields: { case: 'gen' }, confirm: ['case'], gov: 'quantity' })
+  })
+
+  it('routes a genitive form after «нет» to genitive-negation', () => {
+    // «в кни́ге нет ...» won't apply; «нет кни́ги» → кни́ги is gen sg after нет.
+    const a = analyze('noun', kniga, 'На по́лке нет кни́ги.')
+    expect(a.bucket).toBe('genitive-negation')
+    expect(a.dec).toMatchObject({ fields: { case: 'gen' }, confirm: ['case'], gov: 'negation' })
+  })
+
+  it('does not force genitive without a governor (stays genuinely-ambiguous)', () => {
+    expect(bucket('noun', kniga, 'Страни́цы кни́ги поте́ряны.')).toBe('genuinely-ambiguous')
   })
 
   it('reports no-matching-cell when no token is in the paradigm', () => {
@@ -113,5 +137,6 @@ describe('analyze — bucket classification', () => {
   it('decide() still returns an annotation only for the auto-pinned buckets', () => {
     expect(decide('noun', kniga, 'Я чита́ю кни́гу.')).toMatchObject({ fields: { case: 'acc' } })
     expect(decide('noun', stol, 'Я купи́л стол.')).toBeNull() // hand bucket → no auto
+    expect(decide('noun', kniga, 'Кни́га лежи́т на столе́.')).toBeNull() // nominative → no auto
   })
 })
