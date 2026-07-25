@@ -10239,6 +10239,7 @@ words:
         en_gb: The sovereign ruled the country for many years.
       - ru: Наро́д люби́л своего́ госуда́ря.
         en_gb: The people loved their sovereign.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Посо́л говори́л с госуда́рем.
         en_gb: The ambassador spoke with the sovereign.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -17948,6 +17949,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ребёнок жуёт сла́дкий ири́с.
         en_gb: The child is chewing a sweet toffee.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я угости́л друзе́й ири́сом.
         en_gb: I treated my friends to toffee.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -31895,6 +31897,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ба́бочки лю́бят сла́дкий некта́р.
         en_gb: Butterflies love sweet nectar.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: некта́р
       sg_gen: некта́ра
