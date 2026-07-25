@@ -149,6 +149,7 @@ words:
         inflect: { token: 3, case: acc, number: pl, rule: pronoun-personal }
       - ru: Вы говори́те по-ру́сски?
         en_gb: Do you speak Russian?
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Я хочу́ вам помо́чь.
         en_gb: I want to help you.
         inflect: { token: 3, case: dat, number: pl, rule: pronoun-personal }
@@ -381,6 +382,7 @@ words:
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-interrogative }
       - ru: Кто там?
         en_gb: Who is there?
+        inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: У кого́ есть вопро́с?
         en_gb: Who has a question?
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
@@ -403,8 +405,10 @@ words:
     usage:
       - ru: Тебе́ кто́-то звони́л.
         en_gb: Someone called you.
+        inflect: { token: 2, case: nom }
       - ru: Кто́-то стучи́т в дверь.
         en_gb: Someone is knocking at the door.
+        inflect: { token: 1, case: nom }
       - ru: Я с ке́м-то говори́л об э́том.
         en_gb: I spoke with someone about this.
         inflect: { token: 3, case: ins, number: sg, rule: pronoun-interrogative }
@@ -532,6 +536,7 @@ words:
         inflect: { token: 3, case: dat, number: pl, rule: pronoun-personal }
       - ru: Мы живём в Ло́ндоне.
         en_gb: We live in London.
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Нам ну́жно идти́ домо́й.
         en_gb: We need to go home.
         inflect: { token: 1, case: dat, rule: pronoun-personal }
@@ -662,6 +667,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
       - ru: Никто́ не зна́ет отве́та.
         en_gb: Nobody knows the answer.
+        inflect: { token: 1, case: nom }
       - ru: Я никого́ там не ви́дел.
         en_gb: I saw nobody there.
       - ru: Об э́том никому́ не говори́.
@@ -724,6 +730,7 @@ words:
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
       - ru: Он чита́ет газе́ту.
         en_gb: He is reading the newspaper.
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Я ви́жу его́ ка́ждый день.
         en_gb: I see him every day.
       - ru: Мы говори́ли о нём вчера́.
@@ -759,6 +766,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: pronoun-personal }
       - ru: Она́ живёт в Москве́.
         en_gb: She lives in Moscow.
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Я хорошо́ её зна́ю.
         en_gb: I know her well.
         inflect: { token: 3, case: acc, number: sg, rule: pronoun-personal }
@@ -792,6 +800,7 @@ words:
         inflect: { token: 3, case: ins, number: pl, rule: pronoun-personal }
       - ru: Они́ рабо́тают вме́сте.
         en_gb: They work together.
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Я давно́ их не ви́дел.
         en_gb: I have not seen them for a long time.
       - ru: Мы говори́ли о них на встре́че.
@@ -819,8 +828,10 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: pronoun-personal }
       - ru: Я ви́жу окно́, оно́ откры́то.
         en_gb: I see the window, it is open.
+        inflect: { token: 4, case: nom, rule: pronoun-personal }
       - ru: Где мо́ре? — Оно́ за горо́й.
         en_gb: Where is the sea? — It is behind the mountain.
+        inflect: { token: 4, case: nom, rule: pronoun-personal }
     forms:
       nom: оно́
       gen: его́
@@ -1155,6 +1166,7 @@ words:
         inflect: { token: 2, case: gen, rule: pronoun-personal }
       - ru: Ты лю́бишь ко́фе?
         en_gb: Do you like coffee?
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Я тебя́ не слы́шу.
         en_gb: I cannot hear you.
       - ru: Я хочу́ пойти́ с тобо́й.
@@ -1342,6 +1354,7 @@ words:
         inflect: { token: 2, case: dat, number: sg, rule: pronoun-personal }
       - ru: Я живу́ здесь.
         en_gb: I live here.
+        inflect: { token: 1, case: nom, rule: pronoun-personal }
       - ru: Он ждёт меня́ у вхо́да.
         en_gb: He is waiting for me at the entrance.
         inflect: { token: 3, case: acc, number: sg, rule: pronoun-personal }

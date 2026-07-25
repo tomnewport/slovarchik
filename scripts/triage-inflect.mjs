@@ -182,6 +182,13 @@ function verify() {
         const tokens = tokenize(u.ru);
         const tok = tokens[inf.token - 1];
         const prev = inf.token >= 2 ? norm(core(tokens[inf.token - 2])) : null;
+        // «что (э́то) за N» is a fixed exclamative — «за» doesn't govern here and
+        // N is nominative («Что за шту́ка?», «Что э́то за шту́ка?»), so it's not a
+        // preposition signal. «что» may sit one or two tokens before «за».
+        if (prev === 'за' &&
+            [tokens[inf.token - 3], tokens[inf.token - 4]].some((t) => norm(core(t ?? '')) === 'что')) {
+          unverifiable++; continue;
+        }
         const allowed = prev ? PREP_CASES[prev] : null;
         if (!allowed) { unverifiable++; continue; }
         // The second locative (в аду́, на берегу́) is a specialized prepositional:

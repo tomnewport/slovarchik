@@ -356,6 +356,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́сленица дли́тся це́лую неде́лю.
         en_gb: Maslenitsa lasts a whole week.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Пе́ред Ма́сленицей мы покупа́ем муку́.
         en_gb: Before Maslenitsa we buy flour.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
@@ -466,6 +467,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Па́сха — ва́жный весе́нний пра́здник.
         en_gb: Easter is an important spring holiday.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Пе́ред Па́схой кра́сят я́йца.
         en_gb: Before Easter people dye eggs.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
@@ -522,6 +524,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Пя́тница — коне́ц рабо́чей неде́ли.
         en_gb: Friday is the end of the working week.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По пя́тницам мы у́жинаем вме́сте.
         en_gb: On Fridays we have dinner together.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
@@ -609,6 +612,7 @@ words:
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Среда́ — середи́на неде́ли.
         en_gb: Wednesday is the middle of the week.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В сре́ду я был за́нят.
         en_gb: On Wednesday I was busy.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
@@ -640,6 +644,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Суббо́та — выходно́й день.
         en_gb: Saturday is a day off.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По суббо́там я хожу́ на ры́нок.
         en_gb: On Saturdays I go to the market.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
