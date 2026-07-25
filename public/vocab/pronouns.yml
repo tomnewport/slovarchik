@@ -338,6 +338,7 @@ words:
         en_gb: The man who called has left.
       - ru: В кото́ром часу́ начина́ется уро́к?
         en_gb: At what time does the lesson start?
+        inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-interrogative }
     forms:
       m: кото́рый
       f: кото́рая
@@ -432,6 +433,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: В любо́е вре́мя звони́ мне.
         en_gb: Call me at any time.
+        inflect: { token: 2, case: acc, number: sg, gender: n, rule: pronoun-demonstrative }
     forms:
       m: любо́й
       f: люба́я
@@ -634,6 +636,7 @@ words:
     usage:
       - ru: У меня́ нет никако́го пла́на.
         en_gb: I have no plan at all.
+        inflect: { token: 4, case: gen, number: sg, gender: m }
       - ru: Никака́я пого́да нас не остано́вит.
         en_gb: No weather will stop us.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
