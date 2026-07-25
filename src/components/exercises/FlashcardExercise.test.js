@@ -9,19 +9,6 @@ vi.mock('../../lib/speech.js', () => ({
 }))
 vi.mock('../../stores/settings.js', () => ({ playFeedback: vi.fn() }))
 
-// A small decoy vocabulary so the combo box has words to offer in tests.
-vi.mock('../../stores/vocab.js', () => ({
-  vocab: {
-    value: [
-      { en: 'autumn' },
-      { en: 'summer' },
-      { en: 'winter' },
-      { en: 'week' },
-      { en: 'year' },
-    ],
-  },
-}))
-
 // Recognition is controllable per test: `listenImpl` decides what the mic does.
 let listenImpl = () => ({ stop() {}, abort() {} })
 vi.mock('../../lib/recognition.js', () => ({
@@ -51,9 +38,6 @@ const exercise = {
   targets: ['a', 'b'],
 }
 
-const options = (wrapper) => wrapper.findAll('.option')
-const optionByText = (wrapper, text) => options(wrapper).find((b) => b.text() === text)
-
 beforeEach(() => {
   vi.clearAllMocks()
   listenImpl = () => ({ stop() {}, abort() {} })
@@ -66,9 +50,10 @@ describe('FlashcardExercise', () => {
     expect(wrapper.find('.count').text()).toContain('Card 1 of 2')
   })
 
-  it('offers the answer among the combo-box candidates', () => {
+  it('does not render any clickable answer options', () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
-    expect(optionByText(wrapper, 'spring')).toBeTruthy()
+    expect(wrapper.findAll('.option').length).toBe(0)
+    expect(wrapper.find('[role="listbox"]').exists()).toBe(false)
   })
 
   it('advances to the next card once the English is typed correctly', async () => {
@@ -80,36 +65,43 @@ describe('FlashcardExercise', () => {
     expect(playFeedback).toHaveBeenCalledWith(true)
   })
 
-  it('selecting the correct candidate advances the card', async () => {
+  it('reveals the correct answer when a wrong guess is submitted', async () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
-    await optionByText(wrapper, 'spring').trigger('click')
-    expect(wrapper.find('.ru').text()).toBe('ме́сяц')
-  })
-
-  it('a wrong candidate flags the card but leaves it open', async () => {
-    const wrapper = mount(FlashcardExercise, { props: { exercise } })
-    // "summer" is a decoy, not the answer for card 1.
-    await optionByText(wrapper, 'summer').trigger('click')
-    // Still on card 1, with a "keep trying" nudge.
+    await wrapper.find('.combo-input').setValue('summer')
+    await wrapper.find('form').trigger('submit')
+    // Still on card 1, but the answer is now revealed for the learner to read.
     expect(wrapper.find('.ru').text()).toBe('весна')
-    expect(wrapper.find('.miss').exists()).toBe(true)
+    expect(wrapper.find('.reveal').exists()).toBe(true)
+    expect(wrapper.find('.reveal-en').text()).toBe('spring')
     expect(playFeedback).toHaveBeenLastCalledWith(false)
   })
 
-  it('a card reached after a wrong guess is still reported wrong', async () => {
+  it('moves on from the revealed answer when Enter is pressed again', async () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
-    await optionByText(wrapper, 'summer').trigger('click') // wrong on card 1
-    await wrapper.find('.combo-input').setValue('spring') // then found it
+    await wrapper.find('.combo-input').setValue('summer')
+    await wrapper.find('form').trigger('submit') // reveal card 1
+    await wrapper.find('form').trigger('submit') // continue
+    expect(wrapper.find('.reveal').exists()).toBe(false)
+    expect(wrapper.find('.ru').text()).toBe('ме́сяц')
+  })
+
+  it('a card guessed wrong is reported wrong even after moving on', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    await wrapper.find('.combo-input').setValue('summer') // wrong on card 1
+    await wrapper.find('form').trigger('submit') // reveal
+    await wrapper.find('.next').trigger('click') // continue to card 2
     await wrapper.find('.combo-input').setValue('month') // card 2 clean
     const payload = wrapper.emitted('done')[0][0]
     expect(payload.correct).toBe(false)
     expect(payload.wrong).toEqual(['a'])
   })
 
-  it('Pass fails the card and moves on; done reports the passed key', async () => {
+  it('Pass reveals the answer and reports the passed key as wrong', async () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
     await wrapper.find('.combo-input').setValue('spring') // card 1 correct
     await wrapper.find('.pass').trigger('click') // card 2 passed
+    expect(wrapper.find('.reveal-en').text()).toBe('month')
+    await wrapper.find('.next').trigger('click') // finish
     const payload = wrapper.emitted('done')[0][0]
     expect(payload.correct).toBe(false)
     expect(payload.wrong).toEqual(['b'])
@@ -140,13 +132,13 @@ describe('FlashcardExercise', () => {
     expect(wrapper.find('.ru').text()).toBe('ме́сяц')
   })
 
-  it('narrows the candidate list as the answer is typed', async () => {
+  it('a wrong spoken answer reveals the correct answer', async () => {
+    listenImpl = (opts) => {
+      opts.onEnd('winter', [])
+      return { stop() {}, abort() {} }
+    }
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
-    const before = options(wrapper).length
-    await wrapper.find('.combo-input').setValue('spr')
-    const after = options(wrapper).length
-    expect(after).toBeLessThan(before)
-    // The answer is still reachable in the narrowed list.
-    expect(optionByText(wrapper, 'spring')).toBeTruthy()
+    await wrapper.find('.speak-toggle').trigger('click')
+    expect(wrapper.find('.reveal-en').text()).toBe('spring')
   })
 })
