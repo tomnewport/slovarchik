@@ -13,6 +13,12 @@ import {
 
 const sobaka = { key: 'собака=dog', pos: 'noun', headword: 'соба́ка', ru: 'собака' }
 const dumat = { key: 'думать=to think', pos: 'verb', headword: 'ду́мать', ru: 'думать' }
+const dumatFuture = {
+  id: 'budu-dumat',
+  ru: 'Я бу́ду ду́мать об э́том.',
+  en: 'I will think about it.',
+  target: { key: 'думать=to think', token: 2, tense: 'future', person: '1sg', rule: 'verb-future' },
+}
 
 // A verb linked to its aspect partner (as built by vocabBuild.linkAspectPairs)
 // gets a choose-the-aspect step before spelling.
@@ -155,6 +161,22 @@ describe('buildFromPhrase', () => {
     expect(ex.lemmaOptions).toBeNull()
     expect(ex.answerAccented).toBe('ду́маю')
     expect(ex.slotLabel).toContain('Present')
+  })
+
+  it('treats the finite быть auxiliary as the inflected part of an imperfective future', () => {
+    const paired = {
+      ...dumat,
+      aspect: 'impf',
+      aspectPair: { key: 'подумать=to think', ru: 'поду́мать', aspect: 'pf', gloss: 'to think' },
+    }
+    const ex = buildFromPhrase(dumatFuture, paired)
+    expect(ex.targetIndex).toBe(1)
+    expect(ex.lemma).toBe('быть')
+    expect(ex.answerAccented).toBe('бу́ду')
+    expect(ex.slotLabel).toBe('Future · I')
+    // A one-token slot cannot offer aspect alternatives with different syntax.
+    expect(ex.selectSteps).toEqual([])
+    expect(ex.lemmaOptions).toBeNull()
   })
 
   it('offers both lemmas and the aspect rule for a paired verb', () => {

@@ -29,6 +29,19 @@ const PAST_LABEL = { past_m: 'he (past)', past_f: 'she (past)', past_n: 'it (pas
 const IMPERATIVE_LABEL = { imp_sg: 'ты (command)', imp_pl: 'вы (command)' }
 const TENSE_LABEL = { present: 'Present', future: 'Future', past: 'Past', imperative: 'Imperative' }
 
+// An imperfective future is analytic: the finite form belongs to быть and the
+// lexical verb stays in the infinitive (я бу́ду чита́ть). Usage annotations
+// point at this auxiliary so the context drill can ask for the part that
+// actually carries person and number.
+export const ANALYTIC_FUTURE_FORMS = Object.freeze({
+  '1sg': 'бу́ду',
+  '2sg': 'бу́дешь',
+  '3sg': 'бу́дет',
+  '1pl': 'бу́дем',
+  '2pl': 'бу́дете',
+  '3pl': 'бу́дут',
+})
+
 /** Aspect display names and the short usage cue shown on each aspect option. */
 export const ASPECT_LABEL = Object.freeze({ impf: 'imperfective', pf: 'perfective' })
 const ASPECT_HINT = {
@@ -266,13 +279,24 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   const core = wordCore(origToken)
   if (!core) return null
 
+  const analyticFuture =
+    word?.pos === 'verb' &&
+    word?.aspect === 'impf' &&
+    target.tense === 'future' &&
+    ANALYTIC_FUTURE_FORMS[target.person] != null
+
   // The slot shows the dictionary form before answering; the component
   // (PhraseFixExercise) re-attaches the token's surrounding punctuation around
-  // the lemma / answer when it renders, so we only need the lemma here.
-  const lemma = word?.headword || word?.ru || core
+  // the lemma / answer when it renders, so we only need the lemma here. In an
+  // analytic future the annotated finite word is the auxiliary, not the
+  // lexical verb that owns the example.
+  const lemma = analyticFuture ? 'быть' : word?.headword || word?.ru || core
 
   const rule = target.rule ? (rules[target.rule] ?? null) : null
-  const selectSteps = buildSelectSteps(target, word)
+  // Aspect cannot be selected in the one-token board for an analytic future:
+  // its imperfective and perfective alternatives have different structures
+  // (бу́дет чита́ть vs прочита́ет), not interchangeable forms of this slot.
+  const selectSteps = analyticFuture ? [] : buildSelectSteps(target, word)
   const aspectSelect = selectSteps.find((s) => s.kind === 'aspect')
 
   return {

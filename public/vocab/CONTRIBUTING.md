@@ -471,7 +471,10 @@ owner, so its key is implicit:
   (`1sg 2sg 3sg 1pl 2pl 3pl`, `past_m/f/n/pl`, or `imp_sg`/`imp_pl` for the
   imperative). Verbs skip the case step — but a verb with a `pair:` link gets a
   **choose-the-aspect** step first: the sentence is shown with both partners as
-  options and the learner picks the one the context needs.
+  options and the learner picks the one the context needs. For an imperfective
+  analytic future (`бу́ду` + infinitive), point `token` at the finite `быть`
+  auxiliary and annotate the lexical verb's future `person`; the auxiliary is
+  the word that carries person and number.
 
 `token` is the 1-based index of the target in the whitespace-split `ru`
 (punctuation stays attached to its word); the token's letters must equal the

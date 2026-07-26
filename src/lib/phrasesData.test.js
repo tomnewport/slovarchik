@@ -13,7 +13,7 @@ import yaml from 'js-yaml'
 import { loadFixtureWords } from '../test/fixtures.js'
 import { shapeContextPhrases } from './vocabBuild.js'
 import { normalize } from './text.js'
-import { buildFromPhrase, indexPhrases } from './phraseContext.js'
+import { ANALYTIC_FUTURE_FORMS, buildFromPhrase, indexPhrases } from './phraseContext.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
 const rules = yaml.load(readFileSync(resolve(vocabDir, 'grammar-rules.yml'), 'utf8')).rules
@@ -48,6 +48,9 @@ function storedForm(word, t) {
     if (t.person.startsWith('past')) return conj[t.person] ?? null
     if (t.person === 'imp_sg') return conj.imperative?.sg ?? null
     if (t.person === 'imp_pl') return conj.imperative?.pl ?? null
+    // Imperfective verbs have no synthetic future cell of their own. Their
+    // annotated future token is the finite auxiliary from быть.
+    if (t.tense === 'future' && word.aspect === 'impf') return ANALYTIC_FUTURE_FORMS[t.person] ?? null
     return conj[t.tense]?.[t.person] ?? null
   }
   return null
