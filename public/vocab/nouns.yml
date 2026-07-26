@@ -31486,8 +31486,9 @@ words:
     en_gb:
       standard: name (a title or designation)
     usage:
-      - ru: Как называ́ется э́тот го́род?
-        en_gb: What is the name of this city?
+      - ru: Я не по́мню назва́ния э́той у́лицы.
+        en_gb: I don't remember the name of this street.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Я забы́л назва́ние э́той кни́ги.
         en_gb: I forgot the name of this book.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -33321,8 +33322,9 @@ words:
       alt:
         - dinner
     usage:
-      - ru: Мы обы́чно обе́даем в час.
-        en_gb: We usually have lunch at one.
+      - ru: За обе́дом мы обсужда́ли пла́ны.
+        en_gb: Over lunch we discussed our plans.
+        inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: По́сле обе́да мы гуля́ли в па́рке.
         en_gb: After lunch we walked in the park.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -53749,8 +53751,9 @@ words:
       - ru: Две стра́ны заключи́ли сою́з.
         en_gb: The two countries formed a union.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Рабо́чие вступи́ли в профсою́з.
-        en_gb: The workers joined the trade union.
+      - ru: Рабо́чие вступи́ли в сою́з.
+        en_gb: The workers joined the union.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Их сою́з оказа́лся про́чным.
         en_gb: Their union proved to be solid.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
@@ -61590,8 +61593,9 @@ words:
       - ru: Ле́том в го́роде прохо́дит музыка́льный фестива́ль.
         en_gb: In summer a music festival takes place in the city.
         inflect: { token: 6, case: nom, number: sg, rule: noun-nom-sg }
-      - ru: Мы е́здили на кинофестива́ль.
-        en_gb: We went to the film festival.
+      - ru: Мы е́здили на фестива́ль.
+        en_gb: We went to the festival.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На фестива́ле выступа́ли изве́стные музыка́нты.
         en_gb: Famous musicians performed at the festival.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -66647,8 +66651,9 @@ words:
       - ru: Мы ждём эффе́кта от но́вого ме́тода.
         en_gb: We are awaiting the effect of the new method.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: В фи́льме мно́го спецэффе́ктов.
-        en_gb: There are many special effects in the film.
+      - ru: В фи́льме мно́го эффе́ктов.
+        en_gb: There are many effects in the film.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
   "эхо=echo":
     cefr_level: B1
     gender: n
