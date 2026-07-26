@@ -14429,8 +14429,9 @@ words:
       - ru: У ежа́ о́стрые иго́лки.
         en_gb: A hedgehog has sharp needles.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: В лесу́ мы ви́дели не́сколько ежо́в.
+      - ru: В лесу́ мы ви́дели не́сколько еже́й.
         en_gb: In the forest we saw several hedgehogs.
+        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: ёж
       sg_gen: ежа́
