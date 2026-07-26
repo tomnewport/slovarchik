@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { stripStress, normalize } from './text.js'
+import { stripStress, normalize, stressMatches } from './text.js'
 
 describe('stripStress', () => {
   it('removes combining acute accents', () => {
@@ -24,5 +24,16 @@ describe('normalize', () => {
   })
   it('treats ё as е', () => {
     expect(normalize('живёшь')).toBe('живешь')
+  })
+})
+
+describe('stressMatches', () => {
+  it('distinguishes forms whose spelling only differs by stress position', () => {
+    expect(stressMatches('о́кна', 'окна́')).toBe(false)
+    expect(stressMatches('О́КНА', 'о́кна')).toBe(true)
+  })
+
+  it('canonicalises acute variants and folds ё/е without dropping stress', () => {
+    expect(stressMatches('все\u02CA', 'всё\u0301')).toBe(true)
   })
 })

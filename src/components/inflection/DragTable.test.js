@@ -32,6 +32,25 @@ const syncreticParadigm = {
   ],
 }
 
+// Same spelling, different stress — e.g. nominative plural versus genitive
+// singular for окно. The table remains correct when these are swapped, but the
+// stress distinction should not disappear.
+const stressParadigm = {
+  lemma: 'окно́',
+  rows: [
+    { key: 'nom', label: 'Nominative' },
+    { key: 'gen', label: 'Genitive' },
+  ],
+  cols: [
+    { key: 'sg', label: 'Singular' },
+    { key: 'pl', label: 'Plural' },
+  ],
+  cells: [
+    { row: 'nom', col: 'pl', form: 'о́кна' },
+    { row: 'gen', col: 'sg', form: 'окна́' },
+  ],
+}
+
 describe('DragTable', () => {
   it('grades the table correct when every chip is placed in a matching-form cell', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: normalParadigm } })
@@ -75,6 +94,46 @@ describe('DragTable', () => {
     await wrapper.find('button.primary').trigger('click')
 
     expect(wrapper.emitted('graded')[0][0]).toBe(true)
+  })
+
+  it('soft-warns when same-spelling forms are placed with the wrong stress', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: stressParadigm } })
+
+    const nomPlural = wrapper.vm.bank.find((c) => c.form === 'о́кна')
+    const genSingular = wrapper.vm.bank.find((c) => c.form === 'окна́')
+    wrapper.vm.place('nom.pl', genSingular.id)
+    wrapper.vm.place('gen.sg', nomPlural.id)
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button.primary').trigger('click')
+
+    const [correct, records] = wrapper.emitted('graded')[0]
+    expect(correct).toBe(true) // stress is never a hard fail
+    expect(records.every((record) => record.correct)).toBe(true)
+    expect(records.every((record) => record.stressCorrect === false)).toBe(true)
+    expect(wrapper.findAll('.drop.stress-warning')).toHaveLength(2)
+    expect(wrapper.findAll('.drop.correct')).toHaveLength(0)
+    expect(wrapper.find('.stress-hint').text()).toContain('Table accepted')
+    expect(wrapper.findAll('.stress-correction').map((node) => node.text())).toEqual([
+      'окна́→о́кна',
+      'о́кна→окна́',
+    ])
+  })
+
+  it('does not warn when same-spelling forms have the right stress', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: stressParadigm } })
+
+    const nomPlural = wrapper.vm.bank.find((c) => c.form === 'о́кна')
+    const genSingular = wrapper.vm.bank.find((c) => c.form === 'окна́')
+    wrapper.vm.place('nom.pl', nomPlural.id)
+    wrapper.vm.place('gen.sg', genSingular.id)
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button.primary').trigger('click')
+
+    const [correct, records] = wrapper.emitted('graded')[0]
+    expect(correct).toBe(true)
+    expect(records.every((record) => record.stressCorrect)).toBe(true)
+    expect(wrapper.findAll('.drop.correct')).toHaveLength(2)
+    expect(wrapper.find('.stress-hint').exists()).toBe(false)
   })
 
   it('emits per-cell records and the overall pass/fail flag', async () => {

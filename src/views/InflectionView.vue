@@ -61,12 +61,14 @@ function newRound() {
   round.value += 1
 }
 
-function onGraded(correct) {
+function onGraded(correct, records = []) {
   if (lastResult.value) return
-  lastResult.value = { correct }
+  const stressWarning =
+    !!correct && records.some((record) => record.correct && record.stressCorrect === false)
+  lastResult.value = { correct, stressWarning }
   score.total += 1
   if (correct) score.right += 1
-  if (correct) {
+  if (correct && !stressWarning) {
     celebrating.value = true
     advanceTimer = setTimeout(newRound, CELEBRATE_MS)
   }
@@ -137,7 +139,11 @@ onUnmounted(() => {
     />
 
     <div class="row">
-      <button v-if="lastResult && !lastResult.correct" class="primary" @click="newRound">
+      <button
+        v-if="lastResult && (!lastResult.correct || lastResult.stressWarning)"
+        class="primary"
+        @click="newRound"
+      >
         Next →
       </button>
       <span v-if="lastResult && !lastResult.correct" class="feedback bad">Review the answers above.</span>

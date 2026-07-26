@@ -7,7 +7,7 @@ import { computed, onMounted, reactive, ref } from 'vue'
 
 import { cellKey } from '../../lib/paradigm.js'
 import { shuffle } from '../../lib/quiz.js'
-import { normalize } from '../../lib/text.js'
+import { normalize, stressMatches } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
 
 const props = defineProps({ paradigm: { type: Object, required: true } })
@@ -81,6 +81,19 @@ function isCorrect(key) {
   return cell && chip && normalize(chip.form) === normalize(cell.form)
 }
 
+// A stress-only miss stays correct for scoring, but is shown separately so
+// syncretic-looking forms such as о́кна / окна́ cannot be swapped silently.
+function hasStressMismatch(key) {
+  const cell = props.paradigm.cells.find((c) => cellKey(c.row, c.col) === key)
+  const chip = chipById.get(placed[key])
+  return !!(cell && chip && isCorrect(key) && !stressMatches(chip.form, cell.form))
+}
+
+const stressWarningCount = computed(
+  () =>
+    props.paradigm.cells.filter((c) => hasStressMismatch(cellKey(c.row, c.col))).length,
+)
+
 onMounted(() => speak(props.paradigm.lemma))
 
 function check() {
@@ -89,6 +102,9 @@ function check() {
   const records = props.paradigm.cells.map((c) => ({
     slot: cellKey(c.row, c.col),
     correct: isCorrect(cellKey(c.row, c.col)),
+    stressCorrect: isCorrect(cellKey(c.row, c.col))
+      ? !hasStressMismatch(cellKey(c.row, c.col))
+      : null,
   }))
   emit('graded', records.every((r) => r.correct), records)
 }
@@ -140,7 +156,8 @@ function check() {
                 class="drop"
                 :class="{
                   filled: placed[cellKey(row.key, col.key)] != null,
-                  correct: checked && isCorrect(cellKey(row.key, col.key)),
+                  correct: checked && isCorrect(cellKey(row.key, col.key)) && !hasStressMismatch(cellKey(row.key, col.key)),
+                  'stress-warning': checked && hasStressMismatch(cellKey(row.key, col.key)),
                   wrong: checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key)),
                   droppable: picked != null && placed[cellKey(row.key, col.key)] == null,
                 }"
@@ -149,7 +166,16 @@ function check() {
                 @drop.prevent="(e) => onDrop(e, cellKey(row.key, col.key))"
               >
                 <div
-                  v-if="checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key))"
+                  v-if="checked && hasStressMismatch(cellKey(row.key, col.key))"
+                  class="stress-correction"
+                  lang="ru"
+                >
+                  <span class="stress-attempt">{{ chipById.get(placed[cellKey(row.key, col.key)]).form }}</span>
+                  <span aria-hidden="true">→</span>
+                  <span class="correct-form">{{ cellAt(row.key, col.key).form }}</span>
+                </div>
+                <div
+                  v-else-if="checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key))"
                   class="correction"
                   lang="ru"
                 >
@@ -166,6 +192,11 @@ function check() {
         </tbody>
       </table>
     </div>
+
+    <p v-if="checked && stressWarningCount" class="stress-hint" role="status">
+      Table accepted — check the stress in
+      {{ stressWarningCount === 1 ? 'the highlighted form' : 'the highlighted forms' }}.
+    </p>
 
     <div class="row">
       <button v-if="!checked" class="primary" :disabled="!allPlaced" @click="check">Check</button>
@@ -259,6 +290,10 @@ function check() {
   border-color: var(--good);
   background: color-mix(in srgb, var(--good) 18%, var(--card));
 }
+.drop.stress-warning {
+  border-color: var(--warn, #c9962b);
+  background: color-mix(in srgb, var(--warn, #c9962b) 18%, var(--card));
+}
 .drop.wrong {
   border-color: var(--bad);
   background: color-mix(in srgb, var(--bad) 18%, var(--card));
@@ -268,6 +303,21 @@ function check() {
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
+}
+.stress-correction {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--warn, #c9962b);
+}
+.stress-attempt {
+  text-decoration: line-through;
+  opacity: 0.9;
+}
+.stress-hint {
+  margin: 0;
+  color: var(--warn, #c9962b);
+  font-size: 0.9rem;
 }
 .wrong-attempt {
   font-size: 0.75rem;
