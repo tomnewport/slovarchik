@@ -7141,8 +7141,9 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ты бу́дешь жале́ть об э́том реше́нии.
         en_gb: You'll be sorry about this decision.
-      - ru: Я бы пожа́лел его́, но он не про́сит.
-        en_gb: I would feel sorry for him, but he doesn't ask.
+      - ru: Он до́лго жале́л о том реше́нии.
+        en_gb: He regretted that decision for a long time.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Ты жале́ешь бездо́мных живо́тных?
         en_gb: Do you feel sorry for homeless animals?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
@@ -10254,8 +10255,9 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: За́втра я бу́ду звать госте́й.
         en_gb: Tomorrow I will be calling the guests.
-      - ru: Я бы позва́л тебя́, е́сли бы знал.
-        en_gb: I would have called you if I had known.
+      - ru: Ты зовёшь меня́ на по́мощь?
+        en_gb: Are you calling me for help?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы зовёте госте́й на у́жин?
         en_gb: Are you inviting guests for dinner?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
@@ -17112,8 +17114,9 @@ words:
       - ru: Я организу́ю рабо́ту кома́нды.
         en_gb: I organise the team's work.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
-      - ru: Я бу́ду организо́вывать встре́чи ка́ждый ме́сяц.
-        en_gb: I will organise meetings every month.
+      - ru: Дире́ктор организу́ет но́вый отде́л.
+        en_gb: The director is organising a new department.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я бы организова́л пое́здку ина́че.
         en_gb: I would organise the trip differently.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -19395,8 +19398,9 @@ words:
       past_n: переби́ло
       past_pl: переби́ли
     usage:
-      - ru: Не перебива́й, я договорю́.
-        en_gb: Don't interrupt, I will finish.
+      - ru: Ты обяза́тельно перебьёшь меня́.
+        en_gb: You will definitely interrupt me.
+        inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Он переби́л меня́ на полусло́ве.
         en_gb: He interrupted me mid-word.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -19463,8 +19467,9 @@ words:
       - ru: Она́ перево́дит кни́ги с англи́йского.
         en_gb: She translates books from English.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
-      - ru: Переведи́ э́то сло́во на ру́сский.
-        en_gb: Translate this word into Russian.
+      - ru: Я перевожу́ статью́ на англи́йский.
+        en_gb: I am translating an article into English.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты перево́дишь кни́ги с англи́йского?
         en_gb: Do you translate books from English?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
@@ -22570,8 +22575,9 @@ words:
       - ru: Они́ поки́нули го́род на рассве́те.
         en_gb: They left the city at dawn.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: Капита́н после́дним покида́ет кора́бль.
-        en_gb: The captain is the last to leave the ship.
+      - ru: Капита́н после́дним поки́нул кора́бль.
+        en_gb: The captain was the last to leave the ship.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Я бы не поки́нул друзе́й в беде́.
         en_gb: I would not leave my friends in trouble.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
@@ -24884,8 +24890,9 @@ words:
       - ru: Я потра́тил все де́ньги на кни́ги.
         en_gb: I spent all my money on books.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Не трать сто́лько вре́мени на и́гры.
-        en_gb: Don't spend so much time on games.
+      - ru: Я потра́чу все де́ньги на пода́рки.
+        en_gb: I will spend all the money on presents.
+        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты потра́тишь все де́ньги на кни́ги?
         en_gb: Will you spend all your money on books?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
@@ -30475,8 +30482,9 @@ words:
       - ru: Она́ расстро́илась и́з-за плохо́й оце́нки.
         en_gb: She got upset because of the bad grade.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
-      - ru: Не расстра́ивайся, всё бу́дет хорошо́.
-        en_gb: Don't get upset, everything will be fine.
+      - ru: Он си́льно расстро́ился.
+        en_gb: He got very upset.
+        inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Ты расстро́ишься из-за плохо́й оце́нки?
         en_gb: Will you get upset because of the bad grade?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
@@ -36738,8 +36746,9 @@ words:
       - ru: Он случа́йно уда́рил меня́ ло́ктем.
         en_gb: He accidentally hit me with his elbow.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
-      - ru: Не уда́рься голово́й о дверь.
-        en_gb: Don't hit your head on the door.
+      - ru: Она́ уда́рила руко́й по столу́.
+        en_gb: She hit the table with her hand.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мяч уда́рит в окно́.
         en_gb: The ball will hit the window.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
