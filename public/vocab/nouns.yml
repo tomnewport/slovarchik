@@ -6507,6 +6507,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У меня́ ко́нчились визи́тки.
         en_gb: I have run out of business cards.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: визи́тка
       sg_gen: визи́тки
@@ -9510,6 +9511,7 @@ words:
     usage:
       - ru: У ребёнка голубы́е глаза́.
         en_gb: The child has blue eyes.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Он закры́л оди́н глаз.
         en_gb: He closed one eye.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -11146,6 +11148,7 @@ words:
     usage:
       - ru: У неё кра́сные гу́бы.
         en_gb: She has red lips.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Она́ прикуси́ла ни́жнюю губу́.
         en_gb: She bit her lower lip.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -16544,6 +16547,7 @@ words:
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
       - ru: На не́бе зажгли́сь звёзды.
         en_gb: The stars lit up in the sky.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Он смотре́л на я́ркую звезду́.
         en_gb: He looked at the bright star.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
@@ -18418,6 +18422,7 @@ words:
         en_gb: A bright spark flew from the fire.
       - ru: Из прово́дки посы́пались и́скры.
         en_gb: Sparks flew out of the wiring.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Пожа́р начался́ и́з-за одно́й и́скры.
         en_gb: The fire started because of a single spark.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -19004,6 +19009,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На пля́же стоя́т каби́ны для переоде́вания.
         en_gb: There are changing cabins on the beach.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
   "кабинет=office":
     cefr_level: A2
     gender: m
@@ -19225,6 +19231,7 @@ words:
         en_gb: The camera films the whole yard.
       - ru: На у́лице вися́т ка́меры наблюде́ния.
         en_gb: There are surveillance cameras on the street.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: ка́мера
       sg_gen: ка́меры
@@ -19547,6 +19554,7 @@ words:
         inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
       - ru: На траве́ блестя́т ка́пли росы́.
         en_gb: Drops of dew glisten on the grass.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
   "капуста=cabbage":
     cefr_level: A1
     gender: f
@@ -19906,6 +19914,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В нача́ле карье́ры бы́ло тру́дно.
         en_gb: At the start of her career it was hard.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
   "касса=till":
     cefr_level: B1
     gender: f
@@ -23840,6 +23849,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В райо́не уча́стились кра́жи.
         en_gb: Thefts have become more frequent in the area.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: кра́жа
       sg_gen: кра́жи
@@ -25420,6 +25430,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ ку́чи ста́рых бума́г.
         en_gb: There are heaps of old papers on the table.
+        inflect: { token: 3, case: nom, number: pl, rule: noun-nom-pl }
   "лаборатория=laboratory":
     cefr_level: B1
     gender: f
@@ -25742,6 +25753,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У медве́дя больши́е ла́пы.
         en_gb: The bear has big paws.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
   "лапша=noodles":
     cefr_level: A1
     gender: f
@@ -29798,6 +29810,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У люде́й ра́зные мне́ния.
         en_gb: People have different opinions.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
   "множество=multitude":
     cefr_level: B1
     gender: n
@@ -33390,6 +33403,7 @@ words:
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Со вре́менем все оби́ды забыва́ются.
         en_gb: In time all grievances are forgotten.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
   "облако=cloud":
     cefr_level: A2
     gender: n
@@ -40989,6 +41003,7 @@ words:
     usage:
       - ru: За дере́вней начина́ется по́ле.
         en_gb: A field begins beyond the village.
+        inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Тра́ктор е́дет по по́лю.
         en_gb: The tractor is moving across the field.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -42565,6 +42580,7 @@ words:
     usage:
       - ru: Весно́й на ве́тках появи́лись по́чки.
         en_gb: In spring buds appeared on the branches.
+        inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Из по́чки распусти́лся ли́стик.
         en_gb: A little leaf opened out of the bud.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -44085,6 +44101,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У́тром в го́роде больши́е про́бки.
         en_gb: In the morning there are big traffic jams in the city.
+        inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
       - ru: И́з-за про́бки мы опозда́ли.
         en_gb: Because of the traffic jam we were late.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -44185,6 +44202,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: И́з-за дождя́ оборва́лись провода́.
         en_gb: Because of the rain the wires snapped.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Электри́к чини́л про́вод на столбе́.
         en_gb: The electrician was repairing a wire on the pole.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -44317,6 +44335,7 @@ words:
         en_gb: A morning walk is good for the health.
       - ru: Во вре́мя прогу́лки пошёл дождь.
         en_gb: During the walk it started to rain.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: прогу́лка
       sg_gen: прогу́лки
@@ -45351,6 +45370,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На пальто́ блестя́щие пу́говицы.
         en_gb: There are shiny buttons on the coat.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: пу́говица
       sg_gen: пу́говицы
@@ -47510,6 +47530,7 @@ words:
     usage:
       - ru: У неё дли́нные ресни́цы.
         en_gb: She has long eyelashes.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Ей в глаз попа́ла ресни́ца.
         en_gb: An eyelash got into her eye.
       - ru: Она́ кра́сит ресни́цы ту́шью.
@@ -47924,6 +47945,7 @@ words:
     usage:
       - ru: У быка́ о́стрые рога́.
         en_gb: The bull has sharp horns.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Оле́нь уда́рил врага́ ро́гом.
         en_gb: The deer struck the enemy with its horn.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -53143,6 +53165,7 @@ words:
     usage:
       - ru: У меня́ есть сомне́ния.
         en_gb: I have doubts.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Без сомне́ния, он прав.
         en_gb: Without doubt, he is right.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -54663,6 +54686,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У подъе́зда сидя́т стару́шки.
         en_gb: Old ladies are sitting by the entrance.
+        inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
   "старшина=sergeant major":
     cefr_level: C1
     gender: m
@@ -58578,6 +58602,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В нау́ке тре́буют то́чности.
         en_gb: In science accuracy is demanded.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
   "трава=grass":
     cefr_level: A2
     gender: f
@@ -65896,6 +65921,7 @@ words:
     usage:
       - ru: От моро́за щёки ста́ли кра́сными.
         en_gb: From the frost the cheeks turned red.
+        inflect: { token: 3, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Ба́бушка поцелова́ла внука́ в щёку.
         en_gb: Grandma kissed her grandson on the cheek.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }

@@ -1009,6 +1009,7 @@ words:
     usage:
       - ru: У меня́ тако́й же телефо́н.
         en_gb: I have the same phone.
+        inflect: { token: 3, case: nom, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Тако́й краси́вый го́род!
         en_gb: What a beautiful city!
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: pronoun-demonstrative }
