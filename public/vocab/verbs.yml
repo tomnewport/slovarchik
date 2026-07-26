@@ -4946,6 +4946,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: В письме́ говори́лось о пого́де.
         en_gb: The letter spoke of the weather.
+        inflect: { token: 3, tense: past, person: past_n, rule: verb-past }
       - ru: В э́тих кни́гах говоря́тся ра́зные ве́щи.
         en_gb: Different things are said in these books.
         inflect: { token: 4, tense: present, person: 3pl, rule: verb-present }
@@ -4953,6 +4954,7 @@ words:
         en_gb: The report will speak about the results.
       - ru: Е́сли бы так говори́лось, я бы пове́рил.
         en_gb: If it were said so, I would believe it.
+        inflect: { token: 4, tense: past, person: past_n, rule: verb-conditional }
   "гордиться=to be proud":
     cefr_level: B1
     accented: горди́ться
@@ -10004,10 +10006,13 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ей захоте́лось погуля́ть.
         en_gb: She felt like going for a walk.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Нам захоте́лось пое́сть.
         en_gb: We felt like eating.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: В жару́ мне бы захоте́лось холо́дной воды́.
         en_gb: In the heat I would feel like having cold water.
+        inflect: { token: 5, tense: past, person: past_n, rule: verb-conditional }
       - ru: Ско́ро тебе́ захо́чется спать.
         en_gb: Soon you'll feel like sleeping.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
@@ -16988,6 +16993,7 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро фонари́ освети́т у́лицу.
         en_gb: Soon the lamps will light up the street.
+        inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты освети́шь ко́мнату?
         en_gb: Will you light up the room?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
@@ -20392,13 +20398,16 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Нам повезло́ с пого́дой.
         en_gb: We were lucky with the weather.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Ему́ повезло́ найти́ рабо́ту.
         en_gb: He was lucky to find a job.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Ско́ро тебе́ повезёт в любви́.
         en_gb: Soon you will be lucky in love.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Е́сли бы повезло́, мы бы вы́играли.
         en_gb: If we were lucky, we would win.
+        inflect: { token: 3, tense: past, person: past_n, rule: verb-conditional }
   "поверить=to believe":
     cefr_level: B1
     accented: пове́рить
@@ -38365,12 +38374,15 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Ей хоте́лось пла́кать.
         en_gb: She felt like crying.
+        inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Нам о́чень хо́чется пить.
         en_gb: We really feel thirsty.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: По́сле прогу́лки тебе́ бу́дет хоте́ться пить.
         en_gb: After the walk you will feel like drinking.
       - ru: Мне бы хоте́лось споко́йно посиде́ть.
         en_gb: I would feel like sitting quietly.
+        inflect: { token: 3, tense: past, person: past_n, rule: verb-conditional }
   "хохотать=to laugh loudly":
     cefr_level: B2
     accented: хохота́ть

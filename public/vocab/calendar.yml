@@ -103,6 +103,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Воскресе́нье — после́дний день неде́ли.
         en_gb: Sunday is the last day of the week.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По воскресе́ньям мы отдыха́ем до́ма.
         en_gb: On Sundays we rest at home.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
