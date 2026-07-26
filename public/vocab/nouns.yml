@@ -13617,6 +13617,12 @@ words:
       sg_acc: досто́инство
       sg_ins: досто́инством
       sg_pre: досто́инстве
+      pl_nom: досто́инства
+      pl_gen: досто́инств
+      pl_dat: досто́инствам
+      pl_acc: досто́инства
+      pl_ins: досто́инствами
+      pl_pre: досто́инствах
     usage:
       - ru: Он держа́лся с больши́м досто́инством.
         en_gb: He behaved with great dignity.
@@ -18455,6 +18461,12 @@ words:
       sg_acc: иску́сство
       sg_ins: иску́сством
       sg_pre: иску́сстве
+      pl_nom: иску́сства
+      pl_gen: иску́сств
+      pl_dat: иску́сствам
+      pl_acc: иску́сства
+      pl_ins: иску́сствами
+      pl_pre: иску́сствах
   "испанец=Spaniard":
     cefr_level: A2
     gender: m
@@ -20109,6 +20121,12 @@ words:
       sg_acc: ка́чество
       sg_ins: ка́чеством
       sg_pre: ка́честве
+      pl_nom: ка́чества
+      pl_gen: ка́честв
+      pl_dat: ка́чествам
+      pl_acc: ка́чества
+      pl_ins: ка́чествами
+      pl_pre: ка́чествах
   "каша=porridge":
     cefr_level: A2
     gender: f
@@ -33799,12 +33817,19 @@ words:
       sg_acc: обстоя́тельство
       sg_ins: обстоя́тельством
       sg_pre: обстоя́тельстве
+      pl_nom: обстоя́тельства
+      pl_gen: обстоя́тельств
+      pl_dat: обстоя́тельствам
+      pl_acc: обстоя́тельства
+      pl_ins: обстоя́тельствами
+      pl_pre: обстоя́тельствах
     usage:
       - ru: Э́то реши́ло одно́ ва́жное обстоя́тельство.
         en_gb: One important circumstance decided this.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По семе́йным обстоя́тельствам он уе́хал.
         en_gb: He left because of family circumstances.
+        inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Мы должны́ учи́тывать все обстоя́тельства.
         en_gb: We must take all circumstances into account.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -33886,6 +33911,12 @@ words:
       sg_acc: о́бщество
       sg_ins: о́бществом
       sg_pre: о́бществе
+      pl_nom: о́бщества
+      pl_gen: о́бществ
+      pl_dat: о́бществам
+      pl_acc: о́бщества
+      pl_ins: о́бществами
+      pl_pre: о́бществах
   "объект=object":
     cefr_level: B1
     gender: m
@@ -48919,6 +48950,12 @@ words:
       sg_acc: руково́дство
       sg_ins: руково́дством
       sg_pre: руково́дстве
+      pl_nom: руково́дства
+      pl_gen: руково́дств
+      pl_dat: руково́дствам
+      pl_acc: руково́дства
+      pl_ins: руково́дствами
+      pl_pre: руково́дствах
     usage:
       - ru: Руково́дство компа́нии при́няло реше́ние.
         en_gb: The company's leadership made a decision.
@@ -50232,6 +50269,12 @@ words:
       sg_acc: сво́йство
       sg_ins: сво́йством
       sg_pre: сво́йстве
+      pl_nom: сво́йства
+      pl_gen: сво́йств
+      pl_dat: сво́йствам
+      pl_acc: сво́йства
+      pl_ins: сво́йствами
+      pl_pre: сво́йствах
     usage:
       - ru: У воды́ есть осо́бое сво́йство.
         en_gb: Water has a special property.
@@ -52911,7 +52954,7 @@ words:
     cefr_level: B1
     gender: n
     animacy: i
-    number: ["sg"]
+    number: ["sg", "pl"]
     collections:
       - feelings and sensations
     en_gb:
@@ -52925,6 +52968,12 @@ words:
       sg_acc: сожале́ние
       sg_ins: сожале́нием
       sg_pre: сожале́нии
+      pl_nom: сожале́ния
+      pl_gen: сожале́ний
+      pl_dat: сожале́ниям
+      pl_acc: сожале́ния
+      pl_ins: сожале́ниями
+      pl_pre: сожале́ниях
     usage:
       - ru: К сожале́нию, я не могу́ прийти́.
         en_gb: Unfortunately, I can't come.
@@ -52937,6 +52986,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У меня́ нет никаки́х сожале́ний.
         en_gb: I have no regrets at all.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "создание=creation":
     cefr_level: B1
     gender: n
@@ -54344,6 +54394,12 @@ words:
       sg_acc: сре́дство
       sg_ins: сре́дством
       sg_pre: сре́дстве
+      pl_nom: сре́дства
+      pl_gen: сре́дств
+      pl_dat: сре́дствам
+      pl_acc: сре́дства
+      pl_ins: сре́дствами
+      pl_pre: сре́дствах
     usage:
       - ru: У нас нет сре́дства добра́ться туда́.
         en_gb: We have no means of getting there.
@@ -54353,6 +54409,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он по́льзуется все́ми сре́дствами.
         en_gb: He uses all means.
+        inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
   "срок=term":
     cefr_level: B1
     gender: m
@@ -60819,6 +60876,12 @@ words:
       sg_acc: устро́йство
       sg_ins: устро́йством
       sg_pre: устро́йстве
+      pl_nom: устро́йства
+      pl_gen: устро́йств
+      pl_dat: устро́йствам
+      pl_acc: устро́йства
+      pl_ins: устро́йствами
+      pl_pre: устро́йствах
     usage:
       - ru: Э́то о́чень удо́бное устро́йство.
         en_gb: This is a very convenient device.
@@ -60828,6 +60891,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Магази́н прода́л мно́го электро́нных устро́йств.
         en_gb: The shop sold many electronic devices.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "утверждение=statement":
     cefr_level: B2
     gender: n
@@ -62798,6 +62862,12 @@ words:
       sg_acc: хозя́йство
       sg_ins: хозя́йством
       sg_pre: хозя́йстве
+      pl_nom: хозя́йства
+      pl_gen: хозя́йств
+      pl_dat: хозя́йствам
+      pl_acc: хозя́йства
+      pl_ins: хозя́йствами
+      pl_pre: хозя́йствах
     usage:
       - ru: Се́льское хозя́йство развива́ется бы́стро.
         en_gb: Agriculture is developing fast.
