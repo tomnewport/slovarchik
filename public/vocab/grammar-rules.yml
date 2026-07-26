@@ -109,15 +109,16 @@ rules:
   # ── Noun exceptions / irregulars ─────────────────────────────────────────
   noun-acc-animate:
     exception: true
-    title: "Accusative of animate nouns = genitive"
-    formula: "animate acc = genitive (sg & pl)"
+    title: "Accusative patterns for animate nouns"
+    formula: "pl animate = genitive · sg animate m 2nd decl. = genitive"
     explanation: >
-      For animate nouns (people, animals) the accusative copies the GENITIVE, not
-      the nominative — in both numbers. Я люблю́ отца́ (= gen отца́), Я ви́жу
-      друзе́й (= gen pl друзе́й). This is how Russian marks "who did what to whom"
-      when word order is free.
-    exceptions:
-      - "Feminine -а animates still take -у in the singular: ма́му, соба́ку."
+      In the plural, the accusative of animate nouns of every gender copies the
+      genitive: Я ви́жу друзе́й (= gen pl друзе́й). In the singular, this
+      genitive-shaped accusative is the masculine second-declension pattern: Я
+      ви́жу отца́ (= gen отца́). Other singular noun classes keep their own
+      accusative forms: Я ви́жу ко́шку (feminine -а), па́пу (masculine
+      first-declension), живо́е существо́ (neuter) — not ко́шки, па́пы or
+      живо́го существа́.
 
   noun-genpl-fleeting:
     exception: true
@@ -348,8 +349,10 @@ rules:
       Feminine singular endings are the clearest: -ая (nominative) → -ую
       (accusative). Hard stems take -ый/-ой, -ая, -ое, -ые; soft stems and
       stems after к/г/х and ж/ш/щ/ч take -ий, -яя, -ее, -ие. With an animate
-      masculine or any plural noun the accusative copies the genitive: ви́жу
-      но́вого студе́нта, ста́рых друзе́й.
+      masculine singular or any animate plural noun, an agreeing adjective uses
+      the genitive-shaped accusative: ви́жу но́вого студе́нта, ста́рых друзе́й.
+      Inanimate plurals keep the nominative-shaped accusative: ви́жу ста́рые
+      столы́.
 
   adj-acc-animate:
     exception: true
