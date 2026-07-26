@@ -3815,6 +3815,7 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В э́том бою́ поги́бло мно́го люде́й.
         en_gb: Many people died in this battle.
+        inflect: { token: 3, case: loc, number: sg, rule: noun-locative }
     declension:
       sg_nom: бой
       sg_gen: бо́я
@@ -3822,6 +3823,7 @@ words:
       sg_acc: бой
       sg_ins: бо́ем
       sg_pre: бо́е
+      sg_loc: бою́
       pl_nom: бо́и
       pl_gen: боёв
       pl_dat: боя́м
@@ -25954,6 +25956,7 @@ words:
       sg_acc: лёд
       sg_ins: льдом
       sg_pre: льде
+      sg_loc: льду
     usage:
       - ru: Река́ покры́лась льдом.
         en_gb: The river was covered with ice.
@@ -25963,6 +25966,7 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На льду ката́лись де́ти.
         en_gb: Children were skating on the ice.
+        inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
   "ледник=glacier":
     cefr_level: C1
     gender: m
