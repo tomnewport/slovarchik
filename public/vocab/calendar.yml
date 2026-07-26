@@ -39,6 +39,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: А́вгуст — после́дний ме́сяц ле́та.
         en_gb: August is the last month of summer.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: К а́вгусту созрева́ют фру́кты.
         en_gb: By August the fruit ripens.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
@@ -72,6 +73,7 @@ words:
         en_gb: April is often rainy.
         en_alt:
           - It is often rainy in April.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: К апре́лю та́ет снег.
         en_gb: By April the snow melts.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
@@ -103,6 +105,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Воскресе́нье — после́дний день неде́ли.
         en_gb: Sunday is the last day of the week.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По воскресе́ньям мы отдыха́ем до́ма.
         en_gb: On Sundays we rest at home.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
@@ -135,6 +138,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вто́рник был о́чень дли́нным.
         en_gb: Tuesday was very long.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: До вто́рника оста́лось два дня.
         en_gb: There are two days left until Tuesday.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -166,6 +170,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дека́брь — пе́рвый ме́сяц зимы́.
         en_gb: December is the first month of winter.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: К декабрю́ выпада́ет снег.
         en_gb: By December snow falls.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
@@ -227,6 +232,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ию́ль — са́мый тёплый ме́сяц.
         en_gb: July is the warmest month.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле ию́ля наступа́ет а́вгуст.
         en_gb: After July comes August.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -258,6 +264,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ию́нь — пе́рвый ме́сяц ле́та.
         en_gb: June is the first month of summer.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: К ию́ню зака́нчивается шко́ла.
         en_gb: By June school ends.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
@@ -289,6 +296,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Май — мой люби́мый ме́сяц.
         en_gb: May is my favourite month.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле ма́я начина́ется ле́то.
         en_gb: After May summer begins.
         en_alt:
@@ -322,6 +330,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Март — пе́рвый ме́сяц весны́.
         en_gb: March is the first month of spring.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле ма́рта стано́вится тепле́е.
         en_gb: After March it becomes warmer.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -404,6 +413,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ноя́брь — холо́дный и тёмный ме́сяц.
         en_gb: November is a cold and dark month.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле ноября́ начина́ется зима́.
         en_gb: After November winter begins.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -435,6 +445,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Октя́брь — золота́я о́сень.
         en_gb: October is golden autumn.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: К октябрю́ дере́вья желте́ют.
         en_gb: By October the trees turn yellow.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
@@ -491,6 +502,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Понеде́льник — тяжёлый день.
         en_gb: Monday is a hard day.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По понеде́льникам у нас собра́ние.
         en_gb: On Mondays we have a meeting.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
@@ -553,6 +565,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Рождество́ — све́тлый пра́здник.
         en_gb: Christmas is a bright holiday.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Пе́ред Рождество́м все убира́ют дом.
         en_gb: Before Christmas everyone tidies the house.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
@@ -578,6 +591,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Сентя́брь — пе́рвый ме́сяц о́сени.
         en_gb: September is the first month of autumn.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле сентября́ стано́вится прохла́днее.
         en_gb: After September it gets cooler.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -668,6 +682,7 @@ words:
     usage:
       - ru: Февра́ль — са́мый коро́ткий ме́сяц.
         en_gb: February is the shortest month.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В феврале́ ещё хо́лодно.
         en_gb: In February it is still cold.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -704,6 +719,7 @@ words:
           - we will meet on Thursday
       - ru: Четве́рг — мой люби́мый день.
         en_gb: Thursday is my favourite day.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По четверга́м рабо́тает ры́нок.
         en_gb: The market is open on Thursdays.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
@@ -737,6 +753,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ско́ро у шко́лы большо́й юбиле́й.
         en_gb: The school will soon have a big anniversary.
+        inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Го́сти пришли́ на юбиле́й де́душки.
         en_gb: The guests came to grandfather's jubilee.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -768,6 +785,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Янва́рь — са́мый холо́дный ме́сяц.
         en_gb: January is the coldest month.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле января́ наступа́ет февра́ль.
         en_gb: After January comes February.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
