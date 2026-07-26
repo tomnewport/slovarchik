@@ -10889,8 +10889,9 @@ words:
       - ru: Что вы име́ете в виду́?
         en_gb: What do you mean?
         inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
-      - ru: У меня́ есть вопро́с.
-        en_gb: I have a question.
+      - ru: Я име́ю ва́жный вопро́с.
+        en_gb: I have an important question.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ име́ет большо́й о́пыт.
         en_gb: She has a lot of experience.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -20231,8 +20232,9 @@ words:
       - ru: Я бы пла́кал от ра́дости.
         en_gb: I would cry with joy.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Без му́зыки фильм не был бы таки́м гру́стным.
-        en_gb: Without the music the film would not be so sad.
+      - ru: Ма́льчик пла́кал це́лый день.
+        en_gb: The boy cried all day.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ты пла́чешь от бо́ли?
         en_gb: Are you crying from pain?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
