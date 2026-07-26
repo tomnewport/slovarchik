@@ -26974,6 +26974,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ стоя́ли плечо́м к плечу́, ло́ктем к ло́ктю.
         en_gb: They stood shoulder to shoulder, elbow to elbow.
+        inflect: { token: 8, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: ло́коть
       sg_gen: ло́ктя
