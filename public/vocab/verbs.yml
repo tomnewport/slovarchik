@@ -245,6 +245,7 @@ words:
     usage:
       - ru: Не беспоко́йся, всё бу́дет хорошо́.
         en_gb: Don't worry, everything will be fine.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ма́ма беспоко́ится о сы́не.
         en_gb: Mum worries about her son.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -264,6 +265,9 @@ words:
         en_gb: Do you worry about your health?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
+      imperative:
+        sg: беспоко́йся
+        pl: беспоко́йтесь
       present:
         "1sg": беспоко́юсь
         "2sg": беспоко́ишься
@@ -1593,6 +1597,9 @@ words:
       alt:
         - to take a look
     conjugation:
+      imperative:
+        sg: взгляни́
+        pl: взгляни́те
       future:
         "1sg": взгляну́
         "2sg": взгля́нешь
@@ -1613,6 +1620,7 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Взгляни́ на не́бо!
         en_gb: Glance at the sky!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Е́сли бы я знал, я бы взгляну́л внима́тельнее.
         en_gb: If I had known, I would have glanced more carefully.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-conditional }
@@ -2422,6 +2430,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не волну́йся, всё бу́дет хорошо́.
         en_gb: Don't worry, everything will be fine.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Роди́тели волнова́лись за дете́й.
         en_gb: The parents were worried about the children.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -2438,6 +2447,9 @@ words:
         en_gb: Are you nervous before the flight?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
+      imperative:
+        sg: волну́йся
+        pl: волну́йтесь
       present:
         "1sg": волну́юсь
         "2sg": волну́ешься
@@ -2500,6 +2512,9 @@ words:
       alt:
         - to take advantage of
     conjugation:
+      imperative:
+        sg: воспо́льзуйся
+        pl: воспо́льзуйтесь
       future:
         "1sg": воспо́льзуюсь
         "2sg": воспо́льзуешься
@@ -2520,6 +2535,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Воспо́льзуйтесь ли́фтом.
         en_gb: Make use of the lift.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Е́сли бы был шанс, я бы им воспо́льзовался.
         en_gb: If there were a chance, I would make use of it.
         inflect: { token: 8, tense: past, person: past_m, rule: verb-conditional }
@@ -2570,6 +2586,9 @@ words:
       alt:
         - to tell lies
     conjugation:
+      imperative:
+        sg: ври
+        pl: ври́те
       present:
         "1sg": вру
         "2sg": врёшь
@@ -2584,6 +2603,7 @@ words:
     usage:
       - ru: Не ври мне!
         en_gb: Don't lie to me!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он ча́сто врёт роди́телям.
         en_gb: He often lies to his parents.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
@@ -2827,6 +2847,9 @@ words:
       alt:
         - to put in
     conjugation:
+      imperative:
+        sg: вста́вь
+        pl: вста́вьте
       future:
         "1sg": вста́влю
         "2sg": вста́вишь
@@ -2847,6 +2870,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Вста́вьте слова́ в про́пуски.
         en_gb: Insert the words in the gaps.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Е́сли пона́добится, я вста́влю но́вую батаре́йку.
         en_gb: If needed, I will insert a new battery.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
@@ -3308,6 +3332,9 @@ words:
       alt:
         - to discard
     conjugation:
+      imperative:
+        sg: вы́брось
+        pl: вы́бросьте
       future:
         "1sg": вы́брошу
         "2sg": вы́бросишь
@@ -3328,6 +3355,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Вы́бросьте э́тот му́сор.
         en_gb: Throw out this rubbish.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Е́сли бы вещь слома́лась, я бы её вы́бросил.
         en_gb: If the thing broke, I would throw it out.
         inflect: { token: 8, tense: past, person: past_m, rule: verb-conditional }
@@ -3631,6 +3659,9 @@ words:
       alt:
         - to summon
     conjugation:
+      imperative:
+        sg: вы́зови
+        pl: вы́зовите
       future:
         "1sg": вы́зову
         "2sg": вы́зовешь
@@ -3651,6 +3682,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Вы́зовите ско́рую по́мощь!
         en_gb: Call an ambulance!
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Е́сли бы ему́ ста́ло пло́хо, я бы вы́звал врача́.
         en_gb: If he felt unwell, I would call a doctor.
         inflect: { token: 8, tense: past, person: past_m, rule: verb-conditional }
@@ -3874,6 +3906,9 @@ words:
       alt:
         - to endure
     conjugation:
+      imperative:
+        sg: вы́неси
+        pl: вы́несите
       future:
         "1sg": вы́несу
         "2sg": вы́несешь
@@ -3888,6 +3923,7 @@ words:
     usage:
       - ru: Вы́неси му́сор, пожа́луйста.
         en_gb: Take out the rubbish, please.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он вы́нес стол во двор.
         en_gb: He carried the table out into the yard.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -4087,6 +4123,9 @@ words:
       alt:
         - to let out
     conjugation:
+      imperative:
+        sg: выпуска́й
+        pl: выпуска́йте
       present:
         "1sg": выпуска́ю
         "2sg": выпуска́ешь
@@ -4104,6 +4143,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не выпуска́й соба́ку на у́лицу.
         en_gb: Don't let the dog out onto the street.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Изда́тельство выпуска́ло журна́лы.
         en_gb: The publishing house used to release magazines.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
@@ -4400,6 +4440,9 @@ words:
       alt:
         - to listen to
     conjugation:
+      imperative:
+        sg: вы́слушай
+        pl: вы́слушайте
       future:
         "1sg": вы́слушаю
         "2sg": вы́слушаешь
@@ -4414,6 +4457,7 @@ words:
     usage:
       - ru: Вы́слушай меня́ внима́тельно.
         en_gb: Hear me out carefully.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Врач вы́слушал жа́лобы больно́го.
         en_gb: The doctor heard out the patient's complaints.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -4756,6 +4800,9 @@ words:
       alt:
         - to gaze
     conjugation:
+      imperative:
+        sg: гляди́
+        pl: гляди́те
       present:
         "1sg": гляжу́
         "2sg": гляди́шь
@@ -4776,6 +4823,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Не гляди́ на меня́ так!
         en_gb: Don't look at me like that!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ве́чером я бу́ду гляде́ть на звёзды с балко́на.
         en_gb: In the evening I will be looking at the stars from the balcony.
       - ru: Без очко́в я бы гляде́л на доро́гу с трудо́м.
@@ -4793,6 +4841,9 @@ words:
     en_gb:
       standard: to glance (to look briefly)
     conjugation:
+      imperative:
+        sg: глянь
+        pl: гля́ньте
       future:
         "1sg": гля́ну
         "2sg": гля́нешь
@@ -4813,6 +4864,7 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Глянь, кто пришёл!
         en_gb: Take a look at who has come!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я гля́ну на часы́ пото́м.
         en_gb: I'll glance at the clock later.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -4833,6 +4885,9 @@ words:
       alt:
         - to chase
     conjugation:
+      imperative:
+        sg: гони́
+        pl: гони́те
       present:
         "1sg": гоню́
         "2sg": го́нишь
@@ -4853,6 +4908,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не гони́ маши́ну так бы́стро!
         en_gb: Don't drive the car so fast!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: У́тром пасту́х бу́дет гнать ста́до на луг.
         en_gb: In the morning the shepherd will drive the herd to the meadow.
       - ru: Я бы не гнал так бы́стро.
@@ -5419,6 +5475,7 @@ words:
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Не дви́гайся, пожа́луйста!
         en_gb: Please don't move!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра коло́нна бу́дет дви́гаться на юг.
         en_gb: Tomorrow the column will be moving south.
       - ru: По́езд дви́гался о́чень ме́дленно.
@@ -5428,6 +5485,9 @@ words:
         en_gb: Are you moving very slowly?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: дви́гайся
+        pl: дви́гайтесь
       present:
         "1sg": дви́гаюсь
         "2sg": дви́гаешься
@@ -5680,6 +5740,9 @@ words:
       alt:
         - to keep oneself
     conjugation:
+      imperative:
+        sg: держи́сь
+        pl: держи́тесь
       present:
         "1sg": держу́сь
         "2sg": де́ржишься
@@ -5694,6 +5757,7 @@ words:
     usage:
       - ru: Держи́сь за пери́ла!
         en_gb: Hold on to the railing!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он де́ржится за верёвку.
         en_gb: He is holding on to the rope.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -5748,6 +5812,9 @@ words:
     en_gb:
       standard: to add (to put something extra in)
     conjugation:
+      imperative:
+        sg: доба́вь
+        pl: доба́вьте
       future:
         "1sg": доба́влю
         "2sg": доба́вишь
@@ -5768,6 +5835,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Доба́вьте, пожа́луйста, мо́лока.
         en_gb: Please add some milk.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы доба́вил немно́го пе́рца в суп.
         en_gb: I would add a little pepper to the soup.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -6155,6 +6223,9 @@ words:
     en_gb:
       standard: to wait for (to stay until something happens)
     conjugation:
+      imperative:
+        sg: дожида́йся
+        pl: дожида́йтесь
       present:
         "1sg": дожида́юсь
         "2sg": дожида́ешься
@@ -6175,6 +6246,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Не дожида́йся меня́ ве́чером.
         en_gb: Don't wait for me in the evening.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бу́ду дожида́ться тебя́ у вхо́да.
         en_gb: I'll be waiting for you at the entrance.
       - ru: Я бы не дожида́лся так до́лго.
@@ -6717,6 +6789,9 @@ words:
       alt:
         - to brawl
     conjugation:
+      imperative:
+        sg: дери́сь
+        pl: дери́тесь
       present:
         "1sg": деру́сь
         "2sg": дерёшься
@@ -6734,6 +6809,7 @@ words:
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Не дери́сь с бра́том!
         en_gb: Don't fight with your brother!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Они́ дра́лись и́з-за игру́шки.
         en_gb: They fought over a toy.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -7716,6 +7792,9 @@ words:
       alt:
         - to look in
     conjugation:
+      imperative:
+        sg: загляни́
+        pl: загляни́те
       future:
         "1sg": загляну́
         "2sg": загля́нешь
@@ -7736,6 +7815,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Загляни́ в слова́рь, е́сли не зна́ешь.
         en_gb: Look in the dictionary if you don't know.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы загляну́л к тебе́, но был за́нят.
         en_gb: I would have dropped in on you, but I was busy.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -7802,10 +7882,14 @@ words:
         en_gb: In summer she likes to sunbathe on the beach.
       - ru: Не загора́й сли́шком до́лго.
         en_gb: Don't sunbathe too long.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты загора́ешь на пля́же?
         en_gb: Do you sunbathe on the beach?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: загора́й
+        pl: загора́йте
       present:
         "1sg": загора́ю
         "2sg": загора́ешь
@@ -8002,6 +8086,7 @@ words:
     usage:
       - ru: Зайди́ ко мне по́сле рабо́ты.
         en_gb: Drop by to see me after work.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я зашёл в магази́н за хле́бом.
         en_gb: I dropped into the shop for bread.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -8009,6 +8094,9 @@ words:
         en_gb: Will you drop into the shop for bread?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: зайди́
+        pl: зайди́те
       future:
         "1sg": зайду́
         "2sg": зайдёшь
@@ -8787,6 +8875,9 @@ words:
       alt:
         - to stop talking
     conjugation:
+      imperative:
+        sg: замолчи́
+        pl: замолчи́те
       future:
         "1sg": замолчу́
         "2sg": замо́лчишь
@@ -8804,6 +8895,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Замолчи́, пожа́луйста!
         en_gb: Be quiet, please!
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Де́ти сра́зу замолча́ли.
         en_gb: The children immediately fell silent.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
@@ -9008,6 +9100,9 @@ words:
     en_gb:
       standard: to start yelling (to suddenly yell loudly)
     conjugation:
+      imperative:
+        sg: заори́
+        pl: заори́те
       future:
         "1sg": заору́
         "2sg": заорёшь
@@ -9025,6 +9120,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не заори́ от испу́га.
         en_gb: Don't start yelling out of fright.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Боле́льщики заора́ли от ра́дости.
         en_gb: The fans started yelling with joy.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -9047,6 +9143,9 @@ words:
     en_gb:
       standard: to lock (to secure with a key)
     conjugation:
+      imperative:
+        sg: запри́
+        pl: запри́те
       future:
         "1sg": запру́
         "2sg": запрёшь
@@ -9067,6 +9166,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Запри́ воро́та на́ ночь.
         en_gb: Lock the gate for the night.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы за́пер дверь, но ключ у тебя́.
         en_gb: I would lock the door, but you have the key.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -9743,6 +9843,9 @@ words:
       alt:
         - to button up
     conjugation:
+      imperative:
+        sg: застегни́
+        pl: застегни́те
       future:
         "1sg": застегну́
         "2sg": застегнёшь
@@ -9757,6 +9860,7 @@ words:
     usage:
       - ru: Застегни́ ку́ртку, на у́лице хо́лодно.
         en_gb: Fasten your jacket, it's cold outside.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он застегну́л все пу́говицы на пальто́.
         en_gb: He fastened all the buttons on his coat.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -11366,6 +11470,9 @@ words:
         - to concern
         - to relate to
     conjugation:
+      imperative:
+        sg: каса́йся
+        pl: каса́йтесь
       present:
         "1sg": каса́юсь
         "2sg": каса́ешься
@@ -11380,6 +11487,7 @@ words:
     usage:
       - ru: Не каса́йся горя́чей плиты́.
         en_gb: Don't touch the hot stove.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Э́то каса́ется всех нас.
         en_gb: This concerns all of us.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -11698,6 +11806,9 @@ words:
     en_gb:
       standard: to command (to be in charge of; to give orders)
     conjugation:
+      imperative:
+        sg: кома́ндуй
+        pl: кома́ндуйте
       present:
         "1sg": кома́ндую
         "2sg": кома́ндуешь
@@ -11715,6 +11826,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не кома́ндуй мной!
         en_gb: Don't order me about!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Капита́н кома́ндовал кома́ндой.
         en_gb: The captain commanded the team.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -12140,6 +12252,7 @@ words:
     usage:
       - ru: Не критику́й други́х без причи́ны.
         en_gb: Don't criticize others without reason.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Газе́ты критику́ют но́вый зако́н.
         en_gb: The newspapers criticize the new law.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
@@ -12147,6 +12260,9 @@ words:
         en_gb: Are you criticizing the new law?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: критику́й
+        pl: критику́йте
       present:
         "1sg": критику́ю
         "2sg": критику́ешь
@@ -12704,6 +12820,9 @@ words:
     en_gb:
       standard: to break (to damage or destroy)
     conjugation:
+      imperative:
+        sg: лома́й
+        pl: лома́йте
       present:
         "1sg": лома́ю
         "2sg": лома́ешь
@@ -12718,6 +12837,7 @@ words:
     usage:
       - ru: Не лома́й игру́шку!
         en_gb: Don't break the toy!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ве́тер лома́ет ве́тви дере́вьев.
         en_gb: The wind breaks the branches of the trees.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -13105,6 +13225,9 @@ words:
         - to stir
         - to mix
     conjugation:
+      imperative:
+        sg: меша́й
+        pl: меша́йте
       present:
         "1sg": меша́ю
         "2sg": меша́ешь
@@ -13122,6 +13245,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не меша́й сестре́!
         en_gb: Don't disturb your sister!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ меша́ла суп ло́жкой.
         en_gb: She was stirring the soup with a spoon.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -13516,6 +13640,7 @@ words:
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Надева́й ша́пку, на у́лице моро́з.
         en_gb: Put on a hat, it's freezing outside.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты надева́ешь ку́ртку, когда́ хо́лодно?
         en_gb: Do you put on a jacket when it is cold?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
@@ -13523,6 +13648,9 @@ words:
         en_gb: Are you putting on your coat?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     conjugation:
+      imperative:
+        sg: надева́й
+        pl: надева́йте
       present:
         "1sg": надева́ю
         "2sg": надева́ешь
@@ -13676,6 +13804,9 @@ words:
       alt:
         - to push
     conjugation:
+      imperative:
+        sg: нажми́
+        pl: нажми́те
       future:
         "1sg": нажму́
         "2sg": нажмёшь
@@ -13690,6 +13821,7 @@ words:
     usage:
       - ru: Нажми́ кра́сную кно́пку.
         en_gb: Press the red button.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я нажму́ на педа́ль.
         en_gb: I will press the pedal.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -13722,6 +13854,7 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Назови́ свой люби́мый цвет.
         en_gb: Name your favourite colour.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я назову́ э́ту кни́гу лу́чшей.
         en_gb: I will call this book the best.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -13735,6 +13868,9 @@ words:
         en_gb: Will you name your son Ivan?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: назови́
+        pl: назови́те
       future:
         "1sg": назову́
         "2sg": назовёшь
@@ -14283,6 +14419,7 @@ words:
     usage:
       - ru: Наре́жь хлеб то́нкими куска́ми.
         en_gb: Slice the bread into thin pieces.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ма́ма наре́зала о́вощи для сала́та.
         en_gb: Mum sliced the vegetables for the salad.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -14290,6 +14427,9 @@ words:
         en_gb: Will you slice the vegetables for the salad?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: наре́жь
+        pl: наре́жьте
       future:
         "1sg": наре́жу
         "2sg": наре́жешь
@@ -14347,6 +14487,9 @@ words:
       alt:
         - to disturb
     conjugation:
+      imperative:
+        sg: нару́шь
+        pl: нару́шьте
       future:
         "1sg": нару́шу
         "2sg": нару́шишь
@@ -14361,6 +14504,7 @@ words:
     usage:
       - ru: Не нару́шь тишину́ в библиоте́ке.
         en_gb: Don't break the silence in the library.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Води́тель нару́шил пра́вила.
         en_gb: The driver violated the rules.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -14466,6 +14610,9 @@ words:
       alt:
         - to arrive
     conjugation:
+      imperative:
+        sg: наступи́
+        pl: наступи́те
       future:
         "1sg": наступлю́
         "2sg": насту́пишь
@@ -14486,6 +14633,7 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Не наступи́ на цветы́!
         en_gb: Don't step on the flowers!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы наступи́л на лёд, е́сли бы не заме́тил.
         en_gb: I would have stepped on the ice if I had not noticed.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -15280,6 +15428,9 @@ words:
     en_gb:
       standard: to take offence (to feel hurt or insulted)
     conjugation:
+      imperative:
+        sg: оби́дься
+        pl: оби́дьтесь
       future:
         "1sg": оби́жусь
         "2sg": оби́дишься
@@ -15294,6 +15445,7 @@ words:
     usage:
       - ru: Не оби́дься на меня́.
         en_gb: Don't take offence at me.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ оби́делась на бра́та.
         en_gb: She took offence at her brother.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -15727,6 +15879,9 @@ words:
       alt:
         - to direct
     conjugation:
+      imperative:
+        sg: обрати́
+        pl: обрати́те
       future:
         "1sg": обращу́
         "2sg": обрати́шь
@@ -15741,6 +15896,7 @@ words:
     usage:
       - ru: Обрати́ внима́ние на э́ту дета́ль.
         en_gb: Turn your attention to this detail.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Учи́тель обрати́л взгляд на доску́.
         en_gb: The teacher turned his gaze to the board.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -16224,6 +16380,9 @@ words:
       alt:
         - to look around
     conjugation:
+      imperative:
+        sg: огляни́сь
+        pl: огляни́тесь
       future:
         "1sg": огляну́сь
         "2sg": огля́нешься
@@ -16244,6 +16403,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Огляни́сь, кто́-то идёт.
         en_gb: Look back, someone is coming.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я бы огляну́лся ещё раз.
         en_gb: I would look back once more.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -16891,6 +17051,9 @@ words:
       alt:
         - to bawl
     conjugation:
+      imperative:
+        sg: ори́
+        pl: ори́те
       present:
         "1sg": ору́
         "2sg": орёшь
@@ -16908,6 +17071,7 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не ори́ так гро́мко.
         en_gb: Don't yell so loudly.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Де́ти ора́ли во дворе́.
         en_gb: The children were yelling in the yard.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -19366,6 +19530,9 @@ words:
     en_gb:
       standard: to pass on (to hand over, on one occasion)
     conjugation:
+      imperative:
+        sg: переда́й
+        pl: переда́йте
       future:
         "1sg": переда́м
         "2sg": переда́шь
@@ -19380,6 +19547,7 @@ words:
     usage:
       - ru: Переда́й соль, пожа́луйста.
         en_gb: Pass the salt, please.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я переда́м кни́гу за́втра.
         en_gb: I will pass on the book tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -19517,7 +19685,11 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Перезвони́ мне, когда́ освободи́шься.
         en_gb: Call me back when you're free.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
     conjugation:
+      imperative:
+        sg: перезвони́
+        pl: перезвони́те
       future:
         "1sg": перезвоню́
         "2sg": перезвони́шь
@@ -20459,6 +20631,9 @@ words:
     en_gb:
       standard: to turn (to change direction, on one occasion)
     conjugation:
+      imperative:
+        sg: поверни́
+        pl: поверни́те
       future:
         "1sg": поверну́
         "2sg": повернёшь
@@ -20473,6 +20648,7 @@ words:
     usage:
       - ru: Поверни́ напра́во у магази́на.
         en_gb: Turn right at the shop.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я поверну́ ключ в замке́.
         en_gb: I will turn the key in the lock.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -20705,6 +20881,9 @@ words:
     en_gb:
       standard: to look (to cast a glance, on one occasion)
     conjugation:
+      imperative:
+        sg: погляди́
+        pl: погляди́те
       future:
         "1sg": погляжу́
         "2sg": погляди́шь
@@ -20724,6 +20903,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Погляди́ в окно́, идёт снег.
         en_gb: Look out of the window, it is snowing.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра я погляжу́ на но́вый дом.
         en_gb: Tomorrow I will take a look at the new house.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
@@ -21405,6 +21585,9 @@ words:
     en_gb:
       standard: to sign (a document)
     conjugation:
+      imperative:
+        sg: подпиши́
+        pl: подпиши́те
       future:
         "1sg": подпишу́
         "2sg": подпи́шешь
@@ -21425,6 +21608,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Подпиши́те здесь, пожа́луйста.
         en_gb: Please sign here.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы подписа́л догово́р без коле́баний.
         en_gb: I would sign the contract without hesitation.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -21563,6 +21747,7 @@ words:
     usage:
       - ru: Не подходи́ к кра́ю!
         en_gb: Don't approach the edge!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я подхожу́ к до́му ка́ждый ве́чер.
         en_gb: I approach the house every evening.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -21578,6 +21763,9 @@ words:
         en_gb: Do you approach the house every evening?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: подходи́
+        pl: подходи́те
       present:
         "1sg": подхожу́
         "2sg": подхо́дишь
@@ -21598,6 +21786,9 @@ words:
       alt:
         - to emphasise
     conjugation:
+      imperative:
+        sg: подчеркни́
+        pl: подчеркни́те
       future:
         "1sg": подчеркну́
         "2sg": подчеркнёшь
@@ -21618,6 +21809,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Подчеркни́те гла́вную мысль предложе́ния.
         en_gb: Underline the main idea of the sentence.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы подчеркну́л э́ту мысль кра́сным.
         en_gb: I would underline this thought in red.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -23736,6 +23928,9 @@ words:
       alt:
         - to fix
     conjugation:
+      imperative:
+        sg: попра́вь
+        pl: попра́вьте
       future:
         "1sg": попра́влю
         "2sg": попра́вишь
@@ -23756,6 +23951,7 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Попра́вьте меня́, е́сли я не прав.
         en_gb: Correct me if I am wrong.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы попра́вил оши́бку сра́зу.
         en_gb: I would correct the mistake at once.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -24356,6 +24552,9 @@ words:
     en_gb:
       standard: to try hard (to make an effort)
     conjugation:
+      imperative:
+        sg: постара́йся
+        pl: постара́йтесь
       future:
         "1sg": постара́юсь
         "2sg": постара́ешься
@@ -24376,6 +24575,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Постара́йтесь говори́ть поме́дленнее.
         en_gb: Try hard to speak more slowly.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я бы постара́лся всё успе́ть.
         en_gb: I would try hard to get everything done.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
@@ -25489,6 +25689,9 @@ words:
     en_gb:
       standard: to present (to introduce, to imagine, on one occasion)
     conjugation:
+      imperative:
+        sg: предста́вь
+        pl: предста́вьте
       future:
         "1sg": предста́влю
         "2sg": предста́вишь
@@ -25509,6 +25712,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Предста́вьте себе́ ти́хий о́стров.
         en_gb: Imagine a quiet island.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: За́втра я предста́влю но́вый прое́кт.
         en_gb: Tomorrow I will present the new project.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
@@ -25920,6 +26124,9 @@ words:
     en_gb:
       standard: to bring (someone on foot); to lead to
     conjugation:
+      imperative:
+        sg: приведи́
+        pl: приведи́те
       future:
         "1sg": приведу́
         "2sg": приведёшь
@@ -25934,6 +26141,7 @@ words:
     usage:
       - ru: Приведи́ дру́га на пра́здник.
         en_gb: Bring a friend to the party.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Учи́тель привёл нас в музе́й.
         en_gb: The teacher brought us to the museum.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -26516,6 +26724,9 @@ words:
     en_gb:
       standard: to cover (to cover or shield partly)
     conjugation:
+      imperative:
+        sg: прикро́й
+        pl: прикро́йте
       future:
         "1sg": прикро́ю
         "2sg": прикро́ешь
@@ -26530,6 +26741,7 @@ words:
     usage:
       - ru: Прикро́й окно́ што́рой.
         en_gb: Cover the window with the curtain.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он прикры́л глаза́ руко́й.
         en_gb: He covered his eyes with his hand.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -26889,6 +27101,9 @@ words:
     en_gb:
       standard: to sit down (for a short while)
     conjugation:
+      imperative:
+        sg: прися́дь
+        pl: прися́дьте
       future:
         "1sg": прися́ду
         "2sg": прися́дешь
@@ -26903,6 +27118,7 @@ words:
     usage:
       - ru: Прися́дь на мину́тку.
         en_gb: Sit down for a minute.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я прися́ду у окна́.
         en_gb: I will sit down by the window.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -27302,6 +27518,9 @@ words:
       alt:
         - to verify
     conjugation:
+      imperative:
+        sg: прове́рь
+        pl: прове́рьте
       future:
         "1sg": прове́рю
         "2sg": прове́ришь
@@ -27322,6 +27541,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Прове́рьте свои́ отве́ты.
         en_gb: Check your answers.
+        inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: За́втра я прове́рю все докуме́нты.
         en_gb: Tomorrow I will check all the documents.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
@@ -28193,6 +28413,9 @@ words:
     en_gb:
       standard: to miss; to let pass
     conjugation:
+      imperative:
+        sg: пропусти́
+        pl: пропусти́те
       future:
         "1sg": пропущу́
         "2sg": пропу́стишь
@@ -28210,6 +28433,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не пропусти́ свой авто́бус.
         en_gb: Don't miss your bus.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ пропу́стит на́чало фи́льма.
         en_gb: She will miss the start of the film.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
@@ -28319,10 +28543,14 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не проспи́ за́втра экза́мен!
         en_gb: Don't oversleep your exam tomorrow!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты проспи́шь весь день?
         en_gb: Will you sleep the whole day?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: проспи́
+        pl: проспи́те
       future:
         "1sg": просплю́
         "2sg": проспи́шь
@@ -28345,6 +28573,9 @@ words:
     en_gb:
       standard: to forgive (to pardon, on one occasion)
     conjugation:
+      imperative:
+        sg: прости́
+        pl: прости́те
       future:
         "1sg": прощу́
         "2sg": прости́шь
@@ -28359,6 +28590,7 @@ words:
     usage:
       - ru: Прости́ меня́, пожа́луйста.
         en_gb: Forgive me, please.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я прощу́ ему́ э́ту оши́бку.
         en_gb: I will forgive him this mistake.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -28773,6 +29005,9 @@ words:
     en_gb:
       standard: to let (to allow or release)
     conjugation:
+      imperative:
+        sg: пусти́
+        pl: пусти́те
       future:
         "1sg": пущу́
         "2sg": пу́стишь
@@ -28787,6 +29022,7 @@ words:
     usage:
       - ru: Пусти́ меня́ в дом.
         en_gb: Let me into the house.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он пусти́л соба́ку во двор.
         en_gb: He let the dog into the yard.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -29429,6 +29665,7 @@ words:
     usage:
       - ru: Раздели́ пиро́г на шесть часте́й.
         en_gb: Divide the pie into six parts.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Учи́тель раздели́л класс на гру́ппы.
         en_gb: The teacher divided the class into groups.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -29436,6 +29673,9 @@ words:
         en_gb: Will you divide the class into groups?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: раздели́
+        pl: раздели́те
       future:
         "1sg": разделю́
         "2sg": разде́лишь
@@ -29486,6 +29726,9 @@ words:
       alt:
         - to undress
     conjugation:
+      imperative:
+        sg: разде́нься
+        pl: разде́ньтесь
       future:
         "1sg": разде́нусь
         "2sg": разде́нешься
@@ -29503,6 +29746,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Разде́нься и ложи́сь.
         en_gb: Get undressed and lie down.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ разде́лась и встала́ под душ.
         en_gb: She undressed and got into the shower.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -30148,6 +30392,9 @@ words:
       alt:
         - to unbutton
     conjugation:
+      imperative:
+        sg: расстегни́
+        pl: расстегни́те
       future:
         "1sg": расстегну́
         "2sg": расстегнёшь
@@ -30165,6 +30412,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Расстегни́ пальто́, здесь тепло́.
         en_gb: Undo your coat, it's warm here.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ расстегну́ла молни́ю на ку́ртке.
         en_gb: She unzipped the jacket.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -30326,6 +30574,9 @@ words:
     en_gb:
       standard: to be at a loss (to become confused)
     conjugation:
+      imperative:
+        sg: растеря́йся
+        pl: растеря́йтесь
       future:
         "1sg": растеря́юсь
         "2sg": растеря́ешься
@@ -30343,6 +30594,7 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Не растеря́йся на экза́мене.
         en_gb: Don't get flustered at the exam.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я растеря́юсь от тако́го вопро́са.
         en_gb: I will be at a loss at such a question.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -30403,6 +30655,9 @@ words:
     en_gb:
       standard: to tear (to rip)
     conjugation:
+      imperative:
+        sg: рви
+        pl: рви́те
       present:
         "1sg": рву
         "2sg": рвёшь
@@ -30417,6 +30672,7 @@ words:
     usage:
       - ru: Не рви бума́гу!
         en_gb: Don't tear the paper!
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ве́тер рвёт ли́стья с дере́вьев.
         en_gb: The wind tears the leaves from the trees.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -30895,6 +31151,9 @@ words:
     en_gb:
       standard: to swear (to quarrel; to scold)
     conjugation:
+      imperative:
+        sg: руга́йся
+        pl: руга́йтесь
       present:
         "1sg": руга́юсь
         "2sg": руга́ешься
@@ -30912,6 +31171,7 @@ words:
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не руга́йся при де́тях.
         en_gb: Don't swear in front of the children.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Сосе́ди руга́лись всю ночь.
         en_gb: The neighbours were quarrelling all night.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -31169,6 +31429,7 @@ words:
     usage:
       - ru: Свари́ мне, пожа́луйста, ко́фе.
         en_gb: Please make me some coffee.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ свари́ла суп на обе́д.
         en_gb: She cooked soup for lunch.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -31176,6 +31437,9 @@ words:
         en_gb: Will you cook soup for lunch?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: свари́
+        pl: свари́те
       future:
         "1sg": сварю́
         "2sg": сва́ришь
@@ -31196,6 +31460,9 @@ words:
     en_gb:
       standard: to turn (to roll up)
     conjugation:
+      imperative:
+        sg: сверни́
+        pl: сверни́те
       future:
         "1sg": сверну́
         "2sg": свернёшь
@@ -31210,6 +31477,7 @@ words:
     usage:
       - ru: Сверни́ напра́во у магази́на.
         en_gb: Turn right at the shop.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я сверну́ ковёр.
         en_gb: I will roll up the carpet.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -31646,10 +31914,14 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Скача́й приложе́ние из интерне́та.
         en_gb: Download the app from the internet.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты скача́ешь э́ту пе́сню на телефо́н?
         en_gb: Will you download this song to your phone?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: скача́й
+        pl: скача́йте
       future:
         "1sg": скача́ю
         "2sg": скача́ешь
@@ -31672,6 +31944,7 @@ words:
     usage:
       - ru: Скопи́руй файл на фле́шку.
         en_gb: Copy the file onto a USB stick.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он скопи́ровал докуме́нт два́жды.
         en_gb: He copied the document twice.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -31679,6 +31952,9 @@ words:
         en_gb: Will you copy the document twice?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: скопи́руй
+        pl: скопи́руйте
       future:
         "1sg": скопи́рую
         "2sg": скопи́руешь
@@ -34341,10 +34617,14 @@ words:
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не ссо́рься с бра́том.
         en_gb: Don't quarrel with your brother.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты ссо́ришься из-за де́нег?
         en_gb: Do you quarrel over money?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: ссо́рься
+        pl: ссо́рьтесь
       present:
         "1sg": ссо́рюсь
         "2sg": ссо́ришься
@@ -34536,6 +34816,7 @@ words:
     usage:
       - ru: Сотри́ оши́бку и напиши́ сно́ва.
         en_gb: Erase the mistake and write again.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я случа́йно стёр ва́жный файл.
         en_gb: I accidentally erased an important file.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
@@ -34543,6 +34824,9 @@ words:
         en_gb: Will you erase the important file?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: сотри́
+        pl: сотри́те
       future:
         "1sg": сотру́
         "2sg": сотрёшь
@@ -34897,6 +35181,9 @@ words:
     en_gb:
       standard: to judge (to form an opinion or try in court)
     conjugation:
+      imperative:
+        sg: суди́
+        pl: суди́те
       present:
         "1sg": сужу́
         "2sg": су́дишь
@@ -34913,6 +35200,7 @@ words:
         en_gb: Judging by everything, it will rain.
       - ru: Не суди́ люде́й по вне́шности.
         en_gb: Don't judge people by their appearance.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он су́дит о́бо всём сли́шком стро́го.
         en_gb: He judges everything too strictly.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -34974,6 +35262,9 @@ words:
     en_gb:
       standard: to shove (to stick in; to poke)
     conjugation:
+      imperative:
+        sg: сунь
+        pl: су́ньте
       future:
         "1sg": су́ну
         "2sg": су́нешь
@@ -34994,6 +35285,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не сунь па́льцы в ро́зетку.
         en_gb: Do not stick your fingers into the socket.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ско́ро я су́ну письмо́ в я́щик.
         en_gb: Soon I will shove the letter into the box.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
@@ -35641,6 +35933,7 @@ words:
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Не трать де́ньги на ерунду́.
         en_gb: Do not spend money on nonsense.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра я бу́ду тра́тить мно́го сил.
         en_gb: Tomorrow I will be spending a lot of energy.
       - ru: Я бы не тра́тил де́ньги на э́то.
@@ -35650,6 +35943,9 @@ words:
         en_gb: Do you spend a lot of money on books?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: трать
+        pl: тра́тьте
       present:
         "1sg": тра́чу
         "2sg": тра́тишь
@@ -36394,6 +36690,7 @@ words:
     usage:
       - ru: Удали́ э́то сообще́ние, пожа́луйста.
         en_gb: Please delete this message.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я удали́л ста́рые фотогра́фии.
         en_gb: I deleted the old photos.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -36401,6 +36698,9 @@ words:
         en_gb: Will you delete the old photos?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: удали́
+        pl: удали́те
       future:
         "1sg": удалю́
         "2sg": удали́шь
@@ -36493,6 +36793,9 @@ words:
     en_gb:
       standard: to hold on (to restrain oneself)
     conjugation:
+      imperative:
+        sg: удержи́сь
+        pl: удержи́тесь
       future:
         "1sg": удержу́сь
         "2sg": уде́ржишься
@@ -36510,6 +36813,7 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Удержи́сь от ли́шних слов.
         en_gb: Restrain yourself from extra words.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Она́ едва́ удержа́лась на нога́х.
         en_gb: She barely kept on her feet.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
@@ -36529,6 +36833,9 @@ words:
     en_gb:
       standard: to be surprised (to be amazed)
     conjugation:
+      imperative:
+        sg: удиви́сь
+        pl: удиви́тесь
       future:
         "1sg": удивлю́сь
         "2sg": удиви́шься
@@ -36549,6 +36856,7 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Не удиви́сь, уви́дев меня́.
         en_gb: Don't be surprised to see me.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра ты удиви́шься но́вости.
         en_gb: Tomorrow you will be surprised by the news.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
@@ -36565,6 +36873,9 @@ words:
     en_gb:
       standard: to be surprised (to marvel at)
     conjugation:
+      imperative:
+        sg: удивля́йся
+        pl: удивля́йтесь
       present:
         "1sg": удивля́юсь
         "2sg": удивля́ешься
@@ -36582,6 +36893,7 @@ words:
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Не удивля́йся, э́то норма́льно.
         en_gb: Don't be surprised, it's normal.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Тури́сты удивля́лись краси́вым гора́м.
         en_gb: The tourists marvelled at the beautiful mountains.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -36825,6 +37137,9 @@ words:
     en_gb:
       standard: to indicate (to point out)
     conjugation:
+      imperative:
+        sg: укажи́
+        pl: укажи́те
       future:
         "1sg": укажу́
         "2sg": ука́жешь
@@ -36842,6 +37157,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Пожа́луйста, укажи́те ваш а́дрес.
         en_gb: Please indicate your address.
+        inflect: { token: 2, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Она́ ука́жет нам доро́гу.
         en_gb: She will show us the way.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
@@ -36963,6 +37279,9 @@ words:
     en_gb:
       standard: to put to bed (to lay down; to pack)
     conjugation:
+      imperative:
+        sg: уложи́
+        pl: уложи́те
       future:
         "1sg": уложу́
         "2sg": уло́жишь
@@ -36983,6 +37302,7 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Уложи́ ма́лыша поскоре́е.
         en_gb: Put the baby to bed sooner.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра ве́чером я уложу́ дете́й ра́ньше.
         en_gb: Tomorrow evening I will put the children to bed earlier.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
@@ -37209,12 +37529,17 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Умно́жь пять на три.
         en_gb: Multiply five by three.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Что́бы найти́ пло́щадь, умно́жь длину́ на ширину́.
         en_gb: To find the area, multiply length by width.
+        inflect: { token: 4, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты умно́жишь пять на три?
         en_gb: Will you multiply five by three?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
+      imperative:
+        sg: умно́жь
+        pl: умно́жьте
       future:
         "1sg": умно́жу
         "2sg": умно́жишь
@@ -37235,6 +37560,9 @@ words:
     en_gb:
       standard: to destroy (to eliminate)
     conjugation:
+      imperative:
+        sg: уничто́жь
+        pl: уничто́жьте
       future:
         "1sg": уничто́жу
         "2sg": уничто́жишь
@@ -37255,6 +37583,7 @@ words:
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Уничто́жь э́тот файл.
         en_gb: Destroy this file.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра мы уничто́жим ста́рые бума́ги.
         en_gb: Tomorrow we will destroy the old papers.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
@@ -37584,6 +37913,9 @@ words:
     en_gb:
       standard: to calm down (to settle)
     conjugation:
+      imperative:
+        sg: успоко́йся
+        pl: успоко́йтесь
       future:
         "1sg": успоко́юсь
         "2sg": успоко́ишься
@@ -37598,6 +37930,7 @@ words:
     usage:
       - ru: Успоко́йся и вы́дохни.
         en_gb: Calm down and breathe out.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он успоко́ился по́сле разгово́ра.
         en_gb: He calmed down after the conversation.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -37622,6 +37955,9 @@ words:
     en_gb:
       standard: to stare (to fix one's gaze)
     conjugation:
+      imperative:
+        sg: уста́вься
+        pl: уста́вьтесь
       future:
         "1sg": уста́влюсь
         "2sg": уста́вишься
@@ -37639,6 +37975,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Не уста́вься так на люде́й.
         en_gb: Don't stare at people like that.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Де́ти уста́вились на фо́кусника.
         en_gb: The children stared at the magician.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -37984,6 +38321,9 @@ words:
     en_gb:
       standard: to take into account (to consider)
     conjugation:
+      imperative:
+        sg: учти́
+        pl: учти́те
       future:
         "1sg": учту́
         "2sg": учтёшь
@@ -38004,6 +38344,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Учти́ э́тот ва́жный факт.
         en_gb: Take this important fact into account.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: За́втра мы учтём ва́ши пожела́ния.
         en_gb: Tomorrow we will take your wishes into account.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
@@ -38151,6 +38492,9 @@ words:
     en_gb:
       standard: to grab (to be enough)
     conjugation:
+      imperative:
+        sg: хвата́й
+        pl: хвата́йте
       present:
         "1sg": хвата́ю
         "2sg": хвата́ешь
@@ -38171,6 +38515,7 @@ words:
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Не хвата́й всё подря́д.
         en_gb: Don't grab everything in a row.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Без де́нег нам не бу́дет хвата́ть на еду́.
         en_gb: Without money we won't have enough for food.
       - ru: Мне бы хвата́ло вре́мени без спе́шки.
@@ -38750,6 +39095,9 @@ words:
     en_gb:
       standard: to stir (to move slightly)
     conjugation:
+      imperative:
+        sg: шевели́сь
+        pl: шевели́тесь
       present:
         "1sg": шевелю́сь
         "2sg": шевели́шься
@@ -38767,6 +39115,7 @@ words:
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не шевели́сь, я фотографи́рую.
         en_gb: Don't move, I'm taking a photo.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Котёнок едва́ шевели́лся во сне.
         en_gb: The kitten barely stirred in its sleep.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
@@ -38790,10 +39139,14 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Не шепчи́, говори́ гро́мче.
         en_gb: Don't whisper, speak louder.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты ше́пчешь что́-то на у́хо?
         en_gb: Are you whispering something in his ear?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
+      imperative:
+        sg: шепчи́
+        pl: шепчи́те
       present:
         "1sg": шепчу́
         "2sg": ше́пчешь
@@ -38935,6 +39288,9 @@ words:
     en_gb:
       standard: to click (to snap; to flick)
     conjugation:
+      imperative:
+        sg: щёлкни
+        pl: щёлкните
       future:
         "1sg": щёлкну
         "2sg": щёлкнешь
@@ -38952,6 +39308,7 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Щёлкни по э́той кно́пке.
         en_gb: Click on this button.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я щёлкну па́льцами.
         en_gb: I will snap my fingers.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
