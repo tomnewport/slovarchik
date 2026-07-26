@@ -13874,6 +13874,7 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-irregular-plural }
       - ru: Они́ лю́бят друг дру́га.
         en_gb: They love each other.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: Он мой лу́чший друг.
         en_gb: He is my best friend.
       - ru: Я доверя́ю своему́ дру́гу.

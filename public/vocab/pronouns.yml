@@ -700,6 +700,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
       - ru: Ничто́ не ве́чно.
         en_gb: Nothing is eternal.
+        inflect: { token: 1, case: nom }
       - ru: Я ничего́ не понима́ю.
         en_gb: I understand nothing.
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
@@ -1256,8 +1257,10 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Что тако́е любо́вь?
         en_gb: What is love?
+        inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Что э́то?
         en_gb: What is this?
+        inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Чего́ ты бои́шься?
         en_gb: What are you afraid of?
         inflect: { token: 1, case: gen, number: sg, rule: pronoun-interrogative }
@@ -1280,8 +1283,10 @@ words:
     usage:
       - ru: Я хочу́ тебе́ что́-то сказа́ть.
         en_gb: I want to tell you something.
+        inflect: { token: 4, case: acc }
       - ru: На столе́ лежи́т что́-то стра́нное.
         en_gb: Something strange is lying on the table.
+        inflect: { token: 4, case: nom }
       - ru: Он че́м-то расстро́ен.
         en_gb: He is upset about something.
         inflect: { token: 2, case: ins, number: sg, rule: pronoun-interrogative }
