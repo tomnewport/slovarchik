@@ -38,3 +38,23 @@ export function foldYo(value) {
 export function normalize(value) {
   return foldYo(stripStress(value).trim().toLowerCase().replace(/\s+/g, ' '))
 }
+
+/**
+ * Compare two answers while preserving the position of their stress mark.
+ * Case, whitespace and ё/е are still folded like `normalize`; the supported
+ * acute-accent variants are canonicalised instead of removed.
+ *
+ * This is intended as a companion check after a lenient spelling match: most
+ * drills accept omitted/misplaced stress, but can still point the slip out.
+ * @param {string} actual
+ * @param {string} expected
+ * @returns {boolean}
+ */
+export function stressMatches(actual, expected) {
+  const key = (value) =>
+    foldYo(String(value ?? '').trim().toLowerCase().replace(/\s+/g, ' ')).replace(
+      STRESS_MARK,
+      '\u0301',
+    )
+  return key(actual) === key(expected)
+}
