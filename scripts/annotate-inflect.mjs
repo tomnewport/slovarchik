@@ -104,14 +104,24 @@ export function verbCells(w) {
   }
   return map;
 }
+// Third-person personal pronouns take an н- prefix on their oblique forms after
+// any preposition: его → у него́, и́ми → с ни́ми. The prepositional is already
+// stored with the н (нём, них); the others (gen/dat/acc/ins) are stored bare, so
+// we add the н-variant as a separate `prep`-flagged reading of the same case.
+const THIRD_PERSON = new Set(['он', 'она', 'оно', 'они']);
+
 export function pronounCells(w) {
   if (w.declension) return { map: adjCells(w), gendered: true };
   const map = new Map();
+  const add = (form, cell) => {
+    const n = norm(form);
+    (map.get(n) ?? map.set(n, []).get(n)).push(cell);
+  };
+  const thirdPerson = THIRD_PERSON.has(norm(w.forms?.nom ?? ''));
   for (const c of ['nom', 'gen', 'dat', 'acc', 'ins', 'pre']) {
     if (!w.forms?.[c]) continue;
-    const n = norm(w.forms[c]);
-    if (!map.has(n)) map.set(n, []);
-    map.get(n).push({ case: c });
+    add(w.forms[c], { case: c });
+    if (thirdPerson && c !== 'nom' && c !== 'pre') add(`н${norm(w.forms[c])}`, { case: c, prep: true });
   }
   return { map, gendered: false };
 }
@@ -166,7 +176,7 @@ export function paradigmFor(pos, word) {
       extraFields: (cell) =>
         pc.gendered
           ? { case: cell.case, number: cell.number, gender: cell.gender }
-          : { case: cell.case },
+          : { case: cell.case, ...(cell.prep ? { prep: true } : {}) },
     };
   }
   return null;
@@ -438,6 +448,7 @@ export function serializeInflect(pos, dec) {
     parts.push(`case: ${f.case}`);
     if (f.number) parts.push(`number: ${f.number}`);
     if (f.gender) parts.push(`gender: ${f.gender}`);
+    if (f.prep) parts.push('prep: true');
   }
   if (dec.rule) parts.push(`rule: ${dec.rule}`);
   return `        inflect: { ${parts.join(', ')} }`;

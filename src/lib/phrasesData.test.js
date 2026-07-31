@@ -41,7 +41,9 @@ function storedForm(word, t) {
       // personal, reflexive and interrogative pronouns are flat by case.
       const ex = word.extra ?? {}
       if (t.gender) return ex.declension?.[animAcc ? `${t.gender}_gen` : `${t.gender}_${t.case}`] ?? null
-      return ex.forms?.[t.case] ?? null
+      const bare = ex.forms?.[t.case] ?? null
+      // Third-person post-preposition н- prefix: у него́, с ни́ми.
+      return t.prep && bare ? `н${bare}` : bare
     }
     return word.forms?.[t.number]?.[t.case] ?? null // noun
   }
