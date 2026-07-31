@@ -737,6 +737,7 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: pronoun-personal }
       - ru: У него́ мно́го друзе́й.
         en_gb: He has many friends.
+        inflect: { token: 2, case: gen, prep: true, rule: pronoun-personal }
       - ru: Ему́ два́дцать лет.
         en_gb: He is twenty years old.
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
@@ -808,6 +809,7 @@ words:
         inflect: { token: 1, case: dat, number: pl, rule: pronoun-personal }
       - ru: Мы е́дем с ни́ми на мо́ре.
         en_gb: We are going to the sea with them.
+        inflect: { token: 4, case: ins, prep: true, rule: pronoun-personal }
       - ru: Мы горди́мся и́ми.
         en_gb: We are proud of them.
         inflect: { token: 3, case: ins, number: pl, rule: pronoun-personal }

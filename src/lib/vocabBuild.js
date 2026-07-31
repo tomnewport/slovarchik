@@ -344,9 +344,18 @@ export function shapeContextPhrases(words) {
         target: {
           key: w.key,
           token: a.token,
+          // Consecutive tokens the slot spans — a multi-word lemma inflects as a
+          // unit (день рожде́ния, горя́чий шокола́д). Defaults to a single token.
+          span: a.span ?? null,
           case: a.case ?? null,
           number: a.number ?? null,
           gender: a.gender ?? null,
+          // Short-form (predicate) adjective agreement: «degree: short» + gender,
+          // no case (закры́т, ра́да). Graded by gender/number against `short`.
+          degree: a.degree ?? null,
+          // Third-person pronoun with the post-preposition н- prefix (у него́,
+          // с ни́ми): the answer form is «н» + the stored oblique form.
+          prep: a.prep ?? null,
           // Marks an adjective/pronoun accusative that agrees with an animate
           // noun, so it takes the genitive form (ви́жу хоро́шего дру́га). The slot
           // is still graded as the accusative — animacy only selects the form.

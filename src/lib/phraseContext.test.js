@@ -106,6 +106,28 @@ describe('buildSelectSteps', () => {
   it('returns no selection steps for a verb without an aspect partner', () => {
     expect(buildSelectSteps(verbPhrase.target, dumat)).toEqual([])
   })
+  it('spans several tokens for a multi-word lemma (answer joins the window)', () => {
+    const shokolad = { key: 'горячий шоколад=hot chocolate', pos: 'noun', headword: 'горя́чий шокола́д' }
+    const phrase = {
+      id: 'gs', ru: 'Нет ничего́ лу́чше горя́чего шокола́да зимо́й.', en: '',
+      target: { key: 'горячий шоколад=hot chocolate', token: 4, span: 2, case: 'gen', number: 'sg' },
+    }
+    const ex = buildFromPhrase(phrase, shokolad)
+    expect(ex.span).toBe(2)
+    expect(ex.targetIndex).toBe(3)
+    expect(ex.answerAccented).toBe('горя́чего шокола́да')
+    expect(ex.lemma).toBe('горя́чий шокола́д')
+  })
+  it('returns a short-form gender step for a short (predicate) adjective', () => {
+    const zakrytyi = {
+      key: 'закрытый=closed', pos: 'adjective',
+      short: { m: 'закры́т', f: 'закры́та', n: 'закры́то', pl: 'закры́ты' },
+    }
+    const steps = buildSelectSteps({ degree: 'short', gender: 'f', token: 3 }, zakrytyi)
+    expect(steps.map((s) => s.kind)).toEqual(['gender'])
+    expect(steps[0].options.map((o) => o.id)).toEqual(['m', 'n', 'f', 'pl'])
+    expect(steps[0].options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'f' })])
+  })
   it('returns a choose-the-aspect step for a verb with an aspect partner', () => {
     const steps = buildSelectSteps(skazatPhrase.target, skazat)
     expect(steps.map((s) => s.kind)).toEqual(['aspect'])

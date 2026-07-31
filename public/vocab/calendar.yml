@@ -200,10 +200,13 @@ words:
     usage:
       - ru: У меня́ день рожде́ния в ма́е.
         en_gb: My birthday is in May.
+        inflect: { token: 3, span: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я жду свой день рожде́ния.
         en_gb: I am looking forward to my birthday.
+        inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ пригото́вила пода́рок ко дню рожде́ния.
         en_gb: She prepared a present for the birthday.
+        inflect: { token: 5, span: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: день рожде́ния
       sg_gen: дня рожде́ния
@@ -388,10 +391,13 @@ words:
     usage:
       - ru: На Но́вый год мы наряжа́ем ёлку.
         en_gb: At New Year we decorate the fir tree.
+        inflect: { token: 2, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы лю́бим Но́вый год.
         en_gb: We love New Year.
+        inflect: { token: 3, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́сле Но́вого го́да начина́ются кани́кулы.
         en_gb: After New Year the holidays begin.
+        inflect: { token: 2, span: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: Но́вый год
       sg_gen: Но́вого го́да

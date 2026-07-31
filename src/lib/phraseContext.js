@@ -123,6 +123,9 @@ function agreementLabel(gender, c) {
 
 /** Human-readable label for the grammatical slot a phrase drills. */
 function slotLabelFor(target) {
+  if (target.degree === 'short') {
+    return `Short form · ${GENDER_LABEL[target.gender] ?? target.gender}`
+  }
   if (target.case) {
     if (target.gender) return agreementLabel(target.gender, target.case)
     // Case first, then number — the order the learner reasons in.
@@ -198,6 +201,26 @@ function genderStep(target, word) {
   }
 }
 
+/**
+ * Selection step: pick the gender + number a short-form (predicate) adjective
+ * agrees with (закры́т / закры́та / закры́то / закры́ты). Like genderStep, but the
+ * options come from the word's `short` block rather than the case declension.
+ */
+function shortGenderStep(target, word) {
+  const short = word?.short ?? {}
+  const present = GENDERS.filter((g) => short[g])
+  const genders = present.length ? present : GENDERS
+  return {
+    kind: 'gender',
+    prompt: 'Which gender / number must the short form agree with?',
+    options: genders.map((g) => ({
+      id: g,
+      label: GENDER_LABEL[g] ?? g,
+      correct: g === target.gender,
+    })),
+  }
+}
+
 /** The two members of a verb's aspect pair, imperfective first. */
 function aspectPairMembers(word) {
   const self = { ru: word.headword || word.ru, aspect: word.aspect, key: word.key, correct: true }
@@ -242,6 +265,7 @@ function aspectStep(word) {
  * component grades each clicked option's `correct` flag.
  */
 export function buildSelectSteps(target, word) {
+  if (target?.degree === 'short') return [shortGenderStep(target, word)]
   if (!target?.case) {
     return target?.person && word?.aspectPair ? [aspectStep(word)] : []
   }
@@ -262,9 +286,13 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   const idx = Number(target.token) - 1 // annotations are 1-based
   if (!Number.isInteger(idx) || idx < 0 || idx >= tokens.length) return null
 
-  const origToken = tokens[idx]
-  const core = wordCore(origToken)
-  if (!core) return null
+  // A multi-word lemma (день рожде́ния, горя́чий шокола́д) inflects as a unit, so
+  // the slot spans `span` consecutive tokens and the answer is their join.
+  const span = Math.max(1, Number(target.span) || 1)
+  if (idx + span > tokens.length) return null
+  const cores = tokens.slice(idx, idx + span).map(wordCore)
+  if (cores.some((c) => !c)) return null
+  const core = cores.join(' ')
 
   // The slot shows the dictionary form before answering; the component
   // (PhraseFixExercise) re-attaches the token's surrounding punctuation around
@@ -279,6 +307,8 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     kind: 'phrase-fix',
     tokens, // the correct sentence tokens
     targetIndex: idx,
+    // Number of consecutive tokens the slot covers (>1 for multi-word lemmas).
+    span,
     lemma,
     // With an aspect step the slot must not reveal which partner is correct, so
     // the component shows every candidate lemma (impf first) until it's chosen.

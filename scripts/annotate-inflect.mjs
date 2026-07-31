@@ -104,14 +104,24 @@ export function verbCells(w) {
   }
   return map;
 }
+// Third-person personal pronouns take an н- prefix on their oblique forms after
+// any preposition: его → у него́, и́ми → с ни́ми. The prepositional is already
+// stored with the н (нём, них); the others (gen/dat/acc/ins) are stored bare, so
+// we add the н-variant as a separate `prep`-flagged reading of the same case.
+const THIRD_PERSON = new Set(['он', 'она', 'оно', 'они']);
+
 export function pronounCells(w) {
   if (w.declension) return { map: adjCells(w), gendered: true };
   const map = new Map();
+  const add = (form, cell) => {
+    const n = norm(form);
+    (map.get(n) ?? map.set(n, []).get(n)).push(cell);
+  };
+  const thirdPerson = THIRD_PERSON.has(norm(w.forms?.nom ?? ''));
   for (const c of ['nom', 'gen', 'dat', 'acc', 'ins', 'pre']) {
     if (!w.forms?.[c]) continue;
-    const n = norm(w.forms[c]);
-    if (!map.has(n)) map.set(n, []);
-    map.get(n).push({ case: c });
+    add(w.forms[c], { case: c });
+    if (thirdPerson && c !== 'nom' && c !== 'pre') add(`н${norm(w.forms[c])}`, { case: c, prep: true });
   }
   return { map, gendered: false };
 }
@@ -166,7 +176,7 @@ export function paradigmFor(pos, word) {
       extraFields: (cell) =>
         pc.gendered
           ? { case: cell.case, number: cell.number, gender: cell.gender }
-          : { case: cell.case },
+          : { case: cell.case, ...(cell.prep ? { prep: true } : {}) },
     };
   }
   return null;
@@ -194,13 +204,41 @@ function isSkippableCase(pos, gendered, cell) {
  * This is the single source of truth: `decide` returns dec only when
  * status === 'annotate', and the triage tool reads bucket/dec/candidates.
  */
+/**
+ * Match a short-form (predicate) adjective. The short form (боле́н, закры́т,
+ * рад) agrees by gender/number only and lives in a separate `short:` block, not
+ * the case declension — so it never appears among the regular candidates. If
+ * exactly one token is exactly one gender's short form, propose it. Returns an
+ * `annotate` result (degree: short, no case) or null.
+ */
+function shortAnnotate(pos, word, tokens) {
+  if (pos !== 'adjective' || !word.short) return null;
+  const byForm = new Map();
+  for (const g of ['m', 'f', 'n', 'pl']) {
+    if (!word.short[g]) continue;
+    const n = norm(word.short[g]);
+    (byForm.get(n) ?? byForm.set(n, []).get(n)).push(g);
+  }
+  const hits = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const gs = byForm.get(norm(core(tokens[i])));
+    if (gs) hits.push({ i, gs });
+  }
+  if (hits.length !== 1 || hits[0].gs.length !== 1) return null;
+  return {
+    status: 'annotate', bucket: 'short-form', candidates: [],
+    dec: { token: hits[0].i + 1, fields: { degree: 'short', gender: hits[0].gs[0] }, rule: 'adj-short-form' },
+  };
+}
+
 export function analyze(pos, word, ru) {
+  const tokens = tokenize(ru);
   const setup = paradigmFor(pos, word);
   if (!setup) return { status: 'skip', bucket: 'unsupported-pos', candidates: [] };
   const { map, gendered, ruleFor, extraFields } = setup;
-  if (!map || map.size === 0) return { status: 'skip', bucket: 'no-paradigm', candidates: [] };
+  if (!map || map.size === 0) return shortAnnotate(pos, word, tokens)
+    ?? { status: 'skip', bucket: 'no-paradigm', candidates: [] };
 
-  const tokens = tokenize(ru);
   const canPrep = pos === 'noun' || (pos === 'pronoun' && !gendered);
   const mk = (cell, extra = {}) => ({ fields: extraFields(cell), rule: ruleFor(cell), ...extra });
 
@@ -214,7 +252,8 @@ export function analyze(pos, word, ru) {
     const prev = i > 0 ? norm(core(tokens[i - 1])) : null;
     cands.push({ idx: i, n, cells, prep: canPrep && prev && PREP_CASES[prev] ? prev : null });
   }
-  if (!cands.length) return { status: 'skip', bucket: 'no-matching-cell', candidates: [] };
+  if (!cands.length) return shortAnnotate(pos, word, tokens)
+    ?? { status: 'skip', bucket: 'no-matching-cell', candidates: [] };
 
   // Resolve each candidate token to a definite oblique cell where we can.
   for (const c of cands) {
@@ -403,10 +442,13 @@ export function serializeInflect(pos, dec) {
   const parts = [`token: ${dec.token}`];
   if (pos === 'verb') {
     parts.push(`tense: ${f.tense}`, `person: ${f.person}`);
+  } else if (f.degree === 'short') {
+    parts.push('degree: short', `gender: ${f.gender}`);
   } else {
     parts.push(`case: ${f.case}`);
     if (f.number) parts.push(`number: ${f.number}`);
     if (f.gender) parts.push(`gender: ${f.gender}`);
+    if (f.prep) parts.push('prep: true');
   }
   if (dec.rule) parts.push(`rule: ${dec.rule}`);
   return `        inflect: { ${parts.join(', ')} }`;

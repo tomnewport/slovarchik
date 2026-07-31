@@ -10320,10 +10320,13 @@ words:
     usage:
       - ru: Зимо́й я люблю́ горя́чий шокола́д.
         en_gb: In winter I love hot chocolate.
+        inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ заказа́ла горя́чий шокола́д в кафе́.
         en_gb: She ordered hot chocolate at the café.
+        inflect: { token: 3, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Нет ничего́ лу́чше горя́чего шокола́да в холо́дный день.
         en_gb: There's nothing better than hot chocolate on a cold day.
+        inflect: { token: 4, span: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: горя́чий шокола́д
       sg_gen: горя́чего шокола́да
@@ -16986,10 +16989,13 @@ words:
     usage:
       - ru: Я доба́вил в сала́т зелёный горо́шек.
         en_gb: I added green peas to the salad.
+        inflect: { token: 5, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ты лю́бишь зелёный горо́шек?
         en_gb: Do you like green peas?
+        inflect: { token: 3, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе был зелёный горо́шек.
         en_gb: There were green peas in the soup.
+        inflect: { token: 4, span: 2, case: nom, number: sg, rule: noun-nom-sg }
     declension:
       sg_nom: зелёный горо́шек
       sg_gen: зелёного горо́шка
@@ -20887,10 +20893,13 @@ words:
     usage:
       - ru: Я о́чень люблю́ ки́слую капу́сту.
         en_gb: I really love sauerkraut.
+        inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ки́слая капу́ста поле́зна для здоро́вья.
         en_gb: Sauerkraut is good for your health.
+        inflect: { token: 1, span: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Она́ подала́ мя́со с ки́слой капу́стой.
         en_gb: She served meat with sauerkraut.
+        inflect: { token: 5, span: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ки́слая капу́ста
       sg_gen: ки́слой капу́сты
@@ -33206,10 +33215,13 @@ words:
     usage:
       - ru: Она́ купи́ла краси́вое ни́жнее бельё.
         en_gb: She bought pretty underwear.
+        inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ни́жнее бельё лежи́т в шкафу́.
         en_gb: The underwear is in the wardrobe.
+        inflect: { token: 1, span: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ты не забы́л ни́жнее бельё?
         en_gb: Did you forget your underwear?
+        inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: ни́жнее бельё
       sg_gen: ни́жнего белья́
@@ -53795,10 +53807,13 @@ words:
     usage:
       - ru: Ба́бушка сама́ де́лает солёные огурцы́.
         en_gb: Grandma makes pickled cucumbers herself.
+        inflect: { token: 4, span: 2, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Я люблю́ солёные огурцы́ с карто́шкой.
         en_gb: I love pickled cucumbers with potatoes.
+        inflect: { token: 3, span: 2, case: acc, number: pl, rule: noun-acc-pl }
       - ru: В ба́нке ещё есть солёные огурцы́.
         en_gb: There are still pickled cucumbers in the jar.
+        inflect: { token: 5, span: 2, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       pl_nom: солёные огурцы́
       pl_gen: солёных огурцо́в
@@ -54826,10 +54841,13 @@ words:
     usage:
       - ru: Он бе́гает в спорти́вном костю́ме.
         en_gb: He runs in a tracksuit.
+        inflect: { token: 4, span: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ купи́ла но́вый спорти́вный костю́м.
         en_gb: She bought a new tracksuit.
+        inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Тебе́ идёт э́тот спорти́вный костю́м.
         en_gb: This tracksuit suits you.
+        inflect: { token: 4, span: 2, case: nom, number: sg, rule: noun-nom-sg }
     declension:
       sg_nom: спорти́вный костю́м
       sg_gen: спорти́вного костю́ма
