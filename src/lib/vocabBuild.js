@@ -59,6 +59,16 @@ function glossNote(text) {
 }
 
 /**
+ * Accepted English answers for an explicit plural-display gloss (`en_pl`). A
+ * string or a list; each is reduced to its short gloss (dropping any
+ * parenthetical note, like `en_gb`) and de-duplicated.
+ */
+function normalizeEnList(raw) {
+  const arr = Array.isArray(raw) ? raw : raw != null ? [raw] : []
+  return [...new Set(arr.map(shortGloss).filter(Boolean))]
+}
+
+/**
  * Normalise an explicit `heteronyms` annotation into {ru, gloss} entries.
  *
  * Heteronyms link at two levels and an author picks one per word:
@@ -139,6 +149,20 @@ function normalizeWord(pos, key, word) {
   const formNotes = pos === 'noun' ? nestNotes(word.declension_notes, numbers) : {}
   const headword = headwordOf(pos, word, forms, ru)
 
+  // Display-number preference for the vocabulary word-drills (match/spell/speak
+  // and the /vocab browser). Some nouns are stored singular (their dictionary
+  // form) yet are used almost always in the plural — перчатки, сапоги, боти́нки.
+  // `display_number: pl` shows the plural form and gloss there; `mixed` alternates
+  // singular/plural at random; the default `sg` is the historical behaviour. Only
+  // the vocab word-drills honour it — the inflection and phrase drills keep the
+  // singular headword and the full paradigm. Noun-only.
+  const displayNumber = pos === 'noun' ? (word.display_number ?? 'sg') : 'sg'
+  // The plural nominative (from the declension table) and the explicit plural
+  // gloss(es), used only when a plural display is resolved. Stored, not derived
+  // (English plurals aren't reliably regular): `en_pl` is authored.
+  const displayRuPl = forms.pl?.nom ?? null
+  const displayEnPl = normalizeEnList(word.en_pl)
+
   // Accepted English answers: the key gloss plus the short form of the standard
   // and alternate meanings.
   const english = [...new Set([en, shortGloss(std), ...alts.map(shortGloss)].filter(Boolean))]
@@ -173,6 +197,12 @@ function normalizeWord(pos, key, word) {
     // a short tooltip explaining an irregular/suppletive cell (год → лет). Empty
     // for the overwhelming majority of nouns.
     formNotes,
+    // Vocab word-drill display preference (see above). Both surface forms are
+    // carried so the consumer resolves the shown number per-instance (see
+    // `vocabDisplay`); `mixed` needs both, `pl` needs the plural, `sg` neither.
+    displayNumber,
+    displayRuPl,
+    displayEnPl,
     // Short-form (predicate) adjective agreement: { m, f, n, pl } accented, as
     // authored. Present only where the short form is actually used; hand-curated
     // (stress shifts stored, not derived) and left untouched by the declension
@@ -317,7 +347,32 @@ export function shapeVocab(words) {
     ambiguousEn: w.ambiguousEn ?? [],
     aspect: w.aspect ?? null,
     aspectPair: w.aspectPair ?? null,
+    // Display-number preference + the plural surface form/gloss, so the vocab
+    // word-drills can show a usually-plural noun in the plural. `vocabDisplay`
+    // turns these into the single shown `{ ru, en }` per exercise instance.
+    displayNumber: w.displayNumber ?? 'sg',
+    ruPl: w.displayRuPl ?? null,
+    enPl: w.displayEnPl ?? [],
   }))
+}
+
+/**
+ * Resolve which surface form a shaped vocab word shows in the word-drills.
+ * `display_number: pl` returns the plural nominative and plural gloss; `mixed`
+ * flips a coin (per call, via `rng`); anything else — the default — returns the
+ * singular headword. Falls back to the singular whenever the plural data is
+ * absent, so a mis-annotation never renders a blank prompt.
+ *
+ * @param {object} v shaped vocab word (from {@link shapeVocab})
+ * @param {() => number} [rng] randomness source for the `mixed` coin-flip
+ * @returns {{ ru: string, en: string[], number: 'sg' | 'pl' }}
+ */
+export function vocabDisplay(v, rng = Math.random) {
+  const wantPl = v?.displayNumber === 'pl' || (v?.displayNumber === 'mixed' && rng() < 0.5)
+  if (wantPl && v.ruPl && v.enPl?.length) {
+    return { ru: v.ruPl, en: v.enPl, number: 'pl' }
+  }
+  return { ru: v.ru, en: v.en, number: 'sg' }
 }
 
 /**

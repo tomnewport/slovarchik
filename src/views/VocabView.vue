@@ -1,6 +1,7 @@
 <script setup>
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
+import { vocabDisplay } from '../lib/vocabBuild.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
 import { resetHint } from '../stores/keyboard.js'
 import { speak, speechSupported } from '../lib/speech.js'
@@ -53,6 +54,15 @@ let wrongTimer = null
 // aloud when it's tapped, turning the matching board into a listening drill.
 const hideSpellings = ref(false)
 const canSpeak = speechSupported()
+
+// Resolve a shaped word's display number (singular / plural / mixed) into the
+// `ru`/`en` this drill shows. Done once per drawn word — a single-word prompt or
+// each board tile — so both matching columns and the reveal agree on the number.
+function withDisplay(w) {
+  if (!w) return w
+  const { ru, en } = vocabDisplay(w)
+  return { ...w, ru, en }
+}
 
 // English answers may be arrays; show the first as the canonical prompt/answer.
 const promptOf = (w) => (direction.value === 'ru-en' ? w.ru : firstEn(w))
@@ -152,7 +162,7 @@ function nextQuestion() {
   answered.value = false
   wasCorrect.value = false
   typed.value = ''
-  current.value = weightedPickWord()
+  current.value = withDisplay(weightedPickWord())
   nextTick(() => inputEl.value?.focus())
   if (direction.value === 'ru-en') speak(current.value.ru)
 }
@@ -164,7 +174,7 @@ function nextBoard() {
   matched.clear()
   selectedLeft.value = null
   selectedRight.value = null
-  const words = weightedSampleWords(Math.min(BOARD_PAIRS, vocab.value.length))
+  const words = weightedSampleWords(Math.min(BOARD_PAIRS, vocab.value.length)).map(withDisplay)
   boardLeft.value = shuffle(words)
   boardRight.value = shuffle(words)
 }

@@ -3,6 +3,7 @@ import {
   parseKey,
   buildWords,
   shapeVocab,
+  vocabDisplay,
   shapePhrases,
   shapeNouns,
   learnableWords,
@@ -451,5 +452,84 @@ describe('the bundled vocabulary has no case-only duplicate keys', () => {
       .filter((keys) => keys.size > 1)
       .map((keys) => [...keys].join(' / '))
     expect(collisions).toEqual([])
+  })
+})
+
+describe('display_number (usually-plural nouns)', () => {
+  const build = (extra) =>
+    buildWords([
+      {
+        pos: 'noun',
+        text: `
+words:
+  "перчатка=glove":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    ${extra}
+    en_gb:
+      standard: glove (a covering for the hand)
+    declension:
+      sg_nom: перча́тка
+      sg_gen: перча́тки
+      sg_dat: перча́тке
+      sg_acc: перча́тку
+      sg_ins: перча́ткой
+      sg_pre: перча́тке
+      pl_nom: перча́тки
+      pl_gen: перча́ток
+      pl_dat: перча́ткам
+      pl_acc: перча́тки
+      pl_ins: перча́тками
+      pl_pre: перча́тках
+`,
+      },
+    ])
+
+  it('defaults to singular and captures the plural surface form/gloss', () => {
+    const [w] = build('en_pl: gloves')
+    expect(w.displayNumber).toBe('sg')
+    expect(w.displayRuPl).toBe('перча́тки')
+    expect(w.displayEnPl).toEqual(['gloves'])
+  })
+
+  it('normalises an en_pl list, dropping any parenthetical note', () => {
+    const [w] = build('en_pl: [gloves, mittens (fingerless)]')
+    expect(w.displayEnPl).toEqual(['gloves', 'mittens'])
+  })
+
+  it('shapeVocab carries the display preference through', () => {
+    const [v] = shapeVocab(build('display_number: pl\n    en_pl: gloves'))
+    expect(v.displayNumber).toBe('pl')
+    expect(v.ruPl).toBe('перча́тки')
+    expect(v.enPl).toEqual(['gloves'])
+    // The shaped singular fields stay the dictionary headword/gloss.
+    expect(v.ru).toBe('перча́тка')
+    expect(v.en).toContain('glove')
+  })
+
+  it('vocabDisplay shows the plural form and gloss when display_number is pl', () => {
+    const [v] = shapeVocab(build('display_number: pl\n    en_pl: gloves'))
+    expect(vocabDisplay(v)).toEqual({ ru: 'перча́тки', en: ['gloves'], number: 'pl' })
+  })
+
+  it('vocabDisplay shows the singular by default', () => {
+    const [v] = shapeVocab(build('en_pl: gloves'))
+    const d = vocabDisplay(v)
+    expect(d.number).toBe('sg')
+    expect(d.ru).toBe('перча́тка')
+  })
+
+  it('mixed flips between singular and plural on the injected rng', () => {
+    const [v] = shapeVocab(build('display_number: mixed\n    en_pl: gloves'))
+    expect(vocabDisplay(v, () => 0.1).number).toBe('pl') // < 0.5 → plural
+    expect(vocabDisplay(v, () => 0.9).number).toBe('sg') // ≥ 0.5 → singular
+  })
+
+  it('falls back to the singular when the plural data is missing', () => {
+    // Marked plural but no en_pl authored: never render a blank plural prompt.
+    const [v] = shapeVocab(build('display_number: pl'))
+    expect(vocabDisplay(v).number).toBe('sg')
   })
 })
