@@ -2111,6 +2111,7 @@ words:
         en_gb: I do not want to wage war.
       - ru: Никто́ не хо́чет, что́бы стра́ны воева́ли.
         en_gb: No one wants the countries to be at war.
+        inflect: { token: 6, tense: past, person: past_pl, rule: verb-past }
       - ru: Без причи́ны наро́д не воева́л бы.
         en_gb: Without a reason the people would not wage war.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
