@@ -377,11 +377,11 @@ words:
         pl: благодари́те
       present:
         "1sg": благодарю́
-        "2sg": благода́ришь
-        "3sg": благода́рит
-        "1pl": благода́рим
-        "2pl": благода́рите
-        "3pl": благода́рят
+        "2sg": благодари́шь
+        "3sg": благодари́т
+        "1pl": благодари́м
+        "2pl": благодари́те
+        "3pl": благодаря́т
       past_m: благодари́л
       past_f: благодари́ла
       past_n: благодари́ло
@@ -396,7 +396,7 @@ words:
       - ru: Она́ благодари́ла учи́теля.
         en_gb: She thanked the teacher.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
-      - ru: Го́сти благода́рят хозя́йку.
+      - ru: Го́сти благодаря́т хозя́йку.
         en_gb: The guests thank the hostess.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: По́сле конце́рта она́ бу́дет благодари́ть всех ли́чно.
@@ -405,7 +405,7 @@ words:
       - ru: За тако́й шанс она́ благодари́ла бы судьбу́ всю жизнь.
         en_gb: She would thank fate all her life for an opportunity like that.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
-      - ru: Ты благода́ришь учи́теля?
+      - ru: Ты благодари́шь учи́теля?
         en_gb: Do you thank the teacher?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы благодари́те хозя́ина?
@@ -756,7 +756,7 @@ words:
         "2pl": берётесь
         "3pl": беру́тся
       past_m: бра́лся
-      past_f: бра́лась
+      past_f: брала́сь
       past_n: бра́лось
       past_pl: бра́лись
     usage:
@@ -1132,8 +1132,8 @@ words:
       - ru: Рабо́чие вали́ли ста́рый сара́й.
         en_gb: The workers were felling the old shed.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: Снег вали́т весь день.
-        en_gb: The snow has been pouring down all day.
+      - ru: Ве́тер ва́лит дере́вья.
+        en_gb: The wind topples trees.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: За́втра рабо́чие бу́дут вали́ть ста́рые дере́вья.
         en_gb: Tomorrow the workers will be felling the old trees.
@@ -1831,16 +1831,16 @@ words:
       standard: to see (colloquial; to have seen)
     conjugation:
       present:
-        "1sg": ви́даю
-        "2sg": ви́даешь
-        "3sg": ви́дает
-        "1pl": ви́даем
-        "2pl": ви́даете
-        "3pl": ви́дают
-      past_m: ви́дал
-      past_f: ви́дала
-      past_n: ви́дало
-      past_pl: ви́дали
+        "1sg": вида́ю
+        "2sg": вида́ешь
+        "3sg": вида́ет
+        "1pl": вида́ем
+        "2pl": вида́ете
+        "3pl": вида́ют
+      past_m: вида́л
+      past_f: вида́ла
+      past_n: вида́ло
+      past_pl: вида́ли
     usage:
       - ru: Я не вида́л его́ давно́.
         en_gb: I haven't seen him for ages.
@@ -2178,7 +2178,7 @@ words:
     en_gb:
       standard: to transport (to carry by vehicle, habitually)
     usage:
-      - ru: Он вози́т проду́кты на грузовике́.
+      - ru: Он во́зит проду́кты на грузовике́.
         en_gb: He transports goods by lorry.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я вожу́ дете́й в шко́лу ка́ждый день.
@@ -3180,7 +3180,7 @@ words:
       - ru: Е́сли бы меня́ позва́ли, я бы вступи́л в клуб.
         en_gb: If they invited me, I would join the club.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-conditional }
-      - ru: За́втра он вступи́т в но́вую до́лжность.
+      - ru: За́втра он всту́пит в но́вую до́лжность.
         en_gb: Tomorrow he will take up the new post.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты всту́пишь в разгово́р?
@@ -3421,7 +3421,7 @@ words:
         - to remove
     conjugation:
       future:
-        "1sg": выведу́
+        "1sg": вы́веду
         "2sg": вы́ведешь
         "3sg": вы́ведет
         "1pl": вы́ведем
@@ -5897,7 +5897,7 @@ words:
       past_n: доба́вило
       past_pl: доба́вили
     usage:
-      - ru: Я добавлю́ са́хар в чай.
+      - ru: Я доба́влю са́хар в чай.
         en_gb: I will add sugar to the tea.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он доба́вил немно́го со́ли.
@@ -6094,16 +6094,16 @@ words:
         - to figure out
     conjugation:
       future:
-        "1sg": дога́даюсь
-        "2sg": дога́даешься
-        "3sg": дога́дается
-        "1pl": дога́даемся
-        "2pl": дога́даетесь
-        "3pl": дога́даются
-      past_m: дога́дался
-      past_f: дога́далась
-      past_n: дога́далось
-      past_pl: дога́дались
+        "1sg": догада́юсь
+        "2sg": догада́ешься
+        "3sg": догада́ется
+        "1pl": догада́емся
+        "2pl": догада́етесь
+        "3pl": догада́ются
+      past_m: догада́лся
+      past_f: догада́лась
+      past_n: догада́лось
+      past_pl: догада́лись
     usage:
       - ru: Я сра́зу догада́лся о́бо всём.
         en_gb: I guessed everything at once.
@@ -6117,10 +6117,10 @@ words:
       - ru: Без э́той подска́зки она́ не догада́лась бы.
         en_gb: Without that hint, she would not have guessed.
         inflect: { token: 6, tense: past, person: past_f, rule: verb-conditional }
-      - ru: Ско́ро ты дога́даешься, в чём де́ло.
+      - ru: Ско́ро ты догада́ешься, в чём де́ло.
         en_gb: Soon you'll guess what's going on.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
-      - ru: Ты дога́даешься обо всём?
+      - ru: Ты догада́ешься обо всём?
         en_gb: Will you guess everything?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "догадываться=to guess":
@@ -6215,11 +6215,11 @@ words:
     conjugation:
       future:
         "1sg": договорю́сь
-        "2sg": догово́ришься
-        "3sg": догово́рится
-        "1pl": догово́римся
-        "2pl": догово́ритесь
-        "3pl": догово́рятся
+        "2sg": договори́шься
+        "3sg": договори́тся
+        "1pl": договори́мся
+        "2pl": договори́тесь
+        "3pl": договоря́тся
       past_m: договори́лся
       past_f: договори́лась
       past_n: договори́лось
@@ -6231,13 +6231,13 @@ words:
       - ru: Я договорю́сь с нача́льником.
         en_gb: I will come to an arrangement with the boss.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Они́ догово́рятся о цене́.
+      - ru: Они́ договоря́тся о цене́.
         en_gb: They will agree on the price.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: О ски́дке вы договори́лись бы зара́нее?
         en_gb: Would you arrange a discount in advance?
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-conditional }
-      - ru: За́втра мы догово́римся о сро́ках.
+      - ru: За́втра мы договори́мся о сро́ках.
         en_gb: Tomorrow we'll agree on the deadlines.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
       - ru: Вы договори́тесь о встре́че?
@@ -6276,7 +6276,7 @@ words:
       - ru: Мы дожда́лись поезда́ на платфо́рме.
         en_gb: We waited for the train on the platform.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: Она́ дожда́лась бы нас, но по́езд уже́ ушёл.
+      - ru: Она́ дождала́сь бы нас, но по́езд уже́ ушёл.
         en_gb: She would have waited for us, but the train had already left.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро мы дождёмся хоро́шей пого́ды.
@@ -6827,15 +6827,15 @@ words:
     conjugation:
       present:
         "1sg": дохожу́
-        "2sg": до́ходишь
-        "3sg": до́ходит
-        "1pl": до́ходим
-        "2pl": до́ходите
-        "3pl": до́ходят
-      past_m: дохо́дил
-      past_f: дохо́дила
-      past_n: дохо́дило
-      past_pl: дохо́дили
+        "2sg": дохо́дишь
+        "3sg": дохо́дит
+        "1pl": дохо́дим
+        "2pl": дохо́дите
+        "3pl": дохо́дят
+      past_m: доходи́л
+      past_f: доходи́ла
+      past_n: доходи́ло
+      past_pl: доходи́ли
     usage:
       - ru: Я дохожу́ до рабо́ты за де́сять мину́т.
         en_gb: I reach work in ten minutes.
@@ -6843,7 +6843,7 @@ words:
       - ru: Звук не дохо́дит до за́днего ря́да.
         en_gb: The sound does not reach the back row.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
-      - ru: Письма́ дохо́дили о́чень ме́дленно.
+      - ru: Письма́ доходи́ли о́чень ме́дленно.
         en_gb: The letters arrived very slowly.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: До конца́ неде́ли пи́сьма бу́дут доходи́ть медле́ннее.
@@ -6852,7 +6852,7 @@ words:
       - ru: Без шу́ма звук доходи́л бы лу́чше.
         en_gb: Without noise the sound would reach better.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ты до́ходишь до рабо́ты пешко́м?
+      - ru: Ты дохо́дишь до рабо́ты пешко́м?
         en_gb: Do you walk to work?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "драться=to fight":
@@ -7526,7 +7526,7 @@ words:
       - ru: Ско́ро мы бу́дем жить у мо́ря.
         en_gb: Soon we'll be living by the sea.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
-      - ru: У мо́ря они́ жили́ бы кру́глый год.
+      - ru: У мо́ря они́ жи́ли бы кру́глый год.
         en_gb: They would live by the sea all year round.
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Где ты живёшь?
@@ -7775,10 +7775,10 @@ words:
         "1pl": зави́сим
         "2pl": зави́сите
         "3pl": зави́сят
-      past_m: зависе́л
-      past_f: зависе́ла
-      past_n: зависе́ло
-      past_pl: зависе́ли
+      past_m: зави́сел
+      past_f: зави́села
+      past_n: зави́село
+      past_pl: зави́сели
     usage:
       - ru: Всё зави́сит от пого́ды.
         en_gb: Everything depends on the weather.
@@ -8068,15 +8068,15 @@ words:
         "1pl": зади́м
         "2pl": зади́те
         "3pl": зададу́т
-      past_m: зада́л
+      past_m: за́дал
       past_f: задала́
-      past_n: зада́ло
-      past_pl: зада́ли
+      past_n: за́дало
+      past_pl: за́дали
     usage:
       - ru: Я зада́м тебе́ оди́н вопро́с.
         en_gb: I will ask you one question.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Учи́тель зада́л дома́шнюю рабо́ту.
+      - ru: Учи́тель за́дал дома́шнюю рабо́ту.
         en_gb: The teacher set homework.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ зададу́т нам тру́дную те́му.
@@ -8121,7 +8121,7 @@ words:
       - ru: Они́ заде́ржат рейс и́з-за пого́ды.
         en_gb: They will delay the flight because of the weather.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
-      - ru: Вы заде́ржали бы по́езд ра́ди одного́ пассажи́ра?
+      - ru: Вы задержа́ли бы по́езд ра́ди одного́ пассажи́ра?
         en_gb: Would you hold the train for one passenger?
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Ско́ро охра́на заде́ржит наруши́теля.
@@ -8805,11 +8805,11 @@ words:
     conjugation:
       future:
         "1sg": заменю́
-        "2sg": замени́шь
-        "3sg": замени́т
-        "1pl": замени́м
-        "2pl": замени́те
-        "3pl": заменя́т
+        "2sg": заме́нишь
+        "3sg": заме́нит
+        "1pl": заме́ним
+        "2pl": заме́ните
+        "3pl": заме́нят
       past_m: замени́л
       past_f: замени́ла
       past_n: замени́ло
@@ -8821,7 +8821,7 @@ words:
       - ru: Он замени́л колесо́ на маши́не.
         en_gb: He replaced the wheel on the car.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Они́ заменя́т окно́ на но́вое.
+      - ru: Они́ заме́нят окно́ на но́вое.
         en_gb: They will replace the window with a new one.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Э́ту дета́ль ма́стер замени́л бы сра́зу.
@@ -8830,7 +8830,7 @@ words:
       - ru: Ско́ро меха́ник заме́нит ма́сло.
         en_gb: Soon the mechanic will change the oil.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
-      - ru: Ты замени́шь ста́рую ла́мпу?
+      - ru: Ты заме́нишь ста́рую ла́мпу?
         en_gb: Will you replace the old lamp?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "замереть=to freeze":
@@ -8853,8 +8853,8 @@ words:
         "3pl": замру́т
       past_m: за́мер
       past_f: замерла́
-      past_n: замерло́
-      past_pl: замерли́
+      past_n: за́мерло
+      past_pl: за́мерли
     usage:
       - ru: Он за́мер от удивле́ния.
         en_gb: He froze in surprise.
@@ -8980,11 +8980,11 @@ words:
         pl: замолчи́те
       future:
         "1sg": замолчу́
-        "2sg": замо́лчишь
-        "3sg": замо́лчит
-        "1pl": замо́лчим
-        "2pl": замо́лчите
-        "3pl": замо́лчат
+        "2sg": замолчи́шь
+        "3sg": замолчи́т
+        "1pl": замолчи́м
+        "2pl": замолчи́те
+        "3pl": замолча́т
       past_m: замолча́л
       past_f: замолча́ла
       past_n: замолча́ло
@@ -10124,15 +10124,15 @@ words:
         pl: заходи́те
       present:
         "1sg": захожу́
-        "2sg": за́ходишь
-        "3sg": за́ходит
-        "1pl": за́ходим
-        "2pl": за́ходите
-        "3pl": за́ходят
-      past_m: захо́дил
-      past_f: захо́дила
-      past_n: захо́дило
-      past_pl: захо́дили
+        "2sg": захо́дишь
+        "3sg": захо́дит
+        "1pl": захо́дим
+        "2pl": захо́дите
+        "3pl": захо́дят
+      past_m: заходи́л
+      past_f: заходи́ла
+      past_n: заходи́ло
+      past_pl: заходи́ли
     usage:
       - ru: Заходи́те к нам в го́сти!
         en_gb: Drop in to visit us!
@@ -10143,7 +10143,7 @@ words:
       - ru: Со́лнце захо́дит за́ горы.
         en_gb: The sun is setting behind the mountains.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
-      - ru: Они́ захо́дили к нам по вечера́м.
+      - ru: Они́ заходи́ли к нам по вечера́м.
         en_gb: They used to drop in on us in the evenings.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я бу́ду заходи́ть к тебе́ ка́ждый ве́чер.
@@ -10774,11 +10774,11 @@ words:
     conjugation:
       future:
         "1sg": изменю́
-        "2sg": измени́шь
-        "3sg": измени́т
-        "1pl": измени́м
-        "2pl": измени́те
-        "3pl": изменя́т
+        "2sg": изме́нишь
+        "3sg": изме́нит
+        "1pl": изме́ним
+        "2pl": изме́ните
+        "3pl": изме́нят
       past_m: измени́л
       past_f: измени́ла
       past_n: измени́ло
@@ -10796,7 +10796,7 @@ words:
       - ru: Что вы измени́ли бы в э́том прое́кте?
         en_gb: What would you change in this project?
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-conditional }
-      - ru: Они́ изменя́т распи́сание на сле́дующей неде́ле.
+      - ru: Они́ изме́нят распи́сание на сле́дующей неде́ле.
         en_gb: They will change the schedule next week.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты изме́нишь на́ши пла́ны?
@@ -10814,11 +10814,11 @@ words:
     conjugation:
       future:
         "1sg": изменю́сь
-        "2sg": измени́шься
-        "3sg": измени́тся
-        "1pl": измени́мся
-        "2pl": измени́тесь
-        "3pl": изменя́тся
+        "2sg": изме́нишься
+        "3sg": изме́нится
+        "1pl": изме́нимся
+        "2pl": изме́нитесь
+        "3pl": изме́нятся
       past_m: измени́лся
       past_f: измени́лась
       past_n: измени́лось
@@ -11953,10 +11953,10 @@ words:
         "1pl": кома́ндуем
         "2pl": кома́ндуете
         "3pl": кома́ндуют
-      past_m: командова́л
-      past_f: командова́ла
-      past_n: командова́ло
-      past_pl: командова́ли
+      past_m: кома́ндовал
+      past_f: кома́ндовала
+      past_n: кома́ндовало
+      past_pl: кома́ндовали
     usage:
       - ru: Генера́л кома́ндует а́рмией.
         en_gb: The general commands the army.
@@ -14260,11 +14260,11 @@ words:
     conjugation:
       future:
         "1sg": наклоню́сь
-        "2sg": наклони́шься
-        "3sg": наклони́тся
-        "1pl": наклони́мся
-        "2pl": наклони́тесь
-        "3pl": наклоня́тся
+        "2sg": накло́нишься
+        "3sg": накло́нится
+        "1pl": накло́нимся
+        "2pl": накло́нитесь
+        "3pl": накло́нятся
       past_m: наклони́лся
       past_f: наклони́лась
       past_n: наклони́лось
@@ -14285,7 +14285,7 @@ words:
       - ru: От ве́тра ве́тки накло́нятся к земле́.
         en_gb: In the wind the branches will lean towards the ground.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
-      - ru: Ты наклони́шься над водо́й?
+      - ru: Ты накло́нишься над водо́й?
         en_gb: Will you lean over the water?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "налить=to pour":
@@ -14309,7 +14309,7 @@ words:
         "2pl": нальёте
         "3pl": налью́т
       past_m: нали́л
-      past_f: нали́ла
+      past_f: налила́
       past_n: нали́ло
       past_pl: нали́ли
     usage:
@@ -14922,10 +14922,10 @@ words:
         "1pl": нахо́дим
         "2pl": нахо́дите
         "3pl": нахо́дят
-      past_m: нахо́дил
-      past_f: нахо́дила
-      past_n: нахо́дило
-      past_pl: нахо́дили
+      past_m: находи́л
+      past_f: находи́ла
+      past_n: находи́ло
+      past_pl: находи́ли
     usage:
       - ru: Я ча́сто нахожу́ моне́ты на у́лице.
         en_gb: I often find coins on the street.
@@ -14933,7 +14933,7 @@ words:
       - ru: Она́ нахо́дит оши́бки в те́ксте.
         en_gb: She finds mistakes in the text.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
-      - ru: Он нахо́дил вре́мя для спо́рта.
+      - ru: Он находи́л вре́мя для спо́рта.
         en_gb: He used to find time for sport.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: В лесу́ мы бу́дем находи́ть гриб за грибо́м.
@@ -14965,10 +14965,10 @@ words:
         "1pl": нахо́димся
         "2pl": нахо́дитесь
         "3pl": нахо́дятся
-      past_m: нахо́дился
-      past_f: нахо́дилась
-      past_n: нахо́дилось
-      past_pl: нахо́дились
+      past_m: находи́лся
+      past_f: находи́лась
+      past_n: находи́лось
+      past_pl: находи́лись
     usage:
       - ru: Где вы нахо́дитесь сейча́с?
         en_gb: Where are you now?
@@ -15700,11 +15700,11 @@ words:
     conjugation:
       future:
         "1sg": обману́
-        "2sg": обманёшь
-        "3sg": обманёт
-        "1pl": обманём
-        "2pl": обманёте
-        "3pl": обману́т
+        "2sg": обма́нешь
+        "3sg": обма́нет
+        "1pl": обма́нем
+        "2pl": обма́нете
+        "3pl": обма́нут
       past_m: обману́л
       past_f: обману́ла
       past_n: обману́ло
@@ -15725,7 +15725,7 @@ words:
       - ru: Ско́ро моше́нники обма́нут мно́гих люде́й.
         en_gb: Soon swindlers will deceive many people.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
-      - ru: Ты обманёшь покупа́теля?
+      - ru: Ты обма́нешь покупа́теля?
         en_gb: Will you deceive the buyer?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "обнаружить=to discover":
@@ -16754,16 +16754,16 @@ words:
         - to signify
     conjugation:
       present:
-        "1sg": озна́чаю
-        "2sg": озна́чаешь
-        "3sg": озна́чает
-        "1pl": озна́чаем
-        "2pl": озна́чаете
-        "3pl": озна́чают
-      past_m: озна́чал
-      past_f: озна́чала
-      past_n: озна́чало
-      past_pl: озна́чали
+        "1sg": означа́ю
+        "2sg": означа́ешь
+        "3sg": означа́ет
+        "1pl": означа́ем
+        "2pl": означа́ете
+        "3pl": означа́ют
+      past_m: означа́л
+      past_f: означа́ла
+      past_n: означа́ло
+      past_pl: означа́ли
     usage:
       - ru: Что означа́ет э́то сло́во?
         en_gb: What does this word mean?
@@ -17672,11 +17672,11 @@ words:
         pl: останови́те
       future:
         "1sg": остановлю́
-        "2sg": останови́шь
-        "3sg": останови́т
-        "1pl": останови́м
-        "2pl": останови́те
-        "3pl": остановя́т
+        "2sg": остано́вишь
+        "3sg": остано́вит
+        "1pl": остано́вим
+        "2pl": остано́вите
+        "3pl": остано́вят
       past_m: останови́л
       past_f: останови́ла
       past_n: останови́ло
@@ -17688,7 +17688,7 @@ words:
       - ru: Я остановлю́ такси́ на углу́.
         en_gb: I will stop a taxi at the corner.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Они́ остановя́т рабо́ту в по́лночь.
+      - ru: Они́ остано́вят рабо́ту в по́лночь.
         en_gb: They will stop work at midnight.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Я бы останови́л э́тот спор.
@@ -17697,7 +17697,7 @@ words:
       - ru: Ско́ро по́лиция остано́вит наруши́теля.
         en_gb: Soon the police will stop the offender.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
-      - ru: Ты останови́шь маши́ну?
+      - ru: Ты остано́вишь маши́ну?
         en_gb: Will you stop the car?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "остановиться=to stop":
@@ -17716,11 +17716,11 @@ words:
         pl: останови́тесь
       future:
         "1sg": остановлю́сь
-        "2sg": останови́шься
-        "3sg": останови́тся
-        "1pl": останови́мся
-        "2pl": останови́тесь
-        "3pl": остановя́тся
+        "2sg": остано́вишься
+        "3sg": остано́вится
+        "1pl": остано́вимся
+        "2pl": остано́витесь
+        "3pl": остано́вятся
       past_m: останови́лся
       past_f: останови́лась
       past_n: останови́лось
@@ -17732,7 +17732,7 @@ words:
       - ru: Я остановлю́сь на мину́ту.
         en_gb: I will stop for a minute.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Мы останови́мся в гости́нице.
+      - ru: Мы остано́вимся в гости́нице.
         en_gb: We will stay at a hotel.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я бы останови́лся у мо́ря.
@@ -17741,7 +17741,7 @@ words:
       - ru: Ско́ро авто́бус остано́вится у па́рка.
         en_gb: Soon the bus will stop by the park.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
-      - ru: Ты останови́шься у воро́т?
+      - ru: Ты остано́вишься у воро́т?
         en_gb: Will you stop at the gate?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "остаться=to stay":
@@ -18077,11 +18077,11 @@ words:
         pl: отдохни́те
       future:
         "1sg": отдохну́
-        "2sg": отдо́хнешь
-        "3sg": отдо́хнет
-        "1pl": отдо́хнем
-        "2pl": отдо́хнете
-        "3pl": отдо́хнут
+        "2sg": отдохнёшь
+        "3sg": отдохнёт
+        "1pl": отдохнём
+        "2pl": отдохнёте
+        "3pl": отдохну́т
       past_m: отдохну́л
       past_f: отдохну́ла
       past_n: отдохну́ло
@@ -18102,7 +18102,7 @@ words:
       - ru: Ско́ро мы отдохнём от забо́т.
         en_gb: Soon we will rest from our cares.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
-      - ru: Ты отдо́хнешь по́сле рабо́ты?
+      - ru: Ты отдохнёшь по́сле рабо́ты?
         en_gb: Will you rest after work?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "отдыхать=to rest":
@@ -18186,7 +18186,7 @@ words:
       past_n: отказа́лось
       past_pl: отказа́лись
     usage:
-      - ru: Я отка́жусь от э́той рабо́ты.
+      - ru: Я откажу́сь от э́той рабо́ты.
         en_gb: I will refuse this job.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он отказа́лся от по́мощи.
@@ -18973,10 +18973,10 @@ words:
         "1pl": отхо́дим
         "2pl": отхо́дите
         "3pl": отхо́дят
-      past_m: отхо́дил
-      past_f: отхо́дила
-      past_n: отхо́дило
-      past_pl: отхо́дили
+      past_m: отходи́л
+      past_f: отходи́ла
+      past_n: отходи́ло
+      past_pl: отходи́ли
     usage:
       - ru: Поезда́ отхо́дят ка́ждый час.
         en_gb: The trains leave every hour.
@@ -19120,11 +19120,11 @@ words:
     conjugation:
       future:
         "1sg": оценю́
-        "2sg": оцени́шь
-        "3sg": оцени́т
-        "1pl": оцени́м
-        "2pl": оцени́те
-        "3pl": оценя́т
+        "2sg": оце́нишь
+        "3sg": оце́нит
+        "1pl": оце́ним
+        "2pl": оце́ните
+        "3pl": оце́нят
       past_m: оцени́л
       past_f: оцени́ла
       past_n: оцени́ло
@@ -19145,7 +19145,7 @@ words:
       - ru: Ско́ро экспе́рт оце́нит карти́ну.
         en_gb: Soon the expert will evaluate the painting.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
-      - ru: Ты оцени́шь на́шу рабо́ту?
+      - ru: Ты оце́нишь на́шу рабо́ту?
         en_gb: Will you evaluate our work?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "очнуться=to come to":
@@ -19772,7 +19772,7 @@ words:
       - ru: Я переда́м кни́гу за́втра.
         en_gb: I will pass on the book tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Она́ переда́ла приве́т от ма́мы.
+      - ru: Она́ передала́ приве́т от ма́мы.
         en_gb: She passed on greetings from mum.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я бы переда́л ему́ твои́ слова́.
@@ -21557,10 +21557,10 @@ words:
         "1pl": подни́мем
         "2pl": подни́мете
         "3pl": подни́мут
-      past_m: подня́л
+      past_m: по́днял
       past_f: подняла́
-      past_n: подня́ло
-      past_pl: подня́ли
+      past_n: по́дняло
+      past_pl: по́дняли
     usage:
       - ru: Я подниму́ э́ту коро́бку сам.
         en_gb: I will raise this box myself.
@@ -21611,7 +21611,7 @@ words:
       - ru: Мы подни́мем флаг у́тром.
         en_gb: We will raise the flag in the morning.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
-      - ru: Я бы подня́л коро́бку, е́сли смог.
+      - ru: Я бы по́днял коро́бку, е́сли смог.
         en_gb: I would lift the box if I could.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро кран подни́мет конте́йнер.
@@ -21633,7 +21633,7 @@ words:
       - ru: Он подня́лся на вто́рой эта́ж.
         en_gb: He went up to the second floor.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Мы поднимёмся на верши́ну к утру́.
+      - ru: Мы подни́мемся на верши́ну к утру́.
         en_gb: We will go up to the summit by morning.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Цены́ си́льно подняли́сь за год.
@@ -21719,8 +21719,8 @@ words:
         "3pl": подожду́т
       past_m: подожда́л
       past_f: подождала́
-      past_n: подождало́
-      past_pl: подождали́
+      past_n: подожда́ло
+      past_pl: подожда́ли
     usage:
       - ru: Подожди́ меня́ у вхо́да.
         en_gb: Wait for me at the entrance.
@@ -22751,16 +22751,16 @@ words:
         - to shake
     conjugation:
       future:
-        "1sg": пока́чаю
-        "2sg": пока́чаешь
-        "3sg": пока́чает
-        "1pl": пока́чаем
-        "2pl": пока́чаете
-        "3pl": пока́чают
-      past_m: пока́чал
-      past_f: пока́чала
-      past_n: пока́чало
-      past_pl: пока́чали
+        "1sg": покача́ю
+        "2sg": покача́ешь
+        "3sg": покача́ет
+        "1pl": покача́ем
+        "2pl": покача́ете
+        "3pl": покача́ют
+      past_m: покача́л
+      past_f: покача́ла
+      past_n: покача́ло
+      past_pl: покача́ли
     usage:
       - ru: Ма́ма покача́ла ребёнка на рука́х.
         en_gb: Mum rocked the baby in her arms.
@@ -22777,7 +22777,7 @@ words:
       - ru: Ско́ро ба́бушка покача́ет вну́ка в крова́тке.
         en_gb: Soon grandmother will rock the grandchild in the cot.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
-      - ru: Ты пока́чаешь ребёнка на рука́х?
+      - ru: Ты покача́ешь ребёнка на рука́х?
         en_gb: Will you rock the baby in your arms?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "покинуть=to leave":
@@ -22804,7 +22804,7 @@ words:
       past_n: поки́нуло
       past_pl: поки́нули
     usage:
-      - ru: Я не покину́ тебя́ в беде́.
+      - ru: Я не поки́ну тебя́ в беде́.
         en_gb: I will not leave you in trouble.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ поки́нули го́род на рассве́те.
@@ -22967,16 +22967,16 @@ words:
         - to think
     conjugation:
       present:
-        "1sg": пола́гаю
-        "2sg": пола́гаешь
-        "3sg": пола́гает
-        "1pl": пола́гаем
-        "2pl": пола́гаете
-        "3pl": пола́гают
-      past_m: пола́гал
-      past_f: пола́гала
-      past_n: пола́гало
-      past_pl: пола́гали
+        "1sg": полага́ю
+        "2sg": полага́ешь
+        "3sg": полага́ет
+        "1pl": полага́ем
+        "2pl": полага́ете
+        "3pl": полага́ют
+      past_m: полага́л
+      past_f: полага́ла
+      past_n: полага́ло
+      past_pl: полага́ли
     usage:
       - ru: Я полага́ю, что он прав.
         en_gb: I suppose that he is right.
@@ -23008,16 +23008,16 @@ words:
         - to be due
     conjugation:
       present:
-        "1sg": пола́гаюсь
-        "2sg": пола́гаешься
-        "3sg": пола́гается
-        "1pl": пола́гаемся
-        "2pl": пола́гаетесь
-        "3pl": пола́гаются
-      past_m: пола́гался
-      past_f: пола́галась
-      past_n: пола́галось
-      past_pl: пола́гались
+        "1sg": полага́юсь
+        "2sg": полага́ешься
+        "3sg": полага́ется
+        "1pl": полага́емся
+        "2pl": полага́етесь
+        "3pl": полага́ются
+      past_m: полага́лся
+      past_f: полага́лась
+      past_n: полага́лось
+      past_pl: полага́лись
     usage:
       - ru: Я полага́юсь на твою́ по́мощь.
         en_gb: I rely on your help.
@@ -23033,7 +23033,7 @@ words:
       - ru: В похо́де я бы полага́лся на о́пытного дру́га.
         en_gb: On a hike I would rely on an experienced friend.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ты пола́гаешься на мою́ по́мощь?
+      - ru: Ты полага́ешься на мою́ по́мощь?
         en_gb: Do you rely on my help?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "полезть=to climb":
@@ -23648,11 +23648,11 @@ words:
     conjugation:
       future:
         "1sg": помолчу́
-        "2sg": помо́лчишь
-        "3sg": помо́лчит
-        "1pl": помо́лчим
-        "2pl": помо́лчите
-        "3pl": помо́лчат
+        "2sg": помолчи́шь
+        "3sg": помолчи́т
+        "1pl": помолчи́м
+        "2pl": помолчи́те
+        "3pl": помолча́т
       past_m: помолча́л
       past_f: помолча́ла
       past_n: помолча́ло
@@ -23670,10 +23670,10 @@ words:
       - ru: Я бы помолча́л и послу́шал други́х.
         en_gb: I would stay quiet for a while and listen to others.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ско́ро все помо́лчат в знак уваже́ния.
+      - ru: Ско́ро все помолча́т в знак уваже́ния.
         en_gb: Soon everyone will fall silent as a mark of respect.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
-      - ru: Ты помо́лчишь мину́ту?
+      - ru: Ты помолчи́шь мину́ту?
         en_gb: Will you be silent for a minute?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "помочь=to help":
@@ -24364,7 +24364,7 @@ words:
       past_n: порази́ло
       past_pl: порази́ли
     usage:
-      - ru: Его́ красота́ поразила́ всех госте́й.
+      - ru: Его́ красота́ порази́ла всех госте́й.
         en_gb: Its beauty struck all the guests.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
       - ru: Меня́ порази́ла её сме́лость.
@@ -24398,10 +24398,10 @@ words:
         "1pl": поса́дим
         "2pl": поса́дите
         "3pl": поса́дят
-      past_m: поса́дил
-      past_f: поса́дила
-      past_n: поса́дило
-      past_pl: поса́дили
+      past_m: посади́л
+      past_f: посади́ла
+      past_n: посади́ло
+      past_pl: посади́ли
     usage:
       - ru: Я посажу́ го́стя у окна́.
         en_gb: I will seat the guest by the window.
@@ -24475,11 +24475,11 @@ words:
         pl: посиди́те
       future:
         "1sg": посижу́
-        "2sg": поси́дишь
-        "3sg": поси́дит
-        "1pl": поси́дим
-        "2pl": поси́дите
-        "3pl": поси́дят
+        "2sg": посиди́шь
+        "3sg": посиди́т
+        "1pl": посиди́м
+        "2pl": посиди́те
+        "3pl": посидя́т
       past_m: посиде́л
       past_f: посиде́ла
       past_n: посиде́ло
@@ -24500,7 +24500,7 @@ words:
       - ru: Ско́ро мы посиди́м в ти́хом кафе́.
         en_gb: Soon we will sit for a while in a quiet café.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
-      - ru: Вы поси́дите на скаме́йке?
+      - ru: Вы посиди́те на скаме́йке?
         en_gb: Will you sit for a while on the bench?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "послать=to send":
@@ -25009,11 +25009,11 @@ words:
         pl: постучи́те
       future:
         "1sg": постучу́
-        "2sg": посту́чишь
-        "3sg": посту́чит
-        "1pl": посту́чим
-        "2pl": посту́чите
-        "3pl": посту́чат
+        "2sg": постучи́шь
+        "3sg": постучи́т
+        "1pl": постучи́м
+        "2pl": постучи́те
+        "3pl": постуча́т
       past_m: постуча́л
       past_f: постуча́ла
       past_n: постуча́ло
@@ -25034,7 +25034,7 @@ words:
       - ru: Ско́ро почтальо́н постучи́т в окно́.
         en_gb: Soon the postman will knock at the window.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
-      - ru: Ты посту́чишь в дверь?
+      - ru: Ты постучи́шь в дверь?
         en_gb: Will you knock at the door?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "посылать=to send":
@@ -25115,7 +25115,7 @@ words:
       - ru: Она́ потеря́ла наде́жду на успе́х.
         en_gb: She lost hope of success.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
-      - ru: Ско́ро ты поте́ряешь интере́с к э́той игре́.
+      - ru: Ско́ро ты потеря́ешь интере́с к э́той игре́.
         en_gb: Soon you will lose interest in this game.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Без па́пки я бы потеря́л все докуме́нты.
@@ -26812,12 +26812,12 @@ words:
         "1pl": призна́ем
         "2pl": призна́ете
         "3pl": призна́ют
-      past_m: при́знал
-      past_f: признала́
+      past_m: призна́л
+      past_f: призна́ла
       past_n: призна́ло
       past_pl: призна́ли
     usage:
-      - ru: Он при́знал свою́ оши́бку.
+      - ru: Он призна́л свою́ оши́бку.
         en_gb: He acknowledged his mistake.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я призна́ю, что был непра́в.
@@ -26967,10 +26967,10 @@ words:
         "1pl": прика́жем
         "2pl": прика́жете
         "3pl": прика́жут
-      past_m: прика́зал
-      past_f: прика́зала
-      past_n: прика́зало
-      past_pl: прика́зали
+      past_m: приказа́л
+      past_f: приказа́ла
+      past_n: приказа́ло
+      past_pl: приказа́ли
     usage:
       - ru: Команди́р приказа́л отступа́ть.
         en_gb: The commander ordered a retreat.
@@ -27656,7 +27656,7 @@ words:
       - ru: Я пришью́ пу́говицу к пальто́.
         en_gb: I will sew a button onto my coat.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
-      - ru: Она́ пришила́ но́вый во́ротник к пла́тью.
+      - ru: Она́ приши́ла но́вый во́ротник к пла́тью.
         en_gb: She sewed a new collar onto the dress.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Он приши́л запла́тку на брю́ки.
@@ -29700,16 +29700,16 @@ words:
       standard: to develop (to evolve)
     conjugation:
       present:
-        "1sg": разви́ваюсь
-        "2sg": разви́ваешься
-        "3sg": разви́вается
-        "1pl": разви́ваемся
-        "2pl": разви́ваетесь
-        "3pl": разви́ваются
-      past_m: разви́вался
-      past_f: разви́валась
-      past_n: разви́валось
-      past_pl: разви́вались
+        "1sg": развива́юсь
+        "2sg": развива́ешься
+        "3sg": развива́ется
+        "1pl": развива́емся
+        "2pl": развива́етесь
+        "3pl": развива́ются
+      past_m: развива́лся
+      past_f: развива́лась
+      past_n: развива́лось
+      past_pl: развива́лись
     usage:
       - ru: Го́род бы́стро развива́ется.
         en_gb: The city is developing rapidly.
@@ -30415,16 +30415,16 @@ words:
       standard: to arrange (to position)
     conjugation:
       future:
-        "1sg": располо́жу
+        "1sg": расположу́
         "2sg": располо́жишь
         "3sg": располо́жит
         "1pl": располо́жим
         "2pl": располо́жите
         "3pl": располо́жат
-      past_m: располо́жил
-      past_f: располо́жила
-      past_n: располо́жило
-      past_pl: располо́жили
+      past_m: расположи́л
+      past_f: расположи́ла
+      past_n: расположи́ло
+      past_pl: расположи́ли
     usage:
       - ru: Она́ расположи́ла кни́ги по поря́дку.
         en_gb: She arranged the books in order.
@@ -31300,24 +31300,24 @@ words:
       standard: to risk (to take chances)
     conjugation:
       present:
-        "1sg": рискую́
-        "2sg": рискуёшь
-        "3sg": рискуёт
-        "1pl": рискуём
-        "2pl": рискуёте
-        "3pl": рискую́т
+        "1sg": риску́ю
+        "2sg": риску́ешь
+        "3sg": риску́ет
+        "1pl": риску́ем
+        "2pl": риску́ете
+        "3pl": риску́ют
       past_m: рискова́л
       past_f: рискова́ла
       past_n: рискова́ло
       past_pl: рискова́ли
     usage:
-      - ru: Я не рискую́ свои́ми деньга́ми.
+      - ru: Я не риску́ю свои́ми деньга́ми.
         en_gb: I do not risk my money.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Он рискова́л жи́знью ра́ди друзе́й.
         en_gb: He risked his life for his friends.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Они́ рискую́т потеря́ть всё.
+      - ru: Они́ риску́ют потеря́ть всё.
         en_gb: They risk losing everything.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я не бу́ду рискова́ть здоро́вьем.
@@ -31447,7 +31447,7 @@ words:
       - ru: Я роди́лся в Москве́.
         en_gb: I was born in Moscow.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: У них роди́лась до́чка.
+      - ru: У них родила́сь до́чка.
         en_gb: A daughter was born to them.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
       - ru: Ско́ро роди́тся мла́денец.
@@ -31824,11 +31824,11 @@ words:
     conjugation:
       present:
         "1sg": свечу́сь
-        "2sg": свети́шься
-        "3sg": свети́тся
-        "1pl": свети́мся
-        "2pl": свети́тесь
-        "3pl": светя́тся
+        "2sg": све́тишься
+        "3sg": све́тится
+        "1pl": све́тимся
+        "2pl": све́титесь
+        "3pl": све́тятся
       past_m: свети́лся
       past_f: свети́лась
       past_n: свети́лось
@@ -31840,7 +31840,7 @@ words:
       - ru: Окно́ свети́лось в темноте́.
         en_gb: The window glowed in the dark.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
-      - ru: Её лицо́ свети́тся от сча́стья.
+      - ru: Её лицо́ све́тится от сча́стья.
         en_gb: Her face is glowing with happiness.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Но́чью о́кна бу́дут свети́ться в темноте́.
@@ -33419,9 +33419,9 @@ words:
         "2pl": соберётесь
         "3pl": соберу́тся
       past_m: собра́лся
-      past_f: собра́лась
-      past_n: собра́лось
-      past_pl: собра́лись
+      past_f: собрала́сь
+      past_n: собрало́сь
+      past_pl: собрали́сь
     usage:
       - ru: Лю́ди собрали́сь на пло́щади.
         en_gb: People gathered in the square.
@@ -34166,7 +34166,7 @@ words:
       - ru: Я бою́сь, что я сорву́сь с обры́ва.
         en_gb: I am afraid I will fall off the cliff.
         inflect: { token: 5, tense: future, person: 1sg, rule: verb-future }
-      - ru: Встре́ча сорва́лась и́з-за дождя́.
+      - ru: Встре́ча сорвала́сь и́з-за дождя́.
         en_gb: The meeting fell through because of the rain.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Без поводка́ соба́ка сорвётся и убежи́т.
@@ -36019,7 +36019,7 @@ words:
       alt:
         - to haul
     usage:
-      - ru: Он тащи́т тяжёлый чемода́н.
+      - ru: Он та́щит тяжёлый чемода́н.
         en_gb: He is dragging a heavy suitcase.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я тащу́ су́мку по сне́гу.
@@ -36226,11 +36226,11 @@ words:
         pl: торопи́тесь
       present:
         "1sg": тороплю́сь
-        "2sg": торопи́шься
-        "3sg": торопи́тся
-        "1pl": торопи́мся
-        "2pl": торопи́тесь
-        "3pl": торопя́тся
+        "2sg": торо́пишься
+        "3sg": торо́пится
+        "1pl": торо́пимся
+        "2pl": торо́питесь
+        "3pl": торо́пятся
       past_m: торопи́лся
       past_f: торопи́лась
       past_n: торопи́лось
@@ -36251,7 +36251,7 @@ words:
       - ru: Я бы не торопи́лся на твоём ме́сте.
         en_gb: I would not hurry if I were you.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ты торопи́шься на встре́чу?
+      - ru: Ты торо́пишься на встре́чу?
         en_gb: Are you hurrying to a meeting?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы торо́питесь домо́й?
@@ -36829,7 +36829,7 @@ words:
       - ru: Охо́тник уби́л во́лка.
         en_gb: The hunter killed the wolf.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Э́та но́вость убила́ её наде́жду.
+      - ru: Э́та но́вость уби́ла её наде́жду.
         en_gb: This news killed her hope.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
       - ru: За́втра пе́рвый моро́з убьёт цветы́.
@@ -38038,7 +38038,7 @@ words:
       standard: to sit down (to settle into a seat)
     conjugation:
       future:
-        "1sg": усяду́сь
+        "1sg": уся́дусь
         "2sg": уся́дешься
         "3sg": уся́дется
         "1pl": уся́демся
@@ -38415,9 +38415,9 @@ words:
       - ru: Рабо́чие установи́ли но́вую дверь.
         en_gb: The workers installed a new door.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: Установи́те прило́жение на телефо́н.
-        en_gb: Install the app on your phone.
-        inflect: { token: 1, tense: future, person: 2pl, rule: verb-future }
+      - ru: За́втра вы устано́вите но́вую програ́мму.
+        en_gb: Tomorrow you will install the new program.
+        inflect: { token: 3, tense: future, person: 2pl, rule: verb-future }
       - ru: За́втра рабо́чие устано́вят но́вую дверь.
         en_gb: Tomorrow the workers will install a new door.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
@@ -38951,7 +38951,7 @@ words:
       - ru: Нам хва́тит де́нег на биле́ты.
         en_gb: We will have enough money for the tickets.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
-      - ru: Хвати́т спо́рить!
+      - ru: Хва́тит спо́рить!
         en_gb: Stop arguing!
         inflect: { token: 1, tense: future, person: 3sg, rule: verb-future }
       - ru: Воды́ хвати́ло на всех.
@@ -39188,11 +39188,11 @@ words:
     conjugation:
       present:
         "1sg": храню́
-        "2sg": хра́нишь
-        "3sg": хра́нит
-        "1pl": хра́ним
-        "2pl": хра́ните
-        "3pl": хра́нят
+        "2sg": храни́шь
+        "3sg": храни́т
+        "1pl": храни́м
+        "2pl": храни́те
+        "3pl": храня́т
       past_m: храни́л
       past_f: храни́ла
       past_n: храни́ло
@@ -39213,7 +39213,7 @@ words:
       - ru: Я бы храни́л де́ньги в ба́нке.
         en_gb: I would keep the money in a bank.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ты хра́нишь ста́рые пи́сьма?
+      - ru: Ты храни́шь ста́рые пи́сьма?
         en_gb: Do you keep old letters?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "целовать=to kiss":
@@ -39672,11 +39672,11 @@ words:
         pl: шути́те
       present:
         "1sg": шучу́
-        "2sg": шути́шь
-        "3sg": шути́т
-        "1pl": шути́м
-        "2pl": шути́те
-        "3pl": шутя́т
+        "2sg": шу́тишь
+        "3sg": шу́тит
+        "1pl": шу́тим
+        "2pl": шу́тите
+        "3pl": шу́тят
       past_m: шути́л
       past_f: шути́ла
       past_n: шути́ло
