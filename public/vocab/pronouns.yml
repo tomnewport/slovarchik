@@ -928,6 +928,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: pronoun-possessive }
       - ru: Они́ лю́бят свои́х дете́й.
         en_gb: They love their own children.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: pronoun-possessive }
     forms:
       m: свой
       f: своя́

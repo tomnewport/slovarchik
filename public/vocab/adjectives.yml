@@ -1039,6 +1039,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Врач осмотре́л больны́х дете́й.
         en_gb: The doctor examined the ill children.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
     forms:
       m: больно́й
       f: больна́я
@@ -1247,6 +1248,7 @@ words:
     usage:
       - ru: Я встре́тил бы́вшего колле́гу.
         en_gb: I met a former colleague.
+        inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: Э́то моя́ бы́вшая учи́тельница.
         en_gb: This is my former teacher.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -1880,6 +1882,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, gender: m, rule: adj-agreement }
       - ru: Поли́ция нашла́ вино́вного.
         en_gb: The police found the guilty one.
+        inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: Вино́вные понесу́т наказа́ние.
         en_gb: The guilty ones will bear punishment.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
@@ -2197,6 +2200,7 @@ words:
     usage:
       - ru: Де́ти запуска́ли возду́шного зме́я.
         en_gb: The children were flying a kite (aerial kite).
+        inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: Мы любу́емся возду́шными ша́рами.
         en_gb: We admire the balloons (aerial balloons).
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
@@ -3210,6 +3214,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Накорми́ голо́дных дете́й.
         en_gb: Feed the hungry children.
+        inflect: { token: 2, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
     forms:
       m: голо́дный
       f: голо́дная
@@ -4933,6 +4938,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я люблю́ свои́х дома́шних живо́тных.
         en_gb: I love my pets.
+        inflect: { token: 4, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
       - ru: Учи́тель за́дал дома́шнее зада́ние.
         en_gb: The teacher set the homework.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
@@ -7372,6 +7378,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы познако́мились с интеллиге́нтными людьми́.
         en_gb: We met some cultured people.
+        inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
   "интересный=interesting":
     cefr_level: A1
     accented: интере́сный
@@ -15588,6 +15595,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Я встре́тил пре́жних друзе́й.
         en_gb: I met former friends.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
   "прекрасный=beautiful":
     cefr_level: B1
     accented: прекра́сный
@@ -16795,6 +16803,7 @@ words:
         inflect: { token: 1, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Ра́неных бы́стро отвезли́ в больни́цу.
         en_gb: The wounded were quickly taken to hospital.
+        inflect: { token: 1, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
   "ранний=early":
     cefr_level: A2
     accented: ра́нний
@@ -18651,6 +18660,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы встре́тили случа́йных люде́й.
         en_gb: We met some random people.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
   "смелый=brave":
     cefr_level: B1
     accented: сме́лый
@@ -18670,6 +18680,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим сме́лых геро́ев.
         en_gb: We love brave heroes.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
     forms:
       m: сме́лый
       f: сме́лая
@@ -19905,6 +19916,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вспомина́ем ста́рых друзе́й.
         en_gb: We remember old friends.
+        inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
     forms:
       m: ста́рый
       f: ста́рая
