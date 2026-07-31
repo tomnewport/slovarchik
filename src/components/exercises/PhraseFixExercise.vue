@@ -90,10 +90,15 @@ const spellReveal = computed(() => revealDiff(typed.value, item.value.answerAcce
 // so the slot doesn't drop it when we swap in the lemma / answer. Combining marks
 // (the stress accent) stay with the word core, so they're excluded from the affix.
 const slotAffix = computed(() => {
-  const orig = item.value.tokens?.[item.value.targetIndex] ?? ''
+  const tokens = item.value.tokens ?? []
+  const start = item.value.targetIndex
+  // Lead punctuation from the first covered token, trail from the last — a
+  // multi-word slot spans several tokens (день рожде́ния … горо́шек?).
+  const first = tokens[start] ?? ''
+  const last = tokens[start + (item.value.span ?? 1) - 1] ?? ''
   return {
-    lead: orig.match(/^[^\p{L}\p{M}]*/u)?.[0] ?? '',
-    trail: orig.match(/[^\p{L}\p{M}]*$/u)?.[0] ?? '',
+    lead: first.match(/^[^\p{L}\p{M}]*/u)?.[0] ?? '',
+    trail: last.match(/[^\p{L}\p{M}]*$/u)?.[0] ?? '',
   }
 })
 
@@ -219,6 +224,8 @@ onMounted(() => {
           v-else-if="i === item.targetIndex"
           :class="overallCorrect ? 'mark-ok' : spellingOnlyMiss ? 'mark-warn' : 'mark-err'"
         >{{ slotText }}</mark>
+        <!-- Tokens covered by a multi-word slot are drawn as part of the slot above. -->
+        <template v-else-if="i > item.targetIndex && i < item.targetIndex + (item.span ?? 1)" />
         <span v-else>{{ tok }}</span>
       </template>
     </div>

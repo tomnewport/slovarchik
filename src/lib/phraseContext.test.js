@@ -106,6 +106,18 @@ describe('buildSelectSteps', () => {
   it('returns no selection steps for a verb without an aspect partner', () => {
     expect(buildSelectSteps(verbPhrase.target, dumat)).toEqual([])
   })
+  it('spans several tokens for a multi-word lemma (answer joins the window)', () => {
+    const shokolad = { key: 'горячий шоколад=hot chocolate', pos: 'noun', headword: 'горя́чий шокола́д' }
+    const phrase = {
+      id: 'gs', ru: 'Нет ничего́ лу́чше горя́чего шокола́да зимо́й.', en: '',
+      target: { key: 'горячий шоколад=hot chocolate', token: 4, span: 2, case: 'gen', number: 'sg' },
+    }
+    const ex = buildFromPhrase(phrase, shokolad)
+    expect(ex.span).toBe(2)
+    expect(ex.targetIndex).toBe(3)
+    expect(ex.answerAccented).toBe('горя́чего шокола́да')
+    expect(ex.lemma).toBe('горя́чий шокола́д')
+  })
   it('returns a short-form gender step for a short (predicate) adjective', () => {
     const zakrytyi = {
       key: 'закрытый=closed', pos: 'adjective',

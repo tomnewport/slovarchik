@@ -344,6 +344,9 @@ export function shapeContextPhrases(words) {
         target: {
           key: w.key,
           token: a.token,
+          // Consecutive tokens the slot spans — a multi-word lemma inflects as a
+          // unit (день рожде́ния, горя́чий шокола́д). Defaults to a single token.
+          span: a.span ?? null,
           case: a.case ?? null,
           number: a.number ?? null,
           gender: a.gender ?? null,
