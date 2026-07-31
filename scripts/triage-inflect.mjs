@@ -184,6 +184,14 @@ function verify() {
         const prev = inf.token >= 2 ? norm(core(tokens[inf.token - 2])) : null;
         const allowed = prev ? PREP_CASES[prev] : null;
         if (!allowed) { unverifiable++; continue; }
+        // «что (э́то) за N» is an exclamative/interrogative frame — the «за» does
+        // NOT govern a case here (N stays nominative: «Что э́то за шту́ка?»). If a
+        // «что» sits just before this «за», it isn't a real governing preposition.
+        if (prev === 'за') {
+          const w2 = inf.token >= 3 ? norm(core(tokens[inf.token - 3])) : null;
+          const w3 = inf.token >= 4 ? norm(core(tokens[inf.token - 4])) : null;
+          if (w2 === 'что' || w3 === 'что') { unverifiable++; continue; }
+        }
         // The second locative (в аду́, на берегу́) is a specialized prepositional:
         // a preposition that governs `pre` also legitimately governs `loc`.
         const ok = allowed.includes(inf.case) || (inf.case === 'loc' && allowed.includes('pre'));
