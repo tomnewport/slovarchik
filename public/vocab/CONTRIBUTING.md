@@ -242,6 +242,38 @@ Run `node scripts/coverage-gloss.js` to list any gaps.
   the declension table. Keep the real prepositional in `sg_pre`; don't put the
   `-у́` locative there.
 
+- **`display_number` — show a usually-plural noun in the plural (optional).**
+  Some nouns are stored under their singular dictionary form but are almost
+  always *used* in the plural — перчатки (gloves), сапоги (boots), боти́нки
+  (shoes), носки (socks). By default the **vocabulary word-drills** (flashcard /
+  match, spell, speak, and the `/vocab` browser) show the singular headword;
+  `display_number` overrides just those drills:
+
+  ```yaml
+  "перчатка=glove":
+    number: ["sg", "pl"]
+    display_number: pl   # sg (default) | pl | mixed
+    en_pl: gloves        # English shown & accepted for the plural (list allowed)
+    ...
+  ```
+
+  - `sg` (or omitted) — the historical behaviour, singular everywhere.
+  - `pl` — the vocab drills show the **plural nominative** (`pl_nom`, already in
+    the declension table) with the `en_pl` gloss.
+  - `mixed` — the drills alternate singular and plural at random per exercise.
+  - **`en_pl` is required** for `pl`/`mixed`: English plurals aren't reliably
+    regular, so — like stress and short forms — the plural gloss is **stored, not
+    derived**. It may be a single string or a list; the same
+    short-gloss/parenthetical convention as `en_gb` applies. `en_pl` is the only
+    accepted answer while the plural is shown.
+  - Only the vocab word-drills honour this. The **inflection and phrase drills
+    keep the singular headword and the full paradigm** — a learner still drills
+    `перча́тка → перча́тки`. A truly plural-only word (очки, джинсы) is a
+    **pluralia tantum** (`number: ["pl"]`) and needs none of this.
+  - Guarded by `nounsData.test.js`: `display_number` must be `sg`/`pl`/`mixed`,
+    and `pl`/`mixed` require a `pl` number, a `pl_nom` form and a non-empty
+    `en_pl`.
+
 ### Verbs (`verbs.yml`)
 
 ```yaml

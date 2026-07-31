@@ -4336,6 +4336,8 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    display_number: pl
+    en_pl: [shoes, boots]
     collections:
       - clothes
       - shopping
@@ -33545,6 +33547,8 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    display_number: pl
+    en_pl: socks
     collections:
       - clothes
     en_gb:
@@ -38772,6 +38776,8 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    display_number: pl
+    en_pl: gloves
     collections:
       - clothes
     en_gb:
@@ -50392,6 +50398,8 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    display_number: pl
+    en_pl: boots
     collections:
       - clothes
     en_gb:
