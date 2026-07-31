@@ -124,13 +124,18 @@ export function cellKey(row, col) {
  * dropped, then any fully-empty row or column is pruned so the rendered table is
  * tight (e.g. pluralia-tantum nouns lose the singular column).
  */
-function assemble(meta, rows, cols, lookup) {
+function assemble(meta, rows, cols, lookup, noteLookup) {
   const cells = []
   for (const row of rows) {
     for (const col of cols) {
       const form = cleanForm(lookup(row.key, col.key))
       if (form && hasCyrillic(form)) {
-        cells.push({ row: row.key, col: col.key, form })
+        const cell = { row: row.key, col: col.key, form }
+        // An optional per-cell note (e.g. год's suppletive genitive plural лет)
+        // rides along so tables can surface it as a tooltip on that cell.
+        const note = noteLookup?.(row.key, col.key)
+        if (note) cell.note = String(note).trim()
+        cells.push(cell)
       }
     }
   }
@@ -160,8 +165,15 @@ export function buildParadigm(word) {
   switch (word.pos) {
     case 'noun': {
       const cols = NUMBERS.map((n) => ({ key: n, label: NUMBER_LABELS[n] }))
-      // forms is nested number → case, columns are numbers and rows are cases.
-      paradigm = assemble(meta, NOUN_ROWS, cols, (row, col) => word.forms?.[col]?.[row])
+      // forms is nested number → case, columns are numbers and rows are cases;
+      // formNotes mirrors that shape and carries the optional per-cell tooltips.
+      paradigm = assemble(
+        meta,
+        NOUN_ROWS,
+        cols,
+        (row, col) => word.forms?.[col]?.[row],
+        (row, col) => word.formNotes?.[col]?.[row],
+      )
       break
     }
     case 'pronoun': {

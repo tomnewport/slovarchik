@@ -96,6 +96,27 @@ function nestForms(declension, numbers) {
   return forms
 }
 
+/**
+ * Convert a flat per-cell notes map (`declension_notes`, same cell keys as
+ * `declension` — sg_nom, pl_gen, …) into the same nested number → case shape as
+ * {@link nestForms}. A note is a short explanation surfaced as a tooltip on that
+ * one cell of the declension table — e.g. why год's genitive plural is the
+ * suppletive лет rather than the regular годо́в. Cells without a note are absent.
+ */
+function nestNotes(notes, numbers) {
+  const out = {}
+  if (!notes) return out
+  for (const num of numbers) {
+    const slot = {}
+    for (const c of [...CASES, LOCATIVE]) {
+      const key = `${num}_${c}`
+      if (notes[key] != null) slot[c] = String(notes[key]).trim()
+    }
+    if (Object.keys(slot).length) out[num] = slot
+  }
+  return out
+}
+
 /** Pick the accented dictionary form to display. */
 function headwordOf(pos, word, forms, bareRu) {
   if (word.accented) return word.accented
@@ -115,6 +136,7 @@ function normalizeWord(pos, key, word) {
 
   const numbers = pos === 'noun' ? (word.number ?? ['sg', 'pl']) : []
   const forms = pos === 'noun' ? nestForms(word.declension, numbers) : {}
+  const formNotes = pos === 'noun' ? nestNotes(word.declension_notes, numbers) : {}
   const headword = headwordOf(pos, word, forms, ru)
 
   // Accepted English answers: the key gloss plus the short form of the standard
@@ -147,6 +169,10 @@ function normalizeWord(pos, key, word) {
     animate: word.animacy === 'a',
     numbers,
     forms,
+    // Per-cell declension notes (nested number → case, mirroring `forms`), each
+    // a short tooltip explaining an irregular/suppletive cell (год → лет). Empty
+    // for the overwhelming majority of nouns.
+    formNotes,
     // Short-form (predicate) adjective agreement: { m, f, n, pl } accented, as
     // authored. Present only where the short form is actually used; hand-curated
     // (stress shifts stored, not derived) and left untouched by the declension

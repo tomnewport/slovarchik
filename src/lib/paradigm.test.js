@@ -164,6 +164,33 @@ describe('buildParadigm — noun', () => {
   })
 })
 
+describe('buildParadigm — noun with a per-cell note', () => {
+  const god = {
+    key: 'год=year',
+    pos: 'noun',
+    headword: 'год',
+    meaning: 'year',
+    forms: {
+      sg: { nom: 'год', gen: 'го́да', dat: 'го́ду', acc: 'год', ins: 'го́дом', pre: 'го́де' },
+      pl: { nom: 'го́ды', gen: 'лет', dat: 'го́дам', acc: 'го́ды', ins: 'го́дами', pre: 'го́дах' },
+    },
+    formNotes: {
+      pl: { gen: 'Suppletive genitive plural — лет, not годо́в.' },
+    },
+  }
+  const p = buildParadigm(god)
+  it('attaches the note to the matching cell only', () => {
+    const genPl = p.cells.find((c) => c.row === 'gen' && c.col === 'pl')
+    expect(genPl.note).toMatch(/suppletive/i)
+    const genSg = p.cells.find((c) => c.row === 'gen' && c.col === 'sg')
+    expect(genSg.note).toBeUndefined()
+    expect(p.cells.filter((c) => c.note)).toHaveLength(1)
+  })
+  it('leaves cells noteless when the noun declares no formNotes', () => {
+    expect(buildParadigm(stol).cells.some((c) => c.note)).toBe(false)
+  })
+})
+
 describe('buildParadigm — noun with a second locative', () => {
   const les = {
     key: 'лес=forest',

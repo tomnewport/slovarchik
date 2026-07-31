@@ -241,6 +241,27 @@ Run `node scripts/coverage-gloss.js` to list any gaps.
   correctly-stressed form and a "Locative" row (with an explanatory tooltip) to
   the declension table. Keep the real prepositional in `sg_pre`; don't put the
   `-у́` locative there.
+- **Per-cell notes (`declension_notes`) — optional.** A cell can carry a short
+  explanation, surfaced as an ⓘ tooltip on that cell in the declension drills.
+  Use it for a genuinely irregular or suppletive form that would otherwise look
+  like a mistake — e.g. the genitive plural of `год` is the suppletive **лет**
+  («ско́лько тебе́ лет?»), not the regular `годо́в`. The table still stores exactly
+  one form per cell; store the form learners should actually produce and explain
+  it in the note. Keys mirror `declension` (`<number>_<case>`):
+
+  ```yaml
+  declension:
+    # …
+    pl_gen: лет          # the form the drill teaches
+  declension_notes:
+    pl_gen: >-
+      Suppletive genitive plural: after quantities Russian uses лет — «мно́го
+      лет» — not the regular годо́в.
+  ```
+
+  Notes are display-only: they don't affect grading, matching, or the ending
+  drills. Add one only where the form is surprising; the vast majority of nouns
+  need none.
 
 ### Verbs (`verbs.yml`)
 
