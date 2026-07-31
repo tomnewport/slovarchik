@@ -7,7 +7,7 @@
 import { computed, ref } from 'vue'
 
 import { state as vocabState } from '../stores/vocab.js'
-import { wordProgressDetail, leaveForLater } from '../stores/progress.js'
+import { wordProgressDetail, leaveForLater, markKnown, unmarkKnown } from '../stores/progress.js'
 import { parseKey } from '../lib/vocabBuild.js'
 
 const props = defineProps({
@@ -69,6 +69,26 @@ async function confirmLeave() {
   emit('left', props.wordKey)
   emit('close')
 }
+
+async function markKnownWord() {
+  if (busy.value) return
+  busy.value = true
+  try {
+    await markKnown(props.wordKey)
+  } finally {
+    busy.value = false
+  }
+}
+
+async function unmarkKnownWord() {
+  if (busy.value) return
+  busy.value = true
+  try {
+    await unmarkKnown(props.wordKey)
+  } finally {
+    busy.value = false
+  }
+}
 </script>
 
 <template>
@@ -112,6 +132,19 @@ async function confirmLeave() {
         <div><dt>Attempts</dt><dd>{{ detail.totalAttempts }}</dd></div>
         <div><dt>Last seen</dt><dd>{{ fmtDate(detail.lastAt) }}</dd></div>
       </dl>
+
+      <div class="known-control" :class="{ on: detail.known }">
+        <template v-if="!detail.known">
+          <button class="know" :disabled="busy" @click="markKnownWord">✓ I already know this word</button>
+          <p class="muted know-note">
+            One correct answer per exercise will confirm it — no repeated drilling.
+          </p>
+        </template>
+        <div v-else class="known-badge">
+          <p class="known-line">✓ Marked as known — one correct answer per exercise confirms it.</p>
+          <button class="linkish" :disabled="busy" @click="unmarkKnownWord">Undo</button>
+        </div>
+      </div>
 
       <footer class="actions">
         <template v-if="!confirming">
@@ -285,6 +318,55 @@ async function confirmLeave() {
   margin: 0;
   font-size: 0.9rem;
   font-weight: 500;
+}
+.known-control {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+.know {
+  justify-self: start;
+  background: color-mix(in srgb, var(--good) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--good) 45%, transparent);
+  border-radius: 8px;
+  color: var(--good);
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+}
+.know:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.know-note {
+  margin: 0;
+  font-size: 0.78rem;
+}
+.known-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.known-line {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--good);
+}
+.linkish {
+  background: none;
+  border: none;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.linkish:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 .actions {
   display: flex;

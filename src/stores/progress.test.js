@@ -47,6 +47,10 @@ import {
   removeFromBatch,
   leaveForLater,
   wordProgressDetail,
+  markKnown,
+  unmarkKnown,
+  isKnown,
+  isPendingConfirmation,
 } from './progress.js'
 import { dayKey } from '../lib/streak.js'
 
@@ -1287,6 +1291,90 @@ describe('wordProgressDetail', () => {
     expect(d.learnedAt).toBe(1000)
     expect(d.totalAttempts).toBe(12)
     expect(d.levels.learning.every((dim) => dim.met)).toBe(true)
+  })
+})
+
+describe('known words (#321)', () => {
+  // One correct answer in each learning dimension.
+  async function onePassLearning(word, ts = 1) {
+    for (const d of ['identification', 'usage', 'hearing', 'speaking']) {
+      await recordAttempt({ word, dimension: d, level: 'learning', correct: true, ts })
+    }
+  }
+
+  it('learns after a single pass of each dimension once flagged known', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await markKnown('w0')
+    expect(isKnown('w0')).toBe(true)
+    await onePassLearning('w0')
+    expect(stateOf('w0')).toBe('learned')
+  })
+
+  it('a known learned word skips the spaced confirmation and is mastery-eligible at once', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await markKnown('w0')
+    await onePassLearning('w0')
+    expect(stateOf('w0')).toBe('learned')
+    // The standard flow would leave it pending an overnight review (#313); a
+    // vouched-for word is eligible immediately.
+    expect(isPendingConfirmation('w0')).toBe(false)
+  })
+
+  it('flagging a never-seen word known leaves it unknown until demonstrated once', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await markKnown('w0')
+    expect(stateOf('w0')).toBe('unknown')
+  })
+
+  it('flagging known fast-forwards a part-learned word and stamps learnedAt', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0', 5)
+    expect(stateOf('w0')).toBe('learning')
+    await markKnown('w0')
+    expect(stateOf('w0')).toBe('learned')
+    expect(state.records.w0.learnedAt).not.toBeNull()
+  })
+
+  it('unmarking known restores the standard criteria', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0', 5)
+    await markKnown('w0')
+    expect(stateOf('w0')).toBe('learned')
+    await unmarkKnown('w0')
+    expect(isKnown('w0')).toBe(false)
+    expect(stateOf('w0')).toBe('learning')
+  })
+
+  it('reflects the reduced requirement in the exercise-progress bar', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    commitBatch({ level: 'learning', name: 'batch', words: ['w0'], size: 1 })
+    const before = batchExerciseProgress('learning').fresh
+    await markKnown('w0')
+    const after = batchExerciseProgress('learning').fresh
+    expect(after).toBeLessThan(before)
+  })
+
+  it('persists the known flag across a reload', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await markKnown('w0')
+    await loadProgress()
+    expect(isKnown('w0')).toBe(true)
+  })
+
+  it('round-trips the known flag through export/import', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await markKnown('w0')
+    const data = exportData()
+    await resetProgress()
+    await importData(data)
+    expect(isKnown('w0')).toBe(true)
+  })
+
+  it('surfaces the flag through wordProgressDetail', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    expect(wordProgressDetail('w0').known).toBe(false)
+    await markKnown('w0')
+    expect(wordProgressDetail('w0').known).toBe(true)
   })
 })
 

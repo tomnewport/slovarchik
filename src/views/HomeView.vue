@@ -101,7 +101,7 @@ function buildWordList(batchWords, level, dims) {
         dims: dimsFor(w.word, level, dims).map((d) => ({
           label: DIM_LABEL[d],
           name: d,
-          ...dimensionProgress(events, level, d),
+          ...dimensionProgress(events, level, d, { known: progress.records[w.word]?.known }),
         })),
       }
     })
@@ -123,7 +123,7 @@ function buildStatusWordList(keys) {
     const dims = dimsFor(key, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS).map((d) => ({
       label: DIM_LABEL[d],
       name: d,
-      ...dimensionProgress(evs, level, d),
+      ...dimensionProgress(evs, level, d, { known: progress.records[key]?.known }),
     }))
     return { key, ru, en, state, dims }
   })
