@@ -38,3 +38,22 @@ describe('declension completeness (full corpus)', () => {
     },
   )
 })
+
+// Guard the vocab word-drill display-number annotation (#…): usually-plural
+// nouns stored singular (перчатка, сапог) may set `display_number` to show the
+// plural in the vocab drills. When they do, the plural form and gloss must both
+// exist, or the drill would render a blank/mismatched prompt.
+describe('display_number annotation (full corpus)', () => {
+  const annotated = entries.filter(([, w]) => w.display_number != null)
+
+  it.each(annotated.map(([key, w]) => [key, w]))('%s is a valid display_number', (key, w) => {
+    expect(['sg', 'pl', 'mixed'], `${key} bad display_number`).toContain(w.display_number)
+    if (w.display_number === 'sg') return
+    // pl / mixed need a plural nominative and an authored plural gloss.
+    const numbers = w.number ?? ['sg', 'pl']
+    expect(numbers, `${key} display_number ${w.display_number} but no pl number`).toContain('pl')
+    expect(w.declension?.pl_nom, `${key} missing pl_nom`).toBeTruthy()
+    const enPl = Array.isArray(w.en_pl) ? w.en_pl : w.en_pl != null ? [w.en_pl] : []
+    expect(enPl.filter(Boolean).length, `${key} needs en_pl`).toBeGreaterThan(0)
+  })
+})

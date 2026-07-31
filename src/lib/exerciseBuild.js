@@ -21,7 +21,7 @@
 
 import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
-import { shapeVocab } from './vocabBuild.js'
+import { shapeVocab, vocabDisplay } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 import { buildAspectDrill, buildContextSet, canBuildContext } from './phraseContext.js'
 import { wordTokensInPhrase } from './phraseHint.js'
@@ -226,7 +226,10 @@ function buildMatch(practice, pi, ctx, make) {
     make({
       ...common(practice, pi),
       kind: 'match',
-      pairs: picked.map((w) => ({ key: w.id, ru: w.ru, en: enText(w.en) })),
+      pairs: picked.map((w) => {
+        const d = vocabDisplay(w, ctx.rng)
+        return { key: w.id, ru: d.ru, en: enText(d.en) }
+      }),
       targets: picked.map((w) => w.id),
     }),
   ]
@@ -245,18 +248,21 @@ function buildWordType(practice, pi, ctx, make, kind) {
     used: ctx.used,
     keyOf: (w) => w.id,
   })
-  return picked.map((w) =>
-    make({
+  return picked.map((w) => {
+    const d = vocabDisplay(w, ctx.rng)
+    return make({
       ...common(practice, pi),
       kind,
       targets: [w.id],
-      ru: w.ru,
-      en: enText(w.en),
+      ru: d.ru,
+      en: enText(d.en),
       note: w.note,
-      ...(w.alsoRu?.length ? { alsoRu: w.alsoRu } : {}),
+      // `alsoRu` are alternate singular spellings — only offer them when the
+      // singular is being shown, or they wouldn't match the plural prompt.
+      ...(d.number === 'sg' && w.alsoRu?.length ? { alsoRu: w.alsoRu } : {}),
       ...(w.ambiguousEn?.length ? { ambiguousEn: w.ambiguousEn } : {}),
-    }),
-  )
+    })
+  })
 }
 
 function buildPhrase(practice, pi, ctx, make, kind) {
@@ -469,6 +475,7 @@ export function makeReplacementPicker({
   phrases = [],
   vocabById = new Map(),
   exclude = new Set(),
+  rng = Math.random,
 } = {}) {
   const words = wordKeys.filter((k) => vocabById.has(k))
   const freshWords = words.filter((k) => !exclude.has(k))
@@ -483,7 +490,9 @@ export function makeReplacementPicker({
       const k = nextWordKey()
       if (k == null) return null
       const v = vocabById.get(k)
-      return v ? { key: k, ru: v.ru, en: enText(v.en), note: v.note } : null
+      if (!v) return null
+      const d = vocabDisplay(v, rng)
+      return { key: k, ru: d.ru, en: enText(d.en), note: v.note }
     },
     phrase() {
       const p = nextPhrase()
