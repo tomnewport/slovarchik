@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "lint": "eslint . --ext .js,.vue",
     "gen:manifest": "node scripts/gen-manifest.mjs",
+    "check:stress": "node scripts/check-stress.mjs",
     "gen:icons": "node scripts/gen-icons.mjs",
     "gen:adjectives": "node scripts/gen-adjective-declension.mjs"
   },
