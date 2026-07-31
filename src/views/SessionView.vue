@@ -293,6 +293,20 @@ const canSkipSpeaking = computed(
   () => !runner.skipped.includes('speaking') && upcomingHas('speaking'),
 )
 
+// "I know this word" (#321): only for single-target exercises — a matching board
+// drills many words at once, and one button can't speak for all of them. The
+// learner marks the word known and simply answers this one exercise; from now
+// on a single correct answer per dimension confirms it instead of the full grind.
+const currentKey = computed(() => {
+  const targets = (current.value?.targets ?? []).filter(Boolean)
+  return targets.length === 1 ? targets[0] : null
+})
+const canMarkKnown = computed(() => currentKey.value != null && !progress.isKnown(currentKey.value))
+
+async function markCurrentKnown() {
+  if (currentKey.value) await progress.markKnown(currentKey.value)
+}
+
 async function skip(dimension) {
   const picker = buildReplacementPicker()
   skipDimension(runner, dimension, (skipped) => makeVisualReplacement(skipped, repSeq++, picker))
@@ -390,6 +404,7 @@ function confirmClose() {
       <div class="skips row">
         <button v-if="canSkipListening" class="skip" @click="skip('hearing')">Skip listening</button>
         <button v-if="canSkipSpeaking" class="skip" @click="skip('speaking')">Skip speaking</button>
+        <button v-if="canMarkKnown" class="skip know" @click="markCurrentKnown">I know this word</button>
         <ReportButton
           :exercise="current"
           :vocab-version="vocabState.vocabVersion"
@@ -571,6 +586,10 @@ function confirmClose() {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.35rem 0.6rem;
+}
+.skip.know {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 45%, transparent);
 }
 .summary {
   text-align: center;

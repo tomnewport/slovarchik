@@ -261,4 +261,20 @@ describe('SessionView', () => {
     await wrapper.findAll('.modal button').at(1).trigger('click') // "End session"
     expect(push).toHaveBeenCalledWith('/')
   })
+
+  it('marks the current single-target word known and hides the button afterwards', async () => {
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    const knowBtn = wrapper.findAll('button.know').find((b) => b.text() === 'I know this word')
+    expect(knowBtn).toBeTruthy()
+    expect(progress.isKnown('t1')).toBe(false)
+
+    await knowBtn.trigger('click')
+    await flushPromises()
+
+    expect(progress.isKnown('t1')).toBe(true)
+    // Button clears once the word is flagged.
+    expect(wrapper.findAll('button.know').some((b) => b.text() === 'I know this word')).toBe(false)
+  })
 })

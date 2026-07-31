@@ -104,7 +104,11 @@ const wordIndex = computed(() => {
 })
 
 function wordRecord(key) {
-  return wordIndex.value.get(key) ?? { key, hasInflections: false }
+  const base = wordIndex.value.get(key) ?? { key, hasInflections: false }
+  // Fold the learner's "I know this word" flag onto the vocab record so the pure
+  // progression model applies the relaxed single-answer criteria for it. Only
+  // spread when actually known — the common path stays a plain lookup.
+  return state.records[key]?.known ? { ...base, known: true } : base
 }
 
 // ---------------------------------------------------------------------------
@@ -182,7 +186,7 @@ export const atRisk = computed(() =>
 // the mastery level too means a mastered word one wrong answer from dropping
 // back to learned is surfaced, not just learning-level slips.
 function isBorderline(key) {
-  return borderlineDimensions(events(key)).length > 0
+  return borderlineDimensions(events(key), wordRecord(key)).length > 0
 }
 
 /**
@@ -193,6 +197,10 @@ function isBorderline(key) {
 export function isPendingConfirmation(key) {
   const rec = state.records[key]
   if (!rec || rec.confirmedAt != null) return false
+  // A word the learner has vouched for ("I know this word") needs no overnight
+  // confirmation — the point of the flag is to skip the grind, so it is eligible
+  // for mastery immediately rather than waiting a day (#321).
+  if (rec.known) return false
   return rank(stateOf(key)) >= rank('learned')
 }
 
@@ -219,6 +227,10 @@ function ensureRecord(key) {
     state.records[key] = {
       word: key,
       events: [],
+      // "I know this word" (#321): when set, the pure model grades this word on
+      // relaxed single-answer criteria, so one clean pass of each exercise
+      // confirms it as learned/mastered instead of the usual repeated drilling.
+      known: false,
       learnedAt: null,
       masteredAt: null,
       peak: 0,
@@ -328,7 +340,10 @@ export async function recordAttempt({
   // spaced attempt ≥1 day after it reached `learned` either confirms it (real
   // learned) or folds it back into the current pool for re-drilling. A word
   // that slips below `learned` is handled by the lost-word plumbing instead.
-  if (rec.confirmedAt == null && rank(next) >= rank('learned')) {
+  // Known words (#321) opt out of the spaced confirmation entirely: the learner
+  // has vouched for them, so a single correct answer is enough — no pending
+  // state, no fold-back on a "failed" overnight review.
+  if (!rec.known && rec.confirmedAt == null && rank(next) >= rank('learned')) {
     const outcome = confirmationOutcome(rec, { correct: !!correct, ts })
     if (outcome === 'confirmed') {
       rec.confirmedAt = ts
@@ -345,6 +360,47 @@ export async function recordAttempt({
   // events anyway).
   logActivity(ts, correct, Math.max(1, times))
   return next
+}
+
+/** Whether the learner has flagged a word "I know this word". */
+export function isKnown(key) {
+  return !!state.records[key]?.known
+}
+
+/**
+ * Flag a word as already known (#321): from now on it is graded on the relaxed
+ * single-answer criteria, so one clean pass of each exercise confirms it at
+ * whichever level it is being drilled. If the word already has enough correct
+ * attempts to clear the relaxed bar, this immediately lifts its state — so we
+ * stamp the learned/mastered timestamps and peak here exactly as recordAttempt
+ * does, keeping the history chart and slip detection consistent. A word never
+ * yet attempted stays `unknown`: the learner still has to demonstrate it once.
+ * @returns {Promise<string>} the word's state after flagging
+ */
+export async function markKnown(key) {
+  if (!key) return stateOf(key)
+  const rec = ensureRecord(key)
+  if (rec.known) return stateOf(key)
+  rec.known = true
+  const ts = Date.now()
+  const next = stateOf(key)
+  if (rec.learnedAt == null && rank(next) >= rank('learned')) rec.learnedAt = ts
+  if (rec.masteredAt == null && next === 'mastered') rec.masteredAt = ts
+  rec.peak = Math.max(rec.peak ?? 0, rank(next))
+  await persist(rec)
+  return next
+}
+
+/**
+ * Clear a word's "known" flag, returning it to the standard criteria. Its
+ * recorded attempts are untouched, so it re-derives its state under the full
+ * thresholds (and may drop back below learned until it earns the extra reps).
+ */
+export async function unmarkKnown(key) {
+  const rec = state.records[key]
+  if (!rec || !rec.known) return
+  rec.known = false
+  await persist(rec)
 }
 
 // ---------------------------------------------------------------------------
@@ -422,6 +478,7 @@ function plain(rec) {
   return {
     word: rec.word,
     events: rec.events.map((e) => ({ ...e })),
+    known: !!rec.known,
     learnedAt: rec.learnedAt,
     masteredAt: rec.masteredAt,
     peak: rec.peak ?? 0,
@@ -451,7 +508,7 @@ function persist(rec) {
  */
 function recheckMasteredPeak(rec) {
   if ((rec.peak ?? 0) < rank('mastered')) return false
-  if (levelMet(rec.events, 'mastery')) return false
+  if (levelMet(rec.events, 'mastery', { known: rec.known })) return false
   rec.peak = rank('learned')
   return true
 }
@@ -645,7 +702,7 @@ function understanding(key) {
   // Count only the dimensions this word is actually graded on, so a word whose
   // speaking is waived isn't treated as perpetually one dimension short.
   for (const dim of applicableDimensions('learning', wordRecord(key))) {
-    if (dimensionProgress(evs, 'learning', dim).met) met++
+    if (dimensionProgress(evs, 'learning', dim, wordRecord(key)).met) met++
   }
   const recent = evs.slice(-WEAKNESS_WINDOW)
   const accuracy = recent.length ? recent.filter((e) => e.correct).length / recent.length : 0
@@ -729,7 +786,7 @@ function masteryBatchActive(now = Date.now()) {
     if (rank(stateOf(key)) >= target) return false
     const evs = events(key)
     return applicableDimensions('mastery', wordRecord(key)).some((d) =>
-      dimensionAdvancesAt(evs, 'mastery', d, now),
+      dimensionAdvancesAt(evs, 'mastery', d, now, wordRecord(key)),
     )
   })
 }
@@ -752,7 +809,7 @@ export function startSession({ type = 'standard', size, focusKeys = null, now = 
   for (const key of Object.keys(state.records)) {
     if (rank(stateOf(key)) < rank('learned')) continue
     if (focusSet && !focusSet.has(key)) continue
-    for (const { level, dimension } of borderlineDimensions(events(key))) {
+    for (const { level, dimension } of borderlineDimensions(events(key), wordRecord(key))) {
       const dims = riskByDim[level]
       if (!dims.has(dimension)) dims.set(dimension, [])
       dims.get(dimension).push(key)
@@ -816,9 +873,9 @@ export function startSession({ type = 'standard', size, focusKeys = null, now = 
       if (stateOf(key) !== 'learned') continue
       const evs = events(key)
       for (const d of applicableDimensions('mastery', wordRecord(key))) {
-        if (dimensionProgress(evs, 'mastery', d).met) continue
+        if (dimensionProgress(evs, 'mastery', d, wordRecord(key)).met) continue
         needed.add(d)
-        if (dimensionAdvancesAt(evs, 'mastery', d, now)) advanceable.add(d)
+        if (dimensionAdvancesAt(evs, 'mastery', d, now, wordRecord(key))) advanceable.add(d)
       }
     }
     for (const d of needed) {
@@ -891,7 +948,9 @@ export function startSession({ type = 'standard', size, focusKeys = null, now = 
       // advance (e.g. an all-mastery grammar session with everything blocked)
       // so the session still has content.
       const advancing = candidates.filter(
-        (k) => riskySet.has(k) || dimensionAdvancesAt(events(k), 'mastery', practice.dimension, now),
+        (k) =>
+          riskySet.has(k) ||
+          dimensionAdvancesAt(events(k), 'mastery', practice.dimension, now, wordRecord(k)),
       )
       practice.pool = advancing.length > 0 ? advancing : candidates
     } else {
@@ -924,10 +983,11 @@ export function wordProgressDetail(key) {
   const word = wordRecord(key)
   const levels = {}
   for (const level of ['learning', 'mastery']) {
-    levels[level] = applicableDimensions(level, word).map((d) => dimensionProgress(evs, level, d))
+    levels[level] = applicableDimensions(level, word).map((d) => dimensionProgress(evs, level, d, word))
   }
   return {
     tracked: !!rec,
+    known: !!rec?.known,
     state: stateOf(key),
     peak: STATES[rec?.peak ?? 0],
     learnedAt: rec?.learnedAt ?? null,
@@ -967,6 +1027,7 @@ export async function loadProgress() {
     map[r.word] = {
       word: r.word,
       events: Array.isArray(r.events) ? r.events : [],
+      known: r.known ?? false,
       learnedAt: r.learnedAt ?? null,
       masteredAt: r.masteredAt ?? null,
       peak: r.peak ?? 0,
@@ -984,11 +1045,11 @@ export async function loadProgress() {
   for (const rec of Object.values(map)) {
     let changed = false
     const when = lastAttemptAt(rec.events) ?? Date.now()
-    if (rec.learnedAt == null && levelMet(rec.events, 'learning')) {
+    if (rec.learnedAt == null && levelMet(rec.events, 'learning', { known: rec.known })) {
       rec.learnedAt = when
       changed = true
     }
-    if (rec.masteredAt == null && levelMet(rec.events, 'mastery')) {
+    if (rec.masteredAt == null && levelMet(rec.events, 'mastery', { known: rec.known })) {
       rec.masteredAt = when
       changed = true
     }
@@ -1158,6 +1219,7 @@ export async function importData(data) {
     const rec = {
       word: r.word,
       events: r.events,
+      known: r.known ?? false,
       learnedAt: r.learnedAt ?? null,
       masteredAt: r.masteredAt ?? null,
       peak: r.peak ?? 0,

@@ -61,6 +61,40 @@ export const CRITERIA = Object.freeze({
   },
 })
 
+/**
+ * Relaxed criteria for a word the learner has flagged "I know this word": every
+ * dimension needs just a single correct answer, so one clean pass of each
+ * exercise confirms the word at whichever level it is being drilled — no
+ * repeated grinding and no overnight day-spacing. Same dimension keys (and
+ * types) as {@link CRITERIA} so every criteria-driven helper stays valid; only
+ * the thresholds shrink. Chosen over a placement quiz (#321): the learner
+ * self-declares knowledge one word at a time and still has to demonstrate it
+ * once, rather than seeding whole CEFR levels as learned on a sampled guess.
+ */
+export const KNOWN_CRITERIA = Object.freeze({
+  learning: {
+    identification: { type: 'ratio', need: 1, window: 1 },
+    usage: { type: 'ratio', need: 1, window: 1 },
+    hearing: { type: 'ratio', need: 1, window: 1 },
+    speaking: { type: 'attempts', need: 1 },
+  },
+  mastery: {
+    identification: { type: 'ratio', need: 1, window: 1 },
+    usage: { type: 'ratio', need: 1, window: 1 },
+    context: { type: 'ratio', need: 1, window: 1 },
+  },
+})
+
+/**
+ * The criteria set that applies to a word: the relaxed single-answer thresholds
+ * once it is flagged `known`, otherwise the standard criteria. Reads the flag
+ * off the word record so every helper below can honour it just by receiving the
+ * word (which they already take, or now take, for inflection awareness).
+ */
+export function criteriaFor(word) {
+  return word?.known ? KNOWN_CRITERIA : CRITERIA
+}
+
 /** The dimensions a given level is graded on, in display order. */
 export function dimensionsForLevel(level) {
   const crit = CRITERIA[level]
@@ -101,8 +135,8 @@ export function criterionMet(attempts, crit) {
  * Progress for one dimension at one level.
  * @returns {{level, dimension, attempts, correct, met, crit}}
  */
-export function dimensionProgress(events, level, dimension) {
-  const crit = CRITERIA[level]?.[dimension] ?? null
+export function dimensionProgress(events, level, dimension, word = {}) {
+  const crit = criteriaFor(word)[level]?.[dimension] ?? null
   const attempts = attemptsFor(events, level, dimension)
   return {
     level,
@@ -160,8 +194,8 @@ export function correctAdvancesAt(attempts, crit, now) {
 }
 
 /** {@link correctAdvancesAt} for one `(level, dimension)` of a word's events. */
-export function dimensionAdvancesAt(events, level, dimension, now) {
-  const crit = CRITERIA[level]?.[dimension] ?? null
+export function dimensionAdvancesAt(events, level, dimension, now, word = {}) {
+  const crit = criteriaFor(word)[level]?.[dimension] ?? null
   return correctAdvancesAt(attemptsFor(events, level, dimension), crit, now)
 }
 
@@ -175,11 +209,12 @@ export function dimensionAdvancesAt(events, level, dimension, now) {
  * uses this list to point at-risk practice at the drill that actually helps.
  * @returns {Array<{level: string, dimension: string}>}
  */
-export function borderlineDimensions(events) {
+export function borderlineDimensions(events, word = {}) {
   const out = []
+  const criteria = criteriaFor(word)
   for (const level of LEVELS) {
     for (const dimension of dimensionsForLevel(level)) {
-      const crit = CRITERIA[level][dimension]
+      const crit = criteria[level][dimension]
       if (crit.type !== 'ratio') continue
       const attempts = attemptsFor(events, level, dimension)
       if (!attempts.length || attempts[attempts.length - 1].correct !== false) continue
@@ -195,8 +230,9 @@ export function borderlineDimensions(events) {
  * across a batch's words this is the "exercises to go" until the batch is done.
  */
 export function minExercisesToLevel(events, level, word = {}) {
+  const criteria = criteriaFor(word)
   return applicableDimensions(level, word).reduce(
-    (sum, dim) => sum + minCorrectToMeet(attemptsFor(events, level, dim), CRITERIA[level]?.[dim]),
+    (sum, dim) => sum + minCorrectToMeet(attemptsFor(events, level, dim), criteria[level]?.[dim]),
     0,
   )
 }
@@ -219,8 +255,9 @@ export function minExercisesToLevel(events, level, word = {}) {
 export function levelGapByDimension(records, level) {
   const gap = {}
   for (const { events, word = {} } of records ?? []) {
+    const criteria = criteriaFor(word)
     for (const d of applicableDimensions(level, word)) {
-      const need = minCorrectToMeet(attemptsFor(events, level, d), CRITERIA[level]?.[d])
+      const need = minCorrectToMeet(attemptsFor(events, level, d), criteria[level]?.[d])
       if (need > 0) gap[d] = (gap[d] ?? 0) + need
     }
   }
@@ -256,8 +293,9 @@ export function applicableDimensions(level, word = {}) {
 
 /** Are every applicable dimension's criteria for a level met? */
 export function levelMet(events, level, word = {}) {
+  const criteria = criteriaFor(word)
   return applicableDimensions(level, word).every((d) =>
-    criterionMet(attemptsFor(events, level, d), CRITERIA[level][d]),
+    criterionMet(attemptsFor(events, level, d), criteria[level][d]),
   )
 }
 
@@ -299,7 +337,7 @@ export function wordState(events, word = {}) {
 export function wordProgress(events, word = {}) {
   const detail = (level) => {
     const dims = {}
-    for (const d of applicableDimensions(level, word)) dims[d] = dimensionProgress(events, level, d)
+    for (const d of applicableDimensions(level, word)) dims[d] = dimensionProgress(events, level, d, word)
     return dims
   }
   const masteryApplicable = wordHasInflections(word)

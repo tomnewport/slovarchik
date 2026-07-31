@@ -4,6 +4,8 @@ import {
   STATES,
   LEVELS,
   CRITERIA,
+  KNOWN_CRITERIA,
+  criteriaFor,
   dimensionsForLevel,
   applicableDimensions,
   criterionMet,
@@ -395,6 +397,77 @@ describe('learning dimensions', () => {
       'hearing',
       'speaking',
     ])
+  })
+})
+
+describe('known words (#321)', () => {
+  const known = { known: true, hasInflections: true, pos: 'noun', hasContextDrill: true }
+
+  it('criteriaFor swaps to the relaxed set only when the word is flagged known', () => {
+    expect(criteriaFor({})).toBe(CRITERIA)
+    expect(criteriaFor({ known: false })).toBe(CRITERIA)
+    expect(criteriaFor(null)).toBe(CRITERIA)
+    expect(criteriaFor({ known: true })).toBe(KNOWN_CRITERIA)
+  })
+
+  it('the relaxed set keeps the same dimensions, each needing a single answer', () => {
+    expect(Object.keys(KNOWN_CRITERIA.learning)).toEqual(Object.keys(CRITERIA.learning))
+    expect(Object.keys(KNOWN_CRITERIA.mastery)).toEqual(Object.keys(CRITERIA.mastery))
+    for (const level of LEVELS) {
+      for (const crit of Object.values(KNOWN_CRITERIA[level])) {
+        expect(crit.need).toBe(1)
+        expect(crit.days).toBeUndefined()
+      }
+    }
+  })
+
+  it('a known word is learned after one correct answer in each learning dimension', () => {
+    const events = [
+      ...attempts('learning', 'identification', [true]),
+      ...attempts('learning', 'usage', [true]),
+      ...attempts('learning', 'hearing', [true]),
+      ...attempts('learning', 'speaking', [true]),
+    ]
+    // Under the standard criteria this is nowhere near learned…
+    expect(wordState(events, { hasInflections: true, pos: 'noun' })).toBe('learning')
+    // …but a known word only needs the single pass.
+    expect(wordState(events, known)).toBe('learned')
+  })
+
+  it('a known word masters on a single same-day pass of each mastery dimension', () => {
+    const events = [
+      ...attempts('learning', 'identification', [true]),
+      ...attempts('learning', 'usage', [true]),
+      ...attempts('learning', 'hearing', [true]),
+      ...attempts('learning', 'speaking', [true]),
+      // All on ts=0 — no day spacing, which the standard criteria would demand.
+      ...attempts('mastery', 'identification', [true]),
+      ...attempts('mastery', 'usage', [true]),
+      ...attempts('mastery', 'context', [true]),
+    ]
+    expect(wordState(events, known)).toBe('mastered')
+  })
+
+  it('a known word never attempted stays unknown — it must still be demonstrated once', () => {
+    expect(wordState([], known)).toBe('unknown')
+  })
+
+  it('needs far fewer exercises to reach a level when known', () => {
+    expect(minExercisesToLevel([], 'learning', known)).toBeLessThan(
+      minExercisesToLevel([], 'learning', { hasInflections: true, pos: 'noun' }),
+    )
+    // Four learning dimensions, one correct answer each.
+    expect(minExercisesToLevel([], 'learning', known)).toBe(4)
+  })
+
+  it('dimensionProgress reports the relaxed need for a known word', () => {
+    const oneCorrect = attempts('learning', 'identification', [true])
+    const strict = dimensionProgress(oneCorrect, 'learning', 'identification')
+    const relaxed = dimensionProgress(oneCorrect, 'learning', 'identification', known)
+    expect(strict.met).toBe(false)
+    expect(strict.crit.need).toBe(3)
+    expect(relaxed.met).toBe(true)
+    expect(relaxed.crit.need).toBe(1)
   })
 })
 
