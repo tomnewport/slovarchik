@@ -120,6 +120,13 @@ onMounted(() => speak(props.paradigm.lemma))
                   spellcheck="false"
                   @keydown.enter.prevent="focusNext"
                 />
+                <button
+                  v-if="cellAt(row.key, col.key).note"
+                  type="button"
+                  class="info"
+                  :title="cellAt(row.key, col.key).note"
+                  :aria-label="cellAt(row.key, col.key).note"
+                >ⓘ</button>
               </div>
               <div
                 v-if="checked && cellAt(row.key, col.key) && !correctCell(cellKey(row.key, col.key))"
@@ -131,6 +138,13 @@ onMounted(() => speak(props.paradigm.lemma))
                 <div class="correct-form speak-row">
                   <span lang="ru">{{ cellAt(row.key, col.key).form }}</span>
                   <SpeakButton :text="cellAt(row.key, col.key).form" />
+                  <button
+                    v-if="cellAt(row.key, col.key).note"
+                    type="button"
+                    class="info"
+                    :title="cellAt(row.key, col.key).note"
+                    :aria-label="cellAt(row.key, col.key).note"
+                  >ⓘ</button>
                 </div>
               </div>
             </td>

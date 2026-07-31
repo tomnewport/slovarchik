@@ -151,8 +151,15 @@ function check() {
               <small v-if="row.sub" class="muted">{{ row.sub }}</small>
             </th>
             <td v-for="col in paradigm.cols" :key="col.key">
+              <div v-if="cellAt(row.key, col.key)" class="cell">
+                <button
+                  v-if="cellAt(row.key, col.key).note"
+                  type="button"
+                  class="info cell-info"
+                  :title="cellAt(row.key, col.key).note"
+                  :aria-label="cellAt(row.key, col.key).note"
+                >ⓘ</button>
               <div
-                v-if="cellAt(row.key, col.key)"
                 class="drop"
                 :class="{
                   filled: placed[cellKey(row.key, col.key)] != null,
@@ -186,6 +193,7 @@ function check() {
                   {{ chipById.get(placed[cellKey(row.key, col.key)]).form }}
                 </span>
                 <span v-else class="muted">·</span>
+              </div>
               </div>
             </td>
           </tr>
@@ -262,6 +270,16 @@ function check() {
   cursor: help;
   vertical-align: super;
   line-height: 1;
+}
+.cell {
+  position: relative;
+}
+.cell-info {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  padding: 0;
+  z-index: 2;
 }
 .ptable thead th:first-child {
   position: sticky;

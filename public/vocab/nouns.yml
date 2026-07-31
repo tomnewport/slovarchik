@@ -9888,11 +9888,16 @@ words:
       sg_pre: го́де
       sg_loc: году́
       pl_nom: го́ды
-      pl_gen: го́дов
+      pl_gen: лет
       pl_dat: го́дам
       pl_acc: го́ды
       pl_ins: го́дами
       pl_pre: го́дах
+    declension_notes:
+      pl_gen: >-
+        Suppletive genitive plural: after quantities Russian uses лет (from a
+        different root) — «мно́го лет», «ско́лько тебе́ лет?». The regular годо́в
+        survives only in a few fixed expressions.
     usage:
       - ru: С Но́вым го́дом!
         en_gb: Happy New Year!
@@ -9902,6 +9907,7 @@ words:
         inflect: { token: 3, case: loc, number: sg, rule: noun-locative }
       - ru: Про́шло мно́го лет.
         en_gb: Many years have passed.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-irregular-plural }
       - ru: Ему́ испо́лнилось три го́да.
         en_gb: He has turned three years old.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }

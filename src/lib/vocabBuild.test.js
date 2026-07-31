@@ -48,6 +48,46 @@ words:
     expect(gate.meaningNote).toContain('doorlike')
     expect(gate.english).toContain('gate')
   })
+  it('leaves formNotes empty when the noun declares no declension_notes', () => {
+    expect(gate.formNotes).toEqual({})
+  })
+})
+
+describe('declension_notes (per-cell tooltips)', () => {
+  const text = `
+words:
+  "год=year":
+    cefr_level: A1
+    gender: m
+    animacy: i
+    en_gb: { standard: year }
+    declension:
+      sg_nom: год
+      sg_gen: го́да
+      sg_dat: го́ду
+      sg_acc: год
+      sg_ins: го́дом
+      sg_pre: го́де
+      pl_nom: го́ды
+      pl_gen: лет
+      pl_dat: го́дам
+      pl_acc: го́ды
+      pl_ins: го́дами
+      pl_pre: го́дах
+    declension_notes:
+      pl_gen: >-
+        Suppletive genitive plural: Russian uses лет, not годо́в.
+`
+  const [god] = buildWords([{ pos: 'noun', text }])
+
+  it('stores the suppletive form and nests the note under the same cell', () => {
+    expect(god.forms.pl.gen).toBe('лет')
+    expect(god.formNotes.pl.gen).toMatch(/suppletive/i)
+  })
+  it('does not annotate cells that have no note', () => {
+    expect(god.formNotes.sg).toBeUndefined()
+    expect(god.formNotes.pl.nom).toBeUndefined()
+  })
 })
 
 describe('learn: false (gloss-only entries)', () => {
