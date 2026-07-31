@@ -106,6 +106,16 @@ describe('buildSelectSteps', () => {
   it('returns no selection steps for a verb without an aspect partner', () => {
     expect(buildSelectSteps(verbPhrase.target, dumat)).toEqual([])
   })
+  it('returns a short-form gender step for a short (predicate) adjective', () => {
+    const zakrytyi = {
+      key: 'закрытый=closed', pos: 'adjective',
+      short: { m: 'закры́т', f: 'закры́та', n: 'закры́то', pl: 'закры́ты' },
+    }
+    const steps = buildSelectSteps({ degree: 'short', gender: 'f', token: 3 }, zakrytyi)
+    expect(steps.map((s) => s.kind)).toEqual(['gender'])
+    expect(steps[0].options.map((o) => o.id)).toEqual(['m', 'n', 'f', 'pl'])
+    expect(steps[0].options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'f' })])
+  })
   it('returns a choose-the-aspect step for a verb with an aspect partner', () => {
     const steps = buildSelectSteps(skazatPhrase.target, skazat)
     expect(steps.map((s) => s.kind)).toEqual(['aspect'])

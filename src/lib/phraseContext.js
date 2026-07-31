@@ -123,6 +123,9 @@ function agreementLabel(gender, c) {
 
 /** Human-readable label for the grammatical slot a phrase drills. */
 function slotLabelFor(target) {
+  if (target.degree === 'short') {
+    return `Short form · ${GENDER_LABEL[target.gender] ?? target.gender}`
+  }
   if (target.case) {
     if (target.gender) return agreementLabel(target.gender, target.case)
     // Case first, then number — the order the learner reasons in.
@@ -198,6 +201,26 @@ function genderStep(target, word) {
   }
 }
 
+/**
+ * Selection step: pick the gender + number a short-form (predicate) adjective
+ * agrees with (закры́т / закры́та / закры́то / закры́ты). Like genderStep, but the
+ * options come from the word's `short` block rather than the case declension.
+ */
+function shortGenderStep(target, word) {
+  const short = word?.short ?? {}
+  const present = GENDERS.filter((g) => short[g])
+  const genders = present.length ? present : GENDERS
+  return {
+    kind: 'gender',
+    prompt: 'Which gender / number must the short form agree with?',
+    options: genders.map((g) => ({
+      id: g,
+      label: GENDER_LABEL[g] ?? g,
+      correct: g === target.gender,
+    })),
+  }
+}
+
 /** The two members of a verb's aspect pair, imperfective first. */
 function aspectPairMembers(word) {
   const self = { ru: word.headword || word.ru, aspect: word.aspect, key: word.key, correct: true }
@@ -242,6 +265,7 @@ function aspectStep(word) {
  * component grades each clicked option's `correct` flag.
  */
 export function buildSelectSteps(target, word) {
+  if (target?.degree === 'short') return [shortGenderStep(target, word)]
   if (!target?.case) {
     return target?.person && word?.aspectPair ? [aspectStep(word)] : []
   }

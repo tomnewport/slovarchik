@@ -1025,9 +1025,15 @@ words:
       standard: ill (not healthy)
       alt:
         - sick
+    short:
+      m: бо́лен
+      f: больна́
+      n: больно́
+      pl: больны́
     usage:
       - ru: Ребёнок сего́дня бо́лен.
         en_gb: The child is ill today.
+        inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Больна́я де́вочка лежа́ла в посте́ли.
         en_gb: The ill girl was lying in bed.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -1846,6 +1852,11 @@ words:
       pl_acc: вино́ватые
       pl_ins: вино́ватыми
       pl_pre: вино́ватых
+    short:
+      m: винова́т
+      f: винова́та
+      n: винова́то
+      pl: винова́ты
     usage:
       - ru: Он чу́вствовал себя́ вино́ватым.
         en_gb: He felt guilty.
@@ -1855,6 +1866,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Я не винова́т в э́том.
         en_gb: I am not guilty of this.
+        inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
   "виновный=guilty":
     cefr_level: B2
     accented: вино́вный
@@ -3331,9 +3343,15 @@ words:
       - feelings and sensations
     en_gb:
       standard: proud (feeling pleased with oneself)
+    short:
+      m: горд
+      f: горда́
+      n: го́рдо
+      pl: горды́
     usage:
       - ru: Роди́тели горды́ свои́м сы́ном.
         en_gb: The parents are proud of their son.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
       - ru: У него́ го́рдый взгляд.
         en_gb: He has a proud look.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
@@ -3648,8 +3666,10 @@ words:
     usage:
       - ru: Обе́д уже́ гото́в.
         en_gb: Dinner is already ready.
+        inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ гото́ва помо́чь нам.
         en_gb: She is ready to help us.
+        inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы купи́ли гото́вые блю́да.
         en_gb: We bought ready-made dishes.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
@@ -4652,6 +4672,11 @@ words:
       standard: kind (gentle and caring)
       alt:
         - good
+    short:
+      m: добр
+      f: добра́
+      n: добро́
+      pl: добры́
     usage:
       - ru: Она́ о́чень до́брая же́нщина.
         en_gb: She is a very kind woman.
@@ -4664,6 +4689,7 @@ words:
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Бу́дьте добры́, переда́йте мне соль.
         en_gb: Would you be so kind as to pass me the salt?
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
       - ru: Всего́ до́брого, до свида́ния!
         en_gb: All the best, goodbye!
         inflect: { token: 2, case: gen, number: sg, gender: n, rule: adj-agreement }
@@ -4811,10 +4837,13 @@ words:
     usage:
       - ru: Я до́лжен идти́ домо́й.
         en_gb: I must go home.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ должна́ рабо́тать за́втра.
         en_gb: She has to work tomorrow.
+        inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы должны́ помога́ть друг дру́гу.
         en_gb: We must help each other.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
   "должный=proper":
     cefr_level: B1
     accented: до́лжный
@@ -5850,12 +5879,18 @@ words:
       - family
     en_gb:
       standard: married (of a man; short form жена́т)
+    short:
+      m: жена́т
+      f: жена́та
+      n: жена́то
+      pl: жена́ты
     usage:
       - ru: Он жена́тый челове́к с детьми́.
         en_gb: He is a married man with children.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мой ста́рший брат уже́ жена́т.
         en_gb: My older brother is already married.
+        inflect: { token: 5, degree: short, gender: m, rule: adj-short-form }
       - ru: Жена́тые мужчи́ны ча́сто но́сят кольцо́.
         en_gb: Married men often wear a ring.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
@@ -6041,9 +6076,15 @@ words:
       - nature
     en_gb:
       standard: alive (living, not dead)
+    short:
+      m: жив
+      f: жива́
+      n: жи́во
+      pl: жи́вы
     usage:
       - ru: Она́ была́ ещё жива́.
         en_gb: She was still alive.
+        inflect: { token: 4, degree: short, gender: f, rule: adj-short-form }
       - ru: Э́тот цвето́к ещё живо́й.
         en_gb: This flower is still alive.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
@@ -6444,16 +6485,24 @@ words:
       pl_acc: закры́тые
       pl_ins: закры́тыми
       pl_pre: закры́тых
+    short:
+      m: закры́т
+      f: закры́та
+      n: закры́то
+      pl: закры́ты
     usage:
       - ru: Он постуча́л в закры́тую дверь.
         en_gb: He knocked on a closed door.
         inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Магази́н сего́дня закры́т.
         en_gb: The shop is closed today.
+        inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Дверь была́ закры́та.
         en_gb: The door was closed.
+        inflect: { token: 3, degree: short, gender: f, rule: adj-short-form }
       - ru: Все о́кна закры́ты.
         en_gb: All the windows are closed.
+        inflect: { token: 3, degree: short, gender: pl, rule: adj-short-form }
   "заметный=noticeable":
     cefr_level: B1
     accented: заме́тный
@@ -6559,6 +6608,7 @@ words:
     usage:
       - ru: Сего́дня я о́чень за́нят.
         en_gb: I am very busy today.
+        inflect: { token: 4, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ о́чень за́нятая же́нщина.
         en_gb: She is a very busy woman.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -12706,16 +12756,24 @@ words:
       pl_acc: обя́занные
       pl_ins: обя́занными
       pl_pre: обя́занных
+    short:
+      m: обя́зан
+      f: обя́зана
+      n: обя́зано
+      pl: обя́заны
     usage:
       - ru: Обя́занная сторона́ подписа́ла догово́р.
         en_gb: The obligated party signed the contract.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я обя́зан тебе́ по́мощью.
         en_gb: I am obliged to you for your help.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ обя́зана отвеча́ть за дете́й.
         en_gb: She is obliged to answer for the children.
+        inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы обя́заны соблюда́ть пра́вила.
         en_gb: We are obliged to follow the rules.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
   "обязательный=obligatory":
     cefr_level: A1
     accented: обяза́тельный
@@ -12848,16 +12906,24 @@ words:
       pl_acc: оде́тые
       pl_ins: оде́тыми
       pl_pre: оде́тых
+    short:
+      m: оде́т
+      f: оде́та
+      n: оде́то
+      pl: оде́ты
     usage:
       - ru: Тепло́ оде́тый ма́льчик игра́л в снегу́.
         en_gb: A warmly dressed boy was playing in the snow.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Он был тепло́ оде́т.
         en_gb: He was warmly dressed.
+        inflect: { token: 4, degree: short, gender: m, rule: adj-short-form }
       - ru: Де́вочка пришла́ хорошо́ оде́та.
         en_gb: The girl came well dressed.
+        inflect: { token: 4, degree: short, gender: f, rule: adj-short-form }
       - ru: Де́ти бы́ли оде́ты по пого́де.
         en_gb: The children were dressed for the weather.
+        inflect: { token: 3, degree: short, gender: pl, rule: adj-short-form }
   "одинаковый=identical":
     cefr_level: B1
     accented: одина́ковый
@@ -13693,9 +13759,15 @@ words:
       pl_acc: откры́тые
       pl_ins: откры́тыми
       pl_pre: откры́тых
+    short:
+      m: откры́т
+      f: откры́та
+      n: откры́то
+      pl: откры́ты
     usage:
       - ru: Магази́н сейча́с откры́т.
         en_gb: The shop is open now.
+        inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Че́рез откры́тую дверь дул ве́тер.
         en_gb: The wind blew through the open door.
         inflect: { token: 2, case: acc, number: sg, gender: f, rule: adj-agreement }
@@ -15228,14 +15300,21 @@ words:
       pl_acc: похо́жие
       pl_ins: похо́жими
       pl_pre: похо́жих
+    short:
+      m: похо́ж
+      f: похо́жа
+      n: похо́же
+      pl: похо́жи
     usage:
       - ru: Он похо́ж на отца́.
         en_gb: He is similar to his father.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
       - ru: У них похо́жая судьба́.
         en_gb: They have a similar fate.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́ти карти́ны о́чень похо́жи.
         en_gb: These paintings are very similar.
+        inflect: { token: 4, degree: short, gender: pl, rule: adj-short-form }
   "пошлый=vulgar":
     cefr_level: B2
     accented: по́шлый
@@ -16373,10 +16452,13 @@ words:
     usage:
       - ru: Я о́чень рад тебя́ ви́деть.
         en_gb: I am very glad to see you.
+        inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ ра́да но́вому пода́рку.
         en_gb: She is glad about the new present.
+        inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы ра́ды, что вы пришли́.
         en_gb: We are glad that you came.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
   "радостный=joyful":
     cefr_level: B1
     accented: ра́достный
@@ -17435,6 +17517,7 @@ words:
     usage:
       - ru: Э́то ме́сто свобо́дно?
         en_gb: Is this seat free?
+        inflect: { token: 3, degree: short, gender: n, rule: adj-short-form }
       - ru: У меня́ сего́дня свобо́дный день.
         en_gb: I have a free day today.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
@@ -18942,14 +19025,21 @@ words:
       pl_acc: согла́сные
       pl_ins: согла́сными
       pl_pre: согла́сных
+    short:
+      m: согла́сен
+      f: согла́сна
+      n: согла́сно
+      pl: согла́сны
     usage:
       - ru: Я согла́сен с тобо́й.
         en_gb: I agree with you.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
       - ru: В сло́ве есть согла́сная бу́ква.
         en_gb: There is a consonant letter in the word.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Все бы́ли согла́сны с пла́ном.
         en_gb: Everyone agreed with the plan.
+        inflect: { token: 3, degree: short, gender: pl, rule: adj-short-form }
   "солдатский=soldier's":
     cefr_level: B1
     accented: солда́тский
@@ -20603,9 +20693,15 @@ words:
       - colours and textures
     en_gb:
       standard: dark (with little light, or deep in colour)
+    short:
+      m: тёмен
+      f: темна́
+      n: темно́
+      pl: темны́
     usage:
       - ru: В ко́мнате бы́ло тёмно и ти́хо.
         en_gb: It was dark and quiet in the room.
+        inflect: { token: 4, degree: short, gender: n, rule: adj-short-form }
       - ru: Она́ наде́ла тёмное пальто́.
         en_gb: She put on a dark coat.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
@@ -20729,9 +20825,15 @@ words:
       pl_acc: те́сные
       pl_ins: те́сными
       pl_pre: те́сных
+    short:
+      m: те́сен
+      f: тесна́
+      n: те́сно
+      pl: те́сны
     usage:
       - ru: Э́тот пиджа́к мне те́сен.
         en_gb: This jacket is tight on me.
+        inflect: { token: 4, degree: short, gender: m, rule: adj-short-form }
       - ru: У нас те́сная кварти́ра.
         en_gb: We have a cramped flat.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -21578,9 +21680,15 @@ words:
       pl_acc: уго́дные
       pl_ins: уго́дными
       pl_pre: уго́дных
+    short:
+      m: уго́ден
+      f: уго́дна
+      n: уго́дно
+      pl: уго́дны
     usage:
       - ru: Он де́лает всё, что уго́дно.
         en_gb: He does whatever pleases.
+        inflect: { token: 5, degree: short, gender: n, rule: adj-short-form }
       - ru: Э́то де́ло, уго́дное всем.
         en_gb: This is a matter agreeable to all.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }

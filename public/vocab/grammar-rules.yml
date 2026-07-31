@@ -354,6 +354,17 @@ rules:
       Inanimate plurals keep the nominative-shaped accusative: ви́жу ста́рые
       столы́.
 
+  adj-short-form:
+    title: "Short-form adjective"
+    formula: "predicate: agrees in gender · number, no case"
+    explanation: >
+      Many adjectives have a short (predicative) form used after «быть» and as
+      the predicate — «Магази́н закры́т», «Она́ гото́ва», «Мы ра́ды». It agrees
+      with the subject in gender and number only (m/f/n/pl) and takes no case:
+      закры́т, закры́та, закры́то, закры́ты. The masculine often inserts a fill
+      vowel (согла́сен, у́годен) and the feminine/plural stress frequently shifts
+      to the ending (больна́, темно́, горды́). Predicative-only words like рад and
+      до́лжен exist only in this short form.
   adj-acc-animate:
     exception: true
     title: "Accusative of adjectives with animate nouns = genitive"
