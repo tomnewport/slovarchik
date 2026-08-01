@@ -50,7 +50,7 @@ describe('FlashcardExercise', () => {
     expect(wrapper.find('.count').text()).toContain('Card 1 of 2')
   })
 
-  it('does not render any clickable answer options', () => {
+  it('renders no options when the exercise carries no autocomplete pool', () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
     expect(wrapper.findAll('.option').length).toBe(0)
     expect(wrapper.find('[role="listbox"]').exists()).toBe(false)
@@ -140,5 +140,96 @@ describe('FlashcardExercise', () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
     await wrapper.find('.speak-toggle').trigger('click')
     expect(wrapper.find('.reveal-en').text()).toBe('spring')
+  })
+})
+
+describe('FlashcardExercise type-ahead options (#473)', () => {
+  const withOptions = {
+    id: 'fo',
+    kind: 'match',
+    dimension: 'identification',
+    level: 'learning',
+    audio: false,
+    pairs: [
+      { key: 'a', ru: 'весна', en: 'spring', label: 'spring' },
+      { key: 'b', ru: 'ме́сяц', en: 'month', label: 'month' },
+    ],
+    targets: ['a', 'b'],
+    options: [
+      { key: 'a', en: 'spring', label: 'spring' },
+      { key: 'b', en: 'month', label: 'month' },
+      { key: 'x', en: 'summer', label: 'summer' },
+    ],
+  }
+
+  const optionByLabel = (wrapper, label) =>
+    wrapper.findAll('.option').find((b) => b.text() === label)
+
+  it('shows nothing before the learner types, then suggestions after', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: withOptions } })
+    expect(wrapper.findAll('.option').length).toBe(0)
+    await wrapper.find('.combo-input').setValue('s')
+    expect(wrapper.findAll('.option').length).toBeGreaterThan(0)
+    expect(wrapper.find('[role="listbox"]').exists()).toBe(true)
+  })
+
+  it('picking the correct suggestion advances the card', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: withOptions } })
+    await wrapper.find('.combo-input').setValue('s') // partial — no auto-advance
+    await optionByLabel(wrapper, 'spring').trigger('click')
+    expect(wrapper.find('.ru').text()).toBe('ме́сяц')
+    expect(playFeedback).toHaveBeenLastCalledWith(true)
+  })
+
+  it('picking a wrong suggestion reveals the answer and reports it wrong', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: withOptions } })
+    await wrapper.find('.combo-input').setValue('s')
+    await optionByLabel(wrapper, 'summer').trigger('click') // wrong for "spring"
+    expect(wrapper.find('.reveal-en').text()).toBe('spring')
+    await wrapper.find('.next').trigger('click')
+    await wrapper.find('.combo-input').setValue('month')
+    expect(wrapper.emitted('done')[0][0].wrong).toEqual(['a'])
+  })
+
+  it('tells same-base forms apart by their label', async () => {
+    const hat = {
+      id: 'fh',
+      kind: 'match',
+      dimension: 'identification',
+      level: 'learning',
+      audio: false,
+      pairs: [{ key: 'h2', ru: 'шля́па', en: 'hat', label: 'hat (brimmed)' }],
+      targets: ['h2'],
+      options: [
+        { key: 'h1', en: 'hat', label: 'hat (winter)' },
+        { key: 'h2', en: 'hat', label: 'hat (brimmed)' },
+      ],
+    }
+    const wrapper = mount(FlashcardExercise, { props: { exercise: hat } })
+    await wrapper.find('.combo-input').setValue('h') // both hats appear
+    // The other hat form is graded wrong even though its base gloss matches.
+    await optionByLabel(wrapper, 'hat (winter)').trigger('click')
+    expect(wrapper.find('.reveal').exists()).toBe(true)
+    expect(playFeedback).toHaveBeenLastCalledWith(false)
+  })
+
+  it('accepts the exact same-base form when picked', async () => {
+    const hat = {
+      id: 'fh',
+      kind: 'match',
+      dimension: 'identification',
+      level: 'learning',
+      audio: false,
+      pairs: [{ key: 'h2', ru: 'шля́па', en: 'hat', label: 'hat (brimmed)' }],
+      targets: ['h2'],
+      options: [
+        { key: 'h1', en: 'hat', label: 'hat (winter)' },
+        { key: 'h2', en: 'hat', label: 'hat (brimmed)' },
+      ],
+    }
+    const wrapper = mount(FlashcardExercise, { props: { exercise: hat } })
+    await wrapper.find('.combo-input').setValue('h')
+    await optionByLabel(wrapper, 'hat (brimmed)').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
   })
 })

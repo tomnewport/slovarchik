@@ -52,16 +52,40 @@ function advanceRound(s) {
 /**
  * Record the result of the current exercise and advance. Wrong answers are
  * re-queued for a later round; the loop ends once a whole round passes clean.
+ *
+ * `requeue: false` records the result (so the summary and progress bar stay
+ * honest) but does not re-queue the exercise even when it was wrong. Flashcard
+ * boards use this: their misses are collected at word granularity and replayed
+ * as one combined board at the end, rather than replaying whole boards (#472).
  * @returns {object} the same (mutated) state
  */
-export function submit(s, correct) {
+export function submit(s, correct, { requeue = true } = {}) {
   const ex = currentExercise(s)
   if (!ex) return s
   if (!(ex.id in s.firstAttempt)) s.firstAttempt[ex.id] = !!correct
   s.log.push({ id: ex.id, correct: !!correct, round: s.round })
-  if (!correct) s.wrong.push(ex)
+  if (!correct && requeue) s.wrong.push(ex)
   s.pos++
   if (s.pos >= s.queue.length) advanceRound(s)
+  return s
+}
+
+/**
+ * Start an extra round from a fresh set of exercises, reviving the session if it
+ * had reached the summary. Used to append the combined flashcard-repeat board
+ * once the planned pass (and any normal repeats) are done (#472). No-op when the
+ * list is empty. The exercises are not added to the plan — like every repeat
+ * round they sit outside the first-pass progress bar.
+ * @returns {object} the mutated state
+ */
+export function startExtraRound(s, exercises = []) {
+  const list = (exercises ?? []).filter(Boolean)
+  if (!list.length) return s
+  s.queue = list
+  s.pos = 0
+  s.wrong = []
+  s.round++
+  s.phase = 'exercise'
   return s
 }
 

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, makeVisualReplacement, makeReplacementPicker, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
+import { buildExercises, makeVisualReplacement, makeReplacementPicker, buildCombinedFlashcard, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
 import { ASPECT_DRILL_ITEMS, ASPECT_DRILL_MIN_ITEMS } from './phraseContext.js'
-import { shapePhrases } from './vocabBuild.js'
+import { shapePhrases, shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 import { normToken } from './phraseHint.js'
 import { phraseTokens } from './phrases.js'
@@ -563,5 +563,76 @@ describe('CEFR-aware top-up', () => {
     expect(levels.filter((l) => l === 'A1')).toHaveLength(3)
     expect(levels).toContain('B1')
     expect(levels).not.toContain('B2')
+  })
+})
+
+describe('flashcards draw one combined pool (#472)', () => {
+  const synth = (i) => ({ key: `w${i}=m${i}`, ru: `w${i}`, english: `m${i}`, pos: 'noun', cefr: 'A1' })
+
+  it('a match board mixes current, at-risk and due words regardless of its bucket', () => {
+    const synthWords = [synth(1), synth(2), synth(3), synth(4)]
+    const session = {
+      practices: [practice('match-vocab', { bucket: 'atRisk' })],
+      pools: { current: ['w1=m1', 'w2=m2'], atRisk: ['w3=m3'], untested: ['w4=m4'] },
+    }
+    const ex = buildExercises(session, { words: synthWords, phrases: [], rng: seededRng(1) })
+    expect(ex).toHaveLength(1)
+    // The at-risk-bucket board still draws current-batch and due words — one pool.
+    expect(ex[0].targets.slice().sort()).toEqual(['w1=m1', 'w2=m2', 'w3=m3', 'w4=m4'])
+  })
+
+  it('attaches the whole-dictionary autocomplete pool to every match board', () => {
+    const synthWords = [synth(1), synth(2), synth(3)]
+    const session = {
+      practices: [practice('match-vocab')],
+      pools: { current: ['w1=m1'], atRisk: [], untested: [] },
+    }
+    const ex = buildExercises(session, { words: synthWords, phrases: [], rng: seededRng(1) })
+    expect(Array.isArray(ex[0].options)).toBe(true)
+    expect(ex[0].options.length).toBe(3)
+    expect(ex[0].options[0]).toHaveProperty('label')
+    // Pairs carry a disambiguated label too, for grading a picked option.
+    expect(ex[0].pairs[0]).toHaveProperty('label')
+  })
+})
+
+describe('buildCombinedFlashcard (#472)', () => {
+  const synth = (i) => ({ key: `w${i}=m${i}`, ru: `w${i}`, english: `m${i}`, pos: 'noun', cefr: 'A1' })
+  const vocabById = new Map(
+    shapeVocab(Array.from({ length: 20 }, (_, i) => synth(i))).map((v) => [v.id, v]),
+  )
+
+  it('includes every wrong word, then tops up to MATCH_PAIRS with the weakest correct', () => {
+    const wrongKeys = ['w0=m0', 'w1=m1']
+    const topUpKeys = Array.from({ length: 15 }, (_, i) => `w${i + 2}=m${i + 2}`)
+    const ex = buildCombinedFlashcard({ wrongKeys, topUpKeys, vocabById, id: 'r1' })
+    expect(ex.kind).toBe('match')
+    expect(ex.targets.length).toBe(MATCH_PAIRS)
+    // Wrong words are always present; top-up fills the rest in the given order.
+    expect(ex.targets).toContain('w0=m0')
+    expect(ex.targets).toContain('w1=m1')
+    expect(ex.targets).toContain('w2=m2') // first top-up word
+    expect(ex.repeat).toBe(true)
+  })
+
+  it('grows past MATCH_PAIRS when more than that were missed', () => {
+    const wrongKeys = Array.from({ length: 15 }, (_, i) => `w${i}=m${i}`)
+    const ex = buildCombinedFlashcard({ wrongKeys, topUpKeys: [], vocabById, id: 'r2' })
+    expect(ex.targets.length).toBe(15)
+  })
+
+  it('de-duplicates and ignores unknown keys', () => {
+    const ex = buildCombinedFlashcard({
+      wrongKeys: ['w0=m0', 'w0=m0', 'nope=x'],
+      topUpKeys: ['w0=m0', 'w1=m1'],
+      vocabById,
+      id: 'r3',
+    })
+    expect(ex.targets).toEqual(['w0=m0', 'w1=m1'])
+  })
+
+  it('returns null when fewer than two words resolve', () => {
+    expect(buildCombinedFlashcard({ wrongKeys: ['w0=m0'], topUpKeys: [], vocabById })).toBe(null)
+    expect(buildCombinedFlashcard({ wrongKeys: ['nope=x'], topUpKeys: [], vocabById })).toBe(null)
   })
 })

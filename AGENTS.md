@@ -51,19 +51,21 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # ~17 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
                         #   /practice, /progress, /data, /vocab, /phrases, /phrase-fix,
-                        #   /listening, /speaking, /numbers, and the shared inflection
-                        #   view at /declension /verbs /pronouns /adjectives (one
-                        #   InflectionView fed a different `pos` prop).
+                        #   /verb-government, /listening, /speaking, /numbers, and the
+                        #   shared inflection view at /declension /verbs /pronouns
+                        #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
-                        #   ProgressPill, ReportButton, CelebrationBurst, …)
-    exercises/*.vue     #   per-exercise UIs (Match, Type, WordBank, Inflect, Speak, PhraseFix)
+                        #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
+                        #   BatchSearchAdd, WordProgressModal, …)
+    exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
+                        #   PhraseFix, AspectDrill)
     inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
-    progress.js         #   the core engine — per-word attempts → states, batches, sessions
+    progress.js         #   the core engine (~1.3k lines) — per-word attempts → states, batches, sessions
     settings.js         #   user preferences (not learning progress)
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
@@ -71,10 +73,11 @@ src/
     errorToast.js       #   transient error toast state
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
                         #   progression/schedule/batches/session/sessionRunner/practices/
-                        #     exerciseBuild/focus/achievements  — the learning engine
+                        #     exerciseBuild/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
                         #   phrases/phraseHint/phraseContext/glossCoverage  — phrases
-                        #   quiz/recognition/handsFree/speech/feedbackSound  — drills & speech
+                        #   quiz/recognition/handsFree/speech/feedbackSound/spellReveal  — drills & speech
+                        #   flashcardOptions/initialism/stressAudit  — drill data helpers
                         #   vocabBuild/idb/text/collections/reportIssue  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
@@ -130,3 +133,8 @@ When working from a GitHub issue:
 2. **Implement** the changes on that branch and push.
 3. **Raise a PR** when the work is complete — do not wait to be asked.
 4. **Reference the issue** in the PR body with `Closes #<issue-number>` so GitHub auto-closes it on merge.
+
+**Keep this map honest.** When a change adds or removes a route, store, or a
+`src/lib/` module — or a whole `components/` subtree — update the "Project map"
+above in the same PR. The map above drifts every few features otherwise; a
+one-line edit alongside the code keeps onboarding (human and agent) accurate.

@@ -8,14 +8,20 @@
 // The loop is deliberately fast: a correct answer advances the moment it's
 // typed, no key press needed. A wrong guess — or a Pass — reveals the correct
 // answer so the learner actually learns from the miss, then a single Enter (or
-// the Next button) moves on. There are no clickable decoy options; the input is
-// the only place an answer is produced.
+// the Next button) moves on.
+//
+// As the learner types, a short type-ahead list of candidate words appears and
+// refines as the guess gets closer (#473): a known word can be tapped instead of
+// typed in full, and two near-identical glosses (a *winter* hat vs a *brimmed*
+// hat) can be told apart by picking the exact form. See lib/flashcardOptions.js.
 //
 // Reports like the matching board did: `wrong` lists the keys that were passed
 // or guessed wrong, so only those record an incorrect attempt.
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
 
 import { phraseCorrect } from '../../lib/phrases.js'
+import { normalize } from '../../lib/text.js'
+import { buildOptions } from '../../lib/flashcardOptions.js'
 import { speak } from '../../lib/speech.js'
 import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition.js'
 import { playFeedback } from '../../stores/settings.js'
@@ -45,6 +51,9 @@ function enOf(v) {
   return Array.isArray(en) ? (en[0] ?? '') : (en ?? '')
 }
 const answer = computed(() => enOf(card.value))
+// The disambiguated label of the card's answer ("hat (winter)"), for grading a
+// picked option: two words sharing a base gloss are told apart by their label.
+const answerLabel = computed(() => card.value?.label ?? answer.value)
 
 // A typed / selected candidate is right when it matches the gloss bar case,
 // punctuation, stress and articles.
@@ -84,6 +93,27 @@ function startCard() {
   // In hearing mode the card is heard, not seen — read it out as it appears.
   if (props.exercise.audio && card.value) speak(card.value.ru)
   focusInput()
+}
+
+// Type-ahead suggestions (#473): refine as the guess improves; hidden once the
+// answer is revealed or before anything is typed.
+const options = computed(() => {
+  if (revealed.value) return []
+  const pool = props.exercise.options ?? []
+  if (!pool.length) return []
+  return buildOptions({ typed: typed.value, answer: answer.value, pool })
+})
+
+// Picking a suggestion answers the card with it. It is correct when it is the
+// card's own word or shares its disambiguated label (a true synonym), so the two
+// hats are told apart while маши́на/автомоби́ль both count as "car".
+function pickOption(o) {
+  if (revealed.value) return
+  typed.value = o.label ?? o.en ?? ''
+  const correct =
+    o.key === card.value?.key || normalize(o.label ?? o.en ?? '') === normalize(answerLabel.value)
+  if (correct) succeed()
+  else reveal()
 }
 
 // Typing the whole word right advances straight away — no Enter needed.
@@ -210,6 +240,13 @@ onBeforeUnmount(() => {
       />
     </form>
 
+    <!-- Type-ahead suggestions: tap to answer without typing the whole word. -->
+    <ul v-if="options.length" class="options" role="listbox" aria-label="Suggestions">
+      <li v-for="o in options" :key="o.key" role="option">
+        <button type="button" class="option" @click="pickOption(o)">{{ o.label }}</button>
+      </li>
+    </ul>
+
     <!-- The learning moment: the correct answer after a wrong guess or a pass. -->
     <div v-if="revealed" class="reveal">
       <span class="reveal-label">Answer</span>
@@ -271,6 +308,26 @@ onBeforeUnmount(() => {
 .combo-input.revealed {
   border-color: var(--bad);
   background: color-mix(in srgb, var(--bad) 10%, var(--card));
+}
+.options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.option {
+  font-size: 1rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+}
+.option:hover {
+  border-color: var(--primary);
 }
 .reveal {
   display: flex;
