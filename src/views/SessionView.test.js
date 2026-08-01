@@ -289,6 +289,43 @@ describe('SessionView', () => {
     expect(wrapper.text()).not.toContain('Session complete')
     expect(wrapper.text()).toContain('Fixing mistakes')
     expect(wrapper.find('.combo-input').exists()).toBe(true)
+    // A reading board's repeat stays a reading board (the Russian is shown).
+    expect(wrapper.find('.ru').exists()).toBe(true)
+    expect(wrapper.find('.big-speak').exists()).toBe(false)
+  })
+
+  it('replays missed listening words as a listening board (#472)', async () => {
+    // A heard-word (audio) flashcard board: its misses must come back as audio.
+    const keys = vocabState.words.slice(0, 2).map((w) => w.key)
+    mockExercises.value = [
+      {
+        id: 'm0',
+        kind: 'match',
+        dimension: 'hearing',
+        level: 'learning',
+        content: 'word',
+        practiceIndex: 0,
+        audio: true,
+        pairs: keys.map((k, i) => ({ key: k, ru: `слово${i}`, en: ['alpha', 'bravo'][i], label: ['alpha', 'bravo'][i] })),
+        targets: keys,
+        options: keys.map((k, i) => ({ key: k, en: ['alpha', 'bravo'][i], label: ['alpha', 'bravo'][i] })),
+      },
+    ]
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    // Card 0 wrong, card 1 correct.
+    await wrapper.find('.combo-input').setValue('zzz')
+    await wrapper.find('form').trigger('submit') // reveal
+    await wrapper.find('.next').trigger('click')
+    await wrapper.find('.combo-input').setValue('bravo')
+    for (let i = 0; i < 8; i++) await flushPromises()
+
+    expect(wrapper.text()).toContain('Fixing mistakes')
+    // The repeat board is audio: the Russian is hidden and a speaker is shown.
+    expect(wrapper.find('.big-speak').exists()).toBe(true)
+    expect(wrapper.find('.ru').exists()).toBe(false)
   })
 
   it('asks for confirmation before closing', async () => {

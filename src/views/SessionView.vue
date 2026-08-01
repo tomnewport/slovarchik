@@ -74,15 +74,24 @@ let sessionPhrases = []
 
 // Flashcard word-level repeat (#472): rather than replaying whole match boards,
 // every word missed on a board across the whole session is collected and
-// replayed once as a single combined board at the end, topped up with the
-// weakest correctly-guessed words. `flashcardWrong` is the current collection
-// window (reset each time a combined board is built, so the board's own misses
-// re-seed the next one); `flashcardCorrect` is every correctly-guessed flashcard
-// word — the top-up candidates. `flashcardOptions` is the shared autocomplete
-// pool, reused for the combined board.
-const flashcardWrong = new Set()
-const flashcardCorrect = new Set()
+// replayed once as a combined board at the end, topped up with the weakest
+// correctly-guessed words. Reading (identification) and listening (hearing)
+// misses are kept apart so each replays in its own modality — a heard-word miss
+// comes back as a heard-word board. Both maps are keyed by dimension:
+// `flashcardWrong` is the current collection window (reset each time a board is
+// built, so the board's own misses re-seed the next one); `flashcardCorrect` is
+// every correctly-guessed word — the top-up candidates. `flashcardOptions` is
+// the shared autocomplete pool, reused for the combined boards.
+const flashcardWrong = new Map()
+const flashcardCorrect = new Map()
 let flashcardOptions = []
+
+/** Get (or create) the per-dimension key set in a flashcard accumulator map. */
+function dimSet(map, dim) {
+  let s = map.get(dim)
+  if (!s) map.set(dim, (s = new Set()))
+  return s
+}
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -236,15 +245,18 @@ async function onDone(result) {
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
   // Flashcard boards report per word: collect misses (and correct guesses, as
-  // top-up candidates) so they can be replayed as one combined board (#472).
+  // top-up candidates) per modality so reading and listening replay separately
+  // as combined boards (#472).
   const isMatch = ex.kind === 'match'
   if (isMatch) {
+    const wrongSet = dimSet(flashcardWrong, ex.dimension)
+    const correctSet = dimSet(flashcardCorrect, ex.dimension)
     for (const key of (ex.targets ?? []).filter(Boolean)) {
       if (wrong?.has(key)) {
-        flashcardWrong.add(key)
-        flashcardCorrect.delete(key)
-      } else if (!flashcardWrong.has(key)) {
-        flashcardCorrect.add(key)
+        wrongSet.add(key)
+        correctSet.delete(key)
+      } else if (!wrongSet.has(key)) {
+        correctSet.add(key)
       }
     }
   }
@@ -284,30 +296,41 @@ async function onDone(result) {
   if (firstError) throw firstError
 }
 
-// When the planned pass (and any normal repeats) are done, replay all the
-// flashcard words missed this window as one combined board, topped up with the
-// weakest correctly-guessed words to a full board (#472). Runs each time the
-// session would otherwise finish, so the combined board's own misses spawn a
-// further board until a clean pass — mirroring the whole-session repeat loop but
-// at word granularity.
+// When the planned pass (and any normal repeats) are done, replay the flashcard
+// words missed this window as combined boards — one per modality, so reading
+// misses come back as a reading board and listening misses as a listening board
+// (#472) — each topped up with the weakest correctly-guessed words to a full
+// board. Runs each time the session would otherwise finish, so a board's own
+// misses spawn a further board until a clean pass — mirroring the whole-session
+// repeat loop but at word granularity.
 function injectFlashcardRepeat() {
   if (runner.phase !== 'summary' || finalized) return
-  if (flashcardWrong.size === 0) return
-  const wrongKeys = [...flashcardWrong]
-  // Weakest correctly-guessed words first (lower state = weaker), for top-up.
-  const topUpKeys = [...flashcardCorrect]
-    .filter((k) => !flashcardWrong.has(k))
-    .sort((a, b) => rank(progress.stateOf(a)) - rank(progress.stateOf(b)))
-  // Reset the window before the board runs so its own misses re-seed the next.
-  flashcardWrong.clear()
-  const board = buildCombinedFlashcard({
-    wrongKeys,
-    topUpKeys,
-    vocabById,
-    options: flashcardOptions,
-    id: `fcrep${repSeq++}`,
-  })
-  if (board) startExtraRound(runner, [board])
+  const boards = []
+  // Reading (visual) before listening (audio); a match board is only ever one
+  // of these two dimensions.
+  for (const dim of ['identification', 'hearing']) {
+    const wrongSet = flashcardWrong.get(dim)
+    if (!wrongSet || wrongSet.size === 0) continue
+    const wrongKeys = [...wrongSet]
+    // Weakest correctly-guessed words first (lower state = weaker), for top-up.
+    const correctSet = flashcardCorrect.get(dim) ?? new Set()
+    const topUpKeys = [...correctSet]
+      .filter((k) => !wrongSet.has(k))
+      .sort((a, b) => rank(progress.stateOf(a)) - rank(progress.stateOf(b)))
+    // Reset the window before the board runs so its own misses re-seed the next.
+    wrongSet.clear()
+    const board = buildCombinedFlashcard({
+      wrongKeys,
+      topUpKeys,
+      vocabById,
+      options: flashcardOptions,
+      dimension: dim,
+      audio: dim === 'hearing',
+      id: `fcrep${repSeq++}`,
+    })
+    if (board) boards.push(board)
+  }
+  if (boards.length) startExtraRound(runner, boards)
 }
 
 // Honesty system: the learner overrode a "wrong" word-bank grade, claiming a
