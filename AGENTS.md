@@ -72,12 +72,12 @@ src/
     hints.js            #   in-phrase word-hint glue
     errorToast.js       #   transient error toast state
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
-                        #   progression/schedule/batches/session/sessionRunner/practices/
-                        #     exerciseBuild/focus/achievements/streak  — the learning engine
+                        #   progression/schedule/batches/session/sessionPools/sessionRunner/
+                        #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
                         #   phrases/phraseHint/phraseContext/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
-                        #   quiz/recognition/handsFree/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
-                        #   flashcardOptions/initialism/stressAudit  — drill data helpers
+                        #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   flashcardOptions/initialism/stressAudit/homeDashboard  — drill & dashboard view-model helpers
                         #   vocabBuild/idb/text/collections/reportIssue  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json

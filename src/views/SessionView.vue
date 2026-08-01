@@ -14,8 +14,13 @@ import {
   buildExercises,
   makeVisualReplacement,
   makeReplacementPicker,
-  buildCombinedFlashcard,
 } from '../lib/exerciseBuild.js'
+import {
+  collectMatchResult,
+  buildFlashcardRepeatBoards,
+  orderPhrasesBySource,
+  durationLabel,
+} from '../lib/flashcardRepeat.js'
 import { shapeVocab } from '../lib/vocabBuild.js'
 import {
   initRunner,
@@ -82,16 +87,8 @@ let sessionPhrases = []
 // built, so the board's own misses re-seed the next one); `flashcardCorrect` is
 // every correctly-guessed word — the top-up candidates. `flashcardOptions` is
 // the shared autocomplete pool, reused for the combined boards.
-const flashcardWrong = new Map()
-const flashcardCorrect = new Map()
+const flashcards = { wrong: new Map(), correct: new Map() }
 let flashcardOptions = []
-
-/** Get (or create) the per-dimension key set in a flashcard accumulator map. */
-function dimSet(map, dim) {
-  let s = map.get(dim)
-  if (!s) map.set(dim, (s = new Set()))
-  return s
-}
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -249,16 +246,7 @@ async function onDone(result) {
   // as combined boards (#472).
   const isMatch = ex.kind === 'match'
   if (isMatch) {
-    const wrongSet = dimSet(flashcardWrong, ex.dimension)
-    const correctSet = dimSet(flashcardCorrect, ex.dimension)
-    for (const key of (ex.targets ?? []).filter(Boolean)) {
-      if (wrong?.has(key)) {
-        wrongSet.add(key)
-        correctSet.delete(key)
-      } else if (!wrongSet.has(key)) {
-        correctSet.add(key)
-      }
-    }
+    collectMatchResult(flashcards, { dimension: ex.dimension, targets: ex.targets, wrong })
   }
   // Collateral-damage guard: a phrase spelled wrong only *outside* the word being
   // assessed still counts as a wrong exercise, but the word itself was produced
@@ -305,31 +293,13 @@ async function onDone(result) {
 // repeat loop but at word granularity.
 function injectFlashcardRepeat() {
   if (runner.phase !== 'summary' || finalized) return
-  const boards = []
-  // Reading (visual) before listening (audio); a match board is only ever one
-  // of these two dimensions.
-  for (const dim of ['identification', 'hearing']) {
-    const wrongSet = flashcardWrong.get(dim)
-    if (!wrongSet || wrongSet.size === 0) continue
-    const wrongKeys = [...wrongSet]
-    // Weakest correctly-guessed words first (lower state = weaker), for top-up.
-    const correctSet = flashcardCorrect.get(dim) ?? new Set()
-    const topUpKeys = [...correctSet]
-      .filter((k) => !wrongSet.has(k))
-      .sort((a, b) => rank(progress.stateOf(a)) - rank(progress.stateOf(b)))
-    // Reset the window before the board runs so its own misses re-seed the next.
-    wrongSet.clear()
-    const board = buildCombinedFlashcard({
-      wrongKeys,
-      topUpKeys,
-      vocabById,
-      options: flashcardOptions,
-      dimension: dim,
-      audio: dim === 'hearing',
-      id: `fcrep${repSeq++}`,
-    })
-    if (board) boards.push(board)
-  }
+  const { boards, repSeq: nextSeq } = buildFlashcardRepeatBoards(flashcards, {
+    vocabById,
+    options: flashcardOptions,
+    rankOf: (key) => rank(progress.stateOf(key)),
+    repSeq,
+  })
+  repSeq = nextSeq
   if (boards.length) startExtraRound(runner, boards)
 }
 
@@ -363,10 +333,7 @@ function buildReplacementPicker() {
   const wordKeys = session?.pools?.current ?? []
   const exclude = new Set()
   for (const e of runner.plan) for (const k of e.targets ?? []) exclude.add(k)
-  const order = new Map(wordKeys.map((k, i) => [k, i]))
-  const phrases = sessionPhrases
-    .slice()
-    .sort((a, b) => (order.get(a.source) ?? Infinity) - (order.get(b.source) ?? Infinity))
+  const phrases = orderPhrasesBySource(sessionPhrases, wordKeys)
   return makeReplacementPicker({ wordKeys, phrases, vocabById, exclude })
 }
 
@@ -432,12 +399,6 @@ const summary = computed(() => {
   const durationMs = finishedAt.value && startedAt.value ? finishedAt.value - startedAt.value : 0
   return { ...base, slipped, confirmed, durationMs }
 })
-
-function durationLabel(ms) {
-  const s = Math.round(ms / 1000)
-  const m = Math.floor(s / 60)
-  return m > 0 ? `${m}m ${s % 60}s` : `${s}s`
-}
 
 // After a learning batch completes, route to batch selection so the learner
 // can choose what to study next. Mastery batches are auto-committed in

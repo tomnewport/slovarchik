@@ -16,8 +16,12 @@ import {
   isPendingConfirmation,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
-import { parseKey } from '../lib/vocabBuild.js'
-import { dimensionProgress, lastAttemptAt } from '../lib/progression.js'
+import {
+  LEARNING_DIMS,
+  MASTERY_DIMS,
+  buildWordList,
+  buildStatusWordList,
+} from '../lib/homeDashboard.js'
 import BatchSearchAdd from '../components/BatchSearchAdd.vue'
 import WordProgressModal from '../components/WordProgressModal.vue'
 
@@ -74,63 +78,23 @@ const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).l
 const learningExercise = computed(() => batchExerciseProgress('learning'))
 const masteryExercise = computed(() => batchExerciseProgress('mastery'))
 
-const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
-const MASTERY_DIMS = ['identification', 'usage', 'context']
-const DIM_LABEL = { identification: '👁️', usage: '✍️', hearing: '👂', speaking: '🗣️', context: '🛠️' }
+// Injected into the pure builders so they stay free of the store.
+const wordListCtx = computed(() => ({
+  records: progress.records,
+  hasContextDrill,
+  isPendingConfirmation,
+}))
 
-// Drop dots a word isn't actually graded on, so "done" words stay tidy:
-//  - context, at the mastery level, for words with no phrase-completion drill.
-function dimsFor(key, level, dims) {
-  if (level !== 'mastery') return dims
-  return dims.filter((d) => d !== 'context' || hasContextDrill(key))
-}
+const allLearningWords = computed(() =>
+  buildWordList(learningProgress.value, 'learning', LEARNING_DIMS, wordListCtx.value),
+)
+const allMasteryWords = computed(() =>
+  buildWordList(masteryProgress.value, 'mastery', MASTERY_DIMS, wordListCtx.value),
+)
 
-function buildWordList(batchWords, level, dims) {
-  return batchWords
-    .map((w) => {
-      const events = progress.records[w.word]?.events ?? []
-      const { ru, en } = parseKey(w.word)
-      return {
-        key: w.word,
-        ru,
-        en,
-        done: w.done,
-        // Done by criteria but awaiting the spaced confirmation review (#313).
-        pending: w.done && isPendingConfirmation(w.word),
-        lastAt: lastAttemptAt(events) ?? 0,
-        dims: dimsFor(w.word, level, dims).map((d) => ({
-          label: DIM_LABEL[d],
-          name: d,
-          ...dimensionProgress(events, level, d, { known: progress.records[w.word]?.known }),
-        })),
-      }
-    })
-    .sort((a, b) => {
-      if (a.done !== b.done) return a.done ? 1 : -1
-      return b.lastAt - a.lastAt
-    })
-}
-
-const allLearningWords = computed(() => buildWordList(learningProgress.value, 'learning', LEARNING_DIMS))
-const allMasteryWords = computed(() => buildWordList(masteryProgress.value, 'mastery', MASTERY_DIMS))
-
-function buildStatusWordList(keys) {
-  return keys.map((key) => {
-    const evs = progress.records[key]?.events ?? []
-    const { ru, en } = parseKey(key)
-    const state = stateOf(key)
-    const level = state === 'mastered' ? 'mastery' : 'learning'
-    const dims = dimsFor(key, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS).map((d) => ({
-      label: DIM_LABEL[d],
-      name: d,
-      ...dimensionProgress(evs, level, d, { known: progress.records[key]?.known }),
-    }))
-    return { key, ru, en, state, dims }
-  })
-}
-
-const atRiskWords = computed(() => buildStatusWordList(atRisk.value))
-const slippedWords = computed(() => buildStatusWordList(lost.value))
+const statusCtx = computed(() => ({ records: progress.records, stateOf, hasContextDrill }))
+const atRiskWords = computed(() => buildStatusWordList(atRisk.value, statusCtx.value))
+const slippedWords = computed(() => buildStatusWordList(lost.value, statusCtx.value))
 
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
