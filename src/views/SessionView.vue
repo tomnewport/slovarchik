@@ -10,13 +10,19 @@ import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration } from '../stores/settings.js'
 import { warmAudio } from '../lib/feedbackSound.js'
 import { STATES } from '../lib/progression.js'
-import { buildExercises, makeVisualReplacement, makeReplacementPicker } from '../lib/exerciseBuild.js'
+import {
+  buildExercises,
+  makeVisualReplacement,
+  makeReplacementPicker,
+  buildCombinedFlashcard,
+} from '../lib/exerciseBuild.js'
 import { shapeVocab } from '../lib/vocabBuild.js'
 import {
   initRunner,
   currentExercise,
   submit,
   skipDimension,
+  startExtraRound,
   runnerSummary,
   firstPassProgress,
   isRepeating,
@@ -65,6 +71,18 @@ let repSeq = 0
 // Vocab/phrase sources for re-prioritised skip replacements (set in setup()).
 let vocabById = new Map()
 let sessionPhrases = []
+
+// Flashcard word-level repeat (#472): rather than replaying whole match boards,
+// every word missed on a board across the whole session is collected and
+// replayed once as a single combined board at the end, topped up with the
+// weakest correctly-guessed words. `flashcardWrong` is the current collection
+// window (reset each time a combined board is built, so the board's own misses
+// re-seed the next one); `flashcardCorrect` is every correctly-guessed flashcard
+// word — the top-up candidates. `flashcardOptions` is the shared autocomplete
+// pool, reused for the combined board.
+const flashcardWrong = new Set()
+const flashcardCorrect = new Set()
+let flashcardOptions = []
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -125,6 +143,10 @@ async function setup() {
       if (progress.isPendingConfirmation(key)) startPending.add(key)
     }
   }
+
+  // Reuse the whole-dictionary autocomplete pool the builder attached to the
+  // match boards for the combined flashcard-repeat board (#472/#473).
+  flashcardOptions = exercises.find((e) => e.kind === 'match')?.options ?? []
 
   Object.assign(runner, initRunner(exercises))
   startedAt.value = Date.now()
@@ -206,12 +228,26 @@ async function onDone(result) {
   // eligible for speaking again in a later session.
   if (result.skip) {
     submit(runner, true)
+    injectFlashcardRepeat()
     await finalizeIfDone()
     return
   }
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
+  // Flashcard boards report per word: collect misses (and correct guesses, as
+  // top-up candidates) so they can be replayed as one combined board (#472).
+  const isMatch = ex.kind === 'match'
+  if (isMatch) {
+    for (const key of (ex.targets ?? []).filter(Boolean)) {
+      if (wrong?.has(key)) {
+        flashcardWrong.add(key)
+        flashcardCorrect.delete(key)
+      } else if (!flashcardWrong.has(key)) {
+        flashcardCorrect.add(key)
+      }
+    }
+  }
   // Collateral-damage guard: a phrase spelled wrong only *outside* the word being
   // assessed still counts as a wrong exercise, but the word itself was produced
   // correctly — so don't record (and possibly slip) it. TypeExercise reports this
@@ -240,10 +276,38 @@ async function onDone(result) {
   }
   // Always advance the session even if a persistence write failed, so the
   // exercise doesn't freeze. The error is re-thrown afterwards so Vue's global
-  // errorHandler can surface it to the user.
-  submit(runner, result.correct)
+  // errorHandler can surface it to the user. Match boards are never re-queued
+  // whole: their misses drive one combined repeat board instead (#472).
+  submit(runner, result.correct, { requeue: !isMatch })
+  injectFlashcardRepeat()
   await finalizeIfDone()
   if (firstError) throw firstError
+}
+
+// When the planned pass (and any normal repeats) are done, replay all the
+// flashcard words missed this window as one combined board, topped up with the
+// weakest correctly-guessed words to a full board (#472). Runs each time the
+// session would otherwise finish, so the combined board's own misses spawn a
+// further board until a clean pass — mirroring the whole-session repeat loop but
+// at word granularity.
+function injectFlashcardRepeat() {
+  if (runner.phase !== 'summary' || finalized) return
+  if (flashcardWrong.size === 0) return
+  const wrongKeys = [...flashcardWrong]
+  // Weakest correctly-guessed words first (lower state = weaker), for top-up.
+  const topUpKeys = [...flashcardCorrect]
+    .filter((k) => !flashcardWrong.has(k))
+    .sort((a, b) => rank(progress.stateOf(a)) - rank(progress.stateOf(b)))
+  // Reset the window before the board runs so its own misses re-seed the next.
+  flashcardWrong.clear()
+  const board = buildCombinedFlashcard({
+    wrongKeys,
+    topUpKeys,
+    vocabById,
+    options: flashcardOptions,
+    id: `fcrep${repSeq++}`,
+  })
+  if (board) startExtraRound(runner, [board])
 }
 
 // Honesty system: the learner overrode a "wrong" word-bank grade, claiming a
@@ -310,6 +374,7 @@ async function markCurrentKnown() {
 async function skip(dimension) {
   const picker = buildReplacementPicker()
   skipDimension(runner, dimension, (skipped) => makeVisualReplacement(skipped, repSeq++, picker))
+  injectFlashcardRepeat()
   await finalizeIfDone()
 }
 

@@ -18,9 +18,12 @@ const { mockExercises, defaultExercises } = vi.hoisted(() => {
   ]
   return { mockExercises: { value: defaultExercises }, defaultExercises }
 })
-vi.mock('../lib/exerciseBuild.js', () => ({
-  buildExercises: () => mockExercises.value,
-}))
+// Keep the real helpers (buildCombinedFlashcard, makeVisualReplacement, …) so
+// the flashcard-repeat flow works; only the session builder is stubbed.
+vi.mock('../lib/exerciseBuild.js', async (importActual) => {
+  const actual = await importActual()
+  return { ...actual, buildExercises: () => mockExercises.value }
+})
 
 const push = vi.fn()
 vi.mock('vue-router', () => ({
@@ -248,6 +251,44 @@ describe('SessionView', () => {
     const rec = progress.state.records.t1
     expect(rec).toBeDefined()
     expect(rec.events.some((e) => e.dimension === 'usage' && e.correct === false)).toBe(true)
+  })
+
+  it('replays missed flashcard words as one combined board at the end (#472)', async () => {
+    // A single flashcard board of three real vocab words (so the combined repeat
+    // board can resolve them from the shaped vocab).
+    const keys = vocabState.words.slice(0, 3).map((w) => w.key)
+    mockExercises.value = [
+      {
+        id: 'm0',
+        kind: 'match',
+        dimension: 'identification',
+        level: 'learning',
+        content: 'word',
+        practiceIndex: 0,
+        audio: false,
+        pairs: keys.map((k, i) => ({ key: k, ru: `слово${i}`, en: ['alpha', 'bravo', 'charlie'][i], label: ['alpha', 'bravo', 'charlie'][i] })),
+        targets: keys,
+        options: keys.map((k, i) => ({ key: k, en: ['alpha', 'bravo', 'charlie'][i], label: ['alpha', 'bravo', 'charlie'][i] })),
+      },
+    ]
+
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    // Card 0 wrong, cards 1 & 2 correct.
+    await wrapper.find('.combo-input').setValue('zzz')
+    await wrapper.find('form').trigger('submit') // reveal
+    await wrapper.find('.next').trigger('click')
+    await wrapper.find('.combo-input').setValue('bravo')
+    await wrapper.find('.combo-input').setValue('charlie')
+    // The board's `done` handler records three attempts to IndexedDB before the
+    // combined repeat board is injected — flush until that settles.
+    for (let i = 0; i < 8; i++) await flushPromises()
+
+    // Not finished: the one missed word drives a combined repeat board.
+    expect(wrapper.text()).not.toContain('Session complete')
+    expect(wrapper.text()).toContain('Fixing mistakes')
+    expect(wrapper.find('.combo-input').exists()).toBe(true)
   })
 
   it('asks for confirmation before closing', async () => {
