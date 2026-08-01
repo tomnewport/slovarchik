@@ -76,15 +76,34 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Precache the app shell *and* the vocab manifest + per-file JSON so the
-        // very first offline launch (after install) still has data to load into
-        // IDB. The source `.yml` is deliberately *not* precached — the client
-        // fetches the build-generated `.json`, so caching the YAML too would just
-        // double the precache for bytes the app never reads.
+        // Precache the *app shell only* — JS/CSS/HTML/icons/fonts. The vocab
+        // (`vocab/*.json` + `manifest.json`) is deliberately excluded (#266):
+        // precaching it pulled the full ~4.4 MB into the SW on first install and,
+        // because any word change alters the precache manifest revision, forced
+        // every client to re-download the whole precache on *every deploy* — even
+        // though only a couple of small vocab files actually changed. The `.yml`
+        // authoring source is likewise not precached (the client only ever fetches
+        // the build-generated `.json`).
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,json}'],
-        // nouns.json has outgrown Workbox's 2 MiB default; keep headroom so the
-        // vocabulary can keep growing without silently dropping out of precache.
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        globIgnores: ['**/vocab/**'],
+        // Serve the vocab from a separate runtime cache instead: cache-first for
+        // instant, offline-capable loads once a file has been seen, with a
+        // background revalidation that pulls fresh bytes when online. This keeps
+        // the app fully usable offline after the first online visit, while
+        // decoupling app-shell updates from the multi-MB word data — deploys no
+        // longer re-ship vocab the client already has. (The store in
+        // src/stores/vocab.js still owns its own IndexedDB cache + manifest-hash
+        // sync; this SW cache is the network-fetch layer beneath it.)
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => /\/vocab\/.*\.json$/.test(url.pathname),
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'slovarchik-vocab',
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
     }),
   ],
