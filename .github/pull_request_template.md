@@ -5,17 +5,19 @@
 ## Issue
 
 <!--
-Link the issue this PR resolves so GitHub auto-closes it on merge.
-This MUST be in the body (here) — a mention in the PR *title* does not auto-close.
-Keep the keyword and number on one line: "Closes #123" (or Fixes / Resolves).
+Prefer linking the issue in a COMMIT MESSAGE ("Closes #123") so the reference
+travels with the commits even when this PR is opened by someone/something other
+than the author. A "Closes #" line here in the body works too; a mention in the
+PR *title* does NOT auto-close.
+Keyword + number on one line: "Closes #123" (or Fixes / Resolves).
 -->
 
 Closes #
 
 <!--
-No issue to close (e.g. a dependency bump or pure chore)?
-Delete the "Closes #" line above and add the `no-issue` label to this PR.
-The CI "PR issue link" check requires one or the other.
+No issue to close (e.g. a dependency bump or pure chore)? Delete the "Closes #"
+line above and either add a "No-issue: <reason>" line to a commit message or
+apply the `no-issue` label. The CI "PR issue link" check requires one of these.
 -->
 
 ## Checklist

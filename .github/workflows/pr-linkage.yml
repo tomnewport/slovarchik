@@ -1,12 +1,18 @@
 name: PR issue link
 
-# Fails a pull request whose body has no issue-closing reference
-# (Closes/Fixes/Resolves #N). GitHub only auto-closes issues from a closing
-# keyword in the PR *body* — a "#123" in the title does nothing — so this guards
-# against work shipping while its tracking issue is silently orphaned open.
+# Fails a pull request that neither closes an issue nor declares it closes none.
+# GitHub auto-closes an issue only from a closing keyword (Closes/Fixes/Resolves
+# #N) in a commit merged to the default branch or in the PR body — a "#123" in
+# the title does nothing — so this guards against work shipping while its
+# tracking issue is silently orphaned open.
 #
-# Bypass: add the `no-issue` label to a PR that intentionally closes no issue.
-# Dependabot PRs are skipped automatically.
+# The reference belongs in the COMMIT MESSAGE so it survives into the PR (and
+# onto main) regardless of who opens the PR or how the body is written. The PR
+# body is also accepted. The check passes when any of these is true:
+#   - a commit message or the PR body contains "Closes/Fixes/Resolves #N";
+#   - a commit message contains an explicit "No-issue" line (nothing to close);
+#   - the PR carries the `no-issue` label;
+#   - the PR is from Dependabot.
 
 on:
   pull_request:
@@ -14,6 +20,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   require-closes:
@@ -24,27 +31,46 @@ jobs:
         with:
           script: |
             const pr = context.payload.pull_request;
-            const labels = (pr.labels || []).map((l) => l.name);
+            const { owner, repo } = context.repo;
 
+            const labels = (pr.labels || []).map((l) => l.name);
             if (labels.includes('no-issue')) {
               core.info('`no-issue` label present — skipping the issue-link check.');
               return;
             }
 
+            // Every commit message in the PR, plus the PR body.
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner,
+              repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            const commitMessages = commits.map((c) => c.commit.message);
+            const closesHaystack = [pr.body || '', ...commitMessages].join('\n\n');
+
             // GitHub's closing keywords, followed by #123, owner/repo#123, or a
             // full issues URL. Case-insensitive; keyword and reference on one line.
-            const body = pr.body || '';
-            const re =
+            const closesRe =
               /\b(?:close[sd]?|fix(?:e[sd])?|resolve[sd]?)\b\s+(?:[\w.-]+\/[\w.-]+#|#|https?:\/\/github\.com\/[\w.-]+\/[\w.-]+\/issues\/)\d+/i;
+            if (closesRe.test(closesHaystack)) {
+              core.info('Found an issue-closing reference in a commit message or the PR body. ✔');
+              return;
+            }
 
-            if (re.test(body)) {
-              core.info('Found an issue-closing reference in the PR body. ✔');
+            // Explicit opt-out: a "No-issue" line in a commit message (a PR that
+            // legitimately closes nothing — a chore, a pure refactor).
+            const noIssueRe = /^[ \t]*no[- ]issue\b/im;
+            if (commitMessages.some((m) => noIssueRe.test(m))) {
+              core.info('A commit declares "No-issue" — nothing to close. ✔');
               return;
             }
 
             core.setFailed(
-              'This PR body has no issue-closing reference.\n\n' +
-                'Add a line like "Closes #123" (or Fixes / Resolves) to the PR *body* ' +
-                'so the issue auto-closes on merge — a mention in the title does not count.\n' +
-                'If this PR intentionally closes no issue, add the `no-issue` label.',
+              'No issue link found on this PR.\n\n' +
+                'Put "Closes #123" (or Fixes / Resolves) in a commit message so it ' +
+                'travels with the PR and auto-closes the issue on merge — a mention ' +
+                'in the title does not count.\n' +
+                'If this PR closes no issue, add a "No-issue: <reason>" line to a ' +
+                'commit message, or apply the `no-issue` label.',
             );
