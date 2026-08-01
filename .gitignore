@@ -9,6 +9,7 @@ coverage
 .claude/
 
 # Generated from the vocab YAML on every build (and predev) — see
-# scripts/gen-manifest.mjs. Not committed so parallel vocab edits don't
-# conflict over it.
-public/vocab/manifest.json
+# scripts/gen-manifest.mjs. The manifest and the per-file JSON the client
+# fetches are both derived from the authoring `.yml`; not committed so parallel
+# vocab edits don't conflict over them.
+public/vocab/*.json

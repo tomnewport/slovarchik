@@ -23,7 +23,7 @@ export function loadFixtureFiles() {
 }
 
 export function loadFixtureWords() {
-  return buildWords(loadFixtureFiles().map((r) => ({ pos: r.pos, text: r.content })))
+  return buildWords(loadFixtureFiles().map((r) => ({ pos: r.pos, doc: yaml.load(r.content) })))
 }
 
 export function loadFixtureNouns() {

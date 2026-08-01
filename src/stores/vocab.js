@@ -4,16 +4,20 @@
 // — if online — fetch the manifest and download any files whose content `hash`
 // differs from the cached copy (falling back to the `updated` timestamp for
 // older manifests), storing them back in IndexedDB.
+//
+// The vocab files are served as build-generated JSON (converted from the
+// authoring YAML at build time — see scripts/gen-manifest.mjs and issue #324),
+// so the browser only ever runs `JSON.parse` (via `response.json()`), never a
+// YAML parser. We cache the *parsed* document object in IndexedDB, so cached
+// (offline) launches skip re-parsing entirely and just structured-clone it back.
 import { computed, reactive } from 'vue'
-import yaml from 'js-yaml'
 
 import { buildWords, shapeVocab, shapeNouns, shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import * as idb from '../lib/idb.js'
 
-/** File (and manifest `pos`) holding the grammar-rule explanations, not words. */
-const RULES_FILE = 'grammar-rules.yml'
-const NON_WORD_FILES = new Set([RULES_FILE])
+/** Manifest `pos` for the file holding grammar-rule explanations, not words. */
+const RULES_POS = 'grammar-rules'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const manifestUrl = () => `${BASE}vocab/manifest.json`
@@ -47,25 +51,16 @@ function stampContextDrill(words, phrasesByKey) {
   for (const w of words) w.hasContextDrill = canBuildContext(w, { phrasesByKey })
 }
 
-/** Parse a cached YAML record's top-level key, tolerating a missing/bad file. */
-function parseRecord(records, file, key) {
-  const rec = records.find((r) => r.file === file)
-  if (!rec) return null
-  try {
-    return yaml.load(rec.content)?.[key] ?? null
-  } catch {
-    return null
-  }
-}
-
 function rebuild(records) {
+  // Only records carrying a parsed `doc` are usable. A record without one is a
+  // stale entry from the pre-JSON cache format (raw YAML text under `content`);
+  // it is ignored here and pruned by the next successful network sync.
+  const usable = records.filter((r) => r.doc)
   const words = buildWords(
-    records
-      .filter((r) => !NON_WORD_FILES.has(r.file))
-      .map((r) => ({ pos: r.pos, text: r.content })),
+    usable.filter((r) => r.pos !== RULES_POS).map((r) => ({ pos: r.pos, doc: r.doc })),
   )
   const phrasesByKey = indexPhrases(shapeContextPhrases(words))
-  const rules = parseRecord(records, RULES_FILE, 'rules') ?? {}
+  const rules = usable.find((r) => r.pos === RULES_POS)?.doc?.rules ?? {}
   stampContextDrill(words, phrasesByKey)
   state.words = words
   state.contextPhrases = phrasesByKey
@@ -96,25 +91,39 @@ export async function syncFromNetwork() {
   const cached = await idb.getAllFiles()
   const cachedBy = new Map(cached.map((r) => [r.file, r]))
 
+  const entries = manifest.files ?? []
   let changed = false
-  for (const entry of manifest.files ?? []) {
+  for (const entry of entries) {
     const existing = cachedBy.get(entry.file)
     // Invalidate on the content hash when the manifest provides one, falling
     // back to the `updated` timestamp for older manifests/caches. The hash
     // changes exactly when the bytes do, so a touched-but-unchanged file no
-    // longer forces a re-download, and a changed file can never be missed.
-    if (existing && cacheToken(existing) === cacheToken(entry)) continue // up to date
+    // longer forces a re-download, and a changed file can never be missed. A
+    // record with no parsed `doc` is a stale pre-JSON entry — treat it as absent
+    // so it is refetched in the new format.
+    if (existing?.doc && cacheToken(existing) === cacheToken(entry)) continue // up to date
     const fileRes = await fetch(fileUrl(entry.file), { cache: 'no-cache' })
     if (!fileRes.ok) continue // skip a single bad file rather than fail the lot
-    const content = await fileRes.text()
+    const doc = await fileRes.json()
     await idb.putFile({
       file: entry.file,
       pos: entry.pos,
       updated: entry.updated,
       hash: entry.hash,
-      content,
+      doc,
     })
     changed = true
+  }
+
+  // Drop any cached record the manifest no longer lists — chiefly the old
+  // `*.yml` text records left behind by the pre-JSON cache format, which would
+  // otherwise linger forever and (lacking a `doc`) contribute nothing.
+  const wanted = new Set(entries.map((e) => e.file))
+  for (const rec of cached) {
+    if (!wanted.has(rec.file)) {
+      await idb.deleteFile(rec.file)
+      changed = true
+    }
   }
 
   if (changed || state.words.length === 0) {

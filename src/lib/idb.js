@@ -1,5 +1,5 @@
 // Tiny promise-based IndexedDB wrapper. Three object stores:
-//   'vocab-files' (keyed by filename)  — cached vocab YAML: { file, pos, updated, hash, content }
+//   'vocab-files' (keyed by filename)  — cached parsed vocab doc: { file, pos, updated, hash, doc }
 //   'meta'        (keyed by name)       — small app settings: { key, value }
 //   'progress'    (keyed by word)       — per-word learning record (see stores/progress.js)
 
@@ -75,6 +75,14 @@ export function putFile(record) {
   return tx(FILES_STORE, 'readwrite', (store) => {
     store.put(record)
     return { value: record }
+  })
+}
+
+/** Delete a single cached file record by its filename. */
+export function deleteFile(file) {
+  return tx(FILES_STORE, 'readwrite', (store) => {
+    store.delete(file)
+    return { value: file }
   })
 }
 
