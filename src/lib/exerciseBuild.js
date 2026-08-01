@@ -74,6 +74,42 @@ function enText(en) {
 }
 
 /**
+ * A disambiguated display gloss: the base English plus any bracketed note that
+ * tells near-identical meanings apart ("hat" + "winter" → "hat (winter)"). Used
+ * both as the flashcard option label and to grade a picked option, so the two
+ * hats can be told apart even though their base gloss is the same (#473).
+ */
+function glossLabel(en, note) {
+  return note ? `${en} (${note})` : en
+}
+
+/**
+ * A flashcard `{ key, ru, en, label }` pair for one shaped vocab word, with its
+ * shown surface form resolved (singular/plural) and a disambiguated label.
+ */
+function matchPair(w, rng) {
+  const d = vocabDisplay(w, rng)
+  const en = enText(d.en)
+  return { key: w.id, ru: d.ru, en, label: glossLabel(en, w.note) }
+}
+
+/**
+ * The shared autocomplete pool for the flashcard drill (#473): one entry per
+ * shaped vocab word, carrying its base gloss (what a guess matches against) and
+ * a disambiguated label (what is shown / graded on a pick). The same array is
+ * referenced by every match exercise, so it costs nothing to attach widely.
+ */
+function buildOptionPool(vocab) {
+  const out = []
+  for (const w of vocab.values()) {
+    const en = enText(w.en)
+    if (!en) continue
+    out.push({ key: w.id, ru: w.ru, en, label: glossLabel(en, w.note) })
+  }
+  return out
+}
+
+/**
  * Group items into tiers by how many times they have already been drawn this
  * session (the 0-used tier first, then 1-used, …), preserving the incoming
  * order within each tier. Drawing tier-by-tier guarantees a word is never used
@@ -214,10 +250,17 @@ function common(practice, practiceIndex) {
 }
 
 function buildMatch(practice, pi, ctx, make) {
-  const { pool, rest } = splitWords(practice.pool, ctx.vocab)
+  // Flashcards drill one combined pool, not one bucket at a time (#472): a single
+  // board mixes current-batch, at-risk, due and slipped words instead of running
+  // separate boards for "learning" and "known" words. The combined pool is
+  // ordered worst-understood first (current batch leads), so front-biasing still
+  // favours the words that need the most work. Falls back to the practice's own
+  // bucket pool when no session-wide pool is available (e.g. unit tests).
+  const poolKeys = ctx.matchPoolKeys ?? practice.pool
+  const { pool, rest } = splitWords(poolKeys, ctx.vocab)
   // Card count comes from the practice catalogue (`items`), defaulting to MATCH_PAIRS.
   const picked = drawN(pool, rest, practice.items ?? MATCH_PAIRS, ctx.rng, {
-    frontBias: practice.bucket === 'current',
+    frontBias: true,
     used: ctx.used,
     keyOf: (w) => w.id,
   })
@@ -226,13 +269,72 @@ function buildMatch(practice, pi, ctx, make) {
     make({
       ...common(practice, pi),
       kind: 'match',
-      pairs: picked.map((w) => {
-        const d = vocabDisplay(w, ctx.rng)
-        return { key: w.id, ru: d.ru, en: enText(d.en) }
-      }),
+      pairs: picked.map((w) => matchPair(w, ctx.rng)),
       targets: picked.map((w) => w.id),
+      // Type-ahead autocomplete candidates (#473) — the whole dictionary.
+      options: ctx.optionPool,
     }),
   ]
+}
+
+/**
+ * Build one combined flashcard exercise from the words missed across a session
+ * (#472): every wrong word, then — if that is fewer than MATCH_PAIRS — the
+ * weakest correctly-guessed words as top-up, so a short mistake list still fills
+ * a full board. When more than MATCH_PAIRS words were missed the board simply
+ * grows to hold them all. `topUpKeys` must already be ordered weakest-first.
+ *
+ * @param {object} args
+ * @param {string[]} args.wrongKeys   words answered wrong (always included)
+ * @param {string[]} [args.topUpKeys] correctly-guessed words, weakest first
+ * @param {Map} args.vocabById        shaped vocab by id (from shapeVocab)
+ * @param {Array} [args.options]      the shared autocomplete pool
+ * @param {string} [args.id]
+ * @returns {object|null} a match descriptor, or null if fewer than two words resolve
+ */
+export function buildCombinedFlashcard({
+  wrongKeys = [],
+  topUpKeys = [],
+  vocabById,
+  options = [],
+  dimension = 'identification',
+  level = 'learning',
+  audio = false,
+  id = 'fc-repeat',
+  rng = Math.random,
+} = {}) {
+  const seen = new Set()
+  const keys = []
+  const add = (k) => {
+    if (k != null && !seen.has(k) && vocabById.has(k)) {
+      seen.add(k)
+      keys.push(k)
+    }
+  }
+  for (const k of wrongKeys) add(k)
+  for (const k of topUpKeys) {
+    if (keys.length >= MATCH_PAIRS) break
+    add(k)
+  }
+  if (keys.length < 2) return null
+  return {
+    id,
+    practiceIndex: -1, // not part of the planned pass — a repeat board
+    practiceType: 'match-vocab',
+    dimension,
+    level,
+    content: 'word',
+    bucket: 'current',
+    audio,
+    kind: 'match',
+    pairs: shuffle(
+      keys.map((k) => matchPair(vocabById.get(k), rng)),
+      rng,
+    ),
+    targets: keys,
+    options,
+    repeat: true,
+  }
 }
 
 function buildWordType(practice, pi, ctx, make, kind) {
@@ -577,6 +679,20 @@ export function buildExercises(
   // Shared across every practice so draws spread over the whole lesson: a word
   // recurs only once the rest of its pool has had a turn (mid-lesson spacing).
   const used = new Map()
+  // Flashcards draw from one combined pool spanning every bucket (#472), and
+  // offer the whole dictionary as autocomplete candidates (#473). Both are built
+  // once and shared. `matchPoolKeys` is null when the session carries no pools
+  // (unit tests), so buildMatch falls back to each practice's own bucket pool.
+  const matchPoolKeys = session.pools
+    ? [
+        ...new Set([
+          ...(session.pools.current ?? []),
+          ...(session.pools.atRisk ?? []),
+          ...(session.pools.untested ?? []),
+        ]),
+      ]
+    : null
+  const optionPool = buildOptionPool(vocab)
   const ctx = {
     vocab,
     recordByKey,
@@ -587,6 +703,8 @@ export function buildExercises(
     contextPhrases,
     rules,
     used,
+    matchPoolKeys,
+    optionPool,
   }
 
   const out = []

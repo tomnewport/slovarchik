@@ -10,13 +10,19 @@ import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration } from '../stores/settings.js'
 import { warmAudio } from '../lib/feedbackSound.js'
 import { STATES } from '../lib/progression.js'
-import { buildExercises, makeVisualReplacement, makeReplacementPicker } from '../lib/exerciseBuild.js'
+import {
+  buildExercises,
+  makeVisualReplacement,
+  makeReplacementPicker,
+  buildCombinedFlashcard,
+} from '../lib/exerciseBuild.js'
 import { shapeVocab } from '../lib/vocabBuild.js'
 import {
   initRunner,
   currentExercise,
   submit,
   skipDimension,
+  startExtraRound,
   runnerSummary,
   firstPassProgress,
   isRepeating,
@@ -65,6 +71,27 @@ let repSeq = 0
 // Vocab/phrase sources for re-prioritised skip replacements (set in setup()).
 let vocabById = new Map()
 let sessionPhrases = []
+
+// Flashcard word-level repeat (#472): rather than replaying whole match boards,
+// every word missed on a board across the whole session is collected and
+// replayed once as a combined board at the end, topped up with the weakest
+// correctly-guessed words. Reading (identification) and listening (hearing)
+// misses are kept apart so each replays in its own modality — a heard-word miss
+// comes back as a heard-word board. Both maps are keyed by dimension:
+// `flashcardWrong` is the current collection window (reset each time a board is
+// built, so the board's own misses re-seed the next one); `flashcardCorrect` is
+// every correctly-guessed word — the top-up candidates. `flashcardOptions` is
+// the shared autocomplete pool, reused for the combined boards.
+const flashcardWrong = new Map()
+const flashcardCorrect = new Map()
+let flashcardOptions = []
+
+/** Get (or create) the per-dimension key set in a flashcard accumulator map. */
+function dimSet(map, dim) {
+  let s = map.get(dim)
+  if (!s) map.set(dim, (s = new Set()))
+  return s
+}
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -125,6 +152,10 @@ async function setup() {
       if (progress.isPendingConfirmation(key)) startPending.add(key)
     }
   }
+
+  // Reuse the whole-dictionary autocomplete pool the builder attached to the
+  // match boards for the combined flashcard-repeat board (#472/#473).
+  flashcardOptions = exercises.find((e) => e.kind === 'match')?.options ?? []
 
   Object.assign(runner, initRunner(exercises))
   startedAt.value = Date.now()
@@ -206,12 +237,29 @@ async function onDone(result) {
   // eligible for speaking again in a later session.
   if (result.skip) {
     submit(runner, true)
+    injectFlashcardRepeat()
     await finalizeIfDone()
     return
   }
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null
+  // Flashcard boards report per word: collect misses (and correct guesses, as
+  // top-up candidates) per modality so reading and listening replay separately
+  // as combined boards (#472).
+  const isMatch = ex.kind === 'match'
+  if (isMatch) {
+    const wrongSet = dimSet(flashcardWrong, ex.dimension)
+    const correctSet = dimSet(flashcardCorrect, ex.dimension)
+    for (const key of (ex.targets ?? []).filter(Boolean)) {
+      if (wrong?.has(key)) {
+        wrongSet.add(key)
+        correctSet.delete(key)
+      } else if (!wrongSet.has(key)) {
+        correctSet.add(key)
+      }
+    }
+  }
   // Collateral-damage guard: a phrase spelled wrong only *outside* the word being
   // assessed still counts as a wrong exercise, but the word itself was produced
   // correctly — so don't record (and possibly slip) it. TypeExercise reports this
@@ -240,10 +288,49 @@ async function onDone(result) {
   }
   // Always advance the session even if a persistence write failed, so the
   // exercise doesn't freeze. The error is re-thrown afterwards so Vue's global
-  // errorHandler can surface it to the user.
-  submit(runner, result.correct)
+  // errorHandler can surface it to the user. Match boards are never re-queued
+  // whole: their misses drive one combined repeat board instead (#472).
+  submit(runner, result.correct, { requeue: !isMatch })
+  injectFlashcardRepeat()
   await finalizeIfDone()
   if (firstError) throw firstError
+}
+
+// When the planned pass (and any normal repeats) are done, replay the flashcard
+// words missed this window as combined boards — one per modality, so reading
+// misses come back as a reading board and listening misses as a listening board
+// (#472) — each topped up with the weakest correctly-guessed words to a full
+// board. Runs each time the session would otherwise finish, so a board's own
+// misses spawn a further board until a clean pass — mirroring the whole-session
+// repeat loop but at word granularity.
+function injectFlashcardRepeat() {
+  if (runner.phase !== 'summary' || finalized) return
+  const boards = []
+  // Reading (visual) before listening (audio); a match board is only ever one
+  // of these two dimensions.
+  for (const dim of ['identification', 'hearing']) {
+    const wrongSet = flashcardWrong.get(dim)
+    if (!wrongSet || wrongSet.size === 0) continue
+    const wrongKeys = [...wrongSet]
+    // Weakest correctly-guessed words first (lower state = weaker), for top-up.
+    const correctSet = flashcardCorrect.get(dim) ?? new Set()
+    const topUpKeys = [...correctSet]
+      .filter((k) => !wrongSet.has(k))
+      .sort((a, b) => rank(progress.stateOf(a)) - rank(progress.stateOf(b)))
+    // Reset the window before the board runs so its own misses re-seed the next.
+    wrongSet.clear()
+    const board = buildCombinedFlashcard({
+      wrongKeys,
+      topUpKeys,
+      vocabById,
+      options: flashcardOptions,
+      dimension: dim,
+      audio: dim === 'hearing',
+      id: `fcrep${repSeq++}`,
+    })
+    if (board) boards.push(board)
+  }
+  if (boards.length) startExtraRound(runner, boards)
 }
 
 // Honesty system: the learner overrode a "wrong" word-bank grade, claiming a
@@ -310,6 +397,7 @@ async function markCurrentKnown() {
 async function skip(dimension) {
   const picker = buildReplacementPicker()
   skipDimension(runner, dimension, (skipped) => makeVisualReplacement(skipped, repSeq++, picker))
+  injectFlashcardRepeat()
   await finalizeIfDone()
 }
 
