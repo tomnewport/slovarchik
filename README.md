@@ -108,12 +108,14 @@ wherever the on-screen Russian keyboard is shown.
 
 The quiz/declension/progression logic lives in framework-free modules under
 [`src/lib`](src/lib) so it can be unit-tested in isolation. The vocabulary is
-**not part of the JS bundle** — it's a set of human-editable **YAML files**
-served as static assets from [`public/vocab`](public/vocab) (one per part of
-speech), parsed in the browser and cached in IndexedDB. This keeps the JS bundle
-small and constant as the word lists grow. (The service worker currently also
-precaches the YAML so the first launch works offline — see
-[How loading works](#how-loading-works) below.)
+**not part of the JS bundle** — it's authored as human-editable **YAML files** in
+[`public/vocab`](public/vocab) (one per part of speech), converted to JSON at
+build time, and fetched, parsed and cached in IndexedDB at runtime (one file per
+part of speech). This keeps the JS bundle small and constant as the word lists
+grow. The vocab is **not part of the service-worker precache** either — it's
+served from a separate runtime cache, so app-shell updates don't drag the
+multi-MB word data along on every deploy (see
+[How loading works](#how-loading-works) below).
 
 ## The vocabulary database
 
@@ -126,11 +128,15 @@ precaches the YAML so the first launch works offline — see
 3. Any file that is new or whose `hash` differs from the cached copy is
    downloaded, parsed and written back to IndexedDB; the drills update reactively.
 
-The service worker also precaches the manifest and YAML, so even the *first*
-offline launch after install has data to load. The flow lives in
-[`src/stores/vocab.js`](src/stores/vocab.js) (reactive store + sync),
-[`src/lib/idb.js`](src/lib/idb.js) (IndexedDB) and
-[`src/lib/vocabBuild.js`](src/lib/vocabBuild.js) (pure YAML → records builder).
+The service worker keeps the vocab in a **runtime cache** (`slovarchik-vocab`,
+`StaleWhileRevalidate`) rather than the app-shell precache: once you've loaded a
+file online it's available offline, and a background refresh pulls fresh bytes
+whenever you're online — so the app works **fully offline once you start using
+it, and updates itself when connected**. Because vocab is no longer precached,
+deploys re-ship only the app shell, not the multi-MB word data (issue #266). The
+flow lives in [`src/stores/vocab.js`](src/stores/vocab.js) (reactive store +
+sync), [`src/lib/idb.js`](src/lib/idb.js) (IndexedDB) and
+[`src/lib/vocabBuild.js`](src/lib/vocabBuild.js) (pure records builder).
 
 To publish updated words, just edit the YAML and commit it. `manifest.json` is a
 **generated, uncommitted** artifact — `npm run build` (and `npm run dev`)
