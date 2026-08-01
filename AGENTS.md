@@ -132,7 +132,7 @@ When working from a GitHub issue:
 1. **Branch name** — create a branch that reflects the issue, e.g. `fix/123-short-description` or `feat/123-short-description`. Do not use random suffixes.
 2. **Implement** the changes on that branch and push.
 3. **Raise a PR** when the work is complete — do not wait to be asked.
-4. **Reference the issue** in the PR body with `Closes #<issue-number>` so GitHub auto-closes it on merge.
+4. **Reference the issue** with `Closes #<issue-number>` (or `Fixes`/`Resolves`) in the PR **body** — not just the title. GitHub only auto-closes from a closing keyword in the body; a `#123` in the title does nothing. CI enforces this: the **PR issue link** check fails a PR whose body has no such reference. A PR that intentionally closes no issue (e.g. a dependency bump) needs the `no-issue` label instead.
 
 **Keep this map honest.** When a change adds or removes a route, store, or a
 `src/lib/` module — or a whole `components/` subtree — update the "Project map"
