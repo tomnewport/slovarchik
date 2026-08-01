@@ -1,11 +1,21 @@
-// Generates public/vocab/manifest.json from the vocab YAML files.
+// Generates public/vocab/manifest.json AND the per-file JSON the client fetches,
+// both from the authoring vocab YAML files.
+//
+// YAML stays the source of truth (it's what humans edit), but the browser never
+// parses it: parsing ~4.5 MB of YAML on the main thread was meaningful load-time
+// cost on low-end phones (issue #324). Instead this build step converts every
+// `<name>.yml` → `<name>.json`, the manifest points at the JSON, and the runtime
+// only ever runs the native (fast, C++) `JSON.parse` via `response.json()`.
+// `js-yaml` therefore lives in devDependencies and never ships in the bundle.
+// Like the manifest, the emitted `.json` files are derived artifacts and are not
+// committed (see .gitignore) — regenerated on every build and `predev`.
 //
 // The client (src/stores/vocab.js) invalidates its IndexedDB cache per file by
 // comparing a version token from the manifest. Historically that token was a
 // hand-edited `updated` timestamp — and forgetting to bump it shipped vocab
 // changes that clients never re-synced (see issue #323, commit #298). The token
-// is now a content `hash` derived from the file's bytes, so it changes exactly
-// when (and only when) the content changes.
+// is now a content `hash` derived from the source file's bytes, so it changes
+// exactly when (and only when) the content changes.
 //
 // The manifest is a *derived* artifact and is no longer committed: it is
 // regenerated from the working tree on every build (and on `predev`). Deriving
@@ -31,6 +41,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
+import yaml from 'js-yaml'
 
 // Canonical file → part-of-speech mapping. This is the source of truth for
 // which YAML files ship and what `pos` they carry; a new vocab file must be
@@ -52,9 +63,25 @@ export const FILES = [
 
 export const MANIFEST_VERSION = 1
 
+/** The JSON filename the client fetches for a given `.yml` source file. */
+export const jsonName = (file) => file.replace(/\.ya?ml$/, '.json')
+
 /** Short content hash of a file's raw bytes. */
 export function hashFile(dir, file) {
   return createHash('sha256').update(readFileSync(resolve(dir, file))).digest('hex').slice(0, 16)
+}
+
+/**
+ * Convert every registered `<name>.yml` into `<name>.json` on disk (the parsed
+ * document, compact-stringified). Deterministic — js-yaml preserves the file's
+ * key order and JSON.stringify preserves insertion order — so rebuilding the
+ * same commit yields byte-identical JSON.
+ */
+export function emitVocabJson(dir) {
+  for (const { file } of FILES) {
+    const doc = yaml.load(readFileSync(resolve(dir, file), 'utf8')) ?? null
+    writeFileSync(resolve(dir, jsonName(file)), JSON.stringify(doc))
+  }
 }
 
 /** ISO timestamp trimmed to second precision and normalised to UTC `Z`. */
@@ -94,14 +121,17 @@ export function assertFilesInSync(dir) {
 }
 
 /**
- * Build the manifest object. Both fields are derived from the file itself:
- * `hash` from its bytes and `updated` from `dateFor(file)` (git history in
- * production; injected in tests for determinism).
+ * Build the manifest object. Each entry points at the emitted `<name>.json`
+ * (what the client fetches), while its cache-invalidation fields stay tied to
+ * the YAML source: `hash` from the source bytes and `updated` from
+ * `dateFor(sourceFile)` (git history in production; injected in tests for
+ * determinism). Hashing the source is enough — the JSON is a deterministic
+ * derivative, so the source hash changes exactly when the served JSON would.
  */
 export function buildManifest(dir, dateFor) {
   const files = FILES.map(({ pos, file }) => ({
     pos,
-    file,
+    file: jsonName(file),
     updated: dateFor(file),
     hash: hashFile(dir, file),
   }))
@@ -113,9 +143,12 @@ function main() {
   const dir = resolve(here, '../public/vocab')
 
   assertFilesInSync(dir)
+  emitVocabJson(dir)
   const manifest = buildManifest(dir, (file) => gitUpdated(dir, file) ?? nowStamp())
   writeFileSync(resolve(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n')
-  console.log(`Wrote ${manifest.files.length} entries to public/vocab/manifest.json`)
+  console.log(
+    `Wrote ${manifest.files.length} JSON files + manifest.json to public/vocab/`,
+  )
 }
 
 // Run as a CLI only when invoked directly (not when imported by tests).

@@ -1,5 +1,7 @@
 import { fileURLToPath, URL } from 'node:url'
 import { execSync } from 'node:child_process'
+import { readdirSync, rmSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -15,6 +17,31 @@ function gitCommitHash() {
   }
 }
 
+// The vocab YAML in public/vocab/ is the authoring source, but the client only
+// ever fetches the build-generated JSON (see scripts/gen-manifest.mjs, #324).
+// Vite copies all of public/ verbatim, so without this the deploy would ship
+// both — doubling the ~5 MB vocab payload for bytes nothing loads. Drop the
+// `.yml` (and the derived manifest, which is regenerated) from the output once
+// Vite has finished writing it.
+function dropVocabYaml() {
+  return {
+    name: 'drop-vocab-yaml',
+    apply: 'build',
+    closeBundle() {
+      const dir = resolve('dist/vocab')
+      let entries
+      try {
+        entries = readdirSync(dir)
+      } catch {
+        return // no dist/vocab (e.g. custom outDir) — nothing to prune
+      }
+      for (const f of entries) {
+        if (f.endsWith('.yml')) rmSync(resolve(dir, f))
+      }
+    },
+  }
+}
+
 export default defineConfig({
   base,
   // Build-time constants surfaced on the Data screen.
@@ -24,6 +51,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    dropVocabYaml(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png'],
@@ -48,10 +76,13 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Precache the app shell *and* the vocab manifest/YAML so the very first
-        // offline launch (after install) still has data to download into IDB.
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2,json,yml}'],
-        // nouns.yml has outgrown Workbox's 2 MiB default; keep headroom so the
+        // Precache the app shell *and* the vocab manifest + per-file JSON so the
+        // very first offline launch (after install) still has data to load into
+        // IDB. The source `.yml` is deliberately *not* precached — the client
+        // fetches the build-generated `.json`, so caching the YAML too would just
+        // double the precache for bytes the app never reads.
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2,json}'],
+        // nouns.json has outgrown Workbox's 2 MiB default; keep headroom so the
         // vocabulary can keep growing without silently dropping out of precache.
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },

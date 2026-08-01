@@ -1,8 +1,13 @@
 import { describe, it, expect } from 'vitest'
 
+import yaml from 'js-yaml'
+
 import { buildWords } from './vocabBuild.js'
 import { unglossedExampleForms } from './glossCoverage.js'
 import { loadFixtureWords } from '../test/fixtures.js'
+
+// buildWords takes parsed docs; these tests author inline YAML, so parse first.
+const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
 
 describe('unglossedExampleForms', () => {
   // A noun whose usage example leans on a word that has no dictionary entry.
@@ -31,7 +36,7 @@ words:
 `
 
   it('reports a phrase word that resolves to no gloss', () => {
-    const holes = unglossedExampleForms(buildWords([{ pos: 'noun', text: base }]))
+    const holes = unglossedExampleForms(fromYaml([{ pos: 'noun', text: base }]))
     const forms = holes.map((h) => h.form)
     // «большо́й» and «краси́в» have no entry; «го́род» does.
     expect(forms).toContain('большой')
@@ -48,7 +53,7 @@ words:
     en_gb: { standard: big }
     forms: { m: большо́й, f: больша́я, n: большо́е, pl: больши́е }
 `
-    const holes = unglossedExampleForms(buildWords([{ pos: 'adjective', text: withGloss }]))
+    const holes = unglossedExampleForms(fromYaml([{ pos: 'adjective', text: withGloss }]))
     expect(holes.map((h) => h.form)).not.toContain('большой')
   })
 })

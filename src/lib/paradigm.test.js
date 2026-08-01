@@ -2,8 +2,12 @@ import { describe, it, expect } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import yaml from 'js-yaml'
 
 import { buildWords } from './vocabBuild.js'
+
+// buildWords takes parsed docs; this suite reads YAML off disk, so parse first.
+const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
 import {
   buildParadigm,
   buildParadigms,
@@ -389,7 +393,7 @@ describe('buildParadigms over the shipped vocabulary', () => {
     pos,
     text: fs.readFileSync(path.join(dir, `${file}.yml`), 'utf8'),
   }))
-  const words = buildWords(files)
+  const words = fromYaml(files)
 
   it.each([
     ['noun', 100],

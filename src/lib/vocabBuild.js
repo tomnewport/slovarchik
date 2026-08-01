@@ -1,8 +1,9 @@
-// Pure functions that turn raw YAML file contents into the normalised, queryable
-// word records used across the app. No I/O here (no fetch, no IndexedDB) so it
-// stays trivially testable; the store layer feeds it raw text.
-import yaml from 'js-yaml'
-
+// Pure functions that turn parsed vocab documents into the normalised, queryable
+// word records used across the app. No I/O and no parsing here (no fetch, no
+// IndexedDB, no YAML/JSON decode) so it stays trivially testable and — crucially
+// — carries no parser into the runtime bundle. The store layer feeds it the
+// already-parsed document object (`{ words: {...} }`); at build time the YAML is
+// converted to JSON, and the browser only ever `JSON.parse`s (see issue #324).
 import { CASES, LOCATIVE, NUMBERS } from './declension.js'
 import { stripStress } from './text.js'
 
@@ -303,16 +304,16 @@ function linkAspectPairs(words) {
 }
 
 /**
- * Build the full, sorted word list from raw file contents.
- * @param {Array<{pos: string, text: string}>} files
+ * Build the full, sorted word list from parsed vocab documents.
+ * @param {Array<{pos: string, doc: object}>} files each `doc` is the parsed
+ *   file object (`{ words: {...} }`), already decoded from JSON by the caller.
  * @returns {object[]}
  */
 export function buildWords(files) {
   const out = []
-  for (const { pos, text } of files) {
+  for (const { pos, doc } of files) {
     if (!pos) continue
-    const doc = yaml.load(text) ?? {}
-    for (const [key, word] of Object.entries(doc.words ?? {})) {
+    for (const [key, word] of Object.entries(doc?.words ?? {})) {
       out.push(normalizeWord(pos, key, word ?? {}))
     }
   }

@@ -10,6 +10,11 @@ import {
   partsOfSpeech,
 } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
+import yaml from 'js-yaml'
+
+// buildWords now takes parsed docs (the runtime feeds it build-generated JSON);
+// these tests author inline YAML, so parse it here before handing it over.
+const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
 
 describe('parseKey', () => {
   it('splits a russian=english natural key', () => {
@@ -36,7 +41,7 @@ words:
       pl_ins: воро́тами
       pl_pre: воро́тах
 `
-  const [gate] = buildWords([{ pos: 'noun', text }])
+  const [gate] = fromYaml([{ pos: 'noun', text }])
 
   it('nests flat declension keys and tracks present numbers', () => {
     expect(gate.numbers).toEqual(['pl'])
@@ -78,7 +83,7 @@ words:
       pl_gen: >-
         Suppletive genitive plural: Russian uses лет, not годо́в.
 `
-  const [god] = buildWords([{ pos: 'noun', text }])
+  const [god] = fromYaml([{ pos: 'noun', text }])
 
   it('stores the suppletive form and nests the note under the same cell', () => {
     expect(god.forms.pl.gen).toBe('лет')
@@ -129,7 +134,7 @@ words:
       sg_ins: полу́днем
       sg_pre: полу́дне
 `
-  const words = buildWords([{ pos: 'noun', text }])
+  const words = fromYaml([{ pos: 'noun', text }])
   const noon = words.find((w) => w.key === 'полдень=noon')
   const house = words.find((w) => w.key === 'дом=house')
 
@@ -172,7 +177,7 @@ words:
     declension:
       sg_nom: за́мок
 `
-    const words = buildWords([{ pos: 'noun', text }])
+    const words = fromYaml([{ pos: 'noun', text }])
     const lock = words.find((w) => w.key === 'замок=lock')
     expect(lock.heteronyms).toEqual([
       { ru: 'замо́к', gloss: 'lock' },
@@ -198,7 +203,7 @@ words:
     declension:
       sg_nom: коса́
 `
-    const words = buildWords([{ pos: 'noun', text }])
+    const words = fromYaml([{ pos: 'noun', text }])
     for (const w of words) expect(w.heteronyms).toEqual([])
   })
 
@@ -216,7 +221,7 @@ words:
     declension:
       sg_nom: за́мок
 `
-    const words = buildWords([{ pos: 'noun', text }])
+    const words = fromYaml([{ pos: 'noun', text }])
     for (const w of words) {
       for (const h of w.heteronyms) expect(h.gloss).not.toContain('undefined')
     }
@@ -236,7 +241,7 @@ words:
     en_gb:
       standard: to cost
 `
-    const [cost] = buildWords([{ pos: 'verb', text }])
+    const [cost] = fromYaml([{ pos: 'verb', text }])
     expect(cost.heteronyms).toEqual([
       { ru: 'сто́ит', gloss: 'it costs' },
       { ru: 'стои́т', gloss: 'it stands' },
@@ -261,7 +266,7 @@ words:
     en_gb:
       standard: house
 `
-  const words = buildWords([{ pos: 'noun', text }])
+  const words = fromYaml([{ pos: 'noun', text }])
 
   it('marks words that share a base English meaning', () => {
     const dochka = words.find((w) => w.key === 'дочка=daughter')
@@ -302,7 +307,7 @@ words:
     en_gb:
       standard: to sew
 `
-    const ws = buildWords([{ pos: 'verb', text: gloss }])
+    const ws = fromYaml([{ pos: 'verb', text: gloss }])
     const sew = ws.find((w) => w.key === 'шить=to sew')
     expect(sew.ambiguousEn).toEqual([])
   })
@@ -339,7 +344,7 @@ words:
     en_gb:
       standard: to hang
 `
-  const words = buildWords([{ pos: 'verb', text }])
+  const words = fromYaml([{ pos: 'verb', text }])
   const govorit = words.find((w) => w.key === 'говорить=to speak')
   const skazat = words.find((w) => w.key === 'сказать=to say')
 
@@ -429,7 +434,7 @@ words:
           - This city is big.
           - ""
 `
-    const ph = shapePhrases(buildWords([{ pos: 'noun', text }]))
+    const ph = shapePhrases(fromYaml([{ pos: 'noun', text }]))
     expect(ph).toHaveLength(1)
     // Blank entries are dropped; real alternates are kept.
     expect(ph[0].enAlt).toEqual(['This city is big.'])
@@ -457,7 +462,7 @@ describe('the bundled vocabulary has no case-only duplicate keys', () => {
 
 describe('display_number (usually-plural nouns)', () => {
   const build = (extra) =>
-    buildWords([
+    fromYaml([
       {
         pos: 'noun',
         text: `

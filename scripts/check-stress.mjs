@@ -29,7 +29,7 @@ const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public'
 function loadWords() {
   const files = readdirSync(vocabDir)
     .filter((f) => f.endsWith('.yml'))
-    .map((f) => ({ pos: POS_BY_FILE[f.replace(/\.ya?ml$/, '')], text: readFileSync(resolve(vocabDir, f), 'utf8') }))
+    .map((f) => ({ pos: POS_BY_FILE[f.replace(/\.ya?ml$/, '')], doc: yaml.load(readFileSync(resolve(vocabDir, f), 'utf8')) }))
     .filter((r) => r.pos)
   return buildWords(files)
 }
