@@ -475,7 +475,12 @@ function confirmClose() {
     <p v-if="!ready" class="muted">Loading…</p>
 
     <!-- Active exercise -->
-    <div v-else-if="runner.phase === 'exercise' && current" class="exercise">
+    <div
+      v-else-if="runner.phase === 'exercise' && current"
+      class="exercise"
+      :data-kind="current.kind"
+      :data-eid="current.id + ':' + runner.log.length"
+    >
       <span v-if="wordStatus" class="word-status" :class="wordStatus">
         {{ wordStatus === 'slipped' ? 'Slipped' : 'At risk' }}
       </span>
@@ -502,7 +507,7 @@ function confirmClose() {
     </div>
 
     <!-- Summary -->
-    <div v-else class="summary card">
+    <div v-else class="summary card" data-testid="session-summary">
       <!-- Batch completion celebration takes over the summary when earned. -->
       <div v-if="celebrated.length" class="celebration" :class="celebrated[0].level">
         <CelebrationBurst :show="true" />

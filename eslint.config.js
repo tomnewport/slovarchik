@@ -39,4 +39,12 @@ export default [
       globals: { Buffer: 'readonly', process: 'readonly', console: 'readonly' },
     },
   },
+  {
+    // Playwright e2e specs: run under Node (process/console), and their in-page
+    // callbacks use the browser globals already declared above.
+    files: ['e2e/**/*.js'],
+    languageOptions: {
+      globals: { process: 'readonly', console: 'readonly' },
+    },
+  },
 ]

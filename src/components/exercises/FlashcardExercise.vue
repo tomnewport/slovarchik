@@ -230,6 +230,7 @@ onBeforeUnmount(() => {
         type="text"
         class="combo-input"
         :class="{ revealed }"
+        :data-answer="answer"
         :readonly="revealed"
         placeholder="Type the English…"
         autocomplete="off"
