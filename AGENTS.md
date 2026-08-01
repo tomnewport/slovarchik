@@ -75,7 +75,7 @@ src/
                         #   progression/schedule/batches/session/sessionRunner/practices/
                         #     exerciseBuild/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
-                        #   phrases/phraseHint/phraseContext/glossCoverage  — phrases
+                        #   phrases/phraseHint/phraseContext/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit  — drill data helpers
                         #   vocabBuild/idb/text/collections/reportIssue  — data & utilities

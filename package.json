@@ -19,7 +19,8 @@
     "gen:manifest": "node scripts/gen-manifest.mjs",
     "check:stress": "node scripts/check-stress.mjs",
     "gen:icons": "node scripts/gen-icons.mjs",
-    "gen:adjectives": "node scripts/gen-adjective-declension.mjs"
+    "gen:adjectives": "node scripts/gen-adjective-declension.mjs",
+    "promote:glossary": "node scripts/promote-glossary.mjs"
   },
   "dependencies": {
     "vue": "^3.5.13",
