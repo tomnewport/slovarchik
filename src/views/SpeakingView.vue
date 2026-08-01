@@ -3,73 +3,30 @@ import { computed, reactive, ref, onMounted, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
 import { speak, speakSequence, cancelSpeech, SLOW_RATE } from '../lib/speech.js'
-import {
-  listen,
-  gradeSpoken,
-  wordDiff,
-  isPass,
-  recognitionSupported,
-  recognitionErrorMessage,
-} from '../lib/recognition.js'
+import { listen, recognitionSupported, recognitionErrorMessage } from '../lib/recognition.js'
 import { makeVisualReplacement } from '../lib/exerciseBuild.js'
+import {
+  MODES,
+  findMode,
+  estimateSpeechMs,
+  sequenceDurationMs,
+  needsWarmUp,
+  buildWarmUpSequence,
+  gradeGuesses,
+  buildFeedbackSequence,
+  shouldRetryEmpty,
+  CELEBRATE_MS,
+  REVIEW_MS,
+} from '../lib/speakingDrill.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 import WordBankExercise from '../components/exercises/WordBankExercise.vue'
-
-// How long the ✓ celebration shows before the hands-free loop moves on.
-const CELEBRATE_MS = 2500
-// How long to pause after the model answer is read aloud (incorrect / passed),
-// giving enough time to read the phrase and attempt to repeat it.
-const REVIEW_MS = 4000
-// Phrases with this many Russian words or more get a word-by-word warm-up in
-// hands-free mode before the first full-phrase listening attempt.
-const LONG_PHRASE_WORDS = 5
-
-// The three speaking challenges. `recLang` is what the recogniser listens for;
-// `target` is the field of the phrase the spoken answer is graded against;
-// `promptRu` reads the Russian aloud when the question appears; `showRu`/`showEn`
-// decide what's on screen before the answer is revealed.
-const MODES = [
-  {
-    id: 'echo',
-    emoji: '🗣️',
-    label: 'Echo · say it in Russian',
-    help: 'See the Russian and English, hear it read out, then say it back. Checks your pronunciation.',
-    recLang: 'ru-RU',
-    target: 'ru',
-    promptRu: true,
-    showRu: true,
-    showEn: true,
-  },
-  {
-    id: 'produce',
-    emoji: '🇷🇺',
-    label: 'Produce · translate into Russian',
-    help: 'See the English, say the Russian. The correct phrase is then read aloud.',
-    recLang: 'ru-RU',
-    target: 'ru',
-    promptRu: false,
-    showRu: false,
-    showEn: true,
-  },
-  {
-    id: 'interpret',
-    emoji: '🎧',
-    label: 'Interpret · translate into English',
-    help: 'Hear a Russian phrase, say the English — or say "pass". Hands-free with spoken feedback.',
-    recLang: 'en-GB',
-    target: 'en',
-    promptRu: true,
-    showRu: false,
-    showEn: false,
-  },
-]
 
 const canRecognize = recognitionSupported()
 const ready = computed(() => phrases.value.length > 0)
 
 const mode = ref(null)
-const modeCfg = computed(() => MODES.find((m) => m.id === mode.value) ?? null)
+const modeCfg = computed(() => findMode(mode.value))
 const handsFree = ref(true)
 const score = reactive({ right: 0, total: 0 })
 
@@ -88,17 +45,9 @@ let recCtl = null
 let seq = 0
 let visSeq = 0
 const visualExercise = ref(null)
-// Auto re-listens after a silent result, capped so a blocked mic can't spin.
+// Auto re-listens after a silent result, capped so a blocked mic can't spin
+// (the cap and fatal-error set live in speakingDrill.shouldRetryEmpty).
 let emptyRetries = 0
-const MAX_EMPTY_RETRIES = 5
-// Errors that won't fix themselves — never auto-retry listening on these.
-const FATAL_ERRORS = new Set([
-  'not-allowed',
-  'service-not-allowed',
-  'audio-capture',
-  'network',
-  'unsupported',
-])
 
 // Screen Wake Lock — keeps the display on during active drills.
 const wakeLock = ref(null)
@@ -143,13 +92,6 @@ function clearTimers() {
 const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
 )
-
-// Rough upper bound on how long an utterance takes to read, so a watchdog can
-// rescue the hands-free loop when speechSynthesis never fires `onend` (a known
-// flaky case: long utterances, backgrounded tabs, after a cancel()).
-function estimateSpeechMs(text) {
-  return Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
-}
 
 // Run `action` exactly once for the *current* question — whichever fires first,
 // the speech `onEnd` callback or the watchdog. Returns the callback to hand to
@@ -204,9 +146,8 @@ function presentPrompt() {
   if (modeCfg.value?.promptRu) {
     // For long phrases in hands-free mode, run a word-by-word warm-up sequence
     // before the first listening attempt so the learner has heard each part.
-    const ruWords = (current.value.ru ?? '').split(/\s+/).filter(Boolean)
-    if (handsFree.value && ruWords.length >= LONG_PHRASE_WORDS) {
-      presentWithWarmUp(ruWords)
+    if (needsWarmUp(current.value.ru, handsFree.value)) {
+      presentWithWarmUp()
       return
     }
     const onEnd = onceForQuestion(() => {
@@ -221,23 +162,11 @@ function presentPrompt() {
 
 // Warm-up sequence for long phrases: full Russian → English → slow Russian →
 // "Repeat each word:" → each word individually. Begins listening afterwards.
-function presentWithWarmUp(ruWords) {
-  const wordItems = ruWords.map((w) => ({
-    text: w.replace(/[^\p{L}]/gu, ''),
-    lang: 'ru-RU',
-    rate: 0.7,
-  })).filter((item) => item.text)
-  const sequence = [
-    { text: current.value.ru, lang: 'ru-RU', rate: 0.9 },
-    { text: current.value.en, lang: 'en-GB', rate: 1 },
-    { text: current.value.ru, lang: 'ru-RU', rate: SLOW_RATE },
-    { text: 'Repeat each word:', lang: 'en-GB', rate: 1 },
-    ...wordItems,
-  ]
-  const totalMs = sequence.reduce((ms, s) => ms + estimateSpeechMs(s.text), 0)
+function presentWithWarmUp() {
+  const sequence = buildWarmUpSequence(current.value)
   const onEnd = onceForQuestion(() => {
     if (handsFree.value && phase.value === 'prompt') beginListen()
-  }, totalMs + 2000)
+  }, sequenceDurationMs(sequence) + 2000)
   const spoke = speakSequence(sequence, { onEnd })
   if (!spoke) onEnd()
 }
@@ -286,8 +215,7 @@ function beginListen() {
         // and hands-free re-open the mic so a quiet moment doesn't end the loop
         // — but not on a fatal error, and not forever.
         phase.value = 'prompt'
-        const retryable = handsFree.value && !FATAL_ERRORS.has(recError.value)
-        if (retryable && emptyRetries < MAX_EMPTY_RETRIES) {
+        if (shouldRetryEmpty(handsFree.value, recError.value, emptyRetries)) {
           emptyRetries += 1
           later(() => {
             if (phase.value === 'prompt' && handsFree.value) beginListen()
@@ -307,18 +235,11 @@ function finishListening() {
 }
 
 function grade(finalText, alternatives = []) {
-  const passed = isPass(finalText)
-  const target = current.value[modeCfg.value.target]
   // Grade on the most generous of all the recogniser's guesses; the winning
   // guess (`best`) is what we show and diff against. `onEnd` already passes the
   // best guess as `finalText` and the full set as `alternatives`.
-  const guesses = alternatives.length ? alternatives : [finalText]
-  const { correct, similarity, best } = passed
-    ? { correct: false, similarity: 0, best: finalText }
-    : gradeSpoken(guesses, target)
-  // Per-word breakdown of the best guess, so the highlighted words line up with
-  // the score (skip it on a deliberate pass — there was no real attempt).
-  const diff = passed ? null : wordDiff(best, target)
+  const target = current.value[modeCfg.value.target]
+  const { correct, passed, similarity, best, diff } = gradeGuesses(finalText, alternatives, target)
   reveal({ correct, passed, similarity, diff, heard: best })
 }
 
@@ -334,23 +255,15 @@ function reveal({ correct, passed, similarity, diff, heard }) {
 
   // Spoken feedback: a short English cue, then the Russian phrase so you always
   // hear the model answer — the heart of the hands-free loop. A watchdog advances
-  // even if speechSynthesis never reports the sequence finishing.
-  const cue = correct ? 'Correct.' : passed ? 'Passed.' : 'Not quite.'
-  // Play the Russian feedback slowly when the answer was wrong so the learner
-  // gets a clear model to echo before the next attempt.
-  const ruRate = correct ? 0.9 : SLOW_RATE
+  // even if speechSynthesis never reports the sequence finishing. The Russian is
+  // read slowly when wrong so the learner gets a clear model to echo.
+  const { cue, sequence } = buildFeedbackSequence({ correct, passed }, current.value.ru)
   const advance = onceForQuestion(() => {
     if (handsFree.value && phase.value === 'graded') {
       later(nextQuestion, correct ? CELEBRATE_MS : REVIEW_MS)
     }
   }, estimateSpeechMs(cue) + estimateSpeechMs(current.value.ru) + 1500)
-  const spoke = speakSequence(
-    [
-      { text: cue, lang: 'en-GB', rate: 1 },
-      { text: current.value.ru, lang: 'ru-RU', rate: ruRate },
-    ],
-    { onEnd: advance },
-  )
+  const spoke = speakSequence(sequence, { onEnd: advance })
   if (!spoke) advance()
 }
 
