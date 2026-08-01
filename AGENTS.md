@@ -76,7 +76,7 @@ src/
                         #     exerciseBuild/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
                         #   phrases/phraseHint/phraseContext/glossCoverage  — phrases
-                        #   quiz/recognition/handsFree/speech/feedbackSound/spellReveal  — drills & speech
+                        #   quiz/recognition/handsFree/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit  — drill data helpers
                         #   vocabBuild/idb/text/collections/reportIssue  — data & utilities
   test/fixtures.js      # shared test fixtures
