@@ -1,7 +1,12 @@
 name: Deploy to GitHub Pages
 
+# Deploy only after CI (lint + test + build + e2e) has passed for the commit
+# on main, so a lint failure or broken e2e can't ship. Running after CI also
+# means we don't re-run the tests here — CI already gated them.
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -18,10 +23,15 @@ concurrency:
 
 jobs:
   build:
+    # Skip unless CI succeeded (workflow_run) or the run was triggered manually.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          # Build the exact commit CI validated (workflow_run reports it via
+          # head_sha); fall back to the default ref for manual dispatch.
+          ref: ${{ github.event.workflow_run.head_sha || github.ref }}
           # Full history so gen-manifest can read each vocab file's last-changed
           # date from git (a shallow clone would fall back to the build time).
           fetch-depth: 0
@@ -30,7 +40,6 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
       - run: npm run build
       - uses: actions/configure-pages@v5
         with:
