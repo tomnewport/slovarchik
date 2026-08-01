@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Offline-first PWA for drilling Russian vocabulary and noun declensions.",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "predev": "node scripts/gen-manifest.mjs",
     "dev": "vite",
