@@ -5,7 +5,13 @@ import { initVocab } from './stores/vocab.js'
 import { loadProgress } from './stores/progress.js'
 import { loadSettings } from './stores/settings.js'
 import { raiseError } from './stores/errorToast.js'
+import { installSeededRandom } from './lib/seed.js'
 import './style.css'
+
+// Before anything reads Math.random (vocab shaping, batch/session building), pin
+// it to a seeded generator when a seed is supplied — deterministic e2e runs
+// (#322). A no-op in normal use.
+installSeededRandom()
 
 const app = createApp(App)
 

@@ -8,6 +8,10 @@ coverage
 *.log
 .claude/
 
+# Playwright e2e output (reports, traces, recorded videos).
+test-results/
+playwright-report/
+
 # Generated from the vocab YAML on every build (and predev) — see
 # scripts/gen-manifest.mjs. The manifest and the per-file JSON the client
 # fetches are both derived from the authoring `.yml`; not committed so parallel

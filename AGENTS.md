@@ -78,7 +78,7 @@ src/
                         #   phrases/phraseHint/phraseContext/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit/homeDashboard  — drill & dashboard view-model helpers
-                        #   vocabBuild/idb/text/collections/reportIssue  — data & utilities
+                        #   vocabBuild/idb/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
 e2e/                    # Playwright specs
