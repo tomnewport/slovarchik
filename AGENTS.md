@@ -72,12 +72,12 @@ src/
     hints.js            #   in-phrase word-hint glue
     errorToast.js       #   transient error toast state
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
-                        #   progression/schedule/batches/session/sessionRunner/practices/
-                        #     exerciseBuild/focus/achievements/streak  — the learning engine
+                        #   progression/schedule/batches/session/sessionPools/sessionRunner/
+                        #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
-                        #   phrases/phraseHint/phraseContext/glossCoverage  — phrases
-                        #   quiz/recognition/handsFree/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
-                        #   flashcardOptions/initialism/stressAudit  — drill data helpers
+                        #   phrases/phraseHint/phraseContext/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
+                        #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   flashcardOptions/initialism/stressAudit/homeDashboard  — drill & dashboard view-model helpers
                         #   vocabBuild/idb/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
@@ -132,7 +132,7 @@ When working from a GitHub issue:
 1. **Branch name** — create a branch that reflects the issue, e.g. `fix/123-short-description` or `feat/123-short-description`. Do not use random suffixes.
 2. **Implement** the changes on that branch and push.
 3. **Raise a PR** when the work is complete — do not wait to be asked.
-4. **Reference the issue** in the PR body with `Closes #<issue-number>` so GitHub auto-closes it on merge.
+4. **Reference the issue in a commit message** — put `Closes #<issue-number>` (or `Fixes`/`Resolves`) in the body of a commit, not just the PR title or description. That way the link travels with the commits into whatever PR is opened, even when you don't open it yourself, and GitHub auto-closes the issue on merge. A `#123` in the title does nothing; a mention without a closing keyword doesn't auto-close. If the change genuinely closes no issue (a chore, a pure refactor), say so explicitly with a `No-issue: <reason>` line in a commit message. CI enforces this: the **PR issue link** check fails a PR with neither a closing reference (in a commit message or the PR body) nor a `No-issue` declaration (or the `no-issue` label, which Dependabot-style PRs use).
 
 **Keep this map honest.** When a change adds or removes a route, store, or a
 `src/lib/` module — or a whole `components/` subtree — update the "Project map"
