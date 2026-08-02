@@ -277,8 +277,11 @@ async function onDone(result) {
   // Always advance the session even if a persistence write failed, so the
   // exercise doesn't freeze. The error is re-thrown afterwards so Vue's global
   // errorHandler can surface it to the user. Match boards are never re-queued
-  // whole: their misses drive one combined repeat board instead (#472).
-  submit(runner, result.correct, { requeue: !isMatch })
+  // whole: their misses drive one combined repeat board instead (#472). An item
+  // corrected on its own built-in retry isn't re-queued either: that immediate
+  // retry already served as its repeat, so the first miss is recorded once
+  // without also replaying the item at the end (#447).
+  submit(runner, result.correct, { requeue: !isMatch && !result.correctedOnRetry })
   injectFlashcardRepeat()
   await finalizeIfDone()
   if (firstError) throw firstError
