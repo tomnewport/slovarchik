@@ -153,6 +153,9 @@ onBeforeUnmount(() => setHintAllowed(true))
           (one of {{ exercise.ambiguousEn.length + 1 }} Russian words for this)
         </small>
       </template>
+      <!-- Which part of speech the answer should be — e.g. "cold" the adjective
+           vs the adverb (#503). Word spelling only; a phrase has no single POS. -->
+      <small v-if="exercise.pos && !isPhrase" class="pos">{{ exercise.pos }}</small>
     </div>
 
     <form @submit.prevent="check">
@@ -224,6 +227,12 @@ onBeforeUnmount(() => setHintAllowed(true))
   align-items: center;
   gap: 0.5rem;
   font-size: 1.3rem;
+}
+.pos {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
 }
 .answer-input {
   width: 100%;

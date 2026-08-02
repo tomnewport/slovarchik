@@ -1,21 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import {
-  stripBrackets,
-  guessCorrectness,
-  tierFor,
-  buildOptions,
-  OPTION_TIERS,
-  MAX_OPTIONS,
-} from './flashcardOptions.js'
-
-// Deterministic RNG so option draws are reproducible.
-function seededRng(seed) {
-  let s = seed >>> 0
-  return () => {
-    s = (s * 1664525 + 1013904223) >>> 0
-    return s / 0xffffffff
-  }
-}
+import { stripBrackets, buildOptions, OPTION_LIMIT } from './flashcardOptions.js'
 
 describe('stripBrackets', () => {
   it('drops bracketed qualifiers and collapses whitespace', () => {
@@ -29,34 +13,6 @@ describe('stripBrackets', () => {
   })
 })
 
-describe('guessCorrectness', () => {
-  it('is 1 for a fully correct guess, ignoring brackets and case', () => {
-    expect(guessCorrectness('Hat', 'hat (winter)')).toBe(1)
-  })
-  it('scores an unfinished guess by how far it has got', () => {
-    // "spr" of "spring" (6 letters) → 3/6.
-    expect(guessCorrectness('spr', 'spring')).toBeCloseTo(0.5)
-  })
-  it('penalises wrong letters', () => {
-    // "xpr" vs "spring": positions 1,2 match ('p','r'), position 0 wrong → 2/6.
-    expect(guessCorrectness('xpr', 'spring')).toBeCloseTo(1 / 3)
-  })
-  it('is 0 for an empty guess or empty answer', () => {
-    expect(guessCorrectness('', 'spring')).toBe(0)
-    expect(guessCorrectness('spring', '')).toBe(0)
-  })
-})
-
-describe('tierFor', () => {
-  it('maps correctness to the right tier', () => {
-    expect(tierFor(1)).toBe(OPTION_TIERS[0])
-    expect(tierFor(0.95)).toBe(OPTION_TIERS[1])
-    expect(tierFor(0.85)).toBe(OPTION_TIERS[2])
-    expect(tierFor(0.5)).toBe(OPTION_TIERS[3])
-    expect(tierFor(0)).toBe(OPTION_TIERS[3])
-  })
-})
-
 describe('buildOptions', () => {
   const pool = [
     { key: 'a', en: 'hat', label: 'hat (winter)' },
@@ -67,37 +23,47 @@ describe('buildOptions', () => {
   ]
 
   it('returns nothing before anything is typed', () => {
-    expect(buildOptions({ typed: '', answer: 'hat', pool })).toEqual([])
+    expect(buildOptions({ typed: '', pool })).toEqual([])
   })
 
-  it('prefix-matches (no decoys) when the guess is fully correct', () => {
-    // "ho" is a perfect prefix of the answer "house" → 100% tier: no decoys,
-    // prefix match. Only "house"/"horse" prefix-match "ho".
-    const out = buildOptions({ typed: 'ho', answer: 'ho', pool, rng: seededRng(3) })
+  it('substring-matches the typed text against the gloss', () => {
+    // "ho" is a substring of house and horse only.
+    const out = buildOptions({ typed: 'ho', pool })
     expect(out.map((o) => o.key).sort()).toEqual(['c', 'd'])
   })
 
   it('surfaces both bracketed forms of the same base word', () => {
-    // A perfect guess of "hat" prefix-matches both hat forms and nothing else.
-    const out = buildOptions({ typed: 'hat', answer: 'hat', pool, rng: seededRng(1) })
+    // "hat" substring-matches both hats and nothing else — the whole point:
+    // telling a winter hat from a brimmed one.
+    const out = buildOptions({ typed: 'hat', pool })
     expect(out.map((o) => o.key).sort()).toEqual(['a', 'b'])
   })
 
-  it('mixes in decoys when the guess is weak (substring match)', () => {
-    // "h" is a weak guess for "spring" (0% correct) → 500-decoy substring tier.
-    // "h" substring-matches hat/hat/house/horse; "spring" is a decoy.
-    const out = buildOptions({ typed: 'h', answer: 'spring', pool, rng: seededRng(2) })
-    expect(out.length).toBeGreaterThan(0)
-    expect(out.length).toBeLessThanOrEqual(MAX_OPTIONS)
-    // The non-matching word can still appear as a decoy in the weak tier.
-    const keys = new Set(out.map((o) => o.key))
-    expect([...keys].every((k) => ['a', 'b', 'c', 'd', 'e'].includes(k))).toBe(true)
+  it('matches on an interior substring, ignoring brackets and case', () => {
+    // "OR" appears inside "horse"; the bracketed label is ignored, only `en`.
+    const out = buildOptions({ typed: 'OR', pool })
+    expect(out.map((o) => o.key)).toEqual(['d'])
   })
 
-  it('never shows more than the max', () => {
-    const big = Array.from({ length: 50 }, (_, i) => ({ key: `k${i}`, en: `word${i}`, label: `word${i}` }))
-    const out = buildOptions({ typed: 'word', answer: 'word0', pool: big, max: MAX_OPTIONS, rng: seededRng(9) })
-    expect(out.length).toBe(MAX_OPTIONS)
+  it('hides the list until fewer than the limit match', () => {
+    // Every word contains "o"? No — but build a wide field to test the cutoff.
+    const wide = Array.from({ length: OPTION_LIMIT }, (_, i) => ({
+      key: `k${i}`,
+      en: `word${i}`,
+      label: `word${i}`,
+    }))
+    // "word" matches all OPTION_LIMIT of them → too wide, list hidden.
+    expect(buildOptions({ typed: 'word', pool: wide })).toEqual([])
+    // Dropping one below the limit reveals the shortlist.
+    expect(buildOptions({ typed: 'word', pool: wide.slice(1) })).toHaveLength(OPTION_LIMIT - 1)
+  })
+
+  it('respects a custom limit', () => {
+    const out = buildOptions({ typed: 'h', pool, limit: 3 })
+    // "h" matches hat/hat/house/horse (4) → 4 >= 3, hidden.
+    expect(out).toEqual([])
+    // With a higher limit the same guess surfaces all four.
+    expect(buildOptions({ typed: 'h', pool, limit: 5 })).toHaveLength(4)
   })
 
   it('de-duplicates by key', () => {
@@ -105,7 +71,10 @@ describe('buildOptions', () => {
       { key: 'a', en: 'hat', label: 'hat' },
       { key: 'a', en: 'hat', label: 'hat' },
     ]
-    const out = buildOptions({ typed: 'ha', answer: 'ha', pool: dupPool, rng: seededRng(1) })
-    expect(out).toHaveLength(1)
+    expect(buildOptions({ typed: 'ha', pool: dupPool })).toHaveLength(1)
+  })
+
+  it('returns nothing when nothing matches', () => {
+    expect(buildOptions({ typed: 'zzz', pool })).toEqual([])
   })
 })
