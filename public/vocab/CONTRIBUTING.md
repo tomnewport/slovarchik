@@ -584,6 +584,36 @@ Keeping files sorted is mechanical — run `node scripts/sort-vocab.js
 public/vocab/<file>.yml`, which reorders entries by Russian headword while
 preserving the header/`meta` block and each entry verbatim.
 
+## The morphology oracle (is this form real Russian?)
+
+Shape tests prove a cell has the right *fields*; the stress test proves the
+*stress* sits on the right syllable. Neither proves the stored **form itself**
+is correct — if a table and a drill both read the same bad value, they agree
+and CI stays green. The morphology oracle
+([`src/lib/morphOracle.js`](../../src/lib/morphOracle.js), gated by
+`morphData.test.js`) is the independent check. Run it by hand with **`npm run
+check:morph`**. It has four checks:
+
+- **orthography** — a `й` followed by a hard vowel (`йа/йо/йу/йы`) in a
+  generated ending, where the softened `я/ё/ю/и/е` is required (`случай →
+  *слу́чайа` instead of `слу́чая`). A sequence already present in the lemma
+  (`район`, `фойе`) is never flagged.
+- **person-duplicate** — two persons in a verb's present/future spelled the
+  same (a wrong-person copy-paste, e.g. the 3sg pasted into the 3pl cell).
+- **golden** — a stored cell disagreeing with a curated correct form
+  ([`src/lib/morphGolden.js`](../../src/lib/morphGolden.js)) for an irregular /
+  special-ending / mobile-stress entry.
+- **defective** — a paradigm slot the language doesn't have, filled anyway
+  (perfective `убедиться` has no 1sg future).
+
+**When a check fires,** the usual answer is to fix the YAML. If the form is
+actually correct, record *why* in `morphGolden.js` rather than loosening a
+check: list every accepted spelling for a cell as an array (`махаю`/`машу`), add
+an impersonal verb's key to `IMPERSONAL_VERBS`, or add a truly defective slot to
+`DEFECTIVE`. That file's header documents each mechanism. Keep the oracle
+high-signal — a green run should mean "no known-bad forms", not "noise we
+learned to ignore".
+
 ## Adding a whole new part of speech
 
 1. Create `public/vocab/<name>.yml` with a `words:` block.
