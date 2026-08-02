@@ -16,7 +16,6 @@ import { computed, reactive, ref, onMounted, onUnmounted } from 'vue'
 import { vocab, phrases, state as vocabState, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
 import { loadSettings, playFeedback } from '../stores/settings.js'
-import { STATES } from '../lib/progression.js'
 import { speakSequence, cancelSpeech, speechSupported } from '../lib/speech.js'
 import { recognitionSupported, recognitionErrorMessage, listen } from '../lib/recognition.js'
 import {
@@ -28,6 +27,7 @@ import {
   isQuit,
   isPass,
 } from '../lib/handsFree.js'
+import { FATAL_ERRORS, buildPools } from '../lib/handsFreePools.js'
 
 const canRecognize = recognitionSupported()
 const canSpeak = speechSupported()
@@ -40,14 +40,6 @@ const ADVANCE_MS = 700
 const MAX_SILENCE = 60
 // How many current-batch words to open each session with as a gentle warm-up.
 const WARMUP_COUNT = 3
-// Errors that won't fix themselves — pause the loop instead of auto-retrying.
-const FATAL_ERRORS = new Set([
-  'not-allowed',
-  'service-not-allowed',
-  'audio-capture',
-  'network',
-  'unsupported',
-])
 
 const ready = ref(false)
 // phase: 'welcome' | 'reading' | 'listening' | 'feedback' | 'ended'
@@ -72,46 +64,19 @@ const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
 )
 
-const rank = (s) => STATES.indexOf(s)
-
-// --- Eligible pools (issue #25's gating rules) ------------------------------
+// --- Eligible pools (issue #25's gating rules live in lib/handsFreePools) ----
 
 const learningKeys = computed(() => new Set(progress.state.learning?.words ?? []))
 
-// "New words" come from the current learning batch (which includes never-seen
-// words); fall back to anything actively being learned if no batch is set.
-const newWordsPool = computed(() => {
-  const inBatch = vocab.value.filter((w) => learningKeys.value.has(w.id))
-  if (inBatch.length) return inBatch
-  return vocab.value.filter((w) => progress.stateOf(w.id) === 'learning')
-})
-
-// Words the learner has got right at least once are eligible to be *tested*.
-const knownWords = computed(() => vocab.value.filter((w) => progress.hasBeenCorrect(w.id)))
-
-// English→Russian phrase production is only offered once the owning word is
-// learned (a stand-in for "translated a few times and spoken aloud").
-const phraseToRuPool = computed(() =>
-  phrases.value.filter((p) => rank(progress.stateOf(p.source)) >= rank('learned')),
+const pools = computed(() =>
+  buildPools({
+    vocab: vocab.value,
+    phrases: phrases.value,
+    learningKeys: learningKeys.value,
+    stateOf: progress.stateOf,
+    hasBeenCorrect: progress.hasBeenCorrect,
+  }),
 )
-
-// Phrase listening/repetition practice is gated to phrases whose source word
-// is in the current learning batch or has been answered correctly at least
-// once — prevents drilling completely unknown vocabulary.
-const phrasePool = computed(() =>
-  phrases.value.filter(
-    (p) => learningKeys.value.has(p.source) || progress.hasBeenCorrect(p.source),
-  ),
-)
-
-const pools = computed(() => ({
-  'new-words': newWordsPool.value,
-  'word-test': knownWords.value,
-  'translate-word': knownWords.value,
-  'repeat-phrase': phrasePool.value,
-  'translate-phrase': phrasePool.value,
-  'phrase-to-russian': phraseToRuPool.value,
-}))
 
 const hasActivities = computed(() => availableTypes(pools.value).length > 0)
 
@@ -271,7 +236,7 @@ function beginSession() {
   silenceRetries = 0
   lastKey = null
   // Open with a few words from the current batch as a gentle warm-up.
-  warmup = warmupActivities(newWordsPool.value, WARMUP_COUNT)
+  warmup = warmupActivities(pools.value['new-words'], WARMUP_COUNT)
   acquireWakeLock()
   nextItem()
 }
