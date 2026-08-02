@@ -50,6 +50,17 @@ describe('FlashcardExercise', () => {
     expect(wrapper.find('.count').text()).toContain('Card 1 of 2')
   })
 
+  it('shows the part of speech on the card when present (#503)', () => {
+    const withPos = { ...exercise, pairs: [{ key: 'a', ru: 'весна', en: 'spring', pos: 'noun' }] }
+    const wrapper = mount(FlashcardExercise, { props: { exercise: withPos } })
+    expect(wrapper.find('.pos').text()).toBe('noun')
+  })
+
+  it('omits the part-of-speech tag when the card carries none', () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    expect(wrapper.find('.pos').exists()).toBe(false)
+  })
+
   it('renders no options when the exercise carries no autocomplete pool', () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
     expect(wrapper.findAll('.option').length).toBe(0)
