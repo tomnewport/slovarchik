@@ -33,6 +33,10 @@ const component = computed(() => (isKeyboard.value ? BlindEndings : DragTable))
 
 const graded = ref(false)
 const wasCorrect = ref(false)
+// A wrong first check spent the one built-in retry; the second check grades for
+// real. A retry success is never first-try evidence, so it can't count double
+// (#447).
+const retried = ref(false)
 // Whether the learner switched the keyboard hint on at any point. A table
 // typed correctly with the hint untouched counts double (and gets a 🔥).
 const hintUsed = ref(false)
@@ -45,11 +49,17 @@ watch(
 )
 
 const double = computed(
-  () => isKeyboard.value && wasCorrect.value && !hintUsed.value && !!paradigm.value,
+  () =>
+    isKeyboard.value &&
+    wasCorrect.value &&
+    !hintUsed.value &&
+    !retried.value &&
+    !!paradigm.value,
 )
 
 // First unaided check slipped: unlock the keyboard hint for the aided retry.
 function onRetry() {
+  retried.value = true
   setHintAllowed(true)
   playFeedback(false)
 }
@@ -65,7 +75,13 @@ function next() {
   // No paradigm to drill (shouldn't happen — the builder filters these out) is
   // an auto-pass, not a wrong answer, so the runner can't get stuck re-queuing
   // an unanswerable exercise forever.
-  emit('done', { correct: paradigm.value ? wasCorrect.value : true, double: double.value })
+  // Preserve the first miss: a table corrected on the built-in retry reports the
+  // initial failure (`correct: false`) flagged `correctedOnRetry` (#447).
+  emit('done', {
+    correct: paradigm.value ? (retried.value ? false : wasCorrect.value) : true,
+    correctedOnRetry: retried.value && wasCorrect.value,
+    double: double.value,
+  })
 }
 
 onMounted(() => {

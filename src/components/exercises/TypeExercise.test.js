@@ -52,7 +52,12 @@ describe('TypeExercise', () => {
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')).toBeTruthy()
     // Correct without touching the hint → counts double, with a 🔥 burst.
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true, wordCorrect: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      correctedOnRetry: false,
+      double: true,
+      wordCorrect: true,
+    })
   })
 
   it('fires a burst and counts double when correct without the hint', async () => {
@@ -64,7 +69,12 @@ describe('TypeExercise', () => {
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(true)
 
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true, wordCorrect: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      correctedOnRetry: false,
+      double: true,
+      wordCorrect: true,
+    })
   })
 
   it('does not count double (or burst) once the hint has been switched on', async () => {
@@ -77,7 +87,12 @@ describe('TypeExercise', () => {
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
 
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false, wordCorrect: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      correctedOnRetry: false,
+      double: false,
+      wordCorrect: true,
+    })
   })
 
   it('offers a retry on the first wrong answer, then reveals on the second', async () => {
@@ -95,8 +110,38 @@ describe('TypeExercise', () => {
 
     await wrapper.find('button.next').trigger('click')
     // A word (no targetTokens): the slip is necessarily in the word, so it is
-    // penalised — wordCorrect mirrors the failed grade.
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false, double: false, wordCorrect: false })
+    // penalised — wordCorrect mirrors the failed grade. Both tries wrong, so it
+    // is not a corrected retry.
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: false,
+      double: false,
+      wordCorrect: false,
+    })
+  })
+
+  it('records the first miss (not a double success) when a retry corrects a word (#447)', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    // Wrong first, then the right answer on the retry — without touching the hint.
+    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.text()).toContain('Not quite')
+
+    await wrapper.find('input[lang="ru"]').setValue('дом')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.text()).toContain('Correct')
+    // No 🔥: a corrected retry is not first-try recall.
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
+
+    await wrapper.find('button.next').trigger('click')
+    // The first retrieval failed: report the miss, flagged as corrected on retry,
+    // never a double first-try success.
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: true,
+      double: false,
+      wordCorrect: false,
+    })
   })
 
   it('accepts an alsoRu synonym as correct', async () => {
@@ -139,6 +184,27 @@ describe('TypeExercise', () => {
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({
       correct: false,
+      correctedOnRetry: false,
+      double: false,
+      wordCorrect: true,
+    })
+  })
+
+  it('spares the word but records the phrase miss when a retry fixes a slip elsewhere (#447)', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // First try: assessed word (школу) right, slip elsewhere ("ыду").
+    await wrapper.find('input[lang="ru"]').setValue('я ыду в школу')
+    await wrapper.find('button.check').trigger('click') // first wrong → retry
+    // Retry fixes the other word — the whole phrase is now correct.
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школу')
+    await wrapper.find('button.check').trigger('click')
+
+    await wrapper.find('button.next').trigger('click')
+    // The exercise was missed first try (corrected on retry), but the word's own
+    // first retrieval succeeded, so it is still spared a penalty.
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: true,
       double: false,
       wordCorrect: true,
     })
@@ -154,6 +220,7 @@ describe('TypeExercise', () => {
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({
       correct: false,
+      correctedOnRetry: false,
       double: false,
       wordCorrect: false,
     })

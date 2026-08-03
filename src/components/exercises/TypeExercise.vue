@@ -32,11 +32,16 @@ const isPhrase = computed(() => props.exercise.content === 'phrase')
 const typed = ref('')
 const checked = ref(false)
 const wasCorrect = ref(false)
-// For a phrase, whether the *word being assessed* was spelled right — true even
-// when the whole phrase is wrong if the only slip was elsewhere. Lets the session
-// spare the word a penalty while still counting the exercise as incorrect. For a
-// single word (no targetTokens) this always tracks wasCorrect.
-const wordCorrect = ref(false)
+// Whether the first, unaided check was correct. This — not the final graded
+// state — is the evidence of unaided recall: a wrong first attempt corrected on
+// the retry never earns first-try credit (#447).
+const firstTryCorrect = ref(false)
+// For a phrase, whether the *word being assessed* was spelled right on that
+// first, unaided attempt — true even when the whole phrase was wrong if the only
+// slip was elsewhere. Lets the session spare the word a penalty while still
+// counting the exercise as incorrect. For a single word (no targetTokens) this
+// tracks firstTryCorrect.
+const firstTryWordCorrect = ref(false)
 // On a first wrong answer offer one retry before revealing. Once the learner
 // has retried (or they got it right), this stays true so we don't loop.
 const retried = ref(false)
@@ -55,8 +60,9 @@ watch(
     if (on) hintUsed.value = true
   },
 )
-// Correct and never reached for the hint — the answer the learner truly knew.
-const double = computed(() => wasCorrect.value && !hintUsed.value)
+// Correct on the first try and never reached for the hint — the answer the
+// learner truly knew unaided. A retry success never qualifies (#447).
+const double = computed(() => firstTryCorrect.value && !hintUsed.value)
 
 const answer = computed(() => typingSequence(props.exercise.ru))
 
@@ -99,6 +105,16 @@ function check() {
   if (checked.value) return
   const targets = [props.exercise.ru, ...(props.exercise.alsoRu ?? [])]
   wasCorrect.value = phraseCorrect(typed.value, targets)
+  if (!retried.value) {
+    // Capture the first, unaided attempt's outcome — the only evidence of
+    // unaided recall. A phrase can be wrong overall yet the assessed word
+    // spelled right (a slip elsewhere); coerce to a clean boolean
+    // (assessedWordCorrect → null for a single word, where the whole answer *is*
+    // the word).
+    firstTryCorrect.value = wasCorrect.value
+    firstTryWordCorrect.value =
+      wasCorrect.value || assessedWordCorrect(typed.value, props.exercise.targetTokens) === true
+  }
   if (!wasCorrect.value && !retried.value) {
     retried.value = true
     // Mark where the unaided attempt slipped (when close), then unlock the
@@ -111,11 +127,6 @@ function check() {
     return
   }
   checked.value = true
-  // A phrase can be wrong overall yet the assessed word spelled right (a slip
-  // elsewhere); coerce to a clean boolean (assessedWordCorrect → null for a
-  // single word, where the whole answer *is* the word).
-  wordCorrect.value =
-    wasCorrect.value || assessedWordCorrect(typed.value, props.exercise.targetTokens) === true
   playFeedback(wasCorrect.value)
   if (double.value) showFire.value = true
   // Read the Russian aloud once the answer is resolved so the learner hears the
@@ -124,7 +135,15 @@ function check() {
 }
 
 function next() {
-  emit('done', { correct: wasCorrect.value, double: double.value, wordCorrect: wordCorrect.value })
+  // Preserve the first miss: a retry success reports the initial failure
+  // (`correct: false`) flagged `correctedOnRetry`, so the session records the
+  // real first-try outcome instead of two first-try successes (#447).
+  emit('done', {
+    correct: firstTryCorrect.value,
+    correctedOnRetry: retried.value && wasCorrect.value,
+    double: double.value,
+    wordCorrect: firstTryWordCorrect.value,
+  })
 }
 
 onMounted(() => {

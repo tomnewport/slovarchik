@@ -253,6 +253,30 @@ describe('SessionView', () => {
     expect(rec.events.some((e) => e.dimension === 'usage' && e.correct === false)).toBe(true)
   })
 
+  it('records a single first-try miss for a word corrected on its built-in retry (#447)', async () => {
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    // ex0: wrong first, then corrected on the retry without the hint.
+    await wrapper.find('input[lang="ru"]').setValue('wrong')
+    await wrapper.find('button.check').trigger('click') // first wrong → retry
+    await wrapper.find('input[lang="ru"]').setValue('дом')
+    await wrapper.find('button.check').trigger('click') // corrected on retry
+    await wrapper.find('button.next').trigger('click')
+    await flushPromises()
+    await flushPromises()
+
+    // The corrected retry is not re-queued: the session moves straight on to ex1
+    // rather than repeating ex0.
+    expect(wrapper.text()).not.toContain('Fixing mistakes')
+    // Exactly one attempt is recorded, and it is the first-try miss — never two
+    // first-try successes.
+    const rec = progress.state.records.t1
+    expect(rec).toBeDefined()
+    const usage = rec.events.filter((e) => e.dimension === 'usage')
+    expect(usage).toEqual([expect.objectContaining({ correct: false })])
+  })
+
   it('replays missed flashcard words as one combined board at the end (#472)', async () => {
     // A single flashcard board of three real vocab words (so the combined repeat
     // board can resolve them from the shaped vocab).

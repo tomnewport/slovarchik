@@ -43,7 +43,11 @@ describe('InflectExercise', () => {
     })
     expect(wrapper.text()).toContain('No inflection table')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false })
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      correctedOnRetry: false,
+      double: false,
+    })
     vocabState.words = saved
   })
 
@@ -61,7 +65,11 @@ describe('InflectExercise', () => {
     await wrapper.find('.row button.primary').trigger('click') // Check
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(true)
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      correctedOnRetry: false,
+      double: true,
+    })
   })
 
   it('unlocks the hint after a wrong first check and grades the retry', async () => {
@@ -77,8 +85,32 @@ describe('InflectExercise', () => {
     await fillTable(wrapper, true)
     await wrapper.find('.row button.primary').trigger('click') // second check grades
     await wrapper.find('button.next').trigger('click')
-    // Correct on the retry, but the hint was used → full (single) credit only.
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false })
+    // Correct on the retry: the first check missed, so this is a corrected retry,
+    // never a first-try (let alone double) success.
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: true,
+      double: false,
+    })
+  })
+
+  it('records the first miss (no double, no 🔥) when a retry corrects the table unaided (#447)', async () => {
+    const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
+    await fillTable(wrapper, false)
+    await wrapper.find('.row button.primary').trigger('click') // first check → retry
+    expect(wrapper.text()).toContain('Not quite')
+
+    // Correct it on the retry without ever reaching for the keyboard hint.
+    await fillTable(wrapper, true)
+    await wrapper.find('.row button.primary').trigger('click') // second check grades
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: true,
+      double: false,
+    })
   })
 
   it('does not count a hint-assisted first-try success double', async () => {
@@ -91,6 +123,10 @@ describe('InflectExercise', () => {
     await fillTable(wrapper, true)
     await wrapper.find('.row button.primary').trigger('click')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, double: false })
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      correctedOnRetry: false,
+      double: false,
+    })
   })
 })
