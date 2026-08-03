@@ -21131,6 +21131,7 @@ words:
     usage:
       - ru: Поглядя́т они́ на не́бо и улыбну́тся.
         en_gb: They will look at the sky and smile.
+        inflect: { token: 1, tense: future, person: 3pl, rule: verb-future }
       - ru: Она́ погляде́ла на меня́ с улы́бкой.
         en_gb: She looked at me with a smile.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
