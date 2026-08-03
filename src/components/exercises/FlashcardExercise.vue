@@ -51,6 +51,9 @@ function enOf(v) {
   return Array.isArray(en) ? (en[0] ?? '') : (en ?? '')
 }
 const answer = computed(() => enOf(card.value))
+// The card's part of speech ("noun", "verb", …), shown as a small tag so the
+// learner knows what kind of word they're being asked for (#503).
+const pos = computed(() => card.value?.pos ?? '')
 // The disambiguated label of the card's answer ("hat (winter)"), for grading a
 // picked option: two words sharing a base gloss are told apart by their label.
 const answerLabel = computed(() => card.value?.label ?? answer.value)
@@ -95,13 +98,14 @@ function startCard() {
   focusInput()
 }
 
-// Type-ahead suggestions (#473): refine as the guess improves; hidden once the
-// answer is revealed or before anything is typed.
+// Type-ahead suggestions (#473, refined in #503): a substring shortlist that
+// appears once the guess narrows the field; hidden once the answer is revealed
+// or before anything is typed.
 const options = computed(() => {
   if (revealed.value) return []
   const pool = props.exercise.options ?? []
   if (!pool.length) return []
-  return buildOptions({ typed: typed.value, answer: answer.value, pool })
+  return buildOptions({ typed: typed.value, pool })
 })
 
 // Picking a suggestion answers the card with it. It is correct when it is the
@@ -221,6 +225,9 @@ onBeforeUnmount(() => {
       </template>
     </div>
 
+    <!-- Part of speech: which kind of word the learner is being asked for. -->
+    <p v-if="pos" class="pos muted">{{ pos }}</p>
+
     <label class="visually-hidden" for="fc-input">Type the English</label>
     <form @submit.prevent="onSubmit">
       <input
@@ -230,6 +237,7 @@ onBeforeUnmount(() => {
         type="text"
         class="combo-input"
         :class="{ revealed }"
+        :data-answer="answer"
         :readonly="revealed"
         placeholder="Type the English…"
         autocomplete="off"
@@ -295,6 +303,13 @@ onBeforeUnmount(() => {
 }
 .hint {
   font-size: 0.9rem;
+}
+.pos {
+  margin: -0.4rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .combo-input {
   width: 100%;

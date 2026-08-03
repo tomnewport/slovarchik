@@ -54,6 +54,11 @@ const overridden = ref(false)
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
 
+// The correct tile sequence, exposed (JSON) for e2e answer recovery (#322). The
+// same tokens the feedback line shows once checked, made machine-readable so a
+// test can tap them in order without solving the translation itself.
+const answerTokens = computed(() => JSON.stringify(listeningTokens(props.exercise.en)))
+
 // Tiles still available to place, in bank order.
 const available = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id)))
 // The available tiles whose text begins with the typed prefix.
@@ -178,7 +183,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="grid" style="gap: 1rem">
+  <div class="grid" style="gap: 1rem" :data-answer-tokens="answerTokens">
     <div class="prompt">
       <template v-if="exercise.audio">
         <span class="muted">Translate what you hear</span>

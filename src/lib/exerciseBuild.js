@@ -84,13 +84,14 @@ function glossLabel(en, note) {
 }
 
 /**
- * A flashcard `{ key, ru, en, label }` pair for one shaped vocab word, with its
- * shown surface form resolved (singular/plural) and a disambiguated label.
+ * A flashcard `{ key, ru, en, label, pos }` pair for one shaped vocab word, with
+ * its shown surface form resolved (singular/plural), a disambiguated label, and
+ * its part of speech (shown on the card, #503).
  */
 function matchPair(w, rng) {
   const d = vocabDisplay(w, rng)
   const en = enText(d.en)
-  return { key: w.id, ru: d.ru, en, label: glossLabel(en, w.note) }
+  return { key: w.id, ru: d.ru, en, label: glossLabel(en, w.note), pos: w.pos }
 }
 
 /**
@@ -359,6 +360,9 @@ function buildWordType(practice, pi, ctx, make, kind) {
       ru: d.ru,
       en: enText(d.en),
       note: w.note,
+      // Part of speech, so a spelling prompt says which kind of word to spell —
+      // "cold" as an adjective vs an adverb, say (#503).
+      pos: w.pos,
       // `alsoRu` are alternate singular spellings — only offer them when the
       // singular is being shown, or they wouldn't match the plural prompt.
       ...(d.number === 'sg' && w.alsoRu?.length ? { alsoRu: w.alsoRu } : {}),
@@ -534,6 +538,7 @@ function visType(content, skipped, id) {
     ru: content.ru,
     en: content.en,
     ...(content.note !== undefined ? { note: content.note } : {}),
+    ...(content.pos ? { pos: content.pos } : {}),
   }
 }
 
@@ -594,7 +599,7 @@ export function makeReplacementPicker({
       const v = vocabById.get(k)
       if (!v) return null
       const d = vocabDisplay(v, rng)
-      return { key: k, ru: d.ru, en: enText(d.en), note: v.note }
+      return { key: k, ru: d.ru, en: enText(d.en), note: v.note, pos: v.pos }
     },
     phrase() {
       const p = nextPhrase()
@@ -626,7 +631,7 @@ export function makeVisualReplacement(skipped, seq, picker = null) {
   if (skipped?.kind === 'match' && skipped.pairs?.length) {
     return skipped.pairs
       .map((pair, i) => {
-        const content = pick(true) || { key: pair.key, ru: pair.ru, en: pair.en }
+        const content = pick(true) || { key: pair.key, ru: pair.ru, en: pair.en, pos: pair.pos }
         return content.ru && content.en ? visType(content, skipped, `vis${seq}_${i}`) : null
       })
       .filter(Boolean)
@@ -637,7 +642,7 @@ export function makeVisualReplacement(skipped, seq, picker = null) {
     pick(isWord) ||
     (skipped?.ru && skipped?.en
       ? isWord
-        ? { key: (skipped.targets ?? [])[0], ru: skipped.ru, en: skipped.en, note: skipped.note }
+        ? { key: (skipped.targets ?? [])[0], ru: skipped.ru, en: skipped.en, note: skipped.note, pos: skipped.pos }
         : { source: (skipped.targets ?? [])[0], ru: skipped.ru, en: skipped.en, enAlt: skipped.enAlt }
       : null)
   if (!content) return null

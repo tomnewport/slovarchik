@@ -240,6 +240,7 @@ onMounted(() => {
             :key="opt.id"
             type="button"
             class="case-btn"
+            :data-correct="opt.correct ? 'true' : 'false'"
             :class="{
               correct: resolved[si]?.id === opt.id,
               wrong: (wrongTried[si] ?? []).includes(opt.id),

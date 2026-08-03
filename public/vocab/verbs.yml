@@ -8065,8 +8065,8 @@ words:
         "1sg": зада́м
         "2sg": зада́шь
         "3sg": зада́ст
-        "1pl": зади́м
-        "2pl": зади́те
+        "1pl": задади́м
+        "2pl": задади́те
         "3pl": зададу́т
       past_m: за́дал
       past_f: задала́
@@ -17335,7 +17335,7 @@ words:
         "3sg": освети́т
         "1pl": освети́м
         "2pl": освети́те
-        "3pl": освети́т
+        "3pl": осветя́т
       past_m: освети́л
       past_f: освети́ла
       past_n: освети́ло
@@ -30583,7 +30583,7 @@ words:
     conjugation:
       future:
         "1sg": рассмею́сь
-        "2sg": рассмеётесь
+        "2sg": рассмеёшься
         "3sg": рассмеётся
         "1pl": рассмеёмся
         "2pl": рассмеётесь
@@ -36647,7 +36647,6 @@ words:
       standard: to make sure (to convince oneself)
     conjugation:
       future:
-        "1sg": убежду́сь
         "2sg": убеди́шься
         "3sg": убеди́тся
         "1pl": убеди́мся
@@ -36658,18 +36657,18 @@ words:
       past_n: убеди́лось
       past_pl: убеди́лись
     usage:
-      - ru: Я убежду́сь, что дверь закры́та.
-        en_gb: I will make sure the door is closed.
-        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
+      - ru: Ты убеди́шься, что дверь закры́та.
+        en_gb: You will make sure the door is closed.
+        inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Она́ убеди́лась в его́ правоте́.
         en_gb: She convinced herself of his rightness.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы убеди́лись в успе́хе пла́на.
         en_gb: We became convinced of the plan's success.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
-      - ru: Я убежду́сь в его́ че́стности за́втра.
-        en_gb: I will make sure of his honesty tomorrow.
-        inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
+      - ru: Мы убеди́мся в его́ че́стности за́втра.
+        en_gb: We will make sure of his honesty tomorrow.
+        inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я убеди́лся бы сам, пре́жде чем ве́рить.
         en_gb: I would make sure myself before believing it.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }

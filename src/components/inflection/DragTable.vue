@@ -161,6 +161,7 @@ function check() {
                 >ⓘ</button>
               <div
                 class="drop"
+                :data-answer="cellAt(row.key, col.key).form"
                 :class="{
                   filled: placed[cellKey(row.key, col.key)] != null,
                   correct: checked && isCorrect(cellKey(row.key, col.key)) && !hasStressMismatch(cellKey(row.key, col.key)),

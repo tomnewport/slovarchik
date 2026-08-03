@@ -31,6 +31,16 @@ const exercise = {
 }
 
 describe('TypeExercise', () => {
+  it('shows the part of speech the answer should be (#503)', () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: { ...exercise, en: 'cold', pos: 'adjective' } } })
+    expect(wrapper.find('.pos').text()).toBe('adjective')
+  })
+
+  it('omits the part-of-speech tag when the exercise carries none', () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    expect(wrapper.find('.pos').exists()).toBe(false)
+  })
+
   it('shows the English cue and grades a correct answer', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
     expect(wrapper.text()).toContain('house')
