@@ -55,7 +55,7 @@ const GROUPS = {
   ],
   leave: [
     'genuinely-ambiguous', 'multi-token-ambiguous',
-    'no-matching-cell', 'no-paradigm', 'unsupported-pos',
+    'no-matching-cell', 'no-paradigm', 'unsupported-pos', 'indeclinable',
   ],
 };
 const cefrOf = (w) => w.cefr_level || w.cefr || 'none';

@@ -195,9 +195,9 @@ function isSkippableCase(pos, gendered, cell) {
  *   - status: 'annotate' (script can prove the slot) or 'skip'
  *   - bucket: WHY it lands where it does — the triage key. For 'annotate':
  *       'single-cell' | 'prep-pinned'. For 'skip':
- *       'no-paradigm' | 'no-matching-cell' | 'nominative-subject' |
- *       'prep-pinnable-multi-token' | 'number-only' | 'animate-accusative' |
- *       'genuinely-ambiguous'.
+ *       'no-paradigm' | 'no-matching-cell' | 'indeclinable' |
+ *       'nominative-subject' | 'prep-pinnable-multi-token' | 'number-only' |
+ *       'animate-accusative' | 'genuinely-ambiguous'.
  *   - dec: { token, fields, rule } when the case (and, for a suggestion, a
  *       proposed number) is pinned; the `confirm` array names fields a human
  *       must still check (e.g. ['number'] for the number-only bucket).
@@ -238,6 +238,15 @@ export function analyze(pos, word, ru) {
   const { map, gendered, ruleFor, extraFields } = setup;
   if (!map || map.size === 0) return shortAnnotate(pos, word, tokens)
     ?? { status: 'skip', bucket: 'no-paradigm', candidates: [] };
+
+  // Indeclinable paradigm: every declension/case cell collapses to one surface
+  // form (Маро́кко, США, ко́фе). There is nothing to inflect — an annotation
+  // would make the answer equal the prompt — so we never propose or apply here.
+  // This is NOT a single-slot noun (only one cell defined): that has a real
+  // oblique form to drill, so require the one form to span more than one cell.
+  if (pos !== 'verb' && map.size === 1 && [...map.values()][0].length > 1) {
+    return { status: 'skip', bucket: 'indeclinable', candidates: [] };
+  }
 
   const canPrep = pos === 'noun' || (pos === 'pronoun' && !gendered);
   const mk = (cell, extra = {}) => ({ fields: extraFields(cell), rule: ruleFor(cell), ...extra });

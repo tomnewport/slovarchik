@@ -53086,8 +53086,10 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В тако́м слу́чае я остаю́сь.
         en_gb: In that case I am staying.
+        inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы встре́тились по счастли́вому слу́чаю.
         en_gb: We met by a happy chance.
+        inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
   "смартфон=smartphone":
     cefr_level: A2
     gender: m
