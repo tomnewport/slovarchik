@@ -242,6 +242,20 @@ onUnmounted(() => {
       <p class="confirm-q">
         Same words, different order. Does your translation mean the same thing?
       </p>
+      <!-- Show the learner's answer next to the default English translation so
+           the two can be compared directly — the learner can't judge whether a
+           reordering is faithful without seeing what it's being judged against
+           (#513). -->
+      <dl class="confirm-compare">
+        <div class="compare-row">
+          <dt>Yours</dt>
+          <dd>{{ assembled }}</dd>
+        </div>
+        <div class="compare-row">
+          <dt>Default</dt>
+          <dd>{{ listeningTokens(exercise.en).join(' ') }}</dd>
+        </div>
+      </dl>
       <div class="row">
         <button type="button" class="primary" @click="confirmCorrect">Yes, it's correct</button>
         <button type="button" @click="rejectConfirm">No, I was wrong</button>
@@ -330,6 +344,28 @@ onUnmounted(() => {
 .confirm-q {
   margin: 0;
   font-size: 0.95rem;
+}
+.confirm-compare {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.compare-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.compare-row dt {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.compare-row dd {
+  margin: 0;
+  font-size: 1.05rem;
 }
 .feedback {
   display: flex;
