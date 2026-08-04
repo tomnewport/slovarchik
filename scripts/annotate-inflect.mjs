@@ -62,6 +62,187 @@ export const GENITIVE_NUMERALS = new Set([
 ]);
 export const GENITIVE_NEGATION = new Set(['нет', 'нету']);
 
+// --- Direct-object accusative detection ---------------------------------
+// Many object nouns take an accusative spelled exactly like the nominative
+// (inanimate masc/neuter, and every noun's nom/acc plural), so no governing
+// preposition can pin the case. We annotate accusative only when the syntax
+// makes the token an unambiguous direct object: it follows an imperative, or a
+// nominative subject plus a transitive finite verb — and never in a
+// pointing/copular/predicate frame. Restricted to nom≡acc syncretic forms
+// (inanimate); an animate acc (== gen) is left to the hand bucket, because its
+// surface form is shared with the genitive of negation («не ви́жу дру́га») and
+// the partitive («вы́пить ча́ю»), which this syntax test cannot tell apart.
+// Conservative by design: unsure → left for `accusative-object` to confirm.
+export const NOM_SUBJ_PRON = new Set(['я', 'ты', 'он', 'она', 'оно', 'мы', 'вы', 'они', 'кто']);
+export const POINTERS = new Set(['это', 'этот', 'эта', 'эти', 'вот', 'вон', 'то', 'тот']);
+// Oblique (non-nominative) pronouns: an experiencer like «Его́ охвати́ло …» is
+// not the subject, so it must not license the post-verbal noun as an object.
+export const OBLIQUE_PRON = new Set([
+  'меня', 'тебя', 'его', 'её', 'ее', 'нас', 'вас', 'их', 'мне', 'тебе', 'ему', 'ей',
+  'нам', 'вам', 'им', 'мной', 'тобой', 'ею', 'нами', 'вами', 'ими', 'себя', 'себе',
+  'собой', 'кого', 'кому', 'кем', 'чего', 'чему', 'чем', 'мою', 'твою',
+]);
+
+// Linking / intransitive verbs: a nominative-shaped noun beside one of these is
+// the subject, not an object. (Reflexive `-ся/-сь` verbs are excluded too.)
+// Also lists verbs that govern a case OTHER than the accusative (dat/ins/gen),
+// so their nominative-shaped neighbour is never their object.
+export const INTRANS_LEMMAS = new Set([
+  // linking
+  'быть', 'стать', 'становиться', 'являться', 'казаться', 'оставаться', 'оказаться',
+  'называться', 'выглядеть', 'оказываться',
+  // intransitive activity / position / motion (impf + pf)
+  'работать', 'служить', 'жить', 'учиться', 'заниматься', 'находиться', 'лежать',
+  'стоять', 'сидеть', 'висеть', 'расти', 'спать', 'гореть', 'светить', 'дышать',
+  'идти', 'ходить', 'ехать', 'ездить', 'бежать', 'бегать', 'лететь', 'летать',
+  'плыть', 'плавать', 'гулять', 'путешествовать', 'спешить', 'торопиться', 'цвести',
+  'течь', 'дуть', 'войти', 'выйти', 'прийти', 'уйти', 'зайти', 'отойти', 'подойти',
+  'перейти', 'пройти', 'дойти', 'приехать', 'уехать', 'поехать', 'въехать', 'выехать',
+  'побежать', 'прибежать', 'убежать', 'прилететь', 'улететь', 'полететь',
+  'встать', 'сесть', 'лечь', 'упасть', 'подняться', 'спуститься', 'вернуться',
+  'проснуться', 'уснуть', 'заснуть', 'родиться', 'умереть', 'погибнуть',
+  'остаться', 'появиться', 'исчезнуть', 'случиться', 'произойти', 'наступить',
+  'стоить', 'вырасти', 'возникнуть', 'возникать', 'вырастать', 'опуститься',
+  'происходить', 'случаться', 'наступать', 'существовать', 'появляться',
+  'приходить', 'уходить', 'приезжать', 'уезжать', 'входить', 'выходить', 'возвращаться',
+  // government other than accusative (dat / ins / gen / prep)
+  'звонить', 'позвонить', 'помогать', 'помочь', 'мешать', 'помешать', 'верить', 'поверить',
+  'принадлежать', 'зависеть', 'править', 'следить', 'управлять', 'руководить', 'владеть',
+  'гордиться', 'пользоваться', 'воспользоваться', 'интересоваться', 'улыбаться', 'смеяться',
+  'доверять', 'угрожать', 'грозить', 'завидовать', 'радоваться', 'учиться', 'научиться',
+  'обладать', 'дорожить', 'наслаждаться', 'заведовать', 'командовать', 'дирижировать',
+  // psych / experiencer verbs: nom stimulus + acc/dat experiencer, so a
+  // nominative-shaped noun beside them is the (nominative) stimulus subject
+  'нравиться', 'понравиться', 'радовать', 'интересовать', 'удивлять', 'удивить',
+  'беспокоить', 'волновать', 'пугать', 'испугать', 'злить', 'раздражать', 'восхищать',
+  'привлекать', 'хотеться', 'требоваться', 'удаваться', 'удаться', 'сниться', 'присниться',
+]);
+
+// Imperative forms that are also common non-verbs (мой = possessive, три = 3).
+export const IMPER_HOMOGRAPHS = new Set(['мой', 'три']);
+
+/**
+ * Every surface form that is UNAMBIGUOUSLY nominative — its nominative differs
+ * from its accusative in the same lexeme (feminine `-а`, animate, …). A subject
+ * candidate must be one of these, which rejects both oblique nouns mistaken for
+ * subjects (e.g. «слова́х») and nominative-shaped objects fronted before the
+ * verb (OSV: «Письмо́ написа́л челове́к», «Реше́ние при́нял штаб»).
+ */
+function buildNomIndex() {
+  const nom = new Set();
+  const addIf = (n, a) => { if (n && norm(n) !== norm(a)) nom.add(norm(n)); };
+  for (const f of ['nouns.yml', 'calendar.yml']) {
+    const doc = yaml.load(readFileSync(`${dir}/${f}`, 'utf8'));
+    for (const w of Object.values(doc.words || {})) {
+      addIf(w.declension?.sg_nom, w.declension?.sg_acc);
+      addIf(w.declension?.pl_nom, w.declension?.pl_acc);
+    }
+  }
+  const adj = yaml.load(readFileSync(`${dir}/adjectives.yml`, 'utf8'));
+  for (const w of Object.values(adj.words || {})) {
+    for (const g of ['m', 'n', 'f', 'pl']) addIf(w.declension?.[`${g}_nom`], w.declension?.[`${g}_acc`]);
+  }
+  const pr = yaml.load(readFileSync(`${dir}/pronouns.yml`, 'utf8'));
+  for (const w of Object.values(pr.words || {})) {
+    for (const g of ['m', 'n', 'f', 'pl']) addIf(w.declension?.[`${g}_nom`], w.declension?.[`${g}_acc`]);
+    addIf(w.forms?.nom, w.forms?.acc);
+  }
+  return nom;
+}
+
+/** Build the transitive-finite and imperative form indexes from verbs.yml. */
+function buildVerbIndex() {
+  const doc = yaml.load(readFileSync(`${dir}/verbs.yml`, 'utf8'));
+  const finite = new Set();
+  const imper = new Set();
+  for (const [key, w] of Object.entries(doc.words || {})) {
+    const lemma = key.split('=')[0];
+    if (INTRANS_LEMMAS.has(lemma) || /с[яь]$/.test(lemma)) continue;
+    const c = w.conjugation || {};
+    for (const t of ['present', 'future']) {
+      if (c[t]) for (const f of Object.values(c[t])) if (f) finite.add(norm(f));
+    }
+    for (const p of ['past_m', 'past_f', 'past_n', 'past_pl']) if (c[p]) finite.add(norm(c[p]));
+    if (c.imperative) {
+      // Skip imperative forms that collide with a common non-verb word: «мой»
+      // is also the possessive, «три» the number — both would false-fire.
+      if (c.imperative.sg && !IMPER_HOMOGRAPHS.has(norm(c.imperative.sg))) {
+        imper.add(norm(c.imperative.sg));
+      }
+      if (c.imperative.pl) imper.add(norm(c.imperative.pl));
+    }
+  }
+  return { finite, imper };
+}
+
+// The nom/verb indexes are derived from the whole vocab, so build them once and
+// cache. Lazy: only the direct-object path touches them, so a caller reasoning
+// about a synthetic word without that path never reads the corpus files.
+let _accContext = null;
+export function accContext() {
+  return _accContext ??= { nomForms: buildNomIndex(), verbIdx: buildVerbIndex() };
+}
+
+/**
+ * Whether the token at `idx` (0-based) reads as a bare accusative direct object,
+ * using the nom/verb indexes in `ctx` (defaults to the cached corpus context).
+ * `analyze`/`decide` accept the same `ctx` so tests can inject a hand-built one.
+ */
+export function isAccObject(tokens, idx, ctx = accContext()) {
+  const { nomForms, verbIdx } = ctx;
+  if (idx === 0) return false; // sentence-initial → topic/subject
+  if (PREP_CASES[norm(core(tokens[idx - 1]))]) return false; // prep-governed, handled elsewhere
+  if (POINTERS.has(norm(core(tokens[0])))) return false; // «Это …», «Вот …» → predicate nominative
+  if (tokens.some((t) => /^[—–-]$/.test(t))) return false; // «X — Y» predicate
+  let hasImper = false;
+  let hasSubjPron = false;
+  for (let j = 0; j < idx; j++) {
+    const n = norm(core(tokens[j]));
+    if (verbIdx.imper.has(n)) hasImper = true;
+    if (NOM_SUBJ_PRON.has(n)) hasSubjPron = true;
+  }
+  if (hasImper) return true;
+  const hasTransVerb = tokens.some((t) => verbIdx.finite.has(norm(core(t))));
+  if (hasSubjPron && hasTransVerb) return true;
+  // General S–V–O: a transitive finite verb sits before the owner, preceded by
+  // a plausible nominative subject. Rejects V–S inversion («В собо́ре игра́л
+  // орга́н») and experiencer fronting («Его́ охвати́ло отча́яние») by requiring
+  // the subject not to be a preposition-object or an oblique pronoun.
+  const isSubject = (j) => {
+    const n = norm(core(tokens[j]));
+    if (!n || PREP_CASES[n] || POINTERS.has(n) || OBLIQUE_PRON.has(n)) return false;
+    if (j > 0 && PREP_CASES[norm(core(tokens[j - 1]))]) return false; // prep-object
+    return NOM_SUBJ_PRON.has(n) || nomForms.has(n); // must be nominative-capable
+  };
+  for (let k = 1; k < idx; k++) {
+    if (!verbIdx.finite.has(norm(core(tokens[k])))) continue;
+    for (let j = 0; j < k; j++) if (isSubject(j)) return true;
+  }
+  return false;
+}
+
+/**
+ * Pin an unresolved candidate to its accusative cell when the syntax makes it a
+ * direct object. Only for a nom≡acc syncretic form (inanimate noun, or an
+ * agreeing adjective whose gender the form already fixes). Returns the acc cell
+ * or null.
+ */
+function directObjectAccCell(pos, cand, tokens, ctx) {
+  const cases = new Set(cand.cells.map((x) => x.case));
+  if (!(cases.size === 2 && cases.has('nom') && cases.has('acc'))) return null;
+  if (pos === 'noun') {
+    if (!isAccObject(tokens, cand.idx, ctx)) return null;
+    const accCells = cand.cells.filter((x) => x.case === 'acc');
+    return accCells.length === 1 ? accCells[0] : null;
+  }
+  if (pos === 'adjective') {
+    const genders = new Set(cand.cells.map((x) => x.gender));
+    if (genders.size !== 1 || !isAccObject(tokens, cand.idx, ctx)) return null;
+    return cand.cells.find((x) => x.case === 'acc');
+  }
+  return null;
+}
+
 /** Build norm(form) -> list of paradigm cells, from a flat key→form map. */
 function cellsFromFlat(obj, keyRe, shape) {
   const map = new Map();
@@ -194,7 +375,7 @@ function isSkippableCase(pos, gendered, cell) {
  * Returns { status, bucket, dec?, candidates } where:
  *   - status: 'annotate' (script can prove the slot) or 'skip'
  *   - bucket: WHY it lands where it does — the triage key. For 'annotate':
- *       'single-cell' | 'prep-pinned'. For 'skip':
+ *       'single-cell' | 'prep-pinned' | 'direct-object-acc'. For 'skip':
  *       'no-paradigm' | 'no-matching-cell' | 'indeclinable' |
  *       'nominative-subject' | 'prep-pinnable-multi-token' | 'number-only' |
  *       'animate-accusative' | 'genuinely-ambiguous'.
@@ -231,7 +412,7 @@ function shortAnnotate(pos, word, tokens) {
   };
 }
 
-export function analyze(pos, word, ru) {
+export function analyze(pos, word, ru, ctx) {
   const tokens = tokenize(ru);
   const setup = paradigmFor(pos, word);
   if (!setup) return { status: 'skip', bucket: 'unsupported-pos', candidates: [] };
@@ -283,6 +464,12 @@ export function analyze(pos, word, ru) {
         c.cell = hit[0]; c.via = 'prep-pinned';
       }
     }
+    // Direct-object accusative: a nom≡acc syncretic form (which no preposition
+    // can disambiguate) that the syntax proves is a transitive verb's object.
+    if (!c.cell && (pos === 'noun' || pos === 'adjective')) {
+      const cell = directObjectAccCell(pos, c, tokens, ctx ?? accContext());
+      if (cell) { c.cell = cell; c.via = 'direct-object-acc'; }
+    }
   }
 
   // The auto-annotatable set: candidates pinned to a single definite cell.
@@ -291,7 +478,7 @@ export function analyze(pos, word, ru) {
     const c = pinned[0];
     return {
       status: 'annotate',
-      bucket: c.via, // 'single-cell' | 'prep-pinned'
+      bucket: c.via, // 'single-cell' | 'prep-pinned' | 'direct-object-acc'
       dec: { token: c.idx + 1, ...mk(c.cell) },
       candidates: cands,
     };
@@ -440,8 +627,8 @@ function nearestGoverningPrep(tokens, idx) {
  * Decide the annotation for one usage sentence of `word`, or null.
  * Returns { token (1-based), fields, rule }. Thin wrapper over `analyze`.
  */
-export function decide(pos, word, ru) {
-  const a = analyze(pos, word, ru);
+export function decide(pos, word, ru, ctx) {
+  const a = analyze(pos, word, ru, ctx);
   return a.status === 'annotate' ? a.dec : null;
 }
 
@@ -521,11 +708,16 @@ export function loadVocabFile(file) {
 // ---- driver ----------------------------------------------------------------
 function main(args) {
   const APPLY = args.includes('--apply');
+  // --check: non-mutating CI guard. Fail if the annotator would still add
+  // anything, i.e. a committed usage sentence is provably annotatable but
+  // un-applied — the drift the exhaustive-annotation policy must not accrue.
+  const CHECK = args.includes('--check');
   const onlyFile = args.includes('--file') ? args[args.indexOf('--file') + 1] : null;
   const sampleN = args.includes('--sample') ? Number(args[args.indexOf('--sample') + 1]) : 0;
 
   const grand = { added: 0, alreadyOk: 0, skipped: 0, sentences: 0 };
   const samples = [];
+  const residue = []; // every would-add sentence, for --check to report in full
 
   for (const [file, pos] of Object.entries(FILES)) {
     if (onlyFile && file !== onlyFile) continue;
@@ -540,9 +732,8 @@ function main(args) {
         if (dec) {
           inserts.push({ afterLine: item.lastLine, text: serializeInflect(pos, dec) });
           grand.added++;
-          if (samples.length < sampleN) {
-            samples.push(`${file}  ${item.key}\n   ${item.ru}\n   → ${serializeInflect(pos, dec).trim()}`);
-          }
+          residue.push(`${file}  ${item.key}\n   ${item.ru}\n   → ${serializeInflect(pos, dec).trim()}`);
+          if (samples.length < sampleN) samples.push(residue[residue.length - 1]);
         } else {
           grand.skipped++;
         }
@@ -562,6 +753,13 @@ function main(args) {
 
   console.log(`\nTOTAL: added=${grand.added} skipped=${grand.skipped} alreadyAnnotated=${grand.alreadyOk} unannotatedSentencesSeen=${grand.sentences}`);
   if (samples.length) console.log('\n--- samples ---\n' + samples.join('\n\n'));
+
+  if (CHECK && grand.added) {
+    console.error(`\n✗ ${grand.added} un-applied annotation(s). Run \`node scripts/annotate-inflect.mjs --apply\`:\n\n${residue.join('\n\n')}`);
+    process.exitCode = 1;
+  } else if (CHECK) {
+    console.log('\n✓ no un-applied annotations — the vocab is fully annotated.');
+  }
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {

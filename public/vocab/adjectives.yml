@@ -141,7 +141,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы изуча́ем азиа́тские стра́ны.
         en_gb: We are studying Asian countries.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
     declension:
       m_nom: азиа́тский
       m_gen: азиа́тского
@@ -300,7 +300,7 @@ words:
     usage:
       - ru: Я учу́ англи́йский язы́к.
         en_gb: I am learning the English language.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ чита́ет англи́йскую кни́гу.
         en_gb: She is reading an English book.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
@@ -610,7 +610,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы прово́дим биологи́ческие о́пыты.
         en_gb: We conduct biological experiments.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
     declension:
       m_nom: биологи́ческий
       m_gen: биологи́ческого
@@ -1444,7 +1444,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем вели́кие собы́тия.
         en_gb: We study great events.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "великолепный=magnificent":
     cefr_level: B2
     accented: великоле́пный
@@ -1676,7 +1676,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Я слу́шаю вече́рние но́вости.
         en_gb: I listen to the evening news.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Вече́рний по́езд опозда́л.
         en_gb: The evening train was late.
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: adj-agreement }
@@ -1724,7 +1724,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы и́щем ве́чные и́стины.
         en_gb: We seek eternal truths.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "взрослый=adult":
     cefr_level: A2
     accented: взро́слый
@@ -2080,7 +2080,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы обсу́дим вну́тренние дела́.
         en_gb: We will discuss internal affairs.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: вну́тренний
       f: вну́тренняя
@@ -2623,7 +2623,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Он расска́зывает вся́кие исто́рии.
         en_gb: He tells all kinds of stories.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: На по́лке лежа́ла вся́кая вся́чина.
         en_gb: All sorts of odds and ends lay on the shelf.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -3148,7 +3148,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Не слу́шай глу́пые сове́ты.
         en_gb: Do not listen to stupid advice.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "глухой=deaf":
     cefr_level: B1
     accented: глухо́й
@@ -3724,7 +3724,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ защища́ют гражда́нские права́.
         en_gb: They defend civil rights.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "грозный=formidable":
     cefr_level: B2
     accented: гро́зный
@@ -4330,7 +4330,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ веду́т деловы́е перегово́ры.
         en_gb: They are conducting business negotiations.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "деревенский=rural":
     cefr_level: B1
     accented: дереве́нский
@@ -4377,7 +4377,7 @@ words:
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим дереве́нские пра́здники.
         en_gb: We love rural festivals.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "деревянный=wooden":
     cefr_level: B1
     accented: деревя́нный
@@ -5312,7 +5312,7 @@ words:
     usage:
       - ru: Он и́щет духо́вный путь.
         en_gb: He is seeking a spiritual path.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Му́зыка даёт духо́вную пи́щу.
         en_gb: Music gives spiritual nourishment.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
@@ -5366,7 +5366,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я чу́вствую душе́вное споко́йствие.
         en_gb: I feel a heartfelt calm.
-        inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
   "еврейский=Jewish":
     cefr_level: B1
     accented: евре́йский
@@ -5405,7 +5405,7 @@ words:
     usage:
       - ru: Мы изуча́ем евре́йский язы́к.
         en_gb: We are studying the Hebrew language.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ соблюда́ют евре́йские тради́ции.
         en_gb: They observe Jewish traditions.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
@@ -6557,7 +6557,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ви́дим заме́тные результа́ты.
         en_gb: We see noticeable results.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "замечательный=wonderful":
     cefr_level: B1
     accented: замеча́тельный
@@ -7490,13 +7490,13 @@ words:
     usage:
       - ru: Я учу́ испа́нский язы́к.
         en_gb: I am learning the Spanish language.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Мне нра́вится испа́нская му́зыка.
         en_gb: I like Spanish music.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим испа́нские пе́сни.
         en_gb: We love Spanish songs.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
     declension:
       m_nom: испа́нский
       m_gen: испа́нского
@@ -7569,7 +7569,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы и́щем и́стинные це́нности.
         en_gb: We seek true values.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "исторический=historical":
     cefr_level: B1
     accented: истори́ческий
@@ -9071,7 +9071,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы чита́ем литерату́рные журна́лы.
         en_gb: We read literary magazines.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "личный=personal":
     cefr_level: B1
     accented: ли́чный
@@ -9116,7 +9116,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ храни́т ли́чные ве́щи в столе́.
         en_gb: She keeps personal things in the desk.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "лишний=extra":
     cefr_level: B1
     accented: ли́шний
@@ -9673,7 +9673,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем междунаро́дные отноше́ния.
         en_gb: We study international relations.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "мелкий=small":
     cefr_level: B1
     accented: ме́лкий
@@ -9719,7 +9719,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он реша́ет ме́лкие пробле́мы.
         en_gb: He solves petty problems.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "мёртвый=dead":
     cefr_level: B1
     accented: мёртвый
@@ -10733,7 +10733,7 @@ words:
     usage:
       - ru: Они́ танцу́ют наро́дный та́нец.
         en_gb: They are dancing a folk dance.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то наро́дная пе́сня.
         en_gb: This is a folk song.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -10866,7 +10866,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы чита́ем нау́чные журна́лы.
         en_gb: We read scientific journals.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "национальный=national":
     cefr_level: B1
     accented: национа́льный
@@ -12350,7 +12350,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Они́ веду́т норма́льный о́браз жи́зни.
         en_gb: They lead a normal way of life.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
   "ночной=nocturnal":
     cefr_level: B1
     accented: ночно́й
@@ -13728,7 +13728,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы предпочита́ем оте́чественные проду́кты.
         en_gb: We prefer domestic products.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "открытый=open":
     cefr_level: A2
     accented: откры́тый
@@ -14532,7 +14532,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы ча́сто слы́шим подо́бные вопро́сы.
         en_gb: We often hear similar questions.
-        inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "подходящий=suitable":
     cefr_level: B1
     accented: подходя́щий
@@ -14809,7 +14809,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ обсужда́ют полити́ческие но́вости.
         en_gb: They are discussing political news.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "полный=full":
     cefr_level: A2
     accented: по́лный
@@ -14906,7 +14906,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Рабо́тники получа́ют поло́женные льго́ты.
         en_gb: The workers receive the prescribed benefits.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "положительный=positive":
     cefr_level: B2
     accented: положи́тельный
@@ -15497,7 +15497,7 @@ words:
     usage:
       - ru: Подними́ пра́вый па́лец.
         en_gb: Raise your right finger.
-        inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 2, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: У него́ боли́т пра́вая нога́.
         en_gb: His right leg hurts.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -15688,7 +15688,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы де́лаем привы́чные дела́.
         en_gb: We do our habitual tasks.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "приёмный=reception":
     cefr_level: B2
     accented: приёмный
@@ -16206,7 +16206,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вспомина́ем про́шлые го́ды.
         en_gb: We recall the past years.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "прямой=straight":
     cefr_level: B1
     accented: прямо́й
@@ -16848,7 +16848,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы лю́бим ра́нние я́годы.
         en_gb: We love early berries.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "рациональный=rational":
     cefr_level: A1
     accented: рациона́льный
@@ -17752,7 +17752,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ храня́т секре́тные докуме́нты.
         en_gb: They keep secret documents.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "семейный=family":
     cefr_level: A2
     accented: семе́йный
@@ -17797,7 +17797,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы храни́м семе́йные фотогра́фии.
         en_gb: We keep family photographs.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "сентиментальный=sentimental":
     cefr_level: A1
     accented: сентимента́льный
@@ -18901,7 +18901,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ба́бушка храни́т сове́тские моне́ты.
         en_gb: Grandma keeps Soviet coins.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "совместный=joint":
     cefr_level: B2
     accented: совме́стный
@@ -19428,7 +19428,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем социа́льные пробле́мы.
         en_gb: We study social problems.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "специальный=special":
     cefr_level: B1
     accented: специа́льный
@@ -19804,7 +19804,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Рабо́чие де́лают стальны́е тру́бы.
         en_gb: The workers make steel pipes.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "старинный=antique":
     cefr_level: B1
     accented: стари́нный
@@ -21009,7 +21009,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Зимо́й мы но́сим то́лстые сви́теры.
         en_gb: In winter we wear thick jumpers.
-        inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: то́лстый
       f: то́лстая
@@ -21280,7 +21280,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы гото́вим традицио́нные блю́да.
         en_gb: We cook traditional dishes.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "треугольный=triangular":
     cefr_level: B1
     accented: треуго́льный
@@ -21506,7 +21506,7 @@ words:
     usage:
       - ru: Я несу́ тяжёлый чемода́н.
         en_gb: I am carrying a heavy suitcase.
-        inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: У неё тяжёлая су́мка.
         en_gb: She has a heavy bag.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
@@ -21706,7 +21706,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Выбира́й любы́е уго́дные тебе́ кни́ги.
         en_gb: Choose any books that please you.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "уголовный=criminal":
     cefr_level: B2
     accented: уголо́вный
@@ -22283,7 +22283,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ де́лают физи́ческие упражне́ния.
         en_gb: They do physical exercises.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "финансовый=financial":
     cefr_level: B1
     accented: фина́нсовый
@@ -22328,7 +22328,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы реша́ем фина́нсовые вопро́сы.
         en_gb: We are dealing with financial matters.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "фиолетовый=purple":
     cefr_level: B1
     accented: фиоле́товый
@@ -23188,7 +23188,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем челове́ческие чу́вства.
         en_gb: We study human feelings.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "чёрный=black":
     cefr_level: A1
     accented: чёрный
@@ -23347,7 +23347,7 @@ words:
     usage:
       - ru: Не бери́ чужо́е.
         en_gb: Don't take what's not yours.
-        inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Он чужо́й челове́к в на́шем го́роде.
         en_gb: He is a stranger in our city.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
@@ -23481,7 +23481,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вспомина́ем шко́льные го́ды.
         en_gb: We remember our school years.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "экономический=economic":
     cefr_level: B1
     accented: экономи́ческий
