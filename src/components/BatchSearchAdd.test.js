@@ -69,4 +69,37 @@ describe('BatchSearchAdd combo-box', () => {
     expect(commitBatch).toHaveBeenCalledTimes(2)
     expect(progressState.learning.words).toContain('avocado')
   })
+
+  it('prefix-matches any word in a sense — "hat" surfaces every "hat (…)" but not "what"/"chat"', async () => {
+    vocabState.words = [
+      { key: 'hat-brim', ru: 'шляпа', en: 'hat (brimmed)', cefr: 'A1', headword: 'шляпа', meaning: 'hat (brimmed)' },
+      { key: 'hat-knit', ru: 'шапка', en: 'hat (knitted)', cefr: 'A1', headword: 'шапка', meaning: 'hat (knitted)' },
+      { key: 'what', ru: 'что', en: 'what', cefr: 'A1', headword: 'что', meaning: 'what' },
+      { key: 'chat', ru: 'болтать', en: 'to chat', cefr: 'A2', headword: 'болтать', meaning: 'to chat' },
+    ]
+
+    const wrapper = mount(BatchSearchAdd)
+    const input = wrapper.find('.search-input')
+    await input.trigger('focus')
+    await input.setValue('hat')
+
+    const text = wrapper.findAll('.item').map((i) => i.text())
+    expect(text.some((t) => t.includes('шляпа'))).toBe(true)
+    expect(text.some((t) => t.includes('шапка'))).toBe(true)
+    expect(text.some((t) => t.includes('что'))).toBe(false)
+    expect(text.some((t) => t.includes('болтать'))).toBe(false)
+  })
+
+  it('matches a non-leading word in a multi-word sense — "brimmed" reaches "hat (brimmed)"', async () => {
+    vocabState.words = [
+      { key: 'hat-brim', ru: 'шляпа', en: 'hat (brimmed)', cefr: 'A1', headword: 'шляпа', meaning: 'hat (brimmed)' },
+    ]
+
+    const wrapper = mount(BatchSearchAdd)
+    const input = wrapper.find('.search-input')
+    await input.trigger('focus')
+    await input.setValue('brimmed')
+
+    expect(wrapper.find('.item').text()).toContain('шляпа')
+  })
 })

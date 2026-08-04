@@ -367,6 +367,12 @@ onUnmounted(() => {
   margin: 0;
   font-size: 1.05rem;
 }
+.feedback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+}
 .feedback.ok strong {
   color: var(--good);
 }

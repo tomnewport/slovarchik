@@ -18,6 +18,26 @@ const justAdded = ref('')
 const batch = computed(() => progressState[props.level])
 const batchWordSet = computed(() => new Set(batch.value?.words ?? []))
 
+// Split a string into lowercase word tokens, dropping punctuation and
+// parenthetical scaffolding. "hat (brimmed)" → ["hat", "brimmed"], "to run" →
+// ["to", "run"].
+function tokenize(s) {
+  return (s ?? '')
+    .toLowerCase()
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter(Boolean)
+}
+
+// A field matches when every query token is a prefix of some token in the
+// field. Prefix-per-word (not substring) keeps "hat" off "what"/"that"/"chat"
+// while still surfacing every "hat (…)" sense, and lets "brimmed" reach
+// "hat (brimmed)".
+function fieldMatches(text, queryTokens) {
+  if (!text) return false
+  const tokens = tokenize(text)
+  return queryTokens.every((qt) => tokens.some((t) => t.startsWith(qt)))
+}
+
 function eligibleCollectionWords(collectionName) {
   const words = learnableWords(vocabState.words)
   return words.filter(
@@ -31,13 +51,15 @@ function eligibleCollectionWords(collectionName) {
 const results = computed(() => {
   const q = query.value.trim().toLowerCase()
   if (!q || !vocabState.words.length) return []
+  const queryTokens = tokenize(q)
+  if (!queryTokens.length) return []
 
   const wordMatches = learnableWords(vocabState.words)
     .filter(
       (w) =>
-        w.ru?.toLowerCase().includes(q) ||
-        w.en?.toLowerCase().includes(q) ||
-        w.meaning?.toLowerCase().includes(q),
+        fieldMatches(w.ru, queryTokens) ||
+        fieldMatches(w.en, queryTokens) ||
+        fieldMatches(w.meaning, queryTokens),
     )
     .slice(0, 5)
     .map((w) => ({
@@ -49,7 +71,7 @@ const results = computed(() => {
       inBatch: batchWordSet.value.has(w.key),
     }))
 
-  const collectionMatches = COLLECTIONS.filter((c) => c.toLowerCase().includes(q))
+  const collectionMatches = COLLECTIONS.filter((c) => fieldMatches(c, queryTokens))
     .slice(0, 3)
     .map((c) => {
       const newWords = eligibleCollectionWords(c)
