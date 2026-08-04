@@ -10828,7 +10828,7 @@ words:
     en_gb:
       standard: granite (a very hard grey rock used in building)
     usage:
-      - ru: На́бережная облицо́вана серым грани́том.
+      - ru: На́бережная облицо́вана се́рым грани́том.
         en_gb: The embankment is faced with grey granite.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Па́мятник вы́сечен из грани́та.
@@ -14333,31 +14333,32 @@ words:
       pl_acc: дурако́в
       pl_ins: дурака́ми
       pl_pre: дурака́х
-  "дух=spirit":
+  "дух=ghost":
     cefr_level: B2
     gender: m
-    animacy: i
+    animacy: a
     number: ["sg", "pl"]
     collections:
       - faith
-      - feelings and sensations
     en_gb:
-      standard: spirit (the soul, or a ghost)
+      standard: ghost (an incorporeal spirit or apparition)
+      alt:
+        - spirit
     usage:
-      - ru: Си́льный дух помога́ет в беде́.
-        en_gb: A strong spirit helps in trouble.
-        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
-      - ru: Он пал ду́хом по́сле неуда́чи.
-        en_gb: He lost spirit after the failure.
-        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В ста́ром до́ме жи́ли злы́е ду́хи.
         en_gb: Evil spirits lived in the old house.
         inflect: { token: 6, case: nom, number: pl, rule: noun-nom-pl }
+      - ru: Она́ ве́рит в злы́х ду́хов.
+        en_gb: She believes in evil spirits.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Мона́х вы́звал ду́ха.
+        en_gb: The monk summoned a spirit.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
     declension:
       sg_nom: дух
       sg_gen: ду́ха
       sg_dat: ду́ху
-      sg_acc: дух
+      sg_acc: ду́ха
       sg_ins: ду́хом
       sg_pre: ду́хе
       pl_nom: ду́хи
@@ -14366,6 +14367,35 @@ words:
       pl_acc: ду́хов
       pl_ins: ду́хами
       pl_pre: ду́хах
+  "дух=spirit":
+    cefr_level: B2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - faith
+      - feelings and sensations
+    en_gb:
+      standard: spirit (the soul; morale, inner strength)
+      alt:
+        - morale
+    usage:
+      - ru: Си́льный дух помога́ет в беде́.
+        en_gb: A strong spirit helps in trouble.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он пал ду́хом по́сле неуда́чи.
+        en_gb: He lost spirit after the failure.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Ему́ не хвата́ет бо́евого ду́ха.
+        en_gb: He lacks fighting spirit.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: дух
+      sg_gen: ду́ха
+      sg_dat: ду́ху
+      sg_acc: дух
+      sg_ins: ду́хом
+      sg_pre: ду́хе
   "душ=shower":
     cefr_level: A2
     gender: m
@@ -27575,7 +27605,7 @@ words:
     en_gb:
       standard: meadow (a field of grass)
     usage:
-      - ru: На лугу́ мно́го ярких цвето́в.
+      - ru: На лугу́ мно́го я́рких цвето́в.
         en_gb: There are many bright flowers in the meadow.
         inflect: { token: 2, case: loc, number: sg, rule: noun-locative }
       - ru: Де́ти игра́ли на зелёном лугу́.
@@ -38460,7 +38490,7 @@ words:
       - ru: Мой де́душка — пенсионе́р.
         en_gb: My grandfather is a pensioner.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
-      - ru: Пенсионе́ру да́ли скидку на биле́т.
+      - ru: Пенсионе́ру да́ли ски́дку на биле́т.
         en_gb: The pensioner was given a discount on the ticket.
         inflect: { token: 1, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В па́рке мно́го пенсионе́ров.
@@ -48616,26 +48646,26 @@ words:
       alt:
         - grille
     declension:
-      sg_nom: реше́тка
-      sg_gen: реше́тки
-      sg_dat: реше́тке
-      sg_acc: реше́тку
-      sg_ins: реше́ткой
-      sg_pre: реше́тке
-      pl_nom: реше́тки
-      pl_gen: реше́ток
-      pl_dat: реше́ткам
-      pl_acc: реше́тки
-      pl_ins: реше́тками
-      pl_pre: реше́тках
+      sg_nom: решётка
+      sg_gen: решётки
+      sg_dat: решётке
+      sg_acc: решётку
+      sg_ins: решёткой
+      sg_pre: решётке
+      pl_nom: решётки
+      pl_gen: решёток
+      pl_dat: решёткам
+      pl_acc: решётки
+      pl_ins: решётками
+      pl_pre: решётках
     usage:
-      - ru: На окне́ желе́зная реше́тка.
+      - ru: На окне́ желе́зная решётка.
         en_gb: There is an iron grating on the window.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
-      - ru: Пти́ца сиде́ла за реше́ткой.
+      - ru: Пти́ца сиде́ла за решёткой.
         en_gb: The bird sat behind the grating.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
-      - ru: Мастера́ покра́сили ста́рые реше́тки.
+      - ru: Мастера́ покра́сили ста́рые решётки.
         en_gb: The craftsmen painted the old gratings.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
   "Рим=Rome":
@@ -54707,7 +54737,7 @@ words:
     en_gb:
       standard: spaghetti (long thin pasta; indeclinable)
     usage:
-      - ru: На обе́д мы ели спаге́тти.
+      - ru: На обе́д мы е́ли спаге́тти.
         en_gb: For lunch we ate spaghetti.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он лю́бит спаге́тти с сы́ром.
@@ -57541,16 +57571,22 @@ words:
       pl_nom: существа́
       pl_gen: суще́ств
       pl_dat: существа́м
-      pl_acc: существа́
+      pl_acc: суще́ств
       pl_ins: существа́ми
       pl_pre: существа́х
+    declension_notes:
+      pl_acc: >-
+        существо́ is grammatically animate, so the accusative plural copies the
+        genitive (суще́ств): «изуча́ю морски́х суще́ств». The nominative-shaped
+        существа́ is also heard in everyday speech, but the animate суще́ств is
+        the standard direct-object form.
     usage:
       - ru: В лесу́ жило́ стра́нное существо́.
         en_gb: A strange creature lived in the forest.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Учёный изуча́ет морски́х суще́ств.
         en_gb: The scientist studies sea creatures.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Ребёнок любова́лся ма́леньким существо́м.
         en_gb: The child admired the little creature.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
