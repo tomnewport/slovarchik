@@ -5,8 +5,9 @@
 // that ordinary structural tests can't judge — irregular, defective,
 // impersonal, mobile-stress and special-ending paradigms. It is seeded from
 // concrete corrections (the `случай`/`некий`/`комментарий`/`задать`/`осветить`/
-// `рассмеяться`/`убедиться` defects) so those exact bugs can never silently
-// return.
+// `рассмеяться`/`убедиться` defects, plus the #444 verb batch —
+// `вздохнуть`/`отдохнуть`/`обмануть`/`рисковать`/`поглядеть`/`совершить`/
+// `сообразить`) so those exact bugs can never silently return.
 //
 // ─── How to review and allowlist a disagreement ─────────────────────────────
 // The oracle is meant to stay high-signal: a green run must mean "no known-bad
@@ -88,6 +89,58 @@ export const GOLDEN = {
   // cell.
   'рассмеяться=to burst out laughing': {
     'future.2sg': 'рассмеёшься',
+  },
+
+  // ─── #444 verb corrections ───────────────────────────────────────────────
+  // Mobile-stress -нуть perfectives: the stress falls on the ё-bearing ending
+  // in 2sg–2pl, not on the stem. A stored `вздо́хнешь`/`отдо́хнешь` (no ё) is the
+  // stem-stressed miscopy.
+  'вздохнуть=to sigh': {
+    'future.2sg': 'вздохнёшь',
+    'future.3sg': 'вздохнёт',
+    'future.1pl': 'вздохнём',
+    'future.2pl': 'вздохнёте',
+  },
+  'отдохнуть=to rest': {
+    'future.2sg': 'отдохнёшь',
+    'future.3sg': 'отдохнёт',
+    'future.1pl': 'отдохнём',
+    'future.2pl': 'отдохнёте',
+  },
+
+  // Opposite mobile-stress pattern: обману́ retracts the stress to the stem from
+  // 2sg on, so the ending is plain -е-, not ё. A stored `обманёшь` (ё) fabricates
+  // the never-stressed ending.
+  'обмануть=to deceive': {
+    'future.2sg': 'обма́нешь',
+    'future.3sg': 'обма́нет',
+    'future.1pl': 'обма́нем',
+    'future.2pl': 'обма́нете',
+  },
+
+  // -овать imperfective: the -ова- alternates to -у- + plain vowel endings
+  // (риску́ешь), never a ё (`рискуёшь` is a fabricated ё on an unstressed ending).
+  'рисковать=to risk': {
+    'present.2sg': 'риску́ешь',
+    'present.3sg': 'риску́ет',
+    'present.1pl': 'риску́ем',
+    'present.2pl': 'риску́ете',
+  },
+
+  // 3pl is поглядя́т — a stored `погладя́т` swaps the stem vowel я→а.
+  'поглядеть=to look': {
+    'future.3pl': 'поглядя́т',
+  },
+
+  // 1sg is совершу́ (the -ить ending is clipped and the personal ending added);
+  // a stored `соверши́ть` is the bare infinitive left in the 1sg cell.
+  'совершить=to commit': {
+    'future.1sg': 'совершу́',
+  },
+
+  // 1sg is соображу́ — a stored `сображу́` drops the second о of the соо- prefix.
+  'сообразить=to figure out': {
+    'future.1sg': 'соображу́',
   },
 
   // Accepted-variant example: махать has two standard present paradigms. Either

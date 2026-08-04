@@ -6,6 +6,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 import {
   buildListeningBank,
+  isQuestion,
   listeningTokens,
   listeningWordPool,
   phraseCorrect,
@@ -50,6 +51,10 @@ const typed = ref('')
 // all store. If the learner believes a "wrong" grade was actually right, they
 // can override it — crediting the attempt and reporting it for curation.
 const overridden = ref(false)
+
+// In listen mode the "?" is only heard, and browser TTS rarely conveys the
+// rising question intonation, so flag questions in the prompt (#514).
+const showQuestionCue = computed(() => props.exercise.audio && isQuestion(props.exercise.ru))
 
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
@@ -188,6 +193,9 @@ onUnmounted(() => {
       <template v-if="exercise.audio">
         <span class="muted">Translate what you hear</span>
         <SpeakButton :text="exercise.ru" />
+        <span v-if="showQuestionCue" class="q-cue" title="This sentence is a question">
+          ❓ question
+        </span>
       </template>
       <HintablePhrase v-else :text="exercise.ru" mode="inline" class="cue" />
     </div>
@@ -242,6 +250,20 @@ onUnmounted(() => {
       <p class="confirm-q">
         Same words, different order. Does your translation mean the same thing?
       </p>
+      <!-- Show the learner's answer next to the default English translation so
+           the two can be compared directly — the learner can't judge whether a
+           reordering is faithful without seeing what it's being judged against
+           (#513). -->
+      <dl class="confirm-compare">
+        <div class="compare-row">
+          <dt>Yours</dt>
+          <dd>{{ assembled }}</dd>
+        </div>
+        <div class="compare-row">
+          <dt>Default</dt>
+          <dd>{{ listeningTokens(exercise.en).join(' ') }}</dd>
+        </div>
+      </dl>
       <div class="row">
         <button type="button" class="primary" @click="confirmCorrect">Yes, it's correct</button>
         <button type="button" @click="rejectConfirm">No, I was wrong</button>
@@ -275,6 +297,14 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   font-size: 1.3rem;
+}
+.q-cue {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  white-space: nowrap;
 }
 .answer-line {
   display: flex;
@@ -330,6 +360,34 @@ onUnmounted(() => {
 .confirm-q {
   margin: 0;
   font-size: 0.95rem;
+}
+.confirm-compare {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.compare-row {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.compare-row dt {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.compare-row dd {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.feedback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
 }
 .feedback.ok strong {
   color: var(--good);

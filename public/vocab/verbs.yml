@@ -718,7 +718,7 @@ words:
         en_gb: Do you borrow books from the library?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы берёте зо́нтик в доро́гу?
-        en_gb: Do you take an umbrella on the trip?
+        en_gb: Are you taking an umbrella for the trip?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Вы берёте такси́?
         en_gb: Are you taking a taxi?
@@ -1669,11 +1669,11 @@ words:
     conjugation:
       future:
         "1sg": вздохну́
-        "2sg": вздо́хнешь
-        "3sg": вздо́хнет
-        "1pl": вздо́хнем
-        "2pl": вздо́хнете
-        "3pl": вздо́хнут
+        "2sg": вздохнёшь
+        "3sg": вздохнёт
+        "1pl": вздохнём
+        "2pl": вздохнёте
+        "3pl": вздохну́т
       past_m: вздохну́л
       past_f: вздохну́ла
       past_n: вздохну́ло
@@ -1694,7 +1694,7 @@ words:
       - ru: На его́ ме́сте я бы то́лько вздохну́л.
         en_gb: In his place I would only sigh.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ты вздо́хнешь споко́йно?
+      - ru: Ты вздохнёшь споко́йно?
         en_gb: Will you sigh with relief?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "вздрогнуть=to shudder":
@@ -17353,9 +17353,9 @@ words:
       - ru: Я освети́л бы сце́ну я́рче.
         en_gb: I would illuminate the stage more brightly.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ско́ро фонари́ освети́т у́лицу.
+      - ru: Ско́ро фонари́ осветя́т у́лицу.
         en_gb: Soon the lamps will light up the street.
-        inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+        inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты освети́шь ко́мнату?
         en_gb: Will you light up the room?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
@@ -21123,7 +21123,7 @@ words:
         "3sg": погляди́т
         "1pl": погляди́м
         "2pl": погляди́те
-        "3pl": погладя́т
+        "3pl": поглядя́т
       past_m: погляде́л
       past_f: погляде́ла
       past_n: погляде́ло
@@ -21131,6 +21131,7 @@ words:
     usage:
       - ru: Поглядя́т они́ на не́бо и улыбну́тся.
         en_gb: They will look at the sky and smile.
+        inflect: { token: 1, tense: future, person: 3pl, rule: verb-future }
       - ru: Она́ погляде́ла на меня́ с улы́бкой.
         en_gb: She looked at me with a smile.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
@@ -33492,7 +33493,7 @@ words:
       standard: to commit (to accomplish)
     conjugation:
       future:
-        "1sg": соверши́ть
+        "1sg": совершу́
         "2sg": соверши́шь
         "3sg": соверши́т
         "1pl": соверши́м
@@ -33920,7 +33921,7 @@ words:
       standard: to figure out (to understand quickly)
     conjugation:
       future:
-        "1sg": сображу́
+        "1sg": соображу́
         "2sg": сообрази́шь
         "3sg": сообрази́т
         "1pl": сообрази́м

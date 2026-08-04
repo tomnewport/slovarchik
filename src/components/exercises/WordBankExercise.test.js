@@ -119,6 +119,21 @@ describe('WordBankExercise order-insensitive grading (#267)', () => {
     expect(wrapper.find('.confirm-source').exists()).toBe(false)
   })
 
+  it('shows the default translation next to the answer so they can be compared (#513)', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    await assembleReordering(wrapper)
+    await wrapper.find('button.check').trigger('click')
+
+    // The confirm step lays out the learner's reordering and the canonical
+    // translation side by side so the learner can judge whether they match.
+    const compare = wrapper.find('.confirm-compare')
+    expect(compare.exists()).toBe(true)
+    // Tiles are lowercased, so the assembled answer and the canonical
+    // translation both render in lower case here.
+    expect(compare.text()).toContain('this city is big') // the reordering
+    expect(compare.text()).toContain('this is a big city') // the default translation
+  })
+
   it('passes an exact-order answer outright without confirmation', async () => {
     const wrapper = mount(WordBankExercise, { props: { exercise } })
     await assembleExpected(wrapper)
@@ -134,6 +149,27 @@ describe('WordBankExercise order-insensitive grading (#267)', () => {
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.find('.confirm').exists()).toBe(false)
     expect(wrapper.text()).toContain('Answer:')
+  })
+})
+
+describe('WordBankExercise question cue (#514)', () => {
+  it('flags a heard question the learner cannot see the "?" of', () => {
+    const wrapper = mount(WordBankExercise, {
+      props: { exercise: { ...exercise, audio: true, ru: 'Вы берёте зо́нтик?' } },
+    })
+    expect(wrapper.find('.q-cue').exists()).toBe(true)
+  })
+
+  it('shows no cue for a heard statement', () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise: { ...exercise, audio: true } } })
+    expect(wrapper.find('.q-cue').exists()).toBe(false)
+  })
+
+  it('shows no cue when the phrase is on screen (the "?" is already visible)', () => {
+    const wrapper = mount(WordBankExercise, {
+      props: { exercise: { ...exercise, audio: false, ru: 'Вы берёте зо́нтик?' } },
+    })
+    expect(wrapper.find('.q-cue').exists()).toBe(false)
   })
 })
 

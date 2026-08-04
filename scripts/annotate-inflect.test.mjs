@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 
-import { analyze, decide } from './annotate-inflect.mjs'
+import {
+  analyze, decide, FILES, loadVocabFile, parseUsageItems,
+} from './annotate-inflect.mjs'
 
 // A minimal feminine noun (кни́га): sg_dat and sg_pre are syncretic (кни́ге),
 // pl_nom/pl_acc are syncretic (кни́ги), acc sg is distinct (кни́гу).
@@ -30,6 +32,23 @@ const drug = {
     sg_nom: 'друг', sg_gen: 'дру́га', sg_dat: 'дру́гу', sg_acc: 'дру́га',
     sg_ins: 'дру́гом', sg_pre: 'дру́ге',
   },
+}
+
+// Indeclinable neuter (Маро́кко): every case cell is the same surface form, so
+// there is no slot to inflect — the drill answer would equal the prompt.
+const marokko = {
+  animacy: 'i',
+  declension: {
+    sg_nom: 'Маро́кко', sg_gen: 'Маро́кко', sg_dat: 'Маро́кко',
+    sg_acc: 'Маро́кко', sg_ins: 'Маро́кко', sg_pre: 'Маро́кко',
+  },
+}
+
+// A genuine single-slot noun (only one case defined) is NOT indeclinable: its
+// lone form is a real oblique to drill.
+const singleSlot = {
+  animacy: 'i',
+  declension: { sg_gen: 'молока́' },
 }
 
 const bucket = (pos, w, ru) => analyze(pos, w, ru).bucket
@@ -134,9 +153,47 @@ describe('analyze — bucket classification', () => {
     expect(bucket('noun', kniga, 'Он бежи́т домо́й.')).toBe('no-matching-cell')
   })
 
+  it('buckets an indeclinable noun as indeclinable — never annotates it', () => {
+    // «из Маро́кко» reads as a prep-pinned genitive on the surface, but every
+    // cell is «Маро́кко», so there is nothing to inflect: leave it out of scope.
+    const a = analyze('noun', marokko, 'Она́ верну́лась из Маро́кко.')
+    expect(a.status).toBe('skip')
+    expect(a.bucket).toBe('indeclinable')
+    expect(a.dec).toBeUndefined()
+    expect(decide('noun', marokko, 'Она́ верну́лась из Маро́кко.')).toBeNull()
+  })
+
+  it('still handles a genuine single-slot noun (one defined cell)', () => {
+    // One cell only ≠ indeclinable: молока́ is a real gen sg to auto-pin.
+    const a = analyze('noun', singleSlot, 'Он вы́пил молока́.')
+    expect(a.status).toBe('annotate')
+    expect(a.bucket).toBe('single-cell')
+    expect(a.dec).toMatchObject({ fields: { case: 'gen', number: 'sg' } })
+  })
+
   it('decide() still returns an annotation only for the auto-pinned buckets', () => {
     expect(decide('noun', kniga, 'Я чита́ю кни́гу.')).toMatchObject({ fields: { case: 'acc' } })
     expect(decide('noun', stol, 'Я купи́л стол.')).toBeNull() // hand bucket → no auto
     expect(decide('noun', kniga, 'Кни́га лежи́т на столе́.')).toBeNull() // nominative → no auto
+  })
+})
+
+// The auto-annotator adds every provable annotation; nothing else does. So an
+// unannotated sentence the classifier can prove is a slip: `--apply` was never
+// run for it, and it silently never drills. This guard keeps that residue empty
+// (issue #466) — run `node scripts/annotate-inflect.mjs --apply` if it trips.
+describe('committed vocab — no un-applied auto-annotatable residue', () => {
+  it('leaves nothing the auto-annotator would still add', () => {
+    const residue = []
+    for (const [file, pos] of Object.entries(FILES)) {
+      const { words, lines } = loadVocabFile(file)
+      for (const item of parseUsageItems(lines)) {
+        const w = words[item.key]
+        if (!w || item.hasInflect || w.learn === false) continue
+        const dec = decide(pos, w, item.ru)
+        if (dec) residue.push(`${file}  ${item.key}: ${item.ru}`)
+      }
+    }
+    expect(residue, `${residue.length} un-applied annotation(s):\n${residue.join('\n')}`).toEqual([])
   })
 })
