@@ -10,6 +10,19 @@ import { sample, shuffle } from './quiz.js'
 export const RU_LETTERS = [...'абвгдежзийклмнопрстуфхцчшщъыьэюя']
 export const EN_LETTERS = [...'abcdefghijklmnopqrstuvwxyz']
 
+/**
+ * True when a phrase is written as a question. Detected purely from
+ * punctuation: a trailing "?" (allowing closing quotes/brackets after it).
+ * Used to surface a visual "this is a question" cue in listen mode, where the
+ * learner only hears the phrase and browser TTS rarely renders the rising
+ * question intonation clearly (#514).
+ * @param {string} phrase
+ * @returns {boolean}
+ */
+export function isQuestion(phrase) {
+  return /\?['"»”’)\]]*\s*$/.test(String(phrase ?? '').trim())
+}
+
 /** Split a phrase into whitespace-separated word tokens (punctuation kept). */
 export function phraseTokens(phrase) {
   return String(phrase ?? '')

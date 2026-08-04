@@ -137,6 +137,27 @@ describe('WordBankExercise order-insensitive grading (#267)', () => {
   })
 })
 
+describe('WordBankExercise question cue (#514)', () => {
+  it('flags a heard question the learner cannot see the "?" of', () => {
+    const wrapper = mount(WordBankExercise, {
+      props: { exercise: { ...exercise, audio: true, ru: 'Вы берёте зо́нтик?' } },
+    })
+    expect(wrapper.find('.q-cue').exists()).toBe(true)
+  })
+
+  it('shows no cue for a heard statement', () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise: { ...exercise, audio: true } } })
+    expect(wrapper.find('.q-cue').exists()).toBe(false)
+  })
+
+  it('shows no cue when the phrase is on screen (the "?" is already visible)', () => {
+    const wrapper = mount(WordBankExercise, {
+      props: { exercise: { ...exercise, audio: false, ru: 'Вы берёте зо́нтик?' } },
+    })
+    expect(wrapper.find('.q-cue').exists()).toBe(false)
+  })
+})
+
 describe('WordBankExercise type-ahead', () => {
   const press = (key) => window.dispatchEvent(new window.KeyboardEvent('keydown', { key }))
 

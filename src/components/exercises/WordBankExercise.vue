@@ -6,6 +6,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 import {
   buildListeningBank,
+  isQuestion,
   listeningTokens,
   listeningWordPool,
   phraseCorrect,
@@ -50,6 +51,10 @@ const typed = ref('')
 // all store. If the learner believes a "wrong" grade was actually right, they
 // can override it — crediting the attempt and reporting it for curation.
 const overridden = ref(false)
+
+// In listen mode the "?" is only heard, and browser TTS rarely conveys the
+// rising question intonation, so flag questions in the prompt (#514).
+const showQuestionCue = computed(() => props.exercise.audio && isQuestion(props.exercise.ru))
 
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
@@ -188,6 +193,9 @@ onUnmounted(() => {
       <template v-if="exercise.audio">
         <span class="muted">Translate what you hear</span>
         <SpeakButton :text="exercise.ru" />
+        <span v-if="showQuestionCue" class="q-cue" title="This sentence is a question">
+          ❓ question
+        </span>
       </template>
       <HintablePhrase v-else :text="exercise.ru" mode="inline" class="cue" />
     </div>
@@ -275,6 +283,14 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   font-size: 1.3rem;
+}
+.q-cue {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  white-space: nowrap;
 }
 .answer-line {
   display: flex;

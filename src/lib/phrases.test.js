@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
+  isQuestion,
   phraseTokens,
   typingSequence,
   phraseCorrect,
@@ -25,6 +26,26 @@ function seededRng(seed) {
     return s / 0xffffffff
   }
 }
+
+describe('isQuestion', () => {
+  it('detects a trailing question mark', () => {
+    expect(isQuestion('Вы берёте зо́нтик в доро́гу?')).toBe(true)
+    expect(isQuestion('Are you taking an umbrella?')).toBe(true)
+  })
+  it('ignores trailing whitespace and closing quotes', () => {
+    expect(isQuestion('«Ты идёшь?»')).toBe(true)
+    expect(isQuestion('Кто там?  ')).toBe(true)
+  })
+  it('is false for statements and exclamations', () => {
+    expect(isQuestion('Я иду́ в шко́лу.')).toBe(false)
+    expect(isQuestion('Осторо́жно!')).toBe(false)
+    expect(isQuestion('')).toBe(false)
+    expect(isQuestion(null)).toBe(false)
+  })
+  it('does not fire on a mid-sentence question mark', () => {
+    expect(isQuestion('«Ты идёшь?» — спроси́л он.')).toBe(false)
+  })
+})
 
 describe('phraseTokens', () => {
   it('splits on whitespace and keeps punctuation attached', () => {
