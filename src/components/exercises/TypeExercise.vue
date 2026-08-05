@@ -12,7 +12,14 @@
 // hasn't learned yet (the ones they can't be expected to spell).
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import { assessedWordCorrect, phraseCorrect, spellingDiff, typingSequence } from '../../lib/phrases.js'
+import {
+  assessedWordCorrect,
+  phraseCorrect,
+  phraseFeedback,
+  spellingDiff,
+  typingSequence,
+} from '../../lib/phrases.js'
+import { shuffle } from '../../lib/quiz.js'
 import { normToken } from '../../lib/phraseHint.js'
 import { stripStress } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
@@ -48,6 +55,18 @@ const retried = ref(false)
 // After a close-but-wrong first phrase attempt, the per-character map of where
 // the learner slipped (shown while they retry). Empty when we don't reveal it.
 const errorCells = ref([])
+// Graded feedback on the first wrong attempt (#523): a headline ("Almost
+// correct" / "Good try" / "One word missing" / …) driven by Levenshtein
+// similarity and a word-by-word pass. Null until the first miss.
+const feedback = ref(null)
+// When the first miss was "right words, wrong order", we swap the retry from
+// retyping to rearranging chips. `chips` are the learner's tokens (tap to place),
+// `placed` the order they've rebuilt so far.
+const reorderMode = ref(false)
+const chips = ref([])
+const placed = ref([])
+const placedIds = computed(() => new Set(placed.value.map((c) => c.id)))
+const availableChips = computed(() => chips.value.filter((c) => !placedIds.value.has(c.id)))
 // The ❓ Dictionary panel (unlearned phrase words) — collapsed by default.
 const dictOpen = ref(false)
 // Whether the learner switched the keyboard hint on at any point this exercise.
@@ -65,6 +84,10 @@ watch(
 const double = computed(() => firstTryCorrect.value && !hintUsed.value)
 
 const answer = computed(() => typingSequence(props.exercise.ru))
+
+// Every accepted Russian rendering (the target plus any synonyms) — the answer
+// is graded, and its feedback measured, against whichever one it's closest to.
+const gradeTargets = computed(() => [props.exercise.ru, ...(props.exercise.alsoRu ?? [])])
 
 // The unlearned words of a phrase, each with its meaning, for the Dictionary:
 // words the learner hasn't learned and isn't actively drilling. The word this
@@ -103,8 +126,7 @@ function closeEnough(cells) {
 
 function check() {
   if (checked.value) return
-  const targets = [props.exercise.ru, ...(props.exercise.alsoRu ?? [])]
-  wasCorrect.value = phraseCorrect(typed.value, targets)
+  wasCorrect.value = phraseCorrect(typed.value, gradeTargets.value)
   if (!retried.value) {
     // Capture the first, unaided attempt's outcome — the only evidence of
     // unaided recall. A phrase can be wrong overall yet the assessed word
@@ -117,15 +139,53 @@ function check() {
   }
   if (!wasCorrect.value && !retried.value) {
     retried.value = true
-    // Mark where the unaided attempt slipped (when close), then unlock the
-    // keyboard hint so the second try can be aided.
-    const cells = spellingDiff(typingSequence(typed.value), answer.value)
-    if (closeEnough(cells)) errorCells.value = cells
-    setHintAllowed(true)
-    typed.value = ''
+    // Grade *how* the attempt missed so the retry hint can say more than "not
+    // quite" (#523).
+    feedback.value = phraseFeedback(typed.value, gradeTargets.value)
+    if (feedback.value.reorder) {
+      // Right words, wrong order: retry by rearranging chips, not retyping.
+      enterReorder(feedback.value.chips)
+    } else {
+      // Mark where the unaided attempt slipped (when close), then unlock the
+      // keyboard hint so the second try can be aided.
+      const cells = spellingDiff(typingSequence(typed.value), answer.value)
+      if (closeEnough(cells)) errorCells.value = cells
+      setHintAllowed(true)
+      typed.value = ''
+    }
     playFeedback(false)
     return
   }
+  resolve()
+}
+
+// Enter reorder mode: turn the learner's own words into tappable chips (shuffled
+// so the wrong order isn't simply reproduced left to right).
+function enterReorder(words) {
+  reorderMode.value = true
+  chips.value = shuffle(words.map((text, id) => ({ id, text })))
+  placed.value = []
+}
+
+function placeChip(chip) {
+  if (checked.value || placedIds.value.has(chip.id)) return
+  placed.value.push(chip)
+}
+function unplaceChip(chip) {
+  if (checked.value) return
+  placed.value = placed.value.filter((c) => c.id !== chip.id)
+}
+
+// Grade the rearranged chips as the (aided) second attempt.
+function checkOrder() {
+  if (checked.value) return
+  wasCorrect.value = phraseCorrect(placed.value.map((c) => c.text).join(' '), gradeTargets.value)
+  resolve()
+}
+
+// Settle the exercise: play feedback, celebrate a clean first try, and read the
+// answer aloud once resolved.
+function resolve() {
   checked.value = true
   playFeedback(wasCorrect.value)
   if (double.value) showFire.value = true
@@ -177,7 +237,7 @@ onBeforeUnmount(() => setHintAllowed(true))
       <small v-if="exercise.pos && !isPhrase" class="pos">{{ exercise.pos }}</small>
     </div>
 
-    <form @submit.prevent="check">
+    <form v-if="!reorderMode" @submit.prevent="check">
       <input
         v-model="typed"
         type="text"
@@ -192,9 +252,39 @@ onBeforeUnmount(() => setHintAllowed(true))
       />
     </form>
 
+    <!-- Right words, wrong order (#523): rebuild the phrase by tapping the chips
+         into the correct order instead of retyping. -->
+    <div v-if="reorderMode && !checked" class="reorder">
+      <div class="answer-line" :aria-label="placed.map((c) => c.text).join(' ')">
+        <button
+          v-for="chip in placed"
+          :key="chip.id"
+          type="button"
+          class="chip placed"
+          lang="ru"
+          @click="unplaceChip(chip)"
+        >
+          {{ chip.text }}
+        </button>
+        <span v-if="!placed.length" class="muted">Tap the words in order…</span>
+      </div>
+      <div class="bank">
+        <button
+          v-for="chip in availableChips"
+          :key="chip.id"
+          type="button"
+          class="chip"
+          lang="ru"
+          @click="placeChip(chip)"
+        >
+          {{ chip.text }}
+        </button>
+      </div>
+    </div>
+
     <!-- Dictionary: reveal, with no penalty, the phrase words the learner can't
          be expected to spell yet. -->
-    <div v-if="dictionary.length && !checked" class="dictionary">
+    <div v-if="dictionary.length && !checked && !reorderMode" class="dictionary">
       <button type="button" class="dict-toggle" :aria-expanded="dictOpen" @click="dictOpen = !dictOpen">
         ❓ Dictionary
       </button>
@@ -207,7 +297,10 @@ onBeforeUnmount(() => setHintAllowed(true))
     </div>
 
     <template v-if="retried && !checked">
-      <p class="retry-hint">Not quite — try again</p>
+      <p class="retry-hint" :class="feedback?.tier">
+        {{ feedback?.message ?? 'Not quite' }}
+        <span class="retry-again">— {{ reorderMode ? 'reorder the words' : 'try again' }}</span>
+      </p>
       <!-- Where the first, unaided try slipped: wrong letters flagged, gaps for
            omissions — without revealing the correct letters. -->
       <p v-if="errorCells.length" class="error-map" aria-label="Where your spelling went wrong">
@@ -232,7 +325,15 @@ onBeforeUnmount(() => setHintAllowed(true))
 
     <div class="row check-row">
       <CelebrationBurst :show="showFire" emoji="🔥" />
-      <button v-if="!checked" class="primary check" :disabled="!typed.trim()" @click="check">
+      <button
+        v-if="!checked && reorderMode"
+        class="primary check"
+        :disabled="!placed.length"
+        @click="checkOrder"
+      >
+        Check
+      </button>
+      <button v-else-if="!checked" class="primary check" :disabled="!typed.trim()" @click="check">
         Check
       </button>
       <button v-else class="primary next" @click="next">Next →</button>
@@ -264,8 +365,48 @@ onBeforeUnmount(() => setHintAllowed(true))
 }
 .retry-hint {
   margin: 0;
-  color: var(--bad);
+  color: var(--gold);
   font-size: 0.9rem;
+}
+/* Only a genuinely-far answer ("Incorrect") reads red; the closer bands and the
+   structural hints (reorder / missing word) stay amber — encouraging, not a
+   rejection. */
+.retry-hint.incorrect {
+  color: var(--bad);
+}
+.retry-again {
+  color: var(--muted);
+}
+.reorder {
+  display: grid;
+  gap: 0.6rem;
+}
+.reorder .answer-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 3rem;
+  align-items: center;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+}
+.reorder .bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chip {
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: 1.05rem;
+}
+.chip.placed {
+  border-color: var(--primary);
 }
 .dictionary {
   display: flex;

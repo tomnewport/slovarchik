@@ -256,6 +256,124 @@ export function spellingDistance(typed, answer) {
   return spellingDiff(typed, answer).filter((c) => c.type !== 'ok').length
 }
 
+/** How alike two single words are, 0 (nothing in common) … 1 (identical after
+ * folding), from their edit distance relative to the longer word. */
+function wordSimilarity(a, b) {
+  const max = Math.max(a.length, b.length)
+  if (!max) return 1
+  return 1 - spellingDistance(a, b) / max
+}
+
+/**
+ * Pair each target word with the closest not-yet-used typed word whose spelling
+ * similarity clears `threshold` (so a misspelt-but-recognisable word still
+ * counts as present), and report what's left over: `missing` target words with
+ * no partner, and `extra` typed words that matched nothing. Both word lists are
+ * expected already normalised (lowercased, stress/ё-folded, article-stripped).
+ * @param {string[]} typedWords
+ * @param {string[]} targetWords
+ * @param {number} [threshold]
+ * @returns {{missing: number, extra: number}}
+ */
+function matchWords(typedWords, targetWords, threshold = 0.5) {
+  const used = new Array(typedWords.length).fill(false)
+  let missing = 0
+  for (const target of targetWords) {
+    let bestIdx = -1
+    let bestSim = 0
+    for (let i = 0; i < typedWords.length; i++) {
+      if (used[i]) continue
+      const sim = wordSimilarity(typedWords[i], target)
+      if (sim > bestSim) {
+        bestSim = sim
+        bestIdx = i
+      }
+    }
+    if (bestIdx >= 0 && bestSim >= threshold) used[bestIdx] = true
+    else missing++
+  }
+  return { missing, extra: used.filter((u) => !u).length }
+}
+
+// Similarity bands (Levenshtein-derived) → the headline shown for a wrong
+// answer, best-match first (#523). We never show the percentage; the band name
+// is the whole message.
+const FEEDBACK_BANDS = [
+  { tier: 'almost', min: 0.95, message: 'Almost correct' },
+  { tier: 'notQuite', min: 0.8, message: 'Not quite' },
+  { tier: 'goodTry', min: 0.7, message: 'Good try' },
+  { tier: 'incorrect', min: 0, message: 'Incorrect' },
+]
+
+const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six']
+function countWord(n) {
+  return (NUMBER_WORDS[n] ?? String(n)).replace(/^./, (c) => c.toUpperCase())
+}
+
+/**
+ * Describe *how* a wrong phrase/word answer missed, so the drill can say more
+ * than a flat "not quite" (#523). Two measures combine:
+ *
+ *  1. A Levenshtein similarity band gives the headline — "Almost correct" (≥95%),
+ *     "Not quite" (≥80%), "Good try" (≥70%), else "Incorrect" — measured against
+ *     whichever accepted rendering the answer is closest to.
+ *  2. A word-by-word pass overrides that headline for two structural slips it can
+ *     name precisely: the right words in the wrong order (offer a reorder), and
+ *     one or more whole words left out.
+ *
+ * Only meaningful for a *wrong* answer; a correct one still returns a band.
+ * `target` may be a single rendering or a list of accepted ones.
+ * @param {string} input
+ * @param {string|string[]} target
+ * @returns {{tier: string, message: string, reorder: boolean, chips: string[]}}
+ */
+export function phraseFeedback(input, target) {
+  const targets = Array.isArray(target) ? target : [target]
+  const got = foldYo(stripArticles(typingSequence(input)))
+
+  // Similarity band, measured against the closest accepted rendering.
+  let sim = -1
+  let closest = ''
+  for (const t of targets) {
+    const wanted = foldYo(stripArticles(typingSequence(t)))
+    if (!wanted.length) continue
+    const s = wanted === got ? 1 : 1 - spellingDistance(got, wanted) / Math.max(got.length, wanted.length)
+    if (s > sim) {
+      sim = s
+      closest = wanted
+    }
+  }
+  const band = FEEDBACK_BANDS.find((b) => sim >= b.min) ?? FEEDBACK_BANDS[FEEDBACK_BANDS.length - 1]
+
+  // Right words, wrong order — a reordering, not a respelling. Chips come from
+  // the learner's own tokens (ё preserved) since the bag already matches.
+  if (phraseCorrectBagOfWords(input, targets) && !phraseCorrect(input, targets)) {
+    return {
+      tier: 'reorder',
+      message: 'Right words, wrong order',
+      reorder: true,
+      chips: typingSequence(input).split(' ').filter(Boolean),
+    }
+  }
+
+  // Whole words left out: every target word bar a few is present (misspellings
+  // allowed) and the learner typed nothing wrong in their place.
+  const targetWords = closest.split(' ').filter(Boolean)
+  if (targetWords.length > 1) {
+    const { missing, extra } = matchWords(got.split(' ').filter(Boolean), targetWords)
+    if (missing >= 1 && extra === 0) {
+      return {
+        tier: band.tier,
+        message: `${countWord(missing)} ${missing === 1 ? 'word' : 'words'} missing`,
+        reorder: false,
+        chips: [],
+      }
+    }
+  }
+
+  return { tier: band.tier, message: band.message, reorder: false, chips: [] }
+}
+
 /**
  * Display tokens for the listening word bank: each word lowercased with
  * surrounding punctuation and stress marks removed (internal apostrophes in
