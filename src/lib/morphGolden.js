@@ -73,6 +73,42 @@ export const GOLDEN = {
     n_pre: 'не́коем',
   },
 
+  // ─── #448 noun corrections ───────────────────────────────────────────────
+  // ё-stem feminine noun: the stressed vowel is ё in every form, never a plain
+  // stressed е. The whole paradigm was mechanically written `реше́тк-` while the
+  // headword declares `решётка` — this is the required-ё regression guard
+  // (comparison here is ё-sensitive, so `реше́тка` fails against `решётка`).
+  'решётка=grating': {
+    sg_nom: 'решётка',
+    sg_gen: 'решётки',
+    sg_dat: 'решётке',
+    sg_acc: 'решётку',
+    sg_ins: 'решёткой',
+    sg_pre: 'решётке',
+    pl_nom: 'решётки',
+    pl_gen: 'решёток',
+    pl_dat: 'решёткам',
+    pl_acc: 'решётки',
+    pl_ins: 'решётками',
+    pl_pre: 'решётках',
+  },
+
+  // Animate neuter noun: in the plural the accusative of an animate noun of any
+  // gender copies the genitive (суще́ств), so a stored nominative-shaped
+  // существа́ in the acc cell is the animacy defect this pins shut.
+  'существо=creature': {
+    pl_gen: 'суще́ств',
+    pl_acc: 'суще́ств',
+  },
+
+  // Ghost sense is animate: sg/pl accusative both copy the genitive (ду́ха /
+  // ду́хов). Pinning the animate acc keeps the sense-split from collapsing back
+  // into the inanimate `дух`/`ду́хи` forms that belong to `дух=spirit`.
+  'дух=ghost': {
+    sg_acc: 'ду́ха',
+    pl_acc: 'ду́хов',
+  },
+
   // Conjugates like дать: 1pl/2pl are задади́м/задади́те, not the stem-clipped
   // *зади́м/*зади́те.
   'задать=to assign': {
