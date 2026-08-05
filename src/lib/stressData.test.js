@@ -20,7 +20,13 @@
 import { describe, it, expect } from 'vitest'
 
 import { loadFixtureWords, loadFixtureRules } from '../test/fixtures.js'
-import { annotatedStressDivergences, latinInRussianText } from './stressAudit.js'
+import {
+  annotatedStressDivergences,
+  latinInRussianText,
+  missingStressMarks,
+  stressGoldenMismatches,
+} from './stressAudit.js'
+import { STRESS_GOLDEN } from './stressGolden.js'
 
 const words = loadFixtureWords()
 const rules = loadFixtureRules()
@@ -40,6 +46,26 @@ describe('stress data integrity', () => {
       divergences,
       `Wrong-syllable stress — fix the mis-stressed side (phrase or paradigm):\n${divergences
         .map((d) => `  [${d.id}] token «${d.token}» vs stored «${d.stored}»  (${d.ru})`)
+        .join('\n')}`,
+    ).toEqual([])
+  })
+
+  it('has no multi-syllable Russian token written without a stress mark', () => {
+    const missing = missingStressMarks(words)
+    expect(
+      missing,
+      `Multi-syllable forms missing their stress mark:\n${missing
+        .map((m) => `  [${m.key}] ${m.where} «${m.token}»${m.ru ? `  (${m.ru})` : ''}`)
+        .join('\n')}`,
+    ).toEqual([])
+  })
+
+  it('agrees with the curated stress-golden table on every pinned form', () => {
+    const mismatches = stressGoldenMismatches(words, STRESS_GOLDEN)
+    expect(
+      mismatches,
+      `Stored stress disagrees with the golden reference — fix the vocab YAML:\n${mismatches
+        .map((m) => `  [${m.key}] ${m.slot}: expected «${m.expected}», found ${m.actual == null ? '(missing)' : `«${m.actual}»`}`)
         .join('\n')}`,
     ).toEqual([])
   })

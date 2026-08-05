@@ -22,7 +22,13 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import { buildWords, POS_BY_FILE } from '../src/lib/vocabBuild.js'
-import { annotatedStressDivergences, latinInRussianText } from '../src/lib/stressAudit.js'
+import {
+  annotatedStressDivergences,
+  latinInRussianText,
+  missingStressMarks,
+  stressGoldenMismatches,
+} from '../src/lib/stressAudit.js'
+import { STRESS_GOLDEN } from '../src/lib/stressGolden.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'vocab')
 
@@ -48,6 +54,20 @@ for (const d of div) {
   console.log(`      ${d.ru}`)
 }
 
-const total = latin.length + div.length
+const golden = stressGoldenMismatches(words, STRESS_GOLDEN)
+console.log(`\n=== Stored stress vs curated golden table (${golden.length}) ===`)
+for (const m of golden) {
+  console.log(
+    `  [${m.key}] ${m.slot}: expected «${m.expected}», found ${m.actual == null ? '(missing)' : `«${m.actual}»`}`,
+  )
+}
+
+const missing = missingStressMarks(words)
+console.log(`\n=== Multi-syllable tokens missing a stress mark (${missing.length}) ===`)
+for (const m of missing) {
+  console.log(`  [${m.key}] ${m.where} «${m.token}»${m.ru ? `  ${m.ru}` : ''}`)
+}
+
+const total = latin.length + div.length + golden.length + missing.length
 console.log(`\nTOTAL: ${total}`)
 process.exitCode = total ? 1 : 0
