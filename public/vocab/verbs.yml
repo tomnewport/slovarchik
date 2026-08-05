@@ -922,8 +922,9 @@ words:
       - ru: Де́ти броса́ются в во́ду.
         en_gb: The children fling themselves into the water.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
-      - ru: Он бро́сился на по́мощь дру́гу.
-        en_gb: He rushed to help his friend.
+      - ru: Он всегда́ броса́ется на по́мощь дру́гу.
+        en_gb: He always rushes to help his friend.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: В жару́ де́ти бу́дут броса́ться в во́ду.
         en_gb: In the heat the children will be rushing into the water.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
@@ -17519,8 +17520,9 @@ words:
       - ru: Мы бу́дем остава́ться на свя́зи.
         en_gb: We will stay in touch.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
-      - ru: Е́сли б ты попроси́л, я оста́лся бы.
-        en_gb: I would stay if you asked.
+      - ru: Е́сли б ты проси́л, я остава́лся бы до́ма.
+        en_gb: If you asked me to, I would stay at home.
+        inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
       - ru: Ты остаёшься споко́йным?
         en_gb: Do you stay calm?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }

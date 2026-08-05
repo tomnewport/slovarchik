@@ -13689,8 +13689,9 @@ words:
       - ru: Наш дом стои́т у реки́.
         en_gb: Our house stands by the river.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
-      - ru: Мы верну́лись домо́й по́здно ве́чером.
-        en_gb: We returned home late in the evening.
+      - ru: Он подошёл к до́му по́здно ве́чером.
+        en_gb: He approached the house late in the evening.
+        inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В на́шем го́роде стро́ят но́вые дома́.
         en_gb: New houses are being built in our city.
         inflect: { token: 6, case: acc, number: pl, rule: noun-acc-pl }
@@ -33779,8 +33780,9 @@ words:
       - ru: Я посмотре́л на низ страни́цы.
         en_gb: I looked at the bottom of the page.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: По́дпись стои́т внизу́ страни́цы.
-        en_gb: The signature is at the bottom of the page.
+      - ru: Он дошёл до ни́за ле́стницы.
+        en_gb: He got to the bottom of the stairs.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Низ страни́цы оста́лся пусты́м.
         en_gb: The bottom of the page remained empty.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
@@ -50172,7 +50174,7 @@ words:
       pl_acc: ру́ды
       pl_ins: ру́дами
       pl_pre: ру́дах
-  "ружьё=rifle":
+  "ружьё=shotgun":
     cefr_level: B1
     gender: n
     animacy: i
@@ -50181,7 +50183,9 @@ words:
       - military
       - sport
     en_gb:
-      standard: rifle (a long-barrelled firearm)
+      standard: shotgun (a smooth-bore gun, typically for hunting)
+      alt:
+        - gun (a hunting or sporting firearm)
     declension:
       sg_nom: ружьё
       sg_gen: ружья́
@@ -50197,13 +50201,13 @@ words:
       pl_pre: ру́жьях
     usage:
       - ru: Охо́тник заряди́л ружьё.
-        en_gb: The hunter loaded the rifle.
+        en_gb: The hunter loaded the shotgun.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Без ружья́ на охо́ту не хо́дят.
-        en_gb: One does not go hunting without a rifle.
+        en_gb: One does not go hunting without a shotgun.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В музе́е храня́тся ста́рые ру́жья.
-        en_gb: Old rifles are kept in the museum.
+        en_gb: Old shotguns are kept in the museum.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
   "рука=hand":
     cefr_level: A1
