@@ -15823,8 +15823,9 @@ words:
       pl_ins: при́нятыми
       pl_pre: при́нятых
     usage:
-      - ru: Э́то общепри́нятый поря́док.
-        en_gb: This is a generally accepted procedure.
+      - ru: Э́то при́нятый поря́док.
+        en_gb: This is the accepted procedure.
+        inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Така́я при́нятая фо́рма обще́ния.
         en_gb: Such is the accepted form of communication.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
