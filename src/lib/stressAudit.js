@@ -109,6 +109,52 @@ export function storedForm(word, t) {
 }
 
 /**
+ * Read a word's stored form for a stress-golden slot key. Understands
+ * `headword`, dotted conjugation slots (`present.3sg`), bare conjugation slots
+ * (`past_m`), and flat declension slots (`sg_gen`), returning null when the slot
+ * is absent.
+ */
+function readStressCell(word, slot) {
+  if (slot === 'headword') return word.headword ?? null
+  if (slot.includes('.')) {
+    const [block, person] = slot.split('.')
+    return word.extra?.conjugation?.[block]?.[person] ?? null
+  }
+  const conj = word.extra?.conjugation
+  if (conj && typeof conj[slot] === 'string') return conj[slot]
+  return word.extra?.declension?.[slot] ?? null
+}
+
+/**
+ * Stored forms whose *stress placement* disagrees with a curated golden table
+ * (stressGolden.js `STRESS_GOLDEN`). Unlike annotatedStressDivergences — which
+ * can only fire when a phrase token contradicts its own paradigm cell — this is
+ * an independent reference: it catches a headword or a whole paradigm that has
+ * uniformly drifted onto the wrong syllable (the выгля́деть-for-вы́глядеть class,
+ * or a homograph flipped into its twin, замо́к↔за́мок / сто́ит↔стои́т). Comparison
+ * is stress-sensitive (via normTokenStress) but folds case and ё, so only the
+ * accent position is judged here; the letters are morphOracle's job.
+ *
+ * @param {object[]} words   normalised word list (from buildWords)
+ * @param {Record<string, Record<string, string>>} golden key → slot → correct stressed form
+ * @returns {{key: string, slot: string, expected: string, actual: string|null}[]}
+ */
+export function stressGoldenMismatches(words, golden) {
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  const out = []
+  for (const [key, cells] of Object.entries(golden ?? {})) {
+    const word = byKey.get(key)
+    if (!word) continue // a renamed/removed entry is a data-shape test's problem, not ours
+    for (const [slot, expected] of Object.entries(cells)) {
+      const actual = readStressCell(word, slot)
+      const ok = actual != null && normTokenStress(actual) === normTokenStress(expected)
+      if (!ok) out.push({ key, slot, expected, actual })
+    }
+  }
+  return out
+}
+
+/**
  * Annotated usage tokens whose stress disagrees with the word's own stored
  * paradigm form for the annotated slot. Only tokens whose *core* (stress
  * stripped) already matches the stored form are considered, so a genuine

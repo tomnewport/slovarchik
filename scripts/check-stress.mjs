@@ -22,7 +22,12 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import { buildWords, POS_BY_FILE } from '../src/lib/vocabBuild.js'
-import { annotatedStressDivergences, latinInRussianText } from '../src/lib/stressAudit.js'
+import {
+  annotatedStressDivergences,
+  latinInRussianText,
+  stressGoldenMismatches,
+} from '../src/lib/stressAudit.js'
+import { STRESS_GOLDEN } from '../src/lib/stressGolden.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'vocab')
 
@@ -48,6 +53,14 @@ for (const d of div) {
   console.log(`      ${d.ru}`)
 }
 
-const total = latin.length + div.length
+const golden = stressGoldenMismatches(words, STRESS_GOLDEN)
+console.log(`\n=== Stored stress vs curated golden table (${golden.length}) ===`)
+for (const m of golden) {
+  console.log(
+    `  [${m.key}] ${m.slot}: expected «${m.expected}», found ${m.actual == null ? '(missing)' : `«${m.actual}»`}`,
+  )
+}
+
+const total = latin.length + div.length + golden.length
 console.log(`\nTOTAL: ${total}`)
 process.exitCode = total ? 1 : 0

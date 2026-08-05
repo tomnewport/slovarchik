@@ -1823,7 +1823,7 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "видать=to see":
     cefr_level: B2
-    accented: ви́дать
+    accented: вида́ть
     aspect: impf
     collections:
       - daily life
@@ -1851,7 +1851,7 @@ words:
       - ru: Ты вида́ешь э́ту го́ру отсю́да?
         en_gb: Can you see this mountain from here?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
-      - ru: В таку́ю пого́ду ты бу́дешь ви́дать го́ры отсю́да.
+      - ru: В таку́ю пого́ду ты бу́дешь вида́ть го́ры отсю́да.
         en_gb: In such weather you will see the mountains from here.
         inflect: { token: 5, tense: future, person: 2sg, rule: verb-future }
       - ru: Без очко́в я бы не вида́л доро́гу.
@@ -3463,30 +3463,30 @@ words:
         - to appear
     conjugation:
       present:
-        "1sg": выгляжу́
-        "2sg": выгля́дишь
-        "3sg": выгля́дит
-        "1pl": выгля́дим
-        "2pl": выгля́дите
-        "3pl": выгля́дят
-      past_m: выгля́дел
-      past_f: выгля́дела
-      past_n: выгля́дело
-      past_pl: выгля́дели
+        "1sg": вы́гляжу
+        "2sg": вы́глядишь
+        "3sg": вы́глядит
+        "1pl": вы́глядим
+        "2pl": вы́глядите
+        "3pl": вы́глядят
+      past_m: вы́глядел
+      past_f: вы́глядела
+      past_n: вы́глядело
+      past_pl: вы́глядели
     usage:
-      - ru: Ты сего́дня хорошо́ выгля́дишь.
+      - ru: Ты сего́дня хорошо́ вы́глядишь.
         en_gb: You look well today.
         inflect: { token: 4, tense: present, person: 2sg, rule: verb-present }
-      - ru: Дом выгля́дел ста́рым.
+      - ru: Дом вы́глядел ста́рым.
         en_gb: The house looked old.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Они́ выгля́дят уста́лыми.
+      - ru: Они́ вы́глядят уста́лыми.
         en_gb: They look tired.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
-      - ru: По́сле о́тдыха ты бу́дешь выгля́деть лу́чше.
+      - ru: По́сле о́тдыха ты бу́дешь вы́глядеть лу́чше.
         en_gb: After the rest you will look better.
         inflect: { token: 4, tense: future, person: 2sg, rule: verb-future }
-      - ru: Без сна я бы выгля́дел уста́лым.
+      - ru: Без сна я бы вы́глядел уста́лым.
         en_gb: Without sleep I would look tired.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
   "выдавать=to give out":
@@ -6083,7 +6083,7 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "догадаться=to guess":
     cefr_level: B1
-    accented: дога́даться
+    accented: догада́ться
     aspect: pf
     pair: "догадываться=to guess"
     collections:
@@ -6815,7 +6815,7 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "доходить=to reach":
     cefr_level: B1
-    accented: дохо́дить
+    accented: доходи́ть
     aspect: impf
     pair: "дойти=to reach"
     collections:
@@ -10109,7 +10109,7 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "заходить=to drop in":
     cefr_level: A2
-    accented: захо́дить
+    accented: заходи́ть
     aspect: impf
     collections:
       - motion
@@ -16743,7 +16743,7 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "означать=to mean":
     cefr_level: B1
-    accented: озна́чать
+    accented: означа́ть
     aspect: impf
     collections:
       - communication
@@ -22742,7 +22742,7 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "покачать=to rock":
     cefr_level: B1
-    accented: пока́чать
+    accented: покача́ть
     aspect: pf
     collections:
       - daily life
@@ -22958,7 +22958,7 @@ words:
       past_pl: покупа́ли
   "полагать=to suppose":
     cefr_level: B2
-    accented: пола́гать
+    accented: полага́ть
     aspect: impf
     collections:
       - communication
@@ -22999,7 +22999,7 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "полагаться=to rely on":
     cefr_level: B1
-    accented: пола́гаться
+    accented: полага́ться
     aspect: impf
     collections:
       - daily life
@@ -29693,7 +29693,7 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "развиваться=to develop":
     cefr_level: B1
-    accented: разви́ваться
+    accented: развива́ться
     aspect: impf
     collections:
       - daily life
@@ -30408,7 +30408,7 @@ words:
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
   "расположить=to arrange":
     cefr_level: B1
-    accented: располо́жить
+    accented: расположи́ть
     aspect: pf
     collections:
       - daily life
