@@ -1,8 +1,19 @@
 import { describe, it, expect } from 'vitest'
 
 import {
-  analyze, decide, FILES, loadVocabFile, parseUsageItems,
+  analyze, decide, isAccObject, norm, FILES, loadVocabFile, parseUsageItems,
 } from './annotate-inflect.mjs'
+
+// A hand-built accusative context (no corpus read) for the direct-object tests:
+// «купи́л»/«ви́жу»/«игра́л» are transitive finite verbs, «купи́» an imperative, and
+// «челове́к» an unambiguous nominative form eligible to be a subject.
+const ACC_CTX = {
+  nomForms: new Set([norm('челове́к')]),
+  verbIdx: {
+    finite: new Set([norm('купи́л'), norm('ви́жу'), norm('игра́л'), norm('разбуди́л')]),
+    imper: new Set([norm('купи́')]),
+  },
+}
 
 // A minimal feminine noun (кни́га): sg_dat and sg_pre are syncretic (кни́ге),
 // pl_nom/pl_acc are syncretic (кни́ги), acc sg is distinct (кни́гу).
@@ -70,11 +81,22 @@ describe('analyze — bucket classification', () => {
     expect(a.dec.fields).toMatchObject({ case: 'pre', number: 'sg' })
   })
 
-  it('routes an inanimate nom/acc form to accusative-object (confirm the case)', () => {
-    const a = analyze('noun', stol, 'Я купи́л стол.')
+  it('auto-annotates an inanimate nom/acc form the syntax proves is a direct object', () => {
+    // «Я купи́л стол»: subject pronoun + transitive finite verb → стол is the
+    // object, so its nom≡acc form resolves to accusative and auto-annotates.
+    const a = analyze('noun', stol, 'Я купи́л стол.', ACC_CTX)
+    expect(a.status).toBe('annotate')
+    expect(a.bucket).toBe('direct-object-acc')
+    expect(a.dec).toMatchObject({ token: 3, fields: { case: 'acc', number: 'sg' }, rule: 'noun-acc-sg' })
+  })
+
+  it('leaves a nom/acc form it cannot prove an object as accusative-object (confirm)', () => {
+    // Sentence-initial стол may well be the subject; with no object frame the
+    // syntax test declines, so it stays a hand-confirm accusative-object.
+    const a = analyze('noun', stol, 'Стол стои́т в углу́.', ACC_CTX)
     expect(a.status).toBe('skip')
     expect(a.bucket).toBe('accusative-object')
-    expect(a.dec).toMatchObject({ token: 3, fields: { case: 'acc' }, confirm: ['case'] })
+    expect(a.dec).toMatchObject({ token: 1, fields: { case: 'acc' }, confirm: ['case'] })
   })
 
   it('routes an animate acc=gen form to accusative-object', () => {
@@ -173,8 +195,48 @@ describe('analyze — bucket classification', () => {
 
   it('decide() still returns an annotation only for the auto-pinned buckets', () => {
     expect(decide('noun', kniga, 'Я чита́ю кни́гу.')).toMatchObject({ fields: { case: 'acc' } })
-    expect(decide('noun', stol, 'Я купи́л стол.')).toBeNull() // hand bucket → no auto
+    expect(decide('noun', stol, 'Я купи́л стол.', ACC_CTX)).toMatchObject({ fields: { case: 'acc' } }) // direct object
+    expect(decide('noun', stol, 'Стол стои́т в углу́.', ACC_CTX)).toBeNull() // unproven → hand bucket
     expect(decide('noun', kniga, 'Кни́га лежи́т на столе́.')).toBeNull() // nominative → no auto
+  })
+})
+
+// The direct-object accusative detector (ported from the #340 branch): a
+// nom≡acc syncretic form is auto-annotated accusative only when the syntax
+// makes it an unambiguous transitive object, and never in the precision hazards
+// the accusative annotation is prone to. These use the injected ACC_CTX so they
+// exercise the syntax test without the whole corpus.
+describe('isAccObject — direct-object syntax test', () => {
+  const T = (s) => s.split(/\s+/)
+  const yes = (s, i, why) => it(`accepts: ${why}`, () => expect(isAccObject(T(s), i, ACC_CTX)).toBe(true))
+  const no = (s, i, why) => it(`rejects: ${why}`, () => expect(isAccObject(T(s), i, ACC_CTX)).toBe(false))
+
+  yes('Я купи́л стол', 2, 'subject pronoun + transitive verb (S–V–O)')
+  yes('Купи́ стол', 1, 'imperative + object')
+  no('Стол купи́л челове́к', 0, 'OSV: fronted object is sentence-initial (idx 0)')
+  no('В теа́тре игра́л орга́н', 3, 'V–S inversion: the only subject candidate is a prep-object')
+  no('Э́то мой стол', 2, 'pointer «Это …» → predicate nominative')
+  no('Стол — мой вы́бор', 0, 'dash «X — Y» → predicate')
+  no('Его́ разбуди́л гром', 2, 'experiencer fronting: «Его́» is an oblique pronoun, not a subject')
+})
+
+describe('direct-object accusative — precision hazards stay unannotated', () => {
+  // A feminine noun's genitive (кни́ги) is syncretic with its nom/acc plural, so
+  // it is a 3-way form, never the {nom,acc}-only shape the detector requires —
+  // which is exactly why genitive-of-negation and the partitive can't be
+  // mistaken for a direct object here.
+  const kniga2 = {
+    animacy: 'i',
+    declension: {
+      sg_nom: 'кни́га', sg_gen: 'кни́ги', sg_dat: 'кни́ге', sg_acc: 'кни́гу',
+      sg_ins: 'кни́гой', sg_pre: 'кни́ге',
+      pl_nom: 'кни́ги', pl_gen: 'книг', pl_dat: 'кни́гам', pl_acc: 'кни́ги',
+      pl_ins: 'кни́гами', pl_pre: 'кни́гах',
+    },
+  }
+  it('does not annotate a genitive-of-negation form as accusative', () => {
+    const a = analyze('noun', kniga2, 'Я не чита́ю кни́ги.', ACC_CTX)
+    expect(a.bucket).not.toBe('direct-object-acc')
   })
 })
 

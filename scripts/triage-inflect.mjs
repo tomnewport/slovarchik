@@ -45,7 +45,7 @@ const limit = has('--limit') ? Number(val('--limit')) : 40;
 // Bucket groups drive how the report is organized and which buckets --suggest
 // can propose a concrete annotation for.
 const GROUPS = {
-  annotatable: ['single-cell', 'prep-pinned'],
+  annotatable: ['single-cell', 'prep-pinned', 'direct-object-acc'],
   // Buckets a human confirms — one per kind of case call. Under the exhaustive
   // policy (#436) this now includes nominative subjects and the genitive
   // governors, so `--suggest` proposes a case for every one of them.

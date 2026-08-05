@@ -38526,7 +38526,7 @@ words:
     usage:
       - ru: Покажи́те ваш па́спорт.
         en_gb: Show me your passport.
-        inflect: { token: 3, case: nom, number: sg, rule: noun-nom-sg }
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я потеря́л свой па́спорт.
         en_gb: I have lost my passport.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -40818,7 +40818,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Поста́вь плюс ме́жду чи́слами.
         en_gb: Put a plus between the numbers.
-        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
   "пляж=beach":
     cefr_level: A2
     gender: m
@@ -45103,10 +45103,10 @@ words:
     usage:
       - ru: Учи́тель привёл хоро́ший приме́р.
         en_gb: The teacher gave a good example.
-        inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Бери́ приме́р со ста́ршего бра́та.
         en_gb: Follow the example of your older brother.
-        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+        inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го поле́зных приме́ров.
         en_gb: There are many useful examples in the book.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -47551,7 +47551,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я не хочу́ начина́ть э́тот разгово́р.
         en_gb: I do not want to start this conversation.
-        inflect: { token: 6, case: nom, number: sg, rule: noun-nom-sg }
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́сле разгово́ра ему́ ста́ло ле́гче.
         en_gb: After the conversation he felt better.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -48935,7 +48935,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Они́ откры́ли но́вый рестора́н.
         en_gb: They opened a new restaurant.
-        inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том го́роде мно́го рестора́нов.
         en_gb: There are many restaurants in this city.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
@@ -50848,7 +50848,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он создаёт са́йты для компа́ний.
         en_gb: He creates websites for companies.
-        inflect: { token: 3, case: nom, number: pl, rule: noun-nom-pl }
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: сайт
       sg_gen: са́йта
