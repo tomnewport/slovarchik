@@ -100,7 +100,7 @@ describe('TypeExercise', () => {
     await wrapper.find('input[lang="ru"]').setValue('кот')
     await wrapper.find('button.check').trigger('click')
     // First wrong attempt → retry hint shown, answer not yet revealed.
-    expect(wrapper.text()).toContain('Not quite')
+    expect(wrapper.find('.retry-hint').exists()).toBe(true)
     expect(wrapper.text()).not.toContain('Answer:')
 
     // Second wrong attempt → answer revealed.
@@ -125,7 +125,7 @@ describe('TypeExercise', () => {
     // Wrong first, then the right answer on the retry — without touching the hint.
     await wrapper.find('input[lang="ru"]').setValue('кот')
     await wrapper.find('button.check').trigger('click')
-    expect(wrapper.text()).toContain('Not quite')
+    expect(wrapper.find('.retry-hint').exists()).toBe(true)
 
     await wrapper.find('input[lang="ru"]').setValue('дом')
     await wrapper.find('button.check').trigger('click')
@@ -282,7 +282,74 @@ describe('TypeExercise', () => {
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.find('.error-map').exists()).toBe(false)
     // The retry is still offered — just without the map.
-    expect(wrapper.text()).toContain('Not quite')
+    expect(wrapper.find('.retry-hint').exists()).toBe(true)
+  })
+
+  it('grades how the first miss missed instead of a flat "not quite" (#523)', async () => {
+    const wrapper = mount(TypeExercise, {
+      props: { exercise: { ...exercise, ru: 'автомобиль' } },
+    })
+    // One slip in a ten-letter word → "Not quite" band.
+    await wrapper.find('input[lang="ru"]').setValue('автамобиль')
+    await wrapper.find('button.check').trigger('click')
+    const hint = wrapper.find('.retry-hint')
+    expect(hint.text()).toContain('Not quite')
+    // A far-off answer reads red ("Incorrect"), a close one amber.
+    expect(hint.classes()).toContain('notQuite')
+  })
+
+  it('calls a nowhere-near single word "Incorrect"', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('button.check').trigger('click')
+    const hint = wrapper.find('.retry-hint')
+    expect(hint.text()).toContain('Incorrect')
+    expect(hint.classes()).toContain('incorrect')
+  })
+
+  it('names a missing word on a phrase miss', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    // Dropped "в" — the rest present and in order.
+    await wrapper.find('input[lang="ru"]').setValue('я иду школу')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.retry-hint').text()).toContain('One word missing')
+  })
+
+  it('offers a chip reorder when the words are right but the order is wrong', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    await wrapper.find('input[lang="ru"]').setValue('школу я иду в')
+    await wrapper.find('button.check').trigger('click')
+
+    expect(wrapper.find('.retry-hint').text()).toContain('Right words, wrong order')
+    // The text input gives way to a chip bank; no error map here.
+    expect(wrapper.find('input[lang="ru"]').exists()).toBe(false)
+    expect(wrapper.find('.error-map').exists()).toBe(false)
+    const bankChips = wrapper.findAll('.reorder .bank .chip')
+    expect(bankChips.map((c) => c.text()).sort()).toEqual(['в', 'иду', 'школу', 'я'])
+  })
+
+  it('grades the rearranged chips and credits a corrected retry (#447)', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    await wrapper.find('input[lang="ru"]').setValue('школу я иду в')
+    await wrapper.find('button.check').trigger('click')
+
+    // Tap the chips into the correct order: я иду в школу.
+    const order = ['я', 'иду', 'в', 'школу']
+    for (const word of order) {
+      const chip = wrapper.findAll('.reorder .bank .chip').find((c) => c.text() === word)
+      await chip.trigger('click')
+    }
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.text()).toContain('Correct')
+
+    await wrapper.find('button.next').trigger('click')
+    // A reorder success is a corrected retry, never a first-try double.
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: true,
+      double: false,
+      wordCorrect: true,
+    })
   })
 
   // Dictionary: the unlearned words of a phrase, revealed with no penalty.

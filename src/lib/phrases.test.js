@@ -16,6 +16,7 @@ import {
   listeningWordPool,
   buildListeningBank,
   buildAssemblyBank,
+  phraseFeedback,
 } from './phrases.js'
 
 // A deterministic pseudo-rng so hintKeys assertions are stable.
@@ -248,6 +249,68 @@ describe('spellingDiff / spellingDistance', () => {
   it('folds ё/е and case so neither counts as a spelling error', () => {
     expect(spellingDistance('ВСЕ', 'всё')).toBe(0)
     expect(types('ВСЕ', 'всё')).toEqual(['ok', 'ok', 'ok'])
+  })
+})
+
+describe('phraseFeedback', () => {
+  it('bands a single-word slip by Levenshtein similarity', () => {
+    // 1 edit in автомобиль (10 letters) → 90% → "Not quite".
+    expect(phraseFeedback('автамобиль', 'автомобиль').message).toBe('Not quite')
+    expect(phraseFeedback('автамобиль', 'автомобиль').tier).toBe('notQuite')
+  })
+  it('says "Almost correct" for a near-perfect answer', () => {
+    // 1 slip (школе for школу) in a 25-char phrase → ~96% → "Almost correct".
+    const fb = phraseFeedback('я иду в школе каждый день', 'я иду в школу каждый день')
+    expect(fb.message).toBe('Almost correct')
+    expect(fb.tier).toBe('almost')
+  })
+  it('says "Good try" for a roughly-three-quarters answer', () => {
+    // "спаси" for "спасибо": 2 letters dropped from 7 → ~71% → "Good try".
+    const fb = phraseFeedback('спаси', 'спасибо')
+    expect(fb.message).toBe('Good try')
+    expect(fb.tier).toBe('goodTry')
+  })
+  it('says "Incorrect" for an answer nowhere near', () => {
+    const fb = phraseFeedback('нет', 'я иду в школу')
+    expect(fb.message).toBe('Incorrect')
+    expect(fb.tier).toBe('incorrect')
+  })
+  it('flags the right words in the wrong order and offers a reorder', () => {
+    const fb = phraseFeedback('в школу я иду', 'я иду в школу')
+    expect(fb.message).toBe('Right words, wrong order')
+    expect(fb.reorder).toBe(true)
+    // Chips are the learner's own tokens, ready to rearrange.
+    expect(fb.chips.sort()).toEqual(['в', 'иду', 'школу', 'я'])
+  })
+  it('does not call a respelling a reorder', () => {
+    // Same order, one word misspelt — not a reorder.
+    const fb = phraseFeedback('я иду в школе', 'я иду в школу')
+    expect(fb.reorder).toBe(false)
+  })
+  it('names a single missing word', () => {
+    // Dropped "в"; the rest present and in order.
+    const fb = phraseFeedback('я иду школу', 'я иду в школу')
+    expect(fb.message).toBe('One word missing')
+    expect(fb.reorder).toBe(false)
+  })
+  it('names several missing words', () => {
+    const fb = phraseFeedback('я иду', 'я иду в школу')
+    expect(fb.message).toBe('Two words missing')
+  })
+  it('counts a misspelt-but-recognisable word as present, not missing', () => {
+    // "школе" for "школу" is one slip — the word is there, so nothing is missing.
+    const fb = phraseFeedback('я иду в школе', 'я иду в школу')
+    expect(fb.message).not.toMatch(/missing/)
+  })
+  it('does not report missing when the learner typed a wrong word in its place', () => {
+    // "домой" replaces "в школу" wholesale — an error, not a clean omission.
+    const fb = phraseFeedback('я иду домой', 'я иду в школу')
+    expect(fb.message).not.toMatch(/missing/)
+  })
+  it('accepts the closest of several renderings for the band', () => {
+    const fb = phraseFeedback('the weather is good', ['nice weather', 'the weather is good today'])
+    // Closest rendering is "the weather is good today" (one word missing).
+    expect(fb.message).toBe('One word missing')
   })
 })
 
