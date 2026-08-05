@@ -79,12 +79,20 @@ function conjugationCells(word) {
   return out
 }
 
-/** Read a cell by golden slot key (dotted → conjugation, flat → declension). */
+/**
+ * Read a cell by golden slot key. A dotted key is a nested conjugation block
+ * (`future.1sg`). A flat key is either a top-level conjugation cell — the past
+ * agreement forms live directly under `conjugation` as `past_m`/`past_f`/
+ * `past_n`/`past_pl` — or a flat declension cell (`sg_pre`, `m_gen`). The two
+ * flat key spaces don't overlap, so conjugation wins wherever it holds a string.
+ */
 export function readCell(word, slot) {
   if (slot.includes('.')) {
     const [block, person] = slot.split('.')
     return word.extra?.conjugation?.[block]?.[person] ?? null
   }
+  const conj = word.extra?.conjugation?.[slot]
+  if (typeof conj === 'string') return conj
   return word.extra?.declension?.[slot] ?? null
 }
 

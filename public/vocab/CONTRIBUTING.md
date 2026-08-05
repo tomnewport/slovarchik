@@ -339,6 +339,17 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
   `sg + те` (reflexives: `-ся` → `-тесь`), but both are stored explicitly.
   Leave the block off verbs with no natural command (мочь, хоте́ть, зна́чить,
   impersonals like хоте́ться).
+- **`defective` — sparse/impersonal paradigm (optional).** Most verbs fill the
+  whole present/future and all four past cells. A genuinely **defective** or
+  **impersonal** verb doesn't: impersonal `повезти` has only a 3sg future and a
+  neuter past (`тебе́ повезёт`, `нам повезло́`); reflexive-passive `говори́ться`
+  has no 1st/2nd person and no masculine/feminine past. Store **only the cells
+  that exist** — never pad the gaps with a copied form (a masc/fem/plural past
+  all holding the neuter form spells out a person/gender that isn't used) — and
+  set `defective: true`. That lets the inflection table drill the real two- or
+  four-cell paradigm; without it the builder needs three filled cells and would
+  drop the word. List the absent slots in `DEFECTIVE` (see the morphology oracle
+  below) so the filler can never creep back.
 - **`governs` — object case (optional).** For a verb whose object isn't the
   plain accusative, name the case it governs: `governs: dat` (помога́ть,
   звони́ть, ве́рить, меша́ть, сове́товать), `gen` (ждать, боя́ться, жела́ть) or

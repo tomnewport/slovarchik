@@ -322,6 +322,63 @@ describe('buildParadigm — verb with an imperative', () => {
   })
 })
 
+describe('buildParadigm — defective / impersonal verb (#445)', () => {
+  // Impersonal перфектив: a 3sg future and a neuter past, nothing else. Marked
+  // `defective` so the two-cell table is allowed instead of being dropped.
+  const povezti = {
+    key: 'повезти=to be lucky',
+    pos: 'verb',
+    headword: 'повезти́',
+    meaning: 'to be lucky',
+    extra: {
+      defective: true,
+      conjugation: { future: { '3sg': 'повезёт' }, past_n: 'повезло́' },
+    },
+  }
+
+  it('builds a genuine two-cell paradigm and prunes the empty rows/cols', () => {
+    const p = buildParadigm(povezti)
+    expect(p).not.toBeNull()
+    expect(p.cells).toHaveLength(2)
+    // Only the finite and past columns survive — no imperative — and only the
+    // 3sg and neuter-past rows, so no cell implies a person/gender that's absent.
+    expect(p.cols.map((c) => c.key)).toEqual(['finite', 'past'])
+    expect(p.rows.map((r) => r.key)).toEqual(['3sg', 'past_n'])
+    expect(p.cells.find((c) => c.row === 'past_n').form).toBe('повезло́')
+    expect(p.cells.some((c) => ['past_m', 'past_f', 'past_pl'].includes(c.row))).toBe(false)
+  })
+
+  it('still drops a sparse paradigm that is not marked defective', () => {
+    const notMarked = { ...povezti, extra: { ...povezti.extra, defective: false } }
+    expect(buildParadigm(notMarked)).toBeNull()
+    const noFlag = { ...povezti, extra: { conjugation: povezti.extra.conjugation } }
+    expect(buildParadigm(noFlag)).toBeNull()
+  })
+
+  it('keeps a four-cell reflexive-passive without fabricated masc/fem past', () => {
+    // говориться: 3sg/3pl present + neuter/plural past, no 1st/2nd person and no
+    // masculine/feminine past.
+    const govoritsya = {
+      key: 'говориться=to be said',
+      pos: 'verb',
+      headword: 'говори́ться',
+      meaning: 'to be said',
+      extra: {
+        defective: true,
+        conjugation: {
+          present: { '3sg': 'говори́тся', '3pl': 'говоря́тся' },
+          past_n: 'говори́лось',
+          past_pl: 'говори́лись',
+        },
+      },
+    }
+    const p = buildParadigm(govoritsya)
+    expect(p.cells).toHaveLength(4)
+    expect(p.rows.map((r) => r.key)).toEqual(['3sg', '3pl', 'past_n', 'past_pl'])
+    expect(p.cells.some((c) => c.row === 'past_m' || c.row === 'past_f')).toBe(false)
+  })
+})
+
 describe('buildParadigm — adjective', () => {
   const p = buildParadigm(novyy)
   it('builds the full case × gender/number grid with the derived animate accusative', () => {
@@ -403,8 +460,13 @@ describe('buildParadigms over the shipped vocabulary', () => {
   ])('produces plenty of %s paradigms (≥ %i)', (pos, min) => {
     const paradigms = buildParadigms(words, pos)
     expect(paradigms.length).toBeGreaterThanOrEqual(min)
-    // Every paradigm must carry at least three filled cells to be drillable.
-    for (const p of paradigms) expect(p.cells.length).toBeGreaterThanOrEqual(3)
+    // Every paradigm must carry enough filled cells to be drillable: three in
+    // general, or at least two for an explicitly defective/impersonal paradigm
+    // (impersonal повезти is a legitimate two-cell table — issue #445).
+    for (const p of paradigms) {
+      const floor = p.word?.extra?.defective ? 2 : 3
+      expect(p.cells.length, p.key).toBeGreaterThanOrEqual(floor)
+    }
   })
 
   it('ships short-form adjective paradigms and keeps every short: block complete', () => {

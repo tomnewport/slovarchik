@@ -5039,16 +5039,19 @@ words:
     cefr_level: B2
     accented: говори́ться
     aspect: impf
+    # Reflexive passive taught with 3rd-person / inanimate subjects only (это
+    # говори́тся, ве́щи говоря́тся): no 1st/2nd person and no masculine/feminine
+    # singular past. The masc/fem past cells previously held the neuter
+    # говори́лось as filler, implying a «он / она (past)» form that isn't used.
+    defective: true
     en_gb:
-      standard: to be said (impersonal — as the saying goes)
+      standard: to be said (passive / impersonal — as the saying goes)
       alt:
         - to be told
     conjugation:
       present:
         "3sg": говори́тся
         "3pl": говоря́тся
-      past_m: говори́лось
-      past_f: говори́лось
       past_n: говори́лось
       past_pl: говори́лись
     usage:
@@ -20784,6 +20787,11 @@ words:
     cefr_level: B1
     accented: повезти́
     aspect: pf
+    # Impersonal: only a 3sg future and a neuter past exist (кому-то повезёт /
+    # повезло́). There is no personal subject, so the masculine/feminine/plural
+    # past cells are genuinely absent — `defective` lets the paradigm drill the
+    # real two-cell table instead of padding it with filler (see #445).
+    defective: true
     collections:
       - feelings and sensations
       - daily life
@@ -20792,10 +20800,7 @@ words:
     conjugation:
       future:
         "3sg": повезёт
-      past_m: повезло́
-      past_f: повезло́
       past_n: повезло́
-      past_pl: повезло́
     usage:
       - ru: Тебе́ повезёт на экза́мене.
         en_gb: You will be lucky in the exam.

@@ -170,6 +170,19 @@ describe('defectiveCellsPresent', () => {
     const good = verb('убедиться=to make sure', { future: { '2sg': 'убеди́шься' } })
     expect(defectiveCellsPresent([good], defective)).toEqual([])
   })
+
+  it('flags a fabricated top-level past cell on an impersonal verb (повезти)', () => {
+    // The past agreement cells live directly under `conjugation`, not in a
+    // nested block — so the guard only works if readCell reaches them (#445).
+    const impersonalDefective = { 'повезти=to be lucky': ['past_m', 'past_f', 'past_pl'] }
+    const bad = verb('повезти=to be lucky', { future: { '3sg': 'повезёт' }, past_n: 'повезло́', past_m: 'повезло́' })
+    expect(defectiveCellsPresent([bad], impersonalDefective)).toEqual([
+      { key: 'повезти=to be lucky', slot: 'past_m', form: 'повезло́' },
+    ])
+    // The real cells (neuter past, 3sg future) stay untouched.
+    const good = verb('повезти=to be lucky', { future: { '3sg': 'повезёт' }, past_n: 'повезло́' })
+    expect(defectiveCellsPresent([good], impersonalDefective)).toEqual([])
+  })
 })
 
 describe('readCell', () => {
@@ -179,6 +192,12 @@ describe('readCell', () => {
     expect(readCell(n, 'sg_gen')).toBe('y')
     expect(readCell(v, 'future.1pl')).toBe('w')
     expect(readCell(n, 'sg_pre')).toBeNull()
+  })
+
+  it('reads a top-level conjugation cell (past_m) via its flat key', () => {
+    const v = verb('z=z', { future: { '3sg': 'w' }, past_n: 'wn' })
+    expect(readCell(v, 'past_n')).toBe('wn')
+    expect(readCell(v, 'past_m')).toBeNull()
   })
 })
 
