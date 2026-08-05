@@ -25,6 +25,7 @@ import { buildWords, POS_BY_FILE } from '../src/lib/vocabBuild.js'
 import {
   annotatedStressDivergences,
   latinInRussianText,
+  missingStressMarks,
   stressGoldenMismatches,
 } from '../src/lib/stressAudit.js'
 import { STRESS_GOLDEN } from '../src/lib/stressGolden.js'
@@ -61,6 +62,12 @@ for (const m of golden) {
   )
 }
 
-const total = latin.length + div.length + golden.length
+const missing = missingStressMarks(words)
+console.log(`\n=== Multi-syllable tokens missing a stress mark (${missing.length}) ===`)
+for (const m of missing) {
+  console.log(`  [${m.key}] ${m.where} «${m.token}»${m.ru ? `  ${m.ru}` : ''}`)
+}
+
+const total = latin.length + div.length + golden.length + missing.length
 console.log(`\nTOTAL: ${total}`)
 process.exitCode = total ? 1 : 0
