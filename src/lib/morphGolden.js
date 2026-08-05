@@ -190,10 +190,24 @@ export const GOLDEN = {
 /**
  * key → conjugation slots that must stay EMPTY. Perfective verbs of the
  * убедить/убедиться/победить class have no standard 1st-person-singular future;
- * a filled cell (`убежду́сь`) is a fabricated form.
+ * a filled cell (`убежду́сь`) is a fabricated form. Defective/impersonal verbs
+ * (#445) list the person/gender slots their sense doesn't fill, so the padded
+ * filler forms can never silently return. The top-level past slots (`past_m`…)
+ * are read straight off the conjugation block by `readCell`.
  */
 export const DEFECTIVE = {
   'убедиться=to make sure': ['future.1sg'],
+
+  // Impersonal: only «(кому-то) повезёт / повезло́» — a dative experiencer with
+  // no personal subject. The masculine, feminine and plural past cells held the
+  // neuter повезло́ as filler, spelling out a non-existent «он / она / они
+  // (past)» form; only the neuter past and 3sg future are real.
+  'повезти=to be lucky': ['past_m', 'past_f', 'past_pl'],
+
+  // Reflexive passive with 3rd-person/inanimate subjects only (это говори́тся,
+  // ве́щи говоря́тся) — no 1st/2nd person and no masculine/feminine singular
+  // past. The masc/fem past cells held the neuter говори́лось as filler.
+  'говориться=to be said': ['past_m', 'past_f'],
 }
 
 /**

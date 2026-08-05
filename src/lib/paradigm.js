@@ -239,8 +239,14 @@ export function buildParadigm(word) {
       return null
   }
 
-  // Need at least a few cells for any drill to make sense.
-  return paradigm.cells.length >= 3 ? paradigm : null
+  // A drill needs at least a few cells to make sense. Genuinely defective or
+  // impersonal paradigms (impersonal повезти: 3sg future + neuter past; a
+  // reflexive-passive говориться with no 1st/2nd person) are marked `defective:
+  // true` in the data — they are allowed down to two cells rather than padded
+  // with fabricated filler forms (issue #445). Anything unmarked still needs
+  // three, so an incompletely-authored table never becomes a degenerate drill.
+  const minCells = word.extra?.defective ? 2 : 3
+  return paradigm.cells.length >= minCells ? paradigm : null
 }
 
 /**
