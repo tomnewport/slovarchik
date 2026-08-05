@@ -98,4 +98,23 @@ export const STRESS_GOLDEN = {
   // leaked into usage sentences.
   'вполне=quite': { headword: 'вполне́' },
   'высоко=high': { headword: 'высоко́' },
+
+  // ─── Reference-cell corrections surfaced by the corpus-wide stress cross-check
+  // (a stored headword/cell that a lone correct usage token contradicted).
+  //
+  // заговори́ть "begin speaking" is a stress homograph of загово́рить "talk (someone)
+  // into a stupor / bewitch"; the whole paradigm had the second verb's stem stress.
+  'заговорить=to start speaking': {
+    headword: 'заговори́ть',
+    'future.3sg': 'заговори́т',
+    past_m: 'заговори́л',
+    past_pl: 'заговори́ли',
+  },
+  // допро́с is end-stressed throughout; the paradigm had been written до́прос-.
+  'допрос=interrogation': { sg_nom: 'допро́с', sg_pre: 'допро́се' },
+  // земля has a mobile paradigm: end-stressed singular, STEM-stressed plural obliques
+  // (зе́млям/зе́млями/зе́млях). The plural obliques had leaked the singular's end stress.
+  'земля=earth': { sg_acc: 'зе́млю', pl_dat: 'зе́млям', pl_ins: 'зе́млями', pl_pre: 'зе́млях' },
+  // сража́лся (stem жа́), matching its sibling сража́лись; the entry stored сра́жался.
+  'сражался=fought': { headword: 'сража́лся' },
 }
