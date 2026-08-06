@@ -26,6 +26,7 @@ import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { hintTokensFor } from '../../stores/hints.js'
 import { playFeedback } from '../../stores/settings.js'
+import AnnotatedEnglish from '../AnnotatedEnglish.vue'
 import SpeakButton from '../SpeakButton.vue'
 import CelebrationBurst from '../CelebrationBurst.vue'
 
@@ -226,7 +227,10 @@ onBeforeUnmount(() => setHintAllowed(true))
         <SpeakButton :text="exercise.ru" />
       </template>
       <template v-else>
-        <span class="cue">{{ exercise.en }}</span>
+        <!-- The English is all the learner gets, so anything the Russian
+             answer commits to that the English hides (informal vs formal
+             "you", the speaker's gender) is annotated on the word itself. -->
+        <AnnotatedEnglish class="cue" :text="exercise.en" :notes="exercise.enNotes ?? []" />
         <small v-if="exercise.note" class="muted">({{ exercise.note }})</small>
         <small v-else-if="exercise.ambiguousEn?.length" class="muted">
           (one of {{ exercise.ambiguousEn.length + 1 }} Russian words for this)

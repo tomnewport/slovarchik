@@ -5,6 +5,7 @@ import { sample } from '../lib/quiz.js'
 import { resetHint } from '../stores/keyboard.js'
 import { phraseTokens, phraseCorrect, buildAssemblyBank } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
+import AnnotatedEnglish from '../components/AnnotatedEnglish.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import HintablePhrase from '../components/HintablePhrase.vue'
 import SpeakButton from '../components/SpeakButton.vue'
@@ -166,7 +167,9 @@ onUnmounted(() => {
         :lang="direction === 'ru-en' ? 'ru' : 'en'"
       >
         <HintablePhrase v-if="direction === 'ru-en'" :text="sourceOf(current)" />
-        <template v-else>{{ sourceOf(current) }}</template>
+        <!-- Translating *into* Russian: annotate what the English can't say on
+             its own — informal vs formal "you", the speaker's gender. -->
+        <AnnotatedEnglish v-else :text="sourceOf(current)" :notes="current.enNotes ?? []" />
       </div>
       <SpeakButton v-if="direction === 'ru-en'" :text="sourceOf(current)" />
     </div>

@@ -59,7 +59,7 @@ src/
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, …)
+                        #   BatchSearchAdd, WordProgressModal, AnnotatedEnglish, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, AspectDrill)
     inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
@@ -75,7 +75,7 @@ src/
                         #   progression/schedule/batches/session/sessionPools/sessionRunner/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
-                        #   phrases/phraseHint/phraseContext/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
+                        #   phrases/phraseHint/phraseContext/phraseAmbiguity/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit/homeDashboard  — drill & dashboard view-model helpers
                         #   stressAudit/stressGolden/morphOracle/morphGolden  — corpus data-integrity oracles (CI guards on the vocab)
