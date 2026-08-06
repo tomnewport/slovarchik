@@ -448,16 +448,16 @@ words:
     usage:
       - ru: Тебе́ кто́-то звони́л.
         en_gb: Someone called you.
-        inflect: { token: 2, case: nom }
+        inflect: { token: 2, case: nom, rule: pronoun-interrogative }
       - ru: Кто́-то стучи́т в дверь.
         en_gb: Someone is knocking at the door.
-        inflect: { token: 1, case: nom }
+        inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Я с ке́м-то говори́ла об э́том.
         en_gb: I spoke with someone about this.
         inflect: { token: 3, case: ins, number: sg, rule: pronoun-interrogative }
       - ru: Я ви́жу кого́-то в окне́.
         en_gb: I see someone in the window.
-        inflect: { token: 3, case: acc }
+        inflect: { token: 3, case: acc, rule: pronoun-interrogative }
       - ru: Я до́лжен помо́чь кому́-то.
         en_gb: I must help someone.
         inflect: { token: 4, case: dat, number: sg, rule: pronoun-interrogative }
@@ -723,7 +723,7 @@ words:
     usage:
       - ru: У меня́ нет никако́го пла́на.
         en_gb: I have no plan at all.
-        inflect: { token: 4, case: gen, number: sg, gender: m }
+        inflect: { token: 4, case: gen, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Никака́я пого́да нас не остано́вит.
         en_gb: No weather will stop us.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
@@ -749,10 +749,10 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
       - ru: Никто́ не зна́ет отве́та.
         en_gb: Nobody knows the answer.
-        inflect: { token: 1, case: nom }
+        inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Я никого́ там не ви́дела.
         en_gb: I saw nobody there.
-        inflect: { token: 2, case: acc }
+        inflect: { token: 2, case: acc, rule: pronoun-interrogative }
       - ru: Об э́том никому́ не говори́.
         en_gb: Do not tell anybody about this.
         inflect: { token: 3, case: dat, number: sg, rule: pronoun-interrogative }
@@ -778,7 +778,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
       - ru: Ничто́ не ве́чно.
         en_gb: Nothing is eternal.
-        inflect: { token: 1, case: nom }
+        inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Я ничего́ не понима́ю.
         en_gb: I understand nothing.
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
@@ -1421,10 +1421,10 @@ words:
     usage:
       - ru: Я хочу́ тебе́ что́-то сказа́ть.
         en_gb: I want to tell you something.
-        inflect: { token: 4, case: acc }
+        inflect: { token: 4, case: acc, rule: pronoun-interrogative }
       - ru: На столе́ лежи́т что́-то стра́нное.
         en_gb: Something strange is lying on the table.
-        inflect: { token: 4, case: nom }
+        inflect: { token: 4, case: nom, rule: pronoun-interrogative }
       - ru: Он че́м-то расстро́ен.
         en_gb: He is upset about something.
         inflect: { token: 2, case: ins, number: sg, rule: pronoun-interrogative }
