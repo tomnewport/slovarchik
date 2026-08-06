@@ -8,9 +8,13 @@ histogram shape.
 Re-run the reporting tool any time:
 
 ```bash
-node scripts/audit-cefr.js          # distribution + flags
+npm run audit:cefr                  # distribution + flags
 node scripts/audit-cefr.js --list   # also list flagged entries
 ```
+
+> This doc records two passes. The **[2026 cohort pass](#the-2026-cohort-pass)**
+> at the bottom is the current baseline; the sections immediately below are the
+> original audit, kept for the method and the history.
 
 ## What the audit found
 
@@ -107,6 +111,89 @@ The ~113 words still missing from the standard list are non-core: abbreviations
 (`нквд`, `цк`, `др`), proper nouns, slang/loanwords (`вай-фай`, `хобби`), set
 phrases (`доброе утро`), and a tail of specialist/literary items.
 
+## The 2026 cohort pass
+
+The corpus had grown to 4,180 learnable words (plus ~2,500 gloss-only entries in
+`glossary.yml`, which no drill ever serves), and the drift had come back in a
+new shape — see [#529](https://github.com/tomnewport/slovarchik/issues/529).
+It was no longer individual bad labels: whole **topic packs** had been added in
+one go and stamped with a single level regardless of how hard the words in them
+were. The `character` pack was the clearest case — 14 of its 18 original words
+sat at A1, including `харизматичный`, `педантичный`, `коммуникабельный` and
+`сентиментальный`. `многофункциональный` (19 letters) was A1 too.
+
+This matters more than a wrong pill. `cefr_level` drives batch selection: step 2
+of `src/lib/batches.js` refines the eligible words to the **lowest CEFR level
+present**, so A1 is literally what a learner opening the app for the first time
+is served. A1 had swollen to 550 words and a beginner's opening batches were
+drawing `многофункциональный` ahead of much of the core vocabulary.
+
+### What changed
+
+**212 entries were re-levelled**, all upwards, all out of A1 — 160 nouns, 25
+adjectives, 18 verbs, 9 adverbs (72 → A2, 107 → B1, 33 → B2). The yardstick is
+the same TORFL/ТРКИ lexical minimum used above:
+
+- **A1 (Элементарный)** — the first weeks: `хлеб`, `семья`, `дом`, `автобус`,
+  the numbers, the seasons, the immediate family. What survived the pass reads
+  like a beginner's first hundred words.
+- **A2 (Базовый)** — everyday concrete extensions: rooms and furnishings
+  (`гостиная`, `подушка`), common foods (`капуста`, `йогурт`, `сосиска`),
+  clothes (`блузка`, `кроссовка`), jobs (`бармен`, `банкир`), and the
+  countries/nationalities beyond the core (`Мексика`, `швед`) — which also puts
+  the whole `nationalities` pack on one level for the first time.
+- **B1 (ТРКИ-1)** — topic vocabulary that needs a context to come up in:
+  instruments and genres (`саксофон`, `джаз`, `танго`), hobbies (`боулинг`,
+  `рыбалка`), less common foods (`свёкла`, `петрушка`, `маслина`), abstract
+  nouns (`интуиция`, `гармония`), and the personality adjectives a learner can
+  actually use (`оптимистичный`, `практичный`, `эмоциональный`).
+- **B2 (ТРКИ-2)** — specialist, formal or culturally narrow: `устрица`,
+  `паэлья`, `кислая капуста`, `водоросль`, `бунгало`, `шезлонг`, `инъекция`,
+  `медикамент`, `консерватория`, `стабильность`, and the bookish character
+  adjectives (`харизматичный`, `педантичный`, `сентиментальный`,
+  `коммуникабельный`, `интеллигентный`, `многофункциональный`).
+
+Borderline calls were again left alone. Nothing moved *down*, and no word
+outside A1 was touched.
+
+### Distribution (learnable words only)
+
+| Level | Before | After |
+| ----- | -----: | ----: |
+| A1 | 550 (13.2%) | 338 (8.1%) |
+| A2 | 1048 (25.1%) | 1120 (26.8%) |
+| B1 | 1932 (46.2%) | 2039 (48.8%) |
+| B2 | 630 (15.1%) | 663 (15.9%) |
+| C1 | 20 (0.5%) | 20 (0.5%) |
+| C2 | 0 | 0 |
+| **Total** | **4180** | **4180** |
+
+Gloss-only entries (`learn: false`) are excluded throughout: they are never
+served to a learner, and their keys are surface forms, not headwords. The audit
+tool now reports the learnable totals on their own row for the same reason.
+
+### What the tool learned
+
+The old script gave the corpus a clean bill of health (`Flagged entries: 0`)
+while all of the above was in it: its anchors are entry-shaped, and a cohort
+mislevelled *together* looks exactly like a legitimate cluster of easy topical
+words. `scripts/audit-cefr.js` now runs two further heuristics, both covered by
+`scripts/audit-cefr.test.mjs`:
+
+- **Cohorts** — a collection of ≥10 learnable words with ≥70% at one level.
+  `character` was 78% A1. Some packs are genuinely uniform (`nationalities` is
+  83% A2 and correct), so this is a prompt to look, not a verdict.
+- **Shape** — an A1/A2 headword longer than 13 letters, or ending in a
+  transparent internationalism (`-ичный`, `-альный`, `-ационный`, `-ивный`,
+  `-ация`, `-изм`, `-логия`). Elementary vocabulary is overwhelmingly short and
+  native. Run against the corpus as it stood before this pass, that one rule
+  alone catches 21 of the mislevelled entries.
+
+Post-pass the tool reports one cohort (`nationalities`, reviewed and correct)
+and seven shape flags, all A2 words that are fine where they are (`нормальный`,
+`спортивный`, `центральный`, `информация`, `ситуация`, `останавливаться`,
+`путешествовать`).
+
 ## Still open
 
 - **No C2, and C1 is still thin.** This is expected for a corpus aimed at
@@ -119,3 +206,11 @@ phrases (`доброе утро`), and a tail of specialist/literary items.
   A2↔B1 / B1↔B2 nouns were not exhaustively re-judged. The
   `scripts/audit-cefr.js` anchors are a small high-confidence seed — extend the
   `REFERENCE` map there to widen automated flagging.
+- **The A2 band has not had a cohort pass.** The 2026 pass re-levelled out of A1
+  only, because that is the band batch selection serves first. A2 now holds
+  1,120 words and is the next place the same uniform-stamp pattern would show
+  up; the cohort check reports it, nobody has swept it.
+- **`glossary.yml` levels are unreviewed** and deliberately so — the entries are
+  auto-generated, `learn: false`, and never reach a drill. If a
+  glossary→curriculum promotion ever starts flipping entries to `learn: true`,
+  their levels need auditing at that point.
