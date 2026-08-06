@@ -61,7 +61,7 @@ rather than shipping.
 
 ## Known limitations / future work
 
-- Only **first-person** gender is balanced. Second-person phrases — «ты» with a
+- Only **first-person** gender is balanced (#541). Second-person phrases — «ты» with a
   past-tense verb or predicate («Ты уста́л?», «Ты ве́рно отве́тил») — are still
   ~100% masculine (100 m / 0 f). The prompt annotations built on
   `phraseAmbiguity.js` now surface this to the learner ("You (informal, to a

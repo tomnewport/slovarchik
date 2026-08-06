@@ -9,6 +9,10 @@
 //   Do you (informal) want tea?        ← хо́чешь, not хоти́те
 //   I (male speaker) bought a ticket.  ← я купи́л, not купи́ла
 //
+// Only the visual prompts carry these notes; the hands-free loop speaks its
+// English and has nothing to annotate (#542). Gender on a *dropped* subject —
+// «ра́да была́ помо́чь», no «я» to hang it on — is deliberately not read (#543).
+//
 // Detection is **marker-driven**: a note is produced only when the Russian
 // actually commits to a reading. A generic English "you" with no ты/вы marker
 // behind it («Здесь мо́жно комфо́ртно рабо́тать» — "You can work comfortably
