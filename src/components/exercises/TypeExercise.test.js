@@ -60,6 +60,22 @@ describe('TypeExercise', () => {
     })
   })
 
+  it('annotates what the English prompt cannot say on its own', () => {
+    const wrapper = mount(TypeExercise, {
+      props: {
+        exercise: {
+          ...exercise,
+          content: 'phrase',
+          ru: 'Хо́чешь ча́ю?',
+          en: 'Do you want tea?',
+          enNotes: ['you-informal'],
+        },
+      },
+    })
+    // Without the note there is no way to know the answer wants ты, not вы.
+    expect(wrapper.find('.prompt').text()).toContain('you (informal)')
+  })
+
   it('fires a burst and counts double when correct without the hint', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)

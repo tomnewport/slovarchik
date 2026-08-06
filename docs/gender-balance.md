@@ -61,6 +61,14 @@ rather than shipping.
 
 ## Known limitations / future work
 
+- Only **first-person** gender is balanced. Second-person phrases — «ты» with a
+  past-tense verb or predicate («Ты уста́л?», «Ты ве́рно отве́тил») — are still
+  ~100% masculine (100 m / 0 f). The prompt annotations built on
+  `phraseAmbiguity.js` now surface this to the learner ("You (informal, to a
+  man) answered correctly"), so the skew is visible rather than silent. Evening
+  it out is the same job as this one, one pronoun over: `feminizeFirstPerson`
+  would need a «ты» variant, and the flip is safe under the same
+  one-gendered-token rule.
 - Only **verb** gender is flipped. Predicate short adjectives (я рад → я ра́да)
   and profession nouns (я учи́тель → я учи́тельница) are recognised for the
   count but not auto-switched — their feminine forms would need to come from the

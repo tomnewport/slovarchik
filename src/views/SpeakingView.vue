@@ -18,6 +18,7 @@ import {
   CELEBRATE_MS,
   REVIEW_MS,
 } from '../lib/speakingDrill.js'
+import AnnotatedEnglish from '../components/AnnotatedEnglish.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 import WordBankExercise from '../components/exercises/WordBankExercise.vue'
@@ -404,7 +405,10 @@ onUnmounted(() => {
           {{ current.ru }}
         </div>
         <div v-if="modeCfg.showEn" lang="en" style="font-size: 1.35rem; margin: 0.4rem 0">
-          {{ current.en }}
+          <!-- Annotate the ambiguous words only when the Russian is hidden
+               (produce mode): with the Russian on screen there is nothing for
+               the learner to guess. -->
+          <AnnotatedEnglish :text="current.en" :notes="modeCfg.showRu ? [] : (current.enNotes ?? [])" />
         </div>
         <!-- Interpret mode hides everything until you've answered. -->
         <p v-if="!modeCfg.showRu && !modeCfg.showEn" class="muted" style="margin: 0.5rem 0">

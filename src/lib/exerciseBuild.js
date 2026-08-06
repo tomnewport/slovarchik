@@ -392,6 +392,10 @@ function buildPhrase(practice, pi, ctx, make, kind) {
       ru: p.ru,
       en: p.en,
       ...(p.enAlt?.length ? { enAlt: p.enAlt } : {}),
+      // What the Russian commits to that the English can't show — informal vs
+      // formal "you", the speaker's gender. Carried so a prompt showing only
+      // the English can annotate the ambiguous word (see phraseAmbiguity.js).
+      ...(p.enNotes?.length ? { enNotes: p.enNotes } : {}),
     }
     // For spelling (type) a phrase, record which token(s) are the word being
     // assessed so a wrong answer only penalises the word if the slip was in it.

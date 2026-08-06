@@ -154,6 +154,26 @@ one, and there's nothing "stereotypically feminine" required to justify it.
   of masculine verb phrases to feminine. See
   [`docs/gender-balance.md`](../../docs/gender-balance.md).
 
+#### Ambiguity annotations (nothing to write)
+
+When a drill shows only the English and asks for the Russian, the English often
+under-determines the answer: "Do you want tea?" hides ты vs вы, and — now that
+first-person gender is genuinely mixed — "I was tired" hides уста́л vs уста́ла.
+The prompt therefore annotates the ambiguous word ("Do you (informal) want
+tea?"), working it out **automatically** from your `ru` sentence
+([`src/lib/phraseAmbiguity.js`](../../src/lib/phraseAmbiguity.js)). There's no
+field to fill in, but two things help it:
+
+- **Write the sentence naturally and completely.** The evidence it reads is the
+  ты/вы pronouns and possessives, unambiguous 2sg/2pl and imperative verb forms,
+  and past-tense/short-adjective agreement in the same clause as «я» or «ты».
+- **Keep the `conjugation` table of any verb you use complete and correct.** A
+  missing imperative or past cell simply means the phrase says nothing, and the
+  prompt stays unannotated (never wrongly annotated).
+
+A sentence that marks nothing — a generic "you can…" rendered with мо́жно —
+gets no annotation, which is correct: nothing is being hidden.
+
 ### Gloss-only entries (`learn: false`) and `glossary.yml`
 
 When a learner reads a phrase they can tap any word they haven't learned to see

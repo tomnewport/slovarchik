@@ -5,6 +5,7 @@
 // already-parsed document object (`{ words: {...} }`); at build time the YAML is
 // converted to JSON, and the browser only ever `JSON.parse`s (see issue #324).
 import { CASES, LOCATIVE, NUMBERS } from './declension.js'
+import { buildAmbiguityIndex, phraseAmbiguities } from './phraseAmbiguity.js'
 import { stripStress } from './text.js'
 
 /** Map a vocab filename (without extension) to its part of speech. */
@@ -380,10 +381,18 @@ export function vocabDisplay(v, rng = Math.random) {
  * Shape usage examples into a phrase bank for the phrase drill. Every word may
  * carry example sentences as `{ ru, en_gb }` pairs; we flatten them all into a
  * single deduplicated list of translatable phrases.
+ *
+ * Each phrase also carries `enNotes` — the distinctions its Russian makes that
+ * its English can't (informal vs formal "you", the speaker's gender), so a
+ * prompt that shows only the English can annotate the ambiguous word instead of
+ * asking for a form the learner has no way to choose. See `phraseAmbiguity.js`.
  */
 export function shapePhrases(words) {
   const seen = new Set()
   const out = []
+  // Built from *every* word (gloss-only entries included): a surface form is
+  // only evidence of person/gender if nothing else in the dictionary shares it.
+  const ambiguity = buildAmbiguityIndex(words)
   for (const w of learnableWords(words)) {
     for (const ex of w.usage ?? []) {
       const ru = String(ex?.ru ?? '').trim()
@@ -398,7 +407,8 @@ export function shapePhrases(words) {
       const enAlt = Array.isArray(ex?.en_alt)
         ? ex.en_alt.map((s) => String(s ?? '').trim()).filter(Boolean)
         : []
-      out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr })
+      const enNotes = phraseAmbiguities(ru, ambiguity)
+      out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes })
     }
   }
   return out
