@@ -451,7 +451,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: stork (a tall white bird with long legs)
     usage:
@@ -1375,7 +1374,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - town
+      - places
       - architecture
     en_gb:
       standard: asphalt (a dark material used for road surfaces)
@@ -1626,7 +1625,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: lecture hall (a room for lectures; an audience)
     usage:
@@ -1656,7 +1655,7 @@ words:
     number: ["sg"]
     collections:
       - sport
-      - health
+      - sickness and health
     en_gb:
       standard: aerobics (energetic exercise done to music)
     usage:
@@ -3486,7 +3485,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - abstract
-      - values
+      - character
       - society
     en_gb:
       standard: good (benefit, a blessing)
@@ -3915,7 +3914,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - military
-      - conflict
       - war and peace
     en_gb:
       standard: battle (a fight or combat)
@@ -4440,7 +4438,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - military
-      - nautical
+      - travel
     en_gb:
       standard: boatswain (bosun; a ship's petty officer)
     usage:
@@ -4572,7 +4570,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - materials
+      - craft and construction
     en_gb:
       standard: log (a cut section of a tree trunk)
     usage:
@@ -5001,7 +4999,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: bud (a flower before it opens)
     usage:
@@ -5193,7 +5191,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: boulder (a very large rounded stone)
     usage:
@@ -5326,7 +5323,6 @@ words:
     en_pl: mittens
     collections:
       - clothes
-      - clothing
     en_gb:
       standard: mitten (a glove with no separate fingers)
     usage:
@@ -5394,7 +5390,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: cornflower (a bright blue field flower)
     usage:
@@ -6079,6 +6075,7 @@ words:
     collections:
       - nature
       - geography
+      - weather
     en_gb:
       standard: wind (moving air)
     usage:
@@ -6208,7 +6205,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - time of day
+      - time
       - daily life
     en_gb:
       standard: evening
@@ -6919,7 +6916,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - military
-      - weapons
     en_gb:
       standard: rifle (a long-barrelled firearm)
     usage:
@@ -7189,6 +7185,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - politics
     en_gb:
       standard: influence (an effect on something)
     declension:
@@ -7223,6 +7221,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - school
+      - abstract
     en_gb:
       standard: attention (careful notice)
     usage:
@@ -7584,6 +7584,9 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - abstract
+      - science
     en_gb:
       standard: impact (an effect or influence)
     declension:
@@ -8198,7 +8201,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: sparrow (a small brown city bird)
     usage:
@@ -8228,7 +8230,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: crow (a large black bird)
     usage:
@@ -8257,7 +8258,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - clothing
+      - clothes
     en_gb:
       standard: collar (the neckline of a garment)
     usage:
@@ -8409,6 +8410,7 @@ words:
     number: ["sg"]
     collections:
       - geography
+      - directions
     en_gb:
       standard: east (the direction towards the rising sun)
     usage:
@@ -9056,7 +9058,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: elm (a tall broad-leaved tree)
     usage:
@@ -9285,7 +9287,6 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: pebbles (small smooth stones on a beach or riverbed)
       alt:
@@ -9608,6 +9609,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - life and death
     en_gb:
       standard: death (a violent or sudden end)
     declension:
@@ -10133,7 +10135,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: pigeon (a common grey city bird)
       alt:
@@ -10399,7 +10400,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - town
+      - places
       - geography
     en_gb:
       standard: small town (a modest-sized urban settlement)
@@ -10703,6 +10704,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - politics
+      - society
     en_gb:
       standard: state (a politically organised territory)
       alt:
@@ -10768,6 +10770,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - work
+      - character
     en_gb:
       standard: readiness (willingness, preparedness)
     declension:
@@ -10850,6 +10855,7 @@ words:
     collections:
       - people
       - the law
+      - society
     en_gb:
       standard: citizen (a person who belongs to a state)
     usage:
@@ -10941,7 +10947,6 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: granite (a very hard grey rock used in building)
     usage:
@@ -11056,7 +11061,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - agriculture
+      - in the garden
     en_gb:
       standard: buckwheat (the plant that gives buckwheat groats)
     usage:
@@ -11176,8 +11181,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - death
-      - funeral
+      - life and death
     en_gb:
       standard: coffin (a box for burying the dead)
     usage:
@@ -11884,7 +11888,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: a two (the school grade 'D'/fail; the number two)
     usage:
@@ -12425,7 +12429,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - time of day
+      - time
       - daily life
     en_gb:
       standard: day
@@ -12650,6 +12654,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - technology
+      - craft and construction
     en_gb:
       standard: detail (a small specific part)
     declension:
@@ -12855,6 +12861,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - work
+      - society
     en_gb:
       standard: activity (work, doings)
     declension:
@@ -13250,7 +13259,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - nautical
+      - travel
     en_gb:
       standard: bottom (the lowest part of a sea, river or vessel)
     usage:
@@ -13279,7 +13288,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - values
+      - character
     en_gb:
       standard: goodness (the good, as opposed to evil)
     usage:
@@ -13545,6 +13554,8 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - work
     en_gb:
       standard: post (an official position or job)
     declension:
@@ -13986,6 +13997,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - work
+      - sport
     en_gb:
       standard: achievement (something accomplished)
     declension:
@@ -14256,6 +14269,9 @@ words:
     cefr_level: B1
     animacy: i
     number: ["pl"]
+    collections:
+      - home
+      - craft and construction
     en_gb:
       standard: firewood (wood for burning)
     declension:
@@ -14372,7 +14388,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: oak (a large strong tree that bears acorns)
     usage:
@@ -14713,7 +14729,7 @@ words:
     animacy: a
     number: ["sg", "pl"]
     collections:
-      - religion
+      - faith
       - abstract
     en_gb:
       standard: devil (Satan; an evil spirit)
@@ -14783,7 +14799,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: woodpecker (a bird that hammers on tree trunks)
     usage:
@@ -14978,7 +14993,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: spruce (an evergreen tree with needles, a fir)
     usage:
@@ -15171,6 +15186,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - craft and construction
+      - nature
     en_gb:
       standard: iron (the metal)
     declension:
@@ -15558,6 +15576,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - life and death
     en_gb:
       standard: life (the period between birth and death)
     usage:
@@ -15593,7 +15612,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - clothes
-      - clothing
     en_gb:
       standard: waistcoat (a sleeveless garment worn over a shirt)
       alt:
@@ -15754,6 +15772,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - work
+      - the arts
     en_gb:
       standard: journalist (a reporter)
     declension:
@@ -16544,6 +16565,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - shopping
+      - work
     en_gb:
       standard: stock (a reserve or supply)
     declension:
@@ -16575,7 +16599,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - senses
+      - feelings and sensations
       - daily life
     en_gb:
       standard: smell (a scent or odour)
@@ -16640,6 +16664,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - reading
+      - technology
     en_gb:
       standard: record (a recording or written entry)
     declension:
@@ -16896,6 +16923,8 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - parts of the body
     en_gb:
       standard: the back of the head (the nape)
     declension:
@@ -17906,7 +17935,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: willow (a tree with long thin branches growing near water)
     usage:
@@ -18004,6 +18033,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - people
+      - character
     en_gb:
       standard: idiot (a stupid person)
     declension:
@@ -18069,7 +18101,6 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: limestone (a soft pale rock used for building and cement)
     usage:
@@ -18348,6 +18379,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - history
+      - politics
     en_gb:
       standard: emperor (a male ruler of an empire)
     declension:
@@ -18821,7 +18855,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - health
+      - sickness and health
     en_gb:
       standard: injection (medicine given with a needle)
     usage:
@@ -18947,6 +18981,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - school
     en_gb:
       standard: exception (a case that does not follow the rule)
     declension:
@@ -19163,6 +19199,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - technology
+      - abstract
     en_gb:
       standard: use (the act of using something)
     declension:
@@ -19188,6 +19226,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - science
+      - school
     en_gb:
       standard: trial (a test of something)
     declension:
@@ -20011,7 +20051,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - geography
-      - town
+      - places
       - technology
     en_gb:
       standard: canal (an artificial waterway; a channel)
@@ -20709,6 +20749,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - shopping
     en_gb:
       standard: quality (degree of excellence)
     usage:
@@ -20801,7 +20843,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: chestnut (a tree with large leaves and shiny brown nuts)
     usage:
@@ -20903,7 +20945,6 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: quartz (a hard glassy mineral found in many rocks)
     usage:
@@ -20956,7 +20997,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: cedar (a large evergreen tree; the Siberian pine)
     usage:
@@ -21146,8 +21187,8 @@ words:
     number: ["sg", "pl"]
     collections:
       - daily life
-      - entertainment
-      - media
+      - hobbies and pastimes
+      - the arts
     en_gb:
       standard: cinema (a movie theatre; a film)
     usage:
@@ -21481,6 +21522,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - places
+      - life and death
     en_gb:
       standard: cemetery (a place where people are buried)
     usage:
@@ -21631,7 +21673,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: maple (a tree with broad leaves that turn red in autumn)
     usage:
@@ -21988,6 +22030,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - history
+      - politics
     en_gb:
       standard: prince (a Russian noble title)
     declension:
@@ -22246,7 +22291,6 @@ words:
     number: ["pl"]
     collections:
       - clothes
-      - clothing
     en_gb:
       standard: tights (a close-fitting garment covering the legs and waist)
       alt:
@@ -22273,6 +22317,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - reading
+      - faith
     en_gb:
       standard: sorcerer (a male magician)
     declension:
@@ -22443,7 +22490,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: college (a place of higher education)
     usage:
@@ -23095,7 +23142,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - work
-      - work
     en_gb:
       standard: company (a business organisation)
     usage:
@@ -23295,7 +23341,6 @@ words:
     animacy: a
     number: ["sg"]
     collections:
-      - names
       - people
     en_gb:
       standard: Constantine (a Russian male given name)
@@ -23423,7 +23468,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: test (a class test, контрольная работа)
     usage:
@@ -23682,6 +23727,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - restaurants and cafes
     en_gb:
       standard: cognac (brandy)
     declension:
@@ -24333,7 +24381,6 @@ words:
     animacy: a
     number: ["sg"]
     collections:
-      - names
       - people
     en_gb:
       standard: Kostya (diminutive of Konstantin)
@@ -24393,6 +24440,9 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - food and drink
+      - restaurants and cafes
     en_gb:
       standard: coffee (the drink; indeclinable)
     usage:
@@ -24419,7 +24469,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - clothes
-      - clothing
     en_gb:
       standard: knitted top (a loose knitted or woven garment for the upper body)
       alt:
@@ -25060,6 +25109,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - feelings and sensations
     en_gb:
       standard: shout (a loud cry)
     declension:
@@ -25122,6 +25174,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
     en_gb:
       standard: bed (furniture for sleeping)
     usage:
@@ -25351,6 +25406,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - hobbies and pastimes
+      - school
     en_gb:
       standard: circle (a small group or club)
     declension:
@@ -25750,7 +25808,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - agriculture
+      - in the garden
     en_gb:
       standard: maize (a tall crop with yellow cobs, sweetcorn)
       alt:
@@ -26489,7 +26547,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: lily of the valley (a spring flower with small white bells)
     usage:
@@ -26578,7 +26636,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: swallow (a small fast bird with a forked tail)
     usage:
@@ -26608,7 +26665,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: swan (a large white water bird with a long neck)
     usage:
@@ -26742,6 +26798,7 @@ words:
     collections:
       - nature
       - food and drink
+      - weather
     en_gb:
       standard: ice (frozen water)
     declension:
@@ -26998,7 +27055,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: petal (one of the coloured parts of a flower)
     usage:
@@ -27109,7 +27166,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - seasons
+      - the calendar
     en_gb:
       standard: summer
     usage:
@@ -27298,7 +27355,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: linden (a tree with fragrant flowers, also called lime)
     usage:
@@ -27431,6 +27488,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - plants
+      - reading
     en_gb:
       standard: leaf (a small leaf or sheet of paper)
     declension:
@@ -27591,6 +27651,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - character
+      - people
     en_gb:
       standard: personality (a person's character); an individual
     declension:
@@ -27759,6 +27822,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - communication
+      - character
     en_gb:
       standard: lie (an untrue statement)
     declension:
@@ -28075,6 +28140,8 @@ words:
     animacy: a
     number: ["sg", "pl"]
     collections:
+      - hobbies and pastimes
+      - people
     en_gb:
       standard: amateur (a person who does something for pleasure)
     declension:
@@ -28160,7 +28227,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - nautical
+      - travel
       - technology
     en_gb:
       standard: hatch (a covered opening, e.g. a manhole or deck hatch)
@@ -28453,6 +28520,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - family
+      - people
     en_gb:
       standard: kid (a little child)
     declension:
@@ -28949,7 +29019,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - health
+      - sickness and health
     en_gb:
       standard: massage (rubbing the body to relax the muscles)
     usage:
@@ -29363,7 +29433,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - health
+      - sickness and health
     en_gb:
       standard: medication (a medicine, usually one of several)
     usage:
@@ -29395,8 +29465,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - health
-      - study
+      - sickness and health
+      - school
     en_gb:
       standard: medicine (the science of treating illness)
     usage:
@@ -29586,6 +29656,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - finance
+      - shopping
     en_gb:
       standard: small change (coins); a trifle
     declension:
@@ -29645,6 +29718,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - restaurants and cafes
+      - food and drink
     en_gb:
       standard: menu (a list of dishes; indeclinable)
     declension:
@@ -29739,7 +29815,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - time of day
+      - time
       - the calendar
     en_gb:
       standard: "month (also: the moon in poetic/archaic usage)"
@@ -29807,7 +29883,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - science
-      - study
+      - school
     en_gb:
       standard: method (a systematic way of doing something)
     usage:
@@ -30322,7 +30398,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: mineral (a natural solid substance found in rocks)
     usage:
@@ -30350,6 +30425,8 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - measurement and calculation
     en_gb:
       standard: minimum (the least amount)
     declension:
@@ -30474,6 +30551,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - time
+      - measurement and calculation
     en_gb:
       standard: minute (sixty seconds)
     usage:
@@ -30738,6 +30818,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - measurement and calculation
+      - abstract
     en_gb:
       standard: multitude (a very large number)
     declension:
@@ -30765,6 +30847,7 @@ words:
     collections:
       - daily life
       - faith
+      - life and death
     en_gb:
       standard: grave (a place where a dead person is buried)
     declension:
@@ -30953,7 +31036,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - nature
+      - weather
     en_gb:
       standard: lightning (a flash of light in a storm)
     usage:
@@ -31010,6 +31093,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - character
     en_gb:
       standard: "a fine fellow (often said as praise: well done!)"
     declension:
@@ -31040,6 +31126,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - time
+      - people
     en_gb:
       standard: youth (the time of being young)
     declension:
@@ -31366,6 +31455,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - animals
+      - parts of the body
     en_gb:
       standard: muzzle (an animal's snout)
     declension:
@@ -31494,6 +31586,7 @@ words:
     collections:
       - nature
       - geography
+      - weather
     en_gb:
       standard: frost (freezing cold weather)
     usage:
@@ -31652,7 +31745,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - architecture
-      - town
+      - places
       - geography
     en_gb:
       standard: bridge (a structure spanning a gap)
@@ -31758,7 +31851,6 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: marble (a smooth stone used for statues and floors)
     usage:
@@ -32173,6 +32265,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - home
+      - daily life
     en_gb:
       standard: soap (for washing)
     declension:
@@ -32198,6 +32293,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - communication
     en_gb:
       standard: thought (an idea in the mind)
     usage:
@@ -32427,6 +32524,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - reading
+      - architecture
     en_gb:
       standard: inscription (writing on a surface)
     declension:
@@ -32458,6 +32558,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - communication
+      - abstract
     en_gb:
       standard: name (a title or designation)
     usage:
@@ -32552,6 +32654,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - abstract
+      - shopping
     en_gb:
       standard: presence (the fact of being available)
     declension:
@@ -32639,6 +32744,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - character
     en_gb:
       standard: intention (a plan to do something)
     declension:
@@ -32806,6 +32913,7 @@ words:
       - history
       - people
       - war and peace
+      - society
     en_gb:
       standard: people (the people of a nation)
       alt:
@@ -32895,6 +33003,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - clothes
+      - work
     en_gb:
       standard: outfit (clothing); a work detail
     declension:
@@ -32958,6 +33069,7 @@ words:
     number: ["sg"]
     collections:
       - daily life
+      - society
     en_gb:
       standard: population (all the people living in a place)
     declension:
@@ -33198,6 +33310,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - politics
+      - society
     en_gb:
       standard: nation (a large group of people sharing history and territory)
     declension:
@@ -33328,6 +33441,7 @@ words:
     collections:
       - nature
       - faith
+      - weather
     en_gb:
       standard: sky (the space above the earth)
       alt:
@@ -33483,6 +33597,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - character
+      - abstract
     en_gb:
       standard: shortcoming (a flaw); a shortage
     declension:
@@ -33630,6 +33747,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - abstract
+      - daily life
     en_gb:
       standard: necessity (something essential)
     declension:
@@ -33654,6 +33774,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+      - daily life
     en_gb:
       standard: trouble (an unpleasant situation)
     declension:
@@ -33684,6 +33807,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - parts of the body
+      - sickness and health
     en_gb:
       standard: nerve (a fibre carrying signals in the body)
     declension:
@@ -34037,6 +34163,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - society
+      - measurement and calculation
     en_gb:
       standard: norm (a standard or rule)
     declension:
@@ -34200,7 +34329,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - time of day
+      - time
       - daily life
     en_gb:
       standard: night
@@ -34478,6 +34607,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - geography
+      - politics
     en_gb:
       standard: region (an administrative area, an oblast)
       alt:
@@ -34816,6 +34948,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - the law
     en_gb:
       standard: circumstance (a fact affecting a situation)
     declension:
@@ -34874,6 +35008,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - communication
+      - society
     en_gb:
       standard: communication (the exchange of information)
     declension:
@@ -34900,6 +35036,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - politics
+      - society
     en_gb:
       standard: society (people living together)
     usage:
@@ -34995,6 +35132,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - school
+      - communication
     en_gb:
       standard: explanation (a statement that makes something clear)
     declension:
@@ -35053,6 +35192,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - work
+      - the law
     en_gb:
       standard: duty (an obligation)
     declension:
@@ -35117,7 +35259,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - agriculture
+      - in the garden
     en_gb:
       standard: oats (a grain used for porridge and horse feed)
     usage:
@@ -35461,7 +35603,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: dandelion (a yellow flower that turns into a ball of fluff)
     usage:
@@ -35823,7 +35965,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - safety
+      - sickness and health
       - abstract
     en_gb:
       standard: danger (a threat or hazard)
@@ -35973,6 +36115,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - work
+      - science
     en_gb:
       standard: experience (knowledge from practice); an experiment
     declension:
@@ -36104,6 +36249,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - science
+      - sickness and health
     en_gb:
       standard: organism (a living body)
     declension:
@@ -36169,7 +36317,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: eagle (a large powerful bird of prey)
     usage:
@@ -36355,7 +36502,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: aspen (a tree whose leaves tremble in the wind)
     usage:
@@ -36719,6 +36866,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - work
+      - character
     en_gb:
       standard: responsibility (being answerable)
     declension:
@@ -37040,6 +37190,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - feelings and sensations
+      - romance and dating
     en_gb:
       standard: attitude (a way of thinking about something)
     usage:
@@ -37167,6 +37319,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - school
+      - work
     en_gb:
       standard: absence (the state of being away or missing)
     declension:
@@ -37688,8 +37843,8 @@ words:
     animacy: i
     number: ["pl"]
     collections:
-      - clothing
-      - health
+      - clothes
+      - sickness and health
     en_gb:
       standard: glasses (lenses worn in front of the eyes)
       alt:
@@ -38118,7 +38273,6 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - mind
       - abstract
     en_gb:
       standard: memory (the ability to remember; a recollection)
@@ -39028,6 +39182,9 @@ words:
     gender: m
     animacy: i
     number: ["pl"]
+    collections:
+      - politics
+      - work
     en_gb:
       standard: negotiations (formal talks)
     declension:
@@ -39190,7 +39347,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - places
-      - town
     en_gb:
       standard: lane (a narrow side street)
     usage:
@@ -39318,6 +39474,9 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - animals
+      - reading
     en_gb:
       standard: feather (of a bird); a pen nib
     declension:
@@ -39613,6 +39772,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - the law
+      - reading
     en_gb:
       standard: seal or stamp; the press (printed media)
     declension:
@@ -40108,6 +40270,9 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - reading
     en_gb:
       standard: letter (a written message)
     usage:
@@ -40750,7 +40915,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - town
+      - places
       - architecture
     en_gb:
       standard: platform (a flat area; a playground or landing)
@@ -41141,7 +41306,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - work
-      - work
     en_gb:
       standard: increase (a rise in level)
     declension:
@@ -41175,6 +41339,7 @@ words:
     collections:
       - nature
       - daily life
+      - weather
     en_gb:
       standard: weather (atmospheric conditions)
     declension:
@@ -41479,6 +41644,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - home
+      - architecture
     en_gb:
       standard: windowsill (the ledge below a window)
     declension:
@@ -41542,6 +41710,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - abstract
     en_gb:
       standard: detail (a small particular)
     declension:
@@ -41653,8 +41824,8 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
-      - agriculture
+      - plants
+      - in the garden
     en_gb:
       standard: sunflower (a tall flower with a large yellow head)
     usage:
@@ -42084,6 +42255,7 @@ words:
     collections:
       - family
       - history
+      - society
     en_gb:
       standard: generation (people born around the same time)
     usage:
@@ -42181,6 +42353,9 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - time
+      - daily life
     en_gb:
       standard: noon (twelve o'clock in the daytime)
     usage:
@@ -42202,6 +42377,9 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - nature
+      - in the garden
     en_gb:
       standard: field (an open area of land)
     declension:
@@ -42271,6 +42449,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - politics
+      - work
     en_gb:
       standard: politician (a person in politics)
     declension:
@@ -42596,6 +42777,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - finance
+      - work
     en_gb:
       standard: receipt (the act of receiving something)
     declension:
@@ -42806,6 +42989,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - daily life
+      - sickness and health
     en_gb:
       standard: help (assistance)
     usage:
@@ -42831,6 +43017,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - school
+      - abstract
     en_gb:
       standard: understanding (the ability to grasp meaning)
     declension:
@@ -43074,6 +43262,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - home
+      - architecture
     en_gb:
       standard: threshold (a doorstep; a limit)
     declension:
@@ -43244,7 +43435,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - places
-      - town
     en_gb:
       standard: settlement (a small village or housing area)
     usage:
@@ -43504,7 +43694,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - body
+      - parts of the body
     en_gb:
       standard: sweat (the salty liquid produced by the skin)
     usage:
@@ -43659,6 +43849,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - abstract
+      - shopping
     en_gb:
       standard: need (a requirement)
     declension:
@@ -43849,6 +44042,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - communication
+      - places
     en_gb:
       standard: post (the mail; a post office)
       alt:
@@ -43940,6 +44136,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - time
     en_gb:
       standard: appearance (the act of coming into view)
     declension:
@@ -43970,6 +44168,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - clothes
+      - geography
     en_gb:
       standard: belt (worn around the waist); a zone
     declension:
@@ -44369,7 +44570,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - work
-      - work
     en_gb:
       standard: enterprise (a business organisation)
     declension:
@@ -44569,6 +44769,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - sickness and health
+      - science
     en_gb:
       standard: preparation (a medicinal or chemical product)
     declension:
@@ -44600,7 +44803,7 @@ words:
     animacy: a
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
       - work
     en_gb:
       standard: lecturer (a teacher at a university)
@@ -44952,6 +45155,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - communication
+      - feelings and sensations
     en_gb:
       standard: recognition (acknowledgement of something)
     declension:
@@ -45147,6 +45352,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - faith
+      - history
     en_gb:
       standard: omen (a sign of the future); a distinguishing mark
     declension:
@@ -45753,7 +45961,6 @@ words:
     number: ["sg"]
     collections:
       - work
-      - work
     en_gb:
       standard: production (manufactured goods)
     declension:
@@ -46067,7 +46274,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - places
-      - town
     en_gb:
       standard: avenue (a wide main street)
     usage:
@@ -46453,6 +46659,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - science
     en_gb:
       standard: manifestation (an outward sign of something)
     declension:
@@ -46573,7 +46781,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - study
+      - school
     en_gb:
       standard: psychology (the study of the mind and behaviour)
     usage:
@@ -46932,7 +47140,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - movement
+      - motion
       - travel
       - abstract
     en_gb:
@@ -47037,7 +47245,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - agriculture
+      - in the garden
     en_gb:
       standard: wheat (the grain used to make bread and flour)
     usage:
@@ -47147,7 +47355,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: a five (the top school grade 'A'; the number five)
     usage:
@@ -47820,7 +48028,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - geography
-      - town
+      - places
       - daily life
     en_gb:
       standard: district (an area or region)
@@ -47885,6 +48093,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - the arts
+      - home
     en_gb:
       standard: frame (a border); bounds
     declension:
@@ -48180,6 +48391,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - science
+      - craft and construction
     en_gb:
       standard: solution (a liquid mixture); mortar
     declension:
@@ -48342,6 +48556,8 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - abstract
     en_gb:
       standard: reality (the real state of things)
     declension:
@@ -49094,6 +49310,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - politics
     en_gb:
       standard: speech (the act of speaking; an address)
     declension:
@@ -49125,6 +49344,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - school
     en_gb:
       standard: decision (a choice made after thinking)
     usage:
@@ -49576,6 +49797,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - family
+      - life and death
     en_gb:
       standard: birth (coming into the world)
     usage:
@@ -49608,7 +49830,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - agriculture
+      - in the garden
     en_gb:
       standard: rye (a grain used for dark bread)
     usage:
@@ -49797,7 +50019,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: camomile (a white flower with a yellow centre, a daisy)
       alt:
@@ -49986,6 +50208,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - military
+      - war and peace
     en_gb:
       standard: company (a military unit)
     declension:
@@ -50151,7 +50376,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - minerals
     en_gb:
       standard: ore (rock from which metal is taken)
     usage:
@@ -50353,6 +50577,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - reading
+      - history
     en_gb:
       standard: manuscript (a handwritten or original text)
     declension:
@@ -50449,6 +50676,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - nature
+      - geography
     en_gb:
       standard: stream (a small flow of water)
     declension:
@@ -50726,7 +50956,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: rowan (a tree with red berries, also called mountain ash)
       alt:
@@ -50834,7 +51064,7 @@ words:
     collections:
       - nature
       - plants
-      - agriculture
+      - in the garden
     en_gb:
       standard: seedling (a young plant grown for planting out)
       alt:
@@ -51256,6 +51486,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - finance
+      - work
     en_gb:
       standard: collection (a gathering; a fee)
     declension:
@@ -51321,6 +51554,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - communication
+      - school
     en_gb:
       standard: information (a piece of knowledge)
     declension:
@@ -51378,6 +51613,9 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - nature
+      - home
     en_gb:
       standard: light (brightness); also the world
     usage:
@@ -51642,6 +51880,7 @@ words:
       - history
       - feelings and sensations
       - war and peace
+      - society
     en_gb:
       standard: freedom (the state of being free)
       alt:
@@ -51706,6 +51945,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - technology
     en_gb:
       standard: connection (a link); communication
     declension:
@@ -51836,6 +52078,8 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - directions
     en_gb:
       standard: north (the direction)
     declension:
@@ -52057,6 +52301,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - in the garden
+      - animals
     en_gb:
       standard: hay (dried grass for animals)
     declension:
@@ -52643,7 +52890,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: tit (a small bird with a yellow breast)
     usage:
@@ -52837,7 +53083,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - town
+      - places
       - daily life
     en_gb:
       standard: bench (a long seat in a public place)
@@ -53219,6 +53465,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - character
+      - sickness and health
     en_gb:
       standard: weakness (lack of strength; a fondness)
     declension:
@@ -53491,6 +53740,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - science
+      - craft and construction
     en_gb:
       standard: layer (a sheet covering a surface)
     declension:
@@ -53557,6 +53809,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - work
+      - history
     en_gb:
       standard: servant (a person who serves a household)
     declension:
@@ -53622,6 +53877,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - feelings and sensations
+      - communication
     en_gb:
       standard: hearing (the sense); a rumour
       alt:
@@ -53654,6 +53912,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - abstract
+      - daily life
     en_gb:
       standard: case (an occasion or instance); a chance event
       alt:
@@ -53812,6 +54073,9 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - feelings and sensations
+      - hobbies and pastimes
     en_gb:
       standard: laughter (the act of laughing)
     declension:
@@ -53867,7 +54131,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - language
+      - communication
       - abstract
     en_gb:
       standard: meaning (sense; point; purpose)
@@ -53899,6 +54163,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - military
+      - sport
     en_gb:
       standard: projectile (an artillery shell); apparatus
     declension:
@@ -54035,6 +54302,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - communication
+      - people
     en_gb:
       standard: the person one is talking to
     declension:
@@ -54132,6 +54402,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - finance
+      - the law
     en_gb:
       standard: property (something owned); ownership
     declension:
@@ -54194,7 +54467,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: owl (a bird of prey that hunts at night)
     usage:
@@ -54224,6 +54496,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - character
+      - faith
     en_gb:
       standard: conscience (the sense of right and wrong)
     declension:
@@ -54287,6 +54562,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - politics
+      - work
     en_gb:
       standard: adviser (a counsellor)
     declension:
@@ -54380,6 +54658,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - communication
+      - the law
     en_gb:
       standard: agreement (consent, accord)
       alt:
@@ -54478,6 +54759,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - the arts
+      - abstract
     en_gb:
       standard: creation (the act of making something)
     declension:
@@ -54645,6 +54928,7 @@ words:
     collections:
       - nature
       - holiday
+      - weather
     en_gb:
       standard: sun (the star that lights the day)
     usage:
@@ -54769,6 +55053,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - work
     en_gb:
       standard: consideration (a factor taken into account)
     declension:
@@ -54928,7 +55214,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - animals
-      - birds
     en_gb:
       standard: magpie (a black-and-white bird known for stealing shiny things)
     usage:
@@ -55737,6 +56022,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - character
+      - school
     en_gb:
       standard: ability (a capacity or talent)
     declension:
@@ -55767,6 +56055,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - the law
+      - society
     en_gb:
       standard: justice (fairness)
     declension:
@@ -55859,6 +56150,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - school
     en_gb:
       standard: comparison (the act of comparing things)
     declension:
@@ -55923,6 +56216,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - technology
+      - finance
     en_gb:
       standard: means (a method or instrument)
     declension:
@@ -56223,6 +56518,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - life and death
+      - people
     en_gb:
       standard: old age (the later part of life)
     declension:
@@ -56343,6 +56641,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - society
+      - work
     en_gb:
       standard: status (rank or standing)
     declension:
@@ -56771,6 +57072,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - finance
+      - shopping
     en_gb:
       standard: cost (the price or value)
     declension:
@@ -56877,7 +57181,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - architecture
-      - town
+      - places
     en_gb:
       standard: post (a pillar or telegraph pole)
     declension:
@@ -57549,7 +57853,7 @@ words:
     animacy: a
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: student (a female university student)
     usage:
@@ -57782,7 +58086,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - nautical
+      - travel
     en_gb:
       standard: vessel (a ship or large boat)
     usage:
@@ -58120,6 +58424,9 @@ words:
     cefr_level: B1
     animacy: i
     number: ["pl"]
+    collections:
+      - time
+      - measurement and calculation
     en_gb:
       standard: a day and night (a 24-hour period)
     declension:
@@ -58235,6 +58542,8 @@ words:
     animacy: i
     number: ["sg"]
     collections:
+      - abstract
+      - life and death
     en_gb:
       standard: existence (the fact of being real)
     declension:
@@ -58262,6 +58571,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - abstract
+      - science
     en_gb:
       standard: essence (the core nature of something)
     declension:
@@ -58762,6 +59074,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - public transport
+      - travel
     en_gb:
       standard: taxi (a car for hire; indeclinable)
     usage:
@@ -59240,8 +59555,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - body
-      - health
+      - parts of the body
+      - sickness and health
     en_gb:
       standard: body (the physical form of a person or animal)
     usage:
@@ -59932,6 +60247,9 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - abstract
+      - communication
     en_gb:
       standard: sense (use, point); meaning
     declension:
@@ -59958,7 +60276,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - people
-      - town
+      - places
     en_gb:
       standard: crowd (a large number of people gathered together)
     declension:
@@ -60139,7 +60457,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: poplar (a tall straight tree common in towns)
     usage:
@@ -60328,6 +60646,9 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    collections:
+      - measurement and calculation
+      - science
     en_gb:
       standard: accuracy (exactness, precision)
     declension:
@@ -60858,6 +61179,8 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - life and death
     en_gb:
       standard: corpse (a dead body)
     declension:
@@ -60888,6 +61211,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - character
+      - war and peace
     en_gb:
       standard: coward (a person lacking courage)
     declension:
@@ -60918,6 +61244,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - home
+      - daily life
     en_gb:
       standard: rag (a piece of old cloth)
     declension:
@@ -60988,6 +61317,7 @@ words:
     collections:
       - nature
       - travel
+      - weather
     en_gb:
       standard: fog (a thick mist)
     declension:
@@ -61085,6 +61415,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
+      - weather
     en_gb:
       standard: storm cloud (a dark heavy cloud)
       alt:
@@ -61182,7 +61513,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: tulip (a bright cup-shaped spring flower)
     usage:
@@ -61279,6 +61610,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - the law
+      - life and death
     en_gb:
       standard: murder (the crime of killing a person)
     usage:
@@ -61701,8 +62033,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - emotions
-      - feelings
+      - feelings and sensations
     en_gb:
       standard: horror (terror; something dreadful)
     usage:
@@ -61769,6 +62100,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - craft and construction
+      - travel
     en_gb:
       standard: knot (a tied fastening); a junction
     declension:
@@ -62334,6 +62668,9 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - work
+      - sport
     en_gb:
       standard: effort (a determined attempt)
     declension:
@@ -62688,7 +63025,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - time of day
+      - time
       - daily life
     en_gb:
       standard: morning
@@ -62764,6 +63101,9 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    collections:
+      - sickness and health
+      - family
     en_gb:
       standard: care (looking after; also departure)
     declension:
@@ -62921,7 +63261,7 @@ words:
     animacy: a
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: pupil (a schoolgirl)
     usage:
@@ -62952,6 +63292,9 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - school
+      - work
     en_gb:
       standard: college (a vocational school)
     declension:
@@ -63186,7 +63529,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: faculty (a department of a university)
     usage:
@@ -63254,7 +63597,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - clothes
-      - clothing
       - in the kitchen
     en_gb:
       standard: apron (a protective garment worn over clothes when cooking or working)
@@ -63438,7 +63780,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - flowers
+      - plants
     en_gb:
       standard: violet (a small purple flower)
     usage:
@@ -63500,7 +63842,7 @@ words:
     animacy: i
     number: ["sg"]
     collections:
-      - study
+      - school
     en_gb:
       standard: philosophy (the study of ideas about life and knowledge)
     usage:
@@ -63601,7 +63943,7 @@ words:
     number: ["sg"]
     collections:
       - sport
-      - health
+      - sickness and health
     en_gb:
       standard: fitness (physical exercise to keep healthy)
     usage:
@@ -63813,7 +64155,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - daily life
-      - town
+      - places
     en_gb:
       standard: lantern (a portable light)
       alt:
@@ -64627,7 +64969,6 @@ words:
     number: ["sg", "pl"]
     collections:
       - work
-      - work
     en_gb:
       standard: economy (a system of production and resources)
     declension:
@@ -64719,6 +65060,7 @@ words:
     collections:
       - nature
       - feelings and sensations
+      - weather
     en_gb:
       standard: cold (low temperature; cold weather)
     declension:
@@ -65060,6 +65402,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - abstract
+      - work
     en_gb:
       standard: goal (an aim or objective)
     usage:
@@ -65163,7 +65507,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - abstract
-      - values
+      - character
     en_gb:
       standard: value (worth; a moral value or principle)
     usage:
@@ -65628,7 +65972,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - abstract
-      - structure
+      - measurement and calculation
     en_gb:
       standard: part (a portion or section of a whole)
     usage:
@@ -65811,6 +66155,9 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - parts of the body
+      - sickness and health
     en_gb:
       standard: jaw (the bones holding the teeth)
     declension:
@@ -66037,7 +66384,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - study
+      - school
     en_gb:
       standard: a four (the school grade 'B'; the number four)
     usage:
@@ -66066,7 +66413,7 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
-      - numbers
+      - measurement and calculation
       - time
     en_gb:
       standard: quarter (one fourth; a school term)
@@ -66263,6 +66610,9 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    collections:
+      - society
+      - politics
     en_gb:
       standard: member (of a group or body)
     declension:
@@ -67455,6 +67805,9 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    collections:
+      - travel
+      - public transport
     en_gb:
       standard: highway (a main road; indeclinable)
     declension:
@@ -67578,6 +67931,9 @@ words:
     gender: m
     animacy: i
     number: ["pl"]
+    collections:
+      - clothes
+      - shopping
     en_gb:
       standard: trousers (a garment for the legs)
     declension:
@@ -67602,6 +67958,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - politics
+      - work
     en_gb:
       standard: state (a federal state; also staff)
     declension:
@@ -67632,6 +67991,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - weather
+      - nature
     en_gb:
       standard: storm (a violent storm, especially at sea)
     declension:
@@ -67890,6 +68252,8 @@ words:
     animacy: i
     number: ["sg", "pl"]
     collections:
+      - home
+      - architecture
     en_gb:
       standard: crack (a narrow gap or crevice)
     declension:
@@ -68049,6 +68413,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - travel
+      - military
     en_gb:
       standard: crew (of a ship or aircraft)
     declension:
@@ -68240,6 +68607,9 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    collections:
+      - science
+      - school
     en_gb:
       standard: experiment (a scientific test)
     declension:
@@ -68678,6 +69048,7 @@ words:
     collections:
       - geography
       - daily life
+      - directions
     en_gb:
       standard: south (the southerly direction)
     declension:
@@ -68807,7 +69178,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - parts of the body
-      - language
+      - communication
       - school
     en_gb:
       standard: tongue (the part in the mouth used for tasting and speaking)
@@ -69001,7 +69372,7 @@ words:
     number: ["sg", "pl"]
     collections:
       - nature
-      - trees
+      - plants
     en_gb:
       standard: ash (a tall tree with grey bark and winged seeds)
     usage:
@@ -69063,7 +69434,7 @@ words:
     number: ["sg"]
     collections:
       - nature
-      - agriculture
+      - in the garden
     en_gb:
       standard: barley (a grain used for soup, bread and beer)
     usage:
