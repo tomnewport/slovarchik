@@ -121,6 +121,13 @@ en_gb:
 - **Accepted English answers** are derived automatically: the key's English plus
   the short gloss of `standard` and of every `alt`. So `"ворота=gate"` accepts
   `gate`; add synonyms via `alt` rather than cramming them into the key.
+- **The note has to distinguish.** A spelling drill prompts English→Russian with
+  the short gloss, the note and the part of speech, and nothing else — so two
+  words sharing all three ask a question that can only be guessed at. Write
+  notes that separate near-synonyms (`брю́ки` "(the standard word)" vs `штаны́`
+  "(the informal word)"), not notes that merely restate the gloss. Aspect pairs
+  need nothing: the prompt shows the aspect, which already tells them apart.
+  `spellPromptData.test.js` fails CI on any collision (#527).
 
 ### `usage` — example sentences
 

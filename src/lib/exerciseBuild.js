@@ -363,6 +363,10 @@ function buildWordType(practice, pi, ctx, make, kind) {
       // Part of speech, so a spelling prompt says which kind of word to spell —
       // "cold" as an adjective vs an adverb, say (#503).
       pos: w.pos,
+      // Verbal aspect, rendered next to the part of speech. For an aspect pair
+      // both members share a gloss and a note, so the aspect is the only thing
+      // that says whether уби́ть or убива́ть is wanted (#527).
+      ...(w.aspect ? { aspect: w.aspect } : {}),
       // `alsoRu` are alternate singular spellings — only offer them when the
       // singular is being shown, or they wouldn't match the plural prompt.
       ...(d.number === 'sg' && w.alsoRu?.length ? { alsoRu: w.alsoRu } : {}),
