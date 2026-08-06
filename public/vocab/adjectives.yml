@@ -172,6 +172,9 @@ words:
     accented: акти́вный
     en_gb:
       standard: active (energetic and busy)
+    collections:
+      - character
+      - sport
     forms:
       m: акти́вный
       f: акти́вная
@@ -502,6 +505,9 @@ words:
     accented: бесконе́чный
     en_gb:
       standard: endless (having no end)
+    collections:
+      - time
+      - abstract
     forms:
       m: бесконе́чный
       f: бесконе́чная
@@ -738,6 +744,9 @@ words:
     accented: блестя́щий
     en_gb:
       standard: brilliant (shining or outstanding)
+    collections:
+      - colours and textures
+      - character
     forms:
       m: блестя́щий
       f: блестя́щая
@@ -783,6 +792,9 @@ words:
     accented: ближа́йший
     en_gb:
       standard: nearest (closest in distance or time)
+    collections:
+      - places
+      - directions
     forms:
       m: ближа́йший
       f: ближа́йшая
@@ -830,6 +842,9 @@ words:
       standard: close (near in space or time)
       alt:
         - near
+    collections:
+      - places
+      - romance and dating
     forms:
       m: бли́зкий
       f: бли́зкая
@@ -973,7 +988,7 @@ words:
     cefr_level: B1
     accented: бо́жий
     collections:
-      - religion
+      - faith
     en_gb:
       standard: divine (of or relating to God)
     usage:
@@ -1075,6 +1090,8 @@ words:
     accented: бо́льший
     en_gb:
       standard: bigger (of greater size; comparative of большой)
+    collections:
+      - measurement and calculation
     forms:
       m: бо́льший
       f: бо́льшая
@@ -1122,6 +1139,8 @@ words:
       standard: big (large in size)
       alt:
         - large
+    collections:
+      - measurement and calculation
     usage:
       - ru: Э́то большо́й го́род.
         en_gb: This is a big city.
@@ -1170,6 +1189,8 @@ words:
     accented: бу́дущий
     en_gb:
       standard: future (yet to come)
+    collections:
+      - time
     forms:
       m: бу́дущий
       f: бу́дущая
@@ -1215,6 +1236,9 @@ words:
     accented: бы́вший
     en_gb:
       standard: former (no longer holding a position)
+    collections:
+      - time
+      - work
     forms:
       m: бы́вший
       f: бы́вшая
@@ -1262,6 +1286,8 @@ words:
       standard: fast (moving quickly)
       alt:
         - quick
+    collections:
+      - motion
     forms:
       m: бы́стрый
       f: бы́страя
@@ -1405,6 +1431,9 @@ words:
     accented: вели́кий
     en_gb:
       standard: great (of outstanding importance or ability)
+    collections:
+      - history
+      - character
     forms:
       m: вели́кий
       f: вели́кая
@@ -1450,6 +1479,9 @@ words:
     accented: великоле́пный
     en_gb:
       standard: magnificent (impressively beautiful)
+    collections:
+      - architecture
+      - the arts
     forms:
       m: великоле́пный
       f: великоле́пная
@@ -1496,6 +1528,9 @@ words:
     accented: ве́рный
     en_gb:
       standard: faithful (loyal and trustworthy)
+    collections:
+      - character
+      - romance and dating
     forms:
       m: ве́рный
       f: ве́рная
@@ -1542,6 +1577,9 @@ words:
     accented: ве́рхний
     en_gb:
       standard: upper (at the top)
+    collections:
+      - directions
+      - places
     forms:
       m: ве́рхний
       f: ве́рхняя
@@ -1685,6 +1723,9 @@ words:
     accented: ве́чный
     en_gb:
       standard: eternal (lasting forever)
+    collections:
+      - time
+      - faith
     forms:
       m: ве́чный
       f: ве́чная
@@ -1732,6 +1773,9 @@ words:
       standard: adult (fully grown)
       alt:
         - grown-up
+    collections:
+      - people
+      - family
     forms:
       m: взро́слый
       f: взро́слая
@@ -1779,6 +1823,9 @@ words:
       standard: visible (able to be seen)
       alt:
         - apparent
+    collections:
+      - feelings and sensations
+      - abstract
     forms:
       m: ви́димый
       f: ви́димая
@@ -1824,6 +1871,9 @@ words:
     accented: вино́ватый
     en_gb:
       standard: guilty (at fault, to blame)
+    collections:
+      - the law
+      - feelings and sensations
     forms:
       m: вино́ватый
       f: вино́ватая
@@ -1975,6 +2025,9 @@ words:
       alt:
         - humid
         - moist
+    collections:
+      - weather
+      - colours and textures
     forms:
       m: вла́жный
       f: вла́жная
@@ -2167,6 +2220,9 @@ words:
       alt:
         - air (as modifier)
         - airy
+    collections:
+      - travel
+      - nature
     forms:
       m: возду́шный
       f: возду́шная
@@ -2212,6 +2268,8 @@ words:
     accented: возмо́жный
     en_gb:
       standard: possible (able to happen or be done)
+    collections:
+      - abstract
     forms:
       m: возмо́жный
       f: возмо́жная
@@ -2257,6 +2315,9 @@ words:
     accented: волше́бный
     en_gb:
       standard: magical (having a quality of magic)
+    collections:
+      - the arts
+      - reading
     forms:
       m: волше́бный
       f: волше́бная
@@ -2304,6 +2365,9 @@ words:
       standard: free (unconstrained, at liberty)
       alt:
         - unrestrained
+    collections:
+      - abstract
+      - character
     forms:
       m: во́льный
       f: во́льная
@@ -2399,6 +2463,9 @@ words:
       alt:
         - oriental
         - east (as modifier)
+    collections:
+      - geography
+      - directions
     forms:
       m: восто́чный
       f: восто́чная
@@ -2448,7 +2515,7 @@ words:
         - nasty
     collections:
       - daily life
-      - health
+      - sickness and health
     forms:
       m: вре́дный
       f: вре́дная
@@ -2494,6 +2561,9 @@ words:
     accented: вре́менный
     en_gb:
       standard: temporary (lasting for a limited time)
+    collections:
+      - time
+      - work
     forms:
       m: вре́менный
       f: вре́менная
@@ -2539,6 +2609,9 @@ words:
     accented: всео́бщий
     en_gb:
       standard: universal (applying to all)
+    collections:
+      - society
+      - abstract
     forms:
       m: всео́бщий
       f: всео́бщая
@@ -2587,6 +2660,9 @@ words:
       alt:
         - every
         - various
+    collections:
+      - abstract
+      - measurement and calculation
     forms:
       m: вся́кий
       f: вся́кая
@@ -2681,6 +2757,9 @@ words:
       standard: forced (compelled by circumstances)
       alt:
         - compelled
+    collections:
+      - abstract
+      - work
     forms:
       m: вы́нужденный
       f: вы́нужденная
@@ -2777,6 +2856,9 @@ words:
     accented: вы́сший
     en_gb:
       standard: highest (supreme, top)
+    collections:
+      - school
+      - measurement and calculation
     forms:
       m: вы́сший
       f: вы́сшая
@@ -2822,6 +2904,9 @@ words:
     accented: генера́льный
     en_gb:
       standard: general (chief, main)
+    collections:
+      - work
+      - military
     forms:
       m: генера́льный
       f: генера́льная
@@ -2914,6 +2999,8 @@ words:
     accented: гига́нтский
     en_gb:
       standard: gigantic (extremely large)
+    collections:
+      - measurement and calculation
     forms:
       m: гига́нтский
       f: гига́нтская
@@ -3157,6 +3244,9 @@ words:
       alt:
         - muffled (of sounds)
         - remote (of places)
+    collections:
+      - sickness and health
+      - parts of the body
     forms:
       m: глухо́й
       f: глуха́я
@@ -3301,6 +3391,9 @@ words:
       alt:
         - bare
         - nude
+    collections:
+      - clothes
+      - parts of the body
     forms:
       m: го́лый
       f: го́лая
@@ -3398,6 +3491,9 @@ words:
     accented: го́рный
     en_gb:
       standard: mountain (of or in the mountains)
+    collections:
+      - geography
+      - nature
     forms:
       m: го́рный
       f: го́рная
@@ -3443,6 +3539,9 @@ words:
     accented: городско́й
     en_gb:
       standard: urban (relating to a city or town)
+    collections:
+      - places
+      - architecture
     forms:
       m: городско́й
       f: городска́я
@@ -3490,6 +3589,9 @@ words:
       standard: bitter (having a sharp, unpleasant taste)
       alt:
         - harsh
+    collections:
+      - food and drink
+      - in the kitchen
     forms:
       m: го́рький
       f: го́рькая
@@ -3633,6 +3735,9 @@ words:
       standard: ready (prepared)
       alt:
         - willing
+    collections:
+      - daily life
+      - in the kitchen
     forms:
       m: гото́вый
       f: гото́вая
@@ -3683,6 +3788,7 @@ words:
     accented: гражда́нский
     collections:
       - politics
+      - society
     en_gb:
       standard: civil (of ordinary citizens)
     forms:
@@ -3730,6 +3836,9 @@ words:
     accented: гро́зный
     en_gb:
       standard: formidable (inspiring fear or respect)
+    collections:
+      - war and peace
+      - character
     forms:
       m: гро́зный
       f: гро́зная
@@ -3775,6 +3884,8 @@ words:
     accented: грома́дный
     en_gb:
       standard: enormous (very large in size)
+    collections:
+      - measurement and calculation
     forms:
       m: грома́дный
       f: грома́дная
@@ -3820,6 +3931,9 @@ words:
     accented: гро́мкий
     en_gb:
       standard: loud (producing much noise)
+    collections:
+      - feelings and sensations
+      - communication
     forms:
       m: гро́мкий
       f: гро́мкая
@@ -4012,6 +4126,9 @@ words:
     accented: густо́й
     en_gb:
       standard: thick (dense in consistency or growth)
+    collections:
+      - colours and textures
+      - in the kitchen
     forms:
       m: густо́й
       f: густа́я
@@ -4058,6 +4175,9 @@ words:
     accented: далёкий
     en_gb:
       standard: distant (far away)
+    collections:
+      - places
+      - travel
     forms:
       m: далёкий
       f: далёкая
@@ -4104,6 +4224,9 @@ words:
     accented: дальне́йший
     en_gb:
       standard: further (additional, subsequent)
+    collections:
+      - time
+      - abstract
     forms:
       m: дальне́йший
       f: дальне́йшая
@@ -4197,6 +4320,9 @@ words:
     accented: да́нный
     en_gb:
       standard: given (particular, this specific)
+    collections:
+      - abstract
+      - school
     forms:
       m: да́нный
       f: да́нная
@@ -4244,6 +4370,9 @@ words:
       standard: on duty (currently responsible)
       alt:
         - duty (as modifier)
+    collections:
+      - work
+      - school
     forms:
       m: дежу́рный
       f: дежу́рная
@@ -4627,6 +4756,8 @@ words:
     accented: дли́тельный
     en_gb:
       standard: lengthy (lasting a long time)
+    collections:
+      - time
     forms:
       m: дли́тельный
       f: дли́тельная
@@ -4737,6 +4868,8 @@ words:
       alt:
         - content
         - pleased
+    collections:
+      - feelings and sensations
     forms:
       m: дово́льный
       f: дово́льная
@@ -4785,6 +4918,8 @@ words:
       standard: long (lasting a long time)
       alt:
         - lengthy
+    collections:
+      - time
     forms:
       m: до́лгий
       f: до́лгая
@@ -4857,6 +4992,9 @@ words:
       alt:
         - due
         - appropriate
+    collections:
+      - abstract
+      - work
     forms:
       m: до́лжный
       f: до́лжная
@@ -4902,6 +5040,9 @@ words:
     accented: дома́шний
     en_gb:
       standard: home (domestic, relating to the household)
+    collections:
+      - home
+      - daily life
     forms:
       m: дома́шний
       f: дома́шняя
@@ -4947,6 +5088,9 @@ words:
     accented: дополни́тельный
     en_gb:
       standard: additional (extra, added)
+    collections:
+      - measurement and calculation
+      - school
     forms:
       m: дополни́тельный
       f: дополни́тельная
@@ -4992,6 +5136,9 @@ words:
     accented: допусти́мый
     en_gb:
       standard: permissible (that may be allowed)
+    collections:
+      - the law
+      - abstract
     forms:
       m: допусти́мый
       f: допусти́мая
@@ -5092,6 +5239,8 @@ words:
       alt:
         - decent
         - dignified
+    collections:
+      - character
     forms:
       m: досто́йный
       f: досто́йная
@@ -5184,6 +5333,9 @@ words:
     accented: дура́цкий
     en_gb:
       standard: foolish (silly, stupid)
+    collections:
+      - character
+      - communication
     forms:
       m: дура́цкий
       f: дура́цкая
@@ -5232,6 +5384,9 @@ words:
       alt:
         - nasty
         - ill
+    collections:
+      - character
+      - abstract
     forms:
       m: дурно́й
       f: дурна́я
@@ -5327,6 +5482,9 @@ words:
       alt:
         - soulful
         - warm-hearted
+    collections:
+      - feelings and sensations
+      - character
     forms:
       m: душе́вный
       f: душе́вная
@@ -5372,6 +5530,9 @@ words:
     accented: евре́йский
     en_gb:
       standard: Jewish (relating to Jews or Judaism)
+    collections:
+      - nationalities
+      - faith
     forms:
       m: евре́йский
       f: евре́йская
@@ -5417,6 +5578,9 @@ words:
     accented: европе́йский
     en_gb:
       standard: European (of or from Europe)
+    collections:
+      - nationalities
+      - geography
     forms:
       m: европе́йский
       f: европе́йская
@@ -5462,6 +5626,9 @@ words:
     accented: еди́нственный
     en_gb:
       standard: only (being the sole one)
+    collections:
+      - measurement and calculation
+      - abstract
     forms:
       m: еди́нственный
       f: еди́нственная
@@ -5507,6 +5674,9 @@ words:
     accented: еди́ный
     en_gb:
       standard: single (unified, one and the same)
+    collections:
+      - abstract
+      - politics
     forms:
       m: еди́ный
       f: еди́ная
@@ -5646,6 +5816,9 @@ words:
       alt:
         - pathetic
         - miserable
+    collections:
+      - feelings and sensations
+      - character
     forms:
       m: жа́лкий
       f: жа́лкая
@@ -5691,6 +5864,7 @@ words:
     accented: жа́ркий
     collections:
       - nature
+      - weather
     en_gb:
       standard: hot (having a high temperature, of weather)
     forms:
@@ -5741,6 +5915,9 @@ words:
       standard: railway (relating to rail transport)
       alt:
         - railroad
+    collections:
+      - public transport
+      - travel
     forms:
       m: железнодоро́жный
       f: железнодоро́жная
@@ -5938,6 +6115,9 @@ words:
       alt:
         - women's
         - feminine
+    collections:
+      - people
+      - family
     forms:
       m: же́нский
       f: же́нская
@@ -6033,6 +6213,9 @@ words:
     accented: жесто́кий
     en_gb:
       standard: cruel (wilfully causing pain or suffering)
+    collections:
+      - character
+      - war and peace
     forms:
       m: жесто́кий
       f: жесто́кая
@@ -6134,6 +6317,9 @@ words:
       standard: animal (of or relating to animals)
       alt:
         - bestial
+    collections:
+      - animals
+      - nature
     forms:
       m: живо́тный
       f: живо́тная
@@ -6179,6 +6365,9 @@ words:
     accented: жи́зненный
     en_gb:
       standard: vital (of great importance to life)
+    collections:
+      - life and death
+      - abstract
     forms:
       m: жи́зненный
       f: жи́зненная
@@ -6271,6 +6460,9 @@ words:
     accented: зага́дочный
     en_gb:
       standard: mysterious (difficult to understand or explain)
+    collections:
+      - reading
+      - abstract
     forms:
       m: зага́дочный
       f: зага́дочная
@@ -6318,6 +6510,9 @@ words:
       standard: rear (at the back)
       alt:
         - back (as modifier)
+    collections:
+      - directions
+      - public transport
     forms:
       m: за́дний
       f: за́дняя
@@ -6365,6 +6560,8 @@ words:
       standard: imprisoned (locked up, detained)
       alt:
         - confined
+    collections:
+      - the law
     forms:
       m: заключённый
       f: заключённая
@@ -6461,6 +6658,9 @@ words:
       standard: closed (not open)
       alt:
         - shut
+    collections:
+      - shopping
+      - daily life
     forms:
       m: закры́тый
       f: закры́тая
@@ -6517,6 +6717,9 @@ words:
       alt:
         - conspicuous
         - significant
+    collections:
+      - abstract
+      - measurement and calculation
     forms:
       m: заме́тный
       f: заме́тная
@@ -6563,6 +6766,8 @@ words:
     accented: замеча́тельный
     en_gb:
       standard: wonderful (inspiring delight or admiration)
+    collections:
+      - feelings and sensations
     forms:
       m: замеча́тельный
       f: замеча́тельная
@@ -6811,6 +7016,9 @@ words:
       alt:
         - terrestrial
         - worldly
+    collections:
+      - nature
+      - geography
     forms:
       m: земно́й
       f: земна́я
@@ -6956,6 +7164,9 @@ words:
       standard: familiar (well known, recognisable)
       alt:
         - acquainted
+    collections:
+      - people
+      - daily life
     forms:
       m: знако́мый
       f: знако́мая
@@ -7001,6 +7212,9 @@ words:
     accented: знамени́тый
     en_gb:
       standard: famous (known by many people)
+    collections:
+      - the arts
+      - history
     forms:
       m: знамени́тый
       f: знамени́тая
@@ -7048,6 +7262,9 @@ words:
       standard: significant (large or important)
       alt:
         - considerable
+    collections:
+      - measurement and calculation
+      - abstract
     forms:
       m: значи́тельный
       f: значи́тельная
@@ -7243,6 +7460,8 @@ words:
       standard: other (different, another)
       alt:
         - different
+    collections:
+      - abstract
     forms:
       m: ино́й
       f: ина́я
@@ -7435,6 +7654,9 @@ words:
     accented: иску́сственный
     en_gb:
       standard: artificial (made by humans, not natural)
+    collections:
+      - technology
+      - science
     forms:
       m: иску́сственный
       f: иску́сственная
@@ -7530,6 +7752,9 @@ words:
       alt:
         - genuine
         - authentic
+    collections:
+      - abstract
+      - faith
     forms:
       m: и́стинный
       f: и́стинная
@@ -7671,6 +7896,9 @@ words:
       standard: stone (made of stone)
       alt:
         - rocky
+    collections:
+      - craft and construction
+      - architecture
     forms:
       m: ка́менный
       f: ка́менная
@@ -7906,6 +8134,9 @@ words:
     accented: ко́жаный
     en_gb:
       standard: leather (made of leather)
+    collections:
+      - clothes
+      - craft and construction
     forms:
       m: ко́жаный
       f: ко́жаная
@@ -8047,6 +8278,9 @@ words:
     accented: конкре́тный
     en_gb:
       standard: concrete (specific and definite)
+    collections:
+      - abstract
+      - communication
     forms:
       m: конкре́тный
       f: конкре́тная
@@ -8282,6 +8516,9 @@ words:
     accented: кра́йний
     en_gb:
       standard: last (the outermost or extreme one)
+    collections:
+      - measurement and calculation
+      - places
     forms:
       m: кра́йний
       f: кра́йняя
@@ -8329,6 +8566,9 @@ words:
       standard: beautiful (very nice to look at)
       alt:
         - handsome
+    collections:
+      - the arts
+      - romance and dating
     usage:
       - ru: Кака́я краси́вая пе́сня!
         en_gb: What a beautiful song!
@@ -8469,6 +8709,9 @@ words:
     accented: кре́пкий
     en_gb:
       standard: strong (firm and sturdy)
+    collections:
+      - character
+      - food and drink
     forms:
       m: кре́пкий
       f: кре́пкая
@@ -8515,6 +8758,8 @@ words:
     accented: криво́й
     en_gb:
       standard: crooked (not straight or level)
+    collections:
+      - shapes and patterns
     forms:
       m: криво́й
       f: крива́я
@@ -8654,6 +8899,8 @@ words:
     accented: кру́пный
     en_gb:
       standard: large (of considerable size or importance)
+    collections:
+      - measurement and calculation
     forms:
       m: кру́пный
       f: кру́пная
@@ -8700,6 +8947,9 @@ words:
     accented: круто́й
     en_gb:
       standard: steep (sharply sloping; colloquially, cool)
+    collections:
+      - geography
+      - motion
     forms:
       m: круто́й
       f: крута́я
@@ -8793,6 +9043,8 @@ words:
     accented: ле́вый
     en_gb:
       standard: left (on or towards the left side)
+    collections:
+      - directions
     forms:
       m: ле́вый
       f: ле́вая
@@ -8841,6 +9093,9 @@ words:
       alt:
         - easy
         - slight
+    collections:
+      - measurement and calculation
+      - sport
     forms:
       m: лёгкий
       f: лёгкая
@@ -9077,6 +9332,9 @@ words:
     accented: ли́чный
     en_gb:
       standard: personal (of or belonging to a particular person)
+    collections:
+      - daily life
+      - abstract
     forms:
       m: ли́чный
       f: ли́чная
@@ -9122,6 +9380,8 @@ words:
     accented: ли́шний
     en_gb:
       standard: extra (surplus, more than needed)
+    collections:
+      - measurement and calculation
     forms:
       m: ли́шний
       f: ли́шняя
@@ -9167,6 +9427,9 @@ words:
     accented: лу́чший
     en_gb:
       standard: best (of the highest quality; comparative of хороший)
+    collections:
+      - measurement and calculation
+      - school
     forms:
       m: лу́чший
       f: лу́чшая
@@ -9262,6 +9525,8 @@ words:
     accented: мале́йший
     en_gb:
       standard: slightest (the very smallest)
+    collections:
+      - measurement and calculation
     forms:
       m: мале́йший
       f: мале́йшая
@@ -9309,6 +9574,8 @@ words:
       standard: small (little in size)
       alt:
         - little
+    collections:
+      - measurement and calculation
     usage:
       - ru: У них ма́ленькая соба́ка.
         en_gb: They have a small dog.
@@ -9357,6 +9624,8 @@ words:
       standard: small (little in size or amount)
       alt:
         - little
+    collections:
+      - measurement and calculation
     forms:
       m: ма́лый
       f: ма́лая
@@ -9404,6 +9673,9 @@ words:
       standard: mass (involving large numbers of people)
       alt:
         - popular
+    collections:
+      - society
+      - measurement and calculation
     forms:
       m: ма́ссовый
       f: ма́ссовая
@@ -9496,6 +9768,9 @@ words:
       standard: material (relating to physical or financial matters)
       alt:
         - financial
+    collections:
+      - finance
+      - abstract
     forms:
       m: материа́льный
       f: материа́льная
@@ -9541,6 +9816,9 @@ words:
     accented: медици́нский
     en_gb:
       standard: medical (of or relating to medicine)
+    collections:
+      - sickness and health
+      - science
     forms:
       m: медици́нский
       f: медици́нская
@@ -9586,6 +9864,8 @@ words:
     accented: ме́дленный
     en_gb:
       standard: slow (not moving quickly)
+    collections:
+      - motion
     forms:
       m: ме́дленный
       f: ме́дленная
@@ -9679,6 +9959,9 @@ words:
     accented: ме́лкий
     en_gb:
       standard: small (of little size, petty, or shallow)
+    collections:
+      - measurement and calculation
+      - shapes and patterns
     forms:
       m: ме́лкий
       f: ме́лкая
@@ -9725,6 +10008,8 @@ words:
     accented: мёртвый
     en_gb:
       standard: dead (no longer alive)
+    collections:
+      - life and death
     forms:
       m: мёртвый
       f: мёртвая
@@ -9769,7 +10054,7 @@ words:
     cefr_level: B1
     accented: ме́стный
     collections:
-      - town
+      - places
     en_gb:
       standard: local (belonging to a particular area)
     forms:
@@ -9867,6 +10152,9 @@ words:
       alt:
         - sweet
         - cute
+    collections:
+      - romance and dating
+      - feelings and sensations
     forms:
       m: ми́лый
       f: ми́лая
@@ -9959,7 +10247,7 @@ words:
     cefr_level: B1
     accented: мирово́й
     collections:
-      - geopolitics
+      - politics
       - society
     en_gb:
       standard: world (relating to the whole world)
@@ -10103,6 +10391,8 @@ words:
     accented: многочи́сленный
     en_gb:
       standard: numerous (very many)
+    collections:
+      - measurement and calculation
     forms:
       m: многочи́сленный
       f: многочи́сленная
@@ -10148,6 +10438,9 @@ words:
     accented: могу́чий
     en_gb:
       standard: mighty (very powerful or strong)
+    collections:
+      - character
+      - war and peace
     forms:
       m: могу́чий
       f: могу́чая
@@ -10246,6 +10539,7 @@ words:
       - nature
       - daily life
       - colours and textures
+      - weather
     en_gb:
       standard: wet (covered with water)
     usage:
@@ -10440,6 +10734,9 @@ words:
     accented: мо́щный
     en_gb:
       standard: powerful (having great strength or force)
+    collections:
+      - technology
+      - measurement and calculation
     forms:
       m: мо́щный
       f: мо́щная
@@ -10534,6 +10831,9 @@ words:
     accented: мужско́й
     en_gb:
       standard: male (relating to men)
+    collections:
+      - people
+      - family
     forms:
       m: мужско́й
       f: мужска́я
@@ -10679,6 +10979,9 @@ words:
       alt:
         - dependable
         - trustworthy
+    collections:
+      - character
+      - technology
     forms:
       m: надёжный
       f: надёжная
@@ -10775,7 +11078,7 @@ words:
     accented: настоя́щий
     collections:
       - abstract
-      - values
+      - character
     en_gb:
       standard: real (genuine, not fake)
       alt:
@@ -10967,6 +11270,8 @@ words:
     accented: небольшо́й
     en_gb:
       standard: small (not large in size)
+    collections:
+      - measurement and calculation
     forms:
       m: небольшо́й
       f: небольша́я
@@ -11012,6 +11317,9 @@ words:
     accented: неве́домый
     en_gb:
       standard: unknown (mysterious and unfamiliar)
+    collections:
+      - abstract
+      - reading
     forms:
       m: неве́домый
       f: неве́домая
@@ -11101,6 +11409,9 @@ words:
     accented: невероя́тный
     en_gb:
       standard: incredible (impossible to believe)
+    collections:
+      - abstract
+      - feelings and sensations
     forms:
       m: невероя́тный
       f: невероя́тная
@@ -11146,6 +11457,9 @@ words:
     accented: неви́димый
     en_gb:
       standard: invisible (unable to be seen)
+    collections:
+      - abstract
+      - science
     forms:
       m: неви́димый
       f: неви́димая
@@ -11238,6 +11552,9 @@ words:
     accented: недалёкий
     en_gb:
       standard: not far (close in distance)
+    collections:
+      - places
+      - measurement and calculation
     forms:
       m: недалёкий
       f: недалёкая
@@ -11429,6 +11746,9 @@ words:
     accented: незнако́мый
     en_gb:
       standard: unfamiliar (not known or recognised)
+    collections:
+      - people
+      - daily life
     forms:
       m: незнако́мый
       f: незнако́мая
@@ -11474,6 +11794,9 @@ words:
     accented: неизве́стный
     en_gb:
       standard: unknown (not known or identified)
+    collections:
+      - abstract
+      - communication
     forms:
       m: неизве́стный
       f: неизве́стная
@@ -11521,6 +11844,8 @@ words:
       standard: certain (a certain, some)
       alt:
         - some
+    collections:
+      - abstract
     forms:
       m: не́кий
       f: не́кая
@@ -11568,6 +11893,9 @@ words:
       standard: some (a number of, certain ones)
       alt:
         - certain
+    collections:
+      - measurement and calculation
+      - abstract
     forms:
       m: не́который
       f: не́которая
@@ -11613,6 +11941,8 @@ words:
     accented: неме́цкий
     en_gb:
       standard: German (of or from Germany)
+    collections:
+      - nationalities
     forms:
       m: неме́цкий
       f: неме́цкая
@@ -11658,6 +11988,9 @@ words:
     accented: необходи́мый
     en_gb:
       standard: necessary (absolutely needed)
+    collections:
+      - abstract
+      - daily life
     forms:
       m: необходи́мый
       f: необходи́мая
@@ -11703,6 +12036,9 @@ words:
     accented: необыкнове́нный
     en_gb:
       standard: extraordinary (very unusual or remarkable)
+    collections:
+      - abstract
+      - feelings and sensations
     forms:
       m: необыкнове́нный
       f: необыкнове́нная
@@ -11795,6 +12131,9 @@ words:
     accented: нео́жиданный
     en_gb:
       standard: unexpected (not anticipated)
+    collections:
+      - time
+      - feelings and sensations
     forms:
       m: нео́жиданный
       f: нео́жиданная
@@ -11840,6 +12179,9 @@ words:
     accented: непоня́тный
     en_gb:
       standard: incomprehensible (impossible to understand)
+    collections:
+      - communication
+      - school
     forms:
       m: непоня́тный
       f: непоня́тная
@@ -11885,6 +12227,9 @@ words:
     accented: непра́вильный
     en_gb:
       standard: incorrect (not in accordance with fact)
+    collections:
+      - school
+      - abstract
     forms:
       m: непра́вильный
       f: непра́вильная
@@ -12073,6 +12418,9 @@ words:
       standard: unhurried (not in a hurry)
       alt:
         - leisurely
+    collections:
+      - motion
+      - character
     forms:
       m: неторопли́вый
       f: неторопли́вая
@@ -12166,6 +12514,9 @@ words:
     accented: ни́жний
     en_gb:
       standard: lower (situated below)
+    collections:
+      - directions
+      - places
     forms:
       m: ни́жний
       f: ни́жняя
@@ -12262,6 +12613,9 @@ words:
     accented: но́вый
     en_gb:
       standard: new (recently made or bought)
+    collections:
+      - time
+      - shopping
     usage:
       - ru: Мы встре́тили но́вого сосе́да.
         en_gb: We met a new neighbour.
@@ -12311,6 +12665,9 @@ words:
     accented: норма́льный
     en_gb:
       standard: normal (conforming to the standard)
+    collections:
+      - daily life
+      - abstract
     forms:
       m: норма́льный
       f: норма́льная
@@ -12358,6 +12715,9 @@ words:
       standard: nocturnal (of or at night)
       alt:
         - night (as modifier)
+    collections:
+      - time
+      - daily life
     forms:
       m: ночно́й
       f: ночна́я
@@ -12405,6 +12765,9 @@ words:
       standard: necessary (needed, required)
       alt:
         - needed
+    collections:
+      - abstract
+      - daily life
     forms:
       m: ну́жный
       f: ну́жная
@@ -12455,6 +12818,8 @@ words:
     accented: ны́нешний
     en_gb:
       standard: current (of the present time)
+    collections:
+      - time
     forms:
       m: ны́нешний
       f: ны́нешняя
@@ -12500,6 +12865,9 @@ words:
     accented: обра́тный
     en_gb:
       standard: reverse (going back or in the opposite direction)
+    collections:
+      - directions
+      - travel
     forms:
       m: обра́тный
       f: обра́тная
@@ -12546,6 +12914,7 @@ words:
     collections:
       - politics
       - daily life
+      - society
     en_gb:
       standard: public (of or concerning society as a whole)
     forms:
@@ -12593,6 +12962,9 @@ words:
     accented: о́бщий
     en_gb:
       standard: general (shared or common to all)
+    collections:
+      - abstract
+      - society
     forms:
       m: о́бщий
       f: о́бщая
@@ -12638,6 +13010,9 @@ words:
     accented: обыкнове́нный
     en_gb:
       standard: ordinary (with no special features)
+    collections:
+      - daily life
+      - abstract
     forms:
       m: обыкнове́нный
       f: обыкнове́нная
@@ -12686,6 +13061,8 @@ words:
       alt:
         - usual
         - common
+    collections:
+      - daily life
     forms:
       m: обы́чный
       f: обы́чная
@@ -12733,6 +13110,9 @@ words:
       standard: obliged (duty-bound)
       alt:
         - duty-bound
+    collections:
+      - the law
+      - work
     forms:
       m: обя́занный
       f: обя́занная
@@ -12836,6 +13216,8 @@ words:
     accented: огро́мный
     en_gb:
       standard: enormous (very large)
+    collections:
+      - measurement and calculation
     forms:
       m: огро́мный
       f: огро́мная
@@ -12883,6 +13265,8 @@ words:
     accented: оде́тый
     en_gb:
       standard: dressed (wearing clothes)
+    collections:
+      - clothes
     forms:
       m: оде́тый
       f: оде́тая
@@ -12936,6 +13320,9 @@ words:
     accented: одина́ковый
     en_gb:
       standard: identical (the same in every detail)
+    collections:
+      - measurement and calculation
+      - abstract
     forms:
       m: одина́ковый
       f: одина́ковая
@@ -13083,6 +13470,9 @@ words:
     accented: операти́вный
     en_gb:
       standard: prompt (acting quickly and efficiently)
+    collections:
+      - work
+      - time
     forms:
       m: операти́вный
       f: операти́вная
@@ -13128,6 +13518,8 @@ words:
     accented: определённый
     en_gb:
       standard: definite (clearly established or decided)
+    collections:
+      - abstract
     forms:
       m: определённый
       f: определённая
@@ -13222,6 +13614,9 @@ words:
       standard: experienced (having much experience)
       alt:
         - skilled
+    collections:
+      - work
+      - character
     forms:
       m: о́пытный
       f: о́пытная
@@ -13363,6 +13758,9 @@ words:
     accented: осе́нний
     en_gb:
       standard: autumn (relating to autumn)
+    collections:
+      - the calendar
+      - nature
     forms:
       m: осе́нний
       f: осе́нняя
@@ -13408,6 +13806,9 @@ words:
     accented: основно́й
     en_gb:
       standard: main (most important)
+    collections:
+      - abstract
+      - work
     forms:
       m: основно́й
       f: основна́я
@@ -13453,6 +13854,9 @@ words:
     accented: осо́бенный
     en_gb:
       standard: special (better or different from the ordinary)
+    collections:
+      - abstract
+      - feelings and sensations
     forms:
       m: осо́бенный
       f: осо́бенная
@@ -13498,6 +13902,8 @@ words:
     accented: осо́бый
     en_gb:
       standard: particular (specific and distinct from others)
+    collections:
+      - abstract
     forms:
       m: осо́бый
       f: осо́бая
@@ -13545,6 +13951,9 @@ words:
       standard: remaining (the rest of)
       alt:
         - rest (the rest)
+    collections:
+      - measurement and calculation
+      - abstract
     forms:
       m: остально́й
       f: остальна́я
@@ -13642,6 +14051,9 @@ words:
     accented: отде́льный
     en_gb:
       standard: separate (not joined or combined)
+    collections:
+      - abstract
+      - places
     forms:
       m: отде́льный
       f: отде́льная
@@ -13736,6 +14148,9 @@ words:
       standard: open (not closed)
       alt:
         - opened
+    collections:
+      - shopping
+      - daily life
     forms:
       m: откры́тый
       f: откры́тая
@@ -13788,6 +14203,9 @@ words:
       standard: excellent (very good)
       alt:
         - great
+    collections:
+      - school
+      - feelings and sensations
     forms:
       m: отли́чный
       f: отли́чная
@@ -13928,6 +14346,9 @@ words:
       alt:
         - another
         - scheduled
+    collections:
+      - time
+      - daily life
     forms:
       m: очередно́й
       f: очередна́я
@@ -14071,6 +14492,9 @@ words:
       standard: front (at the front)
       alt:
         - fore (as modifier)
+    collections:
+      - directions
+      - public transport
     forms:
       m: пере́дний
       f: пере́дняя
@@ -14166,6 +14590,8 @@ words:
       alt:
         - melancholy
         - mournful
+    collections:
+      - feelings and sensations
     forms:
       m: печа́льный
       f: печа́льная
@@ -14212,6 +14638,9 @@ words:
     accented: пи́сьменный
     en_gb:
       standard: written (in writing)
+    collections:
+      - reading
+      - school
     forms:
       m: пи́сьменный
       f: пи́сьменная
@@ -14304,6 +14733,9 @@ words:
     accented: пло́тный
     en_gb:
       standard: dense (closely compacted in substance)
+    collections:
+      - colours and textures
+      - measurement and calculation
     forms:
       m: пло́тный
       f: пло́тная
@@ -14352,6 +14784,9 @@ words:
     accented: плохо́й
     en_gb:
       standard: bad (not good)
+    collections:
+      - abstract
+      - feelings and sensations
     usage:
       - ru: Сего́дня плоха́я пого́да.
         en_gb: The weather is bad today.
@@ -14446,6 +14881,9 @@ words:
     accented: по́длинный
     en_gb:
       standard: genuine (authentic, true)
+    collections:
+      - the arts
+      - abstract
     forms:
       m: по́длинный
       f: по́длинная
@@ -14493,6 +14931,9 @@ words:
       standard: similar (like, of the same kind)
       alt:
         - such
+    collections:
+      - abstract
+      - shapes and patterns
     forms:
       m: подо́бный
       f: подо́бная
@@ -14538,6 +14979,9 @@ words:
     accented: подходя́щий
     en_gb:
       standard: suitable (right or appropriate for a purpose)
+    collections:
+      - abstract
+      - clothes
     forms:
       m: подходя́щий
       f: подходя́щая
@@ -14677,6 +15121,9 @@ words:
     accented: полево́й
     en_gb:
       standard: field (relating to a field)
+    collections:
+      - nature
+      - in the garden
     forms:
       m: полево́й
       f: полева́я
@@ -14724,6 +15171,9 @@ words:
       standard: useful (serving a practical purpose)
       alt:
         - beneficial
+    collections:
+      - sickness and health
+      - daily life
     forms:
       m: поле́зный
       f: поле́зная
@@ -14770,6 +15220,8 @@ words:
     accented: полити́ческий
     en_gb:
       standard: political (of or relating to politics)
+    collections:
+      - politics
     forms:
       m: полити́ческий
       f: полити́ческая
@@ -14867,6 +15319,9 @@ words:
       alt:
         - due
         - appointed
+    collections:
+      - the law
+      - work
     forms:
       m: поло́женный
       f: поло́женная
@@ -15003,6 +15458,9 @@ words:
       alt:
         - clear
         - comprehensible
+    collections:
+      - communication
+      - school
     forms:
       m: поня́тный
       f: поня́тная
@@ -15095,6 +15553,9 @@ words:
     accented: после́дний
     en_gb:
       standard: last (coming after all others)
+    collections:
+      - time
+      - measurement and calculation
     forms:
       m: после́дний
       f: после́дняя
@@ -15184,6 +15645,9 @@ words:
     accented: посторо́нний
     en_gb:
       standard: outside (extraneous; a stranger)
+    collections:
+      - people
+      - places
     forms:
       m: посторо́нний
       f: посторо́нняя
@@ -15229,6 +15693,8 @@ words:
     accented: постоя́нный
     en_gb:
       standard: permanent (lasting or intended to last indefinitely)
+    collections:
+      - time
     forms:
       m: постоя́нный
       f: постоя́нная
@@ -15277,6 +15743,9 @@ words:
       alt:
         - alike
         - resembling
+    collections:
+      - abstract
+      - people
     forms:
       m: похо́жий
       f: похо́жая
@@ -15372,6 +15841,9 @@ words:
     accented: пра́вильный
     en_gb:
       standard: correct (free from error)
+    collections:
+      - school
+      - abstract
     forms:
       m: пра́вильный
       f: пра́вильная
@@ -15464,6 +15936,8 @@ words:
       alt:
         - right-wing
         - righteous
+    collections:
+      - directions
     forms:
       m: пра́вый
       f: пра́вая
@@ -15556,6 +16030,8 @@ words:
     accented: пре́жний
     en_gb:
       standard: former (existing in the past)
+    collections:
+      - time
     forms:
       m: пре́жний
       f: пре́жняя
@@ -15601,6 +16077,9 @@ words:
     accented: прекра́сный
     en_gb:
       standard: beautiful (giving aesthetic pleasure)
+    collections:
+      - the arts
+      - feelings and sensations
     forms:
       m: прекра́сный
       f: прекра́сная
@@ -15649,6 +16128,9 @@ words:
       alt:
         - customary
         - familiar
+    collections:
+      - daily life
+      - character
     forms:
       m: привы́чный
       f: привы́чная
@@ -15697,6 +16179,9 @@ words:
       alt:
         - adoptive (of parents)
         - foster
+    collections:
+      - family
+      - work
     forms:
       m: приёмный
       f: приёмная
@@ -15745,6 +16230,9 @@ words:
       alt:
         - proper
         - respectable
+    collections:
+      - character
+      - society
     forms:
       m: прили́чный
       f: прили́чная
@@ -15792,6 +16280,9 @@ words:
       standard: accepted (adopted, agreed upon)
       alt:
         - adopted
+    collections:
+      - society
+      - the law
     forms:
       m: при́нятый
       f: при́нятая
@@ -15840,6 +16331,8 @@ words:
       alt:
         - nice
         - agreeable
+    collections:
+      - feelings and sensations
     forms:
       m: прия́тный
       f: прия́тная
@@ -15886,6 +16379,9 @@ words:
     accented: прозра́чный
     en_gb:
       standard: transparent (allowing light to pass through)
+    collections:
+      - colours and textures
+      - science
     forms:
       m: прозра́чный
       f: прозра́чная
@@ -15933,6 +16429,9 @@ words:
       standard: damned (cursed)
       alt:
         - cursed
+    collections:
+      - faith
+      - feelings and sensations
     forms:
       m: прокля́тый
       f: прокля́тая
@@ -16029,6 +16528,9 @@ words:
     accented: противополо́жный
     en_gb:
       standard: opposite (completely different, facing)
+    collections:
+      - directions
+      - abstract
     forms:
       m: противополо́жный
       f: противополо́жная
@@ -16168,6 +16670,8 @@ words:
       alt:
         - last
         - previous
+    collections:
+      - time
     forms:
       m: про́шлый
       f: про́шлая
@@ -16359,6 +16863,9 @@ words:
       standard: drunk (intoxicated with alcohol)
       alt:
         - intoxicated
+    collections:
+      - food and drink
+      - sickness and health
     forms:
       m: пья́ный
       f: пья́ная
@@ -16476,6 +16983,8 @@ words:
       alt:
         - glad
         - delighted
+    collections:
+      - feelings and sensations
     forms:
       m: ра́достный
       f: ра́достная
@@ -16523,6 +17032,9 @@ words:
       standard: broken (smashed, defeated)
       alt:
         - smashed
+    collections:
+      - daily life
+      - war and peace
     forms:
       m: разби́тый
       f: разби́тая
@@ -16573,6 +17085,9 @@ words:
       alt:
         - diverse
         - different
+    collections:
+      - measurement and calculation
+      - abstract
     forms:
       m: разли́чный
       f: разли́чная
@@ -16669,6 +17184,9 @@ words:
       alt:
         - various
         - diverse
+    collections:
+      - abstract
+      - measurement and calculation
     forms:
       m: ра́зный
       f: ра́зная
@@ -16717,6 +17235,9 @@ words:
       alt:
         - sensible
         - rational
+    collections:
+      - abstract
+      - character
     forms:
       m: разу́мный
       f: разу́мная
@@ -16765,6 +17286,9 @@ words:
       standard: wounded (injured in battle or by violence)
       alt:
         - injured
+    collections:
+      - war and peace
+      - sickness and health
     forms:
       m: ра́неный
       f: ра́неная
@@ -16810,6 +17334,8 @@ words:
     accented: ра́нний
     en_gb:
       standard: early (happening near the beginning)
+    collections:
+      - time
     forms:
       m: ра́нний
       f: ра́нняя
@@ -16902,6 +17428,8 @@ words:
     accented: реа́льный
     en_gb:
       standard: real (actually existing or occurring)
+    collections:
+      - abstract
     forms:
       m: реа́льный
       f: реа́льная
@@ -16947,6 +17475,9 @@ words:
     accented: ре́дкий
     en_gb:
       standard: rare (not occurring very often)
+    collections:
+      - measurement and calculation
+      - nature
     forms:
       m: ре́дкий
       f: ре́дкая
@@ -16993,6 +17524,9 @@ words:
     accented: ре́зкий
     en_gb:
       standard: sharp (sudden or severe)
+    collections:
+      - feelings and sensations
+      - motion
     forms:
       m: ре́зкий
       f: ре́зкая
@@ -17280,6 +17814,8 @@ words:
     accented: ру́сский
     en_gb:
       standard: Russian (from Russia, or the language)
+    collections:
+      - nationalities
     usage:
       - ru: Он чита́ет ру́сский журна́л.
         en_gb: He is reading a Russian magazine.
@@ -17328,6 +17864,9 @@ words:
       alt:
         - ginger
         - auburn
+    collections:
+      - people
+      - colours and textures
     forms:
       m: ры́жий
       f: ры́жая
@@ -17375,6 +17914,8 @@ words:
       standard: the most (used to form superlatives)
       alt:
         - very (emphasising identity)
+    collections:
+      - measurement and calculation
     forms:
       m: са́мый
       f: са́мая
@@ -17577,6 +18118,9 @@ words:
       standard: northern (in or towards the north)
       alt:
         - north (as modifier)
+    collections:
+      - geography
+      - directions
     forms:
       m: се́верный
       f: се́верная
@@ -17622,6 +18166,9 @@ words:
     accented: сего́дняшний
     en_gb:
       standard: today's (relating to today)
+    collections:
+      - time
+      - the calendar
     forms:
       m: сего́дняшний
       f: сего́дняшняя
@@ -17667,6 +18214,9 @@ words:
     accented: седо́й
     en_gb:
       standard: grey-haired (with grey or white hair)
+    collections:
+      - people
+      - colours and textures
     forms:
       m: седо́й
       f: седа́я
@@ -17714,6 +18264,9 @@ words:
       standard: secret (kept hidden from others)
       alt:
         - classified
+    collections:
+      - military
+      - the law
     forms:
       m: секре́тный
       f: секре́тная
@@ -17759,6 +18312,8 @@ words:
     accented: семе́йный
     en_gb:
       standard: family (of or relating to family)
+    collections:
+      - family
     forms:
       m: семе́йный
       f: семе́йная
@@ -18097,6 +18652,9 @@ words:
       alt:
         - quick
         - soon
+    collections:
+      - motion
+      - public transport
     forms:
       m: ско́рый
       f: ско́рая
@@ -18191,6 +18749,9 @@ words:
     accented: скры́тый
     en_gb:
       standard: hidden (kept out of sight)
+    collections:
+      - abstract
+      - military
     forms:
       m: скры́тый
       f: скры́тая
@@ -18338,6 +18899,9 @@ words:
     accented: сла́вный
     en_gb:
       standard: glorious (having or bringing great fame)
+    collections:
+      - history
+      - character
     forms:
       m: сла́вный
       f: сла́вная
@@ -18432,6 +18996,9 @@ words:
     accented: сле́дующий
     en_gb:
       standard: next (the one that follows)
+    collections:
+      - time
+      - public transport
     forms:
       m: сле́дующий
       f: сле́дующая
@@ -18525,6 +19092,9 @@ words:
     accented: сло́жный
     en_gb:
       standard: complex (consisting of many different parts)
+    collections:
+      - school
+      - abstract
     forms:
       m: сло́жный
       f: сло́жная
@@ -18574,6 +19144,8 @@ words:
       alt:
         - work (as modifier)
         - service (as modifier)
+    collections:
+      - work
     forms:
       m: слу́жебный
       f: слу́жебная
@@ -18622,6 +19194,9 @@ words:
       alt:
         - random
         - chance
+    collections:
+      - abstract
+      - daily life
     forms:
       m: случа́йный
       f: случа́йная
@@ -18721,6 +19296,9 @@ words:
       alt:
         - ridiculous
         - comic
+    collections:
+      - feelings and sensations
+      - hobbies and pastimes
     forms:
       m: смешно́й
       f: смешна́я
@@ -18768,6 +19346,9 @@ words:
       standard: snowy (covered with or resembling snow)
       alt:
         - snow (as modifier)
+    collections:
+      - weather
+      - nature
     forms:
       m: сне́жный
       f: сне́жная
@@ -18815,6 +19396,9 @@ words:
       standard: own (belonging to oneself)
       alt:
         - personal
+    collections:
+      - abstract
+      - finance
     forms:
       m: со́бственный
       f: со́бственная
@@ -18911,6 +19495,9 @@ words:
       alt:
         - combined
         - shared
+    collections:
+      - work
+      - society
     forms:
       m: совме́стный
       f: совме́стная
@@ -19007,6 +19594,9 @@ words:
       standard: agreeable (in agreement, consonant)
       alt:
         - willing
+    collections:
+      - communication
+      - school
     forms:
       m: согла́сный
       f: согла́сная
@@ -19059,6 +19649,9 @@ words:
       standard: soldier's (of or relating to soldiers)
       alt:
         - military
+    collections:
+      - military
+      - war and peace
     forms:
       m: солда́тский
       f: солда́тская
@@ -19153,6 +19746,7 @@ words:
     collections:
       - nature
       - holiday
+      - weather
     en_gb:
       standard: sunny (full of sunshine)
     usage:
@@ -19295,6 +19889,9 @@ words:
       alt:
         - adjacent
         - next-door
+    collections:
+      - places
+      - home
     forms:
       m: сосе́дний
       f: сосе́дняя
@@ -19388,6 +19985,7 @@ words:
     collections:
       - politics
       - daily life
+      - society
     en_gb:
       standard: social (of or relating to society)
     forms:
@@ -19435,6 +20033,9 @@ words:
     accented: специа́льный
     en_gb:
       standard: special (designed for a particular purpose)
+    collections:
+      - work
+      - abstract
     forms:
       m: специа́льный
       f: специа́льная
@@ -19483,6 +20084,9 @@ words:
       alt:
         - solid
         - unbroken
+    collections:
+      - measurement and calculation
+      - colours and textures
     forms:
       m: сплошно́й
       f: сплошна́я
@@ -19579,6 +20183,8 @@ words:
       alt:
         - athletic
         - sporting
+    collections:
+      - sport
     forms:
       m: спорти́вный
       f: спорти́вная
@@ -19671,6 +20277,9 @@ words:
     accented: справедли́вый
     en_gb:
       standard: just (based on fairness)
+    collections:
+      - the law
+      - character
     forms:
       m: справедли́вый
       f: справедли́вая
@@ -19719,6 +20328,9 @@ words:
       alt:
         - middle
         - medium
+    collections:
+      - measurement and calculation
+      - school
     forms:
       m: сре́дний
       f: сре́дняя
@@ -19860,6 +20472,9 @@ words:
     accented: ста́рший
     en_gb:
       standard: senior (older or higher in rank)
+    collections:
+      - family
+      - work
     forms:
       m: ста́рший
       f: ста́ршая
@@ -19905,6 +20520,9 @@ words:
     accented: ста́рый
     en_gb:
       standard: old (not new, or aged)
+    collections:
+      - time
+      - people
     usage:
       - ru: Я хорошо́ зна́ю ста́рого учи́теля.
         en_gb: I know the old teacher well.
@@ -19954,6 +20572,9 @@ words:
     accented: стекля́нный
     en_gb:
       standard: glass (made of glass)
+    collections:
+      - craft and construction
+      - in the kitchen
     forms:
       m: стекля́нный
       f: стекля́нная
@@ -20001,6 +20622,9 @@ words:
       standard: dining (for eating, table-related)
       alt:
         - table (as modifier)
+    collections:
+      - in the kitchen
+      - restaurants and cafes
     forms:
       m: столо́вый
       f: столо́вая
@@ -20046,6 +20670,9 @@ words:
     accented: стра́нный
     en_gb:
       standard: strange (unusual or surprising)
+    collections:
+      - abstract
+      - feelings and sensations
     forms:
       m: стра́нный
       f: стра́нная
@@ -20140,6 +20767,9 @@ words:
     accented: стро́гий
     en_gb:
       standard: strict (demanding obedience to rules)
+    collections:
+      - character
+      - school
     forms:
       m: стро́гий
       f: стро́гая
@@ -20188,6 +20818,9 @@ words:
       standard: shameful (causing shame)
       alt:
         - disgraceful
+    collections:
+      - feelings and sensations
+      - character
     forms:
       m: сты́дный
       f: сты́дная
@@ -20233,6 +20866,9 @@ words:
     accented: сумасше́дший
     en_gb:
       standard: crazy (mad, insane)
+    collections:
+      - sickness and health
+      - feelings and sensations
     forms:
       m: сумасше́дший
       f: сумасше́дшая
@@ -20278,6 +20914,9 @@ words:
     accented: суро́вый
     en_gb:
       standard: harsh (stern and uncompromising)
+    collections:
+      - character
+      - weather
     forms:
       m: суро́вый
       f: суро́вая
@@ -20326,6 +20965,7 @@ words:
       - colours and textures
       - nature
       - in the kitchen
+      - weather
     en_gb:
       standard: dry (not wet)
     usage:
@@ -20424,6 +21064,9 @@ words:
     accented: сыро́й
     en_gb:
       standard: raw (uncooked, or damp)
+    collections:
+      - in the kitchen
+      - weather
     forms:
       m: сыро́й
       f: сыра́я
@@ -20471,6 +21114,9 @@ words:
       standard: mysterious (full of mystery)
       alt:
         - enigmatic
+    collections:
+      - reading
+      - abstract
     forms:
       m: таи́нственный
       f: таи́нственная
@@ -20516,6 +21162,9 @@ words:
     accented: та́йный
     en_gb:
       standard: secret (kept hidden from others)
+    collections:
+      - military
+      - abstract
     forms:
       m: та́йный
       f: та́йная
@@ -20612,6 +21261,9 @@ words:
       standard: creative (involving imagination and invention)
       alt:
         - artistic
+    collections:
+      - the arts
+      - work
     forms:
       m: тво́рческий
       f: тво́рческая
@@ -20659,6 +21311,9 @@ words:
       standard: telephone (of or by telephone)
       alt:
         - phone (as modifier)
+    collections:
+      - technology
+      - communication
     forms:
       m: телефо́нный
       f: телефо́нная
@@ -20759,6 +21414,7 @@ words:
       - feelings and sensations
       - clothes
       - nature
+      - weather
     en_gb:
       standard: warm (pleasantly hot)
     usage:
@@ -20807,6 +21463,9 @@ words:
     accented: те́сный
     en_gb:
       standard: tight (fitting closely or cramped)
+    collections:
+      - clothes
+      - places
     forms:
       m: те́сный
       f: те́сная
@@ -20858,6 +21517,9 @@ words:
     accented: техни́ческий
     en_gb:
       standard: technical (of or relating to technology)
+    collections:
+      - technology
+      - science
     forms:
       m: техни́ческий
       f: техни́ческая
@@ -20950,6 +21612,9 @@ words:
     accented: ти́хий
     en_gb:
       standard: quiet (making little or no noise)
+    collections:
+      - feelings and sensations
+      - places
     forms:
       m: ти́хий
       f: ти́хая
@@ -21148,6 +21813,9 @@ words:
       alt:
         - hurried
         - rushed
+    collections:
+      - motion
+      - character
     forms:
       m: торопли́вый
       f: торопли́вая
@@ -21193,6 +21861,9 @@ words:
     accented: то́чный
     en_gb:
       standard: exact (precise and accurate)
+    collections:
+      - measurement and calculation
+      - science
     forms:
       m: то́чный
       f: то́чная
@@ -21383,6 +22054,8 @@ words:
     accented: трудово́й
     en_gb:
       standard: labour (relating to work)
+    collections:
+      - work
     forms:
       m: трудово́й
       f: трудова́я
@@ -21428,6 +22101,9 @@ words:
     accented: тупо́й
     en_gb:
       standard: blunt (not sharp; also stupid)
+    collections:
+      - in the kitchen
+      - character
     forms:
       m: тупо́й
       f: тупа́я
@@ -21473,6 +22149,9 @@ words:
     accented: тяжёлый
     en_gb:
       standard: heavy (of great weight or difficulty)
+    collections:
+      - measurement and calculation
+      - work
     forms:
       m: тяжёлый
       f: тяжёлая
@@ -21521,6 +22200,9 @@ words:
       standard: killed (having been killed)
       alt:
         - dead
+    collections:
+      - life and death
+      - war and peace
     forms:
       m: уби́тый
       f: уби́тая
@@ -21568,6 +22250,9 @@ words:
       standard: respected (held in high regard)
       alt:
         - dear (as a form of address)
+    collections:
+      - communication
+      - society
     forms:
       m: уважа́емый
       f: уважа́емая
@@ -21663,6 +22348,9 @@ words:
       standard: pleasing (acceptable, welcome)
       alt:
         - acceptable
+    collections:
+      - communication
+      - faith
     forms:
       m: уго́дный
       f: уго́дная
@@ -21760,6 +22448,8 @@ words:
     accented: удиви́тельный
     en_gb:
       standard: amazing (causing wonder or astonishment)
+    collections:
+      - feelings and sensations
     forms:
       m: удиви́тельный
       f: удиви́тельная
@@ -22054,6 +22744,9 @@ words:
     accented: у́тренний
     en_gb:
       standard: morning (relating to the morning)
+    collections:
+      - time
+      - daily life
     forms:
       m: у́тренний
       f: у́тренняя
@@ -22102,6 +22795,8 @@ words:
       alt:
         - academic
         - school (as modifier)
+    collections:
+      - school
     forms:
       m: уче́бный
       f: уче́бная
@@ -22149,6 +22844,9 @@ words:
       standard: scholarly (learned, educated)
       alt:
         - learned
+    collections:
+      - science
+      - school
     forms:
       m: учёный
       f: учёная
@@ -22196,6 +22894,9 @@ words:
       standard: cosy (comfortable and warm)
       alt:
         - comfortable
+    collections:
+      - home
+      - feelings and sensations
     forms:
       m: ую́тный
       f: ую́тная
@@ -22290,6 +22991,8 @@ words:
     accented: фина́нсовый
     en_gb:
       standard: financial (of or relating to finance)
+    collections:
+      - finance
     forms:
       m: фина́нсовый
       f: фина́нсовая
@@ -22480,6 +23183,9 @@ words:
     accented: хара́ктерный
     en_gb:
       standard: characteristic (typical of a particular person or thing)
+    collections:
+      - character
+      - abstract
     forms:
       m: хара́ктерный
       f: хара́ктерная
@@ -22575,6 +23281,8 @@ words:
       alt:
         - sly
         - crafty
+    collections:
+      - character
     forms:
       m: хи́трый
       f: хи́трая
@@ -22623,6 +23331,7 @@ words:
       - feelings and sensations
       - nature
       - in the kitchen
+      - weather
     en_gb:
       standard: cold (low in temperature)
     usage:
@@ -22673,6 +23382,9 @@ words:
       standard: good (of high quality)
       alt:
         - nice
+    collections:
+      - abstract
+      - feelings and sensations
     usage:
       - ru: Я ви́жу хоро́шего дру́га.
         en_gb: I see a good friend.
@@ -22772,6 +23484,9 @@ words:
     accented: худо́й
     en_gb:
       standard: thin (lean, skinny)
+    collections:
+      - people
+      - parts of the body
     forms:
       m: худо́й
       f: худа́я
@@ -22916,6 +23631,8 @@ words:
       standard: whole (entire, complete)
       alt:
         - entire
+    collections:
+      - measurement and calculation
     forms:
       m: це́лый
       f: це́лая
@@ -22963,6 +23680,9 @@ words:
       standard: valuable (of great value or worth)
       alt:
         - precious
+    collections:
+      - finance
+      - character
     forms:
       m: це́нный
       f: це́нная
@@ -23057,6 +23777,9 @@ words:
       standard: private (not public, personal)
       alt:
         - personal
+    collections:
+      - the law
+      - finance
     forms:
       m: ча́стный
       f: ча́стная
@@ -23104,6 +23827,9 @@ words:
       standard: frequent (happening often)
       alt:
         - dense (of a forest, crowd)
+    collections:
+      - time
+      - measurement and calculation
     forms:
       m: ча́стый
       f: ча́стая
@@ -23150,6 +23876,9 @@ words:
     accented: челове́ческий
     en_gb:
       standard: human (of or relating to people)
+    collections:
+      - people
+      - society
     forms:
       m: челове́ческий
       f: челове́ческая
@@ -23297,6 +24026,9 @@ words:
       standard: wonderful (marvellous, amazing)
       alt:
         - marvellous
+    collections:
+      - feelings and sensations
+      - faith
     forms:
       m: чуде́сный
       f: чуде́сная
@@ -23678,6 +24410,9 @@ words:
       standard: young (youthful)
       alt:
         - youthful
+    collections:
+      - people
+      - family
     forms:
       m: ю́ный
       f: ю́ная
@@ -23770,6 +24505,9 @@ words:
       alt:
         - evident
         - apparent
+    collections:
+      - abstract
+      - communication
     forms:
       m: я́вный
       f: я́вная
