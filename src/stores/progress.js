@@ -112,9 +112,71 @@ function events(key) {
   return state.records[key]?.events ?? []
 }
 
+// ---------------------------------------------------------------------------
+// Per-word derivation memo (#531, deferred from #314).
+//
+// `wordState` (and `borderlineDimensions`) are pure functions of a word's
+// events plus its vocab record, but seven exported computeds map them over
+// every tracked record — and every `recordAttempt` invalidates all of them. At
+// a couple of thousand tracked words that is tens of milliseconds of redundant
+// recompute per answer, on the hot path of a drill. A word's derived state
+// cannot change unless its own inputs changed, so memoise per word.
+//
+// The memo entry is keyed on everything those inputs can change through:
+//
+//   * the record object — replaced wholesale by load/import/reset;
+//   * the event count, and the identity of the newest event. Identity rather
+//     than its timestamp: every attempt pushes a fresh object, so this stays
+//     sound when the event-window cap keeps the length steady, or when two
+//     attempts share a `ts`;
+//   * `known` — `markKnown` swaps in the relaxed criteria without appending
+//     any event.
+//
+// The vocab side is covered by dropping the whole memo whenever `wordIndex`
+// rebuilds (it produces a fresh Map each time `vocabState.words` is replaced),
+// which matters on first load: progress is read before the vocab arrives, and
+// the applicable dimensions change once it does.
+//
+// Every field of the key is read on the *hit* path too. That is deliberate: it
+// keeps the calling computeds subscribed to exactly the reactive sources they
+// depended on before, so memoising cannot make a stale computed stick.
+// ---------------------------------------------------------------------------
+
+/** word key → { rec, len, last, known, state?, borderline? } */
+const memo = new Map()
+let memoIndex = null
+
+/** The live memo entry for a word, recomputing the key (never the values). */
+function memoEntry(key) {
+  const index = wordIndex.value
+  if (index !== memoIndex) {
+    memoIndex = index
+    memo.clear()
+  }
+  const rec = state.records[key]
+  const evs = rec?.events ?? []
+  const len = evs.length
+  const last = len > 0 ? evs[len - 1] : null
+  const known = !!rec?.known
+  const hit = memo.get(key)
+  if (hit && hit.rec === rec && hit.len === len && hit.last === last && hit.known === known) {
+    return hit
+  }
+  const entry = { rec, len, last, known }
+  memo.set(key, entry)
+  return entry
+}
+
+/** Drop the memo wholesale (bulk record replacement: load/import/reset). */
+function clearMemo() {
+  memo.clear()
+}
+
 /** Current state of a word, computed from its attempts + the pure model. */
 export function stateOf(key) {
-  return wordState(events(key), wordRecord(key))
+  const entry = memoEntry(key)
+  if (entry.state === undefined) entry.state = wordState(events(key), wordRecord(key))
+  return entry.state
 }
 
 export const learnedCount = computed(
@@ -125,10 +187,15 @@ export const masteredCount = computed(
   () => Object.keys(state.records).filter((k) => stateOf(k) === 'mastered').length,
 )
 
+/**
+ * The learnable slice of the vocab, as its own computed: it depends only on the
+ * vocab, so filtering all ~6,700 entries shouldn't be redone every time
+ * progress changes underneath `cefrStats` (#531).
+ */
+const learnableVocab = computed(() => learnableWords(vocabState.words))
+
 /** CEFR-level stats (total words / learned words) derived from vocab + progress. */
-export const cefrStats = computed(() =>
-  buildCefrStats(learnableWords(vocabState.words), stateOf),
-)
+export const cefrStats = computed(() => buildCefrStats(learnableVocab.value, stateOf))
 
 /** All achievement IDs the learner has currently earned (reactive). */
 export const earnedAchievements = computed(() =>
@@ -175,7 +242,11 @@ export const atRisk = computed(() =>
 // the mastery level too means a mastered word one wrong answer from dropping
 // back to learned is surfaced, not just learning-level slips.
 function isBorderline(key) {
-  return borderlineDimensions(events(key), wordRecord(key)).length > 0
+  const entry = memoEntry(key)
+  if (entry.borderline === undefined) {
+    entry.borderline = borderlineDimensions(events(key), wordRecord(key)).length > 0
+  }
+  return entry.borderline
 }
 
 /**
@@ -793,6 +864,7 @@ export async function loadProgress() {
   }
   if (!masteryRechecked) await idb.setMeta('migration:mastery-recheck', true)
 
+  clearMemo()
   state.records = map
   state.learning = (await idb.getMeta(BATCH_META_KEY('learning'))) ?? null
   state.mastery = (await idb.getMeta(BATCH_META_KEY('mastery'))) ?? null
@@ -839,6 +911,7 @@ export async function resetProgress() {
   await idb.setMeta('streak:activity', {})
   await idb.setMeta('streak:hue', null)
   await idb.setMeta('streak:batchSig', null)
+  clearMemo()
   state.records = {}
   state.learning = null
   state.mastery = null
@@ -971,6 +1044,7 @@ export async function importData(data) {
   // reactive `state` would hand IndexedDB a Vue proxy it can't clone.
   const learningBatch = data.batches?.learning ?? null
   const masteryBatch = data.batches?.mastery ?? null
+  clearMemo()
   state.records = map
   state.learning = learningBatch
   state.mastery = masteryBatch
