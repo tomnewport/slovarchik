@@ -3,6 +3,8 @@ import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
 import { vocabDisplay } from '../lib/vocabBuild.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
+import { ASPECT_LABEL } from '../lib/phraseContext.js'
+import { posLabel } from '../lib/spellPrompt.js'
 import { resetHint } from '../stores/keyboard.js'
 import { speak, speechSupported } from '../lib/speech.js'
 import { atRisk, lost, state as progressState, stateOf } from '../stores/progress.js'
@@ -80,7 +82,6 @@ const heteronyms = computed(() => current.value?.heteronyms ?? [])
 // after answering, so the pair is learned as a unit rather than as two
 // unrelated words with similar glosses.
 const aspectPair = computed(() => current.value?.aspectPair ?? null)
-const ASPECT_LABEL = { impf: 'imperfective', pf: 'perfective' }
 // Anything worth reading after a correct answer holds the auto-advance.
 const holdAfterAnswer = computed(() => heteronyms.value.length > 0 || aspectPair.value != null)
 
@@ -341,6 +342,10 @@ onUnmounted(() => {
         <small v-else-if="current.ambiguousEn?.length" class="muted">
           (one of {{ current.ambiguousEn.length + 1 }} Russian words for this)
         </small>
+        <!-- Which kind of word is wanted, and for a verb which aspect — the
+             same prompt line the session's spelling drill shows, and the only
+             thing separating an aspect pair's two identical glosses (#527). -->
+        <div v-if="current.pos" class="pos">{{ posLabel(current.pos, current.aspect) }}</div>
       </template>
       <SpeakButton v-if="direction === 'ru-en'" :text="promptOf(current)" />
     </div>
@@ -449,5 +454,11 @@ onUnmounted(() => {
 .aspect-note {
   border-left: 3px solid var(--primary, #4a7dd6);
   text-align: left;
+}
+.pos {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
 }
 </style>

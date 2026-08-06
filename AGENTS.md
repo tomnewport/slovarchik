@@ -77,8 +77,8 @@ src/
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
-                        #   flashcardOptions/initialism/stressAudit/homeDashboard  — drill & dashboard view-model helpers
-                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance  — corpus data-integrity oracles (CI guards on the vocab)
+                        #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
+                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/spellPrompt  — corpus data-integrity oracles (CI guards on the vocab)
                         #   vocabBuild/idb/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json

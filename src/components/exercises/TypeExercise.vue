@@ -20,6 +20,7 @@ import {
   typingSequence,
 } from '../../lib/phrases.js'
 import { shuffle } from '../../lib/quiz.js'
+import { posLabel } from '../../lib/spellPrompt.js'
 import { normToken } from '../../lib/phraseHint.js'
 import { stripStress } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
@@ -237,8 +238,12 @@ onBeforeUnmount(() => setHintAllowed(true))
         </small>
       </template>
       <!-- Which part of speech the answer should be — e.g. "cold" the adjective
-           vs the adverb (#503). Word spelling only; a phrase has no single POS. -->
-      <small v-if="exercise.pos && !isPhrase" class="pos">{{ exercise.pos }}</small>
+           vs the adverb (#503) — and, for a verb, which aspect, the only thing
+           that tells уби́ть from убива́ть when both glosses read "to kill"
+           (#527). Word spelling only; a phrase has no single POS. -->
+      <small v-if="exercise.pos && !isPhrase" class="pos">
+        {{ posLabel(exercise.pos, exercise.aspect) }}
+      </small>
     </div>
 
     <form v-if="!reorderMode" @submit.prevent="check">

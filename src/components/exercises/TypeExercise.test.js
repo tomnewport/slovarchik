@@ -41,6 +41,27 @@ describe('TypeExercise', () => {
     expect(wrapper.find('.pos').exists()).toBe(false)
   })
 
+  // An aspect pair shares its gloss and its note, so the aspect is the only
+  // thing on the prompt that says which of the two is wanted (#527).
+  const kill = { ...exercise, targets: ['убить=to kill'], ru: 'уби́ть', en: 'to kill', note: 'to murder', pos: 'verb' }
+
+  it('names the aspect of a perfective verb (#527)', () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: { ...kill, aspect: 'pf' } } })
+    expect(wrapper.find('.pos').text()).toBe('verb · perfective')
+  })
+
+  it('names the aspect of its imperfective partner (#527)', () => {
+    const wrapper = mount(TypeExercise, {
+      props: { exercise: { ...kill, ru: 'убива́ть', aspect: 'impf' } },
+    })
+    expect(wrapper.find('.pos').text()).toBe('verb · imperfective')
+  })
+
+  it('shows the part of speech alone for a word with no aspect', () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: { ...exercise, pos: 'noun' } } })
+    expect(wrapper.find('.pos').text()).toBe('noun')
+  })
+
   it('shows the English cue and grades a correct answer', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
     expect(wrapper.text()).toContain('house')
