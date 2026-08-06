@@ -30,7 +30,7 @@ words:
     en_gb:
       standard: to applaud (to clap your hands; takes the dative)
     collections:
-      - entertainment
+      - hobbies and pastimes
     usage:
       - ru: Кому́ вы аплоди́руете?
         en_gb: Whom are you applauding?
@@ -1067,6 +1067,9 @@ words:
     aspect: impf
     en_gb:
       standard: to be (to exist or to equal)
+    collections:
+      - daily life
+      - abstract
     usage:
       - ru: Будь до́ма к у́жину.
         en_gb: Be home by dinner.
@@ -1865,6 +1868,9 @@ words:
     pair: "увидеть=to see"
     en_gb:
       standard: to see (to notice with your eyes)
+    collections:
+      - feelings and sensations
+      - daily life
     usage:
       - ru: Я ви́жу большо́й дом.
         en_gb: I see a big house.
@@ -3578,6 +3584,9 @@ words:
     aspect: pf
     en_gb:
       standard: to allocate (to set aside or highlight)
+    collections:
+      - work
+      - measurement and calculation
     conjugation:
       future:
         "1sg": вы́делю
@@ -4530,6 +4539,9 @@ words:
     aspect: pf
     en_gb:
       standard: to put out (to set out or exhibit)
+    collections:
+      - the arts
+      - shopping
     conjugation:
       future:
         "1sg": вы́ставлю
@@ -4981,6 +4993,9 @@ words:
       standard: to speak (to say words)
       alt:
         - to talk
+    collections:
+      - communication
+      - daily life
     usage:
       - ru: Вы говори́те по-англи́йски?
         en_gb: Do you speak English?
@@ -5049,6 +5064,8 @@ words:
       standard: to be said (passive / impersonal — as the saying goes)
       alt:
         - to be told
+    collections:
+      - communication
     conjugation:
       present:
         "3sg": говори́тся
@@ -5658,6 +5675,9 @@ words:
       standard: to do (to perform an action)
       alt:
         - to make
+    collections:
+      - daily life
+      - work
     usage:
       - ru: Что ты де́лаешь ве́чером?
         en_gb: What are you doing this evening?
@@ -6543,6 +6563,9 @@ words:
       standard: to reach (of sounds — to be heard from a distance)
       alt:
         - to be heard
+    collections:
+      - feelings and sensations
+      - communication
     conjugation:
       present:
         "3sg": доно́сится
@@ -7511,6 +7534,8 @@ words:
     aspect: impf
     en_gb:
       standard: to live (to be alive, or to reside)
+    collections:
+      - life and death
     usage:
       - ru: Живи́ здесь, э́то хоро́ший го́род.
         en_gb: Live here, it is a good city.
@@ -7733,6 +7758,9 @@ words:
     aspect: pf
     en_gb:
       standard: to start (an engine; also to acquire)
+    collections:
+      - technology
+      - public transport
     conjugation:
       future:
         "1sg": заведу́
@@ -9908,7 +9936,6 @@ words:
     pair: "застегнуть=to fasten"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to fasten (to do up a button or zip, habitually)
@@ -9945,7 +9972,6 @@ words:
     pair: "застёгивать=to fasten"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to fasten (to do up a button or zip on one occasion)
@@ -10514,6 +10540,9 @@ words:
     aspect: impf
     en_gb:
       standard: to know (to have information)
+    collections:
+      - abstract
+      - school
     usage:
       - ru: Вы зна́ете, где метро́?
         en_gb: Do you know where the metro is?
@@ -10674,6 +10703,9 @@ words:
       standard: to go (on foot, in one direction)
       alt:
         - to walk
+    collections:
+      - motion
+      - daily life
     usage:
       - ru: Ты идёшь с на́ми?
         en_gb: Are you coming with us?
@@ -12317,7 +12349,7 @@ words:
       standard: to put on make-up (to apply cosmetics to oneself)
     collections:
       - daily life
-      - body
+      - parts of the body
     usage:
       - ru: Вы кра́ситесь ка́ждое у́тро?
         en_gb: Do you put on make-up every morning?
@@ -15531,6 +15563,9 @@ words:
     aspect: pf
     en_gb:
       standard: to provide; to ensure
+    collections:
+      - work
+      - finance
     conjugation:
       future:
         "1sg": обеспе́чу
@@ -16615,7 +16650,6 @@ words:
     pair: "одеться=to get dressed"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to get dressed (to put on one's clothes, habitually)
@@ -16663,7 +16697,6 @@ words:
     pair: "одеваться=to get dressed"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to get dressed (to put on one's clothes, on one occasion)
@@ -16867,7 +16900,7 @@ words:
     en_gb:
       standard: to finish (to complete, e.g. a course)
     collections:
-      - study
+      - school
     usage:
       - ru: Он око́нчит университе́т че́рез год.
         en_gb: He will graduate from university in a year.
@@ -17414,7 +17447,7 @@ words:
     en_gb:
       standard: to examine (to look over carefully)
     collections:
-      - health
+      - sickness and health
     usage:
       - ru: Врач осма́тривает больно́го.
         en_gb: The doctor examines the patient.
@@ -19567,6 +19600,9 @@ words:
     aspect: impf
     en_gb:
       standard: to smell (to give off a smell)
+    collections:
+      - feelings and sensations
+      - in the kitchen
     conjugation:
       present:
         "1sg": па́хну
@@ -20016,7 +20052,6 @@ words:
     pair: "переодеться=to change clothes"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to change clothes (to change what one is wearing, habitually)
@@ -20052,7 +20087,6 @@ words:
     pair: "переодеваться=to change clothes"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to change clothes (to change what one is wearing, on one occasion)
@@ -20235,6 +20269,9 @@ words:
     aspect: impf
     en_gb:
       standard: to bake (to cook in an oven)
+    collections:
+      - in the kitchen
+      - food and drink
     conjugation:
       present:
         "1sg": пеку́
@@ -20273,6 +20310,9 @@ words:
     pair: "написать=to write"
     en_gb:
       standard: to write (to put words on paper)
+    collections:
+      - reading
+      - school
     usage:
       - ru: Пиши́ мне ча́ще!
         en_gb: Write to me more often!
@@ -21081,6 +21121,7 @@ words:
     collections:
       - war and peace
       - daily life
+      - life and death
     en_gb:
       standard: to perish (to die, to be killed, on one occasion)
     conjugation:
@@ -21240,6 +21281,9 @@ words:
     pair: "подать=to serve"
     en_gb:
       standard: to serve (to give or submit)
+    collections:
+      - restaurants and cafes
+      - work
     conjugation:
       present:
         "1sg": подаю́
@@ -21278,6 +21322,9 @@ words:
     pair: "дарить=to give"
     en_gb:
       standard: to give (something) as a present
+    collections:
+      - holiday
+      - family
     conjugation:
       imperative:
         sg: подари́
@@ -21319,6 +21366,9 @@ words:
     pair: "подавать=to serve"
     en_gb:
       standard: to serve (to give or submit)
+    collections:
+      - restaurants and cafes
+      - work
     conjugation:
       future:
         "1sg": пода́м
@@ -21356,6 +21406,9 @@ words:
     aspect: pf
     en_gb:
       standard: to prepare (something in advance)
+    collections:
+      - work
+      - school
     conjugation:
       future:
         "1sg": подгото́влю
@@ -21394,6 +21447,9 @@ words:
     pair: "поддерживать=to support"
     en_gb:
       standard: to support (to back or hold up)
+    collections:
+      - character
+      - communication
     conjugation:
       future:
         "1sg": поддержу́
@@ -21432,6 +21488,9 @@ words:
     pair: "поддержать=to support"
     en_gb:
       standard: to support (to back or hold up)
+    collections:
+      - character
+      - communication
     conjugation:
       present:
         "1sg": подде́рживаю
@@ -21470,6 +21529,8 @@ words:
     pair: "поднять=to lift"
     en_gb:
       standard: to lift (to raise something up)
+    collections:
+      - motion
     conjugation:
       imperative:
         sg: поднима́й
@@ -21551,8 +21612,8 @@ words:
     accented: подня́ть
     aspect: pf
     collections:
-      - movement
-      - actions
+      - motion
+      - daily life
     en_gb:
       standard: to raise (to lift something upwards)
       alt:
@@ -21595,6 +21656,8 @@ words:
     pair: "поднимать=to lift"
     en_gb:
       standard: to lift (to raise something up)
+    collections:
+      - motion
     conjugation:
       imperative:
         sg: подними́
@@ -21674,6 +21737,9 @@ words:
     aspect: pf
     en_gb:
       standard: to pick up (to select or gather up)
+    collections:
+      - motion
+      - daily life
     conjugation:
       future:
         "1sg": подберу́
@@ -21754,6 +21820,9 @@ words:
     aspect: impf
     en_gb:
       standard: to suspect (to think someone guilty)
+    collections:
+      - the law
+      - abstract
     conjugation:
       present:
         "1sg": подозрева́ю
@@ -21831,6 +21900,9 @@ words:
     aspect: pf
     en_gb:
       standard: to sign (a document)
+    collections:
+      - work
+      - the law
     conjugation:
       imperative:
         sg: подпиши́
@@ -21871,6 +21943,9 @@ words:
     aspect: pf
     en_gb:
       standard: to confirm; to corroborate
+    collections:
+      - communication
+      - work
     conjugation:
       future:
         "1sg": подтвержу́
@@ -21909,6 +21984,8 @@ words:
     pair: "думать=to think"
     en_gb:
       standard: to think (to give something some thought)
+    collections:
+      - abstract
     usage:
       - ru: Он отве́тил, не поду́мав.
         en_gb: He answered without thinking.
@@ -21951,6 +22028,9 @@ words:
     aspect: pf
     en_gb:
       standard: to catch (to pick up or take up quickly)
+    collections:
+      - motion
+      - sickness and health
     conjugation:
       future:
         "1sg": подхвачу́
@@ -22033,6 +22113,9 @@ words:
       standard: to underline; to emphasise
       alt:
         - to emphasise
+    collections:
+      - reading
+      - communication
     conjugation:
       imperative:
         sg: подчеркни́
@@ -23422,6 +23505,9 @@ words:
     pair: "воспользоваться=to make use of"
     en_gb:
       standard: to use; to make use of
+    collections:
+      - technology
+      - daily life
     usage:
       - ru: Я по́льзуюсь словарём.
         en_gb: I use a dictionary.
@@ -25421,7 +25507,7 @@ words:
     en_gb:
       standard: to kiss (each other)
     collections:
-      - feelings
+      - feelings and sensations
     usage:
       - ru: На проща́ние они́ поцелова́лись.
         en_gb: They kissed goodbye.
@@ -25694,6 +25780,9 @@ words:
     pair: "превращаться=to turn into"
     en_gb:
       standard: to turn into; to become
+    collections:
+      - abstract
+      - the arts
     conjugation:
       future:
         "1sg": превращу́сь
@@ -25729,6 +25818,9 @@ words:
     pair: "превратиться=to turn into"
     en_gb:
       standard: to turn into (to become something else)
+    collections:
+      - abstract
+      - the arts
     conjugation:
       present:
         "1sg": превраща́юсь
@@ -25850,6 +25942,9 @@ words:
     aspect: impf
     en_gb:
       standard: to assume; to suppose
+    collections:
+      - abstract
+      - science
     conjugation:
       present:
         "1sg": предполага́ю
@@ -25884,6 +25979,9 @@ words:
     aspect: pf
     en_gb:
       standard: to suppose; to make an assumption
+    collections:
+      - abstract
+      - science
     conjugation:
       future:
         "1sg": предположу́
@@ -25918,6 +26016,9 @@ words:
     aspect: impf
     en_gb:
       standard: to prefer (one thing to another)
+    collections:
+      - abstract
+      - shopping
     conjugation:
       present:
         "1sg": предпочита́ю
@@ -26040,6 +26141,9 @@ words:
     aspect: impf
     en_gb:
       standard: to introduce oneself (or to seem)
+    collections:
+      - communication
+      - people
     conjugation:
       present:
         "1sg": представля́юсь
@@ -26108,6 +26212,9 @@ words:
     pair: "предупреждать=to warn"
     en_gb:
       standard: to warn; to let know in advance
+    collections:
+      - communication
+      - sickness and health
     conjugation:
       future:
         "1sg": предупрежу́
@@ -26146,6 +26253,9 @@ words:
     pair: "предупредить=to warn"
     en_gb:
       standard: to warn; to let know in advance
+    collections:
+      - communication
+      - sickness and health
     conjugation:
       present:
         "1sg": предупрежда́ю
@@ -26185,6 +26295,9 @@ words:
       standard: to stop; to put an end to
       alt:
         - to cease
+    collections:
+      - time
+      - motion
     conjugation:
       future:
         "1sg": прекращу́
@@ -26223,7 +26336,7 @@ words:
     en_gb:
       standard: to teach (at a school or university)
     collections:
-      - study
+      - school
     usage:
       - ru: Она́ преподаёт ру́сский язы́к в шко́ле.
         en_gb: She teaches Russian at school.
@@ -26252,6 +26365,9 @@ words:
     aspect: pf
     en_gb:
       standard: to interrupt; to break off
+    collections:
+      - communication
+      - time
     conjugation:
       future:
         "1sg": прерву́
@@ -26289,6 +26405,9 @@ words:
     aspect: impf
     en_gb:
       standard: to approach; to draw near
+    collections:
+      - motion
+      - directions
     conjugation:
       present:
         "1sg": приближа́юсь
@@ -26323,6 +26442,9 @@ words:
     aspect: pf
     en_gb:
       standard: to arrive (to reach a destination)
+    collections:
+      - travel
+      - public transport
     conjugation:
       future:
         "1sg": прибу́ду
@@ -26360,6 +26482,9 @@ words:
     aspect: pf
     en_gb:
       standard: to bring (something by transport)
+    collections:
+      - travel
+      - motion
     conjugation:
       future:
         "1sg": привезу́
@@ -26398,6 +26523,9 @@ words:
     pair: "приводить=to bring"
     en_gb:
       standard: to bring (someone on foot); to lead to
+    collections:
+      - motion
+      - daily life
     conjugation:
       imperative:
         sg: приведи́
@@ -26439,6 +26567,9 @@ words:
     pair: "привести=to bring"
     en_gb:
       standard: to bring (someone on foot); to lead to
+    collections:
+      - motion
+      - daily life
     conjugation:
       present:
         "1sg": привожу́
@@ -26476,6 +26607,9 @@ words:
     aspect: pf
     en_gb:
       standard: to get used to (something)
+    collections:
+      - daily life
+      - character
     conjugation:
       future:
         "1sg": привы́кну
@@ -26514,6 +26648,9 @@ words:
     pair: "приглашать=to invite"
     en_gb:
       standard: to invite (someone somewhere)
+    collections:
+      - romance and dating
+      - holiday
     usage:
       - ru: Я хочу́ пригласи́ть тебя́ в кино́.
         en_gb: I want to invite you to the cinema.
@@ -26554,6 +26691,9 @@ words:
     pair: "пригласить=to invite"
     en_gb:
       standard: to invite (someone somewhere)
+    collections:
+      - romance and dating
+      - holiday
     conjugation:
       present:
         "1sg": приглаша́ю
@@ -26597,6 +26737,9 @@ words:
       standard: to prepare; to cook
       alt:
         - to cook
+    collections:
+      - in the kitchen
+      - food and drink
     conjugation:
       imperative:
         sg: пригото́вь
@@ -26639,6 +26782,9 @@ words:
       standard: to think up; to invent
       alt:
         - to invent
+    collections:
+      - abstract
+      - the arts
     conjugation:
       imperative:
         sg: приду́май
@@ -26770,6 +26916,9 @@ words:
     aspect: pf
     en_gb:
       standard: to press (to press something tightly)
+    collections:
+      - motion
+      - romance and dating
     conjugation:
       future:
         "1sg": прижму́
@@ -26807,7 +26956,7 @@ words:
     aspect: pf
     collections:
       - communication
-      - emotions
+      - feelings and sensations
     en_gb:
       standard: to acknowledge (to admit or recognise something)
       alt:
@@ -26849,6 +26998,9 @@ words:
     aspect: pf
     en_gb:
       standard: to confess; to admit
+    collections:
+      - communication
+      - feelings and sensations
     conjugation:
       future:
         "1sg": призна́юсь
@@ -26960,7 +27112,7 @@ words:
     accented: приказа́ть
     aspect: pf
     collections:
-      - authority
+      - politics
       - communication
       - military
     en_gb:
@@ -27001,6 +27153,9 @@ words:
     aspect: pf
     en_gb:
       standard: to cover (to cover or shield partly)
+    collections:
+      - home
+      - daily life
     conjugation:
       imperative:
         sg: прикро́й
@@ -27072,6 +27227,9 @@ words:
     pair: "применять=to apply"
     en_gb:
       standard: to apply (to put to use)
+    collections:
+      - work
+      - technology
     conjugation:
       future:
         "1sg": применю́
@@ -27110,6 +27268,9 @@ words:
     pair: "применить=to apply"
     en_gb:
       standard: to apply (to put to use)
+    collections:
+      - work
+      - technology
     conjugation:
       present:
         "1sg": применя́ю
@@ -27147,6 +27308,9 @@ words:
     aspect: impf
     en_gb:
       standard: to belong (to someone)
+    collections:
+      - finance
+      - abstract
     conjugation:
       present:
         "1sg": принадлежу́
@@ -27267,6 +27431,9 @@ words:
     pair: "принести=to bring"
     en_gb:
       standard: to bring (on foot)
+    collections:
+      - motion
+      - daily life
     conjugation:
       present:
         "1sg": приношу́
@@ -27345,6 +27512,9 @@ words:
     aspect: pf
     en_gb:
       standard: to acquire; to obtain
+    collections:
+      - shopping
+      - finance
     conjugation:
       future:
         "1sg": приобрету́
@@ -27382,6 +27552,9 @@ words:
     aspect: pf
     en_gb:
       standard: to sit down (for a short while)
+    collections:
+      - daily life
+      - home
     conjugation:
       imperative:
         sg: прися́дь
@@ -27422,6 +27595,9 @@ words:
     aspect: pf
     en_gb:
       standard: to send (something to someone)
+    collections:
+      - communication
+      - technology
     conjugation:
       future:
         "1sg": пришлю́
@@ -27459,6 +27635,9 @@ words:
     aspect: impf
     en_gb:
       standard: to listen attentively (to heed or pay attention)
+    collections:
+      - feelings and sensations
+      - communication
     conjugation:
       present:
         "1sg": прислу́шиваюсь
@@ -27496,6 +27675,9 @@ words:
     aspect: impf
     en_gb:
       standard: to be present (at an event)
+    collections:
+      - work
+      - school
     conjugation:
       present:
         "1sg": прису́тствую
@@ -27609,7 +27791,6 @@ words:
     pair: "пришить=to sew on"
     collections:
       - clothes
-      - clothing
       - craft and construction
     en_gb:
       standard: to sew on (to attach by sewing, habitually)
@@ -27644,7 +27825,6 @@ words:
     pair: "пришивать=to sew on"
     collections:
       - clothes
-      - clothing
       - craft and construction
     en_gb:
       standard: to sew on (to attach by sewing, on one occasion)
@@ -27718,6 +27898,9 @@ words:
       standard: to try; to taste
       alt:
         - to taste
+    collections:
+      - food and drink
+      - daily life
     usage:
       - ru: Я про́бую но́вое блю́до.
         en_gb: I am tasting a new dish.
@@ -27759,6 +27942,8 @@ words:
     pair: "бормотать=to mutter"
     en_gb:
       standard: to mutter (to say in a low, unclear voice)
+    collections:
+      - communication
     conjugation:
       future:
         "1sg": пробормочу́
@@ -27797,8 +27982,8 @@ words:
     pair: "проверять=to check"
     collections:
       - work
-      - study
-      - actions
+      - school
+      - daily life
     en_gb:
       standard: to check (to verify or examine something)
       alt:
@@ -27844,6 +28029,9 @@ words:
     pair: "проверить=to check"
     en_gb:
       standard: to check; to test
+    collections:
+      - school
+      - work
     conjugation:
       present:
         "1sg": проверя́ю
@@ -27967,6 +28155,9 @@ words:
     aspect: impf
     en_gb:
       standard: to see (someone) off; to accompany
+    collections:
+      - travel
+      - family
     conjugation:
       present:
         "1sg": провожа́ю
@@ -28007,6 +28198,8 @@ words:
     aspect: pf
     en_gb:
       standard: to utter (to say or pronounce)
+    collections:
+      - communication
     conjugation:
       future:
         "1sg": проговорю́
@@ -28120,6 +28313,9 @@ words:
     pair: "продавать=to sell"
     en_gb:
       standard: to sell (something to someone)
+    collections:
+      - shopping
+      - finance
     usage:
       - ru: Он хо́чет прода́ть маши́ну.
         en_gb: He wants to sell the car.
@@ -28202,7 +28398,7 @@ words:
     aspect: impf
     collections:
       - time
-      - actions
+      - daily life
     en_gb:
       standard: to continue (to go on happening; to last)
       alt:
@@ -28314,6 +28510,8 @@ words:
     aspect: pf
     en_gb:
       standard: to live (for a stated time)
+    collections:
+      - life and death
     conjugation:
       future:
         "1sg": проживу́
@@ -28382,6 +28580,9 @@ words:
     pair: "производить=to produce"
     en_gb:
       standard: to produce (to make or carry out)
+    collections:
+      - work
+      - technology
     conjugation:
       future:
         "1sg": произведу́
@@ -28417,6 +28618,9 @@ words:
     pair: "произвести=to produce"
     en_gb:
       standard: to produce; to manufacture
+    collections:
+      - work
+      - technology
     conjugation:
       present:
         "1sg": произвожу́
@@ -28452,6 +28656,9 @@ words:
     pair: "произносить=to pronounce"
     en_gb:
       standard: to pronounce; to utter
+    collections:
+      - communication
+      - school
     conjugation:
       future:
         "1sg": произнесу́
@@ -28490,6 +28697,9 @@ words:
     pair: "произнести=to pronounce"
     en_gb:
       standard: to pronounce; to utter
+    collections:
+      - communication
+      - school
     conjugation:
       present:
         "1sg": произношу́
@@ -28600,7 +28810,7 @@ words:
     aspect: pf
     pair: "проходить=to pass"
     collections:
-      - movement
+      - motion
       - travel
     en_gb:
       standard: to pass (to go through or by something)
@@ -28640,6 +28850,9 @@ words:
     aspect: impf
     en_gb:
       standard: to disappear (to vanish or go missing)
+    collections:
+      - abstract
+      - motion
     conjugation:
       present:
         "1sg": пропада́ю
@@ -28674,6 +28887,9 @@ words:
     aspect: pf
     en_gb:
       standard: to vanish (to disappear or be lost)
+    collections:
+      - abstract
+      - motion
     conjugation:
       future:
         "1sg": пропаду́
@@ -28708,6 +28924,9 @@ words:
     aspect: pf
     en_gb:
       standard: to miss; to let pass
+    collections:
+      - school
+      - public transport
     conjugation:
       imperative:
         sg: пропусти́
@@ -28792,6 +29011,9 @@ words:
     aspect: pf
     en_gb:
       standard: to wake up
+    collections:
+      - daily life
+      - home
     usage:
       - ru: Я просну́лся ра́но у́тром.
         en_gb: I woke up early in the morning.
@@ -28909,6 +29131,9 @@ words:
     aspect: pf
     en_gb:
       standard: to stretch out; to hold out
+    collections:
+      - motion
+      - parts of the body
     conjugation:
       future:
         "1sg": протяну́
@@ -28946,7 +29171,7 @@ words:
     aspect: impf
     pair: "пройти=to pass"
     collections:
-      - movement
+      - motion
       - travel
     en_gb:
       standard: to pass (to go through or by something, repeatedly or in progress)
@@ -29034,6 +29259,9 @@ words:
     pair: "шептать=to whisper"
     en_gb:
       standard: to whisper (to speak very softly)
+    collections:
+      - communication
+      - feelings and sensations
     conjugation:
       future:
         "1sg": прошепчу́
@@ -29112,6 +29340,9 @@ words:
     aspect: pf
     en_gb:
       standard: to show; to display (a quality)
+    collections:
+      - character
+      - communication
     conjugation:
       future:
         "1sg": проявлю́
@@ -29231,6 +29462,9 @@ words:
     aspect: impf
     en_gb:
       standard: to hide (oneself)
+    collections:
+      - hobbies and pastimes
+      - motion
     conjugation:
       present:
         "1sg": пря́чусь
@@ -29269,6 +29503,9 @@ words:
     pair: "пустить=to let"
     en_gb:
       standard: to let (to allow or release)
+    collections:
+      - motion
+      - daily life
     conjugation:
       present:
         "1sg": пуска́ю
@@ -29307,6 +29544,9 @@ words:
     pair: "пускать=to let"
     en_gb:
       standard: to let (to allow or release)
+    collections:
+      - motion
+      - daily life
     conjugation:
       imperative:
         sg: пусти́
@@ -29934,7 +30174,6 @@ words:
     pair: "раздеться=to get undressed"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to get undressed (to take off one's clothes, habitually)
@@ -30004,6 +30243,9 @@ words:
     aspect: pf
     en_gb:
       standard: to divide (to split into parts or groups)
+    collections:
+      - measurement and calculation
+      - school
     conjugation:
       future:
         "1sg": разделю́сь
@@ -30030,7 +30272,6 @@ words:
     pair: "раздеваться=to get undressed"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to get undressed (to take off one's clothes, on one occasion)
@@ -30662,7 +30903,6 @@ words:
     pair: "расстегнуть=to unfasten"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to unfasten (to undo a button or zip, habitually)
@@ -30699,7 +30939,6 @@ words:
     pair: "расстёгивать=to unfasten"
     collections:
       - clothes
-      - clothing
       - daily life
     en_gb:
       standard: to unfasten (to undo a button or zip on one occasion)
@@ -30782,7 +31021,7 @@ words:
     en_gb:
       standard: to get upset (to become sad)
     collections:
-      - feelings
+      - feelings and sensations
     usage:
       - ru: Она́ расстро́илась и́з-за плохо́й оце́нки.
         en_gb: She got upset because of the bad grade.
@@ -31437,6 +31676,7 @@ words:
     collections:
       - family
       - daily life
+      - life and death
     en_gb:
       standard: to be born
     conjugation:
@@ -31865,7 +32105,7 @@ words:
     en_gb:
       standard: to hand in (to submit; to sit an exam)
     collections:
-      - study
+      - school
     usage:
       - ru: За́втра студе́нты сдаю́т экза́мен.
         en_gb: Tomorrow the students take an exam.
@@ -34976,7 +35216,7 @@ words:
     en_gb:
       standard: to quarrel (to argue)
     collections:
-      - feelings
+      - feelings and sensations
     usage:
       - ru: Они́ ча́сто ссо́рятся и́з-за де́нег.
         en_gb: They often quarrel over money.
@@ -35556,6 +35796,9 @@ words:
     aspect: impf
     en_gb:
       standard: to judge (to form an opinion or try in court)
+    collections:
+      - the law
+      - sport
     conjugation:
       imperative:
         sg: суди́
@@ -35599,6 +35842,9 @@ words:
     pair: "уметь=to be able"
     en_gb:
       standard: to manage (to be able to do something)
+    collections:
+      - work
+      - abstract
     conjugation:
       future:
         "1sg": суме́ю
@@ -35841,7 +36087,6 @@ words:
     pair: "шить=to sew"
     collections:
       - clothes
-      - clothing
       - craft and construction
     en_gb:
       standard: to sew (to make or join by sewing, on one occasion)
@@ -36726,6 +36971,7 @@ words:
     pair: "убить=to kill"
     collections:
       - war and peace
+      - life and death
     en_gb:
       standard: to kill (to murder)
     conjugation:
@@ -36815,6 +37061,7 @@ words:
     pair: "убивать=to kill"
     collections:
       - war and peace
+      - life and death
     en_gb:
       standard: to kill (to murder)
     conjugation:
@@ -37811,6 +38058,7 @@ words:
     pair: "умирать=to die"
     collections:
       - daily life
+      - life and death
     en_gb:
       standard: to die (to pass away)
     conjugation:
@@ -37890,6 +38138,7 @@ words:
     pair: "умереть=to die"
     collections:
       - daily life
+      - life and death
     en_gb:
       standard: to die (to be dying)
     conjugation:
@@ -38439,8 +38688,8 @@ words:
     accented: уста́ть
     aspect: pf
     collections:
-      - health
-      - emotions
+      - sickness and health
+      - feelings and sensations
       - daily life
     en_gb:
       standard: to get tired (to become weary or fatigued)
@@ -39589,7 +39838,6 @@ words:
     pair: "сшить=to sew"
     collections:
       - clothes
-      - clothing
       - craft and construction
     en_gb:
       standard: to sew (to join fabric with a needle and thread, habitually)

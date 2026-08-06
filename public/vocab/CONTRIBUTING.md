@@ -81,8 +81,23 @@ never also takes a combining accent.
 | `en_gb`       | **yes**  | The meaning(s). See below.                                            |
 | `accented`    | usually  | The stressed dictionary (headword) form. Required wherever there's no declension table to derive it from. |
 | `usage`       | no       | Example sentences — see below. These also feed the **Phrases** drill. |
-| `collections` | no       | Free-form topic tags (`[travel, daily life]`) used for grouping/skills. |
+| `collections` | no       | Topic tags (`[travel, daily life]`) that let a batch be *themed*. Pick from the registry in [`src/lib/collections.js`](../../src/lib/collections.js) — anything else fails `collections.test.js`. See below. |
 | `learn`       | no       | Set `false` to make a **gloss-only** entry: kept in the dictionary so phrase hints can translate it, but excluded from every drill, the phrase bank and the batch/progress engine. Defaults to `true`. See below. |
+
+#### `collections` — topic tags
+
+Tags are what make a batch themed: a named learning batch has to draw 15 of its
+20 words from one collection, or it falls back to "Random". Two rules follow,
+both enforced by `src/lib/collections.test.js`:
+
+- **Use a registered name.** The allowed set lives in `src/lib/collections.js`.
+- **Don't invent a tag for a handful of words.** A collection needs at least
+  `MIN_COLLECTION_WORDS` (15) words in the corpus, so a new one has to arrive
+  with a body of words behind it. Where an existing tag nearly fits, tag with
+  that instead of splitting the theme.
+
+Tag generously — two or three tags per word is normal, and an untagged word can
+only ever be batch filler.
 
 > **Do not add a `batteries:` field.** Older entries carried an experimental
 > `batteries:` grouping tag. Nothing in the app ever read it — it duplicated
