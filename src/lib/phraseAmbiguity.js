@@ -24,6 +24,14 @@
 //     surface form in the dictionary is known. A surface form only counts as
 //     evidence when it is *unambiguous across the whole dictionary* — «мой» is
 //     both "my" and the imperative of мыть, so it proves nothing and is ignored.
+//
+// `genderBalance.js` also reads gender out of a phrase, but for the opposite
+// job and with the opposite bias, so the two deliberately stay separate. That
+// one is a build-time oracle deciding whether a masculine sentence is safe to
+// flip to feminine, so it *over*-detects — any token ending in -л/-ла counts,
+// «стол» and «шко́ла» included — because a false positive there only blocks a
+// flip. This one writes on the learner's screen, so it must *under*-detect: only
+// forms the dictionary confirms, and only in the clause the pronoun stands in.
 import { normToken, wordForms } from './phraseHint.js'
 import { phraseTokens } from './phrases.js'
 

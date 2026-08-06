@@ -133,14 +133,36 @@ usage:
       - This city is big.
 ```
 
+#### First-person gender — keep it balanced (#525)
+
+Russian marks the speaker's gender on the **past-tense verb** (я сде́лал vs
+я сде́лала) and on **predicate short adjectives** (я рад vs я ра́да). The gender
+of «я» in "I was at work" is arbitrary, so across the corpus the two should be
+**even** — don't let first-person examples default to masculine (they used to be
+~99% male). When you add first-person past-tense or predicate sentences, mix the
+genders; a feminine speaker is the correct answer just as often as a masculine
+one, and there's nothing "stereotypically feminine" required to justify it.
+
+- Feminine past verbs come straight from the verb's own `past_f` cell — copy
+  that form (with its stress: была́, взяла́, начала́ shift the stress; сде́лала,
+  купи́ла don't), never guess it by appending `-а`.
+- If a first-person example carries an `inflect:` block, its `person:` must match
+  the gender you wrote (`past_m` vs `past_f`, or `gender: m`/`f` for a short
+  form) — the context drill grades the shown token against that slot.
+- **`npm run audit:gender`** prints the current split and per-file breakdown, and
+  `node scripts/rebalance-gender.mjs` can even it out by flipping a safe subset
+  of masculine verb phrases to feminine. See
+  [`docs/gender-balance.md`](../../docs/gender-balance.md).
+
 #### Ambiguity annotations (nothing to write)
 
 When a drill shows only the English and asks for the Russian, the English often
-under-determines the answer: "Do you want tea?" hides ты vs вы, "I was tired"
-hides уста́л vs уста́ла. The prompt therefore annotates the ambiguous word —
-"Do you (informal) want tea?" — and works this out **automatically** from your
-`ru` sentence ([`src/lib/phraseAmbiguity.js`](../../src/lib/phraseAmbiguity.js)).
-There's no field to fill in, but two things help it:
+under-determines the answer: "Do you want tea?" hides ты vs вы, and — now that
+first-person gender is genuinely mixed — "I was tired" hides уста́л vs уста́ла.
+The prompt therefore annotates the ambiguous word ("Do you (informal) want
+tea?"), working it out **automatically** from your `ru` sentence
+([`src/lib/phraseAmbiguity.js`](../../src/lib/phraseAmbiguity.js)). There's no
+field to fill in, but two things help it:
 
 - **Write the sentence naturally and completely.** The evidence it reads is the
   ты/вы pronouns and possessives, unambiguous 2sg/2pl and imperative verb forms,
@@ -608,7 +630,10 @@ which assert that the **real** files on disk:
   **meaning**, and at least one accepted **English** answer;
 - are **sorted** alphabetically by Russian (ignoring stress);
 - give every noun **all six cases** for each number it declares;
-- produce at least one usage **phrase** overall.
+- produce at least one usage **phrase** overall;
+- keep the **first-person gender split even** — `genderBalance.test.js` fails if
+  either gender drops below 45% of the first-person gendered phrases (see the
+  gender-balance note under `usage` above).
 
 Keeping files sorted is mechanical — run `node scripts/sort-vocab.js
 public/vocab/<file>.yml`, which reorders entries by Russian headword while
