@@ -529,7 +529,11 @@ Set `type` (`pers refl poss demo det inter neg`); the `forms` block depends on i
 ### Adverbs (`adverbs.yml`)
 
 Mostly invariable: `accented` + `en_gb` (+ optional `usage`, `collections`). Add
-`forms: { comparative: <form> }` only if it has a comparative.
+`forms: { comparative: <form> }` only if it has a comparative — and, in the same
+edit, a usage example that **uses** it (`inflect: { degree: comparative }`, see
+below). `degreeCoverage.test.js` fails on a stored comparative nothing teaches,
+so the form and the sentence arrive together. Don't invent one for a word that
+has no natural comparative (there is no «непра́вильнее»); leave `forms` off.
 
 ### Prepositions (`prepositions.yml`)
 
@@ -599,6 +603,17 @@ owner, so its key is implicit:
   `rule: adj-acc-animate`; the slot is still graded as the accusative, animacy
   just selects the form. (The inflection **table** shows this as a derived
   "Accusative (animate)" row automatically — no data needed.)
+- **Degrees of comparison:** `degree: comparative` on an adjective *or* adverb
+  whose entry stores `forms.comparative` — no case, number or gender, because
+  the comparative is invariable; the learner picks the degree, then spells the
+  one form (`rule: adj-comparative` / `adv-comparative`, or the `-stem` variants
+  for the mutating and suppletive set: гро́мче, ти́ше, лу́чше, бо́льше).
+  `degree: superlative` marks the analytic «са́мый + adjective»: the slot covers
+  BOTH words, so give `span: 2` with the `case` and `gender` they agree in and
+  point `token` at «са́мый» (`rule: adj-superlative`). The unrelated
+  `degree: short` — a predicate form graded by `gender` against the entry's
+  `short:` block (Магази́н закры́т, `rule: adj-short-form`) — shares the key but
+  is not a degree of comparison.
 - **Verbs:** `tense` (`present`/`future`/`past`/`imperative`) + `person`
   (`1sg 2sg 3sg 1pl 2pl 3pl`, `past_m/f/n/pl`, or `imp_sg`/`imp_pl` for the
   imperative). Verbs skip the case step — but a verb with a `pair:` link gets a

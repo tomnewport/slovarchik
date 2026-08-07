@@ -234,7 +234,12 @@ onMounted(() => {
     <div v-if="stage === 'select'" class="grid" style="gap: 0.75rem">
       <fieldset v-for="(step, si) in selectSteps" :key="step.kind" class="select-group">
         <legend class="step-label muted">{{ step.prompt }}</legend>
-        <div class="case-grid" :class="{ narrow: step.options.length <= 4 && step.kind !== 'aspect' }">
+        <!-- Options that carry a usage hint (aspect, degree) need the roomier
+             two-column grid; bare chips (gender, number) sit four to a row. -->
+        <div
+          class="case-grid"
+          :class="{ narrow: step.options.length <= 4 && !step.options.some((o) => o.hint) }"
+        >
           <button
             v-for="opt in step.options"
             :key="opt.id"

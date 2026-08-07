@@ -21,7 +21,11 @@
 // Kept framework-free so both `scripts/check-stress.mjs` and the unit test can
 // drive it.
 import { shapeContextPhrases } from './vocabBuild.js'
-import { ANALYTIC_FUTURE_FORMS, buildFromPhrase } from './phraseContext.js'
+import {
+  ANALYTIC_FUTURE_FORMS,
+  SUPERLATIVE_MARKER_KEY,
+  buildFromPhrase,
+} from './phraseContext.js'
 import { normalize } from './text.js'
 import { normToken, normTokenStress } from './phraseHint.js'
 
@@ -97,11 +101,30 @@ export function latinInRussianText(words) {
 /**
  * The word's stored (accented) form for an annotated phrase slot, or null if
  * the slot doesn't resolve. Mirrors the resolution the in-context inflect drill
- * uses. (Kept in sync with the copy in phrasesData.test.js.)
+ * uses, so it is the single source of truth for "what should this annotated
+ * token read?" — `phrasesData.test.js` grades every annotation with it and
+ * {@link annotatedStressDivergences} re-reads it for stress placement.
+ *
+ * @param {object} word normalised word record
+ * @param {object} t    the phrase target (a shaped `inflect:` annotation)
+ * @param {Map<string, object>} [byKey] every word by natural key — needed only
+ *   for the superlative, whose slot spans «са́мый» + the adjective and so has to
+ *   read a second entry's declension.
  */
-export function storedForm(word, t) {
+export function storedForm(word, t, byKey = null) {
   if (t.degree === 'short') {
     return word.pos === 'adjective' ? (word.short?.[t.gender] ?? null) : null
+  }
+  // Degrees of comparison. The comparative is one invariable stored form; the
+  // analytic superlative is «са́мый» + the adjective, both agreeing with the noun,
+  // so the slot's answer is the two forms joined.
+  if (t.degree === 'comparative') return word.extra?.forms?.comparative ?? null
+  if (t.degree === 'superlative') {
+    if (word.pos !== 'adjective' || !t.case || !t.gender) return null
+    const cell = (w) => w?.extra?.declension?.[`${t.gender}_${t.case}`] ?? null
+    const marker = cell(byKey?.get(SUPERLATIVE_MARKER_KEY))
+    const adjective = cell(word)
+    return marker && adjective ? `${marker} ${adjective}` : null
   }
   if (t.case) {
     const animAcc = t.animate && t.case === 'acc' && (t.gender === 'm' || t.gender === 'pl')
@@ -194,7 +217,7 @@ export function annotatedStressDivergences(words, rules) {
     if (!w || w.learnable === false) continue
     const ex = buildFromPhrase(p, w, { rules })
     if (!ex) continue
-    const stored = storedForm(w, p.target)
+    const stored = storedForm(w, p.target, byKey)
     if (!stored) continue
     // Same core (case/number/person right) but different stress placement.
     if (normalize(ex.answerAccented) !== normalize(stored)) continue

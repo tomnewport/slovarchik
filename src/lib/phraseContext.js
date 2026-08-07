@@ -21,6 +21,18 @@ import { CASES, LOCATIVE, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
 
 const GENDER_LABEL = { m: 'Masculine', n: 'Neuter', f: 'Feminine', pl: 'Plural' }
+/** Degrees of comparison, in the order the board offers them. */
+const DEGREES = ['positive', 'comparative', 'superlative']
+const DEGREE_LABEL = {
+  positive: 'Positive',
+  comparative: 'Comparative',
+  superlative: 'Superlative',
+}
+const DEGREE_HINT = {
+  positive: 'the plain quality — big, quietly',
+  comparative: '"more / -er" — bigger, more quietly',
+  superlative: '"the most / -est" — the biggest',
+}
 const PERSON_LABEL = {
   '1sg': 'I', '2sg': 'you', '3sg': 'he/she/it',
   '1pl': 'we', '2pl': 'you (pl)', '3pl': 'they',
@@ -28,6 +40,13 @@ const PERSON_LABEL = {
 const PAST_LABEL = { past_m: 'he (past)', past_f: 'she (past)', past_n: 'it (past)', past_pl: 'they (past)' }
 const IMPERATIVE_LABEL = { imp_sg: 'ты (command)', imp_pl: 'вы (command)' }
 const TENSE_LABEL = { present: 'Present', future: 'Future', past: 'Past', imperative: 'Imperative' }
+
+/**
+ * The natural key of «са́мый», the word that forms the analytic superlative.
+ * A superlative slot spans са́мый + the adjective, so resolving its stored form
+ * needs this entry's declension alongside the adjective's own.
+ */
+export const SUPERLATIVE_MARKER_KEY = 'самый=the most'
 
 // An imperfective future is analytic: the finite form belongs to быть and the
 // lexical verb stays in the infinitive (я бу́ду чита́ть). Usage annotations
@@ -139,6 +158,14 @@ function slotLabelFor(target) {
   if (target.degree === 'short') {
     return `Short form · ${GENDER_LABEL[target.gender] ?? target.gender}`
   }
+  // The comparative is invariable, so it is the whole label. The superlative
+  // agrees (са́мый + adjective), so it carries the agreement after it.
+  if (target.degree === 'comparative') return DEGREE_LABEL.comparative
+  if (target.degree === 'superlative') {
+    return target.case
+      ? `${DEGREE_LABEL.superlative} · ${agreementLabel(target.gender, target.case)}`
+      : DEGREE_LABEL.superlative
+  }
   if (target.case) {
     if (target.gender) return agreementLabel(target.gender, target.case)
     // Case first, then number — the order the learner reasons in.
@@ -234,6 +261,36 @@ function shortGenderStep(target, word) {
   }
 }
 
+/**
+ * Selection step: pick the degree of comparison the sentence needs. The English
+ * carries the answer ("colder", "the coldest"), so this is the step that teaches
+ * a learner to *notice* a comparison rather than reach for the dictionary form.
+ *
+ * Like genderStep, the options are the degrees the word really has: the positive
+ * always, the comparative only where one is stored, and the superlative only for
+ * adjectives — «са́мый» modifies an adjective, not an adverb, so offering it on
+ * ти́хо would be an option that can never be right.
+ */
+function degreeStep(target, word) {
+  const has = {
+    positive: true,
+    comparative: !!word?.extra?.forms?.comparative,
+    superlative: word?.pos === 'adjective',
+  }
+  // The annotated degree is always offered, even if the word's own data is thin.
+  const degrees = DEGREES.filter((d) => has[d] || d === target.degree)
+  return {
+    kind: 'degree',
+    prompt: 'Which degree does the sentence need?',
+    options: degrees.map((d) => ({
+      id: d,
+      label: DEGREE_LABEL[d],
+      hint: DEGREE_HINT[d],
+      correct: d === target.degree,
+    })),
+  }
+}
+
 /** The two members of a verb's aspect pair, imperfective first. */
 function aspectPairMembers(word) {
   const self = { ru: word.headword || word.ru, aspect: word.aspect, key: word.key, correct: true }
@@ -269,6 +326,9 @@ function aspectStep(word) {
  * The ordered selection steps the learner works through before spelling — case
  * always first, then the other dimension:
  *   - adjectives / possessive pronouns (gender-bearing): case → gender + number
+ *   - a comparative (adjective or adverb): degree only — the form is invariable,
+ *     so there is no case, number or gender left to choose
+ *   - a superlative: degree → case → gender + number, because «са́мый» agrees
  *   - nouns: case → number (singular / plural)
  *   - personal pronouns: case only (number is fixed by the lemma — я is always
  *     singular, so there's nothing to choose)
@@ -279,6 +339,12 @@ function aspectStep(word) {
  */
 export function buildSelectSteps(target, word) {
   if (target?.degree === 'short') return [shortGenderStep(target, word)]
+  if (target?.degree === 'comparative') return [degreeStep(target, word)]
+  if (target?.degree === 'superlative') {
+    return target.case
+      ? [degreeStep(target, word), caseStep(target, word), genderStep(target, word)]
+      : [degreeStep(target, word)]
+  }
   if (!target?.case) {
     return target?.person && word?.aspectPair ? [aspectStep(word)] : []
   }

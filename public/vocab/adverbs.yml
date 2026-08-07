@@ -38,6 +38,9 @@ words:
         en_gb: Write neatly, please.
       - ru: Кни́ги аккура́тно стоя́т на по́лке.
         en_gb: The books stand neatly on the shelf.
+      - ru: Пиши́ аккура́тнее, пожа́луйста.
+        en_gb: Write more neatly, please.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
   "безоблачно=cloudlessly":
     cefr_level: B2
     accented: безо́блачно
@@ -89,6 +92,9 @@ words:
         en_gb: They live quite near.
       - ru: Не подходи́ так бли́зко!
         en_gb: Don't come so near!
+      - ru: Подойди́ бли́же к окну́.
+        en_gb: Come closer to the window.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: бли́же
   "более=more":
@@ -157,6 +163,9 @@ words:
         en_gb: Time goes very quickly.
       - ru: Мы бы́стро зако́нчили рабо́ту.
         en_gb: We quickly finished the work.
+      - ru: Он бе́гает быстре́е меня́.
+        en_gb: He runs faster than me.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
     forms:
       comparative: быстре́е
   "в-третьих=thirdly":
@@ -188,6 +197,9 @@ words:
         en_gb: He walked importantly past us.
       - ru: Для меня́ э́то о́чень ва́жно.
         en_gb: For me this is very important.
+      - ru: Сейча́с важне́е отдохну́ть.
+        en_gb: Right now it is more important to rest.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
   "вверх=up":
     cefr_level: A2
     accented: вверх
@@ -250,6 +262,9 @@ words:
         en_gb: He politely greeted everyone.
       - ru: Официа́нт ве́жливо отве́тил на вопро́с.
         en_gb: The waiter politely answered the question.
+      - ru: Отве́ть ве́жливее, пожа́луйста.
+        en_gb: Answer more politely, please.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
     forms:
       comparative: ве́жливее
   "везде=everywhere":
@@ -279,7 +294,7 @@ words:
         - truly
         - faithfully
     forms:
-      comparative: ве́рнее
+      comparative: верне́е
     usage:
       - ru: Ты ве́рно отве́тил на вопро́с.
         en_gb: You answered the question correctly.
@@ -287,6 +302,9 @@ words:
         en_gb: He understood the task correctly.
       - ru: Всё бы́ло сде́лано ве́рно.
         en_gb: Everything was done correctly.
+      - ru: Э́ти часы́ иду́т верне́е ста́рых.
+        en_gb: This clock keeps time more accurately than the old one.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "вероятно=probably":
     cefr_level: B1
     accented: вероя́тно
@@ -315,6 +333,9 @@ words:
         en_gb: The children played cheerfully in the yard.
       - ru: Нам ста́ло ве́село и легко́.
         en_gb: We felt cheerful and light.
+      - ru: С му́зыкой рабо́тать веселе́е.
+        en_gb: It is more cheerful to work with music.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
     forms:
       comparative: веселе́е
   "весьма=very":
@@ -396,6 +417,9 @@ words:
         en_gb: Mum cooks soup deliciously.
       - ru: В э́том кафе́ всегда́ вку́сно.
         en_gb: It is always delicious in this cafe.
+      - ru: До́ма гото́вят вкусне́е, чем в кафе́.
+        en_gb: At home they cook more tastily than in a cafe.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
     forms:
       comparative: вкусне́е
   "вместе=together":
@@ -477,6 +501,9 @@ words:
         en_gb: He read the letter attentively.
       - ru: Внима́тельно прове́рь оши́бки.
         en_gb: Check the mistakes attentively.
+      - ru: Прочита́й вопро́с внима́тельнее.
+        en_gb: Read the question more attentively.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "вновь=anew":
     cefr_level: B1
     accented: вновь
@@ -868,6 +895,9 @@ words:
         en_gb: The moon stands high above the city.
       - ru: Он высоко́ це́нит её рабо́ту.
         en_gb: He highly values her work.
+      - ru: Пти́ца подняла́сь вы́ше облако́в.
+        en_gb: The bird rose higher than the clouds.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
   "где=where":
     cefr_level: A1
     accented: где
@@ -922,6 +952,9 @@ words:
         en_gb: The roots go deeply into the ground.
       - ru: Я глубоко́ уважа́ю э́того челове́ка.
         en_gb: I deeply respect this man.
+      - ru: Дыши́ глу́бже и не спеши́.
+        en_gb: Breathe more deeply and do not hurry.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
   "глупо=foolishly":
     cefr_level: B1
     accented: глу́по
@@ -968,6 +1001,9 @@ words:
         en_gb: The musicians played very loudly.
       - ru: Он гро́мко рассмея́лся.
         en_gb: He laughed loudly.
+      - ru: Говори́ гро́мче, я не слы́шу.
+        en_gb: Speak louder, I cannot hear.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: гро́мче
   "грустно=sadly":
@@ -984,6 +1020,9 @@ words:
         en_gb: She looked sadly out of the window.
       - ru: Без друзе́й здесь гру́стно.
         en_gb: Without friends it is sad here.
+      - ru: Без него́ в до́ме грустне́е.
+        en_gb: Without him it is sadder in the house.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative }
     forms:
       comparative: грустне́е
   "давно=long ago":
@@ -1035,6 +1074,9 @@ words:
         en_gb: It is still far to the city.
       - ru: Он живёт далеко́ от рабо́ты.
         en_gb: He lives far from work.
+      - ru: Не уходи́ да́льше реки́.
+        en_gb: Do not go further than the river.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: да́льше
   "дважды=twice":
@@ -1084,6 +1126,9 @@ words:
         en_gb: I bought the ticket very cheaply.
       - ru: На ры́нке всё дёшево.
         en_gb: Everything is cheap at the market.
+      - ru: На ры́нке о́вощи сто́ят деше́вле.
+        en_gb: At the market the vegetables cost less.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: деше́вле
   "довольно=quite":
@@ -1119,6 +1164,9 @@ words:
         en_gb: He thought over the answer for a long time.
       - ru: Не сиди́ так до́лго за компью́тером.
         en_gb: Don't sit at the computer for so long.
+      - ru: Э́тот фильм идёт до́льше, чем пе́рвый.
+        en_gb: This film runs longer than the first one.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
   "домой=home":
     cefr_level: A1
     accented: домо́й
@@ -1149,6 +1197,9 @@ words:
         en_gb: This dress costs too expensively.
       - ru: Он до́рого заплати́л за оши́бку.
         en_gb: He paid dearly for the mistake.
+      - ru: В це́нтре жить доро́же.
+        en_gb: It is more expensive to live in the centre.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: доро́же
   "достаточно=sufficiently":
@@ -1251,6 +1302,9 @@ words:
         en_gb: I am hot in this coat.
       - ru: В ко́мнате ста́ло жа́рко.
         en_gb: It became hot in the room.
+      - ru: В ию́ле жа́рче, чем в ма́е.
+        en_gb: In July it is hotter than in May.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
   "завтра=tomorrow":
     cefr_level: A1
     accented: за́втра
@@ -1301,6 +1355,9 @@ words:
         en_gb: He was noticeably nervous.
       - ru: Дни ста́ли заме́тно коро́че.
         en_gb: The days have become noticeably shorter.
+      - ru: При све́те пятно́ заме́тнее.
+        en_gb: In the light the stain is more noticeable.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "замуж=married":
     cefr_level: A2
     accented: за́муж
@@ -1432,6 +1489,9 @@ words:
         en_gb: He is significantly older than me.
       - ru: Результа́т значи́тельно улу́чшился.
         en_gb: The result has improved significantly.
+      - ru: Для нас э́то значи́тельнее, чем ка́жется.
+        en_gb: For us this is more significant than it seems.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "зря=in vain":
     cefr_level: B1
     accented: зря
@@ -1526,6 +1586,9 @@ words:
         en_gb: I wonder what will happen next.
       - ru: В музе́е бы́ло о́чень интере́сно.
         en_gb: It was very interesting at the museum.
+      - ru: Тепе́рь мне интере́снее учи́ться.
+        en_gb: Now it is more interesting for me to study.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
     forms:
       comparative: интере́снее
   "исключительно=exclusively":
@@ -1622,6 +1685,9 @@ words:
         en_gb: He answered the question briefly.
       - ru: Она́ ко́ротко подстри́глась.
         en_gb: She got her hair cut short.
+      - ru: Расскажи́ коро́че, у нас ма́ло вре́мени.
+        en_gb: Tell it more briefly, we have little time.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
   "крайне=extremely":
     cefr_level: B1
     accented: кра́йне
@@ -1653,6 +1719,9 @@ words:
         en_gb: The table was beautifully laid.
       - ru: Здесь о́сенью о́чень краси́во.
         en_gb: It is very beautiful here in autumn.
+      - ru: Она́ поёт краси́вее, чем игра́ет.
+        en_gb: She sings more beautifully than she plays.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "крепко=firmly":
     cefr_level: B1
     accented: кре́пко
@@ -1673,6 +1742,9 @@ words:
         en_gb: The child is sleeping soundly.
       - ru: Держи́сь кре́пко за пери́ла.
         en_gb: Hold on firmly to the railing.
+      - ru: Держи́ верёвку кре́пче.
+        en_gb: Hold the rope more firmly.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
   "кругом=all around":
     cefr_level: B1
     accented: круго́м
@@ -1754,6 +1826,9 @@ words:
         en_gb: He looked at her tenderly.
       - ru: Со́лнце ла́сково гре́ло.
         en_gb: The sun warmed gently.
+      - ru: Поговори́ с ним ла́сковее.
+        en_gb: Talk to him more tenderly.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "легко=easily":
     cefr_level: A1
     accented: легко́
@@ -1772,6 +1847,9 @@ words:
         en_gb: This text reads easily.
       - ru: Мне легко́ на душе́.
         en_gb: My heart feels light.
+      - ru: По́сле лека́рства ста́ло ле́гче.
+        en_gb: After the medicine it became easier.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ле́гче
   "лишь=only":
@@ -1811,6 +1889,9 @@ words:
         en_gb: The cook deftly sliced the vegetables.
       - ru: Ко́шка ло́вко забрала́сь на де́рево.
         en_gb: The cat deftly climbed the tree.
+      - ru: Он рабо́тает ло́вчее меня́.
+        en_gb: He works more deftly than me.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "лучше=better":
     cefr_level: A2
     accented: лу́чше
@@ -1843,6 +1924,9 @@ words:
         en_gb: He eats little in the mornings.
       - ru: Здесь ма́ло люде́й.
         en_gb: There are few people here.
+      - ru: Тепе́рь я сплю ме́ньше, чем ра́ньше.
+        en_gb: Now I sleep less than before.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ме́ньше
   "мгновенно=instantly":
@@ -1876,8 +1960,11 @@ words:
         en_gb: The train slowly left the station.
       - ru: Вре́мя тяну́лось ме́дленно.
         en_gb: Time dragged on slowly.
+      - ru: Говори́ ме́дленнее, пожа́луйста.
+        en_gb: Speak more slowly, please.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
     forms:
-      comparative: медле́ннее
+      comparative: ме́дленнее
   "между тем=meanwhile":
     cefr_level: B2
     accented: ме́жду тем
@@ -1939,6 +2026,9 @@ words:
         en_gb: She reads a lot.
       - ru: В го́роде мно́го музе́ев.
         en_gb: There are a lot of museums in the city.
+      - ru: Он чита́ет бо́льше, чем я.
+        en_gb: He reads more than I do.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: бо́льше
   "можно=one may":
@@ -1995,6 +2085,9 @@ words:
         en_gb: The teacher gently corrected the pupil.
       - ru: Здесь о́чень мя́гко сиде́ть.
         en_gb: It is very soft to sit here.
+      - ru: Скажи́ ему́ об э́том мя́гче.
+        en_gb: Tell him about it more gently.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
   "наверно=probably":
     cefr_level: B2
     accented: наве́рно
@@ -2647,8 +2740,6 @@ words:
       alt:
         - wrongly
         - it is wrong
-    forms:
-      comparative: непра́вильнее
     usage:
       - ru: Ты написа́ла э́то сло́во непра́вильно.
         en_gb: You wrote this word incorrectly.
@@ -2848,6 +2939,9 @@ words:
         en_gb: He feels normal.
       - ru: Сего́дня я спала́ норма́льно.
         en_gb: Today I slept normally.
+      - ru: Сего́дня он вы́глядит норма́льнее, чем вчера́.
+        en_gb: Today he looks more normal than yesterday.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "ныне=nowadays":
     cefr_level: B2
     accented: ны́не
@@ -3056,6 +3150,9 @@ words:
         en_gb: Walk carefully, it is slippery here.
       - ru: Осторо́жно неси́ ча́шку.
         en_gb: Carry the cup carefully.
+      - ru: Он ведёт маши́ну осторо́жнее меня́.
+        en_gb: He drives the car more carefully than me.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "откуда=from where":
     cefr_level: A2
     accented: отку́да
@@ -3262,6 +3359,9 @@ words:
         en_gb: I slept badly at night.
       - ru: Здесь пло́хо ви́дно.
         en_gb: It is hard to see here.
+      - ru: Он говори́т по-англи́йски ху́же, чем я.
+        en_gb: He speaks English worse than I do.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ху́же
   "по-вашему=in your opinion":
@@ -3376,6 +3476,9 @@ words:
         en_gb: It is already late, time to sleep.
       - ru: Он пришёл сли́шком по́здно.
         en_gb: He came too late.
+      - ru: Дава́й встре́тимся по́зже.
+        en_gb: Let us meet later.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: по́зже
   "полностью=completely":
@@ -3581,6 +3684,9 @@ words:
         en_gb: Solve the problem correctly.
       - ru: Он пра́вильно произно́сит слова́.
         en_gb: He pronounces the words correctly.
+      - ru: Втора́я фра́за звучи́т пра́вильнее.
+        en_gb: The second phrase sounds more correct.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "практически=practically":
     cefr_level: B1
     accented: практи́чески
@@ -3618,6 +3724,9 @@ words:
         en_gb: I understand you perfectly.
       - ru: Всё прошло́ прекра́сно.
         en_gb: Everything went wonderfully.
+      - ru: Нет ничего́ прекра́снее ле́та.
+        en_gb: There is nothing more wonderful than summer.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "престижно=prestigiously":
     cefr_level: B2
     accented: прести́жно
@@ -3684,6 +3793,9 @@ words:
         en_gb: The room smells pleasant.
       - ru: Прия́тно слы́шать твой го́лос.
         en_gb: It is pleasant to hear your voice.
+      - ru: Гуля́ть у́тром прия́тнее, чем ве́чером.
+        en_gb: Walking in the morning is more pleasant than in the evening.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "просто=simply":
     cefr_level: A1
     accented: про́сто
@@ -3770,6 +3882,9 @@ words:
         en_gb: It became joyful in my heart.
       - ru: Она́ ра́достно встре́тила госте́й.
         en_gb: She joyfully greeted the guests.
+      - ru: С детьми́ в до́ме ра́достнее.
+        en_gb: With children the house is more joyful.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative }
   "разве=really":
     cefr_level: A2
     accented: ра́зве
@@ -3816,6 +3931,9 @@ words:
         en_gb: It is still too early.
       - ru: Зимо́й темне́ет ра́но.
         en_gb: In winter it gets dark early.
+      - ru: Он встаёт ра́ньше меня́.
+        en_gb: He gets up earlier than me.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ра́ньше
   "раньше=earlier":
@@ -3851,6 +3969,9 @@ words:
         en_gb: He rarely gets ill.
       - ru: Таки́е лю́ди встреча́ются ре́дко.
         en_gb: Such people are met rarely.
+      - ru: Тепе́рь мы встреча́емся ре́же.
+        en_gb: Now we meet more rarely.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ре́же
   "резко=sharply":
@@ -3873,6 +3994,9 @@ words:
         en_gb: The weather changed sharply.
       - ru: Он ре́зко отве́тил.
         en_gb: He answered sharply.
+      - ru: Он отве́тил ре́зче, чем хоте́л.
+        en_gb: He answered more sharply than he wanted.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
   "решительно=resolutely":
     cefr_level: B1
     accented: реши́тельно
@@ -3900,7 +4024,7 @@ words:
         - evenly
         - smoothly
     forms:
-      comparative: ро́внее
+      comparative: ровне́е
     usage:
       - ru: Сейча́с ро́вно во́семь часо́в.
         en_gb: It is now exactly eight o'clock.
@@ -3908,6 +4032,9 @@ words:
         en_gb: Draw the line evenly.
       - ru: Он пришёл ро́вно в по́лдень.
         en_gb: He came exactly at noon.
+      - ru: Постара́йся писа́ть ровне́е.
+        en_gb: Try to write more evenly.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "сбоку=from the side":
     cefr_level: B1
     accented: сбо́ку
@@ -3959,6 +4086,9 @@ words:
         en_gb: It is bright and cosy in the room.
       - ru: Ле́том до́лго светло́.
         en_gb: In summer it stays light for a long time.
+      - ru: В э́той ко́мнате светле́е.
+        en_gb: In this room it is lighter.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
     forms:
       comparative: светле́е
   "свободно=freely":
@@ -3980,6 +4110,9 @@ words:
         en_gb: Here one can breathe freely.
       - ru: Пти́цы лета́ют свобо́дно.
         en_gb: The birds fly freely.
+      - ru: Тепе́рь он говори́т по-ру́сски свобо́днее.
+        en_gb: Now he speaks Russian more freely.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative }
   "сегодня=today":
     cefr_level: A1
     accented: сего́дня
@@ -4043,6 +4176,9 @@ words:
         en_gb: He became seriously ill.
       - ru: Ты э́то серьёзно?
         en_gb: Are you serious about this?
+      - ru: Он смо́трит на э́то серьёзнее, чем я.
+        en_gb: He looks at this more seriously than I do.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative }
   "сзади=from behind":
     cefr_level: B1
     accented: сза́ди
@@ -4085,7 +4221,7 @@ words:
         - very much
         - hard
     forms:
-      comparative: си́льнее
+      comparative: сильне́е
     usage:
       - ru: На у́лице си́льно ду́ет ве́тер.
         en_gb: The wind is blowing strongly outside.
@@ -4093,6 +4229,9 @@ words:
         en_gb: He is very tired.
       - ru: Дождь шёл о́чень си́льно.
         en_gb: The rain fell very heavily.
+      - ru: Ве́тер ду́ет сильне́е, чем у́тром.
+        en_gb: The wind blows more strongly than in the morning.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "скорее=rather":
     cefr_level: B1
     accented: скоре́е
@@ -4127,6 +4266,9 @@ words:
         en_gb: Spring will come soon.
       - ru: Мы ско́ро уви́димся.
         en_gb: We will see each other soon.
+      - ru: Приходи́ скоре́е, мы ждём.
+        en_gb: Come sooner, we are waiting.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
     forms:
       comparative: скоре́е
   "скучно=boringly":
@@ -4146,6 +4288,9 @@ words:
         en_gb: We were bored all evening.
       - ru: На уро́ке ску́чно без игр.
         en_gb: The lesson is boring without games.
+      - ru: Без книг в доро́ге скучне́е.
+        en_gb: Without books it is more boring on the journey.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative }
     forms:
       comparative: скучне́е
   "слева=on the left":
@@ -4427,6 +4572,9 @@ words:
         en_gb: The child slept peacefully.
       - ru: Здесь мо́жно споко́йно рабо́тать.
         en_gb: One can work calmly here.
+      - ru: Ве́чером в па́рке споко́йнее.
+        en_gb: In the evening it is calmer in the park.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "справа=on the right":
     cefr_level: B1
     accented: спра́ва
@@ -4572,6 +4720,9 @@ words:
         en_gb: Smoking is strictly forbidden here.
       - ru: Ма́ма стро́го разгова́ривала с ним.
         en_gb: Mum spoke strictly with him.
+      - ru: С детьми́ на́до говори́ть стро́же.
+        en_gb: One has to speak more strictly with children.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
   "сюда=here":
     cefr_level: A1
     accented: сюда́
@@ -4661,6 +4812,9 @@ words:
         en_gb: She firmly said 'no'.
       - ru: Я твёрдо ве́рю в успе́х.
         en_gb: I firmly believe in success.
+      - ru: Тепе́рь он говори́т твёрже.
+        en_gb: Now he speaks more firmly.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
   "темно=dark":
     cefr_level: B1
     accented: темно́
@@ -4676,6 +4830,9 @@ words:
         en_gb: It is already dark in the room.
       - ru: На у́лице ста́ло темно́.
         en_gb: It became dark outside.
+      - ru: В лесу́ темне́е, чем в по́ле.
+        en_gb: In the forest it is darker than in the field.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
     forms:
       comparative: темне́е
   "теперь=now":
@@ -4710,6 +4867,9 @@ words:
         en_gb: Dress warmly, it's freezing outside.
       - ru: Нас тепло́ встре́тили.
         en_gb: We were warmly welcomed.
+      - ru: В ку́ртке тепле́е, чем в сви́тере.
+        en_gb: In a jacket it is warmer than in a jumper.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
     forms:
       comparative: тепле́е
   "тихо=quietly":
@@ -4727,6 +4887,9 @@ words:
         en_gb: Speak quietly, the child is sleeping.
       - ru: В до́ме бы́ло ти́хо.
         en_gb: It was quiet in the house.
+      - ru: Говори́ ти́ше, ребёнок спит.
+        en_gb: Speak more quietly, the child is asleep.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ти́ше
   "тихонько=quietly":
@@ -4827,6 +4990,9 @@ words:
         en_gb: It is hard to live without money.
       - ru: Больно́му тру́дно дыша́ть.
         en_gb: The patient finds it hard to breathe.
+      - ru: Мне трудне́е чита́ть, чем говори́ть.
+        en_gb: It is harder for me to read than to speak.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
     forms:
       comparative: трудне́е
   "туда=there":
@@ -4865,6 +5031,9 @@ words:
         en_gb: He checked the work thoroughly.
       - ru: Мы тща́тельно подгото́вились к экза́мену.
         en_gb: We prepared thoroughly for the exam.
+      - ru: Прове́рь рабо́ту тща́тельнее.
+        en_gb: Check the work more thoroughly.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "тяжело=heavily":
     cefr_level: B1
     accented: тяжело́
@@ -4883,6 +5052,9 @@ words:
         en_gb: It is hard for me to carry this suitcase.
       - ru: Он тяжело́ вздохну́л.
         en_gb: He sighed heavily.
+      - ru: По́сле боле́зни ему́ тяжеле́е рабо́тать.
+        en_gb: After the illness it is harder for him to work.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
     forms:
       comparative: тяжеле́е
   "уверенно=confidently":
@@ -4904,6 +5076,9 @@ words:
         en_gb: He drives the car confidently.
       - ru: Спортсме́н уве́ренно вы́играл.
         en_gb: The athlete won confidently.
+      - ru: Тепе́рь он отвеча́ет уве́реннее.
+        en_gb: Now he answers more confidently.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "удивительно=surprisingly":
     cefr_level: B1
     accented: удиви́тельно
@@ -4922,6 +5097,9 @@ words:
         en_gb: She sings surprisingly beautifully.
       - ru: Удиви́тельно, как бы́стро лети́т вре́мя.
         en_gb: It's amazing how fast time flies.
+      - ru: Что мо́жет быть удиви́тельнее э́того?
+        en_gb: What could be more surprising than this?
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
   "ужасно=terribly":
     cefr_level: B1
     accented: ужа́сно
@@ -4942,6 +5120,9 @@ words:
         en_gb: The weather is terribly cold today.
       - ru: Он ужа́сно расстро́ился и́з-за но́вости.
         en_gb: He was terribly upset by the news.
+      - ru: Ничего́ ужа́снее я не ви́дел.
+        en_gb: I have not seen anything more terrible.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }
   "уже=already":
     cefr_level: A1
     accented: уже́
@@ -4973,6 +5154,9 @@ words:
         en_gb: I am cold without a jacket.
       - ru: Она́ хо́лодно посмотре́ла на него́.
         en_gb: She looked at him coldly.
+      - ru: Но́чью на у́лице холодне́е.
+        en_gb: At night it is colder outside.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative }
     forms:
       comparative: холодне́е
   "хорошо=well":
@@ -4992,6 +5176,9 @@ words:
         en_gb: You did the work well.
       - ru: Здесь хорошо́ отдыха́ть ле́том.
         en_gb: It is nice to relax here in summer.
+      - ru: Сего́дня я чу́вствую себя́ лу́чше.
+        en_gb: Today I feel better.
+        inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: лу́чше
   "часто=often":
@@ -5008,6 +5195,9 @@ words:
         en_gb: He is often ill in winter.
       - ru: Я ча́сто ду́маю о тебе́.
         en_gb: I often think about you.
+      - ru: Он звони́т ча́ще, чем пи́шет.
+        en_gb: He phones more often than he writes.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ча́ще
   "честно=honestly":
@@ -5030,6 +5220,9 @@ words:
         en_gb: He always acts honestly.
       - ru: Че́стно говоря́, я уста́ла.
         en_gb: Honestly speaking, I am tired.
+      - ru: Бы́ло бы честне́е сказа́ть пра́вду.
+        en_gb: It would be more honest to tell the truth.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "чётко=clearly":
     cefr_level: B1
     accented: чётко
@@ -5050,6 +5243,9 @@ words:
         en_gb: He carried out the task precisely.
       - ru: На фо́то всё ви́дно чётко.
         en_gb: Everything is clearly visible in the photo.
+      - ru: Говори́ чётче, тебя́ пло́хо слы́шно.
+        en_gb: Speak more clearly, you can hardly be heard.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
   "чисто=purely":
     cefr_level: B1
     accented: чи́сто
@@ -5067,6 +5263,9 @@ words:
         en_gb: This is purely my personal opinion.
       - ru: Он чи́сто говори́т по-ру́сски.
         en_gb: He speaks Russian cleanly.
+      - ru: В но́вой ку́хне чи́ще, чем в ста́рой.
+        en_gb: In the new kitchen it is cleaner than in the old one.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
   "чрезвычайно=extremely":
     cefr_level: B2
     accented: чрезвыча́йно
@@ -5094,7 +5293,7 @@ words:
       alt:
         - broadly
     forms:
-      comparative: шире́
+      comparative: ши́ре
     usage:
       - ru: Он широко́ улыбну́лся.
         en_gb: He smiled broadly.
@@ -5102,6 +5301,9 @@ words:
         en_gb: Open the window wide.
       - ru: Э́та кни́га широко́ изве́стна.
         en_gb: This book is widely known.
+      - ru: Откро́й окно́ ши́ре.
+        en_gb: Open the window wider.
+        inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
   "шумно=noisily":
     cefr_level: A2
     accented: шу́мно
@@ -5172,6 +5374,9 @@ words:
         en_gb: The room is brightly lit.
       - ru: Она́ я́рко оде́та сего́дня.
         en_gb: She is brightly dressed today.
+      - ru: Ле́том со́лнце све́тит я́рче.
+        en_gb: In summer the sun shines more brightly.
+        inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
   "ясно=clearly":
     cefr_level: A2
     accented: я́сно
@@ -5192,3 +5397,6 @@ words:
         en_gb: He explained the task clearly.
       - ru: На не́бе я́сно, ни одного́ о́блака.
         en_gb: The sky is clear, not a single cloud.
+      - ru: Объясни́ я́снее, пожа́луйста.
+        en_gb: Explain more clearly, please.
+        inflect: { token: 2, degree: comparative, rule: adv-comparative }

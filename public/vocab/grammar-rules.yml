@@ -380,6 +380,86 @@ rules:
       - "Feminine singular is unchanged: -ую either way (ви́жу но́вую подру́гу)."
       - "Neuter has no animate class; its accusative always equals the nominative."
 
+  # ── Degrees of comparison ────────────────────────────────────────────────
+  # The comparative is one invariable word — no gender, number or case — so the
+  # whole skill is producing it from the dictionary form. The regular -ее ending
+  # and the stem-changing set are split into separate rules so the hard forms
+  # (they are flagged as exceptions) surface more often in the drill.
+  adj-comparative:
+    title: "Comparative adjective"
+    formula: "stem + -ее · than = чем … or the plain genitive"
+    explanation: >
+      The comparative says "more X" or "X-er" and is ONE word, not two: краси́вый
+      → краси́вее, интере́сный → интере́снее. It never changes — no gender, number
+      or case — because it is used as a predicate, after быть or on its own:
+      Э́та кни́га интере́снее. Say what you are comparing with either «чем» + the
+      nominative (Она́ ста́рше, чем я) or, more compactly, the bare GENITIVE
+      (Она́ ста́рше меня́); «на» + the accusative gives the margin (на год ста́рше,
+      "a year older"). Stress: two-syllable adjectives pull it onto the ending
+      (умне́е, сильне́е), longer ones keep it on the stem (краси́вее, удо́бнее).
+    exceptions:
+      - "Two-word alternative: бо́лее + the dictionary form (бо́лее сло́жный), the only option before a noun — «бо́лее сло́жная зада́ча», never «сложне́е зада́ча»."
+      - "«ме́нее» is the negative counterpart and is always two words: ме́нее ва́жный."
+      - "по- softens it: подо́льше, полу́чше — \"a bit longer / a bit better\"."
+  adj-comparative-stem:
+    exception: true
+    title: "Comparative with a stem change"
+    formula: "-к / -г / -х / -д / -т stems → -е + a mutated consonant"
+    explanation: >
+      A large group of common adjectives builds the comparative with a bare -е
+      instead of -ее, and the final stem consonant mutates in front of it: г→ж
+      (дорого́й → доро́же), к→ч (гро́мкий → гро́мче), х→ш (ти́хий → ти́ше), д→ж
+      (молодо́й → моло́же), т→ч (бога́тый → бога́че), ст→щ (просто́й → про́ще),
+      з→ж (у́зкий → у́же). The -к- of the -кий adjectives usually drops first
+      (ни́зкий → ни́же, бли́зкий → бли́же). These forms are always stem-stressed.
+      Four are suppletive and simply have to be learnt: хоро́ший → лу́чше,
+      плохо́й → ху́же, большо́й → бо́льше, ма́ленький → ме́ньше.
+    exceptions:
+      - "Suppletive: хоро́ший → лу́чше · плохо́й → ху́же · большо́й → бо́льше · ма́ленький → ме́ньше."
+      - "Irregular stems: далёкий → да́льше, до́лгий → до́льше, ста́рый → ста́рше (people), глубо́кий → глу́бже."
+      - "ста́рше is for people's ages; a thing that is older is бо́лее ста́рый."
+  adv-comparative:
+    title: "Comparative adverb"
+    formula: "same form as the comparative adjective · stem + -ее"
+    explanation: >
+      An adverb's comparative is spelled exactly like the adjective's — бы́стро
+      and бы́стрый both give быстре́е — so there is only one form to learn per
+      root. What differs is what it attaches to: the adverb modifies a VERB
+      (Он бе́гает быстре́е) where the adjective describes a noun (Его́ маши́на
+      быстре́е). Comparison works the same way: «чем» + the nominative or the
+      bare genitive (Он говори́т ти́ше меня́).
+    exceptions:
+      - "«бо́лее» + an adverb is unidiomatic — say быстре́е, not «бо́лее бы́стро»."
+      - "Ordinary adverbs have no superlative; use лу́чше всех / бо́льше всего́ (\"best of all\")."
+  adv-comparative-stem:
+    exception: true
+    title: "Comparative adverb with a stem change"
+    formula: "-е + a mutated consonant · ти́хо → ти́ше, до́рого → доро́же"
+    explanation: >
+      The same stem-changing group as the adjectives, and the same forms:
+      гро́мко → гро́мче, ти́хо → ти́ше, до́рого → доро́же, легко́ → ле́гче, ча́сто →
+      ча́ще, ре́дко → ре́же, чи́сто → чи́ще, ко́ротко → коро́че. The suppletives are
+      the ones a learner meets first and most often: хорошо́ → лу́чше, пло́хо →
+      ху́же, мно́го → бо́льше, ма́ло → ме́ньше, ра́но → ра́ньше, по́здно → по́зже,
+      далеко́ → да́льше, бли́зко → бли́же.
+    exceptions:
+      - "Suppletive: хорошо́ → лу́чше · пло́хо → ху́же · мно́го → бо́льше · ма́ло → ме́ньше."
+      - "ра́но → ра́ньше and по́здно → по́зже change the stem outright."
+  adj-superlative:
+    title: "Superlative: са́мый + adjective"
+    formula: "са́мый + the adjective · BOTH agree in gender, number and case"
+    explanation: >
+      The everyday superlative — "the biggest", "the most interesting" — is two
+      words: «са́мый» in front of the ordinary dictionary form. Both halves agree
+      with the noun, so both change together: са́мый большо́й дом, са́мая больша́я
+      кварти́ра, в са́мом большо́м до́ме. Unlike the comparative it is not a special
+      form at all, which makes it the easier of the two degrees: if you can
+      decline the adjective, you can say the superlative.
+    exceptions:
+      - "The comparative + всех/всего́ is the spoken alternative: Он бе́гает быстре́е всех."
+      - "A bookish synthetic superlative in -е́йший / -а́йший exists (интере́снейший, велича́йший); it usually means \"extremely\", not \"the most\"."
+      - "лу́чший and ху́дший already carry the meaning, so са́мый лу́чший is emphatic (and frowned on in careful writing)."
+
   # ── Pronouns ────────────────────────────────────────────────────────────
   pronoun-personal:
     title: "Personal pronoun"

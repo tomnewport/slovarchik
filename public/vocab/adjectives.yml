@@ -216,6 +216,9 @@ words:
       - ru: Де́ти ста́ли бо́лее акти́вными.
         en_gb: The children have become more active.
         inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ве́чером он акти́внее, чем у́тром.
+        en_gb: In the evening he is more active than in the morning.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "американский=American":
     cefr_level: A2
     accented: америка́нский
@@ -372,6 +375,9 @@ words:
       - ru: В дере́вне живу́т бе́дные лю́ди.
         en_gb: Poor people live in the village.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: По́сле войны́ страна́ ста́ла бедне́е.
+        en_gb: After the war the country became poorer.
+        inflect: { token: 5, degree: comparative, rule: adj-comparative }
     forms:
       m: бе́дный
       f: бе́дная
@@ -469,6 +475,9 @@ words:
       - ru: В ва́зе стоя́т бе́лые цветы́.
         en_gb: There are white flowers in the vase.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та руба́шка беле́е, чем та.
+        en_gb: This shirt is whiter than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: бе́лый
       f: бе́лая
@@ -690,6 +699,9 @@ words:
       - ru: Э́то бы́ли благоро́дные лю́ди.
         en_gb: These were noble people.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Нет це́ли благоро́днее, чем помога́ть лю́дям.
+        en_gb: There is no goal nobler than helping people.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "бледный=pale":
     cefr_level: B1
     accented: бле́дный
@@ -708,6 +720,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Не́бо ста́ло бледне́е к ве́черу.
         en_gb: The sky became paler towards evening.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: бле́дный
       f: бле́дная
@@ -886,6 +899,9 @@ words:
       - ru: Я скуча́ю по бли́зкому челове́ку.
         en_gb: I miss a person close to me.
         inflect: { token: 4, case: dat, number: sg, gender: m, rule: adj-agreement }
+      - ru: Апте́ка бли́же, чем больни́ца.
+        en_gb: The pharmacy is closer than the hospital.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative-stem }
   "богатый=rich":
     cefr_level: A2
     accented: бога́тый
@@ -906,6 +922,9 @@ words:
       - ru: У страны́ бога́тая исто́рия.
         en_gb: The country has a rich history.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Его́ семья́ бога́че на́шей.
+        en_gb: His family is richer than ours.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: бога́тый
       f: бога́тая
@@ -1153,6 +1172,12 @@ words:
       - ru: У нас больша́я семья́.
         en_gb: We have a big family.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́та ко́мната бо́льше, чем моя́.
+        en_gb: This room is bigger than mine.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
+      - ru: Э́то са́мый большо́й дом в дере́вне.
+        en_gb: This is the biggest house in the village.
+        inflect: { token: 2, span: 2, degree: superlative, case: nom, gender: m, rule: adj-superlative }
     forms:
       m: большо́й
       f: больша́я
@@ -1328,6 +1353,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Поезда́ ста́ли быстре́е.
         en_gb: The trains have become faster.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "важный=important":
     cefr_level: A2
     accented: ва́жный
@@ -1347,6 +1373,9 @@ words:
       - ru: Мы обсуди́ли ва́жные дела́.
         en_gb: We discussed important matters.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Здоро́вье важне́е де́нег.
+        en_gb: Health is more important than money.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
     forms:
       m: ва́жный
       f: ва́жная
@@ -1426,6 +1455,9 @@ words:
       - ru: Мне нра́вятся ве́жливые лю́ди.
         en_gb: I like polite people.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Но́вый продаве́ц ве́жливее ста́рого.
+        en_gb: The new shop assistant is politer than the old one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "великий=great":
     cefr_level: B1
     accented: вели́кий
@@ -1523,6 +1555,9 @@ words:
       - ru: Мы жи́ли в великоле́пном до́ме.
         en_gb: We lived in a magnificent house.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
+      - ru: Вид с горы́ великоле́пнее, чем с балко́на.
+        en_gb: The view from the mountain is more magnificent than from the balcony.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "верный=faithful":
     cefr_level: B1
     accented: ве́рный
@@ -1572,6 +1607,9 @@ words:
       - ru: Они́ ве́рные това́рищи.
         en_gb: They are faithful comrades.
         inflect: { token: 2, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та ка́рта верне́е, чем ста́рая.
+        en_gb: This map is more accurate than the old one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "верхний=upper":
     cefr_level: B1
     accented: ве́рхний
@@ -1639,6 +1677,9 @@ words:
       - ru: Мы провели́ весёлый ве́чер.
         en_gb: We had a cheerful evening.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: На у́лице сейча́с веселе́е, чем в до́ме.
+        en_gb: Outside it is more cheerful now than in the house.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
     forms:
       m: весёлый
       f: весёлая
@@ -1986,6 +2027,12 @@ words:
       - ru: В кафе́ подаю́т вку́сные пирожки́.
         en_gb: They serve tasty pies at the cafe.
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Суп сего́дня вкусне́е, чем вчера́.
+        en_gb: The soup today is tastier than yesterday.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: Он вы́брал са́мую вку́сную ры́бу.
+        en_gb: He chose the tastiest fish.
+        inflect: { token: 3, span: 2, degree: superlative, case: acc, gender: f, rule: adj-superlative }
     forms:
       m: вку́сный
       f: вку́сная
@@ -2033,7 +2080,7 @@ words:
       f: вла́жная
       n: вла́жное
       pl: вла́жные
-      comparative: вла́жнее
+      comparative: влажне́е
     declension:
       m_nom: вла́жный
       m_gen: вла́жного
@@ -2069,6 +2116,9 @@ words:
       - ru: В подва́ле вла́жные сте́ны.
         en_gb: The cellar has damp walls.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: В лесу́ во́здух влажне́е, чем в го́роде.
+        en_gb: The air in the forest is damper than in the city.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "внешний=external":
     cefr_level: B1
     accented: вне́шний
@@ -2820,6 +2870,9 @@ words:
       - ru: Вокру́г росли́ высо́кие дере́вья.
         en_gb: Tall trees grew all around.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Брат вы́ше меня́ на го́лову.
+        en_gb: My brother is a head taller than me.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: высо́кий
       f: высо́кая
@@ -3108,6 +3161,9 @@ words:
       - ru: Доро́га была́ ро́вной и гла́дкой.
         en_gb: The road was even and smooth.
         inflect: { token: 5, case: ins, number: sg, gender: f, rule: adj-agreement }
+      - ru: Лёд на о́зере гла́же, чем на реке́.
+        en_gb: The ice on the lake is smoother than on the river.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: гла́дкий
       f: гла́дкая
@@ -3157,6 +3213,9 @@ words:
       - ru: Я погрузи́лся в глубо́кий сон.
         en_gb: I sank into a deep sleep.
         inflect: { token: 4, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: Э́то о́зеро глу́бже, чем на́ше.
+        en_gb: This lake is deeper than ours.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: глубо́кий
       f: глубо́кая
@@ -3236,6 +3295,9 @@ words:
       - ru: Не слу́шай глу́пые сове́ты.
         en_gb: Do not listen to stupid advice.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ничего́ глупе́е я не слы́шал.
+        en_gb: I have not heard anything more stupid.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
   "глухой=deaf":
     cefr_level: B1
     accented: глухо́й
@@ -3633,6 +3695,9 @@ words:
       - ru: Он пролива́л го́рькие слёзы.
         en_gb: He shed bitter tears.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Чёрный ко́фе горче́ ча́я.
+        en_gb: Black coffee is more bitter than tea.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "горячий=hot":
     cefr_level: A1
     accented: горя́чий
@@ -3975,6 +4040,9 @@ words:
       - ru: Не люблю́ гро́мкие голоса́.
         en_gb: I do not like loud voices.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Му́зыка ста́ла гро́мче.
+        en_gb: The music became louder.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "грубый=rude":
     cefr_level: B1
     accented: гру́бый
@@ -4023,6 +4091,9 @@ words:
       - ru: Я не выношу́ гру́бые слова́.
         en_gb: I cannot stand rude words.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Его́ отве́т был грубе́е, чем ну́жно.
+        en_gb: His answer was ruder than necessary.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "грустный=sad":
     cefr_level: A1
     accented: гру́стный
@@ -4040,6 +4111,9 @@ words:
       - ru: Мы слу́шали гру́стную му́зыку.
         en_gb: We listened to sad music.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́та пе́сня грустне́е, чем ка́жется.
+        en_gb: This song is sadder than it seems.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: гру́стный
       f: гру́стная
@@ -4090,6 +4164,9 @@ words:
       - ru: Помо́й гря́зные таре́лки.
         en_gb: Wash the dirty plates.
         inflect: { token: 2, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: У́лица грязне́е по́сле дождя́.
+        en_gb: The street is dirtier after the rain.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
     forms:
       m: гря́зный
       f: гря́зная
@@ -4170,6 +4247,9 @@ words:
       - ru: Мы шли че́рез густы́е леса́.
         en_gb: We walked through thick forests.
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Здесь лес гу́ще, чем у реки́.
+        en_gb: Here the forest is thicker than by the river.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "далёкий=distant":
     cefr_level: A2
     accented: далёкий
@@ -4219,6 +4299,9 @@ words:
       - ru: Мы мечта́ем о далёких плане́тах.
         en_gb: We dream of distant planets.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та дере́вня да́льше, чем я ду́мал.
+        en_gb: This village is further away than I thought.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "дальнейший=further":
     cefr_level: B1
     accented: дальне́йший
@@ -4621,6 +4704,9 @@ words:
       - ru: В магази́не дешёвая оде́жда.
         en_gb: There is cheap clothing in the shop.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Биле́ты на по́езд деше́вле, чем на самолёт.
+        en_gb: Train tickets are cheaper than plane tickets.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: дешёвый
       f: дешёвая
@@ -4720,6 +4806,9 @@ words:
       - ru: Он написа́л дли́нное письмо́.
         en_gb: He wrote a long letter.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Э́та у́лица длинне́е, чем на́ша.
+        en_gb: This street is longer than ours.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: дли́нный
       f: дли́нная
@@ -4829,6 +4918,9 @@ words:
       - ru: Всего́ до́брого, до свида́ния!
         en_gb: All the best, goodbye!
         inflect: { token: 2, case: gen, number: sg, gender: n, rule: adj-agreement }
+      - ru: Со вре́менем он стал добре́е.
+        en_gb: Over time he became kinder.
+        inflect: { token: 5, degree: comparative, rule: adj-comparative }
     forms:
       m: до́брый
       f: до́брая
@@ -4911,6 +5003,9 @@ words:
       - ru: Дово́льные го́сти благодари́ли хозя́ев.
         en_gb: The satisfied guests thanked the hosts.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: По́сле о́тпуска он вы́глядит дово́льнее.
+        en_gb: After the holiday he looks more satisfied.
+        inflect: { token: 5, degree: comparative, rule: adj-comparative }
   "долгий=long":
     cefr_level: A2
     accented: до́лгий
@@ -5200,6 +5295,12 @@ words:
       - ru: В дороги́х магази́нах я не покупа́ю.
         en_gb: I do not shop in expensive shops.
         inflect: { token: 2, case: pre, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот телефо́н доро́же моего́.
+        en_gb: This phone is more expensive than mine.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
+      - ru: В э́том магази́не са́мые дороги́е часы́.
+        en_gb: The most expensive watches are in this shop.
+        inflect: { token: 4, span: 2, degree: superlative, case: nom, gender: pl, rule: adj-superlative }
     forms:
       m: дорого́й
       f: дорога́я
@@ -5908,6 +6009,9 @@ words:
       - ru: Мы пережи́ли жа́ркие дни.
         en_gb: We lived through hot days.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: На ю́ге ле́то жа́рче.
+        en_gb: In the south the summer is hotter.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
   "железнодорожный=railway":
     cefr_level: B1
     accented: железнодоро́жный
@@ -6177,6 +6281,9 @@ words:
       - ru: Они́ спа́ли на жёсткой крова́ти.
         en_gb: They slept on a hard bed.
         inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
+      - ru: Здесь крова́ть жёстче, чем до́ма.
+        en_gb: The bed here is harder than at home.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: жёсткий
       f: жёсткая
@@ -6257,6 +6364,9 @@ words:
       - ru: Они́ боя́тся жесто́ких слов.
         en_gb: They are afraid of cruel words.
         inflect: { token: 3, case: gen, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Его́ слова́ бы́ли жесто́че, чем посту́пок.
+        en_gb: His words were crueller than his deed.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
   "живой=alive":
     cefr_level: A2
     accented: живо́й
@@ -6761,6 +6871,9 @@ words:
       - ru: Мы ви́дим заме́тные результа́ты.
         en_gb: We see noticeable results.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: На све́тлой стене́ пятно́ заме́тнее.
+        en_gb: On a light wall the stain is more noticeable.
+        inflect: { token: 5, degree: comparative, rule: adj-comparative }
   "замечательный=wonderful":
     cefr_level: B1
     accented: замеча́тельный
@@ -6925,6 +7038,9 @@ words:
       - ru: Де́ти едя́т здоро́вую пи́щу.
         en_gb: The children eat healthy food.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
+      - ru: По́сле о́тпуска он стал здорове́е.
+        en_gb: After the holiday he became healthier.
+        inflect: { token: 5, degree: comparative, rule: adj-comparative }
     forms:
       m: здоро́вый
       f: здоро́вая
@@ -6977,6 +7093,9 @@ words:
       - ru: Он купи́л зелёное я́блоко.
         en_gb: He bought a green apple.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Весно́й трава́ зелене́е.
+        en_gb: In spring the grass is greener.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: зелёный
       f: зелёная
@@ -7126,6 +7245,9 @@ words:
       - ru: Он сказа́л э́то злым го́лосом.
         en_gb: He said it in an angry voice.
         inflect: { token: 4, case: ins, number: sg, gender: m, rule: adj-agreement }
+      - ru: Соба́ка зле́е ко́шки.
+        en_gb: The dog is angrier than the cat.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
     forms:
       m: злой
       f: зла́я
@@ -7306,6 +7428,9 @@ words:
       - ru: Мы потеря́ли значи́тельные де́ньги.
         en_gb: We lost significant money.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ра́зница значи́тельнее, чем мы ду́мали.
+        en_gb: The difference is more significant than we thought.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
   "золотой=golden":
     cefr_level: B1
     accented: золото́й
@@ -7618,6 +7743,12 @@ words:
       - ru: У нас был интере́сный разгово́р.
         en_gb: We had an interesting conversation.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
+      - ru: Кни́га интере́снее фи́льма.
+        en_gb: The book is more interesting than the film.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
+      - ru: Э́то са́мая интере́сная кни́га в библиоте́ке.
+        en_gb: This is the most interesting book in the library.
+        inflect: { token: 2, span: 2, degree: superlative, case: nom, gender: f, rule: adj-superlative }
     forms:
       m: интере́сный
       f: интере́сная
@@ -8007,6 +8138,9 @@ words:
       - ru: Мне нра́вятся ки́слые я́годы.
         en_gb: I like sour berries.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́ти я́блоки кисле́е, чем те.
+        en_gb: These apples are sourer than those.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: ки́слый
       f: ки́слая
@@ -8433,6 +8567,9 @@ words:
       - ru: Мы пошли́ коро́ткой доро́гой.
         en_gb: We went by the short road.
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́та доро́га коро́че.
+        en_gb: This road is shorter.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: коро́ткий
       f: коро́ткая
@@ -8579,6 +8716,12 @@ words:
       - ru: Мы любу́емся краси́выми гора́ми.
         en_gb: We admire the beautiful mountains.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот парк краси́вее, чем тот.
+        en_gb: This park is more beautiful than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: Здесь са́мое краси́вое ме́сто в го́роде.
+        en_gb: Here is the most beautiful place in the city.
+        inflect: { token: 2, span: 2, degree: superlative, case: nom, gender: n, rule: adj-superlative }
     forms:
       m: краси́вый
       f: краси́вая
@@ -8753,6 +8896,9 @@ words:
       - ru: У них кре́пкие ру́ки.
         en_gb: They have strong hands.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот чай кре́пче, чем обы́чно.
+        en_gb: This tea is stronger than usual.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "кривой=crooked":
     cefr_level: B1
     accented: криво́й
@@ -8906,7 +9052,7 @@ words:
       f: кру́пная
       n: кру́пное
       pl: кру́пные
-      comparative: кру́пнее
+      comparative: крупне́е
     declension:
       m_nom: кру́пный
       m_gen: кру́пного
@@ -8942,6 +9088,9 @@ words:
       - ru: На ры́нке кру́пные я́блоки.
         en_gb: There are large apples at the market.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Наш го́род крупне́е сосе́днего.
+        en_gb: Our city is larger than the neighbouring one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "крутой=steep":
     cefr_level: B1
     accented: круто́й
@@ -9137,6 +9286,12 @@ words:
       - ru: Мы зада́ли лёгкие вопро́сы.
         en_gb: We asked easy questions.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ходи́ть пешко́м ле́гче, чем бе́гать.
+        en_gb: Walking is easier than running.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
+      - ru: Ученики́ реша́ют са́мые лёгкие вопро́сы.
+        en_gb: The pupils are solving the easiest questions.
+        inflect: { token: 3, span: 2, degree: superlative, case: acc, gender: pl, rule: adj-superlative }
   "ледяной=icy":
     cefr_level: B1
     accented: ледяно́й
@@ -9586,6 +9741,12 @@ words:
       - ru: Она́ держа́ла ма́ленькое яйцо́.
         en_gb: She held a small egg.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Моя́ ко́мната ме́ньше, чем твоя́.
+        en_gb: My room is smaller than yours.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
+      - ru: Она́ живёт в са́мой ма́ленькой кварти́ре.
+        en_gb: She lives in the smallest flat.
+        inflect: { token: 4, span: 2, degree: superlative, case: pre, gender: f, rule: adj-superlative }
     forms:
       m: ма́ленький
       f: ма́ленькая
@@ -9907,6 +10068,9 @@ words:
       - ru: Мне не нра́вятся ме́дленные та́нцы.
         en_gb: I do not like slow dances.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот по́езд ме́дленнее, чем авто́бус.
+        en_gb: This train is slower than the bus.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "международный=international":
     cefr_level: B1
     accented: междунаро́дный
@@ -9967,7 +10131,7 @@ words:
       f: ме́лкая
       n: ме́лкое
       pl: ме́лкие
-      comparative: ме́лче
+      comparative: ме́льче
     declension:
       m_nom: ме́лкий
       m_gen: ме́лкого
@@ -10003,6 +10167,9 @@ words:
       - ru: Он реша́ет ме́лкие пробле́мы.
         en_gb: He solves petty problems.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: У бе́рега вода́ ме́льче.
+        en_gb: Near the shore the water is shallower.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
   "мёртвый=dead":
     cefr_level: B1
     accented: мёртвый
@@ -10196,6 +10363,9 @@ words:
       - ru: У них ми́лые де́ти.
         en_gb: They have lovely children.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Нет ме́ста миле́е до́ма.
+        en_gb: There is no place dearer than home.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "мирный=peaceful":
     cefr_level: B2
     accented: ми́рный
@@ -10501,6 +10671,9 @@ words:
       - ru: Она́ но́сит мо́дные очки́.
         en_gb: She wears fashionable glasses.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́то пальто́ модне́е, чем ста́рое.
+        en_gb: This coat is more fashionable than the old one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: мо́дный
       f: мо́дная
@@ -10603,6 +10776,12 @@ words:
       - ru: Они́ помога́ют молодо́й семье́.
         en_gb: They help the young family.
         inflect: { token: 3, case: dat, number: sg, gender: f, rule: adj-agreement }
+      - ru: Сестра́ моло́же меня́ на три го́да.
+        en_gb: My sister is three years younger than me.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative-stem }
+      - ru: Учи́тель помога́ет са́мому молодо́му ученику́.
+        en_gb: The teacher helps the youngest pupil.
+        inflect: { token: 3, span: 2, degree: superlative, case: dat, gender: m, rule: adj-superlative }
     forms:
       m: молодо́й
       f: молода́я
@@ -10742,7 +10921,7 @@ words:
       f: мо́щная
       n: мо́щное
       pl: мо́щные
-      comparative: мо́щнее
+      comparative: мощне́е
     declension:
       m_nom: мо́щный
       m_gen: мо́щного
@@ -10778,6 +10957,9 @@ words:
       - ru: Заво́д испо́льзует мо́щные насо́сы.
         en_gb: The factory uses powerful pumps.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот компью́тер мощне́е моего́.
+        en_gb: This computer is more powerful than mine.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "мрачный=gloomy":
     cefr_level: B2
     accented: мра́чный
@@ -10790,7 +10972,7 @@ words:
       f: мра́чная
       n: мра́чное
       pl: мра́чные
-      comparative: мра́чнее
+      comparative: мрачне́е
     declension:
       m_nom: мра́чный
       m_gen: мра́чного
@@ -10826,6 +11008,9 @@ words:
       - ru: Мы шли по мра́чным у́лицам.
         en_gb: We walked through gloomy streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
+      - ru: По́сле но́вости он стал мрачне́е.
+        en_gb: After the news he became gloomier.
+        inflect: { token: 5, degree: comparative, rule: adj-comparative }
   "мужской=male":
     cefr_level: A2
     accented: мужско́й
@@ -10940,6 +11125,9 @@ words:
       - ru: Она́ се́ла в мя́гкое кре́сло.
         en_gb: She sat in a soft armchair.
         inflect: { token: 4, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Э́то кре́сло мя́гче, чем стул.
+        en_gb: This armchair is softer than the chair.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: мя́гкий
       f: мя́гкая
@@ -11023,6 +11211,9 @@ words:
       - ru: Им нужны́ надёжные партнёры.
         en_gb: They need reliable partners.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ста́рый замо́к надёжнее но́вого.
+        en_gb: The old lock is more reliable than the new one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "народный=folk":
     cefr_level: B2
     accented: наро́дный
@@ -11663,6 +11854,9 @@ words:
       - ru: Они́ обменя́лись не́жными слова́ми.
         en_gb: They exchanged tender words.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Её го́лос стал нежне́е.
+        en_gb: Her voice became gentler.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
     forms:
       m: не́жный
       f: не́жная
@@ -12577,6 +12771,9 @@ words:
       - ru: Зимо́й здесь ни́зкие температу́ры.
         en_gb: In winter there are low temperatures here.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот стол ни́же того́.
+        en_gb: This table is lower than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: ни́зкий
       f: ни́зкая
@@ -12629,6 +12826,12 @@ words:
       - ru: У них но́вые сосе́ди.
         en_gb: They have new neighbours.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Его́ маши́на нове́е мое́й.
+        en_gb: His car is newer than mine.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: В магази́не нет са́мых но́вых книг.
+        en_gb: The shop does not have the newest books.
+        inflect: { token: 4, span: 2, degree: superlative, case: gen, gender: pl, rule: adj-superlative }
     forms:
       m: но́вый
       f: но́вая
@@ -13434,6 +13637,9 @@ words:
       - ru: Мы избежа́ли опа́сного пути́.
         en_gb: We avoided the dangerous route.
         inflect: { token: 3, case: gen, number: sg, gender: m, rule: adj-agreement }
+      - ru: Е́здить но́чью опа́снее.
+        en_gb: Driving at night is more dangerous.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: опа́сный
       f: опа́сная
@@ -14015,6 +14221,9 @@ words:
       - ru: У ножа́ о́строе ле́звие.
         en_gb: The knife has a sharp blade.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
+      - ru: Э́тот нож остре́е того́.
+        en_gb: This knife is sharper than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: о́стрый
       f: о́страя
@@ -14633,6 +14842,9 @@ words:
       - ru: Мы услы́шали печа́льное изве́стие.
         en_gb: We heard sad news.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Коне́ц кни́ги печа́льнее нача́ла.
+        en_gb: The end of the book is sadder than the beginning.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "письменный=written":
     cefr_level: B1
     accented: пи́сьменный
@@ -14741,7 +14953,7 @@ words:
       f: пло́тная
       n: пло́тное
       pl: пло́тные
-      comparative: пло́тнее
+      comparative: плотне́е
     declension:
       m_nom: пло́тный
       m_gen: пло́тного
@@ -14779,6 +14991,9 @@ words:
         en_alt:
           - There are dense bushes in the forest.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Здесь лес плотне́е, чем у доро́ги.
+        en_gb: Here the forest is denser than by the road.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "плохой=bad":
     cefr_level: A1
     accented: плохо́й
@@ -14797,6 +15012,9 @@ words:
       - ru: Э́то плохи́е но́вости.
         en_gb: This is bad news.
         inflect: { token: 2, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Пого́да сего́дня ху́же, чем вчера́.
+        en_gb: The weather today is worse than yesterday.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: плохо́й
       f: плоха́я
@@ -15215,6 +15433,9 @@ words:
       - ru: О́вощи — поле́зные проду́кты.
         en_gb: Vegetables are useful foods.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Фру́кты поле́знее конфе́т.
+        en_gb: Fruit is healthier than sweets.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
   "политический=political":
     cefr_level: B1
     accented: полити́ческий
@@ -15280,6 +15501,9 @@ words:
       - ru: У меня́ по́лная су́мка проду́ктов.
         en_gb: I have a bag full of groceries.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Но́вый слова́рь полне́е ста́рого.
+        en_gb: The new dictionary is fuller than the old one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: по́лный
       f: по́лная
@@ -15805,6 +16029,9 @@ words:
       - ru: Мне не нра́вится э́та по́шлая му́зыка.
         en_gb: I don't like this vulgar music.
         inflect: { token: 5, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Его́ шу́тки ста́ли по́шлее.
+        en_gb: His jokes have become more vulgar.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
     forms:
       m: по́шлый
       f: по́шлая
@@ -16374,6 +16601,9 @@ words:
       - ru: Мы провели́ прия́тный ве́чер.
         en_gb: We spent a pleasant evening.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: Гуля́ть в па́рке прия́тнее, чем в го́роде.
+        en_gb: Walking in the park is more pleasant than in the city.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "прозрачный=transparent":
     cefr_level: B1
     accented: прозра́чный
@@ -16492,6 +16722,9 @@ words:
       - ru: Они́ живу́т просто́й жи́знью.
         en_gb: They live a simple life.
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то пра́вило про́ще, чем ка́жется.
+        en_gb: This rule is simpler than it seems.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: просто́й
       f: проста́я
@@ -17279,6 +17512,9 @@ words:
       - ru: Мы при́няли разу́мные ме́ры.
         en_gb: We took reasonable measures.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Пое́хать на по́езде разу́мнее, чем на маши́не.
+        en_gb: Going by train is more sensible than by car.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "раненый=wounded":
     cefr_level: B1
     accented: ра́неный
@@ -17519,6 +17755,9 @@ words:
       - ru: Мы нашли́ ре́дкие моне́ты.
         en_gb: We found rare coins.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Тепе́рь таки́е слу́чаи ре́же.
+        en_gb: Now such cases are rarer.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
   "резкий=sharp":
     cefr_level: B1
     accented: ре́зкий
@@ -17568,6 +17807,9 @@ words:
       - ru: Он сде́лал ре́зкое движе́ние.
         en_gb: He made a sharp movement.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Его́ го́лос стал ре́зче.
+        en_gb: His voice became sharper.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative-stem }
   "ровный=even":
     cefr_level: B1
     accented: ро́вный
@@ -17588,6 +17830,9 @@ words:
       - ru: Положи́ кни́ги ро́вными ряда́ми.
         en_gb: Lay the books in even rows.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та доро́га ровне́е, чем та.
+        en_gb: This road is more even than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: ро́вный
       f: ро́вная
@@ -17975,6 +18220,9 @@ words:
       - ru: У нас све́жая ры́ба.
         en_gb: We have fresh fish.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: У́тром во́здух свеже́е.
+        en_gb: In the morning the air is fresher.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: све́жий
       f: све́жая
@@ -18025,6 +18273,9 @@ words:
       - ru: Я купи́ла све́тлый костю́м.
         en_gb: I bought a light suit.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: Э́та ко́мната светле́е, чем та.
+        en_gb: This room is lighter than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: све́тлый
       f: све́тлая
@@ -18515,6 +18766,9 @@ words:
       - ru: Он серьёзный челове́к.
         en_gb: He is a serious person.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
+      - ru: Разгово́р был серьёзнее, чем я ожида́л.
+        en_gb: The conversation was more serious than I expected.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: серьёзный
       f: серьёзная
@@ -18565,6 +18819,12 @@ words:
       - ru: У неё си́льная во́ля.
         en_gb: She has a strong will.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Ве́тер стал сильне́е к ве́черу.
+        en_gb: The wind became stronger towards evening.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: Он стал са́мым си́льным в кла́ссе.
+        en_gb: He became the strongest in the class.
+        inflect: { token: 3, span: 2, degree: superlative, case: ins, gender: m, rule: adj-superlative }
     forms:
       m: си́льный
       f: си́льная
@@ -18696,6 +18956,9 @@ words:
       - ru: Жела́ю тебе́ ско́рого выздоровле́ния.
         en_gb: I wish you a fast recovery.
         inflect: { token: 3, case: gen, number: sg, gender: n, rule: adj-agreement }
+      - ru: Чем скоре́е мы вы́едем, тем лу́чше.
+        en_gb: The sooner we set off, the better.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
   "скромный=modest":
     cefr_level: B1
     accented: скро́мный
@@ -18708,7 +18971,7 @@ words:
       f: скро́мная
       n: скро́мное
       pl: скро́мные
-      comparative: скро́мнее
+      comparative: скромне́е
     declension:
       m_nom: скро́мный
       m_gen: скро́много
@@ -18744,6 +19007,9 @@ words:
       - ru: Мы получи́ли скро́мные результа́ты.
         en_gb: We obtained modest results.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Она́ скромне́е свое́й сестры́.
+        en_gb: She is more modest than her sister.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
   "скрытый=hidden":
     cefr_level: B1
     accented: скры́тый
@@ -18814,6 +19080,9 @@ words:
       - ru: У нас ску́чные сосе́ди.
         en_gb: We have boring neighbours.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та ле́кция скучне́е, чем уро́к.
+        en_gb: This lecture is more boring than the lesson.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: ску́чный
       f: ску́чная
@@ -18863,6 +19132,9 @@ words:
       - ru: Я пью сла́бый чай.
         en_gb: I drink weak tea.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: По́сле боле́зни он слабе́е, чем ра́ньше.
+        en_gb: After the illness he is weaker than before.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
     forms:
       m: сла́бый
       f: сла́бая
@@ -18960,6 +19232,9 @@ words:
       - ru: Де́ти лю́бят сла́дкие я́блоки.
         en_gb: Children love sweet apples.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот сок сла́ще, чем тот.
+        en_gb: This juice is sweeter than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: сла́дкий
       f: сла́дкая
@@ -19100,7 +19375,7 @@ words:
       f: сло́жная
       n: сло́жное
       pl: сло́жные
-      comparative: сло́жнее
+      comparative: сложне́е
     declension:
       m_nom: сло́жный
       m_gen: сло́жного
@@ -19136,6 +19411,9 @@ words:
       - ru: У него́ сло́жные пла́ны.
         en_gb: He has complex plans.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ру́сский язы́к сложне́е англи́йского.
+        en_gb: Russian is more complex than English.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "служебный=official":
     cefr_level: B1
     accented: слу́жебный
@@ -19257,6 +19535,9 @@ words:
       - ru: Мы лю́бим сме́лых геро́ев.
         en_gb: We love brave heroes.
         inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
+      - ru: Его́ реше́ние смеле́е на́шего.
+        en_gb: His decision is braver than ours.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: сме́лый
       f: сме́лая
@@ -19556,6 +19837,9 @@ words:
       - ru: Мне нра́вятся совреме́нные карти́ны.
         en_gb: I like modern paintings.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Но́вое зда́ние совреме́ннее, чем ста́рое.
+        en_gb: The new building is more modern than the old one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: совреме́нный
       f: совреме́нная
@@ -20144,6 +20428,9 @@ words:
       - ru: Мы провели́ споко́йный ве́чер.
         en_gb: We spent a calm evening.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: Здесь у́лица споко́йнее, чем в це́нтре.
+        en_gb: The street here is calmer than in the centre.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: споко́йный
       f: споко́йная
@@ -20536,6 +20823,12 @@ words:
       - ru: Мы вспомина́ем ста́рых друзе́й.
         en_gb: We remember old friends.
         inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
+      - ru: Мой брат ста́рше меня́ на два го́да.
+        en_gb: My brother is two years older than me.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
+      - ru: Он купи́л са́мый ста́рый дом на у́лице.
+        en_gb: He bought the oldest house on the street.
+        inflect: { token: 3, span: 2, degree: superlative, case: acc, gender: m, rule: adj-superlative }
     forms:
       m: ста́рый
       f: ста́рая
@@ -20714,6 +21007,9 @@ words:
       - ru: У него́ стра́нные привы́чки.
         en_gb: He has strange habits.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Его́ поведе́ние ста́ло стра́ннее.
+        en_gb: His behaviour has become stranger.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "страшный=terrible":
     cefr_level: A2
     accented: стра́шный
@@ -20726,7 +21022,7 @@ words:
       f: стра́шная
       n: стра́шное
       pl: стра́шные
-      comparative: стра́шнее
+      comparative: страшне́е
     declension:
       m_nom: стра́шный
       m_gen: стра́шного
@@ -20762,6 +21058,9 @@ words:
       - ru: На у́лице стра́шные моро́зы.
         en_gb: There are terrible frosts outside.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та ска́зка страшне́е, чем пе́рвая.
+        en_gb: This fairy tale is scarier than the first one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "строгий=strict":
     cefr_level: B1
     accented: стро́гий
@@ -20811,6 +21110,9 @@ words:
       - ru: В шко́ле стро́гие пра́вила.
         en_gb: There are strict rules at school.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Оте́ц стро́же ма́тери.
+        en_gb: Father is stricter than mother.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative-stem }
   "стыдный=shameful":
     cefr_level: B2
     accented: сты́дный
@@ -20958,6 +21260,9 @@ words:
       - ru: Они́ жи́ли в суро́вых усло́виях.
         en_gb: They lived in harsh conditions.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Зима́ на се́вере суро́вее.
+        en_gb: Winter in the north is harsher.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "сухой=dry":
     cefr_level: A2
     accented: сухо́й
@@ -20978,6 +21283,9 @@ words:
       - ru: Мы шли по сухи́м ли́стьям.
         en_gb: We walked over the dry leaves.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Здесь во́здух су́ше, чем на берегу́.
+        en_gb: The air here is drier than on the shore.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: сухо́й
       f: суха́я
@@ -21028,6 +21336,12 @@ words:
       - ru: Э́то был счастли́вый день.
         en_gb: It was a happy day.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
+      - ru: Тепе́рь она́ счастли́вее, чем ра́ньше.
+        en_gb: Now she is happier than before.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: Она́ чу́вствовала себя́ са́мой счастли́вой.
+        en_gb: She felt the happiest.
+        inflect: { token: 4, span: 2, degree: superlative, case: ins, gender: f, rule: adj-superlative }
     forms:
       m: счастли́вый
       f: счастли́вая
@@ -21223,6 +21537,9 @@ words:
       - ru: Мы шли по твёрдой земле́.
         en_gb: We walked on hard ground.
         inflect: { token: 4, case: dat, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́тот сыр твёрже, чем тот.
+        en_gb: This cheese is harder than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: твёрдый
       f: твёрдая
@@ -21376,6 +21693,9 @@ words:
       - ru: Мы шли по тёмным у́лицам.
         en_gb: We walked along the dark streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ве́чером в ко́мнате темне́е.
+        en_gb: In the evening the room is darker.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
     forms:
       m: тёмный
       f: тёмная
@@ -21427,6 +21747,12 @@ words:
       - ru: Нам нужны́ тёплые носки́.
         en_gb: We need warm socks.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Сего́дня тепле́е, чем вчера́.
+        en_gb: Today is warmer than yesterday.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
+      - ru: Он живёт в са́мом тёплом го́роде страны́.
+        en_gb: He lives in the warmest city in the country.
+        inflect: { token: 4, span: 2, degree: superlative, case: pre, gender: m, rule: adj-superlative }
     forms:
       m: тёплый
       f: тёплая
@@ -21471,7 +21797,7 @@ words:
       f: те́сная
       n: те́сное
       pl: те́сные
-      comparative: те́снее
+      comparative: тесне́е
     declension:
       m_nom: те́сный
       m_gen: те́сного
@@ -21512,6 +21838,9 @@ words:
       - ru: Они́ шли те́сными у́лочками.
         en_gb: They walked through narrow lanes.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́ти ту́фли тесне́е, чем те.
+        en_gb: These shoes are tighter than those.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "технический=technical":
     cefr_level: B1
     accented: техни́ческий
@@ -21656,6 +21985,9 @@ words:
       - ru: Они́ говори́ли ти́хими голоса́ми.
         en_gb: They spoke in quiet voices.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
+      - ru: В библиоте́ке ти́ше, чем в кафе́.
+        en_gb: It is quieter in the library than in a cafe.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "толстый=thick":
     cefr_level: A2
     accented: то́лстый
@@ -21676,6 +22008,9 @@ words:
       - ru: Зимо́й мы но́сим то́лстые сви́теры.
         en_gb: In winter we wear thick jumpers.
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та кни́га то́лще, чем та.
+        en_gb: This book is thicker than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: то́лстый
       f: то́лстая
@@ -21726,6 +22061,9 @@ words:
       - ru: У неё то́нкая та́лия.
         en_gb: She has a thin waist.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́тот лёд то́ньше, чем ка́жется.
+        en_gb: This ice is thinner than it seems.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: то́нкий
       f: то́нкая
@@ -21869,7 +22207,7 @@ words:
       f: то́чная
       n: то́чное
       pl: то́чные
-      comparative: то́чнее
+      comparative: точне́е
     declension:
       m_nom: то́чный
       m_gen: то́чного
@@ -21905,6 +22243,9 @@ words:
       - ru: Учёный сде́лал то́чные расчёты.
         en_gb: The scientist made exact calculations.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Но́вые часы́ точне́е ста́рых.
+        en_gb: The new clock is more accurate than the old one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "традиционный=traditional":
     cefr_level: B1
     accented: традицио́нный
@@ -22018,6 +22359,12 @@ words:
       - ru: Мы пережи́ли тру́дные времена́.
         en_gb: We went through difficult times.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та рабо́та трудне́е, чем я ду́мал.
+        en_gb: This work is harder than I thought.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: Он не боя́лся са́мого тру́дного вопро́са.
+        en_gb: He was not afraid of the hardest question.
+        inflect: { token: 4, span: 2, degree: superlative, case: gen, gender: m, rule: adj-superlative }
     forms:
       m: тру́дный
       f: тру́дная
@@ -22193,6 +22540,9 @@ words:
       - ru: Они́ поднима́ли тяжёлые я́щики.
         en_gb: They were lifting heavy boxes.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́тот чемода́н тяжеле́е моего́.
+        en_gb: This suitcase is heavier than mine.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "убитый=killed":
     cefr_level: B1
     accented: уби́тый
@@ -22511,6 +22861,9 @@ words:
       - ru: У меня́ удо́бная о́бувь.
         en_gb: I have comfortable shoes.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Э́то кре́сло удо́бнее, чем стул.
+        en_gb: This armchair is more comfortable than the chair.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: удо́бный
       f: удо́бная
@@ -22590,6 +22943,9 @@ words:
       - ru: Они́ жи́ли в ужа́сных усло́виях.
         en_gb: They lived in terrible conditions.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Пого́да ста́ла ещё ужа́снее.
+        en_gb: The weather became even more terrible.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "узкий=narrow":
     cefr_level: B1
     accented: у́зкий
@@ -22608,6 +22964,9 @@ words:
       - ru: Че́рез у́зкое окно́ све́тит со́лнце.
         en_gb: The sun shines through the narrow window.
         inflect: { token: 2, case: acc, number: sg, gender: n, rule: adj-agreement }
+      - ru: Э́та дверь у́же, чем та.
+        en_gb: This door is narrower than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: у́зкий
       f: у́зкая
@@ -22660,6 +23019,9 @@ words:
       - ru: Он дал у́мный сове́т.
         en_gb: He gave clever advice.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: Сестра́ умне́е меня́.
+        en_gb: My sister is cleverer than me.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
     forms:
       m: у́мный
       f: у́мная
@@ -22938,6 +23300,9 @@ words:
       - ru: Здесь мно́го ую́тных кафе́.
         en_gb: There are many cosy cafes here.
         inflect: { token: 3, case: gen, number: pl, gender: pl, rule: adj-agreement }
+      - ru: В ма́ленькой ко́мнате ую́тнее.
+        en_gb: It is cosier in a small room.
+        inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "физический=physical":
     cefr_level: B1
     accented: физи́ческий
@@ -23324,6 +23689,9 @@ words:
       - ru: Он приду́мал хи́трые пла́ны.
         en_gb: He came up with cunning plans.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Лиса́ хитре́е во́лка.
+        en_gb: The fox is more cunning than the wolf.
+        inflect: { token: 2, degree: comparative, rule: adj-comparative }
   "холодный=cold":
     cefr_level: A1
     accented: холо́дный
@@ -23344,6 +23712,9 @@ words:
       - ru: Мы шли по холо́дным у́лицам.
         en_gb: We walked along the cold streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
+      - ru: В январе́ холодне́е, чем в ма́рте.
+        en_gb: In January it is colder than in March.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: холо́дный
       f: холо́дная
@@ -23401,6 +23772,9 @@ words:
       - ru: У нас хоро́шие сосе́ди.
         en_gb: We have good neighbours.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Э́та гости́ница лу́чше, чем та.
+        en_gb: This hotel is better than that one.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: хоро́ший
       f: хоро́шая
@@ -23871,6 +24245,9 @@ words:
       - ru: Зимо́й здесь ча́стые дожди́.
         en_gb: In winter there are frequent rains here.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Дожди́ ста́ли ча́ще.
+        en_gb: The rains have become more frequent.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "человеческий=human":
     cefr_level: B1
     accented: челове́ческий
@@ -23936,6 +24313,9 @@ words:
       - ru: Он лю́бит чёрный ко́фе.
         en_gb: He likes black coffee.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
+      - ru: Её во́лосы черне́е мои́х.
+        en_gb: Her hair is blacker than mine.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: чёрный
       f: чёрная
@@ -23988,6 +24368,9 @@ words:
       - ru: Мы дыша́ли чи́стым во́здухом.
         en_gb: We breathed clean air.
         inflect: { token: 3, case: ins, number: sg, gender: m, rule: adj-agreement }
+      - ru: Здесь во́здух чи́ще, чем в го́роде.
+        en_gb: The air here is cleaner than in the city.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: чи́стый
       f: чи́стая
@@ -24137,6 +24520,9 @@ words:
       - ru: Они́ шли по широ́кому по́лю.
         en_gb: They walked across the wide field.
         inflect: { token: 4, case: dat, number: sg, gender: n, rule: adj-agreement }
+      - ru: Э́та река́ ши́ре, чем на́ша.
+        en_gb: This river is wider than ours.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: широ́кий
       f: широ́кая
@@ -24612,6 +24998,9 @@ words:
       - ru: Она́ лю́бит я́ркие цвета́.
         en_gb: She likes bright colours.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Ле́том со́лнце я́рче.
+        en_gb: In summer the sun is brighter.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
     forms:
       m: я́ркий
       f: я́ркая
@@ -24661,6 +25050,9 @@ words:
       - ru: У нас я́сная цель.
         en_gb: We have a clear goal.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
+      - ru: Тепе́рь пра́вило ясне́е.
+        en_gb: Now the rule is clearer.
+        inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: я́сный
       f: я́сная
