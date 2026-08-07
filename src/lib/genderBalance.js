@@ -1,27 +1,37 @@
-// Gender-balance oracle for first-person phrases (issue #525).
+// Gender-balance oracle for phrases with a singular personal subject
+// (issues #525 first person, #541 second person).
 //
-// Russian marks the speaker's gender on past-tense verbs (я сде́лал vs я
-// сде́лала) and on predicate short adjectives (я рад vs я ра́да). Because the
-// usage corpus was seeded from a mostly-masculine source, first-person examples
-// skew heavily male — "I was at work" is masculine, and the handful of feminine
-// sentences cluster on stereotyped topics. That is a data-integrity problem: the
-// speaker's gender is arbitrary, so the distribution should be even.
+// Russian marks the subject's gender on past-tense verbs (я сде́лал vs я
+// сде́лала, ты уста́л vs ты уста́ла) and on predicate short adjectives (я рад vs
+// я ра́да). Because the usage corpus was seeded from a mostly-masculine source,
+// those examples skew heavily male — "I was at work" is masculine, and the
+// handful of feminine sentences cluster on stereotyped topics. That is a
+// data-integrity problem: the subject's gender is arbitrary, so the
+// distribution should be even. It matters most in the second person, where the
+// subject *is* the learner: «ты» phrases are the one place the corpus tells
+// them what gender they are.
 //
 // This module is the framework-free half of the fix. It:
 //   • recognises the gendered tokens in a phrase (past-tense verbs via the
 //     verbs' own conjugation tables, plus a curated set of predicate forms),
-//   • decides whether a first-person masculine phrase can be *safely* rendered
-//     in the feminine — only when «я» is the subject and the phrase carries
-//     exactly one gendered token, so flipping it can't disagree with anything
-//     else — and produces that feminine rendering from the verb's stored,
-//     correctly-stressed `past_f` form (never by mutating letters, which would
-//     get the mobile-stress class была́/взяла́/начала́ wrong), and
-//   • measures the first-person gender distribution across the corpus.
+//   • decides whether a masculine phrase can be *safely* rendered in the
+//     feminine — only when the subject pronoun («я» or «ты») is present and the
+//     phrase carries exactly one gendered token, sitting in that pronoun's own
+//     clause, so flipping it can't disagree with anything else or move somebody
+//     else's gender — and produces that feminine rendering from the verb's
+//     stored, correctly-stressed `past_f` form (never by mutating letters,
+//     which would get the mobile-stress class была́/взяла́/начала́ wrong), and
+//   • measures the gender distribution across the corpus, per person.
+//
+// Everything is parameterised by the subject pronoun: first and second person
+// behave identically for agreement purposes, so `'я'` and `'ты'` are the same
+// code path with a different pronoun. The `firstPerson*`/`secondPerson*`
+// exports are thin, named wrappers over it.
 //
 // The audit script (scripts/gender-audit.mjs) reports the distribution; the
-// data migration (scripts/rebalance-gender.mjs) uses feminizeFirstPerson to
-// even it out; genderBalance.test.js pins both the behaviour and a regression
-// floor on the corpus.
+// data migration (scripts/rebalance-gender.mjs) uses feminizeSubject to even it
+// out; genderBalance.test.js pins both the behaviour and a regression floor on
+// the corpus.
 
 import { stripStress, foldYo } from './text.js'
 
@@ -38,8 +48,8 @@ function tokenize(ru) {
 }
 
 /**
- * Curated first-person predicate forms whose ending marks the speaker's gender:
- * short adjectives (рад/ра́да, до́лжен/должна́) and a few gendered pronouns
+ * Curated predicate forms whose ending marks the subject's gender: short
+ * adjectives (рад/ра́да, до́лжен/должна́) and a few gendered pronouns
  * (сам/сама́, оди́н/одна́). They are recognised so a phrase that carries one
  * counts as gendered and — crucially — so a phrase carrying a predicate *and* a
  * verb is treated as two gendered tokens and left alone by the switcher (its
@@ -136,19 +146,68 @@ export function genderedTokens(ru, pastIndex) {
   return out
 }
 
+/**
+ * The singular personal subject pronouns this module balances. Both agree the
+ * same way — a past-tense verb after «ты» marks the addressee's gender exactly
+ * as one after «я» marks the speaker's — so the pronoun is a parameter
+ * everywhere rather than a second copy of the logic.
+ */
+export const FIRST_PERSON = 'я'
+export const SECOND_PERSON = 'ты'
+const PRONOUNS = [FIRST_PERSON, SECOND_PERSON]
+
+/** Cache of the "standalone subject pronoun" matchers, keyed by pronoun. */
+const subjectRes = new Map()
+
+/**
+ * A matcher for `pronoun` standing alone as a word: preceded by the start of
+ * the phrase, whitespace or an opening quote/bracket/dash, and followed by
+ * whitespace, punctuation or the end. Keeps «я» out of the middle of по-япо́нски
+ * and «ты» out of the middle of ты́сяча.
+ */
+function subjectRe(pronoun) {
+  let re = subjectRes.get(pronoun)
+  if (!re) {
+    const head = pronoun.charAt(0)
+    const tail = pronoun.slice(1)
+    re = new RegExp(
+      `(?:^|[\\s"«„(–—-])[${head}${head.toUpperCase()}]${tail}(?=[\\s,.!?…:;»")]|$)`,
+      'u',
+    )
+    subjectRes.set(pronoun, re)
+  }
+  return re
+}
+
+/** Whether `pronoun` («я» / «ты») stands alone as a subject token in the phrase. */
+export function hasSubjectPronoun(ru, pronoun = FIRST_PERSON) {
+  return subjectRe(pronoun).test(String(ru ?? ''))
+}
+
 /** Whether «я» is a standalone subject token in the phrase (not part of a word). */
 export function isFirstPersonSingular(ru) {
-  return /(^|[\s"«„(–—-])[яЯ](?=[\s,.!?…:;»")]|$)/u.test(String(ru ?? ''))
+  return hasSubjectPronoun(ru, FIRST_PERSON)
+}
+
+/** Whether «ты» is a standalone subject token in the phrase (not part of a word). */
+export function isSecondPersonSingular(ru) {
+  return hasSubjectPronoun(ru, SECOND_PERSON)
 }
 
 /**
- * The speaker's gender in a first-person phrase, or null when the phrase is not
- * first-person or carries no gendered token. Returns `'mixed'` when both a
- * masculine and a feminine marker appear (rare, e.g. reported speech).
+ * The gender of `pronoun`'s referent in the phrase, or null when the pronoun is
+ * not its subject or the phrase carries no gendered token. Returns `'mixed'`
+ * when both a masculine and a feminine marker appear (rare, e.g. reported
+ * speech).
+ *
+ * Deliberately whole-phrase rather than clause-scoped: this is the *counting*
+ * side, where over-detection only ever makes the measured skew look worse than
+ * it is. The flip side ({@link feminizeSubject}) is the strict one.
+ *
  * @returns {'m'|'f'|'mixed'|null}
  */
-export function firstPersonGender(ru, pastIndex) {
-  if (!isFirstPersonSingular(ru)) return null
+export function subjectGender(ru, pastIndex, pronoun = FIRST_PERSON) {
+  if (!hasSubjectPronoun(ru, pronoun)) return null
   const toks = genderedTokens(ru, pastIndex)
   const hasM = toks.some((t) => t.gender === 'm')
   const hasF = toks.some((t) => t.gender === 'f')
@@ -156,6 +215,16 @@ export function firstPersonGender(ru, pastIndex) {
   if (hasM) return 'm'
   if (hasF) return 'f'
   return null
+}
+
+/** The speaker's gender in a first-person («я …») phrase. @see subjectGender */
+export function firstPersonGender(ru, pastIndex) {
+  return subjectGender(ru, pastIndex, FIRST_PERSON)
+}
+
+/** The addressee's gender in a second-person («ты …») phrase. @see subjectGender */
+export function secondPersonGender(ru, pastIndex) {
+  return subjectGender(ru, pastIndex, SECOND_PERSON)
 }
 
 /** Re-attach `original`'s surrounding punctuation and leading capital to `form`. */
@@ -167,53 +236,132 @@ function reclothe(original, form) {
   return lead + body + tail
 }
 
+// Punctuation that ends a clause when it trails a token, and that opens one
+// when it leads a token. Used to keep a flip inside the clause its subject
+// pronoun stands in: in «Ты зна́ешь, что он сде́лал?» the masculine сде́лал is
+// the *third* person's, and flipping it would be a mistranslation rather than a
+// rebalance. Mirrors the clause split in phraseAmbiguity.js, which annotates the
+// same agreement for the learner.
+const CLAUSE_END = /[,;:.!?…)\]»"'—–]$/u
+const CLAUSE_START = /^[«"'([—–]/u
+
+/** The token index ranges `[start, end)` of each clause of a tokenised phrase. */
+function clauseSpans(tokens) {
+  const spans = []
+  let start = 0
+  for (let i = 0; i < tokens.length; i++) {
+    if (i > start && CLAUSE_START.test(tokens[i])) {
+      spans.push([start, i])
+      start = i
+    }
+    if (CLAUSE_END.test(tokens[i])) {
+      spans.push([start, i + 1])
+      start = i + 1
+    }
+  }
+  if (start < tokens.length) spans.push([start, tokens.length])
+  return spans
+}
+
 /**
- * A feminine rendering of a first-person masculine phrase, or null when it
- * can't be produced *safely*. Safe means: «я» is the subject, and the phrase
- * has exactly one gendered token, and that token is a masculine past-tense verb
- * with a known feminine form. Anything with a second gendered word (я был рад,
- * two clauses), a predicate-only gender, or an already-feminine subject returns
- * null — the switcher never touches a form it can't derive from stored data.
+ * A feminine rendering of a masculine phrase whose subject is `pronoun` («я» or
+ * «ты»), or null when it can't be produced *safely*. Safe means all of:
+ *
+ *  - `pronoun` stands alone as a subject in the phrase;
+ *  - the phrase has exactly one gendered token, and it is a masculine
+ *    past-tense verb with a known feminine form (so nothing else can fall out
+ *    of agreement, and the new form comes from stored data rather than a
+ *    letter rule);
+ *  - that token sits in the same clause as `pronoun`, and the *other* personal
+ *    pronoun («ты» for a «я» flip, and vice versa) is not in that clause — so
+ *    the gender being moved is demonstrably this subject's and no one else's.
+ *
+ * Anything with a second gendered word (я был рад), a predicate-only gender, or
+ * an already-feminine subject returns null.
  *
  * @param {string} ru
  * @param {{ mToF: Map, fem: Set }} pastIndex from {@link buildPastIndex}
+ * @param {string} pronoun the subject pronoun to feminise agreement for
  * @returns {{ ru: string, index: number } | null} the feminised phrase and the
  *   token index that changed (for updating an `inflect` annotation), or null
  */
-export function feminizeFirstPerson(ru, pastIndex) {
-  if (!isFirstPersonSingular(ru)) return null
+export function feminizeSubject(ru, pastIndex, pronoun = FIRST_PERSON) {
+  if (!hasSubjectPronoun(ru, pronoun)) return null
   const toks = genderedTokens(ru, pastIndex)
   if (toks.length !== 1) return null
   const t = toks[0]
   if (t.gender !== 'm' || t.kind !== 'verb' || !t.feminine) return null
+
   const tokens = tokenize(ru)
+  // The verb and its subject must share a clause, and that clause must not also
+  // hold the other person's pronoun (whose agreement we would be rewriting).
+  const others = PRONOUNS.filter((p) => p !== pronoun)
+  const span = clauseSpans(tokens).find(([from, to]) => t.index >= from && t.index < to)
+  if (!span) return null
+  const clause = tokens.slice(span[0], span[1]).join(' ')
+  if (!hasSubjectPronoun(clause, pronoun)) return null
+  if (others.some((p) => hasSubjectPronoun(clause, p))) return null
+
   tokens[t.index] = reclothe(tokens[t.index], t.feminine)
   return { ru: tokens.join(' '), index: t.index }
 }
 
+/** A feminine rendering of a masculine «я …» phrase. @see feminizeSubject */
+export function feminizeFirstPerson(ru, pastIndex) {
+  return feminizeSubject(ru, pastIndex, FIRST_PERSON)
+}
+
+/** A feminine rendering of a masculine «ты …» phrase. @see feminizeSubject */
+export function feminizeSecondPerson(ru, pastIndex) {
+  return feminizeSubject(ru, pastIndex, SECOND_PERSON)
+}
+
 /**
- * First-person gender distribution across a set of word records' usage
- * examples. `switchable` counts the masculine phrases {@link feminizeFirstPerson}
- * can safely flip — the pool the migration draws from.
+ * Gender distribution of `pronoun`'s referent across a set of word records'
+ * usage examples. `switchable` counts the masculine phrases
+ * {@link feminizeSubject} can safely flip — the pool the migration draws from.
+ * `subject` is how many phrases have `pronoun` as a subject at all (gendered or
+ * not).
  * @param {Array} words normalised word records (vocabBuild)
+ * @param {string} pronoun the subject pronoun to measure
  * @returns {{ masculine: number, feminine: number, mixed: number,
- *   firstPerson: number, switchable: number }}
+ *   subject: number, switchable: number }}
  */
-export function firstPersonGenderStats(words) {
+export function subjectGenderStats(words, pronoun = FIRST_PERSON) {
   const pastIndex = buildPastIndex(words)
-  const stat = { masculine: 0, feminine: 0, mixed: 0, firstPerson: 0, switchable: 0 }
+  const stat = { masculine: 0, feminine: 0, mixed: 0, subject: 0, switchable: 0 }
   for (const w of words ?? []) {
     if (w?.learnable === false) continue
     for (const ex of w.usage ?? []) {
       const ru = ex?.ru
-      if (!isFirstPersonSingular(ru)) continue
-      stat.firstPerson++
-      const g = firstPersonGender(ru, pastIndex)
+      if (!hasSubjectPronoun(ru, pronoun)) continue
+      stat.subject++
+      const g = subjectGender(ru, pastIndex, pronoun)
       if (g === 'm') stat.masculine++
       else if (g === 'f') stat.feminine++
       else if (g === 'mixed') stat.mixed++
-      if (feminizeFirstPerson(ru, pastIndex)) stat.switchable++
+      if (feminizeSubject(ru, pastIndex, pronoun)) stat.switchable++
     }
   }
   return stat
+}
+
+/**
+ * First-person gender distribution. `firstPerson` is kept as an alias of
+ * `subject` so existing callers keep reading.
+ * @see subjectGenderStats
+ */
+export function firstPersonGenderStats(words) {
+  const stat = subjectGenderStats(words, FIRST_PERSON)
+  return { ...stat, firstPerson: stat.subject }
+}
+
+/**
+ * Second-person gender distribution — the addressee's, i.e. the learner's.
+ * `secondPerson` mirrors `firstPerson` above.
+ * @see subjectGenderStats
+ */
+export function secondPersonGenderStats(words) {
+  const stat = subjectGenderStats(words, SECOND_PERSON)
+  return { ...stat, secondPerson: stat.subject }
 }

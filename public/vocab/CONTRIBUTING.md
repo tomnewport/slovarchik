@@ -155,20 +155,25 @@ usage:
       - This city is big.
 ```
 
-#### First-person gender — keep it balanced (#525)
+#### Subject gender — keep it balanced (#525, #541)
 
-Russian marks the speaker's gender on the **past-tense verb** (я сде́лал vs
-я сде́лала) and on **predicate short adjectives** (я рад vs я ра́да). The gender
-of «я» in "I was at work" is arbitrary, so across the corpus the two should be
-**even** — don't let first-person examples default to masculine (they used to be
-~99% male). When you add first-person past-tense or predicate sentences, mix the
-genders; a feminine speaker is the correct answer just as often as a masculine
-one, and there's nothing "stereotypically feminine" required to justify it.
+Russian marks the subject's gender on the **past-tense verb** (я сде́лал vs
+я сде́лала, ты уста́л vs ты уста́ла) and on **predicate short adjectives** (я рад
+vs я ра́да). The gender of «я» in "I was at work" is arbitrary, so across the
+corpus the two should be **even** — don't let examples default to masculine
+(first person used to be ~99% male, second person ~95%). When you add
+past-tense or predicate sentences with a «я» or «ты» subject, mix the genders; a
+feminine subject is the correct answer just as often as a masculine one, and
+there's nothing "stereotypically feminine" required to justify it.
+
+This matters most for **«ты»**: the addressee is the learner, so an all-masculine
+second person is the corpus telling every learner what gender they are — and the
+prompt annotations print it ("You (informal, to a man) answered correctly").
 
 - Feminine past verbs come straight from the verb's own `past_f` cell — copy
   that form (with its stress: была́, взяла́, начала́ shift the stress; сде́лала,
   купи́ла don't), never guess it by appending `-а`.
-- If a first-person example carries an `inflect:` block, its `person:` must match
+- If such an example carries an `inflect:` block, its `person:` must match
   the gender you wrote (`past_m` vs `past_f`, or `gender: m`/`f` for a short
   form) — the context drill grades the shown token against that slot.
 - **`npm run audit:gender`** prints the current split and per-file breakdown, and
@@ -180,7 +185,7 @@ one, and there's nothing "stereotypically feminine" required to justify it.
 
 When a drill shows only the English and asks for the Russian, the English often
 under-determines the answer: "Do you want tea?" hides ты vs вы, and — now that
-first-person gender is genuinely mixed — "I was tired" hides уста́л vs уста́ла.
+subject gender is genuinely mixed — "I was tired" hides уста́л vs уста́ла.
 The prompt therefore annotates the ambiguous word ("Do you (informal) want
 tea?"), working it out **automatically** from your `ru` sentence
 ([`src/lib/phraseAmbiguity.js`](../../src/lib/phraseAmbiguity.js)). There's no
@@ -653,9 +658,9 @@ which assert that the **real** files on disk:
 - are **sorted** alphabetically by Russian (ignoring stress);
 - give every noun **all six cases** for each number it declares;
 - produce at least one usage **phrase** overall;
-- keep the **first-person gender split even** — `genderBalance.test.js` fails if
-  either gender drops below 45% of the first-person gendered phrases (see the
-  gender-balance note under `usage` above).
+- keep the **subject gender split even, per person** — `genderBalance.test.js`
+  fails if either gender drops below 45% of the gendered «я …» phrases, or of
+  the gendered «ты …» ones (see the gender-balance note under `usage` above).
 
 Keeping files sorted is mechanical — run `node scripts/sort-vocab.js
 public/vocab/<file>.yml`, which reorders entries by Russian headword while

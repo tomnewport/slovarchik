@@ -4,9 +4,13 @@ import { loadFixtureWords } from '../test/fixtures.js'
 import {
   genderedTokens,
   isFirstPersonSingular,
+  isSecondPersonSingular,
   firstPersonGender,
+  secondPersonGender,
   feminizeFirstPerson,
+  feminizeSecondPerson,
   firstPersonGenderStats,
+  secondPersonGenderStats,
 } from './genderBalance.js'
 
 // A tiny hand-built past index so the unit cases don't depend on the corpus.
@@ -17,8 +21,10 @@ const pastIndex = {
     ['сделал', 'сде́лала'],
     ['купил', 'купи́ла'],
     ['вернулся', 'верну́лась'],
+    ['устал', 'уста́ла'],
+    ['пришел', 'пришла́'],
   ]),
-  fem: new Set(['была', 'взяла', 'сделала', 'купила', 'вернулась']),
+  fem: new Set(['была', 'взяла', 'сделала', 'купила', 'вернулась', 'устала', 'пришла']),
 }
 
 describe('isFirstPersonSingular', () => {
@@ -30,6 +36,18 @@ describe('isFirstPersonSingular', () => {
   it('ignores я inside a larger word and phrases without it', () => {
     expect(isFirstPersonSingular('Он говори́т по-япо́нски.')).toBe(false)
     expect(isFirstPersonSingular('Мы бы́ли до́ма.')).toBe(false)
+  })
+})
+
+describe('isSecondPersonSingular', () => {
+  it('detects a standalone ты subject anywhere in the phrase', () => {
+    expect(isSecondPersonSingular('Ты уста́л?')).toBe(true)
+    expect(isSecondPersonSingular('Заче́м ты сюда́ пришёл?')).toBe(true)
+  })
+  it('ignores ты inside a larger word and the oblique forms', () => {
+    expect(isSecondPersonSingular('У меня́ ты́сяча дел.')).toBe(false)
+    expect(isSecondPersonSingular('Я тебя́ ви́дел.')).toBe(false) // тебя́ is not the subject
+    expect(isSecondPersonSingular('Вы уста́ли?')).toBe(false)
   })
 })
 
@@ -94,21 +112,71 @@ describe('feminizeFirstPerson', () => {
   it('refuses a lone predicate (no verb form to derive)', () => {
     expect(feminizeFirstPerson('Я рад.', pastIndex)).toBeNull()
   })
+  it('refuses when the gendered verb sits in another subject’s clause', () => {
+    // сде́лал is ты's, not the speaker's — flipping it would change the wrong
+    // person's gender (and re-skew the second person).
+    expect(feminizeFirstPerson('Я зна́ю, что ты сде́лал.', pastIndex)).toBeNull()
+  })
 })
 
-describe('corpus first-person gender balance (issue #525)', () => {
-  const stats = firstPersonGenderStats(loadFixtureWords())
+describe('feminizeSecondPerson (issue #541)', () => {
+  it('flips the addressee’s verb to its stored feminine form', () => {
+    expect(feminizeSecondPerson('Ты уста́л?', pastIndex)).toEqual({
+      ru: 'Ты уста́ла?',
+      index: 1,
+    })
+    expect(feminizeSecondPerson('Заче́м ты сюда́ пришёл?', pastIndex)?.ru).toBe(
+      'Заче́м ты сюда́ пришла́?',
+    )
+  })
+  it('keeps the mobile stress from the verb table', () => {
+    expect(feminizeSecondPerson('Чью кни́гу ты взял?', pastIndex)?.ru).toBe('Чью кни́гу ты взяла́?')
+  })
+  it('refuses phrases with a second gendered token', () => {
+    expect(feminizeSecondPerson('Ты был рад.', pastIndex)).toBeNull()
+    expect(feminizeSecondPerson('Ты взял то, что я купи́л.', pastIndex)).toBeNull()
+  })
+  it('refuses when the gendered verb belongs to another subject’s clause', () => {
+    expect(feminizeSecondPerson('Ты зна́ешь, что он сде́лал?', pastIndex)).toBeNull()
+    expect(feminizeSecondPerson('Ты зна́ешь, что я сде́лал?', pastIndex)).toBeNull()
+  })
+  it('refuses non-second-person or already-feminine phrases', () => {
+    expect(feminizeSecondPerson('Я был до́ма.', pastIndex)).toBeNull()
+    expect(feminizeSecondPerson('Вы бы́ли до́ма.', pastIndex)).toBeNull()
+    expect(feminizeSecondPerson('Ты уста́ла?', pastIndex)).toBeNull()
+  })
+})
 
-  it('has a large first-person sample to reason about', () => {
-    expect(stats.firstPerson).toBeGreaterThan(1000)
+describe('secondPersonGender', () => {
+  it('reads the addressee gender off a second-person phrase', () => {
+    expect(secondPersonGender('Ты уста́л?', pastIndex)).toBe('m')
+    expect(secondPersonGender('Ты уста́ла?', pastIndex)).toBe('f')
+    expect(secondPersonGender('Ты чита́ешь кни́гу.', pastIndex)).toBeNull()
+    expect(secondPersonGender('Он был до́ма.', pastIndex)).toBeNull()
+  })
+})
+
+// Regression floor: the corpus was ~99% masculine in the first person before
+// #525 rebalanced it, and ~95% masculine in the second person before #541. This
+// ratchet keeps both there — adding masculine phrases without balancing them (or
+// vice-versa) trips the guard. If a change deliberately shifts the balance,
+// re-run `node scripts/gender-audit.mjs` and move the floor to match the new,
+// still-near-even split.
+describe('corpus gender balance (issues #525, #541)', () => {
+  const words = loadFixtureWords()
+  const first = firstPersonGenderStats(words)
+  const second = secondPersonGenderStats(words)
+
+  it('has a large sample of both persons to reason about', () => {
+    expect(first.firstPerson).toBeGreaterThan(1000)
+    expect(second.secondPerson).toBeGreaterThan(500)
   })
 
-  // Regression floor: the corpus was ~99% masculine before #525 rebalanced it to
-  // an even split. This ratchet keeps it there — adding first-person masculine
-  // phrases without balancing them (or vice-versa) trips the guard. If a change
-  // deliberately shifts the balance, re-run `node scripts/gender-audit.mjs` and
-  // move the floor to match the new, still-near-even split.
-  it('keeps the masculine / feminine split even (neither side below 45%)', () => {
+  it.each([
+    ['first person (я …)', () => first],
+    ['second person (ты …)', () => second],
+  ])('keeps the %s masculine / feminine split even (neither side below 45%%)', (_label, get) => {
+    const stats = get()
     const gendered = stats.masculine + stats.feminine
     expect(stats.feminine / gendered).toBeGreaterThan(0.45)
     expect(stats.masculine / gendered).toBeGreaterThan(0.45)
