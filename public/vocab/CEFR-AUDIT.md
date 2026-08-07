@@ -8,9 +8,16 @@ histogram shape.
 Re-run the reporting tool any time:
 
 ```bash
-node scripts/audit-cefr.js          # distribution + flags
+npm run audit:cefr                  # distribution + flags
 node scripts/audit-cefr.js --list   # also list flagged entries
 ```
+
+> This doc records four passes. The 2026 cohort pass — **[part 1, the A1
+> band](#the-2026-cohort-pass-part-1-the-a1-band)**, **[part 2, the A2
+> band](#the-2026-cohort-pass-part-2-the-a2-band)** and **[part 3,
+> consistency](#the-2026-cohort-pass-part-3-consistency)** — is the current
+> baseline; the sections immediately below are the original audit, kept for the
+> method and the history.
 
 ## What the audit found
 
@@ -107,15 +114,253 @@ The ~113 words still missing from the standard list are non-core: abbreviations
 (`нквд`, `цк`, `др`), proper nouns, slang/loanwords (`вай-фай`, `хобби`), set
 phrases (`доброе утро`), and a tail of specialist/literary items.
 
+## The 2026 cohort pass, part 1: the A1 band
+
+The corpus had grown to 4,180 learnable words (plus ~2,500 gloss-only entries in
+`glossary.yml`, which no drill ever serves), and the drift had come back in a
+new shape — see [#529](https://github.com/tomnewport/slovarchik/issues/529).
+It was no longer individual bad labels: whole **topic packs** had been added in
+one go and stamped with a single level regardless of how hard the words in them
+were. The `character` pack was the clearest case — 14 of its 18 original words
+sat at A1, including `харизматичный`, `педантичный`, `коммуникабельный` and
+`сентиментальный`. `многофункциональный` (19 letters) was A1 too.
+
+This matters more than a wrong pill. `cefr_level` drives batch selection: step 2
+of `src/lib/batches.js` refines the eligible words to the **lowest CEFR level
+present**, so A1 is literally what a learner opening the app for the first time
+is served. A1 had swollen to 550 words and a beginner's opening batches were
+drawing `многофункциональный` ahead of much of the core vocabulary.
+
+### What changed
+
+**212 entries were re-levelled**, all upwards, all out of A1 — 160 nouns, 25
+adjectives, 18 verbs, 9 adverbs (72 → A2, 107 → B1, 33 → B2). The yardstick is
+the same TORFL/ТРКИ lexical minimum used above:
+
+- **A1 (Элементарный)** — the first weeks: `хлеб`, `семья`, `дом`, `автобус`,
+  the numbers, the seasons, the immediate family. What survived the pass reads
+  like a beginner's first hundred words.
+- **A2 (Базовый)** — everyday concrete extensions: rooms and furnishings
+  (`гостиная`, `подушка`), common foods (`капуста`, `йогурт`, `сосиска`),
+  clothes (`блузка`, `кроссовка`), jobs (`бармен`, `банкир`), and the
+  countries/nationalities beyond the core (`Мексика`, `швед`) — which also puts
+  the whole `nationalities` pack on one level for the first time.
+- **B1 (ТРКИ-1)** — topic vocabulary that needs a context to come up in:
+  instruments and genres (`саксофон`, `джаз`, `танго`), hobbies (`боулинг`,
+  `рыбалка`), less common foods (`свёкла`, `петрушка`, `маслина`), abstract
+  nouns (`интуиция`, `гармония`), and the personality adjectives a learner can
+  actually use (`оптимистичный`, `практичный`, `эмоциональный`).
+- **B2 (ТРКИ-2)** — specialist, formal or culturally narrow: `устрица`,
+  `паэлья`, `кислая капуста`, `водоросль`, `бунгало`, `шезлонг`, `инъекция`,
+  `медикамент`, `консерватория`, `стабильность`, and the bookish character
+  adjectives (`харизматичный`, `педантичный`, `сентиментальный`,
+  `коммуникабельный`, `интеллигентный`, `многофункциональный`).
+
+Borderline calls were again left alone. Nothing moved *down*, and no word
+outside A1 was touched.
+
+### Distribution (learnable words only)
+
+| Level | Before | After |
+| ----- | -----: | ----: |
+| A1 | 550 (13.2%) | 338 (8.1%) |
+| A2 | 1048 (25.1%) | 1120 (26.8%) |
+| B1 | 1932 (46.2%) | 2039 (48.8%) |
+| B2 | 630 (15.1%) | 663 (15.9%) |
+| C1 | 20 (0.5%) | 20 (0.5%) |
+| C2 | 0 | 0 |
+| **Total** | **4180** | **4180** |
+
+Gloss-only entries (`learn: false`) are excluded throughout: they are never
+served to a learner, and their keys are surface forms, not headwords. The audit
+tool now reports the learnable totals on their own row for the same reason.
+
+### What the tool learned
+
+The old script gave the corpus a clean bill of health (`Flagged entries: 0`)
+while all of the above was in it: its anchors are entry-shaped, and a cohort
+mislevelled *together* looks exactly like a legitimate cluster of easy topical
+words. `scripts/audit-cefr.js` now runs two further heuristics, both covered by
+`scripts/audit-cefr.test.mjs`:
+
+- **Cohorts** — a collection of ≥10 learnable words with ≥70% at one level.
+  `character` was 78% A1. Some packs are genuinely uniform (`nationalities` is
+  83% A2 and correct), so this is a prompt to look, not a verdict.
+- **Shape** — an A1/A2 headword longer than 13 letters, or ending in a
+  transparent internationalism (`-ичный`, `-альный`, `-ационный`, `-ивный`,
+  `-ация`, `-изм`, `-логия`). Elementary vocabulary is overwhelmingly short and
+  native. Run against the corpus as it stood before this pass, that one rule
+  alone catches 21 of the mislevelled entries.
+
+Post-pass the tool reports one cohort (`nationalities`, reviewed and correct)
+and seven shape flags, all A2 words that are fine where they are (`нормальный`,
+`спортивный`, `центральный`, `информация`, `ситуация`, `останавливаться`,
+`путешествовать`).
+
+## The 2026 cohort pass, part 2: the A2 band
+
+Part 1 left A1 at 338 words and A2 at 1,120, and named A2 as the next band to
+sweep. It turned out **not** to have part 1's defect. The only A2-dominated
+cohort is `nationalities`, reviewed in part 1 and correct; read end to end, the
+band is a coherent Базовый list, which is what the original audit's re-levelling
+left behind. What it had instead was the mirror-image problem, and the previous
+"Still open" list had already named the place it was hiding: *"function words
+(conjunctions, numerals) … were not exhaustively re-judged."*
+
+They had not been judged at all. Sitting at A2 were `к`, `о`, `для`, `до`, `от`,
+`без`, `после`, `через`, `если`, `когда`, `потому что`, `что`, `его`/`её`/`их`,
+`какой`, `конечно`, the tens (`тридцать`…`сто`, `тысяча`) and the ordinals
+`четвёртый`–`десятый`. `по` — one of the most common prepositions in the
+language — was at **B1**.
+
+That is not a cosmetic mislabel either, because glue words have their own
+channel in batch selection: `buildBatchOptions` separates the four glue parts of
+speech and runs `refineToLowest` over them independently, so a learner sees only
+the **48 A1 glue words** — three per batch — before any A2 glue word appears.
+At 20 words a batch that is roughly sixteen batches, some 300 words of
+vocabulary, learned without `к`, `о`, `если` or `когда`: enough nouns to name
+things and not enough grammar to say anything about them.
+
+### What changed
+
+**233 entries were re-levelled**: 190 down to A1, 41 up to B1, and 2 down from
+B1 to A2 (`чтобы`, `свой`). Both directions apply the same TORFL/ТРКИ yardstick
+as part 1 — the standard did not move, only the words that were measured
+against it.
+
+**Down to A1 — the Элементарный core that was stranded at A2:**
+
+- **44 function words**: 17 prepositions (`без`, `для`, `до`, `к`/`ко`, `о`/`об`/
+  `обо`, `около`, `от`, `перед`, `под`, `над`, `после`, `про`, `через`, and `по`
+  from B1), 6 conjunctions (`если`, `когда`, `что`, `потому что`, `поэтому`,
+  `тоже`), 5 pronouns (`его`, `её`, `их`, `какой`, `весь`), 3 interjections
+  (`конечно`, `ну`, `тут`) and 13 numerals (the tens to `сто`, `тысяча`, and the
+  ordinals `четвёртый`–`десятый`, which had `первый`–`третий` already at A1).
+- **146 content words**: 61 nouns (`вопрос`, `ответ`, `врач`, `письмо`,
+  `завтрак`/`обед`/`ужин`, `язык`, `экзамен`, `студент`, `университет`,
+  `ресторан`, `театр`, `музей`, `такси`, the tableware and the everyday food),
+  41 verbs (`видеть`, `купить`/`покупать`, `помочь`/`помогать`, `показать`,
+  `забыть`, `помнить`, `нравиться`, `вставать`/`встать`, `ложиться`/`лечь`,
+  `приходить`/`прийти` and the other elementary aspect pairs), 26 adverbs
+  (`быстро`, `медленно`, `вместе`, `иногда`, `рано`, `поздно`, `налево`,
+  `направо`, `немного`, `тепло`, `холодно`) and 18 adjectives (`красивый`,
+  `вкусный`, `молодой`, `весёлый`, `добрый`, `злой`, `больной`, `здоровый`,
+  `дешёвый`, `горячий`, `трудный`, `лёгкий`).
+
+**Up to B1 — what Базовый does not stretch to:** colloquial diminutives and
+second-order words that presuppose the plain one (`речка`, `столик`, `дорожка`,
+`картинка`, `бумажка`, `лампочка`, `крышка`, `ступенька`, `пачка`, `папка`,
+`карточка`, `городок`, `девчонка`, `мальчишка`, `пёс`, `малыш`), narrower
+nature and city vocabulary (`воробей`, `ворона`, `голубь`, `сосна`, `луг`,
+`пустыня`, `сено`, `лапа`, `ладонь`, `скамейка`, `эскалатор`, `шоссе`), and a
+tail of specific or bookish items (`баня`, `моряк`, `охранник`, `приятель`,
+`фитнес`, `усталость`, `удивление`, `дурак`/`дура`, and the narrative
+`кивать`/`кивнуть`, `больший`, `малый`).
+
+Borderline calls were left alone again, and nothing was moved to make a
+histogram look better: the anchored words in `audit-cefr.js` (`банк`, `война`,
+`документ`, `культура`, …) stayed exactly where the original audit put them.
+
+### Distribution (learnable words only)
+
+| Level | Before part 1 | After part 1 | After part 2 |
+| ----- | ------------: | -----------: | -----------: |
+| A1 | 550 (13.2%) | 338 (8.1%) | 528 (12.6%) |
+| A2 | 1048 (25.1%) | 1120 (26.8%) | 892 (21.3%) |
+| B1 | 1932 (46.2%) | 2039 (48.8%) | 2077 (49.7%) |
+| B2 | 630 (15.1%) | 663 (15.9%) | 663 (15.9%) |
+| C1 | 20 (0.5%) | 20 (0.5%) | 20 (0.5%) |
+| C2 | 0 | 0 | 0 |
+| **Total** | **4180** | **4180** | **4180** |
+
+A1 ends up near where it started numerically and nowhere near it in content:
+`харизматичный` and `паэлья` are out, `если` and `врач` are in. The batch engine
+feels the difference twice over — the opening pool is 528 words of genuine
+beginner vocabulary, and the collections that can anchor a named A1 batch (≥15
+words in one collection) went from 9 to 20, so a beginner is offered real topics
+rather than "Random".
+
+## The 2026 cohort pass, part 3: consistency
+
+Parts 1 and 2 worked a band at a time and left a short list of open items. Part
+3 closes the ones that are *checkable* — where being wrong is a fact about the
+data rather than a judgement about a word — and says plainly which are not.
+
+**The function words are finished.** Part 2 stopped at the ones it was sure of;
+the remaining B1 entries in those files got the same treatment: `кроме`, `при`,
+`против`, `пока`, `чем`, `хотя`, `себя`, `сам`, `чей` and the conditional
+particle `бы` are all Базовый and are now A2. The five function-word files have
+now been read end to end at every level, which had never been done.
+
+**The tens above sixty exist again.** `семьдесят`, `восемьдесят` and `девяносто`
+were gloss-only entries — a hole in the middle of the A1 numeral run part 2
+created. They are now real numerals with full case forms, at A1 with their
+neighbours, and their glossary duplicates are gone. While in the file, the
+hundreds, `миллион`, `оба`/`обе` and `двадцатый` moved B1 → A2, so the numeral
+band reads in one direction.
+
+**Aspect pairs no longer straddle levels.** A verb and its `pair:` partner are
+one lexical item that every course teaches together, so a level split is an
+accident of when each half was added — and there were **50** of them. `уметь`
+was A1 while `суметь` was B1; `смотреть` A1 and `посмотреть` A2; `ждать` A1 and
+`подождать` A2. Each pair is now levelled at the lower of its two halves (49
+entries moved, 20 of them into A1), with two deliberate exceptions: `полюбить`
+"to come to love" really is later than `любить`, and `суметь` is genuinely rarer
+than `уметь` — it moved to A2 so the gap is one band rather than two. The one
+masculine/feminine split (`студент` A1 / `студентка` A2) went the same way.
+
+**The audit tool learned the check**, as a fourth heuristic (`pairFlags`) — and
+this one is not advisory. Unlike a cohort or a long headword, a split pair is a
+defect unless someone writes down why it isn't, so `scripts/audit-cefr.test.mjs`
+asserts it against the real corpus, with the two exceptions listed by name. The
+50 splits cannot creep back one entry at a time.
+
+**Promotion no longer launders glossary levels.** `scaffoldEntry` copied the
+glossary entry's `cefr_level` into the scaffold bare, so an auto-generated guess
+could be pasted into the curriculum and start driving batch selection with
+nobody having looked at it. It now carries the level with a `⚠` marker like
+every other reused field, which also makes `hasUnresolvedMarkers` catch it.
+
+### Distribution (learnable words only)
+
+| Level | Before part 1 | After part 2 | After part 3 |
+| ----- | ------------: | -----------: | -----------: |
+| A1 | 550 (13.2%) | 528 (12.6%) | 551 (13.2%) |
+| A2 | 1048 (25.1%) | 892 (21.3%) | 914 (21.9%) |
+| B1 | 1932 (46.2%) | 2077 (49.7%) | 2040 (48.8%) |
+| B2 | 630 (15.1%) | 663 (15.9%) | 658 (15.7%) |
+| C1 | 20 (0.5%) | 20 (0.5%) | 20 (0.5%) |
+| **Total** | **4180** | **4180** | **4183** |
+
+The three extra words are the tens.
+
 ## Still open
 
+- **The mid-band is a judgement call, and it was left as one.** B1 is 48.8% of
+  the corpus — close to where the original audit left it after pulling it down
+  from 52.7%. Part 3 screened it: 450 of its 2,040 words are absent from the
+  standard frequency list, but the ones in specialist collections (`молоток`,
+  `ножницы`, `дуб`, `флаг`, `адвокат`, `космонавт`) are ordinary B1 vocabulary,
+  not misfiled B2. There is no systemic defect left there to fix — only some
+  2,000 individual A2↔B1 and B1↔B2 calls, which is a different kind of work and
+  should not be done by sweep. The `REFERENCE` anchors in `audit-cefr.js` are
+  the place to record any that get settled.
+- **`поднять` is in the corpus twice** — `поднять=to raise` and
+  `поднять=to lift`, same stress, same aspect, overlapping glosses, and only one
+  of them carries a `pair:`. Their levels are now consistent (both A2), but the
+  duplication is a content bug rather than a levelling one: merging them means
+  removing a key that learner progress may be stored against, so it wants its
+  own change. Six other same-headword pairs (`а́тлас`/`атла́с`, `му́ка`/`мука́`,
+  `о́рган`/`орга́н`, …) are genuine heteronyms and correctly sit at different
+  levels.
 - **No C2, and C1 is still thin.** This is expected for a corpus aimed at
   A1–B2 learners; the few genuinely C2 items aren't in the word lists yet.
 - **~203 standard-list words still missing**, but the remainder is mostly
   non-core: set phrases (`доброе утро`), slang/loanwords (`вай-фай`, `хобби`),
   abbreviations (`нквд`, `цк`), proper nouns, derived forms already present in
   their base, and a tail of specialist or literary nouns/verbs.
-- **Function words** (conjunctions, numerals) and the remaining mid-band
-  A2↔B1 / B1↔B2 nouns were not exhaustively re-judged. The
-  `scripts/audit-cefr.js` anchors are a small high-confidence seed — extend the
-  `REFERENCE` map there to widen automated flagging.
+- **`glossary.yml` levels are unreviewed** and deliberately so — the entries are
+  auto-generated, `learn: false`, and never reach a drill. Nothing downstream
+  trusts them any more, now that the promotion scaffold flags what it carries.
+  If a promotion pipeline ever starts flipping entries to `learn: true` in bulk,
+  they need auditing at that point.

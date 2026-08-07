@@ -21,6 +21,7 @@
     "check:morph": "node scripts/check-morphology.mjs",
     "check:inflect": "node scripts/annotate-inflect.mjs --check",
     "audit:gender": "node scripts/gender-audit.mjs",
+    "audit:cefr": "node scripts/audit-cefr.js",
     "gen:icons": "node scripts/gen-icons.mjs",
     "gen:adjectives": "node scripts/gen-adjective-declension.mjs",
     "promote:glossary": "node scripts/promote-glossary.mjs"
