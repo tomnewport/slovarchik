@@ -242,6 +242,58 @@ describe('demotion, at-risk and recently-learned', () => {
   })
 })
 
+// The per-word memo behind stateOf/at-risk (#531) is only sound if its key
+// changes whenever anything the pure model reads changes. These are the cases
+// where a naive key (a timestamp, or the progress record alone) goes stale.
+describe('state memoisation (#531)', () => {
+  it('re-derives a word when the vocab changes what it is graded on', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    expect(stateOf('w0')).toBe('mastered')
+    // The same record, but the word now has an inflection table: mastery gains
+    // dimensions it has never been drilled on.
+    setVocab(makeWords(1, { hasInflections: true }))
+    expect(stateOf('w0')).toBe('learned')
+  })
+
+  it('re-derives when capped same-timestamp attempts leave the event count unchanged', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0', 1)
+    // Fill the identification window to its cap, so every further attempt
+    // evicts one: the record's event count stops moving, and every event shares
+    // a timestamp.
+    for (let i = 0; i < 10; i++) {
+      await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: true, ts: 1 })
+    }
+    const capped = state.records.w0.events.length
+    expect(stateOf('w0')).toBe('mastered')
+    for (let i = 0; i < 2; i++) {
+      await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false, ts: 1 })
+    }
+    expect(state.records.w0.events.length).toBe(capped)
+    expect(stateOf('w0')).toBe('learning')
+    expect(atRisk.value).not.toContain('w0')
+    expect(lost.value).toContain('w0')
+  })
+
+  it('re-derives after the record is deleted', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    expect(stateOf('w0')).toBe('mastered')
+    await deleteRecord('w0')
+    expect(stateOf('w0')).toBe('unknown')
+  })
+
+  it('cefrStats follows both the vocab and progress', async () => {
+    setVocab(makeWords(2, { cefr: 'A1', hasInflections: false }))
+    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 0 })
+    await learn('w0')
+    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 1 })
+    setVocab(makeWords(3, { cefr: 'A1', hasInflections: false }))
+    expect(cefrStats.value.A1).toEqual({ total: 3, learned: 1 })
+  })
+})
+
 describe('batches', () => {
   it('offers learning options and commits the chosen one', async () => {
     setVocab(makeWords(20, { hasInflections: true }))
