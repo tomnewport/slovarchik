@@ -63,6 +63,10 @@ src/
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, AspectDrill)
     inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
+  composables/          # stateful Vue orchestration shared between views (needs a
+                        #   component lifecycle, so it can't live in lib/):
+    useSpeechLoop.js    #   sequence guards, timer registry, speech watchdogs, wake
+                        #   lock, mic lifecycle — SpeakingView + PracticeView
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
     progress.js         #   the core engine (~1.3k lines) — per-word attempts → states, batches, sessions
@@ -121,6 +125,9 @@ CI (`.github/workflows/ci.yml`) runs `lint`, `test`, `build`, and the Playwright
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
 - **The session/practice flow** → `src/views/SessionView.vue` +
   `src/lib/sessionRunner.js` / `session.js` / `exerciseBuild.js`.
+- **Mic/speech timing in the spoken drills** (watchdogs, sequence guards, wake
+  lock) → `src/composables/useSpeechLoop.js`, shared by SpeakingView and
+  PracticeView — fix it once, both get it.
 - **Routing** → `src/router/index.js`. There's no nav bar; the user navigates
   from `HomeView` (the header in `App.vue` is just the Home logo + Data avatar).
 

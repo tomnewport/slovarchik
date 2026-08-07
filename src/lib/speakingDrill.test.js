@@ -3,8 +3,6 @@ import { describe, it, expect } from 'vitest'
 import {
   MODES,
   findMode,
-  estimateSpeechMs,
-  sequenceDurationMs,
   ruWords,
   needsWarmUp,
   buildWarmUpSequence,
@@ -30,35 +28,6 @@ describe('MODES / findMode', () => {
 
   it('returns null for an unknown mode', () => {
     expect(findMode('nope')).toBe(null)
-  })
-})
-
-describe('estimateSpeechMs', () => {
-  it('clamps to the [2500, 12000] range', () => {
-    expect(estimateSpeechMs('')).toBe(2500)
-    expect(estimateSpeechMs('a')).toBe(2500) // below the floor
-    expect(estimateSpeechMs('x'.repeat(1000))).toBe(12000) // above the ceiling
-  })
-
-  it('scales with length between the bounds', () => {
-    expect(estimateSpeechMs('x'.repeat(50))).toBe(50 * 90 + 1200)
-  })
-
-  it('treats null/undefined as empty', () => {
-    expect(estimateSpeechMs(null)).toBe(2500)
-    expect(estimateSpeechMs(undefined)).toBe(2500)
-  })
-})
-
-describe('sequenceDurationMs', () => {
-  it('sums the estimates of each part', () => {
-    const seq = [{ text: 'a' }, { text: 'b' }]
-    expect(sequenceDurationMs(seq)).toBe(estimateSpeechMs('a') + estimateSpeechMs('b'))
-  })
-
-  it('is zero for an empty or missing sequence', () => {
-    expect(sequenceDurationMs([])).toBe(0)
-    expect(sequenceDurationMs(undefined)).toBe(0)
   })
 })
 

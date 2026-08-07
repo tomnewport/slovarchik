@@ -71,6 +71,32 @@ export function cancelSpeech() {
 }
 
 /**
+ * Rough upper bound on how long an utterance takes to read aloud, so a watchdog
+ * can rescue a drill when speechSynthesis never fires `onend` (a known flaky
+ * case: long utterances, backgrounded tabs, after a `cancel()`).
+ *
+ * Divided by the playback rate: a slow (0.5×) read takes about twice as long,
+ * so the watchdog must wait for it — otherwise the mic opens mid-sentence.
+ * @param {string} text
+ * @param {number} [rate] playback rate the part is spoken at (1 = normal)
+ * @returns {number} milliseconds
+ */
+export function estimateSpeechMs(text, rate = 1) {
+  const base = Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
+  return base / (rate || 1)
+}
+
+/**
+ * Total estimated read time for a speech sequence — the sum of its parts, each
+ * scaled by its own rate.
+ * @param {Array<{ text: string, rate?: number }>} sequence
+ * @returns {number} milliseconds
+ */
+export function sequenceDurationMs(sequence) {
+  return (sequence ?? []).reduce((ms, s) => ms + estimateSpeechMs(s.text, s.rate), 0)
+}
+
+/**
  * Speak several parts back-to-back, each with its own language, then call
  * `onEnd` once the last finishes. Used for cross-language audio feedback like
  * an English "Correct." followed by the Russian phrase. Empty parts are

@@ -74,20 +74,6 @@ export function findMode(id) {
   return MODES.find((m) => m.id === id) ?? null
 }
 
-/**
- * Rough upper bound on how long an utterance takes to read, so a watchdog can
- * rescue the hands-free loop when speechSynthesis never fires `onend` (a known
- * flaky case: long utterances, backgrounded tabs, after a cancel()).
- */
-export function estimateSpeechMs(text) {
-  return Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
-}
-
-/** Total estimated read time for a speech sequence (sum of its parts). */
-export function sequenceDurationMs(sequence) {
-  return (sequence ?? []).reduce((ms, s) => ms + estimateSpeechMs(s.text), 0)
-}
-
 /** The Russian words of a phrase, whitespace-split with blanks dropped. */
 export function ruWords(ru) {
   return String(ru ?? '')
