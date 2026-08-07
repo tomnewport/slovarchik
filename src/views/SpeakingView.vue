@@ -1,15 +1,14 @@
 <script setup>
-import { computed, reactive, ref, onMounted, onUnmounted } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { speak, speakSequence, cancelSpeech, SLOW_RATE } from '../lib/speech.js'
-import { listen, recognitionSupported, recognitionErrorMessage } from '../lib/recognition.js'
+import { speak, estimateSpeechMs, SLOW_RATE } from '../lib/speech.js'
+import { recognitionSupported, recognitionErrorMessage } from '../lib/recognition.js'
 import { makeVisualReplacement } from '../lib/exerciseBuild.js'
+import { useSpeechLoop } from '../composables/useSpeechLoop.js'
 import {
   MODES,
   findMode,
-  estimateSpeechMs,
-  sequenceDurationMs,
   needsWarmUp,
   buildWarmUpSequence,
   gradeGuesses,
@@ -39,75 +38,36 @@ const recError = ref('')
 const result = ref(null) // { correct, passed, similarity }
 const celebrating = ref(false)
 
-let recCtl = null
-// Bumped on every question change / quit so callbacks captured by an earlier
-// question (a late recogniser result, or a `speechSynthesis.cancel()` that
-// retro-fires the old utterance's `onend`) bail instead of acting on the new one.
-let seq = 0
 let visSeq = 0
 const visualExercise = ref(null)
 // Auto re-listens after a silent result, capped so a blocked mic can't spin
 // (the cap and fatal-error set live in speakingDrill.shouldRetryEmpty).
 let emptyRetries = 0
 
-// Screen Wake Lock — keeps the display on during active drills.
-const wakeLock = ref(null)
-async function acquireWakeLock() {
-  if (!('wakeLock' in navigator) || wakeLock.value) return
-  try {
-    const lock = await navigator.wakeLock.request('screen')
-    // If quit() fired while we were awaiting, release immediately rather than
-    // leaving an orphaned lock with no owner to clean it up.
-    if (!mode.value) { lock.release(); return }
-    wakeLock.value = lock
-    wakeLock.value.addEventListener('release', () => { wakeLock.value = null })
-  } catch {
-    // Permission denied or API unavailable — safe to ignore.
-  }
-}
-function releaseWakeLock() {
-  wakeLock.value?.release()
-  wakeLock.value = null
-}
-// The browser silently releases the lock when the tab is hidden; re-acquire on
-// return if a drill is still running.
-function onVisibilityChange() {
-  if (document.visibilityState === 'visible' && mode.value) acquireWakeLock()
-}
-
-// Pending timers (watchdogs + advance delays), all cleared on any transition.
-const timers = new Set()
-function later(fn, ms) {
-  const id = setTimeout(() => {
-    timers.delete(id)
-    fn()
-  }, ms)
-  timers.add(id)
-  return id
-}
-function clearTimers() {
-  for (const id of timers) clearTimeout(id)
-  timers.clear()
-}
+// Speech/mic orchestration shared with PracticeView: the sequence guard (`seq`,
+// bumped on every question change / quit so callbacks captured by an earlier
+// question bail), the timer registry, the speech watchdogs, the wake lock and
+// the recognition lifecycle. See composables/useSpeechLoop.js.
+const {
+  // Not read by this component — bound so the step counter stays visible to the
+  // template scope, Vue devtools and the view's tests.
+  // eslint-disable-next-line no-unused-vars
+  seq,
+  later,
+  clearTimers,
+  onceForStep: onceForQuestion,
+  readThen,
+  listenGuarded,
+  stopRecognition,
+  stopListening,
+  acquireWakeLock,
+  releaseWakeLock,
+  resetLoop,
+} = useSpeechLoop({ isActive: () => Boolean(mode.value) })
 
 const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
 )
-
-// Run `action` exactly once for the *current* question — whichever fires first,
-// the speech `onEnd` callback or the watchdog. Returns the callback to hand to
-// speak()/speakSequence(); a stale call from a previous question is ignored.
-function onceForQuestion(action, watchdogMs) {
-  const mySeq = seq
-  let done = false
-  const run = () => {
-    if (done || mySeq !== seq) return
-    done = true
-    action()
-  }
-  later(run, watchdogMs)
-  return run
-}
 
 function start(modeId) {
   mode.value = modeId
@@ -117,18 +77,8 @@ function start(modeId) {
   nextQuestion()
 }
 
-function stopRecognition() {
-  if (recCtl) {
-    recCtl.abort()
-    recCtl = null
-  }
-}
-
 function nextQuestion() {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   celebrating.value = false
   emptyRetries = 0
   phase.value = 'prompt'
@@ -164,12 +114,13 @@ function presentPrompt() {
 // Warm-up sequence for long phrases: full Russian → English → slow Russian →
 // "Repeat each word:" → each word individually. Begins listening afterwards.
 function presentWithWarmUp() {
-  const sequence = buildWarmUpSequence(current.value)
-  const onEnd = onceForQuestion(() => {
-    if (handsFree.value && phase.value === 'prompt') beginListen()
-  }, sequenceDurationMs(sequence) + 2000)
-  const spoke = speakSequence(sequence, { onEnd })
-  if (!spoke) onEnd()
+  readThen(
+    buildWarmUpSequence(current.value),
+    () => {
+      if (handsFree.value && phase.value === 'prompt') beginListen()
+    },
+    2000,
+  )
 }
 
 function replayPrompt() {
@@ -187,30 +138,28 @@ function replaySlowPrompt() {
   phase.value = 'prompt'
   const onEnd = onceForQuestion(() => {
     if (handsFree.value && phase.value === 'prompt' && wasListening) beginListen()
-  }, estimateSpeechMs(current.value.ru) * 2 + 1500)
+  }, estimateSpeechMs(current.value.ru, SLOW_RATE) + 1500)
   const spoke = speak(current.value.ru, 'ru-RU', SLOW_RATE, { onEnd })
   if (!spoke) onEnd()
 }
 
 function beginListen() {
   if (!canRecognize || phase.value === 'graded') return
-  stopRecognition()
-  const mySeq = seq
   recError.value = ''
   transcript.value = ''
   phase.value = 'listening'
-  recCtl = listen({
+  // Stale results (from a question we've already left) are dropped by the
+  // composable's sequence guard; only the phase check is ours.
+  listenGuarded({
     lang: modeCfg.value.recLang,
     onResult: ({ transcript: heard }) => {
-      if (mySeq === seq) transcript.value = heard
+      transcript.value = heard
     },
     onError: (err) => {
-      if (mySeq === seq) recError.value = err
+      recError.value = err
     },
     onEnd: (finalText, alternatives) => {
-      recCtl = null
-      // Ignore a result that arrives after we've already moved on.
-      if (mySeq !== seq || phase.value !== 'listening') return
+      if (phase.value !== 'listening') return
       if (!finalText) {
         // Empty result (usually a silent 'no-speech'): drop back to the prompt,
         // and hands-free re-open the mic so a quiet moment doesn't end the loop
@@ -232,7 +181,7 @@ function beginListen() {
 
 // User taps "Done" to finish a manual recording early.
 function finishListening() {
-  if (recCtl) recCtl.stop()
+  stopListening()
 }
 
 function grade(finalText, alternatives = []) {
@@ -258,21 +207,16 @@ function reveal({ correct, passed, similarity, diff, heard }) {
   // hear the model answer — the heart of the hands-free loop. A watchdog advances
   // even if speechSynthesis never reports the sequence finishing. The Russian is
   // read slowly when wrong so the learner gets a clear model to echo.
-  const { cue, sequence } = buildFeedbackSequence({ correct, passed }, current.value.ru)
-  const advance = onceForQuestion(() => {
+  const { sequence } = buildFeedbackSequence({ correct, passed }, current.value.ru)
+  readThen(sequence, () => {
     if (handsFree.value && phase.value === 'graded') {
       later(nextQuestion, correct ? CELEBRATE_MS : REVIEW_MS)
     }
-  }, estimateSpeechMs(cue) + estimateSpeechMs(current.value.ru) + 1500)
-  const spoke = speakSequence(sequence, { onEnd: advance })
-  if (!spoke) advance()
+  })
 }
 
 function tryAgain() {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   celebrating.value = false
   emptyRetries = 0
   phase.value = 'prompt'
@@ -290,10 +234,7 @@ function skipToVisual() {
     visSeq++,
   )
   if (!rep) { nextQuestion(); return }
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   celebrating.value = false
   phase.value = 'prompt'
   transcript.value = ''
@@ -310,10 +251,7 @@ function onVisualDone({ correct }) {
 }
 
 function quit() {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   celebrating.value = false
   mode.value = null
   current.value = null
@@ -321,18 +259,6 @@ function quit() {
   visualExercise.value = null
   releaseWakeLock()
 }
-
-onMounted(() => {
-  document.addEventListener('visibilitychange', onVisibilityChange)
-})
-
-onUnmounted(() => {
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
-  releaseWakeLock()
-  document.removeEventListener('visibilitychange', onVisibilityChange)
-})
 </script>
 
 <template>

@@ -8,16 +8,18 @@
 // learner falls silent, the app just keeps listening rather than nagging.
 //
 // All the "what to say / listen for / how to grade" decisions live in the pure
-// engine (lib/handsFree.js); this component only drives speech, the microphone,
-// and the loop's timing — closely mirroring SpeakingView's robustness tricks
-// (sequence guards, watchdogs, wake lock, visibility re-acquire).
-import { computed, reactive, ref, onMounted, onUnmounted } from 'vue'
+// engine (lib/handsFree.js); the stateful speech/mic orchestration it runs on —
+// sequence guards, watchdogs, wake lock, visibility re-acquire — is shared with
+// SpeakingView in composables/useSpeechLoop.js. This component is just the glue
+// between the two, plus the screen.
+import { computed, onMounted, reactive, ref } from 'vue'
 
 import { vocab, phrases, state as vocabState, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
 import { loadSettings, playFeedback } from '../stores/settings.js'
-import { speakSequence, cancelSpeech, speechSupported } from '../lib/speech.js'
-import { recognitionSupported, recognitionErrorMessage, listen } from '../lib/recognition.js'
+import { speechSupported } from '../lib/speech.js'
+import { recognitionSupported, recognitionErrorMessage } from '../lib/recognition.js'
+import { useSpeechLoop } from '../composables/useSpeechLoop.js'
 import {
   nextActivity,
   warmupActivities,
@@ -51,14 +53,24 @@ const recError = ref('')
 const paused = ref(false)
 const score = reactive({ right: 0, total: 0 })
 
-let recCtl = null
-let seq = 0
 let attempts = 0
 let gotCorrect = false
 let silenceRetries = 0
 let lastKey = null
 // New-words activities to run before the random mix — a current-batch warm-up.
 let warmup = []
+
+// Timers, speech watchdogs, the sequence guard, the wake lock and the
+// recognition lifecycle — shared with SpeakingView (composables/useSpeechLoop.js).
+const {
+  isCurrent,
+  later,
+  readThen,
+  listenGuarded,
+  acquireWakeLock,
+  releaseWakeLock,
+  resetLoop,
+} = useSpeechLoop({ isActive: () => started.value })
 
 const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
@@ -80,94 +92,10 @@ const pools = computed(() =>
 
 const hasActivities = computed(() => availableTypes(pools.value).length > 0)
 
-// --- Timers + speech watchdogs (mirrors SpeakingView) -----------------------
-
-const timers = new Set()
-function later(fn, ms) {
-  const id = setTimeout(() => {
-    timers.delete(id)
-    fn()
-  }, ms)
-  timers.add(id)
-  return id
-}
-function clearTimers() {
-  for (const id of timers) clearTimeout(id)
-  timers.clear()
-}
-
-// Rough upper bound on how long a part takes to read aloud. Divide by the
-// playback rate: a slow (0.5×) read takes about twice as long, so the watchdog
-// must wait for it — otherwise the mic opens mid-sentence.
-function estimateSpeechMs(text, rate = 1) {
-  const base = Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
-  return base / (rate || 1)
-}
-
-// Run `action` once for the current step — whichever fires first, the speech
-// `onEnd` or the watchdog. A stale call from an earlier step is ignored.
-function onceForStep(action, watchdogMs) {
-  const mySeq = seq
-  let done = false
-  const run = () => {
-    if (done || mySeq !== seq) return
-    done = true
-    action()
-  }
-  later(run, watchdogMs)
-  return run
-}
-
-// Read a sequence of spoken parts, then call `cb` once they finish.
-function readThen(parts, cb) {
-  const watchdog =
-    (parts ?? []).reduce((s, p) => s + estimateSpeechMs(p.text, p.rate), 0) + 1500
-  const run = onceForStep(cb, watchdog)
-  const spoke = speakSequence(parts, { onEnd: run })
-  if (!spoke) run()
-}
-
-// --- Screen Wake Lock (a locked screen kills the mic) -----------------------
-
-const wakeLock = ref(null)
-async function acquireWakeLock() {
-  if (!('wakeLock' in navigator) || wakeLock.value) return
-  try {
-    const lock = await navigator.wakeLock.request('screen')
-    if (!started.value) {
-      lock.release()
-      return
-    }
-    wakeLock.value = lock
-    wakeLock.value.addEventListener('release', () => {
-      wakeLock.value = null
-    })
-  } catch {
-    // Permission denied or API unavailable — safe to ignore.
-  }
-}
-function releaseWakeLock() {
-  wakeLock.value?.release()
-  wakeLock.value = null
-}
-function onVisibilityChange() {
-  if (document.visibilityState === 'visible' && started.value) acquireWakeLock()
-}
-
 // --- The loop ---------------------------------------------------------------
 
-function stopRecognition() {
-  if (recCtl) {
-    recCtl.abort()
-    recCtl = null
-  }
-}
-
 function welcome() {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   phase.value = 'welcome'
   transcript.value = ''
   recError.value = ''
@@ -193,21 +121,18 @@ function welcome() {
 
 function listenForStart() {
   if (!canRecognize) return
-  stopRecognition()
-  const mySeq = seq
   phase.value = 'welcome'
   recError.value = ''
-  recCtl = listen({
+  listenGuarded({
     lang: 'ru-RU',
     onResult: ({ transcript: heard }) => {
-      if (mySeq === seq) transcript.value = heard
+      transcript.value = heard
     },
     onError: (err) => {
-      if (mySeq === seq) recError.value = err
+      recError.value = err
     },
     onEnd: (finalText) => {
-      recCtl = null
-      if (mySeq !== seq || phase.value !== 'welcome') return
+      if (phase.value !== 'welcome') return
       if (isQuit(finalText)) {
         endSession()
         return
@@ -242,10 +167,7 @@ function beginSession() {
 }
 
 function nextItem() {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   attempts = 0
   gotCorrect = false
   silenceRetries = 0
@@ -269,22 +191,19 @@ function nextItem() {
 
 function beginListen() {
   if (!canRecognize || !activity.value) return
-  stopRecognition()
-  const mySeq = seq
   recError.value = ''
   transcript.value = ''
   phase.value = 'listening'
-  recCtl = listen({
+  listenGuarded({
     lang: activity.value.recLang,
     onResult: ({ transcript: heard }) => {
-      if (mySeq === seq) transcript.value = heard
+      transcript.value = heard
     },
     onError: (err) => {
-      if (mySeq === seq) recError.value = err
+      recError.value = err
     },
-    onEnd: (finalText, alternatives) => {
-      recCtl = null
-      if (mySeq !== seq || phase.value !== 'listening') return
+    onEnd: (finalText, alternatives, mySeq) => {
+      if (phase.value !== 'listening') return
       if (isQuit(finalText)) {
         endSession()
         return
@@ -294,7 +213,7 @@ function beginListen() {
         if (!FATAL_ERRORS.has(recError.value) && silenceRetries < MAX_SILENCE) {
           silenceRetries += 1
           later(() => {
-            if (phase.value === 'listening' && seq === mySeq) beginListen()
+            if (phase.value === 'listening' && isCurrent(mySeq)) beginListen()
           }, 600)
         } else {
           paused.value = true
@@ -373,10 +292,7 @@ async function finishItem(record) {
 }
 
 function endSession() {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
+  resetLoop()
   started.value = false
   activity.value = null
   paused.value = false
@@ -404,19 +320,7 @@ async function setup() {
   if (canSpeak && canRecognize) welcome()
 }
 
-onMounted(() => {
-  document.addEventListener('visibilitychange', onVisibilityChange)
-  setup()
-})
-
-onUnmounted(() => {
-  seq += 1
-  clearTimers()
-  stopRecognition()
-  cancelSpeech()
-  releaseWakeLock()
-  document.removeEventListener('visibilitychange', onVisibilityChange)
-})
+onMounted(setup)
 
 // Big-icon state: 🎧 while the app speaks, 🎤 while listening.
 const micIcon = computed(() => (phase.value === 'listening' ? '🎤' : '🎧'))

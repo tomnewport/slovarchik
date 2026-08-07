@@ -8,7 +8,13 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { typingSequence } from '../../lib/phrases.js'
-import { speak, speechSupported, cancelSpeech, SLOW_RATE } from '../../lib/speech.js'
+import {
+  speak,
+  speechSupported,
+  cancelSpeech,
+  estimateSpeechMs,
+  SLOW_RATE,
+} from '../../lib/speech.js'
 import {
   listen,
   gradeSpoken,
@@ -59,12 +65,6 @@ function clearTimers() {
 const errorMessage = computed(() =>
   recError.value ? recognitionErrorMessage(recError.value) : '',
 )
-
-// Rough upper bound on how long the prompt takes to read aloud, so the watchdog
-// that opens the mic can wait out a long phrase rather than cut in mid-speech.
-function estimateSpeechMs(text) {
-  return Math.min(12000, Math.max(2500, String(text ?? '').length * 90 + 1200))
-}
 
 function speakTarget() {
   if (speechSupported()) speak(props.exercise.ru)
@@ -152,7 +152,9 @@ function speakSlow() {
     if (canRecognize && wasListening) beginListen()
   }
   speak(props.exercise.ru, 'ru-RU', SLOW_RATE, { onEnd: open })
-  later(open, estimateSpeechMs(props.exercise.ru) * 2 + 500)
+  // The slow read takes about twice as long — the watchdog waits it out rather
+  // than cutting in mid-speech.
+  later(open, estimateSpeechMs(props.exercise.ru, SLOW_RATE) + 500)
 }
 
 function tryAgain() {
@@ -167,7 +169,9 @@ function tryAgain() {
     beginListen()
   }
   speak(props.exercise.ru, 'ru-RU', SLOW_RATE, { onEnd: open })
-  later(open, estimateSpeechMs(props.exercise.ru) * 2 + 500)
+  // The slow read takes about twice as long — the watchdog waits it out rather
+  // than cutting in mid-speech.
+  later(open, estimateSpeechMs(props.exercise.ru, SLOW_RATE) + 500)
 }
 
 // Self-assessment fallback (no recognition): the attempt counts.

@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { speak, speechSupported } from './speech.js'
+import { speak, speechSupported, estimateSpeechMs, sequenceDurationMs, SLOW_RATE } from './speech.js'
 
 afterEach(() => {
   delete window.speechSynthesis
@@ -56,5 +56,51 @@ describe('speech', () => {
     window.speechSynthesis = { cancel: vi.fn(), speak: vi.fn() }
     expect(speak('   ')).toBe(false)
     expect(window.speechSynthesis.speak).not.toHaveBeenCalled()
+  })
+})
+
+describe('estimateSpeechMs', () => {
+  it('clamps to the [2500, 12000] range', () => {
+    expect(estimateSpeechMs('')).toBe(2500)
+    expect(estimateSpeechMs('a')).toBe(2500) // below the floor
+    expect(estimateSpeechMs('x'.repeat(1000))).toBe(12000) // above the ceiling
+  })
+
+  it('scales with length between the bounds', () => {
+    expect(estimateSpeechMs('x'.repeat(50))).toBe(50 * 90 + 1200)
+  })
+
+  it('treats null/undefined as empty', () => {
+    expect(estimateSpeechMs(null)).toBe(2500)
+    expect(estimateSpeechMs(undefined)).toBe(2500)
+  })
+
+  it('stretches the estimate for a slower playback rate', () => {
+    // A half-speed read takes about twice as long: a watchdog that ignored the
+    // rate would open the mic while the phone was still talking.
+    expect(estimateSpeechMs('x'.repeat(50), SLOW_RATE)).toBe((50 * 90 + 1200) * 2)
+    expect(estimateSpeechMs('x'.repeat(50), 1)).toBe(50 * 90 + 1200)
+  })
+
+  it('treats a zero or missing rate as normal speed', () => {
+    expect(estimateSpeechMs('x'.repeat(50), 0)).toBe(50 * 90 + 1200)
+    expect(estimateSpeechMs('x'.repeat(50), undefined)).toBe(50 * 90 + 1200)
+  })
+})
+
+describe('sequenceDurationMs', () => {
+  it('sums the estimates of each part', () => {
+    const seq = [{ text: 'a' }, { text: 'b' }]
+    expect(sequenceDurationMs(seq)).toBe(estimateSpeechMs('a') + estimateSpeechMs('b'))
+  })
+
+  it('scales each part by its own rate', () => {
+    const seq = [{ text: 'a', rate: 1 }, { text: 'b', rate: SLOW_RATE }]
+    expect(sequenceDurationMs(seq)).toBe(estimateSpeechMs('a') + estimateSpeechMs('b') * 2)
+  })
+
+  it('is zero for an empty or missing sequence', () => {
+    expect(sequenceDurationMs([])).toBe(0)
+    expect(sequenceDurationMs(undefined)).toBe(0)
   })
 })
