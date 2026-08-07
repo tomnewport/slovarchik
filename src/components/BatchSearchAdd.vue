@@ -6,6 +6,7 @@ import { state as progressState, commitBatch, stateOf } from '@/stores/progress.
 import { COLLECTIONS } from '@/lib/collections.js'
 import { learnableWords } from '@/lib/vocabBuild.js'
 import { isEligible, batchSize, refineToLowest } from '@/lib/batches.js'
+import { toPlain } from '@/lib/plain.js'
 
 const props = defineProps({
   level: { type: String, default: 'learning' },
@@ -88,7 +89,7 @@ let addedTimer = null
 
 async function selectWord(result) {
   if (!batch.value || result.inBatch) return
-  const updated = JSON.parse(JSON.stringify(batch.value))
+  const updated = toPlain(batch.value)
   updated.words.push(result.key)
   updated.size = updated.words.length
   await commitBatch(updated)
@@ -100,7 +101,7 @@ async function selectCollection(result) {
   const eligible = eligibleCollectionWords(result.name)
   const pool = refineToLowest(eligible, batchSize(props.level))
   const toAdd = pool.slice(0, 5).map((w) => w.key)
-  const updated = JSON.parse(JSON.stringify(batch.value))
+  const updated = toPlain(batch.value)
   updated.words.push(...toAdd)
   updated.size = updated.words.length
   await commitBatch(updated)

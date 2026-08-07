@@ -79,7 +79,7 @@ src/
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/spellPrompt  — corpus data-integrity oracles (CI guards on the vocab)
-                        #   vocabBuild/idb/text/collections/reportIssue/seed  — data & utilities
+                        #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
 e2e/                    # Playwright specs
