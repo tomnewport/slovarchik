@@ -258,9 +258,11 @@ function posSkeleton(pos) {
  * finished entry: every `TODO` must be filled, every `⚠`/`✍` addressed, and the
  * lemma verified before it goes anywhere near the curriculum.
  *
- * Only the gloss and CEFR level are carried over from the glossary entry (both
- * safe, both still flagged for review). The lemma defaults to the surface form
- * but is marked for verification unless the caller passes a hand-lemmatised one.
+ * Only the gloss and CEFR level are carried over from the glossary entry, and
+ * both come across flagged for review — the level especially, since glossary
+ * levels are auto-generated and unaudited. The lemma defaults to the surface
+ * form but is marked for verification unless the caller passes a
+ * hand-lemmatised one.
  *
  * @param {object} word    the glossary word record (from buildWords)
  * @param {object} [opts]
@@ -277,7 +279,15 @@ export function scaffoldEntry(word, opts = {}) {
   const lemmaSupplied = Boolean(opts.lemma)
   const lemma = (opts.lemma || word.ru).trim()
   const en = word.en || `${TODO}-en`
-  const cefr = word.cefr || `${TODO}  # A1 | A2 | B1 | B2 | C1 | C2`
+  // Glossary levels are auto-generated and have never been audited — the three
+  // spellings of the same decade sit at B1, B2 and B1 (see CEFR-AUDIT.md), and
+  // `learn: false` means nothing has ever had to be right about them. Carrying
+  // one into the curriculum unmarked would launder a guess into a learner-facing
+  // label and into batch selection, so it comes across flagged like every other
+  // reused field.
+  const cefr = word.cefr
+    ? `${word.cefr}   # ⚠ carried from the glossary (unaudited) — set the real level`
+    : `${TODO}  # A1 | A2 | B1 | B2 | C1 | C2`
   const gloss = word.meaningFull || word.meaning || `${TODO}-gloss`
 
   const header = [

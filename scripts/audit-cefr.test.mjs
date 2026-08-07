@@ -6,6 +6,8 @@ import {
   anchorFlags,
   cohortFlags,
   shapeFlags,
+  pairFlags,
+  loadDocs,
 } from './audit-cefr.js'
 
 /** Build `n` throwaway entries in one collection at the given levels. */
@@ -26,9 +28,11 @@ describe('collectEntries', () => {
       file: 'nouns.yml',
       key: 'го́род=city',
       ru: 'город', // stress-stripped, lower-cased
+      en: 'city',
       level: 'A1',
       collections: ['places'],
       learn: true,
+      pair: null,
     })
   })
 
@@ -137,5 +141,106 @@ describe('shapeFlags', () => {
 
   it('says nothing about B1+ entries, where long and borrowed words belong', () => {
     expect(flagsFor({ 'многофункциона́льный=multifunctional': { cefr_level: 'B2' } })).toEqual([])
+  })
+})
+
+describe('pairFlags', () => {
+  const verbs = (words) => pairFlags(collectEntries({ 'verbs.yml': { words } }))
+
+  it('flags an aspect pair split across levels, reporting the unreachable half', () => {
+    const [flag] = verbs({
+      'уметь=to be able': { cefr_level: 'A1', pair: 'суметь=to manage' },
+      'суметь=to manage': { cefr_level: 'B1', pair: 'уметь=to be able' },
+    })
+    expect(flag.key).toBe('суметь=to manage') // the higher half, the one out of reach
+    expect(flag.gap).toBe(2)
+    expect(flag.why).toContain('уметь=to be able is A1')
+  })
+
+  it('reports a split pair once, not once per direction', () => {
+    expect(
+      verbs({
+        'уметь=to be able': { cefr_level: 'A1', pair: 'суметь=to manage' },
+        'суметь=to manage': { cefr_level: 'B1', pair: 'уметь=to be able' },
+      }),
+    ).toHaveLength(1)
+  })
+
+  it('says nothing when both halves share a level', () => {
+    expect(
+      verbs({
+        'смотреть=to watch': { cefr_level: 'A1', pair: 'посмотреть=to look' },
+        'посмотреть=to look': { cefr_level: 'A1', pair: 'смотреть=to watch' },
+      }),
+    ).toEqual([])
+  })
+
+  it('ignores a pair whose partner is not in the corpus', () => {
+    expect(verbs({ 'уметь=to be able': { cefr_level: 'A1', pair: 'суметь=to manage' } })).toEqual([])
+  })
+
+  it('flags a masculine/feminine noun pair split by level', () => {
+    const [flag] = pairFlags(
+      collectEntries({
+        'nouns.yml': {
+          words: {
+            'студент=student': { cefr_level: 'A1' },
+            'студентка=student (f)': { cefr_level: 'A2' },
+          },
+        },
+      }),
+    )
+    expect(flag.key).toBe('студентка=student (f)')
+    expect(flag.why).toContain('gender partner студент=student is A1')
+  })
+
+  it('does not pair a "(f)" gloss with an unrelated word of the same name', () => {
+    expect(
+      pairFlags(
+        collectEntries({
+          'nouns.yml': {
+            words: {
+              'учительница=teacher (f)': { cefr_level: 'A2' },
+              'преподаватель=lecturer': { cefr_level: 'B1' },
+            },
+          },
+        }),
+      ),
+    ).toEqual([])
+  })
+
+  it('skips gloss-only entries, which are never taught in the first place', () => {
+    expect(
+      verbs({
+        'уметь=to be able': { cefr_level: 'A1', learn: false, pair: 'суметь=to manage' },
+        'суметь=to manage': { cefr_level: 'B1', learn: false, pair: 'уметь=to be able' },
+      }),
+    ).toEqual([])
+  })
+})
+
+// The other heuristics in this file are judgement calls and stay advisory — a
+// cohort or a long headword is a prompt to look, not a defect. A split pair is
+// different: the two halves are one lexical item, so a split is a bug in the
+// metadata unless someone has decided otherwise in writing. Locking it down
+// here stops the 50 splits fixed in #529 from creeping back one entry at a time.
+describe('the corpus itself', () => {
+  // Pairs that are deliberately split, with the reason. Add to this list only
+  // when the two halves really do differ in difficulty, and say why.
+  const ALLOWED_SPLITS = {
+    'полюбить=to come to love': 'inceptive "to come to love" is a later nuance than любить',
+    'суметь=to manage': 'rarer than уметь; brought within one level of it rather than merged',
+  }
+
+  it('keeps both halves of every aspect and gender pair at the same level', () => {
+    const splits = pairFlags(collectEntries(loadDocs()))
+    const unexpected = splits.filter((s) => !ALLOWED_SPLITS[s.key])
+    expect(unexpected.map((s) => `${s.key} (${s.level}) — ${s.why}`)).toEqual([])
+  })
+
+  it('keeps a deliberately split pair within one level', () => {
+    for (const split of pairFlags(collectEntries(loadDocs()))) {
+      expect(split.gap, `${split.key}: ${split.why}`).toBeLessThanOrEqual(1)
+    }
   })
 })

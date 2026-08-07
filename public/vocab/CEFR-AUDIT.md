@@ -12,11 +12,12 @@ npm run audit:cefr                  # distribution + flags
 node scripts/audit-cefr.js --list   # also list flagged entries
 ```
 
-> This doc records three passes. The 2026 cohort pass — **[part 1, the A1
-> band](#the-2026-cohort-pass-part-1-the-a1-band)** and **[part 2, the A2
-> band](#the-2026-cohort-pass-part-2-the-a2-band)** — is the current baseline;
-> the sections immediately below are the original audit, kept for the method and
-> the history.
+> This doc records four passes. The 2026 cohort pass — **[part 1, the A1
+> band](#the-2026-cohort-pass-part-1-the-a1-band)**, **[part 2, the A2
+> band](#the-2026-cohort-pass-part-2-the-a2-band)** and **[part 3,
+> consistency](#the-2026-cohort-pass-part-3-consistency)** — is the current
+> baseline; the sections immediately below are the original audit, kept for the
+> method and the history.
 
 ## What the audit found
 
@@ -279,32 +280,87 @@ beginner vocabulary, and the collections that can anchor a named A1 batch (≥15
 words in one collection) went from 9 to 20, so a beginner is offered real topics
 rather than "Random".
 
+## The 2026 cohort pass, part 3: consistency
+
+Parts 1 and 2 worked a band at a time and left a short list of open items. Part
+3 closes the ones that are *checkable* — where being wrong is a fact about the
+data rather than a judgement about a word — and says plainly which are not.
+
+**The function words are finished.** Part 2 stopped at the ones it was sure of;
+the remaining B1 entries in those files got the same treatment: `кроме`, `при`,
+`против`, `пока`, `чем`, `хотя`, `себя`, `сам`, `чей` and the conditional
+particle `бы` are all Базовый and are now A2. The five function-word files have
+now been read end to end at every level, which had never been done.
+
+**The tens above sixty exist again.** `семьдесят`, `восемьдесят` and `девяносто`
+were gloss-only entries — a hole in the middle of the A1 numeral run part 2
+created. They are now real numerals with full case forms, at A1 with their
+neighbours, and their glossary duplicates are gone. While in the file, the
+hundreds, `миллион`, `оба`/`обе` and `двадцатый` moved B1 → A2, so the numeral
+band reads in one direction.
+
+**Aspect pairs no longer straddle levels.** A verb and its `pair:` partner are
+one lexical item that every course teaches together, so a level split is an
+accident of when each half was added — and there were **50** of them. `уметь`
+was A1 while `суметь` was B1; `смотреть` A1 and `посмотреть` A2; `ждать` A1 and
+`подождать` A2. Each pair is now levelled at the lower of its two halves (49
+entries moved, 20 of them into A1), with two deliberate exceptions: `полюбить`
+"to come to love" really is later than `любить`, and `суметь` is genuinely rarer
+than `уметь` — it moved to A2 so the gap is one band rather than two. The one
+masculine/feminine split (`студент` A1 / `студентка` A2) went the same way.
+
+**The audit tool learned the check**, as a fourth heuristic (`pairFlags`) — and
+this one is not advisory. Unlike a cohort or a long headword, a split pair is a
+defect unless someone writes down why it isn't, so `scripts/audit-cefr.test.mjs`
+asserts it against the real corpus, with the two exceptions listed by name. The
+50 splits cannot creep back one entry at a time.
+
+**Promotion no longer launders glossary levels.** `scaffoldEntry` copied the
+glossary entry's `cefr_level` into the scaffold bare, so an auto-generated guess
+could be pasted into the curriculum and start driving batch selection with
+nobody having looked at it. It now carries the level with a `⚠` marker like
+every other reused field, which also makes `hasUnresolvedMarkers` catch it.
+
+### Distribution (learnable words only)
+
+| Level | Before part 1 | After part 2 | After part 3 |
+| ----- | ------------: | -----------: | -----------: |
+| A1 | 550 (13.2%) | 528 (12.6%) | 551 (13.2%) |
+| A2 | 1048 (25.1%) | 892 (21.3%) | 914 (21.9%) |
+| B1 | 1932 (46.2%) | 2077 (49.7%) | 2040 (48.8%) |
+| B2 | 630 (15.1%) | 663 (15.9%) | 658 (15.7%) |
+| C1 | 20 (0.5%) | 20 (0.5%) | 20 (0.5%) |
+| **Total** | **4180** | **4180** | **4183** |
+
+The three extra words are the tens.
+
 ## Still open
 
+- **The mid-band is a judgement call, and it was left as one.** B1 is 48.8% of
+  the corpus — close to where the original audit left it after pulling it down
+  from 52.7%. Part 3 screened it: 450 of its 2,040 words are absent from the
+  standard frequency list, but the ones in specialist collections (`молоток`,
+  `ножницы`, `дуб`, `флаг`, `адвокат`, `космонавт`) are ordinary B1 vocabulary,
+  not misfiled B2. There is no systemic defect left there to fix — only some
+  2,000 individual A2↔B1 and B1↔B2 calls, which is a different kind of work and
+  should not be done by sweep. The `REFERENCE` anchors in `audit-cefr.js` are
+  the place to record any that get settled.
+- **`поднять` is in the corpus twice** — `поднять=to raise` and
+  `поднять=to lift`, same stress, same aspect, overlapping glosses, and only one
+  of them carries a `pair:`. Their levels are now consistent (both A2), but the
+  duplication is a content bug rather than a levelling one: merging them means
+  removing a key that learner progress may be stored against, so it wants its
+  own change. Six other same-headword pairs (`а́тлас`/`атла́с`, `му́ка`/`мука́`,
+  `о́рган`/`орга́н`, …) are genuine heteronyms and correctly sit at different
+  levels.
 - **No C2, and C1 is still thin.** This is expected for a corpus aimed at
   A1–B2 learners; the few genuinely C2 items aren't in the word lists yet.
 - **~203 standard-list words still missing**, but the remainder is mostly
   non-core: set phrases (`доброе утро`), slang/loanwords (`вай-фай`, `хобби`),
   abbreviations (`нквд`, `цк`), proper nouns, derived forms already present in
   their base, and a tail of specialist or literary nouns/verbs.
-- **The mid-band has still not been re-judged.** Both 2026 passes worked the
-  edges — out of A1, then into and out of A2. The A2↔B1 and B1↔B2 boundaries
-  are where the remaining judgement calls live, and B1 is half the corpus again
-  (49.7%), which is roughly where the original audit found it before it pulled
-  B1 down from 52.7%. The `scripts/audit-cefr.js` anchors are a small
-  high-confidence seed — extend the `REFERENCE` map there to widen automated
-  flagging.
-- **`по`, `свой` and `чтобы` were not the only function words above their
-  level.** Part 2 fixed the ones it was confident about while it was in the
-  file; the B1 preposition/conjunction lists (`кроме`, `против`, `пока`, `чем`)
-  were left alone and are worth a look by someone with a lexical minimum open.
-- **The tens above sixty are missing from the curriculum.** `семьдесят`,
-  `восемьдесят` and `девяносто` exist only as gloss-only entries in
-  `glossary.yml` (at B1, B2 and B1 respectively), so a learner who now gets
-  `тридцать`–`сто` at A1 cannot be taught the numbers in between. This is a
-  coverage gap, not a levelling one — see `scripts/promote-glossary.mjs`.
 - **`glossary.yml` levels are unreviewed** and deliberately so — the entries are
-  auto-generated, `learn: false`, and never reach a drill. If a
-  glossary→curriculum promotion ever starts flipping entries to `learn: true`,
-  their levels need auditing at that point. The `восемьдесят`-at-B2 above is a
-  fair sample of how much they mean today.
+  auto-generated, `learn: false`, and never reach a drill. Nothing downstream
+  trusts them any more, now that the promotion scaffold flags what it carries.
+  If a promotion pipeline ever starts flipping entries to `learn: true` in bulk,
+  they need auditing at that point.

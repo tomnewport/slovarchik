@@ -152,6 +152,9 @@ describe('scaffoldEntry', () => {
   it('carries the gloss and CEFR but leaves inflection cells as TODO', () => {
     const stub = scaffoldEntry(gloss('мяч=ball'), { pos: 'noun' })
     expect(stub).toContain('cefr_level: A1')
+    // Carried, but never silently: glossary levels are auto-generated and
+    // unaudited, and this one feeds batch selection once it is promoted.
+    expect(stub).toMatch(/cefr_level: A1\s+# ⚠ carried from the glossary/)
     expect(stub).toContain('standard: ball')
     // The declension grid is scaffolded but never guessed.
     expect(stub).toContain('sg_nom: TODO')

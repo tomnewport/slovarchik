@@ -29,6 +29,12 @@
  *     transparent internationalism (`-ичный`/`-альный`/`-ационный`/`-ация`…).
  *     Elementary vocabulary is overwhelmingly short and native, so these are
  *     the tell-tale of a pack stamped on the way in.
+ *  4. **Pairs.** Two entries that are one lexical item — a verb and its `pair:`
+ *     aspect partner, a masculine noun and its `… (f)` counterpart — sitting at
+ *     different levels. A course teaches an aspect pair together, so a split is
+ *     usually an accident of when each half was added rather than a judgement
+ *     (`уметь` was A1 while `суметь` was B1). A few splits are deliberate:
+ *     `полюбить` "to come to love" really is later than `любить`.
  *
  * Gloss-only entries (`learn: false`, i.e. all of glossary.yml) are counted in
  * the distribution but excluded from the cohort and shape checks: they are
@@ -100,9 +106,11 @@ export function collectEntries(docs) {
         file,
         key,
         ru: ru(key),
+        en: key.split('=').slice(1).join('=').trim(),
         level: entry?.cefr_level ?? null,
         collections: Array.isArray(entry?.collections) ? entry.collections : [],
         learn: entry?.learn !== false,
+        pair: entry?.pair ?? null,
       });
     }
   }
@@ -178,7 +186,55 @@ export function shapeFlags(entries, { maxLength = MAX_ELEMENTARY_LENGTH } = {}) 
   return out;
 }
 
-function loadDocs(dir) {
+/**
+ * Two halves of one lexical item stored at different levels: a verb and its
+ * `pair:` aspect partner, or a masculine noun and the `… (f)` entry that
+ * glosses its feminine counterpart. Returns one row per split pair,
+ * widest gap first — `{ file, key, level, partner, partnerLevel, gap, why }`.
+ */
+export function pairFlags(entries) {
+  const byKey = new Map(entries.filter((e) => e.learn).map((e) => [`${e.file}|${e.key}`, e]));
+  const byFileEn = new Map();
+  for (const e of byKey.values()) {
+    const k = `${e.file}|${e.en}`;
+    if (!byFileEn.has(k)) byFileEn.set(k, []);
+    byFileEn.get(k).push(e);
+  }
+
+  const out = [];
+  const seen = new Set();
+  const add = (a, b, kind) => {
+    if (!LEVELS.includes(a.level) || !LEVELS.includes(b.level) || a.level === b.level) return;
+    const sig = [`${a.file}|${a.key}`, `${b.file}|${b.key}`].sort().join(' || ');
+    if (seen.has(sig)) return;
+    seen.add(sig);
+    // Report the higher-levelled half: that is the one a learner cannot reach.
+    const [lo, hi] = rank(a.level) < rank(b.level) ? [a, b] : [b, a];
+    out.push({
+      ...hi,
+      partner: lo.key,
+      partnerLevel: lo.level,
+      gap: rank(hi.level) - rank(lo.level),
+      why: `${kind} partner ${lo.key} is ${lo.level}`,
+    });
+  };
+
+  for (const e of byKey.values()) {
+    if (e.pair) {
+      const partner = byKey.get(`${e.file}|${e.pair}`);
+      if (partner) add(e, partner, 'aspect');
+    }
+    const feminine = e.en.match(/^(.*) \(f\)$/);
+    if (feminine) for (const base of byFileEn.get(`${e.file}|${feminine[1]}`) ?? []) add(e, base, 'gender');
+  }
+  return out.sort((a, b) => b.gap - a.gap || a.key.localeCompare(b.key));
+}
+
+/** The vocab directory this script reports on. */
+export const VOCAB_DIR = vocabDir;
+
+/** Parse every `*.yml` in `dir` into `{ filename: document }`. */
+export function loadDocs(dir = vocabDir) {
   const docs = {};
   for (const file of readdirSync(dir).filter((f) => f.endsWith('.yml'))) {
     docs[file] = yamlLoad(readFileSync(join(dir, file), 'utf8'));
@@ -235,7 +291,12 @@ function main() {
     console.log(`  ${c.collection.padEnd(28)} ${String(Math.round(c.share * 100)).padStart(3)}% ${c.level}  n=${String(c.size).padStart(4)}   ${spread}`);
   }
 
-  const flagged = [...invalidLevelFlags(entries), ...anchorFlags(entries), ...shapeFlags(entries)];
+  const flagged = [
+    ...invalidLevelFlags(entries),
+    ...anchorFlags(entries),
+    ...shapeFlags(entries),
+    ...pairFlags(entries),
+  ];
   console.log(`\nFlagged entries: ${flagged.length}`);
   if (flagged.length && process.argv.includes('--list')) {
     for (const f of flagged) console.log(`  [${f.file}] ${f.key}  has ${f.level}, ${f.why}`);

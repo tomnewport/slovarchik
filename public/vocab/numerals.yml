@@ -81,6 +81,27 @@ words:
       acc: во́семь
       ins: восемью́
       pre: восьми́
+  "восемьдесят=eighty":
+    cefr_level: A1
+    type: cardinal
+    value: 80
+    accented: во́семьдесят
+    en_gb:
+      standard: eighty (both halves of the word decline)
+    usage:
+      - ru: Де́ду испо́лнилось во́семьдесят лет.
+        en_gb: Grandfather turned eighty.
+      - ru: До го́рода во́семьдесят киломе́тров.
+        en_gb: It is eighty kilometres to the city.
+      - ru: К восьми́десяти года́м он написа́л де́сять книг.
+        en_gb: By the age of eighty he had written ten books.
+    forms:
+      nom: во́семьдесят
+      gen: восьми́десяти
+      dat: восьми́десяти
+      acc: во́семьдесят
+      ins: восемью́десятью
+      pre: восьми́десяти
   "восьмой=eighth":
     cefr_level: A1
     type: ordinal
@@ -143,7 +164,7 @@ words:
       ins: двумя́
       pre: двух
   "двадцатый=twentieth":
-    cefr_level: B1
+    cefr_level: A2
     type: ordinal
     value: 20
     accented: двадца́тый
@@ -302,7 +323,7 @@ words:
       ins: двена́дцатью
       pre: двена́дцати
   "двести=two hundred":
-    cefr_level: B1
+    cefr_level: A2
     type: cardinal
     value: 200
     accented: две́сти
@@ -336,6 +357,27 @@ words:
         en_gb: There were two of us.
       - ru: В ко́мнате остаётся дво́е друзе́й.
         en_gb: Two friends remain in the room.
+  "девяносто=ninety":
+    cefr_level: A1
+    type: cardinal
+    value: 90
+    accented: девяно́сто
+    en_gb:
+      standard: ninety
+    usage:
+      - ru: В кни́ге девяно́сто страни́ц.
+        en_gb: There are ninety pages in the book.
+      - ru: Он купи́л биле́т за девяно́сто рубле́й.
+        en_gb: He bought a ticket for ninety roubles.
+      - ru: Мы говори́ли о девяно́ста гостя́х.
+        en_gb: We talked about ninety guests.
+    forms:
+      nom: девяно́сто
+      gen: девяно́ста
+      dat: девяно́ста
+      acc: девяно́сто
+      ins: девяно́ста
+      pre: девяно́ста
   "девятнадцать=nineteen":
     cefr_level: A1
     type: cardinal
@@ -468,7 +510,7 @@ words:
       - ru: У нас нет и дю́жины я́блок.
         en_gb: We do not even have a dozen apples.
   "миллион=million":
-    cefr_level: B1
+    cefr_level: A2
     type: cardinal
     value: 1000000
     accented: миллио́н
@@ -512,7 +554,7 @@ words:
       ins: нолём
       pre: ноле́
   "оба=both":
-    cefr_level: B1
+    cefr_level: A2
     type: collective
     value: 2
     accented: о́ба
@@ -526,7 +568,7 @@ words:
       - ru: Я зна́ю обо́их ма́льчиков.
         en_gb: I know both boys.
   "обе=both":
-    cefr_level: B1
+    cefr_level: A2
     type: collective
     value: 2
     accented: о́бе
@@ -801,6 +843,27 @@ words:
       acc: семь
       ins: семью́
       pre: семи́
+  "семьдесят=seventy":
+    cefr_level: A1
+    type: cardinal
+    value: 70
+    accented: се́мьдесят
+    en_gb:
+      standard: seventy (both halves of the word decline)
+    usage:
+      - ru: Мое́й ба́бушке се́мьдесят лет.
+        en_gb: My grandmother is seventy years old.
+      - ru: В за́ле се́мьдесят мест.
+        en_gb: There are seventy seats in the hall.
+      - ru: Мы говори́ли о семи́десяти уча́стниках.
+        en_gb: We talked about seventy participants.
+    forms:
+      nom: се́мьдесят
+      gen: семи́десяти
+      dat: семи́десяти
+      acc: се́мьдесят
+      ins: семью́десятью
+      pre: семи́десяти
   "сорок=forty":
     cefr_level: A1
     type: cardinal
@@ -959,7 +1022,7 @@ words:
       - ru: Мы говори́ли о трина́дцати ученика́х.
         en_gb: We talked about thirteen pupils.
   "триста=three hundred":
-    cefr_level: B1
+    cefr_level: A2
     type: cardinal
     value: 300
     accented: три́ста
