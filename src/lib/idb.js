@@ -2,6 +2,12 @@
 //   'vocab-files' (keyed by filename)  — cached parsed vocab doc: { file, pos, updated, hash, doc }
 //   'meta'        (keyed by name)       — small app settings: { key, value }
 //   'progress'    (keyed by word)       — per-word learning record (see stores/progress.js)
+//
+// Every write runs its record through `toPlain` first (#534), so callers can
+// hand over reactive store state directly: unwrapping Vue's proxies is this
+// boundary's job, not each caller's.
+
+import { toPlain } from './plain.js'
 
 const DB_NAME = 'slovarchik'
 const FILES_STORE = 'vocab-files'
@@ -72,9 +78,10 @@ export function getAllFiles() {
 
 /** Insert or replace a cached file record. */
 export function putFile(record) {
+  const plain = toPlain(record)
   return tx(FILES_STORE, 'readwrite', (store) => {
-    store.put(record)
-    return { value: record }
+    store.put(plain)
+    return { value: plain }
   })
 }
 
@@ -101,9 +108,10 @@ export function getAllProgress() {
 
 /** Insert or replace a per-word progress record. */
 export function putProgress(record) {
+  const plain = toPlain(record)
   return tx(PROGRESS_STORE, 'readwrite', (store) => {
-    store.put(record)
-    return { value: record }
+    store.put(plain)
+    return { value: plain }
   })
 }
 
@@ -136,9 +144,10 @@ export function getMeta(key) {
 
 /** Insert or replace a single app setting. */
 export function setMeta(key, value) {
+  const plain = toPlain(value)
   return tx(META_STORE, 'readwrite', (store) => {
-    store.put({ key, value })
-    return { value }
+    store.put({ key, value: plain })
+    return { value: plain }
   })
 }
 
@@ -149,9 +158,10 @@ export function getAllReports() {
 
 /** Insert or replace a queued issue report. */
 export function putReport(record) {
+  const plain = toPlain(record)
   return tx(REPORTS_STORE, 'readwrite', (store) => {
-    store.put(record)
-    return { value: record }
+    store.put(plain)
+    return { value: plain }
   })
 }
 

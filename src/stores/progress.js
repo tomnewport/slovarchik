@@ -12,6 +12,7 @@
 import { computed, reactive } from 'vue'
 
 import * as idb from '../lib/idb.js'
+import { toPlain } from '../lib/plain.js'
 import { state as vocabState } from './vocab.js'
 import {
   STATES,
@@ -473,10 +474,6 @@ function batchSignature() {
   return `${sig(state.learning)}|${sig(state.mastery)}`
 }
 
-function plainActivity() {
-  return JSON.parse(JSON.stringify(state.activity))
-}
-
 /** Fire-and-forget meta write — swallow errors so it never becomes unhandled. */
 function saveMeta(key, value) {
   idb.setMeta(key, value).catch(() => {})
@@ -504,7 +501,7 @@ function logActivity(ts, correct, times) {
   if (correct) rec.correct += times
   rec.hue = state.streakHue
   state.activity[day] = rec
-  saveMeta('streak:activity', plainActivity())
+  saveMeta('streak:activity', state.activity)
 }
 
 /** Current streak length in days (today, or a yesterday-grace day, backwards). */
@@ -534,7 +531,12 @@ export async function acknowledgeAchievements() {
   await idb.setMeta('seenAchievements', ids)
 }
 
-function plain(rec) {
+/**
+ * The persisted shape of a record. Nested fields may still be reactive proxies;
+ * unwrapping them is the job of whoever serialises the result (`idb.putProgress`
+ * on the way to storage, `toPlain` on the way into an export).
+ */
+function persistedShape(rec) {
   return {
     word: rec.word,
     events: rec.events.map((e) => ({ ...e })),
@@ -544,15 +546,13 @@ function plain(rec) {
     peak: rec.peak ?? 0,
     confirmedAt: rec.confirmedAt ?? null,
     confirmFailedAt: rec.confirmFailedAt ?? null,
-    // JSON round-trip strips Vue proxies from the nested maps so IndexedDB's
-    // structured clone can serialise them.
-    schedule: JSON.parse(JSON.stringify(rec.schedule ?? {})),
-    agg: JSON.parse(JSON.stringify(rec.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} })),
+    schedule: rec.schedule ?? {},
+    agg: rec.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
   }
 }
 
 function persist(rec) {
-  return idb.putProgress(plain(rec))
+  return idb.putProgress(persistedShape(rec))
 }
 
 /**
@@ -626,11 +626,9 @@ export async function ensureMasteryBatch(rng = Math.random) {
 /** Commit a chosen batch as the current batch for its level; persist it. */
 export async function commitBatch(option) {
   if (!option) return
-  // Store a plain, fully-unwrapped clone: the option may arrive as a Vue
-  // reactive proxy (incl. nested arrays), which IndexedDB's structured clone
-  // cannot serialise. A JSON round-trip drops the proxies and stays correct if
-  // the option shape ever gains a field.
-  const plainOption = JSON.parse(JSON.stringify(option))
+  // Detach before adopting: the option may arrive as a reactive proxy owned by
+  // whoever built it, and the current batch must not alias their state.
+  const plainOption = toPlain(option)
   state[plainOption.level] = plainOption
   await idb.setMeta(BATCH_META_KEY(plainOption.level), plainOption)
 }
@@ -703,7 +701,7 @@ export async function removeFromBatch(level, key) {
     await advanceBatch(level)
     return
   }
-  const updated = JSON.parse(JSON.stringify(batch))
+  const updated = toPlain(batch)
   updated.words = words
   updated.size = words.length
   await commitBatch(updated)
@@ -895,7 +893,7 @@ export async function loadProgress() {
     }
   }
   state.activity = activity
-  if (backfilled) await idb.setMeta('streak:activity', plainActivity())
+  if (backfilled) await idb.setMeta('streak:activity', state.activity)
 
   state.loaded = true
   return state
@@ -986,15 +984,15 @@ export function exportData() {
     version: EXPORT_VERSION,
     exportedAt: Date.now(),
     firstUseAt: state.firstUseAt,
-    records: Object.values(state.records).map(plain),
+    records: Object.values(state.records).map((rec) => persistedShape(rec)),
     batches: { learning: state.learning, mastery: state.mastery },
     seenAchievements: [...state.seenAchievements],
     activity: state.activity,
     streakHue: state.streakHue,
     batchSig: state.batchSig,
   }
-  // Round-trip to strip any Vue reactive proxies (e.g. on the batches).
-  return JSON.parse(JSON.stringify(snapshot))
+  // Detach from reactive state (e.g. the batches) before handing it out.
+  return toPlain(snapshot)
 }
 
 /** Validate a parsed import payload. Returns `{ ok, error }`. */
@@ -1063,10 +1061,10 @@ export async function importData(data) {
     data.activity && typeof data.activity === 'object'
       ? data.activity
       : buildActivityFromEvents(map)
-  state.activity = JSON.parse(JSON.stringify(importedActivity))
+  state.activity = toPlain(importedActivity)
   state.streakHue = typeof data.streakHue === 'number' ? data.streakHue : randomHue()
   state.batchSig = typeof data.batchSig === 'string' ? data.batchSig : batchSignature()
-  await idb.setMeta('streak:activity', plainActivity())
+  await idb.setMeta('streak:activity', state.activity)
   await idb.setMeta('streak:hue', state.streakHue)
   await idb.setMeta('streak:batchSig', state.batchSig)
   // Silently acknowledge any achievements already earned in the imported data so
