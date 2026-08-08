@@ -637,3 +637,105 @@ describe('the motion contrast step and drill', () => {
     expect(ex.contrastRule.id).toBe('verb-motion-pair')
   })
 })
+
+describe('non-finite forms (participles and gerunds)', () => {
+  // A transitive perfective storing the whole set, and an imperfective storing
+  // only the two forms it can build (#564).
+  const prochitat = {
+    key: 'прочитать=to read',
+    pos: 'verb',
+    headword: 'прочита́ть',
+    meaning: 'to read',
+    aspect: 'pf',
+    participles: {
+      act_past: 'прочита́вший',
+      pass_past: 'прочи́танный',
+      pass_short: { m: 'прочи́тан', f: 'прочи́тана', n: 'прочи́тано', pl: 'прочи́таны' },
+    },
+    gerund: 'прочита́в',
+    extra: {},
+  }
+  const plakat = {
+    key: 'плакать=to cry',
+    pos: 'verb',
+    headword: 'пла́кать',
+    meaning: 'to cry',
+    aspect: 'impf',
+    participles: { act_pres: 'пла́чущий' },
+    gerund: 'пла́ча',
+    extra: {},
+  }
+
+  it('asks which form first, then nothing else for the invariable gerund', () => {
+    const steps = buildSelectSteps({ form: 'gerund', token: 4 }, prochitat)
+    expect(steps.map((s) => s.kind)).toEqual(['form'])
+    expect(steps[0].prompt).toBe('Which form of the verb does the sentence need?')
+    expect(steps[0].options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ id: 'gerund' }),
+    ])
+  })
+
+  it('offers only the forms the verb actually stores', () => {
+    // пла́кать is imperfective, so no past passive can ever be right for it.
+    const [step] = buildSelectSteps({ form: 'act_pres', token: 2 }, plakat)
+    expect(step.options.map((o) => o.id)).toEqual(['act_pres', 'gerund'])
+    const [pf] = buildSelectSteps({ form: 'gerund', token: 4 }, prochitat)
+    expect(pf.options.map((o) => o.id)).toEqual(['act_past', 'pass_past', 'pass_short', 'gerund'])
+  })
+
+  it('still offers the annotated form when the verb stores nothing for it', () => {
+    const [step] = buildSelectSteps({ form: 'pass_pres', token: 2 }, plakat)
+    expect(step.options.map((o) => o.id)).toContain('pass_pres')
+  })
+
+  it('follows the short passive with its gender / number agreement', () => {
+    const steps = buildSelectSteps({ form: 'pass_short', gender: 'f', token: 3 }, prochitat)
+    expect(steps.map((s) => s.kind)).toEqual(['form', 'gender'])
+    expect(steps[1].options.map((o) => o.id)).toEqual(['m', 'n', 'f', 'pl'])
+    expect(steps[1].options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ id: 'f' }),
+    ])
+  })
+
+  it('adds the case step only for a long participle in an oblique case', () => {
+    const nom = buildSelectSteps({ form: 'act_pres', gender: 'm', token: 2 }, plakat)
+    expect(nom.map((s) => s.kind)).toEqual(['form', 'gender'])
+    const oblique = buildSelectSteps(
+      { form: 'act_pres', case: 'acc', gender: 'm', animate: true, token: 3 },
+      plakat,
+    )
+    expect(oblique.map((s) => s.kind)).toEqual(['form', 'case', 'gender'])
+  })
+
+  it('labels the slot by the form, with any agreement after it', () => {
+    const label = (target, word) =>
+      buildFromPhrase(
+        { id: 'x', ru: 'Она́ успока́ивала пла́чущего ребёнка.', en: '', target },
+        word,
+      ).slotLabel
+    expect(label({ form: 'gerund', token: 2 }, prochitat)).toBe('Gerund')
+    expect(label({ form: 'pass_short', gender: 'f', token: 2 }, prochitat)).toBe(
+      'Short passive participle · Feminine',
+    )
+    expect(label({ form: 'act_pres', gender: 'm', token: 2 }, plakat)).toBe(
+      'Present active participle · Masculine',
+    )
+    expect(
+      label({ form: 'act_pres', case: 'acc', gender: 'm', animate: true, token: 3 }, plakat),
+    ).toBe('Present active participle · Accusative · Masculine')
+  })
+
+  it('takes the answer straight off the sentence, as every other slot does', () => {
+    const ex = buildFromPhrase(
+      {
+        id: 'p',
+        ru: 'Она́ успока́ивала пла́чущего ребёнка.',
+        en: 'She was comforting the crying child.',
+        target: { key: plakat.key, token: 3, form: 'act_pres', case: 'acc', gender: 'm', animate: true },
+      },
+      plakat,
+    )
+    expect(ex.answerAccented).toBe('пла́чущего')
+    expect(ex.lemma).toBe('пла́кать')
+  })
+})

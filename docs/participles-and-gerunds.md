@@ -1,8 +1,11 @@
 # Participles and gerunds — design note
 
-> Status: **proposal**, for sign-off before any vocab edits. Settles the four
-> open questions in #564 (split out of #538, whose items 1–3 shipped in #566).
-> Nothing in this note is implemented yet.
+> Status: **stage 1 landed** (#564). The four decisions below are settled and
+> the machinery they describe is in the code: the storage blocks, the shared
+> `adjectiveDeclension.js`, the two paradigm variants, the `form:` annotation
+> dimension, the seven grammar rules and every integrity guard. Stages 2–4 are
+> data, and the corpus stores **no** participle or gerund yet — the guards run
+> vacuously today and start biting the moment the first one lands.
 
 ## The hole
 
@@ -304,18 +307,31 @@ here too.
 | 3 | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | ~200 verbs |
 | 4 | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | ~120 verbs |
 
-Stage 1 lands alone and green. Each later stage is data plus annotations against
-machinery that already exists — which is the property #564 says this work
-currently lacks, and the reason for settling the four decisions first.
+Stage 1 has landed alone and green. Each later stage is data plus annotations
+against machinery that already exists — which is the property #564 says this work
+lacked, and the reason for settling the four decisions first.
 
-## Open for sign-off
+**Authoring a stage-2+ batch** is now purely additive, and
+[`public/vocab/CONTRIBUTING.md`](../public/vocab/CONTRIBUTING.md) is the
+reference: add the `participles:` / `gerund:` block, add one usage example
+annotated `inflect: { form: … }` per stored slot, and CI does the rest. The
+guards that will catch a mistake are `verbsData.test.js` (slot legality per
+aspect, a complete `pass_short`, forms built on the verb's own stem, stress
+marks), `participleCoverage.test.js` (a stored form no drill reaches, and the
+mirror case of an annotation with nothing stored), `phrasesData.test.js` (the
+annotated token equals the resolved form) and `stressData.test.js`.
 
-1. Deriving the participle grid rather than storing it (Decision 1) — this is
-   the one place the note breaks the corpus's usual "store, don't derive" habit,
-   and the argument rests on participle stress being fixed across the long grid.
-2. Whether the variant-paradigm limitation (free practice only, no mastery
-   session) is acceptable for stage 1, or whether wiring `#short`/`#nonfinite`
-   into `exerciseBuild` should be a prerequisite.
-3. The stage 3/4 volume — 320 verbs of hand-authored, stress-marked forms is the
-   bulk of the cost, and it can be cut to the A1–A2 core without changing
-   anything above it.
+## Settled at sign-off
+
+1. **Deriving the participle grid rather than storing it** (Decision 1) — the
+   one place this note breaks the corpus's usual "store, don't derive" habit.
+   Adopted: participial stress is fixed across the long grid, and the derivation
+   is now `src/lib/adjectiveDeclension.js`, guarded by the same seven golden
+   paradigms the adjective generator has always refused to write without.
+2. **The variant-paradigm limitation** (free practice only, no mastery session)
+   is accepted for stage 1. `#nonfinite` and `#passive-short` reach `/verbs`
+   immediately; wiring variants into `exerciseBuild.buildInflect` stays a
+   follow-up shared with the adjective short forms, and is not smuggled in here.
+3. **The stage 3/4 volume** — 320 verbs of hand-authored, stress-marked forms —
+   remains the bulk of the cost and can still be cut to the A1–A2 core without
+   changing anything above it.

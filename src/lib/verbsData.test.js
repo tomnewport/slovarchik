@@ -17,10 +17,18 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import { stripStress } from './text.js'
+import {
+  FORM_SLOTS,
+  PARTICIPLE_SLOTS,
+  PASSIVE_SLOTS,
+  SHORT_GENDERS,
+  SLOT_ASPECTS,
+} from './participles.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
 const verbs = yaml.load(readFileSync(resolve(vocabDir, 'verbs.yml'), 'utf8')).words
 const entries = Object.entries(verbs)
+const adjectives = yaml.load(readFileSync(resolve(vocabDir, 'adjectives.yml'), 'utf8')).words
 
 const CYRILLIC = /^[а-яё]+$/iu // checked on stress-stripped forms
 
@@ -114,6 +122,143 @@ describe('imperatives (`conjugation.imperative`)', () => {
         if (vowels(form) > 1 && !form.includes('ё')) {
           expect(form, `${key} imperative "${form}" needs a stress mark`).toMatch(/́/)
         }
+      }
+    }
+  })
+})
+
+// ── Non-finite forms: `participles:` and `gerund:` (#564) ───────────────────
+//
+// The rules these guard are the ones an author can't be expected to hold in
+// their head across 977 entries: which slot each aspect may carry, that a
+// half-filled short-passive block is always a mistake, and that a pasted form
+// belongs to the verb it was pasted into. See docs/participles-and-gerunds.md.
+describe('participles and gerunds', () => {
+  const withNonFinite = entries.filter(([, w]) => w.participles || w.gerund)
+
+  // Genuine oddities, keyed so the exception is visible rather than implied.
+  // Empty today: the corpus stores no non-finite forms yet — stage 1 of #564 is
+  // the machinery. A verb that legitimately breaks a rule below goes here with
+  // the reason, exactly as `impersonalVerbs` does for the person-cell oracle.
+  const SLOT_ALLOW = {}
+
+  // Every check below loops rather than using `it.each`, so the suite still runs
+  // while the corpus carries no non-finite forms and each staged batch of data
+  // arrives against guards that are already in place.
+  const nonFiniteForms = (w) => [
+    ...PARTICIPLE_SLOTS.map((s) => [s, w.participles?.[s]]),
+    ...SHORT_GENDERS.map((g) => [`pass_short.${g}`, w.participles?.pass_short?.[g]]),
+    ['gerund', w.gerund],
+  ].filter(([, form]) => form)
+
+  it('uses only known slot names', () => {
+    for (const [key, w] of withNonFinite) {
+      for (const slot of Object.keys(w.participles ?? {})) {
+        expect(FORM_SLOTS, `${key}: unknown participle slot "${slot}"`).toContain(slot)
+        expect(slot, `${key}: the gerund is a sibling of participles:, not a slot in it`).not.toBe(
+          'gerund',
+        )
+      }
+    }
+  })
+
+  it('carries only the slots each verb\'s aspect can form', () => {
+    for (const [key, w] of withNonFinite) {
+      const slots = [...Object.keys(w.participles ?? {}), ...(w.gerund ? ['gerund'] : [])]
+      for (const slot of slots) {
+        if (SLOT_ALLOW[key]?.includes(slot)) continue
+        expect(SLOT_ASPECTS[slot], `${key} is ${w.aspect} and cannot form ${slot}`).toContain(
+          w.aspect,
+        )
+      }
+    }
+  })
+
+  it('gives no passive to a verb with no accusative object', () => {
+    // A verb that governs a non-accusative frame (помога́ть + dative) has no
+    // object to promote, so it has no passive of either tense.
+    for (const [key, w] of withNonFinite) {
+      const passive = PASSIVE_SLOTS.filter((s) => w.participles?.[s])
+      if (!passive.length || !w.governs) continue
+      expect(
+        SLOT_ALLOW[key] ?? [],
+        `${key} governs ${JSON.stringify(w.governs)} but stores ${passive.join(', ')}`,
+      ).toEqual(expect.arrayContaining(passive))
+    }
+  })
+
+  it('fills the short passive completely or not at all', () => {
+    // Three cells out of four is always an authoring slip, never a real gap:
+    // the short passive agrees with whatever the subject happens to be.
+    for (const [key, w] of withNonFinite) {
+      const short = w.participles?.pass_short
+      if (!short) continue
+      expect(Object.keys(short).sort(), `${key} pass_short`).toEqual([...SHORT_GENDERS].sort())
+    }
+  })
+
+  it('stores only forms built on the verb\'s own stem', () => {
+    // Cheap, high-signal guard against a pasted wrong lexeme: every non-finite
+    // form is built off the verb's own stem, so it shares a prefix with the
+    // infinitive. Four letters clears the prefixed pairs (про-чита́в vs чита́я)
+    // without being long enough to trip a stem mutation in the ending.
+    for (const [key, w] of withNonFinite) {
+      const infinitive = stripStress(w.accented ?? key.split('=')[0])
+      const stem = infinitive.replace(/(ся|сь)$/, '').slice(0, 4)
+      for (const [slot, form] of nonFiniteForms(w)) {
+        expect(stripStress(form), `${key}.${slot}: "${form}" is not built on «${stem}»`).toContain(
+          stem,
+        )
+      }
+    }
+  })
+
+  it('marks stress on every polysyllabic form', () => {
+    const vowels = (s) => [...stripStress(s)].filter((ch) => 'аеёиоуыэюя'.includes(ch)).length
+    for (const [key, w] of withNonFinite) {
+      for (const [slot, form] of nonFiniteForms(w)) {
+        if (vowels(form) > 1 && !form.includes('ё')) {
+          expect(form, `${key}.${slot}: "${form}" needs a stress mark`).toMatch(/́/)
+        }
+      }
+    }
+  })
+})
+
+// ── `from_verb:` — a lexicalised participle's back-link (#564, Decision 4) ──
+//
+// Nine participles are also taught as adjectives in their own right (закры́тый,
+// при́нятый, …). They stay adjective entries — deleting them would lose their
+// curated grids and usage phrases — but the five that are transparently
+// participles link back to their verb, so the learner meets the pattern rather
+// than a stray word. Two copies of one form is exactly the setup that drifts, so
+// the link is checked in both directions, stress included.
+describe('lexicalised participles (`from_verb:`)', () => {
+  const linked = Object.entries(adjectives).filter(([, w]) => w.from_verb)
+
+  it('links to a verb that stores that slot', () => {
+    for (const [key, w] of linked) {
+      const { key: verbKey, form } = w.from_verb
+      expect(
+        PARTICIPLE_SLOTS,
+        `${key}: from_verb.form "${form}" is not a long participle`,
+      ).toContain(form)
+      const verb = verbs[verbKey]
+      expect(verb, `${key}: from_verb "${verbKey}" does not exist`).toBeTruthy()
+      expect(verb.participles?.[form], `${key}: ${verbKey} stores no ${form}`).toBeTruthy()
+    }
+  })
+
+  it('agrees with the verb letter-for-letter, stress included', () => {
+    // закры́т/закры́та appearing twice with different stress is precisely the bug
+    // this guard is for.
+    for (const [key, w] of linked) {
+      const verb = verbs[w.from_verb.key]
+      const headword = w.accented ?? w.forms?.m
+      expect(verb.participles[w.from_verb.form], `${key} headword vs its verb`).toBe(headword)
+      if (!w.short || !verb.participles?.pass_short) continue
+      for (const g of SHORT_GENDERS) {
+        expect(w.short[g], `${key} short.${g}`).toBe(verb.participles.pass_short[g])
       }
     }
   })

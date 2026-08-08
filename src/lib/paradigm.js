@@ -18,6 +18,14 @@ import {
   NUMBER_LABELS,
   commonStem,
 } from './declension.js'
+import {
+  FORM_HINT,
+  FORM_LABEL,
+  PARTICIPLE_SLOTS,
+  gerundForm,
+  participleNominative,
+  shortPassiveCell,
+} from './participles.js'
 
 const caseRow = (c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c], note: CASE_NOTES[c] })
 
@@ -85,6 +93,17 @@ const VERB_IMPERATIVE_ROWS = [
   { key: 'imp_pl', label: 'Imperative pl.', sub: 'вы' },
 ]
 const IMPERATIVE_KEY = { imp_sg: 'sg', imp_pl: 'pl' }
+
+// Non-finite rows: the four long participles plus the gerund, each a single
+// stored form. They are a paradigm of their own rather than columns on the
+// finite table — see buildNonFiniteParadigm for why. The short passive agrees
+// by gender/number, so it gets its own table (buildPassiveShortParadigm) and is
+// not a row here.
+const VERB_NON_FINITE_ROWS = PARTICIPLE_SLOTS.concat('gerund').map((key) => ({
+  key,
+  label: FORM_LABEL[key],
+  sub: FORM_HINT[key],
+}))
 
 // Gender × number agreement rows. Adjectives and the adjective-like pronouns
 // (possessives, determiners, demonstratives, какой/чей) decline like this: the
@@ -272,7 +291,74 @@ export function buildShortParadigm(word) {
   return paradigm.cells.length >= 3 ? paradigm : null
 }
 
-/** Build every usable paradigm of a given part of speech. */
+/**
+ * Build the non-finite paradigm for a verb — its participles and gerund — or
+ * null if it stores fewer than the usual three cells.
+ *
+ * This is a *separate* paradigm rather than extra columns on the finite table,
+ * and deliberately so: {@link assemble} takes the paradigm's stem to be the
+ * longest common prefix of every cell, so folding пи́шущий/пи́санный in beside
+ * пишу́/писа́л would collapse писа́ть's common stem from `пиш`/`писа` to `пи` and
+ * degrade "Type the endings" for the finite cells that work today. Adjective
+ * short forms are split out for the same reason (see {@link buildShortParadigm}).
+ *
+ * `assemble` prunes the empty rows, so a perfective intransitive — which has
+ * only two of these forms — falls under the three-cell floor and is correctly
+ * dropped rather than drilled as a degenerate table.
+ */
+export function buildNonFiniteParadigm(word) {
+  if (word.pos !== 'verb') return null
+  const meta = {
+    key: `${word.key}#nonfinite`,
+    pos: word.pos,
+    lemma: word.headword || word.ru,
+    en: word.meaning || word.en,
+    cefr: word.cefr ?? null,
+    variant: 'nonfinite',
+    variantLabel: 'Participles & gerund',
+    word,
+  }
+  const paradigm = assemble(meta, VERB_NON_FINITE_ROWS, SINGLE_COL('Form'), (row) =>
+    row === 'gerund' ? gerundForm(word) : participleNominative(word, row),
+  )
+  return paradigm.cells.length >= 3 ? paradigm : null
+}
+
+/**
+ * Build the short (predicate) passive paradigm for a verb — «Магази́н закры́т»,
+ * «Кни́га прочи́тана» — or null if it carries no `pass_short` block. Structurally
+ * identical to an adjective's short form: agreement by gender/number only, no
+ * case, and stored rather than derived because this is where participial stress
+ * genuinely moves (при́нятый → принята́).
+ */
+export function buildPassiveShortParadigm(word) {
+  if (word.pos !== 'verb') return null
+  const meta = {
+    key: `${word.key}#passive-short`,
+    pos: word.pos,
+    lemma: word.headword || word.ru,
+    en: word.meaning || word.en,
+    cefr: word.cefr ?? null,
+    variant: 'passive-short',
+    variantLabel: 'Short passive',
+    word,
+  }
+  const paradigm = assemble(meta, GENDER_FORMS, SINGLE_COL('Short passive'), (row) =>
+    shortPassiveCell(word, row),
+  )
+  return paradigm.cells.length >= 3 ? paradigm : null
+}
+
+/**
+ * Build every usable paradigm of a given part of speech.
+ *
+ * Beyond each word's primary table, two kinds of *variant* paradigm ride along:
+ * an adjective's short form, and a verb's participles/gerund and short passive.
+ * Note that a variant reaches free practice (`/adjectives`, `/verbs`) but not
+ * the mastery session — `exerciseBuild.buildInflect` builds from
+ * `buildParadigm(record)`, which returns only the primary table. Wiring variants
+ * into the session pool is a follow-up shared by both.
+ */
 export function buildParadigms(words, pos) {
   const out = []
   for (const word of words) {
@@ -282,6 +368,11 @@ export function buildParadigms(words, pos) {
     // Adjectives with a short-form block contribute an extra short-form table.
     const short = buildShortParadigm(word)
     if (short) out.push(short)
+    // Verbs storing participles / a gerund contribute up to two more.
+    const nonFinite = buildNonFiniteParadigm(word)
+    if (nonFinite) out.push(nonFinite)
+    const passiveShort = buildPassiveShortParadigm(word)
+    if (passiveShort) out.push(passiveShort)
   }
   return out
 }

@@ -80,13 +80,48 @@ function conjugationCells(word) {
 }
 
 /**
- * Read a cell by golden slot key. A dotted key is a nested conjugation block
- * (`future.1sg`). A flat key is either a top-level conjugation cell — the past
- * agreement forms live directly under `conjugation` as `past_m`/`past_f`/
+ * Dotted (slot → form) entries for a verb's participles and gerund, or `[]`.
+ *
+ * These are walked SEPARATELY from {@link conjugationCells} on purpose. They are
+ * not person cells, and feeding them to `personCellDuplicates` would fire on
+ * пла́чущий vs пла́кавший — which is the third argument in
+ * docs/participles-and-gerunds.md for storing them in sibling blocks rather than
+ * as new `conjugation:` keys. Only the orthography check wants them.
+ */
+function nonFiniteCells(word) {
+  const out = []
+  const p = word.extra?.participles
+  if (p && typeof p === 'object') {
+    for (const [slot, val] of Object.entries(p)) {
+      if (typeof val === 'string') out.push([`participles.${slot}`, val])
+      else if (val && typeof val === 'object') {
+        for (const [g, v] of Object.entries(val)) {
+          if (typeof v === 'string') out.push([`participles.${slot}.${g}`, v])
+        }
+      }
+    }
+  }
+  if (typeof word.extra?.gerund === 'string') out.push(['gerund', word.extra.gerund])
+  return out
+}
+
+/**
+ * Read a cell by golden slot key. A `participles.`-prefixed key is a non-finite
+ * slot (`participles.pass_past`, `participles.pass_short.f`) and `gerund` is the
+ * scalar gerund. Otherwise a dotted key is a nested conjugation block
+ * (`future.1sg`), and a flat key is either a top-level conjugation cell — the
+ * past agreement forms live directly under `conjugation` as `past_m`/`past_f`/
  * `past_n`/`past_pl` — or a flat declension cell (`sg_pre`, `m_gen`). The two
  * flat key spaces don't overlap, so conjugation wins wherever it holds a string.
  */
 export function readCell(word, slot) {
+  if (slot === 'gerund') return word.extra?.gerund ?? null
+  if (slot.startsWith('participles.')) {
+    const [, name, gender] = slot.split('.')
+    const cell = word.extra?.participles?.[name]
+    if (gender) return cell?.[gender] ?? null
+    return typeof cell === 'string' ? cell : null
+  }
   if (slot.includes('.')) {
     const [block, person] = slot.split('.')
     return word.extra?.conjugation?.[block]?.[person] ?? null
@@ -106,7 +141,8 @@ export function impossibleOrthography(words) {
   const out = []
   for (const word of words) {
     const bases = baseForms(word)
-    for (const [slot, form] of [...declensionCells(word), ...conjugationCells(word)]) {
+    const cells = [...declensionCells(word), ...conjugationCells(word), ...nonFiniteCells(word)]
+    for (const [slot, form] of cells) {
       const hits = bare(form).match(IMPOSSIBLE_BIGRAM)
       if (!hits) continue
       const introduced = hits.filter((bigram) => !bases.some((b) => b.includes(bigram)))

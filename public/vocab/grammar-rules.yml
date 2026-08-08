@@ -319,6 +319,115 @@ rules:
       - "A completed round trip goes in the indeterminate past: вчера́ я ходи́л в кино́ (went and came back)."
       - "The indeterminate member also carries the settled sense: носи́ть = to wear, води́ть = to drive (a car)."
 
+  # ── Non-finite verb forms: participles and gerunds ───────────────────────
+  # Причастия agree like adjectives and replace a кото́рый clause; деепричастия
+  # are invariable and replace a second clause of time or manner. Both are the
+  # register marker of written Russian, and both are unguessable from English,
+  # where "-ing" covers all of them at once. See docs/participles-and-gerunds.md.
+  verb-participle-act-pres:
+    title: "Present active participle"
+    formula: "3rd-plural stem + -ущ/-ющ/-ащ/-ящ + adjective endings"
+    explanation: >
+      The present active participle names the one DOING the action right now —
+      "the crying child", "a passing car". Build it off the 3rd-person plural:
+      чита́ют → чита́ющий, говоря́т → говоря́щий; first-conjugation verbs give
+      -ущ/-ющ, second-conjugation -ащ/-ящ. It then agrees like но́вый, in gender,
+      number and case, with the noun it describes: пла́чущего ребёнка. Its whole
+      job is to compress a кото́рый clause — ребёнок, кото́рый пла́чет becomes
+      пла́чущий ребёнок — which is why written Russian is full of them and speech
+      much less so. Only imperfective verbs have one: a perfective has no present
+      tense to build it from.
+    exceptions:
+      - "Some have hardened into ordinary adjectives: сле́дующий (next), настоя́щий (real), блестя́щий (brilliant)."
+  verb-participle-act-past:
+    title: "Past active participle"
+    formula: "past stem + -вш- (-ш- after a consonant) + adjective endings"
+    explanation: >
+      The past active participle names the one who DID the action — "the man who
+      read the letter". Take the past tense, drop the -л and add -вш-: чита́л →
+      чита́вший, прочита́л → прочита́вший; a past with no -л takes bare -ш- (нёс →
+      нёсший). Both aspects have one, and the aspect carries its usual meaning:
+      чита́вший was reading, прочита́вший had finished. It agrees like но́вый and,
+      like the present active, exists to replace a кото́рый clause in writing.
+    exceptions:
+      - "бы́вший (former) and уме́рший (deceased) are used as plain adjectives."
+      - "Reflexives keep -ся after a vowel: верну́вшийся, not *верну́вшийсь."
+  verb-participle-pass-pres:
+    exception: true
+    title: "Present passive participle"
+    formula: "1st-plural + -ый · a small, bookish, closed class"
+    explanation: >
+      The present passive participle names what is BEING acted on — люби́мый
+      "beloved / favourite", уважа́емый "respected", ведо́мый "led". Formally it is
+      the 1st-person plural plus -ый (лю́бим → люби́мый), but treat it as
+      vocabulary rather than as a productive rule: only a limited set of
+      imperfective transitive verbs form one, it is markedly bookish, and modern
+      Russian usually prefers an active sentence or a кото́рый clause instead.
+      Several members are now simply adjectives or nouns (люби́мый "favourite",
+      обвиня́емый "the accused"). Perfectives have none at all.
+    exceptions:
+      - "Second-conjugation -и́мый is rarer still: люби́мый, дели́мый, ви́димый."
+      - "Many are far commoner negated: невозмо́жный, незабыва́емый, неулови́мый."
+  verb-participle-pass-past:
+    title: "Past passive participle"
+    formula: "-нн- / -ённ- / -т- + adjective endings · transitive perfectives"
+    explanation: >
+      The past passive participle names the thing that WAS acted on — "the book
+      that was read", "a closed door". Verbs in -ать take -нн- (прочита́ть →
+      прочи́танный), verbs in -и́ть take -ённ-/-енн- with a stem change (реши́ть →
+      решённый, купи́ть → ку́пленный), and a short set in -ыть/-ить/-еть take -т-
+      (закры́ть → закры́тый, приня́ть → при́нятый). Only transitive verbs form one,
+      and in practice almost only perfectives. In the long form it agrees like
+      но́вый and describes a noun; as a predicate it uses the SHORT form instead,
+      which is the far commoner of the two.
+    exceptions:
+      - "Note the stress shift into the participle: приня́ть → при́нятый, нача́ть → на́чатый."
+      - "-и́ть verbs mutate the stem: пригласи́ть → приглашённый, купи́ть → ку́пленный."
+  verb-participle-short:
+    exception: true
+    title: "Short passive participle (the predicate)"
+    formula: "one -н / -т: закры́т, закры́та, закры́то, закры́ты · agrees, no case"
+    explanation: >
+      This is the everyday half of the passive, and the one to learn first:
+      «Магази́н закры́т», «Кни́га прочи́тана», «Всё гото́во». Drop one -н from the
+      long form (прочи́танный → прочи́тан) and agree with the subject in gender and
+      number only — no case, because it is a predicate, not a modifier. Russian
+      uses it where English uses "is/was + past participle", with быть unspoken
+      in the present: Дверь закры́та = "the door is closed". The stress is the
+      trap — it very often moves onto the ending in the feminine, exactly as in
+      short adjectives: при́нят but принята́, на́чат but начата́, про́дан but продана́.
+    exceptions:
+      - "Feminine stress shifts to the ending: принята́, начата́, взята́, продана́."
+      - "With был/бу́дет it makes any tense: дверь была́ закры́та, бу́дет закры́та."
+  verb-gerund-impf:
+    title: "Imperfective gerund (деепричастие)"
+    formula: "3rd-plural stem + -я (-а after ж, ш, щ, ч) · invariable"
+    explanation: >
+      The imperfective gerund names an action going on AT THE SAME TIME as the
+      main verb — «Он шёл, напева́я» (he walked, humming). Build it off the
+      3rd-person plural: чита́ют → чита́я, говоря́т → говоря́, слы́шат → слы́ша. It
+      never changes form — no gender, number, case or person — because it leans
+      entirely on the main verb, and that is also its one hard rule: the gerund
+      and the main verb must share a subject. Plenty of ordinary verbs simply
+      have no imperfective gerund at all (ждать, пить, петь, писа́ть, бежа́ть).
+    exceptions:
+      - "быть is suppletive: бу́дучи."
+      - "Three have hardened into other parts of speech: благодаря́ and несмотря́ (prepositions), мо́лча (adverb)."
+  verb-gerund-pf:
+    title: "Perfective gerund (деепричастие)"
+    formula: "past stem + -в (-вши(сь) for reflexives) · invariable"
+    explanation: >
+      The perfective gerund names an action finished BEFORE the main verb —
+      «Поду́мав, он отве́тил» (having thought, he answered). Take the past tense,
+      drop the -л and add -в: поду́мал → поду́мав, уви́дел → уви́дев; reflexives take
+      -вшись (попроща́лся → попроща́вшись). Like the imperfective gerund it is
+      invariable and must share its subject with the main verb. It is especially
+      common negated, where English uses "without …ing": «Он отве́тил, не
+      поду́мав», «Он ушёл не попроща́вшись».
+    exceptions:
+      - "A gerund clause is set off by commas — unless it has hardened into an adverb: Он ушёл не проща́ясь."
+      - "Verbs whose past has no -л take -ши: принёс → принёсши."
+
   # ── Verb government ──────────────────────────────────────────────────────
   # Which case a verb puts its object in when it isn't the plain accusative —
   # a producing-Russian skill an English speaker can't guess. Marked as

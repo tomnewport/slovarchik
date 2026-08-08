@@ -17,6 +17,7 @@ import { normalize } from './text.js'
 import { sample, shuffle } from './quiz.js'
 import { CASES, LOCATIVE, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
 import { GOVERNMENT_RULES } from './verbGovernment.js'
+import { FORM_HINT, FORM_LABEL, FORM_SLOTS, shortPassiveCell, storedSlots } from './participles.js'
 
 /** Parts of speech that carry a context drill. */
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
@@ -154,6 +155,14 @@ function slotLabelFor(target) {
   if (target.degree === 'short') {
     return `Short form · ${GENDER_LABEL[target.gender] ?? target.gender}`
   }
+  // A non-finite verb form. The gerund is invariable, so its name is the whole
+  // label; the participles agree, so the agreement follows the form's name.
+  if (target.form) {
+    const name = FORM_LABEL[target.form] ?? target.form
+    if (target.form === 'gerund') return name
+    if (target.case) return `${name} · ${agreementLabel(target.gender, target.case)}`
+    return target.gender ? `${name} · ${GENDER_LABEL[target.gender] ?? target.gender}` : name
+  }
   // The comparative is invariable, so it is the whole label. The superlative
   // agrees (са́мый + adjective), so it carries the agreement after it.
   if (target.degree === 'comparative') return DEGREE_LABEL.comparative
@@ -288,6 +297,68 @@ function degreeStep(target, word) {
 }
 
 /**
+ * Selection step: pick which non-finite form of the verb the sentence needs —
+ * a participle (and which one) or the gerund. This is the step that carries the
+ * *meaning*: the formation drill lives in the `#nonfinite` paradigm, but knowing
+ * that "the crying child" wants a present active participle while "without
+ * thinking" wants a gerund is what the sentence teaches.
+ *
+ * Like genderStep and degreeStep, the options are the forms the verb really
+ * stores — offering a present active participle for a perfective (which has no
+ * present stem) would be an option that can never be right — plus the annotated
+ * one, which is always offered even if the word's own data is thin.
+ */
+function formStep(target, word) {
+  const stored = new Set(storedSlots(word))
+  const forms = FORM_SLOTS.filter((f) => stored.has(f) || f === target.form)
+  return {
+    kind: 'form',
+    prompt: 'Which form of the verb does the sentence need?',
+    options: forms.map((f) => ({
+      id: f,
+      label: FORM_LABEL[f],
+      hint: FORM_HINT[f],
+      correct: f === target.form,
+    })),
+  }
+}
+
+/**
+ * Selection step: pick the gender + number a short passive participle agrees
+ * with (закры́т / закры́та / закры́то / закры́ты). The short-form twin of
+ * {@link shortGenderStep}, reading the verb's `pass_short` cells rather than an
+ * adjective's `short` block.
+ */
+function passiveShortGenderStep(target, word) {
+  const present = GENDERS.filter((g) => shortPassiveCell(word, g))
+  const genders = present.length ? present : GENDERS
+  return {
+    kind: 'gender',
+    prompt: 'Which gender / number must the short form agree with?',
+    options: genders.map((g) => ({
+      id: g,
+      label: GENDER_LABEL[g] ?? g,
+      correct: g === target.gender,
+    })),
+  }
+}
+
+/**
+ * The ordered steps for a non-finite slot, per docs/participles-and-gerunds.md:
+ * the gerund is invariable so the form is the whole choice; the short passive
+ * agrees by gender/number; a long participle agrees like an adjective, so a
+ * nominative needs the gender and an oblique one needs the case first.
+ */
+function nonFiniteSteps(target, word) {
+  const first = formStep(target, word)
+  if (target.form === 'gerund') return [first]
+  if (target.form === 'pass_short') return [first, passiveShortGenderStep(target, word)]
+  return target.case
+    ? [first, caseStep(target, word), genderStep(target, word)]
+    : [first, genderStep(target, word)]
+}
+
+/**
  * The two verb contrasts a linked pair can teach. Both are "two verbs, one
  * gloss, and the sentence decides which" — the same drill shape over a
  * different dimension:
@@ -403,6 +474,10 @@ function contrastStep(word, contrast) {
 /**
  * The ordered selection steps the learner works through before spelling — case
  * always first, then the other dimension:
+ *   - a non-finite verb form (participle / gerund): which form first, since that
+ *     is the choice the sentence teaches, then its agreement — none for the
+ *     invariable gerund, gender + number for the short passive, and case →
+ *     gender + number for a long participle in an oblique case
  *   - adjectives / possessive pronouns (gender-bearing): case → gender + number
  *   - a comparative (adjective or adverb): degree only — the form is invariable,
  *     so there is no case, number or gender left to choose
@@ -417,6 +492,7 @@ function contrastStep(word, contrast) {
  * component grades each clicked option's `correct` flag.
  */
 export function buildSelectSteps(target, word) {
+  if (target?.form) return nonFiniteSteps(target, word)
   if (target?.degree === 'short') return [shortGenderStep(target, word)]
   if (target?.degree === 'comparative') return [degreeStep(target, word)]
   if (target?.degree === 'superlative') {

@@ -12,6 +12,8 @@ import {
   buildParadigm,
   buildParadigms,
   buildShortParadigm,
+  buildNonFiniteParadigm,
+  buildPassiveShortParadigm,
   cleanForm,
   endingOf,
   matchingCells,
@@ -551,5 +553,90 @@ describe('buildShortParadigm', () => {
 
   it('returns null for an adjective with no short block', () => {
     expect(buildShortParadigm(novyy)).toBeNull()
+  })
+})
+
+describe('buildNonFiniteParadigm / buildPassiveShortParadigm', () => {
+  // A transitive perfective: past active + past passive + the short passive +
+  // the perfective gerund (docs/participles-and-gerunds.md, Decision 1).
+  const prochitat = {
+    key: 'прочитать=to read',
+    pos: 'verb',
+    headword: 'прочита́ть',
+    meaning: 'to read',
+    cefr: 'A1',
+    participles: {
+      act_past: 'прочита́вший',
+      pass_past: 'прочи́танный',
+      pass_short: { m: 'прочи́тан', f: 'прочи́тана', n: 'прочи́тано', pl: 'прочи́таны' },
+    },
+    gerund: 'прочита́в',
+    extra: {
+      aspect: 'pf',
+      conjugation: {
+        future: { '1sg': 'прочита́ю', '2sg': 'прочита́ешь', '3sg': 'прочита́ет' },
+        past_m: 'прочита́л',
+      },
+    },
+  }
+
+  it('builds a single-column table of the long participles and the gerund', () => {
+    const p = buildNonFiniteParadigm(prochitat)
+    expect(p.variant).toBe('nonfinite')
+    expect(p.variantLabel).toBe('Participles & gerund')
+    expect(p.key).toBe('прочитать=to read#nonfinite')
+    expect(p.cols).toHaveLength(1)
+    // The two present slots are pruned — a perfective has no present stem — and
+    // the short passive is a table of its own, not a row here.
+    expect(p.rows.map((r) => r.key)).toEqual(['act_past', 'pass_past', 'gerund'])
+    expect(p.cells.map((c) => c.form)).toEqual(['прочита́вший', 'прочи́танный', 'прочита́в'])
+  })
+
+  it('keeps its stem out of the finite table', () => {
+    // The reason it is a separate paradigm: folding прочи́танный in beside
+    // прочита́ю would shorten the finite paradigm's common stem.
+    expect(buildParadigm(prochitat).stem).toBe('прочита')
+    expect(buildNonFiniteParadigm(prochitat).stem).toBe('прочита')
+    // …and the variant's own stem is computed over its own cells only.
+    expect(buildNonFiniteParadigm(prochitat).cells).toHaveLength(3)
+  })
+
+  it('builds the short passive as an m/f/n/pl agreement table', () => {
+    const p = buildPassiveShortParadigm(prochitat)
+    expect(p.variant).toBe('passive-short')
+    expect(p.variantLabel).toBe('Short passive')
+    expect(p.key).toBe('прочитать=to read#passive-short')
+    expect(p.rows.map((r) => r.key)).toEqual(['m', 'f', 'n', 'pl'])
+    expect(p.cells.map((c) => c.form)).toEqual([
+      'прочи́тан', 'прочи́тана', 'прочи́тано', 'прочи́таны',
+    ])
+  })
+
+  it('drops a table too thin to drill', () => {
+    // A perfective intransitive stores only an active past and a gerund — two
+    // cells, under the three-cell floor — so it is dropped rather than drilled
+    // as a degenerate table.
+    const intransitive = {
+      ...prochitat,
+      key: 'уйти=to leave',
+      participles: { act_past: 'уше́дший' },
+      gerund: 'уйдя́',
+    }
+    expect(buildNonFiniteParadigm(intransitive)).toBeNull()
+    expect(buildPassiveShortParadigm(intransitive)).toBeNull()
+  })
+
+  it('returns null for anything that is not a verb', () => {
+    expect(buildNonFiniteParadigm(novyy)).toBeNull()
+    expect(buildPassiveShortParadigm(novyy)).toBeNull()
+  })
+
+  it('rides along with the verb paradigms from buildParadigms', () => {
+    const built = buildParadigms([prochitat], 'verb')
+    expect(built.map((p) => p.variant ?? 'primary')).toEqual([
+      'primary',
+      'nonfinite',
+      'passive-short',
+    ])
   })
 })
