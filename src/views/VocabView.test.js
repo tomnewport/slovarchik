@@ -150,6 +150,61 @@ describe('VocabView', () => {
     expect(wrapper.text()).toContain('Next')
   })
 
+  it('shows a verb government frame and waits, even on a correct answer', async () => {
+    vi.useFakeTimers()
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[1].trigger('click') // typing mode
+
+    // «зави́сеть» is the poster child: its English says "depend ON", but the
+    // Russian preposition is от — exactly what the gloss alone can't teach.
+    const zaviset = shapeVocab(loadFixtureWords()).find((w) => w.id === 'зависеть=to depend on')
+    expect(zaviset.governs).toEqual([{ prep: 'от', case: 'gen' }])
+    wrapper.vm.current = zaviset
+    await wrapper.vm.$nextTick()
+
+    const answer = Array.isArray(zaviset.en) ? zaviset.en[0] : zaviset.en
+    await wrapper.find('input[type="text"]').setValue(answer)
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.vm.wasCorrect).toBe(true)
+    // The frame is spelled out beside the headword …
+    expect(wrapper.find('.government-note').text()).toContain('от + genitive')
+    // … and, like the other reminders, it holds the auto-advance.
+    vi.advanceTimersByTime(2000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.answered).toBe(true)
+    expect(wrapper.text()).toContain('Next')
+  })
+
+  it('lists every frame of a verb that governs more than one', async () => {
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[1].trigger('click') // typing mode
+
+    // отвеча́ть takes both a bare dative (отвеча́ть дру́гу) and на + accusative
+    // (отвеча́ть на вопро́с), so the card must show both.
+    wrapper.vm.current = shapeVocab(loadFixtureWords()).find((w) => w.id === 'отвечать=to answer')
+    await wrapper.vm.$nextTick()
+    await wrapper.find('input[type="text"]').setValue('nonsense')
+    await wrapper.find('form').trigger('submit')
+
+    const frames = wrapper.findAll('.government-note .frame').map((f) => f.text())
+    expect(frames).toEqual(['+ dative', 'на + accusative'])
+  })
+
+  it('shows no government note for a verb that takes a plain accusative', async () => {
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[1].trigger('click') // typing mode
+
+    const chitat = shapeVocab(loadFixtureWords()).find((w) => w.id === 'читать=to read')
+    expect(chitat.governs).toBeNull()
+    wrapper.vm.current = chitat
+    await wrapper.vm.$nextTick()
+    await wrapper.find('input[type="text"]').setValue('nonsense')
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.find('.government-note').exists()).toBe(false)
+  })
+
   it('clears a heteronym pair in easy mode without the typing-mode pause', async () => {
     const wrapper = mount(VocabView)
     await wrapper.findAll('button.card')[0].trigger('click') // easy / match

@@ -158,6 +158,70 @@ words:
   })
 })
 
+describe('verb government (`governs:`)', () => {
+  const text = `
+words:
+  "звонить=to call":
+    cefr_level: A1
+    accented: звони́ть
+    aspect: impf
+    governs: dat
+    en_gb: { standard: to call }
+  "зависеть=to depend on":
+    cefr_level: B1
+    accented: зави́сеть
+    aspect: impf
+    governs: { prep: от, case: gen }
+    en_gb: { standard: to depend on }
+  "отвечать=to answer":
+    cefr_level: A1
+    accented: отвеча́ть
+    aspect: impf
+    governs: [dat, { prep: на, case: acc }]
+    en_gb: { standard: to answer }
+  "читать=to read":
+    cefr_level: A1
+    accented: чита́ть
+    aspect: impf
+    en_gb: { standard: to read }
+`
+  const byKey = new Map(fromYaml([{ pos: 'verb', text }]).map((w) => [w.key, w]))
+
+  it('normalises every authored shape to a list of frames', () => {
+    expect(byKey.get('звонить=to call').governs).toEqual([{ prep: null, case: 'dat' }])
+    expect(byKey.get('зависеть=to depend on').governs).toEqual([{ prep: 'от', case: 'gen' }])
+    expect(byKey.get('отвечать=to answer').governs).toEqual([
+      { prep: null, case: 'dat' },
+      { prep: 'на', case: 'acc' },
+    ])
+  })
+
+  it('leaves an ordinary accusative verb ungoverned', () => {
+    expect(byKey.get('читать=to read').governs).toBeNull()
+  })
+
+  it('carries the frames onto the shaped vocab word', () => {
+    const shaped = shapeVocab([...byKey.values()])
+    const zvonit = shaped.find((v) => v.id === 'звонить=to call')
+    expect(zvonit.governs).toEqual([{ prep: null, case: 'dat' }])
+    expect(shaped.find((v) => v.id === 'читать=to read').governs).toBeNull()
+  })
+
+  it('is verb-only — a preposition keeps its own `governs` in `extra`', () => {
+    const prepText = `
+words:
+  "в=in":
+    cefr_level: A1
+    accented: в
+    governs: ["acc", "pre"]
+    en_gb: { standard: in }
+`
+    const [v] = fromYaml([{ pos: 'preposition', text: prepText }])
+    expect(v.governs).toBeNull()
+    expect(v.extra.governs).toEqual(['acc', 'pre'])
+  })
+})
+
 describe('heteronyms', () => {
   it('auto-links same-spelling headwords that differ only in stress', () => {
     const text = `

@@ -27,6 +27,7 @@ words:
     cefr_level: B1
     accented: аплоди́ровать
     aspect: impf
+    governs: dat
     en_gb:
       standard: to applaud (to clap your hands; takes the dative)
     collections:
@@ -2000,6 +2001,7 @@ words:
     cefr_level: B1
     accented: владе́ть
     aspect: impf
+    governs: ins
     collections:
       - finance
       - work
@@ -2548,6 +2550,7 @@ words:
     cefr_level: B1
     accented: воспо́льзоваться
     aspect: pf
+    governs: ins
     pair: "пользоваться=to use"
     collections:
       - daily life
@@ -2619,6 +2622,43 @@ words:
       past_f: восстанови́ла
       past_n: восстанови́ло
       past_pl: восстанови́ли
+  "восхищаться=to admire":
+    cefr_level: B2
+    accented: восхища́ться
+    aspect: impf
+    governs: ins
+    collections:
+      - feelings and sensations
+      - the arts
+    en_gb:
+      standard: to admire (to be filled with admiration)
+      alt:
+        - to be delighted by
+    conjugation:
+      imperative:
+        sg: восхища́йся
+        pl: восхища́йтесь
+      present:
+        "1sg": восхища́юсь
+        "2sg": восхища́ешься
+        "3sg": восхища́ется
+        "1pl": восхища́емся
+        "2pl": восхища́етесь
+        "3pl": восхища́ются
+      past_m: восхища́лся
+      past_f: восхища́лась
+      past_n: восхища́лось
+      past_pl: восхища́лись
+    usage:
+      - ru: Она́ восхища́ется му́зыкой.
+        en_gb: She admires the music.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я восхища́юсь его́ тала́нтом.
+        en_gb: I admire his talent.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Го́сти восхища́лись карти́ной.
+        en_gb: The guests admired the painting.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
   "врать=to lie":
     cefr_level: B1
     accented: врать
@@ -2663,6 +2703,43 @@ words:
       - ru: Ты врёшь роди́телям?
         en_gb: Do you lie to your parents?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+  "вредить=to harm":
+    cefr_level: B2
+    accented: вреди́ть
+    aspect: impf
+    governs: dat
+    collections:
+      - sickness and health
+      - character
+    en_gb:
+      standard: to harm (to do damage to)
+      alt:
+        - to be bad for
+    conjugation:
+      imperative:
+        sg: вреди́
+        pl: вреди́те
+      present:
+        "1sg": врежу́
+        "2sg": вреди́шь
+        "3sg": вреди́т
+        "1pl": вреди́м
+        "2pl": вреди́те
+        "3pl": вредя́т
+      past_m: вреди́л
+      past_f: вреди́ла
+      past_n: вреди́ло
+      past_pl: вреди́ли
+    usage:
+      - ru: Куре́ние вреди́т здоро́вью.
+        en_gb: Smoking harms your health.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Не вреди́ себе́.
+        en_gb: Don't harm yourself.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Хо́лод вреди́л расте́ниям.
+        en_gb: The cold harmed the plants.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
   "вскочить=to jump up":
     cefr_level: B1
     accented: вскочи́ть
@@ -4988,6 +5065,7 @@ words:
     cefr_level: A1
     accented: говори́ть
     aspect: impf
+    governs: { prep: о, case: pre }
     pair: "сказать=to say"
     en_gb:
       standard: to speak (to say words)
@@ -5234,6 +5312,7 @@ words:
     cefr_level: A2
     accented: гото́виться
     aspect: impf
+    governs: { prep: к, case: dat }
     collections:
       - daily life
       - school
@@ -5465,6 +5544,7 @@ words:
     cefr_level: A1
     accented: дари́ть
     aspect: impf
+    governs: dat
     pair: "подарить=to give a present"
     en_gb:
       standard: to give (something as a gift; takes the dative of the recipient)
@@ -5939,10 +6019,50 @@ words:
       - ru: Ты доба́вишь немно́го со́ли?
         en_gb: Will you add a little salt?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "добиваться=to strive for":
+    cefr_level: B1
+    accented: добива́ться
+    aspect: impf
+    governs: gen
+    pair: "добиться=to achieve"
+    collections:
+      - work
+      - character
+    en_gb:
+      standard: to strive for (to work at getting something)
+      alt:
+        - to seek
+    conjugation:
+      imperative:
+        sg: добива́йся
+        pl: добива́йтесь
+      present:
+        "1sg": добива́юсь
+        "2sg": добива́ешься
+        "3sg": добива́ется
+        "1pl": добива́емся
+        "2pl": добива́етесь
+        "3pl": добива́ются
+      past_m: добива́лся
+      past_f: добива́лась
+      past_n: добива́лось
+      past_pl: добива́лись
+    usage:
+      - ru: Он добива́ется успе́ха.
+        en_gb: He is striving for success.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я добива́юсь отве́та.
+        en_gb: I am pressing for an answer.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Они́ добива́лись свобо́ды.
+        en_gb: They were striving for freedom.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
   "добиться=to achieve":
     cefr_level: B1
     accented: доби́ться
     aspect: pf
+    governs: gen
+    pair: "добиваться=to strive for"
     collections:
       - work
       - daily life
@@ -6798,6 +6918,44 @@ words:
       - ru: Ско́ро насле́дство доста́нется де́тям.
         en_gb: Soon the inheritance will fall to the children.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+  "достигать=to reach":
+    cefr_level: B1
+    accented: достига́ть
+    aspect: impf
+    governs: gen
+    pair: "достичь=to reach"
+    collections:
+      - work
+      - sport
+    en_gb:
+      standard: to reach (to attain a goal or a level)
+      alt:
+        - to achieve
+    conjugation:
+      imperative:
+        sg: достига́й
+        pl: достига́йте
+      present:
+        "1sg": достига́ю
+        "2sg": достига́ешь
+        "3sg": достига́ет
+        "1pl": достига́ем
+        "2pl": достига́ете
+        "3pl": достига́ют
+      past_m: достига́л
+      past_f: достига́ла
+      past_n: достига́ло
+      past_pl: достига́ли
+    usage:
+      - ru: Он достига́ет це́ли ме́дленно.
+        en_gb: He reaches his goal slowly.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Мы достига́ем хоро́ших результа́тов.
+        en_gb: We achieve good results.
+        inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
+      - ru: Тогда́ она́ достига́ла успе́ха.
+        en_gb: Back then she was achieving success.
+        inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
   "достигнуть=to reach":
     cefr_level: B1
     accented: дости́гнуть
@@ -6840,6 +6998,44 @@ words:
       - ru: Ты дости́гнешь свое́й це́ли?
         en_gb: Will you reach your goal?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "достичь=to reach":
+    cefr_level: B1
+    accented: дости́чь
+    aspect: pf
+    governs: gen
+    pair: "достигать=to reach"
+    collections:
+      - work
+      - sport
+    en_gb:
+      standard: to reach (to attain a goal or a level)
+      alt:
+        - to achieve
+    conjugation:
+      imperative:
+        sg: дости́гни
+        pl: дости́гните
+      future:
+        "1sg": дости́гну
+        "2sg": дости́гнешь
+        "3sg": дости́гнет
+        "1pl": дости́гнем
+        "2pl": дости́гнете
+        "3pl": дости́гнут
+      past_m: дости́г
+      past_f: дости́гла
+      past_n: дости́гло
+      past_pl: дости́гли
+    usage:
+      - ru: Он дости́г це́ли.
+        en_gb: He reached his goal.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Мы дости́гнем результа́та.
+        en_gb: We will achieve the result.
+        inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
+      - ru: Она́ дости́гла успе́ха.
+        en_gb: She achieved success.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
   "доходить=to reach":
     cefr_level: A2
     accented: доходи́ть
@@ -6969,6 +7165,7 @@ words:
     cefr_level: A1
     accented: ду́мать
     aspect: impf
+    governs: { prep: о, case: pre }
     pair: "подумать=to think"
     collections:
       - daily life
@@ -7029,6 +7226,7 @@ words:
     cefr_level: A2
     accented: дыша́ть
     aspect: impf
+    governs: ins
     collections:
       - sickness and health
     en_gb:
@@ -7494,6 +7692,43 @@ words:
       past_f: жени́лась
       past_n: жени́лось
       past_pl: жени́лись
+  "жертвовать=to sacrifice":
+    cefr_level: B2
+    accented: же́ртвовать
+    aspect: impf
+    governs: ins
+    collections:
+      - character
+      - society
+    en_gb:
+      standard: to sacrifice (to give something up for a cause)
+      alt:
+        - to give up
+    conjugation:
+      imperative:
+        sg: же́ртвуй
+        pl: же́ртвуйте
+      present:
+        "1sg": же́ртвую
+        "2sg": же́ртвуешь
+        "3sg": же́ртвует
+        "1pl": же́ртвуем
+        "2pl": же́ртвуете
+        "3pl": же́ртвуют
+      past_m: же́ртвовал
+      past_f: же́ртвовала
+      past_n: же́ртвовало
+      past_pl: же́ртвовали
+    usage:
+      - ru: Он же́ртвует вре́менем.
+        en_gb: He sacrifices his time.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Они́ же́ртвовали здоро́вьем.
+        en_gb: They sacrificed their health.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
+      - ru: Я не же́ртвую семьёй.
+        en_gb: I do not sacrifice my family.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
   "жечь=to burn":
     cefr_level: B1
     accented: жечь
@@ -7664,6 +7899,7 @@ words:
     cefr_level: A1
     accented: забыва́ть
     aspect: impf
+    governs: { prep: о, case: pre }
     pair: "забыть=to forget"
     collections:
       - daily life
@@ -7710,6 +7946,7 @@ words:
     cefr_level: A1
     accented: забы́ть
     aspect: pf
+    governs: { prep: о, case: pre }
     pair: "забывать=to forget"
     collections:
       - daily life
@@ -7791,10 +8028,54 @@ words:
       - ru: Ты заведёшь но́вую соба́ку?
         en_gb: Will you get a new dog?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "завидовать=to envy":
+    cefr_level: B1
+    accented: зави́довать
+    aspect: impf
+    governs: dat
+    collections:
+      - feelings and sensations
+      - character
+    en_gb:
+      standard: to envy (to want what someone else has)
+      alt:
+        - to be jealous of
+    conjugation:
+      imperative:
+        sg: зави́дуй
+        pl: зави́дуйте
+      present:
+        "1sg": зави́дую
+        "2sg": зави́дуешь
+        "3sg": зави́дует
+        "1pl": зави́дуем
+        "2pl": зави́дуете
+        "3pl": зави́дуют
+      past_m: зави́довал
+      past_f: зави́довала
+      past_n: зави́довало
+      past_pl: зави́довали
+    usage:
+      - ru: Он зави́дует бра́ту.
+        en_gb: He envies his brother.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я не зави́дую сосе́ду.
+        en_gb: I do not envy my neighbour.
+        inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
+      - ru: Не зави́дуй друзья́м.
+        en_gb: Don't envy your friends.
+        inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Она́ зави́довала сестре́.
+        en_gb: She envied her sister.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
+      - ru: Ты зави́дуешь их успе́ху?
+        en_gb: Do you envy their success?
+        inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "зависеть=to depend on":
     cefr_level: B1
     accented: зави́сеть
     aspect: impf
+    governs: { prep: от, case: gen }
     collections:
       - daily life
     en_gb:
@@ -9181,6 +9462,7 @@ words:
     cefr_level: A1
     accented: заня́ться
     aspect: pf
+    governs: ins
     pair: "заниматься=to study"
     collections:
       - school
@@ -9524,6 +9806,7 @@ words:
     cefr_level: B1
     accented: запрети́ть
     aspect: pf
+    governs: dat
     pair: "запрещать=to forbid"
     collections:
       - the law
@@ -9567,6 +9850,7 @@ words:
     cefr_level: B1
     accented: запреща́ть
     aspect: impf
+    governs: dat
     pair: "запретить=to forbid"
     collections:
       - the law
@@ -10186,6 +10470,7 @@ words:
     cefr_level: A1
     accented: захоте́ть
     aspect: pf
+    governs: gen
     pair: "хотеть=to want"
     collections:
       - feelings and sensations
@@ -10755,6 +11040,43 @@ words:
       past_f: шла
       past_n: шло
       past_pl: шли
+  "избегать=to avoid":
+    cefr_level: B1
+    accented: избега́ть
+    aspect: impf
+    governs: gen
+    collections:
+      - character
+      - daily life
+    en_gb:
+      standard: to avoid (to keep away from)
+      alt:
+        - to keep clear of
+    conjugation:
+      imperative:
+        sg: избега́й
+        pl: избега́йте
+      present:
+        "1sg": избега́ю
+        "2sg": избега́ешь
+        "3sg": избега́ет
+        "1pl": избега́ем
+        "2pl": избега́ете
+        "3pl": избега́ют
+      past_m: избега́л
+      past_f: избега́ла
+      past_n: избега́ло
+      past_pl: избега́ли
+    usage:
+      - ru: Она́ избега́ет шу́ма.
+        en_gb: She avoids noise.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Избега́й опа́сности.
+        en_gb: Avoid danger.
+        inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+      - ru: Он избега́л разгово́ра.
+        en_gb: He avoided the conversation.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
   "извинить=to excuse":
     cefr_level: A2
     accented: извини́ть
@@ -11182,6 +11504,7 @@ words:
     cefr_level: A2
     accented: иска́ть
     aspect: impf
+    governs: gen
     collections:
       - daily life
     en_gb:
@@ -11589,6 +11912,7 @@ words:
     cefr_level: A2
     accented: каза́ться
     aspect: impf
+    governs: dat
     pair: "показаться=to seem"
     collections:
       - daily life
@@ -11629,6 +11953,7 @@ words:
     cefr_level: B1
     accented: каса́ться
     aspect: impf
+    governs: gen
     collections:
       - daily life
     en_gb:
@@ -11973,6 +12298,7 @@ words:
     cefr_level: B2
     accented: кома́ндовать
     aspect: impf
+    governs: ins
     collections:
       - military
       - work
@@ -12906,6 +13232,40 @@ words:
       past_f: легла́
       past_n: легло́
       past_pl: легли́
+  "лишиться=to lose":
+    cefr_level: B2
+    accented: лиши́ться
+    aspect: pf
+    governs: gen
+    collections:
+      - life and death
+      - finance
+    en_gb:
+      standard: to lose (to be deprived of something)
+      alt:
+        - to be deprived of
+    conjugation:
+      future:
+        "1sg": лишу́сь
+        "2sg": лиши́шься
+        "3sg": лиши́тся
+        "1pl": лиши́мся
+        "2pl": лиши́тесь
+        "3pl": лиша́тся
+      past_m: лиши́лся
+      past_f: лиши́лась
+      past_n: лиши́лось
+      past_pl: лиши́лись
+    usage:
+      - ru: Он лиши́лся рабо́ты.
+        en_gb: He lost his job.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Она́ лиши́лась го́лоса.
+        en_gb: She lost her voice.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
+      - ru: Мы лиши́мся вре́мени.
+        en_gb: We will lose our time.
+        inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
   "ловить=to catch":
     cefr_level: B1
     accented: лови́ть
@@ -13360,6 +13720,7 @@ words:
     cefr_level: A2
     accented: мечта́ть
     aspect: impf
+    governs: { prep: о, case: pre }
     collections:
       - feelings and sensations
     en_gb:
@@ -13913,6 +14274,7 @@ words:
     cefr_level: A2
     accented: наде́яться
     aspect: impf
+    governs: { prep: на, case: acc }
     collections:
       - feelings and sensations
     en_gb:
@@ -14171,6 +14533,7 @@ words:
     cefr_level: A2
     accented: называ́ться
     aspect: impf
+    governs: ins
     collections:
       - daily life
       - communication
@@ -15436,6 +15799,7 @@ words:
     cefr_level: A1
     accented: нра́виться
     aspect: impf
+    governs: dat
     pair: "понравиться=to be liked"
     collections:
       - feelings and sensations
@@ -15476,6 +15840,7 @@ words:
     cefr_level: B1
     accented: нужда́ться
     aspect: impf
+    governs: { prep: в, case: pre }
     collections:
       - daily life
       - feelings and sensations
@@ -15601,6 +15966,7 @@ words:
     cefr_level: A2
     accented: обеща́ть
     aspect: impf
+    governs: dat
     pair: "пообещать=to promise"
     collections:
       - communication
@@ -15645,6 +16011,7 @@ words:
     cefr_level: B1
     accented: оби́деться
     aspect: pf
+    governs: { prep: на, case: acc }
     collections:
       - feelings and sensations
       - communication
@@ -15688,6 +16055,7 @@ words:
     cefr_level: B1
     accented: облада́ть
     aspect: impf
+    governs: ins
     collections:
       - daily life
     en_gb:
@@ -16019,6 +16387,7 @@ words:
     cefr_level: A2
     accented: обра́доваться
     aspect: pf
+    governs: dat
     pair: "радоваться=to be glad"
     collections:
       - feelings and sensations
@@ -16141,6 +16510,7 @@ words:
     cefr_level: B1
     accented: обрати́ться
     aspect: pf
+    governs: { prep: к, case: dat }
     pair: "обращаться=to address"
     collections:
       - communication
@@ -16228,6 +16598,7 @@ words:
     cefr_level: B1
     accented: обраща́ться
     aspect: impf
+    governs: { prep: к, case: dat }
     pair: "обратиться=to address"
     collections:
       - communication
@@ -16428,6 +16799,7 @@ words:
     cefr_level: A1
     accented: объясни́ть
     aspect: pf
+    governs: dat
     pair: "объяснять=to explain"
     collections:
       - communication
@@ -16472,6 +16844,7 @@ words:
     cefr_level: A1
     accented: объясня́ть
     aspect: impf
+    governs: dat
     pair: "объяснить=to explain"
     collections:
       - communication
@@ -16740,6 +17113,7 @@ words:
     cefr_level: B1
     accented: ожида́ть
     aspect: impf
+    governs: gen
     collections:
       - daily life
       - feelings and sensations
@@ -16821,6 +17195,7 @@ words:
     cefr_level: B1
     accented: оказа́ться
     aspect: pf
+    governs: ins
     pair: "оказываться=to turn out"
     collections:
       - daily life
@@ -16860,6 +17235,7 @@ words:
     cefr_level: B1
     accented: ока́зываться
     aspect: impf
+    governs: ins
     pair: "оказаться=to turn out"
     collections:
       - daily life
@@ -17915,6 +18291,7 @@ words:
     cefr_level: A1
     accented: отве́тить
     aspect: pf
+    governs: [dat, { prep: на, case: acc }]
     pair: "отвечать=to answer"
     collections:
       - communication
@@ -17962,6 +18339,7 @@ words:
     cefr_level: A1
     accented: отвеча́ть
     aspect: impf
+    governs: [dat, { prep: на, case: acc }]
     pair: "ответить=to answer"
     collections:
       - communication
@@ -18203,6 +18581,7 @@ words:
     cefr_level: B1
     accented: отказа́ться
     aspect: pf
+    governs: { prep: от, case: gen }
     pair: "отказываться=to refuse"
     collections:
       - communication
@@ -18246,6 +18625,7 @@ words:
     cefr_level: B1
     accented: отка́зываться
     aspect: impf
+    governs: { prep: от, case: gen }
     pair: "отказаться=to refuse"
     collections:
       - communication
@@ -18532,6 +18912,7 @@ words:
     cefr_level: B1
     accented: относи́ться
     aspect: impf
+    governs: { prep: к, case: dat }
     collections:
       - daily life
       - communication
@@ -19598,6 +19979,7 @@ words:
     cefr_level: B1
     accented: па́хнуть
     aspect: impf
+    governs: ins
     en_gb:
       standard: to smell (to give off a smell)
     collections:
@@ -20863,6 +21245,7 @@ words:
     cefr_level: A2
     accented: пове́рить
     aspect: pf
+    governs: dat
     pair: "верить=to believe"
     collections:
       - feelings and sensations
@@ -21319,6 +21702,7 @@ words:
     cefr_level: A1
     accented: подари́ть
     aspect: pf
+    governs: dat
     pair: "дарить=to give"
     en_gb:
       standard: to give (something) as a present
@@ -21775,6 +22159,7 @@ words:
     cefr_level: A1
     accented: подожда́ть
     aspect: pf
+    governs: gen
     pair: "ждать=to wait"
     collections:
       - daily life
@@ -21981,6 +22366,7 @@ words:
     cefr_level: A1
     accented: поду́мать
     aspect: pf
+    governs: { prep: о, case: pre }
     pair: "думать=to think"
     en_gb:
       standard: to think (to give something some thought)
@@ -22453,6 +22839,7 @@ words:
     cefr_level: A1
     accented: позвони́ть
     aspect: pf
+    governs: dat
     pair: "звонить=to call"
     collections:
       - communication
@@ -22706,6 +23093,7 @@ words:
     cefr_level: A1
     accented: показа́ть
     aspect: pf
+    governs: dat
     pair: "показывать=to show"
     collections:
       - communication
@@ -22750,6 +23138,7 @@ words:
     cefr_level: A2
     accented: показа́ться
     aspect: pf
+    governs: dat
     pair: "казаться=to seem"
     collections:
       - feelings and sensations
@@ -22790,6 +23179,7 @@ words:
     cefr_level: A1
     accented: пока́зывать
     aspect: impf
+    governs: dat
     pair: "показать=to show"
     collections:
       - communication
@@ -23587,6 +23977,7 @@ words:
     cefr_level: B1
     accented: помеша́ть
     aspect: pf
+    governs: dat
     pair: "мешать=to hinder"
     collections:
       - daily life
@@ -23629,6 +24020,7 @@ words:
     cefr_level: A1
     accented: по́мнить
     aspect: impf
+    governs: { prep: о, case: pre }
     collections:
       - daily life
     en_gb:
@@ -23774,6 +24166,7 @@ words:
     cefr_level: A1
     accented: помо́чь
     aspect: pf
+    governs: dat
     pair: "помогать=to help"
     collections:
       - daily life
@@ -23943,6 +24336,7 @@ words:
     cefr_level: A1
     accented: понра́виться
     aspect: pf
+    governs: dat
     pair: "нравиться=to be liked"
     collections:
       - feelings and sensations
@@ -24063,6 +24457,7 @@ words:
     cefr_level: A2
     accented: пообеща́ть
     aspect: pf
+    governs: dat
     pair: "обещать=to promise"
     collections:
       - communication
@@ -24358,6 +24753,7 @@ words:
     cefr_level: A2
     accented: попроси́ть
     aspect: pf
+    governs: gen
     pair: "просить=to ask for"
     collections:
       - communication
@@ -24645,6 +25041,7 @@ words:
     cefr_level: B1
     accented: после́довать
     aspect: pf
+    governs: dat
     pair: "следовать=to follow"
     collections:
       - daily life
@@ -24759,6 +25156,7 @@ words:
     cefr_level: A1
     accented: посмотре́ть
     aspect: pf
+    governs: { prep: на, case: acc }
     pair: "смотреть=to watch"
     collections:
       - daily life
@@ -24805,6 +25203,7 @@ words:
     cefr_level: B1
     accented: посове́товать
     aspect: pf
+    governs: dat
     pair: "советовать=to advise"
     collections:
       - communication
@@ -25253,6 +25652,7 @@ words:
     cefr_level: B1
     accented: потре́бовать
     aspect: pf
+    governs: gen
     pair: "требовать=to demand"
     collections:
       - communication
@@ -26605,6 +27005,7 @@ words:
     cefr_level: B1
     accented: привы́кнуть
     aspect: pf
+    governs: { prep: к, case: dat }
     en_gb:
       standard: to get used to (something)
     collections:
@@ -27111,6 +27512,7 @@ words:
     cefr_level: B1
     accented: приказа́ть
     aspect: pf
+    governs: dat
     collections:
       - politics
       - communication
@@ -27306,6 +27708,7 @@ words:
     cefr_level: B1
     accented: принадлежа́ть
     aspect: impf
+    governs: dat
     en_gb:
       standard: to belong (to someone)
     collections:
@@ -28965,6 +29368,7 @@ words:
     cefr_level: A2
     accented: проси́ть
     aspect: impf
+    governs: gen
     pair: "попросить=to ask for"
     collections:
       - communication
@@ -29674,6 +30078,7 @@ words:
     cefr_level: A1
     accented: рабо́тать
     aspect: impf
+    governs: ins
     collections:
       - work
       - daily life
@@ -29738,6 +30143,7 @@ words:
     cefr_level: A2
     accented: ра́доваться
     aspect: impf
+    governs: dat
     pair: "обрадоваться=to be glad"
     collections:
       - feelings and sensations
@@ -30460,6 +30866,7 @@ words:
     cefr_level: A2
     accented: разреша́ть
     aspect: impf
+    governs: dat
     pair: "разрешить=to allow"
     collections:
       - the law
@@ -30503,6 +30910,7 @@ words:
     cefr_level: A2
     accented: разреши́ть
     aspect: pf
+    governs: dat
     pair: "разрешать=to allow"
     collections:
       - daily life
@@ -30697,6 +31105,7 @@ words:
     cefr_level: A2
     accented: рассказа́ть
     aspect: pf
+    governs: { prep: о, case: pre }
     pair: "рассказывать=to tell"
     collections:
       - communication
@@ -30740,6 +31149,7 @@ words:
     cefr_level: A2
     accented: расска́зывать
     aspect: impf
+    governs: { prep: о, case: pre }
     pair: "рассказать=to tell"
     collections:
       - communication
@@ -31086,6 +31496,7 @@ words:
     cefr_level: B1
     accented: рассчи́тывать
     aspect: impf
+    governs: { prep: на, case: acc }
     collections:
       - daily life
     en_gb:
@@ -31541,6 +31952,7 @@ words:
     cefr_level: B1
     accented: рискова́ть
     aspect: impf
+    governs: ins
     collections:
       - daily life
     en_gb:
@@ -31749,6 +32161,43 @@ words:
       - ru: Ты руга́ешься из-за пустяко́в?
         en_gb: Do you quarrel over trifles?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+  "руководить=to lead":
+    cefr_level: B2
+    accented: руководи́ть
+    aspect: impf
+    governs: ins
+    collections:
+      - work
+      - society
+    en_gb:
+      standard: to lead (to be in charge of a group or a project)
+      alt:
+        - to manage
+    conjugation:
+      imperative:
+        sg: руководи́
+        pl: руководи́те
+      present:
+        "1sg": руковожу́
+        "2sg": руководи́шь
+        "3sg": руководи́т
+        "1pl": руководи́м
+        "2pl": руководи́те
+        "3pl": руководя́т
+      past_m: руководи́л
+      past_f: руководи́ла
+      past_n: руководи́ло
+      past_pl: руководи́ли
+    usage:
+      - ru: Он руководи́т гру́ппой.
+        en_gb: He leads the group.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Она́ руководи́ла отде́лом.
+        en_gb: She managed the department.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
+      - ru: Я руковожу́ прое́ктом.
+        en_gb: I am running the project.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
   "рухнуть=to collapse":
     cefr_level: B1
     accented: ру́хнуть
@@ -32426,6 +32875,7 @@ words:
     cefr_level: A1
     accented: сказа́ть
     aspect: pf
+    governs: { prep: о, case: pre }
     pair: "говорить=to speak"
     collections:
       - communication
@@ -32694,6 +33144,7 @@ words:
     cefr_level: B1
     accented: сле́довать
     aspect: impf
+    governs: dat
     pair: "последовать=to follow"
     collections:
       - daily life
@@ -32855,6 +33306,7 @@ words:
     cefr_level: A2
     accented: служи́ть
     aspect: impf
+    governs: ins
     collections:
       - work
       - military
@@ -33289,6 +33741,7 @@ words:
     cefr_level: A1
     accented: смотре́ть
     aspect: impf
+    governs: { prep: на, case: acc }
     pair: "посмотреть=to look"
     collections:
       - the arts
@@ -33466,6 +33919,40 @@ words:
       - ru: Ты снима́ешь пальто́ в прихо́жей?
         en_gb: Do you take off your coat in the hallway?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+  "сниться=to be dreamt":
+    cefr_level: B1
+    accented: сни́ться
+    aspect: impf
+    governs: dat
+    collections:
+      - daily life
+      - feelings and sensations
+    en_gb:
+      standard: to be dreamt (to appear in someone's dream)
+      alt:
+        - to dream about (the dreamer is dative)
+    conjugation:
+      present:
+        "1sg": снюсь
+        "2sg": сни́шься
+        "3sg": сни́тся
+        "1pl": сни́мся
+        "2pl": сни́тесь
+        "3pl": сня́тся
+      past_m: сни́лся
+      past_f: сни́лась
+      past_n: сни́лось
+      past_pl: сни́лись
+    usage:
+      - ru: Мне сни́тся стра́нный сон.
+        en_gb: I am having a strange dream.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Бра́ту сни́лся стра́шный сон.
+        en_gb: My brother had a frightening dream.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
+      - ru: Тебе́ сня́тся хоро́шие сны?
+        en_gb: Do you have good dreams?
+        inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
   "снять=to take off":
     cefr_level: A2
     accented: снять
@@ -34084,6 +34571,7 @@ words:
     cefr_level: B1
     accented: сомнева́ться
     aspect: impf
+    governs: { prep: в, case: pre }
     collections:
       - feelings and sensations
     en_gb:
@@ -34651,6 +35139,43 @@ words:
       - ru: В сухо́м ме́сте докуме́нты сохрани́лись бы лу́чше.
         en_gb: In a dry place the documents would be better preserved.
         inflect: { token: 5, tense: past, person: past_pl, rule: verb-conditional }
+  "сочувствовать=to sympathise":
+    cefr_level: B2
+    accented: сочу́вствовать
+    aspect: impf
+    governs: dat
+    collections:
+      - feelings and sensations
+      - character
+    en_gb:
+      standard: to sympathise (to feel for someone)
+      alt:
+        - to feel sorry for
+    conjugation:
+      imperative:
+        sg: сочу́вствуй
+        pl: сочу́вствуйте
+      present:
+        "1sg": сочу́вствую
+        "2sg": сочу́вствуешь
+        "3sg": сочу́вствует
+        "1pl": сочу́вствуем
+        "2pl": сочу́вствуете
+        "3pl": сочу́вствуют
+      past_m: сочу́вствовал
+      past_f: сочу́вствовала
+      past_n: сочу́вствовало
+      past_pl: сочу́вствовали
+    usage:
+      - ru: Я сочу́вствую сосе́ду.
+        en_gb: I sympathise with my neighbour.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Все сочу́вствовали ма́тери.
+        en_gb: Everyone sympathised with the mother.
+        inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
+      - ru: Он сочу́вствует друзья́м.
+        en_gb: He sympathises with his friends.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
   "спасать=to save":
     cefr_level: A2
     accented: спаса́ть
@@ -35289,6 +35814,7 @@ words:
     cefr_level: A2
     accented: станови́ться
     aspect: impf
+    governs: ins
     pair: "стать=to become"
     collections:
       - daily life
@@ -35375,6 +35901,7 @@ words:
     cefr_level: A2
     accented: стать
     aspect: pf
+    governs: ins
     pair: "становиться=to become"
     collections:
       - daily life
@@ -35491,6 +36018,7 @@ words:
     cefr_level: A1
     accented: сто́ить
     aspect: impf
+    governs: gen
     heteronyms:
       - ru: сто́ит
         gloss: it costs
@@ -35583,6 +36111,7 @@ words:
     cefr_level: B1
     accented: страда́ть
     aspect: impf
+    governs: { prep: от, case: gen }
     collections:
       - feelings and sensations
       - sickness and health
@@ -36048,6 +36577,7 @@ words:
     cefr_level: B1
     accented: счита́ться
     aspect: impf
+    governs: ins
     collections:
       - daily life
     en_gb:
@@ -36594,6 +37124,7 @@ words:
     cefr_level: B1
     accented: тре́бовать
     aspect: impf
+    governs: gen
     pair: "потребовать=to demand"
     collections:
       - daily life
@@ -37218,6 +37749,43 @@ words:
       - ru: Ты уви́дишь мо́ре из окна́?
         en_gb: Will you see the sea from the window?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+  "увлекаться=to be keen on":
+    cefr_level: B1
+    accented: увлека́ться
+    aspect: impf
+    governs: ins
+    collections:
+      - hobbies and pastimes
+      - character
+    en_gb:
+      standard: to be keen on (to have something as a passion)
+      alt:
+        - to be into
+    conjugation:
+      imperative:
+        sg: увлека́йся
+        pl: увлека́йтесь
+      present:
+        "1sg": увлека́юсь
+        "2sg": увлека́ешься
+        "3sg": увлека́ется
+        "1pl": увлека́емся
+        "2pl": увлека́етесь
+        "3pl": увлека́ются
+      past_m: увлека́лся
+      past_f: увлека́лась
+      past_n: увлека́лось
+      past_pl: увлека́лись
+    usage:
+      - ru: Она́ увлека́ется исто́рией.
+        en_gb: She is keen on history.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Я увлека́юсь спо́ртом.
+        en_gb: I am keen on sport.
+        inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+      - ru: Брат увлека́лся му́зыкой.
+        en_gb: My brother was keen on music.
+        inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
   "уволить=to fire":
     cefr_level: B2
     accented: уво́лить
@@ -37290,6 +37858,7 @@ words:
     cefr_level: B1
     accented: удава́ться
     aspect: impf
+    governs: dat
     pair: "удаться=to succeed"
     collections:
       - daily life
@@ -37396,6 +37965,7 @@ words:
     cefr_level: B1
     accented: уда́ться
     aspect: pf
+    governs: dat
     pair: "удаваться=to succeed"
     collections:
       - daily life
@@ -37472,6 +38042,7 @@ words:
     cefr_level: B1
     accented: удиви́ться
     aspect: pf
+    governs: dat
     pair: "удивляться=to be surprised"
     collections:
       - feelings and sensations
@@ -37512,6 +38083,7 @@ words:
     cefr_level: B1
     accented: удивля́ться
     aspect: impf
+    governs: dat
     pair: "удивиться=to be surprised"
     collections:
       - feelings and sensations
@@ -37965,6 +38537,7 @@ words:
     cefr_level: A2
     accented: улыба́ться
     aspect: impf
+    governs: dat
     pair: "улыбнуться=to smile"
     collections:
       - feelings and sensations
@@ -38015,6 +38588,7 @@ words:
     cefr_level: A2
     accented: улыбну́ться
     aspect: pf
+    governs: dat
     pair: "улыбаться=to smile"
     collections:
       - feelings and sensations
@@ -38284,6 +38858,44 @@ words:
       - ru: Без пери́л я бы упа́л с ле́стницы.
         en_gb: Without a railing I would fall down the stairs.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
+  "управлять=to control":
+    cefr_level: B1
+    accented: управля́ть
+    aspect: impf
+    governs: ins
+    collections:
+      - work
+      - technology
+    en_gb:
+      standard: to control (to steer or run something)
+      alt:
+        - to manage
+        - to drive
+    conjugation:
+      imperative:
+        sg: управля́й
+        pl: управля́йте
+      present:
+        "1sg": управля́ю
+        "2sg": управля́ешь
+        "3sg": управля́ет
+        "1pl": управля́ем
+        "2pl": управля́ете
+        "3pl": управля́ют
+      past_m: управля́л
+      past_f: управля́ла
+      past_n: управля́ло
+      past_pl: управля́ли
+    usage:
+      - ru: Он управля́ет маши́ной.
+        en_gb: He drives the car.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Кто управля́ет заво́дом?
+        en_gb: Who runs the factory?
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Она́ управля́ла компа́нией.
+        en_gb: She managed the company.
+        inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
   "усесться=to sit down":
     cefr_level: B1
     accented: усе́сться
@@ -38687,6 +39299,7 @@ words:
     cefr_level: A2
     accented: уста́ть
     aspect: pf
+    governs: { prep: от, case: gen }
     collections:
       - sickness and health
       - feelings and sensations
@@ -38936,6 +39549,7 @@ words:
     cefr_level: B1
     accented: уча́ствовать
     aspect: impf
+    governs: { prep: в, case: pre }
     collections:
       - daily life
     en_gb:
@@ -39316,6 +39930,7 @@ words:
     cefr_level: A1
     accented: хоте́ть
     aspect: impf
+    governs: gen
     pair: "захотеть=to want"
     collections:
       - daily life
@@ -40039,6 +40654,7 @@ words:
     cefr_level: B1
     accented: явля́ться
     aspect: impf
+    governs: ins
     collections:
       - daily life
     en_gb:

@@ -418,26 +418,56 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
   four-cell paradigm; without it the builder needs three filled cells and would
   drop the word. List the absent slots in `DEFECTIVE` (see the morphology oracle
   below) so the filler can never creep back.
-- **`governs` — object case (optional).** For a verb whose object isn't the
-  plain accusative, name the case it governs: `governs: dat` (помога́ть,
-  звони́ть, ве́рить, меша́ть, сове́товать), `gen` (ждать, боя́ться, жела́ть) or
-  `ins` (интересова́ться, занима́ться, горди́ться, по́льзоваться). One of
-  `dat`/`gen`/`ins`; leave it off ordinary accusative or intransitive verbs.
-  This feeds the **verb-government drill** (`/verb-government`). To exercise a
-  government, annotate the *governed object* in a usage example with that case
-  and the matching rule — e.g. on `мама`:
+- **`governs` — government frame (optional).** For a verb whose object isn't the
+  plain accusative, name the frame it forces. Two shapes, and a verb may carry
+  a list of both:
+
+  ```yaml
+  governs: dat                          # bare case: помога́ть, звони́ть, нра́виться
+  governs: { prep: от, case: gen }      # preposition + case: зави́сеть от
+  governs: [dat, { prep: на, case: acc }]   # отвеча́ть дру́гу / на вопро́с
+  ```
+
+  A **bare case** is one of `dat` (помога́ть, звони́ть, ве́рить, нра́виться,
+  зави́довать), `gen` (ждать, боя́ться, тре́бовать, избега́ть) or `ins`
+  (интересова́ться, занима́ться, стать, владе́ть). The accusative is the default,
+  so it is never a bare government — leave `governs` off ordinary accusative or
+  intransitive verbs.
+
+  A **prepositional frame** must be one the curriculum teaches; the closed list
+  lives in `PREP_FRAMES` (`src/lib/verbGovernment.js`) and is currently
+  `о + pre`, `на + acc`, `от + gen`, `к + dat`, `в + pre`. Adding a frame means
+  adding its `verb-gov-prep-*` rule to `grammar-rules.yml` in the same edit —
+  a frame with no rule is a government the app can't explain, and the data test
+  fails on it.
+
+  Aspect doesn't change government, so **both members of a pair carry the same
+  frame** (помога́ть and помо́чь are both `dat`); a test enforces it.
+
+  This feeds the **verb-government drill** (`/verb-government`) and the
+  government note on the vocab word card. To exercise a government, annotate the
+  *governed object* in a usage example with that case and the frame's rule —
+  e.g. on `мама` and on `погода`:
 
   ```yaml
   usage:
     - ru: Я ча́сто помога́ю ма́ме.
       en_gb: I often help my mum.
       inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
+    - ru: Всё зави́сит от пого́ды.
+      en_gb: Everything depends on the weather.
+      inflect: { token: 4, case: gen, number: sg, rule: verb-gov-prep-ot-gen }
   ```
 
-  The rules (`verb-gov-dative` / `-genitive` / `-instrumental` in
-  `grammar-rules.yml`) are marked `exception: true`, so the drill weights them
-  4×; a data test cross-checks that a matching governing verb really appears in
-  the sentence.
+  Note that the annotation goes on the **noun's** entry, not the verb's — the
+  slot the learner fills is the object, so the drill reads the answer off the
+  noun's own paradigm.
+
+  Every government rule in `grammar-rules.yml` is marked `exception: true`, so
+  the drill weights them 4×. Data tests cross-check that a verb governing that
+  exact frame really appears in the sentence, and — for a prepositional frame —
+  that the preposition is actually spelled out in it (its lengthened variants,
+  об/обо/во/ко, count as the same word).
 
 ### Adjectives (`adjectives.yml`)
 

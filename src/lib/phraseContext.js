@@ -16,6 +16,7 @@
 import { normalize } from './text.js'
 import { sample, shuffle } from './quiz.js'
 import { CASES, LOCATIVE, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
+import { GOVERNMENT_RULES } from './verbGovernment.js'
 
 /** Parts of speech that carry a context drill. */
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
@@ -118,11 +119,6 @@ export function indexPhrases(phrases) {
   }
   return byKey
 }
-
-/** Grammar-rule ids that mark a verb-government slot. */
-export const GOVERNMENT_RULES = Object.freeze(
-  new Set(['verb-gov-dative', 'verb-gov-genitive', 'verb-gov-instrumental']),
-)
 
 /** Whether a context phrase drills a verb-governed object case. */
 export function isGovernmentPhrase(phrase) {

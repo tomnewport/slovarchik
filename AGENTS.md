@@ -79,6 +79,7 @@ src/
                         #   progression/schedule/batches/session/sessionPools/sessionRunner/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/numerals/numberDrill  — inflection & numbers
+                        #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers

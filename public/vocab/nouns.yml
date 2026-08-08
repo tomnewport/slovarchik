@@ -1290,6 +1290,9 @@ words:
       - ru: Враг боя́лся си́льной а́рмии.
         en_gb: The enemy feared the strong army.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Генера́л кома́ндует а́рмией.
+        en_gb: The general commands the army.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: а́рмия
       sg_gen: а́рмии
@@ -1323,6 +1326,9 @@ words:
       - ru: В ци́рке выступа́ют молоды́е арти́сты.
         en_gb: Young performers appear at the circus.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
+      - ru: Зри́тели аплоди́руют арти́сту.
+        en_gb: The audience applaud the performer.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: арти́ст
       sg_gen: арти́ста
@@ -1844,6 +1850,9 @@ words:
       - ru: На пра́здник вну́ки принесли́ ба́бушкам буке́ты.
         en_gb: For the holiday the grandchildren brought their grandmothers bouquets.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
+      - ru: Внук да́рит ба́бушке цветы́.
+        en_gb: The grandson gives his grandmother flowers.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: ба́бушка
       sg_gen: ба́бушки
@@ -4165,6 +4174,9 @@ words:
       - ru: Табле́тка снима́ет головны́е бо́ли.
         en_gb: The tablet relieves headaches.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он страда́ет от бо́ли.
+        en_gb: He is suffering from pain.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-prep-ot-gen }
     declension:
       sg_nom: боль
       sg_gen: бо́ли
@@ -4550,6 +4562,12 @@ words:
       - ru: Роди́тели купи́ли бра́тьям одина́ковые велосипе́ды.
         en_gb: The parents bought the brothers identical bicycles.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
+      - ru: Врач запреща́ет бра́ту кури́ть.
+        en_gb: The doctor forbids my brother to smoke.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Она́ оби́делась на бра́та.
+        en_gb: She took offence at my brother.
+        inflect: { token: 4, case: acc, number: sg, rule: verb-gov-prep-na-acc }
     declension:
       sg_nom: брат
       sg_gen: бра́та
@@ -6070,6 +6088,9 @@ words:
       - ru: Мы ждём прихо́да весны́.
         en_gb: We are waiting for the arrival of spring.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Все ра́дуются весне́.
+        en_gb: Everyone is glad of the spring.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
   "ветер=wind":
     cefr_level: A1
     gender: m
@@ -7238,6 +7259,9 @@ words:
       - ru: Он слу́шал ле́кцию со внима́нием.
         en_gb: He listened to the lecture with attention.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Э́та рабо́та тре́бует внима́ния.
+        en_gb: This work demands attention.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-genitive }
     declension:
       sg_nom: внима́ние
       sg_gen: внима́ния
@@ -7346,6 +7370,9 @@ words:
       - ru: Ры́ба живёт в воде́.
         en_gb: Fish live in water.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Я хочу́ воды́.
+        en_gb: I want some water.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
     declension:
       sg_nom: вода́
       sg_gen: воды́
@@ -7635,6 +7662,9 @@ words:
       - ru: Дете́й на́до бо́льше держа́ть на во́здухе.
         en_gb: Children should be kept in the open air more.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Мы ды́шим све́жим во́здухом.
+        en_gb: We are breathing fresh air.
+        inflect: { token: 4, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: во́здух
       sg_gen: во́здуха
@@ -8151,6 +8181,12 @@ words:
       - ru: В таки́х делика́тных вопро́сах ва́жно не спеши́ть.
         en_gb: In such delicate matters it is important not to rush.
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Учи́тель удивля́ется вопро́су.
+        en_gb: The teacher is surprised at the question.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Он отвеча́ет на вопро́с.
+        en_gb: He is answering the question.
+        inflect: { token: 4, case: acc, number: sg, rule: verb-gov-prep-na-acc }
     declension:
       sg_nom: вопро́с
       sg_gen: вопро́са
@@ -8573,6 +8609,12 @@ words:
       - ru: В большу́ю больни́цу набра́ли молоды́х враче́й.
         en_gb: They took on young doctors for the big hospital.
         inflect: { token: 6, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Он стано́вится врачо́м.
+        en_gb: He is becoming a doctor.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
+      - ru: Она́ обраща́ется к врачу́.
+        en_gb: She is turning to the doctor.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-prep-k-dat }
     declension:
       sg_nom: врач
       sg_gen: врача́
@@ -8623,6 +8665,9 @@ words:
         en_alt:
           - people lived differently in ancient times
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он же́ртвует вре́менем.
+        en_gb: He sacrifices his time.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: вре́мя
       sg_gen: вре́мени
@@ -8683,6 +8728,9 @@ words:
       - ru: Пока́! До встре́чи!
         en_gb: Bye! See you!
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я забы́л о встре́че.
+        en_gb: I forgot about the meeting.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
     declension:
       sg_nom: встре́ча
       sg_gen: встре́чи
@@ -10687,6 +10735,9 @@ words:
       - ru: На новосе́лье мы пригласи́ли всех бли́зких госте́й.
         en_gb: For the housewarming we invited all our close guests.
         inflect: { token: 7, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Он показа́л го́стю дом.
+        en_gb: He showed the guest the house.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: гость
       sg_gen: го́стя
@@ -11376,6 +11427,9 @@ words:
       - ru: Он игра́ет в музыка́льной гру́ппе.
         en_gb: He plays in a musical group.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он руководи́т гру́ппой.
+        en_gb: He leads the group.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
   "грусть=sadness":
     cefr_level: B1
     gender: f
@@ -12819,6 +12873,9 @@ words:
       - ru: Они́ дру́жат с де́тства.
         en_gb: They have been friends since childhood.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он рассказа́л о де́тстве.
+        en_gb: He told us about his childhood.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
     declension:
       sg_nom: де́тство
       sg_gen: де́тства
@@ -14157,6 +14214,9 @@ words:
       - ru: Мать це́лый день занята́ ма́ленькими дочеря́ми.
         en_gb: The mother is busy all day with her little daughters.
         inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Оте́ц улыба́ется до́чери.
+        en_gb: The father smiles at his daughter.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: дочь
       sg_gen: до́чери
@@ -14345,6 +14405,15 @@ words:
       - ru: На свой день рожде́ния она́ позвала́ ста́рых друзе́й.
         en_gb: For her birthday she called round her old friends.
         inflect: { token: 8, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Э́тот дом принадлежи́т дру́гу.
+        en_gb: This house belongs to my friend.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Я по́мню о дру́ге.
+        en_gb: I keep my friend in mind.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
+      - ru: Он зави́дует дру́гу.
+        en_gb: He envies his friend.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: друг
       sg_gen: дру́га
@@ -14700,6 +14769,9 @@ words:
       - ru: Мы почу́вствовали за́пах ды́ма.
         en_gb: We smelled the smell of smoke.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Здесь па́хнет ды́мом.
+        en_gb: It smells of smoke here.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
   "дыхание=breathing":
     cefr_level: B1
     gender: n
@@ -17316,6 +17388,12 @@ words:
       - ru: Жела́ю вам кре́пкого здоро́вья.
         en_gb: I wish you robust health.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он риску́ет здоро́вьем.
+        en_gb: He is risking his health.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
+      - ru: Куре́ние вреди́т здоро́вью.
+        en_gb: Smoking harms your health.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: здоро́вье
       sg_gen: здоро́вья
@@ -17982,6 +18060,9 @@ words:
       - ru: В магази́не мно́го интере́сных игр.
         en_gb: There are many interesting games in the shop.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он уча́ствует в игре́.
+        en_gb: He is taking part in the game.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-v-pre }
     declension:
       sg_nom: игра́
       sg_gen: игры́
@@ -18510,6 +18591,9 @@ words:
       - ru: Заво́д горди́тся свои́ми молоды́ми инжене́рами.
         en_gb: The plant is proud of its young engineers.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Оте́ц рабо́тает инжене́ром.
+        en_gb: My father works as an engineer.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: инжене́р
       sg_gen: инжене́ра
@@ -19354,6 +19438,9 @@ words:
       - ru: В стра́шных исто́риях всегда́ есть до́ля пра́вды.
         en_gb: In scary stories there is always a grain of truth.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Она́ увлека́ется исто́рией.
+        en_gb: She is keen on history.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: исто́рия
       sg_gen: исто́рии
@@ -20396,6 +20483,12 @@ words:
       - ru: На карти́не изображён лес.
         en_gb: A forest is depicted in the picture.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Она́ смо́трит на карти́ну.
+        en_gb: She is looking at the picture.
+        inflect: { token: 4, case: acc, number: sg, rule: verb-gov-prep-na-acc }
+      - ru: Го́сти восхища́лись карти́ной.
+        en_gb: The guests admired the painting.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: карти́на
       sg_gen: карти́ны
@@ -28686,6 +28779,9 @@ words:
       - ru: Мы пошли́ к ма́ме в го́сти.
         en_gb: We went to visit mum.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Я обеща́ю ма́ме помо́чь.
+        en_gb: I promise my mum to help.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: ма́ма
       sg_gen: ма́мы
@@ -29215,6 +29311,9 @@ words:
       - ru: Де́ти лю́бят свои́х матере́й.
         en_gb: Children love their mothers.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Все сочу́вствуют ма́тери.
+        en_gb: Everyone sympathises with the mother.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: мать
       sg_gen: ма́тери
@@ -29287,6 +29386,9 @@ words:
       - ru: Мы прие́хали на маши́не.
         en_gb: We came by car.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Он управля́ет маши́ной.
+        en_gb: He drives the car.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: маши́на
       sg_gen: маши́ны
@@ -36851,6 +36953,12 @@ words:
       - ru: Я не всегда́ доверя́ю бы́стрым отве́там.
         en_gb: I do not always trust quick answers.
         inflect: { token: 6, case: dat, number: pl, rule: noun-dat-pl }
+      - ru: Мы ожида́ем отве́та.
+        en_gb: We are awaiting an answer.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
+      - ru: Я сомнева́юсь в отве́те.
+        en_gb: I doubt the answer.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-v-pre }
     declension:
       sg_nom: отве́т
       sg_gen: отве́та
@@ -37039,6 +37147,9 @@ words:
       - ru: Он пошёл в кино́ с отцо́м.
         en_gb: He went to the cinema with his father.
         inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Отцу́ сни́тся сын.
+        en_gb: The father dreams of his son.
+        inflect: { token: 1, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: оте́ц
       sg_gen: отца́
@@ -37935,6 +38046,9 @@ words:
       - ru: О чужи́х оши́бках су́дят стро́же, чем о свои́х.
         en_gb: People judge other people's mistakes more harshly than their own.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Э́то оказа́лось оши́бкой.
+        en_gb: That turned out to be a mistake.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: оши́бка
       sg_gen: оши́бки
@@ -41368,6 +41482,12 @@ words:
       - ru: Я слежу́ за пого́дой ка́ждый день.
         en_gb: I follow the weather every day.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Мы говори́м о пого́де.
+        en_gb: We are talking about the weather.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
+      - ru: Всё зави́сит от пого́ды.
+        en_gb: Everything depends on the weather.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-prep-ot-gen }
   "подарок=present":
     cefr_level: A2
     gender: m
@@ -41820,6 +41940,9 @@ words:
       - ru: Она́ обожа́ет ходи́ть по магази́нам с подру́гами.
         en_gb: She adores going round the shops with her friends.
         inflect: { token: 7, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Подру́ге понра́вился твой пода́рок.
+        en_gb: My friend liked your present.
+        inflect: { token: 1, case: dat, number: sg, rule: verb-gov-dative }
   "подсолнух=sunflower":
     cefr_level: B1
     gender: m
@@ -43007,6 +43130,15 @@ words:
       - ru: Я пришла́ к тебе́ за по́мощью.
         en_gb: I came to you for help.
         inflect: { token: 6, case: ins, number: sg, rule: noun-fem-soft }
+      - ru: Я прошу́ по́мощи.
+        en_gb: I am asking for help.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
+      - ru: Я рассчи́тываю на по́мощь.
+        en_gb: I am counting on help.
+        inflect: { token: 4, case: acc, number: sg, rule: verb-gov-prep-na-acc }
+      - ru: Они́ нужда́ются в по́мощи.
+        en_gb: They need help.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-v-pre }
     declension:
       sg_nom: по́мощь
       sg_gen: по́мощи
@@ -44487,6 +44619,9 @@ words:
       - ru: Прочита́й пе́рвые два предложе́ния.
         en_gb: Read the first two sentences.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он отказа́лся от предложе́ния.
+        en_gb: He refused the offer.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-prep-ot-gen }
     declension:
       sg_nom: предложе́ние
       sg_gen: предложе́ния
@@ -45350,6 +45485,9 @@ words:
       - ru: В кни́ге мно́го поле́зных приме́ров.
         en_gb: There are many useful examples in the book.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Э́та кни́га явля́ется приме́ром.
+        en_gb: This book is an example.
+        inflect: { token: 4, case: ins, number: sg, rule: verb-gov-instrumental }
   "примета=omen":
     cefr_level: B2
     gender: f
@@ -47124,6 +47262,9 @@ words:
       - ru: В путеше́ствии мы уви́дели мно́го городо́в.
         en_gb: On the journey we saw many cities.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Она́ мечта́ет о путеше́ствии.
+        en_gb: She dreams about a journey.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
     declension:
       sg_nom: путеше́ствие
       sg_gen: путеше́ствия
@@ -47470,6 +47611,18 @@ words:
       - ru: Он дово́лен свое́й рабо́той.
         en_gb: He is happy with his work.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Разгово́р каса́ется рабо́ты.
+        en_gb: The conversation concerns work.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
+      - ru: Я ду́маю о рабо́те.
+        en_gb: I am thinking about work.
+        inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
+      - ru: Он серьёзно отно́сится к рабо́те.
+        en_gb: He takes his work seriously.
+        inflect: { token: 5, case: dat, number: sg, rule: verb-gov-prep-k-dat }
+      - ru: Он лиши́лся рабо́ты.
+        en_gb: He lost his job.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
     declension:
       sg_nom: рабо́та
       sg_gen: рабо́ты
@@ -52488,6 +52641,9 @@ words:
       - ru: В де́тстве я де́лала уро́ки вме́сте со сёстрами.
         en_gb: As a child I did my homework together with my sisters.
         inflect: { token: 8, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Сестре́ нра́вится но́вая рабо́та.
+        en_gb: My sister likes her new job.
+        inflect: { token: 1, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: сестра́
       sg_gen: сестры́
@@ -54547,6 +54703,12 @@ words:
       - ru: Благодаря́ до́брому сове́ту всё получи́лось.
         en_gb: Thanks to the good advice, everything worked out.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      - ru: Он сле́дует моему́ сове́ту.
+        en_gb: He follows my advice.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Она́ и́щет сове́та.
+        en_gb: She is looking for advice.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
     declension:
       sg_nom: сове́т
       sg_gen: сове́та
@@ -54883,6 +55045,12 @@ words:
       - ru: Генера́л ли́чно поговори́л с уста́лыми солда́тами.
         en_gb: The general spoke personally with the weary soldiers.
         inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Команди́р приказа́л солда́ту молча́ть.
+        en_gb: The commander ordered the soldier to keep quiet.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Он служи́л солда́том.
+        en_gb: He served as a soldier.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: солда́т
       sg_gen: солда́та
@@ -55759,6 +55927,9 @@ words:
       - ru: На заво́де не хвата́ет специали́стов.
         en_gb: The factory lacks specialists.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он счита́ется специали́стом.
+        en_gb: He is considered a specialist.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: специали́ст
       sg_gen: специали́ста
@@ -57837,6 +58008,9 @@ words:
       - ru: Профе́ссор попроси́л студе́нтов сдать рабо́ты во вто́рник.
         en_gb: The professor asked the students to hand in their work on Tuesday.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-animate }
+      - ru: Учи́тель объясня́ет пра́вило студе́нту.
+        en_gb: The teacher explains the rule to the student.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: студе́нт
       sg_gen: студе́нта
@@ -58868,6 +59042,9 @@ words:
       - ru: По воскресе́ньям оте́ц хо́дит на рыба́лку с сыновья́ми.
         en_gb: On Sundays the father goes fishing with his sons.
         inflect: { token: 8, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Мать разреша́ет сы́ну гуля́ть.
+        en_gb: The mother allows her son to go out.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
     declension:
       sg_nom: сын
       sg_gen: сы́на
@@ -59166,6 +59343,9 @@ words:
       - ru: В шко́ле мно́го ю́ных тала́нтов.
         en_gb: There are many young talents at the school.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+      - ru: Он облада́ет тала́нтом.
+        en_gb: He possesses talent.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
   "танго=tango":
     cefr_level: B1
     gender: n
@@ -61144,6 +61324,9 @@ words:
       - ru: Лю́ди горди́лись свои́м трудо́м.
         en_gb: People were proud of their labour.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Э́то не сто́ит труда́.
+        en_gb: That is not worth the trouble.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-genitive }
   "трудоголик=workaholic":
     cefr_level: B2
     gender: m
@@ -61963,6 +62146,9 @@ words:
       - ru: Он по́льзуется уда́чей в дела́х.
         en_gb: He enjoys luck in his affairs.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Мы наде́емся на уда́чу.
+        en_gb: We are hoping for luck.
+        inflect: { token: 4, case: acc, number: sg, rule: verb-gov-prep-na-acc }
   "удивление=surprise":
     cefr_level: B1
     gender: n
@@ -62833,6 +63019,12 @@ words:
       - ru: Он добива́ется успе́ха упо́рным трудо́м.
         en_gb: He achieves success through hard work.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он доби́лся успе́ха.
+        en_gb: He achieved success.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
+      - ru: Она́ добива́ется успе́ха.
+        en_gb: She is striving for success.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
   "усталость=tiredness":
     cefr_level: B1
     gender: f
@@ -63353,6 +63545,12 @@ words:
       - ru: В той шко́ле мно́гие вы́пускники ста́ли учителя́ми.
         en_gb: At that school many of the graduates became teachers.
         inflect: { token: 7, case: ins, number: pl, rule: noun-ins-pl }
+      - ru: Студе́нт отвеча́ет учи́телю.
+        en_gb: The student answers the teacher.
+        inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Она́ ста́ла учи́телем.
+        en_gb: She became a teacher.
+        inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: учи́тель
       sg_gen: учи́теля
@@ -65083,6 +65281,9 @@ words:
       - ru: Расте́ния поги́бли и́з-за хо́лода.
         en_gb: The plants died because of the cold.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Мы привы́кли к хо́лоду.
+        en_gb: We have got used to the cold.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-prep-k-dat }
   "холодильник=fridge":
     cefr_level: A2
     gender: m
@@ -65422,6 +65623,9 @@ words:
       - ru: Хоро́ший руководи́тель дви́жется к я́сным це́лям.
         en_gb: A good leader moves towards clear goals.
         inflect: { token: 6, case: dat, number: pl, rule: noun-dat-pl }
+      - ru: Он дости́г це́ли.
+        en_gb: He reached his goal.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
     declension:
       sg_nom: цель
       sg_gen: це́ли
@@ -68149,6 +68353,12 @@ words:
       - ru: Де́ти игра́ли с больши́м шу́мом.
         en_gb: The children played with a lot of noise.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Я уста́л от шу́ма.
+        en_gb: I am tired of the noise.
+        inflect: { token: 4, case: gen, number: sg, rule: verb-gov-prep-ot-gen }
+      - ru: Она́ избега́ет шу́ма.
+        en_gb: She avoids noise.
+        inflect: { token: 3, case: gen, number: sg, rule: verb-gov-genitive }
   "шуруп=screw":
     cefr_level: B2
     gender: m
@@ -68398,6 +68608,9 @@ words:
       - ru: На у́стных экза́менах он всегда́ волну́ется.
         en_gb: In oral exams he always gets nervous.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Студе́нт гото́вится к экза́мену.
+        en_gb: The student is preparing for the exam.
+        inflect: { token: 4, case: dat, number: sg, rule: verb-gov-prep-k-dat }
     declension:
       sg_nom: экза́мен
       sg_gen: экза́мена
@@ -69197,6 +69410,9 @@ words:
       - ru: Врач попроси́л показа́ть язы́к.
         en_gb: The doctor asked me to show my tongue.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ хорошо́ владе́ет языко́м.
+        en_gb: She has a good command of the language.
+        inflect: { token: 4, case: ins, number: sg, rule: verb-gov-instrumental }
     declension:
       sg_nom: язы́к
       sg_gen: языка́

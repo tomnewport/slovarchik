@@ -308,37 +308,108 @@ rules:
   verb-gov-dative:
     exception: true
     title: "Verbs that take the dative"
-    formula: "помога́ть · звони́ть · ве́рить · меша́ть · сове́товать + dative"
+    formula: "помога́ть · звони́ть · ве́рить · нра́виться · сове́товать + dative"
     explanation: >
       Some verbs put their object in the DATIVE where English just uses a direct
       object: помога́ть (to help), звони́ть (to phone), ве́рить (to believe /
-      trust), меша́ть (to disturb), сове́товать (to advise). Я помога́ю ма́ме (not
-      *ма́му), Я звоню́ дру́гу, Я ве́рю врачу́. Think of them as "give help / a
-      call / trust TO someone".
+      trust), меша́ть (to disturb), сове́товать (to advise), зави́довать (to
+      envy), удивля́ться (to be surprised at), ра́доваться (to be glad of),
+      улыба́ться (to smile at), принадлежа́ть (to belong to). Я помога́ю ма́ме
+      (not *ма́му), Я звоню́ дру́гу, Я ве́рю врачу́. Think of them as "give help /
+      a call / trust TO someone". A verb of giving or telling — дари́ть,
+      пока́зывать, объясня́ть, обеща́ть — puts the RECIPIENT in the dative and
+      the thing given in the accusative: Я дарю́ подру́ге цветы́.
     exceptions:
-      - "нра́виться and its subject: the liked thing is nominative, the person dative (мне нра́вится)."
+      - "нра́виться turns the sentence around: the liked thing is nominative, the person dative (мне нра́вится кни́га)."
+      - "So do каза́ться, сни́ться and удава́ться — the person is dative, never the subject (мне ка́жется, мне удало́сь)."
   verb-gov-genitive:
     exception: true
     title: "Verbs that take the genitive"
-    formula: "ждать · боя́ться · жела́ть + genitive"
+    formula: "ждать · боя́ться · жела́ть · тре́бовать · избега́ть + genitive"
     explanation: >
       A few verbs govern the GENITIVE: боя́ться (to fear), жела́ть (to wish),
-      and ждать (to wait for) with a non-specific or abstract object. Я бою́сь
-      соба́ки, Жела́ю сча́стья, Я жду авто́буса. (With a definite, concrete object
-      ждать can take the accusative — жду ма́му — but the genitive is the safe
-      default for things.)
+      тре́бовать (to demand), каса́ться (to touch / concern), избега́ть (to
+      avoid), добива́ться (to strive for), достига́ть (to reach) and ждать (to
+      wait for) with a non-specific or abstract object. Я бою́сь соба́ки, Жела́ю
+      сча́стья, Я жду авто́буса. (With a definite, concrete object ждать can take
+      the accusative — жду ма́му — but the genitive is the safe default for
+      things.) Проси́ть, иска́ть and хоте́ть also take the genitive for something
+      abstract or uncounted — проси́ть по́мощи, хоте́ть ча́я — and the accusative
+      for a definite thing: проси́ть де́ньги.
     exceptions:
       - "ждать takes the accusative for a specific person: жду ма́му, жду дру́га."
   verb-gov-instrumental:
     exception: true
     title: "Verbs that take the instrumental"
-    formula: "интересова́ться · занима́ться · горди́ться · по́льзоваться + instrumental"
+    formula: "интересова́ться · занима́ться · станови́ться · по́льзоваться + instrumental"
     explanation: >
       Several verbs — many of them reflexive -ся — govern the INSTRUMENTAL with
       no preposition: интересова́ться (to be interested in), занима́ться (to do /
-      study), горди́ться (to be proud of), по́льзоваться (to use). Она́
-      интересу́ется му́зыкой, Я занима́юсь спо́ртом, Мать горди́тся сы́ном, Я
-      по́льзуюсь телефо́ном.
+      study), горди́ться (to be proud of), по́льзоваться (to use), владе́ть (to
+      own), облада́ть (to possess), увлека́ться (to be keen on), рискова́ть (to
+      risk). Она́ интересу́ется му́зыкой, Я занима́юсь спо́ртом, Мать горди́тся
+      сы́ном. The other big group is "turning into / counting as": стать,
+      станови́ться, явля́ться, оказа́ться, счита́ться, называ́ться, and рабо́тать /
+      служи́ть in the sense of holding a post — Он стал врачо́м, Она́ рабо́тает
+      учи́телем.
+
+  # ── Verb government with a preposition ───────────────────────────────────
+  # The other half of government: the verb demands a fixed preposition, and the
+  # preposition brings its own case. The English gloss is what misleads here —
+  # "depend ON" is `от`, not `на` — so each frame gets its own rule.
+  verb-gov-prep-o-pre:
+    exception: true
+    title: "Verbs with о + prepositional"
+    formula: "ду́мать · говори́ть · по́мнить + о + prepositional"
+    explanation: >
+      "About" something is о + the PREPOSITIONAL: ду́мать о рабо́те (to think
+      about work), говори́ть о фи́льме, по́мнить о встре́че, мечта́ть о
+      путеше́ствии, забы́ть о вре́мени, рассказа́ть о де́тстве. The preposition
+      lengthens to об before a word starting with а, э, и, о or у (об исто́рии,
+      об о́тпуске) and to обо in обо мне.
+    exceptions:
+      - "ду́мать над + instrumental means to ponder a problem, not to think about a thing."
+  verb-gov-prep-na-acc:
+    exception: true
+    title: "Verbs with на + accusative"
+    formula: "наде́яться · смотре́ть · влия́ть + на + accusative"
+    explanation: >
+      A group of verbs points AT something with на + the ACCUSATIVE — the
+      accusative, not the prepositional, because the sense is direction:
+      наде́яться на друзе́й (to hope for / rely on friends), смотре́ть на карти́ну
+      (to look at a picture), влия́ть на пого́ду, оби́деться на бра́та (to take
+      offence at), рассчи́тывать на по́мощь (to count on help), отвеча́ть на
+      вопро́с (to answer a question).
+  verb-gov-prep-ot-gen:
+    exception: true
+    title: "Verbs with от + genitive"
+    formula: "зави́сеть · отказа́ться · уста́ть + от + genitive"
+    explanation: >
+      "From / on" in the sense of a source or a thing moved away from is от +
+      the GENITIVE: зави́сеть от пого́ды (to depend ON the weather — от, never
+      *на), отказа́ться от предложе́ния (to refuse an offer), уста́ть от рабо́ты
+      (to be tired of work), страда́ть от бо́ли (to suffer from pain).
+    exceptions:
+      - "The English of зави́сеть is \"depend ON\", but the Russian preposition is от."
+  verb-gov-prep-k-dat:
+    exception: true
+    title: "Verbs with к + dative"
+    formula: "гото́виться · привы́кнуть · относи́ться + к + dative"
+    explanation: >
+      Movement or attitude TOWARDS something is к + the DATIVE: гото́виться к
+      экза́мену (to prepare for an exam), привы́кнуть к хо́лоду (to get used to
+      the cold), относи́ться к рабо́те серьёзно (to treat work seriously),
+      обраща́ться к врачу́ (to turn to a doctor). Note that "prepare FOR" and
+      "get used TO" are both к, not для or в.
+  verb-gov-prep-v-pre:
+    exception: true
+    title: "Verbs with в + prepositional"
+    formula: "уча́ствовать · сомнева́ться · нужда́ться + в + prepositional"
+    explanation: >
+      Taking part or being involved IN something is в + the PREPOSITIONAL:
+      уча́ствовать в ко́нкурсе (to take part in a competition), сомнева́ться в
+      отве́те (to doubt an answer), нужда́ться в по́мощи (to need help). The
+      preposition lengthens to во before an awkward cluster (во вре́мени).
 
   # ── Adjectives ──────────────────────────────────────────────────────────
   adj-agreement:
