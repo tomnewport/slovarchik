@@ -192,7 +192,7 @@ async function completeSession(page) {
         await solveInflect(exercise)
         break
       case 'phrase-fix':
-      case 'aspect-drill':
+      case 'verb-contrast':
         await solvePhraseFix(exercise)
         break
       default:

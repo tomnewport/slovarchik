@@ -301,6 +301,24 @@ rules:
       - "After начина́ть/конча́ть ('begin/finish doing') only the imperfective infinitive follows."
       - "A negated imperative usually goes imperfective: не говори́!"
 
+  verb-motion-pair:
+    exception: true
+    title: "Verbs of motion: one direction or not?"
+    formula: "идти́/е́хать = one trip, one direction · ходи́ть/е́здить = habitually, there and back"
+    explanation: >
+      Nine of the commonest verbs come as a pair of IMPERFECTIVES, and the
+      choice between them is not aspect but direction. The DETERMINATE member
+      (идти́, е́хать, бежа́ть, лете́ть, плыть, нести́, вести́, везти́) describes one
+      journey under way in one direction: «Я иду́ в шко́лу» — I am on my way
+      there now. The INDETERMINATE member (ходи́ть, е́здить, бе́гать, лета́ть,
+      пла́вать, носи́ть, води́ть, вози́ть) describes motion as a habit, a
+      repetition, a round trip, or the bare ability: «Я хожу́ в шко́лу ка́ждый
+      день», «Ребёнок уже́ хо́дит». Adverbs give it away — сейча́с, туда́ point to
+      the determinate; ка́ждый день, ча́сто, обы́чно to the indeterminate.
+    exceptions:
+      - "A completed round trip goes in the indeterminate past: вчера́ я ходи́л в кино́ (went and came back)."
+      - "The indeterminate member also carries the settled sense: носи́ть = to wear, води́ть = to drive (a car)."
+
   # ── Verb government ──────────────────────────────────────────────────────
   # Which case a verb puts its object in when it isn't the plain accusative —
   # a producing-Russian skill an English speaker can't guess. Marked as

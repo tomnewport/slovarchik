@@ -216,6 +216,15 @@ function normalizeWord(pos, key, word) {
     aspect: word.aspect ?? null,
     pairKey: word.pair ?? null,
     aspectPair: null,
+    // Directionality of a verb of motion (`det` — one trip in one direction:
+    // идти́, е́хать; `indet` — habitual, repeated or round-trip: ходи́ть,
+    // е́здить) and the natural key of the other member of the pair. Both
+    // members are imperfective, so `pair:`/aspect can't express the contrast —
+    // it needs its own link. buildWords resolves `motionPairKey` into
+    // `motionPair`, exactly as it does for the aspect partner.
+    motion: word.motion ?? null,
+    motionPairKey: word.motion_pair ?? null,
+    motionPair: null,
     // The government frames a verb imposes on its object when it isn't the
     // plain accusative — a list of `{ prep, case }`, with `prep: null` for a
     // bare case (помога́ть + dative, ждать + genitive, горди́ться +
@@ -287,24 +296,31 @@ function linkAmbiguousEn(words) {
 }
 
 /**
- * Resolve verbs' `pair:` annotations (the natural key of the aspect partner)
- * into a display-ready link: the partner's accented headword, aspect and gloss.
- * A dangling key resolves to nothing — the data tests enforce that pairs exist
- * and are reciprocal, so silence here only ever hides an authoring typo from
- * the runtime, not from CI.
+ * Resolve verbs' partner annotations into display-ready links: the partner's
+ * accented headword, its aspect (and, for a motion pair, its directionality)
+ * and its gloss. Two independent links, authored the same way:
+ *   - `pair:` → `aspectPair`, the imperfective/perfective partner;
+ *   - `motion_pair:` → `motionPair`, the determinate/indeterminate partner of a
+ *     verb of motion (идти́ ↔ ходи́ть) — a contrast between two imperfectives,
+ *     which `pair:` cannot express.
+ * A dangling key resolves to nothing — the data tests enforce that partners
+ * exist and are reciprocal, so silence here only ever hides an authoring typo
+ * from the runtime, not from CI.
  */
-function linkAspectPairs(words) {
+function linkPartners(words) {
   const byKey = new Map(words.map((w) => [w.key, w]))
+  const link = (partner) => ({
+    key: partner.key,
+    ru: partner.headword || partner.ru,
+    aspect: partner.aspect,
+    motion: partner.motion,
+    gloss: partner.meaning || partner.en,
+  })
   for (const w of words) {
-    if (!w.pairKey) continue
-    const partner = byKey.get(w.pairKey)
-    if (!partner) continue
-    w.aspectPair = {
-      key: partner.key,
-      ru: partner.headword || partner.ru,
-      aspect: partner.aspect,
-      gloss: partner.meaning || partner.en,
-    }
+    const aspect = w.pairKey ? byKey.get(w.pairKey) : null
+    if (aspect) w.aspectPair = link(aspect)
+    const motion = w.motionPairKey ? byKey.get(w.motionPairKey) : null
+    if (motion) w.motionPair = link(motion)
   }
 }
 
@@ -324,7 +340,7 @@ export function buildWords(files) {
   }
   linkHeteronyms(out)
   linkAmbiguousEn(out)
-  linkAspectPairs(out)
+  linkPartners(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
@@ -353,6 +369,11 @@ export function shapeVocab(words) {
     ambiguousEn: w.ambiguousEn ?? [],
     aspect: w.aspect ?? null,
     aspectPair: w.aspectPair ?? null,
+    // Verb-of-motion directionality and its determinate/indeterminate partner
+    // (идти́ ↔ ходи́ть) — shown beside the headword like the aspect pair, so the
+    // two members are learned as one contrast rather than as near-synonyms.
+    motion: w.motion ?? null,
+    motionPair: w.motionPair ?? null,
     // Government frames (звони́ть + dative, зави́сеть от + genitive) — shown
     // beside the headword so the frame is learned with the word rather than
     // only in the dedicated drill.

@@ -3,6 +3,10 @@
 //  - `pair:` links two entries as an aspect pair: both keys must exist, the
 //    link must be reciprocal, and it must join one imperfective to one
 //    perfective (catches a typo'd key or a same-aspect "pair").
+//  - `motion_pair:` links the two members of a verb-of-motion pair (идти́ ↔
+//    ходи́ть). Same reciprocity rule, but the opposite aspect check: BOTH
+//    members are imperfective — the contrast is direction, not aspect — and
+//    each declares which side it is with `motion: det | indet`.
 //  - `conjugation.imperative` carries the accented command forms; the plural
 //    is always the singular + те (reflexives swap -ся for -тесь), so the two
 //    fields can be cross-checked mechanically.
@@ -34,6 +38,39 @@ describe('aspect pairs (`pair:`)', () => {
     expect(new Set([w.aspect, partner.aspect]), 'a pair joins impf with pf').toEqual(
       new Set(['impf', 'pf']),
     )
+  })
+})
+
+describe('motion pairs (`motion_pair:` / `motion:`)', () => {
+  const paired = entries.filter(([, w]) => w.motion_pair)
+
+  it('covers the determinate/indeterminate pairs the corpus carries', () => {
+    // Eight pairs — 16 entries — as of #538: идти́/ходи́ть, е́хать/е́здить,
+    // бежа́ть/бе́гать, лете́ть/лета́ть, плыть/пла́вать, нести́/носи́ть,
+    // вести́/води́ть, везти́/вози́ть.
+    expect(paired.length).toBeGreaterThanOrEqual(16)
+    expect(paired.length % 2, 'a pair is two entries').toBe(0)
+    expect(verbs['идти=to go'].motion_pair).toBe('ходить=to walk')
+    expect(verbs['идти=to go'].motion).toBe('det')
+    expect(verbs['ходить=to walk'].motion).toBe('indet')
+  })
+
+  it.each(paired.map(([key, w]) => [key, w]))('%s has a valid, reciprocal partner', (key, w) => {
+    const partner = verbs[w.motion_pair]
+    expect(partner, `motion_pair "${w.motion_pair}" does not exist`).toBeTruthy()
+    expect(partner.motion_pair, `motion_pair "${w.motion_pair}" does not link back`).toBe(key)
+    // The contrast is direction, so the pair joins one determinate to one
+    // indeterminate — and both members are imperfective (that is exactly why
+    // `pair:` cannot express it).
+    expect(new Set([w.motion, partner.motion]), 'a motion pair joins det with indet').toEqual(
+      new Set(['det', 'indet']),
+    )
+    expect([w.aspect, partner.aspect], 'both members are imperfective').toEqual(['impf', 'impf'])
+  })
+
+  it.each(entries.filter(([, w]) => w.motion))('%s declares a valid `motion`', (key, w) => {
+    expect(['det', 'indet'], key).toContain(w.motion)
+    expect(w.motion_pair, `${key} has motion but no motion_pair`).toBeTruthy()
   })
 })
 

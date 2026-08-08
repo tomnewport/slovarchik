@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { buildExercises, makeVisualReplacement, makeReplacementPicker, buildCombinedFlashcard, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
-import { ASPECT_DRILL_ITEMS, ASPECT_DRILL_MIN_ITEMS } from './phraseContext.js'
+import { CONTRAST_DRILL_ITEMS, CONTRAST_DRILL_MIN_ITEMS } from './phraseContext.js'
 import { shapePhrases, shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
 import { normToken } from './phraseHint.js'
@@ -304,23 +304,24 @@ describe('context sentence sets', () => {
   })
 })
 
-describe('verb aspect drill (usage mastery)', () => {
+describe('verb contrast drill (usage mastery)', () => {
   const pairedVerbKeys = words
     .filter((w) => w.pos === 'verb' && w.aspectPair)
     .map((w) => w.key)
 
-  it('emits the aspect drill instead of the table for paired verbs', () => {
+  it('emits the contrast drill instead of the table for paired verbs', () => {
     const pool = pairedVerbKeys.slice(0, 5)
     const ex = build([practice('inflect-keyboard', { exercises: 5, pool })])
     expect(ex.length).toBeGreaterThan(0)
-    const drills = ex.filter((e) => e.kind === 'aspect-drill')
+    const drills = ex.filter((e) => e.kind === 'verb-contrast')
     expect(drills.length).toBeGreaterThan(0)
     for (const d of drills) {
       expect(d.dimension).toBe('usage')
+      expect(d.contrast).toBe('aspect')
       expect(d.level).toBe('mastery')
       expect(pool).toContain(d.targets[0])
-      expect(d.items.length).toBeGreaterThanOrEqual(ASPECT_DRILL_MIN_ITEMS)
-      expect(d.items.length).toBeLessThanOrEqual(ASPECT_DRILL_ITEMS)
+      expect(d.items.length).toBeGreaterThanOrEqual(CONTRAST_DRILL_MIN_ITEMS)
+      expect(d.items.length).toBeLessThanOrEqual(CONTRAST_DRILL_ITEMS)
       expect(d.options.map((o) => o.id)).toEqual(['impf', 'pf'])
       // The spelling stage is ready to embed: no aspect step, answer resolved,
       // and its sentence is not leaked among the picks.
@@ -330,9 +331,23 @@ describe('verb aspect drill (usage mastery)', () => {
     }
   })
 
+  it('emits the drill on the motion contrast for a verb of motion', () => {
+    // ходи́ть has no aspect partner — its pair is the determinate идти́, so the
+    // pick stage is the directional one (#538).
+    const pool = ['ходить=to walk']
+    const ex = build([practice('inflect-keyboard', { exercises: 1, pool })])
+    const [drill] = ex.filter((e) => e.kind === 'verb-contrast')
+    expect(drill).toBeTruthy()
+    expect(drill.contrast).toBe('motion')
+    expect(drill.options.map((o) => o.id)).toEqual(['det', 'indet'])
+    expect(drill.options.map((o) => o.label)).toEqual(['идти́', 'ходи́ть'])
+    expect(new Set(drill.items.map((i) => i.answer))).toEqual(new Set(['det', 'indet']))
+    expect(drill.contrastRule?.id).toBe('verb-motion-pair')
+  })
+
   it('keeps the typed table for unpaired verbs and for inflect-bank', () => {
     const unpaired = words
-      .filter((w) => w.pos === 'verb' && !w.aspectPair && buildParadigm(w))
+      .filter((w) => w.pos === 'verb' && !w.aspectPair && !w.motionPair && buildParadigm(w))
       .map((w) => w.key)
     const ex = build([practice('inflect-keyboard', { exercises: 3, pool: unpaired.slice(0, 3) })])
     expect(ex.length).toBeGreaterThan(0)

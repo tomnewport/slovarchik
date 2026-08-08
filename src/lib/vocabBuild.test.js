@@ -417,6 +417,7 @@ words:
     expect(govorit.aspectPair).toEqual({
       key: 'сказать=to say',
       ru: 'сказа́ть',
+      motion: null,
       aspect: 'pf',
       gloss: 'to say',
     })
@@ -434,6 +435,68 @@ words:
     expect(g.aspect).toBe('impf')
     expect(g.aspectPair).toMatchObject({ ru: 'сказа́ть', aspect: 'pf' })
     expect(shaped.find((v) => v.id === 'жить=to live').aspectPair).toBeNull()
+  })
+})
+
+describe('motion pairs', () => {
+  // Both members are imperfective, so the link cannot ride on `pair:` — it has
+  // its own field and carries the det/indet side of each partner (#538).
+  const text = `
+words:
+  "идти=to go":
+    cefr_level: A1
+    accented: идти́
+    aspect: impf
+    motion: det
+    motion_pair: "ходить=to walk"
+    pair: "пойти=to go"
+    en_gb:
+      standard: to go (on foot, in one direction)
+  "ходить=to walk":
+    cefr_level: A1
+    accented: ходи́ть
+    aspect: impf
+    motion: indet
+    motion_pair: "идти=to go"
+    en_gb:
+      standard: to walk (habitually)
+  "пойти=to go":
+    cefr_level: A1
+    accented: пойти́
+    aspect: pf
+    pair: "идти=to go"
+    en_gb:
+      standard: to go (to set off)
+`
+  const words = fromYaml([{ pos: 'verb', text }])
+  const idti = words.find((w) => w.key === 'идти=to go')
+  const khodit = words.find((w) => w.key === 'ходить=to walk')
+
+  it('resolves the reciprocal link with the partner’s direction', () => {
+    expect(idti.motion).toBe('det')
+    expect(idti.motionPair).toEqual({
+      key: 'ходить=to walk',
+      ru: 'ходи́ть',
+      aspect: 'impf',
+      motion: 'indet',
+      gloss: 'to walk',
+    })
+    expect(khodit.motionPair).toMatchObject({ key: 'идти=to go', ru: 'идти́', motion: 'det' })
+  })
+
+  it('is independent of the aspect link — a verb can carry both', () => {
+    expect(idti.aspectPair).toMatchObject({ key: 'пойти=to go', aspect: 'pf' })
+    // …and the indeterminate member typically has no aspect partner at all.
+    expect(khodit.aspectPair).toBeNull()
+    expect(words.find((w) => w.key === 'пойти=to go').motionPair).toBeNull()
+  })
+
+  it('shapeVocab exposes motion and motionPair', () => {
+    const shaped = shapeVocab(words)
+    const k = shaped.find((v) => v.id === 'ходить=to walk')
+    expect(k.motion).toBe('indet')
+    expect(k.motionPair).toMatchObject({ ru: 'идти́', motion: 'det' })
+    expect(shaped.find((v) => v.id === 'пойти=to go').motionPair).toBeNull()
   })
 })
 

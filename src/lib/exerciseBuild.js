@@ -12,7 +12,7 @@
 //   type     spell with the hintable keyboard (spell-word, spell-phrase, dictation)
 //   speak    repeat aloud                     (repeat-word, repeat-phrase)
 //   inflect  fill an inflection table         (inflect-bank, inflect-keyboard)
-//   aspect-drill pick the aspect partner per sentence, then conjugate
+//   verb-contrast pick the aspect / motion partner per sentence, then conjugate
 //            (inflect-keyboard, emitted instead of the table for paired verbs)
 //   phrase-fix restore an inflection in a set of phrases (inflect-context)
 //
@@ -23,7 +23,7 @@ import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab, vocabDisplay } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
-import { buildAspectDrill, buildContextSet, canBuildContext } from './phraseContext.js'
+import { buildContrastDrill, buildContextSet, canBuildContext } from './phraseContext.js'
 import { wordTokensInPhrase } from './phraseHint.js'
 
 /** Render `kind` for each practice type. */
@@ -428,12 +428,13 @@ function buildInflect(practice, pi, ctx, make) {
   })
   const mode = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
   return picked.map((r) => {
-    // Usage mastery for a verb with an aspect partner is the aspect drill —
-    // pick the right member of the pair for a batch of English sentences, then
-    // spell one conjugated form — rather than typing the full table. Verbs the
-    // drill can't be built for (no partner, thin data) keep the table.
+    // Usage mastery for a verb with a linked partner is the contrast drill —
+    // pick the right member of the pair (imperfective/perfective, or for a verb
+    // of motion determinate/indeterminate) for a batch of English sentences,
+    // then spell one conjugated form — rather than typing the full table. Verbs
+    // the drill can't be built for (no partner, thin data) keep the table.
     if (mode === 'keyboard' && r.pos === 'verb') {
-      const drill = buildAspectDrill(r, {
+      const drill = buildContrastDrill(r, {
         phrasesByKey: ctx.contextPhrases,
         phrasesBySource: ctx.phrasesBySource,
         rules: ctx.rules,

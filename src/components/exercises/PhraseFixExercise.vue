@@ -65,14 +65,18 @@ const allResolved = computed(() => selectSteps.value.every((_, i) => resolved.va
 const selectMissed = computed(() => missed.value.length > 0)
 const overallCorrect = computed(() => !selectMissed.value && spellCorrect.value)
 
-// Whether the aspect group was ever answered wrong — the feedback then names the
-// verb that was needed, not just its grammatical slot.
-const aspectMissed = computed(() => missed.value.includes('aspect'))
+// Whether the pair (aspect / direction) group was ever answered wrong — the
+// feedback then names the verb that was needed, not just its grammatical slot.
+const contrastMissed = computed(() => missed.value.includes('contrast'))
 
-// The dimensions the learner got wrong (case / number / gender / aspect),
-// worded for the feedback line — e.g. "case", "number", or "case and number".
+// The dimensions the learner got wrong (case / number / gender / aspect /
+// direction), worded for the feedback line — e.g. "case", "number", or "case
+// and number". A step may carry its own `label` where its `kind` isn't a word
+// the learner would recognise (the pair step's kind is "contrast").
 const wrongDimsLabel = computed(() => {
-  const names = selectSteps.value.map((s) => s.kind).filter((k) => missed.value.includes(k))
+  const names = selectSteps.value
+    .filter((s) => missed.value.includes(s.kind))
+    .map((s) => s.label ?? s.kind)
   if (names.length <= 1) return names[0] ?? ''
   return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1]
 })
@@ -102,13 +106,13 @@ const slotAffix = computed(() => {
   }
 })
 
-// An aspect drill must not leak which partner is correct, so until the aspect is
-// picked the slot shows every candidate infinitive (impf / pf).
+// A pair drill must not leak which partner is correct, so until the pick is
+// made the slot shows every candidate infinitive (impf / pf, det / indet).
 const lemmaChoicesVisible = computed(
   () =>
     stage.value === 'select' &&
     (item.value.lemmaOptions?.length ?? 0) > 0 &&
-    selectSteps.value.some((s) => s.kind === 'aspect'),
+    selectSteps.value.some((s) => s.kind === 'contrast'),
 )
 
 // The slot token: the candidate lemma(s) until solved, the correct form after.
@@ -300,7 +304,7 @@ onMounted(() => {
             <template v-else-if="spellingOnlyMiss">
               ✓ Spelling right — but you picked the wrong {{ wrongDimsLabel }}.
               It needed
-              <strong v-if="aspectMissed" lang="ru">{{ item.lemma }}</strong>
+              <strong v-if="contrastMissed" lang="ru">{{ item.lemma }}</strong>
               <strong v-else>{{ item.slotLabel }}</strong>.
             </template>
             <template v-else>✗ Not quite — compare your answer below.</template>
@@ -361,12 +365,12 @@ onMounted(() => {
 
         <!-- Why this aspect: shown whenever the item carried an aspect choice,
              expanded when that choice went wrong. -->
-        <details v-if="item.aspectRule" class="rule" :open="aspectMissed">
-          <summary>{{ item.aspectRule.title }}</summary>
-          <p v-if="item.aspectRule.formula" class="formula" lang="ru">{{ item.aspectRule.formula }}</p>
-          <p v-if="item.aspectRule.explanation" class="muted">{{ item.aspectRule.explanation }}</p>
-          <ul v-if="item.aspectRule.exceptions?.length" class="exceptions muted">
-            <li v-for="(ex, i) in item.aspectRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
+        <details v-if="item.contrastRule" class="rule" :open="contrastMissed">
+          <summary>{{ item.contrastRule.title }}</summary>
+          <p v-if="item.contrastRule.formula" class="formula" lang="ru">{{ item.contrastRule.formula }}</p>
+          <p v-if="item.contrastRule.explanation" class="muted">{{ item.contrastRule.explanation }}</p>
+          <ul v-if="item.contrastRule.exceptions?.length" class="exceptions muted">
+            <li v-for="(ex, i) in item.contrastRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
           </ul>
         </details>
 

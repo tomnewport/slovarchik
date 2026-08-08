@@ -8,14 +8,14 @@ vi.mock('../../lib/speech.js', () => ({
 }))
 vi.mock('../../stores/settings.js', () => ({ playFeedback: vi.fn() }))
 
-import AspectDrillExercise from './AspectDrillExercise.vue'
+import VerbContrastExercise from './VerbContrastExercise.vue'
 
 // A drill for the говори́ть / сказа́ть pair, as built by
-// phraseContext.buildAspectDrill: English sentences from both partners, then
+// phraseContext.buildContrastDrill: English sentences from both partners, then
 // one conjugated form to spell.
 const exercise = {
   id: 'ex0',
-  kind: 'aspect-drill',
+  kind: 'verb-contrast',
   options: [
     { id: 'impf', label: 'говори́ть', hint: 'imperfective — a process, habit or repeated action' },
     { id: 'pf', label: 'сказа́ть', hint: 'perfective — a single completed action or its result' },
@@ -40,10 +40,10 @@ const exercise = {
     ru: 'Он сказа́л пра́вду.',
     en: 'He said the truth.',
     rule: { id: 'verb-past', title: 'Past tense' },
-    aspectRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
+    contrastRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
     targets: ['сказать=to say'],
   },
-  aspectRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
+  contrastRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
   targets: ['сказать=to say'],
 }
 
@@ -52,7 +52,7 @@ beforeEach(() => speak.mockClear())
 // The row for the i-th sentence, and a click on the option labelled `label`.
 async function answer(wrapper, i, label) {
   const row = wrapper.findAll('.item')[i]
-  const btn = row.findAll('.aspect-btn').find((b) => b.text().includes(label))
+  const btn = row.findAll('.pair-btn').find((b) => b.text().includes(label))
   await btn.trigger('click')
 }
 
@@ -60,9 +60,9 @@ async function answerAll(wrapper, ...labels) {
   for (const [i, label] of labels.entries()) await answer(wrapper, i, label)
 }
 
-describe('AspectDrillExercise', () => {
+describe('VerbContrastExercise', () => {
   it('lists every English sentence with the two infinitives to pick from', () => {
-    const wrapper = mount(AspectDrillExercise, { props: { exercise } })
+    const wrapper = mount(VerbContrastExercise, { props: { exercise } })
     expect(wrapper.text()).toContain('Which verb does each sentence need?')
     const rows = wrapper.findAll('.item')
     expect(rows).toHaveLength(4)
@@ -70,7 +70,7 @@ describe('AspectDrillExercise', () => {
       expect(rows[i].text()).toContain(item.en)
       // The Russian sentence is hidden until the pick is made.
       expect(rows[i].text()).not.toContain(item.ru)
-      const labels = rows[i].findAll('.aspect-btn').map((b) => b.text())
+      const labels = rows[i].findAll('.pair-btn').map((b) => b.text())
       expect(labels).toEqual(['говори́ть', 'сказа́ть'])
     }
     // The pair legend explains both aspects up front.
@@ -79,7 +79,7 @@ describe('AspectDrillExercise', () => {
   })
 
   it('grades each pick at once, reveals and speaks the Russian sentence', async () => {
-    const wrapper = mount(AspectDrillExercise, { props: { exercise } })
+    const wrapper = mount(VerbContrastExercise, { props: { exercise } })
     await answer(wrapper, 0, 'говори́ть') // right
     let row = wrapper.findAll('.item')[0]
     expect(row.find('.verdict.good').exists()).toBe(true)
@@ -92,11 +92,11 @@ describe('AspectDrillExercise', () => {
     expect(row.text()).toContain('it needed')
     expect(row.text()).toContain('сказа́ть')
     // A row can only be answered once.
-    expect(row.findAll('.aspect-btn')).toHaveLength(0)
+    expect(row.findAll('.pair-btn')).toHaveLength(0)
   })
 
   it('moves to the spelling stage only after every sentence is answered', async () => {
-    const wrapper = mount(AspectDrillExercise, { props: { exercise } })
+    const wrapper = mount(VerbContrastExercise, { props: { exercise } })
     expect(wrapper.find('.to-spell').exists()).toBe(false)
     await answerAll(wrapper, 'говори́ть', 'сказа́ть', 'говори́ть')
     expect(wrapper.find('.to-spell').exists()).toBe(false) // one still open
@@ -109,7 +109,7 @@ describe('AspectDrillExercise', () => {
   })
 
   it('is correct only when every pick and the spelling are right', async () => {
-    const wrapper = mount(AspectDrillExercise, { props: { exercise } })
+    const wrapper = mount(VerbContrastExercise, { props: { exercise } })
     await answerAll(wrapper, 'говори́ть', 'сказа́ть', 'говори́ть', 'сказа́ть')
     await wrapper.find('.to-spell').trigger('click')
     await wrapper.find('input[lang="ru"]').setValue('сказал')
@@ -119,7 +119,7 @@ describe('AspectDrillExercise', () => {
   })
 
   it('fails the exercise when an aspect pick was missed, even if spelled right', async () => {
-    const wrapper = mount(AspectDrillExercise, { props: { exercise } })
+    const wrapper = mount(VerbContrastExercise, { props: { exercise } })
     await answerAll(wrapper, 'сказа́ть', 'сказа́ть', 'говори́ть', 'сказа́ть') // first is wrong
     expect(wrapper.find('.feedback.bad').text()).toContain('1 of 4 missed')
     await wrapper.find('.to-spell').trigger('click')
@@ -130,7 +130,7 @@ describe('AspectDrillExercise', () => {
   })
 
   it('fails the exercise when the spelling was wrong', async () => {
-    const wrapper = mount(AspectDrillExercise, { props: { exercise } })
+    const wrapper = mount(VerbContrastExercise, { props: { exercise } })
     await answerAll(wrapper, 'говори́ть', 'сказа́ть', 'говори́ть', 'сказа́ть')
     await wrapper.find('.to-spell').trigger('click')
     await wrapper.find('input[lang="ru"]').setValue('сказали') // wrong form

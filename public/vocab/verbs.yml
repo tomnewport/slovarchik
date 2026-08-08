@@ -103,6 +103,8 @@ words:
     cefr_level: A2
     accented: бе́гать
     aspect: impf
+    motion: indet
+    motion_pair: "бежать=to run"
     collections:
       - hobbies and pastimes
       - parts of the body
@@ -156,6 +158,8 @@ words:
     cefr_level: A2
     accented: бежа́ть
     aspect: impf
+    motion: det
+    motion_pair: "бегать=to run"
     collections:
       - motion
       - daily life
@@ -1273,6 +1277,8 @@ words:
     cefr_level: B1
     accented: везти́
     aspect: impf
+    motion: det
+    motion_pair: "возить=to transport"
     collections:
       - motion
       - travel
@@ -1579,6 +1585,8 @@ words:
     cefr_level: B1
     accented: вести́
     aspect: impf
+    motion: det
+    motion_pair: "водить=to drive"
     collections:
       - motion
       - daily life
@@ -2044,6 +2052,8 @@ words:
     cefr_level: B1
     accented: води́ть
     aspect: impf
+    motion: indet
+    motion_pair: "вести=to be leading"
     heteronyms:
       - ru: вожу́
         gloss: I drive / I transport (водить / возить)
@@ -2177,6 +2187,8 @@ words:
     cefr_level: B1
     accented: вози́ть
     aspect: impf
+    motion: indet
+    motion_pair: "везти=to be taking"
     heteronyms:
       - ru: вожу́
         gloss: I transport / I drive (возить / водить)
@@ -7268,6 +7280,8 @@ words:
     cefr_level: A2
     accented: е́здить
     aspect: impf
+    motion: indet
+    motion_pair: "ехать=to go by transport"
     collections:
       - motion
       - travel
@@ -7378,6 +7392,8 @@ words:
     cefr_level: A1
     accented: е́хать
     aspect: impf
+    motion: det
+    motion_pair: "ездить=to go by transport"
     pair: "поехать=to set off by vehicle"
     collections:
       - public transport
@@ -10983,6 +10999,8 @@ words:
     cefr_level: A1
     accented: идти́
     aspect: impf
+    motion: det
+    motion_pair: "ходить=to walk"
     pair: "пойти=to go"
     en_gb:
       standard: to go (on foot, in one direction)
@@ -13058,6 +13076,8 @@ words:
     cefr_level: A2
     accented: лета́ть
     aspect: impf
+    motion: indet
+    motion_pair: "лететь=to be flying"
     collections:
       - travel
       - public transport
@@ -13108,6 +13128,8 @@ words:
     cefr_level: A2
     accented: лете́ть
     aspect: impf
+    motion: det
+    motion_pair: "летать=to fly"
     collections:
       - motion
       - travel
@@ -15630,6 +15652,8 @@ words:
     cefr_level: B1
     accented: нести́
     aspect: impf
+    motion: det
+    motion_pair: "носить=to wear"
     collections:
       - motion
       - daily life
@@ -15708,6 +15732,8 @@ words:
     cefr_level: A2
     accented: носи́ть
     aspect: impf
+    motion: indet
+    motion_pair: "нести=to be carrying"
     collections:
       - clothes
       - daily life
@@ -15739,6 +15765,9 @@ words:
       - ru: Вы но́сите шля́пу?
         en_gb: Do you wear a hat?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+      - ru: Она́ всегда́ но́сит с собо́й зо́нтик.
+        en_gb: She always carries an umbrella with her.
+        inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
     conjugation:
       imperative:
         sg: носи́
@@ -20814,6 +20843,8 @@ words:
     cefr_level: A1
     accented: пла́вать
     aspect: impf
+    motion: indet
+    motion_pair: "плыть=to be swimming"
     collections:
       - hobbies and pastimes
       - holiday
@@ -20973,6 +21004,8 @@ words:
     cefr_level: A2
     accented: плыть
     aspect: impf
+    motion: det
+    motion_pair: "плавать=to swim"
     collections:
       - motion
       - nature
@@ -39884,6 +39917,8 @@ words:
     cefr_level: A1
     accented: ходи́ть
     aspect: impf
+    motion: indet
+    motion_pair: "идти=to go"
     collections:
       - motion
       - daily life
