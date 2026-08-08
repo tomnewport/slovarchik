@@ -25,13 +25,19 @@
 //     evidence when it is *unambiguous across the whole dictionary* — «мой» is
 //     both "my" and the imperative of мыть, so it proves nothing and is ignored.
 //
+// Russian also drops the subject freely, and a dropped «я» still leaves its
+// gender behind on the predicate — «Ра́да была́ помо́чь» is a woman speaking with
+// no pronoun anywhere to hang that on. {@link ellipticalSpeaker} recovers those,
+// but only under conditions narrow enough that nothing else in the sentence
+// could own the agreement instead. See its comment for why the bar is so high.
+//
 // `genderBalance.js` also reads gender out of a phrase, but for the opposite
 // job and with the opposite bias, so the two deliberately stay separate. That
 // one is a build-time oracle deciding whether a masculine sentence is safe to
 // flip to feminine, so it *over*-detects — any token ending in -л/-ла counts,
 // «стол» and «шко́ла» included — because a false positive there only blocks a
 // flip. This one writes on the learner's screen, so it must *under*-detect: only
-// forms the dictionary confirms, and only in the clause the pronoun stands in.
+// forms the dictionary confirms, and only where nothing else can claim them.
 import { normToken, wordForms } from './phraseHint.js'
 import { phraseTokens } from './phrases.js'
 
@@ -59,6 +65,23 @@ const VY_FORMS = new Set([
 /** The nominative subject pronouns whose agreement reveals a person's gender. */
 const YA = 'я'
 const TY = 'ты'
+
+/**
+ * Nominative pronouns that can stand alone as the subject of a singular
+ * masculine or feminine predicate — i.e. that could own the gender agreement a
+ * dropped «я» would otherwise explain. Plurals (мы, вы, они) are left out
+ * because they take the plural short form («мы гото́вы»), never the m/f one, and
+ * neuters (оно́, э́то, всё, что) for the same reason.
+ */
+const THIRD_PERSON_NOM = new Set(['он', 'она', 'кто', 'ктото', 'никто', 'некто'])
+
+/**
+ * The first person as an English *subject*. Deliberately only the nominative
+ * pronoun: it is what an elided Russian subject corresponds to, and it is the
+ * word the resulting note gets pinned to. Case-sensitive — a lowercase "i" is
+ * not the pronoun.
+ */
+const FIRST_PERSON_SUBJECT = /\bI\b/
 
 // Tags a surface form can carry in the ambiguity index. A form that could be
 // two different things across the dictionary is stored as `null` (ambiguous)
@@ -110,11 +133,28 @@ function claim(index, form, tag) {
  * gender. Built once from the whole word list (all parts of speech), because a
  * form is only usable evidence if *nothing else* in Russian shares it.
  *
+ * Two companion sets ride along on the returned Map, both needed only by
+ * {@link ellipticalSpeaker}:
+ *
+ *  - `.shortPredicates` — the forms that came from an adjective's `short` block
+ *    and survived as unambiguous evidence. A short form *is* a predicate on its
+ *    own, so it can carry the agreement of a subject that was never uttered;
+ *    a past-tense verb can too, but only these are safe enough to act on.
+ *  - `.subjects` — the forms that could be the nominative subject some other
+ *    reading of the sentence hangs its agreement on: every masculine or
+ *    feminine noun's nominative singular, plus {@link THIRD_PERSON_NOM}.
+ *
+ * Membership of the index itself doubles as "the dictionary knows this word",
+ * since `glossary.yml` (a harvest of surface forms, see below) never enters it.
+ *
  * @param {object[]} words  normalised word records (from buildWords)
- * @returns {Map<string, string|null>}  normalised form → tag, or null if ambiguous
+ * @returns {Map<string, string|null> & {shortPredicates: Set<string>, subjects: Set<string>}}
+ *   normalised form → tag, or null if ambiguous
  */
 export function buildAmbiguityIndex(words) {
   const index = new Map()
+  const shortCandidates = new Set()
+  const subjects = new Set(THIRD_PERSON_NOM)
   for (const w of words ?? []) {
     // `glossary.yml` is a harvest of *surface forms* taken from the phrases
     // themselves ("беги́=run", "прочита́йте=read"), not a list of independent
@@ -148,12 +188,27 @@ export function buildAmbiguityIndex(words) {
       // that the English names anyway.
       mark(w.extra?.short?.m, MASC)
       mark(w.extra?.short?.f, FEM)
+      for (const [form, tag] of marked) {
+        if (tag === MASC || tag === FEM) shortCandidates.add(form)
+      }
+    } else if (w?.pos === 'noun' && (w.gender === 'm' || w.gender === 'f')) {
+      // The nominative singular is the slot a subject stands in; anything else
+      // in the paradigm is an object or an adverbial and agrees with nothing.
+      const nom = normToken(w.forms?.sg?.nom)
+      if (nom) subjects.add(nom)
     }
     for (const [form, tag] of marked) claim(index, form, tag)
     for (const form of wordForms(w)) {
       if (!marked.has(form)) claim(index, form, OTHER)
     }
   }
+  // A short form shared with anything else in the dictionary has already been
+  // degraded to `null` above — «дорога́» is "dear" only until «доро́га» "road"
+  // is added — so filtering by the surviving tag keeps the set honest.
+  index.shortPredicates = new Set(
+    [...shortCandidates].filter((f) => index.get(f) === MASC || index.get(f) === FEM),
+  )
+  index.subjects = subjects
   return index
 }
 
@@ -181,15 +236,66 @@ function clauseGender(clause, index) {
 }
 
 /**
+ * The speaker's gender read off a clause whose subject was dropped — the case
+ * «Не́ за что, ра́да была́ помо́чь» ("You're welcome, I was glad to help"), where
+ * ра́да is the only thing saying a woman is speaking and there is no pronoun to
+ * attach it to. Returns `MASC`/`FEM`, or null when the reading isn't safe.
+ *
+ * Everything here is a guard, because the failure mode is expensive: annotate a
+ * phrase whose gendered word belongs to something else in the sentence and the
+ * prompt teaches the wrong form. «Мне ну́жен слова́рь» is first-person, dative and
+ * masculine, and none of that is about the speaker — ну́жен agrees with слова́рь.
+ * So all of the following must hold:
+ *
+ *  - The gendered word is a **short adjective** (`.shortPredicates`). A short
+ *    form is a complete predicate; a past-tense verb usually has a subject
+ *    somewhere, and admitting those is what makes the дативные sentences leak.
+ *  - The clause names **neither я nor ты** — those the pronoun rule above
+ *    already reads, and better — and carries **no 2nd-person verb form**, which
+ *    would make the dropped subject the addressee rather than the speaker.
+ *  - **Nothing in the whole sentence could own the agreement instead**: no
+ *    nominative m/f noun, no 3rd-person pronoun, and no word the dictionary
+ *    doesn't know — an unknown token is most often exactly the noun that owns
+ *    it («Сейча́с приёмная за́ла полна́»), so it counts against us too.
+ *  - Every candidate clause agrees on one gender.
+ *
+ * The English is consulted for the same reason (see {@link phraseAmbiguities}):
+ * an elided Russian subject that the English renders as "I" is the speaker.
+ */
+function ellipticalSpeaker(clauses, index) {
+  const shorts = index?.shortPredicates
+  if (!shorts?.size) return null
+  const candidates = clauses.filter(
+    (clause) =>
+      !clause.includes(YA) &&
+      !clause.includes(TY) &&
+      !clause.some((t) => index.get(t) === SECOND_SG || index.get(t) === SECOND_PL) &&
+      clause.some((t) => shorts.has(t)),
+  )
+  if (!candidates.length) return null
+  const contested = (t) => !index.has(t) || index.subjects?.has(t)
+  if (clauses.flat().some(contested)) return null
+  const genders = new Set(candidates.map((clause) => clauseGender(clause, index)))
+  return genders.size === 1 ? ([...genders][0] ?? null) : null
+}
+
+/**
  * Which distinctions a Russian phrase makes that its English translation can't.
  * Returns note ids (see {@link NOTES}) in display order, or an empty array when
  * the Russian commits to nothing the English hides.
  *
+ * The English is read for one narrow purpose and never as evidence about
+ * Russian grammar: a clause whose subject Russian dropped only tells us about
+ * *the speaker* if the sentence is about the speaker, and an English "I" is
+ * what says so. Omit `en` and that last rule simply doesn't fire; everything
+ * else is decided on the Russian side alone.
+ *
  * @param {string} ru                        the Russian phrase
  * @param {Map<string, string|null>} index   from {@link buildAmbiguityIndex}
+ * @param {string} [en]                      its English translation
  * @returns {string[]}
  */
-export function phraseAmbiguities(ru, index) {
+export function phraseAmbiguities(ru, index, en = '') {
   const clauses = clausesOf(ru)
   if (!clauses.length) return []
   const tokens = clauses.flat()
@@ -216,6 +322,12 @@ export function phraseAmbiguities(ru, index) {
     if (clause.includes(YA)) speaker = speaker && speaker !== gender ? 'x' : gender
     if (clause.includes(TY)) addressee = addressee && addressee !== gender ? 'x' : gender
   }
+  // …and, failing that, off a clause whose «я» was dropped — but only when the
+  // English names the speaker as its subject. See {@link ellipticalSpeaker}.
+  if (!speaker && FIRST_PERSON_SUBJECT.test(String(en ?? ''))) {
+    speaker = ellipticalSpeaker(clauses, index)
+  }
+
   if (speaker === MASC) ids.add('speaker-m')
   if (speaker === FEM) ids.add('speaker-f')
   if (addressee === MASC) ids.add('addressee-m')

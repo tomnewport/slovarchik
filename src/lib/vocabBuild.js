@@ -436,7 +436,7 @@ export function shapePhrases(words) {
       const enAlt = Array.isArray(ex?.en_alt)
         ? ex.en_alt.map((s) => String(s ?? '').trim()).filter(Boolean)
         : []
-      const enNotes = phraseAmbiguities(ru, ambiguity)
+      const enNotes = phraseAmbiguities(ru, ambiguity, en)
       out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes })
     }
   }
