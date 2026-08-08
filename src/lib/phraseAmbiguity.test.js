@@ -14,6 +14,11 @@ function adjective(key, ru, short) {
   return { key, ru, headword: ru, pos: 'adjective', meaning: key.split('=')[1], forms: {}, extra: { short } }
 }
 
+/** A minimal noun record with the declension slots the index reads. */
+function noun(key, gender, forms) {
+  return { key, ru: forms.sg.nom, headword: forms.sg.nom, pos: 'noun', gender, meaning: key.split('=')[1], forms, extra: {} }
+}
+
 const хотеть = verb('хотеть=to want', 'хоте́ть', {
   present: { '1sg': 'хочу́', '2sg': 'хо́чешь', '3sg': 'хо́чет', '2pl': 'хоти́те' },
   past_m: 'хоте́л',
@@ -29,8 +34,12 @@ const хлопнуть = verb('хлопнуть=to slam', 'хло́пнуть', 
 const мыть = verb('мыть=to wash', 'мыть', { imperative: { sg: 'мой', pl: 'мо́йте' } })
 const мой = { key: 'мой=my', ru: 'мой', headword: 'мой', pos: 'pronoun', meaning: 'my', forms: {}, extra: {} }
 const готовый = adjective('готовый=ready', 'гото́вый', { m: 'гото́в', f: 'гото́ва' })
+const рад = adjective('рад=glad', 'рад', { m: 'рад', f: 'ра́да' })
+const быть = verb('быть=to be', 'быть', { future: { '2sg': 'бу́дешь' }, past_m: 'был', past_f: 'была́' })
+const помочь = verb('помочь=to help', 'помо́чь', {})
+const машина = noun('машина=car', 'f', { sg: { nom: 'маши́на', gen: 'маши́ны' } })
 
-const WORDS = [хотеть, купить, устать, хлопнуть, мыть, мой, готовый]
+const WORDS = [хотеть, купить, устать, хлопнуть, мыть, мой, готовый, рад, быть, помочь, машина]
 const index = buildAmbiguityIndex(WORDS)
 
 describe('buildAmbiguityIndex', () => {
@@ -57,6 +66,21 @@ describe('buildAmbiguityIndex', () => {
     // «мой» is both the possessive "my" and the imperative of мыть, so it can
     // never prove a phrase addresses one person informally.
     expect(index.get('мой')).toBe(null)
+  })
+
+  it('separates the short predicate forms from the gendered past tense', () => {
+    // A short adjective is a predicate on its own, so it can carry the
+    // agreement of a subject that was never uttered; a past tense usually has
+    // a subject somewhere in the sentence.
+    expect(index.shortPredicates.has('готова')).toBe(true)
+    expect(index.shortPredicates.has('рада')).toBe(true)
+    expect(index.shortPredicates.has('устала')).toBe(false)
+  })
+
+  it('collects the forms that could be a subject the agreement belongs to', () => {
+    expect(index.subjects.has('машина')).toBe(true) // nominative singular
+    expect(index.subjects.has('машины')).toBe(false) // genitive: owns nothing
+    expect(index.subjects.has('она')).toBe(true)
   })
 })
 
@@ -115,6 +139,58 @@ describe('phraseAmbiguities', () => {
     expect(phraseAmbiguities('', index)).toEqual([])
     expect(phraseAmbiguities('Абракада́бра.', index)).toEqual([])
     expect(phraseAmbiguities('Хо́чешь ча́ю?', undefined)).toEqual([])
+  })
+})
+
+describe('phraseAmbiguities with a dropped subject', () => {
+  it("reads the speaker's gender off a short adjective with no pronoun", () => {
+    // Nothing here says who is speaking except ра́да — and the English "I" says
+    // the sentence is about the speaker, so the agreement can only be theirs.
+    expect(phraseAmbiguities('Ра́да была́ помо́чь.', index, 'I was glad to help.')).toEqual([
+      'speaker-f',
+    ])
+    expect(phraseAmbiguities('Рад был помо́чь.', index, 'I was glad to help.')).toEqual([
+      'speaker-m',
+    ])
+  })
+
+  it('says nothing when the English does not name the speaker as its subject', () => {
+    // Without an "I" the sentence may be about anyone; "me" is not enough
+    // either, since a dative object is exactly what «мне ну́жен» has.
+    expect(phraseAmbiguities('Ра́да была́ помо́чь.', index, 'Glad to help.')).toEqual([])
+    expect(phraseAmbiguities('Ра́да была́ помо́чь.', index, 'She was glad to help me.')).toEqual([])
+    expect(phraseAmbiguities('Ра́да была́ помо́чь.', index)).toEqual([])
+  })
+
+  it('says nothing when a subject in the sentence could own the agreement', () => {
+    const en = 'I think the car was ready.'
+    expect(phraseAmbiguities('Маши́на была́ гото́ва.', index, en)).toEqual([])
+    expect(phraseAmbiguities('Она́ была́ гото́ва.', index, en)).toEqual([])
+  })
+
+  it('says nothing when a word in the sentence is not in the dictionary', () => {
+    // «Ма́ше» is unknown, and an unknown word is most often the very noun the
+    // agreement belongs to. Refusing to guess is the whole point.
+    expect(phraseAmbiguities('Ра́да была́ помо́чь Ма́ше.', index, 'I was glad to help Masha.')).toEqual(
+      [],
+    )
+  })
+
+  it('says nothing for a gendered past tense with no short adjective', () => {
+    expect(phraseAmbiguities('Уста́л.', index, 'I got tired.')).toEqual([])
+  })
+
+  it('says nothing when the clause addresses someone', () => {
+    // бу́дешь makes the dropped subject the person spoken to, not the speaker.
+    expect(phraseAmbiguities('Бу́дешь гото́ва?', index, 'Will you be ready? I will wait.')).toEqual([
+      'you-informal',
+    ])
+  })
+
+  it('says nothing when two dropped subjects disagree about gender', () => {
+    expect(
+      phraseAmbiguities('Рад был помо́чь; ра́да была́ помо́чь.', index, 'I was glad to help.'),
+    ).toEqual([])
   })
 })
 
@@ -196,5 +272,17 @@ describe('the phrase bank', () => {
     // A sample of phrases whose English gives the learner no way to choose.
     expect(notesFor('Хо́чешь ча́ю? — Нет, спаси́бо.')).toEqual(['you-informal'])
     expect(notesFor('Прочита́йте пе́рвый абза́ц.')).toEqual(['you-formal'])
+  })
+
+  it('reads a dropped «я» off a real corpus phrase, and only where it is safe', () => {
+    const byRu = new Map(phrases.map((p) => [p.ru, p]))
+    const notesFor = (ru) => byRu.get(ru)?.enNotes ?? null
+    // ра́да is the only thing marking the speaker female; the prompt has to say.
+    expect(notesFor('Не́ за что, ра́да была́ помо́чь.')).toEqual(['speaker-f'])
+    // …while these are first-person and gendered too, and mean nothing by it:
+    // the gendered word agrees with the thing needed, liked or wanted.
+    expect(notesFor('Мне ну́жен англо-ру́сский слова́рь.')).toEqual([])
+    expect(notesFor('Мне понра́вился э́тот фильм.')).toEqual([])
+    expect(notesFor('Э́та коме́дия мне о́чень понра́вилась.')).toEqual([])
   })
 })
