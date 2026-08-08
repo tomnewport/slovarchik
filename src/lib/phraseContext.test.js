@@ -134,6 +134,33 @@ describe('buildSelectSteps', () => {
     expect(steps[0].options.map((o) => o.id)).toEqual(['m', 'n', 'f', 'pl'])
     expect(steps[0].options.filter((o) => o.correct)).toEqual([expect.objectContaining({ id: 'f' })])
   })
+  it('returns a degree step only for a comparative — the form is invariable', () => {
+    const tihiy = {
+      key: 'тихий=quiet', pos: 'adjective', headword: 'ти́хий',
+      extra: { forms: { comparative: 'ти́ше' } },
+    }
+    const steps = buildSelectSteps({ degree: 'comparative', token: 2 }, tihiy)
+    expect(steps.map((s) => s.kind)).toEqual(['degree'])
+    expect(steps[0].options.map((o) => o.id)).toEqual(['positive', 'comparative', 'superlative'])
+    expect(steps[0].options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ id: 'comparative' }),
+    ])
+  })
+  it('never offers the superlative on an adverb — «са́мый» modifies adjectives', () => {
+    const tiho = {
+      key: 'тихо=quietly', pos: 'adverb', headword: 'ти́хо',
+      extra: { forms: { comparative: 'ти́ше' } },
+    }
+    const [degree] = buildSelectSteps({ degree: 'comparative', token: 2 }, tiho)
+    expect(degree.options.map((o) => o.id)).toEqual(['positive', 'comparative'])
+  })
+  it('adds case and gender after the degree for a superlative — са́мый agrees', () => {
+    const steps = buildSelectSteps(
+      { degree: 'superlative', case: 'nom', gender: 'f', token: 2, span: 2 },
+      noviy,
+    )
+    expect(steps.map((s) => s.kind)).toEqual(['degree', 'case', 'gender'])
+  })
   it('returns a choose-the-aspect step for a verb with an aspect partner', () => {
     const steps = buildSelectSteps(skazatPhrase.target, skazat)
     expect(steps.map((s) => s.kind)).toEqual(['aspect'])
@@ -225,6 +252,35 @@ describe('buildFromPhrase', () => {
     expect(ex.selectSteps.map((s) => s.kind)).toEqual(['case', 'gender'])
     expect(ex.answerAccented).toBe('но́вую')
     expect(ex.slotLabel).toBe('Accusative · Feminine')
+  })
+
+  it('labels a comparative slot and reads the invariable form off the sentence', () => {
+    const tihiy = {
+      key: 'тихий=quiet', pos: 'adjective', headword: 'ти́хий',
+      extra: { forms: { comparative: 'ти́ше' } },
+    }
+    const ex = buildFromPhrase(
+      {
+        id: 'q', ru: 'В библиоте́ке ти́ше, чем в кафе́.', en: '',
+        target: { key: 'тихий=quiet', token: 3, degree: 'comparative' },
+      },
+      tihiy,
+    )
+    expect(ex.lemma).toBe('ти́хий') // the slot shows the dictionary form to build from
+    expect(ex.answerAccented).toBe('ти́ше')
+    expect(ex.slotLabel).toBe('Comparative')
+  })
+
+  it('spans са́мый + the adjective for a superlative, and labels the agreement', () => {
+    const ex = buildFromPhrase(
+      {
+        id: 's', ru: 'Э́то са́мая но́вая кни́га.', en: '',
+        target: { key: 'новый=new', token: 2, span: 2, degree: 'superlative', case: 'nom', gender: 'f' },
+      },
+      noviy,
+    )
+    expect(ex.answerAccented).toBe('са́мая но́вая')
+    expect(ex.slotLabel).toBe('Superlative · Nominative · Feminine')
   })
 
   it('returns null for an out-of-range token index', () => {
