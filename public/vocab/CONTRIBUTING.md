@@ -399,8 +399,37 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
   (`verbsData.test.js` enforces this). Linked verbs show their partner in the
   vocabulary drill and power the choose-the-aspect step of the in-context
   drill. Don't link mere prefixed derivatives (проговори́ть, заговори́ть) or
-  motion-verb directionality partners (бе́гать/бежа́ть — both imperfective) —
-  only true aspect pairs.
+  motion-verb directionality partners (бе́гать/бежа́ть — both imperfective, and
+  linked with `motion_pair:` instead) — only true aspect pairs.
+- **`motion` / `motion_pair` — verbs of motion (optional).** A handful of the
+  commonest verbs come as a pair of **imperfectives** whose contrast is
+  direction, not aspect: идти́ (one trip, one direction) against ходи́ть
+  (habitually, or there and back). `pair:` can't express that — it joins an
+  imperfective to a perfective — so the pair gets its own reciprocal link, and
+  each member declares which side it is:
+
+  ```yaml
+  "идти=to go":
+    aspect: impf
+    motion: det              # det (determinate) | indet (indeterminate)
+    motion_pair: "ходить=to walk"
+    pair: "пойти=to go"      # a verb may carry both links
+
+  "ходить=to walk":
+    aspect: impf
+    motion: indet
+    motion_pair: "идти=to go"
+  ```
+
+  `verbsData.test.js` enforces the mirror image of the `pair:` rule: the link
+  must be reciprocal, it must join one `det` to one `indet`, and **both members
+  must be imperfective**. The link drives the motion-pair reminder on the vocab
+  word card and the choose-the-direction step of the in-context drill, and turns
+  the verb's usage-mastery exercise into the contrast drill (`verb-motion-pair`
+  in `grammar-rules.yml` explains it). Aspect wins when a verb carries both
+  links, so the directional contrast is drilled from the indeterminate member's
+  side — which is where it belongs, since the indeterminates mostly have no
+  aspect partner.
 - **`imperative` — command forms (optional).** An `imperative:` block with the
   accented `sg` (ты) and `pl` (вы) forms adds an Imperative column to the verb's
   inflection table and lets usage examples drill it. The plural is always

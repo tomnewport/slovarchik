@@ -115,31 +115,45 @@ sentence, (b) speak it, and (c) show the linked grammar rule. The lemma-in-slot
 sentence is never spoken. A sentence counts as correct only if *both* steps were
 right first time.
 
-## The verb aspect drill (usage · mastery)
+## The verb contrast drill (usage · mastery)
 
-How the **usage dimension is mastered for verbs with an aspect partner** —
+How the **usage dimension is mastered for verbs with a linked partner** —
 replacing the type-the-table drill for those verbs (unpaired or data-thin verbs
-keep the table). Built by `phraseContext.buildAspectDrill`, rendered by
-`components/exercises/AspectDrillExercise.vue`, emitted by
+keep the table). Built by `phraseContext.buildContrastDrill`, rendered by
+`components/exercises/VerbContrastExercise.vue`, emitted by
 `exerciseBuild.buildInflect` for the `inflect-keyboard` practice:
 
-1. **Pick the aspect, six sentences at a time.** The learner sees up to
-   `ASPECT_DRILL_ITEMS` (6) *English* sentences that use the pair in different
-   tenses and aspects, with the two infinitives (imperfective first, each with
-   its usage cue) as the answer buttons for every row. Picks grade immediately,
-   revealing and speaking the authored Russian sentence.
+1. **Pick the partner, six sentences at a time.** The learner sees up to
+   `CONTRAST_DRILL_ITEMS` (6) *English* sentences that use the pair in different
+   tenses, with the two infinitives (each with its usage cue) as the answer
+   buttons for every row. Picks grade immediately, revealing and speaking the
+   authored Russian sentence.
 2. **Spell one conjugated form.** The single-sentence context renderer is
-   embedded with one of the verb's *annotated* phrases (aspect step stripped —
+   embedded with one of the verb's *annotated* phrases (pair step stripped —
    that skill was stage 1).
 
+**Two contrasts share this machinery** (`verbContrast` picks which one a verb
+drills):
+
+| Contrast | Linked by | Members | Rule |
+| --- | --- | --- | --- |
+| `aspect` (#315) | `pair:` → `aspectPair` | imperfective / perfective — говори́ть ↔ сказа́ть | `verb-aspect` |
+| `motion` (#538) | `motion_pair:` → `motionPair` | determinate / indeterminate — идти́ ↔ ходи́ть | `verb-motion-pair` |
+
+A verb of motion is two *imperfectives*, so `pair:` cannot express the contrast
+— hence the second link. Aspect wins when a verb carries both (идти́ has the
+perfective пойти́ *and* the indeterminate ходи́ть): it is the contrast every other
+verb in the lexicon drills, and the directional one is still taught from the
+other side, since the indeterminate members mostly have no aspect partner.
+
 Because every usage example is hand-authored around the verb that owns it, a
-sentence's correct answer is simply its owner's aspect — so the pick stage draws
-from **all** usage examples of both partners (no `inflect:` annotation needed),
-balancing the two aspects as evenly as the data allows. Sentences whose English
-appears on *both* sides of the pair ("She thanked the teacher.") cannot
-discriminate the aspect and are excluded from both sides; the spelling sentence
-is likewise excluded from the picks so its revealed form can't leak. The
-exercise is correct only if every pick and the spelling were right.
+sentence's correct answer is simply its owner's value on the contrast — so the
+pick stage draws from **all** usage examples of both partners (no `inflect:`
+annotation needed), balancing the two members as evenly as the data allows.
+Sentences whose English appears on *both* sides of the pair ("She thanked the
+teacher.") cannot discriminate the pair and are excluded from both sides; the
+spelling sentence is likewise excluded from the picks so its revealed form can't
+leak. The exercise is correct only if every pick and the spelling were right.
 
 ### Context sets
 
@@ -147,7 +161,7 @@ Each `inflect-context` exercise bundles a **set of sentences that all drill the
 same lexical item** (`phraseContext.buildContextSet`): up to `items: 3` distinct
 annotated sentences of one drawn word — extended, for a verb with an aspect
 partner, by the partner's sentences (same both-sides-English exclusion as the
-aspect drill; partner sentences report against the drawn word when the partner
+contrast drill; partner sentences report against the drawn word when the partner
 is outside the mastery batch). Keeping a set to one root / aspect pair lets the
 learner contrast the English uses of the word against its Russian uses, instead
 of hopping between unrelated words. A set shrinks to the sentences the item

@@ -3,7 +3,7 @@ import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
 import { vocab, state } from '../stores/vocab.js'
 import { vocabDisplay } from '../lib/vocabBuild.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
-import { ASPECT_LABEL } from '../lib/phraseContext.js'
+import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
 import { governmentLabels } from '../lib/verbGovernment.js'
 import { posLabel } from '../lib/spellPrompt.js'
 import { resetHint } from '../stores/keyboard.js'
@@ -84,6 +84,11 @@ const heteronyms = computed(() => current.value?.heteronyms ?? [])
 // unrelated words with similar glosses.
 const aspectPair = computed(() => current.value?.aspectPair ?? null)
 
+// Verbs of motion carry a second link: the other imperfective of their pair
+// (идти́ ↔ ходи́ть). It is the same "two verbs, one gloss" problem as aspect —
+// and the one an English gloss hides completely — so it gets the same reminder.
+const motionPair = computed(() => current.value?.motionPair ?? null)
+
 // Verbs whose object isn't the plain accusative carry their government frame
 // (звони́ть + dative, зави́сеть от + genitive). Showing it beside the headword
 // teaches the frame everywhere the word appears, not just in the government
@@ -91,7 +96,11 @@ const aspectPair = computed(() => current.value?.aspectPair ?? null)
 const government = computed(() => governmentLabels(current.value?.governs))
 // Anything worth reading after a correct answer holds the auto-advance.
 const holdAfterAnswer = computed(
-  () => heteronyms.value.length > 0 || aspectPair.value != null || government.value.length > 0,
+  () =>
+    heteronyms.value.length > 0 ||
+    aspectPair.value != null ||
+    motionPair.value != null ||
+    government.value.length > 0,
 )
 
 // Build a weighted pool of known (learned+) words for drilling.
@@ -444,6 +453,21 @@ onUnmounted(() => {
           <SpeakButton :text="aspectPair.ru" />
         </div>
       </div>
+      <!-- Motion-pair reminder: the determinate/indeterminate partner, and
+           which of the two this verb is (идти́ = one trip now, ходи́ть = habit). -->
+      <div v-if="motionPair" class="card aspect-note">
+        <div class="muted" style="margin-bottom: 0.5rem">
+          Verb of motion — this one is
+          {{ MOTION_LABEL[current.motion] ?? current.motion }}
+          ({{ current.motion === 'det' ? 'one trip, one direction' : 'habitual or there and back' }});
+          its {{ MOTION_LABEL[motionPair.motion] ?? motionPair.motion }} partner is:
+        </div>
+        <div class="row" style="gap: 0.5rem; align-items: center">
+          <strong lang="ru">{{ motionPair.ru }}</strong>
+          <span class="muted">— {{ motionPair.gloss }}</span>
+          <SpeakButton :text="motionPair.ru" />
+        </div>
+      </div>
       <!-- Government reminder: the case (and preposition) this verb forces on
            its object — the half of the word an English gloss leaves out. -->
       <div v-if="government.length" class="card government-note">
@@ -456,7 +480,7 @@ onUnmounted(() => {
         </div>
       </div>
       <!-- Correct answers advance on their own; wrong answers and heteronym /
-           aspect-pair / government reminders wait for the user. -->
+           pair / government reminders wait for the user. -->
       <div v-if="!wasCorrect || holdAfterAnswer" class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
         <button @click="quit">Change mode</button>

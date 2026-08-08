@@ -1273,7 +1273,7 @@ words:
     collections:
       - feelings and sensations
     en_gb:
-      standard: it is a pity (expressing regret)
+      standard: it is a pity (the colloquial word; expressing regret)
       alt:
         - a shame
     usage:
@@ -1283,6 +1283,26 @@ words:
         en_gb: I feel sorry for this little dog.
       - ru: Жа́лко тра́тить вре́мя зря.
         en_gb: It is a pity to waste time in vain.
+  "жаль=a pity":
+    cefr_level: A2
+    accented: жаль
+    collections:
+      - feelings and sensations
+      - communication
+    en_gb:
+      standard: a pity (the neutral word; the person who feels it goes in the dative)
+      alt:
+        - it is a shame
+        - to be sorry
+    usage:
+      - ru: Мне жаль, что так получи́лось.
+        en_gb: I am sorry that it turned out that way.
+      - ru: Жаль, что ле́то так бы́стро ко́нчилось.
+        en_gb: It is a pity that summer ended so quickly.
+      - ru: Ему́ бы́ло жаль ста́рую соба́ку.
+        en_gb: He felt sorry for the old dog.
+      - ru: Нам жаль вас беспоко́ить.
+        en_gb: We are sorry to trouble you.
   "жарко=hotly":
     cefr_level: A1
     accented: жа́рко
@@ -2942,6 +2962,26 @@ words:
       - ru: Сего́дня он вы́глядит норма́льнее, чем вчера́.
         en_gb: Today he looks more normal than yesterday.
         inflect: { token: 4, degree: comparative, rule: adv-comparative }
+  "нужно=needed":
+    cefr_level: A1
+    accented: ну́жно
+    collections:
+      - daily life
+      - abstract
+    en_gb:
+      standard: needed (the everyday «мне ну́жно» — the person who needs goes in the dative)
+      alt:
+        - one needs
+        - it is necessary
+    usage:
+      - ru: Мне ну́жно идти́ домо́й.
+        en_gb: I need to go home.
+      - ru: Что тебе́ ну́жно?
+        en_gb: What do you need?
+      - ru: Нам ну́жно бы́ло купи́ть хлеб.
+        en_gb: We needed to buy bread.
+      - ru: Врачу́ ну́жно ви́деть результа́ты.
+        en_gb: The doctor needs to see the results.
   "ныне=nowadays":
     cefr_level: B2
     accented: ны́не
@@ -4723,6 +4763,25 @@ words:
       - ru: С детьми́ на́до говори́ть стро́же.
         en_gb: One has to speak more strictly with children.
         inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
+  "стыдно=ashamed":
+    cefr_level: B1
+    accented: сты́дно
+    collections:
+      - feelings and sensations
+      - character
+    en_gb:
+      standard: ashamed (it is shameful; the person who feels it goes in the dative)
+      alt:
+        - it is a disgrace
+    usage:
+      - ru: Мне сты́дно за свои́ слова́.
+        en_gb: I am ashamed of my words.
+      - ru: Тебе́ не сты́дно?
+        en_gb: Aren't you ashamed?
+      - ru: Ма́льчику ста́ло сты́дно.
+        en_gb: The boy became ashamed.
+      - ru: Сты́дно так говори́ть с ма́терью.
+        en_gb: It is shameful to speak to your mother like that.
   "сюда=here":
     cefr_level: A1
     accented: сюда́

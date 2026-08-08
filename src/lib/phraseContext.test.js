@@ -6,9 +6,10 @@ import {
   buildContextExercise,
   buildContextSet,
   canBuildContext,
-  buildAspectDrill,
-  canBuildAspectDrill,
-  ASPECT_DRILL_ITEMS,
+  buildContrastDrill,
+  canBuildContrastDrill,
+  verbContrast,
+  CONTRAST_DRILL_ITEMS,
 } from './phraseContext.js'
 
 const sobaka = { key: 'собака=dog', pos: 'noun', headword: 'соба́ка', ru: 'собака' }
@@ -163,7 +164,8 @@ describe('buildSelectSteps', () => {
   })
   it('returns a choose-the-aspect step for a verb with an aspect partner', () => {
     const steps = buildSelectSteps(skazatPhrase.target, skazat)
-    expect(steps.map((s) => s.kind)).toEqual(['aspect'])
+    expect(steps.map((s) => s.kind)).toEqual(['contrast'])
+    expect(steps.map((s) => s.dimension)).toEqual(['aspect'])
     const [aspect] = steps
     // Both infinitives offered, imperfective first; the phrase's owner wins.
     expect(aspect.options.map((o) => o.label)).toEqual(['говори́ть', 'сказа́ть'])
@@ -229,14 +231,14 @@ describe('buildFromPhrase', () => {
   })
 
   it('offers both lemmas and the aspect rule for a paired verb', () => {
-    const aspectRules = { 'verb-aspect': { title: 'Aspect', formula: 'impf vs pf' } }
-    const ex = buildFromPhrase(skazatPhrase, skazat, { rules: aspectRules })
-    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['aspect'])
+    const contrastRules = { 'verb-aspect': { title: 'Aspect', formula: 'impf vs pf' } }
+    const ex = buildFromPhrase(skazatPhrase, skazat, { rules: contrastRules })
+    expect(ex.selectSteps.map((s) => s.kind)).toEqual(['contrast'])
     // The slot must not leak which partner is correct before the choice.
     expect(ex.lemmaOptions).toEqual(['говори́ть', 'сказа́ть'])
     expect(ex.lemma).toBe('сказа́ть')
     expect(ex.answerAccented).toBe('сказа́л')
-    expect(ex.aspectRule).toMatchObject({ id: 'verb-aspect', title: 'Aspect' })
+    expect(ex.contrastRule).toMatchObject({ id: 'verb-aspect', title: 'Aspect' })
   })
 
   it('labels an imperative slot', () => {
@@ -244,7 +246,7 @@ describe('buildFromPhrase', () => {
     expect(ex.answerAccented).toBe('Скажи́те')
     expect(ex.answer).toBe('скажите')
     expect(ex.slotLabel).toBe('Imperative · вы (command)')
-    expect(ex.aspectRule).toBeNull() // no rules map supplied
+    expect(ex.contrastRule).toBeNull() // no rules map supplied
   })
 
   it('builds case + gender steps for an adjective', () => {
@@ -359,7 +361,7 @@ describe('buildContextSet', () => {
     // partner's infinitive and its aspect step is answered by the partner.
     const partnerItem = byOwner['говорить=to speak'][0]
     expect(partnerItem.lemma).toBe('говори́ть')
-    const aspect = partnerItem.selectSteps.find((s) => s.kind === 'aspect')
+    const aspect = partnerItem.selectSteps.find((s) => s.kind === 'contrast')
     expect(aspect.options.filter((o) => o.correct)).toEqual([
       expect.objectContaining({ id: 'impf' }),
     ])
@@ -433,7 +435,7 @@ describe('exception weighting', () => {
   })
 })
 
-describe('buildAspectDrill / canBuildAspectDrill', () => {
+describe('buildContrastDrill / canBuildContrastDrill', () => {
   // The pf verb (сказа́ть) with usage sentences on both sides of its pair. The
   // pick stage needs no annotations, only ru/en usage phrases keyed by owner;
   // the spelling stage draws from the annotated phrases (phrasesByKey).
@@ -459,16 +461,16 @@ describe('buildAspectDrill / canBuildAspectDrill', () => {
   const ctx = { phrasesByKey, phrasesBySource, rules: drillRules, rng: () => 0 }
 
   it('reports availability only for paired verbs with enough sentences', () => {
-    expect(canBuildAspectDrill(skazat, ctx)).toBe(true)
+    expect(canBuildContrastDrill(skazat, ctx)).toBe(true)
     // No aspect partner → no drill.
-    expect(canBuildAspectDrill(dumat, ctx)).toBe(false)
+    expect(canBuildContrastDrill(dumat, ctx)).toBe(false)
     // Not a verb.
-    expect(canBuildAspectDrill(sobaka, ctx)).toBe(false)
+    expect(canBuildContrastDrill(sobaka, ctx)).toBe(false)
     // No annotated phrase to spell.
-    expect(canBuildAspectDrill(skazat, { ...ctx, phrasesByKey: new Map() })).toBe(false)
+    expect(canBuildContrastDrill(skazat, { ...ctx, phrasesByKey: new Map() })).toBe(false)
     // Too few sentences overall (own side reserved one for spelling).
     expect(
-      canBuildAspectDrill(skazat, {
+      canBuildContrastDrill(skazat, {
         ...ctx,
         phrasesBySource: new Map([
           ['сказать=to say', ownUsage.slice(0, 2)],
@@ -479,8 +481,8 @@ describe('buildAspectDrill / canBuildAspectDrill', () => {
   })
 
   it('builds items from both partners, answered by the owning verb aspect', () => {
-    const drill = buildAspectDrill(skazat, ctx)
-    expect(drill.kind).toBe('aspect-drill')
+    const drill = buildContrastDrill(skazat, ctx)
+    expect(drill.kind).toBe('verb-contrast')
     expect(drill.targets).toEqual(['сказать=to say'])
     // Options are the two infinitives, imperfective first, with usage cues.
     expect(drill.options.map((o) => o.id)).toEqual(['impf', 'pf'])
@@ -497,7 +499,7 @@ describe('buildAspectDrill / canBuildAspectDrill', () => {
   })
 
   it('never shows the spelling sentence among the picks', () => {
-    const drill = buildAspectDrill(skazat, ctx)
+    const drill = buildContrastDrill(skazat, ctx)
     // The only annotated phrase is Он сказа́л пра́вду — it must be the spelling
     // stage, and must not leak into the pick list.
     expect(drill.spell.ru).toBe('Он сказа́л пра́вду.')
@@ -505,26 +507,26 @@ describe('buildAspectDrill / canBuildAspectDrill', () => {
   })
 
   it('strips the aspect step from the spelling stage but keeps the aspect rule', () => {
-    const drill = buildAspectDrill(skazat, ctx)
+    const drill = buildContrastDrill(skazat, ctx)
     expect(drill.spell.selectSteps).toEqual([])
     expect(drill.spell.lemmaOptions).toBeNull()
     // The generic aspect explanation is still offered after spelling.
-    expect(drill.spell.aspectRule).toEqual(expect.objectContaining({ id: 'verb-aspect' }))
-    expect(drill.aspectRule).toEqual(expect.objectContaining({ id: 'verb-aspect' }))
+    expect(drill.spell.contrastRule).toEqual(expect.objectContaining({ id: 'verb-aspect' }))
+    expect(drill.contrastRule).toEqual(expect.objectContaining({ id: 'verb-aspect' }))
   })
 
   it('caps the pick list at the requested number of items', () => {
     const many = Array.from({ length: 10 }, (_, i) => ({
       ru: `Фра́за но́мер ${i}.`, en: `Phrase number ${i}.`, source: 'говорить=to speak',
     }))
-    const drill = buildAspectDrill(skazat, {
+    const drill = buildContrastDrill(skazat, {
       ...ctx,
       phrasesBySource: new Map([
         ['сказать=to say', ownUsage],
         ['говорить=to speak', many],
       ]),
     })
-    expect(drill.items.length).toBe(ASPECT_DRILL_ITEMS)
+    expect(drill.items.length).toBe(CONTRAST_DRILL_ITEMS)
     // Balanced: the short own side contributes everything it has (minus the
     // spelling sentence), the partner fills the rest.
     expect(drill.items.filter((i) => i.answer === 'pf').length).toBe(2)
@@ -532,6 +534,106 @@ describe('buildAspectDrill / canBuildAspectDrill', () => {
   })
 
   it('returns null when the drill cannot be built', () => {
-    expect(buildAspectDrill(dumat, ctx)).toBeNull()
+    expect(buildContrastDrill(dumat, ctx)).toBeNull()
+  })
+})
+
+// --- The motion contrast (#538) --------------------------------------------
+//
+// A verb of motion pairs with the *other imperfective* of its pair, so the
+// contrast is direction rather than aspect. ходи́ть is the indeterminate member
+// and — like most indeterminates — has no aspect partner at all, so the pair
+// step it gets is the directional one.
+const khodit = {
+  key: 'ходить=to walk', pos: 'verb', headword: 'ходи́ть', ru: 'ходить', aspect: 'impf',
+  motion: 'indet',
+  motionPair: { key: 'идти=to go', ru: 'идти́', aspect: 'impf', motion: 'det', gloss: 'to go' },
+}
+// идти́ carries BOTH links: the perfective пойти́ and the indeterminate ходи́ть.
+const idti = {
+  key: 'идти=to go', pos: 'verb', headword: 'идти́', ru: 'идти', aspect: 'impf', motion: 'det',
+  aspectPair: { key: 'пойти=to go', ru: 'пойти́', aspect: 'pf', motion: null, gloss: 'to go' },
+  motionPair: { key: 'ходить=to walk', ru: 'ходи́ть', aspect: 'impf', motion: 'indet', gloss: 'to walk' },
+}
+const khoditPhrase = {
+  id: 'hozhu-v-shkolu', ru: 'Я хожу́ в шко́лу ка́ждый день.', en: 'I go to school every day.',
+  target: { key: 'ходить=to walk', token: 2, tense: 'present', person: '1sg', rule: 'verb-present' },
+}
+
+describe('verbContrast', () => {
+  it('picks the motion contrast for a verb of motion with no aspect partner', () => {
+    expect(verbContrast(khodit)?.dimension).toBe('motion')
+  })
+
+  it('prefers aspect when a verb carries both links', () => {
+    // идти́ ↔ пойти́ (aspect) and идти́ ↔ ходи́ть (direction). Aspect is the
+    // contrast every other verb drills, so it stays primary; the directional
+    // one is still taught from ходи́ть's side.
+    expect(verbContrast(idti)?.dimension).toBe('aspect')
+  })
+
+  it('is null for an unpaired verb and for anything that is not a verb', () => {
+    expect(verbContrast(dumat)).toBeNull()
+    expect(verbContrast(sobaka)).toBeNull()
+    expect(verbContrast(null)).toBeNull()
+  })
+})
+
+describe('the motion contrast step and drill', () => {
+  const ownUsage = [
+    { ru: 'Я хожу́ в шко́лу ка́ждый день.', en: 'I go to school every day.', source: 'ходить=to walk' },
+    { ru: 'Он ча́сто хо́дит в бассе́йн.', en: 'He often goes to the swimming pool.', source: 'ходить=to walk' },
+    { ru: 'Ребёнок уже́ хо́дит.', en: 'The child can already walk.', source: 'ходить=to walk' },
+  ]
+  const partnerUsage = [
+    { ru: 'Я иду́ в шко́лу.', en: 'I am on my way to school.', source: 'идти=to go' },
+    { ru: 'Куда́ ты идёшь?', en: 'Where are you going?', source: 'идти=to go' },
+  ]
+  const ctx = {
+    phrasesByKey: indexPhrases([khoditPhrase]),
+    phrasesBySource: new Map([
+      ['ходить=to walk', ownUsage],
+      ['идти=to go', partnerUsage],
+    ]),
+    rules: {
+      'verb-present': { title: 'Present tense' },
+      'verb-motion-pair': { title: 'Verbs of motion: one direction or not?' },
+    },
+    rng: () => 0,
+  }
+
+  it('offers the two imperfectives, determinate first, with directional cues', () => {
+    const [step] = buildSelectSteps(khoditPhrase.target, khodit)
+    expect(step.kind).toBe('contrast')
+    expect(step.dimension).toBe('motion')
+    // Named "direction" in the feedback line — "contrast" means nothing to a learner.
+    expect(step.label).toBe('direction')
+    expect(step.options.map((o) => o.id)).toEqual(['det', 'indet'])
+    expect(step.options.map((o) => o.label)).toEqual(['идти́', 'ходи́ть'])
+    expect(step.options.find((o) => o.correct).label).toBe('ходи́ть')
+    expect(step.options[0].hint).toContain('one trip')
+    expect(step.options[1].hint).toContain('habitual')
+  })
+
+  it('builds a drill answered by the direction of each sentence’s owner', () => {
+    const drill = buildContrastDrill(khodit, ctx)
+    expect(drill.kind).toBe('verb-contrast')
+    expect(drill.contrast).toBe('motion')
+    expect(drill.targets).toEqual(['ходить=to walk'])
+    expect(drill.options.map((o) => o.id)).toEqual(['det', 'indet'])
+    const ownRu = new Set(ownUsage.map((p) => p.ru))
+    for (const item of drill.items) {
+      expect(item.answer).toBe(ownRu.has(item.ru) ? 'indet' : 'det')
+    }
+    expect(new Set(drill.items.map((i) => i.answer))).toEqual(new Set(['det', 'indet']))
+    // The directional rule explains it, not the aspect one.
+    expect(drill.contrastRule.id).toBe('verb-motion-pair')
+    expect(drill.spell.contrastRule.id).toBe('verb-motion-pair')
+  })
+
+  it('hides which partner is correct behind both lemmas until the pick', () => {
+    const ex = buildFromPhrase(khoditPhrase, khodit, { rules: ctx.rules })
+    expect(ex.lemmaOptions).toEqual(['идти́', 'ходи́ть'])
+    expect(ex.contrastRule.id).toBe('verb-motion-pair')
   })
 })

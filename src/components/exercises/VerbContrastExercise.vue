@@ -1,15 +1,16 @@
 <script setup>
-// Verb usage-mastery drill: one aspect pair, a list of English sentences that
-// use it in different tenses and aspects. Stage 1 — for each sentence the
-// learner picks which member of the pair (imperfective or perfective
-// infinitive) the Russian needs; the pick is graded at once and the real
+// Verb usage-mastery drill: one linked pair, a list of English sentences that
+// use it in different tenses. Stage 1 — for each sentence the learner picks
+// which member of the pair the Russian needs; which contrast that is depends on
+// the pair (imperfective vs perfective for an aspect pair, determinate vs
+// indeterminate for a verb of motion). The pick is graded at once and the real
 // Russian sentence is revealed (and spoken — it is the authored, correct
 // sentence, so it is always safe to voice). Stage 2 — spell one conjugated
 // form, reusing the single-sentence context renderer (PhraseFixExercise) for
 // the identical slot-and-keyboard interaction.
 //
-// The exercise counts as correct only if every aspect pick and the spelling
-// were right. The descriptor is built by lib/phraseContext.buildAspectDrill.
+// The exercise counts as correct only if every pick and the spelling were
+// right. The descriptor is built by lib/phraseContext.buildContrastDrill.
 import { computed, ref } from 'vue'
 
 import { speak } from '../../lib/speech.js'
@@ -44,8 +45,8 @@ function pick(item, opt) {
   speak(item.ru)
 }
 
-function labelFor(aspectId) {
-  return props.exercise.options.find((o) => o.id === aspectId)?.label ?? aspectId
+function labelFor(optionId) {
+  return props.exercise.options.find((o) => o.id === optionId)?.label ?? optionId
 }
 
 function toSpell() {
@@ -60,7 +61,7 @@ function onSpellDone(result) {
 
 <template>
   <div class="grid" style="gap: 1rem">
-    <!-- Stage 1 — pick the aspect for each sentence -->
+    <!-- Stage 1 — pick the pair member each sentence needs -->
     <template v-if="stage === 'pick'">
       <p class="prompt">
         <span class="muted">Which verb does each sentence need?</span>
@@ -81,7 +82,7 @@ function onSpellDone(result) {
               v-for="opt in exercise.options"
               :key="opt.id"
               type="button"
-              class="aspect-btn"
+              class="pair-btn"
               lang="ru"
               @click="pick(item, opt)"
             >
@@ -158,7 +159,7 @@ function onSpellDone(result) {
 .options {
   gap: 0.5rem;
 }
-.aspect-btn {
+.pair-btn {
   padding: 0.4rem 0.8rem;
   border: 1px solid var(--border, #ccc);
   border-radius: 6px;
@@ -166,7 +167,7 @@ function onSpellDone(result) {
   font-size: 1rem;
   cursor: pointer;
 }
-.aspect-btn:hover {
+.pair-btn:hover {
   border-color: var(--primary);
 }
 .verdict {

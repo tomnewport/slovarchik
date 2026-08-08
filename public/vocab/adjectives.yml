@@ -384,6 +384,11 @@ words:
       n: бе́дное
       pl: бе́дные
       comparative: бедне́е
+    short:
+      m: бе́ден
+      f: бедна́
+      n: бе́дно
+      pl: бедны́
     declension:
       m_nom: бе́дный
       m_gen: бе́дного
@@ -727,6 +732,11 @@ words:
       n: бле́дное
       pl: бле́дные
       comparative: бледне́е
+    short:
+      m: бле́ден
+      f: бледна́
+      n: бле́дно
+      pl: бледны́
     declension:
       m_nom: бле́дный
       m_gen: бле́дного
@@ -864,6 +874,11 @@ words:
       n: бли́зкое
       pl: бли́зкие
       comparative: бли́же
+    short:
+      m: бли́зок
+      f: близка́
+      n: бли́зко
+      pl: близки́
     declension:
       m_nom: бли́зкий
       m_gen: бли́зкого
@@ -931,6 +946,11 @@ words:
       n: бога́тое
       pl: бога́тые
       comparative: бога́че
+    short:
+      m: бога́т
+      f: бога́та
+      n: бога́то
+      pl: бога́ты
     declension:
       m_nom: бога́тый
       m_gen: бога́того
@@ -1319,6 +1339,11 @@ words:
       n: бы́строе
       pl: бы́стрые
       comparative: быстре́е
+    short:
+      m: быстр
+      f: быстра́
+      n: бы́стро
+      pl: быстры́
     declension:
       m_nom: бы́стрый
       m_gen: бы́строго
@@ -1382,6 +1407,11 @@ words:
       n: ва́жное
       pl: ва́жные
       comparative: важне́е
+    short:
+      m: ва́жен
+      f: важна́
+      n: ва́жно
+      pl: важны́
     declension:
       m_nom: ва́жный
       m_gen: ва́жного
@@ -1420,6 +1450,11 @@ words:
       n: ве́жливое
       pl: ве́жливые
       comparative: ве́жливее
+    short:
+      m: ве́жлив
+      f: ве́жлива
+      n: ве́жливо
+      pl: ве́жливы
     declension:
       m_nom: ве́жливый
       m_gen: ве́жливого
@@ -1572,6 +1607,11 @@ words:
       n: ве́рное
       pl: ве́рные
       comparative: верне́е
+    short:
+      m: ве́рен
+      f: верна́
+      n: ве́рно
+      pl: верны́
     declension:
       m_nom: ве́рный
       m_gen: ве́рного
@@ -1686,6 +1726,11 @@ words:
       n: весёлое
       pl: весёлые
       comparative: веселе́е
+    short:
+      m: ве́сел
+      f: весела́
+      n: ве́село
+      pl: ве́селы
     declension:
       m_nom: весёлый
       m_gen: весёлого
@@ -2039,6 +2084,11 @@ words:
       n: вку́сное
       pl: вку́сные
       comparative: вкусне́е
+    short:
+      m: вку́сен
+      f: вкусна́
+      n: вку́сно
+      pl: вкусны́
     declension:
       m_nom: вку́сный
       m_gen: вку́сного
@@ -2081,6 +2131,11 @@ words:
       n: вла́жное
       pl: вла́жные
       comparative: влажне́е
+    short:
+      m: вла́жен
+      f: влажна́
+      n: вла́жно
+      pl: влажны́
     declension:
       m_nom: вла́жный
       m_gen: вла́жного
@@ -2325,6 +2380,11 @@ words:
       f: возмо́жная
       n: возмо́жное
       pl: возмо́жные
+    short:
+      m: возмо́жен
+      f: возмо́жна
+      n: возмо́жно
+      pl: возмо́жны
     declension:
       m_nom: возмо́жный
       m_gen: возмо́жного
@@ -2571,6 +2631,11 @@ words:
       f: вре́дная
       n: вре́дное
       pl: вре́дные
+    short:
+      m: вре́ден
+      f: вредна́
+      n: вре́дно
+      pl: вредны́
     declension:
       m_nom: вре́дный
       m_gen: вре́дного
@@ -2879,6 +2944,11 @@ words:
       n: высо́кое
       pl: высо́кие
       comparative: вы́ше
+    short:
+      m: высо́к
+      f: высока́
+      n: высоко́
+      pl: высоки́
     declension:
       m_nom: высо́кий
       m_gen: высо́кого
@@ -3222,6 +3292,11 @@ words:
       n: глубо́кое
       pl: глубо́кие
       comparative: глу́бже
+    short:
+      m: глубо́к
+      f: глубока́
+      n: глубоко́
+      pl: глубоки́
     declension:
       m_nom: глубо́кий
       m_gen: глубо́кого
@@ -3260,6 +3335,11 @@ words:
       n: глу́пое
       pl: глу́пые
       comparative: глупе́е
+    short:
+      m: глуп
+      f: глупа́
+      n: глу́по
+      pl: глупы́
     declension:
       m_nom: глу́пый
       m_gen: глу́пого
@@ -3367,11 +3447,22 @@ words:
       - ru: Накорми́ голо́дных дете́й.
         en_gb: Feed the hungry children.
         inflect: { token: 2, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
+      - ru: Я голодна́ по́сле рабо́ты.
+        en_gb: I am hungry after work.
+        inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
+      - ru: Ребёнок го́лоден по́сле шко́лы.
+        en_gb: The child is hungry after school.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
     forms:
       m: голо́дный
       f: голо́дная
       n: голо́дное
       pl: голо́дные
+    short:
+      m: го́лоден
+      f: голодна́
+      n: го́лодно
+      pl: го́лодны
     declension:
       m_nom: голо́дный
       m_gen: голо́дного
@@ -3461,6 +3552,11 @@ words:
       f: го́лая
       n: го́лое
       pl: го́лые
+    short:
+      m: гол
+      f: гола́
+      n: го́ло
+      pl: го́лы
     declension:
       m_nom: го́лый
       m_gen: го́лого
@@ -3721,6 +3817,11 @@ words:
       f: горя́чая
       n: горя́чее
       pl: горя́чие
+    short:
+      m: горя́ч
+      f: горяча́
+      n: горячо́
+      pl: горячи́
     declension:
       m_nom: горя́чий
       m_gen: горя́чего
@@ -4056,6 +4157,11 @@ words:
       n: гру́бое
       pl: гру́бые
       comparative: грубе́е
+    short:
+      m: груб
+      f: груба́
+      n: гру́бо
+      pl: гру́бы
     declension:
       m_nom: гру́бый
       m_gen: гру́бого
@@ -4120,6 +4226,11 @@ words:
       n: гру́стное
       pl: гру́стные
       comparative: грустне́е
+    short:
+      m: гру́стен
+      f: грустна́
+      n: гру́стно
+      pl: грустны́
     declension:
       m_nom: гру́стный
       m_gen: гру́стного
@@ -4173,6 +4284,11 @@ words:
       n: гря́зное
       pl: гря́зные
       comparative: грязне́е
+    short:
+      m: гря́зен
+      f: грязна́
+      n: гря́зно
+      pl: грязны́
     declension:
       m_nom: гря́зный
       m_gen: гря́зного
@@ -4212,6 +4328,11 @@ words:
       n: густо́е
       pl: густы́е
       comparative: гу́ще
+    short:
+      m: густ
+      f: густа́
+      n: гу́сто
+      pl: гу́сты
     declension:
       m_nom: густо́й
       m_gen: густо́го
@@ -4264,6 +4385,11 @@ words:
       n: далёкое
       pl: далёкие
       comparative: да́льше
+    short:
+      m: далёк
+      f: далека́
+      n: далеко́
+      pl: далеки́
     declension:
       m_nom: далёкий
       m_gen: далёкого
@@ -4713,6 +4839,11 @@ words:
       n: дешёвое
       pl: дешёвые
       comparative: деше́вле
+    short:
+      m: дёшев
+      f: дешева́
+      n: дёшево
+      pl: дёшевы
     declension:
       m_nom: дешёвый
       m_gen: дешёвого
@@ -4968,6 +5099,11 @@ words:
       n: дово́льное
       pl: дово́льные
       comparative: дово́льнее
+    short:
+      m: дово́лен
+      f: дово́льна
+      n: дово́льно
+      pl: дово́льны
     declension:
       m_nom: дово́льный
       m_gen: дово́льного
@@ -5006,6 +5142,12 @@ words:
       - ru: По́сле о́тпуска он вы́глядит дово́льнее.
         en_gb: After the holiday he looks more satisfied.
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
+      - ru: Все дово́льны результа́том.
+        en_gb: Everyone is pleased with the result.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
+      - ru: Он дово́лен но́вой рабо́той.
+        en_gb: He is pleased with his new job.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
   "долгий=long":
     cefr_level: A2
     accented: до́лгий
@@ -5307,6 +5449,11 @@ words:
       n: дорого́е
       pl: дороги́е
       comparative: доро́же
+    short:
+      m: до́рог
+      f: дорога́
+      n: до́рого
+      pl: до́роги
     declension:
       m_nom: дорого́й
       m_gen: дорого́го
@@ -6836,6 +6983,11 @@ words:
       n: заме́тное
       pl: заме́тные
       comparative: заме́тнее
+    short:
+      m: заме́тен
+      f: заме́тна
+      n: заме́тно
+      pl: заме́тны
     declension:
       m_nom: заме́тный
       m_gen: заме́тного
@@ -7041,12 +7193,20 @@ words:
       - ru: По́сле о́тпуска он стал здорове́е.
         en_gb: After the holiday he became healthier.
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
+      - ru: Тепе́рь ты здоро́ва.
+        en_gb: Now you are well.
+        inflect: { token: 3, degree: short, gender: f, rule: adj-short-form }
     forms:
       m: здоро́вый
       f: здоро́вая
       n: здоро́вое
       pl: здоро́вые
       comparative: здорове́е
+    short:
+      m: здоро́в
+      f: здоро́ва
+      n: здоро́во
+      pl: здоро́вы
     declension:
       m_nom: здоро́вый
       m_gen: здоро́вого
@@ -7254,6 +7414,11 @@ words:
       n: зло́е
       pl: злы́е
       comparative: зле́е
+    short:
+      m: зол
+      f: зла
+      n: зло
+      pl: злы
     declension:
       m_nom: злой
       m_gen: зло́го
@@ -7294,6 +7459,11 @@ words:
       f: знако́мая
       n: знако́мое
       pl: знако́мые
+    short:
+      m: знако́м
+      f: знако́ма
+      n: знако́мо
+      pl: знако́мы
     declension:
       m_nom: знако́мый
       m_gen: знако́мого
@@ -7342,6 +7512,11 @@ words:
       f: знамени́тая
       n: знамени́тое
       pl: знамени́тые
+    short:
+      m: знамени́т
+      f: знамени́та
+      n: знамени́то
+      pl: знамени́ты
     declension:
       m_nom: знамени́тый
       m_gen: знамени́того
@@ -7506,6 +7681,11 @@ words:
       f: изве́стная
       n: изве́стное
       pl: изве́стные
+    short:
+      m: изве́стен
+      f: изве́стна
+      n: изве́стно
+      pl: изве́стны
     declension:
       m_nom: изве́стный
       m_gen: изве́стного
@@ -7749,12 +7929,20 @@ words:
       - ru: Э́то са́мая интере́сная кни́га в библиоте́ке.
         en_gb: This is the most interesting book in the library.
         inflect: { token: 2, span: 2, degree: superlative, case: nom, gender: f, rule: adj-superlative }
+      - ru: Э́та кни́га о́чень интере́сна.
+        en_gb: This book is very interesting.
+        inflect: { token: 4, degree: short, gender: f, rule: adj-short-form }
     forms:
       m: интере́сный
       f: интере́сная
       n: интере́сное
       pl: интере́сные
       comparative: интере́снее
+    short:
+      m: интере́сен
+      f: интере́сна
+      n: интере́сно
+      pl: интере́сны
     declension:
       m_nom: интере́сный
       m_gen: интере́сного
@@ -8728,6 +8916,11 @@ words:
       n: краси́вое
       pl: краси́вые
       comparative: краси́вее
+    short:
+      m: краси́в
+      f: краси́ва
+      n: краси́во
+      pl: краси́вы
     declension:
       m_nom: краси́вый
       m_gen: краси́вого
@@ -8861,6 +9054,11 @@ words:
       n: кре́пкое
       pl: кре́пкие
       comparative: кре́пче
+    short:
+      m: кре́пок
+      f: крепка́
+      n: кре́пко
+      pl: крепки́
     declension:
       m_nom: кре́пкий
       m_gen: кре́пкого
@@ -9251,6 +9449,11 @@ words:
       n: лёгкое
       pl: лёгкие
       comparative: ле́гче
+    short:
+      m: лёгок
+      f: легка́
+      n: легко́
+      pl: легки́
     declension:
       m_nom: лёгкий
       m_gen: лёгкого
@@ -9753,6 +9956,11 @@ words:
       n: ма́ленькое
       pl: ма́ленькие
       comparative: ме́ньше
+    short:
+      m: мал
+      f: мала́
+      n: мало́
+      pl: малы́
     declension:
       m_nom: ма́ленький
       m_gen: ма́ленького
@@ -10132,6 +10340,11 @@ words:
       n: ме́лкое
       pl: ме́лкие
       comparative: ме́льче
+    short:
+      m: ме́лок
+      f: мелка́
+      n: ме́лко
+      pl: мелки́
     declension:
       m_nom: ме́лкий
       m_gen: ме́лкого
@@ -10328,6 +10541,11 @@ words:
       n: ми́лое
       pl: ми́лые
       comparative: миле́е
+    short:
+      m: мил
+      f: мила́
+      n: ми́ло
+      pl: милы́
     declension:
       m_nom: ми́лый
       m_gen: ми́лого
@@ -10680,6 +10898,11 @@ words:
       n: мо́дное
       pl: мо́дные
       comparative: модне́е
+    short:
+      m: мо́ден
+      f: модна́
+      n: мо́дно
+      pl: модны́
     declension:
       m_nom: мо́дный
       m_gen: мо́дного
@@ -10788,6 +11011,11 @@ words:
       n: молодо́е
       pl: молоды́е
       comparative: моло́же
+    short:
+      m: мо́лод
+      f: молода́
+      n: мо́лодо
+      pl: мо́лоды
     declension:
       m_nom: молодо́й
       m_gen: молодо́го
@@ -11134,6 +11362,11 @@ words:
       n: мя́гкое
       pl: мя́гкие
       comparative: мя́гче
+    short:
+      m: мя́гок
+      f: мягка́
+      n: мя́гко
+      pl: мя́гки
     declension:
       m_nom: мя́гкий
       m_gen: мя́гкого
@@ -11176,6 +11409,11 @@ words:
       n: надёжное
       pl: надёжные
       comparative: надёжнее
+    short:
+      m: надёжен
+      f: надёжна
+      n: надёжно
+      pl: надёжны
     declension:
       m_nom: надёжный
       m_gen: надёжного
@@ -11798,6 +12036,11 @@ words:
       f: недово́льная
       n: недово́льное
       pl: недово́льные
+    short:
+      m: недово́лен
+      f: недово́льна
+      n: недово́льно
+      pl: недово́льны
     declension:
       m_nom: недово́льный
       m_gen: недово́льного
@@ -11863,6 +12106,11 @@ words:
       n: не́жное
       pl: не́жные
       comparative: нежне́е
+    short:
+      m: не́жен
+      f: нежна́
+      n: не́жно
+      pl: нежны́
     declension:
       m_nom: не́жный
       m_gen: не́жного
@@ -12190,6 +12438,11 @@ words:
       f: необходи́мая
       n: необходи́мое
       pl: необходи́мые
+    short:
+      m: необходи́м
+      f: необходи́ма
+      n: необходи́мо
+      pl: необходи́мы
     declension:
       m_nom: необходи́мый
       m_gen: необходи́мого
@@ -12780,6 +13033,11 @@ words:
       n: ни́зкое
       pl: ни́зкие
       comparative: ни́же
+    short:
+      m: ни́зок
+      f: низка́
+      n: ни́зко
+      pl: ни́зки
     declension:
       m_nom: ни́зкий
       m_gen: ни́зкого
@@ -12838,6 +13096,11 @@ words:
       n: но́вое
       pl: но́вые
       comparative: нове́е
+    short:
+      m: нов
+      f: нова́
+      n: но́во
+      pl: но́вы
     declension:
       m_nom: но́вый
       m_gen: но́вого
@@ -12876,6 +13139,11 @@ words:
       f: норма́льная
       n: норма́льное
       pl: норма́льные
+    short:
+      m: норма́лен
+      f: норма́льна
+      n: норма́льно
+      pl: норма́льны
     declension:
       m_nom: норма́льный
       m_gen: норма́льного
@@ -13271,6 +13539,11 @@ words:
       f: обы́чная
       n: обы́чное
       pl: обы́чные
+    short:
+      m: обы́чен
+      f: обы́чна
+      n: обы́чно
+      pl: обы́чны
     declension:
       m_nom: обы́чный
       m_gen: обы́чного
@@ -13379,6 +13652,11 @@ words:
       f: обяза́тельная
       n: обяза́тельное
       pl: обяза́тельные
+    short:
+      m: обяза́телен
+      f: обяза́тельна
+      n: обяза́тельно
+      pl: обяза́тельны
     declension:
       m_nom: обяза́тельный
       m_gen: обяза́тельного
@@ -13426,6 +13704,11 @@ words:
       f: огро́мная
       n: огро́мное
       pl: огро́мные
+    short:
+      m: огро́мен
+      f: огро́мна
+      n: огро́мно
+      pl: огро́мны
     declension:
       m_nom: огро́мный
       m_gen: огро́много
@@ -13593,6 +13876,11 @@ words:
       f: одино́кая
       n: одино́кое
       pl: одино́кие
+    short:
+      m: одино́к
+      f: одино́ка
+      n: одино́ко
+      pl: одино́ки
     declension:
       m_nom: одино́кий
       m_gen: одино́кого
@@ -13640,12 +13928,20 @@ words:
       - ru: Е́здить но́чью опа́снее.
         en_gb: Driving at night is more dangerous.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
+      - ru: Э́та доро́га опа́сна но́чью.
+        en_gb: This road is dangerous at night.
+        inflect: { token: 3, degree: short, gender: f, rule: adj-short-form }
     forms:
       m: опа́сный
       f: опа́сная
       n: опа́сное
       pl: опа́сные
       comparative: опа́снее
+    short:
+      m: опа́сен
+      f: опа́сна
+      n: опа́сно
+      pl: опа́сны
     declension:
       m_nom: опа́сный
       m_gen: опа́сного
@@ -13828,6 +14124,11 @@ words:
       f: о́пытная
       n: о́пытное
       pl: о́пытные
+    short:
+      m: о́пытен
+      f: о́пытна
+      n: о́пытно
+      pl: о́пытны
     declension:
       m_nom: о́пытный
       m_gen: о́пытного
@@ -14807,6 +15108,11 @@ words:
       n: печа́льное
       pl: печа́льные
       comparative: печа́льнее
+    short:
+      m: печа́лен
+      f: печа́льна
+      n: печа́льно
+      pl: печа́льны
     declension:
       m_nom: печа́льный
       m_gen: печа́льного
@@ -15021,6 +15327,11 @@ words:
       n: плохо́е
       pl: плохи́е
       comparative: ху́же
+    short:
+      m: плох
+      f: плоха́
+      n: пло́хо
+      pl: пло́хи
     declension:
       m_nom: плохо́й
       m_gen: плохо́го
@@ -15398,6 +15709,11 @@ words:
       n: поле́зное
       pl: поле́зные
       comparative: поле́знее
+    short:
+      m: поле́зен
+      f: поле́зна
+      n: поле́зно
+      pl: поле́зны
     declension:
       m_nom: поле́зный
       m_gen: поле́зного
@@ -15510,6 +15826,11 @@ words:
       n: по́лное
       pl: по́лные
       comparative: полне́е
+    short:
+      m: по́лон
+      f: полна́
+      n: полно́
+      pl: полны́
     declension:
       m_nom: по́лный
       m_gen: по́лного
@@ -15690,6 +16011,11 @@ words:
       f: поня́тная
       n: поня́тное
       pl: поня́тные
+    short:
+      m: поня́тен
+      f: поня́тна
+      n: поня́тно
+      pl: поня́тны
     declension:
       m_nom: поня́тный
       m_gen: поня́тного
@@ -15737,6 +16063,11 @@ words:
       f: популя́рная
       n: популя́рное
       pl: популя́рные
+    short:
+      m: популя́рен
+      f: популя́рна
+      n: популя́рно
+      pl: популя́рны
     declension:
       m_nom: популя́рный
       m_gen: популя́рного
@@ -15924,6 +16255,11 @@ words:
       f: постоя́нная
       n: постоя́нное
       pl: постоя́нные
+    short:
+      m: постоя́нен
+      f: постоя́нна
+      n: постоя́нно
+      pl: постоя́нны
     declension:
       m_nom: постоя́нный
       m_gen: постоя́нного
@@ -16076,6 +16412,11 @@ words:
       f: пра́вильная
       n: пра́вильное
       pl: пра́вильные
+    short:
+      m: пра́вилен
+      f: пра́вильна
+      n: пра́вильно
+      pl: пра́вильны
     declension:
       m_nom: пра́вильный
       m_gen: пра́вильного
@@ -16312,6 +16653,11 @@ words:
       f: прекра́сная
       n: прекра́сное
       pl: прекра́сные
+    short:
+      m: прекра́сен
+      f: прекра́сна
+      n: прекра́сно
+      pl: прекра́сны
     declension:
       m_nom: прекра́сный
       m_gen: прекра́сного
@@ -16363,6 +16709,11 @@ words:
       f: привы́чная
       n: привы́чное
       pl: привы́чные
+    short:
+      m: привы́чен
+      f: привы́чна
+      n: привы́чно
+      pl: привы́чны
     declension:
       m_nom: привы́чный
       m_gen: привы́чного
@@ -16566,6 +16917,11 @@ words:
       n: прия́тное
       pl: прия́тные
       comparative: прия́тнее
+    short:
+      m: прия́тен
+      f: прия́тна
+      n: прия́тно
+      pl: прия́тны
     declension:
       m_nom: прия́тный
       m_gen: прия́тного
@@ -16731,6 +17087,11 @@ words:
       n: просто́е
       pl: просты́е
       comparative: про́ще
+    short:
+      m: прост
+      f: проста́
+      n: про́сто
+      pl: просты́
     declension:
       m_nom: просто́й
       m_gen: просто́го
@@ -17064,6 +17425,11 @@ words:
       f: пуста́я
       n: пусто́е
       pl: пусты́е
+    short:
+      m: пуст
+      f: пуста́
+      n: пу́сто
+      pl: пусты́
     declension:
       m_nom: пусто́й
       m_gen: пусто́го
@@ -17104,6 +17470,11 @@ words:
       f: пья́ная
       n: пья́ное
       pl: пья́ные
+    short:
+      m: пьян
+      f: пьяна́
+      n: пья́но
+      pl: пья́ны
     declension:
       m_nom: пья́ный
       m_gen: пья́ного
@@ -17223,6 +17594,11 @@ words:
       f: ра́достная
       n: ра́достное
       pl: ра́достные
+    short:
+      m: ра́достен
+      f: ра́достна
+      n: ра́достно
+      pl: ра́достны
     declension:
       m_nom: ра́достный
       m_gen: ра́достного
@@ -17720,6 +18096,11 @@ words:
       n: ре́дкое
       pl: ре́дкие
       comparative: ре́же
+    short:
+      m: ре́док
+      f: редка́
+      n: ре́дко
+      pl: ре́дки
     declension:
       m_nom: ре́дкий
       m_gen: ре́дкого
@@ -17772,6 +18153,11 @@ words:
       n: ре́зкое
       pl: ре́зкие
       comparative: ре́зче
+    short:
+      m: ре́зок
+      f: резка́
+      n: ре́зко
+      pl: ре́зки
     declension:
       m_nom: ре́зкий
       m_gen: ре́зкого
@@ -17839,6 +18225,11 @@ words:
       n: ро́вное
       pl: ро́вные
       comparative: ровне́е
+    short:
+      m: ро́вен
+      f: ровна́
+      n: ро́вно
+      pl: ровны́
     declension:
       m_nom: ро́вный
       m_gen: ро́вного
@@ -18229,6 +18620,11 @@ words:
       n: све́жее
       pl: све́жие
       comparative: свеже́е
+    short:
+      m: свеж
+      f: свежа́
+      n: свежо́
+      pl: свежи́
     declension:
       m_nom: све́жий
       m_gen: све́жего
@@ -18775,6 +19171,11 @@ words:
       n: серьёзное
       pl: серьёзные
       comparative: серьёзнее
+    short:
+      m: серьёзен
+      f: серьёзна
+      n: серьёзно
+      pl: серьёзны
     declension:
       m_nom: серьёзный
       m_gen: серьёзного
@@ -18825,12 +19226,20 @@ words:
       - ru: Он стал са́мым си́льным в кла́ссе.
         en_gb: He became the strongest in the class.
         inflect: { token: 3, span: 2, degree: superlative, case: ins, gender: m, rule: adj-superlative }
+      - ru: Ты силён, но будь осторо́жен.
+        en_gb: You are strong, but be careful.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
     forms:
       m: си́льный
       f: си́льная
       n: си́льное
       pl: си́льные
       comparative: сильне́е
+    short:
+      m: силён
+      f: сильна́
+      n: си́льно
+      pl: сильны́
     declension:
       m_nom: си́льный
       m_gen: си́льного
@@ -18972,6 +19381,11 @@ words:
       n: скро́мное
       pl: скро́мные
       comparative: скромне́е
+    short:
+      m: скро́мен
+      f: скромна́
+      n: скро́мно
+      pl: скро́мны
     declension:
       m_nom: скро́мный
       m_gen: скро́много
@@ -19089,6 +19503,11 @@ words:
       n: ску́чное
       pl: ску́чные
       comparative: скучне́е
+    short:
+      m: ску́чен
+      f: скучна́
+      n: ску́чно
+      pl: скучны́
     declension:
       m_nom: ску́чный
       m_gen: ску́чного
@@ -19141,6 +19560,11 @@ words:
       n: сла́бое
       pl: сла́бые
       comparative: слабе́е
+    short:
+      m: слаб
+      f: слаба́
+      n: сла́бо
+      pl: сла́бы
     declension:
       m_nom: сла́бый
       m_gen: сла́бого
@@ -19241,6 +19665,11 @@ words:
       n: сла́дкое
       pl: сла́дкие
       comparative: сла́ще
+    short:
+      m: сла́док
+      f: сладка́
+      n: сла́дко
+      pl: сла́дки
     declension:
       m_nom: сла́дкий
       m_gen: сла́дкого
@@ -19327,6 +19756,11 @@ words:
       f: слепа́я
       n: слепо́е
       pl: слепы́е
+    short:
+      m: слеп
+      f: слепа́
+      n: сле́по
+      pl: слепы́
     declension:
       m_nom: слепо́й
       m_gen: слепо́го
@@ -19376,6 +19810,11 @@ words:
       n: сло́жное
       pl: сло́жные
       comparative: сложне́е
+    short:
+      m: сло́жен
+      f: сложна́
+      n: сло́жно
+      pl: сложны́
     declension:
       m_nom: сло́жный
       m_gen: сло́жного
@@ -19544,6 +19983,11 @@ words:
       n: сме́лое
       pl: сме́лые
       comparative: смеле́е
+    short:
+      m: смел
+      f: смела́
+      n: сме́ло
+      pl: сме́лы
     declension:
       m_nom: сме́лый
       m_gen: сме́лого
@@ -19585,6 +20029,11 @@ words:
       f: смешна́я
       n: смешно́е
       pl: смешны́е
+    short:
+      m: смешо́н
+      f: смешна́
+      n: смешно́
+      pl: смешны́
     declension:
       m_nom: смешно́й
       m_gen: смешно́го
@@ -20437,6 +20886,11 @@ words:
       n: споко́йное
       pl: споко́йные
       comparative: споко́йнее
+    short:
+      m: споко́ен
+      f: споко́йна
+      n: споко́йно
+      pl: споко́йны
     declension:
       m_nom: споко́йный
       m_gen: споко́йного
@@ -20524,6 +20978,11 @@ words:
       f: спосо́бная
       n: спосо́бное
       pl: спосо́бные
+    short:
+      m: спосо́бен
+      f: спосо́бна
+      n: спосо́бно
+      pl: спосо́бны
     declension:
       m_nom: спосо́бный
       m_gen: спосо́бного
@@ -20572,6 +21031,11 @@ words:
       f: справедли́вая
       n: справедли́вое
       pl: справедли́вые
+    short:
+      m: справедли́в
+      f: справедли́ва
+      n: справедли́во
+      pl: справедли́вы
     declension:
       m_nom: справедли́вый
       m_gen: справедли́вого
@@ -20835,6 +21299,11 @@ words:
       n: ста́рое
       pl: ста́рые
       comparative: ста́рше
+    short:
+      m: стар
+      f: стара́
+      n: ста́ро
+      pl: ста́ры
     declension:
       m_nom: ста́рый
       m_gen: ста́рого
@@ -20972,6 +21441,11 @@ words:
       n: стра́нное
       pl: стра́нные
       comparative: стра́ннее
+    short:
+      m: стра́нен
+      f: странна́
+      n: стра́нно
+      pl: стра́нны
     declension:
       m_nom: стра́нный
       m_gen: стра́нного
@@ -21023,6 +21497,11 @@ words:
       n: стра́шное
       pl: стра́шные
       comparative: страшне́е
+    short:
+      m: стра́шен
+      f: страшна́
+      n: стра́шно
+      pl: стра́шны
     declension:
       m_nom: стра́шный
       m_gen: стра́шного
@@ -21075,6 +21554,11 @@ words:
       n: стро́гое
       pl: стро́гие
       comparative: стро́же
+    short:
+      m: строг
+      f: строга́
+      n: стро́го
+      pl: стро́ги
     declension:
       m_nom: стро́гий
       m_gen: стро́гого
@@ -21292,6 +21776,11 @@ words:
       n: сухо́е
       pl: сухи́е
       comparative: су́ше
+    short:
+      m: сух
+      f: суха́
+      n: су́хо
+      pl: су́хи
     declension:
       m_nom: сухо́й
       m_gen: сухо́го
@@ -21342,12 +21831,23 @@ words:
       - ru: Она́ чу́вствовала себя́ са́мой счастли́вой.
         en_gb: She felt the happiest.
         inflect: { token: 4, span: 2, degree: superlative, case: ins, gender: f, rule: adj-superlative }
+      - ru: Я сча́стлив, что ты пришла́.
+        en_gb: I am happy that you came.
+        inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
+      - ru: Мы сча́стливы вме́сте.
+        en_gb: We are happy together.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
     forms:
       m: счастли́вый
       f: счастли́вая
       n: счастли́вое
       pl: счастли́вые
       comparative: счастли́вее
+    short:
+      m: сча́стлив
+      f: сча́стлива
+      n: сча́стливо
+      pl: сча́стливы
     declension:
       m_nom: счастли́вый
       m_gen: счастли́вого
@@ -21546,6 +22046,11 @@ words:
       n: твёрдое
       pl: твёрдые
       comparative: твёрже
+    short:
+      m: твёрд
+      f: тверда́
+      n: твёрдо
+      pl: твёрды
     declension:
       m_nom: твёрдый
       m_gen: твёрдого
@@ -21759,6 +22264,11 @@ words:
       n: тёплое
       pl: тёплые
       comparative: тепле́е
+    short:
+      m: тёпел
+      f: тепла́
+      n: тепло́
+      pl: теплы́
     declension:
       m_nom: тёплый
       m_gen: тёплого
@@ -21950,6 +22460,11 @@ words:
       n: ти́хое
       pl: ти́хие
       comparative: ти́ше
+    short:
+      m: тих
+      f: тиха́
+      n: ти́хо
+      pl: ти́хи
     declension:
       m_nom: ти́хий
       m_gen: ти́хого
@@ -22017,6 +22532,11 @@ words:
       n: то́лстое
       pl: то́лстые
       comparative: то́лще
+    short:
+      m: толст
+      f: толста́
+      n: то́лсто
+      pl: то́лсты
     declension:
       m_nom: то́лстый
       m_gen: то́лстого
@@ -22070,6 +22590,11 @@ words:
       n: то́нкое
       pl: то́нкие
       comparative: то́ньше
+    short:
+      m: то́нок
+      f: тонка́
+      n: то́нко
+      pl: тонки́
     declension:
       m_nom: то́нкий
       m_gen: то́нкого
@@ -22208,6 +22733,11 @@ words:
       n: то́чное
       pl: то́чные
       comparative: точне́е
+    short:
+      m: то́чен
+      f: точна́
+      n: то́чно
+      pl: точны́
     declension:
       m_nom: то́чный
       m_gen: то́чного
@@ -22371,6 +22901,11 @@ words:
       n: тру́дное
       pl: тру́дные
       comparative: трудне́е
+    short:
+      m: тру́ден
+      f: трудна́
+      n: тру́дно
+      pl: трудны́
     declension:
       m_nom: тру́дный
       m_gen: тру́дного
@@ -22505,6 +23040,11 @@ words:
       n: тяжёлое
       pl: тяжёлые
       comparative: тяжеле́е
+    short:
+      m: тяжёл
+      f: тяжела́
+      n: тяжело́
+      pl: тяжелы́
     declension:
       m_nom: тяжёлый
       m_gen: тяжёлого
@@ -22656,6 +23196,11 @@ words:
       f: уве́ренная
       n: уве́ренное
       pl: уве́ренные
+    short:
+      m: уве́рен
+      f: уве́рена
+      n: уве́рено
+      pl: уве́рены
     declension:
       m_nom: уве́ренный
       m_gen: уве́ренного
@@ -22691,6 +23236,12 @@ words:
       - ru: Мы слы́шали уве́ренные слова́.
         en_gb: We heard confident words.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+      - ru: Она́ уве́рена в себе́.
+        en_gb: She is confident in herself.
+        inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
+      - ru: Мы уве́рены в отве́те.
+        en_gb: We are sure of the answer.
+        inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
   "угодный=pleasing":
     cefr_level: B2
     accented: уго́дный
@@ -22805,6 +23356,11 @@ words:
       f: удиви́тельная
       n: удиви́тельное
       pl: удиви́тельные
+    short:
+      m: удиви́телен
+      f: удиви́тельна
+      n: удиви́тельно
+      pl: удиви́тельны
     declension:
       m_nom: удиви́тельный
       m_gen: удиви́тельного
@@ -22870,6 +23426,11 @@ words:
       n: удо́бное
       pl: удо́бные
       comparative: удо́бнее
+    short:
+      m: удо́бен
+      f: удо́бна
+      n: удо́бно
+      pl: удо́бны
     declension:
       m_nom: удо́бный
       m_gen: удо́бного
@@ -22908,6 +23469,11 @@ words:
       n: ужа́сное
       pl: ужа́сные
       comparative: ужа́снее
+    short:
+      m: ужа́сен
+      f: ужа́сна
+      n: ужа́сно
+      pl: ужа́сны
     declension:
       m_nom: ужа́сный
       m_gen: ужа́сного
@@ -22973,6 +23539,11 @@ words:
       n: у́зкое
       pl: у́зкие
       comparative: у́же
+    short:
+      m: у́зок
+      f: узка́
+      n: у́зко
+      pl: узки́
     declension:
       m_nom: у́зкий
       m_gen: у́зкого
@@ -23022,12 +23593,20 @@ words:
       - ru: Сестра́ умне́е меня́.
         en_gb: My sister is cleverer than me.
         inflect: { token: 2, degree: comparative, rule: adj-comparative }
+      - ru: Твоя́ дочь о́чень умна́.
+        en_gb: Your daughter is very clever.
+        inflect: { token: 4, degree: short, gender: f, rule: adj-short-form }
     forms:
       m: у́мный
       f: у́мная
       n: у́мное
       pl: у́мные
       comparative: умне́е
+    short:
+      m: умён
+      f: умна́
+      n: умно́
+      pl: умны́
     declension:
       m_nom: у́мный
       m_gen: у́много
@@ -23654,6 +24233,11 @@ words:
       n: хи́трое
       pl: хи́трые
       comparative: хитре́е
+    short:
+      m: хитёр
+      f: хитра́
+      n: хи́тро
+      pl: хитры́
     declension:
       m_nom: хи́трый
       m_gen: хи́трого
@@ -23721,6 +24305,11 @@ words:
       n: холо́дное
       pl: холо́дные
       comparative: холодне́е
+    short:
+      m: хо́лоден
+      f: холодна́
+      n: хо́лодно
+      pl: хо́лодны
     declension:
       m_nom: холо́дный
       m_gen: холо́дного
@@ -23781,6 +24370,11 @@ words:
       n: хоро́шее
       pl: хоро́шие
       comparative: лу́чше
+    short:
+      m: хоро́ш
+      f: хороша́
+      n: хорошо́
+      pl: хороши́
     declension:
       m_nom: хоро́ший
       m_gen: хоро́шего
@@ -23866,6 +24460,11 @@ words:
       f: худа́я
       n: худо́е
       pl: худы́е
+    short:
+      m: худ
+      f: худа́
+      n: ху́до
+      pl: ху́ды
     declension:
       m_nom: худо́й
       m_gen: худо́го
@@ -24012,6 +24611,11 @@ words:
       f: це́лая
       n: це́лое
       pl: це́лые
+    short:
+      m: цел
+      f: цела́
+      n: це́ло
+      pl: це́лы
     declension:
       m_nom: це́лый
       m_gen: це́лого
@@ -24062,6 +24666,11 @@ words:
       f: це́нная
       n: це́нное
       pl: це́нные
+    short:
+      m: це́нен
+      f: ценна́
+      n: це́нно
+      pl: це́нны
     declension:
       m_nom: це́нный
       m_gen: це́нного
@@ -24377,6 +24986,11 @@ words:
       n: чи́стое
       pl: чи́стые
       comparative: чи́ще
+    short:
+      m: чист
+      f: чиста́
+      n: чи́сто
+      pl: чи́сты
     declension:
       m_nom: чи́стый
       m_gen: чи́стого
@@ -24417,6 +25031,11 @@ words:
       f: чуде́сная
       n: чуде́сное
       pl: чуде́сные
+    short:
+      m: чуде́сен
+      f: чуде́сна
+      n: чуде́сно
+      pl: чуде́сны
     declension:
       m_nom: чуде́сный
       m_gen: чуде́сного
@@ -24529,6 +25148,11 @@ words:
       n: широ́кое
       pl: широ́кие
       comparative: ши́ре
+    short:
+      m: широ́к
+      f: широка́
+      n: широко́
+      pl: широки́
     declension:
       m_nom: широ́кий
       m_gen: широ́кого
@@ -24899,6 +25523,11 @@ words:
       f: я́вная
       n: я́вное
       pl: я́вные
+    short:
+      m: я́вен
+      f: явна́
+      n: я́вно
+      pl: явны́
     declension:
       m_nom: я́вный
       m_gen: я́вного
@@ -25007,6 +25636,11 @@ words:
       n: я́ркое
       pl: я́ркие
       comparative: я́рче
+    short:
+      m: я́рок
+      f: ярка́
+      n: я́рко
+      pl: я́рки
     declension:
       m_nom: я́ркий
       m_gen: я́ркого
@@ -25059,6 +25693,11 @@ words:
       n: я́сное
       pl: я́сные
       comparative: ясне́е
+    short:
+      m: я́сен
+      f: ясна́
+      n: я́сно
+      pl: ясны́
     declension:
       m_nom: я́сный
       m_gen: я́сного

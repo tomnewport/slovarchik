@@ -308,7 +308,9 @@ describe('PhraseFixExercise', () => {
     answer: 'сказал',
     selectSteps: [
       {
-        kind: 'aspect',
+        kind: 'contrast',
+        dimension: 'aspect',
+        label: 'aspect',
         prompt: 'Which verb does this sentence need?',
         options: [
           { id: 'impf', label: 'говори́ть', hint: 'imperfective — a process, habit or repeated action', correct: false },
@@ -320,7 +322,7 @@ describe('PhraseFixExercise', () => {
     ru: 'Он сказа́л пра́вду.',
     en: 'He said the truth.',
     rule: { id: 'verb-past', title: 'Past tense' },
-    aspectRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
+    contrastRule: { id: 'verb-aspect', title: 'Aspect: imperfective or perfective?' },
     targets: ['сказать=to say'],
   }
 

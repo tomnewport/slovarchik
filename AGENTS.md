@@ -61,7 +61,7 @@ src/
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, AnnotatedEnglish, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
-                        #   PhraseFix, AspectDrill)
+                        #   PhraseFix, VerbContrast)
     inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
   composables/          # stateful Vue orchestration shared between views (needs a
                         #   component lifecycle, so it can't live in lib/):

@@ -39,7 +39,7 @@ import FlashcardExercise from '../components/exercises/FlashcardExercise.vue'
 import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import PhraseFixExercise from '../components/exercises/PhraseFixExercise.vue'
-import AspectDrillExercise from '../components/exercises/AspectDrillExercise.vue'
+import VerbContrastExercise from '../components/exercises/VerbContrastExercise.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import AchievementBadge from '../components/AchievementBadge.vue'
 import ReportButton from '../components/ReportButton.vue'
@@ -52,7 +52,7 @@ const COMPONENTS = {
   speak: SpeakExercise,
   inflect: InflectExercise,
   'phrase-fix': PhraseFixExercise,
-  'aspect-drill': AspectDrillExercise,
+  'verb-contrast': VerbContrastExercise,
 }
 
 const route = useRoute()

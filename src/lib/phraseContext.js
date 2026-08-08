@@ -287,34 +287,116 @@ function degreeStep(target, word) {
   }
 }
 
-/** The two members of a verb's aspect pair, imperfective first. */
-function aspectPairMembers(word) {
-  const self = { ru: word.headword || word.ru, aspect: word.aspect, key: word.key, correct: true }
-  const partner = { ...word.aspectPair, correct: false }
-  return [self, partner].sort((a) => (a.aspect === 'impf' ? -1 : 1))
+/**
+ * The two verb contrasts a linked pair can teach. Both are "two verbs, one
+ * gloss, and the sentence decides which" — the same drill shape over a
+ * different dimension:
+ *
+ *  - `aspect` — imperfective vs perfective (говори́ть ↔ сказа́ть), linked by
+ *    `pair:` and resolved into `aspectPair`;
+ *  - `motion` — determinate vs indeterminate (идти́ ↔ ходи́ть), linked by
+ *    `motion_pair:` and resolved into `motionPair`. Both members are
+ *    imperfective, so aspect cannot express it and #538 gave it its own link.
+ *
+ * `dimension` is the descriptor's own name, `value` reads a word's position on
+ * it, `first` is the value that sorts to the left in the option list, and
+ * `rule` names the grammar rule that explains the contrast.
+ */
+export const MOTION_LABEL = Object.freeze({ det: 'determinate', indet: 'indeterminate' })
+const MOTION_HINT = {
+  det: 'one trip, under way in one direction',
+  indet: 'habitual, repeated, or there and back',
 }
 
-/** An option button for one member of an aspect pair (its infinitive + cue). */
-function aspectOption(member) {
+const CONTRASTS = Object.freeze({
+  aspect: Object.freeze({
+    dimension: 'aspect',
+    partnerOf: (w) => w?.aspectPair ?? null,
+    value: (w) => w?.aspect ?? null,
+    label: ASPECT_LABEL,
+    hint: ASPECT_HINT,
+    first: 'impf',
+    rule: 'verb-aspect',
+    stepLabel: 'aspect',
+  }),
+  motion: Object.freeze({
+    dimension: 'motion',
+    partnerOf: (w) => w?.motionPair ?? null,
+    value: (w) => w?.motion ?? null,
+    label: MOTION_LABEL,
+    hint: MOTION_HINT,
+    first: 'det',
+    rule: 'verb-motion-pair',
+    stepLabel: 'direction',
+  }),
+})
+
+/**
+ * Which contrast a verb drills, or null for an unpaired verb. Aspect wins when
+ * a verb has both links (идти́ has the perfective пойти́ *and* the indeterminate
+ * ходи́ть): it is the contrast every other verb in the lexicon drills, so
+ * keeping it primary keeps the drill's meaning stable. The motion contrast is
+ * still taught from the other side — ходи́ть has no aspect partner, so its
+ * drill is the directional one.
+ */
+export function verbContrast(word) {
+  if (!word || word.pos !== 'verb') return null
+  for (const c of [CONTRASTS.aspect, CONTRASTS.motion]) {
+    if (c.partnerOf(word)?.key && c.value(word)) return c
+  }
+  return null
+}
+
+/** The two members of a verb's pair, the contrast's `first` value leading. */
+function pairMembers(word, contrast) {
+  const self = {
+    ru: word.headword || word.ru,
+    key: word.key,
+    aspect: word.aspect,
+    motion: word.motion,
+    correct: true,
+  }
+  const partner = { ...contrast.partnerOf(word), correct: false }
+  return [self, partner].sort((a) => (contrast.value(a) === contrast.first ? -1 : 1))
+}
+
+/** An option button for one member of a pair (its infinitive + usage cue). */
+function pairOption(member, contrast) {
+  const v = contrast.value(member)
   return {
-    id: member.aspect,
+    id: v,
     label: member.ru,
-    hint: `${ASPECT_LABEL[member.aspect] ?? member.aspect} — ${ASPECT_HINT[member.aspect] ?? ''}`,
+    hint: `${contrast.label[v] ?? v} — ${contrast.hint[v] ?? ''}`,
   }
 }
 
+/** The grammar rule explaining a contrast, resolved out of the rules map. */
+function contrastRuleFor(contrast, rules) {
+  const rule = contrast ? (rules?.[contrast.rule] ?? null) : null
+  return rule ? { id: contrast.rule, ...rule } : null
+}
+
 /**
- * Selection step: choose between the two members of an aspect pair — the drill
- * from #315. The sentence context (habit vs. single completed action, …)
- * determines which verb fits; the options are the two infinitives, imperfective
- * first, each with a one-line usage cue. The correct option is always the word
- * that owns the phrase (its usage examples are hand-authored around it).
+ * Selection step: choose between the two members of a linked pair — the drill
+ * from #315, generalised to the motion pairs by #538. The sentence context
+ * (habit vs. single completed action; one trip vs. a round trip) determines
+ * which verb fits; the options are the two infinitives, each with a one-line
+ * usage cue. The correct option is always the word that owns the phrase (its
+ * usage examples are hand-authored around it).
  */
-function aspectStep(word) {
+function contrastStep(word, contrast) {
   return {
-    kind: 'aspect',
+    kind: 'contrast',
+    // Which dimension the pick is on ('aspect' | 'motion') and how to name it
+    // in feedback — the other steps are named by their `kind`, but "contrast"
+    // means nothing to a learner ("you picked the wrong direction" does).
+    dimension: contrast.dimension,
+    label: contrast.stepLabel,
     prompt: 'Which verb does this sentence need?',
-    options: aspectPairMembers(word).map((m) => ({ ...aspectOption(m), correct: m.correct })),
+    options: pairMembers(word, contrast).map((m) => ({
+      ...pairOption(m, contrast),
+      correct: m.correct,
+    })),
   }
 }
 
@@ -328,8 +410,9 @@ function aspectStep(word) {
  *   - nouns: case → number (singular / plural)
  *   - personal pronouns: case only (number is fixed by the lemma — я is always
  *     singular, so there's nothing to choose)
- *   - verbs (no case): an aspect choice when the verb has a linked aspect
- *     partner (говори́ть vs сказа́ть), otherwise straight to spelling
+ *   - verbs (no case): a pair choice when the verb has a linked partner —
+ *     aspect (говори́ть vs сказа́ть) or, for a verb of motion with no aspect
+ *     partner, direction (ходи́ть vs идти́) — otherwise straight to spelling
  * Each step is `{ kind, prompt, options: [{ id, label, hint?, correct }] }`; the
  * component grades each clicked option's `correct` flag.
  */
@@ -342,7 +425,8 @@ export function buildSelectSteps(target, word) {
       : [degreeStep(target, word)]
   }
   if (!target?.case) {
-    return target?.person && word?.aspectPair ? [aspectStep(word)] : []
+    const contrast = target?.person ? verbContrast(word) : null
+    return contrast ? [contrastStep(word, contrast)] : []
   }
   if (target.gender) return [caseStep(target, word), genderStep(target, word)]
   if (word?.pos === 'noun') return [caseStep(target, word), numberStep(target)]
@@ -387,7 +471,7 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   // its imperfective and perfective alternatives have different structures
   // (бу́дет чита́ть vs прочита́ет), not interchangeable forms of this slot.
   const selectSteps = analyticFuture ? [] : buildSelectSteps(target, word)
-  const aspectSelect = selectSteps.find((s) => s.kind === 'aspect')
+  const contrastSelect = selectSteps.find((s) => s.kind === 'contrast')
 
   return {
     kind: 'phrase-fix',
@@ -396,14 +480,14 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     // Number of consecutive tokens the slot covers (>1 for multi-word lemmas).
     span,
     lemma,
-    // With an aspect step the slot must not reveal which partner is correct, so
-    // the component shows every candidate lemma (impf first) until it's chosen.
-    lemmaOptions: aspectSelect ? aspectSelect.options.map((o) => o.label) : null,
+    // With a pair step the slot must not reveal which partner is correct, so
+    // the component shows every candidate lemma until it's chosen.
+    lemmaOptions: contrastSelect ? contrastSelect.options.map((o) => o.label) : null,
     answerAccented: core,
     answer: normalize(core),
-    // The ordered selection steps (aspect for paired verbs; otherwise case
-    // first, then number / gender + number). The component grades each clicked
-    // option's `correct`.
+    // The ordered selection steps (the aspect/direction contrast for paired
+    // verbs; otherwise case first, then number / gender + number). The
+    // component grades each clicked option's `correct`.
     selectSteps,
     number: target.number ?? null,
     slotLabel: slotLabelFor(target),
@@ -411,10 +495,9 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     ru: phrase.ru,
     en: phrase.en,
     rule: rule ? { id: target.rule, ...rule } : null,
-    // The generic aspect-choice explanation, shown whenever the exercise opened
-    // with an aspect step (alongside any slot-specific rule).
-    aspectRule:
-      aspectSelect && rules['verb-aspect'] ? { id: 'verb-aspect', ...rules['verb-aspect'] } : null,
+    // The generic pair-choice explanation, shown whenever the exercise opened
+    // with a contrast step (alongside any slot-specific rule).
+    contrastRule: contrastRuleFor(contrastSelect ? verbContrast(word) : null, rules),
     exception: rule?.exception === true,
     subject: phrase.subject ?? null,
     targets: [target.key],
@@ -531,23 +614,27 @@ export function buildContextSet(
     .filter(Boolean)
 }
 
-// --- Verb aspect drill (usage · mastery) -----------------------------------
+// --- Verb contrast drill (usage · mastery) ---------------------------------
 //
-// How the usage dimension is mastered for a verb with an aspect partner: the
+// How the usage dimension is mastered for a verb with a linked partner: the
 // learner reads a batch of English sentences that use the pair in different
-// tenses and aspects and picks, per sentence, which member (imperfective or
-// perfective infinitive) the Russian would need — then spells one conjugated
-// form. Every usage example is hand-authored around the verb that owns it, so
-// (exactly as for the single-sentence aspect step above) the correct answer for
-// a sentence is simply its owner's aspect. The pick stage needs no `inflect:`
-// annotation, so it draws from ALL usage examples of both partners; only the
-// spelling stage needs an annotated phrase.
+// tenses and picks, per sentence, which member the Russian would need — then
+// spells one conjugated form. Every usage example is hand-authored around the
+// verb that owns it, so (exactly as for the single-sentence contrast step
+// above) the correct answer for a sentence is simply its owner's value on the
+// contrast. The pick stage needs no `inflect:` annotation, so it draws from ALL
+// usage examples of both partners; only the spelling stage needs an annotated
+// phrase.
+//
+// The contrast is aspect for most verbs (#315) and direction for a verb of
+// motion whose partner is the other imperfective of its pair (#538) — see
+// `verbContrast`.
 
-/** Sentences an aspect drill aims to show. */
-export const ASPECT_DRILL_ITEMS = 6
+/** Sentences a contrast drill aims to show. */
+export const CONTRAST_DRILL_ITEMS = 6
 
 /** Fewest sentences a drill may run with (else fall back to the table drill). */
-export const ASPECT_DRILL_MIN_ITEMS = 4
+export const CONTRAST_DRILL_MIN_ITEMS = 4
 
 /** English text key for de-duplicating / collision-testing drill sentences. */
 function enKey(p) {
@@ -559,10 +646,10 @@ function enKey(p) {
  * its English text, then any English that appears on BOTH sides removed from
  * both. The pair's sentences are sometimes authored as translations of the
  * same English ("She thanked the teacher." for both благодари́ла and
- * поблагодари́ла); such a sentence cannot discriminate the aspect, so it is
+ * поблагодари́ла); such a sentence cannot discriminate the pair, so it is
  * unanswerable and must not be asked.
  */
-function aspectDrillPools(word, phrasesBySource) {
+function contrastDrillPools(word, contrast, phrasesBySource) {
   const dedupe = (list) => {
     const seen = new Set()
     return (list ?? []).filter((p) => {
@@ -573,7 +660,7 @@ function aspectDrillPools(word, phrasesBySource) {
     })
   }
   const own = dedupe(phrasesBySource.get(word.key))
-  const partner = dedupe(phrasesBySource.get(word.aspectPair.key))
+  const partner = dedupe(phrasesBySource.get(contrast.partnerOf(word).key))
   const ownEn = new Set(own.map(enKey))
   const partnerEn = new Set(partner.map(enKey))
   return {
@@ -583,8 +670,8 @@ function aspectDrillPools(word, phrasesBySource) {
 }
 
 /**
- * Whether the aspect drill can be built for a word (deterministic): a verb with
- * a linked aspect partner, at least one annotated phrase to spell, at least one
+ * Whether the contrast drill can be built for a word (deterministic): a verb
+ * with a linked partner, at least one annotated phrase to spell, at least one
  * unambiguous usage sentence on each side of the pair beyond the spelling one,
  * and enough sentences overall.
  * @param {object} word normalised word record
@@ -592,59 +679,65 @@ function aspectDrillPools(word, phrasesBySource) {
  * @param {Map} ctx.phrasesByKey    key → annotated phrases (see indexPhrases)
  * @param {Map} ctx.phrasesBySource key → shaped usage phrases (vocabBuild.shapePhrases)
  */
-export function canBuildAspectDrill(word, { phrasesByKey, phrasesBySource } = {}) {
-  if (!word || word.pos !== 'verb' || !word.aspectPair?.key || !phrasesBySource) return false
+export function canBuildContrastDrill(word, { phrasesByKey, phrasesBySource } = {}) {
+  const contrast = verbContrast(word)
+  if (!contrast || !phrasesBySource) return false
   if (!canBuildContext(word, { phrasesByKey })) return false
-  const pools = aspectDrillPools(word, phrasesBySource)
+  const pools = contrastDrillPools(word, contrast, phrasesBySource)
   // One of the word's own sentences is (conservatively) reserved for spelling.
   const own = pools.own.length - 1
   const partner = pools.partner.length
-  return own >= 1 && partner >= 1 && own + partner >= ASPECT_DRILL_MIN_ITEMS
+  return own >= 1 && partner >= 1 && own + partner >= CONTRAST_DRILL_MIN_ITEMS
 }
 
 /**
- * Build the aspect drill descriptor for a verb, or null if it can't be made.
- * The pick stage balances the two aspects as evenly as the data allows and
+ * Build the contrast drill descriptor for a verb, or null if it can't be made.
+ * The pick stage balances the two members as evenly as the data allows and
  * shuffles the result; the spelling stage reuses the single-sentence context
- * exercise (its aspect step stripped — the aspect was the pick stage's skill).
- * @returns {{kind: 'aspect-drill', options, items, spell, targets}|null}
+ * exercise (its contrast step stripped — that was the pick stage's skill).
+ * @returns {{kind: 'verb-contrast', contrast, options, items, spell, targets}|null}
  */
-export function buildAspectDrill(
+export function buildContrastDrill(
   word,
-  { phrasesByKey, phrasesBySource, rules = {}, rng = Math.random, items = ASPECT_DRILL_ITEMS } = {},
+  { phrasesByKey, phrasesBySource, rules = {}, rng = Math.random, items = CONTRAST_DRILL_ITEMS } = {},
 ) {
-  if (!canBuildAspectDrill(word, { phrasesByKey, phrasesBySource })) return null
+  if (!canBuildContrastDrill(word, { phrasesByKey, phrasesBySource })) return null
+  const contrast = verbContrast(word)
   const spell = buildContextExercise(word, { phrasesByKey, rules, rng })
   if (!spell) return null
-  // The aspect was already exercised across the pick stage; spelling assesses
-  // the conjugation only. The generic aspect explanation still shows at the end.
+  // The contrast was already exercised across the pick stage; spelling assesses
+  // the conjugation only. The generic explanation still shows at the end.
   spell.selectSteps = []
   spell.lemmaOptions = null
 
   // The spelling sentence must not appear among the picks — its revealed form
-  // would leak the answer (and its aspect answer would be a repeat).
-  const pools = aspectDrillPools(word, phrasesBySource)
+  // would leak the answer (and its pick answer would be a repeat).
+  const pools = contrastDrillPools(word, contrast, phrasesBySource)
   const own = pools.own.filter((p) => p.ru !== spell.ru)
   const partner = pools.partner.filter((p) => p.ru !== spell.ru)
 
   // Half from each side where possible; whichever side is short, the other tops up.
   const nPartner = Math.min(partner.length, items - Math.min(own.length, Math.ceil(items / 2)))
   const nOwn = Math.min(own.length, items - nPartner)
+  const partnerValue = contrast.value(contrast.partnerOf(word))
   const picked = [
-    ...sample(own, nOwn, rng).map((p) => ({ ru: p.ru, en: p.en, answer: word.aspect })),
-    ...sample(partner, nPartner, rng).map((p) => ({ ru: p.ru, en: p.en, answer: word.aspectPair.aspect })),
+    ...sample(own, nOwn, rng).map((p) => ({ ru: p.ru, en: p.en, answer: contrast.value(word) })),
+    ...sample(partner, nPartner, rng).map((p) => ({ ru: p.ru, en: p.en, answer: partnerValue })),
   ]
-  if (picked.length < ASPECT_DRILL_MIN_ITEMS) return null
+  if (picked.length < CONTRAST_DRILL_MIN_ITEMS) return null
 
   return {
-    kind: 'aspect-drill',
-    // The two infinitives (imperfective first), shown as the answer buttons for
-    // every sentence.
-    options: aspectPairMembers(word).map(aspectOption),
+    kind: 'verb-contrast',
+    // Which contrast this drill teaches ('aspect' | 'motion'). Not `dimension`:
+    // an exercise descriptor already carries the practice dimension (usage /
+    // identification / …) and the drill is spread over it.
+    contrast: contrast.dimension,
+    // The two infinitives (the contrast's leading value first), shown as the
+    // answer buttons for every sentence.
+    options: pairMembers(word, contrast).map((m) => pairOption(m, contrast)),
     items: shuffle(picked, rng).map((it, i) => ({ id: `a${i}`, ...it })),
     spell,
-    aspectRule:
-      rules['verb-aspect'] ? { id: 'verb-aspect', ...rules['verb-aspect'] } : null,
+    contrastRule: contrastRuleFor(contrast, rules),
     targets: [word.key],
   }
 }
