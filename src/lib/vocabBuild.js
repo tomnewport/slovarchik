@@ -7,6 +7,7 @@
 import { CASES, LOCATIVE, NUMBERS } from './declension.js'
 import { buildAmbiguityIndex, phraseAmbiguities } from './phraseAmbiguity.js'
 import { stripStress } from './text.js'
+import { normalizeGoverns } from './verbGovernment.js'
 
 /** Map a vocab filename (without extension) to its part of speech. */
 export const POS_BY_FILE = {
@@ -215,11 +216,14 @@ function normalizeWord(pos, key, word) {
     aspect: word.aspect ?? null,
     pairKey: word.pair ?? null,
     aspectPair: null,
-    // The case a verb governs on its object when it isn't the plain accusative
-    // (помога́ть + dative, ждать + genitive, горди́ться + instrumental). Powers
-    // the verb-government drill; null for ordinary accusative/intransitive verbs.
-    // Verb-only: prepositions carry their own array-valued `governs` in `extra`.
-    governs: pos === 'verb' ? (word.governs ?? null) : null,
+    // The government frames a verb imposes on its object when it isn't the
+    // plain accusative — a list of `{ prep, case }`, with `prep: null` for a
+    // bare case (помога́ть + dative, ждать + genitive, горди́ться +
+    // instrumental) and a preposition for a prepositional frame (зави́сеть от +
+    // genitive). Powers the verb-government drill; null for ordinary
+    // accusative/intransitive verbs. Verb-only: prepositions carry their own
+    // array-valued `governs` in `extra`.
+    governs: pos === 'verb' ? normalizeGoverns(word.governs) : null,
     // Confusable same-spelling forms whose stress carries the meaning. An
     // explicit annotation wins; otherwise buildWords fills this in for headword
     // collisions (за́мок "castle" vs замо́к "lock").
@@ -349,6 +353,10 @@ export function shapeVocab(words) {
     ambiguousEn: w.ambiguousEn ?? [],
     aspect: w.aspect ?? null,
     aspectPair: w.aspectPair ?? null,
+    // Government frames (звони́ть + dative, зави́сеть от + genitive) — shown
+    // beside the headword so the frame is learned with the word rather than
+    // only in the dedicated drill.
+    governs: w.governs ?? null,
     // Display-number preference + the plural surface form/gloss, so the vocab
     // word-drills can show a usually-plural noun in the plural. `vocabDisplay`
     // turns these into the single shown `{ ru, en }` per exercise instance.
