@@ -7331,6 +7331,17 @@ words:
       past_f: е́здила
       past_n: е́здило
       past_pl: е́здили
+  # The existential «есть» — historically the 3rd-person present of быть, now
+  # frozen as the one present-tense form the verb keeps. It is a homograph of the
+  # infinitive «есть» "to eat", which is what a tap-hint used to (wrongly) offer
+  # in «У ва́ших сосе́дей есть соба́ка» (#568). Gloss-only: быть already carries the
+  # conjugation drills, and there is nothing to inflect here.
+  "есть=there is":
+    cefr_level: A1
+    learn: false
+    accented: есть
+    en_gb:
+      standard: there is (there are; also renders "have" — у меня́ есть = I have)
   "есть=to eat":
     cefr_level: A1
     accented: есть

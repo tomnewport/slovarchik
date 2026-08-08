@@ -631,6 +631,26 @@ Two mechanisms, pick the one that fits:
      - { ru: стои́т, gloss: it stands }
    ```
 
+### Homographs (same spelling *and* stress → different meaning)
+
+Nothing to annotate: give each meaning its own entry, keyed by its own gloss
+(`"замок=castle"` and `"замок=lock"`, `"есть=to eat"` and `"есть=there is"`).
+The form index stacks every dictionary entry that spells itself the same way
+into one hint carrying all of them, so a tap on «есть» reads **"to eat / there
+is"** rather than picking one and being wrong half the time (#568). Each sense is
+weighed separately against the learner's progress, so the meaning they still
+need keeps showing after they've learned the other.
+
+This applies to *dictionary* forms only. An inflected form that happens to
+collide with another word (`дорого́й` = the adjective, and the instrumental of
+`доро́га`) is a coincidence of endings, not a second meaning, and does not stack —
+use the `heteronyms:` annotation above if the collision really is meaningful.
+
+When one of the meanings is a form of a word already in the curriculum rather
+than a lemma of its own — the existential «есть» belongs to `быть` — make it
+gloss-only (`learn: false`) so it hints inside phrases without becoming a
+separate drillable word.
+
 ---
 
 ## Context-drill annotations (`inflect:` on usage + `grammar-rules.yml`)

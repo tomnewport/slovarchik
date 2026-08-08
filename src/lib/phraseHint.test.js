@@ -147,6 +147,52 @@ describe('buildFormIndex', () => {
     expect(index.get(normToken('неё'))?.en).toBe('she')
   })
 
+  it('stacks every dictionary sense of a homograph onto one hint (#568)', () => {
+    // «есть» is both the infinitive "to eat" and the existential "there is"
+    // («У ва́ших сосе́дей есть соба́ка»). One gloss would be wrong half the time.
+    const index = buildFormIndex(loadFixtureWords())
+    const hit = index.get(normToken('есть'))
+    expect(hit.senses.map((s) => s.key)).toEqual(['есть=to eat', 'есть=there is'])
+    expect(hit.en).toBe('to eat / there is')
+    // The entry's own key stays the learnable one, so a drill that must not give
+    // its own answer away still recognises the word it is assessing.
+    expect(hit.key).toBe('есть=to eat')
+  })
+
+  it('orders a homograph’s senses independently of vocab load order', () => {
+    const castle = { key: 'замок=castle', headword: 'за́мок', ru: 'замок', meaning: 'castle' }
+    const lock = { key: 'замок=lock', headword: 'замо́к', ru: 'замок', meaning: 'lock' }
+    for (const list of [[castle, lock], [lock, castle]]) {
+      expect(buildFormIndex(list).get(normToken('замок')).en).toBe('castle / lock')
+    }
+  })
+
+  it('does not repeat a sense two entries happen to share', () => {
+    const task = { key: 'задание=task', headword: 'зада́ние', ru: 'задание', meaning: 'task' }
+    const job = { key: 'задание=job', headword: 'зада́ние', ru: 'задание', meaning: 'task' }
+    expect(buildFormIndex([task, job]).get(normToken('задание')).en).toBe('task')
+  })
+
+  it('does not stack a mere inflected-form collision as a second sense', () => {
+    // «дорого́й» is the adjective's dictionary form and the instrumental of
+    // «доро́га» — a coincidence of endings, not a second meaning of the word.
+    const road = {
+      key: 'дорога=road',
+      headword: 'доро́га',
+      ru: 'дорога',
+      meaning: 'road',
+      extra: { declension: { sg_ins: 'дорого́й' } },
+    }
+    const expensive = {
+      key: 'дорогой=expensive',
+      headword: 'дорого́й',
+      ru: 'дорогой',
+      meaning: 'expensive',
+      extra: { forms: { m: 'дорого́й' } },
+    }
+    expect(buildFormIndex([road, expensive]).get(normToken('дорого́й')).en).toBe('expensive')
+  })
+
   it('combines heteronym glosses for forms that are ambiguous after stress-stripping (#198)', () => {
     // стоить (to cost) has 3sg сто́ит; стоять (to stand) has 3sg стои́т.
     // After stress-stripping both normalise to "стоит", so the hint should show both.
