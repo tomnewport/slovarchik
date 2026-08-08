@@ -20,7 +20,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
-      - run: npm test
+      # The same suite as `npm test`, with coverage measured over the logic
+      # layers. The per-layer thresholds in vite.config.js are a ratchet: they
+      # fail the job when coverage of src/lib, src/stores or src/composables
+      # slips below where it stands today (#535).
+      - run: npm run test:coverage
+      # Publish the numbers on the run itself — including when the step above
+      # failed, so a threshold breach comes with the table that explains it.
+      - name: Publish the coverage summary
+        if: ${{ !cancelled() }}
+        run: node scripts/coverage-summary.mjs
       - run: npm run build
 
   e2e:

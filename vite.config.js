@@ -116,5 +116,39 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     include: ['src/**/*.{test,spec}.{js,ts}', 'scripts/**/*.{test,spec}.mjs'],
+    // The mount-heavy view tests take a few seconds each, and v8's coverage
+    // instrumentation roughly doubles that — enough to trip the 5 s default
+    // under `test:coverage`. Give every test the same headroom so a run means
+    // the same thing with and without `--coverage`.
+    testTimeout: 15000,
+    // Coverage is measured over the *logic* layers only — the framework-free
+    // `lib/` engine, the reactive stores and the composables (#535). Two
+    // reasons to scope it rather than take a repo-wide number: the `.vue`
+    // views are exercised by @vue/test-utils and Playwright, where line
+    // coverage says little about whether a drill actually works; and the test
+    // count is dominated by data-driven corpus oracles asserting over
+    // thousands of vocab entries, which inflate the totals while touching only
+    // a handful of code paths. A number over the code that holds the logic is
+    // the one worth acting on.
+    coverage: {
+      provider: 'v8',
+      reporter: ['text-summary', 'text', 'json-summary'],
+      reportOnFailure: true,
+      include: ['src/lib/**/*.js', 'src/stores/**/*.js', 'src/composables/**/*.js'],
+      exclude: [
+        '**/*.{test,spec}.js',
+        'src/lib/seed.js', // test-support fixtures, not shipped logic
+        'src/lib/morphGolden.js', // curated oracle data, not code
+        'src/lib/stressGolden.js',
+      ],
+      // Thresholds are a ratchet, not an aspiration: they sit just under the
+      // current numbers so a change that drops coverage fails loudly, and are
+      // meant to be raised when the real figure climbs past them.
+      thresholds: {
+        'src/lib/**/*.js': { statements: 95, branches: 84, functions: 97, lines: 97 },
+        'src/stores/**/*.js': { statements: 92, branches: 85, functions: 92, lines: 95 },
+        'src/composables/**/*.js': { statements: 95, branches: 92, functions: 95, lines: 96 },
+      },
+    },
   },
 })

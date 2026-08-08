@@ -85,6 +85,7 @@ src/
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/spellPrompt  — corpus data-integrity oracles (CI guards on the vocab)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
+  test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
 e2e/                    # Playwright specs
 docs/                   # design notes for in-flight features
@@ -93,6 +94,12 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
 
+Coverage is measured over the logic layers only — `src/lib/`, `src/stores/` and
+`src/composables/` — not the `.vue` views, which @vue/test-utils and Playwright
+cover in ways a line count says little about. Each layer has a threshold in
+`vite.config.js` set just under where it stands today, so a change that drops
+coverage fails CI; raise the thresholds when the real figure climbs past them.
+
 ## Commands
 
 ```bash
@@ -100,14 +107,16 @@ npm install
 npm run dev         # local dev server
 npm test            # run unit tests once (vitest)
 npm run test:watch  # watch mode
+npm run test:coverage # same suite + coverage over src/lib, src/stores, src/composables
 npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
 npm run build       # production build into dist/
 npm run preview     # serve the production build
 npm run test:e2e    # Playwright end-to-end tests
 ```
 
-CI (`.github/workflows/ci.yml`) runs `lint`, `test`, `build`, and the Playwright
-`e2e` job on every push.
+CI (`.github/workflows/ci.yml`) runs `lint`, `test:coverage`, `build`, and the
+Playwright `e2e` job on every push, publishing the coverage table to the run's
+job summary via `scripts/coverage-summary.mjs`.
 
 ## Where to make common changes
 
