@@ -53,6 +53,7 @@ import {
   isPendingConfirmation,
 } from './progress.js'
 import { dayKey } from '../lib/streak.js'
+import { failWrites } from '../test/idbFailure.js'
 
 // A small synthetic vocabulary; `hasInflections` short-circuits the paradigm
 // lookup so we can control mastery eligibility precisely.
@@ -1427,6 +1428,49 @@ describe('known words (#321)', () => {
     expect(wordProgressDetail('w0').known).toBe(false)
     await markKnown('w0')
     expect(wordProgressDetail('w0').known).toBe(true)
+  })
+})
+
+// The two halves of the store's persistence-failure contract (#535). Both are
+// deliberate: a lost progress write has to reach the learner, and a lost streak
+// write must not — the calendar is recoverable from the attempts themselves.
+describe('a failed IndexedDB write', () => {
+  it('rejects out of recordAttempt so the caller can surface it', async () => {
+    setVocab(makeWords(1))
+    const restore = await failWrites({ stores: ['progress'] })
+    let reason
+    try {
+      reason = await recordAttempt({
+        word: 'w0',
+        dimension: 'identification',
+        level: 'learning',
+        correct: true,
+      }).then(
+        () => null,
+        (e) => e,
+      )
+    } finally {
+      restore()
+    }
+    expect(reason?.name).toBe('ConstraintError')
+  })
+
+  it('does not reject when only the streak write fails', async () => {
+    setVocab(makeWords(1))
+    const restore = await failWrites({ stores: ['meta'] })
+    try {
+      // `saveMeta` fires the streak write off with a bare `.catch()`, so this
+      // resolves normally and the attempt still lands.
+      await recordAttempt({
+        word: 'w0',
+        dimension: 'identification',
+        level: 'learning',
+        correct: true,
+      })
+    } finally {
+      restore()
+    }
+    expect(encounterCount('w0')).toBe(1)
   })
 })
 

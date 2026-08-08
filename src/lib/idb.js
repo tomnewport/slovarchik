@@ -6,6 +6,11 @@
 // Every write runs its record through `toPlain` first (#534), so callers can
 // hand over reactive store state directly: unwrapping Vue's proxies is this
 // boundary's job, not each caller's.
+//
+// Every export returns a promise and reports failure by rejecting it — never by
+// throwing synchronously. Callers depend on that: `progress.js` fires its
+// streak writes off with a bare `.catch(() => {})`, which a synchronous throw
+// would sail straight past.
 
 import { toPlain } from './plain.js'
 
@@ -46,6 +51,26 @@ function openDb() {
   return dbPromise
 }
 
+/**
+ * The reason to reject a failed transaction with.
+ *
+ * A failing request's `error` event *bubbles* to the transaction, and it does
+ * so before the abort — at which point `transaction.error` is still null. So
+ * the useful error is the one on the event's target (the request that failed);
+ * `transaction.error` is the fallback for an abort raised on the transaction
+ * itself. Without this the rejection carries `null` and the caller has nothing
+ * to report — `SessionView` re-throws it for Vue's global handler to surface.
+ */
+function txError(event, transaction) {
+  return (
+    event?.target?.error ??
+    transaction.error ??
+    new DOMException('The IndexedDB transaction was aborted.', 'AbortError')
+  )
+}
+
+// `run` is called inside the promise, so a writer can do its `toPlain` there
+// and have a DataCloneError reject rather than throw at the call site.
 function tx(storeName, mode, run) {
   return openDb().then(
     (db) =>
@@ -54,8 +79,8 @@ function tx(storeName, mode, run) {
         const store = transaction.objectStore(storeName)
         const result = run(store)
         transaction.oncomplete = () => resolve(result.value)
-        transaction.onerror = () => reject(transaction.error)
-        transaction.onabort = () => reject(transaction.error)
+        transaction.onerror = (event) => reject(txError(event, transaction))
+        transaction.onabort = (event) => reject(txError(event, transaction))
       }),
   )
 }
@@ -78,8 +103,8 @@ export function getAllFiles() {
 
 /** Insert or replace a cached file record. */
 export function putFile(record) {
-  const plain = toPlain(record)
   return tx(FILES_STORE, 'readwrite', (store) => {
+    const plain = toPlain(record)
     store.put(plain)
     return { value: plain }
   })
@@ -108,8 +133,8 @@ export function getAllProgress() {
 
 /** Insert or replace a per-word progress record. */
 export function putProgress(record) {
-  const plain = toPlain(record)
   return tx(PROGRESS_STORE, 'readwrite', (store) => {
+    const plain = toPlain(record)
     store.put(plain)
     return { value: plain }
   })
@@ -144,8 +169,8 @@ export function getMeta(key) {
 
 /** Insert or replace a single app setting. */
 export function setMeta(key, value) {
-  const plain = toPlain(value)
   return tx(META_STORE, 'readwrite', (store) => {
+    const plain = toPlain(value)
     store.put({ key, value: plain })
     return { value: plain }
   })
@@ -158,8 +183,8 @@ export function getAllReports() {
 
 /** Insert or replace a queued issue report. */
 export function putReport(record) {
-  const plain = toPlain(record)
   return tx(REPORTS_STORE, 'readwrite', (store) => {
+    const plain = toPlain(record)
     store.put(plain)
     return { value: plain }
   })
