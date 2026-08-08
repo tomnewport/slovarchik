@@ -58011,6 +58011,9 @@ words:
       - ru: Учи́тель объясня́ет пра́вило студе́нту.
         en_gb: The teacher explains the rule to the student.
         inflect: { token: 4, case: dat, number: sg, rule: verb-gov-dative }
+      - ru: Студе́нту ну́жно отдохну́ть пе́ред экза́меном.
+        en_gb: The student needs to rest before the exam.
+        inflect: { token: 1, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: студе́нт
       sg_gen: студе́нта

@@ -33150,6 +33150,8 @@ words:
       - daily life
     en_gb:
       standard: to follow (to comply with)
+      alt:
+        - one should (impersonal «сле́дует» + dative — you ought to)
     conjugation:
       present:
         "1sg": сле́дую
@@ -33181,6 +33183,12 @@ words:
       - ru: Ты сле́дуешь пра́вилам?
         en_gb: Do you follow the rules?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Вам сле́дует отдохну́ть.
+        en_gb: You should rest.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
+      - ru: Не сле́дует так говори́ть с ма́терью.
+        en_gb: One should not speak to one's mother like that.
+        inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
   "сложить=to fold":
     cefr_level: B1
     accented: сложи́ть
