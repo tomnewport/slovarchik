@@ -143,20 +143,71 @@ export function wordTokensInPhrase(phrase, word) {
     .filter((t) => t && forms.has(t))
 }
 
+/** Separator between the glosses of a form that carries more than one sense. */
+const SENSE_SEPARATOR = ' / '
+
+/**
+ * The gloss line for a set of senses — every meaning the surface form can carry,
+ * in dictionary order. Exported so a consumer that narrows the senses (the hint
+ * store drops the ones the learner already knows) renders them the same way.
+ * @param {Array<{en: string}>} senses
+ * @returns {string}
+ */
+export function senseGloss(senses) {
+  return (senses ?? []).map((s) => s.en).join(SENSE_SEPARATOR)
+}
+
+/**
+ * Does `en` say something the already-collected `senses` don't? Guards against
+ * a hint reading "task / task" when two entries share a gloss, and against
+ * repeating a gloss already contained in a longer one.
+ */
+function isNewGloss(senses, en) {
+  return !senses.some((s) => s.en === en || s.en.includes(en))
+}
+
+/**
+ * Add a sense `{ key, ru, en }` to the entry for `form`, creating the entry when
+ * the form is new. The first sense also supplies the entry's own `key`/`ru`, so
+ * a single-sense entry looks exactly as it did before senses existed.
+ */
+function addSense(index, form, sense) {
+  const existing = index.get(form)
+  if (!existing) {
+    index.set(form, { key: sense.key, ru: sense.ru, en: sense.en, senses: [sense] })
+    return
+  }
+  if (existing.senses.some((s) => s.key === sense.key)) return
+  if (!isNewGloss(existing.senses, sense.en)) return
+  existing.senses.push(sense)
+  existing.en = senseGloss(existing.senses)
+}
+
 /**
  * Build a lookup from a normalised surface form to a hint entry
- * `{ key, ru, en }` for the word that can appear as that form.
+ * `{ key, ru, en, senses }` for the word(s) that can appear as that form.
  *
  * Collisions are resolved in two passes. First every word claims its own
  * **dictionary form** (headword/key), so a word whose lemma *is* the surface
  * token always beats another word for which the token is merely an oblique
  * inflected form — e.g. «дорого́й» glosses as the adjective "expensive" rather
  * than the instrumental of «доро́га» "road" (#173). Only then do inflected forms
- * fill the remaining gaps. Within each pass the alphabetically earlier headword
- * wins, a stable choice regardless of load order.
- * @param {object[]} sorted   word records, pre-sorted by headword
+ * fill the remaining gaps.
+ *
+ * When two *dictionary* forms genuinely collide the token is a homograph, and
+ * one gloss would be a lie half the time — «есть» is both "to eat" and the
+ * existential "there is", «замок» both "castle" and "lock" (#568). Those stack
+ * up as multiple `senses` on the one entry and `en` joins their glosses, so the
+ * hint offers every meaning the learner might be looking at. Inflected forms
+ * (pass 2) deliberately don't stack: an oblique form that happens to look like
+ * another word is a coincidence, not a second meaning — the exception being an
+ * explicit heteronym annotation, which is exactly a claim that the collision is
+ * real ("it costs" for сто́ит vs "it stands" for стои́т).
+ *
+ * Within each pass senses appear in dictionary order of the entries claiming them.
+ * @param {object[]} sorted   word records, pre-sorted by headword then key
  * @param {(t: string) => string} norm  token normaliser keying the index
- * @returns {Map<string, {key: string, ru: string, en: string}>}
+ * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}>}
  */
 function buildIndex(sorted, norm) {
   const index = new Map()
@@ -164,11 +215,9 @@ function buildIndex(sorted, norm) {
   // Pass 1: base (dictionary) forms — a word whose lemma *is* the surface form
   // always beats another word for which the token is merely an oblique form.
   for (const w of sorted) {
-    const entry = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
-    if (!entry.en) continue
-    for (const form of baseForms(w, norm)) {
-      if (!index.has(form)) index.set(form, entry)
-    }
+    const sense = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
+    if (!sense.en) continue
+    for (const form of baseForms(w, norm)) addSense(index, form, sense)
   }
 
   // Pass 2: inflected forms. When a word has heteronym annotations, use the
@@ -182,15 +231,10 @@ function buildIndex(sorted, norm) {
     for (const form of wordForms(w, norm)) {
       const hetEntry = w.heteronyms?.find((h) => norm(h.ru) === form)
       const en = hetEntry?.gloss || baseEn
-      if (!index.has(form)) {
-        index.set(form, { key: w.key, ru: w.headword || w.ru, en })
-      } else if (hetEntry) {
-        // Heteronym collision: append this side's gloss if it is new information.
-        const existing = index.get(form)
-        if (en !== existing.en && !existing.en.includes(en)) {
-          index.set(form, { ...existing, en: `${existing.en} / ${en}` })
-        }
-      }
+      const sense = { key: w.key, ru: w.headword || w.ru, en }
+      // Only a heteronym annotation may join a form another word already holds;
+      // otherwise inflected forms just fill the gaps pass 1 left.
+      if (!index.has(form) || hetEntry) addSense(index, form, sense)
     }
   }
 
@@ -199,8 +243,9 @@ function buildIndex(sorted, norm) {
 
 /**
  * Build a lookup from a normalised surface form to a hint entry
- * `{ key, ru, en }` for the word that can appear as that form. See {@link buildIndex}
- * for the two-pass collision rules.
+ * `{ key, ru, en, senses }` for the word(s) that can appear as that form. See
+ * {@link buildIndex} for the two-pass collision rules and how a homograph comes
+ * to carry several senses.
  *
  * The returned Map is keyed by the stress-stripped form (the default lookup). A
  * companion **stress-aware** index is attached as `.stressIndex`, keyed with the
@@ -208,12 +253,22 @@ function buildIndex(sorted, norm) {
  * differ only by stress — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т» (stand)
  * vs «сто́ят» (cost) — whenever the phrase token carries its stress mark.
  * @param {object[]} words   normalised word records (from buildWords)
- * @returns {Map<string, {key: string, ru: string, en: string}> & {stressIndex: Map}}
+ * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}> & {stressIndex: Map}}
  */
 export function buildFormIndex(words) {
   const sorted = (words ?? [])
     .slice()
-    .sort((a, b) => stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru'))
+    .sort(
+      (a, b) =>
+        stripStress(a.ru ?? '').localeCompare(stripStress(b.ru ?? ''), 'ru') ||
+        // Homographs share a bare form, so the tie needs breaking explicitly —
+        // otherwise the order their senses stack in (and which one an entry takes
+        // its `key` from) would depend on which vocab file happened to load first.
+        // A curriculum word sorts ahead of a gloss-only one so the entry's `key`
+        // names something the learner can actually be drilling.
+        (a.learnable === false) - (b.learnable === false) ||
+        String(a.key ?? '').localeCompare(String(b.key ?? ''), 'ru'),
+    )
   const index = buildIndex(sorted, normToken)
   index.stressIndex = buildIndex(sorted, normTokenStress)
   return index

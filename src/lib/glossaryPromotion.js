@@ -75,12 +75,15 @@ export function promotionCandidates(words) {
   const counts = new Map() // glossary key → { count, phrases:Set }
   for (const phrase of shapePhrases(list)) {
     for (const tok of phraseHintTokens(phrase.ru, index)) {
-      const key = tok.hint?.key
-      if (!key || !glossByKey.has(key)) continue
-      if (!counts.has(key)) counts.set(key, { count: 0, phrases: new Set() })
-      const rec = counts.get(key)
-      rec.count += 1
-      rec.phrases.add(phrase.ru)
+      // A homograph's hint carries one sense per entry that spells itself that
+      // way, so credit each glossary sense — not just the entry's primary key.
+      for (const { key } of tok.hint?.senses ?? []) {
+        if (!glossByKey.has(key)) continue
+        if (!counts.has(key)) counts.set(key, { count: 0, phrases: new Set() })
+        const rec = counts.get(key)
+        rec.count += 1
+        rec.phrases.add(phrase.ru)
+      }
     }
   }
 

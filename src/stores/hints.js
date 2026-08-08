@@ -10,7 +10,7 @@ import { computed } from 'vue'
 
 import { state as vocabState } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
-import { buildFormIndex, phraseHintTokens } from '../lib/phraseHint.js'
+import { buildFormIndex, phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
 import { STATES } from '../lib/progression.js'
 
 const LEARNED_RANK = STATES.indexOf('learned')
@@ -33,16 +33,33 @@ function isLearned(key) {
   return STATES.indexOf(stateOf(key)) >= LEARNED_RANK
 }
 
+/** Is this sense one the learner still needs spelling out? */
+function isSenseShowable(sense) {
+  return !currentBatchKeys.value.has(sense.key) && !isLearned(sense.key)
+}
+
 /**
- * The hint to show for a single dictionary entry, or null when the learner is
+ * The hint to show for a single form-index entry, or null when the learner is
  * expected to know it (already learned) or is actively drilling it (in the
  * current batch).
+ *
+ * A homograph carries one sense per dictionary entry that spells itself that way
+ * (#568), and they're weighed one at a time: knowing «есть» "to eat" says nothing
+ * about the existential «есть» "there is", so the meaning the learner is missing
+ * still shows. The hint is dropped only once every sense is known.
  */
 function hintIfShowable(entry) {
   if (!entry) return null
-  if (currentBatchKeys.value.has(entry.key)) return null
-  if (isLearned(entry.key)) return null
-  return entry
+  const senses = entry.senses.filter(isSenseShowable)
+  if (!senses.length) return null
+  if (senses.length === entry.senses.length) return entry
+  return {
+    ...entry,
+    key: senses[0].key,
+    ru: senses[0].ru,
+    en: senseGloss(senses),
+    senses,
+  }
 }
 
 /**

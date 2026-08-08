@@ -105,8 +105,10 @@ const dictionary = computed(() => {
   const out = []
   for (const { text, hint } of hintTokensFor(props.exercise.ru)) {
     if (!hint) continue
-    // Never reveal the assessed word, however its form is recognised.
-    if (assessedKeys.has(hint.key) || assessedTokens.has(normToken(text))) continue
+    // Never reveal the assessed word, however its form is recognised — including
+    // when it is only one sense of a homograph the hint also glosses otherwise.
+    if (hint.senses.some((s) => assessedKeys.has(s.key))) continue
+    if (assessedTokens.has(normToken(text))) continue
     // Drop any surrounding punctuation so an end-of-phrase word reads cleanly.
     const ru = text.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')
     const key = ru.toLowerCase()
