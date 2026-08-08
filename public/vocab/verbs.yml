@@ -10243,8 +10243,12 @@ words:
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Ребёнок ещё не уме́ет застёгивать пу́говицы.
         en_gb: The child cannot yet do up buttons.
+        en_alt:
+          - The child cannot yet fasten buttons.
       - ru: Я застёгиваю пальто́ пе́ред вы́ходом.
         en_gb: I button up my coat before going out.
+        en_alt:
+          - I fasten my coat before going out.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты застёгиваешь ку́ртку?
         en_gb: Do you fasten your jacket?
@@ -10291,6 +10295,8 @@ words:
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Я застегну́ пальто́ и вы́йду за́втра.
         en_gb: I will button up my coat and go out tomorrow.
+        en_alt:
+          - I will fasten my coat and go out tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты застегнёшь реме́нь безопа́сности?
         en_gb: Will you fasten your seatbelt?
