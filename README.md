@@ -41,7 +41,7 @@ against hand-checked golden paradigms and every curated nominative.
 | Exercise        | How it works                                                                 |
 | --------------- | ---------------------------------------------------------------------------- |
 | Identify        | Given one form, select every cell it could fill (handles syncretism).        |
-| Build the table | Drag (or tap) each shuffled form into the right cell of an empty table.       |
+| Build the table | Drag (or tap, or select with the keyboard) each shuffled form into the right cell of an empty table. |
 | Type the endings| The stem is shown; type every ending. Stuck? Tap the on-screen keyboard's 💡 to light up the next letter — see [The keyboard hint](#the-keyboard-hint). |
 
 The identify exercise understands syncretism — e.g. *книге* matches both dative

@@ -20,6 +20,9 @@ const chipById = new Map(chips.map((c) => [c.id, c]))
 const placed = reactive({}) // cellKey -> chipId
 const picked = ref(null) // chip id selected for tap-to-place
 const checked = ref(false)
+// Screen-reader narration of the pick → place gesture, which is otherwise
+// signalled only by colour and the speak() call.
+const announcement = ref('')
 
 const placedIds = computed(() => new Set(Object.values(placed)))
 const bank = computed(() => chips.filter((c) => !placedIds.value.has(c.id)))
@@ -29,19 +32,55 @@ function cellAt(row, col) {
   return props.paradigm.cells.find((c) => c.row === row && c.col === col)
 }
 
+// "Nominative, Singular" for every slot — the only thing that tells a
+// screen-reader user which of a dozen identical cells they are on.
+const slotLabels = computed(() => {
+  const map = new Map()
+  for (const row of props.paradigm.rows) {
+    for (const col of props.paradigm.cols) {
+      map.set(cellKey(row.key, col.key), `${row.label}, ${col.label}`)
+    }
+  }
+  return map
+})
+
+function slotLabel(key) {
+  return slotLabels.value.get(key) ?? key
+}
+
+function cellLabel(key) {
+  const where = slotLabel(key)
+  const chip = chipById.get(placed[key])
+  if (!checked.value) {
+    if (!chip) {
+      const pick = picked.value == null ? null : chipById.get(picked.value)
+      return pick ? `${where}: empty, place ${pick.form}` : `${where}: empty`
+    }
+    return `${where}: ${chip.form}, press to return it to the bank`
+  }
+  const answer = props.paradigm.cells.find((c) => cellKey(c.row, c.col) === key)
+  if (!chip) return `${where}: empty, answer ${answer.form}`
+  if (hasStressMismatch(key)) return `${where}: ${chip.form}, right form, wrong stress — ${answer.form}`
+  if (isCorrect(key)) return `${where}: ${chip.form}, correct`
+  return `${where}: ${chip.form}, wrong — ${answer.form}`
+}
+
 function place(key, chipId) {
   if (checked.value || chipId == null) return
   // Remove the chip from any previous cell, then drop it here.
   for (const [k, v] of Object.entries(placed)) if (v === chipId) delete placed[k]
   placed[key] = chipId
   picked.value = null
+  announcement.value = `${chipById.get(chipId).form} placed in ${slotLabel(key)}.`
 }
 
 function onCellClick(key) {
   if (checked.value) return
   if (placed[key] != null) {
     // Tap a filled cell to send its chip back to the bank.
+    const chip = chipById.get(placed[key])
     delete placed[key]
+    announcement.value = `${chip.form} returned to the bank.`
     return
   }
   if (picked.value != null) place(key, picked.value)
@@ -49,8 +88,11 @@ function onCellClick(key) {
 
 function onChipClick(id) {
   if (checked.value) return
-  speak(chipById.get(id).form)
+  const chip = chipById.get(id)
+  speak(chip.form)
   picked.value = picked.value === id ? null : id
+  announcement.value =
+    picked.value === id ? `${chip.form} selected — choose a cell.` : `${chip.form} deselected.`
 }
 
 function nextEmptySlot() {
@@ -112,7 +154,14 @@ function check() {
 
 <template>
   <div class="grid" style="gap: 1rem">
-    <div class="bank card" :class="{ active: picked != null }">
+    <p class="visually-hidden" role="status" aria-live="polite">{{ announcement }}</p>
+
+    <div
+      class="bank card"
+      :class="{ active: picked != null }"
+      role="group"
+      aria-label="Forms to place"
+    >
       <span v-if="!bank.length" class="muted">All forms placed.</span>
       <button
         v-for="chip in bank"
@@ -120,6 +169,7 @@ function check() {
         type="button"
         class="chip"
         :class="{ picked: picked === chip.id }"
+        :aria-pressed="picked === chip.id"
         draggable="true"
         lang="ru"
         @click="onChipClick(chip.id)"
@@ -169,7 +219,12 @@ function check() {
                   wrong: checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key)),
                   droppable: picked != null && placed[cellKey(row.key, col.key)] == null,
                 }"
+                role="button"
+                :tabindex="checked ? -1 : 0"
+                :aria-label="cellLabel(cellKey(row.key, col.key))"
                 @click="onCellClick(cellKey(row.key, col.key))"
+                @keydown.enter="onCellClick(cellKey(row.key, col.key))"
+                @keydown.space.prevent="onCellClick(cellKey(row.key, col.key))"
                 @dragover.prevent
                 @drop.prevent="(e) => onDrop(e, cellKey(row.key, col.key))"
               >
@@ -297,6 +352,10 @@ function check() {
   justify-content: center;
   font-size: 1.05rem;
 }
+.drop:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
 .drop.droppable {
   border-style: solid;
   border-color: var(--primary);
@@ -346,5 +405,16 @@ function check() {
 }
 .correct-form {
   font-size: 1.1rem;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 </style>
