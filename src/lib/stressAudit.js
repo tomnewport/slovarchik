@@ -178,6 +178,18 @@ export function storedForm(word, t, byKey = null) {
  */
 function readStressCell(word, slot) {
   if (slot === 'headword') return word.headword ?? null
+  // Non-finite slots (#564). The short passive is where participial stress is
+  // mobile — при́нят but принята́, на́чат but начата́ — so it is the one part of
+  // this class the golden table really has to pin: a whole paradigm authored on
+  // the wrong syllable agrees with its own usage example, and only an
+  // independent reference catches that.
+  if (slot === 'gerund') return word.extra?.gerund ?? null
+  if (slot.startsWith('participles.')) {
+    const [, name, gender] = slot.split('.')
+    const cell = word.extra?.participles?.[name]
+    if (gender) return cell?.[gender] ?? null
+    return typeof cell === 'string' ? cell : null
+  }
   if (slot.includes('.')) {
     const [block, person] = slot.split('.')
     return word.extra?.conjugation?.[block]?.[person] ?? null

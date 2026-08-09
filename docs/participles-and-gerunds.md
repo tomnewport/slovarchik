@@ -1,14 +1,13 @@
 # Participles and gerunds — design note
 
-> Status: **stages 1–2 landed** (#564). The four decisions below are settled and
-> the machinery they describe is in the code: the storage blocks, the shared
-> `adjectiveDeclension.js`, the two paradigm variants, the `form:` annotation
-> dimension, the seven grammar rules and every integrity guard. Stage 2 then
-> closed the leak — 17 verbs now store 20 non-finite forms, each with the
-> sentence that teaches it, and three lexicalised adjectives link back to their
-> verb. Stages 3–4 (breadth across the transitive perfectives and the A1–B1
-> imperfective core) are still to come. See the correction under Decision 4:
-> retiring the glossary stubs is a real step, not bookkeeping.
+> Status: **stages 1–3 landed** (#564). The four decisions below are settled and
+> the machinery they describe is in the code. Stage 2 closed the leak; stage 3
+> took the short passive across the A1/A2 transitive perfectives. The corpus now
+> stores **69 non-finite forms on 60 verbs**, every one reachable by a drill, and
+> 51 verbs carry a drillable `#passive-short` table. Stage 4 — `act_pres` /
+> `act_past` / `gerund` on the A1–B1 imperfective core — is what remains. See
+> the correction under Decision 4: retiring the glossary stubs is a real step,
+> not bookkeeping.
 
 ## The hole
 
@@ -344,7 +343,7 @@ here too.
 | --- | --- | --- |
 | 1 ✅ | Machinery: blocks + `adjectiveDeclension.js` + paradigm variants + `form:` in `shapeContextPhrases`/`phraseContext` + the seven rules + tests + CONTRIBUTING | ~0 |
 | 2 ✅ | Close the leak: the glossary participles/gerunds and the linkable adjectives get their verb blocks and one annotated phrase each | 17 verbs, 20 forms |
-| 3 | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | ~200 verbs |
+| 3 ✅ | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | 48 verbs (A1/A2 core) |
 | 4 | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | ~120 verbs |
 
 Stage 1 has landed alone and green. Each later stage is data plus annotations
@@ -360,6 +359,51 @@ aspect, a complete `pass_short`, forms built on the verb's own stem, stress
 marks), `participleCoverage.test.js` (a stored form no drill reaches, and the
 mirror case of an annotation with nothing stored), `phrasesData.test.js` (the
 annotated token equals the resolved form) and `stressData.test.js`.
+
+## Stage 3 as built
+
+Scoped to the **A1/A2** transitive perfectives with a `pair:`, which is the cut
+the third sign-off question left open — 48 verbs rather than the ~200 the note
+first sized, chosen so every form could be hand-verified rather than bulk-derived.
+The remaining B1 tail is the same shape and can follow whenever.
+
+**`pass_short` only, not `pass_short` + `pass_past`.** Each stored slot needs its
+own teaching sentence (that is what `participleCoverage` enforces), so storing
+both would have doubled the sentence count for the same number of verbs. The
+short passive is the half that earns it: «Магази́н закры́т», «Рабо́та зако́нчена»
+is everyday A2 Russian, where the long form is a written-register modifier. Nine
+verbs carry a `pass_past` as well, from stage 2 and from прочита́ть.
+
+The batch is organised by formation class, because that is what the learner is
+actually generalising and what an author gets wrong:
+
+| class | example | short paradigm |
+| --- | --- | --- |
+| -ать → -анный | написа́ть → напи́сан | stem-stressed throughout |
+| да- / -нять | прода́ть → про́дан | **feminine to the ending**: продана́ |
+| -ыть/-ять → -тый | взять → взят | **feminine to the ending**: взята́ |
+| -ить → -енный | купи́ть → ку́плен | stem-stressed, with the -ить mutation (п→пл, т→ч, с→ш) |
+| -ить/-ти → -ённый | реши́ть → решён | **everything but the masculine** end-stressed |
+
+Genders are spread deliberately across the annotations (m 26 / f 21 / n 9 / pl 9)
+so the agreement step is drilled on all four cells rather than over-teaching the
+bare masculine, which is also the one with no ending.
+
+**Two independent oracles now cover these forms**, because the guards that check
+a stored cell against its own usage sentence cannot catch a uniform error — both
+sides come from the same authoring pass and agree with each other:
+
+- `stressGolden.js` pins the mobile-stress class syllable by syllable
+  (при́нят/принята́, на́чат/начата́, решён/решена́/решено́/решены́), plus a few
+  stem-stressed contrast cases so a future "fix" can't spread the mobile rule
+  across the regular class;
+- `morphGolden.js` pins the spelling: the -нн-/-н- distinction (прочи́танный but
+  прочи́тан), the -ить consonant mutations, and ё where -ённый is not -енный.
+
+Both earned their keep during authoring. The stress cross-check caught
+«Кварти́ра про́дана» against the stored `продана́`, and the missing-stress check
+caught a bare «Ужин»; stage 2's token check had already caught a mis-counted
+index. Every one was a sentence bug, not a paradigm bug.
 
 ## Settled at sign-off
 

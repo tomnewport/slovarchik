@@ -142,6 +142,11 @@ describe('participles and gerunds', () => {
   // the reason, exactly as `impersonalVerbs` does for the person-cell oracle.
   const SLOT_ALLOW = {}
 
+  // Verbs whose root is too short for even a three-character stem check: дать's
+  // participle «дан» shares only «да» with дать / даду́т / дал. One genuinely
+  // suppletive verb, allowlisted rather than weakening the rule for everyone.
+  const SHORT_STEM_ALLOW = new Set(['дать=to give'])
+
   // Every check below loops rather than using `it.each`, so the suite still runs
   // while the corpus carries no non-finite forms and each staged batch of data
   // arrives against guards that are already in place.
@@ -198,19 +203,25 @@ describe('participles and gerunds', () => {
   })
 
   it('stores only forms built on the verb\'s own stem', () => {
-    // Cheap, high-signal guard against a pasted wrong lexeme. Every non-finite
-    // form is built off one of the verb's own stems — but NOT always the
-    // infinitive's: the present participles come off the 3rd-plural, which
-    // mutates (пла́кать → пла́чут → пла́чущий, писа́ть → пи́шут → пи́шущий), and the
-    // past ones off the past stem. So compare against all of them and require a
-    // four-character agreement with at least one. Four clears the prefixed pairs
-    // (про-чита́в vs чита́я) without tripping a stem mutation.
+    // Cheap guard against a pasted wrong lexeme. Every non-finite form is built
+    // off one of the verb's own stems — but not always the infinitive's: the
+    // present participles come off the 3rd-plural, which mutates (пла́кать →
+    // пла́чут → пла́чущий), and the past ones off the past stem. So compare
+    // against all of them and require agreement with one.
+    //
+    // Three characters, not four: the stem a participle keeps is the bare root,
+    // and for a short root the suffix starts diverging almost immediately —
+    // купи́ть → ку́плен and реши́ть → решён share only «куп» / «реш» with every
+    // finite form the verb has. Three still catches a whole wrong lexeme, which
+    // is what this is for; the annotated-token check is the guard that proves a
+    // stored form is the RIGHT one.
     const lcp = (a, b) => {
       let i = 0
       while (i < a.length && i < b.length && a[i] === b[i]) i++
       return i
     }
     for (const [key, w] of withNonFinite) {
+      if (SHORT_STEM_ALLOW.has(key)) continue
       const c = w.conjugation ?? {}
       const finite = c.present ?? c.future ?? {}
       const bases = [
@@ -223,7 +234,7 @@ describe('participles and gerunds', () => {
         expect(
           shared,
           `${key}.${slot}: "${form}" shares no stem with ${bases.join(' / ')}`,
-        ).toBeGreaterThanOrEqual(Math.min(4, bare.length))
+        ).toBeGreaterThanOrEqual(Math.min(3, bare.length))
       }
     }
   })
