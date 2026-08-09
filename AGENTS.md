@@ -78,12 +78,12 @@ src/
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
                         #   progression/schedule/batches/session/sessionPools/sessionRunner/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
-                        #   declension/paradigm/numerals/numberDrill  — inflection & numbers
+                        #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
-                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/spellPrompt  — corpus data-integrity oracles (CI guards on the vocab)
+                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt  — corpus data-integrity oracles (CI guards on the vocab)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)

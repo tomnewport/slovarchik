@@ -55,6 +55,9 @@ export const STRESS_GOLDEN = {
     'present.2sg': 'стои́шь',
     'present.3sg': 'стои́т',
     'present.3pl': 'стоя́т',
+    // Stage 4 (#564): the gerund RETRACTS off the ending the 3rd-plural carries.
+    gerund: 'сто́я',
+    'participles.act_pres': 'стоя́щий',
   },
 
   // Stem-vs-ending shift across one paradigm: gen-sg го́рода vs nom-pl города́
@@ -117,4 +120,114 @@ export const STRESS_GOLDEN = {
   'земля=earth': { sg_acc: 'зе́млю', pl_dat: 'зе́млям', pl_ins: 'зе́млями', pl_pre: 'зе́млях' },
   // сража́лся (stem жа́), matching its sibling сража́лись; the entry stored сра́жался.
   'сражался=fought': { headword: 'сража́лся' },
+  // ─── Short passive participles: the mobile-stress class (#564, stage 3) ────
+  //
+  // The one place participial stress genuinely moves, and the reason `pass_short`
+  // is stored per gender rather than derived. These are pinned independently
+  // because the two checks around them cannot catch a uniform error: the stored
+  // cell and the usage token that teaches it come from the same authoring pass,
+  // so if both say *при́нята they agree with each other and stay green.
+  //
+  // Three sub-classes, each with its own rule:
+  //   -т-  feminine goes to the ending, neuter/plural stay on the stem
+  //   да-  feminine (and often neuter/plural) go to the ending
+  //   -ён- the whole short paradigm is end-stressed except the masculine
+  'принять=to accept': {
+    'participles.pass_short.m': 'при́нят',
+    'participles.pass_short.f': 'принята́',
+    'participles.pass_short.n': 'при́нято',
+    'participles.pass_short.pl': 'при́няты',
+  },
+  'начать=to begin': {
+    'participles.pass_short.m': 'на́чат',
+    'participles.pass_short.f': 'начата́',
+    'participles.pass_short.pl': 'на́чаты',
+  },
+  'понять=to understand': {
+    'participles.pass_short.m': 'по́нят',
+    'participles.pass_short.f': 'понята́',
+  },
+  'поднять=to lift': {
+    'participles.pass_short.m': 'по́днят',
+    'participles.pass_short.f': 'поднята́',
+  },
+  'взять=to take': {
+    'participles.pass_short.m': 'взят',
+    'participles.pass_short.f': 'взята́',
+    'participles.pass_short.n': 'взя́то',
+  },
+  'снять=to take off': {
+    'participles.pass_short.m': 'снят',
+    'participles.pass_short.f': 'снята́',
+    'participles.pass_short.n': 'сня́то',
+  },
+  'дать=to give': {
+    'participles.pass_short.f': 'дана́',
+    'participles.pass_short.n': 'дано́',
+    'participles.pass_short.pl': 'даны́',
+  },
+  'продать=to sell': {
+    'participles.pass_short.m': 'про́дан',
+    'participles.pass_short.f': 'продана́',
+  },
+  'отдать=to give back': {
+    'participles.pass_short.m': 'о́тдан',
+    'participles.pass_short.f': 'отдана́',
+  },
+  'сдать=to hand in': {
+    'participles.pass_short.f': 'сдана́',
+    'participles.pass_short.n': 'сда́но',
+  },
+  // -ённый: masculine -ён, everything else end-stressed.
+  'решить=to decide': {
+    'participles.pass_short.m': 'решён',
+    'participles.pass_short.f': 'решена́',
+    'participles.pass_short.n': 'решено́',
+    'participles.pass_short.pl': 'решены́',
+  },
+  'включить=to switch on': {
+    'participles.pass_short.f': 'включена́',
+    'participles.pass_short.pl': 'включены́',
+  },
+  'пригласить=to invite': {
+    'participles.pass_short.f': 'приглашена́',
+    'participles.pass_short.pl': 'приглашены́',
+  },
+  'принести=to bring': {
+    'participles.pass_short.m': 'принесён',
+    'participles.pass_short.f': 'принесена́',
+  },
+  'спасти=to save': {
+    'participles.pass_short.m': 'спасён',
+    'participles.pass_short.f': 'спасена́',
+  },
+  // Stem-stressed contrast cases: these do NOT move, and pinning a few keeps a
+  // future "fix" from spreading the mobile rule across the regular class.
+  'прочитать=to read': {
+    'participles.pass_short.f': 'прочи́тана',
+    'participles.pass_short.pl': 'прочи́таны',
+  },
+  'купить=to buy': {
+    'participles.pass_short.f': 'ку́плена',
+    'participles.pass_short.pl': 'ку́плены',
+  },
+  'найти=to find': {
+    'participles.pass_short.f': 'на́йдена',
+    'participles.pass_short.pl': 'на́йдены',
+  },
+  // ─── Active participles and the imperfective gerund (#564, stage 4) ────────
+  //
+  // The stress traps in this class are the gerunds that RETRACT off the ending
+  // their 3rd-plural carries — сидя́т but си́дя, стоя́т but сто́я — and their
+  // opposites, which keep it (живу́т → живя́, лю́бят → любя́). Getting one wrong
+  // is invisible to every other check, since the usage sentence is authored
+  // from the same form.
+  'сидеть=to sit': { gerund: 'си́дя', 'participles.act_pres': 'сидя́щий' },
+  'жить=to live': { gerund: 'живя́', 'participles.act_pres': 'живу́щий', 'participles.act_past': 'жи́вший' },
+  'любить=to love': { gerund: 'любя́', 'participles.act_pres': 'лю́бящий' },
+  'говорить=to speak': { gerund: 'говоря́', 'participles.act_pres': 'говоря́щий' },
+  // The present participle is built on the 3rd-plural stem, so it inherits that
+  // stem's stress, not the infinitive's: пи́шут → пи́шущий, never *писа́ющий.
+  'писать=to write': { 'participles.act_pres': 'пи́шущий', 'participles.act_past': 'писа́вший' },
+  'читать=to read': { 'participles.act_pres': 'чита́ющий', gerund: 'чита́я' },
 }

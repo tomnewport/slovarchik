@@ -1,8 +1,14 @@
 # Participles and gerunds — design note
 
-> Status: **proposal**, for sign-off before any vocab edits. Settles the four
-> open questions in #564 (split out of #538, whose items 1–3 shipped in #566).
-> Nothing in this note is implemented yet.
+> Status: **all four stages landed** (#564). The decisions below are settled and
+> the machinery they describe is in the code. The corpus stores **113 non-finite
+> forms on 75 verbs**, every one reachable by a drill, and 65 verbs carry a
+> drillable variant table — 51 `#passive-short` and 14 `#nonfinite`. What is left
+> is breadth (the B1 tail of each stage), not machinery, plus the two named
+> follow-ups, both now filed: the hint index resolving a stored form to its verb
+> rather than a gloss stub (**#574**, see the correction under Decision 4 — it is
+> a real step, not bookkeeping) and wiring variant paradigms into the mastery
+> session (**#575**).
 
 ## The hole
 
@@ -138,7 +144,9 @@ variant paradigm does *not* reach the mastery session — `exerciseBuild.buildIn
 builds from `buildParadigm(record)` (`exerciseBuild.js:418`), which returns only
 the primary table. Wiring variants into the session pool is a named follow-up,
 shared with the adjective short forms, and should not be smuggled into this
-work.
+work — **filed as #575**, which counts 206 stranded tables (141 adjective
+`#short`, 51 `#passive-short`, 14 `#nonfinite`) and sets out the progress-model
+question that has to be answered first.
 
 ### b. Meaning and use → context phrases, the main vehicle
 
@@ -236,6 +244,18 @@ Rationale, per word:
   сле́дующий are ordinary adjectives with no living verb behind them for a
   learner, бы́вший means "ex-". These get **no** `from_verb` link — the same
   treatment благодаря́ gets in `prepositions.yml`.
+
+> **Stage 2 outcome.** Three of the five linked: откры́тый, закры́тый and
+> при́нятый. вооружи́ть is not in the corpus, so вооружённый has nothing to link
+> to. заключённый was held back deliberately: the corpus verb is keyed
+> `заключи́ть=to conclude`, and while заключённый "prisoner" is the same lexeme,
+> a card reading "past passive participle of заключи́ть (to conclude)" teaches a
+> learner the wrong thing. It wants either a second sense on the verb or a
+> `заключи́ть=to imprison` entry — data work, not a link.
+>
+> The leak list also names eight verbs the corpus simply doesn't have (тону́ть,
+> мороси́ть, опа́сть, повреди́ть, перепо́лнить, затаи́ть, попроща́ться, вооружи́ть).
+> Their glossary stubs stay until those verbs are taught.
 - The other five (откры́тый, закры́тый, при́нятый, вооружённый, заключённый) are
   transparently participles of verbs already in the corpus, and the link is the
   thing the learner is missing. The vocab word card already renders an aspect
@@ -250,9 +270,67 @@ same test; закры́т/закры́та appearing twice with different stress
 bug this guard is for.
 
 The ~24 glossary rows in group 2 need no decision here: once the verb stores the
-form, `buildFormIndex` resolves the surface token to the verb (pass 2 already
-prefers a real lemma over a gloss stub), and the stubs can be retired by the
-existing `promote-glossary` cleanup as a follow-up.
+form, it becomes hintable from the verb and the stubs can be retired as a
+follow-up.
+
+> **Correction (stage 2, refined after review).** The sentence above originally
+> read "…`buildFormIndex` resolves the surface token to the verb (pass 2 already
+> prefers a real lemma over a gloss stub)". That is wrong: a gloss-only stub is
+> keyed on the surface form it glosses, so it claims that form in **pass 1** —
+> the dictionary-form pass — and pass 2 does not stack onto it.
+>
+> The precise rule, which is worth stating because both looser versions of it are
+> wrong: **a stub shadows exactly the one surface form it is keyed on, and
+> nothing else.** Every other cell of the participle — stored or derived —
+> reaches its verb normally. So on today's corpus:
+>
+> ```
+> плачущий      → плакать=to cry            ✓  (no stub is keyed «плачущий»)
+> плачущего     → плачущего=crying          ✗  (a stub IS keyed «плачущего»)
+> плачущему     → плакать=to cry            ✓  derived, no stub
+> сломанный     → сломанный=broken          ✗  a NOMINATIVE, and still shadowed
+> сломанного    → сломать=to break          ✓  derived, no stub
+> ```
+>
+> It is therefore *not* the case that "the stored nominative wins and only the
+> derived obliques lose" — подозрева́емый, сло́манный, поте́рянный, кома́ндующий and
+> реша́ющий are all nominatives that the corpus happens to carry a stub for, and
+> all five still resolve to the stub. What decides it is whether a stub key
+> exists for that exact string, not where the form sits in the paradigm.
+>
+> So retiring the stubs is not optional bookkeeping; it is the step that actually
+> closes the leak for the learner. It also turns out to need per-entry judgement
+> rather than a bulk pass, because several stubs carry a **nominalised** gloss
+> that the verb's infinitive would lose: заде́ржанный "detainee", подозрева́емый
+> "suspect", кома́ндующий "commander", пропа́вшего "the missing person",
+> укра́денное "stolen goods", при́нято "it is customary" (a distinct sense
+> altogether). Two ways forward, for the follow-up to pick between:
+>
+> 1. retire only the stubs whose gloss is just the verb's own meaning
+>    (пла́чущего, сло́манный, поте́рянный, поду́мав, услы́шав, уви́дев, су́дя), and
+>    keep the nominalised ones; or
+> 2. let a real lemma's inflected form **stack as an extra sense** onto a
+>    gloss-only entry, the way #568/#571 stack homograph senses — the hint then
+>    reads "detainee / to detain" and nothing is lost.
+>
+> Option 2 is the better end state and is a small change to `buildIndex` pass 2,
+> but it alters hint resolution corpus-wide, so it wants its own issue rather
+> than riding along with a data stage. **Filed as #574**, which also records the
+> full count: 94 forms are shadowed this way, most of them imperatives that
+> predate this work entirely.
+>
+> `glossary.yml`'s own header already names the underlying hazard, and any fix
+> should lean on it rather than re-deriving it:
+>
+> > INVARIANT: keys are surface forms exactly as they occur in the corpus, NOT
+> > lemmas … these keys must never be treated as dictionary headwords — anything
+> > promoting entries out of this file … must first lemmatise, or add a `lemma:`
+> > field.
+>
+> Pass 1 does exactly what that warns against: it treats a surface-form key as a
+> dictionary headword. Adding the `lemma:` field the invariant already
+> contemplates would let pass 1 recognise a stub as a non-lemma and decline the
+> claim — which is arguably a cleaner fix than special-casing pass 2.
 
 ## Data integrity
 
@@ -299,23 +377,108 @@ here too.
 
 | stage | scope | new forms |
 | --- | --- | --- |
-| 1 | Machinery: blocks + `adjectiveDeclension.js` + paradigm variants + `form:` in `shapeContextPhrases`/`phraseContext` + the seven rules + tests + CONTRIBUTING | ~0 |
-| 2 | Close the leak: the ~24 glossary participles/gerunds and the five linkable adjectives get their verb blocks and one annotated phrase each | ~35 verbs |
-| 3 | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | ~200 verbs |
-| 4 | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | ~120 verbs |
+| 1 ✅ | Machinery: blocks + `adjectiveDeclension.js` + paradigm variants + `form:` in `shapeContextPhrases`/`phraseContext` + the seven rules + tests + CONTRIBUTING | ~0 |
+| 2 ✅ | Close the leak: the glossary participles/gerunds and the linkable adjectives get their verb blocks and one annotated phrase each | 17 verbs, 20 forms |
+| 3 ✅ | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | 48 verbs (A1/A2 core) |
+| 4 ✅ | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | 15 verbs (A1/A2 core) |
 
-Stage 1 lands alone and green. Each later stage is data plus annotations against
-machinery that already exists — which is the property #564 says this work
-currently lacks, and the reason for settling the four decisions first.
+Stage 1 has landed alone and green. Each later stage is data plus annotations
+against machinery that already exists — which is the property #564 says this work
+lacked, and the reason for settling the four decisions first.
 
-## Open for sign-off
+**Authoring a stage-2+ batch** is now purely additive, and
+[`public/vocab/CONTRIBUTING.md`](../public/vocab/CONTRIBUTING.md) is the
+reference: add the `participles:` / `gerund:` block, add one usage example
+annotated `inflect: { form: … }` per stored slot, and CI does the rest. The
+guards that will catch a mistake are `verbsData.test.js` (slot legality per
+aspect, a complete `pass_short`, forms built on the verb's own stem, stress
+marks), `participleCoverage.test.js` (a stored form no drill reaches, and the
+mirror case of an annotation with nothing stored), `phrasesData.test.js` (the
+annotated token equals the resolved form) and `stressData.test.js`.
 
-1. Deriving the participle grid rather than storing it (Decision 1) — this is
-   the one place the note breaks the corpus's usual "store, don't derive" habit,
-   and the argument rests on participle stress being fixed across the long grid.
-2. Whether the variant-paradigm limitation (free practice only, no mastery
-   session) is acceptable for stage 1, or whether wiring `#short`/`#nonfinite`
-   into `exerciseBuild` should be a prerequisite.
-3. The stage 3/4 volume — 320 verbs of hand-authored, stress-marked forms is the
-   bulk of the cost, and it can be cut to the A1–A2 core without changing
-   anything above it.
+## Stage 3 as built
+
+Scoped to the **A1/A2** transitive perfectives with a `pair:`, which is the cut
+the third sign-off question left open — 48 verbs rather than the ~200 the note
+first sized, chosen so every form could be hand-verified rather than bulk-derived.
+The remaining B1 tail is the same shape and can follow whenever.
+
+**`pass_short` only, not `pass_short` + `pass_past`.** Each stored slot needs its
+own teaching sentence (that is what `participleCoverage` enforces), so storing
+both would have doubled the sentence count for the same number of verbs. The
+short passive is the half that earns it: «Магази́н закры́т», «Рабо́та зако́нчена»
+is everyday A2 Russian, where the long form is a written-register modifier. Nine
+verbs carry a `pass_past` as well, from stage 2 and from прочита́ть.
+
+The batch is organised by formation class, because that is what the learner is
+actually generalising and what an author gets wrong:
+
+| class | example | short paradigm |
+| --- | --- | --- |
+| -ать → -анный | написа́ть → напи́сан | stem-stressed throughout |
+| да- / -нять | прода́ть → про́дан | **feminine to the ending**: продана́ |
+| -ыть/-ять → -тый | взять → взят | **feminine to the ending**: взята́ |
+| -ить → -енный | купи́ть → ку́плен | stem-stressed, with the -ить mutation (п→пл, т→ч, с→ш) |
+| -ить/-ти → -ённый | реши́ть → решён | **everything but the masculine** end-stressed |
+
+Genders are spread deliberately across the annotations (m 26 / f 21 / n 9 / pl 9)
+so the agreement step is drilled on all four cells rather than over-teaching the
+bare masculine, which is also the one with no ending.
+
+**Two independent oracles now cover these forms**, because the guards that check
+a stored cell against its own usage sentence cannot catch a uniform error — both
+sides come from the same authoring pass and agree with each other:
+
+- `stressGolden.js` pins the mobile-stress class syllable by syllable
+  (при́нят/принята́, на́чат/начата́, решён/решена́/решено́/решены́), plus a few
+  stem-stressed contrast cases so a future "fix" can't spread the mobile rule
+  across the regular class;
+- `morphGolden.js` pins the spelling: the -нн-/-н- distinction (прочи́танный but
+  прочи́тан), the -ить consonant mutations, and ё where -ённый is not -енный.
+
+Both earned their keep during authoring. The stress cross-check caught
+«Кварти́ра про́дана» against the stored `продана́`, and the missing-stress check
+caught a bare «Ужин»; stage 2's token check had already caught a mis-counted
+index. Every one was a sentence bug, not a paradigm bug.
+
+## Stage 4 as built
+
+Fifteen A1/A2 imperfectives, scoped the same way stage 3 was and for the same
+reason: every form hand-verified against its formation class rather than
+bulk-derived. Fourteen carry all three slots, which is what earns them a
+drillable `#nonfinite` table — the three-cell floor in `assemble` means a verb
+needs three of the five non-finite rows before the table is worth drilling.
+
+**писа́ть is in the batch deliberately with only two slots.** It has no
+imperfective gerund at all, so it stores `act_pres` and `act_past` and nothing
+else, and `buildNonFiniteParadigm` correctly drops it below the floor rather than
+drilling a two-cell table. That is the `defective:` rule from Decision 1 applied
+to this class, and it is worth having one worked example of it in the corpus.
+
+The stems confirm Decision 2a was right. Each verb's finite table keeps its own
+stem and the non-finite table computes its own — сиде́ть is `си` finite and `сид`
+non-finite, жить is `жи` and `жив`, стоя́ть is `сто` and `стоя`. Had the forms
+been folded into one table, every one of those pairs would have collapsed to the
+shorter of the two and degraded "Type the endings" for cells that work today.
+
+**The stress traps here are the gerunds**, and they run in both directions: сидя́т
+but си́дя, стоя́т but сто́я, against живу́т → живя́ and лю́бят → любя́. Nothing else
+in CI can catch a wrong one — the usage sentence is authored from the same form,
+so both sides agree — so they are pinned in `stressGolden.js` alongside the
+present participles, which take the 3rd-plural stem and its stress rather than
+the infinitive's (пи́шут → пи́шущий, never *писа́ющий).
+
+## Settled at sign-off
+
+1. **Deriving the participle grid rather than storing it** (Decision 1) — the
+   one place this note breaks the corpus's usual "store, don't derive" habit.
+   Adopted: participial stress is fixed across the long grid, and the derivation
+   is now `src/lib/adjectiveDeclension.js`, guarded by the same seven golden
+   paradigms the adjective generator has always refused to write without.
+2. **The variant-paradigm limitation** (free practice only, no mastery session)
+   is accepted for stage 1. `#nonfinite` and `#passive-short` reach `/verbs`
+   immediately; wiring variants into `exerciseBuild.buildInflect` stays a
+   follow-up shared with the adjective short forms, and is not smuggled in here.
+3. **The stage 3/4 volume** — 320 verbs of hand-authored, stress-marked forms —
+   remains the bulk of the cost and can still be cut to the A1–A2 core without
+   changing anything above it.

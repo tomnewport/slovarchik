@@ -26,6 +26,9 @@ const noun = (key, headword, declension) => ({
   extra: { declension },
 })
 const verb = (key, conjugation) => ({ key, pos: 'verb', ru: key.split('=')[0], extra: { conjugation } })
+// A verb carrying the non-finite blocks (#564) instead of / alongside a
+// conjugation: `participles:` and `gerund:` are siblings of `conjugation:`.
+const nonFinite = (key, extra) => ({ key, pos: 'verb', ru: key.split('=')[0], extra })
 const adj = (key, headword, declension) => ({
   key,
   pos: 'adjective',
@@ -198,6 +201,47 @@ describe('readCell', () => {
     const v = verb('z=z', { future: { '3sg': 'w' }, past_n: 'wn' })
     expect(readCell(v, 'past_n')).toBe('wn')
     expect(readCell(v, 'past_m')).toBeNull()
+  })
+
+  it('reads the non-finite blocks under their own key space (#564)', () => {
+    const v = nonFinite('прочитать=to read', {
+      participles: {
+        pass_past: 'прочи́танный',
+        pass_short: { m: 'прочи́тан', f: 'прочи́тана' },
+      },
+      gerund: 'прочита́в',
+    })
+    expect(readCell(v, 'participles.pass_past')).toBe('прочи́танный')
+    expect(readCell(v, 'participles.pass_short.f')).toBe('прочи́тана')
+    expect(readCell(v, 'gerund')).toBe('прочита́в')
+    expect(readCell(v, 'participles.act_pres')).toBeNull()
+    expect(readCell(v, 'participles.pass_short.pl')).toBeNull()
+    // A nested block read without a gender is not a form.
+    expect(readCell(v, 'participles.pass_short')).toBeNull()
+    expect(readCell(verb('z=z', {}), 'gerund')).toBeNull()
+  })
+})
+
+describe('non-finite cells', () => {
+  it('walks participles and the gerund for the orthography check', () => {
+    // They must reach impossibleOrthography — but NOT personCellDuplicates,
+    // which would fire on пла́чущий vs пла́кавший (docs/participles-and-gerunds.md).
+    const bad = nonFinite('читать=to read', {
+      participles: { act_pres: 'читайущий', pass_short: { f: 'читайана' } },
+      gerund: 'читайа',
+    })
+    expect(impossibleOrthography([bad]).map((h) => h.slot)).toEqual([
+      'participles.act_pres',
+      'participles.pass_short.f',
+      'gerund',
+    ])
+  })
+
+  it('does not read a participle as a duplicated person cell', () => {
+    const twins = nonFinite('плакать=to cry', {
+      participles: { act_pres: 'пла́чущий', act_past: 'пла́чущий' },
+    })
+    expect(personCellDuplicates([twins])).toEqual([])
   })
 })
 

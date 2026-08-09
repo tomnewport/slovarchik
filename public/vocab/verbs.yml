@@ -1779,6 +1779,9 @@ words:
       - ru: Ты возьмёшь такси́ до вокза́ла?
         en_gb: Will you take a taxi to the station?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Кни́га взята́ в библиоте́ке.
+        en_gb: The book was taken from the library.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: возьми́
@@ -1794,6 +1797,12 @@ words:
       past_f: взяла́
       past_n: взя́ло
       past_pl: взя́ли
+    participles:
+      pass_short:
+        m: взят
+        f: взята́
+        n: взя́то
+        pl: взя́ты
   "взяться=to take hold of":
     cefr_level: B1
     accented: взя́ться
@@ -1986,6 +1995,13 @@ words:
       past_f: включи́ла
       past_n: включи́ло
       past_pl: включи́ли
+    participles:
+      pass_past: включённый
+      pass_short:
+        m: включён
+        f: включена́
+        n: включено́
+        pl: включены́
     usage:
       - ru: Я включу́ свет в ко́мнате.
         en_gb: I will switch on the light in the room.
@@ -2005,6 +2021,12 @@ words:
       - ru: Ты включи́шь телеви́зор?
         en_gb: Will you switch on the television?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Включённый свет меша́л спать.
+        en_gb: The light that was on made it hard to sleep.
+        inflect: { token: 1, form: pass_past, gender: m, rule: verb-participle-pass-past }
+      - ru: Свет включён.
+        en_gb: The light is on.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "владеть=to own":
     cefr_level: B1
     accented: владе́ть
@@ -3091,6 +3113,9 @@ words:
       - ru: Ты встре́тишь друзе́й в теа́тре?
         en_gb: Will you meet your friends at the theatre?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Го́сти встре́чены.
+        en_gb: The guests have been met.
+        inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: встреть
@@ -3106,6 +3131,12 @@ words:
       past_f: встре́тила
       past_n: встре́тило
       past_pl: встре́тили
+    participles:
+      pass_short:
+        m: встре́чен
+        f: встре́чена
+        n: встре́чено
+        pl: встре́чены
   "встретиться=to meet":
     cefr_level: A2
     accented: встре́титься
@@ -3401,6 +3432,12 @@ words:
       past_f: вы́брала
       past_n: вы́брало
       past_pl: вы́брали
+    participles:
+      pass_short:
+        m: вы́бран
+        f: вы́брана
+        n: вы́брано
+        pl: вы́браны
     usage:
       - ru: Я вы́беру кра́сное пла́тье.
         en_gb: I will choose the red dress.
@@ -3420,6 +3457,9 @@ words:
       - ru: Ты вы́берешь кра́сное пла́тье?
         en_gb: Will you choose the red dress?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Пода́рок уже́ вы́бран.
+        en_gb: The present has already been chosen.
+        inflect: { token: 3, form: pass_short, gender: m, rule: verb-participle-short }
   "выбраться=to get out":
     cefr_level: B1
     accented: вы́браться
@@ -4159,6 +4199,9 @@ words:
       - ru: Вы вы́пьете стака́н молока́?
         en_gb: Will you drink a glass of milk?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+      - ru: Молоко́ вы́пито.
+        en_gb: The milk has been drunk.
+        inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: вы́пей
@@ -4174,6 +4217,12 @@ words:
       past_f: вы́пила
       past_n: вы́пило
       past_pl: вы́пили
+    participles:
+      pass_short:
+        m: вы́пит
+        f: вы́пита
+        n: вы́пито
+        pl: вы́питы
   "выполнить=to fulfil":
     cefr_level: B1
     accented: вы́полнить
@@ -5126,6 +5175,15 @@ words:
       - ru: Ты говори́шь пра́вду?
         en_gb: Are you telling the truth?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Мы слу́шали говоря́щего врача́.
+        en_gb: We listened to the doctor who was speaking.
+        inflect: { token: 3, form: act_pres, case: acc, gender: m, animate: true, rule: verb-participle-act-pres }
+      - ru: Я не по́мню говори́вшего челове́ка.
+        en_gb: I do not remember the man who was speaking.
+        inflect: { token: 4, form: act_past, case: acc, gender: m, animate: true, rule: verb-participle-act-past }
+      - ru: Говоря́ ти́хо, он объясни́л пра́вило.
+        en_gb: Speaking quietly, he explained the rule.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: говори́
@@ -5141,6 +5199,10 @@ words:
       past_f: говори́ла
       past_n: говори́ло
       past_pl: говори́ли
+    participles:
+      act_pres: говоря́щий
+      act_past: говори́вший
+    gerund: говоря́
   "говориться=to be said":
     cefr_level: B2
     accented: говори́ться
@@ -5619,6 +5681,9 @@ words:
       - ru: Ско́ро он даст нам отве́т.
         en_gb: Soon he'll give us an answer.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+      - ru: Отве́т дан.
+        en_gb: The answer has been given.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: дай
@@ -5634,6 +5699,12 @@ words:
       past_f: дала́
       past_n: да́ло
       past_pl: да́ли
+    participles:
+      pass_short:
+        m: дан
+        f: дана́
+        n: дано́
+        pl: даны́
   "двигаться=to move":
     cefr_level: B1
     accented: дви́гаться
@@ -5810,6 +5881,15 @@ words:
       - ru: Что вы де́лаете?
         en_gb: What are you doing?
         inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
+      - ru: Де́лающий уро́ки сын не отвеча́л.
+        en_gb: The son who was doing his homework did not answer.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Де́лавший рабо́ту челове́к уста́л.
+        en_gb: The man who had been doing the work got tired.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Де́лая уро́ки, он слу́шал му́зыку.
+        en_gb: While doing his homework, he listened to music.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: де́лай
@@ -5825,6 +5905,10 @@ words:
       past_f: де́лала
       past_n: де́лало
       past_pl: де́лали
+    participles:
+      act_pres: де́лающий
+      act_past: де́лавший
+    gerund: де́лая
   "делаться=to become":
     cefr_level: B1
     accented: де́латься
@@ -7219,6 +7303,15 @@ words:
       - ru: О чём вы ду́маете?
         en_gb: What are you thinking about?
         inflect: { token: 4, tense: present, person: 2pl, rule: verb-present }
+      - ru: Ду́мающий челове́к задаёт вопро́сы.
+        en_gb: A thinking person asks questions.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Ду́мавший об э́том ма́льчик молча́л.
+        en_gb: The boy who had been thinking about it was silent.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Ду́мая о до́ме, он улыбну́лся.
+        en_gb: Thinking about home, he smiled.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: ду́май
@@ -7234,6 +7327,10 @@ words:
       past_f: ду́мала
       past_n: ду́мало
       past_pl: ду́мали
+    participles:
+      act_pres: ду́мающий
+      act_past: ду́мавший
+    gerund: ду́мая
   "дышать=to breathe":
     cefr_level: A2
     accented: дыша́ть
@@ -7835,6 +7932,15 @@ words:
       - ru: Как вы живёте?
         en_gb: How are you doing?
         inflect: { token: 3, tense: present, person: 2pl, rule: verb-present }
+      - ru: Живу́щий ря́дом сосе́д помо́г нам.
+        en_gb: The neighbour living nearby helped us.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Жи́вший здесь худо́жник у́мер.
+        en_gb: The artist who lived here has died.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Живя́ в дере́вне, он мно́го гуля́л.
+        en_gb: Living in the village, he walked a lot.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: живи́
@@ -7850,6 +7956,10 @@ words:
       past_f: жила́
       past_n: жи́ло
       past_pl: жи́ли
+    participles:
+      act_pres: живу́щий
+      act_past: жи́вший
+    gerund: живя́
   "заботиться=to take care":
     cefr_level: B2
     accented: забо́титься
@@ -8451,6 +8561,13 @@ words:
       past_f: задержа́ла
       past_n: задержа́ло
       past_pl: задержа́ли
+    participles:
+      pass_past: заде́ржанный
+      pass_short:
+        m: заде́ржан
+        f: заде́ржана
+        n: заде́ржано
+        pl: заде́ржаны
     usage:
       - ru: Поли́ция задержа́ла во́ра.
         en_gb: The police detained the thief.
@@ -8470,6 +8587,12 @@ words:
       - ru: Ты заде́ржишь меня́?
         en_gb: Will you keep me?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Заде́ржанный молча́л всю доро́гу.
+        en_gb: The detained man was silent the whole way.
+        inflect: { token: 1, form: pass_past, gender: m, rule: verb-participle-pass-past }
+      - ru: Рейс заде́ржан.
+        en_gb: The flight has been delayed.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "задуматься=to start thinking":
     cefr_level: B1
     accented: заду́маться
@@ -8570,6 +8693,12 @@ words:
       past_f: заказа́ла
       past_n: заказа́ло
       past_pl: заказа́ли
+    participles:
+      pass_short:
+        m: зака́зан
+        f: зака́зана
+        n: зака́зано
+        pl: зака́заны
     usage:
       - ru: Закажи́ мне ко́фе, пожа́луйста.
         en_gb: Order me a coffee, please.
@@ -8592,6 +8721,9 @@ words:
       - ru: Ты зака́жешь биле́ты?
         en_gb: Will you order the tickets?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Такси́ уже́ зака́зано.
+        en_gb: The taxi has already been ordered.
+        inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
   "заказывать=to order":
     cefr_level: A2
     accented: зака́зывать
@@ -8808,6 +8940,9 @@ words:
       - ru: Ты зако́нчишь прое́кт к пя́тнице?
         en_gb: Will you finish the project by Friday?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Рабо́та зако́нчена.
+        en_gb: The work is finished.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: зако́нчи
@@ -8823,6 +8958,12 @@ words:
       past_f: зако́нчила
       past_n: зако́нчило
       past_pl: зако́нчили
+    participles:
+      pass_short:
+        m: зако́нчен
+        f: зако́нчена
+        n: зако́нчено
+        pl: зако́нчены
   "закончиться=to end":
     cefr_level: A2
     accented: зако́нчиться
@@ -9003,6 +9144,13 @@ words:
       past_f: закры́ла
       past_n: закры́ло
       past_pl: закры́ли
+    participles:
+      pass_past: закры́тый
+      pass_short:
+        m: закры́т
+        f: закры́та
+        n: закры́то
+        pl: закры́ты
     usage:
       - ru: Закро́й, пожа́луйста, дверь.
         en_gb: Please close the door.
@@ -9022,6 +9170,12 @@ words:
       - ru: Ты закро́ешь окно́?
         en_gb: Will you close the window?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Он постуча́л в закры́тую дверь.
+        en_gb: He knocked on the closed door.
+        inflect: { token: 4, form: pass_past, case: acc, gender: f, rule: verb-participle-pass-past }
+      - ru: Магази́н закры́т до утра́.
+        en_gb: The shop is closed until morning.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "закрыться=to shut":
     cefr_level: B1
     accented: закры́ться
@@ -9238,6 +9392,12 @@ words:
       past_f: заме́тила
       past_n: заме́тило
       past_pl: заме́тили
+    participles:
+      pass_short:
+        m: заме́чен
+        f: заме́чена
+        n: заме́чено
+        pl: заме́чены
     usage:
       - ru: Я заме́тила оши́бку в те́ксте.
         en_gb: I noticed a mistake in the text.
@@ -9257,6 +9417,9 @@ words:
       - ru: Ты заме́тишь переме́ны сра́зу?
         en_gb: Will you notice the changes at once?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Оши́бка заме́чена.
+        en_gb: The mistake has been noticed.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "замечать=to notice":
     cefr_level: A2
     accented: замеча́ть
@@ -9646,6 +9809,12 @@ words:
       past_f: записа́ла
       past_n: записа́ло
       past_pl: записа́ли
+    participles:
+      pass_short:
+        m: запи́сан
+        f: запи́сана
+        n: запи́сано
+        pl: запи́саны
     usage:
       - ru: Я запишу́ твой а́дрес.
         en_gb: I will write down your address.
@@ -9665,6 +9834,9 @@ words:
       - ru: Ты запи́шешь мой а́дрес?
         en_gb: Will you write down my address?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ваш а́дрес запи́сан.
+        en_gb: Your address has been written down.
+        inflect: { token: 3, form: pass_short, gender: m, rule: verb-participle-short }
   "записывать=to write down":
     cefr_level: A2
     accented: запи́сывать
@@ -9762,6 +9934,12 @@ words:
       past_f: заплати́ла
       past_n: заплати́ло
       past_pl: заплати́ли
+    participles:
+      pass_short:
+        m: запла́чен
+        f: запла́чена
+        n: запла́чено
+        pl: запла́чены
     usage:
       - ru: Заплати́те за ко́фе, пожа́луйста.
         en_gb: Pay for the coffee, please.
@@ -9784,6 +9962,9 @@ words:
       - ru: Ты запла́тишь за обе́д?
         en_gb: Will you pay for lunch?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Все счета́ запла́чены.
+        en_gb: All the bills have been paid.
+        inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
   "запомнить=to memorise":
     cefr_level: A2
     accented: запо́мнить
@@ -10015,6 +10196,12 @@ words:
       past_f: зарабо́тала
       past_n: зарабо́тало
       past_pl: зарабо́тали
+    participles:
+      pass_short:
+        m: зарабо́тан
+        f: зарабо́тана
+        n: зарабо́тано
+        pl: зарабо́таны
     usage:
       - ru: Я зарабо́таю на маши́ну за год.
         en_gb: I will earn enough for a car in a year.
@@ -10034,6 +10221,9 @@ words:
       - ru: Ты зарабо́таешь пе́рвые де́ньги ле́том?
         en_gb: Will you earn your first money in the summer?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Э́ти де́ньги зарабо́таны че́стно.
+        en_gb: This money was earned honestly.
+        inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
   "заслужить=to deserve":
     cefr_level: B1
     accented: заслужи́ть
@@ -10898,6 +11088,15 @@ words:
       - ru: Ты зна́ешь отве́т?
         en_gb: Do you know the answer?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Зна́ющий отве́т студе́нт по́днял ру́ку.
+        en_gb: The student who knew the answer raised his hand.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Зна́вший её челове́к молча́л.
+        en_gb: The man who knew her was silent.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Зна́я пра́вду, она́ молча́ла.
+        en_gb: Knowing the truth, she stayed silent.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: знай
@@ -10913,6 +11112,10 @@ words:
       past_f: зна́ла
       past_n: зна́ло
       past_pl: зна́ли
+    participles:
+      act_pres: зна́ющий
+      act_past: зна́вший
+    gerund: зна́я
   "значить=to mean":
     cefr_level: A2
     accented: зна́чить
@@ -10997,6 +11200,15 @@ words:
       - ru: Ты игра́ешь в футбо́л?
         en_gb: Do you play football?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Игра́ющие де́ти бы́ли сча́стливы.
+        en_gb: The children who were playing were happy.
+        inflect: { token: 1, form: act_pres, gender: pl, rule: verb-participle-act-pres }
+      - ru: Игра́вший в саду́ ребёнок уста́л.
+        en_gb: The child who had been playing in the garden got tired.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Игра́я в футбо́л, он слома́л но́гу.
+        en_gb: While playing football, he broke his leg.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: игра́й
@@ -11012,6 +11224,10 @@ words:
       past_f: игра́ла
       past_n: игра́ло
       past_pl: игра́ли
+    participles:
+      act_pres: игра́ющий
+      act_past: игра́вший
+    gerund: игра́я
   "идти=to go":
     cefr_level: A1
     accented: идти́
@@ -12354,6 +12570,8 @@ words:
       past_f: кома́ндовала
       past_n: кома́ндовало
       past_pl: кома́ндовали
+    participles:
+      act_pres: кома́ндующий
     usage:
       - ru: Генера́л кома́ндует а́рмией.
         en_gb: The general commands the army.
@@ -12373,6 +12591,9 @@ words:
       - ru: Ты кома́ндуешь а́рмией?
         en_gb: Do you command the army?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Кома́ндующий а́рмией отда́л прика́з.
+        en_gb: The commander of the army gave an order.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
   "контролировать=to control":
     cefr_level: B1
     accented: контроли́ровать
@@ -12902,6 +13123,9 @@ words:
       - ru: Ты ку́пишь но́вую кни́гу?
         en_gb: Will you buy a new book?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Биле́ты уже́ ку́плены.
+        en_gb: The tickets have already been bought.
+        inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: купи́
@@ -12917,6 +13141,12 @@ words:
       past_f: купи́ла
       past_n: купи́ло
       past_pl: купи́ли
+    participles:
+      pass_short:
+        m: ку́плен
+        f: ку́плена
+        n: ку́плено
+        pl: ку́плены
   "курить=to smoke":
     cefr_level: A2
     accented: кури́ть
@@ -13491,6 +13721,15 @@ words:
       - ru: Ты лю́бишь чита́ть?
         en_gb: Do you like reading?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Лю́бящая мать всё поймёт.
+        en_gb: A loving mother will understand everything.
+        inflect: { token: 1, form: act_pres, gender: f, rule: verb-participle-act-pres }
+      - ru: Люби́вший её челове́к уе́хал.
+        en_gb: The man who loved her has left.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Любя́ дете́й, она́ ста́ла учи́телем.
+        en_gb: Loving children, she became a teacher.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: люби́
@@ -13506,6 +13745,10 @@ words:
       past_f: люби́ла
       past_n: люби́ло
       past_pl: люби́ли
+    participles:
+      act_pres: лю́бящий
+      act_past: люби́вший
+    gerund: любя́
   "махать=to wave":
     cefr_level: B1
     accented: маха́ть
@@ -14290,6 +14533,12 @@ words:
       past_f: наде́ла
       past_n: наде́ло
       past_pl: наде́ли
+    participles:
+      pass_short:
+        m: наде́т
+        f: наде́та
+        n: наде́то
+        pl: наде́ты
     usage:
       - ru: Я наде́ну тёплую ку́ртку.
         en_gb: I will put on a warm jacket.
@@ -14309,6 +14558,9 @@ words:
       - ru: Ты наде́нешь тёплую ку́ртку?
         en_gb: Will you put on a warm jacket?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Пальто́ наде́то.
+        en_gb: The coat is on.
+        inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
   "надеяться=to hope":
     cefr_level: A2
     accented: наде́яться
@@ -14628,6 +14880,12 @@ words:
       past_f: нашла́
       past_n: нашло́
       past_pl: нашли́
+    participles:
+      pass_short:
+        m: на́йден
+        f: на́йдена
+        n: на́йдено
+        pl: на́йдены
     usage:
       - ru: Найди́те свобо́дное ме́сто, пожа́луйста.
         en_gb: Find a free seat, please.
@@ -14650,6 +14908,9 @@ words:
       - ru: Ты найдёшь доро́гу по ка́рте?
         en_gb: Will you find the way with the map?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ключи́ на́йдены.
+        en_gb: The keys have been found.
+        inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
   "найтись=to be found":
     cefr_level: B1
     accented: найти́сь
@@ -14831,6 +15092,9 @@ words:
       - ru: Вы напи́шете отчёт к пя́тнице?
         en_gb: Will you write the report by Friday?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+      - ru: Письмо́ уже́ напи́сано.
+        en_gb: The letter is already written.
+        inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: напиши́
@@ -14846,6 +15110,12 @@ words:
       past_f: написа́ла
       past_n: написа́ло
       past_pl: написа́ли
+    participles:
+      pass_short:
+        m: напи́сан
+        f: напи́сана
+        n: напи́сано
+        pl: напи́саны
   "напоминать=to remind":
     cefr_level: A2
     accented: напомина́ть
@@ -15069,6 +15339,9 @@ words:
       - ru: Ты нарису́ешь дом и со́лнце?
         en_gb: Will you draw a house and the sun?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Карти́на нарисо́вана карандашо́м.
+        en_gb: The picture is drawn in pencil.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: нарису́й
@@ -15084,6 +15357,12 @@ words:
       past_f: нарисова́ла
       past_n: нарисова́ло
       past_pl: нарисова́ли
+    participles:
+      pass_short:
+        m: нарисо́ван
+        f: нарисо́вана
+        n: нарисо́вано
+        pl: нарисо́ваны
   "нарушить=to violate":
     cefr_level: B1
     accented: нару́шить
@@ -15457,6 +15736,9 @@ words:
       - ru: Когда́ ты начнёшь но́вую рабо́ту?
         en_gb: When will you start your new job?
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
+      - ru: Рабо́та начата́.
+        en_gb: The work has been started.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: начни́
@@ -15472,6 +15754,12 @@ words:
       past_f: начала́
       past_n: на́чало
       past_pl: на́чали
+    participles:
+      pass_short:
+        m: на́чат
+        f: начата́
+        n: на́чато
+        pl: на́чаты
   "начаться=to begin":
     cefr_level: A1
     accented: нача́ться
@@ -18008,6 +18296,12 @@ words:
       past_f: оста́вила
       past_n: оста́вило
       past_pl: оста́вили
+    participles:
+      pass_short:
+        m: оста́влен
+        f: оста́влена
+        n: оста́влено
+        pl: оста́влены
     usage:
       - ru: Я оста́влю ключи́ на столе́.
         en_gb: I will leave the keys on the table.
@@ -18027,6 +18321,9 @@ words:
       - ru: Ты оста́вишь су́мку до́ма?
         en_gb: Will you leave your bag at home?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Запи́ска оста́влена на столе́.
+        en_gb: A note has been left on the table.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "оставлять=to leave":
     cefr_level: A2
     accented: оставля́ть
@@ -18502,6 +18799,12 @@ words:
       past_f: отдала́
       past_n: отда́ло
       past_pl: отда́ли
+    participles:
+      pass_short:
+        m: о́тдан
+        f: отдана́
+        n: о́тдано
+        pl: о́тданы
     usage:
       - ru: Я отда́м тебе́ долг за́втра.
         en_gb: I will give you back the debt tomorrow.
@@ -18521,6 +18824,9 @@ words:
       - ru: Ты отда́шь кни́гу подру́ге?
         en_gb: Will you give the book back to your friend?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Долг о́тдан.
+        en_gb: The debt has been repaid.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "отдохнуть=to rest":
     cefr_level: A1
     accented: отдохну́ть
@@ -18608,6 +18914,15 @@ words:
       - ru: Вы отдыха́ете в воскресе́нье?
         en_gb: Do you rest on Sunday?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+      - ru: Отдыха́ющие тури́сты сиде́ли на пля́же.
+        en_gb: The tourists who were resting sat on the beach.
+        inflect: { token: 1, form: act_pres, gender: pl, rule: verb-participle-act-pres }
+      - ru: Отдыха́вший в дере́вне брат верну́лся.
+        en_gb: The brother who had been resting in the village came back.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Отдыха́я на мо́ре, они́ мно́го пла́вали.
+        en_gb: While resting at the seaside, they swam a lot.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: отдыха́й
@@ -18623,6 +18938,10 @@ words:
       past_f: отдыха́ла
       past_n: отдыха́ло
       past_pl: отдыха́ли
+    participles:
+      act_pres: отдыха́ющий
+      act_past: отдыха́вший
+    gerund: отдыха́я
   "отказаться=to refuse":
     cefr_level: B1
     accented: отказа́ться
@@ -18817,6 +19136,13 @@ words:
       past_f: откры́ла
       past_n: откры́ло
       past_pl: откры́ли
+    participles:
+      pass_past: откры́тый
+      pass_short:
+        m: откры́т
+        f: откры́та
+        n: откры́то
+        pl: откры́ты
     usage:
       - ru: Откро́йте, пожа́луйста, окно́.
         en_gb: Please open the window.
@@ -18839,6 +19165,12 @@ words:
       - ru: Ты откро́ешь окно́?
         en_gb: Will you open the window?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Он вошёл че́рез откры́тую дверь.
+        en_gb: He came in through the open door.
+        inflect: { token: 4, form: pass_past, case: acc, gender: f, rule: verb-participle-pass-past }
+      - ru: Музе́й откры́т сего́дня.
+        en_gb: The museum is open today.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "открыться=to open":
     cefr_level: B1
     accented: откры́ться
@@ -20778,6 +21110,12 @@ words:
       - ru: Ты пи́шешь письмо́ ма́ме?
         en_gb: Are you writing a letter to your mum?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Пи́шущий письмо́ ма́льчик сиде́л ти́хо.
+        en_gb: The boy writing a letter sat quietly.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Писа́вший письмо́ ма́льчик встал.
+        en_gb: The boy who had been writing the letter stood up.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
     conjugation:
       imperative:
         sg: пиши́
@@ -20793,6 +21131,9 @@ words:
       past_f: писа́ла
       past_n: писа́ло
       past_pl: писа́ли
+    participles:
+      act_pres: пи́шущий
+      act_past: писа́вший
   "пить=to drink":
     cefr_level: A1
     accented: пить
@@ -20943,6 +21284,9 @@ words:
       - ru: Вы пла́чете на сва́дьбах?
         en_gb: Do you cry at weddings?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+      - ru: Мать обняла́ пла́чущего ребёнка.
+        en_gb: The mother hugged the crying child.
+        inflect: { token: 3, form: act_pres, case: acc, gender: m, animate: true, rule: verb-participle-act-pres }
     conjugation:
       imperative:
         sg: плачь
@@ -20958,6 +21302,8 @@ words:
       past_f: пла́кала
       past_n: пла́кало
       past_pl: пла́кали
+    participles:
+      act_pres: пла́чущий
   "платить=to pay":
     cefr_level: A2
     accented: плати́ть
@@ -22107,6 +22453,12 @@ words:
       past_f: подняла́
       past_n: по́дняло
       past_pl: по́дняли
+    participles:
+      pass_short:
+        m: по́днят
+        f: поднята́
+        n: по́днято
+        pl: по́дняты
     usage:
       - ru: Помоги́ мне подня́ть коро́бку.
         en_gb: Help me lift the box.
@@ -22125,6 +22477,9 @@ words:
       - ru: Вы подни́мете флаг у́тром?
         en_gb: Will you raise the flag in the morning?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+      - ru: Ру́ки по́дняты.
+        en_gb: Hands are raised.
+        inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
   "подняться=to go up":
     cefr_level: B1
     accented: подня́ться
@@ -22270,6 +22625,8 @@ words:
       past_f: подозрева́ла
       past_n: подозрева́ло
       past_pl: подозрева́ли
+    participles:
+      pass_pres: подозрева́емый
     usage:
       - ru: Поли́ция подозрева́ет сосе́да.
         en_gb: The police suspect the neighbour.
@@ -22289,6 +22646,9 @@ words:
       - ru: Ты подозрева́ешь сосе́да?
         en_gb: Do you suspect the neighbour?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Подозрева́емый отказа́лся отвеча́ть.
+        en_gb: The suspect refused to answer.
+        inflect: { token: 1, form: pass_pres, gender: m, rule: verb-participle-pass-pres }
   "подойти=to approach":
     cefr_level: B1
     accented: подойти́
@@ -22425,6 +22785,7 @@ words:
     usage:
       - ru: Он отве́тил, не поду́мав.
         en_gb: He answered without thinking.
+        inflect: { token: 4, form: gerund, rule: verb-gerund-pf }
       - ru: Я поду́маю об э́том.
         en_gb: I will think about it.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -22458,6 +22819,7 @@ words:
       past_f: поду́мала
       past_n: поду́мало
       past_pl: поду́мали
+    gerund: поду́мав
   "подхватить=to catch":
     cefr_level: B2
     accented: подхвати́ть
@@ -23754,6 +24116,12 @@ words:
       past_f: положи́ла
       past_n: положи́ло
       past_pl: положи́ли
+    participles:
+      pass_short:
+        m: поло́жен
+        f: поло́жена
+        n: поло́жено
+        pl: поло́жены
     usage:
       - ru: Положи́ кни́гу на по́лку.
         en_gb: Put the book on the shelf.
@@ -23773,6 +24141,9 @@ words:
       - ru: Ты поло́жишь де́ньги в карма́н?
         en_gb: Will you put the money in your pocket?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Кни́га поло́жена на по́лку.
+        en_gb: The book has been put on the shelf.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "получать=to receive":
     cefr_level: A1
     accented: получа́ть
@@ -23883,6 +24254,12 @@ words:
       past_f: получи́ла
       past_n: получи́ло
       past_pl: получи́ли
+    participles:
+      pass_short:
+        m: полу́чен
+        f: полу́чена
+        n: полу́чено
+        pl: полу́чены
     usage:
       - ru: Я получу́ дипло́м в ию́не.
         en_gb: I will receive my diploma in June.
@@ -23902,6 +24279,9 @@ words:
       - ru: Ты полу́чишь дипло́м в ию́не?
         en_gb: Will you receive your diploma in June?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Письмо́ полу́чено.
+        en_gb: The letter has been received.
+        inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
   "получиться=to turn out":
     cefr_level: B1
     accented: получи́ться
@@ -24367,6 +24747,15 @@ words:
       - ru: Вы понима́ете по-ру́сски?
         en_gb: Do you understand Russian?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+      - ru: Понима́ющий учи́тель помо́г ученику́.
+        en_gb: The understanding teacher helped the pupil.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Понима́вший всё ма́льчик молча́л.
+        en_gb: The boy who understood everything was silent.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Понима́я его́ страх, она́ обняла́ его́.
+        en_gb: Understanding his fear, she hugged him.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: понима́й
@@ -24382,6 +24771,10 @@ words:
       past_f: понима́ла
       past_n: понима́ло
       past_pl: понима́ли
+    participles:
+      act_pres: понима́ющий
+      act_past: понима́вший
+    gerund: понима́я
   "понравиться=to be liked":
     cefr_level: A1
     accented: понра́виться
@@ -24455,6 +24848,9 @@ words:
       - ru: Ты поймёшь э́ту зада́чу?
         en_gb: Will you understand this problem?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Пра́вило по́нято.
+        en_gb: The rule is understood.
+        inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: пойми́
@@ -24470,6 +24866,12 @@ words:
       past_f: поняла́
       past_n: по́няло
       past_pl: по́няли
+    participles:
+      pass_short:
+        m: по́нят
+        f: понята́
+        n: по́нято
+        pl: по́няты
   "пообедать=to have lunch":
     cefr_level: A2
     accented: пообе́дать
@@ -25068,6 +25470,12 @@ words:
       past_f: посла́ла
       past_n: посла́ло
       past_pl: посла́ли
+    participles:
+      pass_short:
+        m: по́слан
+        f: по́слана
+        n: по́слано
+        pl: по́сланы
     usage:
       - ru: Я пошлю́ тебе́ откры́тку из Пари́жа.
         en_gb: I will send you a postcard from Paris.
@@ -25087,6 +25495,9 @@ words:
       - ru: Ты пошлёшь дете́й за хле́бом?
         en_gb: Will you send the children for bread?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Письмо́ по́слано вчера́.
+        en_gb: The letter was sent yesterday.
+        inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
   "последовать=to follow":
     cefr_level: B1
     accented: после́довать
@@ -25319,6 +25730,12 @@ words:
       past_f: поста́вила
       past_n: поста́вило
       past_pl: поста́вили
+    participles:
+      pass_short:
+        m: поста́влен
+        f: поста́влена
+        n: поста́влено
+        pl: поста́влены
     usage:
       - ru: Поста́вь ва́зу на стол.
         en_gb: Put the vase on the table.
@@ -25338,6 +25755,9 @@ words:
       - ru: Ты поста́вишь маши́ну в гара́ж?
         en_gb: Will you put the car in the garage?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ва́за поста́влена на стол.
+        en_gb: The vase has been put on the table.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "постараться=to try hard":
     cefr_level: A2
     accented: постара́ться
@@ -25399,6 +25819,9 @@ words:
       - ru: Ты постира́ешь всё бельё?
         en_gb: Will you wash all the laundry?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Руба́шка пости́рана.
+        en_gb: The shirt has been washed.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       future:
         "1sg": постира́ю
@@ -25411,6 +25834,12 @@ words:
       past_f: постира́ла
       past_n: постира́ло
       past_pl: постира́ли
+    participles:
+      pass_short:
+        m: пости́ран
+        f: пости́рана
+        n: пости́рано
+        pl: пости́раны
   "построить=to build":
     cefr_level: A2
     accented: постро́ить
@@ -25436,6 +25865,12 @@ words:
       past_f: постро́ила
       past_n: постро́ило
       past_pl: постро́или
+    participles:
+      pass_short:
+        m: постро́ен
+        f: постро́ена
+        n: постро́ено
+        pl: постро́ены
     usage:
       - ru: Они́ постро́или но́вый дом за год.
         en_gb: They built a new house in a year.
@@ -25455,6 +25890,9 @@ words:
       - ru: Ты постро́ишь дом в лесу́?
         en_gb: Will you build a house in the forest?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Шко́ла постро́ена бы́стро.
+        en_gb: The school was built quickly.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "поступать=to act":
     cefr_level: B1
     accented: поступа́ть
@@ -25648,6 +26086,13 @@ words:
       past_f: потеря́ла
       past_n: потеря́ло
       past_pl: потеря́ли
+    participles:
+      pass_past: поте́рянный
+      pass_short:
+        m: поте́рян
+        f: поте́ряна
+        n: поте́ряно
+        pl: поте́ряны
     usage:
       - ru: Я потеря́л свои́ ключи́.
         en_gb: I lost my keys.
@@ -25667,6 +26112,12 @@ words:
       - ru: Ты потеря́ешь свои́ ключи́?
         en_gb: Will you lose your keys?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Поте́рянный кошелёк нашли́ в па́рке.
+        en_gb: The lost wallet was found in the park.
+        inflect: { token: 1, form: pass_past, gender: m, rule: verb-participle-pass-past }
+      - ru: Кошелёк поте́рян.
+        en_gb: The wallet is lost.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "потратить=to spend":
     cefr_level: B1
     accented: потра́тить
@@ -27120,6 +27571,9 @@ words:
       - ru: Вы пригласи́те друзе́й на сва́дьбу?
         en_gb: Will you invite friends to the wedding?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+      - ru: Все го́сти приглашены́.
+        en_gb: All the guests have been invited.
+        inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: пригласи́
@@ -27135,6 +27589,12 @@ words:
       past_f: пригласи́ла
       past_n: пригласи́ло
       past_pl: пригласи́ли
+    participles:
+      pass_short:
+        m: приглашён
+        f: приглашена́
+        n: приглашено́
+        pl: приглашены́
   "приглашать=to invite":
     cefr_level: A2
     accented: приглаша́ть
@@ -27206,6 +27666,12 @@ words:
       past_f: пригото́вила
       past_n: пригото́вило
       past_pl: пригото́вили
+    participles:
+      pass_short:
+        m: пригото́влен
+        f: пригото́влена
+        n: пригото́влено
+        pl: пригото́влены
     usage:
       - ru: Ма́ма пригото́вила вку́сный обе́д.
         en_gb: Mum prepared a tasty lunch.
@@ -27225,6 +27691,9 @@ words:
       - ru: Ты пригото́вишь вку́сный обе́д?
         en_gb: Will you prepare a tasty lunch?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: У́жин пригото́влен.
+        en_gb: Dinner is ready.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "придумать=to think up":
     cefr_level: A2
     accented: приду́мать
@@ -27817,6 +28286,12 @@ words:
       past_f: принесла́
       past_n: принесло́
       past_pl: принесли́
+    participles:
+      pass_short:
+        m: принесён
+        f: принесена́
+        n: принесено́
+        pl: принесены́
     usage:
       - ru: Принеси́ мне стака́н воды́.
         en_gb: Bring me a glass of water.
@@ -27836,6 +28311,9 @@ words:
       - ru: Ты принесёшь цветы́?
         en_gb: Will you bring flowers?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ко́фе принесён.
+        en_gb: The coffee has been brought.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "принимать=to accept":
     cefr_level: B1
     accented: принима́ть
@@ -27940,6 +28418,13 @@ words:
       past_f: приняла́
       past_n: при́няло
       past_pl: при́няли
+    participles:
+      pass_past: при́нятый
+      pass_short:
+        m: при́нят
+        f: принята́
+        n: при́нято
+        pl: при́няты
     usage:
       - ru: Я приму́ душ пе́ред сном.
         en_gb: I will take a shower before bed.
@@ -27959,6 +28444,12 @@ words:
       - ru: Ты при́мешь ва́жное реше́ние?
         en_gb: Will you make an important decision?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: При́нятый зако́н вступи́л в си́лу.
+        en_gb: The law that was passed came into force.
+        inflect: { token: 1, form: pass_past, gender: m, rule: verb-participle-pass-past }
+      - ru: Ва́ше предложе́ние при́нято.
+        en_gb: Your proposal has been accepted.
+        inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
   "приобрести=to acquire":
     cefr_level: B2
     accented: приобрести́
@@ -28787,6 +29278,9 @@ words:
       - ru: Ты прода́шь кварти́ру весно́й?
         en_gb: Will you sell the flat in spring?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Кварти́ра продана́.
+        en_gb: The flat has been sold.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: прода́й
@@ -28802,6 +29296,12 @@ words:
       past_f: продала́
       past_n: про́дало
       past_pl: про́дали
+    participles:
+      pass_short:
+        m: про́дан
+        f: продана́
+        n: про́дано
+        pl: про́даны
   "продолжать=to continue":
     cefr_level: A2
     accented: продолжа́ть
@@ -29355,6 +29855,8 @@ words:
       past_f: пропа́ла
       past_n: пропа́ло
       past_pl: пропа́ли
+    participles:
+      act_past: пропа́вший
     usage:
       - ru: Мои́ ключи́ пропа́ли вчера́.
         en_gb: My keys vanished yesterday.
@@ -29371,6 +29873,9 @@ words:
       - ru: Я пропа́л бы без твое́й по́мощи.
         en_gb: I would be lost without your help.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
+      - ru: Поли́ция и́щет пропа́вшего ребёнка.
+        en_gb: The police are looking for the missing child.
+        inflect: { token: 3, form: act_past, case: acc, gender: m, animate: true, rule: verb-participle-act-past }
   "пропустить=to miss":
     cefr_level: B1
     accented: пропусти́ть
@@ -29691,6 +30196,12 @@ words:
       - ru: Ты прочита́ешь э́ту кни́гу за неде́лю?
         en_gb: Will you read this book in a week?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Он верну́л прочи́танную кни́гу.
+        en_gb: He returned the book he had read.
+        inflect: { token: 3, form: pass_past, case: acc, gender: f, rule: verb-participle-pass-past }
+      - ru: Кни́га прочи́тана до конца́.
+        en_gb: The book has been read to the end.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: прочита́й
@@ -29706,6 +30217,13 @@ words:
       past_f: прочита́ла
       past_n: прочита́ло
       past_pl: прочита́ли
+    participles:
+      pass_past: прочи́танный
+      pass_short:
+        m: прочи́тан
+        f: прочи́тана
+        n: прочи́тано
+        pl: прочи́таны
   "прошептать=to whisper":
     cefr_level: B2
     accented: прошепта́ть
@@ -30174,6 +30692,15 @@ words:
       - ru: Вы рабо́таете в шко́ле?
         en_gb: Do you work at a school?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+      - ru: Рабо́тающий оте́ц верну́лся по́здно.
+        en_gb: The father, who works, came back late.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Рабо́тавший здесь врач уе́хал.
+        en_gb: The doctor who worked here has left.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Рабо́тая в Москве́, она́ вы́учила ру́сский.
+        en_gb: While working in Moscow, she learned Russian.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: рабо́тай
@@ -30189,6 +30716,10 @@ words:
       past_f: рабо́тала
       past_n: рабо́тало
       past_pl: рабо́тали
+    participles:
+      act_pres: рабо́тающий
+      act_past: рабо́тавший
+    gerund: рабо́тая
   "радоваться=to be glad":
     cefr_level: A2
     accented: ра́доваться
@@ -31858,6 +32389,9 @@ words:
       - ru: Ты реша́ешь зада́чи?
         en_gb: Are you solving the problems?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Э́то был реша́ющий матч.
+        en_gb: That was the decisive match.
+        inflect: { token: 3, form: act_pres, gender: m, rule: verb-participle-act-pres }
     conjugation:
       imperative:
         sg: реша́й
@@ -31873,6 +32407,8 @@ words:
       past_f: реша́ла
       past_n: реша́ло
       past_pl: реша́ли
+    participles:
+      act_pres: реша́ющий
   "решаться=to decide":
     cefr_level: B1
     accented: реша́ться
@@ -31943,6 +32479,9 @@ words:
       - ru: Ты реши́шь оста́ться до́ма?
         en_gb: Will you decide to stay at home?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Зада́ча решена́.
+        en_gb: The problem has been solved.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: реши́
@@ -31958,6 +32497,12 @@ words:
       past_f: реши́ла
       past_n: реши́ло
       past_pl: реши́ли
+    participles:
+      pass_short:
+        m: решён
+        f: решена́
+        n: решено́
+        pl: решены́
   "решиться=to make up one's mind":
     cefr_level: B1
     accented: реши́ться
@@ -32503,6 +33048,9 @@ words:
       - ru: Ты сва́ришь суп на обе́д?
         en_gb: Will you cook soup for lunch?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Карто́шка сва́рена.
+        en_gb: The potatoes are boiled.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: свари́
@@ -32518,6 +33066,12 @@ words:
       past_f: свари́ла
       past_n: свари́ло
       past_pl: свари́ли
+    participles:
+      pass_short:
+        m: сва́рен
+        f: сва́рена
+        n: сва́рено
+        pl: сва́рены
   "свернуть=to turn":
     cefr_level: B1
     accented: сверну́ть
@@ -32652,6 +33206,12 @@ words:
       past_f: сдала́
       past_n: сда́ло
       past_pl: сда́ли
+    participles:
+      pass_short:
+        m: сдан
+        f: сдана́
+        n: сда́но
+        pl: сда́ны
     usage:
       - ru: Я сдам экза́мен в ию́не.
         en_gb: I will pass the exam in June.
@@ -32671,6 +33231,9 @@ words:
       - ru: Ты сдашь докуме́нты за́втра?
         en_gb: Will you hand in the documents tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Экза́мен сдан.
+        en_gb: The exam has been passed.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "сделать=to do/make":
     cefr_level: A1
     accented: сде́лать
@@ -32701,6 +33264,9 @@ words:
       - ru: Е́сли бы вре́мя бы́ло, я бы всё сде́лал.
         en_gb: If there were time, I would do everything.
         inflect: { token: 8, tense: past, person: past_m, rule: verb-conditional }
+      - ru: Вся рабо́та сде́лана.
+        en_gb: All the work is done.
+        inflect: { token: 3, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
         sg: сде́лай
@@ -32716,6 +33282,12 @@ words:
       past_f: сде́лала
       past_n: сде́лало
       past_pl: сде́лали
+    participles:
+      pass_short:
+        m: сде́лан
+        f: сде́лана
+        n: сде́лано
+        pl: сде́ланы
   "сделаться=to become":
     cefr_level: B1
     accented: сде́латься
@@ -32863,6 +33435,10 @@ words:
       past_f: сиде́ла
       past_n: сиде́ло
       past_pl: сиде́ли
+    participles:
+      act_pres: сидя́щий
+      act_past: сиде́вший
+    gerund: си́дя
     usage:
       - ru: Где ты сиди́шь на уро́ке?
         en_gb: Where do you sit in the lesson?
@@ -32885,6 +33461,15 @@ words:
       - ru: Я сиде́л бы до́ма в таку́ю пого́ду.
         en_gb: I would sit at home in such weather.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
+      - ru: Сидя́щий у окна́ мужчи́на чита́л.
+        en_gb: The man sitting by the window was reading.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Сиде́вший ря́дом па́ссажир вы́шел.
+        en_gb: The passenger who had been sitting nearby got off.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Си́дя на дива́не, она́ смотре́ла телеви́зор.
+        en_gb: Sitting on the sofa, she watched television.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
   "сиять=to shine":
     cefr_level: B1
     accented: сия́ть
@@ -33341,6 +33926,13 @@ words:
       past_f: слома́ла
       past_n: слома́ло
       past_pl: слома́ли
+    participles:
+      pass_past: сло́манный
+      pass_short:
+        m: сло́ман
+        f: сло́мана
+        n: сло́мано
+        pl: сло́маны
     usage:
       - ru: Я случа́йно слома́л стул.
         en_gb: I accidentally broke the chair.
@@ -33360,6 +33952,12 @@ words:
       - ru: Ты слома́ешь стул?
         en_gb: Will you break the chair?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Он вы́бросил сло́манный стул.
+        en_gb: He threw out the broken chair.
+        inflect: { token: 3, form: pass_past, case: acc, gender: m, rule: verb-participle-pass-past }
+      - ru: Стул сло́ман.
+        en_gb: The chair is broken.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "служить=to serve":
     cefr_level: A2
     accented: служи́ть
@@ -33526,6 +34124,15 @@ words:
       - ru: Ты слу́шаешь учи́теля?
         en_gb: Are you listening to the teacher?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Слу́шающие де́ти сиде́ли ти́хо.
+        en_gb: The children who were listening sat quietly.
+        inflect: { token: 1, form: act_pres, gender: pl, rule: verb-participle-act-pres }
+      - ru: Слу́шавший ле́кцию студе́нт задава́л вопро́сы.
+        en_gb: The student who had listened to the lecture asked questions.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Слу́шая му́зыку, она́ гото́вила у́жин.
+        en_gb: While listening to music, she cooked dinner.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: слу́шай
@@ -33541,6 +34148,10 @@ words:
       past_f: слу́шала
       past_n: слу́шало
       past_pl: слу́шали
+    participles:
+      act_pres: слу́шающий
+      act_past: слу́шавший
+    gerund: слу́шая
   "слыхать=to hear":
     cefr_level: B1
     accented: слыха́ть
@@ -34036,6 +34647,12 @@ words:
       past_f: сняла́
       past_n: сня́ло
       past_pl: сня́ли
+    participles:
+      pass_short:
+        m: снят
+        f: снята́
+        n: сня́то
+        pl: сня́ты
     usage:
       - ru: Я сниму́ ту́фли у две́ри.
         en_gb: I will take off my shoes by the door.
@@ -34055,6 +34672,9 @@ words:
       - ru: Ты сни́мешь ту́фли у две́ри?
         en_gb: Will you take off your shoes by the door?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Фильм снят в Москве́.
+        en_gb: The film was shot in Moscow.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "собирать=to collect":
     cefr_level: A2
     accented: собира́ть
@@ -34175,6 +34795,12 @@ words:
       past_f: собрала́
       past_n: собра́ло
       past_pl: собра́ли
+    participles:
+      pass_short:
+        m: со́бран
+        f: со́брана
+        n: со́брано
+        pl: со́браны
     usage:
       - ru: Я соберу́ все докуме́нты.
         en_gb: I will collect all the documents.
@@ -34194,6 +34820,9 @@ words:
       - ru: Ты соберёшь все докуме́нты?
         en_gb: Will you collect all the documents?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Все ве́щи со́браны.
+        en_gb: All the things are packed.
+        inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
   "собраться=to gather":
     cefr_level: A2
     accented: собра́ться
@@ -35303,6 +35932,12 @@ words:
       past_f: спасла́
       past_n: спасло́
       past_pl: спасли́
+    participles:
+      pass_short:
+        m: спасён
+        f: спасена́
+        n: спасено́
+        pl: спасены́
     usage:
       - ru: Я спасу́ котёнка с де́рева.
         en_gb: I will save the kitten from the tree.
@@ -35322,6 +35957,9 @@ words:
       - ru: Ты спасёшь челове́ка?
         en_gb: Will you save the man?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Де́вочка спасена́.
+        en_gb: The girl has been saved.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "спать=to sleep":
     cefr_level: A1
     accented: спать
@@ -35685,6 +36323,12 @@ words:
       past_f: спря́тала
       past_n: спря́тало
       past_pl: спря́тали
+    participles:
+      pass_short:
+        m: спря́тан
+        f: спря́тана
+        n: спря́тано
+        pl: спря́таны
     usage:
       - ru: Я спря́чу пода́рок в шкаф.
         en_gb: I will hide the present in the wardrobe.
@@ -35704,6 +36348,9 @@ words:
       - ru: Ты спря́чешь игру́шки?
         en_gb: Will you hide the toys?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ключи́ спря́таны в столе́.
+        en_gb: The keys are hidden in the desk.
+        inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
   "спускаться=to descend":
     cefr_level: A2
     accented: спуска́ться
@@ -36150,6 +36797,15 @@ words:
       - ru: Без подде́ржки стена́ не стоя́ла бы до́лго.
         en_gb: Without support the wall would not stand long.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
+      - ru: Стоя́щий у две́ри челове́к ждал.
+        en_gb: The man standing by the door was waiting.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Стоя́вшая у окна́ де́вушка молча́ла.
+        en_gb: The girl who had been standing by the window was silent.
+        inflect: { token: 1, form: act_past, gender: f, rule: verb-participle-act-past }
+      - ru: Сто́я в о́череди, он чита́л газе́ту.
+        en_gb: Standing in the queue, he read a newspaper.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: стой
@@ -36165,6 +36821,10 @@ words:
       past_f: стоя́ла
       past_n: стоя́ло
       past_pl: стоя́ли
+    participles:
+      act_pres: стоя́щий
+      act_past: стоя́вший
+    gerund: сто́я
   "страдать=to suffer":
     cefr_level: B1
     accented: страда́ть
@@ -36401,6 +37061,7 @@ words:
       past_f: суди́ла
       past_n: суди́ло
       past_pl: суди́ли
+    gerund: су́дя
     usage:
       - ru: Су́дя по всему́, бу́дет дождь.
         en_gb: Judging by everything, it will rain.
@@ -36422,6 +37083,9 @@ words:
       - ru: Ты су́дишь уча́стников ко́нкурса?
         en_gb: Are you judging the competition participants?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Су́дя по всему́, бу́дет дождь.
+        en_gb: By all appearances, it is going to rain.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
   "суметь=to manage":
     cefr_level: A2
     accented: суме́ть
@@ -36733,6 +37397,12 @@ words:
       past_f: съе́ла
       past_n: съе́ло
       past_pl: съе́ли
+    participles:
+      pass_short:
+        m: съе́ден
+        f: съе́дена
+        n: съе́дено
+        pl: съе́дены
     usage:
       - ru: Я съем весь суп.
         en_gb: I will eat up all the soup.
@@ -36752,6 +37422,9 @@ words:
       - ru: Ты съешь ка́шу?
         en_gb: Will you eat up the porridge?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Всё съе́дено.
+        en_gb: Everything has been eaten.
+        inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
   "сыграть=to play":
     cefr_level: A1
     accented: сыгра́ть
@@ -36777,6 +37450,12 @@ words:
       past_f: сыгра́ла
       past_n: сыгра́ло
       past_pl: сыгра́ли
+    participles:
+      pass_short:
+        m: сы́гран
+        f: сы́грана
+        n: сы́грано
+        pl: сы́граны
     usage:
       - ru: Я сыгра́ю на гита́ре.
         en_gb: I will play the guitar.
@@ -36796,6 +37475,9 @@ words:
       - ru: Ты сыгра́ешь на гита́ре?
         en_gb: Will you play the guitar?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Игра́ сы́грана.
+        en_gb: The game has been played.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "танцевать=to dance":
     cefr_level: A1
     accented: танцева́ть
@@ -37706,6 +38388,12 @@ words:
       past_f: убрала́
       past_n: убра́ло
       past_pl: убра́ли
+    participles:
+      pass_short:
+        m: у́бран
+        f: у́брана
+        n: у́брано
+        pl: у́браны
     usage:
       - ru: Я уберу́ кни́ги со стола́.
         en_gb: I will clear the books off the table.
@@ -37725,6 +38413,9 @@ words:
       - ru: Ты уберёшь му́сор у́тром?
         en_gb: Will you take out the rubbish in the morning?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Ко́мната у́брана.
+        en_gb: The room has been tidied.
+        inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
   "уважать=to respect":
     cefr_level: B1
     accented: уважа́ть
@@ -37788,6 +38479,7 @@ words:
       past_f: уви́дела
       past_n: уви́дело
       past_pl: уви́дели
+    gerund: уви́дев
     usage:
       - ru: Я уви́жу тебя́ за́втра.
         en_gb: I will see you tomorrow.
@@ -37807,6 +38499,9 @@ words:
       - ru: Ты уви́дишь мо́ре из окна́?
         en_gb: Will you see the sea from the window?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Уви́дев меня́, он улыбну́лся.
+        en_gb: Having seen me, he smiled.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
   "увлекаться=to be keen on":
     cefr_level: B1
     accented: увлека́ться
@@ -38507,6 +39202,13 @@ words:
       past_f: укра́ла
       past_n: укра́ло
       past_pl: укра́ли
+    participles:
+      pass_past: укра́денный
+      pass_short:
+        m: укра́ден
+        f: укра́дена
+        n: укра́дено
+        pl: укра́дены
     usage:
       - ru: Кто́-то укра́л мой велосипе́д.
         en_gb: Someone stole my bicycle.
@@ -38523,6 +39225,12 @@ words:
       - ru: Я никогда́ не укра́ла бы чужо́е.
         en_gb: I would never steal what belongs to others.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-conditional }
+      - ru: Поли́ция нашла́ укра́денный велосипе́д.
+        en_gb: The police found the stolen bicycle.
+        inflect: { token: 3, form: pass_past, case: acc, gender: m, rule: verb-participle-pass-past }
+      - ru: Велосипе́д укра́ден.
+        en_gb: The bicycle has been stolen.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
   "укусить=to bite":
     cefr_level: B1
     accented: укуси́ть
@@ -39014,6 +39722,7 @@ words:
       past_f: услы́шала
       past_n: услы́шало
       past_pl: услы́шали
+    gerund: услы́шав
     usage:
       - ru: Я услы́шала стра́нный шум.
         en_gb: I heard a strange noise.
@@ -39030,6 +39739,9 @@ words:
       - ru: Будь му́зыка поти́ше, я услы́шала бы звоно́к.
         en_gb: I would hear the bell if the music were quieter.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
+      - ru: Услы́шав но́вость, она́ запла́кала.
+        en_gb: Having heard the news, she burst into tears.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
   "усмехнуться=to smirk":
     cefr_level: B2
     accented: усмехну́ться
@@ -40289,6 +41001,15 @@ words:
       - ru: Ты чита́ешь по-ру́сски?
         en_gb: Do you read Russian?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+      - ru: Чита́ющий студе́нт сиде́л у окна́.
+        en_gb: The student who was reading sat by the window.
+        inflect: { token: 1, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Чита́вший студе́нт закры́л кни́гу.
+        en_gb: The student who had been reading closed the book.
+        inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Чита́я кни́гу, он засну́л.
+        en_gb: While reading the book, he fell asleep.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: чита́й
@@ -40304,6 +41025,10 @@ words:
       past_f: чита́ла
       past_n: чита́ло
       past_pl: чита́ли
+    participles:
+      act_pres: чита́ющий
+      act_past: чита́вший
+    gerund: чита́я
   "чувствовать=to feel":
     cefr_level: A2
     accented: чу́вствовать

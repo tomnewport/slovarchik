@@ -308,3 +308,51 @@ describe('phraseHintTokens', () => {
     expect(tokens.find((t) => t.text === 'по́лке').hint?.en).toBe('shelf')
   })
 })
+
+describe('participle forms (#564)', () => {
+  // A verb stores only each participle's NOMINATIVE; the oblique cells are
+  // derived, so tapping «пла́чущего» in a phrase resolves to пла́кать rather than
+  // to a glossary stub — the disconnect #564 is about.
+  const plakat = {
+    key: 'плакать=to cry',
+    pos: 'verb',
+    ru: 'плакать',
+    headword: 'пла́кать',
+    meaning: 'to cry',
+    participles: { act_pres: 'пла́чущий' },
+    gerund: 'пла́ча',
+    extra: { conjugation: { present: { '3sg': 'пла́чет' } } },
+  }
+
+  it('indexes the stored nominative, the derived grid and the gerund', () => {
+    const forms = wordForms(plakat)
+    expect(forms.has('плачущий')).toBe(true)
+    expect(forms.has('плачущего')).toBe(true) // derived
+    expect(forms.has('плачущими')).toBe(true) // derived
+    expect(forms.has('плача')).toBe(true) // the gerund
+    expect(forms.has('плачет')).toBe(true) // still the finite cells
+  })
+
+  it('indexes the short passive cells', () => {
+    const prochitat = {
+      key: 'прочитать=to read',
+      pos: 'verb',
+      ru: 'прочитать',
+      headword: 'прочита́ть',
+      meaning: 'to read',
+      participles: { pass_short: { m: 'прочи́тан', f: 'прочи́тана' } },
+      extra: {},
+    }
+    const forms = wordForms(prochitat)
+    expect(forms.has('прочитан')).toBe(true)
+    expect(forms.has('прочитана')).toBe(true)
+  })
+
+  it('resolves an oblique participle back to its verb', () => {
+    const index = buildFormIndex([plakat])
+    expect(index.get(normToken('пла́чущего'))).toMatchObject({
+      key: 'плакать=to cry',
+      ru: 'пла́кать',
+    })
+  })
+})

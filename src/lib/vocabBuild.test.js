@@ -6,6 +6,7 @@ import {
   vocabDisplay,
   shapePhrases,
   shapeNouns,
+  shapeContextPhrases,
   learnableWords,
   partsOfSpeech,
 } from './vocabBuild.js'
@@ -663,5 +664,89 @@ words:
     // Marked plural but no en_pl authored: never render a blank plural prompt.
     const [v] = shapeVocab(build('display_number: pl'))
     expect(vocabDisplay(v).number).toBe('sg')
+  })
+})
+
+describe('non-finite verb forms and the participle back-link (#564)', () => {
+  const doc = (pos, text) => ({ pos, doc: yaml.load(text) })
+  const words = buildWords([
+    doc(
+      'verb',
+      `
+words:
+  "закрыть=to close":
+    accented: закры́ть
+    aspect: pf
+    en_gb: { standard: to close }
+    participles:
+      pass_past: закры́тый
+      pass_short: { m: закры́т, f: закры́та, n: закры́то, pl: закры́ты }
+    gerund: закры́в
+    usage:
+      - ru: Магази́н закры́т до утра́.
+        en_gb: The shop is closed until morning.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+`,
+    ),
+    doc(
+      'adjective',
+      `
+words:
+  "закрытый=closed":
+    accented: закры́тый
+    en_gb: { standard: closed }
+    from_verb: { key: "закрыть=to close", form: pass_past }
+    forms: { m: закры́тый, f: закры́тая, n: закры́тое, pl: закры́тые }
+`,
+    ),
+  ])
+  const byKey = new Map(words.map((w) => [w.key, w]))
+
+  it('promotes participles and the gerund onto the record', () => {
+    const verb = byKey.get('закрыть=to close')
+    expect(verb.participles.pass_past).toBe('закры́тый')
+    expect(verb.participles.pass_short.f).toBe('закры́та')
+    expect(verb.gerund).toBe('закры́в')
+  })
+
+  it('leaves both null for a verb that carries neither', () => {
+    const bare = buildWords([doc('verb', 'words:\n  "ждать=to wait": { accented: ждать }')])[0]
+    expect(bare.participles).toBeNull()
+    expect(bare.gerund).toBeNull()
+  })
+
+  it('resolves a lexicalised participle back to its verb', () => {
+    expect(byKey.get('закрытый=closed').participleOf).toEqual({
+      key: 'закрыть=to close',
+      ru: 'закры́ть',
+      aspect: 'pf',
+      gloss: 'to close',
+      form: 'pass_past',
+    })
+  })
+
+  it('leaves the link null when the verb is absent', () => {
+    const orphan = buildWords([
+      doc(
+        'adjective',
+        'words:\n  "бывший=former":\n    accented: бы́вший\n    from_verb: { key: "быть=to be", form: act_past }',
+      ),
+    ])[0]
+    expect(orphan.participleOf).toBeNull()
+  })
+
+  it('carries `form:` through to the context phrase target', () => {
+    const [phrase] = shapeContextPhrases(words).filter((p) => p.target.form)
+    expect(phrase.target).toMatchObject({
+      key: 'закрыть=to close',
+      form: 'pass_short',
+      gender: 'm',
+      rule: 'verb-participle-short',
+    })
+  })
+
+  it('surfaces the link on the shaped vocab word', () => {
+    const shaped = shapeVocab(words).find((v) => v.id === 'закрытый=closed')
+    expect(shaped.participleOf.key).toBe('закрыть=to close')
   })
 })

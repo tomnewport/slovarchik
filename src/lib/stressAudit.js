@@ -28,6 +28,7 @@ import {
 } from './phraseContext.js'
 import { normalize } from './text.js'
 import { normToken, normTokenStress } from './phraseHint.js'
+import { gerundForm, participleCell, shortPassiveCell } from './participles.js'
 
 // Basic Latin + Latin-1 Supplement + Latin Extended-A/B (covers á é í ó ú ý and
 // the ASCII homoglyphs a/o/e/c/p…). Anything in these blocks is out of place in
@@ -77,6 +78,8 @@ function* russianStrings(w) {
   if (w.extra) {
     yield* strings(w.extra.declension, `${w.key}:declension`)
     yield* strings(w.extra.conjugation, `${w.key}:conjugation`)
+    yield* strings(w.extra.participles, `${w.key}:participles`)
+    yield* strings(w.extra.gerund, `${w.key}:gerund`)
     yield* strings(w.extra.forms, `${w.key}:forms`)
   }
   for (const u of w.usage || []) if (u?.ru) yield [`${w.key}:usage.ru`, u.ru]
@@ -114,6 +117,21 @@ export function latinInRussianText(words) {
 export function storedForm(word, t, byKey = null) {
   if (t.degree === 'short') {
     return word.pos === 'adjective' ? (word.short?.[t.gender] ?? null) : null
+  }
+  // A non-finite verb form (#564). The gerund is invariable; the short passive
+  // agrees by gender/number and is stored per cell; a long participle agrees
+  // like an adjective, so its oblique cells are derived from the one stored
+  // nominative. Checked before `t.case` because a participle slot carries a case
+  // too — and it must not be read as a noun/adjective declension cell.
+  if (t.form) {
+    if (word.pos !== 'verb') return null
+    if (t.form === 'gerund') return gerundForm(word)
+    if (t.form === 'pass_short') return shortPassiveCell(word, t.gender)
+    return participleCell(word, t.form, {
+      case: t.case ?? 'nom',
+      gender: t.gender ?? 'm',
+      animate: !!t.animate,
+    })
   }
   // Degrees of comparison. The comparative is one invariable stored form; the
   // analytic superlative is «са́мый» + the adjective, both agreeing with the noun,
@@ -160,6 +178,18 @@ export function storedForm(word, t, byKey = null) {
  */
 function readStressCell(word, slot) {
   if (slot === 'headword') return word.headword ?? null
+  // Non-finite slots (#564). The short passive is where participial stress is
+  // mobile — при́нят but принята́, на́чат but начата́ — so it is the one part of
+  // this class the golden table really has to pin: a whole paradigm authored on
+  // the wrong syllable agrees with its own usage example, and only an
+  // independent reference catches that.
+  if (slot === 'gerund') return word.extra?.gerund ?? null
+  if (slot.startsWith('participles.')) {
+    const [, name, gender] = slot.split('.')
+    const cell = word.extra?.participles?.[name]
+    if (gender) return cell?.[gender] ?? null
+    return typeof cell === 'string' ? cell : null
+  }
   if (slot.includes('.')) {
     const [block, person] = slot.split('.')
     return word.extra?.conjugation?.[block]?.[person] ?? null
@@ -262,6 +292,8 @@ export function missingStressMarks(words) {
       if (w.extra) {
         for (const [path, v] of strings(w.extra.declension, 'declension')) scan(w.key, path, v, null)
         for (const [path, v] of strings(w.extra.conjugation, 'conjugation')) scan(w.key, path, v, null)
+        for (const [path, v] of strings(w.extra.participles, 'participles')) scan(w.key, path, v, null)
+        for (const [path, v] of strings(w.extra.gerund, 'gerund')) scan(w.key, path, v, null)
       }
     }
     for (const u of w.usage || []) {

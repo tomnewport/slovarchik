@@ -6911,6 +6911,7 @@ words:
   "закрытый=closed":
     cefr_level: A2
     accented: закры́тый
+    from_verb: { key: "закрыть=to close", form: pass_past }
     en_gb:
       standard: closed (not open)
       alt:
@@ -14654,6 +14655,7 @@ words:
   "открытый=open":
     cefr_level: A2
     accented: откры́тый
+    from_verb: { key: "открыть=to open", form: pass_past }
     en_gb:
       standard: open (not closed)
       alt:
@@ -16854,6 +16856,7 @@ words:
   "принятый=accepted":
     cefr_level: B1
     accented: при́нятый
+    from_verb: { key: "принять=to accept", form: pass_past }
     en_gb:
       standard: accepted (adopted, agreed upon)
       alt:

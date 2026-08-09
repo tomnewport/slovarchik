@@ -9,6 +9,7 @@
 // so we index every form a word can take and look surface tokens up against it.
 import { stripStress } from './text.js'
 import { phraseTokens } from './phrases.js'
+import { PARTICIPLE_SLOTS, participleGrid } from './participles.js'
 
 // Raw-record keys that hold inflected Russian forms worth indexing. English
 // glosses and example sentences live under other keys and are deliberately left
@@ -80,6 +81,19 @@ export function wordForms(word, norm = normToken) {
   for (const key of FORM_KEYS) collectStrings(extra[key], raw)
   // Nouns keep their nested forms on the normalised record, not just in `extra`.
   collectStrings(word?.forms, raw)
+  // A verb's non-finite forms, likewise promoted onto the normalised record.
+  // `participles` is nested — its `pass_short` block holds the four gender
+  // cells — and collectStrings recurses, so that comes along whole.
+  collectStrings(word?.participles, raw)
+  collectStrings(word?.gerund, raw)
+  // Only each long participle's NOMINATIVE is stored; the other 23 cells are
+  // derived (participles.js). Without them, tapping «пла́чущего» in a phrase
+  // would resolve to a glossary stub rather than to пла́кать — which is exactly
+  // the disconnect #564 is about.
+  for (const slot of PARTICIPLE_SLOTS) {
+    const grid = participleGrid(word, slot)
+    if (grid) collectStrings(grid, raw)
+  }
 
   const forms = new Set()
   for (const s of raw) {

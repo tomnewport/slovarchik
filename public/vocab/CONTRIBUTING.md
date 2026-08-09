@@ -498,6 +498,71 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
   that the preposition is actually spelled out in it (its lengthened variants,
   об/обо/во/ко, count as the same word).
 
+#### Non-finite forms — `participles:` / `gerund:` (optional)
+
+Причастия and деепричастия are stored in **sibling blocks**, not as
+`conjugation:` keys — `conjugation:` is a map of finite *person* cells and three
+consumers read it that way. Store **one accented form per slot**:
+
+```yaml
+"прочитать=to read":
+  aspect: pf
+  conjugation: { ... }          # unchanged
+  participles:
+    act_past: прочита́вший       # active past   — "the one who read"
+    pass_past: прочи́танный      # passive past  — "the thing that was read"
+    pass_short:                 # predicate passive — «Кни́га прочи́тана»
+      m: прочи́тан
+      f: прочи́тана
+      n: прочи́тано
+      pl: прочи́таны
+  gerund: прочита́в              # деепричастие — "having read"
+```
+
+- **Only the nominative is stored** for the four long participles (`act_pres`,
+  `act_past`, `pass_pres`, `pass_past`). A participle agrees exactly like
+  `но́вый`, and its stress is fixed across the long grid, so the other 23 cells
+  are derived at runtime (`src/lib/adjectiveDeclension.js`). Do **not** write out
+  a `declension:` block for one.
+- **`pass_short` is stored per gender**, because that is where the stress
+  genuinely moves (при́нятый → принята́, на́чатый → начата́) — the same
+  "store, don't derive" rule as `short:` on adjectives. All four cells or none;
+  three is always a slip.
+- **`gerund` is a single scalar**, not `{ impf, pf }`: a verb forms the gerund of
+  its own aspect and `aspect:` already says which. Reflexives store the `-вшись`
+  form (попроща́вшись).
+- **Which slots an aspect may carry**, enforced by a data test:
+
+  | slot | imperfective | perfective |
+  | --- | --- | --- |
+  | `act_pres` | ✔ чита́ющий | — (no present stem) |
+  | `act_past` | ✔ чита́вший | ✔ прочита́вший |
+  | `pass_pres` | rare, closed class (люби́мый, уважа́емый) | — |
+  | `pass_past` | rare | ✔ transitive only (прочи́танный) |
+  | `pass_short` | rare | ✔ transitive only (прочи́тан) |
+  | `gerund` | ✔ чита́я | ✔ прочита́в |
+
+- **Every block is optional and gappy on purpose** — the `defective:` rule
+  applies verbatim: store only the forms that exist, never pad. An intransitive
+  has no passive of either tense, and plenty of common imperfectives have no
+  gerund at all (ждать, пить, петь, писа́ть, бежа́ть).
+- A stored form **must arrive with the sentence that teaches it** — a usage
+  example annotated `inflect: { form: <slot> }` (see the context-drill section
+  below). `src/lib/participleCoverage.js` fails CI on a stored form no drill can
+  reach, exactly as `degreeCoverage` does for comparatives.
+- **CEFR.** The short passive is A2–B1 material («Магази́н закры́т» is A2
+  Russian); full participles and gerunds are B2. Annotate accordingly so a B2
+  construct doesn't land in an A1 batch.
+
+Stored forms give the verb up to two extra tables in the inflection drill —
+`#nonfinite` (the participles and the gerund) and `#passive-short` — separate
+from the finite conjugation so they don't collapse its common stem. Like the
+adjective short form, these reach free practice (`/verbs`) but not yet the
+mastery session.
+
+Full background, including why each of these is the way it is:
+[`docs/participles-and-gerunds.md`](../../docs/participles-and-gerunds.md).
+
 ### Adjectives (`adjectives.yml`)
 
 ```yaml
@@ -549,6 +614,32 @@ it off). It sits alongside `forms:`:
   `accented` (the masculine short form) + a `short:` block and **omit** `forms:`
   and the `declension:` grid entirely. The generator skips them, and they drill
   as a short-form paradigm only.
+
+#### `from_verb:` — a lexicalised participle's back-link (optional)
+
+Nine participles are also taught here as adjectives in their own right
+(откры́тый, закры́тый, при́нятый, вооружённый, заключённый, бы́вший, бу́дущий,
+сле́дующий, настоя́щий). They **stay** adjective entries — deleting them would
+lose their curated grids, `short:` blocks and usage phrases — but the ones that
+are transparently participles of a verb the corpus already teaches carry a link
+back to it, so the learner meets one productive pattern rather than a stray word:
+
+```yaml
+"закрытый=closed":
+  from_verb: { key: "закрыть=to close", form: pass_past }
+```
+
+- `form` is one of the four long participle slots, and the verb must actually
+  store that slot.
+- The two copies are **checked against each other**, stress included: the
+  adjective's headword must equal the verb's stored form letter-for-letter, and
+  where both carry a short block, those must agree cell-for-cell.
+  закры́т/закры́та appearing twice with different stress is exactly the drift this
+  guard exists for.
+- **Fully lexicalised words get no link.** настоя́щий "genuine" is not "the one
+  that is present"; бу́дущий and сле́дующий have no living verb behind them for a
+  learner; бы́вший means "ex-". Same treatment as благодаря́ in
+  `prepositions.yml` — a gerund that has hardened into a preposition.
 
 ### Pronouns (`pronouns.yml`)
 
@@ -701,6 +792,41 @@ owner, so its key is implicit:
   analytic future (`бу́ду` + infinitive), point `token` at the finite `быть`
   auxiliary and annotate the lexical verb's future `person`; the auxiliary is
   the word that carries person and number.
+- **Non-finite verb forms:** `form:` names which participle or gerund the slot
+  is — `act_pres`, `act_past`, `pass_pres`, `pass_past`, `pass_short` or
+  `gerund` — and the verb must store it (see `participles:` above). The
+  annotation goes on the **verb's own** usage example, which is what makes the
+  form reachable. What rides alongside `form:` depends on the slot:
+
+  ```yaml
+  "плакать=to cry":
+    usage:
+      - ru: Она́ успока́ивала пла́чущего ребёнка.
+        en_gb: She was comforting the crying child.
+        inflect: { token: 3, form: act_pres, case: acc, gender: m, animate: true,
+                   rule: verb-participle-act-pres }
+  "закрыть=to close":
+    usage:
+      - ru: Магази́н закры́т до утра́.
+        en_gb: The shop is closed until morning.
+        inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+  "подумать=to think":
+    usage:
+      - ru: Он отве́тил, не поду́мав.
+        en_gb: He answered without thinking.
+        inflect: { token: 4, form: gerund, rule: verb-gerund-pf }
+  ```
+
+  | annotated as | also give | steps the learner works through |
+  | --- | --- | --- |
+  | `gerund` | nothing — it is invariable | form |
+  | `pass_short` | `gender` | form → gender/number |
+  | a participle in the nominative | `gender` | form → gender/number |
+  | a participle in an oblique case | `case` + `gender` (+ `animate`) | form → case → gender/number |
+
+  The seven `verb-participle-*` / `verb-gerund-*` rules in `grammar-rules.yml`
+  explain each; the present passive and the short passive are marked
+  `exception: true`, so the drill weights them 4×.
 
 `token` is the 1-based index of the target in the whitespace-split `ru`
 (punctuation stays attached to its word); the token's letters must equal the

@@ -211,6 +211,22 @@ function normalizeWord(pos, key, word) {
     // (stress shifts stored, not derived) and left untouched by the declension
     // generator. Powers the short-form inflection paradigm.
     short: word.short ?? null,
+    // Non-finite verb forms — причастия and деепричастия (#564). `participles`
+    // holds one accented nominative per long slot (`act_pres`, `act_past`,
+    // `pass_pres`, `pass_past`) plus the per-gender `pass_short` block; `gerund`
+    // is a single scalar (a verb forms the gerund of its own aspect, and
+    // `aspect:` already says which). Both are optional and gappy on purpose —
+    // an intransitive has no passive, many imperfectives have no gerund. The
+    // long participles' oblique cells are derived, not stored: see
+    // src/lib/participles.js and docs/participles-and-gerunds.md.
+    participles: word.participles ?? null,
+    gerund: word.gerund ?? null,
+    // A participle that has also been lexicalised as its own adjective entry
+    // (закры́тый, при́нятый) links back to the verb it came from, so the word
+    // card can explain the origin instead of teaching an unrelated item.
+    // buildWords resolves it into `participleOf`. Adjective-only.
+    fromVerb: word.from_verb ?? null,
+    participleOf: null,
     // Verbal aspect (impf | pf) and the natural key of the aspect partner, as
     // authored. buildWords resolves `pairKey` into the full `aspectPair` link.
     aspect: word.aspect ?? null,
@@ -321,6 +337,19 @@ function linkPartners(words) {
     if (aspect) w.aspectPair = link(aspect)
     const motion = w.motionPairKey ? byKey.get(w.motionPairKey) : null
     if (motion) w.motionPair = link(motion)
+    // A lexicalised participle's back-link to its verb (закры́тый → закры́ть).
+    // Only the slot the adjective *is* travels with it — the word card renders
+    // "past passive participle of закры́ть" from the pair.
+    const verb = w.fromVerb?.key ? byKey.get(w.fromVerb.key) : null
+    if (verb) {
+      w.participleOf = {
+        key: verb.key,
+        ru: verb.headword || verb.ru,
+        aspect: verb.aspect,
+        gloss: verb.meaning || verb.en,
+        form: w.fromVerb.form ?? null,
+      }
+    }
   }
 }
 
@@ -374,6 +403,10 @@ export function shapeVocab(words) {
     // two members are learned as one contrast rather than as near-synonyms.
     motion: w.motion ?? null,
     motionPair: w.motionPair ?? null,
+    // For a lexicalised participle (закры́тый, при́нятый), the verb it is a
+    // participle of — shown beside the headword like the aspect pair, so the
+    // learner meets it as one productive pattern rather than as a stray word.
+    participleOf: w.participleOf ?? null,
     // Government frames (звони́ть + dative, зави́сеть от + genitive) — shown
     // beside the headword so the frame is learned with the word rather than
     // only in the dedicated drill.
@@ -474,6 +507,13 @@ export function shapeContextPhrases(words) {
           // Short-form (predicate) adjective agreement: «degree: short» + gender,
           // no case (закры́т, ра́да). Graded by gender/number against `short`.
           degree: a.degree ?? null,
+          // Which non-finite verb form the slot is, for a participle or gerund
+          // (`act_pres`, `pass_short`, `gerund`, … — see participles.js
+          // FORM_SLOTS). This is the dimension that makes a stored participle
+          // reachable: without it the form is inert data, visible only as a
+          // phrase hint. A long participle also carries case/gender/animate,
+          // the short passive carries gender only, and the gerund is invariable.
+          form: a.form ?? null,
           // Third-person pronoun with the post-preposition н- prefix (у него́,
           // с ни́ми): the answer form is «н» + the stored oblique form.
           prep: a.prep ?? null,
