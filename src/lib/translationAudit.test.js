@@ -10,6 +10,8 @@ import {
   tierOf,
   priorityScore,
   tierCounts,
+  verbRendering,
+  aspectCollisions,
 } from './translationAudit.js'
 import { buildFormIndex } from './phraseHint.js'
 import { buildWords } from './vocabBuild.js'
@@ -301,6 +303,85 @@ describe('auditPhrases', () => {
   it('handles an empty bank', () => {
     expect(auditPhrases([], words)).toEqual([])
     expect(auditPhrases(undefined, words)).toEqual([])
+  })
+})
+
+describe('verbRendering', () => {
+  const hear = { meaning: 'to hear' }
+
+  it('returns the auxiliary chain plus the verb as written', () => {
+    expect(verbRendering('I would hear the bell.', hear)).toBe('would hear')
+    expect(verbRendering('I would have heard the bell.', hear)).toBe('would have heard')
+  })
+
+  it('keeps the main verb unstemmed, so tense still separates', () => {
+    expect(verbRendering('She thanked him.', { meaning: 'to thank' })).toBe('thanked')
+    expect(verbRendering('She thanks him.', { meaning: 'to thank' })).not.toBe('thanked')
+  })
+
+  it('returns null when the English contains no form of the verb', () => {
+    expect(verbRendering('She left the room.', hear)).toBeNull()
+    expect(verbRendering('anything', {})).toBeNull()
+  })
+})
+
+describe('aspectCollisions', () => {
+  const pair = buildWords([
+    {
+      pos: 'verb',
+      doc: {
+        words: {
+          'слышать=to hear': {
+            cefr_level: 'A2', aspect: 'impf', pair: 'услышать=to hear',
+            en_gb: { standard: 'to hear' },
+          },
+          'услышать=to hear': {
+            cefr_level: 'A2', aspect: 'pf', pair: 'слышать=to hear',
+            en_gb: { standard: 'to hear' },
+          },
+        },
+      },
+    },
+  ])
+
+  const phrase = (source, ru, en) => ({ source, ru, en })
+
+  it('reports a pair whose two members read the same', () => {
+    const found = aspectCollisions(pair, [
+      phrase('слышать=to hear', 'Без шу́ма я бы слы́шала ка́ждое сло́во.', 'Without the noise I would hear every word.'),
+      phrase('услышать=to hear', 'Будь му́зыка поти́ше, я услы́шала бы звоно́к.', 'I would hear the bell if the music were quieter.'),
+    ])
+    expect(found).toHaveLength(1)
+    expect(found[0].rendering).toBe('would hear')
+    expect(found[0].severity).toBe('frame')
+  })
+
+  it('marks an identical English sentence as the worse severity', () => {
+    const found = aspectCollisions(pair, [
+      phrase('слышать=to hear', 'Она́ слы́шала его́.', 'She heard him.'),
+      phrase('услышать=to hear', 'Она́ услы́шала его́.', 'She heard him.'),
+    ])
+    expect(found[0].severity).toBe('identical')
+  })
+
+  it('reports nothing when the English distinguishes the aspects', () => {
+    expect(aspectCollisions(pair, [
+      phrase('слышать=to hear', 'Без шу́ма я бы слы́шала ка́ждое сло́во.', 'Without the noise I would hear every word.'),
+      phrase('услышать=to hear', 'Будь му́зыка поти́ше, я услы́шала бы звоно́к.', 'I would have heard the bell if the music had been quieter.'),
+    ])).toEqual([])
+  })
+
+  it('examines an unordered pair only once', () => {
+    const found = aspectCollisions(pair, [
+      phrase('слышать=to hear', 'Она́ слы́шала его́.', 'She heard him.'),
+      phrase('услышать=to hear', 'Она́ услы́шала его́.', 'She heard him.'),
+    ])
+    expect(found).toHaveLength(1)
+  })
+
+  it('handles an empty corpus', () => {
+    expect(aspectCollisions([], [])).toEqual([])
+    expect(aspectCollisions(undefined, undefined)).toEqual([])
   })
 })
 

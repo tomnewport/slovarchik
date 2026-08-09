@@ -43,6 +43,7 @@ words. What is left over on each side is the signal.
 | **Ungloss-able token** — no dictionary entry at all | a hole in the dictionary, not a translation defect |
 | **Clause markers** — comma, dash, colon in the Russian | subordinate clauses, where restructuring hides |
 | **Length ratio** — English words ÷ Russian words | padding, explanatory translation |
+| **Aspect collision** — an aspect pair whose two members read the same in English | a contrast-drill question with two right answers |
 
 Two refinements matter more than they look, because without them the report is
 swamped by predictable Russian↔English mismatches rather than real defects:
@@ -95,6 +96,37 @@ For each sentence, in this order:
    contorting `en_gb`.
 5. **Does the rendering match the word's own gloss?** If the sentence needs a
    sense the headword's gloss doesn't cover, the gloss may be what needs fixing.
+6. **If the word is half of an aspect pair, does the English commit to that
+   aspect?** See below — this one is invisible when reading a sentence alone.
+
+### Aspect collisions
+
+A phrase in a packet may carry an `aspectCollisions` block. It means this
+sentence and a sentence of the verb's **aspect partner** are rendered by the
+same English, and it is the one defect in this review that cannot be seen by
+reading a sentence on its own — both halves look fine individually.
+
+It matters because `buildContrastDrill` (phraseContext.js) draws sentences from
+*both* members of a pair, shows the learner the English, and asks which verb it
+is. When «Она́ благодари́ла учи́теля.» and «Она́ поблагодари́ла учи́теля.» are both
+"She thanked the teacher.", that question has two right answers and the drill
+marks one of them wrong. #576 was exactly this, reported from a screenshot of
+the drill: «Будь му́зыка поти́ше, я услы́шала бы звоно́к.» glossed "I would hear
+the bell…" — a present counterfactual, which is what the *imperfective* says —
+against the partner's own "Without the noise I would hear every word."
+
+Russian doesn't distinguish "would" from "would have" (бы + past covers both,
+per `verb-conditional` in grammar-rules.yml), so the English is free to pick the
+reading the aspect actually carries. Fixing the perfective side to "I would
+**have heard** the bell if the music **had been** quieter" forces услы́шать and
+leaves the imperfective as the only "would hear".
+
+Two severities are reported. `identical` means the whole English sentence
+matches — unanswerable, always a defect. `frame` means only the verb's
+auxiliary-plus-form matches ("would hear"); the rest of the sentence may still
+carry a cue, so read it and judge. **Fix the side whose English is wrong, not
+whichever is convenient** — usually the perfective, which should read as a
+single completed event.
 
 ### Defect taxonomy
 
@@ -187,6 +219,8 @@ its `inflect.person` in step.
 ```bash
 npm run audit:translations                                   # tier counts + signal breakdown
 node scripts/audit-translations.mjs --sample 20 --tier high  # eyeball the worst
+node scripts/audit-translations.mjs --collisions             # aspect pairs that read alike
+node scripts/audit-translations.mjs --collisions --all       # …incl. verb-frame-only matches
 node scripts/audit-translations.mjs --shard                  # cut work packets
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl          # dry run
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl --apply  # write

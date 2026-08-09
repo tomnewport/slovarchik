@@ -29,7 +29,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { load as yamlLoad } from 'js-yaml'
 import { buildWords, shapePhrases, POS_BY_FILE } from '../src/lib/vocabBuild.js'
-import { auditPhrases, tierCounts } from '../src/lib/translationAudit.js'
+import { auditPhrases, tierCounts, aspectCollisions } from '../src/lib/translationAudit.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const vocabDir = join(__dirname, '..', 'public', 'vocab')
@@ -82,7 +82,25 @@ const wordByKey = new Map(words.map((w) => [w.key, w]))
 
 if (flag('report') || args.length === 0) report()
 if (flag('sample')) sample()
+if (flag('collisions')) collisions()
 if (flag('shard')) shard()
+
+/**
+ * Aspect/motion pairs whose two members are rendered by the same English. The
+ * contrast drill shows that English and asks which verb it is, so a collision
+ * is a question with two right answers (#576).
+ */
+function collisions() {
+  const found = aspectCollisions(words, phrases)
+  const identical = found.filter((c) => c.severity === 'identical')
+  console.log(`\naspect-pair collisions: ${identical.length} identical English, ${found.length - identical.length} matching verb frame only`)
+  const show = flag('all') ? found : identical
+  for (const c of show) {
+    console.log(`\n  ${c.pair}  — both read "${c.rendering}"`)
+    console.log(`    ${c.a.key}\n      ${c.a.ru}\n      ${c.a.en}`)
+    console.log(`    ${c.b.key}\n      ${c.b.ru}\n      ${c.b.en}`)
+  }
+}
 
 function report() {
   const counts = tierCounts(rows)
@@ -145,9 +163,29 @@ function shard() {
   while (picked.size < Math.min(cleanSample, clean.length)) {
     picked.add(Math.floor(rand() * clean.length))
   }
+  // An aspect collision is a property of a *pair* of sentences, so it can't be
+  // derived from the phrase a reviewer is looking at. Index it by sentence and
+  // carry it into the packet, or the reviewer has no way to see it.
+  const collisionsByRu = new Map()
+  for (const c of aspectCollisions(words, phrases)) {
+    for (const [side, other] of [[c.a, c.b], [c.b, c.a]]) {
+      if (!collisionsByRu.has(side.ru)) collisionsByRu.set(side.ru, [])
+      collisionsByRu.get(side.ru).push({
+        severity: c.severity,
+        rendering: c.rendering,
+        partnerKey: other.key,
+        partnerRu: other.ru,
+        partnerEn: other.en,
+      })
+    }
+  }
+
   const inScope = new Set()
   for (const r of rows) if (r.tier !== 'clean') inScope.add(r.source)
   for (const i of picked) inScope.add(clean[i].source)
+  // A colliding sentence needs reviewing whatever its own signals say — the
+  // defect is in the pair, and neither half looks wrong on its own.
+  for (const r of rows) if (collisionsByRu.has(r.ru)) inScope.add(r.source)
 
   // Group every phrase of an in-scope word — including its clean ones, which
   // are the baseline a reviewer judges the flagged siblings against.
@@ -201,6 +239,7 @@ function shard() {
           clauseMarkers: r.commas + (r.dash ? 1 : 0) + (r.colon ? 1 : 0),
           lengthRatio: Number(r.lengthRatio.toFixed(2)),
         },
+        ...(collisionsByRu.has(r.ru) ? { aspectCollisions: collisionsByRu.get(r.ru) } : {}),
       })),
     })
     count += group.length

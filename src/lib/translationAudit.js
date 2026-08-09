@@ -393,6 +393,118 @@ export function auditPhrases(phrases, words) {
     .sort((a, b) => b.priority - a.priority || a.ru.localeCompare(b.ru, 'ru'))
 }
 
+/**
+ * English auxiliaries and modals, in the order they can stack. Together with the
+ * main verb they carry the whole tense/aspect/modality frame, which is what a
+ * learner reads to tell a Russian aspect pair apart.
+ */
+const EN_AUXILIARIES = new Set([
+  'will', 'would', 'shall', 'should', 'can', 'could', 'may', 'might', 'must',
+  'have', 'has', 'had', 'be', 'been', 'being', 'is', 'are', 'am', 'was', 'were',
+  'do', 'does', 'did', 'used', 'going', 'about',
+])
+
+/**
+ * How a phrase's English renders one particular verb: the auxiliary chain plus
+ * the stem of the word that translates the verb itself — "would hear",
+ * "would have hear(d)", "is read(ing)".
+ *
+ * Returns null when the English contains nothing recognisable as that verb, in
+ * which case the two sides can't be compared and nothing is claimed.
+ *
+ * @param {string} en    the English translation
+ * @param {object} word  the verb's normalised record (for its gloss)
+ * @returns {string|null}
+ */
+export function verbRendering(en, word) {
+  const candidates = glossHeadWords(word?.meaning ?? word?.en ?? '')
+  if (!candidates.length) return null
+  const pool = englishWords(en)
+  const at = pool.findIndex((w) => candidates.some((c) => alignsWith(c, w)))
+  if (at === -1) return null
+  // The main verb keeps its SURFACE form. Stemming it would fold "thanked" into
+  // "thank" and erase the tense, which is often the whole cue distinguishing a
+  // perfective sentence from its imperfective partner.
+  const auxiliaries = pool.slice(0, at).filter((w) => EN_AUXILIARIES.has(w))
+  return [...auxiliaries, pool[at]].join(' ')
+}
+
+/**
+ * Sentence pairs across an aspect (or motion) pair whose English renders both
+ * members identically.
+ *
+ * The aspect-contrast drill draws sentences from both members of a pair and
+ * asks the learner which verb each one is — with the English as the cue. When a
+ * sentence of «слы́шать» and a sentence of «услы́шать» both read "I would
+ * hear…", that question has two right answers and the drill marks one wrong
+ * (#576). The Russian is fine in both; it is the English that has thrown the
+ * distinction away, so it is a translation defect and belongs in this review.
+ *
+ * Only exact frame matches are reported. A near-miss ("would hear" vs "would be
+ * hearing") is a real distinction a learner can act on, and flagging those would
+ * bury the genuine collisions.
+ *
+ * @param {object[]} words     normalised word records (from buildWords)
+ * @param {object[]} phrases   from shapePhrases, carrying `source`
+ * @returns {Array<{pair: string, rendering: string, a: object, b: object}>}
+ */
+/** Compare two English sentences ignoring case, punctuation and spacing. */
+const normaliseEnglish = (en) => englishWords(en).join(' ')
+
+export function aspectCollisions(words, phrases) {
+  const byKey = new Map((words ?? []).map((w) => [w.key, w]))
+  const bySource = new Map()
+  for (const p of phrases ?? []) {
+    if (!bySource.has(p.source)) bySource.set(p.source, [])
+    bySource.get(p.source).push(p)
+  }
+
+  const out = []
+  const seen = new Set()
+  for (const word of words ?? []) {
+    // Aspect pairs only. A determinate/indeterminate motion pair (бежа́ть /
+    // бе́гать) has no distinct English verb form at all — both are "running" —
+    // so the cue is necessarily the rest of the sentence ("to the river" vs "in
+    // the yard"), and a matching verb frame there proves nothing.
+    for (const link of [word.aspectPair]) {
+      const partner = link && byKey.get(link.key)
+      if (!partner) continue
+      // Each unordered pair is examined once.
+      const pairId = [word.key, partner.key].sort().join(' / ')
+      if (seen.has(pairId)) continue
+      seen.add(pairId)
+
+      const mine = (bySource.get(word.key) ?? [])
+        .map((p) => ({ phrase: p, rendering: verbRendering(p.en, word) }))
+        .filter((r) => r.rendering)
+      const theirs = (bySource.get(partner.key) ?? [])
+        .map((p) => ({ phrase: p, rendering: verbRendering(p.en, partner) }))
+        .filter((r) => r.rendering)
+
+      for (const a of mine) {
+        for (const b of theirs) {
+          if (a.rendering !== b.rendering) continue
+          // Two severities. When the whole English sentence matches, the drill
+          // question is *unanswerable* — the learner is shown one string and
+          // asked which of two verbs it is. When only the verb frame matches,
+          // the rest of the sentence may still carry a usable cue, so it is a
+          // read-and-judge finding rather than an outright bug.
+          const identical = normaliseEnglish(a.phrase.en) === normaliseEnglish(b.phrase.en)
+          out.push({
+            pair: pairId,
+            rendering: a.rendering,
+            severity: identical ? 'identical' : 'frame',
+            a: { key: word.key, ru: a.phrase.ru, en: a.phrase.en },
+            b: { key: partner.key, ru: b.phrase.ru, en: b.phrase.en },
+          })
+        }
+      }
+    }
+  }
+  // Unanswerable questions first.
+  return out.sort((a, b) => (a.severity === 'identical' ? 0 : 1) - (b.severity === 'identical' ? 0 : 1))
+}
+
 /** Tier counts, for a report header. */
 export function tierCounts(rows) {
   const counts = { high: 0, medium: 0, clean: 0 }
