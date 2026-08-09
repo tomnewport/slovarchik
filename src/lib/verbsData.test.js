@@ -198,17 +198,32 @@ describe('participles and gerunds', () => {
   })
 
   it('stores only forms built on the verb\'s own stem', () => {
-    // Cheap, high-signal guard against a pasted wrong lexeme: every non-finite
-    // form is built off the verb's own stem, so it shares a prefix with the
-    // infinitive. Four letters clears the prefixed pairs (про-чита́в vs чита́я)
-    // without being long enough to trip a stem mutation in the ending.
+    // Cheap, high-signal guard against a pasted wrong lexeme. Every non-finite
+    // form is built off one of the verb's own stems — but NOT always the
+    // infinitive's: the present participles come off the 3rd-plural, which
+    // mutates (пла́кать → пла́чут → пла́чущий, писа́ть → пи́шут → пи́шущий), and the
+    // past ones off the past stem. So compare against all of them and require a
+    // four-character agreement with at least one. Four clears the prefixed pairs
+    // (про-чита́в vs чита́я) without tripping a stem mutation.
+    const lcp = (a, b) => {
+      let i = 0
+      while (i < a.length && i < b.length && a[i] === b[i]) i++
+      return i
+    }
     for (const [key, w] of withNonFinite) {
-      const infinitive = stripStress(w.accented ?? key.split('=')[0])
-      const stem = infinitive.replace(/(ся|сь)$/, '').slice(0, 4)
+      const c = w.conjugation ?? {}
+      const finite = c.present ?? c.future ?? {}
+      const bases = [
+        stripStress(w.accented ?? key.split('=')[0]).replace(/(ся|сь)$/, ''),
+        ...[finite['3pl'], finite['1pl'], c.past_m].filter(Boolean).map(stripStress),
+      ]
       for (const [slot, form] of nonFiniteForms(w)) {
-        expect(stripStress(form), `${key}.${slot}: "${form}" is not built on «${stem}»`).toContain(
-          stem,
-        )
+        const bare = stripStress(form)
+        const shared = Math.max(...bases.map((b) => lcp(bare, b)))
+        expect(
+          shared,
+          `${key}.${slot}: "${form}" shares no stem with ${bases.join(' / ')}`,
+        ).toBeGreaterThanOrEqual(Math.min(4, bare.length))
       }
     }
   })

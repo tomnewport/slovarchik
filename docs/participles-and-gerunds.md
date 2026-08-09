@@ -1,11 +1,14 @@
 # Participles and gerunds — design note
 
-> Status: **stage 1 landed** (#564). The four decisions below are settled and
+> Status: **stages 1–2 landed** (#564). The four decisions below are settled and
 > the machinery they describe is in the code: the storage blocks, the shared
 > `adjectiveDeclension.js`, the two paradigm variants, the `form:` annotation
-> dimension, the seven grammar rules and every integrity guard. Stages 2–4 are
-> data, and the corpus stores **no** participle or gerund yet — the guards run
-> vacuously today and start biting the moment the first one lands.
+> dimension, the seven grammar rules and every integrity guard. Stage 2 then
+> closed the leak — 17 verbs now store 20 non-finite forms, each with the
+> sentence that teaches it, and three lexicalised adjectives link back to their
+> verb. Stages 3–4 (breadth across the transitive perfectives and the A1–B1
+> imperfective core) are still to come. See the correction under Decision 4:
+> retiring the glossary stubs is a real step, not bookkeeping.
 
 ## The hole
 
@@ -239,6 +242,18 @@ Rationale, per word:
   сле́дующий are ordinary adjectives with no living verb behind them for a
   learner, бы́вший means "ex-". These get **no** `from_verb` link — the same
   treatment благодаря́ gets in `prepositions.yml`.
+
+> **Stage 2 outcome.** Three of the five linked: откры́тый, закры́тый and
+> при́нятый. вооружи́ть is not in the corpus, so вооружённый has nothing to link
+> to. заключённый was held back deliberately: the corpus verb is keyed
+> `заключи́ть=to conclude`, and while заключённый "prisoner" is the same lexeme,
+> a card reading "past passive participle of заключи́ть (to conclude)" teaches a
+> learner the wrong thing. It wants either a second sense on the verb or a
+> `заключи́ть=to imprison` entry — data work, not a link.
+>
+> The leak list also names eight verbs the corpus simply doesn't have (тону́ть,
+> мороси́ть, опа́сть, повреди́ть, перепо́лнить, затаи́ть, попроща́ться, вооружи́ть).
+> Their glossary stubs stay until those verbs are taught.
 - The other five (откры́тый, закры́тый, при́нятый, вооружённый, заключённый) are
   transparently participles of verbs already in the corpus, and the link is the
   thing the learner is missing. The vocab word card already renders an aspect
@@ -253,9 +268,34 @@ same test; закры́т/закры́та appearing twice with different stress
 bug this guard is for.
 
 The ~24 glossary rows in group 2 need no decision here: once the verb stores the
-form, `buildFormIndex` resolves the surface token to the verb (pass 2 already
-prefers a real lemma over a gloss stub), and the stubs can be retired by the
-existing `promote-glossary` cleanup as a follow-up.
+form, it becomes hintable from the verb and the stubs can be retired as a
+follow-up.
+
+> **Correction (stage 2).** The sentence above originally read "…`buildFormIndex`
+> resolves the surface token to the verb (pass 2 already prefers a real lemma
+> over a gloss stub)". That is wrong, and stage 2 proved it: a gloss-only stub is
+> keyed on its *own headword*, so it claims the form in **pass 1** — the
+> dictionary-form pass — and pass 2 does not stack onto it. While the stub
+> exists, tapping «пла́чущего» still resolves to the stub, not to пла́кать.
+>
+> So retiring the stubs is not optional bookkeeping; it is the step that actually
+> closes the leak for the learner. It also turns out to need per-entry judgement
+> rather than a bulk pass, because several stubs carry a **nominalised** gloss
+> that the verb's infinitive would lose: заде́ржанный "detainee", подозрева́емый
+> "suspect", кома́ндующий "commander", пропа́вшего "the missing person",
+> укра́денное "stolen goods", при́нято "it is customary" (a distinct sense
+> altogether). Two ways forward, for the follow-up to pick between:
+>
+> 1. retire only the stubs whose gloss is just the verb's own meaning
+>    (пла́чущего, сло́манный, поте́рянный, поду́мав, услы́шав, уви́дев, су́дя), and
+>    keep the nominalised ones; or
+> 2. let a real lemma's inflected form **stack as an extra sense** onto a
+>    gloss-only entry, the way #568/#571 stack homograph senses — the hint then
+>    reads "detainee / to detain" and nothing is lost.
+>
+> Option 2 is the better end state and is a small change to `buildIndex` pass 2,
+> but it alters hint resolution corpus-wide, so it wants its own issue rather
+> than riding along with a data stage.
 
 ## Data integrity
 
@@ -302,8 +342,8 @@ here too.
 
 | stage | scope | new forms |
 | --- | --- | --- |
-| 1 | Machinery: blocks + `adjectiveDeclension.js` + paradigm variants + `form:` in `shapeContextPhrases`/`phraseContext` + the seven rules + tests + CONTRIBUTING | ~0 |
-| 2 | Close the leak: the ~24 glossary participles/gerunds and the five linkable adjectives get their verb blocks and one annotated phrase each | ~35 verbs |
+| 1 ✅ | Machinery: blocks + `adjectiveDeclension.js` + paradigm variants + `form:` in `shapeContextPhrases`/`phraseContext` + the seven rules + tests + CONTRIBUTING | ~0 |
+| 2 ✅ | Close the leak: the glossary participles/gerunds and the linkable adjectives get their verb blocks and one annotated phrase each | 17 verbs, 20 forms |
 | 3 | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | ~200 verbs |
 | 4 | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | ~120 verbs |
 
