@@ -205,6 +205,9 @@ export function glossHeadWords(gloss) {
  */
 export function alignPhrase(ru, en, index) {
   const tokens = phraseHintTokens(ru, index).filter((t) => normToken(t.text))
+  // A participle or gerund forces an English subordinate clause whose
+  // conjunction has no Russian token behind it — see PARTICIPLE_PATTERNS.
+  const nonFinite = hasNonFinite(tokens.map((t) => t.text), ru)
   const pool = englishWords(en).filter((w) => !EN_GRAMMATICAL.has(w))
   const consumed = new Set()
   const glossMisses = []
@@ -228,7 +231,12 @@ export function alignPhrase(ru, en, index) {
     else consumed.add(at)
   }
 
-  const addedEnglish = pool.filter((_, i) => !consumed.has(i))
+  // Excuse the forced subordinator only after alignment, not before: «что»
+  // glosses as "that" and must keep the chance to claim it. Only a subordinator
+  // still unclaimed at the end is the one English grammar added by itself.
+  const addedEnglish = pool.filter(
+    (word, i) => !consumed.has(i) && !(nonFinite && SUBORDINATORS.has(word)),
+  )
   const aligned = content - glossMisses.length - unglossed.length
   return {
     content,
@@ -238,6 +246,63 @@ export function alignPhrase(ru, en, index) {
     literalness: content ? aligned / content : 1,
   }
 }
+
+/**
+ * Russian participle and gerund morphology.
+ *
+ * These constructions are single words that English can only render as a
+ * subordinate clause — «Люби́вший её челове́к уе́хал» is "The man **who** loved
+ * her has left", «Де́лая уро́ки…» is "**While** doing his homework…". The
+ * subordinator is forced by English grammar and has no Russian token behind it,
+ * so without this the whole class scores as over-translation: measured against
+ * the participle sentences added in #564, 77% tripped a signal versus 38% for
+ * the corpus at large, all of them correctly translated.
+ *
+ * The patterns are deliberately tight. A false positive only licenses a "that"
+ * that would otherwise have been flagged; a false negative buries a real defect
+ * under a structural artefact. Short-form passives (при́нят, решена́) are left
+ * out entirely — they are indistinguishable from ordinary short adjectives and
+ * from он/она́/они́ by suffix alone, and they render with auxiliaries that are
+ * already treated as grammatical.
+ */
+const PARTICIPLE_PATTERNS = [
+  // active present (-щий) and active past (-вший), in any adjectival cell
+  /(щ|вш)(ий|ая|ее|ие|его|ей|ему|им|их|ими|ую|ем|юю)$/,
+  // long-form passive past: -анный / -янный / -енный / -ённый and -тый
+  /(анн|янн|енн|ённ|ыт|ят)(ый|ая|ое|ые|ого|ой|ых|ым|ыми|ую|ом)$/,
+  // perfective gerunds: сде́лав, поду́мав, верну́вшись
+  /вши(сь)?$/,
+  /[аяеои]в$/,
+  /ясь$/,
+]
+
+/**
+ * Does the phrase contain a participle or gerund?
+ *
+ * The imperfective gerund (де́лая, игра́я) ends in a bare -я, which is also every
+ * feminine nominative singular in the language, so suffix matching alone cannot
+ * see it. It is recognised only in its canonical position — opening a
+ * comma-delimited adverbial clause — which is where the corpus puts it.
+ */
+function hasNonFinite(tokens, ru) {
+  return tokens.some((token, i) => {
+    const form = normToken(token)
+    if (!form) return false
+    if (PARTICIPLE_PATTERNS.some((re) => re.test(form))) return true
+    return i === 0 && /я$/.test(form) && /,/.test(ru)
+  })
+}
+
+/**
+ * English subordinators a participle or gerund forces into the translation.
+ * Licensed only when the Russian actually contains one — «кото́рый» carries its
+ * own gloss and aligns on its own, so a relative pronoun in an ordinary sentence
+ * still counts as added.
+ */
+const SUBORDINATORS = new Set([
+  'who', 'whom', 'whose', 'which', 'that',
+  'while', 'when', 'after', 'having', 'being',
+])
 
 /** Clause-structure markers on the Russian side, a proxy for restructuring. */
 function clauseMarkers(ru) {

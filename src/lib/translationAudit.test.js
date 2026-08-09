@@ -173,6 +173,34 @@ describe('alignPhrase', () => {
     expect(alignPhrase('', '', index).literalness).toBe(1)
   })
 
+  it('excuses the relative pronoun a participle forces into the English', () => {
+    // «Люби́вший» is one word; English can only say it with a relative clause.
+    const r = alignPhrase('Люби́вший ма́льчик чита́ет.', 'The boy who loved reads.', index)
+    expect(r.addedEnglish).not.toContain('who')
+  })
+
+  it('excuses the conjunction an adverbial gerund forces', () => {
+    const r = alignPhrase('Чита́я, ма́льчик молча́л.', 'While reading, the boy was silent.', index)
+    expect(r.addedEnglish).not.toContain('while')
+  })
+
+  it('still counts a relative pronoun when no participle licenses it', () => {
+    const r = alignPhrase('Ма́льчик чита́ет.', 'The boy who reads.', index)
+    expect(r.addedEnglish).toContain('who')
+  })
+
+  it('does not treat an ordinary adjective in -нный as a participle', () => {
+    // дли́нный is an adjective, not a participle, so "that" stays flagged.
+    const r = alignPhrase('Дли́нный ма́льчик чита́ет.', 'The long boy that reads.', index)
+    expect(r.addedEnglish).toContain('that')
+  })
+
+  it('lets a Russian token claim its subordinator before it is excused', () => {
+    // «что» glosses as "that"; the participle must not steal its target.
+    const r = alignPhrase('Чита́вший ма́льчик знал, что.', 'The boy who read knew that.', index)
+    expect(r.addedEnglish).not.toContain('that')
+  })
+
   it('consumes each English word at most once', () => {
     // Two Russian tokens glossing to "book" cannot both align to one "book".
     const r = alignPhrase('кни́га кни́га', 'a book', index)
