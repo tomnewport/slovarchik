@@ -5,9 +5,10 @@
 > forms on 75 verbs**, every one reachable by a drill, and 65 verbs carry a
 > drillable variant table — 51 `#passive-short` and 14 `#nonfinite`. What is left
 > is breadth (the B1 tail of each stage), not machinery, plus the two named
-> follow-ups: retiring the glossary stubs (see the correction under Decision 4 —
-> it is a real step, not bookkeeping) and wiring variant paradigms into the
-> mastery session.
+> follow-ups, both now filed: the hint index resolving a stored form to its verb
+> rather than a gloss stub (**#574**, see the correction under Decision 4 — it is
+> a real step, not bookkeeping) and wiring variant paradigms into the mastery
+> session (**#575**).
 
 ## The hole
 
@@ -143,7 +144,9 @@ variant paradigm does *not* reach the mastery session — `exerciseBuild.buildIn
 builds from `buildParadigm(record)` (`exerciseBuild.js:418`), which returns only
 the primary table. Wiring variants into the session pool is a named follow-up,
 shared with the adjective short forms, and should not be smuggled into this
-work.
+work — **filed as #575**, which counts 206 stranded tables (141 adjective
+`#short`, 51 `#passive-short`, 14 `#nonfinite`) and sets out the progress-model
+question that has to be answered first.
 
 ### b. Meaning and use → context phrases, the main vehicle
 
@@ -294,7 +297,9 @@ follow-up.
 >
 > Option 2 is the better end state and is a small change to `buildIndex` pass 2,
 > but it alters hint resolution corpus-wide, so it wants its own issue rather
-> than riding along with a data stage.
+> than riding along with a data stage. **Filed as #574**, which also records the
+> full count: 94 forms are shadowed this way, most of them imperatives that
+> predate this work entirely.
 
 ## Data integrity
 
