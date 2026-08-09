@@ -201,8 +201,29 @@ sweep of this size reviewable after the fact.
 A pass that "improves" 3,000 sentences is only trustworthy if it can be checked:
 
 1. `npm test` and `npm run lint` — the shape guards.
-2. `npm run audit:translations` — mean literalness should **rise**; the `high`
-   tier should **shrink**. A fall means the pass made things freer, not tighter.
-3. Spot-read the diff. It is minimal by construction, so this is feasible.
+2. Every proposal round-trips: the applier reports **0 unmatched**. A proposal
+   the applier cannot place is a silently dropped review, so this number
+   matters more than any quality metric.
+3. Spot-read the diff. It is minimal by construction, so this is feasible, and
+   it is the only check that actually reads the new English.
 4. The `keep` rate on the sampled `clean` phrases estimates the heuristics'
    false-negative rate, and says whether a full sweep is worth running.
+
+**Do not use mean literalness as a success metric.** It was the obvious choice
+and the pilot showed it is wrong, in two independent ways:
+
+- *Scale.* A packet changes ~5% of its own phrases, which is ~0.05% of the
+  corpus. The figure does not move at three decimal places, so it can neither
+  confirm nor refute a good pass.
+- *Direction.* A **correct** fix often makes the score worse. "We are all
+  divine creatures" → "We are all God's creatures" is right — «бо́жий» is
+  *God's* — but the headword gloss says "divine", so the corrected sentence now
+  fails to align where the wrong one aligned. Where the gloss is the defective
+  half, fixing the sentence necessarily lowers literalness.
+
+That second case is the review's most useful by-product: a cluster of
+`gloss-mismatch` findings is the corpus telling you which **headword glosses**
+are too narrow (`бо́жий` "divine", `ве́рный` "faithful" missing "accurate",
+`вре́дный` "harmful" missing "nasty", `бело́к` "protein" missing "egg white").
+Those are `flag`s, not edits — the fix belongs in the word's `en_gb`, not in
+the sentence, and it should be made deliberately rather than as a side effect.

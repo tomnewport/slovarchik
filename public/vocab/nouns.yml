@@ -1699,12 +1699,18 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы встре́тили друзе́й в аэропорту́.
         en_gb: We met our friends at the airport.
+        en_alt:
+          - We met friends at the airport.
         inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: До аэропо́рта далеко́ е́хать.
         en_gb: It is a long drive to the airport.
+        en_alt:
+          - It is far to drive to the airport.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В междунаро́дных аэропо́ртах рабо́тают кру́глые су́тки.
         en_gb: International airports operate around the clock.
+        en_alt:
+          - In international airports they work around the clock.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: аэропо́рт
@@ -1779,9 +1785,11 @@ words:
     usage:
       - ru: Ба́бка сиде́ла на ла́вочке.
         en_gb: The old woman sat on the bench.
+        en_alt:
+          - The old woman was sitting on the bench.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я помога́ю свое́й ба́бке.
-        en_gb: I help my old grandmother.
+        en_gb: I help my grandma.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У ба́бки бы́ло мно́го вну́ков.
         en_gb: The old woman had many grandchildren.
@@ -1835,6 +1843,8 @@ words:
     usage:
       - ru: Я помога́ю ба́бушке по до́му.
         en_gb: I help grandma around the house.
+        en_alt:
+          - I help my grandmother around the house.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Ба́бушка печёт вку́сные пироги́.
         en_gb: Grandmother bakes tasty pies.
@@ -1849,6 +1859,8 @@ words:
           - I live in the village at my grandmother's
       - ru: На пра́здник вну́ки принесли́ ба́бушкам буке́ты.
         en_gb: For the holiday the grandchildren brought their grandmothers bouquets.
+        en_alt:
+          - For the holiday the grandchildren brought bouquets to their grandmothers.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Внук да́рит ба́бушке цветы́.
         en_gb: The grandson gives his grandmother flowers.
@@ -1883,6 +1895,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я оста́вила бага́ж в ка́мере хране́ния.
         en_gb: I left my luggage in the storage room.
+        en_alt:
+          - I left my luggage at the left-luggage office.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В багаже́ лежа́ли тёплые ве́щи.
         en_gb: There were warm clothes in the luggage.
@@ -2233,6 +2247,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он взял креди́т в ба́нке.
         en_gb: He took a loan from the bank.
+        en_alt:
+          - He took out a loan at the bank.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: банк
@@ -2294,6 +2310,8 @@ words:
     usage:
       - ru: Я сняла́ де́ньги в банкома́те.
         en_gb: I took money out of the ATM.
+        en_alt:
+          - I withdrew money from the ATM.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Банкома́т не вы́дал де́ньги.
         en_gb: The ATM did not dispense money.
@@ -2363,6 +2381,8 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Бар нахо́дится ря́дом с оте́лем.
         en_gb: The bar is next to the hotel.
+        en_alt:
+          - The bar is located next to the hotel.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он заказа́л пи́во в ба́ре.
         en_gb: He ordered a beer at the bar.
@@ -2645,7 +2665,7 @@ words:
       standard: battalion (a large military unit)
     usage:
       - ru: Батальо́н пошёл в ата́ку.
-        en_gb: The battalion went into attack.
+        en_gb: The battalion went on the attack.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Команди́р постро́ил весь батальо́н.
         en_gb: The commander lined up the whole battalion.
@@ -2678,6 +2698,8 @@ words:
     usage:
       - ru: Батаре́я в телефо́не се́ла.
         en_gb: The battery in the phone has died.
+        en_alt:
+          - The battery in the phone has gone flat.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я купи́ла но́вую батаре́ю для часо́в.
         en_gb: I bought a new battery for the watch.
@@ -2713,6 +2735,8 @@ words:
     usage:
       - ru: С ба́шни видна́ вся пло́щадь.
         en_gb: From the tower you can see the whole square.
+        en_alt:
+          - From the tower the whole square is visible.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Высо́кая ба́шня видна́ издалека́.
         en_gb: The tall tower is visible from afar.
@@ -2908,6 +2932,8 @@ words:
     usage:
       - ru: Безопа́сность дете́й важне́е всего́.
         en_gb: Children's safety is the most important thing.
+        en_alt:
+          - Children's safety is more important than anything.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мы ду́маем о безопа́сности гра́ждан.
         en_gb: We think about the safety of citizens.
@@ -2964,7 +2990,7 @@ words:
         en_gb: Chicken meat is rich in protein.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Врач посове́товал есть бо́льше белко́в.
-        en_gb: The doctor advised eating more proteins.
+        en_gb: The doctor advised eating more protein.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Отдели́ бело́к от желтка́.
         en_gb: Separate the egg white from the yolk.
@@ -3051,7 +3077,7 @@ words:
       standard: shore (the land along the edge of a body of water)
     usage:
       - ru: Мы сиде́ли на берегу́ реки́.
-        en_gb: We sat on the shore of the river.
+        en_gb: We sat on the bank of the river.
         inflect: { token: 4, case: loc, number: sg, rule: noun-locative }
       - ru: Ло́дка подплыла́ к бе́регу.
         en_gb: The boat sailed up to the shore.
@@ -3064,6 +3090,8 @@ words:
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: На высо́ких берега́х реки́ стоя́т ста́рые це́ркви.
         en_gb: On the high banks of the river stand old churches.
+        en_alt:
+          - Old churches stand on the high banks of the river.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: бе́рег
@@ -3168,6 +3196,8 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я не находи́ла себе́ ме́ста от беспоко́йства.
         en_gb: I could not settle down out of anxiety.
+        en_alt:
+          - I was beside myself with anxiety.
         inflect: { token: 7, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Прости́те за беспоко́йство.
         en_gb: Sorry for the trouble.
@@ -3219,6 +3249,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Рабо́чие за́лили фунда́мент бето́ном.
         en_gb: The workers poured concrete into the foundation.
+        en_alt:
+          - The workers filled the foundation with concrete.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: бето́н
@@ -3374,6 +3406,8 @@ words:
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Я купи́л биле́т на по́езд.
         en_gb: I bought a train ticket.
+        en_alt:
+          - I bought a ticket for the train.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Цена́ биле́та о́чень высо́кая.
         en_gb: The price of the ticket is very high.
@@ -3411,6 +3445,8 @@ words:
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он хорошо́ разбира́ется в билья́рде.
         en_gb: He knows billiards well.
+        en_alt:
+          - He knows a lot about billiards.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Билья́рд тре́бует то́чности.
         en_gb: Billiards requires accuracy.
@@ -3437,6 +3473,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В апте́чке зако́нчился бинт.
         en_gb: The bandage in the first-aid kit has run out.
+        en_alt:
+          - The first-aid kit has run out of bandages.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ра́ну закры́ли чи́стыми бинта́ми.
         en_gb: The wound was covered with clean bandages.
@@ -3467,12 +3505,16 @@ words:
     usage:
       - ru: Би́тва продолжа́лась це́лый день.
         en_gb: The battle lasted all day.
+        en_alt:
+          - The battle lasted the whole day.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Они́ победи́ли в реши́тельной би́тве.
         en_gb: They won in the decisive battle.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Об э́той би́тве пи́шут в кни́гах.
         en_gb: This battle is written about in books.
+        en_alt:
+          - They write about this battle in books.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: би́тва
@@ -3501,12 +3543,16 @@ words:
     usage:
       - ru: Здоро́вье — вели́чайшее бла́го.
         en_gb: Health is the greatest good.
+        en_alt:
+          - Health is the greatest blessing.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он де́лал всё для бла́га семьи́.
         en_gb: He did everything for the good of the family.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Все бла́га принадлежа́т наро́ду.
         en_gb: All goods belong to the people.
+        en_alt:
+          - All benefits belong to the people.
         inflect: { token: 2, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: бла́го
