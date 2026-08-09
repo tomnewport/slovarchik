@@ -1,13 +1,13 @@
 # Participles and gerunds — design note
 
-> Status: **stages 1–3 landed** (#564). The four decisions below are settled and
-> the machinery they describe is in the code. Stage 2 closed the leak; stage 3
-> took the short passive across the A1/A2 transitive perfectives. The corpus now
-> stores **69 non-finite forms on 60 verbs**, every one reachable by a drill, and
-> 51 verbs carry a drillable `#passive-short` table. Stage 4 — `act_pres` /
-> `act_past` / `gerund` on the A1–B1 imperfective core — is what remains. See
-> the correction under Decision 4: retiring the glossary stubs is a real step,
-> not bookkeeping.
+> Status: **all four stages landed** (#564). The decisions below are settled and
+> the machinery they describe is in the code. The corpus stores **113 non-finite
+> forms on 75 verbs**, every one reachable by a drill, and 65 verbs carry a
+> drillable variant table — 51 `#passive-short` and 14 `#nonfinite`. What is left
+> is breadth (the B1 tail of each stage), not machinery, plus the two named
+> follow-ups: retiring the glossary stubs (see the correction under Decision 4 —
+> it is a real step, not bookkeeping) and wiring variant paradigms into the
+> mastery session.
 
 ## The hole
 
@@ -344,7 +344,7 @@ here too.
 | 1 ✅ | Machinery: blocks + `adjectiveDeclension.js` + paradigm variants + `form:` in `shapeContextPhrases`/`phraseContext` + the seven rules + tests + CONTRIBUTING | ~0 |
 | 2 ✅ | Close the leak: the glossary participles/gerunds and the linkable adjectives get their verb blocks and one annotated phrase each | 17 verbs, 20 forms |
 | 3 ✅ | The highest-yield real Russian: `pass_short` (+ `pass_past`) on transitive perfectives that already carry a `pair:` | 48 verbs (A1/A2 core) |
-| 4 | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | ~120 verbs |
+| 4 ✅ | `act_pres` / `act_past` / `gerund` on the A1–B1 imperfective core | 15 verbs (A1/A2 core) |
 
 Stage 1 has landed alone and green. Each later stage is data plus annotations
 against machinery that already exists — which is the property #564 says this work
@@ -404,6 +404,33 @@ Both earned their keep during authoring. The stress cross-check caught
 «Кварти́ра про́дана» against the stored `продана́`, and the missing-stress check
 caught a bare «Ужин»; stage 2's token check had already caught a mis-counted
 index. Every one was a sentence bug, not a paradigm bug.
+
+## Stage 4 as built
+
+Fifteen A1/A2 imperfectives, scoped the same way stage 3 was and for the same
+reason: every form hand-verified against its formation class rather than
+bulk-derived. Fourteen carry all three slots, which is what earns them a
+drillable `#nonfinite` table — the three-cell floor in `assemble` means a verb
+needs three of the five non-finite rows before the table is worth drilling.
+
+**писа́ть is in the batch deliberately with only two slots.** It has no
+imperfective gerund at all, so it stores `act_pres` and `act_past` and nothing
+else, and `buildNonFiniteParadigm` correctly drops it below the floor rather than
+drilling a two-cell table. That is the `defective:` rule from Decision 1 applied
+to this class, and it is worth having one worked example of it in the corpus.
+
+The stems confirm Decision 2a was right. Each verb's finite table keeps its own
+stem and the non-finite table computes its own — сиде́ть is `си` finite and `сид`
+non-finite, жить is `жи` and `жив`, стоя́ть is `сто` and `стоя`. Had the forms
+been folded into one table, every one of those pairs would have collapsed to the
+shorter of the two and degraded "Type the endings" for cells that work today.
+
+**The stress traps here are the gerunds**, and they run in both directions: сидя́т
+but си́дя, стоя́т but сто́я, against живу́т → живя́ and лю́бят → любя́. Nothing else
+in CI can catch a wrong one — the usage sentence is authored from the same form,
+so both sides agree — so they are pinned in `stressGolden.js` alongside the
+present participles, which take the 3rd-plural stem and its stress rather than
+the infinitive's (пи́шут → пи́шущий, never *писа́ющий).
 
 ## Settled at sign-off
 

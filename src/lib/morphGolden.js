@@ -245,6 +245,15 @@ Object.assign(GOLDEN, {
   'плакать=to cry': { 'participles.act_pres': 'пла́чущий' }, // ч from пла́чут, not к
   'подумать=to think': { gerund: 'поду́мав' },
   'судить=to judge': { gerund: 'су́дя' },
+  // Stage 4. The present participle and the gerund are both built on the
+  // 3rd-plural stem, which is where the consonant lives: пи́шут → пи́шущий (ш,
+  // not с), сидя́т → сидя́щий (д). The past active comes off the past stem.
+  'писать=to write': { 'participles.act_pres': 'пи́шущий', 'participles.act_past': 'писа́вший' },
+  'сидеть=to sit': { 'participles.act_pres': 'сидя́щий', gerund: 'си́дя' },
+  'жить=to live': { 'participles.act_pres': 'живу́щий', gerund: 'живя́' },
+  // First conjugation takes -ющий/-я off the 3rd-plural: слу́шают → слу́шающий,
+  // слу́шая. (Second conjugation is where -ащий/-ящий appears: сидя́т → сидя́щий.)
+  'слушать=to listen': { 'participles.act_pres': 'слу́шающий', gerund: 'слу́шая' },
 })
 
 export const IMPERSONAL_VERBS = ['хотеться=to feel like']

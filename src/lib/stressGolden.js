@@ -55,6 +55,9 @@ export const STRESS_GOLDEN = {
     'present.2sg': 'стои́шь',
     'present.3sg': 'стои́т',
     'present.3pl': 'стоя́т',
+    // Stage 4 (#564): the gerund RETRACTS off the ending the 3rd-plural carries.
+    gerund: 'сто́я',
+    'participles.act_pres': 'стоя́щий',
   },
 
   // Stem-vs-ending shift across one paradigm: gen-sg го́рода vs nom-pl города́
@@ -212,4 +215,19 @@ export const STRESS_GOLDEN = {
     'participles.pass_short.f': 'на́йдена',
     'participles.pass_short.pl': 'на́йдены',
   },
+  // ─── Active participles and the imperfective gerund (#564, stage 4) ────────
+  //
+  // The stress traps in this class are the gerunds that RETRACT off the ending
+  // their 3rd-plural carries — сидя́т but си́дя, стоя́т but сто́я — and their
+  // opposites, which keep it (живу́т → живя́, лю́бят → любя́). Getting one wrong
+  // is invisible to every other check, since the usage sentence is authored
+  // from the same form.
+  'сидеть=to sit': { gerund: 'си́дя', 'participles.act_pres': 'сидя́щий' },
+  'жить=to live': { gerund: 'живя́', 'participles.act_pres': 'живу́щий', 'participles.act_past': 'жи́вший' },
+  'любить=to love': { gerund: 'любя́', 'participles.act_pres': 'лю́бящий' },
+  'говорить=to speak': { gerund: 'говоря́', 'participles.act_pres': 'говоря́щий' },
+  // The present participle is built on the 3rd-plural stem, so it inherits that
+  // stem's stress, not the infinitive's: пи́шут → пи́шущий, never *писа́ющий.
+  'писать=to write': { 'participles.act_pres': 'пи́шущий', 'participles.act_past': 'писа́вший' },
+  'читать=to read': { 'participles.act_pres': 'чита́ющий', gerund: 'чита́я' },
 }
