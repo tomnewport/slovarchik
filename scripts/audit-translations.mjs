@@ -29,7 +29,7 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { load as yamlLoad } from 'js-yaml'
 import { buildWords, shapePhrases, POS_BY_FILE } from '../src/lib/vocabBuild.js'
-import { auditPhrases, tierCounts, aspectCollisions } from '../src/lib/translationAudit.js'
+import { auditPhrases, tierCounts, aspectCollisions, duplicateEnglish } from '../src/lib/translationAudit.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const vocabDir = join(__dirname, '..', 'public', 'vocab')
@@ -83,6 +83,20 @@ const wordByKey = new Map(words.map((w) => [w.key, w]))
 if (flag('report') || args.length === 0) report()
 if (flag('sample')) sample()
 if (flag('collisions')) collisions()
+if (flag('duplicates')) duplicates()
+
+/**
+ * Distinct Russian sentences that share one English translation — any drill
+ * prompting from that English has two right answers.
+ */
+function duplicates() {
+  const found = duplicateEnglish(phrases)
+  console.log(`\nEnglish translations shared by 2+ distinct Russian sentences: ${found.length}`)
+  for (const d of found) {
+    console.log(`\n  "${d.en}"`)
+    for (const p of d.phrases) console.log(`    ${p.ru}   [${p.source}]`)
+  }
+}
 if (flag('shard')) shard()
 
 /**

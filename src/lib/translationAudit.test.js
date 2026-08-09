@@ -12,6 +12,7 @@ import {
   tierCounts,
   verbRendering,
   aspectCollisions,
+  duplicateEnglish,
 } from './translationAudit.js'
 import { buildFormIndex } from './phraseHint.js'
 import { buildWords } from './vocabBuild.js'
@@ -382,6 +383,48 @@ describe('aspectCollisions', () => {
   it('handles an empty corpus', () => {
     expect(aspectCollisions([], [])).toEqual([])
     expect(aspectCollisions(undefined, undefined)).toEqual([])
+  })
+})
+
+describe('duplicateEnglish', () => {
+  const p = (source, ru, en) => ({ source, ru, en })
+
+  it('groups distinct Russian sentences sharing one English', () => {
+    const found = duplicateEnglish([
+      p('беспокоиться=to worry', 'Не беспоко́йся, всё бу́дет хорошо́.', "Don't worry, everything will be fine."),
+      p('волноваться=to worry', 'Не волну́йся, всё бу́дет хорошо́.', "Don't worry, everything will be fine."),
+      p('книга=book', 'Я чита́ю кни́гу.', 'I am reading a book.'),
+    ])
+    expect(found).toHaveLength(1)
+    expect(found[0].phrases).toHaveLength(2)
+  })
+
+  it('ignores punctuation and case when comparing the English', () => {
+    expect(duplicateEnglish([
+      p('a=a', 'Оди́н.', 'It is fine!'),
+      p('b=b', 'Два.', 'it is fine'),
+    ])).toHaveLength(1)
+  })
+
+  it('treats one sentence reused under two headwords as no clash', () => {
+    expect(duplicateEnglish([
+      p('a=a', 'Одна́ и та́ же.', 'Same sentence.'),
+      p('b=b', 'Одна́ и та́ же.', 'Same sentence.'),
+    ])).toEqual([])
+  })
+
+  it('counts a stress disagreement as two different sentences', () => {
+    // This is the point: two copies of one sentence stressed differently is a
+    // data bug, and comparing the raw Russian is what exposes it.
+    expect(duplicateEnglish([
+      p('бассейн=swimming pool', 'По сре́дам я хожу́ в бассе́йн.', 'On Wednesdays I go to the swimming pool.'),
+      p('среда=Wednesday', 'По среда́м я хожу́ в бассе́йн.', 'On Wednesdays I go to the swimming pool.'),
+    ])).toHaveLength(1)
+  })
+
+  it('handles an empty bank', () => {
+    expect(duplicateEnglish([])).toEqual([])
+    expect(duplicateEnglish(undefined)).toEqual([])
   })
 })
 

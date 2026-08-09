@@ -505,6 +505,52 @@ export function aspectCollisions(words, phrases) {
   return out.sort((a, b) => (a.severity === 'identical' ? 0 : 1) - (b.severity === 'identical' ? 0 : 1))
 }
 
+/**
+ * Distinct Russian sentences sharing one English translation.
+ *
+ * The aspect-pair case ({@link aspectCollisions}) is the sharpest instance of a
+ * wider problem: whenever two different Russian sentences carry byte-identical
+ * English, any drill that prompts from the English has two right answers and
+ * scores one of them wrong. It shows up in three shapes, which want different
+ * fixes, so this reports them rather than judging:
+ *
+ *  - **near-synonym pairs** — «Не беспоко́йся…» / «Не волну́йся…» both "Don't
+ *    worry, everything will be fine." The words are genuinely close; the
+ *    sentences need to diverge enough for the English to pick one.
+ *  - **government or case contrasts** — «Я жду авто́буса» / «Я жду авто́бус»,
+ *    the genitive and accusative objects of ждать, whose difference in nuance
+ *    the shared English throws away.
+ *  - **outright data bugs** — two copies of one sentence that disagree on
+ *    something. «По сре́дам…» / «По среда́м…» is the same sentence stressed two
+ *    ways, and only one of them can be right.
+ *
+ * Sentences differing only in stress or ё/е are still *different* here: the
+ * comparison is on the raw Russian, because a stress disagreement between two
+ * copies is exactly the bug worth surfacing.
+ *
+ * @param {object[]} phrases  from shapePhrases, carrying `source`
+ * @returns {Array<{en: string, phrases: Array<{ru: string, source: string}>}>}
+ */
+export function duplicateEnglish(phrases) {
+  const byEnglish = new Map()
+  for (const p of phrases ?? []) {
+    const key = englishWords(p.en).join(' ')
+    if (!key) continue
+    if (!byEnglish.has(key)) byEnglish.set(key, [])
+    byEnglish.get(key).push(p)
+  }
+  const out = []
+  for (const group of byEnglish.values()) {
+    // A single sentence reused under two headwords is one phrase, not a clash.
+    if (new Set(group.map((p) => p.ru)).size < 2) continue
+    out.push({
+      en: group[0].en,
+      phrases: group.map((p) => ({ ru: p.ru, source: p.source })),
+    })
+  }
+  return out.sort((a, b) => b.phrases.length - a.phrases.length || a.en.localeCompare(b.en))
+}
+
 /** Tier counts, for a report header. */
 export function tierCounts(rows) {
   const counts = { high: 0, medium: 0, clean: 0 }
