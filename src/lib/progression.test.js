@@ -269,6 +269,28 @@ describe('dimensionProgress', () => {
     )
     expect(p).toMatchObject({ level: 'learning', dimension: 'hearing', attempts: 4, correct: 3, met: true })
   })
+
+  it('counts windowCorrect inside the criterion window, not over the whole history', () => {
+    // Seven lifetime correct answers, but the last two attempts were wrong: the
+    // criterion compares `need` against the window, so this word is at 2/3 —
+    // reporting the lifetime 7 would read as "7/3" next to an unmet dimension.
+    const p = dimensionProgress(
+      attempts('learning', 'usage', [false, true, true, true, true, true, true, true, false, false]),
+      'learning',
+      'usage',
+    )
+    expect(p).toMatchObject({ attempts: 10, correct: 7, windowCorrect: 2, met: false })
+    expect(p.windowCorrect).toBeLessThan(p.crit.need)
+  })
+
+  it('counts every attempt for an attempts-type criterion, which has no window', () => {
+    const p = dimensionProgress(
+      attempts('learning', 'speaking', [true, false, true, true]),
+      'learning',
+      'speaking',
+    )
+    expect(p).toMatchObject({ attempts: 4, correct: 3, windowCorrect: 3, met: true })
+  })
 })
 
 describe('wordHasInflections', () => {
