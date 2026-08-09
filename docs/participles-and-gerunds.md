@@ -273,12 +273,30 @@ The ~24 glossary rows in group 2 need no decision here: once the verb stores the
 form, it becomes hintable from the verb and the stubs can be retired as a
 follow-up.
 
-> **Correction (stage 2).** The sentence above originally read "…`buildFormIndex`
-> resolves the surface token to the verb (pass 2 already prefers a real lemma
-> over a gloss stub)". That is wrong, and stage 2 proved it: a gloss-only stub is
-> keyed on its *own headword*, so it claims the form in **pass 1** — the
-> dictionary-form pass — and pass 2 does not stack onto it. While the stub
-> exists, tapping «пла́чущего» still resolves to the stub, not to пла́кать.
+> **Correction (stage 2, refined after review).** The sentence above originally
+> read "…`buildFormIndex` resolves the surface token to the verb (pass 2 already
+> prefers a real lemma over a gloss stub)". That is wrong: a gloss-only stub is
+> keyed on the surface form it glosses, so it claims that form in **pass 1** —
+> the dictionary-form pass — and pass 2 does not stack onto it.
+>
+> The precise rule, which is worth stating because both looser versions of it are
+> wrong: **a stub shadows exactly the one surface form it is keyed on, and
+> nothing else.** Every other cell of the participle — stored or derived —
+> reaches its verb normally. So on today's corpus:
+>
+> ```
+> плачущий      → плакать=to cry            ✓  (no stub is keyed «плачущий»)
+> плачущего     → плачущего=crying          ✗  (a stub IS keyed «плачущего»)
+> плачущему     → плакать=to cry            ✓  derived, no stub
+> сломанный     → сломанный=broken          ✗  a NOMINATIVE, and still shadowed
+> сломанного    → сломать=to break          ✓  derived, no stub
+> ```
+>
+> It is therefore *not* the case that "the stored nominative wins and only the
+> derived obliques lose" — подозрева́емый, сло́манный, поте́рянный, кома́ндующий and
+> реша́ющий are all nominatives that the corpus happens to carry a stub for, and
+> all five still resolve to the stub. What decides it is whether a stub key
+> exists for that exact string, not where the form sits in the paradigm.
 >
 > So retiring the stubs is not optional bookkeeping; it is the step that actually
 > closes the leak for the learner. It also turns out to need per-entry judgement
@@ -300,6 +318,19 @@ follow-up.
 > than riding along with a data stage. **Filed as #574**, which also records the
 > full count: 94 forms are shadowed this way, most of them imperatives that
 > predate this work entirely.
+>
+> `glossary.yml`'s own header already names the underlying hazard, and any fix
+> should lean on it rather than re-deriving it:
+>
+> > INVARIANT: keys are surface forms exactly as they occur in the corpus, NOT
+> > lemmas … these keys must never be treated as dictionary headwords — anything
+> > promoting entries out of this file … must first lemmatise, or add a `lemma:`
+> > field.
+>
+> Pass 1 does exactly what that warns against: it treats a surface-form key as a
+> dictionary headword. Adding the `lemma:` field the invariant already
+> contemplates would let pass 1 recognise a stub as a non-lemma and decline the
+> claim — which is arguably a cleaner fix than special-casing pass 2.
 
 ## Data integrity
 
