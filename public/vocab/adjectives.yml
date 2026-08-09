@@ -3586,11 +3586,14 @@ words:
       - ru: На нём голубо́й сви́тер.
         en_gb: He is wearing a light blue jumper.
         en_alt:
+          - He has on a light blue jumper.
           - He has a light blue jumper on.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Над на́ми голубо́е не́бо.
         en_gb: Above us is a light blue sky.
         en_alt:
+          - Above us is the light blue sky.
+          - The sky above us is light blue.
           - There is a light blue sky above us.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
     forms:
@@ -3881,6 +3884,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Он пролива́л го́рькие слёзы.
         en_gb: He shed bitter tears.
+        en_alt:
+          - He was shedding bitter tears.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Чёрный ко́фе горче́ ча́я.
         en_gb: Black coffee is more bitter than tea.
@@ -3899,6 +3904,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я пью горя́чий чай.
         en_gb: I am drinking hot tea.
+        en_alt:
+          - I drink hot tea.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Будь осторо́жен с горя́чими блю́дами.
         en_gb: Be careful with the hot dishes.
@@ -4032,13 +4039,15 @@ words:
       pl_pre: гото́вых
     usage:
       - ru: Обе́д уже́ гото́в.
-        en_gb: Dinner is already ready.
+        en_gb: Lunch is already ready.
         inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ гото́ва помо́чь нам.
         en_gb: She is ready to help us.
         inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы купи́ли гото́вые блю́да.
         en_gb: We bought ready-made dishes.
+        en_alt:
+          - We bought ready meals.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "гражданский=civil":
     cefr_level: B1
@@ -4129,12 +4138,15 @@ words:
     usage:
       - ru: У него́ был гро́зный вид.
         en_gb: He had a formidable look.
+        en_alt:
+          - He had a menacing look.
+          - He looked menacing.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Прибли́жалась гро́зная бу́ря.
         en_gb: A formidable storm was approaching.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Нас встре́тили гро́зные взгля́ды.
-        en_gb: Formidable looks met us.
+        en_gb: Menacing looks met us.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "громадный=enormous":
     cefr_level: B2
@@ -4234,6 +4246,8 @@ words:
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Му́зыка ста́ла гро́мче.
         en_gb: The music became louder.
+        en_alt:
+          - The music got louder.
         inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
   "грубый=rude":
     cefr_level: B1
@@ -4283,7 +4297,7 @@ words:
         en_gb: He gave a rude answer.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то была́ гру́бая оши́бка.
-        en_gb: It was a crude mistake.
+        en_gb: It was a gross mistake.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я не выношу́ гру́бые слова́.
         en_gb: I cannot stand rude words.
@@ -4307,6 +4321,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы слу́шали гру́стную му́зыку.
         en_gb: We listened to sad music.
+        en_alt:
+          - We were listening to sad music.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́та пе́сня грустне́е, чем ка́жется.
         en_gb: This song is sadder than it seems.
@@ -4451,7 +4467,7 @@ words:
       pl_pre: густы́х
     usage:
       - ru: Над реко́й стоя́л густо́й тума́н.
-        en_gb: A thick fog stood over the river.
+        en_gb: A thick fog hung over the river.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У неё густа́я причёска.
         en_gb: She has thick hair.
@@ -4565,7 +4581,7 @@ words:
         en_gb: This requires further study.
         inflect: { token: 3, case: gen, number: sg, gender: n, rule: adj-agreement }
       - ru: Дальне́йшая судьба́ его́ неизве́стна.
-        en_gb: His further fate is unknown.
+        en_gb: His subsequent fate is unknown.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
   "дальний=distant":
     cefr_level: B1
@@ -4581,6 +4597,8 @@ words:
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
       - ru: Он мой да́льний ро́дственник.
         en_gb: He is a distant relative of mine.
+        en_alt:
+          - He is my distant relative.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы пое́хали в да́льнюю дере́вню.
         en_gb: We went to a distant village.
@@ -4894,6 +4912,9 @@ words:
     usage:
       - ru: Мы пошли́ в де́тский сад.
         en_gb: We went to the children's nursery.
+        en_alt:
+          - We went to the nursery.
+          - We went to the kindergarten.
         inflect: { token: 4, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Я чита́ю де́тскую кни́гу.
         en_gb: I am reading a children's book.
@@ -4914,6 +4935,8 @@ words:
     usage:
       - ru: Здесь о́чень дешёвые фру́кты.
         en_gb: The fruit here is very cheap.
+        en_alt:
+          - Here the fruit is very cheap.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Он купи́л дешёвый биле́т.
         en_gb: He bought a cheap ticket.
@@ -5009,6 +5032,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы наблюда́ли за ди́кими живо́тными.
         en_gb: We watched the wild animals.
+        en_alt:
+          - We were watching the wild animals.
         inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
   "длинный=long":
     cefr_level: A1
@@ -5142,6 +5167,8 @@ words:
         inflect: { token: 2, case: gen, number: sg, gender: n, rule: adj-agreement }
       - ru: Со вре́менем он стал добре́е.
         en_gb: Over time he became kinder.
+        en_alt:
+          - With time he became kinder.
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
     forms:
       m: до́брый
@@ -5235,9 +5262,13 @@ words:
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
       - ru: Все дово́льны результа́том.
         en_gb: Everyone is pleased with the result.
+        en_alt:
+          - Everyone is satisfied with the result.
         inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
       - ru: Он дово́лен но́вой рабо́той.
         en_gb: He is pleased with his new job.
+        en_alt:
+          - He is satisfied with his new job.
         inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
   "долгий=long":
     cefr_level: A2
@@ -5403,7 +5434,7 @@ words:
       pl_pre: дома́шних
     usage:
       - ru: Дома́шняя еда́ всегда́ вкусне́е.
-        en_gb: Home food is always tastier.
+        en_gb: Homemade food is always tastier.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я люблю́ свои́х дома́шних живо́тных.
         en_gb: I love my pets.
@@ -5660,6 +5691,8 @@ words:
     usage:
       - ru: Мы посети́ли дре́вний го́род.
         en_gb: We visited the ancient city.
+        en_alt:
+          - We visited an ancient city.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: В музе́е храни́тся дре́вняя ру́копись.
         en_gb: An ancient manuscript is kept in the museum.
@@ -5708,6 +5741,8 @@ words:
     usage:
       - ru: Э́то была́ дура́цкая оши́бка.
         en_gb: That was a foolish mistake.
+        en_alt:
+          - It was a foolish mistake.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Не задава́й дура́цких вопро́сов.
         en_gb: Don't ask foolish questions.
@@ -5809,6 +5844,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Му́зыка даёт духо́вную пи́щу.
         en_gb: Music gives spiritual nourishment.
+        en_alt:
+          - Music gives spiritual food.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы цени́м духо́вные це́нности.
         en_gb: We value spiritual values.
@@ -6055,6 +6092,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Существу́ют еди́ные пра́вила.
         en_gb: There are unified rules.
+        en_alt:
+          - There are uniform rules.
         inflect: { token: 2, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "ежедневный=daily":
     cefr_level: B1
@@ -6191,12 +6230,16 @@ words:
     usage:
       - ru: У него́ был жа́лкий вид.
         en_gb: He had a pitiful appearance.
+        en_alt:
+          - He looked pitiful.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то жа́лкая отгово́рка.
         en_gb: This is a pitiful excuse.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ получи́ли жа́лкие гроши́.
         en_gb: They received pitiful pennies.
+        en_alt:
+          - They received a pitiful pittance.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "жаркий=hot":
     cefr_level: A2
@@ -6299,6 +6342,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь стро́ят железнодоро́жные пути́.
         en_gb: Railway tracks are being built here.
+        en_alt:
+          - They are building railway tracks here.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "железный=iron":
     cefr_level: B1
@@ -6357,6 +6402,8 @@ words:
     usage:
       - ru: О́сенью ли́стья стано́вятся жёлтыми.
         en_gb: In autumn the leaves turn yellow.
+        en_alt:
+          - In autumn the leaves become yellow.
         inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
       - ru: У неё жёлтое пла́тье.
         en_gb: She has a yellow dress.
@@ -6364,6 +6411,7 @@ words:
       - ru: На столе́ лежи́т жёлтый каранда́ш.
         en_gb: A yellow pencil lies on the table.
         en_alt:
+          - A yellow pencil is lying on the table.
           - There is a yellow pencil on the table.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
     forms:
@@ -6496,6 +6544,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ но́сит же́нскую су́мку.
         en_gb: She carries a women's bag.
+        en_alt:
+          - She carries a woman's handbag.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь продаю́т же́нские ту́фли.
         en_gb: They sell women's shoes here.
@@ -6595,6 +6645,8 @@ words:
     usage:
       - ru: Он жесто́кий челове́к.
         en_gb: He is a cruel man.
+        en_alt:
+          - He is a cruel person.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то была́ жесто́кая шу́тка.
         en_gb: That was a cruel joke.
@@ -6626,7 +6678,7 @@ words:
         en_gb: This flower is still alive.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: В саду́ мно́го живы́х птиц.
-        en_gb: There are many living birds in the garden.
+        en_gb: There are many live birds in the garden.
         inflect: { token: 4, case: gen, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: живо́й
@@ -6707,6 +6759,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь живу́т живо́тные ра́зных ви́дов.
         en_gb: Animals of various kinds live here.
+        en_alt:
+          - Animals of different species live here.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "жизненный=vital":
     cefr_level: B2
@@ -6755,6 +6809,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ обсужда́ют жи́зненные пробле́мы.
         en_gb: They discuss vital problems.
+        en_alt:
+          - They are discussing vital problems.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "жирный=fatty":
     cefr_level: B1
@@ -6843,7 +6899,7 @@ words:
       pl_pre: зага́дочных
     usage:
       - ru: Э́то зага́дочный челове́к.
-        en_gb: He is a mysterious person.
+        en_gb: This is a mysterious person.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ улыбну́лась зага́дочной улы́бкой.
         en_gb: She smiled a mysterious smile.
@@ -6897,9 +6953,13 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Мы се́ли на за́дние места́.
         en_gb: We sat in the rear seats.
+        en_alt:
+          - We sat in the back seats.
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: За́дний вход был закры́т.
         en_gb: The rear entrance was closed.
+        en_alt:
+          - The back entrance was closed.
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: adj-agreement }
   "заключённый=imprisoned":
     cefr_level: B1
@@ -6943,9 +7003,13 @@ words:
     usage:
       - ru: Заключённый челове́к мечта́ет о свобо́де.
         en_gb: An imprisoned man dreams of freedom.
+        en_alt:
+          - An imprisoned person dreams of freedom.
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Заключённая ждала́ суда́.
         en_gb: The imprisoned woman awaited the trial.
+        en_alt:
+          - The imprisoned woman was waiting for the trial.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Заключённые рабо́тали в по́ле.
         en_gb: The prisoners worked in the field.
@@ -7117,6 +7181,8 @@ words:
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: На све́тлой стене́ пятно́ заме́тнее.
         en_gb: On a light wall the stain is more noticeable.
+        en_alt:
+          - On a light wall a stain is more noticeable.
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
   "замечательный=wonderful":
     cefr_level: B1
@@ -7287,6 +7353,8 @@ words:
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
       - ru: Тепе́рь ты здоро́ва.
         en_gb: Now you are well.
+        en_alt:
+          - Now you are healthy.
         inflect: { token: 3, degree: short, gender: f, rule: adj-short-form }
     forms:
       m: здоро́вый
@@ -7423,6 +7491,8 @@ words:
     usage:
       - ru: Э́то земно́й шар.
         en_gb: This is the terrestrial globe.
+        en_alt:
+          - This is the globe.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ ду́мает о земны́х забо́тах.
         en_gb: She thinks about earthly cares.
@@ -7693,7 +7763,7 @@ words:
         en_gb: A significant change occurred.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы потеря́ли значи́тельные де́ньги.
-        en_gb: We lost significant money.
+        en_gb: We lost a significant amount of money.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Ра́зница значи́тельнее, чем мы ду́мали.
         en_gb: The difference is more significant than we thought.
@@ -7892,12 +7962,18 @@ words:
     usage:
       - ru: Э́то совсе́м ино́й вопро́с.
         en_gb: This is quite another question.
+        en_alt:
+          - This is a completely different question.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ вы́брала ину́ю доро́гу.
         en_gb: She chose a different road.
+        en_alt:
+          - She chose another road.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В ины́е дни он молчи́т.
         en_gb: On other days he stays silent.
+        en_alt:
+          - On some days he stays silent.
         inflect: { token: 2, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "иностранный=foreign":
     cefr_level: A2
@@ -7994,6 +8070,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы познако́мились с интеллиге́нтными людьми́.
         en_gb: We met some cultured people.
+        en_alt:
+          - We got acquainted with cultured people.
         inflect: { token: 4, case: ins, number: pl, gender: pl, rule: adj-agreement }
   "интересный=interesting":
     cefr_level: A1
@@ -8205,6 +8283,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы и́щем и́стинные це́нности.
         en_gb: We seek true values.
+        en_alt:
+          - We are looking for true values.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "исторический=historical":
     cefr_level: B1
@@ -8362,6 +8442,7 @@ words:
       - ru: На полу́ лежи́т квадра́тный ковёр.
         en_gb: A square rug lies on the floor.
         en_alt:
+          - A square carpet lies on the floor.
           - There is a square rug on the floor.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У нас квадра́тный стол.
@@ -8420,6 +8501,8 @@ words:
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́ти я́блоки кисле́е, чем те.
         en_gb: These apples are sourer than those.
+        en_alt:
+          - These apples are more sour than those.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: ки́слый
@@ -8846,6 +8929,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы пошли́ коро́ткой доро́гой.
         en_gb: We went by the short road.
+        en_alt:
+          - We took the short road.
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́та доро́га коро́че.
         en_gb: This road is shorter.
@@ -8921,6 +9006,8 @@ words:
     usage:
       - ru: Э́то косми́ческий кора́бль.
         en_gb: This is a spaceship.
+        en_alt:
+          - This is a space ship.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ изуча́ют косми́ческую пыль.
         en_gb: They study cosmic dust.
@@ -9282,6 +9369,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Они́ ви́дели крова́вые следы́.
         en_gb: They saw bloody footprints.
+        en_alt:
+          - They saw bloody tracks.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "круглый=round":
     cefr_level: A2
@@ -9374,6 +9463,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ откры́ли кру́пную фи́рму.
         en_gb: They opened a large company.
+        en_alt:
+          - They opened a large firm.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: На ры́нке кру́пные я́блоки.
         en_gb: There are large apples at the market.
@@ -9421,7 +9512,7 @@ words:
       pl_pre: круты́х
     usage:
       - ru: Доро́га шла по круто́му скло́ну.
-        en_gb: The road went up a steep slope.
+        en_gb: The road went along a steep slope.
         inflect: { token: 4, case: dat, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы поднима́лись по круто́й ле́стнице.
         en_gb: We climbed up a steep staircase.
@@ -9523,6 +9614,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Маши́на сверну́ла в ле́вую сто́рону.
         en_gb: The car turned to the left side.
+        en_alt:
+          - The car turned to the left.
         inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
   "лёгкий=light":
     cefr_level: A1
@@ -9583,6 +9676,8 @@ words:
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Ходи́ть пешко́м ле́гче, чем бе́гать.
         en_gb: Walking is easier than running.
+        en_alt:
+          - Going on foot is easier than running.
         inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
       - ru: Ученики́ реша́ют са́мые лёгкие вопро́сы.
         en_gb: The pupils are solving the easiest questions.
@@ -9818,6 +9913,8 @@ words:
     usage:
       - ru: Э́то моё ли́чное де́ло.
         en_gb: This is my personal matter.
+        en_alt:
+          - This is my own business.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: У него́ есть ли́чный води́тель.
         en_gb: He has a personal driver.
@@ -9865,12 +9962,18 @@ words:
     usage:
       - ru: У тебя́ есть ли́шняя ру́чка?
         en_gb: Do you have a spare pen?
+        en_alt:
+          - Do you have an extra pen?
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Не бери́ ли́шних веще́й в доро́гу.
         en_gb: Don't take extra things on the trip.
+        en_alt:
+          - Don't take extra things for the journey.
         inflect: { token: 3, case: gen, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́то ли́шнее сло́во в предложе́нии.
         en_gb: This is a superfluous word in the sentence.
+        en_alt:
+          - This is an extra word in the sentence.
         inflect: { token: 2, case: nom, number: sg, gender: n, rule: adj-agreement }
   "лучший=best":
     cefr_level: A2
@@ -10035,6 +10138,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ держа́ла ма́ленькое яйцо́.
         en_gb: She held a small egg.
+        en_alt:
+          - She was holding a small egg.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Моя́ ко́мната ме́ньше, чем твоя́.
         en_gb: My room is smaller than yours.
@@ -10468,9 +10573,13 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У меня́ то́лько ме́лкая моне́та.
         en_gb: I only have a small coin.
+        en_alt:
+          - I have only a small coin.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он реша́ет ме́лкие пробле́мы.
         en_gb: He solves petty problems.
+        en_alt:
+          - He solves minor problems.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: У бе́рега вода́ ме́льче.
         en_gb: Near the shore the water is shallower.
@@ -10689,9 +10798,13 @@ words:
         inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то ми́рный наро́д.
         en_gb: This is a peaceful people.
+        en_alt:
+          - They are a peaceful people.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ живу́т в ми́рное вре́мя.
         en_gb: They live in peaceful times.
+        en_alt:
+          - They live in peacetime.
         inflect: { token: 4, case: acc, number: sg, gender: n, rule: adj-agreement }
     forms:
       m: ми́рный
@@ -11083,7 +11196,7 @@ words:
         en_gb: Everyone loves the young doctor.
         inflect: { token: 3, case: acc, number: sg, gender: m, animate: true, rule: adj-acc-animate }
       - ru: Они́ ещё совсе́м молоды́е.
-        en_gb: They are still quite young.
+        en_gb: They are still very young.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́то молодо́й врач.
         en_gb: This is a young doctor.
@@ -11270,6 +11383,8 @@ words:
     usage:
       - ru: Э́то мо́щный мото́р.
         en_gb: This is a powerful engine.
+        en_alt:
+          - This is a powerful motor.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У них мо́щная маши́на.
         en_gb: They have a powerful car.
@@ -11327,6 +11442,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Мы шли по мра́чным у́лицам.
         en_gb: We walked through gloomy streets.
+        en_alt:
+          - We walked along gloomy streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
       - ru: По́сле но́вости он стал мрачне́е.
         en_gb: After the news he became gloomier.
@@ -11613,6 +11730,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: У неё настоя́щая любо́вь.
         en_gb: She has true love.
+        en_alt:
+          - She has real love.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: настоя́щий
@@ -11737,6 +11856,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Здесь храня́т национа́льные тради́ции.
         en_gb: National traditions are preserved here.
+        en_alt:
+          - Here they preserve national traditions.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "небесный=heavenly":
     cefr_level: B2
@@ -12061,6 +12182,8 @@ words:
     usage:
       - ru: Э́то неда́вний слу́чай.
         en_gb: This is a recent event.
+        en_alt:
+          - This is a recent case.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы вспо́мнили неда́внюю встре́чу.
         en_gb: We recalled the recent meeting.
@@ -12108,13 +12231,15 @@ words:
       pl_pre: недалёких
     usage:
       - ru: Э́то недалёкий путь.
-        en_gb: This is not a far journey.
+        en_gb: This is not a long journey.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ живу́т в недалёкой дере́вне.
         en_gb: They live in a village not far away.
+        en_alt:
+          - They live in a nearby village.
         inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы говори́м о недалёких времена́х.
-        en_gb: We are speaking of not-distant times.
+        en_gb: We are speaking of times not far off.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: adj-agreement }
   "недовольный=dissatisfied":
     cefr_level: B1
@@ -12164,6 +12289,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Учи́тель сде́лал недово́льное лицо́.
         en_gb: The teacher made a displeased face.
+        en_alt:
+          - The teacher made a dissatisfied face.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Недово́льные лю́ди ушли́ ра́но.
         en_gb: The dissatisfied people left early.
@@ -12367,6 +12494,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ пошли́ по неизве́стной доро́ге.
         en_gb: They went down an unknown road.
+        en_alt:
+          - They went along an unknown road.
         inflect: { token: 4, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Учёные изуча́ют неизве́стные явле́ния.
         en_gb: Scientists study unknown phenomena.
@@ -12757,6 +12886,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Он за́дал непоня́тный вопро́с.
         en_gb: He asked an unclear question.
+        en_alt:
+          - He asked an incomprehensible question.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ говори́ла непоня́тные слова́.
         en_gb: She spoke incomprehensible words.
@@ -12946,9 +13077,13 @@ words:
         inflect: { token: 3, case: ins, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ росла́ несча́стной де́вочкой.
         en_gb: She grew up an unhappy girl.
+        en_alt:
+          - She grew up as an unhappy girl.
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то несча́стное живо́тное оста́лось одно́.
         en_gb: This unhappy animal was left alone.
+        en_alt:
+          - This unhappy animal remained alone.
         inflect: { token: 2, case: nom, number: sg, gender: n, rule: adj-agreement }
   "неторопливый=unhurried":
     cefr_level: B2
@@ -13092,9 +13227,13 @@ words:
         inflect: { token: 4, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Откро́й ни́жний я́щик стола́.
         en_gb: Open the lower drawer of the desk.
+        en_alt:
+          - Open the bottom drawer of the desk.
         inflect: { token: 2, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Ни́жние этажи́ уже́ за́няты.
         en_gb: The lower floors are already taken.
+        en_alt:
+          - The lower floors are already occupied.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "низкий=low":
     cefr_level: A1
@@ -13270,6 +13409,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Они́ веду́т норма́льный о́браз жи́зни.
         en_gb: They lead a normal way of life.
+        en_alt:
+          - They lead a normal lifestyle.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
   "ночной=nocturnal":
     cefr_level: B1
@@ -13313,10 +13454,12 @@ words:
       pl_pre: ночны́х
     usage:
       - ru: Я слы́шала ночно́й шум.
-        en_gb: I heard a nocturnal noise.
+        en_gb: I heard a night-time noise.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Нас разбуди́ла ночна́я гроза́.
         en_gb: A nocturnal storm woke us up.
+        en_alt:
+          - A night-time storm woke us up.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Сова́ — ночна́я пти́ца.
         en_gb: The owl is a nocturnal bird.
@@ -13369,9 +13512,13 @@ words:
     usage:
       - ru: Я нашла́ ну́жную кни́гу.
         en_gb: I found the necessary book.
+        en_alt:
+          - I found the book I needed.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Вот тебе́ ну́жный инструме́нт.
         en_gb: Here is the necessary tool for you.
+        en_alt:
+          - Here is the tool you need.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Возьми́ все ну́жные ве́щи.
         en_gb: Take all the necessary things.
@@ -13467,6 +13614,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Маши́на пое́хала в обра́тную сто́рону.
         en_gb: The car drove in the reverse direction.
+        en_alt:
+          - The car drove off in the opposite direction.
         inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Назови́ чи́сла в обра́тном поря́дке.
         en_gb: Name the numbers in reverse order.
@@ -13519,6 +13668,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он занима́ется обще́ственной рабо́той.
         en_gb: He is engaged in public work.
+        en_alt:
+          - He is engaged in community work.
         inflect: { token: 3, case: ins, number: sg, gender: f, rule: adj-agreement }
   "общий=general":
     cefr_level: A2
@@ -13667,6 +13818,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то обы́чная исто́рия.
         en_gb: It is an ordinary story.
+        en_alt:
+          - This is an ordinary story.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы говори́ли обы́чными слова́ми.
         en_gb: We spoke in ordinary words.
@@ -13719,6 +13872,8 @@ words:
     usage:
       - ru: Обя́занная сторона́ подписа́ла догово́р.
         en_gb: The obligated party signed the contract.
+        en_alt:
+          - The obliged party signed the contract.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я обя́зан тебе́ по́мощью.
         en_gb: I am obliged to you for your help.
@@ -13728,6 +13883,8 @@ words:
         inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы обя́заны соблюда́ть пра́вила.
         en_gb: We are obliged to follow the rules.
+        en_alt:
+          - We are obliged to observe the rules.
         inflect: { token: 2, degree: short, gender: pl, rule: adj-short-form }
   "обязательный=obligatory":
     cefr_level: B1
@@ -13780,6 +13937,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ру́сский язы́к — обяза́тельный предме́т.
         en_gb: Russian is an obligatory subject.
+        en_alt:
+          - The Russian language is a compulsory subject.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Он о́чень обяза́тельный челове́к.
         en_gb: He is a very reliable person.
@@ -13933,10 +14092,12 @@ words:
       pl_pre: одина́ковых
     usage:
       - ru: У них одина́ковый рост.
-        en_gb: They have identical height.
+        en_gb: They are the same height.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: На сёстрах одина́ковая оде́жда.
         en_gb: The sisters have identical clothes on.
+        en_alt:
+          - The sisters are wearing identical clothes.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вы́брали одина́ковые телефо́ны.
         en_gb: We chose identical phones.
@@ -14013,9 +14174,13 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то опа́сный зверь.
         en_gb: This is a dangerous animal.
+        en_alt:
+          - This is a dangerous beast.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы избежа́ли опа́сного пути́.
         en_gb: We avoided the dangerous route.
+        en_alt:
+          - We avoided the dangerous path.
         inflect: { token: 3, case: gen, number: sg, gender: m, rule: adj-agreement }
       - ru: Е́здить но́чью опа́снее.
         en_gb: Driving at night is more dangerous.
@@ -14100,12 +14265,14 @@ words:
     usage:
       - ru: Нам ну́жен операти́вный отве́т.
         en_gb: We need a prompt response.
+        en_alt:
+          - We need a prompt answer.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Поли́ция при́няла операти́вные ме́ры.
         en_gb: The police took prompt measures.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́то операти́вная информа́ция.
-        en_gb: This is prompt information.
+        en_gb: This is timely information.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
   "определённый=definite":
     cefr_level: B1
@@ -14393,6 +14560,8 @@ words:
     usage:
       - ru: Осе́нняя пого́да быва́ет дождли́вой.
         en_gb: Autumn weather can be rainy.
+        en_alt:
+          - Autumn weather is often rainy.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я наде́ла осе́ннее пальто́.
         en_gb: I put on my autumn coat.
@@ -14689,6 +14858,8 @@ words:
     usage:
       - ru: У ка́ждого свой отде́льный стол.
         en_gb: Everyone has their own separate desk.
+        en_alt:
+          - Everyone has their own separate table.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то отде́льная ко́мната.
         en_gb: This is a separate room.
@@ -15184,6 +15355,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы гуля́ли по петербу́ргским у́лицам.
         en_gb: We walked along the Saint Petersburg streets.
+        en_alt:
+          - We strolled along the Saint Petersburg streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
   "печальный=sad":
     cefr_level: B1
@@ -15240,6 +15413,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали печа́льное изве́стие.
         en_gb: We heard sad news.
+        en_alt:
+          - We heard the sad news.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Коне́ц кни́ги печа́льнее нача́ла.
         en_gb: The end of the book is sadder than the beginning.
@@ -15308,6 +15483,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Доро́га шла по пло́ской равни́не.
         en_gb: The road ran across the flat plain.
+        en_alt:
+          - The road went across the flat plain.
         inflect: { token: 4, case: dat, number: sg, gender: f, rule: adj-agreement }
     forms:
       m: пло́ский
@@ -15384,6 +15561,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У пальто́ пло́тная ткань.
         en_gb: The coat has dense fabric.
+        en_alt:
+          - The coat has thick fabric.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В лесу́ расту́т пло́тные куста́рники.
         en_gb: Dense bushes grow in the forest.
@@ -15404,6 +15583,8 @@ words:
     usage:
       - ru: Сего́дня плоха́я пого́да.
         en_gb: The weather is bad today.
+        en_alt:
+          - Today the weather is bad.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У меня́ плохо́е настрое́ние.
         en_gb: I am in a bad mood.
@@ -15542,6 +15723,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы уви́дели по́длинное письмо́ поэ́та.
         en_gb: We saw the poet's genuine letter.
+        en_alt:
+          - We saw the genuine letter of the poet.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: В музе́е храня́тся по́длинные докуме́нты.
         en_gb: Genuine documents are kept in the museum.
@@ -15589,6 +15772,8 @@ words:
     usage:
       - ru: Я ви́дела подо́бный слу́чай.
         en_gb: I have seen a similar case.
+        en_alt:
+          - I saw a similar case.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Возни́кла подо́бная пробле́ма.
         en_gb: A similar problem arose.
@@ -15684,12 +15869,17 @@ words:
     usage:
       - ru: В авто́бусе сиде́л пожило́й мужчи́на.
         en_gb: An elderly man sat on the bus.
+        en_alt:
+          - An elderly man was sitting on the bus.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Ему́ помогла́ пожила́я же́нщина.
         en_gb: An elderly woman helped him.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Пожилы́е лю́ди лю́бят споко́йствие.
         en_gb: Elderly people love peace and quiet.
+        en_alt:
+          - Elderly people love quiet.
+          - Elderly people love calm.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "поздний=late":
     cefr_level: A2
@@ -15785,6 +15975,8 @@ words:
         inflect: { token: 4, case: gen, number: sg, gender: f, rule: adj-agreement }
       - ru: Учёные собира́ли полевы́е тра́вы.
         en_gb: The scientists gathered field herbs.
+        en_alt:
+          - The scientists collected field herbs.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "полезный=useful":
     cefr_level: A2
@@ -15835,12 +16027,16 @@ words:
     usage:
       - ru: Э́то о́чень поле́зный сове́т.
         en_gb: This is a very useful piece of advice.
+        en_alt:
+          - This is very useful advice.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Прогу́лка — поле́зная привы́чка.
         en_gb: A walk is a useful habit.
+        en_alt:
+          - A walk is a healthy habit.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: О́вощи — поле́зные проду́кты.
-        en_gb: Vegetables are useful foods.
+        en_gb: Vegetables are healthy foods.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Фру́кты поле́знее конфе́т.
         en_gb: Fruit is healthier than sweets.
@@ -15912,6 +16108,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Но́вый слова́рь полне́е ста́рого.
         en_gb: The new dictionary is fuller than the old one.
+        en_alt:
+          - The new dictionary is more complete than the old one.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: по́лный
@@ -15996,6 +16194,8 @@ words:
         inflect: { token: 5, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы получи́ли поло́женную су́мму.
         en_gb: We received the prescribed amount.
+        en_alt:
+          - We received the prescribed sum.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Рабо́тники получа́ют поло́женные льго́ты.
         en_gb: The workers receive the prescribed benefits.
@@ -16329,12 +16529,16 @@ words:
     usage:
       - ru: Посторо́нним вход воспрещён.
         en_gb: Entry is forbidden to outsiders.
+        en_alt:
+          - Unauthorised persons are forbidden entry.
         inflect: { token: 1, case: dat, number: pl, gender: pl, rule: adj-agreement }
       - ru: Я услы́шал посторо́нний звук.
         en_gb: I heard an extraneous sound.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Не вмеши́вайся в посторо́нние дела́.
         en_gb: Don't interfere in other people's affairs.
+        en_alt:
+          - Don't interfere in other people's business.
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "постоянный=permanent":
     cefr_level: B1
@@ -16386,7 +16590,7 @@ words:
         en_gb: She needs a permanent job.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы их постоя́нные клие́нты.
-        en_gb: We are their permanent customers.
+        en_gb: We are their regular customers.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "похожий=similar":
     cefr_level: A2
@@ -16437,6 +16641,8 @@ words:
     usage:
       - ru: Он похо́ж на отца́.
         en_gb: He is similar to his father.
+        en_alt:
+          - He looks like his father.
         inflect: { token: 2, degree: short, gender: m, rule: adj-short-form }
       - ru: У них похо́жая судьба́.
         en_gb: They have a similar fate.
@@ -16731,7 +16937,7 @@ words:
         en_gb: Return to your former life.
         inflect: { token: 3, case: dat, number: sg, gender: f, rule: adj-agreement }
       - ru: Я встре́тил пре́жних друзе́й.
-        en_gb: I met former friends.
+        en_gb: I met my former friends.
         inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
   "прекрасный=beautiful":
     cefr_level: B1
@@ -16782,6 +16988,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы уви́дели прекра́сную карти́ну.
         en_gb: We saw a beautiful painting.
+        en_alt:
+          - We saw a beautiful picture.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В саду́ цвету́т прекра́сные цветы́.
         en_gb: Beautiful flowers bloom in the garden.
@@ -16835,12 +17043,17 @@ words:
     usage:
       - ru: Э́то его́ привы́чный маршру́т.
         en_gb: This is his habitual route.
+        en_alt:
+          - This is his usual route.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У неё привы́чная улы́бка.
         en_gb: She has a habitual smile.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы де́лаем привы́чные дела́.
         en_gb: We do our habitual tasks.
+        en_alt:
+          - We do our usual tasks.
+          - We do the usual things.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "приёмный=reception":
     cefr_level: B2
@@ -17168,6 +17381,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У зада́чи просто́е реше́ние.
         en_gb: The task has a simple solution.
+        en_alt:
+          - The problem has a simple solution.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Они́ живу́т просто́й жи́знью.
         en_gb: They live a simple life.
@@ -17258,6 +17473,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: Дом стои́т на противополо́жном берегу́.
         en_gb: The house stands on the opposite bank.
+        en_alt:
+          - The house stands on the opposite shore.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
   "профессиональный=professional":
     cefr_level: B1
@@ -17393,12 +17610,18 @@ words:
     usage:
       - ru: Э́то бы́ло в про́шлый раз.
         en_gb: It happened last time.
+        en_alt:
+          - That was last time.
         inflect: { token: 4, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: На про́шлой неде́ле шёл дождь.
         en_gb: Last week it rained.
+        en_alt:
+          - It rained last week.
         inflect: { token: 2, case: pre, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы вспомина́ем про́шлые го́ды.
         en_gb: We recall the past years.
+        en_alt:
+          - We remember the past years.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "прямой=straight":
     cefr_level: B1
@@ -17510,9 +17733,13 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: В ко́мнате стои́т пусто́й шкаф.
         en_gb: There is an empty wardrobe in the room.
+        en_alt:
+          - An empty wardrobe stands in the room.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы е́хали по пусты́м у́лицам.
         en_gb: We drove along empty streets.
+        en_alt:
+          - We drove along the empty streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: пусто́й
@@ -17597,12 +17824,16 @@ words:
     usage:
       - ru: На скаме́йке сиде́л пья́ный мужчи́на.
         en_gb: A drunk man sat on the bench.
+        en_alt:
+          - A drunk man was sitting on the bench.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Пья́ная компа́ния шуме́ла во дворе́.
-        en_gb: A drunk company made noise in the yard.
+        en_gb: A drunken group made noise in the yard.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Пья́ные го́сти разошли́сь по́здно.
         en_gb: The drunk guests left late.
+        en_alt:
+          - The drunken guests left late.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "равный=equal":
     cefr_level: B2
@@ -17617,6 +17848,8 @@ words:
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: У нас ра́вный счёт.
         en_gb: We have an equal score.
+        en_alt:
+          - The score is level.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Им предоста́вили ра́вные права́.
         en_gb: They were given equal rights.
@@ -17669,6 +17902,8 @@ words:
         inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Она́ ра́да но́вому пода́рку.
         en_gb: She is glad about the new present.
+        en_alt:
+          - She is pleased with the new present.
         inflect: { token: 2, degree: short, gender: f, rule: adj-short-form }
       - ru: Мы ра́ды, что вы пришли́.
         en_gb: We are glad that you came.
@@ -17772,6 +18007,7 @@ words:
       - ru: На полу́ лежи́т разби́тый стака́н.
         en_gb: A broken glass lies on the floor.
         en_alt:
+          - There is a broken glass lying on the floor.
           - There is a broken glass on the floor.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У маши́ны разби́тая фа́ра.
@@ -17845,6 +18081,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Де́ти наряди́ли разноцве́тную ёлку.
         en_gb: The children decorated a multicoloured tree.
+        en_alt:
+          - The children decorated a multicoloured fir tree.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В не́бе горя́т разноцве́тные огни́.
         en_gb: Multicoloured lights glow in the sky.
@@ -17923,6 +18161,8 @@ words:
     usage:
       - ru: У нас ра́зный вкус.
         en_gb: We have different taste.
+        en_alt:
+          - We have different tastes.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ говоря́т на ра́зных языка́х.
         en_gb: They speak different languages.
@@ -17975,6 +18215,8 @@ words:
     usage:
       - ru: Он дал разу́мный сове́т.
         en_gb: He gave reasonable advice.
+        en_alt:
+          - He gave sensible advice.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то разу́мная цена́.
         en_gb: This is a reasonable price.
@@ -17984,6 +18226,8 @@ words:
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Пое́хать на по́езде разу́мнее, чем на маши́не.
         en_gb: Going by train is more sensible than by car.
+        en_alt:
+          - Going by train is more reasonable than by car.
         inflect: { token: 4, degree: comparative, rule: adj-comparative }
   "раненый=wounded":
     cefr_level: B1
@@ -18028,6 +18272,8 @@ words:
     usage:
       - ru: Ра́неный солда́т лежа́л в пала́те.
         en_gb: The wounded soldier lay in the ward.
+        en_alt:
+          - The wounded soldier was lying in the ward.
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Ра́неную пти́цу принесли́ домо́й.
         en_gb: The wounded bird was brought home.
@@ -18172,9 +18418,11 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У нас реа́льная возмо́жность.
         en_gb: We have a real opportunity.
+        en_alt:
+          - We have a real possibility.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Расскажи́ о реа́льных собы́тиях.
-        en_gb: Tell about the real events.
+        en_gb: Tell me about the real events.
         inflect: { token: 3, case: pre, number: pl, gender: pl, rule: adj-agreement }
   "редкий=rare":
     cefr_level: B1
@@ -18283,9 +18531,13 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Произошла́ ре́зкая переме́на.
         en_gb: A sharp change occurred.
+        en_alt:
+          - A sudden change occurred.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он сде́лал ре́зкое движе́ние.
         en_gb: He made a sharp movement.
+        en_alt:
+          - He made an abrupt movement.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Его́ го́лос стал ре́зче.
         en_gb: His voice became sharper.
@@ -18309,6 +18561,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Положи́ кни́ги ро́вными ряда́ми.
         en_gb: Lay the books in even rows.
+        en_alt:
+          - Put the books in even rows.
         inflect: { token: 3, case: ins, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́та доро́га ровне́е, чем та.
         en_gb: This road is more even than that one.
@@ -18389,9 +18643,11 @@ words:
     usage:
       - ru: Э́то мой родно́й го́род.
         en_gb: This is my native town.
+        en_alt:
+          - This is my home town.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Ру́сский — её родна́я речь.
-        en_gb: Russian is her native speech.
+        en_gb: Russian is her native tongue.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы верну́лись в родны́е места́.
         en_gb: We returned to our native places.
@@ -18485,6 +18741,8 @@ words:
     usage:
       - ru: Она́ о́чень романти́чная де́вушка.
         en_gb: She is a very romantic girl.
+        en_alt:
+          - She is a very romantic young woman.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он романти́чный челове́к.
         en_gb: He is a romantic person.
@@ -18633,9 +18891,13 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Ря́дом стоя́ла ры́жая де́вочка.
         en_gb: A red-haired girl stood nearby.
+        en_alt:
+          - A red-haired girl was standing nearby.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У бра́тьев ры́жие во́лосы.
         en_gb: The brothers have red hair.
+        en_alt:
+          - The brothers have ginger hair.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "самый=the most":
     cefr_level: A1
@@ -18679,6 +18941,8 @@ words:
     usage:
       - ru: Э́то са́мый высо́кий дом.
         en_gb: This is the tallest house.
+        en_alt:
+          - This is the tallest building.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ са́мая до́брая учи́тельница.
         en_gb: She is the kindest teacher.
@@ -18698,6 +18962,8 @@ words:
     usage:
       - ru: Я люблю́ све́жий хлеб.
         en_gb: I love fresh bread.
+        en_alt:
+          - I like fresh bread.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: На столе́ све́жие фру́кты.
         en_gb: There is fresh fruit on the table.
@@ -18707,6 +18973,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У́тром во́здух свеже́е.
         en_gb: In the morning the air is fresher.
+        en_alt:
+          - The air is fresher in the morning.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: све́жий
@@ -18756,15 +19024,23 @@ words:
     usage:
       - ru: У них све́тлая ко́мната.
         en_gb: They have a light room.
+        en_alt:
+          - They have a bright room.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У неё све́тлые во́лосы.
         en_gb: She has light hair.
+        en_alt:
+          - She has fair hair.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Я купи́ла све́тлый костю́м.
         en_gb: I bought a light suit.
+        en_alt:
+          - I bought a light-coloured suit.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́та ко́мната светле́е, чем та.
         en_gb: This room is lighter than that one.
+        en_alt:
+          - This room is brighter than that one.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: све́тлый
@@ -18815,6 +19091,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Есть ли свобо́дные места́?
         en_gb: Are there any free seats?
+        en_alt:
+          - Are there any free places?
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: свобо́дный
@@ -18895,12 +19173,14 @@ words:
     usage:
       - ru: Поду́л холо́дный се́верный ве́тер.
         en_gb: A cold northern wind blew.
+        en_alt:
+          - A cold north wind blew.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то се́верная часть страны́.
         en_gb: This is the northern part of the country.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы посети́ли се́верные города́.
-        en_gb: We visited the northern towns.
+        en_gb: We visited the northern cities.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "сегодняшний=today's":
     cefr_level: A2
@@ -18993,7 +19273,7 @@ words:
         en_gb: A grey-haired old man sat on the bench.
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У неё была́ седа́я голова́.
-        en_gb: She had a grey head of hair.
+        en_gb: She had a head of grey hair.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Седы́е во́лосы блесте́ли на со́лнце.
         en_gb: The grey hair shone in the sun.
@@ -19204,6 +19484,8 @@ words:
         inflect: { token: 3, case: ins, number: sg, gender: n, rule: adj-agreement }
       - ru: На нём се́рый пиджа́к.
         en_gb: He is wearing a grey jacket.
+        en_alt:
+          - He has a grey jacket on.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: По двору́ хо́дит се́рая ко́шка.
         en_gb: A grey cat walks around the yard.
@@ -19307,6 +19589,8 @@ words:
     usage:
       - ru: Он о́чень си́льный челове́к.
         en_gb: He is a very strong man.
+        en_alt:
+          - He is a very strong person.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Поду́л си́льный ве́тер.
         en_gb: A strong wind blew.
@@ -19316,6 +19600,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ве́тер стал сильне́е к ве́черу.
         en_gb: The wind became stronger towards evening.
+        en_alt:
+          - The wind grew stronger towards evening.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
       - ru: Он стал са́мым си́льным в кла́ссе.
         en_gb: He became the strongest in the class.
@@ -19452,12 +19738,18 @@ words:
     usage:
       - ru: Мы е́дем на ско́ром по́езде.
         en_gb: We are travelling on a fast train.
+        en_alt:
+          - We are travelling on an express train.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
       - ru: Я жду ско́рую по́мощь.
         en_gb: I am waiting for the ambulance.
+        en_alt:
+          - I am waiting for an ambulance.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Жела́ю тебе́ ско́рого выздоровле́ния.
         en_gb: I wish you a fast recovery.
+        en_alt:
+          - I wish you a speedy recovery.
         inflect: { token: 3, case: gen, number: sg, gender: n, rule: adj-agreement }
       - ru: Чем скоре́е мы вы́едем, тем лу́чше.
         en_gb: The sooner we set off, the better.
@@ -19514,6 +19806,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы получи́ли скро́мные результа́ты.
         en_gb: We obtained modest results.
+        en_alt:
+          - We received modest results.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: Она́ скромне́е свое́й сестры́.
         en_gb: She is more modest than her sister.
@@ -19946,6 +20240,8 @@ words:
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Ру́сский язы́к сложне́е англи́йского.
         en_gb: Russian is more complex than English.
+        en_alt:
+          - The Russian language is more complex than English.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "служебный=official":
     cefr_level: B1
@@ -19993,6 +20289,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то слу́жебная маши́на.
         en_gb: This is an official car.
+        en_alt:
+          - This is a company car.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У нас слу́жебные обя́занности.
         en_gb: We have official duties.
@@ -20040,10 +20338,12 @@ words:
       pl_pre: случа́йных
     usage:
       - ru: Э́то был случа́йный гость.
-        en_gb: That was an accidental guest.
+        en_gb: That was a chance guest.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Произошла́ случа́йная оши́бка.
         en_gb: An accidental mistake occurred.
+        en_alt:
+          - There was an accidental mistake.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы встре́тили случа́йных люде́й.
         en_gb: We met some random people.
@@ -20211,7 +20511,7 @@ words:
         en_gb: The weather is snowy today.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Де́ти лепи́ли сне́жную ба́бу.
-        en_gb: The children made a snowman.
+        en_gb: The children were making a snowman.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
   "собственный=own":
     cefr_level: B1
@@ -20379,6 +20679,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мне нра́вятся совреме́нные карти́ны.
         en_gb: I like modern paintings.
+        en_alt:
+          - I like modern pictures.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Но́вое зда́ние совреме́ннее, чем ста́рое.
         en_gb: The new building is more modern than the old one.
@@ -20468,6 +20770,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Все бы́ли согла́сны с пла́ном.
         en_gb: Everyone agreed with the plan.
+        en_alt:
+          - Everyone was in agreement with the plan.
         inflect: { token: 3, degree: short, gender: pl, rule: adj-short-form }
   "солдатский=soldier's":
     cefr_level: B1
@@ -20630,6 +20934,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ верну́лась домо́й со́нная.
         en_gb: She came home sleepy.
+        en_alt:
+          - She returned home sleepy.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ребёнок смотре́л со́нными глаза́ми.
         en_gb: The child looked with sleepy eyes.
@@ -20804,7 +21110,7 @@ words:
         en_gb: They were building a socialist society.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: В кни́ге опи́саны социалисти́ческие иде́и.
-        en_gb: The book describes socialist ideas.
+        en_gb: Socialist ideas are described in the book.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "социальный=social":
     cefr_level: B1
@@ -20851,6 +21157,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Госуда́рство ока́зывает социа́льную по́мощь.
         en_gb: The state provides social assistance.
+        en_alt:
+          - The state provides social help.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы изуча́ем социа́льные пробле́мы.
         en_gb: We study social problems.
@@ -21353,9 +21661,13 @@ words:
     usage:
       - ru: Мой ста́рший брат рабо́тает врачо́м.
         en_gb: My elder brother works as a doctor.
+        en_alt:
+          - My older brother works as a doctor.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Ста́ршая сестра́ помога́ет мне с уро́ками.
         en_gb: My elder sister helps me with lessons.
+        en_alt:
+          - My older sister helps me with lessons.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Ста́ршие ученики́ ушли́ домо́й.
         en_gb: The senior pupils went home.
@@ -21386,6 +21698,8 @@ words:
         inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
       - ru: Он купи́л са́мый ста́рый дом на у́лице.
         en_gb: He bought the oldest house on the street.
+        en_alt:
+          - He bought the oldest house in the street.
         inflect: { token: 3, span: 2, degree: superlative, case: acc, gender: m, rule: adj-superlative }
     forms:
       m: ста́рый
@@ -21469,7 +21783,7 @@ words:
         en_gb: She broke a glass vase.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В до́ме больши́е стекля́нные две́ри.
-        en_gb: The house has large glass doors.
+        en_gb: There are large glass doors in the house.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "столовый=dining":
     cefr_level: B1
@@ -21514,6 +21828,8 @@ words:
     usage:
       - ru: Нам ну́жен столо́вый нож.
         en_gb: We need a dinner knife.
+        en_alt:
+          - We need a table knife.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Она́ купи́ла столо́вую посу́ду.
         en_gb: She bought tableware.
@@ -21788,6 +22104,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы е́хали с сумасше́дшей ско́ростью.
         en_gb: We drove at a crazy speed.
+        en_alt:
+          - We were driving at a crazy speed.
         inflect: { token: 4, case: ins, number: sg, gender: f, rule: adj-agreement }
   "суровый=harsh":
     cefr_level: B1
@@ -21860,6 +22178,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы шли по сухи́м ли́стьям.
         en_gb: We walked over the dry leaves.
+        en_alt:
+          - We were walking over the dry leaves.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
       - ru: Здесь во́здух су́ше, чем на берегу́.
         en_gb: The air here is drier than on the shore.
@@ -21915,6 +22235,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он счастли́вый челове́к.
         en_gb: He is a happy man.
+        en_alt:
+          - He is a happy person.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то был счастли́вый день.
         en_gb: It was a happy day.
@@ -21923,7 +22245,7 @@ words:
         en_gb: Now she is happier than before.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
       - ru: Она́ чу́вствовала себя́ са́мой счастли́вой.
-        en_gb: She felt the happiest.
+        en_gb: She felt happiest of all.
         inflect: { token: 4, span: 2, degree: superlative, case: ins, gender: f, rule: adj-superlative }
       - ru: Я сча́стлив, что ты пришла́.
         en_gb: I am happy that you came.
@@ -22127,6 +22449,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У неё твёрдая рука́.
         en_gb: She has a firm hand.
+        en_alt:
+          - She has a steady hand.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы шли по твёрдой земле́.
         en_gb: We walked on hard ground.
@@ -22348,6 +22672,8 @@ words:
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Сего́дня тепле́е, чем вчера́.
         en_gb: Today is warmer than yesterday.
+        en_alt:
+          - It is warmer today than yesterday.
         inflect: { token: 2, degree: comparative, rule: adj-comparative }
       - ru: Он живёт в са́мом тёплом го́роде страны́.
         en_gb: He lives in the warmest city in the country.
