@@ -133,16 +133,24 @@ export function criterionMet(attempts, crit) {
 
 /**
  * Progress for one dimension at one level.
- * @returns {{level, dimension, attempts, correct, met, crit}}
+ *
+ * `correct` is the lifetime count of correct attempts; `windowCorrect` counts
+ * only those inside the criterion's window — the number the `need` threshold is
+ * actually compared against. The two diverge as soon as a word slips: a word
+ * with seven lifetime correct answers and two recent misses is at 2/3, not 7/3,
+ * so anything rendering progress against `need` wants `windowCorrect`.
+ * @returns {{level, dimension, attempts, correct, windowCorrect, met, crit}}
  */
 export function dimensionProgress(events, level, dimension, word = {}) {
   const crit = criteriaFor(word)[level]?.[dimension] ?? null
   const attempts = attemptsFor(events, level, dimension)
+  const window = crit?.type === 'ratio' ? attempts.slice(-crit.window) : attempts
   return {
     level,
     dimension,
     attempts: attempts.length,
     correct: attempts.filter((a) => a.correct).length,
+    windowCorrect: window.filter((a) => a.correct).length,
     met: criterionMet(attempts, crit),
     crit,
   }

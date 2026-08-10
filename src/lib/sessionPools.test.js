@@ -203,4 +203,47 @@ describe('assembleSession', () => {
     const session = assembleSession(snapshot({}), { type: 'standard', size: 'quick' })
     expect(session.focusKeys).toBeNull()
   })
+
+  it('narrows a current-bucket learning slot to words its own dimension can advance', () => {
+    // Both words are still being learned and both sit in the current pool, but
+    // only `wUnheard` can be moved by a listening drill — `wHeard` met hearing
+    // already, so drilling it there advances nothing.
+    const records = {
+      wUnheard: { events: [ev('identification', 'learning', true)] },
+      wHeard: {
+        events: [ev('identification', 'learning', true), ev('hearing', 'learning', true)],
+      },
+    }
+    const session = assembleSession(
+      snapshot(records, { learning: { words: ['wUnheard', 'wHeard'] } }),
+      { type: 'listening' },
+    )
+    const current = session.practices.filter((p) => p.bucket === 'current')
+    expect(current.length).toBeGreaterThan(0)
+    for (const p of current) expect(p.pool).toEqual(['wUnheard'])
+  })
+
+  it('keeps the whole current pool when every word has already met the slot dimension', () => {
+    const records = {
+      w0: { events: [ev('hearing', 'learning', true)] },
+      w1: { events: [ev('hearing', 'learning', true)] },
+    }
+    const session = assembleSession(snapshot(records, { learning: { words: ['w0', 'w1'] } }), {
+      type: 'listening',
+    })
+    const current = session.practices.filter((p) => p.bucket === 'current')
+    expect(current.length).toBeGreaterThan(0)
+    for (const p of current) expect([...p.pool].sort()).toEqual(['w0', 'w1'])
+  })
+
+  it('leaves the refresh buckets drilling met dimensions — that is what retention is', () => {
+    // A finished word has met every dimension, so the advance-half narrowing
+    // would empty its pool; the refresh buckets must still schedule it.
+    const records = { w0: { events: learnedEvents() } }
+    const session = assembleSession(snapshot(records), { type: 'listening' })
+    expect(session.pools.untested).toContain('w0')
+    const refresh = session.practices.filter((p) => p.bucket === 'untested')
+    expect(refresh.length).toBeGreaterThan(0)
+    for (const p of refresh) expect(p.pool).toContain('w0')
+  })
 })

@@ -50,7 +50,15 @@ function dimStatus(dim) {
   if (dim.crit?.type === 'attempts') {
     return { cls: dim.attempts ? 'partial' : 'empty', text: `${Math.min(dim.attempts, need)}/${need}`, title: 'Attempts' }
   }
-  return { cls: dim.attempts ? 'partial' : 'empty', text: `${dim.correct}/${need}`, title: 'Correct answers' }
+  // Against a ratio criterion only the answers inside its window count, so show
+  // that figure — a word with seven lifetime correct answers and two recent
+  // misses is at 2/3, and reading "7/3" beside an unfinished dimension looks
+  // like the engine has lost count.
+  return {
+    cls: dim.attempts ? 'partial' : 'empty',
+    text: `${dim.windowCorrect ?? dim.correct}/${need}`,
+    title: 'Correct answers in the recent window',
+  }
 }
 
 function fmtDate(ts) {

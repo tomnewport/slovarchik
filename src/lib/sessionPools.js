@@ -341,6 +341,23 @@ export function assembleSession(
           dimensionAdvancesAt(ctx.events(k), 'mastery', practice.dimension, now, ctx.wordRecord(k)),
       )
       practice.pool = advancing.length > 0 ? advancing : candidates
+    } else if (practice.bucket === 'current' && practice.level === 'learning') {
+      // The current bucket is the *advance* half of the session: its job is to
+      // push unlearned words toward `learned`. The pool is ordered
+      // worst-understood first, but `understanding` is a whole-word score — it
+      // says nothing about the dimension this slot actually drills. Without the
+      // narrowing below, a word that is weak overall but has long since met its
+      // usage criterion still outranks a word that has never been spelled at
+      // all, so spelling slots keep landing on words spelling cannot move. Keep
+      // only the words this slot's dimension can still advance (the same
+      // treatment mastery slots already get above), preserving the
+      // worst-understood-first order so the front bias still favours the words
+      // that need the most work. Falls back to the whole pool when every word
+      // has met this dimension, so the slot always has content.
+      const advancing = base.filter((k) =>
+        dimensionAdvancesAt(ctx.events(k), 'learning', practice.dimension, now, ctx.wordRecord(k)),
+      )
+      practice.pool = advancing.length > 0 ? advancing : base
     } else {
       practice.pool = base
     }
