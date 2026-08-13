@@ -36,6 +36,8 @@ words:
     usage:
       - ru: В а́вгусте мы е́здили на мо́ре.
         en_gb: In August we went to the seaside.
+        en_alt:
+          - In August we went to the sea.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: А́вгуст — после́дний ме́сяц ле́та.
         en_gb: August is the last month of summer.
@@ -203,6 +205,8 @@ words:
         inflect: { token: 3, span: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я жду свой день рожде́ния.
         en_gb: I am looking forward to my birthday.
+        en_alt:
+          - I am waiting for my birthday.
         inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ пригото́вила пода́рок ко дню рожде́ния.
         en_gb: She prepared a present for the birthday.
@@ -264,6 +268,8 @@ words:
     usage:
       - ru: В ию́не начина́ются кани́кулы.
         en_gb: The holidays begin in June.
+        en_alt:
+          - In June the holidays begin.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ию́нь — пе́рвый ме́сяц ле́та.
         en_gb: June is the first month of summer.
@@ -330,12 +336,16 @@ words:
     usage:
       - ru: В ма́рте начина́ется весна́.
         en_gb: Spring begins in March.
+        en_alt:
+          - In March spring begins.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Март — пе́рвый ме́сяц весны́.
         en_gb: March is the first month of spring.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле ма́рта стано́вится тепле́е.
         en_gb: After March it becomes warmer.
+        en_alt:
+          - After March it gets warmer.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: март
@@ -364,7 +374,7 @@ words:
         - Butter Week
     usage:
       - ru: На Ма́сленицу пеку́т блины́.
-        en_gb: At Maslenitsa people make pancakes.
+        en_gb: At Maslenitsa people bake pancakes.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ма́сленица дли́тся це́лую неде́лю.
         en_gb: Maslenitsa lasts a whole week.
@@ -487,6 +497,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Пе́ред Па́схой кра́сят я́йца.
         en_gb: Before Easter people dye eggs.
+        en_alt:
+          - Before Easter people paint eggs.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: Па́сха
@@ -507,6 +519,8 @@ words:
     usage:
       - ru: В понеде́льник я иду́ на рабо́ту.
         en_gb: On Monday I go to work.
+        en_alt:
+          - On Monday I am going to work.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Понеде́льник — тяжёлый день.
         en_gb: Monday is a hard day.
@@ -539,6 +553,8 @@ words:
     usage:
       - ru: В пя́тницу мы идём в кино́.
         en_gb: On Friday we are going to the cinema.
+        en_alt:
+          - On Friday we go to the cinema.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Пя́тница — коне́ц рабо́чей неде́ли.
         en_gb: Friday is the end of the working week.
@@ -597,12 +613,16 @@ words:
     usage:
       - ru: В сентябре́ начина́ется уче́бный год.
         en_gb: The school year begins in September.
+        en_alt:
+          - In September the school year begins.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Сентя́брь — пе́рвый ме́сяц о́сени.
         en_gb: September is the first month of autumn.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По́сле сентября́ стано́вится прохла́днее.
         en_gb: After September it gets cooler.
+        en_alt:
+          - After September it becomes cooler.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: сентя́брь
@@ -629,6 +649,8 @@ words:
     usage:
       - ru: По среда́м я хожу́ в бассе́йн.
         en_gb: On Wednesdays I go to the swimming pool.
+        en_alt:
+          - On Wednesdays I go to the pool.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Среда́ — середи́на неде́ли.
         en_gb: Wednesday is the middle of the week.
@@ -699,6 +721,8 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: К февралю́ всё бу́дет гото́во.
         en_gb: Everything will be ready by February.
+        en_alt:
+          - By February everything will be ready.
         inflect: { token: 2, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: февра́ль
@@ -733,6 +757,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: По четверга́м рабо́тает ры́нок.
         en_gb: The market is open on Thursdays.
+        en_alt:
+          - On Thursdays the market is open.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: четве́рг
@@ -760,13 +786,13 @@ words:
         - jubilee
     usage:
       - ru: Мы отмеча́ем юбиле́й ба́бушки.
-        en_gb: We are celebrating grandmother's jubilee.
+        en_gb: We are celebrating grandmother's anniversary.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ско́ро у шко́лы большо́й юбиле́й.
         en_gb: The school will soon have a big anniversary.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Го́сти пришли́ на юбиле́й де́душки.
-        en_gb: The guests came to grandfather's jubilee.
+        en_gb: The guests came to grandfather's anniversary.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: юбиле́й

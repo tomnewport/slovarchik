@@ -4518,6 +4518,9 @@ words:
         en_gb: Footsteps were heard from behind.
       - ru: Он сиде́л сза́ди.
         en_gb: He sat at the back.
+        en_alt:
+          - He was sitting at the back.
+          - He sat behind.
   "сидя=sitting":
     cefr_level: B1
     accented: си́дя
@@ -4551,8 +4554,13 @@ words:
         en_gb: He is very tired.
       - ru: Дождь шёл о́чень си́льно.
         en_gb: The rain fell very heavily.
+        en_alt:
+          - The rain was falling very heavily.
+          - It was raining very heavily.
       - ru: Ве́тер ду́ет сильне́е, чем у́тром.
         en_gb: The wind blows more strongly than in the morning.
+        en_alt:
+          - The wind is blowing more strongly than in the morning.
         inflect: { token: 3, degree: comparative, rule: adv-comparative }
   "скорее=rather":
     cefr_level: B1
@@ -4568,10 +4576,12 @@ words:
     usage:
       - ru: Скоре́е всего́, он уже́ до́ма.
         en_gb: Most likely, he is already home.
+        en_alt:
+          - Most likely he is already at home.
       - ru: Э́то скоре́е шу́тка, чем пра́вда.
-        en_gb: This is rather a joke than the truth.
+        en_gb: This is more of a joke than the truth.
       - ru: Иди́ сюда́ скоре́е!
-        en_gb: Come here quicker!
+        en_gb: Come here quickly!
   "скоро=soon":
     cefr_level: A1
     accented: ско́ро
@@ -4589,7 +4599,7 @@ words:
       - ru: Мы ско́ро уви́димся.
         en_gb: We will see each other soon.
       - ru: Приходи́ скоре́е, мы ждём.
-        en_gb: Come sooner, we are waiting.
+        en_gb: Come quickly, we are waiting.
         inflect: { token: 2, degree: comparative, rule: adv-comparative }
     forms:
       comparative: скоре́е
@@ -4610,8 +4620,12 @@ words:
         en_gb: We were bored all evening.
       - ru: На уро́ке ску́чно без игр.
         en_gb: The lesson is boring without games.
+        en_alt:
+          - In the lesson it is boring without games.
       - ru: Без книг в доро́ге скучне́е.
         en_gb: Without books it is more boring on the journey.
+        en_alt:
+          - Without books the journey is more boring.
         inflect: { token: 5, degree: comparative, rule: adv-comparative }
     forms:
       comparative: скучне́е
@@ -4626,10 +4640,15 @@ words:
     usage:
       - ru: Сле́ва стои́т большо́й дом.
         en_gb: On the left stands a big house.
+        en_alt:
+          - On the left there is a big house.
       - ru: Магази́н нахо́дится сле́ва от вокза́ла.
-        en_gb: The shop is on the left of the station.
+        en_gb: The shop is to the left of the station.
       - ru: Сле́ва от меня́ сиде́л друг.
         en_gb: A friend was sitting on my left.
+        en_alt:
+          - To my left sat a friend.
+          - A friend sat on my left.
   "слегка=slightly":
     cefr_level: B1
     accented: слегка́
@@ -4656,6 +4675,8 @@ words:
         en_gb: This is too expensive.
       - ru: Ты говори́шь сли́шком бы́стро.
         en_gb: You speak too quickly.
+        en_alt:
+          - You are speaking too quickly.
       - ru: В ко́мнате сли́шком жа́рко.
         en_gb: It is too hot in the room.
   "случайно=by chance":
@@ -4676,6 +4697,8 @@ words:
         en_gb: I accidentally broke the cup.
       - ru: Ты случа́йно не зна́ешь его́ а́дрес?
         en_gb: Do you happen to know his address?
+        en_alt:
+          - You don't happen to know his address, do you?
   "слышно=audibly":
     cefr_level: B1
     accented: слы́шно
@@ -4689,6 +4712,9 @@ words:
     usage:
       - ru: Тебя́ совсе́м не слы́шно.
         en_gb: You cannot be heard at all.
+        en_alt:
+          - I cannot hear you at all.
+          - You can't be heard at all.
       - ru: Из ку́хни слы́шно ра́дио.
         en_gb: The radio can be heard from the kitchen.
       - ru: Бы́ло слы́шно, как пое́т пти́ца.
@@ -4706,8 +4732,10 @@ words:
     usage:
       - ru: Мне смешно́ от его́ шу́ток.
         en_gb: His jokes make me laugh.
+        en_alt:
+          - I find his jokes funny.
       - ru: Кло́ун смешно́ упа́л.
-        en_gb: The clown fell funnily.
+        en_gb: The clown fell in a funny way.
       - ru: Бы́ло о́чень смешно́ на спекта́кле.
         en_gb: It was very funny at the show.
   "снаружи=from the outside":
@@ -4727,6 +4755,8 @@ words:
         en_gb: The door is locked from the outside.
       - ru: Снару́жи зда́ние вы́глядит ста́рым.
         en_gb: From the outside the building looks old.
+        en_alt:
+          - The building looks old from the outside.
   "сначала=at first":
     cefr_level: A1
     accented: снача́ла
@@ -4744,6 +4774,9 @@ words:
         en_gb: At first it was hard to study.
       - ru: Дава́й начнём снача́ла.
         en_gb: Let's start from the beginning.
+        en_alt:
+          - Let's start over.
+          - Let us start from the beginning.
   "снизу=from below":
     cefr_level: B1
     accented: сни́зу
@@ -4771,6 +4804,9 @@ words:
     usage:
       - ru: Сно́ва пошёл дождь.
         en_gb: It started to rain again.
+        en_alt:
+          - It began to rain again.
+          - It started raining again.
       - ru: Мы сно́ва встре́тились в па́рке.
         en_gb: We met again in the park.
       - ru: Она́ сно́ва опозда́ла на рабо́ту.
@@ -4788,10 +4824,15 @@ words:
     usage:
       - ru: Что, со́бственно, ты хо́чешь?
         en_gb: What is it you actually want?
+        en_alt:
+          - What do you actually want?
       - ru: Со́бственно, я уже́ собира́лся уходи́ть.
         en_gb: Actually, I was already about to leave.
       - ru: Со́бственно говоря́, он прав.
         en_gb: Strictly speaking, he is right.
+        en_alt:
+          - As a matter of fact, he is right.
+          - Actually speaking, he is right.
   "совершенно=completely":
     cefr_level: B1
     accented: соверше́нно
@@ -4825,7 +4866,7 @@ words:
       - ru: На у́лице совсе́м темно́.
         en_gb: It is completely dark outside.
       - ru: Она́ ещё совсе́м молода́я.
-        en_gb: She is still quite young.
+        en_gb: She is still very young.
   "согласно=according to":
     cefr_level: B1
     accented: согла́сно
@@ -4839,6 +4880,8 @@ words:
     usage:
       - ru: Согла́сно пла́ну, мы вы́едем у́тром.
         en_gb: According to the plan, we will leave in the morning.
+        en_alt:
+          - According to the plan, we will set off in the morning.
       - ru: Всё прошло́ согла́сно расписа́нию.
         en_gb: Everything went according to schedule.
       - ru: Согла́сно зако́ну, э́то запрещено́.
@@ -4856,7 +4899,7 @@ words:
       - ru: Сперва́ он не пове́рил мне.
         en_gb: At first he did not believe me.
       - ru: Сперва́ мы пое́ли, пото́м гуля́ли.
-        en_gb: First we ate, then we walked.
+        en_gb: First we ate, then we went for a walk.
   "специально=specially":
     cefr_level: B1
     accented: специа́льно
@@ -4871,10 +4914,17 @@ words:
     usage:
       - ru: Я специа́льно пришёл к тебе́.
         en_gb: I came specially to see you.
+        en_alt:
+          - I came to you specially.
       - ru: Э́тот пода́рок специа́льно для тебя́.
         en_gb: This present is specially for you.
+        en_alt:
+          - This gift is specially for you.
       - ru: Он специа́льно сказа́л э́то гро́мко.
         en_gb: He said it loudly on purpose.
+        en_alt:
+          - He deliberately said it loudly.
+          - He said it loudly deliberately.
   "спокойно=calmly":
     cefr_level: A2
     accented: споко́йно
@@ -4892,8 +4942,13 @@ words:
         en_gb: Speak calmly, don't rush.
       - ru: Ребёнок споко́йно спал.
         en_gb: The child slept peacefully.
+        en_alt:
+          - The child was sleeping peacefully.
+          - The child slept calmly.
       - ru: Здесь мо́жно споко́йно рабо́тать.
         en_gb: One can work calmly here.
+        en_alt:
+          - You can work calmly here.
       - ru: Ве́чером в па́рке споко́йнее.
         en_gb: In the evening it is calmer in the park.
         inflect: { token: 4, degree: comparative, rule: adv-comparative }
@@ -4908,10 +4963,15 @@ words:
     usage:
       - ru: Спра́ва ты уви́дишь апте́ку.
         en_gb: On the right you will see a pharmacy.
+        en_alt:
+          - You will see a pharmacy on the right.
       - ru: Спра́ва от двери́ виси́т карти́на.
         en_gb: A picture hangs to the right of the door.
       - ru: Спра́ва шуми́т река́.
         en_gb: On the right a river is rushing.
+        en_alt:
+          - On the right a river is roaring.
+          - A river is making noise on the right.
   "сразу=at once":
     cefr_level: A2
     accented: сра́зу
@@ -4924,8 +4984,13 @@ words:
     usage:
       - ru: Я сра́зу узна́л его́.
         en_gb: I recognised him at once.
+        en_alt:
+          - I recognised him immediately.
+          - I immediately recognised him.
       - ru: Позвони́ мне сра́зу по́сле уро́ка.
         en_gb: Call me right after the lesson.
+        en_alt:
+          - Call me immediately after the lesson.
       - ru: Всё ста́ло сра́зу поня́тно.
         en_gb: Everything became clear at once.
   "срочно=urgently":
@@ -4941,8 +5006,13 @@ words:
     usage:
       - ru: Мне сро́чно ну́жен врач.
         en_gb: I urgently need a doctor.
+        en_alt:
+          - I need a doctor urgently.
       - ru: Сро́чно позвони́ домо́й.
         en_gb: Call home urgently.
+        en_alt:
+          - Urgently call home.
+          - Call home immediately.
       - ru: Письмо́ на́до отпра́вить сро́чно.
         en_gb: The letter must be sent urgently.
   "столь=so":
@@ -4961,6 +5031,8 @@ words:
         en_gb: Why are you so sad?
       - ru: Э́то столь же ва́жно, как и пре́жде.
         en_gb: This is just as important as before.
+        en_alt:
+          - This is just as important as it was before.
   "столько=so many":
     cefr_level: A2
     accented: сто́лько
@@ -4975,8 +5047,12 @@ words:
         en_gb: I have so many things to do today!
       - ru: Не ешь сто́лько конфе́т.
         en_gb: Don't eat so many sweets.
+        en_alt:
+          - Do not eat so many sweets.
       - ru: Я не ви́дела сто́лько люде́й.
         en_gb: I have not seen so many people.
+        en_alt:
+          - I had not seen so many people.
   "стоя=standing":
     cefr_level: B1
     accented: сто́я
@@ -5003,10 +5079,14 @@ words:
     usage:
       - ru: Стра́нно, что его́ ещё нет.
         en_gb: It's strange that he is not here yet.
+        en_alt:
+          - It is strange that he is still not here.
       - ru: Он стра́нно посмотре́л на меня́.
         en_gb: He looked at me strangely.
       - ru: Маши́на стра́нно шуми́т.
         en_gb: The car makes a strange noise.
+        en_alt:
+          - The car is making a strange noise.
   "страшно=terribly":
     cefr_level: B1
     accented: стра́шно
@@ -5019,6 +5099,8 @@ words:
     usage:
       - ru: Мне стра́шно одному́ в темноте́.
         en_gb: I am scared alone in the dark.
+        en_alt:
+          - I am frightened on my own in the dark.
       - ru: На у́лице стра́шно хо́лодно.
         en_gb: It is terribly cold outside.
       - ru: Он стра́шно уста́л по́сле рабо́ты.
@@ -5040,10 +5122,14 @@ words:
         en_gb: The teacher looked at us sternly.
       - ru: Здесь стро́го запрещено́ кури́ть.
         en_gb: Smoking is strictly forbidden here.
+        en_alt:
+          - It is strictly forbidden to smoke here.
       - ru: Ма́ма стро́го разгова́ривала с ним.
-        en_gb: Mum spoke strictly with him.
+        en_gb: Mum spoke sternly to him.
       - ru: С детьми́ на́до говори́ть стро́же.
         en_gb: One has to speak more strictly with children.
+        en_alt:
+          - You have to speak more strictly with children.
         inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
   "стыдно=ashamed":
     cefr_level: B1
@@ -5060,10 +5146,14 @@ words:
         en_gb: I am ashamed of my words.
       - ru: Тебе́ не сты́дно?
         en_gb: Aren't you ashamed?
+        en_alt:
+          - Are you not ashamed?
       - ru: Ма́льчику ста́ло сты́дно.
-        en_gb: The boy became ashamed.
+        en_gb: The boy felt ashamed.
       - ru: Сты́дно так говори́ть с ма́терью.
         en_gb: It is shameful to speak to your mother like that.
+        en_alt:
+          - It is shameful to talk to your mother like that.
   "сюда=here":
     cefr_level: A1
     accented: сюда́
@@ -5093,16 +5183,27 @@ words:
     usage:
       - ru: Не так бы́стро!
         en_gb: Not so fast!
+        en_alt:
+          - Not so quickly!
       - ru: Сде́лай так же, как я.
         en_gb: Do it the same way as me.
+        en_alt:
+          - Do it just as I do.
+          - Do it the same way I do.
       - ru: Он так уста́л, что усну́л сра́зу.
         en_gb: He was so tired that he fell asleep at once.
       - ru: Так себе́.
         en_gb: So-so.
       - ru: Что́-то здесь не так.
         en_gb: Something is wrong here.
+        en_alt:
+          - Something here is wrong.
+          - Something is not right here.
       - ru: У нас и так ма́ло вре́мени.
         en_gb: We have little time as it is.
+        en_alt:
+          - We have little time as it is anyway.
+          - We already have little time as it is.
   "также=also":
     cefr_level: A2
     accented: та́кже
@@ -5117,6 +5218,8 @@ words:
         en_gb: I also want to go with you.
       - ru: Он зна́ет неме́цкий, а та́кже францу́зский.
         en_gb: He knows German, and also French.
+        en_alt:
+          - He knows German, as well as French.
       - ru: Мы купи́ли хлеб и та́кже молоко́.
         en_gb: We bought bread and also milk.
   "там=there":
@@ -5130,6 +5233,8 @@ words:
     usage:
       - ru: Мы встре́тимся там же, где и вчера́.
         en_gb: We will meet at the same place as yesterday.
+        en_alt:
+          - We will meet in the same place as yesterday.
       - ru: Магази́н там, напра́во.
         en_gb: The shop is there, on the right.
       - ru: Там живу́т мои́ роди́тели.
@@ -5171,6 +5276,8 @@ words:
         en_gb: It is already dark in the room.
       - ru: На у́лице ста́ло темно́.
         en_gb: It became dark outside.
+        en_alt:
+          - It got dark outside.
       - ru: В лесу́ темне́е, чем в по́ле.
         en_gb: In the forest it is darker than in the field.
         inflect: { token: 3, degree: comparative, rule: adv-comparative }
@@ -5190,6 +5297,9 @@ words:
         en_gb: Now everything is clear.
       - ru: Что мы бу́дем де́лать тепе́рь?
         en_gb: What shall we do now?
+        en_alt:
+          - What are we going to do now?
+          - What will we do now?
   "тепло=warmly":
     cefr_level: A1
     accented: тепло́
@@ -5206,8 +5316,12 @@ words:
         en_gb: It is warm outside today.
       - ru: Оде́нься тепло́, на у́лице моро́з.
         en_gb: Dress warmly, it's freezing outside.
+        en_alt:
+          - Dress warmly, it is freezing outside.
       - ru: Нас тепло́ встре́тили.
         en_gb: We were warmly welcomed.
+        en_alt:
+          - They greeted us warmly.
       - ru: В ку́ртке тепле́е, чем в сви́тере.
         en_gb: In a jacket it is warmer than in a jumper.
         inflect: { token: 3, degree: comparative, rule: adv-comparative }
@@ -5224,6 +5338,8 @@ words:
     usage:
       - ru: В це́ркви на́до вести́ себя́ ти́хо.
         en_gb: In church you must behave quietly.
+        en_alt:
+          - In church one must behave quietly.
       - ru: Говори́те ти́хо, ребёнок спит.
         en_gb: Speak quietly, the child is sleeping.
       - ru: В до́ме бы́ло ти́хо.
@@ -5269,6 +5385,8 @@ words:
         en_gb: I have only one question.
       - ru: Э́то мо́жет сде́лать то́лько он.
         en_gb: Only he can do this.
+        en_alt:
+          - He is the only one who can do this.
   "тотчас=immediately":
     cefr_level: B2
     accented: то́тчас
@@ -5279,10 +5397,17 @@ words:
     usage:
       - ru: Он то́тчас отве́тил на письмо́.
         en_gb: He immediately answered the letter.
+        en_alt:
+          - He answered the letter immediately.
       - ru: Врач то́тчас прие́хал.
         en_gb: The doctor came immediately.
+        en_alt:
+          - The doctor arrived immediately.
       - ru: Я то́тчас всё по́нял.
         en_gb: I understood everything at once.
+        en_alt:
+          - I understood everything immediately.
+          - I immediately understood everything.
   "точно=exactly":
     cefr_level: A2
     accented: то́чно
@@ -5296,11 +5421,16 @@ words:
         - for sure
     usage:
       - ru: Я то́чно зна́ю отве́т.
-        en_gb: I know the answer exactly.
+        en_gb: I know the answer for sure.
       - ru: Часы́ пока́зывают вре́мя то́чно.
         en_gb: The clock shows the time precisely.
+        en_alt:
+          - The clock shows the time exactly.
+          - The clock keeps time accurately.
       - ru: Он то́чно прие́дет за́втра.
         en_gb: He will definitely come tomorrow.
+        en_alt:
+          - He will definitely arrive tomorrow.
   "трижды=three times":
     cefr_level: B1
     accented: три́жды
@@ -5325,12 +5455,20 @@ words:
     usage:
       - ru: Мне тру́дно поня́ть э́то пра́вило.
         en_gb: It is difficult for me to understand this rule.
+        en_alt:
+          - It is hard for me to understand this rule.
       - ru: Ему́ тру́дно говори́ть по-ру́сски.
         en_gb: It is hard for him to speak Russian.
+        en_alt:
+          - It is difficult for him to speak Russian.
       - ru: Тру́дно жить без де́нег.
         en_gb: It is hard to live without money.
+        en_alt:
+          - It is difficult to live without money.
       - ru: Больно́му тру́дно дыша́ть.
         en_gb: The patient finds it hard to breathe.
+        en_alt:
+          - It is hard for the patient to breathe.
       - ru: Мне трудне́е чита́ть, чем говори́ть.
         en_gb: It is harder for me to read than to speak.
         inflect: { token: 2, degree: comparative, rule: adv-comparative }
@@ -5347,8 +5485,10 @@ words:
     usage:
       - ru: Мы е́дем туда́ же, куда́ и вчера́.
         en_gb: We are going to the same place as yesterday.
+        en_alt:
+          - We are driving to the same place as yesterday.
       - ru: Мы идём туда́ пешко́м.
-        en_gb: We are walking there on foot.
+        en_gb: We are going there on foot.
       - ru: Не ходи́ туда́ оди́н.
         en_gb: Don't go there alone.
       - ru: Положи́ кни́ги туда́, на по́лку.
@@ -5391,6 +5531,8 @@ words:
         en_gb: After the illness it is hard for him to walk.
       - ru: Мне тяжело́ нести́ э́тот чемода́н.
         en_gb: It is hard for me to carry this suitcase.
+        en_alt:
+          - This suitcase is heavy for me to carry.
       - ru: Он тяжело́ вздохну́л.
         en_gb: He sighed heavily.
       - ru: По́сле боле́зни ему́ тяжеле́е рабо́тать.
@@ -5434,10 +5576,14 @@ words:
     usage:
       - ru: Сего́дня удиви́тельно тепло́.
         en_gb: It is surprisingly warm today.
+        en_alt:
+          - Today it is surprisingly warm.
       - ru: Она́ удиви́тельно краси́во поёт.
         en_gb: She sings surprisingly beautifully.
       - ru: Удиви́тельно, как бы́стро лети́т вре́мя.
         en_gb: It's amazing how fast time flies.
+        en_alt:
+          - It is surprising how quickly time flies.
       - ru: Что мо́жет быть удиви́тельнее э́того?
         en_gb: What could be more surprising than this?
         inflect: { token: 4, degree: comparative, rule: adv-comparative }
@@ -5459,8 +5605,12 @@ words:
         en_gb: I am terribly hungry.
       - ru: Сего́дня ужа́сно холо́дная пого́да.
         en_gb: The weather is terribly cold today.
+        en_alt:
+          - Today the weather is terribly cold.
       - ru: Он ужа́сно расстро́ился и́з-за но́вости.
         en_gb: He was terribly upset by the news.
+        en_alt:
+          - He was terribly upset because of the news.
       - ru: Ничего́ ужа́снее я не ви́дел.
         en_gb: I have not seen anything more terrible.
         inflect: { token: 2, degree: comparative, rule: adv-comparative }
@@ -5474,10 +5624,14 @@ words:
     usage:
       - ru: Он уже́ до́ма.
         en_gb: He is already at home.
+        en_alt:
+          - He is already home.
       - ru: Уже́ по́здно, пора́ спать.
         en_gb: It is already late, time to sleep.
       - ru: Ты уже́ всё съел?
         en_gb: Have you eaten everything already?
+        en_alt:
+          - Have you already eaten everything?
   "холодно=coldly":
     cefr_level: A1
     accented: хо́лодно
@@ -5516,7 +5670,7 @@ words:
       - ru: Ты сде́лал рабо́ту хорошо́.
         en_gb: You did the work well.
       - ru: Здесь хорошо́ отдыха́ть ле́том.
-        en_gb: It is nice to relax here in summer.
+        en_gb: It is good to rest here in summer.
       - ru: Сего́дня я чу́вствую себя́ лу́чше.
         en_gb: Today I feel better.
         inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
@@ -5538,6 +5692,8 @@ words:
         en_gb: I often think about you.
       - ru: Он звони́т ча́ще, чем пи́шет.
         en_gb: He phones more often than he writes.
+        en_alt:
+          - He calls more often than he writes.
         inflect: { token: 3, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ча́ще
@@ -5561,6 +5717,8 @@ words:
         en_gb: He always acts honestly.
       - ru: Че́стно говоря́, я уста́ла.
         en_gb: Honestly speaking, I am tired.
+        en_alt:
+          - To be honest, I am tired.
       - ru: Бы́ло бы честне́е сказа́ть пра́вду.
         en_gb: It would be more honest to tell the truth.
         inflect: { token: 3, degree: comparative, rule: adv-comparative }
@@ -5584,8 +5742,12 @@ words:
         en_gb: He carried out the task precisely.
       - ru: На фо́то всё ви́дно чётко.
         en_gb: Everything is clearly visible in the photo.
+        en_alt:
+          - In the photo everything is clearly visible.
       - ru: Говори́ чётче, тебя́ пло́хо слы́шно.
         en_gb: Speak more clearly, you can hardly be heard.
+        en_alt:
+          - Speak more clearly, you are hard to hear.
         inflect: { token: 2, degree: comparative, rule: adv-comparative-stem }
   "чисто=purely":
     cefr_level: B1
@@ -5600,10 +5762,12 @@ words:
     usage:
       - ru: В ко́мнате бы́ло чи́сто и светло́.
         en_gb: The room was clean and bright.
+        en_alt:
+          - It was clean and bright in the room.
       - ru: Э́то чи́сто моё ли́чное мне́ние.
         en_gb: This is purely my personal opinion.
       - ru: Он чи́сто говори́т по-ру́сски.
-        en_gb: He speaks Russian cleanly.
+        en_gb: He speaks Russian clearly.
       - ru: В но́вой ку́хне чи́ще, чем в ста́рой.
         en_gb: In the new kitchen it is cleaner than in the old one.
         inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
@@ -5623,6 +5787,8 @@ words:
         en_gb: She is extremely glad to see you.
       - ru: Зада́ча оказа́лась чрезвыча́йно сло́жной.
         en_gb: The task turned out to be extremely difficult.
+        en_alt:
+          - The task turned out to be extremely complex.
   "широко=widely":
     cefr_level: B1
     accented: широко́
@@ -5660,6 +5826,8 @@ words:
         en_gb: It was very noisy in the classroom.
       - ru: Де́ти шу́мно игра́ли во дворе́.
         en_gb: The children were playing noisily in the yard.
+        en_alt:
+          - The children were playing noisily in the courtyard.
       - ru: Здесь сли́шком шу́мно, я не слы́шу тебя́.
         en_gb: It's too noisy here, I can't hear you.
   "явно=obviously":
@@ -5711,12 +5879,16 @@ words:
     usage:
       - ru: Со́лнце све́тит я́рко.
         en_gb: The sun is shining brightly.
+        en_alt:
+          - The sun shines brightly.
       - ru: Ко́мната я́рко освещена́.
         en_gb: The room is brightly lit.
       - ru: Она́ я́рко оде́та сего́дня.
         en_gb: She is brightly dressed today.
       - ru: Ле́том со́лнце све́тит я́рче.
         en_gb: In summer the sun shines more brightly.
+        en_alt:
+          - In summer the sun shines brighter.
         inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
   "ясно=clearly":
     cefr_level: A2
@@ -5736,6 +5908,8 @@ words:
         en_gb: Now everything is clear to me.
       - ru: Он я́сно объясни́л зада́чу.
         en_gb: He explained the task clearly.
+        en_alt:
+          - He clearly explained the task.
       - ru: На не́бе я́сно, ни одного́ о́блака.
         en_gb: The sky is clear, not a single cloud.
       - ru: Объясни́ я́снее, пожа́луйста.
