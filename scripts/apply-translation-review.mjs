@@ -44,7 +44,7 @@
  *   --quarantine PATH   where deferred fix-russian proposals go
  *                       (default: review/quarantine-russian.jsonl)
  */
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import yaml from 'js-yaml'
@@ -211,7 +211,28 @@ for (const [file, filePoposals] of byFile) {
 }
 
 if (quarantine.length && APPLY) {
-  writeFileSync(quarantinePath, `${quarantine.map((q) => JSON.stringify(q)).join('\n')}\n`)
+  // Accumulate. The review applies in batches as reviewers finish, so writing
+  // this file fresh each run would drop every proposal quarantined by an
+  // earlier batch — and since the file is gitignored, silently. Existing
+  // entries are re-read and merged, keyed by the sentence they would rewrite.
+  const existing = new Map()
+  if (existsSync(quarantinePath)) {
+    for (const line of readFileSync(quarantinePath, 'utf8').split('\n')) {
+      if (!line.trim()) continue
+      try {
+        const row = JSON.parse(line)
+        existing.set(`${row.key}\u0000${row.ru}`, row)
+      } catch {
+        // A hand-edited line that no longer parses is kept verbatim rather than
+        // dropped — this file is a worklist someone may have annotated.
+        existing.set(line, line)
+      }
+    }
+  }
+  for (const q of quarantine) existing.set(`${q.key}\u0000${q.ru}`, q)
+  const rendered = [...existing.values()].map((q) => (typeof q === 'string' ? q : JSON.stringify(q)))
+  writeFileSync(quarantinePath, `${rendered.join('\n')}\n`)
+  console.log(`  quarantine now holds ${rendered.length} proposal(s)`)
 }
 
 console.log(`\nproposals read      ${stats.read}`)
