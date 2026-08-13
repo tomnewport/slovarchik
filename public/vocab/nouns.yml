@@ -22005,9 +22005,14 @@ words:
     usage:
       - ru: Дава́й пойдём в кино́ сего́дня ве́чером.
         en_gb: Let's go to the cinema this evening.
+        en_alt:
+          - Let's go to the cinema tonight.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он о́чень лю́бит кино́.
         en_gb: He loves cinema very much.
+        en_alt:
+          - He really loves the cinema.
+          - He is very fond of the cinema.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кино́ сего́дня но́вый фильм.
         en_gb: There is a new film at the cinema today.
@@ -22040,6 +22045,8 @@ words:
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ря́дом с до́мом откры́ли кинотеа́тр.
         en_gb: A cinema opened near the house.
+        en_alt:
+          - A cinema has opened next to the house.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Дава́й встре́тимся у кинотеа́тра.
         en_gb: "Let's meet by the cinema."
@@ -22103,6 +22110,8 @@ words:
     usage:
       - ru: Я о́чень люблю́ ки́слую капу́сту.
         en_gb: I really love sauerkraut.
+        en_alt:
+          - I love sauerkraut very much.
         inflect: { token: 4, span: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ки́слая капу́ста поле́зна для здоро́вья.
         en_gb: Sauerkraut is good for your health.
@@ -22131,7 +22140,7 @@ words:
         en_gb: Plants give us oxygen.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Без кислоро́да челове́к не мо́жет жить.
-        en_gb: A human cannot live without oxygen.
+        en_gb: Without oxygen a person cannot live.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: кислоро́д
@@ -22155,6 +22164,8 @@ words:
     usage:
       - ru: Худо́жник взял кисть и кра́ски.
         en_gb: The artist took a brush and paints.
+        en_alt:
+          - The artist picked up a brush and paints.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Помо́й ки́сти по́сле рабо́ты.
         en_gb: Wash the brushes after work.
@@ -22216,6 +22227,8 @@ words:
     usage:
       - ru: Я познако́милась с кита́йцем.
         en_gb: I got to know a Chinese man.
+        en_alt:
+          - I met a Chinese man.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Кита́ец показа́л нам доро́гу.
         en_gb: The Chinese man showed us the way.
@@ -22255,6 +22268,8 @@ words:
     usage:
       - ru: Кита́й — больша́я страна́.
         en_gb: China is a large country.
+        en_alt:
+          - China is a big country.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мы верну́лись из Кита́я вчера́.
         en_gb: We returned from China yesterday.
@@ -22342,9 +22357,14 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Кла́дбище нахо́дится за го́родом.
         en_gb: The cemetery is outside the town.
+        en_alt:
+          - The cemetery is located outside the city.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Они́ верну́лись с кла́дбища ти́хими.
         en_gb: They returned from the cemetery quiet.
+        en_alt:
+          - They came back from the cemetery quiet.
+          - They returned from the cemetery silent.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: кла́дбище
@@ -22375,12 +22395,14 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кла́ссе сиди́т два́дцать ученико́в.
         en_gb: There are twenty pupils in the classroom.
+        en_alt:
+          - Twenty pupils are sitting in the classroom.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учи́тель убра́л кла́ссы по́сле уро́ков.
         en_gb: The teacher tidied the classrooms after lessons.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Дире́ктор ходи́л по кла́ссам и проверя́л поря́док.
-        en_gb: The head walked round the classrooms checking that all was in order.
+        en_gb: The headmaster went round the classrooms and checked that all was in order.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: В мла́дших кла́ссах де́ти у́чатся то́лько до обе́да.
         en_gb: In the junior classes the children study only until lunchtime.
@@ -22413,9 +22435,11 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он ничего́ не понима́ет в кла́ссике.
         en_gb: He understands nothing about classical music.
+        en_alt:
+          - He doesn't understand anything about classical music.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Кла́ссика никогда́ не устарева́ет.
-        en_gb: The classics never go out of date.
+        en_gb: Classical music never goes out of date.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
     declension:
       sg_nom: кла́ссика
@@ -22462,9 +22486,13 @@ words:
     usage:
       - ru: Прикле́й бума́гу кле́ем.
         en_gb: Stick the paper with glue.
+        en_alt:
+          - Stick the paper down with glue.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У меня́ зако́нчился клей.
         en_gb: I have run out of glue.
+        en_alt:
+          - My glue has run out.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На столе́ ка́пля кле́я.
         en_gb: There is a drop of glue on the table.
@@ -22492,7 +22520,7 @@ words:
         en_gb: In autumn the maple turns red.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мы собра́ли ли́стья клёна.
-        en_gb: We gathered the maple's leaves.
+        en_gb: We gathered the maple leaves.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: клён
@@ -22557,21 +22585,33 @@ words:
     usage:
       - ru: Ме́неджер бы́стро отвеча́ет клие́нтам.
         en_gb: The manager replies to clients quickly.
+        en_alt:
+          - The manager answers clients quickly.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Клие́нт всегда́ прав.
         en_gb: The client is always right.
+        en_alt:
+          - The customer is always right.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мы це́ним ка́ждого клие́нта.
         en_gb: We value every client.
+        en_alt:
+          - We value each client.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В о́фисе мно́го но́вых клие́нтов.
         en_gb: There are many new clients at the office.
+        en_alt:
+          - There are a lot of new clients in the office.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Банк рассыла́ет клие́нтам сообще́ния о ски́дках.
         en_gb: The bank sends its clients messages about discounts.
+        en_alt:
+          - The bank sends out messages about discounts to clients.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Молодо́й ме́неджер уме́ет ла́дить да́же с тру́дными клие́нтами.
         en_gb: The young manager knows how to get on even with difficult clients.
+        en_alt:
+          - The young manager is able to get on even with difficult clients.
         inflect: { token: 8, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: клие́нт
@@ -22603,6 +22643,8 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Кли́ника откры́та круглосу́точно.
         en_gb: The clinic is open around the clock.
+        en_alt:
+          - The clinic is open twenty-four hours a day.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он идёт к врачу́ в но́вую кли́нику.
         en_gb: He is going to the doctor at a new clinic.
@@ -22639,6 +22681,8 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В го́роде мно́го ночны́х клу́бов.
         en_gb: There are many night clubs in the city.
+        en_alt:
+          - There are a lot of nightclubs in the city.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: клуб
@@ -22709,6 +22753,8 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он до́лго греме́л ключа́ми у две́ри.
         en_gb: He rattled his keys at the door for a long time.
+        en_alt:
+          - He rattled his keys by the door for a long time.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: ключ
@@ -22736,6 +22782,8 @@ words:
     usage:
       - ru: Я сдала́ кни́ги в библиоте́ку.
         en_gb: I returned the books to the library.
+        en_alt:
+          - I handed the books in to the library.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Э́то о́чень интере́сная кни́га.
         en_gb: This is a very interesting book.
@@ -22748,6 +22796,8 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Экза́мен придётся сдава́ть сра́зу по не́скольким кни́гам.
         en_gb: The exam will have to be taken across several books at once.
+        en_alt:
+          - The exam will have to be taken on several books at once.
         inflect: { token: 7, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Весь стол был зава́лен ста́рыми кни́гами.
         en_gb: The whole table was piled with old books.
@@ -22800,6 +22850,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́мке лежи́т ма́ленькая кни́жка.
         en_gb: There is a little book in the bag.
+        en_alt:
+          - A little book is lying in the bag.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мне нра́вятся карти́нки в э́той кни́жке.
         en_gb: I like the pictures in this book.
@@ -22917,12 +22969,14 @@ words:
     usage:
       - ru: У ма́лыша не́жная ко́жа.
         en_gb: The baby has soft skin.
+        en_alt:
+          - The baby has delicate skin.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На со́лнце ко́жа бы́стро темне́ет.
         en_gb: In the sun the skin quickly darkens.
         inflect: { token: 3, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Крем хорошо́ влия́ет на ко́жу.
-        en_gb: The cream is good for the skin.
+        en_gb: The cream has a good effect on the skin.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
       sg_nom: ко́жа
@@ -23111,7 +23165,7 @@ words:
         en_gb: She put on tights and a skirt.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Зимо́й ношу́ тёплые колго́тки.
-        en_gb: In winter I wear thick tights.
+        en_gb: In winter I wear warm tights.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: На колго́тках появи́лась стре́лка.
         en_gb: A ladder appeared in the tights.
@@ -23155,6 +23209,8 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В леге́нде расска́зывают о колдуна́х.
         en_gb: The legend tells of sorcerers.
+        en_alt:
+          - In the legend they tell of sorcerers.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
   "колено=knee":
     cefr_level: A2
@@ -23174,6 +23230,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ребёнок сиде́л у отца́ на коле́нях.
         en_gb: The child sat on his father's knees.
+        en_alt:
+          - The child sat on his father's lap.
         inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: коле́но
@@ -23266,6 +23324,8 @@ words:
         inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
       - ru: Я познако́мил тебя́ с колле́гой.
         en_gb: I introduced you to my colleague.
+        en_alt:
+          - I introduced you to a colleague.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Мой колле́га всегда́ помога́ет мне.
         en_gb: My colleague always helps me.
@@ -23278,9 +23338,13 @@ words:
         inflect: { token: 6, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Она́ всегда́ гото́ва прийти́ на по́мощь колле́гам.
         en_gb: She is always ready to come to her colleagues' aid.
+        en_alt:
+          - She is always ready to come to the aid of her colleagues.
         inflect: { token: 7, case: dat, number: pl, rule: noun-dat-pl }
       - ru: По́сле рабо́ты я иногда́ пью ко́фе с колле́гами.
         en_gb: After work I sometimes have coffee with my colleagues.
+        en_alt:
+          - After work I sometimes drink coffee with colleagues.
         inflect: { token: 8, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: колле́га
@@ -23373,6 +23437,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ба́шне зазвони́л ко́локол.
         en_gb: The bell rang in the tower.
+        en_alt:
+          - A bell began to ring in the tower.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Гро́мкий ко́локол слы́шен издалека́.
         en_gb: The loud bell can be heard from afar.
@@ -23702,10 +23768,12 @@ words:
       standard: commissar (a Soviet political officer)
     usage:
       - ru: Комисса́р следи́л за мора́лью в ча́сти.
-        en_gb: The commissar monitored morale in the unit.
+        en_gb: The commissar watched over morals in the unit.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Солда́ты ве́рили комисса́ру.
         en_gb: The soldiers trusted the commissar.
+        en_alt:
+          - The soldiers believed the commissar.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В по́лку присла́ли но́вых комисса́ров.
         en_gb: New commissars were sent to the regiment.
@@ -23770,12 +23838,16 @@ words:
     usage:
       - ru: Комите́т при́нял реше́ние.
         en_gb: The committee made a decision.
+        en_alt:
+          - The committee took a decision.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Его́ вы́брали в комите́т.
         en_gb: He was elected to the committee.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Об э́том говори́ли на комите́те.
         en_gb: This was discussed at the committee.
+        en_alt:
+          - They talked about this at the committee.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
     declension:
       sg_nom: комите́т
@@ -23963,7 +24035,7 @@ words:
         en_gb: He opened his own company.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Они́ пришли́ весёлой компа́нией.
-        en_gb: They came as a cheerful company.
+        en_gb: They arrived as a merry group.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: компа́ния
@@ -23994,6 +24066,8 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У него́ ко́мплекс и́з-за ро́ста.
         en_gb: He has a complex about his height.
+        en_alt:
+          - He has a complex because of his height.
         inflect: { token: 3, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ря́дом постро́или но́вый ко́мплекс.
         en_gb: A new complex was built nearby.
@@ -24030,6 +24104,8 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Вели́кий компози́тор жил в э́том до́ме.
         en_gb: A great composer lived in this house.
+        en_alt:
+          - The great composer lived in this house.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
     declension:
       sg_nom: компози́тор
