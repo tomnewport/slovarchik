@@ -26425,9 +26425,13 @@ words:
     usage:
       - ru: У пти́цы сло́мано крыло́.
         en_gb: The bird has a broken wing.
+        en_alt:
+          - The bird's wing is broken.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Самолёт поверну́л на пра́вое крыло́.
         en_gb: The plane banked onto its right wing.
+        en_alt:
+          - The plane turned onto its right wing.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Пти́ца распра́вила кры́лья.
         en_gb: The bird spread its wings.
@@ -26457,10 +26461,12 @@ words:
       standard: porch (a covered entrance to a building)
     usage:
       - ru: Он стоя́л на крыльце́ и ждал госте́й.
-        en_gb: He stood on the porch waiting for guests.
+        en_gb: He stood on the porch and waited for guests.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На крыльце́ лежа́л снег.
         en_gb: There was snow on the porch.
+        en_alt:
+          - Snow lay on the porch.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ помы́ла крыльцо́.
         en_gb: She washed the porch.
@@ -26525,6 +26531,8 @@ words:
     usage:
       - ru: На кры́ше лежи́т снег.
         en_gb: There is snow on the roof.
+        en_alt:
+          - Snow lies on the roof.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Рабо́чие чи́нят кры́шу.
         en_gb: The workers are repairing the roof.
@@ -26573,12 +26581,16 @@ words:
     usage:
       - ru: Закро́й кастрю́лю кры́шкой.
         en_gb: Cover the pot with the lid.
+        en_alt:
+          - Cover the saucepan with the lid.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Кры́шка от ба́нки потеря́лась.
         en_gb: The lid of the jar got lost.
+        en_alt:
+          - The jar's lid has been lost.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В я́щике лежа́т ра́зные кры́шки.
-        en_gb: There are various lids in the drawer.
+        en_gb: There are different lids in the box.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
   "крючок=hook":
     cefr_level: B2
@@ -26633,6 +26645,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Де́ти стро́или ба́шню из ку́бов.
         en_gb: The children built a tower out of cubes.
+        en_alt:
+          - The children were building a tower out of cubes.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: куб
@@ -26723,6 +26737,8 @@ words:
     usage:
       - ru: Де́вочка игра́ет с ку́клой.
         en_gb: The girl plays with a doll.
+        en_alt:
+          - The girl is playing with a doll.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Ма́ма купи́ла краси́вую ку́клу.
         en_gb: Mum bought a beautiful doll.
@@ -26828,6 +26844,8 @@ words:
     usage:
       - ru: Он изуча́ет ру́сскую культу́ру.
         en_gb: He studies Russian culture.
+        en_alt:
+          - He is studying Russian culture.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В культу́ре наро́да мно́го тради́ций.
         en_gb: There are many traditions in the people's culture.
@@ -26884,9 +26902,11 @@ words:
         inflect: { token: 2, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Ку́пол це́ркви сия́ет зо́лотом.
         en_gb: The dome of the church gleams with gold.
+        en_alt:
+          - The church's dome shines with gold.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Под ку́полом лета́ли го́луби.
-        en_gb: Pigeons flew under the dome.
+        en_gb: Pigeons were flying under the dome.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: ку́пол
@@ -26954,7 +26974,7 @@ words:
         en_gb: The hen lays eggs.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ку́рицу зажа́рили на обе́д.
-        en_gb: The hen was roasted for dinner.
+        en_gb: The hen was roasted for lunch.
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Во дворе́ хо́дят ку́ры.
         en_gb: Hens are walking around the yard.
@@ -27020,6 +27040,8 @@ words:
     usage:
       - ru: Он записа́лся на курс ру́сского языка́.
         en_gb: He enrolled in a Russian language course.
+        en_alt:
+          - He signed up for a Russian language course.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я зако́нчила э́тот курс.
         en_gb: I finished this course.
@@ -27166,10 +27188,12 @@ words:
         en_gb: We renovated the kitchen.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Из ку́хни вку́сно па́хнет.
-        en_gb: There is a tasty smell from the kitchen.
+        en_gb: There is a delicious smell from the kitchen.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В ма́леньких ку́хнях тру́дно размести́ть большу́ю семью́.
         en_gb: In small kitchens it is hard to fit a big family.
+        en_alt:
+          - In small kitchens it is difficult to accommodate a large family.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: ку́хня
@@ -27215,6 +27239,8 @@ words:
         inflect: { token: 3, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Де́ти пры́гали в ку́чу ли́стьев.
         en_gb: The children jumped into the heap of leaves.
+        en_alt:
+          - The children were jumping into a heap of leaves.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ ку́чи ста́рых бума́г.
         en_gb: There are heaps of old papers on the table.
@@ -27245,6 +27271,8 @@ words:
     usage:
       - ru: В лаборато́рии прово́дят о́пыты.
         en_gb: Experiments are carried out in the laboratory.
+        en_alt:
+          - They carry out experiments in the laboratory.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учёные верну́лись в лаборато́рию.
         en_gb: The scientists returned to the laboratory.
@@ -27335,12 +27363,16 @@ words:
     usage:
       - ru: Он держа́л моне́ту на ладо́ни.
         en_gb: He held the coin in his palm.
+        en_alt:
+          - He was holding the coin in his palm.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он протяну́л мне ладо́нь.
         en_gb: He held out his palm to me.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Снежи́нки та́яли на ладо́нях.
         en_gb: Snowflakes melted on his palms.
+        en_alt:
+          - Snowflakes were melting on his palms.
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
     declension:
       sg_nom: ладо́нь
@@ -27432,6 +27464,8 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ла́мпа стои́т на столе́.
         en_gb: The lamp is on the table.
+        en_alt:
+          - The lamp stands on the table.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Под ла́мпой удо́бно чита́ть.
         en_gb: It is comfortable to read under the lamp.
@@ -27462,6 +27496,8 @@ words:
     usage:
       - ru: Ла́мпочка перегоре́ла.
         en_gb: The light bulb has blown.
+        en_alt:
+          - The light bulb has burned out.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Купи́ но́вую ла́мпочку.
         en_gb: Buy a new light bulb.
@@ -27498,6 +27534,8 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он собра́л буке́т ла́ндышей.
         en_gb: He gathered a bunch of lilies of the valley.
+        en_alt:
+          - He picked a bouquet of lilies of the valley.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: ла́ндыш
@@ -27557,6 +27595,8 @@ words:
     usage:
       - ru: Я пригото́вила вку́сную лапшу́.
         en_gb: I made tasty noodles.
+        en_alt:
+          - I cooked delicious noodles.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го лапши́.
         en_gb: There are lots of noodles in the soup.
@@ -27611,7 +27651,7 @@ words:
       standard: swan (a large white water bird with a long neck)
     usage:
       - ru: По о́зеру плыл бе́лый ле́бедь.
-        en_gb: A white swan swam across the lake.
+        en_gb: A white swan was swimming on the lake.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мы любова́лись лебедя́ми на пруду́.
         en_gb: We admired the swans on the pond.
@@ -27642,6 +27682,8 @@ words:
     usage:
       - ru: Лев — царь звере́й.
         en_gb: The lion is the king of the beasts.
+        en_alt:
+          - The lion is the king of beasts.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В зоопа́рке мы ви́дели льва.
         en_gb: We saw a lion at the zoo.
@@ -27712,6 +27754,8 @@ words:
     usage:
       - ru: Куре́ние вре́дно для лёгких.
         en_gb: Smoking is bad for the lungs.
+        en_alt:
+          - Smoking is harmful to the lungs.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Врач прослу́шал его́ лёгкое.
         en_gb: The doctor listened to his lung.
@@ -27754,6 +27798,8 @@ words:
     usage:
       - ru: Река́ покры́лась льдом.
         en_gb: The river was covered with ice.
+        en_alt:
+          - The river became covered with ice.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Положи́ в стака́н кусо́чек льда.
         en_gb: Put a piece of ice in the glass.
@@ -27803,6 +27849,8 @@ words:
     usage:
       - ru: Он поли́л цветы́ из ле́йки.
         en_gb: He watered the flowers from the watering can.
+        en_alt:
+          - He watered the flowers with the watering can.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Ле́йка полна́ воды́.
         en_gb: The watering can is full of water.
@@ -27899,9 +27947,13 @@ words:
     usage:
       - ru: Студе́нты слу́шали ле́кцию.
         en_gb: The students listened to the lecture.
+        en_alt:
+          - The students were listening to the lecture.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Профе́ссор чита́ет ле́кцию.
         en_gb: The professor is giving a lecture.
+        en_alt:
+          - The professor is delivering a lecture.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он опозда́л на ле́кцию.
         en_gb: He was late for the lecture.
@@ -27948,9 +28000,13 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Над Ленингра́дом плы́ли облака́.
         en_gb: Clouds drifted over Leningrad.
+        en_alt:
+          - Clouds floated over Leningrad.
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: По́езд идёт до Ленингра́да.
         en_gb: The train goes to Leningrad.
+        en_alt:
+          - The train goes as far as Leningrad.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Они́ перее́хали в Ленингра́д.
         en_gb: They moved to Leningrad.
@@ -27988,7 +28044,7 @@ words:
         en_gb: There were bright ribbons in the box.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Пода́рок переви́т кра́сной ле́нтой.
-        en_gb: The present is wrapped with a red ribbon.
+        en_gb: The present is tied with a red ribbon.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
   "лепесток=petal":
     cefr_level: B2
@@ -28040,9 +28096,13 @@ words:
           - There are wild animals living in the forest.
       - ru: Мы пошли́ в лес за гриба́ми.
         en_gb: We went to the forest for mushrooms.
+        en_alt:
+          - We went into the forest for mushrooms.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: За реко́й видны́ густы́е леса́.
         en_gb: Thick forests can be seen beyond the river.
+        en_alt:
+          - Dense forests are visible beyond the river.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
       - ru: По со́сновым леса́м раски́даны ти́хие озёра.
         en_gb: Quiet lakes are scattered through the pine forests.
@@ -28123,6 +28183,8 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я жду ле́та с нетерпе́нием.
         en_gb: I am eagerly awaiting summer.
+        en_alt:
+          - I am waiting impatiently for summer.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: ле́то
@@ -28187,6 +28249,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ему́ нужны́ де́ньги на лече́ние.
         en_gb: He needs money for treatment.
+        en_alt:
+          - He needs money for the treatment.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: По́сле лече́ния он почу́вствовал себя́ лу́чше.
         en_gb: After the treatment he felt better.
@@ -28204,12 +28268,16 @@ words:
     usage:
       - ru: Ли́дер па́ртии вы́ступил с ре́чью.
         en_gb: The party leader gave a speech.
+        en_alt:
+          - The party leader made a speech.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Они́ ве́рят своему́ ли́деру.
         en_gb: They trust their leader.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Встре́тились ли́деры двух стран.
         en_gb: The leaders of the two countries met.
+        en_alt:
+          - The leaders of two countries met.
         inflect: { token: 2, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: ли́дер
@@ -28276,6 +28344,8 @@ words:
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учени́к стёр кривы́е ли́нии.
         en_gb: The pupil erased the crooked lines.
+        en_alt:
+          - The pupil rubbed out the crooked lines.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     declension:
       sg_nom: ли́ния
@@ -28405,12 +28475,16 @@ words:
     usage:
       - ru: Он написа́л письмо́ на одно́м листе́.
         en_gb: He wrote the letter on one sheet.
+        en_alt:
+          - He wrote the letter on a single sheet.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Дай мне чи́стый лист.
-        en_gb: Give me a clean sheet.
+        en_gb: Give me a blank sheet.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ испи́сала мно́го листо́в.
         en_gb: She filled many sheets with writing.
+        en_alt:
+          - She covered many sheets with writing.
         inflect: { token: 4, case: gen, number: pl, rule: noun-irregular-plural }
     declension:
       sg_nom: лист
@@ -28452,10 +28526,13 @@ words:
       - ru: На столе́ лежи́т ма́ленький листо́к.
         en_gb: A small sheet lies on the table.
         en_alt:
+          - A small sheet is lying on the table.
           - There is a small sheet lying on the table.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Запиши́ а́дрес на листке́.
         en_gb: Write the address on the sheet.
+        en_alt:
+          - Write down the address on the sheet.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он вы́рвал листо́к из тетра́ди.
         en_gb: He tore a sheet out of the exercise book.
