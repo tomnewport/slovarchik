@@ -125,7 +125,7 @@
 {"key": "свадьба=wedding", "ru": "На сва́дьбе бы́ло мно́го госте́й.", "verdict": "keep", "defect": "none", "confidence": "high"}
 {"key": "свадьба=wedding", "ru": "Нас пригласи́ли на сва́дьбу.", "verdict": "keep", "defect": "none", "confidence": "high"}
 {"key": "свадьба=wedding", "ru": "Их сва́дьба бу́дет ле́том.", "verdict": "keep", "defect": "none", "confidence": "high"}
-{"key": "сведение=information", "ru": "Я узна́л об э́том из надёжных све́дений.", "verdict": "flag", "defect": "unnatural-russian", "note": "Russian normally says узна́ть из надёжных исто́чников; учить 'из све́дений' is odd, but rewording would drop the headword, so this needs a human decision.", "confidence": "low"}
+{"key": "сведение=information", "ru": "Я узна́л об э́том из надёжных све́дений.", "verdict": "flag", "defect": "unnatural-russian", "note": "Russian normally says узна́ть из надёжных исто́чников; узна́ть 'из све́дений' is odd, but rewording would drop the headword, so this needs a human decision.", "confidence": "low"}
 {"key": "сведение=information", "ru": "Поли́ция собрала́ но́вые све́дения.", "verdict": "keep", "defect": "none", "confidence": "high"}
 {"key": "сведение=information", "ru": "Э́то ва́жное све́дение.", "verdict": "keep", "defect": "none", "confidence": "high"}
 {"key": "свёкла=beetroot", "ru": "Э́тот сала́т со свёклой.", "verdict": "keep", "defect": "none", "confidence": "high"}
