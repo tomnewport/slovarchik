@@ -1247,6 +1247,8 @@ words:
     usage:
       - ru: Как зову́т твою́ сестру́?
         en_gb: What is your sister called?
+        en_alt:
+          - What is your sister's name?
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Где твой телефо́н?
         en_gb: Where is your phone?
@@ -1256,12 +1258,17 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Я ви́дела твои́ фотогра́фии.
         en_gb: I saw your photographs.
+        en_alt:
+          - I saw your photos.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: pronoun-possessive }
       - ru: Э́то кни́га твоего́ дру́га.
         en_gb: This is your friend's book.
         inflect: { token: 3, case: gen, number: sg, gender: m, rule: pronoun-possessive }
       - ru: В твоём телефо́не мно́го фотогра́фий.
         en_gb: There are many photos on your phone.
+        en_alt:
+          - There are a lot of photos on your phone.
+          - There are many photographs on your phone.
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-possessive }
       - ru: Я позвони́л твое́й ма́ме.
         en_gb: I called your mum.
@@ -1456,12 +1463,16 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: pronoun-interrogative }
       - ru: Из чего́ де́лают сыр?
         en_gb: What is cheese made from?
+        en_alt:
+          - What do they make cheese from?
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Что тако́е любо́вь?
         en_gb: What is love?
         inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Что э́то?
         en_gb: What is this?
+        en_alt:
+          - What is that?
         inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Чего́ ты бои́шься?
         en_gb: What are you afraid of?
@@ -1491,6 +1502,8 @@ words:
     usage:
       - ru: Я хочу́ тебе́ что́-то сказа́ть.
         en_gb: I want to tell you something.
+        en_alt:
+          - I want to say something to you.
         inflect: { token: 4, case: acc, rule: pronoun-interrogative }
       - ru: На столе́ лежи́т что́-то стра́нное.
         en_gb: Something strange is lying on the table.
@@ -1500,6 +1513,8 @@ words:
         inflect: { token: 2, case: ins, number: sg, rule: pronoun-interrogative }
       - ru: Мне не хвата́ет чего́-то ва́жного.
         en_gb: I am missing something important.
+        en_alt:
+          - I lack something important.
         inflect: { token: 4, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Он ду́мает о чём-то серьёзном.
         en_gb: He is thinking about something serious.
@@ -1523,9 +1538,13 @@ words:
         inflect: { token: 4, case: acc, number: sg, gender: m, animate: true, rule: pronoun-demonstrative }
       - ru: Я дал э́тому ма́льчику кни́гу.
         en_gb: I gave this boy a book.
+        en_alt:
+          - I gave a book to this boy.
         inflect: { token: 3, case: dat, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Я живу́ в э́том до́ме уже́ год.
         en_gb: I have lived in this house for a year now.
+        en_alt:
+          - I have been living in this house for a year now.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Э́тот дом о́чень ста́рый.
         en_gb: This house is very old.
@@ -1581,12 +1600,18 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: pronoun-personal }
       - ru: Пойдём со мной в кино́.
         en_gb: Come to the cinema with me.
+        en_alt:
+          - Let's go to the cinema together.
         inflect: { token: 3, case: ins, number: sg, rule: pronoun-personal }
       - ru: Мне хо́лодно, закро́й окно́.
         en_gb: I am cold — close the window.
+        en_alt:
+          - I am cold, close the window.
         inflect: { token: 1, case: dat, number: sg, rule: pronoun-personal }
       - ru: Купи́ мне моро́женое, пожа́луйста.
         en_gb: Buy me an ice cream, please.
+        en_alt:
+          - Buy me some ice cream, please.
         inflect: { token: 2, case: dat, number: sg, rule: pronoun-personal }
       - ru: Я живу́ здесь.
         en_gb: I live here.

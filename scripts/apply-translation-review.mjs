@@ -128,8 +128,18 @@ for (const [file, filePoposals] of byFile) {
   const path = join(vocabDir, file)
   const lines = readFileSync(path, 'utf8').split('\n')
   const items = parseUsageItems(lines)
+  // A proposal names its target by (word key, ru sentence). Two usage items of
+  // one word can carry the *same* Russian with different English — «Ве́тер
+  // ва́лит дере́вья.» appears twice under валить — so that pair does not
+  // identify a line. Keeping one silently would edit whichever was indexed
+  // last, so ambiguous keys are recorded and refused below.
   const index = new Map()
-  for (const item of items) index.set(`${item.key}\u0000${matchKey(item.ru)}`, item)
+  const ambiguous = new Set()
+  for (const item of items) {
+    const k = `${item.key}\u0000${matchKey(item.ru)}`
+    if (index.has(k)) ambiguous.add(k)
+    index.set(k, item)
+  }
 
   // Collect edits first, apply last: line indices must stay valid while we work.
   const replacements = new Map() // lineNo → new text
@@ -137,10 +147,16 @@ for (const [file, filePoposals] of byFile) {
   const deletions = new Set()
 
   for (const p of filePoposals) {
-    const item = index.get(`${p.key}\u0000${matchKey(p.ru)}`)
+    const lookup = `${p.key}\u0000${matchKey(p.ru)}`
+    const item = index.get(lookup)
     if (!item) {
       stats.unmatched += 1
       unmatched.push({ ...p, why: 'no usage item with that exact ru' })
+      continue
+    }
+    if (ambiguous.has(lookup)) {
+      stats.unmatched += 1
+      unmatched.push({ ...p, why: 'this word has two usage items with that exact ru — cannot tell which' })
       continue
     }
     const span = lines.slice(item.ruLine, item.lastLine + 1)
