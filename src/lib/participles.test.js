@@ -11,6 +11,7 @@ import {
   participleCell,
   participleGrid,
   participleNominative,
+  plausibleSlots,
   shortPassiveCell,
   storedNonFiniteForms,
   storedSlots,
@@ -106,6 +107,42 @@ words:
     expect(storedSlots(прочитать)).toEqual(['act_past', 'pass_past', 'pass_short', 'gerund'])
     expect(storedSlots(читать)).toEqual(['act_pres', 'gerund'])
     expect(storedSlots(ждать)).toEqual([])
+  })
+
+  it('lists what a verb could build, not just what it stores', () => {
+    // ждать stores nothing at all, but it is an imperfective: everything except
+    // the two forms that need a perfective stem is still formable in principle.
+    expect(plausibleSlots(ждать)).toEqual([
+      'act_pres',
+      'act_past',
+      'pass_pres',
+      'pass_past',
+      'pass_short',
+      'gerund',
+    ])
+    expect(plausibleSlots(прочитать)).toEqual([
+      'act_past',
+      'pass_past',
+      'pass_short',
+      'gerund',
+    ])
+  })
+
+  it('denies a passive to a verb with no accusative object', () => {
+    const помогать = verb(`
+words:
+  "помогать=to help":
+    accented: помога́ть
+    aspect: impf
+    en_gb: { standard: to help }
+    governs: { case: dat }
+`)
+    expect(plausibleSlots(помогать)).toEqual(['act_pres', 'act_past', 'gerund'])
+  })
+
+  it('rules nothing in for a verb of unknown aspect', () => {
+    expect(plausibleSlots({ pos: 'verb' })).toEqual([])
+    expect(plausibleSlots(null)).toEqual([])
   })
 
   it('flattens every stored form, one entry per short-passive gender', () => {

@@ -675,17 +675,67 @@ describe('non-finite forms (participles and gerunds)', () => {
     ])
   })
 
-  it('offers only the forms the verb actually stores', () => {
+  it('offers only the forms the verb\'s aspect can build', () => {
     // пла́кать is imperfective, so no past passive can ever be right for it.
     const [step] = buildSelectSteps({ form: 'act_pres', token: 2 }, plakat)
-    expect(step.options.map((o) => o.id)).toEqual(['act_pres', 'gerund'])
+    expect(step.options.map((o) => o.id)).toEqual(['act_pres', 'act_past', 'pass_pres', 'gerund'])
+    // прочита́ть stores four slots already, so there is nothing to pad with.
     const [pf] = buildSelectSteps({ form: 'gerund', token: 4 }, prochitat)
     expect(pf.options.map((o) => o.id)).toEqual(['act_past', 'pass_past', 'pass_short', 'gerund'])
+  })
+
+  it('pads a thinly stored verb up to a real choice', () => {
+    // услы́шать stores its gerund and nothing else, so a stored-only step would
+    // ask a question with a single answer. The distractors are the other slots
+    // a transitive perfective can build.
+    const uslyshat = {
+      key: 'услышать=to hear',
+      pos: 'verb',
+      headword: 'услы́шать',
+      meaning: 'to hear',
+      aspect: 'pf',
+      gerund: 'услы́шав',
+      extra: {},
+    }
+    const [step] = buildSelectSteps({ form: 'gerund', token: 1 }, uslyshat)
+    expect(step.options.map((o) => o.id)).toEqual([
+      'act_past',
+      'pass_past',
+      'pass_short',
+      'gerund',
+    ])
+    expect(step.options.filter((o) => o.correct)).toEqual([
+      expect.objectContaining({ id: 'gerund' }),
+    ])
+  })
+
+  it('pads with no passive for a verb whose object is not accusative', () => {
+    // кома́ндовать takes the instrumental, so it has no object to promote and
+    // no passive of either tense — those would be options that cannot be right.
+    const komandovat = {
+      key: 'командовать=to command',
+      pos: 'verb',
+      headword: 'кома́ндовать',
+      meaning: 'to command',
+      aspect: 'impf',
+      participles: { act_pres: 'кома́ндующий' },
+      governs: [{ prep: null, case: 'ins' }],
+      extra: {},
+    }
+    const [step] = buildSelectSteps({ form: 'act_pres', token: 2 }, komandovat)
+    expect(step.options.map((o) => o.id)).toEqual(['act_pres', 'act_past', 'gerund'])
   })
 
   it('still offers the annotated form when the verb stores nothing for it', () => {
     const [step] = buildSelectSteps({ form: 'pass_pres', token: 2 }, plakat)
     expect(step.options.map((o) => o.id)).toContain('pass_pres')
+  })
+
+  it('drops a step that has only one option to offer', () => {
+    // No aspect on the record, so nothing can be ruled in to pad with: the step
+    // would be a single button, which grades nothing.
+    const thin = { key: 'x=y', pos: 'verb', headword: 'х', gerund: 'х', extra: {} }
+    expect(buildSelectSteps({ form: 'gerund', token: 1 }, thin)).toEqual([])
   })
 
   it('follows the short passive with its gender / number agreement', () => {

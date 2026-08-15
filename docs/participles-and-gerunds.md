@@ -178,7 +178,11 @@ owner (that is exactly why `degreeCoverage` exists).
 
 `phraseContext.selectSteps` gains a `formStep` mirroring `degreeStep`
 (`phraseContext.js:270`) — "Which form of the verb does the sentence need?",
-offering the slots the verb actually stores plus the annotated one:
+offering the slots the verb stores plus the annotated one, padded up to four
+from the slots its aspect and government frame allow it
+(`participles.plausibleSlots`). The padding is what makes the step a question:
+the corpus stores only the forms it drills, so услы́шать carries its gerund alone
+and a stored-only step would offer a single button:
 
 | annotated as | steps |
 | --- | --- |
