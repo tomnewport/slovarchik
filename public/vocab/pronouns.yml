@@ -105,7 +105,7 @@ words:
         - the whole
     usage:
       - ru: Во всём ми́ре зна́ют э́ту пе́сню.
-        en_gb: The whole world knows this song.
+        en_gb: All over the world people know this song.
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Он рабо́тал всю ночь.
         en_gb: He worked all night.
@@ -115,12 +115,18 @@ words:
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: Весь день шёл дождь.
         en_gb: It rained all day.
+        en_alt:
+          - It was raining all day.
         inflect: { token: 1, case: acc, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Все де́ти спят.
         en_gb: All the children are asleep.
+        en_alt:
+          - All the children are sleeping.
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: pronoun-demonstrative }
       - ru: Он съел всё моро́женое.
         en_gb: He ate all the ice cream.
+        en_alt:
+          - He ate up all the ice cream.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: pronoun-demonstrative }
       - ru: Я пригласи́л всех друзе́й.
         en_gb: I invited all my friends.
@@ -167,6 +173,8 @@ words:
         inflect: { token: 5, case: pre, number: pl, rule: pronoun-personal }
       - ru: У вас есть вопро́сы?
         en_gb: Do you have questions?
+        en_alt:
+          - Do you have any questions?
         inflect: { token: 2, case: gen, number: pl, rule: pronoun-personal }
       - ru: Мы ра́ды вас ви́деть.
         en_gb: We are glad to see you.
@@ -182,6 +190,8 @@ words:
         inflect: { token: 3, case: acc, rule: pronoun-personal }
       - ru: Прия́тно рабо́тать с ва́ми.
         en_gb: It is pleasant to work with you.
+        en_alt:
+          - It is nice to work with you.
         inflect: { token: 4, case: ins, number: pl, rule: pronoun-personal }
       - ru: Я хочу́ пригласи́ть вас на у́жин.
         en_gb: I want to invite you to dinner.
@@ -236,6 +246,8 @@ words:
         en_gb: Their children study at school.
       - ru: Их дом нахо́дится за́ городом.
         en_gb: Their house is outside the city.
+        en_alt:
+          - Their house is out of town.
       - ru: Я зна́ю их роди́телей.
         en_gb: I know their parents.
   "каждый=each":
@@ -261,6 +273,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: В ка́ждом до́ме есть телеви́зор.
         en_gb: Each house has a television.
+        en_alt:
+          - There is a television in every house.
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
     forms:
       m: ка́ждый
@@ -306,15 +320,22 @@ words:
         inflect: { token: 1, case: ins, number: sg, gender: m, rule: pronoun-interrogative }
       - ru: Каку́ю кни́гу ты чита́ешь?
         en_gb: Which book are you reading?
+        en_alt:
+          - What book are you reading?
         inflect: { token: 1, case: acc, number: sg, gender: f, rule: pronoun-interrogative }
       - ru: Кака́я сего́дня пого́да?
         en_gb: What is the weather like today?
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-interrogative }
       - ru: В како́м го́роде ты живёшь?
         en_gb: Which city do you live in?
+        en_alt:
+          - In which city do you live?
+          - What city do you live in?
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-interrogative }
       - ru: Каки́е фи́льмы тебе́ нра́вятся?
         en_gb: Which films do you like?
+        en_alt:
+          - What films do you like?
         inflect: { token: 1, case: nom, number: pl, gender: pl, rule: pronoun-interrogative }
     forms:
       m: како́й
@@ -358,9 +379,13 @@ words:
     usage:
       - ru: Друг, кото́рому я звони́л, не отве́тил.
         en_gb: The friend I called didn't answer.
+        en_alt:
+          - The friend whom I called did not answer.
         inflect: { token: 2, case: dat, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Кни́га, о кото́рой мы говори́м, о́чень интере́сная.
         en_gb: The book we are talking about is very interesting.
+        en_alt:
+          - The book which we are talking about is very interesting.
         inflect: { token: 3, case: pre, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: Вот дом, в кото́ром я вы́росла.
         en_gb: Here is the house I grew up in.
@@ -370,6 +395,8 @@ words:
         inflect: { token: 2, case: acc, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: Челове́к, кото́рый звони́л, ушёл.
         en_gb: The man who called has left.
+        en_alt:
+          - The person who called has left.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: pronoun-interrogative }
       - ru: В кото́ром часу́ начина́ется уро́к?
         en_gb: At what time does the lesson start?
@@ -592,7 +619,7 @@ words:
         en_gb: Mum is waiting for us at home.
         inflect: { token: 3, case: acc, number: pl, rule: pronoun-personal }
       - ru: Они́ говоря́т о нас то́лько хорошо́.
-        en_gb: They speak about us only well.
+        en_gb: They only speak well of us.
         inflect: { token: 4, case: pre, number: pl, rule: pronoun-personal }
       - ru: Приходи́ к нам в го́сти.
         en_gb: Come and visit us.
@@ -611,6 +638,8 @@ words:
         inflect: { token: 2, case: gen, number: pl, rule: pronoun-personal }
       - ru: Он ча́сто приглаша́ет нас в го́сти.
         en_gb: He often invites us over.
+        en_alt:
+          - He often invites us round.
         inflect: { token: 4, case: acc, number: pl, rule: pronoun-personal }
     forms:
       nom: мы
@@ -630,9 +659,13 @@ words:
     usage:
       - ru: В на́шем до́ме пять этаже́й.
         en_gb: There are five floors in our building.
+        en_alt:
+          - There are five floors in our house.
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-possessive }
       - ru: Наш дом нахо́дится в це́нтре.
         en_gb: Our house is in the centre.
+        en_alt:
+          - Our house is located in the centre.
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: pronoun-possessive }
       - ru: На́ша учи́тельница о́чень до́брая.
         en_gb: Our teacher is very kind.
@@ -648,6 +681,8 @@ words:
         inflect: { token: 3, case: ins, number: sg, gender: m, rule: pronoun-possessive }
       - ru: Ты ви́дел на́шу соба́ку?
         en_gb: Have you seen our dog?
+        en_alt:
+          - Did you see our dog?
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Расскажи́ на́шим друзья́м но́вости.
         en_gb: Tell our friends the news.
@@ -729,6 +764,8 @@ words:
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: pronoun-demonstrative }
       - ru: Он не зна́ет никаки́х языко́в.
         en_gb: He knows no languages at all.
+        en_alt:
+          - He does not know any languages at all.
         inflect: { token: 4, case: gen, number: pl, gender: pl, rule: pronoun-demonstrative }
   "никто=nobody":
     cefr_level: A2
@@ -744,6 +781,8 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Я ни с кем не говори́л об э́том.
         en_gb: I have not spoken to anyone about this.
+        en_alt:
+          - I did not speak to anyone about this.
       - ru: Никто́ ничего́ не зна́ет.
         en_gb: Nobody knows anything.
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
@@ -752,6 +791,8 @@ words:
         inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Я никого́ там не ви́дела.
         en_gb: I saw nobody there.
+        en_alt:
+          - I did not see anyone there.
         inflect: { token: 2, case: acc, rule: pronoun-interrogative }
       - ru: Об э́том никому́ не говори́.
         en_gb: Do not tell anybody about this.
@@ -771,19 +812,25 @@ words:
       standard: nothing (not a single thing)
     usage:
       - ru: Она́ ничему́ не ве́рит.
-        en_gb: She believes in nothing.
+        en_gb: She does not believe anything.
         inflect: { token: 2, case: dat, number: sg, rule: pronoun-interrogative }
       - ru: Ничто́ не меня́ется в э́том го́роде.
         en_gb: Nothing changes in this town.
+        en_alt:
+          - Nothing changes in this city.
         inflect: { token: 1, case: nom, number: sg, rule: pronoun-interrogative }
       - ru: Ничто́ не ве́чно.
         en_gb: Nothing is eternal.
         inflect: { token: 1, case: nom, rule: pronoun-interrogative }
       - ru: Я ничего́ не понима́ю.
         en_gb: I understand nothing.
+        en_alt:
+          - I do not understand anything.
         inflect: { token: 2, case: gen, number: sg, rule: pronoun-interrogative }
       - ru: Он ниче́м не интересу́ется.
         en_gb: He is interested in nothing.
+        en_alt:
+          - He is not interested in anything.
         inflect: { token: 2, case: ins, number: sg, rule: pronoun-interrogative }
     forms:
       nom: ничто́
@@ -809,6 +856,8 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: pronoun-personal }
       - ru: У него́ мно́го друзе́й.
         en_gb: He has many friends.
+        en_alt:
+          - He has a lot of friends.
         inflect: { token: 2, case: gen, prep: true, rule: pronoun-personal }
       - ru: Ему́ два́дцать лет.
         en_gb: He is twenty years old.
@@ -824,6 +873,9 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: pronoun-personal }
       - ru: Я иду́ к нему́ за́втра.
         en_gb: I am going to visit him tomorrow.
+        en_alt:
+          - I am going to see him tomorrow.
+          - I am going to his place tomorrow.
         inflect: { token: 4, case: dat, prep: true, rule: pronoun-personal }
       - ru: Посмотри́ на него́!
         en_gb: Look at him!
@@ -867,9 +919,13 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: pronoun-personal }
       - ru: У неё есть ста́ршая сестра́.
         en_gb: She has an older sister.
+        en_alt:
+          - She has an elder sister.
         inflect: { token: 2, case: gen, prep: true, rule: pronoun-personal }
       - ru: Я до́лго разгова́ривала с ней.
         en_gb: I talked with her for a long time.
+        en_alt:
+          - I talked to her for a long time.
         inflect: { token: 5, case: ins, prep: true, rule: pronoun-personal }
     forms:
       nom: она́
@@ -893,6 +949,8 @@ words:
         inflect: { token: 1, case: dat, number: pl, rule: pronoun-personal }
       - ru: Мы е́дем с ни́ми на мо́ре.
         en_gb: We are going to the sea with them.
+        en_alt:
+          - We are going to the seaside with them.
         inflect: { token: 4, case: ins, prep: true, rule: pronoun-personal }
       - ru: Мы горди́мся и́ми.
         en_gb: We are proud of them.
@@ -937,6 +995,8 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: pronoun-personal }
       - ru: Пла́тье мне понра́вилось, и я купи́ла его́.
         en_gb: I liked the dress, so I bought it.
+        en_alt:
+          - I liked the dress, and I bought it.
         inflect: { token: 7, case: acc, number: sg, rule: pronoun-personal }
     forms:
       nom: оно́
@@ -1015,9 +1075,11 @@ words:
         inflect: { token: 3, case: ins, number: sg, gender: m, rule: pronoun-possessive }
       - ru: Ка́ждый расска́зывал о свои́х пла́нах.
         en_gb: Everyone talked about their own plans.
+        en_alt:
+          - Each person talked about their own plans.
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: pronoun-possessive }
       - ru: Он лю́бит свою́ рабо́ту.
-        en_gb: He loves his (own) work.
+        en_gb: He loves his own work.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Я взяла́ свой зо́нтик.
         en_gb: I took my own umbrella.
@@ -1080,6 +1142,8 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: pronoun-personal }
       - ru: Расскажи́те немно́го о себе́.
         en_gb: Tell us a little about yourself.
+        en_alt:
+          - Tell me a little about yourself.
         inflect: { token: 4, case: pre, number: sg, rule: pronoun-personal }
       - ru: Возьми́ зо́нтик с собо́й.
         en_gb: Take an umbrella with you.
@@ -1092,6 +1156,8 @@ words:
         inflect: { token: 2, case: dat, rule: pronoun-personal }
       - ru: Он недово́лен собо́й.
         en_gb: He is unhappy with himself.
+        en_alt:
+          - He is dissatisfied with himself.
         inflect: { token: 3, case: ins, rule: pronoun-personal }
     forms:
       gen: себя́
@@ -1126,9 +1192,13 @@ words:
     usage:
       - ru: У меня́ тако́й же телефо́н.
         en_gb: I have the same phone.
+        en_alt:
+          - I have the same kind of phone.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Тако́й краси́вый го́род!
         en_gb: What a beautiful city!
+        en_alt:
+          - Such a beautiful city!
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Я никогда́ не ви́дел тако́й маши́ны.
         en_gb: I have never seen such a car.
