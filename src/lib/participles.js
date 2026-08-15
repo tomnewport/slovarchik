@@ -145,6 +145,30 @@ export function storedSlots(word) {
 }
 
 /**
+ * The non-finite slots a verb could plausibly build, whether or not the corpus
+ * stores them: every slot its aspect allows, minus the passives when its
+ * government frame leaves no accusative object to promote (помога́ть + dative
+ * has no passive — the same rule verbsData.test.js enforces on the corpus).
+ *
+ * Deliberately distinct from {@link storedSlots}: the corpus stores only the
+ * forms its own sentences drill, so "not stored" is not "cannot exist"
+ * (услы́шать stores just its gerund, yet услы́шанный is perfectly good Russian).
+ * That makes these the fair distractors for the "which form?" step — wrong for
+ * the sentence without being impossible for the verb. Empty when the aspect is
+ * unknown, since then nothing can be ruled in.
+ *
+ * @returns {string[]} a subset of {@link FORM_SLOTS}, in canonical order
+ */
+export function plausibleSlots(word) {
+  const aspect = word?.aspect
+  const noPassive = !!word?.governs
+  return FORM_SLOTS.filter((slot) => {
+    if (noPassive && PASSIVE_SLOTS.includes(slot)) return false
+    return SLOT_ASPECTS[slot].includes(aspect)
+  })
+}
+
+/**
  * Every non-finite form a verb stores, flattened for the coverage oracle and the
  * data guards: `{ slot, form }`, with the short passive contributing one entry
  * per gender cell (`pass_short.f`).

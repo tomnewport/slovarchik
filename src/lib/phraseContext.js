@@ -17,7 +17,15 @@ import { normalize } from './text.js'
 import { sample, shuffle } from './quiz.js'
 import { CASES, LOCATIVE, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
 import { GOVERNMENT_RULES } from './verbGovernment.js'
-import { FORM_HINT, FORM_LABEL, FORM_SLOTS, shortPassiveCell, storedSlots } from './participles.js'
+import {
+  FORM_HINT,
+  FORM_LABEL,
+  FORM_SLOTS,
+  PASSIVE_SLOTS,
+  plausibleSlots,
+  shortPassiveCell,
+  storedSlots,
+} from './participles.js'
 
 /** Parts of speech that carry a context drill. */
 export const CONTEXT_POS = Object.freeze(['noun', 'verb', 'adjective', 'pronoun'])
@@ -297,20 +305,43 @@ function degreeStep(target, word) {
 }
 
 /**
+ * How many options the "which form?" step aims to offer. Most verbs store only
+ * the one or two non-finite forms their own sentences drill, so a step built
+ * from stored slots alone is usually a single button — nothing to choose.
+ */
+const FORM_OPTIONS = 4
+
+/**
  * Selection step: pick which non-finite form of the verb the sentence needs —
  * a participle (and which one) or the gerund. This is the step that carries the
  * *meaning*: the formation drill lives in the `#nonfinite` paradigm, but knowing
  * that "the crying child" wants a present active participle while "without
  * thinking" wants a gerund is what the sentence teaches.
  *
- * Like genderStep and degreeStep, the options are the forms the verb really
- * stores — offering a present active participle for a perfective (which has no
- * present stem) would be an option that can never be right — plus the annotated
- * one, which is always offered even if the word's own data is thin.
+ * The forms the verb stores are always offered (the annotated one included, even
+ * when the word's data is thin), then padded up to {@link FORM_OPTIONS} from the
+ * slots its aspect and government frame allow it — see participles.plausibleSlots.
+ * Unlike genderStep and degreeStep, "the word stores it" is the wrong bar here:
+ * the corpus stores only the forms it drills, so услы́шать carries its gerund
+ * alone and a stored-only step would ask a question with one answer. Padding
+ * with unstored-but-formable slots keeps every option one the sentence could
+ * plausibly have wanted; the impossible ones (a present participle of a
+ * perfective) stay out.
+ *
+ * Actives and the gerund pad first, passives after: nearly every verb of the
+ * right aspect has the former, while the latter needs a transitive verb, and
+ * `governs` catches only the frames that make that explicit.
  */
 function formStep(target, word) {
-  const stored = new Set(storedSlots(word))
-  const forms = FORM_SLOTS.filter((f) => stored.has(f) || f === target.form)
+  const chosen = new Set(storedSlots(word))
+  if (target.form) chosen.add(target.form)
+  const pad = plausibleSlots(word)
+  const passive = (slot) => PASSIVE_SLOTS.includes(slot)
+  for (const slot of [...pad.filter((s) => !passive(s)), ...pad.filter(passive)]) {
+    if (chosen.size >= FORM_OPTIONS) break
+    chosen.add(slot)
+  }
+  const forms = FORM_SLOTS.filter((f) => chosen.has(f))
   return {
     kind: 'form',
     prompt: 'Which form of the verb does the sentence need?',
@@ -492,6 +523,14 @@ function contrastStep(word, contrast) {
  * component grades each clicked option's `correct` flag.
  */
 export function buildSelectSteps(target, word) {
+  // A step whose option set collapsed to one button asks nothing — the single
+  // answer is right by construction — so it is dropped rather than shown as a
+  // free tap. Every step type above offers at least two options on real data;
+  // this is the backstop for a word whose record is too thin to fill one.
+  return selectStepsFor(target, word).filter((step) => step.options.length > 1)
+}
+
+function selectStepsFor(target, word) {
   if (target?.form) return nonFiniteSteps(target, word)
   if (target?.degree === 'short') return [shortGenderStep(target, word)]
   if (target?.degree === 'comparative') return [degreeStep(target, word)]
