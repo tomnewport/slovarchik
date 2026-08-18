@@ -16,6 +16,7 @@ import {
   isPendingConfirmation,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
+import { vocab } from '../stores/vocab.js'
 import {
   LEARNING_DIMS,
   MASTERY_DIMS,
@@ -77,10 +78,12 @@ const masteryDone = computed(() => masteryProgress.value.filter((w) => w.done).l
 // minimum exercises still needed now versus when it was freshly committed.
 const learningExercise = computed(() => batchExerciseProgress('learning'))
 const masteryExercise = computed(() => batchExerciseProgress('mastery'))
+const vocabByKey = computed(() => new Map(vocab.value.map((word) => [word.id, word])))
 
 // Injected into the pure builders so they stay free of the store.
 const wordListCtx = computed(() => ({
   records: progress.records,
+  vocabByKey: vocabByKey.value,
   hasContextDrill,
   isPendingConfirmation,
 }))
@@ -92,7 +95,12 @@ const allMasteryWords = computed(() =>
   buildWordList(masteryProgress.value, 'mastery', MASTERY_DIMS, wordListCtx.value),
 )
 
-const statusCtx = computed(() => ({ records: progress.records, stateOf, hasContextDrill }))
+const statusCtx = computed(() => ({
+  records: progress.records,
+  vocabByKey: vocabByKey.value,
+  stateOf,
+  hasContextDrill,
+}))
 const atRiskWords = computed(() => buildStatusWordList(atRisk.value, statusCtx.value))
 const slippedWords = computed(() => buildStatusWordList(lost.value, statusCtx.value))
 
