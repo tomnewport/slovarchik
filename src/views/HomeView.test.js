@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 
 import { state as progress } from '../stores/progress.js'
+import { state as vocabState } from '../stores/vocab.js'
 
 const push = vi.fn()
 vi.mock('vue-router', () => ({ useRouter: () => ({ push }) }))
@@ -14,6 +15,7 @@ vi.mock('../stores/reports.js', () => ({
 const { default: HomeView } = await import('./HomeView.vue')
 
 beforeEach(() => {
+  vocabState.words = []
   progress.records = {}
   progress.learning = null
   progress.mastery = null
@@ -94,6 +96,37 @@ describe('HomeView', () => {
     const firstRow = wrapper.find('.batch-row')
     const children = [...firstRow.element.children].map((el) => el.className)
     expect(children[0]).toContain('exercise-bar')
+  })
+
+  it('visibly distinguishes both members of an aspect pair in the batch list', () => {
+    vocabState.words = [
+      {
+        key: 'сшить=to sew',
+        headword: 'сши́ть',
+        english: ['to sew'],
+        pos: 'verb',
+        aspect: 'pf',
+        aspectPair: { key: 'шить=to sew' },
+      },
+      {
+        key: 'шить=to sew',
+        headword: 'ши́ть',
+        english: ['to sew'],
+        pos: 'verb',
+        aspect: 'impf',
+        aspectPair: { key: 'сшить=to sew' },
+      },
+    ]
+    progress.learning = {
+      name: 'sewing',
+      level: 'learning',
+      words: ['сшить=to sew', 'шить=to sew'],
+      size: 2,
+    }
+
+    const wrapper = mount(HomeView)
+    const glosses = wrapper.find('.word-list-card').findAll('.word-en').map((node) => node.text())
+    expect(glosses).toEqual(['to sew (perfective)', 'to sew (imperfective)'])
   })
 
   it('flags the unmet skills on a slipped word with a missing badge', () => {
