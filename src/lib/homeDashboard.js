@@ -7,6 +7,7 @@
 // and renders the plain objects they return.
 
 import { parseKey } from './vocabBuild.js'
+import { ASPECT_LABEL, MOTION_LABEL } from './phraseContext.js'
 import { dimensionProgress, lastAttemptAt } from './progression.js'
 
 // Which dimensions each level tracks, and the emoji pip shown for each.
@@ -18,6 +19,32 @@ export const DIM_LABEL = {
   hearing: '👂',
   speaking: '🗣️',
   context: '🛠️',
+}
+
+/**
+ * Add the smallest useful qualifier when a dashboard gloss would otherwise
+ * hide a distinction the vocabulary already knows about. Ordinary words keep
+ * their bare gloss; linked aspect/motion pairs show their grammatical contrast,
+ * while same-gloss words use their authored meaning note.
+ */
+export function disambiguatedGloss(en, word) {
+  if (!word) return en
+
+  const note = String(word.note ?? '').trim()
+  if (word.ambiguousEn?.length && note) return `${en} (${note})`
+
+  const aspect = word.aspectPair ? ASPECT_LABEL[word.aspect] : null
+  if (aspect) return `${en} (${aspect})`
+
+  const motion = word.motionPair ? MOTION_LABEL[word.motion] : null
+  if (motion) return `${en} (${motion})`
+
+  return en
+}
+
+function rowIdentity(key, vocabByKey) {
+  const { ru, en } = parseKey(key)
+  return { ru, en: disambiguatedGloss(en, vocabByKey?.get(key)) }
 }
 
 /**
@@ -45,15 +72,15 @@ function dimPips(events, level, dims, key, { known, hasContextDrill }) {
  * Sorted not-done first, then most-recently-attempted first.
  *
  * @param batchWords array of `{ word, done }` (from `batchProgress(level)`)
- * @param ctx `{ records, hasContextDrill, isPendingConfirmation }`
+ * @param ctx `{ records, vocabByKey, hasContextDrill, isPendingConfirmation }`
  */
 export function buildWordList(batchWords, level, dims, ctx) {
-  const { records, hasContextDrill, isPendingConfirmation } = ctx
+  const { records, vocabByKey, hasContextDrill, isPendingConfirmation } = ctx
   return batchWords
     .map((w) => {
       const rec = records[w.word]
       const events = rec?.events ?? []
-      const { ru, en } = parseKey(w.word)
+      const { ru, en } = rowIdentity(w.word, vocabByKey)
       return {
         key: w.word,
         ru,
@@ -76,14 +103,14 @@ export function buildWordList(batchWords, level, dims, ctx) {
  * to its current state, the level it's graded at, and its dimension pips.
  *
  * @param keys array of word keys
- * @param ctx `{ records, stateOf, hasContextDrill }`
+ * @param ctx `{ records, vocabByKey, stateOf, hasContextDrill }`
  */
 export function buildStatusWordList(keys, ctx) {
-  const { records, stateOf, hasContextDrill } = ctx
+  const { records, vocabByKey, stateOf, hasContextDrill } = ctx
   return keys.map((key) => {
     const rec = records[key]
     const evs = rec?.events ?? []
-    const { ru, en } = parseKey(key)
+    const { ru, en } = rowIdentity(key, vocabByKey)
     const state = stateOf(key)
     const level = state === 'mastered' ? 'mastery' : 'learning'
     const dims = dimPips(evs, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS, key, {
