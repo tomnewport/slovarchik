@@ -10493,9 +10493,11 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Запри́ воро́та на́ ночь.
         en_gb: Lock the gate for the night.
+        en_alt:
+          - Lock the gates for the night.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: На ночь хозя́ин за́пер бы все две́ри.
-        en_gb: The owner would lock all the doors at night.
+        en_gb: The owner would have locked all the doors for the night.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро сто́рож запрёт воро́та.
         en_gb: Soon the watchman will lock the gates.
@@ -10548,6 +10550,8 @@ words:
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: На моём ме́сте вы записа́ли бы а́дрес.
         en_gb: In my place, you would write down the address.
+        en_alt:
+          - In my place, you would have written down the address.
         inflect: { token: 5, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Ско́ро секрета́рь запи́шет реше́ние.
         en_gb: Soon the secretary will write down the decision.
@@ -10622,7 +10626,7 @@ words:
         en_gb: She will start crying if she hears this.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: От оби́ды я бы запла́кал.
-        en_gb: From hurt I would burst into tears.
+        en_gb: From the hurt I would have burst into tears.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро ребёнок запла́чет от уста́лости.
         en_gb: Soon the child will start crying from tiredness.
@@ -10771,6 +10775,8 @@ words:
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро вла́сти запретя́т прода́жу.
         en_gb: Soon the authorities will forbid the sale.
+        en_alt:
+          - Soon the authorities will ban the sale.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты запрети́шь э́ту пое́здку?
         en_gb: Will you forbid this trip?
@@ -10867,7 +10873,7 @@ words:
         en_gb: I earn my living honestly.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он зараба́тывал ма́ло, но был сча́стлив.
-        en_gb: He earned little but was happy.
+        en_gb: He used to earn little, but was happy.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: На но́вой рабо́те я бу́ду зараба́тывать бо́льше.
         en_gb: At the new job I'll be earning more.
@@ -10934,7 +10940,7 @@ words:
         en_gb: They will earn a lot from this business.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: За ле́то они́ зарабо́тали бы на пое́здку.
-        en_gb: Over the summer, they would earn enough for the trip.
+        en_gb: Over the summer, they would have earned enough for the trip.
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Ско́ро она́ зарабо́тает на свою́ мечту́.
         en_gb: Soon she'll earn enough for her dream.
@@ -10970,7 +10976,7 @@ words:
       past_pl: заслужи́ли
     usage:
       - ru: Ты заслужи́ла награ́ду.
-        en_gb: You have deserved the reward.
+        en_gb: You have earned the reward.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я заслужу́ их дове́рие.
         en_gb: I will earn their trust.
@@ -10980,12 +10986,14 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Че́стным трудо́м она́ заслужи́ла бы уваже́ние.
         en_gb: Through honest work, she would earn respect.
+        en_alt:
+          - Through honest work she would have earned respect.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро он заслу́жит дове́рие нача́льства.
         en_gb: Soon he'll earn the trust of his superiors.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты заслу́жишь награ́ду?
-        en_gb: Will you deserve the reward?
+        en_gb: Will you earn the reward?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "засмеяться=to burst out laughing":
     cefr_level: B1
@@ -11015,7 +11023,7 @@ words:
         en_gb: I will burst out laughing if I see this.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Все засмея́лись одновреме́нно.
-        en_gb: Everyone burst out laughing at once.
+        en_gb: Everyone burst out laughing at the same time.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: От тако́й шу́тки я бы засмея́лся.
         en_gb: At such a joke I would burst out laughing.
@@ -11062,7 +11070,7 @@ words:
         en_gb: They fell asleep to the sound of the rain.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Без шу́ма я бы засну́ла бы́стро.
-        en_gb: Without noise I would fall asleep quickly.
+        en_gb: Without noise I would have fallen asleep quickly.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро ма́льчик заснёт.
         en_gb: Soon the boy will fall asleep.
@@ -11141,12 +11149,16 @@ words:
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ заставля́ли дете́й рабо́тать.
         en_gb: They made the children work.
+        en_alt:
+          - They used to make the children work.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Тре́нер бу́дет заставля́ть нас бе́гать ка́ждое у́тро.
         en_gb: The coach will be making us run every morning.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: На ва́шем ме́сте я не заставля́ла бы его́ ждать.
         en_gb: If I were you, I would not make him wait.
+        en_alt:
+          - In your place I would not make him wait.
         inflect: { token: 6, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты заставля́ешь дете́й рабо́тать?
         en_gb: Do you make the children work?
@@ -11180,7 +11192,7 @@ words:
         en_gb: He always fastens his jacket all the way up.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Ребёнок ещё не уме́ет застёгивать пу́говицы.
-        en_gb: The child cannot yet do up buttons.
+        en_gb: The child does not yet know how to do up buttons.
         en_alt:
           - The child cannot yet fasten buttons.
       - ru: Я застёгиваю пальто́ пе́ред вы́ходом.
@@ -11190,6 +11202,8 @@ words:
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты застёгиваешь ку́ртку?
         en_gb: Do you fasten your jacket?
+        en_alt:
+          - Are you fastening your jacket?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "застегнуть=to fasten":
     cefr_level: B1
@@ -11275,6 +11289,8 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Без огня́ суп засты́л бы на хо́лоде.
         en_gb: Without a flame the soup would set in the cold.
+        en_alt:
+          - Without a flame the soup would have set in the cold.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро желе́ засты́нет в формочка́х.
         en_gb: Soon the jelly will set in the moulds.
@@ -11313,6 +11329,8 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Мы засыпа́ем по́здно ле́том.
         en_gb: We fall asleep late in summer.
+        en_alt:
+          - We fall asleep late in the summer.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: По́сле прогу́лки я бу́ду засыпа́ть бы́стро.
         en_gb: After a walk I'll be falling asleep quickly.
@@ -11352,6 +11370,8 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я захвачу́ зонт на вся́кий слу́чай.
         en_gb: I will grab an umbrella just in case.
+        en_alt:
+          - I will take an umbrella just in case.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ захва́тят власть си́лой.
         en_gb: They will seize power by force.
@@ -11394,6 +11414,8 @@ words:
     usage:
       - ru: Заходи́те к нам в го́сти!
         en_gb: Drop in to visit us!
+        en_alt:
+          - Come and visit us!
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я ча́сто захожу́ в э́то кафе́.
         en_gb: I often drop into this cafe.
@@ -11408,7 +11430,7 @@ words:
         en_gb: From now on I'll be dropping in on you every evening.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Е́сли бы вы жи́ли ря́дом, то заходи́ли бы к нам ча́ще?
-        en_gb: If you lived nearby, would you drop in more often?
+        en_gb: If you lived nearby, would you drop in on us more often?
         inflect: { token: 7, tense: past, person: past_pl, rule: verb-conditional }
   "захотеть=to want":
     cefr_level: A1
@@ -11506,6 +11528,8 @@ words:
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Соба́ка защища́ла дом.
         en_gb: The dog was guarding the house.
+        en_alt:
+          - The dog was defending the house.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы бу́дем защища́ть свой дом.
         en_gb: We will defend our home.
@@ -11554,6 +11578,8 @@ words:
     usage:
       - ru: Он заяви́л о свои́х права́х.
         en_gb: He declared his rights.
+        en_alt:
+          - He asserted his rights.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я заявлю́ об э́том в поли́цию.
         en_gb: I will report this to the police.
@@ -11563,12 +11589,16 @@ words:
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Мы бы заяви́ли об э́том ра́ньше.
         en_gb: We would have declared this sooner.
+        en_alt:
+          - We would have announced this sooner.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Президе́нт заяви́т о реше́нии ско́ро.
         en_gb: The president will declare the decision soon.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты заяви́шь о свои́х права́х?
         en_gb: Will you declare your rights?
+        en_alt:
+          - Will you assert your rights?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "звать=to call":
     cefr_level: A1
@@ -11599,7 +11629,7 @@ words:
       past_pl: зва́ли
     usage:
       - ru: Зови́ друзе́й на у́жин.
-        en_gb: Call your friends for dinner.
+        en_gb: Invite your friends for dinner.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Как тебя́ зову́т?
         en_gb: What is your name? (informal)
@@ -15210,6 +15240,8 @@ words:
     usage:
       - ru: По́сле еды́ я мо́ю посу́ду.
         en_gb: After the meal I wash the dishes.
+        en_alt:
+          - After eating I wash the dishes.
         inflect: { token: 4, tense: present, person: 1sg, rule: verb-present }
       - ru: Ты мо́ешь ру́ки пе́ред едо́й?
         en_gb: Do you wash your hands before eating?
@@ -15225,6 +15257,8 @@ words:
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Мой ру́ки пе́ред едо́й.
         en_gb: Wash your hands before eating.
+        en_alt:
+          - Wash your hands before meals.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты мо́ешь посу́ду?
         en_gb: Are you washing the dishes?
@@ -15306,18 +15340,25 @@ words:
     usage:
       - ru: Я наблюда́ю за пти́цами.
         en_gb: I observe the birds.
+        en_alt:
+          - I am observing the birds.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Учёные наблюда́ют за звёздами.
         en_gb: The scientists observe the stars.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Он наблюда́л за детьми́ в па́рке.
         en_gb: He was watching the children in the park.
+        en_alt:
+          - He was observing the children in the park.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Но́чью мы бу́дем наблюда́ть за звёздами.
         en_gb: At night we will be observing the stars.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
       - ru: Я наблюда́л бы за пти́цами це́лый день.
         en_gb: I would watch the birds all day.
+        en_alt:
+          - I would observe the birds all day.
+          - I would watch the birds the whole day.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты наблюда́ешь за пти́цами?
         en_gb: Are you observing the birds?
@@ -15355,12 +15396,16 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы наберём грибо́в в лесу́.
         en_gb: We will gather some mushrooms in the forest.
+        en_alt:
+          - We will pick some mushrooms in the forest.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Е́сли бы пошёл в лес, я набра́л бы грибо́в.
         en_gb: I would have gathered mushrooms if I had gone to the forest.
         inflect: { token: 7, tense: past, person: past_m, rule: verb-conditional }
       - ru: Они́ наберу́т кома́нду к ле́ту.
         en_gb: They will recruit a team by summer.
+        en_alt:
+          - They will recruit a team by the summer.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты наберёшь но́мер врача́?
         en_gb: Will you dial the doctor's number?
@@ -15383,6 +15428,8 @@ words:
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты надева́ешь ку́ртку, когда́ хо́лодно?
         en_gb: Do you put on a jacket when it is cold?
+        en_alt:
+          - Do you put a jacket on when it's cold?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы надева́ете пальто́?
         en_gb: Are you putting on your coat?
@@ -15454,6 +15501,8 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Пальто́ наде́то.
         en_gb: The coat is on.
+        en_alt:
+          - The coat has been put on.
         inflect: { token: 2, form: pass_short, gender: n, rule: verb-participle-short }
   "надеяться=to hope":
     cefr_level: A2
@@ -15479,6 +15528,8 @@ words:
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
       - ru: Я наде́ялась бы на по́мощь друзе́й.
         en_gb: I would hope for the help of friends.
+        en_alt:
+          - I would hope for my friends' help.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Вы наде́етесь на побе́ду?
         en_gb: Do you hope for victory?
@@ -15529,7 +15580,7 @@ words:
       past_pl: надое́ли
     usage:
       - ru: Мне надое́л э́тот шум.
-        en_gb: This noise has got on my nerves.
+        en_gb: I am tired of this noise.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Тебе́ ско́ро надое́ст игра́.
         en_gb: You will soon grow tired of the game.
@@ -15578,6 +15629,9 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он нажа́л на ру́чку две́ри.
         en_gb: He pressed on the door handle.
+        en_alt:
+          - He pressed the door handle.
+          - He pressed down on the door handle.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Е́сли бы знал, я нажа́л бы на кно́пку.
         en_gb: I would have pressed the button if I had known.
@@ -15614,6 +15668,8 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Они́ назову́т ребёнка в честь де́да.
         en_gb: They will name the child after the grandfather.
+        en_alt:
+          - They will name the child after their grandfather.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты назовёшь сы́на Ива́ном?
         en_gb: Will you name your son Ivan?
@@ -15659,21 +15715,33 @@ words:
     usage:
       - ru: Дире́ктор назна́чит встре́чу.
         en_gb: The director will arrange a meeting.
+        en_alt:
+          - The director will schedule a meeting.
+          - The director will set a meeting.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Врач назна́чил мне лека́рство.
         en_gb: The doctor prescribed me some medicine.
+        en_alt:
+          - The doctor prescribed some medicine for me.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Его́ назна́чили нача́льником.
         en_gb: He was appointed head.
+        en_alt:
+          - They appointed him head.
+          - He was appointed boss.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я назна́чила бы встре́чу на у́тро.
         en_gb: I would set the meeting for the morning.
+        en_alt:
+          - I would schedule the meeting for the morning.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Дире́ктор назна́чит но́вого нача́льника за́втра.
         en_gb: The director will appoint a new manager tomorrow.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты назна́чишь встре́чу?
         en_gb: Will you arrange a meeting?
+        en_alt:
+          - Will you schedule a meeting?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "называть=to call/name":
     cefr_level: B1
@@ -15688,10 +15756,12 @@ words:
         - to name
     usage:
       - ru: Как называ́ют э́то блю́до?
-        en_gb: What is this dish called?
+        en_gb: What do they call this dish?
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Друзья́ называ́ют его́ Са́шей.
         en_gb: His friends call him Sasha.
+        en_alt:
+          - Friends call him Sasha.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Мы называ́ем э́то ме́сто до́мом.
         en_gb: We call this place home.
@@ -15700,7 +15770,7 @@ words:
         en_gb: Friends will be calling him a hero.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ра́ньше э́ту у́лицу называ́ли ина́че.
-        en_gb: This street used to be called differently.
+        en_gb: This street used to be called something else.
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-past }
     conjugation:
       present:
@@ -15743,12 +15813,16 @@ words:
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Кни́га называ́лась интере́сно.
         en_gb: The book had an interesting title.
+        en_alt:
+          - The book had an interesting name.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Как бу́дет называ́ться но́вый фильм?
         en_gb: What will the new film be called?
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Без причи́ны э́то не называ́лось бы пра́здником.
         en_gb: Without reason this would not be called a holiday.
+        en_alt:
+          - Without a reason this would not be called a holiday.
         inflect: { token: 5, tense: past, person: past_n, rule: verb-conditional }
   "найти=to find":
     cefr_level: A1
@@ -15789,21 +15863,29 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ нашла́ ключи́ в су́мке.
         en_gb: She found the keys in her bag.
+        en_alt:
+          - She found the keys in the bag.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы найдём доро́гу домо́й.
         en_gb: We will find the way home.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Е́сли бы поду́мал, я нашёл бы реше́ние.
-        en_gb: I would find a solution if I thought about it.
+        en_gb: I would have found a solution if I had thought about it.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Они́ найду́т доро́гу по ка́рте.
         en_gb: They will find the way using the map.
+        en_alt:
+          - They will find the way from the map.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты найдёшь доро́гу по ка́рте?
         en_gb: Will you find the way with the map?
+        en_alt:
+          - Will you find the way using the map?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Ключи́ на́йдены.
         en_gb: The keys have been found.
+        en_alt:
+          - The keys are found.
         inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
   "найтись=to be found":
     cefr_level: B1
@@ -15826,12 +15908,18 @@ words:
     usage:
       - ru: Поте́рянный кот ско́ро найдётся.
         en_gb: The lost cat will soon be found.
+        en_alt:
+          - The lost cat will turn up soon.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
       - ru: Ключи́ нашли́сь под столо́м.
         en_gb: The keys were found under the table.
+        en_alt:
+          - The keys turned up under the table.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Реше́ние найдётся обяза́тельно.
         en_gb: A solution will certainly be found.
+        en_alt:
+          - A solution will definitely be found.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Без по́иска кни́га бы не нашла́сь.
         en_gb: Without searching the book would not have been found.
@@ -15868,15 +15956,21 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я наклоню́сь, что́бы подня́ть ру́чку.
         en_gb: I will bend down to pick up the pen.
+        en_alt:
+          - I will lean down to pick up the pen.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Де́рево наклони́лось от ве́тра.
         en_gb: The tree leaned over from the wind.
+        en_alt:
+          - The tree leaned over in the wind.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Я наклони́лась бы, что́бы помо́чь.
         en_gb: I would lean down to help.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: От ве́тра ве́тки накло́нятся к земле́.
         en_gb: In the wind the branches will lean towards the ground.
+        en_alt:
+          - From the wind the branches will lean towards the ground.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты накло́нишься над водо́й?
         en_gb: Will you lean over the water?
@@ -15917,9 +16011,13 @@ words:
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Е́сли бы он был, я нали́л бы тебе́ ко́фе.
         en_gb: I would pour you coffee if there were any.
+        en_alt:
+          - I would pour you some coffee if there were any.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Официа́нт нальёт вино́ в бока́лы.
         en_gb: The waiter will pour wine into the glasses.
+        en_alt:
+          - The waiter will pour the wine into the glasses.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты нальёшь молоко́ в стака́н?
         en_gb: Will you pour milk into the glass?
@@ -15970,6 +16068,8 @@ words:
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я написа́ла письмо́ дру́гу.
         en_gb: I wrote a letter to a friend.
+        en_alt:
+          - I wrote a letter to my friend.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я напишу́ тебе́ за́втра.
         en_gb: I will write to you tomorrow.
@@ -15979,6 +16079,9 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ты бы написа́ла письмо́ ра́ньше.
         en_gb: You would have written the letter sooner.
+        en_alt:
+          - You would have written the letter earlier.
+          - You should have written the letter earlier.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Они́ напи́шут отчёт к концу́ неде́ли.
         en_gb: They will write the report by the end of the week.
@@ -15988,6 +16091,8 @@ words:
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
       - ru: Письмо́ уже́ напи́сано.
         en_gb: The letter is already written.
+        en_alt:
+          - The letter has already been written.
         inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
     conjugation:
       imperative:
@@ -16055,6 +16160,8 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты напомина́ешь мне о вре́мени?
         en_gb: Do you remind me of the time?
+        en_alt:
+          - Are you reminding me about the time?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "напомнить=to remind":
     cefr_level: A2
@@ -16087,12 +16194,14 @@ words:
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я напо́мню тебе́ ве́чером.
         en_gb: I will remind you in the evening.
+        en_alt:
+          - I will remind you this evening.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он напо́мнил нам о сро́ке.
         en_gb: He reminded us about the deadline.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я напо́мнил бы тебе́, но забы́л сам.
-        en_gb: I would remind you, but I forgot myself.
+        en_gb: I would have reminded you, but I forgot myself.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Секрета́рь напо́мнит вам о сро́ке.
         en_gb: The secretary will remind you of the deadline.
@@ -16126,18 +16235,26 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Он напра́вил свет на карти́ну.
         en_gb: He directed the light at the painting.
+        en_alt:
+          - He directed the light at the picture.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я напра́влю письмо́ в о́фис.
         en_gb: I will send the letter to the office.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Я напра́вила бы тебя́ к хоро́шему врачу́.
         en_gb: I would direct you to a good doctor.
+        en_alt:
+          - I would send you to a good doctor.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Они́ напра́вят по́мощь в дере́вню.
         en_gb: They will send aid to the village.
+        en_alt:
+          - They will send help to the village.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты напра́вишь свет на карти́ну?
         en_gb: Will you direct the light at the painting?
+        en_alt:
+          - Will you direct the light at the picture?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "направиться=to head":
     cefr_level: B1
@@ -16165,6 +16282,8 @@ words:
     usage:
       - ru: Мы напра́вимся к вокза́лу.
         en_gb: We will head to the station.
+        en_alt:
+          - We will head for the station.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Он напра́вился к вы́ходу.
         en_gb: He headed for the exit.
@@ -16180,6 +16299,8 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Вы напра́витесь к вокза́лу?
         en_gb: Will you head to the station?
+        en_alt:
+          - Will you head for the station?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "нарезать=to slice":
     cefr_level: B1
@@ -16235,6 +16356,8 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Карти́на нарисо́вана карандашо́м.
         en_gb: The picture is drawn in pencil.
+        en_alt:
+          - The picture is drawn with a pencil.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
@@ -16317,9 +16440,13 @@ words:
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Наслажда́йтесь ка́ждым днём!
         en_gb: Enjoy every day!
+        en_alt:
+          - Enjoy each day!
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я наслажда́юсь му́зыкой.
         en_gb: I am enjoying the music.
+        en_alt:
+          - I enjoy the music.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ наслажда́ется со́лнцем на пля́же.
         en_gb: She is enjoying the sun on the beach.
@@ -16373,13 +16500,15 @@ words:
         en_gb: The army is advancing on the city.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Ве́чер наступа́л ме́дленно.
-        en_gb: Evening was slowly drawing in.
+        en_gb: Evening was slowly falling.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ско́ро бу́дет наступа́ть весна́.
-        en_gb: Spring will soon be advancing.
+        en_gb: Spring will soon be coming.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Без тепла́ ле́то наступа́ло бы по́здно.
         en_gb: Without warmth summer would arrive late.
+        en_alt:
+          - Without warmth summer would come late.
         inflect: { token: 4, tense: past, person: past_n, rule: verb-conditional }
   "наступить=to step on":
     cefr_level: B1
@@ -16454,6 +16583,8 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Оте́ц научи́л сы́на води́ть маши́ну.
         en_gb: The father taught his son to drive.
+        en_alt:
+          - The father taught his son to drive a car.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Учи́тель научи́т нас чита́ть.
         en_gb: The teacher will teach us to read.
@@ -16466,6 +16597,8 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты научи́шь сы́на води́ть маши́ну?
         en_gb: Will you teach your son to drive?
+        en_alt:
+          - Will you teach your son to drive a car?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "научиться=to learn":
     cefr_level: A1
@@ -16509,6 +16642,8 @@ words:
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Они́ науча́тся води́ть маши́ну к ле́ту.
         en_gb: They will learn to drive by summer.
+        en_alt:
+          - They will learn to drive a car by summer.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты научи́шься гото́вить борщ?
         en_gb: Will you learn to cook borscht?
@@ -16594,7 +16729,7 @@ words:
         en_gb: The shops were located nearby.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Во вре́мя ремо́нта музе́й бу́дет находи́ться в друго́м зда́нии.
-        en_gb: During the renovations, the museum will be housed in another building.
+        en_gb: During the renovations, the museum will be located in another building.
         inflect: { token: 5, tense: future, person: 3sg, rule: verb-future }
       - ru: Без вы́вески магази́н находи́лся бы незаме́тно.
         en_gb: Without a sign the shop would be hard to find.
@@ -16870,6 +17005,8 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ты бу́дешь нести́ су́мку, а я — рюкза́к.
         en_gb: You will carry the bag, and I the rucksack.
+        en_alt:
+          - You will be carrying the bag, and I the rucksack.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Я нёс бы су́мку сам.
         en_gb: I would carry the bag myself.
@@ -16957,6 +17094,8 @@ words:
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Е́сли бы пло́хо ви́дел, я носи́л бы очки́.
         en_gb: I would wear glasses if my sight were poor.
+        en_alt:
+          - If my sight were poor, I would wear glasses.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты но́сишь очки́?
         en_gb: Do you wear glasses?
@@ -17015,7 +17154,7 @@ words:
         en_gb: We spent the night in a small hotel.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Во вре́мя похо́да мы бу́дем ночева́ть в пала́тках.
-        en_gb: During the hike, we will sleep in tents.
+        en_gb: During the hike, we will spend the nights in tents.
         inflect: { token: 5, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты бы ночева́ла под звёздами.
         en_gb: You would spend the night under the stars.
@@ -17056,7 +17195,7 @@ words:
         en_gb: She likes red roses.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Нам нра́вился э́тот го́род.
-        en_gb: We liked this city.
+        en_gb: We used to like this city.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Тебе́ бу́дет нра́виться э́та шко́ла.
         en_gb: You will like this school.
@@ -17145,7 +17284,7 @@ words:
         en_gb: I would have turned around if I had heard.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро она́ обернётся к нам.
-        en_gb: Soon she will turn around to us.
+        en_gb: Soon she will turn around towards us.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты обернёшься на шум?
         en_gb: Will you turn around at the noise?
@@ -17185,7 +17324,7 @@ words:
         en_gb: I would provide the family with everything.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Заво́д обеспе́чит го́род водо́й.
-        en_gb: The factory will supply the city with water.
+        en_gb: The factory will provide the city with water.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты обеспе́чишь семью́?
         en_gb: Will you provide for your family?
@@ -17212,7 +17351,7 @@ words:
         en_gb: They promised to help us.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: С понеде́льника я бу́ду обеща́ть то́лько ва́жное.
-        en_gb: From Monday I will promise only what matters.
+        en_gb: From Monday I will be promising only what is important.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
       - ru: Е́сли был уве́рен, я обеща́л бы.
         en_gb: I would promise if I were sure.
@@ -17391,6 +17530,8 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я обнару́жу оши́бку в отчёте.
         en_gb: I will discover the error in the report.
+        en_alt:
+          - I will discover the mistake in the report.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Поли́ция обнару́жит укра́денное.
         en_gb: The police will discover the stolen goods.
@@ -17643,13 +17784,13 @@ words:
         en_gb: I will be glad to get your call.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ма́ма обра́довалась хоро́шей но́вости.
-        en_gb: Mum was glad about the good news.
+        en_gb: Mum was delighted at the good news.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я обра́довался бы тако́му пода́рку.
         en_gb: I would be glad of such a gift.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро де́ти обра́дуются кани́кулам.
-        en_gb: Soon the children will be glad of the holidays.
+        en_gb: Soon the children will be delighted with the holidays.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты обра́дуешься пода́рку?
         en_gb: Will you be glad about the present?
@@ -17718,21 +17859,29 @@ words:
     usage:
       - ru: Обрати́ внима́ние на э́ту дета́ль.
         en_gb: Turn your attention to this detail.
+        en_alt:
+          - Pay attention to this detail.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Учи́тель обрати́л взгляд на до́ску.
         en_gb: The teacher turned his gaze to the board.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я обращу́ внима́ние на оши́бки.
         en_gb: I will turn my attention to the mistakes.
+        en_alt:
+          - I will pay attention to the mistakes.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты бы обрати́л на э́то внима́ние.
-        en_gb: You would pay attention to this.
+        en_gb: You would have paid attention to this.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Я обращу́ ваш взгляд на гла́вное за́втра.
         en_gb: I will turn your attention to the main thing tomorrow.
+        en_alt:
+          - I will turn your gaze to the main thing tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты обрати́шь внима́ние на до́ску?
         en_gb: Will you turn your attention to the board?
+        en_alt:
+          - Will you pay attention to the board?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "обратиться=to address":
     cefr_level: B1
@@ -17765,19 +17914,23 @@ words:
         en_gb: I will turn to a doctor.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он обрати́лся за по́мощью.
-        en_gb: He turned to others for help.
+        en_gb: He asked for help.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ обратя́тся в поли́цию.
         en_gb: They will turn to the police.
+        en_alt:
+          - They will go to the police.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Я обрати́лась бы к специали́сту.
-        en_gb: I would address a specialist.
+        en_gb: I would turn to a specialist.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Мы обрати́мся к юри́сту ско́ро.
         en_gb: We will turn to a lawyer soon.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты обрати́шься к врачу́?
         en_gb: Will you turn to a doctor?
+        en_alt:
+          - Will you see a doctor?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "обращать=to turn":
     cefr_level: B1
@@ -17806,6 +17959,8 @@ words:
     usage:
       - ru: Я не обраща́ю внима́ния на шум.
         en_gb: I pay no attention to the noise.
+        en_alt:
+          - I do not pay attention to the noise.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ обраща́ет всё в шу́тку.
         en_gb: She turns everything into a joke.
@@ -17815,12 +17970,17 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Мы бу́дем обраща́ть внима́ние на дета́ли.
         en_gb: We will pay attention to details.
+        en_alt:
+          - We will pay attention to the details.
+          - We will be paying attention to the details.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я не обраща́ла бы внима́ния на спле́тни.
         en_gb: I would not pay attention to gossip.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты обраща́ешь внима́ние на шум?
         en_gb: Do you pay attention to the noise?
+        en_alt:
+          - Are you paying attention to the noise?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "обращаться=to address":
     cefr_level: B1
@@ -17854,12 +18014,16 @@ words:
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Я обраща́юсь к вам с про́сьбой.
         en_gb: I am turning to you with a request.
+        en_alt:
+          - I am addressing you with a request.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ хорошо́ обраща́лись с живо́тными.
         en_gb: They treated the animals well.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Тепе́рь я бу́ду обраща́ться к вам по и́мени.
         en_gb: Now I will address you by your name.
+        en_alt:
+          - Now I will address you by name.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты бы обраща́лась с ним мя́гче.
         en_gb: You would treat him more gently.
@@ -17879,6 +18043,8 @@ words:
     usage:
       - ru: Дава́й обсу́дим э́тот вопро́с за́втра.
         en_gb: Let's discuss this question tomorrow.
+        en_alt:
+          - Let's discuss this issue tomorrow.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Мы обсуди́ли план на собра́нии.
         en_gb: We discussed the plan at the meeting.
@@ -17925,22 +18091,26 @@ words:
         en_gb: We are discussing the new project.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Они́ до́лго обсужда́ли пла́ны.
-        en_gb: They discussed the plans for a long time.
+        en_gb: They were discussing the plans for a long time.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Я обсужда́ю кни́гу с друзья́ми.
         en_gb: I am discussing the book with friends.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: На собра́нии со́трудники бу́дут обсужда́ть бюдже́т.
-        en_gb: At the meeting, the employees will discuss the budget.
+        en_gb: At the meeting, the employees will be discussing the budget.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Я не обсужда́ла бы э́то при де́тях.
         en_gb: I would not discuss this in front of the children.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты обсужда́ешь пла́ны?
         en_gb: Are you discussing the plans?
+        en_alt:
+          - Do you discuss the plans?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы обсужда́ете но́вости?
         en_gb: Are you discussing the news?
+        en_alt:
+          - Do you discuss the news?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "общаться=to communicate":
     cefr_level: A2
@@ -17956,9 +18126,13 @@ words:
     usage:
       - ru: С кем вы обща́етесь на рабо́те?
         en_gb: Whom do you talk with at work?
+        en_alt:
+          - Who do you talk to at work?
         inflect: { token: 4, tense: present, person: 2pl, rule: verb-present }
       - ru: Обща́йся с друзья́ми ка́ждый день.
         en_gb: Talk with your friends every day.
+        en_alt:
+          - Talk with friends every day.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я ча́сто обща́юсь с друзья́ми.
         en_gb: I often communicate with friends.
@@ -17968,6 +18142,8 @@ words:
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Мы до́лго обща́лись по телефо́ну.
         en_gb: We talked for a long time on the phone.
+        en_alt:
+          - We spoke on the phone for a long time.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
     conjugation:
       imperative:
@@ -18043,9 +18219,11 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ объясни́ла причи́ну опозда́ния.
         en_gb: She explained the reason for being late.
+        en_alt:
+          - She explained the reason for the delay.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ты бы объясни́ла всё подро́бно.
-        en_gb: You would explain everything in detail.
+        en_gb: You would have explained everything in detail.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: За́втра он объясни́т нам зада́чу.
         en_gb: Tomorrow he will explain the task to us.
@@ -18090,13 +18268,15 @@ words:
         en_gb: The professor was explaining a difficult topic.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ты бу́дешь объясня́ть пра́вило шаг за ша́гом.
-        en_gb: You will explain the rule step by step.
+        en_gb: You will be explaining the rule step by step.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Я объясня́ла бы ме́дленнее на твоём ме́сте.
         en_gb: I would explain more slowly in your place.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Вы объясня́ете зада́ние студе́нтам?
         en_gb: Do you explain the task to the students?
+        en_alt:
+          - Are you explaining the task to the students?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Вы объясня́ете пра́вило сно́ва?
         en_gb: Are you explaining the rule again?
@@ -18183,6 +18363,8 @@ words:
     usage:
       - ru: Я огля́дываюсь по сторона́м.
         en_gb: I am looking around in all directions.
+        en_alt:
+          - I am looking around me.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ ча́сто огля́дывается наза́д.
         en_gb: She often looks back.
@@ -18228,12 +18410,16 @@ words:
     usage:
       - ru: Я огляну́сь на проща́ние.
         en_gb: I will look back to say goodbye.
+        en_alt:
+          - I will look back in farewell.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ огляну́лась и улыбну́лась.
         en_gb: She looked back and smiled.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Огляни́сь, кто́-то идёт.
         en_gb: Look back, someone is coming.
+        en_alt:
+          - Look round, someone is coming.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты бы огляну́лась ещё раз.
         en_gb: You would look back once more.
@@ -18243,6 +18429,8 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты огля́нешься на проща́ние?
         en_gb: Will you look back to say goodbye?
+        en_alt:
+          - Will you look back in farewell?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "одеваться=to get dressed":
     cefr_level: A2
@@ -18367,6 +18555,8 @@ words:
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Я ожида́ю отве́та на письмо́.
         en_gb: I am awaiting a reply to the letter.
+        en_alt:
+          - I am awaiting an answer to the letter.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Пассажи́ры ожида́ли по́езд на платфо́рме.
         en_gb: The passengers were waiting for the train on the platform.
@@ -18451,13 +18641,13 @@ words:
         en_gb: I found myself in an unfamiliar place.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы ока́жемся до́ма к ве́черу.
-        en_gb: We will find ourselves home by evening.
+        en_gb: We will find ourselves at home by evening.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Без ка́рты я бы оказа́лся в тупике́.
         en_gb: Without a map I would end up at a dead end.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро всё ока́жется на свои́х места́х.
-        en_gb: Soon everything will turn out to be in its place.
+        en_gb: Soon everything will end up in its place.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
   "оказываться=to turn out":
     cefr_level: B1
@@ -18489,7 +18679,7 @@ words:
         en_gb: I turn out to be right in arguments.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Пла́ны ока́зывались сли́шком сло́жными.
-        en_gb: The plans kept turning out too complicated.
+        en_gb: The plans kept turning out to be too complicated.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Его́ сове́ты бу́дут ока́зываться поле́зными.
         en_gb: His advice will turn out to be useful.
@@ -18606,7 +18796,7 @@ words:
         en_gb: I would be wary of such promises.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты опаса́ешься темноты́?
-        en_gb: Are you afraid of the dark?
+        en_gb: Are you wary of the dark?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "описать=to describe":
     cefr_level: B1
@@ -18746,7 +18936,7 @@ words:
         en_gb: They will determine the winner.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты бы определи́л срок то́чно.
-        en_gb: You would determine the deadline precisely.
+        en_gb: You would have determined the deadline precisely.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро жюри́ определи́т лу́чшего.
         en_gb: Soon the jury will determine the best one.
@@ -18783,12 +18973,14 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я определя́ю направле́ние по ка́рте.
         en_gb: I determine the direction by the map.
+        en_alt:
+          - I determine the direction from the map.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Пра́вила определя́ли поря́док игры́.
         en_gb: The rules determined the order of the game.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: О́пыт бу́дет определя́ть твой вы́бор.
-        en_gb: Experience will determine your choice.
+        en_gb: Experience will be determining your choice.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Я определя́л бы це́ну по ка́честву.
         en_gb: I would determine the price by quality.
@@ -18870,6 +19062,8 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Тума́н опу́стится на го́род.
         en_gb: Fog will descend on the city.
+        en_alt:
+          - The fog will descend on the city.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Я опусти́лась бы на коле́ни.
         en_gb: I would sink to my knees.
@@ -18905,6 +19099,8 @@ words:
     usage:
       - ru: Он орёт на весь дом.
         en_gb: He is yelling so the whole house hears.
+        en_alt:
+          - He is yelling loud enough for the whole house to hear.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не ори́ так гро́мко.
         en_gb: Don't yell so loudly.
@@ -18942,6 +19138,8 @@ words:
     usage:
       - ru: Мы организу́ем большо́й пра́здник.
         en_gb: We are organising a big celebration.
+        en_alt:
+          - We are organising a big party.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Она́ организова́ла встре́чу друзе́й.
         en_gb: She organised a meeting of friends.
@@ -18987,6 +19185,8 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я освещу́ доро́гу фонарём.
         en_gb: I will illuminate the path with a torch.
+        en_alt:
+          - I will illuminate the road with a torch.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Со́лнце освети́ло верши́ны гор.
         en_gb: The sun illuminated the mountain peaks.
@@ -18996,9 +19196,13 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро фонари́ осветя́т у́лицу.
         en_gb: Soon the lamps will light up the street.
+        en_alt:
+          - Soon the lamps will illuminate the street.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты освети́шь ко́мнату?
         en_gb: Will you light up the room?
+        en_alt:
+          - Will you illuminate the room?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "освободить=to free":
     cefr_level: B1
@@ -19055,9 +19259,13 @@ words:
     usage:
       - ru: Врач осма́тривает больно́го.
         en_gb: The doctor examines the patient.
+        en_alt:
+          - The doctor is examining the patient.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Тури́сты осма́тривают ста́рый замо́к.
         en_gb: The tourists examine the old castle.
+        en_alt:
+          - The tourists are looking round the old castle.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Ты осма́триваешь больно́го?
         en_gb: Are you examining the patient?
@@ -19147,6 +19355,8 @@ words:
     usage:
       - ru: Я остаю́сь до́ма сего́дня.
         en_gb: I am staying home today.
+        en_alt:
+          - I am staying at home today.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он остава́лся споко́йным.
         en_gb: He remained calm.
@@ -19155,13 +19365,15 @@ words:
         en_gb: We remain friends forever.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Мы бу́дем остава́ться на свя́зи.
-        en_gb: We will stay in touch.
+        en_gb: We will keep in touch.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Е́сли б ты проси́л, я остава́лся бы до́ма.
-        en_gb: If you asked me to, I would stay at home.
+        en_gb: If you asked, I would stay at home.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-past }
       - ru: Ты остаёшься споко́йным?
         en_gb: Do you stay calm?
+        en_alt:
+          - Are you staying calm?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "оставить=to leave":
     cefr_level: A2
@@ -19207,7 +19419,7 @@ words:
         en_gb: They will leave the dog with the neighbour.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Я оста́вил бы тебе́ запи́ску.
-        en_gb: I would leave you a note.
+        en_gb: I would have left you a note.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро он оста́вит э́ту до́лжность.
         en_gb: Soon he will leave this position.
@@ -19256,7 +19468,7 @@ words:
         en_gb: They used to leave the light on.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: С э́того дня я бу́ду оставля́ть свет в коридо́ре.
-        en_gb: From this day on I will leave the light on in the hall.
+        en_gb: From this day on I will be leaving the light on in the hall.
         inflect: { token: 5, tense: future, person: 1sg, rule: verb-future }
       - ru: Я не оставля́ла бы дверь откры́той.
         en_gb: I would not leave the door open.
@@ -19300,7 +19512,7 @@ words:
         en_gb: We used to stay in a small hotel.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ты бу́дешь остана́вливаться у ка́ждой витри́ны.
-        en_gb: You will stop at every shop window.
+        en_gb: You will be stopping at every shop window.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Я не остана́вливалась бы на полпути́.
         en_gb: I would not stop halfway.
@@ -19387,7 +19599,7 @@ words:
         en_gb: We will stay at a hotel.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я останови́лся бы у мо́ря.
-        en_gb: I would stop by the sea.
+        en_gb: I would have stopped by the sea.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро авто́бус остано́вится у па́рка.
         en_gb: Soon the bus will stop by the park.
@@ -19428,12 +19640,16 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ оста́лась одна́ в до́ме.
         en_gb: She stayed alone in the house.
+        en_alt:
+          - She was left alone in the house.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: На столе́ оста́лось немно́го хле́ба.
         en_gb: A little bread was left on the table.
+        en_alt:
+          - There was a little bread left on the table.
         inflect: { token: 3, tense: past, person: past_n, rule: verb-past }
       - ru: Я оста́лся бы ещё на день.
-        en_gb: I would stay one more day.
+        en_gb: I would have stayed one more day.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Мы оста́немся одни́ ско́ро.
         en_gb: We will be left alone soon.
@@ -19517,6 +19733,8 @@ words:
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Я отвела́ бы дете́й в безопа́сное ме́сто.
         en_gb: I would lead the children to a safe place.
+        en_alt:
+          - I would take the children to a safe place.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Я отведу́ маши́ну в се́рвис за́втра.
         en_gb: I will take the car to the garage tomorrow.
@@ -19549,7 +19767,7 @@ words:
         en_gb: She answered quietly and calmly.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я отве́тил бы че́стно.
-        en_gb: I would answer honestly.
+        en_gb: I would have answered honestly.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро она́ отве́тит на письмо́.
         en_gb: Soon she will answer the letter.
@@ -19597,7 +19815,7 @@ words:
         en_gb: He didn't answer for a long time.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-past }
       - ru: Мы бу́дем отвеча́ть на все вопро́сы.
-        en_gb: We will answer all the questions.
+        en_gb: We will be answering all the questions.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты бы отвеча́л споко́йнее.
         en_gb: You would answer more calmly.
@@ -19650,21 +19868,27 @@ words:
     usage:
       - ru: Я отдаю́ де́ньги ка́ждый ме́сяц.
         en_gb: I give back the money every month.
+        en_alt:
+          - I give the money back every month.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он отдаёт кни́ги в библиоте́ку.
         en_gb: He returns books to the library.
+        en_alt:
+          - He gives the books back to the library.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Они́ отдава́ли ста́рые ве́щи бе́дным.
         en_gb: They used to give old things to the poor.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: С понеде́льника я бу́ду отдава́ть долг по частя́м.
-        en_gb: From Monday I will give back the debt in instalments.
+        en_gb: From Monday I will be giving back the debt in instalments.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
       - ru: Я отдава́ла бы ста́рые ве́щи в прию́т.
         en_gb: I would give old things to the shelter.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты отдаёшь де́ньги ка́ждый ме́сяц?
         en_gb: Do you give back the money every month?
+        en_alt:
+          - Do you give the money back every month?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "отдать=to give back":
     cefr_level: A2
@@ -19754,12 +19978,14 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Мы хорошо́ отдохну́ли на мо́ре.
         en_gb: We rested well at the seaside.
+        en_alt:
+          - We had a good rest at the seaside.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Ты отдохнёшь в выходны́е.
         en_gb: You will rest at the weekend.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Я отдохну́л бы у мо́ря.
-        en_gb: I would rest by the sea.
+        en_gb: I would have a rest by the sea.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Мы отдохнём от забо́т ско́ро.
         en_gb: We will rest from our cares soon.
@@ -19791,10 +20017,12 @@ words:
         en_gb: He was resting in the garden.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ле́том я бу́ду отдыха́ть в гора́х.
-        en_gb: In summer I will rest in the mountains.
+        en_gb: In summer I will be resting in the mountains.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Я отдыха́ла бы ча́ще на твоём ме́сте.
         en_gb: I would rest more often in your place.
+        en_alt:
+          - I would rest more often if I were you.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Вы отдыха́ете на мо́ре?
         en_gb: Do you holiday by the sea?
@@ -19810,6 +20038,8 @@ words:
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
       - ru: Отдыха́ющие тури́сты сиде́ли на пля́же.
         en_gb: The tourists who were resting sat on the beach.
+        en_alt:
+          - The resting tourists sat on the beach.
         inflect: { token: 1, form: act_pres, gender: pl, rule: verb-participle-act-pres }
       - ru: Отдыха́вший в дере́вне брат верну́лся.
         en_gb: The brother who had been resting in the village came back.
@@ -19864,15 +20094,19 @@ words:
     usage:
       - ru: Я откажу́сь от э́той рабо́ты.
         en_gb: I will refuse this job.
+        en_alt:
+          - I will turn down this job.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он отказа́лся от по́мощи.
         en_gb: He refused the help.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ отка́жутся от пла́на.
         en_gb: They will refuse the plan.
+        en_alt:
+          - They will give up the plan.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты бы отказа́лся от тако́го предложе́ния.
-        en_gb: You would refuse such an offer.
+        en_gb: You would have refused such an offer.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро он отка́жется от ку́рева.
         en_gb: Soon he will give up smoking.
@@ -19916,7 +20150,7 @@ words:
         en_gb: They kept refusing to answer.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я не бу́ду отка́зываться от по́мощи.
-        en_gb: I will not refuse help.
+        en_gb: I will not be refusing help.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Я не отка́зывалась бы так бы́стро.
         en_gb: I would not refuse so quickly.
@@ -19966,7 +20200,7 @@ words:
         en_gb: They were opening the door for the guest.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: С декабря́ мы бу́дем открыва́ть магази́н в во́семь.
-        en_gb: From December, we will open the shop at eight.
+        en_gb: From December, we will be opening the shop at eight.
         inflect: { token: 4, tense: future, person: 1pl, rule: verb-future }
       - ru: Я открыва́л бы о́кна по утра́м.
         en_gb: I would open the windows in the mornings.
@@ -20000,7 +20234,7 @@ words:
         en_gb: The museums used to open late.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ско́ро ка́сса бу́дет открыва́ться в во́семь.
-        en_gb: Soon the box office will open at eight.
+        en_gb: Soon the box office will be opening at eight.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Дверь не открыва́лась бы без ключа́.
         en_gb: The door would not open without a key.
@@ -20094,7 +20328,7 @@ words:
         en_gb: The windows will open after the repairs.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Без ключа́ замо́к не откры́лся бы.
-        en_gb: Without a key the lock would not open.
+        en_gb: Without a key the lock would not have opened.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро парк откро́ется для посети́телей.
         en_gb: Soon the park will open to visitors.
