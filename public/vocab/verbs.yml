@@ -29828,6 +29828,8 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: С за́втрашнего дня я бу́ду приноси́ть обе́д.
         en_gb: From tomorrow I will be bringing my lunch.
+        en_alt:
+          - From tomorrow I will be bringing lunch.
         inflect: { token: 5, tense: future, person: 1sg, rule: verb-future }
       - ru: Он приноси́л бы газе́ту, е́сли бы вспомина́л.
         en_gb: He would bring the newspaper if he remembered.
@@ -29867,9 +29869,13 @@ words:
     usage:
       - ru: Я приму́ душ пе́ред сном.
         en_gb: I will take a shower before bed.
+        en_alt:
+          - I will have a shower before bed.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он при́нял ва́жное реше́ние.
         en_gb: He made an important decision.
+        en_alt:
+          - He took an important decision.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ при́мут нас за́втра.
         en_gb: They will receive us tomorrow.
@@ -29885,6 +29891,8 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: При́нятый зако́н вступи́л в си́лу.
         en_gb: The law that was passed came into force.
+        en_alt:
+          - The adopted law came into force.
         inflect: { token: 1, form: pass_past, gender: m, rule: verb-participle-pass-past }
       - ru: Ва́ше предложе́ние при́нято.
         en_gb: Your proposal has been accepted.
@@ -29925,6 +29933,8 @@ words:
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Е́сли бы мог, я приобрёл бы э́ту карти́ну.
         en_gb: I would acquire this painting if I could.
+        en_alt:
+          - If I could, I would acquire this painting.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты приобретёшь но́вую кварти́ру?
         en_gb: Will you acquire a new flat?
@@ -29965,6 +29975,8 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я сейча́с прися́ду отдохну́ть на мину́тку.
         en_gb: I will sit down to rest for a minute now.
+        en_alt:
+          - I will sit down now to rest for a minute.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ бы присе́ла, но нет свобо́дных мест.
         en_gb: She would sit down, but there are no free seats.
@@ -30008,6 +30020,8 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он бы присла́л отве́т, е́сли бы успе́л.
         en_gb: He would send a reply if he had time.
+        en_alt:
+          - He would have sent a reply if he had had time.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты пришлёшь фотогра́фии?
         en_gb: Will you send the photos?
@@ -30042,15 +30056,19 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ прислу́шиваются к мне́нию наро́да.
         en_gb: They heed the opinion of the people.
+        en_alt:
+          - They listen attentively to the opinion of the people.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Тепе́рь я бу́ду прислу́шиваться к сове́там.
-        en_gb: From now on I will listen to advice attentively.
+        en_gb: From now on I will listen attentively to advice.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Му́дрый руководи́тель прислу́шивался бы к лю́дям.
         en_gb: A wise leader would listen attentively to people.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты прислу́шиваешься к сове́там отца́?
         en_gb: Do you listen closely to your father's advice?
+        en_alt:
+          - Do you listen attentively to your father's advice?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "присутствовать=to be present":
     cefr_level: B1
@@ -30085,6 +30103,8 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: На всех испы́таниях бу́дет прису́тствовать врач.
         en_gb: A doctor will be present at every test.
+        en_alt:
+          - A doctor will be present at all the tests.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
       - ru: Я прису́тствовал бы, е́сли бы меня́ пригласи́ли.
         en_gb: I would be present if I were invited.
@@ -30165,7 +30185,7 @@ words:
         en_gb: We have to save every rouble.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Ему́ приходи́лось мно́го ходи́ть пешко́м.
-        en_gb: He had to walk a lot on foot.
+        en_gb: He had to walk a lot.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
   "пришивать=to sew on":
     cefr_level: B2
@@ -30195,6 +30215,8 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Он уме́ет пришива́ть запла́ты на брю́ки.
         en_gb: He can sew patches onto trousers.
+        en_alt:
+          - He knows how to sew patches onto trousers.
       - ru: Я пришива́ю наши́вку к фо́рме.
         en_gb: I am sewing a badge onto the uniform.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
@@ -30226,6 +30248,8 @@ words:
     usage:
       - ru: Я пришью́ пу́говицу к пальто́.
         en_gb: I will sew a button onto my coat.
+        en_alt:
+          - I will sew a button onto the coat.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ приши́ла но́вый воротни́к к пла́тью.
         en_gb: She sewed a new collar onto the dress.
@@ -30235,12 +30259,17 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Е́сли бы нашёл и́голку, я приши́л бы пу́говицу.
         en_gb: I would sew on the button if I found a needle.
+        en_alt:
+          - If I found a needle, I would sew on the button.
+          - I would have sewn on the button if I had found a needle.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Я пришью́ наши́вку к фо́рме за́втра.
         en_gb: I will sew the badge onto the uniform tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ты пришьёшь пу́говицу к пальто́?
         en_gb: Will you sew a button onto your coat?
+        en_alt:
+          - Will you sew a button onto the coat?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "пробежать=to run":
     cefr_level: B1
@@ -30287,21 +30316,25 @@ words:
     usage:
       - ru: Я про́бую но́вое блю́до.
         en_gb: I am tasting a new dish.
+        en_alt:
+          - I am trying a new dish.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он про́бует но́вый реце́пт.
         en_gb: He is trying a new recipe.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Мы про́бовали э́тот суп ра́ньше.
-        en_gb: We had tried this soup before.
+        en_gb: We have tried this soup before.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: За у́жином го́сти бу́дут про́бовать блю́да из ра́зных стран.
-        en_gb: Over dinner, the guests will try dishes from different countries.
+        en_gb: Over dinner, the guests will be trying dishes from different countries.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Е́сли бы не уста́л, я про́бовал бы ещё раз.
         en_gb: I would try again if I were not tired.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты про́буешь но́вое блю́до?
         en_gb: Are you tasting a new dish?
+        en_alt:
+          - Are you trying a new dish?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     conjugation:
       imperative:
@@ -30350,10 +30383,12 @@ words:
         en_gb: I will mutter an answer in my sleep.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он сейча́с пробормо́чет что́-то и уйдёт.
-        en_gb: He will mutter something and leave now.
+        en_gb: In a moment he will mutter something and leave.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Она́ бы пробормота́ла извине́ние и ушла́.
         en_gb: She would mutter an apology and leave.
+        en_alt:
+          - She would have muttered an apology and left.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты пробормо́чешь извине́ние?
         en_gb: Will you mutter an apology?
@@ -30400,7 +30435,7 @@ words:
         en_gb: I will check all the documents tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Я прове́рила бы счёт ещё раз.
-        en_gb: I would check the bill once more.
+        en_gb: I would have checked the bill once more.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты прове́ришь тетра́ди?
         en_gb: Will you check the exercise books?
@@ -30491,6 +30526,8 @@ words:
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Ты проведёшь ва́жный о́пыт?
         en_gb: Will you carry out an important experiment?
+        en_alt:
+          - Will you conduct an important experiment?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "проводить=to accompany":
     cefr_level: B1
@@ -30515,7 +30552,7 @@ words:
       past_pl: проводи́ли
     usage:
       - ru: Я провожу́ тебя́ до до́ма.
-        en_gb: I will accompany you to the house.
+        en_gb: I will accompany you home.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он проводи́л госте́й до двери́.
         en_gb: He accompanied the guests to the door.
@@ -30531,6 +30568,8 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты прово́дишь госте́й до две́ри?
         en_gb: Will you see the guests to the door?
+        en_alt:
+          - Will you accompany the guests to the door?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "провожать=to see off":
     cefr_level: B1
@@ -30555,13 +30594,16 @@ words:
       past_pl: провожа́ли
     usage:
       - ru: Я провожа́ю друзе́й на вокза́л.
-        en_gb: I am seeing my friends off at the station.
+        en_gb: I am seeing my friends off to the station.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ провожа́ла сы́на в а́рмию.
         en_gb: She saw her son off to the army.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы провожа́ем го́стя до маши́ны.
         en_gb: We accompany the guest to the car.
+        en_alt:
+          - We are seeing the guest to the car.
+          - We are accompanying the guest to the car.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Ка́ждое у́тро она́ бу́дет провожа́ть сы́на до шко́лы.
         en_gb: Every morning, she will walk her son to school.
@@ -30570,10 +30612,12 @@ words:
         en_gb: She would see us off, but she is busy.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты провожа́ешь друзе́й на вокза́л?
-        en_gb: Are you seeing your friends off at the station?
+        en_gb: Are you seeing your friends off to the station?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы провожа́ете дру́га?
         en_gb: Are you seeing off your friend?
+        en_alt:
+          - Are you seeing your friend off?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "проговорить=to utter":
     cefr_level: B2
@@ -30604,9 +30648,11 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Я проговорю́ э́ту фра́зу ме́дленно.
         en_gb: I will say this phrase slowly.
+        en_alt:
+          - I will utter this phrase slowly.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он сейча́с проговори́т па́ру слов и замолчи́т.
-        en_gb: He will utter a couple of words and fall silent.
+        en_gb: In a moment he will utter a couple of words and fall silent.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Я проговори́ла бы фра́зу ме́дленнее.
         en_gb: I would utter the phrase more slowly.
@@ -30634,12 +30680,16 @@ words:
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ продава́ли о́вощи на ры́нке.
         en_gb: They used to sell vegetables at the market.
+        en_alt:
+          - They were selling vegetables at the market.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ле́том я бу́ду продава́ть я́годы на ры́нке.
         en_gb: In summer I will be selling berries at the market.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Я продава́л бы деше́вле, е́сли бы спрос был ме́ньше.
         en_gb: I would sell cheaper if demand were lower.
+        en_alt:
+          - I would sell more cheaply if demand were lower.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты продаёшь о́бувь?
         en_gb: Do you sell shoes?
@@ -30676,6 +30726,8 @@ words:
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Биле́ты продаю́тся в ка́ссе.
         en_gb: The tickets are sold at the box office.
+        en_alt:
+          - Tickets are sold at the ticket office.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
     conjugation:
       present:
@@ -30712,13 +30764,15 @@ words:
         en_gb: In spring I will sell the old car.
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Он бы про́дал дом доро́же.
-        en_gb: He would sell the house for more.
+        en_gb: He would have sold the house for more.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты прода́шь кварти́ру весно́й?
         en_gb: Will you sell the flat in spring?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Кварти́ра продана́.
         en_gb: The flat has been sold.
+        en_alt:
+          - The flat is sold.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     conjugation:
       imperative:
@@ -30768,18 +30822,22 @@ words:
     usage:
       - ru: Я продолжа́ю учи́ть ру́сский язы́к.
         en_gb: I continue to learn Russian.
+        en_alt:
+          - I am continuing to learn Russian.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он продолжа́л рабо́тать всю ночь.
-        en_gb: He continued working all night.
+        en_gb: He went on working all night.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Мы продолжа́ем наш разгово́р.
         en_gb: We are continuing our conversation.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: На сле́дующей неде́ле мы бу́дем продолжа́ть рабо́ту над прое́ктом.
-        en_gb: Next week, we will continue working on the project.
+        en_gb: Next week we will be continuing work on the project.
         inflect: { token: 5, tense: future, person: 1pl, rule: verb-future }
       - ru: Е́сли бы бы́ло вре́мя, я продолжа́ла бы учи́ться.
         en_gb: I would continue studying if I had time.
+        en_alt:
+          - If I had time, I would continue studying.
         inflect: { token: 6, tense: past, person: past_f, rule: verb-conditional }
       - ru: Вы продолжа́ете наш разгово́р?
         en_gb: Are you continuing our conversation?
@@ -30810,9 +30868,13 @@ words:
     usage:
       - ru: Дождь продолжа́ется уже́ час.
         en_gb: The rain has been continuing for an hour.
+        en_alt:
+          - The rain has already been going on for an hour.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Встре́ча продолжа́лась до́лго.
         en_gb: The meeting went on for a long time.
+        en_alt:
+          - The meeting continued for a long time.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Перегово́ры продолжа́ются.
         en_gb: The negotiations are continuing.
@@ -30861,7 +30923,7 @@ words:
         en_gb: I will continue reading the novel tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ бы продо́лжила расска́з, но усну́ла.
-        en_gb: She would continue the story, but she fell asleep.
+        en_gb: She would have continued the story, but she fell asleep.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Вы продо́лжите уро́к?
         en_gb: Will you continue the lesson?
