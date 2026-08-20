@@ -20358,6 +20358,8 @@ words:
     usage:
       - ru: Э́ти кни́ги отлича́ются содержа́нием.
         en_gb: These books differ in their content.
+        en_alt:
+          - These books differ in content.
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Я отлича́юсь от свои́х бра́тьев.
         en_gb: I differ from my brothers.
@@ -20403,7 +20405,7 @@ words:
         en_gb: He marked an important date.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я отме́чу ну́жные страни́цы.
-        en_gb: I will mark the needed pages.
+        en_gb: I will mark the necessary pages.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Я отме́тила бы э́тот день осо́бо.
         en_gb: I would mark this day specially.
@@ -20450,6 +20452,8 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ты бу́дешь относи́ться к рабо́те серьёзно.
         en_gb: You will treat the work seriously.
+        en_alt:
+          - You will take the work seriously.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Ты бы относи́лась к нему́ доброже́лательнее.
         en_gb: You would treat him more kindly.
@@ -20612,6 +20616,8 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ве́тер оторвёт пла́кат.
         en_gb: The wind will tear off the poster.
+        en_alt:
+          - The wind will tear the poster off.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты бы оторва́ла э́тот ярлы́к.
         en_gb: You would tear off this label.
@@ -20702,7 +20708,7 @@ words:
         en_gb: I will set off home after lunch.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Я отпра́вился бы в путь неме́дленно.
-        en_gb: I would set off on the journey immediately.
+        en_gb: I would have set off on the journey immediately.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро экспеди́ция отпра́вится на се́вер.
         en_gb: Soon the expedition will set off northwards.
@@ -20740,6 +20746,8 @@ words:
     usage:
       - ru: По́езд отправля́ется в во́семь.
         en_gb: The train sets off at eight.
+        en_alt:
+          - The train departs at eight.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я отправля́юсь на рабо́ту ра́но.
         en_gb: I set off for work early.
@@ -20748,7 +20756,7 @@ words:
         en_gb: The tourists used to set off at dawn.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Мы бу́дем отправля́ться на рабо́ту ра́ньше.
-        en_gb: We will set off for work earlier.
+        en_gb: We will be setting off for work earlier.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты бы отправля́лась в путь на рассве́те.
         en_gb: You would set off at dawn.
@@ -20785,6 +20793,8 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Учи́тель отпусти́л класс ра́ньше.
         en_gb: The teacher let the class go early.
+        en_alt:
+          - The teacher let the class go earlier.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ отпу́стят пти́цу на во́лю.
         en_gb: They will let the bird go free.
@@ -20828,6 +20838,8 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ отре́жут ли́шнюю ткань.
         en_gb: They will cut off the extra cloth.
+        en_alt:
+          - They will cut off the extra fabric.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Я отре́зала бы кусо́к побо́льше.
         en_gb: I would cut off a bigger piece.
@@ -20871,7 +20883,7 @@ words:
         en_gb: Several pupils are absent today.
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Весь а́вгуст дире́ктор бу́дет отсу́тствовать.
-        en_gb: The director will be away throughout August.
+        en_gb: The director will be absent for the whole of August.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
       - ru: Я не отсу́тствовала бы без причи́ны.
         en_gb: I would not be absent without a reason.
@@ -20908,6 +20920,8 @@ words:
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Я отхожу́ от окна́.
         en_gb: I move away from the window.
+        en_alt:
+          - I am moving away from the window.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Он ме́дленно отходи́л в сто́рону.
         en_gb: He was slowly moving aside.
@@ -20945,7 +20959,7 @@ words:
       past_pl: отыска́ли
     usage:
       - ru: Я отыщу́ ну́жную кни́гу.
-        en_gb: I will find the needed book.
+        en_gb: I will find the book I need.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Он отыска́л ста́рое письмо́.
         en_gb: He found an old letter.
@@ -21099,9 +21113,11 @@ words:
     usage:
       - ru: Он очну́лся в больни́це.
         en_gb: He came to in the hospital.
+        en_alt:
+          - He came to in hospital.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я очну́сь от шу́ма.
-        en_gb: I will come to from the noise.
+        en_gb: I will come to because of the noise.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Больно́й ско́ро очнётся.
         en_gb: The patient will come to soon.
@@ -21114,6 +21130,8 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты очнёшься в больни́це?
         en_gb: Will you come to in the hospital?
+        en_alt:
+          - Will you come to in hospital?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "ошибаться=to make a mistake":
     cefr_level: B1
@@ -21142,6 +21160,8 @@ words:
     usage:
       - ru: Все лю́ди иногда́ ошиба́ются.
         en_gb: All people sometimes make mistakes.
+        en_alt:
+          - Everyone sometimes makes mistakes.
         inflect: { token: 4, tense: present, person: 3pl, rule: verb-present }
       - ru: Я ча́сто ошиба́юсь в счёте.
         en_gb: I often make mistakes in counting.
@@ -21188,12 +21208,14 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ ошибла́сь но́мером.
         en_gb: She got the number wrong.
+        en_alt:
+          - She dialled the wrong number.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ты ошибёшься в расчётах.
         en_gb: You will make a mistake in the calculations.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Ты бы ошибла́сь без подска́зки.
-        en_gb: You would make a mistake without a hint.
+        en_gb: You would have made a mistake without a hint.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро ты поймёшь, что ошибёшься.
         en_gb: Soon you will realise that you will be mistaken.
@@ -21236,7 +21258,7 @@ words:
         en_gb: We will feel the difference at once.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я ощути́ла бы ра́зницу сра́зу.
-        en_gb: I would feel the difference at once.
+        en_gb: I would have felt the difference at once.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро ты ощути́шь облегче́ние.
         en_gb: Soon you will feel relief.
@@ -21276,7 +21298,7 @@ words:
         en_gb: He felt the warmth of the sun.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Мы ощуща́ем за́пах цвето́в.
-        en_gb: We feel the scent of the flowers.
+        en_gb: We sense the scent of the flowers.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: С э́того дня я бу́ду ощуща́ть твою́ подде́ржку.
         en_gb: From this day on I will feel your support.
@@ -21289,6 +21311,8 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы ощуща́ете за́пах ды́ма?
         en_gb: Do you sense the smell of smoke?
+        en_alt:
+          - Can you smell the smoke?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
   "падать=to fall":
     cefr_level: A2
@@ -21309,9 +21333,11 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Це́ны па́дали ка́ждый ме́сяц.
         en_gb: Prices were falling every month.
+        en_alt:
+          - Prices fell every month.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ско́ро бу́дут па́дать пе́рвые снежи́нки.
-        en_gb: Soon the first snowflakes will fall.
+        en_gb: Soon the first snowflakes will be falling.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Без опо́ры де́рево па́дало бы.
         en_gb: Without support the tree would fall.
@@ -21392,6 +21418,8 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Без ве́тра пти́ца не пари́ла бы так до́лго.
         en_gb: Without wind the bird would not soar so long.
+        en_alt:
+          - Without wind the bird would not soar for so long.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
     conjugation:
       present:
