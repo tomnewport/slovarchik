@@ -24096,9 +24096,11 @@ words:
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Он поду́мал и согласи́лся.
         en_gb: He thought and agreed.
+        en_alt:
+          - He thought it over and agreed.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ты бы поду́мала об э́том ещё раз.
-        en_gb: You would think about it once more.
+        en_gb: You should think about it once more.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Я поду́маю над твои́м предложе́нием за́втра.
         en_gb: I will think over your proposal tomorrow.
@@ -24158,6 +24160,9 @@ words:
         inflect: { token: 3, tense: future, person: 1sg, rule: verb-future }
       - ru: Е́сли бы знал слова́, я подхвати́л бы мело́дию.
         en_gb: I would join in the tune if I knew the words.
+        en_alt:
+          - If I knew the words, I would join in the tune.
+          - If I knew the words, I would take up the tune.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты подхва́тишь весёлую пе́сню?
         en_gb: Will you take up the cheerful song?
@@ -24174,6 +24179,8 @@ words:
     usage:
       - ru: Не подходи́ к кра́ю!
         en_gb: Don't approach the edge!
+        en_alt:
+          - Don't go near the edge!
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я подхожу́ к до́му ка́ждый ве́чер.
         en_gb: I approach the house every evening.
@@ -24182,7 +24189,7 @@ words:
         en_gb: People were approaching the stage one by one.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Во вре́мя у́жина официа́нт бу́дет подходи́ть к ва́шему сто́лику.
-        en_gb: During dinner, the waiter will come over to your table.
+        en_gb: During dinner, the waiter will be coming over to your table.
         inflect: { token: 5, tense: future, person: 3sg, rule: verb-future }
       - ru: Я подходи́ла бы к нему́ осторо́жнее.
         en_gb: I would approach him more carefully.
@@ -24279,18 +24286,26 @@ words:
     usage:
       - ru: Я пое́ду в дере́вню за́втра.
         en_gb: I will set off to the village tomorrow.
+        en_alt:
+          - I will set off for the village tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Они́ пое́хали на мо́ре ле́том.
         en_gb: They set off to the seaside in summer.
+        en_alt:
+          - They set off for the seaside in summer.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Мы пое́дем на по́езде у́тром.
         en_gb: We will set off by train in the morning.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Е́сли бы́ли де́ньги, я пое́хала бы на мо́ре.
         en_gb: I would go to the seaside if I had the money.
+        en_alt:
+          - If I had the money, I would go to the seaside.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро ты пое́дешь на велосипе́де в парк.
         en_gb: Soon you will set off to the park by bike.
+        en_alt:
+          - Soon you will set off for the park by bike.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Ты пое́дешь на мо́ре ле́том?
         en_gb: Will you go to the seaside in summer?
@@ -24320,7 +24335,7 @@ words:
       past_pl: пожале́ли
     usage:
       - ru: Ты ещё пожале́ешь об э́том.
-        en_gb: You will still feel sorry about this.
+        en_gb: You will be sorry about this yet.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Она́ пожале́ла бе́дную соба́ку.
         en_gb: She felt sorry for the poor dog.
@@ -24336,6 +24351,8 @@ words:
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Ты пожале́ешь об э́том?
         en_gb: Will you feel sorry about this?
+        en_alt:
+          - Will you regret this?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "пожать=to shake":
     cefr_level: B1
@@ -24360,7 +24377,7 @@ words:
       past_pl: пожа́ли
     usage:
       - ru: Он пожа́л мне ру́ку при встре́че.
-        en_gb: He shook my hand at the meeting.
+        en_gb: He shook my hand when we met.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я пожму́ ру́ку но́вому колле́ге.
         en_gb: I will shake the new colleague's hand.
@@ -24373,6 +24390,8 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: При встре́че мы пожмём друг дру́гу ру́ки.
         en_gb: When we meet we will shake hands.
+        en_alt:
+          - When we meet we will shake each other's hands.
         inflect: { token: 4, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты пожмёшь ру́ки хозя́ину?
         en_gb: Will you shake hands with the host?
@@ -24493,15 +24512,19 @@ words:
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Учи́тель позво́лил вы́йти из кла́сса.
         en_gb: The teacher allowed us to leave the classroom.
+        en_alt:
+          - The teacher allowed me to leave the classroom.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я позво́лил бы тебе́ оста́ться.
-        en_gb: I would allow you to stay.
+        en_gb: I would have allowed you to stay.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро врач позво́лит ему́ встава́ть.
         en_gb: Soon the doctor will allow him to get up.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Вы позво́лите вы́йти из кла́сса?
         en_gb: Will you allow us to leave the classroom?
+        en_alt:
+          - Will you allow me to leave the classroom?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
   "позволять=to allow":
     cefr_level: A2
@@ -24542,12 +24565,16 @@ words:
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ле́том мы бу́дем позволя́ть де́тям ложи́ться по́зже.
         en_gb: In summer, we will let the children go to bed later.
+        en_alt:
+          - In summer we will allow the children to go to bed later.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
       - ru: Хоро́ший тре́нер не позволя́л бы таки́х оши́бок.
         en_gb: A good coach wouldn't allow such mistakes.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты позволя́ешь шуме́ть в библиоте́ке?
         en_gb: Do you allow noise in the library?
+        en_alt:
+          - Do you allow people to make noise in the library?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "позвонить=to call":
     cefr_level: A1
@@ -24607,6 +24634,8 @@ words:
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: Друзья́ поздравля́ют его́ с побе́дой.
         en_gb: His friends congratulate him on the victory.
+        en_alt:
+          - His friends are congratulating him on the victory.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
       - ru: Вы поздравля́ете дру́га?
         en_gb: Are you congratulating your friend?
@@ -24651,21 +24680,27 @@ words:
       past_pl: познако́мились
     usage:
       - ru: Познако́мьтесь, э́то мой друг.
-        en_gb: Get acquainted, this is my friend.
+        en_gb: Let me introduce you — this is my friend.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я познако́млюсь с но́выми сосе́дями.
         en_gb: I will get acquainted with the new neighbours.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: О́чень прия́тно познако́миться!
         en_gb: Very nice to meet you!
+        en_alt:
+          - Very pleased to meet you!
       - ru: Мы познако́мились на конце́рте.
         en_gb: We got acquainted at a concert.
+        en_alt:
+          - We met at a concert.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Дава́йте познако́мимся побли́же.
         en_gb: Let's get better acquainted.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты бы познако́мился с ним ра́ньше.
         en_gb: You would have got acquainted with him earlier.
+        en_alt:
+          - You should have got acquainted with him earlier.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро ты познако́мишься с но́вым учи́телем.
         en_gb: Soon you will get acquainted with the new teacher.
@@ -24710,6 +24745,8 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты поинтересу́ешься цено́й биле́тов?
         en_gb: Will you ask about the price of the tickets?
+        en_alt:
+          - Will you inquire about the price of the tickets?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "поймать=to catch":
     cefr_level: B1
@@ -24744,7 +24781,7 @@ words:
         en_gb: The fishermen caught a big fish.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Е́сли бы успе́л, я пойма́л бы мяч.
-        en_gb: I would catch the ball if I were in time.
+        en_gb: If I had been in time, I would have caught the ball.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: За́втра рыбаки́ пойма́ют мно́го ры́бы.
         en_gb: Tomorrow the fishermen will catch a lot of fish.
@@ -24884,7 +24921,7 @@ words:
         en_gb: The task will seem easy after practice.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Без о́тдыха зада́ча показа́лась бы сло́жной.
-        en_gb: Without rest the task would seem difficult.
+        en_gb: Without rest the task would have seemed difficult.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ско́ро вдали́ пока́жется на́ша дере́вня.
         en_gb: Soon our village will come into view in the distance.
@@ -24918,18 +24955,22 @@ words:
     usage:
       - ru: Гид пока́зывает тури́стам го́род.
         en_gb: The guide shows the city to the tourists.
+        en_alt:
+          - The guide shows the tourists the city.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я ча́сто пока́зываю де́тям ка́рту.
         en_gb: I often show the children the map.
         inflect: { token: 3, tense: present, person: 1sg, rule: verb-present }
       - ru: Часы́ пока́зывали по́лночь.
         en_gb: The clock showed midnight.
+        en_alt:
+          - The clock was showing midnight.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: За́втра гид бу́дет пока́зывать нам ста́рый го́род.
         en_gb: Tomorrow the guide will be showing us the old town.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты бы пока́зывала де́тям бо́льше карти́н.
-        en_gb: You would show the children more pictures.
+        en_gb: You should show the children more pictures.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты пока́зываешь биле́т?
         en_gb: Are you showing your ticket?
@@ -24968,9 +25009,11 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: Е́сли б он пла́кал, я покача́л бы коля́ску.
         en_gb: I would rock the pram if he were crying.
+        en_alt:
+          - If he were crying, I would rock the pram.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро ба́бушка покача́ет вну́ка в крова́тке.
-        en_gb: Soon grandmother will rock the grandchild in the cot.
+        en_gb: Soon grandmother will rock her grandson in the cot.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Ты покача́ешь ребёнка на рука́х?
         en_gb: Will you rock the baby in your arms?
