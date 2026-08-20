@@ -20,6 +20,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # The translation review (#573) claims review/proposals is a complete,
+      # replayable record of every corpus change. Prove it: replaying the
+      # proposals onto the state the review started from must land exactly
+      # on the committed YAML, or the audit trail is decorative.
+      - run: npm run verify:review
+        if: hashFiles('review/proposals/*.jsonl') != ''
       # The same suite as `npm test`, with coverage measured over the logic
       # layers. The per-layer thresholds in vite.config.js are a ratchet: they
       # fail the job when coverage of src/lib, src/stores or src/composables

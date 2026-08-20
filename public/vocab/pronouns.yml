@@ -106,6 +106,8 @@ words:
     usage:
       - ru: Во всём ми́ре зна́ют э́ту пе́сню.
         en_gb: All over the world people know this song.
+        en_alt:
+          - They know this song all over the world.
         inflect: { token: 2, case: pre, number: sg, gender: m, rule: pronoun-demonstrative }
       - ru: Он рабо́тал всю ночь.
         en_gb: He worked all night.
@@ -620,6 +622,8 @@ words:
         inflect: { token: 3, case: acc, number: pl, rule: pronoun-personal }
       - ru: Они́ говоря́т о нас то́лько хорошо́.
         en_gb: They only speak well of us.
+        en_alt:
+          - They say only good things about us.
         inflect: { token: 4, case: pre, number: pl, rule: pronoun-personal }
       - ru: Приходи́ к нам в го́сти.
         en_gb: Come and visit us.
@@ -813,6 +817,8 @@ words:
     usage:
       - ru: Она́ ничему́ не ве́рит.
         en_gb: She does not believe anything.
+        en_alt:
+          - She believes nothing.
         inflect: { token: 2, case: dat, number: sg, rule: pronoun-interrogative }
       - ru: Ничто́ не меня́ется в э́том го́роде.
         en_gb: Nothing changes in this town.
@@ -1080,6 +1086,8 @@ words:
         inflect: { token: 4, case: pre, number: pl, gender: pl, rule: pronoun-possessive }
       - ru: Он лю́бит свою́ рабо́ту.
         en_gb: He loves his own work.
+        en_alt:
+          - He loves his work.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: pronoun-possessive }
       - ru: Я взяла́ свой зо́нтик.
         en_gb: I took my own umbrella.

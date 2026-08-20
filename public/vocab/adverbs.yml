@@ -2301,6 +2301,8 @@ words:
     usage:
       - ru: Он наверняка́ сдал экза́мен.
         en_gb: He definitely passed the exam.
+        en_alt:
+          - He passed the exam for sure.
       - ru: Я наверняка́ зна́ю, где он.
         en_gb: I know for certain where he is.
       - ru: За́втра наверняка́ бу́дет со́лнце.
@@ -2318,6 +2320,8 @@ words:
     usage:
       - ru: Мы подняли́сь наве́рх на ли́фте.
         en_gb: We went up in the lift.
+        en_alt:
+          - We went up by lift.
       - ru: Положи́ су́мку наве́рх.
         en_gb: Put the bag up on top.
         en_alt:
@@ -2381,6 +2385,8 @@ words:
         en_gb: I need to rest.
       - ru: На́до купи́ть хлеб.
         en_gb: It is necessary to buy bread.
+        en_alt:
+          - We need to buy bread.
   "назад=back":
     cefr_level: A1
     accented: наза́д
@@ -2400,6 +2406,8 @@ words:
         en_gb: He came two hours ago.
       - ru: Оберни́сь наза́д.
         en_gb: Turn around.
+        en_alt:
+          - Turn round.
   "наиболее=most":
     cefr_level: B2
     accented: наибо́лее
@@ -3074,10 +3082,14 @@ words:
     usage:
       - ru: Я нигде́ не нашёл ключи́.
         en_gb: I could not find the keys anywhere.
+        en_alt:
+          - I did not find the keys anywhere.
       - ru: Его́ нигде́ нет.
         en_gb: He is nowhere to be found.
       - ru: Тако́го нигде́ не уви́дишь.
         en_gb: You will not see such a thing anywhere.
+        en_alt:
+          - You will not see anything like that anywhere.
   "ниже=lower":
     cefr_level: B1
     accented: ни́же
@@ -3110,6 +3122,8 @@ words:
         en_gb: The door just won't open.
       - ru: Он ника́к не реаги́рует.
         en_gb: He does not react at all.
+        en_alt:
+          - He shows no reaction at all.
   "никогда=never":
     cefr_level: A1
     accented: никогда́
@@ -3135,10 +3149,16 @@ words:
     usage:
       - ru: Я никуда́ не пойду́.
         en_gb: I will not go anywhere.
+        en_alt:
+          - I am not going anywhere.
       - ru: Он никуда́ не спеши́т.
         en_gb: He is not hurrying anywhere.
+        en_alt:
+          - He is in no hurry.
       - ru: Ле́том мы никуда́ не е́здили.
         en_gb: In summer we did not go anywhere.
+        en_alt:
+          - In the summer we did not go anywhere.
   "нормально=normally":
     cefr_level: A2
     accented: норма́льно
@@ -3296,6 +3316,8 @@ words:
     usage:
       - ru: Одна́жды я был в Москве́.
         en_gb: Once I was in Moscow.
+        en_alt:
+          - I was in Moscow once.
       - ru: Одна́жды ве́чером пошёл снег.
         en_gb: One evening it began to snow.
       - ru: Одна́жды ты всё поймёшь.
@@ -3627,6 +3649,8 @@ words:
     usage:
       - ru: Он пло́хо себя́ чу́вствует.
         en_gb: He feels unwell.
+        en_alt:
+          - He is not feeling well.
       - ru: Я пло́хо спала́ но́чью.
         en_gb: I slept badly at night.
       - ru: Здесь пло́хо ви́дно.
@@ -4174,6 +4198,8 @@ words:
         en_gb: The children laughed joyfully.
       - ru: На душе́ ста́ло ра́достно.
         en_gb: My heart was filled with joy.
+        en_alt:
+          - I felt joyful inside.
       - ru: Она́ ра́достно встре́тила госте́й.
         en_gb: She joyfully greeted the guests.
       - ru: С детьми́ в до́ме ра́достнее.
@@ -4267,8 +4293,12 @@ words:
         en_gb: He rarely gets ill.
       - ru: Таки́е лю́ди встреча́ются ре́дко.
         en_gb: Such people are rarely encountered.
+        en_alt:
+          - You rarely meet such people.
       - ru: Тепе́рь мы встреча́емся ре́же.
         en_gb: Now we meet less often.
+        en_alt:
+          - Now we meet more rarely.
         inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }
     forms:
       comparative: ре́же
@@ -4580,8 +4610,13 @@ words:
           - Most likely he is already at home.
       - ru: Э́то скоре́е шу́тка, чем пра́вда.
         en_gb: This is more of a joke than the truth.
+        en_alt:
+          - This is more a joke than the truth.
       - ru: Иди́ сюда́ скоре́е!
         en_gb: Come here quickly!
+        en_alt:
+          - Hurry up and come here!
+          - Come here, quick!
   "скоро=soon":
     cefr_level: A1
     accented: ско́ро
@@ -4600,6 +4635,8 @@ words:
         en_gb: We will see each other soon.
       - ru: Приходи́ скоре́е, мы ждём.
         en_gb: Come quickly, we are waiting.
+        en_alt:
+          - Come soon, we are waiting.
         inflect: { token: 2, degree: comparative, rule: adv-comparative }
     forms:
       comparative: скоре́е
@@ -4644,6 +4681,8 @@ words:
           - On the left there is a big house.
       - ru: Магази́н нахо́дится сле́ва от вокза́ла.
         en_gb: The shop is to the left of the station.
+        en_alt:
+          - The shop is located to the left of the station.
       - ru: Сле́ва от меня́ сиде́л друг.
         en_gb: A friend was sitting on my left.
         en_alt:
@@ -4736,6 +4775,8 @@ words:
           - I find his jokes funny.
       - ru: Кло́ун смешно́ упа́л.
         en_gb: The clown fell in a funny way.
+        en_alt:
+          - The clown had a funny fall.
       - ru: Бы́ло о́чень смешно́ на спекта́кле.
         en_gb: It was very funny at the show.
   "снаружи=from the outside":
@@ -4900,6 +4941,8 @@ words:
         en_gb: At first he did not believe me.
       - ru: Сперва́ мы пое́ли, пото́м гуля́ли.
         en_gb: First we ate, then we went for a walk.
+        en_alt:
+          - First we ate, then we strolled.
   "специально=specially":
     cefr_level: B1
     accented: специа́льно
@@ -5126,6 +5169,8 @@ words:
           - It is strictly forbidden to smoke here.
       - ru: Ма́ма стро́го разгова́ривала с ним.
         en_gb: Mum spoke sternly to him.
+        en_alt:
+          - Mum talked to him sternly.
       - ru: С детьми́ на́до говори́ть стро́же.
         en_gb: One has to speak more strictly with children.
         en_alt:
@@ -5150,6 +5195,8 @@ words:
           - Are you not ashamed?
       - ru: Ма́льчику ста́ло сты́дно.
         en_gb: The boy felt ashamed.
+        en_alt:
+          - The boy grew ashamed.
       - ru: Сты́дно так говори́ть с ма́терью.
         en_gb: It is shameful to speak to your mother like that.
         en_alt:
@@ -5422,6 +5469,8 @@ words:
     usage:
       - ru: Я то́чно зна́ю отве́т.
         en_gb: I know the answer for sure.
+        en_alt:
+          - I know the answer for certain.
       - ru: Часы́ пока́зывают вре́мя то́чно.
         en_gb: The clock shows the time precisely.
         en_alt:
@@ -5489,6 +5538,8 @@ words:
           - We are driving to the same place as yesterday.
       - ru: Мы идём туда́ пешко́м.
         en_gb: We are going there on foot.
+        en_alt:
+          - We are walking there.
       - ru: Не ходи́ туда́ оди́н.
         en_gb: Don't go there alone.
       - ru: Положи́ кни́ги туда́, на по́лку.
@@ -5671,6 +5722,8 @@ words:
         en_gb: You did the work well.
       - ru: Здесь хорошо́ отдыха́ть ле́том.
         en_gb: It is good to rest here in summer.
+        en_alt:
+          - It is nice to relax here in summer.
       - ru: Сего́дня я чу́вствую себя́ лу́чше.
         en_gb: Today I feel better.
         inflect: { token: 5, degree: comparative, rule: adv-comparative-stem }
@@ -5768,6 +5821,8 @@ words:
         en_gb: This is purely my personal opinion.
       - ru: Он чи́сто говори́т по-ру́сски.
         en_gb: He speaks Russian clearly.
+        en_alt:
+          - He speaks pure Russian.
       - ru: В но́вой ку́хне чи́ще, чем в ста́рой.
         en_gb: In the new kitchen it is cleaner than in the old one.
         inflect: { token: 4, degree: comparative, rule: adv-comparative-stem }

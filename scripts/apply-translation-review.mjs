@@ -81,6 +81,8 @@ export function yamlScalar(value) {
 }
 
 const proposals = []
+let parseFailures = 0
+let writeFailures = 0
 for (const file of inputs) {
   const text = readFileSync(file, 'utf8')
   text.split('\n').forEach((line, i) => {
@@ -89,7 +91,8 @@ for (const file of inputs) {
     try {
       proposals.push({ ...JSON.parse(trimmed), _src: `${file}:${i + 1}` })
     } catch {
-      console.error(`  ! ${file}:${i + 1} is not valid JSON — skipped`)
+      console.error(`  ! ${file}:${i + 1} is not valid JSON`)
+      parseFailures += 1
     }
   })
 }
@@ -145,6 +148,47 @@ for (const [file, filePoposals] of byFile) {
   const replacements = new Map() // lineNo → new text
   const insertions = new Map() // afterLineNo → string[]
   const deletions = new Set()
+  // Alts already queued for a usage item during THIS run, and the items for
+  // which an `en_alt:` header has been queued. Both are essential: two
+  // proposals can target one sentence (packets overlap where a word was
+  // re-cut between shardings), and without this each would see no en_alt in
+  // the file and open a second block — producing a duplicate mapping key and
+  // invalid YAML. Checking the file alone is not enough; #581 caught this.
+  const queuedAlts = new Map() // ruLine → Set of alt strings
+  const queuedHeader = new Set() // ruLine
+
+  /**
+   * Queue an item's `en_alt` additions, skipping any already present in the
+   * file or already queued in this run. Returns true if anything was added.
+   */
+  function queueAlts(p, item, span, enOffset, altOffset) {
+    const inFile = new Set(
+      span
+        .filter((l) => /^ {10}- /.test(l))
+        .map((l) => l.replace(/^ {10}- /, '').trim().replace(/^["'](.*)["']$/, '$1')),
+    )
+    const already = queuedAlts.get(item.ruLine) ?? new Set()
+    const alts = (p.en_alt ?? [])
+      .filter(Boolean)
+      .map((a) => String(a).trim())
+      .filter((a) => !inFile.has(a) && !already.has(a))
+    if (!alts.length) return false
+    for (const a of alts) already.add(a)
+    queuedAlts.set(item.ruLine, already)
+
+    const rendered = alts.map((a) => `          - ${yamlScalar(a)}`)
+    const needsHeader = altOffset === -1 && !queuedHeader.has(item.ruLine)
+    if (needsHeader) queuedHeader.add(item.ruLine)
+    // Anchor on the en_alt line when the file already has one, otherwise on
+    // en_gb so the item keeps its ru / en_gb / en_alt / inflect order.
+    const anchor = item.ruLine + (altOffset !== -1 ? altOffset : enOffset === -1 ? 0 : enOffset)
+    insertions.set(anchor, [
+      ...(insertions.get(anchor) ?? []),
+      ...(needsHeader ? ['        en_alt:'] : []),
+      ...rendered,
+    ])
+    return true
+  }
 
   for (const p of filePoposals) {
     const lookup = `${p.key}\u0000${matchKey(p.ru)}`
@@ -169,30 +213,15 @@ for (const [file, filePoposals] of byFile) {
       if (enOffset === -1) { unmatched.push({ ...p, why: 'no en_gb line found' }); stats.unmatched += 1; continue }
       replacements.set(item.ruLine + enOffset, `        en_gb: ${yamlScalar(p.en)}`)
       stats.retranslate += 1
+      // A retranslate may also carry en_alt — reviewers routinely keep the
+      // wording they replaced as an accepted alternative. Dropping those (as
+      // this script did until #581) silently discards the compensating
+      // alternate while still making the shown English worse.
+      if ((p.en_alt ?? []).filter(Boolean).length) queueAlts(p, item, span, enOffset, altOffset)
     } else if (p.verdict === 'add-alt') {
-      // Idempotent: an alt already present is skipped, so re-applying a
-      // proposal set (a re-run, or a packet reviewed twice) can't stack
-      // duplicates into en_alt. The comparison ignores quoting style, since
-      // yamlScalar may or may not have quoted the same string.
-      const existingAlts = new Set(
-        span
-          .filter((l) => /^ {10}- /.test(l))
-          .map((l) => l.replace(/^ {10}- /, '').trim().replace(/^["'](.*)["']$/, '$1')),
-      )
-      const alts = (p.en_alt ?? []).filter(Boolean).filter((a) => !existingAlts.has(String(a).trim()))
       if (!(p.en_alt ?? []).filter(Boolean).length) { unmatched.push({ ...p, why: 'add-alt without en_alt' }); stats.unmatched += 1; continue }
-      if (!alts.length) { stats.altAlreadyPresent += 1; continue }
-      const rendered = alts.map((a) => `          - ${yamlScalar(a)}`)
-      if (altOffset === -1) {
-        // No en_alt block yet — open one directly after the en_gb line so the
-        // item keeps the ru / en_gb / en_alt / inflect order used everywhere.
-        const anchor = item.ruLine + (enOffset === -1 ? 0 : enOffset)
-        insertions.set(anchor, [...(insertions.get(anchor) ?? []), '        en_alt:', ...rendered])
-      } else {
-        const anchor = item.ruLine + altOffset
-        insertions.set(anchor, [...(insertions.get(anchor) ?? []), ...rendered])
-      }
-      stats.addAlt += 1
+      if (queueAlts(p, item, span, enOffset, altOffset)) stats.addAlt += 1
+      else stats.altAlreadyPresent += 1
     } else if (p.verdict === 'fix-russian') {
       if (!p.ru_new) { unmatched.push({ ...p, why: 'fix-russian without ru_new' }); stats.unmatched += 1; continue }
       if (hasInflect) {
@@ -204,6 +233,7 @@ for (const [file, filePoposals] of byFile) {
       replacements.set(item.ruLine, `      - ru: ${yamlScalar(p.ru_new)}`)
       if (p.en && enOffset !== -1) replacements.set(item.ruLine + enOffset, `        en_gb: ${yamlScalar(p.en)}`)
       stats.fixRussian += 1
+      if ((p.en_alt ?? []).filter(Boolean).length) queueAlts(p, item, span, enOffset, altOffset)
     }
   }
 
@@ -220,6 +250,7 @@ for (const [file, filePoposals] of byFile) {
     yaml.load(text)
   } catch (err) {
     console.error(`  ! ${file}: edits produce invalid YAML (${err.message}) — file left untouched`)
+    writeFailures += 1
     continue
   }
   if (APPLY) writeFileSync(path, text)
@@ -265,6 +296,15 @@ console.log(`  unmatched         ${stats.unmatched}`)
 for (const u of unmatched.slice(0, 20)) console.log(`  ! ${u._src}: ${u.why} — ${u.key} / ${String(u.ru).slice(0, 50)}`)
 for (const f of flags.slice(0, 20)) console.log(`  ? ${f.key}: ${f.note ?? ''}`)
 
+// Exit non-zero on anything that means the corpus does not reflect the
+// proposals: a file skipped for invalid YAML, a proposal that matched nothing,
+// or a JSONL line that did not parse. Reporting these and exiting 0 (as this
+// script did until #581) lets a partial application pass for a complete one.
+const failures = writeFailures + stats.unmatched + parseFailures
+if (failures) {
+  console.error(`\nFAILED: ${writeFailures} file(s) left unwritten, ${stats.unmatched} unmatched proposal(s), ${parseFailures} unparseable line(s)`)
+}
+
 if (!APPLY) console.log('\ndry run — pass --apply to write')
 else if (stats.fixRussian) {
   console.log('\nRussian sentences changed. Now run:')
@@ -272,3 +312,5 @@ else if (stats.fixRussian) {
   console.log('  node scripts/triage-inflect.mjs --verify')
   console.log('  npm run audit:gender')
 }
+
+if (failures) process.exit(1)

@@ -21,6 +21,7 @@ words:
       - ru: Я чита́ю, а он пи́шет.
         en_gb: I am reading, and he is writing.
         en_alt:
+          - I am reading, whereas he is writing.
           - I am reading, and he is writing.
       - ru: Он лю́бит чай, а я ко́фе.
         en_gb: He likes tea, whereas I like coffee.
@@ -77,6 +78,8 @@ words:
         en_gb: Hardly had we left when it started to rain.
       - ru: Он едва́ успе́л на по́езд.
         en_gb: He barely caught the train.
+        en_alt:
+          - He only just made the train.
       - ru: Едва́ слы́шно её го́лос.
         en_gb: Her voice is hardly audible.
   "если=if":
