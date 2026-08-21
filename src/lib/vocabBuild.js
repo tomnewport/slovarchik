@@ -6,6 +6,7 @@
 // converted to JSON, and the browser only ever `JSON.parse`s (see issue #324).
 import { CASES, LOCATIVE, NUMBERS } from './declension.js'
 import { buildAmbiguityIndex, phraseAmbiguities } from './phraseAmbiguity.js'
+import { promptHints } from './promptDisambiguation.js'
 import { stripStress } from './text.js'
 import { normalizeGoverns } from './verbGovernment.js'
 
@@ -472,6 +473,16 @@ export function shapePhrases(words) {
       const enNotes = phraseAmbiguities(ru, ambiguity, en)
       out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes })
     }
+  }
+  // English→Russian prompts are only answerable when the English picks out one
+  // Russian sentence. Where two sentences share a prompt, `enHint` carries the
+  // gloss note that tells them apart — computed here rather than per drill,
+  // because whether a prompt is ambiguous is a property of the whole corpus and
+  // no single phrase can know it. See lib/promptDisambiguation.js.
+  const byId = new Map(out.map((p) => [p.id, p]))
+  for (const [id, hint] of promptHints(out, words)) {
+    const p = byId.get(id)
+    if (p) p.enHint = hint
   }
   return out
 }

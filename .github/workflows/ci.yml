@@ -34,6 +34,12 @@ jobs:
       # either way). This re-derives the case from the governing preposition,
       # an independent signal, and fails on a contradiction.
       - run: npm run check:inflect:cases
+      # English→Russian is only a fair question when the English prompt picks
+      # out one Russian sentence, and the corpus teaches synonyms on purpose —
+      # брю́ки and штаны́ are both "trousers". Most collisions are separated by
+      # the ты/вы annotation or by the distinguishing note the gloss already
+      # carries; this fails when the unresolvable remainder grows (#581).
+      - run: npm run check:prompts
       # The same suite as `npm test`, with coverage measured over the logic
       # layers. The per-layer thresholds in vite.config.js are a ratchet: they
       # fail the job when coverage of src/lib, src/stores or src/composables

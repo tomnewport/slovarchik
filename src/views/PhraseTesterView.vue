@@ -171,6 +171,13 @@ onUnmounted(() => {
              its own — informal vs formal "you", the speaker's gender. -->
         <AnnotatedEnglish v-else :text="sourceOf(current)" :notes="current.enNotes ?? []" />
       </div>
+      <!-- Two Russian sentences can share one English prompt — брю́ки and штаны́
+           are both "trousers" — and then the prompt alone cannot be answered.
+           `enHint` is present only on those, and names the sense being asked
+           for. See lib/promptDisambiguation.js. -->
+      <p v-if="direction === 'en-ru' && current.enHint" class="prompt-hint">
+        {{ current.enHint }}
+      </p>
       <SpeakButton v-if="direction === 'ru-en'" :text="sourceOf(current)" />
     </div>
 
@@ -234,6 +241,14 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* Quieter than the prompt: it is a disambiguation, not part of the sentence. */
+.prompt-hint {
+  margin: 0.15rem 0 0.4rem;
+  font-size: 0.9rem;
+  opacity: 0.72;
+  font-style: italic;
+}
+
 .tile {
   padding: 0.5rem 0.8rem;
   font-size: 1.05rem;
