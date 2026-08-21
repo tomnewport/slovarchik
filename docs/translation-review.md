@@ -143,6 +143,45 @@ single completed event.
 | `unnatural-russian` | the Russian half is the problem |
 | `none` | no defect; recorded for an `add-alt` or a sampled `keep` |
 
+### The `gloss-mismatch` follow-up
+
+`gloss-mismatch` is deliberately **not** fixed by editing the sentence. When
+«листо́к» is glossed "leaf" and every one of its examples is a sheet of paper,
+the sentences are right and the gloss is the wrong half — and a gloss is not
+local. It seeds the accepted answers for the vocabulary drill and shows on
+every tap hint, so widening one changes every drill the word appears in, and
+that should be a deliberate act rather than a side effect.
+
+So those flags are collected afterwards, by word rather than by sentence:
+
+```bash
+node scripts/gloss-packets.mjs                                  # flags → packets
+node scripts/apply-gloss-review.mjs review/gloss/*.jsonl         # dry run
+node scripts/apply-gloss-review.mjs review/gloss/*.jsonl --apply
+```
+
+Each packet carries every sentence the word owns, not just the flagged one:
+deciding a sense is genuinely missing means seeing what the word is actually
+responsible for. Two rules govern the verdict.
+
+**The key is never touched.** `"кран=tap"` stays `"кран=tap"` and gains an alt
+of "crane". The key is the word's identity and the progress store is keyed on
+it.
+
+**Bias towards leaving alone.** Every alt becomes an accepted answer
+corpus-wide, so a loose one makes a wrong answer pass. A sense the current
+gloss already reaches — even loosely — is not worth that. The first pass over
+209 flagged words widened 89 and left 120.
+
+Format an alt exactly like `standard`: short gloss first, then an optional
+parenthetical. `shortGloss` strips the parenthetical, so only the text before
+the first `(` is shown and graded. That is itself a recurring cause of these
+flags — a sense named in the parenthetical, or after a semicolon, is asserted
+by the corpus but can never be *accepted* as an answer. Note that alts cannot
+trip `spellPromptData.test.js`: `spellPrompt` renders `firstEn` plus the
+word-level `note`, so it never sees them. The risk an alt carries is grading
+looseness, not prompt ambiguity.
+
 ## The protocol
 
 Reviewers **never edit YAML.** They read a packet and emit JSONL proposals; a
@@ -199,7 +238,29 @@ are syncretic. `enNotes` (the ты/вы and gender annotations from
 
 So the applier **refuses to rewrite a Russian sentence that carries an
 `inflect:` block**, writing the proposal to `review/quarantine-russian.jsonl`
-for a follow-up pass that re-annotates it. After any applied `fix-russian`:
+for a follow-up pass that re-annotates it. `apply-quarantined-russian.mjs`
+drains that queue by asking whether the *annotated word itself* survived the
+edit — compared stress-blind, so парни́ → па́рни is still the same word in the
+same slot. When it did, the repair is arithmetic: re-find it and rewrite
+`token:`.
+
+When it did not, no arithmetic can decide the new slot, and the answer goes in
+`review/quarantine-resolutions.jsonl` — matched on (key, ru), carrying the
+replacement `inflect:` object and the reasoning. That file is an *input* to the
+pipeline, not a hand correction to the tree: `verify:review` copies it in
+alongside the proposals, so the replay still has to land on the committed
+corpus. Hand-editing the YAML instead would read as the review failing to
+reproduce itself. A resolution that matches nothing is reported, so a stale one
+cannot sit there quietly doing nothing.
+
+The distinction is worth keeping straight, because it is where the annotation
+is easiest to get wrong. «на свои́х о́пытах» → «на своём о́пыте» leaves the noun
+at token 5 and still governed by «на» — only its `number:` is stale. «я бы
+бро́силась» → «я бро́шусь» moves the verb one token left *and* turns a past-form
+conditional into a perfective future, so the whole object is replaced, rule
+included.
+
+After any applied `fix-russian`:
 
 ```bash
 npm run check:inflect                        # would the annotator add anything now?
