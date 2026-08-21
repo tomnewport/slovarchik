@@ -268,8 +268,6 @@ words:
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты бесе́дуешь ве́чером?
         en_gb: Do you talk in the evening?
-        en_alt:
-          - Do you converse in the evening?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "беспокоиться=to worry":
     cefr_level: B1
@@ -14159,7 +14157,6 @@ words:
       - ru: Го́сти ку́шали с аппети́том.
         en_gb: The guests ate with a good appetite.
         en_alt:
-          - The guests ate with appetite.
           - The guests ate heartily.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: За́втра го́сти бу́дут ку́шать пиро́г.
@@ -14180,7 +14177,6 @@ words:
       - ru: Почему́ ты лежи́шь так до́лго?
         en_gb: Why are you lying down for so long?
         en_alt:
-          - Why are you lying down so long?
           - Why have you been lying down so long?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Кот лежи́т на дива́не.
@@ -14243,7 +14239,6 @@ words:
       - ru: Ты бы не ле́зла на э́то де́рево.
         en_gb: You shouldn't climb that tree.
         en_alt:
-          - You would not climb that tree.
           - You'd better not climb that tree.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты ле́зешь на де́рево?
@@ -14532,8 +14527,6 @@ words:
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Де́ти лови́ли мяч на лугу́.
         en_gb: The children were catching the ball in the meadow.
-        en_alt:
-          - The children were catching the ball on the meadow.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: С рассве́та рыбаки́ бу́дут лови́ть ры́бу у бе́рега.
         en_gb: The fishermen will be fishing near the shore from dawn.
@@ -15119,7 +15112,6 @@ words:
         en_gb: The noise will stop us from sleeping.
         en_alt:
           - The noise will keep us from sleeping.
-          - The noise will be hindering our sleep.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Я не меша́ла бы тебе́ рабо́тать.
         en_gb: I would not get in the way of your work.
@@ -15194,7 +15186,6 @@ words:
         en_gb: He prayed before going to sleep.
         en_alt:
           - He prayed before bed.
-          - He prayed before sleep.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ве́чером она́ бу́дет моли́ться о здоро́вье.
         en_gb: In the evening she will be praying for health.
@@ -24876,8 +24867,6 @@ words:
     usage:
       - ru: Познако́мьтесь, э́то мой друг.
         en_gb: Let me introduce you — this is my friend.
-        en_alt:
-          - Get acquainted, this is my friend.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
       - ru: Я познако́млюсь с но́выми сосе́дями.
         en_gb: I will get acquainted with the new neighbours.
@@ -42289,8 +42278,6 @@ words:
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Я уча́ствовал бы в ко́нкурсе охо́тно.
         en_gb: I would gladly participate in the contest.
-        en_alt:
-          - I would participate in the contest gladly.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты уча́ствуешь в ко́нкурсе?
         en_gb: Are you taking part in the contest?
@@ -42579,8 +42566,6 @@ words:
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: От ве́тра дверь ско́ро хло́пнет.
         en_gb: The door will soon slam from the wind.
-        en_alt:
-          - From the wind the door will soon slam.
         inflect: { token: 5, tense: future, person: 3sg, rule: verb-future }
       - ru: Я не хло́пнул бы две́рью так гро́мко.
         en_gb: I would not slam the door so loudly.

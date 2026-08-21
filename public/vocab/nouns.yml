@@ -4255,8 +4255,6 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кла́ссе всегда́ есть па́ра болтуно́в.
         en_gb: There are always a couple of chatterboxes in the class.
-        en_alt:
-          - There is always a pair of chatterboxes in the class.
         inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
     declension:
       sg_nom: болту́н
@@ -12746,8 +12744,6 @@ words:
         inflect: { token: 2, case: nom, number: pl, rule: noun-nom-pl }
       - ru: Лека́рство начало́ своё де́йствие.
         en_gb: The medicine began to take effect.
-        en_alt:
-          - The medicine began its action.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы наблюда́ли за де́йствиями солда́т.
         en_gb: We watched the soldiers' actions.
@@ -13391,8 +13387,6 @@ words:
     usage:
       - ru: Он — изве́стный де́ятель ку́льтуры.
         en_gb: He is a well-known cultural figure.
-        en_alt:
-          - He is a well-known figure in culture.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Па́мятник поста́вили вели́кому де́ятелю.
         en_gb: A monument was erected to the great figure.
@@ -28778,7 +28772,6 @@ words:
       - ru: Он о́чень я́ркая ли́чность.
         en_gb: He is a very striking personality.
         en_alt:
-          - He is a very bright personality.
           - He is a very colourful character.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Поли́ция устана́вливает ли́чность челове́ка.
@@ -28915,8 +28908,6 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Суп удо́бнее есть деревя́нными ло́жками.
         en_gb: It is more convenient to eat soup with wooden spoons.
-        en_alt:
-          - Soup is more convenient to eat with wooden spoons.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: ло́жка
@@ -29244,7 +29235,6 @@ words:
         en_gb: The room was full of rays of sunlight.
         en_alt:
           - The room was full of sunbeams.
-          - The room was full of sun rays.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "лыжи=skis":
     cefr_level: B1
@@ -30217,8 +30207,6 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: По́сле рабо́ты она́ де́лает масса́ж.
         en_gb: After work she gives a massage.
-        en_alt:
-          - After work she does a massage.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мне о́чень помога́ет масса́ж спины́.
         en_gb: A back massage helps me a lot.
@@ -31369,8 +31357,6 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Она́ живёт свое́й мечто́й.
         en_gb: She lives for her dream.
-        en_alt:
-          - She lives by her dream.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он наконе́ц дости́г свое́й мечты́.
         en_gb: He finally reached his dream.
@@ -39361,8 +39347,6 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У вхо́да собрали́сь дли́нные о́череди.
         en_gb: Long queues formed at the entrance.
-        en_alt:
-          - Long queues gathered at the entrance.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
     declension:
       sg_nom: о́чередь
@@ -40622,7 +40606,6 @@ words:
       - ru: Э́та паэ́лья с морепроду́ктами.
         en_gb: This paella has seafood in it.
         en_alt:
-          - This paella is with seafood.
           - This is a seafood paella.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
     declension:
@@ -42649,8 +42632,6 @@ words:
     usage:
       - ru: Де́ти игра́ют на де́тской площа́дке.
         en_gb: The children are playing in the playground.
-        en_alt:
-          - The children are playing on the playground.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы ждём ли́фта на площа́дке.
         en_gb: We are waiting for the lift on the landing.
@@ -42837,8 +42818,6 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Го́сти до́лго аплоди́ровали повара́м за у́жин.
         en_gb: The guests spent a long time applauding the cooks for the dinner.
-        en_alt:
-          - The guests applauded the cooks for a long time for the dinner.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Рестора́н горди́тся свои́ми повара́ми.
         en_gb: The restaurant is proud of its cooks.
@@ -51494,8 +51473,6 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы перешли́ ре́чку по мо́стику.
         en_gb: We crossed the small river over the little bridge.
-        en_alt:
-          - We crossed the small river by the little bridge.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
   "речь=speech":
     cefr_level: B1
@@ -53280,8 +53257,6 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Вокру́г до́ма мно́го фрукто́вых садо́в.
         en_gb: There are many orchards around the house.
-        en_alt:
-          - There are many fruit gardens around the house.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: По ста́рым сада́м лю́бят броди́ть ры́жие ко́ты.
         en_gb: Ginger cats love to wander through the old gardens.
@@ -60611,8 +60586,6 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-irregular-plural }
       - ru: Ма́ленький зал был те́сно уста́влен сту́льями.
         en_gb: The small hall was tightly packed with chairs.
-        en_alt:
-          - The little hall was packed tight with chairs.
         inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
     declension:
       sg_nom: стул
@@ -65686,8 +65659,6 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Благодаря́ о́бщим уси́лиям мы победи́ли.
         en_gb: Thanks to joint efforts we won.
-        en_alt:
-          - Thanks to common efforts we won.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
   "ускорение=acceleration":
     cefr_level: B2
@@ -65854,8 +65825,6 @@ words:
     usage:
       - ru: По́сле рабо́ты он чу́вствует уста́лость.
         en_gb: After work he feels tired.
-        en_alt:
-          - After work he feels tiredness.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: От уста́лости она́ засну́ла сра́зу.
         en_gb: Out of tiredness she fell asleep at once.
@@ -66062,9 +66031,6 @@ words:
         en_alt:
           - He waited until morning at home.
           - He waited for morning at home.
-          - From morning till evening he works.
-          - He works from morning to evening.
-          - From morning to evening he works.
       - ru: По утра́м он пьёт ко́фе и чита́ет но́вости.
         en_gb: In the mornings he drinks coffee and reads the news.
         inflect: { token: 2, case: dat, number: pl, rule: noun-dat-pl }
@@ -71426,8 +71392,6 @@ words:
     usage:
       - ru: Он вкрути́л шуру́п в сте́ну.
         en_gb: He drove a screw into the wall.
-        en_alt:
-          - He screwed a screw into the wall.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мне ну́жен дли́нный шуру́п.
         en_gb: I need a long screw.

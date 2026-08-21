@@ -100,6 +100,7 @@ for (const file of inputs) {
 const stats = {
   read: proposals.length, keep: 0, retranslate: 0, addAlt: 0, fixRussian: 0,
   flag: 0, quarantined: 0, lowConfidence: 0, unmatched: 0, altAlreadyPresent: 0,
+  rejectedOldPrimary: 0,
 }
 const quarantine = []
 const flags = []
@@ -211,13 +212,30 @@ for (const [file, filePoposals] of byFile) {
     if (p.verdict === 'retranslate') {
       if (!p.en) { unmatched.push({ ...p, why: 'retranslate without en' }); stats.unmatched += 1; continue }
       if (enOffset === -1) { unmatched.push({ ...p, why: 'no en_gb line found' }); stats.unmatched += 1; continue }
+      // The English this retranslate is replacing, read from the file rather
+      // than the proposal — needed to enforce the rule below.
+      const oldEn = String(span[enOffset] ?? '')
+        .replace(/^ {8}en_gb:\s*/, '')
+        .trim()
+        .replace(/^["'](.*)["']$/, '$1')
       replacements.set(item.ruLine + enOffset, `        en_gb: ${yamlScalar(p.en)}`)
       stats.retranslate += 1
       // A retranslate may also carry en_alt — reviewers routinely keep the
       // wording they replaced as an accepted alternative. Dropping those (as
       // this script did until #581) silently discards the compensating
       // alternate while still making the shown English worse.
-      if ((p.en_alt ?? []).filter(Boolean).length) queueAlts(p, item, span, enOffset, altOffset)
+      //
+      // With one exception. When the defect is `unnatural-english`, the proposal
+      // has just argued in its own note that the old wording is *not English* —
+      // "translationese", "not idiomatic" — and handing that same string back as
+      // an accepted answer contradicts the edit. An alternate is meant to be an
+      // equally valid translation, not a compatibility shim for a known-bad one.
+      // 33 rows did exactly this, committing "We are their permanent customers"
+      // as correct after calling it not English (#581).
+      const rejectsOldPrimary = p.defect === 'unnatural-english'
+      const alts = (p.en_alt ?? []).filter(Boolean).filter((a) => !(rejectsOldPrimary && String(a).trim() === oldEn))
+      if (rejectsOldPrimary && alts.length < (p.en_alt ?? []).filter(Boolean).length) stats.rejectedOldPrimary += 1
+      if (alts.length) queueAlts({ ...p, en_alt: alts }, item, span, enOffset, altOffset)
     } else if (p.verdict === 'add-alt') {
       if (!(p.en_alt ?? []).filter(Boolean).length) { unmatched.push({ ...p, why: 'add-alt without en_alt' }); stats.unmatched += 1; continue }
       if (queueAlts(p, item, span, enOffset, altOffset)) stats.addAlt += 1
@@ -290,6 +308,7 @@ console.log(`  fix-russian       ${stats.fixRussian}`)
 console.log(`  quarantined       ${stats.quarantined}${quarantine.length ? `  → ${quarantinePath}` : ''}`)
 console.log(`  flagged for human ${stats.flag}`)
 console.log(`  alt already present ${stats.altAlreadyPresent}`)
+console.log(`  old primary refused  ${stats.rejectedOldPrimary}  (unnatural-english retranslations that tried to re-accept the English they replaced)`)
 console.log(`  below confidence  ${stats.lowConfidence}`)
 console.log(`  unmatched         ${stats.unmatched}`)
 

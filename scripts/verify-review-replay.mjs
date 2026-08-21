@@ -136,7 +136,20 @@ try {
     }
   }
 
-  // Stage four: the gloss widenings. These are word-level, not sentence-level —
+  // Stage four: accepted alternates that are not renderings of their sentence
+  // at all. Pre-existing data, but the widened word bank made them reachable,
+  // so they are removed here rather than left to be offered as answers.
+  const removals = join(repo, 'review', 'alt-removals.jsonl')
+  if (existsSync(removals)) {
+    cpSync(join(repo, 'scripts', 'apply-alt-removals.mjs'), join(work, 'scripts', 'apply-alt-removals.mjs'))
+    cpSync(removals, join(work, 'review', 'alt-removals.jsonl'))
+    execFileSync('node', [join('scripts', 'apply-alt-removals.mjs'), '--apply'], {
+      cwd: work,
+      stdio: ['ignore', 'ignore', 'inherit'],
+    })
+  }
+
+  // Stage five: the gloss widenings. These are word-level, not sentence-level —
   // they append to a headword's `en_gb.alt` — so they are independent of the
   // three sentence stages and can run last. Without this stage the 89 widenings
   // were reproduced by nothing, and `reviewedLines` now compares the headword
@@ -156,7 +169,7 @@ try {
     }
   }
 
-  // Stage five: the gloss-only entries a Russian rewrite makes necessary. These
+  // Stage six: the gloss-only entries a Russian rewrite makes necessary. These
   // land in glossary.yml, which used to be skipped by the comparison entirely.
   const additions = join(repo, 'review', 'glossary-additions.jsonl')
   if (existsSync(additions)) {
@@ -168,7 +181,7 @@ try {
     })
   }
 
-  // 6. compare
+  // 7. compare
   const vocabDir = join(repo, 'public', 'vocab')
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
     const replayed = reviewedLines(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))

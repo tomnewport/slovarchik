@@ -1044,7 +1044,6 @@ words:
         en_gb: At the exercises they use live rounds.
         en_alt:
           - Live rounds are used at the exercises.
-          - Live combat rounds are used at the exercises.
         inflect: { token: 4, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "божий=divine":
     cefr_level: B1
@@ -1525,8 +1524,6 @@ words:
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: Но́вый продаве́ц ве́жливее ста́рого.
         en_gb: The new shop assistant is more polite than the old one.
-        en_alt:
-          - The new shop assistant is politer than the old one.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
   "великий=great":
     cefr_level: B1
@@ -2858,7 +2855,6 @@ words:
         en_gb: A general strike took place.
         en_alt:
           - There was a general strike.
-          - A universal strike took place.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
   "всякий=any":
     cefr_level: B1
@@ -16635,8 +16631,6 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы их постоя́нные клие́нты.
         en_gb: We are their regular customers.
-        en_alt:
-          - We are their permanent customers.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "похожий=similar":
     cefr_level: A2
