@@ -37617,9 +37617,9 @@ words:
       - ru: Учени́к провёл интере́сный о́пыт.
         en_gb: The pupil carried out an interesting experiment.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Мы у́чимся на свои́х о́пытах.
-        en_gb: We learn from our own experiences.
-        inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
+      - ru: Мы у́чимся на своём о́пыте.
+        en_gb: We learn from our own experience.
+        inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
   "орган=bodily organ":
     cefr_level: B1
     gender: m
@@ -43042,6 +43042,8 @@ words:
       - work
     en_gb:
       standard: increase (a rise in level)
+      alt:
+        - promotion (a rise to a higher job or rank)
     declension:
       sg_nom: повыше́ние
       sg_gen: повыше́ния
@@ -44547,6 +44549,7 @@ words:
     en_gb:
       standard: position (a place, situation, or point of view)
       alt:
+        - provision (a clause of a law or agreement)
         - situation
     declension:
       sg_nom: положе́ние
@@ -46141,6 +46144,8 @@ words:
       - geography
     en_gb:
       standard: belt (worn around the waist); a zone
+      alt:
+        - waist (the narrow middle of the body)
     declension:
       sg_nom: по́яс
       sg_gen: по́яса
@@ -46381,6 +46386,8 @@ words:
       - school
     en_gb:
       standard: practice (repeated exercise to improve a skill)
+      alt:
+        - placement (a student's spell of supervised work as part of training)
     declension:
       sg_nom: пра́ктика
       sg_gen: пра́ктики
@@ -46490,6 +46497,8 @@ words:
       - daily life
     en_gb:
       standard: subject (a school subject; an object or topic)
+      alt:
+        - object (a physical thing you can pick up)
     declension:
       sg_nom: предме́т
       sg_gen: предме́та
@@ -48457,6 +48466,9 @@ words:
       - work
     en_gb:
       standard: protocol (an official record or set of rules)
+      alt:
+        - minutes (the written record of a meeting)
+        - report (an official police record of an incident)
     declension:
       sg_nom: протоко́л
       sg_gen: протоко́ла
@@ -48597,6 +48609,7 @@ words:
     en_gb:
       standard: per cent (a part out of a hundred)
       alt:
+        - interest (the payment a bank makes or charges on money)
         - percentage
     usage:
       - ru: Це́ны вы́росли на де́сять проце́нтов.
@@ -50036,6 +50049,8 @@ words:
       - war and peace
     en_gb:
       standard: break (a rupture, gap, or explosion burst)
+      alt:
+        - burst (the explosion of a shell)
     declension:
       sg_nom: разры́в
       sg_gen: разры́ва
@@ -50511,6 +50526,8 @@ words:
       - craft and construction
     en_gb:
       standard: solution (a liquid mixture); mortar
+      alt:
+        - mortar (the mix that bonds bricks)
     declension:
       sg_nom: раство́р
       sg_gen: раство́ра
@@ -51746,6 +51763,8 @@ words:
       - history
     en_gb:
       standard: family (a clan, lineage, or gender in grammar)
+      alt:
+        - gender (a noun's grammatical class)
     declension:
       sg_nom: род
       sg_gen: ро́да
@@ -53727,6 +53746,8 @@ words:
       - work
     en_gb:
       standard: collection (a gathering; a fee)
+      alt:
+        - fee (a charge levied for entry or a service)
     declension:
       sg_nom: сбор
       sg_gen: сбо́ра
@@ -56032,6 +56053,8 @@ words:
       - daily life
     en_gb:
       standard: investigation (a legal inquiry; also a consequence)
+      alt:
+        - consequence (a result that follows from a cause)
     declension:
       sg_nom: сле́дствие
       sg_gen: сле́дствия
@@ -56290,9 +56313,9 @@ words:
       - ru: Хозя́ин позва́л слугу́.
         en_gb: The master called the servant.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: В до́ме рабо́тали мно́гие слу́ги.
+      - ru: В до́ме рабо́тало мно́го слуг.
         en_gb: Many servants worked in the house.
-        inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "служба=service":
     cefr_level: B1
     gender: f
@@ -57087,6 +57110,8 @@ words:
       - work
     en_gb:
       standard: conference (a formal meeting for discussion)
+      alt:
+        - meeting (a work discussion called by a manager)
     declension:
       sg_nom: совеща́ние
       sg_gen: совеща́ния
@@ -57257,6 +57282,8 @@ words:
       - abstract
     en_gb:
       standard: creation (the act of making something)
+      alt:
+        - creature (a living being, in an elevated or affectionate tone)
     declension:
       sg_nom: созда́ние
       sg_gen: созда́ния
@@ -57959,6 +57986,7 @@ words:
     en_gb:
       standard: state (the condition of something at a particular time)
       alt:
+        - fortune (a large amount of accumulated wealth)
         - condition
     declension:
       sg_nom: состоя́ние
@@ -58778,6 +58806,8 @@ words:
       - finance
     en_gb:
       standard: means (a method or instrument)
+      alt:
+        - remedy (a preparation that treats an ailment)
     declension:
       sg_nom: сре́дство
       sg_gen: сре́дства
@@ -59702,6 +59732,7 @@ words:
     en_gb:
       standard: stand (a counter or rack; an upright support)
       alt:
+        - pole (an upright support, such as a tent pole)
         - counter
     declension:
       sg_nom: сто́йка
@@ -60333,6 +60364,8 @@ words:
       - politics
     en_gb:
       standard: formation (a military rank; a social system)
+      alt:
+        - system (a country's political and social order)
     declension:
       sg_nom: строй
       sg_gen: стро́я
@@ -60718,6 +60751,8 @@ words:
       - the law
     en_gb:
       standard: court (where legal cases are heard)
+      alt:
+        - trial (the hearing of a case before a judge)
     usage:
       - ru: Де́ло рассмотре́ли в суде́.
         en_gb: The case was examined in court.
@@ -62108,6 +62143,8 @@ words:
       - the arts
     en_gb:
       standard: creativity (creative artistic work)
+      alt:
+        - creative work (an artist's body of work)
     declension:
       sg_nom: тво́рчество
       sg_gen: тво́рчества
@@ -62769,6 +62806,7 @@ words:
     en_gb:
       standard: technology (machines and equipment)
       alt:
+        - appliances (household machines such as a fridge or washer)
         - technique
     usage:
       - ru: В до́ме мно́го совреме́нной те́хники.
@@ -64722,6 +64760,8 @@ words:
       - work
     en_gb:
       standard: coal (a black mineral fuel)
+      alt:
+        - charcoal (burnt wood used for drawing)
     declension:
       sg_nom: у́голь
       sg_gen: угля́
@@ -65587,6 +65627,8 @@ words:
       - daily life
     en_gb:
       standard: moustache (a single strand of a moustache; usually plural усы́)
+      alt:
+        - whisker (a stiff hair on an animal's muzzle)
     declension:
       sg_nom: ус
       sg_gen: уса́
@@ -65905,6 +65947,8 @@ words:
       - technology
     en_gb:
       standard: device (a piece of equipment)
+      alt:
+        - workings (the internal make-up of a machine)
     declension:
       sg_nom: устро́йство
       sg_gen: устро́йства

@@ -21,7 +21,7 @@
  * Exits non-zero if the applier fails or any file differs.
  */
 import { execFileSync } from 'child_process'
-import { mkdtempSync, readFileSync, rmSync, readdirSync, mkdirSync, cpSync } from 'fs'
+import { mkdtempSync, readFileSync, rmSync, readdirSync, mkdirSync, cpSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { tmpdir } from 'os'
 import { fileURLToPath } from 'url'
@@ -83,6 +83,10 @@ try {
   // wrote, so the two together are the whole pipeline — replaying only the
   // proposals would leave 24 sentences unfixed and report a false difference.
   cpSync(join(repo, 'scripts', 'apply-quarantined-russian.mjs'), join(work, 'scripts', 'apply-quarantined-russian.mjs'))
+  // The hand-decided annotations for rewrites that change the token's slot —
+  // part of the pipeline's input, not of the tree it is replayed onto.
+  const resolutions = join(repo, 'review', 'quarantine-resolutions.jsonl')
+  if (existsSync(resolutions)) cpSync(resolutions, join(work, 'review', 'quarantine-resolutions.jsonl'))
   execFileSync('node', [join('scripts', 'apply-quarantined-russian.mjs'), '--apply'], {
     cwd: work,
     stdio: ['ignore', 'ignore', 'inherit'],

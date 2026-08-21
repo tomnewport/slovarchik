@@ -7281,9 +7281,9 @@ words:
       - ru: Она́ о́чень за́нятая же́нщина.
         en_gb: She is a very busy woman.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
-      - ru: У меня́ за́нятые ру́ки.
-        en_gb: My hands are full.
-        inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
+      - ru: У меня́ ру́ки за́няты.
+        en_gb: My hands are busy.
+        inflect: { token: 4, degree: short, gender: pl, rule: adj-short-form }
     forms:
       m: за́нятый
       f: за́нятая
@@ -18108,9 +18108,9 @@ words:
       pl_ins: разли́чными
       pl_pre: разли́чных
     usage:
-      - ru: Существу́ет разли́чный подхо́д к зада́че.
-        en_gb: There is a different approach to the task.
-        inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
+      - ru: Существу́ют разли́чные подхо́ды к зада́че.
+        en_gb: There are different approaches to the task.
+        inflect: { token: 2, case: nom, number: pl, gender: pl, rule: adj-agreement }
       - ru: У них разли́чная то́чка зре́ния.
         en_gb: They have a differing point of view.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
