@@ -347,6 +347,28 @@ describe('buildAssemblyBank', () => {
     expect(bank.filter((t) => t.decoy)).toHaveLength(5)
     expect(bank).toHaveLength(8)
   })
+  it('offers the tiles an accepted alternate needs', () => {
+    const bank = buildAssemblyBank('I go home', [], 2.5, seededRng(1), { alts: ['I go back home'] })
+    const texts = bank.map((t) => t.text)
+    for (const w of ['I', 'go', 'home', 'back']) expect(texts).toContain(w)
+  })
+  it('takes an alternate\'s extra tiles out of the decoy budget, not on top of it', () => {
+    const pool = ['the dog runs fast', 'she reads a book', 'we eat lunch']
+    const plain = buildAssemblyBank('I go home', pool, 2.5, seededRng(1))
+    const withAlt = buildAssemblyBank('I go home', pool, 2.5, seededRng(1), { alts: ['I go back home'] })
+    // A phrase with alternates must not face a bigger bank than one without.
+    expect(withAlt).toHaveLength(plain.length)
+    expect(withAlt.filter((t) => t.decoy)).toHaveLength(plain.filter((t) => t.decoy).length - 1)
+  })
+  it('counts repeats, so an alternate needing two of a word gets two', () => {
+    const bank = buildAssemblyBank('the cat sat', [], 2.5, seededRng(3), { alts: ['the cat on the mat'] })
+    expect(bank.filter((t) => t.text.toLowerCase() === 'the' && !t.decoy)).toHaveLength(2)
+  })
+  it('keeps the target\'s own capitalisation', () => {
+    const bank = buildAssemblyBank('I go home', [], 2.5, seededRng(1), { alts: ['i go back home'] })
+    expect(bank.map((t) => t.text)).toContain('I')
+    expect(bank.map((t) => t.text)).not.toContain('i')
+  })
   it('never includes a decoy that appears in the target phrase (case-insensitive)', () => {
     const pool = ['go to school', 'home is nice']
     const bank = buildAssemblyBank('I go home', pool, 2.5, seededRng(2))

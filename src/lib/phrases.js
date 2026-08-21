@@ -413,15 +413,41 @@ export function listeningWordPool(phrases) {
  * tile count is `factor` × the phrase length (default 2.5×). Decoys are taken
  * from any word that doesn't already appear in the target (case-insensitive).
  * Each tile has `{ id, text, decoy }`. `rng` is injectable for deterministic tests.
+ * Alternates in `opts.alts` contribute their tiles too, so an answer the drill
+ * would grade as correct can actually be built (#581). Their extra tiles come
+ * out of the decoy budget rather than on top: each is already a distractor for
+ * the primary reading, and adding them on top would give a phrase with
+ * alternates a much larger bank than one without.
+ *
  * @param {string}   target  the phrase to assemble
  * @param {string[]} pool    other phrase strings to draw decoy words from
  * @param {number}   [factor]
  * @param {() => number} [rng]
+ * @param {{alts?: string[]}} [opts]
  * @returns {Array<{id: number, text: string, decoy: boolean}>}
  */
-export function buildAssemblyBank(target, pool, factor = 2.5, rng = Math.random) {
-  const words = phraseTokens(target)
-  const decoyCount = Math.round(words.length * (factor - 1))
+export function buildAssemblyBank(target, pool, factor = 2.5, rng = Math.random, opts = {}) {
+  const primary = phraseTokens(target)
+  // Not `bankTokens`: that lowercases for the listening tiles, while these keep
+  // the sentence's own capitalisation. Same multiset rule though — if the target
+  // needs one "the" and an alternate needs two, the bank needs two.
+  const need = new Map()
+  for (const w of primary) need.set(w.toLowerCase(), (need.get(w.toLowerCase()) ?? 0) + 1)
+  const extraTiles = []
+  for (const alt of opts?.alts ?? []) {
+    const tokens = phraseTokens(alt)
+    const counts = new Map()
+    for (const w of tokens) counts.set(w.toLowerCase(), (counts.get(w.toLowerCase()) ?? 0) + 1)
+    for (const [key, n] of counts) {
+      const already = need.get(key) ?? 0
+      if (n <= already) continue
+      const cased = tokens.find((w) => w.toLowerCase() === key)
+      for (let i = 0; i < n - already; i += 1) extraTiles.push(cased)
+      need.set(key, n)
+    }
+  }
+  const words = [...primary, ...extraTiles]
+  const decoyCount = Math.round(primary.length * (factor - 1)) - extraTiles.length
   const have = new Set(words.map((w) => w.toLowerCase()))
 
   const seen = new Set()

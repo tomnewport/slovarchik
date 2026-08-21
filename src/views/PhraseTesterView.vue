@@ -39,6 +39,14 @@ const answerTokenCount = ref(0)
 
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
+/**
+ * Every rendering that counts as right. `enAlt` holds alternate *English*, so it
+ * only applies when English is what is being produced; translating into Russian
+ * there is one accepted sentence. Until #581 this drill graded and built tiles
+ * from the primary alone, so an alternate the corpus had curated was marked
+ * wrong here while passing in the session word-bank.
+ */
+const acceptedOf = (p) => (direction.value === 'ru-en' ? [p.en, ...(p.enAlt ?? [])] : [p.ru])
 // The translation's alphabet — drives the Russian input and on-screen keyboard.
 const targetLang = computed(() => (direction.value === 'ru-en' ? 'en' : 'ru'))
 
@@ -61,9 +69,13 @@ function nextQuestion() {
   if (direction.value === 'ru-en') speak(current.value.ru)
   if (level.value === 'easy') {
     const target = targetOf(current.value)
-    answerTokenCount.value = phraseTokens(target).length
+    const alts = acceptedOf(current.value).slice(1)
+    // The longest accepted answer, not the primary's length: a longer alternate
+    // has to be reachable, and the auto-submit below must not fire before the
+    // learner has had the chance to place its last tile.
+    answerTokenCount.value = Math.max(...acceptedOf(current.value).map((t) => phraseTokens(t).length))
     const otherTargets = phrases.value.filter((p) => p !== current.value).map((p) => targetOf(p))
-    bank.value = buildAssemblyBank(target, otherTargets)
+    bank.value = buildAssemblyBank(target, otherTargets, 2.5, Math.random, { alts })
   } else {
     nextTick(() => inputEl.value?.focus())
   }
@@ -90,9 +102,13 @@ function placeToken(token) {
   if (answered.value) return
   if (targetLang.value === 'ru') speak(token.text)
   placed.value = [...placed.value, token]
-  if (placed.value.length === answerTokenCount.value) {
-    record(phraseCorrect(placed.value.map((t) => t.text).join(' '), targetOf(current.value)))
-  }
+  const assembled = placed.value.map((t) => t.text).join(' ')
+  const accepted = acceptedOf(current.value)
+  // A shorter alternate is complete before the longest one is, so submit as soon
+  // as what is placed *is* an accepted answer; otherwise wait until the longest
+  // one could have been finished before calling it wrong.
+  if (phraseCorrect(assembled, accepted)) record(true)
+  else if (placed.value.length >= answerTokenCount.value) record(false)
 }
 
 function removeToken(token) {
@@ -106,7 +122,7 @@ function submitTyped() {
     nextQuestion()
     return
   }
-  record(phraseCorrect(typed.value, targetOf(current.value)))
+  record(phraseCorrect(typed.value, acceptedOf(current.value)))
 }
 
 function quit() {
