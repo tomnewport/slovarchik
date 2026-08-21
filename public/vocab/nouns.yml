@@ -4717,8 +4717,6 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
       - ru: Она́ оби́делась на бра́та.
         en_gb: She took offence at her brother.
-        en_alt:
-          - She took offence at my brother.
         inflect: { token: 4, case: acc, number: sg, rule: verb-gov-prep-na-acc }
     declension:
       sg_nom: брат
@@ -13366,8 +13364,6 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он рассказа́л о де́тстве.
         en_gb: He talked about his childhood.
-        en_alt:
-          - He told us about his childhood.
         inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-o-pre }
     declension:
       sg_nom: де́тство
@@ -29906,8 +29902,6 @@ words:
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Ма́рки не хвати́ло для письма́.
         en_gb: The stamp was not enough for the letter.
-        en_alt:
-          - There was not enough on the stamp for the letter.
         inflect: { token: 1, case: gen, number: sg, rule: noun-gen-sg }
   "маркер=marker":
     cefr_level: A2
@@ -65219,8 +65213,6 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Украи́нец рассказа́л о своём го́роде.
         en_gb: The Ukrainian talked about his city.
-        en_alt:
-          - The Ukrainian told us about his city.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мой колле́га — украи́нец.
         en_gb: My colleague is a Ukrainian.

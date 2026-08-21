@@ -182,21 +182,44 @@ export function promptHints(phrases, words, formIndex) {
 }
 
 /**
- * The prompts still unanswerable after hinting — the backlog, and what CI holds
- * the line on. Each entry says why it could not be resolved, because the three
- * causes need different fixes: a missing note is authoring, identical notes mean
- * the two words are not actually being taught apart, and an aspect pair needs a
- * cue the gloss cannot carry.
+ * The prompts still unanswerable — the backlog, and what CI holds the line on.
  *
+ * A hint being *present and different* is not the same as a hint that lets the
+ * learner choose. «вско́ре» and «ско́ро» are glossed "soon (a short time later)"
+ * and "soon (in a short time)": two strings, one definition, no way to pick. So
+ * a generated hint does not by itself resolve a group — a human has to confirm
+ * that it names a real distinction, by listing the prompt in
+ * `review/prompt-distinctions.jsonl`.
+ *
+ * That cannot be inferred instead. Lexical overlap is no guide: брю́ки "the
+ * standard word" against штаны́ "the informal word" overlaps as heavily as
+ * "understandably" against "plainly", and only one of those pairs distinguishes
+ * anything. Whether two notes contrast or merely rephrase is a judgement about
+ * meaning, so it is recorded rather than computed.
+ *
+ * Unconfirmed groups still *show* their hint — a hint is informative even when
+ * it is not decisive — they simply are not counted as answerable.
+ *
+ * @param {Set<string>|Iterable<string>} [confirmed] prompts a human has confirmed
  * @returns {Array<{en: string, why: string, members: Array<{ru: string, source: string, hint: string}>}>}
  */
-export function ambiguousPrompts(phrases, words, formIndex) {
+export function ambiguousPrompts(phrases, words, formIndex, confirmed = new Set()) {
+  const ok = confirmed instanceof Set ? confirmed : new Set(confirmed ?? [])
   const resolve = resolver(words, formIndex)
   const out = []
   for (const { en, phrases: group } of collidingPrompts(phrases)) {
     if (separatedByNotes(group)) continue
     const proposed = group.map((p) => hintFor(p, group, resolve))
-    if (!proposed.some((h) => !h) && new Set(proposed).size === proposed.length) continue
+    const hinted = !proposed.some((h) => !h) && new Set(proposed).size === proposed.length
+    if (hinted && ok.has(en)) continue
+    if (hinted) {
+      out.push({
+        en,
+        why: 'hinted, but nobody has confirmed the two notes actually distinguish the words',
+        members: group.map((p, i) => ({ ru: p.ru, source: p.source, hint: proposed[i] })),
+      })
+      continue
+    }
 
     // Same letters, different stress: two spellings of one sentence, which is a
     // data defect rather than a choice the learner could be helped to make.

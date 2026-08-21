@@ -1065,8 +1065,6 @@ words:
         inflect: { token: 4, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Все мы бо́жьи созда́ния.
         en_gb: We are all God's creatures.
-        en_alt:
-          - We are all divine creatures.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: бо́жий

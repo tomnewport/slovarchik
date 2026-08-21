@@ -120,6 +120,23 @@ describe('ListeningView', () => {
     expect(wrapper.vm.wasCorrect).toBe(true)
   })
 
+  it('keeps the alternates when Skip swaps in the visual exercise (#581)', async () => {
+    const wrapper = mount(ListeningView)
+    await startDrill(wrapper)
+
+    const phrases = shapePhrases(loadFixtureWords())
+    const phrase = phrases.find((p) => (p.enAlt ?? []).length)
+    wrapper.vm.current = phrase
+    await nextTick()
+
+    const skip = wrapper.findAll('button').find((b) => b.text() === 'Skip')
+    await skip.trigger('click')
+
+    // The replacement is the same phrase, so dropping enAlt here would quietly
+    // return the learner to primary-only tiles and grading.
+    expect(wrapper.vm.visualExercise?.enAlt).toEqual(phrase.enAlt)
+  })
+
   it('marks a wrong order incorrect and reveals the answer', async () => {
     vi.useFakeTimers()
     const wrapper = mount(ListeningView)

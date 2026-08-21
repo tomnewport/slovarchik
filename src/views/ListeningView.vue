@@ -115,7 +115,16 @@ function skipToVisual() {
   const phrase = current.value
   if (!phrase) { nextQuestion(); return }
   const rep = makeVisualReplacement(
-    { ru: phrase.ru, en: phrase.en, content: 'phrase', targets: phrase.source ? [phrase.source] : [] },
+    {
+      ru: phrase.ru,
+      en: phrase.en,
+      // `makeVisualReplacement` carries enAlt through when it is given, and the
+      // replacement is the same phrase — so omitting it silently dropped the
+      // learner back to primary-only tiles and grading after a Skip.
+      enAlt: phrase.enAlt ?? [],
+      content: 'phrase',
+      targets: phrase.source ? [phrase.source] : [],
+    },
     visSeq++,
   )
   if (!rep) { nextQuestion(); return }

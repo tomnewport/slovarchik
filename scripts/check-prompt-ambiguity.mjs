@@ -7,11 +7,14 @@
  * Where two sentences share a prompt and nothing separates them, the learner is
  * guessing and the grader marks one of two correct answers wrong.
  *
- * Most of these resolve themselves: `phraseAmbiguity.js` annotates the ты/вы and
- * gender ones from the Russian, and `promptDisambiguation.js` covers the rest
- * with the distinguishing note the headword gloss already carries. What this
- * guards is the remainder — prompts where neither mechanism can help, because
- * the words involved are not glossed apart.
+ * Some resolve themselves: `phraseAmbiguity.js` annotates the ты/вы and gender
+ * ones from the Russian, which is determinative. The rest get a hint built from
+ * the distinguishing note the headword gloss already carries — but a hint being
+ * present and different is not the same as a hint a learner can act on. «вско́ре»
+ * and «ско́ро» are glossed "soon (a short time later)" and "soon (in a short
+ * time)": two strings, one definition. So a generated hint counts as a
+ * resolution only once a human has confirmed it names a real distinction, in
+ * `review/prompt-distinctions.jsonl`. Everything else is the backlog.
  *
  * It is a ratchet, not a clean bill of health: BUDGET is the number that stands
  * today, and CI fails if it grows. Lower it as the backlog is worked off; never
@@ -21,14 +24,26 @@
  *   node scripts/check-prompt-ambiguity.mjs          # report + enforce
  *   node scripts/check-prompt-ambiguity.mjs --list   # full detail, no enforcement
  */
-import { readFileSync, readdirSync } from 'fs'
+import { readFileSync, readdirSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { load as yamlLoad } from 'js-yaml'
 import { buildWords, shapePhrases, POS_BY_FILE } from '../src/lib/vocabBuild.js'
 import { ambiguousPrompts, collidingPrompts, promptHints } from '../src/lib/promptDisambiguation.js'
 
-const BUDGET = 18
+/** Prompts a human has confirmed are genuinely told apart by their hints. */
+function confirmedDistinctions() {
+  const path = join(__dirname, '..', 'review', 'prompt-distinctions.jsonl')
+  if (!existsSync(path)) return new Set()
+  return new Set(
+    readFileSync(path, 'utf8')
+      .split('\n')
+      .filter((l) => l.trim())
+      .map((l) => String(JSON.parse(l).en ?? '').trim()),
+  )
+}
+
+const BUDGET = 33
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const vocabDir = join(__dirname, '..', 'public', 'vocab')
@@ -44,10 +59,11 @@ const phrases = shapePhrases(words)
 
 const colliding = collidingPrompts(phrases)
 const hinted = promptHints(phrases, words)
-const left = ambiguousPrompts(phrases, words)
+const confirmed = confirmedDistinctions()
+const left = ambiguousPrompts(phrases, words, undefined, confirmed)
 
 console.log(`English prompts shared by 2+ distinct Russian sentences: ${colliding.length}`)
-console.log(`  resolved by ты/вы + gender annotation or a gloss note: ${colliding.length - left.length}`)
+console.log(`  resolved by the ты/вы + gender annotation, or a confirmed hint: ${colliding.length - left.length}`)
 console.log(`  still unanswerable                                   : ${left.length}  (budget ${BUDGET})`)
 console.log(`  phrases carrying a disambiguating hint               : ${hinted.size}`)
 
@@ -70,8 +86,10 @@ if (left.length > BUDGET) {
   console.error(
     `\nFAILED: ${left.length} unanswerable prompt(s), budget is ${BUDGET}.\n` +
       'Give the words that differ distinguishing notes in their `en_gb.standard`\n' +
-      'parenthetical — that is what the drill shows — or fix the sentence. Run with\n' +
-      '--list to see which. Do not raise the budget to make this pass.',
+      'parenthetical — that is what the drill shows — or fix the sentence. Where a\n' +
+      'hint already exists and does distinguish, confirm it in\n' +
+      'review/prompt-distinctions.jsonl. Run with --list to see which. Do not raise\n' +
+      'the budget to make this pass.',
   )
   process.exit(1)
 }

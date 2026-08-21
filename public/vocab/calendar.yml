@@ -788,18 +788,18 @@ words:
         - jubilee
     usage:
       - ru: Мы отмеча́ем юбиле́й ба́бушки.
-        en_gb: We are celebrating grandmother's jubilee.
+        en_gb: We are celebrating grandmother's milestone birthday.
         en_alt:
-          - We are celebrating grandmother's anniversary.
+          - We are celebrating grandmother's big birthday.
           - We are celebrating grandmother's jubilee.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Ско́ро у шко́лы большо́й юбиле́й.
         en_gb: The school will soon have a big anniversary.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Го́сти пришли́ на юбиле́й де́душки.
-        en_gb: The guests came to grandfather's jubilee.
+        en_gb: The guests came to grandfather's milestone birthday.
         en_alt:
-          - The guests came to grandfather's anniversary.
+          - The guests came to grandfather's birthday celebration.
           - The guests came to grandfather's jubilee.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
     declension:

@@ -168,8 +168,32 @@ describe('ambiguousPrompts', () => {
     phrase('b', 'На штана́х появи́лось пятно́.', 'A stain appeared on the trousers.', 'штаны=trousers'),
   ]
 
-  it('is empty once every member can be hinted apart', () => {
-    expect(ambiguousPrompts(phrases, TROUSERS, index)).toEqual([])
+  it('is empty once a hinted group has been confirmed', () => {
+    const ok = new Set(['A stain appeared on the trousers.'])
+    expect(ambiguousPrompts(phrases, TROUSERS, index, ok)).toEqual([])
+  })
+
+  it('does not call a hinted group resolved until a human confirms it', () => {
+    // Different strings, same definition: «вско́ре» and «ско́ро» are both "soon".
+    const paraphrase = [
+      word('вскоре=soon', 'soon', 'a short time later', 'adverb'),
+      word('скоро=soon', 'soon', 'in a short time', 'adverb'),
+    ]
+    const idx = new Map([
+      ['вскоре', { key: 'вскоре=soon', senses: [{}] }],
+      ['скоро', { key: 'скоро=soon', senses: [{}] }],
+    ])
+    const g = [
+      phrase('a', 'Вско́ре насту́пит весна́.', 'Spring will soon arrive.', 'вскоре=soon'),
+      phrase('b', 'Ско́ро насту́пит весна́.', 'Spring will soon arrive.', 'скоро=soon'),
+    ]
+    // A hint is still issued — it is informative even when not decisive …
+    expect(promptHints(g, paraphrase, idx).size).toBe(2)
+    // … but the group stays in the backlog until someone vouches for it.
+    const out = ambiguousPrompts(g, paraphrase, idx)
+    expect(out).toHaveLength(1)
+    expect(out[0].why).toMatch(/nobody has confirmed/)
+    expect(ambiguousPrompts(g, paraphrase, idx, new Set(['Spring will soon arrive.']))).toEqual([])
   })
 
   it('reports a group whose words share one note, and says so', () => {
