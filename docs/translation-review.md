@@ -160,6 +160,14 @@ node scripts/apply-gloss-review.mjs review/gloss/*.jsonl         # dry run
 node scripts/apply-gloss-review.mjs review/gloss/*.jsonl --apply
 ```
 
+Run this pass **before** treating a sentence as mistranslated. The first sweep
+did it the other way round: 52 sentences were rewritten to match their headword's
+hint, and 15 had to be undone — «Кла́ссика никогда́ не устарева́ет» became
+"Classical music never goes out of date" when кла́ссика covers classic works of
+any art, and «о свои́х вну́ках» became "grandsons" when Russian masculine plural
+covers a mixed group. A polysemous word's example using a sense the gloss cannot
+reach is evidence the *gloss* is narrow, not that the sentence is wrong.
+
 Each packet carries every sentence the word owns, not just the flagged one:
 deciding a sense is genuinely missing means seeing what the word is actually
 responsible for. Two rules govern the verdict.
@@ -225,6 +233,22 @@ word order, so one Russian sentence has several equally valid English
 renderings; adding them stops the word-bank drill marking a correct answer
 wrong. Where `en_gb` is idiomatic, a literal `en_alt` also gives the learner the
 structural reading without making the shown translation stilted.
+
+**An alternate is an equally valid translation, not a compatibility shim.**
+Every `en_alt` is an answer the drill will mark correct, in every phrase drill,
+for good. A `retranslate` whose defect is `unnatural-english` has just argued
+that the wording it replaces is *not English* — so handing that string back as
+an alternate contradicts the edit, and the applier now refuses it and says how
+many it refused. 33 rows did this before it was enforced, committing "We are
+their permanent customers" as correct immediately after calling it not English.
+
+Alternates are also **removable**, via `review/alt-removals.jsonl` and
+`apply-alt-removals.mjs`. This is for rows that are not renderings of their
+sentence at all — «Он дожда́лся у́тра до́ма» accepted three variants of "he works
+from morning to evening", a block apparently left behind when the Russian it
+belonged to was replaced. Each record names the exact strings to drop and a
+string that is not present is an error, so a typo cannot silently remove
+nothing.
 
 ### The hazard: `inflect:` token indices are positional
 
