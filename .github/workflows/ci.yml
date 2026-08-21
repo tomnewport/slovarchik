@@ -26,6 +26,14 @@ jobs:
       # on the committed YAML, or the audit trail is decorative.
       - run: npm run verify:review
         if: hashFiles('review/proposals/*.jsonl') != ''
+      # An `inflect:` token index is positional, so a reworded sentence can
+      # leave the annotation pointing at the wrong word. phrasesData.test.js
+      # checks the annotated token against its declared slot, which catches
+      # most of that — but not a *syncretic* form sitting in the wrong slot
+      # (кни́ге is both dative and prepositional, so the form check passes
+      # either way). This re-derives the case from the governing preposition,
+      # an independent signal, and fails on a contradiction.
+      - run: npm run check:inflect:cases
       # The same suite as `npm test`, with coverage measured over the logic
       # layers. The per-layer thresholds in vite.config.js are a ratchet: they
       # fail the job when coverage of src/lib, src/stores or src/composables
