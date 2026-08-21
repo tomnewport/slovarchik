@@ -102,8 +102,24 @@ for (const [file, items] of byFile) {
   const spanOf = new Map()
   starts.forEach((s, i) => spanOf.set(s.key, [s.line, i + 1 < starts.length ? starts[i + 1].line : lines.length]))
 
-  const insertions = new Map() // afterLine → string[]
+  // Merge every proposal for a word into one. Two `widen` rows for the same key
+  // used to be handled independently, and when the word had no `alt:` block yet
+  // each of them opened its own — producing a duplicate mapping key and invalid
+  // YAML. Reviewers work in parallel over re-cut packets, so two rows for one
+  // key is ordinary, not a malformed input.
+  const merged = new Map() // key → {key, alt[], _src[]}
   for (const p of items) {
+    const at = merged.get(p.key)
+    if (at) {
+      at.alt.push(...p.alt)
+      at._src.push(p._src)
+    } else {
+      merged.set(p.key, { ...p, alt: [...p.alt], _src: [p._src] })
+    }
+  }
+
+  const insertions = new Map() // afterLine → string[]
+  for (const p of merged.values()) {
     const span = spanOf.get(p.key)
     if (!span) { unmatched.push({ ...p, why: 'word entry not found in file' }); stats.unmatched += 1; continue }
     const [from, to] = span
