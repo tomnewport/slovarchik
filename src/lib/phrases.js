@@ -445,19 +445,57 @@ export function buildAssemblyBank(target, pool, factor = 2.5, rng = Math.random)
 }
 
 /**
+ * The tiles a bank must offer so that the target phrase — or any of its
+ * accepted alternate renderings — can be assembled.
+ *
+ * A multiset union, not a set union: if the target needs one "the" and an
+ * alternate needs two, the bank needs two, or that alternate is unbuildable.
+ * The target's own tokens always come first and in order, so a bank built with
+ * no alternates is exactly what it was before.
+ *
+ * This exists because grading accepts `enAlt` while the bank was built from the
+ * primary alone, so ~90% of the corpus's alternates could never be assembled by
+ * a learner and did nothing at all (#581).
+ * @param {string} target     the primary English phrase
+ * @param {string[]} [alts]   accepted alternate renderings
+ * @returns {string[]}
+ */
+export function bankTokens(target, alts = []) {
+  const tokens = listeningTokens(target)
+  const need = new Map()
+  for (const w of tokens) need.set(w, (need.get(w) ?? 0) + 1)
+  for (const alt of alts ?? []) {
+    const counts = new Map()
+    for (const w of listeningTokens(alt)) counts.set(w, (counts.get(w) ?? 0) + 1)
+    for (const [w, n] of counts) if (n > (need.get(w) ?? 0)) need.set(w, n)
+  }
+  // The target's tokens in their own order, then whatever the alternates add.
+  const extra = []
+  const remaining = new Map(need)
+  for (const w of tokens) remaining.set(w, remaining.get(w) - 1)
+  for (const [w, n] of remaining) for (let i = 0; i < n; i += 1) extra.push(w)
+  return [...tokens, ...extra]
+}
+
+/**
  * Build a shuffled word bank for the listening drill: every word of the target
  * English phrase plus up to `decoyCount` random decoys drawn from `pool`
  * (skipping any word that already appears in the phrase, so there's never an
  * ambiguous extra copy). Each tile carries a stable `id` so repeated words stay
  * distinct, and a `decoy` flag. `rng` is injectable for deterministic tests.
+ *
+ * `opts.alts` widens the bank so the accepted alternate renderings are
+ * assemblable too — see {@link bankTokens}. Words an alternate adds are not
+ * decoys: they spell a translation the drill will mark correct.
  * @param {string} target    the English phrase to rebuild
  * @param {string[]} pool    candidate decoy words
  * @param {number} [decoyCount]
  * @param {() => number} [rng]
+ * @param {{alts?: string[]}} [opts]
  * @returns {Array<{id: number, text: string, decoy: boolean}>}
  */
-export function buildListeningBank(target, pool, decoyCount = 3, rng = Math.random) {
-  const words = listeningTokens(target)
+export function buildListeningBank(target, pool, decoyCount = 3, rng = Math.random, opts = {}) {
+  const words = bankTokens(target, opts.alts)
   const have = new Set(words)
   const decoys = sample(
     (pool ?? []).filter((w) => !have.has(w)),

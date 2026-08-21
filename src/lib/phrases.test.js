@@ -14,6 +14,7 @@ import {
   EN_LETTERS,
   listeningTokens,
   listeningWordPool,
+  bankTokens,
   buildListeningBank,
   buildAssemblyBank,
   phraseFeedback,
@@ -373,7 +374,49 @@ describe('buildAssemblyBank', () => {
   })
 })
 
+describe('bankTokens', () => {
+  it('is just the target when there are no alternates', () => {
+    expect(bankTokens('I see a dog')).toEqual(listeningTokens('I see a dog'))
+    expect(bankTokens('I see a dog', [])).toEqual(listeningTokens('I see a dog'))
+  })
+
+  it('adds the words an alternate needs and the target lacks', () => {
+    const tiles = bankTokens('We are studying it', ['We study it'])
+    expect(tiles).toContain('study')
+    expect(tiles.slice(0, 4)).toEqual(listeningTokens('We are studying it'))
+  })
+
+  it('adds nothing when the alternate only reorders the same words', () => {
+    const target = 'the bus stop is near the house'
+    expect(bankTokens(target, ['near the house is the bus stop'])).toEqual(listeningTokens(target))
+  })
+
+  it('counts duplicates, so an alternate needing two of a word gets two', () => {
+    const tiles = bankTokens('it is very good', ['it is very very good'])
+    expect(tiles.filter((w) => w === 'very')).toHaveLength(2)
+  })
+
+  it('never drops a word the target needs twice', () => {
+    const tiles = bankTokens('more and more people', ['many people'])
+    expect(tiles.filter((w) => w === 'more')).toHaveLength(2)
+  })
+})
+
 describe('buildListeningBank', () => {
+  it('offers tiles for an alternate rendering when alts are given', () => {
+    const bank = buildListeningBank('We are studying it', [], 0, seededRng(3), {
+      alts: ['We study it'],
+    })
+    const texts = bank.map((t) => t.text)
+    for (const w of listeningTokens('We are studying it')) expect(texts).toContain(w)
+    expect(texts).toContain('study')
+  })
+  it('marks a word an alternate contributes as a real tile, not a decoy', () => {
+    const bank = buildListeningBank('We are studying it', [], 0, seededRng(3), {
+      alts: ['We study it'],
+    })
+    expect(bank.find((t) => t.text === 'study').decoy).toBe(false)
+  })
   it('contains every target word plus the requested number of decoys', () => {
     const pool = ['cat', 'dog', 'fish', 'bird', 'tree']
     const bank = buildListeningBank('I see a dog', pool, 3, seededRng(7))
