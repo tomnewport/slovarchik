@@ -2282,9 +2282,9 @@ words:
         en_alt:
           - Switch on the radio, please.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
-      - ru: Е́сли ста́нет темно́, я бы включи́ла свет.
+      - ru: Е́сли бы ста́ло темно́, я бы включи́ла свет.
         en_gb: If it got dark, I would switch on the light.
-        inflect: { token: 6, tense: past, person: past_f, rule: verb-conditional }
+        inflect: { token: 7, tense: past, person: past_f, rule: verb-conditional }
       - ru: За́втра он включи́т но́вый компью́тер.
         en_gb: Tomorrow he will switch on the new computer.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
@@ -14836,7 +14836,7 @@ words:
       - ru: У меня́ мелькну́ла мысль.
         en_gb: A thought flashed through my mind.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-past }
-      - ru: Тени́ мелькну́ли на стене́.
+      - ru: Те́ни мелькну́ли на стене́.
         en_gb: Shadows flashed on the wall.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Без све́та ничего́ бы не мелькну́ло.
@@ -17472,9 +17472,9 @@ words:
       - ru: С понеде́льника я бу́ду обеща́ть то́лько ва́жное.
         en_gb: From Monday I will be promising only what is important.
         inflect: { token: 4, tense: future, person: 1sg, rule: verb-future }
-      - ru: Е́сли был уве́рен, я обеща́л бы.
+      - ru: Е́сли бы был уве́рен, я обеща́л бы.
         en_gb: I would promise if I were sure.
-        inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
+        inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты обеща́ешь прийти́ во́время?
         en_gb: Do you promise to come on time?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
@@ -24477,7 +24477,7 @@ words:
       - ru: Ты бы пожале́л об э́тих слова́х.
         en_gb: You would regret those words.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ско́ро ты пожале́ешь о свое́м реше́нии.
+      - ru: Ско́ро ты пожале́ешь о своём реше́нии.
         en_gb: Soon you will regret your decision.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Ты пожале́ешь об э́том?
@@ -33756,7 +33756,7 @@ words:
       past_n: расстреля́ло
       past_pl: расстреля́ли
     usage:
-      - ru: Солда́т расстреля́ли пле́нных.
+      - ru: Солда́ты расстреля́ли пле́нных.
         en_gb: The soldiers shot the prisoners.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Их расстреля́ли на рассве́те.
@@ -34145,7 +34145,7 @@ words:
       - ru: Ты бы реша́ла э́ту зада́чу споко́йно.
         en_gb: You should solve this problem calmly.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
-      - ru: Ты реша́ешь куда́ пойти́?
+      - ru: Ты реша́ешь, куда́ пойти́?
         en_gb: Are you deciding where to go?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Вы реша́ете зада́чу?
@@ -35168,7 +35168,7 @@ words:
       - ru: Ого́нь сжёг весь лес.
         en_gb: The fire burnt down the whole forest.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
-      - ru: Я сжёг бы э́ти ста́рые письма́.
+      - ru: Я сжёг бы э́ти ста́рые пи́сьма.
         en_gb: I would burn these old letters.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Без присмо́тра костёр сжёг бы весь лес.
@@ -39579,7 +39579,7 @@ words:
       - ru: Мы це́лый день торча́ли до́ма.
         en_gb: We hung around at home all day.
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-past }
-      - ru: Гвоздь бу́дет торча́ть, пока́ его́ не заби́ть.
+      - ru: Гвоздь бу́дет торча́ть, пока́ его́ не забью́т.
         en_gb: The nail will stick out until it is hammered in.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Я не торча́ла бы тут весь день.
@@ -42116,7 +42116,7 @@ words:
       past_n: уча́ствовало
       past_pl: уча́ствовали
     usage:
-      - ru: Я уча́ствую в конку́рсе.
+      - ru: Я уча́ствую в ко́нкурсе.
         en_gb: I am taking part in the contest.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ уча́ствовали в ма́рше.
@@ -42133,7 +42133,7 @@ words:
         en_alt:
           - I would participate in the contest gladly.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
-      - ru: Ты уча́ствуешь в конку́рсе?
+      - ru: Ты уча́ствуешь в ко́нкурсе?
         en_gb: Are you taking part in the contest?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
   "учесть=to take into account":
@@ -42451,7 +42451,7 @@ words:
       - ru: В де́тстве мы ходи́ли в э́тот парк.
         en_gb: As children we used to go to this park.
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-past }
-      - ru: С сле́дующей неде́ли я бу́ду ходи́ть в спортза́л.
+      - ru: Со сле́дующей неде́ли я бу́ду ходи́ть в спортза́л.
         en_gb: From next week I will be going to the gym.
         inflect: { token: 5, tense: future, person: 1sg, rule: verb-future }
       - ru: Будь побли́же, я ходи́ла бы пешко́м.
@@ -42970,7 +42970,7 @@ words:
       past_n: шевели́лось
       past_pl: шевели́лись
     usage:
-      - ru: Ли́стья ти́хо шевеля́тся на ве́тре.
+      - ru: Ли́стья ти́хо шевеля́тся на ветру́.
         en_gb: The leaves stir quietly in the wind.
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Не шевели́сь, я фотографи́рую.
@@ -42979,7 +42979,7 @@ words:
       - ru: Котёнок едва́ шевели́лся во сне.
         en_gb: The kitten barely stirred in its sleep.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
-      - ru: На ве́тре ли́стья бу́дут ти́хо шевели́ться.
+      - ru: На ветру́ ли́стья бу́дут ти́хо шевели́ться.
         en_gb: In the wind the leaves will be stirring quietly.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Я не шевели́лась бы во вре́мя съёмки.

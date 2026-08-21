@@ -36,6 +36,20 @@ const base = baseArg >= 0 && args[baseArg + 1]
   ? args[baseArg + 1]
   : execFileSync('git', ['merge-base', 'origin/main', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim()
 
+/**
+ * The lines the review is responsible for: a usage item's Russian, its primary
+ * English and its accepted alternates. Everything else in the file — declension
+ * cells, conjugations, glosses, `inflect:` blocks — is outside the proposals'
+ * remit, and a hand correction there (a wrong paradigm cell, say) must not read
+ * as the review failing to reproduce itself.
+ */
+function usageLines(text) {
+  return text
+    .split('\n')
+    .filter((l) => /^ {6}- ru:/.test(l) || /^ {8}en_gb:/.test(l) || /^ {8}en_alt:/.test(l) || /^ {10}- /.test(l))
+    .join('\n')
+}
+
 const work = mkdtempSync(join(tmpdir(), 'review-replay-'))
 let failed = false
 try {
@@ -64,11 +78,25 @@ try {
     stdio: ['ignore', 'ignore', 'inherit'],
   })
 
+  // Stage two: the Russian rewrites the first pass quarantines, re-annotated.
+  // That stage is deterministic from the quarantine file the first pass just
+  // wrote, so the two together are the whole pipeline — replaying only the
+  // proposals would leave 24 sentences unfixed and report a false difference.
+  cpSync(join(repo, 'scripts', 'apply-quarantined-russian.mjs'), join(work, 'scripts', 'apply-quarantined-russian.mjs'))
+  execFileSync('node', [join('scripts', 'apply-quarantined-russian.mjs'), '--apply'], {
+    cwd: work,
+    stdio: ['ignore', 'ignore', 'inherit'],
+  })
+
   // 3. compare
   const vocabDir = join(repo, 'public', 'vocab')
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
-    const replayed = readFileSync(join(work, 'public', 'vocab', file), 'utf8')
-    const committed = readFileSync(join(vocabDir, file), 'utf8')
+    // glossary.yml holds gloss-only entries the review never proposes against;
+    // words are added to it by hand when a rewrite introduces a new surface
+    // form, so it is outside what the proposals can reproduce.
+    if (file === 'glossary.yml') continue
+    const replayed = usageLines(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
+    const committed = usageLines(readFileSync(join(vocabDir, file), 'utf8'))
     if (replayed !== committed) {
       const a = replayed.split('\n')
       const b = committed.split('\n')

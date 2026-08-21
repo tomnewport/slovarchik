@@ -27934,7 +27934,7 @@ words:
       - ru: Лейтена́нт доложи́л о ситуа́ции.
         en_gb: The lieutenant reported on the situation.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
-      - ru: Прика́з отда́л лейтена́нту.
+      - ru: Прика́з о́тдали лейтена́нту.
         en_gb: The order was given to the lieutenant.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Молоды́е лейтена́нты стоя́ли в строю́.
@@ -31891,8 +31891,8 @@ words:
     en_gb:
       standard: mister (a title for an English-speaking man)
     usage:
-      - ru: Я поздоро́вался с ми́стером.
-        en_gb: I greeted the mister.
+      - ru: Я поздоро́вался с ми́стером Сми́том.
+        en_gb: I greeted Mister Smith.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: До́брый день, ми́стер Смит.
         en_gb: Good afternoon, Mister Smith.
@@ -39982,7 +39982,7 @@ words:
       - ru: Я давно́ зна́ю э́того па́рня.
         en_gb: I have known this guy for a long time.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
-      - ru: Во дворе́ игра́ли молоды́е парни́.
+      - ru: Во дворе́ игра́ли молоды́е па́рни.
         en_gb: Young guys were playing in the yard.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
     declension:
@@ -39992,7 +39992,7 @@ words:
       sg_acc: па́рня
       sg_ins: па́рнем
       sg_pre: па́рне
-      pl_nom: парни́
+      pl_nom: па́рни
       pl_gen: парне́й
       pl_dat: парня́м
       pl_acc: парне́й
@@ -40210,7 +40210,7 @@ words:
         en_alt:
           - The party members gathered in the hall.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
-      - ru: На вы́борах уча́ствуют мно́го па́ртий.
+      - ru: В вы́борах уча́ствует мно́го па́ртий.
         en_gb: Many parties take part in the elections.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
   "партнёр=partner":
@@ -52649,7 +52649,7 @@ words:
     en_gb:
       standard: sleeve (the part of a garment for the arm)
     usage:
-      - ru: Он закати́л рукава́ руба́шки.
+      - ru: Он заката́л рукава́ руба́шки.
         en_gb: He rolled up the sleeves of his shirt.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: На рукаве́ появи́лось пятно́.
@@ -57321,7 +57321,7 @@ words:
       - ru: Солда́ты ма́ршируют по пло́щади.
         en_gb: The soldiers are marching across the square.
         inflect: { token: 1, case: nom, number: pl, rule: noun-nom-pl }
-      - ru: Команди́р прика́зал солда́там отдыха́ть.
+      - ru: Команди́р приказа́л солда́там отдыха́ть.
         en_gb: The commander ordered the soldiers to rest.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
       - ru: Генера́л ли́чно поговори́л с уста́лыми солда́тами.
@@ -64538,7 +64538,7 @@ words:
     en_gb:
       standard: increase (a rise in amount or size)
     usage:
-      - ru: Всё ждут увеличе́ния зарпла́ты.
+      - ru: Все ждут увеличе́ния зарпла́ты.
         en_gb: Everyone is waiting for an increase in salary.
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Произошло́ увеличе́ние цен.
@@ -66524,7 +66524,7 @@ words:
       - ru: Я не по́мню его́ фами́лию.
         en_gb: I do not remember his surname.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: На спи́ске мно́го одина́ковых фами́лий.
+      - ru: В спи́ске мно́го одина́ковых фами́лий.
         en_gb: There are many identical surnames on the list.
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
     declension:
@@ -68374,7 +68374,7 @@ words:
       - ru: Мне нра́вятся я́ркие цвета́.
         en_gb: I like bright colours.
         inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
-      - ru: Стены́ покра́шены в зелёный цвет.
+      - ru: Сте́ны покра́шены в зелёный цвет.
         en_gb: The walls are painted green.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
     declension:
@@ -68503,7 +68503,7 @@ words:
       - ru: Цеме́нт смеша́ли с песко́м.
         en_gb: The cement was mixed with sand.
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
-      - ru: Стены́ скрепи́ли цеме́нтом.
+      - ru: Сте́ны скрепи́ли цеме́нтом.
         en_gb: The walls were bonded with cement.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
