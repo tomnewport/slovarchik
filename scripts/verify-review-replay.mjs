@@ -37,16 +37,39 @@ const base = baseArg >= 0 && args[baseArg + 1]
   : execFileSync('git', ['merge-base', 'origin/main', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim()
 
 /**
- * The lines the review is responsible for: a usage item's Russian, its primary
- * English and its accepted alternates. Everything else in the file — declension
- * cells, conjugations, glosses, `inflect:` blocks — is outside the proposals'
- * remit, and a hand correction there (a wrong paradigm cell, say) must not read
- * as the review failing to reproduce itself.
+ * Every line the review is responsible for.
+ *
+ * This started as usage `ru`/`en_gb`/`en_alt` only, which let two whole classes
+ * of change pass unchecked. `inflect:` was filtered out even though the
+ * quarantine stage exists precisely to relocate those annotations — so a
+ * hand-edited `token:` could differ from what the resolutions replayed and the
+ * check would still say "exactly". Headword glosses were filtered out too, so
+ * none of the gloss pass's widenings were covered.
+ *
+ * What remains excluded is genuinely outside the review's remit: declension and
+ * conjugation cells, `cefr_level`, `aspect`, and the rest of a word's data. A
+ * hand correction to a wrong paradigm cell must not read as the review failing
+ * to reproduce itself.
+ *
+ * The word-key lines are kept as anchors: without them a block that moved could
+ * line up against a different word's and compare equal.
  */
-function usageLines(text) {
+function reviewedLines(text) {
   return text
     .split('\n')
-    .filter((l) => /^ {6}- ru:/.test(l) || /^ {8}en_gb:/.test(l) || /^ {8}en_alt:/.test(l) || /^ {10}- /.test(l))
+    .filter(
+      (l) =>
+        /^ {2}"[^"]+":\s*$/.test(l) || // word key — anchors everything below it
+        /^ {4}en_gb:/.test(l) || // headword gloss block
+        /^ {6}standard:/.test(l) ||
+        /^ {6}alt:/.test(l) ||
+        /^ {8}- /.test(l) || // headword alt items
+        /^ {6}- ru:/.test(l) || // usage item
+        /^ {8}en_gb:/.test(l) ||
+        /^ {8}en_alt:/.test(l) ||
+        /^ {8}inflect:/.test(l) ||
+        /^ {10}- /.test(l), // usage alt items
+    )
     .join('\n')
 }
 
@@ -113,15 +136,43 @@ try {
     }
   }
 
-  // 4. compare
+  // Stage four: the gloss widenings. These are word-level, not sentence-level —
+  // they append to a headword's `en_gb.alt` — so they are independent of the
+  // three sentence stages and can run last. Without this stage the 89 widenings
+  // were reproduced by nothing, and `reviewedLines` now compares the headword
+  // gloss block, so an unreplayed one is a difference rather than a blind spot.
+  const glossDir = join(repo, 'review', 'gloss')
+  if (existsSync(glossDir)) {
+    cpSync(join(repo, 'scripts', 'apply-gloss-review.mjs'), join(work, 'scripts', 'apply-gloss-review.mjs'))
+    cpSync(glossDir, join(work, 'review', 'gloss'), { recursive: true })
+    const glosses = readdirSync(join(work, 'review', 'gloss'))
+      .filter((f) => f.endsWith('.jsonl'))
+      .map((f) => join('review', 'gloss', f))
+    if (glosses.length) {
+      execFileSync('node', [join('scripts', 'apply-gloss-review.mjs'), ...glosses, '--apply'], {
+        cwd: work,
+        stdio: ['ignore', 'ignore', 'inherit'],
+      })
+    }
+  }
+
+  // Stage five: the gloss-only entries a Russian rewrite makes necessary. These
+  // land in glossary.yml, which used to be skipped by the comparison entirely.
+  const additions = join(repo, 'review', 'glossary-additions.jsonl')
+  if (existsSync(additions)) {
+    cpSync(join(repo, 'scripts', 'apply-glossary-additions.mjs'), join(work, 'scripts', 'apply-glossary-additions.mjs'))
+    cpSync(additions, join(work, 'review', 'glossary-additions.jsonl'))
+    execFileSync('node', [join('scripts', 'apply-glossary-additions.mjs'), '--apply'], {
+      cwd: work,
+      stdio: ['ignore', 'ignore', 'inherit'],
+    })
+  }
+
+  // 6. compare
   const vocabDir = join(repo, 'public', 'vocab')
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
-    // glossary.yml holds gloss-only entries the review never proposes against;
-    // words are added to it by hand when a rewrite introduces a new surface
-    // form, so it is outside what the proposals can reproduce.
-    if (file === 'glossary.yml') continue
-    const replayed = usageLines(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
-    const committed = usageLines(readFileSync(join(vocabDir, file), 'utf8'))
+    const replayed = reviewedLines(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
+    const committed = reviewedLines(readFileSync(join(vocabDir, file), 'utf8'))
     if (replayed !== committed) {
       const a = replayed.split('\n')
       const b = committed.split('\n')
