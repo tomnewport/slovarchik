@@ -39237,7 +39237,7 @@ words:
         en_gb: Tomorrow we will play the decisive match.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
       - ru: Я сыгра́л бы для вас, но забы́л но́ты.
-        en_gb: I would play for you, but I forgot the music.
+        en_gb: I would have played for you, but I forgot the music.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты сыгра́ешь на гита́ре?
         en_gb: Will you play the guitar?
@@ -39270,6 +39270,8 @@ words:
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Е́сли б уме́ла, я танцева́ла бы.
         en_gb: I would dance if I knew how.
+        en_alt:
+          - If I knew how, I would dance.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
       - ru: Вы танцу́ете на сва́дьбе?
         en_gb: Are you dancing at the wedding?
@@ -39452,7 +39454,7 @@ words:
         en_gb: The river flows to the sea.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Слёзы текли́ по щека́м.
-        en_gb: Tears were running down the cheeks.
+        en_gb: Tears were flowing down the cheeks.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ручьи́ теку́т весно́й.
         en_gb: Streams flow in spring.
@@ -39536,7 +39538,7 @@ words:
         en_gb: They were hurrying for the train.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: С но́вым расписа́нием мы бо́льше не бу́дем торопи́ться на по́езд.
-        en_gb: With the new timetable, we will no longer rush for the train.
+        en_gb: With the new timetable, we will no longer hurry for the train.
         inflect: { token: 7, tense: future, person: 1pl, rule: verb-future }
       - ru: Я не торопи́лся бы на твоём ме́сте.
         en_gb: I would not hurry if I were you.
@@ -39604,7 +39606,7 @@ words:
         en_gb: Do not spend money on nonsense.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: На доро́гу вы бу́дете тра́тить не бо́льше часа́.
-        en_gb: You will spend no more than an hour travelling.
+        en_gb: You will be spending no more than an hour on the journey.
         inflect: { token: 4, tense: future, person: 2pl, rule: verb-future }
       - ru: Я не тра́тила бы де́ньги на э́то.
         en_gb: I would not spend money on that.
@@ -39657,10 +39659,10 @@ words:
         en_gb: The work requires patience.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Они́ тре́бовали отве́та.
-        en_gb: They demanded an answer.
+        en_gb: They were demanding an answer.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Ты бу́дешь тре́бовать справедли́вости.
-        en_gb: You will demand justice.
+        en_gb: You will be demanding justice.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Я тре́бовала бы извине́ний на твоём ме́сте.
         en_gb: I would demand an apology if I were you.
@@ -39810,6 +39812,8 @@ words:
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Э́та пе́сня за́втра тро́нет ка́ждого.
         en_gb: Tomorrow this song will touch everyone.
+        en_alt:
+          - This song will touch everyone tomorrow.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
       - ru: Я не тро́нула бы его́ ве́щи без спро́са.
         en_gb: I would not touch his things without asking.
@@ -39952,7 +39956,7 @@ words:
         en_gb: You will make sure the door is closed.
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
       - ru: Она́ убеди́лась в его́ правоте́.
-        en_gb: She convinced herself of his rightness.
+        en_gb: She became convinced of his rightness.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Мы убеди́лись в успе́хе пла́на.
         en_gb: We became convinced of the plan's success.
@@ -40070,6 +40074,8 @@ words:
         inflect: { token: 4, tense: future, person: 1pl, rule: verb-future }
       - ru: Будь у меня́ вре́мя, я убира́ла бы ча́ще.
         en_gb: I would tidy more often if I had time.
+        en_alt:
+          - If I had time, I would tidy more often.
         inflect: { token: 6, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты убира́ешь кварти́ру?
         en_gb: Are you tidying the flat?
@@ -40166,7 +40172,7 @@ words:
         en_gb: I will clear the books off the table.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ убрала́ ко́мнату до прихо́да госте́й.
-        en_gb: She tidied the room before the guests.
+        en_gb: She tidied the room before the guests arrived.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Они́ уберу́т му́сор у́тром.
         en_gb: They will remove the rubbish in the morning.
@@ -40261,7 +40267,7 @@ words:
         en_gb: Tomorrow we will see the sea for the first time.
         inflect: { token: 3, tense: future, person: 1pl, rule: verb-future }
       - ru: Будь светле́е, я уви́дела бы бо́льше.
-        en_gb: I would see more if it were lighter.
+        en_gb: I would have seen more if it had been lighter.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-conditional }
       - ru: Ты уви́дишь мо́ре из окна́?
         en_gb: Will you see the sea from the window?
@@ -42575,7 +42581,7 @@ words:
         en_gb: We laughed loudly all evening.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я хохочу́ от его́ шу́ток.
-        en_gb: I guffaw at his jokes.
+        en_gb: I laugh loudly at his jokes.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: На спекта́кле мы бу́дем хохота́ть до слёз.
         en_gb: At the show we will be laughing until we cry.
@@ -42638,13 +42644,15 @@ words:
       standard: to kiss (to touch with the lips lovingly)
     usage:
       - ru: Ма́ма целу́ет ребёнка пе́ред сном.
-        en_gb: Mum kisses the child before sleep.
+        en_gb: Mum kisses the child before bed.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Я целу́ю тебя́ на проща́ние.
         en_gb: I kiss you goodbye.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Они́ не́жно целова́ли друг дру́га.
         en_gb: They tenderly kissed each other.
+        en_alt:
+          - They kissed each other tenderly.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: С понеде́льника я бу́ду целова́ть тебя́ ка́ждое у́тро.
         en_gb: From Monday I will be kissing you every morning.
@@ -42689,7 +42697,7 @@ words:
         en_gb: They were mending the roof all summer.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Все выходны́е мы бу́дем чини́ть ста́рый велосипе́д.
-        en_gb: We will spend the whole weekend mending the old bicycle.
+        en_gb: All weekend we will be mending the old bicycle.
         inflect: { token: 4, tense: future, person: 1pl, rule: verb-future }
       - ru: Будь инструме́нты, я чини́л бы кран сам.
         en_gb: I would mend the tap myself if I had the tools.
@@ -42736,7 +42744,7 @@ words:
         en_gb: She reads the newspaper in the mornings.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Вчера́ мы чита́ли интере́сный расска́з.
-        en_gb: Yesterday we read an interesting story.
+        en_gb: Yesterday we were reading an interesting story.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: За́втра ве́чером я бу́ду чита́ть кни́гу.
         en_gb: Tomorrow evening I will be reading a book.
@@ -42878,7 +42886,7 @@ words:
         en_gb: He strode briskly forward.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
       - ru: По го́рной тропе́ мы бу́дем шага́ть друг за дру́гом.
-        en_gb: We will walk single file along the mountain trail.
+        en_gb: Along the mountain trail we will be striding one after another.
         inflect: { token: 5, tense: future, person: 1pl, rule: verb-future }
       - ru: Будь доро́га ро́вной, я шага́л бы быстре́е.
         en_gb: I would stride faster if the road were even.
@@ -42962,7 +42970,7 @@ words:
         en_gb: In the wind the leaves will be stirring quietly.
         inflect: { token: 4, tense: future, person: 3pl, rule: verb-future }
       - ru: Я не шевели́лась бы во вре́мя съёмки.
-        en_gb: I would not stir during the photo.
+        en_gb: I would not stir during the photo shoot.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
   "шептать=to whisper":
     cefr_level: B2
@@ -42975,7 +42983,7 @@ words:
       - communication
     usage:
       - ru: Де́ти шепта́ли что́-то на у́хо.
-        en_gb: The children whispered something in his ear.
+        en_gb: The children were whispering something in his ear.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Не шепчи́, говори́ гро́мче.
         en_gb: Don't whisper, speak louder.
@@ -43030,7 +43038,7 @@ words:
       - ru: Я учу́сь шить на маши́нке.
         en_gb: I am learning to sew by machine.
       - ru: Она́ бу́дет шить костю́м всю неде́лю.
-        en_gb: She will be sewing the costume all week.
+        en_gb: She will be sewing the suit all week.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Е́сли бы уме́л, я шил бы сам.
         en_gb: I would sew it myself if I knew how.
@@ -43072,7 +43080,7 @@ words:
         en_gb: Don't make noise, everyone is asleep.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Мо́ре шуме́ло всю ночь.
-        en_gb: The sea was roaring all night.
+        en_gb: The sea was making noise all night.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Всю ночь мо́ре бу́дет шуме́ть за окно́м.
         en_gb: All night the sea will be making noise outside the window.
@@ -43185,7 +43193,7 @@ words:
       past_pl: яви́лись
     usage:
       - ru: Он яви́лся на собра́ние без опозда́ния.
-        en_gb: He turned up to the meeting without delay.
+        en_gb: He turned up to the meeting without being late.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я явлю́сь к девяти́ часа́м.
         en_gb: I will appear by nine o'clock.
@@ -43195,9 +43203,11 @@ words:
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Я явлю́сь за́втра к девяти́ часа́м.
         en_gb: I will appear by nine o'clock tomorrow.
+        en_alt:
+          - Tomorrow I will appear by nine o'clock.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Зна́я о встре́че, я яви́лся бы ра́ньше.
-        en_gb: I would appear earlier if I knew about the meeting.
+        en_gb: I would have appeared earlier if I had known about the meeting.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ты яви́шься во́время?
         en_gb: Will you turn up on time?
@@ -43234,7 +43244,7 @@ words:
         en_gb: She was the main witness.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Ско́ро он бу́дет явля́ться дире́ктором фи́рмы.
-        en_gb: Soon he will be the director of the company.
+        en_gb: Soon he will be the director of the firm.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Без него́ прое́кт не явля́лся бы по́лным.
         en_gb: Without him the project would not be complete.
