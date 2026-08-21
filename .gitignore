@@ -23,3 +23,8 @@ public/vocab/*.json
 # so not committed; the reviewers' proposals in review/proposals/ are.
 review/packets/
 review/quarantine-russian.jsonl
+
+# Gloss-review work packets — regenerate with `node scripts/gloss-packets.mjs`.
+# Derived from the proposals + vocab; the reviewers' *.jsonl beside them are
+# the record and stay tracked.
+review/gloss/*.json
