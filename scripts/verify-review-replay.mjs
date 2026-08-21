@@ -92,7 +92,28 @@ try {
     stdio: ['ignore', 'ignore', 'inherit'],
   })
 
-  // 3. compare
+  // Stage three: the copyedit. The first pass judged fidelity — is the English
+  // faithful to the Russian — and that is the wrong question for asking whether
+  // the English is *English*, so some of its fixes landed as calques. The
+  // copyedit revisits those, and it has to run last because it overrides the
+  // first pass's `en_gb` on the same sentences. Keeping it as its own set of
+  // proposals rather than editing the originals keeps both decisions on the
+  // record: what the fidelity pass concluded, and what the copyedit changed.
+  const copyeditDir = join(repo, 'review', 'copyedit')
+  if (existsSync(copyeditDir)) {
+    cpSync(copyeditDir, join(work, 'review', 'copyedit'), { recursive: true })
+    const copyedits = readdirSync(join(work, 'review', 'copyedit'))
+      .filter((f) => f.endsWith('.jsonl'))
+      .map((f) => join('review', 'copyedit', f))
+    if (copyedits.length) {
+      execFileSync('node', [join('scripts', 'apply-translation-review.mjs'), ...copyedits, '--apply'], {
+        cwd: work,
+        stdio: ['ignore', 'ignore', 'inherit'],
+      })
+    }
+  }
+
+  // 4. compare
   const vocabDir = join(repo, 'public', 'vocab')
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
     // glossary.yml holds gloss-only entries the review never proposes against;
