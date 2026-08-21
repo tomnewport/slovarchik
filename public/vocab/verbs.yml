@@ -2595,7 +2595,7 @@ words:
       past_pl: возника́ли
     usage:
       - ru: У меня́ возника́ет вопро́с.
-        en_gb: A question arises for me.
+        en_gb: I have a question.
         inflect: { token: 3, tense: present, person: 3sg, rule: verb-present }
       - ru: Тру́дности возника́ют ча́сто.
         en_gb: Difficulties arise often.
@@ -12223,8 +12223,9 @@ words:
         en_gb: She excused his mistake.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Она́ извини́ла бы его́, е́сли бы он попроси́л.
-        en_gb: She would excuse him if he asked.
+        en_gb: She would forgive him if he asked.
         en_alt:
+          - She would excuse him if he asked.
           - She would forgive him if he asked.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
       - ru: Они́ извиня́т нас за опозда́ние пото́м.
@@ -26148,7 +26149,7 @@ words:
         en_gb: I would stay quiet for a while and listen to others.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро все помолча́т в знак уваже́ния.
-        en_gb: Soon everyone will be silent for a while as a mark of respect.
+        en_gb: Soon everyone will fall silent as a mark of respect.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты помолчи́шь мину́ту?
         en_gb: Will you be silent for a minute?
@@ -26868,7 +26869,9 @@ words:
         en_gb: We will attempt to start our own business soon.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Ты попыта́ешься откры́ть дверь?
-        en_gb: Will you attempt to open the door?
+        en_gb: Will you try to open the door?
+        en_alt:
+          - Will you attempt to open the door?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "поразить=to strike":
     cefr_level: B1
@@ -31589,7 +31592,7 @@ words:
           - He would disappear at work for days on end.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Си́лы пропада́ют к ве́черу.
-        en_gb: Strength disappears towards evening.
+        en_gb: My strength fades towards evening.
         en_alt:
           - My strength fades towards evening.
         inflect: { token: 2, tense: present, person: 3pl, rule: verb-present }
@@ -32978,7 +32981,7 @@ words:
         en_gb: Soon the final bell will sound.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: В тишине́ разда́лся бы любо́й шо́рох.
-        en_gb: In the silence any rustle would ring out.
+        en_gb: In the silence, any rustle would be clearly audible.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
   "раздеваться=to get undressed":
     cefr_level: B1
@@ -38230,7 +38233,9 @@ words:
         pl: спря́таны
     usage:
       - ru: Я спря́чу пода́рок в шкаф.
-        en_gb: I will hide the present in the cupboard.
+        en_gb: I will hide the present in the wardrobe.
+        en_alt:
+          - I will hide the present in the cupboard.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Она́ спря́тала ключ под ковёр.
         en_gb: She hid the key under the rug.
@@ -42565,7 +42570,7 @@ words:
         en_gb: The wind banged the window.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: От ве́тра дверь ско́ро хло́пнет.
-        en_gb: The door will soon slam from the wind.
+        en_gb: The door will soon slam in the wind.
         inflect: { token: 5, tense: future, person: 3sg, rule: verb-future }
       - ru: Я не хло́пнул бы две́рью так гро́мко.
         en_gb: I would not slam the door so loudly.
@@ -43197,7 +43202,9 @@ words:
       - ru: Я учу́сь шить на маши́нке.
         en_gb: I am learning to sew by machine.
       - ru: Она́ бу́дет шить костю́м всю неде́лю.
-        en_gb: She will be sewing the suit all week.
+        en_gb: She will be sewing the costume all week.
+        en_alt:
+          - She will be sewing the suit all week.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Е́сли бы уме́л, я шил бы сам.
         en_gb: I would sew it myself if I knew how.
@@ -43239,7 +43246,7 @@ words:
         en_gb: Don't make noise, everyone is asleep.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Мо́ре шуме́ло всю ночь.
-        en_gb: The sea was making noise all night.
+        en_gb: The sea was roaring all night.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
       - ru: Всю ночь мо́ре бу́дет шуме́ть за окно́м.
         en_gb: All night the sea will be making noise outside the window.

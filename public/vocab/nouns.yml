@@ -7552,7 +7552,9 @@ words:
       standard: grandson (the son of your child)
     usage:
       - ru: Ба́бушка расска́зывает о свои́х вну́ках.
-        en_gb: Grandma talks about her grandsons.
+        en_gb: Grandma talks about her grandchildren.
+        en_alt:
+          - Grandma talks about her grandsons.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Внук помога́ет де́душке в саду́.
         en_gb: The grandson helps his grandfather in the garden.
@@ -16919,7 +16921,9 @@ words:
         en_gb: The team has many tasks.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Профе́ссор посвяти́л ле́кцию сло́жным зада́чам.
-        en_gb: The professor devoted the lecture to complex tasks.
+        en_gb: The professor devoted the lecture to difficult problems.
+        en_alt:
+          - The professor devoted the lecture to complex tasks.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
   "заказ=order":
     cefr_level: B1
@@ -19046,7 +19050,7 @@ words:
         en_gb: She returned from Israel.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Друзья́ рассказа́ли об Изра́иле.
-        en_gb: Friends told me about Israel.
+        en_gb: Friends talked about Israel.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Мы лета́ли в Изра́иль.
         en_gb: We flew to Israel.
@@ -19195,7 +19199,7 @@ words:
         en_gb: The Roman Empire was enormous.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Импе́рия распа́лась на ча́сти.
-        en_gb: The empire broke apart into pieces.
+        en_gb: The empire broke up into parts.
         en_alt:
           - The empire broke up into parts.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
@@ -22505,7 +22509,9 @@ words:
           - He doesn't understand anything about classical music.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Кла́ссика никогда́ не устарева́ет.
-        en_gb: Classical music never goes out of date.
+        en_gb: The classics never go out of date.
+        en_alt:
+          - Classical music never goes out of date.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
     declension:
       sg_nom: кла́ссика
@@ -26660,7 +26666,9 @@ words:
           - The jar's lid has been lost.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В я́щике лежа́т ра́зные кры́шки.
-        en_gb: There are different lids in the box.
+        en_gb: There are various lids in the drawer.
+        en_alt:
+          - There are various lids in the box.
         inflect: { token: 5, case: nom, number: pl, rule: noun-nom-pl }
   "крючок=hook":
     cefr_level: B2
@@ -39244,7 +39252,7 @@ words:
       pl_pre: охра́нах
     usage:
       - ru: Охра́на стои́т у воро́т.
-        en_gb: Security stands at the gate.
+        en_gb: Security guards are standing at the gate.
         en_alt:
           - Security is standing at the gate.
           - The security guards are standing at the gate.
@@ -41616,8 +41624,9 @@ words:
         - jacket
     usage:
       - ru: Он снял пиджа́к и сел за стол.
-        en_gb: He took off his blazer and sat down at the table.
+        en_gb: He took off his jacket and sat down at the table.
         en_alt:
+          - He took off his blazer and sat down at the table.
           - He took off his jacket and sat down at the table.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На нём но́вый си́ний пиджа́к.
@@ -47869,8 +47878,9 @@ words:
         - shop assistant
     usage:
       - ru: Продаве́ц помо́г мне вы́брать пода́рок.
-        en_gb: The salesperson helped me choose a present.
+        en_gb: The shop assistant helped me choose a present.
         en_alt:
+          - The salesperson helped me choose a present.
           - The shop assistant helped me choose a present.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я спроси́л у продавца́ о цене́.
@@ -51925,7 +51935,7 @@ words:
         - relatives
     usage:
       - ru: На пра́здник прие́хала вся родня́.
-        en_gb: All the kin came for the holiday.
+        en_gb: All the relatives came for the holiday.
         en_alt:
           - All the relatives came for the holiday.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
