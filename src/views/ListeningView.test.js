@@ -24,7 +24,7 @@ describe('ListeningView', () => {
     expect(wrapper.findAll('.bank button.tile')).toHaveLength(0)
   })
 
-  it('builds a word bank with the target words plus a few decoys', async () => {
+  it('builds a word bank containing every target word, with no duplicate decoys', async () => {
     const wrapper = mount(ListeningView)
     await startDrill(wrapper)
 
@@ -35,10 +35,15 @@ describe('ListeningView', () => {
     const bankWords = wrapper.vm.bank.map((t) => t.text)
     for (const word of targetWords) expect(bankWords).toContain(word)
 
-    // … and the bank is padded out with decoy tiles.
+    // … and no decoy duplicates a real word of the phrase.
+    //
+    // How *many* decoys there are is not asserted here: the view spends its
+    // decoy budget on the tiles an accepted alternate needs (#581), so a phrase
+    // with rich alternates legitimately gets none — and `current` is drawn at
+    // random, which made this test fail roughly one run in five. The padding
+    // itself is pinned in phrases.test.js, where the phrase, the pool and the
+    // rng are all injected.
     const decoys = wrapper.vm.bank.filter((t) => t.decoy)
-    expect(decoys.length).toBeGreaterThan(0)
-    // No decoy duplicates a real word of the phrase.
     for (const d of decoys) expect(targetWords).not.toContain(d.text)
   })
 
