@@ -5,11 +5,37 @@ import {
   MASTERY_DIMS,
   DIM_LABEL,
   dimsFor,
+  disambiguatedGloss,
   buildWordList,
   buildStatusWordList,
 } from './homeDashboard.js'
 
 const ev = (dimension, level, correct, ts) => ({ dimension, level, correct, ts })
+
+describe('disambiguatedGloss', () => {
+  it('qualifies a verb that has an aspect partner', () => {
+    expect(
+      disambiguatedGloss('to sew', { aspect: 'pf', aspectPair: { key: 'шить=to sew' } }),
+    ).toBe('to sew (perfective)')
+  })
+
+  it('qualifies a verb that has a motion partner', () => {
+    expect(
+      disambiguatedGloss('to walk', { motion: 'indet', motionPair: { key: 'идти=to go' } }),
+    ).toBe('to walk (indeterminate)')
+  })
+
+  it('uses the authored note for same-gloss words', () => {
+    expect(
+      disambiguatedGloss('hat', { note: 'winter', ambiguousEn: [{ ru: 'шляпа' }] }),
+    ).toBe('hat (winter)')
+  })
+
+  it('leaves ordinary words and non-distinguishing notes unchanged', () => {
+    expect(disambiguatedGloss('house', { note: 'building', ambiguousEn: [] })).toBe('house')
+    expect(disambiguatedGloss('house')).toBe('house')
+  })
+})
 
 describe('dimsFor', () => {
   it('returns dims unchanged at the learning level', () => {
@@ -47,6 +73,22 @@ describe('buildWordList', () => {
     expect(row.en).toBe('house')
     expect(row.dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
     expect(row.dims.map((d) => d.label)).toEqual(LEARNING_DIMS.map((d) => DIM_LABEL[d]))
+  })
+
+  it('uses vocabulary metadata to disambiguate the row gloss', () => {
+    const pairedCtx = {
+      ...ctx,
+      vocabByKey: new Map([
+        ['сшить=to sew', { aspect: 'pf', aspectPair: { key: 'шить=to sew' } }],
+      ]),
+    }
+    const [row] = buildWordList(
+      [{ word: 'сшить=to sew', done: false }],
+      'learning',
+      LEARNING_DIMS,
+      pairedCtx,
+    )
+    expect(row.en).toBe('to sew (perfective)')
   })
 
   it('sorts not-done first, then most-recently-attempted first', () => {
@@ -106,5 +148,16 @@ describe('buildStatusWordList', () => {
     const [row] = buildStatusWordList(['кот=cat'], ctx)
     expect(row.state).toBe('mastered')
     expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
+  })
+
+  it('uses the same disambiguated gloss as current-batch rows', () => {
+    const pairedCtx = {
+      ...ctx,
+      vocabByKey: new Map([
+        ['кот=cat', { note: 'animal', ambiguousEn: [{ ru: 'кошка' }] }],
+      ]),
+    }
+    const [row] = buildStatusWordList(['кот=cat'], pairedCtx)
+    expect(row.en).toBe('cat (animal)')
   })
 })
