@@ -11,7 +11,7 @@ import { computed } from 'vue'
 import { state as vocabState } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
 import { buildFormIndex, phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
-import { diagnose } from '../lib/confusables.js'
+import { buildGlossIndex, diagnose, diagnoseEnglish } from '../lib/confusables.js'
 import { STATES } from '../lib/progression.js'
 
 const LEARNED_RANK = STATES.indexOf('learned')
@@ -101,4 +101,34 @@ export function diagnoseAnswer(typed, { targetKey, target } = {}) {
     formIndex: formIndex.value,
     byKey: wordsByKey.value,
   })
+}
+
+// Gloss → keys, cached per autocomplete pool. The flashcard drill hands the same
+// pool array to every card of an exercise, so the index is built once per board
+// rather than once per guess.
+const glossIndexes = new WeakMap()
+
+function glossIndexFor(pool) {
+  if (!Array.isArray(pool) || !pool.length) return null
+  let index = glossIndexes.get(pool)
+  if (!index) {
+    index = buildGlossIndex(pool)
+    glossIndexes.set(pool, index)
+  }
+  return index
+}
+
+/**
+ * The same diagnosis in the English direction: the learner saw the Russian and
+ * typed a gloss that wasn't the one wanted — whose word were they describing?
+ * Null when the gloss belongs to no word we know.
+ *
+ * @param {string} typed the English the learner gave
+ * @param {{targetKey: string, options: Array}} about the card's word and the
+ *   drill's autocomplete pool, which doubles as the gloss index's source
+ */
+export function diagnoseEnglishAnswer(typed, { targetKey, options } = {}) {
+  const glossIndex = glossIndexFor(options)
+  if (!glossIndex) return null
+  return diagnoseEnglish(typed, { targetKey, byKey: wordsByKey.value, glossIndex })
 }
