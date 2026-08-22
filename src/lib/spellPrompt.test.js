@@ -1,6 +1,12 @@
 import { describe, it, expect } from 'vitest'
 
-import { duplicateSpellPrompts, posLabel, spellPrompt, spellPromptsFor } from './spellPrompt.js'
+import {
+  aspectSense,
+  duplicateSpellPrompts,
+  posLabel,
+  spellPrompt,
+  spellPromptsFor,
+} from './spellPrompt.js'
 
 describe('posLabel', () => {
   it('is just the part of speech when there is no aspect', () => {
@@ -19,6 +25,29 @@ describe('posLabel', () => {
 
   it('is empty without a part of speech', () => {
     expect(posLabel(null, 'pf')).toBe('')
+  })
+})
+
+describe('aspectSense', () => {
+  it('says what each aspect means rather than naming it', () => {
+    expect(aspectSense('pf')).toBe('a single completed action or its result')
+    expect(aspectSense('impf')).toBe('a process, habit or repeated action')
+  })
+
+  it('is the contrast posLabel only names — the difference for an identical-gloss pair', () => {
+    expect(posLabel('verb', 'pf')).toBe('verb · perfective')
+    expect(aspectSense('pf')).not.toContain('perfective')
+  })
+
+  it('prefers directionality, the finer contrast, for a verb of motion', () => {
+    expect(aspectSense('impf', 'det')).toBe('one trip, under way in one direction')
+    expect(aspectSense('impf', 'indet')).toBe('habitual, repeated, or there and back')
+  })
+
+  it('is empty for a word that draws neither contrast', () => {
+    expect(aspectSense(null)).toBe('')
+    expect(aspectSense(undefined, undefined)).toBe('')
+    expect(aspectSense('nonsense')).toBe('')
   })
 })
 

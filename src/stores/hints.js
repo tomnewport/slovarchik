@@ -11,6 +11,7 @@ import { computed } from 'vue'
 import { state as vocabState } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
 import { buildFormIndex, phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
+import { diagnose } from '../lib/confusables.js'
 import { STATES } from '../lib/progression.js'
 
 const LEARNED_RANK = STATES.indexOf('learned')
@@ -74,4 +75,30 @@ export function hintTokensFor(phrase) {
     text,
     hint: hintIfShowable(hint),
   }))
+}
+
+/** key → word record, for the diagnosis of a wrong answer. */
+const wordsByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
+
+/**
+ * Diagnose a wrong answer: what word did the learner actually write, and how
+ * does it relate to the one being asked for? Returns null when the answer isn't
+ * a recognisable Russian word — an ordinary spelling slip, which the drills
+ * handle as they always have. See lib/confusables.js.
+ *
+ * The wiring lives here because this store already builds (and caches) the
+ * surface-form index the diagnosis looks words up in; rebuilding it per drill
+ * would be pure waste.
+ *
+ * @param {string} typed the learner's answer
+ * @param {{targetKey: string, target: string}} about the word being drilled and
+ *   the surface form wanted (a single word, or the whole phrase)
+ */
+export function diagnoseAnswer(typed, { targetKey, target } = {}) {
+  return diagnose(typed, {
+    targetKey,
+    target,
+    formIndex: formIndex.value,
+    byKey: wordsByKey.value,
+  })
 }

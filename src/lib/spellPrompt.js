@@ -13,7 +13,7 @@
 //  - Genuine synonyms need authored notes that distinguish them; that is a data
 //    fix, and {@link duplicateSpellPrompts} is what keeps it done.
 
-import { ASPECT_LABEL } from './phraseContext.js'
+import { ASPECT_HINT, ASPECT_LABEL, MOTION_HINT } from './phraseContext.js'
 
 /**
  * The part-of-speech line under a spelling prompt: which kind of word to spell
@@ -24,6 +24,25 @@ export function posLabel(pos, aspect) {
   if (!pos) return ''
   const asp = ASPECT_LABEL[aspect]
   return asp ? `${pos} · ${asp}` : pos
+}
+
+/**
+ * The contrast a verb's aspect (or, for a verb of motion, its directionality)
+ * actually draws, in plain English — "a single completed action or its result"
+ * rather than the bare label "perfective".
+ *
+ * {@link posLabel} names the distinction, which is enough to *pick* between two
+ * entries on a prompt. Explaining a wrong answer needs the sense: for an
+ * identical-gloss pair like сшить/шить the aspect is the only difference there
+ * is, so quoting the two glosses would print "to sew" twice. Directionality
+ * wins when a word has both, since it is the finer contrast of the two.
+ *
+ * @param {string} aspect `impf` | `pf`
+ * @param {string} [motion] `det` | `indet` for a verb of motion
+ * @returns {string} the sense, or '' when the word draws neither contrast
+ */
+export function aspectSense(aspect, motion) {
+  return MOTION_HINT[motion] ?? ASPECT_HINT[aspect] ?? ''
 }
 
 /** First accepted English gloss; the shaped `en` may be a list or a string. */
