@@ -49,6 +49,11 @@ function selfEn(record) {
   return (Array.isArray(en) ? en[0] : en) || ''
 }
 
+/** The word's own distinguishing note — the `en_gb` parenthetical. */
+function selfNote(record) {
+  return String(record?.meaningNote ?? record?.note ?? '').trim()
+}
+
 // Headword → record indexes, cached per word-map so a panel re-render doesn't
 // re-scan the dictionary. Heteronyms and `ambiguousEn` carry a headword but no
 // natural key (they are computed from spelling/gloss collisions), so resolving
@@ -157,6 +162,42 @@ export function relatedWords(record, byKey) {
   return out
 }
 
+/**
+ * The best available explanation of how this word differs from a related one —
+ * for a correction message ("that's the *other* one") or a panel row.
+ *
+ * A pair like звони́ть / звене́ть is the case that needs it: near-identical
+ * spelling, and glosses ("to call" / "to ring") close enough that showing them
+ * side by side barely separates the two. The explanation is usually already in
+ * the corpus, so this looks for it in order:
+ *  1. an authored `why` on the `confusable_with:` link — prose written for
+ *     exactly this pair;
+ *  2. the two words' distinguishing notes, the `en_gb.standard` parentheticals
+ *     that #527 already requires to tell same-gloss words apart — rendered as a
+ *     contrast, "звони́ть — to phone someone; звене́ть — of a bell". This is what
+ *     makes derived relations explainable at all: a link the build derives has
+ *     nowhere to put a `why`, but both ends still carry their notes;
+ *  3. nothing — the caller falls back to the glosses (and, for an aspect pair,
+ *     to saying the aspect in words).
+ *
+ * @param {object} record the word in hand (full record or shaped vocab word)
+ * @param {object} related one entry from {@link relatedWords}
+ * @returns {{text: string, source: 'why' | 'contrast' | 'note' | ''}}
+ */
+export function confusionNote(record, related) {
+  const why = String(related?.why ?? '').trim()
+  if (why) return { text: why, source: 'why' }
+  const sides = [
+    { ru: selfRu(record), note: selfNote(record) },
+    { ru: related?.ru ?? '', note: String(related?.note ?? '').trim() },
+  ].filter((side) => side.ru && side.note)
+  if (!sides.length) return { text: '', source: '' }
+  return {
+    text: sides.map((side) => `${side.ru} — ${side.note}`).join('; '),
+    source: sides.length === 2 ? 'contrast' : 'note',
+  }
+}
+
 /** Strip stress and joining hyphens so a morpheme can be matched in a headword. */
 function bareMorpheme(value) {
   return stripStress(String(value ?? ''))
@@ -174,6 +215,25 @@ function isSubsequence(parts, word) {
     at = i + p.length
   }
   return true
+}
+
+/**
+ * Can a learner tell these two words apart from what the corpus already says?
+ * A distinguishing note on either side does it (that is what a note is for);
+ * failing that, the two short glosses have to actually differ — one gloss
+ * containing the other ("to call" / "to call back") separates nothing.
+ */
+function distinguishable(a, b) {
+  if (!b) return true // a dangling key is reported on its own
+  if (selfNote(a) || selfNote(b)) return true
+  const one = String(a.meaning || a.en || '')
+    .trim()
+    .toLowerCase()
+  const two = String(b.meaning || b.en || '')
+    .trim()
+    .toLowerCase()
+  if (!one || !two) return true
+  return !one.includes(two) && !two.includes(one)
 }
 
 /** The keys of every word this one is already linked to by derivation. */
@@ -285,6 +345,12 @@ export function factIssues(words) {
       else if (!byKey.has(k)) report(word.key, at, `"${k}" is not a word`)
       else if (derived.has(k)) {
         report(word.key, at, `"${k}" is already linked automatically — don't author it`)
+      } else if (!String(c?.why ?? '').trim() && !distinguishable(word, byKey.get(k))) {
+        // With no `why`, the correction message falls back to the two glosses
+        // and notes. Where those are the same on both sides there is nothing
+        // left to say, and a learner is told their answer was wrong by being
+        // shown the meaning they were already thinking of.
+        report(word.key, at, `nothing tells "${k}" apart from this word — write a why`)
       }
       seen.add(k)
     }

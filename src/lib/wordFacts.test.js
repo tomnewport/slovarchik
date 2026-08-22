@@ -2,7 +2,14 @@ import { describe, it, expect } from 'vitest'
 import yaml from 'js-yaml'
 
 import { buildWords, shapeVocab } from './vocabBuild.js'
-import { wordFacts, factParts, relatedWords, factIssues, FACT_KINDS } from './wordFacts.js'
+import {
+  wordFacts,
+  factParts,
+  relatedWords,
+  confusionNote,
+  factIssues,
+  FACT_KINDS,
+} from './wordFacts.js'
 
 // buildWords takes parsed docs; these tests author inline YAML, so parse first.
 const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
@@ -374,6 +381,86 @@ words:
   })
 })
 
+describe('confusionNote', () => {
+  const words = fromYaml([{ pos: 'verb', text: verbs }])
+  const byKey = byKeyOf(words)
+
+  it('prefers the authored why', () => {
+    const call = find(words, 'звонить=to call')
+    const [ring] = relatedWords(call, byKey)
+    expect(confusionNote(call, ring)).toEqual({
+      text: 'Nearly the same sound; звони́ть is to phone someone, звене́ть is a bell ringing.',
+      source: 'why',
+    })
+  })
+
+  it('falls back to contrasting the two distinguishing notes', () => {
+    // The pair that needs explaining most: near-identical spelling, glosses too
+    // close to separate them. Neither word authors a `why` here — the notes the
+    // corpus already carries do the work.
+    const sound = fromYaml([
+      {
+        pos: 'verb',
+        text: `
+words:
+  "звонить=to call":
+    cefr_level: A2
+    accented: звони́ть
+    en_gb: { standard: to call (to phone someone) }
+    confusable_with: [{ key: "звенеть=to ring" }]
+  "звенеть=to ring":
+    cefr_level: B2
+    accented: звене́ть
+    en_gb: { standard: to ring (of a bell) }
+`,
+      },
+    ])
+    const call = find(sound, 'звонить=to call')
+    const [ring] = relatedWords(call, byKeyOf(sound))
+    expect(confusionNote(call, ring)).toEqual({
+      text: 'звони́ть — to phone someone; звене́ть — of a bell',
+      source: 'contrast',
+    })
+  })
+
+  it('explains a derived relation too, which can carry no why at all', () => {
+    const sew = fromYaml([
+      {
+        pos: 'verb',
+        text: `
+words:
+  "шить=to sew":
+    cefr_level: B1
+    accented: шить
+    aspect: impf
+    pair: "сшить=to sew"
+    en_gb: { standard: to sew }
+  "сшить=to sew":
+    cefr_level: B1
+    accented: сшить
+    aspect: pf
+    pair: "шить=to sew"
+    en_gb:
+      standard: to sew (one garment run up start to finish)
+`,
+      },
+    ])
+    const impf = find(sew, 'шить=to sew')
+    const [pf] = relatedWords(impf, byKeyOf(sew))
+    expect(pf.relation).toBe('aspect')
+    expect(confusionNote(impf, pf)).toEqual({
+      text: 'сшить — one garment run up start to finish',
+      source: 'note',
+    })
+  })
+
+  it('says nothing when the corpus has nothing to say', () => {
+    const lead = find(words, 'водить=to lead')
+    expect(confusionNote(lead, { ru: 'вести́', en: 'to lead' })).toEqual({ text: '', source: '' })
+    expect(confusionNote(null, null)).toEqual({ text: '', source: '' })
+  })
+})
+
 describe('factIssues', () => {
   const issuesFor = (text, pos = 'adverb') => factIssues(fromYaml([{ pos, text }]))
   const messages = (issues) => issues.map((i) => i.message)
@@ -547,6 +634,54 @@ words:
     expect(messages(issues)).toEqual([
       expect.stringContaining('is already linked automatically'),
     ])
+  })
+
+  it('requires a why when nothing else tells the two words apart', () => {
+    const issues = factIssues(
+      fromYaml([
+        {
+          pos: 'verb',
+          text: `
+words:
+  "звонить=to call":
+    cefr_level: A2
+    accented: звони́ть
+    en_gb: { standard: to call }
+    confusable_with: [{ key: "перезвонить=to call back" }]
+  "перезвонить=to call back":
+    cefr_level: B2
+    accented: перезвони́ть
+    en_gb: { standard: to call back }
+`,
+        },
+      ]),
+    )
+    expect(messages(issues)).toEqual([
+      expect.stringContaining('nothing tells "перезвонить=to call back" apart'),
+    ])
+  })
+
+  it('accepts the same pair once either side carries a note', () => {
+    const issues = factIssues(
+      fromYaml([
+        {
+          pos: 'verb',
+          text: `
+words:
+  "звонить=to call":
+    cefr_level: A2
+    accented: звони́ть
+    en_gb: { standard: to call (to phone someone) }
+    confusable_with: [{ key: "звенеть=to ring" }]
+  "звенеть=to ring":
+    cefr_level: B2
+    accented: звене́ть
+    en_gb: { standard: to ring (of a bell) }
+`,
+        },
+      ]),
+    )
+    expect(issues).toEqual([])
   })
 
   it('flags a dangling, self-referential, duplicated or keyless confusable', () => {

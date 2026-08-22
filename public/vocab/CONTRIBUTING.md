@@ -252,9 +252,22 @@ wrong word is not.
       why: "Nearly the same sound; звони́ть is to phone someone, звене́ть is a bell ringing."
 ```
 
-`why` is optional — where it's absent the app falls back to the two glosses.
 **Write the pair once:** the link is mirrored automatically onto the other word,
 exactly as heteronyms are.
+
+`why` is optional, because the explanation is usually already in the corpus. When
+it's absent the app contrasts the two words' **distinguishing notes** — the
+`en_gb.standard` parentheticals — so the pair above still reads *"звони́ть — to
+phone someone; звене́ть — of a bell"* even with no `why` written. That fallback is
+what makes a *derived* relation explainable at all: an aspect pair or a
+same-gloss sibling has nowhere to put a `why`, but both ends still carry a note.
+
+So write a note that distinguishes (you owe one anyway, see `en_gb` above) and
+reach for `why` when the difference needs a sentence rather than a phrase.
+**One case makes it compulsory:** where neither word has a note and one gloss
+merely contains the other ("to call" / "to call back"), nothing separates them —
+the learner is told they were wrong by being shown the meaning they were already
+thinking of. The corpus guard fails until a `why` is written.
 
 > **Don't author what is already derived.** Aspect pairs (`pair:`), motion pairs
 > (`motion_pair:`), participle origins (`from_verb:`), heteronyms (same spelling,
@@ -948,8 +961,9 @@ which assert that the **real** files on disk:
   fails if either gender drops below 45% of the gendered «я …» phrases, or of
   the gendered «ты …» ones (see the gender-balance note under `usage` above).
 - resolve every **`facts:` / `confusable_with:`** link, with a valid `kind`,
-  a non-empty `text`, a breakdown that really spells out its headword, and no
-  hand-authored duplicate of a link the build already derives
+  a non-empty `text`, a breakdown that really spells out its headword, no
+  hand-authored duplicate of a link the build already derives, and *something*
+  that tells each confusable pair apart — a note, distinct glosses or a `why`
   (`wordFacts.factIssues`, asserted in `vocabBuild.test.js`).
 
 Keeping files sorted is mechanical — run `node scripts/sort-vocab.js
