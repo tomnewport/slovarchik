@@ -30,14 +30,62 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const repo = join(__dirname, '..')
 const args = process.argv.slice(2)
 const baseArg = args.indexOf('--base')
-// The review branched from the merge base with main; that is the state the
-// proposals were written against.
-const base = baseArg >= 0 && args[baseArg + 1]
-  ? args[baseArg + 1]
-  : execFileSync('git', ['merge-base', 'origin/main', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim()
 
 /**
- * Every line the review is responsible for.
+ * The commit the proposals were written against.
+ *
+ * Read from `review/replay-base.txt` rather than derived. It used to be
+ * `git merge-base origin/main HEAD`, which is correct while the review sits on
+ * a branch and wrong the moment it merges: on main the merge base is main
+ * itself, so the replay re-applies every proposal to a tree that already has
+ * them. The 32 `fix-russian` rows then cannot find their sentences — their
+ * Russian has been rewritten — and the check fails on data that is perfectly
+ * fine. Main went red on exactly that after #581 landed.
+ */
+function replayBase() {
+  if (baseArg >= 0 && args[baseArg + 1]) return args[baseArg + 1]
+  const path = join(repo, 'review', 'replay-base.txt')
+  if (!existsSync(path)) {
+    console.error('review/replay-base.txt is missing — it names the commit the proposals were written against')
+    process.exit(1)
+  }
+  const sha = readFileSync(path, 'utf8')
+    .split('\n')
+    .map((l) => l.trim())
+    .find((l) => l && !l.startsWith('#'))
+  if (!sha) {
+    console.error('review/replay-base.txt names no commit')
+    process.exit(1)
+  }
+  return sha
+}
+const base = replayBase()
+
+// A base that is not behind HEAD cannot be a starting point for the replay: the
+// tree it names already contains the changes we are about to apply. Catching it
+// here says so, instead of surfacing as unmatched proposals a reader would
+// reasonably mistake for corrupt data.
+try {
+  execFileSync('git', ['merge-base', '--is-ancestor', base, 'HEAD'], { cwd: repo, stdio: 'ignore' })
+} catch {
+  console.error(`replay base ${base.slice(0, 8)} is not an ancestor of HEAD — it must name the state the review started from`)
+  process.exit(1)
+}
+if (execFileSync('git', ['rev-parse', base], { cwd: repo, encoding: 'utf8' }).trim()
+  === execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim()) {
+  console.error(`replay base ${base.slice(0, 8)} is HEAD itself — nothing would be replayed`)
+  process.exit(1)
+}
+
+/**
+ * Every line the review is responsible for, grouped by the word that owns it.
+ *
+ * Grouped, rather than compared as one flat list, because the corpus keeps
+ * growing. A word added after the base — «аво́сь» arrived with #603 — exists in
+ * the committed tree and not in the replay, and against a flat list that reads
+ * as the review failing to reproduce itself. It is not: a word the review never
+ * saw is not the review's to reproduce. So only keys present in *both* trees are
+ * compared, and a key the replay produces but the corpus has lost is reported.
  *
  * This started as usage `ru`/`en_gb`/`en_alt` only, which let two whole classes
  * of change pass unchecked. `inflect:` was filtered out even though the
@@ -54,23 +102,32 @@ const base = baseArg >= 0 && args[baseArg + 1]
  * The word-key lines are kept as anchors: without them a block that moved could
  * line up against a different word's and compare equal.
  */
-function reviewedLines(text) {
-  return text
-    .split('\n')
-    .filter(
-      (l) =>
-        /^ {2}"[^"]+":\s*$/.test(l) || // word key — anchors everything below it
-        /^ {4}en_gb:/.test(l) || // headword gloss block
-        /^ {6}standard:/.test(l) ||
-        /^ {6}alt:/.test(l) ||
-        /^ {8}- /.test(l) || // headword alt items
-        /^ {6}- ru:/.test(l) || // usage item
-        /^ {8}en_gb:/.test(l) ||
-        /^ {8}en_alt:/.test(l) ||
-        /^ {8}inflect:/.test(l) ||
-        /^ {10}- /.test(l), // usage alt items
-    )
-    .join('\n')
+function reviewedByKey(text) {
+  const out = new Map()
+  let key = null
+  for (const line of text.split('\n')) {
+    const k = line.match(/^ {2}"([^"]+)":\s*$/)
+    if (k) {
+      key = k[1]
+      out.set(key, [])
+      continue
+    }
+    if (!key) continue
+    if (
+      /^ {4}en_gb:/.test(line) || // headword gloss block
+      /^ {6}standard:/.test(line) ||
+      /^ {6}alt:/.test(line) ||
+      /^ {8}- /.test(line) || // headword alt items
+      /^ {6}- ru:/.test(line) || // usage item
+      /^ {8}en_gb:/.test(line) ||
+      /^ {8}en_alt:/.test(line) ||
+      /^ {8}inflect:/.test(line) ||
+      /^ {10}- /.test(line) // usage alt items
+    ) {
+      out.get(key).push(line)
+    }
+  }
+  return new Map([...out].map(([k, v]) => [k, v.join('\n')]))
 }
 
 const work = mkdtempSync(join(tmpdir(), 'review-replay-'))
@@ -181,20 +238,33 @@ try {
     })
   }
 
-  // 7. compare
+  // 7. compare, word by word
   const vocabDir = join(repo, 'public', 'vocab')
+  let compared = 0
+  let added = 0
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
-    const replayed = reviewedLines(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
-    const committed = reviewedLines(readFileSync(join(vocabDir, file), 'utf8'))
-    if (replayed !== committed) {
-      const a = replayed.split('\n')
-      const b = committed.split('\n')
+    const replayed = reviewedByKey(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
+    const committed = reviewedByKey(readFileSync(join(vocabDir, file), 'utf8'))
+    for (const [key, text] of replayed) {
+      if (!committed.has(key)) {
+        console.error(`  ✗ ${file}: ${key} was replayed but is no longer in the corpus`)
+        failed = true
+        continue
+      }
+      compared += 1
+      if (text === committed.get(key)) continue
+      const a = text.split('\n')
+      const b = committed.get(key).split('\n')
       const at = a.findIndex((line, i) => line !== b[i])
-      console.error(`  ✗ ${file} differs (first at line ${at + 1})`)
-      console.error(`      replay:    ${a[at]}`)
-      console.error(`      committed: ${b[at]}`)
+      console.error(`  ✗ ${file}: ${key} differs`)
+      console.error(`      replay:    ${a[at] ?? '(nothing)'}`)
+      console.error(`      committed: ${b[at] ?? '(nothing)'}`)
       failed = true
     }
+    for (const key of committed.keys()) if (!replayed.has(key)) added += 1
+  }
+  if (!failed) {
+    console.log(`  ${compared} word(s) compared; ${added} added since the base and outside the review's remit`)
   }
 } catch (err) {
   console.error(`replay failed: ${err.message}`)

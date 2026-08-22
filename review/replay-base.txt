@@ -1,0 +1,14 @@
+# The commit the translation review was written against.
+#
+# `verify:review` replays review/proposals/ (and the stages after it) onto this
+# tree and requires the result to equal the committed vocab. That only works
+# against a *fixed* starting point. It used to be derived with
+# `git merge-base origin/main HEAD`, which is the right answer while the review
+# lives on a branch and the wrong one the moment it merges: on main the merge
+# base is main itself, so the replay re-applies the proposals to data that
+# already has them — and the 32 `fix-russian` rows, whose Russian has since been
+# rewritten, cannot find their sentences. Main went red on exactly that.
+#
+# So it is pinned. This is a permanent historical fact, not a moving reference,
+# and it only changes if a future review is written against a different base.
+4521e640433c078386e9c9a9d0a68ec9daf8534c
