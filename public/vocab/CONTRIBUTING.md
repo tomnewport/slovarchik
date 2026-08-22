@@ -83,6 +83,8 @@ never also takes a combining accent.
 | `usage`       | no       | Example sentences — see below. These also feed the **Phrases** drill. |
 | `collections` | no       | Topic tags (`[travel, daily life]`) that let a batch be *themed*. Pick from the registry in [`src/lib/collections.js`](../../src/lib/collections.js) — anything else fails `collections.test.js`. See below. |
 | `learn`       | no       | Set `false` to make a **gloss-only** entry: kept in the dictionary so phrase hints can translate it, but excluded from every drill, the phrase bank and the batch/progress engine. Defaults to `true`. See below. |
+| `facts`       | no       | Typed notes *about the word* — how it is built, its root, its origin, a mnemonic. Optional content, never an interruption. See below. |
+| `confusable_with` | no   | Sound-alikes and false friends the app can't derive (звони́ть / звене́ть). See below. |
 
 #### `collections` — topic tags
 
@@ -200,6 +202,70 @@ field to fill in, but two things help it:
 
 A sentence that marks nothing — a generic "you can…" rendered with мо́жно —
 gets no annotation, which is correct: nothing is being hidden.
+
+### `facts` — what there is to say about the word
+
+A polysyllabic word is much easier to remember once you can see it as a compound
+(пере‧вод‧и́ть = "across" + "lead" + verb ending), or as a relative of a word you
+already know. `facts:` is where that knowledge goes — a flat list of typed notes,
+all optional:
+
+```yaml
+"переводить=to translate":
+  facts:
+    - kind: build
+      text: "Literally to lead across — the same пере- as in переходи́ть (to cross)."
+      parts:
+        - { ru: "пере-", en: "across, over, re-" }
+        - { ru: "вод",   en: "lead (root of води́ть)" }
+        - { ru: "-и́ть",  en: "verb ending" }
+    - kind: root
+      text: "Same root as води́ть (to lead) and вождь (leader)."
+      see: ["водить=to lead"]
+    - kind: origin
+      text: "A calque of Latin trans-ferre — the same picture in both languages."
+    - kind: memory
+      text: "A translator leads a sentence across a border."
+```
+
+| Key     | Required | Notes |
+| ------- | -------- | ----- |
+| `kind`  | **yes**  | One of `build` `root` `origin` `memory` `note`. A closed set: anything else is dropped by the build and fails the corpus guard. |
+| `text`  | **yes**  | One or two sentences. **Markdown is not parsed** — write plain prose, because `*emphasis*` renders literally. |
+| `parts` | no       | `build` only: the morphemes in order, each `{ ru, en }`. Keep the joining hyphens (`пере-`, `-и́ть`) — they show where the piece attaches and are stripped when the chips are read out as one word. |
+| `see`   | no       | Natural keys of related entries. Each is resolved into a link, so the panel can offer the word rather than only name it. |
+
+A word may carry as many facts as it earns — two roots, two mnemonics — and they
+are shown in the order above regardless of how they are written.
+
+The `parts` of a `build` fact have to spell out the word they sit on: the guard
+checks that the morphemes appear, in order, inside the headword. Consonant
+alternations are fine (`писа́ть` → `пис` + `-а́ть`); a breakdown pasted onto the
+wrong word is not.
+
+### `confusable_with` — sound-alikes and false friends
+
+```yaml
+"звонить=to call":
+  confusable_with:
+    - key: "звенеть=to ring"
+      why: "Nearly the same sound; звони́ть is to phone someone, звене́ть is a bell ringing."
+```
+
+`why` is optional — where it's absent the app falls back to the two glosses.
+**Write the pair once:** the link is mirrored automatically onto the other word,
+exactly as heteronyms are.
+
+> **Don't author what is already derived.** Aspect pairs (`pair:`), motion pairs
+> (`motion_pair:`), participle origins (`from_verb:`), heteronyms (same spelling,
+> different stress) and same-gloss words are already linked by `vocabBuild.js`
+> and are picked up by the word panels for free. `confusable_with:` is for the
+> confusions nothing in the data can see. The corpus guard fails on any entry
+> that re-states a derivable link.
+
+Both fields are read by [`src/lib/wordFacts.js`](../../src/lib/wordFacts.js),
+whose `factIssues` is the guard that fails CI on a malformed, dangling,
+self-referential or already-derived link.
 
 ### Gloss-only entries (`learn: false`) and `glossary.yml`
 
@@ -881,6 +947,10 @@ which assert that the **real** files on disk:
 - keep the **subject gender split even, per person** — `genderBalance.test.js`
   fails if either gender drops below 45% of the gendered «я …» phrases, or of
   the gendered «ты …» ones (see the gender-balance note under `usage` above).
+- resolve every **`facts:` / `confusable_with:`** link, with a valid `kind`,
+  a non-empty `text`, a breakdown that really spells out its headword, and no
+  hand-authored duplicate of a link the build already derives
+  (`wordFacts.factIssues`, asserted in `vocabBuild.test.js`).
 
 Keeping files sorted is mechanical — run `node scripts/sort-vocab.js
 public/vocab/<file>.yml`, which reorders entries by Russian headword while

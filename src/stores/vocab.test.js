@@ -147,3 +147,80 @@ describe('vocab store sync', () => {
     expect(state.words.length).toBeGreaterThan(0)
   })
 })
+
+// A tiny two-word document exercising the optional `facts:` / `confusable_with:`
+// fields (#585). Written as the JSON the client actually fetches, so this is a
+// real round trip: document → IndexedDB → buildWords → store.
+const factsDoc = {
+  words: {
+    'звонить=to call': {
+      cefr_level: 'A2',
+      accented: 'звони́ть',
+      aspect: 'impf',
+      en_gb: { standard: 'to call (on the telephone)' },
+      facts: [
+        {
+          kind: 'build',
+          text: 'From звон — a ringing sound.',
+          parts: [
+            { ru: 'звон', en: 'a ring, a chime' },
+            { ru: '-и́ть', en: 'verb ending' },
+          ],
+        },
+      ],
+      confusable_with: [{ key: 'звенеть=to ring', why: 'Nearly the same sound.' }],
+    },
+    'звенеть=to ring': {
+      cefr_level: 'B2',
+      accented: 'звене́ть',
+      aspect: 'impf',
+      en_gb: { standard: 'to ring (of a bell)' },
+    },
+  },
+}
+
+describe('word facts survive the cache round trip', () => {
+  it('carries facts and links both ends of a confusable pair', async () => {
+    await idb.putFile({
+      file: 'verbs.json',
+      pos: 'verb',
+      updated: '2026-08-15T00:00:00Z',
+      doc: factsDoc,
+    })
+    globalThis.fetch = vi.fn(() => {
+      throw new Error('should not be called')
+    })
+
+    await loadFromCache()
+
+    const call = state.words.find((w) => w.key === 'звонить=to call')
+    expect(call.facts[0].parts.map((p) => p.ru)).toEqual(['звон', '-и́ть'])
+    expect(call.confusables.map((c) => c.key)).toEqual(['звенеть=to ring'])
+
+    const ring = state.words.find((w) => w.key === 'звенеть=to ring')
+    expect(ring.confusables[0]).toMatchObject({
+      key: 'звонить=to call',
+      ru: 'звони́ть',
+      why: 'Nearly the same sound.',
+    })
+  })
+
+  it('leaves a word that authors neither field with empty lists', async () => {
+    await idb.putFile({
+      file: 'nouns.json',
+      pos: 'noun',
+      updated: '2026-05-28T00:00:00Z',
+      doc: nounsDoc,
+    })
+    globalThis.fetch = vi.fn(() => {
+      throw new Error('should not be called')
+    })
+
+    await loadFromCache()
+
+    for (const w of state.words) {
+      expect(w.facts, `${w.key}: facts`).toEqual([])
+      expect(w.confusables, `${w.key}: confusables`).toEqual([])
+    }
+  })
+})

@@ -11,6 +11,7 @@ import {
   partsOfSpeech,
 } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
+import { factIssues } from './wordFacts.js'
 import yaml from 'js-yaml'
 
 // buildWords now takes parsed docs (the runtime feeds it build-generated JSON);
@@ -748,5 +749,40 @@ words:
   it('surfaces the link on the shaped vocab word', () => {
     const shaped = shapeVocab(words).find((v) => v.id === 'закрытый=closed')
     expect(shaped.participleOf.key).toBe('закрыть=to close')
+  })
+})
+
+// ── `facts:` / `confusable_with:` — the corpus guard (#585) ─────────────────
+// The logic lives in wordFacts.factIssues (tested there against inline data);
+// here it is pointed at the real files. Both fields are optional, so an empty
+// corpus passes — this fails only once an authoring slip exists on disk.
+describe('the bundled vocabulary’s word facts', () => {
+  const words = loadFixtureWords()
+
+  it('authors no malformed, dangling or already-derived fact link', () => {
+    const issues = factIssues(words)
+    const report = issues.map((i) => `${i.key} ${i.field}: ${i.message}`).join('\n')
+    expect(issues, `\n${report}`).toEqual([])
+  })
+
+  it('gives every word the two fields, empty where nothing is authored', () => {
+    for (const w of words) {
+      expect(Array.isArray(w.facts), `${w.key}: facts`).toBe(true)
+      expect(Array.isArray(w.confusables), `${w.key}: confusables`).toBe(true)
+    }
+  })
+
+  it('links every confusable pair from both ends', () => {
+    const byKey = new Map(words.map((w) => [w.key, w]))
+    for (const w of words) {
+      for (const c of w.confusables) {
+        const other = byKey.get(c.key)
+        expect(other, `${w.key}: confusable "${c.key}" does not exist`).toBeTruthy()
+        expect(
+          other.confusables.map((b) => b.key),
+          `${c.key} does not link back to ${w.key}`,
+        ).toContain(w.key)
+      }
+    }
   })
 })

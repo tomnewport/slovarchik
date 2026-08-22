@@ -95,6 +95,78 @@ function normalizeHeteronyms(raw) {
     .filter((h) => h.ru)
 }
 
+/**
+ * The closed set of `facts:` kinds, in the order a panel shows them. A word's
+ * facts are optional notes about *the word itself* rather than about a drill:
+ *  - `build`   — the morpheme breakdown (пере‧вод‧и́ть), optionally as `parts`;
+ *  - `root`    — the shared root that ties it to words already known;
+ *  - `origin`  — etymology, borrowings, calques;
+ *  - `memory`  — a mnemonic;
+ *  - `note`    — anything else worth saying once.
+ * A closed set means the renderer maps kind → icon/label and never guesses;
+ * adding a kind is a one-line change here plus an icon.
+ */
+export const FACT_KINDS = ['build', 'root', 'origin', 'memory', 'note']
+
+/** Normalise the morpheme breakdown of a `build` fact into {ru, en} chips. */
+function normalizeParts(raw) {
+  if (!Array.isArray(raw)) return []
+  return raw
+    .map((p) => ({ ru: String(p?.ru ?? '').trim(), en: String(p?.en ?? p?.gloss ?? '').trim() }))
+    .filter((p) => p.ru)
+}
+
+/** Natural keys of related entries, trimmed and de-duplicated. */
+function normalizeKeys(raw) {
+  const arr = Array.isArray(raw) ? raw : raw != null ? [raw] : []
+  return [...new Set(arr.map((k) => String(k ?? '').trim()).filter(Boolean))]
+}
+
+/**
+ * Normalise the optional `facts:` list — typed notes about the word (see
+ * {@link FACT_KINDS}). An unknown `kind` or a blank `text` drops the fact rather
+ * than failing the build; `factIssues` (wordFacts.js) is what turns an authoring
+ * slip into a red CI run. `parts` is `build`-only; the `see:` keys are resolved
+ * into full links by linkFacts once every word exists.
+ */
+function normalizeFacts(raw) {
+  if (!Array.isArray(raw)) return []
+  return raw
+    .map((f) => {
+      const kind = String(f?.kind ?? '').trim()
+      const text = String(f?.text ?? '').trim()
+      if (!FACT_KINDS.includes(kind) || !text) return null
+      return {
+        kind,
+        text,
+        parts: kind === 'build' ? normalizeParts(f.parts) : [],
+        seeKeys: normalizeKeys(f.see),
+        see: [], // resolved by linkFacts
+      }
+    })
+    .filter(Boolean)
+}
+
+/**
+ * Normalise the optional `confusable_with:` list into {key, why} entries. This
+ * is for confusions the shaped record cannot already see — sound-alikes
+ * (звони́ть/звене́ть) and false friends. Aspect pairs, motion pairs, participle
+ * origins, heteronyms and same-gloss words are derived elsewhere and must not be
+ * re-authored here.
+ */
+function normalizeConfusableWith(raw) {
+  if (!Array.isArray(raw)) return []
+  const seen = new Set()
+  const out = []
+  for (const c of raw) {
+    const key = String(c?.key ?? '').trim()
+    if (!key || seen.has(key)) continue
+    seen.add(key)
+    out.push({ key, why: String(c?.why ?? '').trim() })
+  }
+  return out
+}
+
 /** Convert a flat declension map (sg_nom, pl_gen, …) into nested forms. */
 function nestForms(declension, numbers) {
   const forms = {}
@@ -257,6 +329,16 @@ function normalizeWord(pos, key, word) {
     // Other learnable words that share the same base English meaning — filled in
     // by linkAmbiguousEn after all words are built.
     ambiguousEn: [],
+    // Optional authored notes about the word itself — how it is built, its root,
+    // its origin, a mnemonic (#585). Each fact's `see:` keys are resolved into
+    // full links by linkFacts. Empty for the overwhelming majority of words:
+    // facts are optional content and nothing in the app requires them.
+    facts: normalizeFacts(word.facts),
+    // Authored sound-alikes and false friends, as {key, why}. linkFacts resolves
+    // these into `confusables` and mirrors them onto the other member, so an
+    // author writes the pair once.
+    confusableWith: normalizeConfusableWith(word.confusable_with),
+    confusables: [],
     extra: word,
   }
 }
@@ -355,6 +437,52 @@ function linkPartners(words) {
 }
 
 /**
+ * Resolve the authored fact links (#585) once every word exists:
+ *  - each fact's `see:` keys become full `{key, ru, en, note}` links;
+ *  - `confusable_with:` becomes `confusables`, **symmetrically** — an author
+ *    writes the pair on one word and both ends carry it, exactly as
+ *    linkHeteronyms does for stress pairs. A `why` authored on the near side
+ *    wins over one mirrored from the far side.
+ * A dangling key resolves to nothing; `factIssues` (wordFacts.js) is the guard
+ * that fails CI on it, so silence here only ever hides a typo from the runtime.
+ */
+function linkFacts(words) {
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  const link = (t) => ({
+    key: t.key,
+    ru: t.headword || t.ru,
+    en: t.meaning || t.en,
+    note: t.meaningNote || '',
+  })
+
+  // key → (other key → why), collected before anything is resolved so the
+  // mirrored half of a pair can never be lost to iteration order.
+  const pairs = new Map()
+  const add = (from, to, why) => {
+    if (!from || !to || from === to) return
+    if (!byKey.has(from) || !byKey.has(to)) return
+    if (!pairs.has(from)) pairs.set(from, new Map())
+    const near = pairs.get(from)
+    if (!near.get(to)) near.set(to, why)
+  }
+  for (const w of words) for (const c of w.confusableWith) add(w.key, c.key, c.why)
+  for (const w of words) for (const c of w.confusableWith) add(c.key, w.key, c.why)
+
+  for (const w of words) {
+    for (const f of w.facts) {
+      f.see = f.seeKeys
+        .map((k) => byKey.get(k))
+        .filter((t) => t && t !== w)
+        .map(link)
+    }
+    w.confusables = [...(pairs.get(w.key) ?? [])].map(([k, why]) => ({
+      ...link(byKey.get(k)),
+      why,
+    }))
+  }
+}
+
+/**
  * Build the full, sorted word list from parsed vocab documents.
  * @param {Array<{pos: string, doc: object}>} files each `doc` is the parsed
  *   file object (`{ words: {...} }`), already decoded from JSON by the caller.
@@ -371,6 +499,7 @@ export function buildWords(files) {
   linkHeteronyms(out)
   linkAmbiguousEn(out)
   linkPartners(out)
+  linkFacts(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
 }
@@ -397,6 +526,11 @@ export function shapeVocab(words) {
     heteronyms: w.heteronyms,
     alsoRu: w.alsoRu,
     ambiguousEn: w.ambiguousEn ?? [],
+    // Authored word facts and the resolved confusable links (#585), carried on
+    // the shaped word so the drills and word panels reach them without
+    // re-deriving anything. Both are empty unless the entry authors them.
+    facts: w.facts ?? [],
+    confusables: w.confusables ?? [],
     aspect: w.aspect ?? null,
     aspectPair: w.aspectPair ?? null,
     // Verb-of-motion directionality and its determinate/indeterminate partner
