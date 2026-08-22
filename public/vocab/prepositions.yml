@@ -114,9 +114,12 @@ words:
     usage:
       - ru: Я родила́сь во вто́рник.
         en_gb: I was born on a Tuesday.
+        en_alt:
+          - I was born on Tuesday.
       - ru: Во сне я ви́дела мо́ре.
         en_gb: In my dream I saw the sea.
         en_alt:
+          - In a dream I saw the sea.
           - I saw the sea in my dream.
       - ru: Во дворе́ игра́ют де́ти.
         en_gb: Children are playing in the yard.
@@ -157,7 +160,7 @@ words:
       standard: after (looking or moving in the wake of someone)
     usage:
       - ru: Он посмотре́л вслед по́езду.
-        en_gb: He looked after the train.
+        en_gb: He gazed after the train.
       - ru: Соба́ка побежа́ла вслед хозя́ину.
         en_gb: The dog ran after its owner.
       - ru: Она́ маха́ла руко́й вслед маши́не.
@@ -236,10 +239,16 @@ words:
     usage:
       - ru: Он крича́л и́зо всех сил.
         en_gb: He shouted with all his might.
+        en_alt:
+          - He shouted with all his strength.
       - ru: И́зо рта шёл пар.
         en_gb: Steam came from his mouth.
+        en_alt:
+          - Steam was coming from his mouth.
       - ru: Она́ рабо́тала и́зо дня в день.
         en_gb: She worked day in, day out.
+        en_alt:
+          - She worked day after day.
   "к=towards":
     cefr_level: A1
     accented: к
@@ -264,10 +273,14 @@ words:
     usage:
       - ru: Подойди́ ко мне.
         en_gb: Come over to me.
+        en_alt:
+          - Come up to me.
       - ru: Го́сти пришли́ ко второ́му ча́су.
         en_gb: The guests came by two o'clock.
       - ru: Он привы́к ко всему́.
         en_gb: He has got used to everything.
+        en_alt:
+          - He is used to everything.
   "кроме=except":
     cefr_level: A2
     accented: кро́ме
@@ -282,8 +295,12 @@ words:
         en_gb: Everyone agrees except me.
       - ru: Кро́ме хле́ба, ничего́ нет.
         en_gb: Apart from bread, there is nothing.
+        en_alt:
+          - Except for bread, there is nothing.
       - ru: Магази́н откры́т кро́ме понеде́льника.
         en_gb: The shop is open except on Monday.
+        en_alt:
+          - The shop is open except on Mondays.
   "меж=between":
     cefr_level: B2
     accented: меж
@@ -364,11 +381,13 @@ words:
       standard: regarding (about, concerning)
     usage:
       - ru: Поговори́м насчёт рабо́ты.
-        en_gb: Let's talk regarding the job.
+        en_gb: Let's talk about the job.
       - ru: Что ты ду́маешь насчёт пое́здки?
-        en_gb: What do you think regarding the trip?
+        en_gb: What do you think about the trip?
       - ru: У меня́ есть вопро́с насчёт пла́на.
         en_gb: I have a question regarding the plan.
+        en_alt:
+          - I have a question about the plan.
   "несмотря=despite":
     cefr_level: B1
     accented: несмотря́
@@ -454,6 +473,8 @@ words:
         en_gb: I have the keys to the flat.
       - ru: Он дрожа́л от хо́лода.
         en_gb: He was shivering from the cold.
+        en_alt:
+          - He was trembling with the cold.
   "перед=in front of":
     cefr_level: A1
     accented: пе́ред
@@ -465,8 +486,12 @@ words:
     usage:
       - ru: Маши́на стои́т пе́ред до́мом.
         en_gb: The car stands in front of the house.
+        en_alt:
+          - The car is standing in front of the house.
       - ru: Пе́ред сном я чита́ю кни́гу.
         en_gb: Before sleep I read a book.
+        en_alt:
+          - Before bed I read a book.
       - ru: Он вы́ступил пе́ред кла́ссом.
         en_gb: He spoke in front of the class.
   "по=along":
@@ -483,6 +508,8 @@ words:
         en_gb: We are walking around the park.
       - ru: Де́ти бе́гают по двору́.
         en_gb: The children run about the yard.
+        en_alt:
+          - The children run around the yard.
       - ru: Я скуча́ю по до́му.
         en_gb: I miss home.
   "под=under":
@@ -514,6 +541,8 @@ words:
         en_gb: Besides tea, there is coffee.
       - ru: Поми́мо неё, никто́ не зна́ет.
         en_gb: Besides her, no one knows.
+        en_alt:
+          - Apart from her, no one knows.
   "после=after":
     cefr_level: A1
     accented: по́сле
@@ -555,7 +584,7 @@ words:
       - ru: Шко́ла рабо́тает при це́ркви.
         en_gb: The school operates at the church.
       - ru: При жела́нии всё возмо́жно.
-        en_gb: With a bit of will, anything is possible.
+        en_gb: Anything is possible if you really want it.
   "про=about":
     cefr_level: A1
     accented: про
@@ -636,6 +665,8 @@ words:
         en_gb: We walked through the crowd.
       - ru: Сквозь тума́н ничего́ не ви́дно.
         en_gb: Through the fog nothing is visible.
+        en_alt:
+          - Nothing can be seen through the fog.
   "спустя=after":
     cefr_level: B2
     accented: спустя́
@@ -660,6 +691,8 @@ words:
     usage:
       - ru: Среди́ друзе́й он са́мый весёлый.
         en_gb: Among his friends he is the merriest.
+        en_alt:
+          - Among friends he is the most cheerful.
       - ru: Среди́ книг я нашла́ слова́рь.
         en_gb: Among the books I found a dictionary.
       - ru: Она́ просну́лась среди́ но́чи.
@@ -677,8 +710,12 @@ words:
         en_gb: I have a dog.
       - ru: Я была́ в гостя́х у ба́бушки.
         en_gb: I was visiting at Grandma's.
+        en_alt:
+          - I was visiting my grandmother.
       - ru: Маши́на стои́т у воро́т.
         en_gb: The car is parked by the gate.
+        en_alt:
+          - The car is standing by the gate.
   "через=through":
     cefr_level: A1
     accented: че́рез
@@ -691,6 +728,8 @@ words:
     usage:
       - ru: Мы перешли́ че́рез доро́гу.
         en_gb: We crossed the road.
+        en_alt:
+          - We went across the road.
       - ru: По́езд прие́дет че́рез час.
         en_gb: The train will arrive in an hour.
       - ru: Он пры́гнул че́рез забо́р.

@@ -17,3 +17,14 @@ playwright-report/
 # fetches are both derived from the authoring `.yml`; not committed so parallel
 # vocab edits don't conflict over them.
 public/vocab/*.json
+
+# Translation-review work packets — regenerate with
+# `node scripts/audit-translations.mjs --shard`. Derived from the vocab YAML,
+# so not committed; the reviewers' proposals in review/proposals/ are.
+review/packets/
+review/quarantine-russian.jsonl
+
+# Gloss-review work packets — regenerate with `node scripts/gloss-packets.mjs`.
+# Derived from the proposals + vocab; the reviewers' *.jsonl beside them are
+# the record and stay tracked.
+review/gloss/*.json

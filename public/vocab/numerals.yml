@@ -175,6 +175,8 @@ words:
         en_gb: That was in the twentieth century.
       - ru: Он живёт в двадца́той кварти́ре.
         en_gb: He lives in flat number twenty.
+        en_alt:
+          - He lives in flat twenty.
       - ru: Сего́дня двадца́тое ию́ля.
         en_gb: Today is the twentieth of July.
     forms:
@@ -215,6 +217,8 @@ words:
         en_gb: It happened in the year two thousand.
       - ru: Мы встре́тили двухты́сячный год с ра́достью.
         en_gb: We greeted the year two thousand with joy.
+        en_alt:
+          - We welcomed the year two thousand with joy.
       - ru: Э́то бы́ло до двухты́сячного го́да.
         en_gb: This was before the year two thousand.
   "две тысячи восемь=2008":
@@ -591,6 +595,8 @@ words:
     usage:
       - ru: Мы чита́ем оди́н и тот же текст.
         en_gb: We are reading one and the same text.
+        en_alt:
+          - We are reading the same text.
       - ru: У меня́ оди́н брат.
         en_gb: I have one brother.
       - ru: У меня́ нет ни одного́ рубля́.
@@ -668,6 +674,8 @@ words:
     usage:
       - ru: Я ждал полтора́ часа́.
         en_gb: I waited for one and a half hours.
+        en_alt:
+          - I waited an hour and a half.
       - ru: Я купи́ла полтора́ килогра́мма я́блок.
         en_gb: I bought one and a half kilograms of apples.
       - ru: Доро́га заняла́ полторы́ неде́ли.
@@ -698,6 +706,8 @@ words:
         en_gb: The lesson lasts fifteen minutes.
       - ru: Сейча́с пятна́дцать мину́т тре́тьего.
         en_gb: It is a quarter past two now.
+        en_alt:
+          - It is fifteen minutes past two now.
       - ru: Мы говори́ли о пятна́дцати кни́гах.
         en_gb: We talked about fifteen books.
     forms:
@@ -894,7 +904,7 @@ words:
       standard: a hundred (an informal batch of about a hundred)
     usage:
       - ru: На пло́щади была́ со́тня люде́й.
-        en_gb: There were about a hundred people in the square.
+        en_gb: There were a hundred people in the square.
       - ru: Я заплати́ла со́тню рубле́й.
         en_gb: I paid a hundred roubles.
       - ru: У него́ бо́льше со́тни книг.
@@ -953,6 +963,8 @@ words:
         en_gb: I live on the third floor.
       - ru: Э́то тре́тья у́лица напра́во.
         en_gb: It is the third street on the right.
+        en_alt:
+          - This is the third street on the right.
     forms:
       m: тре́тий
       f: тре́тья
@@ -1066,6 +1078,8 @@ words:
     usage:
       - ru: В го́роде ты́сяча жи́телей.
         en_gb: There are a thousand inhabitants in the town.
+        en_alt:
+          - There are a thousand inhabitants in the city.
       - ru: Я заплати́л ты́сячу рубле́й.
         en_gb: I paid a thousand roubles.
       - ru: В кни́ге бо́льше ты́сячи слов.
@@ -1091,6 +1105,8 @@ words:
         en_gb: The war of eighteen twelve was hard.
       - ru: Э́то собы́тие отно́сится к ты́сяча восемьсо́т двена́дцатому го́ду.
         en_gb: This event dates back to eighteen twelve.
+        en_alt:
+          - This event dates to eighteen twelve.
   "тысяча восемьсот шестьдесят один=1861":
     cefr_level: B2
     type: year
@@ -1143,6 +1159,8 @@ words:
     usage:
       - ru: Сове́тский Сою́з распа́лся в ты́сяча девятьсо́т девяно́сто пе́рвом году́.
         en_gb: The Soviet Union broke up in nineteen ninety-one.
+        en_alt:
+          - The Soviet Union collapsed in nineteen ninety-one.
       - ru: Э́то произошло́ в ты́сяча девятьсо́т девяно́сто пе́рвом году́.
         en_gb: This happened in nineteen ninety-one.
       - ru: По́сле ты́сяча девятьсо́т девяно́сто пе́рвого го́да страна́ си́льно измени́лась.
@@ -1248,8 +1266,12 @@ words:
         en_gb: This is the thousandth customer.
       - ru: Магази́н прода́л ты́сячную кни́гу.
         en_gb: The shop sold its thousandth book.
+        en_alt:
+          - The shop sold the thousandth book.
       - ru: Мы отмеча́ем ты́сячный день.
         en_gb: We are marking the thousandth day.
+        en_alt:
+          - We are celebrating the thousandth day.
   "четверо=four together":
     cefr_level: B1
     type: collective
@@ -1279,6 +1301,8 @@ words:
     usage:
       - ru: Он у́чится в четвёртом кла́ссе.
         en_gb: He studies in the fourth grade.
+        en_alt:
+          - He is in the fourth grade.
       - ru: Э́то четвёртая глава́.
         en_gb: This is the fourth chapter.
       - ru: Сего́дня четвёртое ию́ня.

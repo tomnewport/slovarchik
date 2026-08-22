@@ -20,6 +20,26 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # The translation review (#573) claims review/proposals is a complete,
+      # replayable record of every corpus change. Prove it: replaying the
+      # proposals onto the state the review started from must land exactly
+      # on the committed YAML, or the audit trail is decorative.
+      - run: npm run verify:review
+        if: hashFiles('review/proposals/*.jsonl') != ''
+      # An `inflect:` token index is positional, so a reworded sentence can
+      # leave the annotation pointing at the wrong word. phrasesData.test.js
+      # checks the annotated token against its declared slot, which catches
+      # most of that — but not a *syncretic* form sitting in the wrong slot
+      # (кни́ге is both dative and prepositional, so the form check passes
+      # either way). This re-derives the case from the governing preposition,
+      # an independent signal, and fails on a contradiction.
+      - run: npm run check:inflect:cases
+      # English→Russian is only a fair question when the English prompt picks
+      # out one Russian sentence, and the corpus teaches synonyms on purpose —
+      # брю́ки and штаны́ are both "trousers". Most collisions are separated by
+      # the ты/вы annotation or by the distinguishing note the gloss already
+      # carries; this fails when the unresolvable remainder grows (#581).
+      - run: npm run check:prompts
       # The same suite as `npm test`, with coverage measured over the logic
       # layers. The per-layer thresholds in vite.config.js are a ratchet: they
       # fail the job when coverage of src/lib, src/stores or src/composables

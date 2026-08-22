@@ -14,6 +14,7 @@ import {
   EN_LETTERS,
   listeningTokens,
   listeningWordPool,
+  bankTokens,
   buildListeningBank,
   buildAssemblyBank,
   phraseFeedback,
@@ -346,6 +347,28 @@ describe('buildAssemblyBank', () => {
     expect(bank.filter((t) => t.decoy)).toHaveLength(5)
     expect(bank).toHaveLength(8)
   })
+  it('offers the tiles an accepted alternate needs', () => {
+    const bank = buildAssemblyBank('I go home', [], 2.5, seededRng(1), { alts: ['I go back home'] })
+    const texts = bank.map((t) => t.text)
+    for (const w of ['I', 'go', 'home', 'back']) expect(texts).toContain(w)
+  })
+  it('takes an alternate\'s extra tiles out of the decoy budget, not on top of it', () => {
+    const pool = ['the dog runs fast', 'she reads a book', 'we eat lunch']
+    const plain = buildAssemblyBank('I go home', pool, 2.5, seededRng(1))
+    const withAlt = buildAssemblyBank('I go home', pool, 2.5, seededRng(1), { alts: ['I go back home'] })
+    // A phrase with alternates must not face a bigger bank than one without.
+    expect(withAlt).toHaveLength(plain.length)
+    expect(withAlt.filter((t) => t.decoy)).toHaveLength(plain.filter((t) => t.decoy).length - 1)
+  })
+  it('counts repeats, so an alternate needing two of a word gets two', () => {
+    const bank = buildAssemblyBank('the cat sat', [], 2.5, seededRng(3), { alts: ['the cat on the mat'] })
+    expect(bank.filter((t) => t.text.toLowerCase() === 'the' && !t.decoy)).toHaveLength(2)
+  })
+  it('keeps the target\'s own capitalisation', () => {
+    const bank = buildAssemblyBank('I go home', [], 2.5, seededRng(1), { alts: ['i go back home'] })
+    expect(bank.map((t) => t.text)).toContain('I')
+    expect(bank.map((t) => t.text)).not.toContain('i')
+  })
   it('never includes a decoy that appears in the target phrase (case-insensitive)', () => {
     const pool = ['go to school', 'home is nice']
     const bank = buildAssemblyBank('I go home', pool, 2.5, seededRng(2))
@@ -373,7 +396,49 @@ describe('buildAssemblyBank', () => {
   })
 })
 
+describe('bankTokens', () => {
+  it('is just the target when there are no alternates', () => {
+    expect(bankTokens('I see a dog')).toEqual(listeningTokens('I see a dog'))
+    expect(bankTokens('I see a dog', [])).toEqual(listeningTokens('I see a dog'))
+  })
+
+  it('adds the words an alternate needs and the target lacks', () => {
+    const tiles = bankTokens('We are studying it', ['We study it'])
+    expect(tiles).toContain('study')
+    expect(tiles.slice(0, 4)).toEqual(listeningTokens('We are studying it'))
+  })
+
+  it('adds nothing when the alternate only reorders the same words', () => {
+    const target = 'the bus stop is near the house'
+    expect(bankTokens(target, ['near the house is the bus stop'])).toEqual(listeningTokens(target))
+  })
+
+  it('counts duplicates, so an alternate needing two of a word gets two', () => {
+    const tiles = bankTokens('it is very good', ['it is very very good'])
+    expect(tiles.filter((w) => w === 'very')).toHaveLength(2)
+  })
+
+  it('never drops a word the target needs twice', () => {
+    const tiles = bankTokens('more and more people', ['many people'])
+    expect(tiles.filter((w) => w === 'more')).toHaveLength(2)
+  })
+})
+
 describe('buildListeningBank', () => {
+  it('offers tiles for an alternate rendering when alts are given', () => {
+    const bank = buildListeningBank('We are studying it', [], 0, seededRng(3), {
+      alts: ['We study it'],
+    })
+    const texts = bank.map((t) => t.text)
+    for (const w of listeningTokens('We are studying it')) expect(texts).toContain(w)
+    expect(texts).toContain('study')
+  })
+  it('marks a word an alternate contributes as a real tile, not a decoy', () => {
+    const bank = buildListeningBank('We are studying it', [], 0, seededRng(3), {
+      alts: ['We study it'],
+    })
+    expect(bank.find((t) => t.text === 'study').decoy).toBe(false)
+  })
   it('contains every target word plus the requested number of decoys', () => {
     const pool = ['cat', 'dog', 'fish', 'bird', 'tree']
     const bank = buildListeningBank('I see a dog', pool, 3, seededRng(7))

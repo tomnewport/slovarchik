@@ -1,8 +1,10 @@
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import ListeningView from './ListeningView.vue'
 import { state } from '../stores/vocab.js'
-import { listeningTokens } from '../lib/phrases.js'
+import { buildListeningBank, listeningTokens } from '../lib/phrases.js'
+import { shapePhrases } from '../lib/vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab so the phrase bank is populated.
@@ -86,6 +88,53 @@ describe('ListeningView', () => {
     } finally {
       state.words = saved
     }
+  })
+
+  it('supplies tiles for a curated alternate and accepts it (#581)', async () => {
+    const wrapper = mount(ListeningView)
+    await startDrill(wrapper)
+
+    // An alternate that needs a word the primary does not have: until #581 the
+    // bank came from the primary alone while check() accepted `enAlt`, so the
+    // answer was graded correct but could never be assembled.
+    const phrases = shapePhrases(loadFixtureWords())
+    const phrase = phrases.find((p) =>
+      (p.enAlt ?? []).some((a) => listeningTokens(a).some((w) => !listeningTokens(p.en).includes(w))),
+    )
+    const alt = phrase.enAlt.find((a) =>
+      listeningTokens(a).some((w) => !listeningTokens(phrase.en).includes(w)),
+    )
+    wrapper.vm.current = phrase
+    wrapper.vm.bank = buildListeningBank(phrase.en, [], 0, () => 0.5, { alts: phrase.enAlt })
+    await nextTick()
+
+    for (const word of listeningTokens(alt)) {
+      const tile = wrapper
+        .findAll('.bank button.tile')
+        .find((b) => b.text() === word && !b.element.disabled)
+      expect(tile, `no tile for "${word}"`).toBeTruthy()
+      await tile.trigger('click')
+    }
+    await wrapper.find('button.check').trigger('click')
+
+    expect(wrapper.vm.wasCorrect).toBe(true)
+  })
+
+  it('keeps the alternates when Skip swaps in the visual exercise (#581)', async () => {
+    const wrapper = mount(ListeningView)
+    await startDrill(wrapper)
+
+    const phrases = shapePhrases(loadFixtureWords())
+    const phrase = phrases.find((p) => (p.enAlt ?? []).length)
+    wrapper.vm.current = phrase
+    await nextTick()
+
+    const skip = wrapper.findAll('button').find((b) => b.text() === 'Skip')
+    await skip.trigger('click')
+
+    // The replacement is the same phrase, so dropping enAlt here would quietly
+    // return the learner to primary-only tiles and grading.
+    expect(wrapper.vm.visualExercise?.enAlt).toEqual(phrase.enAlt)
   })
 
   it('marks a wrong order incorrect and reveals the answer', async () => {

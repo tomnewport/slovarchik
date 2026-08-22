@@ -5,6 +5,7 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 import {
+  bankTokens,
   buildListeningBank,
   isQuestion,
   listeningTokens,
@@ -35,7 +36,24 @@ const FILLERS = [
 // real vocabulary, falling back to the generic fillers. Deduplicated because
 // buildListeningBank samples without dedup.
 const decoyPool = [...new Set([...listeningWordPool(phrases.value), ...FILLERS])]
-const bank = ref(buildListeningBank(props.exercise.en, decoyPool, DECOY_COUNT))
+// Build the bank from the primary translation AND its accepted alternates, so
+// an answer this drill would grade as correct can actually be assembled. Until
+// #581 the tiles came from the primary alone while check() accepted `enAlt`,
+// which made ~90% of the corpus's alternates unreachable.
+//
+// Every extra tile an alternate contributes is itself a distractor for the
+// primary reading, so they are subtracted from the decoy budget rather than
+// added on top — otherwise a phrase with alternates would face a much bigger
+// bank than one without.
+const altTiles = computed(() => {
+  const alts = props.exercise.enAlt ?? []
+  return alts.length ? bankTokens(props.exercise.en, alts).length - listeningTokens(props.exercise.en).length : 0
+})
+const bank = ref(
+  buildListeningBank(props.exercise.en, decoyPool, Math.max(0, DECOY_COUNT - altTiles.value), Math.random, {
+    alts: props.exercise.enAlt ?? [],
+  }),
+)
 const placed = ref([])
 const checked = ref(false)
 const wasCorrect = ref(false)

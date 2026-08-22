@@ -1,8 +1,10 @@
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
+import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import PhraseTesterView from './PhraseTesterView.vue'
 import { state } from '../stores/vocab.js'
-import { phraseTokens } from '../lib/phrases.js'
+import { buildAssemblyBank, phraseTokens } from '../lib/phrases.js'
+import { shapePhrases } from '../lib/vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab so the phrase bank is populated.
@@ -36,6 +38,55 @@ describe('PhraseTesterView', () => {
 
     expect(wrapper.vm.score).toEqual({ right: 1, total: 1 })
     expect(wrapper.text()).toContain('Correct')
+  })
+
+  it('accepts a curated alternate translation when typing (#581)', async () => {
+    const wrapper = mount(PhraseTesterView)
+    await wrapper.findAll('button.card')[1].trigger('click') // Type it
+
+    // Force a phrase whose alternate is genuinely different from its primary —
+    // grading accepted `enAlt` in the session word-bank but not here.
+    const phrase = shapePhrases(loadFixtureWords()).find(
+      (p) => (p.enAlt ?? []).some((a) => a && a !== p.en),
+    )
+    wrapper.vm.current = phrase
+    await nextTick()
+
+    const alt = phrase.enAlt.find((a) => a && a !== phrase.en)
+    await wrapper.find('input').setValue(alt)
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.vm.score).toEqual({ right: 1, total: 1 })
+    expect(wrapper.text()).toContain('Correct')
+  })
+
+  it('offers tiles for an alternate that adds a word, and accepts it', async () => {
+    const wrapper = mount(PhraseTesterView)
+    await wrapper.findAll('button.card')[0].trigger('click') // Easy
+
+    // An alternate needing a word the primary does not have: the bank has to
+    // supply it, and the auto-submit must not fire before its last tile lands.
+    const phrases = shapePhrases(loadFixtureWords())
+    const phrase = phrases.find((p) =>
+      (p.enAlt ?? []).some((a) => phraseTokens(a).length > phraseTokens(p.en).length),
+    )
+    wrapper.vm.current = phrase
+    const alt = phrase.enAlt.find((a) => phraseTokens(a).length > phraseTokens(phrase.en).length)
+    wrapper.vm.answerTokenCount = Math.max(
+      ...[phrase.en, ...phrase.enAlt].map((t) => phraseTokens(t).length),
+    )
+    wrapper.vm.bank = buildAssemblyBank(phrase.en, [], 2.5, () => 0.5, { alts: phrase.enAlt })
+    await nextTick()
+
+    for (const word of phraseTokens(alt)) {
+      const tile = wrapper
+        .findAll('button.tile')
+        .find((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
+      expect(tile, `no tile for "${word}"`).toBeTruthy()
+      await tile.trigger('click')
+    }
+
+    expect(wrapper.vm.score).toEqual({ right: 1, total: 1 })
   })
 
   it('celebrates and auto-advances after a correct build', async () => {

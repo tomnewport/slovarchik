@@ -2,7 +2,7 @@
 import { computed, reactive, ref, onUnmounted } from 'vue'
 import { phrases, state } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
-import { buildListeningBank, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
+import { bankTokens, buildListeningBank, listeningTokens, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
 import { speak, speechSupported, SLOW_RATE } from '../lib/speech.js'
 import { makeVisualReplacement } from '../lib/exerciseBuild.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
@@ -60,7 +60,19 @@ function nextQuestion() {
   wasCorrect.value = false
   placed.value = []
   current.value = sample(phrases.value, 1)[0]
-  bank.value = buildListeningBank(current.value?.en ?? '', decoyPool.value, DECOYS)
+  // Tiles come from the primary translation *and* its accepted alternates, so
+  // an answer check() will grade as correct can actually be assembled (#581).
+  // Extra tiles from an alternate are themselves distractors for the primary
+  // reading, so they come out of the decoy budget rather than on top of it —
+  // otherwise a phrase with alternates faces a much bigger bank than one
+  // without. Mirrors WordBankExercise.
+  const alts = current.value?.enAlt ?? []
+  const extra = alts.length
+    ? bankTokens(current.value?.en ?? '', alts).length - listeningTokens(current.value?.en ?? '').length
+    : 0
+  bank.value = buildListeningBank(current.value?.en ?? '', decoyPool.value, Math.max(0, DECOYS - extra), Math.random, {
+    alts,
+  })
   replay() // read the phrase aloud as soon as it appears
 }
 
@@ -93,14 +105,26 @@ function record(correct) {
 
 function check() {
   if (answered.value || !placed.value.length) return
-  record(phraseCorrect(placed.value.map((t) => t.text).join(' '), current.value.en))
+  // The primary translation or any curated alternate — the same accepted set
+  // the word-bank exercise uses.
+  const accepted = [current.value.en, ...(current.value.enAlt ?? [])]
+  record(phraseCorrect(placed.value.map((t) => t.text).join(' '), accepted))
 }
 
 function skipToVisual() {
   const phrase = current.value
   if (!phrase) { nextQuestion(); return }
   const rep = makeVisualReplacement(
-    { ru: phrase.ru, en: phrase.en, content: 'phrase', targets: phrase.source ? [phrase.source] : [] },
+    {
+      ru: phrase.ru,
+      en: phrase.en,
+      // `makeVisualReplacement` carries enAlt through when it is given, and the
+      // replacement is the same phrase — so omitting it silently dropped the
+      // learner back to primary-only tiles and grading after a Skip.
+      enAlt: phrase.enAlt ?? [],
+      content: 'phrase',
+      targets: phrase.source ? [phrase.source] : [],
+    },
     visSeq++,
   )
   if (!rep) { nextQuestion(); return }

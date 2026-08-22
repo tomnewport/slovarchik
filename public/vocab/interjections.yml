@@ -36,6 +36,8 @@ words:
     usage:
       - ru: Ай, как бо́льно!
         en_gb: Ow, that hurts!
+        en_alt:
+          - Ow, how painful!
       - ru: Ай, я не зна́ла э́того.
         en_gb: Oh, I didn't know that.
       - ru: Ай, кака́я больша́я соба́ка!
@@ -53,6 +55,8 @@ words:
         en_gb: Hello, I'm listening.
       - ru: Алло́, э́то рестора́н?
         en_gb: Hello, is this the restaurant?
+        en_alt:
+          - Hello, is that the restaurant?
   "ах=ah":
     cefr_level: A2
     type: excl
@@ -68,6 +72,8 @@ words:
         en_gb: Ah, what a pity!
       - ru: Ах, я совсе́м забы́ла!
         en_gb: Oh, I completely forgot!
+        en_alt:
+          - Ah, I completely forgot!
   "боже=oh God":
     cefr_level: B1
     type: excl
@@ -79,7 +85,7 @@ words:
         - my God
     usage:
       - ru: Бо́же мой, что случи́лось?
-        en_gb: Oh God, what happened?
+        en_gb: My God, what happened?
       - ru: Бо́же, кака́я жара́!
         en_gb: Oh God, what heat!
       - ru: Бо́же, помоги́ нам.
@@ -113,7 +119,7 @@ words:
       - ru: Мы ведь друзья́.
         en_gb: We're friends, after all.
       - ru: Ведь уже́ по́здно.
-        en_gb: It's late, you know.
+        en_gb: It's already late, you know.
   "вон=there":
     cefr_level: A2
     type: particle
@@ -124,7 +130,7 @@ words:
         - look (directing attention)
     usage:
       - ru: Вон тот дом на углу́.
-        en_gb: There's that house on the corner.
+        en_gb: That house over there on the corner.
       - ru: Вон, посмотри́ напра́во.
         en_gb: Over there, look to the right.
       - ru: Вон она́ идёт.
@@ -142,6 +148,8 @@ words:
         en_gb: Good lord, how tired I am!
       - ru: Го́споди, что за шум?
         en_gb: Good lord, what is this noise?
+        en_alt:
+          - Good lord, what's that noise?
       - ru: Го́споди, наконе́ц-то ты до́ма.
         en_gb: Good lord, you're finally home.
   "да=yes":
@@ -193,6 +201,8 @@ words:
     usage:
       - ru: До свида́ния, до за́втра!
         en_gb: Goodbye, see you tomorrow!
+        en_alt:
+          - Goodbye, until tomorrow!
       - ru: До свида́ния, спаси́бо за всё.
         en_gb: Goodbye, thank you for everything.
       - ru: Ну, до свида́ния!
@@ -244,6 +254,8 @@ words:
         en_gb: Why are you silent, then?
       - ru: Я же говори́ла тебе́!
         en_gb: I told you, didn't I!
+        en_alt:
+          - I did tell you!
       - ru: Где же мои́ ключи́?
         en_gb: Where on earth are my keys?
   "зато=but at least":
@@ -261,6 +273,8 @@ words:
         en_gb: Cold, but at least sunny.
       - ru: Ма́ленький, зато́ ую́тный.
         en_gb: Small, but cosy at least.
+        en_alt:
+          - Small, but at least cosy.
   "здравствуй=hello":
     cefr_level: A1
     type: greet
@@ -311,6 +325,8 @@ words:
         en_gb: Excuse me, where is the metro?
       - ru: Извини́те за опозда́ние.
         en_gb: Sorry for being late.
+        en_alt:
+          - Excuse me for being late.
       - ru: Извини́те, я вас не по́нял.
         en_gb: Excuse me, I didn't understand you.
   "итак=so":
@@ -357,6 +373,8 @@ words:
         en_gb: I don't know whether he'll come.
       - ru: Бу́дет ли за́втра дождь?
         en_gb: Will it rain tomorrow?
+        en_alt:
+          - Will there be rain tomorrow?
       - ru: Спроси́, гото́в ли обе́д.
         en_gb: Ask whether lunch is ready.
   "мол=reportedly":
@@ -447,8 +465,12 @@ words:
     usage:
       - ru: Ни сло́ва бо́льше!
         en_gb: Not a single word more!
+        en_alt:
+          - Not another word!
       - ru: У меня́ нет ни рубля́.
         en_gb: I haven't a single rouble.
+        en_alt:
+          - I don't have a single rouble.
       - ru: На не́бе ни о́блачка.
         en_gb: Not a cloud in the sky.
   "ну=well":
@@ -462,6 +484,8 @@ words:
     usage:
       - ru: Ну, что бу́дем де́лать?
         en_gb: Well, what shall we do?
+        en_alt:
+          - Well, what are we going to do?
       - ru: Ну, расскажи́ мне всё.
         en_gb: Well, tell me everything.
       - ru: Ну и пого́да сего́дня!
@@ -503,6 +527,8 @@ words:
         en_gb: Please give me some water.
       - ru: Помоги́те мне, пожа́луйста.
         en_gb: Please help me.
+        en_alt:
+          - Help me, please.
       - ru: Спаси́бо! — Пожа́луйста.
         en_gb: Thank you! — You're welcome.
   "пока=bye":
@@ -518,6 +544,8 @@ words:
         en_gb: Bye! See you tomorrow.
       - ru: Пока́, мне пора́ идти́.
         en_gb: Bye, I have to go.
+        en_alt:
+          - Bye, it's time for me to go.
       - ru: Ну ла́дно, пока́!
         en_gb: All right then, bye!
   "привет=hi":
@@ -546,6 +574,8 @@ words:
         en_gb: Let him decide for himself.
       - ru: Пусть бу́дет так.
         en_gb: Let it be so.
+        en_alt:
+          - So be it.
   "спасибо=thank you":
     cefr_level: A1
     type: polite
@@ -572,8 +602,12 @@ words:
     usage:
       - ru: Он та́ки прие́хал.
         en_gb: He came after all.
+        en_alt:
+          - He arrived after all.
       - ru: Мы та́ки успе́ли на по́езд.
         en_gb: We made the train after all.
+        en_alt:
+          - We caught the train after all.
       - ru: Она́ та́ки была́ права́.
         en_gb: She was right after all.
   "тут=here":
@@ -614,7 +648,7 @@ words:
         - already (emphatic)
     usage:
       - ru: Уж ты́-то зна́ешь!
-        en_gb: You of all people know, indeed!
+        en_gb: You of all people know!
       - ru: Не так уж и тру́дно.
         en_gb: It's not so hard, really.
       - ru: Уж по́здно возвраща́ться.
@@ -658,6 +692,8 @@ words:
         en_gb: Give me at least a minute.
       - ru: Позвони́ мне хоть иногда́.
         en_gb: Call me at least sometimes.
+        en_alt:
+          - Call me at least occasionally.
       - ru: Хоть бы дождь переста́л.
         en_gb: If only the rain would stop.
   "чуть=barely":
@@ -687,5 +723,7 @@ words:
         en_gb: Hey, wait for me!
       - ru: Эй, ты меня́ слы́шишь?
         en_gb: Hey, can you hear me?
+        en_alt:
+          - Hey, do you hear me?
       - ru: Эй, кто там?
         en_gb: Hey, who's there?

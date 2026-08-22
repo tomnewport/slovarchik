@@ -19,13 +19,19 @@ words:
         - whereas
     usage:
       - ru: Я чита́ю, а он пи́шет.
-        en_gb: I am reading, and (whereas) he is writing.
+        en_gb: I am reading, and he is writing.
         en_alt:
+          - I am reading, whereas he is writing.
           - I am reading, and he is writing.
       - ru: Он лю́бит чай, а я ко́фе.
         en_gb: He likes tea, whereas I like coffee.
+        en_alt:
+          - He likes tea, and I like coffee.
+          - He likes tea, but I like coffee.
       - ru: Сего́дня тепло́, а вчера́ бы́ло хо́лодно.
         en_gb: Today it's warm, whereas yesterday it was cold.
+        en_alt:
+          - Today it is warm, but yesterday it was cold.
   "будто=as if":
     cefr_level: B1
     type: sub
@@ -39,6 +45,8 @@ words:
         en_gb: He looks at me as if he doesn't recognise me.
       - ru: Она́ говори́т так, бу́дто всё зна́ет.
         en_gb: She speaks as if she knows everything.
+        en_alt:
+          - She talks as if she knows everything.
       - ru: Ти́хо, бу́дто все усну́ли.
         en_gb: It's quiet, as if everyone has fallen asleep.
   "да=and":
@@ -69,7 +77,9 @@ words:
       - ru: Едва́ мы вы́шли, начался́ дождь.
         en_gb: Hardly had we left when it started to rain.
       - ru: Он едва́ успе́л на по́езд.
-        en_gb: He hardly made it to the train.
+        en_gb: He barely caught the train.
+        en_alt:
+          - He only just made the train.
       - ru: Едва́ слы́шно её го́лос.
         en_gb: Her voice is hardly audible.
   "если=if":
@@ -83,8 +93,12 @@ words:
         en_gb: If it rains, we will stay at home.
       - ru: Е́сли хо́чешь, пойдём вме́сте.
         en_gb: If you want, let's go together.
+        en_alt:
+          - If you want, we will go together.
       - ru: Позвони́ мне, е́сли что́-то случи́тся.
         en_gb: Call me if anything happens.
+        en_alt:
+          - Call me if something happens.
   "и=and":
     cefr_level: A1
     type: coord
@@ -128,6 +142,8 @@ words:
         en_gb: Everything happened as we expected.
       - ru: Он рабо́тает, как настоя́щий ма́стер.
         en_gb: He works like a true master.
+        en_alt:
+          - He works like a real master.
   "когда=when":
     cefr_level: A1
     type: sub
@@ -137,10 +153,16 @@ words:
     usage:
       - ru: Когда́ я приду́, я позвоню́.
         en_gb: When I arrive, I will call.
+        en_alt:
+          - When I come, I will call.
       - ru: Когда́ ты вернёшься, мы поговори́м.
         en_gb: When you come back, we'll talk.
+        en_alt:
+          - When you return, we will talk.
       - ru: Я был ма́леньким, когда́ мы перее́хали.
         en_gb: I was little when we moved.
+        en_alt:
+          - I was small when we moved.
   "либо=or":
     cefr_level: B1
     type: coord
@@ -179,6 +201,8 @@ words:
     usage:
       - ru: Он уста́л, одна́ко продолжа́л рабо́тать.
         en_gb: He was tired; however, he kept working.
+        en_alt:
+          - He was tired; however, he continued to work.
       - ru: Пого́да была́ плоха́я, одна́ко мы пошли́ в лес.
         en_gb: The weather was bad; however, we went to the forest.
       - ru: Зада́ча тру́дная, одна́ко интере́сная.
@@ -194,6 +218,8 @@ words:
     usage:
       - ru: Пока́ ты гото́вишь, я накро́ю на стол.
         en_gb: While you cook, I will lay the table.
+        en_alt:
+          - While you are cooking, I will lay the table.
       - ru: Пока́ идёт дождь, мы побу́дем до́ма.
         en_gb: While it's raining, we'll stay at home.
       - ru: Чита́й, пока́ есть вре́мя.
@@ -213,6 +239,8 @@ words:
         en_gb: Since it's raining, take an umbrella.
       - ru: Поско́льку магази́н закры́т, пойдём за́втра.
         en_gb: Since the shop is closed, we'll go tomorrow.
+        en_alt:
+          - Since the shop is closed, let's go tomorrow.
   "потому что=because":
     cefr_level: A1
     type: sub
@@ -242,6 +270,8 @@ words:
         en_gb: I'm tired, therefore I'll go to bed early.
       - ru: Он зна́ет язы́к, поэ́тому ему́ ле́гче.
         en_gb: He knows the language, therefore it's easier for him.
+        en_alt:
+          - He knows the language, so it is easier for him.
   "прежде=before":
     cefr_level: B1
     type: sub
@@ -251,6 +281,8 @@ words:
     usage:
       - ru: Поду́май, пре́жде чем отве́тить.
         en_gb: Think before you answer.
+        en_alt:
+          - Think before answering.
       - ru: Вы́мой ру́ки, пре́жде чем есть.
         en_gb: Wash your hands before eating.
       - ru: Пре́жде чем уйти́, закро́й окно́.
@@ -281,8 +313,10 @@ words:
     usage:
       - ru: Он молчи́т, сло́вно оби́делся.
         en_gb: He's silent, as if he's offended.
+        en_alt:
+          - He is silent, as if he had taken offence.
       - ru: Снег па́дал, сло́вно пух.
-        en_gb: The snow fell like down.
+        en_gb: The snow was falling like down.
       - ru: Она́ улыба́ется, сло́вно ребёнок.
         en_gb: She smiles like a child.
   "так=so":
@@ -333,8 +367,10 @@ words:
         en_gb: If you're tired, then rest.
       - ru: Не хо́чешь? Тогда́ не на́до.
         en_gb: You don't want to? Then don't.
+        en_alt:
+          - You don't want to? Then there's no need.
       - ru: Зако́нчишь рабо́ту — тогда́ пойдём.
-        en_gb: Finish the work, then we'll go.
+        en_gb: When you finish the work, then we'll go.
   "тоже=also":
     cefr_level: A1
     type: coord
@@ -378,7 +414,7 @@ words:
       - ru: Хотя́ бы́ло хо́лодно, мы пошли́ гуля́ть.
         en_gb: Although it was cold, we went for a walk.
       - ru: Хотя́ он уста́л, он не оста́вил рабо́ту.
-        en_gb: Although he was tired, he didn't leave the work.
+        en_gb: Although he was tired, he did not abandon the work.
       - ru: Я согла́сен, хотя́ есть сомне́ния.
         en_gb: I agree, although there are doubts.
   "чем=than":
@@ -405,6 +441,8 @@ words:
         en_gb: I know that you are right.
       - ru: Он сказа́л, что прие́дет за́втра.
         en_gb: He said that he would come tomorrow.
+        en_alt:
+          - He said that he would arrive tomorrow.
       - ru: Хорошо́, что ты пришёл.
         en_gb: It's good that you came.
   "чтоб=so that":
@@ -433,6 +471,8 @@ words:
     usage:
       - ru: Я учу́сь, что́бы найти́ хоро́шую рабо́ту.
         en_gb: I study in order to find a good job.
+        en_alt:
+          - I am studying in order to find a good job.
       - ru: Я вста́ла ра́но, что́бы успе́ть на по́езд.
         en_gb: I got up early in order to catch the train.
       - ru: Она́ занима́ется, что́бы хорошо́ говори́ть.
