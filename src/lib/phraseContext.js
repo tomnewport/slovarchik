@@ -73,10 +73,16 @@ export const ANALYTIC_FUTURE_FORMS = Object.freeze({
 
 /** Aspect display names and the short usage cue shown on each aspect option. */
 export const ASPECT_LABEL = Object.freeze({ impf: 'imperfective', pf: 'perfective' })
-const ASPECT_HINT = {
+/**
+ * Each aspect said as a *sense* rather than as its name. "Perfective" names the
+ * distinction; it doesn't explain it, and for an identical-gloss pair (уби́ть /
+ * убива́ть) the name is all the learner has. Exported so the correction
+ * messages, the intro card and the facts panel all say the same thing.
+ */
+export const ASPECT_HINT = Object.freeze({
   impf: 'a process, habit or repeated action',
   pf: 'a single completed action or its result',
-}
+})
 
 /**
  * Strip leading/trailing punctuation from a token, keeping inner letters and any
@@ -405,10 +411,11 @@ function nonFiniteSteps(target, word) {
  * `rule` names the grammar rule that explains the contrast.
  */
 export const MOTION_LABEL = Object.freeze({ det: 'determinate', indet: 'indeterminate' })
-const MOTION_HINT = {
+/** The same, for the directionality of a verb of motion. See {@link ASPECT_HINT}. */
+export const MOTION_HINT = Object.freeze({
   det: 'one trip, under way in one direction',
   indet: 'habitual, repeated, or there and back',
-}
+})
 
 const CONTRASTS = Object.freeze({
   aspect: Object.freeze({

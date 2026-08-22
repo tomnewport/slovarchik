@@ -133,15 +133,17 @@ describe('TypeExercise', () => {
   })
 
   it('offers a retry on the first wrong answer, then reveals on the second', async () => {
+    // A misspelling, not a word: the one-retry rule still governs these (#588
+    // only changes what happens when the answer is a real, related word).
     const wrapper = mount(TypeExercise, { props: { exercise } })
-    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('input[lang="ru"]').setValue('квакозябр')
     await wrapper.find('button.check').trigger('click')
     // First wrong attempt → retry hint shown, answer not yet revealed.
     expect(wrapper.find('.retry-hint').exists()).toBe(true)
     expect(wrapper.text()).not.toContain('Answer:')
 
     // Second wrong attempt → answer revealed.
-    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('input[lang="ru"]').setValue('квакозябр')
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.text()).toContain('Answer:')
 
@@ -159,7 +161,9 @@ describe('TypeExercise', () => {
 
   it('records the first miss (not a double success) when a retry corrects a word (#447)', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
-    // Wrong first, then the right answer on the retry — without touching the hint.
+    // Wrong first ("кот" is a real word, so it is diagnosed), then the right
+    // answer on the retry — without touching the hint. Grading is unchanged
+    // either way: the first attempt is the evidence.
     await wrapper.find('input[lang="ru"]').setValue('кот')
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.find('.retry-hint').exists()).toBe(true)
@@ -179,6 +183,103 @@ describe('TypeExercise', () => {
       double: false,
       wordCorrect: false,
     })
+  })
+
+  // ── A wrong answer that is a real, related word (#588) ────────────────────
+  // «сшить» and «шить» are an aspect pair sharing one base gloss, so a rejection
+  // that quotes the gloss tells the learner nothing they weren't already
+  // thinking. These are the regressions that motivated the whole feature.
+  const sew = { ...exercise, targets: ['шить=to sew'], ru: 'шить', en: 'to sew', pos: 'verb', aspect: 'impf' }
+
+  it('diagnoses a real, related word instead of rejecting it', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    await wrapper.find('input[lang="ru"]').setValue('сшить')
+    await wrapper.find('button.check').trigger('click')
+
+    const hint = wrapper.find('.retry-hint')
+    expect(hint.text()).toContain('«сшить»')
+    expect(hint.text()).toContain('a single completed action')
+    expect(hint.classes()).toContain('lexical')
+  })
+
+  it('re-opens the input rather than revealing, however many lexical tries it takes', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    for (const attempt of ['сшить', 'кот', 'дом']) {
+      await wrapper.find('input[lang="ru"]').setValue(attempt)
+      await wrapper.find('button.check').trigger('click')
+      // Every one diagnosed, the answer never given away, the input still open.
+      expect(wrapper.find('.retry-hint').classes(), attempt).toContain('lexical')
+      expect(wrapper.text(), attempt).not.toContain('Answer:')
+      expect(wrapper.find('input[lang="ru"]').exists(), attempt).toBe(true)
+    }
+  })
+
+  it('never spells the answer out while the learner is still trying', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    await wrapper.find('input[lang="ru"]').setValue('сшить')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.retry-hint').text()).not.toMatch(/(^|[^\p{L}])шить([^\p{L}]|$)/u)
+  })
+
+  it('still grades the first attempt, and only the first', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    await wrapper.find('input[lang="ru"]').setValue('сшить')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('input[lang="ru"]').setValue('шить')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.text()).toContain('Correct')
+
+    await wrapper.find('button.next').trigger('click')
+    // Byte-identical to what one wrong attempt then a correction reports today.
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: true,
+      double: false,
+      wordCorrect: false,
+    })
+  })
+
+  it('lets the learner end the loop with Show me the answer', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    expect(wrapper.find('button.reveal').exists()).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('сшить')
+    await wrapper.find('button.check').trigger('click')
+    await wrapper.find('button.reveal').trigger('click')
+
+    expect(wrapper.text()).toContain('Answer:')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toMatchObject({ correct: false, correctedOnRetry: false })
+  })
+
+  it('treats a true synonym gently — right knowledge, wrong slot', async () => {
+    const car = { ...exercise, targets: ['машина=car'], ru: 'маши́на', en: 'car', pos: 'noun' }
+    const wrapper = mount(TypeExercise, { props: { exercise: car } })
+    await wrapper.find('input[lang="ru"]').setValue('автомоби́ль')
+    await wrapper.find('button.check').trigger('click')
+
+    const hint = wrapper.find('.retry-hint')
+    expect(hint.text()).toContain('«автомоби́ль»')
+    // Amber, never the red reserved for a flat rejection.
+    expect(hint.classes()).not.toContain('incorrect')
+  })
+
+  it('unlocks the keyboard hint after a lexical miss, like any other', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    expect(keyboard.allowed).toBe(false)
+    await wrapper.find('input[lang="ru"]').setValue('сшить')
+    await wrapper.find('button.check').trigger('click')
+    expect(keyboard.allowed).toBe(true)
+  })
+
+  it('still shows the error map when the answer is a slip, not a word', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: { ...exercise, ru: 'до́мик', en: 'little house' } } })
+    await wrapper.find('input[lang="ru"]').setValue('домек')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.error-map').exists()).toBe(true)
+    expect(wrapper.find('.retry-hint').classes()).not.toContain('lexical')
   })
 
   it('accepts an alsoRu synonym as correct', async () => {
@@ -337,7 +438,7 @@ describe('TypeExercise', () => {
 
   it('calls a nowhere-near single word "Incorrect"', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
-    await wrapper.find('input[lang="ru"]').setValue('кот')
+    await wrapper.find('input[lang="ru"]').setValue('квакозябр')
     await wrapper.find('button.check').trigger('click')
     const hint = wrapper.find('.retry-hint')
     expect(hint.text()).toContain('Incorrect')

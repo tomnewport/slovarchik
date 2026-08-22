@@ -3,6 +3,15 @@
 // keyboard. Covers spell-word, spell-phrase and dictation (where the prompt is
 // heard, not seen). Hints never penalise — grading only looks at the answer.
 //
+// A wrong answer that is a real, related word is not a failure to be cut off
+// after one retry — it is the moment the distinction is learnable (#588). Such
+// an answer is diagnosed ("«сшить» is the perfective…"), the input re-opens, and
+// the learner may try as often as they like; a **Show me the answer** button is
+// there from the first miss, so they end the loop rather than a counter. An
+// answer that *isn't* a recognisable word is an ordinary spelling slip and
+// behaves exactly as it always has. Grading is untouched either way: only the
+// first attempt is evidence of recall, and every later try teaches.
+//
 // Spelling (#keyboard-hints-word-bank) nudges the learner to spell unaided
 // first: the keyboard hint is withheld on the opening attempt — for phrases
 // and single words alike. If that first try lands close to the answer we mark
@@ -25,7 +34,8 @@ import { normToken } from '../../lib/phraseHint.js'
 import { stripStress } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
-import { hintTokensFor } from '../../stores/hints.js'
+import { hintTokensFor, diagnoseAnswer } from '../../stores/hints.js'
+import { correctionMessage } from '../../lib/confusables.js'
 import { playFeedback } from '../../stores/settings.js'
 import AnnotatedEnglish from '../AnnotatedEnglish.vue'
 import SpeakButton from '../SpeakButton.vue'
@@ -54,6 +64,16 @@ const firstTryWordCorrect = ref(false)
 // On a first wrong answer offer one retry before revealing. Once the learner
 // has retried (or they got it right), this stays true so we don't loop.
 const retried = ref(false)
+// How many answers have been checked. Only the first is evidence of recall; the
+// count also decides when a *spelling* miss has had its one retry.
+const attempts = ref(0)
+// Wrong answers that weren't a recognisable word — the ones the old one-retry
+// rule governs. A diagnosed (lexical) miss never counts here, so it never
+// spends the learner's retry.
+const spellingMisses = ref(0)
+// The diagnosis of the latest lexical miss: {headline, detail, tier}, or null
+// when the answer was an ordinary slip. See lib/confusables.js.
+const correction = ref(null)
 // After a close-but-wrong first phrase attempt, the per-character map of where
 // the learner slipped (shown while they retry). Empty when we don't reveal it.
 const errorCells = ref([])
@@ -131,7 +151,7 @@ function closeEnough(cells) {
 function check() {
   if (checked.value) return
   wasCorrect.value = phraseCorrect(typed.value, gradeTargets.value)
-  if (!retried.value) {
+  if (attempts.value === 0) {
     // Capture the first, unaided attempt's outcome — the only evidence of
     // unaided recall. A phrase can be wrong overall yet the assessed word
     // spelled right (a slip elsewhere); coerce to a clean boolean
@@ -141,8 +161,37 @@ function check() {
     firstTryWordCorrect.value =
       wasCorrect.value || assessedWordCorrect(typed.value, props.exercise.targetTokens) === true
   }
-  if (!wasCorrect.value && !retried.value) {
-    retried.value = true
+  attempts.value += 1
+  if (wasCorrect.value) {
+    resolve()
+    return
+  }
+  retried.value = true
+
+  // Did they write a real word — one the dictionary can name and relate to the
+  // answer? If so this is a confusion, not a slip: say what they wrote and let
+  // them go again, however many attempts it takes.
+  const verdict = diagnoseAnswer(typed.value, {
+    targetKey: (props.exercise.targets ?? [])[0],
+    target: props.exercise.ru,
+  })
+  if (verdict) {
+    correction.value = correctionMessage(verdict)
+    feedback.value = null
+    errorCells.value = []
+    // The second attempt is aided whatever went wrong on the first — a lexical
+    // miss escalates the help like any other, it just doesn't spend the retry.
+    setHintAllowed(true)
+    typed.value = ''
+    // A synonym is a correct piece of knowledge in the wrong slot — not a sound
+    // worth punishing.
+    if (correction.value.tier !== 'synonym') playFeedback(false)
+    return
+  }
+
+  correction.value = null
+  spellingMisses.value += 1
+  if (spellingMisses.value === 1) {
     // Grade *how* the attempt missed so the retry hint can say more than "not
     // quite" (#523).
     feedback.value = phraseFeedback(typed.value, gradeTargets.value)
@@ -160,6 +209,13 @@ function check() {
     playFeedback(false)
     return
   }
+  resolve()
+}
+
+/** End the loop on the learner's terms: reveal the answer, unsolved. */
+function reveal() {
+  if (checked.value) return
+  wasCorrect.value = false
   resolve()
 }
 
@@ -183,6 +239,7 @@ function unplaceChip(chip) {
 // Grade the rearranged chips as the (aided) second attempt.
 function checkOrder() {
   if (checked.value) return
+  attempts.value += 1
   wasCorrect.value = phraseCorrect(placed.value.map((c) => c.text).join(' '), gradeTargets.value)
   resolve()
 }
@@ -204,7 +261,7 @@ function next() {
   // real first-try outcome instead of two first-try successes (#447).
   emit('done', {
     correct: firstTryCorrect.value,
-    correctedOnRetry: retried.value && wasCorrect.value,
+    correctedOnRetry: attempts.value > 1 && wasCorrect.value,
     double: double.value,
     wordCorrect: firstTryWordCorrect.value,
   })
@@ -307,7 +364,15 @@ onBeforeUnmount(() => setHintAllowed(true))
       </ul>
     </div>
 
-    <template v-if="retried && !checked">
+    <!-- The answer was a real, related word: name it and say how it differs,
+         without ever spelling out the word being asked for. -->
+    <p v-if="correction && !checked" class="retry-hint" :class="correction.tier">
+      <strong class="correction-headline">{{ correction.headline }}</strong>
+      <span class="correction-detail">{{ correction.detail }}</span>
+      <span class="retry-again">— try again</span>
+    </p>
+
+    <template v-if="retried && !correction && !checked">
       <p class="retry-hint" :class="feedback?.tier">
         {{ feedback?.message ?? 'Not quite' }}
         <span class="retry-again">— {{ reorderMode ? 'reorder the words' : 'try again' }}</span>
@@ -347,6 +412,10 @@ onBeforeUnmount(() => setHintAllowed(true))
       <button v-else-if="!checked" class="primary check" :disabled="!typed.trim()" @click="check">
         Check
       </button>
+      <!-- The learner ends the retry loop, not a counter (#588). -->
+      <button v-if="!checked && retried" type="button" class="reveal" @click="reveal">
+        Show me the answer
+      </button>
       <button v-else class="primary next" @click="next">Next →</button>
     </div>
   </div>
@@ -384,6 +453,32 @@ onBeforeUnmount(() => setHintAllowed(true))
    rejection. */
 .retry-hint.incorrect {
   color: var(--bad);
+}
+/* A diagnosed answer is a real word, so the correction teaches rather than
+   rejects — amber like the close bands, never red. A synonym is better still:
+   right knowledge, wrong slot. */
+.retry-hint.lexical,
+.retry-hint.synonym {
+  display: grid;
+  gap: 0.15rem;
+  color: var(--gold);
+}
+.retry-hint.synonym {
+  color: var(--ok, var(--gold));
+}
+.correction-headline {
+  font-weight: 600;
+}
+.correction-detail {
+  color: var(--text);
+}
+.reveal {
+  background: none;
+  border: none;
+  color: var(--muted);
+  text-decoration: underline;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 .retry-again {
   color: var(--muted);
