@@ -59,7 +59,7 @@ src/
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, AnnotatedEnglish, …)
+                        #   BatchSearchAdd, WordProgressModal, WordFacts, AnnotatedEnglish, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast)
     inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)

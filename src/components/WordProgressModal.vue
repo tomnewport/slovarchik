@@ -9,11 +9,12 @@ import { computed, ref } from 'vue'
 import { state as vocabState } from '../stores/vocab.js'
 import { wordProgressDetail, leaveForLater, markKnown, unmarkKnown } from '../stores/progress.js'
 import { parseKey } from '../lib/vocabBuild.js'
+import WordFacts from './WordFacts.vue'
 
 const props = defineProps({
   wordKey: { type: String, required: true },
 })
-const emit = defineEmits(['close', 'left'])
+const emit = defineEmits(['close', 'left', 'open-word'])
 
 const DIM_META = {
   identification: { icon: '👁️', name: 'Identification' },
@@ -140,6 +141,11 @@ async function unmarkKnownWord() {
         <div><dt>Attempts</dt><dd>{{ detail.totalAttempts }}</dd></div>
         <div><dt>Last seen</dt><dd>{{ fmtDate(detail.lastAt) }}</dd></div>
       </dl>
+
+      <!-- What there is to say about the word itself (#586) — this modal is
+           already the "everything about this word" surface, so the facts belong
+           beside the mastery figures. Tapping a related word opens its card. -->
+      <WordFacts :word-key="wordKey" @open-word="emit('open-word', $event)" />
 
       <div class="known-control" :class="{ on: detail.known }">
         <template v-if="!detail.known">

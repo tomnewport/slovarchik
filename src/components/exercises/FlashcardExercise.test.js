@@ -7,7 +7,12 @@ vi.mock('../../lib/speech.js', () => ({
   speechSupported: () => true,
   SLOW_RATE: 0.7,
 }))
-vi.mock('../../stores/settings.js', () => ({ playFeedback: vi.fn() }))
+// WordFacts (#586) reads the auto-expand preference from the same store, so the
+// mock has to carry it as well as the sound hook.
+vi.mock('../../stores/settings.js', () => ({
+  playFeedback: vi.fn(),
+  settings: { factsExpanded: false },
+}))
 
 // Recognition is controllable per test: `listenImpl` decides what the mic does.
 let listenImpl = () => ({ stop() {}, abort() {} })
@@ -342,5 +347,22 @@ describe('FlashcardExercise diagnoses a placeable wrong guess', () => {
     expect(wrapper.find('.correction').exists()).toBe(true)
     await answerRight(wrapper, 'to get dressed')
     expect(wrapper.find('.correction').exists()).toBe(false)
+  })
+})
+
+describe('the facts panel never precedes the answer (#586)', () => {
+  it('appears only once the card is revealed', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('button.pass').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
+  })
+
+  it('is gone again on the next card', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    await wrapper.find('button.pass').trigger('click')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
   })
 })

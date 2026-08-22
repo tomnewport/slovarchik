@@ -35,6 +35,7 @@ import { playFeedback } from '../../stores/settings.js'
 import { diagnoseEnglishAnswer } from '../../stores/hints.js'
 import { correctionMessage } from '../../lib/confusables.js'
 import SpeakButton from '../SpeakButton.vue'
+import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -304,6 +305,9 @@ onBeforeUnmount(() => {
       <span class="reveal-en">{{ answer }}</span>
       <span class="reveal-ru"><span lang="ru">{{ card.ru }}</span><SpeakButton :text="card.ru" /></span>
     </div>
+    <!-- About this word (#586) — only once the answer is on screen, never while
+         the learner is still producing it. Collapsed unless they asked for it. -->
+    <WordFacts v-if="revealed && card?.key" :key="card.key" :word-key="card.key" />
 
     <!-- Answer by voice instead of typing. -->
     <div v-if="canSpeak && !revealed" class="speak-row">

@@ -12,6 +12,7 @@ import { atRisk, lost, state as progressState, stateOf } from '../stores/progres
 import { lastAttemptAt } from '../lib/progression.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
+import WordFacts from '../components/WordFacts.vue'
 
 // How long the celebration plays before auto-advancing to the next question.
 const CELEBRATE_MS = 1000
@@ -479,6 +480,10 @@ onUnmounted(() => {
           <span v-for="frame in government" :key="frame" class="frame">{{ frame }}</span>
         </div>
       </div>
+      <!-- About this word (#586): its build, root, origin and family, collapsed
+           behind a disclosure. Only here, in the answered block — before the
+           answer a `build` fact would spell the word out. -->
+      <WordFacts v-if="current?.id" :key="current.id" :word-key="current.id" />
       <!-- Correct answers advance on their own; wrong answers and heteronym /
            pair / government reminders wait for the user. -->
       <div v-if="!wasCorrect || holdAfterAnswer" class="row">

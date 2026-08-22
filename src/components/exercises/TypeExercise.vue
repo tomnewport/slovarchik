@@ -38,6 +38,7 @@ import { hintTokensFor, diagnoseAnswer } from '../../stores/hints.js'
 import { correctionMessage } from '../../lib/confusables.js'
 import { playFeedback } from '../../stores/settings.js'
 import AnnotatedEnglish from '../AnnotatedEnglish.vue'
+import WordFacts from '../WordFacts.vue'
 import SpeakButton from '../SpeakButton.vue'
 import CelebrationBurst from '../CelebrationBurst.vue'
 
@@ -106,6 +107,10 @@ watch(
 const double = computed(() => firstTryCorrect.value && !hintUsed.value)
 
 const answer = computed(() => typingSequence(props.exercise.ru))
+
+// The word whose facts the resolved answer may show. A phrase has no single
+// word to be about, so it gets none.
+const factsKey = computed(() => (isPhrase.value ? null : ((props.exercise.targets ?? [])[0] ?? null)))
 
 // Every accepted Russian rendering (the target plus any synonyms) — the answer
 // is graded, and its feedback measured, against whichever one it's closest to.
@@ -397,6 +402,10 @@ onBeforeUnmount(() => setHintAllowed(true))
         <SpeakButton :text="exercise.ru" />
       </div>
       <p v-if="exercise.audio && exercise.en" class="translation-hint">{{ exercise.en }}</p>
+      <!-- About this word (#586) — only once the answer is resolved. A `build`
+           fact spells the word out, so showing it any earlier would hand over
+           the answer. Collapsed unless the learner asked for it. -->
+      <WordFacts v-if="factsKey" :word-key="factsKey" />
     </div>
 
     <div class="row check-row">

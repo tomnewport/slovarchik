@@ -15,6 +15,7 @@ import {
   setSuccessSound,
   setErrorSound,
   setCelebrationSound,
+  setFactsExpanded,
   OFF,
 } from '../stores/settings.js'
 import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
@@ -258,6 +259,24 @@ onMounted(async () => {
       </template>
     </div>
 
+    <!-- Word facts (#586): whether the "About this word" panel starts open. -->
+    <div class="card">
+      <h2>Word facts</h2>
+      <p class="muted">
+        Where a word has a breakdown, a root or relatives worth showing, an
+        <strong>About this word</strong> panel appears once an answer is resolved.
+      </p>
+      <label class="facts-toggle-row">
+        <input
+          type="checkbox"
+          class="facts-expanded"
+          :checked="settings.factsExpanded"
+          @change="setFactsExpanded($event.target.checked)"
+        />
+        Open it automatically instead of leaving it collapsed
+      </label>
+    </div>
+
     <!-- Export -->
     <div class="card">
       <h2>Export</h2>
@@ -318,6 +337,12 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.facts-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
 .warn strong {
   color: var(--text);
 }
