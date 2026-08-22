@@ -11,6 +11,21 @@ meta:
     resp: response
     particle: particle
 words:
+  "авось=with luck":
+    cefr_level: B2
+    type: particle
+    accented: аво́сь
+    en_gb:
+      standard: with luck (hoping it somehow turns out fine, with no plan behind it)
+      alt:
+        - hopefully (trusting to chance)
+    usage:
+      - ru: Аво́сь всё обойдётся.
+        en_gb: With luck it will all work out.
+      - ru: Он всё де́лает на аво́сь.
+        en_gb: He does everything on the off chance.
+      - ru: Аво́сь пого́да за́втра бу́дет лу́чше.
+        en_gb: With luck the weather will be better tomorrow.
   "ага=yes":
     cefr_level: A1
     type: resp
@@ -135,6 +150,22 @@ words:
         en_gb: Over there, look to the right.
       - ru: Вон она́ идёт.
         en_gb: There she comes.
+  "всё-таки=all the same":
+    cefr_level: B1
+    type: particle
+    accented: всё-таки
+    en_gb:
+      standard: all the same (in spite of what was just said)
+      alt:
+        - nevertheless
+        - still (even so)
+    usage:
+      - ru: Бы́ло хо́лодно, но мы всё-таки пошли́ гуля́ть.
+        en_gb: It was cold, but we went for a walk all the same.
+      - ru: Ты всё-таки был прав.
+        en_gb: You were right after all.
+      - ru: Э́то всё-таки сли́шком до́рого.
+        en_gb: All the same, that is too expensive.
   "господи=good lord":
     cefr_level: B1
     type: excl
@@ -192,6 +223,19 @@ words:
         en_gb: She, supposedly, knew nothing.
       - ru: Они́, де, уже́ ушли́.
         en_gb: They, reportedly, have already left.
+  "дескать=supposedly":
+    cefr_level: C1
+    type: particle
+    accented: де́скать
+    en_gb:
+      standard: supposedly (introducing words quoted from someone else, often with doubt)
+      alt:
+        - so they say
+    usage:
+      - ru: Он сказа́л, де́скать, у него́ не́ было вре́мени.
+        en_gb: He said that supposedly he had no time.
+      - ru: Она́ отвеча́ет, де́скать, э́то не её де́ло.
+        en_gb: She answers that supposedly it is none of her business.
   "до свидания=goodbye":
     cefr_level: A1
     type: greet
@@ -345,6 +389,19 @@ words:
         en_gb: So, everything is ready.
       - ru: Ита́к, каки́е у нас пла́ны?
         en_gb: So, what are our plans?
+  "ишь=look at that":
+    cefr_level: C1
+    type: excl
+    accented: ишь
+    en_gb:
+      standard: look at that (surprise or indignation at someone else)
+      alt:
+        - just look
+    usage:
+      - ru: Ишь, како́й у́мный!
+        en_gb: Look at that, what a clever one!
+      - ru: Ишь, как бы́стро он бе́гает!
+        en_gb: Just look how fast he runs!
   "конечно=of course":
     cefr_level: A1
     type: resp
@@ -454,6 +511,17 @@ words:
         en_gb: Is this really true?
       - ru: Неуже́ли ты не поняла́?
         en_gb: Did you really not understand?
+  "неужто=surely not":
+    cefr_level: C1
+    type: particle
+    accented: неу́жто
+    en_gb:
+      standard: surely not (colloquial and old-fashioned form of неужели)
+    usage:
+      - ru: Неу́жто ты забы́ла об э́том?
+        en_gb: Surely you haven't forgotten about it?
+      - ru: Неу́жто э́то пра́вда?
+        en_gb: Surely that isn't true?
   "ни=not a single":
     cefr_level: B1
     type: particle
@@ -516,6 +584,34 @@ words:
         en_gb: Oh, this rain again.
       - ru: Ох, тяжёлый был день.
         en_gb: Oh, it was a hard day.
+  "поди=I reckon":
+    cefr_level: C1
+    type: particle
+    accented: поди́
+    en_gb:
+      standard: I reckon (colloquial guess about what is probably so)
+      alt:
+        - I dare say
+    usage:
+      - ru: Поди́, они́ уже́ уе́хали.
+        en_gb: They have already left, I reckon.
+      - ru: Ты, поди́, всё уже́ зна́ешь.
+        en_gb: You already know everything, I reckon.
+  "пожалуй=perhaps":
+    cefr_level: B1
+    type: particle
+    accented: пожа́луй
+    en_gb:
+      standard: perhaps (the speaker making up their mind, I think on reflection)
+      alt:
+        - I think (having thought about it)
+    usage:
+      - ru: Я, пожа́луй, оста́нусь до́ма.
+        en_gb: I think I'll stay at home.
+      - ru: Э́то, пожа́луй, лу́чший вариа́нт.
+        en_gb: That is perhaps the best option.
+      - ru: Пожа́луй, э́то са́мый просто́й спо́соб.
+        en_gb: Perhaps that is the simplest way.
   "пожалуйста=please":
     cefr_level: A1
     type: polite
@@ -696,6 +792,17 @@ words:
           - Call me at least occasionally.
       - ru: Хоть бы дождь переста́л.
         en_gb: If only the rain would stop.
+  "чай=I suppose":
+    cefr_level: C1
+    type: particle
+    accented: чай
+    en_gb:
+      standard: I suppose (folksy particle, nothing to do with the drink)
+    usage:
+      - ru: Ты, чай, уже́ всё поняла́.
+        en_gb: You have already understood everything, I suppose.
+      - ru: Он, чай, уже́ до́ма.
+        en_gb: He is at home already, I suppose.
   "чуть=barely":
     cefr_level: A2
     type: particle
