@@ -13,6 +13,11 @@
 // An "exercise" here is an opaque descriptor that must carry at least:
 //   { id: string|number, dimension: string, practiceIndex: number }
 // (see exerciseBuild.js for the concrete shape).
+//
+// A descriptor may also be **non-graded** (`graded: false`) — an intro card
+// (#587) is a step the learner walks through, not something they can get wrong.
+// Those move on via `advance()` rather than `submit()`, and never enter
+// `firstAttempt`, so they cannot dilute the session's accuracy.
 
 /** Create the initial runner state for a list of planned exercises. */
 export function initRunner(exercises = []) {
@@ -24,6 +29,10 @@ export function initRunner(exercises = []) {
     round: 1, // 1 = planned pass; >1 = repeat-mistakes rounds
     wrong: [], // exercises answered wrong this round (next round's queue)
     firstAttempt: {}, // exercise id → was the first attempt correct
+    // Non-graded steps already walked past. Kept apart from `firstAttempt` so
+    // the summary can't see them, but the progress bar can (they are real steps
+    // and a cell that never fills would look stuck).
+    visited: [],
     log: [], // every submission: { id, correct, round }
     skipped: [], // dimensions the learner chose to skip
     phase: plan.length ? 'exercise' : 'summary',
@@ -65,6 +74,22 @@ export function submit(s, correct, { requeue = true } = {}) {
   if (!(ex.id in s.firstAttempt)) s.firstAttempt[ex.id] = !!correct
   s.log.push({ id: ex.id, correct: !!correct, round: s.round })
   if (!correct && requeue) s.wrong.push(ex)
+  s.pos++
+  if (s.pos >= s.queue.length) advanceRound(s)
+  return s
+}
+
+/**
+ * Step past the current exercise without logging a result or re-queueing it —
+ * the way through the machine for a non-graded step (an intro card, #587).
+ * Nothing is written to `firstAttempt`, so `runnerSummary()` percentages are
+ * exactly what they would have been without the card.
+ * @returns {object} the same (mutated) state
+ */
+export function advance(s) {
+  const ex = currentExercise(s)
+  if (!ex) return s
+  if (!s.visited.includes(ex.id)) s.visited.push(ex.id)
   s.pos++
   if (s.pos >= s.queue.length) advanceRound(s)
   return s
@@ -162,7 +187,8 @@ export function practiceSegments(s) {
     if (!byPractice.has(pi)) byPractice.set(pi, [])
     byPractice.get(pi).push({
       id: ex.id,
-      done: ex.id in s.firstAttempt,
+      // A walked-past non-graded step is done, but never right or wrong.
+      done: ex.id in s.firstAttempt || s.visited.includes(ex.id),
       correct: s.firstAttempt[ex.id] ?? null,
     })
   }

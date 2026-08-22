@@ -16,6 +16,7 @@ import {
   setErrorSound,
   setCelebrationSound,
   setFactsExpanded,
+  setShowIntroCards,
   OFF,
 } from '../stores/settings.js'
 import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
@@ -274,6 +275,15 @@ onMounted(async () => {
           @change="setFactsExpanded($event.target.checked)"
         />
         Open it automatically instead of leaving it collapsed
+      </label>
+      <label class="facts-toggle-row">
+        <input
+          type="checkbox"
+          class="show-intros"
+          :checked="settings.showIntroCards"
+          @change="setShowIntroCards($event.target.checked)"
+        />
+        Introduce a brand-new word before its first exercise
       </label>
     </div>
 

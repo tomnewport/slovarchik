@@ -7,11 +7,12 @@ import { useRoute, useRouter } from 'vue-router'
 
 import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
-import { loadSettings, playCelebration } from '../stores/settings.js'
+import { loadSettings, playCelebration, settings } from '../stores/settings.js'
 import { warmAudio } from '../lib/feedbackSound.js'
 import { STATES } from '../lib/progression.js'
 import {
   buildExercises,
+  spliceIntros,
   makeVisualReplacement,
   makeReplacementPicker,
 } from '../lib/exerciseBuild.js'
@@ -26,6 +27,7 @@ import {
   initRunner,
   currentExercise,
   submit,
+  advance,
   skipDimension,
   startExtraRound,
   runnerSummary,
@@ -40,6 +42,7 @@ import SpeakExercise from '../components/exercises/SpeakExercise.vue'
 import InflectExercise from '../components/exercises/InflectExercise.vue'
 import PhraseFixExercise from '../components/exercises/PhraseFixExercise.vue'
 import VerbContrastExercise from '../components/exercises/VerbContrastExercise.vue'
+import IntroCard from '../components/exercises/IntroCard.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import AchievementBadge from '../components/AchievementBadge.vue'
 import ReportButton from '../components/ReportButton.vue'
@@ -53,6 +56,7 @@ const COMPONENTS = {
   inflect: InflectExercise,
   'phrase-fix': PhraseFixExercise,
   'verb-contrast': VerbContrastExercise,
+  intro: IntroCard,
 }
 
 const route = useRoute()
@@ -136,13 +140,24 @@ async function setup() {
   vocabById = new Map(shapeVocab(words).map((v) => [v.id, v]))
   sessionPhrases = phrases
 
-  const exercises = buildExercises(session, {
+  let exercises = buildExercises(session, {
     words,
     phrases,
     encounterCount: progress.encounterCount,
     contextPhrases: vocabState.contextPhrases,
     rules: vocabState.rules,
   })
+  // Introduce a never-met word before the first exercise that tests it (#587),
+  // so its first appearance isn't a guaranteed miss. Current-batch words only —
+  // a top-up word drawn in to fill a thin pool shouldn't stop the lesson.
+  if (settings.showIntroCards) {
+    exercises = spliceIntros(exercises, {
+      needsIntro: (key) => progress.encounterCount(key) === 0 && !progress.wasIntroduced(key),
+      // `pools.current` is the committed batch — the words this lesson is
+      // actually for. At-risk and due top-ups are not introduced.
+      batchKeys: session.pools?.current ?? null,
+    })
+  }
   for (const ex of exercises) {
     for (const key of ex.targets) {
       if (!startStates.has(key)) startStates.set(key, progress.stateOf(key))
@@ -222,12 +237,38 @@ async function finalizeIfDone() {
   await progress.acknowledgeAchievements()
 }
 
+/**
+ * An intro card is finished (#587). Nothing is graded: step past it, having
+ * recorded that the word has now been introduced so the card doesn't come back
+ * in a later session even if this one is abandoned here.
+ */
+async function onIntroDone({ known = false } = {}) {
+  warmAudio()
+  const ex = current.value
+  if (!ex) return
+  const key = (ex.targets ?? [])[0]
+  if (key) {
+    await progress.markIntroduced(key)
+    // "I know this already" — the introduction is the natural moment to say so,
+    // and it spares the learner drilling a word they brought with them.
+    if (known) await progress.markKnown(key)
+  }
+  advance(runner)
+  injectFlashcardRepeat()
+  await finalizeIfDone()
+}
+
 async function onDone(result) {
   // Unlock/resume the AudioContext while still inside the user-gesture callback,
   // before any awaits. This ensures the celebration sound can fire later (#214).
   warmAudio()
   const ex = current.value
   if (!ex) return
+  // A non-graded step (the intro card) never reaches the grading path.
+  if (ex.graded === false) {
+    await onIntroDone(result ?? {})
+    return
+  }
   // One-off speaking skip: recognition is misbehaving on this word right now.
   // Advance past just this exercise without recording an attempt — so it isn't
   // marked wrong or re-queued, and nothing is waived permanently. The word stays
@@ -455,6 +496,7 @@ function confirmClose() {
         :key="current.id + ':' + runner.log.length"
         :exercise="current"
         @done="onDone"
+        @known="onIntroDone({ known: true })"
         @dispute="onDispute"
       />
 

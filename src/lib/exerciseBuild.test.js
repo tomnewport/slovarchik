@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildExercises, makeVisualReplacement, makeReplacementPicker, buildCombinedFlashcard, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
+import { buildExercises, spliceIntros, MAX_INTROS_PER_SESSION, makeVisualReplacement, makeReplacementPicker, buildCombinedFlashcard, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
 import { CONTRAST_DRILL_ITEMS, CONTRAST_DRILL_MIN_ITEMS } from './phraseContext.js'
 import { shapePhrases, shapeVocab } from './vocabBuild.js'
 import { buildParadigm } from './paradigm.js'
@@ -649,5 +649,105 @@ describe('buildCombinedFlashcard (#472)', () => {
   it('returns null when fewer than two words resolve', () => {
     expect(buildCombinedFlashcard({ wrongKeys: ['w0=m0'], topUpKeys: [], vocabById })).toBe(null)
     expect(buildCombinedFlashcard({ wrongKeys: ['nope=x'], topUpKeys: [], vocabById })).toBe(null)
+  })
+})
+
+// ── Intro cards (#587) ──────────────────────────────────────────────────────
+describe('spliceIntros', () => {
+  const ex = (id, targets, extra = {}) => ({
+    id,
+    kind: 'type',
+    dimension: 'usage',
+    practiceIndex: 0,
+    targets,
+    ...extra,
+  })
+  const unseen = (...keys) => {
+    const set = new Set(keys)
+    return (key) => set.has(key)
+  }
+
+  it('introduces a word immediately before the first exercise that tests it', () => {
+    const list = [ex('a', ['дом=house']), ex('b', ['кот=cat'])]
+    const out = spliceIntros(list, { needsIntro: unseen('кот=cat') })
+    expect(out.map((e) => e.kind)).toEqual(['type', 'intro', 'type'])
+    expect(out[1].targets).toEqual(['кот=cat'])
+    expect(out[2].id).toBe('b')
+  })
+
+  it('marks the card non-graded and borrows the exercise’s practice index', () => {
+    const list = [ex('a', ['кот=cat'], { practiceIndex: 3, level: 'learning' })]
+    const [intro] = spliceIntros(list, { needsIntro: unseen('кот=cat') })
+    expect(intro).toMatchObject({
+      kind: 'intro',
+      graded: false,
+      practiceIndex: 3,
+      dimension: 'usage',
+      level: 'learning',
+    })
+  })
+
+  it('introduces a word once, however many exercises test it', () => {
+    const list = [ex('a', ['кот=cat']), ex('b', ['дом=house']), ex('c', ['кот=cat'])]
+    const out = spliceIntros(list, { needsIntro: unseen('кот=cat') })
+    expect(out.filter((e) => e.kind === 'intro')).toHaveLength(1)
+  })
+
+  it('never runs two cards back to back', () => {
+    const list = [ex('a', ['кот=cat']), ex('b', ['дом=house'])]
+    const out = spliceIntros(list, { needsIntro: unseen('кот=cat', 'дом=house') })
+    const kinds = out.map((e) => e.kind)
+    for (let i = 1; i < kinds.length; i++) {
+      expect(kinds[i] === 'intro' && kinds[i - 1] === 'intro').toBe(false)
+    }
+  })
+
+  it('introduces at most one word per exercise — a full board is not a queue of cards', () => {
+    // The case that motivated the rule: a twelve-card flashcard board of
+    // brand-new words must not become twelve introductions.
+    const board = ex('board', ['a=1', 'b=2', 'c=3', 'd=4'], { kind: 'match' })
+    const out = spliceIntros([board], { needsIntro: () => true })
+    expect(out.filter((e) => e.kind === 'intro')).toHaveLength(1)
+  })
+
+  it('caps the session', () => {
+    const list = Array.from({ length: 20 }, (_, i) => ex(`e${i}`, [`w${i}=x`]))
+    const out = spliceIntros(list, { needsIntro: () => true })
+    expect(out.filter((e) => e.kind === 'intro')).toHaveLength(MAX_INTROS_PER_SESSION)
+  })
+
+  it('honours a lower cap, and builds nothing at zero', () => {
+    const list = Array.from({ length: 6 }, (_, i) => ex(`e${i}`, [`w${i}=x`]))
+    expect(spliceIntros(list, { needsIntro: () => true, max: 2 }).filter((e) => e.kind === 'intro'))
+      .toHaveLength(2)
+    expect(spliceIntros(list, { needsIntro: () => true, max: 0 })).toEqual(list)
+  })
+
+  it('introduces only current-batch words — a top-up shouldn’t stop the lesson', () => {
+    const list = [ex('a', ['топ=topup']), ex('b', ['кот=cat'])]
+    const out = spliceIntros(list, {
+      needsIntro: () => true,
+      batchKeys: ['кот=cat'],
+    })
+    expect(out.filter((e) => e.kind === 'intro').map((e) => e.targets[0])).toEqual(['кот=cat'])
+  })
+
+  it('leaves the list untouched when every word has been met', () => {
+    const list = [ex('a', ['дом=house']), ex('b', ['кот=cat'])]
+    expect(spliceIntros(list, { needsIntro: () => false })).toEqual(list)
+  })
+
+  it('leaves the list untouched without a predicate — the setting turned off', () => {
+    const list = [ex('a', ['дом=house'])]
+    expect(spliceIntros(list, {})).toEqual(list)
+    expect(spliceIntros(list)).toEqual(list)
+  })
+
+  it('gives every card a distinct id', () => {
+    const list = Array.from({ length: 4 }, (_, i) => ex(`e${i}`, [`w${i}=x`]))
+    const ids = spliceIntros(list, { needsIntro: () => true })
+      .filter((e) => e.kind === 'intro')
+      .map((e) => e.id)
+    expect(new Set(ids).size).toBe(ids.length)
   })
 })

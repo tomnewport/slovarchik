@@ -9,6 +9,7 @@ import {
   isRepeating,
   remainingInRound,
   practiceSegments,
+  advance,
   runnerSummary,
 } from './sessionRunner.js'
 
@@ -198,5 +199,77 @@ describe('skipDimension', () => {
     ])
     expect(s.phase).toBe('exercise')
     expect(s.queue.map((e) => e.id)).toEqual(['m-0', 'm-1'])
+  })
+})
+
+// ── Non-graded steps (#587) ─────────────────────────────────────────────────
+describe('advance (a step the learner cannot get wrong)', () => {
+  const card = { id: 'i1', kind: 'intro', graded: false, dimension: 'usage', practiceIndex: 0 }
+  const ex = (id) => ({ id, dimension: 'usage', practiceIndex: 0 })
+
+  it('steps past without logging anything', () => {
+    const s = initRunner([card, ex('a')])
+    advance(s)
+    expect(s.log).toEqual([])
+    expect(s.firstAttempt).toEqual({})
+    expect(currentExercise(s).id).toBe('a')
+  })
+
+  it('never re-queues, however the session goes', () => {
+    const s = initRunner([card, ex('a')])
+    advance(s)
+    submit(s, true)
+    expect(s.phase).toBe('summary')
+  })
+
+  it('leaves the accuracy figures exactly as they would have been', () => {
+    const withCard = initRunner([card, ex('a'), ex('b')])
+    advance(withCard)
+    submit(withCard, true)
+    submit(withCard, false)
+
+    const without = initRunner([ex('a'), ex('b')])
+    submit(without, true)
+    submit(without, false)
+
+    expect(runnerSummary(withCard)).toEqual(runnerSummary(without))
+    expect(runnerSummary(withCard).total).toBe(2)
+  })
+
+  it('still counts as a planned step, so the progress bar moves', () => {
+    const s = initRunner([card, ex('a')])
+    expect(plannedTotal(s)).toBe(2)
+    advance(s)
+    expect(firstPassProgress(s)).toBeCloseTo(0.5)
+  })
+
+  it('fills its progress cell — done, but neither right nor wrong', () => {
+    const s = initRunner([card, ex('a')])
+    advance(s)
+    const cells = practiceSegments(s)[0].exercises
+    expect(cells[0]).toEqual({ id: 'i1', done: true, correct: null })
+    expect(cells[1].done).toBe(false)
+  })
+
+  it('reaches the summary when the session is nothing but cards', () => {
+    const s = initRunner([card, { ...card, id: 'i2' }])
+    advance(s)
+    advance(s)
+    expect(s.phase).toBe('summary')
+    expect(runnerSummary(s)).toEqual({ total: 0, correct: 0, percent: 0 })
+  })
+
+  it('is a no-op at the summary', () => {
+    const s = initRunner([])
+    expect(advance(s)).toBe(s)
+    expect(s.phase).toBe('summary')
+  })
+
+  it('does not double-count a card walked past twice', () => {
+    const s = initRunner([card, ex('a')])
+    advance(s)
+    s.pos = 0 // contrive a revisit
+    advance(s)
+    expect(s.visited).toEqual(['i1'])
   })
 })

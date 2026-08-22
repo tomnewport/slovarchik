@@ -305,6 +305,11 @@ function ensureRecord(key) {
       schedule: {},
       /** Lifetime aggregates (#314): counters survive the event-window cap. */
       agg: { firstSeenAt: null, lastSeenAt: null, dims: {} },
+      // When the learner was shown this word's intro card (#587). Deliberately
+      // separate from `agg.firstSeenAt`, which only moves on a real attempt:
+      // someone shown the card who then abandons the session *has* been
+      // introduced, and shouldn't meet the same card again next time.
+      introducedAt: null,
     }
   }
   return state.records[key]
@@ -453,6 +458,26 @@ export async function markKnown(key) {
 }
 
 /**
+ * Record that the learner has been shown this word's intro card (#587). Writes
+ * nothing else: being introduced is not an attempt, so the word's state,
+ * schedule and aggregates are all untouched.
+ * @returns {number} the timestamp stored (the existing one if already set)
+ */
+export async function markIntroduced(key) {
+  if (!key) return null
+  const rec = ensureRecord(key)
+  if (rec.introducedAt) return rec.introducedAt
+  rec.introducedAt = Date.now()
+  await persist(rec)
+  return rec.introducedAt
+}
+
+/** Has this word's intro card already been shown? */
+export function wasIntroduced(key) {
+  return !!state.records[key]?.introducedAt
+}
+
+/**
  * Clear a word's "known" flag, returning it to the standard criteria. Its
  * recorded attempts are untouched, so it re-derives its state under the full
  * thresholds (and may drop back below learned until it earns the extra reps).
@@ -548,6 +573,7 @@ function persistedShape(rec) {
     confirmFailedAt: rec.confirmFailedAt ?? null,
     schedule: rec.schedule ?? {},
     agg: rec.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
+    introducedAt: rec.introducedAt ?? null,
   }
 }
 
@@ -792,6 +818,7 @@ export function wordProgressDetail(key) {
     peak: STATES[rec?.peak ?? 0],
     learnedAt: rec?.learnedAt ?? null,
     masteredAt: rec?.masteredAt ?? null,
+    introducedAt: rec?.introducedAt ?? null,
     totalAttempts: evs.length,
     lastAt: lastAttemptAt(evs),
     levels,
@@ -835,6 +862,7 @@ export async function loadProgress() {
       confirmFailedAt: r.confirmFailedAt ?? null,
       schedule: r.schedule ?? {},
       agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
+      introducedAt: r.introducedAt ?? null,
     }
   }
   // Backfill first-learned / first-mastered timestamps for any record that
@@ -1031,6 +1059,7 @@ export async function importData(data) {
       confirmFailedAt: r.confirmFailedAt ?? null,
       schedule: r.schedule ?? {},
       agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
+      introducedAt: r.introducedAt ?? null,
     }
     // Backups exported before the mastery criteria tightened (v1) carry peaks
     // earned under the old single-answer rule — re-check them (#313).

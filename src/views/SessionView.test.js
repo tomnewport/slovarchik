@@ -45,7 +45,18 @@ beforeEach(async () => {
   mockExercises.value = defaultExercises
 })
 
+// A never-met word is now introduced before its first exercise (#587). These
+// tests are about the grading flow, so step past any card in the way.
+async function passIntro(wrapper) {
+  while (wrapper.find('button.got-it').exists()) {
+    await wrapper.find('button.got-it').trigger('click')
+    await flushPromises()
+    await flushPromises()
+  }
+}
+
 async function answer(wrapper, text) {
+  await passIntro(wrapper)
   await wrapper.find('input[lang="ru"]').setValue(text)
   await wrapper.find('button.check').trigger('click')
   // If the first wrong attempt shows a retry hint instead of revealing the

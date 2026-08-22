@@ -20,6 +20,7 @@ import {
   playFeedback,
   playCelebration,
   setFactsExpanded,
+  setShowIntroCards,
   OFF,
 } from './settings.js'
 
@@ -30,6 +31,7 @@ beforeEach(() => {
   settings.successSound = SUCCESS_SOUNDS[0].id
   settings.errorSound = NEUTRAL_SOUNDS[0].id
   settings.factsExpanded = false
+  settings.showIntroCards = true
   settings.celebrationSound = CELEBRATION_SOUNDS[0].id
   settings.loaded = false
   playSound.mockClear()
@@ -128,5 +130,32 @@ describe('the word-facts preference (#586)', () => {
     settings.loaded = false
     await loadSettings()
     expect(settings.factsExpanded).toBe(false)
+  })
+})
+
+describe('the intro-card preference (#587)', () => {
+  it('is on by default — a cold first test is a guaranteed miss', () => {
+    expect(settings.showIntroCards).toBe(true)
+  })
+
+  it('persists being turned off, and reloads that way', async () => {
+    await setShowIntroCards(false)
+    expect(settings.showIntroCards).toBe(false)
+
+    settings.showIntroCards = true
+    settings.loaded = false
+    await loadSettings()
+    expect(settings.showIntroCards).toBe(false)
+  })
+
+  it('shares a key with the facts preference without clobbering it', async () => {
+    await setFactsExpanded(true)
+    await setShowIntroCards(false)
+    settings.loaded = false
+    settings.factsExpanded = false
+    settings.showIntroCards = true
+    await loadSettings()
+    expect(settings.factsExpanded).toBe(true)
+    expect(settings.showIntroCards).toBe(false)
   })
 })

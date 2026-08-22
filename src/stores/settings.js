@@ -24,6 +24,10 @@ export const settings = reactive({
   // collapsed. Facts are optional content, never an interruption, so the
   // default is off — a learner who wants them every time opts in.
   factsExpanded: false,
+  // Introduce a never-seen word with a card before its first exercise (#587).
+  // On by default: a cold first test is a guaranteed miss, and the point of the
+  // card is that the learner meets the word before being asked for it.
+  showIntroCards: true,
   loaded: false,
 })
 
@@ -48,6 +52,7 @@ export async function loadSettings() {
   if (valid('celebration', stored.celebrationSound)) settings.celebrationSound = stored.celebrationSound
   const facts = (await idb.getMeta(FACTS_KEY)) ?? {}
   if (typeof facts.factsExpanded === 'boolean') settings.factsExpanded = facts.factsExpanded
+  if (typeof facts.showIntroCards === 'boolean') settings.showIntroCards = facts.showIntroCards
   settings.loaded = true
   return settings
 }
@@ -108,5 +113,21 @@ export function playCelebration() {
  */
 export async function setFactsExpanded(on) {
   settings.factsExpanded = !!on
-  await idb.setMeta(FACTS_KEY, { factsExpanded: settings.factsExpanded })
+  await persistFacts()
+}
+
+/**
+ * Turn the intro cards off (#587). With them off no intro step is built at all,
+ * restoring exactly the pre-#587 flow.
+ */
+export async function setShowIntroCards(on) {
+  settings.showIntroCards = !!on
+  await persistFacts()
+}
+
+function persistFacts() {
+  return idb.setMeta(FACTS_KEY, {
+    factsExpanded: settings.factsExpanded,
+    showIntroCards: settings.showIntroCards,
+  })
 }
