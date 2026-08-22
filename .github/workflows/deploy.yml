@@ -27,7 +27,7 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Build the exact commit CI validated (workflow_run reports it via
           # head_sha); fall back to the default ref for manual dispatch.
