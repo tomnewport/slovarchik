@@ -80,10 +80,11 @@ src/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
+                        #   wordFacts  — a word's authored facts (build/root/origin/mnemonic) and its related words, derived + authored
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
-                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt  — corpus data-integrity oracles (CI guards on the vocab)
+                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
   test/fixtures.js      # shared test fixtures
