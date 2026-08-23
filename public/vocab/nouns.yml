@@ -1761,6 +1761,12 @@ words:
       pl_acc: аэропо́рты
       pl_ins: аэропо́ртами
       pl_pre: аэропо́ртах
+    facts:
+      - kind: build
+        text: "The same two pieces as the English airport, both borrowed: аэро- for air and порт for port."
+        parts:
+          - { ru: "аэро-", en: "air" }
+          - { ru: "порт", en: "port" }
   "баба=woman":
     cefr_level: B1
     gender: f
@@ -7694,6 +7700,13 @@ words:
       pl_acc: води́телей
       pl_ins: води́телями
       pl_pre: води́телях
+    facts:
+      - kind: build
+        text: "The suffix -тель makes the one who does the verb, so води́тель is the one who drives — from води́ть."
+        parts:
+          - { ru: "вод", en: "lead, drive" }
+          - { ru: "-и́тель", en: "the one who does it" }
+        see: ["водить=to drive"]
   "водка=vodka":
     cefr_level: A2
     gender: f
@@ -24225,6 +24238,9 @@ words:
       pl_acc: компью́теры
       pl_ins: компью́терами
       pl_pre: компью́терах
+    facts:
+      - kind: origin
+        text: "Borrowed straight from English, spelled as Russian hears it. Stress on the ю: компью́тер."
   "конец=end":
     cefr_level: A1
     gender: m
@@ -49715,6 +49731,12 @@ words:
       pl_acc: ра́дости
       pl_ins: ра́достями
       pl_pre: ра́достях
+    facts:
+      - kind: build
+        text: "The suffix -ость turns an adjective into the quality itself, so ра́дость is the state of being рад — glad."
+        parts:
+          - { ru: "рад", en: "glad" }
+          - { ru: "-ость", en: "the quality of being" }
   "раз=time":
     cefr_level: A1
     gender: m
@@ -62341,6 +62363,9 @@ words:
       pl_acc: телефо́ны
       pl_ins: телефо́нами
       pl_pre: телефо́нах
+    facts:
+      - kind: origin
+        text: "Greek tele, far, plus phone, sound — the same two pieces as the English word, so it is one you already know."
   "телешоу=TV show":
     cefr_level: B1
     gender: n
@@ -66370,6 +66395,13 @@ words:
       pl_acc: учителе́й
       pl_ins: учителя́ми
       pl_pre: учителя́х
+    facts:
+      - kind: build
+        text: "The same -тель as in води́тель: the one who does the verb. From учи́ть, to teach."
+        parts:
+          - { ru: "уч", en: "teach" }
+          - { ru: "-и́тель", en: "the one who does it" }
+        see: ["учить=to teach"]
   "учреждение=institution":
     cefr_level: B1
     gender: n

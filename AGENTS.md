@@ -82,6 +82,7 @@ src/
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   wordFacts  — a word's authored facts (build/root/origin/mnemonic) and its related words, derived + authored
+                        #   factCoverage  — which words most deserve a fact, and the sound-alike shortlist (a worklist, NOT a CI guard)
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
