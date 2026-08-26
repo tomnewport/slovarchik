@@ -1766,7 +1766,7 @@ words:
         text: "The same two pieces as the English airport, both borrowed: аэро- for air and порт for port."
         parts:
           - { ru: "аэро-", en: "air" }
-          - { ru: "порт", en: "port" }
+          - { ru: "по́рт", en: "port" }
   "баба=woman":
     cefr_level: B1
     gender: f
@@ -7972,6 +7972,12 @@ words:
       sg_acc: во́здух
       sg_ins: во́здухом
       sg_pre: во́здухе
+    facts:
+      - kind: build
+        text: "Literally what is breathed up: воз- for up and дух, breath or spirit."
+        parts:
+          - { ru: "во́з-", en: "up" }
+          - { ru: "дух", en: "breath, spirit" }
   "возможность=possibility":
     cefr_level: B1
     gender: f
@@ -49735,7 +49741,7 @@ words:
       - kind: build
         text: "The suffix -ость turns an adjective into the quality itself, so ра́дость is the state of being рад — glad."
         parts:
-          - { ru: "рад", en: "glad" }
+          - { ru: "ра́д", en: "glad" }
           - { ru: "-ость", en: "the quality of being" }
   "раз=time":
     cefr_level: A1
@@ -51906,6 +51912,13 @@ words:
         en_alt:
           - The decision rested with the parents.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
+    facts:
+      - kind: build
+        text: "The suffix -тель makes the one who does the verb, so роди́тель is the one who gave birth — from роди́ть."
+        parts:
+          - { ru: "род", en: "birth, kin" }
+          - { ru: "-и́тель", en: "the one who does it" }
+        see: ["родить=to give birth"]
   "родник=spring":
     cefr_level: B2
     gender: m

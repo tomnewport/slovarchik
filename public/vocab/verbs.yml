@@ -4617,6 +4617,12 @@ words:
         f: вы́пита
         n: вы́пито
         pl: вы́питы
+    facts:
+      - kind: build
+        text: "вы- carries the drinking through to the end — the glass is empty."
+        parts:
+          - { ru: "вы́-", en: "makes it perfective" }
+          - { ru: "пить", en: "to drink" }
   "выполнить=to fulfil":
     cefr_level: B1
     accented: вы́полнить
@@ -11596,6 +11602,12 @@ words:
       - ru: Ты захо́чешь есть че́рез час?
         en_gb: Will you want to eat in an hour?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "за- marks the moment the wanting starts, rather than the wanting itself."
+        parts:
+          - { ru: "за-", en: "makes it perfective" }
+          - { ru: "хоте́ть", en: "to want" }
   "захотеться=to feel like":
     cefr_level: A2
     accented: захоте́ться
@@ -16301,6 +16313,12 @@ words:
         f: напи́сана
         n: напи́сано
         pl: напи́саны
+    facts:
+      - kind: build
+        text: "на- here adds nothing but completion — написа́ть is писа́ть with the writing finished."
+        parts:
+          - { ru: "на-", en: "makes it perfective" }
+          - { ru: "писа́ть", en: "to write" }
   "напоминать=to remind":
     cefr_level: A2
     accented: напомина́ть
@@ -16566,6 +16584,12 @@ words:
         f: нарисо́вана
         n: нарисо́вано
         pl: нарисо́ваны
+    facts:
+      - kind: build
+        text: "на- here adds nothing but completion — the drawing is finished."
+        parts:
+          - { ru: "на-", en: "makes it perfective" }
+          - { ru: "рисова́ть", en: "to draw" }
   "нарушить=to violate":
     cefr_level: B1
     accented: нару́шить
@@ -16792,6 +16816,12 @@ words:
         en_alt:
           - Will you teach your son to drive a car?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "на- marks the teaching as having got somewhere; the verb is otherwise учи́ть."
+        parts:
+          - { ru: "на-", en: "makes it perfective" }
+          - { ru: "учи́ть", en: "to teach" }
   "научиться=to learn":
     cefr_level: A1
     accented: научи́ться
@@ -16840,6 +16870,12 @@ words:
       - ru: Ты научи́шься гото́вить борщ?
         en_gb: Will you learn to cook borscht?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The same на- as in научи́ть, on the reflexive: to have learned something rather than to be studying it."
+        parts:
+          - { ru: "на-", en: "makes it perfective" }
+          - { ru: "учи́ться", en: "to study" }
   "находить=to find":
     cefr_level: A1
     accented: находи́ть
@@ -23639,6 +23675,12 @@ words:
       - ru: Ты пода́ришь вну́чке шарф?
         en_gb: Will you give your granddaughter a scarf?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- only marks completion — one gift given, rather than giving."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "дари́ть", en: "to give" }
   "подать=to serve":
     cefr_level: B1
     accented: пода́ть
@@ -24142,6 +24184,12 @@ words:
       - ru: Ты подождёшь ещё пять мину́т?
         en_gb: Will you wait another five minutes?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "подо- is по- with a vowel added so подожда́ть can be said at all; it marks a spell of waiting that ends."
+        parts:
+          - { ru: "подо-", en: "makes it perfective" }
+          - { ru: "жда́ть", en: "to wait" }
   "подозревать=to suspect":
     cefr_level: B1
     accented: подозрева́ть
@@ -24374,6 +24422,12 @@ words:
       past_n: поду́мало
       past_pl: поду́мали
     gerund: поду́мав
+    facts:
+      - kind: build
+        text: "по- adds no meaning of its own here — поду́мать is ду́мать with the thinking done."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "ду́мать", en: "to think" }
   "подхватить=to catch":
     cefr_level: B2
     accented: подхвати́ть
@@ -24735,6 +24789,12 @@ words:
       - ru: Ты позовёшь дете́й к столу́?
         en_gb: Will you call the children to the table?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- only marks completion: one call, rather than calling."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "зва́ть", en: "to call" }
   "позволить=to allow":
     cefr_level: A2
     accented: позво́лить
@@ -24881,6 +24941,12 @@ words:
       past_f: позвони́ла
       past_n: позвони́ло
       past_pl: позвони́ли
+    facts:
+      - kind: build
+        text: "по- only marks completion: one telephone call, made and over."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "звони́ть", en: "to call" }
   "поздравлять=to congratulate":
     cefr_level: B1
     accented: поздравля́ть
@@ -26464,6 +26530,12 @@ words:
       - ru: Ско́ро им понра́вится но́вая кварти́ра.
         en_gb: Soon they will like the new flat.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- only marks completion: the moment of taking to something."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "нра́виться", en: "to be liked" }
   "понять=to understand":
     cefr_level: A1
     accented: поня́ть
@@ -27252,6 +27324,12 @@ words:
       - ru: Ты послу́шаешь но́вую пе́сню ве́чером?
         en_gb: Will you listen to the new song in the evening?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- only marks completion — a spell of listening that ends."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "слу́шать", en: "to listen" }
   "послышаться=to be heard":
     cefr_level: B1
     accented: послы́шаться
@@ -27336,6 +27414,12 @@ words:
       - ru: Ты посмо́тришь э́тот фильм за́втра?
         en_gb: Will you watch this film tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- only marks completion: one look, rather than looking."
+        parts:
+          - { ru: "по-", en: "makes it perfective" }
+          - { ru: "смотре́ть", en: "to watch" }
   "посоветовать=to advise":
     cefr_level: B1
     accented: посове́товать
@@ -29420,6 +29504,12 @@ words:
         en_alt:
           - Dinner is prepared.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "при- marks the cooking as finished; the verb is otherwise гото́вить."
+        parts:
+          - { ru: "при-", en: "makes it perfective" }
+          - { ru: "гото́вить", en: "to cook" }
   "придумать=to think up":
     cefr_level: A2
     accented: приду́мать
@@ -32087,6 +32177,12 @@ words:
         f: прочи́тана
         n: прочи́тано
         pl: прочи́таны
+    facts:
+      - kind: build
+        text: "про- here means read all the way through, rather than read in some other way."
+        parts:
+          - { ru: "про-", en: "makes it perfective" }
+          - { ru: "чита́ть", en: "to read" }
   "прошептать=to whisper":
     cefr_level: B2
     accented: прошепта́ть
@@ -35259,6 +35355,12 @@ words:
         f: сде́лана
         n: сде́лано
         pl: сде́ланы
+    facts:
+      - kind: build
+        text: "с- adds no meaning of its own — сде́лать is де́лать, seen through to the end. The pattern is what to learn here, not a second word."
+        parts:
+          - { ru: "с-", en: "makes it perfective" }
+          - { ru: "де́лать", en: "to do" }
   "сделаться=to become":
     cefr_level: B1
     accented: сде́латься
@@ -36496,6 +36598,12 @@ words:
       - ru: Ты смо́жешь помо́чь за́втра?
         en_gb: Will you be able to help tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "с- makes мочь perfective: managing something once, rather than being able in general."
+        parts:
+          - { ru: "с-", en: "makes it perfective" }
+          - { ru: "мочь", en: "to be able" }
   "снизить=to reduce":
     cefr_level: B2
     accented: сни́зить
@@ -38293,6 +38401,10 @@ words:
       past_f: спроси́ла
       past_n: спроси́ло
       past_pl: спроси́ли
+    facts:
+      - kind: root
+        text: "The same root as проси́ть, to ask for something. The с- turns asking for into asking a question."
+        see: ["просить=to ask for"]
   "спрятать=to hide":
     cefr_level: A2
     accented: спря́тать
@@ -40514,6 +40626,12 @@ words:
       - ru: Уви́дев меня́, он улыбну́лся.
         en_gb: Having seen me, he smiled.
         inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
+    facts:
+      - kind: build
+        text: "у- here adds nothing but completion: catching sight of something, rather than seeing."
+        parts:
+          - { ru: "у-", en: "makes it perfective" }
+          - { ru: "ви́деть", en: "to see" }
   "увлекаться=to be keen on":
     cefr_level: B1
     accented: увлека́ться
@@ -41763,6 +41881,12 @@ words:
       - ru: Услы́шав но́вость, она́ запла́кала.
         en_gb: Having heard the news, she burst into tears.
         inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
+    facts:
+      - kind: build
+        text: "у- here adds nothing but completion: catching a sound, rather than hearing."
+        parts:
+          - { ru: "у-", en: "makes it perfective" }
+          - { ru: "слы́шать", en: "to hear" }
   "усмехнуться=to smirk":
     cefr_level: B2
     accented: усмехну́ться

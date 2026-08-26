@@ -157,6 +157,13 @@ words:
       pl_acc: вто́рники
       pl_ins: вто́рниками
       pl_pre: вто́рниках
+    facts:
+      - kind: build
+        text: "The second day, from второ́й. Russian counts its weekdays from Monday, so Tuesday is the second."
+        parts:
+          - { ru: "вто́р", en: "second" }
+          - { ru: "-ник", en: "day of" }
+        see: ["второй=second"]
   "декабрь=December":
     cefr_level: A1
     gender: m
@@ -543,6 +550,14 @@ words:
       pl_acc: понеде́льники
       pl_ins: понеде́льниками
       pl_pre: понеде́льниках
+    facts:
+      - kind: build
+        text: "The day after the неде́ля. Неде́ля is the week now, but it once meant the day of not-doing — Sunday."
+        parts:
+          - { ru: "по-", en: "after" }
+          - { ru: "неде́ль", en: "week (once: Sunday)" }
+          - { ru: "-ник", en: "day of" }
+        see: ["неделя=week"]
   "пятница=Friday":
     cefr_level: A1
     gender: f

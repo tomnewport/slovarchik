@@ -313,7 +313,8 @@ export function factIssues(words) {
     }
 
     // ── facts: the morpheme breakdown really spells this word ───────────────
-    const bareHeadword = bareMorpheme(word.headword || word.ru)
+    const headword = word.headword || word.ru
+    const bareHeadword = bareMorpheme(headword)
     for (const [i, f] of word.facts.entries()) {
       if (!f.parts.length) continue
       // Consonant alternations are legitimate (писа́ть → пишу́), so the test is a
@@ -324,7 +325,21 @@ export function factIssues(words) {
         report(
           word.key,
           `facts[${i}].parts`,
-          `"${f.parts.map((p) => p.ru).join('')}" does not spell out ${word.headword || word.ru}`,
+          `"${f.parts.map((p) => p.ru).join('')}" does not spell out ${headword}`,
+        )
+        continue
+      }
+      // When the morphemes do join back into the whole word, they should join
+      // into the *stressed* word: `factParts` hands that joined form to a screen
+      // reader, and an unstressed one has it saying a word nobody says. Only
+      // checked for an exact join — an alternation legitimately can't reproduce
+      // the headword either way.
+      const joined = f.parts.map((p) => String(p.ru ?? '').replace(/[-‧]/g, '')).join('')
+      if (joined !== headword && stripStress(joined) === stripStress(headword)) {
+        report(
+          word.key,
+          `facts[${i}].parts`,
+          `the parts spell "${joined}" — mark the stress on the part that carries it, so the joined-up form is "${headword}"`,
         )
       }
     }

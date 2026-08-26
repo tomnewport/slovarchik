@@ -2408,6 +2408,12 @@ words:
         en_gb: Turn around.
         en_alt:
           - Turn round.
+    facts:
+      - kind: build
+        text: "на- onto plus зад, the back or rear — so наза́д is towards the back."
+        parts:
+          - { ru: "на-", en: "onto, towards" }
+          - { ru: "за́д", en: "the back, the rear" }
   "наиболее=most":
     cefr_level: B2
     accented: наибо́лее
@@ -2519,6 +2525,12 @@ words:
           - Turn right.
       - ru: О́кна выхо́дят напра́во.
         en_gb: The windows face to the right.
+    facts:
+      - kind: build
+        text: "на- towards plus пра́во, the right."
+        parts:
+          - { ru: "на-", en: "towards" }
+          - { ru: "пра́во", en: "the right" }
   "напрасно=in vain":
     cefr_level: B1
     accented: напра́сно
