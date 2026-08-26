@@ -45,13 +45,18 @@ beforeEach(async () => {
   mockExercises.value = defaultExercises
 })
 
+// Several of these actions are IndexedDB writes deep, and fake-indexeddb
+// completes them on setImmediate — one or two flushes is not always enough.
+async function settle() {
+  for (let i = 0; i < 8; i++) await flushPromises()
+}
+
 // A never-met word is now introduced before its first exercise (#587). These
 // tests are about the grading flow, so step past any card in the way.
 async function passIntro(wrapper) {
   while (wrapper.find('button.got-it').exists()) {
     await wrapper.find('button.got-it').trigger('click')
-    await flushPromises()
-    await flushPromises()
+    await settle()
   }
 }
 
@@ -389,5 +394,100 @@ describe('SessionView', () => {
     expect(progress.isKnown('t1')).toBe(true)
     // Button clears once the word is flagged.
     expect(wrapper.findAll('button.know').some((b) => b.text() === 'I know this word')).toBe(false)
+  })
+})
+
+// ── The intro card's two buttons, end to end (#587) ─────────────────────────
+describe('SessionView intro cards', () => {
+
+  const intro = (id, key, pi) => ({
+    id,
+    kind: 'intro',
+    graded: false,
+    dimension: 'usage',
+    level: 'learning',
+    practiceIndex: pi,
+    targets: [key],
+  })
+  const type = (id, key, ru, en, pi) => ({
+    id,
+    kind: 'type',
+    dimension: 'usage',
+    level: 'learning',
+    content: 'word',
+    practiceIndex: pi,
+    audio: false,
+    targets: [key],
+    ru,
+    en,
+  })
+
+  it('"Got it" moves on to the exercise, which still tests the word', async () => {
+    mockExercises.value = [
+      intro('i0', 'дом=house', 0),
+      type('ex0', 'дом=house', 'дом', 'house', 0),
+    ]
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    expect(wrapper.find('button.got-it').exists()).toBe(true)
+    await wrapper.find('button.got-it').trigger('click')
+    await flushPromises()
+    await flushPromises()
+
+    // The exercise it introduced is still there to be answered.
+    expect(wrapper.find('input[lang="ru"]').exists()).toBe(true)
+    expect(progress.wasIntroduced('дом=house')).toBe(true)
+  })
+
+  it('"I know this already" marks it known and skips its drilling', async () => {
+    mockExercises.value = [
+      intro('i0', 'дом=house', 0),
+      type('ex0', 'дом=house', 'дом', 'house', 0),
+      type('ex1', 'кот=cat', 'кот', 'cat', 1),
+    ]
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    await wrapper.find('button.known').trigger('click')
+    await settle()
+
+    // Known, introduced — and its exercise is gone, not merely skipped past.
+    // `known` relaxes the criteria; it does not award attempts, so the word's
+    // state is still 'unknown' until it is answered once. The flag is the point.
+    expect(progress.state.records['дом=house'].known).toBe(true)
+    expect(wrapper.vm.runner.queue.map((e) => e.id)).not.toContain('ex0')
+    // The next word's exercise is untouched.
+    expect(wrapper.find('input[lang="ru"]').attributes('data-answer')).toBe('кот')
+  })
+
+  it('leaves the other words on a board when one of them is already known', async () => {
+    mockExercises.value = [
+      intro('i0', 'дом=house', 0),
+      {
+        id: 'ex0',
+        kind: 'match',
+        dimension: 'identification',
+        level: 'learning',
+        practiceIndex: 0,
+        targets: ['дом=house', 'кот=cat', 'год=year'],
+        pairs: [
+          { key: 'дом=house', ru: 'дом', en: 'house' },
+          { key: 'кот=cat', ru: 'кот', en: 'cat' },
+          { key: 'год=year', ru: 'год', en: 'year' },
+        ],
+      },
+    ]
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    await wrapper.find('button.known').trigger('click')
+    await settle()
+
+    // The board survives, minus the one pair.
+    const board = wrapper.vm.runner.queue.find((e) => e.id === 'ex0')
+    expect(board).toBeTruthy()
+    expect(board.pairs.map((p) => p.key)).toEqual(['кот=cat', 'год=year'])
+    expect(board.targets).not.toContain('дом=house')
   })
 })

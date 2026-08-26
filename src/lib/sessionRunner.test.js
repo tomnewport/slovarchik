@@ -10,6 +10,7 @@ import {
   remainingInRound,
   practiceSegments,
   advance,
+  dropQueued,
   runnerSummary,
 } from './sessionRunner.js'
 
@@ -271,5 +272,46 @@ describe('advance (a step the learner cannot get wrong)', () => {
     s.pos = 0 // contrive a revisit
     advance(s)
     expect(s.visited).toEqual(['i1'])
+  })
+})
+
+describe('dropQueued (a word the learner says they already know)', () => {
+  const ex = (id, targets) => ({ id, dimension: 'usage', practiceIndex: 0, targets })
+
+  it('removes the matching exercises from the queue and the plan', () => {
+    const s = initRunner([ex('a', ['кот=cat']), ex('b', ['дом=house'])])
+    dropQueued(s, (e) => e.targets.includes('дом=house'))
+    expect(s.queue.map((e) => e.id)).toEqual(['a'])
+    expect(plannedTotal(s)).toBe(1)
+  })
+
+  it('keeps the plan cell of an exercise already attempted — that is history', () => {
+    const s = initRunner([ex('a', ['кот=cat']), ex('b', ['дом=house'])])
+    submit(s, false) // 'a' now has a real result
+    dropQueued(s, () => true)
+    expect(s.plan.map((e) => e.id)).toContain('a')
+    expect(s.plan.map((e) => e.id)).not.toContain('b')
+  })
+
+  it('drops the word from a later repeat round too', () => {
+    const s = initRunner([ex('a', ['кот=cat']), ex('b', ['дом=house'])])
+    submit(s, false)
+    submit(s, false)
+    // Both wrong → round 2 queues them; dropping should take one out of it.
+    dropQueued(s, (e) => e.targets.includes('дом=house'))
+    expect(s.queue.map((e) => e.id)).toEqual(['a'])
+  })
+
+  it('reaches the summary when the last remaining exercise is dropped', () => {
+    const s = initRunner([ex('a', ['кот=cat'])])
+    dropQueued(s, () => true)
+    expect(s.phase).toBe('summary')
+  })
+
+  it('is a no-op when nothing matches', () => {
+    const s = initRunner([ex('a', ['кот=cat'])])
+    dropQueued(s, () => false)
+    expect(s.queue).toHaveLength(1)
+    expect(s.phase).toBe('exercise')
   })
 })

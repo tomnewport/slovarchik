@@ -145,7 +145,7 @@ async function unmarkKnownWord() {
       <!-- What there is to say about the word itself (#586) — this modal is
            already the "everything about this word" surface, so the facts belong
            beside the mastery figures. Tapping a related word opens its card. -->
-      <WordFacts :word-key="wordKey" @open-word="emit('open-word', $event)" />
+      <WordFacts :word-key="wordKey" navigable @open-word="emit('open-word', $event)" />
 
       <div class="known-control" :class="{ on: detail.known }">
         <template v-if="!detail.known">

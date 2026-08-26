@@ -17,7 +17,7 @@ import { computed, ref } from 'vue'
 import { state as vocabState } from '../stores/vocab.js'
 import { stateOf } from '../stores/progress.js'
 import { settings } from '../stores/settings.js'
-import { wordFacts, factParts, relatedWords } from '../lib/wordFacts.js'
+import { wordFacts, factParts, relatedWords, hasWordFacts } from '../lib/wordFacts.js'
 import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
 import SpeakButton from './SpeakButton.vue'
 
@@ -26,6 +26,12 @@ const props = defineProps({
   // Rendered open, with no disclosure at all. The intro card (#587) is the one
   // place the learner has asked to be told about the word.
   open: { type: Boolean, default: false },
+  // Whether a related word can actually be opened from here. Only a host that
+  // has somewhere to go — the word modal — can honour `open-word`; mid-drill
+  // there is nowhere to navigate to and nothing should look tappable. Off by
+  // default so a host has to opt in, rather than silently rendering dead
+  // buttons.
+  navigable: { type: Boolean, default: false },
 })
 const emit = defineEmits(['open-word'])
 
@@ -43,7 +49,7 @@ const related = computed(() => relatedWords(record.value, byKey.value))
 const confusables = computed(() => related.value.filter((r) => r.relation === 'confusable'))
 const family = computed(() => related.value.filter((r) => r.relation !== 'confusable'))
 
-const isEmpty = computed(() => !facts.value.length && !related.value.length)
+const isEmpty = computed(() => !hasWordFacts(record.value, byKey.value))
 
 /** The morpheme chips of a `build` fact, plus the joined word for a reader. */
 function parts(fact) {
@@ -113,10 +119,15 @@ const shown = ref(settings.factsExpanded)
         </p>
         <ul v-if="fact.see.length" class="see">
           <li v-for="link in fact.see" :key="link.key">
-            <button type="button" class="word-link" @click="emit('open-word', link.key)">
+            <component
+              :is="navigable ? 'button' : 'span'"
+              :type="navigable ? 'button' : null"
+              class="word-link"
+              @click="navigable && emit('open-word', link.key)"
+            >
               <span lang="ru">{{ link.ru }}</span>
               <span class="muted">{{ link.en }}</span>
-            </button>
+            </component>
           </li>
         </ul>
       </template>
@@ -125,16 +136,16 @@ const shown = ref(settings.factsExpanded)
         <h4 class="facts-title">Related words</h4>
         <ul class="word-rows">
           <li v-for="row in family" :key="row.key ?? row.ru" :class="{ unmet: !met(row) }">
-            <button
-              type="button"
+            <component
+              :is="navigable && row.key ? 'button' : 'span'"
+              :type="navigable && row.key ? 'button' : null"
               class="word-link"
-              :disabled="!row.key"
-              @click="row.key && emit('open-word', row.key)"
+              @click="navigable && row.key && emit('open-word', row.key)"
             >
               <span lang="ru" class="row-ru">{{ row.ru }}</span>
               <span class="muted row-en">{{ row.en }}</span>
               <span class="relation">{{ relationLabel(row) }}</span>
-            </button>
+            </component>
             <SpeakButton :text="row.ru" />
           </li>
         </ul>
@@ -144,15 +155,15 @@ const shown = ref(settings.factsExpanded)
         <h4 class="facts-title">Easily confused</h4>
         <ul class="word-rows">
           <li v-for="row in confusables" :key="row.key ?? row.ru" :class="{ unmet: !met(row) }">
-            <button
-              type="button"
+            <component
+              :is="navigable && row.key ? 'button' : 'span'"
+              :type="navigable && row.key ? 'button' : null"
               class="word-link"
-              :disabled="!row.key"
-              @click="row.key && emit('open-word', row.key)"
+              @click="navigable && row.key && emit('open-word', row.key)"
             >
               <span lang="ru" class="row-ru">{{ row.ru }}</span>
               <span class="muted row-en">{{ row.en }}</span>
-            </button>
+            </component>
             <SpeakButton :text="row.ru" />
             <p v-if="row.why" class="why">{{ row.why }}</p>
           </li>
@@ -248,7 +259,7 @@ const shown = ref(settings.factsExpanded)
   text-align: left;
   cursor: pointer;
 }
-.word-link:disabled {
+span.word-link {
   cursor: default;
 }
 .row-ru {

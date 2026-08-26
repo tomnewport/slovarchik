@@ -28,6 +28,7 @@ import {
   currentExercise,
   submit,
   advance,
+  dropQueued,
   skipDimension,
   startExtraRound,
   runnerSummary,
@@ -250,12 +251,36 @@ async function onIntroDone({ known = false } = {}) {
   if (key) {
     await progress.markIntroduced(key)
     // "I know this already" — the introduction is the natural moment to say so,
-    // and it spares the learner drilling a word they brought with them.
-    if (known) await progress.markKnown(key)
+    // and it has to actually spare them the drilling, or the button is a lie.
+    if (known) {
+      await progress.markKnown(key)
+      skipDrillingFor(key)
+    }
   }
   advance(runner)
   injectFlashcardRepeat()
   await finalizeIfDone()
+}
+
+/**
+ * Take a word the learner has just said they know out of the rest of the
+ * session. An exercise that tests only that word goes; a board that tests it
+ * alongside others loses just its pair, so the other words keep their practice —
+ * unless that would leave too few pairs to play, in which case the board goes
+ * too. Already-attempted exercises are untouched.
+ */
+function skipDrillingFor(key) {
+  for (const ex of runner.queue.slice(runner.pos)) {
+    const targets = ex.targets ?? []
+    if (!targets.includes(key) || ex.id in runner.firstAttempt) continue
+    if (!ex.pairs || targets.length <= 1) continue
+    const pairs = ex.pairs.filter((p) => p.key !== key)
+    // MIN_BOARD_PAIRS: a board of one card is not a board.
+    if (pairs.length < 2) continue
+    ex.pairs = pairs
+    ex.targets = targets.filter((k) => k !== key)
+  }
+  dropQueued(runner, (ex) => (ex.targets ?? []).includes(key) && ex.kind !== 'intro')
 }
 
 async function onDone(result) {

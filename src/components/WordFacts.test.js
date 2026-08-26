@@ -98,15 +98,42 @@ describe('WordFacts', () => {
   })
 
   it('opens a related word when its row is tapped', async () => {
-    const wrapper = mountFor('перевести=to translate')
+    const wrapper = mountFor('перевести=to translate', { navigable: true })
     await wrapper.find('.word-rows .word-link').trigger('click')
     expect(wrapper.emitted('open-word')[0]).toEqual(['переводить=to translate'])
   })
 
   it("opens a fact's see link too", async () => {
-    const wrapper = mountFor('переводить=to translate')
+    const wrapper = mountFor('переводить=to translate', { navigable: true })
     await wrapper.find('.see .word-link').trigger('click')
     expect(wrapper.emitted('open-word')[0]).toEqual(['водить=to lead'])
+  })
+
+  // Only a host with somewhere to go can honour `open-word`. Mid-drill there is
+  // nowhere to navigate to, and a row that looks tappable but does nothing is
+  // worse than a row that doesn't.
+  it('renders rows as buttons only where the host can navigate', () => {
+    const navigable = mountFor('перевести=to translate', { navigable: true })
+    expect(navigable.find('.word-rows button.word-link').exists()).toBe(true)
+
+    const plain = mountFor('перевести=to translate')
+    expect(plain.find('.word-rows button.word-link').exists()).toBe(false)
+    expect(plain.find('.word-rows span.word-link').exists()).toBe(true)
+  })
+
+  it('emits nothing when a non-navigable row is clicked', async () => {
+    const wrapper = mountFor('перевести=to translate')
+    await wrapper.find('.word-rows .word-link').trigger('click')
+    expect(wrapper.emitted('open-word')).toBeUndefined()
+  })
+
+  it('leaves an unresolvable row unclickable even when navigable', () => {
+    // A heteronym or same-gloss row carries only a spelling when the word map
+    // can't resolve it; there is no key to open.
+    const wrapper = mount(WordFacts, {
+      props: { wordKey: 'перевести=to translate', navigable: true },
+    })
+    expect(wrapper.findAll('.word-rows .word-link').length).toBeGreaterThan(0)
   })
 
   it('marks a related word the learner has not met yet', () => {

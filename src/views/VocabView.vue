@@ -13,6 +13,7 @@ import { lastAttemptAt } from '../lib/progression.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 import WordFacts from '../components/WordFacts.vue'
+import { hasWordFacts } from '../lib/wordFacts.js'
 
 // How long the celebration plays before auto-advancing to the next question.
 const CELEBRATE_MS = 1000
@@ -95,13 +96,22 @@ const motionPair = computed(() => current.value?.motionPair ?? null)
 // teaches the frame everywhere the word appears, not just in the government
 // drill — the same idea as the aspect-pair reminder above.
 const government = computed(() => governmentLabels(current.value?.governs))
+// The word record behind the shaped drill word, for the facts panel.
+const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, w])))
+// Does this word have a facts panel worth reading (#586)? A one-second
+// auto-advance past a breakdown the learner hasn't opened yet makes the
+// disclosure unusable, so it holds like the other reminders do.
+const hasFacts = computed(() =>
+  current.value?.id ? hasWordFacts(wordsByKey.value.get(current.value.id), wordsByKey.value) : false,
+)
 // Anything worth reading after a correct answer holds the auto-advance.
 const holdAfterAnswer = computed(
   () =>
     heteronyms.value.length > 0 ||
     aspectPair.value != null ||
     motionPair.value != null ||
-    government.value.length > 0,
+    government.value.length > 0 ||
+    hasFacts.value,
 )
 
 // Build a weighted pool of known (learned+) words for drilling.

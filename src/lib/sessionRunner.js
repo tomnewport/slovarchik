@@ -154,6 +154,35 @@ export function skipDimension(s, dimension, makeReplacement = () => null) {
   return s
 }
 
+/**
+ * Remove not-yet-attempted exercises the caller no longer wants, keeping the
+ * plan in step so the segmented progress bar doesn't keep cells for steps that
+ * will never run. Used when a learner says they already know a word at its
+ * intro card (#587): drilling it is exactly what they asked to skip.
+ *
+ * A matching exercise leaves the queue whichever round it is in — replaying it
+ * is precisely what the learner asked to skip. Its **plan cell** survives if it
+ * has already been attempted: that cell carries a real result, and removing it
+ * would rewrite the session's history.
+ *
+ * @param {object} s runner state
+ * @param {(ex: object) => boolean} shouldDrop
+ * @returns {object} the mutated state
+ */
+export function dropQueued(s, shouldDrop) {
+  for (let i = s.queue.length - 1; i >= s.pos; i--) {
+    const ex = s.queue[i]
+    if (!shouldDrop(ex)) continue
+    s.queue.splice(i, 1)
+    if (ex.id in s.firstAttempt) continue
+    const planIdx = s.plan.findIndex((e) => e.id === ex.id)
+    if (planIdx !== -1) s.plan.splice(planIdx, 1)
+  }
+  s.wrong = s.wrong.filter((ex) => !shouldDrop(ex))
+  if (s.phase === 'exercise' && s.pos >= s.queue.length) advanceRound(s)
+  return s
+}
+
 /** Total planned exercises (the first-pass denominator). */
 export function plannedTotal(s) {
   return s.plan.length

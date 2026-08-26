@@ -674,7 +674,10 @@ export const MAX_INTROS_PER_SESSION = 5
  *    one word and teaches the rest by reveal, as it does today;
  *  - **never two in a row**, and never more than {@link MAX_INTROS_PER_SESSION};
  *  - **once per session per word**, so a word introduced before its flashcard
- *    isn't introduced again before its spelling exercise.
+ *    isn't introduced again before its spelling exercise;
+ *  - **never after the word has already been met in this session**. A board that
+ *    teaches a word by reveal has introduced it, whatever the label says, and a
+ *    card headed "A new word" arriving afterwards is simply backwards.
  *
  * @param {object[]} exercises the built list, in order
  * @param {object} opts
@@ -688,17 +691,20 @@ export const MAX_INTROS_PER_SESSION = 5
 export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_INTROS_PER_SESSION } = {}) {
   if (typeof needsIntro !== 'function' || max <= 0) return exercises.slice()
   const eligible = batchKeys ? new Set(batchKeys) : null
-  const introduced = new Set()
+  // Every word this session has already put in front of the learner — whether by
+  // introducing it or by testing it. A word only gets a card while it is still
+  // genuinely new to the session.
+  const seen = new Set()
   const out = []
   let count = 0
   let lastWasIntro = false
   for (const ex of exercises) {
     if (count < max && !lastWasIntro) {
       const key = (ex.targets ?? []).find(
-        (k) => k && !introduced.has(k) && (!eligible || eligible.has(k)) && needsIntro(k),
+        (k) => k && !seen.has(k) && (!eligible || eligible.has(k)) && needsIntro(k),
       )
       if (key) {
-        introduced.add(key)
+        seen.add(key)
         count++
         out.push({
           id: `intro${count}`,
@@ -715,11 +721,13 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
         })
         lastWasIntro = true
         out.push(ex)
+        for (const k of ex.targets ?? []) if (k) seen.add(k)
         continue
       }
     }
     lastWasIntro = false
     out.push(ex)
+    for (const k of ex.targets ?? []) if (k) seen.add(k)
   }
   return out
 }

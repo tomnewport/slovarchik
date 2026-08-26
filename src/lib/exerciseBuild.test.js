@@ -732,6 +732,29 @@ describe('spliceIntros', () => {
     expect(out.filter((e) => e.kind === 'intro').map((e) => e.targets[0])).toEqual(['кот=cat'])
   })
 
+  it('never introduces a word an earlier exercise has already taught', () => {
+    // A board teaches its words by reveal, so a card headed "A new word"
+    // arriving after it is backwards.
+    const board = ex('m', ['a=1', 'b=2'], { kind: 'match' })
+    const out = spliceIntros([board, ex('o', ['c=3']), ex('t', ['b=2'])], {
+      needsIntro: () => true,
+    })
+    expect(out.map((e) => (e.kind === 'intro' ? `intro:${e.targets[0]}` : e.id))).toEqual([
+      'intro:a=1',
+      'm',
+      'o',
+      't',
+    ])
+  })
+
+  it('does not introduce a word the very next exercise already tested', () => {
+    const out = spliceIntros([ex('a', ['кот=cat']), ex('b', ['кот=cat'])], {
+      needsIntro: () => true,
+    })
+    expect(out.filter((e) => e.kind === 'intro')).toHaveLength(1)
+    expect(out[0].kind).toBe('intro')
+  })
+
   it('leaves the list untouched when every word has been met', () => {
     const list = [ex('a', ['дом=house']), ex('b', ['кот=cat'])]
     expect(spliceIntros(list, { needsIntro: () => false })).toEqual(list)
