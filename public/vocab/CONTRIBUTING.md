@@ -280,6 +280,32 @@ Both fields are read by [`src/lib/wordFacts.js`](../../src/lib/wordFacts.js),
 whose `factIssues` is the guard that fails CI on a malformed, dangling,
 self-referential or already-derived link.
 
+### Which words to write facts for
+
+Not all of them — the payoff is nowhere near even. **`npm run coverage:facts`**
+ranks the corpus for you and prints three lists:
+
+- **problems with facts already authored** — these fail CI, so they come first;
+- **worth a breakdown** — a prefixed word whose bare stem *is itself an entry*
+  (входи́ть over ходи́ть), ordered by how many words share that root. This is the
+  highest-yield group by a distance: one fact on ход- is repaid across fourteen
+  words, and the `see:` link lands on a word the learner already has;
+- **sound-alike shortlist** — candidates for `confusable_with:`, by a weighted
+  edit distance that treats a vowel-for-vowel swap as *half* a change, because
+  unstressed Russian vowels reduce and a pair differing only in vowels can be
+  near-homophones (звони́ть / звене́ть, слу́шать / слы́шать). Pairs already linked
+  by aspect, motion, heteronymy or a shared gloss are excluded — authoring those
+  fails the guard.
+
+It is a worklist, never a CI gate: facts are optional, and a threshold would
+turn an enrichment into an obligation on every new word. Review a shortlist by
+hand before authoring — it is a suggestion, not a verdict.
+
+**Prose style**, so the corpus reads as one voice: one or two sentences, plain
+English, present tense, no markdown, and always tied to a word the learner might
+already have — "the same пере- as in переходи́ть" beats an abstract account of the
+prefix.
+
 ### Gloss-only entries (`learn: false`) and `glossary.yml`
 
 When a learner reads a phrase they can tap any word they haven't learned to see

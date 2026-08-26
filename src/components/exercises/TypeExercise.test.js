@@ -282,6 +282,29 @@ describe('TypeExercise', () => {
     expect(wrapper.find('.retry-hint').classes()).not.toContain('lexical')
   })
 
+  // ── The answer-leak guard for the facts panel (#586) ──────────────────────
+  it('shows no facts panel until the answer is resolved', async () => {
+    // A `build` fact spells the word out in morphemes, so the panel appearing
+    // one moment early would simply hand over the answer.
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('квакозябр')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('дом')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
+  })
+
+  it('offers no facts panel for a phrase — there is no one word it is about', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школу')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+  })
+
   it('accepts an alsoRu synonym as correct', async () => {
     const wrapper = mount(TypeExercise, {
       props: { exercise: { ...exercise, ru: 'автомобиль', alsoRu: ['маши́на'] } },

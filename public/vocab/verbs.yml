@@ -1405,6 +1405,9 @@ words:
         en_alt:
           - Do you make jam in the summer?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+    confusable_with:
+      - key: "верить=to believe"
+        why: "One letter apart and nearly the same sound: вари́ть happens in a saucepan, ве́рить happens in your head."
   "ввести=to introduce":
     cefr_level: B1
     accented: ввести́
@@ -3686,6 +3689,14 @@ words:
       past_f: входи́ла
       past_n: входи́ло
       past_pl: входи́ли
+    facts:
+      - kind: build
+        text: "в- is into, so входи́ть is to go in — the same ход- as in ходи́ть."
+        parts:
+          - { ru: "в-", en: "into" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "выбирать=to choose":
     cefr_level: A2
     accented: выбира́ть
@@ -5361,6 +5372,14 @@ words:
       past_f: выходи́ла
       past_n: выходи́ло
       past_pl: выходи́ли
+    facts:
+      - kind: build
+        text: "вы- is out, so выходи́ть is to go out — the same ход- as in ходи́ть."
+        parts:
+          - { ru: "вы-", en: "out" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "выяснить=to find out":
     cefr_level: B1
     accented: вы́яснить
@@ -7801,6 +7820,14 @@ words:
       - ru: Ты дохо́дишь до рабо́ты пешко́м?
         en_gb: Do you get to work on foot?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "до- is as far as, so доходи́ть is to get all the way there on foot — the same ход- as in ходи́ть."
+        parts:
+          - { ru: "до-", en: "as far as" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "драться=to fight":
     cefr_level: B1
     accented: дра́ться
@@ -11517,6 +11544,14 @@ words:
       - ru: Е́сли бы вы жи́ли ря́дом, то заходи́ли бы к нам ча́ще?
         en_gb: If you lived nearby, would you drop in on us more often?
         inflect: { token: 7, tense: past, person: past_pl, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "за- is in passing, so заходи́ть is to call in on your way — the same ход- as in ходи́ть."
+        parts:
+          - { ru: "за-", en: "in passing" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "захотеть=to want":
     cefr_level: A1
     accented: захоте́ть
@@ -11743,6 +11778,30 @@ words:
       - ru: Вы зовёте госте́й на у́жин?
         en_gb: Are you inviting guests for dinner?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+  "звенеть=to ring":
+    cefr_level: B1
+    accented: звене́ть
+    aspect: impf
+    en_gb:
+      standard: to ring (of a bell or something metal)
+    conjugation:
+      imperative:
+        sg: звени́
+        pl: звени́те
+      present:
+        "1sg": звеню́
+        "2sg": звени́шь
+        "3sg": звени́т
+        "1pl": звени́м
+        "2pl": звени́те
+        "3pl": звеня́т
+      past_m: звене́л
+      past_f: звене́ла
+      past_n: звене́ло
+      past_pl: звене́ли
+    confusable_with:
+      - key: "звонить=to call"
+        why: "A bell звени́т by itself; a person звони́т someone, on the telephone."
   "звонить=to call":
     cefr_level: A1
     accented: звони́ть
@@ -16827,6 +16886,14 @@ words:
       - ru: Вы нахо́дите отве́ты бы́стро?
         en_gb: Do you find the answers quickly?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+    facts:
+      - kind: build
+        text: "на- is onto, and coming upon something on foot is how you find it. The same ход- as in ходи́ть."
+        parts:
+          - { ru: "на-", en: "onto" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "находиться=to be located":
     cefr_level: A2
     accented: находи́ться
@@ -24493,6 +24560,13 @@ words:
       - ru: Ты пое́дешь на мо́ре ле́том?
         en_gb: Will you go to the seaside in summer?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- on a verb of motion is setting off, so пое́хать is to head off somewhere by transport."
+        parts:
+          - { ru: "по-", en: "setting off" }
+          - { ru: "-е́хать", en: "to go by transport" }
+        see: ["ехать=to go by transport"]
   "пожалеть=to feel sorry":
     cefr_level: B1
     accented: пожале́ть
@@ -29488,6 +29562,13 @@ words:
       past_f: прие́хала
       past_n: прие́хало
       past_pl: прие́хали
+    facts:
+      - kind: build
+        text: "The same при- as in приходи́ть, on е́хать instead of ходи́ть: arriving, but by transport rather than on foot."
+        parts:
+          - { ru: "при-", en: "arriving" }
+          - { ru: "-е́хать", en: "to go by transport" }
+        see: ["ехать=to go by transport"]
   "прижать=to press":
     cefr_level: B2
     accented: прижа́ть
@@ -30390,6 +30471,14 @@ words:
       past_f: приходи́ла
       past_n: приходи́ло
       past_pl: приходи́ли
+    facts:
+      - kind: build
+        text: "при- is arriving, so приходи́ть is to come on foot — the same ход- as in ходи́ть."
+        parts:
+          - { ru: "при-", en: "arriving" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "приходиться=to have to":
     cefr_level: B1
     accented: приходи́ться
@@ -36041,6 +36130,9 @@ words:
       act_pres: слу́шающий
       act_past: слу́шавший
     gerund: слу́шая
+    confusable_with:
+      - key: "слышать=to hear"
+        why: "слу́шать is the deliberate act of listening; слы́шать is what your ears do whether you meant it or not."
   "слыхать=to hear":
     cefr_level: B1
     accented: слыха́ть
@@ -40884,6 +40976,13 @@ words:
       past_f: уе́хала
       past_n: уе́хало
       past_pl: уе́хали
+    facts:
+      - kind: build
+        text: "The same у- as in уходи́ть: away, but by transport rather than on foot."
+        parts:
+          - { ru: "у-", en: "away" }
+          - { ru: "-е́хать", en: "to go by transport" }
+        see: ["ехать=to go by transport"]
   "узнавать=to find out":
     cefr_level: A2
     accented: узнава́ть
@@ -42247,6 +42346,14 @@ words:
       past_f: уходи́ла
       past_n: уходи́ло
       past_pl: уходи́ли
+    facts:
+      - kind: build
+        text: "у- is away, so уходи́ть is to go off — the same ход- as in ходи́ть."
+        parts:
+          - { ru: "у-", en: "away" }
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "участвовать=to participate":
     cefr_level: B1
     accented: уча́ствовать
@@ -42635,6 +42742,12 @@ words:
       past_f: ходи́ла
       past_n: ходи́ло
       past_pl: ходи́ли
+    facts:
+      - kind: build
+        text: "The root ход- is going on foot. Give it a prefix and you get a dozen more verbs, each with its own direction."
+        parts:
+          - { ru: "ход", en: "going on foot" }
+          - { ru: "-и́ть", en: "verb ending" }
   "хотеть=to want":
     cefr_level: A1
     accented: хоте́ть

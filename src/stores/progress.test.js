@@ -26,6 +26,8 @@ import {
   startSession,
   loadProgress,
   resetProgress,
+  markIntroduced,
+  wasIntroduced,
   history,
   learnedWords,
   masteredWords,
@@ -1482,3 +1484,46 @@ function seededRng(seed) {
     return s / 0xffffffff
   }
 }
+
+// ── Intro cards (#587) ──────────────────────────────────────────────────────
+describe('markIntroduced', () => {
+  const KEY = 'дом=house'
+
+  it('records that the word has been shown, and survives a reload', async () => {
+    expect(wasIntroduced(KEY)).toBe(false)
+    const ts = await markIntroduced(KEY)
+    expect(ts).toBeTruthy()
+    expect(wasIntroduced(KEY)).toBe(true)
+
+    await loadProgress()
+    expect(wasIntroduced(KEY)).toBe(true)
+    expect(wordProgressDetail(KEY).introducedAt).toBe(ts)
+  })
+
+  it('leaves the word’s state and attempts untouched — being shown is not an attempt', async () => {
+    await markIntroduced(KEY)
+    expect(stateOf(KEY)).toBe('unknown')
+    const detail = wordProgressDetail(KEY)
+    expect(detail.totalAttempts).toBe(0)
+    expect(detail.learnedAt).toBeNull()
+  })
+
+  it('keeps the first timestamp when called again', async () => {
+    const first = await markIntroduced(KEY)
+    expect(await markIntroduced(KEY)).toBe(first)
+  })
+
+  it('ignores a missing key', async () => {
+    expect(await markIntroduced('')).toBeNull()
+    expect(wasIntroduced('')).toBe(false)
+  })
+
+  it('an abandoned session still counts — the card does not come back', async () => {
+    // The reason introducedAt is separate from agg.firstSeenAt: the learner saw
+    // the card, then quit before answering anything.
+    await markIntroduced(KEY)
+    await loadProgress()
+    expect(encounterCount(KEY)).toBe(0)
+    expect(wasIntroduced(KEY)).toBe(true)
+  })
+})

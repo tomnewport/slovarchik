@@ -198,6 +198,20 @@ export function confusionNote(record, related) {
   }
 }
 
+/**
+ * Has this word anything to show — an authored fact, or a relation worth naming?
+ * The panel renders nothing when it hasn't, and a caller that has to decide
+ * something *around* the panel (whether to hold an auto-advance so it can be
+ * read, say) needs the same answer without rendering it first.
+ *
+ * @param {object} record a word record (buildWords) or shaped vocab word
+ * @param {Map<string, object>} [byKey]
+ * @returns {boolean}
+ */
+export function hasWordFacts(record, byKey) {
+  return wordFacts(record).length > 0 || relatedWords(record, byKey).length > 0
+}
+
 /** Strip stress and joining hyphens so a morpheme can be matched in a headword. */
 function bareMorpheme(value) {
   return stripStress(String(value ?? ''))

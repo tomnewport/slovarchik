@@ -10,6 +10,13 @@
 // answer so the learner actually learns from the miss, then a single Enter (or
 // the Next button) moves on.
 //
+// Unless the guess was a real gloss of a *related* word (#589). Told "to put on"
+// for «одева́ться», the drill says that belongs to «надева́ть» and keeps the card
+// open for another go, however many it takes — the mirror of the spelling
+// direction (#588), sharing its diagnosis. Pass is still the escape hatch, and a
+// guess we can't place reveals immediately, so the loop stays fast for a genuine
+// blank. The card is counted missed on the first wrong guess either way.
+//
 // As the learner types, a short type-ahead list of candidate words appears and
 // refines as the guess gets closer (#473): a known word can be tapped instead of
 // typed in full, and two near-identical glosses (a *winter* hat vs a *brimmed*
@@ -25,7 +32,10 @@ import { buildOptions } from '../../lib/flashcardOptions.js'
 import { speak } from '../../lib/speech.js'
 import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition.js'
 import { playFeedback } from '../../stores/settings.js'
+import { diagnoseEnglishAnswer } from '../../stores/hints.js'
+import { correctionMessage } from '../../lib/confusables.js'
 import SpeakButton from '../SpeakButton.vue'
+import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -77,6 +87,8 @@ const typed = ref('')
 // Once true, the correct answer is on screen (after a wrong guess or a pass) and
 // the only thing left to do is move on.
 const revealed = ref(false)
+// The diagnosis of the latest placeable guess: {headline, detail, tier}, or null.
+const correction = ref(null)
 const heard = ref('') // last spoken transcript
 const listening = ref(false)
 let recCtl = null
@@ -92,6 +104,7 @@ function focusInput() {
 function startCard() {
   typed.value = ''
   revealed.value = false
+  correction.value = null
   heard.value = ''
   // In hearing mode the card is heard, not seen — read it out as it appears.
   if (props.exercise.audio && card.value) speak(card.value.ru)
@@ -117,7 +130,7 @@ function pickOption(o) {
   const correct =
     o.key === card.value?.key || normalize(o.label ?? o.en ?? '') === normalize(answerLabel.value)
   if (correct) succeed()
-  else reveal()
+  else miss(typed.value)
 }
 
 // Typing the whole word right advances straight away — no Enter needed.
@@ -133,7 +146,31 @@ function onSubmit() {
     return
   }
   if (isAnswer(typed.value)) succeed()
-  else reveal()
+  else miss(typed.value)
+}
+
+/**
+ * A wrong guess. If we can say whose word they just described, say it and leave
+ * the card open; otherwise reveal, as the drill always has. Either way the card
+ * is counted missed the first time round.
+ */
+function miss(guess) {
+  if (!card.value || revealed.value) return
+  const verdict = diagnoseEnglishAnswer(guess, {
+    targetKey: card.value.key,
+    options: props.exercise.options,
+  })
+  if (!verdict) {
+    reveal()
+    return
+  }
+  correction.value = correctionMessage(verdict)
+  missed.add(card.value.key)
+  stopMic()
+  // A synonym is a correct piece of knowledge in the wrong slot — no error sound.
+  if (correction.value.tier !== 'synonym') playFeedback(false)
+  typed.value = ''
+  focusInput()
 }
 
 // Show the correct answer and count the card as missed. The learner reads it,
@@ -248,6 +285,13 @@ onBeforeUnmount(() => {
       />
     </form>
 
+    <!-- Whose word did they just describe? Shown instead of revealing, so the
+         card stays open for another go. -->
+    <p v-if="correction && !revealed" class="correction" :class="correction.tier">
+      <strong class="correction-headline">{{ correction.headline }}</strong>
+      <span class="correction-detail">{{ correction.detail }}</span>
+    </p>
+
     <!-- Type-ahead suggestions: tap to answer without typing the whole word. -->
     <ul v-if="options.length" class="options" role="listbox" aria-label="Suggestions">
       <li v-for="o in options" :key="o.key" role="option">
@@ -261,6 +305,9 @@ onBeforeUnmount(() => {
       <span class="reveal-en">{{ answer }}</span>
       <span class="reveal-ru"><span lang="ru">{{ card.ru }}</span><SpeakButton :text="card.ru" /></span>
     </div>
+    <!-- About this word (#586) — only once the answer is on screen, never while
+         the learner is still producing it. Collapsed unless they asked for it. -->
+    <WordFacts v-if="revealed && card?.key" :key="card.key" :word-key="card.key" />
 
     <!-- Answer by voice instead of typing. -->
     <div v-if="canSpeak && !revealed" class="speak-row">
@@ -285,6 +332,21 @@ onBeforeUnmount(() => {
 .count {
   margin: 0;
   font-size: 0.85rem;
+}
+/* A placeable guess is a real word, so the correction teaches rather than
+   rejects — amber, never the red of a flat miss. */
+.correction {
+  margin: 0;
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.9rem;
+  color: var(--gold);
+}
+.correction-headline {
+  font-weight: 600;
+}
+.correction-detail {
+  color: var(--text);
 }
 .cue {
   display: flex;

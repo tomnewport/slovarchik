@@ -101,18 +101,32 @@ if (execFileSync('git', ['rev-parse', base], { cwd: repo, encoding: 'utf8' }).tr
  *
  * The word-key lines are kept as anchors: without them a block that moved could
  * line up against a different word's and compare equal.
+ *
+ * The *field* a line sits under is tracked rather than inferred from its
+ * indentation. Indentation alone is ambiguous — a nested list item under any
+ * new field lands at the same depth as a usage `en_alt:` entry, and would be
+ * read as review content. `facts:` (#585) was the first field to collide, and
+ * it is exactly the kind of thing this check must ignore: a hand-authored word
+ * fact is no more the review's to reproduce than a conjugation cell is.
  */
+const REVIEWED_FIELDS = new Set(['en_gb', 'usage'])
+
 function reviewedByKey(text) {
   const out = new Map()
   let key = null
+  let field = null
   for (const line of text.split('\n')) {
     const k = line.match(/^ {2}"([^"]+)":\s*$/)
     if (k) {
       key = k[1]
+      field = null
       out.set(key, [])
       continue
     }
     if (!key) continue
+    const f = line.match(/^ {4}([\w-]+):/)
+    if (f) field = f[1]
+    if (!REVIEWED_FIELDS.has(field)) continue
     if (
       /^ {4}en_gb:/.test(line) || // headword gloss block
       /^ {6}standard:/.test(line) ||
@@ -255,7 +269,12 @@ try {
       if (text === committed.get(key)) continue
       const a = text.split('\n')
       const b = committed.get(key).split('\n')
-      const at = a.findIndex((line, i) => line !== b[i])
+      // Scan the longer side: when one is a prefix of the other (a block added
+      // on one side only) scanning `a` alone finds no differing index and the
+      // report reads "(nothing)" against "(nothing)".
+      const at = Array.from({ length: Math.max(a.length, b.length) }).findIndex(
+        (_, i) => a[i] !== b[i],
+      )
       console.error(`  ✗ ${file}: ${key} differs`)
       console.error(`      replay:    ${a[at] ?? '(nothing)'}`)
       console.error(`      committed: ${b[at] ?? '(nothing)'}`)

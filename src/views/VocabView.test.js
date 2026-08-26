@@ -4,6 +4,7 @@ import VocabView from './VocabView.vue'
 import { state } from '../stores/vocab.js'
 import { state as progressState } from '../stores/progress.js'
 import { shapeVocab } from '../lib/vocabBuild.js'
+import { hasWordFacts } from '../lib/wordFacts.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab data so the menu is ready.
@@ -68,12 +69,14 @@ describe('VocabView', () => {
     // Start typing mode — celebration applies to the typing drill.
     await wrapper.findAll('button.card')[1].trigger('click')
 
-    // Pin to a word with no post-answer reminder: a correct heteronym or
-    // aspect-pair answer intentionally shows a "Next" prompt instead of
-    // auto-advancing (each covered by its own test), so leaving the question to
-    // the random sample makes this assertion flaky.
-    wrapper.vm.current = shapeVocab(loadFixtureWords()).find(
-      (w) => !w.heteronyms?.length && !w.aspectPair,
+    // Pin to a word with no post-answer reminder: a correct heteronym,
+    // aspect-pair or word-facts answer intentionally shows a "Next" prompt
+    // instead of auto-advancing (each covered by its own test), so leaving the
+    // question to the random sample makes this assertion flaky.
+    const words = loadFixtureWords()
+    const byKey = new Map(words.map((w) => [w.key, w]))
+    wrapper.vm.current = shapeVocab(words).find(
+      (w) => !w.heteronyms?.length && !w.aspectPair && !hasWordFacts(byKey.get(w.id), byKey),
     )
     await wrapper.vm.$nextTick()
 
@@ -94,6 +97,33 @@ describe('VocabView', () => {
     await wrapper.vm.$nextTick()
     expect(wrapper.vm.answered).toBe(false)
     expect(wrapper.vm.celebrating).toBe(false)
+  })
+
+  it('waits when the word has facts to read, rather than advancing past them', async () => {
+    // A one-second auto-advance past a collapsed "About this word" disclosure
+    // makes it unusable — the learner never gets to open it (#586).
+    vi.useFakeTimers()
+    const wrapper = mount(VocabView)
+    await wrapper.findAll('button.card')[1].trigger('click')
+
+    const words = loadFixtureWords()
+    const byKey = new Map(words.map((w) => [w.key, w]))
+    wrapper.vm.current = shapeVocab(words).find(
+      (w) => !w.heteronyms?.length && !w.aspectPair && hasWordFacts(byKey.get(w.id), byKey),
+    )
+    await wrapper.vm.$nextTick()
+
+    const want = wrapper.vm.current
+    await wrapper.find('input[type="text"]').setValue(Array.isArray(want.en) ? want.en[0] : want.en)
+    await wrapper.find('form').trigger('submit')
+
+    expect(wrapper.vm.wasCorrect).toBe(true)
+    expect(wrapper.text()).toContain('About this word')
+    // Still on the same question after the celebration window would have passed.
+    vi.advanceTimersByTime(2000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.answered).toBe(true)
+    expect(wrapper.text()).toContain('Next')
   })
 
   it('shows a heteronym reminder and waits, even on a correct answer', async () => {

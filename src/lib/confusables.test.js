@@ -3,7 +3,14 @@ import yaml from 'js-yaml'
 
 import { buildWords } from './vocabBuild.js'
 import { buildFormIndex } from './phraseHint.js'
-import { diagnose, correctionMessage, VERDICTS } from './confusables.js'
+import {
+  diagnose,
+  diagnoseEnglish,
+  buildGlossIndex,
+  correctionMessage,
+  VERDICTS,
+} from './confusables.js'
+import { shapeVocab } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
@@ -194,7 +201,7 @@ words:
     })
   })
 
-  it('quotes the notes instead when two same-gloss words carry them', () => {
+  it('calls it right word, wrong sense when two same-gloss words carry notes', () => {
     // The notes exist precisely to separate these (see spellPromptData.test.js),
     // so they say more than "that is a synonym".
     const words = fromYaml([
@@ -222,8 +229,12 @@ words:
       },
     ])
     const verdict = verdictOf(words, 'штаны́', 'брюки=trousers', 'брю́ки')
-    expect(verdict.type).toBe('other-word')
-    expect(correctionMessage(verdict).detail).toBe('I want trousers (the standard word).')
+    expect(verdict.type).toBe('wrong-sense')
+    expect(correctionMessage(verdict)).toEqual({
+      headline: '«штаны́» is trousers (the informal word)',
+      detail: 'Right word, wrong sense — I want trousers (the standard word).',
+      tier: 'lexical',
+    })
   })
 
   it('quotes both glosses for an aspect pair whose members differ in meaning', () => {
@@ -365,5 +376,171 @@ describe('diagnose, on a phrase', () => {
 
   it('says nothing when the differing token is not a word at all', () => {
     expect(verdictOf(words, 'Я читаю квакозябру', 'читать=to read', 'Я чита́ю газе́ту')).toBeNull()
+  })
+})
+
+// ── The English direction (#589) ────────────────────────────────────────────
+describe('diagnoseEnglish', () => {
+  const words = loadFixtureWords()
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  // The flashcard drill's own autocomplete pool, which doubles as the index.
+  const pool = shapeVocab(words).map((w) => {
+    const en = Array.isArray(w.en) ? (w.en[0] ?? '') : (w.en ?? '')
+    return { key: w.id, ru: w.ru, en, label: w.note ? `${en} (${w.note})` : en }
+  })
+  const glossIndex = buildGlossIndex(pool)
+  const guess = (typed, targetKey) => diagnoseEnglish(typed, { typed, targetKey, byKey, glossIndex })
+
+  it('resolves a gloss belonging to another entry back to that word', () => {
+    const verdict = guess('to put on', 'одеваться=to get dressed')
+    expect(verdict).toMatchObject({ type: 'other-word', direction: 'en' })
+    expect(correctionMessage(verdict).headline).toContain('«надева́ть»')
+  })
+
+  it('never states the English, which is the answer in this direction', () => {
+    const { headline, detail } = correctionMessage(guess('to put on', 'одеваться=to get dressed'))
+    expect(`${headline} ${detail}`).not.toContain('to get dressed')
+  })
+
+  it('reports a sense mismatch when the two entries both carry notes', () => {
+    const verdict = guess('trousers (the informal word)', 'брюки=trousers')
+    expect(verdict.type).toBe('wrong-sense')
+    expect(correctionMessage(verdict).detail).toContain('Right English word, wrong sense')
+  })
+
+  it('reads a heteronym partner’s gloss as the stress confusion it is', () => {
+    const verdict = guess('castle', 'замок=lock')
+    expect(verdict.type).toBe('heteronym')
+    expect(correctionMessage(verdict).detail).toContain('the stress is elsewhere')
+  })
+
+  it('says nothing for the card’s own gloss, or an unknown one', () => {
+    expect(guess('to get dressed', 'одеваться=to get dressed')).toBeNull()
+    expect(guess('flibbertigibbet', 'одеваться=to get dressed')).toBeNull()
+    expect(guess('', 'одеваться=to get dressed')).toBeNull()
+  })
+
+  it('returns nothing without an index, a word map or a known target', () => {
+    expect(diagnoseEnglish('to put on', {})).toBeNull()
+    expect(diagnoseEnglish('to put on', { byKey, glossIndex, targetKey: 'nope=nope' })).toBeNull()
+  })
+
+  it('ignores case, articles and punctuation in the guess', () => {
+    expect(guess('To Put On!', 'одеваться=to get dressed')?.type).toBe('other-word')
+  })
+})
+
+describe('diagnoseEnglish, on data shaped to isolate each relation', () => {
+  const inline = fromYaml([
+    {
+      pos: 'verb',
+      text: `
+words:
+  "покупать=to buy":
+    cefr_level: A1
+    accented: покупа́ть
+    aspect: impf
+    pair: "купить=to buy"
+    en_gb:
+      standard: to buy (over and over)
+  "купить=to buy":
+    cefr_level: A1
+    accented: купи́ть
+    aspect: pf
+    pair: "покупать=to buy"
+    en_gb:
+      standard: to buy (once)
+  "звенеть=to ring":
+    cefr_level: B2
+    accented: звене́ть
+    en_gb:
+      standard: to ring (of a bell)
+  "звонить=to call":
+    cefr_level: A2
+    accented: звони́ть
+    en_gb:
+      standard: to call (to phone someone)
+    confusable_with:
+      - key: "звенеть=to ring"
+        why: A bell does one and a person does the other.
+`,
+    },
+    {
+      pos: 'noun',
+      text: `
+words:
+  "автомобиль=car":
+    cefr_level: B1
+    accented: автомоби́ль
+    gender: m
+    animacy: i
+    en_gb:
+      standard: car
+      alt:
+        - motor car
+  "машина=car":
+    cefr_level: A1
+    accented: маши́на
+    gender: f
+    animacy: i
+    en_gb: { standard: car }
+`,
+    },
+  ])
+  const byKey = new Map(inline.map((w) => [w.key, w]))
+  const pool = shapeVocab(inline).flatMap((w) =>
+    (Array.isArray(w.en) ? w.en : [w.en]).map((en) => ({
+      key: w.id,
+      ru: w.ru,
+      en,
+      label: w.note ? `${en} (${w.note})` : en,
+    })),
+  )
+  const glossIndex = buildGlossIndex(pool)
+  const guess = (typed, targetKey) => diagnoseEnglish(typed, { targetKey, byKey, glossIndex })
+
+  it('names the aspect partner, and says the aspect as a sense', () => {
+    const verdict = guess('to buy (once)', 'покупать=to buy')
+    expect(verdict).toMatchObject({ type: 'aspect', dimension: 'aspect' })
+    const { headline, detail } = correctionMessage(verdict)
+    expect(headline).toBe('«купи́ть» is “to buy (once)”')
+    expect(detail).toContain('perfective partner — a single completed action')
+  })
+
+  it('treats a true synonym gently, and without an error tier', () => {
+    const verdict = guess('motor car', 'машина=car')
+    expect(verdict.type).toBe('synonym')
+    expect(correctionMessage(verdict)).toEqual({
+      headline: '«автомоби́ль» is “car”',
+      detail: "That means the same thing — but I want this word's own English.",
+      tier: 'synonym',
+    })
+  })
+
+  it('uses the authored why for a confusable pair', () => {
+    const verdict = guess('to ring (of a bell)', 'звонить=to call')
+    expect(verdict.type).toBe('confusable')
+    expect(correctionMessage(verdict).detail).toContain('A bell does one')
+  })
+})
+
+describe('buildGlossIndex', () => {
+  it('indexes both the bare gloss and the disambiguated label', () => {
+    const index = buildGlossIndex([{ key: 'шапка=hat', en: 'hat', label: 'hat (winter)' }])
+    expect(index.get('hat')).toEqual(['шапка=hat'])
+    expect(index.get('hat (winter)')).toEqual(['шапка=hat'])
+  })
+
+  it('collects every word carrying a shared gloss', () => {
+    const index = buildGlossIndex([
+      { key: 'машина=car', en: 'car', label: 'car' },
+      { key: 'автомобиль=car', en: 'car', label: 'car' },
+    ])
+    expect(index.get('car')).toEqual(['машина=car', 'автомобиль=car'])
+  })
+
+  it('skips entries with no key or no gloss', () => {
+    expect(buildGlossIndex([{ en: 'orphan' }, { key: 'k' }, null]).size).toBe(0)
+    expect(buildGlossIndex(undefined).size).toBe(0)
   })
 })

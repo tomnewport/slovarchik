@@ -390,6 +390,7 @@ const FOCUSED = [
       :word-key="selectedWord"
       @close="selectedWord = null"
       @left="selectedWord = null"
+      @open-word="selectedWord = $event"
     />
   </section>
 </template>

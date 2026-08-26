@@ -7,7 +7,12 @@ vi.mock('../../lib/speech.js', () => ({
   speechSupported: () => true,
   SLOW_RATE: 0.7,
 }))
-vi.mock('../../stores/settings.js', () => ({ playFeedback: vi.fn() }))
+// WordFacts (#586) reads the auto-expand preference from the same store, so the
+// mock has to carry it as well as the sound hook.
+vi.mock('../../stores/settings.js', () => ({
+  playFeedback: vi.fn(),
+  settings: { factsExpanded: false },
+}))
 
 // Recognition is controllable per test: `listenImpl` decides what the mic does.
 let listenImpl = () => ({ stop() {}, abort() {} })
@@ -24,6 +29,9 @@ vi.mock('../../lib/recognition.js', () => ({
 import { speak } from '../../lib/speech.js'
 import { playFeedback } from '../../stores/settings.js'
 import FlashcardExercise from './FlashcardExercise.vue'
+import { state as vocabState } from '../../stores/vocab.js'
+import { shapeVocab } from '../../lib/vocabBuild.js'
+import { loadFixtureWords } from '../../test/fixtures.js'
 
 const exercise = {
   id: 'f0',
@@ -242,5 +250,119 @@ describe('FlashcardExercise type-ahead options (#473)', () => {
     await wrapper.find('.combo-input').setValue('h')
     await optionByLabel(wrapper, 'hat (brimmed)').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+  })
+})
+
+// ── A wrong guess that names a real, related word (#589) ────────────────────
+// The mirror of the spelling direction: shown «одева́ться» and told "to put on",
+// the drill can say that belongs to «надева́ть» instead of just failing the card.
+describe('FlashcardExercise diagnoses a placeable wrong guess', () => {
+  const words = loadFixtureWords()
+
+  // The drill's own autocomplete pool doubles as the gloss index (see
+  // buildGlossIndex), so build it exactly as exerciseBuild does.
+  const optionPool = shapeVocab(words).map((w) => {
+    const en = Array.isArray(w.en) ? (w.en[0] ?? '') : (w.en ?? '')
+    return { key: w.id, ru: w.ru, en, label: w.note ? `${en} (${w.note})` : en }
+  })
+
+  const dress = {
+    ...exercise,
+    pairs: [
+      { key: 'одеваться=to get dressed', ru: 'одева́ться', en: 'to get dressed' },
+      { key: 'ме́сяц=month', ru: 'ме́сяц', en: 'month' },
+    ],
+    targets: ['одеваться=to get dressed', 'ме́сяц=month'],
+    options: optionPool,
+  }
+
+  const guess = async (wrapper, text) => {
+    await wrapper.find('input.combo-input').setValue(text)
+    await wrapper.find('form').trigger('submit')
+  }
+  // A correct answer advances the moment it is typed — no Enter, by design.
+  const answerRight = async (wrapper, text) => {
+    await wrapper.find('input.combo-input').setValue(text)
+  }
+
+  beforeEach(() => {
+    vocabState.words = words
+    vocabState.status = 'ready'
+  })
+
+  it('names the word the guess actually describes, and keeps the card open', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await guess(wrapper, 'to put on')
+
+    const correction = wrapper.find('.correction')
+    expect(correction.text()).toContain('«надева́ть»')
+    // Not revealed: the answer is still to be produced.
+    expect(wrapper.find('.reveal').exists()).toBe(false)
+    expect(wrapper.find('input.combo-input').attributes('readonly')).toBeUndefined()
+  })
+
+  it('never states the English, which is the answer here', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await guess(wrapper, 'to put on')
+    expect(wrapper.find('.correction').text()).not.toContain('to get dressed')
+  })
+
+  it('lets the learner go again, as often as it takes', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await guess(wrapper, 'to put on')
+    await guess(wrapper, 'castle')
+    expect(wrapper.find('.correction').text()).toContain('«за́мок»')
+    expect(wrapper.find('.reveal').exists()).toBe(false)
+  })
+
+  it('still reports the card wrong after an eventual correct answer', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await guess(wrapper, 'to put on')
+    await answerRight(wrapper, 'to get dressed') // right at last — already missed
+    await answerRight(wrapper, 'month')
+
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      wrong: ['одеваться=to get dressed'],
+    })
+  })
+
+  it('reveals at once for a guess it cannot place — the loop stays fast', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await guess(wrapper, 'flibbertigibbet')
+    expect(wrapper.find('.correction').exists()).toBe(false)
+    expect(wrapper.find('.reveal').exists()).toBe(true)
+  })
+
+  it('Pass still reveals, whatever is in the box', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await wrapper.find('input.combo-input').setValue('to put on')
+    await wrapper.find('button.pass').trigger('click')
+    expect(wrapper.find('.reveal').exists()).toBe(true)
+  })
+
+  it('clears the correction when the next card comes up', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dress } })
+    await guess(wrapper, 'to put on')
+    expect(wrapper.find('.correction').exists()).toBe(true)
+    await answerRight(wrapper, 'to get dressed')
+    expect(wrapper.find('.correction').exists()).toBe(false)
+  })
+})
+
+describe('the facts panel never precedes the answer (#586)', () => {
+  it('appears only once the card is revealed', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('button.pass').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
+  })
+
+  it('is gone again on the next card', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    await wrapper.find('button.pass').trigger('click')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
   })
 })

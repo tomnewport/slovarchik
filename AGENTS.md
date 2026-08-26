@@ -59,9 +59,10 @@ src/
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, AnnotatedEnglish, …)
+                        #   BatchSearchAdd, WordProgressModal, WordFacts, AnnotatedEnglish, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
-                        #   PhraseFix, VerbContrast)
+                        #   PhraseFix, VerbContrast, IntroCard — the non-graded
+                        #   "here is a new word" step)
     inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
   composables/          # stateful Vue orchestration shared between views (needs a
                         #   component lifecycle, so it can't live in lib/):
@@ -81,9 +82,10 @@ src/
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   wordFacts  — a word's authored facts (build/root/origin/mnemonic) and its related words, derived + authored
+                        #   factCoverage  — which words most deserve a fact, and the sound-alike shortlist (a worklist, NOT a CI guard)
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
-                        #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so
+                        #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)

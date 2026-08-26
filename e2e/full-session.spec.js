@@ -195,6 +195,10 @@ async function completeSession(page) {
       case 'verb-contrast':
         await solvePhraseFix(exercise)
         break
+      case 'intro':
+        // A non-graded introduction (#587): read it and carry on.
+        await exercise.locator('button.got-it').click()
+        break
       default:
         throw new Error(`Unhandled exercise kind: ${kind}`)
     }
@@ -246,4 +250,32 @@ test('completes a full session and persists progress across a reload', async ({ 
   const persistedBar = page.locator('.batches-card [role="progressbar"]').first()
   await expect(persistedBar).toBeVisible({ timeout: 15_000 })
   expect(Number(await persistedBar.getAttribute('aria-valuenow'))).toBe(advanced)
+})
+
+test('introduces a brand-new word before the first exercise that tests it', async ({ page }) => {
+  await page.addInitScript((seed) => {
+    window.__SLOVARCHIK_SEED__ = seed
+  }, SEED)
+
+  await page.goto('/')
+  await page.getByRole('button', { name: /Normal/ }).click()
+
+  const firstBatch = page.locator('.batch-select .option').first()
+  await expect(firstBatch).toBeVisible({ timeout: 30_000 })
+  await firstBatch.click()
+
+  // A fresh batch is nothing but never-met words, so the session opens with an
+  // introduction rather than a guaranteed miss (#587).
+  const exercise = page.locator('.exercise[data-kind]')
+  await expect(exercise).toHaveAttribute('data-kind', 'intro', { timeout: 30_000 })
+  const headword = await exercise.locator('.intro-card .ru').textContent()
+  expect(headword?.trim()).toBeTruthy()
+
+  // Reading it moves straight on to a real, graded exercise.
+  await exercise.locator('button.got-it').click()
+  await expect(exercise).not.toHaveAttribute('data-kind', 'intro', { timeout: 15_000 })
+
+  // And the introduction sticks: the same word is not introduced twice.
+  await completeSession(page)
+  await expect(page.getByTestId('session-summary')).toBeVisible()
 })

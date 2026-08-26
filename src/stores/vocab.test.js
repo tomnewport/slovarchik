@@ -218,7 +218,12 @@ describe('word facts survive the cache round trip', () => {
 
     await loadFromCache()
 
-    for (const w of state.words) {
+    // Some nouns now carry authored facts (#590); the point here is the *other*
+    // words — one that authors nothing gets empty lists, not undefined.
+    const authored = new Set(Object.entries(nounsDoc.words).filter(([, w]) => w.facts).map(([k]) => k))
+    const plain = state.words.filter((w) => !authored.has(w.key))
+    expect(plain.length).toBeGreaterThan(0)
+    for (const w of plain) {
       expect(w.facts, `${w.key}: facts`).toEqual([])
       expect(w.confusables, `${w.key}: confusables`).toEqual([])
     }

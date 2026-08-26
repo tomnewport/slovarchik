@@ -658,6 +658,80 @@ export function makeVisualReplacement(skipped, seq, picker = null) {
   return isWord ? visType(content, skipped, `vis${seq}`) : visWordbank(content, skipped, `vis${seq}`)
 }
 
+/** At most this many intro cards in one session — an introduction is a pause. */
+export const MAX_INTROS_PER_SESSION = 5
+
+/**
+ * Splice intro cards (#587) into a built exercise list: a non-graded "here is a
+ * new word" step immediately before the first exercise that tests it.
+ *
+ * Just-in-time rather than batched at the top of the session, so the
+ * introduction and the first test sit together. The rules keep it from becoming
+ * the session:
+ *  - **current-batch words only** — a top-up word pulled in to fill a thin pool
+ *    shouldn't stop the lesson;
+ *  - **at most one per exercise**, so a twelve-card flashcard board introduces
+ *    one word and teaches the rest by reveal, as it does today;
+ *  - **never two in a row**, and never more than {@link MAX_INTROS_PER_SESSION};
+ *  - **once per session per word**, so a word introduced before its flashcard
+ *    isn't introduced again before its spelling exercise;
+ *  - **never after the word has already been met in this session**. A board that
+ *    teaches a word by reveal has introduced it, whatever the label says, and a
+ *    card headed "A new word" arriving afterwards is simply backwards.
+ *
+ * @param {object[]} exercises the built list, in order
+ * @param {object} opts
+ * @param {(key: string) => boolean} opts.needsIntro has this word never been
+ *   met *and* never been introduced?
+ * @param {Set<string>|string[]} [opts.batchKeys] words of the current batch; when
+ *   absent every target is eligible
+ * @param {number} [opts.max]
+ * @returns {object[]} a new list with the intro descriptors spliced in
+ */
+export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_INTROS_PER_SESSION } = {}) {
+  if (typeof needsIntro !== 'function' || max <= 0) return exercises.slice()
+  const eligible = batchKeys ? new Set(batchKeys) : null
+  // Every word this session has already put in front of the learner — whether by
+  // introducing it or by testing it. A word only gets a card while it is still
+  // genuinely new to the session.
+  const seen = new Set()
+  const out = []
+  let count = 0
+  let lastWasIntro = false
+  for (const ex of exercises) {
+    if (count < max && !lastWasIntro) {
+      const key = (ex.targets ?? []).find(
+        (k) => k && !seen.has(k) && (!eligible || eligible.has(k)) && needsIntro(k),
+      )
+      if (key) {
+        seen.add(key)
+        count++
+        out.push({
+          id: `intro${count}`,
+          kind: 'intro',
+          // Not something the learner can get wrong: the runner walks past it
+          // with `advance()` and it never enters the accuracy figures.
+          graded: false,
+          dimension: ex.dimension,
+          level: ex.level,
+          targets: [key],
+          // It borrows the practice index of the exercise it precedes, so the
+          // segmented progress bar stays coherent.
+          practiceIndex: ex.practiceIndex ?? 0,
+        })
+        lastWasIntro = true
+        out.push(ex)
+        for (const k of ex.targets ?? []) if (k) seen.add(k)
+        continue
+      }
+    }
+    lastWasIntro = false
+    out.push(ex)
+    for (const k of ex.targets ?? []) if (k) seen.add(k)
+  }
+  return out
+}
+
 /**
  * Build the flat exercise list for a session.
  * @param {object} session   from store.startSession (has `.practices`)
