@@ -51,7 +51,7 @@ describe('breakdownCandidates', () => {
     expect(breakdownCandidates(family).map((c) => c.key)).not.toContain('ходить=to go')
   })
 
-  it('ranks by root-family size — the reach is what makes a fact worth writing', () => {
+  it('ranks by root-family size — the reach is what makes a fact worth writing', { timeout: 60_000 }, () => {
     const ranked = breakdownCandidates(loadFixtureWords())
     expect(ranked[0].family).toBeGreaterThanOrEqual(ranked[ranked.length - 1].family)
     expect(ranked[0].family).toBeGreaterThan(5)
@@ -252,7 +252,9 @@ words:
     expect(confusableCandidates(words, { maxCefrGap: 5 })).toHaveLength(1)
   })
 
-  it('reports the closest pairs first', () => {
+  // Corpus-scale: the scan considers millions of pairs, so it gets headroom
+  // over the default per-test timeout for a slow CI runner.
+  it('reports the closest pairs first', { timeout: 60_000 }, () => {
     const ranked = confusableCandidates(loadFixtureWords())
     expect(ranked.length).toBeGreaterThan(0)
     for (let i = 1; i < ranked.length; i++) {

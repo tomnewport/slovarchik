@@ -140,23 +140,38 @@ function substitutionCost(x, y) {
   return VOWELS.has(x) && VOWELS.has(y) ? 0.5 : 1
 }
 
+// Two rows of the DP table, reused across calls. The scan runs this millions of
+// times, and allocating a fresh row per character was costing more than the
+// arithmetic in it.
+let prevRow = new Float64Array(64)
+let curRow = new Float64Array(64)
+
 /** Weighted edit distance, bailing out once it exceeds `cap`. */
 function distance(a, b, cap) {
   if (Math.abs(a.length - b.length) > cap) return cap + 1
-  let prev = Array.from({ length: b.length + 1 }, (_, i) => i)
+  if (prevRow.length < b.length + 1) {
+    prevRow = new Float64Array(b.length + 1)
+    curRow = new Float64Array(b.length + 1)
+  }
+  let prev = prevRow
+  let cur = curRow
+  for (let j = 0; j <= b.length; j++) prev[j] = j
   for (let i = 1; i <= a.length; i++) {
-    const row = [i]
+    cur[0] = i
     let best = i
+    const ai = a[i - 1]
     for (let j = 1; j <= b.length; j++) {
-      row[j] = Math.min(
-        prev[j] + 1,
-        row[j - 1] + 1,
-        prev[j - 1] + substitutionCost(a[i - 1], b[j - 1]),
-      )
-      if (row[j] < best) best = row[j]
+      const sub = prev[j - 1] + substitutionCost(ai, b[j - 1])
+      const del = prev[j] + 1
+      const ins = cur[j - 1] + 1
+      const v = sub < del ? (sub < ins ? sub : ins) : del < ins ? del : ins
+      cur[j] = v
+      if (v < best) best = v
     }
     if (best > cap) return cap + 1
-    prev = row
+    const swap = prev
+    prev = cur
+    cur = swap
   }
   return prev[b.length]
 }
@@ -213,10 +228,14 @@ export function confusableCandidates(
       // Sorted by length: once the gap exceeds the cap nothing further can match.
       if (fb.length - fa.length > cap) break
       if (Math.abs(cefrRank(a.cefr) - cefrRank(b.cefr)) > maxCefrGap) continue
-      if (alreadyLinked(a, b) || alreadyLinked(b, a)) continue
+      // Distance first, and only then the link check. The scan considers
+      // millions of pairs and rejects almost all of them; `alreadyLinked`
+      // normalises several arrays per call, so running it on every pair rather
+      // than on the handful that survive costs seconds.
       const d = distance(fa, fb, cap)
       const ratio = d / Math.max(fa.length, fb.length)
       if (d === 0 || d > cap || ratio > maxRatio) continue
+      if (alreadyLinked(a, b) || alreadyLinked(b, a)) continue
       out.push({
         a: { key: a.key, ru: a.headword || a.ru, en: a.meaning, cefr: a.cefr },
         b: { key: b.key, ru: b.headword || b.ru, en: b.meaning, cefr: b.cefr },
