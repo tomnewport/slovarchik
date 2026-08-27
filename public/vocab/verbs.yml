@@ -1451,6 +1451,13 @@ words:
       - ru: Ско́ро шко́ла введёт но́вое расписа́ние.
         en_gb: Soon the school will introduce a new timetable.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "В- is into, so ввести́ is to lead something in: a person, a rule, a new word."
+        parts:
+          - { ru: "в", en: "in" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "везти=to be taking":
     cefr_level: B1
     accented: везти́
@@ -3346,6 +3353,13 @@ words:
       - ru: Ты вста́вишь но́вую батаре́йку?
         en_gb: Will you insert a new battery?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "В- is in, so вста́вить is to stand something inside something else: to insert."
+        parts:
+          - { ru: "в", en: "in" }
+          - { ru: "ста́вить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "встать=to stand up":
     cefr_level: A1
     accented: встать
@@ -3806,6 +3820,13 @@ words:
       - ru: Пода́рок уже́ вы́бран.
         en_gb: The present has already been chosen.
         inflect: { token: 3, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "Вы- is out, so вы́брать is to take out of a set: to choose."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "брать", en: "take" }
+        see: ["брать=to take"]
   "выбраться=to get out":
     cefr_level: B1
     accented: вы́браться
@@ -3938,6 +3959,13 @@ words:
       - ru: Ты вы́ведешь всех нару́жу?
         en_gb: Will you lead everyone outside?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out, the exact opposite of the в- in ввести́: to lead out, and so to remove."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "вести", en: "lead" }
+        see: ["вести=to be leading"]
   "выглядеть=to look":
     cefr_level: A2
     accented: вы́глядеть
@@ -4028,6 +4056,13 @@ words:
         en_alt:
           - Do you give out money?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Вы- is out: to give out, to issue — and, of a person, to give them away."
+        parts:
+          - { ru: "вы", en: "out" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "выдать=to give out":
     cefr_level: B1
     accented: вы́дать
@@ -4072,6 +4107,13 @@ words:
       - ru: Ты вы́дашь секре́т?
         en_gb: Will you give away the secret?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out: to give out, to issue — and, of a person, to give them away."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "дать", en: "give" }
+        see: ["дать=to give"]
   "выделить=to allocate":
     cefr_level: B1
     accented: вы́делить
@@ -5153,6 +5195,13 @@ words:
       - ru: За́втра галере́я вы́ставит но́вые рабо́ты.
         en_gb: Tomorrow the gallery will put new works on display.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out: to put something out, and so to exhibit it."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "ставить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "выступать=to perform":
     cefr_level: B1
     accented: выступа́ть
@@ -6942,6 +6991,13 @@ words:
         en_alt:
           - Will you see the matter through to the end?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "До- is as far as, so довести́ is to lead something all the way to a point — a place, or a state."
+        parts:
+          - { ru: "до", en: "as far as" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "догадаться=to guess":
     cefr_level: B1
     accented: догада́ться
@@ -7585,6 +7641,13 @@ words:
       - ru: Ты доста́вишь посы́лку за́втра?
         en_gb: Will you deliver the parcel tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "До- is all the way there, so доста́вить is to get something to where it was going."
+        parts:
+          - { ru: "до", en: "all the way to" }
+          - { ru: "ста́вить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "достать=to get":
     cefr_level: A2
     accented: доста́ть
@@ -8736,6 +8799,13 @@ words:
       past_f: забрала́
       past_n: забра́ло
       past_pl: забра́ли
+    facts:
+      - kind: build
+        text: "За- is off and away with it: to collect something, or take it off someone."
+        parts:
+          - { ru: "за", en: "off, away" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "забывать=to forget":
     cefr_level: A1
     accented: забыва́ть
@@ -8877,6 +8947,13 @@ words:
       - ru: Ты заведёшь но́вую соба́ку?
         en_gb: Will you get a new dog?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "За- takes вести́ round behind something, and from there to setting it going: a car, a conversation, a dog."
+        parts:
+          - { ru: "за", en: "behind, into motion" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "завидовать=to envy":
     cefr_level: B1
     accented: зави́довать
@@ -11256,6 +11333,13 @@ words:
       - ru: Ско́ро обстоя́тельства заста́вят нас уе́хать.
         en_gb: Soon circumstances will force us to leave.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "За- blocks the way. Заста́вить first meant to block someone in with furniture, and cornering a person is how it came to mean making them do something."
+        parts:
+          - { ru: "за", en: "blocking, behind" }
+          - { ru: "ста́вить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "заставлять=to make":
     cefr_level: B1
     accented: заставля́ть
@@ -15626,6 +15710,13 @@ words:
       - ru: Ты наберёшь но́мер врача́?
         en_gb: Will you dial the doctor's number?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "На- is onto, and up to a quantity: to gather a number of things — including the digits of a phone number."
+        parts:
+          - { ru: "на", en: "onto, up to a number" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "надевать=to put on":
     cefr_level: A2
     accented: надева́ть
@@ -19711,6 +19802,13 @@ words:
       - ru: Запи́ска оста́влена на столе́.
         en_gb: A note has been left on the table.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "О- leaves the thing standing where it is, and walks off: to leave behind."
+        parts:
+          - { ru: "о", en: "aside, where it is" }
+          - { ru: "ста́вить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "оставлять=to leave":
     cefr_level: A2
     accented: оставля́ть
@@ -20027,6 +20125,13 @@ words:
       - ru: Ты отведёшь ребёнка в шко́лу?
         en_gb: Will you take the child to school?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "От- is away from here, so отвести́ is to take someone off somewhere: to school, or to one side."
+        parts:
+          - { ru: "от", en: "away" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "ответить=to answer":
     cefr_level: A1
     accented: отве́тить
@@ -20808,6 +20913,13 @@ words:
       - ru: Ты отберёшь лу́чшие фотогра́фии?
         en_gb: Will you pick out the best photographs?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "От- is away from someone. Note the о: before бр- the prefix grows one, because отбрать is unsayable. The same happens in подобра́ть and разобра́ть."
+        parts:
+          - { ru: "ото", en: "away from" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "отозваться=to respond":
     cefr_level: B1
     accented: отозва́ться
@@ -21940,6 +22052,13 @@ words:
       - ru: Ты переведёшь э́тот текст?
         en_gb: Will you translate this text?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Пере- is across. Перевести́ is to lead across — a road, or a language, and that second one is why it means to translate."
+        parts:
+          - { ru: "пере", en: "across, over" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "переводить=to translate":
     cefr_level: B1
     accented: переводи́ть
@@ -22017,6 +22136,13 @@ words:
       - ru: Ты передаёшь письмо́ сосе́ду?
         en_gb: Are you passing the letter to the neighbour?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Пере- is across, so this is to hand something across: to pass it on, or to broadcast it."
+        parts:
+          - { ru: "пере", en: "across, over" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "передать=to pass on":
     cefr_level: B1
     accented: переда́ть
@@ -22065,6 +22191,13 @@ words:
       - ru: Ты переда́шь кни́гу за́втра?
         en_gb: Will you pass on the book tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Пере- is across, so this is to hand something across: to pass it on, or to broadcast it."
+        parts:
+          - { ru: "пере", en: "across, over" }
+          - { ru: "да́ть", en: "give" }
+        see: ["дать=to give"]
   "передумать=to change one's mind":
     cefr_level: B1
     accented: переду́мать
@@ -23666,6 +23799,13 @@ words:
       - ru: Ты подаёшь суп?
         en_gb: Are you serving the soup?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "По- is toward someone, so this is to give in their direction: to serve a dish, to hand in a form."
+        parts:
+          - { ru: "по", en: "toward" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "подарить=to give a present":
     cefr_level: A1
     accented: подари́ть
@@ -23769,6 +23909,13 @@ words:
       - ru: Ты пода́шь заявле́ние в университе́т?
         en_gb: Will you submit an application to the university?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "По- is toward someone, so this is to give in their direction: to serve a dish, to hand in a form."
+        parts:
+          - { ru: "по", en: "toward" }
+          - { ru: "да́ть", en: "give" }
+        see: ["дать=to give"]
   "подготовить=to prepare":
     cefr_level: B1
     accented: подгото́вить
@@ -24183,6 +24330,13 @@ words:
       - ru: Ты подберёшь ну́жные слова́?
         en_gb: Will you pick the right words?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Под- is up from underneath, with the same helping о that ото- needed: to pick up what has fallen, or to pick out what matches."
+        parts:
+          - { ru: "подо", en: "up from under" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "подождать=to wait":
     cefr_level: A1
     accented: подожда́ть
@@ -27561,6 +27715,12 @@ words:
       - ru: Ва́за поста́влена на стол.
         en_gb: The vase has been put on the table.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "The one prefix in this family that adds nothing. По- only makes ста́вить perfective; the meaning stays exactly where it was. In the other eight the prefix is the whole difference."
+        parts:
+          - { ru: "по", en: "finishes the action" }
+          - { ru: "ста́вить", en: "put, set standing" }
   "постараться=to try hard":
     cefr_level: A2
     accented: постара́ться
@@ -28832,6 +28992,13 @@ words:
       - ru: Ты предста́вишь отчёт нача́льнику?
         en_gb: Will you present the report to the boss?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Пред- is before. Предста́вить is to set something before someone: to present it, or to picture it."
+        parts:
+          - { ru: "пред", en: "before, in front of" }
+          - { ru: "ста́вить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "представлять=to present":
     cefr_level: B1
     accented: представля́ть
@@ -29306,6 +29473,13 @@ words:
       - ru: Ты приведёшь сы́на в шко́лу?
         en_gb: Will you bring your son to school?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "При- is arrival, so привести́ is to bring someone here: the counterpart of отвести́."
+        parts:
+          - { ru: "при", en: "to, arriving" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "приводить=to bring":
     cefr_level: B1
     accented: приводи́ть
@@ -30989,6 +31163,13 @@ words:
         en_alt:
           - Will you conduct an important experiment?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Про- is through. Провести́ is to lead through, and time led through is time spent."
+        parts:
+          - { ru: "про", en: "through" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "проводить=to accompany":
     cefr_level: B1
     accented: проводи́ть
@@ -31212,6 +31393,14 @@ words:
       past_f: продава́лась
       past_n: продава́лось
       past_pl: продава́лись
+    facts:
+      - kind: build
+        text: "Прода́ть with -ся on the end: to sell itself, which is how Russian says a thing is on sale."
+        parts:
+          - { ru: "про", en: "away, through" }
+          - { ru: "дава́", en: "give" }
+          - { ru: "ться", en: "itself" }
+        see: ["давать=to give"]
   "продать=to sell":
     cefr_level: A2
     accented: прода́ть
@@ -32976,6 +33165,13 @@ words:
       - ru: Ты разведёшь кра́ску водо́й?
         en_gb: Will you dilute the paint with water?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Раз- is apart, so развести́ is to lead two things away from each other: a couple, or a powder into water."
+        parts:
+          - { ru: "раз", en: "apart" }
+          - { ru: "вести́", en: "lead" }
+        see: ["вести=to be leading"]
   "развиваться=to develop":
     cefr_level: B1
     accented: развива́ться
@@ -33225,6 +33421,14 @@ words:
       - ru: В тишине́ разда́лся бы любо́й шо́рох.
         en_gb: In the silence, any rustle would be clearly audible.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Раз- is outward in all directions, so разда́ться is to give itself out: a sound spreading through a room."
+        parts:
+          - { ru: "раз", en: "outward" }
+          - { ru: "да́", en: "give" }
+          - { ru: "ться", en: "itself" }
+        see: ["дать=to give"]
   "раздеваться=to get undressed":
     cefr_level: B1
     accented: раздева́ться
@@ -33415,6 +33619,13 @@ words:
         en_alt:
           - Will you take the tent down?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Раз- is apart, again with the helping о: to take to pieces, and from there to make out what something says."
+        parts:
+          - { ru: "разо", en: "apart" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "разобраться=to sort out":
     cefr_level: B1
     accented: разобра́ться
@@ -36993,6 +37204,13 @@ words:
       - ru: Все ве́щи со́браны.
         en_gb: All the things are packed.
         inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "Со- is together: to take things together, to gather them up."
+        parts:
+          - { ru: "со", en: "together" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "собраться=to gather":
     cefr_level: A2
     accented: собра́ться
@@ -37814,6 +38032,13 @@ words:
       - ru: Ты соста́вишь спи́сок поку́пок?
         en_gb: Will you make a shopping list?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Со- is together, so соста́вить is to stand things side by side: to put together."
+        parts:
+          - { ru: "со", en: "together" }
+          - { ru: "ста́вить", en: "put, set standing" }
+        see: ["ставить=to place"]
   "составлять=to compile":
     cefr_level: B1
     accented: составля́ть
@@ -40621,6 +40846,13 @@ words:
       - ru: Ко́мната у́брана.
         en_gb: The room has been tidied.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "У- is away, so убра́ть is to take away: to clear, to tidy."
+        parts:
+          - { ru: "у", en: "away" }
+          - { ru: "бра́ть", en: "take" }
+        see: ["брать=to take"]
   "уважать=to respect":
     cefr_level: B1
     accented: уважа́ть
@@ -40858,6 +41090,14 @@ words:
       - ru: Без по́мощи мне не удава́лось бы э́то.
         en_gb: Without help, I would not be succeeding at this.
         inflect: { token: 5, tense: past, person: past_n, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "У- plus дава́ть with -ся: the thing gives itself. Russian says the attempt succeeds itself, which is why the person goes in the dative — мне удаётся."
+        parts:
+          - { ru: "у", en: "off well" }
+          - { ru: "дава́", en: "give" }
+          - { ru: "ться", en: "itself" }
+        see: ["давать=to give"]
   "удалить=to delete":
     cefr_level: B1
     accented: удали́ть
@@ -40965,6 +41205,14 @@ words:
       - ru: С деньга́ми нам уда́лось бы бо́льше.
         en_gb: With money we would have succeeded at more.
         inflect: { token: 4, tense: past, person: past_n, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "У- plus дать with -ся on the end: the thing gave itself. Russian says the attempt succeeded itself, which is why the person goes in the dative — мне удало́сь."
+        parts:
+          - { ru: "у", en: "off well" }
+          - { ru: "да́", en: "give" }
+          - { ru: "ться", en: "itself" }
+        see: ["дать=to give"]
   "удержаться=to hold on":
     cefr_level: B1
     accented: удержа́ться
@@ -42259,6 +42507,14 @@ words:
       - ru: Ты уста́вишься на экра́н?
         en_gb: Will you stare at the screen?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "У- plus ста́вить plus -ся: to set yourself on something and not move. That is staring."
+        parts:
+          - { ru: "у", en: "onto, fixed" }
+          - { ru: "ста́ви", en: "put, set standing" }
+          - { ru: "-ться", en: "oneself" }
+        see: ["ставить=to place"]
   "установить=to install":
     cefr_level: B1
     accented: установи́ть
