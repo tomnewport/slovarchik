@@ -13,7 +13,16 @@
 // dozen words. Ranking by that reach beats ranking by word length, which just
 // returns every long word in the dictionary.
 //
-// Pure and framework-free; `scripts/coverage-facts.mjs` is the thin CLI over it.
+// The suffix pass works the same way in spirit: it names a source only when the
+// derivation reconstructs, because a wrong `see:` link teaches a relationship
+// that does not exist, which is worse than no link at all (#614).
+//
+// The sound-alike pass is a list to be worked *down*, so rejections are as
+// durable as authored links: `review/confusables-reviewed.jsonl` records them
+// with a reason and this module subtracts them (#613).
+//
+// Pure and framework-free; `scripts/coverage-facts.mjs` is the thin CLI over it,
+// and reads the ledger — nothing here touches the filesystem.
 import { stripStress } from './text.js'
 
 /** Productive prefixes, longest first so «пере-» wins over «пе-». */
@@ -25,6 +34,22 @@ export const PRODUCTIVE_PREFIXES = [
 
 /** Productive derivational suffixes worth a `root` fact. */
 export const PRODUCTIVE_SUFFIXES = ['тель', 'ость', 'ство', 'ение', 'ание', 'ник', 'ский']
+
+/**
+ * What each suffix is put on. A suffix does not attach to just anything: -ание
+ * and -тель build on verbs, -ость on adjectives, -ский and -ник on nouns and
+ * adjectives. Checking it is most of what separates зада́ние ← зада́ть from
+ * зада́ние ← зад, which reconstruct equally well on the letters alone.
+ */
+const SUFFIX_SOURCE_POS = {
+  тель: ['verb'],
+  ание: ['verb'],
+  ение: ['verb'],
+  ость: ['adjective'],
+  ство: ['noun', 'adjective'],
+  ник: ['noun', 'adjective', 'numeral'],
+  ский: ['noun', 'adjective', 'numeral'],
+}
 
 const CEFR_ORDER = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']
 
@@ -99,13 +124,100 @@ function cefrRank(level) {
 }
 
 /**
+ * Endings stripped from a candidate source to reach the stem it derives from,
+ * longest first. Every stripping that leaves a usable stem is indexed, not just
+ * the longest: расти́ has to yield both «рас» and «раст», because расте́ние is
+ * built on the second.
+ */
+const SOURCE_ENDINGS = [
+  'ться', 'ся', 'ти', 'ть', 'чь', 'ый', 'ий', 'ой', 'ая', 'ое', 'ые',
+  'ец', 'а', 'я', 'о', 'е', 'ь', 'й', 'ы', 'и',
+]
+
+/**
+ * Consonant mutations Russian derivation runs through, as [plain, mutated].
+ * друг → дру́жеский, рука́ → ручно́й: the stem the suffix lands on is not always
+ * the stem the source shows you.
+ */
+const MUTATIONS = [
+  ['ск', 'щ'], ['ст', 'щ'], ['к', 'ч'], ['г', 'ж'], ['х', 'ш'], ['ц', 'ч'],
+  ['д', 'жд'], ['д', 'ж'], ['т', 'щ'], ['т', 'ч'], ['з', 'ж'], ['с', 'ш'],
+  ['б', 'бл'], ['п', 'пл'], ['в', 'вл'], ['м', 'мл'],
+]
+
+const VOWELS = new Set('аеёиоуыэюя')
+
+const MIN_STEM = 3
+
+/**
+ * Every stem a source word could plausibly hand to a suffix — each ending
+ * stripped, and each result again without its final vowel, because the theme
+ * vowel goes too: зада́ть gives «зада» and then «зад», which is what зада́ние is
+ * built on.
+ */
+function sourceStems(form) {
+  const stems = []
+  const add = (stem) => {
+    if (stem.length >= MIN_STEM && !stems.includes(stem)) stems.push(stem)
+  }
+  add(form)
+  for (const end of SOURCE_ENDINGS) {
+    if (!form.endsWith(end)) continue
+    const stem = form.slice(0, -end.length)
+    add(stem)
+    if (VOWELS.has(stem[stem.length - 1])) add(stem.slice(0, -1))
+  }
+  return stems
+}
+
+/** stem → the words that could have handed it over. */
+function stemIndex(words) {
+  const index = new Map()
+  for (const w of words) {
+    for (const stem of sourceStems(bare(w))) {
+      const at = index.get(stem)
+      if (at) at.push(w)
+      else index.set(stem, [w])
+    }
+  }
+  return index
+}
+
+/**
+ * Sources that reconstruct `stem`, each with how it got there. A mutation is
+ * reported as such so a reviewer can see which claims lean on one.
+ */
+function sourcesFor(stem, index) {
+  const found = []
+  for (const w of index.get(stem) ?? []) found.push({ word: w, via: 'exact' })
+  for (const [plain, mutated] of MUTATIONS) {
+    if (!stem.endsWith(mutated)) continue
+    const unmutated = stem.slice(0, -mutated.length) + plain
+    for (const w of index.get(unmutated) ?? []) found.push({ word: w, via: 'mutation' })
+  }
+  return found
+}
+
+/**
  * Words carrying a productive derivational suffix and no root fact yet, with
- * the entry their stem seems to come from when one can be found. Fuzzier than
- * the prefix pass — this is a shortlist for a human, not a claim.
- * @returns {Array<{key, ru, cefr, suffix, from: ?{key, ru}}>}
+ * the entry they are built on **when that can be verified** (#614).
+ *
+ * Verified means reconstructible: some stripping of the source's own ending,
+ * allowing a known consonant mutation, is exactly the stem the suffix sits on.
+ * Anything less is reported as `from: null`. The column is one an author acts
+ * on — a wrong `see:` link teaches a relationship that does not exist, which is
+ * worse than no link at all — so it is quiet and right rather than full and
+ * wrong. Same constraint that makes the prefix pass trustworthy: the source has
+ * to be a real word standing in a real relation, not the nearest string.
+ *
+ * A source is also required to be *shorter* than the word it supposedly built.
+ * Derivation adds material; внима́ние does not come from внима́тельно.
+ *
+ * @returns {Array<{key, ru, cefr, suffix, from: ?{key, ru, via}}>}
  */
 export function derivationCandidates(words) {
   const learnable = (words ?? []).filter((w) => w.learnable !== false)
+  const index = stemIndex(learnable)
   const out = []
   for (const w of learnable) {
     if (w.facts?.some((f) => f.kind === 'root' || f.kind === 'build')) continue
@@ -113,19 +225,45 @@ export function derivationCandidates(words) {
     const suffix = PRODUCTIVE_SUFFIXES.find((s) => form.endsWith(s) && form.length - s.length >= 3)
     if (!suffix) continue
     const stem = form.slice(0, -suffix.length)
-    const from = learnable.find((o) => o !== w && bare(o).startsWith(stem) && bare(o).length >= 4)
+    const from = bestSource(sourcesFor(stem, index), w, form, suffix)
     out.push({
       key: w.key,
       ru: w.headword || w.ru,
       cefr: w.cefr ?? null,
       suffix,
-      from: from ? { key: from.key, ru: from.headword || from.ru } : null,
+      from: from ? { key: from.word.key, ru: from.word.headword || from.word.ru, via: from.via } : null,
     })
   }
   return out.sort((a, b) => cefrRank(a.cefr) - cefrRank(b.cefr) || a.ru.localeCompare(b.ru, 'ru'))
 }
 
-const VOWELS = new Set('аеёиоуыэюя')
+/**
+ * The likeliest of several reconstructions: an exact stem over one that needed a
+ * mutation, then the shortest source, on the reasoning that the least derived
+ * word in a family is the one the learner should be sent to.
+ */
+function bestSource(found, self, form, suffix) {
+  const wanted = SUFFIX_SOURCE_POS[suffix] ?? []
+  let best = null
+  for (const cand of found) {
+    if (cand.word === self) continue
+    if (!wanted.includes(cand.word.pos)) continue
+    // Compare without the reflexive: дви́гаться is longer than движе́ние only
+    // because of the -ся, and движе́ние is plainly built on it.
+    const srcForm = bare(cand.word)
+    if (unreflex(srcForm).length >= form.length) continue
+    if (!best || better(cand, best, srcForm)) best = { ...cand, form: srcForm }
+  }
+  return best
+}
+
+function better(cand, best, srcForm) {
+  if (cand.via !== best.via) return cand.via === 'exact'
+  if (srcForm.length !== best.form.length) return srcForm.length < best.form.length
+  const rank = cefrRank(cand.word.cefr) - cefrRank(best.word.cefr)
+  if (rank !== 0) return rank < 0
+  return cand.word.key.localeCompare(best.word.key, 'ru') < 0
+}
 
 /**
  * Cost of substituting one letter for another. A vowel for a vowel is cheap on
@@ -193,6 +331,29 @@ function alreadyLinked(a, b) {
 }
 
 /**
+ * Canonical identity of an unordered pair, so a rejection recorded one way
+ * round is honoured the other.
+ */
+function pairKey(a, b) {
+  return a < b ? `${a}\u0000${b}` : `${b}\u0000${a}`
+}
+
+/**
+ * Ledger entries naming a word the corpus no longer has (#613). A rejection
+ * outlives the review that made it, so a renamed or deleted key would otherwise
+ * sit there quietly inflating the count of what has been dealt with.
+ * @param {object[]} words
+ * @param {Array<{a: string, b: string}>} reviewed
+ * @returns {Array<{a, b, missing: string[]}>}
+ */
+export function staleReviewed(words, reviewed) {
+  const keys = new Set((words ?? []).filter((w) => w.learnable !== false).map((w) => w.key))
+  return (reviewed ?? [])
+    .map((r) => ({ ...r, missing: [r.a, r.b].filter((k) => !keys.has(k)) }))
+    .filter((r) => r.missing.length)
+}
+
+/**
  * Sound-alike shortlist for `confusable_with:` — pairs close enough in spelling
  * to be mistaken for each other, and not already linked by aspect, motion,
  * heteronymy or a shared gloss (those are derived, and authoring them is a CI
@@ -208,12 +369,16 @@ function alreadyLinked(a, b) {
  * @param {number} [opts.minLength] shortest word worth comparing (default 4)
  * @param {number} [opts.maxCefrGap] levels apart before a pair stops being a
  *   realistic confusion — you mix up words you are learning together (default 1)
+ * @param {Array<{a: string, b: string}>} [opts.reviewed] pairs already looked at
+ *   and set aside (#613), so the list can be worked *down* rather than re-read
+ *   from the top every session. Order-insensitive.
  * @returns {Array<{a, b, distance, ratio}>} closest first
  */
 export function confusableCandidates(
   words,
-  { maxRatio = 0.25, minLength = 4, maxCefrGap = 1 } = {},
+  { maxRatio = 0.25, minLength = 4, maxCefrGap = 1, reviewed = [] } = {},
 ) {
+  const setAside = new Set((reviewed ?? []).map((r) => pairKey(r.a, r.b)))
   const learnable = (words ?? [])
     .filter((w) => w.learnable !== false && bare(w).length >= minLength)
     .map((w) => ({ w, form: bare(w) }))
@@ -236,6 +401,7 @@ export function confusableCandidates(
       const ratio = d / Math.max(fa.length, fb.length)
       if (d === 0 || d > cap || ratio > maxRatio) continue
       if (alreadyLinked(a, b) || alreadyLinked(b, a)) continue
+      if (setAside.has(pairKey(a.key, b.key))) continue
       out.push({
         a: { key: a.key, ru: a.headword || a.ru, en: a.meaning, cefr: a.cefr },
         b: { key: b.key, ru: b.headword || b.ru, en: b.meaning, cefr: b.cefr },

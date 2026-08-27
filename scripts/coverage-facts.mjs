@@ -11,7 +11,11 @@
 // Usage:
 //   node scripts/coverage-facts.mjs            # coverage + the top of each list
 //   node scripts/coverage-facts.mjs --all      # every candidate
+//   node scripts/coverage-facts.mjs --skip=25  # resume the sound-alike list
 //   node scripts/coverage-facts.mjs --json     # machine-readable
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+
 import { loadFixtureWords } from '../src/test/fixtures.js'
 import { factIssues } from '../src/lib/wordFacts.js'
 import {
@@ -19,21 +23,42 @@ import {
   breakdownCandidates,
   derivationCandidates,
   confusableCandidates,
+  staleReviewed,
 } from '../src/lib/factCoverage.js'
+
+// Pairs looked at and set aside, so the shortlist can be worked *down* (#613).
+// One judgement per line, JSONL like the other ledgers in review/.
+const LEDGER = fileURLToPath(new URL('../review/confusables-reviewed.jsonl', import.meta.url))
+function loadReviewed() {
+  try {
+    return readFileSync(LEDGER, 'utf8')
+      .split('\n')
+      .filter((l) => l.trim())
+      .map((l) => JSON.parse(l))
+  } catch (err) {
+    if (err.code === 'ENOENT') return []
+    throw err
+  }
+}
 
 const words = loadFixtureWords()
 const args = process.argv.slice(2)
 const all = args.includes('--all')
 const LIMIT = all ? Infinity : 25
+// --skip=N picks up where the last session stopped, without a ledger entry per
+// rejection: the ledger records judgements, this records position.
+const SKIP = Number(args.find((a) => a.startsWith('--skip='))?.slice(7) ?? 0) || 0
 
 const coverage = factCoverage(words)
 const issues = factIssues(words)
 const breakdown = breakdownCandidates(words)
 const derivation = derivationCandidates(words)
-const confusable = confusableCandidates(words)
+const reviewed = loadReviewed()
+const stale = staleReviewed(words, reviewed)
+const confusable = confusableCandidates(words, { reviewed })
 
 if (args.includes('--json')) {
-  console.log(JSON.stringify({ coverage, issues, breakdown, derivation, confusable }, null, 2))
+  console.log(JSON.stringify({ coverage, issues, breakdown, derivation, confusable, reviewed, stale }, null, 2))
   process.exit(0)
 }
 
@@ -82,16 +107,33 @@ for (const c of breakdown) {
 }
 if (breakdown.length > shown) console.log(`  … ${breakdown.length - shown} more candidates (--all)`)
 
+const sourced = derivation.filter((c) => c.from).length
 console.log(`\n=== Worth a root fact (${derivation.length}) — productive suffixes ===\n`)
+console.log(
+  `  ${sourced} of ${derivation.length} have a source that reconstructs; the rest say so ` +
+    `rather than naming the nearest string (#614).\n`,
+)
 for (const c of derivation.slice(0, LIMIT)) {
-  console.log(`  ${pad(c.ru, 18)}${pad(c.cefr ?? '?', 4)}-${pad(c.suffix, 7)}${c.from ? `from ${c.from.ru}` : ''}`)
+  const from = c.from ? `from ${c.from.ru}${c.from.via === 'mutation' ? ' (mutation)' : ''}` : ''
+  console.log(`  ${pad(c.ru, 18)}${pad(c.cefr ?? '?', 4)}-${pad(c.suffix, 7)}${from}`)
 }
 if (derivation.length > LIMIT) console.log(`  … and ${derivation.length - LIMIT} more (--all)`)
 
 // ── Sound-alikes: the shortlist for confusable_with, closest first.
 console.log(`\n=== Sound-alike shortlist (${confusable.length}) — candidates for confusable_with ===\n`)
-for (const p of confusable.slice(0, LIMIT)) {
+if (reviewed.length) {
+  console.log(`  ${reviewed.length} pair(s) previously set aside in review/confusables-reviewed.jsonl.`)
+}
+if (stale.length) {
+  console.log(`  ${stale.length} ledger entr(ies) name a word the corpus no longer has:`)
+  for (const r of stale) console.log(`      ${r.missing.join(', ')}`)
+}
+if (SKIP) console.log(`  starting at ${SKIP + 1} (--skip=${SKIP}).`)
+if (reviewed.length || stale.length || SKIP) console.log()
+for (const p of confusable.slice(SKIP, SKIP + LIMIT)) {
   console.log(`  ${pad(p.a.ru, 16)}${pad(p.b.ru, 16)}${pad(p.ratio, 8)}${p.a.en} | ${p.b.en}`)
 }
-if (confusable.length > LIMIT) console.log(`  … and ${confusable.length - LIMIT} more (--all)`)
-console.log('\nReview by hand before authoring: a shortlist is a suggestion, not a verdict.\n')
+const left = confusable.length - SKIP - LIMIT
+if (left > 0) console.log(`  … and ${left} more (--all, or --skip=${SKIP + LIMIT})`)
+console.log('\nReview by hand before authoring: a shortlist is a suggestion, not a verdict.')
+console.log('Rejected one? Add it to review/confusables-reviewed.jsonl with a reason.\n')
