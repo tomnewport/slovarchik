@@ -4737,6 +4737,9 @@ words:
       pl_acc: бра́тьев
       pl_ins: бра́тьями
       pl_pre: бра́тьях
+    facts:
+      - kind: origin
+        text: "The same word as English brother, and Latin frater."
   "бревно=log":
     cefr_level: B1
     gender: n
@@ -6311,6 +6314,9 @@ words:
         en_alt:
           - Everyone is happy about the spring.
         inflect: { token: 3, case: dat, number: sg, rule: verb-gov-dative }
+    facts:
+      - kind: origin
+        text: "The same root as vernal; Latin ver."
   "ветер=wind":
     cefr_level: A1
     gender: m
@@ -6350,6 +6356,9 @@ words:
       pl_acc: ветра́
       pl_ins: ветра́ми
       pl_pre: ветра́х
+    facts:
+      - kind: origin
+        text: "The same root as English wind and Latin ventus: the vent- of ventilate."
   "ветеран=veteran":
     cefr_level: B2
     gender: m
@@ -7663,6 +7672,10 @@ words:
       pl_acc: во́ды
       pl_ins: во́дами
       pl_pre: во́дах
+    facts:
+      - kind: origin
+        text: "The same word as English water, worn down over a few thousand years. Once you see it, во́дка gives itself away."
+        see: ["водка=vodka"]
   "водитель=driver":
     cefr_level: A2
     gender: m
@@ -7740,6 +7753,13 @@ words:
       - ru: Го́сти пришли́ с буты́лкой во́дки.
         en_gb: The guests came with a bottle of vodka.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    facts:
+      - kind: build
+        text: "Вода́ with a diminutive ending on it: little water."
+        parts:
+          - { ru: "во́д", en: "water" }
+          - { ru: "-ка", en: "little" }
+        see: ["вода=water"]
   "водопад=waterfall":
     cefr_level: B1
     gender: m
@@ -8195,6 +8215,9 @@ words:
       pl_acc: вокза́лы
       pl_ins: вокза́лами
       pl_pre: вокза́лах
+    facts:
+      - kind: origin
+        text: "Thought to come from Vauxhall, the London pleasure gardens. The name reached the concert hall at the Pavlovsk railway terminus outside St Petersburg, and spread from there to every station in the country."
   "Волга=Volga":
     cefr_level: B1
     gender: f
@@ -8968,6 +8991,10 @@ words:
       pl_acc: враче́й
       pl_ins: врача́ми
       pl_pre: врача́х
+    facts:
+      - kind: origin
+        text: "From an old verb meaning to speak or to incant: the doctor was the one who said the words over you. That verb is врать, which now means to lie."
+        see: ["врать=to lie"]
   "время=time":
     cefr_level: A1
     gender: n
@@ -12315,6 +12342,9 @@ words:
       pl_acc: две́ри
       pl_ins: дверя́ми
       pl_pre: дверя́х
+    facts:
+      - kind: origin
+        text: "The same word as English door."
   "двигатель=engine":
     cefr_level: B1
     gender: m
@@ -12992,6 +13022,9 @@ words:
       pl_acc: дни
       pl_ins: дня́ми
       pl_pre: днях
+    facts:
+      - kind: origin
+        text: "Latin dies is the same word, so день is the di- of diary and diurnal. English day, despite the look of it, is not related at all."
   "деньги=money":
     cefr_level: A1
     animacy: i
@@ -13035,6 +13068,9 @@ words:
       pl_acc: де́ньги
       pl_ins: деньга́ми
       pl_pre: деньга́х
+    facts:
+      - kind: origin
+        text: "From a Turkic coin name, the tenga, which is still the currency of Kazakhstan."
   "депутат=deputy":
     cefr_level: B2
     gender: m
@@ -14339,6 +14375,9 @@ words:
       pl_acc: дома́
       pl_ins: дома́ми
       pl_pre: дома́х
+    facts:
+      - kind: origin
+        text: "The dom- of domestic and dominion. Latin domus is the same word, and it means the household as much as the building."
   "домохозяйка=housewife":
     cefr_level: B1
     gender: f
@@ -14800,6 +14839,9 @@ words:
       pl_acc: дочере́й
       pl_ins: дочеря́ми
       pl_pre: дочеря́х
+    facts:
+      - kind: origin
+        text: "The same word as English daughter."
   "драка=fight":
     cefr_level: B1
     gender: f
@@ -18212,6 +18254,9 @@ words:
       pl_acc: зи́мы
       pl_ins: зи́мами
       pl_pre: зи́мах
+    facts:
+      - kind: origin
+        text: "Latin hiems is the same word, so зима́ is the root of hibernate."
   "зло=evil":
     cefr_level: B1
     gender: n
@@ -19274,6 +19319,9 @@ words:
       pl_acc: имена́
       pl_ins: имена́ми
       pl_pre: имена́х
+    facts:
+      - kind: origin
+        text: "The same word as English name, and Latin nomen."
   "инженер=engineer":
     cefr_level: B1
     gender: m
@@ -21132,6 +21180,9 @@ words:
       pl_acc: карандаши́
       pl_ins: карандаша́ми
       pl_pre: карандаша́х
+    facts:
+      - kind: origin
+        text: "Thought to be Turkic kara taş, black stone, which is a fair description of the graphite inside it."
   "карман=pocket":
     cefr_level: A2
     gender: m
@@ -29225,6 +29276,9 @@ words:
       - ru: Мы любова́лись луно́й всю ночь.
         en_gb: We admired the moon all night.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+    facts:
+      - kind: origin
+        text: "The same word as Latin luna, so the same word as lunar."
   "луч=ray":
     cefr_level: B1
     gender: m
@@ -30437,6 +30491,10 @@ words:
       pl_acc: матере́й
       pl_ins: матеря́ми
       pl_pre: матеря́х
+    facts:
+      - kind: origin
+        text: "The same word as English mother and Latin mater. Most of the Russian family words are like this: брат, сестра́, сын and дочь all have English twins too."
+        see: ["брат=brother", "сестра=sister", "сын=son", "дочь=daughter"]
   "мачеха=stepmother":
     cefr_level: B2
     gender: f
@@ -30652,6 +30710,13 @@ words:
       pl_acc: медве́дей
       pl_ins: медве́дями
       pl_pre: медве́дях
+    facts:
+      - kind: build
+        text: "Not the bear's name but a nickname, the honey-eater. Saying the real name was thought to summon the animal, so it went unsaid until it was lost. English did the same and settled for bear, which only means the brown one."
+        parts:
+          - { ru: "мед", en: "honey (мёд)" }
+          - { ru: "ве́дь", en: "eating" }
+        see: ["есть=to eat"]
   "медикамент=medication":
     cefr_level: B2
     gender: m
@@ -31093,6 +31158,10 @@ words:
       pl_acc: ме́сяцы
       pl_ins: ме́сяцами
       pl_pre: ме́сяцах
+    facts:
+      - kind: origin
+        text: "Ме́сяц is both the month and the crescent moon, and that is no accident: English moon and month are the same pair, split from one word for what measures out time."
+        see: ["луна=moon"]
   "металл=metal":
     cefr_level: B1
     gender: m
@@ -32841,6 +32910,9 @@ words:
       pl_acc: моря́
       pl_ins: моря́ми
       pl_pre: моря́х
+    facts:
+      - kind: origin
+        text: "The same root as marine and mermaid; Latin mare."
   "морепродукт=seafood":
     cefr_level: B1
     gender: m
@@ -34992,6 +35064,13 @@ words:
         en_alt:
           - Last week it rained.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
+    facts:
+      - kind: build
+        text: "The not-doing day: the day nothing was worked. It meant Sunday before it meant the whole week."
+        parts:
+          - { ru: "не", en: "not" }
+          - { ru: "де́ля", en: "doing" }
+        see: ["воскресенье=Sunday", "делать=to do"]
   "недостаток=shortcoming":
     cefr_level: B1
     gender: m
@@ -35652,6 +35731,9 @@ words:
       pl_acc: носы́
       pl_ins: носа́ми
       pl_pre: носа́х
+    facts:
+      - kind: origin
+        text: "The same word as English nose, and Latin nasus."
   "носок=sock":
     cefr_level: A2
     gender: m
@@ -35796,6 +35878,9 @@ words:
       pl_acc: но́чи
       pl_ins: ноча́ми
       pl_pre: ноча́х
+    facts:
+      - kind: origin
+        text: "The same word as English night, German Nacht, Latin nox."
   "нужда=need":
     cefr_level: B1
     gender: f
@@ -37284,6 +37369,10 @@ words:
       pl_acc: о́кна
       pl_ins: о́кнами
       pl_pre: о́кнах
+    facts:
+      - kind: origin
+        text: "A window is an eye in the wall: from о́ко, the old word for eye, still visible in очки́. English did the same thing, and window is the Old Norse for wind-eye."
+        see: ["очки=glasses"]
   "окончание=ending":
     cefr_level: B1
     gender: n
@@ -39421,6 +39510,10 @@ words:
       pl_acc: очки́
       pl_ins: очка́ми
       pl_pre: очка́х
+    facts:
+      - kind: origin
+        text: "Little eyes, from о́ко, the old word for eye that глаз replaced. Окно́ comes from the same word."
+        see: ["окно=window"]
   "очко=point":
     cefr_level: B2
     gender: n
@@ -54837,6 +54930,9 @@ words:
       pl_acc: сестёр
       pl_ins: сёстрами
       pl_pre: сёстрах
+    facts:
+      - kind: origin
+        text: "The same word as English sister, and Latin soror."
   "сетка=grid":
     cefr_level: B2
     gender: f
@@ -57500,6 +57596,9 @@ words:
       sg_acc: со́лнце
       sg_ins: со́лнцем
       sg_pre: со́лнце
+    facts:
+      - kind: origin
+        text: "The same root as solar and solstice; Latin sol."
   "соль=salt":
     cefr_level: A1
     gender: f
@@ -57526,6 +57625,9 @@ words:
       sg_acc: соль
       sg_ins: со́лью
       sg_pre: со́ли
+    facts:
+      - kind: origin
+        text: "The same word as English salt, and Latin sal: the sal- of salary."
   "сомнение=doubt":
     cefr_level: B1
     gender: n
@@ -61666,6 +61768,9 @@ words:
       pl_acc: сынове́й
       pl_ins: сыновья́ми
       pl_pre: сыновья́х
+    facts:
+      - kind: origin
+        text: "The same word as English son."
   "сыр=cheese":
     cefr_level: A1
     gender: m
@@ -69047,6 +69152,9 @@ words:
       pl_acc: чаи́
       pl_ins: чая́ми
       pl_pre: чая́х
+    facts:
+      - kind: origin
+        text: "From Chinese chá, carried overland. English tea came by sea instead, from a southern dialect's te: the same leaf, two trade routes, two words."
   "чайка=seagull":
     cefr_level: B1
     gender: f
@@ -72470,6 +72578,9 @@ words:
       pl_acc: я́блоки
       pl_ins: я́блоками
       pl_pre: я́блоках
+    facts:
+      - kind: origin
+        text: "The same word as English apple."
   "явление=phenomenon":
     cefr_level: B1
     gender: n

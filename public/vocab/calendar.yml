@@ -124,6 +124,10 @@ words:
       pl_acc: воскресе́нья
       pl_ins: воскресе́ньями
       pl_pre: воскресе́ньях
+    facts:
+      - kind: origin
+        text: "Resurrection. It took Sunday over from неде́ля, which then slid up to mean the whole week, leaving понеде́льник still pointing at the older sense: the day after the неде́ля."
+        see: ["неделя=week", "понедельник=Monday"]
   # ── Months ─────────────────────────────────────────────────────────
   "вторник=Tuesday":
     cefr_level: A1

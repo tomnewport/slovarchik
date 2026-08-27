@@ -1423,6 +1423,10 @@ words:
           - Tomorrow I have a day off.
       - ru: Уви́димся за́втра у́тром.
         en_gb: See you tomorrow morning.
+    facts:
+      - kind: origin
+        text: "Once за у́тра, beyond the morning. The two words ran together and the у wore away."
+        see: ["утро=morning"]
   "задумчиво=thoughtfully":
     cefr_level: B2
     accented: заду́мчиво
@@ -4481,6 +4485,13 @@ words:
         en_gb: What are we doing this evening?
         en_alt:
           - What are we doing tonight?
+    facts:
+      - kind: build
+        text: "Сего́ дня, of this day, fused into one word. The г is still said as в, a fossil of the old ending."
+        parts:
+          - { ru: "сего́", en: "of this" }
+          - { ru: "дня", en: "day" }
+        see: ["день=day"]
   "сейчас=now":
     cefr_level: A1
     accented: сейча́с
@@ -4501,6 +4512,13 @@ words:
         en_gb: The lesson will begin now.
         en_alt:
           - The lesson is about to begin.
+    facts:
+      - kind: build
+        text: "Сей час, this hour, fused into one word."
+        parts:
+          - { ru: "сей", en: "this" }
+          - { ru: "ча́с", en: "hour" }
+        see: ["час=hour"]
   "сердито=angrily":
     cefr_level: B2
     accented: серди́то

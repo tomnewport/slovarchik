@@ -163,6 +163,9 @@ words:
       acc_f: две
       ins: двумя́
       pre: двух
+    facts:
+      - kind: origin
+        text: "The same word as English two."
   "двадцатый=twentieth":
     cefr_level: A2
     type: ordinal
@@ -895,6 +898,9 @@ words:
       acc: со́рок
       ins: сорока́
       pre: сорока́
+    facts:
+      - kind: origin
+        text: "The one round number Russian does not build from its parts: everywhere else it says so many tens, but forty has a word of its own. It is thought to come from a со́рок, a bundle of forty sable pelts, once a unit of trade."
   "сотня=hundred of":
     cefr_level: B1
     type: quantity
@@ -949,6 +955,9 @@ words:
       acc: сто
       ins: ста
       pre: ста
+    facts:
+      - kind: origin
+        text: "English hundred and the cent- of per cent are the same old word; сто is what is left of it in Russian."
   "третий=third":
     cefr_level: A1
     type: ordinal
@@ -991,6 +1000,9 @@ words:
       acc: три
       ins: тремя́
       pre: трёх
+    facts:
+      - kind: origin
+        text: "The same word as English three."
   "тридцать=thirty":
     cefr_level: A1
     type: cardinal

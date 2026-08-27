@@ -2200,6 +2200,9 @@ words:
       past_f: ви́дела
       past_n: ви́дело
       past_pl: ви́дели
+    facts:
+      - kind: origin
+        text: "The same root as video and vision, and as English wit, which once meant to know by seeing."
   "висеть=to hang":
     cefr_level: A2
     accented: висе́ть
@@ -8158,6 +8161,9 @@ words:
       past_f: е́ла
       past_n: е́ло
       past_pl: е́ли
+    facts:
+      - kind: origin
+        text: "The same word as English eat, and Latin edere."
   "ехать=to go by transport":
     cefr_level: A1
     accented: е́хать
@@ -8647,6 +8653,9 @@ words:
       act_pres: живу́щий
       act_past: жи́вший
     gerund: живя́
+    facts:
+      - kind: origin
+        text: "The same root as vital and vivid, and as the old sense of quick meaning alive, as in the quick and the dead."
   "заботиться=to take care":
     cefr_level: B2
     accented: забо́титься
@@ -12033,6 +12042,9 @@ words:
       act_pres: зна́ющий
       act_past: зна́вший
     gerund: зна́я
+    facts:
+      - kind: origin
+        text: "The same word as English know, and the gno- of diagnosis and agnostic."
   "значить=to mean":
     cefr_level: A2
     accented: зна́чить
@@ -22666,6 +22678,9 @@ words:
       past_f: пила́
       past_n: пи́ло
       past_pl: пи́ли
+    facts:
+      - kind: origin
+        text: "The same root as potion and potable; Latin bibere."
   "плавать=to swim":
     cefr_level: A1
     accented: пла́вать
@@ -35543,6 +35558,9 @@ words:
       - ru: Си́дя на дива́не, она́ смотре́ла телеви́зор.
         en_gb: Sitting on the sofa, she watched television.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+    facts:
+      - kind: origin
+        text: "The same word as English sit."
   "сиять=to shine":
     cefr_level: B1
     accented: сия́ть
@@ -38935,6 +38953,9 @@ words:
       act_pres: стоя́щий
       act_past: стоя́вший
     gerund: сто́я
+    facts:
+      - kind: origin
+        text: "The same word as English stand, and the sta- of stable and station."
   "страдать=to suffer":
     cefr_level: B1
     accented: страда́ть

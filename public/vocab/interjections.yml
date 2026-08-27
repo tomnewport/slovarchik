@@ -341,6 +341,10 @@ words:
         en_gb: Hello, glad to see you.
       - ru: Здра́вствуйте, проходи́те, пожа́луйста.
         en_gb: Hello, please come in.
+    facts:
+      - kind: origin
+        text: "Be healthy: the same root as здоро́вый. The everyday greeting is literally a wish for the other person's health."
+        see: ["здоровый=healthy"]
   "ибо=because":
     cefr_level: B2
     type: particle
@@ -627,6 +631,9 @@ words:
           - Help me, please.
       - ru: Спаси́бо! — Пожа́луйста.
         en_gb: Thank you! — You're welcome.
+    facts:
+      - kind: origin
+        text: "From жа́ловать, to grant a favour: please in the sense of do me the kindness."
   "пока=bye":
     cefr_level: A1
     type: greet
@@ -687,6 +694,13 @@ words:
         en_gb: Thank you for everything.
       - ru: Спаси́бо, э́то о́чень ми́ло.
         en_gb: Thanks, that's very kind.
+    facts:
+      - kind: build
+        text: "Спаси́ Бог, God save you, said often enough to fuse into one word."
+        parts:
+          - { ru: "спаси́", en: "save" }
+          - { ru: "бо", en: "God (Бог)" }
+        see: ["спасти=to save"]
   "таки=after all":
     cefr_level: B2
     type: particle
