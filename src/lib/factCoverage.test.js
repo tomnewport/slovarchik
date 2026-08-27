@@ -53,8 +53,13 @@ describe('breakdownCandidates', () => {
 
   it('ranks by root-family size — the reach is what makes a fact worth writing', { timeout: 60_000 }, () => {
     const ranked = breakdownCandidates(loadFixtureWords())
-    expect(ranked[0].family).toBeGreaterThanOrEqual(ranked[ranked.length - 1].family)
-    expect(ranked[0].family).toBeGreaterThan(5)
+    // Assert the ordering itself rather than how big the biggest family happens
+    // to be today: authoring facts drains the large families, so any threshold
+    // on ranked[0].family measures how much has been written, not the ranking.
+    const sizes = ranked.map((c) => c.family)
+    expect(sizes).toEqual([...sizes].sort((a, b) => b - a))
+    // …and that it is ranking real families, not a list of singletons.
+    expect(sizes[0]).toBeGreaterThan(1)
   })
 
   it('drops a word that already carries a build or root fact', () => {
