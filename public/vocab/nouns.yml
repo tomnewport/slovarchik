@@ -9188,6 +9188,13 @@ words:
       pl_acc: вхо́ды
       pl_ins: вхо́дами
       pl_pre: вхо́дах
+    facts:
+      - kind: build
+        text: "В- is in and ход is the going: an вход is the place where the going-in happens."
+        parts:
+          - { ru: "в", en: "in" }
+          - { ru: "ход", en: "going" }
+        see: ["ход=move"]
   "выбор=choice":
     cefr_level: A2
     gender: m
@@ -9502,6 +9509,13 @@ words:
       pl_acc: вы́ходы
       pl_ins: вы́ходами
       pl_pre: вы́ходах
+    facts:
+      - kind: build
+        text: "Вы- is out, the opposite of the в- in вход: where the going-out happens, and of a situation, the way out of it."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "ход", en: "going" }
+        see: ["вход=entrance"]
   "вяз=elm":
     cefr_level: C1
     gender: m
@@ -14784,6 +14798,13 @@ words:
       pl_acc: дохо́ды
       pl_ins: дохо́дами
       pl_pre: дохо́дах
+    facts:
+      - kind: build
+        text: "До- is up to and as far as, so дохо́д is what comes as far as you: income."
+        parts:
+          - { ru: "до", en: "as far as" }
+          - { ru: "хо́д", en: "going" }
+        see: ["ход=move"]
   "дочка=daughter":
     cefr_level: A1
     gender: f
@@ -41239,6 +41260,13 @@ words:
       pl_acc: перехо́ды
       pl_ins: перехо́дами
       pl_pre: перехо́дах
+    facts:
+      - kind: build
+        text: "The same пере- as in переходи́ть, put on ход instead: a crossing, whether over a road or from one state to another."
+        parts:
+          - { ru: "пере", en: "across" }
+          - { ru: "хо́д", en: "going" }
+        see: ["переходить=to cross"]
   "перец=pepper":
     cefr_level: B1
     gender: m
@@ -46076,6 +46104,13 @@ words:
       pl_acc: похо́ды
       pl_ins: похо́дами
       pl_pre: похо́дах
+    facts:
+      - kind: build
+        text: "По- sets the going going: a похо́д is a journey undertaken on purpose — a hike, or a campaign."
+        parts:
+          - { ru: "по", en: "setting off" }
+          - { ru: "хо́д", en: "going" }
+        see: ["ход=move"]
   "поцелуй=kiss":
     cefr_level: B1
     gender: m
@@ -48813,6 +48848,13 @@ words:
       - ru: Рабо́чие закры́ли все прохо́ды.
         en_gb: The workers closed all the passages.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+    facts:
+      - kind: build
+        text: "Про- is through, so a прохо́д is the space you go through: a passage, an aisle."
+        parts:
+          - { ru: "про", en: "through" }
+          - { ru: "хо́д", en: "going" }
+        see: ["проходить=to pass"]
   "процент=per cent":
     cefr_level: B1
     gender: m
@@ -50857,6 +50899,13 @@ words:
       pl_acc: расхо́ды
       pl_ins: расхо́дами
       pl_pre: расхо́дах
+    facts:
+      - kind: build
+        text: "Рас- is out and apart, the exact opposite of the до- in дохо́д: what goes out again."
+        parts:
+          - { ru: "рас", en: "out, apart" }
+          - { ru: "хо́д", en: "going" }
+        see: ["доход=income"]
   "расчёт=calculation":
     cefr_level: B1
     gender: m
@@ -66403,6 +66452,13 @@ words:
       - ru: Его́ ухо́д был неожи́данным.
         en_gb: His departure was unexpected.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+    facts:
+      - kind: build
+        text: "У- is away, so ухо́д is a going away. The other sense, care, comes by way of уха́живать за ке́м-то, to attend on someone."
+        parts:
+          - { ru: "у", en: "away" }
+          - { ru: "хо́д", en: "going" }
+        see: ["ход=move"]
   "участие=participation":
     cefr_level: B1
     gender: n

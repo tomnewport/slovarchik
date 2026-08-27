@@ -4560,6 +4560,13 @@ words:
       - ru: Ты вы́несешь му́сор?
         en_gb: Will you take out the rubbish?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out: to carry something out. It also means to bear a thing, which is the same picture — carrying the weight all the way out."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "нести", en: "carry" }
+        see: ["нести=to be carrying"]
   "вынуть=to take out":
     cefr_level: A2
     accented: вы́нуть
@@ -4850,6 +4857,13 @@ words:
       - ru: Ты вы́пустишь но́вую кни́гу?
         en_gb: Will you release a new book?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out: to let out — a prisoner, a book, a breath."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "пустить", en: "let go" }
+        see: ["пустить=to let"]
   "выражать=to express":
     cefr_level: B1
     accented: выража́ть
@@ -7556,6 +7570,13 @@ words:
       - ru: Ты допу́стишь оши́бку?
         en_gb: Will you make a mistake?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "До- is as far as, so допусти́ть is to let something get that far: to allow it."
+        parts:
+          - { ru: "до", en: "as far as" }
+          - { ru: "пусти́ть", en: "let go" }
+        see: ["пустить=to let"]
   "доставать=to get":
     cefr_level: A2
     accented: достава́ть
@@ -11067,6 +11088,13 @@ words:
       past_f: запусти́ла
       past_n: запусти́ло
       past_pl: запусти́ли
+    facts:
+      - kind: build
+        text: "За- sends it off beyond: to let a thing fly, to launch or start it up."
+        parts:
+          - { ru: "за", en: "off, beyond" }
+          - { ru: "пусти́ть", en: "let go" }
+        see: ["пустить=to let"]
   "зарабатывать=to earn":
     cefr_level: A2
     accented: зараба́тывать
@@ -17087,6 +17115,14 @@ words:
       - ru: Без вы́вески магази́н находи́лся бы незаме́тно.
         en_gb: Without a sign the shop would be hard to find.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "На- plus ходи́ть with -ся: to have walked yourself onto something, and so to be found there. Находи́ться is simply where a thing is."
+        parts:
+          - { ru: "на", en: "onto" }
+          - { ru: "ходи́", en: "walk" }
+          - { ru: "ться", en: "oneself" }
+        see: ["ходить=to walk"]
   "начать=to begin":
     cefr_level: A1
     accented: нача́ть
@@ -19400,6 +19436,13 @@ words:
       - ru: Ты опу́стишь го́лову?
         en_gb: Will you lower your head?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "О- is down: to let something down."
+        parts:
+          - { ru: "о", en: "down" }
+          - { ru: "пусти́ть", en: "let go" }
+        see: ["пустить=to let"]
   "опуститься=to sink":
     cefr_level: B1
     accented: опусти́ться
@@ -19441,6 +19484,14 @@ words:
       - ru: Ско́ро со́лнце опу́стится за́ лес.
         en_gb: Soon the sun will sink behind the forest.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The same о- as in опусти́ть, with -ся: to let yourself down, to sink."
+        parts:
+          - { ru: "о", en: "down" }
+          - { ru: "пусти́", en: "let go" }
+          - { ru: "ться", en: "oneself" }
+        see: ["опустить=to lower"]
   "орать=to yell":
     cefr_level: B2
     accented: ора́ть
@@ -21227,6 +21278,13 @@ words:
       - ru: Ты отпу́стишь соба́ку погуля́ть?
         en_gb: Will you let the dog go for a walk?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "От- is away, so отпусти́ть is to let go of something and let it go off."
+        parts:
+          - { ru: "от", en: "away" }
+          - { ru: "пусти́ть", en: "let go" }
+        see: ["пустить=to let"]
   "отрезать=to cut off":
     cefr_level: B1
     accented: отре́зать
@@ -21354,6 +21412,13 @@ words:
       - ru: Ты отхо́дишь от окна́?
         en_gb: Are you moving away from the window?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "От- is away, so отходи́ть is to walk off from something. It is what a train does when it leaves the platform."
+        parts:
+          - { ru: "от", en: "away" }
+          - { ru: "ходи́ть", en: "walk" }
+        see: ["ходить=to walk"]
   "отыскать=to find":
     cefr_level: B1
     accented: отыска́ть
@@ -22435,6 +22500,13 @@ words:
       - ru: Ты перенесёшь тяжёлую боле́знь?
         en_gb: Will you get through a serious illness?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Пере- is across: to carry something over, to move it — and so to come through an illness or a hardship and out the other side."
+        parts:
+          - { ru: "пере", en: "across" }
+          - { ru: "нести́", en: "carry" }
+        see: ["нести=to be carrying"]
   "переодеваться=to change clothes":
     cefr_level: B1
     accented: переодева́ться
@@ -22599,6 +22671,13 @@ words:
       - ru: Ты перехо́дишь доро́гу осторо́жно?
         en_gb: Do you cross the road carefully?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Пере- is across: to walk across. The noun made the same way is перехо́д, a crossing."
+        parts:
+          - { ru: "пере", en: "across" }
+          - { ru: "ходи́ть", en: "walk" }
+        see: ["переход=crossing"]
   "петь=to sing":
     cefr_level: A1
     accented: петь
@@ -23152,6 +23231,13 @@ words:
       - ru: Ты побежи́шь за мячо́м?
         en_gb: Will you run off after the ball?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "По- sets the running going: to break into a run."
+        parts:
+          - { ru: "по", en: "setting off" }
+          - { ru: "бежа́ть", en: "run" }
+        see: ["бежать=to run"]
   "побеждать=to win":
     cefr_level: B1
     accented: побежда́ть
@@ -23313,6 +23399,13 @@ words:
         en_alt:
           - If we had been lucky, we would have won.
         inflect: { token: 3, tense: past, person: past_n, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "По- sets везти́ going. Impersonally it is Russian for being lucky: мне повезло́, it carried well for me, with the person in the dative."
+        parts:
+          - { ru: "по", en: "setting off" }
+          - { ru: "везти́", en: "take by vehicle" }
+        see: ["везти=to be taking"]
   "поверить=to believe":
     cefr_level: A2
     accented: пове́рить
@@ -24713,6 +24806,13 @@ words:
       past_f: подходи́ла
       past_n: подходи́ло
       past_pl: подходи́ли
+    facts:
+      - kind: build
+        text: "Под- is up to and under, so подходи́ть is to walk up to something — and to suit, in the sense of coming up to what was wanted."
+        parts:
+          - { ru: "под", en: "up to" }
+          - { ru: "ходи́ть", en: "walk" }
+        see: ["ходить=to walk"]
   "подчеркнуть=to underline":
     cefr_level: B1
     accented: подчеркну́ть
@@ -26615,6 +26715,13 @@ words:
       - ru: Ты понесёшь су́мки в дом?
         en_gb: Will you carry the bags into the house?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "По- sets нести́ going: to start carrying, or to be carried off."
+        parts:
+          - { ru: "по", en: "setting off" }
+          - { ru: "нести́", en: "carry" }
+        see: ["нести=to be carrying"]
   "понимать=to understand":
     cefr_level: A1
     accented: понима́ть
@@ -28336,6 +28443,13 @@ words:
       - ru: Ты похо́дишь на отца́?
         en_gb: Are you like your father?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "По- with ходи́ть is going about in someone else's manner, and from there simply being like them. Note the stress: похо́дить is to resemble, while походи́ть, stressed on the ending, is to walk about for a while."
+        parts:
+          - { ru: "по", en: "about, in the manner of" }
+          - { ru: "хо́дить", en: "walk" }
+        see: ["ходить=to walk"]
   "поцеловать=to kiss":
     cefr_level: A2
     accented: поцелова́ть
@@ -29429,6 +29543,13 @@ words:
       - ru: Ты привезёшь ме́бель на грузовике́?
         en_gb: Will you bring the furniture by lorry?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "При- is arrival, везти́ is taking something by vehicle: привезти́ is to bring it in a car, a train, a suitcase. Russian makes you say how the thing arrives. При- is arrival either way; the stem is the difference. Принести́ brings it in your hands."
+        parts:
+          - { ru: "при", en: "arriving" }
+          - { ru: "везти́", en: "take by vehicle" }
+        see: ["везти=to be taking", "принести=to bring"]
   "привести=to bring":
     cefr_level: B1
     accented: привести́
@@ -30370,6 +30491,13 @@ words:
       - ru: Ко́фе принесён.
         en_gb: The coffee has been brought.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "При- is arrival, нести́ is carrying: принести́ is to bring something in your hands. Russian makes you say how the thing arrives. При- is arrival either way; the stem is the difference. Привезти́ brings it by vehicle, привести́ brings a person on foot."
+        parts:
+          - { ru: "при", en: "arriving" }
+          - { ru: "нести́", en: "carry" }
+        see: ["нести=to be carrying", "привезти=to bring", "привести=to bring"]
   "принимать=to accept":
     cefr_level: B1
     accented: принима́ть
@@ -30817,6 +30945,14 @@ words:
       - ru: Ему́ приходи́лось мно́го ходи́ть пешко́м.
         en_gb: He had to walk a lot.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
+    facts:
+      - kind: build
+        text: "При- is arrival and -ся turns it back on itself: the thing comes round to you. Russian has the obligation arrive at the person, which is why they stand in the dative — мне прихо́дится."
+        parts:
+          - { ru: "при", en: "arriving" }
+          - { ru: "ходи́", en: "walk" }
+          - { ru: "ться", en: "oneself" }
+        see: ["ходить=to walk"]
   "пришивать=to sew on":
     cefr_level: B2
     accented: пришива́ть
@@ -30931,6 +31067,13 @@ words:
       past_f: пробежа́ла
       past_n: пробежа́ло
       past_pl: пробежа́ли
+    facts:
+      - kind: build
+        text: "Про- is through and past: to run a distance, or to run past something."
+        parts:
+          - { ru: "про", en: "through, past" }
+          - { ru: "бежа́ть", en: "run" }
+        see: ["бежать=to run"]
   "пробовать=to try":
     cefr_level: A2
     accented: про́бовать
@@ -32112,6 +32255,13 @@ words:
       - ru: Ты пропу́стишь авто́бус?
         en_gb: Will you miss the bus?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Про- is through and past. Пропусти́ть is to let something through — or to let it go past you, which is how the same word means to miss it."
+        parts:
+          - { ru: "про", en: "through, past" }
+          - { ru: "пусти́ть", en: "let go" }
+        see: ["пустить=to let"]
   "просить=to ask for":
     cefr_level: A2
     accented: проси́ть
@@ -32363,6 +32513,13 @@ words:
       - ru: Вре́мя проходи́ло бы быстре́е за рабо́той.
         en_gb: Time would pass faster while working.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Про- is through: to walk through, past, or over. The noun is прохо́д, a passage."
+        parts:
+          - { ru: "про", en: "through" }
+          - { ru: "ходи́ть", en: "walk" }
+        see: ["проход=passage"]
   "прочитать=to read":
     cefr_level: A1
     accented: прочита́ть
@@ -35284,6 +35441,13 @@ words:
       - ru: Ты сбежи́шь но́чью?
         en_gb: Will you run away at night?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "С- is off and down: to run off, to escape."
+        parts:
+          - { ru: "с", en: "off, down" }
+          - { ru: "бежа́ть", en: "run" }
+        see: ["убежать=to run away"]
   "сбить=to knock down":
     cefr_level: B1
     accented: сбить
@@ -38848,6 +39012,14 @@ words:
       - ru: Ты спусти́шься к ве́черу?
         en_gb: Will you come down by evening?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "С- is down and off, with -ся on the end: to let yourself down."
+        parts:
+          - { ru: "с", en: "down, off" }
+          - { ru: "пусти́", en: "let go" }
+          - { ru: "ться", en: "oneself" }
+        see: ["пустить=to let"]
   "ссориться=to quarrel":
     cefr_level: B1
     accented: ссо́риться
@@ -40663,6 +40835,13 @@ words:
       - ru: Ты убежи́шь от соба́ки?
         en_gb: Will you run away from the dog?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "У- is away and gone, so убежа́ть is to run away for good — a shade more final than сбежа́ть, which is more of a bolt."
+        parts:
+          - { ru: "у", en: "away, gone" }
+          - { ru: "бежа́ть", en: "run" }
+        see: ["сбежать=to run away"]
   "убивать=to kill":
     cefr_level: B1
     accented: убива́ть
