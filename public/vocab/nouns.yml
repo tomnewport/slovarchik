@@ -1172,6 +1172,10 @@ words:
       pl_acc: апте́ки
       pl_ins: апте́ками
       pl_pre: апте́ках
+    facts:
+      - kind: origin
+        text: "Greek apothēkē, a storehouse. The same word gave English boutique and Spanish bodega, and the -тека of библиоте́ка is that storehouse again."
+        see: ["библиотека=library"]
   "Аргентина=Argentina":
     cefr_level: A2
     gender: f
@@ -2017,6 +2021,9 @@ words:
       pl_acc: база́ры
       pl_ins: база́рами
       pl_pre: база́рах
+    facts:
+      - kind: origin
+        text: "Persian, and well travelled: English bazaar is the same word."
   "Байкал=Lake Baikal":
     cefr_level: B1
     gender: m
@@ -3342,6 +3349,10 @@ words:
       pl_acc: библиоте́ки
       pl_ins: библиоте́ками
       pl_pre: библиоте́ках
+    facts:
+      - kind: origin
+        text: "Greek biblion, book, on the same -тека storehouse ending that апте́ка carries: a place where books are kept."
+        see: ["аптека=pharmacy"]
   "бизнес=business":
     cefr_level: B1
     gender: m
@@ -5191,6 +5202,9 @@ words:
       pl_acc: бутербро́ды
       pl_ins: бутербро́дами
       pl_pre: бутербро́дах
+    facts:
+      - kind: origin
+        text: "German Butterbrot, butter-bread, taken whole. A Russian бутербро́д is under no obligation to have butter on it."
   "бутон=bud":
     cefr_level: B2
     gender: m
@@ -9723,6 +9737,9 @@ words:
       pl_acc: га́лстуки
       pl_ins: га́лстуками
       pl_pre: га́лстуках
+    facts:
+      - kind: origin
+        text: "German Halstuch, neck-cloth."
   "галька=pebbles":
     cefr_level: C1
     gender: f
@@ -11194,6 +11211,9 @@ words:
       pl_acc: госте́й
       pl_ins: гостя́ми
       pl_pre: гостя́х
+    facts:
+      - kind: origin
+        text: "The same word as English guest, and as host and hostile: one old word for the stranger who had to be dealt with somehow, and two ways of dealing with him."
   "государство=state":
     cefr_level: B1
     gender: n
@@ -12413,6 +12433,13 @@ words:
       pl_acc: движе́ния
       pl_ins: движе́ниями
       pl_pre: движе́ниях
+    facts:
+      - kind: build
+        text: "The -ние noun of дви́гаться, to move: движе́ние is movement, and on a road that means the traffic."
+        parts:
+          - { ru: "движе́", en: "move" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["двигаться=to move"]
   "двойка=a two":
     cefr_level: B1
     gender: f
@@ -14515,6 +14542,9 @@ words:
       pl_acc: доро́ги
       pl_ins: доро́гами
       pl_pre: доро́гах
+    confusable_with:
+      - key: "дорого=expensively"
+        why: "Доро́га is a road; до́рого means expensively, and the stress moves to the front."
   "дорожка=path":
     cefr_level: B1
     gender: f
@@ -15904,6 +15934,13 @@ words:
       - ru: Она́ загада́ла жела́ние под звездо́й.
         en_gb: She made a wish under the star.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    facts:
+      - kind: build
+        text: "The -ние ending turns a verb into the noun of its action: жела́ть, to wish, gives жела́ние, a wish."
+        parts:
+          - { ru: "жела́", en: "wish" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["желать=to wish"]
   "железо=iron":
     cefr_level: A2
     gender: n
@@ -16869,6 +16906,13 @@ words:
       - ru: В зада́нии бы́ло три вопро́са.
         en_gb: There were three questions in the task.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+    facts:
+      - kind: build
+        text: "The -ние noun of зада́ть, to set: a зада́ние is what has been set."
+        parts:
+          - { ru: "зада́", en: "set" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["задать=to assign"]
   "задание=assignment":
     cefr_level: A2
     gender: n
@@ -16904,6 +16948,13 @@ words:
       - ru: Студе́нты сдаю́т зада́ния в пя́тницу.
         en_gb: The students hand in their assignments on Friday.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+    facts:
+      - kind: build
+        text: "The -ние noun of зада́ть, to set: a зада́ние is what has been set."
+        parts:
+          - { ru: "зада́", en: "set" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["задать=to assign"]
   "задача=problem":
     cefr_level: A2
     gender: f
@@ -24828,6 +24879,10 @@ words:
       - ru: Он подобра́л копе́йку с по́ла.
         en_gb: He picked up a kopek from the floor.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    facts:
+      - kind: origin
+        text: "Named for the spearman stamped on it, from копьё, a spear."
+        see: ["копьё=spear"]
   "копьё=spear":
     cefr_level: B2
     gender: n
@@ -25135,6 +25190,9 @@ words:
       pl_acc: коро́в
       pl_ins: коро́вами
       pl_pre: коро́вах
+    facts:
+      - kind: origin
+        text: "From an old word for horn, the one behind Latin cornu and English horn: the horned one."
   "королева=queen":
     cefr_level: A2
     gender: f
@@ -28084,6 +28142,13 @@ words:
       pl_acc: лека́рства
       pl_ins: лека́рствами
       pl_pre: лека́рствах
+    facts:
+      - kind: build
+        text: "The -ство ending names a thing or a business of its own. Here it is on the root of лечи́ть, to treat: лека́рство is what does the treating."
+        parts:
+          - { ru: "лека́р", en: "healer, treating" }
+          - { ru: "-ство", en: "the thing or business of" }
+        see: ["лечить=to treat"]
   "лекция=lecture":
     cefr_level: A2
     gender: f
@@ -29175,6 +29240,10 @@ words:
       pl_acc: лошаде́й
       pl_ins: лошадьми́
       pl_pre: лошадя́х
+    facts:
+      - kind: origin
+        text: "A Turkic borrowing. Конь is the older Slavic word, and the two have lived side by side ever since."
+        see: ["конь=horse"]
   "луг=meadow":
     cefr_level: B1
     gender: m
@@ -33827,6 +33896,9 @@ words:
       pl_acc: мыше́й
       pl_ins: мыша́ми
       pl_pre: мыша́х
+    facts:
+      - kind: origin
+        text: "The same word as English mouse, and Latin mus."
   "мясо=meat":
     cefr_level: A1
     gender: n
@@ -34027,6 +34099,13 @@ words:
       pl_acc: назва́ния
       pl_ins: назва́ниями
       pl_pre: назва́ниях
+    facts:
+      - kind: build
+        text: "The -ние noun of назва́ть, to call something: a назва́ние is what a thing is called."
+        parts:
+          - { ru: "назва́", en: "call, name" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["назвать=to call/name"]
   "назначение=appointment":
     cefr_level: B2
     gender: n
@@ -35449,6 +35528,13 @@ words:
       pl_acc: но́вости
       pl_ins: новостя́ми
       pl_pre: новостя́х
+    facts:
+      - kind: build
+        text: "The -ость ending makes a noun out of a quality: но́вый gives но́вость, newness, and so the news."
+        parts:
+          - { ru: "но́в", en: "new" }
+          - { ru: "-ость", en: "the quality of being" }
+        see: ["новый=new"]
   "нога=leg":
     cefr_level: A1
     gender: f
@@ -36992,6 +37078,9 @@ words:
       pl_acc: огни́
       pl_ins: огня́ми
       pl_pre: огня́х
+    facts:
+      - kind: origin
+        text: "Latin ignis is the same word, so ого́нь is the ign- of ignite."
   "огород=vegetable garden":
     cefr_level: A2
     gender: m
@@ -42012,6 +42101,13 @@ words:
       pl_acc: писа́телей
       pl_ins: писа́телями
       pl_pre: писа́телях
+    facts:
+      - kind: build
+        text: "The -тель ending names the one who does it, as in роди́тель: писа́ть gives писа́тель."
+        parts:
+          - { ru: "писа́", en: "write" }
+          - { ru: "-тель", en: "the one who does it" }
+        see: ["писать=to write"]
   "пистолет=pistol":
     cefr_level: B1
     gender: m
@@ -44942,6 +45038,13 @@ words:
       pl_acc: помо́щников
       pl_ins: помо́щниками
       pl_pre: помо́щниках
+    facts:
+      - kind: build
+        text: "The same -ник on по́мощь: the one who helps."
+        parts:
+          - { ru: "помо́щ", en: "help" }
+          - { ru: "-ник", en: "the one who does it" }
+        see: ["помощь=help"]
   "помощь=help":
     cefr_level: A2
     gender: f
@@ -46369,6 +46472,13 @@ words:
       - ru: Реше́ние зави́сит от прави́тельства.
         en_gb: The decision depends on the government.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    facts:
+      - kind: build
+        text: "The same -ство, here on прави́тель, a ruler, from пра́вить: the government is the body that rules."
+        parts:
+          - { ru: "прави́тель", en: "ruler" }
+          - { ru: "-ство", en: "the body or business of" }
+        see: ["править=to rule"]
   "право=right":
     cefr_level: B1
     gender: n
@@ -46473,6 +46583,13 @@ words:
       pl_acc: пра́здники
       pl_ins: пра́здниками
       pl_pre: пра́здниках
+    facts:
+      - kind: build
+        text: "The -ник ending on an old word meaning idle or empty: a пра́здник is a day left empty of work."
+        parts:
+          - { ru: "пра́зд", en: "idle, empty" }
+          - { ru: "-ник", en: "day of" }
+        see: ["праздновать=to celebrate"]
   "практика=practice":
     cefr_level: B1
     gender: f
@@ -49701,6 +49818,13 @@ words:
       pl_acc: рабо́тников
       pl_ins: рабо́тниками
       pl_pre: рабо́тниках
+    facts:
+      - kind: build
+        text: "The -ник ending does the same job as -тель, naming the person: рабо́та gives рабо́тник."
+        parts:
+          - { ru: "рабо́т", en: "work" }
+          - { ru: "-ник", en: "the one who does it" }
+        see: ["работа=work"]
   "рабочий=worker":
     cefr_level: A2
     gender: m
@@ -50688,6 +50812,13 @@ words:
       pl_acc: расте́ния
       pl_ins: расте́ниями
       pl_pre: расте́ниях
+    facts:
+      - kind: build
+        text: "The same -ние on расти́, to grow: a расте́ние is simply a growing thing."
+        parts:
+          - { ru: "расте́", en: "grow" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["расти=to grow"]
   "расход=expense":
     cefr_level: B2
     gender: m
@@ -51667,6 +51798,13 @@ words:
       pl_acc: реше́ния
       pl_ins: реше́ниями
       pl_pre: реше́ниях
+    facts:
+      - kind: build
+        text: "The -ние noun of реша́ть, to decide: a реше́ние is the deciding, and so the decision."
+        parts:
+          - { ru: "реше́", en: "decide" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["решать=to decide"]
   "решётка=grating":
     cefr_level: B2
     gender: f
@@ -52710,6 +52848,9 @@ words:
       pl_acc: рубли́
       pl_ins: рубля́ми
       pl_pre: рубля́х
+    facts:
+      - kind: origin
+        text: "Thought to come from руби́ть, to chop: a rouble began as a piece chopped off a bar of silver."
   "руда=ore":
     cefr_level: B2
     gender: f
@@ -53232,6 +53373,9 @@ words:
       pl_acc: ры́нки
       pl_ins: ры́нками
       pl_pre: ры́нках
+    facts:
+      - kind: origin
+        text: "From German Ring by way of Polish: the market was the ring of stalls round a square."
   "рыцарь=knight":
     cefr_level: B2
     gender: m
@@ -60024,6 +60168,10 @@ words:
       pl_acc: столи́цы
       pl_ins: столи́цами
       pl_pre: столи́цах
+    facts:
+      - kind: origin
+        text: "From стол, back when a стол was a throne rather than a table: the capital is where the throne is."
+        see: ["стол=table"]
   "столовая=dining room":
     cefr_level: A2
     gender: f
@@ -69523,6 +69671,9 @@ words:
       pl_acc: чемода́ны
       pl_ins: чемода́нами
       pl_pre: чемода́нах
+    facts:
+      - kind: origin
+        text: "Persian jāmadān, a place for keeping clothes."
   "чемпион=champion":
     cefr_level: B1
     gender: m

@@ -272,6 +272,13 @@ words:
       - ru: Мы смотре́ли америка́нское кино́.
         en_gb: We watched an American film.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "The same -ский as in ру́сский: one ending turns a place into its adjective."
+        parts:
+          - { ru: "америка́н", en: "America" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["Америка=America"]
   "английский=English":
     cefr_level: A1
     accented: англи́йский
@@ -4954,6 +4961,13 @@ words:
       - ru: Здесь продаю́т де́тские игру́шки.
         en_gb: They sell children's toys here.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "The same -ский on де́ти: of children."
+        parts:
+          - { ru: "де́т", en: "children" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["дети=children"]
   "дешёвый=cheap":
     cefr_level: A1
     accented: дешёвый
@@ -5351,6 +5365,9 @@ words:
       - ru: Мы вели́ до́лгие бесе́ды.
         en_gb: We had long conversations.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: origin
+        text: "The same word as English long, and Latin longus."
   "должен=must":
     cefr_level: A1
     accented: до́лжен
@@ -6029,6 +6046,13 @@ words:
       - ru: Они́ посети́ли европе́йские столи́цы.
         en_gb: They visited European capitals.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "Евро́па with the -ский ending that makes a country's adjective, here for a whole continent."
+        parts:
+          - { ru: "европе́й", en: "Europe" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["Европа=Europe"]
   "единственный=only":
     cefr_level: B1
     accented: еди́нственный
@@ -6582,6 +6606,13 @@ words:
       - ru: Здесь продаю́т же́нские ту́фли.
         en_gb: They sell women's shoes here.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "-ский is not only for places: on the root of жена́ and же́нщина it gives же́нский, of women."
+        parts:
+          - { ru: "же́н", en: "woman, wife" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["женщина=woman"]
   "жёсткий=hard":
     cefr_level: B1
     accented: жёсткий
@@ -8269,6 +8300,13 @@ words:
       pl_acc: испа́нские
       pl_ins: испа́нскими
       pl_pre: испа́нских
+    facts:
+      - kind: build
+        text: "Испа́ния with the -ский ending that makes a country's adjective."
+        parts:
+          - { ru: "испа́н", en: "Spain" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["Испания=Spain"]
   "истинный=true":
     cefr_level: B2
     accented: и́стинный
@@ -8416,6 +8454,13 @@ words:
       pl_acc: италья́нские
       pl_ins: италья́нскими
       pl_pre: италья́нских
+    facts:
+      - kind: build
+        text: "Ита́лия with the -ский ending that makes a country's adjective."
+        parts:
+          - { ru: "италья́н", en: "Italy" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["Италия=Italy"]
   "каменный=stone":
     cefr_level: B1
     accented: ка́менный
@@ -8618,6 +8663,13 @@ words:
       - ru: Здесь продаю́т кита́йские това́ры.
         en_gb: They sell Chinese goods here.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "Кита́й with the -ский ending that makes a country's adjective."
+        parts:
+          - { ru: "кита́й", en: "China" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["Китай=China"]
   "классический=classical":
     cefr_level: B1
     accented: класси́ческий
@@ -13570,6 +13622,9 @@ words:
       - ru: Возьми́ все ну́жные ве́щи.
         en_gb: Take all the necessary things.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    confusable_with:
+      - key: "нежный=gentle"
+        why: "Ну́жный is needed, не́жный is tender."
   "нынешний=current":
     cefr_level: B1
     accented: ны́нешний
@@ -16198,6 +16253,9 @@ words:
       pl_acc: по́лные
       pl_ins: по́лными
       pl_pre: по́лных
+    facts:
+      - kind: origin
+        text: "The same word as English full, and the plen- of plenty and complete."
   "положенный=prescribed":
     cefr_level: B2
     accented: поло́женный
@@ -16339,6 +16397,13 @@ words:
       pl_acc: по́льские
       pl_ins: по́льскими
       pl_pre: по́льских
+    facts:
+      - kind: build
+        text: "По́льша with the -ский ending that makes a country's adjective."
+        parts:
+          - { ru: "по́ль", en: "Poland" }
+          - { ru: "-ский", en: "of, belonging to" }
+        see: ["Польша=Poland"]
   "понятный=understandable":
     cefr_level: B1
     accented: поня́тный
@@ -25408,6 +25473,9 @@ words:
       - ru: Дожди́ ста́ли ча́ще.
         en_gb: The rains have become more frequent.
         inflect: { token: 3, degree: comparative, rule: adj-comparative-stem }
+    confusable_with:
+      - key: "чистый=clean"
+        why: "Ча́стый is frequent, чи́стый is clean."
   "человеческий=human":
     cefr_level: B1
     accented: челове́ческий

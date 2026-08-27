@@ -9216,6 +9216,13 @@ words:
       - ru: Ты задаёшь мно́го вопро́сов?
         en_gb: Do you ask a lot of questions?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "The prefix does the work here. Дать is only to give; за- sets the thing in front of someone, so this is to set a question, a task, homework."
+        parts:
+          - { ru: "за", en: "set, put to" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "задать=to assign":
     cefr_level: A2
     accented: зада́ть
@@ -9262,6 +9269,13 @@ words:
       - ru: За́втра учи́тель зада́ст но́вую те́му.
         en_gb: Tomorrow the teacher will set a new topic.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The prefix does the work here. Дать is only to give; за- sets the thing in front of someone, so this is to set a question, a task, homework."
+        parts:
+          - { ru: "за", en: "set, put to" }
+          - { ru: "да́ть", en: "give" }
+        see: ["дать=to give"]
   "задержать=to detain":
     cefr_level: B1
     accented: задержа́ть
@@ -20163,6 +20177,13 @@ words:
         en_alt:
           - Do you give the money back every month?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "От- is away and back, so this is to give back: to return what was not yours to keep."
+        parts:
+          - { ru: "от", en: "away, back" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "отдать=to give back":
     cefr_level: A2
     accented: отда́ть
@@ -20218,6 +20239,13 @@ words:
       - ru: Долг о́тдан.
         en_gb: The debt has been repaid.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "От- is away and back, so this is to give back: to return what was not yours to keep."
+        parts:
+          - { ru: "от", en: "away, back" }
+          - { ru: "да́ть", en: "give" }
+        see: ["дать=to give"]
   "отдохнуть=to rest":
     cefr_level: A1
     accented: отдохну́ть
@@ -31148,6 +31176,13 @@ words:
       past_f: продава́ла
       past_n: продава́ло
       past_pl: продава́ли
+    facts:
+      - kind: build
+        text: "Про- carries the sense of parting with something for good, so this is to give it up for money: to sell."
+        parts:
+          - { ru: "про", en: "away, through" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "продаваться=to be sold":
     cefr_level: B2
     accented: продава́ться
@@ -31233,6 +31268,13 @@ words:
         f: продана́
         n: про́дано
         pl: про́даны
+    facts:
+      - kind: build
+        text: "Про- carries the sense of parting with something for good, so this is to give it up for money: to sell."
+        parts:
+          - { ru: "про", en: "away, through" }
+          - { ru: "да́ть", en: "give" }
+        see: ["дать=to give"]
   "продолжать=to continue":
     cefr_level: A2
     accented: продолжа́ть
@@ -35260,6 +35302,13 @@ words:
       past_f: сдава́ла
       past_n: сдава́ло
       past_pl: сдава́ли
+    facts:
+      - kind: build
+        text: "С- is off and over, so this is to hand something over: an exam, a key, a coat at the door."
+        parts:
+          - { ru: "с", en: "off, over" }
+          - { ru: "дава́ть", en: "give" }
+        see: ["давать=to give"]
   "сдать=to hand in":
     cefr_level: A2
     accented: сдать
@@ -35316,6 +35365,13 @@ words:
       - ru: Экза́мен сдан.
         en_gb: The exam has been passed.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "С- is off and over, so this is to hand something over: an exam, a key, a coat at the door."
+        parts:
+          - { ru: "с", en: "off, over" }
+          - { ru: "дать", en: "give" }
+        see: ["дать=to give"]
   "сделать=to do/make":
     cefr_level: A1
     accented: сде́лать
@@ -38684,6 +38740,9 @@ words:
       - ru: Без со́лнца дни станови́лись бы мрачне́е.
         en_gb: Without the sun the days would be getting gloomier.
         inflect: { token: 4, tense: past, person: past_pl, rule: verb-conditional }
+    confusable_with:
+      - key: "остановиться=to stop"
+        why: "Станови́ться is to become, останови́ться is to stop. The о- is the whole difference."
   "стараться=to try hard":
     cefr_level: A2
     accented: стара́ться
@@ -38890,6 +38949,9 @@ words:
       past_f: сто́ила
       past_n: сто́ило
       past_pl: сто́или
+    confusable_with:
+      - key: "стоять=to stand"
+        why: "One letter apart and both everyday: сто́ить is what a thing costs, стоя́ть is standing on your feet."
   "стоять=to stand":
     cefr_level: A1
     accented: стоя́ть
