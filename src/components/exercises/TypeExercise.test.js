@@ -241,17 +241,59 @@ describe('TypeExercise', () => {
     })
   })
 
-  it('lets the learner end the loop with Show me the answer', async () => {
+  it('lets the learner end the loop with I don’t know, once confirmed', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    // The confirmation is the only thing that reveals: the link itself never does.
     expect(wrapper.find('button.reveal').exists()).toBe(false)
 
     await wrapper.find('input[lang="ru"]').setValue('сшить')
     await wrapper.find('button.check').trigger('click')
+    await wrapper.find('button.dunno').trigger('click')
+    expect(wrapper.text()).not.toContain('Answer:')
     await wrapper.find('button.reveal').trigger('click')
 
     expect(wrapper.text()).toContain('Answer:')
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toMatchObject({ correct: false, correctedOnRetry: false })
+  })
+
+  // The misclick this whole flow exists to prevent: Next belongs to the answered
+  // state, so an open question must never offer it.
+  it('offers no Next while the question is still open', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    expect(wrapper.find('button.next').exists()).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('дом')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('button.next').exists()).toBe(true)
+  })
+
+  it('says what I don’t know costs, and grades nothing until it is confirmed', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    await wrapper.find('button.dunno').trigger('click')
+
+    const confirm = wrapper.find('.dunno-confirm')
+    expect(confirm.text()).toContain('I don’t know')
+    expect(confirm.text()).toContain('marked wrong')
+    // Still unanswered: no reveal, no verdict, no Next.
+    expect(wrapper.text()).not.toContain('Answer:')
+    expect(wrapper.find('button.next').exists()).toBe(false)
+
+    await wrapper.find('button.keep-trying').trigger('click')
+    expect(wrapper.find('.dunno-confirm').exists()).toBe(false)
+    expect(wrapper.emitted('done')).toBeUndefined()
+    // And the way back out is still there.
+    expect(wrapper.find('button.dunno').exists()).toBe(true)
+  })
+
+  it('gives up on an untouched prompt only through the confirmation', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise } })
+    await wrapper.find('button.dunno').trigger('click')
+    await wrapper.find('button.reveal').trigger('click')
+
+    expect(wrapper.text()).toContain('Answer:')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toMatchObject({ correct: false, wordCorrect: false })
   })
 
   it('treats a true synonym gently — right knowledge, wrong slot', async () => {
