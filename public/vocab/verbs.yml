@@ -3403,6 +3403,13 @@ words:
       past_f: вста́ла
       past_n: вста́ло
       past_pl: вста́ли
+    facts:
+      - kind: build
+        text: "Стать now means to become, but it began as to stand, and this family keeps the older sense. The в- is a worn-down вз-, up: to get up."
+        parts:
+          - { ru: "в", en: "up" }
+          - { ru: "стать", en: "stand, come to be" }
+        see: ["стать=to become"]
   "встретить=to meet":
     cefr_level: A1
     accented: встре́тить
@@ -4005,6 +4012,13 @@ words:
       - ru: Без сна я бы вы́глядел уста́лым.
         en_gb: Without sleep I would look tired.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Вы- is out, so вы́глядеть is how you look outward — your appearance, not your looking. It is what other people see, not what you see."
+        parts:
+          - { ru: "вы́", en: "out" }
+          - { ru: "глядеть", en: "look" }
+        see: ["глядеть=to look"]
   "выдавать=to give out":
     cefr_level: B1
     accented: выдава́ть
@@ -4201,6 +4215,13 @@ words:
         en_alt:
           - Will you pass the difficult exam?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out and all the way through: to hold out."
+        parts:
+          - { ru: "вы́", en: "out, through" }
+          - { ru: "держать", en: "hold" }
+        see: ["держать=to hold"]
   "выехать=to drive out":
     cefr_level: A2
     accented: вы́ехать
@@ -7525,6 +7546,14 @@ words:
       - ru: Без откры́того окна́ звук не доноси́лся бы.
         en_gb: Without an open window the sound wouldn't reach us.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "До- is as far as, with -ся: a sound carries itself all the way to where you are."
+        parts:
+          - { ru: "до", en: "as far as" }
+          - { ru: "носи́", en: "carry about" }
+          - { ru: "ться", en: "oneself" }
+        see: ["носить=to wear"]
   "допустить=to allow":
     cefr_level: B1
     accented: допусти́ть
@@ -7715,6 +7744,13 @@ words:
       - ru: Ты доста́нешь де́ньги из ба́нка?
         en_gb: Will you get the money from the bank?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "До- is as far as, so доста́ть is to reach that far — and reaching a thing is how you come to have it."
+        parts:
+          - { ru: "до", en: "as far as" }
+          - { ru: "ста́ть", en: "stand, come to be" }
+        see: ["стать=to become"]
   "достаться=to fall to":
     cefr_level: B1
     accented: доста́ться
@@ -7753,6 +7789,14 @@ words:
         en_alt:
           - Soon the inheritance will go to the children.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The до- of доста́ть turned back with -ся: the thing reaches as far as someone and stays there — it falls to them."
+        parts:
+          - { ru: "до", en: "as far as" }
+          - { ru: "ста́", en: "stand, come to be" }
+          - { ru: "ться", en: "oneself" }
+        see: ["достать=to get"]
   "достигать=to reach":
     cefr_level: B1
     accented: достига́ть
@@ -9437,6 +9481,13 @@ words:
       - ru: Рейс заде́ржан.
         en_gb: The flight has been delayed.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "За- holds a thing back behind where it wanted to go: to delay it, or to detain someone."
+        parts:
+          - { ru: "за", en: "back, behind" }
+          - { ru: "держа́ть", en: "hold" }
+        see: ["держать=to hold"]
   "задуматься=to start thinking":
     cefr_level: B1
     accented: заду́маться
@@ -16605,6 +16656,13 @@ words:
         en_alt:
           - Will you direct the light at the picture?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "На- is onto, so напра́вить is to steer something onto a course."
+        parts:
+          - { ru: "на", en: "onto" }
+          - { ru: "пра́вить", en: "steer, set straight" }
+        see: ["править=to rule"]
   "направиться=to head":
     cefr_level: B1
     accented: напра́виться
@@ -16651,6 +16709,14 @@ words:
         en_alt:
           - Will you head for the station?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The same на- with -ся: to steer yourself onto a course, and so to head somewhere."
+        parts:
+          - { ru: "на", en: "onto" }
+          - { ru: "пра́ви", en: "steer, set straight" }
+          - { ru: "ться", en: "oneself" }
+        see: ["направить=to direct"]
   "нарезать=to slice":
     cefr_level: B1
     accented: наре́зать
@@ -18734,6 +18800,13 @@ words:
       - ru: Ты огля́дишь всю ко́мнату?
         en_gb: Will you look over the whole room?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "О- goes round, so огляде́ть is to look a thing over, all the way round it."
+        parts:
+          - { ru: "о", en: "round" }
+          - { ru: "гляде́ть", en: "look" }
+        see: ["глядеть=to look"]
   "оглядываться=to look around":
     cefr_level: B1
     accented: огля́дываться
@@ -20091,6 +20164,14 @@ words:
       - ru: Ты оста́нешься до́ма?
         en_gb: Will you stay at home?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "О- leaves you standing where you were, and -ся makes it your own doing: to stay."
+        parts:
+          - { ru: "о", en: "where you are" }
+          - { ru: "ста́", en: "stand, come to be" }
+          - { ru: "ться", en: "oneself" }
+        see: ["стать=to become"]
   "отвернуться=to turn away":
     cefr_level: B1
     accented: отверну́ться
@@ -20922,6 +21003,14 @@ words:
       - ru: Ты отно́сишься к сосе́дям хорошо́?
         en_gb: Do you treat the neighbours well?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "От- is away, носи́ть is carrying, and -ся turns it back on you: how you carry yourself towards a thing is how you regard it."
+        parts:
+          - { ru: "от", en: "towards, away" }
+          - { ru: "носи́", en: "carry about" }
+          - { ru: "ться", en: "oneself" }
+        see: ["носить=to wear"]
   "отобрать=to take away":
     cefr_level: B1
     accented: отобра́ть
@@ -21138,6 +21227,13 @@ words:
       - ru: Ты отпра́вишь письмо́ за́втра?
         en_gb: Will you send the letter tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The root пра́в- is straight and right — the one in пра́вый, пра́вда and пра́вило. Пра́вить is to steer, and от- steers a thing away from here: to send it off."
+        parts:
+          - { ru: "от", en: "away" }
+          - { ru: "пра́вить", en: "steer, set straight" }
+        see: ["правый=right", "правда=truth"]
   "отправиться=to set off":
     cefr_level: A2
     accented: отпра́виться
@@ -21186,6 +21282,14 @@ words:
       - ru: Вы отпра́витесь в путь у́тром?
         en_gb: Will you set off in the morning?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "The same от- on пра́вить, turned back with -ся: to steer yourself away, to set off."
+        parts:
+          - { ru: "от", en: "away" }
+          - { ru: "пра́ви", en: "steer, set straight" }
+          - { ru: "ться", en: "oneself" }
+        see: ["отправить=to send"]
   "отправляться=to set off":
     cefr_level: A2
     accented: отправля́ться
@@ -22155,6 +22259,13 @@ words:
       past_f: переводи́ла
       past_n: переводи́ло
       past_pl: переводи́ли
+    facts:
+      - kind: build
+        text: "The imperfective side of перевести́, built on води́ть rather than вести́. Пере- is still across, and leading a language across is still what makes it to translate."
+        parts:
+          - { ru: "пере", en: "across" }
+          - { ru: "води́ть", en: "lead, take about" }
+        see: ["водить=to drive"]
   "передавать=to pass on":
     cefr_level: B1
     accented: передава́ть
@@ -22626,6 +22737,13 @@ words:
       - ru: Ты переста́нешь кури́ть?
         en_gb: Will you stop smoking?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Пере- is across and over, so переста́ть is to be over and done with doing it."
+        parts:
+          - { ru: "пере", en: "over" }
+          - { ru: "ста́ть", en: "stand, come to be" }
+        see: ["стать=to become"]
   "переходить=to cross":
     cefr_level: B1
     accented: переходи́ть
@@ -23491,6 +23609,13 @@ words:
       - ru: Ты повернёшь за́ угол?
         en_gb: Will you turn round the corner?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Верну́ть is to turn something back. По- sets the turn going: to turn."
+        parts:
+          - { ru: "по", en: "setting off" }
+          - { ru: "верну́ть", en: "turn" }
+        see: ["вернуть=to return"]
   "повернуться=to turn around":
     cefr_level: B1
     accented: поверну́ться
@@ -23755,6 +23880,12 @@ words:
       - ru: Ты бы погляде́ла на звёзды сего́дня.
         en_gb: You would take a look at the stars today.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "По- gives гляде́ть a moment and an end: to have a look."
+        parts:
+          - { ru: "по", en: "a while, and done" }
+          - { ru: "гляде́ть", en: "look" }
   "поглядывать=to glance":
     cefr_level: B2
     accented: погля́дывать
@@ -24095,6 +24226,13 @@ words:
       - ru: Ты подде́ржишь мою́ иде́ю?
         en_gb: Will you support my idea?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Под- is from underneath: to hold a thing up from below. English support is built the same way, from sub and portare, carried from under."
+        parts:
+          - { ru: "под", en: "from underneath" }
+          - { ru: "держа́ть", en: "hold" }
+        see: ["держать=to hold"]
   "поддерживать=to support":
     cefr_level: B1
     accented: подде́рживать
@@ -27191,6 +27329,13 @@ words:
       - ru: Ты попра́вишь мою́ оши́бку?
         en_gb: Will you correct my mistake?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "По- with пра́вить is to put a thing straight again: to correct it, or to adjust it."
+        parts:
+          - { ru: "по", en: "straight again" }
+          - { ru: "пра́вить", en: "steer, set straight" }
+        see: ["правило=rule"]
   "попробовать=to try":
     cefr_level: A2
     accented: попро́бовать
@@ -29642,6 +29787,13 @@ words:
       - ru: Ты приво́дишь дете́й в сад?
         en_gb: Do you bring the children to the nursery?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "The imperfective side of привести́, on води́ть. При- is arrival: to bring a person here, on foot."
+        parts:
+          - { ru: "при", en: "arriving" }
+          - { ru: "води́ть", en: "lead, take about" }
+        see: ["водить=to drive"]
   "привыкнуть=to get used to":
     cefr_level: B1
     accented: привы́кнуть
@@ -30587,6 +30739,13 @@ words:
       - ru: Ты прино́сишь газе́ту домо́й?
         en_gb: Do you bring the newspaper home?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "The imperfective side of принести́, on носи́ть, which is carrying about rather than carrying in one direction."
+        parts:
+          - { ru: "при", en: "arriving" }
+          - { ru: "носи́ть", en: "carry about" }
+        see: ["носить=to wear"]
   "принять=to accept":
     cefr_level: B1
     accented: приня́ть
@@ -31357,6 +31516,13 @@ words:
         en_alt:
           - Will you accompany the guests to the door?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Про- is through, on води́ть. Проводи́ть is to lead someone on their way, and of time, to lead it through — to spend it."
+        parts:
+          - { ru: "про", en: "through" }
+          - { ru: "води́ть", en: "lead, take about" }
+        see: ["водить=to drive"]
   "провожать=to see off":
     cefr_level: B1
     accented: провожа́ть
@@ -33280,6 +33446,13 @@ words:
       - ru: Ты развернёшь маши́ну?
         en_gb: Will you turn the car around?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Раз- is apart and open: to turn a thing out of its folds — to unwrap it, to spread it out."
+        parts:
+          - { ru: "раз", en: "apart, open" }
+          - { ru: "верну́ть", en: "turn" }
+        see: ["вернуть=to return"]
   "развести=to breed":
     cefr_level: B2
     accented: развести́
@@ -33450,6 +33623,13 @@ words:
       - ru: Ты разгляди́шь да́льний бе́рег?
         en_gb: Will you make out the far shore?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Раз- takes things apart, so разгляде́ть is to look until the thing separates from everything round it: to make it out."
+        parts:
+          - { ru: "раз", en: "apart" }
+          - { ru: "гляде́ть", en: "look" }
+        see: ["глядеть=to look"]
   "разглядывать=to examine":
     cefr_level: B1
     accented: разгля́дывать
@@ -35610,6 +35790,13 @@ words:
       - ru: Ты свернёшь ковёр?
         en_gb: Will you roll up the carpet?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "С- is off and together at once, which is why сверну́ть is both turning off a road and rolling something up: the same movement seen from either end."
+        parts:
+          - { ru: "с", en: "off, together" }
+          - { ru: "верну́ть", en: "turn" }
+        see: ["вернуть=to return"]
   "светиться=to glow":
     cefr_level: B1
     accented: свети́ться
@@ -37654,6 +37841,13 @@ words:
       - ru: Без зарпла́ты он бы не содержа́л семью́.
         en_gb: Without a salary he would not support the family.
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Со- is together, so содержа́ть is to hold together: what a thing contains, or the family you keep."
+        parts:
+          - { ru: "со", en: "together" }
+          - { ru: "держа́ть", en: "hold" }
+        see: ["держать=to hold"]
   "соединить=to unite":
     cefr_level: B1
     accented: соедини́ть
@@ -38773,6 +38967,14 @@ words:
       - ru: Ты спра́вишься с волне́нием?
         en_gb: Will you cope with your nervousness?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "С- is together and off, and -ся puts it on you: to get yourself straight with something, and so to manage it."
+        parts:
+          - { ru: "с", en: "together, off" }
+          - { ru: "пра́ви", en: "steer, set straight" }
+          - { ru: "ться", en: "oneself" }
+        see: ["править=to rule"]
   "спрашивать=to ask":
     cefr_level: A1
     accented: спра́шивать
@@ -42781,6 +42983,13 @@ words:
       - ru: Ты уста́нешь за день?
         en_gb: Will you get tired during the day?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "У- is off and done with, so уста́ть is to have stopped. What is left of you afterwards is tired."
+        parts:
+          - { ru: "у", en: "off, done" }
+          - { ru: "ста́ть", en: "stand, come to be" }
+        see: ["стать=to become"]
   "устраивать=to arrange":
     cefr_level: B1
     accented: устра́ивать
