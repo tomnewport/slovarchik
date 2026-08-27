@@ -6,11 +6,17 @@
 // A wrong answer that is a real, related word is not a failure to be cut off
 // after one retry — it is the moment the distinction is learnable (#588). Such
 // an answer is diagnosed ("«сшить» is the perfective…"), the input re-opens, and
-// the learner may try as often as they like; a **Show me the answer** button is
-// there from the first miss, so they end the loop rather than a counter. An
-// answer that *isn't* a recognisable word is an ordinary spelling slip and
-// behaves exactly as it always has. Grading is untouched either way: only the
-// first attempt is evidence of recall, and every later try teaches.
+// the learner may try as often as they like; an **I don't know** link ends the
+// loop whenever they want, so a counter never does it for them. An answer that
+// *isn't* a recognisable word is an ordinary spelling slip and behaves exactly
+// as it always has. Grading is untouched either way: only the first attempt is
+// evidence of recall, and every later try teaches.
+//
+// Giving up is a deliberate act, never a misclick: the escape is a quiet link
+// (never the primary button, and never wearing Next's clothes), and it asks
+// before it fires, spelling out that it is an "I don't know" — the answer is
+// shown, the question is marked wrong, and the word comes back — rather than a
+// free pass to the next exercise.
 //
 // Spelling (#keyboard-hints-word-bank) nudges the learner to spell unaided
 // first: the keyboard hint is withheld on the opening attempt — for phrases
@@ -88,6 +94,9 @@ const feedback = ref(null)
 const reorderMode = ref(false)
 const chips = ref([])
 const placed = ref([])
+// Whether the "I don't know" link has been pressed and is awaiting confirmation.
+// Nothing is graded or revealed until the learner confirms.
+const confirmingReveal = ref(false)
 const placedIds = computed(() => new Set(placed.value.map((c) => c.id)))
 const availableChips = computed(() => chips.value.filter((c) => !placedIds.value.has(c.id)))
 // The ❓ Dictionary panel (unlearned phrase words) — collapsed by default.
@@ -220,6 +229,7 @@ function check() {
 /** End the loop on the learner's terms: reveal the answer, unsolved. */
 function reveal() {
   if (checked.value) return
+  confirmingReveal.value = false
   wasCorrect.value = false
   resolve()
 }
@@ -410,22 +420,50 @@ onBeforeUnmount(() => setHintAllowed(true))
 
     <div class="row check-row">
       <CelebrationBurst :show="showFire" emoji="🔥" />
-      <button
-        v-if="!checked && reorderMode"
-        class="primary check"
-        :disabled="!placed.length"
-        @click="checkOrder"
-      >
-        Check
-      </button>
-      <button v-else-if="!checked" class="primary check" :disabled="!typed.trim()" @click="check">
-        Check
-      </button>
-      <!-- The learner ends the retry loop, not a counter (#588). -->
-      <button v-if="!checked && retried" type="button" class="reveal" @click="reveal">
-        Show me the answer
-      </button>
+      <!-- One button chain, so Next belongs to the answered state alone: while
+           the question is open the only primary is Check. -->
+      <template v-if="!checked">
+        <button
+          v-if="reorderMode"
+          class="primary check"
+          :disabled="!placed.length"
+          @click="checkOrder"
+        >
+          Check
+        </button>
+        <button v-else class="primary check" :disabled="!typed.trim()" @click="check">Check</button>
+        <!-- The learner ends the loop, not a counter (#588) — quietly, and out
+             at the far end of the row, well away from where Next lands. -->
+        <button
+          v-if="!confirmingReveal"
+          type="button"
+          class="dunno"
+          @click="confirmingReveal = true"
+        >
+          I don't know
+        </button>
+      </template>
       <button v-else class="primary next" @click="next">Next →</button>
+    </div>
+
+    <!-- Say what "I don't know" costs before it costs it: this is the one place
+         the learner can lose the question without answering it. -->
+    <div
+      v-if="confirmingReveal && !checked"
+      class="dunno-confirm"
+      role="group"
+      aria-label="Confirm showing the answer"
+    >
+      <p class="dunno-explain">
+        This is an <strong>“I don’t know”</strong>, not a pass: the answer is shown, the question is
+        marked wrong, and the word comes back for more practice.
+      </p>
+      <div class="row">
+        <button type="button" class="reveal" @click="reveal">Show me the answer</button>
+        <button type="button" class="keep-trying" @click="confirmingReveal = false">
+          Keep trying
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -481,13 +519,39 @@ onBeforeUnmount(() => setHintAllowed(true))
 .correction-detail {
   color: var(--text);
 }
-.reveal {
+/* An escape hatch, not a call to action: a quiet link pushed to the far end of
+   the row, so it is never mistaken for the primary button — nor for Next, which
+   takes that primary slot the moment the answer is in. */
+.dunno {
+  margin-left: auto;
   background: none;
   border: none;
   color: var(--muted);
   text-decoration: underline;
   font-size: 0.85rem;
+  padding: 0.4rem 0.2rem;
   cursor: pointer;
+}
+.dunno-confirm {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-soft);
+}
+.dunno-explain {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.reveal {
+  font-size: 0.9rem;
+  color: var(--muted);
+  background: none;
+}
+.keep-trying {
+  font-size: 0.9rem;
 }
 .retry-again {
   color: var(--muted);
