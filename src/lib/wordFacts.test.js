@@ -517,6 +517,42 @@ words:
     expect(messages(issues)).toEqual([expect.stringContaining('does not spell out тут')])
   })
 
+  it('asks for the stress to be marked when the parts join into the whole word', () => {
+    const issues = issuesFor(
+      `
+words:
+  "назад=back":
+    cefr_level: A1
+    accented: наза́д
+    en_gb: { standard: back }
+    facts:
+      - kind: build
+        text: "..."
+        parts: [{ ru: "на-", en: "onto" }, { ru: "зад", en: "the rear" }]
+`,
+      'adverb',
+    )
+    expect(messages(issues)).toEqual([expect.stringContaining('the parts spell "назад"')])
+  })
+
+  it('is satisfied once the stressed part carries its mark', () => {
+    const issues = issuesFor(
+      `
+words:
+  "назад=back":
+    cefr_level: A1
+    accented: наза́д
+    en_gb: { standard: back }
+    facts:
+      - kind: build
+        text: "..."
+        parts: [{ ru: "на-", en: "onto" }, { ru: "за́д", en: "the rear" }]
+`,
+      'adverb',
+    )
+    expect(issues).toEqual([])
+  })
+
   it('allows a consonant alternation inside the headword', () => {
     // писа́ть → пишу́: the root surfaces as пиш-, so an exact join would fail
     // where a subsequence of the *headword’s* morphemes still holds.
