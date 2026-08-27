@@ -6,10 +6,16 @@ import {
   breakdownCandidates,
   derivationCandidates,
   confusableCandidates,
+  staleReviewed,
   factCoverage,
   PRODUCTIVE_PREFIXES,
 } from './factCoverage.js'
 import { loadFixtureWords } from '../test/fixtures.js'
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 
 const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
 
@@ -122,7 +128,76 @@ words:
     ])
     const [teacher] = derivationCandidates(words)
     expect(teacher).toMatchObject({ key: 'учитель=teacher', suffix: 'тель' })
-    expect(teacher.from.key).toBe('учить=to teach')
+    expect(teacher.from).toMatchObject({ key: 'учить=to teach', via: 'exact' })
+  })
+
+  // ── #614: the source is verified, not guessed ────────────────────────────
+  const noun = (key, accented, gender = 'm') => `
+  "${key}":
+    cefr_level: A1
+    accented: ${accented}
+    gender: ${gender}
+    animacy: i
+    en_gb: { standard: ${key.split('=')[1]} }`
+
+  it('names no source when nothing reconstructs the stem', () => {
+    // посте́ль is not a -тель agent noun; the suffix is a coincidence, and the
+    // old pass answered посади́ть because it starts with «пос».
+    const words = fromYaml([
+      { pos: 'verb', text: `words:${verb('посадить=to plant', 'посади́ть')}` },
+      { pos: 'noun', text: `words:${noun('постель=bed', 'посте́ль', 'f')}` },
+    ])
+    expect(derivationCandidates(words).find((c) => c.key === 'постель=bed').from).toBeNull()
+  })
+
+  it('will not derive a word from something longer than itself', () => {
+    // внима́ние does not come from внима́тельно; derivation adds material.
+    const words = fromYaml([
+      { pos: 'adverb', text: `words:${verb('внимательно=attentively', 'внима́тельно')}` },
+      { pos: 'noun', text: `words:${noun('внимание=attention', 'внима́ние', 'n')}` },
+    ])
+    expect(derivationCandidates(words).find((c) => c.key === 'внимание=attention').from).toBeNull()
+  })
+
+  it('requires the source to be a part of speech the suffix attaches to', () => {
+    // зада́ние reconstructs equally well from зад and from зада́ть on the letters
+    // alone. -ание goes on verbs, which is what separates them.
+    const words = fromYaml([
+      { pos: 'verb', text: `words:${verb('задать=to assign', 'зада́ть')}` },
+      { pos: 'noun', text: `words:${noun('зад=back', 'зад')}${noun('задание=task', 'зада́ние', 'n')}` },
+    ])
+    const task = derivationCandidates(words).find((c) => c.key === 'задание=task')
+    expect(task.from.key).toBe('задать=to assign')
+  })
+
+  it('sees through a consonant mutation, and says that it did', () => {
+    // движе́ние is built on дви́гать, with the г→ж that Russian derivation is
+    // full of — and the -ся must not make the source look too long to be one.
+    const words = fromYaml([
+      { pos: 'verb', text: `words:${verb('двигаться=to move', 'дви́гаться')}` },
+      { pos: 'noun', text: `words:${noun('движение=movement', 'движе́ние', 'n')}` },
+    ])
+    const move = derivationCandidates(words).find((c) => c.key === 'движение=movement')
+    expect(move.from).toMatchObject({ key: 'двигаться=to move', via: 'mutation' })
+  })
+
+  it('takes the stem the theme vowel left behind', () => {
+    // жела́ние sits on «жел», which is жела́ть stripped twice: -ть, then the а.
+    const words = fromYaml([
+      { pos: 'verb', text: `words:${verb('желать=to wish', 'жела́ть')}` },
+      { pos: 'noun', text: `words:${noun('желание=wish', 'жела́ние', 'n')}` },
+    ])
+    expect(derivationCandidates(words).find((c) => c.key === 'желание=wish').from.key).toBe(
+      'желать=to wish',
+    )
+  })
+
+  it('every source it names across the real corpus reconstructs exactly or by one mutation', () => {
+    // The acceptance criterion of #614, asserted rather than spot-checked: no
+    // claim survives that is not one of the two things the module says it is.
+    for (const c of derivationCandidates(loadFixtureWords())) {
+      if (c.from) expect(['exact', 'mutation']).toContain(c.from.via)
+    }
   })
 
   it('still reports a suffixed word whose source is not in the corpus', () => {
@@ -228,6 +303,24 @@ words:
     expect(confusableCandidates(words)).toEqual([])
   })
 
+  // ── #613: a rejection is as durable as an authored link ──────────────────
+  it('drops a pair that has been reviewed and set aside', () => {
+    const words = fromYaml([
+      { pos: 'verb', text: pair('звонить=to call', 'звони́ть', 'to call', 'звенеть=to ring', 'звене́ть', 'to ring') },
+    ])
+    expect(confusableCandidates(words)).toHaveLength(1)
+    const reviewed = [{ a: 'звонить=to call', b: 'звенеть=to ring', why: 'not actually a mix-up' }]
+    expect(confusableCandidates(words, { reviewed })).toEqual([])
+  })
+
+  it('honours a rejection recorded the other way round', () => {
+    const words = fromYaml([
+      { pos: 'verb', text: pair('звонить=to call', 'звони́ть', 'to call', 'звенеть=to ring', 'звене́ть', 'to ring') },
+    ])
+    const reviewed = [{ a: 'звенеть=to ring', b: 'звонить=to call' }]
+    expect(confusableCandidates(words, { reviewed })).toEqual([])
+  })
+
   it('skips a pair already authored as confusable', () => {
     const words = fromYaml([
       {
@@ -314,3 +407,42 @@ words:
     expect(factCoverage().byPos).toEqual([])
   })
 })
+
+describe('staleReviewed', () => {
+  it('names the ledger entries whose words the corpus no longer has', () => {
+    const words = fromYaml([
+      { pos: 'verb', text: pairOf('звонить=to call', 'звони́ть', 'звенеть=to ring', 'звене́ть') },
+    ])
+    const stale = staleReviewed(words, [
+      { a: 'звонить=to call', b: 'звенеть=to ring' },
+      { a: 'звонить=to call', b: 'звинеть=typo' },
+    ])
+    expect(stale).toHaveLength(1)
+    expect(stale[0].missing).toEqual(['звинеть=typo'])
+  })
+
+  // The ledger outlives the review that wrote it, so a key that has since been
+  // renamed would sit there quietly claiming work was done. Cheap to assert.
+  it('finds nothing stale in the committed ledger', () => {
+    const reviewed = readFileSync(resolve(repoRoot, 'review/confusables-reviewed.jsonl'), 'utf8')
+      .split('\n')
+      .filter((l) => l.trim())
+      .map((l) => JSON.parse(l))
+    expect(reviewed.length).toBeGreaterThan(0)
+    for (const r of reviewed) expect(r.why, `${r.a} / ${r.b}`).toBeTruthy()
+    const stale = staleReviewed(loadFixtureWords(), reviewed)
+    expect(stale, stale.map((r) => r.missing.join(', ')).join('\n')).toEqual([])
+  })
+})
+
+const pairOf = (aKey, aRu, bKey, bRu) => `
+words:
+  "${aKey}":
+    cefr_level: A2
+    accented: ${aRu}
+    en_gb: { standard: ${aKey.split('=')[1]} }
+  "${bKey}":
+    cefr_level: A2
+    accented: ${bRu}
+    en_gb: { standard: ${bKey.split('=')[1]} }
+`
