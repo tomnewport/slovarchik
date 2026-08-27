@@ -52337,6 +52337,13 @@ words:
       pl_acc: рожде́ния
       pl_ins: рожде́ниями
       pl_pre: рожде́ниях
+    facts:
+      - kind: build
+        text: "Роди́ть with the -ние that makes a noun of a verb's action, and the д turning into жд on the way. That жд is a Church Slavonic touch Russian kept in the formal word, which is why it is день рожде́ния and not день рожа́ния."
+        parts:
+          - { ru: "рожде́", en: "give birth" }
+          - { ru: "ние", en: "the act of it" }
+        see: ["родить=to give birth", "день рождения=birthday"]
   "рожь=rye":
     cefr_level: B2
     gender: f
@@ -57966,6 +57973,14 @@ words:
       pl_acc: сообще́ния
       pl_ins: сообще́ниями
       pl_pre: сообще́ниях
+    facts:
+      - kind: build
+        text: "Со- is together and общ is the root of о́бщий, common: a сообще́ние is the making of something common to two people. The verb сообща́ть is built the same way."
+        parts:
+          - { ru: "со", en: "together" }
+          - { ru: "общ", en: "common (о́бщий)" }
+          - { ru: "е́ние", en: "the act of it" }
+        see: ["общий=general", "сообщать=to inform"]
   "соответствие=correspondence":
     cefr_level: B2
     gender: n

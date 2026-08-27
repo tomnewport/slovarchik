@@ -24683,6 +24683,13 @@ words:
       - ru: Она́ изуча́ет францу́зские слова́.
         en_gb: She studies French words.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "The -ский of ру́сский, but note what it sits on: not Фра́нция but францу́з, the Frenchman. Some country adjectives are built on the country — кита́йский on Кита́й — and some on the person who comes from it."
+        parts:
+          - { ru: "францу́з", en: "Frenchman" }
+          - { ru: "ский", en: "of, belonging to" }
+        see: ["француз=Frenchman", "Франция=France"]
   "футбольный=football":
     cefr_level: A2
     accented: футбо́льный
@@ -26235,6 +26242,13 @@ words:
       - ru: Она́ изуча́ет япо́нские иеро́глифы.
         en_gb: She studies Japanese characters.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
+    facts:
+      - kind: build
+        text: "Built on япо́нец, the person, rather than on the country — the same way round as францу́зский and америка́нский."
+        parts:
+          - { ru: "япо́н", en: "Japanese person" }
+          - { ru: "ский", en: "of, belonging to" }
+        see: ["японец=Japanese man", "французский=French"]
   "яркий=bright":
     cefr_level: A2
     accented: я́ркий
