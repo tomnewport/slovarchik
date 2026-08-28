@@ -27,8 +27,12 @@ import {
   latinInRussianText,
   missingStressMarks,
   stressGoldenMismatches,
+  unannotatedStressDivergences,
 } from '../src/lib/stressAudit.js'
 import { STRESS_GOLDEN } from '../src/lib/stressGolden.js'
+
+/** Unannotated stress divergences that stand today (#600). Only ever lower it. */
+const BUDGET = 182
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'vocab')
 
@@ -68,6 +72,36 @@ for (const m of missing) {
   console.log(`  [${m.key}] ${m.where} «${m.token}»${m.ru ? `  ${m.ru}` : ''}`)
 }
 
+const loose = unannotatedStressDivergences(words)
+const bySpelling = new Map()
+for (const d of loose) {
+  const k = d.dictionary
+  if (!bySpelling.has(k)) bySpelling.set(k, [])
+  bySpelling.get(k).push(d)
+}
+console.log(
+  `\n=== Unannotated token vs the dictionary's only form (${loose.length} in ${bySpelling.size} spellings) ===\n`,
+)
+console.log('  Spellings more than one word claims are skipped, as is the count')
+console.log('  form after 2/3/4. What is left is a sentence that is wrong, a')
+console.log('  paradigm cell that is wrong, or a word the corpus does not have.\n')
+for (const [dictionary, hits] of [...bySpelling.entries()].sort((a, b) => b[1].length - a[1].length)) {
+  console.log(`  ${String(hits.length).padStart(3)}  «${hits[0].token}» vs «${dictionary}»  [${hits[0].owner}]`)
+  console.log(`       ${hits[0].ru}`)
+}
+
 const total = latin.length + div.length + golden.length + missing.length
-console.log(`\nTOTAL: ${total}`)
-process.exitCode = total ? 1 : 0
+console.log(`\nTOTAL (must be zero): ${total}`)
+if (loose.length > BUDGET) {
+  console.error(
+    `\nFAILED: ${loose.length} unannotated stress divergence(s), budget is ${BUDGET}.\n` +
+      'Fix the mis-stressed side — the sentence or the paradigm cell. Where the\n' +
+      'spelling really is shared with a word the corpus lacks, adding that word\n' +
+      'resolves it. Do not raise the budget to make this pass.',
+  )
+} else if (loose.length < BUDGET) {
+  console.log(`✓ unannotated: down to ${loose.length} from a budget of ${BUDGET} — lower BUDGET to lock the gain in.`)
+} else {
+  console.log('✓ unannotated: at budget')
+}
+process.exitCode = total || loose.length > BUDGET ? 1 : 0

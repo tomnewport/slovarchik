@@ -16,6 +16,12 @@
 //      paradigm — the meaning-changing homograph class (сто́ит/стои́т,
 //      гóрода/городá). Both must always be zero so this can't silently regrow.
 //
+//   3. The same comparison on *unannotated* tokens (#600), against the only
+//      stressed form the dictionary has for that spelling. This one is a
+//      **ratchet**, not a zero: a residue of it is spellings two words share
+//      where only one is a curriculum word, which no corpus-internal check can
+//      tell apart from a real defect. BUDGET is what stands today.
+//
 // Run `node scripts/check-stress.mjs` for the full report while editing data.
 import { describe, it, expect } from 'vitest'
 
@@ -25,11 +31,15 @@ import {
   latinInRussianText,
   missingStressMarks,
   stressGoldenMismatches,
+  unannotatedStressDivergences,
 } from './stressAudit.js'
 import { STRESS_GOLDEN } from './stressGolden.js'
 
 const words = loadFixtureWords()
 const rules = loadFixtureRules()
+
+/** Unannotated divergences standing today (#600). Only ever lower it. */
+const UNANNOTATED_BUDGET = 182
 
 describe('stress data integrity', () => {
   it('has no Latin accented vowels / homoglyphs in Russian text', () => {
@@ -48,6 +58,17 @@ describe('stress data integrity', () => {
         .map((d) => `  [${d.id}] token «${d.token}» vs stored «${d.stored}»  (${d.ru})`)
         .join('\n')}`,
     ).toEqual([])
+  })
+
+  it('does not let unannotated stress divergences grow past their budget', () => {
+    const loose = unannotatedStressDivergences(words)
+    expect(
+      loose.length,
+      `Unannotated tokens disagreeing with the dictionary's only form:\n${loose
+        .slice(0, 40)
+        .map((d) => `  «${d.token}» vs «${d.dictionary}» [${d.owner}]  (${d.ru})`)
+        .join('\n')}\n\nFix the mis-stressed side, or add the word whose spelling is being\nshadowed. Never raise UNANNOTATED_BUDGET to make this pass.`,
+    ).toBeLessThanOrEqual(UNANNOTATED_BUDGET)
   })
 
   it('has no multi-syllable Russian token written without a stress mark', () => {
