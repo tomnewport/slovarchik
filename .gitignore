@@ -28,3 +28,8 @@ review/quarantine-russian.jsonl
 # Derived from the proposals + vocab; the reviewers' *.jsonl beside them are
 # the record and stay tracked.
 review/gloss/*.json
+
+# External dictionary cache for scripts/probe-dictionary.mjs — ~22 MB of
+# OpenRussian CSVs (CC BY-SA 4.0), re-fetchable with `npm run probe:dict -- --fetch`.
+# A derived third-party mirror: measured against, never shipped, never committed.
+.dictionary-cache/
