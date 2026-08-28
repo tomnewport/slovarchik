@@ -18,6 +18,13 @@
 //      stored form is either a mis-stressed phrase or a mis-stressed paradigm —
 //      both are bugs of exactly the kind #457 is about.
 //
+//   3. The same disagreement on tokens carrying *no* annotation (#600). Most
+//      sentence tokens name no slot, so (2) never sees them: a sentence could
+//      stress полице́йский as Поли́цейский and every check stayed green, because
+//      `missingStressMarks` only asks whether a mark is *there*. This compares
+//      the mark's *position* against the dictionary — see
+//      {@link unannotatedStressDivergences} for what it can and cannot know.
+//
 // Kept framework-free so both `scripts/check-stress.mjs` and the unit test can
 // drive it.
 import { shapeContextPhrases } from './vocabBuild.js'
@@ -306,6 +313,99 @@ export function missingStressMarks(words) {
         const prev = trimToken(toks[i - 1] ?? '')
         if (/́/.test(prev) && STRESS_ATTRACTORS.has(normToken(prev))) continue
         out.push({ key: w.key, where: 'usage.ru', token: t, ru: u.ru })
+      }
+    }
+  }
+  return out
+}
+
+/**
+ * Numerals that take the count form — «два часа́», «три шага́». It is a survival
+ * of the dual, not the genitive it looks like, and it is often end-stressed
+ * where the genitive is not. No paradigm cell holds it, so a token after one of
+ * these is left alone rather than measured against a form that does not claim
+ * to cover it.
+ */
+const COUNT_FORM_NUMERALS = /(два|две|три|четыре|оба|обе|полтора|полторы)$/
+
+/**
+ * Every stressed spelling the dictionary knows, indexed by its unstressed form:
+ * `спелling → Map(stressed key → {form, key})`. A spelling more than one word
+ * can claim ends up with several entries, which is the signal that it proves
+ * nothing about where the stress belongs.
+ *
+ * @param {object[]} words normalised word list (from buildWords)
+ * @returns {Map<string, Map<string, {form: string, key: string}>>}
+ */
+export function formStressIndex(words) {
+  const index = new Map()
+  const add = (word, text) => {
+    if (typeof text !== 'string') return
+    const t = trimToken(text)
+    if (!/[а-яё]/i.test(t) || t.includes(' ') || vowelCount(t) < 2) return
+    if (!HAS_STRESS.test(t)) return
+    const bare = normToken(t)
+    if (!bare) return
+    let variants = index.get(bare)
+    if (!variants) index.set(bare, (variants = new Map()))
+    const marked = normTokenStress(t)
+    if (!variants.has(marked)) variants.set(marked, { form: t, key: word.key })
+  }
+  for (const w of words ?? []) {
+    if (w.learnable === false) continue
+    add(w, w.headword)
+    for (const [, v] of strings(w.forms, '')) add(w, v)
+    for (const [, v] of strings(w.short, '')) add(w, v)
+    if (w.extra) {
+      for (const field of ['declension', 'conjugation', 'participles', 'gerund', 'forms']) {
+        for (const [, v] of strings(w.extra[field], '')) add(w, v)
+      }
+    }
+  }
+  return index
+}
+
+/**
+ * Usage-sentence tokens whose stress mark contradicts the only stressed form
+ * the dictionary has for that spelling (#600).
+ *
+ * `annotatedStressDivergences` can only see tokens that name a paradigm slot,
+ * which most do not. This reads the rest, and the whole difficulty is telling a
+ * mis-stressed sentence from a spelling two words share:
+ *
+ *   - **A spelling more than one word claims is skipped.** «Я е́ду на рабо́ту» is
+ *     right — е́ду is 1sg of е́хать, and the dictionary's еду́ is the accusative
+ *     of еда́. The index holds both, so the pair proves nothing and is dropped.
+ *     This is the same rule `phraseAmbiguity` applies to prompts.
+ *   - **The count form after 2/3/4 is skipped**, because no cell holds it.
+ *
+ * What survives splits three ways and only a human can sort them: the sentence
+ * is wrong (Поли́цейский), the paradigm cell is wrong (го́дам for года́м), or the
+ * spelling *is* shared but the other claimant is not a curriculum word, so the
+ * index cannot see the ambiguity — стре́лка is the clock hand, стрелка́ the
+ * marksman's genitive, and only one of them is an entry. That last class cannot
+ * be driven out from inside the corpus, which is why the script budgets this
+ * count rather than requiring zero.
+ *
+ * @param {object[]} words normalised word list (from buildWords)
+ * @returns {{key: string, token: string, dictionary: string, owner: string, ru: string}[]}
+ */
+export function unannotatedStressDivergences(words) {
+  const index = formStressIndex(words)
+  const out = []
+  for (const w of words ?? []) {
+    for (const u of w.usage || []) {
+      if (!u?.ru) continue
+      const tokens = u.ru.split(/\s+/)
+      for (let i = 0; i < tokens.length; i++) {
+        const t = trimToken(tokens[i])
+        if (!/[а-яё]/i.test(t) || vowelCount(t) < 2 || !/\u0301/.test(t)) continue
+        if (COUNT_FORM_NUMERALS.test(normToken(trimToken(tokens[i - 1] ?? '')))) continue
+        const variants = index.get(normToken(t))
+        if (!variants || variants.size !== 1) continue
+        const [only] = [...variants.values()]
+        if (normTokenStress(t) === normTokenStress(only.form)) continue
+        out.push({ key: w.key, token: t, dictionary: only.form, owner: only.key, ru: u.ru })
       }
     }
   }
