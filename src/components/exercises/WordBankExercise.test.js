@@ -241,3 +241,26 @@ describe('WordBankExercise honesty system', () => {
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
   })
 })
+
+// ── The facts panel (#586) ────────────────────────────────────────────────
+describe('WordBankExercise word facts', () => {
+  it('shows the drilled word once the answer is graded, never before', async () => {
+    const wrapper = mount(WordBankExercise, { props: { exercise } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await assembleExpected(wrapper)
+    await wrapper.find('button.check').trigger('click')
+
+    const facts = wrapper.findComponent({ name: 'WordFacts' })
+    expect(facts.exists()).toBe(true)
+    expect(facts.props('wordKey')).toBe('го́род=city')
+  })
+
+  it('has no single subject when the phrase drills several words', async () => {
+    const many = { ...exercise, targets: ['го́род=city', 'большой=big'] }
+    const wrapper = mount(WordBankExercise, { props: { exercise: many } })
+    await assembleExpected(wrapper)
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+  })
+})

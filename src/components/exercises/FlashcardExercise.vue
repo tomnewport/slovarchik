@@ -10,6 +10,12 @@
 // answer so the learner actually learns from the miss, then a single Enter (or
 // the Next button) moves on.
 //
+// The one thing that holds that fast loop is a card with something to say about
+// its word (#586): the facts panel is shown on every resolved card, right or
+// wrong, and auto-advancing past it would mean the learner never reads it. So a
+// correct answer on a word that *has* facts settles instead of advancing, and
+// waits for the same single Enter. Cards with nothing to show are untouched.
+//
 // Unless the guess was a real gloss of a *related* word (#589). Told "to put on"
 // for «одева́ться», the drill says that belongs to «надева́ть» and keeps the card
 // open for another go, however many it takes — the mirror of the spelling
@@ -30,7 +36,9 @@ import { phraseCorrect } from '../../lib/phrases.js'
 import { normalize } from '../../lib/text.js'
 import { buildOptions } from '../../lib/flashcardOptions.js'
 import { speak } from '../../lib/speech.js'
+import { hasWordFacts } from '../../lib/wordFacts.js'
 import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition.js'
+import { state as vocabState } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import { diagnoseEnglishAnswer } from '../../stores/hints.js'
 import { correctionMessage } from '../../lib/confusables.js'
@@ -68,6 +76,13 @@ const pos = computed(() => card.value?.pos ?? '')
 // picked option: two words sharing a base gloss are told apart by their label.
 const answerLabel = computed(() => card.value?.label ?? answer.value)
 
+// Has this card's word anything to say for itself? Decided before the panel is
+// rendered, because it is what tells a correct answer whether to hold.
+const wordsByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
+const cardHasFacts = computed(() =>
+  card.value?.key ? hasWordFacts(wordsByKey.value.get(card.value.key), wordsByKey.value) : false,
+)
+
 // A typed / selected candidate is right when it matches the gloss bar case,
 // punctuation, stress and articles.
 function isAnswer(text) {
@@ -87,6 +102,12 @@ const typed = ref('')
 // Once true, the correct answer is on screen (after a wrong guess or a pass) and
 // the only thing left to do is move on.
 const revealed = ref(false)
+// Once true, the card was answered correctly and is being held open so its facts
+// can be read. Set only where there are facts to read — otherwise a right answer
+// advances as it always has.
+const solved = ref(false)
+// The card is resolved either way: nothing more to answer, only Next.
+const settled = computed(() => revealed.value || solved.value)
 // The diagnosis of the latest placeable guess: {headline, detail, tier}, or null.
 const correction = ref(null)
 const heard = ref('') // last spoken transcript
@@ -104,6 +125,7 @@ function focusInput() {
 function startCard() {
   typed.value = ''
   revealed.value = false
+  solved.value = false
   correction.value = null
   heard.value = ''
   // In hearing mode the card is heard, not seen — read it out as it appears.
@@ -115,7 +137,7 @@ function startCard() {
 // appears once the guess narrows the field; hidden once the answer is revealed
 // or before anything is typed.
 const options = computed(() => {
-  if (revealed.value) return []
+  if (settled.value) return []
   const pool = props.exercise.options ?? []
   if (!pool.length) return []
   return buildOptions({ typed: typed.value, pool })
@@ -125,7 +147,7 @@ const options = computed(() => {
 // card's own word or shares its disambiguated label (a true synonym), so the two
 // hats are told apart while маши́на/автомоби́ль both count as "car".
 function pickOption(o) {
-  if (revealed.value) return
+  if (settled.value) return
   typed.value = o.label ?? o.en ?? ''
   const correct =
     o.key === card.value?.key || normalize(o.label ?? o.en ?? '') === normalize(answerLabel.value)
@@ -135,13 +157,13 @@ function pickOption(o) {
 
 // Typing the whole word right advances straight away — no Enter needed.
 function onType() {
-  if (!revealed.value && isAnswer(typed.value)) succeed()
+  if (!settled.value && isAnswer(typed.value)) succeed()
 }
 
 // Enter drives both phases: check a guess, or (once revealed) move on. Keeping
 // everything on the return key means focus never leaves the input.
 function onSubmit() {
-  if (revealed.value) {
+  if (settled.value) {
     advance()
     return
   }
@@ -155,7 +177,7 @@ function onSubmit() {
  * is counted missed the first time round.
  */
 function miss(guess) {
-  if (!card.value || revealed.value) return
+  if (!card.value || settled.value) return
   const verdict = diagnoseEnglishAnswer(guess, {
     targetKey: card.value.key,
     options: props.exercise.options,
@@ -176,7 +198,7 @@ function miss(guess) {
 // Show the correct answer and count the card as missed. The learner reads it,
 // then presses Enter / Next to continue.
 function reveal() {
-  if (!card.value || revealed.value) return
+  if (!card.value || settled.value) return
   revealed.value = true
   missed.add(card.value.key)
   stopMic()
@@ -190,6 +212,13 @@ function reveal() {
 function succeed() {
   stopMic()
   playFeedback(true)
+  // Hold the card open when there is something to read about the word; the
+  // learner moves on with Enter or Next, exactly as after a miss.
+  if (cardHasFacts.value) {
+    solved.value = true
+    focusInput()
+    return
+  }
   advance()
 }
 
@@ -210,7 +239,7 @@ function advance() {
 // --- Speaking ---------------------------------------------------------------
 
 function startMic() {
-  if (!canSpeak || listening.value || revealed.value) return
+  if (!canSpeak || listening.value || settled.value) return
   heard.value = ''
   listening.value = true
   recCtl = listen({
@@ -273,9 +302,9 @@ onBeforeUnmount(() => {
         v-model="typed"
         type="text"
         class="combo-input"
-        :class="{ revealed }"
+        :class="{ revealed, solved }"
         :data-answer="answer"
-        :readonly="revealed"
+        :readonly="settled"
         placeholder="Type the English…"
         autocomplete="off"
         autocapitalize="off"
@@ -287,7 +316,7 @@ onBeforeUnmount(() => {
 
     <!-- Whose word did they just describe? Shown instead of revealing, so the
          card stays open for another go. -->
-    <p v-if="correction && !revealed" class="correction" :class="correction.tier">
+    <p v-if="correction && !settled" class="correction" :class="correction.tier">
       <strong class="correction-headline">{{ correction.headline }}</strong>
       <span class="correction-detail">{{ correction.detail }}</span>
     </p>
@@ -299,18 +328,19 @@ onBeforeUnmount(() => {
       </li>
     </ul>
 
-    <!-- The learning moment: the correct answer after a wrong guess or a pass. -->
-    <div v-if="revealed" class="reveal">
-      <span class="reveal-label">Answer</span>
-      <span class="reveal-en">{{ answer }}</span>
+    <!-- The learning moment: the correct answer after a wrong guess or a pass —
+         or, on a held card, the confirmation that the guess was right. -->
+    <div v-if="settled" class="reveal" :class="{ solved }">
+      <span class="reveal-label">{{ solved ? '✓ Correct' : 'Answer' }}</span>
+      <span v-if="!solved" class="reveal-en">{{ answer }}</span>
       <span class="reveal-ru"><span lang="ru">{{ card.ru }}</span><SpeakButton :text="card.ru" /></span>
     </div>
-    <!-- About this word (#586) — only once the answer is on screen, never while
-         the learner is still producing it. Collapsed unless they asked for it. -->
-    <WordFacts v-if="revealed && card?.key" :key="card.key" :word-key="card.key" />
+    <!-- About this word (#586) — on every resolved card, right or wrong, but
+         never while the learner is still producing the answer. -->
+    <WordFacts v-if="settled && card?.key" :key="card.key" :word-key="card.key" />
 
     <!-- Answer by voice instead of typing. -->
-    <div v-if="canSpeak && !revealed" class="speak-row">
+    <div v-if="canSpeak && !settled" class="speak-row">
       <button v-if="!listening" type="button" class="speak-toggle" @click="startMic">
         🎤 Speak instead
       </button>
@@ -322,7 +352,7 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="row">
-      <button v-if="revealed" type="button" class="primary next" @click="advance">Next →</button>
+      <button v-if="settled" type="button" class="primary next" @click="advance">Next →</button>
       <button v-else type="button" class="pass" @click="pass">Pass →</button>
     </div>
   </div>
@@ -386,6 +416,10 @@ onBeforeUnmount(() => {
   border-color: var(--bad);
   background: color-mix(in srgb, var(--bad) 10%, var(--card));
 }
+.combo-input.solved {
+  border-color: var(--good);
+  background: color-mix(in srgb, var(--good) 10%, var(--card));
+}
 .options {
   list-style: none;
   margin: 0;
@@ -421,6 +455,9 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--bad);
+}
+.reveal.solved .reveal-label {
+  color: var(--good);
 }
 .reveal-en {
   font-size: 1.35rem;

@@ -15,7 +15,6 @@ import {
   setSuccessSound,
   setErrorSound,
   setCelebrationSound,
-  setFactsExpanded,
   setShowIntroCards,
   OFF,
 } from '../stores/settings.js'
@@ -260,22 +259,15 @@ onMounted(async () => {
       </template>
     </div>
 
-    <!-- Word facts (#586): whether the "About this word" panel starts open. -->
+    <!-- Word facts (#586): what the "About this word" panel is, and the one
+         thing left to choose about it — the intro card before a first exercise. -->
     <div class="card">
       <h2>Word facts</h2>
       <p class="muted">
         Where a word has a breakdown, a root or relatives worth showing, an
-        <strong>About this word</strong> panel appears once an answer is resolved.
+        <strong>About this word</strong> panel appears — in full — as soon as an
+        answer is resolved, right or wrong.
       </p>
-      <label class="facts-toggle-row">
-        <input
-          type="checkbox"
-          class="facts-expanded"
-          :checked="settings.factsExpanded"
-          @change="setFactsExpanded($event.target.checked)"
-        />
-        Open it automatically instead of leaving it collapsed
-      </label>
       <label class="facts-toggle-row">
         <input
           type="checkbox"

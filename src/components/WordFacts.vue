@@ -4,28 +4,26 @@
 // a mnemonic — and the other words it belongs with.
 //
 // One component, several homes: the word modal, the vocab drill's answer, the
-// exercise reveals, and (#587) the intro card. It is never forced on anyone
-// mid-drill: everywhere but the intro card it sits behind a disclosure, and a
-// `build` fact routinely gives an answer away, so the callers only render it
-// once the answer is resolved.
+// intro card and every exercise's resolved state. It is never behind a
+// disclosure: once there is something to say about a word, saying it is the
+// point — a panel the learner has to remember to open is one they never read.
+// Timing is the callers' job instead: a `build` fact routinely gives an answer
+// away, so an exercise renders this only once its answer is resolved (right,
+// wrong or passed).
 //
 // A word with neither authored facts nor derived relations renders **nothing** —
 // no "no facts available" chrome. Most of the corpus carries no authored facts
 // yet, and the derived relations alone have to look deliberate.
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 import { state as vocabState } from '../stores/vocab.js'
 import { stateOf } from '../stores/progress.js'
-import { settings } from '../stores/settings.js'
 import { wordFacts, factParts, relatedWords, hasWordFacts } from '../lib/wordFacts.js'
 import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
 import SpeakButton from './SpeakButton.vue'
 
 const props = defineProps({
   wordKey: { type: String, required: true },
-  // Rendered open, with no disclosure at all. The intro card (#587) is the one
-  // place the learner has asked to be told about the word.
-  open: { type: Boolean, default: false },
   // Whether a related word can actually be opened from here. Only a host that
   // has somewhere to go — the word modal — can honour `open-word`; mid-drill
   // there is nowhere to navigate to and nothing should look tappable. Off by
@@ -81,26 +79,13 @@ function relationLabel(row) {
 function met(row) {
   return !!row.key && stateOf(row.key) !== 'unknown'
 }
-
-// Disclosure state. `open` (the intro card) renders the body with no toggle at
-// all; otherwise the learner's `factsExpanded` preference decides the starting
-// state and the toggle takes over from there.
-const shown = ref(settings.factsExpanded)
 </script>
 
 <template>
   <div v-if="!isEmpty" class="word-facts">
-    <button
-      v-if="!open"
-      type="button"
-      class="facts-toggle"
-      :aria-expanded="shown"
-      @click="shown = !shown"
-    >
-      💡 About this word
-    </button>
+    <p class="facts-heading">💡 About this word</p>
 
-    <div v-if="open || shown" class="facts-body">
+    <div class="facts-body">
       <!-- The breakdown leads: it is the piece that does the most work on a
            long word, and it is worth seeing before any prose. -->
       <template v-for="(fact, i) in facts" :key="i">
@@ -178,14 +163,10 @@ const shown = ref(settings.factsExpanded)
   display: grid;
   gap: 0.5rem;
 }
-.facts-toggle {
-  background: none;
-  border: none;
+.facts-heading {
+  margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
-  text-align: left;
-  padding: 0;
-  cursor: pointer;
 }
 .facts-body {
   display: grid;

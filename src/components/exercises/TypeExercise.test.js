@@ -340,8 +340,20 @@ describe('TypeExercise', () => {
     expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
   })
 
-  it('offers no facts panel for a phrase — there is no one word it is about', async () => {
+  it('shows the facts of the word a phrase drills, once it is resolved', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('я иду в школу')
+    await wrapper.find('button.check').trigger('click')
+    const facts = wrapper.findComponent({ name: 'WordFacts' })
+    expect(facts.exists()).toBe(true)
+    expect(facts.props('wordKey')).toBe('школа=school')
+  })
+
+  it('offers no facts panel for a set spanning several words', async () => {
+    const many = { ...phrase, targets: ['школа=school', 'идти=to go'] }
+    const wrapper = mount(TypeExercise, { props: { exercise: many } })
     await wrapper.find('input[lang="ru"]').setValue('я иду в школу')
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)

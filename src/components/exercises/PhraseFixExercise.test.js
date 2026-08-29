@@ -424,3 +424,22 @@ describe('PhraseFixExercise', () => {
     })
   })
 })
+
+// ── The facts panel (#586) ────────────────────────────────────────────────
+describe('PhraseFixExercise word facts', () => {
+  it('shows the drilled word only once its form is spelled and graded', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await pickSelections(wrapper, 'Accusative', 'Singular')
+    // A `build` fact would spell the form out: still nothing at the spelling stage.
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('input[lang="ru"]').setValue('бабочку')
+    await wrapper.find('form').trigger('submit')
+
+    const facts = wrapper.findComponent({ name: 'WordFacts' })
+    expect(facts.exists()).toBe(true)
+    expect(facts.props('wordKey')).toBe('бабочка=butterfly')
+  })
+})

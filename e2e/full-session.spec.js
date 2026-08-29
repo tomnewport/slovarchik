@@ -66,8 +66,10 @@ async function solveWordbank(ex) {
 
 /**
  * Flashcard board: one always-focused input per card, each advertising the card's
- * answer via `data-answer`. Typing the exact answer auto-advances; the last card
- * ends the exercise (the input detaches). Drains any consecutive boards.
+ * answer via `data-answer`. Typing the exact answer advances the card — unless it
+ * is held open (#586) so the word's facts can be read, which looks exactly like
+ * the reveal after a miss and clears on Next. The last card ends the exercise
+ * (the input detaches). Drains any consecutive boards.
  */
 async function solveMatch(page) {
   const input = page.locator('#fc-input')
@@ -92,6 +94,16 @@ async function solveMatch(page) {
     )
     if (await page.locator('.exercise .reveal').count()) {
       await page.locator('.exercise').getByRole('button', { name: /Next/ }).click()
+      // Don't type into the card just dismissed: wait for the resolved state to
+      // go, which is either a fresh (editable) card or the end of the board.
+      await page.waitForFunction(
+        () => {
+          const inp = document.querySelector('#fc-input')
+          return !document.querySelector('.exercise .reveal') && (!inp || !inp.readOnly)
+        },
+        undefined,
+        { timeout: 15_000 },
+      )
     }
   }
   throw new Error('flashcard board did not finish')

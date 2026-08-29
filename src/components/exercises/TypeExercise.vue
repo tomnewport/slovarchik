@@ -117,9 +117,14 @@ const double = computed(() => firstTryCorrect.value && !hintUsed.value)
 
 const answer = computed(() => typingSequence(props.exercise.ru))
 
-// The word whose facts the resolved answer may show. A phrase has no single
-// word to be about, so it gets none.
-const factsKey = computed(() => (isPhrase.value ? null : ((props.exercise.targets ?? [])[0] ?? null)))
+// The word whose facts the resolved answer shows. A phrase drills one assessed
+// word (the one `targetTokens` marks in the sentence), so it is that word the
+// panel is about; a set spanning several words has no single subject and gets
+// none.
+const factsKey = computed(() => {
+  const targets = (props.exercise.targets ?? []).filter(Boolean)
+  return targets.length === 1 ? targets[0] : null
+})
 
 // Every accepted Russian rendering (the target plus any synonyms) — the answer
 // is graded, and its feedback measured, against whichever one it's closest to.
@@ -412,9 +417,9 @@ onBeforeUnmount(() => setHintAllowed(true))
         <SpeakButton :text="exercise.ru" />
       </div>
       <p v-if="exercise.audio && exercise.en" class="translation-hint">{{ exercise.en }}</p>
-      <!-- About this word (#586) — only once the answer is resolved. A `build`
-           fact spells the word out, so showing it any earlier would hand over
-           the answer. Collapsed unless the learner asked for it. -->
+      <!-- About this word (#586) — only once the answer is resolved, right,
+           wrong or given up on. A `build` fact spells the word out, so showing
+           it any earlier would hand over the answer. -->
       <WordFacts v-if="factsKey" :word-key="factsKey" />
     </div>
 

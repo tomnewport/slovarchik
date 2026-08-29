@@ -23,6 +23,7 @@ import {
 } from '../../lib/recognition.js'
 import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
+import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -39,6 +40,13 @@ const maxListenMs = computed(() => (isPhrase.value ? 10000 : 3000))
 // Letters expected, so we can stop early once roughly that much has been heard
 // instead of waiting out the whole window for a short word.
 const targetLetters = computed(() => typingSequence(props.exercise.ru).replace(/\s+/g, '').length)
+
+// The word being said aloud — the subject of the facts panel once it is graded.
+// A phrase drilling several words has no single subject, so it gets none.
+const factsKey = computed(() => {
+  const targets = (props.exercise.targets ?? []).filter(Boolean)
+  return targets.length === 1 ? targets[0] : null
+})
 
 // phase: 'prompt' (read out, waiting to speak) | 'listening' | 'graded'
 const phase = ref('prompt')
@@ -258,6 +266,8 @@ onBeforeUnmount(() => {
           <span class="match-score">· {{ Math.round(result.similarity * 100) }}% letters</span>
         </p>
         <p v-if="transcript" class="muted heard" style="margin: 0">Heard: "{{ transcript }}"</p>
+        <!-- About this word (#586) — once it has been graded, right or wrong. -->
+        <WordFacts v-if="factsKey" :word-key="factsKey" />
         <div class="row">
           <button class="primary next" @click="next">Next →</button>
           <button v-if="!result.correct" @click="tryAgain">🎤 Try again</button>

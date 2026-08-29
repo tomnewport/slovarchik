@@ -11,7 +11,6 @@ vi.mock('../lib/speech.js', () => ({
 import WordFacts from './WordFacts.vue'
 import { state as vocabState } from '../stores/vocab.js'
 import { state as progressState } from '../stores/progress.js'
-import { settings } from '../stores/settings.js'
 import { buildWords } from '../lib/vocabBuild.js'
 
 const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
@@ -61,7 +60,6 @@ beforeEach(() => {
   vocabState.words = fromYaml([{ pos: 'verb', text: verbs }])
   vocabState.status = 'ready'
   progressState.records = {}
-  settings.factsExpanded = true // render the body without clicking, in most tests
 })
 
 describe('WordFacts', () => {
@@ -157,28 +155,19 @@ describe('WordFacts', () => {
     expect(wrapper.find('.word-rows li').classes()).not.toContain('unmet')
   })
 
-  it('starts collapsed behind a disclosure by default', () => {
-    settings.factsExpanded = false
+  it('renders open, with no disclosure to find — facts are the point', () => {
+    // A panel the learner has to remember to open is one they never read: every
+    // host renders this once there is something to say and the answer is out.
     const wrapper = mountFor('переводить=to translate')
-    expect(wrapper.find('.facts-toggle').exists()).toBe(true)
-    expect(wrapper.find('.facts-body').exists()).toBe(false)
-  })
-
-  it('opens on the disclosure, and honours the auto-expand preference', async () => {
-    settings.factsExpanded = false
-    const wrapper = mountFor('переводить=to translate')
-    await wrapper.find('.facts-toggle').trigger('click')
-    expect(wrapper.find('.facts-body').exists()).toBe(true)
-
-    settings.factsExpanded = true
-    expect(mountFor('переводить=to translate').find('.facts-body').exists()).toBe(true)
-  })
-
-  it('has no disclosure at all when opened outright (the intro card)', () => {
-    settings.factsExpanded = false
-    const wrapper = mountFor('переводить=to translate', { open: true })
     expect(wrapper.find('.facts-toggle').exists()).toBe(false)
     expect(wrapper.find('.facts-body').exists()).toBe(true)
+    expect(wrapper.find('.facts-heading').text()).toContain('About this word')
+  })
+
+  it('still renders nothing at all for a word with nothing to say', () => {
+    const wrapper = mountFor('думать=to think')
+    expect(wrapper.find('.word-facts').exists()).toBe(false)
+    expect(wrapper.text()).toBe('')
   })
 
   it('keeps easily-confused words in their own block, with the authored why', () => {

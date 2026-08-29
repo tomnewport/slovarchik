@@ -130,3 +130,18 @@ describe('InflectExercise', () => {
     })
   })
 })
+
+// ── The facts panel (#586) ────────────────────────────────────────────────
+describe('InflectExercise word facts', () => {
+  it('shows the word once the table is graded, never while it is being filled', async () => {
+    const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await fillTable(wrapper, true)
+    await wrapper.find('.row button.primary').trigger('click') // Check
+
+    const facts = wrapper.findComponent({ name: 'WordFacts' })
+    expect(facts.exists()).toBe(true)
+    expect(facts.props('wordKey')).toBe(word.key)
+  })
+})

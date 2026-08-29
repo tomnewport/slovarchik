@@ -25,6 +25,7 @@ import { revealDiff } from '../../lib/spellReveal.js'
 import { speak } from '../../lib/speech.js'
 import { playFeedback } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
+import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -157,6 +158,11 @@ function submitSpell() {
   // Only now — with the form known correct — is it safe to voice the sentence.
   speak(item.value.ru)
 }
+
+// The word this sentence drills — the subject of the facts panel once the
+// sentence is done. Each item names its own word, so a set moves the panel on
+// with the sentences.
+const factsKey = computed(() => (item.value.targets ?? []).filter(Boolean)[0] ?? null)
 
 const isLast = computed(() => itemIdx.value >= items.value.length - 1)
 
@@ -373,6 +379,10 @@ onMounted(() => {
             <li v-for="(ex, i) in item.contrastRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
           </ul>
         </details>
+
+        <!-- About this word (#586) — once the form is spelled and graded, right
+             or wrong: never before, when a `build` fact would spell it out. -->
+        <WordFacts v-if="factsKey" :word-key="factsKey" />
 
         <button class="primary next" @click="next">
           {{ isLast ? 'Next →' : 'Next sentence →' }}

@@ -99,8 +99,8 @@ const government = computed(() => governmentLabels(current.value?.governs))
 // The word record behind the shaped drill word, for the facts panel.
 const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, w])))
 // Does this word have a facts panel worth reading (#586)? A one-second
-// auto-advance past a breakdown the learner hasn't opened yet makes the
-// disclosure unusable, so it holds like the other reminders do.
+// auto-advance past a breakdown the learner has barely had time to see wastes
+// it, so the answer holds like the other reminders do.
 const hasFacts = computed(() =>
   current.value?.id ? hasWordFacts(wordsByKey.value.get(current.value.id), wordsByKey.value) : false,
 )
@@ -490,9 +490,9 @@ onUnmounted(() => {
           <span v-for="frame in government" :key="frame" class="frame">{{ frame }}</span>
         </div>
       </div>
-      <!-- About this word (#586): its build, root, origin and family, collapsed
-           behind a disclosure. Only here, in the answered block — before the
-           answer a `build` fact would spell the word out. -->
+      <!-- About this word (#586): its build, root, origin and family. Only
+           here, in the answered block — before the answer a `build` fact would
+           spell the word out. -->
       <WordFacts v-if="current?.id" :key="current.id" :word-key="current.id" />
       <!-- Correct answers advance on their own; wrong answers and heteronym /
            pair / government reminders wait for the user. -->
