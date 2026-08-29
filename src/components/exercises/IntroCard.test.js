@@ -7,10 +7,6 @@ vi.mock('../../lib/speech.js', () => ({
   speechSupported: () => true,
   SLOW_RATE: 0.7,
 }))
-vi.mock('../../stores/settings.js', () => ({
-  settings: { factsExpanded: false },
-}))
-
 import { speak } from '../../lib/speech.js'
 import IntroCard from './IntroCard.vue'
 import { state as vocabState } from '../../stores/vocab.js'

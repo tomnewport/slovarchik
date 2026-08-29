@@ -7,11 +7,9 @@ vi.mock('../../lib/speech.js', () => ({
   speechSupported: () => true,
   SLOW_RATE: 0.7,
 }))
-// WordFacts (#586) reads the auto-expand preference from the same store, so the
-// mock has to carry it as well as the sound hook.
 vi.mock('../../stores/settings.js', () => ({
   playFeedback: vi.fn(),
-  settings: { factsExpanded: false },
+  settings: {},
 }))
 
 // Recognition is controllable per test: `listenImpl` decides what the mic does.
@@ -280,9 +278,12 @@ describe('FlashcardExercise diagnoses a placeable wrong guess', () => {
     await wrapper.find('input.combo-input').setValue(text)
     await wrapper.find('form').trigger('submit')
   }
-  // A correct answer advances the moment it is typed — no Enter, by design.
+  // A correct answer advances the moment it is typed — no Enter, by design —
+  // unless the word has facts to read (#586), when the card holds for a Next.
   const answerRight = async (wrapper, text) => {
     await wrapper.find('input.combo-input').setValue(text)
+    const next = wrapper.find('button.next')
+    if (next.exists()) await next.trigger('click')
   }
 
   beforeEach(() => {
@@ -347,6 +348,54 @@ describe('FlashcardExercise diagnoses a placeable wrong guess', () => {
     expect(wrapper.find('.correction').exists()).toBe(true)
     await answerRight(wrapper, 'to get dressed')
     expect(wrapper.find('.correction').exists()).toBe(false)
+  })
+})
+
+describe('a correct card holds only when it has something to say (#586)', () => {
+  const words = loadFixtureWords()
+  const dressed = {
+    ...exercise,
+    pairs: [
+      { key: 'одеваться=to get dressed', ru: 'одева́ться', en: 'to get dressed' },
+      { key: 'ме́сяц=month', ru: 'ме́сяц', en: 'month' },
+    ],
+    targets: ['одеваться=to get dressed', 'ме́сяц=month'],
+  }
+
+  beforeEach(() => {
+    vocabState.words = words
+    vocabState.status = 'ready'
+  })
+
+  it('holds a right answer open on a word with facts, so they can be read', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dressed } })
+    await wrapper.find('input.combo-input').setValue('to get dressed')
+
+    // Still on card 1, marked correct, with the facts on screen.
+    expect(wrapper.find('.count').text()).toContain('Card 1 of 2')
+    expect(wrapper.find('.reveal.solved').text()).toContain('Correct')
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
+    expect(wrapper.emitted('done')).toBeUndefined()
+
+    // Next moves on, and the card still counts as answered correctly.
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.find('.count').text()).toContain('Card 2 of 2')
+  })
+
+  it('does not name the answer again, or paint the input as a miss', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dressed } })
+    await wrapper.find('input.combo-input').setValue('to get dressed')
+    expect(wrapper.find('.reveal-en').exists()).toBe(false)
+    expect(wrapper.find('input.combo-input').classes()).toContain('solved')
+    expect(wrapper.find('input.combo-input').classes()).not.toContain('revealed')
+  })
+
+  it('advances at once when the word has nothing to add — the loop stays fast', async () => {
+    // Keys 'a'/'b' are in no vocabulary, so there are no facts to hold for.
+    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+    await wrapper.find('input.combo-input').setValue('spring')
+    expect(wrapper.find('.count').text()).toContain('Card 2 of 2')
+    expect(wrapper.find('button.next').exists()).toBe(false)
   })
 })
 

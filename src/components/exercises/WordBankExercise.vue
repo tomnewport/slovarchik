@@ -18,6 +18,7 @@ import { phrases } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
+import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done', 'dispute'])
@@ -73,6 +74,14 @@ const overridden = ref(false)
 // In listen mode the "?" is only heard, and browser TTS rarely conveys the
 // rising question intonation, so flag questions in the prompt (#514).
 const showQuestionCue = computed(() => props.exercise.audio && isQuestion(props.exercise.ru))
+
+// The word this phrase was chosen to drill — the subject of the facts panel once
+// the answer is resolved. A phrase built around several words has no single
+// subject, so it gets none.
+const factsKey = computed(() => {
+  const targets = (props.exercise.targets ?? []).filter(Boolean)
+  return targets.length === 1 ? targets[0] : null
+})
 
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
@@ -298,6 +307,10 @@ onUnmounted(() => {
         Sure your translation also works?
         <button type="button" class="link" @click="markCorrect">I was right →</button>
       </p>
+
+      <!-- About this word (#586) — the drilled word, once the answer is graded
+           either way. -->
+      <WordFacts v-if="factsKey" :word-key="factsKey" />
     </template>
 
     <div class="row">

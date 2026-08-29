@@ -18,6 +18,7 @@ import { playFeedback } from '../../stores/settings.js'
 import DragTable from '../inflection/DragTable.vue'
 import BlindEndings from '../inflection/BlindEndings.vue'
 import SpeakButton from '../SpeakButton.vue'
+import WordFacts from '../WordFacts.vue'
 import CelebrationBurst from '../CelebrationBurst.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -120,6 +121,10 @@ onBeforeUnmount(() => {
       @graded="onGraded"
     />
     <p v-else class="muted">No inflection table available.</p>
+
+    <!-- About this word (#586) — once the table is graded, right or wrong: the
+         breakdown and the word's family explain the forms just filled in. -->
+    <WordFacts v-if="graded && exercise.wordKey" :word-key="exercise.wordKey" />
 
     <div class="row next-row">
       <CelebrationBurst :show="showFire" emoji="🔥" />

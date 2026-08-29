@@ -20,10 +20,6 @@ export const settings = reactive({
   successSound: SUCCESS_SOUNDS[0].id,
   errorSound: NEUTRAL_SOUNDS[0].id,
   celebrationSound: CELEBRATION_SOUNDS[0].id,
-  // Auto-expand the "About this word" panel (#586) rather than leaving it
-  // collapsed. Facts are optional content, never an interruption, so the
-  // default is off — a learner who wants them every time opts in.
-  factsExpanded: false,
   // Introduce a never-seen word with a card before its first exercise (#587).
   // On by default: a cold first test is a guaranteed miss, and the point of the
   // card is that the learner meets the word before being asked for it.
@@ -51,7 +47,6 @@ export async function loadSettings() {
   if (valid('neutral', stored.errorSound)) settings.errorSound = stored.errorSound
   if (valid('celebration', stored.celebrationSound)) settings.celebrationSound = stored.celebrationSound
   const facts = (await idb.getMeta(FACTS_KEY)) ?? {}
-  if (typeof facts.factsExpanded === 'boolean') settings.factsExpanded = facts.factsExpanded
   if (typeof facts.showIntroCards === 'boolean') settings.showIntroCards = facts.showIntroCards
   settings.loaded = true
   return settings
@@ -108,15 +103,6 @@ export function playCelebration() {
 }
 
 /**
- * Auto-expand the word-facts panel everywhere it appears collapsed (#586). The
- * panel itself is unchanged either way — this only decides its starting state.
- */
-export async function setFactsExpanded(on) {
-  settings.factsExpanded = !!on
-  await persistFacts()
-}
-
-/**
  * Turn the intro cards off (#587). With them off no intro step is built at all,
  * restoring exactly the pre-#587 flow.
  */
@@ -127,7 +113,6 @@ export async function setShowIntroCards(on) {
 
 function persistFacts() {
   return idb.setMeta(FACTS_KEY, {
-    factsExpanded: settings.factsExpanded,
     showIntroCards: settings.showIntroCards,
   })
 }

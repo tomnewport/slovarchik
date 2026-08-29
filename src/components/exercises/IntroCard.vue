@@ -84,9 +84,9 @@ onMounted(() => {
       <p class="ex-en muted">{{ example.en }}</p>
     </div>
 
-    <!-- Expanded, not collapsed: this card is the one place the learner has
-         asked to be told about the word. -->
-    <WordFacts v-if="wordKey" :word-key="wordKey" open />
+    <!-- The whole point of the card: everything the app can say about the word,
+         before it is ever tested. -->
+    <WordFacts v-if="wordKey" :word-key="wordKey" />
 
     <div class="row actions">
       <button class="primary got-it" @click="emit('done')">Got it →</button>

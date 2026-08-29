@@ -152,3 +152,21 @@ describe('SpeakExercise', () => {
     vi.useRealTimers()
   })
 })
+
+// ── The facts panel (#586) ────────────────────────────────────────────────
+describe('SpeakExercise word facts', () => {
+  it('shows the word once it has been graded, right or wrong', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+
+    await wrapper.find('button.mic').trigger('click')
+    lastRec.fireResult('кошка') // wrong — the panel is not a reward
+    lastRec.stop()
+    await wrapper.vm.$nextTick()
+
+    const facts = wrapper.findComponent({ name: 'WordFacts' })
+    expect(facts.exists()).toBe(true)
+    expect(facts.props('wordKey')).toBe('дом=house')
+  })
+})

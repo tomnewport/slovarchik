@@ -100,8 +100,8 @@ describe('VocabView', () => {
   })
 
   it('waits when the word has facts to read, rather than advancing past them', async () => {
-    // A one-second auto-advance past a collapsed "About this word" disclosure
-    // makes it unusable — the learner never gets to open it (#586).
+    // A one-second auto-advance past the "About this word" panel gives the
+    // learner no chance to read it (#586).
     vi.useFakeTimers()
     const wrapper = mount(VocabView)
     await wrapper.findAll('button.card')[1].trigger('click')
