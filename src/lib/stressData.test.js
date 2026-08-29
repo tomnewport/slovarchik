@@ -39,7 +39,7 @@ const words = loadFixtureWords()
 const rules = loadFixtureRules()
 
 /** Unannotated divergences standing today (#600). Only ever lower it. */
-const UNANNOTATED_BUDGET = 182
+const UNANNOTATED_BUDGET = 177
 
 describe('stress data integrity', () => {
   it('has no Latin accented vowels / homoglyphs in Russian text', () => {
