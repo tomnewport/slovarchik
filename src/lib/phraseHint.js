@@ -213,10 +213,17 @@ function addSense(index, form, sense) {
  * existential "there is", «замок» both "castle" and "lock" (#568). Those stack
  * up as multiple `senses` on the one entry and `en` joins their glosses, so the
  * hint offers every meaning the learner might be looking at. Inflected forms
- * (pass 2) deliberately don't stack: an oblique form that happens to look like
- * another word is a coincidence, not a second meaning — the exception being an
+ * (pass 2) mostly don't stack: an oblique form that happens to look like another
+ * word is a coincidence, not a second meaning. Two things are exceptions. An
  * explicit heteronym annotation, which is exactly a claim that the collision is
- * real ("it costs" for сто́ит vs "it stands" for стои́т).
+ * real ("it costs" for сто́ит vs "it stands" for стои́т). And a **learnable lemma
+ * meeting an entry held only by gloss-only stubs** (#574): a stub is keyed on the
+ * surface form it glosses, so it claims that form in pass 1 as though it were a
+ * headword, and the verb that also spells it there can only ever reach pass 2.
+ * Left unstacked, «закро́й» glosses as "close" and dead-ends; stacked, it reads
+ * "close / to close" and the learner gets back to закры́ть. The stub keeps its own
+ * sense, which for a nominalised gloss — «заде́ржанный» "detainee", not "to detain"
+ * — is the sense that matters.
  *
  * Within each pass senses appear in dictionary order of the entries claiming them.
  * @param {object[]} sorted   word records, pre-sorted by headword then key
@@ -225,6 +232,12 @@ function addSense(index, form, sense) {
  */
 function buildIndex(sorted, norm) {
   const index = new Map()
+  // Gloss-only entries are keyed on a surface form, not on a lemma, so the entries
+  // they hold are the ones a real lemma is allowed to join in pass 2.
+  const glossOnly = new Set(sorted.filter((w) => w.learnable === false).map((w) => w.key))
+
+  /** Is every sense on this entry a gloss-only stub? */
+  const heldOnlyByStubs = (entry) => entry.senses.every((s) => glossOnly.has(s.key))
 
   // Pass 1: base (dictionary) forms — a word whose lemma *is* the surface form
   // always beats another word for which the token is merely an oblique form.
@@ -246,9 +259,16 @@ function buildIndex(sorted, norm) {
       const hetEntry = w.heteronyms?.find((h) => norm(h.ru) === form)
       const en = hetEntry?.gloss || baseEn
       const sense = { key: w.key, ru: w.headword || w.ru, en }
-      // Only a heteronym annotation may join a form another word already holds;
-      // otherwise inflected forms just fill the gaps pass 1 left.
-      if (!index.has(form) || hetEntry) addSense(index, form, sense)
+      // Inflected forms mostly just fill the gaps pass 1 left. Two things may
+      // join a form another entry already holds: a heteronym annotation, and a
+      // learnable lemma whose form is held only by gloss-only stubs (#574) — a
+      // stub is keyed on a surface form, so it claims that form in pass 1 as if
+      // it were a headword, and «закро́й» would otherwise gloss as "close" with
+      // no route back to закры́ть. Stacking keeps the stub's own sense, which for
+      // a nominalised gloss ("detainee", not "to detain") is the one that matters.
+      const entry = index.get(form)
+      const joinsStub = entry && w.learnable !== false && heldOnlyByStubs(entry)
+      if (!entry || hetEntry || joinsStub) addSense(index, form, sense)
     }
   }
 

@@ -270,6 +270,136 @@ describe('buildFormIndex', () => {
     const index = buildFormIndex([road, expensive])
     expect(index.get(normToken('дорого́й'))?.en).toBe('expensive')
   })
+
+  // A gloss-only stub is keyed on the surface form it glosses, not on a lemma,
+  // so it claims that form in pass 1 as though it were a headword — and the real
+  // word that also spells it there could only ever reach pass 2, where it was
+  // refused. «закро́й» glossed as "close" and dead-ended (#574).
+  const closeStub = {
+    key: 'закрой=close',
+    headword: 'закро́й',
+    ru: 'закрой',
+    meaning: 'close',
+    learnable: false,
+  }
+  const closeVerb = {
+    key: 'закрыть=to close',
+    headword: 'закры́ть',
+    ru: 'закрыть',
+    meaning: 'to close',
+    extra: { conjugation: { imperative: { sg: 'закро́й', pl: 'закро́йте' } } },
+  }
+
+  it('lets a learnable lemma join a form only gloss-only stubs hold (#574)', () => {
+    const hit = buildFormIndex([closeStub, closeVerb]).get(normToken('закро́й'))
+    expect(hit.en).toBe('close / to close')
+    expect(hit.senses.map((s) => s.key)).toEqual(['закрой=close', 'закрыть=to close'])
+  })
+
+  it('keeps a stub’s own sense when its gloss is not the lemma’s (#574)', () => {
+    // «заде́ржанный» is a noun, "detainee" — a sense «задержа́ть» "to detain"
+    // would lose. Stacking adds the route back to the verb without dropping it.
+    const stub = {
+      key: 'задержанный=detainee',
+      headword: 'заде́ржанный',
+      ru: 'задержанный',
+      meaning: 'detainee',
+      learnable: false,
+    }
+    const verb = {
+      key: 'задержать=to detain',
+      headword: 'задержа́ть',
+      ru: 'задержать',
+      meaning: 'to detain',
+      participles: { past_pass: 'заде́ржанный' },
+    }
+    expect(buildFormIndex([stub, verb]).get(normToken('заде́ржанный')).en).toBe(
+      'detainee / to detain',
+    )
+  })
+
+  it('does not let one gloss-only entry join another’s form (#574)', () => {
+    // Only a lemma the learner can actually be drilling earns the extra sense;
+    // between two stubs an oblique collision is the coincidence it always was.
+    const brightly = {
+      key: 'светло=brightly',
+      headword: 'светло́',
+      ru: 'светло',
+      meaning: 'brightly',
+      learnable: false,
+    }
+    const light = {
+      key: 'светлый=light',
+      headword: 'све́тлый',
+      ru: 'светлый',
+      meaning: 'light',
+      learnable: false,
+      extra: { forms: { m: 'све́тлый', n: 'светло́' } },
+    }
+    expect(buildFormIndex([brightly, light]).get(normToken('светло́')).en).toBe('brightly')
+  })
+
+  it('still refuses an oblique collision once a learnable word holds the form (#574)', () => {
+    // The stub is no longer the only holder here: «замо́к» "lock" claimed the form
+    // in pass 1 too, so the oblique of «замо́чек» stays the coincidence it is.
+    const stub = {
+      key: 'замок=padlock',
+      headword: 'замо́к',
+      ru: 'замок',
+      meaning: 'padlock',
+      learnable: false,
+    }
+    const lock = { key: 'замок=lock', headword: 'замо́к', ru: 'замок', meaning: 'lock' }
+    const little = {
+      key: 'замочек=little lock',
+      headword: 'замо́чек',
+      ru: 'замочек',
+      meaning: 'little lock',
+      extra: { declension: { sg_gen: 'замо́к' } },
+    }
+    const hit = buildFormIndex([stub, lock, little]).get(normToken('замо́к'))
+    expect(hit.senses.map((s) => s.key)).toEqual(['замок=lock', 'замок=padlock'])
+    expect(hit.en).toBe('lock / padlock')
+  })
+})
+
+describe('the bundled vocabulary’s hint index', () => {
+  // Every form of a learnable word must reach that word. A gloss-only stub keyed
+  // on the same surface form used to swallow it whole (#574): 362 forms — mostly
+  // imperatives, plus the stored participles and gerunds that made it visible —
+  // hinted as a stub gloss with no route back to their lemma.
+  //
+  // The one thing that may still hold a form alone is a stub whose gloss already
+  // says what the lemma means («пирожки» "pies" for пирожо́к "pie"): nothing is
+  // hidden from the learner there, and `senseGloss` would only read "pies / pie".
+  it('never leaves a learnable word’s form dead-ending in a stub gloss (#574)', () => {
+    const words = loadFixtureWords()
+    const byKey = new Map(words.map((w) => [w.key, w]))
+    const index = buildFormIndex(words)
+    const isStub = (key) => byKey.get(key)?.learnable === false
+
+    const shadowed = []
+    for (const w of words) {
+      if (w.learnable === false) continue
+      const en = w.meaning || w.en
+      for (const form of wordForms(w)) {
+        const entry = index.get(form)
+        if (!entry || entry.senses.some((s) => !isStub(s.key))) continue
+        if (!entry.en.includes(en)) shadowed.push(`${form} → «${entry.en}» hides ${w.key}`)
+      }
+    }
+    expect(shadowed, `shadowed forms:\n${shadowed.slice(0, 25).join('\n')}`).toEqual([])
+  })
+
+  it('routes a stored imperative, participle and gerund back to its verb (#574)', () => {
+    const index = buildFormIndex(loadFixtureWords())
+    expect(index.get(normToken('возьми́')).en).toBe('take / to take')
+    expect(index.get(normToken('пла́чущего')).en).toBe('crying / to cry')
+    expect(index.get(normToken('подумав')).en).toBe('having thought / to think')
+    // …without dropping the nominalised glosses a bulk retirement would have lost.
+    expect(index.get(normToken('кома́ндующий')).en).toBe('commander / to command')
+    expect(index.get(normToken('при́нято')).en).toBe('it is customary / to accept')
+  })
 })
 
 describe('phraseHintTokens', () => {

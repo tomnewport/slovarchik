@@ -4,11 +4,10 @@
 > the machinery they describe is in the code. The corpus stores **113 non-finite
 > forms on 75 verbs**, every one reachable by a drill, and 65 verbs carry a
 > drillable variant table — 51 `#passive-short` and 14 `#nonfinite`. What is left
-> is breadth (the B1 tail of each stage), not machinery, plus the two named
-> follow-ups, both now filed: the hint index resolving a stored form to its verb
-> rather than a gloss stub (**#574**, see the correction under Decision 4 — it is
-> a real step, not bookkeeping) and wiring variant paradigms into the mastery
-> session (**#575**).
+> is breadth (the B1 tail of each stage), not machinery, plus one named
+> follow-up: wiring variant paradigms into the mastery session (**#575**). The
+> other, the hint index resolving a stored form to its verb rather than a gloss
+> stub, landed as **#574** — see the outcome under Decision 4.
 
 ## The hole
 
@@ -335,6 +334,22 @@ follow-up.
 > dictionary headword. Adding the `lemma:` field the invariant already
 > contemplates would let pass 1 recognise a stub as a non-lemma and decline the
 > claim — which is arguably a cleaner fix than special-casing pass 2.
+
+> **Outcome (#574).** Option 2 shipped: in `buildIndex` pass 2 a **learnable**
+> lemma may now join a form whose senses are all gloss-only stubs. Nothing was
+> deleted, so the nominalised glosses stand and gain their verb beside them —
+> «заде́ржанный» reads "detainee / to detain", «при́нято» "it is customary / to
+> accept", «закро́й» "close / to close". No `lemma:` field was needed, and pass 1
+> is untouched, so a real lemma still beats another word's oblique form (#173) and
+> a stub still can't be joined by a second stub.
+>
+> The count turned out larger than the 94 recorded above, which only covered
+> verbs storing a non-finite form or an imperative: **362 forms** of learnable
+> words across every part of speech were dead-ending in a stub. A corpus-wide
+> test in `phraseHint.test.js` now holds that at zero. The one thing still
+> allowed to hold a form alone is a stub whose gloss already says what the lemma
+> means («пирожки» "pies" for пирожо́к "pie") — the learner sees the right meaning
+> either way, and stacking would only render "pies / pie".
 
 ## Data integrity
 
