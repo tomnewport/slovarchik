@@ -314,6 +314,24 @@ describe('wordHasInflections', () => {
     expect(wordHasInflections({ key: 'и=and', pos: 'conjunction' })).toBe(false)
     expect(wordHasInflections(null)).toBe(false)
   })
+  it('counts a short-form-only adjective, which has no declension (#575)', () => {
+    // рад and до́лжен store only a `short:` block. Treating them as uninflected
+    // used to master them the moment they were learned, with the one table they
+    // do carry never drilled.
+    const rad = {
+      key: 'рад=glad',
+      pos: 'adjective',
+      headword: 'рад',
+      short: { m: 'рад', f: 'ра́да', n: 'ра́до', pl: 'ра́ды' },
+    }
+    expect(wordHasInflections(rad)).toBe(true)
+    // So a fully-learned рад now has mastery still ahead of it, where it used to
+    // skip straight to mastered on the "nothing more to master" branch.
+    expect(wordState(fullyLearned(), rad)).toBe('learned')
+    expect(wordState([...fullyLearned(), ...masteryMet(['identification', 'usage', 'context'])], rad)).toBe(
+      'mastered',
+    )
+  })
 })
 
 describe('wordState — learning transitions', () => {

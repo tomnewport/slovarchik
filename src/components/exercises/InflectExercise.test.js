@@ -3,7 +3,7 @@ import { mount } from '@vue/test-utils'
 import InflectExercise from './InflectExercise.vue'
 import { keyboard, resetHint } from '../../stores/keyboard.js'
 import { state as vocabState } from '../../stores/vocab.js'
-import { buildParadigm } from '../../lib/paradigm.js'
+import { buildParadigm, buildShortParadigm } from '../../lib/paradigm.js'
 import { loadFixtureWords } from '../../test/fixtures.js'
 
 vi.mock('../../lib/speech.js', () => ({ speak: vi.fn(), speechSupported: () => false }))
@@ -143,5 +143,38 @@ describe('InflectExercise word facts', () => {
     const facts = wrapper.findComponent({ name: 'WordFacts' })
     expect(facts.exists()).toBe(true)
     expect(facts.props('wordKey')).toBe(word.key)
+  })
+})
+
+// ── Variant tables (#575) ─────────────────────────────────────────────────
+describe('InflectExercise variant paradigms', () => {
+  it('drills the named variant, not the word’s primary table', () => {
+    const adj = vocabState.words.find((w) => buildParadigm(w) && buildShortParadigm(w))
+    expect(adj, 'fixture has no adjective with both tables').toBeTruthy()
+    const short = buildShortParadigm(adj)
+
+    const exercise = { id: 'ex-v', kind: 'inflect', mode: 'bank', wordKey: adj.key, lemma: adj.ru }
+    const primary = mount(InflectExercise, { props: { exercise } })
+    const variant = mount(InflectExercise, { props: { exercise: { ...exercise, variant: 'short' } } })
+
+    // The variant is labelled, so a learner asked for закры́т knows the short
+    // form is wanted rather than the declension.
+    expect(variant.text()).toContain(short.variantLabel)
+    expect(primary.text()).not.toContain(short.variantLabel)
+    // …and it really is the short table being rendered.
+    for (const cell of short.cells) expect(variant.text()).toContain(cell.form)
+  })
+
+  it('renders a short-only word, whose primary table does not exist', () => {
+    const only = vocabState.words.find((w) => !buildParadigm(w) && buildShortParadigm(w))
+    expect(only, 'fixture has no short-only adjective').toBeTruthy()
+    const exercise = { id: 'ex-o', kind: 'inflect', mode: 'bank', wordKey: only.key, lemma: only.ru }
+
+    const wrapper = mount(InflectExercise, { props: { exercise: { ...exercise, variant: 'short' } } })
+    expect(wrapper.text()).not.toContain('No inflection table')
+    for (const cell of buildShortParadigm(only).cells) expect(wrapper.text()).toContain(cell.form)
+    // Naming no variant asks for a table this word hasn't got — the builder never
+    // does so, and the auto-pass fallback keeps it from soft-locking if it did.
+    expect(mount(InflectExercise, { props: { exercise } }).text()).toContain('No inflection table')
   })
 })

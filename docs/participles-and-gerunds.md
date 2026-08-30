@@ -4,10 +4,10 @@
 > the machinery they describe is in the code. The corpus stores **113 non-finite
 > forms on 75 verbs**, every one reachable by a drill, and 65 verbs carry a
 > drillable variant table — 51 `#passive-short` and 14 `#nonfinite`. What is left
-> is breadth (the B1 tail of each stage), not machinery, plus one named
-> follow-up: wiring variant paradigms into the mastery session (**#575**). The
-> other, the hint index resolving a stored form to its verb rather than a gloss
-> stub, landed as **#574** — see the outcome under Decision 4.
+> is breadth (the B1 tail of each stage), not machinery. Both named follow-ups
+> have since landed: the hint index resolving a stored form to its verb rather
+> than a gloss stub (**#574**, see the outcome under Decision 4) and wiring the
+> variant paradigms into the mastery session (**#575**, under Decision 2a).
 
 ## The hole
 
@@ -138,14 +138,35 @@ paradigm, exactly as adjective short forms do (`buildShortParadigm`,
   m/f/n/pl agreement table, structurally identical to the adjective short form.
 
 Both are returned from `buildParadigms`, so they appear on the free-practice
-`/verbs` route immediately. **Honest limitation:** like `#short` today, a
-variant paradigm does *not* reach the mastery session — `exerciseBuild.buildInflect`
-builds from `buildParadigm(record)` (`exerciseBuild.js:418`), which returns only
-the primary table. Wiring variants into the session pool is a named follow-up,
-shared with the adjective short forms, and should not be smuggled into this
-work — **filed as #575**, which counts 206 stranded tables (141 adjective
-`#short`, 51 `#passive-short`, 14 `#nonfinite`) and sets out the progress-model
-question that has to be answered first.
+`/verbs` route immediately. **Honest limitation (since fixed):** like `#short`,
+a variant paradigm did *not* reach the mastery session — `exerciseBuild.buildInflect`
+built from `buildParadigm(record)`, which returns only the primary table. Wiring
+variants into the session pool was a named follow-up, shared with the adjective
+short forms, and was deliberately not smuggled into this work — **filed as #575**,
+which counted 206 stranded tables (141 adjective `#short`, 51 `#passive-short`,
+14 `#nonfinite`).
+
+> **Outcome (#575).** A variant **shares its lemma's mastery state**. That was
+> the progress-model question the issue said had to be answered first, and
+> sharing is what the drill actually means: the short form is another way of
+> assessing закры́тый, not a second word. So an exercise still grades against
+> `word.key`, no `#short` progress key exists, and nothing had to be migrated.
+>
+> `buildWordParadigms(word)` (`paradigm.js`) is the new shared accessor — primary
+> table first, then variants — and `buildInflect` draws one of a word's tables
+> uniformly, so a word with a short form drills it about half the time. The
+> exercise stores only the variant *name*; `paradigmFor(word, variant)` rebuilds
+> the table at render time, and `InflectExercise` labels it ("Short passive") so
+> a learner asked for закры́т knows the declension is not what is wanted. A verb
+> turn that drew a variant keeps its table rather than yielding to the aspect
+> contrast drill — it is drilling participles, not aspect.
+>
+> Every variant is eligible as soon as its word is, rather than waiting on the
+> primary table being mastered. That is the only way до́лжен and рад are ever
+> drilled: they are short-form *only*, with no declension behind them to master
+> first. Those two also needed `wordHasInflections` to count a variant, without
+> which they were mastered the moment they were learned — the one behaviour
+> change an existing learner will see, on exactly two words.
 
 ### b. Meaning and use → context phrases, the main vehicle
 

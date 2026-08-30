@@ -11,6 +11,9 @@ const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc:
 import {
   buildParadigm,
   buildParadigms,
+  buildWordParadigms,
+  hasParadigm,
+  paradigmFor,
   buildShortParadigm,
   buildNonFiniteParadigm,
   buildPassiveShortParadigm,
@@ -553,6 +556,35 @@ describe('buildShortParadigm', () => {
 
   it('returns null for an adjective with no short block', () => {
     expect(buildShortParadigm(novyy)).toBeNull()
+  })
+
+  describe('buildWordParadigms / hasParadigm / paradigmFor (#575)', () => {
+    it('lists a word’s primary table first, then its variants', () => {
+      const tables = buildWordParadigms(gotovyy)
+      expect(tables.map((p) => p.variant ?? 'primary')).toEqual(['primary', 'short'])
+    })
+
+    it('lists only the variant for a short-only lexeme', () => {
+      // рад has no declension, so its list starts with the variant. Reading the
+      // first entry as "the primary table" would drop it from the session.
+      expect(buildWordParadigms(rad).map((p) => p.variant)).toEqual(['short'])
+      expect(buildWordParadigms(novyy).map((p) => p.variant ?? 'primary')).toEqual(['primary'])
+    })
+
+    it('counts a variant-only word as carrying a table', () => {
+      expect(hasParadigm(rad)).toBe(true)
+      expect(hasParadigm(novyy)).toBe(true)
+      expect(hasParadigm({ key: 'и=and', pos: 'conjunction' })).toBe(false)
+    })
+
+    it('resolves a table by variant name, and the primary by its absence', () => {
+      expect(paradigmFor(gotovyy, null).key).toBe('готовый=ready')
+      expect(paradigmFor(gotovyy, 'short').key).toBe('готовый=ready#short')
+      // A variant the word doesn't carry resolves to nothing rather than
+      // silently falling back to the primary table.
+      expect(paradigmFor(gotovyy, 'nonfinite')).toBeNull()
+      expect(paradigmFor(rad, null)).toBeNull()
+    })
   })
 })
 
