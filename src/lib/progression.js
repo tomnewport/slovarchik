@@ -18,7 +18,7 @@
 // pair plus whether it was correct; a word's state is recomputed from scratch
 // from its attempt history each time, so words can also slip back down.
 
-import { buildParadigm } from './paradigm.js'
+import { hasParadigm } from './paradigm.js'
 import { DAY_MS } from './schedule.js'
 import { dayKey } from './streak.js'
 
@@ -311,12 +311,16 @@ export function levelMet(events, level, word = {}) {
  * Whether a word carries a usable inflection table. Accepts a precomputed
  * boolean (`word.hasInflections`) so callers/tests need not build a full word
  * record; otherwise it derives the answer from the shared paradigm builder.
+ *
+ * A *variant* table counts (#575): до́лжен and рад have no primary declension at
+ * all, only a short form, and treating them as uninflected left them mastered
+ * the moment they were learned — with the one table they do have never drilled.
  */
 export function wordHasInflections(word) {
   if (!word) return false
   if (typeof word.hasInflections === 'boolean') return word.hasInflections
   try {
-    return buildParadigm(word) != null
+    return hasParadigm(word)
   } catch {
     return false
   }

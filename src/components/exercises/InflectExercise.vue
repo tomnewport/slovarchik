@@ -11,7 +11,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { state as vocabState } from '../../stores/vocab.js'
-import { buildParadigm } from '../../lib/paradigm.js'
+import { paradigmFor } from '../../lib/paradigm.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
@@ -24,9 +24,12 @@ import CelebrationBurst from '../CelebrationBurst.vue'
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
+// `variant` names which of the word's tables this exercise drills — its short
+// form, participles/gerund or short passive — or null for the primary paradigm
+// (#575). Only the name is stored on the exercise; the table is rebuilt here.
 const paradigm = computed(() => {
   const word = vocabState.words.find((w) => w.key === props.exercise.wordKey)
-  return word ? buildParadigm(word) : null
+  return word ? paradigmFor(word, props.exercise.variant) : null
 })
 
 const isKeyboard = computed(() => props.exercise.mode === 'keyboard')
@@ -107,6 +110,9 @@ onBeforeUnmount(() => {
     <div class="prompt">
       <span class="muted">Complete the table for</span>
       <strong lang="ru">{{ exercise.lemma }}</strong>
+      <!-- Which table, when it isn't the word's main one — a learner asked for
+           закры́т needs to know the short form is wanted, not the declension. -->
+      <span v-if="paradigm?.variantLabel" class="pill">{{ paradigm.variantLabel }}</span>
       <SpeakButton :text="exercise.lemma" />
     </div>
 

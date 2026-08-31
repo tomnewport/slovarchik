@@ -349,30 +349,54 @@ export function buildPassiveShortParadigm(word) {
   return paradigm.cells.length >= 3 ? paradigm : null
 }
 
+// The *variant* tables a word can carry beyond its primary paradigm: an
+// adjective's short form, and a verb's participles/gerund and short passive.
+// Order matters — it is the order a word's tables are offered in, in free
+// practice and in the session alike.
+const VARIANT_BUILDERS = [buildShortParadigm, buildNonFiniteParadigm, buildPassiveShortParadigm]
+
 /**
- * Build every usable paradigm of a given part of speech.
- *
- * Beyond each word's primary table, two kinds of *variant* paradigm ride along:
- * an adjective's short form, and a verb's participles/gerund and short passive.
- * Note that a variant reaches free practice (`/adjectives`, `/verbs`) but not
- * the mastery session — `exerciseBuild.buildInflect` builds from
- * `buildParadigm(record)`, which returns only the primary table. Wiring variants
- * into the session pool is a follow-up shared by both.
+ * Every usable table for one word: its primary paradigm first, then any variant.
+ * A handful of adjectives (до́лжен, рад) are short-form *only* and have no primary
+ * table at all, so this can return a list that starts with a variant.
+ * @param {object} word a record from buildWords()
+ * @returns {object[]} possibly empty
+ */
+export function buildWordParadigms(word) {
+  return [buildParadigm(word), ...VARIANT_BUILDERS.map((build) => build(word))].filter(Boolean)
+}
+
+/**
+ * Whether a word carries any drillable table at all. Short-circuits, so it is
+ * cheaper than `buildWordParadigms(word).length` for the common case of asking
+ * the question of every word in the corpus.
+ */
+export function hasParadigm(word) {
+  return Boolean(buildParadigm(word)) || VARIANT_BUILDERS.some((build) => build(word))
+}
+
+/**
+ * The one table a drill means when it names a word and, optionally, a variant
+ * (`'short'`, `'nonfinite'`, `'passive-short'`). A session exercise stores the
+ * variant name rather than the table itself, so this is how it resolves back to
+ * a paradigm at render time. Null when the word has no such table.
+ */
+export function paradigmFor(word, variant) {
+  if (!variant) return buildParadigm(word)
+  return buildWordParadigms(word).find((p) => p.variant === variant) ?? null
+}
+
+/**
+ * Build every usable paradigm of a given part of speech — each word's primary
+ * table plus its variants (see {@link buildWordParadigms}). Feeds the free
+ * practice routes (`/adjectives`, `/verbs`); the mastery session draws the same
+ * tables one word at a time through {@link paradigmFor}.
  */
 export function buildParadigms(words, pos) {
   const out = []
   for (const word of words) {
     if (word.pos !== pos) continue
-    const paradigm = buildParadigm(word)
-    if (paradigm) out.push(paradigm)
-    // Adjectives with a short-form block contribute an extra short-form table.
-    const short = buildShortParadigm(word)
-    if (short) out.push(short)
-    // Verbs storing participles / a gerund contribute up to two more.
-    const nonFinite = buildNonFiniteParadigm(word)
-    if (nonFinite) out.push(nonFinite)
-    const passiveShort = buildPassiveShortParadigm(word)
-    if (passiveShort) out.push(passiveShort)
+    out.push(...buildWordParadigms(word))
   }
   return out
 }

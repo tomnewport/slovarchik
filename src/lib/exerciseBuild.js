@@ -22,7 +22,7 @@
 import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab, vocabDisplay } from './vocabBuild.js'
-import { buildParadigm } from './paradigm.js'
+import { buildWordParadigms, hasParadigm } from './paradigm.js'
 import { buildContrastDrill, buildContextSet, canBuildContext } from './phraseContext.js'
 import { wordTokensInPhrase } from './phraseHint.js'
 
@@ -415,7 +415,7 @@ function buildPhrase(practice, pi, ctx, make, kind) {
 function buildInflect(practice, pi, ctx, make) {
   const { pool, rest } = splitWords(practice.pool, ctx.vocab)
   const inflectable = (list) =>
-    list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && buildParadigm(r))
+    list.map((v) => ctx.recordByKey.get(v.id)).filter((r) => r && hasParadigm(r))
   // Mastery exercises must never pull in words from outside the committed mastery
   // batch: doing so records mastery-level events on non-batch words, corrupting
   // their progression state. If the batch has fewer inflectable words than the
@@ -428,12 +428,21 @@ function buildInflect(practice, pi, ctx, make) {
   })
   const mode = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
   return picked.map((r) => {
+    // Which of the word's tables to drill. Beyond its primary paradigm a word may
+    // carry a variant — an adjective's short form, a verb's participles/gerund or
+    // short passive — and until #575 the session could only ever serve the primary
+    // one, leaving 206 drillable tables to free practice alone. They are drawn
+    // uniformly, so a word with a short form drills it about half the time:
+    // «Магази́н закры́т» is how the predicate is normally said, not an extra.
+    const [table] = sample(buildWordParadigms(r), 1, ctx.rng)
     // Usage mastery for a verb with a linked partner is the contrast drill —
     // pick the right member of the pair (imperfective/perfective, or for a verb
     // of motion determinate/indeterminate) for a batch of English sentences,
     // then spell one conjugated form — rather than typing the full table. Verbs
-    // the drill can't be built for (no partner, thin data) keep the table.
-    if (mode === 'keyboard' && r.pos === 'verb') {
+    // the drill can't be built for (no partner, thin data) keep the table, and a
+    // turn that drew a variant is drilling participles rather than aspect, so it
+    // keeps the table too.
+    if (mode === 'keyboard' && r.pos === 'verb' && !table?.variant) {
       const drill = buildContrastDrill(r, {
         phrasesByKey: ctx.contextPhrases,
         phrasesBySource: ctx.phrasesBySource,
@@ -446,8 +455,12 @@ function buildInflect(practice, pi, ctx, make) {
       ...common(practice, pi),
       kind: 'inflect',
       mode,
+      // A variant shares its lemma's mastery state (#575): the table is another
+      // way of assessing the same word, so it is graded against `word.key` and
+      // needs no progress key of its own.
       targets: [r.key],
       wordKey: r.key,
+      variant: table?.variant ?? null,
       lemma: r.headword || r.ru,
     })
   })

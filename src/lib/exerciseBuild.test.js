@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { buildExercises, spliceIntros, MAX_INTROS_PER_SESSION, makeVisualReplacement, makeReplacementPicker, buildCombinedFlashcard, PRACTICE_KIND, MATCH_PAIRS, MIN_ENCOUNTERS_FOR_SPELLING, MIN_WORDS_FOR_SPELLING, CONTEXT_SET_ITEMS } from './exerciseBuild.js'
 import { CONTRAST_DRILL_ITEMS, CONTRAST_DRILL_MIN_ITEMS } from './phraseContext.js'
 import { shapePhrases, shapeVocab } from './vocabBuild.js'
-import { buildParadigm } from './paradigm.js'
+import { buildParadigm, buildShortParadigm, buildPassiveShortParadigm, buildNonFiniteParadigm } from './paradigm.js'
 import { normToken } from './phraseHint.js'
 import { phraseTokens } from './phrases.js'
 import { loadFixtureWords, loadFixtureContextPhrases, loadFixtureRules } from '../test/fixtures.js'
@@ -125,6 +125,69 @@ describe('buildExercises', () => {
     }
     const exKb = build([practice('inflect-keyboard', { pool: inflectableKeys.slice(0, 3) })])
     expect(exKb[0].mode).toBe('keyboard')
+  })
+
+  // #575: a word's variant tables — an adjective's short form, a verb's
+  // participles/gerund and short passive — used to reach free practice only.
+  describe('variant paradigms in the mastery session (#575)', () => {
+    // Draw over enough seeds that the uniform pick is bound to land on the
+    // variant; one seed proves nothing either way.
+    const variantsFor = (key, seeds = 40) => {
+      const seen = new Set()
+      for (let seed = 1; seed <= seeds; seed++) {
+        for (const e of build([practice('inflect-bank', { exercises: 1, pool: [key] })], seed)) {
+          seen.add(e.variant ?? 'primary')
+        }
+      }
+      return seen
+    }
+
+    const firstKey = (build) => words.find((w) => build(w))?.key
+
+    it('serves an adjective’s short form and its declension', () => {
+      const key = firstKey((w) => buildParadigm(w) && buildShortParadigm(w))
+      expect(variantsFor(key)).toEqual(new Set(['primary', 'short']))
+    })
+
+    it('serves a verb’s short passive and participles', () => {
+      expect(variantsFor(firstKey(buildPassiveShortParadigm))).toContain('passive-short')
+      expect(variantsFor(firstKey(buildNonFiniteParadigm))).toContain('nonfinite')
+    })
+
+    it('serves a short-only adjective, which has no primary table at all', () => {
+      const key = firstKey((w) => !buildParadigm(w) && buildShortParadigm(w))
+      expect(key, 'fixture has no short-only adjective').toBeTruthy()
+      expect(variantsFor(key)).toEqual(new Set(['short']))
+    })
+
+    it('grades a variant against its lemma, not a key of its own', () => {
+      const key = firstKey((w) => buildParadigm(w) && buildShortParadigm(w))
+      for (let seed = 1; seed <= 40; seed++) {
+        for (const e of build([practice('inflect-bank', { exercises: 1, pool: [key] })], seed)) {
+          expect(e.targets).toEqual([key])
+          expect(e.wordKey).toBe(key)
+        }
+      }
+    })
+
+    it('yields the keyboard turn to the contrast drill only for the finite table', () => {
+      // A paired verb in keyboard mode trades its *finite* table for the aspect
+      // contrast drill. A turn that drew a variant is drilling participles, not
+      // aspect, so it keeps the table — over many seeds this verb does both.
+      const key = words.find(
+        (w) => w.aspectPair && (buildPassiveShortParadigm(w) || buildNonFiniteParadigm(w)),
+      )?.key
+      expect(key, 'fixture has no paired verb with a variant table').toBeTruthy()
+      const kinds = new Map()
+      for (let seed = 1; seed <= 40; seed++) {
+        for (const e of build([practice('inflect-keyboard', { exercises: 1, pool: [key] })], seed)) {
+          kinds.set(e.kind, (kinds.get(e.kind) ?? 0) + 1)
+          if (e.kind === 'verb-contrast') expect(e.variant).toBeUndefined()
+          else expect(e.variant).toBeTruthy()
+        }
+      }
+      expect([...kinds.keys()].sort()).toEqual(['inflect', 'verb-contrast'])
+    })
   })
 
   it('mastery inflect exercises never include words outside the pool', () => {
