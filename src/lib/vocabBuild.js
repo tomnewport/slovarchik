@@ -7,7 +7,7 @@
 import { CASES, LOCATIVE, NUMBERS } from './declension.js'
 import { buildAmbiguityIndex, phraseAmbiguities } from './phraseAmbiguity.js'
 import { promptHints } from './promptDisambiguation.js'
-import { stripStress } from './text.js'
+import { foldYo, stripStress } from './text.js'
 import { normalizeGoverns } from './verbGovernment.js'
 
 /** Map a vocab filename (without extension) to its part of speech. */
@@ -314,6 +314,9 @@ function normalizeWord(pos, key, word) {
     motion: word.motion ?? null,
     motionPairKey: word.motion_pair ?? null,
     motionPair: null,
+    // The adjective an adverb is made from, or the adverb made from an
+    // adjective — derived by linkManner, never authored.
+    mannerPair: null,
     // The government frames a verb imposes on its object when it isn't the
     // plain accusative — a list of `{ prep, case }`, with `prep: null` for a
     // bare case (помога́ть + dative, ждать + genitive, горди́ться +
@@ -391,6 +394,54 @@ function linkAmbiguousEn(words) {
         .filter((m) => m !== w)
         .map((m) => ({ ru: m.headword || m.ru, note: m.meaningNote || '' }))
     }
+  }
+}
+
+/** Stem for matching a derivation: no stress, no case, ё folded onto е. */
+function matchStem(word) {
+  return foldYo(stripStress(word.headword || word.ru || '').toLowerCase())
+}
+
+/**
+ * Link an adverb to the adjective it is made from — бы́стро ← бы́стрый (#628).
+ *
+ * One word in two parts of speech, and until this existed the app knew nothing
+ * about it: бы́стро showed an empty facts panel, and the sound-alike shortlist
+ * proposed пло́хо / плохо́й as a pair to keep *apart* — the opposite of the
+ * truth. Deriving it costs nothing and fills both ends.
+ *
+ * The match is deliberately narrow, because `-о` is a common ending and a wrong
+ * link teaches a relationship that does not exist (#614): the adverb must end
+ * in `-о`, the adjective must be an entry in its own right, and the two stems
+ * must be equal once stress and ё are folded away. That fold is what catches
+ * легко́ ← лёгкий and тепло́ ← тёплый, where the vowel is the only difference.
+ * A predicative with no adjective behind it — мо́жно, ну́жно's neighbours — finds
+ * nothing and gains nothing, which is the intended outcome rather than a gap.
+ *
+ * Both ends are gloss-only-free: a `learn: false` entry is a hint record, and
+ * in glossary.yml its key may be an inflected surface form, so linking one
+ * would point the learner at something that is not a headword.
+ */
+function linkManner(words) {
+  // stem → the adjective, or null where more than one claims it: an ambiguous
+  // stem is one for a human to author, not for the build to guess at.
+  const byStem = new Map()
+  for (const w of words) {
+    if (w.pos !== 'adjective' || w.learnable === false) continue
+    const stem = matchStem(w).replace(/(ый|ий|ой)$/, '')
+    if (!stem || stem === matchStem(w)) continue
+    byStem.set(stem, byStem.has(stem) ? null : w)
+  }
+
+  const link = (w) => ({ key: w.key, ru: w.headword || w.ru, gloss: w.meaning || w.en })
+  for (const w of words) {
+    if (w.pos !== 'adverb' || w.learnable === false) continue
+    const form = matchStem(w)
+    if (!form.endsWith('о')) continue
+    const adjective = byStem.get(form.slice(0, -1))
+    if (!adjective || adjective.mannerPair) continue
+    w.mannerPair = link(adjective)
+    adjective.mannerPair = link(w)
   }
 }
 
@@ -499,6 +550,7 @@ export function buildWords(files) {
   linkHeteronyms(out)
   linkAmbiguousEn(out)
   linkPartners(out)
+  linkManner(out)
   linkFacts(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
@@ -542,6 +594,9 @@ export function shapeVocab(words) {
     // participle of — shown beside the headword like the aspect pair, so the
     // learner meets it as one productive pattern rather than as a stray word.
     participleOf: w.participleOf ?? null,
+    // The adjective an adverb is made from, and back (бы́стро ↔ бы́стрый): one
+    // word in two parts of speech, so it is learned once rather than twice.
+    mannerPair: w.mannerPair ?? null,
     // Government frames (звони́ть + dative, зави́сеть от + genitive) — shown
     // beside the headword so the frame is learned with the word rather than
     // only in the dedicated drill.

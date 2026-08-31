@@ -270,9 +270,11 @@ the learner is told they were wrong by being shown the meaning they were already
 thinking of. The corpus guard fails until a `why` is written.
 
 > **Don't author what is already derived.** Aspect pairs (`pair:`), motion pairs
-> (`motion_pair:`), participle origins (`from_verb:`), heteronyms (same spelling,
-> different stress) and same-gloss words are already linked by `vocabBuild.js`
-> and are picked up by the word panels for free. `confusable_with:` is for the
+> (`motion_pair:`), participle origins (`from_verb:`), an adverb and the
+> adjective it is made from (бы́стро ↔ бы́стрый — matched on the stem, so a moving
+> stress or a ё does not hide it), heteronyms (same spelling, different stress)
+> and same-gloss words are already linked by `vocabBuild.js` and are picked up
+> by the word panels for free. `confusable_with:` is for the
 > confusions nothing in the data can see. The corpus guard fails on any entry
 > that re-states a derivable link.
 
@@ -296,6 +298,25 @@ ranks the corpus for you and prints three lists:
   near-homophones (звони́ть / звене́ть, слу́шать / слы́шать). Pairs already linked
   by aspect, motion, heteronymy or a shared gloss are excluded — authoring those
   fails the guard.
+
+**`--level=A1`** (or `--level=A1,A2`) narrows all three lists to one level's
+worth of work, which is how a level gets finished rather than dipped into. A
+sound-alike pair is listed when *either* word is at the level: the learner
+meeting the A2 word already has the A1 one, which is what makes the pair a trap.
+The coverage table always shows every level, so you can watch the rest of it
+hold still while one level moves.
+
+The table itself counts three things, not one, because "has a fact" is not what
+the learner experiences:
+
+| bucket | meaning |
+| ------ | ------- |
+| `facts` | the word carries authored `facts:` |
+| `derived` | no facts, but the panel still has something — an aspect partner, a motion partner, the verb behind a participle, the adjective behind an adverb, a heteronym, a same-gloss word |
+| `empty` | neither: the panel is blank |
+
+`empty` is the number to drive down. A word filled by a derived relation needs
+nothing authored and is not a gap.
 
 It is a worklist, never a CI gate: facts are optional, and a threshold would
 turn an enrichment into an obligation on every new word. Review a shortlist by

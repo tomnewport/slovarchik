@@ -64,6 +64,10 @@ function relationLabel(row) {
       return `${MOTION_LABEL[other?.motion] ?? 'motion'} partner`
     case 'participle':
       return 'the verb it comes from'
+    case 'manner':
+      // One word in two parts of speech, so which way round depends on which
+      // end the learner is standing at.
+      return other?.pos === 'adverb' ? 'the adverb from it' : 'the adjective it comes from'
     case 'heteronym':
       return 'same spelling, different stress'
     case 'same-meaning':
