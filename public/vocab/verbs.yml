@@ -447,9 +447,9 @@ words:
         en_gb: I thank you for your help.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
       - ru: Она́ благодари́ла учи́теля.
-        en_gb: She thanked the teacher.
+        en_gb: She was thanking the teacher.
         en_alt:
-          - She was thanking the teacher.
+          - She thanked the teacher.
           - She used to thank the teacher.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Го́сти благодаря́т хозя́йку.
@@ -2802,7 +2802,7 @@ words:
         en_gb: He is nervous before the exam.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Не волну́йся, всё бу́дет хорошо́.
-        en_gb: Don't worry, everything will be fine.
+        en_gb: Don't be nervous, everything will be fine.
         inflect: { token: 2, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Роди́тели волнова́лись за дете́й.
         en_gb: The parents were worried about the children.
@@ -6588,7 +6588,7 @@ words:
     collections:
       - daily life
     en_gb:
-      standard: to become (to happen or be made)
+      standard: to become (colloquial, of a state coming on by itself)
       alt:
         - to be made
     conjugation:
@@ -6850,7 +6850,7 @@ words:
       - work
       - daily life
     en_gb:
-      standard: to achieve (to attain through effort)
+      standard: to achieve (to get what you pressed for, after effort)
       alt:
         - to attain
     conjugation:
@@ -7807,7 +7807,7 @@ words:
       - work
       - sport
     en_gb:
-      standard: to reach (to attain a goal or a level)
+      standard: to reach (to arrive at a level, point or result)
       alt:
         - to achieve
     conjugation:
@@ -7843,7 +7843,7 @@ words:
       - work
       - daily life
     en_gb:
-      standard: to reach (to achieve a goal)
+      standard: to reach (to arrive at a level or result; a variant of дости́чь)
       alt:
         - to achieve
     conjugation:
@@ -7887,7 +7887,7 @@ words:
       - work
       - sport
     en_gb:
-      standard: to reach (to attain a goal or a level)
+      standard: to reach (to arrive at a level, point or result)
       alt:
         - to achieve
     conjugation:
@@ -8309,7 +8309,7 @@ words:
         - to drive
     usage:
       - ru: Куда́ ты е́дешь?
-        en_gb: Where are you going?
+        en_gb: Where are you travelling to?
         inflect: { token: 3, tense: present, person: 2sg, rule: verb-present }
       - ru: Поезжа́й домо́й, уже́ по́здно.
         en_gb: Drive home, it's already late.
@@ -12230,7 +12230,7 @@ words:
       - daily life
       - school
     en_gb:
-      standard: to mean (to signify or have a meaning)
+      standard: to mean (the everyday word; значит also means so, therefore)
       alt:
         - to signify
     conjugation:
@@ -14299,8 +14299,8 @@ words:
       - ru: Мы ку́пим биле́ты на по́езд за́втра.
         en_gb: We will buy the train tickets tomorrow.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
-      - ru: Купи́ хлеб и молоко́.
-        en_gb: Buy bread and milk.
+      - ru: Купи́ молоко́ в магази́не.
+        en_gb: Buy milk at the shop.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты ку́пишь но́вую кни́гу?
         en_gb: Will you buy a new book?
@@ -15809,8 +15809,8 @@ words:
       - ru: Я надева́ю ку́ртку, когда́ хо́лодно.
         en_gb: I put on a jacket when it's cold.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
-      - ru: Надева́й ша́пку, на у́лице моро́з.
-        en_gb: Put on a hat, it's freezing outside.
+      - ru: Надева́й ша́пку, когда́ на у́лице моро́з.
+        en_gb: Put on a hat when it's freezing outside.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Ты надева́ешь ку́ртку, когда́ хо́лодно?
         en_gb: Do you put on a jacket when it is cold?
@@ -19048,7 +19048,7 @@ words:
       - communication
       - daily life
     en_gb:
-      standard: to mean (to signify or denote)
+      standard: to mean (formal, to denote or stand for)
       alt:
         - to signify
     conjugation:
@@ -20048,7 +20048,7 @@ words:
       past_n: останови́ло
       past_pl: останови́ли
     usage:
-      - ru: Поли́цейский останови́л маши́ну.
+      - ru: Полице́йский останови́л маши́ну.
         en_gb: The policeman stopped the car.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я остановлю́ такси́ на углу́.
@@ -24595,7 +24595,7 @@ words:
       past_pl: подожда́ли
     usage:
       - ru: Подожди́ меня́ у вхо́да.
-        en_gb: Wait for me at the entrance.
+        en_gb: Wait for me at the entrance for a while.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я подожду́ ещё пять мину́т.
         en_gb: I will wait another five minutes.
@@ -35773,7 +35773,7 @@ words:
       past_pl: сверну́ли
     usage:
       - ru: Сверни́ напра́во у магази́на.
-        en_gb: Turn right at the shop.
+        en_gb: Turn off to the right at the shop.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Я сверну́ ковёр.
         en_gb: I will roll up the carpet.
@@ -36002,7 +36002,7 @@ words:
     collections:
       - daily life
     en_gb:
-      standard: to become (to happen)
+      standard: to become (colloquial, of a state that comes on)
     conjugation:
       future:
         "1sg": сде́лаюсь
@@ -39307,7 +39307,7 @@ words:
     collections:
       - daily life
     en_gb:
-      standard: to become (to turn into)
+      standard: to become (the everyday word, gradually turning into)
     conjugation:
       imperative:
         sg: станови́сь
@@ -39397,7 +39397,7 @@ words:
     collections:
       - daily life
     en_gb:
-      standard: to become (to start; to stand)
+      standard: to become (the everyday word; also to start, or to stand)
     conjugation:
       imperative:
         sg: стань
