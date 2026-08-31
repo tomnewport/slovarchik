@@ -16,9 +16,9 @@
  * resolution only once a human has confirmed it names a real distinction, in
  * `review/prompt-distinctions.jsonl`. Everything else is the backlog.
  *
- * It is a ratchet, not a clean bill of health: BUDGET is the number that stands
- * today, and CI fails if it grows. Lower it as the backlog is worked off; never
- * raise it to make a red build green.
+ * It is a ratchet: BUDGET is the number that stands today, and CI fails if it
+ * grows. The backlog is worked off as of #601, so it now stands at zero — but
+ * never raise it to make a red build green.
  *
  * Usage:
  *   node scripts/check-prompt-ambiguity.mjs          # report + enforce
@@ -43,7 +43,13 @@ function confirmedDistinctions() {
   )
 }
 
-const BUDGET = 33
+/**
+ * Unanswerable prompts that stand today. Zero: every colliding English prompt in
+ * the corpus is now separated, either by the ты/вы + gender annotation or by a
+ * hint a human has confirmed. Which makes this a floor, not a ratchet — any new
+ * sentence that reintroduces a collision fails CI until it is resolved.
+ */
+const BUDGET = 0
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const vocabDir = join(__dirname, '..', 'public', 'vocab')

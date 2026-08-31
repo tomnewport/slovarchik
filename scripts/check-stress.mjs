@@ -32,7 +32,7 @@ import {
 import { STRESS_GOLDEN } from '../src/lib/stressGolden.js'
 
 /** Unannotated stress divergences that stand today (#600). Only ever lower it. */
-const BUDGET = 177
+const BUDGET = 175
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'vocab')
 

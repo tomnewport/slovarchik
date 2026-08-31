@@ -252,7 +252,23 @@ try {
     })
   }
 
-  // 7. compare, word by word
+  // Stage seven: the prompt-disambiguation pass (#601). It rewrites headword
+  // gloss *parentheticals* and a few usage sentences — both fields this check
+  // compares — and no earlier stage can express either: apply-gloss-review only
+  // appends to `alt:`, and a `fix-russian` on an annotated sentence is
+  // quarantined rather than applied. It runs last because its `en_gb` rewrites
+  // sit on top of whatever the copyedit concluded.
+  const promptFixes = join(repo, 'review', 'prompt-fixes.jsonl')
+  if (existsSync(promptFixes)) {
+    cpSync(join(repo, 'scripts', 'apply-prompt-fixes.mjs'), join(work, 'scripts', 'apply-prompt-fixes.mjs'))
+    cpSync(promptFixes, join(work, 'review', 'prompt-fixes.jsonl'))
+    execFileSync('node', [join('scripts', 'apply-prompt-fixes.mjs'), '--apply'], {
+      cwd: work,
+      stdio: ['ignore', 'ignore', 'inherit'],
+    })
+  }
+
+  // 8. compare, word by word
   const vocabDir = join(repo, 'public', 'vocab')
   let compared = 0
   let added = 0
