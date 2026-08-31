@@ -125,8 +125,15 @@ describe('HomeView', () => {
     }
 
     const wrapper = mount(HomeView)
-    const glosses = wrapper.find('.word-list-card').findAll('.word-en').map((node) => node.text())
-    expect(glosses).toEqual(['to sew (perfective)', 'to sew (imperfective)'])
+    const rows = wrapper.find('.word-list-card')
+    const glosses = rows.findAll('.word-en').map((node) => node.text())
+    // Abbreviated in the row, which shares its width with the dimension pips;
+    // the hover title (and the word card) still says it in full.
+    expect(glosses).toEqual(['to sew (pf.)', 'to sew (impf.)'])
+    expect(rows.findAll('.word-label').map((node) => node.attributes('title'))).toEqual([
+      'to sew (perfective)',
+      'to sew (imperfective)',
+    ])
   })
 
   it('flags the unmet skills on a slipped word with a missing badge', () => {

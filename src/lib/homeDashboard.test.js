@@ -6,6 +6,7 @@ import {
   DIM_LABEL,
   dimsFor,
   disambiguatedGloss,
+  rowGloss,
   buildWordList,
   buildStatusWordList,
 } from './homeDashboard.js'
@@ -34,6 +35,55 @@ describe('disambiguatedGloss', () => {
   it('leaves ordinary words and non-distinguishing notes unchanged', () => {
     expect(disambiguatedGloss('house', { note: 'building', ambiguousEn: [] })).toBe('house')
     expect(disambiguatedGloss('house')).toBe('house')
+  })
+})
+
+describe('rowGloss', () => {
+  it('keeps only the leading sense of a multi-sense gloss', () => {
+    expect(rowGloss('accepted, resigned himself')).toBe('accepted')
+    expect(rowGloss('audible; can be heard')).toBe('audible')
+  })
+
+  it('keeps a parenthetical clarification whole, commas and all', () => {
+    expect(rowGloss('close (near in space or time)')).toBe('close (near in space or time)')
+  })
+
+  it('abbreviates the aspect and motion qualifiers', () => {
+    expect(rowGloss('to sew', { aspect: 'pf', aspectPair: { key: 'шить=to sew' } })).toBe(
+      'to sew (pf.)',
+    )
+    expect(rowGloss('to walk', { motion: 'indet', motionPair: { key: 'идти=to go' } })).toBe(
+      'to walk (indet.)',
+    )
+  })
+
+  it('keeps the authored note for same-gloss words, which is already short', () => {
+    expect(rowGloss('hat', { note: 'winter', ambiguousEn: [{ ru: 'шляпа' }] })).toBe('hat (winter)')
+  })
+
+  it('reduces an authored note to its opening clause', () => {
+    const word = { note: 'relating to buses; a city bus', ambiguousEn: [{ ru: 'авто́бусный' }] }
+    expect(rowGloss('bus', word)).toBe('bus (relating to buses)')
+    const dashed = { note: 'the everyday word — «мне ну́жно»', ambiguousEn: [{ ru: 'на́до' }] }
+    expect(rowGloss('needed', dashed)).toBe('needed (the everyday word)')
+  })
+
+  it('leaves a note too long to fit beside the pips to the card', () => {
+    const word = {
+      note: 'polite form used with children and guests',
+      ambiguousEn: [{ ru: 'есть' }],
+    }
+    expect(rowGloss('to eat', word)).toBe('to eat')
+  })
+
+  it('drops a note whose opening clause only repeats the gloss', () => {
+    const word = { note: 'alike, to the same degree', ambiguousEn: [{ ru: 'одина́ково' }] }
+    expect(rowGloss('alike', word)).toBe('alike')
+  })
+
+  it('leaves an ordinary single-sense gloss alone', () => {
+    expect(rowGloss('house')).toBe('house')
+    expect(rowGloss('house', { note: 'building', ambiguousEn: [] })).toBe('house')
   })
 })
 
@@ -88,7 +138,9 @@ describe('buildWordList', () => {
       LEARNING_DIMS,
       pairedCtx,
     )
-    expect(row.en).toBe('to sew (perfective)')
+    expect(row.en).toBe('to sew (pf.)')
+    // The unabridged gloss rides along for the row's hover title.
+    expect(row.fullEn).toBe('to sew (perfective)')
   })
 
   it('sorts not-done first, then most-recently-attempted first', () => {
@@ -159,5 +211,6 @@ describe('buildStatusWordList', () => {
     }
     const [row] = buildStatusWordList(['кот=cat'], pairedCtx)
     expect(row.en).toBe('cat (animal)')
+    expect(row.fullEn).toBe('cat (animal)')
   })
 })
