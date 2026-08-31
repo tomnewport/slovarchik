@@ -317,6 +317,9 @@ function normalizeWord(pos, key, word) {
     // The adjective an adverb is made from, or the adverb made from an
     // adjective — derived by linkManner, never authored.
     mannerPair: null,
+    // A numeral's family: the unit it is built on, and everything built on it —
+    // derived by linkNumerals from `type` + `value`, never authored.
+    numeralKin: [],
     // The government frames a verb imposes on its object when it isn't the
     // plain accusative — a list of `{ prep, case }`, with `prep: null` for a
     // bare case (помога́ть + dative, ждать + genitive, горди́ться +
@@ -445,6 +448,70 @@ function linkManner(words) {
   }
 }
 
+// Tens built by multiplying a unit: два́дцать, три́дцать, пятьдеся́т … девяно́сто.
+// **40 is missing on purpose.** со́рок is not четы́ре times anything — it is a
+// word of its own (a bundle of forty furs), and the resemblance to the pattern
+// is what makes the false link tempting.
+const COMPOSED_TENS = new Set([20, 30, 50, 60, 70, 80, 90])
+
+/**
+ * Link a numeral to the number it is built on, and back (#629).
+ *
+ * 31 of the 40 A1 numerals had nothing to show, which is absurd for the most
+ * systematic set in the language: де́вять → девя́тый → девятна́дцать → девяно́сто
+ * is one root four times over, and a learner drilling семна́дцать against
+ * се́мьдесят is being asked to keep apart two words nobody has told them are
+ * relatives.
+ *
+ * Derived from `type` + `value` in numerals.yml rather than from the letters,
+ * which is what makes it safe: the ordinal of nine is девя́тый because both say
+ * 9, not because the strings look alike.
+ *
+ * Four relations, three of them morphological and one functional:
+ *  - `ordinal`   — девя́тый ↔ де́вять, matched on value. Functional: пе́рвый is
+ *    not built out of оди́н, but it *is* the ordinal of one, and saying so is
+ *    both true and the thing a learner needs;
+ *  - `teen`      — девятна́дцать ↔ де́вять, nine sat on ten;
+ *  - `tens`      — девяно́сто ↔ де́вять, nine tens (see COMPOSED_TENS);
+ *  - `hundreds`  — две́сти ↔ два, two hundreds.
+ *
+ * Each entry describes the *other* word: `role: 'base'` means the other word is
+ * what this one is built on, `role: 'derived'` the reverse.
+ */
+function linkNumerals(words) {
+  const cardinals = new Map()
+  const ordinals = []
+  for (const w of words) {
+    if (w.pos !== 'numeral' || w.learnable === false) continue
+    const { type, value } = w.extra ?? {}
+    if (!Number.isInteger(value)) continue
+    if (type === 'cardinal') {
+      if (!cardinals.has(value)) cardinals.set(value, w)
+    } else if (type === 'ordinal') {
+      ordinals.push([value, w])
+    }
+  }
+
+  const link = (w) => ({ key: w.key, ru: w.headword || w.ru, gloss: w.meaning || w.en })
+  const join = (base, derived, via) => {
+    if (!base || !derived || base === derived) return
+    base.numeralKin.push({ ...link(derived), via, role: 'derived' })
+    derived.numeralKin.push({ ...link(base), via, role: 'base' })
+  }
+
+  for (const [value, w] of ordinals.sort((a, b) => a[0] - b[0])) {
+    join(cardinals.get(value), w, 'ordinal')
+  }
+  for (const value of [...cardinals.keys()].sort((a, b) => a - b)) {
+    const w = cardinals.get(value)
+    if (value > 10 && value < 20) join(cardinals.get(value - 10), w, 'teen')
+    else if (COMPOSED_TENS.has(value)) join(cardinals.get(value / 10), w, 'tens')
+    else if (value > 100 && value < 1000 && value % 100 === 0) {
+      join(cardinals.get(value / 100), w, 'hundreds')
+    }
+  }
+}
+
 /**
  * Resolve verbs' partner annotations into display-ready links: the partner's
  * accented headword, its aspect (and, for a motion pair, its directionality)
@@ -551,6 +618,7 @@ export function buildWords(files) {
   linkAmbiguousEn(out)
   linkPartners(out)
   linkManner(out)
+  linkNumerals(out)
   linkFacts(out)
   // Sort alphabetically by Russian headword, ignoring stress marks.
   return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
@@ -597,6 +665,8 @@ export function shapeVocab(words) {
     // The adjective an adverb is made from, and back (бы́стро ↔ бы́стрый): one
     // word in two parts of speech, so it is learned once rather than twice.
     mannerPair: w.mannerPair ?? null,
+    // A numeral's family — the unit it is built on, and everything built on it.
+    numeralKin: w.numeralKin ?? [],
     // Government frames (звони́ть + dative, зави́сеть от + genitive) — shown
     // beside the headword so the frame is learned with the word rather than
     // only in the dedicated drill.

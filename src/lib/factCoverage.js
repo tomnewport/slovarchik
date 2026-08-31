@@ -114,6 +114,10 @@ export function breakdownCandidates(words, { levels } = {}) {
   const found = []
   for (const w of learnable) {
     if (w.facts?.some((f) => f.kind === 'build' || f.kind === 'root')) continue
+    // Numerals compose, they do not take prefixes — and the one candidate the
+    // prefix scan ever found here was со́рок as «со- + рок», which is nonsense
+    // dressed as a pattern. Their real families are derived (#629).
+    if (w.pos === 'numeral') continue
     const form = bare(w)
     for (const prefix of PRODUCTIVE_PREFIXES) {
       if (!form.startsWith(prefix)) continue
@@ -364,10 +368,25 @@ function alreadyLinked(a, b) {
     b.participleOf?.key === a.key ||
     a.mannerPair?.key === b.key ||
     b.mannerPair?.key === a.key ||
+    // Numerals: linked to the number they are built on, and — through it — to
+    // each other. семна́дцать / се́мьдесят is a real confusion, and the family
+    // is what answers it: both lead the learner back to семь, which is a
+    // better answer than a hand-written note on the pair.
+    sharesNumeralFamily(a, b) ||
     (a.heteronyms ?? []).some((h) => stripStress(h.ru).toLowerCase() === bb) ||
     (a.ambiguousEn ?? []).some((x) => stripStress(x.ru).toLowerCase() === bb) ||
     (a.confusables ?? []).some((c) => c.key === b.key)
   )
+}
+
+/** Two numerals of one family: linked directly, or built on the same unit. */
+function sharesNumeralFamily(a, b) {
+  const mine = a.numeralKin ?? []
+  if (!mine.length) return false
+  const theirs = b.numeralKin ?? []
+  if (mine.some((k) => k.key === b.key) || theirs.some((k) => k.key === a.key)) return true
+  const bases = new Set(theirs.filter((k) => k.role === 'base').map((k) => k.key))
+  return mine.some((k) => k.role === 'base' && bases.has(k.key))
 }
 
 /**

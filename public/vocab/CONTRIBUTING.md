@@ -272,9 +272,11 @@ thinking of. The corpus guard fails until a `why` is written.
 > **Don't author what is already derived.** Aspect pairs (`pair:`), motion pairs
 > (`motion_pair:`), participle origins (`from_verb:`), an adverb and the
 > adjective it is made from (бы́стро ↔ бы́стрый — matched on the stem, so a moving
-> stress or a ё does not hide it), heteronyms (same spelling, different stress)
-> and same-gloss words are already linked by `vocabBuild.js` and are picked up
-> by the word panels for free. `confusable_with:` is for the
+> stress or a ё does not hide it), a numeral's family (девя́тый, девятна́дцать and
+> девяно́сто all lead back to де́вять — derived from `type` + `value`, so it is
+> the numbers that match, not the letters), heteronyms (same spelling, different
+> stress) and same-gloss words are already linked by `vocabBuild.js` and are
+> picked up by the word panels for free. `confusable_with:` is for the
 > confusions nothing in the data can see. The corpus guard fails on any entry
 > that re-states a derivable link.
 
@@ -328,7 +330,7 @@ the learner experiences:
 | bucket | meaning |
 | ------ | ------- |
 | `facts` | the word carries authored `facts:` |
-| `derived` | no facts, but the panel still has something — an aspect partner, a motion partner, the verb behind a participle, the adjective behind an adverb, a heteronym, a same-gloss word |
+| `derived` | no facts, but the panel still has something — an aspect partner, a motion partner, the verb behind a participle, the adjective behind an adverb, a numeral's family, a heteronym, a same-gloss word |
 | `empty` | neither: the panel is blank |
 
 `empty` is the number to drive down. A word filled by a derived relation needs

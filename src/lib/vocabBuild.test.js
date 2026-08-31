@@ -593,6 +593,90 @@ words:
   })
 })
 
+describe('numeral families (#629)', () => {
+  const num = (key, accented, type, value, level = 'A1') => `
+  "${key}":
+    cefr_level: ${level}
+    type: ${type}
+    value: ${value}
+    accented: ${accented}
+    en_gb: { standard: ${key.split('=')[1]} }`
+
+  const words = fromYaml([
+    {
+      pos: 'numeral',
+      text: `words:${num('девять=nine', 'де́вять', 'cardinal', 9)}${num('девятый=ninth', 'девя́тый', 'ordinal', 9)}${num('девятнадцать=nineteen', 'девятна́дцать', 'cardinal', 19)}${num('девяносто=ninety', 'девяно́сто', 'cardinal', 90)}${num('четыре=four', 'четы́ре', 'cardinal', 4)}${num('сорок=forty', 'со́рок', 'cardinal', 40)}${num('двое=two together', 'дво́е', 'collective', 2)}`,
+    },
+  ])
+  const at = (key) => words.find((w) => w.key === key)
+  const kin = (key) => at(key).numeralKin.map((k) => `${k.ru}:${k.via}:${k.role}`)
+
+  it('gives a unit its whole family', () => {
+    expect(kin('девять=nine')).toEqual([
+      'девя́тый:ordinal:derived',
+      'девятна́дцать:teen:derived',
+      'девяно́сто:tens:derived',
+    ])
+  })
+
+  it('links each member back to the unit it is built on', () => {
+    expect(kin('девятый=ninth')).toEqual(['де́вять:ordinal:base'])
+    expect(kin('девятнадцать=nineteen')).toEqual(['де́вять:teen:base'])
+    expect(kin('девяносто=ninety')).toEqual(['де́вять:tens:base'])
+  })
+
+  it('leaves со́рок out: it is not four of anything', () => {
+    // The one place the pattern lies. со́рок is a word of its own, and the
+    // resemblance is what makes the false link tempting.
+    expect(at('сорок=forty').numeralKin).toEqual([])
+    expect(kin('четыре=four')).toEqual([])
+  })
+
+  it('ignores numerals that are not cardinals or ordinals', () => {
+    expect(at('двое=two together').numeralKin).toEqual([])
+  })
+
+  it('matches on value, not on letters', () => {
+    // пе́рвый is not built out of оди́н — but it is the ordinal of one, which is
+    // the true and useful thing to say.
+    const suppletive = fromYaml([
+      {
+        pos: 'numeral',
+        text: `words:${num('один=one', 'оди́н', 'cardinal', 1)}${num('первый=first', 'пе́рвый', 'ordinal', 1)}`,
+      },
+    ])
+    expect(suppletive.find((w) => w.key === 'первый=first').numeralKin).toMatchObject([
+      { key: 'один=one', via: 'ordinal', role: 'base' },
+    ])
+  })
+
+  it('shapeVocab carries the family through to the drills', () => {
+    expect(shapeVocab(words).find((v) => v.id === 'девятый=ninth').numeralKin).toHaveLength(1)
+  })
+
+  it('every link across the real corpus is reciprocal and true', () => {
+    const corpus = loadFixtureWords()
+    const byKey = new Map(corpus.map((w) => [w.key, w]))
+    const linked = corpus.filter((w) => w.numeralKin.length)
+    expect(linked.length).toBeGreaterThan(30)
+    for (const w of linked) {
+      for (const k of w.numeralKin) {
+        const other = byKey.get(k.key)
+        expect(other?.numeralKin.some((b) => b.key === w.key && b.via === k.via)).toBe(true)
+        // The claim each relation makes, checked against the values themselves.
+        const mine = w.extra.value
+        const theirs = other.extra.value
+        const [base, derived] = k.role === 'base' ? [theirs, mine] : [mine, theirs]
+        if (k.via === 'ordinal') expect(derived).toBe(base)
+        if (k.via === 'teen') expect(derived).toBe(base + 10)
+        if (k.via === 'tens') expect(derived).toBe(base * 10)
+        if (k.via === 'hundreds') expect(derived).toBe(base * 100)
+      }
+    }
+    expect(byKey.get('сорок=forty').numeralKin).toEqual([])
+  })
+})
+
 describe('the bundled vocabulary fixtures', () => {
   const words = loadFixtureWords()
 
