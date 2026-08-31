@@ -460,6 +460,179 @@ export function confusableCandidates(
 }
 
 /**
+ * Diminutive suffixes, longest first so ба́бушка is analysed as баб + ушка
+ * rather than бабуш + ка. The neuter forms are here for the same reason as the
+ * feminine ones — окно́ takes -ышко where ла́мпа takes -очка.
+ */
+export const DIMINUTIVE_SUFFIXES = [
+  'енька', 'онька', 'ушка', 'юшка', 'ышка', 'очка', 'ечка',
+  'ушко', 'юшко', 'ышко', 'ечко', 'чик', 'ок', 'ёк', 'ек', 'ик', 'ка',
+]
+
+/**
+ * The velar alternation a diminutive suffix triggers, as [plain, shown]. The
+ * stem a diminutive shows is not the stem its base shows: рука́ appears as руч-
+ * in ру́чка, кни́га as книж- in кни́жка, внук as внуч- in вну́чка. Eleven of the
+ * corpus's 59 candidates need it, and they are among the best in the set, so
+ * the generator has to undo it to find the base at all.
+ *
+ * Narrower than {@link MUTATIONS} on purpose: this suffix layer triggers the
+ * three velars and nothing else, and every extra rule is another way to
+ * reconstruct a base that was never there.
+ */
+const VELARS = [['к', 'ч'], ['г', 'ж'], ['х', 'ш']]
+
+/** Nominal endings a base noun sheds before a diminutive suffix lands. */
+const BASE_ENDINGS = ['а', 'я', 'о', 'е', 'ё', 'ь', 'й']
+
+/** Every stem a base noun could hand to a diminutive suffix. */
+function baseStems(form) {
+  const stems = [form]
+  for (const end of BASE_ENDINGS) {
+    if (form.endsWith(end) && form.length - 1 >= MIN_STEM) stems.push(form.slice(0, -1))
+  }
+  return stems
+}
+
+/**
+ * What kind of relation a `-ка`/`-ик` word stands in to its base — because they
+ * are not all diminutives, and the ones that aren't want different wording.
+ *
+ *  - `agent`  разве́дчик ← разве́дка. `-чик`/`-щик` builds the person who does
+ *    the thing. Told apart by animacy rather than by the suffix alone, because
+ *    the same string is a plain diminutive on an inanimate noun — стака́нчик is
+ *    a small glass, not someone who glasses. Which is also why `-чик` is in the
+ *    suffix list at all: dropping it would lose the diminutives to be rid of the
+ *    agents, and the agents are cheaper to exclude here.
+ *  - `female` студе́нтка ← студе́нт, вну́чка ← внук. A feminine animate built on
+ *    a masculine animate is the female counterpart; "a little X" is the wrong
+ *    thing to say about it even when the suffix is the same.
+ *  - `other` the animacy does not carry over, so whatever the relation is it is
+ *    not a diminutive: аргенти́нка is a woman from Аргенти́на, стрело́к the man
+ *    with the стрела́. A little X is the same kind of thing as an X, so this one
+ *    constraint sorts several accidents out of the list without hand-picking.
+ *  - `diminutive` everything else.
+ */
+function diminutiveKind(word, base) {
+  const form = bare(word)
+  if (word.animate && (form.endsWith('чик') || form.endsWith('щик'))) return 'agent'
+  if (word.animate && base.animate && word.gender === 'f' && base.gender === 'm') return 'female'
+  if (word.animate !== base.animate) return 'other'
+  return 'diminutive'
+}
+
+/**
+ * Diminutive shortlist: nouns shaped like a diminutive whose base is itself a
+ * curriculum entry, so ру́чка and рука́ stop being two unrelated things to
+ * memorise (#633).
+ *
+ * A worklist rather than a derivation, and deliberately so. `-ка` is a common
+ * ending, not a signal: ло́жка is not a little ложь, ча́йка not a little чай,
+ * ма́йка not a little май. Roughly half the raw matches are that kind of
+ * accident, and nothing in the letters separates them from во́дка ← вода́, so
+ * #614's rule applies — a guessed link teaches a relationship that does not
+ * exist, which is worse than silence. The list is reviewed by hand and worked
+ * *down*, rejections recorded in `review/diminutives-reviewed.jsonl`.
+ *
+ * The fact worth authoring is usually not "this is a small one" but where the
+ * word has drifted: носо́к is not a little nose, it is a sock, by way of the toe
+ * of a boot. That drift is what stops the word being arbitrary.
+ *
+ * Nouns only. Diminutive adjectives and adverbs exist but are thin here.
+ *
+ * @param {object[]} words
+ * @param {object} [opts]
+ * @param {Array<{a: string, b: string}>} [opts.reviewed] pairs already set
+ *   aside, order-insensitive, subtracted from the list
+ * @param {string[]} [opts.levels] keep a pair when **either** word is at one of
+ *   these levels — the fact is authored on both ends, so a pair straddling two
+ *   levels is still this level's work
+ * @returns {Array<{key, ru, cefr, suffix, kind, via, base: {key, ru, cefr, en}}>}
+ */
+export function diminutiveCandidates(words, { reviewed = [], levels } = {}) {
+  const keep = levelFilter(levels)
+  const setAside = new Set((reviewed ?? []).map((r) => pairKey(r.a, r.b)))
+  const nouns = (words ?? []).filter((w) => w.learnable !== false && w.pos === 'noun')
+
+  const byStem = new Map()
+  for (const w of nouns) {
+    for (const stem of baseStems(bare(w))) {
+      const at = byStem.get(stem)
+      if (at) at.push(w)
+      else byStem.set(stem, [w])
+    }
+  }
+
+  /** Bases that could show `stem`, plainly or through a velar alternation. */
+  const basesFor = (stem) => {
+    const found = (byStem.get(stem) ?? []).map((word) => ({ word, via: 'exact' }))
+    for (const [plain, shown] of VELARS) {
+      if (!stem.endsWith(shown)) continue
+      const unmutated = stem.slice(0, -1) + plain
+      for (const word of byStem.get(unmutated) ?? []) found.push({ word, via: 'velar' })
+    }
+    return found
+  }
+
+  const out = []
+  for (const w of nouns) {
+    // Already explained: a root or build fact is what this list exists to
+    // produce, so a word that has one is done.
+    if (w.facts?.some((f) => f.kind === 'root' || f.kind === 'build')) continue
+    const form = bare(w)
+    for (const suffix of DIMINUTIVE_SUFFIXES) {
+      if (!form.endsWith(suffix)) continue
+      const stem = form.slice(0, -suffix.length)
+      if (stem.length < MIN_STEM) continue
+      // An exact stem beats one that needed the alternation, and the shortest
+      // base wins: the least derived word is the one to send the learner to.
+      const found = basesFor(stem)
+        .filter(({ word }) => word !== w && bare(word).length < form.length)
+        .sort(
+          (x, y) =>
+            (x.via === 'exact' ? 0 : 1) - (y.via === 'exact' ? 0 : 1) ||
+            bare(x.word).length - bare(y.word).length,
+        )
+      const hit = found[0]
+      if (!hit) continue
+      const base = hit.word
+      const kind = diminutiveKind(w, base)
+      // An agent noun is not this pass's business at all — it is a different
+      // relation with different wording, and listing it only makes the
+      // shortlist longer without making it more useful.
+      if (kind === 'agent') break
+      if (setAside.has(pairKey(w.key, base.key))) break
+      if (keep && !keep(w.cefr) && !keep(base.cefr)) break
+      out.push({
+        key: w.key,
+        ru: w.headword || w.ru,
+        cefr: w.cefr ?? null,
+        en: w.meaning,
+        suffix,
+        kind,
+        via: hit.via,
+        base: {
+          key: base.key,
+          ru: base.headword || base.ru,
+          cefr: base.cefr ?? null,
+          en: base.meaning,
+        },
+      })
+      break
+    }
+  }
+  // Diminutives first — the rest are real relations but a different fact — then
+  // by level, so the earliest words lead.
+  const rank = { diminutive: 0, female: 1, other: 2 }
+  return out.sort(
+    (a, b) =>
+      rank[a.kind] - rank[b.kind] ||
+      cefrRank(a.cefr) - cefrRank(b.cefr) ||
+      a.ru.localeCompare(b.ru, 'ru'),
+  )
+}
+
+/**
  * What the corpus has to say about itself, split by part of speech and by CEFR
  * level, so the gaps are visible.
  *

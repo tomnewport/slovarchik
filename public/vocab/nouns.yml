@@ -1804,6 +1804,10 @@ words:
       - ru: Он поговори́л с ба́бой о дела́х.
         en_gb: He spoke with the woman about business.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    facts:
+      - kind: root
+        text: "The plain old word for a woman, and the stem inside ба́бушка."
+        see: ["бабушка=grandmother"]
   "бабка=old woman":
     cefr_level: B1
     gender: f
@@ -1923,6 +1927,10 @@ words:
       pl_acc: ба́бушек
       pl_ins: ба́бушками
       pl_pre: ба́бушках
+    facts:
+      - kind: root
+        text: "Ба́ба with the affectionate -ушка on it. The diminutive did all the work and became the ordinary word for a grandmother, while ба́ба on its own turned blunt."
+        see: ["баба=woman"]
   "багаж=luggage":
     cefr_level: B1
     gender: m
@@ -10915,6 +10923,10 @@ words:
       pl_acc: города́
       pl_ins: города́ми
       pl_pre: города́х
+    facts:
+      - kind: root
+        text: "City. Городо́к is the small one, with the same -ок as in цвето́к."
+        see: ["городок=small town"]
   "городок=small town":
     cefr_level: B1
     gender: m
@@ -10948,6 +10960,10 @@ words:
       pl_acc: городки́
       pl_ins: городка́ми
       pl_pre: городка́х
+    facts:
+      - kind: root
+        text: "Го́род with the -ок that makes things small: a little town."
+        see: ["город=city"]
   "горшок=flowerpot":
     cefr_level: A2
     gender: m
@@ -12774,6 +12790,10 @@ words:
         en_alt:
           - In the photo are my grandfathers.
         inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
+    facts:
+      - kind: root
+        text: "Grandfather plainly. Де́душка is the affectionate form, and the one you will hear more often."
+        see: ["дедушка=grandfather"]
   "дедушка=grandfather":
     cefr_level: A1
     gender: m
@@ -12819,6 +12839,10 @@ words:
       pl_acc: де́душек
       pl_ins: де́душками
       pl_pre: де́душках
+    facts:
+      - kind: root
+        text: "Дед with the same affectionate -ушка as ба́бушка. Both are the everyday words now; дед on its own is blunter."
+        see: ["дед=grandfather"]
   "действие=action":
     cefr_level: B1
     gender: n
@@ -14559,6 +14583,10 @@ words:
     confusable_with:
       - key: "дорого=expensively"
         why: "Доро́га is a road; до́рого means expensively, and the stress moves to the front."
+    facts:
+      - kind: root
+        text: "Road. The diminutive доро́жка is a path or a lane."
+        see: ["дорожка=path"]
   "дорожка=path":
     cefr_level: B1
     gender: f
@@ -14594,6 +14622,10 @@ words:
       - ru: В саду́ мно́го краси́вых доро́жек.
         en_gb: There are many beautiful paths in the garden.
         inflect: { token: 5, case: gen, number: pl, rule: noun-genpl-fleeting }
+    facts:
+      - kind: root
+        text: "Доро́га with -ка and the г turning to ж — the same swap as кни́га to кни́жка. A small road: a path, a lane, a running track."
+        see: ["дорога=road"]
   "досада=annoyance":
     cefr_level: B1
     gender: f
@@ -14841,6 +14873,10 @@ words:
       - ru: У сосе́дей две весёлые до́чки.
         en_gb: The neighbours have two cheerful daughters.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    facts:
+      - kind: root
+        text: "Дочь with a fond -ка that adds nothing but warmth — the same ending as in ру́чка. Parents say до́чка far more often than дочь."
+        see: ["дочь=daughter"]
   "дочь=daughter":
     cefr_level: A1
     gender: f
@@ -14893,6 +14929,9 @@ words:
     facts:
       - kind: origin
         text: "The same word as English daughter."
+      - kind: root
+        text: "Daughter, with до́чка as the affectionate everyday form."
+        see: ["дочка=daughter"]
   "драка=fight":
     cefr_level: B1
     gender: f
@@ -23028,6 +23067,10 @@ words:
       pl_acc: кни́ги
       pl_ins: кни́гами
       pl_pre: кни́гах
+    facts:
+      - kind: root
+        text: "Book. Its diminutive кни́жка swaps the г for ж and means a booklet."
+        see: ["книжка=book"]
   "книжка=book":
     cefr_level: A1
     gender: f
@@ -23066,6 +23109,10 @@ words:
       - ru: Мне нра́вятся карти́нки в э́той кни́жке.
         en_gb: I like the pictures in this book.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
+    facts:
+      - kind: root
+        text: "Кни́га with -ка, and the г turning to ж on the way — the same swap as доро́га to доро́жка. A кни́жка is a little book or a booklet: записна́я кни́жка is a notebook."
+        see: ["книга=book"]
   "кнопка=button (device)":
     cefr_level: B1
     gender: f
@@ -27711,6 +27758,10 @@ words:
       pl_acc: ла́мпы
       pl_ins: ла́мпами
       pl_pre: ла́мпах
+    facts:
+      - kind: root
+        text: "Lamp. The ла́мпочка is the bulb in it."
+        see: ["лампочка=light bulb"]
   "лампочка=light bulb":
     cefr_level: B1
     gender: f
@@ -27746,6 +27797,10 @@ words:
       pl_acc: ла́мпочки
       pl_ins: ла́мпочками
       pl_pre: ла́мпочках
+    facts:
+      - kind: root
+        text: "A little ла́мпа — and the ordinary word for a light bulb, which is the small part inside the lamp."
+        see: ["лампа=lamp"]
   "ландыш=lily of the valley":
     cefr_level: B2
     gender: m
@@ -33413,6 +33468,10 @@ words:
       pl_acc: муже́й
       pl_ins: мужья́ми
       pl_pre: мужья́х
+    facts:
+      - kind: root
+        text: "Husband now, but once simply a man — the sense мужи́к still carries."
+        see: ["мужик=fellow"]
   "мужик=fellow":
     cefr_level: B1
     gender: m
@@ -33448,6 +33507,10 @@ words:
       pl_acc: мужико́в
       pl_ins: мужика́ми
       pl_pre: мужика́х
+    facts:
+      - kind: root
+        text: "Муж meant a man before it narrowed to husband. Мужи́к kept the older sense and now means a bloke — plain-spoken, sometimes admiring."
+        see: ["муж=husband"]
   "мужчина=man":
     cefr_level: A1
     gender: m
@@ -35841,6 +35904,9 @@ words:
     facts:
       - kind: origin
         text: "The same word as English nose, and Latin nasus."
+      - kind: root
+        text: "Nose, and also the toe of a boot — which is how носо́к came to mean a sock."
+        see: ["носок=sock"]
   "носок=sock":
     cefr_level: A2
     gender: m
@@ -35875,6 +35941,10 @@ words:
       pl_acc: носки́
       pl_ins: носка́ми
       pl_pre: носка́х
+    facts:
+      - kind: root
+        text: "A little нос. The toe of a boot is its nose, and the thing you pull over it took the name."
+        see: ["нос=nose"]
   "нота=note":
     cefr_level: B1
     gender: f
@@ -52800,6 +52870,10 @@ words:
       pl_acc: руба́хи
       pl_ins: руба́хами
       pl_pre: руба́хах
+    facts:
+      - kind: root
+        text: "The older, plainer word for a shirt. Руба́шка is its diminutive, and the one people actually use."
+        see: ["рубашка=shirt"]
   "рубашка=shirt":
     cefr_level: A1
     gender: f
@@ -52833,6 +52907,10 @@ words:
       pl_acc: руба́шки
       pl_ins: руба́шками
       pl_pre: руба́шках
+    facts:
+      - kind: root
+        text: "Руба́ха with -ка, and the х turning to ш. The diminutive became the ordinary word; руба́ха now sounds rustic."
+        see: ["рубаха=shirt"]
   "рубеж=frontier":
     cefr_level: B1
     gender: m
@@ -53015,6 +53093,10 @@ words:
       pl_acc: ру́ки
       pl_ins: рука́ми
       pl_pre: рука́х
+    facts:
+      - kind: root
+        text: "Hand or arm. The diminutive ру́чка travelled from little hand to handle to pen."
+        see: ["ручка=pen"]
   "рукав=sleeve":
     cefr_level: B1
     gender: m
@@ -53285,6 +53367,10 @@ words:
       pl_acc: ру́чки
       pl_ins: ру́чками
       pl_pre: ру́чках
+    facts:
+      - kind: root
+        text: "A little рука́, with the к turning to ч. From there it means anything you take hold of — a handle, a door knob — and then the thing you hold to write with."
+        see: ["рука=hand"]
   "рыба=fish":
     cefr_level: A1
     gender: f
@@ -60130,6 +60216,10 @@ words:
       pl_acc: столы́
       pl_ins: стола́ми
       pl_pre: стола́х
+    facts:
+      - kind: root
+        text: "Table. A сто́лик is a small one — the little table you book in a restaurant."
+        see: ["столик=small table"]
   "столб=post":
     cefr_level: B1
     gender: m
@@ -60196,6 +60286,10 @@ words:
       - ru: Все сто́лики бы́ли за́няты.
         en_gb: All the tables were taken.
         inflect: { token: 2, case: nom, number: pl, rule: noun-nom-pl }
+    facts:
+      - kind: root
+        text: "Стол with -ик: a little table. It is what you book in a restaurant."
+        see: ["стол=table"]
   "столица=capital":
     cefr_level: A2
     gender: f
@@ -60851,6 +60945,10 @@ words:
       pl_acc: студе́нтов
       pl_ins: студе́нтами
       pl_pre: студе́нтах
+    facts:
+      - kind: root
+        text: "Student. The feminine is студе́нтка, with the -ка that makes сосе́д into сосе́дка too."
+        see: ["студентка=student (f)"]
   "студентка=student (f)":
     cefr_level: A1
     gender: f
@@ -60883,6 +60981,10 @@ words:
       pl_acc: студе́нток
       pl_ins: студе́нтками
       pl_pre: студе́нтках
+    facts:
+      - kind: root
+        text: "The -ка that makes a feminine counterpart, not a small one: студе́нт to студе́нтка, сосе́д to сосе́дка, официа́нт to официа́нтка."
+        see: ["студент=student"]
   "стук=knock":
     cefr_level: B1
     gender: m
@@ -63057,6 +63159,10 @@ words:
       - ru: У меня́ две тётки.
         en_gb: I have two aunts.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    facts:
+      - kind: root
+        text: "Тётя with -ка, but the ending is blunt here rather than fond: a тётка is an aunt spoken of plainly, or any older woman."
+        see: ["тётя=aunt"]
   "тетрадь=notebook":
     cefr_level: A2
     gender: f
@@ -63128,6 +63234,10 @@ words:
       pl_acc: тётей
       pl_ins: тётями
       pl_pre: тётях
+    facts:
+      - kind: root
+        text: "Aunt. Тётка is the same word said bluntly."
+        see: ["тётка=aunt"]
   "техника=technology":
     cefr_level: B1
     gender: f
@@ -68834,6 +68944,10 @@ words:
       pl_acc: цвета́
       pl_ins: цвета́ми
       pl_pre: цвета́х
+    facts:
+      - kind: root
+        text: "Colour — and, older, blossom, which is where цвето́к comes from."
+        see: ["цветок=flower"]
   "цветок=flower":
     cefr_level: A1
     gender: m
@@ -68888,6 +69002,10 @@ words:
       pl_acc: цветы́
       pl_ins: цвета́ми
       pl_pre: цвета́х
+    facts:
+      - kind: root
+        text: "Цвет is both colour and bloom; a цвето́к is one single bloom. The -ок is the same little-thing ending as in городо́к."
+        see: ["цвет=colour"]
   "цель=goal":
     cefr_level: A2
     gender: f

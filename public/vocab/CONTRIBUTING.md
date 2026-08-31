@@ -285,7 +285,7 @@ self-referential or already-derived link.
 ### Which words to write facts for
 
 Not all of them — the payoff is nowhere near even. **`npm run coverage:facts`**
-ranks the corpus for you and prints three lists:
+ranks the corpus for you and prints these lists:
 
 - **problems with facts already authored** — these fail CI, so they come first;
 - **worth a breakdown** — a prefixed word whose bare stem *is itself an entry*
@@ -297,9 +297,25 @@ ranks the corpus for you and prints three lists:
   unstressed Russian vowels reduce and a pair differing only in vowels can be
   near-homophones (звони́ть / звене́ть, слу́шать / слы́шать). Pairs already linked
   by aspect, motion, heteronymy or a shared gloss are excluded — authoring those
-  fails the guard.
+  fails the guard;
+- **diminutive shortlist** — nouns shaped like a diminutive whose base is itself
+  an entry (ру́чка ← рука́, носо́к ← нос), velar alternations undone so кни́жка
+  still finds кни́га. `-ка` is a common ending rather than a signal, so roughly
+  half the raw matches are accidents (ло́жка is not a little ложь) and the list
+  is reviewed by hand. Each row is tagged: a `female` counterpart (студе́нтка ←
+  студе́нт) and a pair whose animacy does not carry over (ча́йка ← чай) are real
+  relations but a different fact, so they are separated rather than mixed in.
+  The fact worth writing is usually where the word has drifted — носо́к is not a
+  little nose, it is a sock, by way of the toe of a boot — and it is authored on
+  **both** ends, since a `see:` link is one-way.
 
-**`--level=A1`** (or `--level=A1,A2`) narrows all three lists to one level's
+Rejections are as durable as authored links, so they go in a ledger with a
+reason — `review/confusables-reviewed.jsonl` and `review/diminutives-reviewed.jsonl`
+— and the next run subtracts them, which is how a list gets worked *down* rather
+than re-read from the top. One ledger per list: a pair rejected as a sound-alike
+may still be a real diminutive.
+
+**`--level=A1`** (or `--level=A1,A2`) narrows every list to one level's
 worth of work, which is how a level gets finished rather than dipped into. A
 sound-alike pair is listed when *either* word is at the level: the learner
 meeting the A2 word already has the A1 one, which is what makes the pair a trap.
