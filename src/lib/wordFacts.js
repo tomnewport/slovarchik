@@ -4,8 +4,8 @@
 // Two sources feed one view:
 //  - **derived** relations, already sitting on the shaped record because
 //    vocabBuild linked them: the aspect pair, the motion pair, the verb a
-//    lexicalised participle came from, stress heteronyms, and the other words
-//    sharing the same base gloss;
+//    lexicalised participle came from, the adjective behind an adverb, stress
+//    heteronyms, and the other words sharing the same base gloss;
 //  - **authored** `facts:` / `confusable_with:` (see public/vocab/CONTRIBUTING.md),
 //    which fill only what derivation cannot see — shared roots, etymology,
 //    mnemonics, and sound-alikes that aren't grammatically linked.
@@ -24,13 +24,15 @@ const KIND_ORDER = new Map(FACT_KINDS.map((k, i) => [k, i]))
 
 /**
  * The relation kinds `relatedWords` can report, in display order. `aspect`,
- * `motion`, `participle`, `heteronym` and `same-meaning` are derived; `root`
- * (a fact's `see:`) and `confusable` are authored.
+ * `motion`, `participle`, `manner` (an adverb and the adjective behind it) and
+ * `same-meaning` are derived; `root` (a fact's `see:`) and `confusable` are
+ * authored.
  */
 export const RELATIONS = [
   'aspect',
   'motion',
   'participle',
+  'manner',
   'heteronym',
   'same-meaning',
   'root',
@@ -151,6 +153,7 @@ export function relatedWords(record, byKey) {
   if (record.aspectPair) push('aspect', pair(record.aspectPair))
   if (record.motionPair) push('motion', pair(record.motionPair))
   if (record.participleOf) push('participle', pair(record.participleOf))
+  if (record.mannerPair) push('manner', pair(record.mannerPair))
   for (const h of record.heteronyms ?? []) push('heteronym', { ru: h.ru, en: h.gloss ?? '' })
   // Same-gloss siblings share this word's meaning by definition — the note is
   // the only thing that tells them apart, so it is what travels.
@@ -256,6 +259,9 @@ function derivedLinks(word, words) {
   if (word.aspectPair?.key) keys.add(word.aspectPair.key)
   if (word.motionPair?.key) keys.add(word.motionPair.key)
   if (word.participleOf?.key) keys.add(word.participleOf.key)
+  // Both ends carry mannerPair, so пло́хо / плохо́й is caught from either side —
+  // the pair the shortlist used to offer as a trap to keep apart.
+  if (word.mannerPair?.key) keys.add(word.mannerPair.key)
   const spellings = new Set([
     ...(word.heteronyms ?? []).map((h) => h.ru),
     ...(word.ambiguousEn ?? []).map((a) => a.ru),

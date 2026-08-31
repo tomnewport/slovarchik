@@ -362,6 +362,8 @@ function alreadyLinked(a, b) {
     b.motionPair?.key === a.key ||
     a.participleOf?.key === b.key ||
     b.participleOf?.key === a.key ||
+    a.mannerPair?.key === b.key ||
+    b.mannerPair?.key === a.key ||
     (a.heteronyms ?? []).some((h) => stripStress(h.ru).toLowerCase() === bb) ||
     (a.ambiguousEn ?? []).some((x) => stripStress(x.ru).toLowerCase() === bb) ||
     (a.confusables ?? []).some((c) => c.key === b.key)

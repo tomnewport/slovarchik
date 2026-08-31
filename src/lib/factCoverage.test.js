@@ -361,6 +361,58 @@ words:
   })
 })
 
+describe('confusableCandidates: derived pairs are not traps', () => {
+  it('drops an adverb and the adjective it is made from (#628)', () => {
+    // These are minimally different by design — which put them near the top of
+    // the shortlist, proposing that a learner keep apart two forms of one word.
+    const words = fromYaml([
+      {
+        pos: 'adverb',
+        text: `
+words:
+  "медленно=slowly":
+    cefr_level: A1
+    accented: ме́дленно
+    en_gb: { standard: slowly }
+`,
+      },
+      {
+        pos: 'adjective',
+        text: `
+words:
+  "медленный=slow":
+    cefr_level: A1
+    accented: ме́дленный
+    en_gb: { standard: slow }
+`,
+      },
+    ])
+    expect(confusableCandidates(words)).toEqual([])
+  })
+
+  it('leaves a genuine sound-alike across the two parts of speech alone', () => {
+    // голо́дный / холо́дный are not one word: the shortlist should still offer
+    // them, so the exclusion has to be the link and not the pos pairing.
+    const words = fromYaml([
+      {
+        pos: 'adjective',
+        text: `
+words:
+  "голодный=hungry":
+    cefr_level: A2
+    accented: голо́дный
+    en_gb: { standard: hungry }
+  "холодный=cold":
+    cefr_level: A1
+    accented: холо́дный
+    en_gb: { standard: cold }
+`,
+      },
+    ])
+    expect(confusableCandidates(words)).toHaveLength(1)
+  })
+})
+
 describe('the level filter (#627)', () => {
   const at = (key, accented, level, extra = '') => `
   "${key}":

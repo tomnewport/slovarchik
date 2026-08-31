@@ -381,6 +381,75 @@ words:
   })
 })
 
+describe('relatedWords: the adverb ← adjective pair (#628)', () => {
+  const manner = fromYaml([
+    {
+      pos: 'adverb',
+      text: `
+words:
+  "быстро=quickly":
+    cefr_level: A1
+    accented: бы́стро
+    en_gb: { standard: quickly }
+`,
+    },
+    {
+      pos: 'adjective',
+      text: `
+words:
+  "быстрый=fast":
+    cefr_level: A1
+    accented: бы́стрый
+    en_gb: { standard: fast }
+`,
+    },
+  ])
+  const byKey = byKeyOf(manner)
+
+  it('reports the pair from the adverb', () => {
+    const related = relatedWords(find(manner, 'быстро=quickly'), byKey)
+    expect(related.map((r) => [r.relation, r.ru])).toEqual([['manner', 'бы́стрый']])
+  })
+
+  it('reports it from the adjective too', () => {
+    const related = relatedWords(find(manner, 'быстрый=fast'), byKey)
+    expect(related.map((r) => [r.relation, r.ru])).toEqual([['manner', 'бы́стро']])
+  })
+
+  it('is a derived link, so authoring it as a confusable fails the guard', () => {
+    // The shortlist used to offer пло́хо / плохо́й as a pair to keep apart. It
+    // is one word in two parts of speech, and saying otherwise teaches a trap
+    // that is not there.
+    const authored = fromYaml([
+      {
+        pos: 'adverb',
+        text: `
+words:
+  "плохо=badly":
+    cefr_level: A1
+    accented: пло́хо
+    en_gb: { standard: badly }
+    confusable_with: [{ key: "плохой=bad", why: They look alike. }]
+`,
+      },
+      {
+        pos: 'adjective',
+        text: `
+words:
+  "плохой=bad":
+    cefr_level: A1
+    accented: плохо́й
+    en_gb: { standard: bad }
+`,
+      },
+    ])
+    const issues = factIssues(authored)
+    expect(issues.map((i) => i.message)).toContain(
+      '"плохой=bad" is already linked automatically — don\'t author it',
+    )
+  })
+})
+
 describe('confusionNote', () => {
   const words = fromYaml([{ pos: 'verb', text: verbs }])
   const byKey = byKeyOf(words)

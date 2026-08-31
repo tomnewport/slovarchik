@@ -502,6 +502,97 @@ words:
   })
 })
 
+describe('the adverb ← adjective pair (#628)', () => {
+  const adverb = (key, accented, level = 'A1') => `
+  "${key}":
+    cefr_level: ${level}
+    accented: ${accented}
+    en_gb: { standard: ${key.split('=')[1]} }`
+  const adjective = (key, accented, level = 'A1') => `
+  "${key}":
+    cefr_level: ${level}
+    accented: ${accented}
+    en_gb: { standard: ${key.split('=')[1]} }`
+
+  const words = fromYaml([
+    {
+      pos: 'adverb',
+      text: `words:${adverb('быстро=quickly', 'бы́стро')}${adverb('легко=easily', 'легко́')}${adverb('можно=possible', 'мо́жно')}${adverb('плохо=badly', 'пло́хо')}`,
+    },
+    {
+      pos: 'adjective',
+      text: `words:${adjective('быстрый=fast', 'бы́стрый')}${adjective('лёгкий=light', 'лёгкий')}${adjective('плохой=bad', 'плохо́й')}`,
+    },
+  ])
+  const at = (key) => words.find((w) => w.key === key)
+
+  it('links the adverb to the adjective it is made from', () => {
+    expect(at('быстро=quickly').mannerPair).toMatchObject({
+      key: 'быстрый=fast',
+      ru: 'бы́стрый',
+      gloss: 'fast',
+    })
+  })
+
+  it('links back, so the adjective offers the adverb too', () => {
+    expect(at('быстрый=fast').mannerPair).toMatchObject({ key: 'быстро=quickly', ru: 'бы́стро' })
+  })
+
+  it('sees through a stress that moves, and through ё', () => {
+    // пло́хо / плохо́й differ in where the stress sits; легко́ / лёгкий in the
+    // vowel itself. Both are the same word, and neither matches on the letters
+    // as written.
+    expect(at('плохо=badly').mannerPair?.key).toBe('плохой=bad')
+    expect(at('легко=easily').mannerPair?.key).toBe('лёгкий=light')
+  })
+
+  it('leaves a predicative with no adjective behind it alone', () => {
+    // мо́жно ends in -о like the rest and is not made from anything. A link
+    // here would teach a relationship that does not exist (#614).
+    expect(at('можно=possible').mannerPair).toBeNull()
+  })
+
+  it('will not link a gloss-only entry', () => {
+    // glossary.yml keys are surface forms, not lemmas — a link into one points
+    // the learner at something that is not a headword.
+    const stubbed = fromYaml([
+      { pos: 'adverb', text: `words:${adverb('тихо=quietly', 'ти́хо')}` },
+      {
+        pos: 'adjective',
+        text: `
+words:
+  "тихий=quiet":
+    cefr_level: A1
+    learn: false
+    accented: ти́хий
+    en_gb: { standard: quiet }
+`,
+      },
+    ])
+    expect(stubbed.find((w) => w.key === 'тихо=quietly').mannerPair).toBeNull()
+  })
+
+  it('shapeVocab carries the pair through to the drills', () => {
+    const shaped = shapeVocab(words)
+    expect(shaped.find((v) => v.id === 'быстро=quickly').mannerPair).toMatchObject({
+      ru: 'бы́стрый',
+    })
+    expect(shaped.find((v) => v.id === 'можно=possible').mannerPair).toBeNull()
+  })
+
+  it('links both ends of every pair it finds across the real corpus', () => {
+    const corpus = loadFixtureWords()
+    const byKey = new Map(corpus.map((w) => [w.key, w]))
+    const linked = corpus.filter((w) => w.mannerPair)
+    expect(linked.length).toBeGreaterThan(100)
+    for (const w of linked) {
+      const other = byKey.get(w.mannerPair.key)
+      expect(other?.mannerPair?.key).toBe(w.key)
+      expect(new Set([w.pos, other.pos])).toEqual(new Set(['adverb', 'adjective']))
+    }
+  })
+})
+
 describe('the bundled vocabulary fixtures', () => {
   const words = loadFixtureWords()
 
