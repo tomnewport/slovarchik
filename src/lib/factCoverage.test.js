@@ -6,6 +6,7 @@ import {
   breakdownCandidates,
   derivationCandidates,
   confusableCandidates,
+  diminutiveCandidates,
   staleReviewed,
   factCoverage,
   PRODUCTIVE_PREFIXES,
@@ -596,6 +597,110 @@ words:
   it('handles an empty corpus', () => {
     expect(factCoverage([]).total.words).toBe(0)
     expect(factCoverage().byPos).toEqual([])
+  })
+})
+
+const noun = (key, accented, gender, animacy, cefr = 'A1') => `
+  "${key}":
+    cefr_level: ${cefr}
+    gender: ${gender}
+    animacy: ${animacy}
+    accented: ${accented}
+    en_gb: { standard: ${key.split('=')[1]} }`
+
+const nouns = (...entries) => fromYaml([{ pos: 'noun', text: `words:${entries.join('')}` }])
+
+describe('diminutiveCandidates (#633)', () => {
+  it('finds a diminutive whose base is itself an entry', () => {
+    const words = nouns(
+      noun('столик=small table', 'сто́лик', 'm', 'i'),
+      noun('стол=table', 'стол', 'm', 'i'),
+      noun('цветок=flower', 'цвето́к', 'm', 'i'),
+      noun('цвет=colour', 'цвет', 'm', 'i'),
+    )
+    const found = diminutiveCandidates(words)
+    expect(found.map((c) => `${c.key}<-${c.base.key}`)).toEqual([
+      'столик=small table<-стол=table',
+      'цветок=flower<-цвет=colour',
+    ])
+    expect(found.every((c) => c.kind === 'diminutive' && c.via === 'exact')).toBe(true)
+  })
+
+  // Without the alternation the generator misses the best pairs in the set —
+  // ру́чка, кни́жка and вну́чка all hide their base behind a velar swap.
+  it('undoes the velar alternation to reach the base', () => {
+    const words = nouns(
+      noun('ручка=pen', 'ру́чка', 'f', 'i'),
+      noun('рука=hand', 'рука́', 'f', 'i'),
+      noun('книжка=book', 'кни́жка', 'f', 'i'),
+      noun('книга=book', 'кни́га', 'f', 'i'),
+      noun('дорожка=path', 'доро́жка', 'f', 'i'),
+      noun('дорога=road', 'доро́га', 'f', 'i'),
+    )
+    const found = diminutiveCandidates(words)
+    expect(found.map((c) => `${c.ru}<-${c.base.ru}`).sort()).toEqual(
+      ['доро́жка<-доро́га', 'кни́жка<-кни́га', 'ру́чка<-рука́'].sort(),
+    )
+    expect(found.every((c) => c.via === 'velar')).toBe(true)
+  })
+
+  // -чик on an animate noun builds the person who does the thing, never a small
+  // one. On an inanimate noun the same string is an ordinary diminutive, so the
+  // test is animacy rather than the suffix.
+  it('drops an agent noun in -чик but keeps a diminutive that spells the same', () => {
+    const words = nouns(
+      noun('разведчик=scout', 'разве́дчик', 'm', 'a'),
+      noun('разведка=intelligence', 'разве́дка', 'f', 'i'),
+      noun('стаканчик=small glass', 'стака́нчик', 'm', 'i'),
+      noun('стакан=glass', 'стака́н', 'm', 'i'),
+    )
+    const found = diminutiveCandidates(words)
+    expect(found.map((c) => c.key)).toEqual(['стаканчик=small glass'])
+  })
+
+  it('separates a female counterpart from a diminutive', () => {
+    const words = nouns(
+      noun('студентка=student (f)', 'студе́нтка', 'f', 'a'),
+      noun('студент=student', 'студе́нт', 'm', 'a'),
+      noun('дочка=daughter', 'до́чка', 'f', 'a'),
+      noun('дочь=daughter', 'дочь', 'f', 'a'),
+    )
+    const byKey = Object.fromEntries(diminutiveCandidates(words).map((c) => [c.key, c.kind]))
+    expect(byKey['студентка=student (f)']).toBe('female')
+    // Both feminine, so it is warmth rather than a counterpart.
+    expect(byKey['дочка=daughter']).toBe('diminutive')
+  })
+
+  // A little X is the same kind of thing as an X, which sorts several accidents
+  // out without anyone having to name them.
+  it('marks a pair whose animacy does not carry over as something else', () => {
+    const words = nouns(
+      noun('чайка=seagull', 'ча́йка', 'f', 'a'),
+      noun('чай=tea', 'чай', 'm', 'i'),
+    )
+    expect(diminutiveCandidates(words)[0].kind).toBe('other')
+  })
+
+  it('skips a word that already carries a root fact, and honours the ledger', () => {
+    const words = nouns(
+      noun('столик=small table', 'сто́лик', 'm', 'i'),
+      noun('стол=table', 'стол', 'm', 'i'),
+    )
+    expect(diminutiveCandidates(words)).toHaveLength(1)
+    // Order-insensitive, like the sound-alike ledger.
+    const reviewed = [{ a: 'стол=table', b: 'столик=small table' }]
+    expect(diminutiveCandidates(words, { reviewed })).toEqual([])
+  })
+
+  it('leaves the bundled A1 list empty — every pair is authored or rejected', () => {
+    const reviewed = readFileSync(resolve(repoRoot, 'review/diminutives-reviewed.jsonl'), 'utf8')
+      .split('\n')
+      .filter((l) => l.trim())
+      .map((l) => JSON.parse(l))
+    for (const r of reviewed) expect(r.why, `${r.a} / ${r.b}`).toBeTruthy()
+    expect(staleReviewed(loadFixtureWords(), reviewed)).toEqual([])
+    const left = diminutiveCandidates(loadFixtureWords(), { reviewed, levels: ['A1'] })
+    expect(left, left.map((c) => `${c.ru} <- ${c.base.ru}`).join('\n')).toEqual([])
   })
 })
 

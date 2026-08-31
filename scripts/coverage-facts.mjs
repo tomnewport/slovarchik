@@ -24,15 +24,16 @@ import {
   breakdownCandidates,
   derivationCandidates,
   confusableCandidates,
+  diminutiveCandidates,
   staleReviewed,
 } from '../src/lib/factCoverage.js'
 
-// Pairs looked at and set aside, so the shortlist can be worked *down* (#613).
-// One judgement per line, JSONL like the other ledgers in review/.
-const LEDGER = fileURLToPath(new URL('../review/confusables-reviewed.jsonl', import.meta.url))
-function loadReviewed() {
+// Pairs looked at and set aside, so a shortlist can be worked *down* (#613).
+// One judgement per line, JSONL, one ledger per list — a pair rejected as a
+// sound-alike may still be a real diminutive, so the two verdicts stay apart.
+function loadReviewed(name) {
   try {
-    return readFileSync(LEDGER, 'utf8')
+    return readFileSync(fileURLToPath(new URL(`../review/${name}`, import.meta.url)), 'utf8')
       .split('\n')
       .filter((l) => l.trim())
       .map((l) => JSON.parse(l))
@@ -62,14 +63,29 @@ const coverage = factCoverage(words)
 const issues = factIssues(words)
 const breakdown = breakdownCandidates(words, { levels: LEVELS })
 const derivation = derivationCandidates(words, { levels: LEVELS })
-const reviewed = loadReviewed()
+const reviewed = loadReviewed('confusables-reviewed.jsonl')
 const stale = staleReviewed(words, reviewed)
 const confusable = confusableCandidates(words, { reviewed, levels: LEVELS })
+const dimReviewed = loadReviewed('diminutives-reviewed.jsonl')
+const dimStale = staleReviewed(words, dimReviewed)
+const diminutive = diminutiveCandidates(words, { reviewed: dimReviewed, levels: LEVELS })
 
 if (args.includes('--json')) {
   console.log(
     JSON.stringify(
-      { levels: LEVELS, coverage, issues, breakdown, derivation, confusable, reviewed, stale },
+      {
+        levels: LEVELS,
+        coverage,
+        issues,
+        breakdown,
+        derivation,
+        confusable,
+        reviewed,
+        stale,
+        diminutive,
+        dimReviewed,
+        dimStale,
+      },
       null,
       2,
     ),
@@ -167,5 +183,29 @@ for (const p of confusable.slice(SKIP, SKIP + LIMIT)) {
 }
 const left = confusable.length - SKIP - LIMIT
 if (left > 0) console.log(`  … and ${left} more (--all, or --skip=${SKIP + LIMIT})`)
+// ── Diminutives: nouns shaped like one whose base is itself an entry (#633).
+console.log(
+  `\n=== Diminutive shortlist (${diminutive.length}${at}) — a root fact and a see: link both ways ===\n`,
+)
+if (dimReviewed.length) {
+  console.log(`  ${dimReviewed.length} pair(s) previously set aside in review/diminutives-reviewed.jsonl.`)
+}
+if (dimStale.length) {
+  console.log(`  ${dimStale.length} ledger entr(ies) name a word the corpus no longer has:`)
+  for (const r of dimStale) console.log(`      ${r.missing.join(', ')}`)
+}
+if (at) console.log(`  a pair is listed when either word is${at}.`)
+if (dimReviewed.length || dimStale.length || at) console.log()
+for (const c of diminutive.slice(0, LIMIT)) {
+  // The kind is the first thing a reviewer needs: a female counterpart and a
+  // word whose animacy shifted are real relations, but not this fact.
+  const via = c.via === 'velar' ? ' (velar)' : ''
+  console.log(
+    `  ${pad(c.kind, 11)}${pad(`${c.ru} \u2190 ${c.base.ru}`, 26)}${pad(c.cefr ?? '?', 4)}` +
+      `-${pad(c.suffix + via, 13)}${c.en} \u2190 ${c.base.en}`,
+  )
+}
+if (diminutive.length > LIMIT) console.log(`  … and ${diminutive.length - LIMIT} more (--all)`)
+
 console.log('\nReview by hand before authoring: a shortlist is a suggestion, not a verdict.')
-console.log('Rejected one? Add it to review/confusables-reviewed.jsonl with a reason.\n')
+console.log('Rejected one? Add it to the matching review/*-reviewed.jsonl with a reason.\n')
