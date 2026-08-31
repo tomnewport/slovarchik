@@ -361,6 +361,79 @@ words:
   })
 })
 
+describe('the level filter (#627)', () => {
+  const at = (key, accented, level, extra = '') => `
+  "${key}":
+    cefr_level: ${level}
+    accented: ${accented}
+    en_gb: { standard: ${key.split('=')[1]} }${extra}`
+
+  const family = fromYaml([
+    {
+      pos: 'verb',
+      text: `words:${at('ходить=to go', 'ходи́ть', 'A1')}${at('входить=to enter', 'входи́ть', 'A1')}${at('выходить=to exit', 'выходи́ть', 'B1')}${at('переходить=to cross', 'переходи́ть', 'B1')}`,
+    },
+  ])
+
+  it('keeps a breakdown candidate at its own level, not its root’s', () => {
+    // Every one of these hangs off an A1 root, but the fact is authored on the
+    // prefixed word — so that is the word the level is about.
+    const keys = breakdownCandidates(family, { levels: ['A1'] }).map((c) => c.key)
+    expect(keys).toEqual(['входить=to enter'])
+  })
+
+  it('leaves family sizes corpus-wide when a level is asked for', () => {
+    // A root's reach does not shrink because you are reading one level of it:
+    // ход- is still repaid across three words, which is why it ranks.
+    const [enter] = breakdownCandidates(family, { levels: ['A1'] })
+    expect(enter.family).toBe(3)
+  })
+
+  it('takes more than one level', () => {
+    const keys = breakdownCandidates(family, { levels: ['A1', 'B1'] }).map((c) => c.key)
+    expect(keys).toHaveLength(3)
+  })
+
+  it('filters the suffix pass on the derived word’s level', () => {
+    const words = fromYaml([
+      { pos: 'verb', text: `words:${at('двигаться=to move', 'дви́гаться', 'A1')}` },
+      {
+        pos: 'noun',
+        text: `
+words:
+  "движение=movement":
+    cefr_level: B1
+    accented: движе́ние
+    gender: n
+    animacy: i
+    en_gb: { standard: movement }
+`,
+      },
+    ])
+    expect(derivationCandidates(words, { levels: ['A1'] })).toEqual([])
+    expect(derivationCandidates(words, { levels: ['B1'] })).toHaveLength(1)
+  })
+
+  it('keeps a sound-alike pair when either word is at the level', () => {
+    // The straddling pair is the one worth authoring: a learner meeting the A2
+    // word has the A1 one already, which is exactly what makes it a trap.
+    const words = fromYaml([
+      {
+        pos: 'verb',
+        text: `words:${at('слушать=to listen', 'слу́шать', 'A1')}${at('слышать=to hear', 'слы́шать', 'A2')}`,
+      },
+    ])
+    expect(confusableCandidates(words, { levels: ['A1'] })).toHaveLength(1)
+    expect(confusableCandidates(words, { levels: ['A2'] })).toHaveLength(1)
+    expect(confusableCandidates(words, { levels: ['B1'] })).toEqual([])
+  })
+
+  it('is a no-op when no level is asked for', () => {
+    expect(breakdownCandidates(family, { levels: [] })).toEqual(breakdownCandidates(family))
+    expect(derivationCandidates(family, {})).toEqual(derivationCandidates(family))
+  })
+})
+
 describe('factCoverage', () => {
   const words = loadFixtureWords()
 
@@ -400,6 +473,72 @@ words:
       ]),
     )
     expect(cov.total).toMatchObject({ words: 2, withFacts: 1, facts: 1, confusables: 2 })
+  })
+
+  it('splits authored, derived and empty — a derived relation is not a gap', () => {
+    // Three words, one of each: звони́ть is authored, звене́ть is only reachable
+    // as its confusable partner, and ду́мать has nothing to show at all.
+    const cov = factCoverage(
+      fromYaml([
+        {
+          pos: 'verb',
+          text: `
+words:
+  "звенеть=to ring":
+    cefr_level: A2
+    accented: звене́ть
+    en_gb: { standard: to ring }
+  "звонить=to call":
+    cefr_level: A2
+    accented: звони́ть
+    en_gb: { standard: to call }
+    facts:
+      - { kind: note, text: A note. }
+    confusable_with: [{ key: "звенеть=to ring", why: One is a bell. }]
+  "думать=to think":
+    cefr_level: A2
+    accented: ду́мать
+    en_gb: { standard: to think }
+`,
+        },
+      ]),
+    )
+    expect(cov.total).toMatchObject({ words: 3, withFacts: 1, derived: 1, empty: 1 })
+  })
+
+  it('counts an aspect partner as derived, with nothing authored', () => {
+    const cov = factCoverage(
+      fromYaml([
+        {
+          pos: 'verb',
+          text: `
+words:
+  "благодарить=to thank":
+    cefr_level: A2
+    accented: благодари́ть
+    aspect: impf
+    pair: "поблагодарить=to thank"
+    en_gb: { standard: to thank }
+  "поблагодарить=to thank":
+    cefr_level: A2
+    accented: поблагодари́ть
+    aspect: pf
+    pair: "благодарить=to thank"
+    en_gb: { standard: to thank }
+`,
+        },
+      ]),
+    )
+    expect(cov.total).toMatchObject({ words: 2, withFacts: 0, derived: 2, empty: 0 })
+  })
+
+  it('adds up: every word is authored, derived or empty, at every level', () => {
+    // The empty count is what #626 drives to zero, so it has to be exhaustive
+    // rather than merely plausible.
+    const cov = factCoverage(words)
+    for (const row of [cov.total, ...cov.byPos, ...cov.byCefr]) {
+      expect(row.withFacts + row.derived + row.empty).toBe(row.words)
+    }
   })
 
   it('handles an empty corpus', () => {

@@ -297,6 +297,25 @@ ranks the corpus for you and prints three lists:
   by aspect, motion, heteronymy or a shared gloss are excluded — authoring those
   fails the guard.
 
+**`--level=A1`** (or `--level=A1,A2`) narrows all three lists to one level's
+worth of work, which is how a level gets finished rather than dipped into. A
+sound-alike pair is listed when *either* word is at the level: the learner
+meeting the A2 word already has the A1 one, which is what makes the pair a trap.
+The coverage table always shows every level, so you can watch the rest of it
+hold still while one level moves.
+
+The table itself counts three things, not one, because "has a fact" is not what
+the learner experiences:
+
+| bucket | meaning |
+| ------ | ------- |
+| `facts` | the word carries authored `facts:` |
+| `derived` | no facts, but the panel still has something — an aspect partner, a motion partner, the verb behind a participle, a heteronym, a same-gloss word |
+| `empty` | neither: the panel is blank |
+
+`empty` is the number to drive down. A word filled by a derived relation needs
+nothing authored and is not a gap.
+
 It is a worklist, never a CI gate: facts are optional, and a threshold would
 turn an enrichment into an obligation on every new word. Review a shortlist by
 hand before authoring — it is a suggestion, not a verdict.

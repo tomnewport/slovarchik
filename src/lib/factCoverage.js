@@ -24,6 +24,7 @@
 // Pure and framework-free; `scripts/coverage-facts.mjs` is the thin CLI over it,
 // and reads the ledger — nothing here touches the filesystem.
 import { stripStress } from './text.js'
+import { relatedWords } from './wordFacts.js'
 
 /** Productive prefixes, longest first so «пере-» wins over «пе-». */
 export const PRODUCTIVE_PREFIXES = [
@@ -58,6 +59,27 @@ function bare(word) {
   return stripStress(word?.headword || word?.ru || '').toLowerCase()
 }
 
+/**
+ * A CEFR filter for the worklists (#627), so a level can be worked through on
+ * its own rather than read out of a corpus-wide ranking.
+ *
+ * Filtering happens on the *output*, never the input: the ranking that makes
+ * these lists worth reading is computed over the whole corpus — a root family
+ * counts its members wherever they sit, and a sound-alike is a sound-alike
+ * whatever level its partner is — so narrowing the input would quietly change
+ * the numbers rather than the view of them.
+ *
+ * An absent or empty list means every level, so a caller can pass the option
+ * through unconditionally.
+ * @param {string[]} [levels]
+ * @returns {?(cefr: ?string) => boolean}
+ */
+function levelFilter(levels) {
+  if (!levels?.length) return null
+  const want = new Set(levels.map((l) => String(l).toUpperCase()))
+  return (cefr) => want.has(String(cefr ?? '').toUpperCase())
+}
+
 /** Drop a reflexive ending so находи́ться can still find ходи́ть. */
 function unreflex(form) {
   return form.replace(/(ся|сь)$/, '')
@@ -73,9 +95,15 @@ function unreflex(form) {
  * a fact on ход- is repaid across входи́ть, выходи́ть, доходи́ть and a dozen more.
  *
  * @param {object[]} words normalised word records (from buildWords)
+ * @param {object} [opts]
+ * @param {string[]} [opts.levels] keep only candidates at these CEFR levels.
+ *   The *candidate's* level, not the root's: the fact is authored on the
+ *   prefixed word, so that is the word the level is about. Family sizes stay
+ *   corpus-wide — a root's reach does not shrink because you are reading one
+ *   level of it.
  * @returns {Array<{key, ru, cefr, prefix, root: {key, ru}, family: number}>}
  */
-export function breakdownCandidates(words) {
+export function breakdownCandidates(words, { levels } = {}) {
   const learnable = (words ?? []).filter((w) => w.learnable !== false)
   const byBare = new Map()
   for (const w of learnable) {
@@ -104,11 +132,14 @@ export function breakdownCandidates(words) {
     }
   }
 
-  // Family size is the payoff: how many candidates share this root.
+  // Family size is the payoff: how many candidates share this root. Counted
+  // over everything found, before any level filter — see levelFilter.
   const perRoot = new Map()
   for (const c of found) perRoot.set(c.root.key, (perRoot.get(c.root.key) ?? 0) + 1)
+  const keep = levelFilter(levels)
   return found
     .map((c) => ({ ...c, family: perRoot.get(c.root.key) }))
+    .filter((c) => !keep || keep(c.cefr))
     .sort(
       (a, b) =>
         b.family - a.family ||
@@ -213,9 +244,13 @@ function sourcesFor(stem, index) {
  * A source is also required to be *shorter* than the word it supposedly built.
  * Derivation adds material; внима́ние does not come from внима́тельно.
  *
+ * @param {object[]} words
+ * @param {object} [opts]
+ * @param {string[]} [opts.levels] keep only candidates at these CEFR levels —
+ *   the derived word's own level, for the same reason as the prefix pass.
  * @returns {Array<{key, ru, cefr, suffix, from: ?{key, ru, via}}>}
  */
-export function derivationCandidates(words) {
+export function derivationCandidates(words, { levels } = {}) {
   const learnable = (words ?? []).filter((w) => w.learnable !== false)
   const index = stemIndex(learnable)
   const out = []
@@ -234,7 +269,10 @@ export function derivationCandidates(words) {
       from: from ? { key: from.word.key, ru: from.word.headword || from.word.ru, via: from.via } : null,
     })
   }
-  return out.sort((a, b) => cefrRank(a.cefr) - cefrRank(b.cefr) || a.ru.localeCompare(b.ru, 'ru'))
+  const keep = levelFilter(levels)
+  return out
+    .filter((c) => !keep || keep(c.cefr))
+    .sort((a, b) => cefrRank(a.cefr) - cefrRank(b.cefr) || a.ru.localeCompare(b.ru, 'ru'))
 }
 
 /**
@@ -372,12 +410,17 @@ export function staleReviewed(words, reviewed) {
  * @param {Array<{a: string, b: string}>} [opts.reviewed] pairs already looked at
  *   and set aside (#613), so the list can be worked *down* rather than re-read
  *   from the top every session. Order-insensitive.
+ * @param {string[]} [opts.levels] keep a pair when **either** word is at one of
+ *   these levels. A pair straddling two levels is exactly the trap worth
+ *   authoring — the learner meeting the A2 word still has the A1 one — so
+ *   requiring both would hide the most useful half of the list.
  * @returns {Array<{a, b, distance, ratio}>} closest first
  */
 export function confusableCandidates(
   words,
-  { maxRatio = 0.25, minLength = 4, maxCefrGap = 1, reviewed = [] } = {},
+  { maxRatio = 0.25, minLength = 4, maxCefrGap = 1, reviewed = [], levels } = {},
 ) {
+  const keep = levelFilter(levels)
   const setAside = new Set((reviewed ?? []).map((r) => pairKey(r.a, r.b)))
   const learnable = (words ?? [])
     .filter((w) => w.learnable !== false && bare(w).length >= minLength)
@@ -393,6 +436,7 @@ export function confusableCandidates(
       // Sorted by length: once the gap exceeds the cap nothing further can match.
       if (fb.length - fa.length > cap) break
       if (Math.abs(cefrRank(a.cefr) - cefrRank(b.cefr)) > maxCefrGap) continue
+      if (keep && !keep(a.cefr) && !keep(b.cefr)) continue
       // Distance first, and only then the link check. The scan considers
       // millions of pairs and rejects almost all of them; `alreadyLinked`
       // normalises several arrays per call, so running it on every pair rather
@@ -414,13 +458,32 @@ export function confusableCandidates(
 }
 
 /**
- * How much of the corpus carries authored facts, split by part of speech and by
- * CEFR level, so the gaps are visible.
- * @returns {{total: {words, withFacts, facts, confusables}, byPos: object[], byCefr: object[]}}
+ * What the corpus has to say about itself, split by part of speech and by CEFR
+ * level, so the gaps are visible.
+ *
+ * Three buckets, not one, because "words with authored facts" is not what a
+ * learner experiences (#627). A word whose panel is filled by a *derived*
+ * relation — its aspect partner, its motion partner, the verb behind a
+ * participle — needs nothing authored and is not a gap. Counting only authored
+ * facts put A1 top of the table at 15.9% while nearly half of it showed a
+ * blank panel, which is how the whole level came to be overlooked.
+ *
+ *  - `withFacts` — carries `facts:`;
+ *  - `derived`   — no facts, but `relatedWords` has something to show;
+ *  - `empty`     — neither. The number to drive to zero.
+ *
+ * @param {object[]} words
+ * @returns {{total: {words, withFacts, derived, empty, facts, confusables},
+ *   byPos: object[], byCefr: object[]}}
  */
 export function factCoverage(words) {
-  const learnable = (words ?? []).filter((w) => w.learnable !== false)
-  const tally = () => ({ words: 0, withFacts: 0, facts: 0, confusables: 0 })
+  const list = words ?? []
+  // relatedWords resolves its links through a keyed map, and wants the whole
+  // corpus in it: a gloss-only stub is not a learnable word but is a perfectly
+  // good thing to link to.
+  const byKey = new Map(list.filter((w) => w?.key).map((w) => [w.key, w]))
+  const learnable = list.filter((w) => w.learnable !== false)
+  const tally = () => ({ words: 0, withFacts: 0, derived: 0, empty: 0, facts: 0, confusables: 0 })
   const total = tally()
   const byPos = new Map()
   const byCefr = new Map()
@@ -428,6 +491,7 @@ export function factCoverage(words) {
   for (const w of learnable) {
     const facts = w.facts?.length ?? 0
     const confusables = w.confusables?.length ?? 0
+    const derived = facts ? false : relatedWords(w, byKey).length > 0
     for (const bucket of [
       total,
       byPos.get(w.pos) ?? byPos.set(w.pos, tally()).get(w.pos),
@@ -435,6 +499,8 @@ export function factCoverage(words) {
     ]) {
       bucket.words++
       if (facts) bucket.withFacts++
+      else if (derived) bucket.derived++
+      else bucket.empty++
       bucket.facts += facts
       bucket.confusables += confusables
     }
