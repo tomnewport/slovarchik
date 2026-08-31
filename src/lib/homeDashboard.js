@@ -42,9 +42,73 @@ export function disambiguatedGloss(en, word) {
   return en
 }
 
+/** Abbreviations of the grammatical qualifiers {@link disambiguatedGloss} spells out. */
+const SHORT_ASPECT_LABEL = Object.freeze({ impf: 'impf.', pf: 'pf.' })
+const SHORT_MOTION_LABEL = Object.freeze({ det: 'det.', indet: 'indet.' })
+
+/**
+ * How much of an authored note a row can still afford beside the gloss and the
+ * dimension pips — measured against the narrowest phone the app targets, where
+ * the whole English half of a row is about twenty characters wide. A note longer
+ * than this is an explanation rather than a label, and is left to the card.
+ */
+const ROW_NOTE_MAX = 20
+
+/** Separators an authored gloss or note uses between one sense and the next. */
+const SENSE_BREAK = /[,;\u2013\u2014]/
+
+/**
+ * The leading sense of a gloss — everything before the first comma, semicolon or
+ * dash that isn't inside a parenthetical, so "close (near in space or time)"
+ * survives whole while "accepted, resigned himself" reduces to "accepted".
+ */
+function firstSense(en) {
+  const text = String(en ?? '').trim()
+  let depth = 0
+  for (let i = 0; i < text.length; i += 1) {
+    const c = text[i]
+    if (c === '(') depth += 1
+    else if (c === ')') depth = Math.max(0, depth - 1)
+    else if (depth === 0 && SENSE_BREAK.test(c)) return text.slice(0, i).trim()
+  }
+  return text
+}
+
+/**
+ * The gloss a dashboard row shows: its leading sense, with the shortest
+ * qualifier that still keeps a linked pair apart. A row shares its width with
+ * the dimension pips, and a gloss long enough to push those off the card is the
+ * one thing it must not do — so the row says only enough to identify the word,
+ * and the card behind it ({@link disambiguatedGloss}, WordProgressModal) carries
+ * the full explanation.
+ */
+export function rowGloss(en, word) {
+  const base = firstSense(en)
+  if (!word) return base
+
+  // An authored note is a full explanation ("polite form used with children and
+  // guests"), sized for the card rather than for a row. Keep its opening clause
+  // when that alone still fits and says something the gloss doesn't; otherwise
+  // the row shows the bare gloss and the card does the explaining.
+  const note = firstSense(word.note)
+  const fits = note.length <= ROW_NOTE_MAX && note.toLowerCase() !== base.toLowerCase()
+  if (word.ambiguousEn?.length && fits) return `${base} (${note})`
+
+  const aspect = word.aspectPair ? SHORT_ASPECT_LABEL[word.aspect] : null
+  if (aspect) return `${base} (${aspect})`
+
+  const motion = word.motionPair ? SHORT_MOTION_LABEL[word.motion] : null
+  if (motion) return `${base} (${motion})`
+
+  return base
+}
+
 function rowIdentity(key, vocabByKey) {
   const { ru, en } = parseKey(key)
-  return { ru, en: disambiguatedGloss(en, vocabByKey?.get(key)) }
+  const word = vocabByKey?.get(key)
+  // `en` is what the row prints; `fullEn` is the unabridged gloss, carried
+  // along for the row's hover title.
+  return { ru, en: rowGloss(en, word), fullEn: disambiguatedGloss(en, word) }
 }
 
 /**
@@ -80,11 +144,12 @@ export function buildWordList(batchWords, level, dims, ctx) {
     .map((w) => {
       const rec = records[w.word]
       const events = rec?.events ?? []
-      const { ru, en } = rowIdentity(w.word, vocabByKey)
+      const { ru, en, fullEn } = rowIdentity(w.word, vocabByKey)
       return {
         key: w.word,
         ru,
         en,
+        fullEn,
         done: w.done,
         // Done by criteria but awaiting the spaced confirmation review (#313).
         pending: w.done && isPendingConfirmation(w.word),
@@ -110,13 +175,13 @@ export function buildStatusWordList(keys, ctx) {
   return keys.map((key) => {
     const rec = records[key]
     const evs = rec?.events ?? []
-    const { ru, en } = rowIdentity(key, vocabByKey)
+    const { ru, en, fullEn } = rowIdentity(key, vocabByKey)
     const state = stateOf(key)
     const level = state === 'mastered' ? 'mastery' : 'learning'
     const dims = dimPips(evs, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS, key, {
       known: rec?.known,
       hasContextDrill,
     })
-    return { key, ru, en, state, dims }
+    return { key, ru, en, fullEn, state, dims }
   })
 }

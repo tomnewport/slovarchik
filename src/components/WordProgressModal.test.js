@@ -43,3 +43,34 @@ describe('WordProgressModal — "I know this word" (#321)', () => {
     expect(wrapper.find('button.know').exists()).toBe(true)
   })
 })
+
+describe('WordProgressModal — the full explanation (the row is abbreviated)', () => {
+  it('shows the authored meaning whole, its alternates, and the spelled-out aspect', async () => {
+    vocabState.words = [
+      {
+        key: 'сшить=to sew',
+        headword: 'сшить',
+        meaning: 'to sew',
+        meaningFull: 'to sew (join with thread)',
+        meaningsAlt: ['to stitch', 'to make up'],
+        aspect: 'pf',
+        aspectPair: { key: 'шить=to sew' },
+        pos: 'verb',
+      },
+    ]
+    const wrapper = mount(WordProgressModal, { props: { wordKey: 'сшить=to sew' } })
+    await flushPromises()
+
+    expect(wrapper.find('.meaning').text()).toBe('to sew (join with thread)')
+    expect(wrapper.find('.meaning-alt').text()).toBe('also: to stitch; to make up')
+    expect(wrapper.findAll('.chip').map((c) => c.text())).toContain('perfective')
+  })
+
+  it('falls back to the key gloss and hides the alternates line when there are none', async () => {
+    const wrapper = mount(WordProgressModal, { props: { wordKey: 'w0' } })
+    await flushPromises()
+
+    expect(wrapper.find('.meaning').text()).toBe('house')
+    expect(wrapper.find('.meaning-alt').exists()).toBe(false)
+  })
+})

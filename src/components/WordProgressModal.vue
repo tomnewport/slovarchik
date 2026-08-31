@@ -9,6 +9,7 @@ import { computed, ref } from 'vue'
 import { state as vocabState } from '../stores/vocab.js'
 import { wordProgressDetail, leaveForLater, markKnown, unmarkKnown } from '../stores/progress.js'
 import { parseKey } from '../lib/vocabBuild.js'
+import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
 import WordFacts from './WordFacts.vue'
 
 const props = defineProps({
@@ -34,7 +35,30 @@ const STATE_LABEL = {
 const word = computed(() => vocabState.words.find((w) => w.key === props.wordKey) ?? null)
 const parsed = computed(() => parseKey(props.wordKey))
 const headword = computed(() => word.value?.headword || word.value?.ru || parsed.value.ru)
-const meaning = computed(() => word.value?.meaning || word.value?.en || parsed.value.en)
+
+// The home dashboard's rows are abbreviated so their dimension pips stay on
+// screen; this card is where the word gets explained in full. So take the
+// authored meaning whole — its parenthetical clarification included — rather
+// than the short gloss the rows and drills share.
+const meaning = computed(() => {
+  const w = word.value
+  return w?.meaningFull || w?.meaning || w?.en || parsed.value.en
+})
+
+/** Alternative renderings of the same word, kept out of the row entirely. */
+const altMeanings = computed(() => word.value?.meaningsAlt ?? [])
+
+/**
+ * The grammatical contrast the row could only abbreviate to "impf." / "det.",
+ * said in full. A chip rather than a second parenthetical: the meaning already
+ * carries one, and stacking them reads as a typo.
+ */
+const contrast = computed(() => {
+  const w = word.value
+  if (w?.aspectPair && ASPECT_LABEL[w.aspect]) return ASPECT_LABEL[w.aspect]
+  if (w?.motionPair && MOTION_LABEL[w.motion]) return MOTION_LABEL[w.motion]
+  return null
+})
 
 const detail = computed(() => wordProgressDetail(props.wordKey))
 
@@ -108,9 +132,13 @@ async function unmarkKnownWord() {
       <header class="word-head">
         <div class="headword">{{ headword }}</div>
         <div class="meaning muted">{{ meaning }}</div>
+        <div v-if="altMeanings.length" class="meaning-alt muted">
+          also: {{ altMeanings.join('; ') }}
+        </div>
         <div class="head-meta">
           <span v-if="word?.cefr" class="chip">{{ word.cefr }}</span>
           <span v-if="word?.pos" class="chip">{{ word.pos }}</span>
+          <span v-if="contrast" class="chip">{{ contrast }}</span>
           <span class="chip state" :class="detail.state">{{ STATE_LABEL[detail.state] }}</span>
         </div>
       </header>
@@ -230,6 +258,10 @@ async function unmarkKnownWord() {
 }
 .meaning {
   font-size: 0.95rem;
+}
+.meaning-alt {
+  font-size: 0.82rem;
+  opacity: 0.8;
 }
 .head-meta {
   display: flex;

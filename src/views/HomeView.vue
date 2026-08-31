@@ -253,7 +253,7 @@ const FOCUSED = [
       </div>
       <div class="word-scroll">
         <div v-for="w in atRiskWords" :key="w.key" class="word-row">
-          <div class="word-label">
+          <div class="word-label" :title="w.fullEn">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
           </div>
@@ -278,7 +278,7 @@ const FOCUSED = [
       </div>
       <div class="word-scroll">
         <div v-for="w in slippedWords" :key="w.key" class="word-row">
-          <div class="word-label">
+          <div class="word-label" :title="w.fullEn">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
           </div>
@@ -313,7 +313,7 @@ const FOCUSED = [
           @keydown.enter="selectedWord = w.key"
           @keydown.space.prevent="selectedWord = w.key"
         >
-          <div class="word-label">
+          <div class="word-label" :title="w.fullEn">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
             <span
@@ -352,7 +352,7 @@ const FOCUSED = [
           @keydown.enter="selectedWord = w.key"
           @keydown.space.prevent="selectedWord = w.key"
         >
-          <div class="word-label">
+          <div class="word-label" :title="w.fullEn">
             <span class="word-ru">{{ w.ru }}</span>
             <span class="word-en muted">{{ w.en }}</span>
             <span
@@ -468,6 +468,12 @@ const FOCUSED = [
 }
 .word-scroll {
   display: grid;
+  /* An `auto` track is sized from its items' min-content width, and a row's
+     min-content is its nowrap gloss + the pips at full length — so a long word
+     widened the track past the card and scrolled the dimension pips out of
+     sight. `minmax(0, 1fr)` pins the track to the card, leaving the label to
+     ellipsise and the pips always on screen. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.45rem;
   padding-top: 0.6rem;
   border-top: 1px solid var(--border);
@@ -521,6 +527,10 @@ const FOCUSED = [
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 0.9rem;
+  /* The Russian is the row's identity — a narrow row spends its last pixels on
+     the gloss ("заб… to forget (to fail to…" helps nobody), which the word card
+     repeats in full anyway. */
+  flex-shrink: 0;
 }
 .word-en {
   font-size: 0.78rem;
