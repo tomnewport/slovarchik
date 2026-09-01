@@ -76,6 +76,9 @@ function relationLabel(row) {
       return `also means “${record.value?.meaning || row.en}”`
     case 'root':
       return 'same root'
+    case 'see-also':
+      // A `see:` on a note is a pointer, not a claim about morphology.
+      return 'see also'
     default:
       return 'easily confused'
   }

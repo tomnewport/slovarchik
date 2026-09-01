@@ -26,7 +26,14 @@ const KIND_ORDER = new Map(FACT_KINDS.map((k, i) => [k, i]))
  * The relation kinds `relatedWords` can report, in display order. `aspect`,
  * `motion`, `participle`, `manner` (an adverb and the adjective behind it),
  * `numeral` (a number and what it is built on) and `same-meaning` are derived;
- * `root` (a fact's `see:`) and `confusable` are authored.
+ * `root`, `see-also` (both from a fact's `see:`) and `confusable` are authored.
+ *
+ * A `see:` link means different things depending on the fact it hangs off. On a
+ * `build` or `root` fact it is a shared root — води́ть behind переводи́ть. On a
+ * `note` it is only "this word is part of the same picture": под links над and
+ * пе́ред because they are one spatial system, not because they share a
+ * morpheme. Calling both "same root" would put a false claim under half the
+ * closed-class facts (#631), so they are separate relations.
  *
  * A `numeral` row also carries `via` (`ordinal` | `teen` | `tens` | `hundreds`)
  * and `role` (`base` | `derived`, describing the *other* word), because "the
@@ -41,6 +48,7 @@ export const RELATIONS = [
   'heteronym',
   'same-meaning',
   'root',
+  'see-also',
   'confusable',
 ]
 
@@ -187,7 +195,10 @@ export function relatedWords(record, byKey) {
   // the only thing that tells them apart, so it is what travels.
   for (const a of record.ambiguousEn ?? [])
     push('same-meaning', { ru: a.ru, en: selfEn(record), note: a.note ?? '' })
-  for (const f of wordFacts(record)) for (const s of f.see ?? []) push('root', s)
+  for (const f of wordFacts(record)) {
+    const relation = f.kind === 'root' || f.kind === 'build' ? 'root' : 'see-also'
+    for (const s of f.see ?? []) push(relation, s)
+  }
   for (const c of record.confusables ?? []) push('confusable', c)
 
   return out
