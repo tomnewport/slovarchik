@@ -1887,12 +1887,6 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
-    facts:
-      - kind: root
-        text: >-
-          A little ба́ба — the affectionate diminutive is the ordinary word, and
-          the plain one now sounds rough.
-        see: ["баба=woman"]
     collections:
       - family
       - people
@@ -10945,11 +10939,6 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
-    facts:
-      - kind: origin
-        text: >-
-          An enclosure, from the same root as English yard and garden and Latin
-          hortus. It is the -град in Ленингра́д and Волгогра́д.
     collections:
       - places
     en_gb:
@@ -10988,6 +10977,10 @@ words:
       pl_ins: города́ми
       pl_pre: города́х
     facts:
+      - kind: origin
+        text: >-
+          An enclosure, from the same root as English yard and garden and Latin
+          hortus. It is the -град in Ленингра́д and Волгогра́д.
       - kind: root
         text: "City. Городо́к is the small one, with the same -ок as in цвето́к."
         see: ["городок=small town"]
@@ -27918,11 +27911,6 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
-    facts:
-      - kind: origin
-        text: >-
-          Greek lampas, a torch, through French lampe — the same word as English
-          lamp.
     collections:
       - home
       - daily life
@@ -27954,6 +27942,10 @@ words:
       pl_ins: ла́мпами
       pl_pre: ла́мпах
     facts:
+      - kind: origin
+        text: >-
+          Greek lampas, a torch, through French lampe — the same word as English
+          lamp.
       - kind: root
         text: "Lamp. The ла́мпочка is the bulb in it."
         see: ["лампочка=light bulb"]
@@ -33668,12 +33660,6 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
-    facts:
-      - kind: note
-        text: >-
-          Now a husband, but the older sense of simply a man is still visible in
-          мужчи́на, which is built on it.
-        see: ["мужчина=man"]
     collections:
       - family
       - romance and dating
@@ -33710,6 +33696,9 @@ words:
       - kind: root
         text: "Husband now, but once simply a man — the sense мужи́к still carries."
         see: ["мужик=fellow"]
+      - kind: root
+        text: "Мужчи́на, the ordinary word for a man, is built straight on it."
+        see: ["мужчина=man"]
   "мужик=fellow":
     cefr_level: B1
     gender: m
@@ -53431,11 +53420,6 @@ words:
     number: ["sg", "pl"]
     display_number: mixed
     en_pl: [hands, arms]
-    facts:
-      - kind: root
-        text: >-
-          ру́чка — a pen, or a door handle — is literally a little hand.
-        see: ["ручка=pen"]
     collections:
       - parts of the body
     en_gb:
@@ -53713,12 +53697,6 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
-    facts:
-      - kind: root
-        text: >-
-          A little рука́: the diminutive covers a pen, a door handle and the arm of
-          a chair, all things a hand takes hold of.
-        see: ["рука=hand"]
     collections:
       - school
       - daily life
@@ -60589,12 +60567,6 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
-    facts:
-      - kind: origin
-        text: >-
-          From an old verb meaning to spread — the cloth spread out, before the
-          thing under it. Its lookalike стул came from German and is not related.
-        see: ["стул=chair"]
     confusable_with:
       - key: "стул=chair"
         why: >-
@@ -60645,6 +60617,11 @@ words:
       pl_ins: стола́ми
       pl_pre: стола́х
     facts:
+      - kind: origin
+        text: >-
+          From an old verb meaning to spread — the cloth spread out, before the
+          thing under it. Its lookalike стул came from German and is not related.
+        see: ["стул=chair"]
       - kind: root
         text: "Table. A сто́лик is a small one — the little table you book in a restaurant."
         see: ["столик=small table"]
@@ -69423,12 +69400,6 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
-    facts:
-      - kind: note
-        text: >-
-          Both a colour and a bloom, which is why цвето́к, a flower, is built
-          straight on it.
-        see: ["цветок=flower"]
     collections:
       - colours and textures
       - the arts
@@ -69476,12 +69447,6 @@ words:
     number: ["sg", "pl"]
     display_number: mixed
     en_pl: flowers
-    facts:
-      - kind: root
-        text: >-
-          A little цвет — and цвет is both a colour and a bloom, which is why the
-          same word does both jobs.
-        see: ["цвет=colour"]
     collections:
       - in the garden
       - nature
