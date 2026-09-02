@@ -7,6 +7,7 @@ import { phraseTokens, phraseCorrect, buildAssemblyBank } from '../lib/phrases.j
 import { speak } from '../lib/speech.js'
 import AnnotatedEnglish from '../components/AnnotatedEnglish.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import ComprehensionCheck from '../components/ComprehensionCheck.vue'
 import HintablePhrase from '../components/HintablePhrase.vue'
 import SpeakButton from '../components/SpeakButton.vue'
 
@@ -36,6 +37,12 @@ let advanceTimer = null
 const bank = ref([])
 const placed = ref([])
 const answerTokenCount = ref(0)
+
+// The comprehension probe (#597), when this sentence has one. A correct answer
+// normally auto-advances after the celebration; where there is something the
+// English could not carry, the turn waits instead so the learner can read it.
+const probe = ref(null)
+const hasProbe = computed(() => direction.value === 'ru-en' && !!probe.value?.check)
 
 const sourceOf = (p) => (direction.value === 'ru-en' ? p.ru : p.en)
 const targetOf = (p) => (direction.value === 'ru-en' ? p.en : p.ru)
@@ -88,9 +95,10 @@ function record(correct) {
   score.total += 1
   if (correct) {
     score.right += 1
-    // Celebrate, then move straight to the next phrase.
     celebrating.value = true
-    advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
+    // Celebrate, then move straight to the next phrase — unless there is a probe
+    // to read, in which case the learner dismisses it in their own time.
+    if (!hasProbe.value) advanceTimer = setTimeout(nextQuestion, CELEBRATE_MS)
   }
 }
 
@@ -246,8 +254,17 @@ onUnmounted(() => {
         {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + targetOf(current) }}
         <SpeakButton v-if="!wasCorrect && direction === 'en-ru'" :text="targetOf(current)" />
       </p>
-      <!-- Correct answers advance on their own; only wrong answers wait. -->
-      <div v-if="!wasCorrect" class="row">
+      <!-- Translating into English, the graded question is already answered —
+           this asks what the Russian said that the English could not. It renders
+           nothing when the sentence hides nothing (#597). -->
+      <ComprehensionCheck
+        v-if="wasCorrect && direction === 'ru-en'"
+        ref="probe"
+        :phrase="current"
+      />
+      <!-- Correct answers advance on their own; a wrong one, or a probe left on
+           screen, waits for the learner. -->
+      <div v-if="!wasCorrect || hasProbe" class="row">
         <button class="primary" @click="nextQuestion">Next →</button>
         <button @click="quit">Change mode</button>
       </div>

@@ -18,6 +18,7 @@ import { phrases } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
+import ComprehensionCheck from '../ComprehensionCheck.vue'
 import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
@@ -82,6 +83,13 @@ const factsKey = computed(() => {
   const targets = (props.exercise.targets ?? []).filter(Boolean)
   return targets.length === 1 ? targets[0] : null
 })
+
+// What the comprehension probe needs: the sentence and the word it belongs to
+// (#597). Both directions of this exercise produce English, so the probe applies
+// to either — the learner has read the Russian in one and heard it in the other.
+const probePhrase = computed(() =>
+  factsKey.value ? { ru: props.exercise.ru, source: factsKey.value } : null,
+)
 
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const assembled = computed(() => placed.value.map((t) => t.text).join(' '))
@@ -307,6 +315,11 @@ onUnmounted(() => {
         Sure your translation also works?
         <button type="button" class="link" @click="markCorrect">I was right →</button>
       </p>
+
+      <!-- The graded question is answered and right; this asks what the Russian
+           said that the English could not (#597). Nothing renders for a sentence
+           that hides nothing, and nothing is recorded either way. -->
+      <ComprehensionCheck v-if="wasCorrect" :phrase="probePhrase" />
 
       <!-- About this word (#586) — the drilled word, once the answer is graded
            either way. -->

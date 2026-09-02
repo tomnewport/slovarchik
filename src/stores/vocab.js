@@ -40,6 +40,9 @@ export const vocab = computed(() => shapeVocab(state.words))
 export const nouns = computed(() => shapeNouns(state.words))
 export const phrases = computed(() => shapePhrases(state.words))
 export const isReady = computed(() => state.words.length > 0)
+// key → word record. Cached here rather than rebuilt per component: several
+// consumers want it, and it is a Map over the whole dictionary.
+export const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, w])))
 
 /**
  * Stamp `hasContextDrill` on every word so the progression model knows whether
