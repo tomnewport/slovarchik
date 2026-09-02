@@ -176,7 +176,7 @@ words:
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В э́том гараже́ рабо́тают два автомеха́ника.
         en_gb: Two car mechanics work in this garage.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: автомеха́ник
       sg_gen: автомеха́ника
@@ -215,7 +215,7 @@ words:
         en_gb: There are many cars in the street.
         en_alt:
           - There are a lot of cars in the street.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: автомоби́ль
       sg_gen: автомоби́ля
@@ -348,7 +348,7 @@ words:
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В суде́ выступа́ли два адвока́та.
         en_gb: Two lawyers spoke in court.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: адвока́т
       sg_gen: адвока́та
@@ -848,7 +848,7 @@ words:
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В оте́ле бы́ло мно́го америка́нцев.
         en_gb: There were many Americans in the hotel.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: америка́нец
       sg_gen: америка́нца
@@ -1223,7 +1223,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На пля́же бы́ло мно́го аргенти́нцев.
         en_gb: There were many Argentinians on the beach.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: аргенти́нец
       sg_gen: аргенти́нца
@@ -1256,7 +1256,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В гру́ппе бы́ло две аргенти́нки.
         en_gb: There were two Argentinian women in the group.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: аргенти́нка
       sg_gen: аргенти́нки
@@ -1468,7 +1468,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Солда́ты отби́ли две ата́ки.
         en_gb: The soldiers repelled two attacks.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "атеист=atheist":
     cefr_level: B2
     gender: m
@@ -1650,7 +1650,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В па́рке мно́го аттракцио́нов.
         en_gb: There are many rides in the park.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: аттракцио́н
       sg_gen: аттракцио́на
@@ -1800,7 +1800,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На ры́нке торгова́ли две ба́бы.
         en_gb: Two women were trading at the market.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Он поговори́л с ба́бой о дела́х.
         en_gb: He spoke with the woman about business.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -1863,7 +1863,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В саду́ мно́го я́рких ба́бочек.
         en_gb: There are many bright butterflies in the garden.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ба́бочка
       sg_gen: ба́бочки
@@ -1993,7 +1993,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Учёные постро́или две ба́зы в Аркти́ке.
         en_gb: Scientists built two bases in the Arctic.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "базар=market":
     cefr_level: A2
     gender: m
@@ -2338,7 +2338,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На встре́че бы́ло мно́го банки́ров.
         en_gb: There were many bankers at the meeting.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: банки́р
       sg_gen: банки́ра
@@ -2374,7 +2374,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: О́коло магази́на два банкома́та.
         en_gb: There are two ATMs near the shop.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: банкома́т
       sg_gen: банкома́та
@@ -2576,7 +2576,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На балу́ бы́ло не́сколько баро́нов.
         en_gb: There were several barons at the ball.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: баро́н
       sg_gen: баро́на
@@ -3017,7 +3017,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В лесу́ мно́го ры́жих бе́лок.
         en_gb: There are many red squirrels in the forest.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: бе́лка
       sg_gen: бе́лки
@@ -3116,7 +3116,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В ба́ке ма́ло бензи́на.
         en_gb: There is little petrol in the tank.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: бензи́н
       sg_gen: бензи́на
@@ -3340,7 +3340,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В на́шем го́роде три библиоте́ки.
         en_gb: There are three libraries in our city.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: В ста́рых библиоте́ках па́хнет пы́лью и бума́гой.
         en_gb: Old libraries smell of dust and paper.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -4428,7 +4428,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Сапёры обезвре́дили две бо́мбы.
         en_gb: The sappers defused two bombs.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: бо́мба
       sg_gen: бо́мбы
@@ -4731,7 +4731,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У меня́ два ста́рших бра́та.
         en_gb: I have two older brothers.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Роди́тели купи́ли бра́тьям одина́ковые велосипе́ды.
         en_gb: The parents bought the brothers identical bicycles.
         en_alt:
@@ -4828,7 +4828,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На заво́де не́сколько брига́д.
         en_gb: There are several brigades at the factory.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "бригадир=foreman":
     cefr_level: B2
     gender: m
@@ -4975,7 +4975,7 @@ words:
     usage:
       - ru: В ру́сском алфави́те три́дцать три бу́квы.
         en_gb: There are thirty-three letters in the Russian alphabet.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Я не зна́ю э́ту бу́кву.
         en_gb: I do not know this letter.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
@@ -5015,7 +5015,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На столе́ стоя́т два буке́та.
         en_gb: There are two bouquets on the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: буке́т
       sg_gen: буке́та
@@ -5193,7 +5193,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он съел два бутербро́да.
         en_gb: He ate two sandwiches.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Она́ ма́жет бутербро́д ма́слом.
         en_gb: She spreads butter on the sandwich.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -5229,7 +5229,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На ро́зе мно́го буто́нов.
         en_gb: There are many buds on the rose.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: буто́н
       sg_gen: буто́на
@@ -5607,7 +5607,7 @@ words:
         en_gb: There are several variants of the solution.
         en_alt:
           - There are several possible solutions.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Я вы́брал пе́рвый вариа́нт.
         en_gb: I chose the first variant.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -6125,7 +6125,7 @@ words:
         en_gb: The police checked several versions.
         en_alt:
           - The police checked several theories.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "вертолёт=helicopter":
     cefr_level: A2
     gender: m
@@ -6264,7 +6264,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Альпини́сты покори́ли мно́го верши́н.
         en_gb: The climbers conquered many summits.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "вес=weight":
     cefr_level: B1
     gender: m
@@ -7054,7 +7054,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На берегу́ мно́го дороги́х вилл.
         en_gb: There are many expensive villas on the shore.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ви́лла
       sg_gen: ви́ллы
@@ -7144,7 +7144,7 @@ words:
         en_gb: For the celebration they bought two bottles of wine.
         en_alt:
           - For the holiday they bought two bottles of wine.
-        inflect: { token: 7, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 7, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: вино́
       sg_gen: вина́
@@ -7176,7 +7176,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он съел мно́го виногра́да.
         en_gb: He ate a lot of grapes.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: виногра́д
       sg_gen: виногра́да
@@ -7342,7 +7342,7 @@ words:
         en_gb: There are many vitamins in fruit.
         en_alt:
           - There are a lot of vitamins in fruit.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Врач посове́товал принима́ть витами́н.
         en_gb: The doctor advised taking a vitamin.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -7771,7 +7771,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В буты́лке немно́го во́дки.
         en_gb: There is a little vodka in the bottle.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Го́сти пришли́ с буты́лкой во́дки.
         en_gb: The guests came with a bottle of vodka.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -7856,7 +7856,7 @@ words:
         en_gb: There's lots of seaweed in the sea.
         en_alt:
           - There is a lot of seaweed in the sea.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он собра́л во́доросли на пля́же.
         en_gb: He collected seaweed on the beach.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
@@ -8057,7 +8057,7 @@ words:
         en_gb: Many possibilities lie before us.
         en_alt:
           - There are many possibilities before us.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "возраст=age":
     cefr_level: A2
     gender: m
@@ -8594,7 +8594,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В го́роде мно́го воро́в.
         en_gb: There are many thieves in the city.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: вор
       sg_gen: во́ра
@@ -8921,7 +8921,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: У него́ мно́го враго́в.
         en_gb: He has many enemies.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Не дове́ряй своему́ врагу́.
         en_gb: Do not trust your enemy.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
@@ -9341,7 +9341,7 @@ words:
         en_gb: There are many old-fashioned expressions in the book.
         en_alt:
           - There are many old expressions in the book.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "высота=height":
     cefr_level: B1
     gender: f
@@ -9433,7 +9433,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Но́чью мы слы́шали не́сколько вы́стрелов.
         en_gb: At night we heard several shots.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: вы́стрел
       sg_gen: вы́стрела
@@ -9745,7 +9745,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В магази́не мно́го краси́вых га́лстуков.
         en_gb: There are many beautiful ties in the shop.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: га́лстук
       sg_gen: га́лстука
@@ -9836,7 +9836,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В э́той семье́ мно́го гармо́нии.
         en_gb: There is a lot of harmony in this family.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Му́зыка создаёт гармо́нию.
         en_gb: Music creates harmony.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -9971,7 +9971,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На пара́де бы́ло мно́го генера́лов.
         en_gb: There were many generals at the parade.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: генера́л
       sg_gen: генера́ла
@@ -10073,7 +10073,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В фи́льме мно́го сме́лых геро́ев.
         en_gb: There are many brave heroes in the film.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В го́роде поста́вили па́мятник геро́ям войны́.
         en_gb: In the city they put up a monument to the heroes of the war.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
@@ -10218,7 +10218,7 @@ words:
         en_gb: Two guitars stand by the wall.
         en_alt:
           - There are two guitars standing by the wall.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: гита́ра
       sg_gen: гита́ры
@@ -10350,7 +10350,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он вы́пил стака́н воды́ в не́сколько глотко́в.
         en_gb: He drank a glass of water in a few gulps.
-        inflect: { token: 7, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 7, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Сде́лай ещё оди́н глото́к.
         en_gb: Take one more sip.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -10535,7 +10535,7 @@ words:
         en_gb: He has turned three years old.
         en_alt:
           - He turned three.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "голова=head":
     cefr_level: A1
     gender: f
@@ -10904,7 +10904,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В Росси́и мно́го ста́рых городо́в.
         en_gb: There are many old cities in Russia.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В больши́х города́х всегда́ тру́дно найти́ ти́хое ме́сто.
         en_gb: In big cities it is always hard to find a quiet spot.
         en_alt:
@@ -11374,13 +11374,13 @@ words:
     usage:
       - ru: Сего́дня два́дцать гра́дусов тепла́.
         en_gb: Today it is twenty degrees above zero.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Вода́ кипи́т при ста гра́дусах.
         en_gb: Water boils at one hundred degrees.
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Температу́ра упа́ла на пять гра́дусов.
         en_gb: The temperature dropped by five degrees.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: гра́дус
       sg_gen: гра́дуса
@@ -11928,7 +11928,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ученики́ раздели́лись на две гру́ппы.
         en_gb: The pupils divided into two groups.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Он игра́ет в музыка́льной гру́ппе.
         en_gb: He plays in a musical group.
         en_alt:
@@ -12014,7 +12014,7 @@ words:
     usage:
       - ru: По́сле дождя́ на доро́ге бы́ло мно́го гря́зи.
         en_gb: After the rain there was a lot of mud on the road.
-        inflect: { token: 7, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 7, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Он вошёл в дом и принёс грязь с у́лицы.
         en_gb: He came into the house and brought dirt from the street.
         en_alt:
@@ -12084,7 +12084,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На встре́чу пришли́ не́сколько губерна́торов.
         en_gb: Several governors came to the meeting.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: губерна́тор
       sg_gen: губерна́тора
@@ -12245,7 +12245,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: За столо́м сиде́ли две да́мы.
         en_gb: Two ladies were sitting at the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "дар=gift":
     cefr_level: B1
     gender: m
@@ -12354,7 +12354,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: У шка́фчика бы́ли две ма́леньких две́рцы.
         en_gb: The little cabinet had two small doors.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
   "дверь=door":
     cefr_level: A1
     gender: f
@@ -12377,7 +12377,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В коридо́ре мно́го двере́й.
         en_gb: There are many doors in the corridor.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: дверь
       sg_gen: две́ри
@@ -12427,7 +12427,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В самолёте четы́ре дви́гателя.
         en_gb: The aeroplane has four engines.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "движение=traffic":
     cefr_level: A2
     gender: n
@@ -12678,7 +12678,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В кла́ссе мно́го де́вочек.
         en_gb: There are many girls in the class.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На уро́ке та́нцев де́вочкам разда́ли я́ркие ле́нты.
         en_gb: In the dance class the girls were handed bright ribbons.
         en_alt:
@@ -12721,7 +12721,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На остано́вке ждут две де́вушки.
         en_gb: Two young women are waiting at the stop.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "девчонка=girl":
     cefr_level: B1
     gender: f
@@ -12970,7 +12970,7 @@ words:
         en_gb: He has many things to do today.
         en_alt:
           - He has a lot to do today.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: де́ло
       sg_gen: де́ла
@@ -13073,7 +13073,7 @@ words:
         inflect: { token: 2, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Че́рез не́сколько дней начнётся о́тпуск.
         en_gb: In a few days the holiday will begin.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: день
       sg_gen: дня
@@ -13189,7 +13189,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В э́том краю́ мно́го ма́леньких дереве́нь.
         en_gb: There are many small villages in this region.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Врач е́здит по далёким деревня́м ка́ждую неде́лю.
         en_gb: The doctor drives round the far-off villages every week.
         en_alt:
@@ -13286,7 +13286,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В меню́ мно́го вку́сных десе́ртов.
         en_gb: There are many tasty desserts on the menu.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: десе́рт
       sg_gen: десе́рта
@@ -13694,7 +13694,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В гости́ной стоя́т два дива́на.
         en_gb: There are two sofas in the living room.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: дива́н
       sg_gen: дива́на
@@ -13739,7 +13739,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На фро́нте сража́лись не́сколько диви́зий.
         en_gb: Several divisions fought at the front.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "диета=diet":
     cefr_level: B1
     gender: f
@@ -13999,7 +13999,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он сде́лал мно́го добра́ лю́дям.
         en_gb: He did a lot of good for people.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: добро́
       sg_gen: добра́
@@ -14030,7 +14030,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Юри́ст прове́рил два догово́ра.
         en_gb: The lawyer checked two contracts.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: догово́р
       sg_gen: догово́ра
@@ -14132,7 +14132,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На конфере́нции прозвуча́ло мно́го докла́дов.
         en_gb: Many reports were given at the conference.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: докла́д
       sg_gen: докла́да
@@ -14293,7 +14293,7 @@ words:
         en_gb: Several posts were opened in the firm.
         en_alt:
           - Several posts were opened at the firm.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "долина=valley":
     cefr_level: B1
     gender: f
@@ -14339,7 +14339,7 @@ words:
     usage:
       - ru: Биле́т сто́ит пятьдеся́т до́лларов.
         en_gb: The ticket costs fifty dollars.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Курс до́ллара сего́дня вы́рос.
         en_gb: The dollar's exchange rate rose today.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
@@ -14872,7 +14872,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У сосе́дей две весёлые до́чки.
         en_gb: The neighbours have two cheerful daughters.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     facts:
       - kind: root
         text: "Дочь with a fond -ка that adds nothing but warmth — the same ending as in ру́чка. Parents say до́чка far more often than дочь."
@@ -14903,7 +14903,7 @@ words:
         en_gb: They have three grown-up daughters.
         en_alt:
           - They have three adult daughters.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Мать сши́ла дочеря́м одина́ковые пла́тья.
         en_gb: The mother sewed identical dresses for her daughters.
         inflect: { token: 3, case: dat, number: pl, rule: noun-dat-pl }
@@ -15061,7 +15061,7 @@ words:
         inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Он положи́л в пе́чку немно́го дров.
         en_gb: He put a little firewood into the stove.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
   "друг=friend":
     cefr_level: A1
     gender: m
@@ -15741,7 +15741,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лесу́ мы ви́дели не́сколько еже́й.
         en_gb: In the forest we saw several hedgehogs.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ёж
       sg_gen: ежа́
@@ -15873,7 +15873,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го жа́лоб от клие́нтов.
         en_gb: There are many complaints from customers in the book.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он пришёл с жа́лобой на сосе́да.
         en_gb: He came with a complaint about his neighbour.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -16077,7 +16077,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Под ду́бом лежа́ло мно́го желуде́й.
         en_gb: Many acorns lay under the oak.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: жёлудь
       sg_gen: жёлудя
@@ -16199,7 +16199,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В за́ле сиде́ло мно́го же́нщин.
         en_gb: Many women were sitting in the hall.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В э́том ба́ре же́нщинам предлага́ют пе́рвый напи́ток беспла́тно.
         en_gb: In this bar women are offered their first drink free.
         en_alt:
@@ -16294,7 +16294,7 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-fem-soft }
       - ru: В музе́е мно́го стари́нной жи́вописи.
         en_gb: There is a lot of old painting in the museum.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: жи́вопись
       sg_gen: жи́вописи
@@ -16353,7 +16353,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В зоопа́рке мно́го ди́ких живо́тных.
         en_gb: There are many wild animals in the zoo.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Мы помога́ем бездо́мным живо́тным.
         en_gb: We help homeless animals.
         en_alt:
@@ -16492,7 +16492,7 @@ words:
     usage:
       - ru: В э́том мя́се мно́го жи́ра.
         en_gb: There is a lot of fat in this meat.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Она́ жа́рит карто́шку на жи́ре.
         en_gb: She fries potatoes in fat.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -16634,7 +16634,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На пресс-конфере́нции бы́ло мно́го журнали́стов.
         en_gb: There were many journalists at the press conference.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "заболевание=disease":
     cefr_level: B2
     gender: n
@@ -16733,7 +16733,7 @@ words:
         en_gb: He has many cares around the house.
         en_alt:
           - He has a lot of cares around the house.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Де́ти тре́буют постоя́нной забо́ты.
         en_gb: Children require constant care.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -17087,7 +17087,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У кома́нды мно́го зада́ч.
         en_gb: The team has many tasks.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Профе́ссор посвяти́л ле́кцию сло́жным зада́чам.
         en_gb: The professor devoted the lecture to difficult problems.
         en_alt:
@@ -17179,7 +17179,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он нару́шил не́сколько зако́нов.
         en_gb: He broke several laws.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Хоро́ший гражда́нин сле́дует зако́нам.
         en_gb: A good citizen follows the laws.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
@@ -17299,7 +17299,7 @@ words:
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На собра́нии бы́ло не́сколько замести́телей.
         en_gb: There were several deputies at the meeting.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "замок=lock":
     cefr_level: B1
     gender: m
@@ -17355,7 +17355,7 @@ words:
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В Евро́пе мно́го ста́рых за́мков.
         en_gb: There are many old castles in Europe.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: за́мок
       sg_gen: за́мка
@@ -17566,7 +17566,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го ва́жных за́писей.
         en_gb: There are many important records in the book.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "заповедь=commandment":
     cefr_level: B2
     gender: f
@@ -17967,7 +17967,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В а́рмии мно́го разли́чных зва́ний.
         en_gb: In the army there are many different ranks.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "звезда=star":
     cefr_level: A2
     gender: f
@@ -18028,7 +18028,7 @@ words:
         en_gb: Many wild beasts live in the forest.
         en_alt:
           - There are many wild beasts living in the forest.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Хи́щный зверь спря́тался в куста́х.
         en_gb: The predatory beast hid in the bushes.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
@@ -18135,7 +18135,7 @@ words:
         en_gb: There were many strange sounds at night.
         en_alt:
           - at night there were many strange sounds
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Ко́мната наполня́лась стра́нными зву́ками.
         en_gb: The room was filling with strange sounds.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
@@ -18313,7 +18313,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В за́ле бы́ло мно́го зерка́л.
         en_gb: There were many mirrors in the hall.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: зе́ркало
       sg_gen: зе́ркала
@@ -18493,7 +18493,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У него́ мно́го поле́зных знако́мств.
         en_gb: He has many useful acquaintances.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "знамя=banner":
     cefr_level: B2
     gender: n
@@ -18684,7 +18684,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Го́род раздели́ли на не́сколько зон.
         en_gb: The city was divided into several zones.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "зоопарк=zoo":
     cefr_level: A2
     gender: m
@@ -18774,7 +18774,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В за́ле бы́ло мно́го зри́телей.
         en_gb: There were many spectators in the hall.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Фильм понра́вился зри́телям.
         en_gb: The film pleased the spectators.
         en_alt:
@@ -18908,7 +18908,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В магази́не мно́го интере́сных игр.
         en_gb: There are many interesting games in the shop.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он уча́ствует в игре́.
         en_gb: He is taking part in the game.
         inflect: { token: 4, case: pre, number: sg, rule: verb-gov-prep-v-pre }
@@ -19247,7 +19247,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В хра́ме мно́го ста́рых ико́н.
         en_gb: There are many old icons in the church.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ико́на
       sg_gen: ико́ны
@@ -19726,7 +19726,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: У дете́й мно́го ра́зных интере́сов.
         en_gb: Children have many different interests.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: интере́с
       sg_gen: интере́са
@@ -19818,7 +19818,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В статье́ мно́го но́вой информа́ции.
         en_gb: There is a lot of new information in the article.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
   "инъекция=injection":
     cefr_level: B2
     gender: f
@@ -20395,7 +20395,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В реке́ мно́го исто́чников воды́.
         en_gb: There are many sources of water in the river.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "Италия=Italy":
     cefr_level: A2
     gender: f
@@ -20544,7 +20544,7 @@ words:
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я купи́ла два йо́гурта.
         en_gb: I bought two yoghurts.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: йо́гурт
       sg_gen: йо́гурта
@@ -20683,7 +20683,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В шко́ле мно́го све́тлых кабине́тов.
         en_gb: There are many bright classrooms at the school.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В медици́нских кабине́тах всегда́ па́хнет лека́рствами.
         en_gb: Medical consulting rooms always smell of medicine.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -20857,7 +20857,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На берегу́ мно́го гла́дких камне́й.
         en_gb: There are many smooth stones on the shore.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ка́мень
       sg_gen: ка́мня
@@ -21016,7 +21016,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В кома́нде игра́ют не́сколько кана́дцев.
         en_gb: Several Canadians play in the team.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: кана́дец
       sg_gen: кана́дца
@@ -21049,7 +21049,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На конфере́нции бы́ло мно́го кана́док.
         en_gb: There were many Canadian women at the conference.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: кана́дка
       sg_gen: кана́дки
@@ -21224,7 +21224,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Доба́вь не́сколько ка́пель лимо́на.
         en_gb: Add a few drops of lemon.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На траве́ блестя́т ка́пли росы́.
         en_gb: Drops of dew glisten on the grass.
         inflect: { token: 4, case: nom, number: pl, rule: noun-nom-pl }
@@ -21245,7 +21245,7 @@ words:
         en_gb: There's a lot of cabbage in the soup.
         en_alt:
           - There is a lot of cabbage in the soup.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Пиро́г с капу́стой о́чень вку́сный.
         en_gb: The cabbage pie is very tasty.
         en_alt:
@@ -21312,7 +21312,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У ку́ртки два больши́х карма́на.
         en_gb: The jacket has two big pockets.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Ку́ртка с больши́ми карма́нами о́чень удо́бна в похо́де.
         en_gb: A jacket with big pockets is very handy on a hike.
         inflect: { token: 4, case: ins, number: pl, rule: noun-ins-pl }
@@ -21935,7 +21935,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Раздели́ лист на четы́ре квадра́та.
         en_gb: Divide the sheet into four squares.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: квадра́т
       sg_gen: квадра́та
@@ -21973,7 +21973,7 @@ words:
         en_gb: There are many empty flats in the building.
         en_alt:
           - There are many empty flats in the house.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В ма́леньких кварти́рах ка́ждый метр на счету́.
         en_gb: In small flats every metre counts.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -22002,7 +22002,7 @@ words:
     usage:
       - ru: В грани́те мно́го ква́рца.
         en_gb: There is a lot of quartz in granite.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Часы́ рабо́тают на криста́лле ква́рца.
         en_gb: The watch runs on a quartz crystal.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
@@ -22184,7 +22184,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Э́тот арбу́з ве́сит пять килогра́ммов.
         en_gb: This watermelon weighs five kilograms.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: К килогра́мму му́ки доба́вь са́хар.
         en_gb: Add sugar to the kilogram of flour.
         en_alt:
@@ -22218,7 +22218,7 @@ words:
         en_gb: Five kilometres remain to the city.
         en_alt:
           - There are five kilometres left to the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он пробежа́л оди́н киломе́тр.
         en_gb: He ran one kilometre.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -22331,7 +22331,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Рабо́чие приве́зли мно́го кирпиче́й.
         en_gb: The workers brought a lot of bricks.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: кирпи́ч
       sg_gen: кирпича́
@@ -22851,7 +22851,7 @@ words:
         en_gb: There are many new clients at the office.
         en_alt:
           - There are a lot of new clients in the office.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Банк рассыла́ет клие́нтам сообще́ния о ски́дках.
         en_gb: The bank sends its clients messages about discounts.
         en_alt:
@@ -22932,7 +22932,7 @@ words:
         en_gb: There are many night clubs in the city.
         en_alt:
           - There are a lot of nightclubs in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: клуб
       sg_gen: клу́ба
@@ -22964,7 +22964,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В па́рке мно́го кру́глых клумб.
         en_gb: There are many round flower beds in the park.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: клу́мба
       sg_gen: клу́мбы
@@ -23042,7 +23042,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На по́лке мно́го ста́рых книг.
         en_gb: There are many old books on the shelf.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Экза́мен придётся сдава́ть сра́зу по не́скольким кни́гам.
         en_gb: The exam will have to be taken across several books at once.
         en_alt:
@@ -23264,7 +23264,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: У ба́бушки две козы́.
         en_gb: Grandmother has two goats.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Мы пои́ли козу́ молоко́м.
         en_gb: We gave the goat milk to drink.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -23313,7 +23313,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В каю́те четы́ре у́зких ко́йки.
         en_gb: There are four narrow bunks in the cabin.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "кока-кола=Coca-Cola":
     cefr_level: A2
     gender: f
@@ -23357,7 +23357,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ вы́пила два кокте́йля.
         en_gb: She drank two cocktails.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: В э́том кокте́йле мно́го са́хара.
         en_gb: There's a lot of sugar in this cocktail.
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
@@ -23523,7 +23523,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Все четы́ре колеса́ но́вые.
         en_gb: All four wheels are new.
-        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 3, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: колесо́
       sg_gen: колеса́
@@ -23841,7 +23841,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На турни́ре во́семь кома́нд.
         en_gb: There are eight teams in the tournament.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: кома́нда
       sg_gen: кома́нды
@@ -24223,7 +24223,7 @@ words:
     usage:
       - ru: В кварти́ре три ко́мнаты.
         en_gb: There are three rooms in the flat.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Де́ти игра́ют в ко́мнате.
         en_gb: The children are playing in the room.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
@@ -24835,7 +24835,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В коню́шне мно́го коне́й.
         en_gb: There are many horses in the stable.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: конь
       sg_gen: коня́
@@ -25134,7 +25134,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ купи́ла две корзи́ны я́блок.
         en_gb: She bought two baskets of apples.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: корзи́на
       sg_gen: корзи́ны
@@ -25315,7 +25315,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: За столо́м сиде́ли два короля́.
         en_gb: Two kings sat at the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: коро́ль
       sg_gen: короля́
@@ -25345,7 +25345,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Больни́ца занима́ет три ко́рпуса.
         en_gb: The hospital occupies three buildings.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Общежи́тие нахо́дится в сосе́днем ко́рпусе.
         en_gb: The dormitory is in the neighbouring building.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -25416,7 +25416,7 @@ words:
         en_gb: There is a lot of make-up in the bag.
         en_alt:
           - There are a lot of cosmetics in the bag.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Э́та косме́тика без за́паха.
         en_gb: This make-up has no smell.
         en_alt:
@@ -25512,7 +25512,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го косте́й.
         en_gb: There are many bones in the soup.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: кость
       sg_gen: ко́сти
@@ -25783,7 +25783,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У сосе́дей три ко́шки.
         en_gb: The neighbours have three cats.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Ма́ленькая де́вочка налила́ ко́шкам молока́.
         en_gb: The little girl poured the cats some milk.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
@@ -26005,7 +26005,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На балу́ бы́ло мно́го краса́виц.
         en_gb: There were many beauties at the ball.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "краска=paint":
     cefr_level: A2
     gender: f
@@ -26202,7 +26202,7 @@ words:
         en_gb: Two armchairs stand in the room.
         en_alt:
           - There are two armchairs in the room.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: кре́сло
       sg_gen: кре́сла
@@ -26495,7 +26495,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На фе́рме мно́го кро́ликов.
         en_gb: There are many rabbits on the farm.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: кро́лик
       sg_gen: кро́лика
@@ -26559,7 +26559,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Я хочу́ два круасса́на.
         en_gb: I want two croissants.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Она́ купи́ла све́жих круасса́нов.
         en_gb: She bought some fresh croissants.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
@@ -26597,7 +26597,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Бегу́н сде́лал не́сколько круго́в.
         en_gb: The runner did several laps.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: круг
       sg_gen: кру́га
@@ -26646,7 +26646,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В шко́ле мно́го интере́сных кружко́в.
         en_gb: There are many interesting clubs at school.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "круиз=cruise":
     cefr_level: B2
     gender: m
@@ -26954,7 +26954,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В музе́е мно́го спорти́вных ку́бков.
         en_gb: There are many sports cups in the museum.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ку́бок
       sg_gen: ку́бка
@@ -27612,7 +27612,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Тури́сты разби́ли два ла́геря.
         en_gb: The tourists set up two camps.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: ла́герь
       sg_gen: ла́геря
@@ -27883,7 +27883,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го лапши́.
         en_gb: There are lots of noodles in the soup.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: В лапше́ мно́го со́ли.
         en_gb: There's a lot of salt in the noodles.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
@@ -28010,7 +28010,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Об э́тих гора́х есть мно́го леге́нд.
         en_gb: There are many legends about these mountains.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: леге́нда
       sg_gen: леге́нды
@@ -28872,10 +28872,10 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В буты́лке два ли́тра воды́.
         en_gb: There are two litres of water in the bottle.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Маши́не ну́жно ещё де́сять ли́тров бензи́на.
         en_gb: The car needs another ten litres of petrol.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: литр
       sg_gen: ли́тра
@@ -28997,7 +28997,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го интере́сных ли́чностей.
         en_gb: There are many interesting personalities in the book.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "лоб=forehead":
     cefr_level: A2
     gender: m
@@ -29123,7 +29123,7 @@ words:
         en_gb: Add two spoons of sugar.
         en_alt:
           - Add two spoonfuls of sugar.
-        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 3, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Суп удо́бнее есть деревя́нными ло́жками.
         en_gb: It is more convenient to eat soup with wooden spoons.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
@@ -29790,7 +29790,7 @@ words:
     usage:
       - ru: Доба́вь в сала́т немно́го майоне́за.
         en_gb: Add a little mayonnaise to the salad.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Я не люблю́ майоне́з.
         en_gb: I don't like mayonnaise.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -30331,7 +30331,7 @@ words:
         en_gb: There are lots of olives in the salad.
         en_alt:
           - There are lots of black olives in the salad.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Сала́т с масли́нами о́чень вку́сный.
         en_gb: The salad with olives is very tasty.
         inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
@@ -30578,7 +30578,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Журнали́ст собра́л мно́го материа́лов.
         en_gb: The journalist gathered a lot of material.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Учи́тель объясни́л но́вый материа́л на уро́ке.
         en_gb: The teacher explained the new material in the lesson.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -30754,7 +30754,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: За не́сколько мгнове́ний всё измени́лось.
         en_gb: In a few instants everything changed.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
   "мебель=furniture":
     cefr_level: B1
     gender: f
@@ -30882,7 +30882,7 @@ words:
         inflect: { token: 2, case: acc, number: pl, rule: noun-acc-pl }
       - ru: В апте́ке мно́го ра́зных медикаме́нтов.
         en_gb: There are many different medications in the pharmacy.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: медикаме́нт
       sg_gen: медикаме́нта
@@ -31016,7 +31016,7 @@ words:
         en_gb: Many Mexicans danced at the festival.
         en_alt:
           - A lot of Mexicans danced at the festival.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: мексика́нец
       sg_gen: мексика́нца
@@ -31053,7 +31053,7 @@ words:
         en_gb: Several Mexican girls study at the school.
         en_alt:
           - Several Mexican women study at the school.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: мексика́нка
       sg_gen: мексика́нки
@@ -31086,7 +31086,7 @@ words:
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На фестива́ле мно́го мелома́нов.
         en_gb: There are many music lovers at the festival.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: мелома́н
       sg_gen: мелома́на
@@ -31279,7 +31279,7 @@ words:
     usage:
       - ru: В году́ двена́дцать ме́сяцев.
         en_gb: There are twelve months in a year.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Она́ не была́ до́ма це́лый ме́сяц.
         en_gb: She was not at home for a whole month.
         en_alt:
@@ -31385,10 +31385,10 @@ words:
     usage:
       - ru: До магази́на сто ме́тров.
         en_gb: It is a hundred metres to the shop.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Ко́мната длино́й шесть ме́тров.
         en_gb: The room is six metres long.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Отре́жьте оди́н метр тка́ни.
         en_gb: Cut off one metre of fabric.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -31498,7 +31498,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В маши́не мно́го сло́жных механи́змов.
         en_gb: There are many complex mechanisms in the machine.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: механи́зм
       sg_gen: механи́зма
@@ -31835,7 +31835,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В го́роде живёт не́сколько миллионе́ров.
         en_gb: Several millionaires live in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: миллионе́р
       sg_gen: миллионе́ра
@@ -31896,7 +31896,7 @@ words:
     usage:
       - ru: В музе́е мно́го краси́вых минера́лов.
         en_gb: There are many beautiful minerals in the museum.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Э́тот ка́мень — ре́дкий минера́л.
         en_gb: This stone is a rare mineral.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
@@ -32061,7 +32061,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Уро́к дли́тся со́рок мину́т.
         en_gb: The lesson lasts forty minutes.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Че́рез мину́ту по́езд отправля́ется.
         en_gb: The train leaves in a minute.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
@@ -32233,7 +32233,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В пала́те три но́вых младе́нца.
         en_gb: There are three new babies in the ward.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: младе́нец
       sg_gen: младе́нца
@@ -32381,7 +32381,7 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На кла́дбище мно́го ста́рых моги́л.
         en_gb: There are many old graves in the cemetery.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "мода=fashion":
     cefr_level: B1
     gender: f
@@ -33073,7 +33073,7 @@ words:
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: В э́том рестора́не мно́го морепроду́ктов.
         en_gb: There's a lot of seafood in this restaurant.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Сала́т с морепроду́ктами о́чень вку́сный.
         en_gb: The seafood salad is very tasty.
         inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
@@ -33111,7 +33111,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го морко́ви.
         en_gb: There are a lot of carrots in the soup.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: морко́вь
       sg_gen: морко́ви
@@ -33389,7 +33389,7 @@ words:
         en_gb: Two motorcycles were driving down the road.
         en_alt:
           - Two motorcycles were riding along the road.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: мотоци́кл
       sg_gen: мотоци́кла
@@ -33537,7 +33537,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В о́череди бы́ло мно́го мужчи́н.
         en_gb: There were many men in the queue.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В авто́бусе де́ти уступа́ют ме́сто пожилы́м мужчи́нам.
         en_gb: On the bus the children give up their seats to elderly men.
         inflect: { token: 7, case: dat, number: pl, rule: noun-dat-pl }
@@ -33833,7 +33833,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ле́том в до́ме мно́го мух.
         en_gb: In summer there are many flies in the house.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: му́ха
       sg_gen: му́хи
@@ -33966,7 +33966,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В по́ле мно́го мыше́й.
         en_gb: There are many mice in the field.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: мышь
       sg_gen: мы́ши
@@ -34303,7 +34303,7 @@ words:
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
       - ru: Мы храни́м немно́го нали́чных до́ма.
         en_gb: We keep a little cash at home.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       pl_nom: нали́чные
       pl_gen: нали́чных
@@ -34440,7 +34440,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В меню́ мно́го разли́чных напи́тков.
         en_gb: There are many different drinks on the menu.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: напи́ток
       sg_gen: напи́тка
@@ -34544,7 +34544,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На пло́щади бы́ло мно́го наро́да.
         en_gb: There were many people in the square.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: наро́д
       sg_gen: наро́да
@@ -34669,7 +34669,7 @@ words:
         en_gb: Many insects live in the garden.
         en_alt:
           - There are many insects living in the garden.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: насеко́мое
       sg_gen: насеко́мого
@@ -35221,7 +35221,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Мы не ви́делись две неде́ли.
         en_gb: We have not seen each other for two weeks.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: На про́шлой неде́ле шёл дождь.
         en_gb: It rained last week.
         en_alt:
@@ -35343,7 +35343,7 @@ words:
         en_gb: Many Germans live in the city.
         en_alt:
           - There are many Germans living in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Мой сосе́д — пожило́й не́мец.
         en_gb: My neighbour is an elderly German.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
@@ -36814,7 +36814,7 @@ words:
         en_gb: There are many strange objects in the photo.
         en_alt:
           - There are many strange objects in the photograph.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "объём=volume":
     cefr_level: B1
     gender: m
@@ -36881,7 +36881,7 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Учи́тель дал не́сколько объясне́ний.
         en_gb: The teacher gave several explanations.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "объятия=embrace":
     cefr_level: B2
     animacy: i
@@ -36963,7 +36963,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На карти́не худо́жник нарисова́л не́сколько ова́лов.
         en_gb: The artist drew several ovals in the picture.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: ова́л
       sg_gen: ова́ла
@@ -37021,7 +37021,7 @@ words:
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Я ем мно́го овоще́й.
         en_gb: I eat a lot of vegetables.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В су́пе пла́вает оди́н о́вощ.
         en_gb: One vegetable is floating in the soup.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
@@ -37222,7 +37222,7 @@ words:
     usage:
       - ru: В сала́те мно́го огурцо́в.
         en_gb: There are a lot of cucumbers in the salad.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Я наре́зала све́жий огуре́ц.
         en_gb: I sliced a fresh cucumber.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -37292,7 +37292,7 @@ words:
         inflect: { token: 2, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На крова́ти лежа́т два одея́ла.
         en_gb: There are two blankets on the bed.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: одея́ло
       sg_gen: одея́ла
@@ -37453,7 +37453,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Вокру́г мно́го лесны́х озёр.
         en_gb: There are many forest lakes around.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На ти́хих озёрах хорошо́ лови́тся ры́ба.
         en_gb: On the quiet lakes the fishing is good.
         en_alt:
@@ -37584,7 +37584,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В ру́сском языке́ мно́го паде́жных оконча́ний.
         en_gb: In Russian there are many case endings.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
   "окоп=trench":
     cefr_level: B2
     gender: m
@@ -37850,7 +37850,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В на́шей кома́нде мно́го оптими́стов.
         en_gb: There are many optimists on our team.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: оптими́ст
       sg_gen: оптими́ста
@@ -38543,7 +38543,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В океа́не мно́го ма́леньких острово́в.
         en_gb: There are many small islands in the ocean.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На далёких острова́х живёт немно́го люде́й.
         en_gb: Few people live on the distant islands.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -38696,7 +38696,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В магази́не мно́го ра́зных отде́лов.
         en_gb: There are many different departments in the shop.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "отделение=department":
     cefr_level: B1
     gender: n
@@ -38926,7 +38926,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я отпра́вил две откры́тки друзья́м.
         en_gb: I sent two postcards to my friends.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: откры́тка
       sg_gen: откры́тки
@@ -39108,7 +39108,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В лесу́ дви́гались два отря́да.
         en_gb: Two detachments were moving in the forest.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "отсутствие=absence":
     cefr_level: B1
     gender: n
@@ -39264,7 +39264,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Нача́льник тре́бует не́сколько отчётов.
         en_gb: The boss demands several reports.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "отчим=stepfather":
     cefr_level: B2
     gender: m
@@ -39317,7 +39317,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том зда́нии мно́го о́фисов.
         en_gb: There are many offices in this building.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В совреме́нных о́фисах всё ре́же ви́дишь бума́ги.
         en_gb: In modern offices you see paper less and less.
         en_alt:
@@ -39394,7 +39394,7 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В кафе́ рабо́тают два официа́нта.
         en_gb: Two waiters work in the cafe.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: В хоро́ших места́х госте́й у́чат оставля́ть официа́нтам чаевы́е.
         en_gb: In good places guests are taught to leave the waiters a tip.
         inflect: { token: 7, case: dat, number: pl, rule: noun-dat-pl }
@@ -39569,7 +39569,7 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Но́чью в магази́не дежу́рят два охра́нника.
         en_gb: Two security guards are on duty in the shop at night.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: охра́нник
       sg_gen: охра́нника
@@ -39706,7 +39706,7 @@ words:
     usage:
       - ru: На́ша кома́нда набрала́ де́сять очко́в.
         en_gb: Our team scored ten points.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он вы́играл всего́ на одно́ очко́.
         en_gb: He won by just one point.
         en_alt:
@@ -39890,7 +39890,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В больни́це мно́го све́тлых пала́т.
         en_gb: There are many bright wards in the hospital.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "палатка=tent":
     cefr_level: A2
     gender: f
@@ -39955,7 +39955,7 @@ words:
         en_gb: There are ten fingers on the hands.
         en_alt:
           - There are ten fingers on two hands.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Пиани́ст едва́ каса́лся кла́виш то́нкими па́льцами.
         en_gb: The pianist barely touched the keys with his slender fingers.
         inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
@@ -40108,7 +40108,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В го́роде мно́го ста́рых па́мятников.
         en_gb: There are many old monuments in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: па́мятник
       sg_gen: па́мятника
@@ -40284,7 +40284,7 @@ words:
         en_gb: Two couples sat at the table.
         en_alt:
           - Two couples were sitting at the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: па́ра
       sg_gen: па́ры
@@ -40389,7 +40389,7 @@ words:
         en_gb: There are two large parks near the house.
         en_alt:
           - There are two big parks next to the house.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: В городски́х па́рках о́сенью па́хнет опа́вшими ли́стьями.
         en_gb: In the city parks it smells of fallen leaves in autumn.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -40510,7 +40510,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У при́стани стоя́ли два парохо́да.
         en_gb: Two steamships stood at the pier.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "партия=party":
     cefr_level: B1
     gender: f
@@ -40544,7 +40544,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В вы́борах уча́ствует мно́го па́ртий.
         en_gb: Many parties take part in the elections.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "партнёр=partner":
     cefr_level: B1
     gender: m
@@ -40699,7 +40699,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На лугу́ рабо́тают два пастуха́.
         en_gb: Two shepherds work in the meadow.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: пасту́х
       sg_gen: пастуха́
@@ -40744,7 +40744,7 @@ words:
         en_gb: Few cartridges remained in the box.
         en_alt:
           - There were few cartridges left in the box.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он пересчита́л все патро́ны.
         en_gb: He counted all the cartridges.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
@@ -40803,7 +40803,7 @@ words:
         en_gb: Two spiders sat in the corner.
         en_alt:
           - Two spiders were sitting in the corner.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: пау́к
       sg_gen: паука́
@@ -40836,7 +40836,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В о́череди жда́ли не́сколько пацие́нтов.
         en_gb: Several patients waited in the queue.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: пацие́нт
       sg_gen: пацие́нта
@@ -40870,7 +40870,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он купи́л две па́чки пече́нья.
         en_gb: He bought two packets of biscuits.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: па́чка
       sg_gen: па́чки
@@ -40970,7 +40970,7 @@ words:
         inflect: { token: 1, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В па́рке мно́го пенсионе́ров.
         en_gb: There are many pensioners in the park.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: пенсионе́р
       sg_gen: пенсионе́ра
@@ -41147,7 +41147,7 @@ words:
         en_gb: There are many new broadcasts on television.
         en_alt:
           - There are many new programmes on television.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "перелом=fracture":
     cefr_level: B2
     gender: m
@@ -41316,7 +41316,7 @@ words:
         en_gb: There are many underground crossings in the city.
         en_alt:
           - There are many underpasses in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: перехо́д
       sg_gen: перехо́да
@@ -41349,7 +41349,7 @@ words:
     usage:
       - ru: Доба́вь немно́го пе́рца в сала́т.
         en_gb: Add a little pepper to the salad.
-        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 3, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: На столе́ стои́т чёрный пе́рец.
         en_gb: There is black pepper on the table.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
@@ -41402,7 +41402,7 @@ words:
         en_gb: History is divided into several periods.
         en_alt:
           - They divide history into several periods.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "перо=feather":
     cefr_level: B1
     gender: n
@@ -41545,7 +41545,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У сосе́да два злы́х пса.
         en_gb: The neighbour has two angry dogs.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "песня=song":
     cefr_level: A2
     gender: f
@@ -41658,7 +41658,7 @@ words:
     usage:
       - ru: Доба́вь в суп немно́го петру́шки.
         en_gb: Add a little parsley to the soup.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Она́ помы́ла петру́шку.
         en_gb: She washed the parsley.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -41699,7 +41699,7 @@ words:
         en_gb: Two roosters walk around the yard.
         en_alt:
           - Two roosters are walking in the yard.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: пету́х
       sg_gen: петуха́
@@ -41846,7 +41846,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В гора́х мно́го глубо́ких пеще́р.
         en_gb: There are many deep caves in the mountains.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "пианист=pianist":
     cefr_level: B1
     gender: m
@@ -41930,7 +41930,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В шкафу́ виси́т не́сколько пиджако́в.
         en_gb: Several blazers hang in the wardrobe.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: пиджа́к
       sg_gen: пиджака́
@@ -42145,7 +42145,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ купи́ла де́сять пирожко́в.
         en_gb: She bought ten pies.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: пирожо́к
       sg_gen: пирожка́
@@ -42228,7 +42228,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ лежа́ли два пистоле́та.
         en_gb: Two pistols lay on the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: пистоле́т
       sg_gen: пистоле́та
@@ -42466,7 +42466,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Мы обсуди́ли не́сколько пла́нов.
         en_gb: We discussed several plans.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он охо́тно дели́лся с на́ми свои́ми пла́нами.
         en_gb: He readily shared his plans with us.
         inflect: { token: 7, case: ins, number: pl, rule: noun-ins-pl }
@@ -42507,7 +42507,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вокру́г Со́лнца дви́жется во́семь плане́т.
         en_gb: Eight planets move around the Sun.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "планшет=tablet":
     cefr_level: B1
     gender: m
@@ -42603,7 +42603,7 @@ words:
         en_gb: Two headscarves are in the bag.
         en_alt:
           - There are two headscarves in the bag.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: плато́к
       sg_gen: платка́
@@ -42636,7 +42636,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В шкафу́ виси́т мно́го пла́тьев.
         en_gb: Many dresses hang in the wardrobe.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: пла́тье
       sg_gen: пла́тья
@@ -42670,7 +42670,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ве́шалке висе́ли два плаща́.
         en_gb: Two raincoats hung on the rack.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: плащ
       sg_gen: плаща́
@@ -42740,7 +42740,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У меня́ два племя́нника.
         en_gb: I have two nephews.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: племя́нник
       sg_gen: племя́нника
@@ -42973,7 +42973,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Мы шли че́рез не́сколько площаде́й.
         en_gb: We walked through several squares.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На центра́льных площадя́х ста́вят рожде́ственские ёлки.
         en_gb: On the central squares they put up Christmas trees.
         inflect: { token: 3, case: pre, number: pl, rule: noun-pre-pl }
@@ -43021,7 +43021,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Два плю́са даю́т хоро́ший результа́т.
         en_gb: Two pluses give a good result.
-        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 2, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Поста́вь плюс ме́жду чи́слами.
         en_gb: Put a plus between the numbers.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
@@ -43048,7 +43048,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На э́том куро́рте мно́го пля́жей.
         en_gb: There are many beaches at this resort.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: пляж
       sg_gen: пля́жа
@@ -43127,7 +43127,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В рестора́не рабо́тают три по́вара.
         en_gb: Three cooks work in the restaurant.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Го́сти до́лго аплоди́ровали повара́м за у́жин.
         en_gb: The guests spent a long time applauding the cooks for the dinner.
         inflect: { token: 4, case: dat, number: pl, rule: noun-dat-pl }
@@ -43236,7 +43236,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге не́сколько коро́тких повесте́й.
         en_gb: There are several short tales in the book.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: по́весть
       sg_gen: по́вести
@@ -43323,7 +43323,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На доро́ге мно́го о́стрых поворо́тов.
         en_gb: There are many sharp turns on the road.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "повышение=increase":
     cefr_level: B1
     gender: n
@@ -43641,7 +43641,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ стоя́ли два подно́са.
         en_gb: There were two trays on the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: подно́с
       sg_gen: подно́са
@@ -43936,7 +43936,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На крова́ти лежа́т две поду́шки.
         en_gb: There are two pillows on the bed.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: поду́шка
       sg_gen: поду́шки
@@ -43982,7 +43982,7 @@ words:
         en_alt:
           - Our building has four entrances.
           - There are four entrances in our house.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Свет в подъе́зде не рабо́тает.
         en_gb: The light in the entrance does not work.
         en_alt:
@@ -44047,7 +44047,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На вокза́ле мно́го поездо́в.
         en_gb: There are many trains at the station.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В ночны́х поезда́х лу́чше спать на ни́жней по́лке.
         en_gb: On night trains it is better to sleep on the lower bunk.
         en_alt:
@@ -44299,7 +44299,7 @@ words:
         en_gb: The singer has many admirers.
         en_alt:
           - The singer has a lot of admirers.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Молодо́й покло́нник присла́л цветы́.
         en_gb: A young admirer sent flowers.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
@@ -44724,7 +44724,7 @@ words:
         inflect: { token: 5, case: loc, number: sg, rule: noun-locative }
       - ru: На пара́де бы́ло не́сколько полко́в.
         en_gb: There were several regiments at the parade.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "полка=shelf":
     cefr_level: B1
     gender: f
@@ -44815,7 +44815,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Раздели́ я́блоко на две полови́ны.
         en_gb: Divide the apple into two halves.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: полови́на
       sg_gen: полови́ны
@@ -44880,7 +44880,7 @@ words:
     usage:
       - ru: На фла́ге три цветны́е полосы́.
         en_gb: There are three coloured stripes on the flag.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: По стене́ идёт кра́сная полоса́.
         en_gb: A red stripe runs along the wall.
         en_alt:
@@ -44968,7 +44968,7 @@ words:
         en_alt:
           - Sport is of great benefit.
           - There is much benefit from sport.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Э́тот сове́т пошёл мне на по́льзу.
         en_gb: This advice was to my benefit.
         en_alt:
@@ -45122,7 +45122,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У дире́ктора два помо́щника.
         en_gb: The director has two assistants.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: помо́щник
       sg_gen: помо́щника
@@ -45338,7 +45338,7 @@ words:
         en_gb: Two parrots are sitting in the cage.
         en_alt:
           - Two parrots sit in the cage.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: попуга́й
       sg_gen: попуга́я
@@ -45573,7 +45573,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В музе́е мно́го портре́тов.
         en_gb: There are many portraits in the museum.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "портфель=briefcase":
     cefr_level: B1
     gender: m
@@ -45763,7 +45763,7 @@ words:
     usage:
       - ru: Ба́бушка зна́ет мно́го посло́виц.
         en_gb: Grandmother knows many proverbs.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Э́та посло́вица о́чень му́драя.
         en_gb: This proverb is very wise.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
@@ -46666,7 +46666,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В кале́ндаре мно́го пра́здников.
         en_gb: There are many holidays in the calendar.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: По больши́м пра́здникам ба́бушка печёт пиро́г.
         en_gb: On the big holidays grandma bakes a pie.
         en_alt:
@@ -46789,7 +46789,7 @@ words:
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Прочита́й пе́рвые два предложе́ния.
         en_gb: Read the first two sentences.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Он отказа́лся от предложе́ния.
         en_gb: He refused the offer.
         inflect: { token: 4, case: gen, number: sg, rule: verb-gov-prep-ot-gen }
@@ -46837,7 +46837,7 @@ words:
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На столе́ лежа́ло мно́го предме́тов.
         en_gb: Many objects lay on the table.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Учи́тель рассказа́л о но́вом предме́те.
         en_gb: The teacher spoke about a new subject.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -46905,7 +46905,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В го́роде закры́ли не́сколько предприя́тий.
         en_gb: Several enterprises were closed in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "председатель=chairman":
     cefr_level: B1
     gender: m
@@ -46973,7 +46973,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На встре́че бы́ло мно́го предста́вителей.
         en_gb: There were many representatives at the meeting.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "представление=idea":
     cefr_level: B1
     gender: n
@@ -47115,7 +47115,7 @@ words:
         en_gb: There are many different preparations in the pharmacy.
         en_alt:
           - There are many different medicines in the pharmacy.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "преподаватель=lecturer":
     cefr_level: B1
     gender: m
@@ -47273,7 +47273,7 @@ words:
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В лаборато́рии мно́го то́чных прибо́ров.
         en_gb: There are many precise devices in the laboratory.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "прибыль=profit":
     cefr_level: B2
     gender: f
@@ -47473,7 +47473,7 @@ words:
         inflect: { token: 4, case: pre, number: pl, rule: noun-pre-pl }
       - ru: У боле́зни мно́го ра́зных при́знаков.
         en_gb: The illness has many different signs.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "признание=recognition":
     cefr_level: B1
     gender: n
@@ -47541,7 +47541,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Генера́л отда́л не́сколько прика́зов.
         en_gb: The general gave several orders.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "приключение=adventure":
     cefr_level: B1
     gender: n
@@ -47675,7 +47675,7 @@ words:
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го поле́зных приме́ров.
         en_gb: There are many useful examples in the book.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Э́та кни́га явля́ется приме́ром.
         en_gb: This book is an example.
         en_alt:
@@ -47713,7 +47713,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В дере́вне зна́ют мно́го наро́дных приме́т.
         en_gb: In the village they know many folk omens.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
   "принц=prince":
     cefr_level: B1
     gender: m
@@ -47980,7 +47980,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У нас мно́го пробле́м на рабо́те.
         en_gb: We have many problems at work.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Ме́сяцами она́ была́ поглощена́ семе́йными пробле́мами.
         en_gb: For months she was absorbed in family problems.
         inflect: { token: 6, case: ins, number: pl, rule: noun-ins-pl }
@@ -48219,7 +48219,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В магази́не рабо́тают два продавца́.
         en_gb: Two salespeople work in the shop.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: продаве́ц
       sg_gen: продавца́
@@ -48671,7 +48671,7 @@ words:
     usage:
       - ru: В ко́мнате мно́го свобо́дного простра́нства.
         en_gb: There is a lot of free space in the room.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Корабли́ лета́ют в косми́ческом простра́нстве.
         en_gb: The ships fly in outer space.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
@@ -48813,7 +48813,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Поли́ция соста́вила не́сколько протоко́лов.
         en_gb: The police drew up several reports.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "профессия=profession":
     cefr_level: B1
     gender: f
@@ -48941,7 +48941,7 @@ words:
     usage:
       - ru: Це́ны вы́росли на де́сять проце́нтов.
         en_gb: Prices rose by ten per cent.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Банк предлага́ет высо́кий проце́нт.
         en_gb: The bank offers a high rate of interest.
         en_alt:
@@ -49250,7 +49250,7 @@ words:
         en_gb: The concert gathered a large audience.
         en_alt:
           - The concert drew a large audience.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
   "пуговица=button":
     cefr_level: B1
     gender: f
@@ -49385,7 +49385,7 @@ words:
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В спи́ске бы́ло де́сять пу́нктов.
         en_gb: There were ten points on the list.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "пустота=emptiness":
     cefr_level: B2
     gender: f
@@ -49680,7 +49680,7 @@ words:
     usage:
       - ru: На по́лке мно́го пы́ли.
         en_gb: There is a lot of dust on the shelf.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Маши́на подняла́ ту́чу пы́ли.
         en_gb: The car raised a cloud of dust.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -49706,7 +49706,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Весно́й в во́здухе мно́го пыльцы́.
         en_gb: In spring there is a lot of pollen in the air.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: пыльца́
       sg_gen: пыльцы́
@@ -49971,7 +49971,7 @@ words:
         en_gb: Many workers work on the building site.
         en_alt:
           - Many workers work at the building site.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "равнина=plain":
     cefr_level: B2
     gender: f
@@ -50099,7 +50099,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он спроси́л не́сколько раз.
         en_gb: He asked several times.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: раз
       sg_gen: ра́за
@@ -50518,7 +50518,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В го́роде мно́го но́вых райо́нов.
         en_gb: There are many new districts in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "ракета=rocket":
     cefr_level: B1
     gender: f
@@ -50540,7 +50540,7 @@ words:
         en_gb: The enemy fired several rockets.
         en_alt:
           - The enemy launched several rockets.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: раке́та
       sg_gen: раке́ты
@@ -50691,7 +50691,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Бы́ло и́здано не́сколько но́вых распоряже́ний.
         en_gb: Several new orders were issued.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "рассвет=dawn":
     cefr_level: B1
     gender: m
@@ -50910,7 +50910,7 @@ words:
         inflect: { token: 3, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В на́шем до́ме мно́го расте́ний.
         en_gb: There are many plants in our house.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: расте́ние
       sg_gen: расте́ния
@@ -51339,7 +51339,7 @@ words:
         en_gb: Several regimes have succeeded one another in the country.
         en_alt:
           - The country has been through several regimes.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "режиссёр=director":
     cefr_level: B1
     gender: m
@@ -51514,7 +51514,7 @@ words:
     usage:
       - ru: В ми́ре мно́го разли́чных рели́гий.
         en_gb: There are many different religions in the world.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он изуча́ет исто́рию рели́гии.
         en_gb: He studies the history of religion.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
@@ -51705,7 +51705,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В стране́ мно́го автоно́мных респу́блик.
         en_gb: There are many autonomous republics in the country.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "ресторан=restaurant":
     cefr_level: A1
     gender: m
@@ -51728,7 +51728,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том го́роде мно́го рестора́нов.
         en_gb: There are many restaurants in this city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: В дороги́х рестора́нах ча́сто игра́ет жива́я му́зыка.
         en_gb: In expensive restaurants live music often plays.
         en_alt:
@@ -51800,7 +51800,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В кни́ге мно́го вку́сных реце́птов.
         en_gb: There are many tasty recipes in the book.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: реце́пт
       sg_gen: реце́пта
@@ -52470,7 +52470,7 @@ words:
         en_gb: Many roses grow in the garden.
         en_alt:
           - There are many roses in the garden.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Ва́за с ро́зами стои́т на столе́.
         en_gb: A vase with roses stands on the table.
         inflect: { token: 3, case: ins, number: pl, rule: noun-ins-pl }
@@ -52566,7 +52566,7 @@ words:
         inflect: { token: 5, case: ins, number: sg, rule: noun-fem-soft }
       - ru: Актри́са испо́лнила мно́го ро́лей.
         en_gb: The actress performed many roles.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "роман=novel":
     cefr_level: B1
     gender: m
@@ -52589,7 +52589,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Писа́тель написа́л де́сять рома́нов.
         en_gb: The writer wrote ten novels.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: рома́н
       sg_gen: рома́на
@@ -52836,7 +52836,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В полку́ бы́ло не́сколько рот.
         en_gb: There were several companies in the regiment.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "рубаха=shirt":
     cefr_level: B1
     gender: f
@@ -52856,7 +52856,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В шкафу́ виси́т мно́го руба́х.
         en_gb: Many shirts hang in the wardrobe.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: руба́ха
       sg_gen: руба́хи
@@ -52893,7 +52893,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он купи́л две но́вые руба́шки.
         en_gb: He bought two new shirts.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: руба́шка
       sg_gen: руба́шки
@@ -52960,7 +52960,7 @@ words:
     usage:
       - ru: Э́то сто́ит сто рубле́й.
         en_gb: This costs a hundred roubles.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: У меня́ оста́лся оди́н рубль.
         en_gb: I have one rouble left.
         inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
@@ -53353,7 +53353,7 @@ words:
         en_gb: Three pens lie on the table.
         en_alt:
           - There are three pens on the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: ру́чка
       sg_gen: ру́чки
@@ -53392,7 +53392,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Рыбаки́ пойма́ли мно́го рыб.
         en_gb: The fishermen caught many fish.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Зимо́й ры́бам подо льдом не хвата́ет во́здуха.
         en_gb: In winter the fish under the ice run short of air.
         en_alt:
@@ -53675,7 +53675,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Вокру́г до́ма мно́го фрукто́вых садо́в.
         en_gb: There are many orchards around the house.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: По ста́рым сада́м лю́бят броди́ть ры́жие ко́ты.
         en_gb: Ginger cats love to wander through the old gardens.
         en_alt:
@@ -53788,7 +53788,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В орке́стре два саксофо́на.
         en_gb: There are two saxophones in the orchestra.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: саксофо́н
       sg_gen: саксофо́на
@@ -53953,7 +53953,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В аэропорту́ мно́го самолётов.
         en_gb: There are many aeroplanes at the airport.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: самолёт
       sg_gen: самолёта
@@ -54249,7 +54249,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го свёклы.
         en_gb: There's a lot of beetroot in the soup.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Э́тот сала́т со свёклой.
         en_gb: This salad has beetroot in it.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -54339,7 +54339,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На то́рте мно́го свече́й.
         en_gb: There are many candles on the cake.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: свеча́
       sg_gen: свечи́
@@ -54406,7 +54406,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: На суде́ вы́ступили не́сколько свиде́телей.
         en_gb: Several witnesses spoke at the trial.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: свиде́тель
       sg_gen: свиде́теля
@@ -54514,7 +54514,7 @@ words:
         en_alt:
           - There are a lot of warm jumpers in the wardrobe.
           - There are many warm jumpers in the cupboard.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: сви́тер
       sg_gen: сви́тера
@@ -54701,7 +54701,7 @@ words:
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В хра́ме служи́ли два свяще́нника.
         en_gb: Two priests served in the temple.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: свяще́нник
       sg_gen: свяще́нника
@@ -54872,7 +54872,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В приёмной рабо́тают два секретаря́.
         en_gb: Two secretaries work in the reception.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "секунда=second":
     cefr_level: A2
     gender: f
@@ -54905,7 +54905,7 @@ words:
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Че́рез не́сколько секу́нд по́езд тро́нулся.
         en_gb: After a few seconds the train started moving.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
   "семья=family":
     cefr_level: A1
     gender: f
@@ -54930,7 +54930,7 @@ words:
         en_gb: Three families live in our house.
         en_alt:
           - There are three families in our house.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: семья́
       sg_gen: семьи́
@@ -55001,7 +55001,7 @@ words:
         en_gb: There is a lot of fresh hay in the barn.
         en_alt:
           - There is a lot of fresh hay in the shed.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Ло́шадь накорми́ли се́ном.
         en_gb: The horse was fed with hay.
         en_alt:
@@ -55112,7 +55112,7 @@ words:
         en_gb: Two sergeants stood on the parade ground.
         en_alt:
           - Two sergeants were standing on the parade ground.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: сержа́нт
       sg_gen: сержа́нта
@@ -55188,7 +55188,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У меня́ две мла́дшие сестры́.
         en_gb: I have two younger sisters.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Брат ре́дко зави́дует свои́м сёстрам.
         en_gb: The brother rarely envies his sisters.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
@@ -55466,7 +55466,7 @@ words:
     usage:
       - ru: У него́ мно́го си́лы.
         en_gb: He has a lot of strength.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Спортсме́н горди́тся свое́й си́лой.
         en_gb: The athlete is proud of his strength.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -55924,7 +55924,7 @@ words:
         en_gb: After this there were many scandals.
         en_alt:
           - After that there were a lot of scandals.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "скатерть=tablecloth":
     cefr_level: B1
     gender: f
@@ -56538,7 +56538,7 @@ words:
         en_gb: There are many dictionaries in the library.
         en_alt:
           - There are a lot of dictionaries in the library.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: слова́рь
       sg_gen: словаря́
@@ -56711,7 +56711,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В до́ме рабо́тало мно́го слуг.
         en_gb: Many servants worked in the house.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "служба=service":
     cefr_level: B1
     gender: f
@@ -57167,7 +57167,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На у́лице игра́ют две соба́ки.
         en_gb: Two dogs are playing in the street.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Ве́чером я дала́ бездо́мным соба́кам немно́го еды́.
         en_gb: In the evening I gave the stray dogs some food.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
@@ -57376,7 +57376,7 @@ words:
         en_gb: Many owls live in the forest.
         en_alt:
           - There are many owls in the forest.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: сова́
       sg_gen: совы́
@@ -57496,7 +57496,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: У мини́стра мно́го сове́тников.
         en_gb: The minister has many advisers.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "совещание=conference":
     cefr_level: B1
     gender: n
@@ -57756,7 +57756,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В магази́не мно́го ра́зных со́ков.
         en_gb: There are many different juices in the shop.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: сок
       sg_gen: со́ка
@@ -57900,7 +57900,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе сли́шком мно́го со́ли.
         en_gb: There is too much salt in the soup.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Посы́пь карто́шку со́лью.
         en_gb: Sprinkle the potatoes with salt.
         inflect: { token: 3, case: ins, number: sg, rule: noun-fem-soft }
@@ -58019,7 +58019,7 @@ words:
         inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
       - ru: У меня́ есть не́сколько соображе́ний.
         en_gb: I have a few considerations.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "сообщение=message":
     cefr_level: A2
     gender: n
@@ -58599,7 +58599,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В таре́лке ещё мно́го спаге́тти.
         en_gb: There is still a lot of spaghetti on the plate.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: спаге́тти
       sg_gen: спаге́тти
@@ -58642,7 +58642,7 @@ words:
         en_gb: The flat has two bedrooms.
         en_alt:
           - There are two bedrooms in the flat.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "спасение=salvation":
     cefr_level: B2
     gender: n
@@ -59581,7 +59581,7 @@ words:
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
       - ru: На ла́вочке сиде́ли две стару́хи.
         en_gb: Two old women were sitting on the bench.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: стару́ха
       sg_gen: стару́хи
@@ -60088,7 +60088,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В сбо́рнике мно́го коро́тких стихотворе́ний.
         en_gb: There are many short poems in the collection.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: стихотворе́ние
       sg_gen: стихотворе́ния
@@ -60166,7 +60166,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Пала́тку де́ржат две сто́йки.
         en_gb: Two poles hold up the tent.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "стол=table":
     cefr_level: A1
     gender: m
@@ -60394,7 +60394,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: У ка́ждой исто́рии две стороны́.
         en_gb: Every story has two sides.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Он перешёл на на́шу сто́рону.
         en_gb: He came over to our side.
         en_alt:
@@ -60428,7 +60428,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Война́ принесла́ мно́го страда́ний.
         en_gb: The war brought much suffering.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Врачи́ облегча́ют страда́ния больны́х.
         en_gb: Doctors relieve the suffering of the sick.
         inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
@@ -60450,7 +60450,7 @@ words:
         inflect: { token: 6, case: pre, number: pl, rule: noun-pre-pl }
       - ru: Я хочу́ посети́ть мно́го стран.
         en_gb: I want to visit many countries.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На́ша страна́ о́чень больша́я.
         en_gb: Our country is very big.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
@@ -60505,7 +60505,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я прочита́л три страни́цы.
         en_gb: I read three pages.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
   "страсть=passion":
     cefr_level: B2
     gender: f
@@ -60591,7 +60591,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Ле́том у пруда́ мно́го стреко́з.
         en_gb: In summer there are many dragonflies by the pond.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: стрекоза́
       sg_gen: стрекозы́
@@ -60636,7 +60636,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Охо́тник доста́л три стрелы́.
         en_gb: The hunter took out three arrows.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Он порани́лся стрело́й.
         en_gb: He hurt himself with an arrow.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
@@ -60677,7 +60677,7 @@ words:
         en_gb: There are five experienced marksmen in the team.
         en_alt:
           - The team has five experienced marksmen.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "стремление=aspiration":
     cefr_level: B2
     gender: n
@@ -60713,7 +60713,7 @@ words:
         en_gb: She has many bright aspirations.
         en_alt:
           - She has many noble aspirations.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "стремянка=stepladder":
     cefr_level: B2
     gender: f
@@ -61156,7 +61156,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том магази́не мно́го сувени́ров.
         en_gb: There are many souvenirs in this shop.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: сувени́р
       sg_gen: сувени́ра
@@ -61941,7 +61941,7 @@ words:
         en_gb: We asked for two bills.
         en_alt:
           - We asked for two separate bills.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: счёт
       sg_gen: счёта
@@ -62056,7 +62056,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: У них три сы́на.
         en_gb: They have three sons.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: Оте́ц с де́тства привива́л сыновья́м любо́вь к спо́рту.
         en_gb: From childhood the father instilled a love of sport in his sons.
         inflect: { token: 5, case: dat, number: pl, rule: noun-dat-pl }
@@ -62293,7 +62293,7 @@ words:
         en_gb: Scientists revealed many secrets of nature.
         en_alt:
           - Scientists have uncovered many secrets of nature.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "такси=taxi":
     cefr_level: A1
     gender: n
@@ -62398,7 +62398,7 @@ words:
         en_gb: There are many young talents at the school.
         en_alt:
           - There are many young talents in the school.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он облада́ет тала́нтом.
         en_gb: He possesses talent.
         en_alt:
@@ -62455,7 +62455,7 @@ words:
         en_alt:
           - There were many dances at the party.
           - There were a lot of dances at the celebration.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: та́нец
       sg_gen: та́нца
@@ -63158,7 +63158,7 @@ words:
         inflect: { token: 6, case: dat, number: sg, rule: noun-dat-sg }
       - ru: У меня́ две тётки.
         en_gb: I have two aunts.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     facts:
       - kind: root
         text: "Тётя with -ка, but the ending is blunt here rather than fond: a тётка is an aunt spoken of plainly, or any older woman."
@@ -63253,7 +63253,7 @@ words:
     usage:
       - ru: В до́ме мно́го совреме́нной те́хники.
         en_gb: There is a lot of modern technology in the house.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Магази́н продаёт бытову́ю те́хнику.
         en_gb: The shop sells household appliances.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -63400,7 +63400,7 @@ words:
         inflect: { token: 3, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Существу́ет мно́го ти́пов кле́ток.
         en_gb: There are many types of cells.
-        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Учёный рабо́тает с ра́зными ти́пами да́нных.
         en_gb: The scientist works with various types of data.
         inflect: { token: 5, case: ins, number: pl, rule: noun-ins-pl }
@@ -63717,7 +63717,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Слон ве́сит не́сколько тонн.
         en_gb: An elephant weighs several tonnes.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: то́нна
       sg_gen: то́нны
@@ -63875,7 +63875,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: На столе́ стоя́т два то́рта.
         en_gb: There are two cakes on the table.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: торт
       sg_gen: то́рта
@@ -63916,7 +63916,7 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В пе́сне мно́го тоски́ по ро́дине.
         en_gb: There is much longing for the homeland in the song.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
   "точка=dot":
     cefr_level: B1
     gender: f
@@ -64247,7 +64247,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы пропусти́ли две трениро́вки.
         en_gb: We missed two training sessions.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: трениро́вка
       sg_gen: трениро́вки
@@ -64435,7 +64435,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В прибо́ре две стекля́нные тру́бки.
         en_gb: There are two glass tubes in the device.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
   "труд=labour":
     cefr_level: B1
     gender: m
@@ -64495,7 +64495,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В на́шем о́фисе мно́го трудого́ликов.
         en_gb: There are many workaholics in our office.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: трудого́лик
       sg_gen: трудого́лика
@@ -65217,7 +65217,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Шахтёры добыва́ют мно́го угля́.
         en_gb: The miners extract a lot of coal.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Он нарисова́л портре́т углём.
         en_gb: He drew the portrait with charcoal.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -65291,7 +65291,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Боксёр нанёс не́сколько бы́стрых уда́ров.
         en_gb: The boxer landed several quick blows.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "удача=luck":
     cefr_level: A2
     gender: f
@@ -65402,7 +65402,7 @@ words:
         en_gb: The trip gave us much pleasure.
         en_alt:
           - The journey gave us a lot of pleasure.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Пойдёшь с на́ми в кино́? — С удово́льствием!
         en_gb: Are you coming to the cinema with us? — I'd love to!
         en_alt:
@@ -65712,7 +65712,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На ёлке мно́го украше́ний.
         en_gb: There are many decorations on the Christmas tree.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: На э́том украше́нии есть ка́мень.
         en_gb: There's a stone on this ornament.
         en_alt:
@@ -66357,7 +66357,7 @@ words:
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-animate }
       - ru: Он заказа́л мно́го у́стриц.
         en_gb: He ordered a lot of oysters.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он съел одну́ у́стрицу.
         en_gb: He ate one oyster.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -66407,7 +66407,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Магази́н прода́л мно́го электро́нных устро́йств.
         en_gb: The shop sold many electronic devices.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "утверждение=statement":
     cefr_level: B2
     gender: n
@@ -66684,7 +66684,7 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Доро́га прохо́дит че́рез не́сколько уча́стков.
         en_gb: The road passes through several sections.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "ученик=pupil":
     cefr_level: A2
     gender: m
@@ -66792,7 +66792,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В го́роде не́сколько вое́нных учи́лищ.
         en_gb: There are several military colleges in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "учитель=teacher":
     cefr_level: A1
     gender: m
@@ -66870,7 +66870,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В го́роде мно́го госуда́рственных учрежде́ний.
         en_gb: There are many state institutions in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: учрежде́ние
       sg_gen: учрежде́ния
@@ -66937,7 +66937,7 @@ words:
         inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́той па́пке мно́го фа́йлов.
         en_gb: There are many files in this folder.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: файл
       sg_gen: фа́йла
@@ -67013,7 +67013,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: На реше́ние повлия́ло мно́го фа́кторов.
         en_gb: Many factors influenced the decision.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Учёные изуча́ют ра́зные фа́кторы ри́ска.
         en_gb: Scientists study various risk factors.
         en_alt:
@@ -67072,7 +67072,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В спи́ске мно́го одина́ковых фами́лий.
         en_gb: There are many identical surnames on the list.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: фами́лия
       sg_gen: фами́лии
@@ -67139,7 +67139,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го фасо́ли.
         en_gb: There are lots of beans in the soup.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Она́ пригото́вила ры́бу с фасо́лью.
         en_gb: She cooked fish with beans.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
@@ -67184,7 +67184,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В ми́ре существу́ет мно́го футбо́льных федера́ций.
         en_gb: There are many football federations in the world.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
   "фейерверк=firework":
     cefr_level: B1
     gender: m
@@ -67207,7 +67207,7 @@ words:
         en_gb: Many fireworks were set off in the square.
         en_alt:
           - They set off many fireworks in the square.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: фейерве́рк
       sg_gen: фейерве́рка
@@ -67748,7 +67748,7 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Госуда́рство создало́ не́сколько но́вых фо́ндов.
         en_gb: The state created several new funds.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "форма=shape":
     cefr_level: B1
     gender: f
@@ -67880,7 +67880,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я вы́учил не́сколько ну́жных фраз.
         en_gb: I learned a few useful phrases.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: фра́за
       sg_gen: фра́зы
@@ -68094,7 +68094,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Телефо́н име́ет мно́го фу́нкций.
         en_gb: The phone has many functions.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Се́рдце выполня́ет ва́жную фу́нкцию.
         en_gb: The heart performs an important function.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -68195,7 +68195,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В шкафу́ виси́т не́сколько хала́тов.
         en_gb: Several robes hang in the wardrobe.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "характер=character":
     cefr_level: B1
     gender: m
@@ -68230,7 +68230,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: В кни́ге опи́сано мно́го интере́сных хара́ктеров.
         en_gb: Many interesting characters are described in the book.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
   "хвост=tail":
     cefr_level: B1
     gender: m
@@ -68321,7 +68321,7 @@ words:
         en_gb: A lot of cotton is grown in this region.
         en_alt:
           - In this region they grow a lot of cotton.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-quantity-gen-sg }
     declension:
       sg_nom: хло́пок
       sg_gen: хло́пка
@@ -68409,7 +68409,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: У него́ мно́го ра́зных хо́бби.
         en_gb: He has many different hobbies.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: хо́бби
       sg_gen: хо́бби
@@ -68458,7 +68458,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Он обду́мал не́сколько хо́дов вперёд.
         en_gb: He thought several moves ahead.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "хозяин=host":
     cefr_level: B1
     gender: m
@@ -68630,7 +68630,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Вокру́г дере́вни мно́го зелёных холмо́в.
         en_gb: There are many green hills around the village.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "холод=cold":
     cefr_level: A2
     gender: m
@@ -68755,7 +68755,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В го́роде мно́го ста́рых хра́мов.
         en_gb: There are many old temples in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: храм
       sg_gen: хра́ма
@@ -69247,7 +69247,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-fem-soft }
       - ru: В дере́вне есть две ста́рые це́ркви.
         en_gb: There are two old churches in the village.
-        inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 6, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: це́рковь
       sg_gen: це́ркви
@@ -69280,7 +69280,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На заво́де откры́ли не́сколько совреме́нных цехо́в.
         en_gb: Several modern workshops were opened at the plant.
-        inflect: { token: 6, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 6, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: цех
       sg_gen: це́ха
@@ -69378,7 +69378,7 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В докла́де мно́го цита́т из газе́т.
         en_gb: There are many quotes from newspapers in the report.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: цита́та
       sg_gen: цита́ты
@@ -69559,7 +69559,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы встре́тимся в шесть часо́в.
         en_gb: We will meet at six o'clock.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
   "часовня=chapel":
     cefr_level: B2
     gender: f
@@ -69996,7 +69996,7 @@ words:
         en_gb: He has many good traits.
         en_alt:
           - There are many good traits in him.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
       - ru: Он облада́ет ре́дкой черто́й хара́ктера.
         en_gb: He has a rare character trait.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
@@ -70110,7 +70110,7 @@ words:
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В го́роде живёт мно́го чече́нцев.
         en_gb: Many Chechens live in the city.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: чече́нец
       sg_gen: чече́нца
@@ -70248,7 +70248,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: У писа́теля мно́го ве́рных чита́телей.
         en_gb: The writer has many loyal readers.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: чита́тель
       sg_gen: чита́теля
@@ -70623,7 +70623,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В магази́не мно́го краси́вых ша́рфов.
         en_gb: There are many beautiful scarves in the shop.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: шарф
       sg_gen: ша́рфа
@@ -70683,7 +70683,7 @@ words:
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В гру́ппе бы́ло не́сколько шве́дов.
         en_gb: There were several Swedes in the group.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: швед
       sg_gen: шве́да
@@ -70718,7 +70718,7 @@ words:
         en_gb: There were several Swiss men in the hotel.
         en_alt:
           - There were several Swiss people in the hotel.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: швейца́рец
       sg_gen: швейца́рца
@@ -70781,7 +70781,7 @@ words:
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: На ку́рсах бы́ло две швейца́рки.
         en_gb: There were two Swiss women on the course.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: швейца́рка
       sg_gen: швейца́рки
@@ -70844,7 +70844,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На пля́же мно́го шезло́нгов.
         en_gb: There are many deckchairs on the beach.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: шезло́нг
       sg_gen: шезло́нга
@@ -71198,7 +71198,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В прихо́жей стоя́т два шка́фа.
         en_gb: There are two cupboards in the hallway.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: шкаф
       sg_gen: шка́фа
@@ -71315,7 +71315,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В хо́ре пою́т мно́го шко́льниц.
         en_gb: Many schoolgirls sing in the choir.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: шко́льница
       sg_gen: шко́льницы
@@ -71703,7 +71703,7 @@ words:
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В США пятьдеся́т шта́тов.
         en_gb: There are fifty states in the USA.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "шторм=storm":
     cefr_level: B1
     gender: m
@@ -71759,7 +71759,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Поли́ция собрала́ мно́го штра́фов.
         en_gb: The police collected many fines.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: штраф
       sg_gen: штра́фа
@@ -72536,7 +72536,7 @@ words:
     usage:
       - ru: У ребёнка мно́го эне́ргии.
         en_gb: The child has a lot of energy.
-        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
       - ru: Со́лнце даёт нам эне́ргию.
         en_gb: The sun gives us energy.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -72628,7 +72628,7 @@ words:
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: В метро́ два дли́нных эскала́тора.
         en_gb: There are two long escalators in the metro.
-        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
     declension:
       sg_nom: эскала́тор
       sg_gen: эскала́тора
@@ -72664,7 +72664,7 @@ words:
         en_gb: There are ten floors in the building.
         en_alt:
           - There are ten floors in the house.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: эта́ж
       sg_gen: этажа́
@@ -72748,7 +72748,7 @@ words:
         inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В фи́льме мно́го эффе́ктов.
         en_gb: There are many effects in the film.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "эхо=echo":
     cefr_level: B1
     gender: n
@@ -73042,7 +73042,7 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В холоди́льнике де́сять яи́ц.
         en_gb: There are ten eggs in the fridge.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: яйцо́
       sg_gen: яйца́
@@ -73090,7 +73090,7 @@ words:
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На доро́ге мно́го ям.
         en_gb: There are many potholes in the road.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
   "японец=Japanese man":
     cefr_level: A2
     gender: m
@@ -73209,7 +73209,7 @@ words:
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В по́рту мно́го яхт.
         en_gb: There are many yachts in the port.
-        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: я́хта
       sg_gen: я́хты
@@ -73268,7 +73268,7 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В пусты́не живёт мно́го я́щериц.
         en_gb: Many lizards live in the desert.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: я́щерица
       sg_gen: я́щерицы
@@ -73316,4 +73316,4 @@ words:
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: На скла́де мно́го пусты́х я́щиков.
         en_gb: There are many empty boxes in the warehouse.
-        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }

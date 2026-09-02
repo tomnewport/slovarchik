@@ -211,6 +211,40 @@ describe('PhraseFixExercise', () => {
     expect(wrapper.find('details.rule.exception').exists()).toBe(true)
   })
 
+  // #592: «два па́рка» is only intelligible beside «мно́го па́рков», so the reveal
+  // offers the sibling — but closed, because showing both in full every time
+  // would bury the one that actually applies.
+  it('offers the sibling rule beside the one that applies, collapsed', async () => {
+    const sibling = {
+      ...nounExercise,
+      rule: { id: 'noun-count-gen-sg', title: 'After two, three, four', formula: '2, 3, 4 + gen SG' },
+      siblingRule: { id: 'noun-count-gen-pl', title: 'After five, and after много' },
+    }
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: sibling } })
+    await pickSelections(wrapper, 'Accusative', 'Singular')
+    await wrapper.find('input[lang="ru"]').setValue('бабочку')
+    await wrapper.find('form').trigger('submit')
+
+    const blocks = wrapper.findAll('details.rule')
+    expect(blocks).toHaveLength(2)
+    expect(blocks[0].text()).toContain('After two, three, four')
+    expect(blocks[0].attributes('open')).toBeDefined()
+    expect(blocks[1].text()).toContain('After five, and after много')
+    // Closed, and marked as the aside it is rather than as an exception.
+    expect(blocks[1].attributes('open')).toBeUndefined()
+    expect(blocks[1].find('.aside-badge').exists()).toBe(true)
+    expect(wrapper.find('.exc-badge').exists()).toBe(false)
+  })
+
+  it('shows only the one rule when it names no sibling', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
+    await pickSelections(wrapper, 'Accusative', 'Singular')
+    await wrapper.find('input[lang="ru"]').setValue('бабочку')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.findAll('details.rule')).toHaveLength(1)
+    expect(wrapper.find('.aside-badge').exists()).toBe(false)
+  })
+
   it('shows no Exception badge for a regular rule', async () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
     await pickSelections(wrapper, 'Accusative', 'Singular')

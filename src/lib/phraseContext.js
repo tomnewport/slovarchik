@@ -589,6 +589,11 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   const lemma = analyticFuture ? 'быть' : word?.headword || word?.ru || core
 
   const rule = target.rule ? (rules[target.rule] ?? null) : null
+  // A rule may name a sibling it is best read against (#592): the genitive after
+  // два is only intelligible beside the genitive after мно́го, and the word that
+  // decides between them is never the word being highlighted. Resolved here so
+  // the reveal can offer both without the component knowing the rules map.
+  const sibling = rule?.contrast ? (rules[rule.contrast] ?? null) : null
   // Aspect cannot be selected in the one-token board for an analytic future:
   // its imperfective and perfective alternatives have different structures
   // (бу́дет чита́ть vs прочита́ет), not interchangeable forms of this slot.
@@ -617,6 +622,8 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     ru: phrase.ru,
     en: phrase.en,
     rule: rule ? { id: target.rule, ...rule } : null,
+    // The sibling rule, collapsed in the reveal: there to be opened, not read.
+    siblingRule: sibling ? { id: rule.contrast, ...sibling } : null,
     // The generic pair-choice explanation, shown whenever the exercise opened
     // with a contrast step (alongside any slot-specific rule).
     contrastRule: contrastRuleFor(contrastSelect ? verbContrast(word) : null, rules),
