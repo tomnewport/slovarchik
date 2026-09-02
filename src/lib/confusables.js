@@ -30,6 +30,7 @@ export const VERDICTS = [
   'wrong-form',
   'aspect',
   'heteronym',
+  'homograph',
   'synonym',
   'wrong-sense',
   'confusable',
@@ -100,8 +101,16 @@ function relate(got, typed, want) {
     }
   }
 
-  // Same letters, different stress.
-  if (bare(typed.ru) === bare(want.headword || want.ru)) return { ...base, type: 'heteronym' }
+  // Same letters. Whether stress is the difference is a question about the two
+  // spellings, not an assumption: «за́мок»/«замо́к» really are told apart by it,
+  // but «чай» (tea) and «чай» (I suppose) are spelled identically, stress and
+  // all, and telling a learner to move the stress there is advice they cannot
+  // act on (#641). `linkHeteronyms` (vocabBuild.js) draws the same line.
+  const wantRu = want.headword || want.ru
+  if (bare(typed.ru) === bare(wantRu)) {
+    const differsByStress = normTokenStress(typed.ru) !== normTokenStress(wantRu)
+    return { ...base, type: differsByStress ? 'heteronym' : 'homograph' }
+  }
 
   // Words sharing the target's base gloss split two ways. With no notes on
   // either side they are interchangeable — the learner said something correct,
@@ -119,8 +128,16 @@ function relate(got, typed, want) {
 }
 
 /**
- * The single verdict for one candidate sense of what the learner typed, or null
- * when there is nothing to say about it.
+ * The learner wrote the word being asked for — just not the form of it that was
+ * wanted. Nothing this module can say beats the drill's own error map, and no
+ * *other* reading of those letters is more relevant, so this verdict silences
+ * the diagnosis outright rather than yielding the floor to a homograph.
+ */
+const SAME_WORD = Symbol('same word, other form')
+
+/**
+ * The single verdict for one candidate sense of what the learner typed, null
+ * when there is nothing to say about it, or {@link SAME_WORD}.
  */
 function verdictFor(sense, want, typedForm, targetForm, byKey) {
   const got = byKey.get(sense.key) ?? null
@@ -134,13 +151,13 @@ function verdictFor(sense, want, typedForm, targetForm, byKey) {
   // A form of the very word being asked for — right lemma, wrong cell.
   if (sense.key === want.key) {
     // The wanted form itself: that would have been graded correct.
-    if (bare(typedForm) === bare(targetForm)) return null
+    if (bare(typedForm) === bare(targetForm)) return SAME_WORD
     // Only worth saying when the answer is the *dictionary* form, where "I want
     // the dictionary form" is precise. Inside a phrase the wanted form is some
     // inflected cell this module can't name, and the drill's own error map
     // already shows the ending that went wrong — more precisely than any
     // sentence here could. Fall through to it.
-    if (bare(targetForm) !== bare(want.headword || want.ru)) return null
+    if (bare(targetForm) !== bare(want.headword || want.ru)) return SAME_WORD
     return { typed, want: facts(want, null), type: 'wrong-form', wantForm: 'lemma' }
   }
 
@@ -157,9 +174,10 @@ function verdictFor(sense, want, typedForm, targetForm, byKey) {
  * @param {string} ctx.target the wanted surface form (a word or a whole phrase)
  * @param {Map} ctx.formIndex from `buildFormIndex` (phraseHint.js)
  * @param {Map} ctx.byKey key → word record
- * @returns {object|null} a verdict, or null when the answer isn't a recognisable
- *   Russian word — that is a spelling slip, not a confusion, and the caller
- *   should fall through to its existing feedback.
+ * @returns {object|null} a verdict, or null when there is no confusion to name —
+ *   the answer isn't a recognisable Russian word, or it is the target word in
+ *   the wrong form. Both are spelling slips, and the caller should fall through
+ *   to its existing feedback.
  */
 export function diagnose(typed, ctx = {}) {
   const { targetKey, target, formIndex, byKey } = ctx
@@ -177,6 +195,11 @@ function diagnoseWord(typed, targetForm, want, { formIndex, byKey }) {
   let best = null
   for (const sense of entry.senses ?? []) {
     const verdict = verdictFor(sense, want, word, targetForm, byKey)
+    // The letters are a form of the target word itself. That reading outranks
+    // any homograph sharing the spelling — «чай» in «В ча́е…» is tea in the
+    // wrong case, not the folksy particle — so say nothing and let the drill's
+    // error map show the ending that slipped.
+    if (verdict === SAME_WORD) return null
     if (verdict && (!best || rank(verdict.type) < rank(best.type))) best = verdict
   }
   if (best) best.why = whyDiffers(best, want)
@@ -343,6 +366,12 @@ function englishMessage(verdict) {
         detail: `Same letters, but the stress is elsewhere. ${ask}`,
         tier: 'lexical',
       }
+    case 'homograph':
+      return {
+        headline,
+        detail: `Spelled the same, stress and all — but it is a different word. ${ask}`,
+        tier: 'lexical',
+      }
     case 'synonym':
       return {
         headline,
@@ -410,6 +439,14 @@ export function correctionMessage(verdict) {
       return {
         headline: `${q(typed.ru)} is ${typed.en}`,
         detail: 'Same letters — but the stress falls elsewhere in the word I want.',
+        tier: 'lexical',
+      }
+    case 'homograph':
+      return {
+        // Never "move the stress": these two are spelled identically, so there
+        // is nothing the learner could retype to fix it (#641).
+        headline: `${q(typed.ru)} is ${typed.en}`,
+        detail: `Spelled the same, but a different word — I want ${wantGloss(want)}.`,
         tier: 'lexical',
       }
     case 'wrong-sense':

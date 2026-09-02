@@ -321,6 +321,39 @@ words:
     expect(correctionMessage(verdict).headline).toBe('«за́мок» is castle')
   })
 
+  it('does not blame the stress when the two spellings are identical (#641)', () => {
+    // «чай» (tea) and «чай» (I suppose) are homographs, not heteronyms: the
+    // stress sits in the same place in both, so "move it" is advice a learner
+    // cannot act on. `linkHeteronyms` (vocabBuild.js) draws the same line — it
+    // needs the *stressed* forms to differ before it links a pair.
+    const corpus = loadFixtureWords()
+    // The particle is what is being drilled, and the learner writes a form of
+    // the noun: the letters collide, but nothing about the stress explains it.
+    const verdict = verdictOf(corpus, 'ча́е', 'чай=I suppose', 'чай')
+    expect(verdict.type).toBe('homograph')
+    const { headline, detail } = correctionMessage(verdict)
+    expect(headline).toBe('«чай» is tea')
+    expect(detail).toContain('Spelled the same, but a different word')
+    expect(detail).not.toContain('stress')
+  })
+
+  it('stays quiet when the answer is the target word in the wrong form (#641)', () => {
+    // The reported bug, against the real corpus: hearing «В ча́е сли́шком мно́го
+    // са́хара» and writing «чай» is tea in the nominative — a case slip, which
+    // the drill's own error map marks precisely. Reaching past that for the
+    // homograph particle «чай» produced "«чай» is I suppose — the stress falls
+    // elsewhere", wrong twice over: it is not that word, and the two are not
+    // told apart by stress at all (which typed answers never require —
+    // `phraseCorrect` strips it before grading).
+    const corpus = loadFixtureWords()
+    expect(
+      verdictOf(corpus, 'В чай слишком много сахара', 'чай=tea', 'В ча́е сли́шком мно́го са́хара.'),
+    ).toBeNull()
+    // A single-word drill still gets the precise thing to say: the dictionary
+    // form is the answer there, so "that is a form of it" names the gap.
+    expect(verdictOf(corpus, 'ча́е', 'чай=tea', 'чай')).toMatchObject({ type: 'wrong-form' })
+  })
+
   it('diagnoses a gloss-only word — a real word the learner typed, just not taught', () => {
     const words = fromYaml([
       {
