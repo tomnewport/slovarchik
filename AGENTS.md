@@ -59,7 +59,8 @@ src/
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, WordFacts, AnnotatedEnglish, …)
+                        #   BatchSearchAdd, WordProgressModal, WordFacts, AnnotatedEnglish,
+                        #   ComprehensionCheck, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast, IntroCard — the non-graded
                         #   "here is a new word" step)
@@ -88,6 +89,8 @@ src/
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
+                        #   comprehension  — what the Russian says that the English translation cannot (aspect, det/indet motion),
+                        #     asked after a correct RU→EN answer; informational, never graded
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)

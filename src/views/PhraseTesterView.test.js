@@ -4,12 +4,15 @@ import { mount } from '@vue/test-utils'
 import PhraseTesterView from './PhraseTesterView.vue'
 import { state } from '../stores/vocab.js'
 import { buildAssemblyBank, phraseTokens } from '../lib/phrases.js'
-import { shapePhrases } from '../lib/vocabBuild.js'
+import { shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
+import { indexPhrases } from '../lib/phraseContext.js'
+import { comprehensionCheck } from '../lib/comprehension.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab so the phrase bank is populated.
 beforeAll(() => {
   state.words = loadFixtureWords()
+  state.contextPhrases = indexPhrases(shapeContextPhrases(state.words))
   state.status = 'ready'
 })
 
@@ -138,6 +141,57 @@ describe('PhraseTesterView', () => {
     } finally {
       state.words = saved
     }
+  })
+
+  // #597: a correct RU→EN answer normally auto-advances after the celebration.
+  // Where the Russian said something the English could not, the turn has to wait
+  // instead — otherwise the probe is on screen for a second and gone.
+  describe('the comprehension probe', () => {
+    const words = loadFixtureWords()
+    const byKey = new Map(words.map((w) => [w.key, w]))
+    const annotations = indexPhrases(shapeContextPhrases(words))
+    const withProbe = shapePhrases(words).find((p) =>
+      comprehensionCheck(p, { byKey, annotations }),
+    )
+    const withoutProbe = shapePhrases(words).find(
+      (p) => !comprehensionCheck(p, { byKey, annotations }),
+    )
+
+    const answerCorrectly = async (wrapper, phrase) => {
+      await wrapper.findAll('button.card')[1].trigger('click') // Type it
+      wrapper.vm.current = phrase
+      await nextTick()
+      wrapper.vm.typed = phrase.en
+      wrapper.vm.submitTyped()
+      await nextTick()
+      expect(wrapper.vm.wasCorrect).toBe(true)
+    }
+
+    it('holds on the sentence and asks, instead of advancing', async () => {
+      const wrapper = mount(PhraseTesterView)
+      await answerCorrectly(wrapper, withProbe)
+      expect(wrapper.findComponent({ name: 'ComprehensionCheck' }).exists()).toBe(true)
+      expect(wrapper.text()).toContain('What does the Russian say')
+      // The learner leaves in their own time.
+      expect(wrapper.find('button.primary').text()).toContain('Next')
+    })
+
+    it('still advances on its own when the sentence hides nothing', async () => {
+      const wrapper = mount(PhraseTesterView)
+      await answerCorrectly(wrapper, withoutProbe)
+      expect(wrapper.vm.hasProbe).toBe(false)
+      expect(wrapper.text()).not.toContain('What does the Russian say')
+    })
+
+    // The graded question was the translation, and it was right — the probe
+    // cannot take that back.
+    it('does not change the score whichever reading is picked', async () => {
+      const wrapper = mount(PhraseTesterView)
+      await answerCorrectly(wrapper, withProbe)
+      const before = { ...wrapper.vm.score }
+      await wrapper.findAll('button.option')[0].trigger('click')
+      expect(wrapper.vm.score).toEqual(before)
+    })
   })
 
   it('grades a typed answer that omits punctuation and stress', async () => {
