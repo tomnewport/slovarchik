@@ -70,6 +70,24 @@ const overallCorrect = computed(() => !selectMissed.value && spellCorrect.value)
 // feedback then names the verb that was needed, not just its grammatical slot.
 const contrastMissed = computed(() => missed.value.includes('contrast'))
 
+/**
+ * The rule blocks the reveal shows, in reading order (#592).
+ *
+ * The form's own rule leads and is open. The aspect explanation follows when the
+ * item carried an aspect choice, opened only if that choice went wrong. The
+ * sibling rule comes last and stays closed: it is there to be opened, not read —
+ * «два па́рка» is only intelligible beside «мно́го па́рков», but showing both in
+ * full every time would bury the one that actually applies.
+ */
+const revealedRules = computed(() => {
+  const cur = item.value ?? {}
+  return [
+    cur.rule && { rule: cur.rule, open: true, exception: cur.exception },
+    cur.contrastRule && { rule: cur.contrastRule, open: contrastMissed.value },
+    cur.siblingRule && { rule: cur.siblingRule, open: false, aside: true },
+  ].filter(Boolean)
+})
+
 // The dimensions the learner got wrong (case / number / gender / aspect /
 // direction), worded for the feedback line — e.g. "case", "number", or "case
 // and number". A step may carry its own `label` where its `kind` isn't a word
@@ -357,26 +375,26 @@ onMounted(() => {
           <SpeakButton :text="item.ru" />
         </p>
 
-        <details v-if="item.rule" class="rule" :class="{ exception: item.exception }" open>
+        <!-- The rule that explains the form, then anything read alongside it:
+             the aspect explanation when the item carried an aspect choice, and
+             the sibling rule a counting genitive is only intelligible against
+             (#592). One block, because they render identically. -->
+        <details
+          v-for="r in revealedRules"
+          :key="r.rule.id ?? r.rule.title"
+          class="rule"
+          :class="{ exception: r.exception }"
+          :open="r.open"
+        >
           <summary>
-            <span v-if="item.exception" class="exc-badge">Exception</span>
-            {{ item.rule.title }}
+            <span v-if="r.exception" class="exc-badge">Exception</span>
+            <span v-else-if="r.aside" class="aside-badge">Compare</span>
+            {{ r.rule.title }}
           </summary>
-          <p v-if="item.rule.formula" class="formula" lang="ru">{{ item.rule.formula }}</p>
-          <p v-if="item.rule.explanation" class="muted">{{ item.rule.explanation }}</p>
-          <ul v-if="item.rule.exceptions?.length" class="exceptions muted">
-            <li v-for="(ex, i) in item.rule.exceptions" :key="i" lang="ru">{{ ex }}</li>
-          </ul>
-        </details>
-
-        <!-- Why this aspect: shown whenever the item carried an aspect choice,
-             expanded when that choice went wrong. -->
-        <details v-if="item.contrastRule" class="rule" :open="contrastMissed">
-          <summary>{{ item.contrastRule.title }}</summary>
-          <p v-if="item.contrastRule.formula" class="formula" lang="ru">{{ item.contrastRule.formula }}</p>
-          <p v-if="item.contrastRule.explanation" class="muted">{{ item.contrastRule.explanation }}</p>
-          <ul v-if="item.contrastRule.exceptions?.length" class="exceptions muted">
-            <li v-for="(ex, i) in item.contrastRule.exceptions" :key="i" lang="ru">{{ ex }}</li>
+          <p v-if="r.rule.formula" class="formula" lang="ru">{{ r.rule.formula }}</p>
+          <p v-if="r.rule.explanation" class="muted">{{ r.rule.explanation }}</p>
+          <ul v-if="r.rule.exceptions?.length" class="exceptions muted">
+            <li v-for="(ex, i) in r.rule.exceptions" :key="i" lang="ru">{{ ex }}</li>
           </ul>
         </details>
 
@@ -607,6 +625,14 @@ onMounted(() => {
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   background: color-mix(in srgb, var(--primary) 5%, var(--card));
+}
+/* Quieter than the exception badge: this one is an invitation, not a warning. */
+.aside-badge {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  margin-right: 0.4rem;
 }
 .rule.exception {
   border-color: var(--warn, #c9962b);

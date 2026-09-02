@@ -268,7 +268,23 @@ try {
     })
   }
 
-  // 8. compare, word by word
+  // Stage eight: the counting-genitive rule split (#592). It rewrites the
+  // `rule:` inside `inflect:` blocks, which this check compares, and no earlier
+  // stage can express that — the translation review moves sentences and glosses,
+  // never the rule an annotation points at.
+  const repointing = join(repo, 'review', 'rule-repointing.jsonl')
+  if (existsSync(repointing)) {
+    cpSync(join(repo, 'scripts', 'apply-rule-repointing.mjs'), join(work, 'scripts', 'apply-rule-repointing.mjs'))
+    cpSync(repointing, join(work, 'review', 'rule-repointing.jsonl'))
+    // The applier checks every id against the rules file, so it needs it.
+    cpSync(join(repo, 'public', 'vocab', 'grammar-rules.yml'), join(work, 'public', 'vocab', 'grammar-rules.yml'))
+    execFileSync('node', [join('scripts', 'apply-rule-repointing.mjs'), '--apply'], {
+      cwd: work,
+      stdio: ['ignore', 'ignore', 'inherit'],
+    })
+  }
+
+  // 9. compare, word by word
   const vocabDir = join(repo, 'public', 'vocab')
   let compared = 0
   let added = 0

@@ -9,6 +9,10 @@
 # the uses an English speaker won't expect (e.g. instrumental for a profession or
 # the time of day, dative for age, prepositional for what someone is wearing), so
 # the learner sees *why* the highlighted word takes the form it does.
+#
+# `contrast:` names a sibling rule the reveal offers alongside, collapsed — for a
+# rule only intelligible against another one (#592): the genitive after два reads
+# as arbitrary until you can see the genitive after мно́го next to it.
 ---
 rules:
   # ── Nouns ───────────────────────────────────────────────────────────────
@@ -61,6 +65,59 @@ rules:
     exceptions:
       - "Soft feminine/neuter stems take -ей: но́чь → ноче́й, мо́ре → море́й."
       - "Irregulars: челове́к → люде́й, ребёнок → дете́й."
+
+  # ── Counting and quantity (#592) ────────────────────────────────────────
+  # The plain genitive rules above list this among six other jobs, which leaves
+  # the learner to work out which one is operating — and the word that decides
+  # it (два, мно́го) is never the word being highlighted. These three name the
+  # trigger, and `contrast:` puts the sibling rule beside each so the pair can
+  # be read together.
+  noun-count-gen-sg:
+    title: "Genitive singular after two, three, four"
+    formula: "2, 3, 4 — and 22, 33, 104 — + genitive SINGULAR"
+    explanation: >
+      After два/две, три and четы́ре a noun takes the genitive SINGULAR: два
+      часа́, три угла́, две кни́ги. It is the LAST DIGIT that decides, so a
+      compound follows the same rule — два́дцать два па́рка, but два́дцать шесть
+      па́рков. This is not really a genitive at all: it is a fossilised dual, the
+      old form for exactly two, which is why its stress can differ from the true
+      genitive singular — два шага́ against ша́га. It applies only while the
+      phrase is the subject or the direct object; once a preposition puts it in
+      another case everything agrees normally, в двух больши́х па́рках.
+    contrast: noun-count-gen-pl
+    exceptions:
+      - "оди́н reverts to the nominative singular, compounds included: два́дцать оди́н парк."
+      - "11–14 take the genitive PLURAL despite ending in 1–4: оди́ннадцать домо́в."
+      - "An adjective goes genitive PLURAL even though the noun is singular: два больши́х па́рка. Feminines may instead take the nominative plural: две больши́е кни́ги."
+
+  noun-count-gen-pl:
+    title: "Genitive plural after five, and after много"
+    formula: "5 and up, мно́го, не́сколько + genitive PLURAL"
+    explanation: >
+      From пять upwards — and after мно́го, ма́ло, не́сколько, ско́лько — a
+      countable noun takes the genitive PLURAL: пять рубле́й, мно́го стран. The
+      last digit decides, so anything ending 5, 6, 7, 8, 9 or 0 belongs here
+      while 2, 3 and 4 take the singular. A quantity phrase like this counts as
+      neuter singular for the verb, which is why it is «В за́ле сиде́ло мно́го
+      же́нщин» and not сиде́ли.
+    contrast: noun-count-gen-sg
+    exceptions:
+      - "11–14 belong here despite ending in 1–4: двена́дцать ме́сяцев."
+      - "An uncountable noun stays SINGULAR after the same quantity words: мно́го воды́, ма́ло вре́мени."
+
+  noun-quantity-gen-sg:
+    title: "Genitive singular after a quantity word"
+    formula: "мно́го / ма́ло + an uncountable noun → genitive SINGULAR"
+    explanation: >
+      After мно́го, ма́ло, немно́го and ско́лько a noun you cannot count stays in
+      the genitive SINGULAR: мно́го воды́, ма́ло вре́мени, немно́го са́хара. The
+      very same words take the genitive plural the moment the noun is countable
+      — мно́го книг — so here it is the NOUN, not the quantity word, that decides
+      the number. It is the same genitive of quantity as стака́н воды́ and
+      буты́лка молока́.
+    contrast: noun-count-gen-pl
+    exceptions:
+      - "A substance counted in portions goes plural — два ко́фе, три пи́ва: the servings, not the stuff."
 
   noun-dat-sg:
     title: "Dative singular"

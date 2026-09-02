@@ -206,6 +206,37 @@ describe('buildFromPhrase', () => {
     expect(ex.rule).toMatchObject({ id: 'noun-acc-fem-a', formula: '-а → -у' })
   })
 
+  // #592: a rule may name the sibling it is only intelligible against — the
+  // genitive after два against the genitive after мно́го — and the word that
+  // decides between them is never the one being highlighted.
+  describe('the sibling rule a `contrast:` names', () => {
+    const twoRules = {
+      'noun-count-gen-sg': { title: 'After two, three, four', contrast: 'noun-count-gen-pl' },
+      'noun-count-gen-pl': { title: 'After five, and after много', contrast: 'noun-count-gen-sg' },
+    }
+    const counted = { ...accPhrase, target: { ...accPhrase.target, rule: 'noun-count-gen-sg' } }
+
+    it('resolves it beside the rule that applies', () => {
+      const ex = buildFromPhrase(counted, sobaka, { rules: twoRules })
+      expect(ex.rule).toMatchObject({ id: 'noun-count-gen-sg' })
+      expect(ex.siblingRule).toMatchObject({
+        id: 'noun-count-gen-pl',
+        title: 'After five, and after много',
+      })
+    })
+
+    it('is null for a rule that names none', () => {
+      expect(buildFromPhrase(accPhrase, sobaka, { rules }).siblingRule).toBeNull()
+    })
+
+    // A dangling id is an authoring typo. It resolves to nothing rather than
+    // rendering an empty block — the data test is what catches it.
+    it('is null when the sibling does not exist', () => {
+      const dangling = { 'noun-count-gen-sg': { title: 'x', contrast: 'nope' } }
+      expect(buildFromPhrase(counted, sobaka, { rules: dangling }).siblingRule).toBeNull()
+    })
+  })
+
   it('handles verbs (no selection steps, person slot label)', () => {
     const ex = buildFromPhrase(verbPhrase, dumat)
     expect(ex.selectSteps).toEqual([])

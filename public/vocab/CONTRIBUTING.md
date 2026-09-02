@@ -906,7 +906,21 @@ owner, so its key is implicit:
       inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
 ```
 
-- **Nouns / pronouns:** `case` + `number`.
+- **Nouns / pronouns:** `case` + `number`. Where a **quantifier** is what forces
+  the case, point `rule:` at the rule that names it rather than the general one
+  (#592) — the general rule lists six other jobs, and the word that decides
+  between them is never the word being highlighted:
+
+  | the sentence has | the rule |
+  | --- | --- |
+  | 2, 3, 4 (or 22, 104, о́ба, полтора́) | `noun-count-gen-sg` — the fossilised dual |
+  | 5+, мно́го, не́сколько + a countable noun | `noun-count-gen-pl` |
+  | мно́го, ма́ло + an **uncountable** noun | `noun-quantity-gen-sg` — мно́го воды́ |
+
+  A rule that explains a harder *form* keeps it — `noun-genpl-fleeting`,
+  `noun-irregular-plural`, `noun-mya-neuter` — because the fleeting vowel is
+  what the learner is stuck on there, not the trigger. `phrasesData.test.js`
+  holds the split: a new quantified sentence cannot land on the generic rule.
 - **Adjectives:** add `gender` (`m`/`n`/`f`/`pl`). Case-selection only works for
   forms with a distinctive ending (mainly feminine `-ая`/`-ую`), since most
   adjective forms are syncretic. For the **animate accusative** — a masculine or
