@@ -215,6 +215,7 @@ words:
         en_gb: There are many cars in the street.
         en_alt:
           - There are a lot of cars in the street.
+          - Many cars are in the street.
         inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: автомоби́ль
@@ -26708,6 +26709,8 @@ words:
         inflect: { token: 5, case: pre, number: pl, rule: noun-pre-pl }
       - ru: В магази́не мно́го кроссо́вок.
         en_gb: There are many trainers in the shop.
+        en_alt:
+          - Many trainers are in the shop.
         inflect: { token: 4, case: gen, number: pl, rule: noun-genpl-fleeting }
     declension:
       sg_nom: кроссо́вка
