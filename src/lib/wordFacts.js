@@ -24,20 +24,50 @@ const KIND_ORDER = new Map(FACT_KINDS.map((k, i) => [k, i]))
 
 /**
  * The relation kinds `relatedWords` can report, in display order. `aspect`,
- * `motion`, `participle`, `manner` (an adverb and the adjective behind it) and
- * `same-meaning` are derived; `root` (a fact's `see:`) and `confusable` are
- * authored.
+ * `motion`, `participle`, `manner` (an adverb and the adjective behind it),
+ * `numeral` (a number and what it is built on) and `same-meaning` are derived;
+ * `root`, `see-also` (both from a fact's `see:`) and `confusable` are authored.
+ *
+ * A `see:` link means different things depending on the fact it hangs off. On a
+ * `build` or `root` fact it is a shared root — води́ть behind переводи́ть. On a
+ * `note` it is only "this word is part of the same picture": под links над and
+ * пе́ред because they are one spatial system, not because they share a
+ * morpheme. Calling both "same root" would put a false claim under half the
+ * closed-class facts (#631), so they are separate relations.
+ *
+ * A `numeral` row also carries `via` (`ordinal` | `teen` | `tens` | `hundreds`)
+ * and `role` (`base` | `derived`, describing the *other* word), because "the
+ * ordinal of nine" and "nine, on ten" are different things to say.
  */
 export const RELATIONS = [
   'aspect',
   'motion',
   'participle',
   'manner',
+  'numeral',
   'heteronym',
   'same-meaning',
   'root',
+  'see-also',
   'confusable',
 ]
+
+/**
+ * How a numeral row reads, keyed `via:role` — the row describes the *other*
+ * word, so each relation needs saying from both ends. Kept here beside the
+ * relation rather than in the panel, so the intro card and the correction
+ * messages say it the same way (#584).
+ */
+export const NUMERAL_LABEL = {
+  'ordinal:base': 'the number it counts',
+  'ordinal:derived': 'its ordinal',
+  'teen:base': 'the unit it is built on',
+  'teen:derived': 'the same unit, on ten',
+  'tens:base': 'the unit it is built on',
+  'tens:derived': 'the same unit, ten times',
+  'hundreds:base': 'the unit it is built on',
+  'hundreds:derived': 'the same unit, a hundred times',
+}
 
 /** The word's own accented headword, whatever shape of record we were given. */
 function selfRu(record) {
@@ -145,6 +175,10 @@ export function relatedWords(record, byKey) {
       note: entry.note || found?.meaningNote || '',
       why: entry.why || '',
       relation,
+      // Numeral rows carry how the two are related and which end this is.
+      // Attached only where they mean something, so every other relation keeps
+      // the shape its callers already read.
+      ...(entry.via ? { via: entry.via, role: entry.role } : {}),
     })
   }
 
@@ -154,12 +188,17 @@ export function relatedWords(record, byKey) {
   if (record.motionPair) push('motion', pair(record.motionPair))
   if (record.participleOf) push('participle', pair(record.participleOf))
   if (record.mannerPair) push('manner', pair(record.mannerPair))
+  for (const k of record.numeralKin ?? [])
+    push('numeral', { key: k.key, ru: k.ru, en: k.gloss ?? '', via: k.via, role: k.role })
   for (const h of record.heteronyms ?? []) push('heteronym', { ru: h.ru, en: h.gloss ?? '' })
   // Same-gloss siblings share this word's meaning by definition — the note is
   // the only thing that tells them apart, so it is what travels.
   for (const a of record.ambiguousEn ?? [])
     push('same-meaning', { ru: a.ru, en: selfEn(record), note: a.note ?? '' })
-  for (const f of wordFacts(record)) for (const s of f.see ?? []) push('root', s)
+  for (const f of wordFacts(record)) {
+    const relation = f.kind === 'root' || f.kind === 'build' ? 'root' : 'see-also'
+    for (const s of f.see ?? []) push(relation, s)
+  }
   for (const c of record.confusables ?? []) push('confusable', c)
 
   return out
@@ -262,6 +301,7 @@ function derivedLinks(word, words) {
   // Both ends carry mannerPair, so пло́хо / плохо́й is caught from either side —
   // the pair the shortlist used to offer as a trap to keep apart.
   if (word.mannerPair?.key) keys.add(word.mannerPair.key)
+  for (const k of word.numeralKin ?? []) keys.add(k.key)
   const spellings = new Set([
     ...(word.heteronyms ?? []).map((h) => h.ru),
     ...(word.ambiguousEn ?? []).map((a) => a.ru),

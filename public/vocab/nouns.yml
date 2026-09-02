@@ -805,6 +805,11 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          Named after Amerigo Vespucci, the Florentine navigator who worked out it
+          was not Asia.
     collections:
       - geography
     en_gb:
@@ -3457,6 +3462,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French billet, a note or short letter — the same word behind English
+          billet.
     collections:
       - public transport
       - travel
@@ -4707,6 +4717,11 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "брать=to take"
+        why: >-
+          Брат is a brother; брать is the verb to take. Only the soft sign
+          separates a noun from an infinitive.
     collections:
       - family
       - people
@@ -5248,6 +5263,10 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French bouteille, and the same word as English bottle.
     collections:
       - daily life
       - food and drink
@@ -5521,6 +5540,12 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          An adjective that became a noun — ва́нная ко́мната, the bath room, with
+          the noun dropped. It still declines like an adjective.
+        see: ["ванна=bath", "комната=room"]
     collections:
       - home
       - daily life
@@ -6344,6 +6369,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "вечер=evening"
+        why: >-
+          Ве́тер is wind, ве́чер evening.
     collections:
       - nature
       - geography
@@ -8528,6 +8557,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          Same root as проси́ть and спроси́ть, to ask — a question is a thing
+          asked.
+        see: ["спросить=to ask", "ответ=answer"]
     collections:
       - school
       - daily life
@@ -9593,6 +9628,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Italian gazzetta, the small coin a news-sheet cost in Venice. The
+          price became the name of the thing.
     collections:
       - reading
       - daily life
@@ -10271,6 +10311,12 @@ words:
     number: ["sg", "pl"]
     display_number: mixed
     en_pl: eyes
+    facts:
+      - kind: note
+        text: >-
+          The older Russian word for an eye was о́ко, which глаз displaced. О́ко is
+          still there in очки́, the things you put in front of your eyes.
+        see: ["очки=glasses"]
     collections:
       - parts of the body
     en_gb:
@@ -10497,6 +10543,13 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          Count years and the noun changes word: оди́н год, два го́да, but пять
+          лет — and лет is the genitive plural of ле́то, summer. Russians once
+          counted years in summers.
+        see: ["лето=summer"]
     collections:
       - the calendar
       - daily life
@@ -10924,6 +10977,10 @@ words:
       pl_ins: города́ми
       pl_pre: города́х
     facts:
+      - kind: origin
+        text: >-
+          An enclosure, from the same root as English yard and garden and Latin
+          hortus. It is the -град in Ленингра́д and Волгогра́д.
       - kind: root
         text: "City. Городо́к is the small one, with the same -ок as in цвето́к."
         see: ["городок=small town"]
@@ -11901,6 +11958,10 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          German Gruppe, from Italian gruppo — the same word as English group.
     collections:
       - daily life
       - school
@@ -12689,6 +12750,15 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "дедушка=grandfather"
+        why: >-
+          Де́вушка is a young woman, де́душка a grandfather — an embarrassing
+          pair to get the wrong way round.
+      - key: "девочка=girl"
+        why: >-
+          Де́вочка is a child; де́вушка is old enough to be addressed as a young
+          woman. The difference is age, not size.
     collections:
       - people
       - family
@@ -12799,6 +12869,10 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "подушка=pillow"
+        why: >-
+          Де́душка is a grandfather, поду́шка a pillow.
     collections:
       - family
       - people
@@ -13218,6 +13292,11 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient word as English tree — and, further back, as true and
+          durable, from a root meaning firm as wood.
     collections:
       - nature
       - in the garden
@@ -13376,6 +13455,12 @@ words:
     cefr_level: A1
     animacy: a
     number: ["pl"]
+    facts:
+      - kind: note
+        text: >-
+          Serves as the plural of ребёнок, which has no ordinary one of its own —
+          two unrelated words filling one slot.
+        see: ["ребёнок=child", "ребята=guys"]
     collections:
       - family
       - people
@@ -14583,6 +14668,10 @@ words:
     confusable_with:
       - key: "дорого=expensively"
         why: "Доро́га is a road; до́рого means expensively, and the stress moves to the front."
+      - key: "дорогой=expensive"
+        why: >-
+          Доро́га is a road, дорого́й means dear or expensive. Despite the look
+          of them they come from different roots.
     facts:
       - kind: root
         text: "Road. The diminutive доро́жка is a path or a lane."
@@ -14882,6 +14971,13 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "ночь=night"
+        why: >-
+          Дочь is a daughter, ночь a night.
+      - key: "мочь=to be able"
+        why: >-
+          Дочь is a daughter; мочь is the verb to be able.
     collections:
       - family
       - people
@@ -15067,6 +15163,11 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "вдруг=suddenly"
+        why: >-
+          Друг is a friend; вдруг means suddenly. One letter, and nothing in the
+          meanings to connect them.
     collections:
       - people
       - romance and dating
@@ -15564,6 +15665,13 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          Masculine, though it declines exactly like a feminine noun in -я. Па́па
+          and мужчи́на do the same: the endings say one thing, the agreement
+          another — мой до́брый дя́дя.
+        see: ["папа=dad", "мужчина=man"]
     collections:
       - family
       - people
@@ -16406,6 +16514,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          Built straight on жить, to live.
+        see: ["жить=to live"]
     collections:
       - life and death
     en_gb:
@@ -16574,6 +16687,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French journal, a daily record, from Latin diurnalis. The same word as
+          English journal, but in Russian it is the magazine.
+        see: ["газета=newspaper"]
     collections:
       - reading
       - daily life
@@ -16807,6 +16926,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          From за́ утро, for the morning — the meal set aside for it. За́втра, the
+          word for tomorrow, is built the same way from the same утро.
+        see: ["завтра=tomorrow", "утро=morning"]
     collections:
       - in the kitchen
       - daily life
@@ -18259,6 +18384,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          One word covering the ground under your feet, the soil you dig, the land
+          a country sits on, and the planet itself — Земля́ with a capital letter.
     collections:
       - nature
       - geography
@@ -18792,6 +18922,11 @@ words:
     number: ["sg", "pl"]
     display_number: mixed
     en_pl: teeth
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient root as English comb — teeth and comb-teeth being one
+          idea before they were two.
     collections:
       - parts of the body
       - sickness and health
@@ -18891,6 +19026,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The noun of игра́ть, to play.
+        see: ["играть=to play"]
     collections:
       - hobbies and pastimes
       - daily life
@@ -21758,6 +21898,17 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French café, which is also their word for the coffee itself. Like most
+          loans ending in a vowel it never declines: в кафе́, whatever the case.
+        see: ["кофе=coffee"]
+    confusable_with:
+      - key: "кофе=coffee"
+        why: >-
+          Кафе́ is the place, ко́фе the drink you go there for. Both are
+          borrowed and neither declines, so only the vowels tell them apart.
     collections:
       - places
       - restaurants and cafes
@@ -22631,6 +22782,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin classis, a division or rank — the same word as English class, and
+          it carries the same double meaning of a room and a group of pupils.
     collections:
       - places
       - school
@@ -24215,6 +24371,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Through Polish from Latin caminata, a room with a fireplace — the heated
+          room, back when only one was.
     collections:
       - architecture
       - daily life
@@ -24422,6 +24583,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The noun behind ко́нчить and зако́нчить, to finish. Its opposite,
+          нача́ло, is the noun of нача́ть.
+        see: ["кончить=to finish", "начало=beginning"]
     collections:
       - daily life
     en_gb:
@@ -25532,6 +25699,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French costume, from Italian costume, custom — clothing as what is
+          customarily worn.
     collections:
       - clothes
       - work
@@ -25629,6 +25801,12 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          Arabic qahwa, which reached Russian through Dutch koffie. It is
+          masculine despite ending in -е, and it never declines.
+        see: ["кафе=café"]
     collections:
       - food and drink
       - restaurants and cafes
@@ -27450,6 +27628,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          From Latin coquina, to cook, through German — the same word as English
+          kitchen.
     collections:
       - in the kitchen
       - architecture
@@ -27759,6 +27942,10 @@ words:
       pl_ins: ла́мпами
       pl_pre: ла́мпах
     facts:
+      - kind: origin
+        text: >-
+          Greek lampas, a torch, through French lampe — the same word as English
+          lamp.
       - kind: root
         text: "Lamp. The ла́мпочка is the bulb in it."
         see: ["лампочка=light bulb"]
@@ -28933,6 +29120,12 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          Also the grammatical person — пе́рвое лицо́ is the first person. And in
+          official Russian a лицо́ is a person outright.
+        see: ["человек=person"]
     collections:
       - parts of the body
       - feelings and sensations
@@ -29697,6 +29890,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Arabic makhāzin, storehouses, through French magasin. English took the
+          same word for a magazine — a store of articles, or of bullets.
+        see: ["журнал=magazine"]
     collections:
       - shopping
       - places
@@ -30047,6 +30246,13 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          A nursery word, not a borrowing: babies everywhere make this sound
+          first, so most languages ended up with something like it. Ма́ма and
+          мать sit side by side for the same reason.
+        see: ["мать=mother", "папа=dad"]
     collections:
       - people
       - family
@@ -30353,6 +30559,10 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: root
+        text: >-
+          From an old verb meaning to smear or spread: the thing that is spread.
     collections:
       - in the kitchen
       - shopping
@@ -31410,6 +31620,11 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Short for French chemin de fer métropolitain, the railway of the capital.
+          Another loan in -о that never declines: на метро́, в метро́.
     collections:
       - public transport
       - travel
@@ -32050,6 +32265,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin minuta, made small: the hour divided up.
+        see: ["час=hour"]
     collections:
       - time
       - measurement and calculation
@@ -32676,6 +32896,10 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient root as English milk.
     collections:
       - in the kitchen
       - shopping
@@ -33472,6 +33696,9 @@ words:
       - kind: root
         text: "Husband now, but once simply a man — the sense мужи́к still carries."
         see: ["мужик=fellow"]
+      - kind: root
+        text: "Мужчи́на, the ordinary word for a man, is built straight on it."
+        see: ["мужчина=man"]
   "мужик=fellow":
     cefr_level: B1
     gender: m
@@ -33516,6 +33743,11 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          Built on муж, which now means husband but once meant any man.
+        see: ["муж=husband"]
     collections:
       - people
     en_gb:
@@ -33562,6 +33794,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Greek mouseion, a seat of the Muses — a place of study before it was a
+          place of exhibits.
+        see: ["музыка=music"]
     collections:
       - places
       - the arts
@@ -33612,6 +33850,12 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          Greek mousikē, the art of the Muses. Russian keeps the Greek stress
+          where English moved it.
+        see: ["музей=museum"]
     collections:
       - the arts
       - hobbies and pastimes
@@ -35069,6 +35313,11 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient word as Latin nebula and Greek nephos, a cloud — the
+          sky named after what crosses it.
     collections:
       - nature
       - faith
@@ -35626,6 +35875,12 @@ words:
     number: ["sg", "pl"]
     display_number: mixed
     en_pl: [legs, feet]
+    facts:
+      - kind: origin
+        text: >-
+          Originally a claw or hoof, from the same root as English nail — which
+          Russian keeps separately as но́готь.
+        see: ["ноготь=nail"]
     collections:
       - parts of the body
     en_gb:
@@ -36160,6 +36415,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          Об- around plus the old root of есть, to eat — the meal eaten around the
+          middle of the day.
+        see: ["есть=to eat", "еда=food"]
     collections:
       - in the kitchen
       - daily life
@@ -37247,6 +37508,11 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: root
+        text: >-
+          From the same root as оде́ться, to get dressed — what you put on.
+        see: ["одеться=to get dressed"]
     collections:
       - clothes
       - shopping
@@ -37278,6 +37544,11 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          Also from оде́ться, to cover oneself: the thing that covers you at night.
+        see: ["одеться=to get dressed", "одежда=clothes"]
     collections:
       - home
       - daily life
@@ -38230,6 +38501,10 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    confusable_with:
+      - key: "очень=very"
+        why: >-
+          О́сень is autumn, о́чень is very.
     collections:
       - the calendar
       - nature
@@ -38598,6 +38873,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The noun of отве́тить, to answer.
+        see: ["ответить=to answer", "вопрос=question"]
     collections:
       - school
       - daily life
@@ -38805,6 +39085,12 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          Not related to English father, despite the look of it — that word
+          survives in Russian only inside отчество, a patronymic. Оте́ц is from a
+          nursery word for a parent.
     collections:
       - family
       - people
@@ -40052,6 +40338,12 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French paletot. It is neuter and never declines — в пальто́ whatever the
+          case, like метро́ and ра́дио.
+        see: ["метро=metro", "радио=radio"]
     collections:
       - clothes
       - daily life
@@ -40155,6 +40447,12 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          The other nursery word, formed the same way as ма́ма and just as widely
+          shared between languages.
+        see: ["мама=mum"]
     collections:
       - people
       - family
@@ -40371,6 +40669,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          English park, through German and French, from a word meaning an
+          enclosure.
     collections:
       - places
       - nature
@@ -42622,6 +42925,11 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          From плат, a piece of cloth. The collective sense survives: пла́тье can
+          still mean clothing in general.
     collections:
       - clothes
       - shopping
@@ -43836,6 +44144,12 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The feminine of друг. Russian marks the difference where English has
+          only friend.
+        see: ["друг=friend"]
     collections:
       - people
       - daily life
@@ -44026,6 +44340,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          From the same root as е́хать and е́здить, to go by vehicle — a train is
+          simply a going.
+        see: ["ехать=to go by transport", "ездить=to go by transport"]
     collections:
       - public transport
       - travel
@@ -49855,6 +50175,10 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "ребята=guys"
+        why: >-
+          Рабо́та is work; ребя́та is a friendly word for a group of people.
     collections:
       - daily life
       - work
@@ -50007,6 +50331,12 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin radius, a ray. Neuter, and indeclinable like every other loan that
+          ends in -о.
+        see: ["метро=metro", "пальто=coat"]
     collections:
       - technology
       - daily life
@@ -51072,6 +51402,12 @@ words:
     gender: m
     animacy: a
     number: ["sg"]
+    facts:
+      - kind: note
+        text: >-
+          Its plural is де́ти, from a different word altogether. Ребя́та exists but
+          means something more like lads or guys.
+        see: ["дети=children", "ребята=guys"]
     collections:
       - family
       - people
@@ -51103,6 +51439,12 @@ words:
     cefr_level: A1
     animacy: a
     number: ["pl"]
+    facts:
+      - kind: note
+        text: >-
+          Historically the plural of ребёнок, now its own word for a friendly
+          group of any age — де́ти is the plural that means children.
+        see: ["ребёнок=child", "дети=children"]
     collections:
       - people
       - daily life
@@ -51462,6 +51804,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "рука=hand"
+        why: >-
+          Река́ is a river, рука́ a hand or arm. Both are feminine and stress the
+          ending, so the grammar never helps you choose.
     collections:
       - nature
       - places
@@ -51711,6 +52058,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French restaurant, literally something restoring — a place that restores
+          you.
     collections:
       - restaurants and cafes
       - places
@@ -52184,6 +52536,11 @@ words:
     cefr_level: A1
     animacy: a
     number: ["pl"]
+    facts:
+      - kind: root
+        text: >-
+          The ones who gave birth, from роди́ться.
+        see: ["родиться=to be born"]
     collections:
       - family
       - people
@@ -52679,6 +53036,11 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          The Greek form, Ρωσία, of Русь — the country named through a foreign
+          spelling of its own older name.
     collections:
       - geography
     en_gb:
@@ -53661,6 +54023,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          What is planted — literally what is set down, from the same root as
+          сади́ться, to sit down or settle.
+        see: ["садиться=to sit down"]
     collections:
       - in the garden
       - nature
@@ -53933,6 +54301,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          Сам plus лета́ть: a self-flier. Russian built the word out of its own
+          parts rather than borrowing one.
+        see: ["сам=oneself", "летать=to fly"]
     collections:
       - public transport
       - travel
@@ -54107,6 +54481,11 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          Sanskrit śarkarā, grit or gravel, which travelled through Arabic and
+          Greek into most of Europe — English sugar is the same word.
     collections:
       - in the kitchen
       - shopping
@@ -56557,6 +56936,12 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          From an ancient root meaning to hear: what is heard. слу́шать and сла́ва
+          (fame — what is heard about you) come from the same place.
+        see: ["слушать=to listen", "слава=glory"]
     collections:
       - reading
       - school
@@ -57081,6 +57466,11 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient word as English snow, unchanged in meaning for several
+          thousand years.
     collections:
       - nature
       - weather
@@ -57742,6 +58132,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient root as Latin sucus, juice or sap — behind English
+          succulent.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -60172,6 +60567,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "стул=chair"
+        why: >-
+          Стол is a table, стул a chair — and they are not related at all: стол
+          is native Russian, стул a German loan that happens to look like it.
     collections:
       - in the kitchen
       - daily life
@@ -60217,6 +60617,11 @@ words:
       pl_ins: стола́ми
       pl_pre: стола́х
     facts:
+      - kind: origin
+        text: >-
+          From an old verb meaning to spread — the cloth spread out, before the
+          thing under it. Its lookalike стул came from German and is not related.
+        see: ["стул=chair"]
       - kind: root
         text: "Table. A сто́лик is a small one — the little table you book in a restaurant."
         see: ["столик=small table"]
@@ -60437,6 +60842,12 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          A side or region, the same word as сторона́ — a country is a part of the
+          world off to one side.
+        see: ["сторона=side"]
     collections:
       - travel
       - places
@@ -61017,6 +61428,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          German Stuhl, borrowed whole. It looks like стол by accident: that one
+          is native Russian and much older.
+        see: ["стол=table"]
     collections:
       - home
       - daily life
@@ -61430,6 +61847,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French soupe, and the same word as English soup.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -61466,6 +61887,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Taken whole from English, and one of the newest words in this list —
+          Russian borrowed the shop and the name together.
+        see: ["магазин=shop"]
     collections:
       - places
       - shopping
@@ -61961,6 +62388,13 @@ words:
     animacy: i
     number: ["pl"]
     accented: "С.Ш.А."
+    facts:
+      - kind: note
+        text: >-
+          Соединённые Шта́ты Аме́рики — United States of America, letter for
+          letter. Russian reads it out as three letter-names, эс-ша-а, and the
+          whole thing never declines.
+        see: ["Америка=America"]
     collections:
       - geography
     en_gb:
@@ -62090,6 +62524,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          From the same root as сыро́й, damp or raw: cheese as the moist thing
+          milk becomes.
+        see: ["сырой=raw"]
     collections:
       - in the kitchen
       - shopping
@@ -62299,6 +62739,11 @@ words:
     gender: n
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          French taximètre, the meter that counted the fare. Indeclinable, and
+          neuter: на такси́.
     collections:
       - public transport
       - travel
@@ -62533,6 +62978,10 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          German Teller, borrowed and given a Russian ending.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -62602,6 +63051,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Greek theatron, a place for looking — from theaomai, to behold.
     collections:
       - the arts
       - places
@@ -62681,6 +63134,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Greek tēle, far off, plus Latin videre, to see. A far-seer, assembled
+          out of two languages neither of which is Russian.
     collections:
       - technology
       - daily life
@@ -64612,6 +65070,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          French toilette, a little cloth — by way of the dressing table it covered.
     collections:
       - places
       - home
@@ -65851,6 +66313,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin universitas, the whole — a community of scholars taken together.
     collections:
       - school
       - places
@@ -66020,6 +66486,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          From the old root meaning to speak, the one behind речь — a lesson is
+          what is set out in words.
+        see: ["речь=speech"]
     collections:
       - school
       - daily life
@@ -66521,6 +66993,11 @@ words:
     number: ["sg", "pl"]
     display_number: mixed
     en_pl: ears
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient word as English ear and Latin auris — the one behind
+          aural and auditorium.
     collections:
       - parts of the body
     en_gb:
@@ -67056,6 +67533,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin familia — but a false friend. In Russian it is the surname alone;
+          for a family Russian uses семья́.
     collections:
       - family
       - daily life
@@ -67374,6 +67856,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          English film, borrowed with the medium itself.
     collections:
       - the arts
       - hobbies and pastimes
@@ -68269,6 +68755,12 @@ words:
     gender: m
     animacy: i
     number: ["sg"]
+    facts:
+      - kind: origin
+        text: >-
+          Borrowed into Slavic from Germanic, and the same word as English loaf
+          (Old English hlāf). That hlāf is also the first half of lord — hlāford,
+          the keeper of the loaf — and of lady, hlǣfdīge, who kneaded it.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -69531,6 +70023,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          In the plural, часы́, it stops meaning hours and becomes a clock or a
+          watch — and in that sense it has no singular.
+        see: ["часы=clock"]
     collections:
       - the calendar
       - daily life
@@ -69636,6 +70134,12 @@ words:
     cefr_level: A1
     animacy: i
     number: ["pl"]
+    facts:
+      - kind: root
+        text: >-
+          The plural of час, an hour. A clock in Russian is simply hours, and the
+          word has no singular in this meaning.
+        see: ["час=hour"]
     collections:
       - daily life
     en_gb:
@@ -69736,6 +70240,11 @@ words:
     gender: m
     animacy: a
     number: ["sg"]
+    facts:
+      - kind: note
+        text: >-
+          Its plural is лю́ди, a different word entirely. Челове́ки does not exist
+          outside jokes and old texts.
     collections:
       - people
     en_gb:
@@ -72118,6 +72627,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin examen, the tongue of a balance: the thing that weighs you.
     collections:
       - school
     en_gb:
@@ -72960,6 +73473,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: note
+        text: >-
+          One word for the tongue in your mouth and the language you speak with
+          it. English keeps that link only in phrases like mother tongue.
     collections:
       - parts of the body
       - communication
@@ -73028,6 +73546,10 @@ words:
     gender: n
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          The same ancient word as English egg.
     collections:
       - in the kitchen
       - shopping

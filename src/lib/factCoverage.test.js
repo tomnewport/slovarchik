@@ -391,6 +391,38 @@ words:
     expect(confusableCandidates(words)).toEqual([])
   })
 
+  it('drops two numerals built on the same unit (#629)', () => {
+    // семна́дцать / се́мьдесят is a real confusion, and the family answers it
+    // better than a hand-written note would: both lead back to семь.
+    const words = fromYaml([
+      {
+        pos: 'numeral',
+        text: `
+words:
+  "семь=seven":
+    cefr_level: A1
+    type: cardinal
+    value: 7
+    accented: семь
+    en_gb: { standard: seven }
+  "семнадцать=seventeen":
+    cefr_level: A1
+    type: cardinal
+    value: 17
+    accented: семна́дцать
+    en_gb: { standard: seventeen }
+  "семьдесят=seventy":
+    cefr_level: A1
+    type: cardinal
+    value: 70
+    accented: се́мьдесят
+    en_gb: { standard: seventy }
+`,
+      },
+    ])
+    expect(confusableCandidates(words)).toEqual([])
+  })
+
   it('leaves a genuine sound-alike across the two parts of speech alone', () => {
     // голо́дный / холо́дный are not one word: the shortlist should still offer
     // them, so the exclusion has to be the link and not the pos pairing.
@@ -427,6 +459,38 @@ describe('the level filter (#627)', () => {
       text: `words:${at('ходить=to go', 'ходи́ть', 'A1')}${at('входить=to enter', 'входи́ть', 'A1')}${at('выходить=to exit', 'выходи́ть', 'B1')}${at('переходить=to cross', 'переходи́ть', 'B1')}`,
     },
   ])
+
+  it('never proposes a breakdown for a numeral', () => {
+    // The only candidate the prefix scan ever found among numerals was со́рок
+    // as «со- + рок» (#629). Numerals compose; they do not take prefixes.
+    const words = fromYaml([
+      {
+        pos: 'numeral',
+        text: `
+words:
+  "сорок=forty":
+    cefr_level: A1
+    type: cardinal
+    value: 40
+    accented: со́рок
+    en_gb: { standard: forty }
+`,
+      },
+      {
+        pos: 'noun',
+        text: `
+words:
+  "рок=fate":
+    cefr_level: B2
+    accented: рок
+    gender: m
+    animacy: i
+    en_gb: { standard: fate }
+`,
+      },
+    ])
+    expect(breakdownCandidates(words)).toEqual([])
+  })
 
   it('keeps a breakdown candidate at its own level, not its root’s', () => {
     // Every one of these hangs off an A1 root, but the fact is authored on the

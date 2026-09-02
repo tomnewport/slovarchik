@@ -15,6 +15,12 @@ words:
     governs: ["gen"]
     en_gb:
       standard: without (not having something)
+    facts:
+      - kind: note
+        text: >-
+          Always takes the genitive. That is the case Russian reaches for when
+          something is absent, so the grammar and the meaning say the same
+          thing: без са́хара is literally of-sugar-none.
     usage:
       - ru: Я пью ко́фе без са́хара.
         en_gb: I drink coffee without sugar.
@@ -171,6 +177,12 @@ words:
     governs: ["gen"]
     en_gb:
       standard: for (intended for someone)
+    facts:
+      - kind: note
+        text: >-
+          Takes the genitive, and names who or what something is meant for:
+          пода́рок для ма́мы. It is about the person who benefits, not about the
+          reason something is done.
     usage:
       - ru: Э́тот пода́рок для тебя́.
         en_gb: This present is for you.
@@ -187,6 +199,16 @@ words:
       alt:
         - before
         - as far as
+    facts:
+      - kind: note
+        text: >-
+          Takes the genitive and works the same way in space and in time: до
+          Москвы́ is as far as Moscow, до пяти́ часо́в is up to five o'clock.
+      - kind: root
+        text: >-
+          The same до- that begins the verbs of getting all the way there, like
+          дойти́ (to reach on foot).
+        see: ["дойти=to reach"]
     usage:
       - ru: Магази́н рабо́тает до девяти́.
         en_gb: The shop is open until nine.
@@ -351,6 +373,13 @@ words:
       alt:
         - onto (with the accusative)
         - to
+    facts:
+      - kind: note
+        text: >-
+          Two cases, two questions. With the accusative it answers where to —
+          кладу́ кни́гу на стол; with the prepositional, where at — кни́га на
+          столе́. в, под and за split the same way.
+        see: ["в=in", "под=under", "за=behind"]
     usage:
       - ru: Кни́га на столе́.
         en_gb: The book is on the table.
@@ -366,6 +395,13 @@ words:
       standard: above (higher than something)
       alt:
         - over
+    facts:
+      - kind: note
+        text: >-
+          One of three prepositions that put one thing in space against another:
+          над above, под under, пе́ред in front. All three take the instrumental
+          when nothing is moving.
+        see: ["под=under", "перед=in front of"]
     usage:
       - ru: Над го́родом лети́т самолёт.
         en_gb: A plane is flying above the city.
@@ -483,6 +519,13 @@ words:
       standard: in front of (directly ahead of)
       alt:
         - before (a time or event)
+    facts:
+      - kind: note
+        text: >-
+          The third of the spatial set with над and под, and like them it takes
+          the instrumental: пе́ред до́мом. It also works in time — пе́ред
+          обе́дом, just before lunch.
+        see: ["над=above", "под=under"]
     usage:
       - ru: Маши́на стои́т пе́ред до́мом.
         en_gb: The car stands in front of the house.
@@ -521,6 +564,13 @@ words:
       alt:
         - beneath
         - below
+    facts:
+      - kind: note
+        text: >-
+          Instrumental for where something is — кот под столо́м — and accusative
+          for where it is heading: кот побежа́л под стол. над and пе́ред are its
+          neighbours in space.
+        see: ["над=above", "перед=in front of", "на=on"]
     usage:
       - ru: Кот сиди́т под столо́м.
         en_gb: The cat is sitting under the table.
@@ -645,6 +695,13 @@ words:
       standard: with (together with)
       alt:
         - from / off (with the genitive)
+    facts:
+      - kind: note
+        text: >-
+          Two prepositions sharing one spelling. With the instrumental it means
+          together with — ко́фе с молоко́м; with the genitive it means off or
+          down from — упа́л со стола́, where it is the opposite of на.
+        see: ["на=on", "из=from"]
     usage:
       - ru: Я пью чай с са́харом.
         en_gb: I drink tea with sugar.

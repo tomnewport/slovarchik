@@ -218,9 +218,18 @@ describe('word facts survive the cache round trip', () => {
 
     await loadFromCache()
 
-    // Some nouns now carry authored facts (#590); the point here is the *other*
-    // words — one that authors nothing gets empty lists, not undefined.
-    const authored = new Set(Object.entries(nounsDoc.words).filter(([, w]) => w.facts).map(([k]) => k))
+    // Corpus words carry authored facts and confusable links now (#590, #630);
+    // the point here is the *other* words — one that authors nothing gets empty
+    // lists, not undefined. A confusable link is symmetrised by linkFacts, so a
+    // word can hold one without having authored it: both ends come out.
+    const authored = new Set()
+    for (const [key, w] of Object.entries(nounsDoc.words)) {
+      if (w.facts) authored.add(key)
+      for (const c of w.confusable_with ?? []) {
+        authored.add(key)
+        if (c?.key) authored.add(c.key)
+      }
+    }
     const plain = state.words.filter((w) => !authored.has(w.key))
     expect(plain.length).toBeGreaterThan(0)
     for (const w of plain) {

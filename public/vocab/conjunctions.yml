@@ -88,6 +88,13 @@ words:
     accented: е́сли
     en_gb:
       standard: if (introducing a condition)
+    facts:
+      - kind: note
+        text: >-
+          Introduces a condition that might really happen, with ordinary tenses:
+          е́сли бу́дет дождь, мы оста́немся до́ма. Add бы and it turns into the
+          unreal kind — е́сли бы был дождь, if it were raining.
+        see: ["бы=would"]
     usage:
       - ru: Е́сли бу́дет дождь, мы оста́немся до́ма.
         en_gb: If it rains, we will stay at home.
@@ -135,6 +142,11 @@ words:
         - how
         - like
         - when
+    facts:
+      - kind: note
+        text: >-
+          Two jobs in one word. It asks how something is — как дела́? — and it
+          compares: бе́лый как снег, white as snow.
     usage:
       - ru: Де́лай, как я говорю́.
         en_gb: Do as I say.
@@ -150,6 +162,11 @@ words:
     accented: когда́
     en_gb:
       standard: when (at the time that)
+    facts:
+      - kind: note
+        text: >-
+          Both the question when? and the word that ties two events together:
+          когда́ я пришёл, все спа́ли. As a joiner it always takes a comma.
     usage:
       - ru: Когда́ я приду́, я позвоню́.
         en_gb: When I arrive, I will call.
@@ -182,6 +199,13 @@ words:
     accented: но
     en_gb:
       standard: but (introducing a contrast)
+    facts:
+      - kind: note
+        text: >-
+          Marks a real contrast — what follows is not what you would expect. а
+          is the gentler one, setting two things side by side, and и simply
+          adds.
+        see: ["а=and", "и=and"]
     usage:
       - ru: Я хочу́ спать, но на́до рабо́тать.
         en_gb: I want to sleep, but I have to work.

@@ -29,6 +29,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Augustus, renamed for the emperor Augustus, who would not be
+          outdone by Caesar’s July.
     collections:
       - the calendar
     en_gb:
@@ -63,6 +68,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Aprilis, probably from aperire, to open — the month things open up.
     collections:
       - the calendar
     en_gb:
@@ -173,6 +182,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin December, the tenth month of the old Roman year. Latin decem is the same ancient word as Russian де́сять.
+        see: ["десять=ten", "сентябрь=September"]
     collections:
       - the calendar
     en_gb:
@@ -240,6 +254,15 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Julius, renamed for Julius Caesar, who was born in it.
+    confusable_with:
+      - key: "июнь=June"
+        why: >-
+          Ию́ль is July, ию́нь is June — one letter apart, and next to each other
+          in the calendar as well.
     collections:
       - the calendar
     en_gb:
@@ -272,6 +295,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Junius, for the goddess Juno.
     collections:
       - the calendar
     en_gb:
@@ -306,6 +333,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Maius, for the goddess Maia.
     collections:
       - the calendar
     en_gb:
@@ -340,6 +371,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Martius, the month of Mars. It began the Roman year, which is why four of the months further down are counted wrong.
     collections:
       - the calendar
     en_gb:
@@ -433,6 +468,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin November, the ninth month, counting from a March new year — two
+          out from where it sits now.
+        see: ["сентябрь=September"]
     collections:
       - the calendar
     en_gb:
@@ -465,6 +506,11 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin October, the eighth month of a year that began in March. Latin octo is the same ancient word as Russian во́семь.
+        see: ["восемь=eight", "сентябрь=September"]
     collections:
       - the calendar
     en_gb:
@@ -567,6 +613,12 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The fifth day, from пять. Three of the seven days are simply
+          counted: среда́ the middle, четве́рг the fourth, пя́тница the fifth.
+        see: ["пять=five", "четверг=Thursday", "среда=Wednesday"]
     collections:
       - the calendar
     en_gb:
@@ -627,6 +679,16 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin September, the seventh month — because the Roman year began in March. Latin septem is the same ancient word as Russian семь.
+        see: ["семь=seven", "март=March"]
+      - kind: note
+        text: >-
+          The -брь the last four months share is the Greek -βριος that carried
+          them into Slavic. All four move their stress onto the ending as soon
+          as they decline: сентя́брь, but в сентябре́.
     collections:
       - the calendar
     en_gb:
@@ -663,6 +725,12 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The middle — of a week that starts on Monday, so Wednesday sits at
+          its centre. Same root as среди́ (among) and середи́на (the middle).
+        see: ["среди=among", "середина=middle"]
     collections:
       - the calendar
     en_gb:
@@ -697,6 +765,13 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          The one borrowed day: Hebrew shabbat, the sabbath, which reached
+          Russian through Greek. Its neighbours are all home-grown counting
+          words.
+        see: ["пятница=Friday"]
     collections:
       - the calendar
     en_gb:
@@ -729,6 +804,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Februarius, from the februa, the rites of purification the Romans held at this point in the year.
     collections:
       - the calendar
     en_gb:
@@ -763,6 +842,12 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: root
+        text: >-
+          The fourth day, from четы́ре — again counting from Monday. Friday
+          and Wednesday are named the same way, by where they fall.
+        see: ["четыре=four", "пятница=Friday", "среда=Wednesday"]
     collections:
       - the calendar
     en_gb:
@@ -839,6 +924,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: origin
+        text: >-
+          Latin Januarius, the month of Janus, the god who faced both ways at a doorway — the year’s own doorway. All twelve Russian month names came this way, through Greek and Church Slavonic.
     collections:
       - the calendar
     en_gb:

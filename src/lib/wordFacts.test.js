@@ -9,6 +9,7 @@ import {
   confusionNote,
   factIssues,
   FACT_KINDS,
+  NUMERAL_LABEL,
 } from './wordFacts.js'
 
 // buildWords takes parsed docs; these tests author inline YAML, so parse first.
@@ -447,6 +448,59 @@ words:
     expect(issues.map((i) => i.message)).toContain(
       '"плохой=bad" is already linked automatically — don\'t author it',
     )
+  })
+})
+
+describe('relatedWords: numeral families (#629)', () => {
+  const nums = fromYaml([
+    {
+      pos: 'numeral',
+      text: `
+words:
+  "девять=nine":
+    cefr_level: A1
+    type: cardinal
+    value: 9
+    accented: де́вять
+    en_gb: { standard: nine }
+  "девятый=ninth":
+    cefr_level: A1
+    type: ordinal
+    value: 9
+    accented: девя́тый
+    en_gb: { standard: ninth }
+  "девятнадцать=nineteen":
+    cefr_level: A1
+    type: cardinal
+    value: 19
+    accented: девятна́дцать
+    en_gb: { standard: nineteen }
+`,
+    },
+  ])
+  const byKey = byKeyOf(nums)
+
+  it('gives the unit its family, each row saying which way round it goes', () => {
+    const rows = relatedWords(find(nums, 'девять=nine'), byKey)
+    expect(rows.map((r) => [r.ru, r.via, r.role])).toEqual([
+      ['девя́тый', 'ordinal', 'derived'],
+      ['девятна́дцать', 'teen', 'derived'],
+    ])
+  })
+
+  it('reads the other way from a member of the family', () => {
+    const [row] = relatedWords(find(nums, 'девятнадцать=nineteen'), byKey)
+    expect(row).toMatchObject({ relation: 'numeral', ru: 'де́вять', via: 'teen', role: 'base' })
+  })
+
+  it('has wording for every direction it can report', () => {
+    // The panel, the intro card and the correction messages share one phrasing,
+    // so a gap here is a row that renders as "the same family" and says nothing.
+    for (const via of ['ordinal', 'teen', 'tens', 'hundreds']) {
+      for (const role of ['base', 'derived']) {
+        expect(NUMERAL_LABEL[`${via}:${role}`]).toBeTruthy()
+      }
+    }
   })
 })
 

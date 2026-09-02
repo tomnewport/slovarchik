@@ -315,6 +315,10 @@ words:
     accented: двена́дцать
     en_gb:
       standard: twelve
+    confusable_with:
+      - key: "тринадцать=thirteen"
+        why: >-
+          Двена́дцать is twelve, трина́дцать thirteen.
     usage:
       - ru: В году́ двена́дцать ме́сяцев.
         en_gb: There are twelve months in a year.
@@ -413,6 +417,10 @@ words:
     accented: девя́тый
     en_gb:
       standard: ninth
+    confusable_with:
+      - key: "десятый=tenth"
+        why: >-
+          Девя́тый is ninth, деся́тый tenth.
     forms:
       m: девя́тый
       f: девя́тая
@@ -432,6 +440,10 @@ words:
     accented: де́вять
     en_gb:
       standard: nine
+    confusable_with:
+      - key: "десять=ten"
+        why: >-
+          Де́вять is nine, де́сять ten.
     usage:
       - ru: Ему́ де́вять лет.
         en_gb: He is nine years old.
@@ -546,6 +558,10 @@ words:
       standard: zero (nought)
       alt:
         - nought
+    confusable_with:
+      - key: "соль=salt"
+        why: >-
+          Ноль is zero, соль is salt.
     usage:
       - ru: Температу́ра — ноль гра́дусов.
         en_gb: The temperature is zero degrees.
@@ -704,6 +720,10 @@ words:
     accented: пятна́дцать
     en_gb:
       standard: fifteen
+    confusable_with:
+      - key: "шестнадцать=sixteen"
+        why: >-
+          Пятна́дцать is fifteen, шестна́дцать sixteen.
     usage:
       - ru: Уро́к дли́тся пятна́дцать мину́т.
         en_gb: The lesson lasts fifteen minutes.
@@ -821,6 +841,10 @@ words:
     accented: семна́дцать
     en_gb:
       standard: seventeen
+    confusable_with:
+      - key: "восемнадцать=eighteen"
+        why: >-
+          Семна́дцать is seventeen, восемна́дцать eighteen.
     forms:
       nom: семна́дцать
       gen: семна́дцати
@@ -842,6 +866,11 @@ words:
     accented: семь
     en_gb:
       standard: seven
+    confusable_with:
+      - key: "семья=family"
+        why: >-
+          Семь is seven, семья́ a family. They look like relatives and are not
+          related at all.
     usage:
       - ru: В неде́ле семь дней.
         en_gb: There are seven days in a week.
@@ -863,6 +892,10 @@ words:
     accented: се́мьдесят
     en_gb:
       standard: seventy (both halves of the word decline)
+    confusable_with:
+      - key: "восемьдесят=eighty"
+        why: >-
+          Се́мьдесят is seventy, во́семьдесят eighty.
     usage:
       - ru: Мое́й ба́бушке се́мьдесят лет.
         en_gb: My grandmother is seventy years old.

@@ -18,7 +18,7 @@ import { computed } from 'vue'
 
 import { state as vocabState } from '../stores/vocab.js'
 import { stateOf } from '../stores/progress.js'
-import { wordFacts, factParts, relatedWords, hasWordFacts } from '../lib/wordFacts.js'
+import { wordFacts, factParts, relatedWords, hasWordFacts, NUMERAL_LABEL } from '../lib/wordFacts.js'
 import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
 import SpeakButton from './SpeakButton.vue'
 
@@ -68,12 +68,17 @@ function relationLabel(row) {
       // One word in two parts of speech, so which way round depends on which
       // end the learner is standing at.
       return other?.pos === 'adverb' ? 'the adverb from it' : 'the adjective it comes from'
+    case 'numeral':
+      return NUMERAL_LABEL[`${row.via}:${row.role}`] ?? 'the same family'
     case 'heteronym':
       return 'same spelling, different stress'
     case 'same-meaning':
       return `also means “${record.value?.meaning || row.en}”`
     case 'root':
       return 'same root'
+    case 'see-also':
+      // A `see:` on a note is a pointer, not a claim about morphology.
+      return 'see also'
     default:
       return 'easily confused'
   }

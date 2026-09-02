@@ -103,6 +103,11 @@ words:
       standard: all (the whole of something)
       alt:
         - the whole
+    facts:
+      - kind: note
+        text: >-
+          The whole of one thing — весь день, all day long. In the plural it
+          becomes все and means everyone, or all of them.
     usage:
       - ru: Во всём ми́ре зна́ют э́ту пе́сню.
         en_gb: All over the world people know this song.
@@ -211,6 +216,19 @@ words:
     accented: его́
     en_gb:
       standard: his (belonging to him; this form never changes)
+    facts:
+      - kind: note
+        text: >-
+          The possessive that never changes: его́ дом, его́ маши́на, его́ де́ти.
+          мой and наш agree with whatever is owned; его́, её and их simply do
+          not.
+        see: ["мой=my", "её=her", "их=their"]
+      - kind: note
+        text: >-
+          It is also он in the accusative and genitive, so я ви́жу его́ is I see
+          him, not I see his. Only the position in the sentence tells them
+          apart.
+        see: ["он=he"]
     usage:
       - ru: Я зна́ю его́ бра́та.
         en_gb: I know his brother.
@@ -228,6 +246,17 @@ words:
       standard: her (belonging to her; this form never changes)
       alt:
         - hers
+    facts:
+      - kind: note
+        text: >-
+          Never changes its form: её дом, её маши́на, её де́ти. That is what
+          separates it from мой and наш, which agree with the thing owned.
+        see: ["мой=my", "его=his", "их=their"]
+      - kind: note
+        text: >-
+          It doubles as она́ in the accusative and genitive — я ви́жу её is I
+          see her.
+        see: ["она=she"]
     usage:
       - ru: Я зна́ю её сестру́.
         en_gb: I know her sister.
@@ -243,6 +272,17 @@ words:
       standard: their (belonging to them; this form never changes)
       alt:
         - theirs
+    facts:
+      - kind: note
+        text: >-
+          Fixed in one form however many things are owned: их дом, их маши́на,
+          их де́ти.
+        see: ["его=his", "её=her"]
+      - kind: note
+        text: >-
+          It is also они́ in the accusative and genitive: я ви́жу их, I see
+          them.
+        see: ["они=they"]
     usage:
       - ru: Их де́ти у́чатся в шко́ле.
         en_gb: Their children study at school.
@@ -316,6 +356,11 @@ words:
       standard: which (asking what kind or sort)
       alt:
         - what kind of
+    confusable_with:
+      - key: "такой=such"
+        why: >-
+          Russian pairs к- questions with т- answers right through: како́й asks
+          which, тако́й answers such a one. куда́ and туда́ work the same way.
     usage:
       - ru: Каки́м спо́ртом ты занима́ешься?
         en_gb: What sport do you do?
@@ -439,6 +484,12 @@ words:
     accented: кто
     en_gb:
       standard: who (asking about a person)
+    facts:
+      - kind: note
+        text: >-
+          Asks about a person, where что asks about a thing. It counts as
+          masculine singular even about a crowd: кто пришёл?
+        see: ["что=what"]
     usage:
       - ru: Кому́ ты пи́шешь?
         en_gb: Who are you writing to?
@@ -555,6 +606,13 @@ words:
       standard: my (belonging to me)
       alt:
         - mine
+    facts:
+      - kind: note
+        text: >-
+          Agrees with what is owned, never with the owner: мой дом, моя́ кни́га,
+          моё окно́. твой and наш behave the same way; его́, её and их never
+          change at all.
+        see: ["твой=your", "наш=our", "его=his"]
     usage:
       - ru: Возьми́ мою́ ру́чку.
         en_gb: Take my pen.
@@ -616,6 +674,13 @@ words:
     accented: мы
     en_gb:
       standard: we (the speaker and others)
+    facts:
+      - kind: note
+        text: >-
+          The speaker and at least one other person. Russian makes no separate
+          word for a we that includes you and a we that does not — мы covers
+          both.
+        see: ["я=I"]
     usage:
       - ru: Ма́ма ждёт нас до́ма.
         en_gb: Mum is waiting for us at home.
@@ -660,6 +725,12 @@ words:
       standard: our (belonging to us)
       alt:
         - ours
+    facts:
+      - kind: note
+        text: >-
+          Declines like an adjective and agrees with what is owned: наш дом,
+          на́ша кни́га, на́ше окно́. ваш is its formal and plural counterpart.
+        see: ["ваш=your", "мой=my"]
     usage:
       - ru: В на́шем до́ме пять этаже́й.
         en_gb: There are five floors in our building.
@@ -853,6 +924,13 @@ words:
       standard: he (a male person)
       alt:
         - it (for masculine nouns)
+    facts:
+      - kind: note
+        text: >-
+          Stands for any masculine noun, not only a man: стол — он в ку́хне.
+          Every Russian noun is он, она́ or оно́, and its ending usually says
+          which.
+        see: ["она=she", "оно=it"]
     usage:
       - ru: Я встре́тила его́ в па́рке.
         en_gb: I met him in the park.
@@ -901,6 +979,12 @@ words:
       standard: she (a female person)
       alt:
         - it (for feminine nouns)
+    facts:
+      - kind: note
+        text: >-
+          Used of any feminine noun, not only of a woman: кни́га — она́ на
+          столе́. Calling a table it is the commonest early slip in Russian.
+        see: ["он=he", "оно=it"]
     usage:
       - ru: Я ви́жу её ка́ждое у́тро.
         en_gb: I see her every morning.
@@ -946,6 +1030,12 @@ words:
     accented: они́
     en_gb:
       standard: they (more than one person or thing)
+    facts:
+      - kind: note
+        text: >-
+          One plural for everything — people, animals and objects alike, whatever
+          gender they had in the singular.
+        see: ["он=he", "она=she"]
     usage:
       - ru: Я хорошо́ зна́ю их.
         en_gb: I know them well.
@@ -983,6 +1073,12 @@ words:
     accented: оно́
     en_gb:
       standard: it (for neuter nouns)
+    facts:
+      - kind: note
+        text: >-
+          For neuter nouns, the ones ending in -о or -е: окно́ — оно́ откры́то.
+          It is far rarer than он and она́, because most nouns are one of those.
+        see: ["он=he", "она=she"]
     usage:
       - ru: Э́то письмо́ ва́жное, прочита́й его́.
         en_gb: This letter is important, read it.
@@ -1181,6 +1277,12 @@ words:
       standard: how many (asking about quantity)
       alt:
         - how much
+    facts:
+      - kind: note
+        text: >-
+          Whatever is being counted goes into the genitive: ско́лько книг,
+          ско́лько вре́мени. мно́го does exactly the same.
+        see: ["много=a lot"]
     usage:
       - ru: Ско́лько э́то сто́ит?
         en_gb: How much does this cost?
@@ -1197,6 +1299,13 @@ words:
       alt:
         - so
         - what a
+    facts:
+      - kind: note
+        text: >-
+          Points at a kind rather than at a thing: тако́й дом is a house like
+          that one. It declines like an adjective, and answers како́й, which
+          asks the same question.
+        see: ["какой=which", "этот=this"]
     usage:
       - ru: У меня́ тако́й же телефо́н.
         en_gb: I have the same phone.
@@ -1465,6 +1574,13 @@ words:
     accented: что
     en_gb:
       standard: what (asking about a thing)
+    facts:
+      - kind: note
+        text: >-
+          Asks about a thing, where кто asks about a person. The same word also
+          joins two clauses — я зна́ю, что он до́ма — and Russian always puts a
+          comma in front of it.
+        see: ["кто=who"]
     usage:
       - ru: На чём ты е́здишь на рабо́ту?
         en_gb: What do you travel to work on?
@@ -1540,6 +1656,13 @@ words:
     accented: э́тот
     en_gb:
       standard: this (the nearer one)
+    facts:
+      - kind: note
+        text: >-
+          The nearer one, against тот for the further — this against that. It
+          declines like an adjective and agrees with its noun: э́тот дом, э́та
+          кни́га, э́то окно́.
+        see: ["тот=that"]
     usage:
       - ru: Я хорошо́ зна́ю э́того челове́ка.
         en_gb: I know this person well.
@@ -1599,6 +1722,12 @@ words:
     accented: я
     en_gb:
       standard: I (the speaker)
+    facts:
+      - kind: note
+        text: >-
+          Carries no gender itself, but the past tense gives it away: я сказа́л
+          from a man, я сказа́ла from a woman.
+        see: ["мы=we"]
     usage:
       - ru: У меня́ есть больша́я соба́ка.
         en_gb: I have a big dog.
