@@ -1404,6 +1404,11 @@ words:
   "завтра=tomorrow":
     cefr_level: A1
     accented: за́втра
+    confusable_with:
+      - key: "завтрак=breakfast"
+        why: >-
+          За́втра is tomorrow, за́втрак is breakfast — one letter apart, and both
+          really are built on у́тро, morning.
     collections:
       - daily life
     en_gb:
@@ -1921,6 +1926,11 @@ words:
   "куда=where to":
     cefr_level: A1
     accented: куда́
+    confusable_with:
+      - key: "туда=there"
+        why: >-
+          Куда́ asks where to, туда́ answers there — the same к-/т- pairing as
+          како́й and тако́й.
     collections:
       - directions
       - places
@@ -2062,6 +2072,10 @@ words:
   "мало=little":
     cefr_level: A1
     accented: ма́ло
+    confusable_with:
+      - key: "масло=butter"
+        why: >-
+          Ма́ло is little or not much; ма́сло is butter or oil.
     collections:
       - measurement and calculation
       - daily life

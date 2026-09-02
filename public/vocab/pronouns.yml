@@ -356,6 +356,11 @@ words:
       standard: which (asking what kind or sort)
       alt:
         - what kind of
+    confusable_with:
+      - key: "такой=such"
+        why: >-
+          Russian pairs к- questions with т- answers right through: како́й asks
+          which, тако́й answers such a one. куда́ and туда́ work the same way.
     usage:
       - ru: Каки́м спо́ртом ты занима́ешься?
         en_gb: What sport do you do?

@@ -2160,6 +2160,11 @@ words:
     pair: "увидеть=to see"
     en_gb:
       standard: to see (to notice with your eyes)
+    confusable_with:
+      - key: "сидеть=to sit"
+        why: >-
+          Ви́деть is to see, сиде́ть to sit. One letter apart, and both are
+          second-conjugation, so their endings match all the way through.
     collections:
       - feelings and sensations
       - daily life
@@ -4635,6 +4640,10 @@ words:
     accented: вы́пить
     aspect: pf
     pair: "пить=to drink"
+    confusable_with:
+      - key: "купить=to buy"
+        why: >-
+          Вы́пить is to drink up; купи́ть is to buy.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -5709,6 +5718,13 @@ words:
       standard: to speak (to say words)
       alt:
         - to talk
+    confusable_with:
+      - key: "повторить=to repeat"
+        why: >-
+          Говори́ть is to speak, повтори́ть to repeat.
+      - key: "готовить=to cook"
+        why: >-
+          Говори́ть is to speak, гото́вить to cook or to prepare.
     collections:
       - communication
       - daily life
@@ -6289,6 +6305,10 @@ words:
     accented: дать
     aspect: pf
     pair: "давать=to give"
+    confusable_with:
+      - key: "ждать=to wait"
+        why: >-
+          Дать is to give, ждать to wait.
     collections:
       - daily life
     en_gb:
@@ -8235,6 +8255,10 @@ words:
     accented: есть
     aspect: impf
     pair: "съесть=to eat up"
+    confusable_with:
+      - key: "шесть=six"
+        why: >-
+          Есть is to eat — and also there is; шесть is six.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -8708,6 +8732,10 @@ words:
     aspect: impf
     en_gb:
       standard: to live (to be alive, or to reside)
+    confusable_with:
+      - key: "пить=to drink"
+        why: >-
+          Жить is to live, пить to drink.
     collections:
       - life and death
     usage:
@@ -11923,6 +11951,10 @@ words:
     accented: звать
     aspect: impf
     pair: "позвать=to call"
+    confusable_with:
+      - key: "знать=to know"
+        why: >-
+          Звать is to call someone, знать to know.
     collections:
       - communication
       - daily life
@@ -14810,6 +14842,10 @@ words:
     accented: ложи́ться
     aspect: impf
     pair: "лечь=to lie down"
+    confusable_with:
+      - key: "родиться=to be born"
+        why: >-
+          Ложи́ться is to lie down, роди́ться to be born.
     collections:
       - daily life
     en_gb:
@@ -15521,6 +15557,10 @@ words:
     accented: мочь
     aspect: impf
     pair: "смочь=to be able"
+    confusable_with:
+      - key: "ночь=night"
+        why: >-
+          Мочь is the verb to be able; ночь is a night.
     collections:
       - daily life
     en_gb:
@@ -16451,6 +16491,11 @@ words:
     accented: написа́ть
     aspect: pf
     pair: "писать=to write"
+    confusable_with:
+      - key: "начинать=to begin"
+        why: >-
+          Написа́ть is to write; начина́ть is to begin. The на- is shared, the
+          roots are not.
     collections:
       - school
       - communication
@@ -17194,6 +17239,11 @@ words:
     accented: нача́ть
     aspect: pf
     pair: "начинать=to begin"
+    confusable_with:
+      - key: "научить=to teach"
+        why: >-
+          Нача́ть is to begin, научи́ть to teach — same prefix, different verbs
+          underneath.
     collections:
       - daily life
     en_gb:
@@ -17249,6 +17299,10 @@ words:
     accented: нача́ться
     aspect: pf
     pair: "начинаться=to begin"
+    confusable_with:
+      - key: "научиться=to learn"
+        why: >-
+          Нача́ться is to begin; научи́ться is to learn how to do something.
     collections:
       - daily life
     en_gb:
@@ -22800,6 +22854,14 @@ words:
     cefr_level: A1
     accented: петь
     aspect: impf
+    confusable_with:
+      - key: "пить=to drink"
+        why: >-
+          Петь is to sing, пить to drink. Their present tenses stay one letter
+          apart too: пою́ against пью.
+      - key: "пять=five"
+        why: >-
+          Петь is the verb to sing; пять is the number five.
     collections:
       - the arts
       - faith
@@ -22976,6 +23038,10 @@ words:
     accented: пить
     aspect: impf
     pair: "выпить=to drink up"
+    confusable_with:
+      - key: "пять=five"
+        why: >-
+          Пить is to drink; пять is the number five.
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -24808,6 +24874,10 @@ words:
     pair: "думать=to think"
     en_gb:
       standard: to think (to give something some thought)
+    confusable_with:
+      - key: "понимать=to understand"
+        why: >-
+          Поду́мать is to think, понима́ть to understand.
     collections:
       - abstract
     usage:
@@ -25610,6 +25680,10 @@ words:
     aspect: pf
     governs: dat
     pair: "показывать=to show"
+    confusable_with:
+      - key: "покупать=to buy"
+        why: >-
+          Показа́ть is to show, покупа́ть to buy.
     collections:
       - communication
       - daily life
@@ -26983,6 +27057,10 @@ words:
     accented: поня́ть
     aspect: pf
     pair: "понимать=to understand"
+    confusable_with:
+      - key: "помнить=to remember"
+        why: >-
+          Поня́ть is to understand, по́мнить to remember.
     collections:
       - school
       - daily life
@@ -36871,6 +36949,10 @@ words:
     confusable_with:
       - key: "слышать=to hear"
         why: "слу́шать is the deliberate act of listening; слы́шать is what your ears do whether you meant it or not."
+      - key: "услышать=to hear"
+        why: >-
+          Слу́шать is to listen — pointing your ears at something; услы́шать is
+          to hear, which is what happens as a result.
   "слыхать=to hear":
     cefr_level: B1
     accented: слыха́ть
@@ -42555,6 +42637,11 @@ words:
     accented: услы́шать
     aspect: pf
     pair: "слышать=to hear"
+    confusable_with:
+      - key: "послушать=to listen to"
+        why: >-
+          Услы́шать is to hear something; послу́шать is to give it a listen. One
+          is the result, the other the act.
     collections:
       - daily life
     en_gb:
@@ -43542,6 +43629,10 @@ words:
     aspect: impf
     motion: indet
     motion_pair: "идти=to go"
+    confusable_with:
+      - key: "хотеть=to want"
+        why: >-
+          Ходи́ть is to walk, хоте́ть to want.
     collections:
       - motion
       - daily life

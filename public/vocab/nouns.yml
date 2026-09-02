@@ -4723,6 +4723,11 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "брать=to take"
+        why: >-
+          Брат is a brother; брать is the verb to take. Only the soft sign
+          separates a noun from an infinitive.
     collections:
       - family
       - people
@@ -6370,6 +6375,10 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "вечер=evening"
+        why: >-
+          Ве́тер is wind, ве́чер evening.
     collections:
       - nature
       - geography
@@ -12748,6 +12757,15 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "дедушка=grandfather"
+        why: >-
+          Де́вушка is a young woman, де́душка a grandfather — an embarrassing
+          pair to get the wrong way round.
+      - key: "девочка=girl"
+        why: >-
+          Де́вочка is a child; де́вушка is old enough to be addressed as a young
+          woman. The difference is age, not size.
     collections:
       - people
       - family
@@ -12858,6 +12876,10 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "подушка=pillow"
+        why: >-
+          Де́душка is a grandfather, поду́шка a pillow.
     collections:
       - family
       - people
@@ -14653,6 +14675,10 @@ words:
     confusable_with:
       - key: "дорого=expensively"
         why: "Доро́га is a road; до́рого means expensively, and the stress moves to the front."
+      - key: "дорогой=expensive"
+        why: >-
+          Доро́га is a road, дорого́й means dear or expensive. Despite the look
+          of them they come from different roots.
     facts:
       - kind: root
         text: "Road. The diminutive доро́жка is a path or a lane."
@@ -14952,6 +14978,13 @@ words:
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "ночь=night"
+        why: >-
+          Дочь is a daughter, ночь a night.
+      - key: "мочь=to be able"
+        why: >-
+          Дочь is a daughter; мочь is the verb to be able.
     collections:
       - family
       - people
@@ -15137,6 +15170,11 @@ words:
     gender: m
     animacy: a
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "вдруг=suddenly"
+        why: >-
+          Друг is a friend; вдруг means suddenly. One letter, and nothing in the
+          meanings to connect them.
     collections:
       - people
       - romance and dating
@@ -21873,6 +21911,11 @@ words:
           French café, which is also their word for the coffee itself. Like most
           loans ending in a vowel it never declines: в кафе́, whatever the case.
         see: ["кофе=coffee"]
+    confusable_with:
+      - key: "кофе=coffee"
+        why: >-
+          Кафе́ is the place, ко́фе the drink you go there for. Both are
+          borrowed and neither declines, so only the vowels tell them apart.
     collections:
       - places
       - restaurants and cafes
@@ -38469,6 +38512,10 @@ words:
     gender: f
     animacy: i
     number: ["sg"]
+    confusable_with:
+      - key: "очень=very"
+        why: >-
+          О́сень is autumn, о́чень is very.
     collections:
       - the calendar
       - nature
@@ -50139,6 +50186,10 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "ребята=guys"
+        why: >-
+          Рабо́та is work; ребя́та is a friendly word for a group of people.
     collections:
       - daily life
       - work
@@ -51764,6 +51815,11 @@ words:
     gender: f
     animacy: i
     number: ["sg", "pl"]
+    confusable_with:
+      - key: "рука=hand"
+        why: >-
+          Река́ is a river, рука́ a hand or arm. Both are feminine and stress the
+          ending, so the grammar never helps you choose.
     collections:
       - nature
       - places
@@ -60539,6 +60595,11 @@ words:
           From an old verb meaning to spread — the cloth spread out, before the
           thing under it. Its lookalike стул came from German and is not related.
         see: ["стул=chair"]
+    confusable_with:
+      - key: "стул=chair"
+        why: >-
+          Стол is a table, стул a chair — and they are not related at all: стол
+          is native Russian, стул a German loan that happens to look like it.
     collections:
       - in the kitchen
       - daily life

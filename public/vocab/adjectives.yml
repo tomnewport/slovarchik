@@ -1113,6 +1113,11 @@ words:
   "больной=ill":
     cefr_level: A1
     accented: больно́й
+    confusable_with:
+      - key: "большой=big"
+        why: >-
+          Больно́й is ill, большо́й is big. One letter, and the stress falls in
+          the same place in both.
     collections:
       - sickness and health
     en_gb:
