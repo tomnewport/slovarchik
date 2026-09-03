@@ -6,7 +6,9 @@ import { computed, reactive, ref, onUnmounted } from 'vue'
 
 import { state } from '../stores/vocab.js'
 import { buildParadigms, POS_TITLES } from '../lib/paradigm.js'
+import { isCleanTable } from '../lib/tableStage.js'
 import { sample } from '../lib/quiz.js'
+import { isTableClean, markTableClean } from '../stores/progress.js'
 import { resetHint } from '../stores/keyboard.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
@@ -28,6 +30,15 @@ const title = computed(() => POS_TITLES[props.pos] ?? 'Inflection')
 const list = computed(() => buildParadigms(state.words, props.pos))
 const ready = computed(() => list.value.length > 0)
 
+/** Whether a paradigm has already been assembled cleanly from the word bank. */
+function tableClean(p) {
+  return isTableClean(p?.word?.key, p?.variant ?? null)
+}
+
+// Typing a table's endings is only offered for tables the learner has already
+// built from the word bank (#645) — you arrange the forms before you type them.
+const typable = computed(() => list.value.filter(tableClean))
+
 const mode = ref(null)
 const paradigm = ref(null)
 const round = ref(0)
@@ -38,6 +49,16 @@ let advanceTimer = null
 
 const activeMode = computed(() => MODES.find((m) => m.id === mode.value) ?? null)
 const showStem = computed(() => mode.value === 'endings')
+/** The paradigms the chosen mode may draw from. */
+const roundList = computed(() => (mode.value === 'endings' ? typable.value : list.value))
+/** Build-the-table stages this round: the whole table once it has been earned. */
+const staged = computed(() => mode.value === 'drag' && !tableClean(paradigm.value))
+
+/** Whether a mode can be started at all, and why not when it can't. */
+function available(modeId) {
+  if (!ready.value) return false
+  return modeId === 'endings' ? typable.value.length > 0 : true
+}
 
 function start(modeId) {
   mode.value = modeId
@@ -53,9 +74,10 @@ function newRound() {
   lastResult.value = null
   // Avoid drawing the same paradigm twice in a row when there's a choice.
   const prev = paradigm.value
-  let next = sample(list.value, 1)[0]
-  if (list.value.length > 1) {
-    while (next?.key === prev?.key) next = sample(list.value, 1)[0]
+  const pool = roundList.value
+  let next = sample(pool, 1)[0]
+  if (pool.length > 1) {
+    while (next?.key === prev?.key) next = sample(pool, 1)[0]
   }
   paradigm.value = next
   round.value += 1
@@ -65,6 +87,11 @@ function onGraded(correct, records = []) {
   if (lastResult.value) return
   const stressWarning =
     !!correct && records.some((record) => record.correct && record.stressCorrect === false)
+  // Built with nothing to correct: this table is served whole from now on, and
+  // its endings can be typed (#645).
+  if (mode.value === 'drag' && isCleanTable(records)) {
+    markTableClean(paradigm.value?.word?.key, paradigm.value?.variant ?? null)
+  }
   lastResult.value = { correct, stressWarning }
   score.total += 1
   if (correct) score.right += 1
@@ -101,11 +128,16 @@ onUnmounted(() => {
         :key="m.id"
         class="card"
         style="text-align: left"
-        :disabled="!ready"
+        :disabled="!available(m.id)"
         @click="start(m.id)"
       >
         <strong>{{ m.label }}</strong>
-        <div class="muted">{{ m.help }}</div>
+        <div class="muted">
+          {{ m.help }}
+          <template v-if="ready && m.id === 'endings' && !typable.length">
+            <br />Build a table correctly first to unlock this.
+          </template>
+        </div>
       </button>
     </div>
   </section>
@@ -135,6 +167,7 @@ onUnmounted(() => {
       v-if="paradigm"
       :key="round"
       :paradigm="paradigm"
+      :staged="staged"
       @graded="onGraded"
     />
 

@@ -147,6 +147,9 @@ async function setup() {
     encounterCount: progress.encounterCount,
     contextPhrases: vocabState.contextPhrases,
     rules: vocabState.rules,
+    // Which tables the learner has already assembled from the word bank: typing
+    // a table's endings is only asked once they have built it (#645).
+    isTableClean: progress.isTableClean,
   })
   // Introduce a never-met word before the first exercise that tests it (#587),
   // so its first appearance isn't a guaranteed miss. Current-batch words only —

@@ -23,6 +23,7 @@ import { sample, shuffle } from './quiz.js'
 import { cefrRank } from './batches.js'
 import { shapeVocab, vocabDisplay } from './vocabBuild.js'
 import { buildWordParadigms, hasParadigm } from './paradigm.js'
+import { tableKey } from './tableStage.js'
 import { buildContrastDrill, buildContextSet, canBuildContext } from './phraseContext.js'
 import { wordTokensInPhrase } from './phraseHint.js'
 
@@ -426,7 +427,7 @@ function buildInflect(practice, pi, ctx, make) {
     used: ctx.used,
     keyOf: (r) => r.key,
   })
-  const mode = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
+  const wanted = practice.practiceType === 'inflect-keyboard' ? 'keyboard' : 'bank'
   return picked.map((r) => {
     // Which of the word's tables to drill. Beyond its primary paradigm a word may
     // carry a variant — an adjective's short form, a verb's participles/gerund or
@@ -442,7 +443,7 @@ function buildInflect(practice, pi, ctx, make) {
     // the drill can't be built for (no partner, thin data) keep the table, and a
     // turn that drew a variant is drilling participles rather than aspect, so it
     // keeps the table too.
-    if (mode === 'keyboard' && r.pos === 'verb' && !table?.variant) {
+    if (wanted === 'keyboard' && r.pos === 'verb' && !table?.variant) {
       const drill = buildContrastDrill(r, {
         phrasesByKey: ctx.contextPhrases,
         phrasesBySource: ctx.phrasesBySource,
@@ -451,8 +452,18 @@ function buildInflect(practice, pi, ctx, make) {
       })
       if (drill) return make({ ...common(practice, pi), ...drill })
     }
+    // Typing a table's endings is only asked of a table the learner has already
+    // assembled from the word bank (#645). One they haven't gets the word-bank
+    // drill instead — the same table, the easier way round — and that counts as
+    // the identification it is, not as the usage it isn't. A bank exercise
+    // planned earlier in this very session satisfies the gate: the session
+    // orders identification before usage, so the learner meets the table first.
+    const built = ctx.tableBuilt?.(r.key, table?.variant ?? null)
+    const mode = wanted === 'keyboard' && !built ? 'bank' : wanted
+    if (mode === 'bank') ctx.planBank?.(r.key, table?.variant ?? null)
     return make({
       ...common(practice, pi),
+      ...(mode === wanted ? {} : { dimension: 'identification', practiceType: 'inflect-bank' }),
       kind: 'inflect',
       mode,
       // A variant shares its lemma's mastery state (#575): the table is another
@@ -765,6 +776,7 @@ export function buildExercises(
     encounterCount = null,
     contextPhrases = new Map(),
     rules = {},
+    isTableClean = null,
   } = {},
 ) {
   const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
@@ -794,7 +806,14 @@ export function buildExercises(
       ]
     : null
   const optionPool = buildOptionPool(vocab)
+  // Tables the learner has already built from the word bank, plus the ones this
+  // session is about to have them build (#645) — see buildInflect.
+  const plannedBank = new Set()
+  const bankId = (key, variant) => `${key}|${tableKey(variant)}`
   const ctx = {
+    tableBuilt: (key, variant) =>
+      plannedBank.has(bankId(key, variant)) || !!isTableClean?.(key, variant),
+    planBank: (key, variant) => plannedBank.add(bankId(key, variant)),
     vocab,
     recordByKey,
     phrases,

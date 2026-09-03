@@ -3,30 +3,70 @@
 // cell (desktop) or tap a form then tap a cell (touch). A form is correct in a
 // cell when their normalised spellings match, so syncretic forms work anywhere
 // they legitimately fit.
+//
+// The table is filled in *stages* (#645). Until the learner has assembled it
+// once with no corrections, the drill walks one column at a time — masculine,
+// neuter, feminine, plural for a gender table; singular then plural for a noun —
+// showing only the columns reached so far and banking only the forms of the
+// column being filled. `staged: false` (the default, and what a learner who has
+// already built this table cleanly gets) is the original whole-table drill: one
+// stage holding every column.
 import { computed, onMounted, reactive, ref } from 'vue'
 
 import { cellKey } from '../../lib/paradigm.js'
+import { columnStages } from '../../lib/tableStage.js'
 import { shuffle } from '../../lib/quiz.js'
 import { normalize, stressMatches } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
 
-const props = defineProps({ paradigm: { type: Object, required: true } })
+const props = defineProps({
+  paradigm: { type: Object, required: true },
+  // Split the table into one-column stages (a learner's first pass at it).
+  staged: { type: Boolean, default: false },
+})
 const emit = defineEmits(['graded'])
 
+// The column groups this table is filled in, and where each column sits in them.
+const stages = columnStages(props.paradigm, props.staged)
+const stageOfCol = new Map()
+stages.forEach((cols, i) => cols.forEach((col) => stageOfCol.set(col, i)))
+
 // One chip per filled cell (so duplicates appear the right number of times).
-const chips = shuffle(props.paradigm.cells.map((c, i) => ({ id: i, form: c.form })))
+// Each remembers its column, which is what confines the bank to the stage.
+const chips = shuffle(props.paradigm.cells.map((c, i) => ({ id: i, form: c.form, col: c.col })))
 const chipById = new Map(chips.map((c) => [c.id, c]))
+const colByCell = new Map(props.paradigm.cells.map((c) => [cellKey(c.row, c.col), c.col]))
 
 const placed = reactive({}) // cellKey -> chipId
 const picked = ref(null) // chip id selected for tap-to-place
-const checked = ref(false)
+const stage = ref(0) // the column group being filled
+const checkedStage = ref(-1) // the last stage graded (-1 = nothing checked yet)
+// Every cell record collected so far, oldest stage first — emitted as one table
+// result when the last stage is checked.
+const records = []
 // Screen-reader narration of the pick → place gesture, which is otherwise
 // signalled only by colour and the speak() call.
 const announcement = ref('')
 
+const lastStage = computed(() => stage.value >= stages.length - 1)
+const stageChecked = computed(() => checkedStage.value >= stage.value)
+/** Columns of the current stage — the only ones being filled right now. */
+const stageCols = computed(() => new Set(stages[stage.value]))
+/** Columns to render: those reached so far, so earlier stages stay in view. */
+const shownCols = computed(() =>
+  props.paradigm.cols.filter((c) => (stageOfCol.get(c.key) ?? 0) <= stage.value),
+)
+const stageCells = computed(() => props.paradigm.cells.filter((c) => stageCols.value.has(c.col)))
+/** A cell is locked once its own stage has been graded. */
+function isChecked(key) {
+  return (stageOfCol.get(colByCell.get(key)) ?? 0) <= checkedStage.value
+}
+
 const placedIds = computed(() => new Set(Object.values(placed)))
-const bank = computed(() => chips.filter((c) => !placedIds.value.has(c.id)))
-const allPlaced = computed(() => Object.keys(placed).length === props.paradigm.cells.length)
+const bank = computed(() => chips.filter((c) => stageCols.value.has(c.col) && !placedIds.value.has(c.id)))
+const allPlaced = computed(() =>
+  stageCells.value.every((c) => placed[cellKey(c.row, c.col)] != null),
+)
 
 function cellAt(row, col) {
   return props.paradigm.cells.find((c) => c.row === row && c.col === col)
@@ -48,10 +88,20 @@ function slotLabel(key) {
   return slotLabels.value.get(key) ?? key
 }
 
+/** "Masculine — column 2 of 4", the staged drill's progress line. */
+const stageLabel = computed(() => {
+  if (stages.length < 2) return ''
+  const labels = props.paradigm.cols
+    .filter((c) => stageCols.value.has(c.key))
+    .map((c) => c.label)
+    .join(' / ')
+  return `${labels} — column ${stage.value + 1} of ${stages.length}`
+})
+
 function cellLabel(key) {
   const where = slotLabel(key)
   const chip = chipById.get(placed[key])
-  if (!checked.value) {
+  if (!isChecked(key)) {
     if (!chip) {
       const pick = picked.value == null ? null : chipById.get(picked.value)
       return pick ? `${where}: empty, place ${pick.form}` : `${where}: empty`
@@ -66,7 +116,7 @@ function cellLabel(key) {
 }
 
 function place(key, chipId) {
-  if (checked.value || chipId == null) return
+  if (isChecked(key) || chipId == null) return
   // Remove the chip from any previous cell, then drop it here.
   for (const [k, v] of Object.entries(placed)) if (v === chipId) delete placed[k]
   placed[key] = chipId
@@ -75,7 +125,7 @@ function place(key, chipId) {
 }
 
 function onCellClick(key) {
-  if (checked.value) return
+  if (isChecked(key)) return
   if (placed[key] != null) {
     // Tap a filled cell to send its chip back to the bank.
     const chip = chipById.get(placed[key])
@@ -87,7 +137,7 @@ function onCellClick(key) {
 }
 
 function onChipClick(id) {
-  if (checked.value) return
+  if (stageChecked.value) return
   const chip = chipById.get(id)
   speak(chip.form)
   picked.value = picked.value === id ? null : id
@@ -98,6 +148,7 @@ function onChipClick(id) {
 function nextEmptySlot() {
   for (const row of props.paradigm.rows) {
     for (const col of props.paradigm.cols) {
+      if (!stageCols.value.has(col.key)) continue
       if (cellAt(row.key, col.key) && placed[cellKey(row.key, col.key)] == null) {
         return cellKey(row.key, col.key)
       }
@@ -107,7 +158,7 @@ function nextEmptySlot() {
 }
 
 function onChipDblClick(id) {
-  if (checked.value) return
+  if (stageChecked.value) return
   const slot = nextEmptySlot()
   if (slot != null) place(slot, id)
 }
@@ -133,28 +184,42 @@ function hasStressMismatch(key) {
 
 const stressWarningCount = computed(
   () =>
-    props.paradigm.cells.filter((c) => hasStressMismatch(cellKey(c.row, c.col))).length,
+    stageCells.value.filter((c) => hasStressMismatch(cellKey(c.row, c.col))).length,
 )
 
 onMounted(() => speak(props.paradigm.lemma))
 
 function check() {
-  if (checked.value || !allPlaced.value) return
-  checked.value = true
-  const records = props.paradigm.cells.map((c) => ({
-    slot: cellKey(c.row, c.col),
-    correct: isCorrect(cellKey(c.row, c.col)),
-    stressCorrect: isCorrect(cellKey(c.row, c.col))
-      ? !hasStressMismatch(cellKey(c.row, c.col))
-      : null,
-  }))
+  if (stageChecked.value || !allPlaced.value) return
+  checkedStage.value = stage.value
+  for (const c of stageCells.value) {
+    const key = cellKey(c.row, c.col)
+    const correct = isCorrect(key)
+    records.push({ slot: key, correct, stressCorrect: correct ? !hasStressMismatch(key) : null })
+  }
+  if (!lastStage.value) {
+    announcement.value = `Column checked. ${stages.length - stage.value - 1} to go.`
+    return
+  }
   emit('graded', records.every((r) => r.correct), records)
+}
+
+/** Move on to the next column of a staged table. */
+function nextStage() {
+  if (!stageChecked.value || lastStage.value) return
+  stage.value += 1
+  picked.value = null
+  announcement.value = `${stageLabel.value}.`
 }
 </script>
 
 <template>
   <div class="grid" style="gap: 1rem">
     <p class="visually-hidden" role="status" aria-live="polite">{{ announcement }}</p>
+
+    <!-- Staged first pass (#645): one column at a time, so the bank offers a
+         handful of forms rather than the whole paradigm. -->
+    <p v-if="stageLabel" class="stage-line muted">{{ stageLabel }}</p>
 
     <div
       class="bank card"
@@ -181,11 +246,11 @@ function check() {
     </div>
 
     <div class="table-scroll">
-      <table class="ptable">
+      <table class="ptable" :class="{ narrow: shownCols.length < paradigm.cols.length }">
         <thead>
           <tr>
             <th></th>
-            <th v-for="col in paradigm.cols" :key="col.key">{{ col.label }}</th>
+            <th v-for="col in shownCols" :key="col.key">{{ col.label }}</th>
           </tr>
         </thead>
         <tbody>
@@ -200,7 +265,7 @@ function check() {
               >ⓘ</button>
               <small v-if="row.sub" class="muted">{{ row.sub }}</small>
             </th>
-            <td v-for="col in paradigm.cols" :key="col.key">
+            <td v-for="col in shownCols" :key="col.key">
               <div v-if="cellAt(row.key, col.key)" class="cell">
                 <button
                   v-if="cellAt(row.key, col.key).note"
@@ -214,13 +279,20 @@ function check() {
                 :data-answer="cellAt(row.key, col.key).form"
                 :class="{
                   filled: placed[cellKey(row.key, col.key)] != null,
-                  correct: checked && isCorrect(cellKey(row.key, col.key)) && !hasStressMismatch(cellKey(row.key, col.key)),
-                  'stress-warning': checked && hasStressMismatch(cellKey(row.key, col.key)),
-                  wrong: checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key)),
+                  correct:
+                    isChecked(cellKey(row.key, col.key)) &&
+                    isCorrect(cellKey(row.key, col.key)) &&
+                    !hasStressMismatch(cellKey(row.key, col.key)),
+                  'stress-warning':
+                    isChecked(cellKey(row.key, col.key)) && hasStressMismatch(cellKey(row.key, col.key)),
+                  wrong:
+                    isChecked(cellKey(row.key, col.key)) &&
+                    placed[cellKey(row.key, col.key)] != null &&
+                    !isCorrect(cellKey(row.key, col.key)),
                   droppable: picked != null && placed[cellKey(row.key, col.key)] == null,
                 }"
                 role="button"
-                :tabindex="checked ? -1 : 0"
+                :tabindex="isChecked(cellKey(row.key, col.key)) ? -1 : 0"
                 :aria-label="cellLabel(cellKey(row.key, col.key))"
                 @click="onCellClick(cellKey(row.key, col.key))"
                 @keydown.enter="onCellClick(cellKey(row.key, col.key))"
@@ -229,7 +301,7 @@ function check() {
                 @drop.prevent="(e) => onDrop(e, cellKey(row.key, col.key))"
               >
                 <div
-                  v-if="checked && hasStressMismatch(cellKey(row.key, col.key))"
+                  v-if="isChecked(cellKey(row.key, col.key)) && hasStressMismatch(cellKey(row.key, col.key))"
                   class="stress-correction"
                   lang="ru"
                 >
@@ -238,7 +310,11 @@ function check() {
                   <span class="correct-form">{{ cellAt(row.key, col.key).form }}</span>
                 </div>
                 <div
-                  v-else-if="checked && placed[cellKey(row.key, col.key)] != null && !isCorrect(cellKey(row.key, col.key))"
+                  v-else-if="
+                    isChecked(cellKey(row.key, col.key)) &&
+                    placed[cellKey(row.key, col.key)] != null &&
+                    !isCorrect(cellKey(row.key, col.key))
+                  "
                   class="correction"
                   lang="ru"
                 >
@@ -257,13 +333,14 @@ function check() {
       </table>
     </div>
 
-    <p v-if="checked && stressWarningCount" class="stress-hint" role="status">
+    <p v-if="stageChecked && stressWarningCount" class="stress-hint" role="status">
       Table accepted — check the stress in
       {{ stressWarningCount === 1 ? 'the highlighted form' : 'the highlighted forms' }}.
     </p>
 
     <div class="row">
-      <button v-if="!checked" class="primary" :disabled="!allPlaced" @click="check">Check</button>
+      <button v-if="!stageChecked" class="primary" :disabled="!allPlaced" @click="check">Check</button>
+      <button v-else-if="!lastStage" class="primary" @click="nextStage">Next column →</button>
     </div>
   </div>
 </template>
@@ -291,12 +368,25 @@ function check() {
   border-color: var(--primary);
   background: color-mix(in srgb, var(--primary) 22%, var(--card));
 }
+.stage-line {
+  margin: 0;
+  font-size: 0.9rem;
+}
 .table-scroll {
   overflow-x: auto;
 }
 .ptable {
   width: 100%;
   border-collapse: collapse;
+}
+/* A staged table holds only the columns reached so far, so it sizes to its
+   content rather than stretching a lone column across the screen (#645). Its
+   cells keep a floor width so an empty column isn't a sliver. */
+.ptable.narrow {
+  width: auto;
+}
+.ptable.narrow .drop {
+  min-width: 7rem;
 }
 .ptable th,
 .ptable td {

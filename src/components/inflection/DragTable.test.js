@@ -353,3 +353,123 @@ describe('DragTable', () => {
     expect(wrapper.vm.placed).toEqual(placedBefore)
   })
 })
+
+// A four-column gender table — the shape the staged first pass is for.
+const genderParadigm = {
+  lemma: 'но́вый',
+  rows: [
+    { key: 'nom', label: 'Nominative' },
+    { key: 'gen', label: 'Genitive' },
+  ],
+  cols: [
+    { key: 'm', label: 'Masc.' },
+    { key: 'n', label: 'Neut.' },
+  ],
+  cells: [
+    { row: 'nom', col: 'm', form: 'но́вый' },
+    { row: 'gen', col: 'm', form: 'но́вого' },
+    { row: 'nom', col: 'n', form: 'но́вое' },
+    { row: 'gen', col: 'n', form: 'но́вого' },
+  ],
+}
+
+describe('DragTable — staged first pass (#645)', () => {
+  const fill = async (wrapper, cols) => {
+    for (const [key, form] of cols) {
+      const chip = wrapper.vm.bank.find((c) => c.form === form)
+      wrapper.vm.place(key, chip.id)
+    }
+    await wrapper.vm.$nextTick()
+  }
+
+  it('banks only the current column, then moves on to the next', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: genderParadigm, staged: true } })
+
+    // Only the masculine column is on offer: two chips, one column of cells.
+    expect(wrapper.vm.bank).toHaveLength(2)
+    expect(wrapper.vm.shownCols.map((c) => c.key)).toEqual(['m'])
+    expect(wrapper.findAll('.drop')).toHaveLength(2)
+
+    await fill(wrapper, [
+      ['nom.m', 'но́вый'],
+      ['gen.m', 'но́вого'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+    // The table is not graded yet — there is another column to fill.
+    expect(wrapper.emitted('graded')).toBeFalsy()
+
+    await wrapper.find('button.primary').trigger('click') // Next column →
+    expect(wrapper.vm.shownCols.map((c) => c.key)).toEqual(['m', 'n'])
+    expect(wrapper.vm.bank.map((c) => c.form).sort()).toEqual(['но́вого', 'но́вое'])
+
+    await fill(wrapper, [
+      ['nom.n', 'но́вое'],
+      ['gen.n', 'но́вого'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+
+    const [correct, records] = wrapper.emitted('graded')[0]
+    expect(correct).toBe(true)
+    // Every cell of the table is reported, not just the last column's.
+    expect(records.map((r) => r.slot).sort()).toEqual(['gen.m', 'gen.n', 'nom.m', 'nom.n'])
+  })
+
+  it('carries a wrong placement in an early column through to the final grade', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: genderParadigm, staged: true } })
+    await fill(wrapper, [
+      ['nom.m', 'но́вого'],
+      ['gen.m', 'но́вый'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+    await wrapper.find('button.primary').trigger('click') // Next column →
+    await fill(wrapper, [
+      ['nom.n', 'но́вое'],
+      ['gen.n', 'но́вого'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+
+    const [correct, records] = wrapper.emitted('graded')[0]
+    expect(correct).toBe(false)
+    expect(records.filter((r) => !r.correct).map((r) => r.slot).sort()).toEqual(['gen.m', 'nom.m'])
+  })
+
+  it('locks a checked column while the next one is filled', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: genderParadigm, staged: true } })
+    await fill(wrapper, [
+      ['nom.m', 'но́вый'],
+      ['gen.m', 'но́вого'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+    await wrapper.find('button.primary').trigger('click') // Next column →
+
+    const before = wrapper.vm.placed['nom.m']
+    wrapper.vm.onCellClick('nom.m')
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.placed['nom.m']).toBe(before)
+  })
+
+  it('serves the whole table at once when the learner has earned it', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: genderParadigm } })
+    expect(wrapper.vm.bank).toHaveLength(4)
+    expect(wrapper.vm.shownCols.map((c) => c.key)).toEqual(['m', 'n'])
+    await fill(wrapper, [
+      ['nom.m', 'но́вый'],
+      ['gen.m', 'но́вого'],
+      ['nom.n', 'но́вое'],
+      ['gen.n', 'но́вого'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.emitted('graded')[0][0]).toBe(true)
+  })
+
+  it('has nothing to stage in a single-column table', async () => {
+    const wrapper = mount(DragTable, { props: { paradigm: normalParadigm, staged: true } })
+    expect(wrapper.vm.bank).toHaveLength(2)
+    await fill(wrapper, [
+      ['nom.sg', 'кот'],
+      ['gen.sg', 'кота'],
+    ])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.emitted('graded')[0][0]).toBe(true)
+  })
+})

@@ -59,8 +59,22 @@ function practice(practiceType, overrides = {}) {
   }
 }
 
-function build(practices, seed = 1) {
-  return buildExercises({ practices }, { words, phrases, contextPhrases, rules, rng: seededRng(seed) })
+// `isTableClean` defaults to "every table already built from the word bank", so
+// keyboard practices exercise the typed table rather than the #645 fall-back to
+// the word bank; the gate itself is tested with an explicit predicate below.
+function build(practices, seed = 1, opts = {}) {
+  return buildExercises(
+    { practices },
+    {
+      words,
+      phrases,
+      contextPhrases,
+      rules,
+      rng: seededRng(seed),
+      isTableClean: () => true,
+      ...opts,
+    },
+  )
 }
 
 describe('buildExercises', () => {
@@ -125,6 +139,53 @@ describe('buildExercises', () => {
     }
     const exKb = build([practice('inflect-keyboard', { pool: inflectableKeys.slice(0, 3) })])
     expect(exKb[0].mode).toBe('keyboard')
+  })
+
+  describe('build the table before typing it (#645)', () => {
+    // A noun: no aspect partner, so the keyboard turn is always the table.
+    const nounKeys = words
+      .filter((w) => w.pos === 'noun' && buildParadigm(w))
+      .map((w) => w.key)
+
+    it('serves the word bank when the learner has never built the table', () => {
+      const ex = build([practice('inflect-keyboard', { exercises: 3, pool: nounKeys.slice(0, 3) })], 1, {
+        isTableClean: () => false,
+      })
+      expect(ex.length).toBeGreaterThan(0)
+      for (const e of ex) {
+        expect(e.mode).toBe('bank')
+        // Recorded as the identification drill it actually is, not as usage.
+        expect(e.dimension).toBe('identification')
+        expect(e.practiceType).toBe('inflect-bank')
+        expect(e.level).toBe('mastery')
+      }
+    })
+
+    it('types the endings of a table already built cleanly', () => {
+      const ex = build([practice('inflect-keyboard', { exercises: 3, pool: nounKeys.slice(0, 3) })], 1, {
+        isTableClean: (key) => key === nounKeys[0],
+      })
+      const byWord = new Map(ex.map((e) => [e.wordKey, e]))
+      expect(byWord.get(nounKeys[0])?.mode).toBe('keyboard')
+      for (const [key, e] of byWord) {
+        if (key !== nounKeys[0]) expect(e.mode).toBe('bank')
+      }
+    })
+
+    it('counts a word-bank exercise planned earlier in the same session', () => {
+      // The session orders identification before usage, so a table the learner
+      // is about to build satisfies the gate for a later keyboard slot.
+      const pool = [nounKeys[0]]
+      const ex = build(
+        [
+          practice('inflect-bank', { exercises: 1, pool }),
+          practice('inflect-keyboard', { exercises: 1, pool }),
+        ],
+        1,
+        { isTableClean: () => false },
+      )
+      expect(ex.map((e) => e.mode)).toEqual(['bank', 'keyboard'])
+    })
   })
 
   // #575: a word's variant tables — an adjective's short form, a verb's
