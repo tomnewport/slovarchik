@@ -19041,6 +19041,7 @@ words:
       - ru: Де́ти бы́стро оде́лись и пошли́ в шко́лу.
         en_gb: The children quickly got dressed and went to school.
         en_alt:
+          - The children dressed quickly and went to school.
           - children quickly got dressed and went to school
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: Е́сли бы не опа́здывал, я оде́лся бы.
@@ -43963,7 +43964,9 @@ words:
         en_gb: She reads the newspaper in the mornings.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
       - ru: Вчера́ мы чита́ли интере́сный расска́з.
-        en_gb: Yesterday we read an interesting story.
+        en_gb: Yesterday we were reading an interesting story.
+        en_alt:
+          - Yesterday we read an interesting story.
         inflect: { token: 3, tense: past, person: past_pl, rule: verb-past }
       - ru: За́втра ве́чером я бу́ду чита́ть кни́гу.
         en_gb: Tomorrow evening I will be reading a book.
