@@ -183,7 +183,7 @@ describe('InflectExercise variant paradigms', () => {
   })
 })
 
-describe('InflectExercise — build the table before typing it (#645)', () => {
+describe('InflectExercise — staged first pass (#645)', () => {
   // A fresh IndexedDB per test, so one test's clean table can't unstage another.
   beforeEach(async () => {
     globalThis.indexedDB = new IDBFactory()
@@ -199,17 +199,20 @@ describe('InflectExercise — build the table before typing it (#645)', () => {
     lemma: word.ru,
   })
 
-  it('stages the word-bank table until the learner has built it cleanly', async () => {
+  it('asks for the staged pass until the learner has built the table cleanly', async () => {
+    // Whether a table is small enough to skip the split is the table drill's
+    // call (lib/tableStage.js); this is the flag that offers it.
     const wrapper = mount(InflectExercise, { props: { exercise: bankExercise() } })
     expect(wrapper.findComponent(DragTable).props('staged')).toBe(true)
   })
 
-  it('remembers a table built with nothing to correct, and serves it whole after', async () => {
+  it('remembers a table built with nothing in the wrong cell, and serves it whole after', async () => {
     const wrapper = mount(InflectExercise, { props: { exercise: bankExercise() } })
     const records = buildParadigm(word).cells.map((c) => ({
       slot: `${c.row}.${c.col}`,
       correct: true,
-      stressCorrect: true,
+      // A stress warning is not a correction — it does not hold the table back.
+      stressCorrect: false,
     }))
     wrapper.findComponent(DragTable).vm.$emit('graded', true, records)
     await flushPromises()
@@ -231,7 +234,7 @@ describe('InflectExercise — build the table before typing it (#645)', () => {
     expect(next.findComponent(DragTable).props('staged')).toBe(true)
   })
 
-  it('never stages the typed table — it is only ever offered once built', async () => {
+  it('leaves the typed table alone — staging is the word bank\u2019s business', async () => {
     await markTableClean(word.key)
     const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
     expect(wrapper.findComponent(DragTable).exists()).toBe(false)

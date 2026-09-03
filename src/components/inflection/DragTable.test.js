@@ -354,79 +354,74 @@ describe('DragTable', () => {
   })
 })
 
-// A four-column gender table — the shape the staged first pass is for.
+// A four-column gender table of twenty cells — past the floor at which the
+// first pass is split by column (#645).
+const ROWS = ['nom', 'gen', 'dat', 'acc', 'ins']
+const COLS = ['m', 'n', 'f', 'pl']
 const genderParadigm = {
   lemma: 'но́вый',
-  rows: [
-    { key: 'nom', label: 'Nominative' },
-    { key: 'gen', label: 'Genitive' },
-  ],
-  cols: [
-    { key: 'm', label: 'Masc.' },
-    { key: 'n', label: 'Neut.' },
-  ],
-  cells: [
-    { row: 'nom', col: 'm', form: 'но́вый' },
-    { row: 'gen', col: 'm', form: 'но́вого' },
-    { row: 'nom', col: 'n', form: 'но́вое' },
-    { row: 'gen', col: 'n', form: 'но́вого' },
-  ],
+  rows: ROWS.map((key) => ({ key, label: key })),
+  cols: COLS.map((key) => ({ key, label: key.toUpperCase() })),
+  // Every form distinct, so a chip belongs to exactly one cell.
+  cells: ROWS.flatMap((row) => COLS.map((col) => ({ row, col, form: `${row}-${col}` }))),
 }
 
 describe('DragTable — staged first pass (#645)', () => {
-  const fill = async (wrapper, cols) => {
-    for (const [key, form] of cols) {
-      const chip = wrapper.vm.bank.find((c) => c.form === form)
+  /** Place the right chip in every still-empty cell of the current column. */
+  const fillColumn = async (wrapper) => {
+    for (const cell of wrapper.vm.stageCells) {
+      const key = `${cell.row}.${cell.col}`
+      if (wrapper.vm.placed[key] != null) continue
+      const chip = wrapper.vm.bank.find((c) => c.form === cell.form)
       wrapper.vm.place(key, chip.id)
     }
     await wrapper.vm.$nextTick()
   }
+  const check = (wrapper) => wrapper.find('button.primary').trigger('click')
 
   it('banks only the current column, then moves on to the next', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: genderParadigm, staged: true } })
 
-    // Only the masculine column is on offer: two chips, one column of cells.
-    expect(wrapper.vm.bank).toHaveLength(2)
+    // Only the masculine column is on offer: five chips, one column of cells.
+    expect(wrapper.vm.bank).toHaveLength(5)
     expect(wrapper.vm.shownCols.map((c) => c.key)).toEqual(['m'])
-    expect(wrapper.findAll('.drop')).toHaveLength(2)
+    expect(wrapper.findAll('.drop')).toHaveLength(5)
 
-    await fill(wrapper, [
-      ['nom.m', 'но́вый'],
-      ['gen.m', 'но́вого'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
-    // The table is not graded yet — there is another column to fill.
+    await fillColumn(wrapper)
+    await check(wrapper) // grades the column, not the table
     expect(wrapper.emitted('graded')).toBeFalsy()
 
-    await wrapper.find('button.primary').trigger('click') // Next column →
+    await check(wrapper) // Next column →
     expect(wrapper.vm.shownCols.map((c) => c.key)).toEqual(['m', 'n'])
-    expect(wrapper.vm.bank.map((c) => c.form).sort()).toEqual(['но́вого', 'но́вое'])
+    expect(wrapper.vm.bank.every((c) => c.form.endsWith('-n'))).toBe(true)
 
-    await fill(wrapper, [
-      ['nom.n', 'но́вое'],
-      ['gen.n', 'но́вого'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
+    for (let i = 1; i < COLS.length; i++) {
+      await fillColumn(wrapper)
+      await check(wrapper)
+      if (i < COLS.length - 1) await check(wrapper) // Next column →
+    }
 
     const [correct, records] = wrapper.emitted('graded')[0]
     expect(correct).toBe(true)
     // Every cell of the table is reported, not just the last column's.
-    expect(records.map((r) => r.slot).sort()).toEqual(['gen.m', 'gen.n', 'nom.m', 'nom.n'])
+    expect(records).toHaveLength(genderParadigm.cells.length)
   })
 
   it('carries a wrong placement in an early column through to the final grade', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: genderParadigm, staged: true } })
-    await fill(wrapper, [
-      ['nom.m', 'но́вого'],
-      ['gen.m', 'но́вый'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
-    await wrapper.find('button.primary').trigger('click') // Next column →
-    await fill(wrapper, [
-      ['nom.n', 'но́вое'],
-      ['gen.n', 'но́вого'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
+    // Swap two masculine chips, then fill the rest correctly.
+    const swap = (a, b) => {
+      wrapper.vm.place(`${a}.m`, wrapper.vm.bank.find((c) => c.form === `${b}-m`).id)
+      wrapper.vm.place(`${b}.m`, wrapper.vm.bank.find((c) => c.form === `${a}-m`).id)
+    }
+    swap('nom', 'gen')
+    await fillColumn(wrapper)
+    await check(wrapper)
+    for (let i = 1; i < COLS.length; i++) {
+      await check(wrapper) // Next column →
+      await fillColumn(wrapper)
+      await check(wrapper)
+    }
 
     const [correct, records] = wrapper.emitted('graded')[0]
     expect(correct).toBe(false)
@@ -435,12 +430,9 @@ describe('DragTable — staged first pass (#645)', () => {
 
   it('locks a checked column while the next one is filled', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: genderParadigm, staged: true } })
-    await fill(wrapper, [
-      ['nom.m', 'но́вый'],
-      ['gen.m', 'но́вого'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
-    await wrapper.find('button.primary').trigger('click') // Next column →
+    await fillColumn(wrapper)
+    await check(wrapper)
+    await check(wrapper) // Next column →
 
     const before = wrapper.vm.placed['nom.m']
     wrapper.vm.onCellClick('nom.m')
@@ -450,26 +442,25 @@ describe('DragTable — staged first pass (#645)', () => {
 
   it('serves the whole table at once when the learner has earned it', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: genderParadigm } })
-    expect(wrapper.vm.bank).toHaveLength(4)
-    expect(wrapper.vm.shownCols.map((c) => c.key)).toEqual(['m', 'n'])
-    await fill(wrapper, [
-      ['nom.m', 'но́вый'],
-      ['gen.m', 'но́вого'],
-      ['nom.n', 'но́вое'],
-      ['gen.n', 'но́вого'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.vm.bank).toHaveLength(genderParadigm.cells.length)
+    expect(wrapper.vm.shownCols).toHaveLength(COLS.length)
+    await fillColumn(wrapper)
+    await check(wrapper)
     expect(wrapper.emitted('graded')[0][0]).toBe(true)
+  })
+
+  it('never splits a table small enough to hold in one go', async () => {
+    // Two columns, two cells — a staged flag changes nothing.
+    const wrapper = mount(DragTable, { props: { paradigm: stressParadigm, staged: true } })
+    expect(wrapper.vm.bank).toHaveLength(2)
+    expect(wrapper.vm.shownCols).toHaveLength(2)
   })
 
   it('has nothing to stage in a single-column table', async () => {
     const wrapper = mount(DragTable, { props: { paradigm: normalParadigm, staged: true } })
     expect(wrapper.vm.bank).toHaveLength(2)
-    await fill(wrapper, [
-      ['nom.sg', 'кот'],
-      ['gen.sg', 'кота'],
-    ])
-    await wrapper.find('button.primary').trigger('click')
+    await fillColumn(wrapper)
+    await check(wrapper)
     expect(wrapper.emitted('graded')[0][0]).toBe(true)
   })
 })

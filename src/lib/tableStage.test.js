@@ -1,16 +1,22 @@
 import { describe, it, expect } from 'vitest'
 
-import { PRIMARY_TABLE, columnStages, isCleanTable, tableKey } from './tableStage.js'
+import { PRIMARY_TABLE, STAGE_MIN_CELLS, columnStages, isCleanTable, tableKey } from './tableStage.js'
 
-const gendered = {
-  cols: [
-    { key: 'm', label: 'Masc.' },
-    { key: 'n', label: 'Neut.' },
-    { key: 'f', label: 'Fem.' },
-    { key: 'pl', label: 'Plural' },
-  ],
-}
-const single = { cols: [{ key: '_', label: 'Form' }] }
+/** A table of `n` cells spread over the given columns. */
+const table = (cols, n) => ({
+  cols: cols.map((key) => ({ key, label: key })),
+  cells: Array.from({ length: n }, (_, i) => ({
+    row: `r${Math.floor(i / cols.length)}`,
+    col: cols[i % cols.length],
+    form: `f${i}`,
+  })),
+})
+
+// A case × gender declension: four columns, well over the staging floor.
+const gendered = table(['m', 'n', 'f', 'pl'], 28)
+// A noun: two columns, under the floor even when every cell is filled.
+const noun = table(['sg', 'pl'], 14)
+const single = table(['_'], 4)
 
 describe('tableKey', () => {
   it('names the primary paradigm and keeps a variant under its own name', () => {
@@ -30,13 +36,23 @@ describe('columnStages', () => {
     expect(columnStages(gendered, false)).toEqual([['m', 'n', 'f', 'pl']])
   })
 
+  it('leaves a small table whole — splitting two columns is not worth the click', () => {
+    expect(columnStages(noun, true)).toEqual([['sg', 'pl']])
+    expect(noun.cells).toHaveLength(14)
+  })
+
+  it('splits only once a table is past the floor', () => {
+    expect(columnStages(table(['sg', 'pl'], STAGE_MIN_CELLS), true)).toEqual([['sg', 'pl']])
+    expect(columnStages(table(['sg', 'pl'], STAGE_MIN_CELLS + 1), true)).toEqual([['sg'], ['pl']])
+  })
+
   it('has nothing to split in a single-column table', () => {
     expect(columnStages(single, true)).toEqual([['_']])
     expect(columnStages(single, false)).toEqual([['_']])
   })
 
   it('always returns at least one stage', () => {
-    expect(columnStages({ cols: [] }, true)).toEqual([[]])
+    expect(columnStages({ cols: [], cells: [] }, true)).toEqual([[]])
     expect(columnStages(null, true)).toEqual([[]])
   })
 })
@@ -50,8 +66,8 @@ describe('isCleanTable', () => {
     expect(isCleanTable([{ correct: true, stressCorrect: true }, { correct: false, stressCorrect: null }])).toBe(false)
   })
 
-  it('rejects a stress mismatch — the wrong chip went in the cell', () => {
-    expect(isCleanTable([{ correct: true, stressCorrect: false }])).toBe(false)
+  it('accepts a stress mismatch — a soft warning, not a wrong cell', () => {
+    expect(isCleanTable([{ correct: true, stressCorrect: false }])).toBe(true)
   })
 
   it('rejects an empty result rather than promoting on nothing', () => {

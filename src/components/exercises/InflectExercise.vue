@@ -37,9 +37,10 @@ const paradigm = computed(() => {
 const isKeyboard = computed(() => props.exercise.mode === 'keyboard')
 const component = computed(() => (isKeyboard.value ? BlindEndings : DragTable))
 
-// A table the learner has never assembled cleanly is built one column at a time
-// (#645) — masculine, then neuter, then feminine, then plural — so the bank
-// offers a handful of forms rather than the whole paradigm at once.
+// A big table the learner has never assembled cleanly is built one column at a
+// time (#645) — masculine, then neuter, then feminine, then plural — so the bank
+// offers a handful of forms rather than the whole paradigm at once. Whether a
+// table is big enough to split is lib/tableStage.js's call.
 const staged = computed(
   () => !isKeyboard.value && !isTableClean(props.exercise.wordKey, props.exercise.variant),
 )
@@ -82,8 +83,8 @@ function onGraded(correct, records = []) {
   wasCorrect.value = !!correct
   playFeedback(!!correct)
   if (double.value) showFire.value = true
-  // A word-bank table assembled with nothing to correct graduates to the whole
-  // table next time — and unlocks typing its endings (#645).
+  // A word-bank table assembled with nothing in the wrong cell graduates to the
+  // whole table next time (#645).
   if (!isKeyboard.value && isCleanTable(records)) {
     markTableClean(props.exercise.wordKey, props.exercise.variant)
   }

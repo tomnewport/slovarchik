@@ -4,13 +4,13 @@
 // cell when their normalised spellings match, so syncretic forms work anywhere
 // they legitimately fit.
 //
-// The table is filled in *stages* (#645). Until the learner has assembled it
-// once with no corrections, the drill walks one column at a time — masculine,
-// neuter, feminine, plural for a gender table; singular then plural for a noun —
-// showing only the columns reached so far and banking only the forms of the
-// column being filled. `staged: false` (the default, and what a learner who has
-// already built this table cleanly gets) is the original whole-table drill: one
-// stage holding every column.
+// A big table is filled in *stages* (#645). Until the learner has assembled it
+// once with nothing in the wrong cell, the drill walks one column at a time —
+// masculine, neuter, feminine, plural — showing only the columns reached so far
+// and banking only the forms of the column being filled. `staged: false` (the
+// default, and what a learner who has already built this table cleanly gets) is
+// the original whole-table drill: one stage holding every column. Small tables
+// never split, whatever `staged` says — see lib/tableStage.js.
 import { computed, onMounted, reactive, ref } from 'vue'
 
 import { cellKey } from '../../lib/paradigm.js'
@@ -21,7 +21,7 @@ import { speak } from '../../lib/speech.js'
 
 const props = defineProps({
   paradigm: { type: Object, required: true },
-  // Split the table into one-column stages (a learner's first pass at it).
+  // Offer this table one column at a time (a learner's first pass at a big one).
   staged: { type: Boolean, default: false },
 })
 const emit = defineEmits(['graded'])

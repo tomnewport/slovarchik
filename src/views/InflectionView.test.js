@@ -45,61 +45,43 @@ describe('InflectionView', () => {
   })
 })
 
-describe('InflectionView — build the table before typing it (#645)', () => {
+describe('InflectionView — staged first pass (#645)', () => {
   const cardFor = (wrapper, label) =>
     wrapper.findAll('button.card').find((button) => button.text().includes(label))
 
-  it('withholds the typing drill until a table has been built cleanly', async () => {
-    const wrapper = mount(InflectionView, { props: { pos: 'noun' } })
-    const endings = cardFor(wrapper, 'Type the endings')
-    expect(endings.attributes('disabled')).toBeDefined()
-    expect(endings.text()).toContain('Build a table correctly first')
-    expect(cardFor(wrapper, 'Build the table').attributes('disabled')).toBeUndefined()
-  })
-
-  it('unlocks typing for a table assembled with nothing to correct', async () => {
+  it('serves a table staged until it has been built with nothing in the wrong cell', async () => {
     const wrapper = mount(InflectionView, { props: { pos: 'noun' } })
     await cardFor(wrapper, 'Build the table').trigger('click')
     const table = wrapper.findComponent(DragTable)
-    // The learner's first pass at this table is staged, one column at a time.
     expect(table.props('staged')).toBe(true)
 
     const drawn = table.props('paradigm')
     table.vm.$emit(
       'graded',
       true,
-      drawn.cells.map((c) => ({ slot: `${c.row}.${c.col}`, correct: true, stressCorrect: true })),
+      // A stress warning does not stop the promotion — only a wrong cell would.
+      drawn.cells.map((c) => ({ slot: `${c.row}.${c.col}`, correct: true, stressCorrect: false })),
     )
     await flushPromises()
     expect(isTableClean(drawn.word.key, drawn.variant ?? null)).toBe(true)
 
     await vi.advanceTimersByTimeAsync(1000)
-    await wrapper.findAll('button').find((b) => b.text().includes('Change mode')).trigger('click')
-    expect(cardFor(wrapper, 'Type the endings').attributes('disabled')).toBeUndefined()
-  })
-
-  it('draws the typing drill only from tables already built', async () => {
-    const wrapper = mount(InflectionView, { props: { pos: 'noun' } })
-    await cardFor(wrapper, 'Build the table').trigger('click')
-    const drawn = wrapper.findComponent(DragTable).props('paradigm')
-    wrapper
-      .findComponent(DragTable)
-      .vm.$emit(
-        'graded',
-        true,
-        drawn.cells.map((c) => ({ slot: `${c.row}.${c.col}`, correct: true, stressCorrect: true })),
-      )
-    await flushPromises()
-    await vi.advanceTimersByTimeAsync(1000)
-    await wrapper.findAll('button').find((b) => b.text().includes('Change mode')).trigger('click')
-
-    // Exactly one table has been built, so every round of the typing drill —
-    // however many the learner asks for — draws that one and no other.
-    await cardFor(wrapper, 'Type the endings').trigger('click')
-    for (let i = 0; i < 5; i++) {
-      expect(wrapper.vm.paradigm.key).toBe(drawn.key)
+    // The next round of the same table comes whole.
+    while (wrapper.vm.paradigm.key !== drawn.key) {
       wrapper.vm.newRound()
       await wrapper.vm.$nextTick()
     }
+    expect(wrapper.findComponent(DragTable).props('staged')).toBe(false)
+  })
+
+  it('keeps staging a table that needed a correction', async () => {
+    const wrapper = mount(InflectionView, { props: { pos: 'noun' } })
+    await cardFor(wrapper, 'Build the table').trigger('click')
+    const drawn = wrapper.findComponent(DragTable).props('paradigm')
+    wrapper.findComponent(DragTable).vm.$emit('graded', false, [
+      { slot: `${drawn.cells[0].row}.${drawn.cells[0].col}`, correct: false, stressCorrect: null },
+    ])
+    await flushPromises()
+    expect(isTableClean(drawn.word.key, drawn.variant ?? null)).toBe(false)
   })
 })

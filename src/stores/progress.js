@@ -311,10 +311,10 @@ function ensureRecord(key) {
       // someone shown the card who then abandons the session *has* been
       // introduced, and shouldn't meet the same card again next time.
       introducedAt: null,
-      // Inflection tables the learner has assembled from the word bank with no
-      // corrections (#645): table key (see lib/tableStage.js) → timestamp. An
-      // unlisted table is still drilled one column at a time, and is not yet
-      // offered as a type-the-endings drill.
+      // Inflection tables the learner has assembled from the word bank with
+      // nothing in the wrong cell (#645): table key (see lib/tableStage.js) →
+      // timestamp. A big table not listed here is still dealt one column at a
+      // time rather than all at once.
       tables: {},
     }
   }
@@ -485,9 +485,8 @@ export function wasIntroduced(key) {
 
 /**
  * Has the learner already assembled this table from the word bank with nothing
- * to correct (#645)? Until they have, the bank drill serves that table one
- * column at a time, and the type-the-endings drill withholds it: you build a
- * table before you type it.
+ * in the wrong cell (#645)? Until they have, a big table is dealt one column at
+ * a time to cut down the choice of forms.
  * @param {string} key the word's progress key
  * @param {string|null} [variant] which of the word's tables (null = its primary)
  */
@@ -496,7 +495,7 @@ export function isTableClean(key, variant = null) {
 }
 
 /**
- * Record a table assembled with no corrections. Idempotent — the first clean
+ * Record a table assembled with nothing misplaced. Idempotent — the first clean
  * pass is the one that counts, so a later one doesn't rewrite the timestamp.
  * @returns {number|null} the timestamp stored
  */

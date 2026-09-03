@@ -82,7 +82,7 @@ src/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
-                        #     (one column at a time until it is built with no corrections), and what counts as clean
+                        #     (big tables one column at a time until built with nothing misplaced)
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   wordFacts  — a word's authored facts (build/root/origin/mnemonic) and its related words, derived + authored
                         #   factCoverage  — which words most deserve a fact, and the sound-alike and diminutive shortlists

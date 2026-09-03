@@ -35,10 +35,6 @@ function tableClean(p) {
   return isTableClean(p?.word?.key, p?.variant ?? null)
 }
 
-// Typing a table's endings is only offered for tables the learner has already
-// built from the word bank (#645) — you arrange the forms before you type them.
-const typable = computed(() => list.value.filter(tableClean))
-
 const mode = ref(null)
 const paradigm = ref(null)
 const round = ref(0)
@@ -49,16 +45,9 @@ let advanceTimer = null
 
 const activeMode = computed(() => MODES.find((m) => m.id === mode.value) ?? null)
 const showStem = computed(() => mode.value === 'endings')
-/** The paradigms the chosen mode may draw from. */
-const roundList = computed(() => (mode.value === 'endings' ? typable.value : list.value))
-/** Build-the-table stages this round: the whole table once it has been earned. */
+// A big table the learner has never built cleanly is dealt one column at a time
+// (#645); anything smaller, and any table already earned, comes whole.
 const staged = computed(() => mode.value === 'drag' && !tableClean(paradigm.value))
-
-/** Whether a mode can be started at all, and why not when it can't. */
-function available(modeId) {
-  if (!ready.value) return false
-  return modeId === 'endings' ? typable.value.length > 0 : true
-}
 
 function start(modeId) {
   mode.value = modeId
@@ -74,10 +63,9 @@ function newRound() {
   lastResult.value = null
   // Avoid drawing the same paradigm twice in a row when there's a choice.
   const prev = paradigm.value
-  const pool = roundList.value
-  let next = sample(pool, 1)[0]
-  if (pool.length > 1) {
-    while (next?.key === prev?.key) next = sample(pool, 1)[0]
+  let next = sample(list.value, 1)[0]
+  if (list.value.length > 1) {
+    while (next?.key === prev?.key) next = sample(list.value, 1)[0]
   }
   paradigm.value = next
   round.value += 1
@@ -87,8 +75,8 @@ function onGraded(correct, records = []) {
   if (lastResult.value) return
   const stressWarning =
     !!correct && records.some((record) => record.correct && record.stressCorrect === false)
-  // Built with nothing to correct: this table is served whole from now on, and
-  // its endings can be typed (#645).
+  // Built with nothing in the wrong cell: this table is served whole from now
+  // on (#645).
   if (mode.value === 'drag' && isCleanTable(records)) {
     markTableClean(paradigm.value?.word?.key, paradigm.value?.variant ?? null)
   }
@@ -128,16 +116,11 @@ onUnmounted(() => {
         :key="m.id"
         class="card"
         style="text-align: left"
-        :disabled="!available(m.id)"
+        :disabled="!ready"
         @click="start(m.id)"
       >
         <strong>{{ m.label }}</strong>
-        <div class="muted">
-          {{ m.help }}
-          <template v-if="ready && m.id === 'endings' && !typable.length">
-            <br />Build a table correctly first to unlock this.
-          </template>
-        </div>
+        <div class="muted">{{ m.help }}</div>
       </button>
     </div>
   </section>
