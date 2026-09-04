@@ -64,7 +64,8 @@ src/
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast, IntroCard — the non-graded
                         #   "here is a new word" step)
-    inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm)
+    inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm,
+                        #   ParadigmShapeNote — why this table is a different shape)
   composables/          # stateful Vue orchestration shared between views (needs a
                         #   component lifecycle, so it can't live in lib/):
     useSpeechLoop.js    #   sequence guards, timer registry, speech watchdogs, wake
@@ -81,6 +82,8 @@ src/
                         #   progression/schedule/batches/session/sessionPools/sessionRunner/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
+                        #   paradigmShape  — why a verb's table is a different shape (no present tense,
+                        #     third-person only, impersonal), in a sentence beside the table
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
                         #     (big tables one column at a time until built with nothing misplaced)
                         #   verbGovernment  — which case / preposition frame a verb forces on its object

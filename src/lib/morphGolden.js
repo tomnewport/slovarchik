@@ -208,6 +208,11 @@ export const DEFECTIVE = {
   // ве́щи говоря́тся) — no 1st/2nd person and no masculine/feminine singular
   // past. The masc/fem past cells held the neuter говори́лось as filler.
   'говориться=to be said': ['past_m', 'past_f'],
+
+  // Impersonal like повезти́: «мне захо́чется / мне захоте́лось», a dative
+  // experiencer with no personal subject. The masculine, feminine and plural
+  // past cells all held the neuter захоте́лось as filler.
+  'захотеться=to feel like': ['past_m', 'past_f', 'past_pl'],
 }
 
 /**
