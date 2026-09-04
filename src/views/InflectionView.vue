@@ -6,7 +6,9 @@ import { computed, reactive, ref, onUnmounted } from 'vue'
 
 import { state } from '../stores/vocab.js'
 import { buildParadigms, POS_TITLES } from '../lib/paradigm.js'
+import { isCleanTable } from '../lib/tableStage.js'
 import { sample } from '../lib/quiz.js'
+import { isTableClean, markTableClean } from '../stores/progress.js'
 import { resetHint } from '../stores/keyboard.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import SpeakButton from '../components/SpeakButton.vue'
@@ -28,6 +30,11 @@ const title = computed(() => POS_TITLES[props.pos] ?? 'Inflection')
 const list = computed(() => buildParadigms(state.words, props.pos))
 const ready = computed(() => list.value.length > 0)
 
+/** Whether a paradigm has already been assembled cleanly from the word bank. */
+function tableClean(p) {
+  return isTableClean(p?.word?.key, p?.variant ?? null)
+}
+
 const mode = ref(null)
 const paradigm = ref(null)
 const round = ref(0)
@@ -38,6 +45,9 @@ let advanceTimer = null
 
 const activeMode = computed(() => MODES.find((m) => m.id === mode.value) ?? null)
 const showStem = computed(() => mode.value === 'endings')
+// A big table the learner has never built cleanly is dealt one column at a time
+// (#645); anything smaller, and any table already earned, comes whole.
+const staged = computed(() => mode.value === 'drag' && !tableClean(paradigm.value))
 
 function start(modeId) {
   mode.value = modeId
@@ -65,6 +75,11 @@ function onGraded(correct, records = []) {
   if (lastResult.value) return
   const stressWarning =
     !!correct && records.some((record) => record.correct && record.stressCorrect === false)
+  // Built with nothing in the wrong cell: this table is served whole from now
+  // on (#645).
+  if (mode.value === 'drag' && isCleanTable(records)) {
+    markTableClean(paradigm.value?.word?.key, paradigm.value?.variant ?? null)
+  }
   lastResult.value = { correct, stressWarning }
   score.total += 1
   if (correct) score.right += 1
@@ -135,6 +150,7 @@ onUnmounted(() => {
       v-if="paradigm"
       :key="round"
       :paradigm="paradigm"
+      :staged="staged"
       @graded="onGraded"
     />
 

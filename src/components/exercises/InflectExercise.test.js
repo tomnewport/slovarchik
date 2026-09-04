@@ -1,6 +1,10 @@
-import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest'
+import 'fake-indexeddb/auto'
+import { IDBFactory } from 'fake-indexeddb'
+import { mount, flushPromises } from '@vue/test-utils'
 import InflectExercise from './InflectExercise.vue'
+import DragTable from '../inflection/DragTable.vue'
+import { isTableClean, markTableClean, resetProgress } from '../../stores/progress.js'
 import { keyboard, resetHint } from '../../stores/keyboard.js'
 import { state as vocabState } from '../../stores/vocab.js'
 import { buildParadigm, buildShortParadigm } from '../../lib/paradigm.js'
@@ -176,5 +180,63 @@ describe('InflectExercise variant paradigms', () => {
     // Naming no variant asks for a table this word hasn't got — the builder never
     // does so, and the auto-pass fallback keeps it from soft-locking if it did.
     expect(mount(InflectExercise, { props: { exercise } }).text()).toContain('No inflection table')
+  })
+})
+
+describe('InflectExercise — staged first pass (#645)', () => {
+  // A fresh IndexedDB per test, so one test's clean table can't unstage another.
+  beforeEach(async () => {
+    globalThis.indexedDB = new IDBFactory()
+    await resetProgress()
+  })
+
+  const bankExercise = () => ({
+    id: 'ex-bank',
+    kind: 'inflect',
+    mode: 'bank',
+    wordKey: word.key,
+    variant: null,
+    lemma: word.ru,
+  })
+
+  it('asks for the staged pass until the learner has built the table cleanly', async () => {
+    // Whether a table is small enough to skip the split is the table drill's
+    // call (lib/tableStage.js); this is the flag that offers it.
+    const wrapper = mount(InflectExercise, { props: { exercise: bankExercise() } })
+    expect(wrapper.findComponent(DragTable).props('staged')).toBe(true)
+  })
+
+  it('remembers a table built with nothing in the wrong cell, and serves it whole after', async () => {
+    const wrapper = mount(InflectExercise, { props: { exercise: bankExercise() } })
+    const records = buildParadigm(word).cells.map((c) => ({
+      slot: `${c.row}.${c.col}`,
+      correct: true,
+      // A stress warning is not a correction — it does not hold the table back.
+      stressCorrect: false,
+    }))
+    wrapper.findComponent(DragTable).vm.$emit('graded', true, records)
+    await flushPromises()
+
+    expect(isTableClean(word.key)).toBe(true)
+    const next = mount(InflectExercise, { props: { exercise: bankExercise() } })
+    expect(next.findComponent(DragTable).props('staged')).toBe(false)
+  })
+
+  it('keeps staging a table that needed a correction', async () => {
+    const wrapper = mount(InflectExercise, { props: { exercise: bankExercise() } })
+    wrapper.findComponent(DragTable).vm.$emit('graded', false, [
+      { slot: 'nom.sg', correct: false, stressCorrect: null },
+    ])
+    await flushPromises()
+
+    expect(isTableClean(word.key)).toBe(false)
+    const next = mount(InflectExercise, { props: { exercise: bankExercise() } })
+    expect(next.findComponent(DragTable).props('staged')).toBe(true)
+  })
+
+  it('leaves the typed table alone — staging is the word bank\u2019s business', async () => {
+    await markTableClean(word.key)
+    const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
+    expect(wrapper.findComponent(DragTable).exists()).toBe(false)
   })
 })

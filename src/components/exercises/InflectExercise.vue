@@ -12,6 +12,8 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { state as vocabState } from '../../stores/vocab.js'
 import { paradigmFor } from '../../lib/paradigm.js'
+import { isTableClean, markTableClean } from '../../stores/progress.js'
+import { isCleanTable } from '../../lib/tableStage.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
@@ -34,6 +36,14 @@ const paradigm = computed(() => {
 
 const isKeyboard = computed(() => props.exercise.mode === 'keyboard')
 const component = computed(() => (isKeyboard.value ? BlindEndings : DragTable))
+
+// A big table the learner has never assembled cleanly is built one column at a
+// time (#645) — masculine, then neuter, then feminine, then plural — so the bank
+// offers a handful of forms rather than the whole paradigm at once. Whether a
+// table is big enough to split is lib/tableStage.js's call.
+const staged = computed(
+  () => !isKeyboard.value && !isTableClean(props.exercise.wordKey, props.exercise.variant),
+)
 
 const graded = ref(false)
 const wasCorrect = ref(false)
@@ -68,11 +78,16 @@ function onRetry() {
   playFeedback(false)
 }
 
-function onGraded(correct) {
+function onGraded(correct, records = []) {
   graded.value = true
   wasCorrect.value = !!correct
   playFeedback(!!correct)
   if (double.value) showFire.value = true
+  // A word-bank table assembled with nothing in the wrong cell graduates to the
+  // whole table next time (#645).
+  if (!isKeyboard.value && isCleanTable(records)) {
+    markTableClean(props.exercise.wordKey, props.exercise.variant)
+  }
 }
 
 function next() {
@@ -122,6 +137,7 @@ onBeforeUnmount(() => {
       v-if="paradigm"
       :key="exercise.id"
       :paradigm="paradigm"
+      :staged="staged"
       :allow-retry="isKeyboard"
       @retry="onRetry"
       @graded="onGraded"

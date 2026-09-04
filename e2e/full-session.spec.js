@@ -129,21 +129,30 @@ async function solveInflect(ex) {
       const inp = endings.nth(i)
       await inp.fill((await inp.getAttribute('data-answer')) ?? '')
     }
+    await ex.getByRole('button', { name: 'Check' }).click()
   } else {
     // DragTable: each cell advertises its correct form; tap a matching bank chip
-    // then the cell.
-    const cells = ex.locator('.drop[data-answer]')
-    const n = await cells.count()
-    for (let i = 0; i < n; i++) {
-      const cell = cells.nth(i)
-      const want = (await cell.getAttribute('data-answer')) ?? ''
-      // Tap a matching bank chip (placed chips leave the bank), then the cell.
-      await clickButtonByText(ex.locator('.bank'), want)
-      await cell.click()
+    // then the cell. A table the learner has never built cleanly is dealt one
+    // column at a time (#645), so keep filling and checking until the drill runs
+    // out of columns.
+    for (let stage = 0; stage < 10; stage++) {
+      const empty = ex.locator('.drop[data-answer]:not(.filled)')
+      for (let n = await empty.count(); n > 0; n--) {
+        // Always the first still-empty cell: placing one fills it, so the
+        // locator walks the column without index bookkeeping.
+        const cell = empty.first()
+        const want = (await cell.getAttribute('data-answer')) ?? ''
+        // Tap a matching bank chip (placed chips leave the bank), then the cell.
+        await clickButtonByText(ex.locator('.bank'), want)
+        await cell.click()
+      }
+      await ex.getByRole('button', { name: 'Check' }).click()
+      const nextColumn = ex.getByRole('button', { name: /Next column/ })
+      if (!(await nextColumn.count())) break
+      await nextColumn.click()
     }
   }
-  await ex.getByRole('button', { name: 'Check' }).click()
-  await ex.getByRole('button', { name: /Next/ }).click()
+  await ex.getByRole('button', { name: /^Next/ }).click()
 }
 
 /** In-context inflection: pick each correct grammar option, then spell the form. */

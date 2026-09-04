@@ -27,6 +27,7 @@ import {
   minExercisesToLevel,
 } from '../lib/progression.js'
 import { buildBatchOptions } from '../lib/batches.js'
+import { tableKey } from '../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../lib/schedule.js'
 import { learnableWords } from '../lib/vocabBuild.js'
 import {
@@ -310,6 +311,11 @@ function ensureRecord(key) {
       // someone shown the card who then abandons the session *has* been
       // introduced, and shouldn't meet the same card again next time.
       introducedAt: null,
+      // Inflection tables the learner has assembled from the word bank with
+      // nothing in the wrong cell (#645): table key (see lib/tableStage.js) →
+      // timestamp. A big table not listed here is still dealt one column at a
+      // time rather than all at once.
+      tables: {},
     }
   }
   return state.records[key]
@@ -478,6 +484,33 @@ export function wasIntroduced(key) {
 }
 
 /**
+ * Has the learner already assembled this table from the word bank with nothing
+ * in the wrong cell (#645)? Until they have, a big table is dealt one column at
+ * a time to cut down the choice of forms.
+ * @param {string} key the word's progress key
+ * @param {string|null} [variant] which of the word's tables (null = its primary)
+ */
+export function isTableClean(key, variant = null) {
+  return !!state.records[key]?.tables?.[tableKey(variant)]
+}
+
+/**
+ * Record a table assembled with nothing misplaced. Idempotent — the first clean
+ * pass is the one that counts, so a later one doesn't rewrite the timestamp.
+ * @returns {number|null} the timestamp stored
+ */
+export async function markTableClean(key, variant = null, ts = Date.now()) {
+  if (!key) return null
+  const rec = ensureRecord(key)
+  if (!rec.tables) rec.tables = {}
+  const table = tableKey(variant)
+  if (rec.tables[table]) return rec.tables[table]
+  rec.tables[table] = ts
+  await persist(rec)
+  return ts
+}
+
+/**
  * Clear a word's "known" flag, returning it to the standard criteria. Its
  * recorded attempts are untouched, so it re-derives its state under the full
  * thresholds (and may drop back below learned until it earns the extra reps).
@@ -574,6 +607,7 @@ function persistedShape(rec) {
     schedule: rec.schedule ?? {},
     agg: rec.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
     introducedAt: rec.introducedAt ?? null,
+    tables: { ...(rec.tables ?? {}) },
   }
 }
 
@@ -863,6 +897,7 @@ export async function loadProgress() {
       schedule: r.schedule ?? {},
       agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
       introducedAt: r.introducedAt ?? null,
+      tables: r.tables ?? {},
     }
   }
   // Backfill first-learned / first-mastered timestamps for any record that
@@ -1060,6 +1095,7 @@ export async function importData(data) {
       schedule: r.schedule ?? {},
       agg: r.agg ?? { firstSeenAt: null, lastSeenAt: null, dims: {} },
       introducedAt: r.introducedAt ?? null,
+      tables: r.tables ?? {},
     }
     // Backups exported before the mastery criteria tightened (v1) carry peaks
     // earned under the old single-answer rule — re-check them (#313).

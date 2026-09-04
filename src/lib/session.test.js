@@ -162,6 +162,24 @@ describe('buildSession', () => {
       expect(lastIdIdx).toBeLessThan(firstUsageIdx)
     }
   })
+  it('keeps that order when learning practices sit between the mastery ones', () => {
+    // A standard session interleaves both levels; the ordering must survive it
+    // (#645). Learning slots keep their own shuffled positions either way.
+    for (let seed = 1; seed <= 30; seed++) {
+      const s = buildSession({ type: 'standard', size: 'super', rng: seededRng(seed) })
+      const mastery = s.practices.filter((p) => p.level === 'mastery')
+      const lastId = mastery.map((p) => p.dimension).lastIndexOf('identification')
+      const firstUsage = mastery.findIndex((p) => p.dimension === 'usage')
+      if (lastId >= 0 && firstUsage >= 0) expect(lastId).toBeLessThan(firstUsage)
+      const firstContext = mastery.findIndex((p) => p.dimension === 'context')
+      const lastUsage = mastery.map((p) => p.dimension).lastIndexOf('usage')
+      if (firstContext >= 0 && lastUsage >= 0) expect(lastUsage).toBeLessThan(firstContext)
+      // The learning practices are untouched by the mastery reordering.
+      expect(s.practices.filter((p) => p.level === 'learning').length).toBe(
+        s.practices.length - mastery.length,
+      )
+    }
+  })
 })
 
 describe('runRepeatMistakes', () => {

@@ -53,6 +53,8 @@ import {
   unmarkKnown,
   isKnown,
   isPendingConfirmation,
+  isTableClean,
+  markTableClean,
 } from './progress.js'
 import { dayKey } from '../lib/streak.js'
 import { failWrites } from '../test/idbFailure.js'
@@ -1525,5 +1527,50 @@ describe('markIntroduced', () => {
     await loadProgress()
     expect(encounterCount(KEY)).toBe(0)
     expect(wasIntroduced(KEY)).toBe(true)
+  })
+})
+
+describe('markTableClean (#645)', () => {
+  const KEY = 'но́вый=new'
+
+  it('remembers a table built with no corrections, and survives a reload', async () => {
+    expect(isTableClean(KEY)).toBe(false)
+    const ts = await markTableClean(KEY)
+    expect(ts).toBeTruthy()
+    expect(isTableClean(KEY)).toBe(true)
+
+    await loadProgress()
+    expect(isTableClean(KEY)).toBe(true)
+  })
+
+  it('tracks a word’s variant tables separately from its primary one', async () => {
+    await markTableClean(KEY, 'short')
+    expect(isTableClean(KEY, 'short')).toBe(true)
+    expect(isTableClean(KEY)).toBe(false)
+  })
+
+  it('keeps the first timestamp when called again', async () => {
+    const first = await markTableClean(KEY)
+    expect(await markTableClean(KEY, null, first + 1000)).toBe(first)
+  })
+
+  it('is not an attempt — the word’s state and history are untouched', async () => {
+    await markTableClean(KEY)
+    expect(stateOf(KEY)).toBe('unknown')
+    expect(wordProgressDetail(KEY).totalAttempts).toBe(0)
+  })
+
+  it('rides along with an export and its import', async () => {
+    await markTableClean(KEY, 'short')
+    const data = exportData()
+    await resetProgress()
+    expect(isTableClean(KEY, 'short')).toBe(false)
+    await importData(data)
+    expect(isTableClean(KEY, 'short')).toBe(true)
+  })
+
+  it('ignores a missing key', async () => {
+    expect(await markTableClean('')).toBeNull()
+    expect(isTableClean('')).toBe(false)
   })
 })

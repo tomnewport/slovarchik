@@ -179,11 +179,21 @@ export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, 
 
   // Mastery identification (word-bank table) must come before mastery usage
   // (keyboard typing) so every word gets at least one easier identification
-  // drill before being asked to type from memory (#220).
-  practices.sort((a, b) => {
-    if (a.level !== 'mastery' || b.level !== 'mastery') return 0
-    const order = { identification: 0, usage: 1, context: 2 }
-    return (order[a.dimension] ?? 0) - (order[b.dimension] ?? 0)
+  // drill before being asked to type from memory (#220, #645).
+  //
+  // Only the mastery practices are reordered, and only among the slots they
+  // already occupy — the learning slots keep their shuffled positions. Sorting
+  // the whole list with a comparator that returns 0 for every mixed pair does
+  // NOT achieve this: that comparator is not transitive, so a learning practice
+  // sitting between two mastery ones stops the sort from seeing them at all and
+  // usage can still land first.
+  const order = { identification: 0, usage: 1, context: 2 }
+  const masteryAt = practices.map((p, i) => (p.level === 'mastery' ? i : -1)).filter((i) => i >= 0)
+  const ordered = masteryAt
+    .map((i) => practices[i])
+    .sort((a, b) => (order[a.dimension] ?? 0) - (order[b.dimension] ?? 0))
+  masteryAt.forEach((slot, i) => {
+    practices[slot] = ordered[i]
   })
 
   return { type, size, buckets: counts, practices }
