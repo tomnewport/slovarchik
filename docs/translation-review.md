@@ -45,6 +45,62 @@ words. What is left over on each side is the signal.
 | **Length ratio** — English words ÷ Russian words | padding, explanatory translation |
 | **Aspect collision** — an aspect pair whose two members read the same in English | a contrast-drill question with two right answers |
 
+## The alternates
+
+`en_alt` was invisible to the first sweep. `--shard` serialised only `ru` and
+the primary `en`, so 16k sentences were reviewed without one accepted answer
+being read (#599) — and a reviewer proposing an `add-alt` could not see that
+the rendering was already there. Packets carry `en_alt` now, and
+`npm run audit:alternates` triages what the corpus already accepts.
+
+**What can go wrong in an alternate is narrower than what can go wrong in a
+primary.** An alternate is never *shown*: no drill prompts from one, the
+aspect-contrast drill included, which draws its cue from `en` alone. So it
+cannot mislead a reader or make a question unanswerable. The only harm it does
+is grading looseness — accepting, as correct, something that is not a
+translation of this sentence. That was largely inert while the word bank built
+its tiles from the primary alone; once the bank was widened, every alternate
+became an offered, accepted answer.
+
+| Signal | Corpus | What it catches |
+| --- | --- | --- |
+| `foreign-partner` | 1 | verbatim the **aspect partner's** own sentence |
+| `orphan-block` | 5 | a block of renderings left behind from a replaced Russian |
+| `contradicted` | 1 | re-accepts the exact English a proposal replaced as not-English |
+| `duplicate` | 35 | normalises to the primary or a sibling — inert, but unmerged |
+| `foreign` | 14 | verbatim some other sentence's primary |
+| `block` | 37 | the cohesion half of `orphan-block`, alone |
+
+Two of those are worth explaining, because they are the ones that changed the
+design.
+
+**Overlap with the primary is not a signal on its own.** The obvious test —
+an alternate that shares few content words with its primary is not a rendering
+of the same sentence — flags 254 rows, and reading them shows they are simply
+good English paraphrases: "I have a headache" / "My head hurts", "There was a
+ring at the door" / "The doorbell rang". Low overlap is *what a good paraphrase
+looks like*. #599 reported the same result from its own scan, and this
+rediscovered it. What discriminates is overlap **plus** cohesion — the
+alternates resembling each other more than the primary — which is the actual
+«утро» signature, and fires on all three of that block's rows and five others
+corpus-wide.
+
+**`foreign-partner` is #576 arriving through a door #576 does not cover.**
+«Она́ благодари́ла учи́теля» — "She was thanking the teacher" — accepts "She
+thanked the teacher", word for word the perfective partner's own sentence. The
+contrast drill is unaffected, since it shows `en`; but a learner who answers the
+imperfective sentence with the perfective reading is marked correct, and the
+aspect goes untaught. This is grading, not prompting, which is why the existing
+collision check could never see it.
+
+### Which alternates were never read
+
+`--unread` narrows the worklist to alternates no committed proposal wrote.
+That is the gap #599 names, and it is much smaller than the issue assumed:
+**140** of the corpus's 3,350 alternates predate the review. The other ~3,200
+were authored *by* it, each with a reviewer's note attached — never re-read as
+a set, which is a real but lighter risk, and what the signals above are for.
+
 Two refinements matter more than they look, because without them the report is
 swamped by predictable Russian↔English mismatches rather than real defects:
 
@@ -304,6 +360,8 @@ its `inflect.person` in step.
 ```bash
 npm run audit:translations                                   # tier counts + signal breakdown
 node scripts/audit-translations.mjs --sample 20 --tier high  # eyeball the worst
+npm run audit:alternates                                     # triage the accepted en_alt
+node scripts/audit-translations.mjs --alternates --unread     # …only the ones never read
 node scripts/audit-translations.mjs --collisions             # aspect pairs that read alike
 node scripts/audit-translations.mjs --collisions --all       # …incl. verb-frame-only matches
 node scripts/audit-translations.mjs --shard                  # cut work packets

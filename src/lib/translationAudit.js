@@ -329,6 +329,10 @@ export function auditPhrase(phrase, index) {
   const row = {
     ru,
     en,
+    // Carried, not scored. An alternate is never shown, so it cannot make a
+    // sentence read worse — but a packet has to serialise it or the reviewer
+    // judges a sentence without seeing what it already accepts (#599).
+    enAlt: Array.isArray(phrase?.enAlt) ? phrase.enAlt : [],
     source: phrase?.source ?? '',
     cefr: phrase?.cefr ?? '',
     ...alignment,
@@ -449,7 +453,7 @@ export function verbRendering(en, word) {
  * @returns {Array<{pair: string, rendering: string, a: object, b: object}>}
  */
 /** Compare two English sentences ignoring case, punctuation and spacing. */
-const normaliseEnglish = (en) => englishWords(en).join(' ')
+export const normaliseEnglish = (en) => englishWords(en).join(' ')
 
 export function aspectCollisions(words, phrases) {
   const byKey = new Map((words ?? []).map((w) => [w.key, w]))
@@ -556,4 +560,149 @@ export function tierCounts(rows) {
   const counts = { high: 0, medium: 0, clean: 0 }
   for (const row of rows ?? []) counts[row.tier] = (counts[row.tier] ?? 0) + 1
   return counts
+}
+
+/**
+ * The content words of an English sentence, stemmed — what two renderings of
+ * the same Russian must largely share.
+ */
+function contentStems(en) {
+  return new Set(
+    englishWords(en)
+      .filter((w) => !EN_GRAMMATICAL.has(w))
+      .map(stemEnglish)
+      .filter(Boolean),
+  )
+}
+
+/** How much of `a` the words of `b` account for, 0…1. */
+function overlap(a, b) {
+  if (!a.size) return 1
+  let shared = 0
+  for (const w of a) if (b.has(w)) shared += 1
+  return shared / a.size
+}
+
+/**
+ * How little an alternate may share with its own primary before it stops
+ * looking like the same sentence — but only ever in conjunction with `block`
+ * below, never on its own.
+ *
+ * On its own it does not work, and that is worth stating rather than
+ * rediscovering: low content-word overlap is what a *good* English paraphrase
+ * looks like. "I have a headache" and "My head hurts" share nothing and are
+ * both right; so are "There was a ring at the door" / "The doorbell rang" and
+ * 250-odd others in this corpus. #599 reported the same result from its own
+ * scan. Overlap ranks nothing by itself.
+ *
+ * What does discriminate is overlap *plus* cohesion. Checked against the one
+ * known instance — the three renderings of «Он рабо́тает с утра́ до ве́чера»
+ * left behind on «Он дожда́лся у́тра до́ма» — the conjunction fires on all three
+ * of its rows (0.33, 0.40, 0.40) and on five others in the whole corpus.
+ */
+const ORPHAN_OVERLAP = 0.5
+
+/**
+ * Triage a corpus's accepted alternate translations.
+ *
+ * `en_alt` was invisible to the first review: `--shard` serialised only `ru`
+ * and the primary `en`, so all 16k sentences were swept without one accepted
+ * answer being read (#599). That mattered less while the word bank built its
+ * tiles from the primary alone and an alternate could be graded but never
+ * assembled; once the bank was widened, every alternate became a reliably
+ * offered, reliably accepted answer, and a bad row went from dormant to live.
+ *
+ * What an alternate can go wrong in is narrower than what a primary can, and
+ * the signals reflect that. An alternate is never *shown* — no drill prompts
+ * from one, the aspect-contrast drill included, which draws its cue from `en`
+ * alone. So it cannot mislead a reader or make a question unanswerable. The
+ * only harm it does is **grading looseness**: accepting, as correct, something
+ * that is not a translation of this sentence.
+ *
+ *  - `duplicate` — normalises to the primary, or to a sibling alternate. Inert
+ *    rather than wrong, but evidence that something merged without
+ *    deduplicating, and the corpus holds 35 of them.
+ *  - `orphan-block` — shares little with its primary *and* resembles its
+ *    sibling alternates more than it resembles the primary. This is the
+ *    «утро» signature: a block of renderings left behind when the Russian they
+ *    belonged to was replaced. Neither half is usable alone (see above).
+ *  - `block` — the cohesion half on its own. Weak: ты/вы pairs do this
+ *    legitimately. Reported so the half-signature is visible, not ranked.
+ *  - `foreign-partner` — verbatim the primary of a sentence belonging to this
+ *    verb's **aspect partner**. Sharp, and the reason this audit exists at all:
+ *    «Она́ благодари́ла учи́теля» ("She was thanking the teacher") accepts "She
+ *    thanked the teacher", which is word for word the perfective partner's own
+ *    sentence. A learner who answers the imperfective with the perfective
+ *    reading is marked correct, which is #576 arriving through a door #576
+ *    did not cover — grading rather than the contrast drill.
+ *  - `foreign` — verbatim some other Russian sentence's primary. Weak: the
+ *    corpus teaches near-synonyms on purpose, so two sentences legitimately
+ *    share English. Reported, not judged.
+ *  - `contradicted` — re-accepts the exact English a proposal replaced for not
+ *    being English. The applier refuses these at write time now; nothing has
+ *    ever checked the rows committed before that rule existed.
+ *
+ * @param {object[]} phrases   from shapePhrases, carrying `enAlt` and `source`
+ * @param {object} [opts]
+ * @param {object[]} [opts.words]        normalised word records, for aspect pairs
+ * @param {Set<string>} [opts.rejected]  normalised English a proposal replaced
+ * @returns {Array<{key: string, ru: string, en: string, alt: string,
+ *   overlap: number, signals: string[]}>}
+ */
+export function auditAlternates(phrases, { words = [], rejected = new Set() } = {}) {
+  const partnerOf = new Map()
+  for (const w of words ?? []) {
+    // Aspect pairs only. A determinate/indeterminate motion pair shares its
+    // English verb by nature — «бежа́ть» and «бе́гать» are both "running" — so a
+    // shared rendering there is not evidence of anything.
+    if (w.aspectPair?.key) partnerOf.set(w.key, w.aspectPair.key)
+  }
+  const list = (phrases ?? []).filter((p) => (p.enAlt ?? []).length)
+  // Every primary in the corpus, so `foreign` can tell "another sentence's
+  // translation" from "a paraphrase nobody else uses".
+  const primaries = new Map()
+  for (const p of phrases ?? []) {
+    const key = normaliseEnglish(p.en)
+    if (!key) continue
+    if (!primaries.has(key)) primaries.set(key, [])
+    primaries.get(key).push({ ru: p.ru, source: p.source })
+  }
+
+  const out = []
+  for (const p of list) {
+    const primary = contentStems(p.en)
+    const alts = p.enAlt.map((alt) => ({ alt, stems: contentStems(alt), norm: normaliseEnglish(alt) }))
+    // Do the alternates hang together better than they hang off the primary?
+    // A property of the block, so computed once per phrase.
+    const cohesion = alts.length > 1
+      && alts.every((a, i) => alts.some((b, j) => i !== j && overlap(a.stems, b.stems) > overlap(a.stems, primary)))
+
+    const seen = new Set([normaliseEnglish(p.en)])
+    for (const a of alts) {
+      const signals = []
+      if (seen.has(a.norm)) signals.push('duplicate')
+      seen.add(a.norm)
+      const share = overlap(a.stems, primary)
+      if (cohesion) signals.push(share <= ORPHAN_OVERLAP ? 'orphan-block' : 'block')
+      const elsewhere = (primaries.get(a.norm) ?? []).filter((o) => o.ru !== p.ru)
+      const partner = partnerOf.get(p.source)
+      if (elsewhere.some((o) => o.source === partner)) signals.push('foreign-partner')
+      else if (elsewhere.length) signals.push('foreign')
+      if (rejected.has(a.norm)) signals.push('contradicted')
+      if (!signals.length) continue
+      out.push({
+        key: p.source,
+        ru: p.ru,
+        en: p.en,
+        alt: a.alt,
+        overlap: Number(share.toFixed(2)),
+        signals,
+        ...(elsewhere.length ? { alsoTranslates: elsewhere.map((o) => o.ru) } : {}),
+      })
+    }
+  }
+  // The «утро» shape first, then by how many signals and how little is shared.
+  const SHARP = ['foreign-partner', 'orphan-block', 'contradicted']
+  const rank = (r) => (r.signals.some((sig) => SHARP.includes(sig)) ? 0 : 1)
+  return out.sort((a, b) => rank(a) - rank(b) || b.signals.length - a.signals.length || a.overlap - b.overlap)
 }

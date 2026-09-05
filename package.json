@@ -25,6 +25,7 @@
     "check:prompts": "node scripts/check-prompt-ambiguity.mjs",
     "audit:gender": "node scripts/gender-audit.mjs",
     "audit:translations": "node scripts/audit-translations.mjs --report",
+    "audit:alternates": "node scripts/audit-translations.mjs --alternates",
     "verify:review": "node scripts/verify-review-replay.mjs",
     "audit:yield": "node scripts/review-yield.mjs",
     "audit:cefr": "node scripts/audit-cefr.js",

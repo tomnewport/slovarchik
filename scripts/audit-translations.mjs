@@ -24,12 +24,14 @@
  *   --clean-sample N           extra clean-tier phrases to fold in (default 200)
  *   --seed N                   RNG seed for the clean sample (default 20260808)
  */
-import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'fs'
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, mkdtempSync, rmSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { load as yamlLoad } from 'js-yaml'
 import { buildWords, shapePhrases, POS_BY_FILE } from '../src/lib/vocabBuild.js'
-import { auditPhrases, tierCounts, aspectCollisions, duplicateEnglish } from '../src/lib/translationAudit.js'
+import { auditPhrases, tierCounts, aspectCollisions, duplicateEnglish, auditAlternates, normaliseEnglish } from '../src/lib/translationAudit.js'
+import { tmpdir } from 'os'
+import { replayBase, exportVocabAt } from './replay-base.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const vocabDir = join(__dirname, '..', 'public', 'vocab')
@@ -83,7 +85,97 @@ const wordByKey = new Map(words.map((w) => [w.key, w]))
 if (flag('report') || args.length === 0) report()
 if (flag('sample')) sample()
 if (flag('collisions')) collisions()
+if (flag('alternates')) alternates()
 if (flag('duplicates')) duplicates()
+
+/**
+ * Every English wording a proposal *replaced* on the grounds that it was not
+ * English — read off the corpus as it stood before the review, since a proposal
+ * records what it wrote, not what it overwrote.
+ *
+ * An alternate matching one of these re-accepts, as a correct answer, the exact
+ * string the review argued was not English. The applier refuses that at write
+ * time now; nothing has ever checked the rows committed before the rule
+ * existed. Returns an empty set outside a git checkout.
+ */
+function rejectedEnglish() {
+  const repo = join(__dirname, '..')
+  const out = new Set()
+  if (!existsSync(join(repo, 'review', 'replay-base.txt'))) return out
+  const wanted = new Set()
+  for (const dir of ['proposals', 'copyedit']) {
+    const path = join(repo, 'review', dir)
+    if (!existsSync(path)) continue
+    for (const f of readdirSync(path).filter((n) => n.endsWith('.jsonl'))) {
+      for (const line of readFileSync(join(path, f), 'utf8').split('\n')) {
+        if (!line.trim()) continue
+        const row = JSON.parse(line)
+        if (row.verdict === 'retranslate' && row.defect === 'unnatural-english') wanted.add(`${row.key}\u0000${row.ru}`)
+      }
+    }
+  }
+  if (!wanted.size) return out
+  const work = mkdtempSync(join(tmpdir(), 'alt-audit-'))
+  try {
+    const dir = exportVocabAt(repo, replayBase(repo, []), work)
+    const docs = readdirSync(dir)
+      .filter((f) => f.endsWith('.yml'))
+      .map((f) => ({ pos: POS_BY_FILE[f.replace(/\.ya?ml$/, '')], file: f, doc: yamlLoad(readFileSync(join(dir, f), 'utf8')) }))
+      .filter((r) => r.pos)
+    for (const p of shapePhrases(buildWords(docs))) {
+      if (wanted.has(`${p.source}\u0000${p.ru}`)) out.add(normaliseEnglish(p.en))
+    }
+  } catch {
+    // Not a git checkout, or the base is gone. The other signals stand alone.
+  } finally {
+    rmSync(work, { recursive: true, force: true })
+  }
+  return out
+}
+
+/**
+ * The accepted alternate renderings, worst first.
+ *
+ * `--unread` narrows it to alternates no committed proposal wrote — the ones
+ * that predate the review and were therefore never shown to any reviewer,
+ * which is the gap #599 actually names. The rest each arrived with a note.
+ */
+function alternates() {
+  const repo = join(__dirname, '..')
+  const proposed = new Set()
+  for (const dir of ['proposals', 'copyedit']) {
+    const path = join(repo, 'review', dir)
+    if (!existsSync(path)) continue
+    for (const f of readdirSync(path).filter((n) => n.endsWith('.jsonl'))) {
+      for (const line of readFileSync(join(path, f), 'utf8').split('\n')) {
+        if (!line.trim()) continue
+        const row = JSON.parse(line)
+        for (const alt of row.en_alt ?? []) proposed.add(`${row.key}\u0000${normaliseEnglish(alt)}`)
+      }
+    }
+  }
+
+  const withAlt = phrases.filter((p) => p.enAlt?.length)
+  const total = withAlt.reduce((s, p) => s + p.enAlt.length, 0)
+  const unreadOnly = flag('unread')
+  let found = auditAlternates(phrases, { words, rejected: rejectedEnglish() })
+  const unread = (r) => !proposed.has(`${r.key}\u0000${normaliseEnglish(r.alt)}`)
+  const neverRead = phrases.flatMap((p) => (p.enAlt ?? []).map((alt) => ({ key: p.source, alt }))).filter(unread)
+  if (unreadOnly) found = found.filter(unread)
+
+  console.log(`\n${total} accepted alternate(s) across ${withAlt.length} phrases; ${neverRead.length} never shown to a reviewer`)
+  const bySignal = {}
+  for (const r of found) for (const sig of r.signals) bySignal[sig] = (bySignal[sig] ?? 0) + 1
+  console.log(`${found.length} tripped a signal${unreadOnly ? ' (unread only)' : ''}: ${JSON.stringify(bySignal)}`)
+  for (const r of found.slice(0, Number(opt('show', 25)) || 25)) {
+    console.log(`\n  [${r.signals.join(' ')}] overlap ${r.overlap}  ${r.key}`)
+    console.log(`    ru      ${r.ru}`)
+    console.log(`    en      ${r.en}`)
+    console.log(`    accepts ${r.alt}`)
+    for (const ru of r.alsoTranslates ?? []) console.log(`    also    ${ru}`)
+  }
+  console.log()
+}
 
 /**
  * Distinct Russian sentences that share one English translation — any drill
@@ -243,6 +335,10 @@ function shard() {
       phrases: group.map((r) => ({
         ru: r.ru,
         en: r.en,
+        // What this sentence already accepts. Omitted from the first sweep,
+        // so 3,351 accepted answers were never read by anyone (#599) — and a
+        // reviewer proposing an `add-alt` could not see it was already there.
+        ...(r.enAlt.length ? { en_alt: r.enAlt } : {}),
         tier: r.tier,
         priority: Number(r.priority.toFixed(2)),
         literalness: Number(r.literalness.toFixed(2)),
