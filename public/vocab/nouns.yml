@@ -7031,6 +7031,10 @@ words:
       - restaurants and cafes
     en_gb:
       standard: fork (a tool with prongs for eating)
+    facts:
+      - kind: root
+        text: "The same tool at two sizes: ви́лы is a pitchfork, ви́лка the one you eat with. The plug on the end of a cable is a ви́лка too — the prongs are the point."
+        see: ["вилы=garden fork"]
     usage:
       - ru: Мя́со едя́т ви́лкой и ножо́м.
         en_gb: Meat is eaten with a fork and knife.
@@ -10599,6 +10603,10 @@ words:
       - parts of the body
     en_gb:
       standard: head (the top part of the body)
+    facts:
+      - kind: origin
+        text: "Голова́ and глава́ are one word that entered Russian twice — the native full-vowel shape and the Church Slavonic one. Глава́ took the figurative work (a chapter, the head of an organisation, гла́вный for main) and голова́ kept the head on your shoulders."
+        see: ["глава=chapter", "главный=main", "заголовок=headline"]
     usage:
       - ru: У меня́ боли́т голова́.
         en_gb: I have a headache.
@@ -10661,6 +10669,10 @@ words:
       - feelings and sensations
     en_gb:
       standard: voice (the sound produced by the vocal cords)
+    facts:
+      - kind: origin
+        text: "The same doubling as голова́: го́лос is the native shape, глас- the Church Slavonic one. Hence согла́сие — voices together — and голосова́ть, to vote, which is casting your voice."
+        see: ["согласие=agreement", "голосовать=to vote", "голова=head"]
     usage:
       - ru: Я узна́л твой го́лос сра́зу.
         en_gb: I recognised your voice at once.
@@ -13017,6 +13029,10 @@ words:
       standard: matter (an affair, business, or task)
       alt:
         - case (a legal or investigative matter)
+    facts:
+      - kind: root
+        text: "What has been done, from де́лать: a matter, a case, a piece of business. Как дела́? asks after your doings, not your feelings."
+        see: ["делать=to do", "отдел=department", "деловой=business"]
     usage:
       - ru: Он рассказа́л мне о своём де́ле.
         en_gb: He told me about his case.
@@ -14140,6 +14156,10 @@ words:
       - weather
     en_gb:
       standard: rain
+    facts:
+      - kind: note
+        text: "In Russian rain goes rather than falls: идёт дождь, вчера́ шёл дождь. The same verb carries снег and even a film — идёт фильм."
+        see: ["идти=to go", "снег=snow"]
     usage:
       - ru: Мы шли под дождём.
         en_gb: We walked in the rain.
@@ -18250,6 +18270,10 @@ words:
       - daily life
     en_gb:
       standard: sound (vibrations that travel through air and are heard)
+    facts:
+      - kind: root
+        text: "The bare noun of a family that rings: звони́ть (to ring someone up), звоно́к (a bell), звене́ть (a bell ringing), звуча́ть (to sound)."
+        see: ["звонить=to call", "звонок=bell", "звенеть=to ring", "звучать=to sound"]
     usage:
       - ru: Я услы́шала стра́нный звук.
         en_gb: I heard a strange sound.
@@ -25950,6 +25974,10 @@ words:
       - animals
     en_gb:
       standard: cat (a small furry pet)
+    facts:
+      - kind: note
+        text: "Ко́шка is both the female cat and the animal in general — a cat of unknown sex is a ко́шка. Кот is specifically a tom, so у меня́ есть кот says rather more than English a cat does."
+        see: ["кот=tomcat"]
     usage:
       - ru: Она́ ча́сто игра́ет с ко́шками.
         en_gb: She often plays with the cats.
@@ -29308,6 +29336,10 @@ words:
       - restaurants and cafes
     en_gb:
       standard: spoon (a tool with a small bowl for eating)
+    facts:
+      - kind: origin
+        text: "From an old лог- meaning a hollow — a thing scooped out. Nothing to do with ложь, which is from лг-: the two roots merely fell together, and the -ка is part of the word, as it is in ви́лка and ча́шка."
+        see: ["вилка=fork", "чашка=cup"]
     usage:
       - ru: Суп едя́т ло́жкой.
         en_gb: Soup is eaten with a spoon.
@@ -31449,6 +31481,10 @@ words:
       - places
     en_gb:
       standard: place (a spot; a seat; a location)
+    facts:
+      - kind: root
+        text: "The root sits inside three everyday words: вме́сте is in one place, together; вме́сто is in the place of, instead; ме́стный is local."
+        see: ["вместе=together", "вместо=instead of", "местный=local"]
     usage:
       - ru: Уступи́ ме́сто ба́бушке.
         en_gb: Give up your seat to the old lady.
@@ -34241,6 +34277,9 @@ words:
       - shopping
     en_gb:
       standard: meat (food from an animal)
+    facts:
+      - kind: origin
+        text: "One of the oldest words in the language, inherited rather than borrowed: the same ancient word appears in Sanskrit as māṃsa. English meat is unrelated — it once meant food of any kind."
     usage:
       - ru: В э́том блю́де нет мя́са.
         en_gb: There is no meat in this dish.
@@ -43695,6 +43734,10 @@ words:
       pl_acc: пого́ды
       pl_ins: пого́дами
       pl_pre: пого́дах
+    facts:
+      - kind: origin
+        text: "Traditionally taken to share a root with год, an appointed or fitting time — weather as what the season brings. Непого́да, its opposite, is weather gone wrong."
+        see: ["год=year"]
     usage:
       - ru: Сего́дня хоро́шая пого́да.
         en_gb: The weather is good today.
@@ -53748,6 +53791,10 @@ words:
       - restaurants and cafes
     en_gb:
       standard: fish (an animal that lives in water)
+    facts:
+      - kind: root
+        text: "Behind рыба́к (a fisherman) and рыба́лка (fishing as an outing). You go fishing as ходи́ть на рыба́лку and catch fish as лови́ть ры́бу — the fish is the object, so it takes the accusative."
+        see: ["рыбак=fisherman", "рыбалка=fishing"]
     usage:
       - ru: В реке́ пла́вает больша́я ры́ба.
         en_gb: A big fish is swimming in the river.
@@ -65925,6 +65972,10 @@ words:
       standard: dinner (the evening meal)
       alt:
         - supper
+    facts:
+      - kind: origin
+        text: "Traditionally from an old word for south — compare юг — naming the meal eaten when the sun stood due south, at midday. The meal moved to the evening over the centuries and took its name along."
+        see: ["юг=south"]
     usage:
       - ru: На у́жин мы е́ли ры́бу.
         en_gb: For dinner we ate fish.
@@ -66207,6 +66258,10 @@ words:
       - public transport
     en_gb:
       standard: street (a road in a town)
+    facts:
+      - kind: note
+        text: "На у́лице means outdoors as much as in the street: На у́лице хо́лодно is simply it is cold outside. Переу́лок, a lane, is the same root with пере- across it."
+        see: ["переулок=lane"]
     usage:
       - ru: Мы вы́шли на у́лицу.
         en_gb: We went out onto the street.

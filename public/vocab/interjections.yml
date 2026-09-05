@@ -242,6 +242,10 @@ words:
     accented: до свида́ния
     en_gb:
       standard: goodbye (literally "until the meeting")
+    facts:
+      - kind: origin
+        text: "Literally until the meeting: свида́ния is the genitive of свида́ние, a meeting, built on ви́деть. French au revoir and German auf Wiedersehen say exactly the same thing."
+        see: ["свидание=date", "видеть=to see"]
     usage:
       - ru: До свида́ния, до за́втра!
         en_gb: Goodbye, see you tomorrow!
@@ -257,6 +261,10 @@ words:
     accented: до́брое у́тро
     en_gb:
       standard: good morning (a greeting used in the morning)
+    facts:
+      - kind: build
+        text: "До́брый agreeing with у́тро, which is neuter — hence до́брое and not до́брый. The other two greetings name a masculine part of the day — день, ве́чер — and keep the masculine form."
+        see: ["добрый=kind", "утро=morning"]
     usage:
       - ru: До́брое у́тро! Как спа́лось?
         en_gb: Good morning! How did you sleep?
@@ -268,6 +276,10 @@ words:
     accented: до́брый ве́чер
     en_gb:
       standard: good evening (a greeting used in the evening)
+    facts:
+      - kind: build
+        text: "До́брый plus ве́чер. Russian greets by naming the part of the day — у́тро, день, ве́чер — but not ночь: споко́йной но́чи is a farewell, not a greeting."
+        see: ["добрый=kind", "вечер=evening", "ночь=night"]
     usage:
       - ru: До́брый ве́чер, рад вас ви́деть.
         en_gb: Good evening, glad to see you.
@@ -279,6 +291,10 @@ words:
     accented: до́брый день
     en_gb:
       standard: good afternoon (a daytime greeting)
+    facts:
+      - kind: build
+        text: "До́брый plus день. Where English chooses between morning and afternoon, до́брый день covers the whole working day and is the safe neutral greeting when you are unsure of the hour."
+        see: ["добрый=kind", "день=day"]
     usage:
       - ru: До́брый день, чем могу́ помо́чь?
         en_gb: Good afternoon, how can I help?
@@ -368,6 +384,14 @@ words:
       standard: excuse me (apology or to get attention)
       alt:
         - sorry
+    facts:
+      - kind: build
+        text: "Из- on the root of вина́ (guilt), with the plural imperative -ите: take me out of the blame. Извини́ is the same word to someone you call ты."
+        parts:
+          - { ru: "из-", en: "out of" }
+          - { ru: "вин", en: "guilt (root of вина́)" }
+          - { ru: "-и́те", en: "imperative, plural or polite" }
+        see: ["вина=guilt", "извинить=to excuse"]
     usage:
       - ru: Извини́те, где метро́?
         en_gb: Excuse me, where is the metro?
@@ -414,6 +438,10 @@ words:
       standard: of course (emphatic agreement)
       alt:
         - certainly
+    facts:
+      - kind: origin
+        text: "From коне́ц (end) — settled all the way to the end, so beyond question. It keeps an older pronunciation: say коне́шно, with -шн-, never -чн-."
+        see: ["конец=end"]
     usage:
       - ru: Ты помо́жешь мне? — Коне́чно!
         en_gb: Will you help me? — Of course!
@@ -462,6 +490,9 @@ words:
       standard: you're welcome (reply to thanks)
       alt:
         - don't mention it
+    facts:
+      - kind: build
+        text: "Literally there is nothing to thank for. The stress moves onto не́ — не́ за что, not не за что́ — which is what marks it as the set reply rather than an ordinary negative."
     usage:
       - ru: Спаси́бо за по́мощь! — Не́ за что.
         en_gb: Thanks for the help! — You're welcome.
@@ -642,6 +673,10 @@ words:
       standard: bye (informal farewell)
       alt:
         - see you
+    facts:
+      - kind: origin
+        text: "The same пока́ that means while or for now, left standing on its own for until we meet again. Informal: до свида́ния is the one to use with strangers."
+        see: ["пока=while", "до свидания=goodbye"]
     usage:
       - ru: Пока́! Уви́димся за́втра.
         en_gb: Bye! See you tomorrow.
@@ -659,6 +694,13 @@ words:
       standard: hi (informal greeting)
       alt:
         - hello
+    facts:
+      - kind: build
+        text: "При- on the old root вет- (to speak), the same one inside отве́т (speaking back) and сове́т (speaking together): a word sent your way."
+        parts:
+          - { ru: "при-", en: "toward" }
+          - { ru: "ве́т", en: "speak (old root)" }
+        see: ["ответ=answer", "совет=advice"]
     usage:
       - ru: Приве́т! Как дела́?
         en_gb: Hi! How are you?
@@ -839,6 +881,10 @@ words:
     accented: эй
     en_gb:
       standard: hey (calling attention or expressing surprise)
+    facts:
+      - kind: note
+        text: "Not built from anything — a bare call-sound, as English hey and German he are. Russian keeps a small family of them apart by job: эй calls someone, ой is a shock or a pain, ах is admiration."
+        see: ["ой=oh", "ах=ah"]
     usage:
       - ru: Эй, подожди́ меня́!
         en_gb: Hey, wait for me!

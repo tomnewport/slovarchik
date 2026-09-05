@@ -861,6 +861,13 @@ words:
       - time
     en_gb:
       standard: always (every time)
+    facts:
+      - kind: build
+        text: "Все (all) on the -гда ending that marks a time word: at all times. Four of the family are A1 words — когда́, всегда́, иногда́, никогда́ — and they differ only in the front."
+        parts:
+          - { ru: "все", en: "all" }
+          - { ru: "-гда́", en: "time, as in когда́" }
+        see: ["когда=when", "иногда=sometimes", "никогда=never"]
     usage:
       - ru: Я всегда́ пью чай у́тром.
         en_gb: I always drink tea in the morning.
@@ -925,6 +932,10 @@ words:
       - daily life
     en_gb:
       standard: yesterday (the day before today)
+    facts:
+      - kind: origin
+        text: "From ве́чер: yesterday is named after the evening just gone, the way English yester- survives in yesterday."
+        see: ["вечер=evening"]
     usage:
       - ru: Вчера́ мы бы́ли в теа́тре.
         en_gb: Yesterday we were at the theatre.
@@ -964,6 +975,10 @@ words:
       - directions
     en_gb:
       standard: where (at what place)
+    facts:
+      - kind: note
+        text: "Russian splits the English where in three: где asks about position, куда́ about movement towards, отку́да about movement from. Где ты? but Куда́ ты идёшь?"
+        see: ["куда=where to", "откуда=from where"]
     usage:
       - ru: Где ты живёшь?
         en_gb: Where do you live?
@@ -1336,6 +1351,10 @@ words:
         - yet
         - more
         - another
+    facts:
+      - kind: note
+        text: "Ещё and уже́ are a pair: ещё says the state has not run out, уже́ says it has arrived. Negated they swap sides — ещё не is not yet, уже́ не is no longer."
+        see: ["уже=already"]
     usage:
       - ru: Она́ ещё спит.
         en_gb: She is still sleeping.
@@ -1685,6 +1704,13 @@ words:
       - daily life
     en_gb:
       standard: sometimes (now and then)
+    facts:
+      - kind: build
+        text: "Ино- is the ино́й of ино́й раз, another — so at some other time. Same -гда family as когда́, всегда́ and никогда́."
+        parts:
+          - { ru: "ино-", en: "other" }
+          - { ru: "-гда́", en: "time, as in когда́" }
+        see: ["иной=other", "когда=when", "всегда=always"]
     usage:
       - ru: Иногда́ я хожу́ в кино́.
         en_gb: Sometimes I go to the cinema.
@@ -2195,6 +2221,10 @@ words:
       alt:
         - much
         - many
+    facts:
+      - kind: note
+        text: "A quantity word, so it counts in the genitive: мно́го книг, мно́го вре́мени. Ско́лько, сто́лько and немно́го all take the same case."
+        see: ["сколько=how many", "столько=so many", "немного=a little"]
     usage:
       - ru: Он мно́го рабо́тает.
         en_gb: He works a lot.
@@ -2220,6 +2250,10 @@ words:
       alt:
         - it is possible
         - may I
+    facts:
+      - kind: root
+        text: "The impersonal side of мочь (to be able): мо́жно means it is possible, with nobody named as doing it. Its negative is нельзя́, not не мо́жно, which does not exist."
+        see: ["мочь=to be able", "нельзя=one must not"]
     usage:
       - ru: Мо́жно войти́?
         en_gb: May I come in?
@@ -2495,6 +2529,13 @@ words:
       - places
     en_gb:
       standard: to the left (on or to the left side)
+    facts:
+      - kind: build
+        text: "На on ле́вый: to the left, as a direction you move in. Сле́ва is the matching answer to где — position rather than movement."
+        parts:
+          - { ru: "на-", en: "onto, towards" }
+          - { ru: "ле́во", en: "left (from ле́вый)" }
+        see: ["левый=left", "направо=to the right", "слева=on the left"]
     usage:
       - ru: На углу́ поверни́те нале́во.
         en_gb: At the corner turn to the left.
@@ -2646,6 +2687,10 @@ words:
       - abstract
     en_gb:
       standard: not (negation particle)
+    facts:
+      - kind: note
+        text: "Не denies the word straight after it — не я, не сего́дня — while ни is for not a single and for nor. In a few set phrases the stress jumps onto it: не́ за что, не́ был."
+        see: ["ни=not a single", "не за что=you're welcome"]
     usage:
       - ru: Я не зна́ю.
         en_gb: I do not know.
@@ -2839,6 +2884,10 @@ words:
       alt:
         - it is impossible
         - you can't
+    facts:
+      - kind: origin
+        text: "Once не + льзя, where льзя meant it is allowed. Льзя died out and left only its negative standing — which is why нельзя́ has no positive twin and borrows мо́жно for one."
+        see: ["можно=one may"]
     usage:
       - ru: Здесь нельзя́ кури́ть.
         en_gb: One must not smoke here.
@@ -2889,6 +2938,13 @@ words:
       standard: a little (a small amount)
       alt:
         - a bit
+    facts:
+      - kind: build
+        text: "Не on мно́го — not much, which Russian uses where English says a little. Written as one word: the separate не мно́го denies the quantity rather than naming it."
+        parts:
+          - { ru: "не-", en: "not" }
+          - { ru: "мно́го", en: "much" }
+        see: ["много=a lot"]
     usage:
       - ru: Дай мне немно́го воды́.
         en_gb: Give me a little water.
@@ -3161,6 +3217,13 @@ words:
       - time
     en_gb:
       standard: never (at no time)
+    facts:
+      - kind: build
+        text: "Ни- on когда́: not at any time. Russian doubles the negative and expects it — я никогда́ не был там needs both ни- and не."
+        parts:
+          - { ru: "ни-", en: "not at any" }
+          - { ru: "когда́", en: "when" }
+        see: ["когда=when", "никто=nobody", "всегда=always"]
     usage:
       - ru: Я никогда́ там не́ была́.
         en_gb: I have never been there.
@@ -3730,6 +3793,14 @@ words:
       - communication
     en_gb:
       standard: in Russian (in the Russian language or manner)
+    facts:
+      - kind: build
+        text: "The по- …-ски frame means in the manner of, and it takes any language: по-англи́йски, по-неме́цки. It never carries a noun — говори́ть по-ру́сски, but знать ру́сский язы́к."
+        parts:
+          - { ru: "по-", en: "in the manner of" }
+          - { ru: "ру́сск", en: "Russian (from ру́сский)" }
+          - { ru: "-и", en: "adverb ending" }
+        see: ["русский=Russian", "по-английски=in English"]
     usage:
       - ru: Он хорошо́ говори́т по-ру́сски.
         en_gb: He speaks Russian well.
@@ -5714,6 +5785,10 @@ words:
       - time
     en_gb:
       standard: already (by now; so soon)
+    facts:
+      - kind: note
+        text: "The other half of the ещё pair: уже́ marks something as having arrived, ещё that it is still going. Уже́ не is no longer; ещё не is not yet."
+        see: ["ещё=still"]
     usage:
       - ru: Он уже́ до́ма.
         en_gb: He is already at home.
