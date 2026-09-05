@@ -1180,6 +1180,47 @@ words:
       - kind: origin
         text: "Greek apothēkē, a storehouse. The same word gave English boutique and Spanish bodega, and the -тека of библиоте́ка is that storehouse again."
         see: ["библиотека=library"]
+  "арбуз=watermelon":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    facts:
+      - kind: region
+        where: southern Russia
+        text: >-
+          In the south — the Don, the Kuban, Astrakhan — you will hear каву́н for
+          a watermelon. Арбу́з is the standard word and the one used everywhere
+          else.
+        see: ["кавун=watermelon"]
+    collections:
+      - food and drink
+      - shopping
+    en_gb:
+      standard: watermelon (a large green fruit with sweet red flesh)
+    usage:
+      - ru: Ле́том мы всегда́ покупа́ем арбу́з.
+        en_gb: In summer we always buy a watermelon.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́тот арбу́з о́чень сла́дкий.
+        en_gb: This watermelon is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: На ры́нке продаю́т больши́е арбу́зы.
+        en_gb: They sell big watermelons at the market.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+    declension:
+      sg_nom: арбу́з
+      sg_gen: арбу́за
+      sg_dat: арбу́зу
+      sg_acc: арбу́з
+      sg_ins: арбу́зом
+      sg_pre: арбу́зе
+      pl_nom: арбу́зы
+      pl_gen: арбу́зов
+      pl_dat: арбу́зам
+      pl_acc: арбу́зы
+      pl_ins: арбу́зами
+      pl_pre: арбу́зах
   "Аргентина=Argentina":
     cefr_level: A2
     gender: f
@@ -20920,6 +20961,20 @@ words:
       sg_acc: Кавка́з
       sg_ins: Кавка́зом
       sg_pre: Кавка́зе
+  "кавун=watermelon":
+    cefr_level: A2
+    learn: false
+    accented: каву́н
+    en_gb:
+      standard: watermelon (southern regional — the standard word is арбу́з)
+    facts:
+      - kind: region
+        where: southern Russia
+        text: >-
+          The southern Russian word for a watermelon, from Turkic kavun, a
+          melon. Dictionaries mark it regional, so арбу́з is the word to reach
+          for.
+        see: ["арбуз=watermelon"]
   "кадр=frame":
     cefr_level: B1
     gender: m
