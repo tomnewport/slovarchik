@@ -8,6 +8,7 @@ import {
   relatedWords,
   confusionNote,
   factIssues,
+  regionalVariant,
   FACT_KINDS,
   NUMERAL_LABEL,
 } from './wordFacts.js'
@@ -252,7 +253,7 @@ words:
   })
 
   it('exposes the closed kind set', () => {
-    expect(FACT_KINDS).toEqual(['build', 'root', 'origin', 'memory', 'note'])
+    expect(FACT_KINDS).toEqual(['build', 'root', 'origin', 'region', 'memory', 'note'])
   })
 })
 
@@ -584,6 +585,59 @@ words:
   })
 })
 
+describe('region facts (#636)', () => {
+  // The corpus teaches the dictionary standard, so the variant is a gloss-only
+  // stub: told about, never drilled.
+  const bread = `
+words:
+  "булка=white loaf":
+    cefr_level: A2
+    learn: false
+    accented: бу́лка
+    en_gb: { standard: white loaf (elsewhere, a sweet bun) }
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: "In St Petersburg a бу́лка is white bread; elsewhere it is a sweet bun."
+        see: ["хлеб=bread"]
+  "хлеб=bread":
+    cefr_level: A1
+    accented: хлеб
+    en_gb: { standard: bread }
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: "In St Petersburg хлеб leans rye and the white loaf is a бу́лка."
+        see: ["булка=white loaf"]
+`
+  const words = fromYaml([{ pos: 'noun', text: bread }])
+  const byKey = byKeyOf(words)
+  const bread_ = find(words, 'хлеб=bread')
+
+  it('keeps the place beside the prose', () => {
+    expect(wordFacts(bread_)[0]).toMatchObject({ kind: 'region', where: 'St Petersburg' })
+  })
+
+  it('relates the two as region, not as a bare see-also', () => {
+    expect(relatedWords(bread_, byKey)).toMatchObject([
+      { key: 'булка=white loaf', relation: 'region', where: 'St Petersburg' },
+    ])
+  })
+
+  it('names the place a variant belongs to, from the word being asked for', () => {
+    expect(regionalVariant(bread_, 'булка=white loaf')).toBe('St Petersburg')
+  })
+
+  it('says nothing about an unrelated word, or about no word at all', () => {
+    expect(regionalVariant(bread_, 'булочная=bakery')).toBe('')
+    expect(regionalVariant(bread_, '')).toBe('')
+  })
+
+  it('leaves the variant out of the curriculum', () => {
+    expect(shapeVocab(words).map((w) => w.id)).toEqual(['хлеб=bread'])
+  })
+})
+
 describe('factIssues', () => {
   const issuesFor = (text, pos = 'adverb') => factIssues(fromYaml([{ pos, text }]))
   const messages = (issues) => issues.map((i) => i.message)
@@ -708,6 +762,59 @@ words:
       - { kind: root, text: "…", see: ["нет такого=nope"] }
 `)
     expect(messages(issues)).toEqual(['a word cannot see itself', '"нет такого=nope" is not a word'])
+  })
+
+  it('flags a region fact with no place, and a where on any other kind', () => {
+    const issues = issuesFor(`
+words:
+  "тут=here":
+    cefr_level: A1
+    accented: тут
+    en_gb: { standard: here }
+    facts:
+      - { kind: region, text: "They say it differently up north." }
+      - { kind: note, text: "…", where: "Moscow" }
+`)
+    expect(messages(issues)).toEqual([
+      'a region fact needs a where (the place it is about)',
+      'where is region-only, not "note"',
+    ])
+  })
+
+  it('flags a regional pairing claimed from only one end', () => {
+    const issues = issuesFor(`
+words:
+  "тут=here":
+    cefr_level: A1
+    accented: тут
+    en_gb: { standard: here }
+    facts:
+      - { kind: region, where: "the north", text: "Up north they say the other one.", see: ["здесь=here"] }
+  "здесь=here":
+    cefr_level: A1
+    accented: здесь
+    en_gb: { standard: here (in this place) }
+`)
+    expect(messages(issues)).toEqual(['"здесь=here" has no region fact linking back'])
+  })
+
+  it('accepts the pairing once the other end claims it too', () => {
+    const issues = issuesFor(`
+words:
+  "тут=here":
+    cefr_level: A1
+    accented: тут
+    en_gb: { standard: here }
+    facts:
+      - { kind: region, where: "the north", text: "Up north they say the other one.", see: ["здесь=here"] }
+  "здесь=here":
+    cefr_level: A1
+    accented: здесь
+    en_gb: { standard: here (in this place) }
+    facts:
+      - { kind: region, where: "the north", text: "The northern word; тут is the one to give.", see: ["тут=here"] }
+`)
+    expect(issues).toEqual([])
   })
 
   it('flags a confusable that re-states a derivable link', () => {

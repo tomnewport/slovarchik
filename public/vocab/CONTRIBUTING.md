@@ -230,9 +230,10 @@ all optional:
 
 | Key     | Required | Notes |
 | ------- | -------- | ----- |
-| `kind`  | **yes**  | One of `build` `root` `origin` `memory` `note`. A closed set: anything else is dropped by the build and fails the corpus guard. |
+| `kind`  | **yes**  | One of `build` `root` `origin` `region` `memory` `note`. A closed set: anything else is dropped by the build and fails the corpus guard. |
 | `text`  | **yes**  | One or two sentences. **Markdown is not parsed** — write plain prose, because `*emphasis*` renders literally. |
 | `parts` | no       | `build` only: the morphemes in order, each `{ ru, en }`. Keep the joining hyphens (`пере-`, `-и́ть`) — they show where the piece attaches and are stripped when the chips are read out as one word. |
+| `where` | for `region` | `region` only: the place the fact is about, as a short name (`St Petersburg`). Required there — a regional claim that can't name a place is a `note` — and it is what the drill says out loud when a learner writes the variant. |
 | `see`   | no       | Natural keys of related entries. Each is resolved into a link, so the panel can offer the word rather than only name it. |
 
 A word may carry as many facts as it earns — two roots, two mnemonics — and they
@@ -242,6 +243,56 @@ The `parts` of a `build` fact have to spell out the word they sit on: the guard
 checks that the morphemes appear, in order, inside the headword. Consonant
 alternations are fine (`писа́ть` → `пис` + `-а́ть`); a breakdown pasted onto the
 wrong word is not.
+
+#### `region` — the word 400 miles away
+
+A word can mean something else, or be called something else, at the other end of
+the country. **The corpus teaches the dictionary standard** — which is broadly
+Moscow usage — so a regional variant is never an accepted answer and never a
+word the learner is drilled on. It is something they are *told*, so that meeting
+it in the wild is recognition rather than confusion.
+
+```yaml
+"курица=hen":
+  facts:
+    - kind: region
+      where: St Petersburg
+      text: >-
+        In St Petersburg the bird on your plate is often a ку́ра. Dictionaries
+        treat that as colloquial rather than standard, so ку́рица stays the word
+        to reach for.
+      see: ["кура=chicken"]
+```
+
+Three shapes fit under it, and the prose is what tells them apart — which is why
+this is a fact and not a link with a label on it:
+
+- **the same thing, another name** — пара́дная beside подъе́зд;
+- **the same word, another shape** — ку́ра beside ку́рица;
+- **the same word, a different range** — in St Petersburg хлеб leans rye and the
+  white loaf is a бу́лка, while in Moscow бу́лка is a sweet bun. Nothing but a
+  sentence can say that.
+
+Rules the guard enforces:
+
+- **`where` is required.** Without a place it is a `note`.
+- **Both ends carry a `region` fact linking back.** A one-sided claim leaves the
+  learner who meets the *other* word told nothing, and each end reads
+  differently anyway — from хлеб the fact is about bread, from бу́лка it is about
+  buns.
+- The variant itself enters as a **gloss-only stub** (`learn: false`, below), not
+  as curriculum. It sidesteps the CEFR question a regional variant can't answer,
+  and keeps it out of the drills, which is the point.
+
+**Grading.** A learner who types the variant is not told a flat "Incorrect": the
+drill names the word, says where it lives, and asks for the dictionary one
+(`regional` in `confusables.js`). It still counts as a miss — the dictionary form
+is what the corpus teaches — but it doesn't sound an error, on the same footing
+as a synonym.
+
+Out of scope for `region`: register (formal, slang, dated) and the Russian of
+Ukraine, Belarus and Central Asia. They want their own machinery rather than
+being crammed in here.
 
 ### `confusable_with` — sound-alikes and false friends
 
@@ -1049,7 +1100,8 @@ which assert that the **real** files on disk:
   fails if either gender drops below 45% of the gendered «я …» phrases, or of
   the gendered «ты …» ones (see the gender-balance note under `usage` above).
 - resolve every **`facts:` / `confusable_with:`** link, with a valid `kind`,
-  a non-empty `text`, a breakdown that really spells out its headword, no
+  a non-empty `text`, a breakdown that really spells out its headword, a `where`
+  on every `region` fact and a `region` fact linking back from the other end, no
   hand-authored duplicate of a link the build already derives, and *something*
   that tells each confusable pair apart — a note, distinct glosses or a `why`
   (`wordFacts.factIssues`, asserted in `vocabBuild.test.js`).

@@ -5038,6 +5038,20 @@ words:
       pl_acc: буке́ты
       pl_ins: буке́тами
       pl_pre: буке́тах
+  "булка=white loaf":
+    cefr_level: A2
+    learn: false
+    accented: бу́лка
+    en_gb:
+      standard: white loaf (a wheat loaf; elsewhere in Russia, a small sweet bun)
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg a бу́лка is white bread — the loaf a Moscow shop sells
+          as бато́н or бе́лый хлеб. Elsewhere the word means a small sweet bun, so
+          the same five letters buy you two different things.
+        see: ["хлеб=bread"]
   "булочная=bakery":
     cefr_level: A2
     gender: f
@@ -27415,11 +27429,33 @@ words:
       pl_acc: купю́ры
       pl_ins: купю́рами
       pl_pre: купю́рах
+  "кура=chicken":
+    cefr_level: A2
+    learn: false
+    accented: ку́ра
+    en_gb:
+      standard: chicken (colloquial and regional — the standard word is ку́рица)
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg you will hear ку́ра for a chicken, especially the one
+          on your plate. Dictionaries mark it colloquial rather than standard,
+          so it is a word to recognise rather than one to use.
+        see: ["курица=hen"]
   "курица=hen":
     cefr_level: A2
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg the bird on your plate is often a ку́ра. Dictionaries
+          treat that as colloquial rather than standard, so ку́рица stays the
+          word to reach for.
+        see: ["кура=chicken"]
     collections:
       - animals
       - in the garden
@@ -40596,6 +40632,20 @@ words:
       pl_acc: па́ры
       pl_ins: па́рами
       pl_pre: па́рах
+  "парадная=front entrance":
+    cefr_level: A2
+    learn: false
+    accented: пара́дная
+    en_gb:
+      standard: front entrance (a block of flats' street entrance, in St Petersburg usage)
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          The St Petersburg word for the door and stairwell that is a подъе́зд
+          everywhere else. It is short for пара́дный подъе́зд, the grand entrance
+          of a pre-revolutionary building as against the back stairs.
+        see: ["подъезд=entrance"]
   "парень=guy":
     cefr_level: A2
     gender: m
@@ -44268,6 +44318,14 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg the same door is a пара́дная, from the пара́дный
+          подъе́зд of a pre-revolutionary building. Подъе́зд is the standard word
+          and the one used everywhere else.
+        see: ["парадная=front entrance"]
     collections:
       - home
       - architecture
@@ -68731,6 +68789,13 @@ words:
           Borrowed into Slavic from Germanic, and the same word as English loaf
           (Old English hlāf). That hlāf is also the first half of lord — hlāford,
           the keeper of the loaf — and of lady, hlǣfdīge, who kneaded it.
+      - kind: region
+        where: St Petersburg
+        text: >-
+          Which bread хлеб means shifts as you travel. In St Petersburg it leans
+          towards the dark rye loaf and the white one is a бу́лка; in Moscow хлеб
+          covers both, and a бу́лка is a sweet bun.
+        see: ["булка=white loaf"]
     collections:
       - in the kitchen
       - restaurants and cafes

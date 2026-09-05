@@ -87,7 +87,7 @@ src/
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
                         #     (big tables one column at a time until built with nothing misplaced)
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
-                        #   wordFacts  — a word's authored facts (build/root/origin/mnemonic) and its related words, derived + authored
+                        #   wordFacts  — a word's authored facts (build/root/origin/region/mnemonic) and its related words, derived + authored
                         #   factCoverage  — which words most deserve a fact, and the sound-alike and diminutive shortlists
                         #     (worklists, NOT CI guards; rejections live in review/confusables-reviewed.jsonl and
                         #      review/diminutives-reviewed.jsonl)

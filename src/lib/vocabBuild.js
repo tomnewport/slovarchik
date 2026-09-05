@@ -101,12 +101,15 @@ function normalizeHeteronyms(raw) {
  *  - `build`   — the morpheme breakdown (пере‧вод‧и́ть), optionally as `parts`;
  *  - `root`    — the shared root that ties it to words already known;
  *  - `origin`  — etymology, borrowings, calques;
+ *  - `region`  — where in the Russian-speaking world the word is used, or used
+ *                differently. Carries a `where` (the place) beside its prose,
+ *                because a regional claim that cannot name a place is a `note`;
  *  - `memory`  — a mnemonic;
  *  - `note`    — anything else worth saying once.
  * A closed set means the renderer maps kind → icon/label and never guesses;
  * adding a kind is a one-line change here plus an icon.
  */
-export const FACT_KINDS = ['build', 'root', 'origin', 'memory', 'note']
+export const FACT_KINDS = ['build', 'root', 'origin', 'region', 'memory', 'note']
 
 /** Normalise the morpheme breakdown of a `build` fact into {ru, en} chips. */
 function normalizeParts(raw) {
@@ -140,6 +143,10 @@ function normalizeFacts(raw) {
         kind,
         text,
         parts: kind === 'build' ? normalizeParts(f.parts) : [],
+        // The place a `region` fact is about, kept apart from its prose so a
+        // correction message and a panel row can name it without parsing a
+        // sentence. Blank here is an authoring slip, reported by `factIssues`.
+        where: kind === 'region' ? String(f.where ?? '').trim() : '',
         seeKeys: normalizeKeys(f.see),
         see: [], // resolved by linkFacts
       }

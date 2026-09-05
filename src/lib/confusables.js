@@ -19,7 +19,7 @@ import { ASPECT_LABEL, MOTION_LABEL } from './phraseContext.js'
 import { normToken, normTokenStress } from './phraseHint.js'
 import { aspectSense } from './spellPrompt.js'
 import { stripStress } from './text.js'
-import { confusionNote } from './wordFacts.js'
+import { confusionNote, regionalVariant } from './wordFacts.js'
 
 /**
  * Verdict types, strongest first. "Strongest" means most specific: a form of the
@@ -31,6 +31,7 @@ export const VERDICTS = [
   'aspect',
   'heteronym',
   'homograph',
+  'regional',
   'synonym',
   'wrong-sense',
   'confusable',
@@ -111,6 +112,15 @@ function relate(got, typed, want) {
     const differsByStress = normTokenStress(typed.ru) !== normTokenStress(wantRu)
     return { ...base, type: differsByStress ? 'heteronym' : 'homograph' }
   }
+
+  // A word the target names as its regional variant. The corpus teaches the
+  // dictionary standard, so this is still a miss — but a learner who wrote
+  // «ку́ра» knows the meaning perfectly well, and saying *where* that word lives
+  // is the whole difference between teaching them something and telling them
+  // they are wrong (#636). Ranked above `synonym`: where both readings are
+  // available, the place is the more specific thing to say.
+  const where = regionalVariant(want, got?.key)
+  if (where) return { ...base, type: 'regional', where }
 
   // Words sharing the target's base gloss split two ways. With no notes on
   // either side they are interchangeable — the learner said something correct,
@@ -323,6 +333,14 @@ function whyDiffers(verdict, want) {
   return text && !bare(text).includes(target) ? text : ''
 }
 
+/**
+ * Correction tiers that shouldn't sound an error. The answer was wrong, but what
+ * the learner produced was a real word meaning the right thing — a synonym in
+ * the wrong slot, or the right word as another region says it. A buzz there
+ * teaches "that was nonsense", which is the one thing it wasn't.
+ */
+export const QUIET_TIERS = ['synonym', 'regional']
+
 /** Quote a Russian word the way the drills do. */
 const q = (value) => `«${value}»`
 
@@ -371,6 +389,12 @@ function englishMessage(verdict) {
         headline,
         detail: `Spelled the same, stress and all — but it is a different word. ${ask}`,
         tier: 'lexical',
+      }
+    case 'regional':
+      return {
+        headline,
+        detail: `That is what ${verdict.where} says for this. ${ask}`,
+        tier: 'regional',
       }
     case 'synonym':
       return {
@@ -455,6 +479,15 @@ export function correctionMessage(verdict) {
         headline: `${q(typed.ru)} is ${typed.note ? `${typed.en} (${typed.note})` : typed.en}`,
         detail: `Right word, wrong sense — I want ${wantGloss(want)}.`,
         tier: 'lexical',
+      }
+    case 'regional':
+      return {
+        // Never "that's wrong": it is a real word, and where it is said is the
+        // fact worth carrying away. The dictionary form is still what's wanted,
+        // and — as everywhere here — it isn't spelled out.
+        headline: `${q(typed.ru)} is what you’d hear in ${verdict.where}`,
+        detail: `Here I want the dictionary word for ${wantGloss(want)}.`,
+        tier: 'regional',
       }
     case 'synonym':
       return {

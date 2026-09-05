@@ -41,7 +41,7 @@ import { stripStress } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { hintTokensFor, diagnoseAnswer } from '../../stores/hints.js'
-import { correctionMessage } from '../../lib/confusables.js'
+import { correctionMessage, QUIET_TIERS } from '../../lib/confusables.js'
 import { ruleReminder, spellingRuleMiss } from '../../lib/ruleOracle.js'
 import { state as vocabState } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
@@ -211,9 +211,9 @@ function check() {
     // miss escalates the help like any other, it just doesn't spend the retry.
     setHintAllowed(true)
     typed.value = ''
-    // A synonym is a correct piece of knowledge in the wrong slot — not a sound
-    // worth punishing.
-    if (correction.value.tier !== 'synonym') playFeedback(false)
+    // A synonym, or the right word in another region's shape, is correct
+    // knowledge in the wrong slot — not a sound worth punishing.
+    if (!QUIET_TIERS.includes(correction.value.tier)) playFeedback(false)
     return
   }
 
@@ -531,8 +531,11 @@ onBeforeUnmount(() => setHintAllowed(true))
 }
 /* A diagnosed answer is a real word, so the correction teaches rather than
    rejects — amber like the close bands, never red. A synonym is better still:
-   right knowledge, wrong slot. */
+   right knowledge, wrong slot. A regional variant stays amber: it is a real
+   word, but the drill really does want the dictionary one, and green would say
+   otherwise. */
 .retry-hint.lexical,
+.retry-hint.regional,
 .retry-hint.synonym {
   display: grid;
   gap: 0.15rem;
