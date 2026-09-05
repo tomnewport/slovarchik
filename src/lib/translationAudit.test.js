@@ -10,6 +10,7 @@ import {
   tierOf,
   priorityScore,
   tierCounts,
+  auditAlternates,
   verbRendering,
   aspectCollisions,
   duplicateEnglish,
@@ -436,5 +437,106 @@ describe('tierCounts', () => {
 
   it('handles no rows', () => {
     expect(tierCounts()).toEqual({ high: 0, medium: 0, clean: 0 })
+  })
+})
+
+describe('auditAlternates', () => {
+  const p = (source, ru, en, enAlt = []) => ({ source, ru, en, enAlt })
+
+  it('says nothing about a corpus whose alternates are ordinary paraphrases', () => {
+    // The point of the whole design. Low content-word overlap is what a *good*
+    // English paraphrase looks like — these two share nothing and are both
+    // right — so overlap alone must never flag on its own.
+    expect(auditAlternates([
+      p('голова=head', 'У меня́ боли́т голова́.', 'I have a headache.', ['My head hurts.']),
+    ])).toEqual([])
+  })
+
+  it('flags the «утро» signature: alternates that describe a different sentence', () => {
+    // The one known instance, as review/alt-removals.jsonl recorded it: three
+    // renderings of «Он рабо́тает с утра́ до ве́чера» left behind on a sentence
+    // they have nothing to do with.
+    const rows = auditAlternates([
+      p('утро=morning', 'Он дожда́лся у́тра до́ма.', 'He waited for the morning at home.', [
+        'From morning till evening he works.',
+        'He works from morning to evening.',
+        'From morning to evening he works.',
+      ]),
+    ])
+    expect(rows).toHaveLength(3)
+    for (const row of rows) expect(row.signals).toContain('orphan-block')
+  })
+
+  it('does not call a lone divergent alternate an orphan', () => {
+    // Cohesion needs a block. One alternate cannot corroborate itself, however
+    // little it shares with the primary.
+    expect(auditAlternates([
+      p('звонок=bell', 'В дверь позвони́ли.', 'There was a ring at the door.', ['The doorbell rang.']),
+    ])).toEqual([])
+  })
+
+  it('flags an alternate that is verbatim the aspect partner\'s own sentence', () => {
+    // Grading, not the contrast drill: answering the imperfective sentence with
+    // the perfective reading is marked correct, so the aspect goes untaught.
+    const words = [
+      { key: 'благодарить=to thank', aspectPair: { key: 'поблагодарить=to thank' } },
+      { key: 'поблагодарить=to thank', aspectPair: { key: 'благодарить=to thank' } },
+    ]
+    const rows = auditAlternates([
+      p('благодарить=to thank', 'Она́ благодари́ла учи́теля.', 'She was thanking the teacher.', ['She thanked the teacher.']),
+      p('поблагодарить=to thank', 'Она́ поблагодари́ла учи́теля.', 'She thanked the teacher.'),
+    ], { words })
+    expect(rows).toHaveLength(1)
+    expect(rows[0].signals).toContain('foreign-partner')
+    expect(rows[0].alsoTranslates).toEqual(['Она́ поблагодари́ла учи́теля.'])
+  })
+
+  it('calls a shared rendering merely foreign when the words are unrelated', () => {
+    const rows = auditAlternates([
+      p('заходить=to drop in', 'Заходи́те к нам в го́сти!', 'Drop in to visit us!', ['Come and visit us!']),
+      p('приходить=to come', 'Приходи́ к нам в го́сти.', 'Come and visit us!'),
+    ])
+    expect(rows[0].signals).toEqual(['foreign'])
+  })
+
+  it('leaves a contraction variant alone, because the grader does not fold it', () => {
+    // The audit expands contractions to align «не» against "doesn't"; the drill
+    // strips apostrophes instead, so "shes" and "she is" are different answers
+    // and the alternate is doing real work. Judging this by the audit's own
+    // normalisation would delete a row the learner can legitimately type.
+    expect(auditAlternates([
+      p('ванна=bath', 'Она́ принима́ет горя́чую ва́нну.', "She's taking a hot bath.", ['She is taking a hot bath.']),
+    ])).toEqual([])
+  })
+
+  it('flags an alternate that varies only an article the grader ignores', () => {
+    const rows = auditAlternates([
+      p('молоко=milk', 'Молоко́ ско́ро зако́нчится.', 'The milk will soon run out.', ['Milk will soon run out.']),
+    ])
+    expect(rows[0].signals).toEqual(['duplicate'])
+  })
+
+  it('flags an alternate that re-accepts English a proposal called unnatural', () => {
+    const rejected = new Set(['my strength fades towards evening'])
+    const rows = auditAlternates([
+      p('пропадать=to disappear', 'Си́лы пропада́ют к ве́черу.', 'I run out of energy by evening.', ['My strength fades towards evening.']),
+    ], { rejected })
+    expect(rows[0].signals).toContain('contradicted')
+  })
+
+  it('sorts the sharp signals above the weak ones', () => {
+    const rows = auditAlternates([
+      p('a=a', 'Оди́н.', 'One.', ['One.']),
+      p('утро=morning', 'Он дожда́лся у́тра до́ма.', 'He waited for the morning at home.', [
+        'From morning till evening he works.',
+        'He works from morning to evening.',
+      ]),
+    ])
+    expect(rows[0].signals).toContain('orphan-block')
+  })
+
+  it('handles a corpus with no alternates at all', () => {
+    expect(auditAlternates([p('a=a', 'Оди́н.', 'One.')])).toEqual([])
+    expect(auditAlternates(undefined)).toEqual([])
   })
 })

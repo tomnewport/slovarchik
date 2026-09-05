@@ -1,0 +1,155 @@
+#!/usr/bin/env node
+/**
+ * review-yield.mjs — what each tier of the translation review actually returned.
+ *
+ * The review (#573) ranked 16k example sentences into `high`/`medium`/`clean`
+ * and read them in that order. Whether that ranking was worth building is a
+ * question the review can only answer after the fact: join every committed
+ * proposal back onto the tier its phrase was in when the reviewer saw it, and
+ * count the verdicts.
+ *
+ * The tier has to be re-derived from the corpus **as of the replay base**, not
+ * from today's. The review rewrote 685 translations and 32 Russian sentences,
+ * so scoring the committed corpus would ask what tier a sentence would fall in
+ * *after* being fixed — which is a different question, and one whose answer is
+ * biased by construction (a fixed sentence often scores worse; see the
+ * literalness caveat in docs/translation-review.md).
+ *
+ * Usage:
+ *   node scripts/review-yield.mjs [--base <ref>] [--json]
+ *
+ * Reports, per tier: how many reviewed rows fell in it, and the share that came
+ * back `keep`, `add-alt`, or a substantive edit (`retranslate`, `fix-russian`,
+ * `flag`). The substantive-edit rate is the one that says whether the ranking
+ * worked: it is the density of real defects the tier held.
+ */
+import { mkdtempSync, readFileSync, readdirSync, rmSync, existsSync } from 'fs'
+import { join, dirname } from 'path'
+import { tmpdir } from 'os'
+import { fileURLToPath } from 'url'
+import { load as yamlLoad } from 'js-yaml'
+import { buildWords, shapePhrases, POS_BY_FILE } from '../src/lib/vocabBuild.js'
+import { auditPhrases } from '../src/lib/translationAudit.js'
+import { replayBase, assertUsableBase, exportVocabAt } from './replay-base.mjs'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const repo = join(__dirname, '..')
+const args = process.argv.slice(2)
+
+/** Verdicts that changed something a learner sees, beyond widening what's accepted. */
+const SUBSTANTIVE = new Set(['retranslate', 'fix-russian', 'flag'])
+
+const TIERS = ['high', 'medium', 'clean']
+
+function loadCorpusFrom(vocabDir) {
+  const docs = readdirSync(vocabDir)
+    .filter((f) => f.endsWith('.yml'))
+    .sort()
+    .map((f) => ({
+      pos: POS_BY_FILE[f.replace(/\.ya?ml$/, '')],
+      file: f,
+      doc: yamlLoad(readFileSync(join(vocabDir, f), 'utf8')),
+    }))
+    .filter((r) => r.pos)
+  const words = buildWords(docs)
+  return { words, phrases: shapePhrases(words) }
+}
+
+/** Every committed proposal of a pass, keyed the way a packet identifies a phrase. */
+function proposals(name) {
+  const dir = join(repo, 'review', name)
+  const rows = []
+  if (!existsSync(dir)) return rows
+  for (const f of readdirSync(dir).filter((n) => n.endsWith('.jsonl')).sort()) {
+    for (const line of readFileSync(join(dir, f), 'utf8').split('\n')) {
+      if (!line.trim()) continue
+      rows.push(JSON.parse(line))
+    }
+  }
+  return rows
+}
+
+const base = replayBase(repo, args)
+assertUsableBase(repo, base)
+
+const work = mkdtempSync(join(tmpdir(), 'review-yield-'))
+let tiers
+try {
+  const { words, phrases } = loadCorpusFrom(exportVocabAt(repo, base, work))
+  tiers = new Map(auditPhrases(phrases, words).map((r) => [`${r.source}\u0000${r.ru}`, r.tier]))
+} finally {
+  rmSync(work, { recursive: true, force: true })
+}
+
+// Coverage is a statement about the corpus as it stands, so its denominator is
+// today's phrase count — not the base's, which the tier map is built from and
+// which is smaller by every word added since.
+const today = loadCorpusFrom(join(repo, 'public', 'vocab')).phrases
+const corpusToday = today.length
+
+const stat = Object.fromEntries(TIERS.map((t) => [t, {}]))
+// A `fix-russian` row's sentence no longer exists under the Russian it was
+// written against, and packet boundaries drifted as words were added. Those
+// rows are reported rather than dropped silently: an unmatched share large
+// enough to move the percentages would make the table meaningless.
+let unmatched = 0
+for (const p of proposals('proposals')) {
+  const tier = tiers.get(`${p.key}\u0000${p.ru}`)
+  if (!tier) {
+    unmatched += 1
+    continue
+  }
+  stat[tier][p.verdict] = (stat[tier][p.verdict] ?? 0) + 1
+}
+
+const summary = TIERS.map((tier) => {
+  const v = stat[tier]
+  const n = Object.values(v).reduce((a, b) => a + b, 0)
+  const share = (count) => (n ? (100 * count) / n : 0)
+  const substantive = Object.entries(v)
+    .filter(([verdict]) => SUBSTANTIVE.has(verdict))
+    .reduce((a, [, count]) => a + count, 0)
+  return {
+    tier,
+    reviewed: n,
+    keep: share(v.keep ?? 0),
+    addAlt: share(v['add-alt'] ?? 0),
+    substantive: share(substantive),
+    verdicts: v,
+  }
+})
+
+if (args.includes('--json')) {
+  console.log(JSON.stringify({ base, unmatched, tiers: summary }, null, 2))
+} else {
+  const pc = (x) => `${x.toFixed(1)}%`.padStart(6)
+  console.log(`\nreview yield, tiers as of ${base.slice(0, 8)}\n`)
+  console.log('  tier     reviewed    keep  add-alt   edit')
+  for (const r of summary) {
+    console.log(`  ${r.tier.padEnd(8)} ${String(r.reviewed).padStart(6)}  ${pc(r.keep)}  ${pc(r.addAlt)} ${pc(r.substantive)}`)
+  }
+  const clean = summary.find((r) => r.tier === 'clean')
+  const high = summary.find((r) => r.tier === 'high')
+  if (clean?.substantive) {
+    console.log(`\n  ranking enrichment: high holds ${(high.substantive / clean.substantive).toFixed(1)}× the defect density of clean`)
+  }
+  // Coverage counts both passes; the table above is about the ranked one only,
+  // since the residual sweep had no tier to be ranked into — it is what was
+  // left when the ranking ran out of words to cut packets from.
+  const ranked = summary.reduce((a, r) => a + r.reviewed, 0)
+  const residual = proposals('residual').length
+  // Distinct phrases of today's corpus that carry a row, not a count of rows.
+  // Summing rows overstates it: a sentence whose Russian a `fix-russian` rewrote
+  // has a row under a Russian the corpus no longer holds, and the copyedit gave
+  // some sentences a second row. Both would be counted twice.
+  const covered = new Set()
+  for (const pass of ['proposals', 'residual']) {
+    for (const p of proposals(pass)) covered.add(`${p.key}\u0000${p.ru}`)
+  }
+  const read = today.filter((p) => covered.has(`${p.source}\u0000${p.ru}`)).length
+  console.log(`  coverage: ${read} of ${corpusToday} phrases read (${(100 * read / corpusToday).toFixed(1)}%)`)
+  console.log(`    ranked sweep ${ranked} row(s), residual sweep ${residual} row(s)`)
+  if (read < corpusToday) console.log(`    ${corpusToday - read} phrase(s) still unread`)
+  if (unmatched) console.log(`  ${unmatched} proposal(s) could not be placed in a tier (rewritten Russian, or added since the base)`)
+  console.log()
+}

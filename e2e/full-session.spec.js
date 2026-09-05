@@ -42,11 +42,21 @@ async function solveType(ex) {
   const input = ex.locator('input.answer-input')
   await expect(input).toBeVisible()
   await input.fill((await input.getAttribute('data-answer')) ?? '')
-  await ex.getByRole('button', { name: 'Check' }).click()
+  await ex.getByRole('button', { name: 'Check', exact: true }).click()
   await ex.getByRole('button', { name: /Next/ }).click()
 }
 
-/** Tap the bank tiles named by the exercise's `data-answer-tokens`, in order. */
+/**
+ * Tap the bank tiles named by the exercise's `data-answer-tokens`, in order.
+ *
+ * Every `Check` here is matched `exact`, which in Playwright means
+ * case-sensitively. Without it the name match is case-insensitive and a word
+ * bank whose sentence contains the word "check" — «Прове́рьте соотве́тствие…»
+ * is one — offers a lowercase `check` tile that resolves alongside the Check
+ * button and fails the click on a strict-mode violation. Which sentences a
+ * session draws depends on the corpus, so this broke on a translation change
+ * that touched neither the drill nor the test.
+ */
 async function solveWordbank(ex) {
   const tokens = JSON.parse(
     (await ex.locator('[data-answer-tokens]').getAttribute('data-answer-tokens')) ?? '[]',
@@ -56,7 +66,7 @@ async function solveWordbank(ex) {
     // repeated words resolve to distinct tiles).
     await clickButtonByText(ex.locator('.bank'), tok)
   }
-  await ex.getByRole('button', { name: 'Check' }).click()
+  await ex.getByRole('button', { name: 'Check', exact: true }).click()
   // Exact order grades correct outright; guard the "same words, different order"
   // self-confirm branch just in case.
   const confirm = ex.getByRole('button', { name: /Yes, it's correct/ })
@@ -129,7 +139,7 @@ async function solveInflect(ex) {
       const inp = endings.nth(i)
       await inp.fill((await inp.getAttribute('data-answer')) ?? '')
     }
-    await ex.getByRole('button', { name: 'Check' }).click()
+    await ex.getByRole('button', { name: 'Check', exact: true }).click()
   } else {
     // DragTable: each cell advertises its correct form; tap a matching bank chip
     // then the cell. A table the learner has never built cleanly is dealt one
@@ -146,7 +156,7 @@ async function solveInflect(ex) {
         await clickButtonByText(ex.locator('.bank'), want)
         await cell.click()
       }
-      await ex.getByRole('button', { name: 'Check' }).click()
+      await ex.getByRole('button', { name: 'Check', exact: true }).click()
       const nextColumn = ex.getByRole('button', { name: /Next column/ })
       if (!(await nextColumn.count())) break
       await nextColumn.click()
@@ -165,7 +175,7 @@ async function solvePhraseFix(ex) {
   const spell = ex.locator('input[data-answer]')
   await expect(spell).toBeVisible()
   await spell.fill((await spell.getAttribute('data-answer')) ?? '')
-  await ex.getByRole('button', { name: 'Check' }).click()
+  await ex.getByRole('button', { name: 'Check', exact: true }).click()
   await ex.getByRole('button', { name: /Next( sentence)?/ }).click()
 }
 

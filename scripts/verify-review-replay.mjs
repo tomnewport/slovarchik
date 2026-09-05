@@ -21,61 +21,19 @@
  * Exits non-zero if the applier fails or any file differs.
  */
 import { execFileSync } from 'child_process'
-import { mkdtempSync, readFileSync, rmSync, readdirSync, mkdirSync, cpSync, existsSync } from 'fs'
+import { mkdtempSync, readFileSync, writeFileSync, rmSync, readdirSync, mkdirSync, cpSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { tmpdir } from 'os'
 import { fileURLToPath } from 'url'
+import { load as yamlLoad } from 'js-yaml'
+import { replayBase, assertUsableBase, exportVocabAt } from './replay-base.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const repo = join(__dirname, '..')
 const args = process.argv.slice(2)
-const baseArg = args.indexOf('--base')
 
-/**
- * The commit the proposals were written against.
- *
- * Read from `review/replay-base.txt` rather than derived. It used to be
- * `git merge-base origin/main HEAD`, which is correct while the review sits on
- * a branch and wrong the moment it merges: on main the merge base is main
- * itself, so the replay re-applies every proposal to a tree that already has
- * them. The 32 `fix-russian` rows then cannot find their sentences — their
- * Russian has been rewritten — and the check fails on data that is perfectly
- * fine. Main went red on exactly that after #581 landed.
- */
-function replayBase() {
-  if (baseArg >= 0 && args[baseArg + 1]) return args[baseArg + 1]
-  const path = join(repo, 'review', 'replay-base.txt')
-  if (!existsSync(path)) {
-    console.error('review/replay-base.txt is missing — it names the commit the proposals were written against')
-    process.exit(1)
-  }
-  const sha = readFileSync(path, 'utf8')
-    .split('\n')
-    .map((l) => l.trim())
-    .find((l) => l && !l.startsWith('#'))
-  if (!sha) {
-    console.error('review/replay-base.txt names no commit')
-    process.exit(1)
-  }
-  return sha
-}
-const base = replayBase()
-
-// A base that is not behind HEAD cannot be a starting point for the replay: the
-// tree it names already contains the changes we are about to apply. Catching it
-// here says so, instead of surfacing as unmatched proposals a reader would
-// reasonably mistake for corrupt data.
-try {
-  execFileSync('git', ['merge-base', '--is-ancestor', base, 'HEAD'], { cwd: repo, stdio: 'ignore' })
-} catch {
-  console.error(`replay base ${base.slice(0, 8)} is not an ancestor of HEAD — it must name the state the review started from`)
-  process.exit(1)
-}
-if (execFileSync('git', ['rev-parse', base], { cwd: repo, encoding: 'utf8' }).trim()
-  === execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim()) {
-  console.error(`replay base ${base.slice(0, 8)} is HEAD itself — nothing would be replayed`)
-  process.exit(1)
-}
+const base = replayBase(repo, args)
+assertUsableBase(repo, base)
 
 /**
  * Every line the review is responsible for, grouped by the word that owns it.
@@ -148,9 +106,7 @@ const work = mkdtempSync(join(tmpdir(), 'review-replay-'))
 let failed = false
 try {
   // 1. vocab as of the base
-  execFileSync('git', ['archive', base, 'public/vocab'], { cwd: repo, maxBuffer: 1 << 28, stdio: ['ignore', 'pipe', 'inherit'] })
-  const tar = execFileSync('git', ['archive', base, 'public/vocab'], { cwd: repo, maxBuffer: 1 << 28 })
-  execFileSync('tar', ['-x', '-C', work], { input: tar })
+  exportVocabAt(repo, base, work)
 
   // 2. the applier needs its own tree shape: scripts + review beside the vocab
   mkdirSync(join(work, 'scripts'), { recursive: true })
@@ -201,6 +157,55 @@ try {
       .map((f) => join('review', 'copyedit', f))
     if (copyedits.length) {
       execFileSync('node', [join('scripts', 'apply-translation-review.mjs'), ...copyedits, '--apply'], {
+        cwd: work,
+        stdio: ['ignore', 'ignore', 'inherit'],
+      })
+    }
+  }
+
+  // Stage three-and-a-half: the residual sweep. The first pass read 13,125 of
+  // the corpus's phrases; packets are cut by owner word, so a word that tripped
+  // no signal was never cut at all and 3,002 phrases went unread. `audit:yield`
+  // measured the clean tier at a 5.4% substantive-edit rate — a fifth of the
+  // high tier's, and not nothing — which is what made finishing worth doing.
+  //
+  // It runs after the copyedit because it is a later pass over sentences the
+  // earlier stages never touched, so the order is a statement about when it was
+  // decided rather than a dependency.
+  //
+  // Unlike the earlier stages, this one was written against *today's* corpus,
+  // which has words the base does not — «де́скать» arrived after it. Those rows
+  // cannot be replayed onto a tree that has never heard of the word, and they
+  // are not the review failing to reproduce itself: the comparison below
+  // already ignores keys the base lacks, for exactly the same reason. So they
+  // are filtered out here and counted, rather than dropped from the record or
+  // left to fail as unmatched.
+  const residualDir = join(repo, 'review', 'residual')
+  if (existsSync(residualDir)) {
+    const baseKeys = new Set()
+    for (const f of readdirSync(join(work, 'public', 'vocab')).filter((n) => n.endsWith('.yml'))) {
+      const doc = yamlLoad(readFileSync(join(work, 'public', 'vocab', f), 'utf8'))
+      for (const key of Object.keys(doc?.words ?? {})) baseKeys.add(key)
+    }
+    mkdirSync(join(work, 'review', 'residual'), { recursive: true })
+    const residuals = []
+    let skipped = 0
+    for (const f of readdirSync(residualDir).filter((n) => n.endsWith('.jsonl')).sort()) {
+      const kept = readFileSync(join(residualDir, f), 'utf8')
+        .split('\n')
+        .filter((l) => l.trim())
+        .filter((l) => {
+          if (baseKeys.has(JSON.parse(l).key)) return true
+          skipped += 1
+          return false
+        })
+      if (!kept.length) continue
+      writeFileSync(join(work, 'review', 'residual', f), `${kept.join('\n')}\n`)
+      residuals.push(join('review', 'residual', f))
+    }
+    if (skipped) console.log(`  ${skipped} residual proposal(s) skipped: their word postdates the base`)
+    if (residuals.length) {
+      execFileSync('node', [join('scripts', 'apply-translation-review.mjs'), ...residuals, '--apply'], {
         cwd: work,
         stdio: ['ignore', 'ignore', 'inherit'],
       })

@@ -57,7 +57,7 @@ words:
       - ru: Сего́дня на не́бе безо́блачно.
         en_gb: Today the sky is cloudless.
       - ru: С утра́ бы́ло я́сно и безо́блачно.
-        en_gb: Since morning it was clear and cloudless.
+        en_gb: It had been clear and cloudless since morning.
       - ru: Над мо́рем безо́блачно и ти́хо.
         en_gb: Over the sea it is cloudless and calm.
         en_alt:
@@ -116,9 +116,9 @@ words:
       - ru: Э́та зада́ча бо́лее сло́жная.
         en_gb: This task is more difficult.
       - ru: Нам ну́жно бо́лее ти́хое ме́сто.
-        en_gb: We need a more quiet place.
+        en_gb: We need a quieter place.
       - ru: Он стал бо́лее споко́йным.
-        en_gb: He became more calm.
+        en_gb: He became calmer.
   "больно=painfully":
     cefr_level: B1
     accented: бо́льно
@@ -389,11 +389,11 @@ words:
         - always (informally, of annoying habits)
     usage:
       - ru: Ничто́ не дли́тся ве́чно.
-        en_gb: Nothing lasts eternally.
+        en_gb: Nothing lasts forever.
       - ru: Он ве́чно опа́здывает на рабо́ту.
-        en_gb: He is eternally late for work.
+        en_gb: He is always late for work.
       - ru: Я бу́ду ве́чно тебя́ по́мнить.
-        en_gb: I will remember you eternally.
+        en_gb: I will remember you forever.
   "видимо=apparently":
     cefr_level: B1
     accented: ви́димо
@@ -450,7 +450,7 @@ words:
         en_alt:
           - The food in this cafe is always delicious.
       - ru: До́ма гото́вят вкусне́е, чем в кафе́.
-        en_gb: At home they cook tastier food than in a cafe.
+        en_gb: At home they cook better than in a cafe.
         inflect: { token: 3, degree: comparative, rule: adv-comparative }
     forms:
       comparative: вкусне́е
@@ -1377,7 +1377,7 @@ words:
       - ru: Мне жа́лко э́ту ма́ленькую соба́ку.
         en_gb: I feel sorry for this little dog.
       - ru: Жа́лко тра́тить вре́мя зря.
-        en_gb: It is a pity to waste time for nothing.
+        en_gb: It is a pity to spend time for nothing.
   "жаль=a pity":
     cefr_level: A2
     accented: жаль
@@ -1644,7 +1644,7 @@ words:
         en_alt:
           - You are worrying for nothing.
       - ru: Мы зря потра́тили вре́мя.
-        en_gb: We wasted our time for nothing.
+        en_gb: We spent our time for nothing.
       - ru: Я зря туда́ ходи́л.
         en_gb: I went there in vain.
   "изредка=occasionally":
@@ -1793,7 +1793,7 @@ words:
       - ru: Она́ испу́ганно вскри́кнула.
         en_gb: She cried out fearfully.
       - ru: Пти́ца испу́ганно взлете́ла.
-        en_gb: The bird flew up fearfully.
+        en_gb: The bird flew up in fright.
   "когда-нибудь=someday":
     cefr_level: A2
     accented: когда́-нибудь
@@ -3250,8 +3250,6 @@ words:
           - He is in no hurry.
       - ru: Ле́том мы никуда́ не е́здили.
         en_gb: In summer we did not go anywhere.
-        en_alt:
-          - In the summer we did not go anywhere.
   "нормально=normally":
     cefr_level: A2
     accented: норма́льно
@@ -4460,7 +4458,7 @@ words:
       - ru: Сейча́с ро́вно во́семь часо́в.
         en_gb: It is now exactly eight o'clock.
       - ru: Проведи́ ли́нию ро́вно.
-        en_gb: Draw the line evenly.
+        en_gb: Draw the line straight.
       - ru: Он пришёл ро́вно в по́лдень.
         en_gb: He came exactly at noon.
         en_alt:
@@ -5219,7 +5217,7 @@ words:
       standard: standing (while in an upright position)
     usage:
       - ru: Зри́тели аплоди́ровали сто́я.
-        en_gb: The audience applauded standing.
+        en_gb: The audience gave a standing ovation.
       - ru: Он за́втракал сто́я у окна́.
         en_gb: He had breakfast standing by the window.
   "странно=strangely":

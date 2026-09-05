@@ -45,6 +45,91 @@ words. What is left over on each side is the signal.
 | **Length ratio** — English words ÷ Russian words | padding, explanatory translation |
 | **Aspect collision** — an aspect pair whose two members read the same in English | a contrast-drill question with two right answers |
 
+## The alternates
+
+`en_alt` was invisible to the first sweep. `--shard` serialised only `ru` and
+the primary `en`, so 16k sentences were reviewed without one accepted answer
+being read (#599) — and a reviewer proposing an `add-alt` could not see that
+the rendering was already there. Packets carry `en_alt` now, and
+`npm run audit:alternates` triages what the corpus already accepts.
+
+**What can go wrong in an alternate is narrower than what can go wrong in a
+primary.** An alternate is never *shown*: no drill prompts from one, the
+aspect-contrast drill included, which draws its cue from `en` alone. So it
+cannot mislead a reader or make a question unanswerable. The only harm it does
+is grading looseness — accepting, as correct, something that is not a
+translation of this sentence. That was largely inert while the word bank built
+its tiles from the primary alone; once the bank was widened, every alternate
+became an offered, accepted answer.
+
+| Signal | Found | Left | What it catches |
+| --- | --- | --- | --- |
+| `foreign-partner` | 1 | 0 | verbatim the **aspect partner's** own sentence |
+| `contradicted` | 1 | 0 | re-accepts the exact English a proposal replaced as not-English |
+| `duplicate` | 104 | 0 | accepts nothing the primary or an earlier alternate already did |
+| `orphan-block` | 5 | 5 | a block of renderings left behind from a replaced Russian |
+| `foreign` | 14 | 13 | verbatim some other sentence's primary |
+| `block` | 37 | 35 | the cohesion half of `orphan-block`, alone |
+
+The first pass over this removed **104** alternates and left the rest: the
+`orphan-block` five are genuine paraphrases the conjunction happened to catch
+("Simmer the soup over a low heat" for "Cook the soup on a low flame"), and
+`foreign` and `block` are the two signals reported rather than judged.
+
+Two of those are worth explaining, because they are the ones that changed the
+design.
+
+**Overlap with the primary is not a signal on its own.** The obvious test —
+an alternate that shares few content words with its primary is not a rendering
+of the same sentence — flags 254 rows, and reading them shows they are simply
+good English paraphrases: "I have a headache" / "My head hurts", "There was a
+ring at the door" / "The doorbell rang". Low overlap is *what a good paraphrase
+looks like*. #599 reported the same result from its own scan, and this
+rediscovered it. What discriminates is overlap **plus** cohesion — the
+alternates resembling each other more than the primary — which is the actual
+«утро» signature, and fires on all three of that block's rows and five others
+corpus-wide.
+
+**A removal has to land in the stage that owns the list.** `alt-removals.jsonl`
+runs fourth of the replay's stages, and `apply-prompt-fixes.mjs` runs last and
+*replaces* an `en_alt` list wholesale. So removing «Она́ благодари́ла учи́теля»'s
+"She thanked the teacher" through alt-removals silently did nothing: the prompt
+pass put it straight back. That fix belongs in the prompt-fix record itself,
+and the replay is what catches the mistake — the corpus and the record simply
+stop agreeing.
+
+**`foreign-partner` is #576 arriving through a door #576 does not cover.**
+«Она́ благодари́ла учи́теля» — "She was thanking the teacher" — accepts "She
+thanked the teacher", word for word the perfective partner's own sentence. The
+contrast drill is unaffected, since it shows `en`; but a learner who answers the
+imperfective sentence with the perfective reading is marked correct, and the
+aspect goes untaught. This is grading, not prompting, which is why the existing
+collision check could never see it.
+
+**`duplicate` is judged by the drill's grader, not by this module.** The two
+normalise differently and both differences matter. The audit expands
+contractions so «не» can align with "doesn't"; the drills strip apostrophes
+instead, so "She's taking a hot bath" and "She is taking a hot bath" are
+genuinely different answers and both earn their place. The drills fold
+articles; the audit does not, so "Milk will soon run out" beside "The milk will
+soon run out" accepts nothing new. Asking `phraseCorrect` — the same function
+every drill grades with — is the only definition that tracks what a learner can
+actually get credit for.
+
+An alternate that fails that test is not merely inert, either. `bankTokens`
+takes the maximum count of each word across the primary and its alternates, so
+an article-only alternate contributes one extra tile to the word bank, and that
+tile comes out of the phrase's decoy budget. It makes the drill marginally
+harder while accepting nothing.
+
+### Which alternates were never read
+
+`--unread` narrows the worklist to alternates no committed proposal wrote.
+That is the gap #599 names, and it is much smaller than the issue assumed:
+**140** of the corpus's 3,350 alternates predate the review. The other ~3,200
+were authored *by* it, each with a reviewer's note attached — never re-read as
+a set, which is a real but lighter risk, and what the signals above are for.
+
 Two refinements matter more than they look, because without them the report is
 swamped by predictable Russian↔English mismatches rather than real defects:
 
@@ -200,6 +285,10 @@ two of which are tens of thousands of lines — parallel writers would conflict
 constantly and the result would be unreviewable as a diff. One writer means one
 deterministic pass, a minimal diff, and a re-runnable merge.
 
+`review/residual/` is the residual sweep's own record, replayed as its own
+stage; `review/copyedit/` is the English-only stage-three pass. Both sit
+alongside `review/proposals/` and all three are replayed by `verify:review`.
+
 ```
 scripts/audit-translations.mjs --shard   →  review/packets/packet-NNN.json
                                                      ↓
@@ -304,9 +393,15 @@ its `inflect.person` in step.
 ```bash
 npm run audit:translations                                   # tier counts + signal breakdown
 node scripts/audit-translations.mjs --sample 20 --tier high  # eyeball the worst
+npm run audit:alternates                                     # triage the accepted en_alt
+node scripts/audit-translations.mjs --alternates --unread     # …only the ones never read
 node scripts/audit-translations.mjs --collisions             # aspect pairs that read alike
 node scripts/audit-translations.mjs --collisions --all       # …incl. verb-frame-only matches
 node scripts/audit-translations.mjs --shard                  # cut work packets
+npm run audit:yield                                          # what each tier returned, and coverage
+node scripts/audit-translations.mjs --residual                # phrases no packet covered
+node scripts/audit-translations.mjs --residual --list         # …read them
+node scripts/audit-translations.mjs --residual --ids 27,28    # …resolve marked positions
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl          # dry run
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl --apply  # write
 ```
@@ -314,6 +409,45 @@ node scripts/apply-translation-review.mjs review/proposals/*.jsonl --apply  # wr
 `review/packets/` is generated and gitignored. `review/proposals/` **is**
 committed: it is the record of what was changed and why, and it is what makes a
 sweep of this size reviewable after the fact.
+
+## The copyedit stage
+
+The first pass judged **fidelity** — does the English say what the Russian
+says? That is the wrong question for asking whether the English is *English*,
+and asking both at once is what produced the residual calques. A reviewer
+comparing two texts is rewarded for tracking the source, and so is the metric:
+every calque #581 fixed scores *higher* on word alignment than the natural
+English that replaced it.
+
+| | |
+| --- | --- |
+| "A question arises for me" | ← aligns better |
+| "I have a question" | ← is English |
+
+So the copyedit reads the English with the Russian **hidden**, and the hiding
+is mechanical rather than a resolution to look away:
+
+```bash
+node scripts/copyedit-worklist.mjs --english          # stage A: English only
+node scripts/copyedit-worklist.mjs --resolve --ids …  # stage B: against the Russian
+```
+
+Stage A marks what is not natural English. Stage B resolves each mark against
+the Russian and confirms the rewrite does not reintroduce the over-translation
+the first pass removed. Only stage B may look at both.
+
+Over the 267-row `unnatural-english` tail (#598), stage A marked 62 and stage B
+confirmed 24. The 38 it dropped are the point of the second stage: read alone,
+"The police carried out the arrest of the suspect" and "The battalion went on
+the attack" look like officialese, and beside «Поли́ция произвела́ аре́ст» and
+«Батальо́н пошёл в ата́ку» they are the same register the Russian is in.
+
+**Stage B can also reject its own fix.** "I will come to because of the noise"
+is not English, and "The noise will bring me round" is — but «Я очну́сь от
+шу́ма» has a first-person subject, and making the noise the agent buys fluency
+with the person-shift this whole review exists to catch. "I will come round at
+the noise" is the rendering that owes nothing to either. A fluency fix that
+introduces a fidelity defect is not a fix.
 
 ## Verifying a sweep
 
@@ -325,8 +459,84 @@ A pass that "improves" 3,000 sentences is only trustworthy if it can be checked:
    matters more than any quality metric.
 3. Spot-read the diff. It is minimal by construction, so this is feasible, and
    it is the only check that actually reads the new English.
-4. The `keep` rate on the sampled `clean` phrases estimates the heuristics'
+4. The `keep` rate on the `clean` phrases estimates the heuristics'
    false-negative rate, and says whether a full sweep is worth running.
+   `npm run audit:yield` computes it.
+
+## What the ranking returned
+
+`npm run audit:yield` joins every committed proposal back onto the tier its
+phrase was in *when the reviewer saw it* — re-derived from the corpus at the
+replay base, since scoring today's corpus would ask what tier a sentence falls
+in after being fixed. The first sweep:
+
+| tier | reviewed | `keep` | `add-alt` | substantive edit |
+| --- | --- | --- | --- | --- |
+| `high` | 1,344 | 51.8% | 34.1% | **14.1%** |
+| `medium` | 4,744 | 67.2% | 24.6% | **8.1%** |
+| `clean` | 7,037 | 78.9% | 15.8% | **5.4%** |
+
+"substantive edit" is `retranslate`, `fix-russian` or `flag` — a change to what
+the learner reads, as against `add-alt`, which only widens what is accepted.
+
+Two things follow, and they pull in opposite directions.
+
+**The ranking works.** `high` holds 2.6× the defect density of `clean`, and
+reading in tier order found the concentrated defects first. That is what the
+heuristics were built for and it is worth keeping.
+
+**The `clean` tier is not clean.** It returned 278 retranslations, 14 Russian
+rewrites and 81 flags. Its 5.4% is a fifth of `high`'s rate but it is not
+noise, and the tier's name has always overclaimed: it means *trips no signal*,
+not *is correct*. Any future pass should read it rather than sample it.
+
+The 7,037 `clean` phrases read is itself an accident worth recording. The
+design sampled 200 of them deliberately; the rest arrived because packets are
+cut by **owner word**, so a flagged phrase drags its word's clean siblings into
+the packet with it. Cutting by word for the sake of judgement — a gloss needs
+its siblings to be judged against — bought most of a clean sweep for free.
+
+Coverage after the first sweep was **13,125 of 16,086 phrases (81.6%)**. The
+remainder were all `clean`-tier phrases belonging to words no packet covered —
+read since, by the residual sweep below.
+
+## The residual sweep
+
+The 3,002 phrases the ranking never reached were not a decision. Packets are cut
+by **owner word**, so a word with one flagged phrase brought its clean siblings
+in and a word with none was never cut at all. `npm run audit:translations
+--residual` lists what that left; `--list` reads it, `--ids` resolves the
+positions a reading pass marked back into proposals.
+
+The yield table above is what made finishing worth doing: 5.4% is a fifth of
+the `high` tier's rate and still not noise. Reading all 3,002 returned **72
+retranslations and 9 flags** — 2.7%, close enough to the measured clean rate to
+say the estimate held.
+
+The 9 flags are mostly the *Russian* being the weaker half, which is what a
+sweep by owner word is good at surfacing: «Поверни́ на пра́вой стороне́» for
+«поверни́ напра́во», «за́ла» for «зал», «забавля́л себя́» for «забавля́лся»,
+and слыха́ть conjugated in a present and a future the verb does not have. None
+of those can be fixed by translating them better.
+
+Two rules the sweep is worth recording for:
+
+**A `keep` is a row, not a silence.** All 2,921 unflagged phrases carry one.
+Coverage is counted from rows, so a phrase without one is a phrase nobody
+looked at, and omitting the keeps would have made the sweep unprovable.
+
+**Coverage counts distinct phrases, not proposal rows.** Summing rows overstates
+it — a sentence whose Russian a `fix-russian` rewrote holds a row under a
+wording the corpus no longer has, and the copyedit gave some sentences a second
+row. That gap is also how the last 38 phrases were found: read, but only under
+Russian they no longer carry.
+
+Coverage now stands at **16,103 of 16,103 (100%)**.
+
+Words added *after* the replay base cannot be replayed onto it, so
+`verify-review-replay.mjs` filters those residual rows out and says how many.
+That is the same rule the comparison already applies to keys the base lacks —
+a word the review never saw is not the review's to reproduce.
 
 **Do not use mean literalness as a success metric.** It was the obvious choice
 and the pilot showed it is wrong, in two independent ways:
