@@ -492,6 +492,10 @@ words:
       - colours and textures
     en_gb:
       standard: white (the colour of snow)
+    facts:
+      - kind: root
+        text: "Бел- names whiteness itself, and the things named from it are white ones: бельё is the linen, the white wash, and бело́к is the white of an egg — and then the protein science found in it."
+        see: ["бельё=underwear", "белок=protein"]
     usage:
       - ru: На столе́ лежи́т бе́лый лист бума́ги.
         en_gb: A white sheet of paper lies on the table.
@@ -5200,6 +5204,10 @@ words:
       f: добра́
       n: добро́
       pl: добры́
+    facts:
+      - kind: root
+        text: "The older sense of добр- is fitting, suited — which is why удо́бный (comfortable, well-suited) is the same root, and why добро́ means both goodness and goods. The three day-part greetings are this same word again."
+        see: ["добро=goodness", "удобный=comfortable", "добрый день=good afternoon"]
     usage:
       - ru: Она́ о́чень до́брая же́нщина.
         en_gb: She is a very kind woman.
@@ -5387,6 +5395,12 @@ words:
       f: должна́
       n: должно́
       pl: должны́
+    facts:
+      - kind: origin
+        text: "From долг, a debt: to have to do something is to owe it. До́лжный (proper, due) is the ordinary adjective on the same root."
+        see: ["долг=debt", "должный=proper"]
+      - kind: note
+        text: "Short form only — there is no до́лженный. It agrees like any short adjective: он до́лжен, она́ должна́, они́ должны́."
     usage:
       - ru: Я до́лжен идти́ домо́й.
         en_gb: I must go home.
@@ -6460,6 +6474,10 @@ words:
       - colours and textures
     en_gb:
       standard: yellow (the colour of the sun)
+    facts:
+      - kind: origin
+        text: "One ancient root named the whole yellow-green-gold band before those were separate colours; Russian kept three words out of it — жёлтый, зелёный and зо́лото."
+        see: ["зелёный=green", "золото=gold"]
     usage:
       - ru: О́сенью ли́стья стано́вятся жёлтыми.
         en_gb: In autumn the leaves turn yellow.
@@ -7473,6 +7491,10 @@ words:
       - in the garden
     en_gb:
       standard: green (the colour of grass)
+    facts:
+      - kind: origin
+        text: "The same ancient root as жёлтый and зо́лото, which named yellow, green and gold together. The colours split later; the root did not."
+        see: ["жёлтый=yellow", "золото=gold"]
     usage:
       - ru: Ле́том трава́ зелёная.
         en_gb: In summer the grass is green.
@@ -7629,6 +7651,10 @@ words:
       standard: angry (feeling or showing anger)
       alt:
         - evil
+    facts:
+      - kind: root
+        text: "Straight from зло, evil — which is why the word covers more ground than angry does: зла́я соба́ка on a gate warns that it bites, and a злой челове́к may be wicked rather than merely cross."
+        see: ["зло=evil"]
     usage:
       - ru: Не будь таки́м злым.
         en_gb: Don't be so angry.
@@ -9225,6 +9251,10 @@ words:
       - colours and textures
     en_gb:
       standard: red (the colour of blood)
+    facts:
+      - kind: origin
+        text: "It meant beautiful first — the same root as краси́вый and красота́ — and only later settled on the colour. Кра́сная пло́щадь was named the beautiful square, centuries before it was a red one."
+        see: ["красивый=beautiful", "красота=beauty"]
     usage:
       - ru: У неё кра́сная маши́на.
         en_gb: She has a red car.
@@ -13346,6 +13376,10 @@ words:
       standard: low (not high)
       alt:
         - short
+    facts:
+      - kind: root
+        text: "Built on низ, the bottom of something — the same низ- that gives внизу́ (downstairs, below) and сни́зу (from below)."
+        see: ["низ=bottom"]
     usage:
       - ru: Стол сли́шком ни́зкий.
         en_gb: The table is too low.
@@ -18021,6 +18055,12 @@ words:
       f: ра́да
       n: ра́до
       pl: ра́ды
+    facts:
+      - kind: note
+        text: "Short form only — there is no ра́дый, and no place for рад in front of a noun. It agrees as a predicate: я рад, она́ ра́да, мы ра́ды вас ви́деть."
+      - kind: root
+        text: "The same root as ра́дость (joy) and ра́доваться (to be glad about something): рад is the state, ра́доваться is doing it."
+        see: ["радость=joy", "радоваться=to be glad"]
     usage:
       - ru: Я о́чень рад тебя́ ви́деть.
         en_gb: I am very glad to see you.
@@ -19073,6 +19113,10 @@ words:
       pl_acc: са́мые
       pl_ins: са́мыми
       pl_pre: са́мых
+    facts:
+      - kind: root
+        text: "The pronoun сам (oneself, the very one) turned into a superlative marker: са́мый большо́й is the very biggest. It agrees with its adjective rather than replacing it — both words decline."
+        see: ["сам=oneself"]
     usage:
       - ru: Э́то са́мый высо́кий дом.
         en_gb: This is the tallest house.
@@ -19788,6 +19832,10 @@ words:
       - nature
     en_gb:
       standard: blue (dark or deep blue)
+    facts:
+      - kind: note
+        text: "Russian has no single word for blue. Си́ний is the dark end and голубо́й the light end, and they count as two basic colours the way red and pink do in English — not as shades of one."
+        see: ["голубой=light blue"]
     usage:
       - ru: Над на́ми си́нее не́бо.
         en_gb: Above us is the blue sky.
@@ -21817,6 +21865,10 @@ words:
     collections:
       - time
       - people
+    facts:
+      - kind: root
+        text: "The root behind стари́к (an old man), ста́рость (old age) and ста́рший — literally the older one, and so the senior or elder of any pair."
+        see: ["старик=old man", "старость=old age", "старший=senior"]
     usage:
       - ru: Я хорошо́ зна́ю ста́рого учи́теля.
         en_gb: I know the old teacher well.
@@ -25543,6 +25595,9 @@ words:
       - colours and textures
     en_gb:
       standard: black (the colour of night)
+    facts:
+      - kind: origin
+        text: "An inherited word, not borrowed from anywhere: the same ancient root surfaces in Sanskrit as kṛṣṇa, black — the name Krishna, the dark one."
     usage:
       - ru: У меня́ чёрный кот.
         en_gb: I have a black cat.

@@ -6150,6 +6150,10 @@ words:
       standard: to stroll (to walk for pleasure)
       alt:
         - to walk
+    facts:
+      - kind: root
+        text: "The root behind прогу́лка, a walk taken for its own sake — which is what гуля́ть means. You ходи́ть to work and гуля́ть in the park: the verb is about being out, not about getting anywhere."
+        see: ["прогулка=walk", "ходить=to walk"]
     usage:
       - ru: Гуля́й в па́рке ка́ждый день.
         en_gb: Walk in the park every day.
@@ -25522,6 +25526,14 @@ words:
       past_f: познако́милась
       past_n: познако́милось
       past_pl: познако́мились
+    facts:
+      - kind: build
+        text: "По- on знако́мый (familiar), itself from знать — and -ся makes it mutual: the two of you come to know each other. Познако́мить without -ся is to introduce two other people."
+        parts:
+          - { ru: "по-", en: "makes it a completed act" }
+          - { ru: "знако́м", en: "familiar (from знать, to know)" }
+          - { ru: "-иться", en: "verb ending, reflexive" }
+        see: ["знать=to know", "знакомый=familiar", "знакомство=acquaintance"]
     usage:
       - ru: Познако́мьтесь, э́то мой друг.
         en_gb: Let me introduce you — this is my friend.
@@ -28981,6 +28993,10 @@ words:
       standard: to celebrate (to do something special for a happy occasion)
     collections:
       - holiday
+    facts:
+      - kind: origin
+        text: "From пра́здник, and behind it an old word meaning empty or idle: a holiday is a day with the work taken out of it."
+        see: ["праздник=holiday"]
     usage:
       - ru: Как вы пра́зднуете Но́вый год?
         en_gb: How do you celebrate New Year?
@@ -33282,6 +33298,10 @@ words:
       - daily life
     en_gb:
       standard: to work (to do a job)
+    facts:
+      - kind: origin
+        text: "Рабо́та is built on раб, a bound labourer — work named after the people made to do it. The same Slavic root reached English through Czech robota, forced labour, as robot."
+        see: ["работа=work", "робот=robot"]
     usage:
       - ru: Кем вы рабо́таете?
         en_gb: What do you do for work?
@@ -38822,6 +38842,10 @@ words:
       - sickness and health
     en_gb:
       standard: to sleep (to rest with eyes closed)
+    facts:
+      - kind: root
+        text: "Сон (sleep, and a dream) is the same ancient root with the vowel worn away, and so are спа́льня (a bedroom) and засыпа́ть (to drop off)."
+        see: ["сон=dream", "спальня=bedroom", "засыпать=to fall asleep"]
     usage:
       - ru: Спи, уже́ по́здно.
         en_gb: Go to sleep, it's already late.
@@ -40376,6 +40400,10 @@ words:
       - romance and dating
     en_gb:
       standard: to dance (to move in time to music)
+    facts:
+      - kind: origin
+        text: "German Tanz, borrowed through Polish as та́нец. The -евать ending is the standard way Russian turns a borrowed noun into a verb."
+        see: ["танец=dance"]
     usage:
       - ru: Они́ танцу́ют на сва́дьбе.
         en_gb: They are dancing at the wedding.
