@@ -22,6 +22,8 @@ describe('spellingRuleMiss', () => {
     ['кни́гы', 'кни́ги', 'spelling-i-not-y'],
     ['ру́чкы', 'ру́чки', 'spelling-i-not-y'],
     ['ножы́', 'ножи́', 'spelling-i-not-y'],
+    ['столи́', 'столы́', 'spelling-i-not-y'],
+    ['ма́ми', 'ма́мы', 'spelling-i-not-y'],
     ['пишю́', 'пишу́', 'spelling-a-u-not-ya-yu'],
     ['слы́шят', 'слы́шат', 'spelling-a-u-not-ya-yu'],
     ['му́жом', 'му́жем', 'spelling-o-e-after-sibilant'],
@@ -36,6 +38,35 @@ describe('spellingRuleMiss', () => {
     // The ы/и choice is decided by the к, not by the case being asked for.
     const miss = spellingRuleMiss('ру́чкы', 'ру́чки')
     expect(miss).toMatchObject({ kind: 'spelling', got: 'ы', want: 'и', variant: 'i' })
+  })
+
+  it('names the seven-letter rule when it was stretched past the seven letters', () => {
+    // The contrapositive: и where ы was the spelling all along. "и, never ы"
+    // heard as "never ы" is the same rule misjudged, so it is the thing to say.
+    const miss = spellingRuleMiss('столи́', 'столы́')
+    expect(miss).toMatchObject({ ruleId: 'spelling-i-not-y', got: 'и', want: 'ы', variant: 'y' })
+    expect(miss.detail).toContain('ы')
+  })
+
+  it('reads the contrapositive only where ы could have stood', () => {
+    // ы never follows one of the seven, a vowel, й or ь, so an и there is not
+    // the rule over-applied — «Кызылорда́» is a foreign name keeping its own
+    // spelling, and no reminder would have helped.
+    expect(spellingRuleMiss('Кизылорда́', 'Кызылорда́')).toBeNull()
+    expect(spellingRuleMiss('чайи', 'чайы')).toBeNull()
+  })
+
+  it('leaves и/ы after ц to the rule that is actually about ц', () => {
+    // ц is the letter the seven-letter rule leaves out, so the ending/root
+    // question there is its own rule and not this one over-applied.
+    expect(spellingRuleMiss('отци́', 'отцы́')?.ruleId).toBe('spelling-y-not-i-after-ts')
+  })
+
+  it('does not read the eight-letter rule backwards', () => {
+    // а where я belonged says nothing about the hushers — it is the ordinary
+    // hard/soft stem, which is the lesson rather than a reminder.
+    expect(spellingRuleMiss('мо́ра', 'мо́ря')).toBeNull()
+    expect(spellingRuleMiss('говору́', 'говорю́')).toBeNull()
   })
 
   it('stays silent when the word is simply the wrong form', () => {
@@ -287,6 +318,7 @@ describe('ruleReminder', () => {
     // preposition on screen, never the form being asked for.
     for (const [typed, want] of [
       ['кни́гы', 'кни́ги'],
+      ['столи́', 'столы́'],
       ['пишю́', 'пишу́'],
       ['му́жом', 'му́жем'],
       ['отци́', 'отцы́'],
