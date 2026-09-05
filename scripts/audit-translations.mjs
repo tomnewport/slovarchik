@@ -157,6 +157,83 @@ function rejectedEnglish() {
 }
 
 /**
+ * The phrases no packet ever covered.
+ *
+ * The first sweep read 13,125 of the corpus's 16,086 phrases. That was not a
+ * design decision so much as a side effect of a good one: packets are cut by
+ * **owner word**, so a word with even one flagged phrase brought its clean
+ * siblings along, and a word with none was never cut at all. The remainder is
+ * therefore whole words rather than scattered sentences — every phrase of a
+ * word that tripped nothing.
+ *
+ * `npm run audit:yield` measured what reading the clean tier returned (a 5.4%
+ * substantive-edit rate, a fifth of `high`'s but not noise), which is what
+ * makes finishing worth the reading.
+ *
+ * "Never covered" is defined by the committed proposals rather than by
+ * re-running the in-scope selection. The selection is deterministic, but the
+ * corpus has grown since — a word added after the sweep is genuinely unread
+ * even if today's heuristics would have picked it up.
+ *
+ * Usage:
+ *   node scripts/audit-translations.mjs --residual                # count
+ *   node scripts/audit-translations.mjs --residual --list [--from N --count N]
+ *   node scripts/audit-translations.mjs --residual --shard-out <dir>
+ */
+function residual() {
+  const read = new Set()
+  // Both passes count: the ranked sweep and the residual one that finished it.
+  for (const name of ['proposals', 'residual']) {
+    const dir = join(__dirname, '..', 'review', name)
+    if (!existsSync(dir)) continue
+    for (const f of readdirSync(dir).filter((n) => n.endsWith('.jsonl')).sort()) {
+      for (const line of readFileSync(join(dir, f), 'utf8').split('\n')) {
+        if (line.trim()) read.add(JSON.parse(line).key)
+      }
+    }
+  }
+  // Whole words, not stray sentences: a word is unread only if no phrase of it
+  // was ever proposed on, and then every phrase it owns needs reading — the
+  // siblings are the baseline any one of them is judged against.
+  const groups = new Map()
+  for (const r of rows) {
+    if (read.has(r.source)) continue
+    if (!groups.has(r.source)) groups.set(r.source, [])
+    groups.get(r.source).push(r)
+  }
+  const ordered = [...groups.keys()].sort((a, b) => {
+    const fa = byKey.get(a) ?? ''
+    const fb = byKey.get(b) ?? ''
+    return fa.localeCompare(fb) || a.localeCompare(b, 'ru')
+  })
+  const total = ordered.reduce((n, k) => n + groups.get(k).length, 0)
+
+  const flat = ordered.flatMap((k) => groups.get(k).map((r) => ({ key: k, ...r })))
+  if (flag('ids')) {
+    // Resolve the positions a reading pass marked, back to what a proposal needs.
+    for (const n of String(opt('ids', '')).split(',').map((x) => Number(x.trim()))) {
+      const r = flat[n]
+      if (r) console.log(JSON.stringify({ id: n, key: r.key, ru: r.ru, en: r.en }))
+    }
+    return
+  }
+  if (flag('list')) {
+    const from = Number(opt('from', 0)) || 0
+    const count = Number(opt('count', flat.length)) || flat.length
+    flat.slice(from, from + count).forEach((r, i) => {
+      console.log(`${String(from + i).padStart(4)}  ${r.ru}`)
+      console.log(`      ${r.en}`)
+    })
+    return
+  }
+  console.log(`\n${total} phrase(s) across ${ordered.length} word(s) that no packet covered`)
+  const byFile = {}
+  for (const k of ordered) byFile[byKey.get(k) ?? '?'] = (byFile[byKey.get(k) ?? '?'] ?? 0) + groups.get(k).length
+  console.log(' ', JSON.stringify(byFile))
+  console.log()
+}
+
+/**
  * The accepted alternate renderings, worst first.
  *
  * `--unread` narrows it to alternates no committed proposal wrote — the ones
@@ -226,6 +303,7 @@ function duplicates() {
   }
 }
 if (flag('shard')) shard()
+if (flag('residual')) residual()
 
 /**
  * Aspect/motion pairs whose two members are rendered by the same English. The

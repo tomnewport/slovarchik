@@ -2931,13 +2931,13 @@ words:
       - work
     usage:
       - ru: Я восстановлю́ паро́ль за́втра.
-        en_gb: I'll restore the password tomorrow.
+        en_gb: I'll recover the password tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
       - ru: Ма́стер восстанови́л ста́рую карти́ну.
         en_gb: The craftsman restored the old painting.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Ты восстано́вишь паро́ль за́втра?
-        en_gb: Will you restore the password tomorrow?
+        en_gb: Will you recover the password tomorrow?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     conjugation:
       future:
@@ -7884,7 +7884,7 @@ words:
         en_gb: They reached the island by boat.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Без э́тих поме́х кома́нда дости́гла бы це́ли быстре́е.
-        en_gb: Without these obstacles, the team would reach the goal faster.
+        en_gb: Without these obstacles the team would have reached the goal sooner.
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
       - ru: Мы дости́гнем берега́ ско́ро.
         en_gb: We'll reach the shore soon.
@@ -10153,7 +10153,7 @@ words:
         en_gb: The museum will close in an hour.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Окно́ закры́лось от ветра́.
-        en_gb: The window shut from the wind.
+        en_gb: The window blew shut in the wind.
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
     conjugation:
       future:
@@ -11028,7 +11028,7 @@ words:
         en_gb: Memorise my address.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
       - ru: Де́ти запо́мнили бы пра́вило по́сле уро́ка.
-        en_gb: The children would remember the rule after the lesson.
+        en_gb: The children would have remembered the rule after the lesson.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-conditional }
       - ru: Ско́ро де́ти запо́мнят но́вые слова́.
         en_gb: Soon the children will memorise the new words.
@@ -12112,10 +12112,10 @@ words:
         en_gb: Their voices sound joyful.
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
       - ru: Пе́сня звуча́ла весь ве́чер.
-        en_gb: The song sounded all evening.
+        en_gb: The song played all evening.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-past }
       - ru: Му́зыка бу́дет звуча́ть весь ве́чер.
-        en_gb: The music will be sounding all evening.
+        en_gb: The music will play all evening.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
       - ru: Э́то звуча́ло бы стра́нно.
         en_gb: That would sound strange.
@@ -15228,7 +15228,7 @@ words:
         en_gb: The times were changing quickly.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
       - ru: Со вре́менем всё бу́дет меня́ться.
-        en_gb: Over time everything will be changing.
+        en_gb: Over time everything will change.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
       - ru: Без причи́ны лю́ди не меня́лись бы.
         en_gb: Without reason people would not change.
@@ -17974,7 +17974,7 @@ words:
         en_gb: The seller deceived the buyer.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Они́ обма́нут на́ши ожида́ния.
-        en_gb: They will deceive our expectations.
+        en_gb: They will not live up to our expectations.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Я никогда́ тебя́ не обману́ла бы.
         en_gb: I would never deceive you.
@@ -22190,7 +22190,7 @@ words:
         en_gb: You will definitely interrupt me.
         inflect: { token: 3, tense: future, person: 2sg, rule: verb-future }
       - ru: Он переби́л меня́ на полусло́ве.
-        en_gb: He interrupted me mid-word.
+        en_gb: He interrupted me mid-sentence.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
       - ru: Я не перебью́ тебя́.
         en_gb: I will not interrupt you.
@@ -24679,7 +24679,7 @@ words:
         en_gb: We suspect a mistake in the calculations.
         inflect: { token: 2, tense: present, person: 1pl, rule: verb-present }
       - ru: За́втра сле́дователь бу́дет подозрева́ть сосе́да.
-        en_gb: Tomorrow the investigator will be suspecting the neighbour.
+        en_gb: Tomorrow the investigator will suspect the neighbour.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
       - ru: Без ули́к я бы никого́ не подозрева́ла.
         en_gb: Without evidence I would not suspect anyone.
@@ -43821,7 +43821,7 @@ words:
         en_gb: Store the milk in the fridge.
         inflect: { token: 1, tense: present, person: 2pl, rule: verb-present }
       - ru: Мы бу́дем храни́ть э́ти пи́сьма всегда́.
-        en_gb: We will keep these letters always.
+        en_gb: We will always keep these letters.
         inflect: { token: 2, tense: future, person: 1pl, rule: verb-future }
       - ru: Я храни́ла бы де́ньги в ба́нке.
         en_gb: I would keep the money in a bank.

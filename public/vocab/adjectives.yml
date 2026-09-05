@@ -968,7 +968,7 @@ words:
         en_gb: He is a very rich man.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ живу́т в бога́том до́ме.
-        en_gb: They live in a rich house.
+        en_gb: They live in a grand house.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
       - ru: У страны́ бога́тая исто́рия.
         en_gb: The country has a rich history.
@@ -1138,10 +1138,10 @@ words:
         en_gb: The child is ill today.
         inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
       - ru: Больна́я де́вочка лежа́ла в посте́ли.
-        en_gb: The ill girl was lying in bed.
+        en_gb: The sick girl was lying in bed.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Врач осмотре́л больны́х дете́й.
-        en_gb: The doctor examined the ill children.
+        en_gb: The doctor examined the sick children.
         inflect: { token: 3, case: acc, number: pl, gender: pl, animate: true, rule: adj-acc-animate }
     forms:
       m: больно́й
@@ -1957,13 +1957,13 @@ words:
       pl_pre: взро́слых
     usage:
       - ru: Он уже́ взро́слый челове́к.
-        en_gb: He is already an adult person.
+        en_gb: He is already an adult.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Э́то фильм для взро́слых зри́телей.
         en_gb: This is a film for adult viewers.
         inflect: { token: 4, case: gen, number: pl, gender: pl, rule: adj-agreement }
       - ru: Взро́слая дочь живёт отде́льно.
-        en_gb: The adult daughter lives separately.
+        en_gb: The adult daughter lives on her own.
         inflect: { token: 1, case: nom, number: sg, gender: f, rule: adj-agreement }
   "видимый=visible":
     cefr_level: B2
@@ -2010,7 +2010,7 @@ words:
         en_gb: There are no visible stars in the sky.
         inflect: { token: 4, case: gen, number: pl, gender: pl, rule: adj-agreement }
       - ru: Э́то была́ ви́димая оши́бка.
-        en_gb: It was a visible mistake.
+        en_gb: It was an evident mistake.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он рабо́тал без ви́димого уси́лия.
         en_gb: He worked without visible effort.
@@ -4714,7 +4714,7 @@ words:
       pl_pre: да́нных
     usage:
       - ru: В да́нный моме́нт я за́нят.
-        en_gb: At the given moment I am busy.
+        en_gb: At the present moment I am busy.
         inflect: { token: 2, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: Реши́те да́нную зада́чу.
         en_gb: Solve the given problem.
@@ -5958,7 +5958,7 @@ words:
         en_gb: We had a heartfelt conversation.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Я чу́вствую душе́вное споко́йствие.
-        en_gb: I feel a heartfelt calm.
+        en_gb: I feel peace of mind.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
   "еврейский=Jewish":
     cefr_level: B1
@@ -7326,7 +7326,7 @@ words:
         en_gb: She is a very busy woman.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У меня́ ру́ки за́няты.
-        en_gb: My hands are busy.
+        en_gb: My hands are full.
         inflect: { token: 4, degree: short, gender: pl, rule: adj-short-form }
     forms:
       m: за́нятый
@@ -7866,13 +7866,13 @@ words:
         - gold
     usage:
       - ru: На ней золото́е кольцо́.
-        en_gb: She is wearing a golden ring.
+        en_gb: She is wearing a gold ring.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
       - ru: У него́ золото́й хара́ктер.
-        en_gb: He has a golden character.
+        en_gb: He has a heart of gold.
         inflect: { token: 3, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Они́ нашли́ золоты́е моне́ты.
-        en_gb: They found golden coins.
+        en_gb: They found gold coins.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: золото́й
@@ -10489,10 +10489,10 @@ words:
         en_gb: This is the material world.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Им нужна́ материа́льная по́мощь.
-        en_gb: They need material help.
+        en_gb: They need financial help.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У них есть материа́льные тру́дности.
-        en_gb: They have material difficulties.
+        en_gb: They have financial difficulties.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "медицинский=medical":
     cefr_level: B1
@@ -10972,7 +10972,7 @@ words:
         en_gb: This is a world record.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Он изве́стен на мирово́м у́ровне.
-        en_gb: He is known at the world level.
+        en_gb: He is known internationally.
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
     forms:
       m: мирово́й
@@ -14842,7 +14842,7 @@ words:
         en_gb: Particular caution is needed.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: У него́ осо́бое мне́ние.
-        en_gb: He has a particular opinion.
+        en_gb: He has an opinion of his own.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
   "остальной=remaining":
     cefr_level: B1
@@ -15287,10 +15287,10 @@ words:
       pl_pre: очередны́х
     usage:
       - ru: Наступи́л очередно́й кри́зис.
-        en_gb: The next crisis arrived.
+        en_gb: Yet another crisis arrived.
         inflect: { token: 2, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Начала́сь очередна́я неде́ля.
-        en_gb: The next week began.
+        en_gb: Yet another week began.
         inflect: { token: 2, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Он за́дал очередно́й вопро́с.
         en_gb: He asked the next question.
@@ -20823,7 +20823,7 @@ words:
         en_gb: We started a joint project.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: У нас была́ совме́стная рабо́та.
-        en_gb: We had joint work.
+        en_gb: We worked on it together.
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Они́ при́няли совме́стное реше́ние.
         en_gb: They made a joint decision.
@@ -21149,7 +21149,7 @@ words:
         en_gb: Fill in the corresponding box.
         inflect: { token: 2, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Бы́ли при́няты соотве́тствующие ме́ры.
-        en_gb: Corresponding measures were taken.
+        en_gb: Appropriate measures were taken.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: соотве́тствующий
@@ -25102,7 +25102,7 @@ words:
         en_gb: She finished art school.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: В музе́е худо́жественные рабо́ты.
-        en_gb: There are artistic works in the museum.
+        en_gb: There are works of art in the museum.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
   "худой=thin":
     cefr_level: B1

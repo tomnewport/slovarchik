@@ -21,10 +21,11 @@
  * Exits non-zero if the applier fails or any file differs.
  */
 import { execFileSync } from 'child_process'
-import { mkdtempSync, readFileSync, rmSync, readdirSync, mkdirSync, cpSync, existsSync } from 'fs'
+import { mkdtempSync, readFileSync, writeFileSync, rmSync, readdirSync, mkdirSync, cpSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { tmpdir } from 'os'
 import { fileURLToPath } from 'url'
+import { load as yamlLoad } from 'js-yaml'
 import { replayBase, assertUsableBase, exportVocabAt } from './replay-base.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -156,6 +157,55 @@ try {
       .map((f) => join('review', 'copyedit', f))
     if (copyedits.length) {
       execFileSync('node', [join('scripts', 'apply-translation-review.mjs'), ...copyedits, '--apply'], {
+        cwd: work,
+        stdio: ['ignore', 'ignore', 'inherit'],
+      })
+    }
+  }
+
+  // Stage three-and-a-half: the residual sweep. The first pass read 13,125 of
+  // the corpus's phrases; packets are cut by owner word, so a word that tripped
+  // no signal was never cut at all and 3,002 phrases went unread. `audit:yield`
+  // measured the clean tier at a 5.4% substantive-edit rate — a fifth of the
+  // high tier's, and not nothing — which is what made finishing worth doing.
+  //
+  // It runs after the copyedit because it is a later pass over sentences the
+  // earlier stages never touched, so the order is a statement about when it was
+  // decided rather than a dependency.
+  //
+  // Unlike the earlier stages, this one was written against *today's* corpus,
+  // which has words the base does not — «де́скать» arrived after it. Those rows
+  // cannot be replayed onto a tree that has never heard of the word, and they
+  // are not the review failing to reproduce itself: the comparison below
+  // already ignores keys the base lacks, for exactly the same reason. So they
+  // are filtered out here and counted, rather than dropped from the record or
+  // left to fail as unmatched.
+  const residualDir = join(repo, 'review', 'residual')
+  if (existsSync(residualDir)) {
+    const baseKeys = new Set()
+    for (const f of readdirSync(join(work, 'public', 'vocab')).filter((n) => n.endsWith('.yml'))) {
+      const doc = yamlLoad(readFileSync(join(work, 'public', 'vocab', f), 'utf8'))
+      for (const key of Object.keys(doc?.words ?? {})) baseKeys.add(key)
+    }
+    mkdirSync(join(work, 'review', 'residual'), { recursive: true })
+    const residuals = []
+    let skipped = 0
+    for (const f of readdirSync(residualDir).filter((n) => n.endsWith('.jsonl')).sort()) {
+      const kept = readFileSync(join(residualDir, f), 'utf8')
+        .split('\n')
+        .filter((l) => l.trim())
+        .filter((l) => {
+          if (baseKeys.has(JSON.parse(l).key)) return true
+          skipped += 1
+          return false
+        })
+      if (!kept.length) continue
+      writeFileSync(join(work, 'review', 'residual', f), `${kept.join('\n')}\n`)
+      residuals.push(join('review', 'residual', f))
+    }
+    if (skipped) console.log(`  ${skipped} residual proposal(s) skipped: their word postdates the base`)
+    if (residuals.length) {
+      execFileSync('node', [join('scripts', 'apply-translation-review.mjs'), ...residuals, '--apply'], {
         cwd: work,
         stdio: ['ignore', 'ignore', 'inherit'],
       })

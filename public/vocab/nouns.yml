@@ -1648,7 +1648,7 @@ words:
         en_gb: A new ride was built in the park.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Де́ти ката́лись на аттракцио́не.
-        en_gb: The children rode on the attraction.
+        en_gb: The children went on the ride.
         inflect: { token: 4, case: pre, number: sg, rule: noun-pre-sg }
       - ru: В па́рке мно́го аттракцио́нов.
         en_gb: There are many rides in the park.
@@ -2830,7 +2830,7 @@ words:
         en_gb: Running in the mornings is good for your health.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он за́нял пе́рвое ме́сто в бе́ге.
-        en_gb: He took first place in the running.
+        en_gb: He took first place in the race.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Тре́нер дово́лен мои́м бе́гом.
         en_gb: The coach is pleased with my running.
@@ -2871,7 +2871,7 @@ words:
         en_gb: Misfortune came suddenly.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Они́ помогли́ нам в беде́.
-        en_gb: They helped us in misfortune.
+        en_gb: They helped us when we were in trouble.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Он не боя́лся никаки́х бед.
         en_gb: He was not afraid of any misfortunes.
@@ -3913,7 +3913,7 @@ words:
         en_gb: In the evening he plays the blues on the guitar.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Она́ обожа́ет пе́сни в сти́ле блю́за.
-        en_gb: She adores songs in the style of blues.
+        en_gb: She adores songs in the blues style.
         inflect: { token: 6, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Блюз роди́лся в Аме́рике.
         en_gb: The blues was born in America.
@@ -6102,7 +6102,7 @@ words:
         en_gb: The dog is known for its faithfulness.
         inflect: { token: 4, case: ins, number: sg, rule: noun-fem-soft }
       - ru: Он покля́лся в ве́рности дру́гу.
-        en_gb: He swore faithfulness to his friend.
+        en_gb: He swore loyalty to his friend.
         inflect: { token: 4, case: pre, number: sg, rule: noun-fem-soft }
     declension:
       sg_nom: ве́рность
@@ -7588,7 +7588,7 @@ words:
         en_gb: Thank you for your attention.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он слу́шал ле́кцию со внима́нием.
-        en_gb: He listened to the lecture with attention.
+        en_gb: He listened to the lecture attentively.
         inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Э́та рабо́та тре́бует внима́ния.
         en_gb: This work demands attention.
@@ -8827,7 +8827,7 @@ words:
       standard: uprising (a revolt against authority)
     usage:
       - ru: Наро́д по́днял восста́ние.
-        en_gb: The people raised an uprising.
+        en_gb: The people started an uprising.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В стране́ нача́лось восста́ние.
         en_gb: An uprising began in the country.
@@ -9936,7 +9936,7 @@ words:
         en_gb: He hammered a nail into the wall.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На стене́ виси́т карти́на на гвозде́.
-        en_gb: A picture hangs on the wall on a nail.
+        en_gb: A picture hangs from a nail on the wall.
         en_alt:
           - There is a picture hanging on a nail on the wall.
         inflect: { token: 6, case: pre, number: sg, rule: noun-pre-sg }
@@ -10636,7 +10636,7 @@ words:
         en_gb: The children suffered from hunger.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: По́сле прогу́лки он почу́вствовал го́лод.
-        en_gb: After the walk he felt hunger.
+        en_gb: After the walk he felt hungry.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Зимо́й живо́тные му́чаются от го́лода.
         en_gb: In winter the animals suffer from hunger.
@@ -11393,7 +11393,7 @@ words:
         en_gb: He expressed his readiness to help.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Войска́ нахо́дятся в по́лной гото́вности.
-        en_gb: The troops are in full readiness.
+        en_gb: The troops are at full readiness.
         inflect: { token: 5, case: pre, number: sg, rule: noun-fem-soft }
       - ru: Меня́ удиви́ла её гото́вность к рабо́те.
         en_gb: Her readiness for work surprised me.
@@ -12041,12 +12041,12 @@ words:
         - vegetable bed
     usage:
       - ru: На гря́дке расту́т о́вощи.
-        en_gb: Vegetables grow in the bed.
+        en_gb: Vegetables grow in the garden bed.
         en_alt:
           - There are vegetables growing in the bed.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Ба́бушка поли́ла гря́дку.
-        en_gb: Grandma watered the bed.
+        en_gb: Grandma watered the garden bed.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На гря́дках цвету́т тюльпа́ны.
         en_gb: Tulips are blooming in the beds.
@@ -16619,7 +16619,7 @@ words:
         en_gb: She fries potatoes in fat.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Гусь покры́т то́лстым жи́ром.
-        en_gb: The goose is covered with thick fat.
+        en_gb: The goose is covered in a thick layer of fat.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
   "житель=resident":
     cefr_level: A2
@@ -18737,7 +18737,7 @@ words:
         en_gb: Words have different meanings.
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
       - ru: Он прида́л э́тому большо́е значе́ние.
-        en_gb: He attached great meaning to this.
+        en_gb: He attached great importance to this.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
   "золото=gold":
     cefr_level: A2
@@ -20918,7 +20918,7 @@ words:
       standard: frame (a single image on film; a member of staff)
     usage:
       - ru: Фотогра́ф сде́лал краси́вый кадр.
-        en_gb: The photographer captured a beautiful frame.
+        en_gb: The photographer took a beautiful shot.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В э́том ка́дре сли́шком темно́.
         en_gb: It is too dark in this frame.
@@ -23678,7 +23678,7 @@ words:
       standard: wheel (a round part that turns)
     usage:
       - ru: У маши́ны спусти́ло колесо́.
-        en_gb: The car has a flat wheel.
+        en_gb: The car has a flat tyre.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Колесо́ кру́тится бы́стро.
         en_gb: The wheel turns quickly.
@@ -25777,7 +25777,7 @@ words:
         - cat
     usage:
       - ru: Наш кот спит на окне́.
-        en_gb: Our cat is sleeping on the window.
+        en_gb: Our cat is sleeping in the window.
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я покорми́л кота́.
         en_gb: I fed the tomcat.
@@ -30125,7 +30125,7 @@ words:
         en_gb: The kid is sleeping soundly.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Она́ корми́ла малыша́ ка́шей.
-        en_gb: She fed the kid porridge.
+        en_gb: She fed the little one porridge.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-animate }
       - ru: В па́рке игра́ли весёлые малыши́.
         en_gb: Cheerful kids played in the park.
@@ -32160,7 +32160,7 @@ words:
       pl_pre: ми́нимумах
     usage:
       - ru: Нам ну́жен прожи́точный ми́нимум.
-        en_gb: We need a subsistence minimum.
+        en_gb: We need a living wage.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Сведи́ расхо́ды к ми́нимуму.
         en_gb: Reduce the expenses to a minimum.
@@ -39685,7 +39685,7 @@ words:
         en_gb: Two waiters work in the cafe.
         inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
       - ru: В хоро́ших места́х госте́й у́чат оставля́ть официа́нтам чаевы́е.
-        en_gb: In good places guests are taught to leave the waiters a tip.
+        en_gb: In good establishments guests are taught to leave the waiters a tip.
         inflect: { token: 7, case: dat, number: pl, rule: noun-dat-pl }
     declension:
       sg_nom: официа́нт
@@ -39749,7 +39749,7 @@ words:
         en_gb: They returned from the hunt.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Охо́та начина́ется ра́нним у́тром.
-        en_gb: The hunting begins early in the morning.
+        en_gb: The hunt begins early in the morning.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Они́ гото́вятся к охо́те.
         en_gb: They are preparing for the hunt.
@@ -41938,7 +41938,7 @@ words:
         en_gb: She has returned from Petersburg.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Мы до́лго гото́вились к пое́здке по Петербу́ргу.
-        en_gb: We long prepared for the trip around Petersburg.
+        en_gb: We spent a long time preparing for the trip around Petersburg.
         inflect: { token: 7, case: dat, number: sg, rule: noun-dat-sg }
       - ru: Тури́сты любу́ются Петербу́ргом.
         en_gb: The tourists are admiring Petersburg.
@@ -48389,7 +48389,7 @@ words:
         en_gb: He bent the thin wire.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: На столе́ лежа́ла кату́шка с про́волокой.
-        en_gb: A reel with wire lay on the table.
+        en_gb: A reel of wire lay on the table.
         inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: про́волока
@@ -50453,7 +50453,7 @@ words:
         en_gb: The soldiers went on reconnaissance.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Команди́р дове́рился разве́дке.
-        en_gb: The commander trusted the reconnaissance.
+        en_gb: The commander trusted the intelligence.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
     declension:
       sg_nom: разве́дка
@@ -51325,7 +51325,7 @@ words:
         en_gb: The engineer checked the calculation.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Он де́йствовал по холо́дному расчёту.
-        en_gb: He acted by cold calculation.
+        en_gb: He acted out of cold calculation.
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
       - ru: В расчётах была́ оши́бка.
         en_gb: There was a mistake in the calculations.
@@ -58395,7 +58395,7 @@ words:
         en_gb: He expressed an important consideration.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Из соображе́ний безопа́сности дверь закры́та.
-        en_gb: For safety considerations the door is closed.
+        en_gb: For safety reasons the door is closed.
         inflect: { token: 2, case: gen, number: pl, rule: noun-gen-pl }
       - ru: У меня́ есть не́сколько соображе́ний.
         en_gb: I have a few considerations.
@@ -58462,7 +58462,7 @@ words:
         en_gb: The document must be in compliance with the law.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Прове́рьте соотве́тствие да́нных в та́блице.
-        en_gb: Check the correspondence of the data in the table.
+        en_gb: Check that the data in the table match.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Рабо́та вы́полнена в по́лном соотве́тствии с пла́ном.
         en_gb: The work was done in full accordance with the plan.
@@ -61398,7 +61398,7 @@ words:
         en_gb: Suddenly there was a loud knock.
         inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Я просну́лся от сту́ка в дверь.
-        en_gb: I woke up from a knock at the door.
+        en_gb: I woke up to a knock at the door.
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: Он отве́тил на стук молча́нием.
         en_gb: He answered the knock with silence.
@@ -66235,7 +66235,7 @@ words:
         en_gb: He greeted us with a warm smile.
         inflect: { token: 6, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Её улы́бки хвата́ет на всех.
-        en_gb: Her smile is enough for everyone.
+        en_gb: She has a smile for everyone.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
     declension:
       sg_nom: улы́бка
@@ -69268,7 +69268,7 @@ words:
         en_gb: I talked with a Christian.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
       - ru: Христиани́н ве́рит в бо́га.
-        en_gb: A Christian believes in god.
+        en_gb: A Christian believes in God.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
       - ru: Он ве́рующий христиани́н.
         en_gb: He is a devout Christian.
@@ -69527,7 +69527,7 @@ words:
         en_gb: The cement was mixed with sand.
         inflect: { token: 1, case: acc, number: sg, rule: noun-acc-sg }
       - ru: Сте́ны скрепи́ли цеме́нтом.
-        en_gb: The walls were bonded with cement.
+        en_gb: The walls were cemented together.
         inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
     declension:
       sg_nom: цеме́нт

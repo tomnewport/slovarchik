@@ -285,6 +285,10 @@ two of which are tens of thousands of lines — parallel writers would conflict
 constantly and the result would be unreviewable as a diff. One writer means one
 deterministic pass, a minimal diff, and a re-runnable merge.
 
+`review/residual/` is the residual sweep's own record, replayed as its own
+stage; `review/copyedit/` is the English-only stage-three pass. Both sit
+alongside `review/proposals/` and all three are replayed by `verify:review`.
+
 ```
 scripts/audit-translations.mjs --shard   →  review/packets/packet-NNN.json
                                                      ↓
@@ -394,7 +398,10 @@ node scripts/audit-translations.mjs --alternates --unread     # …only the ones
 node scripts/audit-translations.mjs --collisions             # aspect pairs that read alike
 node scripts/audit-translations.mjs --collisions --all       # …incl. verb-frame-only matches
 node scripts/audit-translations.mjs --shard                  # cut work packets
-npm run audit:yield                                          # what each tier returned
+npm run audit:yield                                          # what each tier returned, and coverage
+node scripts/audit-translations.mjs --residual                # phrases no packet covered
+node scripts/audit-translations.mjs --residual --list         # …read them
+node scripts/audit-translations.mjs --residual --ids 27,28    # …resolve marked positions
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl          # dry run
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl --apply  # write
 ```
@@ -489,9 +496,47 @@ cut by **owner word**, so a flagged phrase drags its word's clean siblings into
 the packet with it. Cutting by word for the sake of judgement — a gloss needs
 its siblings to be judged against — bought most of a clean sweep for free.
 
-Coverage after the first sweep is **13,125 of 16,086 phrases (81.6%)**. The
-2,961 that remain are all `clean`-tier phrases belonging to words no packet
-covered.
+Coverage after the first sweep was **13,125 of 16,086 phrases (81.6%)**. The
+remainder were all `clean`-tier phrases belonging to words no packet covered —
+read since, by the residual sweep below.
+
+## The residual sweep
+
+The 3,002 phrases the ranking never reached were not a decision. Packets are cut
+by **owner word**, so a word with one flagged phrase brought its clean siblings
+in and a word with none was never cut at all. `npm run audit:translations
+--residual` lists what that left; `--list` reads it, `--ids` resolves the
+positions a reading pass marked back into proposals.
+
+The yield table above is what made finishing worth doing: 5.4% is a fifth of
+the `high` tier's rate and still not noise. Reading all 3,002 returned **72
+retranslations and 9 flags** — 2.7%, close enough to the measured clean rate to
+say the estimate held.
+
+The 9 flags are mostly the *Russian* being the weaker half, which is what a
+sweep by owner word is good at surfacing: «Поверни́ на пра́вой стороне́» for
+«поверни́ напра́во», «за́ла» for «зал», «забавля́л себя́» for «забавля́лся»,
+and слыха́ть conjugated in a present and a future the verb does not have. None
+of those can be fixed by translating them better.
+
+Two rules the sweep is worth recording for:
+
+**A `keep` is a row, not a silence.** All 2,921 unflagged phrases carry one.
+Coverage is counted from rows, so a phrase without one is a phrase nobody
+looked at, and omitting the keeps would have made the sweep unprovable.
+
+**Coverage counts distinct phrases, not proposal rows.** Summing rows overstates
+it — a sentence whose Russian a `fix-russian` rewrote holds a row under a
+wording the corpus no longer has, and the copyedit gave some sentences a second
+row. That gap is also how the last 38 phrases were found: read, but only under
+Russian they no longer carry.
+
+Coverage now stands at **16,103 of 16,103 (100%)**.
+
+Words added *after* the replay base cannot be replayed onto it, so
+`verify-review-replay.mjs` filters those residual rows out and says how many.
+That is the same rule the comparison already applies to keys the base lacks —
+a word the review never saw is not the review's to reproduce.
 
 **Do not use mean literalness as a success metric.** It was the obvious choice
 and the pilot showed it is wrong, in two independent ways:
