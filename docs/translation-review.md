@@ -307,6 +307,7 @@ node scripts/audit-translations.mjs --sample 20 --tier high  # eyeball the worst
 node scripts/audit-translations.mjs --collisions             # aspect pairs that read alike
 node scripts/audit-translations.mjs --collisions --all       # …incl. verb-frame-only matches
 node scripts/audit-translations.mjs --shard                  # cut work packets
+npm run audit:yield                                          # what each tier returned
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl          # dry run
 node scripts/apply-translation-review.mjs review/proposals/*.jsonl --apply  # write
 ```
@@ -325,8 +326,46 @@ A pass that "improves" 3,000 sentences is only trustworthy if it can be checked:
    matters more than any quality metric.
 3. Spot-read the diff. It is minimal by construction, so this is feasible, and
    it is the only check that actually reads the new English.
-4. The `keep` rate on the sampled `clean` phrases estimates the heuristics'
+4. The `keep` rate on the `clean` phrases estimates the heuristics'
    false-negative rate, and says whether a full sweep is worth running.
+   `npm run audit:yield` computes it.
+
+## What the ranking returned
+
+`npm run audit:yield` joins every committed proposal back onto the tier its
+phrase was in *when the reviewer saw it* — re-derived from the corpus at the
+replay base, since scoring today's corpus would ask what tier a sentence falls
+in after being fixed. The first sweep:
+
+| tier | reviewed | `keep` | `add-alt` | substantive edit |
+| --- | --- | --- | --- | --- |
+| `high` | 1,344 | 51.8% | 34.1% | **14.1%** |
+| `medium` | 4,744 | 67.2% | 24.6% | **8.1%** |
+| `clean` | 7,037 | 78.9% | 15.8% | **5.4%** |
+
+"substantive edit" is `retranslate`, `fix-russian` or `flag` — a change to what
+the learner reads, as against `add-alt`, which only widens what is accepted.
+
+Two things follow, and they pull in opposite directions.
+
+**The ranking works.** `high` holds 2.6× the defect density of `clean`, and
+reading in tier order found the concentrated defects first. That is what the
+heuristics were built for and it is worth keeping.
+
+**The `clean` tier is not clean.** It returned 278 retranslations, 14 Russian
+rewrites and 81 flags. Its 5.4% is a fifth of `high`'s rate but it is not
+noise, and the tier's name has always overclaimed: it means *trips no signal*,
+not *is correct*. Any future pass should read it rather than sample it.
+
+The 7,037 `clean` phrases read is itself an accident worth recording. The
+design sampled 200 of them deliberately; the rest arrived because packets are
+cut by **owner word**, so a flagged phrase drags its word's clean siblings into
+the packet with it. Cutting by word for the sake of judgement — a gloss needs
+its siblings to be judged against — bought most of a clean sweep for free.
+
+Coverage after the first sweep is **13,125 of 16,086 phrases (81.6%)**. The
+2,961 that remain are all `clean`-tier phrases belonging to words no packet
+covered.
 
 **Do not use mean literalness as a success metric.** It was the obvious choice
 and the pilot showed it is wrong, in two independent ways:

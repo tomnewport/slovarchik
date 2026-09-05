@@ -26,6 +26,7 @@
     "audit:gender": "node scripts/gender-audit.mjs",
     "audit:translations": "node scripts/audit-translations.mjs --report",
     "verify:review": "node scripts/verify-review-replay.mjs",
+    "audit:yield": "node scripts/review-yield.mjs",
     "audit:cefr": "node scripts/audit-cefr.js",
     "gen:icons": "node scripts/gen-icons.mjs",
     "gen:adjectives": "node scripts/gen-adjective-declension.mjs",

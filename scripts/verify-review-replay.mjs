@@ -25,57 +25,14 @@ import { mkdtempSync, readFileSync, rmSync, readdirSync, mkdirSync, cpSync, exis
 import { join, dirname } from 'path'
 import { tmpdir } from 'os'
 import { fileURLToPath } from 'url'
+import { replayBase, assertUsableBase, exportVocabAt } from './replay-base.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const repo = join(__dirname, '..')
 const args = process.argv.slice(2)
-const baseArg = args.indexOf('--base')
 
-/**
- * The commit the proposals were written against.
- *
- * Read from `review/replay-base.txt` rather than derived. It used to be
- * `git merge-base origin/main HEAD`, which is correct while the review sits on
- * a branch and wrong the moment it merges: on main the merge base is main
- * itself, so the replay re-applies every proposal to a tree that already has
- * them. The 32 `fix-russian` rows then cannot find their sentences — their
- * Russian has been rewritten — and the check fails on data that is perfectly
- * fine. Main went red on exactly that after #581 landed.
- */
-function replayBase() {
-  if (baseArg >= 0 && args[baseArg + 1]) return args[baseArg + 1]
-  const path = join(repo, 'review', 'replay-base.txt')
-  if (!existsSync(path)) {
-    console.error('review/replay-base.txt is missing — it names the commit the proposals were written against')
-    process.exit(1)
-  }
-  const sha = readFileSync(path, 'utf8')
-    .split('\n')
-    .map((l) => l.trim())
-    .find((l) => l && !l.startsWith('#'))
-  if (!sha) {
-    console.error('review/replay-base.txt names no commit')
-    process.exit(1)
-  }
-  return sha
-}
-const base = replayBase()
-
-// A base that is not behind HEAD cannot be a starting point for the replay: the
-// tree it names already contains the changes we are about to apply. Catching it
-// here says so, instead of surfacing as unmatched proposals a reader would
-// reasonably mistake for corrupt data.
-try {
-  execFileSync('git', ['merge-base', '--is-ancestor', base, 'HEAD'], { cwd: repo, stdio: 'ignore' })
-} catch {
-  console.error(`replay base ${base.slice(0, 8)} is not an ancestor of HEAD — it must name the state the review started from`)
-  process.exit(1)
-}
-if (execFileSync('git', ['rev-parse', base], { cwd: repo, encoding: 'utf8' }).trim()
-  === execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repo, encoding: 'utf8' }).trim()) {
-  console.error(`replay base ${base.slice(0, 8)} is HEAD itself — nothing would be replayed`)
-  process.exit(1)
-}
+const base = replayBase(repo, args)
+assertUsableBase(repo, base)
 
 /**
  * Every line the review is responsible for, grouped by the word that owns it.
@@ -148,9 +105,7 @@ const work = mkdtempSync(join(tmpdir(), 'review-replay-'))
 let failed = false
 try {
   // 1. vocab as of the base
-  execFileSync('git', ['archive', base, 'public/vocab'], { cwd: repo, maxBuffer: 1 << 28, stdio: ['ignore', 'pipe', 'inherit'] })
-  const tar = execFileSync('git', ['archive', base, 'public/vocab'], { cwd: repo, maxBuffer: 1 << 28 })
-  execFileSync('tar', ['-x', '-C', work], { input: tar })
+  exportVocabAt(repo, base, work)
 
   // 2. the applier needs its own tree shape: scripts + review beside the vocab
   mkdirSync(join(work, 'scripts'), { recursive: true })
