@@ -31,8 +31,15 @@
  * }
  *
  * Usage:
- *   node scripts/apply-alt-removals.mjs            # dry run
+ *   node scripts/apply-alt-removals.mjs                    # dry run
  *   node scripts/apply-alt-removals.mjs --apply
+ *   node scripts/apply-alt-removals.mjs <file> --apply     # a subset
+ *
+ * The default is the whole record, which is what `verify:review` replays onto
+ * the pre-review tree. Applying it to a tree that already carries some of those
+ * removals fails — by design, since a record that resolves to nothing is how a
+ * stale entry would hide. So a newly appended batch is applied by naming a file
+ * holding just those lines; the full record still has to replay from the base.
  */
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
@@ -42,8 +49,12 @@ import { parseUsageItems } from './annotate-inflect.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const vocabDir = join(__dirname, '..', 'public', 'vocab')
-const removalsPath = join(__dirname, '..', 'review', 'alt-removals.jsonl')
-const APPLY = process.argv.slice(2).includes('--apply')
+const args = process.argv.slice(2)
+const APPLY = args.includes('--apply')
+const named = args.find((a) => !a.startsWith('--'))
+const removalsPath = named
+  ? (named.startsWith('/') ? named : join(process.cwd(), named))
+  : join(__dirname, '..', 'review', 'alt-removals.jsonl')
 
 if (!existsSync(removalsPath)) {
   console.log('no alternate removals recorded')

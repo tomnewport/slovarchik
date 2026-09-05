@@ -102,19 +102,42 @@ function rejectedEnglish() {
   const repo = join(__dirname, '..')
   const out = new Set()
   if (!existsSync(join(repo, 'review', 'replay-base.txt'))) return out
-  const wanted = new Set()
+
+  // A sentence can be retranslated more than once — the fidelity pass, then
+  // the copyedit — so what a stage rejected is whatever the *previous* stage
+  // left, not whatever the corpus started with. Only the first rewrite of a
+  // sentence rejects the base tree's wording. Getting this wrong in either
+  // direction is silent: too eager and it flags an alternate the review
+  // deliberately restored (пропада́ть), too lax and it misses one the copyedit
+  // has just ruled out (аппара́т).
+  const history = new Map()
   for (const dir of ['proposals', 'copyedit']) {
     const path = join(repo, 'review', dir)
     if (!existsSync(path)) continue
-    for (const f of readdirSync(path).filter((n) => n.endsWith('.jsonl'))) {
+    for (const f of readdirSync(path).filter((n) => n.endsWith('.jsonl')).sort()) {
       for (const line of readFileSync(join(path, f), 'utf8').split('\n')) {
         if (!line.trim()) continue
         const row = JSON.parse(line)
-        if (row.verdict === 'retranslate' && row.defect === 'unnatural-english') wanted.add(`${row.key}\u0000${row.ru}`)
+        if (row.verdict !== 'retranslate' || !row.en) continue
+        const id = `${row.key}\u0000${row.ru}`
+        if (!history.has(id)) history.set(id, [])
+        history.get(id).push(row)
       }
     }
   }
-  if (!wanted.size) return out
+
+  // Sentences whose *first* rewrite called the English unnatural: only those
+  // need the base tree read for what they replaced.
+  const fromBase = new Set()
+  for (const [id, stages] of history) {
+    stages.forEach((row, i) => {
+      if (row.defect !== 'unnatural-english') return
+      if (i === 0) fromBase.add(id)
+      else out.add(normaliseEnglish(stages[i - 1].en))
+    })
+  }
+  if (!fromBase.size) return out
+
   const work = mkdtempSync(join(tmpdir(), 'alt-audit-'))
   try {
     const dir = exportVocabAt(repo, replayBase(repo, []), work)
@@ -123,7 +146,7 @@ function rejectedEnglish() {
       .map((f) => ({ pos: POS_BY_FILE[f.replace(/\.ya?ml$/, '')], file: f, doc: yamlLoad(readFileSync(join(dir, f), 'utf8')) }))
       .filter((r) => r.pos)
     for (const p of shapePhrases(buildWords(docs))) {
-      if (wanted.has(`${p.source}\u0000${p.ru}`)) out.add(normaliseEnglish(p.en))
+      if (fromBase.has(`${p.source}\u0000${p.ru}`)) out.add(normaliseEnglish(p.en))
     }
   } catch {
     // Not a git checkout, or the base is gone. The other signals stand alone.
@@ -158,17 +181,30 @@ function alternates() {
   const withAlt = phrases.filter((p) => p.enAlt?.length)
   const total = withAlt.reduce((s, p) => s + p.enAlt.length, 0)
   const unreadOnly = flag('unread')
-  let found = auditAlternates(phrases, { words, rejected: rejectedEnglish() })
+  const scored = auditAlternates(phrases, { words, rejected: rejectedEnglish() })
   const unread = (r) => !proposed.has(`${r.key}\u0000${normaliseEnglish(r.alt)}`)
-  const neverRead = phrases.flatMap((p) => (p.enAlt ?? []).map((alt) => ({ key: p.source, alt }))).filter(unread)
-  if (unreadOnly) found = found.filter(unread)
+  const neverRead = withAlt.flatMap((p) => p.enAlt.map((alt) => ({
+    key: p.source, ru: p.ru, en: p.en, alt, overlap: 1, signals: [],
+  }))).filter(unread)
+
+  // `--unread` lists every alternate no proposal wrote, signal or not. Being
+  // unread is itself the reason to read it: the signals rank the 3,200 the
+  // review authored, where a per-row note already exists to fall back on.
+  let found = scored
+  if (unreadOnly) {
+    const byRow = new Map(scored.map((r) => [`${r.key}\u0000${r.alt}`, r]))
+    found = neverRead.map((r) => byRow.get(`${r.key}\u0000${r.alt}`) ?? r)
+      .sort((a, b) => b.signals.length - a.signals.length || a.key.localeCompare(b.key))
+  }
 
   console.log(`\n${total} accepted alternate(s) across ${withAlt.length} phrases; ${neverRead.length} never shown to a reviewer`)
   const bySignal = {}
   for (const r of found) for (const sig of r.signals) bySignal[sig] = (bySignal[sig] ?? 0) + 1
-  console.log(`${found.length} tripped a signal${unreadOnly ? ' (unread only)' : ''}: ${JSON.stringify(bySignal)}`)
+  console.log(unreadOnly
+    ? `listing all ${found.length} unread; ${found.filter((r) => r.signals.length).length} of them trip a signal: ${JSON.stringify(bySignal)}`
+    : `${found.length} tripped a signal: ${JSON.stringify(bySignal)}`)
   for (const r of found.slice(0, Number(opt('show', 25)) || 25)) {
-    console.log(`\n  [${r.signals.join(' ')}] overlap ${r.overlap}  ${r.key}`)
+    console.log(`\n  [${r.signals.join(' ') || '—'}] overlap ${r.overlap}  ${r.key}`)
     console.log(`    ru      ${r.ru}`)
     console.log(`    en      ${r.en}`)
     console.log(`    accepts ${r.alt}`)

@@ -62,14 +62,19 @@ translation of this sentence. That was largely inert while the word bank built
 its tiles from the primary alone; once the bank was widened, every alternate
 became an offered, accepted answer.
 
-| Signal | Corpus | What it catches |
-| --- | --- | --- |
-| `foreign-partner` | 1 | verbatim the **aspect partner's** own sentence |
-| `orphan-block` | 5 | a block of renderings left behind from a replaced Russian |
-| `contradicted` | 1 | re-accepts the exact English a proposal replaced as not-English |
-| `duplicate` | 35 | normalises to the primary or a sibling — inert, but unmerged |
-| `foreign` | 14 | verbatim some other sentence's primary |
-| `block` | 37 | the cohesion half of `orphan-block`, alone |
+| Signal | Found | Left | What it catches |
+| --- | --- | --- | --- |
+| `foreign-partner` | 1 | 0 | verbatim the **aspect partner's** own sentence |
+| `contradicted` | 1 | 0 | re-accepts the exact English a proposal replaced as not-English |
+| `duplicate` | 104 | 0 | accepts nothing the primary or an earlier alternate already did |
+| `orphan-block` | 5 | 5 | a block of renderings left behind from a replaced Russian |
+| `foreign` | 14 | 13 | verbatim some other sentence's primary |
+| `block` | 37 | 35 | the cohesion half of `orphan-block`, alone |
+
+The first pass over this removed **104** alternates and left the rest: the
+`orphan-block` five are genuine paraphrases the conjunction happened to catch
+("Simmer the soup over a low heat" for "Cook the soup on a low flame"), and
+`foreign` and `block` are the two signals reported rather than judged.
 
 Two of those are worth explaining, because they are the ones that changed the
 design.
@@ -85,6 +90,14 @@ alternates resembling each other more than the primary — which is the actual
 «утро» signature, and fires on all three of that block's rows and five others
 corpus-wide.
 
+**A removal has to land in the stage that owns the list.** `alt-removals.jsonl`
+runs fourth of the replay's stages, and `apply-prompt-fixes.mjs` runs last and
+*replaces* an `en_alt` list wholesale. So removing «Она́ благодари́ла учи́теля»'s
+"She thanked the teacher" through alt-removals silently did nothing: the prompt
+pass put it straight back. That fix belongs in the prompt-fix record itself,
+and the replay is what catches the mistake — the corpus and the record simply
+stop agreeing.
+
 **`foreign-partner` is #576 arriving through a door #576 does not cover.**
 «Она́ благодари́ла учи́теля» — "She was thanking the teacher" — accepts "She
 thanked the teacher", word for word the perfective partner's own sentence. The
@@ -92,6 +105,22 @@ contrast drill is unaffected, since it shows `en`; but a learner who answers the
 imperfective sentence with the perfective reading is marked correct, and the
 aspect goes untaught. This is grading, not prompting, which is why the existing
 collision check could never see it.
+
+**`duplicate` is judged by the drill's grader, not by this module.** The two
+normalise differently and both differences matter. The audit expands
+contractions so «не» can align with "doesn't"; the drills strip apostrophes
+instead, so "She's taking a hot bath" and "She is taking a hot bath" are
+genuinely different answers and both earn their place. The drills fold
+articles; the audit does not, so "Milk will soon run out" beside "The milk will
+soon run out" accepts nothing new. Asking `phraseCorrect` — the same function
+every drill grades with — is the only definition that tracks what a learner can
+actually get credit for.
+
+An alternate that fails that test is not merely inert, either. `bankTokens`
+takes the maximum count of each word across the primary and its alternates, so
+an article-only alternate contributes one extra tile to the word bank, and that
+tile comes out of the phrase's decoy budget. It makes the drill marginally
+harder while accepting nothing.
 
 ### Which alternates were never read
 

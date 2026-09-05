@@ -25,6 +25,7 @@
 // `stressAudit.js` / `morphOracle.js`, which assert things that are true or
 // false — this one only produces a worklist.
 import { buildFormIndex, phraseHintTokens, normToken } from './phraseHint.js'
+import { phraseCorrect } from './phrases.js'
 
 /**
  * English words with no Russian counterpart to find, ever. Kept to the closed
@@ -619,9 +620,13 @@ const ORPHAN_OVERLAP = 0.5
  * only harm it does is **grading looseness**: accepting, as correct, something
  * that is not a translation of this sentence.
  *
- *  - `duplicate` — normalises to the primary, or to a sibling alternate. Inert
- *    rather than wrong, but evidence that something merged without
- *    deduplicating, and the corpus holds 35 of them.
+ *  - `duplicate` — the **grader** cannot tell it from the primary or from an
+ *    earlier alternate, so it accepts nothing the primary did not already.
+ *    Judged by asking the drill's own `phraseCorrect`, not this module's
+ *    normalisation: the audit expands contractions and the grader does not, so
+ *    "She's taking a hot bath" beside "She is taking a hot bath" is two
+ *    genuinely different answers and stays. The grader does fold articles, so
+ *    "Milk will soon run out" beside "The milk will soon run out" does not.
  *  - `orphan-block` — shares little with its primary *and* resembles its
  *    sibling alternates more than it resembles the primary. This is the
  *    «утро» signature: a block of renderings left behind when the Russian they
@@ -677,11 +682,11 @@ export function auditAlternates(phrases, { words = [], rejected = new Set() } = 
     const cohesion = alts.length > 1
       && alts.every((a, i) => alts.some((b, j) => i !== j && overlap(a.stems, b.stems) > overlap(a.stems, primary)))
 
-    const seen = new Set([normaliseEnglish(p.en)])
+    const seen = [p.en]
     for (const a of alts) {
       const signals = []
-      if (seen.has(a.norm)) signals.push('duplicate')
-      seen.add(a.norm)
+      if (phraseCorrect(a.alt, seen)) signals.push('duplicate')
+      seen.push(a.alt)
       const share = overlap(a.stems, primary)
       if (cohesion) signals.push(share <= ORPHAN_OVERLAP ? 'orphan-block' : 'block')
       const elsewhere = (primaries.get(a.norm) ?? []).filter((o) => o.ru !== p.ru)

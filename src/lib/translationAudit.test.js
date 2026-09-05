@@ -499,9 +499,19 @@ describe('auditAlternates', () => {
     expect(rows[0].signals).toEqual(['foreign'])
   })
 
-  it('flags an alternate that only re-punctuates its primary', () => {
-    const rows = auditAlternates([
+  it('leaves a contraction variant alone, because the grader does not fold it', () => {
+    // The audit expands contractions to align «не» against "doesn't"; the drill
+    // strips apostrophes instead, so "shes" and "she is" are different answers
+    // and the alternate is doing real work. Judging this by the audit's own
+    // normalisation would delete a row the learner can legitimately type.
+    expect(auditAlternates([
       p('ванна=bath', 'Она́ принима́ет горя́чую ва́нну.', "She's taking a hot bath.", ['She is taking a hot bath.']),
+    ])).toEqual([])
+  })
+
+  it('flags an alternate that varies only an article the grader ignores', () => {
+    const rows = auditAlternates([
+      p('молоко=milk', 'Молоко́ ско́ро зако́нчится.', 'The milk will soon run out.', ['Milk will soon run out.']),
     ])
     expect(rows[0].signals).toEqual(['duplicate'])
   })

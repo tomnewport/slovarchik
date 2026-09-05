@@ -2309,13 +2309,9 @@ words:
     usage:
       - ru: Вну́тренний го́лос сказа́л ему́ останови́ться.
         en_gb: An inner voice told him to stop.
-        en_alt:
-          - The inner voice told him to stop.
         inflect: { token: 1, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: У него́ вну́тренняя боль.
         en_gb: He has an internal pain.
-        en_alt:
-          - He has internal pain.
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы обсу́дим вну́тренние дела́.
         en_gb: We will discuss internal affairs.
@@ -2559,8 +2555,6 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали волше́бные слова́.
         en_gb: We heard magic words.
-        en_alt:
-          - We heard the magic words.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
   "вольный=free":
     cefr_level: B2
@@ -3639,7 +3633,6 @@ words:
         en_gb: Above us is a light blue sky.
         en_alt:
           - There is a light blue sky above us.
-          - Above us is the light blue sky.
           - The sky above us is light blue.
         inflect: { token: 3, case: nom, number: sg, gender: n, rule: adj-agreement }
     forms:
@@ -5759,8 +5752,6 @@ words:
     usage:
       - ru: Мы посети́ли дре́вний го́род.
         en_gb: We visited the ancient city.
-        en_alt:
-          - We visited an ancient city.
         inflect: { token: 3, case: acc, number: sg, gender: m, rule: adj-agreement }
       - ru: В музе́е храни́тся дре́вняя ру́копись.
         en_gb: An ancient manuscript is kept in the museum.
@@ -7271,8 +7262,6 @@ words:
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
       - ru: На све́тлой стене́ пятно́ заме́тнее.
         en_gb: On a light wall the stain is more noticeable.
-        en_alt:
-          - On a light wall a stain is more noticeable.
         inflect: { token: 5, degree: comparative, rule: adj-comparative }
   "замечательный=wonderful":
     cefr_level: B1
@@ -15556,8 +15545,6 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Мы услы́шали печа́льное изве́стие.
         en_gb: We heard sad news.
-        en_alt:
-          - We heard the sad news.
         inflect: { token: 3, case: acc, number: sg, gender: n, rule: adj-agreement }
       - ru: Коне́ц кни́ги печа́льнее нача́ла.
         en_gb: The end of the book is sadder than the beginning.
@@ -17895,8 +17882,6 @@ words:
         inflect: { token: 4, case: nom, number: sg, gender: m, rule: adj-agreement }
       - ru: Мы е́хали по пусты́м у́лицам.
         en_gb: We drove along empty streets.
-        en_alt:
-          - We drove along the empty streets.
         inflect: { token: 4, case: dat, number: pl, gender: pl, rule: adj-agreement }
     forms:
       m: пусто́й
@@ -19926,8 +19911,6 @@ words:
         inflect: { token: 4, case: pre, number: sg, gender: m, rule: adj-agreement }
       - ru: Я жду ско́рую по́мощь.
         en_gb: I am waiting for the ambulance.
-        en_alt:
-          - I am waiting for an ambulance.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
       - ru: Жела́ю тебе́ ско́рого выздоровле́ния.
         en_gb: I wish you a fast recovery.
@@ -24068,8 +24051,6 @@ words:
         inflect: { token: 3, case: nom, number: sg, gender: f, rule: adj-agreement }
       - ru: Э́то кре́сло удо́бнее, чем стул.
         en_gb: This armchair is more comfortable than the chair.
-        en_alt:
-          - This armchair is more comfortable than a chair.
         inflect: { token: 3, degree: comparative, rule: adj-comparative }
     forms:
       m: удо́бный
