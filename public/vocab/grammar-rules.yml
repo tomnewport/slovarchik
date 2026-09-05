@@ -756,3 +756,108 @@ rules:
       чего́ ты бои́шься; ниче́м не интересу́ется. Russian doubles the negative —
       the pronoun AND the verb are both negated: Никто́ ничего́ не зна́ет. The
       negatives split around a preposition: ни с кем, ни о чём.
+
+  # ── Spelling rules (#646) ───────────────────────────────────────────────
+  # Rules about the LETTERS, not about the case — they hold whatever ending is
+  # being written, which is what makes them worth stating on their own. The rule
+  # oracle (src/lib/ruleOracle.js) names one of these when a wrong answer breaks
+  # it and nothing else, so a learner who wrote «кни́гы» hears "seven-letter
+  # rule" rather than being sent back to the genitive singular.
+  spelling-i-not-y:
+    title: "The seven-letter rule: и, never ы"
+    formula: "after г, к, х, ж, ч, ш, щ → и"
+    explanation: >
+      After the seven letters г, к, х, ж, ч, ш and щ Russian writes и and never
+      ы — whatever the ending is trying to be. It is why the nominative plural
+      of кни́га is кни́ги and not «кни́гы», why ру́чка gives ру́чки, and why the
+      genitive singular of ру́чка is ру́чки too. The ending has not changed; the
+      spelling of it has. Learn it once and a whole column of endings stops
+      being a guess.
+    exceptions:
+      - "ы does follow ц in endings and in -ын: отцы́, у́лицы, сестри́цын."
+      - "Foreign names keep their own spelling: Кызылорда́, Кыргызста́н."
+
+  spelling-a-u-not-ya-yu:
+    title: "The eight-letter rule: а and у, never я or ю"
+    formula: "after г, к, х, ж, ч, ш, щ, ц → а, у"
+    explanation: >
+      After г, к, х, ж, ч, ш, щ and ц Russian writes а and у, never я or ю.
+      These consonants carry their own hardness or softness, so the vowel does
+      not need to mark it. Hence я пишу́ (not «пишю́»), они́ слы́шат (not
+      «слы́шят»), ча́сто and щу́ка. It bites hardest on verb endings, where the
+      -ю of -ать verbs turns into -у after a husher.
+    exceptions:
+      - "Loanwords keep the foreign spelling: жюри́, парашю́т, брошю́ра."
+
+  spelling-o-e-after-sibilant:
+    title: "о under stress, е without it — after ж, ч, ш, щ, ц"
+    formula: "stressed → о (ё) · unstressed → е"
+    explanation: >
+      After the sibilants ж, ч, ш, щ and ц the choice between о and е is decided
+      by the STRESS, not by the ending: stressed it is о, unstressed it is е.
+      The instrumental singular shows it plainly — ножо́м but му́жем, отцо́м but
+      се́рдцем — and so does the adjective: большо́го against хоро́шего. Since ё
+      is always stressed, an unstressed vowel there can only be е.
+    exceptions:
+      - "In roots the stressed vowel is usually written ё: жёлтый, чёрный, шёл."
+      - "Nouns and adjectives from verbs keep ё: ночёвка, тушёный."
+
+  spelling-y-not-i-after-ts:
+    title: "и or ы after ц"
+    formula: "ending or -ын → ы · root → и"
+    explanation: >
+      ц is the one consonant the seven-letter rule leaves out. After it, an
+      ENDING (and the possessive suffix -ын) takes ы — отцы́, у́лицы,
+      сестри́цын — while inside a ROOT the letter stays и: цирк, ци́фра,
+      ста́нция, револю́ция. Ask whether the letter belongs to the ending or to
+      the word itself.
+    exceptions:
+      - "Four roots take ы anyway: цыга́н, цыплёнок, на цы́почках, цыц."
+
+  # ── Preposition government (#646) ───────────────────────────────────────
+  # A preposition that only ever takes one case is a rule the learner can apply
+  # with no thought at all, so the oracle says it whenever one is ignored. The
+  # prepositions with two cases (в, на, за, под, с) are deliberately absent: for
+  # them the case carries meaning, and there is no one-line rule to give.
+  prep-gov-gen:
+    title: "Prepositions that always take the genitive"
+    formula: "без, для, до, из, от, у, о́коло, по́сле, про́тив, кро́ме, вокру́г … + genitive"
+    explanation: >
+      A large group of prepositions governs the genitive and nothing else —
+      без, для, до, из, от, у, вме́сто, вокру́г, кро́ме, ми́мо, о́коло, по́сле,
+      про́тив, ра́ди, среди́, вдоль. There is no meaning to weigh up: the case is
+      fixed by the preposition, so once you have recognised it the only work
+      left is forming the genitive. Most of them are about absence, origin or
+      position — the genitive's own territory: без са́хара, из Москвы́, у окна́.
+  prep-gov-dat:
+    title: "Prepositions that always take the dative"
+    formula: "к (ко), по, благодаря́, вслед + dative"
+    explanation: >
+      к and по always take the dative, as do благодаря́ and вслед. к is
+      movement towards a person or place (иду́ к врачу́); по is the "along /
+      around / according to" preposition (по у́лице, по телефо́ну, по вто́рникам).
+      Neither ever takes another case, so recognising the preposition settles
+      the form.
+  prep-gov-ins:
+    title: "Prepositions that always take the instrumental"
+    formula: "над, пе́ред, меж + instrumental"
+    explanation: >
+      над, пе́ред and меж govern the instrumental and only the instrumental —
+      unlike their neighbours за and под, which switch to the accusative for
+      movement. Position is the common thread: над столо́м, пе́ред до́мом.
+  prep-gov-acc:
+    title: "Prepositions that always take the accusative"
+    formula: "че́рез, про, сквозь, спустя́ + accusative"
+    explanation: >
+      че́рез, про, сквозь and спустя́ take the accusative every time — crossing,
+      passing through, or a span of time: че́рез неде́лю, про тебя́, сквозь
+      го́род. No motion-versus-location question arises, because they have only
+      the one case.
+  prep-gov-pre:
+    title: "Prepositions that always take the prepositional"
+    formula: "о (об, о́бо), при + prepositional"
+    explanation: >
+      о — "about" — and при take the prepositional. о is the case's namesake
+      and its most frequent trigger: ду́мать о рабо́те, говори́ть о кни́ге. It
+      lengthens to об before a vowel and о́бо in a few fixed phrases (о́бо мне),
+      but the case never changes.

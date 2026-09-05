@@ -115,3 +115,79 @@ describe('BlindEndings — Enter advances to the next empty box', () => {
     wrapper.unmount()
   })
 })
+
+// #646 — a wrong ending that is only wrong about the SPELLING of it. Typing
+// «кни́гы» is the seven-letter rule, not a gap in the genitive, and the drill
+// says so rather than leaving the learner to re-derive the whole case.
+describe('BlindEndings — rule reminders', () => {
+  // Stem "книг", so the endings drilled are и / и / е — the very column the
+  // seven-letter rule governs.
+  const kniga = {
+    lemma: 'кни́га',
+    stem: 'книг',
+    rows: [
+      { key: 'nom', label: 'Nominative' },
+      { key: 'gen', label: 'Genitive' },
+      { key: 'dat', label: 'Dative' },
+    ],
+    cols: [
+      { key: 'sg', label: 'Singular' },
+      { key: 'pl', label: 'Plural' },
+    ],
+    cells: [
+      { row: 'nom', col: 'pl', form: 'кни́ги' },
+      { row: 'gen', col: 'sg', form: 'кни́ги' },
+      { row: 'dat', col: 'sg', form: 'кни́ге' },
+    ],
+  }
+
+  const fill = async (inputs, values) => {
+    for (let i = 0; i < values.length; i++) await inputs[i].setValue(values[i])
+  }
+
+  it('names the rule a wrong ending broke', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm: kniga } })
+    await fill(wrapper.findAll('input.ending-input'), ['ы', 'и', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.text()).toContain('seven-letter rule')
+  })
+
+  it('says one rule once, however many cells it explains', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm: kniga } })
+    await fill(wrapper.findAll('input.ending-input'), ['ы', 'ы', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.findAll('.rule-hint')).toHaveLength(1)
+  })
+
+  it('offers the reminder on the retry, while it can still be acted on', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm: kniga, allowRetry: true } })
+    await fill(wrapper.findAll('input.ending-input'), ['ы', 'и', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.emitted('retry')).toBeTruthy()
+    expect(wrapper.text()).toContain('seven-letter rule')
+  })
+
+  it('drops the reminder once the retry fixes the spelling', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm: kniga, allowRetry: true } })
+    const inputs = wrapper.findAll('input.ending-input')
+    await fill(inputs, ['ы', 'и', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    await fill(inputs, ['и', 'и', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.findAll('.rule-hint')).toHaveLength(0)
+  })
+
+  it('says nothing about an ending the learner simply did not know', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm: kniga } })
+    await fill(wrapper.findAll('input.ending-input'), ['а', 'и', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.findAll('.rule-hint')).toHaveLength(0)
+  })
+
+  it('says nothing when the table is right', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm: kniga } })
+    await fill(wrapper.findAll('input.ending-input'), ['и', 'и', 'е'])
+    await wrapper.find('button.primary').trigger('click')
+    expect(wrapper.findAll('.rule-hint')).toHaveLength(0)
+  })
+})

@@ -15,7 +15,16 @@
 
 import { normalize } from './text.js'
 import { sample, shuffle } from './quiz.js'
-import { CASES, LOCATIVE, CASE_LABELS, CASE_HINTS, NUMBERS, NUMBER_LABELS } from './declension.js'
+import {
+  ACC_ANIMATE,
+  CASES,
+  LOCATIVE,
+  CASE_LABELS,
+  CASE_HINTS,
+  NUMBERS,
+  NUMBER_LABELS,
+} from './declension.js'
+import { paradigmFor } from './paradigm.js'
 import { GOVERNMENT_RULES } from './verbGovernment.js'
 import {
   FORM_HINT,
@@ -556,6 +565,36 @@ function selectStepsFor(target, word) {
 }
 
 /**
+ * The rule oracle's view of a slot (#646): the target word's paradigm, the row
+ * the slot wants, and where in the sentence it sits. Null when there is no case
+ * to reason about — a participle/gerund slot, or a word with no paradigm — in
+ * which case the oracle simply has nothing grammatical to say.
+ *
+ * An adjective agreeing with an animate noun wants the paradigm's derived
+ * animate-accusative row, not the plain one; a noun stores that distinction in
+ * its own accusative forms and carries `animate` instead.
+ */
+function ruleContextFor(word, target, tokens, idx) {
+  if (!word || !target?.case || target.form) return null
+  const paradigm = paradigmFor(word, null)
+  if (!paradigm) return null
+  const adjectival = word.pos !== 'noun'
+  const number = target.number ?? 'sg'
+  return {
+    paradigm,
+    wantCase:
+      target.case === 'acc' && adjectival && target.animate === true ? ACC_ANIMATE : target.case,
+    // A noun's columns are its numbers; an adjective's are gender, with the
+    // plural as a fourth column of its own.
+    wantCol: adjectival ? (number === 'pl' ? 'pl' : (target.gender ?? null)) : number,
+    animate: adjectival ? null : !!word.animate,
+    pos: word.pos,
+    tokens,
+    targetIndex: idx,
+  }
+}
+
+/**
  * Build a context exercise descriptor from a single annotated phrase + the word
  * record it teaches. Returns null if the annotation is malformed (token out of
  * range or empty).
@@ -604,6 +643,12 @@ export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
     kind: 'phrase-fix',
     tokens, // the correct sentence tokens
     targetIndex: idx,
+    // What the rule oracle needs to tell a broken RULE from an unlearned ending
+    // (#646): the word's own paradigm (so a wrong answer can be recognised as
+    // another case of the right word rather than a misspelling), which slot was
+    // wanted, and the sentence around it — a single-case preposition heading the
+    // slot is a rule worth naming.
+    ruleContext: ruleContextFor(word, target, tokens, idx),
     // Number of consecutive tokens the slot covers (>1 for multi-word lemmas).
     span,
     lemma,

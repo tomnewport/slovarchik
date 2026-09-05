@@ -10,7 +10,9 @@ import { computed, onMounted, reactive, ref } from 'vue'
 
 import { cellKey, endingOf } from '../../lib/paradigm.js'
 import { stripStress, normalize } from '../../lib/text.js'
+import { ruleReminder, spellingRuleMiss } from '../../lib/ruleOracle.js'
 import { speak } from '../../lib/speech.js'
+import { state as vocabState } from '../../stores/vocab.js'
 import SpeakButton from '../SpeakButton.vue'
 
 const props = defineProps({
@@ -45,6 +47,32 @@ function correctCell(key) {
 
 const allCorrect = computed(() => props.paradigm.cells.every((c) => correctCell(cellKey(c.row, c.col))))
 
+/**
+ * The spelling rules the wrong cells broke — and broke on their own, the ending
+ * being otherwise right (#646). A whole column can slip on one rule (кни́гы,
+ * ру́чкы, две́рцы), so the reminders are deduped by rule: the learner needs to
+ * hear "the seven-letter rule" once, not six times. The oracle sees the whole
+ * form, not the bare ending, because the letter the rule turns on is the one
+ * before it — usually the last letter of the stem.
+ */
+function ruleHintsFor(keys) {
+  const seen = new Map()
+  for (const key of keys) {
+    const cell = props.paradigm.cells.find((c) => cellKey(c.row, c.col) === key)
+    if (!cell) continue
+    const hint = ruleReminder(
+      spellingRuleMiss(stems[key] + (entries[key] ?? ''), cell.form),
+      vocabState.rules,
+    )
+    if (hint && !seen.has(hint.ruleId)) seen.set(hint.ruleId, hint)
+  }
+  return [...seen.values()]
+}
+
+// Reminders for the cells that slipped, refreshed at each check so a retry that
+// fixes the rule stops repeating it back.
+const ruleHints = ref([])
+
 function check() {
   if (checked.value) return
   if (!allCorrect.value && props.allowRetry && !retried.value) {
@@ -52,9 +80,13 @@ function check() {
     firstTryWrong.value = new Set(
       props.paradigm.cells.map((c) => cellKey(c.row, c.col)).filter((k) => !correctCell(k)),
     )
+    ruleHints.value = ruleHintsFor(firstTryWrong.value)
     emit('retry')
     return
   }
+  ruleHints.value = ruleHintsFor(
+    props.paradigm.cells.map((c) => cellKey(c.row, c.col)).filter((k) => !correctCell(k)),
+  )
   checked.value = true
   const records = props.paradigm.cells.map((c) => ({
     slot: cellKey(c.row, c.col),
@@ -157,6 +189,14 @@ onMounted(() => speak(props.paradigm.lemma))
       Not quite — fix the marked endings and try again
     </p>
 
+    <!-- A rule the marked endings broke, and the only thing wrong with them
+         (#646): the ending itself was right, its spelling wasn't. Deduped, so
+         one rule is stated once however many cells it explains. -->
+    <p v-for="hint in ruleHints" :key="hint.ruleId" class="rule-hint">
+      <strong class="rule-hint-headline">{{ hint.headline }}</strong>
+      <span class="rule-hint-detail">{{ hint.detail }}</span>
+    </p>
+
     <div class="row">
       <button v-if="!checked" class="primary" @click="check">Check</button>
     </div>
@@ -166,6 +206,25 @@ onMounted(() => speak(props.paradigm.lemma))
 <style scoped>
 .table-scroll {
   overflow-x: auto;
+}
+/* The rule reminder is a note to remember, not a grade — so it reads calm
+   beside the amber "not quite" line rather than competing with it. */
+.rule-hint {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.5rem 0.6rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  background: var(--card);
+  font-size: 0.9rem;
+  text-align: left;
+}
+.rule-hint-headline {
+  font-weight: 600;
+}
+.rule-hint-detail {
+  color: var(--muted);
 }
 .ptable {
   width: 100%;
