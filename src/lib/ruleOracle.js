@@ -13,7 +13,10 @@
 //
 //   1. ORTHOGRAPHIC rules — the letter after г/к/х/ж/ч/ш/щ/ц is decided by
 //      spelling convention, not by the case: и never ы, а/у never я/ю, е when
-//      unstressed and о under stress, ы in an ending after ц.
+//      unstressed and о under stress, ы in an ending after ц. A rule that says
+//      where a letter is REQUIRED also says where it is not, so the seven-letter
+//      rule fires from either side: ы after one of the seven breaks it, and so
+//      does и in the one place ы was the spelling all along.
 //   2. ANIMACY — the accusative of an animate noun (and of the adjective
 //      agreeing with it) copies the genitive. It is a rule about the *word*, not
 //      about the ending, so knowing it really does settle the answer.
@@ -32,6 +35,18 @@ import { normalize, stripStress } from './text.js'
 
 /** The vowels a stress mark can land on — used to find an unmarked monosyllable. */
 const VOWELS = 'аеёиоуыэюя'
+
+/** The seven letters that take и and never ы. */
+const SEVEN = 'гкхжчшщ'
+
+/**
+ * The paired consonants — the letters ы actually follows, and so the only ones
+ * the seven-letter rule can be read backwards against. ц is left out because it
+ * has a rule of its own (и in a root, ы in an ending), and so are ь, й and the
+ * vowels, after which ы never appears at all: no ы is possible there, so an и
+ * there is not the seven-letter rule being over-applied.
+ */
+const PAIRED = 'бвдзлмнпрстф'
 
 /** Every acute-accent variant `text.js` folds; here they mark the vowel before. */
 const STRESS_MARKS = new Set(['\u0301', '\u0341', '\u00B4', '\u02CA'])
@@ -73,18 +88,33 @@ function analyse(value) {
  * answer, and whether the answer stresses that vowel (null when unknown) — and
  * returns a variant name, or null when this isn't its business.
  *
- * Every rule is deliberately one-directional where the reverse is not the same
- * mistake: a learner who writes «парашу́т» has not broken the eight-letter rule,
- * they have hit one of its loanword exceptions, and telling them to write у for
- * ю would be the opposite of help.
+ * A rule fires from both sides only where both sides are the same mistake. The
+ * seven-letter rule is one: и and ы divide the same slot between them, so either
+ * letter in the other's place is the one rule misjudged. The eight-letter rule
+ * is not, and stays one-directional — а/у where я/ю belonged says nothing about
+ * г, к, х and the hushers, it is the ordinary hard/soft stem the drill is
+ * already teaching, while «парашу́т» for «парашю́т» is a loanword exception
+ * biting, and telling that learner to write у for ю would be the opposite of
+ * help.
  */
 export const SPELLING_RULES = Object.freeze([
   Object.freeze({
     id: 'spelling-i-not-y',
     name: 'the seven-letter rule',
-    match: ({ got, want, prev }) =>
-      'гкхжчшщ'.includes(prev) && got === 'ы' && want === 'и' ? 'i' : null,
-    detail: () => 'After г, к, х, ж, ч, ш and щ Russian writes и — never ы.',
+    match: ({ got, want, prev }) => {
+      // ы after one of the seven: the rule broken head-on.
+      if (SEVEN.includes(prev) && got === 'ы' && want === 'и') return 'i'
+      // и where ы was wanted, after a letter the rule never covered: the same
+      // rule over-applied. ы is the only letter the seven-letter rule ever
+      // mentions, and a learner who has heard "и, never ы" often takes that as
+      // "never ы", so saying how far the rule reaches is the whole fix.
+      if (PAIRED.includes(prev) && got === 'и' && want === 'ы') return 'y'
+      return null
+    },
+    detail: (variant) =>
+      variant === 'y'
+        ? 'и is the spelling after г, к, х, ж, ч, ш and щ — after the other hard consonants the letter is ы.'
+        : 'After г, к, х, ж, ч, ш and щ Russian writes и — never ы.',
   }),
   Object.freeze({
     id: 'spelling-a-u-not-ya-yu',
