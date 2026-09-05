@@ -15,6 +15,7 @@ import SpeakButton from '../components/SpeakButton.vue'
 import IdentifyForm from '../components/inflection/IdentifyForm.vue'
 import DragTable from '../components/inflection/DragTable.vue'
 import BlindEndings from '../components/inflection/BlindEndings.vue'
+import ParadigmShapeNote from '../components/inflection/ParadigmShapeNote.vue'
 
 const props = defineProps({ pos: { type: String, default: 'noun' } })
 
@@ -144,6 +145,9 @@ onUnmounted(() => {
         <template v-if="showStem && paradigm.stem"> · stem <b lang="ru">{{ paradigm.stem }}-</b></template>
       </div>
     </div>
+
+    <!-- Why the rows/columns differ from the last word's, when they do. -->
+    <ParadigmShapeNote v-if="paradigm" :paradigm="paradigm" />
 
     <component
       :is="activeMode.comp"
