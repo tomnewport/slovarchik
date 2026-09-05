@@ -374,6 +374,45 @@ node scripts/apply-translation-review.mjs review/proposals/*.jsonl --apply  # wr
 committed: it is the record of what was changed and why, and it is what makes a
 sweep of this size reviewable after the fact.
 
+## The copyedit stage
+
+The first pass judged **fidelity** — does the English say what the Russian
+says? That is the wrong question for asking whether the English is *English*,
+and asking both at once is what produced the residual calques. A reviewer
+comparing two texts is rewarded for tracking the source, and so is the metric:
+every calque #581 fixed scores *higher* on word alignment than the natural
+English that replaced it.
+
+| | |
+| --- | --- |
+| "A question arises for me" | ← aligns better |
+| "I have a question" | ← is English |
+
+So the copyedit reads the English with the Russian **hidden**, and the hiding
+is mechanical rather than a resolution to look away:
+
+```bash
+node scripts/copyedit-worklist.mjs --english          # stage A: English only
+node scripts/copyedit-worklist.mjs --resolve --ids …  # stage B: against the Russian
+```
+
+Stage A marks what is not natural English. Stage B resolves each mark against
+the Russian and confirms the rewrite does not reintroduce the over-translation
+the first pass removed. Only stage B may look at both.
+
+Over the 267-row `unnatural-english` tail (#598), stage A marked 62 and stage B
+confirmed 24. The 38 it dropped are the point of the second stage: read alone,
+"The police carried out the arrest of the suspect" and "The battalion went on
+the attack" look like officialese, and beside «Поли́ция произвела́ аре́ст» and
+«Батальо́н пошёл в ата́ку» they are the same register the Russian is in.
+
+**Stage B can also reject its own fix.** "I will come to because of the noise"
+is not English, and "The noise will bring me round" is — but «Я очну́сь от
+шу́ма» has a first-person subject, and making the noise the agent buys fluency
+with the person-shift this whole review exists to catch. "I will come round at
+the noise" is the rendering that owes nothing to either. A fluency fix that
+introduces a fidelity defect is not a fix.
+
 ## Verifying a sweep
 
 A pass that "improves" 3,000 sentences is only trustworthy if it can be checked:
