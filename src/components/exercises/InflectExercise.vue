@@ -19,6 +19,7 @@ import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
 import DragTable from '../inflection/DragTable.vue'
 import BlindEndings from '../inflection/BlindEndings.vue'
+import ParadigmShapeNote from '../inflection/ParadigmShapeNote.vue'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
 import CelebrationBurst from '../CelebrationBurst.vue'
@@ -130,6 +131,11 @@ onBeforeUnmount(() => {
       <span v-if="paradigm?.variantLabel" class="pill">{{ paradigm.variantLabel }}</span>
       <SpeakButton :text="exercise.lemma" />
     </div>
+
+    <!-- Why this table is missing the rows the last one had (a perfective has
+         no present, нача́ться has no «я / ты»). Shown before the answer, not
+         after: it explains which slots exist, never what goes in them. -->
+    <ParadigmShapeNote v-if="paradigm" :paradigm="paradigm" />
 
     <!-- Re-key on the exercise id so the sub-component fully resets per item. -->
     <component

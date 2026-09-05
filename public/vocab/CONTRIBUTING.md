@@ -591,6 +591,15 @@ Person/number keys (`1sg`…`3pl`) and `future` must be **quoted** in YAML.
   four-cell paradigm; without it the builder needs three filled cells and would
   drop the word. List the absent slots in `DEFECTIVE` (see the morphology oracle
   below) so the filler can never creep back.
+- **`paradigm_note` — why the table is that shape (optional).** The drill
+  explains a gappy verb table to the learner itself (`src/lib/paradigmShape.js`):
+  a perfective is told it has no present tense, нача́ться that it is third-person
+  only, повезти́ that it is impersonal. Those sentences are *derived* from the
+  shape, so most verbs need nothing here. Author `paradigm_note:` only where the
+  derived reason would be right about the shape and wrong about the cause —
+  говори́ться is third-person because it is a reflexive passive, not because
+  what it describes can't be done by a person — and the authored sentence
+  replaces it. Plain prose, no Markdown: it renders as text.
 - **`governs` — government frame (optional).** For a verb whose object isn't the
   plain accusative, name the frame it forces. Two shapes, and a verb may carry
   a list of both:
