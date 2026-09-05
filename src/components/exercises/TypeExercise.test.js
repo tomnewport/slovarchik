@@ -4,7 +4,7 @@ import TypeExercise from './TypeExercise.vue'
 import { keyboard, resetHint } from '../../stores/keyboard.js'
 import { state as vocabState } from '../../stores/vocab.js'
 import { state as progressState } from '../../stores/progress.js'
-import { loadFixtureWords } from '../../test/fixtures.js'
+import { loadFixtureWords, loadFixtureRules } from '../../test/fixtures.js'
 
 beforeAll(() => {
   vocabState.words = loadFixtureWords()
@@ -599,5 +599,75 @@ describe('TypeExercise', () => {
     await wrapper.find('.dict-toggle').trigger('click')
     const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
     expect(words).toContain('абзаце')
+  })
+})
+
+// #646 — a wrong answer that is only wrong about a rule. The drill's ordinary
+// "not quite" leaves the learner to guess which letter slipped and why; naming
+// the rule turns one miss into a thing they can apply everywhere.
+describe('TypeExercise — rule reminders', () => {
+  beforeAll(() => {
+    vocabState.rules = loadFixtureRules()
+  })
+
+  const mashina = {
+    ...exercise,
+    targets: ['машина=car'],
+    ru: 'маши́на',
+    en: 'car',
+    pos: 'noun',
+  }
+
+  it('names the rule a spelling slip broke', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: mashina } })
+    await wrapper.find('input[lang="ru"]').setValue('машы́на')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.rule-hint').text()).toContain('seven-letter rule')
+    // Still a retry, not a reveal: the reminder replaces nothing.
+    expect(wrapper.text()).not.toContain('Answer:')
+  })
+
+  it('never spells the answer out while the learner is still trying', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: mashina } })
+    await wrapper.find('input[lang="ru"]').setValue('машы́на')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.rule-hint').text()).not.toContain('машина')
+  })
+
+  it('keeps the reminder on screen once the answer is revealed', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: mashina } })
+    for (let i = 0; i < 2; i++) {
+      await wrapper.find('input[lang="ru"]').setValue('машы́на')
+      await wrapper.find('button.check').trigger('click')
+    }
+    expect(wrapper.text()).toContain('Answer:')
+    expect(wrapper.find('.rule-hint').exists()).toBe(true)
+  })
+
+  it('says nothing about an ordinary misspelling', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: mashina } })
+    await wrapper.find('input[lang="ru"]').setValue('квакозябр')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.rule-hint').exists()).toBe(false)
+  })
+
+  it('leaves a diagnosed word to the lexical correction, which says more', async () => {
+    // «сшить» for «шить» is a real word in the wrong aspect — a confusion, not
+    // a rule broken, and confusables.js already has the better sentence.
+    const sew = { ...exercise, targets: ['шить=to sew'], ru: 'шить', en: 'to sew', pos: 'verb' }
+    const wrapper = mount(TypeExercise, { props: { exercise: sew } })
+    await wrapper.find('input[lang="ru"]').setValue('сшить')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.rule-hint').exists()).toBe(false)
+  })
+
+  it('does not spend the retry differently — grading is untouched', async () => {
+    const wrapper = mount(TypeExercise, { props: { exercise: mashina } })
+    for (let i = 0; i < 2; i++) {
+      await wrapper.find('input[lang="ru"]').setValue('машы́на')
+      await wrapper.find('button.check').trigger('click')
+    }
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toMatchObject({ correct: false, correctedOnRetry: false })
   })
 })

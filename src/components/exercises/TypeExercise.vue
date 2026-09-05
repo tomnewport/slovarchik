@@ -42,6 +42,8 @@ import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
 import { hintTokensFor, diagnoseAnswer } from '../../stores/hints.js'
 import { correctionMessage } from '../../lib/confusables.js'
+import { ruleReminder, spellingRuleMiss } from '../../lib/ruleOracle.js'
+import { state as vocabState } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import AnnotatedEnglish from '../AnnotatedEnglish.vue'
 import WordFacts from '../WordFacts.vue'
@@ -81,6 +83,12 @@ const spellingMisses = ref(0)
 // The diagnosis of the latest lexical miss: {headline, detail, tier}, or null
 // when the answer was an ordinary slip. See lib/confusables.js.
 const correction = ref(null)
+// The spelling rule a miss broke — and broke on its own, the rest of the answer
+// being right (#646). Typing «кни́гы» is the seven-letter rule, not a gap in the
+// genitive, and saying so once saves a whole column of endings. Null for the
+// ordinary slip, which is nearly all of them. Grading is untouched: this is a
+// reminder, not a second chance.
+const ruleHint = ref(null)
 // After a close-but-wrong first phrase attempt, the per-character map of where
 // the learner slipped (shown while they retry). Empty when we don't reveal it.
 const errorCells = ref([])
@@ -196,6 +204,7 @@ function check() {
   })
   if (verdict) {
     correction.value = correctionMessage(verdict)
+    ruleHint.value = null
     feedback.value = null
     errorCells.value = []
     // The second attempt is aided whatever went wrong on the first — a lexical
@@ -209,6 +218,11 @@ function check() {
   }
 
   correction.value = null
+  // Did the answer break a spelling rule and nothing else? Then the rule is the
+  // whole of what went wrong, and it is worth more than "not quite".
+  ruleHint.value =
+    ruleReminder(spellingRuleMiss(typed.value, props.exercise.ru), vocabState.rules) ??
+    ruleHint.value
   spellingMisses.value += 1
   if (spellingMisses.value === 1) {
     // Grade *how* the attempt missed so the retry hint can say more than "not
@@ -410,6 +424,15 @@ onBeforeUnmount(() => setHintAllowed(true))
       </p>
     </template>
 
+    <!-- A rule the answer broke, and the only thing that went wrong with it
+         (#646). Named while the learner is still trying — it says which letters
+         the rule chooses between, never the word — and kept on screen once the
+         answer is in, so a miss that was never corrected still lands. -->
+    <p v-if="ruleHint" class="rule-hint">
+      <strong class="rule-hint-headline">{{ ruleHint.headline }}</strong>
+      <span class="rule-hint-detail">{{ ruleHint.detail }}</span>
+    </p>
+
     <div v-if="checked" class="feedback-block">
       <div class="feedback" :class="wasCorrect ? 'ok' : 'no'">
         <strong>{{ wasCorrect ? 'Correct' : 'Answer:' }}</strong>
@@ -523,6 +546,25 @@ onBeforeUnmount(() => setHintAllowed(true))
 }
 .correction-detail {
   color: var(--text);
+}
+/* The rule reminder is neither praise nor rejection — it is the thing to
+   remember, so it reads as a note rather than as a grade. */
+.rule-hint {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 0.5rem 0.6rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  background: var(--card);
+  font-size: 0.9rem;
+  text-align: left;
+}
+.rule-hint-headline {
+  font-weight: 600;
+}
+.rule-hint-detail {
+  color: var(--muted);
 }
 /* An escape hatch, not a call to action: a quiet link pushed to the far end of
    the row, so it is never mistaken for the primary button — nor for Next, which

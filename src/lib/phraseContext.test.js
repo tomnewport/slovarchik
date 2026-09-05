@@ -337,6 +337,100 @@ describe('buildFromPhrase', () => {
   })
 })
 
+// The rule oracle's view of a slot (#646): enough to tell a broken RULE from an
+// ending that simply isn't known yet. It needs a real paradigm, so this noun
+// carries its forms — the bare `sobaka` above deliberately has none.
+describe('ruleContext', () => {
+  const sahar = {
+    key: 'сахар=sugar',
+    pos: 'noun',
+    headword: 'са́хар',
+    ru: 'сахар',
+    animate: false,
+    forms: {
+      sg: {
+        nom: 'са́хар',
+        gen: 'са́хара',
+        dat: 'са́хару',
+        acc: 'са́хар',
+        ins: 'са́харом',
+        pre: 'са́харе',
+      },
+    },
+  }
+  const bezSahara = {
+    id: 'bez-sahara',
+    ru: 'Я пью ко́фе без са́хара.',
+    en: 'I drink coffee without sugar.',
+    target: { key: 'сахар=sugar', token: 5, case: 'gen', number: 'sg', rule: 'noun-gen-sg' },
+  }
+
+  it('carries the paradigm, the wanted slot and where it sits', () => {
+    const ex = buildFromPhrase(bezSahara, sahar, { rules })
+    expect(ex.ruleContext).toMatchObject({
+      wantCase: 'gen',
+      wantCol: 'sg',
+      animate: false,
+      pos: 'noun',
+      targetIndex: 4,
+    })
+    expect(ex.ruleContext.paradigm.cells.length).toBeGreaterThan(0)
+    expect(ex.ruleContext.tokens).toEqual(ex.tokens)
+  })
+
+  it('is null for a word with no paradigm to reason about', () => {
+    expect(buildFromPhrase(accPhrase, sobaka, { rules }).ruleContext).toBeNull()
+  })
+
+  it('is null for a slot with no case — a participle or a gerund', () => {
+    const gerund = {
+      id: 'dumaya',
+      ru: 'Ду́мая об э́том, я молчу́.',
+      en: 'Thinking about it, I stay silent.',
+      target: { key: 'думать=to think', token: 1, form: 'gerund' },
+    }
+    expect(buildFromPhrase(gerund, dumat, { rules })?.ruleContext ?? null).toBeNull()
+  })
+
+  it('asks for the animate-accusative row when an adjective agrees with one', () => {
+    const horoshiy = {
+      key: 'хороший=good',
+      pos: 'adjective',
+      headword: 'хоро́ший',
+      ru: 'хороший',
+      extra: {
+        declension: {
+          m_nom: 'хоро́ший',
+          m_gen: 'хоро́шего',
+          m_acc: 'хоро́ший',
+          f_nom: 'хоро́шая',
+          f_acc: 'хоро́шую',
+        },
+      },
+    }
+    const phrase = {
+      id: 'vizhu-horoshego-druga',
+      ru: 'Я ви́жу хоро́шего дру́га.',
+      en: 'I see a good friend.',
+      target: {
+        key: 'хороший=good',
+        token: 3,
+        case: 'acc',
+        gender: 'm',
+        animate: true,
+        rule: 'adj-acc-animate',
+      },
+    }
+    const ex = buildFromPhrase(phrase, horoshiy, { rules })
+    expect(ex.ruleContext).toMatchObject({
+      wantCase: 'acc_anim',
+      wantCol: 'm',
+      animate: null,
+      pos: 'adjective',
+    })
+  })
+})
+
 describe('buildContextExercise / canBuildContext', () => {
   const phrasesByKey = indexPhrases([accPhrase, verbPhrase])
   it('builds from the indexed phrase', () => {

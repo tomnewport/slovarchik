@@ -477,3 +477,106 @@ describe('PhraseFixExercise word facts', () => {
     expect(facts.props('wordKey')).toBe('бабочка=butterfly')
   })
 })
+
+// #646 — when one rule accounts for the whole miss, say it. The reveal already
+// carries the case's own explanation; this is the shorter thing to carry away,
+// and it is about the *word*, not the case: a spelling convention, animacy, or
+// a preposition that only ever takes one case.
+describe('PhraseFixExercise — rule reminders', () => {
+  // «без» + genitive, with the sugar paradigm the oracle reads the learner's
+  // answer against.
+  const saharParadigm = {
+    key: 'сахар=sugar',
+    pos: 'noun',
+    lemma: 'са́хар',
+    rows: [
+      { key: 'nom', label: 'Nominative' },
+      { key: 'gen', label: 'Genitive' },
+      { key: 'acc', label: 'Accusative' },
+    ],
+    cols: [{ key: 'sg', label: 'Singular' }],
+    cells: [
+      { row: 'nom', col: 'sg', form: 'са́хар' },
+      { row: 'gen', col: 'sg', form: 'са́хара' },
+      { row: 'acc', col: 'sg', form: 'са́хар' },
+    ],
+    stem: 'сахар',
+  }
+
+  const bezSahara = {
+    id: 'ex-prep',
+    kind: 'phrase-fix',
+    tokens: ['Я', 'пью', 'ко́фе', 'без', 'са́хара.'],
+    targetIndex: 4,
+    lemma: 'са́хар',
+    answerAccented: 'са́хара',
+    answer: 'сахара',
+    selectSteps: [],
+    slotLabel: 'Genitive · Singular',
+    ru: 'Я пью ко́фе без са́хара.',
+    en: 'I drink coffee without sugar.',
+    rule: null,
+    targets: ['сахар=sugar'],
+    ruleContext: {
+      paradigm: saharParadigm,
+      wantCase: 'gen',
+      animate: false,
+      pos: 'noun',
+      tokens: ['Я', 'пью', 'ко́фе', 'без', 'са́хара.'],
+      targetIndex: 4,
+    },
+  }
+
+  const answerWith = async (wrapper, value) => {
+    await wrapper.find('input[lang="ru"]').setValue(value)
+    await wrapper.find('form').trigger('submit')
+  }
+
+  it('names the preposition when another case of the right word was given', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: bezSahara } })
+    await answerWith(wrapper, 'сахар')
+    expect(wrapper.find('.rule-hint').text()).toContain('«без» always takes the genitive')
+  })
+
+  it('says nothing when the answer was right', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: bezSahara } })
+    await answerWith(wrapper, 'сахара')
+    expect(wrapper.find('.rule-hint').exists()).toBe(false)
+  })
+
+  it('says nothing about a plain misspelling — the character diff says more', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: bezSahara } })
+    await answerWith(wrapper, 'сахра')
+    expect(wrapper.find('.rule-hint').exists()).toBe(false)
+  })
+
+  it('names a spelling rule ahead of anything grammatical', async () => {
+    const kniga = {
+      ...bezSahara,
+      id: 'ex-spell',
+      tokens: ['Я', 'чита́ю', 'кни́ги.'],
+      targetIndex: 2,
+      lemma: 'кни́га',
+      answerAccented: 'кни́ги',
+      answer: 'книги',
+      ru: 'Я чита́ю кни́ги.',
+      en: 'I read books.',
+      targets: ['книга=book'],
+      ruleContext: null,
+    }
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: kniga } })
+    await answerWith(wrapper, 'книгы')
+    expect(wrapper.find('.rule-hint').text()).toContain('seven-letter rule')
+  })
+
+  it('holds the reminder back until the answer is in', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: bezSahara } })
+    expect(wrapper.find('.rule-hint').exists()).toBe(false)
+  })
+
+  it('copes with an exercise built before the oracle existed', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: { ...bezSahara, ruleContext: undefined } } })
+    await answerWith(wrapper, 'сахар')
+    expect(wrapper.find('.rule-hint').exists()).toBe(false)
+  })
+})

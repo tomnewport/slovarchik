@@ -94,6 +94,10 @@ src/
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
+                        #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
+                        #     a preposition with only one case) when the rule is the whole of what went wrong; the
+                        #     reminder is shown mid-attempt and never spells the answer out. Ordinary declension /
+                        #     conjugation gaps deliberately return nothing — that is the lesson, not a reminder.
                         #   comprehension  — what the Russian says that the English translation cannot (aspect, det/indet motion),
                         #     asked after a correct RU→EN answer; informational, never graded
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers

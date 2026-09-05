@@ -22,8 +22,10 @@ import { computed, nextTick, ref, onMounted } from 'vue'
 
 import { normalize } from '../../lib/text.js'
 import { revealDiff } from '../../lib/spellReveal.js'
+import { ruleMiss, ruleReminder } from '../../lib/ruleOracle.js'
 import { speak } from '../../lib/speech.js'
 import { playFeedback } from '../../stores/settings.js'
+import { state as vocabState } from '../../stores/vocab.js'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
 
@@ -108,6 +110,21 @@ const spellingOnlyMiss = computed(() => selectMissed.value && spellCorrect.value
 // Character-by-character reveal of a wrong spelling: what was typed against the
 // correct accented form, mismatches flagged on both rows.
 const spellReveal = computed(() => revealDiff(typed.value, item.value.answerAccented))
+
+// The rule the answer broke, when a rule is the whole of what went wrong (#646).
+// Two kinds reach this drill: a spelling rule (the ending was right, its letters
+// weren't) and a grammar one — the animate accusative, or a preposition that
+// only ever takes the case the slot wanted. Ordinary "didn't know the ending"
+// returns nothing; the reveal's own rule block already covers that. Read only in
+// the 'done' stage, so the reminder can be as explicit as it needs to be.
+const ruleHint = computed(() =>
+  stage.value === 'done' && !spellCorrect.value
+    ? ruleReminder(
+        ruleMiss(typed.value, item.value.answerAccented, item.value.ruleContext ?? {}),
+        vocabState.rules,
+      )
+    : null,
+)
 
 // Punctuation around the target token (e.g. a trailing full stop) is preserved
 // so the slot doesn't drop it when we swap in the lemma / answer. Combining marks
@@ -367,6 +384,15 @@ onMounted(() => {
           <p v-if="!spellCorrect && selectMissed" class="diff-note muted">
             You also picked the wrong {{ wrongDimsLabel }} — it needed {{ item.slotLabel }}.
           </p>
+
+          <!-- One rule accounts for the whole miss (#646) — the seven-letter
+               rule, animacy, a preposition with only one case. Said plainly and
+               first, above the case's own explanation below, because it is the
+               shorter thing to carry away. -->
+          <p v-if="ruleHint" class="rule-hint">
+            <strong class="rule-hint-headline">{{ ruleHint.headline }}</strong>
+            <span class="rule-hint-detail">{{ ruleHint.detail }}</span>
+          </p>
         </div>
 
         <!-- The full, correct sentence — safe to read aloud now. -->
@@ -625,6 +651,25 @@ onMounted(() => {
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   background: color-mix(in srgb, var(--primary) 5%, var(--card));
+}
+/* One line to carry away, so it sits above the collapsible rule blocks and
+   reads as a note rather than as a second verdict. */
+.rule-hint {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.6rem;
+  border-left: 3px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  background: var(--card);
+  font-size: 0.9rem;
+  text-align: left;
+}
+.rule-hint-headline {
+  font-weight: 600;
+}
+.rule-hint-detail {
+  color: var(--muted);
 }
 /* Quieter than the exception badge: this one is an invitation, not a warning. */
 .aside-badge {
