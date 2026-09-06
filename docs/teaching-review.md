@@ -6,7 +6,7 @@ what the app teaches, what the corpus can support, where the two don't meet.
 Every figure below was measured against the corpus and the real `src/lib`
 modules at the time of writing. The throughput numbers come from a simulation
 driving the actual engine (`assembleSession` → `buildExercises` → `wordState`),
-described in [Throughput](#the-main-deficiency-throughput-and-the-accuracy-cliff).
+described in [Throughput](#5-throughput-what-the-batch-gate-actually-costs).
 
 ---
 
@@ -222,7 +222,7 @@ So the *easiest* word exercise in the app is free recall, and the word-level
 ladder is free recall → production (type the Russian from English). Phrases have
 a scaffolded rung — the word bank — but words do not. Standard sequencing is
 recognition → cued recall → free recall, and the missing bottom rung is exactly
-what would let a learner build the accuracy the batch gate demands (§6).
+what would shorten the climb for every word (see route 4).
 
 (`README.md:25` still advertises "Match — pick the right translation (4
 choices)". That's stale.)
@@ -271,142 +271,139 @@ short, permanently.
 
 ---
 
-## 5. The main deficiency: throughput and the accuracy cliff
+## 5. Throughput: what the batch gate actually costs
 
-### Method
+### A correction
 
-A deterministic simulation drives the real engine — `assembleSession`,
-`buildExercises`, `wordState`, `reviewSchedule`, `buildBatchOptions` — over the
-real corpus, with the at-risk and lost pools computed as `stores/progress.js`
-computes them. The learner answers each attempt correctly with a fixed
-probability *p*, independent of dimension. 180 consecutive days, one "normal"
-(12-practice) session per day. Verified stable across three RNG seeds.
+An earlier draft of this review claimed that `batchComplete()` — every one of a
+batch's 23 words at target simultaneously, each held by a sliding window that
+un-meets on a miss — traps learners below ~85% accuracy, and that no batch
+completes in six months at 75%. **That was an artefact of the model, not a
+property of the app.** The simulation held per-attempt accuracy *constant per
+word*, so a word drilled 680 times was no better known than on its first
+attempt. A model like that cannot converge by construction, and it is precisely
+the assumption the engine's targeting is built to defeat.
 
-*p* is per-attempt accuracy across **all four dimensions**, including typing
-Russian from an English prompt unaided and speaking aloud. 80% on that mix is a
-good learner, not a struggling one.
+Re-run with accuracy that rises with exposure — `p(n) = a − (a − 0.35)·e^(−n/3)`
+for the nth attempt on a given (word, dimension), `a` the learner's plateau on a
+well-practised item — batches complete normally:
 
-### Result
+| plateau accuracy | batches completed | words reaching `learned`+ | sessions per batch |
+| ---: | ---: | ---: | --- |
+| 0.80 | 1 | 45 | — |
+| 0.85 | 6 | 110 | — |
+| 0.90 | 8 | 132 | — |
+| 0.95 | 12 | 155 | 13, 17, 20, 18, 18, 16, 15, 15, 13, 14, 8, 12 |
+| 0.99 | 13 | 173 | — |
 
-| per-attempt accuracy | batches completed | words reaching `learned`+ | median attempts per committed word | exercises done |
-| ---: | ---: | ---: | ---: | ---: |
-| 0.75 | **0** | 23 | **680** | ~6,100 |
-| 0.80 | 3 | 80 | 201 | ~6,400 |
-| 0.85 | 10 | 146 | 80 | ~6,650 |
-| 0.90 | 14 | 183 | 76 | ~6,450 |
-| 1.00 (perfect) | 40 | 231 | 55 | ~6,770 |
+### The targeting works
 
-At **p = 0.75 the learner completes no batch in six months.** They do ~6,100
-exercises — a median of **680 attempts on each of the same 23 words** — and end
-where they started. That is the "Duolingo kept drilling the same tiny slice"
-complaint in the README, reproduced by a different mechanism.
+The mechanism that saves it is exactly the one the design intends. Measured
+over a 180-session run at plateau 0.95: **71% of all attempts landing on
+open-batch words go to words not yet at target**, even though at any given
+moment most of the batch is already done. `currentPool` sorts worst-understood
+first, `drawN` front-biases the current bucket, `levelGapByDimension` weights
+each dimension by how far it still is from closing, and the current bucket
+narrows to words the slot's *own* dimension can still advance. Practice
+concentrates on the laggards, and the batch closes.
 
-The cliff sits between 0.75 and 0.85, inside the range of a perfectly
-respectable learner. Above 0.85 the engine behaves reasonably (~150–180 words
-in six months of daily practice — modest, but sane).
+The UI supports it too: the Home dashboard lists batch words **sorted not-done
+first**, each with per-dimension pips naming exactly what it still owes, and a
+tap opens `WordProgressModal` with "leave for later". The stall affordance I
+said was missing is already there, one tap from the row that sorts to the top.
 
-### Mechanism
+### What does survive
 
-Batch completion is `batchComplete()`: **every** word in the batch at or above
-target, evaluated simultaneously. Each word needs three sliding-window criteria
-to hold at once, and a window *un-meets* on a miss. The probability a 3-of-last-4
-window holds is `p⁴ + 4p³(1−p)`:
+**Batch duration is set by the slowest word in the batch.** A 23-word
+conjunctive gate means the batch is only as fast as its worst member, so a few
+words a learner genuinely can't get stretch it badly. Modelling that — most
+words plateau at 0.95, a fraction plateau low:
 
-| p | one window | three windows | 23 words at once |
-| ---: | ---: | ---: | ---: |
-| 0.75 | 0.74 | 0.40 | ~1e-9 |
-| 0.80 | 0.82 | 0.55 | ~1e-6 |
-| 0.85 | 0.89 | 0.71 | ~3e-4 |
-| 0.90 | 0.95 | 0.85 | ~0.03 |
+| fraction of hard words | their plateau | batches in 180 sessions | words learned | sessions per batch |
+| ---: | ---: | ---: | ---: | --- |
+| 0 | — | 12 | 155 | 13–20 |
+| 5% | 0.60 | 6 | 104 | 12, 17, **62**, 24, **39**, 16 |
+| 10% | 0.70 | 7 | 121 | 29, 19, 25, 31, 17, 28, 19 |
+| 10% | 0.60 | 5 | 100 | **56**, 26, 36, 21, 24 |
+| 10% | 0.50 | 1 | 31 | **168** |
 
-(An independence approximation, so it overstates the difficulty — the engine
-deliberately steers practice at the weakest word and dimension, which
-correlates the windows favourably. The simulation is the reliable number; the
-algebra explains its shape.)
+A typical batch runs 13–20 sessions. Two or three genuinely hard words in it
+make that 40–60. Ten percent of words at 50% plateau — a learner with a real
+blind spot — is a 168-session batch, which is the trap regime, just reached by
+a different road and by far fewer learners than I originally claimed.
 
-It is coupon-collecting with expiring coupons. Because the refresh buckets keep
-re-testing words that are already `learned` **while they are still in the
-batch**, every retest is a fresh chance to knock one back out. There is no
-ratchet: `wordState` recomputes from scratch every time, by design.
+This is a long tail, not a stall, and the escape hatch exists. The only thing
+worth doing about it is making the tail visible *as a tail*: the dashboard shows
+which words are outstanding but says nothing about how long this batch has been
+open relative to normal. A batch on session 45 looks exactly like a batch on
+session 8. A single line — "this batch has been open much longer than usual;
+these two words are holding it" — turns an invisible slog into a decision, using
+machinery that is already built.
 
-Two aggravating factors:
-
-1. **The progress bar recedes.** `batchExerciseProgress` recomputes `remaining`
-   from current events, so a slip *increases* it and the bar visibly goes
-   backwards.
-2. **There is no stall affordance.** The only escape from a stuck batch is to
-   open `WordProgressModal` on the offending word and choose "leave for later",
-   one word at a time. Nothing tells the learner the batch has stalled, and
-   `advanceBatch` is only ever called on completion.
-
-The design intent — words *should* be able to slip — is right. The defect is
-that slippage is wired to a conjunctive, 23-wide, all-at-once gate.
+**Absolute throughput is modest, and that is a design choice.** Every model I
+ran, fixed-accuracy or learning-curve, lands in the same place: **130–160 words
+in 180 daily sessions**, roughly 45 exercises per word learned, ~0.8 words a
+day. That is the honest price of four dimensions at two levels with overnight
+confirmation, and it buys depth an Anki deck does not. It is worth stating
+plainly somewhere the learner can see, because at that rate the 4,249-word
+corpus is a multi-year commitment and the B1 half of it is largely theoretical.
 
 ---
 
 ## 6. Routes for improvement, ranked
 
-**1. Break the conjunctive batch gate.** Highest impact by a wide margin;
-everything else is polish until this is fixed. Options, roughly in order of how
-much they change the model:
-
-- Ratchet at the word level: once a word reaches `learned`, require *two*
-  consecutive failed windows (or a failed confirmation review) to demote it, so
-  a single slip on a word already banked doesn't re-open the batch.
-- Complete a batch at a threshold (e.g. 90% of words at target) and roll the
-  stragglers into the next batch, which is what a teacher does.
-- Stop the refresh buckets from re-testing words that are still in the open
-  batch — let a word settle before it is put at risk again.
-- Failing all that: surface the stall. "17 of 23 done, 3 keep slipping — move
-  on and keep practising these?" A visible, one-tap escape converts a silent
-  six-month trap into a choice.
-
-**2. Add a recognition tier for words.** A four-choice or tap-the-match rung
-below typed free recall, gated to a word's first N encounters. This raises
-early-encounter accuracy directly, which is the input the batch gate is most
-sensitive to. It also restores what `README.md:25` still promises.
-
-**3. Wire free practice into the progression model.** `/declension`,
-`/phrase-fix`, `/listening`, `/speaking` already produce graded outcomes; they
-just don't record them. Recording learning-level attempts is low-risk (the
-mastery-scope guard already exists as a template for what *not* to record). It
-gives learners a second route to progress that isn't the stalling one.
-
-**4. Guard example-sentence level.** A corpus oracle in the mould of the
+**1. Guard example-sentence level.** A corpus oracle in the mould of the
 existing ones: flag a usage sentence whose hardest word sits ≥2 CEFR bands
 above its headword. ~400 A1 sentences would flag. Fixing them is authoring
-work, but the guard stops the drift — which is the pattern that has worked for
-stress, gender and prompts.
+work, but the guard stops the drift — which is the pattern that has already
+worked for stress, gender, morphology and prompts.
 
-**5. A third inert-form oracle**, covering `governs:`, imperatives and short
+**2. A third inert-form oracle**, covering `governs:`, imperatives and short
 forms — a direct sibling of `degreeCoverage` and `participleCoverage`. Then
 close the holes it reports. The 119 verbs with an unreachable `governs:` frame
 are the biggest single win in the corpus: the drill, the rules and the data all
-exist and are not connected.
+exist and are simply not connected to each other.
 
-**6. Fill adjective oblique-case examples.** Roughly one sentence each for 355
-adjectives, in gen/dat/ins/pre, would take the mastery context drill from
-"mostly nominative" to actually teaching agreement.
+**3. Fill adjective oblique-case examples.** Roughly one sentence each for the
+355 adjectives that have none, in gen/dat/ins/pre, would take the mastery
+context drill from "mostly nominative" to actually teaching agreement.
+
+**4. Add a recognition tier for words.** A four-choice or tap-the-match rung
+below typed free recall, gated to a word's first few encounters. The
+learning-curve model above starts words at 35% accuracy for a reason: the
+current first encounter of a word is a typed free-recall miss. A recognition
+rung shortens the climb for every word, which is the one lever that moves
+throughput without weakening any criterion. It also restores what
+`README.md:25` still promises.
+
+**5. Wire free practice into the progression model.** `/declension`,
+`/phrase-fix`, `/listening`, `/speaking` already produce graded outcomes; they
+just don't record them. Recording learning-level attempts is low-risk (the
+mastery-scope guard is a ready template for what *not* to record), and it gives
+a learner a second route to progress.
+
+**6. Surface batch age.** One line on the dashboard when a batch has been open
+well beyond typical, naming the one or two words holding it. Everything needed
+is already computed.
 
 **7. Surface the grammar proactively.** A browsable route over the 64 rules
 costs almost nothing and makes written content that already exists reachable
-without failing first. A stronger version: show the rule *before* the first
-drill of a case, not only after a miss.
+without failing first. Stronger version: show the rule *before* the first drill
+of a case, not only after a miss.
 
 **8. Aspect pairs for the unpaired 528 verbs**, prioritising the 376 at B1.
-Unlocks the contrast drill for the half of the verb corpus that currently can't
-run it.
+Unlocks the contrast drill for the half of the verb corpus that can't run it.
 
-**9. Split `daily life`.** 1,016 words is a bucket, not a topic; it currently
-crowds out every real collection at the top of the batch menu.
+**9. Split `daily life`.** 1,016 words is a bucket, not a topic; it crowds out
+every real collection at the top of the batch menu.
 
 **10. A stress drill.** The data is there for every form, audited three ways.
 "Where does the stress fall?" is a cheap exercise (two-to-four choice over the
 word's vowels) that tests something nothing else tests.
 
 **11. A persistent modality waiver** in settings, waiving `speaking` (and
-`hearing`) at the criteria level rather than per session, so a silent learner
-has a supported path instead of permanently stalled words.
+`hearing`) at the criteria level rather than per session, so a learner who
+won't speak aloud has a supported path instead of permanently stalled words.
 
 **12. Content above the sentence** — a short dialogue or paragraph tier for
 B1+. The biggest piece of work here and the one to do last, but it is the
@@ -417,16 +414,16 @@ ceiling on what the app can claim to teach.
 ## Summary
 
 The corpus is in good shape and the data discipline around it is better than
-most commercial products. The engine's design is thoughtful and unusually
-explicit about its own reasoning.
+most commercial products. The engine's design is thoughtful, unusually explicit
+about its own reasoning, and — tested against a learner who actually learns —
+it converges: practice concentrates on the laggards, batches close in 13–20
+sessions, and the dashboard already names the words holding one up.
 
-The two things holding it back are one bug-shaped defect and one gap:
+The real gap is not in the engine. It is that **carefully authored data does not
+reach a drill**: verb government (119 verbs, 100% unreachable), adjective short
+forms (79%), imperatives (41%), adjective oblique cases (no example for 70% of
+adjectives), and stress — audited three ways and never once asked for. Alongside
+that, example sentences are not level-checked against the word they teach, which
+is the one corpus dimension with no guard in a repo that guards six others.
 
-- **Batch completion is a conjunctive all-at-once gate over sliding windows
-  that can un-meet**, so learner throughput collapses below ~85% accuracy —
-  6,000 exercises and no progress at 75%.
-- **Carefully authored data does not reach a drill** — verb government (100%
-  unreachable), adjective short forms (79%), imperatives (41%), adjective
-  oblique cases (70% of adjectives), and stress (never asked at all).
-
-Both are tractable, and neither requires rethinking the approach.
+All of it is tractable, and none of it requires rethinking the approach.
