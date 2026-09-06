@@ -63,51 +63,54 @@ Case coverage in noun examples is well shaped and matches natural frequency:
 acc 26.4%   nom 25.2%   gen 18.5%   pre 12.8%   ins 10.0%   dat 6.6%   loc 0.6%
 ```
 
-### Gap 1 — the gloss layer covers reading, but `spell-phrase` asks for production
+### Gap 1 — the dictionary is three implementations and three omissions
 
-Example sentences routinely use vocabulary above their headword's level:
+Example sentences routinely use vocabulary above their headword's level — 49%
+of A1 sentences contain a harder word, 15% contain one two CEFR bands up. **This
+is intended**: the design is comprehensible input, where the learner meets far
+more words than they are asked to memorise and an on-screen dictionary carries
+the rest. The underlying data is complete — measured with the real
+`phraseHintTokens`, **100% of the 74,636 Cyrillic tokens in the example corpus
+resolve to a gloss**, which is what the 2,501 `learn: false` glossary entries
+buy, and getting to exactly zero misses is unusual.
 
-| headword level | example sentences | contain a harder word | contain a word ≥2 CEFR bands harder |
-| --- | ---: | ---: | ---: |
-| A1 | 2,704 | 49% | 15% |
-| A2 | 3,743 | 23% | 2% |
-| B1 | 7,713 | 2% | 0% |
+The defect is not the corpus. It is that the dictionary is **not wired
+consistently into the drills that need it**:
 
-**This is intended, and the machinery behind it is complete.** The design is
-comprehensible input: a learner meets far more words than they are being asked
-to memorise, and an on-screen dictionary carries the rest. Measured with the
-real `phraseHintTokens`, **100% of the 74,636 Cyrillic tokens across the whole
-example corpus resolve to a gloss** — nothing is untappable. That is what the
-2,501 `learn: false` glossary entries are for, and it is a genuinely unusual
-thing to have got to zero. `WordBankExercise` renders the Russian cue as a
-`HintablePhrase` *during* the attempt, so in `translate-phrase` and
-`listen-translate` an over-level word costs one tap and teaches itself. The
-same holds in the free `ListeningView` and `PhraseTesterView`.
+| exercise | Russian shown during the attempt | dictionary |
+| --- | --- | --- |
+| `translate-phrase` (WordBank, visual) | yes, as `HintablePhrase` | ✅ tap any word |
+| `spell-phrase` / `dictation` (TypeExercise) | no — it is the answer | ✅ `❓ Dictionary` disclosure: RU + EN for every word, assessed word withheld, unpenalised |
+| `listen-translate` (WordBank, audio) | **never**, before or after | ❌ |
+| `repeat-phrase` (SpeakExercise) | plain text | ❌ |
+| `inflect-context` (PhraseFixExercise) | plain `<span>{{ tok }}</span>` | ❌ |
+| free `ListeningView` / `PhraseTesterView` | `HintablePhrase` | ✅ |
 
-The gap is the one place the dictionary cannot help: **`spell-phrase`**. There
-the prompt is the English alone and the learner types the whole Russian
-sentence from scratch. There is nothing to tap — the Russian is the answer —
-and the only aid is the keyboard's next-letter hint, crawling letter by letter
-through a word they have not learned. For an A1 headword that means:
+Three observations follow.
 
-- 49% of sentences contain at least one word above A1,
-- a mean of **0.65 over-level words per sentence**,
-- **14% of the tokens the learner must produce** are above their level.
+**`inflect-context` is the worst omission.** It renders the sentence
+token-by-token as bare spans and asks the learner to choose the target's case,
+gender and number — which cannot be done without parsing the preposition and
+the surrounding nouns. It is also the mastery drill, so the deepest grammar work
+in the app is the work done with the least support.
 
-`dictation` is the milder version of the same thing (the audio is given).
-`PhraseFixExercise` is unaffected — stage 2 asks for a single form with the
-lemma supplied.
+**`listen-translate` never reveals the written form at all.** `HintablePhrase`
+sits on the `v-else` of `exercise.audio`, and the only plain render of
+`exercise.ru` is inside the reorder-confirmation branch. Answer it right and the
+spelling is never shown. Defensible for a hearing drill, but it means a word
+heard and not known stays unknown.
 
-The encounter gate does not catch this. `MIN_ENCOUNTERS_FOR_SPELLING = 2` is
-checked against the sentence's **owning** word (`p.source`) only, never against
-the other words in it, so a sentence qualifies for spelling on the strength of
-the one word it was authored for.
+**The free-practice views are better equipped than the guided session** — the
+main path is the weaker one.
 
-The fix is a selection filter, not a corpus rewrite: prefer — or restrict —
-`spell-phrase` to sentences whose non-target words are within the learner's
-reach. That keeps the comprehensible-input design exactly as intended for every
-receptive drill, and stops the one productive drill from demanding output the
-design never meant to require.
+**The gloss layer is also progress-blind.** `HintablePhrase` glosses every token
+identically whether the learner learned it a month ago or has never met it, and
+no exercise varies phrase rendering by `stateOf`. Rendering not-yet-learned
+words as bilingual chips (Russian + English inline) and learned words plain
+would make the comprehensible-input contract *visible*: the learner can see at a
+glance which words they are actually accountable for. The same applies to
+word-bank tiles, where an English tile for an unlearned word could carry its
+Russian.
 
 Sentence length carries no gradient, incidentally: mean 4.6 words and p90 of 6
 at *every* level from A1 to C1.
@@ -371,12 +374,12 @@ corpus is a multi-year commitment and the B1 half of it is largely theoretical.
 
 ## 6. Routes for improvement, ranked
 
-**1. Filter `spell-phrase` on whole-sentence reach.** The cheapest correction
-in this list and the only one touching the drill mix. Extend the existing
-spelling gate so a phrase qualifies on every word it contains, not just the one
-it was authored for. No corpus authoring, no change to the receptive drills,
-and it removes the one place where the comprehensible-input design is asked to
-do a job a dictionary can't do.
+**1. One glossed-phrase component, used by every phrase-bearing exercise, and
+made progress-aware.** Extract the shared component, adopt it in
+`inflect-context`, `listen-translate` and `repeat-phrase`, and let it render
+not-yet-learned words as bilingual chips. This is the highest-value change in
+the list: it closes three omissions, collapses three implementations into one,
+and turns an implicit design contract into something the learner can see.
 
 **2. A third inert-form oracle**, covering `governs:`, imperatives and short
 forms — a direct sibling of `degreeCoverage` and `participleCoverage`. Then
@@ -439,15 +442,71 @@ about its own reasoning, and — tested against a learner who actually learns �
 it converges: practice concentrates on the laggards, batches close in 13–20
 sessions, and the dashboard already names the words holding one up.
 
-The real gap is not in the engine. It is that **carefully authored data does
-not reach a drill**: verb government (119 verbs, 100% unreachable), adjective
-short forms (79%), imperatives (41%), adjective oblique cases (no example for
-70% of adjectives), and stress — audited three ways and never once asked for.
+The real gap is not in the engine, and it is not the corpus's over-level
+vocabulary — that is deliberate comprehensible input backed by a gloss layer
+with 100% token coverage. It is **wiring**: authored data and built machinery
+that never reach the learner.
 
-The corpus's over-level example vocabulary is *not* on that list: it is
-deliberate comprehensible input, backed by a tap-gloss layer with 100% token
-coverage, and it works. It only bites in `spell-phrase`, which asks the learner
-to produce a sentence rather than read one, and that is a selection filter away
-from being fixed.
+- The dictionary exists in three different forms and is absent from three
+  exercises, including the mastery context drill where it matters most.
+- Verb government is 100% unreachable (119 verbs, a whole drill, and the two
+  never meet), adjective short forms 79%, imperatives 41%.
+- 70% of adjectives have no oblique-case example, so the drill that teaches
+  agreement mostly cannot.
+- Stress is audited three ways and never once asked for.
 
 All of it is tractable, and none of it requires rethinking the approach.
+
+---
+
+## 7. Issues this review would raise
+
+Grouped by theme, roughly in the order I'd file them. Sizes are rough: **S** a
+session's work, **M** a focused change, **L** sustained authoring or design.
+
+### A. Dictionary consistency
+
+| # | Issue | Size |
+| --- | --- | --- |
+| 1 | **Extract one glossed-phrase component and use it in every phrase-bearing exercise.** Today: `HintablePhrase` in `WordBankExercise` (visual only), a `❓ Dictionary` disclosure in `TypeExercise`, and nothing in three others. Three implementations of one idea. | M |
+| 2 | **`inflect-context` has no dictionary.** `PhraseFixExercise` renders the sentence as bare `<span>{{ tok }}</span>` during the attempt, then asks for case/gender/number — which needs the preposition and surrounding nouns parsed. The mastery drill is the least supported one. | S |
+| 3 | **`listen-translate` never shows the Russian, before or after grading.** `HintablePhrase` is on the `v-else` of `exercise.audio`; the only plain render is in the reorder-confirm branch. Reveal the glossed sentence after grading. | S |
+| 4 | **`repeat-phrase` shows the Russian as plain text.** Pronunciation is what's assessed, so a gloss costs nothing and stops the learner reciting a sentence they can't parse. | S |
+| 5 | **Make the gloss layer progress-aware: bilingual chips for unlearned words.** `HintablePhrase` is blind to `stateOf`, and no exercise varies phrase rendering by word state. Render not-yet-learned words as RU+EN chips, learned words plain — so the learner can see which words they are actually accountable for. Extend to word-bank tiles (an English tile for an unlearned word carries its Russian). | M |
+| 6 | **`MIN_ENCOUNTERS_FOR_SPELLING` checks only the sentence's owning word** (`p.source`), never the others in it. Lower priority now the `❓ Dictionary` is confirmed present, but the gate is asymmetric with what it claims to protect. | S |
+
+### B. Authored data that reaches no drill
+
+| # | Issue | Size |
+| --- | --- | --- |
+| 7 | **Verb government is 100% unreachable.** 119 verbs declare `governs:`; not one owns a government-annotated sentence. `/verb-government` runs on 84 phrases owned by *nouns*. The frame surfaces only on the `/vocab` word card. Drill, rules and data all exist and never meet. | M |
+| 8 | **Add a third coverage oracle** — sibling of `degreeCoverage.js` / `participleCoverage.js` — for `governs:`, imperatives and short forms, with a test asserting zero, so these can't re-accumulate. | S |
+| 9 | **Imperative examples missing for 166 of 408 verbs (41%)** that store one. A1 grammar (`Скажи́те`, `Дай`), 4.4% of annotated verb sentences. | L |
+| 10 | **Adjective short forms: 112 of 141 (79%) inert.** Stored, stressed, unreachable. | L |
+| 11 | **Adjective oblique cases: 355 of 506 adjectives (70%) have no gen/dat/ins/pre example.** Annotations are 54% nominative, 26% accusative. The mastery context drill mostly cannot teach agreement — the thing it exists for. | L |
+
+### C. Corpus
+
+| # | Issue | Size |
+| --- | --- | --- |
+| 12 | **528 of 978 verbs (54%) carry no aspect `pair:`**, 376 of them at B1, so `buildContrastDrill` — the app's best exercise — can't run for half the verb corpus. Zero dangling refs, so this is missing data, not broken data. | L |
+| 13 | **Split `daily life`.** 1,016 words (24% of the corpus), 170 of the 552 A1 words. `assembleOptions` ranks by size, so it heads the batch menu essentially always. | M |
+| 14 | **Only 6% of nouns have ≥4 distinct cases exampled**; 26.6% of stored declension cells have any context sentence. The context drill samples each table narrowly. | L |
+
+### D. Exercise structure
+
+| # | Issue | Size |
+| --- | --- | --- |
+| 15 | **No recognition tier for words.** The easiest word exercise is typed free recall; there is no rung below it. Gating a 4-choice/tap-match rung to a word's first few encounters shortens the climb for every word. | M |
+| 16 | **Free practice records no attempts.** `/declension`, `/verbs`, `/adjectives`, `/pronouns`, `/phrases`, `/listening`, `/speaking`, `/phrase-fix` all produce graded outcomes and feed nothing back. `InflectionView` touches the store only to mark a table clean. | M |
+| 17 | **Grammar is reveal-only.** 64 written rules, no browsable route, and the richest presentation sits inside a mastery drill most learners barely reach. | M |
+| 18 | **Stress is never produced or tested** — stripped at grading everywhere, despite three audit layers holding the correct placement for every form. A "where does the stress fall?" drill over the word's vowels is cheap. | M |
+| 19 | **No persistent modality waiver.** `speaking` (3 attempts) and `hearing` are hard requirements for every word; "Skip speaking" is per-session only. | S |
+| 20 | **Surface batch age.** A batch on session 45 looks identical to one on session 8. Name the one or two words holding it — everything needed is already computed. | S |
+| 21 | **Nothing above sentence level.** Mean 4.6 words, max 11, no dialogue or paragraph, for a corpus 65% at B1+. | L |
+
+### E. Documentation
+
+| # | Issue | Size |
+| --- | --- | --- |
+| 22 | **`README.md:25` is stale** — still advertises "Match — pick the right translation (4 choices)", replaced by the type-ahead in #473. | S |
