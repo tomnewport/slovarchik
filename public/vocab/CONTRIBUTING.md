@@ -416,7 +416,10 @@ tappable word translatable without dragging those words into the drills, add a
 
 A `learn: false` entry is indexed for hints but filtered out of the vocab,
 declension and phrase drills and the batch/progress engine (see `learnableWords`
-in `vocabBuild.js`). It needs only the usual `cefr_level` + `en_gb`, an
+in `vocabBuild.js`). Promoting one into the curriculum later means removing the
+stub when its key is the lemma itself, and recording that in
+`review/glossary-promotions.jsonl` — see
+[`docs/glossary-promotion.md`](../../docs/glossary-promotion.md). It needs only the usual `cefr_level` + `en_gb`, an
 `accented`/`forms` entry for each surface form that appears, and **no** full
 declension table.
 

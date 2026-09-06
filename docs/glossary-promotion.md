@@ -70,6 +70,23 @@ the vocab files**; `--scaffold` prints one entry to stdout for you to complete.
 5. **Paste** the finished entry into the file the header names (`nouns.yml`,
    `verbs.yml`, …), removing the scaffold's `#` comment header.
 
+   **If the glossary key is the lemma itself** — «арбуз», not «людей» — the stub
+   has to come out of `glossary.yml` at the same time, or the natural key is a
+   duplicate and `vocabBuild.test.js` fails. Removing it trips `verify:review`,
+   which treats a key the replay produces but the corpus has lost as the audit
+   trail failing to reproduce itself. Record the promotion instead, one JSON
+   object per line in **`review/glossary-promotions.jsonl`**:
+
+   ```json
+   {"key":"арбуз=watermelon","to":"арбуз=watermelon","file":"nouns.yml","why":"Promoted to the curriculum (#636); lemma-keyed stub, so it collided with the new entry's natural key."}
+   ```
+
+   `to` is the curriculum key the word became. The check is not a mute: it
+   passes only if `to` is really in the corpus and really learnable, so a
+   promotion recorded but never finished still fails. An inflected stub the new
+   declension table now covers («лимона») is worth removing and recording the
+   same way, even though it collides with nothing.
+
 6. **Sort & generate:**
    ```bash
    node scripts/sort-vocab.js public/vocab/<file>.yml
