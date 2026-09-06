@@ -193,7 +193,13 @@ npm run build      # production build into dist/
 npm run preview    # serve the production build locally
 npm run gen:icons  # regenerate the PWA PNG icons
 npm run gen:manifest # regenerate the (uncommitted) public/vocab/manifest.json
+npm run check:corpus # the corpus gates CI runs and `npm test` doesn't (~5s)
+npm run check:ci     # everything CI's `test` job runs, in order
 ```
+
+`npm test` is not the whole of CI: three corpus gates (`verify:review`,
+`check:inflect:cases`, `check:prompts`) run only in the workflow. `npm run
+check:ci` runs the same list locally, so "will this pass?" is one command.
 
 ## Adding words
 

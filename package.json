@@ -17,6 +17,8 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "lint": "eslint . --ext .js,.vue",
+    "check:ci": "node scripts/check-ci.mjs",
+    "check:corpus": "node scripts/check-ci.mjs --corpus",
     "gen:manifest": "node scripts/gen-manifest.mjs",
     "check:stress": "node scripts/check-stress.mjs",
     "check:morph": "node scripts/check-morphology.mjs",

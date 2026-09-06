@@ -9,6 +9,10 @@ version.
 > 1. Add/edit an entry in the right `*.yml` file (schema below).
 > 2. Keep the file sorted: `node scripts/sort-vocab.js public/vocab/<file>.yml`.
 > 3. `npm test` — the suites guard the shape. Fix anything red.
+> 4. `npm run check:corpus` — the three **corpus gates** that fail CI and run
+>    nowhere else (~5s). A green `npm test` says nothing about them, and a
+>    vocab change is exactly the kind that trips them. `npm run check:ci` runs
+>    the whole CI `test` job if you'd rather have the full verdict.
 >
 > There's no manifest step: `manifest.json` is generated (and not committed), so
 > just edit the YAML and commit that.
@@ -1113,6 +1117,25 @@ Keeping files sorted is mechanical — run `node scripts/sort-vocab.js
 public/vocab/<file>.yml`, which reorders entries by Russian headword while
 preserving the header/`meta` block and each entry verbatim.
 
+### …and what runs only in CI
+
+Three more checks read these files, fail the build, and are **not** part of
+`npm test` — they are slower and corpus-wide, so they stay separate:
+
+| Command | Fails when |
+| --- | --- |
+| `npm run verify:review` | replaying `review/proposals/*.jsonl` onto the review's base no longer reproduces the committed YAML |
+| `npm run check:inflect:cases` | an `inflect:` annotation's case contradicts the case its governing preposition forces |
+| `npm run check:prompts` | the set of English prompts matching more than one Russian sentence has grown |
+
+`npm run check:corpus` runs all three in CI's order; `npm run check:ci` runs
+the whole `test` job (those three plus `lint`, `test:coverage`, `build`).
+
+Everything else in `scripts/` — `check:stress`, `check:morph`, `audit:cefr`,
+`audit:translations`, `audit:gender`, `coverage:facts` — is a **worklist**, not
+a gate: it ranks findings for a human to work down and is not wired to CI, so
+a clean run there is not a prediction about the build.
+
 ## The morphology oracle (is this form real Russian?)
 
 Shape tests prove a cell has the right *fields*; the stress test proves the
@@ -1151,5 +1174,5 @@ learned to ignore".
 3. Register the filename → POS in the `FILES` list in
    [`scripts/gen-manifest.mjs`](../../scripts/gen-manifest.mjs) — the next build
    picks it up into the (generated) manifest automatically.
-4. `npm test`.
+4. `npm test`, then `npm run check:corpus`.
 </content>

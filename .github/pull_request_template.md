@@ -22,5 +22,5 @@ apply the `no-issue` label. The CI "PR issue link" check requires one of these.
 
 ## Checklist
 
-- [ ] `npm run lint` and `npm test` pass
+- [ ] `npm run check:ci` passes (lint + the three corpus gates + coverage + build — the same list, in the same order, as CI's `test` job; `npm run check:corpus` is the ~15s subset for vocab-only changes)
 - [ ] Updated the AGENTS.md "Project map" if a route, store, or `src/lib/` module changed

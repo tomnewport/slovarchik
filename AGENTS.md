@@ -110,6 +110,7 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
 e2e/                    # Playwright specs
 docs/                   # design notes for in-flight features
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
+                        #   check-ci.mjs runs CI's `test` job locally, in order
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
@@ -132,11 +133,32 @@ npm run lint        # eslint (correctness rules; formatting left to Prettier/edi
 npm run build       # production build into dist/
 npm run preview     # serve the production build
 npm run test:e2e    # Playwright end-to-end tests
+
+# Corpus gates — they read the YAML in public/vocab/, they fail CI, and
+# nothing else runs them (a green `npm test` says nothing about them):
+npm run verify:review        # replaying review/proposals reproduces the committed vocab
+npm run check:inflect:cases  # every inflect: annotation agrees with the case its preposition governs
+npm run check:prompts        # no growth in English prompts matching more than one Russian sentence
+
+# The two that answer "did I break CI?"
+npm run check:corpus  # just the three gates above, in CI's order (~5s)
+npm run check:ci      # the whole CI `test` job, in order, stopping where it would
 ```
 
-CI (`.github/workflows/ci.yml`) runs `lint`, `test:coverage`, `build`, and the
-Playwright `e2e` job on every push, publishing the coverage table to the run's
-job summary via `scripts/coverage-summary.mjs`.
+CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `verify:review`
+(only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
+`check:prompts`, `test:coverage` and `build` in its `test` job, plus the
+Playwright `e2e` job — every one of them on every push, publishing the coverage
+table to the run's job summary via `scripts/coverage-summary.mjs`.
+`npm run check:ci` runs that same `test` job list locally and gives the same
+verdict; `scripts/check-ci.test.mjs` reads `ci.yml` and fails if the two ever
+drift apart, so this paragraph cannot go stale unnoticed.
+
+**Gates vs worklists.** Everything above fails the build. The rest of
+`scripts/` — `check:stress`, `check:morph`, `audit:cefr`, `audit:translations`,
+`audit:gender`, `coverage:facts`, `promote:glossary` — are **worklists**: they
+rank findings for a human to work down, are not wired to CI, and passing one
+tells you nothing about whether CI will accept your change.
 
 ## Where to make common changes
 
