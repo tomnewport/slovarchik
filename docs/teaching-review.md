@@ -63,36 +63,54 @@ Case coverage in noun examples is well shaped and matches natural frequency:
 acc 26.4%   nom 25.2%   gen 18.5%   pre 12.8%   ins 10.0%   dat 6.6%   loc 0.6%
 ```
 
-### Gap 1 — example sentences outrun the word they teach
+### Gap 1 — the gloss layer covers reading, but `spell-phrase` asks for production
 
-Nothing checks that a word's example sentences are built from vocabulary at or
-below that word's own level. They frequently are not:
+Example sentences routinely use vocabulary above their headword's level:
 
 | headword level | example sentences | contain a harder word | contain a word ≥2 CEFR bands harder |
 | --- | ---: | ---: | ---: |
-| A1 | 2,704 | **49%** | **15%** |
+| A1 | 2,704 | 49% | 15% |
 | A2 | 3,743 | 23% | 2% |
 | B1 | 7,713 | 2% | 0% |
 
-For A1 headwords the *hardest word in the sentence* lands at A1 only 51% of the
-time; 14% of A1 sentences peak at B1 and 1% at B2. Concretely:
+**This is intended, and the machinery behind it is complete.** The design is
+comprehensible input: a learner meets far more words than they are being asked
+to memorise, and an on-screen dictionary carries the rest. Measured with the
+real `phraseHintTokens`, **100% of the 74,636 Cyrillic tokens across the whole
+example corpus resolve to a gloss** — nothing is untappable. That is what the
+2,501 `learn: false` glossary entries are for, and it is a genuinely unusual
+thing to have got to zero. `WordBankExercise` renders the Russian cue as a
+`HintablePhrase` *during* the attempt, so in `translate-phrase` and
+`listen-translate` an over-level word costs one tap and teaches itself. The
+same holds in the free `ListeningView` and `PhraseTesterView`.
 
-- `бабушка` [A1] → «Ба́бушка печёт вку́сные пироги́» — `печь` is B1
-- `брат` [A1] → «Врач запреща́ет бра́ту кури́ть» — `запрещать` is B1
-- `автобус` [A1] → «Авто́бус опозда́л на де́сять мину́т» — `опоздать` is B1
+The gap is the one place the dictionary cannot help: **`spell-phrase`**. There
+the prompt is the English alone and the learner types the whole Russian
+sentence from scratch. There is nothing to tap — the Russian is the answer —
+and the only aid is the keyboard's next-letter hint, crawling letter by letter
+through a word they have not learned. For an A1 headword that means:
 
-This matters because the phrase drills (`translate-phrase`, `listen-translate`,
-`spell-phrase`, `dictation`, and the mastery `inflect-context`) draw a word's
-**own** usage sentences. A learner in their first batch is asked to translate,
-hear and type sentences assembled out of vocabulary they will not be offered
-for another year of study. The word being taught is the easy part of its own
-example.
+- 49% of sentences contain at least one word above A1,
+- a mean of **0.65 over-level words per sentence**,
+- **14% of the tokens the learner must produce** are above their level.
 
-Sentence length carries no gradient either — mean 4.6 words and p90 of 6 at
-*every* level from A1 to C1. The corpus's only difficulty axis is the headword.
+`dictation` is the milder version of the same thing (the audio is given).
+`PhraseFixExercise` is unaffected — stage 2 asks for a single form with the
+lemma supplied.
 
-This is the one corpus dimension with no guard, in a repo that guards stress,
-morphology, gender balance, prompt ambiguity, gloss coverage and CEFR cohorts.
+The encounter gate does not catch this. `MIN_ENCOUNTERS_FOR_SPELLING = 2` is
+checked against the sentence's **owning** word (`p.source`) only, never against
+the other words in it, so a sentence qualifies for spelling on the strength of
+the one word it was authored for.
+
+The fix is a selection filter, not a corpus rewrite: prefer — or restrict —
+`spell-phrase` to sentences whose non-target words are within the learner's
+reach. That keeps the comprehensible-input design exactly as intended for every
+receptive drill, and stops the one productive drill from demanding output the
+design never meant to require.
+
+Sentence length carries no gradient, incidentally: mean 4.6 words and p90 of 6
+at *every* level from A1 to C1.
 
 ### Gap 2 — adjective oblique cases are barely exampled
 
@@ -184,8 +202,9 @@ A1  552 (13.0%)    A2  926 (21.8%)    B1 2081 (49.0%)    B2 665 (15.7%)   C1 25
 ```
 
 B1 at 49% is acknowledged in `CEFR-AUDIT.md` as a judgement call already
-screened once. I'd leave it alone; the throughput problem below means almost no
-learner reaches it.
+screened once. I'd leave it alone: at the throughput measured in §5 (130–160
+words per 180 daily sessions) very few learners reach the band at all, so it is
+not where a correction would be felt.
 
 ---
 
@@ -352,11 +371,12 @@ corpus is a multi-year commitment and the B1 half of it is largely theoretical.
 
 ## 6. Routes for improvement, ranked
 
-**1. Guard example-sentence level.** A corpus oracle in the mould of the
-existing ones: flag a usage sentence whose hardest word sits ≥2 CEFR bands
-above its headword. ~400 A1 sentences would flag. Fixing them is authoring
-work, but the guard stops the drift — which is the pattern that has already
-worked for stress, gender, morphology and prompts.
+**1. Filter `spell-phrase` on whole-sentence reach.** The cheapest correction
+in this list and the only one touching the drill mix. Extend the existing
+spelling gate so a phrase qualifies on every word it contains, not just the one
+it was authored for. No corpus authoring, no change to the receptive drills,
+and it removes the one place where the comprehensible-input design is asked to
+do a job a dictionary can't do.
 
 **2. A third inert-form oracle**, covering `governs:`, imperatives and short
 forms — a direct sibling of `degreeCoverage` and `participleCoverage`. Then
@@ -419,11 +439,15 @@ about its own reasoning, and — tested against a learner who actually learns �
 it converges: practice concentrates on the laggards, batches close in 13–20
 sessions, and the dashboard already names the words holding one up.
 
-The real gap is not in the engine. It is that **carefully authored data does not
-reach a drill**: verb government (119 verbs, 100% unreachable), adjective short
-forms (79%), imperatives (41%), adjective oblique cases (no example for 70% of
-adjectives), and stress — audited three ways and never once asked for. Alongside
-that, example sentences are not level-checked against the word they teach, which
-is the one corpus dimension with no guard in a repo that guards six others.
+The real gap is not in the engine. It is that **carefully authored data does
+not reach a drill**: verb government (119 verbs, 100% unreachable), adjective
+short forms (79%), imperatives (41%), adjective oblique cases (no example for
+70% of adjectives), and stress — audited three ways and never once asked for.
+
+The corpus's over-level example vocabulary is *not* on that list: it is
+deliberate comprehensible input, backed by a tap-gloss layer with 100% token
+coverage, and it works. It only bites in `spell-phrase`, which asks the learner
+to produce a sentence rather than read one, and that is a selection filter away
+from being fixed.
 
 All of it is tractable, and none of it requires rethinking the approach.
