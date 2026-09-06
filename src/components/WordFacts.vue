@@ -34,7 +34,14 @@ const props = defineProps({
 const emit = defineEmits(['open-word'])
 
 /** Icon per fact kind — the closed set from vocabBuild.FACT_KINDS. */
-const KIND_ICON = { build: '🧩', root: '🌱', origin: '📜', memory: '💡', note: '✎' }
+const KIND_ICON = {
+  build: '🧩',
+  root: '🌱',
+  origin: '📜',
+  region: '📍',
+  memory: '💡',
+  note: '✎',
+}
 
 const byKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
 const record = computed(() => byKey.value.get(props.wordKey) ?? null)
@@ -76,6 +83,11 @@ function relationLabel(row) {
       return `also means “${record.value?.meaning || row.en}”`
     case 'root':
       return 'same root'
+    case 'region':
+      // Neutral on purpose: the three shapes this covers (another name for the
+      // same thing, another spelling, and the same word covering a different
+      // range) can't share a sharper label. The fact's prose says which.
+      return row.where ? `used in ${row.where}` : 'used elsewhere'
     case 'see-also':
       // A `see:` on a note is a pointer, not a claim about morphology.
       return 'see also'

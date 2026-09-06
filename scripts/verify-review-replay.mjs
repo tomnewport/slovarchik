@@ -291,14 +291,56 @@ try {
 
   // 9. compare, word by word
   const vocabDir = join(repo, 'public', 'vocab')
+
+  // A word may legitimately *leave* a file: promoting a gloss-only entry into
+  // the curriculum (#326) moves it out of glossary.yml, and where the stub was
+  // keyed on the lemma rather than an inflected surface form — «арбуз», not
+  // «людей» — leaving it behind would make the natural key a duplicate. That is
+  // the one way the corpus loses a key without losing the word, so it is
+  // recorded rather than tolerated: each row names where the word went, and the
+  // promotion only counts if it is actually there and actually learnable.
+  const promotions = new Map()
+  const promotionsPath = join(repo, 'review', 'glossary-promotions.jsonl')
+  if (existsSync(promotionsPath)) {
+    for (const line of readFileSync(promotionsPath, 'utf8').split('\n')) {
+      if (!line.trim()) continue
+      const row = JSON.parse(line)
+      promotions.set(row.key, row)
+    }
+  }
+  const curriculum = new Map()
+  for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
+    const doc = yamlLoad(readFileSync(join(vocabDir, file), 'utf8'))
+    for (const [key, word] of Object.entries(doc?.words ?? {})) {
+      curriculum.set(key, { file, learnable: word?.learn !== false })
+    }
+  }
+
   let compared = 0
   let added = 0
+  let promoted = 0
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
     const replayed = reviewedByKey(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
     const committed = reviewedByKey(readFileSync(join(vocabDir, file), 'utf8'))
     for (const [key, text] of replayed) {
       if (!committed.has(key)) {
-        console.error(`  ✗ ${file}: ${key} was replayed but is no longer in the corpus`)
+        const promotion = promotions.get(key)
+        const landed = promotion && curriculum.get(promotion.to)
+        if (promotion && landed?.learnable) {
+          promoted += 1
+          continue
+        }
+        if (promotion && !landed) {
+          console.error(
+            `  ✗ ${file}: ${key} is recorded as promoted to ${promotion.to}, which is not in the corpus`,
+          )
+        } else if (promotion) {
+          console.error(
+            `  ✗ ${file}: ${key} is recorded as promoted to ${promotion.to}, which is still gloss-only`,
+          )
+        } else {
+          console.error(`  ✗ ${file}: ${key} was replayed but is no longer in the corpus`)
+        }
         failed = true
         continue
       }
@@ -320,7 +362,10 @@ try {
     for (const key of committed.keys()) if (!replayed.has(key)) added += 1
   }
   if (!failed) {
-    console.log(`  ${compared} word(s) compared; ${added} added since the base and outside the review's remit`)
+    const note = promoted ? `; ${promoted} promoted out of the glossary` : ''
+    console.log(
+      `  ${compared} word(s) compared; ${added} added since the base and outside the review's remit${note}`,
+    )
   }
 } catch (err) {
   console.error(`replay failed: ${err.message}`)

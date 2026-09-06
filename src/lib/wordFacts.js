@@ -26,7 +26,8 @@ const KIND_ORDER = new Map(FACT_KINDS.map((k, i) => [k, i]))
  * The relation kinds `relatedWords` can report, in display order. `aspect`,
  * `motion`, `participle`, `manner` (an adverb and the adjective behind it),
  * `numeral` (a number and what it is built on) and `same-meaning` are derived;
- * `root`, `see-also` (both from a fact's `see:`) and `confusable` are authored.
+ * `root`, `region`, `see-also` (all three from a fact's `see:`) and
+ * `confusable` are authored.
  *
  * A `see:` link means different things depending on the fact it hangs off. On a
  * `build` or `root` fact it is a shared root — води́ть behind переводи́ть. On a
@@ -34,6 +35,9 @@ const KIND_ORDER = new Map(FACT_KINDS.map((k, i) => [k, i]))
  * пе́ред because they are one spatial system, not because they share a
  * morpheme. Calling both "same root" would put a false claim under half the
  * closed-class facts (#631), so they are separate relations.
+ *
+ * A `region` row carries `where` — the place its fact named — so a row can say
+ * *which* place says it without the caller re-reading the prose.
  *
  * A `numeral` row also carries `via` (`ordinal` | `teen` | `tens` | `hundreds`)
  * and `role` (`base` | `derived`, describing the *other* word), because "the
@@ -48,9 +52,18 @@ export const RELATIONS = [
   'heteronym',
   'same-meaning',
   'root',
+  'region',
   'see-also',
   'confusable',
 ]
+
+/**
+ * Which relation a fact's `see:` links report, by the fact's kind. A `see:`
+ * means something different under each: a shared morpheme under `build`/`root`,
+ * the same thing said elsewhere under `region`, and a bare pointer otherwise
+ * (#631).
+ */
+const SEE_RELATION = { build: 'root', root: 'root', region: 'region' }
 
 /**
  * How a numeral row reads, keyed `via:role` — the row describes the *other*
@@ -179,6 +192,8 @@ export function relatedWords(record, byKey) {
       // Attached only where they mean something, so every other relation keeps
       // the shape its callers already read.
       ...(entry.via ? { via: entry.via, role: entry.role } : {}),
+      // A region row carries the place, for the same reason.
+      ...(entry.where ? { where: entry.where } : {}),
     })
   }
 
@@ -196,8 +211,9 @@ export function relatedWords(record, byKey) {
   for (const a of record.ambiguousEn ?? [])
     push('same-meaning', { ru: a.ru, en: selfEn(record), note: a.note ?? '' })
   for (const f of wordFacts(record)) {
-    const relation = f.kind === 'root' || f.kind === 'build' ? 'root' : 'see-also'
-    for (const s of f.see ?? []) push(relation, s)
+    const relation = SEE_RELATION[f.kind] ?? 'see-also'
+    for (const s of f.see ?? [])
+      push(relation, relation === 'region' ? { ...s, where: f.where } : s)
   }
   for (const c of record.confusables ?? []) push('confusable', c)
 
@@ -238,6 +254,28 @@ export function confusionNote(record, related) {
     text: sides.map((side) => `${side.ru} — ${side.note}`).join('; '),
     source: sides.length === 2 ? 'contrast' : 'note',
   }
+}
+
+/**
+ * Is `key` a word this one names as its own regional variant — the same thing
+ * said somewhere else (поре́брик beside бордю́р), or the same word used
+ * differently there (бу́лка beside хлеб)?
+ *
+ * The corpus teaches the dictionary standard, so a variant is never an accepted
+ * answer; what this buys is the difference between "wrong" and "that is the
+ * Petersburg word" (#588, #636). Returns the place, so the message can name it.
+ *
+ * @param {object} record the word being asked for
+ * @param {string} key natural key of the word the learner actually wrote
+ * @returns {string} the place, or '' when the two aren't linked that way
+ */
+export function regionalVariant(record, key) {
+  if (!key) return ''
+  for (const f of wordFacts(record)) {
+    if (f.kind !== 'region') continue
+    if ((f.see ?? []).some((s) => s.key === key)) return f.where || ''
+  }
+  return ''
 }
 
 /**
@@ -352,6 +390,15 @@ export function factIssues(words) {
       if (f?.parts != null && kind !== 'build') {
         report(word.key, at, `parts is build-only, not "${kind}"`)
       }
+      if (f?.where != null && kind !== 'region') {
+        report(word.key, at, `where is region-only, not "${kind}"`)
+      }
+      // A regional claim that cannot name a place is a `note`. The place is
+      // also what a correction message says out loud, so it is required rather
+      // than nice to have.
+      if (kind === 'region' && !String(f?.where ?? '').trim()) {
+        report(word.key, at, 'a region fact needs a where (the place it is about)')
+      }
       for (const [j, p] of (Array.isArray(f?.parts) ? f.parts : []).entries()) {
         if (!String(p?.ru ?? '').trim()) report(word.key, `${at}.parts[${j}]`, 'ru is required')
         if (!String(p?.en ?? '').trim()) report(word.key, `${at}.parts[${j}]`, 'en is required')
@@ -399,6 +446,26 @@ export function factIssues(words) {
         else if (seen.has(k)) report(word.key, at, `"${k}" is listed twice`)
         else if (!byKey.has(k)) report(word.key, at, `"${k}" is not a word`)
         seen.add(k)
+      }
+    }
+
+    // ── facts: a regional pairing is claimed from both ends ─────────────────
+    // A one-sided link leaves the learner who meets the *other* word told
+    // nothing: they tap бу́лка, and the entry that knows why it is interesting
+    // is the one they aren't looking at. Both ends carry their own sentence
+    // anyway — from хлеб and from бу́лка the difference reads differently — so
+    // the guard costs the author nothing they weren't already writing.
+    for (const [i, f] of word.facts.entries()) {
+      if (f.kind !== 'region') continue
+      for (const k of f.seeKeys) {
+        const other = byKey.get(k)
+        if (!other) continue // a dangling key is reported above
+        const mirrored = other.facts.some(
+          (g) => g.kind === 'region' && g.seeKeys.includes(word.key),
+        )
+        if (!mirrored) {
+          report(word.key, `facts[${i}].see`, `"${k}" has no region fact linking back`)
+        }
       }
     }
 

@@ -41,7 +41,7 @@ import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition
 import { state as vocabState } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import { diagnoseEnglishAnswer } from '../../stores/hints.js'
-import { correctionMessage } from '../../lib/confusables.js'
+import { correctionMessage, QUIET_TIERS } from '../../lib/confusables.js'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
 
@@ -189,8 +189,9 @@ function miss(guess) {
   correction.value = correctionMessage(verdict)
   missed.add(card.value.key)
   stopMic()
-  // A synonym is a correct piece of knowledge in the wrong slot — no error sound.
-  if (correction.value.tier !== 'synonym') playFeedback(false)
+  // A synonym, or the right word as another region says it, is correct
+  // knowledge in the wrong slot — no error sound.
+  if (!QUIET_TIERS.includes(correction.value.tier)) playFeedback(false)
   typed.value = ''
   focusInput()
 }

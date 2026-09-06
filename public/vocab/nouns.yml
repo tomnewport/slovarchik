@@ -57,6 +57,38 @@ words:
       pl_acc: абза́цы
       pl_ins: абза́цами
       pl_pre: абза́цах
+  "абрикос=apricot":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: apricot (a small orange fruit with a stone inside)
+    usage:
+      - ru: Э́тот абрико́с о́чень сла́дкий.
+        en_gb: This apricot is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Мы купи́ли абрико́сы на ры́нке.
+        en_gb: We bought apricots at the market.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: В варе́нье мно́го абрико́сов.
+        en_gb: There are a lot of apricots in the jam.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
+    declension:
+      sg_nom: абрико́с
+      sg_gen: абрико́са
+      sg_dat: абрико́су
+      sg_acc: абрико́с
+      sg_ins: абрико́сом
+      sg_pre: абрико́се
+      pl_nom: абрико́сы
+      pl_gen: абрико́сов
+      pl_dat: абрико́сам
+      pl_acc: абрико́сы
+      pl_ins: абрико́сами
+      pl_pre: абрико́сах
   "авиация=aviation":
     cefr_level: B2
     gender: f
@@ -84,6 +116,38 @@ words:
       - ru: Он интересу́ется вое́нной авиа́цией.
         en_gb: He is interested in military aviation.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+  "авокадо=avocado":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: avocado (a green fruit with a large stone, eaten in salads; indeclinable)
+    usage:
+      - ru: Он ест авока́до на за́втрак.
+        en_gb: He eats avocado for breakfast.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В авока́до мно́го жи́ра.
+        en_gb: There is a lot of fat in an avocado.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Она́ де́лает сала́т с авока́до.
+        en_gb: She is making a salad with avocado.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: авока́до
+      sg_gen: авока́до
+      sg_dat: авока́до
+      sg_acc: авока́до
+      sg_ins: авока́до
+      sg_pre: авока́до
+      pl_nom: авока́до
+      pl_gen: авока́до
+      pl_dat: авока́до
+      pl_acc: авока́до
+      pl_ins: авока́до
+      pl_pre: авока́до
   "автобус=bus":
     cefr_level: A1
     gender: m
@@ -936,6 +1000,38 @@ words:
       - ru: Мы провели́ глубо́кий ана́лиз да́нных.
         en_gb: We carried out a deep analysis of the data.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+  "ананас=pineapple":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pineapple (a large tropical fruit with a rough skin)
+    usage:
+      - ru: Анана́с растёт на ю́ге.
+        en_gb: The pineapple grows in the south.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Она́ наре́зала анана́с для сала́та.
+        en_gb: She cut up a pineapple for the salad.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В магази́не нет анана́сов.
+        en_gb: There are no pineapples in the shop.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: анана́с
+      sg_gen: анана́са
+      sg_dat: анана́су
+      sg_acc: анана́с
+      sg_ins: анана́сом
+      sg_pre: анана́се
+      pl_nom: анана́сы
+      pl_gen: анана́сов
+      pl_dat: анана́сам
+      pl_acc: анана́сы
+      pl_ins: анана́сами
+      pl_pre: анана́сах
   "ангел=angel":
     cefr_level: B1
     gender: m
@@ -1180,6 +1276,47 @@ words:
       - kind: origin
         text: "Greek apothēkē, a storehouse. The same word gave English boutique and Spanish bodega, and the -тека of библиоте́ка is that storehouse again."
         see: ["библиотека=library"]
+  "арбуз=watermelon":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    facts:
+      - kind: region
+        where: southern Russia
+        text: >-
+          In the south — the Don, the Kuban, Astrakhan — you will hear каву́н for
+          a watermelon. Арбу́з is the standard word and the one used everywhere
+          else.
+        see: ["кавун=watermelon"]
+    collections:
+      - food and drink
+      - shopping
+    en_gb:
+      standard: watermelon (a large green fruit with sweet red flesh)
+    usage:
+      - ru: Ле́том мы всегда́ покупа́ем арбу́з.
+        en_gb: In summer we always buy a watermelon.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́тот арбу́з о́чень сла́дкий.
+        en_gb: This watermelon is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: На ры́нке продаю́т больши́е арбу́зы.
+        en_gb: They sell big watermelons at the market.
+        inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+    declension:
+      sg_nom: арбу́з
+      sg_gen: арбу́за
+      sg_dat: арбу́зу
+      sg_acc: арбу́з
+      sg_ins: арбу́зом
+      sg_pre: арбу́зе
+      pl_nom: арбу́зы
+      pl_gen: арбу́зов
+      pl_dat: арбу́зам
+      pl_acc: арбу́зы
+      pl_ins: арбу́зами
+      pl_pre: арбу́зах
   "Аргентина=Argentina":
     cefr_level: A2
     gender: f
@@ -2060,6 +2197,39 @@ words:
       sg_acc: Байка́л
       sg_ins: Байка́лом
       sg_pre: Байка́ле
+  "баклажан=aubergine":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: aubergine (a dark purple vegetable, long and smooth)
+    usage:
+      - ru: Э́тот баклажа́н о́чень большо́й.
+        en_gb: This aubergine is very big.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Мы купи́ли баклажа́ны на ры́нке.
+        en_gb: We bought aubergines at the market.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Сала́т из баклажа́нов о́чень вку́сный.
+        en_gb: Aubergine salad is very tasty.
+        inflect: { token: 3, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: баклажа́н
+      sg_gen: баклажа́на
+      sg_dat: баклажа́ну
+      sg_acc: баклажа́н
+      sg_ins: баклажа́ном
+      sg_pre: баклажа́не
+      pl_nom: баклажа́ны
+      pl_gen: баклажа́нов
+      pl_dat: баклажа́нам
+      pl_acc: баклажа́ны
+      pl_ins: баклажа́нами
+      pl_pre: баклажа́нах
   "бал=ball":
     cefr_level: A2
     gender: m
@@ -4909,6 +5079,32 @@ words:
       pl_acc: бро́ви
       pl_ins: бровя́ми
       pl_pre: бровя́х
+  "брокколи=broccoli":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: broccoli (the green vegetable that looks like small trees; indeclinable)
+    usage:
+      - ru: Она́ свари́ла бро́кколи на у́жин.
+        en_gb: She cooked broccoli for dinner.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В бро́кколи мно́го витами́нов.
+        en_gb: There are lots of vitamins in broccoli.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Сала́т из бро́кколи о́чень поле́зный.
+        en_gb: Broccoli salad is very good for you.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: бро́кколи
+      sg_gen: бро́кколи
+      sg_dat: бро́кколи
+      sg_acc: бро́кколи
+      sg_ins: бро́кколи
+      sg_pre: бро́кколи
   "брюки=trousers":
     cefr_level: A2
     animacy: i
@@ -5038,6 +5234,20 @@ words:
       pl_acc: буке́ты
       pl_ins: буке́тами
       pl_pre: буке́тах
+  "булка=white loaf":
+    cefr_level: A2
+    learn: false
+    accented: бу́лка
+    en_gb:
+      standard: white loaf (a wheat loaf; elsewhere in Russia, a small sweet bun)
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg a бу́лка is white bread — the loaf a Moscow shop sells
+          as бато́н or бе́лый хлеб. Elsewhere the word means a small sweet bun, so
+          the same five letters buy you two different things.
+        see: ["хлеб=bread"]
   "булочная=bakery":
     cefr_level: A2
     gender: f
@@ -7387,6 +7597,39 @@ words:
       pl_acc: витами́ны
       pl_ins: витами́нами
       pl_pre: витами́нах
+  "вишня=cherry":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: cherry (the sour dark red one, used in pies and jam)
+    usage:
+      - ru: Я люблю́ пиро́г с ви́шней.
+        en_gb: I love cherry pie.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: На де́реве мно́го ви́шен.
+        en_gb: There are a lot of cherries on the tree.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-genpl-fleeting }
+      - ru: Э́та ви́шня о́чень ки́слая.
+        en_gb: This cherry is very sour.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+    declension:
+      sg_nom: ви́шня
+      sg_gen: ви́шни
+      sg_dat: ви́шне
+      sg_acc: ви́шню
+      sg_ins: ви́шней
+      sg_pre: ви́шне
+      pl_nom: ви́шни
+      pl_gen: ви́шен
+      pl_dat: ви́шням
+      pl_acc: ви́шни
+      pl_ins: ви́шнями
+      pl_pre: ви́шнях
   "вклад=deposit":
     cefr_level: B2
     gender: m
@@ -10690,6 +10933,32 @@ words:
       pl_acc: голоса́
       pl_ins: голоса́ми
       pl_pre: голоса́х
+  "голубика=blueberry":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: blueberry (the larger pale cultivated one sold in punnets; collective)
+    usage:
+      - ru: В магази́не продаю́т голуби́ку.
+        en_gb: They sell blueberries in the shop.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Голуби́ка о́чень поле́зная.
+        en_gb: Blueberries are very good for you.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Она́ купи́ла па́чку голуби́ки.
+        en_gb: She bought a punnet of blueberries.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
+    declension:
+      sg_nom: голуби́ка
+      sg_gen: голуби́ки
+      sg_dat: голуби́ке
+      sg_acc: голуби́ку
+      sg_ins: голуби́кой
+      sg_pre: голуби́ке
   "голубь=pigeon":
     cefr_level: B1
     gender: m
@@ -11516,6 +11785,38 @@ words:
       sg_acc: грамма́тику
       sg_ins: грамма́тикой
       sg_pre: грамма́тике
+  "гранат=pomegranate":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: pomegranate (a round red fruit full of seeds)
+    usage:
+      - ru: Он купи́л большо́й грана́т.
+        en_gb: He bought a big pomegranate.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Сок грана́та о́чень поле́зный.
+        en_gb: Pomegranate juice is very good for you.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Грана́т лежи́т на столе́.
+        en_gb: The pomegranate is lying on the table.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+    declension:
+      sg_nom: грана́т
+      sg_gen: грана́та
+      sg_dat: грана́ту
+      sg_acc: грана́т
+      sg_ins: грана́том
+      sg_pre: грана́те
+      pl_nom: грана́ты
+      pl_gen: грана́тов
+      pl_dat: грана́там
+      pl_acc: грана́ты
+      pl_ins: грана́тами
+      pl_pre: грана́тах
   "граната=grenade":
     cefr_level: B2
     gender: f
@@ -11607,6 +11908,38 @@ words:
       pl_acc: грани́цы
       pl_ins: грани́цами
       pl_pre: грани́цах
+  "грейпфрут=grapefruit":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: grapefruit (a large bitter citrus fruit)
+    usage:
+      - ru: Гре́йпфрут немно́го го́рький.
+        en_gb: A grapefruit is a little bitter.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он пьёт сок из гре́йпфрута.
+        en_gb: He is drinking grapefruit juice.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Я купи́л два гре́йпфрута.
+        en_gb: I bought two grapefruits.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-count-gen-sg }
+    declension:
+      sg_nom: гре́йпфрут
+      sg_gen: гре́йпфрута
+      sg_dat: гре́йпфруту
+      sg_acc: гре́йпфрут
+      sg_ins: гре́йпфрутом
+      sg_pre: гре́йпфруте
+      pl_nom: гре́йпфруты
+      pl_gen: гре́йпфрутов
+      pl_dat: гре́йпфрутам
+      pl_acc: гре́йпфруты
+      pl_ins: гре́йпфрутами
+      pl_pre: гре́йпфрутах
   "грех=sin":
     cefr_level: B2
     gender: m
@@ -12028,6 +12361,39 @@ words:
       sg_acc: грусть
       sg_ins: гру́стью
       sg_pre: гру́сти
+  "груша=pear":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: pear (a sweet fruit, wide at the bottom and narrow at the top)
+    usage:
+      - ru: Э́та гру́ша о́чень сла́дкая.
+        en_gb: This pear is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он ест гру́шу на за́втрак.
+        en_gb: He eats a pear for breakfast.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Я купи́л килогра́мм груш.
+        en_gb: I bought a kilogram of pears.
+        inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: гру́ша
+      sg_gen: гру́ши
+      sg_dat: гру́ше
+      sg_acc: гру́шу
+      sg_ins: гру́шей
+      sg_pre: гру́ше
+      pl_nom: гру́ши
+      pl_gen: груш
+      pl_dat: гру́шам
+      pl_acc: гру́ши
+      pl_ins: гру́шами
+      pl_pre: гру́шах
   "грядка=flower bed":
     cefr_level: B2
     gender: f
@@ -15607,6 +15973,38 @@ words:
       - ru: Здесь па́хнет ды́мом.
         en_gb: It smells of smoke here.
         inflect: { token: 3, case: ins, number: sg, rule: verb-gov-instrumental }
+  "дыня=melon":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: melon (a large sweet yellow melon, eaten fresh)
+    usage:
+      - ru: Э́та ды́ня о́чень сла́дкая.
+        en_gb: This melon is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ба́бушка наре́зала ды́ню.
+        en_gb: Grandma cut up the melon.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Ле́том на ры́нке мно́го дынь.
+        en_gb: In summer there are a lot of melons at the market.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
+    declension:
+      sg_nom: ды́ня
+      sg_gen: ды́ни
+      sg_dat: ды́не
+      sg_acc: ды́ню
+      sg_ins: ды́ней
+      sg_pre: ды́не
+      pl_nom: ды́ни
+      pl_gen: дынь
+      pl_dat: ды́ням
+      pl_acc: ды́ни
+      pl_ins: ды́нями
+      pl_pre: ды́нях
   "дыхание=breathing":
     cefr_level: B1
     gender: n
@@ -15835,6 +16233,32 @@ words:
       sg_acc: еду́
       sg_ins: едо́й
       sg_pre: еде́
+  "ежевика=blackberry":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: blackberry (blackberries; collective)
+    usage:
+      - ru: Ежеви́ка сла́дкая и чёрная.
+        en_gb: Blackberries are sweet and black.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Она́ купи́ла ежеви́ку и мали́ну.
+        en_gb: She bought blackberries and raspberries.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он ест моро́женое с ежеви́кой.
+        en_gb: He is eating ice cream with blackberries.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: ежеви́ка
+      sg_gen: ежеви́ки
+      sg_dat: ежеви́ке
+      sg_acc: ежеви́ку
+      sg_ins: ежеви́кой
+      sg_pre: ежеви́ке
   "ёж=hedgehog":
     cefr_level: B1
     gender: m
@@ -18389,6 +18813,33 @@ words:
       sg_acc: зелёный горо́шек
       sg_ins: зелёным горо́шком
       sg_pre: зелёном горо́шке
+  "зелёный лук=spring onion":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: spring onion (the green stalks, chopped over almost everything)
+    usage:
+      - ru: Она́ доба́вила в сала́т зелёный лук.
+        en_gb: She added spring onion to the salad.
+        inflect: { token: 5, span: 2, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На гря́дке растёт зелёный лук.
+        en_gb: Spring onions are growing in the vegetable bed.
+        inflect: { token: 4, span: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он ест суп с зелёным лу́ком.
+        en_gb: He is eating soup with spring onion.
+        inflect: { token: 5, span: 2, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: зелёный лук
+      sg_gen: зелёного лу́ка
+      sg_dat: зелёному лу́ку
+      sg_acc: зелёный лук
+      sg_ins: зелёным лу́ком
+      sg_pre: зелёном лу́ке
   "земля=earth":
     cefr_level: A1
     gender: f
@@ -19437,6 +19888,33 @@ words:
       sg_acc: икру́
       sg_ins: икро́й
       sg_pre: икре́
+  "имбирь=ginger":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the kitchen
+    en_gb:
+      standard: ginger (the hot spicy root, grated into tea and food)
+    usage:
+      - ru: Я пью чай с имбирём.
+        en_gb: I drink tea with ginger.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Имби́рь о́чень поле́зный.
+        en_gb: Ginger is very good for you.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Она́ купи́ла ко́рень имбиря́.
+        en_gb: She bought a ginger root.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: имби́рь
+      sg_gen: имбиря́
+      sg_dat: имбирю́
+      sg_acc: имби́рь
+      sg_ins: имбирём
+      sg_pre: имбире́
   "имейл=email":
     cefr_level: A2
     gender: m
@@ -20738,6 +21216,39 @@ words:
       pl_acc: кабано́в
       pl_ins: кабана́ми
       pl_pre: кабана́х
+  "кабачок=courgette":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: courgette (a long green summer squash)
+    usage:
+      - ru: На гря́дке растёт большо́й кабачо́к.
+        en_gb: A big courgette is growing in the vegetable bed.
+        inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Мы купи́ли кабачки́ на ры́нке.
+        en_gb: We bought courgettes at the market.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Он пригото́вил суп из кабачка́.
+        en_gb: He made a soup out of a courgette.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: кабачо́к
+      sg_gen: кабачка́
+      sg_dat: кабачку́
+      sg_acc: кабачо́к
+      sg_ins: кабачко́м
+      sg_pre: кабачке́
+      pl_nom: кабачки́
+      pl_gen: кабачко́в
+      pl_dat: кабачка́м
+      pl_acc: кабачки́
+      pl_ins: кабачка́ми
+      pl_pre: кабачка́х
   "кабель=cable":
     cefr_level: B2
     gender: m
@@ -20906,6 +21417,20 @@ words:
       sg_acc: Кавка́з
       sg_ins: Кавка́зом
       sg_pre: Кавка́зе
+  "кавун=watermelon":
+    cefr_level: A2
+    learn: false
+    accented: каву́н
+    en_gb:
+      standard: watermelon (southern regional — the standard word is арбу́з)
+    facts:
+      - kind: region
+        where: southern Russia
+        text: >-
+          The southern Russian word for a watermelon, from Turkic kavun, a
+          melon. Dictionaries mark it regional, so арбу́з is the word to reach
+          for.
+        see: ["арбуз=watermelon"]
   "кадр=frame":
     cefr_level: B1
     gender: m
@@ -22395,6 +22920,33 @@ words:
       pl_acc: киломе́тры
       pl_ins: киломе́трами
       pl_pre: киломе́трах
+  "кинза=coriander":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the kitchen
+    en_gb:
+      standard: coriander (the fresh green leaves, sold in bunches)
+    usage:
+      - ru: Он не лю́бит кинзу́.
+        en_gb: He does not like coriander.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Кинза́ па́хнет о́чень си́льно.
+        en_gb: Coriander smells very strong.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Сала́т с кинзо́й о́чень вку́сный.
+        en_gb: Salad with coriander is very tasty.
+        inflect: { token: 3, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: кинза́
+      sg_gen: кинзы́
+      sg_dat: кинзе́
+      sg_acc: кинзу́
+      sg_ins: кинзо́й
+      sg_pre: кинзе́
   "кино=cinema":
     cefr_level: A1
     gender: n
@@ -23108,6 +23660,33 @@ words:
       pl_acc: клу́бы
       pl_ins: клу́бами
       pl_pre: клу́бах
+  "клубника=strawberry":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: strawberry (strawberries; collective)
+    usage:
+      - ru: Клубни́ка о́чень сла́дкая.
+        en_gb: Strawberries are very sweet.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ле́том мы собира́ем клубни́ку в саду́.
+        en_gb: In summer we pick strawberries in the garden.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Она́ ест йо́гурт с клубни́кой.
+        en_gb: She is eating yoghurt with strawberries.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: клубни́ка
+      sg_gen: клубни́ки
+      sg_dat: клубни́ке
+      sg_acc: клубни́ку
+      sg_ins: клубни́кой
+      sg_pre: клубни́ке
   "клумба=flower bed":
     cefr_level: B2
     gender: f
@@ -23140,6 +23719,32 @@ words:
       pl_acc: клу́мбы
       pl_ins: клу́мбами
       pl_pre: клу́мбах
+  "клюква=cranberry":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: cranberry (cranberries; collective)
+    usage:
+      - ru: Клю́ква о́чень ки́слая.
+        en_gb: Cranberries are very sour.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ба́бушка ва́рит морс из клю́квы.
+        en_gb: Grandma is making a fruit drink from cranberries.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Она́ доба́вила клю́кву в ка́шу.
+        en_gb: She added cranberries to the porridge.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: клю́ква
+      sg_gen: клю́квы
+      sg_dat: клю́кве
+      sg_acc: клю́кву
+      sg_ins: клю́квой
+      sg_pre: клю́кве
   "ключ=key":
     cefr_level: A1
     gender: m
@@ -27415,11 +28020,33 @@ words:
       pl_acc: купю́ры
       pl_ins: купю́рами
       pl_pre: купю́рах
+  "кура=chicken":
+    cefr_level: A2
+    learn: false
+    accented: ку́ра
+    en_gb:
+      standard: chicken (colloquial and regional — the standard word is ку́рица)
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg you will hear ку́ра for a chicken, especially the one
+          on your plate. Dictionaries mark it colloquial rather than standard,
+          so it is a word to recognise rather than one to use.
+        see: ["курица=hen"]
   "курица=hen":
     cefr_level: A2
     gender: f
     animacy: a
     number: ["sg", "pl"]
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg the bird on your plate is often a ку́ра. Dictionaries
+          treat that as colloquial rather than standard, so ку́рица stays the
+          word to reach for.
+        see: ["кура=chicken"]
     collections:
       - animals
       - in the garden
@@ -27879,6 +28506,38 @@ words:
       sg_acc: лаза́нью
       sg_ins: лаза́ньей
       sg_pre: лаза́нье
+  "лайм=lime":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: lime (a small green citrus fruit, sharper than a lemon)
+    usage:
+      - ru: Лайм зелёный, а лимо́н жёлтый.
+        en_gb: A lime is green and a lemon is yellow.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он доба́вил в напи́ток лайм.
+        en_gb: He added lime to the drink.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Сок ла́йма о́чень ки́слый.
+        en_gb: Lime juice is very sour.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: лайм
+      sg_gen: ла́йма
+      sg_dat: ла́йму
+      sg_acc: лайм
+      sg_ins: ла́ймом
+      sg_pre: ла́йме
+      pl_nom: ла́ймы
+      pl_gen: ла́ймов
+      pl_dat: ла́ймам
+      pl_acc: ла́ймы
+      pl_ins: ла́ймами
+      pl_pre: ла́ймах
   "лак=varnish":
     cefr_level: B2
     gender: m
@@ -28803,6 +29462,39 @@ words:
       pl_acc: ликёры
       pl_ins: ликёрами
       pl_pre: ликёрах
+  "лимон=lemon":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the kitchen
+    en_gb:
+      standard: lemon (a sour yellow citrus fruit)
+    usage:
+      - ru: Я пью чай с лимо́ном.
+        en_gb: I drink tea with lemon.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Э́тот лимо́н о́чень ки́слый.
+        en_gb: This lemon is very sour.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Полови́на лимо́на лежи́т на столе́.
+        en_gb: Half a lemon is lying on the table.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-quantity-gen-sg }
+    declension:
+      sg_nom: лимо́н
+      sg_gen: лимо́на
+      sg_dat: лимо́ну
+      sg_acc: лимо́н
+      sg_ins: лимо́ном
+      sg_pre: лимо́не
+      pl_nom: лимо́ны
+      pl_gen: лимо́нов
+      pl_dat: лимо́нам
+      pl_acc: лимо́ны
+      pl_ins: лимо́нами
+      pl_pre: лимо́нах
   "линия=line":
     cefr_level: A2
     gender: f
@@ -30097,6 +30789,33 @@ words:
       pl_acc: макаро́ны
       pl_ins: макаро́нами
       pl_pre: макаро́нах
+  "малина=raspberry":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: raspberry (raspberries; collective)
+    usage:
+      - ru: Мали́на растёт у забо́ра.
+        en_gb: The raspberries grow by the fence.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ма́ма ва́рит варе́нье из мали́ны.
+        en_gb: Mum is making raspberry jam.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Де́ти лю́бят мали́ну.
+        en_gb: Children love raspberries.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: мали́на
+      sg_gen: мали́ны
+      sg_dat: мали́не
+      sg_acc: мали́ну
+      sg_ins: мали́ной
+      sg_pre: мали́не
   "малыш=kid":
     cefr_level: B1
     gender: m
@@ -30299,6 +31018,70 @@ words:
       pl_acc: мам
       pl_ins: ма́мами
       pl_pre: ма́мах
+  "манго=mango":
+    cefr_level: B1
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: mango (a sweet orange tropical fruit; indeclinable)
+    usage:
+      - ru: Я о́чень люблю́ ма́нго.
+        en_gb: I love mango very much.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В ма́нго мно́го витами́нов.
+        en_gb: There are lots of vitamins in a mango.
+        inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
+      - ru: Сок из ма́нго о́чень вку́сный.
+        en_gb: Mango juice is very tasty.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ма́нго
+      sg_gen: ма́нго
+      sg_dat: ма́нго
+      sg_acc: ма́нго
+      sg_ins: ма́нго
+      sg_pre: ма́нго
+      pl_nom: ма́нго
+      pl_gen: ма́нго
+      pl_dat: ма́нго
+      pl_acc: ма́нго
+      pl_ins: ма́нго
+      pl_pre: ма́нго
+  "мандарин=tangerine":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: tangerine (a small sweet citrus fruit that peels easily)
+    usage:
+      - ru: На Но́вый год мы всегда́ еди́м мандари́ны.
+        en_gb: At New Year we always eat tangerines.
+        inflect: { token: 7, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Э́тот мандари́н о́чень сла́дкий.
+        en_gb: This tangerine is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он почи́стил мандари́н.
+        en_gb: He peeled a tangerine.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: мандари́н
+      sg_gen: мандари́на
+      sg_dat: мандари́ну
+      sg_acc: мандари́н
+      sg_ins: мандари́ном
+      sg_pre: мандари́не
+      pl_nom: мандари́ны
+      pl_gen: мандари́нов
+      pl_dat: мандари́нам
+      pl_acc: мандари́ны
+      pl_ins: мандари́нами
+      pl_pre: мандари́нах
   "марка=stamp":
     cefr_level: B1
     gender: f
@@ -35581,6 +36364,38 @@ words:
       sg_acc: некта́р
       sg_ins: некта́ром
       sg_pre: некта́ре
+  "нектарин=nectarine":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: nectarine (a peach with smooth skin)
+    usage:
+      - ru: Э́тот нектари́н о́чень сла́дкий.
+        en_gb: This nectarine is very sweet.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: У нектари́на гла́дкая ко́жа.
+        en_gb: A nectarine has smooth skin.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Он купи́л нектари́ны на ры́нке.
+        en_gb: He bought nectarines at the market.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+    declension:
+      sg_nom: нектари́н
+      sg_gen: нектари́на
+      sg_dat: нектари́ну
+      sg_acc: нектари́н
+      sg_ins: нектари́ном
+      sg_pre: нектари́не
+      pl_nom: нектари́ны
+      pl_gen: нектари́нов
+      pl_dat: нектари́нам
+      pl_acc: нектари́ны
+      pl_ins: нектари́нами
+      pl_pre: нектари́нах
   "немец=German":
     cefr_level: A2
     gender: m
@@ -40596,6 +41411,20 @@ words:
       pl_acc: па́ры
       pl_ins: па́рами
       pl_pre: па́рах
+  "парадная=front entrance":
+    cefr_level: A2
+    learn: false
+    accented: пара́дная
+    en_gb:
+      standard: front entrance (a block of flats' street entrance, in St Petersburg usage)
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          The St Petersburg word for the door and stairwell that is a подъе́зд
+          everywhere else. It is short for пара́дный подъе́зд, the grand entrance
+          of a pre-revolutionary building as against the back stairs.
+        see: ["подъезд=entrance"]
   "парень=guy":
     cefr_level: A2
     gender: m
@@ -41742,6 +42571,38 @@ words:
       - ru: Пти́ца потеря́ла не́сколько пе́рьев.
         en_gb: The bird lost several feathers.
         inflect: { token: 4, case: gen, number: pl, rule: noun-irregular-plural }
+  "персик=peach":
+    cefr_level: A2
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: peach (a soft round fruit with a fuzzy skin)
+    usage:
+      - ru: Он съел большо́й пе́рсик.
+        en_gb: He ate a big peach.
+        inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: У пе́рсика мя́гкая ко́жа.
+        en_gb: A peach has soft skin.
+        inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Де́ти лю́бят пе́рсики.
+        en_gb: Children love peaches.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+    declension:
+      sg_nom: пе́рсик
+      sg_gen: пе́рсика
+      sg_dat: пе́рсику
+      sg_acc: пе́рсик
+      sg_ins: пе́рсиком
+      sg_pre: пе́рсике
+      pl_nom: пе́рсики
+      pl_gen: пе́рсиков
+      pl_dat: пе́рсикам
+      pl_acc: пе́рсики
+      pl_ins: пе́рсиками
+      pl_pre: пе́рсиках
   "перспектива=prospect":
     cefr_level: B2
     gender: f
@@ -44268,6 +45129,14 @@ words:
     gender: m
     animacy: i
     number: ["sg", "pl"]
+    facts:
+      - kind: region
+        where: St Petersburg
+        text: >-
+          In St Petersburg the same door is a пара́дная, from the пара́дный
+          подъе́зд of a pre-revolutionary building. Подъе́зд is the standard word
+          and the one used everywhere else.
+        see: ["парадная=front entrance"]
     collections:
       - home
       - architecture
@@ -51630,6 +52499,39 @@ words:
       sg_acc: реди́с
       sg_ins: реди́сом
       sg_pre: реди́се
+  "редька=radish":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: radish (the big black winter radish, sharp and bitter)
+    usage:
+      - ru: Ре́дька о́чень го́рькая.
+        en_gb: Black radish is very bitter.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Она́ наре́зала ре́дьку в сала́т.
+        en_gb: She cut radish into the salad.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Сала́т из ре́дьки о́чень поле́зный.
+        en_gb: Radish salad is very good for you.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ре́дька
+      sg_gen: ре́дьки
+      sg_dat: ре́дьке
+      sg_acc: ре́дьку
+      sg_ins: ре́дькой
+      sg_pre: ре́дьке
+      pl_nom: ре́дьки
+      pl_gen: ре́дек
+      pl_dat: ре́дькам
+      pl_acc: ре́дьки
+      pl_ins: ре́дьками
+      pl_pre: ре́дьках
   "режим=regime":
     cefr_level: B1
     gender: m
@@ -51972,6 +52874,39 @@ words:
       pl_acc: ремо́нты
       pl_ins: ремо́нтами
       pl_pre: ремо́нтах
+  "репа=turnip":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: turnip (a round pale root vegetable, the old staple before the potato)
+    usage:
+      - ru: Ре́па растёт на огоро́де.
+        en_gb: Turnips grow in the vegetable garden.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ба́бушка свари́ла ре́пу.
+        en_gb: Grandma boiled a turnip.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В магази́не нет ре́пы.
+        en_gb: There are no turnips in the shop.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: ре́па
+      sg_gen: ре́пы
+      sg_dat: ре́пе
+      sg_acc: ре́пу
+      sg_ins: ре́пой
+      sg_pre: ре́пе
+      pl_nom: ре́пы
+      pl_gen: реп
+      pl_dat: ре́пам
+      pl_acc: ре́пы
+      pl_ins: ре́пами
+      pl_pre: ре́пах
   "ресница=eyelash":
     cefr_level: B2
     gender: f
@@ -55272,6 +56207,32 @@ words:
       - ru: Че́рез не́сколько секу́нд по́езд тро́нулся.
         en_gb: After a few seconds the train started moving.
         inflect: { token: 3, case: gen, number: pl, rule: noun-count-gen-pl }
+  "сельдерей=celery":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: celery (the pale green stalks eaten raw or in soup)
+    usage:
+      - ru: Он ест сельдере́й ка́ждый день.
+        en_gb: He eats celery every day.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Сельдере́й лежи́т в холоди́льнике.
+        en_gb: The celery is in the fridge.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Суп из сельдере́я о́чень поле́зный.
+        en_gb: Celery soup is very good for you.
+        inflect: { token: 3, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: сельдере́й
+      sg_gen: сельдере́я
+      sg_dat: сельдере́ю
+      sg_acc: сельдере́й
+      sg_ins: сельдере́ем
+      sg_pre: сельдере́е
   "семья=family":
     cefr_level: A1
     gender: f
@@ -56879,6 +57840,39 @@ words:
       pl_acc: слёзы
       pl_ins: слеза́ми
       pl_pre: слеза́х
+  "слива=plum":
+    cefr_level: A2
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: plum (a small soft fruit with a stone inside)
+    usage:
+      - ru: Э́та сли́ва ещё зелёная.
+        en_gb: This plum is still green.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Де́ти съе́ли все сли́вы.
+        en_gb: The children ate all the plums.
+        inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Ма́ма ва́рит варе́нье из слив.
+        en_gb: Mum is making jam from plums.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: сли́ва
+      sg_gen: сли́вы
+      sg_dat: сли́ве
+      sg_acc: сли́ву
+      sg_ins: сли́вой
+      sg_pre: сли́ве
+      pl_nom: сли́вы
+      pl_gen: слив
+      pl_dat: сли́вам
+      pl_acc: сли́вы
+      pl_ins: сли́вами
+      pl_pre: сли́вах
   "словарь=dictionary":
     cefr_level: A2
     gender: m
@@ -57346,6 +58340,33 @@ words:
       - ru: Де́ти запо́лнили ко́мнату сме́хом.
         en_gb: The children filled the room with laughter.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+  "смородина=currant":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: currant (currants, black or red; collective)
+    usage:
+      - ru: В саду́ растёт чёрная сморо́дина.
+        en_gb: Blackcurrants grow in the garden.
+        inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ба́бушка де́лает варе́нье из сморо́дины.
+        en_gb: Grandma makes jam from currants.
+        inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+      - ru: Де́ти собира́ют сморо́дину.
+        en_gb: The children are picking currants.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: сморо́дина
+      sg_gen: сморо́дины
+      sg_dat: сморо́дине
+      sg_acc: сморо́дину
+      sg_ins: сморо́диной
+      sg_pre: сморо́дине
   "смс=text message":
     cefr_level: A2
     gender: n
@@ -65210,6 +66231,39 @@ words:
       - ru: Из ту́чи пошёл си́льный дождь.
         en_gb: Heavy rain came from the storm cloud.
         inflect: { token: 2, case: gen, number: sg, rule: noun-gen-sg }
+  "тыква=pumpkin":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the garden
+    en_gb:
+      standard: pumpkin (a large orange vegetable with a hard skin)
+    usage:
+      - ru: На огоро́де растёт больша́я ты́ква.
+        en_gb: A big pumpkin is growing in the vegetable garden.
+        inflect: { token: 5, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Ма́ма свари́ла ка́шу с ты́квой.
+        en_gb: Mum cooked porridge with pumpkin.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: Она́ купи́ла ты́кву на ры́нке.
+        en_gb: She bought a pumpkin at the market.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+    declension:
+      sg_nom: ты́ква
+      sg_gen: ты́квы
+      sg_dat: ты́кве
+      sg_acc: ты́кву
+      sg_ins: ты́квой
+      sg_pre: ты́кве
+      pl_nom: ты́квы
+      pl_gen: тыкв
+      pl_dat: ты́квам
+      pl_acc: ты́квы
+      pl_ins: ты́квами
+      pl_pre: ты́квах
   "тыл=rear":
     cefr_level: B2
     gender: m
@@ -66162,6 +67216,34 @@ words:
       pl_acc: украше́ния
       pl_ins: украше́ниями
       pl_pre: украше́ниях
+  "укроп=dill":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the kitchen
+      - in the garden
+    en_gb:
+      standard: dill (the feathery green herb Russian food is full of)
+    usage:
+      - ru: Она́ доба́вила укро́п в суп.
+        en_gb: She added dill to the soup.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: На гря́дке растёт укро́п.
+        en_gb: Dill is growing in the vegetable bed.
+        inflect: { token: 4, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Э́тот сала́т без укро́па.
+        en_gb: This salad has no dill in it.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: укро́п
+      sg_gen: укро́па
+      sg_dat: укро́пу
+      sg_acc: укро́п
+      sg_ins: укро́пом
+      sg_pre: укро́пе
   "улица=street":
     cefr_level: A1
     gender: f
@@ -68731,6 +69813,13 @@ words:
           Borrowed into Slavic from Germanic, and the same word as English loaf
           (Old English hlāf). That hlāf is also the first half of lord — hlāford,
           the keeper of the loaf — and of lady, hlǣfdīge, who kneaded it.
+      - kind: region
+        where: St Petersburg
+        text: >-
+          Which bread хлеб means shifts as you travel. In St Petersburg it leans
+          towards the dark rye loaf and the white one is a бу́лка; in Moscow хлеб
+          covers both, and a бу́лка is a sweet bun.
+        see: ["булка=white loaf"]
     collections:
       - in the kitchen
       - restaurants and cafes
@@ -69330,6 +70419,32 @@ words:
       pl_acc: худо́жников
       pl_ins: худо́жниками
       pl_pre: худо́жниках
+  "хурма=persimmon":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: persimmon (an orange autumn fruit, sold everywhere in Russia in winter)
+    usage:
+      - ru: Хурма́ растёт на ю́ге.
+        en_gb: Persimmons grow in the south.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Я купи́л хурму́ на ры́нке.
+        en_gb: I bought persimmons at the market.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Э́то варе́нье из хурмы́.
+        en_gb: This is persimmon jam.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: хурма́
+      sg_gen: хурмы́
+      sg_dat: хурме́
+      sg_acc: хурму́
+      sg_ins: хурмо́й
+      sg_pre: хурме́
   "царь=tsar":
     cefr_level: B1
     gender: m
@@ -69410,6 +70525,32 @@ words:
       - kind: root
         text: "Colour — and, older, blossom, which is where цвето́к comes from."
         see: ["цветок=flower"]
+  "цветная капуста=cauliflower":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: cauliflower (the white one, sold beside the green cabbage)
+    usage:
+      - ru: Она́ свари́ла цветну́ю капу́сту.
+        en_gb: She boiled cauliflower.
+        inflect: { token: 3, span: 2, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Цветна́я капу́ста лежи́т в холоди́льнике.
+        en_gb: The cauliflower is in the fridge.
+        inflect: { token: 1, span: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Суп из цветно́й капу́сты о́чень вку́сный.
+        en_gb: Cauliflower soup is very tasty.
+        inflect: { token: 3, span: 2, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: цветна́я капу́ста
+      sg_gen: цветно́й капу́сты
+      sg_dat: цветно́й капу́сте
+      sg_acc: цветну́ю капу́сту
+      sg_ins: цветно́й капу́стой
+      sg_pre: цветно́й капу́сте
   "цветок=flower":
     cefr_level: A1
     gender: m
@@ -70407,6 +71548,92 @@ words:
       pl_acc: черепа́х
       pl_ins: черепа́хами
       pl_pre: черепа́хах
+  "черешня=cherry":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: cherry (the sweet pale one, eaten fresh)
+    usage:
+      - ru: Ле́том мы всегда́ покупа́ем чере́шню.
+        en_gb: In summer we always buy cherries.
+        inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: В ию́не на ры́нке продаю́т чере́шню.
+        en_gb: In June they sell cherries at the market.
+        inflect: { token: 6, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он купи́л килогра́мм чере́шни.
+        en_gb: He bought a kilogram of cherries.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
+    declension:
+      sg_nom: чере́шня
+      sg_gen: чере́шни
+      sg_dat: чере́шне
+      sg_acc: чере́шню
+      sg_ins: чере́шней
+      sg_pre: чере́шне
+      pl_nom: чере́шни
+      pl_gen: чере́шен
+      pl_dat: чере́шням
+      pl_acc: чере́шни
+      pl_ins: чере́шнями
+      pl_pre: чере́шнях
+  "черника=blueberry":
+    cefr_level: B1
+    gender: f
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: blueberry (the small dark wild bilberry; collective)
+    usage:
+      - ru: Черни́ка растёт в лесу́.
+        en_gb: Bilberries grow in the forest.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Мы собира́ли черни́ку в лесу́.
+        en_gb: We were picking bilberries in the forest.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Он ест ка́шу с черни́кой.
+        en_gb: He is eating porridge with bilberries.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+    declension:
+      sg_nom: черни́ка
+      sg_gen: черни́ки
+      sg_dat: черни́ке
+      sg_acc: черни́ку
+      sg_ins: черни́кой
+      sg_pre: черни́ке
+  "чеснок=garlic":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+      - in the kitchen
+      - in the garden
+    en_gb:
+      standard: garlic (a strong-smelling bulb used in cooking)
+    usage:
+      - ru: В су́пе мно́го чеснока́.
+        en_gb: There is a lot of garlic in the soup.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-quantity-gen-sg }
+      - ru: Она́ доба́вила чесно́к в со́ус.
+        en_gb: She added garlic to the sauce.
+        inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
+      - ru: Чесно́к па́хнет о́чень си́льно.
+        en_gb: Garlic smells very strong.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+    declension:
+      sg_nom: чесно́к
+      sg_gen: чеснока́
+      sg_dat: чесноку́
+      sg_acc: чесно́к
+      sg_ins: чесноко́м
+      sg_pre: чесноке́
   "чёрт=devil":
     cefr_level: B2
     gender: m
@@ -70973,6 +72200,39 @@ words:
       sg_acc: шампа́нское
       sg_ins: шампа́нским
       sg_pre: шампа́нском
+  "шампиньон=mushroom":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    collections:
+      - food and drink
+      - in the kitchen
+    en_gb:
+      standard: mushroom (the white button mushroom sold in every shop)
+    usage:
+      - ru: Она́ купи́ла шампиньо́ны в магази́не.
+        en_gb: She bought mushrooms in the shop.
+        inflect: { token: 3, case: acc, number: pl, rule: noun-acc-pl }
+      - ru: Э́тот шампиньо́н о́чень большо́й.
+        en_gb: This mushroom is very big.
+        inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он де́лает суп из шампиньо́нов.
+        en_gb: He is making mushroom soup.
+        inflect: { token: 5, case: gen, number: pl, rule: noun-gen-pl }
+    declension:
+      sg_nom: шампиньо́н
+      sg_gen: шампиньо́на
+      sg_dat: шампиньо́ну
+      sg_acc: шампиньо́н
+      sg_ins: шампиньо́ном
+      sg_pre: шампиньо́не
+      pl_nom: шампиньо́ны
+      pl_gen: шампиньо́нов
+      pl_dat: шампиньо́нам
+      pl_acc: шампиньо́ны
+      pl_ins: шампиньо́нами
+      pl_pre: шампиньо́нах
   "шанс=chance":
     cefr_level: B1
     gender: m
@@ -72052,6 +73312,32 @@ words:
       pl_acc: шофёров
       pl_ins: шофёрами
       pl_pre: шофёрах
+  "шпинат=spinach":
+    cefr_level: B1
+    gender: m
+    animacy: i
+    number: ["sg"]
+    collections:
+      - food and drink
+    en_gb:
+      standard: spinach (a dark green leaf vegetable)
+    usage:
+      - ru: Шпина́т о́чень поле́зный.
+        en_gb: Spinach is very good for you.
+        inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+      - ru: Он де́лает сала́т со шпина́том.
+        en_gb: He is making a salad with spinach.
+        inflect: { token: 5, case: ins, number: sg, rule: noun-ins-sg }
+      - ru: В магази́не нет шпина́та.
+        en_gb: There is no spinach in the shop.
+        inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
+    declension:
+      sg_nom: шпина́т
+      sg_gen: шпина́та
+      sg_dat: шпина́ту
+      sg_acc: шпина́т
+      sg_ins: шпина́том
+      sg_pre: шпина́те
   "шприц=syringe":
     cefr_level: B2
     gender: m

@@ -9,6 +9,7 @@ import {
   buildGlossIndex,
   correctionMessage,
   VERDICTS,
+  QUIET_TIERS,
 } from './confusables.js'
 import { shapeVocab } from './vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
@@ -389,6 +390,48 @@ words:
   it('ranks verdicts most-specific first', () => {
     expect(VERDICTS[0]).toBe('wrong-form')
     expect(VERDICTS[VERDICTS.length - 1]).toBe('other-word')
+  })
+})
+
+// ── A regional variant is a real word, not a blank (#636) ───────────────────
+describe('a regional variant, against the real corpus', () => {
+  const words = loadFixtureWords()
+
+  it('names the place instead of failing the answer flat', () => {
+    const verdict = verdictOf(words, 'кура', 'курица=hen', 'ку́рица')
+    expect(verdict).toMatchObject({ type: 'regional', where: 'St Petersburg' })
+  })
+
+  it('says where the word lives, and still asks for the dictionary one', () => {
+    const { headline, detail, tier } = correctionMessage(
+      verdictOf(words, 'кура', 'курица=hen', 'ку́рица'),
+    )
+    expect(headline).toContain('St Petersburg')
+    expect(detail).toMatch(/dictionary/i)
+    // Never the answer itself, however it is spelled.
+    expect(`${headline} ${detail}`).not.toContain('курица')
+    // Right knowledge, wrong variety — no error sound, like a synonym.
+    expect(QUIET_TIERS).toContain(tier)
+  })
+
+  it('covers the class where the boundary moves, not just the renamings', () => {
+    // хлеб/бу́лка is the pair a labelled link could never carry: the same word
+    // divides the bread up differently, so only prose can say it.
+    expect(verdictOf(words, 'булка', 'хлеб=bread', 'хлеб')).toMatchObject({
+      type: 'regional',
+      where: 'St Petersburg',
+    })
+    expect(verdictOf(words, 'парадная', 'подъезд=entrance', 'подъе́зд')).toMatchObject({
+      type: 'regional',
+    })
+  })
+
+  it('leaves an unrelated word alone', () => {
+    expect(verdictOf(words, 'булочная', 'хлеб=bread', 'хлеб')?.type).not.toBe('regional')
+  })
+
+  it('outranks a synonym, which is the vaguer thing to say', () => {
+    expect(VERDICTS.indexOf('regional')).toBeLessThan(VERDICTS.indexOf('synonym'))
   })
 })
 
