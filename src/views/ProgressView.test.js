@@ -64,6 +64,30 @@ describe('ProgressView', () => {
     expect(painted.length).toBeGreaterThanOrEqual(2)
   })
 
+  it('shows a coverage bar per CEFR level, with the mastered slice inside it', () => {
+    vocabState.words = [
+      { key: 'дом=house', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+      { key: 'кот=cat', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+      { key: 'год=year', pos: 'noun', gender: 'm', cefr: 'A2', hasInflections: false },
+      { key: 'gloss=only', pos: 'noun', gender: 'm', cefr: 'B1', hasInflections: false, learnable: false },
+    ]
+    progress.records = { 'дом=house': masteredRecord('дом=house', Date.parse('2026-06-01T10:00:00Z')) }
+
+    const wrapper = mount(ProgressView)
+    const rows = wrapper.findAll('.cefr-row')
+    // A1 and A2 have learnable words; B1's only entry is gloss-only, so no bar.
+    expect(rows.length).toBe(2)
+    expect(rows[0].find('.cefr-level').text()).toBe('A1')
+    expect(rows[0].find('.cefr-pct').text()).toBe('50%')
+    expect(rows[0].find('.cefr-count').text()).toBe('1 / 2 learned, 1 mastered')
+    expect(rows[0].find('.cefr-bar').attributes('aria-valuenow')).toBe('50')
+    expect(rows[0].find('.learn-fill').attributes('style')).toContain('width: 50%')
+    expect(rows[0].find('.master-fill').attributes('style')).toContain('width: 50%')
+    // A2: nothing learned yet.
+    expect(rows[1].find('.cefr-pct').text()).toBe('0%')
+    expect(rows[1].find('.cefr-count').text()).toBe('0 / 1 learned')
+  })
+
   it('lists weakest skills and launches a focused session on tap', async () => {
     const nouns = ['n0', 'n1', 'n2'].map((key) => ({ key, pos: 'noun', gender: 'm', hasInflections: false }))
     vocabState.words = nouns

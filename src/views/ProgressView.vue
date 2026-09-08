@@ -1,11 +1,13 @@
 <script setup>
 // Progress screen: a words-known-by-day chart, expandable learned/mastered word
-// lists, the learner's weakest skills, and achievement badges.
+// lists, per-CEFR-level coverage bars, the learner's weakest skills, and
+// achievement badges.
 import { computed, nextTick, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar, cefrStats } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
+import { CEFR_ORDER } from '../lib/batches.js'
 import AchievementBadge from '../components/AchievementBadge.vue'
 
 const router = useRouter()
@@ -16,6 +18,24 @@ const showList = ref(null) // 'learned' | 'mastered' | null
 
 const learned = computed(() => learnedWords())
 const mastered = computed(() => masteredWords())
+
+// One bar per CEFR level: how much of that level's vocabulary is learned, with
+// the mastered slice drawn inside it. Levels the corpus has no words for are
+// left out rather than shown as empty bars.
+const cefrLevels = computed(() => {
+  const stats = cefrStats.value
+  return CEFR_ORDER.map((level) => {
+    const s = stats[level] ?? { total: 0, learned: 0, mastered: 0 }
+    return {
+      level,
+      total: s.total,
+      learned: s.learned,
+      mastered: s.mastered,
+      pct: s.total ? (s.learned / s.total) * 100 : 0,
+      masteredPct: s.total ? (s.mastered / s.total) * 100 : 0,
+    }
+  }).filter((l) => l.total > 0)
+})
 
 // A compact SVG line chart of cumulative learned words by day.
 const W = 320
@@ -156,6 +176,35 @@ function toggle(which) {
       </div>
     </div>
 
+    <!-- CEFR level coverage -->
+    <div v-if="cefrLevels.length" class="card cefr-card">
+      <h2>CEFR levels</h2>
+      <p class="muted cefr-hint">
+        How much of each level's vocabulary you've learned. The brighter slice is what
+        you've mastered.
+      </p>
+      <div class="cefr-list">
+        <div v-for="l in cefrLevels" :key="l.level" class="cefr-row">
+          <div class="cefr-meta">
+            <span class="cefr-level">{{ l.level }}</span>
+            <span class="cefr-pct">{{ Math.round(l.pct) }}%</span>
+            <span class="cefr-count muted">{{ l.learned }} / {{ l.total }} learned<template v-if="l.mastered">, {{ l.mastered }} mastered</template></span>
+          </div>
+          <div
+            class="cefr-bar"
+            role="progressbar"
+            :aria-valuenow="Math.round(l.pct)"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            :aria-label="`${l.level}: ${l.learned} of ${l.total} words learned`"
+          >
+            <div class="cefr-fill learn-fill" :style="{ width: l.pct + '%' }" />
+            <div class="cefr-fill master-fill" :style="{ width: l.masteredPct + '%' }" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Achievement badges -->
     <div class="card achievements">
       <h2>Achievements <span class="ach-count muted">{{ earnedCount }} / {{ ACHIEVEMENTS.length }}</span></h2>
@@ -267,6 +316,53 @@ function toggle(which) {
 }
 .master-fill {
   background: var(--gold);
+}
+.cefr-card h2 {
+  margin: 0 0 0.25rem;
+}
+.cefr-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+}
+.cefr-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.cefr-row {
+  display: grid;
+  gap: 0.35rem;
+}
+.cefr-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.cefr-level {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  min-width: 2rem;
+}
+.cefr-pct {
+  font-weight: 600;
+  color: var(--good);
+}
+.cefr-count {
+  font-size: 0.85rem;
+  margin-left: auto;
+  text-align: right;
+}
+.cefr-bar {
+  position: relative;
+  height: 8px;
+  background: var(--bg-soft);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.cefr-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 4px;
+  transition: width 0.3s ease;
 }
 .streak-card {
   display: grid;

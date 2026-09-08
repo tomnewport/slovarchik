@@ -88,18 +88,21 @@ export function achievementById(id) {
 /**
  * Build cefrStats from a list of word objects and a stateOf function.
  * Words must have a `.cefr` property. Words without a cefr value are ignored.
+ * `learned` counts mastered words too (mastery is above learned), and
+ * `mastered` is the subset of those — so a bar can show one inside the other.
  * @param {Array<{key: string, cefr: string|null}>} words
  * @param {(key: string) => string} stateOf  - returns word state ('unknown'|'learning'|'learned'|'mastered')
- * @returns {Object} { A1: { total, learned }, ... }
+ * @returns {Object} { A1: { total, learned, mastered }, ... }
  */
 export function buildCefrStats(words, stateOf) {
   const stats = {}
-  for (const level of CEFR_ORDER) stats[level] = { total: 0, learned: 0 }
+  for (const level of CEFR_ORDER) stats[level] = { total: 0, learned: 0, mastered: 0 }
   for (const w of words) {
     if (!w.cefr || !stats[w.cefr]) continue
     stats[w.cefr].total++
     const s = stateOf(w.key)
     if (s === 'learned' || s === 'mastered') stats[w.cefr].learned++
+    if (s === 'mastered') stats[w.cefr].mastered++
   }
   return stats
 }
