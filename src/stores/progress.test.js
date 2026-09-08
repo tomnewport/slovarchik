@@ -291,11 +291,13 @@ describe('state memoisation (#531)', () => {
 
   it('cefrStats follows both the vocab and progress', async () => {
     setVocab(makeWords(2, { cefr: 'A1', hasInflections: false }))
-    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 0 })
+    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 0, mastered: 0 })
     await learn('w0')
-    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 1 })
+    // `learn` covers every dimension of an uninflected word, so w0 lands on
+    // mastered — which counts as learned too, and as its own subset.
+    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 1, mastered: 1 })
     setVocab(makeWords(3, { cefr: 'A1', hasInflections: false }))
-    expect(cefrStats.value.A1).toEqual({ total: 3, learned: 1 })
+    expect(cefrStats.value.A1).toEqual({ total: 3, learned: 1, mastered: 1 })
   })
 })
 

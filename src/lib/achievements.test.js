@@ -134,6 +134,14 @@ describe('buildCefrStats', () => {
     expect(stats.B1.learned).toBe(1) // успех learned
   })
 
+  it('counts mastered words as a subset of learned', () => {
+    const states = { кот: 'mastered', дом: 'learned', год: 'mastered', работа: 'learning' }
+    const stats = buildCefrStats(words, (k) => states[k] ?? 'unknown')
+    expect(stats.A1).toEqual({ total: 2, learned: 2, mastered: 1 })
+    expect(stats.A2).toEqual({ total: 2, learned: 1, mastered: 1 })
+    expect(stats.B1).toEqual({ total: 1, learned: 0, mastered: 0 })
+  })
+
   it('ignores words with null cefr', () => {
     const stats = buildCefrStats(words, () => 'learned')
     // 'noLevel' should not appear in any bucket
