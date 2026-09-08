@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import 'fake-indexeddb/auto'
 import { IDBFactory } from 'fake-indexeddb'
 
@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import * as idb from '../lib/idb.js'
-import { state, loadFromCache, syncFromNetwork } from './vocab.js'
+import { state, loadFromCache, syncFromNetwork, initVocab } from './vocab.js'
 
 // The client fetches build-generated JSON; mirror that here by parsing the
 // authoring YAML into the document object the server would serve.
@@ -236,5 +236,87 @@ describe('word facts survive the cache round trip', () => {
       expect(w.facts, `${w.key}: facts`).toEqual([])
       expect(w.confusables, `${w.key}: confusables`).toEqual([])
     }
+  })
+})
+
+// The offline path, which nothing exercised before #665. This is the app's
+// headline claim — "works offline" — and `initVocab` is where it is decided:
+// it loads the IndexedDB cache first, only reaches for the network when the
+// browser says it is online, and treats a failed refresh as a warning rather
+// than a failure whenever cached words are already in hand.
+describe('initVocab offline', () => {
+  /** Pretend the browser is offline for the duration of one test. */
+  const goOffline = () => vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false)
+
+  // `navigator.onLine` is a prototype getter, so a spy on it outlives the test
+  // that installed it and would quietly put every later test offline.
+  beforeEach(() => {
+    state.error = null
+  })
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  /** Seed IndexedDB as a previous online visit would have left it. */
+  async function seedCache() {
+    await idb.putFile({
+      file: 'nouns.json',
+      pos: 'noun',
+      updated: manifest.files[0].updated,
+      doc: nounsDoc,
+    })
+  }
+
+  it('reaches ready from the cache alone, without touching the network', async () => {
+    await seedCache()
+    goOffline()
+    const fetchSpy = vi.fn()
+    globalThis.fetch = fetchSpy
+
+    expect(await initVocab()).toBe('ready')
+    expect(state.words.length).toBeGreaterThan(0)
+    // The point of the offline branch: no request is even attempted.
+    expect(fetchSpy).not.toHaveBeenCalled()
+  })
+
+  it('reports empty, not error, when offline with nothing cached', async () => {
+    goOffline()
+    globalThis.fetch = vi.fn()
+
+    // Nothing to show, but nothing went wrong either — the distinction is what
+    // lets the UI say "no words yet" instead of raising a failure.
+    expect(await initVocab()).toBe('empty')
+  })
+
+  it('stays ready when the refresh fails but cached words are in hand', async () => {
+    await seedCache()
+    globalThis.fetch = vi.fn(async () => {
+      throw new TypeError('Failed to fetch')
+    })
+
+    // Online as far as the browser is concerned, so the refresh is attempted
+    // and throws — a captive portal, a dropped connection, a 500. Cached data
+    // is still perfectly usable, so this must not degrade to `error`.
+    expect(await initVocab()).toBe('ready')
+    expect(state.words.length).toBeGreaterThan(0)
+    expect(state.error).toBeInstanceOf(TypeError)
+  })
+
+  it('reports error when the refresh fails and there is nothing cached', async () => {
+    globalThis.fetch = vi.fn(async () => {
+      throw new TypeError('Failed to fetch')
+    })
+
+    expect(await initVocab()).toBe('error')
+    expect(state.words).toHaveLength(0)
+  })
+
+  it('refreshes from the network when online', async () => {
+    const fetchSpy = mockFetch()
+    globalThis.fetch = fetchSpy
+
+    expect(await initVocab()).toBe('ready')
+    expect(fetchSpy).toHaveBeenCalled()
+    expect(state.words.length).toBeGreaterThan(0)
   })
 })
