@@ -25,6 +25,7 @@
     "check:inflect": "node scripts/annotate-inflect.mjs --check",
     "check:inflect:cases": "node scripts/triage-inflect.mjs --verify",
     "check:prompts": "node scripts/check-prompt-ambiguity.mjs",
+    "check:size": "node scripts/size-summary.mjs",
     "audit:gender": "node scripts/gender-audit.mjs",
     "audit:translations": "node scripts/audit-translations.mjs --report",
     "audit:alternates": "node scripts/audit-translations.mjs --alternates",
