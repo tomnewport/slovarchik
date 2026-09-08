@@ -4,7 +4,20 @@ import { mkdtempSync, writeFileSync, readFileSync, existsSync, rmSync } from 'no
 import { tmpdir } from 'node:os'
 import { resolve, join } from 'node:path'
 
-import { buildManifest, emitVocabJson, gitUpdated, hashFile, jsonName, FILES } from './gen-manifest.mjs'
+import {
+  buildManifest,
+  emitPhraseNotes,
+  emitVocabJson,
+  gitUpdated,
+  hashFile,
+  jsonName,
+  phraseNotesEntry,
+  wordEntries,
+  FILES,
+  PHRASE_NOTES_FILE,
+  PHRASE_NOTES_POS,
+} from './gen-manifest.mjs'
+import { buildWords, phraseNotesFrom, shapePhrases } from '../src/lib/vocabBuild.js'
 
 // The generator hashes a fixed set of vocab files; give the temp dir all of
 // them so the file-list guard is satisfied, then vary the ones under test.
@@ -59,6 +72,70 @@ describe('gen-manifest', () => {
     // ...and it is the parsed document, not the raw YAML text.
     const doc = JSON.parse(readFileSync(resolve(dir, 'nouns.json'), 'utf8'))
     expect(doc).toEqual({ words: { 'дом=house': { gender: 'm' } } })
+  })
+
+
+  describe('phrase-notes.json (#657)', () => {
+    // A two-word corpus with a usage example whose English is ambiguous about
+    // ты/вы, so the shaped phrase actually carries an annotation to ship.
+    const nounsYml = [
+      'words:',
+      '  дом=house:',
+      '    gender: m',
+      '    usage:',
+      '      - { ru: "Ты идёшь домой", en_gb: "You are going home" }',
+      '      - { ru: "Вы идёте домой", en_gb: "You are going home" }',
+      '',
+    ].join('\n')
+
+    function emit() {
+      writeFileSync(resolve(dir, 'nouns.yml'), nounsYml)
+      emitVocabJson(dir)
+      const manifest = buildManifest(dir, () => '2026-01-01T00:00:00Z')
+      const doc = emitPhraseNotes(dir, manifest.files)
+      return { manifest, doc }
+    }
+
+    it('writes the annotations the runtime would otherwise derive', () => {
+      const { doc } = emit()
+      const words = buildWords([{ pos: 'noun', doc: JSON.parse(readFileSync(resolve(dir, 'nouns.json'), 'utf8')) }])
+      expect(doc.notes).toEqual(phraseNotesFrom(shapePhrases(words)))
+      expect(Object.keys(doc.notes).length).toBeGreaterThan(0)
+    })
+
+    it('stamps the corpus it was derived from, and only the word files', () => {
+      const { manifest, doc } = emit()
+      expect(doc.corpus).toContain('nouns.json:')
+      expect(doc.corpus).not.toContain('grammar-rules.json:')
+      expect(doc.corpus).not.toContain(PHRASE_NOTES_FILE)
+      expect(wordEntries(manifest.files).map((f) => f.file)).not.toContain('grammar-rules.json')
+    })
+
+    it('is a manifest entry like any other, so the client caches it per-hash', () => {
+      const { manifest } = emit()
+      const entry = phraseNotesEntry(dir, manifest.files)
+      expect(entry.pos).toBe(PHRASE_NOTES_POS)
+      expect(entry.file).toBe(PHRASE_NOTES_FILE)
+      expect(entry.hash).toMatch(/^[0-9a-f]{16}$/)
+      expect(entry.updated).toBe('2026-01-01T00:00:00Z')
+      // The entry describes itself, so it is never part of its own token.
+      expect(wordEntries([entry])).toEqual([])
+    })
+
+    it('is deterministic — the same corpus emits the same bytes', () => {
+      emit()
+      const first = readFileSync(resolve(dir, PHRASE_NOTES_FILE), 'utf8')
+      emit()
+      expect(readFileSync(resolve(dir, PHRASE_NOTES_FILE), 'utf8')).toBe(first)
+    })
+
+    it('changes its corpus token when a word file changes', () => {
+      const before = emit().doc.corpus
+      writeFileSync(resolve(dir, 'nouns.yml'), nounsYml.replace('домой', 'домо́й'))
+      emitVocabJson(dir)
+      const manifest = buildManifest(dir, () => '2026-01-01T00:00:00Z')
+      expect(emitPhraseNotes(dir, manifest.files).corpus).not.toBe(before)
+    })
   })
 
   it('gitUpdated returns the last commit date (as UTC Z), null when untracked', () => {

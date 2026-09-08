@@ -7,6 +7,8 @@ import {
   shapePhrases,
   shapeNouns,
   shapeContextPhrases,
+  phraseNotesFrom,
+  corpusToken,
   learnableWords,
   partsOfSpeech,
 } from './vocabBuild.js'
@@ -709,6 +711,50 @@ describe('the bundled vocabulary fixtures', () => {
     const shaped = shapeVocab(words)
     expect(shaped[0]).toHaveProperty('ru')
     expect(Array.isArray(shaped[0].en)).toBe(true)
+  })
+
+  it('shapePhrases derives the same phrases from build-time notes as it does itself (#657)', () => {
+    const derived = shapePhrases(words)
+    const fromNotes = shapePhrases(words, null, phraseNotesFrom(derived))
+    // Not "close enough": the build-time path replaces two corpus-wide
+    // derivations, so anything it gets wrong is wrong for every learner.
+    expect(fromNotes).toEqual(derived)
+  })
+
+  it('phraseNotesFrom keeps only the phrases that carry something', () => {
+    const derived = shapePhrases(words)
+    const notes = phraseNotesFrom(derived)
+    for (const [i, entry] of Object.entries(notes)) {
+      expect(entry.n?.length || entry.h).toBeTruthy()
+      expect(derived[Number(i)]).toBeTruthy()
+    }
+    const carrying = derived.filter((p) => p.enNotes?.length || p.enHint).length
+    expect(Object.keys(notes).length).toBe(carrying)
+  })
+
+  it('shapePhrases with notes never annotates a phrase the notes do not name', () => {
+    // A stale ordinal must degrade to "no annotation", never to "somebody
+    // else's annotation" — the store gates on corpusToken for exactly this,
+    // and this pins the behaviour the gate is protecting.
+    const fromNotes = shapePhrases(words, null, {})
+    expect(fromNotes.every((p) => p.enNotes.length === 0 && p.enHint === undefined)).toBe(true)
+    expect(fromNotes.map((p) => p.id)).toEqual(shapePhrases(words).map((p) => p.id))
+  })
+
+  describe('corpusToken', () => {
+    it('is stable under file order but not under a content change', () => {
+      const a = [{ file: 'nouns.json', hash: 'aaa' }, { file: 'verbs.json', hash: 'bbb' }]
+      expect(corpusToken(a)).toBe(corpusToken([...a].reverse()))
+      expect(corpusToken(a)).not.toBe(
+        corpusToken([{ file: 'nouns.json', hash: 'aaa' }, { file: 'verbs.json', hash: 'ccc' }]),
+      )
+    })
+
+    it('notices a file appearing or disappearing', () => {
+      const a = [{ file: 'nouns.json', hash: 'aaa' }]
+      expect(corpusToken(a)).not.toBe(corpusToken([...a, { file: 'verbs.json', hash: 'bbb' }]))
+      expect(corpusToken([])).toBe('')
+    })
   })
 
   it('shapePhrases flattens usage examples into translatable phrases', () => {

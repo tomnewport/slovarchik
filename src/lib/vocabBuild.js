@@ -723,13 +723,23 @@ export function vocabDisplay(v, rng = Math.random) {
  *   costs ~260 ms — half of this function. The app already keeps one beside the
  *   store's word list and hands it in (see `stores/vocab.js`); scripts and tests
  *   that call this once may leave it out and let `promptHints` build its own.
+ * @param {object|null} [notes] pre-derived annotations from
+ *   {@link phraseNotesFrom}, ordinal → `{n, h}`, built at build time by
+ *   `scripts/gen-manifest.mjs` (#657). When given, the two corpus-wide
+ *   derivations this function would otherwise run — the ambiguity index and the
+ *   prompt disambiguation, ~170 ms of its ~205 ms — are skipped and their
+ *   answers read off instead. The caller must have established that the notes
+ *   were built from *these* words: the store gates on `corpusToken` and falls
+ *   back to deriving here when the two disagree, which is why this path stays
+ *   live and unit-tested rather than becoming dead build-time-only code.
  */
-export function shapePhrases(words, formIndex) {
+export function shapePhrases(words, formIndex, notes = null) {
   const seen = new Set()
   const out = []
   // Built from *every* word (gloss-only entries included): a surface form is
   // only evidence of person/gender if nothing else in the dictionary shares it.
-  const ambiguity = buildAmbiguityIndex(words)
+  // Skipped entirely when the annotations were derived at build time.
+  const ambiguity = notes ? null : buildAmbiguityIndex(words)
   for (const w of learnableWords(words)) {
     for (const ex of w.usage ?? []) {
       const ru = String(ex?.ru ?? '').trim()
@@ -744,7 +754,7 @@ export function shapePhrases(words, formIndex) {
       const enAlt = Array.isArray(ex?.en_alt)
         ? ex.en_alt.map((s) => String(s ?? '').trim()).filter(Boolean)
         : []
-      const enNotes = phraseAmbiguities(ru, ambiguity, en)
+      const enNotes = notes ? (notes[out.length]?.n ?? []) : phraseAmbiguities(ru, ambiguity, en)
       out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes })
     }
   }
@@ -753,12 +763,70 @@ export function shapePhrases(words, formIndex) {
   // gloss note that tells them apart — computed here rather than per drill,
   // because whether a prompt is ambiguous is a property of the whole corpus and
   // no single phrase can know it. See lib/promptDisambiguation.js.
+  if (notes) {
+    out.forEach((p, i) => {
+      const hint = notes[i]?.h
+      if (hint) p.enHint = hint
+    })
+    return out
+  }
   const byId = new Map(out.map((p) => [p.id, p]))
   for (const [id, hint] of promptHints(out, words, formIndex)) {
     const p = byId.get(id)
     if (p) p.enHint = hint
   }
   return out
+}
+
+/**
+ * The build-time half of the above: reduce shaped phrases to just the parts
+ * that were expensive to derive, keyed by their position in the list.
+ *
+ * Position, not phrase text, because the phrase text *is* the corpus — keying
+ * on it costs 92 KiB gzipped against 12.6 KiB for ordinals, to say something the
+ * client already has. Ordinals are only meaningful against the exact word list
+ * they were built from, which is what {@link corpusToken} pins: the store uses
+ * the notes only when its cached corpus is byte-identical to the one the build
+ * shaped, and otherwise derives them itself.
+ *
+ * @param {object[]} phrases shaped phrases (from {@link shapePhrases})
+ * @returns {Object<string, {n?: string[], h?: string}>} sparse — a phrase with
+ *   neither an annotation nor a hint (about 80% of them) is simply absent.
+ */
+export function phraseNotesFrom(phrases) {
+  const out = {}
+  ;(phrases ?? []).forEach((p, i) => {
+    const entry = {}
+    if (p?.enNotes?.length) entry.n = p.enNotes
+    if (p?.enHint) entry.h = p.enHint
+    if (entry.n || entry.h) out[i] = entry
+  })
+  return out
+}
+
+/**
+ * A token identifying exactly which corpus a derived artifact was built from:
+ * every source file the words come from, paired with its content hash, in a
+ * stable order.
+ *
+ * The client caches vocab files individually and invalidates them individually,
+ * so it can legitimately hold a fresh `phrase-notes.json` beside a stale
+ * `nouns.json` for one sync. Ordinal-keyed notes read against the wrong word
+ * list would annotate the wrong sentences — the one failure mode worse than no
+ * annotation, since the annotations exist to stop a learner being asked an
+ * unanswerable question. Comparing tokens turns that into a plain miss: no
+ * match, derive at runtime as before.
+ *
+ * Both sides build the token from manifest fields, so it needs no hashing here.
+ *
+ * @param {Array<{file: string, hash?: string}>} files the word-carrying entries
+ * @returns {string}
+ */
+export function corpusToken(files) {
+  return (files ?? [])
+    .map((f) => `${f.file}:${f.hash ?? ''}`)
+    .sort()
+    .join('|')
 }
 
 /**
