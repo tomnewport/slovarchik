@@ -2,11 +2,12 @@
 // Progress screen: a words-known-by-day chart, expandable learned/mastered word
 // lists, per-CEFR-level coverage bars, the learner's weakest skills, and
 // achievement badges.
-import { computed, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar, cefrStats } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
+import { buildChart } from '../lib/progressChart.js'
 import { CEFR_ORDER } from '../lib/batches.js'
 import AchievementBadge from '../components/AchievementBadge.vue'
 
@@ -37,20 +38,21 @@ const cefrLevels = computed(() => {
   }).filter((l) => l.total > 0)
 })
 
-// A compact SVG line chart of cumulative learned words by day.
-const W = 320
-const H = 80
-const chart = computed(() => {
-  const pts = points.value
-  if (pts.length === 0) return null
-  const max = Math.max(1, ...pts.map((p) => p.learned))
-  const n = pts.length
-  const x = (i) => (n === 1 ? W / 2 : (i / (n - 1)) * W)
-  const y = (v) => H - (v / max) * H
-  const line = (key) => pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(p[key]).toFixed(1)}`).join(' ')
-  // A single day has no segment to stroke, so expose a point to render as a dot.
-  const dot = n === 1 ? { x: x(0), learned: y(pts[0].learned), mastered: y(pts[0].mastered) } : null
-  return { learned: line('learned'), mastered: line('mastered'), dot, max, last: pts[pts.length - 1] }
+// A line chart of cumulative learned/mastered words, on real scales in both
+// directions: geometry (ticks, gridlines, stepped paths) comes from
+// lib/progressChart.js. The SVG is drawn at its true pixel size rather than
+// being stretched by a viewBox, so labels stay the same size on every screen.
+const CHART_H = 190
+const chartBox = ref(null)
+const chartWidth = ref(360)
+let chartObserver = null
+
+const today = new Date().toISOString().slice(0, 10)
+const chart = computed(() => buildChart(points.value, { today, width: chartWidth.value, height: CHART_H }))
+const chartLabel = computed(() => {
+  const c = chart.value
+  if (!c) return 'Words known over time'
+  return `Words known over time: ${c.last.learned} learned, ${c.last.mastered} mastered as of ${c.last.day}`
 })
 
 const earnedCount = computed(() => earnedAchievements.value.size)
@@ -71,7 +73,17 @@ const calScroll = ref(null)
 onMounted(async () => {
   await nextTick()
   if (calScroll.value) calScroll.value.scrollLeft = calScroll.value.scrollWidth
+  const measure = () => {
+    const w = chartBox.value?.clientWidth
+    if (w) chartWidth.value = w
+  }
+  measure()
+  if (chartBox.value && typeof ResizeObserver !== 'undefined') {
+    chartObserver = new ResizeObserver(measure)
+    chartObserver.observe(chartBox.value)
+  }
 })
+onBeforeUnmount(() => chartObserver?.disconnect())
 
 function cellTitle(cell) {
   if (cell.future) return ''
@@ -222,16 +234,74 @@ function toggle(which) {
 
     <!-- Words-known-by-day chart -->
     <div class="card chart-card">
-      <h2>Words known by day</h2>
-      <svg v-if="chart" class="chart" :viewBox="`0 0 ${W} ${H}`" preserveAspectRatio="none" role="img" aria-label="Words known over time">
-        <path :d="chart.learned" class="line-learned" fill="none" />
-        <path v-if="chart.mastered" :d="chart.mastered" class="line-mastered" fill="none" />
-        <template v-if="chart.dot">
-          <circle :cx="chart.dot.x" :cy="chart.dot.learned" r="3" class="dot-learned" />
-          <circle :cx="chart.dot.x" :cy="chart.dot.mastered" r="3" class="dot-mastered" />
-        </template>
-      </svg>
-      <p v-else class="muted">No history yet — finish a session to start your chart.</p>
+      <div class="chart-head">
+        <h2>Words known by day</h2>
+        <ul class="legend">
+          <li><span class="swatch learn-fill" />learned</li>
+          <li><span class="swatch master-fill" />mastered</li>
+        </ul>
+      </div>
+      <div ref="chartBox" class="chart-box">
+        <svg
+          v-if="chart"
+          class="chart"
+          :width="chart.width"
+          :height="chart.height"
+          :viewBox="`0 0 ${chart.width} ${chart.height}`"
+          role="img"
+          :aria-label="chartLabel"
+        >
+          <g class="grid">
+            <line
+              v-for="t in chart.yTicks"
+              :key="`y${t.value}`"
+              :class="{ axis: t.value === 0 }"
+              :x1="chart.plot.x"
+              :x2="chart.plot.x + chart.plot.w"
+              :y1="t.y"
+              :y2="t.y"
+            />
+            <line
+              v-for="t in chart.xTicks"
+              :key="`x${t.time}`"
+              class="v"
+              :x1="t.x"
+              :x2="t.x"
+              :y1="chart.plot.y"
+              :y2="chart.plot.y + chart.plot.h"
+            />
+          </g>
+          <text
+            v-for="t in chart.yTicks"
+            :key="`yl${t.value}`"
+            class="tick"
+            text-anchor="end"
+            :x="chart.plot.x - 6"
+            :y="t.y + 3.5"
+          >{{ t.value }}</text>
+          <text
+            v-for="(t, i) in chart.xTicks"
+            :key="`xl${t.time}`"
+            class="tick"
+            :text-anchor="i === 0 ? 'start' : i === chart.xTicks.length - 1 ? 'end' : 'middle'"
+            :x="t.x"
+            :y="chart.height - 7"
+          >{{ t.label }}</text>
+          <text
+            class="axis-title"
+            text-anchor="middle"
+            :transform="`translate(10, ${chart.plot.y + chart.plot.h / 2}) rotate(-90)`"
+          >words</text>
+          <path v-if="chart.area" :d="chart.area" class="area-learned" />
+          <path v-if="chart.learned" :d="chart.learned" class="line-learned" fill="none" />
+          <path v-if="chart.mastered" :d="chart.mastered" class="line-mastered" fill="none" />
+          <template v-for="m in chart.markers" :key="m.key">
+            <circle :cx="m.x" :cy="m.mastered" r="2.5" class="dot-mastered"><title>{{ m.label }}</title></circle>
+            <circle :cx="m.x" :cy="m.learned" r="2.5" class="dot-learned"><title>{{ m.label }}</title></circle>
+          </template>
+        </svg>
+        <p v-else class="muted">No history yet — finish a session to start your chart.</p>
+      </div>
     </div>
 
     <!-- Learned / mastered word lists -->
@@ -470,18 +540,77 @@ function toggle(which) {
   border-color: var(--gold);
   color: var(--gold);
 }
-.chart {
+.chart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.chart-head h2 {
+  margin: 0;
+}
+.legend {
+  list-style: none;
+  display: flex;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.swatch {
+  width: 0.7rem;
+  height: 0.2rem;
+  border-radius: 1px;
+}
+.chart-box {
   width: 100%;
-  height: 80px;
-  overflow: visible;
+}
+.chart {
+  display: block;
+  max-width: 100%;
+}
+.grid line {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.grid line.v {
+  stroke-dasharray: 2 3;
+  opacity: 0.6;
+}
+.grid line.axis {
+  stroke: var(--muted);
+  opacity: 0.7;
+}
+.tick {
+  fill: var(--muted);
+  font-size: 10px;
+}
+.axis-title {
+  fill: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.area-learned {
+  fill: var(--good);
+  opacity: 0.12;
 }
 .line-learned {
   stroke: var(--good);
   stroke-width: 2;
+  stroke-linejoin: round;
 }
 .line-mastered {
   stroke: var(--gold);
   stroke-width: 2;
+  stroke-linejoin: round;
 }
 .dot-learned {
   fill: var(--good);
