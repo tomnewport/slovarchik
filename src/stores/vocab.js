@@ -14,6 +14,7 @@ import { computed, reactive } from 'vue'
 
 import { buildWords, shapeVocab, shapeNouns, shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
+import { buildFormIndex } from '../lib/phraseHint.js'
 import * as idb from '../lib/idb.js'
 
 /** Manifest `pos` for the file holding grammar-rule explanations, not words. */
@@ -38,11 +39,18 @@ export const state = reactive({
 
 export const vocab = computed(() => shapeVocab(state.words))
 export const nouns = computed(() => shapeNouns(state.words))
-export const phrases = computed(() => shapePhrases(state.words))
+export const phrases = computed(() => shapePhrases(state.words, formIndex.value))
 export const isReady = computed(() => state.words.length > 0)
 // key → word record. Cached here rather than rebuilt per component: several
 // consumers want it, and it is a Map over the whole dictionary.
 export const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, w])))
+// Surface form → hint entry, over the whole dictionary (~39.5k forms, ~260 ms to
+// build). It lives here beside `wordsByKey` rather than in `stores/hints.js`
+// because two unrelated consumers want the same index — the in-phrase hints and
+// `shapePhrases`' prompt disambiguation — and the store owning the words is the
+// only place both can reach without a cycle (#658). Building it twice cost
+// ~250 ms on entry to every phrase-bearing drill.
+export const formIndex = computed(() => buildFormIndex(state.words))
 
 /**
  * Stamp `hasContextDrill` on every word so the progression model knows whether
