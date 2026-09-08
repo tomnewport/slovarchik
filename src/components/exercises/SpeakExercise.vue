@@ -2,9 +2,11 @@
 // Speaking exercise: say the Russian word or phrase aloud. When the browser can
 // recognise speech (Chrome / Edge, online) we listen and grade what's heard with
 // a forgiving 80% letter-similarity threshold — so a single mangled ending still
-// passes. When recognition is unavailable we fall back to self-assessment (an
-// attempt counts, per #79) and say so. Either way the model answer is read aloud
-// the moment the exercise appears, and again with the result so it can be echoed.
+// passes. When recognition is unavailable — or when the learner says it isn't
+// working (a noisy bus, a recogniser mangling every word) — they say it aloud
+// and grade themselves; either verdict is recorded as a real attempt (#79).
+// Either way the model answer is read aloud the moment the exercise appears,
+// and again with the result so it can be echoed.
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 import { typingSequence } from '../../lib/phrases.js'
@@ -21,7 +23,7 @@ import {
   recognitionSupported,
   recognitionErrorMessage,
 } from '../../lib/recognition.js'
-import { playFeedback } from '../../stores/settings.js'
+import { playFeedback, settings, setSelfCertifySpeech } from '../../stores/settings.js'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
 
@@ -29,6 +31,10 @@ const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
 const canRecognize = recognitionSupported()
+
+// Grade by hand when there's no recogniser at all, or when the learner has
+// turned self-grading on for the rest of this app session.
+const selfGrading = computed(() => !canRecognize || settings.selfCertifySpeech)
 
 // Grade fuzzily — 80% of the letters lining up counts as said correctly.
 const THRESHOLD = 0.8
@@ -86,7 +92,7 @@ function stopRecognition() {
 }
 
 function beginListen() {
-  if (!canRecognize || phase.value === 'graded' || cancelled) return
+  if (selfGrading.value || phase.value === 'graded' || cancelled) return
   stopRecognition()
   clearTimers()
   earlyTimer = null
@@ -157,7 +163,7 @@ function speakSlow() {
   const open = () => {
     if (opened || cancelled) return
     opened = true
-    if (canRecognize && wasListening) beginListen()
+    if (!selfGrading.value && wasListening) beginListen()
   }
   speak(props.exercise.ru, 'ru-RU', SLOW_RATE, { onEnd: open })
   // The slow read takes about twice as long — the watchdog waits it out rather
@@ -182,18 +188,34 @@ function tryAgain() {
   later(open, estimateSpeechMs(props.exercise.ru, SLOW_RATE) + 500)
 }
 
-// Self-assessment fallback (no recognition): the attempt counts.
-function selfAssessed() {
-  emit('done', { correct: true })
+// Self-grading: the learner heard the model, said it aloud, and reports how it
+// went. It counts exactly as a recognised attempt would — right or wrong.
+function selfAssessed(correct) {
+  playFeedback(correct)
+  emit('done', { correct })
 }
 
-// One-off skip for when speech recognition is misbehaving on this word right
-// now (mis-hearing it, or it's a very short word like год the recogniser keeps
-// dropping). Skips just this exercise — the attempt isn't marked wrong and the
-// word stays eligible for speaking again in a later session; nothing is waived
-// permanently.
-function skip() {
-  emit('done', { skip: true })
+// "Speech not working?" — hand grading to the learner for the rest of this app
+// session rather than skipping the word. The recogniser can be unusable for
+// reasons the app can't detect (ambient noise on public transport, a mic the
+// browser hands us but nothing reaches), and in that state every attempt would
+// otherwise be scored wrong. Stops the mic immediately so nothing half-heard
+// arrives late and grades on their behalf.
+function certifySelf() {
+  stopRecognition()
+  clearTimers()
+  earlyTimer = null
+  recError.value = ''
+  transcript.value = ''
+  result.value = null
+  phase.value = 'prompt'
+  setSelfCertifySpeech(true)
+}
+
+// Back to the microphone, from the next exercise onwards as well.
+function useMic() {
+  setSelfCertifySpeech(false)
+  beginListen()
 }
 
 function next() {
@@ -204,7 +226,7 @@ onMounted(() => {
   // Read the word/phrase aloud the moment it appears (the main subject). When we
   // can recognise speech, start listening once the prompt finishes so the mic
   // doesn't pick up the synthesised voice; a watchdog opens it if onEnd is flaky.
-  if (canRecognize && speechSupported()) {
+  if (!selfGrading.value && speechSupported()) {
     let opened = false
     const open = () => {
       if (opened || cancelled || phase.value !== 'prompt') return
@@ -237,8 +259,8 @@ onBeforeUnmount(() => {
     </div>
     <p class="muted en">{{ exercise.en }}</p>
 
-    <!-- With recognition: listen, then grade fuzzily. -->
-    <template v-if="canRecognize">
+    <!-- With a working recogniser: listen, then grade fuzzily. -->
+    <template v-if="!selfGrading">
       <p v-if="errorMessage && phase !== 'graded'" class="feedback bad" style="margin: 0">
         {{ errorMessage }}
       </p>
@@ -274,21 +296,34 @@ onBeforeUnmount(() => {
         </div>
       </template>
 
-      <!-- One-off escape hatch for when the recogniser is misbehaving on this
-           word right now: skip just this exercise and move on. The word will
-           come round again for speaking in a later session. -->
-      <button class="skip-word" @click="skip">Speech not working? Skip for now</button>
+      <!-- Escape hatch for a recogniser that can't do the job — mis-hearing this
+           word, or drowned out on a noisy train. Hands grading to the learner
+           rather than scoring attempts it never really heard. -->
+      <button class="self-certify" @click="certifySelf">
+        Speech not working? Grade it yourself
+      </button>
     </template>
 
-    <!-- No recognition: self-assess (the attempt counts). -->
+    <!-- Self-graded: say it aloud against the model, then report how it went. -->
     <template v-else>
       <p class="muted info">
-        Speech recognition isn't available in this browser (try Chrome or Edge) — listen, say it
-        aloud, then mark it done yourself.
+        <template v-if="canRecognize">
+          You're grading yourself — listen, say it aloud, then mark how it went. It counts the same
+          as a recognised answer.
+        </template>
+        <template v-else>
+          Speech recognition isn't available in this browser (try Chrome or Edge) — listen, say it
+          aloud, then mark how it went.
+        </template>
       </p>
       <div class="row">
-        <button class="primary next" @click="selfAssessed">I said it →</button>
+        <button class="primary next" @click="selfAssessed(true)">✓ I said it</button>
+        <button class="missed" @click="selfAssessed(false)">✗ Not quite</button>
+        <button @click="speakSlow">🐢 Slow</button>
       </div>
+      <button v-if="canRecognize" class="self-certify" @click="useMic">
+        Speech working again? Use the microphone
+      </button>
     </template>
   </div>
 </template>
@@ -324,7 +359,7 @@ onBeforeUnmount(() => {
   font-weight: 400;
   opacity: 0.85;
 }
-.skip-word {
+.self-certify {
   justify-self: start;
   font-size: 0.85rem;
   color: var(--muted);

@@ -119,15 +119,15 @@ async function solveMatch(page) {
   throw new Error('flashcard board did not finish')
 }
 
-/** Say-it-aloud: self-assess when recognition is unavailable, else skip the word. */
+/** Say-it-aloud: grade it ourselves — there's no usable mic in CI. */
 async function solveSpeak(ex) {
   const said = ex.getByRole('button', { name: /I said it/ })
-  if (await said.count()) {
-    await said.first().click()
-    return
+  if (!(await said.count())) {
+    // Recognition present but nothing to hear: switch to self-grading, which
+    // then stays on for the rest of the session.
+    await ex.getByRole('button', { name: /Grade it yourself/ }).first().click()
   }
-  // Recognition present (no mic in CI): the per-word skip still advances.
-  await ex.getByRole('button', { name: /Skip for now/ }).first().click()
+  await ex.getByRole('button', { name: /I said it/ }).first().click()
 }
 
 /** Inflection table — word-bank (DragTable) or keyboard (BlindEndings) variant. */
