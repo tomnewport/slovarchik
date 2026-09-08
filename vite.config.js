@@ -96,11 +96,34 @@ export default defineConfig({
         // sync; this SW cache is the network-fetch layer beneath it.)
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => /\/vocab\/.*\.json$/.test(url.pathname),
+            // The word files — but NOT manifest.json, which is deliberately
+            // left to the network (#670).
+            //
+            // `manifest.json` lives under vocab/ and so used to match this
+            // rule. It was measured doing real harm: a service worker
+            // intercepts a request regardless of the `cache: 'no-cache'` the
+            // store passes to `fetch` — that option controls the HTTP cache,
+            // not the worker — so StaleWhileRevalidate answered every manifest
+            // request from the previous launch's copy. Since the manifest's
+            // content hashes are the *only* thing that tells the store a word
+            // file changed, a deploy's vocab change stayed invisible until the
+            // launch after next. Excluding it costs nothing: offline the store
+            // never asks (it checks navigator.onLine first), and a failed
+            // manifest fetch is already handled — initVocab keeps whatever
+            // IndexedDB holds and stays `ready`.
+            urlPattern: ({ url }) =>
+              /\/vocab\/.*\.json$/.test(url.pathname) &&
+              !/\/vocab\/manifest\.json$/.test(url.pathname),
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'slovarchik-vocab',
               cacheableResponse: { statuses: [0, 200] },
+              // Bound the cache. There are twelve word files today; 20 leaves
+              // room to add parts of speech without evicting a live one, while
+              // stopping a file that has been dropped from the manifest — or
+              // renamed by a deploy — from sitting in Cache Storage forever.
+              // Without this the cache had no upper bound at all.
+              expiration: { maxEntries: 20 },
             },
           },
         ],

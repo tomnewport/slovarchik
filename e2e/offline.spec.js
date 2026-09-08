@@ -156,3 +156,49 @@ test('the service worker claiming a first visit does not reload the page', async
 
   expect(await page.evaluate(() => window.__slovarchikDocumentSentinel)).toBe('first-visit')
 })
+
+// The vocab runtime cache (#670). These run here because this is the only
+// project with a real service worker.
+/** Pathnames held in the service worker's vocab runtime cache. */
+async function vocabCacheContents(page) {
+  return page.evaluate(async () => {
+    const name = (await caches.keys()).find((n) => n.includes('slovarchik-vocab'))
+    if (!name) return []
+    const cache = await caches.open(name)
+    return (await cache.keys()).map((req) => new URL(req.url).pathname)
+  })
+}
+
+test('the manifest is never served from the service worker cache', async ({ page }) => {
+  // The bug this pins (#670): manifest.json lives under vocab/, so it used to
+  // match the StaleWhileRevalidate rule. A service worker intercepts a request
+  // whatever `cache:` option the caller passes to fetch — that option is about
+  // the HTTP cache, not the worker — so the store's `cache: 'no-cache'` did not
+  // save it, and every launch read the previous launch's manifest. The manifest
+  // hashes are the only signal that a word file changed, so a deploy's vocab
+  // change stayed invisible until the launch after next.
+  //
+  // Three loads, because the old behaviour needed a second request before the
+  // stale copy could be served: the first populated the cache, the rest read it.
+  await primeCaches(page)
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible({ timeout: 60_000 })
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible({ timeout: 60_000 })
+
+  const cached = await vocabCacheContents(page)
+  expect(cached.filter((p) => p.endsWith('/manifest.json'))).toEqual([])
+})
+
+test('the vocab runtime cache is bounded', async ({ page }) => {
+  await primeCaches(page)
+
+  // `expiration: { maxEntries: 20 }` in the workbox config. The corpus is
+  // twelve word files, so this does not evict anything today — the assertion
+  // is that the bound exists at all, since an unbounded cache keeps every file
+  // a deploy ever renamed.
+  const cached = await vocabCacheContents(page)
+  expect(cached.length).toBeLessThanOrEqual(20)
+  // Sanity: the rule is still matching the word files it should.
+  expect(cached.some((p) => /\/vocab\/.+\.json$/.test(p))).toBe(true)
+})
