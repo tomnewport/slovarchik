@@ -42,6 +42,28 @@ describe('ProgressView', () => {
     expect(wrapper.find('.dot-learned').exists()).toBe(true)
   })
 
+  it('scales the chart with gridlines and labelled word and date axes', () => {
+    // Anchored to now, so the span stays short however long after this is run.
+    const june = Date.now() - 4 * 86400000
+    vocabState.words = [{ key: 'дом=house', pos: 'noun', gender: 'm', hasInflections: false }]
+    progress.records = {
+      'дом=house': masteredRecord('дом=house', june),
+      'кот=cat': masteredRecord('кот=cat', june + 3 * 86400000),
+    }
+
+    const wrapper = mount(ProgressView)
+    const ticks = wrapper.findAll('.chart .tick').map((t) => t.text())
+    // A word scale (0 at the baseline, up to the total) and a date scale.
+    expect(ticks).toContain('0')
+    expect(ticks).toContain('2')
+    expect(ticks.some((t) => /^\d{1,2} [A-Z][a-z]{2}$/.test(t))).toBe(true)
+    expect(wrapper.find('.axis-title').text()).toBe('words')
+    expect(wrapper.findAll('.grid line').length).toBeGreaterThan(2)
+    // Two days apart on a real time axis, so the line steps between them.
+    expect(wrapper.find('.line-learned').attributes('d')).toMatch(/L.*L/)
+    expect(wrapper.find('.area-learned').exists()).toBe(true)
+  })
+
   it('renders the streak calendar with the current streak and coloured cells', async () => {
     const today = new Date()
     const key = (d) => {
