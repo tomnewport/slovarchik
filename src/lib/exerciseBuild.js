@@ -762,6 +762,11 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
  * @param {object} sources
  * @param {object[]} sources.words   normalised word records (vocab store)
  * @param {object[]} sources.phrases shaped phrases ({ id, ru, en, source, cefr })
+ * @param {Map} [sources.vocabById] id → shaped vocab word, over exactly the same
+ *   `words`. Optional and purely a saving: the caller usually holds this already
+ *   (the vocab store publishes it, and SessionView keeps a copy for replacement
+ *   draws), and re-running `shapeVocab` over the dictionary costs ~2 ms a
+ *   session for nothing. Omit it and one is shaped here.
  * @param {Map} [sources.contextPhrases] key → annotated context phrases (drill)
  * @param {object} [sources.rules] grammar-rules map (rule id → explanation)
  * @param {() => number} [sources.rng]
@@ -772,6 +777,7 @@ export function buildExercises(
   {
     words = [],
     phrases = [],
+    vocabById = null,
     rng = Math.random,
     encounterCount = null,
     contextPhrases = new Map(),
@@ -779,7 +785,7 @@ export function buildExercises(
     isTableClean = null,
   } = {},
 ) {
-  const vocab = new Map(shapeVocab(words).map((v) => [v.id, v]))
+  const vocab = vocabById ?? new Map(shapeVocab(words).map((v) => [v.id, v]))
   const recordByKey = new Map(words.map((w) => [w.key, w]))
   // Usage phrases grouped by the word that owns them — the aspect drill draws a
   // verb pair's sentences from here (no `inflect:` annotation needed to pick).

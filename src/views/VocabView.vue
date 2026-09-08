@@ -1,6 +1,6 @@
 <script setup>
 import { computed, reactive, ref, nextTick, onUnmounted } from 'vue'
-import { vocab, state } from '../stores/vocab.js'
+import { vocab, state, wordsByKey } from '../stores/vocab.js'
 import { vocabDisplay } from '../lib/vocabBuild.js'
 import { checkAnswer, sample, shuffle } from '../lib/quiz.js'
 import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
@@ -97,7 +97,6 @@ const motionPair = computed(() => current.value?.motionPair ?? null)
 // drill — the same idea as the aspect-pair reminder above.
 const government = computed(() => governmentLabels(current.value?.governs))
 // The word record behind the shaped drill word, for the facts panel.
-const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, w])))
 // Does this word have a facts panel worth reading (#586)? A one-second
 // auto-advance past a breakdown the learner has barely had time to see wastes
 // it, so the answer holds like the other reminders do.

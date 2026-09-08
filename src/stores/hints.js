@@ -8,7 +8,7 @@
 // can't be expected to know yet and aren't actively drilling.
 import { computed } from 'vue'
 
-import { formIndex, state as vocabState } from './vocab.js'
+import { formIndex, wordsByKey } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
 import { phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
 import { buildGlossIndex, diagnose, diagnoseEnglish } from '../lib/confusables.js'
@@ -73,9 +73,6 @@ export function hintTokensFor(phrase) {
     hint: hintIfShowable(hint),
   }))
 }
-
-/** key → word record, for the diagnosis of a wrong answer. */
-const wordsByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
 
 /**
  * Diagnose a wrong answer: what word did the learner actually write, and how
