@@ -294,16 +294,6 @@ async function onDone(result) {
     await onIntroDone(result ?? {})
     return
   }
-  // One-off speaking skip: recognition is misbehaving on this word right now.
-  // Advance past just this exercise without recording an attempt — so it isn't
-  // marked wrong or re-queued, and nothing is waived permanently. The word stays
-  // eligible for speaking again in a later session.
-  if (result.skip) {
-    submit(runner, true)
-    injectFlashcardRepeat()
-    await finalizeIfDone()
-    return
-  }
   // result.wrong (matching exercises) lists the specific missed keys; everything
   // else reports a single result.correct that applies to every target.
   const wrong = result.wrong ? new Set(result.wrong) : null

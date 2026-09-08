@@ -24,6 +24,10 @@ export const settings = reactive({
   // On by default: a cold first test is a guaranteed miss, and the point of the
   // card is that the learner meets the word before being asked for it.
   showIntroCards: true,
+  // Grade the spoken drills yourself instead of letting the recogniser do it.
+  // Deliberately NOT persisted: it's an escape hatch for a noisy bus or a
+  // flaky recogniser, not a standing preference — a reload puts the mic back.
+  selfCertifySpeech: false,
   loaded: false,
 })
 
@@ -109,6 +113,16 @@ export function playCelebration() {
 export async function setShowIntroCards(on) {
   settings.showIntroCards = !!on
   await persistFacts()
+}
+
+/**
+ * Grade the speaking exercises yourself for the rest of this app session: the
+ * recogniser is either mis-hearing everything or useless in the ambient noise,
+ * so the learner says the word aloud and marks how it went. Not persisted (see
+ * the field's comment) — reloading restores microphone grading.
+ */
+export function setSelfCertifySpeech(on) {
+  settings.selfCertifySpeech = !!on
 }
 
 function persistFacts() {

@@ -1,6 +1,7 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SpeakExercise from './SpeakExercise.vue'
+import { setSelfCertifySpeech } from '../../stores/settings.js'
 
 const exercise = {
   id: 'ex0',
@@ -27,7 +28,9 @@ function installRecognition() {
     stop() {
       this.onend?.()
     }
-    abort() {}
+    abort() {
+      this.aborted = true
+    }
     // Helpers for tests.
     fireResult(transcript) {
       this.onresult?.({
@@ -39,6 +42,8 @@ function installRecognition() {
 }
 
 afterEach(() => {
+  // Self-grading is sticky for the app session — reset it between tests.
+  setSelfCertifySpeech(false)
   delete window.SpeechRecognition
   delete window.webkitSpeechRecognition
   lastRec = null
@@ -99,14 +104,43 @@ describe('SpeakExercise', () => {
     expect(wrapper.find('button.mic').exists()).toBe(true)
   })
 
-  it('offers a one-off skip when recognition misbehaves on a word', async () => {
+  it('hands grading to the learner when they say speech is not working', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
+    await wrapper.find('button.mic').trigger('click')
+    expect(wrapper.text()).toContain('Listening')
 
-    const skipBtn = wrapper.find('button.skip-word')
-    expect(skipBtn.exists()).toBe(true)
-    await skipBtn.trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ skip: true })
+    await wrapper.find('button.self-certify').trigger('click')
+    // The mic is released and the verdict is theirs to give.
+    expect(lastRec.aborted).toBe(true)
+    expect(wrapper.text()).toContain("You're grading yourself")
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+  })
+
+  it('records a self-graded miss as wrong, not as a free pass', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+    await wrapper.find('button.self-certify').trigger('click')
+
+    await wrapper.find('button.missed').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+  })
+
+  it('keeps self-grading for later exercises until the mic is asked back', async () => {
+    installRecognition()
+    const first = mount(SpeakExercise, { props: { exercise } })
+    await first.find('button.self-certify').trigger('click')
+    first.unmount()
+
+    // A fresh exercise opens self-graded — no mic prompt, no listening.
+    const second = mount(SpeakExercise, { props: { exercise } })
+    expect(second.find('button.mic').exists()).toBe(false)
+    expect(second.find('button.next').exists()).toBe(true)
+
+    await second.find('button.self-certify').trigger('click') // "use the microphone"
+    expect(second.find('button.mic').exists() || second.text().includes('Listening')).toBe(true)
   })
 
   it('🐢 Slow while listening pauses recognition and returns to the prompt', async () => {
