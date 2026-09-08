@@ -91,8 +91,9 @@ const wordsByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w]
  * would be pure waste.
  *
  * @param {string} typed the learner's answer
- * @param {{targetKey: string, target: string}} about the word being drilled and
- *   the surface form wanted (a single word, or the whole phrase)
+ * @param {{targetKey?: string, target?: string}} [about] the word being drilled
+ *   and the surface form wanted (a single word, or the whole phrase). Optional
+ *   only in the signature; a diagnosis needs both.
  */
 export function diagnoseAnswer(typed, { targetKey, target } = {}) {
   return diagnose(typed, {
@@ -124,8 +125,9 @@ function glossIndexFor(pool) {
  * Null when the gloss belongs to no word we know.
  *
  * @param {string} typed the English the learner gave
- * @param {{targetKey: string, options: Array}} about the card's word and the
- *   drill's autocomplete pool, which doubles as the gloss index's source
+ * @param {{targetKey?: string, options?: Array}} [about] the card's word and
+ *   the drill's autocomplete pool, which doubles as the gloss index's source.
+ *   Optional only in the signature; a diagnosis needs both.
  */
 export function diagnoseEnglishAnswer(typed, { targetKey, options } = {}) {
   const glossIndex = glossIndexFor(options)

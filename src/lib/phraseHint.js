@@ -300,10 +300,13 @@ export function buildFormIndex(words) {
         // its `key` from) would depend on which vocab file happened to load first.
         // A curriculum word sorts ahead of a gloss-only one so the entry's `key`
         // names something the learner can actually be drilling.
-        (a.learnable === false) - (b.learnable === false) ||
+        Number(a.learnable === false) - Number(b.learnable === false) ||
         String(a.key ?? '').localeCompare(String(b.key ?? ''), 'ru'),
     )
-  const index = buildIndex(sorted, normToken)
+  // Cast so the companion index can be attached: the `.stressIndex` property is
+  // part of this function's documented return type, but `buildIndex` on its own
+  // returns a plain Map.
+  const index = /** @type {ReturnType<typeof buildFormIndex>} */ (buildIndex(sorted, normToken))
   index.stressIndex = buildIndex(sorted, normTokenStress)
   return index
 }
@@ -314,7 +317,8 @@ export function buildFormIndex(words) {
  * display (stress marks, capitalisation and punctuation intact); only the lookup
  * is normalised.
  * @param {string} phrase
- * @param {Map<string, object>} index   from {@link buildFormIndex}
+ * @param {Map<string, object> & {stressIndex?: Map}} index from
+ *   {@link buildFormIndex} — carries the stress-aware companion as `.stressIndex`
  * @returns {Array<{text: string, hint: object|null}>}
  */
 export function phraseHintTokens(phrase, index) {

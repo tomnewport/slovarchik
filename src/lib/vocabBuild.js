@@ -737,7 +737,9 @@ export function shapePhrases(words) {
         ? ex.en_alt.map((s) => String(s ?? '').trim()).filter(Boolean)
         : []
       const enNotes = phraseAmbiguities(ru, ambiguity, en)
-      out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes })
+      out.push(
+        /** @type {Record<string, any>} */ ({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes }),
+      )
     }
   }
   // English→Russian prompts are only answerable when the English picks out one

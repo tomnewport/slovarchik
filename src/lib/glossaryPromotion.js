@@ -126,7 +126,12 @@ export function guessPos(ru) {
     .toLowerCase()
     .replace(/ё/g, 'е')
     .trim()
+  // Annotated so the `confidence` literal survives: without these the inferred
+  // return type widens to `string` and every one of the returns below stops
+  // matching the union this function documents.
+  /** @type {(pos: string, reason: string) => {pos: string, confidence: 'uncertain', reason: string}} */
   const uncertain = (pos, reason) => ({ pos, confidence: 'uncertain', reason })
+  /** @type {(pos: string, reason: string) => {pos: string, confidence: 'likely', reason: string}} */
   const likely = (pos, reason) => ({ pos, confidence: 'likely', reason })
   if (!s) return uncertain('noun', 'empty')
   if (/\s/.test(s)) return uncertain('phrase', 'multi-word — likely a phrase, not a single lemma')

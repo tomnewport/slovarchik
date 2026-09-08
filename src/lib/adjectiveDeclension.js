@@ -134,6 +134,7 @@ export function declineAdjective(mNomAccented, forms) {
   const cls = isPossessive(forms) ? 'possessive' : classify(strip(stem), mNomBare)
   const table = endings(cls, endStressed)
 
+  /** @type {Record<string, string>} */
   const out = {}
   for (const col of ADJ_COLS) {
     for (const c of ADJ_CASES) {

@@ -286,11 +286,16 @@ function buildMatch(practice, pi, ctx, make) {
  * a full board. When more than MATCH_PAIRS words were missed the board simply
  * grows to hold them all. `topUpKeys` must already be ordered weakest-first.
  *
- * @param {object} args
- * @param {string[]} args.wrongKeys   words answered wrong (always included)
- * @param {string[]} [args.topUpKeys] correctly-guessed words, weakest first
- * @param {Map} args.vocabById        shaped vocab by id (from shapeVocab)
- * @param {Array} [args.options]      the shared autocomplete pool
+ * @param {object} [args] optional only in the signature — `vocabById` has no
+ *   default and nothing resolves without it
+ * @param {string[]} [args.wrongKeys]  words answered wrong (always included)
+ * @param {string[]} [args.topUpKeys]  correctly-guessed words, weakest first
+ * @param {Map} [args.vocabById]       shaped vocab by id (from shapeVocab)
+ * @param {Array} [args.options]       the shared autocomplete pool
+ * @param {string} [args.dimension]    which direction the board is drilled in
+ * @param {string} [args.level]        'learning' or 'mastery'
+ * @param {boolean} [args.audio]       deal the board as a listening exercise
+ * @param {() => number} [args.rng]
  * @param {string} [args.id]
  * @returns {object|null} a match descriptor, or null if fewer than two words resolve
  */
@@ -390,6 +395,9 @@ function buildPhrase(practice, pi, ctx, make, kind) {
     keyOf: (p) => p.source,
   })
   return picked.map((p) => {
+    // `targetTokens` is attached below only for spelling exercises, so the
+    // descriptor is built as an open record rather than a fixed literal.
+    /** @type {Record<string, any>} */
     const base = {
       ...common(practice, pi),
       kind,
@@ -703,9 +711,10 @@ export const MAX_INTROS_PER_SESSION = 5
  *    teaches a word by reveal has introduced it, whatever the label says, and a
  *    card headed "A new word" arriving afterwards is simply backwards.
  *
- * @param {object[]} exercises the built list, in order
- * @param {object} opts
- * @param {(key: string) => boolean} opts.needsIntro has this word never been
+ * @param {object[]} [exercises] the built list, in order
+ * @param {object} [opts] optional only in the signature — without `needsIntro`
+ *   the list is returned unchanged
+ * @param {(key: string) => boolean} [opts.needsIntro] has this word never been
  *   met *and* never been introduced?
  * @param {Set<string>|string[]} [opts.batchKeys] words of the current batch; when
  *   absent every target is eligible
@@ -759,12 +768,19 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
 /**
  * Build the flat exercise list for a session.
  * @param {object} session   from store.startSession (has `.practices`)
- * @param {object} sources
- * @param {object[]} sources.words   normalised word records (vocab store)
- * @param {object[]} sources.phrases shaped phrases ({ id, ru, en, source, cefr })
+ * @param {object} [sources]
+ * @param {object[]} [sources.words]   normalised word records (vocab store)
+ * @param {object[]} [sources.phrases] shaped phrases ({ id, ru, en, source, cefr })
  * @param {Map} [sources.contextPhrases] key → annotated context phrases (drill)
  * @param {object} [sources.rules] grammar-rules map (rule id → explanation)
  * @param {() => number} [sources.rng]
+ * @param {(id: string) => number} [sources.encounterCount] how many times a word
+ *   or phrase source has been met. Spelling is only asked of words seen at least
+ *   MIN_ENCOUNTERS_FOR_SPELLING times, so without this no `type` exercise is
+ *   filtered and the drill can ask a learner to spell a word it just introduced.
+ * @param {(key: string, variant?: string|null) => boolean} [sources.isTableClean]
+ *   has this inflection table already been assembled with nothing misplaced?
+ *   Feeds the word-bank staging decision (#645).
  * @returns {object[]} exercise descriptors (each with a unique `id`)
  */
 export function buildExercises(

@@ -119,6 +119,10 @@ export function startExtraRound(s, exercises = []) {
  * exercises of that dimension in the current round are replaced (via
  * `makeReplacement(ex)`, which may return null to simply drop them), and any
  * already-collected wrong ones of that dimension are discarded.
+ * @param {object} s the runner state
+ * @param {string} dimension the modality to skip
+ * @param {(ex: object) => object|null} [makeReplacement] builds a stand-in for
+ *   an unattempted exercise, or returns null to drop it
  * @returns {object} the mutated state
  */
 export function skipDimension(s, dimension, makeReplacement = () => null) {

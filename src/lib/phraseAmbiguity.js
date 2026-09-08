@@ -205,11 +205,14 @@ export function buildAmbiguityIndex(words) {
   // A short form shared with anything else in the dictionary has already been
   // degraded to `null` above — «дорога́» is "dear" only until «доро́га» "road"
   // is added — so filtering by the surviving tag keeps the set honest.
-  index.shortPredicates = new Set(
+  // Companion sets are part of this function's documented return; the bare
+  // Map the index is accumulated in does not carry them.
+  const out = /** @type {ReturnType<typeof buildAmbiguityIndex>} */ (index)
+  out.shortPredicates = new Set(
     [...shortCandidates].filter((f) => index.get(f) === MASC || index.get(f) === FEM),
   )
-  index.subjects = subjects
-  return index
+  out.subjects = subjects
+  return out
 }
 
 /**

@@ -110,6 +110,7 @@ export function allForms(noun) {
 export function endingsTable(noun) {
   const stem = commonStem(allForms(noun))
   const stemLen = [...stem].length
+  /** @type {Record<string, Record<string, string>>} */
   const endings = {}
   for (const num of numbersOf(noun)) {
     endings[num] = {}

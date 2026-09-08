@@ -125,7 +125,9 @@ function ruIndex(byKey) {
  * resolved `see` links, so a renderer needs nothing but this list.
  *
  * @param {object} record a word record (buildWords) or shaped vocab word
- * @returns {Array<{kind: string, text: string, parts: object[], see: object[]}>}
+ * @returns {Array<{kind: string, text: string, parts: object[], see: object[],
+ *   where: string}>} `where` is the place a `region` fact is about, and the
+ *   empty string for every other kind (see normalizeFacts in vocabBuild.js).
  */
 export function wordFacts(record) {
   const facts = record?.facts ?? []

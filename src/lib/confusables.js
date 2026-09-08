@@ -179,11 +179,12 @@ function verdictFor(sense, want, typedForm, targetForm, byKey) {
  * does it relate to the one being asked for?
  *
  * @param {string} typed the learner's answer
- * @param {object} ctx
- * @param {string} ctx.targetKey natural key of the word being drilled
- * @param {string} ctx.target the wanted surface form (a word or a whole phrase)
- * @param {Map} ctx.formIndex from `buildFormIndex` (phraseHint.js)
- * @param {Map} ctx.byKey key → word record
+ * @param {object} [ctx] optional only in the signature — the function returns
+ *   null unless both indexes are supplied
+ * @param {string} [ctx.targetKey] natural key of the word being drilled
+ * @param {string} [ctx.target] the wanted surface form (a word or whole phrase)
+ * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
+ * @param {Map} [ctx.byKey] key → word record
  * @returns {object|null} a verdict, or null when there is no confusion to name —
  *   the answer isn't a recognisable Russian word, or it is the target word in
  *   the wrong form. Both are spelling slips, and the caller should fall through
@@ -197,11 +198,22 @@ export function diagnose(typed, ctx = {}) {
   return diagnoseWord(typed, answer, byKey.get(targetKey) ?? null, ctx)
 }
 
+/**
+ * @param {string} typed the learner's answer
+ * @param {string} targetForm the wanted surface form
+ * @param {object|null} want the word record being drilled
+ * @param {{formIndex?: Map, byKey?: Map}} ctx the same ctx {@link diagnose}
+ *   received, already checked for both indexes
+ */
 function diagnoseWord(typed, targetForm, want, { formIndex, byKey }) {
   const word = String(typed ?? '').trim()
   if (!word || !normToken(word)) return null
   const entry = lookup(formIndex, word)
   if (!entry) return null
+  // `why` and `direction` are attached after the verdict is picked, so the
+  // local carries them as optional rather than inheriting verdictFor's narrower
+  // literal type.
+  /** @type {{type: string, why?: string, direction?: string, [k: string]: any}|null} */
   let best = null
   for (const sense of entry.senses ?? []) {
     const verdict = verdictFor(sense, want, word, targetForm, byKey)
@@ -285,10 +297,11 @@ function normalizeGloss(text) {
  * simply failing the card.
  *
  * @param {string} typed the English the learner gave
- * @param {object} ctx
- * @param {string} ctx.targetKey natural key of the word on the card
- * @param {Map} ctx.byKey key → word record
- * @param {Map} ctx.glossIndex from {@link buildGlossIndex}
+ * @param {object} [ctx] optional only in the signature — the function returns
+ *   null unless both indexes are supplied
+ * @param {string} [ctx.targetKey] natural key of the word on the card
+ * @param {Map} [ctx.byKey] key → word record
+ * @param {Map} [ctx.glossIndex] from {@link buildGlossIndex}
  * @returns {object|null} a verdict tagged `direction: 'en'`, or null when the
  *   gloss belongs to no word we know — an ordinary blank, which the drill
  *   handles by revealing as it always has.
@@ -299,6 +312,7 @@ export function diagnoseEnglish(typed, ctx = {}) {
   const want = byKey.get(targetKey) ?? null
   if (!want) return null
   const keys = glossIndex.get(normalizeGloss(typed)) ?? []
+  /** @type {{type: string, why?: string, direction?: string, [k: string]: any}|null} */
   let best = null
   for (const key of keys) {
     // Their own word: they gave a gloss this very entry carries, so the drill

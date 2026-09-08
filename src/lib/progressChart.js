@@ -93,6 +93,15 @@ export function xAxis(start, end, maxTicks = 6) {
  *
  * The lines run on to `today` so a plateau since the last learned word reads as
  * a plateau, not as the chart ending early.
+ *
+ * @param {Array<{day: string, learned: number, mastered: number}>} points
+ * @param {object} [opts]
+ * @param {string|number|Date} [opts.today] where the lines run to (defaults to now)
+ * @param {number} [opts.width] SVG width in its own pixel space
+ * @param {number} [opts.height] SVG height in its own pixel space
+ * @param {{top?: number, right?: number, bottom?: number, left?: number}} [opts.margin]
+ *   plot insets, leaving room for the axis labels
+ * @param {number} [opts.maxTicks] upper bound on x-axis ticks before thinning
  */
 export function buildChart(points, { today, width = 360, height = 180, margin, maxTicks } = {}) {
   if (!points || points.length === 0) return null

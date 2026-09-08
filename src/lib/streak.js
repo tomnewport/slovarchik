@@ -42,7 +42,9 @@ function weekStart(key) {
 function dayDiff(a, b) {
   const [ay, am, ad] = a.split('-').map(Number)
   const [by, bm, bd] = b.split('-').map(Number)
-  return Math.round((new Date(by, bm - 1, bd) - new Date(ay, am - 1, ad)) / 86400000)
+  return Math.round(
+    (new Date(by, bm - 1, bd).getTime() - new Date(ay, am - 1, ad).getTime()) / 86400000,
+  )
 }
 
 /** Aggregate every record's attempt events into per-day { count, correct }. */

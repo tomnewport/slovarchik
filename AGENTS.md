@@ -46,6 +46,9 @@ index.html              # app shell — mounts #app, loads src/main.js
 vite.config.js          # Vite + Vue plugin + PWA + Vitest config; base = /slovarchik/
 playwright.config.js    # e2e config (serves the preview build)
 eslint.config.js        # flat config: js.recommended + eslint-plugin-vue
+jsconfig.json           # the `npm run typecheck` probe — non-strict tsc --checkJs
+                        #   over src/lib, src/stores, src/composables. Deliberately
+                        #   not a TS migration: no `strict`, no `.vue` checking.
 src/
   main.js               # entry: createApp(App).use(router).mount('#app')
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
@@ -106,6 +109,9 @@ src/
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
+  types/globals.d.ts    # browser globals the DOM lib lacks (webkitAudioContext,
+                        #   SpeechRecognition, the e2e seed hook) — declarations
+                        #   for the typecheck probe, not shipped code
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
@@ -116,6 +122,13 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
+
+`npm run typecheck` runs a non-strict `tsc --checkJs` over those same three
+layers (`jsconfig.json`). It is a JSDoc guard, not a TypeScript migration: it
+fails when a `@param` block stops describing the function it sits above, which
+matters most in `src/lib/`, where the modules are framework-free and their doc
+blocks are the contract callers read. `strict` and `.vue` checking are out of
+scope by design.
 
 Coverage is measured over the logic layers only — `src/lib/`, `src/stores/` and
 `src/composables/` — not the `.vue` views, which @vue/test-utils and Playwright
@@ -132,6 +145,8 @@ npm test            # run unit tests once (vitest)
 npm run test:watch  # watch mode
 npm run test:coverage # same suite + coverage over src/lib, src/stores, src/composables
 npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
+npm run typecheck   # non-strict tsc --checkJs over src/lib, src/stores,
+                    #   src/composables — keeps JSDoc honest, NOT a TS migration
 npm run build       # production build into dist/
 npm run preview     # serve the production build
 npm run test:e2e    # Playwright end-to-end tests
@@ -147,7 +162,7 @@ npm run check:corpus  # just the three gates above, in CI's order (~5s)
 npm run check:ci      # the whole CI `test` job, in order, stopping where it would
 ```
 
-CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `verify:review`
+CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `typecheck`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
 `check:prompts`, `test:coverage` and `build` in its `test` job, plus the
 Playwright `e2e` job — every one of them on every push, publishing the coverage

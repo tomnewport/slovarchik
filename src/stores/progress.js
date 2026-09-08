@@ -366,7 +366,7 @@ function capEvents(rec) {
  * `hinted` marks answers produced with the keyboard hint available-and-used (or
  * any exercise that can't demonstrate unaided recall); the memory scheduler
  * grows stability less for those (#313).
- * @returns {string} the word's new state
+ * @returns {Promise<string>} the word's new state
  */
 export async function recordAttempt({
   word,
@@ -467,7 +467,8 @@ export async function markKnown(key) {
  * Record that the learner has been shown this word's intro card (#587). Writes
  * nothing else: being introduced is not an attempt, so the word's state,
  * schedule and aggregates are all untouched.
- * @returns {number} the timestamp stored (the existing one if already set)
+ * @returns {Promise<number|null>} the timestamp stored (the existing one if
+ *   already set), or null when called without a key
  */
 export async function markIntroduced(key) {
   if (!key) return null
@@ -497,7 +498,7 @@ export function isTableClean(key, variant = null) {
 /**
  * Record a table assembled with nothing misplaced. Idempotent — the first clean
  * pass is the one that counts, so a later one doesn't rewrite the timestamp.
- * @returns {number|null} the timestamp stored
+ * @returns {Promise<number|null>} the timestamp stored
  */
 export async function markTableClean(key, variant = null, ts = Date.now()) {
   if (!key) return null
@@ -642,7 +643,11 @@ function vocabWords() {
   return learnableWords(vocabState.words)
 }
 
-/** Offer up to five batch options for the next learning or mastery journey. */
+/**
+ * Offer up to five batch options for the next learning or mastery journey.
+ * @param {'learning'|'mastery'} [level] which journey the options are for
+ * @param {() => number} [rng]
+ */
 export function getBatchOptions(level = 'learning', rng = Math.random) {
   // Mastery builds on confirmed memory: a word still pending its spaced
   // confirmation review (#313) is not yet eligible to enter a mastery batch.

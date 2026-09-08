@@ -47,6 +47,11 @@ function hasReviewProposals() {
 export const STEPS = [
   { script: 'lint', corpus: false, why: 'eslint correctness rules' },
   {
+    script: 'typecheck',
+    corpus: false,
+    why: 'non-strict tsc --checkJs over src/lib, src/stores, src/composables',
+  },
+  {
     script: 'verify:review',
     corpus: true,
     why: 'replaying review/proposals reproduces the committed vocab',

@@ -129,12 +129,15 @@ function weightedPick(items, weightOf, rng) {
  * @param {object} args
  * @param {string} [args.type] session type (see {@link SESSION_TYPES})
  * @param {string} [args.size] size key for a standard session (quick/normal/super)
- * @param {Partial<Record<string, number>>} [args.weakness] per-dimension weights;
+ * @param {Partial<Record<string, number>>|Record<string, Partial<Record<string, number>>>} [args.weakness]
+ *   per-dimension weights;
  *   higher means weaker, so that dimension is favoured. Defaults to equal. May
  *   instead be a per-level map `{ learning: {...}, mastery: {...}, atRisk?: {...} }`
  *   so each level's slots are weighted only by that level's own needs, with an
  *   optional override for at-risk-bucket slots (see {@link weightResolver}).
  * @param {() => number} [args.rng]
+ * @param {string[]|null} [args.levels] restrict the session to these levels
+ *   ('learning' / 'mastery'); null deals from all of them
  * @returns {{type, size, buckets, practices: object[]}}
  */
 export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, rng = Math.random, levels = null } = {}) {

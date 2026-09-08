@@ -35,9 +35,11 @@ export const FAIL_FACTOR = 0.5
  * Fold one review into a dimension's schedule.
  * @param {{stability: number, due: number, lastReview: number}|null} prev
  *   the dimension's schedule before this review (null on first review)
- * @param {{correct: boolean, hinted?: boolean, ts?: number}} review
- *   `hinted` marks answers produced with the keyboard hint (or any exercise
- *   where unaided recall wasn't demonstrated); they grow stability less.
+ * @param {{correct?: boolean, hinted?: boolean, ts?: number}} [review]
+ *   optional only in the signature: `correct` has no default, and omitting it
+ *   is read as a failure. `hinted` marks answers produced with the keyboard
+ *   hint (or any exercise where unaided recall wasn't demonstrated); they grow
+ *   stability less.
  * @returns {{stability: number, due: number, lastReview: number}}
  */
 export function reviewSchedule(prev, { correct, hinted = true, ts = Date.now() } = {}) {
@@ -108,8 +110,9 @@ export const CONFIRM_GAP_MS = DAY_MS
  * lands correct. Callers should only consult this while the word's state is
  * still `learned` or better (a word that slipped is handled by the lost-word
  * plumbing instead).
- * @param {{learnedAt?: number|null, confirmedAt?: number|null}} rec
- * @param {{correct: boolean, ts?: number}} attempt
+ * @param {{learnedAt?: number|null, confirmedAt?: number|null}} [rec]
+ * @param {{correct?: boolean, ts?: number}} [attempt] optional only in the
+ *   signature — `correct` has no default and decides the outcome
  * @returns {'confirmed'|'failed'|null} null when this attempt is not a
  *   confirmation review (already confirmed, never learned, or too soon).
  */

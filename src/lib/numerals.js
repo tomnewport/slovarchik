@@ -212,6 +212,7 @@ function scaleForm(scale, gv, kase) {
 }
 
 // Scales, widest first: [divisor, scale noun, gender the multiplier agrees with].
+/** @type {Array<[number, object|null, string|null]>} */
 const SCALES = [
   [1000000, MILLION, 'm'],
   [1000, THOUSAND, 'f'],

@@ -105,9 +105,10 @@ function probe({ kind, readings, mine, partner, token, lemma }) {
  * the learner that it doesn't.
  *
  * @param {{ru: string, source: string}} phrase a shaped phrase (shapePhrases)
- * @param {object} ctx
- * @param {Map<string, object>} ctx.byKey key → word record (buildWords)
- * @param {Map<string, object[]>} ctx.annotations key → context phrases
+ * @param {object} [ctx] optional only in the signature — the destructuring default is `{}`, but
+ *   a probe cannot be built without both members below
+ * @param {Map<string, object>} [ctx.byKey] key → word record (buildWords)
+ * @param {Map<string, object[]>} [ctx.annotations] key → context phrases
  *   (indexPhrases over shapeContextPhrases) — where the `inflect:` tense lives
  * @returns {?{kind: string, question: string, options: Array<{id, text}>,
  *   answer: string, why: string}}

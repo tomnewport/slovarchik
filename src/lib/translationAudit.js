@@ -317,7 +317,7 @@ function clauseMarkers(ru) {
 
 /**
  * Signals for one phrase, plus the tier a review pass should read it in.
- * @param {{ru: string, en: string, source?: string, cefr?: string}} phrase
+ * @param {{ru: string, en: string, enAlt?: string[], source?: string, cefr?: string}} phrase
  * @param {Map} index  from {@link buildFormIndex}
  */
 export function auditPhrase(phrase, index) {
@@ -327,6 +327,9 @@ export function auditPhrase(phrase, index) {
   const ruLength = phraseHintTokens(ru, index).filter((t) => normToken(t.text)).length
   const enLength = englishWords(en).length
   const markers = clauseMarkers(ru)
+  // `tier` and `priority` are folded in after the row is scored, so it is an
+  // open record rather than a fixed literal.
+  /** @type {Record<string, any>} */
   const row = {
     ru,
     en,

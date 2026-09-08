@@ -147,6 +147,7 @@ export function reinforcePool(ctx) {
  * this refresh pool excludes words still being learned.
  */
 export function duePool(ctx, now = Date.now()) {
+  /** @type {Array<[string, number]>} */
   const scored = Object.keys(ctx.records)
     .filter((k) => rank(ctx.stateOf(k)) >= rank('learned'))
     .map((k) => [k, wordOverdueness(ctx.records[k]?.schedule, lastAttemptAt(ctx.events(k)), now)])
@@ -179,8 +180,13 @@ export function masteryBatchActive(ctx, now = Date.now()) {
  * dimension) augmented with the candidate word pool for each bucket so the
  * session runner can draw exercises.
  *
- * @param snapshot the store snapshot passed to {@link makeContext}
- * @param opts `{ type, size, focusKeys, now }`
+ * @param {object} snapshot the store snapshot passed to {@link makeContext}
+ * @param {object} [opts]
+ * @param {string} [opts.type] session type ('standard', 'quick', …)
+ * @param {string} [opts.size] session size key
+ * @param {string[]|null} [opts.focusKeys] restrict every bucket to these words
+ * @param {number} [opts.now] clock override, for tests
+ * @param {() => number} [rng]
  */
 export function assembleSession(
   snapshot,

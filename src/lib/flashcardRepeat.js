@@ -50,12 +50,16 @@ export function collectMatchResult(acc, { dimension, targets, wrong }) {
  * topped up with the weakest correctly-guessed words. The `wrong` set for a
  * built board is cleared so its own misses re-seed the next window.
  *
- * @param acc `{ wrong: Map, correct: Map }` — the accumulator maps (wrong sets
- *   for built boards are cleared)
- * @param opts `{ vocabById, options, rankOf, repSeq }` where `rankOf(key)` maps
- *   a key to a comparable weakness rank (lower = weaker → topped up first) and
- *   `repSeq` is the next repeat-board sequence number
- * @returns `{ boards, repSeq }` — the built boards and the advanced sequence
+ * @param {{wrong: Map, correct: Map}} acc the accumulator maps (wrong sets for
+ *   built boards are cleared)
+ * @param {object} [opts]
+ * @param {Map} [opts.vocabById] shaped vocab by id (from shapeVocab)
+ * @param {Array} [opts.options] the shared autocomplete pool
+ * @param {(key: string) => number} [opts.rankOf] a key's comparable weakness
+ *   rank (lower = weaker → topped up first)
+ * @param {number} [opts.repSeq] the next repeat-board sequence number
+ * @returns {{boards: object[], repSeq: number}} the built boards and the
+ *   advanced sequence
  */
 export function buildFlashcardRepeatBoards(acc, { vocabById, options = [], rankOf, repSeq = 0 } = {}) {
   const boards = []

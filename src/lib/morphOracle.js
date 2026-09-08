@@ -180,7 +180,12 @@ export function personCellDuplicates(words, { allow = new Set() } = {}) {
         if (value == null) continue
         const key = bare(value)
         if (seen.has(key)) {
-          out.push({ key: word.key, block, persons: [seen.get(key), person], form: value })
+          out.push({
+            key: word.key,
+            block,
+            persons: /** @type {[string, string]} */ ([seen.get(key), person]),
+            form: value,
+          })
         } else {
           seen.set(key, person)
         }
