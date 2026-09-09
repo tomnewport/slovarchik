@@ -101,6 +101,8 @@ src/
                         #   comprehension  — what the Russian says that the English translation cannot (aspect, det/indet motion),
                         #     asked after a correct RU→EN answer; informational, never graded
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
+                        #   progressChart  — axes, gridlines and stepped cumulative lines for the Progress
+                        #     screen's words-known chart (a real time axis; idle weeks take up width)
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
