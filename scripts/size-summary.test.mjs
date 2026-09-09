@@ -86,9 +86,18 @@ describe('evaluating against the budget', () => {
     expect(row.used).toBeGreaterThan(100)
   })
 
-  it('treats a group the build did not produce as zero rather than passing blindly', () => {
+  it('fails a group the build did not produce rather than passing blindly', () => {
+    // Zero bytes here means the script stopped finding the asset, not that the
+    // asset got small — a gate reading 0.0% forever watches nothing.
     const [row] = evaluate({}, budgetOf(10))
     expect(row.actual).toBe(0)
+    expect(row.found).toBe(false)
+    expect(row.ok).toBe(false)
+  })
+
+  it('fails an entry group whose files list came back empty', () => {
+    const [row] = evaluate({ entryJs: { files: [], gzip: 0 } }, budgetOf(10))
+    expect(row.ok).toBe(false)
   })
 })
 
@@ -109,6 +118,15 @@ describe('the published table', () => {
     expect(md).toContain('❌')
     expect(md).toContain('over.')
     expect(md).toContain('scripts/size-budget.json')
+  })
+
+  it('says the gate has stopped measuring, not that the payload is small', () => {
+    const md = renderSummary({}, evaluate({}, budgetOf(10)))
+    expect(md).toContain('nothing measured')
+    expect(md).toContain('Entry JS (gzip)')
+    expect(md).toContain('❌')
+    // Not the "raise the limit" advice — raising it would fix nothing here.
+    expect(md).not.toContain('raise the limit')
   })
 
   it('lists the largest vocab files, so a jump has an address', () => {

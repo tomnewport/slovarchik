@@ -80,9 +80,18 @@ export function measure(distDir) {
   )
 }
 
-/** Compare a measurement against the budget, largest overrun first. */
+/**
+ * Compare a measurement against the budget.
+ *
+ * A budgeted group the build produced no files for is a failure, not a pass:
+ * zero bytes is what this script reports when it has stopped finding the asset
+ * at all — an entry Vite emits under different markup, a renamed dist/vocab —
+ * and a gate that measures nothing would sit at 0.0% forever while the payload
+ * grew unwatched. `found` separates "nothing there" from "genuinely tiny".
+ */
 export function evaluate(measured, budget) {
   return Object.entries(budget.limits).map(([key, limit]) => {
+    const found = (measured[key]?.files?.length ?? 0) > 0
     const actual = measured[key]?.gzip ?? 0
     return {
       key,
@@ -90,7 +99,8 @@ export function evaluate(measured, budget) {
       why: limit.why,
       actual,
       limit: limit.bytes,
-      ok: actual <= limit.bytes,
+      found,
+      ok: found && actual <= limit.bytes,
       used: limit.bytes === 0 ? 0 : (actual / limit.bytes) * 100,
     }
   })
@@ -100,8 +110,13 @@ const kb = (bytes) => `${(bytes / 1024).toFixed(1)} KiB`
 
 /** Render the markdown report for the CI job summary. */
 export function renderSummary(measured, rows) {
-  const failed = rows.filter((r) => !r.ok)
-  const heading = failed.length ? '### 📦 Size budget — over budget' : '### 📦 Size budget'
+  const missing = rows.filter((r) => !r.found)
+  const over = rows.filter((r) => !r.ok && r.found)
+  const heading = missing.length
+    ? '### 📦 Size budget — nothing measured'
+    : over.length
+      ? '### 📦 Size budget — over budget'
+      : '### 📦 Size budget'
 
   const lines = [heading, '', '| Asset | Gzipped | Budget | Used | |', '| --- | --: | --: | --: | :-: |']
   for (const r of rows) {
@@ -110,9 +125,23 @@ export function renderSummary(measured, rows) {
     )
   }
 
-  if (failed.length) {
+  if (missing.length) {
+    lines.push('', 'Measured nothing at all:', '')
+    for (const r of missing) {
+      lines.push(`- **${r.label}** matched no file in \`dist/\`.`)
+    }
+    lines.push(
+      '',
+      'That is a broken gate rather than a small payload — the budget cannot',
+      'watch an asset it can no longer find. Check how `dist/index.html` now',
+      'references the entry chunk, and that `dist/vocab/` still exists, then fix',
+      '`scripts/size-summary.mjs` rather than deleting the check.',
+    )
+  }
+
+  if (over.length) {
     lines.push('', 'Over budget:', '')
-    for (const r of failed) {
+    for (const r of over) {
       lines.push(`- **${r.label}** is ${kb(r.actual - r.limit)} over. ${r.why}`)
     }
     lines.push(
@@ -156,10 +185,19 @@ export function main() {
   }
   console.log(markdown)
 
-  const failed = rows.filter((r) => !r.ok)
-  if (failed.length) {
+  const missing = rows.filter((r) => !r.found)
+  if (missing.length) {
     console.error(
-      `\n✗ over the size budget: ${failed
+      `\n✗ measured no files for: ${missing.map((r) => r.key).join(', ')} — the budget ` +
+        'has stopped watching them. Fix scripts/size-summary.mjs, do not delete the check.',
+    )
+    process.exitCode = 1
+  }
+
+  const over = rows.filter((r) => !r.ok && r.found)
+  if (over.length) {
+    console.error(
+      `\n✗ over the size budget: ${over
         .map((r) => `${r.key} ${kb(r.actual)} > ${kb(r.limit)}`)
         .join(', ')}`,
     )
