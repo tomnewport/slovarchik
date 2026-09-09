@@ -294,6 +294,25 @@ describe('bulk writes are one transaction, all or nothing', () => {
     expect((await idb.getAllProgress()).map((r) => r.word)).toEqual(['новый'])
   })
 
+  // The failure that isn't an aborted request: `put` throws `DataError` on the
+  // spot for an unusable key, part-way through a batch whose earlier requests
+  // (here, the `clear`) are already queued on the transaction. Without an
+  // explicit abort those commit and the caller sees only a rejection.
+  it('rolls back when a record fails synchronously mid-batch', async () => {
+    await idb.putProgress({ word: 'дом', events: [{ ok: true }] })
+
+    const reason = await reasonOf(
+      idb.replaceAllProgress([
+        { word: 'новый', events: [] },
+        { word: { not: 'a key' }, events: [] },
+      ]),
+    )
+    expect(reason.name).toBe('DataError')
+
+    // Neither the clear nor the record before the bad one landed.
+    expect(await idb.getAllProgress()).toEqual([{ word: 'дом', events: [{ ok: true }] }])
+  })
+
   it('keeps the previous contents when the replacement fails', async () => {
     await idb.putProgress({ word: 'дом', events: [{ ok: true }] })
     await idb.putProgress({ word: 'кот', events: [] })

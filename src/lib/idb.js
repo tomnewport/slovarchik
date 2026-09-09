@@ -97,10 +97,29 @@ function tx(storeName, mode, run) {
       new Promise((resolve, reject) => {
         const transaction = db.transaction(storeName, mode)
         const store = transaction.objectStore(storeName)
-        const result = run(store)
-        transaction.oncomplete = () => resolve(result.value)
+        let result
         transaction.onerror = (event) => reject(txError(event, transaction))
         transaction.onabort = (event) => reject(txError(event, transaction))
+        try {
+          result = run(store)
+        } catch (err) {
+          // A request can also fail *synchronously* — `put` throws `DataError`
+          // on an unusable key, `toPlain` throws `DataCloneError` — and that
+          // throw leaves any requests already issued on this transaction queued
+          // to commit. For a batch writer that is the half-written store the
+          // batching was meant to rule out: `replaceAllProgress` would land its
+          // `clear()` and the puts that preceded the bad record. Abort so the
+          // transaction rolls back, and reject with the real cause rather than
+          // the `AbortError` our own abort will raise a moment later.
+          try {
+            transaction.abort()
+          } catch {
+            // Already finished (or never started) — nothing to roll back.
+          }
+          reject(err)
+          return
+        }
+        transaction.oncomplete = () => resolve(result.value)
       }),
   )
 }
