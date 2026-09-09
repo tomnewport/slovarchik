@@ -34,11 +34,21 @@ export function loadFixtureFiles() {
  * written to after the fact — `linkHeteronyms`/`linkAmbiguousEn`/`linkFacts`
  * fill in the cross-links, and the store's `stampContextDrill` sets
  * `hasContextDrill` — so sharing *those* between tests would leak state across
- * a file. `buildWords` only ever reads its input document (`normalizeWord`
- * copies scalars out and builds fresh objects for `forms`, `facts` and
- * `heteronyms`), so sharing the documents they are built *from* leaks nothing.
+ * a file. `buildWords` itself only ever *reads* its input, so sharing the
+ * documents the records are built from leaks nothing on its own.
  *
- * The documents are shared, so every caller must treat them as read-only.
+ * The caveat, because it is not obvious from `buildWords`: a built record is
+ * not a full copy of its document. `normalizeWord` ends with `extra: word` —
+ * the raw authored node, by reference — and passes `usage`, `collections`,
+ * `meaningsAlt`, `short` and `participles` straight through as well. Those are
+ * live aliases into the cached document now that it is shared, so writing
+ * through one (`w.extra.defective = true`) would reach every later
+ * `loadFixtureWords()` in the same file and make the suite order-dependent.
+ * Nothing does today — the whole suite passes with the documents deep-frozen —
+ * and the rule that keeps it that way is: **treat a fixture document, and
+ * anything reachable from `w.extra`, as read-only.** Derive with a spread
+ * (`{ ...w, extra: { ...w.extra, x } }`), as src/lib/paradigm.test.js and
+ * src/lib/paradigmShape.test.js already do.
  */
 const docsByFile = new Map()
 
