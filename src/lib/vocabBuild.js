@@ -609,6 +609,18 @@ function linkFacts(words) {
 
 /**
  * Build the full, sorted word list from parsed vocab documents.
+ *
+ * The order is a *total* one, so the same corpus yields the same list whatever
+ * order its files arrive in — the build feeds them in `gen-manifest.mjs`'s
+ * registration order, the client in IndexedDB key order (alphabetical by
+ * filename). Homographs tie on the stress-stripped headword, and `sort` is
+ * stable, so without the explicit tiebreak below their relative order is
+ * whichever file happened to be read first. That would be invisible until #657:
+ * `phrase-notes.json` keys its annotations by position in the phrase list, so
+ * two swapped homographs move their sentences and the notes land on the wrong
+ * ones — and `corpusToken` cannot catch it, since it deliberately ignores file
+ * order. `buildFormIndex` breaks the same tie for the same kind of reason.
+ *
  * @param {Array<{pos: string, doc: object}>} files each `doc` is the parsed
  *   file object (`{ words: {...} }`), already decoded from JSON by the caller.
  * @returns {object[]}
@@ -627,8 +639,14 @@ export function buildWords(files) {
   linkManner(out)
   linkNumerals(out)
   linkFacts(out)
-  // Sort alphabetically by Russian headword, ignoring stress marks.
-  return out.sort((a, b) => stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru'))
+  // Sort alphabetically by Russian headword, ignoring stress marks, and break
+  // the homograph tie on the (corpus-unique) key so the order never depends on
+  // which file was read first.
+  return out.sort(
+    (a, b) =>
+      stripStress(a.ru).localeCompare(stripStress(b.ru), 'ru') ||
+      String(a.key ?? '').localeCompare(String(b.key ?? ''), 'ru'),
+  )
 }
 
 /**

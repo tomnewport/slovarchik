@@ -12,7 +12,7 @@ import {
   learnableWords,
   partsOfSpeech,
 } from './vocabBuild.js'
-import { loadFixtureWords } from '../test/fixtures.js'
+import { loadFixtureFiles, loadFixtureWords } from '../test/fixtures.js'
 import { factIssues } from './wordFacts.js'
 import yaml from 'js-yaml'
 
@@ -719,6 +719,23 @@ describe('the bundled vocabulary fixtures', () => {
     // Not "close enough": the build-time path replaces two corpus-wide
     // derivations, so anything it gets wrong is wrong for every learner.
     expect(fromNotes).toEqual(derived)
+  })
+
+  it('reads build-time notes against a corpus whose files arrived in another order (#657)', () => {
+    // The build feeds the word files in `gen-manifest.mjs`'s registration
+    // order; the client feeds them in IndexedDB key order (alphabetical by
+    // filename). `corpusToken` ignores file order on purpose — it is a content
+    // token, not an ordering one — so the ordinals the notes are keyed by have
+    // to be order-independent themselves. If they aren't, two homographs from
+    // different files swap places, their sentences move with them, and the
+    // annotations land on the wrong ones with the gate none the wiser.
+    const files = loadFixtureFiles().map((r) => ({ pos: r.pos, doc: yaml.load(r.content) }))
+    const built = buildWords(files)
+    const reordered = buildWords([...files].reverse())
+    expect(reordered.map((w) => w.key)).toEqual(built.map((w) => w.key))
+
+    const derived = shapePhrases(built)
+    expect(shapePhrases(reordered, null, phraseNotesFrom(derived))).toEqual(derived)
   })
 
   it('phraseNotesFrom keeps only the phrases that carry something', () => {
