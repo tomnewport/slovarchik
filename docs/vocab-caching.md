@@ -22,7 +22,7 @@ while `navigator.onLine` still reads `true`.
 
 `e2e/offline.spec.js` (#665) put a real service worker under test for the first
 time, in the `offline` Playwright project against the preview build. The
-`slovarchik-vocab` cache is **empty**, on every path a learner takes.
+`slovarchik-vocab` cache comes back **empty** on the path a learner takes.
 
 Two things keep it empty, and both are structural rather than incidental:
 
@@ -34,6 +34,22 @@ Two things keep it empty, and both are structural rather than incidental:
    request is issued, so there is still nothing for the worker to cache.
 
 Offline, `initVocab` checks `navigator.onLine` and never fetches at all.
+
+The rule was not broken, which is worth stating precisely because it is the
+tempting misreading. A request that _does_ reach the worker is cached exactly as
+configured — fetch a word file from an already-controlled page and it lands in
+`slovarchik-vocab` on the next tick. Point (1) is therefore a race rather than a
+law: on a slow enough first visit the worker could take control before the
+downloads finished, and then the cache would fill. That race used to fall the
+other way, and coalescing the boot loaders (#676) and fetching the stale files
+together (#677) is what moved it — the downloads now reliably win.
+
+Which is the argument for removal rather than against it. The cache's contents
+were nondeterministic, decided by a race that unrelated performance work could
+flip either way; and whatever landed in it was never read, because from the
+second launch onward the store answers from IndexedDB without asking the
+network. A cache you have to synthesise traffic to exercise is not serving
+traffic.
 
 So the rule could only ever populate itself in a narrow window — a deploy that
 changed a word file, on a visit where the worker already controlled the page —
