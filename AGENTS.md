@@ -109,6 +109,9 @@ src/
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
+                        #   coalesce  — share one in-flight run between concurrent callers, so the boot
+                        #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
+                        #     their work when main.js and a deep-linked view both start them
   types/globals.d.ts    # browser globals the DOM lib lacks (webkitAudioContext,
                         #   SpeechRecognition, the e2e seed hook) — declarations
                         #   for the typecheck probe, not shipped code

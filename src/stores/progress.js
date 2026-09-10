@@ -13,6 +13,7 @@ import { computed, reactive } from 'vue'
 
 import * as idb from '../lib/idb.js'
 import { toPlain } from '../lib/plain.js'
+import { coalesce } from '../lib/coalesce.js'
 import { state as vocabState } from './vocab.js'
 import {
   STATES,
@@ -880,8 +881,14 @@ export function weakestSkills() {
 // Loading / persistence lifecycle.
 // ---------------------------------------------------------------------------
 
-/** Populate the store from IndexedDB (progress records + committed batches). */
-export async function loadProgress() {
+/**
+ * Populate the store from IndexedDB (progress records + committed batches).
+ *
+ * Coalesced (#659): `main.js` starts this on boot and each deep-linkable view
+ * starts it again from `onMounted`, so without the wrapper the migration pass
+ * below runs twice and `clearMemo()` fires mid-flight through the other run.
+ */
+async function doLoadProgress() {
   const records = await idb.getAllProgress()
   const map = {}
   // Records persisted before the scheduler existed carry no `schedule` field.
@@ -966,6 +973,8 @@ export async function loadProgress() {
   state.loaded = true
   return state
 }
+
+export const loadProgress = coalesce(doLoadProgress)
 
 /** Wipe all progress (records + batches + first-use timestamp). For the Data screen's reset/tests. */
 export async function resetProgress() {
