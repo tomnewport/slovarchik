@@ -777,6 +777,27 @@ describe('buildCombinedFlashcard (#472)', () => {
 })
 
 // ── Intro cards (#587) ──────────────────────────────────────────────────────
+describe('a pre-shaped vocab is used rather than re-shaped (#668)', () => {
+  const vocabById = new Map(shapeVocab(words).map((v) => [v.id, v]))
+
+  it('builds the same exercises whether or not one is handed in', () => {
+    const withMap = build([practice('spell-word'), practice('match-vocab')], 7, { vocabById })
+    const without = build([practice('spell-word'), practice('match-vocab')], 7)
+    expect(withMap).toEqual(without)
+  })
+
+  it('reads the words out of the map it was given', () => {
+    // A doctored copy proves the supplied map is what the drills draw from —
+    // if `shapeVocab` still ran internally, the marker could not survive.
+    const doctored = new Map(
+      [...vocabById].map(([id, v]) => [id, { ...v, ru: `${v.ru}\u2020` }]),
+    )
+    const ex = build([practice('match-vocab')], 7, { vocabById: doctored })
+    expect(ex.length).toBeGreaterThan(0)
+    expect(JSON.stringify(ex)).toContain('\u2020')
+  })
+})
+
 describe('spliceIntros', () => {
   const ex = (id, targets, extra = {}) => ({
     id,

@@ -7,10 +7,12 @@ import {
   shapePhrases,
   shapeNouns,
   shapeContextPhrases,
+  phraseNotesFrom,
+  corpusToken,
   learnableWords,
   partsOfSpeech,
 } from './vocabBuild.js'
-import { loadFixtureWords } from '../test/fixtures.js'
+import { loadFixtureFiles, loadFixtureWords } from '../test/fixtures.js'
 import { factIssues } from './wordFacts.js'
 import yaml from 'js-yaml'
 
@@ -709,6 +711,67 @@ describe('the bundled vocabulary fixtures', () => {
     const shaped = shapeVocab(words)
     expect(shaped[0]).toHaveProperty('ru')
     expect(Array.isArray(shaped[0].en)).toBe(true)
+  })
+
+  it('shapePhrases derives the same phrases from build-time notes as it does itself (#657)', () => {
+    const derived = shapePhrases(words)
+    const fromNotes = shapePhrases(words, null, phraseNotesFrom(derived))
+    // Not "close enough": the build-time path replaces two corpus-wide
+    // derivations, so anything it gets wrong is wrong for every learner.
+    expect(fromNotes).toEqual(derived)
+  })
+
+  it('reads build-time notes against a corpus whose files arrived in another order (#657)', () => {
+    // The build feeds the word files in `gen-manifest.mjs`'s registration
+    // order; the client feeds them in IndexedDB key order (alphabetical by
+    // filename). `corpusToken` ignores file order on purpose — it is a content
+    // token, not an ordering one — so the ordinals the notes are keyed by have
+    // to be order-independent themselves. If they aren't, two homographs from
+    // different files swap places, their sentences move with them, and the
+    // annotations land on the wrong ones with the gate none the wiser.
+    const files = loadFixtureFiles().map((r) => ({ pos: r.pos, doc: yaml.load(r.content) }))
+    const built = buildWords(files)
+    const reordered = buildWords([...files].reverse())
+    expect(reordered.map((w) => w.key)).toEqual(built.map((w) => w.key))
+
+    const derived = shapePhrases(built)
+    expect(shapePhrases(reordered, null, phraseNotesFrom(derived))).toEqual(derived)
+  })
+
+  it('phraseNotesFrom keeps only the phrases that carry something', () => {
+    const derived = shapePhrases(words)
+    const notes = phraseNotesFrom(derived)
+    for (const [i, entry] of Object.entries(notes)) {
+      expect(entry.n?.length || entry.h).toBeTruthy()
+      expect(derived[Number(i)]).toBeTruthy()
+    }
+    const carrying = derived.filter((p) => p.enNotes?.length || p.enHint).length
+    expect(Object.keys(notes).length).toBe(carrying)
+  })
+
+  it('shapePhrases with notes never annotates a phrase the notes do not name', () => {
+    // A stale ordinal must degrade to "no annotation", never to "somebody
+    // else's annotation" — the store gates on corpusToken for exactly this,
+    // and this pins the behaviour the gate is protecting.
+    const fromNotes = shapePhrases(words, null, {})
+    expect(fromNotes.every((p) => p.enNotes.length === 0 && p.enHint === undefined)).toBe(true)
+    expect(fromNotes.map((p) => p.id)).toEqual(shapePhrases(words).map((p) => p.id))
+  })
+
+  describe('corpusToken', () => {
+    it('is stable under file order but not under a content change', () => {
+      const a = [{ file: 'nouns.json', hash: 'aaa' }, { file: 'verbs.json', hash: 'bbb' }]
+      expect(corpusToken(a)).toBe(corpusToken([...a].reverse()))
+      expect(corpusToken(a)).not.toBe(
+        corpusToken([{ file: 'nouns.json', hash: 'aaa' }, { file: 'verbs.json', hash: 'ccc' }]),
+      )
+    })
+
+    it('notices a file appearing or disappearing', () => {
+      const a = [{ file: 'nouns.json', hash: 'aaa' }]
+      expect(corpusToken(a)).not.toBe(corpusToken([...a, { file: 'verbs.json', hash: 'bbb' }]))
+      expect(corpusToken([])).toBe('')
+    })
   })
 
   it('shapePhrases flattens usage examples into translatable phrases', () => {
