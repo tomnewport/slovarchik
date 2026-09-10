@@ -3,7 +3,7 @@
 // the same resolver (lib/phraseContext.js) and renderer (PhraseFixExercise.vue)
 // as the session version, drawing from the usage `inflect:` annotations.
 import { computed, ref } from 'vue'
-import { state as vocabState } from '../stores/vocab.js'
+import { wordsByKey as wordByKey, state as vocabState } from '../stores/vocab.js'
 import { sample } from '../lib/quiz.js'
 import {
   buildContextExercise,
@@ -29,7 +29,6 @@ const drillable = computed(() =>
 )
 // Phrase-centric pool for government mode, with a key→word lookup for the owner.
 const govPhrases = computed(() => governmentPhrases(vocabState.contextPhrases))
-const wordByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
 
 const ready = computed(() =>
   props.government ? govPhrases.value.length > 0 : drillable.value.length > 0,
