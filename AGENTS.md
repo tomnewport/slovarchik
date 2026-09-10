@@ -106,6 +106,9 @@ src/
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
+                        #   coalesce  — share one in-flight run between concurrent callers, so the boot
+                        #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
+                        #     their work when main.js and a deep-linked view both start them
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
