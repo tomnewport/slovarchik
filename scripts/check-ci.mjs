@@ -65,6 +65,11 @@ export const STEPS = [
   },
   { script: 'test:coverage', corpus: false, why: 'the unit suite + the per-layer coverage ratchet' },
   { script: 'build', corpus: false, why: 'the production build' },
+  {
+    script: 'check:size',
+    corpus: false,
+    why: 'the shipped payload against the size budget (reads dist/, so it follows build)',
+  },
 ]
 
 function runStep(step) {

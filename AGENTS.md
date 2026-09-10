@@ -134,6 +134,10 @@ e2e/                    # Playwright specs
 docs/                   # design notes for in-flight features
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
                         #   check-ci.mjs runs CI's `test` job locally, in order
+                        #   size-summary.mjs gates the shipped payload (entry chunk,
+                        #     entry CSS, dist/vocab/*.json gzipped) against the
+                        #     committed budget in size-budget.json, and publishes
+                        #     the table to the job summary on pass and on fail
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
@@ -143,6 +147,12 @@ Coverage is measured over the logic layers only — `src/lib/`, `src/stores/` an
 cover in ways a line count says little about. Each layer has a threshold in
 `vite.config.js` set just under where it stands today, so a change that drops
 coverage fails CI; raise the thresholds when the real figure climbs past them.
+
+The shipped payload has the same kind of guard: `scripts/size-budget.json`
+holds gzipped limits for the entry chunk, the entry CSS and `dist/vocab/*.json`,
+and `npm run check:size` fails the build when one is exceeded. Like the coverage
+thresholds it is a ratchet — raise a limit in the PR that grows the payload, and
+say in the commit message what grew and by how much.
 
 ## Commands
 
@@ -163,6 +173,10 @@ npm run verify:review        # replaying review/proposals reproduces the committ
 npm run check:inflect:cases  # every inflect: annotation agrees with the case its preposition governs
 npm run check:prompts        # no growth in English prompts matching more than one Russian sentence
 
+# Build gate — reads dist/, so it runs after `npm run build`:
+npm run check:size    # entry chunk, entry CSS and the vocab JSON against
+                      # scripts/size-budget.json (a ratchet, like coverage)
+
 # The two that answer "did I break CI?"
 npm run check:corpus  # just the three gates above, in CI's order (~5s)
 npm run check:ci      # the whole CI `test` job, in order, stopping where it would
@@ -170,9 +184,10 @@ npm run check:ci      # the whole CI `test` job, in order, stopping where it wou
 
 CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
-`check:prompts`, `test:coverage` and `build` in its `test` job, plus the
-Playwright `e2e` job — every one of them on every push, publishing the coverage
-table to the run's job summary via `scripts/coverage-summary.mjs`.
+`check:prompts`, `test:coverage`, `build` and `check:size` in its `test` job,
+plus the Playwright `e2e` job — every one of them on every push, publishing the
+coverage table to the run's job summary via `scripts/coverage-summary.mjs` and
+the size table via `scripts/size-summary.mjs`.
 `npm run check:ci` runs that same `test` job list locally and gives the same
 verdict; `scripts/check-ci.test.mjs` reads `ci.yml` and fails if the two ever
 drift apart, so this paragraph cannot go stale unnoticed.
