@@ -51,6 +51,13 @@ jobs:
         if: ${{ !cancelled() }}
         run: node scripts/coverage-summary.mjs
       - run: npm run build
+      # The payload a learner actually waits for — entry chunk, entry CSS and
+      # the vocab JSON — against the budget in scripts/size-budget.json. Same
+      # ratchet as the coverage thresholds, and for the same reason: the metric
+      # that reaches learners was the one nothing measured (#669). The script
+      # writes its table to the job summary before it sets a failing exit code,
+      # so a breach always arrives with the numbers that explain it.
+      - run: npm run check:size
 
   e2e:
     runs-on: ubuntu-latest
