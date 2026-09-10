@@ -129,6 +129,9 @@ src/
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
+                        #   + phrase-notes.json — the corpus-wide phrase
+                        #   annotations derived at build time (#657); generated,
+                        #   not committed, like the manifest and the *.json
 e2e/                    # Playwright specs
 docs/                   # design notes for in-flight features
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
@@ -217,7 +220,10 @@ tells you nothing about whether CI will accept your change.
   from git history) and **not committed** — `npm run build` and `npm run dev`
   regenerate it, so there's nothing to bump and nothing to conflict over on
   parallel branches. `npm run gen:manifest` regenerates it on demand if you want
-  to eyeball it. `vocabBuild.test.js`/`declension.test.js` guard the shape.
+  to eyeball it — it also emits `phrase-notes.json`, the phrase annotations
+  `shapePhrases` would otherwise re-derive in every browser on every launch
+  (#657); the store falls back to deriving them whenever its cached corpus isn't
+  the one they were built from, so that path stays live. `vocabBuild.test.js`/`declension.test.js` guard the shape.
   Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store);
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
