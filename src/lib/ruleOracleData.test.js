@@ -10,19 +10,13 @@
 //     directions — no preposition claimed to have one case that the corpus
 //     gives two, and none quietly missing.
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import yaml from 'js-yaml'
 
 import { ORACLE_RULES, SINGLE_CASE_PREPOSITIONS } from './ruleOracle.js'
 import { stripStress } from './text.js'
+import { loadFixtureDoc, loadFixtureRules } from '../test/fixtures.js'
 
-const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
-const load = (file) => yaml.load(readFileSync(resolve(vocabDir, file), 'utf8'))
-
-const rules = load('grammar-rules.yml').rules
-const prepositions = load('prepositions.yml').words
+const rules = loadFixtureRules()
+const prepositions = loadFixtureDoc('prepositions.yml').words
 
 /** Corpus prepositions that govern exactly one case: bare spelling → case. */
 const corpusSingleCase = new Map(
