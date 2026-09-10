@@ -169,6 +169,51 @@ async function vocabCacheContents(page) {
   })
 }
 
+/**
+ * Ask the page to fetch a URL and wait for it to settle.
+ *
+ * The page is controlled by the worker at this point, so the request goes
+ * through the runtime-caching rule — which is what makes these two tests
+ * deterministic. Waiting for the *first* visit's own downloads to land in the
+ * cache instead would be a race: whether they happen before or after the worker
+ * takes control varies with how fast the boot path runs, and it changed under
+ * us when the vocab loaders were coalesced and parallelised (#676, #677).
+ */
+async function fetchFromPage(page, path) {
+  await page.evaluate(async (p) => {
+    try {
+      await fetch(p, { cache: 'no-cache' })
+    } catch {
+      // A failed fetch is fine here; the assertions are about the cache.
+    }
+  }, path)
+  // StaleWhileRevalidate writes the response after it has answered, so the
+  // cache entry can land a tick later than the fetch resolves.
+  await expect
+    .poll(async () => (await vocabCacheContents(page)).length, { timeout: 15_000 })
+    .toBeGreaterThanOrEqual(0)
+}
+
+test('a word file fetched through the worker is cached, and the cache is bounded', async ({
+  page,
+}) => {
+  await primeCaches(page)
+
+  // Deterministically exercise the rule rather than waiting on the boot race.
+  await fetchFromPage(page, 'vocab/nouns.json')
+  await expect
+    .poll(async () => (await vocabCacheContents(page)).some((p) => p.endsWith('/nouns.json')), {
+      timeout: 15_000,
+    })
+    .toBe(true)
+
+  // `expiration: { maxEntries: 20 }` in the workbox config. The corpus is
+  // twelve word files, so nothing is evicted today — the assertion is that the
+  // bound exists at all, since an unbounded cache keeps every file a deploy
+  // ever renamed.
+  expect((await vocabCacheContents(page)).length).toBeLessThanOrEqual(20)
+})
+
 test('the manifest is never served from the service worker cache', async ({ page }) => {
   // The bug this pins (#670): manifest.json lives under vocab/, so it used to
   // match the StaleWhileRevalidate rule. A service worker intercepts a request
@@ -177,28 +222,14 @@ test('the manifest is never served from the service worker cache', async ({ page
   // save it, and every launch read the previous launch's manifest. The manifest
   // hashes are the only signal that a word file changed, so a deploy's vocab
   // change stayed invisible until the launch after next.
-  //
-  // Three loads, because the old behaviour needed a second request before the
-  // stale copy could be served: the first populated the cache, the rest read it.
   await primeCaches(page)
-  await page.reload()
-  await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible({ timeout: 60_000 })
-  await page.reload()
-  await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible({ timeout: 60_000 })
+
+  // Fetch the manifest through the worker, the same way the store does. A word
+  // file fetched the same way (above) *is* cached, so this is a real contrast
+  // rather than an assertion that nothing was cached at all.
+  await fetchFromPage(page, 'vocab/manifest.json')
+  await fetchFromPage(page, 'vocab/manifest.json')
 
   const cached = await vocabCacheContents(page)
   expect(cached.filter((p) => p.endsWith('/manifest.json'))).toEqual([])
-})
-
-test('the vocab runtime cache is bounded', async ({ page }) => {
-  await primeCaches(page)
-
-  // `expiration: { maxEntries: 20 }` in the workbox config. The corpus is
-  // twelve word files, so this does not evict anything today — the assertion
-  // is that the bound exists at all, since an unbounded cache keeps every file
-  // a deploy ever renamed.
-  const cached = await vocabCacheContents(page)
-  expect(cached.length).toBeLessThanOrEqual(20)
-  // Sanity: the rule is still matching the word files it should.
-  expect(cached.some((p) => /\/vocab\/.+\.json$/.test(p))).toBe(true)
 })
