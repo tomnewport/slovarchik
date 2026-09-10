@@ -1,0 +1,31 @@
+{
+  "//": [
+    "A type-check probe over the logic layers (#666). Deliberately NOT a",
+    "TypeScript migration: `strict` is off, `.vue` files are not checked, and",
+    "nothing here emits. What it buys is that the JSDoc blocks in src/lib —",
+    "which are the actual contract for callers, since the layer is",
+    "framework-free and consumed by name — cannot silently drift from the",
+    "signatures they describe.",
+    "",
+    "Run with `npm run typecheck`. Turning on `strict` is out of scope and",
+    "would report a different, much larger class of finding."
+  ],
+  "compilerOptions": {
+    "checkJs": true,
+    "allowJs": true,
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    "strict": false
+  },
+  "include": [
+    "src/types/**/*.d.ts",
+    "src/lib/**/*.js",
+    "src/stores/**/*.js",
+    "src/composables/**/*.js"
+  ],
+  "exclude": ["node_modules", "dist", "**/*.test.js"]
+}
