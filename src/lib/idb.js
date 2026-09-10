@@ -1,7 +1,14 @@
-// Tiny promise-based IndexedDB wrapper. Three object stores:
+// Tiny promise-based IndexedDB wrapper. Object stores:
 //   'vocab-files' (keyed by filename)  — cached parsed vocab doc: { file, pos, updated, hash, doc }
 //   'meta'        (keyed by name)       — small app settings: { key, value }
 //   'progress'    (keyed by word)       — per-word learning record (see stores/progress.js)
+//   'issue-reports' (keyed by id)       — offline-queued issue reports
+//   'activity'    (keyed by day)        — one day of the streak calendar: { day, count, correct, hue }
+//
+// Writes come in two shapes: one record at a time, and — since #662 — whole
+// batches inside a single transaction. The batch writers exist for atomicity as
+// much as for speed: IndexedDB transactions are already all-or-nothing, so a
+// restore that fails halfway leaves the store as it was instead of empty.
 //
 // Every write runs its record through `toPlain` first (#534), so callers can
 // hand over reactive store state directly: unwrapping Vue's proxies is this
@@ -19,7 +26,10 @@ const FILES_STORE = 'vocab-files'
 const META_STORE = 'meta'
 const PROGRESS_STORE = 'progress'
 const REPORTS_STORE = 'issue-reports'
-const VERSION = 5
+// One record per day of the streak calendar (#662). Before this the whole
+// calendar was a single `meta` blob rewritten on every answer.
+const ACTIVITY_STORE = 'activity'
+const VERSION = 6
 
 let dbPromise = null
 
@@ -43,6 +53,13 @@ function openDb() {
       }
       if (!db.objectStoreNames.contains(REPORTS_STORE)) {
         db.createObjectStore(REPORTS_STORE, { keyPath: 'id' })
+      }
+      // New for the per-day activity calendar (v6). Existing installs still
+      // have their calendar in the `streak:activity` meta blob; `loadProgress`
+      // adopts it into this store on the next boot, so nothing is migrated
+      // here — a fresh store is all that's needed.
+      if (!db.objectStoreNames.contains(ACTIVITY_STORE)) {
+        db.createObjectStore(ACTIVITY_STORE, { keyPath: 'day' })
       }
     }
     req.onsuccess = () => resolve(req.result)
@@ -70,17 +87,39 @@ function txError(event, transaction) {
 }
 
 // `run` is called inside the promise, so a writer can do its `toPlain` there
-// and have a DataCloneError reject rather than throw at the call site.
+// and have a DataCloneError reject rather than throw at the call site. It may
+// issue any number of requests on the store — the transaction commits when they
+// have all succeeded, and aborts as a whole if any one of them fails, which is
+// what makes the batch writers below atomic.
 function tx(storeName, mode, run) {
   return openDb().then(
     (db) =>
       new Promise((resolve, reject) => {
         const transaction = db.transaction(storeName, mode)
         const store = transaction.objectStore(storeName)
-        const result = run(store)
-        transaction.oncomplete = () => resolve(result.value)
+        let result
         transaction.onerror = (event) => reject(txError(event, transaction))
         transaction.onabort = (event) => reject(txError(event, transaction))
+        try {
+          result = run(store)
+        } catch (err) {
+          // A request can also fail *synchronously* — `put` throws `DataError`
+          // on an unusable key, `toPlain` throws `DataCloneError` — and that
+          // throw leaves any requests already issued on this transaction queued
+          // to commit. For a batch writer that is the half-written store the
+          // batching was meant to rule out: `replaceAllProgress` would land its
+          // `clear()` and the puts that preceded the bad record. Abort so the
+          // transaction rolls back, and reject with the real cause rather than
+          // the `AbortError` our own abort will raise a moment later.
+          try {
+            transaction.abort()
+          } catch {
+            // Already finished (or never started) — nothing to roll back.
+          }
+          reject(err)
+          return
+        }
+        transaction.oncomplete = () => resolve(result.value)
       }),
   )
 }
@@ -140,6 +179,40 @@ export function putProgress(record) {
   })
 }
 
+/**
+ * Insert or replace many per-word progress records in ONE transaction.
+ *
+ * A per-record loop of {@link putProgress} opens a transaction each — 2,000 of
+ * them for a large restore — and leaves the store half-written if one fails.
+ * Here every `put` rides one transaction, so the batch either lands whole or
+ * not at all.
+ */
+export function putAllProgress(records) {
+  return tx(PROGRESS_STORE, 'readwrite', (store) => {
+    const plain = records.map((record) => toPlain(record))
+    for (const record of plain) store.put(record)
+    return { value: plain }
+  })
+}
+
+/**
+ * Replace the entire progress store with `records`, atomically.
+ *
+ * The clear runs inside the same transaction as the writes, which is the whole
+ * point: `importData` used to clear first and then write record by record, so a
+ * failure partway through left the learner with neither their old progress nor
+ * the backup they were restoring. Aborting this transaction restores the
+ * pre-clear contents.
+ */
+export function replaceAllProgress(records) {
+  return tx(PROGRESS_STORE, 'readwrite', (store) => {
+    const plain = records.map((record) => toPlain(record))
+    store.clear()
+    for (const record of plain) store.put(record)
+    return { value: plain }
+  })
+}
+
 /** Delete a single per-word progress record by its word key. */
 export function deleteProgress(word) {
   return tx(PROGRESS_STORE, 'readwrite', (store) => {
@@ -173,6 +246,47 @@ export function setMeta(key, value) {
     const plain = toPlain(value)
     store.put({ key, value: plain })
     return { value: plain }
+  })
+}
+
+/** Read every day of the stored activity calendar. */
+export function getAllActivity() {
+  return getAll(ACTIVITY_STORE)
+}
+
+/** Insert or replace one day of the activity calendar. */
+export function putActivityDay(record) {
+  return tx(ACTIVITY_STORE, 'readwrite', (store) => {
+    const plain = toPlain(record)
+    store.put(plain)
+    return { value: plain }
+  })
+}
+
+/** Insert or replace many days of the activity calendar in one transaction. */
+export function putAllActivity(records) {
+  return tx(ACTIVITY_STORE, 'readwrite', (store) => {
+    const plain = records.map((record) => toPlain(record))
+    for (const record of plain) store.put(record)
+    return { value: plain }
+  })
+}
+
+/** Replace the whole activity calendar with `records`, atomically. */
+export function replaceAllActivity(records) {
+  return tx(ACTIVITY_STORE, 'readwrite', (store) => {
+    const plain = records.map((record) => toPlain(record))
+    store.clear()
+    for (const record of plain) store.put(record)
+    return { value: plain }
+  })
+}
+
+/** Remove the whole activity calendar (used by "reset" / tests). */
+export function clearActivity() {
+  return tx(ACTIVITY_STORE, 'readwrite', (store) => {
+    store.clear()
+    return { value: undefined }
   })
 }
 
