@@ -16,7 +16,7 @@
 // yet, and the derived relations alone have to look deliberate.
 import { computed } from 'vue'
 
-import { state as vocabState } from '../stores/vocab.js'
+import { wordsByKey as byKey } from '../stores/vocab.js'
 import { stateOf } from '../stores/progress.js'
 import { wordFacts, factParts, relatedWords, hasWordFacts, NUMERAL_LABEL } from '../lib/wordFacts.js'
 import { ASPECT_LABEL, MOTION_LABEL } from '../lib/phraseContext.js'
@@ -43,7 +43,6 @@ const KIND_ICON = {
   note: '✎',
 }
 
-const byKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
 const record = computed(() => byKey.value.get(props.wordKey) ?? null)
 
 const facts = computed(() => wordFacts(record.value))

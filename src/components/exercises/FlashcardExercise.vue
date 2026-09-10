@@ -38,7 +38,7 @@ import { buildOptions } from '../../lib/flashcardOptions.js'
 import { speak } from '../../lib/speech.js'
 import { hasWordFacts } from '../../lib/wordFacts.js'
 import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition.js'
-import { state as vocabState } from '../../stores/vocab.js'
+import { wordsByKey } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
 import { diagnoseEnglishAnswer } from '../../stores/hints.js'
 import { correctionMessage, QUIET_TIERS } from '../../lib/confusables.js'
@@ -78,7 +78,6 @@ const answerLabel = computed(() => card.value?.label ?? answer.value)
 
 // Has this card's word anything to say for itself? Decided before the panel is
 // rendered, because it is what tells a correct answer whether to hold.
-const wordsByKey = computed(() => new Map(vocabState.words.map((w) => [w.key, w])))
 const cardHasFacts = computed(() =>
   card.value?.key ? hasWordFacts(wordsByKey.value.get(card.value.key), wordsByKey.value) : false,
 )

@@ -8,7 +8,8 @@ import { fileURLToPath } from 'node:url'
 import yaml from 'js-yaml'
 
 import * as idb from '../lib/idb.js'
-import { state, loadFromCache, syncFromNetwork, initVocab } from './vocab.js'
+import { state, phrases, loadFromCache, syncFromNetwork, initVocab } from './vocab.js'
+import { buildWords, corpusToken, phraseNotesFrom, shapePhrases } from '../lib/vocabBuild.js'
 
 // The client fetches build-generated JSON; mirror that here by parsing the
 // authoring YAML into the document object the server would serve.
@@ -42,6 +43,7 @@ beforeEach(async () => {
   idb._resetForTests()
   state.words = []
   state.status = 'idle'
+  state.phraseNotes = null
 })
 
 describe('vocab store sync', () => {
@@ -317,6 +319,55 @@ describe('initVocab offline', () => {
 
     expect(await initVocab()).toBe('ready')
     expect(fetchSpy).toHaveBeenCalled()
+    expect(state.words.length).toBeGreaterThan(0)
+  })
+})
+
+describe('build-time phrase annotations (#657)', () => {
+  // The notes are keyed by position in the phrase list, so they are only
+  // meaningful against the word files they were derived from. `corpusToken`
+  // decides that; these pin what it decides.
+  const nounEntry = { file: 'nouns.json', pos: 'noun', updated: '2026-05-28T00:00:00Z', hash: 'aaaa' }
+  const notesFor = (corpus) => {
+    const words = buildWords([{ pos: 'noun', doc: nounsDoc }])
+    return { corpus, notes: phraseNotesFrom(shapePhrases(words)) }
+  }
+  const cache = async (notesDoc) => {
+    await idb.putFile({ ...nounEntry, doc: nounsDoc })
+    await idb.putFile({
+      file: 'phrase-notes.json',
+      pos: 'phrase-notes',
+      updated: nounEntry.updated,
+      hash: 'nnnn',
+      doc: notesDoc,
+    })
+    await loadFromCache()
+  }
+
+  it('uses the notes when they were built from exactly this corpus', async () => {
+    await cache(notesFor(corpusToken([nounEntry])))
+    expect(state.phraseNotes).not.toBeNull()
+    // …and the phrases it produces are the ones deriving them would have.
+    const derived = shapePhrases(state.words)
+    expect(phrases.value).toEqual(derived)
+  })
+
+  it('ignores notes built from a different corpus and derives instead', async () => {
+    await cache(notesFor(corpusToken([{ ...nounEntry, hash: 'stale' }])))
+    expect(state.phraseNotes).toBeNull()
+    expect(phrases.value).toEqual(shapePhrases(state.words))
+  })
+
+  it('derives when no notes file is cached at all', async () => {
+    await idb.putFile({ ...nounEntry, doc: nounsDoc })
+    await loadFromCache()
+    expect(state.phraseNotes).toBeNull()
+    expect(phrases.value.length).toBeGreaterThan(0)
+  })
+
+  it('keeps the notes file out of the word list', async () => {
+    await cache(notesFor(corpusToken([nounEntry])))
+    expect(state.words.some((w) => w.key == null)).toBe(false)
     expect(state.words.length).toBeGreaterThan(0)
   })
 })
