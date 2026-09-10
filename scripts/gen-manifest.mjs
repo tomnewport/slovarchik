@@ -43,6 +43,8 @@ import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 import yaml from 'js-yaml'
 
+import { buildWords, corpusToken, phraseNotesFrom, shapePhrases } from '../src/lib/vocabBuild.js'
+
 // Canonical file → part-of-speech mapping. This is the source of truth for
 // which YAML files ship and what `pos` they carry; a new vocab file must be
 // registered here (the script fails loudly if disk and this list disagree).
@@ -63,6 +65,15 @@ export const FILES = [
 
 export const MANIFEST_VERSION = 1
 
+/**
+ * Manifest `pos` for the derived phrase annotations, and the file they live in.
+ * Not a part of speech and not a word file: `stores/vocab.js` picks it out by
+ * this `pos` and keeps it away from `buildWords`, exactly as it does the
+ * grammar rules.
+ */
+export const PHRASE_NOTES_POS = 'phrase-notes'
+export const PHRASE_NOTES_FILE = 'phrase-notes.json'
+
 /** The JSON filename the client fetches for a given `.yml` source file. */
 export const jsonName = (file) => file.replace(/\.ya?ml$/, '.json')
 
@@ -82,6 +93,60 @@ export function emitVocabJson(dir) {
     const doc = yaml.load(readFileSync(resolve(dir, file), 'utf8')) ?? null
     writeFileSync(resolve(dir, jsonName(file)), JSON.stringify(doc))
   }
+}
+
+/**
+ * The word-carrying manifest entries — everything `buildWords` is fed. The
+ * grammar rules and the phrase notes themselves are excluded: the rules are not
+ * words, and the notes cannot be part of the token that validates them.
+ */
+export const wordEntries = (entries) =>
+  entries.filter((e) => e.pos !== 'grammar-rules' && e.pos !== PHRASE_NOTES_POS)
+
+/**
+ * Emit `phrase-notes.json`: the parts of `shapePhrases` that are expensive to
+ * derive and identical for every learner (#657).
+ *
+ * On the committed corpus `shapePhrases` costs ~205 ms, of which ~170 ms is the
+ * ambiguity index and the per-phrase annotation pass — a pure function of the
+ * corpus, recomputed in every browser on every launch. Shipping its *answers*
+ * costs 12.6 KiB gzipped (+1.1% on a 1.09 MB corpus).
+ *
+ * Shipping the whole shaped phrase list instead would cost 797.5 KiB gzipped
+ * (+71.7%), and a pre-built form index another 487.9 KiB (+43.7%) — both were
+ * measured and rejected; see the issue.
+ *
+ * The `corpus` token records which word files these ordinals were derived
+ * against, so a client holding a half-updated cache falls back to deriving them
+ * rather than reading annotations off the wrong sentences.
+ */
+export function emitPhraseNotes(dir, entries) {
+  const docs = wordEntries(entries).map(({ pos, file }) => ({
+    pos,
+    doc: JSON.parse(readFileSync(resolve(dir, file), 'utf8')),
+  }))
+  const words = buildWords(docs)
+  const derived = shapePhrases(words)
+  const notes = phraseNotesFrom(derived)
+
+  // Assert the round trip on the real corpus, every build. The unit tests prove
+  // the two paths agree on the fixture; this proves it on the corpus that
+  // actually ships, which is the one where a mismatch would put an unanswerable
+  // prompt in front of a learner. It costs one extra `shapePhrases` (~200 ms) at
+  // build time and nothing at runtime.
+  const roundTrip = shapePhrases(words, null, notes)
+  for (let i = 0; i < derived.length; i++) {
+    if (JSON.stringify(roundTrip[i]) !== JSON.stringify(derived[i])) {
+      throw new Error(
+        `phrase-notes round trip differs at phrase ${i} (${derived[i]?.id}) — ` +
+          'the build-time annotations do not reproduce what shapePhrases derives',
+      )
+    }
+  }
+
+  const doc = { corpus: corpusToken(wordEntries(entries)), notes }
+  writeFileSync(resolve(dir, PHRASE_NOTES_FILE), JSON.stringify(doc))
+  return doc
 }
 
 /** ISO timestamp trimmed to second precision and normalised to UTC `Z`. */
@@ -138,6 +203,22 @@ export function buildManifest(dir, dateFor) {
   return { version: MANIFEST_VERSION, files }
 }
 
+/**
+ * The manifest entry for the emitted phrase notes. Its `hash` is over the
+ * emitted bytes (there is no source file to hash) and its `updated` is the
+ * newest of the word files it derives from — both reproducible, so building the
+ * same commit twice still yields a byte-identical manifest.
+ */
+export function phraseNotesEntry(dir, files) {
+  const sources = wordEntries(files)
+  return {
+    pos: PHRASE_NOTES_POS,
+    file: PHRASE_NOTES_FILE,
+    updated: sources.map((f) => f.updated).sort().at(-1) ?? nowStamp(),
+    hash: hashFile(dir, PHRASE_NOTES_FILE),
+  }
+}
+
 function main() {
   const here = dirname(fileURLToPath(import.meta.url))
   const dir = resolve(here, '../public/vocab')
@@ -145,9 +226,12 @@ function main() {
   assertFilesInSync(dir)
   emitVocabJson(dir)
   const manifest = buildManifest(dir, (file) => gitUpdated(dir, file) ?? nowStamp())
+  const notes = emitPhraseNotes(dir, manifest.files)
+  manifest.files.push(phraseNotesEntry(dir, manifest.files))
   writeFileSync(resolve(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n')
   console.log(
-    `Wrote ${manifest.files.length} JSON files + manifest.json to public/vocab/`,
+    `Wrote ${manifest.files.length - 1} JSON files + ${PHRASE_NOTES_FILE} ` +
+      `(${Object.keys(notes.notes).length} annotated phrases) + manifest.json to public/vocab/`,
   )
 }
 

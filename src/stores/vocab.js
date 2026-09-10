@@ -12,7 +12,14 @@
 // (offline) launches skip re-parsing entirely and just structured-clone it back.
 import { computed, reactive } from 'vue'
 
-import { buildWords, shapeVocab, shapeNouns, shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
+import {
+  buildWords,
+  corpusToken,
+  shapeVocab,
+  shapeNouns,
+  shapePhrases,
+  shapeContextPhrases,
+} from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import { buildFormIndex } from '../lib/phraseHint.js'
 import * as idb from '../lib/idb.js'
@@ -20,6 +27,12 @@ import { coalesce } from '../lib/coalesce.js'
 
 /** Manifest `pos` for the file holding grammar-rule explanations, not words. */
 const RULES_POS = 'grammar-rules'
+/**
+ * Manifest `pos` for `phrase-notes.json` — the phrase annotations derived at
+ * build time (#657). Like the rules, it is a manifest entry that is not a word
+ * file and must be kept out of `buildWords`.
+ */
+const PHRASE_NOTES_POS = 'phrase-notes'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const manifestUrl = () => `${BASE}vocab/manifest.json`
@@ -33,6 +46,11 @@ export const state = reactive({
   contextPhrases: new Map(),
   /** Parsed grammar-rules.yml `rules` map (rule id → explanation), or {}. */
   rules: {},
+  /**
+   * Build-time phrase annotations (ordinal → `{n, h}`) when the cached corpus is
+   * the one they were derived from, else null and `shapePhrases` derives them.
+   */
+  phraseNotes: null,
   lastSyncedAt: null,
   vocabVersion: null,
   error: null,
@@ -40,7 +58,14 @@ export const state = reactive({
 
 export const vocab = computed(() => shapeVocab(state.words))
 export const nouns = computed(() => shapeNouns(state.words))
-export const phrases = computed(() => shapePhrases(state.words, formIndex.value))
+// Reading `formIndex.value` here would build the 39.5k-entry index (~260 ms)
+// even on the build-time path that has no use for it, so the branch has to sit
+// outside the argument list rather than inside `shapePhrases`.
+export const phrases = computed(() =>
+  state.phraseNotes
+    ? shapePhrases(state.words, null, state.phraseNotes)
+    : shapePhrases(state.words, formIndex.value),
+)
 export const isReady = computed(() => state.words.length > 0)
 // key → word record. Cached here rather than rebuilt per component: several
 // consumers want it, and it is a Map over the whole dictionary.
@@ -68,15 +93,23 @@ function rebuild(records) {
   // stale entry from the pre-JSON cache format (raw YAML text under `content`);
   // it is ignored here and pruned by the next successful network sync.
   const usable = records.filter((r) => r.doc)
-  const words = buildWords(
-    usable.filter((r) => r.pos !== RULES_POS).map((r) => ({ pos: r.pos, doc: r.doc })),
-  )
+  const sources = usable.filter((r) => r.pos !== RULES_POS && r.pos !== PHRASE_NOTES_POS)
+  const words = buildWords(sources.map((r) => ({ pos: r.pos, doc: r.doc })))
   const phrasesByKey = indexPhrases(shapeContextPhrases(words))
   const rules = usable.find((r) => r.pos === RULES_POS)?.doc?.rules ?? {}
   stampContextDrill(words, phrasesByKey)
   state.words = words
   state.contextPhrases = phrasesByKey
   state.rules = rules
+  // The build-time annotations are keyed by position in the phrase list, which
+  // only means anything against the exact word files they were derived from.
+  // Files are cached and invalidated one at a time, so a half-updated cache is
+  // reachable; when the tokens disagree — or the notes are simply absent, as on
+  // a cache written before this shipped — `shapePhrases` derives them as it
+  // always did rather than annotating the wrong sentences.
+  const notes = usable.find((r) => r.pos === PHRASE_NOTES_POS)?.doc
+  state.phraseNotes =
+    notes?.corpus && notes.corpus === corpusToken(sources) ? (notes.notes ?? null) : null
 }
 
 /** Populate the store from the IndexedDB cache. Returns the cached records. */
