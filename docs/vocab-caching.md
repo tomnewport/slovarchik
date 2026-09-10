@@ -1,70 +1,106 @@
-# Why the corpus is cached twice
+# Why the corpus is cached once
 
-A decision record for #670. The short version: **both copies stay**, the
-runtime cache is now bounded, and `manifest.json` has been taken out of it.
+A decision record for #670. The short version: **the service-worker copy is
+gone.** IndexedDB holds the corpus; nothing else does.
 
-## What exists
+## What the question was
 
-The vocabulary is held in two places at once:
+The vocabulary used to be held in two places at once:
 
-| Where                              | What                     | Size                         | Written by                                                          |
-| ---------------------------------- | ------------------------ | ---------------------------- | ------------------------------------------------------------------- |
-| Cache Storage (`slovarchik-vocab`) | the JSON bytes as served | ~1.15 MB gzipped on the wire | the service worker's `StaleWhileRevalidate` rule (`vite.config.js`) |
-| IndexedDB (`vocab-files`)          | the **parsed** documents | ~5.9 MB structured-cloned    | `src/stores/vocab.js`                                               |
+| Where                              | What                                                | Written by                                                  |
+| ---------------------------------- | --------------------------------------------------- | ----------------------------------------------------------- |
+| Cache Storage (`slovarchik-vocab`) | the JSON bytes as served                            | the worker's `StaleWhileRevalidate` rule (`vite.config.js`) |
+| IndexedDB (`vocab-files`)          | the **parsed** documents, ~5.9 MB structured-cloned | `src/stores/vocab.js`                                       |
 
-They are not the same thing, and that is the point: IndexedDB holds documents
-the app can use without parsing, Cache Storage holds bytes the network layer
-can replay. The duplication is real but the two copies do different jobs.
+The stated reasoning was that the two did different jobs — IndexedDB holding
+documents the app can use without parsing, Cache Storage holding bytes the
+network layer can replay — and that the worker's copy earned its space by
+making a deploy's first launch fast, and by surviving a network that fails
+while `navigator.onLine` still reads `true`.
 
-## When the service worker copy is actually consulted
+## What the measurement said
 
-Measured against the preview build with a real worker (`e2e/offline.spec.js`):
+`e2e/offline.spec.js` (#665) put a real service worker under test for the first
+time, in the `offline` Playwright project against the preview build. The
+`slovarchik-vocab` cache is **empty**, on every path a learner takes.
 
-1. **Offline.** Not consulted. `initVocab` checks `navigator.onLine` and never
-   reaches the network, so the words come from IndexedDB. The SW cache is
-   inert on the path it looks most useful for.
-2. **Online, corpus unchanged.** Only the manifest is fetched; every word file
-   is skipped on its content hash, so nothing reaches the SW rule.
-3. **Online, a file changed.** The one clear win: the changed file is served
-   from cache immediately and revalidated in the background, so a deploy does
-   not stall the first launch after it.
-4. **Online but failing** (captive portal, flaky 4G, a 500). The SW answers
-   from cache where the network would have thrown. The app survives either way
-   — a failed refresh leaves `initVocab` at `ready` on the IndexedDB copy — so
-   this is a latency win, not a correctness one.
+Two things keep it empty, and both are structural rather than incidental:
+
+1. **First visit.** The worker installs and activates, but does not control the
+   page that registered it. `syncFromNetwork`'s twelve fetches therefore go
+   straight to the network — the worker never sees them, so nothing is cached.
+2. **Every visit after that.** The corpus is in IndexedDB and the manifest
+   hashes match, so `syncFromNetwork` skips every file (`vocab.js:106`). No
+   request is issued, so there is still nothing for the worker to cache.
+
+Offline, `initVocab` checks `navigator.onLine` and never fetches at all.
+
+So the rule could only ever populate itself in a narrow window — a deploy that
+changed a word file, on a visit where the worker already controlled the page —
+and even then the store immediately wrote the same bytes into IndexedDB, which
+is what every later launch reads.
+
+The earlier version of this note asserted the deploy-day win as measured. It
+was not: it was inferred from the config. The test is what settled it, and it
+settled it the other way.
 
 ## The decision
 
-**Keep both.** Case 3 is a genuine benefit on exactly the launch a learner is
-most likely to notice, and the cost is bounded disk on a device that has
-already accepted a ~6 MB corpus in IndexedDB. Removing the SW cache would save
-~1.15 MB and make the first launch after every deploy slower.
+**Remove the rule.** Bounding a cache that never fills is a more precise
+description of something that should not be there. What remains is one copy
+with one invalidation rule — the manifest's content hashes — which is the whole
+of the story a future reader has to hold.
 
-Two things did change:
+This also fixes a real bug outright rather than by exception. `manifest.json`
+lives under `vocab/`, so it matched the `StaleWhileRevalidate` pattern. A
+service worker intercepts a request regardless of the `cache: 'no-cache'` the
+store passes to `fetch` — that option controls the HTTP cache, not the worker —
+so every launch was answered from the previous launch's manifest. Since those
+hashes are the only signal that a word file changed, **a deploy's vocab change
+was invisible until the launch after next.** With no rule, there is nothing to
+exclude the manifest from.
 
-- **The cache is bounded** — `expiration: { maxEntries: 20 }`. There are twelve
-  word files; 20 leaves room to add parts of speech without evicting a live
-  one. Before this there was no upper bound at all, so a file dropped from the
-  manifest or renamed by a deploy sat in Cache Storage forever.
-- **`manifest.json` is excluded from the rule.** This was a real bug, not
-  tidying. The manifest lives under `vocab/`, so it matched the
-  `StaleWhileRevalidate` pattern. A service worker intercepts a request
-  regardless of the `cache: 'no-cache'` the store passes to `fetch` — that
-  option controls the HTTP cache, not the worker — so every launch was answered
-  from the previous launch's manifest. The manifest's content hashes are the
-  only signal that a word file changed, so **a deploy's vocab change was
-  invisible until the launch after next.** Excluding it costs nothing: offline
-  the store never asks for it, and a failed manifest fetch is already handled.
+## What is given up
+
+The case for keeping it was a network that fails while `navigator.onLine` still
+reads `true` — a captive portal, a dead zone — where the worker would have
+served a stale word file instead of the fetch throwing. That case is real, and
+it is already handled one layer up: a failed sync leaves `initVocab` on the
+IndexedDB copy at `status: 'ready'` (`vocab.js:148-151`). The learner sees the
+corpus they had before, which is exactly what the stale cache would have given
+them.
+
+The other loss is latency on the first launch after a vocab deploy. That launch
+now fetches the changed files rather than reading them from Cache Storage —
+which is what it did anyway, since the cache was empty.
 
 ## What holds this in place
 
-`e2e/offline.spec.js`, in the `offline` Playwright project (the preview build,
-where the worker is real):
+`scripts/check-precache.mjs`, in CI after `build`:
 
-- `the manifest is never served from the service worker cache` — fails against
-  the pre-#670 config, which is how we know it is testing something.
-- `the vocab runtime cache is bounded`.
+- the `vocab/**` precache partition, which is #266 and was always its job;
+- **no vocab runtime cache in the generated `dist/sw.js`** — the cache name, or
+  a `registerRoute()` whose pattern matches `/vocab/`. Either one fails the
+  build.
 
-The precache/runtime split itself — `vocab/**` staying out of the precache
-manifest, the #266 decision — is guarded separately by
-`scripts/check-precache.mjs` in CI.
+That second check has to read the built worker rather than run in a browser,
+and the reason is the trap this whole issue fell into. Workbox opens a runtime
+cache lazily, on the first request it actually handles. No vocab request ever
+reaches the worker — that is the finding — so the cache is never created, and
+`caches.keys()` is empty whether or not the rule exists. Every runtime
+assertion about that cache passes either way.
+
+The first attempt at this work was a Playwright test asserting the cache was
+bounded. It went green while proving nothing, and its one honest line — a
+sanity check that the cache contained _something_ — is what exposed the empty
+cache and turned this issue around. The replacement was checked in both
+directions: it fails against a build with the rule restored, and passes without
+it.
+
+`e2e/offline.spec.js` still covers the claim that matters — the app boots, a
+route opens and a drill has words with the network cut — plus
+`the corpus that survives the cut is the one in IndexedDB`, which pins the copy
+those tests silently depend on.
+
+**#266 is untouched.** The app shell is still precached and the vocab still is
+not, so a word change does not re-ship the shell.
