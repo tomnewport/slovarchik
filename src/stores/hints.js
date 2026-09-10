@@ -8,16 +8,13 @@
 // can't be expected to know yet and aren't actively drilling.
 import { computed } from 'vue'
 
-import { state as vocabState } from './vocab.js'
+import { formIndex, state as vocabState } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
-import { buildFormIndex, phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
+import { phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
 import { buildGlossIndex, diagnose, diagnoseEnglish } from '../lib/confusables.js'
 import { STATES } from '../lib/progression.js'
 
 const LEARNED_RANK = STATES.indexOf('learned')
-
-/** Surface-form → hint entry, rebuilt only when the vocabulary changes. */
-const formIndex = computed(() => buildFormIndex(vocabState.words))
 
 /** Keys belonging to a currently committed learning or mastery batch. */
 const currentBatchKeys = computed(() => {
