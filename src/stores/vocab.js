@@ -15,6 +15,7 @@ import { computed, reactive } from 'vue'
 import { buildWords, shapeVocab, shapeNouns, shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import * as idb from '../lib/idb.js'
+import { coalesce } from '../lib/coalesce.js'
 
 /** Manifest `pos` for the file holding grammar-rule explanations, not words. */
 const RULES_POS = 'grammar-rules'
@@ -85,8 +86,12 @@ const cacheToken = (entry) => entry.hash ?? entry.updated
 /**
  * Fetch the manifest and download any new/updated files into IndexedDB.
  * Returns true if anything changed.
+ *
+ * Exported through {@link coalesce}, so the Data screen's manual "check for
+ * updates" (DataView.vue) joins a sync already running under `initVocab`
+ * instead of issuing a second set of downloads (#659).
  */
-export async function syncFromNetwork() {
+async function doSyncFromNetwork() {
   const res = await fetch(manifestUrl(), { cache: 'no-cache' })
   if (!res.ok) throw new Error(`manifest ${res.status}`)
   const manifest = await res.json()
@@ -138,8 +143,16 @@ export async function syncFromNetwork() {
   return changed
 }
 
-/** Load cached data, then refresh from the network if we're online. */
-export async function initVocab() {
+export const syncFromNetwork = coalesce(doSyncFromNetwork)
+
+/**
+ * Load cached data, then refresh from the network if we're online.
+ *
+ * Coalesced (#659): `main.js` starts this on boot and every deep-linkable view
+ * starts it again in `onMounted`, so without this the whole 1.15 MB corpus is
+ * downloaded and written to IndexedDB twice.
+ */
+async function doInitVocab() {
   state.status = 'loading'
   try {
     await loadFromCache()
@@ -154,3 +167,5 @@ export async function initVocab() {
   }
   return state.status
 }
+
+export const initVocab = coalesce(doInitVocab)
