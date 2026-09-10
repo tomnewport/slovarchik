@@ -19,11 +19,13 @@
     "is to make them agree \u2014 or, where TS narrows correct JS badly, to say so",
     "with a reason, as src/types/globals.d.ts does.",
     "",
-    "92 errors across 31 files on main @ b2e89c1 (2026-09-10) \u2014 38 TS2339,",
+    "91 errors across 30 files on main @ 4f20d33 (2026-09-10) \u2014 38 TS2339,",
     "21 TS2322, 11 TS2739, 5 TS2741, 5 TS2353, 4 TS2363, 3 TS2362, 3 TS1064,",
     "1 TS2561, 1 TS2554. The fixes are #666's second half and land separately,",
     "against the tree left by the #657/#665/#667/#668/#669/#670 queue rather",
-    "than the tree they were first written for."
+    "than the tree they were first written for.",
+    "",
+    "Down one from 92/31: #657 landed two new errors in vocabBuild.js while this branch was open, the ratchet caught them, and fixing them took that file to zero \u2014 so its entry is gone rather than lowered."
   ],
   "files": {
     "src/lib/adjectiveDeclension.js": 1,
@@ -51,7 +53,6 @@
     "src/lib/sessionRunner.js": 1,
     "src/lib/streak.js": 2,
     "src/lib/translationAudit.js": 6,
-    "src/lib/vocabBuild.js": 1,
     "src/lib/wordFacts.js": 2,
     "src/stores/hints.js": 2,
     "src/stores/progress/batches.js": 1,
