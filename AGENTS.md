@@ -76,7 +76,22 @@ src/
                         #   lock, mic lifecycle — SpeakingView + PracticeView
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
-    progress.js         #   the core engine (~1.3k lines) — per-word attempts → states, batches, sessions
+    progress.js         #   barrel — re-exports stores/progress/ so consumers import one module
+    progress/           #   the core engine, split along its section banners (#667):
+      state.js          #     the reactive `state` + the lookups over it (the floor: imports
+                        #     nothing else in here, so everything else may import it)
+      persistence.js    #     writing to IndexedDB, and noticing when a write fails
+      migrations.js     #     bringing an older record up to the current shape — ONE place,
+                        #     called by both the load path and an import
+      records.js        #     the per-word derivation memo, the derived computeds, and every
+                        #     path that records an attempt (sole owner of the memo)
+      activity.js       #     streak + activity calendar
+      batches.js        #     the current learning/mastery batches
+      sessions.js       #     session assembly + the per-word / per-skill views
+      analytics.js      #     the Progress screen's learned/mastered history
+      lifecycle.js      #     load / reset
+      backup.js         #     export / import
+      index.js          #     re-export; dependencies point one way only, no cycles
     settings.js         #   user preferences (not learning progress)
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state

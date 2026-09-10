@@ -715,8 +715,16 @@ export function vocabDisplay(v, rng = Math.random) {
  * its English can't (informal vs formal "you", the speaker's gender), so a
  * prompt that shows only the English can annotate the ambiguous word instead of
  * asking for a form the learner has no way to choose. See `phraseAmbiguity.js`.
+ *
+ * @param {object[]} words normalised word records (from {@link buildWords})
+ * @param {Map} [formIndex] a surface-form index (from `phraseHint.buildFormIndex`)
+ *   over the *same* words. Optional, and purely a saving: the prompt
+ *   disambiguation below needs one, and building it over the whole dictionary
+ *   costs ~260 ms — half of this function. The app already keeps one beside the
+ *   store's word list and hands it in (see `stores/vocab.js`); scripts and tests
+ *   that call this once may leave it out and let `promptHints` build its own.
  */
-export function shapePhrases(words) {
+export function shapePhrases(words, formIndex) {
   const seen = new Set()
   const out = []
   // Built from *every* word (gloss-only entries included): a surface form is
@@ -746,7 +754,7 @@ export function shapePhrases(words) {
   // because whether a prompt is ambiguous is a property of the whole corpus and
   // no single phrase can know it. See lib/promptDisambiguation.js.
   const byId = new Map(out.map((p) => [p.id, p]))
-  for (const [id, hint] of promptHints(out, words)) {
+  for (const [id, hint] of promptHints(out, words, formIndex)) {
     const p = byId.get(id)
     if (p) p.enHint = hint
   }
