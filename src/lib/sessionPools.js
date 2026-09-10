@@ -100,6 +100,9 @@ export function understanding(ctx, key) {
  */
 export function currentPool(ctx) {
   const out = []
+  // Words folded in because they were once known and are not any more. They are
+  // ranked ahead of the batch below rather than by `understanding` — see there.
+  const relearn = new Set()
   for (const level of ['learning', 'mastery']) {
     const batch = ctx[level]
     if (!batch) continue
@@ -110,22 +113,39 @@ export function currentPool(ctx) {
   // through every other pool: the reinforce pools (at-risk / untested) keep only
   // learned-or-better words, and a slipped word is usually no longer in any
   // committed batch. Fold them into the current batch so they get tested again
-  // instead of sitting in `lost` forever. They sort to the front via
-  // `understanding`, so they get the most practice.
-  for (const key of ctx.lost) if (rank(ctx.stateOf(key)) < rank('learned')) out.push(key)
+  // instead of sitting in `lost` forever.
+  for (const key of ctx.lost) {
+    if (rank(ctx.stateOf(key)) < rank('learned')) {
+      out.push(key)
+      relearn.add(key)
+    }
+  }
   // A word that failed its confirmation review (#313) is still `learned` by
   // criteria but demonstrably not retained overnight — fold it back into the
   // current pool for focused re-drilling until a later spaced review confirms it.
   for (const [key, rec] of Object.entries(ctx.records)) {
     if (rec.confirmedAt == null && rec.confirmFailedAt != null && rank(ctx.stateOf(key)) >= rank('learned')) {
       out.push(key)
+      relearn.add(key)
     }
   }
   // Fall back to anything actively being learned if no batch is committed.
   if (out.length === 0) {
     for (const k of Object.keys(ctx.records)) if (ctx.stateOf(k) === 'learning') out.push(k)
   }
-  return [...new Set(out)].sort((a, b) => understanding(ctx, a) - understanding(ctx, b))
+  // Worst-understood first, because the current bucket is front-biased — but
+  // re-learns rank ahead of the whole batch regardless of their score. A word
+  // that slipped has, by definition, met almost every criterion it needs: one
+  // failing dimension against three or four met ones scores it near the TOP of
+  // `understanding`, which sorted it to the very BACK of the pool and left it
+  // drawn an order of magnitude less often than a fresh batch word — the
+  // opposite of the intent, and how a slipped-word backlog accumulates. Re-learns
+  // are also the cheapest words in the pool to finish (a couple of correct
+  // answers each) and the ones decaying fastest, so they earn the front.
+  const tier = (k) => (relearn.has(k) ? 0 : 1)
+  return [...new Set(out)].sort(
+    (a, b) => tier(a) - tier(b) || understanding(ctx, a) - understanding(ctx, b),
+  )
 }
 
 /**
@@ -136,6 +156,27 @@ export function currentPool(ctx) {
 export function reinforcePool(ctx) {
   return [...new Set([...ctx.atRisk, ...ctx.lost])].filter(
     (k) => rank(ctx.stateOf(k)) >= rank('learned'),
+  )
+}
+
+/**
+ * Words that have slipped back out of mastery: peak `mastered`, now `learned`.
+ * Only a mastery-level correct answer can restore one, and — unlike a
+ * mastery-level at-risk word — it is not borderline (its criterion is *unmet*,
+ * not merely one miss from unmet), so nothing else in this module reaches it.
+ * A mastered word never re-enters a mastery batch on its own, and every pool a
+ * `learned` word does land in (reinforce, due) is drilled at the learning level,
+ * whose criteria it already meets — so without folding these into the mastery
+ * candidates below, a word that drops out of mastery can only sit in `lost`
+ * until a future mastery batch happens to pick it again.
+ *
+ * Deliberately restricted to `learned`: a word that fell further than that has
+ * a broken learning level to repair first, and drilling it at the mastery level
+ * would record mastery events on a word that is no longer learned.
+ */
+export function masteryLostPool(ctx) {
+  return ctx.lost.filter(
+    (k) => (ctx.records[k]?.peak ?? 0) >= rank('mastered') && ctx.stateOf(k) === 'learned',
   )
 }
 
@@ -211,7 +252,11 @@ export function assembleSession(
   // de-risk them: a mastered word never re-enters a mastery batch, so without
   // this it would stay at risk forever.
   const hasLearningPractices = practicesForSession(type).some((p) => p.level === 'learning')
-  const masteryActive = masteryBatchActive(ctx, now) || riskByDim.mastery.size > 0
+  // Words that have dropped out of mastery keep mastery practices in play for
+  // the same reason at-risk ones do: only a mastery-level drill can move them.
+  const masteryLost = masteryLostPool(ctx).filter((k) => !focusSet || focusSet.has(k))
+  const masteryActive =
+    masteryBatchActive(ctx, now) || riskByDim.mastery.size > 0 || masteryLost.length > 0
   const levels = !masteryActive && hasLearningPractices ? ['learning'] : null
   // Weakness is computed *per level* so the two levels never steal each other's
   // practice-selection probability. Both start from the same global per-dimension
@@ -317,16 +362,22 @@ export function assembleSession(
       if (risky.length) base = risky
     }
     const masteryRisky = riskByDim.mastery.get(practice.dimension) ?? []
-    if (practice.level === 'mastery' && (masterySet || masteryRisky.length)) {
+    if (practice.level === 'mastery' && (masterySet || masteryRisky.length || masteryLost.length)) {
       // Mastery-level practices must only draw from the mastery batch to avoid
       // recording mastery-level events on non-batch words (which corrupts their
       // progression state — see exerciseBuild.buildInflect for the same guard
-      // on the top-up path) — plus the words at risk in this dimension: those
-      // already carry a met mastery criterion, so further mastery attempts are
-      // safe, and a correct one is the only thing that de-risks them.
+      // on the top-up path) — plus the words at risk in this dimension, and the
+      // words that have slipped out of mastery ({@link masteryLostPool}). Both
+      // of those have a mastery history already, so further mastery attempts are
+      // safe, and a correct one is the only thing that recovers them.
+      //
+      // Slipped words lead the list: mastery slots are front-biased (they all
+      // sit in the `current` bucket), and a word waiting to be re-mastered is
+      // both cheaper to finish and more perishable than a batch word that has
+      // never been mastered at all.
       const riskySet = new Set(masteryRisky)
       const batchWords = masterySet ? base.filter((k) => masterySet.has(k)) : []
-      const candidates = [...new Set([...batchWords, ...masteryRisky])]
+      const candidates = [...new Set([...masteryLost, ...masteryRisky, ...batchWords])]
       // Prefer words this practice's dimension can still advance today: a word
       // whose criterion is met, or day-blocked (#313 — it just needs another
       // calendar day), gains nothing from more drilling now. An at-risk word
