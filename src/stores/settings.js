@@ -7,6 +7,7 @@
 import { reactive } from 'vue'
 
 import * as idb from '../lib/idb.js'
+import { coalesce } from '../lib/coalesce.js'
 import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound } from '../lib/feedbackSound.js'
 
 const META_KEY = 'feedbackSounds'
@@ -43,8 +44,14 @@ function valid(kind, id) {
 // The slot played after a slip is the "neutral" kind throughout (the
 // NEUTRAL_SOUNDS list); the UI labels it "with mistakes".
 
-/** Load saved preferences (defaults stay in place when nothing is stored). */
-export async function loadSettings() {
+/**
+ * Load saved preferences (defaults stay in place when nothing is stored).
+ *
+ * The `loaded` fast path below only covers a *later* call; two calls racing
+ * each other both see it false, so the coalescing wrapper (#659) is what stops
+ * the duplicate reads on boot.
+ */
+async function doLoadSettings() {
   if (settings.loaded) return settings
   const stored = (await idb.getMeta(META_KEY)) ?? {}
   if (valid('success', stored.successSound)) settings.successSound = stored.successSound
@@ -55,6 +62,8 @@ export async function loadSettings() {
   settings.loaded = true
   return settings
 }
+
+export const loadSettings = coalesce(doLoadSettings)
 
 function persist() {
   return idb.setMeta(META_KEY, {
