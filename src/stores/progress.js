@@ -15,6 +15,7 @@ import * as idb from '../lib/idb.js'
 import { toPlain } from '../lib/plain.js'
 import { coalesce } from '../lib/coalesce.js'
 import { state as vocabState } from './vocab.js'
+import { raiseError } from './errorToast.js'
 import {
   STATES,
   applicableDimensions,
@@ -533,9 +534,53 @@ function batchSignature() {
   return `${sig(state.learning)}|${sig(state.mastery)}`
 }
 
-/** Fire-and-forget meta write — swallow errors so it never becomes unhandled. */
+// How many background writes must fail in a row before we tell the learner.
+// One toast for a run of failures, not one per answer: exhausted quota fails
+// every write, and the message worth delivering is "your progress isn't being
+// saved", once.
+const PERSIST_FAILURES_BEFORE_TOAST = 3
+let consecutivePersistFailures = 0
+/** Outstanding background writes, so tests (and `loadProgress`) can settle. */
+const pendingPersists = new Set()
+
+/**
+ * Fire-and-forget write on the hot path. The rejection is still absorbed rather
+ * than rethrown — `idb.js`'s header explains why these must never become
+ * unhandled — but it is no longer *discarded*. Before this, a learner whose
+ * IndexedDB quota was exhausted lost their streak with no toast, no console
+ * warning, and a `currentStreak` that read correctly until the next reload
+ * silently reset it to zero (#662).
+ */
+function saveInBackground(label, write) {
+  const settled = write.then(
+    () => {
+      consecutivePersistFailures = 0
+    },
+    (err) => {
+      consecutivePersistFailures += 1
+      console.warn(`[Slovarchik] could not persist ${label}`, err)
+      if (consecutivePersistFailures === PERSIST_FAILURES_BEFORE_TOAST) {
+        raiseError(
+          new Error(
+            "Your progress isn't being saved — this device's storage is full or unavailable.",
+          ),
+        )
+      }
+    },
+  )
+  pendingPersists.add(settled)
+  settled.finally(() => pendingPersists.delete(settled))
+  return settled
+}
+
+/** Await every background write started so far (tests, and reset/import). */
+export function persistenceSettled() {
+  return Promise.all([...pendingPersists])
+}
+
+/** Fire-and-forget meta write — reports failure without rejecting (see above). */
 function saveMeta(key, value) {
-  idb.setMeta(key, value).catch(() => {})
+  return saveInBackground(key, idb.setMeta(key, value))
 }
 
 /**
@@ -560,7 +605,16 @@ function logActivity(ts, correct, times) {
   if (correct) rec.correct += times
   rec.hue = state.streakHue
   state.activity[day] = rec
-  saveMeta('streak:activity', state.activity)
+  // One small record for the day that changed, not the whole calendar (#662).
+  // The map is never pruned, so rewriting it per answer meant a ~365-entry
+  // object after a year of daily use and ~1,100 after three, serialised and
+  // structured-cloned on the hot path of every drill.
+  saveInBackground(`activity ${day}`, idb.putActivityDay(activityRecord(day, rec)))
+}
+
+/** The stored shape of one calendar day. */
+function activityRecord(day, rec) {
+  return { day, count: rec.count, correct: rec.correct, hue: rec.hue }
 }
 
 /** Current streak length in days (today, or a yesterday-grace day, backwards). */
@@ -912,6 +966,7 @@ async function doLoadProgress() {
   // behind the live learned/mastered counts. These criteria are inflection-
   // independent, so they're safe to compute before the vocab is loaded.
   const masteryRechecked = (await idb.getMeta('migration:mastery-recheck')) ?? false
+  const backfilled = []
   for (const rec of Object.values(map)) {
     let changed = false
     const when = lastAttemptAt(rec.events) ?? Date.now()
@@ -928,8 +983,10 @@ async function doLoadProgress() {
       changed = true
     }
     if (!masteryRechecked && recheckMasteredPeak(rec)) changed = true
-    if (changed) await persist(rec)
+    if (changed) backfilled.push(rec)
   }
+  // One transaction for the whole backfill rather than one per record (#662).
+  if (backfilled.length) await idb.putAllProgress(backfilled.map(persistedShape))
   if (!masteryRechecked) await idb.setMeta('migration:mastery-recheck', true)
 
   clearMemo()
@@ -952,18 +1009,33 @@ async function doLoadProgress() {
   // already logged, so no day is double-counted.
   state.streakHue = (await idb.getMeta('streak:hue')) ?? randomHue()
   state.batchSig = (await idb.getMeta('streak:batchSig')) ?? batchSignature()
-  const storedActivity = (await idb.getMeta('streak:activity')) ?? {}
-  const activity = { ...storedActivity }
+  const activity = {}
+  const storedDays = await idb.getAllActivity()
+  for (const d of storedDays) activity[d.day] = { count: d.count, correct: d.correct, hue: d.hue }
+  // Installs from before the per-day store (#662) still hold the calendar in a
+  // single `streak:activity` meta blob. Adopt it once — the store being empty
+  // is the only signal, and once it isn't the blob is never read again.
+  const adopting = []
+  if (!storedDays.length) {
+    const legacy = (await idb.getMeta('streak:activity')) ?? {}
+    for (const [day, d] of Object.entries(legacy)) {
+      activity[day] = { count: d.count, correct: d.correct, hue: d.hue }
+      adopting.push(day)
+    }
+  }
   const derived = buildActivityFromEvents(state.records)
-  let backfilled = false
   for (const [day, d] of Object.entries(derived)) {
     if (!activity[day]) {
       activity[day] = { count: d.count, correct: d.correct, hue: hueForDay(day) }
-      backfilled = true
+      adopting.push(day)
     }
   }
   state.activity = activity
-  if (backfilled) await idb.setMeta('streak:activity', state.activity)
+  // Both the adoption and the event backfill are one transaction, not one per
+  // day — a learner with three years of history had ~1,100 of them.
+  if (adopting.length) {
+    await idb.putAllActivity(adopting.map((day) => activityRecord(day, activity[day])))
+  }
 
   state.loaded = true
   return state
@@ -978,6 +1050,7 @@ export async function resetProgress() {
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
   await idb.setMeta('firstUseAt', null)
   await idb.setMeta('seenAchievements', [])
+  await idb.clearActivity()
   await idb.setMeta('streak:activity', {})
   await idb.setMeta('streak:hue', null)
   await idb.setMeta('streak:batchSig', null)
@@ -1087,8 +1160,8 @@ export async function importData(data) {
   const check = validateImport(data)
   if (!check.ok) throw new Error(check.error)
 
-  await idb.clearProgress()
   const map = {}
+  const records = []
   for (const r of data.records) {
     const rec = {
       word: r.word,
@@ -1110,8 +1183,15 @@ export async function importData(data) {
     // earned under the old single-answer rule — re-check them (#313).
     if (data.version < 2) recheckMasteredPeak(rec)
     map[r.word] = rec
-    await idb.putProgress(rec)
+    records.push(rec)
   }
+  // One transaction that clears and rewrites the store together (#662). The
+  // clear used to run first and the records were written one transaction each,
+  // so a failure partway through — or a closed tab — left the learner with
+  // neither their old progress nor the backup they were restoring. Aborting
+  // this transaction puts the pre-import contents back, and nothing below runs,
+  // so the reactive state is never left disagreeing with the database.
+  await idb.replaceAllProgress(records)
   // Use the plain source values for persistence — reading them back off the
   // reactive `state` would hand IndexedDB a Vue proxy it can't clone.
   const learningBatch = data.batches?.learning ?? null
@@ -1138,7 +1218,12 @@ export async function importData(data) {
   state.activity = toPlain(importedActivity)
   state.streakHue = typeof data.streakHue === 'number' ? data.streakHue : randomHue()
   state.batchSig = typeof data.batchSig === 'string' ? data.batchSig : batchSignature()
-  await idb.setMeta('streak:activity', state.activity)
+  await idb.replaceAllActivity(
+    Object.entries(state.activity).map(([day, rec]) => activityRecord(day, rec)),
+  )
+  // Clear the pre-#662 blob too, so it can't shadow an imported empty calendar
+  // on the next boot.
+  await idb.setMeta('streak:activity', {})
   await idb.setMeta('streak:hue', state.streakHue)
   await idb.setMeta('streak:batchSig', state.batchSig)
   // Silently acknowledge any achievements already earned in the imported data so

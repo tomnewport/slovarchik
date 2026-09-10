@@ -14,8 +14,8 @@ import * as idb from './idb.js'
 import { failWrites } from '../test/idbFailure.js'
 
 const DB_NAME = 'slovarchik'
-const VERSION = 5
-const STORES = ['issue-reports', 'meta', 'progress', 'vocab-files']
+const VERSION = 6
+const STORES = ['activity', 'issue-reports', 'meta', 'progress', 'vocab-files']
 
 beforeEach(async () => {
   globalThis.indexedDB = new IDBFactory()
@@ -51,6 +51,24 @@ function reasonOf(promise) {
     },
     (reason) => reason,
   )
+}
+
+/** Count the readwrite transactions opened on `storeName` while still running them. */
+function countTransactions(storeName) {
+  let count = 0
+  const dbProto = IDBDatabase.prototype
+  const original = dbProto.transaction
+  dbProto.transaction = function (names, mode) {
+    const list = Array.isArray(names) ? names : [names]
+    if (mode === 'readwrite' && list.includes(storeName)) count += 1
+    return original.call(this, names, mode)
+  }
+  return {
+    count: () => count,
+    restore: () => {
+      dbProto.transaction = original
+    },
+  }
 }
 
 describe('idb writes accept reactive state', () => {
@@ -99,7 +117,7 @@ describe('idb writes accept reactive state', () => {
 })
 
 describe('the schema', () => {
-  it('creates all four object stores on a first run', async () => {
+  it('creates every object store on a first run', async () => {
     await idb.getMeta('anything') // any call opens the database
 
     const db = await openRaw()
@@ -112,11 +130,12 @@ describe('the schema', () => {
     expect(await idb.getAllFiles()).toEqual([])
     expect(await idb.getAllProgress()).toEqual([])
     expect(await idb.getAllReports()).toEqual([])
+    expect(await idb.getAllActivity()).toEqual([])
   })
 
   // The one that matters: `onupgradeneeded` creates only the stores that are
   // missing, so a learner arriving with an older cache keeps their progress.
-  // Get this wrong in a future v6 and the deploy wipes real data, with no
+  // Get this wrong in a future v7 and the deploy wipes real data, with no
   // backend to restore it from.
   it('upgrades a v4 database in place, leaving the cached data readable', async () => {
     const v4 = await openRaw(4, (db) => {
@@ -138,8 +157,42 @@ describe('the schema', () => {
     ])
     expect(await idb.getMeta('settings')).toEqual({ voice: 'ru-RU' })
     expect((await idb.getAllFiles()).map((f) => f.file)).toEqual(['nouns.json'])
-    // …and the store v5 added is there, empty, alongside the surviving data.
+    // …and the stores v5 and v6 added are there, empty, alongside the data.
     expect(await idb.getAllReports()).toEqual([])
+    expect(await idb.getAllActivity()).toEqual([])
+
+    const upgraded = await openRaw()
+    expect(upgraded.version).toBe(VERSION)
+    expect([...upgraded.objectStoreNames].sort()).toEqual(STORES)
+    upgraded.close()
+  })
+
+  // The upgrade a real install will actually take (#662): v5 had everything but
+  // the activity store, and the calendar it holds still lives in the
+  // `streak:activity` meta blob until `loadProgress` adopts it.
+  it('upgrades a v5 database in place, keeping progress and the legacy calendar', async () => {
+    const v5 = await openRaw(5, (db) => {
+      db.createObjectStore('vocab-files', { keyPath: 'file' })
+      db.createObjectStore('meta', { keyPath: 'key' })
+      db.createObjectStore('progress', { keyPath: 'word' })
+      db.createObjectStore('issue-reports', { keyPath: 'id' })
+    })
+    await writeRaw(v5, ['meta', 'progress'], (store) => {
+      store('progress').put({ word: 'дом', events: [{ dim: 'spell', ok: true }] })
+      store('meta').put({
+        key: 'streak:activity',
+        value: { '2026-09-01': { count: 4, correct: 3, hue: 12 } },
+      })
+    })
+    v5.close()
+
+    expect(await idb.getAllProgress()).toEqual([
+      { word: 'дом', events: [{ dim: 'spell', ok: true }] },
+    ])
+    expect(await idb.getMeta('streak:activity')).toEqual({
+      '2026-09-01': { count: 4, correct: 3, hue: 12 },
+    })
+    expect(await idb.getAllActivity()).toEqual([])
 
     const upgraded = await openRaw()
     expect(upgraded.version).toBe(VERSION)
@@ -200,6 +253,128 @@ describe('reads, writes and deletes round-trip', () => {
 // write failure and deliberately advances the session before re-throwing, and
 // `saveMeta` swallows its rejection so a failed write never surfaces as an
 // unhandled one. Both only hold if a failed write actually rejects.
+describe('bulk writes are one transaction, all or nothing', () => {
+  it('writes every progress record in a single transaction', async () => {
+    const records = Array.from({ length: 50 }, (_, i) => ({ word: `w${i}`, events: [] }))
+    const opened = countTransactions('progress')
+    try {
+      await idb.putAllProgress(records)
+    } finally {
+      opened.restore()
+    }
+
+    expect(opened.count()).toBe(1)
+    expect((await idb.getAllProgress()).length).toBe(50)
+  })
+
+  it('leaves the store untouched when a write fails mid-batch', async () => {
+    await idb.putProgress({ word: 'дом', events: [{ ok: true }] })
+    await idb.putProgress({ word: 'кот', events: [] })
+
+    const restore = await failWrites({ stores: ['progress'] })
+    try {
+      await expect(
+        idb.putAllProgress([{ word: 'новый', events: [] }, { word: 'дом', events: [] }]),
+      ).rejects.toBeInstanceOf(DOMException)
+    } finally {
+      restore()
+    }
+
+    // Neither the new record nor the overwrite landed, and nothing was lost.
+    const after = await idb.getAllProgress()
+    expect(after.map((r) => r.word).sort()).toEqual(['дом', 'кот'])
+    expect(after.find((r) => r.word === 'дом').events).toEqual([{ ok: true }])
+  })
+
+  it('replaces the whole store atomically', async () => {
+    await idb.putProgress({ word: 'старый', events: [] })
+
+    await idb.replaceAllProgress([{ word: 'новый', events: [] }])
+
+    expect((await idb.getAllProgress()).map((r) => r.word)).toEqual(['новый'])
+  })
+
+  // The failure that isn't an aborted request: `put` throws `DataError` on the
+  // spot for an unusable key, part-way through a batch whose earlier requests
+  // (here, the `clear`) are already queued on the transaction. Without an
+  // explicit abort those commit and the caller sees only a rejection.
+  it('rolls back when a record fails synchronously mid-batch', async () => {
+    await idb.putProgress({ word: 'дом', events: [{ ok: true }] })
+
+    const reason = await reasonOf(
+      idb.replaceAllProgress([
+        { word: 'новый', events: [] },
+        { word: { not: 'a key' }, events: [] },
+      ]),
+    )
+    expect(reason.name).toBe('DataError')
+
+    // Neither the clear nor the record before the bad one landed.
+    expect(await idb.getAllProgress()).toEqual([{ word: 'дом', events: [{ ok: true }] }])
+  })
+
+  it('keeps the previous contents when the replacement fails', async () => {
+    await idb.putProgress({ word: 'дом', events: [{ ok: true }] })
+    await idb.putProgress({ word: 'кот', events: [] })
+
+    const restore = await failWrites({ stores: ['progress'] })
+    try {
+      await expect(idb.replaceAllProgress([{ word: 'новый', events: [] }])).rejects.toBeTruthy()
+    } finally {
+      restore()
+    }
+
+    // The clear rides the same transaction as the writes, so a failed restore
+    // is not the same as a wiped store — this is the data-loss path in #662.
+    expect((await idb.getAllProgress()).map((r) => r.word).sort()).toEqual(['дом', 'кот'])
+  })
+})
+
+describe('the activity calendar store', () => {
+  it('round-trips one day at a time', async () => {
+    await idb.putActivityDay({ day: '2026-09-01', count: 4, correct: 3, hue: 12 })
+    await idb.putActivityDay({ day: '2026-09-02', count: 1, correct: 1, hue: 12 })
+
+    expect((await idb.getAllActivity()).map((d) => d.day).sort()).toEqual([
+      '2026-09-01',
+      '2026-09-02',
+    ])
+  })
+
+  it('replaces a day rather than accumulating rows', async () => {
+    await idb.putActivityDay({ day: '2026-09-01', count: 4, correct: 3, hue: 12 })
+    await idb.putActivityDay({ day: '2026-09-01', count: 9, correct: 8, hue: 30 })
+
+    expect(await idb.getAllActivity()).toEqual([
+      { day: '2026-09-01', count: 9, correct: 8, hue: 30 },
+    ])
+  })
+
+  it('writes many days in a single transaction', async () => {
+    const days = Array.from({ length: 400 }, (_, i) => ({
+      day: `day-${i}`,
+      count: 1,
+      correct: 1,
+      hue: 0,
+    }))
+    const opened = countTransactions('activity')
+    try {
+      await idb.putAllActivity(days)
+    } finally {
+      opened.restore()
+    }
+
+    expect(opened.count()).toBe(1)
+    expect((await idb.getAllActivity()).length).toBe(400)
+  })
+
+  it('clears the calendar', async () => {
+    await idb.putActivityDay({ day: '2026-09-01', count: 4, correct: 3, hue: 12 })
+    await idb.clearActivity()
+    expect(await idb.getAllActivity()).toEqual([])
+  })
+})
+
 describe('failed writes reject', () => {
   it('rejects when the record has no usable key', async () => {
     const reason = await reasonOf(idb.putProgress({ word: { not: 'a key' } }))
