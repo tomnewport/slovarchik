@@ -8,7 +8,12 @@
 
 import { parseKey } from './vocabBuild.js'
 import { ASPECT_LABEL, MOTION_LABEL } from './phraseContext.js'
-import { dimensionProgress, lastAttemptAt } from './progression.js'
+import {
+  applicableDimensions,
+  dimensionProgress,
+  lastAttemptAt,
+  wordHasInflections,
+} from './progression.js'
 
 // Which dimensions each level tracks, and the emoji pip shown for each.
 export const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
@@ -164,8 +169,39 @@ export function buildWordList(batchWords, level, dims, ctx) {
 }
 
 /**
+ * Which level's pips a status row should show: the one that has something to
+ * say. A row is on these cards because a criterion broke, so the useful level is
+ * the level the break is at — take the lower one when both have an unmet
+ * dimension, since learning must be repaired before mastery means anything.
+ *
+ * Reading the level off the word's *current state* instead (mastered → mastery,
+ * anything else → learning) is what made a word that slipped out of mastery
+ * render as four met learning pips: it is `learned`, so the row showed the
+ * learning criteria — every one of which it still meets — under a heading saying
+ * it had dropped below its best state, with nothing on the row to say what
+ * dropped or what would fix it. Falls back to the state-derived level for a row
+ * with no unmet dimension at all (an at-risk word: still met, one miss away).
+ */
+function statusLevel(events, key, state, word, hasContextDrill) {
+  // A word with no inflection table has no mastery level of its own — mastery
+  // collapses onto the learning criteria (see `wordState`) — so its mastery
+  // dimensions read as permanently unmet and must never be what a row shows.
+  // Only decided when the vocab record is actually to hand: a key missing from
+  // the vocab map tells us nothing about whether it inflects.
+  if (word.pos && !wordHasInflections(word)) return 'learning'
+  const unmet = (level) =>
+    dimsFor(key, level, applicableDimensions(level, word), hasContextDrill).some(
+      (d) => !dimensionProgress(events, level, d, word).met,
+    )
+  if (unmet('learning')) return 'learning'
+  if (unmet('mastery')) return 'mastery'
+  return state === 'mastered' ? 'mastery' : 'learning'
+}
+
+/**
  * Build the word rows for the at-risk / slipped status cards. Each key resolves
- * to its current state, the level it's graded at, and its dimension pips.
+ * to its current state, the level whose criteria it still owes, and that level's
+ * dimension pips.
  *
  * @param keys array of word keys
  * @param ctx `{ records, vocabByKey, stateOf, hasContextDrill }`
@@ -177,7 +213,8 @@ export function buildStatusWordList(keys, ctx) {
     const evs = rec?.events ?? []
     const { ru, en, fullEn } = rowIdentity(key, vocabByKey)
     const state = stateOf(key)
-    const level = state === 'mastered' ? 'mastery' : 'learning'
+    const word = { ...(vocabByKey?.get(key) ?? {}), known: rec?.known }
+    const level = statusLevel(evs, key, state, word, hasContextDrill)
     const dims = dimPips(evs, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS, key, {
       known: rec?.known,
       hasContextDrill,
