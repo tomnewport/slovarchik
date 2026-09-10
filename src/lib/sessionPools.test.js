@@ -5,6 +5,7 @@ import {
   dimensionWeakness,
   understanding,
   currentPool,
+  masteryLostPool,
   reinforcePool,
   duePool,
   masteryBatchActive,
@@ -113,6 +114,40 @@ describe('currentPool', () => {
     expect(currentPool(ctx)).toContain('wx')
   })
 
+  it('ranks a slipped word ahead of the batch, despite its high understanding', () => {
+    const records = {
+      // Slipped: three of the four learning dimensions still met, so its
+      // `understanding` score is the highest in the pool.
+      wx: {
+        events: [
+          ...learnedEvents(),
+          ev('usage', 'learning', false, 2),
+          ev('usage', 'learning', false, 3),
+        ],
+      },
+      w1: { events: [ev('identification', 'learning', true)] },
+      w2: { events: [ev('identification', 'learning', true), ev('usage', 'learning', true)] },
+    }
+    const ctx = makeContext(
+      snapshot(records, { learning: { words: ['w1', 'w2'] }, lost: ['wx'] }),
+    )
+    expect(understanding(ctx, 'wx')).toBeGreaterThan(understanding(ctx, 'w1'))
+    // The current bucket is front-biased, so position is practice frequency:
+    // scoring highest must not bury the word that needs re-learning.
+    expect(currentPool(ctx)[0]).toBe('wx')
+  })
+
+  it('ranks a confirmation-failed word ahead of the batch too', () => {
+    const records = {
+      wc: { events: learnedEvents(), confirmedAt: null, confirmFailedAt: 500 },
+      w1: { events: [ev('identification', 'learning', true)] },
+    }
+    const ctx = makeContext(
+      snapshot(records, { inflected: { wc: true }, learning: { words: ['w1'] } }),
+    )
+    expect(currentPool(ctx)[0]).toBe('wc')
+  })
+
   it('falls back to actively-learning words when no batch is committed', () => {
     const records = { wa: { events: [ev('identification', 'learning', true)] } }
     const ctx = makeContext(snapshot(records))
@@ -128,6 +163,28 @@ describe('reinforcePool', () => {
     }
     const ctx = makeContext(snapshot(records, { atRisk: ['w0'], lost: ['w1'] }))
     expect(reinforcePool(ctx)).toEqual(['w0'])
+  })
+})
+
+describe('masteryLostPool', () => {
+  it('keeps a word that fell out of mastery back to learned', () => {
+    const records = { w0: { events: learnedEvents(), peak: 3 } }
+    const ctx = makeContext(snapshot(records, { inflected: { w0: true }, lost: ['w0'] }))
+    expect(masteryLostPool(ctx)).toEqual(['w0'])
+  })
+
+  it('excludes a word that fell further than learned', () => {
+    // Its learning level is broken too, so mastery drills would record mastery
+    // events on a word that is no longer learned.
+    const records = { w0: { events: [ev('identification', 'learning', true)], peak: 3 } }
+    const ctx = makeContext(snapshot(records, { inflected: { w0: true }, lost: ['w0'] }))
+    expect(masteryLostPool(ctx)).toEqual([])
+  })
+
+  it('excludes a word that never reached mastery', () => {
+    const records = { w0: { events: learnedEvents(), peak: 2 } }
+    const ctx = makeContext(snapshot(records, { inflected: { w0: true }, lost: ['w0'] }))
+    expect(masteryLostPool(ctx)).toEqual([])
   })
 })
 
@@ -234,6 +291,53 @@ describe('assembleSession', () => {
     const current = session.practices.filter((p) => p.bucket === 'current')
     expect(current.length).toBeGreaterThan(0)
     for (const p of current) expect([...p.pool].sort()).toEqual(['w0', 'w1'])
+  })
+
+  it('offers mastery practices for a word that dropped out of mastery, with no mastery batch', () => {
+    // Its only route back is a correct mastery answer. Nothing else reaches it:
+    // it is not borderline (the criterion is unmet, not one miss from unmet),
+    // and every pool a `learned` word lands in is drilled at the learning level,
+    // whose criteria it already meets — so it would sit in `lost` indefinitely.
+    const records = { w0: { events: learnedEvents(), peak: 3 } }
+    const session = assembleSession(
+      snapshot(records, { inflected: { w0: true }, lost: ['w0'] }),
+      { type: 'standard', size: 'normal' },
+    )
+    const mastery = session.practices.filter((p) => p.level === 'mastery')
+    expect(mastery.length).toBeGreaterThan(0)
+    for (const p of mastery) expect(p.pool).toContain('w0')
+  })
+
+  it('puts a dropped-out-of-mastery word ahead of the mastery batch', () => {
+    const records = {
+      w0: { events: learnedEvents(), peak: 3 },
+      w1: { events: learnedEvents(), peak: 2 },
+    }
+    const session = assembleSession(
+      snapshot(records, {
+        inflected: { w0: true, w1: true },
+        mastery: { words: ['w1'] },
+        lost: ['w0'],
+      }),
+      { type: 'standard', size: 'normal' },
+    )
+    const mastery = session.practices.filter((p) => p.level === 'mastery')
+    expect(mastery.length).toBeGreaterThan(0)
+    // Mastery slots all sit in the front-biased `current` bucket, so leading the
+    // list is what makes the word actually get drilled.
+    for (const p of mastery) expect(p.pool[0]).toBe('w0')
+  })
+
+  it('keeps a dropped-out-of-mastery word out of a focused session it does not match', () => {
+    const records = {
+      w0: { events: learnedEvents(), peak: 3 },
+      w1: { events: learnedEvents(), peak: 3 },
+    }
+    const session = assembleSession(
+      snapshot(records, { inflected: { w0: true, w1: true }, lost: ['w0', 'w1'] }),
+      { type: 'standard', size: 'normal', focusKeys: ['w1'] },
+    )
+    for (const p of session.practices) expect(p.pool).not.toContain('w0')
   })
 
   it('leaves the refresh buckets drilling met dimensions — that is what retention is', () => {

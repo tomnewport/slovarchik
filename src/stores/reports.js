@@ -2,16 +2,21 @@
 import { reactive } from 'vue'
 import * as idb from '../lib/idb.js'
 import { buildIssueUrl } from '../lib/reportIssue.js'
+import { coalesce } from '../lib/coalesce.js'
 
 export const state = reactive({
   pending: [],
   loaded: false,
 })
 
-export async function loadReports() {
+/** Load the offline-queued reports. Coalesced (#659) — HomeView's `onMounted`
+ * can fire while an earlier mount's load is still in flight. */
+async function doLoadReports() {
   state.pending = await idb.getAllReports()
   state.loaded = true
 }
+
+export const loadReports = coalesce(doLoadReports)
 
 export async function queueReport(reportData) {
   const record = { id: crypto.randomUUID(), ...reportData, queuedAt: Date.now() }

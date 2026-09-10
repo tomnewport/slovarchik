@@ -8,19 +8,14 @@
 // The slot → stored form resolution itself lives in stressAudit.storedForm, so
 // this guard and the stress audit can never disagree about what a slot means.
 import { describe, it, expect } from 'vitest'
-import { readFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
-import yaml from 'js-yaml'
 
-import { loadFixtureWords } from '../test/fixtures.js'
+import { loadFixtureRules, loadFixtureWords } from '../test/fixtures.js'
 import { shapeContextPhrases } from './vocabBuild.js'
 import { normalize } from './text.js'
 import { buildFromPhrase, indexPhrases } from './phraseContext.js'
 import { storedForm } from './stressAudit.js'
 
-const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
-const rules = yaml.load(readFileSync(resolve(vocabDir, 'grammar-rules.yml'), 'utf8')).rules
+const rules = loadFixtureRules()
 
 const words = loadFixtureWords()
 const byKey = new Map(words.map((w) => [w.key, w]))
