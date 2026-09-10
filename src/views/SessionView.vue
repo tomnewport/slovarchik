@@ -5,7 +5,7 @@
 import { computed, nextTick, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { state as vocabState, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
+import { state as vocabState, vocab, phrases as vocabPhrases, initVocab } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
 import { loadSettings, playCelebration, settings } from '../stores/settings.js'
 import { warmAudio } from '../lib/feedbackSound.js'
@@ -137,13 +137,19 @@ async function setup() {
   }
 
   // Keep the shaped vocab + phrases around so skipping a modality can draw
-  // re-prioritised replacement content (see buildReplacementPicker).
-  vocabById = new Map(shapeVocab(words).map((v) => [v.id, v]))
+  // re-prioritised replacement content (see buildReplacementPicker) — and hand
+  // the same map to buildExercises, which used to shape the dictionary a second
+  // time (#668). An unfocused session draws from the whole word list, which is
+  // exactly what the store's `vocab` computed already holds; only a focused one
+  // has a filtered list of its own to shape.
+  const shaped = focusKeys ? shapeVocab(words) : vocab.value
+  vocabById = new Map(shaped.map((v) => [v.id, v]))
   sessionPhrases = phrases
 
   let exercises = buildExercises(session, {
     words,
     phrases,
+    vocabById,
     encounterCount: progress.encounterCount,
     contextPhrases: vocabState.contextPhrases,
     rules: vocabState.rules,
