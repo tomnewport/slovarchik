@@ -1,0 +1,38 @@
+{
+  "_about": [
+    "Size budget for the shipped payload (#669).",
+    "",
+    "These limits are a ratchet, exactly like the coverage thresholds in",
+    "vite.config.js: they sit just above the numbers as they stand today so a",
+    "change that makes the app materially heavier fails loudly, and they are",
+    "meant to be raised deliberately — in the PR that grows the payload, with",
+    "the before/after in the commit message — rather than nudged up to get a",
+    "red run green.",
+    "",
+    "Raising a limit is a normal thing to do. Doing it in a commit that says",
+    "nothing about why the payload grew is not: the number is the record.",
+    "",
+    "Measured by scripts/size-summary.mjs against dist/ after `npm run build`.",
+    "All limits are gzipped bytes, because that is what crosses the network.",
+    "",
+    "Baseline on main @ 60e38b6 (2026-09-08):",
+    "  entryJs   83643 B    entryCss   4371 B    vocab  1148952 B"
+  ],
+  "limits": {
+    "entryJs": {
+      "bytes": 88000,
+      "label": "Entry JS (gzip)",
+      "why": "The bundle every launch pays for before anything renders. Vue, the router, the stores and the lib engine accumulate here; route chunks are lazy and deliberately excluded, so a route module pulled into the entry by a stray top-level import shows up as growth here."
+    },
+    "entryCss": {
+      "bytes": 4800,
+      "label": "Entry CSS (gzip)",
+      "why": "The render-blocking stylesheet, for the same reason."
+    },
+    "vocab": {
+      "bytes": 1200000,
+      "label": "Vocab payload (gzip)",
+      "why": "Every dist/vocab/*.json a first install downloads. It only ever grows, and nouns.json is roughly half of it. Build-time derived data (#657) legitimately moves work into this number — that is the trade being made, so raise the limit there and say by how much."
+    }
+  }
+}
