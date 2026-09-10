@@ -182,9 +182,23 @@ describe('buildWordList', () => {
 })
 
 describe('buildStatusWordList', () => {
+  // Enough correct answers to satisfy every criterion at a level, spread over
+  // two calendar days so the mastery day-spacing rule (#313) is satisfied too.
+  const met = (level, dims) =>
+    dims.flatMap((d, i) => [
+      ev(d, level, true, 100 + i),
+      ev(d, level, true, 100 + i + 3 * 86400000),
+      ev(d, level, true, 100 + i + 4 * 86400000),
+    ])
   const ctx = {
     records: {
       'дом=house': { word: 'дом=house', events: [ev('identification', 'learning', true, 100)] },
+      // A realistic mastered word: every criterion met at both levels, which is
+      // the only way `stateOf` can report `mastered` in the app.
+      'кот=cat': {
+        word: 'кот=cat',
+        events: [...met('learning', LEARNING_DIMS), ...met('mastery', MASTERY_DIMS)],
+      },
     },
     stateOf: (k) => (k === 'дом=house' ? 'learned' : 'mastered'),
     hasContextDrill: () => true,
@@ -200,6 +214,62 @@ describe('buildStatusWordList', () => {
     const [row] = buildStatusWordList(['кот=cat'], ctx)
     expect(row.state).toBe('mastered')
     expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
+  })
+
+  it('shows mastery pips for a word that slipped out of mastery', () => {
+    // The symptom this fixes: such a word is `learned`, and reading the level
+    // off its state showed the learning criteria — every one of which it still
+    // meets — so the row rendered four green pips under a heading saying the
+    // word had dropped below its best state.
+    const ctx2 = {
+      records: { 'кот=cat': { word: 'кот=cat', events: met('learning', LEARNING_DIMS) } },
+      stateOf: () => 'learned',
+      hasContextDrill: () => true,
+    }
+    const [row] = buildStatusWordList(['кот=cat'], ctx2)
+    expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
+    expect(row.dims.every((d) => !d.met)).toBe(true)
+  })
+
+  it('still shows learning pips when the learning level is what broke', () => {
+    // A word that slipped all the way past `learned` owes learning work first,
+    // even though it once reached mastery.
+    const ctx2 = {
+      records: {
+        'кот=cat': {
+          word: 'кот=cat',
+          events: [
+            ...met('learning', LEARNING_DIMS),
+            ev('usage', 'learning', false, 9e12),
+            ev('usage', 'learning', false, 9e12 + 1),
+          ],
+        },
+      },
+      stateOf: () => 'learning',
+      hasContextDrill: () => true,
+    }
+    const [row] = buildStatusWordList(['кот=cat'], ctx2)
+    expect(row.dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
+    expect(row.dims.find((d) => d.name === 'usage').met).toBe(false)
+  })
+
+  it('grades an at-risk word with everything met by its current state', () => {
+    const [row] = buildStatusWordList(['кот=cat'], ctx)
+    expect(row.state).toBe('mastered')
+    expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
+  })
+
+  it('never grades an uninflected word at the mastery level', () => {
+    // Mastery collapses onto the learning criteria for a word with no table,
+    // so its mastery dimensions read as permanently unmet.
+    const ctx2 = {
+      records: { 'вчера=yesterday': { word: 'вчера=yesterday', events: [] } },
+      vocabByKey: new Map([['вчера=yesterday', { key: 'вчера=yesterday', pos: 'adverb' }]]),
+      stateOf: () => 'mastered',
+      hasContextDrill: () => true,
+    }
+    const [row] = buildStatusWordList(['вчера=yesterday'], ctx2)
+    expect(row.dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
   })
 
   it('uses the same disambiguated gloss as current-batch rows', () => {

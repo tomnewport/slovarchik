@@ -27,14 +27,24 @@ export function mulberry32(seed) {
 
 /**
  * Read a seed from the environment: a `window.__SLOVARCHIK_SEED__` global (set by
- * a test via addInitScript) takes precedence, then a `seed` query param — checked
- * both on the top-level URL (`?seed=1`) and inside the hash route
- * (`#/session?seed=1`), since the app uses hash history.
+ * a test via addInitScript) takes precedence, then — in a development build only
+ * — a `seed` query param, checked both on the top-level URL (`?seed=1`) and
+ * inside the hash route (`#/session?seed=1`), since the app uses hash history.
+ *
+ * The URL paths are deliberately dev-only (#663). They are a convenience for
+ * reproducing a draw by hand, but on the deployed site any link carrying
+ * `?seed=` — pasted into a chat, bookmarked, shared between learners — silently
+ * pins every batch, session and flashcard draw for whoever opens it, and the
+ * symptom ("it keeps offering me the same words") points nowhere near the URL.
+ * The global has no such reach: nothing but an explicit `addInitScript` can set
+ * it, so it stays live in every build and `e2e/full-session.spec.js` is
+ * unaffected by this gate.
  * @returns {number|null} the seed, or null when none is supplied
  */
 export function readSeed() {
   if (typeof window === 'undefined') return null
   if (window.__SLOVARCHIK_SEED__ != null) return Number(window.__SLOVARCHIK_SEED__)
+  if (!import.meta.env.DEV) return null
   try {
     const search = new URLSearchParams(window.location.search)
     if (search.has('seed')) return Number(search.get('seed'))
