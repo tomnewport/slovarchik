@@ -44,7 +44,11 @@ offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
 ```
 index.html              # app shell — mounts #app, loads src/main.js
 vite.config.js          # Vite + Vue plugin + PWA + Vitest config; base = /slovarchik/
-playwright.config.js    # e2e config (serves the preview build)
+playwright.config.js    # e2e config. Two servers: `npm run dev` on :5173 for the
+                        #   `chromium` and `pixel5` projects, and `npm run build &&
+                        #   npm run preview` on :4173 for the `offline` project —
+                        #   vite-plugin-pwa registers no service worker under `dev`,
+                        #   so offline/precache behaviour is only testable on a build
 eslint.config.js        # flat config: js.recommended + eslint-plugin-vue
 src/
   main.js               # entry: createApp(App).use(router).mount('#app')
@@ -130,7 +134,8 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
                         #   + phrase-notes.json — the corpus-wide phrase
                         #   annotations derived at build time (#657); generated,
                         #   not committed, like the manifest and the *.json
-e2e/                    # Playwright specs
+e2e/                    # Playwright specs (homepage, full-session, and offline —
+                        #   the last runs against the preview build, where the SW exists)
 docs/                   # design notes for in-flight features
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
                         #   check-ci.mjs runs CI's `test` job locally, in order
@@ -138,6 +143,8 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     entry CSS, dist/vocab/*.json gzipped) against the
                         #     committed budget in size-budget.json, and publishes
                         #     the table to the job summary on pass and on fail
+                        #   check-precache.mjs asserts vocab/** stays out of the
+                        #     generated SW precache manifest (the #266 partition)
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
@@ -176,6 +183,7 @@ npm run check:prompts        # no growth in English prompts matching more than o
 # Build gate — reads dist/, so it runs after `npm run build`:
 npm run check:size    # entry chunk, entry CSS and the vocab JSON against
                       # scripts/size-budget.json (a ratchet, like coverage)
+npm run check:precache  # vocab/** is absent from the generated SW precache manifest
 
 # The two that answer "did I break CI?"
 npm run check:corpus  # just the three gates above, in CI's order (~5s)
@@ -184,10 +192,10 @@ npm run check:ci      # the whole CI `test` job, in order, stopping where it wou
 
 CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
-`check:prompts`, `test:coverage`, `build` and `check:size` in its `test` job,
-plus the Playwright `e2e` job — every one of them on every push, publishing the
-coverage table to the run's job summary via `scripts/coverage-summary.mjs` and
-the size table via `scripts/size-summary.mjs`.
+`check:prompts`, `test:coverage`, `build`, `check:size` and `check:precache` in
+its `test` job, plus the Playwright `e2e` job — every one of them on every push,
+publishing the coverage table to the run's job summary via
+`scripts/coverage-summary.mjs` and the size table via `scripts/size-summary.mjs`.
 `npm run check:ci` runs that same `test` job list locally and gives the same
 verdict; `scripts/check-ci.test.mjs` reads `ci.yml` and fails if the two ever
 drift apart, so this paragraph cannot go stale unnoticed.

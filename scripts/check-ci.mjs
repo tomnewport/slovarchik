@@ -70,6 +70,11 @@ export const STEPS = [
     corpus: false,
     why: 'the shipped payload against the size budget (reads dist/, so it follows build)',
   },
+  {
+    script: 'check:precache',
+    corpus: false,
+    why: 'vocab/** stays out of the SW precache manifest (reads dist/, so it follows build)',
+  },
 ]
 
 function runStep(step) {
