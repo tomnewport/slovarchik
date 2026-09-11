@@ -66,6 +66,13 @@ jobs:
       # writes its table to the job summary before it sets a failing exit code,
       # so a breach always arrives with the numbers that explain it.
       - run: npm run check:size
+      # The service worker precaches the app shell and deliberately not the
+      # vocab (#266). Nothing enforced that split, and breaking it costs a
+      # multi-MB first install plus a full precache re-download on every
+      # deploy — neither of which fails a build on its own. Reads the
+      # *generated* manifest in dist/sw.js, so it holds whatever the plugin
+      # actually emitted rather than what the config says (#665).
+      - run: npm run check:precache
 
   e2e:
     runs-on: ubuntu-latest
