@@ -56,8 +56,8 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
-                        #   /practice, /progress, /data, /vocab, /phrases, /phrase-fix,
+  router/index.js       # 16 routes → views. Highlights: / (home), /session, /batch,
+                        #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
@@ -74,7 +74,7 @@ src/
   composables/          # stateful Vue orchestration shared between views (needs a
                         #   component lifecycle, so it can't live in lib/):
     useSpeechLoop.js    #   sequence guards, timer registry, speech watchdogs, wake
-                        #   lock, mic lifecycle — SpeakingView + PracticeView
+                        #   lock, mic lifecycle — SpeakingView
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
     progress.js         #   barrel — re-exports stores/progress/ so consumers import one module
@@ -119,7 +119,7 @@ src/
                         #     (worklists, NOT CI guards; rejections live in review/confusables-reviewed.jsonl and
                         #      review/diminutives-reviewed.jsonl)
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
-                        #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   quiz/recognition/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
                         #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
                         #     a preposition with only one case) when the rule is the whole of what went wrong; the
@@ -259,9 +259,8 @@ tells you nothing about whether CI will accept your change.
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
 - **The session/practice flow** → `src/views/SessionView.vue` +
   `src/lib/sessionRunner.js` / `session.js` / `exerciseBuild.js`.
-- **Mic/speech timing in the spoken drills** (watchdogs, sequence guards, wake
-  lock) → `src/composables/useSpeechLoop.js`, shared by SpeakingView and
-  PracticeView — fix it once, both get it.
+- **Mic/speech timing in the spoken drill** (watchdogs, sequence guards, wake
+  lock) → `src/composables/useSpeechLoop.js`, used by SpeakingView.
 - **Routing** → `src/router/index.js`. There's no nav bar; the user navigates
   from `HomeView` (the header in `App.vue` is just the Home logo + Data avatar).
 
