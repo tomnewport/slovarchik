@@ -53,7 +53,14 @@ export default defineConfig({
     vue(),
     dropVocabYaml(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt', not 'autoUpdate' (#691). Under 'autoUpdate' the plugin builds
+      // the worker with skipWaiting + clientsClaim, so a new deploy activates
+      // and claims the open page the moment a launch notices it — which, with
+      // main.js reloading on that, meant a learner starting a session got the
+      // page pulled out from under them a few seconds in. Under 'prompt' the
+      // new worker installs and *waits*; src/stores/appUpdate.js records that
+      // it is there and Home offers the swap when the learner is ready for it.
+      registerType: 'prompt',
       includeAssets: ['favicon.svg', 'icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
         name: 'Slovarchik — Russian practice',
@@ -76,6 +83,24 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // The two halves of "a new version takes over", set apart deliberately
+        // (#691). `registerType: 'prompt'` above turns both off by default; the
+        // e2e suite is what showed that only one of them should stay off.
+        //
+        // `skipWaiting: false` is the fix: a freshly deployed worker installs
+        // and waits, instead of activating the moment a launch notices it.
+        // Nothing takes over until the learner presses Update on Home.
+        //
+        // `clientsClaim: true` has to come back, though. It governs what a
+        // worker does once it *has* activated, and on a first-ever visit that
+        // is immediately — nothing is waiting for. Without it the page that
+        // installed the worker is never controlled, and neither is the next
+        // one if it happens to be created before activation finishes: the
+        // offline spec caught exactly that, a second launch still uncontrolled
+        // and therefore still not offline-capable. Claiming costs nothing here
+        // now that nothing reloads on `controllerchange`.
+        skipWaiting: false,
+        clientsClaim: true,
         // Precache the *app shell only* — JS/CSS/HTML/icons/fonts. The vocab
         // (`vocab/*.json` + `manifest.json`) is deliberately excluded (#266):
         // precaching it pulled the full ~4.4 MB into the SW on first install and,

@@ -6,6 +6,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import * as idb from '../lib/idb.js'
 import { state as vocabState } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
+import { initAppUpdate, resetAppUpdate } from '../stores/appUpdate.js'
 
 const mockPush = vi.fn()
 vi.mock('vue-router', () => ({ useRouter: () => ({ push: mockPush }) }))
@@ -40,6 +41,7 @@ beforeEach(async () => {
   mockPush.mockClear()
   await progress.resetProgress()
   await progress.loadProgress()
+  resetAppUpdate()
 })
 
 describe('DataView', () => {
@@ -111,6 +113,28 @@ describe('DataView', () => {
     await wrapper.find('.reset-cancel').trigger('click')
     expect(wrapper.find('.reset-btn').exists()).toBe(true)
     expect(wrapper.find('.reset-confirm').exists()).toBe(false)
+  })
+
+  it('takes the waiting build when asked to reload for the latest app (#691)', async () => {
+    // Since the worker stopped claiming the page on its own, a bare reload
+    // would be served the old shell — this button has to take the update.
+    const updateSW = vi.fn(async () => {})
+    const registration = { update: vi.fn(async () => {}), waiting: {} }
+    initAppUpdate(
+      (options) => {
+        options.onRegisteredSW?.('/sw.js', registration)
+        return updateSW
+      },
+      { reload: vi.fn() },
+    )
+
+    const wrapper = mount(DataView)
+    await settle()
+    await wrapper.find('.update-app').trigger('click')
+    await flushPromises()
+
+    expect(registration.update).toHaveBeenCalled()
+    expect(updateSW).toHaveBeenCalledWith(true)
   })
 
   it('shows cached dictionary update dates', async () => {

@@ -16,6 +16,7 @@ import {
   isPendingConfirmation,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
+import { state as appUpdate, applyUpdate } from '../stores/appUpdate.js'
 import { vocab } from '../stores/vocab.js'
 import {
   LEARNING_DIMS,
@@ -119,6 +120,18 @@ const FOCUSED = [
 
 <template>
   <section class="grid" style="gap: 1.25rem">
+    <!-- A newer build is installed and waiting — taken when asked for, never
+         mid-question (#691). -->
+    <div v-if="appUpdate.available" class="card update-banner">
+      <p class="update-title">
+        <strong>A new version is ready.</strong>
+        <span class="muted">It'll be used next time you update — nothing is lost.</span>
+      </p>
+      <button class="apply-update" :disabled="appUpdate.applying" @click="applyUpdate">
+        {{ appUpdate.applying ? 'Updating…' : 'Update now' }}
+      </button>
+    </div>
+
     <!-- Pending offline issue reports -->
     <div v-if="reports.pending.length" class="pending-reports card">
       <p class="pending-title">
@@ -648,6 +661,35 @@ const FOCUSED = [
   cursor: pointer;
   background: var(--bg-soft);
   color: var(--text);
+}
+.update-banner {
+  border-left: 4px solid var(--primary);
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.update-title {
+  margin: 0;
+  font-size: 0.9rem;
+  display: grid;
+  gap: 0.15rem;
+}
+.apply-update {
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+}
+.apply-update:disabled {
+  opacity: 0.6;
+  cursor: default;
 }
 .pending-reports {
   border-left: 4px solid var(--muted);

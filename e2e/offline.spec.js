@@ -132,10 +132,11 @@ test('a route never visited online still opens offline', async ({ page, context 
   await expect(page).toHaveURL(/#\//)
 })
 
-test('the service worker claiming a first visit does not reload the page', async ({ page }) => {
-  // main.js reloads when a *new* worker takes over, but must not reload on the
-  // first visit, when the page simply had no controller yet — that would bounce
-  // a first-time learner mid-render. Guarded explicitly in main.js.
+test('a launch is never reloaded out from under the learner', async ({ page }) => {
+  // #190 auto-reloaded the page whenever a new worker took over, and #691 is
+  // what that cost: starting a session and having it reload a few seconds in.
+  // The worker now installs and waits (`registerType: 'prompt'`), and a launch
+  // reloads for nothing at all — a new build is offered on Home instead.
   //
   // A window sentinel is the reliable way to ask "did this document survive?":
   // counting navigation events also catches the router's hash pushes, which are
@@ -155,6 +156,20 @@ test('the service worker claiming a first visit does not reload the page', async
   await page.waitForTimeout(3_000)
 
   expect(await page.evaluate(() => window.__slovarchikDocumentSentinel)).toBe('first-visit')
+
+  // And the returning-learner case, which is the one #691 actually reports: a
+  // page the worker already controls, a launch that checks for a new build,
+  // and still no reload.
+  await page.reload()
+  await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible({ timeout: 60_000 })
+  await page.waitForFunction(() => Boolean(navigator.serviceWorker.controller), null, {
+    timeout: 60_000,
+  })
+  await page.evaluate(() => {
+    window.__slovarchikDocumentSentinel = 'return-visit'
+  })
+  await page.waitForTimeout(3_000)
+  expect(await page.evaluate(() => window.__slovarchikDocumentSentinel)).toBe('return-visit')
 })
 
 test('the corpus that survives the cut is the one in IndexedDB', async ({ page }) => {

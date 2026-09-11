@@ -9,6 +9,7 @@ import { useRouter } from 'vue-router'
 import * as progress from '../stores/progress.js'
 import { getAllFiles, getMeta, setMeta } from '../lib/idb.js'
 import { syncFromNetwork } from '../stores/vocab.js'
+import { applyUpdate, checkForUpdate } from '../stores/appUpdate.js'
 import {
   settings,
   loadSettings,
@@ -125,15 +126,13 @@ async function updateDictionaries() {
 
 async function reloadApp() {
   // A bare reload is served the old shell by the still-controlling service
-  // worker. Ask the worker to check for a new version first: if one is
-  // deployed it activates (skipWaiting) and claims the page, and the
-  // controllerchange listener in main.js reloads us onto the fresh build.
-  // Fall through to a plain reload when there's no worker or no update.
-  try {
-    const reg = await navigator.serviceWorker?.getRegistration()
-    if (reg) await reg.update()
-  } catch {
-    // Ignore — a failed update check should still let the user reload.
+  // worker, so ask it to look for a new build first. Since #691 a new worker
+  // installs and *waits* rather than activating itself, so the swap has to be
+  // taken explicitly — which is exactly what pressing this button is. Fall
+  // through to a plain reload when there's no worker or nothing waiting.
+  if (await checkForUpdate()) {
+    await applyUpdate()
+    return
   }
   window.location.reload()
 }
