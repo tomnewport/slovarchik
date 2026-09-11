@@ -137,9 +137,28 @@ describe('buildCefrStats', () => {
   it('counts mastered words as a subset of learned', () => {
     const states = { кот: 'mastered', дом: 'learned', год: 'mastered', работа: 'learning' }
     const stats = buildCefrStats(words, (k) => states[k] ?? 'unknown')
-    expect(stats.A1).toEqual({ total: 2, learned: 2, mastered: 1 })
-    expect(stats.A2).toEqual({ total: 2, learned: 1, mastered: 1 })
-    expect(stats.B1).toEqual({ total: 1, learned: 0, mastered: 0 })
+    expect(stats.A1).toEqual({ total: 2, met: 2, learned: 2, mastered: 1 })
+    expect(stats.A2).toEqual({ total: 2, met: 2, learned: 1, mastered: 1 })
+    expect(stats.B1).toEqual({ total: 1, met: 0, learned: 0, mastered: 0 })
+  })
+
+  it('counts a met word that has never been drilled', () => {
+    const met = new Set(['кот'])
+    const stats = buildCefrStats(words, () => 'unknown', (k) => met.has(k))
+    expect(stats.A1).toEqual({ total: 2, met: 1, learned: 0, mastered: 0 })
+  })
+
+  it('counts a drilled word as met without the log saying so', () => {
+    // The nesting has to hold by construction: a word being drilled has plainly
+    // been met, whether or not a phrase ever logged it.
+    const stats = buildCefrStats(words, (k) => (k === 'кот' ? 'learning' : 'unknown'))
+    expect(stats.A1.met).toBe(1)
+    expect(stats.A1.learned).toBe(0)
+  })
+
+  it('does not double-count a word that is both drilled and logged', () => {
+    const stats = buildCefrStats(words, (k) => (k === 'кот' ? 'mastered' : 'unknown'), () => true)
+    expect(stats.A1).toEqual({ total: 2, met: 2, learned: 1, mastered: 1 })
   })
 
   it('ignores words with null cefr', () => {

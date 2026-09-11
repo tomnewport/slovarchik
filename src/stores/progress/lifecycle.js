@@ -88,6 +88,12 @@ async function doLoadProgress() {
   // cefr stats) loses nothing and is completed by the next one.
   const earnedAt = await idb.getMeta('achievementsEarnedAt')
   state.achievementsEarnedAt = earnedAt && typeof earnedAt === 'object' ? { ...earnedAt } : {}
+  // Words met in phrases the learner got right (#675). Absent for an install
+  // that predates the log, and not reconstructible from the records — an
+  // encounter deliberately writes no event — so it simply starts empty and
+  // fills from the next session on.
+  const met = await idb.getMeta('metWords')
+  state.metWords = met && typeof met === 'object' ? { ...met } : {}
 
   // Activity calendar / streak. The forward-logged store is authoritative; on
   // first run (or for any day it lacks) back-populate from the surviving per-
@@ -138,6 +144,7 @@ export async function resetProgress() {
   await idb.setMeta('firstUseAt', null)
   await idb.setMeta('seenAchievements', [])
   await idb.setMeta('achievementsEarnedAt', {})
+  await idb.setMeta('metWords', {})
   await idb.clearActivity()
   await idb.setMeta('streak:activity', {})
   await idb.setMeta('streak:hue', null)
@@ -149,6 +156,7 @@ export async function resetProgress() {
   state.firstUseAt = null
   state.seenAchievements = new Set()
   state.achievementsEarnedAt = {}
+  state.metWords = {}
   state.activity = {}
   state.streakHue = randomHue()
   state.batchSig = ''

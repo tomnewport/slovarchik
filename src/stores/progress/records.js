@@ -15,13 +15,12 @@ import {
 } from '../../lib/progression.js'
 import { tableKey } from '../../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../../lib/schedule.js'
-import { learnableWords } from '../../lib/vocabBuild.js'
 import { earnedSet, buildCefrStats, achievementById, stampEarned } from '../../lib/achievements.js'
-import { state as vocabState } from '../vocab.js'
 
-import { state, wordIndex, wordRecord, rank, events } from './state.js'
+import { state, wordIndex, wordRecord, rank, events, learnableVocab } from './state.js'
 import { persist, saveMeta } from './persistence.js'
 import { logActivity } from './activity.js'
+import { hasMet } from './encounters.js'
 
 // Keep storage bounded: only the most recent attempts per (level, dimension)
 // matter to the model (windows of four; speaking needs three). Ten is plenty.
@@ -105,15 +104,8 @@ export const masteredCount = computed(
   () => Object.keys(state.records).filter((k) => stateOf(k) === 'mastered').length,
 )
 
-/**
- * The learnable slice of the vocab, as its own computed: it depends only on the
- * vocab, so filtering all ~6,700 entries shouldn't be redone every time
- * progress changes underneath `cefrStats` (#531).
- */
-const learnableVocab = computed(() => learnableWords(vocabState.words))
-
-/** CEFR-level stats (total words / learned words) derived from vocab + progress. */
-export const cefrStats = computed(() => buildCefrStats(learnableVocab.value, stateOf))
+/** CEFR-level stats (total / met / learned / mastered) from vocab + progress. */
+export const cefrStats = computed(() => buildCefrStats(learnableVocab.value, stateOf, hasMet))
 
 /**
  * All achievement IDs the learner has earned (reactive) — those meeting their

@@ -141,21 +141,45 @@ A learner meets far more words than their batches teach — in phrases, banks an
 listening boards. #675 counts those as **encountered**, and an encounter has to
 be earned: the word was identified, spelled or said *correctly*.
 
-Two constraints on the implementation:
+Two constraints shaped the implementation:
 
 - **An encounter is not an attempt.** `recordAttempt` fires only for
-  `ex.targets`, one word per exercise; everything else in the phrase leaves no
-  trace today. The fix must not close that gap by writing `events`: an event
-  flips `wordState` to `learning` and pollutes `lost`, `atRisk`, the analytics
-  history and the derivation memo. It belongs in a stamped field, as
-  `introducedAt` is.
-- **A hinted word was not recalled.** `hints.js` already knows which words the
-  learner tapped for a translation; those do not count.
+  `ex.targets`, one word per exercise; everything else in the phrase left no
+  trace. Closing that gap by writing `events` would have been wrong twice over:
+  an event flips `wordState` to `learning` and hands the word to the scheduler,
+  and `lost` / `atRisk` / `recentlyLearned` / the analytics history all walk
+  `Object.keys(state.records)`, so every encounter would become a record those
+  computeds have to consider and reject.
+
+  So the log lives outside `records` entirely, as a single meta blob in
+  `stores/progress/encounters.js` — word key → when it was first met, bounded by
+  the learnable corpus (~4,250 keys) rather than by how much drilling happens.
+
+- **A word the app gave away was not recalled.** Hint *taps* turned out not to
+  be tracked at all, so the gate is built from what is observable per exercise
+  instead: the keyboard hint (already reported as the absence of `double`), the
+  ❓ Dictionary panel (which glosses precisely the encounter candidates and costs
+  no points, so it needed a new `dictUsed` flag), and the inline glosses under a
+  word-bank cue — not opt-in at all, which is why only that drill's *audio*
+  variant can prove anything.
 
 The surface-form index (`formIndex`, built once per vocab load since #686) maps
-the inflected forms in a phrase back to dictionary keys. Bound the whole thing
-to learnable words — the 2,501 `learn: false` glossary entries are out of the
-bars anyway — so the record count stays under the corpus size.
+the inflected forms in a phrase back to dictionary keys. A token matching more
+than one sense is skipped rather than guessed at: crediting the wrong half of a
+homograph would overstate what the learner has seen, and being one word short is
+the cheaper error. Gloss-only entries are gated out, so the log stays bounded by
+the curriculum.
+
+The three counts are derived so they nest by construction — `met` counts
+anything ever attempted *plus* anything the log names — rather than stored
+separately and trusted to stay consistent.
+
+The spoken drills stay out: their grade comes from the Web Speech API, which is
+language-model-assisted and will return the expected sentence from imperfect
+input. That makes a "correct" there much weaker evidence than a typed one, and
+crediting it would overstate the bars in the flattering direction. So of the
+issue's three routes — identified, spelled, said — the first two are wired and
+the third is declined on purpose.
 
 **Mind the name.** `encounterCount` in `stores/progress/sessions.js` already
 means something else: how many identification events a *batch* word has, which

@@ -20,20 +20,26 @@ const showList = ref(null) // 'learned' | 'mastered' | null
 const learned = computed(() => learnedWords())
 const mastered = computed(() => masteredWords())
 
-// One bar per CEFR level: how much of that level's vocabulary is learned, with
-// the mastered slice drawn inside it. Levels the corpus has no words for are
-// left out rather than shown as empty bars.
+// One bar per CEFR level, drawn as three nested slices: met, then learned, then
+// mastered. "Met" is the head start (#675) — words the learner has read, typed
+// or understood correctly inside a phrase, long before the curriculum formally
+// teaches them. The counts nest by construction (see buildCefrStats), so the
+// wider slice is always behind the narrower one. Levels the corpus has no words
+// for are left out rather than shown as empty bars.
 const cefrLevels = computed(() => {
   const stats = cefrStats.value
   return CEFR_ORDER.map((level) => {
-    const s = stats[level] ?? { total: 0, learned: 0, mastered: 0 }
+    const s = stats[level] ?? { total: 0, met: 0, learned: 0, mastered: 0 }
+    const pctOf = (n) => (s.total ? (n / s.total) * 100 : 0)
     return {
       level,
       total: s.total,
+      met: s.met,
       learned: s.learned,
       mastered: s.mastered,
-      pct: s.total ? (s.learned / s.total) * 100 : 0,
-      masteredPct: s.total ? (s.mastered / s.total) * 100 : 0,
+      pct: pctOf(s.learned),
+      metPct: pctOf(s.met),
+      masteredPct: pctOf(s.mastered),
     }
   }).filter((l) => l.total > 0)
 })
@@ -193,14 +199,15 @@ function toggle(which) {
       <h2>CEFR levels</h2>
       <p class="muted cefr-hint">
         How much of each level's vocabulary you've learned. The brighter slice is what
-        you've mastered.
+        you've mastered; the faint one behind is words you've met in a sentence but
+        haven't been taught yet.
       </p>
       <div class="cefr-list">
         <div v-for="l in cefrLevels" :key="l.level" class="cefr-row">
           <div class="cefr-meta">
             <span class="cefr-level">{{ l.level }}</span>
             <span class="cefr-pct">{{ Math.round(l.pct) }}%</span>
-            <span class="cefr-count muted">{{ l.learned }} / {{ l.total }} learned<template v-if="l.mastered">, {{ l.mastered }} mastered</template></span>
+            <span class="cefr-count muted">{{ l.learned }} / {{ l.total }} learned<template v-if="l.mastered">, {{ l.mastered }} mastered</template><template v-if="l.met > l.learned">, {{ l.met }} met</template></span>
           </div>
           <div
             class="cefr-bar"
@@ -208,8 +215,9 @@ function toggle(which) {
             :aria-valuenow="Math.round(l.pct)"
             aria-valuemin="0"
             aria-valuemax="100"
-            :aria-label="`${l.level}: ${l.learned} of ${l.total} words learned`"
+            :aria-label="`${l.level}: ${l.learned} of ${l.total} words learned, ${l.met} met`"
           >
+            <div class="cefr-fill met-fill" :style="{ width: l.metPct + '%' }" />
             <div class="cefr-fill learn-fill" :style="{ width: l.pct + '%' }" />
             <div class="cefr-fill master-fill" :style="{ width: l.masteredPct + '%' }" />
           </div>
@@ -380,6 +388,12 @@ function toggle(which) {
   height: 100%;
   border-radius: 3px;
   transition: width 0.3s ease;
+}
+/* Met but untaught: the same hue as learned, faded, so it reads as a lesser
+   degree of the same thing rather than a fourth category. */
+.met-fill {
+  background: var(--good);
+  opacity: 0.3;
 }
 .learn-fill {
   background: var(--good);

@@ -87,6 +87,8 @@ src/
       records.js        #     the per-word derivation memo, the derived computeds, and every
                         #     path that records an attempt (sole owner of the memo)
       activity.js       #     streak + activity calendar
+      encounters.js     #     words MET but not taught — one meta blob, never a record,
+                        #       because an encounter is not an attempt (#675)
       batches.js        #     the current learning/mastery batches
       sessions.js       #     session assembly + the per-word / per-skill views
       analytics.js      #     the Progress screen's learned/mastered history
@@ -118,6 +120,9 @@ src/
                         #     a preposition with only one case) when the rule is the whole of what went wrong; the
                         #     reminder is shown mid-attempt and never spells the answer out. Ordinary declension /
                         #     conjugation gaps deliberately return nothing — that is the lesson, not a reminder.
+                        #   encounters  — what a correctly-answered phrase proves the learner has MET, as
+                        #     opposed to what it grades: the words around the target, credited only when
+                        #     nothing on screen (keyboard hint, ❓ Dictionary, inline glosses) gave them away
                         #   comprehension  — what the Russian says that the English translation cannot (aspect, det/indet motion),
                         #     asked after a correct RU→EN answer; informational, never graded
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers

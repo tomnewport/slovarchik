@@ -50,6 +50,10 @@ import {
   leaveForLater,
   wordProgressDetail,
   persistenceSettled,
+  hasMet,
+  metCount,
+  markMet,
+  recordEncounter,
   markKnown,
   unmarkKnown,
   isKnown,
@@ -292,13 +296,13 @@ describe('state memoisation (#531)', () => {
 
   it('cefrStats follows both the vocab and progress', async () => {
     setVocab(makeWords(2, { cefr: 'A1', hasInflections: false }))
-    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 0, mastered: 0 })
+    expect(cefrStats.value.A1).toEqual({ total: 2, met: 0, learned: 0, mastered: 0 })
     await learn('w0')
     // `learn` covers every dimension of an uninflected word, so w0 lands on
     // mastered — which counts as learned too, and as its own subset.
-    expect(cefrStats.value.A1).toEqual({ total: 2, learned: 1, mastered: 1 })
+    expect(cefrStats.value.A1).toEqual({ total: 2, met: 1, learned: 1, mastered: 1 })
     setVocab(makeWords(3, { cefr: 'A1', hasInflections: false }))
-    expect(cefrStats.value.A1).toEqual({ total: 3, learned: 1, mastered: 1 })
+    expect(cefrStats.value.A1).toEqual({ total: 3, met: 1, learned: 1, mastered: 1 })
   })
 })
 
@@ -1168,7 +1172,7 @@ describe('achievements', () => {
     // was already shown the achievement, and `seenAchievements` means it would
     // never fire again if we let it lapse.
     setVocab(makeWords(3, { cefr: 'A1', hasInflections: false }))
-    expect(cefrStats.value.A1).toEqual({ total: 3, learned: 2, mastered: 2 })
+    expect(cefrStats.value.A1).toEqual({ total: 3, met: 2, learned: 2, mastered: 2 })
     expect(earnedAchievements.value.has('cefr-A1')).toBe(true)
   })
 
@@ -1222,6 +1226,79 @@ describe('achievements', () => {
     await idb.setMeta('achievementsEarnedAt', {})
     await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
     expect(state.achievementsEarnedAt['learn-1']).toBeTypeOf('number')
+  })
+})
+
+describe('encounters (#675)', () => {
+  // A phrase whose words are all in the vocab, one of which is the drill's own
+  // target and two of which the curriculum has not reached.
+  const vocab = [
+    { key: 'кот=cat', ru: 'кот', headword: 'кот', meaning: 'cat', cefr: 'A1', collections: [] },
+    { key: 'спать=to sleep', ru: 'спать', headword: 'спать', meaning: 'to sleep', cefr: 'A1', collections: [] },
+    { key: 'дом=house', ru: 'дом', headword: 'дом', meaning: 'house', cefr: 'B1', collections: [] },
+  ]
+  const typed = { content: 'phrase', kind: 'type', ru: 'кот спать дом', targets: ['кот=cat'] }
+
+  beforeEach(() => setVocab(vocab))
+
+  it('logs every word of a phrase typed correctly and unaided', () => {
+    recordEncounter(typed, { correct: true, double: true })
+    expect(hasMet('спать=to sleep')).toBe(true)
+    expect(hasMet('дом=house')).toBe(true)
+    expect(metCount.value).toBe(3)
+  })
+
+  it('logs nothing when the answer leaned on a hint', () => {
+    recordEncounter(typed, { correct: true, double: false })
+    expect(metCount.value).toBe(0)
+  })
+
+  it('logs nothing when the Dictionary was opened', () => {
+    recordEncounter(typed, { correct: true, double: true, dictUsed: true })
+    expect(metCount.value).toBe(0)
+  })
+
+  it('keeps the first timestamp when a word is met again', () => {
+    markMet(['дом=house'], 1000)
+    markMet(['дом=house'], 5000)
+    expect(state.metWords['дом=house']).toBe(1000)
+  })
+
+  it('never writes an event, so an encounter cannot start a word learning', () => {
+    recordEncounter(typed, { correct: true, double: true })
+    expect(stateOf('дом=house')).toBe('unknown')
+    expect(state.records['дом=house']).toBeUndefined()
+    expect(lost.value).toEqual([])
+    expect(atRisk.value).toEqual([])
+  })
+
+  it('counts a met word in the CEFR bars without it being learned', () => {
+    recordEncounter(typed, { correct: true, double: true })
+    expect(cefrStats.value.B1).toMatchObject({ total: 1, met: 1, learned: 0, mastered: 0 })
+  })
+
+  it('survives the vocab not having loaded yet', () => {
+    setVocab([])
+    expect(recordEncounter(typed, { correct: true, double: true })).toEqual([])
+  })
+
+  it('persists the log through a reload', async () => {
+    recordEncounter(typed, { correct: true, double: true })
+    await persistenceSettled()
+    state.metWords = {}
+    await loadProgress()
+    expect(hasMet('дом=house')).toBe(true)
+  })
+
+  it('carries the log through an export/import round trip', async () => {
+    recordEncounter(typed, { correct: true, double: true })
+    const snapshot = exportData()
+
+    await resetProgress()
+    expect(metCount.value).toBe(0)
+    await importData(snapshot)
+
+    expect(hasMet('дом=house')).toBe(true)
   })
 })
 

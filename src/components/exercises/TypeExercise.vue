@@ -109,6 +109,11 @@ const placedIds = computed(() => new Set(placed.value.map((c) => c.id)))
 const availableChips = computed(() => chips.value.filter((c) => !placedIds.value.has(c.id)))
 // The ❓ Dictionary panel (unlearned phrase words) — collapsed by default.
 const dictOpen = ref(false)
+// Whether it was opened at any point. It reveals precisely the words an
+// encounter would otherwise credit (#675), and unlike the keyboard hint it
+// costs nothing, so `double` cannot stand in for it. Sticky: closing the panel
+// again does not unsee what it showed.
+const dictUsed = ref(false)
 // Whether the learner switched the keyboard hint on at any point this exercise.
 // A correct answer with the hint untouched counts double (and gets a little 🔥).
 const hintUsed = ref(false)
@@ -289,6 +294,12 @@ function resolve() {
   if (!props.exercise.audio) speak(props.exercise.ru)
 }
 
+// Toggle the Dictionary, remembering for good that it was consulted.
+function openDict() {
+  dictOpen.value = !dictOpen.value
+  if (dictOpen.value) dictUsed.value = true
+}
+
 function next() {
   // Preserve the first miss: a retry success reports the initial failure
   // (`correct: false`) flagged `correctedOnRetry`, so the session records the
@@ -297,6 +308,7 @@ function next() {
     correct: firstTryCorrect.value,
     correctedOnRetry: attempts.value > 1 && wasCorrect.value,
     double: double.value,
+    dictUsed: dictUsed.value,
     wordCorrect: firstTryWordCorrect.value,
   })
 }
@@ -387,7 +399,7 @@ onBeforeUnmount(() => setHintAllowed(true))
     <!-- Dictionary: reveal, with no penalty, the phrase words the learner can't
          be expected to spell yet. -->
     <div v-if="dictionary.length && !checked && !reorderMode" class="dictionary">
-      <button type="button" class="dict-toggle" :aria-expanded="dictOpen" @click="dictOpen = !dictOpen">
+      <button type="button" class="dict-toggle" :aria-expanded="dictOpen" @click="openDict">
         ❓ Dictionary
       </button>
       <ul v-if="dictOpen" class="dict-list">
