@@ -336,6 +336,11 @@ async function onDone(result) {
       if (!firstError) firstError = e
     }
   }
+  // Log the words the learner met in passing (#675). Independent of grading:
+  // the attempts above concern this exercise's target, while this is about the
+  // rest of the sentence — words the curriculum hasn't reached, which a correct
+  // unaided answer proves were read, typed or understood anyway.
+  progress.recordEncounter(ex, result)
   // Always advance the session even if a persistence write failed, so the
   // exercise doesn't freeze. The error is re-thrown afterwards so Vue's global
   // errorHandler can surface it to the user. Match boards are never re-queued

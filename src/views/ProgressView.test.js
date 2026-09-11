@@ -24,6 +24,7 @@ function learningRecord(word) {
 beforeEach(() => {
   progress.records = {}
   progress.activity = {}
+  progress.metWords = {}
   vocabState.words = []
   push.mockClear()
 })
@@ -108,6 +109,35 @@ describe('ProgressView', () => {
     // A2: nothing learned yet.
     expect(rows[1].find('.cefr-pct').text()).toBe('0%')
     expect(rows[1].find('.cefr-count').text()).toBe('0 / 1 learned')
+  })
+
+  it('draws met-but-untaught words as a faint slice behind the learned one', () => {
+    vocabState.words = [
+      { key: 'дом=house', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+      { key: 'кот=cat', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+      { key: 'сон=sleep', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+      { key: 'год=year', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+    ]
+    progress.records = { 'дом=house': masteredRecord('дом=house', Date.parse('2026-06-01T10:00:00Z')) }
+    // Two more met in passing, never drilled.
+    progress.metWords = { 'кот=cat': 1, 'сон=sleep': 1 }
+
+    const row = mount(ProgressView).findAll('.cefr-row')[0]
+    // 1 of 4 learned; 3 of 4 met (the learned one counts as met too).
+    expect(row.find('.learn-fill').attributes('style')).toContain('width: 25%')
+    expect(row.find('.met-fill').attributes('style')).toContain('width: 75%')
+    expect(row.find('.cefr-count').text()).toBe('1 / 4 learned, 1 mastered, 3 met')
+  })
+
+  it('leaves the met count off when nothing has been met beyond what is learned', () => {
+    vocabState.words = [
+      { key: 'дом=house', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+      { key: 'кот=cat', pos: 'noun', gender: 'm', cefr: 'A1', hasInflections: false },
+    ]
+    progress.records = { 'дом=house': masteredRecord('дом=house', Date.parse('2026-06-01T10:00:00Z')) }
+
+    const row = mount(ProgressView).findAll('.cefr-row')[0]
+    expect(row.find('.cefr-count').text()).toBe('1 / 2 learned, 1 mastered')
   })
 
   it('lists weakest skills and launches a focused session on tap', async () => {

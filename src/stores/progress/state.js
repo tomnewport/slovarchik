@@ -28,6 +28,8 @@ export const state = reactive({
   seenAchievements: new Set(),
   /** Achievement ID → epoch ms first earned. Grows only; see `stampEarned`. */
   achievementsEarnedAt: {},
+  /** Word key → epoch ms first met in a phrase the learner got right (#675). */
+  metWords: {},
   /** day key → { count, correct, hue } — the contribution calendar / streak. */
   activity: {},
   /** Hue (0..359) currently assigned to days; rerolled when the batch changes. */
@@ -65,6 +67,14 @@ export function rank(stateName) {
 export function events(key) {
   return state.records[key]?.events ?? []
 }
+
+/**
+ * The learnable slice of the vocab, as its own computed: it depends only on the
+ * vocab, so filtering all ~6,700 entries shouldn't be redone every time progress
+ * changes underneath a consumer (#531). Shared by the CEFR stats and the
+ * encounter log so there is one copy, not one each (#668).
+ */
+export const learnableVocab = computed(() => learnableWords(vocabState.words))
 
 /** All learnable vocab words as the batch engine expects them. */
 export function vocabWords() {

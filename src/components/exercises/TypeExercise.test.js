@@ -77,6 +77,7 @@ describe('TypeExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: true,
+      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -110,6 +111,7 @@ describe('TypeExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: true,
+      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -128,6 +130,7 @@ describe('TypeExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: false,
+      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -155,6 +158,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: false,
       double: false,
+      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -181,6 +185,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -237,6 +242,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -401,6 +407,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: false,
       double: false,
+      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -421,6 +428,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -437,6 +445,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: false,
       double: false,
+      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -563,6 +572,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      dictUsed: false,
       wordCorrect: true,
     })
   })

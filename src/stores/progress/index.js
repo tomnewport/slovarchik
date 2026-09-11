@@ -27,6 +27,7 @@
 
 export { state } from './state.js'
 export { persistenceSettled } from './persistence.js'
+export { hasMet, metCount, markMet, recordEncounter } from './encounters.js'
 
 export {
   stateOf,

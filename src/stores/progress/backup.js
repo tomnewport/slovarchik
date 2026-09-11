@@ -33,6 +33,7 @@ export function exportData() {
     batches: { learning: state.learning, mastery: state.mastery },
     seenAchievements: [...state.seenAchievements],
     achievementsEarnedAt: state.achievementsEarnedAt,
+    metWords: state.metWords,
     activity: state.activity,
     streakHue: state.streakHue,
     batchSig: state.batchSig,
@@ -107,6 +108,10 @@ export async function importData(data) {
       : {}
   state.achievementsEarnedAt = earnedAt
   await idb.setMeta('achievementsEarnedAt', earnedAt)
+  const metWords =
+    data.metWords && typeof data.metWords === 'object' ? toPlain(data.metWords) : {}
+  state.metWords = metWords
+  await idb.setMeta('metWords', metWords)
   // Restore the activity calendar / streak, falling back to whatever the events
   // imply for backups that predate the streak system.
   const importedActivity =
