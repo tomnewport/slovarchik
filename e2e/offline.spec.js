@@ -157,9 +157,6 @@ test('the service worker claiming a first visit does not reload the page', async
   expect(await page.evaluate(() => window.__slovarchikDocumentSentinel)).toBe('first-visit')
 })
 
-// The vocab runtime cache (#670). These run here because this is the only
-// project with a real service worker.
-/** Pathnames held in the service worker's vocab runtime cache. */
 test('the corpus that survives the cut is the one in IndexedDB', async ({ page }) => {
   // The other half of #670. The vocab's service-worker cache was removed
   // because it was always empty; what actually carries the words across a
