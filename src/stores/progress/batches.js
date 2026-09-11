@@ -9,8 +9,32 @@ import { toPlain } from '../../lib/plain.js'
 import { buildBatchOptions } from '../../lib/batches.js'
 import { minExercisesToLevel } from '../../lib/progression.js'
 
+import { curriculumParts, partOfWord } from '../vocab.js'
+
 import { state, BATCH_META_KEY, wordRecord, rank, events, vocabWords } from './state.js'
 import { stateOf, isPendingConfirmation } from './records.js'
+
+/**
+ * Curriculum order for the batch engine: a word's position is the position of
+ * the part that teaches it (#674), so a learner is offered "A2 Part I" words
+ * until that part is done rather than the whole of A2 at once.
+ *
+ * Null when the parts have not loaded — a cache written before they shipped, or
+ * a first launch mid-sync. The engine then falls back to its own CEFR ordering
+ * wholesale, which is the behaviour that predates parts. Falling back *per word*
+ * would be worse than either: mixing part indices with CEFR ranks would order
+ * the pool by two incomparable scales at once.
+ */
+function partRank() {
+  const parts = curriculumParts.value
+  if (!parts.length) return undefined
+  const order = new Map(parts.map((p, i) => [p.id, i]))
+  const of = partOfWord.value
+  // A word no part claims sorts last rather than first: `check:parts` fails the
+  // build on an orphan, so one here means a stale cache, and the safe reading of
+  // "the curriculum doesn't mention this word" is "not yet", not "teach it now".
+  return (w) => order.get(of.get(w.key)) ?? parts.length
+}
 
 /**
  * Offer up to five batch options for the next learning or mastery journey.
@@ -28,6 +52,7 @@ export function getBatchOptions(level = 'learning', rng = Math.random) {
     stateOf: (w) => stateOf(w.key),
     level,
     rng,
+    rankOf: partRank(),
   })
 }
 

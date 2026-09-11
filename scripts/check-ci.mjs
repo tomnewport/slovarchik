@@ -2,8 +2,8 @@
 /**
  * check-ci.mjs — run, locally, exactly what CI's `test` job runs.
  *
- * `npm test` green is not CI green (#655): three corpus gates —
- * `verify:review`, `check:inflect:cases`, `check:prompts` — run only in
+ * `npm test` green is not CI green (#655): four corpus gates —
+ * `verify:review`, `check:inflect:cases`, `check:prompts`, `check:parts` — run only in
  * `.github/workflows/ci.yml`, so the documented pre-push ritual (test, lint,
  * build) can pass on a change CI rejects. This is the one command that gives
  * the same verdict, in the same order, stopping at the first failure the way
@@ -11,7 +11,7 @@
  *
  * Usage:
  *   node scripts/check-ci.mjs            # the whole `test` job (minutes)
- *   node scripts/check-ci.mjs --corpus   # the three corpus gates only (~5s)
+ *   node scripts/check-ci.mjs --corpus   # the four corpus gates only (~5s)
  *   node scripts/check-ci.mjs --list     # print the steps, run nothing
  *
  * `STEPS` below must stay in step with the workflow: `check-ci.test.mjs` reads
@@ -67,6 +67,11 @@ export const STEPS = [
     script: 'check:prompts',
     corpus: true,
     why: 'no growth in English prompts that pick out more than one Russian sentence',
+  },
+  {
+    script: 'check:parts',
+    corpus: true,
+    why: 'parts.yml still describes the corpus: no orphans, bounds held, no tiny fragments',
   },
   { script: 'test:coverage', corpus: false, why: 'the unit suite + the per-layer coverage ratchet' },
   { script: 'build', corpus: false, why: 'the production build' },

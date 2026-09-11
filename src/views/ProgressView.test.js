@@ -25,6 +25,7 @@ beforeEach(() => {
   progress.records = {}
   progress.activity = {}
   progress.metWords = {}
+  vocabState.partsDef = null
   vocabState.words = []
   push.mockClear()
 })
@@ -138,6 +139,28 @@ describe('ProgressView', () => {
 
     const row = mount(ProgressView).findAll('.cefr-row')[0]
     expect(row.find('.cefr-count').text()).toBe('1 / 2 learned, 1 mastered')
+  })
+
+  it('shows one bar per curriculum part once the parts have loaded', () => {
+    vocabState.words = [
+      { key: 'дом=house', pos: 'noun', gender: 'm', cefr: 'A2', collections: ['home'], hasInflections: false },
+      { key: 'кот=cat', pos: 'noun', gender: 'm', cefr: 'A2', collections: ['home'], hasInflections: false },
+      { key: 'год=year', pos: 'noun', gender: 'm', cefr: 'A2', collections: ['time'], hasInflections: false },
+    ]
+    vocabState.partsDef = {
+      parts: [
+        { id: 'A2-1', level: 'A2', ordinal: 1, collections: ['home'] },
+        { id: 'A2-2', level: 'A2', ordinal: 2, collections: ['time'] },
+      ],
+    }
+    progress.records = { 'дом=house': masteredRecord('дом=house', Date.parse('2026-06-01T10:00:00Z')) }
+
+    const wrapper = mount(ProgressView)
+    const rows = wrapper.findAll('.cefr-row')
+    expect(rows.length).toBe(2)
+    expect(rows[0].find('.cefr-level').text()).toBe('A2 Part I')
+    expect(rows[0].find('.cefr-count').text()).toBe('1 / 2 learned, 1 mastered')
+    expect(rows[1].find('.cefr-level').text()).toBe('A2 Part II')
   })
 
   it('lists weakest skills and launches a focused session on tap', async () => {

@@ -44,6 +44,7 @@ describe('check-ci mirrors the workflow', () => {
       'verify:review',
       'check:inflect:cases',
       'check:prompts',
+      'check:parts',
     ])
   })
 })

@@ -50,6 +50,7 @@ import {
   leaveForLater,
   wordProgressDetail,
   persistenceSettled,
+  partStats,
   hasMet,
   metCount,
   markMet,
@@ -1226,6 +1227,85 @@ describe('achievements', () => {
     await idb.setMeta('achievementsEarnedAt', {})
     await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
     expect(state.achievementsEarnedAt['learn-1']).toBeTypeOf('number')
+  })
+})
+
+describe('curriculum parts (#674)', () => {
+  // Two parts inside one CEFR level, so only the part order can decide which
+  // words come first — the CEFR level is identical for all of them.
+  const partsDef = {
+    parts: [
+      { id: 'A2-1', level: 'A2', ordinal: 1, collections: ['first'] },
+      { id: 'A2-2', level: 'A2', ordinal: 2, collections: ['second'] },
+    ],
+  }
+  const partWords = [
+    ...Array.from({ length: 30 }, (_, i) => ({
+      key: `f${i}`,
+      cefr: 'A2',
+      collections: ['first'],
+      hasInflections: false,
+    })),
+    ...Array.from({ length: 30 }, (_, i) => ({
+      key: `s${i}`,
+      cefr: 'A2',
+      collections: ['second'],
+      hasInflections: false,
+    })),
+  ]
+
+  beforeEach(() => {
+    vocabState.words = partWords
+    vocabState.partsDef = partsDef
+  })
+
+  it('offers the lowest part before a later one at the same CEFR level', () => {
+    const options = getBatchOptions('learning', seededRng(1))
+    expect(options.length).toBeGreaterThan(0)
+    const drawn = options.flatMap((o) => o.words)
+    expect(drawn.every((k) => k.startsWith('f'))).toBe(true)
+  })
+
+  it('moves on to the next part once the first is learned', async () => {
+    for (const w of partWords.filter((w) => w.key.startsWith('f'))) await learn(w.key)
+    const drawn = getBatchOptions('learning', seededRng(1)).flatMap((o) => o.words)
+    expect(drawn.length).toBeGreaterThan(0)
+    expect(drawn.every((k) => k.startsWith('s'))).toBe(true)
+  })
+
+  it('falls back to CEFR order when the parts have not loaded', () => {
+    vocabState.partsDef = null
+    const drawn = getBatchOptions('learning', seededRng(1)).flatMap((o) => o.words)
+    // Both parts' words are A2, so with no parts they are one undifferentiated
+    // pool — which is exactly the behaviour that predates #674.
+    expect(drawn.some((k) => k.startsWith('s'))).toBe(true)
+  })
+
+  it('counts progress per part', async () => {
+    await learn('f0')
+    expect(partStats.value['A2-1']).toMatchObject({ total: 30, learned: 1, mastered: 1 })
+    expect(partStats.value['A2-2']).toMatchObject({ total: 30, learned: 0 })
+  })
+
+  it('grants the half-way milestone at half a part, and completion at all of it', async () => {
+    for (const w of partWords.slice(0, 15)) await learn(w.key)
+    expect(earnedAchievements.value.has('part-A2-1-half')).toBe(true)
+    expect(earnedAchievements.value.has('part-A2-1-done')).toBe(false)
+
+    for (const w of partWords.slice(15, 30)) await learn(w.key)
+    expect(earnedAchievements.value.has('part-A2-1-done')).toBe(true)
+  })
+
+  it('keeps a part milestone once the part grows past it', async () => {
+    for (const w of partWords.slice(0, 30)) await learn(w.key)
+    expect(earnedAchievements.value.has('part-A2-1-done')).toBe(true)
+    // A new word ships into that part. The learner was already congratulated.
+    vocabState.words = [
+      ...partWords,
+      { key: 'f-new', cefr: 'A2', collections: ['first'], hasInflections: false },
+    ]
+    expect(partStats.value['A2-1']).toMatchObject({ total: 31, learned: 30 })
+    expect(earnedAchievements.value.has('part-A2-1-done')).toBe(true)
   })
 })
 

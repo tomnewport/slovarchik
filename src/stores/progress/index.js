@@ -34,6 +34,8 @@ export {
   learnedCount,
   masteredCount,
   cefrStats,
+  partStats,
+  achievementCatalogue,
   earnedAchievements,
   pendingAchievements,
   acknowledgeAchievements,

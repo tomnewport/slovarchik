@@ -5,10 +5,11 @@
 import { computed, nextTick, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar, cefrStats } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar, cefrStats, partStats } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
 import { buildChart } from '../lib/progressChart.js'
 import { CEFR_ORDER } from '../lib/batches.js'
+import { curriculumParts } from '../stores/vocab.js'
 import AchievementBadge from '../components/AchievementBadge.vue'
 
 const router = useRouter()
@@ -20,29 +21,47 @@ const showList = ref(null) // 'learned' | 'mastered' | null
 const learned = computed(() => learnedWords())
 const mastered = computed(() => masteredWords())
 
-// One bar per CEFR level, drawn as three nested slices: met, then learned, then
-// mastered. "Met" is the head start (#675) — words the learner has read, typed
-// or understood correctly inside a phrase, long before the curriculum formally
-// teaches them. The counts nest by construction (see buildCefrStats), so the
-// wider slice is always behind the narrower one. Levels the corpus has no words
-// for are left out rather than shown as empty bars.
-const cefrLevels = computed(() => {
+// One bar per curriculum part (#674) — "A2 Part I", not the whole of A2, which
+// is years of study behind one unmoving bar. Each is drawn as three nested
+// slices: met, then learned, then mastered. "Met" is the head start (#675) —
+// words read, typed or understood correctly inside a phrase, long before the
+// curriculum formally teaches them. The counts nest by construction (see
+// buildPartStats), so the wider slice is always behind the narrower one.
+//
+// Falls back to one bar per CEFR level when the parts have not loaded (a cache
+// written before they shipped), so the card never simply vanishes.
+const partRows = computed(() => {
+  const stats = partStats.value
+  return curriculumParts.value
+    .map((part) => {
+      const s = stats[part.id] ?? { total: 0, met: 0, learned: 0, mastered: 0 }
+      return { key: part.id, label: part.name, level: part.level, ...slices(s) }
+    })
+    .filter((p) => p.total > 0)
+})
+
+const cefrRows = computed(() => {
   const stats = cefrStats.value
   return CEFR_ORDER.map((level) => {
     const s = stats[level] ?? { total: 0, met: 0, learned: 0, mastered: 0 }
-    const pctOf = (n) => (s.total ? (n / s.total) * 100 : 0)
-    return {
-      level,
-      total: s.total,
-      met: s.met,
-      learned: s.learned,
-      mastered: s.mastered,
-      pct: pctOf(s.learned),
-      metPct: pctOf(s.met),
-      masteredPct: pctOf(s.mastered),
-    }
+    return { key: level, label: level, level, ...slices(s) }
   }).filter((l) => l.total > 0)
 })
+
+const cefrLevels = computed(() => (partRows.value.length ? partRows.value : cefrRows.value))
+
+function slices(s) {
+  const pctOf = (n) => (s.total ? (n / s.total) * 100 : 0)
+  return {
+    total: s.total,
+    met: s.met,
+    learned: s.learned,
+    mastered: s.mastered,
+    pct: pctOf(s.learned),
+    metPct: pctOf(s.met),
+    masteredPct: pctOf(s.mastered),
+  }
+}
 
 // A line chart of cumulative learned/mastered words, on real scales in both
 // directions: geometry (ticks, gridlines, stepped paths) comes from
@@ -196,16 +215,16 @@ function toggle(which) {
 
     <!-- CEFR level coverage -->
     <div v-if="cefrLevels.length" class="card cefr-card">
-      <h2>CEFR levels</h2>
+      <h2>{{ partRows.length ? 'Your curriculum' : 'CEFR levels' }}</h2>
       <p class="muted cefr-hint">
-        How much of each level's vocabulary you've learned. The brighter slice is what
-        you've mastered; the faint one behind is words you've met in a sentence but
-        haven't been taught yet.
+        How much of each part you've learned. The brighter slice is what you've
+        mastered; the faint one behind is words you've met in a sentence but haven't
+        been taught yet.
       </p>
       <div class="cefr-list">
-        <div v-for="l in cefrLevels" :key="l.level" class="cefr-row">
+        <div v-for="l in cefrLevels" :key="l.key" class="cefr-row">
           <div class="cefr-meta">
-            <span class="cefr-level">{{ l.level }}</span>
+            <span class="cefr-level">{{ l.label }}</span>
             <span class="cefr-pct">{{ Math.round(l.pct) }}%</span>
             <span class="cefr-count muted">{{ l.learned }} / {{ l.total }} learned<template v-if="l.mastered">, {{ l.mastered }} mastered</template><template v-if="l.met > l.learned">, {{ l.met }} met</template></span>
           </div>
@@ -215,7 +234,7 @@ function toggle(which) {
             :aria-valuenow="Math.round(l.pct)"
             aria-valuemin="0"
             aria-valuemax="100"
-            :aria-label="`${l.level}: ${l.learned} of ${l.total} words learned, ${l.met} met`"
+            :aria-label="`${l.label}: ${l.learned} of ${l.total} words learned, ${l.met} met`"
           >
             <div class="cefr-fill met-fill" :style="{ width: l.metPct + '%' }" />
             <div class="cefr-fill learn-fill" :style="{ width: l.pct + '%' }" />
