@@ -76,10 +76,9 @@ async function solveWordbank(ex) {
 
 /**
  * Flashcard board: one always-focused input per card, each advertising the card's
- * answer via `data-answer`. Typing the exact answer advances the card — unless it
- * is held open (#586) so the word's facts can be read, which looks exactly like
- * the reveal after a miss and clears on Next. The last card ends the exercise
- * (the input detaches). Drains any consecutive boards.
+ * answer via `data-answer`. Typing the exact answer advances the card outright
+ * (#690); only a rejected grade reveals an answer to dismiss with Next. The last
+ * card ends the exercise (the input detaches). Drains any consecutive boards.
  */
 async function solveMatch(page) {
   const input = page.locator('#fc-input')
