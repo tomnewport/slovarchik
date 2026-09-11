@@ -14,6 +14,19 @@
 // build. This reads the *generated* manifest rather than the config, so it
 // holds whatever vite-plugin-pwa actually emitted.
 //
+// It also asserts the vocab has no runtime cache of its own (#670). That rule
+// was removed once the offline e2e showed it was always empty — a first visit's
+// fetches happen before the worker controls the page, and every later visit
+// reads IndexedDB instead of fetching — while still shadowing manifest.json and
+// hiding a deploy's vocab change for a launch.
+//
+// That one has to be checked here rather than in a browser, and the reason is
+// worth keeping: Workbox opens a runtime cache lazily, on the first request it
+// actually handles. Since no vocab request ever reaches the worker, the cache
+// is never created, so `caches.keys()` cannot tell "the rule is gone" from "the
+// rule is there and has never fired". Every runtime assertion about it passes
+// either way. The generated sw.js is the only place the difference is visible.
+//
 // Reads dist/sw.js, so it must run after `npm run build`.
 
 import { readFileSync, appendFileSync } from 'node:fs'
@@ -39,7 +52,27 @@ export function vocabEntries(entries) {
   return entries.filter((e) => /(^|\/)vocab\//.test(e.url))
 }
 
-export function renderSummary(entries, offenders) {
+/**
+ * Runtime-cache routes over the vocab in a built sw.js — the ones that must not
+ * exist (#670).
+ *
+ * Matches both halves of what such a rule emits: the cache name, and a route
+ * whose URL pattern tests a `/vocab/…` path. Either alone is enough to fail;
+ * looking for both means a rule re-added under a different cache name, or the
+ * same name attached to a different matcher, is still caught.
+ */
+export function vocabRuntimeRoutes(swSource) {
+  const found = []
+  if (/cacheName:\s*["']([^"']*vocab[^"']*)["']/.test(swSource)) {
+    found.push(`a runtime cache named "${RegExp.$1}"`)
+  }
+  if (/registerRoute\([^;]{0,400}?\\\/vocab\\\//.test(swSource)) {
+    found.push('a registerRoute() whose URL pattern matches /vocab/')
+  }
+  return found
+}
+
+export function renderSummary(entries, offenders, runtimeRoutes = []) {
   const lines = []
   if (offenders.length) {
     lines.push('### 🗂️ Precache partition — broken', '')
@@ -62,6 +95,19 @@ export function renderSummary(entries, offenders) {
       `App shell precached in ${entries.length} entries; no \`vocab/**\` among them, ` +
         'as intended (#266).',
     )
+  }
+  if (runtimeRoutes.length) {
+    lines.push('', '### 🗂️ Vocab runtime cache — should not exist', '')
+    lines.push('The service worker has been given a vocab cache of its own again (#670):', '')
+    for (const what of runtimeRoutes) lines.push(`- ${what}`)
+    lines.push(
+      '',
+      'It was removed because it was always empty on the path a learner takes, ' +
+        'while shadowing `manifest.json` and hiding a deploy for a launch. ' +
+        'See docs/vocab-caching.md.',
+    )
+  } else {
+    lines.push('', 'No vocab runtime cache, as intended (#670).')
   }
   return lines.join('\n')
 }
@@ -90,13 +136,14 @@ export function main() {
   }
 
   const offenders = vocabEntries(entries)
-  const markdown = renderSummary(entries, offenders)
+  const runtimeRoutes = vocabRuntimeRoutes(source)
+  const markdown = renderSummary(entries, offenders, runtimeRoutes)
   if (process.env.GITHUB_STEP_SUMMARY) {
     appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${markdown}\n`)
   }
   console.log(markdown)
 
-  if (offenders.length) process.exitCode = 1
+  if (offenders.length || runtimeRoutes.length) process.exitCode = 1
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main()

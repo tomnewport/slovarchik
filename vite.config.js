@@ -86,24 +86,31 @@ export default defineConfig({
         // the build-generated `.json`).
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,json}'],
         globIgnores: ['**/vocab/**'],
-        // Serve the vocab from a separate runtime cache instead: cache-first for
-        // instant, offline-capable loads once a file has been seen, with a
-        // background revalidation that pulls fresh bytes when online. This keeps
-        // the app fully usable offline after the first online visit, while
-        // decoupling app-shell updates from the multi-MB word data — deploys no
-        // longer re-ship vocab the client already has. (The store in
-        // src/stores/vocab.js still owns its own IndexedDB cache + manifest-hash
-        // sync; this SW cache is the network-fetch layer beneath it.)
-        runtimeCaching: [
-          {
-            urlPattern: ({ url }) => /\/vocab\/.*\.json$/.test(url.pathname),
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'slovarchik-vocab',
-              cacheableResponse: { statuses: [0, 200] },
-            },
-          },
-        ],
+        // Nothing else caches the vocab at the network layer, deliberately (#670).
+        //
+        // There used to be a `runtimeCaching` rule giving vocab/*.json its own
+        // StaleWhileRevalidate cache, on the reasoning that it made the corpus
+        // available offline. It did not, and the e2e suite proved it: the
+        // `slovarchik-vocab` cache is empty in a real browser on the path a
+        // learner actually takes.
+        //
+        // Two things kept it empty. On a first visit the worker installs but
+        // does not yet control the page that registered it, so `syncFromNetwork`'s
+        // twelve fetches never reach it. On every visit after that the manifest
+        // hashes match, so the store issues no vocab fetch at all — it reads
+        // IndexedDB. What carries the corpus across a network cut has always
+        // been `src/stores/vocab.js`'s IndexedDB cache, not the worker.
+        //
+        // It was not merely inert. The rule also matched `manifest.json`, and a
+        // worker intercepts a request regardless of the `cache: 'no-cache'` the
+        // store passes to `fetch` — that option controls the HTTP cache, not the
+        // worker — so the manifest was answered from the previous launch's copy.
+        // Since its content hashes are the only thing that tells the store a
+        // word file changed, a deploy's vocab change stayed invisible until the
+        // launch after next. Removing the rule fixes that outright.
+        //
+        // #266's split is untouched: the app shell is still precached, the vocab
+        // still is not, so a word change does not re-ship the shell.
       },
     }),
   ],

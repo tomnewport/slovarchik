@@ -137,6 +137,9 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
 e2e/                    # Playwright specs (homepage, full-session, and offline —
                         #   the last runs against the preview build, where the SW exists)
 docs/                   # design notes for in-flight features
+                        #   vocab-caching.md — why the corpus is cached twice
+                        #     (Cache Storage + IndexedDB), what each copy is for,
+                        #     and why manifest.json is kept out of the SW rule
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
                         #   check-ci.mjs runs CI's `test` job locally, in order
                         #   size-summary.mjs gates the shipped payload (entry chunk,

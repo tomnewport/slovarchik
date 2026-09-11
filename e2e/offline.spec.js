@@ -17,12 +17,12 @@ import { test, expect } from '@playwright/test'
 //     it is not yet controlled by it, so an offline reload at that point gets
 //     ERR_INTERNET_DISCONNECTED. `primeCaches` reloads once while still online,
 //     which is what a real returning learner does anyway.
-//   - What actually carries the words across the network cut is IndexedDB, not
-//     the service worker's `slovarchik-vocab` runtime cache. The store reads
-//     IndexedDB first, so on the second visit it never re-fetches the JSON and
-//     the SW runtime cache is never populated at all. Asserting on that cache
-//     here would hang. (That the corpus is cached twice, and that one copy goes
-//     unused on this path, is #670.)
+//   - What carries the words across the network cut is IndexedDB, and only
+//     IndexedDB. There was once a `slovarchik-vocab` runtime cache in the
+//     workbox config as well; this spec is what showed it was always empty on
+//     the path a learner takes, and #670 removed it. The last two tests below
+//     pin that: one that the cache is not recreated, one that the IndexedDB
+//     copy it was supposed to be backing up is really there.
 
 test.setTimeout(120_000)
 
@@ -155,4 +155,20 @@ test('the service worker claiming a first visit does not reload the page', async
   await page.waitForTimeout(3_000)
 
   expect(await page.evaluate(() => window.__slovarchikDocumentSentinel)).toBe('first-visit')
+})
+
+test('the corpus that survives the cut is the one in IndexedDB', async ({ page }) => {
+  // The other half of #670. The vocab's service-worker cache was removed
+  // because it was always empty; what actually carries the words across a
+  // network cut is IndexedDB, and the four tests above lean on that without
+  // ever saying so. This says it.
+  //
+  // That the runtime cache stays removed is NOT asserted here, deliberately.
+  // Workbox opens a runtime cache lazily, on the first request it handles, and
+  // no vocab request ever reaches the worker — so the cache is absent whether
+  // or not the rule exists, and `caches.keys()` cannot tell the two apart. An
+  // assertion here would pass either way. `scripts/check-precache.mjs` reads
+  // the generated sw.js instead, where the difference is visible.
+  await primeCaches(page)
+  expect(await cachedDocCount(page)).toBeGreaterThan(0)
 })

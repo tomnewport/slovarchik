@@ -3,7 +3,12 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { precacheEntries, vocabEntries, renderSummary } from './check-precache.mjs'
+import {
+  precacheEntries,
+  vocabEntries,
+  vocabRuntimeRoutes,
+  renderSummary,
+} from './check-precache.mjs'
 
 const repo = join(dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -85,5 +90,36 @@ describe('the workbox config still declares the partition', () => {
   it('keeps a runtime caching rule for the vocab instead', () => {
     expect(config).toMatch(/runtimeCaching/)
     expect(config).toMatch(/slovarchik-vocab/)
+  })
+})
+
+describe('vocabRuntimeRoutes', () => {
+  const withRule =
+    'registerRoute(({url:s})=>/\\/vocab\\/.*\\.json$/.test(s.pathname),' +
+    'new e.StaleWhileRevalidate({cacheName:"slovarchik-vocab",plugins:[]}))'
+
+  it('catches the cache name and the route, so either alone would fail', () => {
+    expect(vocabRuntimeRoutes(withRule)).toHaveLength(2)
+  })
+
+  it('finds nothing once the rule is gone', () => {
+    expect(vocabRuntimeRoutes('registerRoute(new e.NavigationRoute(h("index.html")))')).toEqual([])
+  })
+
+  it('catches a vocab cache re-added under a different name', () => {
+    expect(vocabRuntimeRoutes('new e.CacheFirst({cacheName:"my-vocab-bytes"})')).toEqual([
+      'a runtime cache named "my-vocab-bytes"',
+    ])
+  })
+
+  it('catches a vocab route attached to an innocuous cache name', () => {
+    const sneaky = 'registerRoute(({url:s})=>/\\/vocab\\/x/.test(s.pathname),new e.CacheFirst({cacheName:"assets"}))'
+    expect(vocabRuntimeRoutes(sneaky)).toEqual(['a registerRoute() whose URL pattern matches /vocab/'])
+  })
+
+  it('does not fire on the precache manifest merely listing a vocab url', () => {
+    expect(vocabRuntimeRoutes('precacheAndRoute([{url:"vocab/nouns.json",revision:"a1"}])')).toEqual(
+      [],
+    )
   })
 })
