@@ -773,7 +773,9 @@ export function shapePhrases(words, formIndex, notes = null) {
         ? ex.en_alt.map((s) => String(s ?? '').trim()).filter(Boolean)
         : []
       const enNotes = notes ? (notes[out.length]?.n ?? []) : phraseAmbiguities(ru, ambiguity, en)
-      out.push({ id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes })
+      /** @type {ShapedPhrase} */
+      const phrase = { id, ru, en, enAlt, source: w.key, cefr: w.cefr, enNotes }
+      out.push(phrase)
     }
   }
   // English→Russian prompts are only answerable when the English picks out one
@@ -797,6 +799,25 @@ export function shapePhrases(words, formIndex, notes = null) {
 }
 
 /**
+ * One shaped phrase as the drills consume it.
+ *
+ * `enHint` is attached after construction — it is a property of the whole
+ * corpus (whether this English prompt picks out one Russian sentence) and no
+ * single phrase can decide it — so it is optional here rather than assigned in
+ * the literal. Naming the record is what lets that assignment typecheck (#666).
+ *
+ * @typedef {object} ShapedPhrase
+ * @property {string} id
+ * @property {string} ru
+ * @property {string} en
+ * @property {string[]} enAlt accepted alternative renderings
+ * @property {string} source the word key this example was authored under
+ * @property {string} [cefr]
+ * @property {string[]} enNotes gloss notes that disambiguate a shared prompt
+ * @property {string} [enHint] set only where the prompt is ambiguous
+ */
+
+/**
  * The build-time half of the above: reduce shaped phrases to just the parts
  * that were expensive to derive, keyed by their position in the list.
  *
@@ -812,6 +833,7 @@ export function shapePhrases(words, formIndex, notes = null) {
  *   neither an annotation nor a hint (about 80% of them) is simply absent.
  */
 export function phraseNotesFrom(phrases) {
+  /** @type {Object<string, {n?: string[], h?: string}>} */
   const out = {}
   ;(phrases ?? []).forEach((p, i) => {
     const entry = {}

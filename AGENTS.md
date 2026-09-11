@@ -50,6 +50,7 @@ playwright.config.js    # e2e config. Two servers: `npm run dev` on :5173 for th
                         #   vite-plugin-pwa registers no service worker under `dev`,
                         #   so offline/precache behaviour is only testable on a build
 eslint.config.js        # flat config: js.recommended + eslint-plugin-vue
+jsconfig.json           # the `checkJs` probe (#666): non-strict, logic layers only, no emit
 src/
   main.js               # entry: createApp(App).use(router).mount('#app')
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
@@ -128,6 +129,7 @@ src/
                         #   coalesce  — share one in-flight run between concurrent callers, so the boot
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
                         #     their work when main.js and a deep-linked view both start them
+  types/globals.d.ts    # browser globals the DOM lib omits (prefixed Web Speech/Audio)
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
@@ -148,6 +150,8 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     the table to the job summary on pass and on fail
                         #   check-precache.mjs asserts vocab/** stays out of the
                         #     generated SW precache manifest (the #266 partition)
+                        #   typecheck.mjs holds the JSDoc/signature drift to a per-file
+                        #     ratchet (typecheck-baseline.json); meant to reach zero
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
@@ -173,6 +177,7 @@ npm test            # run unit tests once (vitest)
 npm run test:watch  # watch mode
 npm run test:coverage # same suite + coverage over src/lib, src/stores, src/composables
 npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
+npm run typecheck   # non-strict `tsc --checkJs` over src/lib, src/stores, src/composables
 npm run build       # production build into dist/
 npm run preview     # serve the production build
 npm run test:e2e    # Playwright end-to-end tests
@@ -193,7 +198,14 @@ npm run check:corpus  # just the three gates above, in CI's order (~5s)
 npm run check:ci      # the whole CI `test` job, in order, stopping where it would
 ```
 
-CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `verify:review`
+The typecheck is a **per-file ratchet**, not a clean gate: the JSDoc in
+`src/lib` had already drifted from the signatures it describes when it landed,
+so `scripts/typecheck-baseline.json` records the count per file and CI fails
+only when one grows. It is meant to reach zero — lower an entry when you fix
+some, delete it at zero, never raise one. Per file rather than one total so a
+new error cannot hide behind a fix somewhere else (#666).
+
+CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `typecheck`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
 `check:prompts`, `test:coverage`, `build`, `check:size` and `check:precache` in
 its `test` job, plus the Playwright `e2e` job — every one of them on every push,
