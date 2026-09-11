@@ -25,6 +25,8 @@
     "check:inflect": "node scripts/annotate-inflect.mjs --check",
     "check:inflect:cases": "node scripts/triage-inflect.mjs --verify",
     "check:prompts": "node scripts/check-prompt-ambiguity.mjs",
+    "check:parts": "node scripts/check-parts.mjs",
+    "gen:parts": "node scripts/gen-parts.mjs",
     "check:size": "node scripts/size-summary.mjs",
     "check:precache": "node scripts/check-precache.mjs",
     "audit:gender": "node scripts/gender-audit.mjs",

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ACHIEVEMENTS, earnedSet, newlyUnlocked, achievementById, buildCefrStats, stampEarned } from './achievements.js'
+import { ACHIEVEMENTS, earnedSet, newlyUnlocked, achievementById, buildCefrStats, stampEarned, partAchievements, earnedPartSet } from './achievements.js'
 
 describe('ACHIEVEMENTS', () => {
   it('has unique ids', () => {
@@ -195,5 +195,47 @@ describe('stampEarned', () => {
 
   it('treats a missing stamp as empty', () => {
     expect(stampEarned(undefined, new Set(['learn-1']), 5).next).toEqual({ 'learn-1': 5 })
+  })
+})
+
+describe('part milestones (#674)', () => {
+  const parts = [{ id: 'A2-1', name: 'A2 Part I' }]
+
+  it('offers half-way and completion for each part', () => {
+    expect(partAchievements(parts).map((a) => a.id)).toEqual(['part-A2-1-half', 'part-A2-1-done'])
+  })
+
+  it('names them after the part the learner sees', () => {
+    expect(partAchievements(parts)[1].label).toBe('A2 Part I complete')
+  })
+
+  it('grants half way at exactly half, and not before', () => {
+    expect(earnedPartSet(parts, { 'A2-1': { total: 10, learned: 4 } }).has('part-A2-1-half')).toBe(false)
+    expect(earnedPartSet(parts, { 'A2-1': { total: 10, learned: 5 } }).has('part-A2-1-half')).toBe(true)
+  })
+
+  it('rounds half up, so an odd part needs the larger half', () => {
+    expect(earnedPartSet(parts, { 'A2-1': { total: 9, learned: 4 } }).has('part-A2-1-half')).toBe(false)
+    expect(earnedPartSet(parts, { 'A2-1': { total: 9, learned: 5 } }).has('part-A2-1-half')).toBe(true)
+  })
+
+  it('grants completion only when every word is learned', () => {
+    const nearly = earnedPartSet(parts, { 'A2-1': { total: 10, learned: 9 } })
+    expect(nearly.has('part-A2-1-half')).toBe(true)
+    expect(nearly.has('part-A2-1-done')).toBe(false)
+    expect(earnedPartSet(parts, { 'A2-1': { total: 10, learned: 10 } }).has('part-A2-1-done')).toBe(true)
+  })
+
+  it('grants nothing for a part with no words', () => {
+    expect(earnedPartSet(parts, { 'A2-1': { total: 0, learned: 0 } }).size).toBe(0)
+  })
+
+  it('grants nothing when the part has no stats at all', () => {
+    expect(earnedPartSet(parts, {}).size).toBe(0)
+  })
+
+  it('survives having no parts', () => {
+    expect(partAchievements(null)).toEqual([])
+    expect(earnedPartSet(null, {}).size).toBe(0)
   })
 })

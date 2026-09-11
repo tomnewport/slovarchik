@@ -1,0 +1,280 @@
+# parts.yml — the curriculum parts (#674). MAINTAINER-OWNED.
+#
+# A part is a chunk of about 500 words that a learner works through as one
+# goal: "A2 Part I", "B1 Part III". Each is a bundle of topic collections
+# inside a single CEFR level.
+#
+# This file is committed rather than computed because bin-packing is not
+# stable under insertion — one new word can reshuffle several collections —
+# and a goal that rearranges itself as the corpus grows is no goal at all.
+#
+# `collections` lists the topics a part holds. A collection named by several
+# parts is consumed in part order: a part with a `take` count for it gets
+# that many words (ordered by word key), and the part naming it *without* a
+# count takes whatever is left — which is how new words find a home without
+# anyone editing this file.
+#
+# Bounds, enforced by `npm run check:parts`: 250–750 words, 500 targeted.
+# The floor is waived for a level smaller than it (C1 has 25 words).
+#
+# To change it: `npm run gen:parts -- --repack --write`, which moves the
+# minimum needed to bring every part back inside its bounds, then read the
+# diff. See docs/cefr-parts.md.
+#
+# Sizes when last generated:
+#   A1 Part I     552
+#   A2 Part I     483
+#   A2 Part II    443
+#   B1 Part I     462
+#   B1 Part II    439
+#   B1 Part III   493
+#   B1 Part IV    687
+#   B2 Part I     665
+#   C1 Part I      25
+parts:
+  - id: A1-1
+    level: A1
+    ordinal: 1
+    collections:
+      - (glue)
+      - daily life
+      - in the kitchen
+      - the calendar
+      - communication
+      - school
+      - family
+      - time
+      - nature
+      - measurement and calculation
+      - motion
+      - people
+      - public transport
+      - feelings and sensations
+      - places
+      - the arts
+      - home
+      - parts of the body
+      - reading
+      - abstract
+      - clothes
+      - colours and textures
+      - architecture
+      - hobbies and pastimes
+      - holiday
+      - shopping
+      - travel
+      - finance
+      - food and drink
+      - geography
+      - technology
+      - animals
+      - directions
+      - nationalities
+      - sickness and health
+      - in the garden
+      - life and death
+      - DIY
+      - restaurants and cafes
+      - romance and dating
+      - weather
+      - work
+  - id: A2-1
+    level: A2
+    ordinal: 1
+    collections:
+      - daily life
+      - food and drink
+      - people
+      - communication
+      - (glue)
+      - feelings and sensations
+      - geography
+      - measurement and calculation
+      - motion
+      - school
+  - id: A2-2
+    level: A2
+    ordinal: 2
+    collections:
+      - clothes
+      - nationalities
+      - home
+      - nature
+      - places
+      - time
+      - animals
+      - in the kitchen
+      - abstract
+      - parts of the body
+      - finance
+      - public transport
+      - reading
+      - restaurants and cafes
+      - sickness and health
+      - technology
+      - the arts
+      - travel
+      - colours and textures
+      - family
+      - hobbies and pastimes
+      - work
+      - holiday
+      - romance and dating
+      - shapes and patterns
+      - directions
+      - in the garden
+      - shopping
+      - sport
+      - architecture
+      - the calendar
+      - the law
+      - war and peace
+      - history
+      - craft and construction
+      - character
+      - faith
+      - DIY
+      - life and death
+      - politics
+      - science
+  - id: B1-1
+    level: B1
+    ordinal: 1
+    collections:
+      - daily life
+      - feelings and sensations
+  - id: B1-2
+    level: B1
+    ordinal: 2
+    collections:
+      - communication
+      - work
+      - abstract
+      - people
+      - motion
+  - id: B1-3
+    level: B1
+    ordinal: 3
+    collections:
+      - food and drink
+      - nature
+      - measurement and calculation
+      - technology
+      - (glue)
+      - the arts
+      - clothes
+      - animals
+      - time
+  - id: B1-4
+    level: B1
+    ordinal: 4
+    collections:
+      - character
+      - the law
+      - sickness and health
+      - reading
+      - home
+      - places
+      - school
+      - politics
+      - geography
+      - military
+      - directions
+      - travel
+      - parts of the body
+      - history
+      - colours and textures
+      - finance
+      - hobbies and pastimes
+      - public transport
+      - war and peace
+      - DIY
+      - shapes and patterns
+      - sport
+      - science
+      - craft and construction
+      - romance and dating
+      - architecture
+      - in the garden
+      - shopping
+      - holiday
+      - restaurants and cafes
+      - family
+      - faith
+      - in the kitchen
+      - society
+      - life and death
+      - nationalities
+      - the calendar
+      - weather
+      - plants
+  - id: B2-1
+    level: B2
+    ordinal: 1
+    collections:
+      - nature
+      - faith
+      - the law
+      - feelings and sensations
+      - communication
+      - work
+      - (glue)
+      - military
+      - people
+      - war and peace
+      - daily life
+      - abstract
+      - DIY
+      - measurement and calculation
+      - finance
+      - character
+      - family
+      - science
+      - sickness and health
+      - technology
+      - politics
+      - the arts
+      - time
+      - history
+      - animals
+      - romance and dating
+      - reading
+      - holiday
+      - in the garden
+      - motion
+      - shapes and patterns
+      - parts of the body
+      - society
+      - architecture
+      - clothes
+      - food and drink
+      - places
+      - travel
+      - craft and construction
+      - colours and textures
+      - home
+      - hobbies and pastimes
+      - life and death
+      - sport
+      - directions
+      - geography
+      - school
+      - shopping
+      - in the kitchen
+      - public transport
+      - restaurants and cafes
+      - the calendar
+      - weather
+  - id: C1-1
+    level: C1
+    ordinal: 1
+    collections:
+      - nature
+      - (glue)
+      - history
+      - military
+      - animals
+      - clothes
+      - daily life
+      - faith
+      - in the kitchen

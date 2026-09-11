@@ -81,6 +81,64 @@ export function newlyUnlocked(prev, next) {
 }
 
 /**
+ * The milestones for one curriculum part (#674): half way, and complete.
+ *
+ * These are generated rather than listed with the fixed achievements above
+ * because the parts themselves are data — the corpus decides how many there
+ * are. Their ids are built from the part id, which `check:parts` holds stable,
+ * because `seenAchievements` persists them: an id that changed meaning would
+ * silently re-fire, or never fire again.
+ *
+ * @param {Array<{id: string, name: string}>} parts
+ * @returns {Array<{id: string, type: string, part: string, at: number,
+ *   icon: string, label: string, desc: string}>}
+ */
+export function partAchievements(parts) {
+  return (parts ?? []).flatMap((p) => [
+    {
+      id: `part-${p.id}-half`,
+      type: 'part',
+      part: p.id,
+      at: 0.5,
+      icon: '🌗',
+      label: `${p.name} half way`,
+      desc: `Learned half of ${p.name}`,
+    },
+    {
+      id: `part-${p.id}-done`,
+      type: 'part',
+      part: p.id,
+      at: 1,
+      icon: '🌕',
+      label: `${p.name} complete`,
+      desc: `Learned every word in ${p.name}`,
+    },
+  ])
+}
+
+/**
+ * Which part milestones the learner currently meets.
+ *
+ * "Currently" is the operative word, and the reason `stampEarned` exists: a part
+ * gains words as the corpus grows, so a completion met today can be unmet
+ * tomorrow. The stamp is what makes it permanent; this only reports the live
+ * comparison.
+ *
+ * @param {Array<{id: string, name: string}>} parts
+ * @param {Record<string, {total: number, learned: number}>} partStats
+ * @returns {Set<string>}
+ */
+export function earnedPartSet(parts, partStats) {
+  const earned = new Set()
+  for (const a of partAchievements(parts)) {
+    const s = partStats?.[a.part]
+    if (!s || s.total <= 0) continue
+    if (s.learned >= Math.ceil(s.total * a.at)) earned.add(a.id)
+  }
+  return earned
+}
+
+/**
  * Fold the currently-earned set into the stamped record, which only ever grows.
  *
  * {@link earnedSet} answers "does the learner meet this threshold *right now*",

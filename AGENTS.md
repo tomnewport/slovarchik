@@ -108,6 +108,9 @@ src/
                         #     third-person only, impersonal), in a sentence beside the table
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
                         #     (big tables one column at a time until built with nothing misplaced)
+                        #   curriculum  — the ~500-word PARTS a learner works through ("A2 Part I"),
+                        #     read from the committed public/vocab/parts.yml; a part is a bundle of
+                        #     topic collections inside one CEFR level (#674)
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   wordFacts  — a word's authored facts (build/root/origin/region/mnemonic) and its related words, derived + authored
                         #   factCoverage  — which words most deserve a fact, and the sound-alike and diminutive shortlists
@@ -138,6 +141,10 @@ src/
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
+                        #   + parts.yml — the curriculum parts (#674). COMMITTED and
+                        #   maintainer-owned, unlike the generated files below: the
+                        #   packing is not stable under corpus growth, so a person
+                        #   owns it and `check:parts` says when it has drifted
                         #   + phrase-notes.json — the corpus-wide phrase
                         #   annotations derived at build time (#657); generated,
                         #   not committed, like the manifest and the *.json
@@ -155,6 +162,9 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     the table to the job summary on pass and on fail
                         #   check-precache.mjs asserts vocab/** stays out of the
                         #     generated SW precache manifest (the #266 partition)
+                        #   check-parts.mjs is the curriculum-parts GATE; gen-parts.mjs is
+                        #     the worklist that proposes a packing (--repack for the
+                        #     minimal repair when the gate fails)
                         #   typecheck.mjs holds the JSDoc/signature drift to a per-file
                         #     ratchet (typecheck-baseline.json); meant to reach zero
 ```
@@ -192,6 +202,7 @@ npm run test:e2e    # Playwright end-to-end tests
 npm run verify:review        # replaying review/proposals reproduces the committed vocab
 npm run check:inflect:cases  # every inflect: annotation agrees with the case its preposition governs
 npm run check:prompts        # no growth in English prompts matching more than one Russian sentence
+npm run check:parts          # parts.yml still describes the corpus (no orphans, bounds held)
 
 # Build gate — reads dist/, so it runs after `npm run build`:
 npm run check:size    # entry chunk, entry CSS and the vocab JSON against
@@ -199,7 +210,7 @@ npm run check:size    # entry chunk, entry CSS and the vocab JSON against
 npm run check:precache  # vocab/** is absent from the generated SW precache manifest
 
 # The two that answer "did I break CI?"
-npm run check:corpus  # just the three gates above, in CI's order (~5s)
+npm run check:corpus  # just the four gates above, in CI's order (~5s)
 npm run check:ci      # the whole CI `test` job, in order, stopping where it would
 ```
 
@@ -213,8 +224,8 @@ error cannot hide behind a fix somewhere else (#666).
 
 CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `typecheck`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
-`check:prompts`, `test:coverage`, `build`, `check:size` and `check:precache` in
-its `test` job, plus the Playwright `e2e` job — every one of them on every push,
+`check:prompts`, `check:parts`, `test:coverage`, `build`, `check:size` and
+`check:precache` in its `test` job, plus the Playwright `e2e` job — every one of them on every push,
 publishing the coverage table to the run's job summary via
 `scripts/coverage-summary.mjs` and the size table via `scripts/size-summary.mjs`.
 `npm run check:ci` runs that same `test` job list locally and gives the same

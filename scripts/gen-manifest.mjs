@@ -56,6 +56,7 @@ export const FILES = [
   { pos: 'verb', file: 'verbs.yml' },
   { pos: 'adjective', file: 'adjectives.yml' },
   { pos: 'grammar-rules', file: 'grammar-rules.yml' },
+  { pos: 'parts', file: 'parts.yml' },
   { pos: 'adverb', file: 'adverbs.yml' },
   { pos: 'preposition', file: 'prepositions.yml' },
   { pos: 'conjunction', file: 'conjunctions.yml' },
@@ -72,6 +73,9 @@ export const MANIFEST_VERSION = 1
  * grammar rules.
  */
 export const PHRASE_NOTES_POS = 'phrase-notes'
+
+/** The curriculum parts (#674) — structure over the corpus, not words in it. */
+export const PARTS_POS = 'parts'
 export const PHRASE_NOTES_FILE = 'phrase-notes.json'
 
 /** The JSON filename the client fetches for a given `.yml` source file. */
@@ -97,11 +101,15 @@ export function emitVocabJson(dir) {
 
 /**
  * The word-carrying manifest entries — everything `buildWords` is fed. The
- * grammar rules and the phrase notes themselves are excluded: the rules are not
- * words, and the notes cannot be part of the token that validates them.
+ * grammar rules, the curriculum parts and the phrase notes themselves are
+ * excluded: the rules and the parts are not words (the parts are structure
+ * *over* the words), and the notes cannot be part of the token that validates
+ * them.
  */
 export const wordEntries = (entries) =>
-  entries.filter((e) => e.pos !== 'grammar-rules' && e.pos !== PHRASE_NOTES_POS)
+  entries.filter(
+    (e) => e.pos !== 'grammar-rules' && e.pos !== PARTS_POS && e.pos !== PHRASE_NOTES_POS,
+  )
 
 /**
  * Emit `phrase-notes.json`: the parts of `shapePhrases` that are expensive to

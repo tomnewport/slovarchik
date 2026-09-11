@@ -57,15 +57,26 @@ export function batchSize(level) {
 }
 
 /**
- * Refine eligible words to the lowest CEFR level present, topping up with
- * random words from successively higher levels until at least `size` are
- * available (or the words run out).
+ * Refine eligible words to the lowest rank present, topping up with random
+ * words from successively higher ranks until at least `size` are available (or
+ * the words run out).
+ *
+ * Rank defaults to the CEFR level, which is what this did before curriculum
+ * parts existed (#674) and remains the right answer wherever the parts have not
+ * loaded. Callers that *have* the parts pass a rank derived from them instead —
+ * so a learner works through "A2 Part I" before "A2 Part II" rather than facing
+ * the whole of A2 at once, which is the point of splitting the levels up.
+ *
+ * @param {object[]} words
+ * @param {number} size
+ * @param {() => number} [rng]
+ * @param {(word: object) => number} [rankOf] lower sorts earlier
  */
-export function refineToLowest(words, size, rng = Math.random) {
+export function refineToLowest(words, size, rng = Math.random, rankOf = (w) => cefrRank(w.cefr)) {
   if (words.length === 0) return []
   const byRank = new Map()
   for (const w of words) {
-    const r = cefrRank(w.cefr)
+    const r = rankOf(w)
     if (!byRank.has(r)) byRank.set(r, [])
     byRank.get(r).push(w)
   }
@@ -188,6 +199,8 @@ export function assembleOptions(pool, size, level, rng = Math.random) {
  * @param {(word: object) => string} [args.stateOf] current state per word
  * @param {'learning'|'mastery'} [args.level]
  * @param {() => number} [args.rng]
+ * @param {(word: object) => number} [args.rankOf] curriculum order; defaults to
+ *   the CEFR level (see {@link refineToLowest})
  * @returns {object[]} up to five batch options
  */
 export function buildBatchOptions({
@@ -195,6 +208,7 @@ export function buildBatchOptions({
   stateOf = () => 'unknown',
   level = 'learning',
   rng = Math.random,
+  rankOf = undefined,
 } = {}) {
   const size = batchSize(level)
   const eligible = words.filter((w) => isEligible(stateOf(w), level))
@@ -213,11 +227,11 @@ export function buildBatchOptions({
     const isGlue = (w) => GLUE_POS.includes(w.pos)
     const glueEligible = eligible.filter(isGlue)
     mainEligible = eligible.filter((w) => !isGlue(w))
-    if (glueEligible.length) refinedGlue = refineToLowest(glueEligible, GLUE_PER_BATCH, rng)
+    if (glueEligible.length) refinedGlue = refineToLowest(glueEligible, GLUE_PER_BATCH, rng, rankOf)
   }
 
   if (mainEligible.length === 0) return []
-  const pool = refineToLowest(mainEligible, size, rng)
+  const pool = refineToLowest(mainEligible, size, rng, rankOf)
   const options = assembleOptions(pool, size, level, rng)
   return options.map((opt) => addGlue(opt, refinedGlue, rng))
 }

@@ -15,12 +15,21 @@ import {
 } from '../../lib/progression.js'
 import { tableKey } from '../../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../../lib/schedule.js'
-import { earnedSet, buildCefrStats, achievementById, stampEarned } from '../../lib/achievements.js'
+import {
+  earnedSet,
+  earnedPartSet,
+  partAchievements,
+  buildCefrStats,
+  achievementById,
+  stampEarned,
+} from '../../lib/achievements.js'
+import { buildPartStats } from '../../lib/curriculum.js'
 
 import { state, wordIndex, wordRecord, rank, events, learnableVocab } from './state.js'
 import { persist, saveMeta } from './persistence.js'
 import { logActivity } from './activity.js'
 import { hasMet } from './encounters.js'
+import { curriculumParts } from '../vocab.js'
 
 // Keep storage bounded: only the most recent attempts per (level, dimension)
 // matter to the model (windows of four; speaking needs three). Ten is plenty.
@@ -107,6 +116,18 @@ export const masteredCount = computed(
 /** CEFR-level stats (total / met / learned / mastered) from vocab + progress. */
 export const cefrStats = computed(() => buildCefrStats(learnableVocab.value, stateOf, hasMet))
 
+/** The same four counts per curriculum part (#674) — the unit a learner works
+ *  through, and what the Progress screen's bars are keyed on. */
+export const partStats = computed(() => buildPartStats(curriculumParts.value, stateOf, hasMet))
+
+/** Every achievement that can be granted, fixed and part-derived alike. */
+export const achievementCatalogue = computed(() => partAchievements(curriculumParts.value))
+
+/** Look up an achievement by id across both catalogues. */
+function anyAchievementById(id) {
+  return achievementById(id) ?? achievementCatalogue.value.find((a) => a.id === id)
+}
+
 /**
  * All achievement IDs the learner has earned (reactive) — those meeting their
  * threshold right now, *plus* every one ever stamped. The union is taken here
@@ -118,6 +139,7 @@ export const earnedAchievements = computed(
     new Set([
       ...Object.keys(state.achievementsEarnedAt),
       ...earnedSet(learnedCount.value, masteredCount.value, cefrStats.value),
+      ...earnedPartSet(curriculumParts.value, partStats.value),
     ]),
 )
 
@@ -150,7 +172,7 @@ export const pendingAchievements = computed(() => {
   const seen = state.seenAchievements
   return [...earned]
     .filter((id) => !seen.has(id))
-    .map((id) => achievementById(id))
+    .map((id) => anyAchievementById(id))
     .filter(Boolean)
 })
 

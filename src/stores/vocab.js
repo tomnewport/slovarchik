@@ -19,9 +19,11 @@ import {
   shapeNouns,
   shapePhrases,
   shapeContextPhrases,
+  learnableWords,
 } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import { buildFormIndex } from '../lib/phraseHint.js'
+import { assignParts } from '../lib/curriculum.js'
 import * as idb from '../lib/idb.js'
 import { coalesce } from '../lib/coalesce.js'
 
@@ -33,6 +35,9 @@ const RULES_POS = 'grammar-rules'
  * file and must be kept out of `buildWords`.
  */
 const PHRASE_NOTES_POS = 'phrase-notes'
+// The curriculum parts (#674): structure over the corpus rather than words in
+// it, so it rides the same manifest but never reaches `buildWords`.
+const PARTS_POS = 'parts'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const manifestUrl = () => `${BASE}vocab/manifest.json`
@@ -46,6 +51,8 @@ export const state = reactive({
   contextPhrases: new Map(),
   /** Parsed grammar-rules.yml `rules` map (rule id → explanation), or {}. */
   rules: {},
+  /** Parsed parts.yml — the curriculum parts definition (#674), or null. */
+  partsDef: null,
   /**
    * Build-time phrase annotations (ordinal → `{n, h}`) when the cached corpus is
    * the one they were derived from, else null and `shapePhrases` derives them.
@@ -79,6 +86,23 @@ export const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, 
 export const formIndex = computed(() => buildFormIndex(state.words))
 
 /**
+ * The curriculum parts (#674), each with the words it holds — the unit a
+ * learner actually works through. Empty until `parts.yml` has loaded, which the
+ * callers treat as "fall back to plain CEFR order" rather than as an error: the
+ * app has to stay usable on a cache written before parts shipped.
+ */
+export const curriculumParts = computed(() =>
+  state.partsDef ? assignParts(learnableWords(state.words), state.partsDef).parts : [],
+)
+
+/** Word key → the id of the part that teaches it. */
+export const partOfWord = computed(() => {
+  const map = new Map()
+  for (const part of curriculumParts.value) for (const w of part.words) map.set(w.key, part.id)
+  return map
+})
+
+/**
  * Stamp `hasContextDrill` on every word so the progression model knows whether
  * the phrase-completion mastery requirement applies. A word qualifies only if at
  * least one annotated usage example teaches it; without any `inflect:`
@@ -93,14 +117,18 @@ function rebuild(records) {
   // stale entry from the pre-JSON cache format (raw YAML text under `content`);
   // it is ignored here and pruned by the next successful network sync.
   const usable = records.filter((r) => r.doc)
-  const sources = usable.filter((r) => r.pos !== RULES_POS && r.pos !== PHRASE_NOTES_POS)
+  const sources = usable.filter(
+    (r) => r.pos !== RULES_POS && r.pos !== PHRASE_NOTES_POS && r.pos !== PARTS_POS,
+  )
   const words = buildWords(sources.map((r) => ({ pos: r.pos, doc: r.doc })))
   const phrasesByKey = indexPhrases(shapeContextPhrases(words))
   const rules = usable.find((r) => r.pos === RULES_POS)?.doc?.rules ?? {}
+  const partsDef = usable.find((r) => r.pos === PARTS_POS)?.doc ?? null
   stampContextDrill(words, phrasesByKey)
   state.words = words
   state.contextPhrases = phrasesByKey
   state.rules = rules
+  state.partsDef = partsDef
   // The build-time annotations are keyed by position in the phrase list, which
   // only means anything against the exact word files they were derived from.
   // Files are cached and invalidated one at a time, so a half-updated cache is

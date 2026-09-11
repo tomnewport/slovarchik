@@ -309,9 +309,17 @@ try {
     }
   }
   const curriculum = new Map()
+  // Only the files that actually carry words. `public/vocab/` also holds
+  // structural YAML — grammar-rules.yml, and parts.yml (#674) — which no
+  // proposal can touch and which need not have existed at the base revision,
+  // so reading them out of the replayed tree would fail for a file the review
+  // was never about.
+  const wordFiles = []
   for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
     const doc = yamlLoad(readFileSync(join(vocabDir, file), 'utf8'))
-    for (const [key, word] of Object.entries(doc?.words ?? {})) {
+    if (!doc?.words) continue
+    wordFiles.push(file)
+    for (const [key, word] of Object.entries(doc.words)) {
       curriculum.set(key, { file, learnable: word?.learn !== false })
     }
   }
@@ -319,7 +327,7 @@ try {
   let compared = 0
   let added = 0
   let promoted = 0
-  for (const file of readdirSync(vocabDir).filter((f) => f.endsWith('.yml'))) {
+  for (const file of wordFiles) {
     const replayed = reviewedByKey(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
     const committed = reviewedByKey(readFileSync(join(vocabDir, file), 'utf8'))
     for (const [key, text] of replayed) {
