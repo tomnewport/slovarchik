@@ -67,13 +67,19 @@ function collectStrings(value, out) {
 }
 
 /**
- * Every normalised surface form a word can appear as in a phrase: its headword
- * and bare key form plus all of its inflected forms.
+ * Every *raw* surface form a word can appear as in a phrase: its headword and
+ * bare key form, its authored form tables, and the participle cells derived
+ * from them. Deduplicated but not normalised — the caller decides which
+ * normaliser keys them, which is what lets {@link buildFormIndex} walk each
+ * record once and normalise the strings it collects twice.
+ *
+ * Only single-word forms come back. Indexing the pieces of a multi-word form
+ * (e.g. the year «две ты́сячи») would leak its component words as standalone
+ * glosses — that's how «две» came to mean "two thousand" (see #155).
  * @param {object} word   a normalised word record (from buildWords)
- * @param {(t: string) => string} [norm]  token normaliser (default {@link normToken})
  * @returns {Set<string>}
  */
-export function wordForms(word, norm = normToken) {
+function rawWordForms(word) {
   const raw = []
   if (word?.headword) raw.push(word.headword)
   if (word?.ru) raw.push(word.ru)
@@ -94,30 +100,68 @@ export function wordForms(word, norm = normToken) {
     const grid = participleGrid(word, slot)
     if (grid) collectStrings(grid, raw)
   }
+  return singleWords(raw)
+}
 
+/** The raw dictionary forms — headword and bare key form. See {@link baseForms}. */
+function rawBaseForms(word) {
+  return singleWords([word?.headword, word?.ru])
+}
+
+/** Trim, drop the empties and anything with internal whitespace, dedupe. */
+function singleWords(raw) {
+  const out = new Set()
+  for (const s of raw) {
+    const trimmed = String(s ?? '').trim()
+    if (!trimmed || /\s/.test(trimmed)) continue
+    out.add(trimmed)
+  }
+  return out
+}
+
+/** Key a collected set of raw forms with `norm`, dropping the ones that empty out. */
+function normForms(raw, norm) {
   const forms = new Set()
   for (const s of raw) {
-    // Only single-word forms can ever match a phrase token. Indexing the pieces
-    // of a multi-word form (e.g. the year «две ты́сячи») would leak its component
-    // words as standalone glosses — that's how «две» came to mean "two thousand"
-    // (see #155). Skip anything with internal whitespace.
-    const trimmed = String(s).trim()
-    if (!trimmed || /\s/.test(trimmed)) continue
-    const n = norm(trimmed)
+    const n = norm(s)
     if (n) forms.add(n)
   }
-  // Third-person personal pronouns take an n- prefix after a preposition
-  // (его→него, ему→нему, её→неё, им→ним, их→них, ими→ними). These surface forms
-  // never appear in the curated tables, so derive them here for hinting only.
-  // The rule is purely phonological: oblique forms beginning with е/и gain a
-  // leading н. Restricted to `pers` so the indeclinable possessives его/её/их
-  // don't shadow «него»/«неё» with "his"/"her".
-  if (word?.pos === 'pronoun' && extra.type === 'pers') {
-    for (const f of [...forms]) {
-      if (/^[еи]/.test(f)) forms.add(`н${f}`)
-    }
+  return forms
+}
+
+/**
+ * Add the n-prefixed third-person pronoun forms to an already-normalised set,
+ * in place.
+ *
+ * Third-person personal pronouns take an n- prefix after a preposition
+ * (его→него, ему→нему, её→неё, им→ним, их→них, ими→ними). These surface forms
+ * never appear in the curated tables, so derive them here for hinting only.
+ * The rule is purely phonological: oblique forms beginning with е/и gain a
+ * leading н. Restricted to `pers` so the indeclinable possessives его/её/их
+ * don't shadow «него»/«неё» with "his"/"her".
+ *
+ * It reads the normalised form rather than the raw one, and both normalisers
+ * leave the first letter alone (a combining acute only ever follows a vowel),
+ * so the prefixed forms derive from one another exactly as their bases do —
+ * which is what keeps {@link plainForm} exact over the whole set.
+ */
+function addPronounForms(word, forms) {
+  if (word?.pos !== 'pronoun' || word?.extra?.type !== 'pers') return forms
+  for (const f of [...forms]) {
+    if (/^[еи]/.test(f)) forms.add(`н${f}`)
   }
   return forms
+}
+
+/**
+ * Every normalised surface form a word can appear as in a phrase: its headword
+ * and bare key form plus all of its inflected forms.
+ * @param {object} word   a normalised word record (from buildWords)
+ * @param {(t: string) => string} [norm]  token normaliser (default {@link normToken})
+ * @returns {Set<string>}
+ */
+export function wordForms(word, norm = normToken) {
+  return addPronounForms(word, normForms(rawWordForms(word), norm))
 }
 
 /**
@@ -129,12 +173,37 @@ export function wordForms(word, norm = normToken) {
  * @returns {Set<string>}
  */
 export function baseForms(word, norm = normToken) {
+  return normForms(rawBaseForms(word), norm)
+}
+
+/**
+ * The plain (stress-stripped) key of a form already keyed by
+ * {@link normTokenStress} — the two normalisers are the same pipeline one step
+ * apart, so
+ *
+ * ```js
+ * normToken(s) === plainForm(normTokenStress(s))
+ * ```
+ *
+ * for every string: both lowercase, fold ё→е and drop everything that is not a
+ * letter; the stress-keeping one merely canonicalises the acute variants to a
+ * combining acute and keeps it, which this removes. Deriving beats re-running
+ * the pipeline over all ~47k raw forms (#697), and `phraseHint.test.js` holds
+ * the identity over the whole corpus so a change to either normaliser can't
+ * break the derivation silently.
+ * @param {string} form  a form keyed by {@link normTokenStress}
+ * @returns {string}
+ */
+export function plainForm(form) {
+  return String(form ?? '').replace(/\u0301/g, '')
+}
+
+/** {@link plainForm} over a whole set, dropping any form that empties out. */
+function plainForms(forms) {
   const out = new Set()
-  for (const s of [word?.headword, word?.ru]) {
-    const trimmed = String(s ?? '').trim()
-    if (!trimmed || /\s/.test(trimmed)) continue
-    const n = norm(trimmed)
-    if (n) out.add(n)
+  for (const f of forms) {
+    const p = plainForm(f)
+    if (p) out.add(p)
   }
   return out
 }
@@ -226,25 +295,29 @@ function addSense(index, form, sense) {
  * — is the sense that matters.
  *
  * Within each pass senses appear in dictionary order of the entries claiming them.
- * @param {object[]} sorted   word records, pre-sorted by headword then key
- * @param {(t: string) => string} norm  token normaliser keying the index
+ * @param {Array<{word: object, base: Set<string>, forms: Set<string>}>} prepared
+ *   word records in dictionary order, each with its forms already keyed by the
+ *   normaliser this index uses (see {@link buildFormIndex})
+ * @param {(t: string) => string} norm  the normaliser those forms were keyed with
  * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}>}
  */
-function buildIndex(sorted, norm) {
+function buildIndex(prepared, norm) {
   const index = new Map()
   // Gloss-only entries are keyed on a surface form, not on a lemma, so the entries
   // they hold are the ones a real lemma is allowed to join in pass 2.
-  const glossOnly = new Set(sorted.filter((w) => w.learnable === false).map((w) => w.key))
+  const glossOnly = new Set(
+    prepared.filter((p) => p.word.learnable === false).map((p) => p.word.key),
+  )
 
   /** Is every sense on this entry a gloss-only stub? */
   const heldOnlyByStubs = (entry) => entry.senses.every((s) => glossOnly.has(s.key))
 
   // Pass 1: base (dictionary) forms — a word whose lemma *is* the surface form
   // always beats another word for which the token is merely an oblique form.
-  for (const w of sorted) {
+  for (const { word: w, base } of prepared) {
     const sense = { key: w.key, ru: w.headword || w.ru, en: w.meaning || w.en }
     if (!sense.en) continue
-    for (const form of baseForms(w, norm)) addSense(index, form, sense)
+    for (const form of base) addSense(index, form, sense)
   }
 
   // Pass 2: inflected forms. When a word has heteronym annotations, use the
@@ -252,10 +325,10 @@ function buildIndex(sorted, norm) {
   // of the generic headword meaning. When two heteronymic inflected forms collapse
   // to the same normalised string (stress stripped + ё→е), combine both glosses
   // so the hint shows both possibilities.
-  for (const w of sorted) {
+  for (const { word: w, forms } of prepared) {
     const baseEn = w.meaning || w.en
     if (!baseEn) continue
-    for (const form of wordForms(w, norm)) {
+    for (const form of forms) {
       const hetEntry = w.heteronyms?.find((h) => norm(h.ru) === form)
       const en = hetEntry?.gloss || baseEn
       const sense = { key: w.key, ru: w.headword || w.ru, en }
@@ -317,8 +390,28 @@ export function buildFormIndex(words) {
         Number(a.learnable === false) - Number(b.learnable === false) ||
         String(a.key ?? '').localeCompare(String(b.key ?? ''), 'ru'),
     )
-  const index = /** @type {FormIndex} */ (buildIndex(sorted, normToken))
-  index.stressIndex = buildIndex(sorted, normTokenStress)
+
+  // Two indexes, one walk. Collecting a word's raw forms means recursing its
+  // whole record — form tables, participles, the derived participle grids — and
+  // doing that once per normaliser walked all ~47k of them twice for the same
+  // strings (#697). Collect once, then key the strings twice.
+  const prepared = sorted.map((word) => ({
+    word,
+    base: baseForms(word, normTokenStress),
+    forms: wordForms(word, normTokenStress),
+  }))
+  const stressIndex = buildIndex(prepared, normTokenStress)
+
+  // …and the second keying is a derivation, not a second run of the pipeline:
+  // the plain form of a stress-keyed one is that form with its acute removed
+  // (see {@link plainForm}). Derived in place so each word's stress sets can be
+  // collected as we go rather than both keyings being held at once.
+  for (const p of prepared) {
+    p.base = plainForms(p.base)
+    p.forms = plainForms(p.forms)
+  }
+  const index = /** @type {FormIndex} */ (buildIndex(prepared, normToken))
+  index.stressIndex = stressIndex
   return index
 }
 
