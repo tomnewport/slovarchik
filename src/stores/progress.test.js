@@ -49,6 +49,7 @@ import {
   removeFromBatch,
   leaveForLater,
   wordProgressDetail,
+  persistenceSettled,
   markKnown,
   unmarkKnown,
   isKnown,
@@ -1156,6 +1157,71 @@ describe('achievements', () => {
     expect(state.seenAchievements.size).toBeGreaterThan(0)
     await resetProgress()
     expect(state.seenAchievements.size).toBe(0)
+  })
+
+  it('keeps cefr-A1 when the corpus grows past what the learner has learned', async () => {
+    setVocab(makeWords(2, { cefr: 'A1', hasInflections: false }))
+    await learn('w0')
+    await learn('w1')
+    expect(earnedAchievements.value.has('cefr-A1')).toBe(true)
+    // A new A1 word ships. The level is no longer complete — but the learner
+    // was already shown the achievement, and `seenAchievements` means it would
+    // never fire again if we let it lapse.
+    setVocab(makeWords(3, { cefr: 'A1', hasInflections: false }))
+    expect(cefrStats.value.A1).toEqual({ total: 3, learned: 2, mastered: 2 })
+    expect(earnedAchievements.value.has('cefr-A1')).toBe(true)
+  })
+
+  it('keeps an achievement whose words have slipped back below the threshold', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    expect(earnedAchievements.value.has('learn-1')).toBe(true)
+    // Slip the word: four wrong identifications empty its ratio window.
+    for (let i = 0; i < 4; i++) {
+      await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false })
+    }
+    expect(learnedCount.value).toBe(0)
+    expect(earnedAchievements.value.has('learn-1')).toBe(true)
+  })
+
+  it('persists the earned stamp through a reload', async () => {
+    setVocab(makeWords(2, { cefr: 'A1', hasInflections: false }))
+    await learn('w0')
+    await learn('w1')
+    expect(state.achievementsEarnedAt['cefr-A1']).toBeTypeOf('number')
+
+    await persistenceSettled()
+    state.achievementsEarnedAt = {}
+    await loadProgress()
+    expect(state.achievementsEarnedAt['cefr-A1']).toBeTypeOf('number')
+
+    // Still held once the corpus outgrows it, now from the reloaded stamp.
+    setVocab(makeWords(3, { cefr: 'A1', hasInflections: false }))
+    expect(earnedAchievements.value.has('cefr-A1')).toBe(true)
+  })
+
+  it('carries the earned stamp through an export/import round trip', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    const snapshot = exportData()
+    const earnedAt = state.achievementsEarnedAt['learn-1']
+    expect(earnedAt).toBeTypeOf('number')
+
+    await resetProgress()
+    expect(state.achievementsEarnedAt).toEqual({})
+    await importData(snapshot)
+
+    expect(state.achievementsEarnedAt['learn-1']).toBe(earnedAt)
+  })
+
+  it('backfills a stamp for an install that predates it', async () => {
+    setVocab(makeWords(1, { hasInflections: false }))
+    await learn('w0')
+    // An older install has records but no stamp at all.
+    state.achievementsEarnedAt = {}
+    await idb.setMeta('achievementsEarnedAt', {})
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    expect(state.achievementsEarnedAt['learn-1']).toBeTypeOf('number')
   })
 })
 

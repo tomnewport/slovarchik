@@ -80,6 +80,34 @@ export function newlyUnlocked(prev, next) {
   return [...next].filter((id) => !prev.has(id))
 }
 
+/**
+ * Fold the currently-earned set into the stamped record, which only ever grows.
+ *
+ * {@link earnedSet} answers "does the learner meet this threshold *right now*",
+ * and that is not the same question as "have they earned this". A `cefr`
+ * achievement compares learned against the level's total, so adding words to
+ * the corpus drops it back below the bar and silently un-earns something the
+ * learner was already shown — and `seenAchievements` means it never fires
+ * again. Slipping words do the same to a `learned`/`mastered` threshold.
+ *
+ * So the stamp is the record of truth: an id that enters keeps its original
+ * timestamp and is never removed. Curriculum parts (#674) make this sharper,
+ * with nine smaller denominators for corpus growth to move underneath.
+ *
+ * @param {Record<string, number>} stamped id → epoch ms first earned
+ * @param {Set<string>|string[]} earned ids meeting their threshold right now
+ * @param {number} now timestamp to stamp newly-earned ids with
+ * @returns {{next: Record<string, number>, added: string[]}} `next` is the
+ *   original object when nothing was added, so callers can skip a write
+ */
+export function stampEarned(stamped, earned, now) {
+  const added = [...earned].filter((id) => !(id in (stamped ?? {})))
+  if (!added.length) return { next: stamped ?? {}, added }
+  const next = { ...(stamped ?? {}) }
+  for (const id of added) next[id] = now
+  return { next, added }
+}
+
 /** Look up an achievement by id. Returns undefined if not found. */
 export function achievementById(id) {
   return ACHIEVEMENTS.find((a) => a.id === id)

@@ -80,6 +80,14 @@ async function doLoadProgress() {
   }
   const seenIds = (await idb.getMeta('seenAchievements')) ?? []
   state.seenAchievements = new Set(Array.isArray(seenIds) ? seenIds : [])
+  // Achievements are stamped with when they were first earned, because
+  // `earnedSet` only answers whether the threshold is met *now* (see
+  // `stampEarned`). Installs from before the stamp have none, and their
+  // achievements are backfilled by the first `stampAchievements` after an
+  // attempt — additively, so a partial backfill (vocab not loaded yet, hence no
+  // cefr stats) loses nothing and is completed by the next one.
+  const earnedAt = await idb.getMeta('achievementsEarnedAt')
+  state.achievementsEarnedAt = earnedAt && typeof earnedAt === 'object' ? { ...earnedAt } : {}
 
   // Activity calendar / streak. The forward-logged store is authoritative; on
   // first run (or for any day it lacks) back-populate from the surviving per-
@@ -129,6 +137,7 @@ export async function resetProgress() {
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
   await idb.setMeta('firstUseAt', null)
   await idb.setMeta('seenAchievements', [])
+  await idb.setMeta('achievementsEarnedAt', {})
   await idb.clearActivity()
   await idb.setMeta('streak:activity', {})
   await idb.setMeta('streak:hue', null)
@@ -139,6 +148,7 @@ export async function resetProgress() {
   state.mastery = null
   state.firstUseAt = null
   state.seenAchievements = new Set()
+  state.achievementsEarnedAt = {}
   state.activity = {}
   state.streakHue = randomHue()
   state.batchSig = ''
