@@ -278,12 +278,9 @@ describe('FlashcardExercise diagnoses a placeable wrong guess', () => {
     await wrapper.find('input.combo-input').setValue(text)
     await wrapper.find('form').trigger('submit')
   }
-  // A correct answer advances the moment it is typed — no Enter, by design —
-  // unless the word has facts to read (#586), when the card holds for a Next.
+  // A correct answer advances the moment it is typed — no Enter, by design.
   const answerRight = async (wrapper, text) => {
     await wrapper.find('input.combo-input').setValue(text)
-    const next = wrapper.find('button.next')
-    if (next.exists()) await next.trigger('click')
   }
 
   beforeEach(() => {
@@ -351,8 +348,9 @@ describe('FlashcardExercise diagnoses a placeable wrong guess', () => {
   })
 })
 
-describe('a correct card holds only when it has something to say (#586)', () => {
+describe('a right answer never pauses, facts or no facts (#690)', () => {
   const words = loadFixtureWords()
+  // «одева́ться» is a word with facts to show — the drill used to hold on it.
   const dressed = {
     ...exercise,
     pairs: [
@@ -367,31 +365,28 @@ describe('a correct card holds only when it has something to say (#586)', () => 
     vocabState.status = 'ready'
   })
 
-  it('holds a right answer open on a word with facts, so they can be read', async () => {
+  it('advances straight to the next card, with no Next to press', async () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise: dressed } })
     await wrapper.find('input.combo-input').setValue('to get dressed')
 
-    // Still on card 1, marked correct, with the facts on screen.
-    expect(wrapper.find('.count').text()).toContain('Card 1 of 2')
-    expect(wrapper.find('.reveal.solved').text()).toContain('Correct')
-    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
-    expect(wrapper.emitted('done')).toBeUndefined()
-
-    // Next moves on, and the card still counts as answered correctly.
-    await wrapper.find('button.next').trigger('click')
     expect(wrapper.find('.count').text()).toContain('Card 2 of 2')
+    expect(wrapper.find('button.next').exists()).toBe(false)
+    expect(wrapper.find('.reveal').exists()).toBe(false)
   })
 
-  it('does not name the answer again, or paint the input as a miss', async () => {
-    const wrapper = mount(FlashcardExercise, { props: { exercise: dressed } })
+  it('still reports the card correct', async () => {
+    const one = {
+      ...dressed,
+      pairs: [dressed.pairs[0]],
+      targets: [dressed.targets[0]],
+    }
+    const wrapper = mount(FlashcardExercise, { props: { exercise: one } })
     await wrapper.find('input.combo-input').setValue('to get dressed')
-    expect(wrapper.find('.reveal-en').exists()).toBe(false)
-    expect(wrapper.find('input.combo-input').classes()).toContain('solved')
-    expect(wrapper.find('input.combo-input').classes()).not.toContain('revealed')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
   })
 
-  it('advances at once when the word has nothing to add — the loop stays fast', async () => {
-    // Keys 'a'/'b' are in no vocabulary, so there are no facts to hold for.
+  it('advances at once on a word with nothing to add, as it always has', async () => {
+    // Keys 'a'/'b' are in no vocabulary, so there were never facts to hold for.
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
     await wrapper.find('input.combo-input').setValue('spring')
     expect(wrapper.find('.count').text()).toContain('Card 2 of 2')
@@ -399,19 +394,28 @@ describe('a correct card holds only when it has something to say (#586)', () => 
   })
 })
 
-describe('the facts panel never precedes the answer (#586)', () => {
-  it('appears only once the card is revealed', async () => {
-    const wrapper = mount(FlashcardExercise, { props: { exercise } })
-    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+describe('the facts panel is gone from the flashcard drill (#690)', () => {
+  const words = loadFixtureWords()
+  const dressed = {
+    ...exercise,
+    pairs: [{ key: 'одеваться=to get dressed', ru: 'одева́ться', en: 'to get dressed' }],
+    targets: ['одеваться=to get dressed'],
+  }
 
-    await wrapper.find('button.pass').trigger('click')
-    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(true)
+  beforeEach(() => {
+    vocabState.words = words
+    vocabState.status = 'ready'
   })
 
-  it('is gone again on the next card', async () => {
-    const wrapper = mount(FlashcardExercise, { props: { exercise } })
+  it('is absent while the card is still being answered', () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dressed } })
+    expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
+  })
+
+  it('is absent on a revealed card too — only the answer is shown', async () => {
+    const wrapper = mount(FlashcardExercise, { props: { exercise: dressed } })
     await wrapper.find('button.pass').trigger('click')
-    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.find('.reveal-en').text()).toBe('to get dressed')
     expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
   })
 })

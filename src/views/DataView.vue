@@ -266,7 +266,7 @@ onMounted(async () => {
       <p class="muted">
         Where a word has a breakdown, a root or relatives worth showing, an
         <strong>About this word</strong> panel appears — in full — as soon as an
-        answer is resolved, right or wrong.
+        answer is resolved, right or wrong. Not on flashcards, which stay quick.
       </p>
       <label class="facts-toggle-row">
         <input
