@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest'
 import {
   normToken,
   normTokenStress,
+  plainForm,
   wordForms,
   wordTokensInPhrase,
   buildFormIndex,
@@ -31,6 +32,51 @@ describe('normTokenStress', () => {
     // otherwise behaves like normToken: lowercased, ё→е, punctuation dropped
     expect(normTokenStress('Всё,')).toBe(normTokenStress('все'))
     expect(normTokenStress('«по́лке».')).toBe(normTokenStress('по́лке'))
+  })
+})
+
+// #697: the plain index is no longer keyed by re-running `normToken` over every
+// raw form — it is derived from the stress-keyed one by dropping the acute. That
+// is a saving only while the two normalisers really are the same pipeline one
+// step apart, so the identity is asserted here rather than left as a comment: a
+// change to either normaliser that breaks it fails this test instead of silently
+// mis-keying ~40k forms.
+describe('plainForm', () => {
+  it('derives normToken from normTokenStress', () => {
+    for (const token of [
+      'Абза́ц.',
+      'всё,',
+      '«по́лке»',
+      'Ё-моё',
+      'полке\u0341', // combining acute tone mark
+      'полке\u00B4', // spacing acute
+      'полке\u02CA', // modifier letter acute (a letter, so only the fold drops it)
+      'де\u0308ло', // decomposed ё
+      'dom-2',
+      '—',
+      '\u0301', // a bare acute: stress-keyed to itself, plain to nothing
+      '',
+    ]) {
+      expect(plainForm(normTokenStress(token))).toBe(normToken(token))
+    }
+  })
+
+  // Over the authored corpus, not just the forms the index keys: `normToken`
+  // keys phrase tokens too, and a string the identity fails on would mis-key
+  // whichever of the two it reached.
+  it('holds over every string in the corpus', () => {
+    const seen = new Set()
+    const walk = (value) => {
+      if (value == null) return
+      if (typeof value === 'string') seen.add(value)
+      else if (Array.isArray(value)) value.forEach(walk)
+      else if (typeof value === 'object') Object.values(value).forEach(walk)
+    }
+    for (const w of loadFixtureWords()) walk(w.extra ?? w)
+
+    const mismatched = [...seen].filter((s) => plainForm(normTokenStress(s)) !== normToken(s))
+    expect(mismatched.slice(0, 10), `${mismatched.length} of ${seen.size} strings`).toEqual([])
+    expect(seen.size).toBeGreaterThan(10000) // the walk actually reached the corpus
   })
 })
 
