@@ -276,6 +276,20 @@ function buildIndex(sorted, norm) {
 }
 
 /**
+ * The surface-form index: a Map from normalised token to its entry, carrying a
+ * second Map on the side for stress-exact lookups.
+ *
+ * The side-channel is deliberate — a heteronym is only distinguishable when the
+ * token carries its stress mark, so the stress-exact pass needs its own index,
+ * and hanging it off the main one keeps the pair inseparable. It is why the
+ * assignments below are cast: `buildIndex` returns a plain Map and this is the
+ * moment it becomes the richer shape (#666).
+ *
+ * @typedef {Map<string, {key: string, ru: string, en: string, senses: object[]}>
+ *   & {stressIndex: Map<string, {key: string, ru: string, en: string, senses: object[]}>}} FormIndex
+ */
+
+/**
  * Build a lookup from a normalised surface form to a hint entry
  * `{ key, ru, en, senses }` for the word(s) that can appear as that form. See
  * {@link buildIndex} for the two-pass collision rules and how a homograph comes
@@ -287,7 +301,7 @@ function buildIndex(sorted, norm) {
  * differ only by stress — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т» (stand)
  * vs «сто́ят» (cost) — whenever the phrase token carries its stress mark.
  * @param {object[]} words   normalised word records (from buildWords)
- * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}> & {stressIndex: Map}}
+ * @returns {FormIndex}
  */
 export function buildFormIndex(words) {
   const sorted = (words ?? [])
@@ -300,10 +314,10 @@ export function buildFormIndex(words) {
         // its `key` from) would depend on which vocab file happened to load first.
         // A curriculum word sorts ahead of a gloss-only one so the entry's `key`
         // names something the learner can actually be drilling.
-        (a.learnable === false) - (b.learnable === false) ||
+        Number(a.learnable === false) - Number(b.learnable === false) ||
         String(a.key ?? '').localeCompare(String(b.key ?? ''), 'ru'),
     )
-  const index = buildIndex(sorted, normToken)
+  const index = /** @type {FormIndex} */ (buildIndex(sorted, normToken))
   index.stressIndex = buildIndex(sorted, normTokenStress)
   return index
 }
@@ -314,7 +328,7 @@ export function buildFormIndex(words) {
  * display (stress marks, capitalisation and punctuation intact); only the lookup
  * is normalised.
  * @param {string} phrase
- * @param {Map<string, object>} index   from {@link buildFormIndex}
+ * @param {FormIndex} index   from {@link buildFormIndex}
  * @returns {Array<{text: string, hint: object|null}>}
  */
 export function phraseHintTokens(phrase, index) {

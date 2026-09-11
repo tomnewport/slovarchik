@@ -93,6 +93,17 @@ export function xAxis(start, end, maxTicks = 6) {
  *
  * The lines run on to `today` so a plateau since the last learned word reads as
  * a plateau, not as the chart ending early.
+ *
+ * @param {Array<{day: string, learned: number, mastered: number}>} points
+ * @param {object} [opts]
+ * @param {number} [opts.today] the right-hand edge of the time axis
+ * @param {number} [opts.width] SVG width in its own pixel space
+ * @param {number} [opts.height] SVG height in its own pixel space
+ * @param {{top?: number, right?: number, bottom?: number, left?: number}} [opts.margin]
+ *   room for the axes; defaults are chosen inside
+ * @param {number} [opts.maxTicks] upper bound on x-axis labels before the
+ *   step widens to months
+ * @returns {object|null} geometry, or null when there is nothing to draw
  */
 export function buildChart(points, { today, width = 360, height = 180, margin, maxTicks } = {}) {
   if (!points || points.length === 0) return null

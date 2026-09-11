@@ -213,7 +213,12 @@ export function relatedWords(record, byKey) {
   for (const f of wordFacts(record)) {
     const relation = SEE_RELATION[f.kind] ?? 'see-also'
     for (const s of f.see ?? [])
-      push(relation, relation === 'region' ? { ...s, where: f.where } : s)
+      push(
+        relation,
+        relation === 'region'
+          ? { ...s, where: /** @type {{where?: string}} */ (f).where }
+          : s,
+      )
   }
   for (const c of record.confusables ?? []) push('confusable', c)
 
@@ -273,7 +278,9 @@ export function regionalVariant(record, key) {
   if (!key) return ''
   for (const f of wordFacts(record)) {
     if (f.kind !== 'region') continue
-    if ((f.see ?? []).some((s) => s.key === key)) return f.where || ''
+    if ((f.see ?? []).some((s) => s.key === key)) {
+      return /** @type {{where?: string}} */ (f).where || ''
+    }
   }
   return ''
 }

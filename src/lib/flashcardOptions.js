@@ -39,8 +39,9 @@ export function stripBrackets(text) {
  * matches (otherwise the field is too wide to be a useful shortlist).
  *
  * @param {object} args
- * @param {string} args.typed   the learner's current input
- * @param {Array<object>} args.pool  candidate options ({ key, en, label, … })
+ * @param {string} [args.typed]  the learner's current input; nothing typed
+ *   yields no options, which is what an empty guess should do
+ * @param {Array<object>} [args.pool] candidate options ({ key, en, label, … })
  * @param {number} [args.limit]  hide the list until fewer than this many match
  * @param {(o: object) => string} [args.keyOf]   identity, for de-duplication
  * @param {(o: object) => string} [args.textOf]  the gloss a guess matches against

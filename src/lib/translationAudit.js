@@ -200,7 +200,7 @@ export function glossHeadWords(gloss) {
  *
  * @param {string} ru       the Russian sentence
  * @param {string} en       its English translation
- * @param {Map} index       from {@link buildFormIndex}
+ * @param {import('./phraseHint.js').FormIndex} index from {@link buildFormIndex}
  * @returns {{content: number, glossMisses: Array<{ru: string, gloss: string}>,
  *   unglossed: string[], addedEnglish: string[], literalness: number}}
  */
@@ -317,8 +317,23 @@ function clauseMarkers(ru) {
 
 /**
  * Signals for one phrase, plus the tier a review pass should read it in.
- * @param {{ru: string, en: string, source?: string, cefr?: string}} phrase
- * @param {Map} index  from {@link buildFormIndex}
+ *
+ * `tier` and `priority` are attached to the row after it is built — the first
+ * here, the second by {@link auditPhrases} once the whole set is scored — so the
+ * typedef names them optional rather than the literal declaring them (#666).
+ *
+ * @typedef {object} AuditRow
+ * @property {string} ru
+ * @property {string} en
+ * @property {string[]} enAlt renderings the phrase already accepts, carried not scored
+ * @property {string} source
+ * @property {string} cefr
+ * @property {string} [tier] which pass a reviewer should read this in
+ * @property {number} [priority] rank within the whole audited set
+ *
+ * @param {{ru: string, en: string, enAlt?: string[], source?: string, cefr?: string}} phrase
+ * @param {import('./phraseHint.js').FormIndex} index from {@link buildFormIndex}
+ * @returns {AuditRow & Record<string, any>} the signals, plus `tier`
  */
 export function auditPhrase(phrase, index) {
   const ru = String(phrase?.ru ?? '')
@@ -327,6 +342,7 @@ export function auditPhrase(phrase, index) {
   const ruLength = phraseHintTokens(ru, index).filter((t) => normToken(t.text)).length
   const enLength = englishWords(en).length
   const markers = clauseMarkers(ru)
+  /** @type {AuditRow & Record<string, any>} */
   const row = {
     ru,
     en,

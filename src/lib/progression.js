@@ -108,8 +108,8 @@ function attemptsFor(events, level, dimension) {
 
 /**
  * Does a list of attempts (chronological) satisfy a single criterion?
- * @param {Array<{correct?: boolean}>} attempts
- * @param {{type: string, need: number, window?: number}} crit
+ * @param {Array<{correct?: boolean, ts?: number}>} attempts
+ * @param {{type: string, need: number, window?: number, days?: number}} crit
  */
 export function criterionMet(attempts, crit) {
   if (!crit) return true
@@ -161,8 +161,8 @@ export function dimensionProgress(events, level, dimension, word = {}) {
  * criterion, assuming every added attempt is answered correctly. Zero when the
  * criterion is already met. This is the "best case" distance to done — used to
  * size a batch's exercises-to-go progress bar.
- * @param {Array<{correct?: boolean}>} attempts chronological attempts
- * @param {{type: string, need: number, window?: number}} crit
+ * @param {Array<{correct?: boolean, ts?: number}>} attempts chronological attempts
+ * @param {{type: string, need: number, window?: number, days?: number}} crit
  */
 export function minCorrectToMeet(attempts, crit) {
   if (!crit) return 0
@@ -261,6 +261,7 @@ export function minExercisesToLevel(events, level, word = {}) {
  * @returns {Record<string, number>} dimension → remaining correct answers (>0)
  */
 export function levelGapByDimension(records, level) {
+  /** @type {Record<string, number>} */
   const gap = {}
   for (const { events, word = {} } of records ?? []) {
     const criteria = criteriaFor(word)

@@ -336,9 +336,9 @@ function casesOf(paradigm, form, col) {
  * answer matching no cell at all is a spelling miss, not a grammar one.
  *
  * @param {string} typed
- * @param {object} ctx
- * @param {object} ctx.paradigm  the target word's paradigm (lib/paradigm.js)
- * @param {string} ctx.wantCase  the paradigm row the slot wants — a case key, or
+ * @param {object} [ctx]
+ * @param {object} [ctx.paradigm] the target word's paradigm (lib/paradigm.js)
+ * @param {string} [ctx.wantCase] the paradigm row the slot wants — a case key, or
  *   `acc_anim` for an adjective agreeing with an animate noun
  * @param {boolean} [ctx.animate] whether the target noun is animate
  * @param {string} [ctx.wantCol] the paradigm column the slot sits in — the
@@ -348,7 +348,7 @@ function casesOf(paradigm, form, col) {
  * @param {string[]} [ctx.tokens] the sentence tokens
  * @param {number} [ctx.targetIndex] the slot's first token
  * @returns {{kind: 'case', ruleId: string, gotCase: string|null,
- *   wantCase: string, prep?: string}|null}
+ *   wantCase: string, prep?: string, animate?: boolean}|null}
  */
 export function caseRuleMiss(typed, ctx = {}) {
   const { paradigm, wantCase, wantCol, animate, pos, tokens, targetIndex } = ctx

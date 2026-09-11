@@ -59,6 +59,13 @@ export function focusedKeys(words, skill, stateOf) {
  * Rank skills by weakness — the fraction of the learner's attempted words in a
  * category that have not yet reached `learned`. Categories with fewer than
  * `minWords` attempted words (too little signal) or no weakness are dropped.
+ *
+ * @param {object[]} words the learner's attempted word records
+ * @param {object} [opts]
+ * @param {(key: string) => string} [opts.stateOf] current state per word key
+ * @param {number} [opts.minWords] below this many attempted words a category
+ *   carries too little signal to rank
+ * @param {number} [opts.limit] how many skills to return
  * @returns {Array<{id, label, weakness, attempted, struggling}>} weakest first
  */
 export function rankSkills(words, { stateOf, minWords = 3, limit = 6 } = {}) {

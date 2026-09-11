@@ -85,8 +85,8 @@ export function hintTokensFor(phrase) {
  * would be pure waste.
  *
  * @param {string} typed the learner's answer
- * @param {{targetKey: string, target: string}} about the word being drilled and
- *   the surface form wanted (a single word, or the whole phrase)
+ * @param {{targetKey?: string, target?: string}} [about] the word being drilled
+ *   and the surface form wanted (a single word, or the whole phrase)
  */
 export function diagnoseAnswer(typed, { targetKey, target } = {}) {
   return diagnose(typed, {
@@ -118,7 +118,7 @@ function glossIndexFor(pool) {
  * Null when the gloss belongs to no word we know.
  *
  * @param {string} typed the English the learner gave
- * @param {{targetKey: string, options: Array}} about the card's word and the
+ * @param {{targetKey?: string, options?: Array}} [about] the card's word and the
  *   drill's autocomplete pool, which doubles as the gloss index's source
  */
 export function diagnoseEnglishAnswer(typed, { targetKey, options } = {}) {

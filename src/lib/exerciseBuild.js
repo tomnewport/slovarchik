@@ -287,11 +287,15 @@ function buildMatch(practice, pi, ctx, make) {
  * grows to hold them all. `topUpKeys` must already be ordered weakest-first.
  *
  * @param {object} args
- * @param {string[]} args.wrongKeys   words answered wrong (always included)
- * @param {string[]} [args.topUpKeys] correctly-guessed words, weakest first
  * @param {Map} args.vocabById        shaped vocab by id (from shapeVocab)
+ * @param {string[]} [args.wrongKeys] words answered wrong (always included)
+ * @param {string[]} [args.topUpKeys] correctly-guessed words, weakest first
  * @param {Array} [args.options]      the shared autocomplete pool
+ * @param {string} [args.dimension]   which skill the board assesses
+ * @param {string} [args.level]       learning or mastery
+ * @param {boolean} [args.audio]      deal the board with audio prompts
  * @param {string} [args.id]
+ * @param {() => number} [args.rng]
  * @returns {object|null} a match descriptor, or null if fewer than two words resolve
  */
 export function buildCombinedFlashcard({
@@ -304,7 +308,7 @@ export function buildCombinedFlashcard({
   audio = false,
   id = 'fc-repeat',
   rng = Math.random,
-} = {}) {
+}) {
   const seen = new Set()
   const keys = []
   const add = (k) => {
@@ -407,7 +411,9 @@ function buildPhrase(practice, pi, ctx, make, kind) {
     if (kind === 'type' && p.source) {
       const record = ctx.recordByKey.get(p.source)
       const tokens = record ? wordTokensInPhrase(p.ru, record) : []
-      if (tokens.length) base.targetTokens = tokens
+      // Only set where the tokens were found, so the property is absent rather
+      // than empty on the phrases it does not apply to.
+      if (tokens.length) /** @type {{targetTokens?: string[]}} */ (base).targetTokens = tokens
     }
     return make(base)
   })
@@ -704,8 +710,8 @@ export const MAX_INTROS_PER_SESSION = 5
  *    card headed "A new word" arriving afterwards is simply backwards.
  *
  * @param {object[]} exercises the built list, in order
- * @param {object} opts
- * @param {(key: string) => boolean} opts.needsIntro has this word never been
+ * @param {object} [opts]
+ * @param {(key: string) => boolean} [opts.needsIntro] has this word never been
  *   met *and* never been introduced?
  * @param {Set<string>|string[]} [opts.batchKeys] words of the current batch; when
  *   absent every target is eligible
@@ -760,8 +766,8 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
  * Build the flat exercise list for a session.
  * @param {object} session   from store.startSession (has `.practices`)
  * @param {object} sources
- * @param {object[]} sources.words   normalised word records (vocab store)
- * @param {object[]} sources.phrases shaped phrases ({ id, ru, en, source, cefr })
+ * @param {object[]} [sources.words]   normalised word records (vocab store)
+ * @param {object[]} [sources.phrases] shaped phrases ({ id, ru, en, source, cefr })
  * @param {Map} [sources.vocabById] id → shaped vocab word, over exactly the same
  *   `words`. Optional and purely a saving: the caller usually holds this already
  *   (the vocab store publishes it, and SessionView keeps a copy for replacement
@@ -770,6 +776,11 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
  * @param {Map} [sources.contextPhrases] key → annotated context phrases (drill)
  * @param {object} [sources.rules] grammar-rules map (rule id → explanation)
  * @param {() => number} [sources.rng]
+ * @param {(key: string) => number} [sources.encounterCount] how many times this
+ *   learner has met a word, so a first encounter can be dealt differently
+ * @param {(key: string, variant?: string) => boolean} [sources.isTableClean] has
+ *   this word's table been built with nothing misplaced, for the variant in hand
+ *   (gates the table stage)
  * @returns {object[]} exercise descriptors (each with a unique `id`)
  */
 export function buildExercises(

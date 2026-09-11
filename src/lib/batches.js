@@ -183,9 +183,9 @@ export function assembleOptions(pool, size, level, rng = Math.random) {
 /**
  * Offer batch options for the next learning or mastery journey.
  * @param {object} args
- * @param {object[]} args.words normalised word records (need `key`, `cefr`,
+ * @param {object[]} [args.words] normalised word records (need `key`, `cefr`,
  *   `collections`)
- * @param {(word: object) => string} args.stateOf current state per word
+ * @param {(word: object) => string} [args.stateOf] current state per word
  * @param {'learning'|'mastery'} [args.level]
  * @param {() => number} [args.rng]
  * @returns {object[]} up to five batch options

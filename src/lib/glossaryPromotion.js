@@ -110,6 +110,20 @@ export function promotionCandidates(words) {
 const VOWELS = 'аеёиоуыэюя'
 
 /**
+ * A part-of-speech guess and how much to trust it.
+ *
+ * `confidence` is a two-value union rather than a bare string, and the two
+ * builders inside `guessPos` are annotated with this so the literal survives
+ * inference — without that it widens to `string` at the first return and every
+ * caller loses the narrowing (#666).
+ *
+ * @typedef {object} PosGuess
+ * @property {string} pos the guessed part of speech
+ * @property {'likely'|'uncertain'} confidence
+ * @property {string} reason the ending or shape the guess keyed off, for a human
+ */
+
+/**
  * Best-effort part-of-speech guess from a bare Russian surface form. This is a
  * *hint for the human*, never a decision: it keys off the word's ending, which
  * is only sometimes diagnostic. Verb infinitives (-ть/-ти/-чь) and adjective
@@ -119,14 +133,16 @@ const VOWELS = 'аеёиоуыэюя'
  * of something else entirely.
  *
  * @param {string} ru bare Russian (stress marks tolerated)
- * @returns {{pos: string, confidence: 'likely'|'uncertain', reason: string}}
+ * @returns {PosGuess}
  */
 export function guessPos(ru) {
   const s = stripStress(String(ru ?? ''))
     .toLowerCase()
     .replace(/ё/g, 'е')
     .trim()
+  /** @type {(pos: string, reason: string) => PosGuess} */
   const uncertain = (pos, reason) => ({ pos, confidence: 'uncertain', reason })
+  /** @type {(pos: string, reason: string) => PosGuess} */
   const likely = (pos, reason) => ({ pos, confidence: 'likely', reason })
   if (!s) return uncertain('noun', 'empty')
   if (/\s/.test(s)) return uncertain('phrase', 'multi-word — likely a phrase, not a single lemma')

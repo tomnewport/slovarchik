@@ -135,6 +135,8 @@ function weightedPick(items, weightOf, rng) {
  *   so each level's slots are weighted only by that level's own needs, with an
  *   optional override for at-risk-bucket slots (see {@link weightResolver}).
  * @param {() => number} [args.rng]
+ * @param {string[]|null} [args.levels] restrict the draw to these levels;
+ *   null takes every practice the type allows
  * @returns {{type, size, buckets, practices: object[]}}
  */
 export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, rng = Math.random, levels = null } = {}) {

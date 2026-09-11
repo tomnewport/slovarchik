@@ -227,6 +227,7 @@ export function spellingDiff(typed, answer) {
       d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost)
     }
   }
+  /** @type {Array<{type: 'ok'|'wrong'|'gap', char: string}>} */
   const cells = []
   let i = m
   let j = n
