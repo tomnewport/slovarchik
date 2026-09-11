@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
+import { registerSW } from 'virtual:pwa-register'
 import App from './App.vue'
 import { router } from './router/index.js'
 import { initVocab } from './stores/vocab.js'
 import { loadProgress } from './stores/progress.js'
 import { loadSettings } from './stores/settings.js'
 import { raiseError } from './stores/errorToast.js'
+import { initAppUpdate } from './stores/appUpdate.js'
 import { installSeededRandom } from './lib/seed.js'
 import './style.css'
 
@@ -33,23 +35,13 @@ window.addEventListener('error', (event) => {
   raiseError(event.error)
 })
 
-// Auto-reload when an updated service worker takes control, so a deployed fix
-// actually reaches an already-open PWA instead of running stale cached code
-// until the next cold start (#190). registerSW.js (injected by vite-plugin-pwa)
-// only registers the worker; the Workbox SW uses skipWaiting + clientsClaim, so
-// a new version activates and claims this page — we just have to reload on that.
-if ('serviceWorker' in navigator) {
-  // Only an *update* should trigger a reload. On a first-ever visit the page is
-  // not yet controlled, so the worker claiming it for the first time is not a
-  // stale-code swap and must not bounce the user.
-  const hadController = Boolean(navigator.serviceWorker.controller)
-  let reloading = false
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (reloading || !hadController) return
-    reloading = true
-    window.location.reload()
-  })
-}
+// Register the service worker, and notice when a deployed fix is ready — but
+// do not take it yet. #190 auto-reloaded the page the moment a new worker
+// claimed it, which put a deployed fix in front of the learner at the cost of
+// reloading them mid-question; #691 is that cost, reported. The worker now
+// waits (`registerType: 'prompt'`), the store records that an update is
+// available, and Home offers it. See src/stores/appUpdate.js.
+initAppUpdate(registerSW)
 
 app.use(router).mount('#app')
 

@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 
 import { state as progress } from '../stores/progress.js'
 import { state as vocabState } from '../stores/vocab.js'
+import { state as appUpdate, initAppUpdate, resetAppUpdate } from '../stores/appUpdate.js'
 
 const push = vi.fn()
 vi.mock('vue-router', () => ({ useRouter: () => ({ push }) }))
@@ -20,6 +21,7 @@ beforeEach(() => {
   progress.learning = null
   progress.mastery = null
   push.mockClear()
+  resetAppUpdate()
 })
 
 describe('HomeView', () => {
@@ -156,6 +158,31 @@ describe('HomeView', () => {
     const missing = card.findAll('.dim-missing')
     expect(missing.length).toBeGreaterThan(0)
     expect(missing[0].classes()).toContain('dim-pip')
+  })
+
+  it('offers a waiting update rather than taking it (#691)', async () => {
+    // No banner while the running build is the latest one.
+    expect(mount(HomeView).find('.update-banner').exists()).toBe(false)
+
+    appUpdate.available = true
+    const wrapper = mount(HomeView)
+    const banner = wrapper.find('.update-banner')
+    expect(banner.exists()).toBe(true)
+    expect(banner.text()).toContain('A new version is ready')
+    // The update is an offer with a button, not something that has already
+    // happened to the learner.
+    expect(wrapper.find('.apply-update').attributes('disabled')).toBeUndefined()
+  })
+
+  it('marks the update button busy once pressed, so it is not pressed twice', async () => {
+    const updateSW = vi.fn(async () => {})
+    initAppUpdate(() => updateSW, { reload: vi.fn() })
+    appUpdate.available = true
+    const wrapper = mount(HomeView)
+    await wrapper.find('.apply-update').trigger('click')
+    expect(updateSW).toHaveBeenCalledWith(true)
+    expect(appUpdate.applying).toBe(true)
+    expect(wrapper.find('.apply-update').attributes('disabled')).toBeDefined()
   })
 
   it('shows mastery batch only when a mastery batch is active', () => {

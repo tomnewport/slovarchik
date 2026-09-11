@@ -95,6 +95,8 @@ src/
       lifecycle.js      #     load / reset
       backup.js         #     export / import
       index.js          #     re-export; dependencies point one way only, no cycles
+    appUpdate.js        #   whether a newer build is waiting, and taking it when the
+                        #     learner asks — never mid-question (#691)
     settings.js         #   user preferences (not learning progress)
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
