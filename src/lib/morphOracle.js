@@ -166,6 +166,7 @@ const PERSONS = ['1sg', '2sg', '3sg', '1pl', '2pl', '3pl']
  */
 export function personCellDuplicates(words, { allow = new Set() } = {}) {
   const allowed = allow instanceof Set ? allow : new Set(allow)
+  /** @type {{key: string, block: string, persons: [string, string], form: string}[]} */
   const out = []
   for (const word of words) {
     if (word.pos !== 'verb' || allowed.has(word.key)) continue

@@ -35,7 +35,7 @@ export const FAIL_FACTOR = 0.5
  * Fold one review into a dimension's schedule.
  * @param {{stability: number, due: number, lastReview: number}|null} prev
  *   the dimension's schedule before this review (null on first review)
- * @param {{correct: boolean, hinted?: boolean, ts?: number}} review
+ * @param {{correct?: boolean, hinted?: boolean, ts?: number}} [review]
  *   `hinted` marks answers produced with the keyboard hint (or any exercise
  *   where unaided recall wasn't demonstrated); they grow stability less.
  * @returns {{stability: number, due: number, lastReview: number}}
@@ -109,7 +109,7 @@ export const CONFIRM_GAP_MS = DAY_MS
  * still `learned` or better (a word that slipped is handled by the lost-word
  * plumbing instead).
  * @param {{learnedAt?: number|null, confirmedAt?: number|null}} rec
- * @param {{correct: boolean, ts?: number}} attempt
+ * @param {{correct?: boolean, ts?: number}} [attempt]
  * @returns {'confirmed'|'failed'|null} null when this attempt is not a
  *   confirmation review (already confirmed, never learned, or too soon).
  */

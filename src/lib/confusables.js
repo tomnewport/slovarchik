@@ -179,11 +179,11 @@ function verdictFor(sense, want, typedForm, targetForm, byKey) {
  * does it relate to the one being asked for?
  *
  * @param {string} typed the learner's answer
- * @param {object} ctx
- * @param {string} ctx.targetKey natural key of the word being drilled
- * @param {string} ctx.target the wanted surface form (a word or a whole phrase)
- * @param {Map} ctx.formIndex from `buildFormIndex` (phraseHint.js)
- * @param {Map} ctx.byKey key → word record
+ * @param {object} [ctx]
+ * @param {string} [ctx.targetKey] natural key of the word being drilled
+ * @param {string} [ctx.target] the wanted surface form (a word or a whole phrase)
+ * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
+ * @param {Map} [ctx.byKey] key → word record
  * @returns {object|null} a verdict, or null when there is no confusion to name —
  *   the answer isn't a recognisable Russian word, or it is the target word in
  *   the wrong form. Both are spelling slips, and the caller should fall through
@@ -197,7 +197,17 @@ export function diagnose(typed, ctx = {}) {
   return diagnoseWord(typed, answer, byKey.get(targetKey) ?? null, ctx)
 }
 
-function diagnoseWord(typed, targetForm, want, { formIndex, byKey }) {
+/**
+ * Diagnose a single wrong word against the one the drill wanted.
+ * @param {string} typed the learner's answer
+ * @param {string} targetForm the surface form wanted
+ * @param {object|null} want the target's word record
+ * @param {object} [ctx]
+ * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
+ * @param {Map} [ctx.byKey] key → word record
+ * @returns {object|null}
+ */
+function diagnoseWord(typed, targetForm, want, { formIndex, byKey } = {}) {
   const word = String(typed ?? '').trim()
   if (!word || !normToken(word)) return null
   const entry = lookup(formIndex, word)
@@ -212,7 +222,7 @@ function diagnoseWord(typed, targetForm, want, { formIndex, byKey }) {
     if (verdict === SAME_WORD) return null
     if (verdict && (!best || rank(verdict.type) < rank(best.type))) best = verdict
   }
-  if (best) best.why = whyDiffers(best, want)
+  if (best) /** @type {{why?: string}} */ (best).why = whyDiffers(best, want)
   return best
 }
 
@@ -221,6 +231,14 @@ function diagnoseWord(typed, targetForm, want, { formIndex, byKey }) {
  * unambiguous — same token count, exactly one mismatch — or we are guessing
  * which word the learner meant, and today's whole-phrase feedback is the honest
  * answer.
+ *
+ * @param {string} typed the learner's answer
+ * @param {string} target the wanted phrase
+ * @param {object} [ctx]
+ * @param {string} [ctx.targetKey] natural key of the word being drilled
+ * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
+ * @param {Map} [ctx.byKey] key → word record
+ * @returns {object|null}
  */
 function diagnosePhrase(typed, target, ctx) {
   const got = String(typed ?? '')
@@ -285,10 +303,10 @@ function normalizeGloss(text) {
  * simply failing the card.
  *
  * @param {string} typed the English the learner gave
- * @param {object} ctx
- * @param {string} ctx.targetKey natural key of the word on the card
- * @param {Map} ctx.byKey key → word record
- * @param {Map} ctx.glossIndex from {@link buildGlossIndex}
+ * @param {object} [ctx]
+ * @param {string} [ctx.targetKey] natural key of the word on the card
+ * @param {Map} [ctx.byKey] key → word record
+ * @param {Map} [ctx.glossIndex] from {@link buildGlossIndex}
  * @returns {object|null} a verdict tagged `direction: 'en'`, or null when the
  *   gloss belongs to no word we know — an ordinary blank, which the drill
  *   handles by revealing as it always has.
@@ -310,8 +328,9 @@ export function diagnoseEnglish(typed, ctx = {}) {
     if (verdict && (!best || rank(verdict.type) < rank(best.type))) best = verdict
   }
   if (!best) return null
-  best.direction = 'en'
-  best.why = whyDiffers(best, want)
+  const verdict = /** @type {{direction?: string, why?: string}} */ (best)
+  verdict.direction = 'en'
+  verdict.why = whyDiffers(best, want)
   return best
 }
 

@@ -188,6 +188,7 @@ export function masteryLostPool(ctx) {
  * this refresh pool excludes words still being learned.
  */
 export function duePool(ctx, now = Date.now()) {
+  /** @type {Array<[string, number]>} */
   const scored = Object.keys(ctx.records)
     .filter((k) => rank(ctx.stateOf(k)) >= rank('learned'))
     .map((k) => [k, wordOverdueness(ctx.records[k]?.schedule, lastAttemptAt(ctx.events(k)), now)])
@@ -221,7 +222,13 @@ export function masteryBatchActive(ctx, now = Date.now()) {
  * session runner can draw exercises.
  *
  * @param snapshot the store snapshot passed to {@link makeContext}
- * @param opts `{ type, size, focusKeys, now }`
+ * @param {object} [opts]
+ * @param {string} [opts.type] which shape of session to assemble
+ * @param {string} [opts.size] size key for a standard session
+ *   (quick/normal/super); {@link buildSession} turns it into a count
+ * @param {string[]|null} [opts.focusKeys] restrict the draw to these words
+ * @param {number} [opts.now] clock injection point for the due calculation
+ * @param {() => number} [rng]
  */
 export function assembleSession(
   snapshot,
@@ -326,11 +333,14 @@ export function assembleSession(
   // risk in each dimension, so the slot's practice lands on a drill that can
   // actually de-risk something instead of one whose recent history is clean.
   if (riskByDim.learning.size > 0) {
+    /** @type {Partial<Record<string, number>>} */
     const atRiskWeakness = {}
     for (const d of DIMENSIONS) atRiskWeakness[d] = riskByDim.learning.get(d)?.length ?? 0
     weakness.atRisk = atRiskWeakness
   }
-  const session = buildSession({ type, size, weakness, rng, levels })
+  // `weakness` is per-dimension until an at-risk override is folded in above,
+  // at which point it is the per-level shape buildSession also accepts.
+  const session = buildSession({ type, size, weakness: /** @type {any} */ (weakness), rng, levels })
   let pools
   if (focusKeys) {
     // Focused session: every bucket is restricted to the filtered words, which

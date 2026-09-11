@@ -12,7 +12,12 @@ import { minExercisesToLevel } from '../../lib/progression.js'
 import { state, BATCH_META_KEY, wordRecord, rank, events, vocabWords } from './state.js'
 import { stateOf, isPendingConfirmation } from './records.js'
 
-/** Offer up to five batch options for the next learning or mastery journey. */
+/**
+ * Offer up to five batch options for the next learning or mastery journey.
+ * @param {'learning'|'mastery'} [level]
+ * @param {() => number} [rng]
+ * @returns {object[]}
+ */
 export function getBatchOptions(level = 'learning', rng = Math.random) {
   // Mastery builds on confirmed memory: a word still pending its spaced
   // confirmation review (#313) is not yet eligible to enter a mastery batch.

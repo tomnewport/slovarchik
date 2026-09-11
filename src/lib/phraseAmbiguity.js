@@ -152,7 +152,8 @@ function claim(index, form, tag) {
  *   normalised form → tag, or null if ambiguous
  */
 export function buildAmbiguityIndex(words) {
-  const index = new Map()
+  /** @type {Map<string, string> & {shortPredicates: Set<string>, subjects: Set<string>}} */
+  const index = /** @type {any} */ (new Map())
   const shortCandidates = new Set()
   const subjects = new Set(THIRD_PERSON_NOM)
   for (const w of words ?? []) {

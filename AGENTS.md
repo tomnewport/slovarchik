@@ -198,12 +198,13 @@ npm run check:corpus  # just the three gates above, in CI's order (~5s)
 npm run check:ci      # the whole CI `test` job, in order, stopping where it would
 ```
 
-The typecheck is a **per-file ratchet**, not a clean gate: the JSDoc in
-`src/lib` had already drifted from the signatures it describes when it landed,
-so `scripts/typecheck-baseline.json` records the count per file and CI fails
-only when one grows. It is meant to reach zero — lower an entry when you fix
-some, delete it at zero, never raise one. Per file rather than one total so a
-new error cannot hide behind a fix somewhere else (#666).
+The typecheck is a **per-file ratchet** in `scripts/typecheck-baseline.json`,
+and it is now **empty**: the JSDoc drift it was built to retire is gone, so any
+new error fails the build by name. Adding an entry back is not a fix — a new
+error means a doc block and its signature disagree, and the repair is to make
+them agree, or to say at the site why TypeScript is narrowing correct JS badly
+(as `src/types/globals.d.ts` does). Per file rather than one total, so a new
+error cannot hide behind a fix somewhere else (#666).
 
 CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `typecheck`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,

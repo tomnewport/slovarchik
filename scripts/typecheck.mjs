@@ -6,12 +6,13 @@
 // over (#535), for the same reason. It is deliberately NOT a TypeScript
 // migration; `strict` is off and `.vue` files are untouched.
 //
-// Why a ratchet rather than a clean gate: the JSDoc has already drifted, and
-// the count is not zero on the day this lands. A gate that fails from its first
-// commit teaches everyone to bypass it. So this fails only when the count
-// *grows*, exactly as the coverage thresholds in vite.config.js and the payload
-// budget in scripts/size-budget.json do — and it says so out loud when the
-// count drops, because a baseline nobody lowers is a baseline nobody believes.
+// It began as a ratchet rather than a clean gate, because the JSDoc had already
+// drifted and the count was 92 on the day the probe landed. A gate that fails
+// from its first commit teaches everyone to bypass it, so this failed only when
+// the count *grew*, and said so out loud when it dropped — a baseline nobody
+// lowers is a baseline nobody believes. The baseline is empty now, which makes
+// it an ordinary gate; the ratchet machinery stays because it is what will
+// report the next regression by file and by name.
 //
 // The ceiling is per file, not one total. A single number lets a new error in
 // one module hide behind a fix in another, which is the failure mode that makes
