@@ -87,35 +87,6 @@ export default defineConfig({
         // (#691). `registerType: 'prompt'` above turns both off by default; the
         // e2e suite is what showed that only one of them should stay off.
         //
-        // ⚠️  ONE-OFF RESCUE DEPLOY — `skipWaiting` is TRUE on purpose, and must
-        // go back to `false` in the very next PR once this has reached Pages.
-        // Left in place it is #691 regressed in full, silently. See #703.
-        //
-        // Why it has to be true exactly once: #702 shipped `skipWaiting: false`
-        // to clients that were running an `autoUpdate` build, and those two do
-        // not hand over to each other. The new worker will not activate itself,
-        // and the old page cannot ask it to — under `autoUpdate` the register
-        // script vite-plugin-pwa injects makes `updateServiceWorker` a no-op,
-        // because autoUpdate expects the worker to call `self.skipWaiting()`:
-        //
-        //     if (!auto) { sendSkipWaitingMessage?.() }   // auto === true
-        //
-        // …and the old page is the old bundle, so it has no Update banner to
-        // offer either. Every install from before #702 is therefore stranded on
-        // the last autoUpdate build, collecting one more waiting worker per
-        // deploy. Only the worker can break the deadlock, by taking itself.
-        //
-        // Those clients then reload on their own: their `main.js` still listens
-        // on `controllerchange` (#190), so they land on a build that *has* the
-        // banner, and the next deploy can go back to asking politely.
-        //
-        // Note this build's own `main.js` plays no part in that. At the moment
-        // of claiming, every stranded client is still running the old bundle —
-        // so re-adding a `controllerchange` reload here would rescue nobody and
-        // would only bring #691 back.
-        //
-        // Once reverted, the comment below is true again:
-        //
         // `skipWaiting: false` is the fix: a freshly deployed worker installs
         // and waits, instead of activating the moment a launch notices it.
         // Nothing takes over until the learner presses Update on Home.
@@ -128,7 +99,7 @@ export default defineConfig({
         // offline spec caught exactly that, a second launch still uncontrolled
         // and therefore still not offline-capable. Claiming costs nothing here
         // now that nothing reloads on `controllerchange`.
-        skipWaiting: true, // ⚠️ RESCUE ONLY — back to false next PR (#703)
+        skipWaiting: false,
         clientsClaim: true,
         // Precache the *app shell only* — JS/CSS/HTML/icons/fonts. The vocab
         // (`vocab/*.json` + `manifest.json`) is deliberately excluded (#266):

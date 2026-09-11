@@ -12,11 +12,6 @@ import { reactive } from 'vue'
 // A new worker now installs and waits (`registerType: 'prompt'` plus an
 // explicit `skipWaiting: false` in vite.config.js), and the only thing a launch
 // does on finding one is set `state.available`.
-//
-// (During the one-off rescue deploy for #703, `skipWaiting` is true and the
-// worker takes itself, so `onNeedRefresh` mostly will not fire and this banner
-// mostly will not show. That is the point of that deploy, and it is reverted in
-// the PR straight after it.)
 // Home shows a banner; the swap happens when the learner asks for it, between
 // questions rather than during one.
 //
