@@ -26,6 +26,8 @@ export const state = reactive({
   firstUseAt: null,
   /** Set of achievement IDs the user has already been notified about. */
   seenAchievements: new Set(),
+  /** Achievement ID → epoch ms first earned. Grows only; see `stampEarned`. */
+  achievementsEarnedAt: {},
   /** day key → { count, correct, hue } — the contribution calendar / streak. */
   activity: {},
   /** Hue (0..359) currently assigned to days; rerolled when the batch changes. */

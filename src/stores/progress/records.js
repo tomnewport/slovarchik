@@ -16,11 +16,11 @@ import {
 import { tableKey } from '../../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../../lib/schedule.js'
 import { learnableWords } from '../../lib/vocabBuild.js'
-import { earnedSet, buildCefrStats, achievementById } from '../../lib/achievements.js'
+import { earnedSet, buildCefrStats, achievementById, stampEarned } from '../../lib/achievements.js'
 import { state as vocabState } from '../vocab.js'
 
 import { state, wordIndex, wordRecord, rank, events } from './state.js'
-import { persist } from './persistence.js'
+import { persist, saveMeta } from './persistence.js'
 import { logActivity } from './activity.js'
 
 // Keep storage bounded: only the most recent attempts per (level, dimension)
@@ -115,10 +115,39 @@ const learnableVocab = computed(() => learnableWords(vocabState.words))
 /** CEFR-level stats (total words / learned words) derived from vocab + progress. */
 export const cefrStats = computed(() => buildCefrStats(learnableVocab.value, stateOf))
 
-/** All achievement IDs the learner has currently earned (reactive). */
-export const earnedAchievements = computed(() =>
-  earnedSet(learnedCount.value, masteredCount.value, cefrStats.value),
+/**
+ * All achievement IDs the learner has earned (reactive) — those meeting their
+ * threshold right now, *plus* every one ever stamped. The union is taken here
+ * rather than read off the stamp alone so a freshly-earned achievement is
+ * reactive immediately, before {@link stampAchievements} persists it.
+ */
+export const earnedAchievements = computed(
+  () =>
+    new Set([
+      ...Object.keys(state.achievementsEarnedAt),
+      ...earnedSet(learnedCount.value, masteredCount.value, cefrStats.value),
+    ]),
 )
+
+/**
+ * Stamp any newly-earned achievement with the time it was earned, so growth in
+ * the corpus (or a slipped word) can never revoke one — see `stampEarned`.
+ * Called after every recorded attempt, and a no-op — with no write — when
+ * nothing is new, which is all but a handful of them.
+ *
+ * Synchronous, persisting in the background like the activity log: the stamp
+ * above is what {@link earnedAchievements} reads, so it is already correct when
+ * this returns, and awaiting IndexedDB here would put a write on the hot path
+ * of every drill answer. A failed write is recovered by the next attempt, which
+ * re-stamps from the same live set.
+ * @param {number} ts
+ */
+function stampAchievements(ts) {
+  const { next, added } = stampEarned(state.achievementsEarnedAt, earnedAchievements.value, ts)
+  if (!added.length) return
+  state.achievementsEarnedAt = next
+  saveMeta('achievementsEarnedAt', next)
+}
 
 /**
  * Achievements earned but not yet shown to the user.
@@ -347,6 +376,7 @@ export async function recordAttempt({
   // runner awaits this per target, and the activity log is recoverable from the
   // events anyway).
   logActivity(ts, correct, Math.max(1, times))
+  stampAchievements(ts)
   return next
 }
 
@@ -376,6 +406,7 @@ export async function markKnown(key) {
   if (rec.masteredAt == null && next === 'mastered') rec.masteredAt = ts
   rec.peak = Math.max(rec.peak ?? 0, rank(next))
   await persist(rec)
+  stampAchievements(ts)
   return next
 }
 

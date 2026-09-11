@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ACHIEVEMENTS, earnedSet, newlyUnlocked, achievementById, buildCefrStats } from './achievements.js'
+import { ACHIEVEMENTS, earnedSet, newlyUnlocked, achievementById, buildCefrStats, stampEarned } from './achievements.js'
 
 describe('ACHIEVEMENTS', () => {
   it('has unique ids', () => {
@@ -147,5 +147,34 @@ describe('buildCefrStats', () => {
     // 'noLevel' should not appear in any bucket
     const total = Object.values(stats).reduce((s, v) => s + v.total, 0)
     expect(total).toBe(5) // 6 words minus the null-cefr one
+  })
+})
+
+describe('stampEarned', () => {
+  it('stamps a newly-earned id with the time it was earned', () => {
+    const { next, added } = stampEarned({}, new Set(['learn-1']), 1000)
+    expect(next).toEqual({ 'learn-1': 1000 })
+    expect(added).toEqual(['learn-1'])
+  })
+
+  it('keeps the original timestamp when the id is earned again', () => {
+    const { next, added } = stampEarned({ 'learn-1': 1000 }, new Set(['learn-1']), 9999)
+    expect(next['learn-1']).toBe(1000)
+    expect(added).toEqual([])
+  })
+
+  it('never drops an id that has stopped meeting its threshold', () => {
+    // The whole point: the corpus grew, so cefr-A1 is no longer live-earned.
+    const { next } = stampEarned({ 'cefr-A1': 1000 }, new Set([]), 2000)
+    expect(next).toEqual({ 'cefr-A1': 1000 })
+  })
+
+  it('returns the same object when nothing was added, so callers can skip a write', () => {
+    const stamped = { 'learn-1': 1000 }
+    expect(stampEarned(stamped, new Set(['learn-1']), 2000).next).toBe(stamped)
+  })
+
+  it('treats a missing stamp as empty', () => {
+    expect(stampEarned(undefined, new Set(['learn-1']), 5).next).toEqual({ 'learn-1': 5 })
   })
 })

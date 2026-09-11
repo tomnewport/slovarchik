@@ -32,6 +32,7 @@ export function exportData() {
     records: Object.values(state.records).map((rec) => persistedShape(rec)),
     batches: { learning: state.learning, mastery: state.mastery },
     seenAchievements: [...state.seenAchievements],
+    achievementsEarnedAt: state.achievementsEarnedAt,
     activity: state.activity,
     streakHue: state.streakHue,
     batchSig: state.batchSig,
@@ -98,6 +99,14 @@ export async function importData(data) {
   const seenIds = Array.isArray(data.seenAchievements) ? data.seenAchievements : []
   state.seenAchievements = new Set(seenIds)
   await idb.setMeta('seenAchievements', seenIds)
+  // A backup predating the stamp carries no earned-at map; the achievements it
+  // implies are re-stamped from the restored records on the next attempt.
+  const earnedAt =
+    data.achievementsEarnedAt && typeof data.achievementsEarnedAt === 'object'
+      ? toPlain(data.achievementsEarnedAt)
+      : {}
+  state.achievementsEarnedAt = earnedAt
+  await idb.setMeta('achievementsEarnedAt', earnedAt)
   // Restore the activity calendar / streak, falling back to whatever the events
   // imply for backups that predate the streak system.
   const importedActivity =
