@@ -14,6 +14,7 @@ import {
 } from '../../lib/sessionPools.js'
 import { rankSkills, skillById, focusedKeys } from '../../lib/focus.js'
 import { recoveryPlan } from '../../lib/recovery.js'
+import { reviewState } from '../../lib/reviewState.js'
 
 import { state, wordRecord, events, vocabWords } from './state.js'
 import { stateOf, atRisk, lost } from './records.js'
@@ -76,8 +77,17 @@ export function hasBeenCorrect(key) {
  * well as from a batch, and those two need it to say what dropped. `inBatch`
  * says whether the word is in a committed batch at all, which is what decides
  * whether "leave for later" is a removal or an erasure.
+ *
+ * `review` is where the word stands with the memory scheduler — when each skill
+ * is next expected and whether the word has passed its overnight confirmation
+ * (see lib/reviewState.js). Every other field here describes what the learner
+ * has already done; this is the only one that says what the engine will do next,
+ * which is the half of the spaced-repetition model the card never showed.
+ *
+ * @param {string} key
+ * @param {{now?: number}} [opts] clock injection point for the review rows
  */
-export function wordProgressDetail(key) {
+export function wordProgressDetail(key, { now = Date.now() } = {}) {
   const rec = state.records[key] ?? null
   const evs = events(key)
   const word = wordRecord(key)
@@ -97,6 +107,7 @@ export function wordProgressDetail(key) {
     lastAt: lastAttemptAt(evs),
     levels,
     recovery: recoveryPlan(evs, word, { peak: rec?.peak, state: stateOf(key) }),
+    review: reviewState(rec, { now, state: stateOf(key) }),
     inBatch: inAnyBatch(key),
   }
 }
