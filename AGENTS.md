@@ -123,6 +123,9 @@ src/
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)
+                        #   reviewState  — when the scheduler expects each skill back, and whether a
+                        #     word passed the overnight confirmation review: the word card's
+                        #     "Spaced review" panel, and the only caller of schedule.js's `isDue`
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
                         #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
                         #     a preposition with only one case) when the rule is the whole of what went wrong; the

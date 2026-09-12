@@ -162,3 +162,113 @@ describe('WordProgressModal — what slipped, and what would win it back', () =>
     expect(inBatch.find('.confirm-msg').text()).toContain('current batch')
   })
 })
+
+describe('WordProgressModal — when the word comes back (the scheduler, #313)', () => {
+  const DAY = 86400000
+  const LEARNING = ['identification', 'usage', 'hearing', 'speaking']
+
+  // The component reads the real clock, so these fixtures are anchored to it.
+  const NOW = Date.now()
+  const ev = (dimension, level, correct, ts) => ({ dimension, level, correct, ts })
+  /** Every learning criterion met, on two calendar days. */
+  const learned = (at) =>
+    LEARNING.flatMap((d, i) => [
+      ev(d, 'learning', true, at - DAY + i),
+      ev(d, 'learning', true, at + i),
+      ev(d, 'learning', true, at + i + 1),
+    ])
+
+  function track(rec) {
+    vocabState.words = [
+      { key: 'w0', headword: 'дом', meaning: 'house', pos: 'noun', hasInflections: true },
+    ]
+    progress.state.records.w0 = { word: 'w0', events: [], peak: 0, ...rec }
+  }
+
+  const open = async () => {
+    const wrapper = mount(WordProgressModal, { props: { wordKey: 'w0' } })
+    await flushPromises()
+    return wrapper
+  }
+
+  it('shows no panel for a word the engine has never recorded', async () => {
+    vocabState.words = [{ key: 'w0', headword: 'дом', meaning: 'house', pos: 'noun' }]
+    const wrapper = await open()
+    expect(wrapper.find('.review').exists()).toBe(false)
+  })
+
+  it('gives a row per scheduled skill, naming its interval and when it is next due', async () => {
+    track({
+      events: learned(NOW - 10 * DAY),
+      peak: 2,
+      learnedAt: NOW - 10 * DAY,
+      confirmedAt: NOW - 9 * DAY,
+      schedule: {
+        // Resting: answered this morning on a four-day interval.
+        identification: { stability: 4 * DAY, due: NOW + 4 * DAY, lastReview: NOW },
+        // Overdue by two days on a two-day interval.
+        usage: { stability: 2 * DAY, due: NOW - 2 * DAY, lastReview: NOW - 4 * DAY },
+      },
+    })
+    const rows = (await open()).findAll('.review-dim')
+    expect(rows).toHaveLength(2)
+    // Most overdue leads — the order the due queue itself draws in.
+    expect(rows[0].find('.dim-name').text()).toContain('Usage')
+    expect(rows[0].find('.dim-name').text()).toContain('every 2 days')
+    expect(rows[0].find('.dim-status').text()).toBe('2 days overdue')
+    expect(rows[0].classes()).toContain('due')
+    expect(rows[1].find('.dim-name').text()).toContain('Identification')
+    expect(rows[1].find('.dim-status').text()).toBe('in 4 days')
+    expect(rows[1].classes()).not.toContain('due')
+  })
+
+  it('says the clock has not started for a word with no schedule yet', async () => {
+    // A record written before the scheduler existed: migrations normalise it to
+    // an empty schedule, which fills in on the word's next answer.
+    track({ events: learned(NOW - 30 * DAY), peak: 2, learnedAt: NOW - 30 * DAY, confirmedAt: NOW - 30 * DAY, schedule: {} })
+    const wrapper = await open()
+    expect(wrapper.find('.review').exists()).toBe(true)
+    expect(wrapper.findAll('.review-dim')).toHaveLength(0)
+    expect(wrapper.find('.review-note').text()).toContain('No reviews scheduled yet')
+  })
+
+  it('marks a word that finished its batch today as unconfirmed, with the date it can be settled', async () => {
+    track({ events: learned(NOW - 3600000), peak: 2, learnedAt: NOW - 3600000, schedule: {} })
+    const line = (await open()).find('.confirm-line')
+    expect(line.classes()).toContain('wait')
+    expect(line.find('.confirm-badge').text()).toBe('Unconfirmed')
+    expect(line.find('.confirm-text').text()).toContain('proves working memory')
+    expect(line.find('.confirm-text').text()).toContain('from')
+  })
+
+  it('marks the confirmation review as due once the word has slept on it', async () => {
+    track({ events: learned(NOW - 3 * DAY), peak: 2, learnedAt: NOW - 3 * DAY, schedule: {} })
+    const line = (await open()).find('.confirm-line')
+    expect(line.find('.confirm-badge').text()).toBe('Review due')
+  })
+
+  it('reports a confirmed word, and a failed review, in their own words', async () => {
+    track({ events: learned(NOW - 5 * DAY), peak: 2, learnedAt: NOW - 5 * DAY, confirmedAt: NOW - 4 * DAY, schedule: {} })
+    let line = (await open()).find('.confirm-line')
+    expect(line.classes()).toContain('good')
+    expect(line.find('.confirm-badge').text()).toBe('Confirmed')
+
+    track({ events: learned(NOW - 5 * DAY), peak: 2, learnedAt: NOW - 5 * DAY, confirmFailedAt: NOW - DAY, schedule: {} })
+    line = (await open()).find('.confirm-line')
+    expect(line.classes()).toContain('bad')
+    expect(line.find('.confirm-badge').text()).toBe('Not retained')
+    expect(line.find('.confirm-text').text()).toContain('back in the current batch')
+  })
+
+  it('says a word flagged known has the wait waived (#321)', async () => {
+    track({ events: learned(NOW - 3 * DAY), peak: 2, learnedAt: NOW - 3 * DAY, known: true, schedule: {} })
+    const line = (await open()).find('.confirm-line')
+    expect(line.find('.confirm-badge').text()).toBe('Waived')
+  })
+
+  it('says nothing about confirmation for a word still being learned', async () => {
+    track({ events: [ev('identification', 'learning', true, NOW)], peak: 1, schedule: {} })
+    const wrapper = await open()
+    expect(wrapper.find('.confirm-line').exists()).toBe(false)
+  })
+})

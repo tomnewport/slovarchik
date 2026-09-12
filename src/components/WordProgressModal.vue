@@ -43,6 +43,16 @@ const STATE_LABEL = {
   learned: 'Learned',
   mastered: 'Mastered',
 }
+// The confirmation review (#313) in a badge, per status. `none` has no entry:
+// the word has never been learned (or has slipped back below it), so there is
+// nothing to confirm and the line is left off rather than shown as pending.
+const CONFIRM_BADGE = {
+  confirmed: { label: 'Confirmed', cls: 'good' },
+  waived: { label: 'Waived', cls: 'good' },
+  waiting: { label: 'Unconfirmed', cls: 'wait' },
+  due: { label: 'Review due', cls: 'wait' },
+  failed: { label: 'Not retained', cls: 'bad' },
+}
 
 const word = computed(() => vocabState.words.find((w) => w.key === props.wordKey) ?? null)
 const parsed = computed(() => parseKey(props.wordKey))
@@ -105,6 +115,17 @@ function dimStatus(dim) {
     title: 'Correct answers in the recent window',
   }
 }
+
+// Where the word stands with the memory scheduler: when each skill is next
+// expected, and whether it has held overnight. The rows come ordered
+// most-overdue-first — the order the due queue itself draws in — so the top row
+// is the skill a session would reach for next.
+const review = computed(() => detail.value.review)
+const confirmBadge = computed(() => CONFIRM_BADGE[review.value.confirmation.status] ?? null)
+// Worth a panel at all? A word with neither a schedule nor anything to say about
+// confirmation has not been answered yet, and an empty "Spaced review" heading
+// explains less than no heading.
+const hasReview = computed(() => review.value.scheduled || !!confirmBadge.value)
 
 function fmtDate(ts) {
   if (!ts) return '—'
@@ -215,6 +236,50 @@ async function unmarkKnownWord() {
         <div><dt>Attempts</dt><dd>{{ detail.totalAttempts }}</dd></div>
         <div><dt>Last seen</dt><dd>{{ fmtDate(detail.lastAt) }}</dd></div>
       </dl>
+
+      <!-- The other half of the spaced-repetition model: not what the learner
+           has done, but when the engine expects each skill back, and whether the
+           word survived its first night (#313). -->
+      <section v-if="hasReview" class="review">
+        <h4 class="level-title">Spaced review</h4>
+        <p v-if="confirmBadge" class="confirm-line" :class="confirmBadge.cls">
+          <span class="confirm-badge">{{ confirmBadge.label }}</span>
+          <span class="confirm-text">
+            {{ review.confirmation.text }}
+            <template v-if="review.confirmation.status === 'confirmed'">
+              ({{ fmtDate(review.confirmation.at) }})
+            </template>
+            <template v-else-if="review.confirmation.status === 'waiting'">
+              (from {{ fmtDate(review.confirmation.eligibleAt) }})
+            </template>
+            <template v-else-if="review.confirmation.status === 'failed'">
+              ({{ fmtDate(review.confirmation.at) }})
+            </template>
+          </span>
+        </p>
+        <div v-if="review.scheduled" class="dim-grid">
+          <div
+            v-for="d in review.dimensions"
+            :key="d.dimension"
+            class="dim review-dim"
+            :class="{ due: d.dueNow }"
+          >
+            <span class="dim-icon">{{ DIM_META[d.dimension]?.icon }}</span>
+            <span class="dim-name">
+              {{ DIM_META[d.dimension]?.name ?? d.dimension }}
+              <small class="muted">every {{ d.interval }}</small>
+            </span>
+            <span class="dim-status" :title="`Next review ${fmtDate(d.due)}`">{{ d.when }}</span>
+          </div>
+        </div>
+        <p v-else class="muted review-note">
+          No reviews scheduled yet — the clock starts on this word's next answer.
+        </p>
+        <p v-if="review.scheduled" class="muted review-note">
+          A skill that isn't due yet is still practised when it comes up — being due only moves it
+          to the front of the queue.
+        </p>
+      </section>
 
       <!-- What there is to say about the word itself (#586) — this modal is
            already the "everything about this word" surface, so the facts belong
@@ -469,6 +534,63 @@ async function unmarkKnownWord() {
 .no-progress {
   font-size: 0.9rem;
   margin: 0;
+}
+.review {
+  display: grid;
+  gap: 0.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+.confirm-line {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+.confirm-badge {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.confirm-line.good .confirm-badge {
+  color: var(--good, #22c55e);
+}
+.confirm-line.wait .confirm-badge {
+  color: var(--warn, #f59e0b);
+}
+.confirm-line.bad .confirm-badge {
+  color: var(--bad, #ef4444);
+}
+.confirm-text {
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+}
+.review-dim .dim-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.review-dim .dim-name small {
+  font-size: 0.7rem;
+}
+.review-dim .dim-status {
+  font-weight: 500;
+  color: var(--muted);
+}
+/* Due is the one state worth colouring: it is what the next session acts on. */
+.review-dim.due .dim-status {
+  font-weight: 600;
+  color: var(--warn, #f59e0b);
+}
+.review-note {
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.35;
 }
 .stats {
   display: grid;
