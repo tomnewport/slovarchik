@@ -86,6 +86,46 @@ export const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, 
 export const formIndex = computed(() => buildFormIndex(state.words))
 
 /**
+ * Russian sentence → the shaped phrase it came from, so a caller holding only
+ * the sentence can reach its alignment inputs (#706).
+ *
+ * Most of the app passes phrases around as plain strings — `hintTokensFor(ru)`,
+ * an exercise descriptor's `ex.ru` — and word alignment needs more than the
+ * string: the example's authored `align:` tie-breaks, its `inflect:` target and
+ * the English that the last rung reads as evidence. Rather than thread a phrase
+ * object through every drill, the string is looked back up here.
+ *
+ * Keyed on `ru` alone, so the 24 sentences the corpus renders with two different
+ * English translations resolve to whichever came first in dictionary order.
+ * Their alignment inputs would have to disagree for that to matter, which is
+ * what `check:align` refuses to let happen.
+ */
+export const phrasesByRu = computed(() => {
+  const map = new Map()
+  for (const p of phrases.value) if (!map.has(p.ru)) map.set(p.ru, p)
+  return map
+})
+
+/**
+ * Everything `lib/phraseAlign.js` needs to align a sentence it was handed as a
+ * bare string. Unknown sentences still get the dictionary and no annotations,
+ * which is exactly what the structural rungs need — a phrase typed into a drill
+ * that isn't in the bank still aligns, just without the authored tie-breaks.
+ * @param {string} ru
+ * @returns {object} opts for `alignPhraseTokens`
+ */
+export function alignOptsFor(ru) {
+  const phrase = phrasesByRu.value.get(ru)
+  return {
+    byKey: wordsByKey.value,
+    en: phrase ? `${phrase.en} ${phrase.enAlt.join(' ')}` : '',
+    align: phrase?.align,
+    inflectToken: phrase?.inflectToken ?? undefined,
+    inflectKey: phrase?.source,
+  }
+}
+
+/**
  * The curriculum parts (#674), each with the words it holds — the unit a
  * learner actually works through. Empty until `parts.yml` has loaded, which the
  * callers treat as "fall back to plain CEFR order" rather than as an error: the

@@ -228,10 +228,31 @@ function addSense(index, form, sense) {
  * Within each pass senses appear in dictionary order of the entries claiming them.
  * @param {object[]} sorted   word records, pre-sorted by headword then key
  * @param {(t: string) => string} norm  token normaliser keying the index
- * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}>}
+ * @returns {{index: Map<string, {key: string, ru: string, en: string, senses: object[]}>,
+ *   candidates: Map<string, string[]>}} the display index, and beside it the
+ *   full claim list for every form more than one word can surface as — which is
+ *   the question the collision rules above *answer* rather than record, and the
+ *   one `lib/phraseAlign.js` has to re-ask (#706)
  */
 function buildIndex(sorted, norm) {
   const index = new Map()
+  // Every word that can surface as each form, regardless of which one the
+  // collision rules below hand the entry to. The entry answers "what do we
+  // show"; this answers "what could this token be", which is the question
+  // alignment (lib/phraseAlign.js) has to settle. Only genuinely contested
+  // forms are kept — a form claimed by one word needs no candidate list, and
+  // keeping all 74k of them would cost memory to say nothing.
+  const claims = new Map()
+  for (const w of sorted) {
+    for (const form of wordForms(w, norm)) {
+      const seen = claims.get(form)
+      if (seen) seen.push(w.key)
+      else claims.set(form, [w.key])
+    }
+  }
+  /** @type {Map<string, string[]>} */
+  const candidates = new Map()
+  for (const [form, keys] of claims) if (keys.length > 1) candidates.set(form, keys)
   // Gloss-only entries are keyed on a surface form, not on a lemma, so the entries
   // they hold are the ones a real lemma is allowed to join in pass 2.
   const glossOnly = new Set(sorted.filter((w) => w.learnable === false).map((w) => w.key))
@@ -272,7 +293,7 @@ function buildIndex(sorted, norm) {
     }
   }
 
-  return index
+  return { index, candidates }
 }
 
 /**
@@ -285,8 +306,14 @@ function buildIndex(sorted, norm) {
  * assignments below are cast: `buildIndex` returns a plain Map and this is the
  * moment it becomes the richer shape (#666).
  *
+ * `candidates` is the other side of the same coin: for the forms more than one
+ * word can surface as, *every* word that can — not just the one the collision
+ * rules gave the entry to. The entry says what to show; the candidate list says
+ * what the token could be, which is the question `lib/phraseAlign.js` settles.
+ * Forms only one word claims are absent, so a miss means "unambiguous".
+ *
  * @typedef {Map<string, {key: string, ru: string, en: string, senses: object[]}>
- *   & {stressIndex: Map<string, {key: string, ru: string, en: string, senses: object[]}>}} FormIndex
+ *   & {stressIndex: FormIndex, candidates: Map<string, string[]>}} FormIndex
  */
 
 /**
@@ -300,6 +327,10 @@ function buildIndex(sorted, norm) {
  * stress mark kept, so {@link phraseHintTokens} can disambiguate heteronyms that
  * differ only by stress — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т» (stand)
  * vs «сто́ят» (cost) — whenever the phrase token carries its stress mark.
+ *
+ * Both indexes also carry `.candidates`, the full claim list for every contested
+ * form (see the typedef); `lib/phraseAlign.js` reads it to decide which word a
+ * token actually is, rather than inheriting the display entry's guess.
  * @param {object[]} words   normalised word records (from buildWords)
  * @returns {FormIndex}
  */
@@ -317,8 +348,13 @@ export function buildFormIndex(words) {
         Number(a.learnable === false) - Number(b.learnable === false) ||
         String(a.key ?? '').localeCompare(String(b.key ?? ''), 'ru'),
     )
-  const index = /** @type {FormIndex} */ (buildIndex(sorted, normToken))
-  index.stressIndex = buildIndex(sorted, normTokenStress)
+  const bare = buildIndex(sorted, normToken)
+  const stressed = buildIndex(sorted, normTokenStress)
+  const index = /** @type {FormIndex} */ (bare.index)
+  index.candidates = bare.candidates
+  const stressIndex = /** @type {FormIndex} */ (stressed.index)
+  stressIndex.candidates = stressed.candidates
+  index.stressIndex = stressIndex
   return index
 }
 

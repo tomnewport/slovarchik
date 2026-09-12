@@ -5626,6 +5626,7 @@ words:
       - ru: В э́том магази́не са́мые дороги́е часы́.
         en_gb: The most expensive watches are in this shop.
         inflect: { token: 4, span: 2, degree: superlative, case: nom, gender: pl, rule: adj-superlative }
+        align: { 6: "часы=clock" }
     forms:
       m: дорого́й
       f: дорога́я
@@ -8680,6 +8681,7 @@ words:
       - ru: Мы е́ли кита́йскую еду́.
         en_gb: We ate Chinese food.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
+        align: { 2: "есть=to eat" }
       - ru: Здесь продаю́т кита́йские това́ры.
         en_gb: They sell Chinese goods here.
         inflect: { token: 3, case: acc, number: pl, gender: pl, rule: adj-agreement }
@@ -11099,6 +11101,7 @@ words:
       - ru: Э́ти часы́ о́чень многофункциона́льные.
         en_gb: This watch is very multifunctional.
         inflect: { token: 4, case: nom, number: pl, gender: pl, rule: adj-agreement }
+        align: { 2: "часы=clock" }
   "многочисленный=numerous":
     cefr_level: B2
     accented: многочи́сленный
@@ -11411,6 +11414,7 @@ words:
       - ru: Они́ е́ли морску́ю ры́бу.
         en_gb: They ate sea fish.
         inflect: { token: 3, case: acc, number: sg, gender: f, rule: adj-agreement }
+        align: { 2: "есть=to eat" }
       - ru: Здесь живу́т морски́е живо́тные.
         en_gb: Sea animals live here.
         inflect: { token: 3, case: nom, number: pl, gender: pl, rule: adj-agreement }
@@ -16103,6 +16107,7 @@ words:
       - ru: Солда́ты е́ли из полево́й ку́хни.
         en_gb: The soldiers ate from the field kitchen.
         inflect: { token: 4, case: gen, number: sg, gender: f, rule: adj-agreement }
+        align: { 2: "есть=to eat" }
       - ru: Учёные собира́ли полевы́е тра́вы.
         en_gb: The scientists gathered field herbs.
         en_alt:

@@ -118,7 +118,12 @@ src/
                         #   factCoverage  — which words most deserve a fact, and the sound-alike and diminutive shortlists
                         #     (worklists, NOT CI guards; rejections live in review/confusables-reviewed.jsonl and
                         #      review/diminutives-reviewed.jsonl)
-                        #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
+                        #   phrases/phraseHint/phraseAlign/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
+                        #   phraseAlign  — WHICH dictionary word each Russian token in a phrase is,
+                        #     as opposed to what phraseHint shows for it. Structural rungs first
+                        #     (a stub's lemma: link, a derivational family, one word's several
+                        #     senses), the sentence's English last, and a null rather than a guess —
+                        #     the residue is the `align:` worklist that check:align ratchets
                         #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
                         #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
@@ -169,6 +174,10 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     minimal repair when the gate fails)
                         #   typecheck.mjs holds the JSDoc/signature drift to a per-file
                         #     ratchet (typecheck-baseline.json); meant to reach zero
+                        #   check-align.mjs validates the align: annotations and ratchets the
+                        #     unresolved residue per ambiguity group (align-baseline.json);
+                        #     --list is the worklist. gen-lemma-links.mjs proposes the lemma:
+                        #     links that dissolve a third of the ambiguity outright
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
@@ -205,6 +214,11 @@ npm run verify:review        # replaying review/proposals reproduces the committ
 npm run check:inflect:cases  # every inflect: annotation agrees with the case its preposition governs
 npm run check:prompts        # no growth in English prompts matching more than one Russian sentence
 npm run check:parts          # parts.yml still describes the corpus (no orphans, bounds held)
+npm run check:align          # every phrase token resolves to one word, and the residue hasn't grown
+
+# The alignment worklist and the generator behind it (NOT gates):
+npm run align:list           # the unresolved ambiguity groups, busiest first
+npm run gen:lemma-links      # propose lemma: links for gloss-only stubs (--apply writes them)
 
 # Build gate — reads dist/, so it runs after `npm run build`:
 npm run check:size    # entry chunk, entry CSS and the vocab JSON against
@@ -226,7 +240,7 @@ error cannot hide behind a fix somewhere else (#666).
 
 CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `typecheck`, `verify:review`
 (only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
-`check:prompts`, `check:parts`, `test:coverage`, `build`, `check:size` and
+`check:prompts`, `check:parts`, `check:align`, `test:coverage`, `build`, `check:size` and
 `check:precache` in its `test` job, plus the Playwright `e2e` job — every one of them on every push,
 publishing the coverage table to the run's job summary via
 `scripts/coverage-summary.mjs` and the size table via `scripts/size-summary.mjs`.
@@ -236,7 +250,8 @@ drift apart, so this paragraph cannot go stale unnoticed.
 
 **Gates vs worklists.** Everything above fails the build. The rest of
 `scripts/` — `check:stress`, `check:morph`, `audit:cefr`, `audit:translations`,
-`audit:gender`, `coverage:facts`, `promote:glossary` — are **worklists**: they
+`audit:gender`, `coverage:facts`, `promote:glossary`, `align:list`,
+`gen:lemma-links` — are **worklists**: they
 rank findings for a human to work down, are not wired to CI, and passing one
 tells you nothing about whether CI will accept your change.
 
@@ -255,6 +270,12 @@ tells you nothing about whether CI will accept your change.
   (#657); the store falls back to deriving them whenever its cached corpus isn't
   the one they were built from, so that path stays live. `vocabBuild.test.js`/`declension.test.js` guard the shape.
   Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
+- **A phrase hint glossing the wrong word, or a word the encounter bars won't
+  credit** → `npm run align:list` names the ambiguity; settle it with an
+  `align:` block on the usage example (see the corpus CONTRIBUTING), or with a
+  new rung in `src/lib/phraseAlign.js` if a *rule* decides it rather than a
+  human. A rung needs its accuracy measured before it ships — the corpus's own
+  `inflect:` annotations are the ground truth to measure against.
 - **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store);
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
 - **The session/practice flow** → `src/views/SessionView.vue` +

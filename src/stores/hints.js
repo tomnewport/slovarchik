@@ -8,9 +8,10 @@
 // can't be expected to know yet and aren't actively drilling.
 import { computed } from 'vue'
 
-import { formIndex, wordsByKey } from './vocab.js'
+import { alignOptsFor, formIndex, wordsByKey } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
-import { phraseHintTokens, senseGloss } from '../lib/phraseHint.js'
+import { senseGloss } from '../lib/phraseHint.js'
+import { alignedHintTokens } from '../lib/phraseAlign.js'
 import { buildGlossIndex, diagnose, diagnoseEnglish } from '../lib/confusables.js'
 import { STATES } from '../lib/progression.js'
 
@@ -64,14 +65,21 @@ function hintIfShowable(entry) {
  * Split a phrase into display tokens, each tagged with the hint to reveal for it
  * (or null when it's a plain, non-hintable word). Stress marks, capitalisation
  * and punctuation in the source phrase are preserved for display.
+ *
+ * Glosses come from word alignment rather than straight off the form index
+ * (#706), which is what stops «Мой ру́ки!» glossing мой as "my": the index hands
+ * a contested form to whichever entry won its collision rules, and alignment
+ * knows — from the sentence's own annotations, from a stub's `lemma:` link, or
+ * from the English — when that winner is the wrong word. Tokens alignment can't
+ * settle keep the index's stacked senses, so the homograph behaviour (#568) is
+ * untouched where it is still the honest answer.
  * @param {string} phrase
  * @returns {Array<{text: string, hint: object|null}>}
  */
 export function hintTokensFor(phrase) {
-  return phraseHintTokens(phrase, formIndex.value).map(({ text, hint }) => ({
-    text,
-    hint: hintIfShowable(hint),
-  }))
+  return alignedHintTokens(phrase, formIndex.value, alignOptsFor(phrase)).map(
+    ({ text, hint }) => ({ text, hint: hintIfShowable(hint) }),
+  )
 }
 
 /**
