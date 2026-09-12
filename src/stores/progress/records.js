@@ -12,7 +12,9 @@ import {
   wordHasInflections,
   wordHasContextDrill,
   borderlineDimensions,
+  criterionDays,
 } from '../../lib/progression.js'
+import { dayKey } from '../../lib/streak.js'
 import { tableKey } from '../../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../../lib/schedule.js'
 import {
@@ -299,19 +301,49 @@ function updateAggregates(rec, { dimension, level, correct, ts }) {
   }
 }
 
-/** Drop all but the most recent attempts within each (level, dimension). */
+/**
+ * Drop all but the most recent attempts within each (level, dimension), keeping
+ * the evidence a day-spaced criterion (#313) rests on.
+ *
+ * The cap alone was not safe for those criteria. `criterionMet` counts distinct
+ * calendar days over every *stored* correct attempt precisely so that "further
+ * successes can never un-meet it" — but once a bucket is at its cap, every new
+ * answer evicts the oldest, and a long run of correct answers in one sitting
+ * evicts the older day the criterion was relying on. The word then drops out of
+ * mastery for having been practised correctly: its ratio reads 3/2 and its
+ * criterion is unmet, because the two days it once had are down to one.
+ *
+ * So past the cap, one kind of attempt still earns its place: a correct answer
+ * from a calendar day none of the kept ones cover, in a bucket whose criterion
+ * still wants more distinct days than they hold. At most `days - 1` of these
+ * survive per bucket (one, as the criteria stand), so a bucket holds at most
+ * MAX_EVENTS_PER_DIM + 1 and the record stays bounded. They sit outside the
+ * ratio window — every one of them is older than the capped block — so they
+ * anchor the day count without touching what the ratio sees.
+ */
 function capEvents(rec) {
   const counts = new Map()
+  /** bucket → the distinct calendar days of the correct attempts kept so far. */
+  const days = new Map()
   const kept = []
   // Walk newest-first so we keep the most recent N per bucket.
   for (let i = rec.events.length - 1; i >= 0; i--) {
     const e = rec.events[i]
     const bucket = `${e.level}:${e.dimension}`
+    let seen = days.get(bucket)
+    if (!seen) days.set(bucket, (seen = new Set()))
     const n = counts.get(bucket) ?? 0
     if (n < MAX_EVENTS_PER_DIM) {
       counts.set(bucket, n + 1)
+      if (e.correct) seen.add(dayKey(e.ts ?? 0))
       kept.push(e)
+      continue
     }
+    if (!e.correct || seen.size >= criterionDays(e.level, e.dimension)) continue
+    const day = dayKey(e.ts ?? 0)
+    if (seen.has(day)) continue
+    seen.add(day)
+    kept.push(e)
   }
   kept.reverse()
   rec.events = kept

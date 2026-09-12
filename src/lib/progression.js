@@ -95,6 +95,19 @@ export function criteriaFor(word) {
   return word?.known ? KNOWN_CRITERIA : CRITERIA
 }
 
+/**
+ * The number of distinct calendar days a `(level, dimension)` criterion wants
+ * its correct answers spread over, or 0 where it has no such rule.
+ *
+ * Read off the standard {@link CRITERIA} rather than a word's own set, so a word
+ * currently flagged `known` — whose relaxed criteria drop the day-spacing — is
+ * still treated as needing it. The flag can be undone, and the evidence a
+ * day-spaced criterion depends on cannot be recovered once dropped.
+ */
+export function criterionDays(level, dimension) {
+  return CRITERIA[level]?.[dimension]?.days ?? 0
+}
+
 /** The dimensions a given level is graded on, in display order. */
 export function dimensionsForLevel(level) {
   const crit = CRITERIA[level]

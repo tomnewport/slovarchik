@@ -182,6 +182,55 @@ describe('recording attempts & states', () => {
     )
     expect(usage.length).toBeLessThanOrEqual(10)
   })
+
+  it('keeps practising correctly from un-meeting a day-spaced criterion', async () => {
+    // The cap used to break the invariant `criterionMet` documents — that
+    // further successes can never un-meet a criterion. A mastery dimension
+    // earns its two calendar days, then the learner drills it hard in one
+    // sitting; each new answer evicts the oldest, and once the day-one answer
+    // is gone the distinct-day count falls back to one and the word drops out
+    // of mastery for having been practised correctly.
+    const DAY = 86400000
+    const day1 = Date.now() - 40 * DAY
+    setVocab(makeWords(1, { hasInflections: true, hasContextDrill: false }))
+    await learn('w0', 1)
+    for (const dimension of ['identification', 'usage']) {
+      await recordAttempt({ word: 'w0', dimension, level: 'mastery', correct: true, ts: day1 })
+      await recordAttempt({ word: 'w0', dimension, level: 'mastery', correct: true, ts: day1 + DAY })
+    }
+    expect(stateOf('w0')).toBe('mastered')
+
+    const grind = day1 + 20 * DAY
+    for (let i = 0; i < 30; i++) {
+      await recordAttempt({
+        word: 'w0',
+        dimension: 'identification',
+        level: 'mastery',
+        correct: true,
+        ts: grind + i * 60000,
+      })
+    }
+    expect(stateOf('w0')).toBe('mastered')
+
+    // Still bounded: the day-one answer is the only extra kept, and only
+    // because no other stored answer covers its calendar day.
+    const ident = state.records.w0.events.filter(
+      (e) => e.dimension === 'identification' && e.level === 'mastery',
+    )
+    expect(ident.length).toBeLessThanOrEqual(11)
+
+    // And a real miss must still be able to take the word back down.
+    for (let i = 0; i < 3; i++) {
+      await recordAttempt({
+        word: 'w0',
+        dimension: 'identification',
+        level: 'mastery',
+        correct: false,
+        ts: grind + DAY + i,
+      })
+    }
+    expect(stateOf('w0')).toBe('learned')
+  })
 })
 
 describe('demotion, at-risk and recently-learned', () => {

@@ -23,6 +23,7 @@ import {
   wordState,
   wordProgress,
   lastAttemptAt,
+  criterionDays,
 } from './progression.js'
 
 // Build a chronological list of attempts for one (level, dimension).
@@ -327,6 +328,19 @@ describe('dimensionProgress', () => {
       ...attempts('mastery', 'usage', [true, true, true], 9 * DAY),
     ]
     expect(dimensionProgress(evs, 'mastery', 'usage').days).toEqual({ seen: 2, need: 2, met: true })
+  })
+})
+
+describe('criterionDays', () => {
+  it('reports the day requirement of the standard criteria', () => {
+    expect(criterionDays('mastery', 'identification')).toBe(2)
+    expect(criterionDays('learning', 'usage')).toBe(0)
+    expect(criterionDays('learning', 'speaking')).toBe(0)
+  })
+
+  it('is zero for a pair no criterion grades', () => {
+    expect(criterionDays('learning', 'context')).toBe(0)
+    expect(criterionDays('nonsense', 'usage')).toBe(0)
   })
 })
 
