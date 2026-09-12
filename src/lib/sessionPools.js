@@ -19,7 +19,7 @@ import {
   lastAttemptAt,
   levelGapByDimension,
 } from './progression.js'
-import { wordOverdueness } from './schedule.js'
+import { isDue, wordOverdueness } from './schedule.js'
 import { buildSession } from './session.js'
 import { practicesForSession } from './practices.js'
 
@@ -146,6 +146,45 @@ export function currentPool(ctx) {
   return [...new Set(out)].sort(
     (a, b) => tier(a) - tier(b) || understanding(ctx, a) - understanding(ctx, b),
   )
+}
+
+/**
+ * Move the words *resting* in one dimension to the back of a current-bucket
+ * pool. A dimension whose scheduled review is not yet due was answered
+ * correctly recently enough that the memory model still expects the answer to
+ * be there, so drilling it again teaches less than drilling a word that has had
+ * time to decay — which is the spaced part of spaced repetition, applied inside
+ * the batch rather than only to the words already learned (#313 scheduled the
+ * refresh half; the advance half ignored the schedule entirely).
+ *
+ * Deliberately a *reordering* and not a filter: the learning criteria carry no
+ * day-spacing, and nothing here adds one, so a learner who wants to grind a
+ * whole batch out in one afternoon still can. Resting words keep their place in
+ * the pool and are drawn as soon as the due ones run out. The draw narrows this
+ * further still — `drawN` buckets by how many times this session has already
+ * used a word before it looks at pool order — so this decides which of two
+ * equally-fresh candidates gets the slot, not whether a word is reachable.
+ *
+ * A stable partition, so the worst-understood-first order {@link currentPool}
+ * built survives within each half. Two schedule conventions do the rest of the
+ * work: a dimension with no schedule at all counts as due (an untried skill is
+ * exactly what the advance half is for), and a wrong answer sets `due` to the
+ * moment it was given, so a word that just got this dimension wrong stays at
+ * the front instead of resting on a halved interval.
+ *
+ * @param {string[]} keys pool order from {@link currentPool}
+ * @param {object} ctx the {@link makeContext} snapshot
+ * @param {string} dimension the dimension this practice slot drills
+ * @param {number} [now]
+ */
+export function restingLast(keys, ctx, dimension, now = Date.now()) {
+  const due = []
+  const resting = []
+  for (const key of keys) {
+    if (isDue(ctx.records[key]?.schedule?.[dimension], now)) due.push(key)
+    else resting.push(key)
+  }
+  return [...due, ...resting]
 }
 
 /**
@@ -418,7 +457,10 @@ export function assembleSession(
       const advancing = base.filter((k) =>
         dimensionAdvancesAt(ctx.events(k), 'learning', practice.dimension, now, ctx.wordRecord(k)),
       )
-      practice.pool = advancing.length > 0 ? advancing : base
+      // Then push the words resting in this dimension behind the ones whose
+      // review is due, so the slot spends itself on the memory closest to
+      // fading rather than on one answered correctly ten minutes ago.
+      practice.pool = restingLast(advancing.length > 0 ? advancing : base, ctx, practice.dimension, now)
     } else {
       practice.pool = base
     }
