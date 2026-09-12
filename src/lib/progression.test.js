@@ -293,6 +293,41 @@ describe('dimensionProgress', () => {
     )
     expect(p).toMatchObject({ attempts: 4, correct: 3, windowCorrect: 3, met: true })
   })
+
+  it('reports no day progress for a criterion that has no day rule', () => {
+    // Null rather than a zeroed counter, so a caller can tell "no such rule"
+    // from "rule already satisfied".
+    const p = dimensionProgress(attempts('learning', 'usage', [true, true, true]), 'learning', 'usage')
+    expect(p.days).toBeNull()
+  })
+
+  it('counts the distinct days a day-spaced criterion has banked', () => {
+    const DAY = 24 * 3600 * 1000
+    // Three correct answers, all in one sitting: the ratio is past its target
+    // and the criterion is still unmet, which is the state a screen showing only
+    // "3/2" cannot explain.
+    const oneDay = attempts('mastery', 'identification', [true, true, true], 5 * DAY)
+    const p = dimensionProgress(oneDay, 'mastery', 'identification')
+    expect(p).toMatchObject({ windowCorrect: 3, met: false })
+    expect(p.crit.need).toBe(2)
+    expect(p.days).toEqual({ seen: 1, need: 2, met: false })
+
+    // One more on another day settles it.
+    const twoDays = [...oneDay, ...attempts('mastery', 'identification', [true], 6 * DAY)]
+    const q = dimensionProgress(twoDays, 'mastery', 'identification')
+    expect(q.days).toEqual({ seen: 2, need: 2, met: true })
+    expect(q.met).toBe(true)
+  })
+
+  it('counts days over every stored correct attempt, not just the ratio window', () => {
+    const DAY = 24 * 3600 * 1000
+    // The day-one answer sits outside the three-attempt window, and still counts.
+    const evs = [
+      ...attempts('mastery', 'usage', [true], 5 * DAY),
+      ...attempts('mastery', 'usage', [true, true, true], 9 * DAY),
+    ]
+    expect(dimensionProgress(evs, 'mastery', 'usage').days).toEqual({ seen: 2, need: 2, met: true })
+  })
 })
 
 describe('wordHasInflections', () => {

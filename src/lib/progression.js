@@ -139,7 +139,14 @@ export function criterionMet(attempts, crit) {
  * actually compared against. The two diverge as soon as a word slips: a word
  * with seven lifetime correct answers and two recent misses is at 2/3, not 7/3,
  * so anything rendering progress against `need` wants `windowCorrect`.
- * @returns {{level, dimension, attempts, correct, windowCorrect, met, crit}}
+ *
+ * `days` is the other half of a day-spaced criterion (#313), and without it a
+ * screen showing only the ratio cannot explain itself: a dimension with three
+ * correct answers against a `need` of two renders as "3/2" and *still* reads as
+ * unmet, because all three landed in one sitting and the criterion wants two
+ * calendar days. Null for a criterion that has no day requirement, so a caller
+ * can tell "no such rule" from "rule already satisfied".
+ * @returns {{level, dimension, attempts, correct, windowCorrect, met, days, crit}}
  */
 export function dimensionProgress(events, level, dimension, word = {}) {
   const crit = criteriaFor(word)[level]?.[dimension] ?? null
@@ -152,8 +159,20 @@ export function dimensionProgress(events, level, dimension, word = {}) {
     correct: attempts.filter((a) => a.correct).length,
     windowCorrect: window.filter((a) => a.correct).length,
     met: criterionMet(attempts, crit),
+    days: crit?.days ? dayProgress(attempts, crit) : null,
     crit,
   }
+}
+
+/**
+ * How many distinct calendar days a day-spaced criterion has banked, counted
+ * exactly as {@link criterionMet} counts them: over every stored correct
+ * attempt, not just the ones inside the ratio window.
+ * @returns {{seen: number, need: number, met: boolean}}
+ */
+function dayProgress(attempts, crit) {
+  const seen = new Set((attempts ?? []).filter((a) => a.correct).map((a) => dayKey(a.ts ?? 0))).size
+  return { seen, need: crit.days, met: seen >= crit.days }
 }
 
 /**

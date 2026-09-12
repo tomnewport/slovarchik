@@ -272,3 +272,94 @@ describe('WordProgressModal — when the word comes back (the scheduler, #313)',
     expect(wrapper.find('.confirm-line').exists()).toBe(false)
   })
 })
+
+describe('WordProgressModal — why a count past its target is still unfinished', () => {
+  const DAY = 86400000
+  const NOW = Date.now()
+  const ev = (dimension, level, correct, ts) => ({ dimension, level, correct, ts })
+  const LEARNING = ['identification', 'usage', 'hearing', 'speaking']
+
+  /** Every learning criterion met, over two calendar days. */
+  const learnedEvents = (at) =>
+    LEARNING.flatMap((d, i) => [
+      ev(d, 'learning', true, at - DAY + i),
+      ev(d, 'learning', true, at + i),
+      ev(d, 'learning', true, at + i + 1),
+    ])
+
+  function track(masteryEvents, peak = 3) {
+    vocabState.words = [
+      {
+        key: 'w0',
+        headword: 'год',
+        meaning: 'year',
+        pos: 'noun',
+        hasInflections: true,
+        hasContextDrill: false,
+      },
+    ]
+    progress.state.records.w0 = {
+      word: 'w0',
+      events: [...learnedEvents(NOW - 75 * DAY), ...masteryEvents],
+      peak,
+      learnedAt: NOW - 74 * DAY,
+      confirmedAt: NOW - 73 * DAY,
+      schedule: {},
+    }
+  }
+
+  const open = async () => {
+    const wrapper = mount(WordProgressModal, { props: { wordKey: 'w0' } })
+    await flushPromises()
+    return wrapper
+  }
+
+  /** The row for one dimension within a level section. */
+  const row = (wrapper, level, dimension) => {
+    const section = wrapper.findAll('.level')[level === 'learning' ? 0 : 1]
+    const names = section.findAll('.dim')
+    return names.find((d) => d.find('.dim-name').text().toLowerCase().includes(dimension))
+  }
+
+  it('says which day a skill is on when that is the only thing left', async () => {
+    // Three correct answers against a need of two, all in one sitting: the pip
+    // reads 3/2 and the skill is still unfinished, because the criterion wants
+    // two calendar days. Without the sub-line that is unreadable.
+    const sitting = NOW - 72 * DAY
+    track([
+      ev('identification', 'mastery', true, sitting),
+      ev('identification', 'mastery', true, sitting + 60000),
+      ev('identification', 'mastery', true, sitting + 120000),
+      ev('usage', 'mastery', true, sitting - DAY),
+      ev('usage', 'mastery', true, sitting),
+    ])
+    const wrapper = await open()
+    const ident = row(wrapper, 'mastery', 'identification')
+    expect(ident.find('.dim-status').text()).toBe('3/2')
+    expect(ident.find('.dim-days').text()).toBe('correct on 1 of 2 days')
+    // And the level says why a count can be past its target and still unfinished.
+    expect(wrapper.find('.level-note').text()).toContain('two different days')
+  })
+
+  it('drops the day line once the skill has its second day', async () => {
+    const first = NOW - 73 * DAY
+    track([
+      ev('identification', 'mastery', true, first),
+      ev('identification', 'mastery', true, first + DAY),
+      ev('usage', 'mastery', true, first),
+      ev('usage', 'mastery', true, first + DAY),
+    ])
+    const wrapper = await open()
+    expect(row(wrapper, 'mastery', 'identification').find('.dim-status').text()).toBe('✓')
+    expect(wrapper.find('.dim-days').exists()).toBe(false)
+    expect(wrapper.find('.level-note').exists()).toBe(false)
+  })
+
+  it('says nothing about days on a level whose criteria have no day rule', async () => {
+    track([])
+    const wrapper = await open()
+    const learning = wrapper.findAll('.level')[0]
+    expect(learning.find('.dim-days').exists()).toBe(false)
+    expect(learning.find('.level-note').exists()).toBe(false)
+  })
+})

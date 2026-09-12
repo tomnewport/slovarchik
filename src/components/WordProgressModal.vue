@@ -93,9 +93,20 @@ const recovery = computed(() => {
 const recoveryCopy = computed(() => (recovery.value ? RECOVERY_COPY[recovery.value.status] : null))
 
 // Non-empty (level, dimensions) pairs, in learning-then-mastery order.
+// `dayBlocked` marks a level holding a dimension whose only outstanding
+// requirement is a second calendar day — without saying so the level reads as
+// arithmetic that does not add up (see `dimStatus`).
 const sections = computed(() =>
   ['learning', 'mastery']
-    .map((level) => ({ level, label: LEVEL_LABEL[level], dims: detail.value.levels[level] ?? [] }))
+    .map((level) => {
+      const dims = detail.value.levels[level] ?? []
+      return {
+        level,
+        label: LEVEL_LABEL[level],
+        dims,
+        dayBlocked: dims.some((d) => !d.met && d.days && !d.days.met),
+      }
+    })
     .filter((s) => s.dims.length),
 )
 
@@ -109,10 +120,18 @@ function dimStatus(dim) {
   // that figure — a word with seven lifetime correct answers and two recent
   // misses is at 2/3, and reading "7/3" beside an unfinished dimension looks
   // like the engine has lost count.
+  //
+  // A day-spaced criterion (#313) needs the second half of the story too. Its
+  // ratio can be over the line while the criterion stays unmet, because every
+  // correct answer landed in one sitting — which renders as "3/2", still marked
+  // unfinished, and reads as a bug rather than as the rule doing its job. Say
+  // which day the word is on whenever that rule is the one still outstanding.
+  const days = dim.days && !dim.days.met ? `correct on ${dim.days.seen} of ${dim.days.need} days` : null
   return {
     cls: dim.attempts ? 'partial' : 'empty',
     text: `${dim.windowCorrect ?? dim.correct}/${need}`,
     title: 'Correct answers in the recent window',
+    days,
   }
 }
 
@@ -221,10 +240,20 @@ async function unmarkKnownWord() {
               :class="dimStatus(d).cls"
             >
               <span class="dim-icon">{{ DIM_META[d.dimension]?.icon }}</span>
-              <span class="dim-name">{{ DIM_META[d.dimension]?.name ?? d.dimension }}</span>
+              <span class="dim-name">
+                {{ DIM_META[d.dimension]?.name ?? d.dimension }}
+                <small v-if="dimStatus(d).days" class="muted dim-days">{{ dimStatus(d).days }}</small>
+              </span>
               <span class="dim-status" :title="dimStatus(d).title">{{ dimStatus(d).text }}</span>
             </div>
           </div>
+          <!-- Why a skill with enough correct answers can still be unfinished.
+               Shown only on the level where that is actually happening. -->
+          <p v-if="s.dayBlocked" class="muted level-note">
+            These skills want correct answers on two different days, so a run of them in one
+            sitting counts as one day — which is why a count can be past its target and the skill
+            still unfinished.
+          </p>
         </section>
       </div>
       <p v-else class="muted no-progress">No progress recorded yet.</p>
@@ -516,6 +545,16 @@ async function unmarkKnownWord() {
 .dim-name {
   flex: 1;
   font-size: 0.88rem;
+}
+.dim-days {
+  display: block;
+  font-size: 0.7rem;
+  line-height: 1.25;
+}
+.level-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.35;
 }
 .dim-status {
   font-size: 0.82rem;
