@@ -25,6 +25,18 @@ const DIM_META = {
   context: { icon: '🛠️', name: 'Context' },
 }
 const LEVEL_LABEL = { learning: 'Learning', mastery: 'Mastery' }
+// What each status card's rows are told, said again in full on the card they
+// open: a heading that names the drop, and a line per skill saying its price.
+const RECOVERY_COPY = {
+  slipped: {
+    badge: 'Slipped',
+    lead: 'This word has dropped below the best state it reached. To win it back:',
+  },
+  'at-risk': {
+    badge: 'At risk',
+    lead: 'Still meeting every criterion, but the last answer here was wrong — one more miss drops it. To secure it:',
+  },
+}
 const STATE_LABEL = {
   unknown: 'Not started',
   learning: 'Learning',
@@ -61,6 +73,14 @@ const contrast = computed(() => {
 })
 
 const detail = computed(() => wordProgressDetail(props.wordKey))
+
+// The recovery plan, but only when there is something to recover — a steady
+// word gets no panel rather than a reassuring empty one.
+const recovery = computed(() => {
+  const plan = detail.value.recovery
+  return plan && RECOVERY_COPY[plan.status] ? plan : null
+})
+const recoveryCopy = computed(() => (recovery.value ? RECOVERY_COPY[recovery.value.status] : null))
 
 // Non-empty (level, dimensions) pairs, in learning-then-mastery order.
 const sections = computed(() =>
@@ -143,6 +163,32 @@ async function unmarkKnownWord() {
         </div>
       </header>
 
+      <!-- What dropped, and what would put it back — the same answer the
+           slipped / at-risk rows give in one line, said here in full. -->
+      <section v-if="recovery" class="recovery" :class="recovery.status">
+        <p class="recovery-head">
+          <span class="recovery-badge">{{ recoveryCopy.badge }}</span>
+          <span v-if="recovery.from" class="recovery-move">
+            {{ recovery.from }} → {{ recovery.to }}
+          </span>
+        </p>
+        <p class="recovery-lead">{{ recoveryCopy.lead }}</p>
+        <ul class="recovery-steps">
+          <li v-for="s in recovery.steps" :key="`${s.level}:${s.dimension}`" class="recovery-step">
+            <span class="step-icon">{{ DIM_META[s.dimension]?.icon }}</span>
+            <span class="step-name">
+              {{ s.name }}
+              <small class="muted">{{ LEVEL_LABEL[s.level].toLowerCase() }}<template v-if="s.ask"> · {{ s.ask }}</template></small>
+            </span>
+            <span class="step-need">{{ s.text }}</span>
+          </li>
+        </ul>
+        <p v-if="recovery.steps.some((s) => s.anotherDay)" class="recovery-note muted">
+          A skill that needs answers on two different days can't be finished in one sitting — the
+          engine wants proof the word survived a night.
+        </p>
+      </section>
+
       <div v-if="sections.length" class="progress-body">
         <section v-for="s in sections" :key="s.level" class="level">
           <h4 class="level-title">{{ s.label }}</h4>
@@ -195,7 +241,15 @@ async function unmarkKnownWord() {
         </template>
         <div v-else class="confirm">
           <p class="confirm-msg">
-            Remove <strong>{{ headword }}</strong> from your current batch?
+            <template v-if="detail.inBatch">
+              Remove <strong>{{ headword }}</strong> from your current batch?
+            </template>
+            <!-- Reached from the slipped / at-risk cards, a word need not be in
+                 a batch at all; saying "remove from your batch" would describe
+                 something that isn't about to happen. -->
+            <template v-else>
+              Set <strong>{{ headword }}</strong> aside for later?
+            </template>
           </p>
           <label class="keep">
             <input v-model="keepProgress" type="checkbox" />
@@ -292,6 +346,80 @@ async function unmarkKnownWord() {
 .chip.state.learning {
   background: color-mix(in srgb, var(--primary) 18%, transparent);
   color: var(--primary);
+}
+.recovery {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: 10px;
+  border-left: 3px solid var(--bad, #ef4444);
+  background: color-mix(in srgb, var(--bad, #ef4444) 9%, transparent);
+}
+.recovery.at-risk {
+  border-left-color: var(--warn, #f59e0b);
+  background: color-mix(in srgb, var(--warn, #f59e0b) 10%, transparent);
+}
+.recovery-head {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+.recovery-badge {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--bad, #ef4444);
+}
+.at-risk .recovery-badge {
+  color: var(--warn, #f59e0b);
+}
+.recovery-move {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.recovery-lead {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.recovery-steps {
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.recovery-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.step-icon {
+  flex-shrink: 0;
+}
+.step-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.86rem;
+  display: grid;
+}
+.step-name small {
+  font-size: 0.68rem;
+  text-transform: lowercase;
+}
+.step-need {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: right;
+}
+.recovery-note {
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.35;
 }
 .progress-body {
   display: grid;

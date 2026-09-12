@@ -8,12 +8,8 @@
 
 import { parseKey } from './vocabBuild.js'
 import { ASPECT_LABEL, MOTION_LABEL } from './phraseContext.js'
-import {
-  applicableDimensions,
-  dimensionProgress,
-  lastAttemptAt,
-  wordHasInflections,
-} from './progression.js'
+import { dimensionProgress, dimensionShortfall, lastAttemptAt } from './progression.js'
+import { DIM_NAME, recoveryPlan } from './recovery.js'
 
 // Which dimensions each level tracks, and the emoji pip shown for each.
 export const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
@@ -126,12 +122,18 @@ export function dimsFor(key, level, dims, hasContextDrill) {
   return dims.filter((d) => d !== 'context' || hasContextDrill(key))
 }
 
-/** Build the per-dimension pip descriptors for one word's events. */
-function dimPips(events, level, dims, key, { known, hasContextDrill }) {
+/**
+ * Build the per-dimension pip descriptors for one word's events. `need` is the
+ * best-case number of correct answers the dimension still owes — zero once met —
+ * so a status row can put a figure on an unmet pip instead of a bare cross.
+ */
+function dimPips(events, level, dims, key, { known, hasContextDrill, word = null }) {
+  const w = word ?? { known }
   return dimsFor(key, level, dims, hasContextDrill).map((d) => ({
     label: DIM_LABEL[d],
     name: d,
-    ...dimensionProgress(events, level, d, { known }),
+    need: dimensionShortfall(events, level, d, w),
+    ...dimensionProgress(events, level, d, w),
   }))
 }
 
@@ -169,56 +171,62 @@ export function buildWordList(batchWords, level, dims, ctx) {
 }
 
 /**
- * Which level's pips a status row should show: the one that has something to
- * say. A row is on these cards because a criterion broke, so the useful level is
- * the level the break is at — take the lower one when both have an unmet
- * dimension, since learning must be repaired before mastery means anything.
- *
- * Reading the level off the word's *current state* instead (mastered → mastery,
- * anything else → learning) is what made a word that slipped out of mastery
- * render as four met learning pips: it is `learned`, so the row showed the
- * learning criteria — every one of which it still meets — under a heading saying
- * it had dropped below its best state, with nothing on the row to say what
- * dropped or what would fix it. Falls back to the state-derived level for a row
- * with no unmet dimension at all (an at-risk word: still met, one miss away).
- */
-function statusLevel(events, key, state, word, hasContextDrill) {
-  // A word with no inflection table has no mastery level of its own — mastery
-  // collapses onto the learning criteria (see `wordState`) — so its mastery
-  // dimensions read as permanently unmet and must never be what a row shows.
-  // Only decided when the vocab record is actually to hand: a key missing from
-  // the vocab map tells us nothing about whether it inflects.
-  if (word.pos && !wordHasInflections(word)) return 'learning'
-  const unmet = (level) =>
-    dimsFor(key, level, applicableDimensions(level, word), hasContextDrill).some(
-      (d) => !dimensionProgress(events, level, d, word).met,
-    )
-  if (unmet('learning')) return 'learning'
-  if (unmet('mastery')) return 'mastery'
-  return state === 'mastered' ? 'mastery' : 'learning'
-}
-
-/**
  * Build the word rows for the at-risk / slipped status cards. Each key resolves
  * to its current state, the level whose criteria it still owes, and that level's
  * dimension pips.
  *
+ * Each row also carries its `plan` — what the word dropped from, and what it
+ * would take to get it back (see lib/recovery.js) — so the card can say that
+ * rather than leaving the learner to read it off the pips.
+ *
  * @param keys array of word keys
- * @param ctx `{ records, vocabByKey, stateOf, hasContextDrill }`
+ * @param ctx `{ records, vocabByKey, stateOf, hasContextDrill, hasInflections, now }`
  */
 export function buildStatusWordList(keys, ctx) {
-  const { records, vocabByKey, stateOf, hasContextDrill } = ctx
+  const { records, vocabByKey, stateOf, hasContextDrill, hasInflections, now } = ctx
   return keys.map((key) => {
     const rec = records[key]
     const evs = rec?.events ?? []
     const { ru, en, fullEn } = rowIdentity(key, vocabByKey)
     const state = stateOf(key)
-    const word = { ...(vocabByKey?.get(key) ?? {}), known: rec?.known }
-    const level = statusLevel(evs, key, state, word, hasContextDrill)
+    // Stamping the injected predicates onto the word is what lets the pure
+    // recovery model resolve `context` and the mastery level the same way the
+    // store does, without taking the store's lookups as arguments too.
+    //
+    // `hasInflections` in particular has to come from the store: `vocabByKey`
+    // holds the *shaped* display record (`shapeVocab`), which carries `pos` but
+    // none of the declension data — so asking the paradigm builder about it
+    // answers "no table" for every word, and every word that slipped out of
+    // mastery showed four met learning pips under a heading saying it had
+    // dropped. The store's predicate reads the full vocab record.
+    const word = {
+      ...(vocabByKey?.get(key) ?? {}),
+      known: rec?.known,
+      hasContextDrill: hasContextDrill(key),
+    }
+    if (hasInflections) word.hasInflections = hasInflections(key)
+    const plan = recoveryPlan(evs, word, { peak: rec?.peak, state, now })
+    const level = plan.level
+    // A pip the plan is defending is met, so nothing in its progress figures
+    // says it is one miss from going: the flag is how the row marks it.
+    const defending = new Set(
+      plan.steps.filter((s) => s.kind === 'defend').map((s) => `${s.level}:${s.dimension}`),
+    )
     const dims = dimPips(evs, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS, key, {
       known: rec?.known,
       hasContextDrill,
+      word,
+    }).map((d) => {
+      const step = plan.steps.find((s) => s.level === level && s.dimension === d.name)
+      return {
+        ...d,
+        atRisk: defending.has(`${level}:${d.name}`),
+        // What this one pip is asking for, in words — the row is a line of
+        // emoji otherwise, and a cross that means "practise this" is guesswork
+        // until it says how much practice.
+        hint: step ? `${step.name} — ${step.text}` : `${DIM_NAME[d.name] ?? d.name} — met`,
+      }
     })
-    return { key, ru, en, fullEn, state, dims }
+    return { key, ru, en, fullEn, state, level, dims, plan }
   })
 }

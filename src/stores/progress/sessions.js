@@ -13,6 +13,7 @@ import {
   dimensionWeakness as computeDimensionWeakness,
 } from '../../lib/sessionPools.js'
 import { rankSkills, skillById, focusedKeys } from '../../lib/focus.js'
+import { recoveryPlan } from '../../lib/recovery.js'
 
 import { state, wordRecord, events, vocabWords } from './state.js'
 import { stateOf, atRisk, lost } from './records.js'
@@ -69,6 +70,12 @@ export function hasBeenCorrect(key) {
  * attempts and last-seen time, and per-level dimension progress (only the
  * dimensions the word is actually graded on). `tracked` is false for a word the
  * engine has never recorded an attempt against.
+ *
+ * `recovery` is what the word has lost and what would win it back (see
+ * lib/recovery.js) — the card is opened from the slipped and at-risk lists as
+ * well as from a batch, and those two need it to say what dropped. `inBatch`
+ * says whether the word is in a committed batch at all, which is what decides
+ * whether "leave for later" is a removal or an erasure.
  */
 export function wordProgressDetail(key) {
   const rec = state.records[key] ?? null
@@ -89,7 +96,14 @@ export function wordProgressDetail(key) {
     totalAttempts: evs.length,
     lastAt: lastAttemptAt(evs),
     levels,
+    recovery: recoveryPlan(evs, word, { peak: rec?.peak, state: stateOf(key) }),
+    inBatch: inAnyBatch(key),
   }
+}
+
+/** Is the word in either committed batch? */
+function inAnyBatch(key) {
+  return !!(state.learning?.words?.includes(key) || state.mastery?.words?.includes(key))
 }
 
 /** Keys of the non-unknown words matching a skill id (focused-session pool). */

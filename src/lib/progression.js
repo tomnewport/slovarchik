@@ -208,6 +208,35 @@ export function dimensionAdvancesAt(events, level, dimension, now, word = {}) {
 }
 
 /**
+ * {@link minCorrectToMeet} for one `(level, dimension)` of a word's events: the
+ * best-case number of correct answers that dimension still owes. Zero once its
+ * criterion is met. The per-dimension counterpart of
+ * {@link minExercisesToLevel}, which sums exactly this across a level — a word
+ * card wants the breakdown, a batch's progress bar the total.
+ */
+export function dimensionShortfall(events, level, dimension, word = {}) {
+  const crit = criteriaFor(word)[level]?.[dimension] ?? null
+  return minCorrectToMeet(attemptsFor(events, level, dimension), crit)
+}
+
+/**
+ * Would the shortfall still be outstanding if every correct answer it needs
+ * were given right now? True only when a day-spacing criterion (#313) is what
+ * remains: the answers are there, but they all landed on one calendar day, so
+ * the dimension cannot be recovered before tomorrow. Lets a recovery plan say
+ * "come back tomorrow" instead of asking for answers that would not count.
+ */
+export function needsAnotherDay(events, level, dimension, now, word = {}) {
+  const crit = criteriaFor(word)[level]?.[dimension] ?? null
+  if (!crit?.days) return false
+  const attempts = attemptsFor(events, level, dimension)
+  const need = minCorrectToMeet(attempts, crit)
+  if (need === 0) return false
+  const today = Array.from({ length: need }, () => ({ correct: true, ts: now }))
+  return !criterionMet([...attempts, ...today], crit)
+}
+
+/**
  * The `(level, dimension)` pairs where a word is *borderline*: the criterion is
  * currently met, but its most recent attempt was wrong, so one more miss would
  * un-meet it. Only ratio criteria can be borderline — an attempts-type

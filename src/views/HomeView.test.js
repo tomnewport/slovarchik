@@ -160,6 +160,36 @@ describe('HomeView', () => {
     expect(missing[0].classes()).toContain('dim-pip')
   })
 
+  it('opens the word card from a slipped row, just like a batch row', async () => {
+    progress.records = {
+      'кот=cat': {
+        word: 'кот=cat',
+        events: [{ dimension: 'identification', level: 'learning', correct: true, ts: 1 }],
+        peak: 2,
+      },
+    }
+    const wrapper = mount(HomeView)
+    const row = wrapper.find('.slipped-card .word-row')
+    expect(row.attributes('role')).toBe('button')
+
+    await row.trigger('click')
+    expect(wrapper.find('.modal[aria-label="Word progress"]').exists()).toBe(true)
+  })
+
+  it('says on the row itself what dropped and what it would cost to fix', () => {
+    progress.records = {
+      'кот=cat': {
+        word: 'кот=cat',
+        events: [{ dimension: 'identification', level: 'learning', correct: true, ts: 1 }],
+        peak: 2,
+      },
+    }
+    const card = mount(HomeView).find('.slipped-card')
+    expect(card.find('.row-plan').text()).toContain('Slipped from Learned back to Learning')
+    // An unmet pip carries the figure it still owes, not a bare cross.
+    expect(card.findAll('.dim-need').map((n) => n.text())).toContain('2')
+  })
+
   it('offers a waiting update rather than taking it (#691)', async () => {
     // No banner while the running build is the latest one.
     expect(mount(HomeView).find('.update-banner').exists()).toBe(false)
