@@ -64,8 +64,8 @@ src/
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, WordFacts, AnnotatedEnglish,
-                        #   ComprehensionCheck, …)
+                        #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,
+                        #   AnnotatedEnglish, ComprehensionCheck, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast, IntroCard — the non-graded
                         #   "here is a new word" step)
@@ -120,6 +120,9 @@ src/
                         #      review/diminutives-reviewed.jsonl)
                         #   phrases/phraseHint/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
                         #   quiz/recognition/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   recovery  — what a slipped or at-risk word has lost and what would win it
+                        #     back: the level it owes, the dimensions that broke, and how many correct
+                        #     answers each wants (and when the day-spacing rule means not today)
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
                         #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
                         #     a preposition with only one case) when the rule is the whole of what went wrong; the

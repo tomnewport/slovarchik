@@ -272,6 +272,81 @@ describe('buildStatusWordList', () => {
     expect(row.dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
   })
 
+  it('puts a figure on each unmet pip, and a sentence on the row', () => {
+    // A word that slipped out of mastery: the row has to say what broke and
+    // what would mend it, not just show a cross.
+    const ctx2 = {
+      records: {
+        'кот=cat': { word: 'кот=cat', events: met('learning', LEARNING_DIMS), peak: 3 },
+      },
+      stateOf: () => 'learned',
+      hasContextDrill: () => true,
+      now: 9e12,
+    }
+    const [row] = buildStatusWordList(['кот=cat'], ctx2)
+    expect(row.plan.status).toBe('slipped')
+    expect(row.plan.headline).toBe(
+      'Slipped from Mastered back to Learned — 6 correct answers to go',
+    )
+    const usage = row.dims.find((d) => d.name === 'usage')
+    expect(usage.need).toBe(2)
+    // Two answers, and — because this mastery criterion is day-spaced — not
+    // both in the same sitting.
+    expect(usage.hint).toBe('Usage — 2 correct answers, spread over two days')
+    // A met pip owes nothing and says so.
+    expect(
+      buildStatusWordList(['кот=cat'], ctx)[0].dims.find((d) => d.name === 'identification'),
+    ).toMatchObject({ need: 0, hint: 'Identification — met' })
+  })
+
+  it('marks the one pip an at-risk word is riding on', () => {
+    const ctx2 = {
+      records: {
+        'кот=cat': {
+          word: 'кот=cat',
+          events: [
+            ...met('learning', LEARNING_DIMS),
+            ...met('mastery', MASTERY_DIMS),
+            ev('hearing', 'learning', false, 9e12),
+          ],
+        },
+      },
+      stateOf: () => 'mastered',
+      hasContextDrill: () => true,
+      now: 9e12 + 1,
+    }
+    const [row] = buildStatusWordList(['кот=cat'], ctx2)
+    expect(row.plan.status).toBe('at-risk')
+    // The risk is at the learning level, so that is the level the pips show —
+    // the word's own state (mastered) would have pointed at the wrong table.
+    expect(row.level).toBe('learning')
+    expect(row.dims.filter((d) => d.atRisk).map((d) => d.name)).toEqual(['hearing'])
+    expect(row.dims.every((d) => d.need === 0)).toBe(true)
+  })
+
+  it('takes the inflection answer from the store, not the shaped vocab record', () => {
+    // `vocabByKey` holds the *display* record (shapeVocab): it carries `pos`
+    // but none of the declension data, so asking the paradigm builder about it
+    // answers "no table" for every word — and the no-table shortcut then sent
+    // every slipped word to the learning criteria, which it still met. The
+    // store's own predicate is the one that knows.
+    const ctx2 = {
+      records: { 'кот=cat': { word: 'кот=cat', events: met('learning', LEARNING_DIMS), peak: 3 } },
+      vocabByKey: new Map([['кот=cat', { id: 'кот=cat', ru: 'кот', pos: 'noun' }]]),
+      stateOf: () => 'learned',
+      hasContextDrill: () => true,
+      hasInflections: () => true,
+      now: 9e12,
+    }
+    const [row] = buildStatusWordList(['кот=cat'], ctx2)
+    expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
+    expect(row.plan.headline).toContain('Slipped from Mastered back to Learned')
+
+    // And a word that genuinely has no table still stays at the learning level.
+    const flat = buildStatusWordList(['кот=cat'], { ...ctx2, hasInflections: () => false })
+    expect(flat[0].dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
+  })
+
   it('uses the same disambiguated gloss as current-batch rows', () => {
     const pairedCtx = {
       ...ctx,

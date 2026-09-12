@@ -11,6 +11,8 @@ import {
   criterionMet,
   correctAdvancesAt,
   dimensionAdvancesAt,
+  dimensionShortfall,
+  needsAnotherDay,
   minCorrectToMeet,
   minExercisesToLevel,
   levelGapByDimension,
@@ -515,5 +517,54 @@ describe('lastAttemptAt', () => {
   it('returns the latest timestamp, or null when there are none', () => {
     expect(lastAttemptAt([])).toBe(null)
     expect(lastAttemptAt([{ ts: 5 }, { ts: 9 }, { ts: 2 }])).toBe(9)
+  })
+})
+
+describe('dimensionShortfall', () => {
+  it('counts the correct answers one dimension still owes', () => {
+    expect(dimensionShortfall(attempts('learning', 'usage', [true]), 'learning', 'usage')).toBe(2)
+    expect(
+      dimensionShortfall(attempts('learning', 'usage', [true, true, true]), 'learning', 'usage'),
+    ).toBe(0)
+  })
+
+  it('counts attempts, not correct answers, for speaking', () => {
+    const one = attempts('learning', 'speaking', [false])
+    expect(dimensionShortfall(one, 'learning', 'speaking')).toBe(2)
+  })
+
+  it('sums back to minExercisesToLevel across a level', () => {
+    const word = { hasInflections: true, hasContextDrill: true }
+    const evs = attempts('learning', 'usage', [true])
+    const summed = dimensionsForLevel('learning').reduce(
+      (sum, d) => sum + dimensionShortfall(evs, 'learning', d, word),
+      0,
+    )
+    expect(summed).toBe(minExercisesToLevel(evs, 'learning', word))
+  })
+})
+
+describe('needsAnotherDay', () => {
+  const word = { hasInflections: true, hasContextDrill: true }
+
+  it('is true when only the day-spacing rule is left (#313)', () => {
+    // Both correct answers on the same day: the ratio is satisfied, so no
+    // amount of further practice today can finish the criterion.
+    const sameDay = attempts('mastery', 'usage', [true, true], 5 * DAY)
+    expect(needsAnotherDay(sameDay, 'mastery', 'usage', 5 * DAY + 10, word)).toBe(true)
+  })
+
+  it('is false once the answers already span two days', () => {
+    const spaced = dayApart('mastery', 'usage', [true, true])
+    expect(needsAnotherDay(spaced, 'mastery', 'usage', 3 * DAY, word)).toBe(false)
+  })
+
+  it('is false for a criterion with no day-spacing rule at all', () => {
+    expect(needsAnotherDay([], 'learning', 'usage', 0, word)).toBe(false)
+  })
+
+  it('is false when today is a second day the criterion has not yet seen', () => {
+    const yesterday = attempts('mastery', 'usage', [true], 0)
+    expect(needsAnotherDay(yesterday, 'mastery', 'usage', DAY, word)).toBe(false)
   })
 })
