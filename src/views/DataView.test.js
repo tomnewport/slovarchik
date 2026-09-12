@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import 'fake-indexeddb/auto'
 import { IDBFactory } from 'fake-indexeddb'
 import { mount, flushPromises } from '@vue/test-utils'
@@ -6,7 +6,7 @@ import { mount, flushPromises } from '@vue/test-utils'
 import * as idb from '../lib/idb.js'
 import { state as vocabState } from '../stores/vocab.js'
 import * as progress from '../stores/progress.js'
-import { initAppUpdate, resetAppUpdate } from '../stores/appUpdate.js'
+import { initAppUpdate, resetAppUpdate, installed } from '../stores/appUpdate.js'
 
 const mockPush = vi.fn()
 vi.mock('vue-router', () => ({ useRouter: () => ({ push: mockPush }) }))
@@ -34,14 +34,29 @@ const settleUntil = async (ready) => {
   await flushPromises()
 }
 
+/**
+ * A `fetch` answering the deployed-version request. Every mount asks,
+ * so every test needs one; an unstubbed fetch would reach for the network.
+ */
+function serving(body, { ok = true } = {}) {
+  return vi.fn(async () => ({ ok, json: async () => body }))
+}
+
+const FUTURE = '2099-01-01T00:00:00.000Z'
+
 beforeEach(async () => {
   globalThis.indexedDB = new IDBFactory()
+  vi.stubGlobal('fetch', serving({ commit: installed.commit, released: installed.released }))
   idb._resetForTests()
   vocabState.words = [{ key: 'w0', pos: 'noun', hasInflections: false }]
   mockPush.mockClear()
   await progress.resetProgress()
   await progress.loadProgress()
   resetAppUpdate()
+})
+
+afterEach(() => {
+  vi.unstubAllGlobals()
 })
 
 describe('DataView', () => {
@@ -130,8 +145,10 @@ describe('DataView', () => {
 
     const wrapper = mount(DataView)
     await settle()
+    // The press now runs a full check first — the worker *and* the deployment
+    // — so give the chain room to finish rather than a single tick.
     await wrapper.find('.update-app').trigger('click')
-    await flushPromises()
+    await settleUntil(() => updateSW.mock.calls.length > 0)
 
     expect(registration.update).toHaveBeenCalled()
     expect(updateSW).toHaveBeenCalledWith(true)
@@ -142,5 +159,65 @@ describe('DataView', () => {
     const wrapper = mount(DataView)
     await settle()
     expect(wrapper.find('.dicts').text()).toContain('nouns.yml')
+  })
+
+  it('names the build that is running and when it was released', async () => {
+    const wrapper = mount(DataView)
+    await settle()
+
+    const line = wrapper.find('.installed').text()
+    expect(line).toContain(new Date(installed.released).toLocaleString())
+    expect(line).toContain(installed.commit)
+  })
+
+  it('confirms the running build is the deployed one, and when that was checked', async () => {
+    const wrapper = mount(DataView)
+    await settleUntil(() => wrapper.find('.checked').text().includes('Last checked'))
+
+    expect(wrapper.find('.deployed').text()).toContain("You're running the version that's deployed")
+    expect(wrapper.find('.checked').text()).toContain('Last checked against the live site just now')
+  })
+
+  it('reports a newer deployed version, with its release date', async () => {
+    vi.stubGlobal('fetch', serving({ commit: 'deadbee', released: FUTURE }))
+
+    const wrapper = mount(DataView)
+    await settleUntil(() => wrapper.find('.deployed.newer').exists())
+
+    const text = wrapper.find('.deployed').text()
+    expect(text).toContain('A newer version is available')
+    expect(text).toContain(new Date(FUTURE).toLocaleString())
+    expect(text).toContain('deadbee')
+    expect(wrapper.find('.update-app').text()).toBe('Update now')
+  })
+
+  it('says so when the check could not reach the live site, keeping the old answer', async () => {
+    // Offline is the normal state of this app: "up to date" is only worth the
+    // age of the check behind it, so a failed check must not read as one.
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new TypeError('Failed to fetch')
+      }),
+    )
+
+    const wrapper = mount(DataView)
+    await settleUntil(() => wrapper.find('.checked').text().includes("Couldn't reach"))
+
+    expect(wrapper.find('.checked').text()).toContain('Never checked against the live site')
+    expect(wrapper.find('.deployed').text()).toContain('Not yet checked against the live site')
+  })
+
+  it('checks again on demand', async () => {
+    const wrapper = mount(DataView)
+    await settle()
+
+    const fetchMock = serving({ commit: 'deadbee', released: FUTURE })
+    vi.stubGlobal('fetch', fetchMock)
+    await wrapper.find('.check-version').trigger('click')
+    await settleUntil(() => wrapper.find('.deployed.newer').exists())
+
+    expect(fetchMock).toHaveBeenCalled()
+    expect(wrapper.find('.deployed').text()).toContain('A newer version is available')
   })
 })

@@ -9,6 +9,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 // Deployed under https://<user>.github.io/slovarchik/ so assets need this base.
 const base = '/slovarchik/'
 
+// Two facts about this build, computed once so the constants compiled into the
+// bundle and the `version.json` served beside it can never disagree.
 function gitCommitHash() {
   try {
     return execSync('git rev-parse --short HEAD').toString().trim()
@@ -42,16 +44,50 @@ function dropVocabYaml() {
   }
 }
 
+const BUILD_DATE = new Date().toISOString()
+const COMMIT_HASH = gitCommitHash()
+
+// What the *deployment* is serving, published where the running app can ask for
+// it. The build already bakes these two values into the bundle, which
+// tells a client what it is running; this file is the other half of the
+// comparison, and the only way an installed copy can find out that it is behind
+// without waiting for the service worker to happen to notice.
+//
+// It must stay out of the precache (`globIgnores` below, guarded by
+// `scripts/check-precache.mjs`): precached, it would be answered from the
+// install that is already running, so every check would report "up to date"
+// forever — the exact failure the file exists to rule out.
+function versionFile() {
+  const body = () => JSON.stringify({ commit: COMMIT_HASH, released: BUILD_DATE }, null, 2)
+  return {
+    name: 'emit-version-json',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'version.json', source: body() })
+    },
+    configureServer(server) {
+      // `npm run dev` writes no dist, so serve the same document from memory:
+      // the update check then behaves in dev exactly as it does deployed,
+      // rather than reporting a permanently unreachable deployment.
+      server.middlewares.use((req, res, next) => {
+        if ((req.url ?? '').split('?')[0] !== `${base}version.json`) return next()
+        res.setHeader('Content-Type', 'application/json')
+        res.end(body())
+      })
+    },
+  }
+}
+
 export default defineConfig({
   base,
   // Build-time constants surfaced on the Data screen.
   define: {
-    __APP_BUILD_DATE__: JSON.stringify(new Date().toISOString()),
-    __APP_COMMIT_HASH__: JSON.stringify(gitCommitHash()),
+    __APP_BUILD_DATE__: JSON.stringify(BUILD_DATE),
+    __APP_COMMIT_HASH__: JSON.stringify(COMMIT_HASH),
   },
   plugins: [
     vue(),
     dropVocabYaml(),
+    versionFile(),
     VitePWA({
       // 'prompt', not 'autoUpdate' (#691). Under 'autoUpdate' the plugin builds
       // the worker with skipWaiting + clientsClaim, so a new deploy activates
@@ -110,7 +146,10 @@ export default defineConfig({
         // authoring source is likewise not precached (the client only ever fetches
         // the build-generated `.json`).
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,json}'],
-        globIgnores: ['**/vocab/**'],
+        // `version.json` joins the vocab outside the precache, for a different
+        // reason: it is the answer to "what is deployed?", and a precached copy
+        // would answer with the build doing the asking.
+        globIgnores: ['**/vocab/**', 'version.json'],
         // Nothing else caches the vocab at the network layer, deliberately (#670).
         //
         // There used to be a `runtimeCaching` rule giving vocab/*.json its own
