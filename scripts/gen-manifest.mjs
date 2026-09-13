@@ -41,7 +41,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import { buildWords, corpusToken, phraseNotesFrom, shapePhrases } from '../src/lib/vocabBuild.js'
 
@@ -94,7 +94,11 @@ export function hashFile(dir, file) {
  */
 export function emitVocabJson(dir) {
   for (const { file } of FILES) {
-    const doc = yaml.load(readFileSync(resolve(dir, file), 'utf8')) ?? null
+    // A registered file is allowed to hold no document yet — a stub carrying
+    // only a comment — and emits `null`, as it always has. `loadAll` is how
+    // that is said to js-yaml 5, whose `load` throws on an empty document where
+    // 4 returned undefined; a genuine syntax error still throws from here.
+    const [doc = null] = yaml.loadAll(readFileSync(resolve(dir, file), 'utf8'))
     writeFileSync(resolve(dir, jsonName(file)), JSON.stringify(doc))
   }
 }

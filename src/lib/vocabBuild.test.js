@@ -14,7 +14,7 @@ import {
 } from './vocabBuild.js'
 import { loadFixtureFiles, loadFixtureWords } from '../test/fixtures.js'
 import { factIssues } from './wordFacts.js'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 // buildWords now takes parsed docs (the runtime feeds it build-generated JSON);
 // these tests author inline YAML, so parse it here before handing it over.

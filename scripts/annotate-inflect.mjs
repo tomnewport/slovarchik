@@ -650,7 +650,7 @@ export function serializeInflect(pos, dec) {
   return `        inflect: { ${parts.join(', ')} }`;
 }
 
-import yaml from 'js-yaml';
+import * as yaml from 'js-yaml';
 
 export const FILES = {
   'nouns.yml': 'noun', 'calendar.yml': 'noun', 'verbs.yml': 'verb',

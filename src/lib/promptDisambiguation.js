@@ -40,8 +40,8 @@ const normalise = (en) => String(en ?? '').trim()
  * where that prompt maps to more than one distinct Russian sentence. A group of
  * one, or several rows repeating the same Russian, asks nothing ambiguous.
  *
- * @param {object[]} phrases shaped phrases (from shapePhrases)
- * @returns {Array<{en: string, phrases: object[]}>}
+ * @param {PlainObject[]} phrases shaped phrases (from shapePhrases)
+ * @returns {Array<{en: string, phrases: PlainObject[]}>}
  */
 export function collidingPrompts(phrases) {
   const byEn = new Map()
@@ -124,9 +124,9 @@ const FUNCTION_KEYS = new Set(['не=not', 'нет=no', 'бы=would', 'ли=whet
  * share, and why they collide — so a word with no distinguishing note cannot be
  * told apart this way and yields nothing.
  *
- * @param {object} phrase   the phrase to hint
- * @param {object[]} group  every phrase sharing its English prompt
- * @param {(token: string) => object|undefined} resolve  surface form → word record
+ * @param {PlainObject} phrase   the phrase to hint
+ * @param {PlainObject[]} group  every phrase sharing its English prompt
+ * @param {(token: string) => PlainObject|undefined} resolve  surface form → word record
  */
 export function hintFor(phrase, group, resolve) {
   const candidates = distinguishingTokens(phrase, group)
@@ -164,8 +164,8 @@ function resolver(words, formIndex) {
  * the corpus does not say; issuing identical hints would add words without
  * adding information.
  *
- * @param {object[]} phrases shaped phrases
- * @param {object[]} words   shaped words (for their glosses)
+ * @param {PlainObject[]} phrases shaped phrases
+ * @param {PlainObject[]} words   shaped words (for their glosses)
  * @returns {Map<string, string>} phrase id → hint
  */
 export function promptHints(phrases, words, formIndex) {

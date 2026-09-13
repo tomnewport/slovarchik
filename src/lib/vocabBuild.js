@@ -621,9 +621,9 @@ function linkFacts(words) {
  * ones — and `corpusToken` cannot catch it, since it deliberately ignores file
  * order. `buildFormIndex` breaks the same tie for the same kind of reason.
  *
- * @param {Array<{pos: string, doc: object}>} files each `doc` is the parsed
+ * @param {Array<{pos: string, doc: PlainObject}>} files each `doc` is the parsed
  *   file object (`{ words: {...} }`), already decoded from JSON by the caller.
- * @returns {object[]}
+ * @returns {PlainObject[]}
  */
 export function buildWords(files) {
   const out = []
@@ -712,7 +712,7 @@ export function shapeVocab(words) {
  * singular headword. Falls back to the singular whenever the plural data is
  * absent, so a mis-annotation never renders a blank prompt.
  *
- * @param {object} v shaped vocab word (from {@link shapeVocab})
+ * @param {PlainObject} v shaped vocab word (from {@link shapeVocab})
  * @param {() => number} [rng] randomness source for the `mixed` coin-flip
  * @returns {{ ru: string, en: string[], number: 'sg' | 'pl' }}
  */
@@ -734,14 +734,14 @@ export function vocabDisplay(v, rng = Math.random) {
  * prompt that shows only the English can annotate the ambiguous word instead of
  * asking for a form the learner has no way to choose. See `phraseAmbiguity.js`.
  *
- * @param {object[]} words normalised word records (from {@link buildWords})
+ * @param {PlainObject[]} words normalised word records (from {@link buildWords})
  * @param {Map} [formIndex] a surface-form index (from `phraseHint.buildFormIndex`)
  *   over the *same* words. Optional, and purely a saving: the prompt
  *   disambiguation below needs one, and building it over the whole dictionary
  *   costs ~260 ms — half of this function. The app already keeps one beside the
  *   store's word list and hands it in (see `stores/vocab.js`); scripts and tests
  *   that call this once may leave it out and let `promptHints` build its own.
- * @param {object|null} [notes] pre-derived annotations from
+ * @param {PlainObject|null} [notes] pre-derived annotations from
  *   {@link phraseNotesFrom}, ordinal → `{n, h}`, built at build time by
  *   `scripts/gen-manifest.mjs` (#657). When given, the two corpus-wide
  *   derivations this function would otherwise run — the ambiguity index and the
@@ -806,7 +806,7 @@ export function shapePhrases(words, formIndex, notes = null) {
  * single phrase can decide it — so it is optional here rather than assigned in
  * the literal. Naming the record is what lets that assignment typecheck (#666).
  *
- * @typedef {object} ShapedPhrase
+ * @typedef {PlainObject} ShapedPhrase
  * @property {string} id
  * @property {string} ru
  * @property {string} en
@@ -828,7 +828,7 @@ export function shapePhrases(words, formIndex, notes = null) {
  * the notes only when its cached corpus is byte-identical to the one the build
  * shaped, and otherwise derives them itself.
  *
- * @param {object[]} phrases shaped phrases (from {@link shapePhrases})
+ * @param {PlainObject[]} phrases shaped phrases (from {@link shapePhrases})
  * @returns {Object<string, {n?: string[], h?: string}>} sparse — a phrase with
  *   neither an annotation nor a hint (about 80% of them) is simply absent.
  */

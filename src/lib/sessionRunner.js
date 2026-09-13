@@ -66,7 +66,7 @@ function advanceRound(s) {
  * honest) but does not re-queue the exercise even when it was wrong. Flashcard
  * boards use this: their misses are collected at word granularity and replayed
  * as one combined board at the end, rather than replaying whole boards (#472).
- * @returns {object} the same (mutated) state
+ * @returns {PlainObject} the same (mutated) state
  */
 export function submit(s, correct, { requeue = true } = {}) {
   const ex = currentExercise(s)
@@ -84,7 +84,7 @@ export function submit(s, correct, { requeue = true } = {}) {
  * the way through the machine for a non-graded step (an intro card, #587).
  * Nothing is written to `firstAttempt`, so `runnerSummary()` percentages are
  * exactly what they would have been without the card.
- * @returns {object} the same (mutated) state
+ * @returns {PlainObject} the same (mutated) state
  */
 export function advance(s) {
   const ex = currentExercise(s)
@@ -101,7 +101,7 @@ export function advance(s) {
  * once the planned pass (and any normal repeats) are done (#472). No-op when the
  * list is empty. The exercises are not added to the plan — like every repeat
  * round they sit outside the first-pass progress bar.
- * @returns {object} the mutated state
+ * @returns {PlainObject} the mutated state
  */
 export function startExtraRound(s, exercises = []) {
   const list = (exercises ?? []).filter(Boolean)
@@ -120,11 +120,11 @@ export function startExtraRound(s, exercises = []) {
  * `makeReplacement(ex)`, which may return null to simply drop them), and any
  * already-collected wrong ones of that dimension are discarded.
  *
- * @param {object} s the session runner state
+ * @param {PlainObject} s the session runner state
  * @param {string} dimension the modality to skip
- * @param {(ex: object) => object|object[]|null} [makeReplacement] a stand-in for
+ * @param {(ex: PlainObject) => PlainObject|PlainObject[]|null} [makeReplacement] a stand-in for
  *   each dropped exercise; may return one, several, or null to drop it outright
- * @returns {object} the mutated state
+ * @returns {PlainObject} the mutated state
  */
 export function skipDimension(s, dimension, makeReplacement = () => null) {
   if (s.skipped.includes(dimension)) return s
@@ -170,9 +170,9 @@ export function skipDimension(s, dimension, makeReplacement = () => null) {
  * has already been attempted: that cell carries a real result, and removing it
  * would rewrite the session's history.
  *
- * @param {object} s runner state
- * @param {(ex: object) => boolean} shouldDrop
- * @returns {object} the mutated state
+ * @param {PlainObject} s runner state
+ * @param {(ex: PlainObject) => boolean} shouldDrop
+ * @returns {PlainObject} the mutated state
  */
 export function dropQueued(s, shouldDrop) {
   for (let i = s.queue.length - 1; i >= s.pos; i--) {

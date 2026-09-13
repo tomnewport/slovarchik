@@ -164,9 +164,7 @@ export function hsvToHex(h, s, v) {
   const c = v * s
   const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
   const m = v - c
-  let r = 0
-  let g = 0
-  let b = 0
+  let r, g, b
   if (h < 60) [r, g, b] = [c, x, 0]
   else if (h < 120) [r, g, b] = [x, c, 0]
   else if (h < 180) [r, g, b] = [0, c, x]
@@ -203,7 +201,7 @@ export function dayColor(rec, maxCount) {
  * Build the GitHub-style contribution grid: `weeks` columns (oldest first),
  * each a length-7 array of cells indexed by weekday (0 = Sunday). The last
  * column is the current week; days after today are flagged `future`.
- * @returns {{ weeks: Array<Array<object|null>>, months: Array<{index, label}> }}
+ * @returns {{ weeks: Array<Array<PlainObject|null>>, months: Array<{index, label}> }}
  */
 export function buildCalendar(activity, todayKey, weeks = 53) {
   const maxCount = maxDailyCount(activity)

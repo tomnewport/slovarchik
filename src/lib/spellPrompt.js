@@ -55,7 +55,7 @@ function firstEn(en) {
  * part-of-speech/aspect line — the three things TypeExercise and the /vocab
  * EN→RU drill render, and nothing else.
  *
- * @param {object} v shaped vocab word (from `shapeVocab`)
+ * @param {PlainObject} v shaped vocab word (from `shapeVocab`)
  * @param {string} [en] the shown gloss; defaults to the word's first English
  */
 export function spellPrompt(v, en = firstEn(v?.en)) {
@@ -81,7 +81,7 @@ export function spellPromptsFor(v) {
  * i.e. prompts the learner cannot answer except by guessing. The corpus guard
  * (`spellPromptData.test.js`) requires this to be empty.
  *
- * @param {object[]} vocab shaped vocab (from `shapeVocab`)
+ * @param {PlainObject[]} vocab shaped vocab (from `shapeVocab`)
  * @returns {Array<{prompt: string, ids: string[]}>} colliding groups, sorted
  */
 export function duplicateSpellPrompts(vocab) {

@@ -16,7 +16,7 @@ import { buildFormIndex, phraseHintTokens, normToken } from './phraseHint.js'
  * resolves to no gloss. Glosses are drawn from the *full* word list — including
  * `learn: false` gloss-only entries — so adding such an entry removes the hole.
  *
- * @param {object[]} words normalised word records (from buildWords)
+ * @param {PlainObject[]} words normalised word records (from buildWords)
  * @returns {Array<{form: string, sample: string, count: number, phrases: string[]}>}
  *   one entry per unglossed normalised form, busiest first
  */

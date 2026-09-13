@@ -92,7 +92,7 @@ export function commonStem(forms) {
 /**
  * Flatten every form in a noun's table into a single list of (stress-free)
  * strings.
- * @param {object} noun
+ * @param {PlainObject} noun
  * @returns {string[]}
  */
 export function allForms(noun) {
@@ -104,7 +104,7 @@ export function allForms(noun) {
 /**
  * Derive the ending table (stem stripped) for a noun. Stress marks are removed
  * first so endings reflect what a learner would type.
- * @param {object} noun
+ * @param {PlainObject} noun
  * @returns {{stem: string, endings: Record<string, Record<string, string>>}}
  */
 export function endingsTable(noun) {
@@ -127,7 +127,7 @@ export function endingsTable(noun) {
  * takes exactly that form (comparison ignores stress and case). Powers the
  * "which case is this?" easy drill, where a single form (e.g. книге = dative
  * *and* prepositional) can have several correct answers.
- * @param {object} noun
+ * @param {PlainObject} noun
  * @param {string} form
  * @returns {Array<{number: string, case: string}>}
  */
@@ -148,7 +148,7 @@ export function matchingSlots(noun, form) {
 /**
  * The set of distinct cases a form is valid in (collapsing number), as a Set of
  * case keys. Convenient for grading the easy-mode multi-select.
- * @param {object} noun
+ * @param {PlainObject} noun
  * @param {string} form
  * @returns {Set<string>}
  */
@@ -165,7 +165,7 @@ export function slotKey(number, c) {
  * The set of (number, case) slots a form is valid in, as a Set of slot keys
  * (e.g. 'pl.gen'). Like {@link validCases} but keeps the number distinction —
  * used to grade the easy drill where learners pick case *and* number.
- * @param {object} noun
+ * @param {PlainObject} noun
  * @param {string} form
  * @returns {Set<string>}
  */

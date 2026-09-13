@@ -285,7 +285,7 @@ export function minExercisesToLevel(events, level, word = {}) {
  * from perpetually trailing the blanket ones (a matching or listening board
  * clears ~ten words at once).
  *
- * @param {Array<{events: Array, word?: object}>} records
+ * @param {Array<{events: Array, word?: PlainObject}>} records
  * @param {'learning'|'mastery'} level
  * @returns {Record<string, number>} dimension → remaining correct answers (>0)
  */
@@ -360,7 +360,7 @@ export function wordHasInflections(word) {
  * Compute a word's current state from its attempt history.
  * @param {Array} events attempts for this word (any order within a dimension is
  *   treated as chronological)
- * @param {object} [word] the word record (used to decide if mastery applies)
+ * @param {PlainObject} [word] the word record (used to decide if mastery applies)
  * @returns {'unknown'|'learning'|'learned'|'mastered'}
  */
 export function wordState(events, word = {}) {

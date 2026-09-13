@@ -167,8 +167,8 @@ function assemble(meta, rows, cols, lookup, noteLookup) {
 /**
  * Build a paradigm for a single normalised word record, or null if the word
  * carries no usable inflection table.
- * @param {object} word a record from buildWords()
- * @returns {object|null}
+ * @param {PlainObject} word a record from buildWords()
+ * @returns {PlainObject|null}
  */
 export function buildParadigm(word) {
   const meta = {
@@ -180,7 +180,7 @@ export function buildParadigm(word) {
     word,
   }
 
-  let paradigm = null
+  let paradigm
   switch (word.pos) {
     case 'noun': {
       const cols = NUMBERS.map((n) => ({ key: n, label: NUMBER_LABELS[n] }))
@@ -359,8 +359,8 @@ const VARIANT_BUILDERS = [buildShortParadigm, buildNonFiniteParadigm, buildPassi
  * Every usable table for one word: its primary paradigm first, then any variant.
  * A handful of adjectives (до́лжен, рад) are short-form *only* and have no primary
  * table at all, so this can return a list that starts with a variant.
- * @param {object} word a record from buildWords()
- * @returns {object[]} possibly empty
+ * @param {PlainObject} word a record from buildWords()
+ * @returns {PlainObject[]} possibly empty
  */
 export function buildWordParadigms(word) {
   return [buildParadigm(word), ...VARIANT_BUILDERS.map((build) => build(word))].filter(Boolean)

@@ -40,7 +40,7 @@ function partRank() {
  * Offer up to five batch options for the next learning or mastery journey.
  * @param {'learning'|'mastery'} [level]
  * @param {() => number} [rng]
- * @returns {object[]}
+ * @returns {PlainObject[]}
  */
 export function getBatchOptions(level = 'learning', rng = Math.random) {
   // Mastery builds on confirmed memory: a word still pending its spaced
@@ -74,7 +74,7 @@ export async function autoCommitMasteryBatch(rng = Math.random) {
  * as soon as enough words are learned — without waiting for the previous batch's
  * completion to be celebrated. If the active batch is already complete (every
  * word mastered) it is cleared first so a new one can take its place.
- * @returns {Promise<object|null>} the newly committed batch, or null if none was
+ * @returns {Promise<PlainObject|null>} the newly committed batch, or null if none was
  *   committed (one is still in progress, or too few words are ready to master).
  */
 export async function ensureMasteryBatch(rng = Math.random) {

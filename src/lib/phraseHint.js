@@ -76,7 +76,7 @@ function collectStrings(value, out) {
  * Only single-word forms come back. Indexing the pieces of a multi-word form
  * (e.g. the year «две ты́сячи») would leak its component words as standalone
  * glosses — that's how «две» came to mean "two thousand" (see #155).
- * @param {object} word   a normalised word record (from buildWords)
+ * @param {PlainObject} word   a normalised word record (from buildWords)
  * @returns {Set<string>}
  */
 function rawWordForms(word) {
@@ -156,7 +156,7 @@ function addPronounForms(word, forms) {
 /**
  * Every normalised surface form a word can appear as in a phrase: its headword
  * and bare key form plus all of its inflected forms.
- * @param {object} word   a normalised word record (from buildWords)
+ * @param {PlainObject} word   a normalised word record (from buildWords)
  * @param {(t: string) => string} [norm]  token normaliser (default {@link normToken})
  * @returns {Set<string>}
  */
@@ -168,7 +168,7 @@ export function wordForms(word, norm = normToken) {
  * The normalised *dictionary* forms of a word — its headword and bare key form.
  * These are the lemma a learner would look up, as opposed to the oblique
  * inflected forms also returned by {@link wordForms}.
- * @param {object} word
+ * @param {PlainObject} word
  * @param {(t: string) => string} [norm]  token normaliser (default {@link normToken})
  * @returns {Set<string>}
  */
@@ -215,7 +215,7 @@ function plainForms(forms) {
  * only elsewhere in the phrase (collateral damage). Order follows the phrase;
  * a word appearing twice yields two entries.
  * @param {string} phrase
- * @param {object} word   a normalised word record (from buildWords)
+ * @param {PlainObject} word   a normalised word record (from buildWords)
  * @returns {string[]}    normalised tokens (possibly empty)
  */
 export function wordTokensInPhrase(phrase, word) {
@@ -295,11 +295,11 @@ function addSense(index, form, sense) {
  * — is the sense that matters.
  *
  * Within each pass senses appear in dictionary order of the entries claiming them.
- * @param {Array<{word: object, base: Set<string>, forms: Set<string>}>} prepared
+ * @param {Array<{word: PlainObject, base: Set<string>, forms: Set<string>}>} prepared
  *   word records in dictionary order, each with its forms already keyed by the
  *   normaliser this index uses (see {@link buildFormIndex})
  * @param {(t: string) => string} norm  the normaliser those forms were keyed with
- * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}>}
+ * @returns {Map<string, {key: string, ru: string, en: string, senses: PlainObject[]}>}
  */
 function buildIndex(prepared, norm) {
   const index = new Map()
@@ -358,8 +358,8 @@ function buildIndex(prepared, norm) {
  * assignments below are cast: `buildIndex` returns a plain Map and this is the
  * moment it becomes the richer shape (#666).
  *
- * @typedef {Map<string, {key: string, ru: string, en: string, senses: object[]}>
- *   & {stressIndex: Map<string, {key: string, ru: string, en: string, senses: object[]}>}} FormIndex
+ * @typedef {Map<string, {key: string, ru: string, en: string, senses: PlainObject[]}>
+ *   & {stressIndex: Map<string, {key: string, ru: string, en: string, senses: PlainObject[]}>}} FormIndex
  */
 
 /**
@@ -373,7 +373,7 @@ function buildIndex(prepared, norm) {
  * stress mark kept, so {@link phraseHintTokens} can disambiguate heteronyms that
  * differ only by stress — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т» (stand)
  * vs «сто́ят» (cost) — whenever the phrase token carries its stress mark.
- * @param {object[]} words   normalised word records (from buildWords)
+ * @param {PlainObject[]} words   normalised word records (from buildWords)
  * @returns {FormIndex}
  */
 export function buildFormIndex(words) {
@@ -422,7 +422,7 @@ export function buildFormIndex(words) {
  * is normalised.
  * @param {string} phrase
  * @param {FormIndex} index   from {@link buildFormIndex}
- * @returns {Array<{text: string, hint: object|null}>}
+ * @returns {Array<{text: string, hint: PlainObject|null}>}
  */
 export function phraseHintTokens(phrase, index) {
   const stressIndex = index?.stressIndex

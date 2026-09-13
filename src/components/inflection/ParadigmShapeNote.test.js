@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import ParadigmShapeNote from './ParadigmShapeNote.vue'
 import { buildWords } from '../../lib/vocabBuild.js'

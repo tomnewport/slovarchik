@@ -147,7 +147,7 @@ function claim(index, form, tag) {
  * Membership of the index itself doubles as "the dictionary knows this word",
  * since `glossary.yml` (a harvest of surface forms, see below) never enters it.
  *
- * @param {object[]} words  normalised word records (from buildWords)
+ * @param {PlainObject[]} words  normalised word records (from buildWords)
  * @returns {Map<string, string|null> & {shortPredicates: Set<string>, subjects: Set<string>}}
  *   normalised form → tag, or null if ambiguous
  */

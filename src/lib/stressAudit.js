@@ -76,7 +76,7 @@ function* strings(value, path) {
 /**
  * Every Russian-bearing string on a word: its headword, all inflected forms
  * (nouns/adjectives/pronouns/verbs) and every usage-example sentence.
- * @param {object} w a normalised word record (from buildWords)
+ * @param {PlainObject} w a normalised word record (from buildWords)
  */
 function* russianStrings(w) {
   if (w.headword) yield [`${w.key}:headword`, w.headword]
@@ -95,7 +95,7 @@ function* russianStrings(w) {
 /**
  * Latin letters (including precomposed accented vowels) found inside Russian
  * text across the whole word list.
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @returns {{label: string, text: string}[]}
  */
 export function latinInRussianText(words) {
@@ -115,9 +115,9 @@ export function latinInRussianText(words) {
  * token read?" — `phrasesData.test.js` grades every annotation with it and
  * {@link annotatedStressDivergences} re-reads it for stress placement.
  *
- * @param {object} word normalised word record
- * @param {object} t    the phrase target (a shaped `inflect:` annotation)
- * @param {Map<string, object>} [byKey] every word by natural key — needed only
+ * @param {PlainObject} word normalised word record
+ * @param {PlainObject} t    the phrase target (a shaped `inflect:` annotation)
+ * @param {Map<string, PlainObject>} [byKey] every word by natural key — needed only
  *   for the superlative, whose slot spans «са́мый» + the adjective and so has to
  *   read a second entry's declension.
  */
@@ -216,7 +216,7 @@ function readStressCell(word, slot) {
  * is stress-sensitive (via normTokenStress) but folds case and ё, so only the
  * accent position is judged here; the letters are morphOracle's job.
  *
- * @param {object[]} words   normalised word list (from buildWords)
+ * @param {PlainObject[]} words   normalised word list (from buildWords)
  * @param {Record<string, Record<string, string>>} golden key → slot → correct stressed form
  * @returns {{key: string, slot: string, expected: string, actual: string|null}[]}
  */
@@ -242,8 +242,8 @@ export function stressGoldenMismatches(words, golden) {
  * wrong-slot annotation surfaces in phrasesData.test.js as before and only the
  * stress-placement disagreement lands here.
  *
- * @param {object[]} words   normalised word list (from buildWords)
- * @param {object} rules     grammar-rules map (grammar-rules.yml `.rules`)
+ * @param {PlainObject[]} words   normalised word list (from buildWords)
+ * @param {PlainObject} rules     grammar-rules map (grammar-rules.yml `.rules`)
  * @returns {{id: string, key: string, token: string, stored: string, ru: string}[]}
  */
 export function annotatedStressDivergences(words, rules) {
@@ -280,7 +280,7 @@ export function annotatedStressDivergences(words, rules) {
  * Headwords/cells of function-word parts of speech are skipped for the same
  * proclitic reason.
  *
- * @param {object[]} words normalised word list (from buildWords)
+ * @param {PlainObject[]} words normalised word list (from buildWords)
  * @returns {{key: string, where: string, token: string, ru: string|null}[]}
  */
 export function missingStressMarks(words) {
@@ -334,7 +334,7 @@ const COUNT_FORM_NUMERALS = /(два|две|три|четыре|оба|обе|п
  * can claim ends up with several entries, which is the signal that it proves
  * nothing about where the stress belongs.
  *
- * @param {object[]} words normalised word list (from buildWords)
+ * @param {PlainObject[]} words normalised word list (from buildWords)
  * @returns {Map<string, Map<string, {form: string, key: string}>>}
  */
 export function formStressIndex(words) {
@@ -387,7 +387,7 @@ export function formStressIndex(words) {
  * be driven out from inside the corpus, which is why the script budgets this
  * count rather than requiring zero.
  *
- * @param {object[]} words normalised word list (from buildWords)
+ * @param {PlainObject[]} words normalised word list (from buildWords)
  * @returns {{key: string, token: string, dictionary: string, owner: string, ru: string}[]}
  */
 export function unannotatedStressDivergences(words) {
