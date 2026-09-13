@@ -1,8 +1,7 @@
 // Pure logic for the mode-based Speaking drill (SpeakingView.vue).
 //
-// Framework-free (no Vue, no DOM, no I/O) so it stays trivially unit-testable,
-// mirroring the sibling `handsFree.js` engine that drives PracticeView. The view
-// still owns the microphone, speech synthesis and timers; everything here just
+// Framework-free (no Vue, no DOM, no I/O) so it stays trivially unit-testable.
+// The view still owns the microphone, speech synthesis and timers; everything here just
 // decides *what* to say, *when* to warm up, *how* to grade, and *whether* to
 // retry — the parts worth testing in isolation.
 

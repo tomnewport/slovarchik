@@ -13,6 +13,7 @@ import {
   lost,
   stateOf,
   hasContextDrill,
+  hasInflections,
   isPendingConfirmation,
 } from '../stores/progress.js'
 import { state as reports, loadReports, removeReport } from '../stores/reports.js'
@@ -25,6 +26,7 @@ import {
   buildStatusWordList,
 } from '../lib/homeDashboard.js'
 import BatchSearchAdd from '../components/BatchSearchAdd.vue'
+import WordStatusCard from '../components/WordStatusCard.vue'
 import WordProgressModal from '../components/WordProgressModal.vue'
 
 const router = useRouter()
@@ -101,6 +103,7 @@ const statusCtx = computed(() => ({
   vocabByKey: vocabByKey.value,
   stateOf,
   hasContextDrill,
+  hasInflections,
 }))
 const atRiskWords = computed(() => buildStatusWordList(atRisk.value, statusCtx.value))
 const slippedWords = computed(() => buildStatusWordList(lost.value, statusCtx.value))
@@ -237,15 +240,6 @@ const FOCUSED = [
       </div>
     </div>
 
-    <!-- Hands-free spoken practice -->
-    <button class="card handsfree" @click="router.push('/practice')">
-      <span class="hf-icon">🎤</span>
-      <span class="hf-text">
-        <strong>Hands-free</strong>
-        <span class="muted">Eyes-up, voice-only spoken practice — just say "давай".</span>
-      </span>
-    </button>
-
     <!-- Focused sessions -->
     <div class="row focused">
       <button
@@ -258,55 +252,20 @@ const FOCUSED = [
       </button>
     </div>
 
-    <!-- At-risk words -->
-    <div v-if="atRiskWords.length" class="card status-card risk-card">
-      <div class="status-header">
-        <span class="status-label risk-label">At risk</span>
-        <span class="muted status-count">{{ atRiskWords.length }} word{{ atRiskWords.length === 1 ? '' : 's' }} — one wrong answer from slipping</span>
-      </div>
-      <div class="word-scroll">
-        <div v-for="w in atRiskWords" :key="w.key" class="word-row">
-          <div class="word-label" :title="w.fullEn">
-            <span class="word-ru">{{ w.ru }}</span>
-            <span class="word-en muted">{{ w.en }}</span>
-          </div>
-          <div class="word-dims">
-            <span
-              v-for="d in w.dims"
-              :key="d.name"
-              class="dim-pip"
-              :class="d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty'"
-              :title="d.name"
-            >{{ d.label }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Slipped words -->
-    <div v-if="slippedWords.length" class="card status-card slipped-card">
-      <div class="status-header">
-        <span class="status-label slipped-label">Slipped</span>
-        <span class="muted status-count">{{ slippedWords.length }} word{{ slippedWords.length === 1 ? '' : 's' }} — dropped below their best state</span>
-      </div>
-      <div class="word-scroll">
-        <div v-for="w in slippedWords" :key="w.key" class="word-row">
-          <div class="word-label" :title="w.fullEn">
-            <span class="word-ru">{{ w.ru }}</span>
-            <span class="word-en muted">{{ w.en }}</span>
-          </div>
-          <div class="word-dims">
-            <span
-              v-for="d in w.dims"
-              :key="d.name"
-              class="dim-pip"
-              :class="[d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty', { 'dim-missing': !d.met }]"
-              :title="d.met ? d.name : `${d.name} — needs practice to recover`"
-            ><span class="dim-glyph">{{ d.label }}</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- At-risk and slipped words. Rows open the same word card as a batch
+         row, and each says what dropped and what would put it back. -->
+    <WordStatusCard
+      v-if="atRiskWords.length"
+      kind="risk"
+      :words="atRiskWords"
+      @select="selectedWord = $event"
+    />
+    <WordStatusCard
+      v-if="slippedWords.length"
+      kind="slipped"
+      :words="slippedWords"
+      @select="selectedWord = $event"
+    />
 
     <!-- Current batch word lists -->
     <div v-if="learningBatch && allLearningWords.length" class="card word-list-card">
@@ -479,22 +438,6 @@ const FOCUSED = [
 .master-fill {
   background: var(--gold);
 }
-.word-scroll {
-  display: grid;
-  /* An `auto` track is sized from its items' min-content width, and a row's
-     min-content is its nowrap gloss + the pips at full length — so a long word
-     widened the track past the card and scrolled the dimension pips out of
-     sight. `minmax(0, 1fr)` pins the track to the card, leaving the label to
-     ellipsise and the pips always on screen. */
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.45rem;
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--border);
-  margin-top: 0.1rem;
-  max-height: 13rem;
-  overflow-y: auto;
-  padding-right: 0.25rem;
-}
 .word-done .word-ru,
 .word-done .word-en {
   opacity: 0.4;
@@ -508,99 +451,6 @@ const FOCUSED = [
 .pending-mark {
   font-size: 0.75rem;
   cursor: help;
-}
-.word-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-.word-row.clickable {
-  cursor: pointer;
-  border-radius: 6px;
-  margin: 0 -0.35rem;
-  padding: 0.15rem 0.35rem;
-  transition: background 0.1s ease;
-}
-.word-row.clickable:hover,
-.word-row.clickable:focus-visible {
-  background: var(--bg-soft);
-  outline: none;
-}
-.word-label {
-  display: flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  min-width: 0;
-  overflow: hidden;
-}
-.word-ru {
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 0.9rem;
-  /* The Russian is the row's identity — a narrow row spends its last pixels on
-     the gloss ("заб… to forget (to fail to…" helps nobody), which the word card
-     repeats in full anyway. */
-  flex-shrink: 0;
-}
-.word-en {
-  font-size: 0.78rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.word-dims {
-  display: flex;
-  gap: 0.2rem;
-  flex-shrink: 0;
-}
-.dim-pip {
-  position: relative;
-  font-size: 0.9rem;
-  width: 1.4rem;
-  height: 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.dim-met {
-  opacity: 1;
-}
-.dim-partial {
-  opacity: 0.55;
-}
-.dim-empty {
-  opacity: 0.2;
-}
-/* Slipped words: spotlight the skills that still need recovering. Keep the pip
-   itself at full opacity (so the badge stays crisp — opacity would dim it too)
-   and fade only the glyph, then stamp a red ✕ in the corner. */
-.dim-missing {
-  opacity: 1;
-}
-.dim-missing .dim-glyph {
-  opacity: 0.4;
-  filter: grayscale(0.5);
-}
-.dim-missing::after {
-  content: '✕';
-  position: absolute;
-  top: -0.2rem;
-  right: -0.2rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.55rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  background: var(--bad, #ff5c5c);
-  border-radius: 50%;
-  box-shadow: 0 0 0 1.5px var(--card, #1d2745);
 }
 .standard h2 {
   margin: 0 0 0.25rem;
@@ -619,21 +469,6 @@ const FOCUSED = [
 .size small {
   opacity: 0.8;
   font-weight: 400;
-}
-.handsfree {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  text-align: left;
-  cursor: pointer;
-  border-left: 4px solid var(--primary);
-}
-.hf-icon {
-  font-size: 1.8rem;
-}
-.hf-text {
-  display: grid;
-  gap: 0.15rem;
 }
 .focused {
   gap: 0.5rem;
@@ -752,40 +587,8 @@ const FOCUSED = [
   color: var(--text);
   border-color: var(--muted);
 }
-.status-card {
-  display: grid;
-  gap: 0.6rem;
-}
-.risk-card {
-  border-left: 4px solid var(--warn, #f59e0b);
-}
-.slipped-card {
-  border-left: 4px solid var(--bad, #ef4444);
-}
 .word-list-card {
   display: grid;
   gap: 0.6rem;
-}
-.status-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-.status-label {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-.risk-label {
-  color: var(--warn, #f59e0b);
-}
-.slipped-label {
-  color: var(--bad, #ef4444);
-}
-.status-count {
-  font-size: 0.82rem;
 }
 </style>

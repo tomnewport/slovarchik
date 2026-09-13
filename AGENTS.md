@@ -44,6 +44,9 @@ offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
 ```
 index.html              # app shell — mounts #app, loads src/main.js
 vite.config.js          # Vite + Vue plugin + PWA + Vitest config; base = /slovarchik/
+                        #   also emits dist/version.json (what the deployment is
+                        #   serving, plus dated release notes) and keeps it out
+                        #   of the SW precache
 playwright.config.js    # e2e config. Two servers: `npm run dev` on :5173 for the
                         #   `chromium` and `pixel5` projects, and `npm run build &&
                         #   npm run preview` on :4173 for the `offline` project —
@@ -56,16 +59,16 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
-                        #   /practice, /progress, /data, /vocab, /phrases, /phrase-fix,
+  router/index.js       # 16 routes → views. Highlights: / (home), /session, /batch,
+                        #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, WordFacts, AnnotatedEnglish,
-                        #   ComprehensionCheck, …)
+                        #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,
+                        #   AnnotatedEnglish, ComprehensionCheck, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast, IntroCard — the non-graded
                         #   "here is a new word" step)
@@ -74,7 +77,7 @@ src/
   composables/          # stateful Vue orchestration shared between views (needs a
                         #   component lifecycle, so it can't live in lib/):
     useSpeechLoop.js    #   sequence guards, timer registry, speech watchdogs, wake
-                        #   lock, mic lifecycle — SpeakingView + PracticeView
+                        #   lock, mic lifecycle — SpeakingView
   stores/               # VUE reactive stores (app state), NOT Redux:
     vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
     progress.js         #   barrel — re-exports stores/progress/ so consumers import one module
@@ -96,7 +99,9 @@ src/
       backup.js         #     export / import
       index.js          #     re-export; dependencies point one way only, no cycles
     appUpdate.js        #   whether a newer build is waiting, and taking it when the
-                        #     learner asks — never mid-question (#691)
+                        #     learner asks — never mid-question (#691); also what the
+                        #     deployment says it is serving and when it last said it,
+                        #     for the Data screen's version check
     settings.js         #   user preferences (not learning progress)
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
@@ -124,7 +129,13 @@ src/
                         #     (a stub's lemma: link, a derivational family, one word's several
                         #     senses), the sentence's English last, and a null rather than a guess —
                         #     the residue is the `align:` worklist that check:align ratchets
-                        #   quiz/recognition/handsFree/handsFreePools/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   quiz/recognition/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   recovery  — what a slipped or at-risk word has lost and what would win it
+                        #     back: the level it owes, the dimensions that broke, and how many correct
+                        #     answers each wants (and when the day-spacing rule means not today)
+                        #   reviewState  — when the scheduler expects each skill back, and whether a
+                        #     word passed the overnight confirmation review: the word card's
+                        #     "Spaced review" panel, and the only caller of schedule.js's `isDue`
                         #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
                         #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
                         #     a preposition with only one case) when the rule is the whole of what went wrong; the
@@ -140,6 +151,9 @@ src/
                         #     screen's words-known chart (a real time axis; idle weeks take up width)
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
+                        #   appVersion  — the build running here vs the build deployed, how old
+                        #     the last check is, and which of the deployment's dated release
+                        #     notes are new to THIS install (the Data screen's Versions card)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
                         #   coalesce  — share one in-flight run between concurrent callers, so the boot
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
@@ -155,7 +169,7 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
                         #   + phrase-notes.json — the corpus-wide phrase
                         #   annotations derived at build time (#657); generated,
                         #   not committed, like the manifest and the *.json
-e2e/                    # Playwright specs (homepage, full-session, and offline —
+e2e/                    # Playwright specs (homepage, full-session, versions, and offline —
                         #   the last runs against the preview build, where the SW exists)
 docs/                   # design notes for in-flight features
                         #   vocab-caching.md — why the corpus is cached twice
@@ -168,7 +182,12 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     committed budget in size-budget.json, and publishes
                         #     the table to the job summary on pass and on fail
                         #   check-precache.mjs asserts vocab/** stays out of the
-                        #     generated SW precache manifest (the #266 partition)
+                        #     generated SW precache manifest (the #266 partition), and
+                        #     version.json with it
+                        #   release-notes.mjs reads the commit log at build time —
+                        #     the release notes shipped in version.json and compiled
+                        #     into the app (no changelog file, no tags: the commit
+                        #     subjects are the changelog)
                         #   check-parts.mjs is the curriculum-parts GATE; gen-parts.mjs is
                         #     the worklist that proposes a packing (--repack for the
                         #     minimal repair when the gate fails)
@@ -280,9 +299,8 @@ tells you nothing about whether CI will accept your change.
   most learning state lives in `progress.js`, delegating to the pure `lib` engine.
 - **The session/practice flow** → `src/views/SessionView.vue` +
   `src/lib/sessionRunner.js` / `session.js` / `exerciseBuild.js`.
-- **Mic/speech timing in the spoken drills** (watchdogs, sequence guards, wake
-  lock) → `src/composables/useSpeechLoop.js`, shared by SpeakingView and
-  PracticeView — fix it once, both get it.
+- **Mic/speech timing in the spoken drill** (watchdogs, sequence guards, wake
+  lock) → `src/composables/useSpeechLoop.js`, used by SpeakingView.
 - **Routing** → `src/router/index.js`. There's no nav bar; the user navigates
   from `HomeView` (the header in `App.vue` is just the Home logo + Data avatar).
 

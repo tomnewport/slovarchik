@@ -3,13 +3,35 @@
 // lives only in this browser, how long the app has been in use, and the
 // release date of the running code plus when the dictionaries were last
 // updated (with actions to fetch the latest).
+//
+// The Versions card answers five questions at once: which build is
+// running here, when it was released, whether the deployment has moved past it,
+// and when we last managed to ask. The last one is not decoration — offline is
+// the normal state of this app, so "up to date" is only worth as much as the
+// age of the check behind it, and a check that never reached the network must
+// not read as a clean bill of health.
+//
+// And the fifth: what is actually *in* the version being offered. "A newer
+// version is available" is a reason to reload only if you know what it buys
+// you. The deployment publishes a window of recent changes with each one dated
+// (scripts/release-notes.mjs); this screen slices that window at the running
+// build's own release time, so the list is what is new to this install rather
+// than a changelog everyone sees the same way.
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import * as progress from '../stores/progress.js'
 import { getAllFiles, getMeta, setMeta } from '../lib/idb.js'
 import { syncFromNetwork } from '../stores/vocab.js'
-import { applyUpdate, checkForUpdate } from '../stores/appUpdate.js'
+import {
+  state as appUpdate,
+  deployedStatus,
+  installed,
+  applyUpdate,
+  checkForUpdate,
+  loadUpdateCheck,
+} from '../stores/appUpdate.js'
+import { describeAge, notesSince, parseNotes } from '../lib/appVersion.js'
 import {
   settings,
   loadSettings,
@@ -22,6 +44,14 @@ import {
 import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
 
 const soundsSupported = audioSupported()
+
+// What this build published about itself. Compiled in rather than fetched, so
+// the running version can say what is in it with no network at all; read only
+// here, which keeps it in this lazily-loaded chunk (see vite.config.js).
+const APP_NOTES = parseNotes(typeof __APP_RELEASE_NOTES__ === 'undefined' ? [] : __APP_RELEASE_NOTES__)
+
+/** Enough to see what a version is for, without turning the card into a log. */
+const MAX_NOTES_SHOWN = 8
 
 // Picking a sound previews it (unless turning it off) and saves the choice.
 function chooseSuccess(id) {
@@ -37,9 +67,6 @@ function chooseCelebration(id) {
   if (id !== OFF) playSound('celebration', id)
 }
 
-const APP_BUILD = typeof __APP_BUILD_DATE__ === 'string' ? __APP_BUILD_DATE__ : null
-const APP_COMMIT = typeof __APP_COMMIT_HASH__ === 'string' ? __APP_COMMIT_HASH__ : null
-
 const router = useRouter()
 const files = ref([])
 const importText = ref('')
@@ -48,6 +75,10 @@ const updating = ref(false)
 const updateStatus = ref(null)
 const resetConfirm = ref(false)
 const lastBackupAt = ref(null)
+// Re-read when a check finishes rather than on a timer: the only thing that
+// moves the "last checked" line is a check, and a ticking clock on this screen
+// would be a background timer running for a line nobody is watching.
+const now = ref(Date.now())
 
 const exportText = computed(() => JSON.stringify(progress.exportData(), null, 2))
 const downloadHref = computed(
@@ -73,10 +104,32 @@ const daysUsing = computed(() => {
   return Math.max(1, Math.ceil((Date.now() - since) / 86_400_000))
 })
 
+/** How long ago the deployment last answered us — null if it never has. */
+const checkedAge = computed(() => describeAge(appUpdate.lastCheckedAt, now.value))
+
+/** What the deployed build has that this one has not. */
+const whatsNew = computed(() => notesSince(appUpdate.deployed?.notes ?? [], installed.released))
+const newShown = computed(() => whatsNew.value.slice(0, MAX_NOTES_SHOWN))
+const newHidden = computed(() => Math.max(0, whatsNew.value.length - MAX_NOTES_SHOWN))
+/** What arrived in the build that is running. */
+const ownNotes = computed(() => APP_NOTES.slice(0, MAX_NOTES_SHOWN))
+
+async function checkVersion() {
+  await checkForUpdate()
+  now.value = Date.now()
+}
+
 function fmtDate(value) {
   if (!value) return 'unknown'
   const d = typeof value === 'number' ? new Date(value) : new Date(String(value))
   return Number.isNaN(d.getTime()) ? 'unknown' : d.toLocaleDateString()
+}
+
+/** Release timestamps are worth the time of day: two builds can share a date. */
+function fmtDateTime(value) {
+  if (!value) return 'unknown'
+  const d = typeof value === 'number' ? new Date(value) : new Date(String(value))
+  return Number.isNaN(d.getTime()) ? 'unknown' : d.toLocaleString()
 }
 
 async function loadFiles() {
@@ -148,6 +201,12 @@ onMounted(async () => {
   await loadSettings()
   await loadFiles()
   lastBackupAt.value = (await getMeta('lastBackupAt')) ?? null
+  // Show the last known answer first, then ask again: opening this screen is
+  // itself the request to find out, and an offline attempt leaves the stored
+  // answer (and its age) on screen rather than blanking it.
+  await loadUpdateCheck()
+  now.value = Date.now()
+  await checkVersion()
 })
 </script>
 
@@ -319,7 +378,77 @@ onMounted(async () => {
     <!-- Versions -->
     <div class="card">
       <h2>Versions</h2>
-      <p>App code released: <strong>{{ fmtDate(APP_BUILD) }}</strong><template v-if="APP_COMMIT"> ({{ APP_COMMIT }})</template></p>
+
+      <p class="installed">
+        This app: released <strong>{{ fmtDateTime(installed.released) }}</strong><span v-if="installed.commit" class="commit"> ({{ installed.commit }})</span>
+      </p>
+
+      <p class="deployed" :class="deployedStatus">
+        <template v-if="deployedStatus === 'newer'">
+          <strong>A newer version is available</strong> — released
+          {{ fmtDateTime(appUpdate.deployed.released) }}<span v-if="appUpdate.deployed.commit"> ({{ appUpdate.deployed.commit }})</span>.
+          <template v-if="appUpdate.available">It's downloaded and ready to install.</template>
+        </template>
+        <template v-else-if="deployedStatus === 'current'">
+          You're running the version that's deployed.
+          <template v-if="appUpdate.available">
+            A new build is also downloaded and waiting — install it to see what it is.
+          </template>
+        </template>
+        <template v-else-if="deployedStatus === 'older'">
+          This copy is <strong>ahead of what's deployed</strong>: the live site has been
+          rolled back to {{ fmtDateTime(appUpdate.deployed.released) }}. Reloading would
+          move you back to that version.
+        </template>
+        <template v-else-if="appUpdate.lastCheckedAt">
+          The live site answered but didn't say which version it's serving, so this
+          can't be compared.
+          <template v-if="appUpdate.available">A new build is downloaded and waiting.</template>
+        </template>
+        <template v-else>
+          Not yet checked against the live site, so whether this is the latest version
+          is unknown.
+        </template>
+      </p>
+
+      <div v-if="deployedStatus === 'newer' && whatsNew.length" class="whats-new">
+        <h3>What's new in it</h3>
+        <ul class="notes">
+          <li v-for="n in newShown" :key="n.at + n.text">{{ n.text }}</li>
+        </ul>
+        <p v-if="newHidden" class="muted more">
+          …and {{ newHidden }} more change{{ newHidden === 1 ? '' : 's' }}.
+        </p>
+      </div>
+
+      <details v-if="ownNotes.length" class="own-notes">
+        <summary>What's in the version you're running</summary>
+        <ul class="notes">
+          <li v-for="n in ownNotes" :key="n.at + n.text">{{ n.text }}</li>
+        </ul>
+      </details>
+
+      <p class="checked muted">
+        <template v-if="appUpdate.checking">Checking the live site…</template>
+        <template v-else-if="checkedAge">
+          Last checked against the live site {{ checkedAge }} ({{ fmtDateTime(appUpdate.lastCheckedAt) }}).
+        </template>
+        <template v-else>Never checked against the live site on this device.</template>
+        <template v-if="appUpdate.lastCheckFailed && !appUpdate.checking">
+          <br />Couldn't reach it just now — you're probably offline.
+        </template>
+      </p>
+
+      <div class="row">
+        <button class="check-version" :disabled="appUpdate.checking" @click="checkVersion">
+          {{ appUpdate.checking ? 'Checking…' : 'Check now' }}
+        </button>
+        <button class="update-app" :disabled="appUpdate.applying" @click="reloadApp">
+          {{ appUpdate.applying ? 'Updating…' : deployedStatus === 'newer' ? 'Update now' : 'Reload for latest app' }}
+        </button>
+      </div>
+
+      <h3>Dictionaries</h3>
       <ul class="dicts">
         <li v-for="f in files" :key="f.file">
           {{ f.file }} — updated {{ fmtDate(f.updated) }}
@@ -330,7 +459,6 @@ onMounted(async () => {
         <button class="update-dicts" :disabled="updating" @click="updateDictionaries">
           {{ updating ? 'Checking…' : 'Update dictionaries' }}
         </button>
-        <button class="update-app" @click="reloadApp">Reload for latest app</button>
         <span v-if="updateStatus" class="status muted">{{ updateStatus }}</span>
       </div>
     </div>
@@ -384,6 +512,51 @@ onMounted(async () => {
 .dicts {
   margin: 0.5rem 0;
   padding-left: 1.2rem;
+}
+.installed .commit {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.deployed.newer {
+  color: var(--gold);
+}
+.deployed.older {
+  color: var(--bad);
+}
+.deployed.newer strong,
+.deployed.older strong {
+  color: inherit;
+}
+.checked {
+  font-size: 0.85rem;
+}
+.whats-new h3 {
+  color: var(--gold);
+}
+.notes {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+.notes li {
+  margin-bottom: 0.2rem;
+}
+.more {
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+.own-notes {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+.own-notes summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+.card h3 {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
 }
 .sound-group {
   margin-top: 0.75rem;

@@ -1,9 +1,8 @@
 // The stateful Vue orchestration behind the speech-driven drills (issue #532).
 //
-// SpeakingView (the mode drill) and PracticeView (the hands-free loop) both run
-// the same machine: read a prompt aloud → open the mic → grade → move on. The
-// *decisions* in that loop are pure and live in `lib/speakingDrill.js` and
-// `lib/handsFree.js`; what lives here is the plumbing that makes the loop
+// SpeakingView (the mode drill) runs the machine: read a prompt aloud → open
+// the mic → grade → move on. The *decisions* in that loop are pure and live in
+// `lib/speakingDrill.js`; what lives here is the plumbing that makes the loop
 // survive a flaky platform:
 //
 //   - a **sequence counter** (`seq`), bumped on every step, so a late callback
@@ -20,8 +19,8 @@
 //   - the **recognition lifecycle** — one live controller at a time, aborted on
 //     every transition, with the sequence guard applied to its callbacks.
 //
-// Both views used to carry their own copy of all of this. Mount-time and
-// unmount-time wiring is registered here so neither view can forget to release
+// The view used to carry its own copy of all of this. Mount-time and
+// unmount-time wiring is registered here so the view can't forget to release
 // the lock, clear its timers or stop the mic.
 
 import { onMounted, onUnmounted, ref, shallowRef } from 'vue'

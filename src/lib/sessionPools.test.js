@@ -9,6 +9,7 @@ import {
   reinforcePool,
   duePool,
   masteryBatchActive,
+  restingLast,
   assembleSession,
 } from './sessionPools.js'
 
@@ -155,6 +156,91 @@ describe('currentPool', () => {
   })
 })
 
+describe('restingLast', () => {
+  const DAY = 24 * 3600 * 1000
+  const NOW = 100 * DAY
+
+  const sched = (dimension, due) => ({
+    schedule: { [dimension]: { stability: 2 * DAY, due, lastReview: due - 2 * DAY } },
+  })
+
+  it('moves words resting in the drilled dimension behind the due ones', () => {
+    const ctx = makeContext(
+      snapshot({
+        resting: { events: [], ...sched('usage', NOW + DAY) },
+        due: { events: [], ...sched('usage', NOW - DAY) },
+      }),
+    )
+    expect(restingLast(['resting', 'due'], ctx, 'usage', NOW)).toEqual(['due', 'resting'])
+  })
+
+  it('keeps every word — it reorders, it never filters', () => {
+    // The learning criteria carry no day-spacing and this must not add one: a
+    // learner grinding a batch out in one sitting still reaches every word.
+    const ctx = makeContext(
+      snapshot({
+        a: { events: [], ...sched('usage', NOW + DAY) },
+        b: { events: [], ...sched('usage', NOW + 5 * DAY) },
+      }),
+    )
+    expect(restingLast(['a', 'b'], ctx, 'usage', NOW).sort()).toEqual(['a', 'b'])
+  })
+
+  it('preserves the worst-understood-first order within each half', () => {
+    const ctx = makeContext(
+      snapshot({
+        r1: { events: [], ...sched('usage', NOW + DAY) },
+        d1: { events: [], ...sched('usage', NOW - DAY) },
+        r2: { events: [], ...sched('usage', NOW + DAY) },
+        d2: { events: [], ...sched('usage', NOW - DAY) },
+      }),
+    )
+    expect(restingLast(['r1', 'd1', 'r2', 'd2'], ctx, 'usage', NOW)).toEqual(['d1', 'd2', 'r1', 'r2'])
+  })
+
+  it('treats an unscheduled dimension as due', () => {
+    // A skill never attempted is exactly what the advance half of a session is
+    // for, so it must not be mistaken for one that is resting.
+    const ctx = makeContext(
+      snapshot({
+        untried: { events: [] },
+        resting: { events: [], ...sched('usage', NOW + DAY) },
+      }),
+    )
+    expect(restingLast(['resting', 'untried'], ctx, 'usage', NOW)).toEqual(['untried', 'resting'])
+  })
+
+  it('reads only the drilled dimension', () => {
+    // Resting in `hearing` says nothing about whether a usage slot should skip
+    // the word — the schedule is per dimension and so is this.
+    const ctx = makeContext(
+      snapshot({
+        w0: {
+          events: [],
+          schedule: {
+            hearing: { stability: 2 * DAY, due: NOW + 5 * DAY, lastReview: NOW },
+            usage: { stability: 2 * DAY, due: NOW - DAY, lastReview: NOW - 3 * DAY },
+          },
+        },
+        w1: { events: [], ...sched('usage', NOW + DAY) },
+      }),
+    )
+    expect(restingLast(['w1', 'w0'], ctx, 'usage', NOW)).toEqual(['w0', 'w1'])
+  })
+
+  it('leaves a word that just answered this dimension wrong at the front', () => {
+    // A miss sets `due` to the moment it was given, so the halved interval never
+    // reads as rest.
+    const ctx = makeContext(
+      snapshot({
+        missed: { events: [], schedule: { usage: { stability: DAY, due: NOW, lastReview: NOW } } },
+        resting: { events: [], ...sched('usage', NOW + DAY) },
+      }),
+    )
+    expect(restingLast(['resting', 'missed'], ctx, 'usage', NOW)).toEqual(['missed', 'resting'])
+  })
+})
+
 describe('reinforcePool', () => {
   it('keeps only learned-or-better at-risk / lost words', () => {
     const records = {
@@ -278,6 +364,34 @@ describe('assembleSession', () => {
     const current = session.practices.filter((p) => p.bucket === 'current')
     expect(current.length).toBeGreaterThan(0)
     for (const p of current) expect(p.pool).toEqual(['wUnheard'])
+  })
+
+  it('orders a current-bucket learning slot due-first within the advanceable words', () => {
+    // Both words still owe hearing, so both survive the advance narrowing — but
+    // one was heard correctly this morning and is resting on a three-day
+    // interval, so the listening slot should reach for the other one first.
+    const DAY = 24 * 3600 * 1000
+    const now = 100 * DAY
+    const records = {
+      wRested: {
+        events: [ev('hearing', 'learning', true, now)],
+        schedule: { hearing: { stability: 3 * DAY, due: now + 3 * DAY, lastReview: now } },
+      },
+      wStale: {
+        events: [ev('hearing', 'learning', true, now - 9 * DAY)],
+        schedule: { hearing: { stability: 2 * DAY, due: now - 7 * DAY, lastReview: now - 9 * DAY } },
+      },
+    }
+    const session = assembleSession(
+      snapshot(records, { learning: { words: ['wRested', 'wStale'] } }),
+      { type: 'listening', now },
+    )
+    const current = session.practices.filter((p) => p.bucket === 'current')
+    expect(current.length).toBeGreaterThan(0)
+    for (const p of current) {
+      // Reordered, not filtered: the rested word is still reachable behind it.
+      expect(p.pool).toEqual(['wStale', 'wRested'])
+    }
   })
 
   it('keeps the whole current pool when every word has already met the slot dimension', () => {

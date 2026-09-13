@@ -44,7 +44,7 @@ const visualExercise = ref(null)
 // (the cap and fatal-error set live in speakingDrill.shouldRetryEmpty).
 let emptyRetries = 0
 
-// Speech/mic orchestration shared with PracticeView: the sequence guard (`seq`,
+// Speech/mic orchestration from useSpeechLoop: the sequence guard (`seq`,
 // bumped on every question change / quit so callbacks captured by an earlier
 // question bail), the timer registry, the speech watchdogs, the wake lock and
 // the recognition lifecycle. See composables/useSpeechLoop.js.

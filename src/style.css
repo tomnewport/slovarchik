@@ -210,3 +210,103 @@ input[type='text']:focus {
   background: transparent;
   opacity: 1;
 }
+
+/* Word rows — the shared vocabulary of the home screen's word lists: a
+   scrolling column of "Russian — gloss" rows, each ending in the dimension
+   pips. Global rather than scoped twice over, because the batch lists
+   (HomeView) and the status cards (WordStatusCard) render the same row and a
+   scoped copy each is the same rules twice in the render-blocking sheet. */
+.word-scroll {
+  /* An `auto` track is sized from its items' min-content width, and a row's
+     min-content is its nowrap gloss + the pips at full length — so a long word
+     widened the track past the card and scrolled the dimension pips out of
+     sight. `minmax(0, 1fr)` pins the track to the card, leaving the label to
+     ellipsise and the pips always on screen. */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.45rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.1rem;
+  max-height: 13rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+.word-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.word-row.clickable {
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 0 -0.35rem;
+  padding: 0.15rem 0.35rem;
+  transition: background 0.1s ease;
+}
+.word-row.clickable:hover,
+.word-row.clickable:focus-visible {
+  background: var(--bg-soft);
+  outline: none;
+}
+.word-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  min-width: 0;
+  overflow: hidden;
+}
+.word-ru {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  /* The Russian is the row's identity — a narrow row spends its last pixels on
+     the gloss ("заб… to forget (to fail to…" helps nobody), which the word card
+     repeats in full anyway. */
+  flex-shrink: 0;
+}
+.word-en {
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.word-dims {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+.dim-pip {
+  position: relative;
+  font-size: 0.9rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dim-met {
+  opacity: 1;
+}
+.dim-partial {
+  opacity: 0.55;
+}
+.dim-empty {
+  opacity: 0.2;
+}
+.status-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.status-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  flex-shrink: 0;
+}

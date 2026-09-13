@@ -27,6 +27,12 @@
 // rule is there and has never fired". Every runtime assertion about it passes
 // either way. The generated sw.js is the only place the difference is visible.
 //
+// It guards a second, smaller partition for the same kind of reason.
+// `version.json` says what the *deployment* is serving, and the Data screen
+// fetches it to tell the learner whether they are behind. Precached, it would
+// be answered from the install doing the asking, so the check would report "up
+// to date" forever — a guard that always passes, which is worse than none.
+//
 // Reads dist/sw.js, so it must run after `npm run build`.
 
 import { readFileSync, appendFileSync } from 'node:fs'
@@ -53,6 +59,14 @@ export function vocabEntries(entries) {
 }
 
 /**
+ * Precached entries that are the deployed-version document — the other thing
+ * that must not be there. Matched at the root and under a base path.
+ */
+export function versionEntries(entries) {
+  return entries.filter((e) => /(^|\/)version\.json$/.test(e.url))
+}
+
+/**
  * Runtime-cache routes over the vocab in a built sw.js — the ones that must not
  * exist (#670).
  *
@@ -72,7 +86,7 @@ export function vocabRuntimeRoutes(swSource) {
   return found
 }
 
-export function renderSummary(entries, offenders, runtimeRoutes = []) {
+export function renderSummary(entries, offenders, runtimeRoutes = [], versionOffenders = []) {
   const lines = []
   if (offenders.length) {
     lines.push('### 🗂️ Precache partition — broken', '')
@@ -94,6 +108,14 @@ export function renderSummary(entries, offenders, runtimeRoutes = []) {
     lines.push(
       `App shell precached in ${entries.length} entries; no \`vocab/**\` among them, ` +
         'as intended (#266).',
+    )
+  }
+  if (versionOffenders.length) {
+    lines.push('', '### 🏷️ `version.json` — precached', '')
+    lines.push(
+      'The deployed-version document is in the precache manifest, so every update',
+      'check would be answered by the build doing the asking and could never see a',
+      'newer deploy. Restore the `version.json` entry in `globIgnores`.',
     )
   }
   if (runtimeRoutes.length) {
@@ -136,14 +158,15 @@ export function main() {
   }
 
   const offenders = vocabEntries(entries)
+  const versionOffenders = versionEntries(entries)
   const runtimeRoutes = vocabRuntimeRoutes(source)
-  const markdown = renderSummary(entries, offenders, runtimeRoutes)
+  const markdown = renderSummary(entries, offenders, runtimeRoutes, versionOffenders)
   if (process.env.GITHUB_STEP_SUMMARY) {
     appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${markdown}\n`)
   }
   console.log(markdown)
 
-  if (offenders.length || runtimeRoutes.length) process.exitCode = 1
+  if (offenders.length || versionOffenders.length || runtimeRoutes.length) process.exitCode = 1
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main()

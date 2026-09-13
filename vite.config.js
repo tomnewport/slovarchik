@@ -6,9 +6,13 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
+import { releaseNotes } from './scripts/release-notes.mjs'
+
 // Deployed under https://<user>.github.io/slovarchik/ so assets need this base.
 const base = '/slovarchik/'
 
+// Two facts about this build, computed once so the constants compiled into the
+// bundle and the `version.json` served beside it can never disagree.
 function gitCommitHash() {
   try {
     return execSync('git rev-parse --short HEAD').toString().trim()
@@ -42,16 +46,59 @@ function dropVocabYaml() {
   }
 }
 
+const BUILD_DATE = new Date().toISOString()
+const COMMIT_HASH = gitCommitHash()
+// What changed, from the commit log (scripts/release-notes.mjs). Published in
+// `version.json` so an install can be told what is in the version it hasn't
+// taken yet, and compiled in so it can say what is in the one it is running
+// even offline.
+const RELEASE_NOTES = releaseNotes()
+
+// What the *deployment* is serving, published where the running app can ask for
+// it. The build already bakes these two values into the bundle, which
+// tells a client what it is running; this file is the other half of the
+// comparison, and the only way an installed copy can find out that it is behind
+// without waiting for the service worker to happen to notice.
+//
+// It must stay out of the precache (`globIgnores` below, guarded by
+// `scripts/check-precache.mjs`): precached, it would be answered from the
+// install that is already running, so every check would report "up to date"
+// forever — the exact failure the file exists to rule out.
+function versionFile() {
+  const body = () =>
+    JSON.stringify({ commit: COMMIT_HASH, released: BUILD_DATE, notes: RELEASE_NOTES }, null, 2)
+  return {
+    name: 'emit-version-json',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'version.json', source: body() })
+    },
+    configureServer(server) {
+      // `npm run dev` writes no dist, so serve the same document from memory:
+      // the update check then behaves in dev exactly as it does deployed,
+      // rather than reporting a permanently unreachable deployment.
+      server.middlewares.use((req, res, next) => {
+        if ((req.url ?? '').split('?')[0] !== `${base}version.json`) return next()
+        res.setHeader('Content-Type', 'application/json')
+        res.end(body())
+      })
+    },
+  }
+}
+
 export default defineConfig({
   base,
   // Build-time constants surfaced on the Data screen.
   define: {
-    __APP_BUILD_DATE__: JSON.stringify(new Date().toISOString()),
-    __APP_COMMIT_HASH__: JSON.stringify(gitCommitHash()),
+    __APP_BUILD_DATE__: JSON.stringify(BUILD_DATE),
+    __APP_COMMIT_HASH__: JSON.stringify(COMMIT_HASH),
+    // Read only by the Data screen, which is a lazy route — so the notes ride
+    // in that chunk rather than the entry one the size budget gates.
+    __APP_RELEASE_NOTES__: JSON.stringify(RELEASE_NOTES),
   },
   plugins: [
     vue(),
     dropVocabYaml(),
+    versionFile(),
     VitePWA({
       // 'prompt', not 'autoUpdate' (#691). Under 'autoUpdate' the plugin builds
       // the worker with skipWaiting + clientsClaim, so a new deploy activates
@@ -87,35 +134,6 @@ export default defineConfig({
         // (#691). `registerType: 'prompt'` above turns both off by default; the
         // e2e suite is what showed that only one of them should stay off.
         //
-        // ⚠️  ONE-OFF RESCUE DEPLOY — `skipWaiting` is TRUE on purpose, and must
-        // go back to `false` in the very next PR once this has reached Pages.
-        // Left in place it is #691 regressed in full, silently. See #703.
-        //
-        // Why it has to be true exactly once: #702 shipped `skipWaiting: false`
-        // to clients that were running an `autoUpdate` build, and those two do
-        // not hand over to each other. The new worker will not activate itself,
-        // and the old page cannot ask it to — under `autoUpdate` the register
-        // script vite-plugin-pwa injects makes `updateServiceWorker` a no-op,
-        // because autoUpdate expects the worker to call `self.skipWaiting()`:
-        //
-        //     if (!auto) { sendSkipWaitingMessage?.() }   // auto === true
-        //
-        // …and the old page is the old bundle, so it has no Update banner to
-        // offer either. Every install from before #702 is therefore stranded on
-        // the last autoUpdate build, collecting one more waiting worker per
-        // deploy. Only the worker can break the deadlock, by taking itself.
-        //
-        // Those clients then reload on their own: their `main.js` still listens
-        // on `controllerchange` (#190), so they land on a build that *has* the
-        // banner, and the next deploy can go back to asking politely.
-        //
-        // Note this build's own `main.js` plays no part in that. At the moment
-        // of claiming, every stranded client is still running the old bundle —
-        // so re-adding a `controllerchange` reload here would rescue nobody and
-        // would only bring #691 back.
-        //
-        // Once reverted, the comment below is true again:
-        //
         // `skipWaiting: false` is the fix: a freshly deployed worker installs
         // and waits, instead of activating the moment a launch notices it.
         // Nothing takes over until the learner presses Update on Home.
@@ -128,7 +146,7 @@ export default defineConfig({
         // offline spec caught exactly that, a second launch still uncontrolled
         // and therefore still not offline-capable. Claiming costs nothing here
         // now that nothing reloads on `controllerchange`.
-        skipWaiting: true, // ⚠️ RESCUE ONLY — back to false next PR (#703)
+        skipWaiting: false,
         clientsClaim: true,
         // Precache the *app shell only* — JS/CSS/HTML/icons/fonts. The vocab
         // (`vocab/*.json` + `manifest.json`) is deliberately excluded (#266):
@@ -139,7 +157,10 @@ export default defineConfig({
         // authoring source is likewise not precached (the client only ever fetches
         // the build-generated `.json`).
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,json}'],
-        globIgnores: ['**/vocab/**'],
+        // `version.json` joins the vocab outside the precache, for a different
+        // reason: it is the answer to "what is deployed?", and a precached copy
+        // would answer with the build doing the asking.
+        globIgnores: ['**/vocab/**', 'version.json'],
         // Nothing else caches the vocab at the network layer, deliberately (#670).
         //
         // There used to be a `runtimeCaching` rule giving vocab/*.json its own

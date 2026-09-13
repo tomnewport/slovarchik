@@ -65,9 +65,9 @@ export const state = reactive({
 
 export const vocab = computed(() => shapeVocab(state.words))
 export const nouns = computed(() => shapeNouns(state.words))
-// Reading `formIndex.value` here would build the 39.5k-entry index (~260 ms)
-// even on the build-time path that has no use for it, so the branch has to sit
-// outside the argument list rather than inside `shapePhrases`.
+// Reading `formIndex.value` here would build the 39.5k-entry index (a tenth of a
+// second and more) even on the build-time path that has no use for it, so the
+// branch has to sit outside the argument list rather than inside `shapePhrases`.
 export const phrases = computed(() =>
   state.phraseNotes
     ? shapePhrases(state.words, null, state.phraseNotes)
@@ -77,13 +77,51 @@ export const isReady = computed(() => state.words.length > 0)
 // key → word record. Cached here rather than rebuilt per component: several
 // consumers want it, and it is a Map over the whole dictionary.
 export const wordsByKey = computed(() => new Map(state.words.map((w) => [w.key, w])))
-// Surface form → hint entry, over the whole dictionary (~39.5k forms, ~260 ms to
-// build). It lives here beside `wordsByKey` rather than in `stores/hints.js`
+// Surface form → hint entry, over the whole dictionary (~39.5k forms; it was
+// ~260 ms to build and #697 roughly halved that, still long enough to be felt on
+// a phone). It lives here beside `wordsByKey` rather than in `stores/hints.js`
 // because two unrelated consumers want the same index — the in-phrase hints and
 // `shapePhrases`' prompt disambiguation — and the store owning the words is the
 // only place both can reach without a cycle (#658). Building it twice cost
-// ~250 ms on entry to every phrase-bearing drill.
+// ~250 ms on entry to every phrase-bearing drill. `warmFormIndex` below keeps
+// even the once off the drill's path.
 export const formIndex = computed(() => buildFormIndex(state.words))
+
+/**
+ * Whether an idle build of the form index is already scheduled. Reset when it
+ * runs, so a later corpus change can schedule another.
+ */
+let warmingFormIndex = false
+
+/**
+ * Build the surface-form index in idle time rather than on the first phrase
+ * (#697).
+ *
+ * The index is ~200 ms of CPU on a desktop and several times that on a phone,
+ * and being a lazy computed it is built on the first `HintablePhrase` render —
+ * which lands it between "start the drill" and the first phrase appearing, the
+ * one moment the learner is actually waiting on a tap. Home is up long before
+ * that (~70 ms) and is then read rather than raced through, so the work goes in
+ * an idle callback: by the time a drill asks, `formIndex` is a warm computed and
+ * the read costs nothing.
+ *
+ * Best-effort by construction. Tapping through before the callback runs builds
+ * the index on demand exactly as it did before, and the scheduled read then
+ * finds it cached; a launch that never reaches a phrase drill has spent idle
+ * time and nothing else. `requestIdleCallback` gets a timeout so a page that
+ * never goes idle still warms, and where it is missing (older Safari, jsdom) a
+ * plain timeout stands in.
+ */
+export function warmFormIndex() {
+  if (warmingFormIndex || !state.words.length) return
+  warmingFormIndex = true
+  const build = () => {
+    warmingFormIndex = false
+    if (state.words.length) void formIndex.value
+  }
+  if (typeof requestIdleCallback === 'function') requestIdleCallback(build, { timeout: 2000 })
+  else setTimeout(build, 0)
+}
 
 /**
  * Russian sentence → the shaped phrase it came from, so a caller holding only
@@ -301,6 +339,10 @@ async function doInitVocab() {
     // Cached data still usable even if the refresh failed.
     state.status = state.words.length ? 'ready' : 'error'
   }
+  // Whatever the corpus came from, warm the form index now rather than on the
+  // first phrase (#697) — after the refresh, so a sync that replaces the words
+  // can't strand a freshly built index.
+  warmFormIndex()
   return state.status
 }
 
