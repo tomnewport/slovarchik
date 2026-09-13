@@ -38,12 +38,17 @@ const GLOSSARY = join(repo, 'public', 'vocab', 'glossary.yml')
  * «сто́ит»/«стои́т» don't pool: a stub that names one of a heteronym pair must
  * not be linked to the other. Falls back to the stress-blind form otherwise,
  * which is what unaccented single-syllable stubs need.
+ *
+ * Both paths read the same string — the accented headword, falling back to the
+ * bare key. Keying the stress path off `headword` and the plain path off `ru`
+ * looked equivalent (the two normalise alike today) but meant the fallback could
+ * quietly answer for a different word than the exact match had looked for.
  */
 function owners(stub, bare, stressed) {
-  const acc = stub.headword || stub.ru
-  const exact = stressed.get(normTokenStress(acc))
+  const form = stub.headword || stub.ru
+  const exact = stressed.get(normTokenStress(form))
   if (exact?.length) return exact
-  return bare.get(normToken(stub.ru)) ?? []
+  return bare.get(normToken(form)) ?? []
 }
 
 export function proposeLemmaLinks(words) {

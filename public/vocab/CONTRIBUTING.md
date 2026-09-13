@@ -220,16 +220,22 @@ whose identity the drills would otherwise have to guess at.
 - **`inflect:` already counts.** A token an `inflect:` block names is aligned for
   free: the annotation says which word it is, and `phrasesData.test.js` already
   checks the form against the paradigm. So annotate the *other* tokens.
-- **One annotation per sentence, not per word.** Identical `ru`/`en_gb` pairs are
-  deduplicated into a single phrase and the first copy wins, so two copies
-  annotated differently would make the winner a coin toss. `check:align` refuses
-  that; agreeing copies are fine.
+- **One annotation per sentence, not per word.** Where the same sentence appears
+  under two words, their `align:` blocks are merged, so it only has to be written
+  once and it doesn't matter which example carries it. Two copies annotating the
+  same token *differently* is a real disagreement and `check:align` refuses it.
+  The copies' `inflect:` blocks are not merged — each names its own drill's
+  target — but where two of them claim the same token as different words, the
+  gate says so and an `align:` block is how you settle it.
 
 **Finding the work.** `npm run align:list` prints every unresolved group,
 busiest first, with a sample sentence. `npm run check:align` is the gate: it
-validates the annotations and fails when the residue grows, so new sentences
-cannot quietly make hinting worse. The counts live in
-`scripts/align-baseline.json` and are meant to come down.
+validates the `align:` annotations and the `lemma:` links, refuses a sentence
+whose duplicate copies would align differently, and fails when the residue
+grows — so new sentences cannot quietly make hinting worse. The counts live in
+`scripts/align-baseline.json` and are meant to come down; clear a group
+completely and the gate asks you to drop its line, because a baseline entry for
+an ambiguity that no longer exists is a regression waiting to be let through.
 
 **Don't annotate what a rule should decide.** If a whole group resolves by a
 principle — every member of a derivational family, every gloss-only stub of one

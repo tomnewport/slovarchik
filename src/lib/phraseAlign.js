@@ -30,11 +30,14 @@
 //
 // Pure and framework-free: no Vue, no store, no I/O.
 
-import { normToken, normTokenStress, phraseHintTokens, senseGloss } from './phraseHint.js'
+import {
+  hasStressMark,
+  normToken,
+  normTokenStress,
+  phraseHintTokens,
+  senseGloss,
+} from './phraseHint.js'
 import { phraseTokens } from './phrases.js'
-
-/** Acute-accent marks used to mark stress (mirrors phraseHint). */
-const STRESS_MARKS = /[́́´ˊ]/u
 
 /**
  * How an alignment was reached. Ordered loosely by how much it is worth: an
@@ -77,7 +80,7 @@ const STRESS_MARKS = /[́́´ˊ]/u
  */
 export function tokenCandidates(text, index) {
   if (!index) return []
-  const stressed = STRESS_MARKS.test(text) ? normTokenStress(text) : ''
+  const stressed = hasStressMark(text) ? normTokenStress(text) : ''
   const stressIndex = index.stressIndex
   if (stressed && stressIndex?.has(stressed)) {
     return stressIndex.candidates?.get(stressed) ?? [stressIndex.get(stressed).key]
@@ -403,10 +406,17 @@ function head(group, bare, byKey) {
  * The curriculum words among a group. Gloss-only stubs drop out: they are not
  * taught, do not appear in the CEFR bars, and `encounteredKeys` would have to
  * filter them anyway.
+ *
+ * A group of nothing but stubs credits nothing, and says so with an empty list
+ * rather than handing the stubs back. There are 3,228 such tokens — every word
+ * the phrase bank uses that the curriculum does not teach and that no `lemma:`
+ * link has reached yet — and the old fallback returned them, contradicting the
+ * `Alignment` typedef one screen up. Harmless only because `encounteredKeys`
+ * filters again on its way past; the next consumer to read the contract instead
+ * of the code would have over-credited.
  */
 function creditable(group, byKey) {
-  const out = group.filter((k) => byKey?.get(k)?.learnable !== false)
-  return out.length ? out : group
+  return group.filter((k) => byKey?.get(k)?.learnable !== false)
 }
 
 /**
@@ -439,24 +449,6 @@ export function alignPhraseTokens(phrase, index, opts = {}) {
     })
     return { text, candidates, alignment }
   })
-}
-
-/**
- * The distinct word keys a phrase's tokens are attributed to, in phrase order.
- * Tokens nothing settles are skipped — being a word short is the cheaper error
- * for a soft signal, and what is skipped is exactly what `check:align` reports.
- *
- * @param {string} phrase
- * @param {import('./phraseHint.js').FormIndex} index
- * @param {object} [opts]  as {@link alignPhraseTokens}
- * @returns {string[]}
- */
-export function alignedKeys(phrase, index, opts = {}) {
-  const keys = new Set()
-  for (const { alignment } of alignPhraseTokens(phrase, index, opts)) {
-    if (alignment) keys.add(alignment.key)
-  }
-  return [...keys]
 }
 
 /**

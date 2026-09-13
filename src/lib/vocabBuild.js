@@ -868,6 +868,51 @@ function normalizeAlign(align) {
 }
 
 /**
+ * The phrase bank keyed by Russian sentence, as word alignment sees it (#706).
+ *
+ * {@link shapePhrases} dedupes on `ru=en`, so a sentence written with two
+ * English renderings survives twice; a caller holding only the sentence — which
+ * is most of the app — can use one of them. This picks the first and merges
+ * every copy's authored `align:` block into it.
+ *
+ * Merged rather than taken from the surviving copy alone because alignment is a
+ * property of the **sentence**, not of whichever word happens to own the copy
+ * that sorted first. Without the merge an `align:` written on one example is
+ * silently discarded, and which example that is depends on dictionary order.
+ * The copies' `inflect:` blocks are deliberately *not* merged: each is a claim
+ * about its own drill's target token, two examples of one sentence legitimately
+ * drill different tokens, and where two copies claim the same token differently
+ * that is a real disagreement for `check:align` to report rather than for this
+ * to average away.
+ *
+ * Lives here, beside `shapePhrases`, because both the running app
+ * (`stores/vocab.js`) and the gate (`scripts/check-align.mjs`) have to agree
+ * exactly about which phrase ships — a second copy of this rule is how the gate
+ * came to measure something the app never resolves.
+ *
+ * @param {ShapedPhrase[]} phrases from {@link shapePhrases}
+ * @returns {Map<string, ShapedPhrase>} sentence → the phrase the app resolves
+ */
+export function phrasesByRu(phrases) {
+  /** @type {Map<string, ShapedPhrase>} */
+  const byRu = new Map()
+  for (const phrase of phrases ?? []) {
+    const kept = byRu.get(phrase.ru)
+    if (!kept) {
+      byRu.set(phrase.ru, phrase)
+      continue
+    }
+    const extra = Object.entries(phrase.align ?? {}).filter(([token]) => !(token in kept.align))
+    if (!extra.length) continue
+    // A copy rather than a mutation: `phrases` is a computed's value and the
+    // phrase objects in it are the ones the drills hold. Merging in place would
+    // have this derivation write back into what it derives from.
+    byRu.set(phrase.ru, { ...kept, align: { ...kept.align, ...Object.fromEntries(extra) } })
+  }
+  return byRu
+}
+
+/**
  * The build-time half of the above: reduce shaped phrases to just the parts
  * that were expensive to derive, keyed by their position in the list.
  *

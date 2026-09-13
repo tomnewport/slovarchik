@@ -193,10 +193,12 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     minimal repair when the gate fails)
                         #   typecheck.mjs holds the JSDoc/signature drift to a per-file
                         #     ratchet (typecheck-baseline.json); meant to reach zero
-                        #   check-align.mjs validates the align: annotations and ratchets the
-                        #     unresolved residue per ambiguity group (align-baseline.json);
-                        #     --list is the worklist. gen-lemma-links.mjs proposes the lemma:
-                        #     links that dissolve a third of the ambiguity outright
+                        #   check-align.mjs validates the align: annotations and the lemma:
+                        #     links, refuses a duplicated sentence whose copies would align
+                        #     differently, and ratchets the unresolved residue per ambiguity
+                        #     group (align-baseline.json); --list is the worklist.
+                        #     gen-lemma-links.mjs proposes the lemma: links that dissolve a
+                        #     third of the ambiguity outright
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.

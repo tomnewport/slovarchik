@@ -4,7 +4,6 @@ import { buildFormIndex } from './phraseHint.js'
 import {
   alignPhraseTokens,
   alignedHintTokens,
-  alignedKeys,
   englishStems,
   resolveCandidates,
   tokenCandidates,
@@ -183,6 +182,20 @@ describe('resolveCandidates — structural rungs', () => {
     // creditable, because a stub is not something the bars can report.
     expect(out.show.sort()).toEqual(['купи=buy', 'купить=to buy'])
     expect(out.credit).toEqual(['купить=to buy'])
+  })
+
+  it('credits nothing for a token only gloss-only stubs claim', () => {
+    // The curriculum teaches neither, so there is nothing the CEFR bars could
+    // report. The typedef says stubs never reach `credit`; this is the case
+    // that used to hand them back anyway.
+    const { byKey } = fixture([
+      word('азии=Asia', 'азии', 'Asia', { learnable: false }),
+      word('азии=of Asia', 'азии', 'of Asia', { learnable: false }),
+    ])
+    const out = resolveCandidates(['азии=Asia', 'азии=of Asia'], { byKey, bare: 'азии' })
+    expect(out.via).toBe('polysemy')
+    expect(out.show).toHaveLength(2)
+    expect(out.credit).toEqual([])
   })
 
   it('collapses several entries spelling one Russian word, crediting every sense', () => {
@@ -381,16 +394,12 @@ describe('alignPhraseTokens', () => {
   })
 })
 
-describe('alignedKeys and unalignedTokens', () => {
+describe('unalignedTokens', () => {
   const { index, byKey } = fixture([
     word('кот=cat', 'кот', 'cat'),
     word('мой=my', 'мой', 'my', { pos: 'pronoun' }),
     word('мыть=to wash', 'мыть', 'to wash', { pos: 'verb', ...WASHES }),
   ])
-
-  it('lists each attributed word once, in phrase order', () => {
-    expect(alignedKeys('Кот и кот', index, { byKey })).toEqual(['кот=cat'])
-  })
 
   it('reports the contested tokens nothing settled, 1-based', () => {
     expect(unalignedTokens('Мой кот', index, { byKey })).toEqual([

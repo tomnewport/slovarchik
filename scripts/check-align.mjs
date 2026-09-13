@@ -40,7 +40,7 @@ import { readFileSync, writeFileSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { loadFixtureWords } from '../src/test/fixtures.js'
-import { shapePhrases, learnableWords } from '../src/lib/vocabBuild.js'
+import { shapePhrases, learnableWords, phrasesByRu } from '../src/lib/vocabBuild.js'
 import { buildFormIndex, wordForms, normToken } from '../src/lib/phraseHint.js'
 import { alignPhraseTokens, tokenCandidates } from '../src/lib/phraseAlign.js'
 import { phraseTokens } from '../src/lib/phrases.js'
@@ -169,11 +169,126 @@ export function conflictingAnnotations(byPhrase) {
   return problems
 }
 
+/**
+ * Every `lemma:` link on a gloss-only stub, checked against the word it names.
+ *
+ * The `align:` annotations get four checks each; the 462 lemma links got none,
+ * and they are the higher-leverage data — they drive every `lemma` collapse and
+ * redirect `credit` on a large share of tokens besides. A broken one does not
+ * announce itself: `lexeme()` falls back to the key when the target is missing,
+ * so the link simply stops working and the only symptom is a residue number
+ * somewhere, which is a diagnosis nobody can read backwards. With 2,037 stubs
+ * still unlinked most future links will be written by hand, so they are checked
+ * like anything else written by hand.
+ *
+ * @param {object[]} words normalised word records
+ * @returns {string[]} one message per broken link
+ */
+export function auditLemmaLinks(words) {
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  const problems = []
+  for (const stub of words) {
+    if (!stub.lemma) continue
+    const where = `${stub.key}: lemma ${stub.lemma}`
+    if (stub.learnable !== false) {
+      problems.push(
+        `${where}\n    is on a curriculum word — lemma: says "this entry is a form of that one",` +
+          `\n    which only makes sense for a gloss-only (learn: false) entry`,
+      )
+      continue
+    }
+    const target = byKey.get(stub.lemma)
+    if (!target) {
+      problems.push(`${where}\n    names no word in the corpus`)
+      continue
+    }
+    if (target.learnable === false) {
+      problems.push(
+        `${where}\n    names another gloss-only entry. Alignment follows one hop only, so a` +
+          `\n    chain silently stops at the middle link — point it at the curriculum word`,
+      )
+      continue
+    }
+    if (!wordForms(target).has(normToken(stub.ru))) {
+      problems.push(`${where}\n    «${stub.headword || stub.ru}» is not a form of ${stub.lemma}`)
+    }
+  }
+  return problems
+}
+
+/**
+ * Sentences whose duplicate copies would align differently.
+ *
+ * `shapePhrases` keeps one copy per `ru=en`, and `phrasesByRu` then keeps one of
+ * *those* per `ru` — so a sentence filed under two words ships with one copy's
+ * `source`, `inflectToken` and English, and the other copy's are never read.
+ * Where that changes the answer, which copy survives is decided by dictionary
+ * order, and the alignment a learner gets is an accident of sorting.
+ *
+ * Reported by outcome rather than by comparing inputs, because the inputs differ
+ * on 22 of the 24 duplicated sentences and almost none of it matters: two
+ * examples of one sentence naturally sit under different words and annotate
+ * different tokens. What matters is when the resolution moves.
+ *
+ * @param {object[]} words
+ * @param {import('../src/lib/phraseHint.js').FormIndex} index
+ * @returns {string[]}
+ */
+export function divergentDuplicates(words, index) {
+  const byKey = new Map(words.map((w) => [w.key, w]))
+  const shaped = shapePhrases(words)
+  // The authored annotations as the app will see them: merged across copies, so
+  // one `align:` settles the sentence wherever it was written. What is left to
+  // differ is each copy's own `inflect:` target, its `source` and its English.
+  const merged = phrasesByRu(shaped)
+  /** @type {Map<string, object[]>} */
+  const copies = new Map()
+  for (const phrase of shaped) {
+    if (!copies.has(phrase.ru)) copies.set(phrase.ru, [])
+    copies.get(phrase.ru).push(phrase)
+  }
+
+  const problems = []
+  for (const [ru, group] of copies) {
+    if (group.length < 2) continue
+    const align = merged.get(ru)?.align
+    const runs = group.map((phrase) =>
+      alignPhraseTokens(ru, index, { ...optsFor(phrase, byKey), align }),
+    )
+    runs[0].forEach((cell, i) => {
+      const keys = runs.map((run) => run[i]?.alignment?.key ?? null)
+      if (new Set(keys).size < 2) return
+      problems.push(
+        `«${ru}»\n    token ${i + 1} («${cell.text}») resolves differently depending on which copy` +
+          ` of the sentence the phrase bank keeps:\n` +
+          group.map((p, j) => `      under ${p.source} → ${keys[j] ?? 'unresolved'}`).join('\n') +
+          `\n    settle it with an align: block, which both copies then agree on`,
+      )
+    })
+  }
+  return problems
+}
+
+/**
+ * One phrase per distinct Russian sentence, first occurrence winning — the
+ * phrase bank as `stores/vocab.js` hands it to alignment.
+ *
+ * Deliberately the *same* `phrasesByRu` the running app uses, not a second
+ * implementation of the same idea: `shapePhrases` dedupes on `ru=en`, so a
+ * sentence with two English renderings survives twice, and walking both copies
+ * measured a resolution the app never performs. 24 sentences are duplicated, 22
+ * file their copies under different words, and on «Он постуча́л в закры́тую
+ * дверь.» the two copies' `inflect:` blocks disagree about what «закры́тую» is.
+ */
+export function shippedPhrases(words) {
+  return [...phrasesByRu(shapePhrases(words)).values()]
+}
+
 /** Every ambiguous token nothing settles, grouped by candidate set. */
 export function residue(words) {
   const byKey = new Map(words.map((w) => [w.key, w]))
   const index = buildFormIndex(words)
-  const phrases = shapePhrases(words)
+  const phrases = shippedPhrases(words)
   /** @type {Map<string, {group: string, count: number, samples: Array<object>}>} */
   const groups = new Map()
   let tokens = 0
@@ -215,6 +330,30 @@ function readBaseline() {
   }
 }
 
+/**
+ * Baseline lines for groups that no longer have any residue.
+ *
+ * A ratchet only ratchets while its numbers describe something. Annotate a
+ * group down to nothing and its line stays behind, still permitting a silent
+ * regression to the old count — and since `--update` is a deliberate act, it
+ * stays there until somebody happens to run it. So a cleared group is a
+ * failure with a one-command fix, the same way a group that grew is.
+ *
+ * Only *cleared* groups, not every group that shrank: a loose line is harmless
+ * while the ambiguity still exists, and failing the build on every partial
+ * improvement would make the gate something to route around.
+ *
+ * @param {Array<{group: string, count: number}>} groups
+ * @param {{groups?: Object<string, number>}} baseline
+ * @returns {Array<{group: string, limit: number}>}
+ */
+export function staleBaselineEntries(groups, baseline) {
+  const live = new Set(groups.map((g) => g.group))
+  return Object.entries(baseline?.groups ?? {})
+    .filter(([group]) => !live.has(group))
+    .map(([group, limit]) => ({ group, limit }))
+}
+
 /** Groups that grew, or that the baseline has never seen. */
 export function ratchetFailures(groups, baseline) {
   const allowed = baseline?.groups ?? {}
@@ -233,6 +372,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const { tokens, settled, groups, index } = residue(words)
   const { problems, byPhrase } = auditAnnotations(words, index)
   const conflicts = conflictingAnnotations(byPhrase)
+  const lemmaProblems = auditLemmaLinks(words)
+  const divergent = divergentDuplicates(words, index)
   const unresolved = groups.reduce((sum, g) => sum + g.count, 0)
 
   if (args.includes('--json')) {
@@ -245,6 +386,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
           groups,
           problems,
           conflicts,
+          lemmaProblems,
+          divergent,
         },
         null,
         2,
@@ -286,8 +429,22 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }
   report('Broken align: annotations', problems)
   report('Conflicting align: annotations on one sentence', conflicts)
+  report('Broken lemma: links', lemmaProblems)
+  report('Duplicated sentences whose copies align differently', divergent)
 
-  const failures = ratchetFailures(groups, readBaseline())
+  const baseline = readBaseline()
+  const stale = staleBaselineEntries(groups, baseline)
+  if (stale.length) {
+    failed = true
+    console.error(`The baseline names ${stale.length} group(s) with no residue left:\n`)
+    for (const { group, limit } of stale) console.error(`  ${group}  (still allows ${limit})`)
+    console.error(
+      '\nA line for a group that is gone is a regression waiting to be let through.' +
+        '\nRun `node scripts/check-align.mjs --update` to drop them.\n',
+    )
+  }
+
+  const failures = ratchetFailures(groups, baseline)
   if (failures.length) {
     failed = true
     console.error(`Word alignment went backwards — ${failures.length} group(s) grew:\n`)

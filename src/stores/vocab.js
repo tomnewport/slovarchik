@@ -20,6 +20,7 @@ import {
   shapePhrases,
   shapeContextPhrases,
   learnableWords,
+  phrasesByRu as byRu,
 } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import { buildFormIndex } from '../lib/phraseHint.js'
@@ -134,15 +135,17 @@ export function warmFormIndex() {
  * object through every drill, the string is looked back up here.
  *
  * Keyed on `ru` alone, so the 24 sentences the corpus renders with two different
- * English translations resolve to whichever came first in dictionary order.
- * Their alignment inputs would have to disagree for that to matter, which is
- * what `check:align` refuses to let happen.
+ * English translations resolve through whichever came first in dictionary
+ * order — with every copy's authored `align:` merged in, so an annotation is
+ * never lost to which example happened to sort first. The dedupe rule itself
+ * lives in `lib/vocabBuild.js` so `check:align` can measure the same phrase this
+ * resolves, which is the one thing that stops the gate and the app disagreeing.
+ *
+ * What it cannot merge is the copies' `inflect:` blocks: each names its own
+ * drill's target, and two copies naming the *same* token differently is a real
+ * disagreement — `check:align` reports those rather than letting sort order pick.
  */
-export const phrasesByRu = computed(() => {
-  const map = new Map()
-  for (const p of phrases.value) if (!map.has(p.ru)) map.set(p.ru, p)
-  return map
-})
+export const phrasesByRu = computed(() => byRu(phrases.value))
 
 /**
  * Everything `lib/phraseAlign.js` needs to align a sentence it was handed as a

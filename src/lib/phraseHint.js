@@ -20,6 +20,19 @@ const FORM_KEYS = ['accented', 'forms', 'declension', 'conjugation', 'short']
 const STRESS_MARKS = /[\u0301\u0341\u00B4\u02CA]/gu
 
 /**
+ * Does this token carry an acute stress mark?
+ *
+ * Exported because word alignment asks the same question of the same four
+ * codepoints (lib/phraseAlign.js), and a second copy of the set is a second
+ * place to forget when one of them changes.
+ * @param {string} token
+ * @returns {boolean}
+ */
+export function hasStressMark(token) {
+  return new RegExp(STRESS_MARKS.source, 'u').test(String(token ?? ''))
+}
+
+/**
  * Normalise a Russian surface token for matching: stress marks removed, ё→е,
  * lowercased and stripped of everything but letters (so trailing punctuation in
  * "абза́ц." doesn't defeat the lookup). Returns '' for tokens with no letters.
@@ -47,11 +60,6 @@ export function normTokenStress(token) {
     .replace(/ё/g, 'е')
     .replace(STRESS_MARKS, '\u0301')
     .replace(/[^\p{L}\u0301]/gu, '')
-}
-
-/** Whether a surface token carries an acute stress mark. */
-function hasStressMark(token) {
-  return /[\u0301\u0341\u00B4\u02CA]/u.test(String(token ?? ''))
 }
 
 /** Recursively gather every string leaf under a (possibly nested) value. */

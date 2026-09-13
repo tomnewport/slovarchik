@@ -7195,6 +7195,7 @@ words:
       - ru: Он постуча́л в закры́тую дверь.
         en_gb: He knocked on a closed door.
         inflect: { token: 4, case: acc, number: sg, gender: f, rule: adj-agreement }
+        align: { 4: "закрытый=closed" }
       - ru: Магази́н сего́дня закры́т.
         en_gb: The shop is closed today.
         inflect: { token: 3, degree: short, gender: m, rule: adj-short-form }
