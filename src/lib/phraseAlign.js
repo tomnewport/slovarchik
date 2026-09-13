@@ -279,7 +279,7 @@ function stemsAgree(a, b) {
  *
  * @param {string[]} keys  candidate word keys
  * @param {Set<string>} evidence  stems of the phrase's English (see {@link englishStems})
- * @param {Map<string, object>} byKey
+ * @param {Map<string, PlainObject>} byKey
  * @returns {string|null}
  */
 function byEnglish(keys, evidence, byKey) {
@@ -318,7 +318,7 @@ function byEnglish(keys, evidence, byKey) {
  *
  * @param {string[]} keys  candidates, in dictionary order
  * @param {object} [ctx]
- * @param {Map<string, object>} [ctx.byKey]  the dictionary. Without it only the
+ * @param {Map<string, PlainObject>} [ctx.byKey]  the dictionary. Without it only the
  *   rungs above it can run, and a contested token comes back unresolved rather
  *   than guessed at
  * @param {string} [ctx.authored]  a key from the phrase's `align:` annotation
@@ -420,18 +420,34 @@ function creditable(group, byKey) {
 }
 
 /**
+ * Everything a phrase brings to its own alignment beyond the sentence itself.
+ *
+ * Named once rather than restated per function: three entry points take exactly
+ * these, `stores/vocab.js` assembles them in `alignOptsFor`, and a block that
+ * only said "as alignPhraseTokens" in prose was a shape TypeScript could not
+ * read — which is how the `checkJs` probe (#666) noticed.
+ *
+ * Every field is optional and the structural rungs degrade rather than fail
+ * without them: a sentence typed into a drill that isn't in the phrase bank
+ * still aligns, just with no annotations and no English to weigh.
+ *
+ * @typedef {object} AlignOpts
+ * @property {Map<string, PlainObject>} [byKey]  the dictionary, word records by
+ *   key. Without it only the rungs above `lemma` can run.
+ * @property {string} [en]  the phrase's English, evidence for the last rung
+ * @property {Object<number, string>} [align]  authored overrides, 1-based token
+ *   index → word key (the `align:` block on the usage example)
+ * @property {number} [inflectToken]  1-based index of the example's `inflect:`
+ *   target, whose word is `inflectKey`
+ * @property {string} [inflectKey]  the word that `inflect:` target belongs to
+ */
+
+/**
  * Align every token of a phrase to the word it is.
  *
  * @param {string} phrase  the Russian sentence, stress marks intact
  * @param {import('./phraseHint.js').FormIndex} index  from `buildFormIndex`
- * @param {object} [opts]
- * @param {Map<string, object>} [opts.byKey]  word records by key
- * @param {string} [opts.en]  the phrase's English, evidence for the last rung
- * @param {Object<number, string>} [opts.align]  authored overrides, 1-based
- *   token index → word key (the `align:` block on the usage example)
- * @param {number} [opts.inflectToken]  1-based index of the example's `inflect:`
- *   target, whose word is `inflectKey`
- * @param {string} [opts.inflectKey]  the word that `inflect:` target belongs to
+ * @param {AlignOpts} [opts]
  * @returns {Array<{text: string, candidates: string[], alignment: Alignment|null}>}
  *   one entry per display token, in phrase order
  */
@@ -457,7 +473,7 @@ export function alignPhraseTokens(phrase, index, opts = {}) {
  *
  * @param {string} phrase
  * @param {import('./phraseHint.js').FormIndex} index
- * @param {object} [opts]  as {@link alignPhraseTokens}
+ * @param {AlignOpts} [opts]
  * @returns {Array<{token: number, text: string, candidates: string[]}>}
  *   `token` is 1-based, matching the `align:`/`inflect:` convention
  */
@@ -508,7 +524,7 @@ function isNewGloss(senses, en) {
  * word the entry does not carry at all, which is the case this module exists
  * for — rebuilds it.
  *
- * @returns {object[]|null} the senses to show, or null to keep the entry as-is
+ * @returns {PlainObject[]|null} the senses to show, or null to keep the entry as-is
  */
 function narrowedSenses(alignment, entry, byKey) {
   const wanted = new Set(alignment.show)
@@ -540,8 +556,8 @@ function narrowedSenses(alignment, entry, byKey) {
  *
  * @param {string} phrase
  * @param {import('./phraseHint.js').FormIndex} index
- * @param {object} [opts]  as {@link alignPhraseTokens}
- * @returns {Array<{text: string, hint: object|null, alignment: Alignment|null}>}
+ * @param {AlignOpts} [opts]
+ * @returns {Array<{text: string, hint: PlainObject|null, alignment: Alignment|null}>}
  */
 export function alignedHintTokens(phrase, index, opts = {}) {
   const { byKey } = opts

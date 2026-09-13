@@ -153,7 +153,7 @@ export const phrasesByRu = computed(() => byRu(phrases.value))
  * which is exactly what the structural rungs need — a phrase typed into a drill
  * that isn't in the bank still aligns, just without the authored tie-breaks.
  * @param {string} ru
- * @returns {object} opts for `alignPhraseTokens`
+ * @returns {import('../lib/phraseAlign.js').AlignOpts}
  */
 export function alignOptsFor(ru) {
   const phrase = phrasesByRu.value.get(ru)

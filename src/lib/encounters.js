@@ -84,9 +84,9 @@ export function phraseProvesEncounter(ex, result) {
  * @param {import('./phraseHint.js').FormIndex} index from `buildFormIndex`
  * @param {(key: string) => boolean} [isLearnable] gate for gloss-only entries,
  *   which are not part of the curriculum and are absent from the CEFR bars
- * @param {object} [opts] alignment inputs — `byKey`, the phrase's `en`, its
- *   authored `align` block and `inflectToken`/`inflectKey` (see
- *   {@link import('./phraseAlign.js').alignPhraseTokens})
+ * @param {import('./phraseAlign.js').AlignOpts} [opts] alignment inputs — the
+ *   dictionary, the phrase's English, its authored `align` block and its
+ *   `inflect:` target
  * @returns {string[]} distinct keys, in the order they appear in the phrase
  */
 export function encounteredKeys(phrase, index, isLearnable = () => true, opts = {}) {
