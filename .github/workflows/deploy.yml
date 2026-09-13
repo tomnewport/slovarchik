@@ -35,7 +35,7 @@ jobs:
           # Full history so gen-manifest can read each vocab file's last-changed
           # date from git (a shallow clone would fall back to the build time).
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
