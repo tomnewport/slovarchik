@@ -15,7 +15,7 @@
 //   node _cov.mjs apply <decisions.jsonl>        → insert hand-authored annotations
 //   node _cov.mjs stat                           → coverage tally
 import { readFileSync, writeFileSync } from 'node:fs'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 const strip = (s) => String(s ?? '').normalize('NFC').replace(/́/g, '')
 const coreT = (t) => String(t ?? '').replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '')

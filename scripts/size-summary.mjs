@@ -31,6 +31,16 @@ function gzipBytes(path) {
  * measured rather than silently drop to zero. Only `/assets/` URLs are taken —
  * registerSW.js is emitted separately by the PWA plugin and is not part of the
  * bundle this budget is about.
+ *
+ * `entryJs` is the entry script *and every chunk index.html modulepreloads*,
+ * because the budget is about what a launch pays for before anything renders
+ * and a preloaded chunk is fetched on that same first paint. Taking only
+ * `<script src>` used to amount to the same thing, back when Vite emitted the
+ * entry as one chunk. Vite 8 splits it — Vue's runtime, the vue/export helper
+ * and the progress store came out as separate preloaded files — which moved
+ * 60 KiB of unchanged payload out of a budget whose whole job is to notice
+ * 2 KiB. Lazy route chunks stay excluded: they carry no preload tag, so they
+ * are not matched here.
  */
 export function entryAssets(distDir) {
   const html = readFileSync(join(distDir, 'index.html'), 'utf8')
@@ -39,8 +49,14 @@ export function entryAssets(distDir) {
       .map((m) => m[1].replace(/^.*\/assets\//, 'assets/'))
       .map((rel) => ({ file: rel, path: join(distDir, rel) }))
 
+  const entryJs = [
+    ...pick(/<script[^>]+src="([^"]+\/assets\/[^"]+\.js)"/g),
+    ...pick(/<link[^>]+rel="modulepreload"[^>]+href="([^"]+\/assets\/[^"]+\.js)"/g),
+  ]
+  const seen = new Set()
+
   return {
-    entryJs: pick(/<script[^>]+src="([^"]+\/assets\/[^"]+\.js)"/g),
+    entryJs: entryJs.filter(({ file }) => !seen.has(file) && seen.add(file)),
     entryCss: pick(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+\/assets\/[^"]+\.css)"/g),
   }
 }

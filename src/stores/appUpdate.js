@@ -85,7 +85,7 @@ let reloadPage = () => window.location.reload()
 /**
  * Register the service worker and start watching for a newer build.
  *
- * @param {(options: object) => (reloadPage?: boolean) => Promise<void>} registerSW
+ * @param {(options: PlainObject) => (reloadPage?: boolean) => Promise<void>} registerSW
  *   `registerSW` from `virtual:pwa-register`.
  * @param {{ reload?: () => void }} [deps] Injection seam for tests.
  * @returns {void}

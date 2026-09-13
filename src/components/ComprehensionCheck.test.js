@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import ComprehensionCheck from './ComprehensionCheck.vue'
 import { state as vocabState } from '../stores/vocab.js'

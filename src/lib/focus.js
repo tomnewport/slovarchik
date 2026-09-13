@@ -60,7 +60,7 @@ export function focusedKeys(words, skill, stateOf) {
  * category that have not yet reached `learned`. Categories with fewer than
  * `minWords` attempted words (too little signal) or no weakness are dropped.
  *
- * @param {object[]} words the learner's attempted word records
+ * @param {PlainObject[]} words the learner's attempted word records
  * @param {object} [opts]
  * @param {(key: string) => string} [opts.stateOf] current state per word key
  * @param {number} [opts.minWords] below this many attempted words a category

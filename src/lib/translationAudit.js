@@ -322,7 +322,7 @@ function clauseMarkers(ru) {
  * here, the second by {@link auditPhrases} once the whole set is scored — so the
  * typedef names them optional rather than the literal declaring them (#666).
  *
- * @typedef {object} AuditRow
+ * @typedef {PlainObject} AuditRow
  * @property {string} ru
  * @property {string} en
  * @property {string[]} enAlt renderings the phrase already accepts, carried not scored
@@ -400,8 +400,8 @@ export function priorityScore(row) {
 
 /**
  * Audit a whole phrase bank, most suspicious first.
- * @param {object[]} phrases  from shapePhrases (vocabBuild.js)
- * @param {object[]} words    normalised word records, for the gloss index
+ * @param {PlainObject[]} phrases  from shapePhrases (vocabBuild.js)
+ * @param {PlainObject[]} words    normalised word records, for the gloss index
  */
 export function auditPhrases(phrases, words) {
   const index = buildFormIndex(words)
@@ -434,7 +434,7 @@ const EN_AUXILIARIES = new Set([
  * which case the two sides can't be compared and nothing is claimed.
  *
  * @param {string} en    the English translation
- * @param {object} word  the verb's normalised record (for its gloss)
+ * @param {PlainObject} word  the verb's normalised record (for its gloss)
  * @returns {string|null}
  */
 export function verbRendering(en, word) {
@@ -465,9 +465,9 @@ export function verbRendering(en, word) {
  * hearing") is a real distinction a learner can act on, and flagging those would
  * bury the genuine collisions.
  *
- * @param {object[]} words     normalised word records (from buildWords)
- * @param {object[]} phrases   from shapePhrases, carrying `source`
- * @returns {Array<{pair: string, rendering: string, a: object, b: object}>}
+ * @param {PlainObject[]} words     normalised word records (from buildWords)
+ * @param {PlainObject[]} phrases   from shapePhrases, carrying `source`
+ * @returns {Array<{pair: string, rendering: string, a: PlainObject, b: PlainObject}>}
  */
 /** Compare two English sentences ignoring case, punctuation and spacing. */
 export const normaliseEnglish = (en) => englishWords(en).join(' ')
@@ -549,7 +549,7 @@ export function aspectCollisions(words, phrases) {
  * comparison is on the raw Russian, because a stress disagreement between two
  * copies is exactly the bug worth surfacing.
  *
- * @param {object[]} phrases  from shapePhrases, carrying `source`
+ * @param {PlainObject[]} phrases  from shapePhrases, carrying `source`
  * @returns {Array<{en: string, phrases: Array<{ru: string, source: string}>}>}
  */
 export function duplicateEnglish(phrases) {
@@ -663,9 +663,9 @@ const ORPHAN_OVERLAP = 0.5
  *    being English. The applier refuses these at write time now; nothing has
  *    ever checked the rows committed before that rule existed.
  *
- * @param {object[]} phrases   from shapePhrases, carrying `enAlt` and `source`
+ * @param {PlainObject[]} phrases   from shapePhrases, carrying `enAlt` and `source`
  * @param {object} [opts]
- * @param {object[]} [opts.words]        normalised word records, for aspect pairs
+ * @param {PlainObject[]} [opts.words]        normalised word records, for aspect pairs
  * @param {Set<string>} [opts.rejected]  normalised English a proposal replaced
  * @returns {Array<{key: string, ru: string, en: string, alt: string,
  *   overlap: number, signals: string[]}>}

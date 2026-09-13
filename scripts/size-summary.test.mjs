@@ -21,10 +21,14 @@ beforeAll(() => {
     `<!doctype html><html><head>
        <link rel="stylesheet" href="/slovarchik/assets/index-CaGQnf75.css">
        <script type="module" src="/slovarchik/assets/index-D96PxI5.js"></script>
+       <link rel="modulepreload" href="/slovarchik/assets/runtime-dom-BW1hdNcs.js">
        <script src="/slovarchik/registerSW.js"></script>
      </head><body><div id="app"></div></body></html>`,
   )
   writeFileSync(join(dist, 'assets/index-D96PxI5.js'), 'a'.repeat(5000))
+  writeFileSync(join(dist, 'assets/runtime-dom-BW1hdNcs.js'), 'd'.repeat(3000))
+  // A lazy route chunk: on disk, referenced by no tag in index.html.
+  writeFileSync(join(dist, 'assets/SessionView-Lazy123.js'), 'e'.repeat(7000))
   writeFileSync(join(dist, 'assets/index-CaGQnf75.css'), 'b'.repeat(2000))
   writeFileSync(join(dist, 'registerSW.js'), 'c'.repeat(9000))
   writeFileSync(join(dist, 'vocab/nouns.json'), JSON.stringify({ words: 'x'.repeat(4000) }))
@@ -37,8 +41,24 @@ afterAll(() => rmSync(dist, { recursive: true, force: true }))
 describe('discovering the built assets', () => {
   it('reads the entry chunk out of index.html, base path and all', () => {
     const { entryJs, entryCss } = entryAssets(dist)
-    expect(entryJs.map((a) => a.file)).toEqual(['assets/index-D96PxI5.js'])
+    expect(entryJs.map((a) => a.file)).toContain('assets/index-D96PxI5.js')
     expect(entryCss.map((a) => a.file)).toEqual(['assets/index-CaGQnf75.css'])
+  })
+
+  it('counts the preloaded chunks, which first paint waits for just as much', () => {
+    // Vite 8 splits what Vite 6 emitted as one entry chunk; the pieces are
+    // modulepreloaded, so leaving them out would drop most of the payload this
+    // budget exists to watch.
+    const { entryJs } = entryAssets(dist)
+    expect(entryJs.map((a) => a.file)).toEqual([
+      'assets/index-D96PxI5.js',
+      'assets/runtime-dom-BW1hdNcs.js',
+    ])
+  })
+
+  it('leaves lazy route chunks out — nothing in index.html asks for them', () => {
+    const { entryJs } = entryAssets(dist)
+    expect(entryJs.map((a) => a.file).join()).not.toContain('SessionView')
   })
 
   it('leaves registerSW.js out — it is not part of the bundle', () => {
@@ -58,7 +78,7 @@ describe('discovering the built assets', () => {
 describe('measuring', () => {
   it('reports gzipped bytes per group, summed across files', () => {
     const m = measure(dist)
-    expect(m.entryJs.files).toHaveLength(1)
+    expect(m.entryJs.files).toHaveLength(2)
     expect(m.vocab.files).toHaveLength(2)
     expect(m.vocab.gzip).toBe(m.vocab.files.reduce((n, f) => n + f.gzip, 0))
     // Highly compressible fixtures, but the point is that gzip is what is measured.

@@ -74,7 +74,7 @@ function hintIfShowable(entry) {
  * settle keep the index's stacked senses, so the homograph behaviour (#568) is
  * untouched where it is still the honest answer.
  * @param {string} phrase
- * @returns {Array<{text: string, hint: object|null}>}
+ * @returns {Array<{text: string, hint: PlainObject|null}>}
  */
 export function hintTokensFor(phrase) {
   return alignedHintTokens(phrase, formIndex.value, alignOptsFor(phrase)).map(

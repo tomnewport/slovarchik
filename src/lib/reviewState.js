@@ -73,7 +73,7 @@ export function formatDue(due, now) {
  *    since slipped below it (a slip is the lost-word plumbing's business, and
  *    its own panel on the card already says so).
  *
- * @param {object|null} rec the progress record
+ * @param {PlainObject|null} rec the progress record
  * @param {{now?: number, state?: string|null}} [opts] `state` is the word's
  *   current state, so a slipped word isn't told to expect a confirmation it
  *   cannot earn until its criteria are whole again.
@@ -137,10 +137,10 @@ export function confirmationState(rec, { now = Date.now(), state = null } = {}) 
  * scheduler existed (those records are normalised to an empty schedule, which
  * fills in again on the word's next answer).
  *
- * @param {object|null} rec the progress record
+ * @param {PlainObject|null} rec the progress record
  * @param {{now?: number, state?: string|null}} [opts]
- * @returns {{scheduled: boolean, dimensions: Array, next: object|null,
- *   dueCount: number, confirmation: object}}
+ * @returns {{scheduled: boolean, dimensions: Array, next: PlainObject|null,
+ *   dueCount: number, confirmation: PlainObject}}
  */
 export function reviewState(rec, { now = Date.now(), state = null } = {}) {
   const schedule = rec?.schedule ?? {}

@@ -9,7 +9,7 @@ import { readdirSync, readFileSync, existsSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import { buildWords, POS_BY_FILE, learnableWords } from '../src/lib/vocabBuild.js'
 

@@ -25,7 +25,7 @@ export function storedComparatives(words) {
  * target is its owner, so a sentence that merely contains бо́льше teaches
  * whichever word authored it, not большо́й.
  *
- * @param {object[]} words normalised word records (from buildWords)
+ * @param {PlainObject[]} words normalised word records (from buildWords)
  * @returns {{key: string, form: string}[]} busiest-first is meaningless here, so
  *   the order is the word list's own
  */
