@@ -4,12 +4,19 @@
 // release date of the running code plus when the dictionaries were last
 // updated (with actions to fetch the latest).
 //
-// The Versions card answers four questions at once: which build is
+// The Versions card answers five questions at once: which build is
 // running here, when it was released, whether the deployment has moved past it,
 // and when we last managed to ask. The last one is not decoration — offline is
 // the normal state of this app, so "up to date" is only worth as much as the
 // age of the check behind it, and a check that never reached the network must
 // not read as a clean bill of health.
+//
+// And the fifth: what is actually *in* the version being offered. "A newer
+// version is available" is a reason to reload only if you know what it buys
+// you. The deployment publishes a window of recent changes with each one dated
+// (scripts/release-notes.mjs); this screen slices that window at the running
+// build's own release time, so the list is what is new to this install rather
+// than a changelog everyone sees the same way.
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -24,7 +31,7 @@ import {
   checkForUpdate,
   loadUpdateCheck,
 } from '../stores/appUpdate.js'
-import { describeAge } from '../lib/appVersion.js'
+import { describeAge, notesSince, parseNotes } from '../lib/appVersion.js'
 import {
   settings,
   loadSettings,
@@ -37,6 +44,14 @@ import {
 import { SUCCESS_SOUNDS, NEUTRAL_SOUNDS, CELEBRATION_SOUNDS, playSound, audioSupported } from '../lib/feedbackSound.js'
 
 const soundsSupported = audioSupported()
+
+// What this build published about itself. Compiled in rather than fetched, so
+// the running version can say what is in it with no network at all; read only
+// here, which keeps it in this lazily-loaded chunk (see vite.config.js).
+const APP_NOTES = parseNotes(typeof __APP_RELEASE_NOTES__ === 'undefined' ? [] : __APP_RELEASE_NOTES__)
+
+/** Enough to see what a version is for, without turning the card into a log. */
+const MAX_NOTES_SHOWN = 8
 
 // Picking a sound previews it (unless turning it off) and saves the choice.
 function chooseSuccess(id) {
@@ -91,6 +106,13 @@ const daysUsing = computed(() => {
 
 /** How long ago the deployment last answered us — null if it never has. */
 const checkedAge = computed(() => describeAge(appUpdate.lastCheckedAt, now.value))
+
+/** What the deployed build has that this one has not. */
+const whatsNew = computed(() => notesSince(appUpdate.deployed?.notes ?? [], installed.released))
+const newShown = computed(() => whatsNew.value.slice(0, MAX_NOTES_SHOWN))
+const newHidden = computed(() => Math.max(0, whatsNew.value.length - MAX_NOTES_SHOWN))
+/** What arrived in the build that is running. */
+const ownNotes = computed(() => APP_NOTES.slice(0, MAX_NOTES_SHOWN))
 
 async function checkVersion() {
   await checkForUpdate()
@@ -389,6 +411,23 @@ onMounted(async () => {
         </template>
       </p>
 
+      <div v-if="deployedStatus === 'newer' && whatsNew.length" class="whats-new">
+        <h3>What's new in it</h3>
+        <ul class="notes">
+          <li v-for="n in newShown" :key="n.at + n.text">{{ n.text }}</li>
+        </ul>
+        <p v-if="newHidden" class="muted more">
+          …and {{ newHidden }} more change{{ newHidden === 1 ? '' : 's' }}.
+        </p>
+      </div>
+
+      <details v-if="ownNotes.length" class="own-notes">
+        <summary>What's in the version you're running</summary>
+        <ul class="notes">
+          <li v-for="n in ownNotes" :key="n.at + n.text">{{ n.text }}</li>
+        </ul>
+      </details>
+
       <p class="checked muted">
         <template v-if="appUpdate.checking">Checking the live site…</template>
         <template v-else-if="checkedAge">
@@ -491,6 +530,29 @@ onMounted(async () => {
 }
 .checked {
   font-size: 0.85rem;
+}
+.whats-new h3 {
+  color: var(--gold);
+}
+.notes {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+}
+.notes li {
+  margin-bottom: 0.2rem;
+}
+.more {
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+.own-notes {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+.own-notes summary {
+  cursor: pointer;
+  color: var(--muted);
 }
 .card h3 {
   margin: 1rem 0 0;

@@ -45,7 +45,8 @@ offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
 index.html              # app shell — mounts #app, loads src/main.js
 vite.config.js          # Vite + Vue plugin + PWA + Vitest config; base = /slovarchik/
                         #   also emits dist/version.json (what the deployment is
-                        #   serving) and keeps it out of the SW precache
+                        #   serving, plus dated release notes) and keeps it out
+                        #   of the SW precache
 playwright.config.js    # e2e config. Two servers: `npm run dev` on :5173 for the
                         #   `chromium` and `pixel5` projects, and `npm run build &&
                         #   npm run preview` on :4173 for the `offline` project —
@@ -145,8 +146,9 @@ src/
                         #     screen's words-known chart (a real time axis; idle weeks take up width)
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
                         #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
-                        #   appVersion  — the build running here vs the build deployed, and how
-                        #     old the last check is (the Data screen's Versions card)
+                        #   appVersion  — the build running here vs the build deployed, how old
+                        #     the last check is, and which of the deployment's dated release
+                        #     notes are new to THIS install (the Data screen's Versions card)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
                         #   coalesce  — share one in-flight run between concurrent callers, so the boot
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
@@ -177,6 +179,10 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #   check-precache.mjs asserts vocab/** stays out of the
                         #     generated SW precache manifest (the #266 partition), and
                         #     version.json with it
+                        #   release-notes.mjs reads the commit log at build time —
+                        #     the release notes shipped in version.json and compiled
+                        #     into the app (no changelog file, no tags: the commit
+                        #     subjects are the changelog)
                         #   check-parts.mjs is the curriculum-parts GATE; gen-parts.mjs is
                         #     the worklist that proposes a packing (--repack for the
                         #     minimal repair when the gate fails)

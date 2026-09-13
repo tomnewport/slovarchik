@@ -47,3 +47,10 @@ declare const SpeechRecognition: {
 declare const __APP_COMMIT_HASH__: string | null
 /** @see __APP_COMMIT_HASH__ */
 declare const __APP_BUILD_DATE__: string | null
+
+/**
+ * The recent changes this build published (`scripts/release-notes.mjs`), read
+ * only by the Data screen so they stay out of the entry chunk. Empty where
+ * there was no git history to read.
+ */
+declare const __APP_RELEASE_NOTES__: { at: string; text: string }[]

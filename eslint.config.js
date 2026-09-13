@@ -20,6 +20,7 @@ export default [
         // Build-time constants injected by Vite (see vite.config.js `define`).
         __APP_BUILD_DATE__: 'readonly',
         __APP_COMMIT_HASH__: 'readonly',
+        __APP_RELEASE_NOTES__: 'readonly',
       },
     },
     rules: {

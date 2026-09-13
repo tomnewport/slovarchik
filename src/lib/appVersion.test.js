@@ -1,14 +1,25 @@
 import { describe, it, expect } from 'vitest'
 
-import { INSTALLED, parseVersion, compareVersions, describeAge } from './appVersion.js'
+import {
+  INSTALLED,
+  parseVersion,
+  parseNotes,
+  notesSince,
+  compareVersions,
+  describeAge,
+} from './appVersion.js'
 
 const at = (iso) => ({ commit: 'aaaaaaa', released: iso })
 
 describe('parseVersion', () => {
   it('reads a version document', () => {
-    expect(parseVersion({ commit: 'abc1234', released: '2026-09-01T10:00:00Z' })).toEqual({
+    const notes = [{ at: '2026-09-01T09:00:00Z', text: 'Teach participles and gerunds' }]
+    expect(
+      parseVersion({ commit: 'abc1234', released: '2026-09-01T10:00:00Z', notes }),
+    ).toEqual({
       commit: 'abc1234',
       released: '2026-09-01T10:00:00Z',
+      notes,
     })
   })
 
@@ -16,8 +27,13 @@ describe('parseVersion', () => {
     expect(parseVersion({ released: '2026-09-01T10:00:00Z' })).toEqual({
       commit: null,
       released: '2026-09-01T10:00:00Z',
+      notes: [],
     })
-    expect(parseVersion({ commit: 'abc1234' })).toEqual({ commit: 'abc1234', released: null })
+    expect(parseVersion({ commit: 'abc1234' })).toEqual({
+      commit: 'abc1234',
+      released: null,
+      notes: [],
+    })
   })
 
   it('rejects everything that is not a version document', () => {
@@ -30,6 +46,79 @@ describe('parseVersion', () => {
     expect(parseVersion({})).toBeNull()
     expect(parseVersion({ commit: '', released: '' })).toBeNull()
     expect(parseVersion({ commit: 7, released: {} })).toBeNull()
+  })
+})
+
+describe('parseNotes', () => {
+  it('reads dated notes', () => {
+    const notes = [
+      { at: '2026-09-02T10:00:00Z', text: 'Say what slipped' },
+      { at: '2026-09-01T10:00:00Z', text: 'Teach participles' },
+    ]
+    expect(parseNotes(notes)).toEqual(notes)
+  })
+
+  it('trims the text and drops anything that is not a note', () => {
+    expect(
+      parseNotes([
+        { at: '2026-09-02T10:00:00Z', text: '  Say what slipped  ' },
+        { at: '2026-09-02T10:00:00Z', text: '' },
+        { at: 'whenever', text: 'Undated' },
+        { at: '2026-09-02T10:00:00Z' },
+        { text: 'No date at all' },
+        'not a note',
+        null,
+      ]),
+    ).toEqual([{ at: '2026-09-02T10:00:00Z', text: 'Say what slipped' }])
+  })
+
+  it('has nothing to read in a document without notes', () => {
+    expect(parseNotes(undefined)).toEqual([])
+    expect(parseNotes(null)).toEqual([])
+    expect(parseNotes('Teach participles')).toEqual([])
+    expect(parseNotes({ 0: { at: '2026-09-02T10:00:00Z', text: 'x' } })).toEqual([])
+  })
+
+  it('bounds what a fetched list can cost us', () => {
+    // The list comes off the network and is then stored; its length is not ours
+    // to trust.
+    const many = Array.from({ length: 100 }, (_, i) => ({
+      at: '2026-09-02T10:00:00Z',
+      text: `change ${i}`,
+    }))
+    expect(parseNotes(many)).toHaveLength(30)
+  })
+})
+
+describe('notesSince', () => {
+  const notes = [
+    { at: '2026-09-03T10:00:00Z', text: 'Third' },
+    { at: '2026-09-02T10:00:00Z', text: 'Second' },
+    { at: '2026-09-01T10:00:00Z', text: 'First' },
+  ]
+
+  it('keeps what landed after the running build was released', () => {
+    expect(notesSince(notes, '2026-09-01T12:00:00Z').map((n) => n.text)).toEqual(['Third', 'Second'])
+  })
+
+  it('has nothing new to report for the build that carries them all', () => {
+    expect(notesSince(notes, '2026-09-03T10:00:01Z')).toEqual([])
+  })
+
+  it('excludes a note that landed exactly at the release instant', () => {
+    // It is in the build, not new to it.
+    expect(notesSince(notes, '2026-09-03T10:00:00Z')).toEqual([])
+  })
+
+  it('says nothing rather than everything when it cannot place the build', () => {
+    // "Everything we have" would be wrong for anyone but a first-time visitor,
+    // and this list is headed "what's new for you".
+    expect(notesSince(notes, null)).toEqual([])
+    expect(notesSince(notes, 'sometime last week')).toEqual([])
+  })
+
+  it('handles an empty window', () => {
+    expect(notesSince([], '2026-09-01T12:00:00Z')).toEqual([])
   })
 })
 

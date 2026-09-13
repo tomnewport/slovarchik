@@ -22,10 +22,83 @@ export const INSTALLED = Object.freeze({
 })
 
 /**
- * @typedef {object} AppVersion
+ * @typedef {object} ReleaseNote
+ * @property {string} at   ISO timestamp the change landed
+ * @property {string} text one line saying what changed
+ */
+
+/**
+ * Which build something is: the pair every comparison here is made on.
+ *
+ * @typedef {object} BuildStamp
  * @property {string|null} commit   short commit hash the build was made from
  * @property {string|null} released ISO timestamp the build was made at
  */
+
+/**
+ * A build stamp as a deployment publishes it, with what changed in it.
+ *
+ * `INSTALLED` is a bare stamp rather than one of these on purpose: the running
+ * build's own notes are read only by the Data screen, and keeping them out of
+ * this module keeps them out of the entry chunk (see vite.config.js).
+ *
+ * @typedef {BuildStamp & { notes: ReleaseNote[] }} AppVersion
+ */
+
+/**
+ * How many notes to keep out of a fetched document. A bound on what an
+ * untrusted-length list can cost us in memory and in IndexedDB, not a display
+ * limit — the screen shows far fewer.
+ */
+const MAX_NOTES = 30
+
+/**
+ * Read the `notes` array of a version document, dropping anything malformed.
+ *
+ * The list is published by the deployment and stored, so it is validated on the
+ * way in rather than trusted: an entry needs a parseable date and something to
+ * say, or it is not a note.
+ *
+ * @param {unknown} raw
+ * @returns {ReleaseNote[]}
+ */
+export function parseNotes(raw) {
+  if (!Array.isArray(raw)) return []
+  const notes = []
+  for (const entry of raw) {
+    if (!entry || typeof entry !== 'object') continue
+    const at = typeof entry.at === 'string' ? entry.at : ''
+    const text = typeof entry.text === 'string' ? entry.text.trim() : ''
+    if (!text || Number.isNaN(Date.parse(at))) continue
+    notes.push({ at, text })
+    if (notes.length === MAX_NOTES) break
+  }
+  return notes
+}
+
+/**
+ * The notes that landed after a build was released — what is new to whoever is
+ * running it.
+ *
+ * This is the whole reason a note carries a date. The deployment publishes one
+ * window of recent changes for everyone; each install slices it at its own
+ * release timestamp, so a learner two versions behind sees two versions' worth
+ * and one who has just updated sees none. Nothing has to know which build any
+ * particular browser is holding.
+ *
+ * Without a usable timestamp to slice at, the answer is nothing rather than
+ * everything: a list headed "what's new for you" that is really "everything we
+ * have" would be wrong for anyone but a first-time visitor.
+ *
+ * @param {ReleaseNote[]} notes
+ * @param {string|null|undefined} since ISO timestamp of the running build
+ * @returns {ReleaseNote[]}
+ */
+export function notesSince(notes, since) {
+  const cutoff = Date.parse(since ?? '')
+  if (Number.isNaN(cutoff)) return []
+  return notes.filter((note) => Date.parse(note.at) > cutoff)
+}
 
 /**
  * Read a `version.json` body into a version, or null if it isn't one.
@@ -44,10 +117,15 @@ export function parseVersion(raw) {
   const commit = typeof doc.commit === 'string' && doc.commit ? doc.commit : null
   const released = typeof doc.released === 'string' && doc.released ? doc.released : null
   if (!commit && !released) return null
-  return { commit, released }
+  return { commit, released, notes: parseNotes(doc.notes) }
 }
 
-/** Milliseconds for an ISO release timestamp, or null if it doesn't parse. */
+/**
+ * Milliseconds for an ISO release timestamp, or null if it doesn't parse.
+ *
+ * @param {BuildStamp|null|undefined} version
+ * @returns {number|null}
+ */
 function releasedAt(version) {
   if (!version?.released) return null
   const ms = Date.parse(version.released)
@@ -65,8 +143,8 @@ function releasedAt(version) {
  * - `unknown` — not enough to tell. No deployed version, or two builds that
  *               differ with no usable timestamp to order them by.
  *
- * @param {AppVersion|null} installed
- * @param {AppVersion|null} deployed
+ * @param {BuildStamp|null} installed
+ * @param {BuildStamp|null} deployed
  * @returns {'current'|'newer'|'older'|'unknown'}
  */
 export function compareVersions(installed, deployed) {

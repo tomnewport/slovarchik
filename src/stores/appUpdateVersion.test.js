@@ -39,6 +39,7 @@ function serving(body, { ok = true } = {}) {
 
 const FUTURE = '2099-01-01T00:00:00.000Z'
 const PAST = '2000-01-01T00:00:00.000Z'
+const NOTES = [{ at: '2098-12-31T00:00:00.000Z', text: 'Teach participles and gerunds' }]
 
 beforeEach(() => {
   globalThis.indexedDB = new IDBFactory()
@@ -58,7 +59,7 @@ describe('checking the deployed version', () => {
 
     await checkForUpdate()
 
-    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE })
+    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE, notes: [] })
     expect(state.lastCheckedAt).toBeGreaterThanOrEqual(before)
     expect(state.lastCheckFailed).toBe(false)
     expect(deployedStatus.value).toBe('newer')
@@ -103,7 +104,7 @@ describe('checking the deployed version', () => {
     // being refreshed by an attempt that learned nothing.
     expect(state.lastCheckFailed).toBe(true)
     expect(state.lastCheckedAt).toBe(checkedAt)
-    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE })
+    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE, notes: [] })
   })
 
   it('counts a reply it cannot read as a check that happened, with nothing to compare', async () => {
@@ -176,8 +177,10 @@ describe('checking the deployed version', () => {
 })
 
 describe('remembering the last check', () => {
-  it('restores the last answer so a reload does not report "never"', async () => {
-    vi.stubGlobal('fetch', serving({ commit: 'deadbee', released: FUTURE }))
+  it('restores the last answer, notes included, so a reload does not report "never"', async () => {
+    // The notes matter here: offline, the stored copy is the only thing that
+    // can say what the version on the server was going to bring.
+    vi.stubGlobal('fetch', serving({ commit: 'deadbee', released: FUTURE, notes: NOTES }))
     await checkForUpdate()
     const checkedAt = state.lastCheckedAt
 
@@ -186,7 +189,7 @@ describe('remembering the last check', () => {
     await loadUpdateCheck()
 
     expect(state.lastCheckedAt).toBe(checkedAt)
-    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE })
+    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE, notes: NOTES })
   })
 
   it('does not overwrite a check made this session', async () => {
@@ -198,7 +201,7 @@ describe('remembering the last check', () => {
     await checkForUpdate()
     await loadUpdateCheck()
 
-    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE })
+    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE, notes: [] })
   })
 
   it('has nothing to restore before the first check', async () => {
@@ -226,7 +229,7 @@ describe('remembering the last check', () => {
     vi.stubGlobal('fetch', serving({ commit: 'deadbee', released: FUTURE }))
 
     await expect(checkForUpdate()).resolves.toBe(false)
-    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE })
+    expect(state.deployed).toEqual({ commit: 'deadbee', released: FUTURE, notes: [] })
     await expect(loadUpdateCheck()).resolves.toBeUndefined()
   })
 })

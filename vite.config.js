@@ -6,6 +6,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
+import { releaseNotes } from './scripts/release-notes.mjs'
+
 // Deployed under https://<user>.github.io/slovarchik/ so assets need this base.
 const base = '/slovarchik/'
 
@@ -46,6 +48,11 @@ function dropVocabYaml() {
 
 const BUILD_DATE = new Date().toISOString()
 const COMMIT_HASH = gitCommitHash()
+// What changed, from the commit log (scripts/release-notes.mjs). Published in
+// `version.json` so an install can be told what is in the version it hasn't
+// taken yet, and compiled in so it can say what is in the one it is running
+// even offline.
+const RELEASE_NOTES = releaseNotes()
 
 // What the *deployment* is serving, published where the running app can ask for
 // it. The build already bakes these two values into the bundle, which
@@ -58,7 +65,8 @@ const COMMIT_HASH = gitCommitHash()
 // install that is already running, so every check would report "up to date"
 // forever — the exact failure the file exists to rule out.
 function versionFile() {
-  const body = () => JSON.stringify({ commit: COMMIT_HASH, released: BUILD_DATE }, null, 2)
+  const body = () =>
+    JSON.stringify({ commit: COMMIT_HASH, released: BUILD_DATE, notes: RELEASE_NOTES }, null, 2)
   return {
     name: 'emit-version-json',
     generateBundle() {
@@ -83,6 +91,9 @@ export default defineConfig({
   define: {
     __APP_BUILD_DATE__: JSON.stringify(BUILD_DATE),
     __APP_COMMIT_HASH__: JSON.stringify(COMMIT_HASH),
+    // Read only by the Data screen, which is a lazy route — so the notes ride
+    // in that chunk rather than the entry one the size budget gates.
+    __APP_RELEASE_NOTES__: JSON.stringify(RELEASE_NOTES),
   },
   plugins: [
     vue(),

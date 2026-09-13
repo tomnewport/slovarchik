@@ -208,6 +208,53 @@ describe('DataView', () => {
     expect(wrapper.find('.deployed').text()).toContain('Not yet checked against the live site')
   })
 
+  it('lists what a newer version brings, and only what is new to this build', async () => {
+    vi.stubGlobal(
+      'fetch',
+      serving({
+        commit: 'deadbee',
+        released: FUTURE,
+        notes: [
+          { at: FUTURE, text: 'Teach participles and gerunds' },
+          { at: '2000-01-01T00:00:00.000Z', text: 'Something this build already has' },
+        ],
+      }),
+    )
+
+    const wrapper = mount(DataView)
+    await settleUntil(() => wrapper.find('.whats-new').exists())
+
+    const listed = wrapper.findAll('.whats-new .notes li').map((li) => li.text())
+    expect(listed).toEqual(['Teach participles and gerunds'])
+  })
+
+  it('counts the changes it does not have room to list', async () => {
+    const notes = Array.from({ length: 11 }, (_, i) => ({ at: FUTURE, text: `Change ${i}` }))
+    vi.stubGlobal('fetch', serving({ commit: 'deadbee', released: FUTURE, notes }))
+
+    const wrapper = mount(DataView)
+    await settleUntil(() => wrapper.find('.whats-new').exists())
+
+    expect(wrapper.findAll('.whats-new .notes li')).toHaveLength(8)
+    expect(wrapper.find('.whats-new .more').text()).toContain('3 more changes')
+  })
+
+  it('says what is in the running version without asking anyone', async () => {
+    // Compiled in at build time, so this half of the card survives being offline.
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new TypeError('Failed to fetch')
+      }),
+    )
+
+    const wrapper = mount(DataView)
+    await settle()
+
+    expect(wrapper.find('.own-notes').exists()).toBe(true)
+    expect(wrapper.findAll('.own-notes .notes li').length).toBeGreaterThan(0)
+  })
+
   it('checks again on demand', async () => {
     const wrapper = mount(DataView)
     await settle()

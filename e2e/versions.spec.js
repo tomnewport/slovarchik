@@ -14,11 +14,18 @@ test('the Data screen confirms the running build against the served one', async 
   await expect(page.locator('.checked')).toContainText('Last checked against the live site')
 })
 
-test('a newer deployment is reported, with its release date', async ({ page }) => {
+test('a newer deployment is reported, with its release date and what it brings', async ({ page }) => {
   await page.route('**/version.json', (route) =>
     route.fulfill({
       contentType: 'application/json',
-      body: JSON.stringify({ commit: 'deadbee', released: '2099-01-01T00:00:00.000Z' }),
+      body: JSON.stringify({
+        commit: 'deadbee',
+        released: '2099-01-01T00:00:00.000Z',
+        notes: [
+          { at: '2099-01-01T00:00:00.000Z', text: 'Teach participles and gerunds' },
+          { at: '2000-01-01T00:00:00.000Z', text: 'Something this build already has' },
+        ],
+      }),
     }),
   )
 
@@ -26,7 +33,26 @@ test('a newer deployment is reported, with its release date', async ({ page }) =
 
   await expect(page.locator('.deployed')).toContainText('A newer version is available')
   await expect(page.locator('.deployed')).toContainText('deadbee')
+  await expect(page.locator('.whats-new')).toContainText('Teach participles and gerunds')
+  // Sliced at this build's release date: a note it already carries is not new.
+  await expect(page.locator('.whats-new')).not.toContainText('already has')
   await expect(page.getByRole('button', { name: 'Update now' })).toBeVisible()
+})
+
+test('the running version says what is in it, from the build itself', async ({ page }) => {
+  await page.goto('/#/data')
+
+  // Collapsed until asked for: what is in the version you already have is the
+  // quieter half of the card.
+  const notes = page.locator('.own-notes .notes li')
+  await expect(notes.first()).toBeHidden()
+
+  await page.locator('.own-notes summary').click()
+
+  // Compiled in, so this survives the site being unreachable; the real commit
+  // log is what fills it, so assert the shape rather than any one subject.
+  await expect(notes.first()).toBeVisible()
+  expect(await notes.count()).toBeGreaterThan(0)
 })
 
 test('an unreachable site reads as a failed check, not as up to date', async ({ page }) => {
