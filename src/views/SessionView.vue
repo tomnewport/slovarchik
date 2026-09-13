@@ -153,6 +153,11 @@ async function setup() {
     encounterCount: progress.encounterCount,
     contextPhrases: vocabState.contextPhrases,
     rules: vocabState.rules,
+    // Which tables this learner has already assembled from the word bank (#645).
+    // Without it the builder sees only the tables planned in THIS session, so a
+    // typing slot degrades to the bank drill every time and mastery usage for an
+    // inflecting word can never be earned.
+    isTableClean: progress.isTableClean,
   })
   // Introduce a never-met word before the first exercise that tests it (#587),
   // so its first appearance isn't a guaranteed miss. Current-batch words only —
