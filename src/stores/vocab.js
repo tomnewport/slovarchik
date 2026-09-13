@@ -20,6 +20,7 @@ import {
   shapePhrases,
   shapeContextPhrases,
   learnableWords,
+  phrasesByRu as byRu,
 } from '../lib/vocabBuild.js'
 import { canBuildContext, indexPhrases } from '../lib/phraseContext.js'
 import { buildFormIndex } from '../lib/phraseHint.js'
@@ -121,6 +122,48 @@ export function warmFormIndex() {
   }
   if (typeof requestIdleCallback === 'function') requestIdleCallback(build, { timeout: 2000 })
   else setTimeout(build, 0)
+}
+
+/**
+ * Russian sentence → the shaped phrase it came from, so a caller holding only
+ * the sentence can reach its alignment inputs (#706).
+ *
+ * Most of the app passes phrases around as plain strings — `hintTokensFor(ru)`,
+ * an exercise descriptor's `ex.ru` — and word alignment needs more than the
+ * string: the example's authored `align:` tie-breaks, its `inflect:` target and
+ * the English that the last rung reads as evidence. Rather than thread a phrase
+ * object through every drill, the string is looked back up here.
+ *
+ * Keyed on `ru` alone, so the 24 sentences the corpus renders with two different
+ * English translations resolve through whichever came first in dictionary
+ * order — with every copy's authored `align:` merged in, so an annotation is
+ * never lost to which example happened to sort first. The dedupe rule itself
+ * lives in `lib/vocabBuild.js` so `check:align` can measure the same phrase this
+ * resolves, which is the one thing that stops the gate and the app disagreeing.
+ *
+ * What it cannot merge is the copies' `inflect:` blocks: each names its own
+ * drill's target, and two copies naming the *same* token differently is a real
+ * disagreement — `check:align` reports those rather than letting sort order pick.
+ */
+export const phrasesByRu = computed(() => byRu(phrases.value))
+
+/**
+ * Everything `lib/phraseAlign.js` needs to align a sentence it was handed as a
+ * bare string. Unknown sentences still get the dictionary and no annotations,
+ * which is exactly what the structural rungs need — a phrase typed into a drill
+ * that isn't in the bank still aligns, just without the authored tie-breaks.
+ * @param {string} ru
+ * @returns {object} opts for `alignPhraseTokens`
+ */
+export function alignOptsFor(ru) {
+  const phrase = phrasesByRu.value.get(ru)
+  return {
+    byKey: wordsByKey.value,
+    en: phrase ? `${phrase.en} ${phrase.enAlt.join(' ')}` : '',
+    align: phrase?.align,
+    inflectToken: phrase?.inflectToken ?? undefined,
+    inflectKey: phrase?.source,
+  }
 }
 
 /**

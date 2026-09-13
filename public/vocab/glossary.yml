@@ -10,7 +10,15 @@
 # lemmas (e.g. "азии" = Asia, "автономных" = autonomous). That is what the
 # tap-hint form index wants, but it means these keys must never be treated as
 # dictionary headwords — anything promoting entries out of this file (e.g. a
-# glossary→curriculum pipeline) must first lemmatise, or add a `lemma:` field.
+# glossary→curriculum pipeline) must first lemmatise.
+#
+# Which is what `lemma:` is for: where an entry is an inflected form of a word
+# the curriculum teaches, it names that word ("купи=buy" → "купить=to buy").
+# Word alignment reads it to tell one word wearing two entries apart from two
+# rival words, so a sentence using «купи́» credits «купи́ть» instead of neither
+# (#706). Regenerate with `node scripts/gen-lemma-links.mjs --apply`, which adds
+# links and never removes them — a wholesale regeneration of this file must
+# re-run it, or the links are lost and `check:align` will say so.
 ---
 words:
   "авария=accident":
@@ -46,6 +54,7 @@ words:
   "азии=Asia":
     cefr_level: A2
     learn: false
+    lemma: "Азия=Asia"
     accented: "А́зии"
     en_gb:
       standard: "Asia"
@@ -142,18 +151,21 @@ words:
   "аплодировал=applauded":
     cefr_level: B1
     learn: false
+    lemma: "аплодировать=to applaud"
     accented: "аплоди́ровал"
     en_gb:
       standard: "applauded"
   "аплодировала=applauded":
     cefr_level: B1
     learn: false
+    lemma: "аплодировать=to applaud"
     accented: "аплоди́ровала"
     en_gb:
       standard: "applauded"
   "аплодировали=applauded":
     cefr_level: A2
     learn: false
+    lemma: "аплодировать=to applaud"
     accented: "аплоди́ровали"
     en_gb:
       standard: "applauded"
@@ -232,12 +244,14 @@ words:
   "бале=ball":
     cefr_level: B2
     learn: false
+    lemma: "бал=ball"
     accented: "ба́ле"
     en_gb:
       standard: "ball (dance event)"
   "балу=ball":
     cefr_level: B1
     learn: false
+    lemma: "бал=ball"
     accented: "ба́лу"
     en_gb:
       standard: "ball (dance event)"
@@ -262,6 +276,7 @@ words:
   "беги=run":
     cefr_level: B1
     learn: false
+    lemma: "бежать=to run"
     accented: "беги́"
     en_gb:
       standard: "run (imperative)"
@@ -316,6 +331,7 @@ words:
   "бери=take":
     cefr_level: B1
     learn: false
+    lemma: "брать=to take"
     accented: "бери́"
     en_gb:
       standard: "take (imperative)"
@@ -358,6 +374,7 @@ words:
   "беспокойся=worry":
     cefr_level: B1
     learn: false
+    lemma: "беспокоиться=to worry"
     accented: "беспоко́йся"
     en_gb:
       standard: "worry (imperative)"
@@ -442,6 +459,7 @@ words:
   "близка=near":
     cefr_level: B2
     learn: false
+    lemma: "близкий=close"
     accented: "близка́"
     en_gb:
       standard: "near"
@@ -466,24 +484,28 @@ words:
   "богат=rich":
     cefr_level: A1
     learn: false
+    lemma: "богатый=rich"
     accented: "бога́т"
     en_gb:
       standard: "rich"
   "богата=rich":
     cefr_level: A2
     learn: false
+    lemma: "богатый=rich"
     accented: "бога́та"
     en_gb:
       standard: "rich"
   "богато=rich in":
     cefr_level: B1
     learn: false
+    lemma: "богатый=rich"
     accented: "бога́то"
     en_gb:
       standard: "rich in"
   "богаты=wealthy":
     cefr_level: B1
     learn: false
+    lemma: "богатый=rich"
     accented: "бога́ты"
     en_gb:
       standard: "wealthy"
@@ -526,6 +548,7 @@ words:
   "болен=ill":
     cefr_level: B1
     learn: false
+    lemma: "больной=ill"
     accented: "бо́лен"
     en_gb:
       standard: "ill"
@@ -538,6 +561,7 @@ words:
   "болтай=chatter":
     cefr_level: A2
     learn: false
+    lemma: "болтать=to chat"
     accented: "болта́й"
     en_gb:
       standard: "chatter (imperative)"
@@ -586,12 +610,14 @@ words:
   "бросай=throw":
     cefr_level: A2
     learn: false
+    lemma: "бросать=to throw"
     accented: "броса́й"
     en_gb:
       standard: "throw (imperative)"
   "бросьте=give up":
     cefr_level: A2
     learn: false
+    lemma: "бросить=to throw"
     accented: "бро́сьте"
     en_gb:
       standard: "give up (imperative)"
@@ -616,6 +642,7 @@ words:
   "будь=be":
     cefr_level: A2
     learn: false
+    lemma: "быть=to be"
     accented: "будь"
     en_gb:
       standard: "be (imperative)"
@@ -676,12 +703,14 @@ words:
   "важен=important":
     cefr_level: B1
     learn: false
+    lemma: "важный=important"
     accented: "ва́жен"
     en_gb:
       standard: "important (masculine)"
   "важна=important":
     cefr_level: A2
     learn: false
+    lemma: "важный=important"
     accented: "ва́жна"
     en_gb:
       standard: "important"
@@ -784,18 +813,21 @@ words:
   "верна=faithful":
     cefr_level: B1
     learn: false
+    lemma: "верный=faithful"
     accented: "верна́"
     en_gb:
       standard: "faithful"
   "верни=put back":
     cefr_level: A2
     learn: false
+    lemma: "вернуть=to return"
     accented: "верни́"
     en_gb:
       standard: "put back (imperative)"
   "вернись=come back":
     cefr_level: B1
     learn: false
+    lemma: "вернуться=to return"
     accented: "верни́сь"
     en_gb:
       standard: "come back (imperative)"
@@ -808,6 +840,7 @@ words:
   "верь=believe":
     cefr_level: B1
     learn: false
+    lemma: "верить=to believe"
     accented: "верь"
     en_gb:
       standard: "believe (imperative)"
@@ -868,6 +901,7 @@ words:
   "взгляни=glance":
     cefr_level: B1
     learn: false
+    lemma: "взглянуть=to glance"
     accented: "взгляни́"
     en_gb:
       standard: "glance (imperative)"
@@ -934,6 +968,7 @@ words:
   "виноват=guilty":
     cefr_level: A2
     learn: false
+    lemma: "виноватый=guilty"
     accented: "винова́т"
     en_gb:
       standard: "guilty, at fault"
@@ -958,18 +993,21 @@ words:
   "включена=plugged in":
     cefr_level: B2
     learn: false
+    lemma: "включить=to switch on"
     accented: "включена́"
     en_gb:
       standard: "plugged in"
   "включённым=on":
     cefr_level: A2
     learn: false
+    lemma: "включить=to switch on"
     accented: "включённым"
     en_gb:
       standard: "on (switched on)"
   "включи=turn on":
     cefr_level: A1
     learn: false
+    lemma: "включить=to switch on"
     accented: "включи́"
     en_gb:
       standard: "turn on (imperative)"
@@ -1072,30 +1110,35 @@ words:
   "воздействия=impact":
     cefr_level: B2
     learn: false
+    lemma: "воздействие=impact"
     accented: "возде́йствия"
     en_gb:
       standard: "impact"
   "возьми=take":
     cefr_level: A1
     learn: false
+    lemma: "взять=to take"
     accented: "возьми́"
     en_gb:
       standard: "take (imperative)"
   "возьмите=take":
     cefr_level: B1
     learn: false
+    lemma: "взять=to take"
     accented: "возьми́те"
     en_gb:
       standard: "take (imperative of взять)"
   "войдите=come in":
     cefr_level: A2
     learn: false
+    lemma: "войти=to enter"
     accented: "войди́те"
     en_gb:
       standard: "come in (imperative)"
   "волнуйся=worry":
     cefr_level: B1
     learn: false
+    lemma: "волноваться=to worry"
     accented: "волну́йся"
     en_gb:
       standard: "worry (imperative)"
@@ -1138,6 +1181,7 @@ words:
   "воспользуйтесь=make use of":
     cefr_level: B1
     learn: false
+    lemma: "воспользоваться=to make use of"
     accented: "воспо́льзуйтесь"
     en_gb:
       standard: "make use of (imperative)"
@@ -1150,30 +1194,35 @@ words:
   "восстановил=restored":
     cefr_level: B1
     learn: false
+    lemma: "восстановить=to restore"
     accented: "восстанови́л"
     en_gb:
       standard: "restored"
   "восхищается=admires":
     cefr_level: A2
     learn: false
+    lemma: "восхищаться=to admire"
     accented: "восхища́ется"
     en_gb:
       standard: "admires"
   "восхищались=admired":
     cefr_level: B2
     learn: false
+    lemma: "восхищаться=to admire"
     accented: "восхища́лись"
     en_gb:
       standard: "admired"
   "восхищался=admired":
     cefr_level: B1
     learn: false
+    lemma: "восхищаться=to admire"
     accented: "восхища́лся"
     en_gb:
       standard: "admired"
   "восхищаюсь=admire":
     cefr_level: B2
     learn: false
+    lemma: "восхищаться=to admire"
     accented: "восхища́юсь"
     en_gb:
       standard: "admire"
@@ -1240,24 +1289,28 @@ words:
   "вредит=harms":
     cefr_level: B1
     learn: false
+    lemma: "вредить=to harm"
     accented: "вреди́т"
     en_gb:
       standard: "harms"
   "вредно=bad":
     cefr_level: B2
     learn: false
+    lemma: "вредный=harmful"
     accented: "вре́дно"
     en_gb:
       standard: "bad (harmful)"
   "вредные=harmful":
     cefr_level: A2
     learn: false
+    lemma: "вредный=harmful"
     accented: "вре́дные"
     en_gb:
       standard: "harmful"
   "вредными=harmful":
     cefr_level: B2
     learn: false
+    lemma: "вредный=harmful"
     accented: "вре́дными"
     en_gb:
       standard: "harmful"
@@ -1270,6 +1323,7 @@ words:
   "ври=lie":
     cefr_level: B1
     learn: false
+    lemma: "врать=to lie"
     accented: "ври"
     en_gb:
       standard: "lie (imperative)"
@@ -1300,24 +1354,28 @@ words:
   "вспомни=remember":
     cefr_level: A2
     learn: false
+    lemma: "вспомнить=to remember"
     accented: "вспо́мни"
     en_gb:
       standard: "remember (imperative)"
   "вставьте=insert":
     cefr_level: B1
     learn: false
+    lemma: "вставить=to insert"
     accented: "вста́вьте"
     en_gb:
       standard: "insert (imperative)"
   "встань=stand":
     cefr_level: A2
     learn: false
+    lemma: "встать=to stand up"
     accented: "встань"
     en_gb:
       standard: "stand (imperative)"
   "встаньте=stand up":
     cefr_level: A2
     learn: false
+    lemma: "встать=to stand up"
     accented: "вста́ньте"
     en_gb:
       standard: "stand up (imperative)"
@@ -1360,12 +1418,14 @@ words:
   "выбери=choose":
     cefr_level: A2
     learn: false
+    lemma: "выбрать=to choose"
     accented: "вы́бери"
     en_gb:
       standard: "choose (imperative)"
   "выбирай=choose":
     cefr_level: B2
     learn: false
+    lemma: "выбирать=to choose"
     accented: "выбира́й"
     en_gb:
       standard: "choose (imperative)"
@@ -1378,6 +1438,7 @@ words:
   "выбросьте=throw out":
     cefr_level: B1
     learn: false
+    lemma: "выбросить=to throw out"
     accented: "вы́бросьте"
     en_gb:
       standard: "throw out (imperative)"
@@ -1432,12 +1493,14 @@ words:
   "вызовите=call":
     cefr_level: B1
     learn: false
+    lemma: "вызвать=to call"
     accented: "вы́зовите"
     en_gb:
       standard: "call (imperative)"
   "выйди=leave":
     cefr_level: B1
     learn: false
+    lemma: "выйти=to go out"
     accented: "вы́йди"
     en_gb:
       standard: "leave (imperative)"
@@ -1450,6 +1513,7 @@ words:
   "выключи=turn off":
     cefr_level: B1
     learn: false
+    lemma: "выключить=to turn off"
     accented: "вы́ключи"
     en_gb:
       standard: "turn off (imperative of выключить)"
@@ -1480,6 +1544,7 @@ words:
   "вынеси=take out":
     cefr_level: B1
     learn: false
+    lemma: "вынести=to carry out"
     accented: "вы́неси"
     en_gb:
       standard: "take out (imperative)"
@@ -1492,6 +1557,7 @@ words:
   "вынь=take out":
     cefr_level: A2
     learn: false
+    lemma: "вынуть=to take out"
     accented: "вынь"
     en_gb:
       standard: "take out (imperative)"
@@ -1534,6 +1600,7 @@ words:
   "выпускай=let out":
     cefr_level: B1
     learn: false
+    lemma: "выпускать=to release"
     accented: "выпуска́й"
     en_gb:
       standard: "let out (imperative)"
@@ -1588,6 +1655,7 @@ words:
   "выслушай=hear out":
     cefr_level: B1
     learn: false
+    lemma: "выслушать=to hear out"
     accented: "вы́слушай"
     en_gb:
       standard: "hear out (imperative)"
@@ -1648,6 +1716,7 @@ words:
   "выходи=go beyond":
     cefr_level: B1
     learn: false
+    lemma: "выходить=to go out"
     accented: "выходи́"
     en_gb:
       standard: "go beyond (imperative)"
@@ -1714,6 +1783,7 @@ words:
   "гамаке=hammock":
     cefr_level: A2
     learn: false
+    lemma: "гамак=hammock"
     accented: "гамаке́"
     en_gb:
       standard: "hammock"
@@ -1774,12 +1844,14 @@ words:
   "глуп=stupid":
     cefr_level: B2
     learn: false
+    lemma: "глупый=stupid"
     accented: "глуп"
     en_gb:
       standard: "stupid"
   "гляди=look":
     cefr_level: B1
     learn: false
+    lemma: "глядеть=to look"
     accented: "гляди́"
     en_gb:
       standard: "look (imperative)"
@@ -1792,6 +1864,7 @@ words:
   "глянь=take a look":
     cefr_level: B1
     learn: false
+    lemma: "глянуть=to glance"
     accented: "глянь"
     en_gb:
       standard: "take a look (imperative)"
@@ -1810,12 +1883,14 @@ words:
   "говори=speak":
     cefr_level: A2
     learn: false
+    lemma: "говорить=to speak"
     accented: "говори́"
     en_gb:
       standard: "speak (imperative)"
   "говоря=speaking":
     cefr_level: B2
     learn: false
+    lemma: "говорить=to speak"
     accented: "говоря́"
     en_gb:
       standard: "speaking"
@@ -1876,18 +1951,21 @@ words:
   "голуби=pigeons":
     cefr_level: B2
     learn: false
+    lemma: "голубь=pigeon"
     accented: "го́луби"
     en_gb:
       standard: "pigeons"
   "гони=drive":
     cefr_level: B1
     learn: false
+    lemma: "гнать=to drive"
     accented: "гони́"
     en_gb:
       standard: "drive (imperative)"
   "горды=proud":
     cefr_level: B1
     learn: false
+    lemma: "гордый=proud"
     accented: "горды́"
     en_gb:
       standard: "proud"
@@ -1912,24 +1990,28 @@ words:
   "гостиной=living room":
     cefr_level: A2
     learn: false
+    lemma: "гостиная=living room"
     accented: "гости́ной"
     en_gb:
       standard: "living room"
   "готова=ready":
     cefr_level: A2
     learn: false
+    lemma: "готовый=ready"
     accented: "гото́ва"
     en_gb:
       standard: "ready (feminine)"
   "готово=ready":
     cefr_level: B1
     learn: false
+    lemma: "готовый=ready"
     accented: "гото́во"
     en_gb:
       standard: "ready (neuter)"
   "готовы=ready":
     cefr_level: A1
     learn: false
+    lemma: "готовый=ready"
     accented: "гото́вы"
     en_gb:
       standard: "ready (plural)"
@@ -2038,6 +2120,7 @@ words:
   "грубо=rudely":
     cefr_level: B2
     learn: false
+    lemma: "грубый=rude"
     accented: "гру́бо"
     en_gb:
       standard: "rudely"
@@ -2074,30 +2157,35 @@ words:
   "густо=thickly":
     cefr_level: B1
     learn: false
+    lemma: "густой=thick"
     accented: "гу́сто"
     en_gb:
       standard: "thickly"
   "давай=let's":
     cefr_level: A2
     learn: false
+    lemma: "давать=to give"
     accented: "дава́й"
     en_gb:
       standard: "let's (suggestion particle)"
   "давайте=let's":
     cefr_level: A2
     learn: false
+    lemma: "давать=to give"
     accented: "дава́йте"
     en_gb:
       standard: "let's (polite suggestion)"
   "дай=give":
     cefr_level: A2
     learn: false
+    lemma: "дать=to give"
     accented: "дай"
     en_gb:
       standard: "give (imperative)"
   "дайте=give":
     cefr_level: A1
     learn: false
+    lemma: "дать=to give"
     accented: "да́йте"
     en_gb:
       standard: "give (polite imperative)"
@@ -2158,6 +2246,7 @@ words:
   "двигайся=move":
     cefr_level: B1
     learn: false
+    lemma: "двигаться=to move"
     accented: "дви́гайся"
     en_gb:
       standard: "move (imperative)"
@@ -2236,6 +2325,7 @@ words:
   "делай=do":
     cefr_level: A1
     learn: false
+    lemma: "делать=to do"
     accented: "де́лай"
     en_gb:
       standard: "do (imperative)"
@@ -2290,12 +2380,14 @@ words:
   "держись=hold on":
     cefr_level: B1
     learn: false
+    lemma: "держаться=to hold on"
     accented: "держи́сь"
     en_gb:
       standard: "hold on (imperative)"
   "дерись=fight":
     cefr_level: B1
     learn: false
+    lemma: "драться=to fight"
     accented: "дери́сь"
     en_gb:
       standard: "fight (imperative)"
@@ -2314,6 +2406,7 @@ words:
   "джаза=jazz":
     cefr_level: B1
     learn: false
+    lemma: "джаз=jazz"
     accented: "джа́за"
     en_gb:
       standard: "jazz"
@@ -2368,18 +2461,21 @@ words:
   "длилась=lasted":
     cefr_level: B2
     learn: false
+    lemma: "длиться=to last"
     accented: "дли́лась"
     en_gb:
       standard: "lasted"
   "длилось=lasted":
     cefr_level: B2
     learn: false
+    lemma: "длиться=to last"
     accented: "дли́лось"
     en_gb:
       standard: "lasted"
   "длится=lasts":
     cefr_level: B2
     learn: false
+    lemma: "длиться=to last"
     accented: "дли́тся"
     en_gb:
       standard: "lasts"
@@ -2398,18 +2494,21 @@ words:
   "добавь=add":
     cefr_level: B1
     learn: false
+    lemma: "добавить=to add"
     accented: "доба́вь"
     en_gb:
       standard: "add (imperative)"
   "добавьте=add":
     cefr_level: B1
     learn: false
+    lemma: "добавить=to add"
     accented: "доба́вьте"
     en_gb:
       standard: "add (imperative)"
   "добивается=achieves":
     cefr_level: A2
     learn: false
+    lemma: "добиваться=to strive for"
     accented: "добива́ется"
     en_gb:
       standard: "achieves"
@@ -2428,6 +2527,7 @@ words:
   "добры=kind":
     cefr_level: A2
     learn: false
+    lemma: "добрый=kind"
     accented: "добры́"
     en_gb:
       standard: "kind (short form, as in бу́дьте добры́ — would you be so kind)"
@@ -2470,18 +2570,21 @@ words:
   "доволен=pleased":
     cefr_level: B1
     learn: false
+    lemma: "довольный=satisfied"
     accented: "дово́лен"
     en_gb:
       standard: "pleased (masculine)"
   "довольна=pleased":
     cefr_level: B1
     learn: false
+    lemma: "довольный=satisfied"
     accented: "дово́льна"
     en_gb:
       standard: "pleased"
   "довольны=pleased":
     cefr_level: B1
     learn: false
+    lemma: "довольный=satisfied"
     accented: "дово́льны"
     en_gb:
       standard: "pleased (plural)"
@@ -2536,6 +2639,7 @@ words:
   "дожидайся=wait":
     cefr_level: B1
     learn: false
+    lemma: "дожидаться=to wait for"
     accented: "дожида́йся"
     en_gb:
       standard: "wait (imperative)"
@@ -2548,12 +2652,14 @@ words:
   "доказательств=proof":
     cefr_level: A2
     learn: false
+    lemma: "доказательство=proof"
     accented: "доказа́тельств"
     en_gb:
       standard: "proof"
   "должно=should":
     cefr_level: B2
     learn: false
+    lemma: "должен=must"
     accented: "должно́"
     en_gb:
       standard: "should"
@@ -2596,18 +2702,21 @@ words:
   "доставки=delivery":
     cefr_level: B1
     learn: false
+    lemma: "доставка=delivery"
     accented: "доста́вки"
     en_gb:
       standard: "delivery"
   "достань=get out":
     cefr_level: A2
     learn: false
+    lemma: "достать=to get"
     accented: "доста́нь"
     en_gb:
       standard: "get out (imperative)"
   "достигает=reaches":
     cefr_level: B1
     learn: false
+    lemma: "достигать=to reach"
     accented: "достига́ет"
     en_gb:
       standard: "reaches"
@@ -2782,6 +2891,7 @@ words:
   "ежедневного=daily":
     cefr_level: B1
     learn: false
+    lemma: "ежедневный=daily"
     accented: "ежедне́вного"
     en_gb:
       standard: "daily"
@@ -2836,12 +2946,14 @@ words:
   "жди=wait":
     cefr_level: A2
     learn: false
+    lemma: "ждать=to wait"
     accented: "жди"
     en_gb:
       standard: "wait (imperative)"
   "ждите=wait":
     cefr_level: B1
     learn: false
+    lemma: "ждать=to wait"
     accented: "жди́те"
     en_gb:
       standard: "wait (imperative, plural)"
@@ -2866,12 +2978,14 @@ words:
   "женат=married":
     cefr_level: A2
     learn: false
+    lemma: "женатый=married"
     accented: "жена́т"
     en_gb:
       standard: "married (of a man)"
   "жива=alive":
     cefr_level: A2
     learn: false
+    lemma: "живой=alive"
     accented: "жива́"
     en_gb:
       standard: "alive"
@@ -2968,6 +3082,7 @@ words:
   "заботится=cares for":
     cefr_level: B1
     learn: false
+    lemma: "заботиться=to take care"
     accented: "забо́тится"
     en_gb:
       standard: "cares for"
@@ -2980,6 +3095,7 @@ words:
   "забудь=forget":
     cefr_level: B1
     learn: false
+    lemma: "забыть=to forget"
     accented: "забу́дь"
     en_gb:
       standard: "forget (imperative)"
@@ -3016,12 +3132,14 @@ words:
   "завидует=envies":
     cefr_level: B1
     learn: false
+    lemma: "завидовать=to envy"
     accented: "зави́дует"
     en_gb:
       standard: "envies"
   "завтракал=had breakfast":
     cefr_level: B1
     learn: false
+    lemma: "завтракать=to have breakfast"
     accented: "за́втракал"
     en_gb:
       standard: "had breakfast"
@@ -3082,12 +3200,14 @@ words:
   "загляни=look inside":
     cefr_level: B1
     learn: false
+    lemma: "заглянуть=to peep in"
     accented: "загляни́"
     en_gb:
       standard: "look inside (imperative)"
   "загорай=sunbathe":
     cefr_level: B1
     learn: false
+    lemma: "загорать=to sunbathe"
     accented: "загора́й"
     en_gb:
       standard: "sunbathe (imperative of загорать)"
@@ -3100,12 +3220,14 @@ words:
   "задавай=ask":
     cefr_level: B1
     learn: false
+    lemma: "задавать=to assign"
     accented: "задава́й"
     en_gb:
       standard: "ask (imperative)"
   "задержанный=detainee":
     cefr_level: B2
     learn: false
+    lemma: "задержать=to detain"
     accented: "задержа́нный"
     en_gb:
       standard: "detainee"
@@ -3166,24 +3288,28 @@ words:
   "зайди=visit":
     cefr_level: A2
     learn: false
+    lemma: "зайти=to drop by"
     accented: "зайди́"
     en_gb:
       standard: "visit (imperative)"
   "зайдите=go in":
     cefr_level: B2
     learn: false
+    lemma: "зайти=to drop by"
     accented: "зайди́те"
     en_gb:
       standard: "go in (imperative, plural)"
   "заказывали=booked":
     cefr_level: A1
     learn: false
+    lemma: "заказывать=to order"
     accented: "зака́зывали"
     en_gb:
       standard: "booked"
   "заканчивается=ends":
     cefr_level: A2
     learn: false
+    lemma: "заканчиваться=to end"
     accented: "зака́нчивается"
     en_gb:
       standard: "ends"
@@ -3238,12 +3364,14 @@ words:
   "закончена=finished":
     cefr_level: B1
     learn: false
+    lemma: "закончить=to finish"
     accented: "зако́нчена"
     en_gb:
       standard: "finished"
   "закрой=close":
     cefr_level: A1
     learn: false
+    lemma: "закрыть=to close"
     accented: "закро́й"
     en_gb:
       standard: "close (imperative)"
@@ -3262,18 +3390,21 @@ words:
   "закрывается=closes":
     cefr_level: A2
     learn: false
+    lemma: "закрываться=to close"
     accented: "закрыва́ется"
     en_gb:
       standard: "closes"
   "закрылось=was covered":
     cefr_level: B1
     learn: false
+    lemma: "закрыться=to shut"
     accented: "закры́лось"
     en_gb:
       standard: "was covered"
   "закрылся=covered himself":
     cefr_level: B2
     learn: false
+    lemma: "закрыться=to shut"
     accented: "закры́лся"
     en_gb:
       standard: "covered himself"
@@ -3358,6 +3489,7 @@ words:
   "замолчи=be quiet":
     cefr_level: B1
     learn: false
+    lemma: "замолчать=to fall silent"
     accented: "замолчи́"
     en_gb:
       standard: "be quiet (imperative)"
@@ -3388,18 +3520,21 @@ words:
   "занята=busy":
     cefr_level: B1
     learn: false
+    lemma: "занятый=busy"
     accented: "занята́"
     en_gb:
       standard: "busy"
   "заняты=taken":
     cefr_level: B1
     learn: false
+    lemma: "занятый=busy"
     accented: "за́няты"
     en_gb:
       standard: "taken (plural)"
   "заори=yell":
     cefr_level: B2
     learn: false
+    lemma: "заорать=to start yelling"
     accented: "заори́"
     en_gb:
       standard: "yell (imperative)"
@@ -3436,18 +3571,21 @@ words:
   "записывал=wrote down":
     cefr_level: A2
     learn: false
+    lemma: "записывать=to write down"
     accented: "запи́сывал"
     en_gb:
       standard: "wrote down"
   "запиши=write down":
     cefr_level: B1
     learn: false
+    lemma: "записать=to write down"
     accented: "запиши́"
     en_gb:
       standard: "write down (imperative)"
   "запишите=write down":
     cefr_level: A2
     learn: false
+    lemma: "записать=to write down"
     accented: "запиши́те"
     en_gb:
       standard: "write down (imperative)"
@@ -3484,6 +3622,7 @@ words:
   "запомни=memorise":
     cefr_level: A2
     learn: false
+    lemma: "запомнить=to memorise"
     accented: "запо́мни"
     en_gb:
       standard: "memorise (imperative)"
@@ -3526,6 +3665,7 @@ words:
   "запри=lock":
     cefr_level: B1
     learn: false
+    lemma: "запереть=to lock"
     accented: "запри́"
     en_gb:
       standard: "lock (imperative)"
@@ -3544,6 +3684,7 @@ words:
   "запустили=launched":
     cefr_level: B2
     learn: false
+    lemma: "запустить=to launch"
     accented: "запусти́ли"
     en_gb:
       standard: "launched"
@@ -3628,6 +3769,7 @@ words:
   "застегни=fasten":
     cefr_level: B1
     learn: false
+    lemma: "застегнуть=to fasten"
     accented: "застегни́"
     en_gb:
       standard: "fasten (imperative)"
@@ -3694,12 +3836,14 @@ words:
   "зашёл=went into":
     cefr_level: A2
     learn: false
+    lemma: "зайти=to drop by"
     accented: "зашёл"
     en_gb:
       standard: "went into"
   "зашли=went in":
     cefr_level: B1
     learn: false
+    lemma: "зайти=to drop by"
     accented: "зашли́"
     en_gb:
       standard: "went in"
@@ -3724,12 +3868,14 @@ words:
   "звони=call":
     cefr_level: A2
     learn: false
+    lemma: "звонить=to call"
     accented: "звони́"
     en_gb:
       standard: "call"
   "здоров=healthy":
     cefr_level: B1
     learn: false
+    lemma: "здоровый=healthy"
     accented: "здоро́в"
     en_gb:
       standard: "healthy"
@@ -3754,18 +3900,21 @@ words:
   "знаменит=famous":
     cefr_level: B1
     learn: false
+    lemma: "знаменитый=famous"
     accented: "зна́менит"
     en_gb:
       standard: "famous"
   "знаменита=famous":
     cefr_level: A2
     learn: false
+    lemma: "знаменитый=famous"
     accented: "знамени́та"
     en_gb:
       standard: "famous"
   "зная=knowing":
     cefr_level: B1
     learn: false
+    lemma: "знать=to know"
     accented: "зна́я"
     en_gb:
       standard: "knowing"
@@ -3802,6 +3951,7 @@ words:
   "зоопарке=zoo":
     cefr_level: A2
     learn: false
+    lemma: "зоопарк=zoo"
     accented: "зоопа́рке"
     en_gb:
       standard: "zoo (prepositional)"
@@ -3880,6 +4030,7 @@ words:
   "играй=play":
     cefr_level: A2
     learn: false
+    lemma: "играть=to play"
     accented: "игра́й"
     en_gb:
       standard: "play"
@@ -3946,12 +4097,14 @@ words:
   "иди=go":
     cefr_level: A2
     learn: false
+    lemma: "идти=to go"
     accented: "иди́"
     en_gb:
       standard: "go (imperative)"
   "идите=go":
     cefr_level: A2
     learn: false
+    lemma: "идти=to go"
     accented: "иди́те"
     en_gb:
       standard: "go (polite imperative)"
@@ -3982,6 +4135,7 @@ words:
   "избегает=avoids":
     cefr_level: B1
     learn: false
+    lemma: "избегать=to avoid"
     accented: "избега́ет"
     en_gb:
       standard: "avoids"
@@ -4006,6 +4160,7 @@ words:
   "известен=known":
     cefr_level: B1
     learn: false
+    lemma: "известный=famous"
     accented: "изве́стен"
     en_gb:
       standard: "known"
@@ -4018,6 +4173,7 @@ words:
   "известна=known":
     cefr_level: B2
     learn: false
+    lemma: "известный=famous"
     accented: "изве́стна"
     en_gb:
       standard: "known (feminine)"
@@ -4156,12 +4312,14 @@ words:
   "интересна=interesting":
     cefr_level: A2
     learn: false
+    lemma: "интересный=interesting"
     accented: "интере́сна"
     en_gb:
       standard: "interesting"
   "искусств=arts":
     cefr_level: B2
     learn: false
+    lemma: "искусство=art"
     accented: "иску́сств"
     en_gb:
       standard: "arts"
@@ -4372,6 +4530,7 @@ words:
   "касайся=touch":
     cefr_level: B1
     learn: false
+    lemma: "касаться=to touch"
     accented: "каса́йся"
     en_gb:
       standard: "touch"
@@ -4480,6 +4639,7 @@ words:
   "киты=whales":
     cefr_level: A2
     learn: false
+    lemma: "кит=whale"
     accented: "ки́ты"
     en_gb:
       standard: "whales"
@@ -4624,12 +4784,14 @@ words:
   "командуй=order about":
     cefr_level: B2
     learn: false
+    lemma: "командовать=to command"
     accented: "кома́ндуй"
     en_gb:
       standard: "order about"
   "командующий=commander":
     cefr_level: B1
     learn: false
+    lemma: "командовать=to command"
     accented: "кома́ндующий"
     en_gb:
       standard: "commander"
@@ -4702,6 +4864,7 @@ words:
   "контролирует=controls":
     cefr_level: B1
     learn: false
+    lemma: "контролировать=to control"
     accented: "контроли́рует"
     en_gb:
       standard: "controls"
@@ -4804,12 +4967,14 @@ words:
   "красив=beautiful":
     cefr_level: B2
     learn: false
+    lemma: "красивый=beautiful"
     accented: "краси́в"
     en_gb:
       standard: "beautiful"
   "красивы=beautiful":
     cefr_level: A2
     learn: false
+    lemma: "красивый=beautiful"
     accented: "краси́вы"
     en_gb:
       standard: "beautiful"
@@ -4858,12 +5023,14 @@ words:
   "критикуй=criticize":
     cefr_level: B1
     learn: false
+    lemma: "критиковать=to criticize"
     accented: "критику́й"
     en_gb:
       standard: "criticize (imperative of критиковать)"
   "кричи=shout":
     cefr_level: A2
     learn: false
+    lemma: "кричать=to shout"
     accented: "кричи́"
     en_gb:
       standard: "shout"
@@ -4942,6 +5109,7 @@ words:
   "куклой=doll":
     cefr_level: A1
     learn: false
+    lemma: "кукла=doll"
     accented: "ку́клой"
     en_gb:
       standard: "doll"
@@ -4978,6 +5146,7 @@ words:
   "купи=buy":
     cefr_level: B1
     learn: false
+    lemma: "купить=to buy"
     accented: "купи́"
     en_gb:
       standard: "buy (imperative)"
@@ -5038,6 +5207,7 @@ words:
   "кушайте=eat":
     cefr_level: A1
     learn: false
+    lemma: "кушать=to eat"
     accented: "ку́шайте"
     en_gb:
       standard: "eat"
@@ -5074,12 +5244,14 @@ words:
   "ласточки=swallows":
     cefr_level: B1
     learn: false
+    lemma: "ласточка=swallow"
     accented: "ла́сточки"
     en_gb:
       standard: "swallows (birds)"
   "ласточку=swallow":
     cefr_level: B1
     learn: false
+    lemma: "ласточка=swallow"
     accented: "ла́сточку"
     en_gb:
       standard: "swallow (bird)"
@@ -5116,6 +5288,7 @@ words:
   "лёгок=easy":
     cefr_level: B1
     learn: false
+    lemma: "лёгкий=light"
     accented: "лёгок"
     en_gb:
       standard: "easy"
@@ -5158,6 +5331,7 @@ words:
   "лет=years":
     cefr_level: B2
     learn: false
+    lemma: "год=year"
     accented: "лет"
     en_gb:
       standard: "years (genitive plural)"
@@ -5224,6 +5398,7 @@ words:
   "ложись=lie down":
     cefr_level: B1
     learn: false
+    lemma: "ложиться=to lie down"
     accented: "ложи́сь"
     en_gb:
       standard: "lie down"
@@ -5242,6 +5417,7 @@ words:
   "ломай=break":
     cefr_level: B1
     learn: false
+    lemma: "ломать=to break"
     accented: "лома́й"
     en_gb:
       standard: "break"
@@ -5272,12 +5448,14 @@ words:
   "луга=meadows":
     cefr_level: B1
     learn: false
+    lemma: "луг=meadow"
     accented: "луга́"
     en_gb:
       standard: "meadows"
   "лугу=meadow":
     cefr_level: B1
     learn: false
+    lemma: "луг=meadow"
     accented: "лу́гу"
     en_gb:
       standard: "meadow (prepositional)"
@@ -5386,6 +5564,7 @@ words:
   "мала=too small":
     cefr_level: A1
     learn: false
+    lemma: "маленький=small"
     accented: "мала́"
     en_gb:
       standard: "too small"
@@ -5488,6 +5667,7 @@ words:
   "медицины=medicine":
     cefr_level: B1
     learn: false
+    lemma: "медицина=medicine"
     accented: "медици́ны"
     en_gb:
       standard: "medicine"
@@ -5530,12 +5710,14 @@ words:
   "мешай=disturb":
     cefr_level: B1
     learn: false
+    lemma: "мешать=to hinder"
     accented: "меша́й"
     en_gb:
       standard: "disturb"
   "мило=kind":
     cefr_level: A1
     learn: false
+    lemma: "милый=dear"
     accented: "ми́ло"
     en_gb:
       standard: "kind (sweet)"
@@ -5638,6 +5820,7 @@ words:
   "морепродуктами=seafood":
     cefr_level: B1
     learn: false
+    lemma: "морепродукт=seafood"
     accented: "морепроду́ктами"
     en_gb:
       standard: "seafood"
@@ -5788,6 +5971,7 @@ words:
   "мягка=soft":
     cefr_level: B2
     learn: false
+    lemma: "мягкий=soft"
     accented: "мягка́"
     en_gb:
       standard: "soft"
@@ -5908,12 +6092,14 @@ words:
   "надевай=put on":
     cefr_level: B1
     learn: false
+    lemma: "надевать=to put on"
     accented: "надева́й"
     en_gb:
       standard: "put on (imperative of надевать)"
   "надень=put on":
     cefr_level: A2
     learn: false
+    lemma: "надеть=to put on"
     accented: "наде́нь"
     en_gb:
       standard: "put on (imperative)"
@@ -5926,12 +6112,14 @@ words:
   "нажми=press":
     cefr_level: B1
     learn: false
+    lemma: "нажать=to press"
     accented: "нажми́"
     en_gb:
       standard: "press"
   "нажмите=press":
     cefr_level: B1
     learn: false
+    lemma: "нажать=to press"
     accented: "нажми́те"
     en_gb:
       standard: "press (imperative of нажать)"
@@ -5950,12 +6138,14 @@ words:
   "назови=name":
     cefr_level: B1
     learn: false
+    lemma: "назвать=to call/name"
     accented: "назови́"
     en_gb:
       standard: "name (imperative)"
   "назовите=name":
     cefr_level: A2
     learn: false
+    lemma: "назвать=to call/name"
     accented: "назови́те"
     en_gb:
       standard: "name (command)"
@@ -6040,6 +6230,7 @@ words:
   "налей=pour":
     cefr_level: A2
     learn: false
+    lemma: "налить=to pour"
     accented: "нале́й"
     en_gb:
       standard: "pour (imperative)"
@@ -6094,6 +6285,7 @@ words:
   "напечатала=typed":
     cefr_level: A2
     learn: false
+    lemma: "напечатать=to print"
     accented: "напеча́тала"
     en_gb:
       standard: "typed"
@@ -6106,18 +6298,21 @@ words:
   "написана=written":
     cefr_level: B1
     learn: false
+    lemma: "написать=to write"
     accented: "напи́сана"
     en_gb:
       standard: "written"
   "напиши=write":
     cefr_level: A2
     learn: false
+    lemma: "написать=to write"
     accented: "напиши́"
     en_gb:
       standard: "write (imperative)"
   "напишите=write":
     cefr_level: A2
     learn: false
+    lemma: "написать=to write"
     accented: "напиши́те"
     en_gb:
       standard: "write"
@@ -6160,6 +6355,7 @@ words:
   "напомни=remind":
     cefr_level: A2
     learn: false
+    lemma: "напомнить=to remind"
     accented: "напо́мни"
     en_gb:
       standard: "remind"
@@ -6184,42 +6380,49 @@ words:
   "нарежь=slice":
     cefr_level: B1
     learn: false
+    lemma: "нарезать=to slice"
     accented: "наре́жь"
     en_gb:
       standard: "slice, cut (imperative of нарезать)"
   "нарезал=sliced":
     cefr_level: B2
     learn: false
+    lemma: "нарезать=to slice"
     accented: "наре́зал"
     en_gb:
       standard: "sliced"
   "нарисовал=drew":
     cefr_level: B2
     learn: false
+    lemma: "нарисовать=to draw"
     accented: "нарисова́л"
     en_gb:
       standard: "drew"
   "нарисовала=drew":
     cefr_level: B1
     learn: false
+    lemma: "нарисовать=to draw"
     accented: "нарисова́ла"
     en_gb:
       standard: "drew"
   "нарисован=painted":
     cefr_level: B1
     learn: false
+    lemma: "нарисовать=to draw"
     accented: "нарисо́ван"
     en_gb:
       standard: "painted (drawn)"
   "нарисованы=drawn":
     cefr_level: B2
     learn: false
+    lemma: "нарисовать=to draw"
     accented: "нарисо́ваны"
     en_gb:
       standard: "drawn"
   "нарисуй=draw":
     cefr_level: A2
     learn: false
+    lemma: "нарисовать=to draw"
     accented: "нарису́й"
     en_gb:
       standard: "draw (imperative)"
@@ -6238,6 +6441,7 @@ words:
   "нарушь=break":
     cefr_level: B1
     learn: false
+    lemma: "нарушить=to violate"
     accented: "нару́шь"
     en_gb:
       standard: "break (violate)"
@@ -6256,6 +6460,7 @@ words:
   "насекомых=insects":
     cefr_level: B1
     learn: false
+    lemma: "насекомое=insect"
     accented: "насеко́мых"
     en_gb:
       standard: "insects"
@@ -6268,6 +6473,7 @@ words:
   "наслаждался=enjoyed":
     cefr_level: B1
     learn: false
+    lemma: "наслаждаться=to enjoy"
     accented: "наслажда́лся"
     en_gb:
       standard: "enjoyed"
@@ -6304,6 +6510,7 @@ words:
   "наступи=step on":
     cefr_level: B1
     learn: false
+    lemma: "наступить=to step on"
     accented: "наступи́"
     en_gb:
       standard: "step on"
@@ -6358,6 +6565,7 @@ words:
   "неве=Neva":
     cefr_level: A2
     learn: false
+    lemma: "нева=Neva"
     accented: "неве́"
     en_gb:
       standard: "Neva (river)"
@@ -6412,12 +6620,14 @@ words:
   "недоволен=dissatisfied":
     cefr_level: B1
     learn: false
+    lemma: "недовольный=dissatisfied"
     accented: "недово́лен"
     en_gb:
       standard: "dissatisfied"
   "недовольны=unhappy":
     cefr_level: A2
     learn: false
+    lemma: "недовольный=dissatisfied"
     accented: "недово́льны"
     en_gb:
       standard: "unhappy (dissatisfied)"
@@ -6430,6 +6640,7 @@ words:
   "нежно=tenderly":
     cefr_level: A2
     learn: false
+    lemma: "нежный=gentle"
     accented: "не́жно"
     en_gb:
       standard: "tenderly"
@@ -6478,12 +6689,14 @@ words:
   "необычной=unusual":
     cefr_level: B1
     learn: false
+    lemma: "необычный=unusual"
     accented: "необы́чной"
     en_gb:
       standard: "unusual"
   "необычные=unusual":
     cefr_level: B1
     learn: false
+    lemma: "необычный=unusual"
     accented: "необы́чные"
     en_gb:
       standard: "unusual"
@@ -6658,18 +6871,21 @@ words:
   "ноты=sheet music":
     cefr_level: A2
     learn: false
+    lemma: "нота=note"
     accented: "но́ты"
     en_gb:
       standard: "sheet music"
   "нужна=needed":
     cefr_level: B2
     learn: false
+    lemma: "нужный=necessary"
     accented: "нужна́"
     en_gb:
       standard: "needed (feminine)"
   "нужны=needed":
     cefr_level: B1
     learn: false
+    lemma: "нужный=necessary"
     accented: "нужны́"
     en_gb:
       standard: "needed (plural)"
@@ -6682,6 +6898,7 @@ words:
   "нью-йорка=New York":
     cefr_level: A2
     learn: false
+    lemma: "Нью-Йорк=New York"
     accented: "нью-йо́рка"
     en_gb:
       standard: "New York"
@@ -6796,6 +7013,7 @@ words:
   "обидься=take offence":
     cefr_level: B1
     learn: false
+    lemma: "обидеться=to take offence"
     accented: "оби́дься"
     en_gb:
       standard: "take offence"
@@ -6892,6 +7110,7 @@ words:
   "обрати=pay":
     cefr_level: A2
     learn: false
+    lemma: "обратить=to turn"
     accented: "обрати́"
     en_gb:
       standard: "pay (обрати внимание: pay attention)"
@@ -6916,18 +7135,21 @@ words:
   "обстоятельствам=circumstances":
     cefr_level: B1
     learn: false
+    lemma: "обстоятельство=circumstance"
     accented: "обстоя́тельствам"
     en_gb:
       standard: "circumstances"
   "обсудили=discussed":
     cefr_level: A2
     learn: false
+    lemma: "обсудить=to discuss"
     accented: "обсуди́ли"
     en_gb:
       standard: "discussed"
   "обсудим=will discuss":
     cefr_level: B1
     learn: false
+    lemma: "обсудить=to discuss"
     accented: "обсу́дим"
     en_gb:
       standard: "will discuss"
@@ -6988,30 +7210,35 @@ words:
   "объясни=explain":
     cefr_level: B1
     learn: false
+    lemma: "объяснить=to explain"
     accented: "объясни́"
     en_gb:
       standard: "explain"
   "обязан=obliged":
     cefr_level: B1
     learn: false
+    lemma: "обязанный=obliged"
     accented: "обя́зан"
     en_gb:
       standard: "obliged"
   "обязана=obliged":
     cefr_level: B1
     learn: false
+    lemma: "обязанный=obliged"
     accented: "обя́зана"
     en_gb:
       standard: "obliged"
   "обязаны=obliged":
     cefr_level: B1
     learn: false
+    lemma: "обязанный=obliged"
     accented: "обя́заны"
     en_gb:
       standard: "obliged"
   "обязательны=obligatory":
     cefr_level: B2
     learn: false
+    lemma: "обязательный=obligatory"
     accented: "обяза́тельны"
     en_gb:
       standard: "obligatory"
@@ -7030,6 +7257,7 @@ words:
   "оглянись=look back":
     cefr_level: B1
     learn: false
+    lemma: "оглянуться=to look back"
     accented: "огляни́сь"
     en_gb:
       standard: "look back"
@@ -7060,30 +7288,35 @@ words:
   "одевайся=dress":
     cefr_level: A2
     learn: false
+    lemma: "одеваться=to get dressed"
     accented: "одева́йся"
     en_gb:
       standard: "dress"
   "оденься=dress":
     cefr_level: A2
     learn: false
+    lemma: "одеться=to get dressed"
     accented: "оде́нься"
     en_gb:
       standard: "dress (yourself)"
   "одет=dressed":
     cefr_level: A2
     learn: false
+    lemma: "одетый=dressed"
     accented: "оде́т"
     en_gb:
       standard: "dressed"
   "одета=dressed":
     cefr_level: B1
     learn: false
+    lemma: "одетый=dressed"
     accented: "оде́та"
     en_gb:
       standard: "dressed"
   "одеты=dressed":
     cefr_level: A2
     learn: false
+    lemma: "одетый=dressed"
     accented: "оде́ты"
     en_gb:
       standard: "dressed"
@@ -7120,6 +7353,7 @@ words:
   "окончила=finished":
     cefr_level: B1
     learn: false
+    lemma: "окончить=to graduate"
     accented: "око́нчила"
     en_gb:
       standard: "finished"
@@ -7174,18 +7408,21 @@ words:
   "опасен=dangerous":
     cefr_level: B2
     learn: false
+    lemma: "опасный=dangerous"
     accented: "опа́сен"
     en_gb:
       standard: "dangerous"
   "опасно=dangerous":
     cefr_level: B2
     learn: false
+    lemma: "опасный=dangerous"
     accented: "опа́сно"
     en_gb:
       standard: "dangerous"
   "опасны=dangerous":
     cefr_level: B1
     learn: false
+    lemma: "опасный=dangerous"
     accented: "опа́сны"
     en_gb:
       standard: "dangerous"
@@ -7216,42 +7453,49 @@ words:
   "описывает=describes":
     cefr_level: B2
     learn: false
+    lemma: "описывать=to describe"
     accented: "опи́сывает"
     en_gb:
       standard: "describes"
   "опоздаем=will be late":
     cefr_level: B1
     learn: false
+    lemma: "опоздать=to be late"
     accented: "опозда́ем"
     en_gb:
       standard: "will be late"
   "опоздает=will be late":
     cefr_level: B1
     learn: false
+    lemma: "опоздать=to be late"
     accented: "опозда́ет"
     en_gb:
       standard: "will be late"
   "опоздаешь=will be late":
     cefr_level: B1
     learn: false
+    lemma: "опоздать=to be late"
     accented: "опозда́ешь"
     en_gb:
       standard: "will be late"
   "опоздал=was late":
     cefr_level: A1
     learn: false
+    lemma: "опоздать=to be late"
     accented: "опозда́л"
     en_gb:
       standard: "was late"
   "опоздала=was late":
     cefr_level: A2
     learn: false
+    lemma: "опоздать=to be late"
     accented: "опозда́ла"
     en_gb:
       standard: "was late"
   "опоздали=were late":
     cefr_level: A2
     learn: false
+    lemma: "опоздать=to be late"
     accented: "опозда́ли"
     en_gb:
       standard: "were late"
@@ -7312,6 +7556,7 @@ words:
   "ори=yell":
     cefr_level: B2
     learn: false
+    lemma: "орать=to yell"
     accented: "ори́"
     en_gb:
       standard: "yell"
@@ -7360,12 +7605,14 @@ words:
   "осматривает=is touring":
     cefr_level: A1
     learn: false
+    lemma: "осматривать=to examine"
     accented: "осма́тривает"
     en_gb:
       standard: "is touring"
   "осматривают=are touring":
     cefr_level: B2
     learn: false
+    lemma: "осматривать=to examine"
     accented: "осма́тривают"
     en_gb:
       standard: "are touring"
@@ -7444,6 +7691,7 @@ words:
   "ответьте=answer":
     cefr_level: A2
     learn: false
+    lemma: "ответить=to answer"
     accented: "отве́тьте"
     en_gb:
       standard: "answer"
@@ -7486,6 +7734,7 @@ words:
   "отдохни=rest":
     cefr_level: B1
     learn: false
+    lemma: "отдохнуть=to rest"
     accented: "отдохни́"
     en_gb:
       standard: "rest"
@@ -7522,12 +7771,14 @@ words:
   "открой=open":
     cefr_level: A2
     learn: false
+    lemma: "открыть=to open"
     accented: "откро́й"
     en_gb:
       standard: "open (imperative)"
   "откройте=open":
     cefr_level: A2
     learn: false
+    lemma: "открыть=to open"
     accented: "откро́йте"
     en_gb:
       standard: "open"
@@ -7708,6 +7959,7 @@ words:
   "охотится=hunts":
     cefr_level: B1
     learn: false
+    lemma: "охотиться=to hunt"
     accented: "охо́тится"
     en_gb:
       standard: "hunts"
@@ -7870,6 +8122,7 @@ words:
   "пей=drink":
     cefr_level: B1
     learn: false
+    lemma: "пить=to drink"
     accented: "пей"
     en_gb:
       standard: "drink (imperative of пить)"
@@ -7966,12 +8219,14 @@ words:
   "передай=pass":
     cefr_level: B1
     learn: false
+    lemma: "передать=to pass on"
     accented: "переда́й"
     en_gb:
       standard: "pass"
   "передайте=pass":
     cefr_level: A2
     learn: false
+    lemma: "передать=to pass on"
     accented: "переда́йте"
     en_gb:
       standard: "pass (polite imperative — hand over)"
@@ -8002,6 +8257,7 @@ words:
   "перезвони=call back":
     cefr_level: B1
     learn: false
+    lemma: "перезвонить=to call back"
     accented: "перезвони́"
     en_gb:
       standard: "call back (imperative of перезвонить)"
@@ -8110,6 +8366,7 @@ words:
   "перца=pepper":
     cefr_level: B1
     learn: false
+    lemma: "перец=pepper"
     accented: "пе́рца"
     en_gb:
       standard: "pepper"
@@ -8122,6 +8379,7 @@ words:
   "печален=sad":
     cefr_level: B2
     learn: false
+    lemma: "печальный=sad"
     accented: "печа́лен"
     en_gb:
       standard: "sad"
@@ -8164,6 +8422,7 @@ words:
   "пирожки=pies":
     cefr_level: A2
     learn: false
+    lemma: "пирожок=pie"
     accented: "пирожки́"
     en_gb:
       standard: "pies"
@@ -8182,6 +8441,7 @@ words:
   "пиши=write":
     cefr_level: B2
     learn: false
+    lemma: "писать=to write"
     accented: "пиши́"
     en_gb:
       standard: "write"
@@ -8230,12 +8490,14 @@ words:
   "плачущего=crying":
     cefr_level: B1
     learn: false
+    lemma: "плакать=to cry"
     accented: "пла́чущего"
     en_gb:
       standard: "crying"
   "плачь=cry":
     cefr_level: A2
     learn: false
+    lemma: "плакать=to cry"
     accented: "плачь"
     en_gb:
       standard: "cry"
@@ -8344,18 +8606,21 @@ words:
   "поблагодарил=thanked":
     cefr_level: B1
     learn: false
+    lemma: "поблагодарить=to thank"
     accented: "поблагодари́л"
     en_gb:
       standard: "thanked"
   "поблагодарила=thanked":
     cefr_level: B2
     learn: false
+    lemma: "поблагодарить=to thank"
     accented: "поблагодари́ла"
     en_gb:
       standard: "thanked"
   "поблагодарили=thanked":
     cefr_level: A2
     learn: false
+    lemma: "поблагодарить=to thank"
     accented: "поблагодари́ли"
     en_gb:
       standard: "thanked"
@@ -8392,12 +8657,14 @@ words:
   "поверни=turn":
     cefr_level: A2
     learn: false
+    lemma: "повернуть=to turn"
     accented: "поверни́"
     en_gb:
       standard: "turn (imperative)"
   "поверните=turn":
     cefr_level: A2
     learn: false
+    lemma: "повернуть=to turn"
     accented: "поверни́те"
     en_gb:
       standard: "turn (imperative, formal)"
@@ -8452,6 +8719,7 @@ words:
   "повторяй=repeat":
     cefr_level: B1
     learn: false
+    lemma: "повторять=to repeat"
     accented: "повторя́й"
     en_gb:
       standard: "repeat (imperative)"
@@ -8506,12 +8774,14 @@ words:
   "погляди=look":
     cefr_level: B1
     learn: false
+    lemma: "поглядеть=to look"
     accented: "погляди́"
     en_gb:
       standard: "look (imperative)"
   "поглядят=will look":
     cefr_level: B1
     learn: false
+    lemma: "поглядеть=to look"
     accented: "поглядя́т"
     en_gb:
       standard: "will look"
@@ -8638,6 +8908,7 @@ words:
   "подними=raise":
     cefr_level: B1
     learn: false
+    lemma: "поднять=to lift"
     accented: "подними́"
     en_gb:
       standard: "raise (imperative)"
@@ -8656,24 +8927,28 @@ words:
   "подожди=wait":
     cefr_level: A1
     learn: false
+    lemma: "подождать=to wait"
     accented: "подожди́"
     en_gb:
       standard: "wait (imperative)"
   "подождите=wait":
     cefr_level: A2
     learn: false
+    lemma: "подождать=to wait"
     accented: "подожди́те"
     en_gb:
       standard: "wait (imperative, formal)"
   "подозреваемого=suspect":
     cefr_level: B1
     learn: false
+    lemma: "подозревать=to suspect"
     accented: "подозрева́емого"
     en_gb:
       standard: "suspect"
   "подозреваемый=suspect":
     cefr_level: B2
     learn: false
+    lemma: "подозревать=to suspect"
     accented: "подозрева́емый"
     en_gb:
       standard: "suspect"
@@ -8710,6 +8985,7 @@ words:
   "подпишите=sign":
     cefr_level: A2
     learn: false
+    lemma: "подписать=to sign"
     accented: "подпиши́те"
     en_gb:
       standard: "sign"
@@ -8782,12 +9058,14 @@ words:
   "подумав=having thought":
     cefr_level: B1
     learn: false
+    lemma: "подумать=to think"
     accented: "поду́мав"
     en_gb:
       standard: "having thought (gerund of подумать)"
   "подумай=think it over":
     cefr_level: A2
     learn: false
+    lemma: "подумать=to think"
     accented: "поду́май"
     en_gb:
       standard: "think it over"
@@ -8800,6 +9078,7 @@ words:
   "подходи=come near":
     cefr_level: A1
     learn: false
+    lemma: "подходить=to approach"
     accented: "подходи́"
     en_gb:
       standard: "come near"
@@ -8812,6 +9091,7 @@ words:
   "подчеркните=underline":
     cefr_level: B1
     learn: false
+    lemma: "подчеркнуть=to underline"
     accented: "подчеркни́те"
     en_gb:
       standard: "underline (imperative, formal)"
@@ -8878,12 +9158,14 @@ words:
   "позавтракай=have breakfast":
     cefr_level: B1
     learn: false
+    lemma: "позавтракать=to have breakfast"
     accented: "поза́втракай"
     en_gb:
       standard: "have breakfast (imperative of позавтракать)"
   "позвони=call":
     cefr_level: B1
     learn: false
+    lemma: "позвонить=to call"
     accented: "позвони́"
     en_gb:
       standard: "call (imperative)"
@@ -8908,6 +9190,7 @@ words:
   "поздравляли=were congratulating":
     cefr_level: B1
     learn: false
+    lemma: "поздравлять=to congratulate"
     accented: "поздравля́ли"
     en_gb:
       standard: "were congratulating"
@@ -8920,6 +9203,7 @@ words:
   "позови=call":
     cefr_level: A2
     learn: false
+    lemma: "позвать=to call"
     accented: "позови́"
     en_gb:
       standard: "call (imperative)"
@@ -8938,18 +9222,21 @@ words:
   "пойди=go":
     cefr_level: B1
     learn: false
+    lemma: "пойти=to go"
     accented: "пойди́"
     en_gb:
       standard: "go (imperative)"
   "покажи=show":
     cefr_level: A2
     learn: false
+    lemma: "показать=to show"
     accented: "покажи́"
     en_gb:
       standard: "show (imperative)"
   "покажите=show":
     cefr_level: A2
     learn: false
+    lemma: "показать=to show"
     accented: "покажи́те"
     en_gb:
       standard: "show"
@@ -9106,18 +9393,21 @@ words:
   "полезен=good for health":
     cefr_level: B1
     learn: false
+    lemma: "полезный=useful"
     accented: "поле́зен"
     en_gb:
       standard: "good for health"
   "полезна=beneficial":
     cefr_level: B1
     learn: false
+    lemma: "полезный=useful"
     accented: "поле́зна"
     en_gb:
       standard: "beneficial"
   "полезны=beneficial":
     cefr_level: B1
     learn: false
+    lemma: "полезный=useful"
     accented: "поле́зны"
     en_gb:
       standard: "beneficial"
@@ -9136,12 +9426,14 @@ words:
   "полна=full":
     cefr_level: B1
     learn: false
+    lemma: "полный=full"
     accented: "полна́"
     en_gb:
       standard: "full (feminine)"
   "полно=full of":
     cefr_level: A2
     learn: false
+    lemma: "полный=full"
     accented: "полно́"
     en_gb:
       standard: "full of"
@@ -9154,18 +9446,21 @@ words:
   "полны=full":
     cefr_level: B1
     learn: false
+    lemma: "полный=full"
     accented: "полны́"
     en_gb:
       standard: "full"
   "положи=put":
     cefr_level: A1
     learn: false
+    lemma: "положить=to put"
     accented: "положи́"
     en_gb:
       standard: "put (imperative)"
   "полон=full":
     cefr_level: A2
     learn: false
+    lemma: "полный=full"
     accented: "по́лон"
     en_gb:
       standard: "full (masculine)"
@@ -9262,12 +9557,14 @@ words:
   "помоги=help":
     cefr_level: B1
     learn: false
+    lemma: "помочь=to help"
     accented: "помоги́"
     en_gb:
       standard: "help (imperative)"
   "помогите=help":
     cefr_level: A1
     learn: false
+    lemma: "помочь=to help"
     accented: "помоги́те"
     en_gb:
       standard: "help (imperative)"
@@ -9328,18 +9625,21 @@ words:
   "поправьте=correct":
     cefr_level: B1
     learn: false
+    lemma: "поправить=to correct"
     accented: "попра́вьте"
     en_gb:
       standard: "correct (imperative, formal)"
   "попробуй=try":
     cefr_level: A2
     learn: false
+    lemma: "попробовать=to try"
     accented: "попро́буй"
     en_gb:
       standard: "try (imperative)"
   "попроси=ask":
     cefr_level: A2
     learn: false
+    lemma: "попросить=to ask for"
     accented: "попроси́"
     en_gb:
       standard: "ask (imperative)"
@@ -9358,6 +9658,7 @@ words:
   "популярное=popular":
     cefr_level: A2
     learn: false
+    lemma: "популярный=popular"
     accented: "популя́рное"
     en_gb:
       standard: "popular"
@@ -9490,6 +9791,7 @@ words:
   "послушай=listen":
     cefr_level: A2
     learn: false
+    lemma: "послушать=to listen to"
     accented: "послу́шай"
     en_gb:
       standard: "listen (imperative)"
@@ -9502,6 +9804,7 @@ words:
   "посмотри=look":
     cefr_level: A2
     learn: false
+    lemma: "посмотреть=to look"
     accented: "посмотри́"
     en_gb:
       standard: "look (imperative)"
@@ -9526,18 +9829,21 @@ words:
   "поставь=put":
     cefr_level: A2
     learn: false
+    lemma: "поставить=to put"
     accented: "поста́вь"
     en_gb:
       standard: "put (imperative)"
   "поставьте=put":
     cefr_level: B2
     learn: false
+    lemma: "поставить=to put"
     accented: "поста́вьте"
     en_gb:
       standard: "put (imperative, formal)"
   "постарайтесь=try hard":
     cefr_level: B1
     learn: false
+    lemma: "постараться=to try hard"
     accented: "постара́йтесь"
     en_gb:
       standard: "try hard (imperative, formal)"
@@ -9556,6 +9862,7 @@ words:
   "построен=built":
     cefr_level: B1
     learn: false
+    lemma: "построить=to build"
     accented: "постро́ен"
     en_gb:
       standard: "built (short passive)"
@@ -9646,6 +9953,7 @@ words:
   "потеряй=lose":
     cefr_level: A2
     learn: false
+    lemma: "потерять=to lose"
     accented: "потеря́й"
     en_gb:
       standard: "lose (imperative)"
@@ -9664,12 +9972,14 @@ words:
   "потерянном=lost":
     cefr_level: B1
     learn: false
+    lemma: "потерять=to lose"
     accented: "поте́рянном"
     en_gb:
       standard: "lost"
   "потерянный=lost":
     cefr_level: B1
     learn: false
+    lemma: "потерять=to lose"
     accented: "поте́рянный"
     en_gb:
       standard: "lost"
@@ -9694,12 +10004,14 @@ words:
   "потратил=spent":
     cefr_level: A1
     learn: false
+    lemma: "потратить=to spend"
     accented: "потра́тил"
     en_gb:
       standard: "spent"
   "потратили=spent":
     cefr_level: B2
     learn: false
+    lemma: "потратить=to spend"
     accented: "потра́тили"
     en_gb:
       standard: "spent"
@@ -9742,18 +10054,21 @@ words:
   "похож=looks like":
     cefr_level: B2
     learn: false
+    lemma: "похожий=similar"
     accented: "похо́ж"
     en_gb:
       standard: "looks like"
   "похожа=looks like":
     cefr_level: A2
     learn: false
+    lemma: "похожий=similar"
     accented: "похо́жа"
     en_gb:
       standard: "looks like"
   "похожи=similar":
     cefr_level: A2
     learn: false
+    lemma: "похожий=similar"
     accented: "похо́жи"
     en_gb:
       standard: "similar, alike"
@@ -9832,12 +10147,14 @@ words:
   "праздновал=celebrated":
     cefr_level: B1
     learn: false
+    lemma: "праздновать=to celebrate"
     accented: "пра́здновал"
     en_gb:
       standard: "celebrated"
   "празднуем=celebrate":
     cefr_level: A1
     learn: false
+    lemma: "праздновать=to celebrate"
     accented: "пра́зднуем"
     en_gb:
       standard: "celebrate"
@@ -9886,6 +10203,7 @@ words:
   "представьте=imagine":
     cefr_level: B1
     learn: false
+    lemma: "представить=to present"
     accented: "предста́вьте"
     en_gb:
       standard: "imagine (imperative, formal)"
@@ -9898,6 +10216,7 @@ words:
   "прекрасна=beautiful":
     cefr_level: A1
     learn: false
+    lemma: "прекрасный=beautiful"
     accented: "прекра́сна"
     en_gb:
       standard: "beautiful"
@@ -9940,6 +10259,7 @@ words:
   "приведи=bring":
     cefr_level: B1
     learn: false
+    lemma: "привести=to bring"
     accented: "приведи́"
     en_gb:
       standard: "bring (imperative)"
@@ -10000,6 +10320,7 @@ words:
   "прикрой=cover":
     cefr_level: B2
     learn: false
+    lemma: "прикрыть=to cover"
     accented: "прикро́й"
     en_gb:
       standard: "cover (imperative)"
@@ -10036,12 +10357,14 @@ words:
   "прилетел=arrived":
     cefr_level: A2
     learn: false
+    lemma: "прилететь=to arrive by air"
     accented: "прилете́л"
     en_gb:
       standard: "arrived (by air)"
   "прилетели=flew":
     cefr_level: A2
     learn: false
+    lemma: "прилететь=to arrive by air"
     accented: "прилете́ли"
     en_gb:
       standard: "flew"
@@ -10054,12 +10377,14 @@ words:
   "принеси=bring":
     cefr_level: A2
     learn: false
+    lemma: "принести=to bring"
     accented: "принеси́"
     en_gb:
       standard: "bring (imperative)"
   "принесите=bring":
     cefr_level: B1
     learn: false
+    lemma: "принести=to bring"
     accented: "принеси́те"
     en_gb:
       standard: "bring (imperative, formal)"
@@ -10078,18 +10403,21 @@ words:
   "принят=passed":
     cefr_level: B1
     learn: false
+    lemma: "принять=to accept"
     accented: "при́нят"
     en_gb:
       standard: "passed"
   "принято=it is customary":
     cefr_level: B1
     learn: false
+    lemma: "принять=to accept"
     accented: "при́нято"
     en_gb:
       standard: "it is customary"
   "приняты=taken":
     cefr_level: B2
     learn: false
+    lemma: "принять=to accept"
     accented: "при́няты"
     en_gb:
       standard: "taken (decisions, plural passive)"
@@ -10150,6 +10478,7 @@ words:
   "присядь=sit down":
     cefr_level: B1
     learn: false
+    lemma: "присесть=to sit down"
     accented: "прися́дь"
     en_gb:
       standard: "sit down"
@@ -10204,6 +10533,7 @@ words:
   "пробежал=ran":
     cefr_level: A2
     learn: false
+    lemma: "пробежать=to run"
     accented: "пробежа́л"
     en_gb:
       standard: "ran"
@@ -10246,12 +10576,14 @@ words:
   "проверь=check":
     cefr_level: A2
     learn: false
+    lemma: "проверить=to check"
     accented: "прове́рь"
     en_gb:
       standard: "check"
   "проверьте=check":
     cefr_level: B1
     learn: false
+    lemma: "проверить=to check"
     accented: "прове́рьте"
     en_gb:
       standard: "check (imperative)"
@@ -10306,12 +10638,14 @@ words:
   "проехал=drove past":
     cefr_level: B1
     learn: false
+    lemma: "проехать=to drive past"
     accented: "прое́хал"
     en_gb:
       standard: "drove past"
   "проехали=drove":
     cefr_level: A2
     learn: false
+    lemma: "проехать=to drive past"
     accented: "прое́хали"
     en_gb:
       standard: "drove (traveled)"
@@ -10426,6 +10760,7 @@ words:
   "пропавшего=the missing person":
     cefr_level: B1
     learn: false
+    lemma: "пропасть=to vanish"
     accented: "пропа́вшего"
     en_gb:
       standard: "the missing person"
@@ -10450,6 +10785,7 @@ words:
   "пропусти=don't miss":
     cefr_level: B1
     learn: false
+    lemma: "пропустить=to miss"
     accented: "пропусти́"
     en_gb:
       standard: "don't miss"
@@ -10462,12 +10798,14 @@ words:
   "проспи=oversleep":
     cefr_level: B1
     learn: false
+    lemma: "проспать=to oversleep"
     accented: "проспи́"
     en_gb:
       standard: "oversleep (imperative of проспать)"
   "прости=forgive":
     cefr_level: B1
     learn: false
+    lemma: "простить=to forgive"
     accented: "прости́"
     en_gb:
       standard: "forgive"
@@ -10594,12 +10932,14 @@ words:
   "прочитай=read":
     cefr_level: B2
     learn: false
+    lemma: "прочитать=to read"
     accented: "прочита́й"
     en_gb:
       standard: "read (imperative)"
   "прочитайте=read":
     cefr_level: B1
     learn: false
+    lemma: "прочитать=to read"
     accented: "прочита́йте"
     en_gb:
       standard: "read"
@@ -10642,12 +10982,14 @@ words:
   "пруда=pond":
     cefr_level: B1
     learn: false
+    lemma: "пруд=pond"
     accented: "пруда́"
     en_gb:
       standard: "pond"
   "пруду=pond":
     cefr_level: B1
     learn: false
+    lemma: "пруд=pond"
     accented: "пруду́"
     en_gb:
       standard: "pond"
@@ -10696,12 +11038,14 @@ words:
   "пусти=let in":
     cefr_level: B1
     learn: false
+    lemma: "пустить=to let"
     accented: "пусти́"
     en_gb:
       standard: "let in"
   "пусты=empty":
     cefr_level: B1
     learn: false
+    lemma: "пустой=empty"
     accented: "пусты́"
     en_gb:
       standard: "empty"
@@ -10816,6 +11160,7 @@ words:
   "равнине=plain":
     cefr_level: B1
     learn: false
+    lemma: "равнина=plain"
     accented: "равни́не"
     en_gb:
       standard: "plain (flat land)"
@@ -10828,6 +11173,7 @@ words:
   "радостен=joyful":
     cefr_level: B2
     learn: false
+    lemma: "радостный=joyful"
     accented: "ра́достен"
     en_gb:
       standard: "joyful"
@@ -10840,12 +11186,14 @@ words:
   "рады=glad":
     cefr_level: B1
     learn: false
+    lemma: "рад=glad"
     accented: "ра́ды"
     en_gb:
       standard: "glad (plural)"
   "раза=times":
     cefr_level: A2
     learn: false
+    lemma: "раз=time"
     accented: "ра́за"
     en_gb:
       standard: "times (genitive)"
@@ -10882,6 +11230,7 @@ words:
   "разбуди=wake up":
     cefr_level: A2
     learn: false
+    lemma: "разбудить=to wake up"
     accented: "разбуди́"
     en_gb:
       standard: "wake up"
@@ -10978,18 +11327,21 @@ words:
   "раздели=divide":
     cefr_level: B1
     learn: false
+    lemma: "разделить=to divide"
     accented: "раздели́"
     en_gb:
       standard: "divide (imperative)"
   "разделили=divided":
     cefr_level: B1
     learn: false
+    lemma: "разделить=to divide"
     accented: "раздели́ли"
     en_gb:
       standard: "divided"
   "разденься=get undressed":
     cefr_level: B1
     learn: false
+    lemma: "раздеться=to get undressed"
     accented: "разде́нься"
     en_gb:
       standard: "get undressed"
@@ -11182,6 +11534,7 @@ words:
   "расскажи=tell":
     cefr_level: B1
     learn: false
+    lemma: "рассказать=to tell"
     accented: "расскажи́"
     en_gb:
       standard: "tell (imperative)"
@@ -11212,6 +11565,7 @@ words:
   "расстегни=undo":
     cefr_level: B1
     learn: false
+    lemma: "расстегнуть=to unfasten"
     accented: "расстегни́"
     en_gb:
       standard: "undo (unbutton)"
@@ -11230,6 +11584,7 @@ words:
   "расстроился=was upset":
     cefr_level: B1
     learn: false
+    lemma: "расстроиться=to get upset"
     accented: "расстро́ился"
     en_gb:
       standard: "was upset"
@@ -11242,12 +11597,14 @@ words:
   "растения=plants":
     cefr_level: B2
     learn: false
+    lemma: "растение=plant"
     accented: "расте́ния"
     en_gb:
       standard: "plants"
   "растеряйся=get flustered":
     cefr_level: B1
     learn: false
+    lemma: "растеряться=to be at a loss"
     accented: "растеря́йся"
     en_gb:
       standard: "get flustered"
@@ -11266,6 +11623,7 @@ words:
   "рви=tear":
     cefr_level: B1
     learn: false
+    lemma: "рвать=to tear"
     accented: "рви"
     en_gb:
       standard: "tear (don't tear)"
@@ -11308,6 +11666,7 @@ words:
   "ремонтируют=are repairing":
     cefr_level: B2
     learn: false
+    lemma: "ремонтировать=to repair"
     accented: "ремонти́руют"
     en_gb:
       standard: "are repairing"
@@ -11326,18 +11685,21 @@ words:
   "решай=decide":
     cefr_level: B2
     learn: false
+    lemma: "решать=to decide"
     accented: "реша́й"
     en_gb:
       standard: "decide"
   "решающий=decisive":
     cefr_level: A2
     learn: false
+    lemma: "решать=to decide"
     accented: "реша́ющий"
     en_gb:
       standard: "decisive"
   "реши=decide":
     cefr_level: B1
     learn: false
+    lemma: "решить=to decide"
     accented: "реши́"
     en_gb:
       standard: "decide (imperative)"
@@ -11422,12 +11784,14 @@ words:
   "ругайся=swear":
     cefr_level: B1
     learn: false
+    lemma: "ругаться=to swear"
     accented: "руга́йся"
     en_gb:
       standard: "swear (don't swear)"
   "руководил=led":
     cefr_level: B2
     learn: false
+    lemma: "руководить=to lead"
     accented: "руководи́л"
     en_gb:
       standard: "led (commanded)"
@@ -11482,6 +11846,7 @@ words:
   "садись=sit down":
     cefr_level: B1
     learn: false
+    lemma: "садиться=to sit down"
     accented: "сади́сь"
     en_gb:
       standard: "sit down"
@@ -11554,18 +11919,21 @@ words:
   "свари=cook":
     cefr_level: B1
     learn: false
+    lemma: "сварить=to boil"
     accented: "свари́"
     en_gb:
       standard: "cook, boil (imperative of сварить)"
   "сварил=boiled":
     cefr_level: A2
     learn: false
+    lemma: "сварить=to boil"
     accented: "сва́рил"
     en_gb:
       standard: "boiled (cooked)"
   "сварила=made":
     cefr_level: A2
     learn: false
+    lemma: "сварить=to boil"
     accented: "сва́рила"
     en_gb:
       standard: "made (cooked)"
@@ -11584,6 +11952,7 @@ words:
   "сверни=turn":
     cefr_level: B1
     learn: false
+    lemma: "свернуть=to turn"
     accented: "сверни́"
     en_gb:
       standard: "turn (take a turn)"
@@ -11626,6 +11995,7 @@ words:
   "свободна=clear":
     cefr_level: A2
     learn: false
+    lemma: "свободный=free"
     accented: "свобо́дна"
     en_gb:
       standard: "clear (free)"
@@ -11662,6 +12032,7 @@ words:
   "сдай=hand in":
     cefr_level: A2
     learn: false
+    lemma: "сдать=to hand in"
     accented: "сдай"
     en_gb:
       standard: "hand in"
@@ -11686,6 +12057,7 @@ words:
   "сдают=hand in":
     cefr_level: A2
     learn: false
+    lemma: "сдавать=to hand in"
     accented: "сдаю́т"
     en_gb:
       standard: "hand in"
@@ -11698,30 +12070,35 @@ words:
   "сделай=make":
     cefr_level: A2
     learn: false
+    lemma: "сделать=to do/make"
     accented: "сде́лай"
     en_gb:
       standard: "make (imperative)"
   "сделан=made":
     cefr_level: A2
     learn: false
+    lemma: "сделать=to do/make"
     accented: "сде́лан"
     en_gb:
       standard: "made"
   "сделана=made":
     cefr_level: B2
     learn: false
+    lemma: "сделать=to do/make"
     accented: "сде́лана"
     en_gb:
       standard: "made (feminine passive)"
   "сделано=done":
     cefr_level: A2
     learn: false
+    lemma: "сделать=to do/make"
     accented: "сде́лано"
     en_gb:
       standard: "done"
   "сделаны=made":
     cefr_level: A2
     learn: false
+    lemma: "сделать=to do/make"
     accented: "сде́ланы"
     en_gb:
       standard: "made"
@@ -11782,6 +12159,7 @@ words:
   "семена=seeds":
     cefr_level: A1
     learn: false
+    lemma: "семя=seed"
     accented: "семена́"
     en_gb:
       standard: "seeds"
@@ -11848,12 +12226,14 @@ words:
   "сибири=Siberia":
     cefr_level: B2
     learn: false
+    lemma: "сибирь=Siberia"
     accented: "сиби́ри"
     en_gb:
       standard: "Siberia"
   "сиди=sit":
     cefr_level: A2
     learn: false
+    lemma: "сидеть=to sit"
     accented: "сиди́"
     en_gb:
       standard: "sit (imperative)"
@@ -11884,6 +12264,7 @@ words:
   "скажи=tell":
     cefr_level: A2
     learn: false
+    lemma: "сказать=to say"
     accented: "скажи́"
     en_gb:
       standard: "tell"
@@ -11902,12 +12283,14 @@ words:
   "скачай=download":
     cefr_level: B1
     learn: false
+    lemma: "скачать=to download"
     accented: "скача́й"
     en_gb:
       standard: "download (imperative of скачать)"
   "скачал=downloaded":
     cefr_level: B1
     learn: false
+    lemma: "скачать=to download"
     accented: "скача́л"
     en_gb:
       standard: "downloaded"
@@ -11968,6 +12351,7 @@ words:
   "скопируй=copy":
     cefr_level: B1
     learn: false
+    lemma: "скопировать=to copy"
     accented: "скопи́руй"
     en_gb:
       standard: "copy (imperative of скопировать)"
@@ -12016,6 +12400,7 @@ words:
   "сладко=sweetly":
     cefr_level: A2
     learn: false
+    lemma: "сладкий=sweet"
     accented: "сла́дко"
     en_gb:
       standard: "sweetly"
@@ -12076,24 +12461,28 @@ words:
   "сломан=broken":
     cefr_level: A1
     learn: false
+    lemma: "сломать=to break"
     accented: "сло́ман"
     en_gb:
       standard: "broken (masc.)"
   "сломана=broken":
     cefr_level: B1
     learn: false
+    lemma: "сломать=to break"
     accented: "сло́мана"
     en_gb:
       standard: "broken (fem.)"
   "сломанный=broken":
     cefr_level: B1
     learn: false
+    lemma: "сломать=to break"
     accented: "сло́манный"
     en_gb:
       standard: "broken"
   "сломано=broken":
     cefr_level: B1
     learn: false
+    lemma: "сломать=to break"
     accented: "сло́мано"
     en_gb:
       standard: "broken (neut.)"
@@ -12106,24 +12495,28 @@ words:
   "случае=case":
     cefr_level: B1
     learn: false
+    lemma: "случай=case"
     accented: "слу́чае"
     en_gb:
       standard: "case (prepositional)"
   "случаи=cases, instances":
     cefr_level: B1
     learn: false
+    lemma: "случай=case"
     accented: "слу́чаи"
     en_gb:
       standard: "cases, instances"
   "случаю=chance, occasion":
     cefr_level: B1
     learn: false
+    lemma: "случай=case"
     accented: "слу́чаю"
     en_gb:
       standard: "chance, occasion"
   "слушай=listen":
     cefr_level: A2
     learn: false
+    lemma: "слушать=to listen"
     accented: "слу́шай"
     en_gb:
       standard: "listen (imperative)"
@@ -12184,6 +12577,7 @@ words:
   "смотри=see":
     cefr_level: B1
     learn: false
+    lemma: "смотреть=to watch"
     accented: "смотри́"
     en_gb:
       standard: "see (look below)"
@@ -12220,24 +12614,28 @@ words:
   "снизила=reduced, lowered":
     cefr_level: B1
     learn: false
+    lemma: "снизить=to reduce"
     accented: "сни́зила"
     en_gb:
       standard: "reduced, lowered"
   "сними=take off":
     cefr_level: B1
     learn: false
+    lemma: "снять=to take off"
     accented: "сними́"
     en_gb:
       standard: "take off"
   "снимите=take off":
     cefr_level: B1
     learn: false
+    lemma: "снять=to take off"
     accented: "сни́мите"
     en_gb:
       standard: "take off (imperative, polite)"
   "снятся=are dreamed":
     cefr_level: A2
     learn: false
+    lemma: "сниться=to be dreamt"
     accented: "сня́тся"
     en_gb:
       standard: "are dreamed (of dreams)"
@@ -12250,6 +12648,7 @@ words:
   "собери=gather, collect":
     cefr_level: A2
     learn: false
+    lemma: "собрать=to collect"
     accented: "собери́"
     en_gb:
       standard: "gather, collect (imperative)"
@@ -12292,6 +12691,7 @@ words:
   "собраны=collected, gathered":
     cefr_level: B2
     learn: false
+    lemma: "собрать=to collect"
     accented: "собра́ны"
     en_gb:
       standard: "collected, gathered"
@@ -12304,30 +12704,35 @@ words:
   "согласен=agree":
     cefr_level: B1
     learn: false
+    lemma: "согласный=agreeable"
     accented: "согла́сен"
     en_gb:
       standard: "agree"
   "согласии=harmony, agreement":
     cefr_level: B1
     learn: false
+    lemma: "согласие=agreement"
     accented: "согла́сии"
     en_gb:
       standard: "harmony, agreement"
   "согласия=agreement":
     cefr_level: A2
     learn: false
+    lemma: "согласие=agreement"
     accented: "согла́сия"
     en_gb:
       standard: "agreement"
   "согласна=agrees":
     cefr_level: B2
     learn: false
+    lemma: "согласный=agreeable"
     accented: "согла́сна"
     en_gb:
       standard: "agrees (fem.)"
   "согласны=agree":
     cefr_level: B1
     learn: false
+    lemma: "согласный=agreeable"
     accented: "согла́сны"
     en_gb:
       standard: "agree"
@@ -12346,6 +12751,7 @@ words:
   "сожалений=regrets":
     cefr_level: B1
     learn: false
+    lemma: "сожаление=regret"
     accented: "сожале́ний"
     en_gb:
       standard: "regrets"
@@ -12466,6 +12872,7 @@ words:
   "сотри=erase":
     cefr_level: B1
     learn: false
+    lemma: "стереть=to erase"
     accented: "сотри́"
     en_gb:
       standard: "erase, wipe (imperative of стереть)"
@@ -12532,6 +12939,7 @@ words:
   "спеши=rush, hurry":
     cefr_level: A2
     learn: false
+    lemma: "спешить=to hurry"
     accented: "спеши́"
     en_gb:
       standard: "rush, hurry (imperative)"
@@ -12622,6 +13030,7 @@ words:
   "способен=capable":
     cefr_level: B1
     learn: false
+    lemma: "способный=capable"
     accented: "спосо́бен"
     en_gb:
       standard: "capable"
@@ -12634,6 +13043,7 @@ words:
   "справедливо=justly, fairly":
     cefr_level: B2
     learn: false
+    lemma: "справедливый=just"
     accented: "справедли́во"
     en_gb:
       standard: "justly, fairly"
@@ -12652,6 +13062,7 @@ words:
   "спроси=ask":
     cefr_level: A2
     learn: false
+    lemma: "спросить=to ask"
     accented: "спроси́"
     en_gb:
       standard: "ask"
@@ -12700,6 +13111,7 @@ words:
   "средствами=funds":
     cefr_level: B1
     learn: false
+    lemma: "средство=means"
     accented: "сре́дствами"
     en_gb:
       standard: "funds"
@@ -12730,6 +13142,7 @@ words:
   "ссорься=quarrel":
     cefr_level: B1
     learn: false
+    lemma: "ссориться=to quarrel"
     accented: "ссо́рься"
     en_gb:
       standard: "quarrel (imperative of ссориться)"
@@ -12748,6 +13161,7 @@ words:
   "ставь=put, place":
     cefr_level: B1
     learn: false
+    lemma: "ставить=to place"
     accented: "ставь"
     en_gb:
       standard: "put, place (imperative)"
@@ -12760,6 +13174,7 @@ words:
   "стар=old":
     cefr_level: A1
     learn: false
+    lemma: "старый=old"
     accented: "стар"
     en_gb:
       standard: "old"
@@ -12808,6 +13223,7 @@ words:
   "стёр=erased":
     cefr_level: A2
     learn: false
+    lemma: "стереть=to erase"
     accented: "стёр"
     en_gb:
       standard: "erased"
@@ -12826,6 +13242,7 @@ words:
   "стой=stand":
     cefr_level: B1
     learn: false
+    lemma: "стоять=to stand"
     accented: "стой"
     en_gb:
       standard: "stand"
@@ -12940,24 +13357,28 @@ words:
   "суди=judge":
     cefr_level: B1
     learn: false
+    lemma: "судить=to judge"
     accented: "суди́"
     en_gb:
       standard: "judge (imperative)"
   "судя=judging":
     cefr_level: B1
     learn: false
+    lemma: "судить=to judge"
     accented: "су́дя"
     en_gb:
       standard: "judging (gerund, as in 'судя по' — judging by)"
   "сунь=stick, put":
     cefr_level: B1
     learn: false
+    lemma: "сунуть=to shove"
     accented: "сунь"
     en_gb:
       standard: "stick, put (imperative)"
   "сухо=dry":
     cefr_level: A2
     learn: false
+    lemma: "сухой=dry"
     accented: "сухо́"
     en_gb:
       standard: "dry (it is)"
@@ -13000,6 +13421,7 @@ words:
   "счастлив=happy":
     cefr_level: B1
     learn: false
+    lemma: "счастливый=happy"
     accented: "сча́стлив"
     en_gb:
       standard: "happy"
@@ -13162,6 +13584,7 @@ words:
   "тепла=above zero":
     cefr_level: B1
     learn: false
+    lemma: "тёплый=warm"
     accented: "тепла́"
     en_gb:
       standard: "above zero (degrees of warmth)"
@@ -13198,6 +13621,7 @@ words:
   "тесен=tight":
     cefr_level: B1
     learn: false
+    lemma: "тесный=tight"
     accented: "те́сен"
     en_gb:
       standard: "tight, cramped"
@@ -13258,6 +13682,7 @@ words:
   "торопись=hurry":
     cefr_level: A2
     learn: false
+    lemma: "торопиться=to hurry"
     accented: "торопи́сь"
     en_gb:
       standard: "hurry (imperative)"
@@ -13282,6 +13707,7 @@ words:
   "трать=spend":
     cefr_level: B1
     learn: false
+    lemma: "тратить=to spend"
     accented: "трать"
     en_gb:
       standard: "spend (imperative)"
@@ -13324,6 +13750,7 @@ words:
   "трогай=touch":
     cefr_level: B2
     learn: false
+    lemma: "трогать=to touch"
     accented: "тро́гай"
     en_gb:
       standard: "touch"
@@ -13372,6 +13799,7 @@ words:
   "трудна=difficult":
     cefr_level: B1
     learn: false
+    lemma: "трудный=difficult"
     accented: "трудна́"
     en_gb:
       standard: "difficult"
@@ -13456,6 +13884,7 @@ words:
   "тюльпаны=tulips":
     cefr_level: B2
     learn: false
+    lemma: "тюльпан=tulip"
     accented: "тюльпа́ны"
     en_gb:
       standard: "tulips"
@@ -13468,6 +13897,7 @@ words:
   "убери=tidy":
     cefr_level: A1
     learn: false
+    lemma: "убрать=to remove"
     accented: убери́
     en_gb:
       standard: "tidy away (imperative)"
@@ -13480,12 +13910,14 @@ words:
   "уверен=sure, certain":
     cefr_level: A2
     learn: false
+    lemma: "уверенный=confident"
     accented: "уве́рен"
     en_gb:
       standard: "sure, certain"
   "увидев=having seen":
     cefr_level: B2
     learn: false
+    lemma: "увидеть=to see"
     accented: "уви́дев"
     en_gb:
       standard: "having seen"
@@ -13498,6 +13930,7 @@ words:
   "увлекается=is keen on":
     cefr_level: B2
     learn: false
+    lemma: "увлекаться=to be keen on"
     accented: "увлека́ется"
     en_gb:
       standard: "is keen on"
@@ -13516,6 +13949,7 @@ words:
   "угодно=pleases":
     cefr_level: B2
     learn: false
+    lemma: "угодный=pleasing"
     accented: "уго́дно"
     en_gb:
       standard: "pleases (whatever one likes)"
@@ -13540,6 +13974,7 @@ words:
   "удали=delete":
     cefr_level: B1
     learn: false
+    lemma: "удалить=to delete"
     accented: "удали́"
     en_gb:
       standard: "delete, remove (imperative of удалить)"
@@ -13570,6 +14005,7 @@ words:
   "удержись=restrain yourself":
     cefr_level: B1
     learn: false
+    lemma: "удержаться=to hold on"
     accented: "удержи́сь"
     en_gb:
       standard: "restrain yourself"
@@ -13600,6 +14036,7 @@ words:
   "удивись=be surprised":
     cefr_level: B1
     learn: false
+    lemma: "удивиться=to be surprised"
     accented: "удиви́сь"
     en_gb:
       standard: "be surprised"
@@ -13618,18 +14055,21 @@ words:
   "удивляйся=be surprised":
     cefr_level: B1
     learn: false
+    lemma: "удивляться=to be surprised"
     accented: "удивля́йся"
     en_gb:
       standard: "be surprised"
   "удобна=convenient":
     cefr_level: A2
     learn: false
+    lemma: "удобный=comfortable"
     accented: "удо́бна"
     en_gb:
       standard: "convenient"
   "удобно=comfortable":
     cefr_level: A2
     learn: false
+    lemma: "удобный=comfortable"
     accented: "удо́бно"
     en_gb:
       standard: "comfortable"
@@ -13678,6 +14118,7 @@ words:
   "укажите=indicate, provide":
     cefr_level: B1
     learn: false
+    lemma: "указать=to indicate"
     accented: "укажи́те"
     en_gb:
       standard: "indicate, provide"
@@ -13696,6 +14137,7 @@ words:
   "украденное=stolen goods":
     cefr_level: B1
     learn: false
+    lemma: "украсть=to steal"
     accented: "укра́денное"
     en_gb:
       standard: "stolen goods"
@@ -13738,6 +14180,7 @@ words:
   "укусил=bit":
     cefr_level: B1
     learn: false
+    lemma: "укусить=to bite"
     accented: "уку́сил"
     en_gb:
       standard: "bit"
@@ -13786,6 +14229,7 @@ words:
   "уложи=put to bed":
     cefr_level: B1
     learn: false
+    lemma: "уложить=to put to bed"
     accented: "уложи́"
     en_gb:
       standard: "put to bed"
@@ -13816,12 +14260,14 @@ words:
   "улыбнись=smile":
     cefr_level: A2
     learn: false
+    lemma: "улыбнуться=to smile"
     accented: "улыбни́сь"
     en_gb:
       standard: "smile"
   "умножь=multiply":
     cefr_level: B1
     learn: false
+    lemma: "умножить=to multiply"
     accented: "умно́жь"
     en_gb:
       standard: "multiply (imperative of умножить)"
@@ -13852,12 +14298,14 @@ words:
   "уничтожь=destroy":
     cefr_level: B1
     learn: false
+    lemma: "уничтожить=to destroy"
     accented: "уничто́жь"
     en_gb:
       standard: "destroy"
   "упади=fall":
     cefr_level: A2
     learn: false
+    lemma: "упасть=to fall"
     accented: "упади́"
     en_gb:
       standard: "fall"
@@ -13918,18 +14366,21 @@ words:
   "усилий=efforts":
     cefr_level: B1
     learn: false
+    lemma: "усилие=effort"
     accented: "уси́лий"
     en_gb:
       standard: "efforts"
   "усилия=effort":
     cefr_level: B2
     learn: false
+    lemma: "усилие=effort"
     accented: "уси́лия"
     en_gb:
       standard: "effort"
   "услышав=having heard":
     cefr_level: B1
     learn: false
+    lemma: "услышать=to hear"
     accented: "услы́шав"
     en_gb:
       standard: "having heard"
@@ -13954,6 +14405,7 @@ words:
   "успокойся=calm down":
     cefr_level: B1
     learn: false
+    lemma: "успокоиться=to calm down"
     accented: "успоко́йся"
     en_gb:
       standard: "calm down"
@@ -13966,6 +14418,7 @@ words:
   "уставься=stare":
     cefr_level: B1
     learn: false
+    lemma: "уставиться=to stare"
     accented: "уста́вься"
     en_gb:
       standard: "stare"
@@ -13996,6 +14449,7 @@ words:
   "устройств=devices":
     cefr_level: B1
     learn: false
+    lemma: "устройство=device"
     accented: "устро́йств"
     en_gb:
       standard: "devices"
@@ -14056,6 +14510,7 @@ words:
   "уходи=go away":
     cefr_level: A2
     learn: false
+    lemma: "уходить=to leave"
     accented: "уходи́"
     en_gb:
       standard: "go away"
@@ -14134,6 +14589,7 @@ words:
   "учти=take into account":
     cefr_level: B1
     learn: false
+    lemma: "учесть=to take into account"
     accented: "учти́"
     en_gb:
       standard: "take into account"
@@ -14146,6 +14602,7 @@ words:
   "ущельем=gorge":
     cefr_level: C1
     learn: false
+    lemma: "ущелье=gorge"
     accented: "уще́льем"
     en_gb:
       standard: "gorge"
@@ -14314,12 +14771,14 @@ words:
   "фотографирую=am taking a photo":
     cefr_level: B1
     learn: false
+    lemma: "фотографировать=to photograph"
     accented: "фотографи́рую"
     en_gb:
       standard: "am taking a photo"
   "фотографируют=photograph":
     cefr_level: A2
     learn: false
+    lemma: "фотографировать=to photograph"
     accented: "фотографи́руют"
     en_gb:
       standard: "photograph"
@@ -14356,6 +14815,7 @@ words:
   "футбольных=football":
     cefr_level: B1
     learn: false
+    lemma: "футбольный=football"
     accented: "футбо́льных"
     en_gb:
       standard: "football"
@@ -14374,6 +14834,7 @@ words:
   "хватай=grab":
     cefr_level: B1
     learn: false
+    lemma: "хватать=to grab"
     accented: "хвата́й"
     en_gb:
       standard: "grab"
@@ -14404,6 +14865,7 @@ words:
   "ходи=go":
     cefr_level: A1
     learn: false
+    lemma: "ходить=to walk"
     accented: "ходи́"
     en_gb:
       standard: "go"
@@ -14662,12 +15124,14 @@ words:
   "читай=read":
     cefr_level: B1
     learn: false
+    lemma: "читать=to read"
     accented: "чита́й"
     en_gb:
       standard: "read"
   "читайте=read":
     cefr_level: B1
     learn: false
+    lemma: "читать=to read"
     accented: "чита́йте"
     en_gb:
       standard: "read (plural)"
@@ -14722,6 +15186,7 @@ words:
   "шевелись=move":
     cefr_level: B1
     learn: false
+    lemma: "шевелиться=to stir"
     accented: "шевели́сь"
     en_gb:
       standard: "move"
@@ -14740,6 +15205,7 @@ words:
   "шепчи=whisper":
     cefr_level: B1
     learn: false
+    lemma: "шептать=to whisper"
     accented: "шепчи́"
     en_gb:
       standard: "whisper (imperative of шептать)"
@@ -14788,6 +15254,7 @@ words:
   "школьники=schoolchildren":
     cefr_level: B2
     learn: false
+    lemma: "школьник=schoolboy"
     accented: "шко́льники"
     en_gb:
       standard: "schoolchildren"
@@ -14836,6 +15303,7 @@ words:
   "шуми=make noise":
     cefr_level: A2
     learn: false
+    lemma: "шуметь=to make noise"
     accented: "шуми́"
     en_gb:
       standard: "make noise"
@@ -14860,12 +15328,14 @@ words:
   "щёлкни=click":
     cefr_level: B1
     learn: false
+    lemma: "щёлкнуть=to click"
     accented: "щёлкни"
     en_gb:
       standard: "click"
   "щенку=puppy":
     cefr_level: B1
     learn: false
+    lemma: "щенок=puppy"
     accented: "щенку́"
     en_gb:
       standard: "puppy"

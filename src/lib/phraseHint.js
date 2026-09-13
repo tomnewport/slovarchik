@@ -20,6 +20,19 @@ const FORM_KEYS = ['accented', 'forms', 'declension', 'conjugation', 'short']
 const STRESS_MARKS = /[\u0301\u0341\u00B4\u02CA]/gu
 
 /**
+ * Does this token carry an acute stress mark?
+ *
+ * Exported because word alignment asks the same question of the same four
+ * codepoints (lib/phraseAlign.js), and a second copy of the set is a second
+ * place to forget when one of them changes.
+ * @param {string} token
+ * @returns {boolean}
+ */
+export function hasStressMark(token) {
+  return new RegExp(STRESS_MARKS.source, 'u').test(String(token ?? ''))
+}
+
+/**
  * Normalise a Russian surface token for matching: stress marks removed, ё→е,
  * lowercased and stripped of everything but letters (so trailing punctuation in
  * "абза́ц." doesn't defeat the lookup). Returns '' for tokens with no letters.
@@ -47,11 +60,6 @@ export function normTokenStress(token) {
     .replace(/ё/g, 'е')
     .replace(STRESS_MARKS, '\u0301')
     .replace(/[^\p{L}\u0301]/gu, '')
-}
-
-/** Whether a surface token carries an acute stress mark. */
-function hasStressMark(token) {
-  return /[\u0301\u0341\u00B4\u02CA]/u.test(String(token ?? ''))
 }
 
 /** Recursively gather every string leaf under a (possibly nested) value. */
@@ -299,10 +307,35 @@ function addSense(index, form, sense) {
  *   word records in dictionary order, each with its forms already keyed by the
  *   normaliser this index uses (see {@link buildFormIndex})
  * @param {(t: string) => string} norm  the normaliser those forms were keyed with
- * @returns {Map<string, {key: string, ru: string, en: string, senses: object[]}>}
+ * @returns {{index: Map<string, {key: string, ru: string, en: string, senses: object[]}>,
+ *   candidates: Map<string, string[]>}} the display index, and beside it the
+ *   full claim list for every form more than one word can surface as — which is
+ *   the question the collision rules above *answer* rather than record, and the
+ *   one `lib/phraseAlign.js` has to re-ask (#706)
  */
 function buildIndex(prepared, norm) {
   const index = new Map()
+  // Every word that can surface as each form, regardless of which one the
+  // collision rules below hand the entry to. The entry answers "what do we
+  // show"; this answers "what could this token be", which is the question
+  // alignment (lib/phraseAlign.js) has to settle. Only genuinely contested
+  // forms are kept — a form claimed by one word needs no candidate list, and
+  // keeping all ~47k of them would cost memory to say nothing.
+  //
+  // Read off the forms `prepared` already carries rather than re-deriving them:
+  // walking a record for its forms is the expensive half of building an index,
+  // and doing it again here would put back the second walk #697 removed.
+  const claims = new Map()
+  for (const { word: w, forms } of prepared) {
+    for (const form of forms) {
+      const seen = claims.get(form)
+      if (seen) seen.push(w.key)
+      else claims.set(form, [w.key])
+    }
+  }
+  /** @type {Map<string, string[]>} */
+  const candidates = new Map()
+  for (const [form, keys] of claims) if (keys.length > 1) candidates.set(form, keys)
   // Gloss-only entries are keyed on a surface form, not on a lemma, so the entries
   // they hold are the ones a real lemma is allowed to join in pass 2.
   const glossOnly = new Set(
@@ -345,7 +378,7 @@ function buildIndex(prepared, norm) {
     }
   }
 
-  return index
+  return { index, candidates }
 }
 
 /**
@@ -358,8 +391,14 @@ function buildIndex(prepared, norm) {
  * assignments below are cast: `buildIndex` returns a plain Map and this is the
  * moment it becomes the richer shape (#666).
  *
+ * `candidates` is the other side of the same coin: for the forms more than one
+ * word can surface as, *every* word that can — not just the one the collision
+ * rules gave the entry to. The entry says what to show; the candidate list says
+ * what the token could be, which is the question `lib/phraseAlign.js` settles.
+ * Forms only one word claims are absent, so a miss means "unambiguous".
+ *
  * @typedef {Map<string, {key: string, ru: string, en: string, senses: object[]}>
- *   & {stressIndex: Map<string, {key: string, ru: string, en: string, senses: object[]}>}} FormIndex
+ *   & {stressIndex: FormIndex, candidates: Map<string, string[]>}} FormIndex
  */
 
 /**
@@ -373,6 +412,10 @@ function buildIndex(prepared, norm) {
  * stress mark kept, so {@link phraseHintTokens} can disambiguate heteronyms that
  * differ only by stress — «по́лке» (shelf) vs «полке́» (regiment), «стоя́т» (stand)
  * vs «сто́ят» (cost) — whenever the phrase token carries its stress mark.
+ *
+ * Both indexes also carry `.candidates`, the full claim list for every contested
+ * form (see the typedef); `lib/phraseAlign.js` reads it to decide which word a
+ * token actually is, rather than inheriting the display entry's guess.
  * @param {object[]} words   normalised word records (from buildWords)
  * @returns {FormIndex}
  */
@@ -400,7 +443,7 @@ export function buildFormIndex(words) {
     base: baseForms(word, normTokenStress),
     forms: wordForms(word, normTokenStress),
   }))
-  const stressIndex = buildIndex(prepared, normTokenStress)
+  const stressed = buildIndex(prepared, normTokenStress)
 
   // …and the second keying is a derivation, not a second run of the pipeline:
   // the plain form of a stress-keyed one is that form with its acute removed
@@ -410,7 +453,15 @@ export function buildFormIndex(words) {
     p.base = plainForms(p.base)
     p.forms = plainForms(p.forms)
   }
-  const index = /** @type {FormIndex} */ (buildIndex(prepared, normToken))
+  const bare = buildIndex(prepared, normToken)
+
+  // Each index carries the candidate lists built from its own keying, so a
+  // stress-exact lookup and a stress-blind one disagree about what a token
+  // could be exactly where the forms themselves do (#706).
+  const index = /** @type {FormIndex} */ (bare.index)
+  index.candidates = bare.candidates
+  const stressIndex = /** @type {FormIndex} */ (stressed.index)
+  stressIndex.candidates = stressed.candidates
   index.stressIndex = stressIndex
   return index
 }

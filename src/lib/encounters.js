@@ -25,7 +25,7 @@
 //
 // Pure and framework-free: no Vue, no store, no I/O.
 
-import { phraseHintTokens } from './phraseHint.js'
+import { alignPhraseTokens } from './phraseAlign.js'
 
 /**
  * Does this exercise result prove the learner met the words of its phrase?
@@ -61,28 +61,41 @@ export function phraseProvesEncounter(ex, result) {
 }
 
 /**
- * The learnable word keys a phrase proves met, resolved through the shared
- * surface-form index.
+ * The learnable word keys a phrase proves met, resolved through word alignment
+ * (lib/phraseAlign.js).
  *
- * A token matching several senses is skipped rather than guessed at. Homographs
- * are the case in point — «по́лке» is a shelf or a regiment, and crediting the
- * wrong one would quietly overstate what the learner has seen. Being one word
- * short is the cheaper error for a soft signal like this.
+ * This used to read the hint index directly and skip any token carrying more
+ * than one sense, on the reasoning that crediting the wrong homograph overstates
+ * what the learner has seen. The reasoning was right; the rule was far too
+ * blunt. Most multi-sense tokens are not homographs at all — «купи́=buy» is a
+ * gloss-only stub of «купи́ть=to buy», and skipping it meant a learner who read
+ * «Купи́ ребёнку а́тлас» was credited with neither. Measured over the corpus,
+ * 5.4% of phrase tokens are contested and the old rule threw away every one.
+ *
+ * Alignment answers the sharper question. Where a rung settles a token, its
+ * `credit` list says which curriculum words the token is evidence for — one
+ * key where something decided, every member where a group collapsed, because
+ * «гро́мче» is the comparative of гро́мкий and гро́мко alike and a learner who
+ * read it has met both. Where nothing settles it the token is still skipped,
+ * exactly as before: being a word short remains the cheaper error for a soft
+ * signal, and what is skipped is the worklist `npm run check:align` prints.
  *
  * @param {string} phrase
  * @param {import('./phraseHint.js').FormIndex} index from `buildFormIndex`
  * @param {(key: string) => boolean} [isLearnable] gate for gloss-only entries,
  *   which are not part of the curriculum and are absent from the CEFR bars
+ * @param {object} [opts] alignment inputs — `byKey`, the phrase's `en`, its
+ *   authored `align` block and `inflectToken`/`inflectKey` (see
+ *   {@link import('./phraseAlign.js').alignPhraseTokens})
  * @returns {string[]} distinct keys, in the order they appear in the phrase
  */
-export function encounteredKeys(phrase, index, isLearnable = () => true) {
+export function encounteredKeys(phrase, index, isLearnable = () => true, opts = {}) {
   if (!phrase || !index) return []
   const keys = new Set()
-  for (const { hint } of phraseHintTokens(phrase, index)) {
-    const senses = hint?.senses ?? []
-    if (senses.length !== 1) continue
-    const key = senses[0]?.key
-    if (key && isLearnable(key)) keys.add(key)
+  for (const { alignment } of alignPhraseTokens(phrase, index, opts)) {
+    for (const key of alignment?.credit ?? []) {
+      if (isLearnable(key)) keys.add(key)
+    }
   }
   return [...keys]
 }

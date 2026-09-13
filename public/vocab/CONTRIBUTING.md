@@ -9,8 +9,8 @@ version.
 > 1. Add/edit an entry in the right `*.yml` file (schema below).
 > 2. Keep the file sorted: `node scripts/sort-vocab.js public/vocab/<file>.yml`.
 > 3. `npm test` — the suites guard the shape. Fix anything red.
-> 4. `npm run check:corpus` — the three **corpus gates** that fail CI and run
->    nowhere else (~5s). A green `npm test` says nothing about them, and a
+> 4. `npm run check:corpus` — the **corpus gates** that fail CI and run
+>    nowhere else (~15s). A green `npm test` says nothing about them, and a
 >    vocab change is exactly the kind that trips them. `npm run check:ci` runs
 >    the whole CI `test` job if you'd rather have the full verdict.
 >
@@ -186,6 +186,62 @@ prompt annotations print it ("You (informal, to a man) answered correctly").
   `node scripts/rebalance-gender.mjs` can even it out by flipping a safe subset
   of masculine verb phrases to feminine. See
   [`docs/gender-balance.md`](../../docs/gender-balance.md).
+
+#### `align` — which word a token is, when two words could be it
+
+Phrase hints translate the word a learner taps, and the CEFR bars credit the
+words a sentence proves they have met. Both need to know **which dictionary
+entry each Russian token actually is** — and about one token in eighteen could
+be more than one. Most of those settle themselves from data already in the
+corpus (a gloss-only stub's `lemma:` link, an adjective and its -о adverb, one
+word's several senses). What is left is genuine: «его́» is "his" or "him",
+«часо́в» is the hour or the clock, «е́ли» is "they ate" or "spruces".
+
+Annotate those, and only those, with an `align:` block — a map from **1-based
+token index** (the same indexing `inflect:` uses) to the word key:
+
+```yaml
+"брат=brother":
+  usage:
+    - ru: Я подари́л бра́ту часы́.
+      en_gb: I gave my brother a watch.
+      inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+      align: { 4: "часы=clock" }
+```
+
+Here «часы́» could be «час» "hour" (genitive plural) or «часы́» "clock", and only
+the sentence says which. The `inflect:` block on the same example is unrelated —
+it marks the word being *taught*, «бра́ту»; `align:` marks a different token
+whose identity the drills would otherwise have to guess at.
+
+- **Only for contested tokens.** An `align:` on a token only one word claims is
+  dead weight, and `check:align` fails on it — if it were ever right it would
+  now be silently wrong, because the word it names may have moved.
+- **`inflect:` already counts.** A token an `inflect:` block names is aligned for
+  free: the annotation says which word it is, and `phrasesData.test.js` already
+  checks the form against the paradigm. So annotate the *other* tokens.
+- **One annotation per sentence, not per word.** Where the same sentence appears
+  under two words, their `align:` blocks are merged, so it only has to be written
+  once and it doesn't matter which example carries it. Two copies annotating the
+  same token *differently* is a real disagreement and `check:align` refuses it.
+  The copies' `inflect:` blocks are not merged — each names its own drill's
+  target — but where two of them claim the same token as different words, the
+  gate says so and an `align:` block is how you settle it.
+
+**Finding the work.** `npm run align:list` prints every unresolved group,
+busiest first, with a sample sentence. `npm run check:align` is the gate: it
+validates the `align:` annotations and the `lemma:` links, refuses a sentence
+whose duplicate copies would align differently, and fails when the residue
+grows — so new sentences cannot quietly make hinting worse. The counts live in
+`scripts/align-baseline.json` and are meant to come down; clear a group
+completely and the gate asks you to drop its line, because a baseline entry for
+an ambiguity that no longer exists is a regression waiting to be let through.
+
+**Don't annotate what a rule should decide.** If a whole group resolves by a
+principle — every member of a derivational family, every gloss-only stub of one
+verb — the fix belongs in `src/lib/phraseAlign.js`, not in a thousand YAML
+blocks. Measure any new rung against the corpus's own `inflect:` annotations
+before trusting it: "prefer the adverb" looked obvious and scored 49%.
 
 #### Ambiguity annotations (nothing to write)
 
@@ -440,8 +496,31 @@ Run `node scripts/coverage-gloss.js` to list any gaps.
 > key may be an inflected form (`"азии=Asia"`, `"автономных=autonomous"`).
 > That's exactly right for tap-hints, which look up surface forms — but never
 > reuse these keys as dictionary headwords. If glossary entries are ever
-> promoted into the curriculum, they must be lemmatised first (or the file
-> extended with an explicit `lemma:` field).
+> promoted into the curriculum, they must be lemmatised first.
+
+An entry that **is** an inflected form of a curriculum word carries a **`lemma:`**
+naming it:
+
+```yaml
+"купи=buy":
+  learn: false
+  lemma: "купить=to buy"
+  accented: "купи́"
+  en_gb:
+    standard: "buy (imperative)"
+```
+
+Both glosses still show when a learner taps «купи́» — "buy (imperative)" is the
+more useful of the two there — but the app now knows the two entries are one
+word, which is what lets the CEFR bars credit «купи́ть» for a sentence that used
+its imperative. Without it the two read as rival words and neither was credited
+(#706).
+
+`node scripts/gen-lemma-links.mjs` proposes these (and `--apply` writes them),
+linking only where a stub's form sits in exactly one curriculum word's paradigm.
+It deliberately will not link a stub spelled the same as its supposed owner's
+dictionary form: «есть» "there is" is not a form of «есть» "to eat", and that
+pair is a homograph for `align:` to worry about, not a lemma link.
 
 ---
 

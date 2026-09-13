@@ -368,6 +368,7 @@ words:
       - ru: За́втра часы́ бу́дут бить ка́ждый час.
         en_gb: Tomorrow the clock will strike every hour.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+        align: { 2: "часы=clock" }
       - ru: На его́ ме́сте я бы не бил ребёнка.
         en_gb: In his place I would not hit a child.
         en_alt:
@@ -1691,6 +1692,7 @@ words:
           - Come back before nine o'clock.
           - Be back before nine o'clock.
         inflect: { token: 1, tense: imperative, person: imp_sg, rule: verb-imperative }
+        align: { 4: "час=hour" }
       - ru: Я верну́сь че́рез час.
         en_gb: I will return in an hour.
         en_alt:
@@ -3260,6 +3262,7 @@ words:
       - ru: Я встаю́ в семь часо́в у́тра.
         en_gb: I get up at seven o'clock in the morning.
         inflect: { token: 2, tense: present, person: 1sg, rule: verb-present }
+        align: { 5: "час=hour" }
       - ru: Он встаёт о́чень ра́но.
         en_gb: He gets up very early.
         inflect: { token: 2, tense: present, person: 3sg, rule: verb-present }
@@ -9874,6 +9877,7 @@ words:
         en_alt:
           - Finish the work by five o'clock.
         inflect: { token: 1, tense: imperative, person: imp_pl, rule: verb-imperative }
+        align: { 5: "час=hour" }
       - ru: Я зако́нчил рабо́ту и пошёл домо́й.
         en_gb: I finished work and went home.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-past }
@@ -32543,6 +32547,7 @@ words:
       - ru: Я просну́сь в семь часо́в.
         en_gb: I will wake up at seven o'clock.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
+        align: { 5: "час=hour" }
       - ru: Я просну́сь за́втра ра́но у́тром.
         en_gb: I will wake up early in the morning tomorrow.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
@@ -44399,6 +44404,7 @@ words:
       - ru: Я явлю́сь к девяти́ часа́м.
         en_gb: I will appear by nine o'clock.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
+        align: { 5: "час=hour" }
       - ru: Го́сти яви́лись неожи́данно.
         en_gb: The guests turned up unexpectedly.
         inflect: { token: 2, tense: past, person: past_pl, rule: verb-past }
@@ -44407,6 +44413,7 @@ words:
         en_alt:
           - Tomorrow I will appear by nine o'clock.
         inflect: { token: 2, tense: future, person: 1sg, rule: verb-future }
+        align: { 6: "час=hour" }
       - ru: Зна́я о встре́че, я яви́лся бы ра́ньше.
         en_gb: Knowing about the meeting, I would turn up earlier.
         en_alt:

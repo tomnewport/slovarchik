@@ -53,6 +53,12 @@ jobs:
       # describing it: a word in no part, a part outside its 250-750 bounds, or
       # a collection fragmented into useless pieces.
       - run: npm run check:parts
+      # Which dictionary word each Russian token in a phrase is (#706). Phrase
+      # hints gloss it and the encounter bars credit it, so a token two words
+      # could be is a hint that is wrong half the time. Most resolve from the
+      # corpus's own structure; this validates the align: annotations that
+      # settle the rest, and fails when the unsettled residue grows.
+      - run: npm run check:align
       # The same suite as `npm test`, with coverage measured over the logic
       # layers. The per-layer thresholds in vite.config.js are a ratchet: they
       # fail the job when coverage of src/lib, src/stores or src/composables

@@ -8,6 +8,7 @@ import {
   shapeNouns,
   shapeContextPhrases,
   phraseNotesFrom,
+  phrasesByRu,
   corpusToken,
   learnableWords,
   partsOfSpeech,
@@ -18,7 +19,8 @@ import yaml from 'js-yaml'
 
 // buildWords now takes parsed docs (the runtime feeds it build-generated JSON);
 // these tests author inline YAML, so parse it here before handing it over.
-const fromYaml = (files) => buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
+const fromYaml = (files) =>
+  buildWords(files.map(({ pos, text }) => ({ pos, doc: yaml.load(text) })))
 
 describe('parseKey', () => {
   it('splits a russian=english natural key', () => {
@@ -425,7 +427,11 @@ words:
       aspect: 'pf',
       gloss: 'to say',
     })
-    expect(skazat.aspectPair).toMatchObject({ key: 'говорить=to speak', ru: 'говори́ть', aspect: 'impf' })
+    expect(skazat.aspectPair).toMatchObject({
+      key: 'говорить=to speak',
+      ru: 'говори́ть',
+      aspect: 'impf',
+    })
   })
 
   it('leaves unpaired verbs and dangling keys unlinked', () => {
@@ -760,10 +766,16 @@ describe('the bundled vocabulary fixtures', () => {
 
   describe('corpusToken', () => {
     it('is stable under file order but not under a content change', () => {
-      const a = [{ file: 'nouns.json', hash: 'aaa' }, { file: 'verbs.json', hash: 'bbb' }]
+      const a = [
+        { file: 'nouns.json', hash: 'aaa' },
+        { file: 'verbs.json', hash: 'bbb' },
+      ]
       expect(corpusToken(a)).toBe(corpusToken([...a].reverse()))
       expect(corpusToken(a)).not.toBe(
-        corpusToken([{ file: 'nouns.json', hash: 'aaa' }, { file: 'verbs.json', hash: 'ccc' }]),
+        corpusToken([
+          { file: 'nouns.json', hash: 'aaa' },
+          { file: 'verbs.json', hash: 'ccc' },
+        ]),
       )
     })
 
@@ -1022,5 +1034,58 @@ describe('the bundled vocabulary’s word facts', () => {
         ).toContain(w.key)
       }
     }
+  })
+})
+
+describe('phrasesByRu', () => {
+  const phrase = (ru, en, align = {}, source = 'a=a') => ({
+    id: `${ru}=${en}`,
+    ru,
+    en,
+    enAlt: [],
+    source,
+    enNotes: [],
+    align,
+    inflectToken: null,
+  })
+
+  it('keeps the first copy of a sentence, as the app resolves it', () => {
+    const map = phrasesByRu([
+      phrase('Он до́ма.', 'He is at home.', {}, 'дом=house'),
+      phrase('Он до́ма.', "He's home.", {}, 'он=he'),
+    ])
+    expect(map.size).toBe(1)
+    expect(map.get('Он до́ма.').source).toBe('дом=house')
+  })
+
+  it('merges a later copy’s align block into the one that ships', () => {
+    // Alignment is a property of the sentence. Without the merge an annotation
+    // written on the second example is discarded, and which example that is
+    // depends on dictionary order.
+    const map = phrasesByRu([
+      phrase('Он до́ма.', 'He is at home.', {}, 'дом=house'),
+      phrase('Он до́ма.', "He's home.", { 1: 'он=he' }, 'он=he'),
+    ])
+    expect(map.get('Он до́ма.').align).toEqual({ 1: 'он=he' })
+    expect(map.get('Он до́ма.').source).toBe('дом=house')
+  })
+
+  it('lets the first copy win a token both annotate', () => {
+    const map = phrasesByRu([
+      phrase('Он до́ма.', 'He is at home.', { 1: 'дом=house' }, 'дом=house'),
+      phrase('Он до́ма.', "He's home.", { 1: 'он=he' }, 'он=he'),
+    ])
+    expect(map.get('Он до́ма.').align).toEqual({ 1: 'дом=house' })
+  })
+
+  it('does not write the merge back into the phrase it derives from', () => {
+    const first = phrase('Он до́ма.', 'He is at home.', {}, 'дом=house')
+    phrasesByRu([first, phrase('Он до́ма.', "He's home.", { 1: 'он=he' }, 'он=he')])
+    expect(first.align).toEqual({})
+  })
+
+  it('handles an empty list', () => {
+    expect(phrasesByRu([]).size).toBe(0)
+    expect(phrasesByRu(undefined).size).toBe(0)
   })
 })
