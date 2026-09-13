@@ -11,18 +11,26 @@ import { loadFixtureWords } from '../test/fixtures.js'
 // A fixed two-exercise session so the runner flow is deterministic; both are
 // keyboard-typing exercises so we can drive them through the real DOM. The list
 // is mutable (via vi.hoisted) so a test can swap in a phrase exercise.
-const { mockExercises, defaultExercises } = vi.hoisted(() => {
+const { mockExercises, defaultExercises, buildSources } = vi.hoisted(() => {
   const defaultExercises = [
     { id: 'ex0', kind: 'type', dimension: 'usage', level: 'learning', content: 'word', practiceIndex: 0, audio: false, targets: ['t1'], ru: 'дом', en: 'house' },
     { id: 'ex1', kind: 'type', dimension: 'usage', level: 'learning', content: 'word', practiceIndex: 1, audio: false, targets: ['t2'], ru: 'кот', en: 'cat' },
   ]
-  return { mockExercises: { value: defaultExercises }, defaultExercises }
+  return { mockExercises: { value: defaultExercises }, defaultExercises, buildSources: { value: null } }
 })
 // Keep the real helpers (buildCombinedFlashcard, makeVisualReplacement, …) so
 // the flashcard-repeat flow works; only the session builder is stubbed.
 vi.mock('../lib/exerciseBuild.js', async (importActual) => {
   const actual = await importActual()
-  return { ...actual, buildExercises: () => mockExercises.value }
+  return {
+    ...actual,
+    // Keep the sources the view hands the builder: what it passes (or forgets to
+    // pass) decides which drills a session can serve.
+    buildExercises: (session, sources) => {
+      buildSources.value = sources
+      return mockExercises.value
+    },
+  }
 })
 
 const push = vi.fn()
@@ -43,6 +51,7 @@ beforeEach(async () => {
   await progress.loadProgress()
   push.mockClear()
   mockExercises.value = defaultExercises
+  buildSources.value = null
 })
 
 // Several of these actions are IndexedDB writes deep, and fake-indexeddb
@@ -87,6 +96,22 @@ function masteredRecord(word) {
 }
 
 describe('SessionView', () => {
+  it('tells the builder which tables the learner has already assembled', async () => {
+    // Typing a table's endings is only offered for a table already built from
+    // the word bank (#645). That state is persisted per word, so the view has to
+    // hand it to the builder — without it every typing slot degrades to the bank
+    // drill forever and mastery usage for an inflecting word never advances.
+    await progress.markTableClean('t1', null)
+
+    mount(SessionView)
+    await flushPromises()
+
+    const { isTableClean } = buildSources.value
+    expect(typeof isTableClean).toBe('function')
+    expect(isTableClean('t1', null)).toBe(true)
+    expect(isTableClean('t2', null)).toBe(false)
+  })
+
   it('runs a session to completion, reports results and shows a summary', async () => {
     const wrapper = mount(SessionView)
     await flushPromises()

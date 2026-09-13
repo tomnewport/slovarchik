@@ -780,7 +780,9 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
  *   learner has met a word, so a first encounter can be dealt differently
  * @param {(key: string, variant?: string) => boolean} [sources.isTableClean] has
  *   this word's table been built with nothing misplaced, for the variant in hand
- *   (gates the table stage)
+ *   (gates the table stage). Omit it and no table counts as built beyond the ones
+ *   this session plans, so every typing slot degrades to the word bank — a caller
+ *   holding the learner's progress must pass it.
  * @returns {PlainObject[]} exercise descriptors (each with a unique `id`)
  */
 export function buildExercises(
