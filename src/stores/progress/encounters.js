@@ -22,7 +22,7 @@
 import { computed } from 'vue'
 
 import { phraseProvesEncounter, encounteredKeys } from '../../lib/encounters.js'
-import { formIndex } from '../vocab.js'
+import { alignOptsFor, formIndex } from '../vocab.js'
 
 import { state, learnableVocab } from './state.js'
 import { saveMeta } from './persistence.js'
@@ -70,5 +70,6 @@ export function markMet(keys, ts = Date.now()) {
 export function recordEncounter(ex, result, ts = Date.now()) {
   if (!phraseProvesEncounter(ex, result)) return []
   const known = learnableKeys.value
-  return markMet(encounteredKeys(ex.ru, formIndex.value, (k) => known.has(k)), ts)
+  const keys = encounteredKeys(ex.ru, formIndex.value, (k) => known.has(k), alignOptsFor(ex.ru))
+  return markMet(keys, ts)
 }

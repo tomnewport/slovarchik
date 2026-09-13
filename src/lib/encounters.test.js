@@ -74,13 +74,42 @@ describe('encounteredKeys', () => {
     expect(encounteredKeys('кот и кот', index)).toEqual(['кот=cat'])
   })
 
-  it('skips a token whose form matches more than one sense', () => {
-    // A homograph: crediting either sense would be a guess, so credit neither.
+  it('skips a contested token when given no dictionary to resolve it with', () => {
+    // Without `byKey` the structural rungs cannot run, and a rung that cannot
+    // run must not guess: crediting either entry would be a coin flip.
     const ambiguous = buildFormIndex([
       ...words,
       { key: 'кот=male cat', ru: 'кот', headword: 'кот', meaning: 'male cat', pos: 'noun' },
     ])
     expect(encounteredKeys('кот', ambiguous)).toEqual([])
+  })
+
+  it('credits every sense of one word spelled one way', () => {
+    // Two entries, one Russian word. The learner has met «кот» — which of its
+    // senses the sentence meant is a question the bars do not ask (#706).
+    const extra = { key: 'кот=male cat', ru: 'кот', headword: 'кот', meaning: 'male cat', pos: 'noun' }
+    const all = [...words, extra]
+    const byKey = new Map(all.map((w) => [w.key, w]))
+    expect(encounteredKeys('кот', buildFormIndex(all), () => true, { byKey })).toEqual([
+      'кот=cat',
+      'кот=male cat',
+    ])
+  })
+
+  it('skips a token two genuinely different words could be', () => {
+    // «кот» as a form of «кит» — a different word that merely spells itself the
+    // same way here. Nothing in the data decides it, so nothing is credited.
+    const rival = {
+      key: 'кит=whale',
+      ru: 'кит',
+      headword: 'кит',
+      meaning: 'whale',
+      pos: 'noun',
+      forms: { sg: { acc: 'кот' } },
+    }
+    const all = [...words, rival]
+    const byKey = new Map(all.map((w) => [w.key, w]))
+    expect(encounteredKeys('кот', buildFormIndex(all), () => true, { byKey })).toEqual([])
   })
 
   it('drops keys the caller says are not learnable', () => {

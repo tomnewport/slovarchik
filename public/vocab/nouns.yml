@@ -2932,6 +2932,7 @@ words:
       - ru: Я купи́ла но́вую батаре́ю для часо́в.
         en_gb: I bought a new battery for the watch.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
+        align: { 6: "часы=clock" }
       - ru: В я́щике лежа́т ста́рые батаре́и.
         en_gb: Old batteries are lying in the drawer.
         en_alt:
@@ -4908,6 +4909,7 @@ words:
         en_alt:
           - I gave my brother a watch as a present.
         inflect: { token: 3, case: dat, number: sg, rule: noun-dat-sg }
+        align: { 4: "часы=clock" }
       - ru: У меня́ два ста́рших бра́та.
         en_gb: I have two older brothers.
         inflect: { token: 5, case: gen, number: sg, rule: noun-count-gen-sg }
@@ -18239,6 +18241,7 @@ words:
       - ru: Она́ но́сит часы́ на запя́стье.
         en_gb: She wears a watch on her wrist.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+        align: { 3: "часы=clock" }
       - ru: Он повреди́л запя́стье на трениро́вке.
         en_gb: He injured his wrist at training.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -22690,9 +22693,11 @@ words:
       - ru: Часы́ рабо́тают на криста́лле ква́рца.
         en_gb: The watch runs on a quartz crystal.
         inflect: { token: 5, case: gen, number: sg, rule: noun-gen-sg }
+        align: { 1: "часы=clock" }
       - ru: Э́ти часы́ рабо́тают на ква́рце.
         en_gb: This watch runs on quartz.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+        align: { 2: "часы=clock" }
     declension:
       sg_nom: кварц
       sg_gen: ква́рца
@@ -31467,6 +31472,7 @@ words:
       - ru: Я отнёс часы́ к ма́стеру.
         en_gb: I took the watch to the craftsman.
         inflect: { token: 5, case: dat, number: sg, rule: noun-dat-sg }
+        align: { 3: "часы=clock" }
       - ru: На заво́де рабо́тают о́пытные мастера́.
         en_gb: Experienced craftsmen work at the factory.
         en_alt:
@@ -59995,6 +60001,7 @@ words:
       - ru: На обе́д мы е́ли спаге́тти.
         en_gb: For lunch we ate spaghetti.
         inflect: { token: 5, case: acc, number: sg, rule: noun-acc-sg }
+        align: { 4: "есть=to eat" }
       - ru: Он лю́бит спаге́тти с сы́ром.
         en_gb: He likes spaghetti with cheese.
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
@@ -63564,6 +63571,7 @@ words:
         en_alt:
           - For breakfast we ate syrniki.
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-pl }
+        align: { 4: "есть=to eat" }
       - ru: Он попроси́л ещё сы́рников.
         en_gb: He asked for more curd fritters.
         en_alt:
@@ -66949,6 +66957,7 @@ words:
       - ru: На у́жин мы е́ли ры́бу.
         en_gb: For dinner we ate fish.
         inflect: { token: 2, case: acc, number: sg, rule: noun-acc-sg }
+        align: { 4: "есть=to eat" }
       - ru: Я пригото́вила вку́сный у́жин.
         en_gb: I prepared a tasty dinner.
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
@@ -67882,6 +67891,7 @@ words:
       - ru: В рестора́не мы е́ли у́стриц.
         en_gb: At the restaurant we ate oysters.
         inflect: { token: 5, case: acc, number: pl, rule: noun-acc-animate }
+        align: { 4: "есть=to eat" }
       - ru: Он заказа́л мно́го у́стриц.
         en_gb: He ordered a lot of oysters.
         inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
@@ -74071,6 +74081,7 @@ words:
       - ru: Экску́рсия начала́сь в де́сять часо́в.
         en_gb: The excursion began at ten o'clock.
         inflect: { token: 1, case: nom, number: sg, rule: noun-nom-sg }
+        align: { 5: "час=hour" }
       - ru: Нам понра́вилось на экску́рсии.
         en_gb: We enjoyed the excursion.
         en_alt:

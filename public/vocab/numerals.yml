@@ -74,6 +74,7 @@ words:
         en_gb: I have eight roubles.
       - ru: Мы шли к восьми́ часа́м.
         en_gb: We were heading there for eight o'clock.
+        align: { 5: "час=hour" }
     forms:
       nom: во́семь
       gen: восьми́
@@ -326,6 +327,7 @@ words:
         en_gb: The clock shows twelve.
       - ru: Уро́к начался́ в двена́дцать часо́в.
         en_gb: The lesson started at twelve o'clock.
+        align: { 5: "час=hour" }
     forms:
       nom: двена́дцать
       gen: двена́дцати
@@ -641,6 +643,7 @@ words:
         en_gb: There are eleven pupils in the class.
       - ru: Сейча́с оди́ннадцать часо́в.
         en_gb: It is eleven o'clock now.
+        align: { 3: "час=hour" }
       - ru: Ему́ оди́ннадцать лет.
         en_gb: He is eleven years old.
     forms:
@@ -771,6 +774,7 @@ words:
         en_gb: I have five roubles.
       - ru: К пяти́ часа́м я бу́ду до́ма.
         en_gb: By five o'clock I will be at home.
+        align: { 3: "час=hour" }
       - ru: Купи́ пять я́блок.
         en_gb: Buy five apples.
     forms:
@@ -857,6 +861,7 @@ words:
         en_gb: I am seventeen years old.
       - ru: По́езд ухо́дит в семна́дцать часо́в.
         en_gb: The train leaves at seventeen hundred.
+        align: { 5: "час=hour" }
       - ru: В спи́ске семна́дцать имён.
         en_gb: There are seventeen names on the list.
   "семь=seven":
@@ -878,6 +883,7 @@ words:
         en_gb: Buy seven apples.
       - ru: К семи́ часа́м я верну́сь.
         en_gb: I will be back by seven o'clock.
+        align: { 3: "час=hour" }
     forms:
       nom: семь
       gen: семи́
@@ -1458,6 +1464,7 @@ words:
     usage:
       - ru: Сейча́с шесть часо́в.
         en_gb: It is six o'clock now.
+        align: { 3: "час=hour" }
       - ru: У жука́ шесть ног.
         en_gb: A beetle has six legs.
       - ru: Мы говори́ли о шести́ стра́нах.
