@@ -24,8 +24,8 @@ import { rank } from './state.js'
  * `learnedAt` backfill, and `importData` before anything else, so folding them
  * in here would change one of the two.
  *
- * @param {object} raw  a record as read from IndexedDB or a backup file
- * @returns {object} a new plain record in the current shape
+ * @param {PlainObject} raw  a record as read from IndexedDB or a backup file
+ * @returns {PlainObject} a new plain record in the current shape
  */
 export function normaliseRecord(raw) {
   return {

@@ -32,12 +32,13 @@ sessions. No backend, no accounts; everything runs in the browser and works
 offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
 
 - **Vue 3** (`<script setup>` SFCs) + **Vue Router** (hash history)
-- **Vite 6** build, **vite-plugin-pwa** (Workbox) for the service worker/offline cache
+- **Vite 8** build, **vite-plugin-pwa** (Workbox) for the service worker/offline cache
 - **Vitest** + **@vue/test-utils** + jsdom for unit tests; **Playwright** for e2e
 - Vocabulary is **YAML files** in `public/vocab/`, cached in **IndexedDB** (and
   precached by the service worker for first-launch offline) — not part of the JS
-  bundle. (`js-yaml` is a **runtime** dependency, not a devDep: the app parses
-  the YAML in the browser.)
+  bundle. (`js-yaml` is a **devDependency**: the YAML is converted to JSON at
+  build time by `scripts/gen-manifest.mjs`, and the browser only ever calls
+  `response.json()` — it never parses YAML, and js-yaml is not bundled.)
 
 ## Project map
 
@@ -154,6 +155,8 @@ src/
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
                         #     their work when main.js and a deep-linked view both start them
   types/globals.d.ts    # browser globals the DOM lib omits (prefixed Web Speech/Audio)
+  types/jsdoc.d.ts      # the JSDoc vocabulary the checkJs probe needs: `PlainObject`,
+                        #   the plain record whose fields the probe does not check
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json

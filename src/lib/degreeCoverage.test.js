@@ -1,7 +1,7 @@
 // Unit tests for the degree-coverage oracle (issue #536), plus the corpus guard
 // it exists for: every stored comparative must be reachable by a drill.
 import { describe, it, expect } from 'vitest'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import { buildWords } from './vocabBuild.js'
 import { storedComparatives, unreachableComparatives } from './degreeCoverage.js'

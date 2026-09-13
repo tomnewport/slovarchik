@@ -201,7 +201,7 @@ export const FOCUSES = [
  * Produce the next exercise drawn from the given kinds.
  * @param {string[]} kinds
  * @param {() => number} [rng]
- * @returns {object}
+ * @returns {PlainObject}
  */
 export function nextExercise(kinds, rng = Math.random) {
   const pick = kinds[Math.floor(rng() * kinds.length)]

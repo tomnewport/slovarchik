@@ -19,7 +19,7 @@ import { writeFileSync } from 'node:fs'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import {
   PART_TARGET,
@@ -74,7 +74,6 @@ export function packLevel(sizes, k) {
         const last = parts[k - 1]
         last.collections.push(collection)
         last.size += left
-        left = 0
         break
       }
       const room = quota[p] - parts[p].size
@@ -85,7 +84,6 @@ export function packLevel(sizes, k) {
       if (left <= room) {
         parts[p].collections.push(collection)
         parts[p].size += left
-        left = 0
         break
       }
       if (room >= MIN_FRAGMENT && left - room >= MIN_FRAGMENT) {

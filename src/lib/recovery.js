@@ -113,7 +113,7 @@ function step(events, level, dimension, word, kind, now) {
  * is the thing worth saying first.
  *
  * @param {Array} events the word's recorded attempts
- * @param {object} word the vocab record (`known`, `pos`, inflection/context flags)
+ * @param {PlainObject} word the vocab record (`known`, `pos`, inflection/context flags)
  * @param {{peak?: string|number, state?: string, now?: number}} [opts]
  * @returns {{status: string, state: string, peak: string|null, from: string|null,
  *   to: string|null, level: string, steps: Array, total: number, headline: string}}

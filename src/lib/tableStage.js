@@ -43,7 +43,7 @@ export function tableKey(variant) {
  * everything smaller — and every single-column paradigm (personal pronouns,
  * short forms, participles) — is one stage.
  *
- * @param {object} paradigm a built paradigm (see lib/paradigm.js)
+ * @param {PlainObject} paradigm a built paradigm (see lib/paradigm.js)
  * @param {boolean} [staged] whether to split at all
  * @returns {string[][]} column keys per stage — never empty
  */

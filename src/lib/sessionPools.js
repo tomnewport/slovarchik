@@ -173,7 +173,7 @@ export function currentPool(ctx) {
  * the front instead of resting on a halved interval.
  *
  * @param {string[]} keys pool order from {@link currentPool}
- * @param {object} ctx the {@link makeContext} snapshot
+ * @param {PlainObject} ctx the {@link makeContext} snapshot
  * @param {string} dimension the dimension this practice slot drills
  * @param {number} [now]
  */

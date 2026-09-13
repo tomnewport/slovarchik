@@ -3,7 +3,7 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import { buildWords, shapeNouns, shapeContextPhrases, POS_BY_FILE } from '../lib/vocabBuild.js'
 import { indexPhrases } from '../lib/phraseContext.js'

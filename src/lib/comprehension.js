@@ -106,8 +106,8 @@ function probe({ kind, readings, mine, partner, token, lemma }) {
  *
  * @param {{ru: string, source: string}} phrase a shaped phrase (shapePhrases)
  * @param {object} ctx
- * @param {Map<string, object>} [ctx.byKey] key → word record (buildWords)
- * @param {Map<string, object[]>} [ctx.annotations] key → context phrases
+ * @param {Map<string, PlainObject>} [ctx.byKey] key → word record (buildWords)
+ * @param {Map<string, PlainObject[]>} [ctx.annotations] key → context phrases
  *   (indexPhrases over shapeContextPhrases) — where the `inflect:` tense lives
  * @returns {?{kind: string, question: string, options: Array<{id, text}>,
  *   answer: string, why: string}}

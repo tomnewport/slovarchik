@@ -5,8 +5,8 @@
     "These limits are a ratchet, exactly like the coverage thresholds in",
     "vite.config.js: they sit just above the numbers as they stand today so a",
     "change that makes the app materially heavier fails loudly, and they are",
-    "meant to be raised deliberately — in the PR that grows the payload, with",
-    "the before/after in the commit message — rather than nudged up to get a",
+    "meant to be raised deliberately \u2014 in the PR that grows the payload, with",
+    "the before/after in the commit message \u2014 rather than nudged up to get a",
     "red run green.",
     "",
     "Raising a limit is a normal thing to do. Doing it in a commit that says",
@@ -30,7 +30,15 @@
     "add 1415 B of entry JS (87762 -> 89177) and 129 B of entry CSS",
     "(4695 -> 4824). Both limits move back to the same 2 KB / 200 B",
     "of headroom; without the raise entry JS would sit at 99.4% of budget and",
-    "the next one-line change would fail the build."
+    "the next one-line change would fail the build.",
+    "",
+    "Vite 8 remeasurement (no limit change): Vite 8 splits what Vite 6 emitted",
+    "as a single entry chunk, and the pieces are modulepreloaded from",
+    "index.html rather than script-tagged. size-summary.mjs counted only the",
+    "script tag, so entryJs appeared to fall 87.9 -> 28.2 KiB while the bytes a",
+    "launch downloads barely moved. It now counts the preloaded chunks too, and",
+    "the comparable figure is 85.4 KiB \u2014 2.5 KiB *below* the Vite 6 number, so",
+    "the limit stays at 91200 B and keeps its headroom."
   ],
   "limits": {
     "entryJs": {
@@ -46,7 +54,7 @@
     "vocab": {
       "bytes": 1200000,
       "label": "Vocab payload (gzip)",
-      "why": "Every dist/vocab/*.json a first install downloads. It only ever grows, and nouns.json is roughly half of it. Build-time derived data (#657) legitimately moves work into this number — that is the trade being made, so raise the limit there and say by how much."
+      "why": "Every dist/vocab/*.json a first install downloads. It only ever grows, and nouns.json is roughly half of it. Build-time derived data (#657) legitimately moves work into this number \u2014 that is the trade being made, so raise the limit there and say by how much."
     }
   }
 }

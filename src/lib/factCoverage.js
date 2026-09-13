@@ -72,7 +72,7 @@ function bare(word) {
  * An absent or empty list means every level, so a caller can pass the option
  * through unconditionally.
  * @param {string[]} [levels]
- * @returns {?(cefr: ?string) => boolean}
+ * @returns {((cefr: string|null) => boolean)|null}
  */
 function levelFilter(levels) {
   if (!levels?.length) return null
@@ -94,7 +94,7 @@ function unreflex(form) {
  * size of its root family, because that is what makes the fact worth writing:
  * a fact on ход- is repaid across входи́ть, выходи́ть, доходи́ть and a dozen more.
  *
- * @param {object[]} words normalised word records (from buildWords)
+ * @param {PlainObject[]} words normalised word records (from buildWords)
  * @param {object} [opts]
  * @param {string[]} [opts.levels] keep only candidates at these CEFR levels.
  *   The *candidate's* level, not the root's: the fact is authored on the
@@ -248,7 +248,7 @@ function sourcesFor(stem, index) {
  * A source is also required to be *shorter* than the word it supposedly built.
  * Derivation adds material; внима́ние does not come from внима́тельно.
  *
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {object} [opts]
  * @param {string[]} [opts.levels] keep only candidates at these CEFR levels —
  *   the derived word's own level, for the same reason as the prefix pass.
@@ -401,7 +401,7 @@ function pairKey(a, b) {
  * Ledger entries naming a word the corpus no longer has (#613). A rejection
  * outlives the review that made it, so a renamed or deleted key would otherwise
  * sit there quietly inflating the count of what has been dealt with.
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {Array<{a: string, b: string}>} reviewed
  * @returns {Array<{a, b, missing: string[]}>}
  */
@@ -422,7 +422,7 @@ export function staleReviewed(words, reviewed) {
  * meaningless on short words: it makes «а» a near-neighbour of every other
  * function word in the dictionary. A minimum length does the rest.
  *
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {object} [opts]
  * @param {number} [opts.maxRatio] distance ÷ longer length (default 0.25)
  * @param {number} [opts.minLength] shortest word worth comparing (default 4)
@@ -559,7 +559,7 @@ function diminutiveKind(word, base) {
  *
  * Nouns only. Diminutive adjectives and adverbs exist but are thin here.
  *
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {object} [opts]
  * @param {Array<{a: string, b: string}>} [opts.reviewed] pairs already set
  *   aside, order-insensitive, subtracted from the list
@@ -666,9 +666,9 @@ export function diminutiveCandidates(words, { reviewed = [], levels } = {}) {
  *  - `derived`   — no facts, but `relatedWords` has something to show;
  *  - `empty`     — neither. The number to drive to zero.
  *
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @returns {{total: {words, withFacts, derived, empty, facts, confusables},
- *   byPos: object[], byCefr: object[]}}
+ *   byPos: PlainObject[], byCefr: PlainObject[]}}
  */
 export function factCoverage(words) {
   const list = words ?? []

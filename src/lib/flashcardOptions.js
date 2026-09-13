@@ -41,11 +41,11 @@ export function stripBrackets(text) {
  * @param {object} args
  * @param {string} [args.typed]  the learner's current input; nothing typed
  *   yields no options, which is what an empty guess should do
- * @param {Array<object>} [args.pool] candidate options ({ key, en, label, … })
+ * @param {Array<PlainObject>} [args.pool] candidate options ({ key, en, label, … })
  * @param {number} [args.limit]  hide the list until fewer than this many match
- * @param {(o: object) => string} [args.keyOf]   identity, for de-duplication
- * @param {(o: object) => string} [args.textOf]  the gloss a guess matches against
- * @returns {Array<object>} the matching options (empty when nothing is typed,
+ * @param {(o: PlainObject) => string} [args.keyOf]   identity, for de-duplication
+ * @param {(o: PlainObject) => string} [args.textOf]  the gloss a guess matches against
+ * @returns {Array<PlainObject>} the matching options (empty when nothing is typed,
  *   or when the match is still `limit` words or wider).
  */
 export function buildOptions({

@@ -33,7 +33,7 @@ export async function removeReport(id) {
 /**
  * Open a pre-filled GitHub issue for the given exercise context. When offline,
  * the report is queued in IndexedDB to submit later instead.
- * @param {object} ctx  context for {@link buildIssueUrl}
+ * @param {PlainObject} ctx  context for {@link buildIssueUrl}
  * @returns {Promise<{queued: boolean}>}  whether it was queued for later
  */
 export async function submitReport(ctx) {

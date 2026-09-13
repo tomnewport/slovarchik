@@ -79,7 +79,7 @@ export function isLongParticiple(slot) {
 
 /**
  * The accented nominative stored for a long participle slot, or null.
- * @param {object} word a normalised word record (from buildWords)
+ * @param {PlainObject} word a normalised word record (from buildWords)
  * @param {string} slot one of {@link PARTICIPLE_SLOTS}
  */
 export function participleNominative(word, slot) {
@@ -105,7 +105,7 @@ export function participleGrid(word, slot) {
 
 /**
  * Resolve one cell of a participle's grid.
- * @param {object} word
+ * @param {PlainObject} word
  * @param {string} slot one of {@link PARTICIPLE_SLOTS}
  * @param {{case?: string, gender?: string, animate?: boolean}} at defaults to the
  *   masculine nominative — the participle's own dictionary form

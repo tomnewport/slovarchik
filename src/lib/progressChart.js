@@ -103,7 +103,7 @@ export function xAxis(start, end, maxTicks = 6) {
  *   room for the axes; defaults are chosen inside
  * @param {number} [opts.maxTicks] upper bound on x-axis labels before the
  *   step widens to months
- * @returns {object|null} geometry, or null when there is nothing to draw
+ * @returns {PlainObject|null} geometry, or null when there is nothing to draw
  */
 export function buildChart(points, { today, width = 360, height = 180, margin, maxTicks } = {}) {
   if (!points || points.length === 0) return null

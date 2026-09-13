@@ -296,7 +296,7 @@ function buildMatch(practice, pi, ctx, make) {
  * @param {boolean} [args.audio]      deal the board with audio prompts
  * @param {string} [args.id]
  * @param {() => number} [args.rng]
- * @returns {object|null} a match descriptor, or null if fewer than two words resolve
+ * @returns {PlainObject|null} a match descriptor, or null if fewer than two words resolve
  */
 export function buildCombinedFlashcard({
   wrongKeys = [],
@@ -614,7 +614,7 @@ function cyclePicker(list) {
  * dropped so a backfill targets fresh priorities, and each candidate is yielded
  * round-robin so a long backfill never drills the same word repeatedly.
  *
- * @returns {{word: () => object|null, phrase: () => object|null}}
+ * @returns {{word: () => PlainObject|null, phrase: () => PlainObject|null}}
  */
 export function makeReplacementPicker({
   wordKeys = [],
@@ -657,10 +657,10 @@ export function makeReplacementPicker({
  * (or once the picker's priority pool is exhausted) it falls back to covering
  * exactly the skipped item's own content.
  *
- * @param {object} skipped  exercise/phrase-like descriptor (the fallback content)
+ * @param {PlainObject} skipped  exercise/phrase-like descriptor (the fallback content)
  * @param {number} seq      monotonically-increasing counter for unique ids
- * @param {object} [picker] from {@link makeReplacementPicker}
- * @returns {object|object[]|null} descriptor(s), or null if no content is available
+ * @param {PlainObject} [picker] from {@link makeReplacementPicker}
+ * @returns {PlainObject|PlainObject[]|null} descriptor(s), or null if no content is available
  */
 export function makeVisualReplacement(skipped, seq, picker = null) {
   const pick = (isWord) => (picker ? (isWord ? picker.word() : picker.phrase()) : null)
@@ -709,14 +709,14 @@ export const MAX_INTROS_PER_SESSION = 5
  *    teaches a word by reveal has introduced it, whatever the label says, and a
  *    card headed "A new word" arriving afterwards is simply backwards.
  *
- * @param {object[]} exercises the built list, in order
+ * @param {PlainObject[]} exercises the built list, in order
  * @param {object} [opts]
  * @param {(key: string) => boolean} [opts.needsIntro] has this word never been
  *   met *and* never been introduced?
  * @param {Set<string>|string[]} [opts.batchKeys] words of the current batch; when
  *   absent every target is eligible
  * @param {number} [opts.max]
- * @returns {object[]} a new list with the intro descriptors spliced in
+ * @returns {PlainObject[]} a new list with the intro descriptors spliced in
  */
 export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_INTROS_PER_SESSION } = {}) {
   if (typeof needsIntro !== 'function' || max <= 0) return exercises.slice()
@@ -764,24 +764,24 @@ export function spliceIntros(exercises = [], { needsIntro, batchKeys, max = MAX_
 
 /**
  * Build the flat exercise list for a session.
- * @param {object} session   from store.startSession (has `.practices`)
+ * @param {PlainObject} session   from store.startSession (has `.practices`)
  * @param {object} sources
- * @param {object[]} [sources.words]   normalised word records (vocab store)
- * @param {object[]} [sources.phrases] shaped phrases ({ id, ru, en, source, cefr })
+ * @param {PlainObject[]} [sources.words]   normalised word records (vocab store)
+ * @param {PlainObject[]} [sources.phrases] shaped phrases ({ id, ru, en, source, cefr })
  * @param {Map} [sources.vocabById] id → shaped vocab word, over exactly the same
  *   `words`. Optional and purely a saving: the caller usually holds this already
  *   (the vocab store publishes it, and SessionView keeps a copy for replacement
  *   draws), and re-running `shapeVocab` over the dictionary costs ~2 ms a
  *   session for nothing. Omit it and one is shaped here.
  * @param {Map} [sources.contextPhrases] key → annotated context phrases (drill)
- * @param {object} [sources.rules] grammar-rules map (rule id → explanation)
+ * @param {PlainObject} [sources.rules] grammar-rules map (rule id → explanation)
  * @param {() => number} [sources.rng]
  * @param {(key: string) => number} [sources.encounterCount] how many times this
  *   learner has met a word, so a first encounter can be dealt differently
  * @param {(key: string, variant?: string) => boolean} [sources.isTableClean] has
  *   this word's table been built with nothing misplaced, for the variant in hand
  *   (gates the table stage)
- * @returns {object[]} exercise descriptors (each with a unique `id`)
+ * @returns {PlainObject[]} exercise descriptors (each with a unique `id`)
  */
 export function buildExercises(
   session,

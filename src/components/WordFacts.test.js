@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 vi.mock('../lib/speech.js', () => ({
   speak: vi.fn(),

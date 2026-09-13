@@ -62,8 +62,8 @@ export function markMet(keys, ts = Date.now()) {
  * Log whatever an exercise result proves the learner has met. Safe to call for
  * every result: it decides for itself whether this one proves anything (see
  * `phraseProvesEncounter`), and does nothing when it doesn't.
- * @param {object} ex the exercise descriptor
- * @param {object} result what the exercise component reported
+ * @param {PlainObject} ex the exercise descriptor
+ * @param {PlainObject} result what the exercise component reported
  * @param {number} [ts]
  * @returns {string[]} the keys newly logged
  */

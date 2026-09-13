@@ -184,7 +184,7 @@ function verdictFor(sense, want, typedForm, targetForm, byKey) {
  * @param {string} [ctx.target] the wanted surface form (a word or a whole phrase)
  * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
  * @param {Map} [ctx.byKey] key → word record
- * @returns {object|null} a verdict, or null when there is no confusion to name —
+ * @returns {PlainObject|null} a verdict, or null when there is no confusion to name —
  *   the answer isn't a recognisable Russian word, or it is the target word in
  *   the wrong form. Both are spelling slips, and the caller should fall through
  *   to its existing feedback.
@@ -201,11 +201,11 @@ export function diagnose(typed, ctx = {}) {
  * Diagnose a single wrong word against the one the drill wanted.
  * @param {string} typed the learner's answer
  * @param {string} targetForm the surface form wanted
- * @param {object|null} want the target's word record
+ * @param {PlainObject|null} want the target's word record
  * @param {object} [ctx]
  * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
  * @param {Map} [ctx.byKey] key → word record
- * @returns {object|null}
+ * @returns {PlainObject|null}
  */
 function diagnoseWord(typed, targetForm, want, { formIndex, byKey } = {}) {
   const word = String(typed ?? '').trim()
@@ -238,7 +238,7 @@ function diagnoseWord(typed, targetForm, want, { formIndex, byKey } = {}) {
  * @param {string} [ctx.targetKey] natural key of the word being drilled
  * @param {Map} [ctx.formIndex] from `buildFormIndex` (phraseHint.js)
  * @param {Map} [ctx.byKey] key → word record
- * @returns {object|null}
+ * @returns {PlainObject|null}
  */
 function diagnosePhrase(typed, target, ctx) {
   const got = String(typed ?? '')
@@ -307,7 +307,7 @@ function normalizeGloss(text) {
  * @param {string} [ctx.targetKey] natural key of the word on the card
  * @param {Map} [ctx.byKey] key → word record
  * @param {Map} [ctx.glossIndex] from {@link buildGlossIndex}
- * @returns {object|null} a verdict tagged `direction: 'en'`, or null when the
+ * @returns {PlainObject|null} a verdict tagged `direction: 'en'`, or null when the
  *   gloss belongs to no word we know — an ordinary blank, which the drill
  *   handles by revealing as it always has.
  */
@@ -447,7 +447,7 @@ function englishMessage(verdict) {
  * already showing), but never the Russian being asked for. That is what the
  * "Show me the answer" button is for.
  *
- * @param {object|null} verdict from {@link diagnose}
+ * @param {PlainObject|null} verdict from {@link diagnose}
  * @returns {{headline: string, detail: string, tier: string}|null}
  */
 export function correctionMessage(verdict) {

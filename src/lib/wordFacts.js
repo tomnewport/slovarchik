@@ -124,8 +124,8 @@ function ruIndex(byKey) {
  * `note` and stable within a kind (authoring order). Each fact keeps its
  * resolved `see` links, so a renderer needs nothing but this list.
  *
- * @param {object} record a word record (buildWords) or shaped vocab word
- * @returns {Array<{kind: string, text: string, parts: object[], see: object[]}>}
+ * @param {PlainObject} record a word record (buildWords) or shaped vocab word
+ * @returns {Array<{kind: string, text: string, parts: PlainObject[], see: PlainObject[]}>}
  */
 export function wordFacts(record) {
   const facts = record?.facts ?? []
@@ -140,7 +140,7 @@ export function wordFacts(record) {
  * joined-up word the chips spell out, which is what a screen reader should hear
  * instead of a run of disconnected fragments.
  *
- * @param {object} fact a fact from {@link wordFacts}
+ * @param {PlainObject} fact a fact from {@link wordFacts}
  * @returns {{parts: Array<{ru: string, en: string}>, joined: string, label: string}}
  */
 export function factParts(fact) {
@@ -160,8 +160,8 @@ export function factParts(fact) {
  * relations is reported once, under the first (an aspect pair sharing its gloss
  * is an `aspect` link, not a `same-meaning` one).
  *
- * @param {object} record a word record (buildWords) or shaped vocab word
- * @param {Map<string, object>} [byKey] key → record, used to resolve the
+ * @param {PlainObject} record a word record (buildWords) or shaped vocab word
+ * @param {Map<string, PlainObject>} [byKey] key → record, used to resolve the
  *   relations that carry only a headword (heteronyms, same-meaning) back to a
  *   full entry. Optional: without it those entries simply have `key: null`.
  * @returns {Array<{key: ?string, ru: string, en: string, note: string, why: string, relation: string}>}
@@ -243,8 +243,8 @@ export function relatedWords(record, byKey) {
  *  3. nothing — the caller falls back to the glosses (and, for an aspect pair,
  *     to saying the aspect in words).
  *
- * @param {object} record the word in hand (full record or shaped vocab word)
- * @param {object} related one entry from {@link relatedWords}
+ * @param {PlainObject} record the word in hand (full record or shaped vocab word)
+ * @param {PlainObject} related one entry from {@link relatedWords}
  * @returns {{text: string, source: 'why' | 'contrast' | 'note' | ''}}
  */
 export function confusionNote(record, related) {
@@ -270,7 +270,7 @@ export function confusionNote(record, related) {
  * answer; what this buys is the difference between "wrong" and "that is the
  * Petersburg word" (#588, #636). Returns the place, so the message can name it.
  *
- * @param {object} record the word being asked for
+ * @param {PlainObject} record the word being asked for
  * @param {string} key natural key of the word the learner actually wrote
  * @returns {string} the place, or '' when the two aren't linked that way
  */
@@ -291,8 +291,8 @@ export function regionalVariant(record, key) {
  * something *around* the panel (whether to hold an auto-advance so it can be
  * read, say) needs the same answer without rendering it first.
  *
- * @param {object} record a word record (buildWords) or shaped vocab word
- * @param {Map<string, object>} [byKey]
+ * @param {PlainObject} record a word record (buildWords) or shaped vocab word
+ * @param {Map<string, PlainObject>} [byKey]
  * @returns {boolean}
  */
 export function hasWordFacts(record, byKey) {
@@ -371,7 +371,7 @@ function derivedLinks(word, words) {
  * normalised record, because normalisation drops a malformed fact — which is the
  * right runtime behaviour and exactly the wrong thing for CI to be blind to.
  *
- * @param {object[]} words normalised word records (from buildWords)
+ * @param {PlainObject[]} words normalised word records (from buildWords)
  * @returns {Array<{key: string, field: string, message: string}>}
  */
 export function factIssues(words) {

@@ -6,7 +6,7 @@ Everything runs in your browser and works fully offline once loaded.
 
 🔗 **Live app: [tomnewport.github.io/slovarchik](https://tomnewport.github.io/slovarchik/)**
 
-> **Stack:** **Vue 3** + Vite 6 PWA (Vue Router, Vitest). It is **not** a React
+> **Stack:** **Vue 3** + Vite 8 PWA (Vue Router, Vitest). It is **not** a React
 > app — there's no JSX or hooks. Agents and contributors: start with
 > [`AGENTS.md`](AGENTS.md) for a fast orientation. Details in [Tech](#tech) below.
 
@@ -101,7 +101,7 @@ wherever the on-screen Russian keyboard is shown.
 
 ## Tech
 
-- **Vue 3** + **Vite 6**, **Vue Router** (hash history for clean offline deep links)
+- **Vue 3** + **Vite 8**, **Vue Router** (hash history for clean offline deep links)
 - **vite-plugin-pwa** (Workbox) for the service worker, manifest and offline cache
 - **Vitest** + **@vue/test-utils** for tests
 - Deployed to **GitHub Pages** via GitHub Actions

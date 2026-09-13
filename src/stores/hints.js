@@ -65,7 +65,7 @@ function hintIfShowable(entry) {
  * (or null when it's a plain, non-hintable word). Stress marks, capitalisation
  * and punctuation in the source phrase are preserved for display.
  * @param {string} phrase
- * @returns {Array<{text: string, hint: object|null}>}
+ * @returns {Array<{text: string, hint: PlainObject|null}>}
  */
 export function hintTokensFor(phrase) {
   return phraseHintTokens(phrase, formIndex.value).map(({ text, hint }) => ({

@@ -67,10 +67,10 @@ export function batchSize(level) {
  * so a learner works through "A2 Part I" before "A2 Part II" rather than facing
  * the whole of A2 at once, which is the point of splitting the levels up.
  *
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {number} size
  * @param {() => number} [rng]
- * @param {(word: object) => number} [rankOf] lower sorts earlier
+ * @param {(word: PlainObject) => number} [rankOf] lower sorts earlier
  */
 export function refineToLowest(words, size, rng = Math.random, rankOf = (w) => cefrRank(w.cefr)) {
   if (words.length === 0) return []
@@ -194,14 +194,14 @@ export function assembleOptions(pool, size, level, rng = Math.random) {
 /**
  * Offer batch options for the next learning or mastery journey.
  * @param {object} args
- * @param {object[]} [args.words] normalised word records (need `key`, `cefr`,
+ * @param {PlainObject[]} [args.words] normalised word records (need `key`, `cefr`,
  *   `collections`)
- * @param {(word: object) => string} [args.stateOf] current state per word
+ * @param {(word: PlainObject) => string} [args.stateOf] current state per word
  * @param {'learning'|'mastery'} [args.level]
  * @param {() => number} [args.rng]
- * @param {(word: object) => number} [args.rankOf] curriculum order; defaults to
+ * @param {(word: PlainObject) => number} [args.rankOf] curriculum order; defaults to
  *   the CEFR level (see {@link refineToLowest})
- * @returns {object[]} up to five batch options
+ * @returns {PlainObject[]} up to five batch options
  */
 export function buildBatchOptions({
   words = [],

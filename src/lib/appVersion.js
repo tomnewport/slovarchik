@@ -22,7 +22,7 @@ export const INSTALLED = Object.freeze({
 })
 
 /**
- * @typedef {object} ReleaseNote
+ * @typedef {PlainObject} ReleaseNote
  * @property {string} at   ISO timestamp the change landed
  * @property {string} text one line saying what changed
  */
@@ -30,7 +30,7 @@ export const INSTALLED = Object.freeze({
 /**
  * Which build something is: the pair every comparison here is made on.
  *
- * @typedef {object} BuildStamp
+ * @typedef {PlainObject} BuildStamp
  * @property {string|null} commit   short commit hash the build was made from
  * @property {string|null} released ISO timestamp the build was made at
  */

@@ -137,7 +137,7 @@ function weightedPick(items, weightOf, rng) {
  * @param {() => number} [args.rng]
  * @param {string[]|null} [args.levels] restrict the draw to these levels;
  *   null takes every practice the type allows
- * @returns {{type, size, buckets, practices: object[]}}
+ * @returns {{type, size, buckets, practices: PlainObject[]}}
  */
 export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, rng = Math.random, levels = null } = {}) {
   const all = practicesForSession(type)

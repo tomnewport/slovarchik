@@ -28,7 +28,6 @@ const seenPhrase = new Set();
 for (const file of files) {
   const lines = readFileSync(join(vocabDir, file), 'utf8').split('\n');
   let curKey = null;
-  let curAccented = null;
   for (let i = 0; i < lines.length; i++) {
     const ln = lines[i];
     const num = i + 1;
@@ -37,15 +36,14 @@ for (const file of files) {
     const km = ln.match(/^ {2}"([^"]+)":\s*$/);
     if (km) {
       curKey = km[1];
-      curAccented = null;
       continue;
     }
     // accented within the current entry
     const am = ln.match(/^ {4}accented:\s*"?([^"#]+?)"?\s*$/);
     if (am && curKey) {
-      curAccented = am[1].trim();
+      const accented = am[1].trim();
       const en = curKey.includes('=') ? curKey.slice(curKey.indexOf('=') + 1) : '';
-      headwords.push({ ref: `${file}:${num}`, ru: curAccented, en, key: curKey });
+      headwords.push({ ref: `${file}:${num}`, ru: accented, en, key: curKey });
       continue;
     }
     // usage phrase:  ^      - ru: <text>     (en_gb on a following line)

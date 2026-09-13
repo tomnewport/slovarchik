@@ -134,7 +134,7 @@ export function readCell(word, slot) {
 /**
  * Paradigm cells containing an impossible `й`+hard-vowel sequence that the cell
  * introduces over its lemma (so `район`/`фойе` stems are never flagged).
- * @param {object[]} words normalised word records (from buildWords)
+ * @param {PlainObject[]} words normalised word records (from buildWords)
  * @returns {{key: string, slot: string, form: string, sequences: string[]}[]}
  */
 export function impossibleOrthography(words) {
@@ -160,7 +160,7 @@ const PERSONS = ['1sg', '2sg', '3sg', '1pl', '2pl', '3pl']
  * Verb present/future blocks with two distinct persons spelled identically —
  * almost always a wrong-person copy-paste. Impersonal verbs whose key is in
  * `allow` (every cell holds the single impersonal form on purpose) are skipped.
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {{allow?: Set<string>|string[]}} [opts]
  * @returns {{key: string, block: string, persons: [string, string], form: string}[]}
  */
@@ -196,7 +196,7 @@ export function personCellDuplicates(words, { allow = new Set() } = {}) {
  * be a single accepted form or a list of accepted variants (`махаю`/`машу`);
  * the stored cell must match one of them (stress-insensitively, ё preserved).
  * A golden cell that isn't present in the data at all is reported as missing.
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {Record<string, Record<string, string|string[]>>} golden key → slot → accepted form(s)
  * @returns {{key: string, slot: string, expected: string[], actual: string|null}[]}
  */
@@ -220,7 +220,7 @@ export function goldenMismatches(words, golden) {
  * Defective cells that exist but must not: a paradigm slot the language simply
  * doesn't fill (`убедиться` has no 1st-person-singular future). A non-empty
  * value in such a slot is a fabricated form.
- * @param {object[]} words
+ * @param {PlainObject[]} words
  * @param {Record<string, string[]>} defective key → list of forbidden slot keys
  * @returns {{key: string, slot: string, form: string}[]}
  */
@@ -244,8 +244,8 @@ export function defectiveCellsPresent(words, defective) {
  * Run every oracle check and return one flat, human-readable list of findings.
  * Each finding is `{ check, key, slot, message }`. An empty list means the
  * corpus is clean by the oracle's lights.
- * @param {object[]} words
- * @param {object} oracle the curated config (see morphGolden.js `MORPH_ORACLE`)
+ * @param {PlainObject[]} words
+ * @param {PlainObject} oracle the curated config (see morphGolden.js `MORPH_ORACLE`)
  * @returns {{check: string, key: string, slot: string, message: string}[]}
  */
 export function morphologyViolations(words, oracle = {}) {

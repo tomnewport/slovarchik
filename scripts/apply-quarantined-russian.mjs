@@ -41,7 +41,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 import { parseUsageItems, norm, core, tokenize } from './annotate-inflect.mjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -152,7 +152,7 @@ for (const [file, items] of byFile) {
     // Russian it is keyed on no longer exists, so no later run can match it.
     const resolved = resolutions.get(`${row.key}\u0000${String(row.ru).trim()}`)
     let inflectLine = null
-    let why = null
+    let why
     if (resolved) {
       // A hand resolution replaces the annotation outright: the token may have
       // moved *and* changed grammatical slot, so nothing of the old one stands.

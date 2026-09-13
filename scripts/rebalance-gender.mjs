@@ -26,7 +26,7 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import { buildWords, POS_BY_FILE } from '../src/lib/vocabBuild.js'
 import {

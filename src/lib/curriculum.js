@@ -85,13 +85,13 @@ function byCollection(words, level) {
  * is what lets the corpus grow into the last part holding a collection instead
  * of leaving new words homeless.
  *
- * @param {object[]} words learnable, normalised word records (`key`, `cefr`,
+ * @param {PlainObject[]} words learnable, normalised word records (`key`, `cefr`,
  *   `collections`)
  * @param {{parts: Array<{id: string, level: string, ordinal: number,
  *   collections: string[], take?: Record<string, number>}>}} definition
  *   the parsed `parts.yml`
- * @returns {{parts: Array<object>, keyToPart: Map<string, string>,
- *   unassigned: object[]}} parts in curriculum order, each with its `words`;
+ * @returns {{parts: Array<PlainObject>, keyToPart: Map<string, string>,
+ *   unassigned: PlainObject[]}} parts in curriculum order, each with its `words`;
  *   `unassigned` holds any word no part claimed (a gate failure, not a crash)
  */
 export function assignParts(words, definition) {
@@ -174,7 +174,7 @@ export function partBreach(part, levelTotal) {
 /**
  * Per-part progress counts, shaped like the CEFR stats they replace on the
  * Progress screen: total / met / learned / mastered, nesting by construction.
- * @param {Array<{id: string, words: object[]}>} parts
+ * @param {Array<{id: string, words: PlainObject[]}>} parts
  * @param {(key: string) => string} stateOf
  * @param {(key: string) => boolean} [hasMet]
  * @returns {Record<string, {total: number, met: number, learned: number, mastered: number}>}

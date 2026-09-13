@@ -337,7 +337,7 @@ function casesOf(paradigm, form, col) {
  *
  * @param {string} typed
  * @param {object} [ctx]
- * @param {object} [ctx.paradigm] the target word's paradigm (lib/paradigm.js)
+ * @param {PlainObject} [ctx.paradigm] the target word's paradigm (lib/paradigm.js)
  * @param {string} [ctx.wantCase] the paradigm row the slot wants — a case key, or
  *   `acc_anim` for an adjective agreeing with an animate noun
  * @param {boolean} [ctx.animate] whether the target noun is animate
@@ -408,7 +408,7 @@ export function caseRuleMiss(typed, ctx = {}) {
  *
  * @param {string} typed
  * @param {string} want the wanted form, accented
- * @param {object} [ctx] see {@link caseRuleMiss}
+ * @param {PlainObject} [ctx] see {@link caseRuleMiss}
  */
 export function ruleMiss(typed, want, ctx = {}) {
   if (normalize(typed) === normalize(want)) return null
@@ -430,9 +430,9 @@ const q = (value) => `«${value}»`
  * be it. The worked examples live in the rule's own `grammar-rules.yml` entry,
  * which is for the reveal.
  *
- * @param {object|null} miss from {@link ruleMiss}
- * @param {object} [rules] parsed grammar-rules.yml `rules` map
- * @returns {{ruleId: string, headline: string, detail: string, rule: object|null}|null}
+ * @param {PlainObject|null} miss from {@link ruleMiss}
+ * @param {PlainObject} [rules] parsed grammar-rules.yml `rules` map
+ * @returns {{ruleId: string, headline: string, detail: string, rule: PlainObject|null}|null}
  */
 export function ruleReminder(miss, rules = {}) {
   if (!miss?.ruleId) return null

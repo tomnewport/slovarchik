@@ -47,7 +47,7 @@ function taughtSlots(words) {
  * Stored participles/gerunds that no `form:` annotation teaches — the holes this
  * guard exists to keep at zero.
  *
- * @param {object[]} words normalised word records (from buildWords)
+ * @param {PlainObject[]} words normalised word records (from buildWords)
  * @returns {{key: string, slot: string}[]} in the word list's own order
  */
 export function unreachableNonFiniteForms(words) {

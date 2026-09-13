@@ -48,7 +48,7 @@ function isGlossary(word) {
  * match: a glossary form that always loses to a learnable homograph does no
  * tap-hint work and isn't really a promotion candidate.
  *
- * @param {object[]} words normalised word records (from buildWords) — the FULL
+ * @param {PlainObject[]} words normalised word records (from buildWords) — the FULL
  *   list, glossary entries included.
  * @returns {Array<{key,ru,en,headword,cefr,count,phrases,guess,collision}>}
  *   one row per glossary entry that hints at least one phrase token, busiest
@@ -117,7 +117,7 @@ const VOWELS = 'аеёиоуыэюя'
  * inference — without that it widens to `string` at the first return and every
  * caller loses the narrowing (#666).
  *
- * @typedef {object} PosGuess
+ * @typedef {PlainObject} PosGuess
  * @property {string} pos the guessed part of speech
  * @property {'likely'|'uncertain'} confidence
  * @property {string} reason the ending or shape the guess keyed off, for a human
@@ -283,7 +283,7 @@ function posSkeleton(pos) {
  * form but is marked for verification unless the caller passes a
  * hand-lemmatised one.
  *
- * @param {object} word    the glossary word record (from buildWords)
+ * @param {PlainObject} word    the glossary word record (from buildWords)
  * @param {object} [opts]
  * @param {string} [opts.pos]    target POS (defaults to the {@link guessPos} guess)
  * @param {string} [opts.lemma]  hand-supplied lemma (bare Russian); when omitted

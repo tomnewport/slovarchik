@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import yaml from 'js-yaml'
+import * as yaml from 'js-yaml'
 
 import { buildWords } from './vocabBuild.js'
 import { buildFormIndex } from './phraseHint.js'

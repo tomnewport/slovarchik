@@ -214,7 +214,7 @@ function scaleForm(scale, gv, kase) {
 // Scales, widest first: [divisor, scale noun, gender the multiplier agrees with].
 // The units row carries nulls — there is no scale noun for it — so the tuple is
 // spelled out rather than inferred, keeping `div` a number for the arithmetic.
-/** @type {Array<[number, object|null, 'm'|'f'|null]>} */
+/** @type {Array<[number, PlainObject|null, 'm'|'f'|null]>} */
 const SCALES = [
   [1000000, MILLION, 'm'],
   [1000, THOUSAND, 'f'],

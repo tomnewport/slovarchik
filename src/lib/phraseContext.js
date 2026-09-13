@@ -131,7 +131,7 @@ function weightedPick(items, weightOf, rng) {
 /**
  * Build an index from a word key to the list of phrases that teach it.
  * @param {Array} phrases context phrases (see vocabBuild.shapeContextPhrases)
- * @returns {Map<string, object[]>}
+ * @returns {Map<string, PlainObject[]>}
  */
 export function indexPhrases(phrases) {
   const byKey = new Map()
@@ -153,8 +153,8 @@ export function isGovernmentPhrase(phrase) {
  * Every verb-government phrase in the bank, flattened across owner keys. Feeds
  * the dedicated government drill, which is phrase-centric (organised by the
  * governed object) rather than word-centric like the general phrase-fix drill.
- * @param {Map<string, object[]>} phrasesByKey from {@link indexPhrases}
- * @returns {object[]}
+ * @param {Map<string, PlainObject[]>} phrasesByKey from {@link indexPhrases}
+ * @returns {PlainObject[]}
  */
 export function governmentPhrases(phrasesByKey) {
   const out = []
@@ -599,11 +599,11 @@ function ruleContextFor(word, target, tokens, idx) {
  * record it teaches. Returns null if the annotation is malformed (token out of
  * range or empty).
  *
- * @param {object} phrase one annotated usage phrase (see indexPhrases)
- * @param {object} word the normalised word record it teaches
+ * @param {PlainObject} phrase one annotated usage phrase (see indexPhrases)
+ * @param {PlainObject} word the normalised word record it teaches
  * @param {object} [ctx]
- * @param {object} [ctx.rules] parsed grammar-rules.yml `rules` map
- * @returns {object|null}
+ * @param {PlainObject} [ctx.rules] parsed grammar-rules.yml `rules` map
+ * @returns {PlainObject|null}
  */
 export function buildFromPhrase(phrase, word, { rules = {} } = {}) {
   const target = phrase?.target
@@ -692,11 +692,11 @@ function isException(phrase, rules) {
 
 /**
  * Build a context exercise for a word, or null if none can be made.
- * @param {object} word           a normalised word record (vocabBuild)
+ * @param {PlainObject} word           a normalised word record (vocabBuild)
  * @param {object} [ctx]
  * @param {Map}    [ctx.phrasesByKey] key → annotated phrases (see indexPhrases);
  *   without it there is nothing to draw from and the result is null
- * @param {object} [ctx.rules]     parsed grammar-rules.yml `rules` map
+ * @param {PlainObject} [ctx.rules]     parsed grammar-rules.yml `rules` map
  * @param {() => number} [ctx.rng]
  */
 export function buildContextExercise(word, { phrasesByKey, rules = {}, rng = Math.random } = {}) {
@@ -714,7 +714,7 @@ export function buildContextExercise(word, { phrasesByKey, rules = {}, rng = Mat
 
 /**
  * Whether a context exercise can be built for a word (deterministic).
- * @param {object} word normalised word record
+ * @param {PlainObject} word normalised word record
  * @param {object} [ctx]
  * @param {Map} [ctx.phrasesByKey] key → annotated phrases (see indexPhrases)
  * @returns {boolean}
@@ -751,15 +751,15 @@ function sampleWeighted(list, n, weightOf, rng) {
  * it is dropped from both — unless that would empty the word's own side, in
  * which case the set stays own-only instead of pairing a duplicate English.
  *
- * @param {object} word normalised word record (the drawn word)
+ * @param {PlainObject} word normalised word record (the drawn word)
  * @param {object} [ctx]
  * @param {Map}    [ctx.phrasesByKey] key → annotated phrases (see indexPhrases);
  *   without it the set is empty
- * @param {object} [ctx.rules]      parsed grammar-rules.yml `rules` map
- * @param {object} [ctx.partner]    resolved word record of `word.aspectPair`
+ * @param {PlainObject} [ctx.rules]      parsed grammar-rules.yml `rules` map
+ * @param {PlainObject} [ctx.partner]    resolved word record of `word.aspectPair`
  * @param {number} [ctx.items]      max sentences in the set
  * @param {() => number} [ctx.rng]
- * @returns {object[]} phrase-fix descriptors, each targeting its own owner
+ * @returns {PlainObject[]} phrase-fix descriptors, each targeting its own owner
  */
 export function buildContextSet(
   word,
@@ -862,7 +862,7 @@ function contrastDrillPools(word, contrast, phrasesBySource) {
  * with a linked partner, at least one annotated phrase to spell, at least one
  * unambiguous usage sentence on each side of the pair beyond the spelling one,
  * and enough sentences overall.
- * @param {object} word normalised word record
+ * @param {PlainObject} word normalised word record
  * @param {object} [ctx]
  * @param {Map} [ctx.phrasesByKey]    key → annotated phrases (see indexPhrases)
  * @param {Map} [ctx.phrasesBySource] key → shaped usage phrases (shapePhrases);
@@ -885,11 +885,11 @@ export function canBuildContrastDrill(word, { phrasesByKey, phrasesBySource } = 
  * shuffles the result; the spelling stage reuses the single-sentence context
  * exercise (its contrast step stripped — that was the pick stage's skill).
  *
- * @param {object} word normalised word record
+ * @param {PlainObject} word normalised word record
  * @param {object} [ctx]
  * @param {Map} [ctx.phrasesByKey]    key → annotated phrases (see indexPhrases)
  * @param {Map} [ctx.phrasesBySource] key → shaped usage phrases (shapePhrases)
- * @param {object} [ctx.rules] grammar-rules map (rule id → explanation)
+ * @param {PlainObject} [ctx.rules] grammar-rules map (rule id → explanation)
  * @param {() => number} [ctx.rng]
  * @param {number} [ctx.items] how many sentences the pick stage deals
  * @returns {{kind: 'verb-contrast', contrast, options, items, spell, contrastRule, targets}|null}

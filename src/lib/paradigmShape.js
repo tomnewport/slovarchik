@@ -102,7 +102,7 @@ function personNote(finite, past) {
  * The notes explaining one paradigm's shape — possibly none, at most one per
  * axis (tense, then person). Each is `{ key, text, ru }`, where `ru` is an
  * optional Russian illustration to render in its own `lang="ru"` span.
- * @param {object|null} paradigm from buildParadigm()
+ * @param {PlainObject|null} paradigm from buildParadigm()
  * @returns {{key: string, text: string, ru: string|null}[]}
  */
 export function paradigmNotes(paradigm) {
