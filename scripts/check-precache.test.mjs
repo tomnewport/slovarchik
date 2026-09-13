@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import {
   precacheEntries,
   vocabEntries,
+  versionEntries,
   vocabRuntimeRoutes,
   renderSummary,
 } from './check-precache.mjs'
@@ -59,6 +60,35 @@ describe('the vocab partition', () => {
   })
 })
 
+describe('the version.json partition', () => {
+  it('passes an app-shell-only manifest', () => {
+    expect(versionEntries(precacheEntries(shell))).toEqual([])
+  })
+
+  it('catches the deployed-version document being precached', () => {
+    const entries = precacheEntries('[{url:"version.json",revision:"a1"}]')
+    expect(versionEntries(entries).map((e) => e.url)).toEqual(['version.json'])
+  })
+
+  it('matches it under a base path too', () => {
+    const entries = precacheEntries('[{url:"slovarchik/version.json",revision:"a1"}]')
+    expect(versionEntries(entries)).toHaveLength(1)
+  })
+
+  it('does not mistake another manifest for it', () => {
+    const entries = precacheEntries('[{url:"manifest.webmanifest",revision:"a1"},{url:"vocab/manifest.json",revision:"b"}]')
+    expect(versionEntries(entries)).toEqual([])
+  })
+
+  it('says why it matters in the summary', () => {
+    const entries = precacheEntries('[{url:"version.json",revision:"a1"}]')
+    const md = renderSummary(entries, [], [], versionEntries(entries))
+    expect(md).toContain('version.json')
+    expect(md).toContain('never see a')
+    expect(md).toContain('globIgnores')
+  })
+})
+
 describe('the published summary', () => {
   it('says what is precached when the partition holds', () => {
     const md = renderSummary(precacheEntries(shell), [])
@@ -85,6 +115,10 @@ describe('the workbox config still declares the partition', () => {
 
   it('ignores vocab when building the precache manifest', () => {
     expect(config).toMatch(/globIgnores:\s*\[[^\]]*vocab/)
+  })
+
+  it('ignores the deployed-version document too', () => {
+    expect(config).toMatch(/globIgnores:\s*\[[^\]]*version\.json/)
   })
 
   it('keeps a runtime caching rule for the vocab instead', () => {

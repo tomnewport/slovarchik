@@ -36,3 +36,21 @@ declare const SpeechRecognition: {
   new (): any
   prototype: any
 }
+
+/**
+ * Build-time constants (`define` in vite.config.js): the commit the running
+ * bundle was built from and the instant it was built. Declared `string | null`
+ * because `gitCommitHash()` returns null outside a git checkout — and read
+ * through `typeof` guards anyway (src/lib/appVersion.js), since neither exists
+ * when a file is loaded outside a Vite pipeline.
+ */
+declare const __APP_COMMIT_HASH__: string | null
+/** @see __APP_COMMIT_HASH__ */
+declare const __APP_BUILD_DATE__: string | null
+
+/**
+ * The recent changes this build published (`scripts/release-notes.mjs`), read
+ * only by the Data screen so they stay out of the entry chunk. Empty where
+ * there was no git history to read.
+ */
+declare const __APP_RELEASE_NOTES__: { at: string; text: string }[]
