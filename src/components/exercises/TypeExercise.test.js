@@ -174,7 +174,7 @@ describe('TypeExercise', () => {
     })
   })
 
-  it('records the first miss (not a double success) when a retry corrects a word (#447)', async () => {
+  it('grades a retry-corrected word correct, without the double success (#745)', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
     // Wrong first ("кот" is a real word, so it is diagnosed), then the right
     // answer on the retry — without touching the hint. Grading is unchanged
@@ -190,10 +190,10 @@ describe('TypeExercise', () => {
     expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
 
     await wrapper.find('button.next').trigger('click')
-    // The first retrieval failed: report the miss, flagged as corrected on retry,
-    // never a double first-try success.
+    // The word was produced in the end, so it is graded correct (#745) — flagged
+    // as corrected on retry, and never a double first-try success.
     expect(wrapper.emitted('done')[0][0]).toEqual({
-      correct: false,
+      correct: true,
       correctedOnRetry: true,
       double: false,
       flawless: false,
@@ -237,7 +237,7 @@ describe('TypeExercise', () => {
     expect(wrapper.find('.retry-hint').text()).not.toMatch(/(^|[^\p{L}])шить([^\p{L}]|$)/u)
   })
 
-  it('still grades the first attempt, and only the first', async () => {
+  it('grades the answer it ends on, once, however many tries it took', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise: sew } })
     await wrapper.find('input[lang="ru"]').setValue('сшить')
     await wrapper.find('button.check').trigger('click')
@@ -248,9 +248,10 @@ describe('TypeExercise', () => {
     expect(wrapper.text()).toContain('Correct')
 
     await wrapper.find('button.next').trigger('click')
-    // Byte-identical to what one wrong attempt then a correction reports today.
+    // Byte-identical to what one wrong attempt then a correction reports today:
+    // correct, corrected on retry, and with no first-try credit whatever.
     expect(wrapper.emitted('done')[0][0]).toEqual({
-      correct: false,
+      correct: true,
       correctedOnRetry: true,
       double: false,
       flawless: false,
@@ -423,7 +424,7 @@ describe('TypeExercise', () => {
     })
   })
 
-  it('spares the word but records the phrase miss when a retry fixes a slip elsewhere (#447)', async () => {
+  it('grades the phrase correct when a retry fixes a slip outside the word (#745)', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
     // First try: assessed word (школу) right, slip elsewhere ("ыду").
     await wrapper.find('input[lang="ru"]').setValue('я ыду в школу')
@@ -433,10 +434,11 @@ describe('TypeExercise', () => {
     await wrapper.find('button.check').trigger('click')
 
     await wrapper.find('button.next').trigger('click')
-    // The exercise was missed first try (corrected on retry), but the word's own
-    // first retrieval succeeded, so it is still spared a penalty.
+    // The phrase is right in the end, so it is graded correct (#745) — with no
+    // first-try credit, the first attempt having missed. `wordCorrect` still
+    // reports the word's own unaided retrieval, which succeeded.
     expect(wrapper.emitted('done')[0][0]).toEqual({
-      correct: false,
+      correct: true,
       correctedOnRetry: true,
       double: false,
       flawless: false,
@@ -563,7 +565,7 @@ describe('TypeExercise', () => {
     expect(bankChips.map((c) => c.text()).sort()).toEqual(['в', 'иду', 'школу', 'я'])
   })
 
-  it('grades the rearranged chips and credits a corrected retry (#447)', async () => {
+  it('grades the rearranged chips and credits a corrected retry (#745)', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise: phrase } })
     await wrapper.find('input[lang="ru"]').setValue('школу я иду в')
     await wrapper.find('button.check').trigger('click')
@@ -578,9 +580,10 @@ describe('TypeExercise', () => {
     expect(wrapper.text()).toContain('Correct')
 
     await wrapper.find('button.next').trigger('click')
-    // A reorder success is a corrected retry, never a first-try double.
+    // A reorder success is a corrected retry: graded correct, never a first-try
+    // double.
     expect(wrapper.emitted('done')[0][0]).toEqual({
-      correct: false,
+      correct: true,
       correctedOnRetry: true,
       double: false,
       flawless: false,

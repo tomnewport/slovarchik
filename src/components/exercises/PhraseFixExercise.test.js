@@ -12,8 +12,9 @@ import PhraseFixExercise from './PhraseFixExercise.vue'
 
 /**
  * Submit the spelling. Since #725 a wrong first attempt buys a do-over with the
- * keyboard hint unlocked, so re-submit the same answer to settle it — the grade
- * is the first attempt's either way, which is what these tests are about.
+ * keyboard hint unlocked, so re-submit the same answer to settle it — leaving a
+ * wrong answer wrong, which is what these tests are about. The do-over that
+ * actually *corrects* the form has its own test (#745).
  */
 async function submitSpelling(wrapper) {
   await wrapper.find('form').trigger('submit')
@@ -154,6 +155,34 @@ describe('PhraseFixExercise', () => {
     expect(wrapper.emitted('done')[0][0]).toEqual({
       correct: false,
       wrong: ['бабочка=butterfly'],
+      double: false,
+      flawless: false,
+    })
+  })
+
+  it('grades a spelling corrected on the do-over as correct, but never double (#745)', async () => {
+    const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
+    await pick(wrapper, 'Accusative')
+    await pick(wrapper, 'Singular')
+
+    // The unaided attempt slips; the do-over fixes it.
+    await wrapper.find('input[lang="ru"]').setValue('бабочка')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.find('.retry-hint').exists()).toBe(true)
+    await wrapper.find('input[lang="ru"]').setValue('бабочку')
+    await wrapper.find('form').trigger('submit')
+
+    // The form was produced in the end, so the sentence is graded correct — and
+    // the character diff is gone with the miss it described. No 🔥: the first
+    // attempt missed, so this is not unaided first-try recall.
+    expect(wrapper.find('.feedback.good').exists()).toBe(true)
+    expect(wrapper.find('.spell-diff').exists()).toBe(false)
+    expect(wrapper.findComponent({ name: 'CelebrationBurst' }).props('show')).toBe(false)
+
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: true,
+      wrong: [],
       double: false,
       flawless: false,
     })

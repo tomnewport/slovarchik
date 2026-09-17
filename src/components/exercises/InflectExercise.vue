@@ -113,10 +113,14 @@ function next() {
   // No paradigm to drill (shouldn't happen — the builder filters these out) is
   // an auto-pass, not a wrong answer, so the runner can't get stuck re-queuing
   // an unanswerable exercise forever.
-  // Preserve the first miss: a table corrected on the built-in retry reports the
-  // initial failure (`correct: false`) flagged `correctedOnRetry` (#447).
+  // The table as it finally stands is the grade: a learner who fixes the one
+  // ending they slipped on knows the paradigm, and recording that as a failure
+  // both contradicts the "Correct" they were just shown and keeps the word
+  // eligible for the same drill forever (#745). The retry still costs the
+  // first-try credit — no double, no 🔥, and `hinted` scheduling — which is
+  // where the difference belongs.
   emit('done', {
-    correct: paradigm.value ? (retried.value ? false : wasCorrect.value) : true,
+    correct: paradigm.value ? wasCorrect.value : true,
     correctedOnRetry: retried.value && wasCorrect.value,
     double: double.value,
     // Right first time with no hint and no retry (#725). Unlike `double` this

@@ -91,17 +91,17 @@ describe('InflectExercise', () => {
     await fillTable(wrapper, true)
     await wrapper.find('.row button.primary').trigger('click') // second check grades
     await wrapper.find('button.next').trigger('click')
-    // Correct on the retry: the first check missed, so this is a corrected retry,
-    // never a first-try (let alone double) success.
+    // Correct on the retry: the table is graded as it finally stands (#745), but
+    // the first check missed, so it is never a first-try (let alone double) success.
     expect(wrapper.emitted('done')[0][0]).toEqual({
-      correct: false,
+      correct: true,
       correctedOnRetry: true,
       double: false,
       flawless: false,
     })
   })
 
-  it('records the first miss (no double, no 🔥) when a retry corrects the table unaided (#447)', async () => {
+  it('grades a retry-corrected table correct, with no double and no 🔥 (#745)', async () => {
     const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
     await fillTable(wrapper, false)
     await wrapper.find('.row button.primary').trigger('click') // first check → retry
@@ -114,7 +114,7 @@ describe('InflectExercise', () => {
 
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({
-      correct: false,
+      correct: true,
       correctedOnRetry: true,
       double: false,
       flawless: false,

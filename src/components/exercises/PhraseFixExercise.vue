@@ -83,15 +83,22 @@ watch(
     if (on) hintUsed.value = true
   },
 )
-// Finished items, oldest first: { ru, correct, warn } (warn = spelling right,
-// selection wrong — shown amber, not red).
+// Finished items, oldest first: { ru, correct, firstTry, warn } (warn = spelling
+// right, selection wrong — shown amber, not red).
 const results = ref([])
 
 // Every group has its correct option chosen — the gate to the spelling stage.
 const allResolved = computed(() => selectSteps.value.every((_, i) => resolved.value[i]))
 // A selection dimension was picked wrong at least once this item.
 const selectMissed = computed(() => missed.value.length > 0)
-const overallCorrect = computed(() => !selectMissed.value && spellFirstTry.value)
+// The item's grade: every selection right and the form spelled right in the end.
+// A form corrected on its one do-over counts (#745) — fixing a slip is not the
+// same as not knowing the form, and marking it wrong left the word due again at
+// once. What the do-over does cost is `itemFirstTry`.
+const overallCorrect = computed(() => !selectMissed.value && spellCorrect.value)
+// The same item, unaided and right first time — the first-try credit the 🔥 and
+// the double attempt are for. A do-over never earns it.
+const itemFirstTry = computed(() => !selectMissed.value && spellFirstTry.value)
 
 // Whether the pair (aspect / direction) group was ever answered wrong — the
 // feedback then names the verb that was needed, not just its grammatical slot.
@@ -240,8 +247,8 @@ function settleSpell() {
   setHintAllowed(true)
   // The whole set unaided and right first time — the 🔥 the other typing drills
   // show for the same thing, on the sentence that completes it.
-  if (isLast.value && overallCorrect.value && !hintUsed.value &&
-      results.value.every((r) => r.correct)) {
+  if (isLast.value && itemFirstTry.value && !hintUsed.value &&
+      results.value.every((r) => r.firstTry)) {
     showFire.value = true
   }
   playFeedback(overallCorrect.value)
@@ -270,6 +277,7 @@ function next() {
       ru: item.value.ru,
       key: (item.value.targets ?? [])[0] ?? null,
       correct: overallCorrect.value,
+      firstTry: itemFirstTry.value,
       warn: spellingOnlyMiss.value,
     },
   ]
@@ -290,7 +298,9 @@ function next() {
   }
   // Every sentence right first time, every form spelled with the hint untouched:
   // the set counts double, exactly as the other typing drills do (#210, #725).
-  const flawless = results.value.every((r) => r.correct) && !hintUsed.value
+  // `firstTry`, not `correct`, so a set carried by a do-over is graded correct
+  // without being celebrated as unaided recall (#745).
+  const flawless = results.value.every((r) => r.firstTry) && !hintUsed.value
   emit('done', {
     correct: results.value.every((r) => r.correct),
     // Per-word results: a set spans several words, and only the missed ones

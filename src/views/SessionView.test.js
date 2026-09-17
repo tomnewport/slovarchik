@@ -294,7 +294,7 @@ describe('SessionView', () => {
     expect(rec.events.some((e) => e.dimension === 'usage' && e.correct === false)).toBe(true)
   })
 
-  it('records a single first-try miss for a word corrected on its built-in retry (#447)', async () => {
+  it('records one correct, hinted attempt for a word corrected on its built-in retry (#745)', async () => {
     const wrapper = mount(SessionView)
     await flushPromises()
 
@@ -310,12 +310,13 @@ describe('SessionView', () => {
     // The corrected retry is not re-queued: the session moves straight on to ex1
     // rather than repeating ex0.
     expect(wrapper.text()).not.toContain('Fixing mistakes')
-    // Exactly one attempt is recorded, and it is the first-try miss — never two
-    // first-try successes.
+    // Exactly one attempt is recorded — never two first-try successes — and it
+    // is correct: the do-over fixed it. It counts once and as a hinted answer,
+    // so the schedule grows by the smaller factor and no 🔥 is earned.
     const rec = progress.state.records.t1
     expect(rec).toBeDefined()
     const usage = rec.events.filter((e) => e.dimension === 'usage')
-    expect(usage).toEqual([expect.objectContaining({ correct: false })])
+    expect(usage).toEqual([expect.objectContaining({ correct: true, flawless: false })])
   })
 
   it('replays missed flashcard words as one combined board at the end (#472)', async () => {
