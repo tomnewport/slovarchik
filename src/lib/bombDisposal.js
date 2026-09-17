@@ -544,3 +544,44 @@ export function generateBomb(round = 1, rng = Math.random) {
   const rule = shapeSequence(wires, 2, rng)
   return { round, level: level + 1, seconds: spec.seconds, wires, rule, ...describe(rule) }
 }
+
+// ── Reading speed ────────────────────────────────────────────────────────
+// The instruction gets longer and the clock gets shorter as the levels climb,
+// and the reading speeds up with them: at the top the sentence has to be
+// caught at something close to conversational pace, which is the listening
+// skill the game is for. A ramp rather than a per-level figure because it
+// keeps rising past the last level (LEVELS holds at 7, the rounds do not), so
+// a good run keeps getting harder after the instructions stop growing.
+//
+// Expressed as speechSynthesis rates, where 1 is the voice's normal pace: the
+// drills elsewhere read at 0.9, and that is still where round 1 starts.
+export const BASE_RATE = 0.9
+/** Rate at each named round; between them it is interpolated, beyond the last it holds. */
+const RATE_RAMP = [
+  { round: 1, rate: BASE_RATE },
+  { round: 8, rate: 1.25 },
+  { round: 16, rate: 1.5 },
+]
+
+/**
+ * How fast the instruction is read in a 1-based round: {@link BASE_RATE} at
+ * the start, 1.25× by round 8, 1.5× by round 16, and capped there.
+ * @param {number} [round] 1-based
+ * @returns {number} a speechSynthesis rate
+ */
+export function readingRateFor(round = 1) {
+  const r = Math.max(1, Math.floor(round) || 1)
+  const last = RATE_RAMP[RATE_RAMP.length - 1]
+  if (r >= last.round) return last.rate
+  for (let i = 1; i < RATE_RAMP.length; i += 1) {
+    const from = RATE_RAMP[i - 1]
+    const to = RATE_RAMP[i]
+    if (r > to.round) continue
+    const span = to.round - from.round
+    const rate = from.rate + ((to.rate - from.rate) * (r - from.round)) / span
+    // Two decimals: the voices cannot hear the difference, and an exact
+    // figure makes the ramp readable in a test and in a debug log.
+    return Math.round(rate * 100) / 100
+  }
+  return last.rate
+}
