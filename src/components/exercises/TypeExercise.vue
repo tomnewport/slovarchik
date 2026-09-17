@@ -115,12 +115,6 @@ const availableChips = computed(() => chips.value.filter((c) => !placedIds.value
 // other side of it, so the panel starts open and the toggle is there to put it
 // away.
 const dictOpen = ref(true)
-// Whether it was shown at any point. It reveals precisely the words an
-// encounter would otherwise credit (#675), and unlike the keyboard hint it
-// costs nothing, so `double` cannot stand in for it. Sticky: closing the panel
-// again does not unsee what it showed — and since it now starts open, this is
-// true from the moment there is a dictionary to show.
-const dictUsed = ref(false)
 // Whether the learner switched the keyboard hint on at any point this exercise.
 // A correct answer with the hint untouched counts double (and gets a little 🔥).
 const hintUsed = ref(false)
@@ -301,10 +295,9 @@ function resolve() {
   if (!props.exercise.audio) speak(props.exercise.ru)
 }
 
-// Toggle the Dictionary, remembering for good that it was consulted.
+// Put the Dictionary away, or bring it back.
 function openDict() {
   dictOpen.value = !dictOpen.value
-  if (dictOpen.value) dictUsed.value = true
 }
 
 // The first ask for help: unlock the keyboard hint (a spelling withholds it for
@@ -326,7 +319,6 @@ function next() {
     // Right first time with no hint and no do-over (#725). Same test as
     // `double` here: the Dictionary deliberately doesn't count against it.
     flawless: double.value,
-    dictUsed: dictUsed.value,
     wordCorrect: firstTryWordCorrect.value,
   })
 }
@@ -336,8 +328,6 @@ onMounted(() => {
   // Withhold the keyboard hint for the first, unaided attempt. The 🔥 Hints
   // button unlocks it on demand; a wrong first answer unlocks it anyway.
   setHintAllowed(false)
-  // The panel opens with the exercise, so whatever it glosses has been shown.
-  if (dictionary.value.length) dictUsed.value = true
   if (props.exercise.audio) speak(props.exercise.ru)
 })
 

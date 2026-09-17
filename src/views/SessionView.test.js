@@ -410,10 +410,21 @@ describe('SessionView', () => {
   // question the session only asks once the learner has answered the word's
   // exercises flawlessly.
 
-  /** Give `word` the one correct answer every dimension but `usage` wants. */
+  /**
+   * Give `word` a flawless answer in every dimension but `usage` — a previous
+   * session's work, which this one's usage exercise completes (#725). The
+   * evidence is meant to accumulate across sessions, which is why it is stored
+   * on the attempt rather than counted inside the session.
+   */
   async function primeAllButUsage(word) {
     for (const dimension of ['identification', 'hearing', 'speaking']) {
-      await progress.recordAttempt({ word, dimension, level: 'learning', correct: true })
+      await progress.recordAttempt({
+        word,
+        dimension,
+        level: 'learning',
+        correct: true,
+        flawless: true,
+      })
     }
   }
 
@@ -455,6 +466,36 @@ describe('SessionView', () => {
     await settle()
 
     expect(progress.isKnown('t1')).toBe(false)
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  it('never asks about a word whose earlier work was not flawless', async () => {
+    // Everything else answered, but with help somewhere along the way.
+    for (const dimension of ['identification', 'hearing', 'speaking']) {
+      await progress.recordAttempt({
+        word: 't1',
+        dimension,
+        level: 'learning',
+        correct: true,
+        flawless: false,
+      })
+    }
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await answer(wrapper, 'дом')
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  // The one thing the stored flag cannot see: the repeat round records a fresh,
+  // flawless-looking attempt for a word that was missed ten minutes earlier.
+  it('does not ask about a word this session had to repeat', async () => {
+    await primeAllButUsage('t1')
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    await answer(wrapper, 'ххх') // ex0 missed — a slip, not a real word
+    await answer(wrapper, 'кот') // ex1 fine
+    await answer(wrapper, 'дом') // ex0 again, in the repeat round — now perfect
     expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
   })
 

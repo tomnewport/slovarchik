@@ -12,6 +12,7 @@ import {
   wordHasInflections,
   wordHasContextDrill,
   borderlineDimensions,
+  levelFlawless,
 } from '../../lib/progression.js'
 import { tableKey } from '../../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../../lib/schedule.js'
@@ -328,6 +329,10 @@ function capEvents(rec) {
  * `hinted` marks answers produced with the keyboard hint available-and-used (or
  * any exercise that can't demonstrate unaided recall); the memory scheduler
  * grows stability less for those (#313).
+ * `flawless` marks an answer that was right the first time with no hint and no
+ * do-over, and is stored on the attempt so the quick progression offer (#725)
+ * can read "flawless in every dimension" across sessions rather than only
+ * within the one that happens to finish the set.
  * @returns {Promise<string>} the word's new state
  */
 export async function recordAttempt({
@@ -338,6 +343,7 @@ export async function recordAttempt({
   ts = Date.now(),
   times = 1,
   hinted = true,
+  flawless = false,
 }) {
   // A missing word key means there is nothing meaningful to record (e.g. a
   // phrase exercise with no source word, or a vocab entry that lacks a key).
@@ -362,7 +368,7 @@ export async function recordAttempt({
   // and stripping the flag as well would punish the same answer twice.
   if (!correct && rec.known && inCurrentBatch(word)) rec.known = false
   for (let i = 0; i < Math.max(1, times); i++) {
-    rec.events.push({ dimension, level, correct: !!correct, ts })
+    rec.events.push({ dimension, level, correct: !!correct, ts, flawless: !!flawless })
   }
   capEvents(rec)
   // Lifetime aggregates and the memory schedule fold in the attempt exactly
@@ -417,16 +423,22 @@ function inCurrentBatch(key) {
 }
 
 /**
- * The quick progression offer (#725): the state this word would be in right
- * now if the learner said they already knew it — or null when there is nothing
+ * The quick progression offer (#725): the state this word would be in right now
+ * if the learner said they already knew it — or null when there is nothing
  * worth asking about.
  *
- * The question is only worth putting when the answer changes something, so the
- * offer is withheld unless the relaxed criteria would lift the word *above*
- * where it already stands, and lift it at least as far as `learned`. That test
- * does the session's arithmetic for it: the relaxed criteria want one correct
- * answer in every dimension the level is graded on, so a word only clears the
- * bar once it has actually been drilled on each of them.
+ * The bar is that every dimension the level grades has had its most recent
+ * attempt answered flawlessly: right first time, no hint, no do-over. That is
+ * read off the stored attempts, so it accumulates across sessions — a word is
+ * drilled on whatever it still needs, and its identification answer may be
+ * weeks older than its usage one. Asking only about a set completed inside one
+ * sitting would almost never fire.
+ *
+ * The offer is then capped at what has actually been shown: an inflecting word
+ * whose *mastery* dimensions were merely correct, not flawless, is offered as
+ * learned rather than mastered. And it is withheld altogether unless it would
+ * lift the word above where it already stands — there is no point asking a
+ * question whose answer changes nothing.
  *
  * @param {string} key
  * @returns {'learned'|'mastered'|null} the state on offer
@@ -434,10 +446,18 @@ function inCurrentBatch(key) {
 export function quickProgressOffer(key) {
   const rec = state.records[key]
   if (!rec || rec.known) return null
-  const projected = wordState(events(key), { ...wordRecord(key), known: true })
-  if (rank(projected) < rank('learned')) return null
-  if (rank(projected) <= rank(stateOf(key))) return null
-  return projected === 'mastered' ? 'mastered' : 'learned'
+  const word = { ...wordRecord(key), known: true }
+  const evs = events(key)
+  if (!levelFlawless(evs, 'learning', word)) return null
+  // Flawless on every learning dimension satisfies the relaxed criteria too, so
+  // this is `learned` at worst — and `mastered` for a word with no table, which
+  // has nothing further to show.
+  let offer = wordState(evs, word)
+  if (offer === 'mastered' && wordHasInflections(word) && !levelFlawless(evs, 'mastery', word)) {
+    offer = 'learned'
+  }
+  if (rank(offer) <= rank(stateOf(key))) return null
+  return offer === 'mastered' ? 'mastered' : 'learned'
 }
 
 /**

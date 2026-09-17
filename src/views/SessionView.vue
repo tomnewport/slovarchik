@@ -36,7 +36,7 @@ import {
   isRepeating,
   remainingTargets,
 } from '../lib/sessionRunner.js'
-import { flawlessFinished, trackFlawless } from '../lib/quickProgress.js'
+import { flawlessFinished, resultFlawless, trackFlawless } from '../lib/quickProgress.js'
 
 import TypeExercise from '../components/exercises/TypeExercise.vue'
 import WordBankExercise from '../components/exercises/WordBankExercise.vue'
@@ -98,10 +98,14 @@ const flashcards = { wrong: new Map(), correct: new Map() }
 let flashcardOptions = []
 
 // Quick progression (#725): word key → whether every graded exercise it has had
-// this session was flawless — right first time, no hint, no do-over. Once a
-// word's session is over and the ledger still says yes, we ask whether to
-// count it learned (or mastered) there and then, instead of making the learner
-// grind a word they have just demonstrated they know.
+// *this session* was flawless — right first time, no hint, no do-over.
+//
+// The offer itself is decided by the store, over the flag now stored on every
+// attempt, so the evidence accumulates across sessions. This ledger is the
+// extra guard that only a session can give: an exercise missed and then
+// re-answered correctly in the repeat round leaves a flawless-looking attempt
+// as the dimension's latest, and the same question again ten minutes later is
+// not fresh evidence of anything.
 const flawlessWords = new Map()
 // Words already asked about (or found not worth asking about), so the question
 // is put once per word per session.
@@ -358,6 +362,9 @@ async function onDone(result) {
         correct: wrong ? !wrong.has(key) : result.correct,
         times,
         hinted: !result.double,
+        // Stored on the attempt so "flawless in every dimension" can be read
+        // across sessions, not just inside the one that finishes the set (#725).
+        flawless: resultFlawless(result, key),
       })
     } catch (e) {
       if (!firstError) firstError = e

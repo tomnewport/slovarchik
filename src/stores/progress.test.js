@@ -1334,9 +1334,9 @@ describe('encounters (#675)', () => {
     expect(metCount.value).toBe(0)
   })
 
-  it('logs nothing when the Dictionary was opened', () => {
-    recordEncounter(typed, { correct: true, double: true, dictUsed: true })
-    expect(metCount.value).toBe(0)
+  it('still logs when the Dictionary was open, since a gloss read is a word met (#725)', () => {
+    recordEncounter(typed, { correct: true, double: true })
+    expect(metCount.value).toBeGreaterThan(0)
   })
 
   it('keeps the first timestamp when a word is met again', () => {
@@ -1661,28 +1661,85 @@ describe('known words (#321)', () => {
   })
 })
 
-// The quick progression route (#725): the offer the session puts after a
-// flawless pass, and the deal the learner takes by accepting it.
+// The quick progression route (#725): the offer the session puts once a word
+// has been answered flawlessly in every dimension, and the deal the learner
+// takes by accepting it.
 describe('quick progression (#725)', () => {
-  async function onePassLearning(word, ts = 1) {
+  /** One flawless answer in each learning dimension. */
+  async function onePassLearning(word, ts = 1, flawless = true) {
     for (const d of ['identification', 'usage', 'hearing', 'speaking']) {
-      await recordAttempt({ word, dimension: d, level: 'learning', correct: true, ts })
+      await recordAttempt({ word, dimension: d, level: 'learning', correct: true, ts, flawless })
     }
   }
 
-  it('offers nothing until the relaxed criteria would actually lift the word', async () => {
+  it('offers nothing until every dimension has been answered', async () => {
     setVocab(makeWords(1, { hasInflections: true }))
     expect(quickProgressOffer('w0')).toBeNull() // never attempted
-    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
-    // One dimension answered; the others have nothing at all, relaxed or not.
+    await recordAttempt({
+      word: 'w0', dimension: 'usage', level: 'learning', correct: true, flawless: true,
+    })
     expect(quickProgressOffer('w0')).toBeNull()
   })
 
-  it('offers `learned` once every learning dimension has a clean answer', async () => {
+  it('offers `learned` once every learning dimension has a flawless answer', async () => {
     setVocab(makeWords(1, { hasInflections: true }))
     await onePassLearning('w0')
     expect(stateOf('w0')).toBe('learning')
     expect(quickProgressOffer('w0')).toBe('learned')
+  })
+
+  it('does not ask about a word that was merely correct', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    // Right in every dimension, but with the hint or a do-over somewhere.
+    await onePassLearning('w0', 1, false)
+    expect(quickProgressOffer('w0')).toBeNull()
+  })
+
+  // The point of reading the flag off the stored attempts (#725): a word is
+  // drilled on whatever it still needs, so the dimensions rarely all land in
+  // one sitting.
+  it('accumulates the evidence across sessions', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    for (const d of ['identification', 'hearing', 'speaking']) {
+      await recordAttempt({
+        word: 'w0', dimension: d, level: 'learning', correct: true, ts: 1, flawless: true,
+      })
+    }
+    expect(quickProgressOffer('w0')).toBeNull() // usage still owing
+    await recordAttempt({
+      word: 'w0', dimension: 'usage', level: 'learning', correct: true, ts: 9e8, flawless: true,
+    })
+    expect(quickProgressOffer('w0')).toBe('learned')
+  })
+
+  it('reads the most recent attempt, not the best one', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0')
+    // A later fumble in one dimension: flawless in March says nothing about now.
+    await recordAttempt({
+      word: 'w0', dimension: 'usage', level: 'learning', correct: false, ts: 9e8, flawless: false,
+    })
+    expect(quickProgressOffer('w0')).toBeNull()
+  })
+
+  it('caps the offer at what was shown flawlessly', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0')
+    // Mastery answered, but with help — enough for the relaxed criteria to
+    // reach `mastered`, not enough to be offered it.
+    for (const d of ['identification', 'usage', 'context']) {
+      await recordAttempt({
+        word: 'w0', dimension: d, level: 'mastery', correct: true, ts: 2, flawless: false,
+      })
+    }
+    expect(quickProgressOffer('w0')).toBe('learned')
+
+    for (const d of ['identification', 'usage', 'context']) {
+      await recordAttempt({
+        word: 'w0', dimension: d, level: 'mastery', correct: true, ts: 3, flawless: true,
+      })
+    }
+    expect(quickProgressOffer('w0')).toBe('mastered')
   })
 
   it('offers nothing for a word already there on the standard criteria', async () => {

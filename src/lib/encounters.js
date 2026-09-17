@@ -12,20 +12,17 @@
 // have handed them the word disqualifies the exercise:
 //
 //   * the keyboard hint (already reported as the absence of `double`);
-//   * the ❓ Dictionary panel, which glosses precisely the unlearned words of
-//     the phrase — that is, exactly the encounter candidates;
 //   * the inline glosses under a word-bank cue, which are not opt-in at all,
 //     so only the audio variant of that drill can prove anything.
 //
-// Since #725 the Dictionary panel opens with the exercise rather than waiting
-// to be asked for, on the reasoning that the words it glosses are not the ones
-// being graded, so hunting for them was friction with nothing behind it. The
-// cost lands here: a typed phrase now reports `dictUsed` whenever there was a
-// dictionary to show, so it proves an encounter only for a phrase with nothing
-// unlearned in it — which has nothing to credit anyway. In practice the spoken
-// word-bank drill is now the source of encounters. The rule below is unchanged
-// and deliberately so: it is the panel's default that moved, and if it moves
-// back the evidence comes back with it.
+// The ❓ Dictionary panel used to disqualify a typed phrase too, on the grounds
+// that it glosses precisely the encounter candidates. Since #725 it opens with
+// the exercise rather than waiting to be asked for, and the rule went with it:
+// a gloss read off the panel is still the word met, which is all an encounter
+// claims. The learner typed the sentence out, unaided by the keyboard, having
+// read what its words meant — that is a meeting. Note the word-bank rule below
+// has not moved with it: the inline-gloss case is arguably the same argument,
+// but it is a different drill and changing it is a separate decision.
 //
 // The spoken drills are deliberately not a source. Their grade comes from the
 // Web Speech API, which is language-model-assisted: it will happily return the
@@ -46,7 +43,7 @@ import { alignPhraseTokens } from './phraseAlign.js'
  *
  * @param {{content?: string, kind?: string, ru?: string, audio?: boolean}} ex
  *   the exercise descriptor
- * @param {{correct?: boolean, double?: boolean, dictUsed?: boolean}} result
+ * @param {{correct?: boolean, double?: boolean}} result
  *   what the exercise component reported
  * @returns {boolean}
  */
@@ -56,10 +53,11 @@ export function phraseProvesEncounter(ex, result) {
   switch (ex.kind) {
     // Typed the whole sentence out. `double` is first-try-correct with the
     // keyboard hint untouched, which is the unaided-recall signal the scheduler
-    // already trusts (#210, #313); the Dictionary is checked separately because
-    // it costs no points and so does not show up in `double`.
+    // already trusts (#210, #313). The Dictionary does not count against it: it
+    // glosses the words around the target, and having read a gloss is how a
+    // word gets met.
     case 'type':
-      return result.double === true && !result.dictUsed
+      return result.double === true
     // Assembled the translation of a sentence. Only worth anything when the cue
     // was audio: the visual cue renders through HintablePhrase in `inline` mode,
     // which glosses every unlearned word whether the learner wanted it or not.

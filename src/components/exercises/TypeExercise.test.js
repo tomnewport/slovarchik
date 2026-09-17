@@ -89,7 +89,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: false,
       double: true,
       flawless: true,
-      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -124,7 +123,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: false,
       double: true,
       flawless: true,
-      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -144,7 +142,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: false,
       double: false,
       flawless: false,
-      dictUsed: false,
       wordCorrect: true,
     })
   })
@@ -173,7 +170,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: false,
       double: false,
       flawless: false,
-      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -201,7 +197,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: true,
       double: false,
       flawless: false,
-      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -259,7 +254,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: true,
       double: false,
       flawless: false,
-      dictUsed: false,
       wordCorrect: false,
     })
   })
@@ -425,7 +419,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: false,
       double: false,
       flawless: false,
-      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: true,
     })
   })
@@ -447,7 +440,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: true,
       double: false,
       flawless: false,
-      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: true,
     })
   })
@@ -465,7 +457,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: false,
       double: false,
       flawless: false,
-      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: false,
     })
   })
@@ -593,7 +584,6 @@ describe('TypeExercise', () => {
       correctedOnRetry: true,
       double: false,
       flawless: false,
-      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: true,
     })
   })
