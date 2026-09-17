@@ -31,6 +31,7 @@ import { ruleMiss, ruleReminder } from '../../lib/ruleOracle.js'
 import { speak } from '../../lib/speech.js'
 import { keyboard, resetHint, setHintAllowed, toggleHint } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
+import { firstPhraseEncounter } from '../../stores/progress.js'
 import { state as vocabState } from '../../stores/vocab.js'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
@@ -244,6 +245,9 @@ function passSpell() {
 
 function settleSpell() {
   stage.value = 'done'
+  // The completed Russian sentence is now visible. A later translation drill
+  // should treat it as familiar even if it was first met in this context drill.
+  firstPhraseEncounter(item.value.ru)
   setHintAllowed(true)
   // The whole set unaided and right first time — the 🔥 the other typing drills
   // show for the same thing, on the sentence that completes it.

@@ -16,13 +16,21 @@ import {
 import { speak } from '../../lib/speech.js'
 import { phrases } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
+import { firstPhraseEncounter } from '../../stores/progress.js'
+import { chipGlossesFor } from '../../stores/hints.js'
 import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
 import ComprehensionCheck from '../ComprehensionCheck.vue'
 import WordFacts from '../WordFacts.vue'
 
-const props = defineProps({ exercise: { type: Object, required: true } })
+const props = defineProps({
+  exercise: { type: Object, required: true },
+  // A standalone drill can pass its own first-presentation decision to the
+  // visual replacement for the same question after Skip.
+  firstEncounter: { type: Boolean, default: null },
+})
 const emit = defineEmits(['done', 'dispute'])
+const firstEncounter = props.firstEncounter ?? firstPhraseEncounter(props.exercise.ru)
 
 // How many decoy tiles to mix in. Tripled from the original 3 so the bank has
 // markedly more distractors to find the target words among.
@@ -56,6 +64,8 @@ const bank = ref(
     alts: props.exercise.enAlt ?? [],
   }),
 )
+const chipGlosses = computed(() => firstEncounter
+  ? chipGlossesFor(props.exercise.ru, bank.value, 'en') : new Map())
 const placed = ref([])
 const checked = ref(false)
 const wasCorrect = ref(false)
@@ -232,7 +242,7 @@ onUnmounted(() => {
           ❓ question
         </span>
       </template>
-      <HintablePhrase v-else :text="exercise.ru" mode="inline" class="cue" />
+      <HintablePhrase v-else :text="exercise.ru" mode="inline" :show-gloss="firstEncounter" class="cue" />
     </div>
 
     <div class="answer-line card" :aria-label="assembled">
@@ -244,7 +254,8 @@ onUnmounted(() => {
         :disabled="checked"
         @click="unpick(tile)"
       >
-        {{ tile.text }}
+        <span class="tile-text">{{ tile.text }}</span>
+        <small v-if="chipGlosses.get(tile.id)" class="tile-gloss" lang="ru">{{ chipGlosses.get(tile.id) }}</small>
       </button>
       <span v-if="!placed.length" class="muted">Tap the words in order…</span>
     </div>
@@ -259,7 +270,8 @@ onUnmounted(() => {
         :disabled="checked || placedIds.has(tile.id)"
         @click="pick(tile)"
       >
-        {{ tile.text }}
+        <span class="tile-text">{{ tile.text }}</span>
+        <small v-if="chipGlosses.get(tile.id)" class="tile-gloss" lang="ru">{{ chipGlosses.get(tile.id) }}</small>
       </button>
     </div>
 
@@ -369,7 +381,12 @@ onUnmounted(() => {
   background: var(--bg-soft);
   color: var(--text);
   font-size: 1.05rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
+.tile-gloss { font-size: 0.72rem; color: var(--muted); }
+.tile.match-first .tile-gloss { color: inherit; }
 .tile.placed {
   border-color: var(--primary);
 }

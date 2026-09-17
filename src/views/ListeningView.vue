@@ -5,6 +5,8 @@ import { sample } from '../lib/quiz.js'
 import { bankTokens, buildListeningBank, listeningTokens, listeningWordPool, phraseCorrect } from '../lib/phrases.js'
 import { speak, speechSupported, SLOW_RATE } from '../lib/speech.js'
 import { makeVisualReplacement } from '../lib/exerciseBuild.js'
+import { firstPhraseEncounter, state as progressState } from '../stores/progress.js'
+import { chipGlossesFor } from '../stores/hints.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import HintablePhrase from '../components/HintablePhrase.vue'
 import SpeakButton from '../components/SpeakButton.vue'
@@ -22,6 +24,7 @@ const started = ref(false)
 const score = reactive({ right: 0, total: 0 })
 
 const current = ref(null)
+const currentFirst = ref(false)
 const bank = ref([])
 const placed = ref([])
 const answered = ref(false)
@@ -37,6 +40,8 @@ const decoyPool = computed(() => listeningWordPool(phrases.value))
 
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const pool = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id)))
+const chipGlosses = computed(() => currentFirst.value && current.value
+  ? chipGlossesFor(current.value.ru, bank.value, 'en') : new Map())
 
 function replay() {
   if (current.value) speak(current.value.ru)
@@ -60,6 +65,7 @@ function nextQuestion() {
   wasCorrect.value = false
   placed.value = []
   current.value = sample(phrases.value, 1)[0]
+  currentFirst.value = firstPhraseEncounter(current.value?.ru)
   // Tiles come from the primary translation *and* its accepted alternates, so
   // an answer check() will grade as correct can actually be assembled (#581).
   // Extra tiles from an alternate are themselves distractors for the primary
@@ -164,11 +170,12 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <p v-if="!canSpeak" class="feedback bad">
       Your browser can't read text aloud, so the Russian will be shown as text instead.
     </p>
-    <p v-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
+    <p v-if="ready && !progressState.loaded" class="muted">Loading progress…</p>
+    <p v-else-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
     <p v-else-if="!ready" class="feedback bad">
       No phrases available offline yet — connect once to download them.
     </p>
-    <button class="primary start" :disabled="!ready" @click="start">
+    <button class="primary start" :disabled="!ready || !progressState.loaded" @click="start">
       Start listening
     </button>
   </section>
@@ -183,7 +190,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
     <!-- Visual replacement exercise shown after skipping a phrase -->
     <template v-if="visualExercise">
       <p class="muted" style="margin: 0; font-size: 0.85rem">Skipped — now translate it visually</p>
-      <WordBankExercise :key="visualExercise.id" :exercise="visualExercise" @done="onVisualDone" />
+      <WordBankExercise :key="visualExercise.id" :exercise="visualExercise" :first-encounter="currentFirst" @done="onVisualDone" />
       <button style="justify-self: start" @click="quit">Stop</button>
     </template>
 
@@ -197,7 +204,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
           <button class="replay" :disabled="!canSpeak" @click="replaySlow">🐢 Slow</button>
         </div>
         <!-- Without speech the drill degrades to translating the shown text. -->
-        <HintablePhrase v-if="!canSpeak" :text="current.ru" class="ru" />
+        <HintablePhrase v-if="!canSpeak" :text="current.ru" :show-gloss="currentFirst" class="ru" />
       </div>
 
       <!-- Answer line: the words placed so far (tap to send one back). -->
@@ -209,7 +216,8 @@ onUnmounted(() => clearTimeout(advanceTimer))
           :disabled="answered"
           @click="remove(tile)"
         >
-          {{ tile.text }}
+          <span class="tile-text">{{ tile.text }}</span>
+          <small v-if="chipGlosses.get(tile.id)" class="tile-gloss" lang="ru">{{ chipGlosses.get(tile.id) }}</small>
         </button>
         <span v-if="!placed.length" class="muted">Tap the words below…</span>
       </div>
@@ -223,7 +231,8 @@ onUnmounted(() => clearTimeout(advanceTimer))
           :disabled="answered"
           @click="place(tile)"
         >
-          {{ tile.text }}
+          <span class="tile-text">{{ tile.text }}</span>
+          <small v-if="chipGlosses.get(tile.id)" class="tile-gloss" lang="ru">{{ chipGlosses.get(tile.id) }}</small>
         </button>
       </div>
 
@@ -232,7 +241,7 @@ onUnmounted(() => clearTimeout(advanceTimer))
           {{ wasCorrect ? '✓ Correct!' : '✗ Answer: ' + current.en }}
         </p>
         <div class="muted" style="display: flex; align-items: center; gap: 0.4rem; margin: 0">
-          <HintablePhrase :text="current.ru" />
+          <HintablePhrase :text="current.ru" :show-gloss="currentFirst" />
           <SpeakButton :text="current.ru" />
         </div>
         <!-- Correct answers advance on their own; only wrong answers wait. -->
@@ -257,7 +266,11 @@ onUnmounted(() => clearTimeout(advanceTimer))
 .tile {
   padding: 0.5rem 0.8rem;
   font-size: 1.05rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
+.tile-gloss { font-size: 0.72rem; color: var(--muted); }
 
 .tile.placed {
   border-color: var(--primary);

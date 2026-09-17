@@ -40,6 +40,15 @@ describe('HintablePhrase', () => {
     expect(wrapper.text()).toContain('paragraph')
   })
 
+  it('renders the same sentence without tap or inline gloss on a repeat', () => {
+    const wrapper = mount(HintablePhrase, {
+      props: { text: 'В э́том абза́це две оши́бки.', mode: 'inline', showGloss: false },
+    })
+    expect(wrapper.findAll('.hinted')).toHaveLength(0)
+    expect(wrapper.text()).toContain('абза́це')
+    expect(wrapper.text()).not.toContain('paragraph')
+  })
+
   it('does not hint a word that is in the current batch', () => {
     progressState.learning = { level: 'learning', name: 'Test', words: ['абзац=paragraph'] }
     const wrapper = mount(HintablePhrase, { props: { text: 'В э́том абза́це две оши́бки.' } })

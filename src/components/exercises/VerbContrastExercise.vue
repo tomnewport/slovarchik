@@ -15,6 +15,7 @@ import { computed, ref } from 'vue'
 
 import { speak } from '../../lib/speech.js'
 import { playFeedback } from '../../stores/settings.js'
+import { firstPhraseEncounter } from '../../stores/progress.js'
 import SpeakButton from '../SpeakButton.vue'
 import PhraseFixExercise from './PhraseFixExercise.vue'
 
@@ -42,6 +43,7 @@ function pick(item, opt) {
   const right = opt.id === item.answer
   playFeedback(right)
   // The authored sentence is correct Russian — reveal and voice it.
+  firstPhraseEncounter(item.ru)
   speak(item.ru)
 }
 

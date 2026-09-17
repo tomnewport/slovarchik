@@ -1,5 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import 'fake-indexeddb/auto'
 import { mount } from '@vue/test-utils'
+import { state as progressState } from '../../stores/progress.js'
 
 const speak = vi.fn()
 vi.mock('../../lib/speech.js', () => ({
@@ -47,7 +49,10 @@ const exercise = {
   targets: ['сказать=to say'],
 }
 
-beforeEach(() => speak.mockClear())
+beforeEach(() => {
+  speak.mockClear()
+  progressState.seenPhrases = new Set()
+})
 
 // The row for the i-th sentence, and a click on the option labelled `label`.
 async function answer(wrapper, i, label) {
@@ -85,6 +90,7 @@ describe('VerbContrastExercise', () => {
     expect(row.find('.verdict.good').exists()).toBe(true)
     expect(row.text()).toContain('Он говори́т по-ру́сски ка́ждый день.')
     expect(speak).toHaveBeenCalledWith('Он говори́т по-ру́сски ка́ждый день.')
+    expect(progressState.seenPhrases.has('он говорит порусски каждый день')).toBe(true)
 
     await answer(wrapper, 1, 'говори́ть') // wrong — it needed сказа́ть
     row = wrapper.findAll('.item')[1]

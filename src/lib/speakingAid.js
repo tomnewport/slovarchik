@@ -4,8 +4,9 @@
 // the learner is producing a whole sentence from nothing. Three rungs of help
 // stand behind that prompt, and only the last one costs anything:
 //
-//   0  dictionary  every word of the sentence EXCEPT the one being assessed,
-//                  as headword + gloss, in alphabetical order. Always on. It
+//   0  dictionary  eligible non-target words of the sentence, as headword +
+//                  gloss, in alphabetical order. The caller shows it only on
+//                  a phrase's first encounter. It
 //                  gives away vocabulary the drill is not grading, and the
 //                  alphabetical order is deliberate: it says which words are in
 //                  the sentence without saying where they go.

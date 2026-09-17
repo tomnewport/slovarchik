@@ -1,8 +1,10 @@
 import { describe, it, expect, afterEach, beforeAll, vi } from 'vitest'
+import 'fake-indexeddb/auto'
 import { mount } from '@vue/test-utils'
 import SpeakExercise from './SpeakExercise.vue'
 import { setSelfCertifySpeech } from '../../stores/settings.js'
 import { state as vocabState } from '../../stores/vocab.js'
+import { state as progressState } from '../../stores/progress.js'
 import { loadFixtureWords } from '../../test/fixtures.js'
 
 const exercise = {
@@ -71,6 +73,7 @@ afterEach(() => {
   delete window.SpeechRecognition
   delete window.webkitSpeechRecognition
   lastRec = null
+  progressState.seenPhrases = new Set()
   vi.restoreAllMocks()
 })
 
@@ -94,6 +97,17 @@ describe('SpeakExercise hint ladder', () => {
     // «оши́бки» as «оши́бка». Inflecting them is the learner's job — and is what
     // the next rung hands over.
     expect(words).toEqual(['в', 'два', 'ошибка', 'этот'])
+  })
+
+  it('withholds the dictionary after this phrase has appeared once', () => {
+    installRecognition()
+    const first = mount(SpeakExercise, { props: { exercise: phrase } })
+    expect(first.find('.dict-list').exists()).toBe(true)
+    first.unmount()
+    const again = mount(SpeakExercise, { props: { exercise: phrase } })
+    expect(again.find('.dict-list').exists()).toBe(false)
+    // The hint ladder is still available for producing the Russian sentence.
+    expect(again.find('button.hint-rung').exists()).toBe(true)
   })
 
   it('arranges them into the blanked sentence on the first hint, for free', async () => {

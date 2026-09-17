@@ -1,4 +1,5 @@
 import { describe, it, expect, afterEach, beforeAll } from 'vitest'
+import 'fake-indexeddb/auto'
 import { mount } from '@vue/test-utils'
 import TypeExercise from './TypeExercise.vue'
 import { keyboard, resetHint } from '../../stores/keyboard.js'
@@ -16,6 +17,7 @@ afterEach(() => {
   progressState.records = {}
   progressState.learning = null
   progressState.mastery = null
+  progressState.seenPhrases = new Set()
 })
 
 const exercise = {
@@ -618,10 +620,18 @@ describe('TypeExercise', () => {
     // Same phrase, but nothing marked as the assessed word: абзац now shows,
     // proving the explicit guard (not the batch filter) is what hides it above.
     const wrapper = mount(TypeExercise, {
-      props: { exercise: { ...dictPhrase, targets: [], targetTokens: [] } },
+      props: { exercise: { ...dictPhrase, ru: 'В э́том абза́це две оши́бки!', targets: [], targetTokens: [] } },
     })
     const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
     expect(words).toContain('абзаце')
+  })
+
+  it('removes the dictionary on the next encounter of the same sentence', () => {
+    const first = mount(TypeExercise, { props: { exercise: dictPhrase } })
+    expect(first.find('.dictionary').exists()).toBe(true)
+    first.unmount()
+    const again = mount(TypeExercise, { props: { exercise: dictPhrase } })
+    expect(again.find('.dictionary').exists()).toBe(false)
   })
 })
 

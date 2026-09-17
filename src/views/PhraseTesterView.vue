@@ -5,6 +5,8 @@ import { sample } from '../lib/quiz.js'
 import { resetHint } from '../stores/keyboard.js'
 import { phraseTokens, phraseCorrect, buildAssemblyBank } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
+import { firstPhraseEncounter, state as progressState } from '../stores/progress.js'
+import { chipGlossesFor } from '../stores/hints.js'
 import AnnotatedEnglish from '../components/AnnotatedEnglish.vue'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import ComprehensionCheck from '../components/ComprehensionCheck.vue'
@@ -26,6 +28,7 @@ const direction = ref('ru-en') // or 'en-ru'
 const score = reactive({ right: 0, total: 0 })
 
 const current = ref(null)
+const currentFirst = ref(false)
 const answered = ref(false)
 const wasCorrect = ref(false)
 const typed = ref('')
@@ -73,6 +76,7 @@ function nextQuestion() {
   typed.value = ''
   placed.value = []
   current.value = sample(phrases.value, 1)[0]
+  currentFirst.value = firstPhraseEncounter(current.value?.ru)
   if (direction.value === 'ru-en') speak(current.value.ru)
   if (level.value === 'easy') {
     const target = targetOf(current.value)
@@ -105,6 +109,8 @@ function record(correct) {
 // --- Easy: build the sentence from word tiles ---------------------------------
 const placedIds = computed(() => new Set(placed.value.map((t) => t.id)))
 const pool = computed(() => bank.value.filter((t) => !placedIds.value.has(t.id)))
+const chipGlosses = computed(() => currentFirst.value && current.value
+  ? chipGlossesFor(current.value.ru, bank.value, targetLang.value) : new Map())
 
 function placeToken(token) {
   if (answered.value) return
@@ -158,7 +164,8 @@ onUnmounted(() => {
         EN → RU
       </button>
     </div>
-    <p v-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
+    <p v-if="ready && !progressState.loaded" class="muted">Loading progress…</p>
+    <p v-else-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
     <p v-else-if="!ready" class="feedback bad">
       No phrases available offline yet — connect once to download them.
     </p>
@@ -168,7 +175,7 @@ onUnmounted(() => {
         :key="l.id"
         class="card"
         style="text-align: left"
-        :disabled="!ready"
+        :disabled="!ready || !progressState.loaded"
         @click="start(l.id)"
       >
         <strong>{{ l.label }}</strong>
@@ -190,7 +197,7 @@ onUnmounted(() => {
         style="font-size: 1.5rem; margin: 0.5rem 0"
         :lang="direction === 'ru-en' ? 'ru' : 'en'"
       >
-        <HintablePhrase v-if="direction === 'ru-en'" :text="sourceOf(current)" />
+        <HintablePhrase v-if="direction === 'ru-en'" :text="sourceOf(current)" :show-gloss="currentFirst" />
         <!-- Translating *into* Russian: annotate what the English can't say on
              its own — informal vs formal "you", the speaker's gender. -->
         <AnnotatedEnglish v-else :text="sourceOf(current)" :notes="current.enNotes ?? []" />
@@ -215,7 +222,8 @@ onUnmounted(() => {
           :disabled="answered"
           @click="removeToken(token)"
         >
-          {{ token.text }}
+          <span class="tile-text">{{ token.text }}</span>
+          <small v-if="chipGlosses.get(token.id)" class="tile-gloss" :lang="direction === 'ru-en' ? 'ru' : 'en'">{{ chipGlosses.get(token.id) }}</small>
         </button>
         <span v-if="!placed.length" class="muted">Tap words below…</span>
       </div>
@@ -227,7 +235,8 @@ onUnmounted(() => {
           :disabled="answered"
           @click="placeToken(token)"
         >
-          {{ token.text }}
+          <span class="tile-text">{{ token.text }}</span>
+          <small v-if="chipGlosses.get(token.id)" class="tile-gloss" :lang="direction === 'ru-en' ? 'ru' : 'en'">{{ chipGlosses.get(token.id) }}</small>
         </button>
       </div>
     </template>
@@ -285,7 +294,11 @@ onUnmounted(() => {
 .tile {
   padding: 0.5rem 0.8rem;
   font-size: 1.05rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
+.tile-gloss { font-size: 0.72rem; color: var(--muted); }
 
 .tile.placed {
   border-color: var(--primary);

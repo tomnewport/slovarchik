@@ -13,7 +13,7 @@ import {
 } from '../../lib/streak.js'
 
 import { state, BATCH_META_KEY } from './state.js'
-import { persistedShape } from './persistence.js'
+import { persistedShape, persistenceSettled } from './persistence.js'
 import { clearMemo } from './records.js'
 import { batchSignature, activityRecord } from './activity.js'
 import {
@@ -94,6 +94,15 @@ async function doLoadProgress() {
   // fills from the next session on.
   const met = await idb.getMeta('metWords')
   state.metWords = met && typeof met === 'object' ? { ...met } : {}
+  const seenPhrases = await idb.getMeta('seenPhrases')
+  // A question can begin while the boot load is still in flight. Keep any
+  // presentation already claimed in memory as well as those on disk.
+  const presented = new Set(Array.isArray(seenPhrases) ? seenPhrases : [])
+  for (const key of state.seenPhrases) presented.add(key)
+  state.seenPhrases = presented
+  if (presented.size > (Array.isArray(seenPhrases) ? seenPhrases.length : 0)) {
+    await idb.setMeta('seenPhrases', [...presented])
+  }
 
   // Activity calendar / streak. The forward-logged store is authoritative; on
   // first run (or for any day it lacks) back-populate from the surviving per-
@@ -138,6 +147,9 @@ export const loadProgress = coalesce(doLoadProgress)
 
 /** Wipe all progress (records + batches + first-use timestamp). For the Data screen's reset/tests. */
 export async function resetProgress() {
+  // A first-encounter stamp may still be writing in the background when the
+  // learner resets. Let it finish before clearing the meta key.
+  await persistenceSettled()
   await idb.clearProgress()
   await idb.setMeta(BATCH_META_KEY('learning'), null)
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
@@ -145,6 +157,7 @@ export async function resetProgress() {
   await idb.setMeta('seenAchievements', [])
   await idb.setMeta('achievementsEarnedAt', {})
   await idb.setMeta('metWords', {})
+  await idb.setMeta('seenPhrases', [])
   await idb.clearActivity()
   await idb.setMeta('streak:activity', {})
   await idb.setMeta('streak:hue', null)
@@ -157,6 +170,7 @@ export async function resetProgress() {
   state.seenAchievements = new Set()
   state.achievementsEarnedAt = {}
   state.metWords = {}
+  state.seenPhrases = new Set()
   state.activity = {}
   state.streakHue = randomHue()
   state.batchSig = ''

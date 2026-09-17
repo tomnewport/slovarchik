@@ -23,8 +23,8 @@
 // and single words alike. If that first try lands close to the answer we mark
 // *where* it went wrong (without giving the letters away), then unlock the
 // keyboard hint for a second, aided try. Phrases additionally get a
-// ❓ Dictionary revealing — with no penalty — the phrase words the learner
-// hasn't learned yet (the ones they can't be expected to spell).
+// ❓ Dictionary revealing — with no penalty — unlearned phrase words on the
+// phrase's first encounter (the ones they can't yet be expected to spell).
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import {
@@ -45,6 +45,7 @@ import { correctionMessage, QUIET_TIERS } from '../../lib/confusables.js'
 import { ruleReminder, spellingRuleMiss } from '../../lib/ruleOracle.js'
 import { state as vocabState } from '../../stores/vocab.js'
 import { playFeedback } from '../../stores/settings.js'
+import { firstPhraseEncounter } from '../../stores/progress.js'
 import AnnotatedEnglish from '../AnnotatedEnglish.vue'
 import WordFacts from '../WordFacts.vue'
 import SpeakButton from '../SpeakButton.vue'
@@ -57,6 +58,9 @@ const emit = defineEmits(['done'])
 // Only phrases get the Dictionary (a single word's dictionary entry would be
 // the answer); the withhold-then-hint flow applies to words and phrases alike.
 const isPhrase = computed(() => props.exercise.content === 'phrase')
+// Keep the first-presentation decision fixed for this question. Marking the
+// phrase immediately prevents a later drill from handing out the same glosses.
+const firstEncounter = isPhrase.value && firstPhraseEncounter(props.exercise.ru)
 
 const typed = ref('')
 const checked = ref(false)
@@ -152,7 +156,7 @@ const gradeTargets = computed(() => [props.exercise.ru, ...(props.exercise.alsoR
 // entry — so the answer is never handed out. Sorted alphabetically like a real
 // dictionary.
 const dictionary = computed(() => {
-  if (!isPhrase.value) return []
+  if (!isPhrase.value || !firstEncounter) return []
   const assessedKeys = new Set(props.exercise.targets ?? [])
   const assessedTokens = new Set(props.exercise.targetTokens ?? [])
   const seen = new Set()
@@ -466,7 +470,7 @@ onBeforeUnmount(() => setHintAllowed(true))
         <span lang="ru" class="answer-text">{{ exercise.ru }}</span>
         <SpeakButton :text="exercise.ru" />
       </div>
-      <p v-if="exercise.audio && exercise.en" class="translation-hint">{{ exercise.en }}</p>
+      <p v-if="exercise.audio && exercise.en && (!isPhrase || firstEncounter)" class="translation-hint">{{ exercise.en }}</p>
       <!-- About this word (#586) — only once the answer is resolved, right,
            wrong or given up on. A `build` fact spells the word out, so showing
            it any earlier would hand over the answer. -->

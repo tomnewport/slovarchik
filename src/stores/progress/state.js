@@ -30,6 +30,8 @@ export const state = reactive({
   achievementsEarnedAt: {},
   /** Word key → epoch ms first met in a phrase the learner got right (#675). */
   metWords: {},
+  /** Russian sentence identities already presented to the learner (#740). */
+  seenPhrases: new Set(),
   /** day key → { count, correct, hue } — the contribution calendar / streak. */
   activity: {},
   /** Hue (0..359) currently assigned to days; rerolled when the batch changes. */

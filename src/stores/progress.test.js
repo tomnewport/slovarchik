@@ -56,6 +56,7 @@ import {
   metCount,
   markMet,
   recordEncounter,
+  firstPhraseEncounter,
   markKnown,
   unmarkKnown,
   isKnown,
@@ -965,6 +966,24 @@ describe('confirmation reviews (#313)', () => {
 })
 
 describe('persistence', () => {
+  it('glosses a sentence once across spellings, reloads, reset and backup', async () => {
+    const ru = 'В су́пе мно́го о́вощей.'
+    expect(firstPhraseEncounter(ru)).toBe(true)
+    expect(firstPhraseEncounter('в супе много овощей!')).toBe(false)
+    await persistenceSettled()
+
+    const backup = exportData()
+    expect(backup.seenPhrases).toHaveLength(1)
+    state.seenPhrases = new Set()
+    await loadProgress()
+    expect(firstPhraseEncounter(ru)).toBe(false)
+
+    await resetProgress()
+    expect(firstPhraseEncounter(ru)).toBe(true)
+    await importData(backup)
+    expect(firstPhraseEncounter(ru)).toBe(false)
+  })
+
   it('survives a reload via IndexedDB', async () => {
     setVocab(makeWords(2, { hasInflections: false }))
     await learn('w0', 50)

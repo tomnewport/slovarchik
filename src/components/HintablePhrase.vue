@@ -7,23 +7,28 @@
 //          meaning in a little tooltip and reads it aloud slowly.
 //   inline hintable words always show their meaning underneath — used while the
 //          learner assembles a translation, so unknown words don't block them.
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import { hintTokensFor } from '../stores/hints.js'
+import { phraseTokens } from '../lib/phrases.js'
 import { speak } from '../lib/speech.js'
 
 const props = defineProps({
   text: { type: String, required: true },
   mode: { type: String, default: 'tap' }, // 'tap' | 'inline'
+  showGloss: { type: Boolean, default: true },
 })
 
 // A single hinted word is read slower than a whole phrase so each sound is clear.
 const SLOW_RATE = 0.6
 
-const tokens = computed(() => hintTokensFor(props.text))
+const tokens = computed(() => props.showGloss
+  ? hintTokensFor(props.text)
+  : phraseTokens(props.text).map((text) => ({ text, hint: null })))
 
 // Index of the tap-mode word whose tooltip is open, or -1 for none.
 const open = ref(-1)
+watch(() => [props.text, props.showGloss], () => { open.value = -1 })
 
 function toggle(i, token) {
   open.value = open.value === i ? -1 : i

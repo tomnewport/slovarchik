@@ -97,6 +97,8 @@ src/
       activity.js       #     streak + activity calendar
       encounters.js     #     words MET but not taught — one meta blob, never a record,
                         #       because an encounter is not an attempt (#675)
+      phrases.js        #     sentences already presented — gates first-encounter
+                        #       teaching glosses across drills (#740)
       batches.js        #     the current learning/mastery batches
       sessions.js       #     session assembly + the per-word / per-skill views
       analytics.js      #     the Progress screen's learned/mastered history
