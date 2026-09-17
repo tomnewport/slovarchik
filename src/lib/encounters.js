@@ -28,7 +28,9 @@
 // Web Speech API, which is language-model-assisted: it will happily return the
 // sentence it expected from half-mumbled input, so a "correct" there is much
 // weaker evidence than a typed one. Crediting it would overstate the bars in
-// exactly the direction that flatters, which is the wrong way to be wrong.
+// exactly the direction that flatters, which is the wrong way to be wrong. Since
+// #733 there is a second reason: the spoken drill opens with precisely these
+// words glossed for the learner, and a verdict they can certify themselves.
 //
 // Pure and framework-free: no Vue, no store, no I/O.
 

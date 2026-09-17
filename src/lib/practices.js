@@ -76,22 +76,26 @@ export const PRACTICE_TYPES = Object.freeze([
     exercises: 2,
     label: 'Dictation',
   },
-  // Speaking — learning
+  // Speaking — learning. Producing a whole sentence aloud is worth far more
+  // than producing one word, so the phrase drill carries the dimension and the
+  // word drill is the remainder: the fallback for words no phrase reaches, and
+  // the only speaking practice a word with no example sentence can ever get
+  // (#733). Both prompt with the English — neither is an echo any more.
   {
     id: 'repeat-phrase',
     dimension: 'speaking',
     level: 'learning',
     content: 'phrase',
-    exercises: 2,
-    label: 'Repeat the phrase',
+    exercises: 5,
+    label: 'Say the phrase',
   },
   {
     id: 'repeat-word',
     dimension: 'speaking',
     level: 'learning',
     content: 'word',
-    exercises: 5,
-    label: 'Repeat the word',
+    exercises: 2,
+    label: 'Say the word',
   },
   // Identification — mastering
   {

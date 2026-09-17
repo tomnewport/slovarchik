@@ -1,7 +1,9 @@
-import { describe, it, expect, afterEach, vi } from 'vitest'
+import { describe, it, expect, afterEach, beforeAll, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import SpeakExercise from './SpeakExercise.vue'
 import { setSelfCertifySpeech } from '../../stores/settings.js'
+import { state as vocabState } from '../../stores/vocab.js'
+import { loadFixtureWords } from '../../test/fixtures.js'
 
 const exercise = {
   id: 'ex0',
@@ -13,6 +15,23 @@ const exercise = {
   ru: 'дом',
   en: 'house',
 }
+
+// A phrase drilling абзац, with the target token resolved as the builder does.
+const phrase = {
+  ...exercise,
+  content: 'phrase',
+  targets: ['абзац=paragraph'],
+  ru: 'В э́том абза́це две оши́бки.',
+  en: 'There are two mistakes in this paragraph.',
+  targetTokens: ['абзаце'],
+}
+
+// Combining stress marks stripped so assertions don't depend on exact codepoints.
+const bare = (s) =>
+  s
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
 
 // A controllable SpeechRecognition stub: the test fires onresult/onend by hand.
 let lastRec = null
@@ -41,6 +60,11 @@ function installRecognition() {
   }
 }
 
+beforeAll(() => {
+  vocabState.words = loadFixtureWords()
+  vocabState.status = 'ready'
+})
+
 afterEach(() => {
   // Self-grading is sticky for the app session — reset it between tests.
   setSelfCertifySpeech(false)
@@ -50,20 +74,94 @@ afterEach(() => {
   vi.restoreAllMocks()
 })
 
+// ── The prompt (#733) ──────────────────────────────────────────────────────
+describe('SpeakExercise prompt', () => {
+  it('asks for the Russian without showing it', () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise: phrase } })
+    expect(wrapper.text()).toContain('There are two mistakes in this paragraph.')
+    expect(bare(wrapper.text())).not.toContain('абзаце')
+  })
+})
+
+// ── The help ladder (#733) ─────────────────────────────────────────────────
+describe('SpeakExercise hint ladder', () => {
+  it('gives the non-target words away from the start, never the target', () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise: phrase } })
+    const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
+    // Headwords, not the sentence's forms: «две» is listed as «два» and
+    // «оши́бки» as «оши́бка». Inflecting them is the learner's job — and is what
+    // the next rung hands over.
+    expect(words).toEqual(['в', 'два', 'ошибка', 'этот'])
+  })
+
+  it('arranges them into the blanked sentence on the first hint, for free', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise: phrase } })
+    expect(wrapper.find('.skeleton').exists()).toBe(false)
+
+    await wrapper.find('button.hint-rung').trigger('click')
+    const skeleton = wrapper.find('.skeleton')
+    expect(bare(skeleton.text())).toContain('___')
+    expect(bare(skeleton.text())).not.toContain('абзаце')
+    // Free: the fire is still lit, and the result still says so.
+    expect(wrapper.find('.hint-rung .face').classes()).not.toContain('out')
+
+    await wrapper.find('button.mic').trigger('click')
+    lastRec.fireResult('В э́том абза́це две оши́бки.')
+    lastRec.stop()
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, flawless: true })
+  })
+
+  it('fills the blank on the second hint, and that one costs the fire', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise: phrase } })
+    await wrapper.find('button.hint-rung').trigger('click')
+    await wrapper.find('button.hint-rung').trigger('click')
+
+    expect(bare(wrapper.find('.revealed').text())).toContain('абзаце')
+    // The ladder is spent: the control stays, disabled, with the fire out.
+    expect(wrapper.find('button.hint-rung').attributes('disabled')).toBeDefined()
+    expect(wrapper.find('.hint-rung .face').classes()).toContain('out')
+
+    await wrapper.find('button.mic').trigger('click')
+    lastRec.fireResult('В э́том абза́це две оши́бки.')
+    lastRec.stop()
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button.next').trigger('click')
+    // Still correct — but not flawless, so the word can't be fast-tracked on it.
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, flawless: false })
+  })
+
+  it('offers a single word the reveal alone — there is nothing to arrange', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+    expect(wrapper.find('.dict-list').exists()).toBe(false)
+
+    await wrapper.find('button.hint-rung').trigger('click')
+    expect(wrapper.find('.revealed').text()).toContain('дом')
+    expect(wrapper.find('.hint-rung .face').classes()).toContain('out')
+  })
+})
+
+// ── Grading (#733): recognition can confirm, but never convict ─────────────
 describe('SpeakExercise', () => {
   it('falls back to self-assessment when recognition is unavailable', async () => {
     const wrapper = mount(SpeakExercise, { props: { exercise } })
     expect(wrapper.text()).toContain("Speech recognition isn't available")
 
+    await wrapper.find('button.said').trigger('click')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, flawless: true })
   })
 
   it('listens and grades a close-enough answer as correct', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
 
-    // No TTS in jsdom, so it stays on the prompt with a Speak button.
     await wrapper.find('button.mic').trigger('click')
     expect(wrapper.text()).toContain('Listening')
 
@@ -73,10 +171,10 @@ describe('SpeakExercise', () => {
 
     expect(wrapper.text()).toContain('Got it')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, flawless: true })
   })
 
-  it('marks a wrong utterance incorrect and offers another go', async () => {
+  it('never calls a mismatch wrong — it asks the learner', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
     await wrapper.find('button.mic').trigger('click')
@@ -85,14 +183,40 @@ describe('SpeakExercise', () => {
     lastRec.stop()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.text()).toContain('Not quite')
-    // A retry button is offered; "Next" reports the (incorrect) result.
+    // No verdict yet: the answer is shown, and the question is put to them.
+    expect(wrapper.emitted('done')).toBeFalsy()
+    expect(wrapper.text()).toContain('Was what you said right?')
     expect(wrapper.findAll('button').some((b) => b.text().includes('Try again'))).toBe(true)
-    await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
   })
 
-  it('returns to the prompt (not wrong) when nothing is heard', async () => {
+  it('records the learner saying they got it, despite the recogniser', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+    await wrapper.find('button.mic').trigger('click')
+    lastRec.fireResult('кошка')
+    lastRec.stop()
+    await wrapper.vm.$nextTick()
+
+    await wrapper.find('button.next').trigger('click') // "✓ I said it"
+    expect(wrapper.text()).toContain('Got it')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, flawless: true })
+  })
+
+  it('records a self-certified miss as wrong', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+    await wrapper.find('button.mic').trigger('click')
+    lastRec.fireResult('кошка')
+    lastRec.stop()
+    await wrapper.vm.$nextTick()
+
+    await wrapper.find('button.missed').trigger('click')
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false, flawless: true })
+  })
+
+  it('returns to the prompt (not a verdict) when nothing is heard', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
     await wrapper.find('button.mic').trigger('click')
@@ -115,8 +239,9 @@ describe('SpeakExercise', () => {
     expect(lastRec.aborted).toBe(true)
     expect(wrapper.text()).toContain("You're grading yourself")
 
+    await wrapper.find('button.said').trigger('click')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, flawless: true })
   })
 
   it('records a self-graded miss as wrong, not as a free pass', async () => {
@@ -125,7 +250,8 @@ describe('SpeakExercise', () => {
     await wrapper.find('button.self-certify').trigger('click')
 
     await wrapper.find('button.missed').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false, flawless: true })
   })
 
   it('keeps self-grading for later exercises until the mic is asked back', async () => {
@@ -137,15 +263,24 @@ describe('SpeakExercise', () => {
     // A fresh exercise opens self-graded — no mic prompt, no listening.
     const second = mount(SpeakExercise, { props: { exercise } })
     expect(second.find('button.mic').exists()).toBe(false)
-    expect(second.find('button.next').exists()).toBe(true)
+    expect(second.find('button.said').exists()).toBe(true)
 
     await second.find('button.self-certify').trigger('click') // "use the microphone"
     expect(second.find('button.mic').exists() || second.text().includes('Listening')).toBe(true)
   })
 
+  it('offers no readback of an answer that is still hidden', async () => {
+    installRecognition()
+    const wrapper = mount(SpeakExercise, { props: { exercise } })
+    await wrapper.find('button.mic').trigger('click')
+    // Reading the target aloud mid-attempt would be the reveal by another route.
+    expect(wrapper.findAll('button').some((b) => b.text().includes('Slow'))).toBe(false)
+  })
+
   it('🐢 Slow while listening pauses recognition and returns to the prompt', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
+    await wrapper.find('button.hint-rung').trigger('click') // reveal — now audible
 
     await wrapper.find('button.mic').trigger('click')
     expect(wrapper.text()).toContain('Listening')
@@ -158,8 +293,7 @@ describe('SpeakExercise', () => {
     expect(wrapper.text()).not.toContain('Listening')
   })
 
-  it('try-again clears the wrong result and re-opens the mic after slow readback', async () => {
-    vi.useFakeTimers()
+  it('try-again re-opens the mic without a verdict', async () => {
     installRecognition()
     const wrapper = mount(SpeakExercise, { props: { exercise } })
 
@@ -168,22 +302,12 @@ describe('SpeakExercise', () => {
     lastRec.stop()
     await wrapper.vm.$nextTick()
 
-    expect(wrapper.text()).toContain('Not quite')
-
     const tryAgainBtn = wrapper.findAll('button').find((b) => b.text().includes('Try again'))
     await tryAgainBtn.trigger('click')
     await wrapper.vm.$nextTick()
 
-    // Result cleared immediately; waiting for slow readback watchdog
-    expect(wrapper.text()).not.toContain('Not quite')
-    expect(wrapper.find('button.mic').exists()).toBe(true)
-
-    // Slow readback watchdog fires → beginListen() reopens the mic
-    vi.advanceTimersByTime(6000)
-    await wrapper.vm.$nextTick()
     expect(wrapper.text()).toContain('Listening')
-
-    vi.useRealTimers()
+    expect(wrapper.emitted('done')).toBeFalsy()
   })
 })
 
@@ -195,9 +319,10 @@ describe('SpeakExercise word facts', () => {
     expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
 
     await wrapper.find('button.mic').trigger('click')
-    lastRec.fireResult('кошка') // wrong — the panel is not a reward
+    lastRec.fireResult('кошка')
     lastRec.stop()
     await wrapper.vm.$nextTick()
+    await wrapper.find('button.missed').trigger('click') // wrong — not a reward
 
     const facts = wrapper.findComponent({ name: 'WordFacts' })
     expect(facts.exists()).toBe(true)
