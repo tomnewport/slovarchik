@@ -7,6 +7,7 @@ import { previewBook } from '../lib/readerPreview.js'
 import { lookupReaderWord, readerTokens } from '../lib/readerDictionary.js'
 import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
 import { loadBook } from '../stores/library.js'
+import { translationIssueUrl } from '../lib/readerReport.js'
 
 const route = useRoute()
 const book = ref(route.params.bookId === 'preview' ? previewBook : null)
@@ -57,6 +58,9 @@ function fits(from, to) {
         bookmark.textContent = 'Bookmark'
         bookmark.tabIndex = -1
         actions.append(bookmark)
+        const query = document.createElement('span')
+        query.textContent = ' · Query translation'
+        actions.append(query)
         translation.append(actions)
         paragraph.append(translation)
       }
@@ -222,7 +226,7 @@ onBeforeUnmount(() => {
             <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex"><button v-if="token.word" class="reader-word" :aria-label="`Look up ${token.text}`" @click.stop="openWord(token.text)">{{ token.text }}</button><span v-else>{{ token.text }}</span></span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
               {{ sentence.en }}
-              <span class="reader-translation-actions"><button :aria-pressed="bookmarks.includes(sentence.id)" @click="toggleBookmark(sentence)">{{ bookmarks.includes(sentence.id) ? 'Bookmarked' : 'Bookmark' }}</button></span>
+              <span class="reader-translation-actions"><button :aria-pressed="bookmarks.includes(sentence.id)" @click="toggleBookmark(sentence)">{{ bookmarks.includes(sentence.id) ? 'Bookmarked' : 'Bookmark' }}</button> · <a :href="translationIssueUrl(book, sentence.id)" target="_blank" rel="noopener noreferrer">Query translation</a></span>
             </span>
           </span>{{ ' ' }}
         </p>
@@ -280,6 +284,7 @@ onBeforeUnmount(() => {
 .reader-translation { display: block; margin: .25em 0 .7em; padding-left: 1.2em; color: var(--subtle); font: .73em/1.5 Georgia, 'Times New Roman', serif; text-indent: 0; }
 .reader-translation-actions { display: block; margin-top: .25em; font: .7rem system-ui, sans-serif; }
 .reader-translation-actions button { padding: 0; font-size: inherit; color: var(--subtle); }
+.reader-translation-actions a { color: var(--subtle); }
 .reader-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; border-top: 1px solid var(--rule); color: var(--subtle); font: .82rem system-ui, sans-serif; }
 .reader-bottom button { font-size: 1.5rem; min-width: 3rem; }
 @media (max-width: 540px) { .reader-top { gap: .3rem; } .reader-options { max-width: 6.6rem; } .reader-page { padding: 1.2rem .3rem; } }

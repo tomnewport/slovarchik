@@ -194,6 +194,7 @@ src/
                         #   appVersion  — the build running here vs the build deployed, how old
                         #     the last check is, and which of the deployment's dated release
                         #     notes are new to THIS install (the Data screen's Versions card)
+                        #   readerPage/readerDictionary/readerReport/bookPack — literature layout, lookup, issue links and pack schema
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
                         #   coalesce  — share one in-flight run between concurrent callers, so the boot
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
@@ -218,6 +219,8 @@ docs/                   # design notes for in-flight features
                         #     (Cache Storage + IndexedDB), what each copy is for,
                         #     and why manifest.json is kept out of the SW rule
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
+                        #   build-book-packs.mjs checks reviewed editorial JSON in
+                        #   content/books/ and emits versioned public/books/ data
                         #   check-ci.mjs runs CI's `test` job locally, in order
                         #   size-summary.mjs gates the shipped payload (entry chunk,
                         #     entry CSS, dist/vocab/*.json gzipped) against the
