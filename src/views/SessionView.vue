@@ -113,6 +113,14 @@ const quickAsked = new Set()
 // The offers waiting to be answered — a board can finish several words at once.
 const quickOffers = ref([])
 const quickOffer = computed(() => quickOffers.value[0] ?? null)
+// Without inflection drills, the model's `mastered` state is reached by learning
+// alone. Name the level the learner just demonstrated, not that internal state.
+const quickOfferVerb = computed(() => {
+  if (!quickOffer.value) return ''
+  return quickOffer.value.level === 'mastered' && !progress.hasInflections(quickOffer.value.key)
+    ? 'learned'
+    : quickOffer.value.level
+})
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -572,13 +580,15 @@ function confirmClose() {
         <span v-if="quickWord?.en" class="quick-en">{{ quickWord.en }}</span>
       </p>
       <h2>
-        Seems like you might have {{ quickOffer.level === 'mastered' ? 'mastered' : 'learned' }}
+        Seems like you might have {{ quickOfferVerb }}
         this word already.
       </h2>
       <p class="muted">
-        Shall we consider it {{ quickOffer.level === 'mastered' ? 'mastered' : 'learned' }}? It
-        will still come back for review, and one wrong answer puts it straight back into the
-        lesson.
+        Shall we consider it {{ quickOfferVerb }}? It will still come back for review, and one
+        wrong answer puts it straight back into the lesson.
+        <span v-if="quickOffer.level === 'mastered' && quickOfferVerb === 'learned'">
+          This word has no separate mastery drills, so completing learning also counts as mastery.
+        </span>
       </p>
       <div class="quick-actions">
         <button class="primary quick-yes" @click="answerQuickOffer(true)">
