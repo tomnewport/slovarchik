@@ -20,15 +20,18 @@ const SEED = Number(process.env.PW_SEED ?? 1)
 test.setTimeout(180_000)
 
 /**
- * Click the first enabled button under `container` whose trimmed text equals
- * `text` (case-insensitively). Plain text comparison — avoids feeding
+ * Click the first enabled button under `container` whose main word equals
+ * `text` (case-insensitively). First-encounter chips also show a smaller gloss;
+ * that annotation isn't part of the answer. Plain text comparison avoids feeding
  * answer-derived strings (which may contain `/`, regex metachars, …) through
  * Playwright's text-matching engine.
  */
 async function clickButtonByText(container, text) {
   const want = text.trim().toLowerCase()
   const buttons = container.locator('button:not([disabled])')
-  const texts = await buttons.allInnerTexts()
+  const texts = await buttons.evaluateAll((els) =>
+    els.map((el) => el.querySelector('.tile-text')?.textContent ?? el.textContent),
+  )
   const idx = texts.findIndex((t) => t.trim().toLowerCase() === want)
   if (idx === -1)
     throw new Error(

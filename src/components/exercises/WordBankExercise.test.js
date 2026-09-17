@@ -1,6 +1,13 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, vi } from 'vitest'
+import 'fake-indexeddb/auto'
 import { mount } from '@vue/test-utils'
 import WordBankExercise from './WordBankExercise.vue'
+import { state as vocabState } from '../../stores/vocab.js'
+import { state as progressState } from '../../stores/progress.js'
+import { loadFixtureWords } from '../../test/fixtures.js'
+
+beforeAll(() => { vocabState.words = loadFixtureWords() })
+beforeEach(() => { progressState.seenPhrases = new Set() })
 
 // Speech and feedback sounds are side effects we don't exercise here.
 vi.mock('../../lib/speech.js', () => ({
@@ -27,12 +34,24 @@ async function assembleExpected(wrapper) {
   for (const word of exercise.en.toLowerCase().split(' ')) {
     const tile = wrapper
       .findAll('.bank .tile')
-      .find((b) => b.text().toLowerCase() === word && !b.attributes('disabled'))
+      .find((b) => b.find('.tile-text').text().toLowerCase() === word && !b.attributes('disabled'))
     await tile.trigger('click')
   }
 }
 
 describe('WordBankExercise alternate translations', () => {
+  it('shows bilingual chips and inline glosses only for the first encounter', () => {
+    const first = mount(WordBankExercise, { props: { exercise } })
+    expect(first.findAll('.tile-gloss').length).toBeGreaterThan(0)
+    expect(first.find('.cue .gloss').exists()).toBe(true)
+    first.unmount()
+
+    const repeated = mount(WordBankExercise, { props: { exercise } })
+    expect(repeated.findAll('.tile-gloss')).toHaveLength(0)
+    expect(repeated.find('.cue .gloss').exists()).toBe(false)
+    repeated.unmount()
+  })
+
   it('accepts a curated alternate rendering without an override (#145)', async () => {
     const wrapper = mount(WordBankExercise, {
       props: { exercise: { ...exercise, enAlt: ['This city is big'] } },
@@ -41,7 +60,7 @@ describe('WordBankExercise alternate translations', () => {
     for (const word of ['this', 'city', 'is', 'big']) {
       const tile = wrapper
         .findAll('.bank .tile')
-        .find((b) => b.text().toLowerCase() === word && !b.attributes('disabled'))
+        .find((b) => b.find('.tile-text').text().toLowerCase() === word && !b.attributes('disabled'))
       await tile.trigger('click')
     }
     await wrapper.find('button.check').trigger('click')
@@ -58,7 +77,7 @@ async function assembleReordering(wrapper) {
   for (const word of ['this', 'city', 'is', 'big']) {
     const tile = wrapper
       .findAll('.bank .tile')
-      .find((b) => b.text().toLowerCase() === word && !b.attributes('disabled'))
+      .find((b) => b.find('.tile-text').text().toLowerCase() === word && !b.attributes('disabled'))
     await tile.trigger('click')
   }
 }
@@ -221,7 +240,7 @@ describe('WordBankExercise honesty system', () => {
     const wrapper = mount(WordBankExercise, { props: { exercise } })
     // Place a single tile so the assembled answer is wrong.
     await wrapper.find('.bank .tile').trigger('click')
-    const submitted = wrapper.find('.answer-line').text()
+    const submitted = wrapper.findAll('.answer-line .tile-text').map((t) => t.text()).join(' ')
     await wrapper.find('button.check').trigger('click')
     expect(wrapper.text()).toContain('Answer:')
 

@@ -1,8 +1,10 @@
-import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest'
+import 'fake-indexeddb/auto'
 import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import PhraseTesterView from './PhraseTesterView.vue'
 import { state } from '../stores/vocab.js'
+import { state as progressState } from '../stores/progress.js'
 import { buildAssemblyBank, phraseTokens } from '../lib/phrases.js'
 import { shapePhrases, shapeContextPhrases } from '../lib/vocabBuild.js'
 import { indexPhrases } from '../lib/phraseContext.js'
@@ -14,13 +16,31 @@ beforeAll(() => {
   state.words = loadFixtureWords()
   state.contextPhrases = indexPhrases(shapeContextPhrases(state.words))
   state.status = 'ready'
+  progressState.loaded = true
 })
+beforeEach(() => { progressState.seenPhrases = new Set() })
 
 describe('PhraseTesterView', () => {
   it('shows the difficulty options on the menu', () => {
     const wrapper = mount(PhraseTesterView)
     expect(wrapper.text()).toContain('Easy')
     expect(wrapper.text()).toContain('Type it')
+  })
+
+  it('glosses Russian word chips in English only on the first encounter', async () => {
+    const wrapper = mount(PhraseTesterView)
+    await wrapper.findAll('.row button')[1].trigger('click') // EN → RU
+    await wrapper.findAll('button.card')[0].trigger('click') // easy
+    wrapper.vm.current = { ru: 'В э́том абза́це две оши́бки.', en: 'Two mistakes in this paragraph' }
+    wrapper.vm.bank = [{ id: 0, text: 'абза́це', decoy: false }]
+    wrapper.vm.currentFirst = true
+    await nextTick()
+
+    const chip = wrapper.find('button.tile')
+    expect(chip.find('.tile-gloss').text()).toContain('paragraph')
+    wrapper.vm.currentFirst = false
+    await nextTick()
+    expect(chip.find('.tile-gloss').exists()).toBe(false)
   })
 
   it('builds a sentence from tiles and scores it correct', async () => {
@@ -35,7 +55,7 @@ describe('PhraseTesterView', () => {
       // answer line) so duplicate-word phrases resolve unambiguously.
       const tile = wrapper
         .findAll('button.tile')
-        .find((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
+        .find((b) => b.find('.tile-text').text() === word && !b.classes().includes('placed') && !b.element.disabled)
       await tile.trigger('click')
     }
 
@@ -84,7 +104,7 @@ describe('PhraseTesterView', () => {
     for (const word of phraseTokens(alt)) {
       const tile = wrapper
         .findAll('button.tile')
-        .find((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
+        .find((b) => b.find('.tile-text').text() === word && !b.classes().includes('placed') && !b.element.disabled)
       expect(tile, `no tile for "${word}"`).toBeTruthy()
       await tile.trigger('click')
     }
@@ -101,7 +121,7 @@ describe('PhraseTesterView', () => {
     for (const word of correctOrder) {
       const tile = wrapper
         .findAll('button.tile')
-        .find((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
+        .find((b) => b.find('.tile-text').text() === word && !b.classes().includes('placed') && !b.element.disabled)
       await tile.trigger('click')
     }
 
@@ -132,7 +152,7 @@ describe('PhraseTesterView', () => {
       for (const word of phraseTokens(wrapper.vm.current.en)) {
         const tiles = wrapper
           .findAll('button.tile')
-          .filter((b) => b.text() === word && !b.classes().includes('placed') && !b.element.disabled)
+          .filter((b) => b.find('.tile-text').text() === word && !b.classes().includes('placed') && !b.element.disabled)
         await tiles[tiles.length - 1].trigger('click')
       }
       await wrapper.vm.$nextTick()

@@ -1,14 +1,18 @@
-import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest'
+import 'fake-indexeddb/auto'
 import { mount } from '@vue/test-utils'
 import SpeakingView from './SpeakingView.vue'
 import { state } from '../stores/vocab.js'
+import { state as progressState } from '../stores/progress.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 
 // Seed the reactive store with real vocab so the phrase bank is populated.
 beforeAll(() => {
   state.words = loadFixtureWords()
   state.status = 'ready'
+  progressState.loaded = true
 })
+beforeEach(() => { progressState.seenPhrases = new Set() })
 
 afterEach(() => {
   delete window.SpeechRecognition

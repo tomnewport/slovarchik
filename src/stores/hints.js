@@ -8,10 +8,11 @@
 // can't be expected to know yet and aren't actively drilling.
 import { computed } from 'vue'
 
-import { alignOptsFor, formIndex, wordsByKey } from './vocab.js'
+import { alignOptsFor, formIndex, state as vocabState, wordsByKey } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
-import { senseGloss } from '../lib/phraseHint.js'
+import { normToken, senseGloss } from '../lib/phraseHint.js'
 import { alignedHintTokens } from '../lib/phraseAlign.js'
+import { typingSequence } from '../lib/phrases.js'
 import { buildSpeakingAid } from '../lib/speakingAid.js'
 import { buildGlossIndex, diagnose, diagnoseEnglish } from '../lib/confusables.js'
 import { STATES } from '../lib/progression.js'
@@ -89,10 +90,8 @@ export function hintTokensFor(phrase) {
  *
  * Lives here rather than in the component because it needs the same two things
  * `hintTokensFor` does — the surface-form index and the sentence's alignment
- * options — and building either twice is pure waste. Unlike `hintTokensFor` it
- * glosses every non-target word, learned or not: the drill is asking the
- * learner to *produce* the sentence, so a word they can recognise is still one
- * they may not be able to summon.
+ * options — and building either twice is pure waste. Its dictionary follows
+ * the same learned-word and current-batch rules as the inline phrase glosses.
  *
  * @param {string} phrase  the Russian sentence
  * @param {{targets?: string[], targetTokens?: string[]}} [about]  the word(s)
@@ -100,8 +99,77 @@ export function hintTokensFor(phrase) {
  * @returns {{dictionary: PlainObject[], skeleton: PlainObject[], hasSkeleton: boolean}}
  */
 export function speakingAidFor(phrase, about = {}) {
-  const tokens = alignedHintTokens(phrase, formIndex.value, alignOptsFor(phrase))
+  const tokens = alignedHintTokens(phrase, formIndex.value, alignOptsFor(phrase)).map(
+    (token) => ({ ...token, hint: hintIfShowable(token.hint) }),
+  )
   return buildSpeakingAid(tokens, about)
+}
+
+/** Short English headword for a word tile, when its gloss names one word. */
+function englishTileKey(gloss) {
+  const term = typingSequence(String(gloss ?? '').split(/[(/,;]/)[0]).replace(/^to /, '')
+  return term && !term.includes(' ') ? term : ''
+}
+
+/**
+ * Meanings to put under first-encounter word-bank tiles. The source sentence
+ * takes precedence over a generic dictionary lookup, so a homograph is glossed
+ * in context. Decoys get the same lookup; a source-only label on real tiles
+ * would identify every distractor before the learner has read it. A word with
+ * no trustworthy one-word counterpart is left alone (e.g. English articles,
+ * which Russian does not have).
+ *
+ * @param {string} ru the Russian sentence
+ * @param {Array<{id: number, text: string}>} tiles
+ * @param {'ru'|'en'} lang the language of the tiles
+ * @returns {Map<number, string>}
+ */
+export function chipGlossesFor(ru, tiles, lang) {
+  const source = new Map()
+  const blocked = new Set()
+  for (const { text, hint: raw } of alignedHintTokens(ru, formIndex.value, alignOptsFor(ru))) {
+    const hint = hintIfShowable(raw)
+    if (lang === 'en' && raw) {
+      for (const sense of raw.senses) {
+        if (!isSenseShowable(sense)) blocked.add(englishTileKey(sense.en))
+      }
+    }
+    if (!hint) continue
+    if (lang === 'ru') source.set(normToken(text), hint.en)
+    else {
+      for (const sense of hint.senses) {
+        const key = englishTileKey(sense.en)
+        if (key && !source.has(key)) source.set(key, text.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, ''))
+      }
+    }
+  }
+
+  // English distractors may not occur in this sentence. Look them up in the
+  // same unlearned dictionary; ambiguous glosses stay untranslated rather than
+  // assigning an arbitrary Russian word to the chip.
+  const reverse = new Map()
+  if (lang === 'en') {
+    for (const word of vocabState.words) {
+      if (!isSenseShowable(word)) continue
+      for (const meaning of word.english ?? [word.meaning ?? word.en]) {
+        const key = englishTileKey(meaning)
+        if (!key) continue
+        const ruWord = word.headword ?? word.ru
+        if (!reverse.has(key)) reverse.set(key, ruWord)
+        else if (reverse.get(key) !== ruWord) reverse.set(key, null)
+      }
+    }
+  }
+
+  const out = new Map()
+  for (const tile of tiles ?? []) {
+    const key = lang === 'ru' ? normToken(tile.text) : typingSequence(tile.text)
+    const gloss = source.get(key) ?? (lang === 'ru'
+      ? hintTokensFor(tile.text)[0]?.hint?.en
+      : blocked.has(key) ? null : reverse.get(key))
+    if (gloss) out.set(tile.id, gloss)
+  }
+  return out
 }
 
 /**

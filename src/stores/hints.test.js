@@ -16,7 +16,8 @@ vi.mock('../lib/phraseHint.js', async (importOriginal) => {
 import { buildFormIndex } from '../lib/phraseHint.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 import { state as vocabState, phrases, formIndex } from './vocab.js'
-import { hintTokensFor, diagnoseAnswer } from './hints.js'
+import { state as progressState, stateOf } from './progress.js'
+import { hintTokensFor, diagnoseAnswer, speakingAidFor, chipGlossesFor } from './hints.js'
 
 const words = loadFixtureWords()
 
@@ -78,5 +79,25 @@ describe('hintTokensFor', () => {
 
   it('leaves a token no dictionary entry claims unhinted', () => {
     expect(hintTokensFor('щщщщ').every((t) => t.hint === null)).toBe(true)
+  })
+
+  it('does not translate a learned word in the speaking dictionary or chips', () => {
+    const phrase = 'В э́том абза́це две оши́бки.'
+    const key = 'ошибка=mistake'
+    const events = [
+      ...['identification', 'usage', 'hearing'].flatMap((dimension) =>
+        [1, 2, 3].map((ts) => ({ level: 'learning', dimension, correct: true, ts }))),
+      ...[1, 2, 3].map((ts) => ({ level: 'learning', dimension: 'speaking', correct: true, ts })),
+    ]
+    progressState.records = { [key]: { word: key, events, learnedAt: 3, peak: 2 } }
+    expect(stateOf(key)).toMatch(/learned|mastered/)
+
+    const dictionary = speakingAidFor(phrase, { targets: ['абзац=paragraph'] }).dictionary
+    expect(dictionary.map((entry) => entry.key)).not.toContain(key)
+    const ruChips = chipGlossesFor(phrase, [{ id: 0, text: 'оши́бки' }], 'ru')
+    expect(ruChips.size).toBe(0)
+    const enChips = chipGlossesFor(phrase, [{ id: 1, text: 'mistake' }], 'en')
+    expect(enChips.size).toBe(0)
+    progressState.records = {}
   })
 })

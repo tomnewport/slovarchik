@@ -5,6 +5,7 @@ import { sample } from '../lib/quiz.js'
 import { speak, estimateSpeechMs, SLOW_RATE } from '../lib/speech.js'
 import { recognitionSupported, recognitionErrorMessage } from '../lib/recognition.js'
 import { makeVisualReplacement } from '../lib/exerciseBuild.js'
+import { firstPhraseEncounter, state as progressState } from '../stores/progress.js'
 import { useSpeechLoop } from '../composables/useSpeechLoop.js'
 import {
   MODES,
@@ -33,6 +34,7 @@ const score = reactive({ right: 0, total: 0 })
 // phase: 'prompt' (waiting / reading) | 'listening' | 'graded'
 const phase = ref('prompt')
 const current = ref(null)
+const currentFirst = ref(false)
 const transcript = ref('')
 const recError = ref('')
 const result = ref(null) // { correct, passed, similarity }
@@ -86,6 +88,7 @@ function nextQuestion() {
   recError.value = ''
   result.value = null
   current.value = sample(phrases.value, 1)[0]
+  currentFirst.value = firstPhraseEncounter(current.value?.ru)
   presentPrompt()
 }
 
@@ -115,7 +118,7 @@ function presentPrompt() {
 // "Repeat each word:" → each word individually. Begins listening afterwards.
 function presentWithWarmUp() {
   readThen(
-    buildWarmUpSequence(current.value),
+    buildWarmUpSequence(current.value, currentFirst.value),
     () => {
       if (handsFree.value && phase.value === 'prompt') beginListen()
     },
@@ -280,7 +283,8 @@ function quit() {
       connection); they won't work here.
     </p>
 
-    <p v-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
+    <p v-if="ready && !progressState.loaded" class="muted">Loading progress…</p>
+    <p v-else-if="!ready && state.status === 'loading'" class="muted">Loading phrases…</p>
     <p v-else-if="!ready" class="feedback bad">
       No phrases available offline yet — connect once to download them.
     </p>
@@ -296,7 +300,7 @@ function quit() {
         :key="m.id"
         class="card"
         style="text-align: left"
-        :disabled="!ready || !canRecognize"
+        :disabled="!ready || !progressState.loaded || !canRecognize"
         @click="start(m.id)"
       >
         <strong>{{ m.emoji }} {{ m.label }}</strong>
@@ -316,7 +320,7 @@ function quit() {
     <!-- Visual replacement exercise shown after skipping a phrase -->
     <template v-if="visualExercise">
       <p class="muted" style="margin: 0; font-size: 0.85rem">Skipped — now translate it visually</p>
-      <WordBankExercise :key="visualExercise.id" :exercise="visualExercise" @done="onVisualDone" />
+      <WordBankExercise :key="visualExercise.id" :exercise="visualExercise" :first-encounter="currentFirst" @done="onVisualDone" />
       <button style="justify-self: start" @click="quit">Change mode</button>
     </template>
 
@@ -330,7 +334,7 @@ function quit() {
         <div v-if="modeCfg.showRu" lang="ru" style="font-size: 1.5rem; margin: 0.5rem 0">
           {{ current.ru }}
         </div>
-        <div v-if="modeCfg.showEn" lang="en" style="font-size: 1.35rem; margin: 0.4rem 0">
+        <div v-if="modeCfg.showEn && (!modeCfg.showRu || currentFirst)" lang="en" style="font-size: 1.35rem; margin: 0.4rem 0">
           <!-- Annotate the ambiguous words only when the Russian is hidden
                (produce mode): with the Russian on screen there is nothing for
                the learner to guess. -->
@@ -398,7 +402,7 @@ function quit() {
             <span lang="ru" style="font-size: 1.25rem">{{ current.ru }}</span>
             <SpeakButton :text="current.ru" :slow="true" />
           </div>
-          <div lang="en" class="muted" style="margin-top: 0.25rem">{{ current.en }}</div>
+          <div v-if="currentFirst || modeCfg.target === 'en'" lang="en" class="muted" style="margin-top: 0.25rem">{{ current.en }}</div>
         </div>
 
         <div class="row">

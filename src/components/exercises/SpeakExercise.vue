@@ -4,7 +4,7 @@
 // The drill used to be an echo — the Russian on screen, read aloud, repeated
 // back. Nothing was produced. Now the prompt is the English and the learner has
 // to summon the sentence, with a ladder of help behind it (lib/speakingAid.js):
-// the dictionary of everything except the assessed word is free and always on,
+// the first encounter's dictionary of unlearned non-target words is free,
 // arranging those words into the blanked sentence is free, and only filling the
 // blank costs the exercise its flawlessness.
 //
@@ -29,6 +29,7 @@ import { HINT_ORDER, HINT_REVEAL, hintLadder, rungIsFree } from '../../lib/speak
 import { posLabel } from '../../lib/spellPrompt.js'
 import { playFeedback, settings, setSelfCertifySpeech } from '../../stores/settings.js'
 import { speakingAidFor } from '../../stores/hints.js'
+import { firstPhraseEncounter } from '../../stores/progress.js'
 import AnnotatedEnglish from '../AnnotatedEnglish.vue'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
@@ -48,6 +49,7 @@ const THRESHOLD = 0.8
 
 // Give a reasonable window to finish speaking: ~3s for a word, ~10s for a phrase.
 const isPhrase = computed(() => props.exercise.content === 'phrase')
+const firstEncounter = isPhrase.value && firstPhraseEncounter(props.exercise.ru)
 const maxListenMs = computed(() => (isPhrase.value ? 10000 : 3000))
 
 // Letters expected, so we can stop early once roughly that much has been heard
@@ -321,9 +323,9 @@ onBeforeUnmount(() => {
       </small>
     </div>
 
-    <!-- Rung 0: the words of the sentence except the one being assessed, as
-         headwords, alphabetically. Free, and on from the start. -->
-    <ul v-if="aid.dictionary.length && aidVisible" class="dict-list">
+    <!-- Rung 0: on the first encounter, unlearned non-target headwords with
+         glosses, alphabetically. Free, and on from the start. -->
+    <ul v-if="firstEncounter && aid.dictionary.length && aidVisible" class="dict-list">
       <li v-for="entry in aid.dictionary" :key="entry.key">
         <span lang="ru" class="dict-ru">{{ entry.ru }}</span>
         <span lang="en" class="dict-en">{{ entry.en }}</span>

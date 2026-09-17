@@ -4,7 +4,7 @@ import { toPlain } from '../../lib/plain.js'
 import { buildActivityFromEvents, randomHue } from '../../lib/streak.js'
 
 import { state, BATCH_META_KEY } from './state.js'
-import { persistedShape } from './persistence.js'
+import { persistedShape, persistenceSettled } from './persistence.js'
 import { clearMemo, acknowledgeAchievements } from './records.js'
 import { batchSignature, activityRecord } from './activity.js'
 import {
@@ -34,6 +34,7 @@ export function exportData() {
     seenAchievements: [...state.seenAchievements],
     achievementsEarnedAt: state.achievementsEarnedAt,
     metWords: state.metWords,
+    seenPhrases: [...state.seenPhrases],
     activity: state.activity,
     streakHue: state.streakHue,
     batchSig: state.batchSig,
@@ -61,6 +62,8 @@ export function validateImport(data) {
 export async function importData(data) {
   const check = validateImport(data)
   if (!check.ok) throw new Error(check.error)
+  // An outgoing phrase exposure must not overwrite the imported set later.
+  await persistenceSettled()
 
   const map = {}
   const records = []
@@ -112,6 +115,10 @@ export async function importData(data) {
     data.metWords && typeof data.metWords === 'object' ? toPlain(data.metWords) : {}
   state.metWords = metWords
   await idb.setMeta('metWords', metWords)
+  const seenPhrases = Array.isArray(data.seenPhrases)
+    ? data.seenPhrases.filter((key) => typeof key === 'string') : []
+  state.seenPhrases = new Set(seenPhrases)
+  await idb.setMeta('seenPhrases', [...state.seenPhrases])
   // Restore the activity calendar / streak, falling back to whatever the events
   // imply for backups that predate the streak system.
   const importedActivity =

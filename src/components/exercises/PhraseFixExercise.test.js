@@ -1,5 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import 'fake-indexeddb/auto'
 import { mount } from '@vue/test-utils'
+import { state as progressState } from '../../stores/progress.js'
 
 const speak = vi.fn()
 vi.mock('../../lib/speech.js', () => ({
@@ -72,7 +74,18 @@ const verbExercise = {
   targets: ['бояться=to be afraid'],
 }
 
-beforeEach(() => speak.mockClear())
+beforeEach(() => {
+  speak.mockClear()
+  progressState.seenPhrases = new Set()
+})
+
+it('counts a context phrase as encountered when the finished sentence is revealed', async () => {
+  const wrapper = mount(PhraseFixExercise, { props: { exercise: verbExercise } })
+  expect(progressState.seenPhrases.size).toBe(0)
+  await wrapper.find('form input').setValue('боюсь')
+  await submitSpelling(wrapper)
+  expect(progressState.seenPhrases.has('я боюсь высоты')).toBe(true)
+})
 
 // The option button whose label contains `label`.
 const optBtn = (wrapper, label) =>

@@ -93,13 +93,13 @@ export function needsWarmUp(ru, handsFree) {
  * "Repeat each word:" → each word individually (letters only, slowly). Callers
  * play this before opening the mic on the first attempt.
  */
-export function buildWarmUpSequence(phrase) {
+export function buildWarmUpSequence(phrase, showTranslation = true) {
   const wordItems = ruWords(phrase?.ru)
     .map((w) => ({ text: w.replace(/[^\p{L}]/gu, ''), lang: 'ru-RU', rate: 0.7 }))
     .filter((item) => item.text)
   return [
     { text: phrase.ru, lang: 'ru-RU', rate: 0.9 },
-    { text: phrase.en, lang: 'en-GB', rate: 1 },
+    ...(showTranslation ? [{ text: phrase.en, lang: 'en-GB', rate: 1 }] : []),
     { text: phrase.ru, lang: 'ru-RU', rate: SLOW_RATE },
     { text: 'Repeat each word:', lang: 'en-GB', rate: 1 },
     ...wordItems,

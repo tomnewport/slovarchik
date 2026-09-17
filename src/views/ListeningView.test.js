@@ -1,8 +1,10 @@
-import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest'
+import 'fake-indexeddb/auto'
 import { nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import ListeningView from './ListeningView.vue'
 import { state } from '../stores/vocab.js'
+import { state as progressState } from '../stores/progress.js'
 import { buildListeningBank, listeningTokens } from '../lib/phrases.js'
 import { shapePhrases } from '../lib/vocabBuild.js'
 import { loadFixtureWords } from '../test/fixtures.js'
@@ -11,7 +13,9 @@ import { loadFixtureWords } from '../test/fixtures.js'
 beforeAll(() => {
   state.words = loadFixtureWords()
   state.status = 'ready'
+  progressState.loaded = true
 })
+beforeEach(() => { progressState.seenPhrases = new Set() })
 
 async function startDrill(wrapper) {
   await wrapper.find('button.start').trigger('click')
@@ -54,7 +58,7 @@ describe('ListeningView', () => {
     for (const word of listeningTokens(wrapper.vm.current.en)) {
       const tile = wrapper
         .findAll('.bank button.tile')
-        .find((b) => b.text() === word && !b.element.disabled)
+        .find((b) => b.find('.tile-text').text() === word && !b.element.disabled)
       await tile.trigger('click')
     }
     await wrapper.find('button.check').trigger('click')
@@ -84,7 +88,7 @@ describe('ListeningView', () => {
       for (const word of listeningTokens(wrapper.vm.current.en)) {
         const tiles = wrapper
           .findAll('.bank button.tile')
-          .filter((b) => b.text() === word && !b.element.disabled)
+          .filter((b) => b.find('.tile-text').text() === word && !b.element.disabled)
         await tiles[tiles.length - 1].trigger('click')
       }
       await wrapper.find('button.check').trigger('click')
@@ -116,7 +120,7 @@ describe('ListeningView', () => {
     for (const word of listeningTokens(alt)) {
       const tile = wrapper
         .findAll('.bank button.tile')
-        .find((b) => b.text() === word && !b.element.disabled)
+        .find((b) => b.find('.tile-text').text() === word && !b.element.disabled)
       expect(tile, `no tile for "${word}"`).toBeTruthy()
       await tile.trigger('click')
     }
