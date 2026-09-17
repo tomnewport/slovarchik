@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { stripStress, normalize, stressMatches } from './text.js'
+import { stripStress, normalize, foldLatinAccents, stressMatches } from './text.js'
 
 describe('stripStress', () => {
   it('removes combining acute accents', () => {
@@ -24,6 +24,18 @@ describe('normalize', () => {
   })
   it('treats ё as е', () => {
     expect(normalize('живёшь')).toBe('живешь')
+  })
+})
+
+describe('foldLatinAccents', () => {
+  it('accepts either Unicode spelling of an accented English gloss', () => {
+    expect(foldLatinAccents('café')).toBe('cafe')
+    expect(foldLatinAccents('cafe\u0301')).toBe('cafe')
+  })
+
+  it('keeps distinct Cyrillic letters distinct', () => {
+    expect(foldLatinAccents('край')).toBe('край')
+    expect(foldLatinAccents('ёж')).toBe('ёж')
   })
 })
 

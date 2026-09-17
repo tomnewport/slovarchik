@@ -18,7 +18,7 @@
 import { ASPECT_LABEL, MOTION_LABEL } from './phraseContext.js'
 import { normToken, normTokenStress } from './phraseHint.js'
 import { aspectSense } from './spellPrompt.js'
-import { stripStress } from './text.js'
+import { foldLatinAccents, stripStress } from './text.js'
 import { confusionNote, regionalVariant } from './wordFacts.js'
 
 /**
@@ -285,7 +285,7 @@ export function buildGlossIndex(pool) {
 
 /** Fold an English gloss for lookup: case, articles, punctuation and spacing. */
 function normalizeGloss(text) {
-  return String(text ?? '')
+  return foldLatinAccents(text)
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s()]/gu, ' ')
     .replace(/\b(a|an|the)\b/g, ' ')

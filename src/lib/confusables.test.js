@@ -601,6 +601,10 @@ words:
 })
 
 describe('buildGlossIndex', () => {
+  it('looks up accented English glosses with unaccented spelling', () => {
+    const index = buildGlossIndex([{ key: 'кафе=café', en: 'café', label: 'café' }])
+    expect(index.get('cafe')).toEqual(['кафе=café'])
+  })
   it('indexes both the bare gloss and the disambiguated label', () => {
     const index = buildGlossIndex([{ key: 'шапка=hat', en: 'hat', label: 'hat (winter)' }])
     expect(index.get('hat')).toEqual(['шапка=hat'])
