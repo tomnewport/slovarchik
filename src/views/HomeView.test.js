@@ -80,6 +80,23 @@ describe('HomeView', () => {
     expect(push).toHaveBeenCalledWith('/vocab')
   })
 
+  it('lists the minigames in their own section, apart from the drills', async () => {
+    const wrapper = mount(HomeView)
+    const games = wrapper.findAll('.game')
+    expect(games).toHaveLength(1)
+
+    // A game says which habit it is for — that is the reason to pick one.
+    expect(games[0].text()).toContain('Bomb disposal')
+    expect(games[0].text()).toContain('Colours')
+
+    await games[0].trigger('click')
+    expect(push).toHaveBeenCalledWith('/bomb')
+
+    // Not also in the free-practice list: a game is a break from practice,
+    // not another drill.
+    expect(wrapper.findAll('.drill').map((d) => d.text())).not.toContain('Bomb disposal')
+  })
+
   it('shows the committed batch name as a non-clickable card', () => {
     progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)

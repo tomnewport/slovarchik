@@ -62,6 +62,19 @@ const DRILLS = [
   { to: '/speaking', label: 'Speaking' },
 ]
 
+// Minigames (#726). Not drills: a game is a break from practice that happens
+// to drill something, so they get their own section rather than a pill in the
+// free-practice list — and they say which habit they are for, because that is
+// the reason to pick one over another.
+const MINIGAMES = [
+  {
+    to: '/bomb',
+    icon: '💣',
+    label: 'Bomb disposal',
+    skill: 'Colours, and following a spoken instruction to the letter.',
+  },
+]
+
 function openDrill(to) {
   router.push(to)
 }
@@ -357,6 +370,21 @@ const FOCUSED = [
       </div>
     </details>
 
+    <!-- Minigames -->
+    <div class="card minigames">
+      <h2>Minigames</h2>
+      <p class="muted">Short games to make a habit automatic. They don't track progress.</p>
+      <div class="grid games">
+        <button v-for="g in MINIGAMES" :key="g.to" class="game" @click="openDrill(g.to)">
+          <span class="game-icon" aria-hidden="true">{{ g.icon }}</span>
+          <span class="game-text">
+            <strong>{{ g.label }}</strong>
+            <span class="muted">{{ g.skill }}</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
     <WordProgressModal
       v-if="selectedWord"
       :word-key="selectedWord"
@@ -496,6 +524,33 @@ const FOCUSED = [
   cursor: pointer;
   background: var(--bg-soft);
   color: var(--text);
+}
+.minigames .games {
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.game {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  background: var(--bg-soft);
+  color: var(--text);
+}
+.game-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.game-text {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.game-text .muted {
+  font-size: 0.85rem;
 }
 .update-banner {
   border-left: 4px solid var(--primary);

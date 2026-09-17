@@ -33,6 +33,28 @@ function voiceFor(lang) {
   }
 }
 
+/**
+ * Whether a voice for `lang` is actually installed.
+ *
+ * For the drills, speech is a progressive enhancement and this question does
+ * not arise: a missing voice costs a read-aloud button and nothing else. The
+ * bomb-disposal minigame (#728) is the case where it matters, because there
+ * the spoken instruction *is* the content — with no Russian voice the browser
+ * either reads Cyrillic in an English voice or says nothing, and the game
+ * would be unplayable rather than merely quieter. Knowing in advance lets it
+ * show the instruction in writing instead.
+ *
+ * Voices load asynchronously, so an empty list means "not known yet" rather
+ * than "none": a `false` here is worth re-asking later (the browser fires
+ * `voiceschanged`), not treating as final.
+ * @param {string} [lang]
+ * @returns {boolean}
+ */
+export function voiceAvailable(lang = 'ru-RU') {
+  if (!speechSupported()) return false
+  return voiceFor(lang) !== null
+}
+
 // Speak `text` in `lang` (defaults to Russian). The combining stress mark
 // (U+0301) is kept so Russian voices place the stress on the right vowel —
 // this is what tells heteronyms like сто́ит (costs) from стои́т (stands) apart
