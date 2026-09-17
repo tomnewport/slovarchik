@@ -63,14 +63,15 @@ src/
   router/index.js       # routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, /bomb,
-                        #   /firewatch, /reader/:bookId, and the
+                        #   /firewatch, /library, /reader/:bookId, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
                         #   BombDisposalView and FirewatchView are the minigames — #726's
                         #   between-practice interludes, launched for now from HomeView's
                         #   Minigames section rather than from inside a session.
-                        #   ReaderView paginates literature by stable sentence ID.
+                        #   LibraryView downloads opt-in book packs; ReaderView
+                        #   paginates literature by stable sentence ID.
                         #   FirewatchView is the only canvas in the app: 10 000 cells
                         #   cannot be DOM nodes, so the terrain is painted once into an
                         #   offscreen canvas and patched per cell, and each frame blits
@@ -116,6 +117,7 @@ src/
                         #     deployment says it is serving and when it last said it,
                         #     for the Data screen's version check
     settings.js         #   user preferences (not learning progress)
+    library.js          #   opt-in book catalog, download and removal
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
     hints.js            #   in-phrase word-hint glue + the spoken drill's dictionary (#733)

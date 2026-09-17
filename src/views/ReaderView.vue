@@ -1,13 +1,17 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import * as idb from '../lib/idb.js'
 import { pageEnd, pageParagraphs, pageStart } from '../lib/readerPage.js'
 import { previewBook } from '../lib/readerPreview.js'
 import { lookupReaderWord, readerTokens } from '../lib/readerDictionary.js'
 import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
+import { loadBook } from '../stores/library.js'
 
-const book = ref(previewBook)
+const route = useRoute()
+const book = ref(route.params.bookId === 'preview' ? previewBook : null)
+const loadError = ref(null)
+const loading = ref(!book.value)
 const start = ref(0)
 const end = ref(0)
 const revealedId = ref(null)
@@ -159,6 +163,12 @@ function handleKey(event) {
 }
 
 onMounted(async () => {
+  if (!book.value) {
+    try { book.value = await loadBook(String(route.params.bookId)) }
+    catch (error) { loadError.value = error.message }
+    loading.value = false
+  }
+  if (!book.value) return
   const [saved, savedTheme, savedTypeface, savedBookmarks] = await Promise.all([
     idb.getMeta(`reader:position:${book.value.id}`),
     idb.getMeta('reader:theme'),
@@ -185,9 +195,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="reader" :class="[`reader-${theme}`, `reader-${typeface}`]">
+  <section v-if="!book" class="card"><p>{{ loading ? 'Opening book…' : loadError || 'This book is not downloaded.' }}</p><RouterLink to="/library">Back to library</RouterLink></section>
+  <section v-else class="reader" :class="[`reader-${theme}`, `reader-${typeface}`]">
     <div class="reader-top">
-      <RouterLink to="/" class="reader-back" aria-label="Back to home">←</RouterLink>
+      <RouterLink to="/library" class="reader-back" aria-label="Back to library">←</RouterLink>
       <div class="reader-title"><strong>{{ book.title }}</strong><small>{{ book.author }}</small></div>
       <button class="reader-saved" :aria-expanded="showingBookmarks" @click="showingBookmarks = !showingBookmarks">⌑ {{ bookmarks.length }}</button>
       <div class="reader-options" aria-label="Reading appearance">

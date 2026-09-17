@@ -79,7 +79,7 @@ const MINIGAMES = [
     skill: 'Building two-digit numbers, and saying them at speed.',
   },
   {
-    to: '/reader/preview',
+    to: '/library',
     icon: '📖',
     label: 'Literature reader',
     skill: 'Read Russian at your own pace.',

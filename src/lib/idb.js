@@ -4,6 +4,7 @@
 //   'progress'    (keyed by word)       — per-word learning record (see stores/progress.js)
 //   'issue-reports' (keyed by id)       — offline-queued issue reports
 //   'activity'    (keyed by day)        — one day of the streak calendar: { day, count, correct, hue }
+//   'book-packs'  (keyed by id)         — opt-in book/translation Blob + versions
 //
 // Writes come in two shapes: one record at a time, and — since #662 — whole
 // batches inside a single transaction. The batch writers exist for atomicity as
@@ -29,7 +30,8 @@ const REPORTS_STORE = 'issue-reports'
 // One record per day of the streak calendar (#662). Before this the whole
 // calendar was a single `meta` blob rewritten on every answer.
 const ACTIVITY_STORE = 'activity'
-const VERSION = 6
+const BOOKS_STORE = 'book-packs'
+const VERSION = 7
 
 let dbPromise = null
 
@@ -60,6 +62,9 @@ function openDb() {
       // here — a fresh store is all that's needed.
       if (!db.objectStoreNames.contains(ACTIVITY_STORE)) {
         db.createObjectStore(ACTIVITY_STORE, { keyPath: 'day' })
+      }
+      if (!db.objectStoreNames.contains(BOOKS_STORE)) {
+        db.createObjectStore(BOOKS_STORE, { keyPath: 'id' })
       }
     }
     req.onsuccess = () => resolve(req.result)
@@ -162,6 +167,34 @@ export function clearFiles() {
   return tx(FILES_STORE, 'readwrite', (store) => {
     store.clear()
     return { value: undefined }
+  })
+}
+
+/** Installed book metadata can be listed without parsing any large text Blob. */
+export function getAllBooks() {
+  return getAll(BOOKS_STORE)
+}
+
+export function getBook(id) {
+  return tx(BOOKS_STORE, 'readonly', (store) => {
+    const result = { value: undefined }
+    store.get(id).onsuccess = (e) => { result.value = e.target.result }
+    return result
+  })
+}
+
+export function putBook(record) {
+  return tx(BOOKS_STORE, 'readwrite', (store) => {
+    const plain = toPlain(record)
+    store.put(plain)
+    return { value: plain }
+  })
+}
+
+export function deleteBook(id) {
+  return tx(BOOKS_STORE, 'readwrite', (store) => {
+    store.delete(id)
+    return { value: id }
   })
 }
 

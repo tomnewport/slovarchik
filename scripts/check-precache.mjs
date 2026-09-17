@@ -58,6 +58,11 @@ export function vocabEntries(entries) {
   return entries.filter((e) => /(^|\/)vocab\//.test(e.url))
 }
 
+/** Opt-in literature packs and their catalog must stay outside the shell. */
+export function bookEntries(entries) {
+  return entries.filter((e) => /(^|\/)books\//.test(e.url))
+}
+
 /**
  * Precached entries that are the deployed-version document — the other thing
  * that must not be there. Matched at the root and under a base path.
@@ -86,7 +91,7 @@ export function vocabRuntimeRoutes(swSource) {
   return found
 }
 
-export function renderSummary(entries, offenders, runtimeRoutes = [], versionOffenders = []) {
+export function renderSummary(entries, offenders, runtimeRoutes = [], versionOffenders = [], bookOffenders = []) {
   const lines = []
   if (offenders.length) {
     lines.push('### 🗂️ Precache partition — broken', '')
@@ -117,6 +122,11 @@ export function renderSummary(entries, offenders, runtimeRoutes = [], versionOff
       'check would be answered by the build doing the asking and could never see a',
       'newer deploy. Restore the `version.json` entry in `globIgnores`.',
     )
+  }
+  if (bookOffenders.length) {
+    lines.push('', '### 📖 Book packs — precached', '')
+    lines.push('Literature is opt-in; remove `books/**` from the service worker precache:', '')
+    for (const entry of bookOffenders.slice(0, 10)) lines.push(`- \`${entry.url}\``)
   }
   if (runtimeRoutes.length) {
     lines.push('', '### 🗂️ Vocab runtime cache — should not exist', '')
@@ -159,14 +169,15 @@ export function main() {
 
   const offenders = vocabEntries(entries)
   const versionOffenders = versionEntries(entries)
+  const bookOffenders = bookEntries(entries)
   const runtimeRoutes = vocabRuntimeRoutes(source)
-  const markdown = renderSummary(entries, offenders, runtimeRoutes, versionOffenders)
+  const markdown = renderSummary(entries, offenders, runtimeRoutes, versionOffenders, bookOffenders)
   if (process.env.GITHUB_STEP_SUMMARY) {
     appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${markdown}\n`)
   }
   console.log(markdown)
 
-  if (offenders.length || versionOffenders.length || runtimeRoutes.length) process.exitCode = 1
+  if (offenders.length || versionOffenders.length || bookOffenders.length || runtimeRoutes.length) process.exitCode = 1
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main()
