@@ -12,6 +12,7 @@ import {
   wordHasInflections,
   wordHasContextDrill,
   borderlineDimensions,
+  levelFlawless,
 } from '../../lib/progression.js'
 import { tableKey } from '../../lib/tableStage.js'
 import { reviewSchedule, confirmationOutcome } from '../../lib/schedule.js'
@@ -55,7 +56,8 @@ const RECENT_LIMIT = 12
 //     sound when the event-window cap keeps the length steady, or when two
 //     attempts share a `ts`;
 //   * `known` — `markKnown` swaps in the relaxed criteria without appending
-//     any event.
+//     any event, and a wrong answer inside a current batch swaps them back
+//     out (#725) alongside one that it does append.
 //
 // The vocab side is covered by dropping the whole memo whenever `wordIndex`
 // rebuilds (it produces a fresh Map each time `vocabState.words` is replaced),
@@ -248,9 +250,11 @@ function ensureRecord(key) {
     state.records[key] = {
       word: key,
       events: [],
-      // "I know this word" (#321): when set, the pure model grades this word on
-      // relaxed single-answer criteria, so one clean pass of each exercise
-      // confirms it as learned/mastered instead of the usual repeated drilling.
+      // Vouched for by the learner (#321, and since #725 through the quick
+      // progression offer a flawless pass earns): when set, the pure model
+      // grades this word on relaxed single-answer criteria, so one clean pass
+      // of each exercise confirms it as learned/mastered instead of the usual
+      // repeated drilling.
       known: false,
       learnedAt: null,
       masteredAt: null,
@@ -325,6 +329,10 @@ function capEvents(rec) {
  * `hinted` marks answers produced with the keyboard hint available-and-used (or
  * any exercise that can't demonstrate unaided recall); the memory scheduler
  * grows stability less for those (#313).
+ * `flawless` marks an answer that was right the first time with no hint and no
+ * do-over, and is stored on the attempt so the quick progression offer (#725)
+ * can read "flawless in every dimension" across sessions rather than only
+ * within the one that happens to finish the set.
  * @returns {Promise<string>} the word's new state
  */
 export async function recordAttempt({
@@ -335,6 +343,7 @@ export async function recordAttempt({
   ts = Date.now(),
   times = 1,
   hinted = true,
+  flawless = false,
 }) {
   // A missing word key means there is nothing meaningful to record (e.g. a
   // phrase exercise with no source word, or a vocab entry that lacks a key).
@@ -349,8 +358,17 @@ export async function recordAttempt({
     return stateOf(word)
   }
   const rec = ensureRecord(word)
+  // Quick progression is fragile by design (#725). A word promoted on the
+  // learner's say-so is graded on the relaxed single-answer criteria, and the
+  // deal is that one wrong answer while it is still in a current batch ends
+  // that — no second chances. The attempt is graded exactly as any other; what
+  // goes is the relaxed bar, so the word now has to earn its state the long
+  // way. Outside a current batch the flag stands: a spaced review that goes
+  // wrong slips the word on its own (a window of one cannot survive a miss),
+  // and stripping the flag as well would punish the same answer twice.
+  if (!correct && rec.known && inCurrentBatch(word)) rec.known = false
   for (let i = 0; i < Math.max(1, times); i++) {
-    rec.events.push({ dimension, level, correct: !!correct, ts })
+    rec.events.push({ dimension, level, correct: !!correct, ts, flawless: !!flawless })
   }
   capEvents(rec)
   // Lifetime aggregates and the memory schedule fold in the attempt exactly
@@ -397,6 +415,49 @@ export async function recordAttempt({
 /** Whether the learner has flagged a word "I know this word". */
 export function isKnown(key) {
   return !!state.records[key]?.known
+}
+
+/** Is this word in one of the committed batches the learner is working now? */
+function inCurrentBatch(key) {
+  return ['learning', 'mastery'].some((level) => state[level]?.words?.includes(key))
+}
+
+/**
+ * The quick progression offer (#725): the state this word would be in right now
+ * if the learner said they already knew it — or null when there is nothing
+ * worth asking about.
+ *
+ * The bar is that every dimension the level grades has had its most recent
+ * attempt answered flawlessly: right first time, no hint, no do-over. That is
+ * read off the stored attempts, so it accumulates across sessions — a word is
+ * drilled on whatever it still needs, and its identification answer may be
+ * weeks older than its usage one. Asking only about a set completed inside one
+ * sitting would almost never fire.
+ *
+ * The offer is then capped at what has actually been shown: an inflecting word
+ * whose *mastery* dimensions were merely correct, not flawless, is offered as
+ * learned rather than mastered. And it is withheld altogether unless it would
+ * lift the word above where it already stands — there is no point asking a
+ * question whose answer changes nothing.
+ *
+ * @param {string} key
+ * @returns {'learned'|'mastered'|null} the state on offer
+ */
+export function quickProgressOffer(key) {
+  const rec = state.records[key]
+  if (!rec || rec.known) return null
+  const word = { ...wordRecord(key), known: true }
+  const evs = events(key)
+  if (!levelFlawless(evs, 'learning', word)) return null
+  // Flawless on every learning dimension satisfies the relaxed criteria too, so
+  // this is `learned` at worst — and `mastered` for a word with no table, which
+  // has nothing further to show.
+  let offer = wordState(evs, word)
+  if (offer === 'mastered' && wordHasInflections(word) && !levelFlawless(evs, 'mastery', word)) {
+    offer = 'learned'
+  }
+  if (rank(offer) <= rank(stateOf(key))) return null
+  return offer === 'mastered' ? 'mastered' : 'learned'
 }
 
 /**

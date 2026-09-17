@@ -46,6 +46,7 @@ export {
   recentlyLearned,
   recordAttempt,
   isKnown,
+  quickProgressOffer,
   markKnown,
   unmarkKnown,
   markIntroduced,

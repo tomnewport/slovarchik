@@ -329,6 +329,33 @@ export function applicableDimensions(level, word = {}) {
   return dims.filter((d) => d !== 'context' || wordHasContextDrill(word))
 }
 
+/**
+ * Has every dimension this level grades had its most recent attempt answered
+ * *flawlessly* — right first time, with no hint and no do-over (#725)?
+ *
+ * The quick progression offer is built on this rather than on the criteria
+ * alone. "Flawless across every dimension" is not a thing a single session can
+ * establish: a word is drilled on whatever it still needs, so the identification
+ * answer may be weeks older than the usage one. Reading it off the stored
+ * attempts lets the evidence accumulate across sessions, and the most recent
+ * attempt is the one that speaks — a word answered flawlessly in March and
+ * fumbled last night has not shown it lately.
+ *
+ * An attempt with no `flawless` flag counts as not flawless. Attempts recorded
+ * before the flag existed carry no claim either way, and "we don't know" has to
+ * read as no here: the offer says the learner has demonstrated something.
+ *
+ * @param {Array<{level?: string, dimension?: string, flawless?: boolean}>} events
+ * @param {'learning'|'mastery'} level
+ * @param {PlainObject} [word]
+ */
+export function levelFlawless(events, level, word = {}) {
+  return applicableDimensions(level, word).every((d) => {
+    const attempts = attemptsFor(events, level, d)
+    return attempts[attempts.length - 1]?.flawless === true
+  })
+}
+
 /** Are every applicable dimension's criteria for a level met? */
 export function levelMet(events, level, word = {}) {
   const criteria = criteriaFor(word)

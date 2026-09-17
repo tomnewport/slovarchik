@@ -18,6 +18,7 @@ import {
   levelGapByDimension,
   dimensionProgress,
   levelMet,
+  levelFlawless,
   wordHasInflections,
   wordHasContextDrill,
   wordState,
@@ -566,5 +567,46 @@ describe('needsAnotherDay', () => {
   it('is false when today is a second day the criterion has not yet seen', () => {
     const yesterday = attempts('mastery', 'usage', [true], 0)
     expect(needsAnotherDay(yesterday, 'mastery', 'usage', DAY, word)).toBe(false)
+  })
+})
+
+describe('levelFlawless (#725)', () => {
+  const ev = (dimension, flawless, ts) => ({
+    dimension,
+    level: 'learning',
+    correct: true,
+    flawless,
+    ts,
+  })
+  const LEARNING = ['identification', 'usage', 'hearing', 'speaking']
+  const allFlawless = () => LEARNING.map((d) => ev(d, true, 1))
+
+  it('wants every dimension the level grades, not just some', () => {
+    expect(levelFlawless(allFlawless(), 'learning')).toBe(true)
+    expect(levelFlawless(allFlawless().slice(0, 3), 'learning')).toBe(false)
+  })
+
+  it('reads the most recent attempt of each dimension', () => {
+    // Flawless once, fumbled since: the dimension does not count now.
+    const events = [...allFlawless(), ev('usage', false, 2)]
+    expect(levelFlawless(events, 'learning')).toBe(false)
+    // …and a later flawless answer brings it back.
+    expect(levelFlawless([...events, ev('usage', true, 3)], 'learning')).toBe(true)
+  })
+
+  it('treats an attempt recorded before the flag existed as not flawless', () => {
+    const legacy = LEARNING.map((d) => ({ dimension: d, level: 'learning', correct: true, ts: 1 }))
+    expect(levelFlawless(legacy, 'learning')).toBe(false)
+  })
+
+  it('skips the context drill for a word that has none', () => {
+    const mastery = ['identification', 'usage'].map((d) => ({
+      dimension: d,
+      level: 'mastery',
+      correct: true,
+      flawless: true,
+      ts: 1,
+    }))
+    expect(levelFlawless(mastery, 'mastery', { hasContextDrill: false })).toBe(true)
   })
 })

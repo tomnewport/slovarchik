@@ -135,6 +135,9 @@ describe('VerbContrastExercise', () => {
     await wrapper.find('.to-spell').trigger('click')
     await wrapper.find('input[lang="ru"]').setValue('сказали') // wrong form
     await wrapper.find('form').trigger('submit')
+    // A wrong first spelling buys one do-over (#725); the grade is still the
+    // first attempt's, so re-submitting the same answer settles it.
+    await wrapper.find('form').trigger('submit')
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: false })
   })

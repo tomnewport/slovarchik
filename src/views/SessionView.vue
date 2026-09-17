@@ -34,7 +34,9 @@ import {
   runnerSummary,
   firstPassProgress,
   isRepeating,
+  remainingTargets,
 } from '../lib/sessionRunner.js'
+import { flawlessFinished, resultFlawless, trackFlawless } from '../lib/quickProgress.js'
 
 import TypeExercise from '../components/exercises/TypeExercise.vue'
 import WordBankExercise from '../components/exercises/WordBankExercise.vue'
@@ -94,6 +96,23 @@ let sessionPhrases = []
 // the shared autocomplete pool, reused for the combined boards.
 const flashcards = { wrong: new Map(), correct: new Map() }
 let flashcardOptions = []
+
+// Quick progression (#725): word key → whether every graded exercise it has had
+// *this session* was flawless — right first time, no hint, no do-over.
+//
+// The offer itself is decided by the store, over the flag now stored on every
+// attempt, so the evidence accumulates across sessions. This ledger is the
+// extra guard that only a session can give: an exercise missed and then
+// re-answered correctly in the repeat round leaves a flawless-looking attempt
+// as the dimension's latest, and the same question again ten minutes later is
+// not fresh evidence of anything.
+const flawlessWords = new Map()
+// Words already asked about (or found not worth asking about), so the question
+// is put once per word per session.
+const quickAsked = new Set()
+// The offers waiting to be answered — a board can finish several words at once.
+const quickOffers = ref([])
+const quickOffer = computed(() => quickOffers.value[0] ?? null)
 
 const runner = reactive(initRunner([]))
 const current = computed(() => currentExercise(runner))
@@ -205,6 +224,9 @@ const gainWidth = reactive({ learning: 0, mastery: 0 })
 let finalized = false
 
 async function finalizeIfDone() {
+  // An unanswered quick-progression offer can still change a word's state — and
+  // with it whether a batch is complete — so the summary waits for it.
+  if (quickOffers.value.length) return
   if (runner.phase !== 'summary' || finalized) return
   finalized = true
   finishedAt.value = Date.now()
@@ -315,6 +337,10 @@ async function onDone(result) {
   if (isMatch) {
     collectMatchResult(flashcards, { dimension: ex.dimension, targets: ex.targets, wrong })
   }
+  // Quick progression (#725): note whether this exercise was flawless for each
+  // of its words, before anything is recorded — the offer is about how the
+  // learner answered, not about what the answer did to the word's state.
+  trackFlawless(flawlessWords, ex.targets, result)
   // Collateral-damage guard: a phrase spelled wrong only *outside* the word being
   // assessed still counts as a wrong exercise, but the word itself was produced
   // correctly — so don't record (and possibly slip) it. TypeExercise reports this
@@ -336,6 +362,9 @@ async function onDone(result) {
         correct: wrong ? !wrong.has(key) : result.correct,
         times,
         hinted: !result.double,
+        // Stored on the attempt so "flawless in every dimension" can be read
+        // across sessions, not just inside the one that finishes the set (#725).
+        flawless: resultFlawless(result, key),
       })
     } catch (e) {
       if (!firstError) firstError = e
@@ -355,8 +384,45 @@ async function onDone(result) {
   // without also replaying the item at the end (#447).
   submit(runner, result.correct, { requeue: !isMatch && !result.correctedOnRetry })
   injectFlashcardRepeat()
+  collectQuickOffers()
   await finalizeIfDone()
   if (firstError) throw firstError
+}
+
+/**
+ * Ask about the words whose session has just ended flawlessly (#725).
+ *
+ * Run after the repeat board has been injected, so a word about to come back is
+ * not asked about mid-drilling, and once per word — a word that finishes short
+ * of the bar is not re-examined if a later board happens to touch it again.
+ */
+function collectQuickOffers() {
+  const remaining = remainingTargets(runner)
+  const finished = flawlessFinished(flawlessWords, { remaining, skip: quickAsked })
+  for (const key of finished) {
+    quickAsked.add(key)
+    const level = progress.quickProgressOffer(key)
+    if (level) quickOffers.value.push({ key, level })
+  }
+}
+
+// The dictionary entry behind the current offer, so the card can name the word
+// it is about rather than just its key.
+const quickWord = computed(() =>
+  quickOffer.value ? (vocabById.get(quickOffer.value.key) ?? null) : null,
+)
+
+/**
+ * The learner's answer to an offer. Yes hands the word the relaxed criteria it
+ * has just cleared, so it counts as learned (or mastered) from here — still
+ * scheduled, still slippable, and one wrong answer inside the batch puts it
+ * back on the standard bar. No changes nothing: the word stays in the lesson,
+ * and the flawless work it has already done still counted double.
+ */
+async function answerQuickOffer(accepted) {
+  const offer = quickOffers.value.shift()
+  if (offer && accepted) await progress.markKnown(offer.key)
+  await finalizeIfDone()
 }
 
 // When the planned pass (and any normal repeats) are done, replay the flashcard
@@ -421,20 +487,6 @@ const canSkipListening = computed(
 const canSkipSpeaking = computed(
   () => !runner.skipped.includes('speaking') && upcomingHas('speaking'),
 )
-
-// "I know this word" (#321): only for single-target exercises — a matching board
-// drills many words at once, and one button can't speak for all of them. The
-// learner marks the word known and simply answers this one exercise; from now
-// on a single correct answer per dimension confirms it instead of the full grind.
-const currentKey = computed(() => {
-  const targets = (current.value?.targets ?? []).filter(Boolean)
-  return targets.length === 1 ? targets[0] : null
-})
-const canMarkKnown = computed(() => currentKey.value != null && !progress.isKnown(currentKey.value))
-
-async function markCurrentKnown() {
-  if (currentKey.value) await progress.markKnown(currentKey.value)
-}
 
 async function skip(dimension) {
   const picker = buildReplacementPicker()
@@ -510,6 +562,34 @@ function confirmClose() {
 
     <p v-if="!ready" class="muted">Loading…</p>
 
+    <!-- Quick progression (#725): the word just went through its whole session
+         without a hint, a do-over or a wrong answer. Rather than keep drilling
+         it, ask. Shown between exercises — including before the summary, since
+         a yes can still finish a batch. -->
+    <div v-else-if="quickOffer" class="quick-offer card" data-testid="quick-offer">
+      <p class="quick-word">
+        <strong lang="ru">{{ quickWord?.ru ?? quickOffer.key }}</strong>
+        <span v-if="quickWord?.en" class="quick-en">{{ quickWord.en }}</span>
+      </p>
+      <h2>
+        Seems like you might have {{ quickOffer.level === 'mastered' ? 'mastered' : 'learned' }}
+        this word already.
+      </h2>
+      <p class="muted">
+        Shall we consider it {{ quickOffer.level === 'mastered' ? 'mastered' : 'learned' }}? It
+        will still come back for review, and one wrong answer puts it straight back into the
+        lesson.
+      </p>
+      <div class="quick-actions">
+        <button class="primary quick-yes" @click="answerQuickOffer(true)">
+          Yes, I know this already
+        </button>
+        <button class="ghost quick-no" @click="answerQuickOffer(false)">
+          No, please keep teaching
+        </button>
+      </div>
+    </div>
+
     <!-- Active exercise -->
     <div
       v-else-if="runner.phase === 'exercise' && current"
@@ -534,7 +614,6 @@ function confirmClose() {
       <div class="skips row">
         <button v-if="canSkipListening" class="skip" @click="skip('hearing')">Skip listening</button>
         <button v-if="canSkipSpeaking" class="skip" @click="skip('speaking')">Skip speaking</button>
-        <button v-if="canMarkKnown" class="skip know" @click="markCurrentKnown">I know this word</button>
         <ReportButton
           :exercise="current"
           :vocab-version="vocabState.vocabVersion"
@@ -717,9 +796,30 @@ function confirmClose() {
   border-radius: 8px;
   padding: 0.35rem 0.6rem;
 }
-.skip.know {
-  color: var(--good);
-  border-color: color-mix(in srgb, var(--good) 45%, transparent);
+.quick-offer {
+  text-align: center;
+  display: grid;
+  gap: 0.75rem;
+  padding: 2rem;
+}
+.quick-offer h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.quick-word {
+  margin: 0;
+  display: grid;
+  gap: 0.15rem;
+  font-size: 1.4rem;
+}
+.quick-en {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.quick-actions {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 .summary {
   text-align: center;

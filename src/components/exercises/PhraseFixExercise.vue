@@ -7,9 +7,14 @@
 //      it's tapped: a right pick locks its group green, a wrong pick flashes red
 //      and the learner tries again — so nobody spells a form for a slot they've
 //      picked wrong. A dimension that took a wrong pick still counts as a miss.
-//   2. SPELL the correctly inflected form. A wrong spelling reveals what was
-//      typed against the correct form, character by character, so a subtle slip
-//      (a stray accent, a look-alike letter) is visible.
+//   2. SPELL the correctly inflected form. Like every drill that asks for
+//      Russian off a keyboard (#725), the opening attempt is unaided — the
+//      keyboard hint is withheld until the learner asks for it with 🔥 Hints or
+//      until a wrong first answer unlocks it for the do-over. The do-over
+//      teaches; it does not un-miss, so the grade is the first attempt's. A
+//      wrong spelling reveals what was typed against the correct form,
+//      character by character, so a subtle slip (a stray accent, a look-alike
+//      letter) is visible.
 // Feedback (and the linked grammar rule) follows each sentence; solved
 // sentences stay visible above the current one. The descriptor is built by
 // lib/exerciseBuild.js (a set) or lib/phraseContext.js (a single sentence — a
@@ -18,16 +23,19 @@
 // the exercise reports per-word results via `wrong`. The full sentence is
 // NEVER spoken until its form is spelled — we never voice the ungrammatical
 // lemma-in-slot version.
-import { computed, nextTick, ref, onMounted } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import { normalize } from '../../lib/text.js'
 import { revealDiff } from '../../lib/spellReveal.js'
 import { ruleMiss, ruleReminder } from '../../lib/ruleOracle.js'
 import { speak } from '../../lib/speech.js'
+import { keyboard, resetHint, setHintAllowed, toggleHint } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
 import { state as vocabState } from '../../stores/vocab.js'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
+import CelebrationBurst from '../CelebrationBurst.vue'
+import HintPassButton from '../HintPassButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -56,8 +64,25 @@ const wrongTried = ref([])
 // even though the pick is corrected before spelling.
 const missed = ref([])
 const typed = ref('')
+// Whether the *final* attempt matched — what the character-by-character reveal
+// below is about. The grade is `spellFirstTry`: a do-over teaches, it does not
+// un-miss (#447).
 const spellCorrect = ref(false)
+// Whether the first, unaided attempt at this item's form was right.
+const spellFirstTry = ref(false)
+// Whether this item's spelling has had its one do-over.
+const spellRetried = ref(false)
 const inputEl = ref(null)
+// Whether the learner switched the keyboard hint on at any point in this set. A
+// set spelled through with the hint untouched counts double (and gets a 🔥).
+const hintUsed = ref(false)
+const showFire = ref(false)
+watch(
+  () => keyboard.on,
+  (on) => {
+    if (on) hintUsed.value = true
+  },
+)
 // Finished items, oldest first: { ru, correct, warn } (warn = spelling right,
 // selection wrong — shown amber, not red).
 const results = ref([])
@@ -66,7 +91,7 @@ const results = ref([])
 const allResolved = computed(() => selectSteps.value.every((_, i) => resolved.value[i]))
 // A selection dimension was picked wrong at least once this item.
 const selectMissed = computed(() => missed.value.length > 0)
-const overallCorrect = computed(() => !selectMissed.value && spellCorrect.value)
+const overallCorrect = computed(() => !selectMissed.value && spellFirstTry.value)
 
 // Whether the pair (aspect / direction) group was ever answered wrong — the
 // feedback then names the verb that was needed, not just its grammatical slot.
@@ -187,11 +212,48 @@ function pickOption(groupIdx, step, opt) {
 
 function submitSpell() {
   if (stage.value !== 'spell') return
-  spellCorrect.value = normalize(typed.value) === item.value.answer
+  const ok = normalize(typed.value) === item.value.answer
+  if (!ok && !spellRetried.value) {
+    // The unaided attempt missed. Unlock the keyboard hint and let them go
+    // again — the item is already marked wrong, so the do-over costs nothing
+    // and teaches the form rather than just reporting it.
+    spellRetried.value = true
+    setHintAllowed(true)
+    playFeedback(false)
+    nextTick(() => inputEl.value?.focus())
+    return
+  }
+  if (!spellRetried.value) spellFirstTry.value = ok
+  spellCorrect.value = ok
+  settleSpell()
+}
+
+/** Give up on this form: grade it as it stands and reveal the answer. */
+function passSpell() {
+  if (stage.value !== 'spell') return
+  spellCorrect.value = false
+  settleSpell()
+}
+
+function settleSpell() {
   stage.value = 'done'
+  setHintAllowed(true)
+  // The whole set unaided and right first time — the 🔥 the other typing drills
+  // show for the same thing, on the sentence that completes it.
+  if (isLast.value && overallCorrect.value && !hintUsed.value &&
+      results.value.every((r) => r.correct)) {
+    showFire.value = true
+  }
   playFeedback(overallCorrect.value)
   // Only now — with the form known correct — is it safe to voice the sentence.
   speak(item.value.ru)
+}
+
+// The first ask for help: unlock the keyboard hint and switch it on, so one
+// press both opens the door and walks through it.
+function askForHints() {
+  setHintAllowed(true)
+  if (!keyboard.on) toggleHint()
 }
 
 // The word this sentence drills — the subject of the facts panel once the
@@ -219,20 +281,35 @@ function next() {
     missed.value = []
     typed.value = ''
     spellCorrect.value = false
+    spellFirstTry.value = false
+    spellRetried.value = false
+    // Every item's opening attempt is unaided, however the last one went.
+    setHintAllowed(false)
     if (stage.value === 'spell') nextTick(() => inputEl.value?.focus())
     return
   }
+  // Every sentence right first time, every form spelled with the hint untouched:
+  // the set counts double, exactly as the other typing drills do (#210, #725).
+  const flawless = results.value.every((r) => r.correct) && !hintUsed.value
   emit('done', {
     correct: results.value.every((r) => r.correct),
     // Per-word results: a set spans several words, and only the missed ones
     // should record a wrong attempt.
     wrong: results.value.filter((r) => !r.correct && r.key).map((r) => r.key),
+    double: flawless,
+    flawless,
   })
 }
 
 onMounted(() => {
+  resetHint()
+  // Withhold the keyboard hint for the first, unaided attempt at each form.
+  setHintAllowed(false)
   if (!hasSelect.value) nextTick(() => inputEl.value?.focus())
 })
+
+// Restore the default so the next exercise's keyboard isn't left locked.
+onBeforeUnmount(() => setHintAllowed(true))
 </script>
 
 <template>
@@ -335,11 +412,27 @@ onMounted(() => {
           autocapitalize="off"
           spellcheck="false"
         />
-        <button type="submit" class="primary">Check</button>
+        <!-- The unaided attempt missed. Say so without saying what was wrong —
+             the character-by-character reveal comes once the form is settled. -->
+        <p v-if="spellRetried" class="retry-hint">
+          Not quite — try again<span v-if="!hintUsed">, or ask for the hints</span>
+        </p>
+        <div class="row spell-row">
+          <button type="submit" class="primary">Check</button>
+          <!-- 🔥 while the form is being spelled unaided; once help is taken the
+               fire goes out and what is left is a pass (#725). -->
+          <HintPassButton
+            class="help"
+            :hinted="hintUsed"
+            @hints="askForHints"
+            @pass="passSpell"
+          />
+        </div>
       </form>
 
       <div v-else class="grid" style="gap: 0.75rem">
         <div class="feedback-block">
+          <CelebrationBurst :show="showFire" emoji="🔥" />
           <p class="feedback" :class="overallCorrect ? 'good' : spellingOnlyMiss ? 'warn' : 'bad'">
             <template v-if="overallCorrect">✓ Correct!</template>
             <template v-else-if="spellingOnlyMiss">
@@ -604,6 +697,20 @@ onMounted(() => {
   display: grid;
   gap: 0.5rem;
   text-align: left;
+  /* Anchor the 🔥 burst over the feedback. */
+  position: relative;
+}
+/* Check leads; help sits out at the far end of the row, never mistaken for it. */
+.spell-row {
+  align-items: center;
+}
+.help {
+  margin-left: auto;
+}
+.retry-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 /* What the learner typed against the correct form, aligned character by
    character. Monospace so the two rows line up under each other. */

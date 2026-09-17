@@ -84,6 +84,11 @@ function check() {
     emit('retry')
     return
   }
+  finish()
+}
+
+/** Grade the table exactly as it stands and reveal the answers. */
+function finish() {
   ruleHints.value = ruleHintsFor(
     props.paradigm.cells.map((c) => cellKey(c.row, c.col)).filter((k) => !correctCell(k)),
   )
@@ -94,6 +99,10 @@ function check() {
   }))
   emit('graded', allCorrect.value, records)
 }
+
+// Giving up (#725): grade what is there, skipping the retry the learner would
+// otherwise be offered. Empty cells are simply wrong, which is what a pass is.
+defineExpose({ giveUp: () => !checked.value && finish() })
 
 // Enter jumps to the next still-empty ending box (wrapping around), so the
 // learner can fill the whole table without reaching for each cell. Works for

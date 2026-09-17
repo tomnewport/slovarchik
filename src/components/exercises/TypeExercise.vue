@@ -39,7 +39,7 @@ import { posLabel } from '../../lib/spellPrompt.js'
 import { normToken } from '../../lib/phraseHint.js'
 import { stripStress } from '../../lib/text.js'
 import { speak } from '../../lib/speech.js'
-import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
+import { keyboard, resetHint, setHintAllowed, toggleHint } from '../../stores/keyboard.js'
 import { hintTokensFor, diagnoseAnswer } from '../../stores/hints.js'
 import { correctionMessage, QUIET_TIERS } from '../../lib/confusables.js'
 import { ruleReminder, spellingRuleMiss } from '../../lib/ruleOracle.js'
@@ -49,6 +49,7 @@ import AnnotatedEnglish from '../AnnotatedEnglish.vue'
 import WordFacts from '../WordFacts.vue'
 import SpeakButton from '../SpeakButton.vue'
 import CelebrationBurst from '../CelebrationBurst.vue'
+import HintPassButton from '../HintPassButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -107,13 +108,13 @@ const placed = ref([])
 const confirmingReveal = ref(false)
 const placedIds = computed(() => new Set(placed.value.map((c) => c.id)))
 const availableChips = computed(() => chips.value.filter((c) => !placedIds.value.has(c.id)))
-// The ❓ Dictionary panel (unlearned phrase words) — collapsed by default.
-const dictOpen = ref(false)
-// Whether it was opened at any point. It reveals precisely the words an
-// encounter would otherwise credit (#675), and unlike the keyboard hint it
-// costs nothing, so `double` cannot stand in for it. Sticky: closing the panel
-// again does not unsee what it showed.
-const dictUsed = ref(false)
+// The ❓ Dictionary panel (unlearned phrase words) — open by default (#725).
+// It glosses the words *around* the one being assessed: words the curriculum
+// has not reached, which the learner could not be expected to know and is not
+// being graded on. Making them hunt for that is friction with nothing on the
+// other side of it, so the panel starts open and the toggle is there to put it
+// away.
+const dictOpen = ref(true)
 // Whether the learner switched the keyboard hint on at any point this exercise.
 // A correct answer with the hint untouched counts double (and gets a little 🔥).
 const hintUsed = ref(false)
@@ -294,10 +295,17 @@ function resolve() {
   if (!props.exercise.audio) speak(props.exercise.ru)
 }
 
-// Toggle the Dictionary, remembering for good that it was consulted.
+// Put the Dictionary away, or bring it back.
 function openDict() {
   dictOpen.value = !dictOpen.value
-  if (dictOpen.value) dictUsed.value = true
+}
+
+// The first ask for help: unlock the keyboard hint (a spelling withholds it for
+// the opening attempt) and switch it on, so one press both opens the door and
+// walks through it. The `keyboard.on` watcher above records that help was taken.
+function askForHints() {
+  setHintAllowed(true)
+  if (!keyboard.on) toggleHint()
 }
 
 function next() {
@@ -308,14 +316,17 @@ function next() {
     correct: firstTryCorrect.value,
     correctedOnRetry: attempts.value > 1 && wasCorrect.value,
     double: double.value,
-    dictUsed: dictUsed.value,
+    // Right first time with no hint and no do-over (#725). Same test as
+    // `double` here: the Dictionary deliberately doesn't count against it.
+    flawless: double.value,
     wordCorrect: firstTryWordCorrect.value,
   })
 }
 
 onMounted(() => {
   resetHint()
-  // Withhold the keyboard hint for the first, unaided attempt.
+  // Withhold the keyboard hint for the first, unaided attempt. The 🔥 Hints
+  // button unlocks it on demand; a wrong first answer unlocks it anyway.
   setHintAllowed(false)
   if (props.exercise.audio) speak(props.exercise.ru)
 })
@@ -472,16 +483,17 @@ onBeforeUnmount(() => setHintAllowed(true))
           Check
         </button>
         <button v-else class="primary check" :disabled="!typed.trim()" @click="check">Check</button>
-        <!-- The learner ends the loop, not a counter (#588) — quietly, and out
-             at the far end of the row, well away from where Next lands. -->
-        <button
+        <!-- 🔥 while the answer is unaided; once help is taken the fire goes out
+             and what is left is the old "I don't know" (#725). The learner ends
+             the loop, not a counter (#588) — quietly, and out at the far end of
+             the row, well away from where Next lands. -->
+        <HintPassButton
           v-if="!confirmingReveal"
-          type="button"
-          class="dunno"
-          @click="confirmingReveal = true"
-        >
-          I don't know
-        </button>
+          class="help"
+          :hinted="hintUsed"
+          @hints="askForHints"
+          @pass="confirmingReveal = true"
+        />
       </template>
       <button v-else class="primary next" @click="next">Next →</button>
     </div>
@@ -581,18 +593,11 @@ onBeforeUnmount(() => setHintAllowed(true))
 .rule-hint-detail {
   color: var(--muted);
 }
-/* An escape hatch, not a call to action: a quiet link pushed to the far end of
-   the row, so it is never mistaken for the primary button — nor for Next, which
-   takes that primary slot the moment the answer is in. */
-.dunno {
+/* Help, not a call to action: pushed to the far end of the row, so it is never
+   mistaken for the primary button — nor for Next, which takes that primary slot
+   the moment the answer is in. */
+.help {
   margin-left: auto;
-  background: none;
-  border: none;
-  color: var(--muted);
-  text-decoration: underline;
-  font-size: 0.85rem;
-  padding: 0.4rem 0.2rem;
-  cursor: pointer;
 }
 .dunno-confirm {
   display: grid;

@@ -10,6 +10,16 @@ vi.mock('../../stores/settings.js', () => ({ playFeedback: vi.fn() }))
 
 import PhraseFixExercise from './PhraseFixExercise.vue'
 
+/**
+ * Submit the spelling. Since #725 a wrong first attempt buys a do-over with the
+ * keyboard hint unlocked, so re-submit the same answer to settle it — the grade
+ * is the first attempt's either way, which is what these tests are about.
+ */
+async function submitSpelling(wrapper) {
+  await wrapper.find('form').trigger('submit')
+  if (wrapper.find('form').exists()) await wrapper.find('form').trigger('submit')
+}
+
 const nounExercise = {
   id: 'ex0',
   kind: 'phrase-fix',
@@ -98,7 +108,7 @@ describe('PhraseFixExercise', () => {
     expect(speak).not.toHaveBeenCalled()
 
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     // Solved → the full correct sentence is spoken exactly once.
     expect(speak).toHaveBeenCalledTimes(1)
     expect(speak).toHaveBeenCalledWith('Де́вочка пойма́ла ба́бочку.')
@@ -122,12 +132,14 @@ describe('PhraseFixExercise', () => {
 
     // The early wrong case pick is remembered: spelling right, but still a miss.
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.find('.feedback.warn').exists()).toBe(true)
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({
       correct: false,
       wrong: ['бабочка=butterfly'],
+      double: false,
+      flawless: false,
     })
   })
 
@@ -137,11 +149,13 @@ describe('PhraseFixExercise', () => {
     await pick(wrapper, 'Plural') // wrong number…
     await pick(wrapper, 'Singular') // …corrected, but the miss is recorded
     await wrapper.find('input[lang="ru"]').setValue('бабочку') // right spelling
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({
       correct: false,
       wrong: ['бабочка=butterfly'],
+      double: false,
+      flawless: false,
     })
   })
 
@@ -151,7 +165,7 @@ describe('PhraseFixExercise', () => {
     await pick(wrapper, 'Accusative') // …corrected
     await pick(wrapper, 'Singular') // right number
     await wrapper.find('input[lang="ru"]').setValue('бабочку') // right spelling
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     // Not flagged as an outright miss — the spelling is acknowledged as correct…
     expect(wrapper.find('.feedback.bad').exists()).toBe(false)
     const feedback = wrapper.find('.feedback.warn')
@@ -171,7 +185,7 @@ describe('PhraseFixExercise', () => {
     await pick(wrapper, 'Plural') // wrong number…
     await pick(wrapper, 'Singular') // …corrected
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     const feedback = wrapper.find('.feedback.warn')
     expect(feedback.text()).toContain('wrong number')
   })
@@ -180,18 +194,18 @@ describe('PhraseFixExercise', () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
     await pickSelections(wrapper, 'Accusative', 'Singular')
     await wrapper.find('input[lang="ru"]').setValue('БАБОЧКУ') // stress-free, upper-case
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.text()).toContain('Correct')
     expect(wrapper.text()).toContain('Accusative singular') // rule title shown
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [], double: true, flawless: true })
   })
 
   it('reveals what was typed against the correct form when the spelling is wrong', async () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
     await pickSelections(wrapper, 'Accusative', 'Singular')
     await wrapper.find('input[lang="ru"]').setValue('бабочко') // wrong final vowel
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     // Both the learner's attempt and the correct form are shown for comparison.
     const diff = wrapper.find('.spell-diff')
     expect(diff.exists()).toBe(true)
@@ -206,7 +220,7 @@ describe('PhraseFixExercise', () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: exEx } })
     await pickSelections(wrapper, 'Accusative', 'Singular')
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.find('.exc-badge').exists()).toBe(true)
     expect(wrapper.find('details.rule.exception').exists()).toBe(true)
   })
@@ -223,7 +237,7 @@ describe('PhraseFixExercise', () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: sibling } })
     await pickSelections(wrapper, 'Accusative', 'Singular')
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
 
     const blocks = wrapper.findAll('details.rule')
     expect(blocks).toHaveLength(2)
@@ -240,7 +254,7 @@ describe('PhraseFixExercise', () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
     await pickSelections(wrapper, 'Accusative', 'Singular')
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.findAll('details.rule')).toHaveLength(1)
     expect(wrapper.find('.aside-badge').exists()).toBe(false)
   })
@@ -249,7 +263,7 @@ describe('PhraseFixExercise', () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: nounExercise } })
     await pickSelections(wrapper, 'Accusative', 'Singular')
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.find('.exc-badge').exists()).toBe(false)
   })
 
@@ -289,11 +303,11 @@ describe('PhraseFixExercise', () => {
     await pickSelections(wrapper, 'Accusative', 'Feminine')
     expect(speak).not.toHaveBeenCalled()
     await wrapper.find('input[lang="ru"]').setValue('новую')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.text()).toContain('Correct')
     expect(speak).toHaveBeenCalledWith('Я чита́ю но́вую кни́гу.')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [], double: true, flawless: true })
   })
 
   it('keeps the stress mark on an end-stressed answer (reveal and inline slot)', async () => {
@@ -311,7 +325,7 @@ describe('PhraseFixExercise', () => {
     }
     const wrapper = mount(PhraseFixExercise, { props: { exercise: endStressed } })
     await wrapper.find('input[lang="ru"]').setValue('хобана') // wrong on purpose
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     // The reveal shows the correct accented form, stress intact.
     expect(wrapper.find('.spell-diff').text()).toContain('меня́')
     // The inline slot reattaches the trailing full stop without doubling the mark.
@@ -323,10 +337,10 @@ describe('PhraseFixExercise', () => {
     const wrapper = mount(PhraseFixExercise, { props: { exercise: verbExercise } })
     expect(wrapper.findAll('.case-btn')).toHaveLength(0)
     await wrapper.find('input[lang="ru"]').setValue('боюсь')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(speak).toHaveBeenCalledWith('Я бою́сь высоты́.')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [], double: true, flawless: true })
   })
 
   // The choose-the-aspect drill: a verb with a linked aspect partner opens with
@@ -369,13 +383,13 @@ describe('PhraseFixExercise', () => {
     // Picked correctly → the slot collapses to the correct lemma for spelling.
     expect(wrapper.find('.target-btn').text()).not.toContain('говори́ть')
     await wrapper.find('input[lang="ru"]').setValue('сказал')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     expect(wrapper.text()).toContain('Correct')
     // Both the slot rule and the aspect explanation are offered.
     expect(wrapper.text()).toContain('Past tense')
     expect(wrapper.text()).toContain('Aspect: imperfective or perfective?')
     await wrapper.find('button.next').trigger('click')
-    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [], double: true, flawless: true })
   })
 
   it('flags a wrong aspect pick and names the verb it needed', async () => {
@@ -386,7 +400,7 @@ describe('PhraseFixExercise', () => {
     expect(wrapper.find('.target-btn').text()).toContain('говори́ть / сказа́ть')
     await pick(wrapper, 'сказа́ть') // …corrected
     await wrapper.find('input[lang="ru"]').setValue('сказал') // right spelling
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
     const feedback = wrapper.find('.feedback.warn')
     expect(feedback.exists()).toBe(true)
     expect(feedback.text()).toContain('wrong aspect')
@@ -400,6 +414,8 @@ describe('PhraseFixExercise', () => {
     expect(wrapper.emitted('done')[0][0]).toEqual({
       correct: false,
       wrong: ['сказать=to say'],
+      double: false,
+      flawless: false,
     })
   })
 
@@ -419,7 +435,7 @@ describe('PhraseFixExercise', () => {
 
       await pickSelections(wrapper, 'Accusative', 'Singular')
       await wrapper.find('input[lang="ru"]').setValue('бабочку')
-      await wrapper.find('form').trigger('submit')
+      await submitSpelling(wrapper)
       expect(speak).toHaveBeenCalledWith('Де́вочка пойма́ла ба́бочку.')
       // More sentences to come — the button says so and no done is emitted yet.
       const nextBtn = wrapper.find('button.next')
@@ -433,9 +449,9 @@ describe('PhraseFixExercise', () => {
       expect(wrapper.text()).toContain('I am afraid of heights.')
 
       await wrapper.find('input[lang="ru"]').setValue('боюсь')
-      await wrapper.find('form').trigger('submit')
+      await submitSpelling(wrapper)
       await wrapper.find('button.next').trigger('click')
-      expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+      expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [], double: true, flawless: true })
     })
 
     it('reports only the missed words in `wrong`', async () => {
@@ -445,15 +461,17 @@ describe('PhraseFixExercise', () => {
       await pick(wrapper, 'Accusative')
       await pick(wrapper, 'Singular')
       await wrapper.find('input[lang="ru"]').setValue('бабочку')
-      await wrapper.find('form').trigger('submit')
+      await submitSpelling(wrapper)
       await wrapper.find('button.next').trigger('click')
       // …but get the verb right.
       await wrapper.find('input[lang="ru"]').setValue('боюсь')
-      await wrapper.find('form').trigger('submit')
+      await submitSpelling(wrapper)
       await wrapper.find('button.next').trigger('click')
       expect(wrapper.emitted('done')[0][0]).toEqual({
         correct: false,
         wrong: ['бабочка=butterfly'],
+        double: false,
+        flawless: false,
       })
     })
   })
@@ -470,7 +488,7 @@ describe('PhraseFixExercise word facts', () => {
     expect(wrapper.findComponent({ name: 'WordFacts' }).exists()).toBe(false)
 
     await wrapper.find('input[lang="ru"]').setValue('бабочку')
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
 
     const facts = wrapper.findComponent({ name: 'WordFacts' })
     expect(facts.exists()).toBe(true)
@@ -529,7 +547,7 @@ describe('PhraseFixExercise — rule reminders', () => {
 
   const answerWith = async (wrapper, value) => {
     await wrapper.find('input[lang="ru"]').setValue(value)
-    await wrapper.find('form').trigger('submit')
+    await submitSpelling(wrapper)
   }
 
   it('names the preposition when another case of the right word was given', async () => {

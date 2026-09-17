@@ -405,20 +405,111 @@ describe('SessionView', () => {
     expect(push).toHaveBeenCalledWith('/')
   })
 
-  it('marks the current single-target word known and hides the button afterwards', async () => {
+  // ── The quick progression route (#725) ──────────────────────────────────
+  // The mid-exercise "I know this word" button is gone; what replaces it is a
+  // question the session only asks once the learner has answered the word's
+  // exercises flawlessly.
+
+  /**
+   * Give `word` a flawless answer in every dimension but `usage` — a previous
+   * session's work, which this one's usage exercise completes (#725). The
+   * evidence is meant to accumulate across sessions, which is why it is stored
+   * on the attempt rather than counted inside the session.
+   */
+  async function primeAllButUsage(word) {
+    for (const dimension of ['identification', 'hearing', 'speaking']) {
+      await progress.recordAttempt({
+        word,
+        dimension,
+        level: 'learning',
+        correct: true,
+        flawless: true,
+      })
+    }
+  }
+
+  it('no longer offers a mid-exercise "I know this word" button', async () => {
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    expect(wrapper.text()).not.toContain('I know this word')
+  })
+
+  it('asks after a flawless pass, and promotes the word on a yes', async () => {
+    await primeAllButUsage('t1')
     const wrapper = mount(SessionView)
     await flushPromises()
 
-    const knowBtn = wrapper.findAll('button.know').find((b) => b.text() === 'I know this word')
-    expect(knowBtn).toBeTruthy()
+    // Nothing to ask about while the word is still being drilled.
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+    await answer(wrapper, 'дом') // ex0, right first time with no hint
+
+    const offer = wrapper.find('[data-testid="quick-offer"]')
+    expect(offer.exists()).toBe(true)
+    expect(offer.text()).toContain('already')
     expect(progress.isKnown('t1')).toBe(false)
 
-    await knowBtn.trigger('click')
+    await offer.find('button.quick-yes').trigger('click')
+    await settle()
+    expect(progress.isKnown('t1')).toBe(true)
+    expect(['learned', 'mastered']).toContain(progress.stateOf('t1'))
+    // The lesson carries straight on with the next exercise.
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  it('keeps teaching on a no, and asks only once', async () => {
+    await primeAllButUsage('t1')
+    const wrapper = mount(SessionView)
     await flushPromises()
 
-    expect(progress.isKnown('t1')).toBe(true)
-    // Button clears once the word is flagged.
-    expect(wrapper.findAll('button.know').some((b) => b.text() === 'I know this word')).toBe(false)
+    await answer(wrapper, 'дом')
+    await wrapper.find('[data-testid="quick-offer"] button.quick-no').trigger('click')
+    await settle()
+
+    expect(progress.isKnown('t1')).toBe(false)
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  it('never asks about a word whose earlier work was not flawless', async () => {
+    // Everything else answered, but with help somewhere along the way.
+    for (const dimension of ['identification', 'hearing', 'speaking']) {
+      await progress.recordAttempt({
+        word: 't1',
+        dimension,
+        level: 'learning',
+        correct: true,
+        flawless: false,
+      })
+    }
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await answer(wrapper, 'дом')
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  // The one thing the stored flag cannot see: the repeat round records a fresh,
+  // flawless-looking attempt for a word that was missed ten minutes earlier.
+  it('does not ask about a word this session had to repeat', async () => {
+    await primeAllButUsage('t1')
+    const wrapper = mount(SessionView)
+    await flushPromises()
+
+    await answer(wrapper, 'ххх') // ex0 missed — a slip, not a real word
+    await answer(wrapper, 'кот') // ex1 fine
+    await answer(wrapper, 'дом') // ex0 again, in the repeat round — now perfect
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  it('never asks about a word that needed the keyboard hint', async () => {
+    await primeAllButUsage('t1')
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await passIntro(wrapper)
+
+    // Reach for the hint before answering: the answer is right, but not unaided.
+    await wrapper.find('button.hint-pass').trigger('click')
+    await answer(wrapper, 'дом')
+
+    expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
   })
 })
 

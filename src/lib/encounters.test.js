@@ -20,12 +20,10 @@ describe('phraseProvesEncounter', () => {
     expect(phraseProvesEncounter(phrase, { correct: true, double: false })).toBe(false)
   })
 
-  it('refuses a correct answer after the Dictionary was opened', () => {
-    // The Dictionary glosses exactly the unlearned words of the phrase — the
-    // encounter candidates — and costs no points, so `double` cannot see it.
-    expect(phraseProvesEncounter(phrase, { correct: true, double: true, dictUsed: true })).toBe(
-      false,
-    )
+  it('credits a correct answer that read the Dictionary (#725)', () => {
+    // The Dictionary glosses the words around the target, and having read a
+    // gloss is how a word gets met — which is all an encounter claims.
+    expect(phraseProvesEncounter(phrase, { correct: true, double: true })).toBe(true)
   })
 
   it('credits an audio word bank, where nothing is glossed', () => {

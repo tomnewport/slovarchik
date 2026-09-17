@@ -69,7 +69,8 @@ src/
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,
-                        #   AnnotatedEnglish, ComprehensionCheck, …)
+                        #   AnnotatedEnglish, ComprehensionCheck, HintPassButton — the
+                        #   🔥|Hints → 🤔|Pass help control the typing drills share, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast, IntroCard — the non-graded
                         #   "here is a new word" step)
@@ -111,6 +112,10 @@ src/
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
                         #   progression/schedule/batches/session/sessionPools/sessionRunner/
                         #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
+                        #   quickProgress  — which words a session has answered flawlessly (right
+                        #     first time, no hint, no do-over) and finished with, so it can ask
+                        #     whether to count them learned/mastered now (#725) instead of
+                        #     drilling a word the learner has just demonstrated
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #   paradigmShape  — why a verb's table is a different shape (no present tense,
                         #     third-person only, impersonal), in a sentence beside the table
