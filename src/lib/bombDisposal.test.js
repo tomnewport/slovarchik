@@ -1,6 +1,7 @@
 import { describe as suite, it, expect } from 'vitest'
 
 import {
+  BASE_RATE,
   COLORS,
   LEVELS,
   allOf,
@@ -16,6 +17,7 @@ import {
   notMatching,
   phraseEn,
   phraseRu,
+  readingRateFor,
   plan,
   planIssues,
   resolvePlan,
@@ -499,5 +501,36 @@ suite('generateBomb', () => {
     expect([...seen].sort()).toEqual(
       ['accentPair', 'afterThen', 'branch', 'except', 'patternSet', 'sequence2', 'sequence3'].sort(),
     )
+  })
+})
+
+suite('readingRateFor', () => {
+  it('starts at the rate the drills elsewhere read at', () => {
+    expect(readingRateFor(1)).toBe(BASE_RATE)
+  })
+
+  it('hits the two rates the ramp names', () => {
+    expect(readingRateFor(8)).toBe(1.25)
+    expect(readingRateFor(16)).toBe(1.5)
+  })
+
+  it('caps rather than climbing forever', () => {
+    expect(readingRateFor(17)).toBe(1.5)
+    expect(readingRateFor(500)).toBe(1.5)
+  })
+
+  it('rises without a jump between the named rounds', () => {
+    let previous = readingRateFor(1)
+    for (let round = 2; round <= 20; round += 1) {
+      const rate = readingRateFor(round)
+      expect(rate, `round ${round}`).toBeGreaterThanOrEqual(previous)
+      expect(rate - previous, `round ${round}`).toBeLessThan(0.1)
+      previous = rate
+    }
+  })
+
+  it('treats a round below one as the first', () => {
+    expect(readingRateFor(0)).toBe(BASE_RATE)
+    expect(readingRateFor(undefined)).toBe(BASE_RATE)
   })
 })

@@ -12,6 +12,7 @@ import {
   cutOutcome,
   generateBomb,
   isDefused,
+  readingRateFor,
   resolvePlan,
   stageTargets,
   wireLabelEn,
@@ -80,7 +81,10 @@ function stopClock() {
   advance = null
 }
 
-function say(rate = 0.9) {
+// The default rate climbs with the round (see readingRateFor); the 🐢 button
+// passes SLOW_RATE instead, so the escape hatch stays as slow as ever however
+// far the run has got.
+function say(rate = readingRateFor(round.value)) {
   if (!bomb.value) return
   speak(bomb.value.ru, 'ru-RU', rate)
 }
@@ -195,8 +199,9 @@ onUnmounted(() => {
     <h2 style="margin: 0">Bomb disposal 💣</h2>
     <p class="muted" style="margin: 0">
       An instruction in Russian, a bomb, and a clock. Cut the wires it names, in the order it
-      names them. The colours get less common and the instructions get longer as you go — «все
-      провода́, кро́ме чёрного», then «е́сли нет ора́нжевого про́вода…».
+      names them. The colours get less common, the instructions get longer and the reading
+      speeds up as you go — «все провода́, кро́ме чёрного», then «е́сли нет ора́нжевого
+      про́вода…».
     </p>
     <p v-if="!speechSupported()" class="muted" style="margin: 0">
       This browser has no speech synthesis, so the instruction will be shown in writing instead.
