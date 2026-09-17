@@ -63,7 +63,8 @@ const checked = ref(false)
 const wasCorrect = ref(false)
 // Whether the first, unaided check was correct. This — not the final graded
 // state — is the evidence of unaided recall: a wrong first attempt corrected on
-// the retry never earns first-try credit (#447).
+// the retry never earns first-try credit (#447) — though it is no longer scored
+// as a miss (#745).
 const firstTryCorrect = ref(false)
 // For a phrase, whether the *word being assessed* was spelled right on that
 // first, unaided attempt — true even when the whole phrase was wrong if the only
@@ -309,11 +310,14 @@ function askForHints() {
 }
 
 function next() {
-  // Preserve the first miss: a retry success reports the initial failure
-  // (`correct: false`) flagged `correctedOnRetry`, so the session records the
-  // real first-try outcome instead of two first-try successes (#447).
+  // The answer as it finally stands is the grade (#745): correcting a slip on
+  // the do-over is not the same as not knowing the word, and scoring it as a
+  // plain miss both contradicts the "Correct" just shown and leaves the word
+  // due again immediately. `correctedOnRetry` still suppresses the end-of-queue
+  // repeat (the do-over was that repeat), and the retry still forfeits first-try
+  // credit — no double, no 🔥, `hinted` scheduling.
   emit('done', {
-    correct: firstTryCorrect.value,
+    correct: wasCorrect.value,
     correctedOnRetry: attempts.value > 1 && wasCorrect.value,
     double: double.value,
     // Right first time with no hint and no do-over (#725). Same test as

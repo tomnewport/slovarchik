@@ -387,8 +387,9 @@ async function onDone(result) {
   // errorHandler can surface it to the user. Match boards are never re-queued
   // whole: their misses drive one combined repeat board instead (#472). An item
   // corrected on its own built-in retry isn't re-queued either: that immediate
-  // retry already served as its repeat, so the first miss is recorded once
-  // without also replaying the item at the end (#447).
+  // do-over already served as its repeat, and the typed drills grade the answer
+  // they end on (#745), so the item is recorded once — correct, but `hinted`
+  // and never double — without also being replayed at the end.
   submit(runner, result.correct, { requeue: !isMatch && !result.correctedOnRetry })
   injectFlashcardRepeat()
   collectQuickOffers()
