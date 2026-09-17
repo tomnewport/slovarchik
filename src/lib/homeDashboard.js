@@ -9,7 +9,7 @@
 import { parseKey } from './vocabBuild.js'
 import { ASPECT_LABEL, MOTION_LABEL } from './phraseContext.js'
 import { dimensionProgress, dimensionShortfall, lastAttemptAt } from './progression.js'
-import { DIM_NAME, recoveryPlan } from './recovery.js'
+import { recoveryPlan } from './recovery.js'
 
 // Which dimensions each level tracks, and the emoji pip shown for each.
 export const LEARNING_DIMS = ['identification', 'usage', 'hearing', 'speaking']
@@ -171,9 +171,9 @@ export function buildWordList(batchWords, level, dims, ctx) {
 }
 
 /**
- * Build the word rows for the at-risk / slipped status cards. Each key resolves
- * to its current state, the level whose criteria it still owes, and that level's
- * dimension pips.
+ * Build the word rows for the combined problem card. Each key resolves to its
+ * current state and only the dimensions that need recovery or defending, at
+ * whichever level the work actually belongs to.
  *
  * Each row also carries its `plan` — what the word dropped from, and what it
  * would take to get it back (see lib/recovery.js) — so the card can say that
@@ -206,27 +206,19 @@ export function buildStatusWordList(keys, ctx) {
     }
     if (hasInflections) word.hasInflections = hasInflections(key)
     const plan = recoveryPlan(evs, word, { peak: rec?.peak, state, now })
-    const level = plan.level
-    // A pip the plan is defending is met, so nothing in its progress figures
-    // says it is one miss from going: the flag is how the row marks it.
-    const defending = new Set(
-      plan.steps.filter((s) => s.kind === 'defend').map((s) => `${s.level}:${s.dimension}`),
-    )
-    const dims = dimPips(evs, level, level === 'mastery' ? MASTERY_DIMS : LEARNING_DIMS, key, {
-      known: rec?.known,
-      hasContextDrill,
-      word,
-    }).map((d) => {
-      const step = plan.steps.find((s) => s.level === level && s.dimension === d.name)
-      return {
+    const dims = plan.steps.map((step) => {
+      const [d] = dimPips(evs, step.level, [step.dimension], key, {
+        known: rec?.known,
+        hasContextDrill,
+        word,
+      })
+      return d && {
         ...d,
-        atRisk: defending.has(`${level}:${d.name}`),
-        // What this one pip is asking for, in words — the row is a line of
-        // emoji otherwise, and a cross that means "practise this" is guesswork
-        // until it says how much practice.
-        hint: step ? `${step.name} — ${step.text}` : `${DIM_NAME[d.name] ?? d.name} — met`,
+        level: step.level,
+        atRisk: step.kind === 'defend',
+        hint: `${step.level === 'mastery' ? 'Mastery' : 'Learning'} ${step.name} — ${step.text}`,
       }
-    })
-    return { key, ru, en, fullEn, state, level, dims, plan }
+    }).filter(Boolean)
+    return { key, ru, en, fullEn, state, level: plan.level, dims, plan }
   })
 }

@@ -230,6 +230,35 @@ describe('HomeView', () => {
     expect(wrapper.find('.problem-card').text()).toContain('2 words')
   })
 
+  it('shows only hearing as the problem after a mastered word misses one listening answer', async () => {
+    const word = 'варежки=mittens'
+    vocabState.words = [{ key: word, pos: 'noun', hasInflections: true }]
+    const day = 86400000
+    const start = Date.parse('2026-09-01T12:00:00Z')
+    const learning = ['identification', 'usage', 'hearing', 'speaking'].flatMap((dimension) =>
+      [0, 1, 2].map((i) => ({ dimension, level: 'learning', correct: true, ts: start + i })),
+    )
+    const mastery = ['identification', 'usage', 'context'].flatMap((dimension) =>
+      [start + day, start + 2 * day].map((ts) => ({ dimension, level: 'mastery', correct: true, ts })),
+    )
+    progress.records = {
+      [word]: { word, peak: 3, events: [
+        ...learning, ...mastery,
+        { dimension: 'hearing', level: 'learning', correct: false, ts: start + 3 * day },
+      ] },
+    }
+
+    const wrapper = mount(HomeView)
+    const row = wrapper.find('.problem-card .word-row')
+    expect(row.findAll('.dim-pip').map((n) => n.attributes('title'))).toEqual(['Learning Hearing — 1 correct answer'])
+    expect(row.find('.row-plan').text()).toContain('Hearing is riding on a miss')
+    expect(row.find('.dim-pip').attributes('title')).toContain('Learning Hearing')
+    expect(row.find('.dim-level').text()).toBe('L')
+    await row.trigger('click')
+    expect(wrapper.findAll('.recovery-step')).toHaveLength(1)
+    expect(wrapper.find('.recovery-step').text()).toContain('Hearing')
+  })
+
   it('offers a waiting update rather than taking it (#691)', async () => {
     // No banner while the running build is the latest one.
     expect(mount(HomeView).find('.update-banner').exists()).toBe(false)

@@ -2,9 +2,8 @@
 // The home screen's combined problem-word card (slipped and at-risk words).
 //
 // The rows are the batch rows' equal: each opens the word's progress card, and
-// each says on its face what dropped and what would put it back (the count on
-// an unmet pip, the plan's sentence underneath). Both cards render from the same
-// `buildStatusWordList` rows, each with its own recovery explanation.
+// each shows only the affected skills (with their learning/mastery level) and
+// what would put them back. The row's plan supplies the explanation underneath.
 defineProps({
   /** Rows from `buildStatusWordList` (lib/homeDashboard.js). */
   words: { type: Array, required: true },
@@ -40,15 +39,17 @@ defineEmits(['select'])
           <div class="word-dims">
             <span
               v-for="d in w.dims"
-              :key="d.name"
+              :key="`${d.level}:${d.name}`"
               class="dim-pip"
               :class="[
                 d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty',
                 { 'dim-missing': d.need > 0, 'dim-risk': !d.need && d.atRisk },
               ]"
               :title="d.hint"
+              :aria-label="d.hint"
             >
               <span class="dim-glyph">{{ d.label }}</span>
+              <span class="dim-level" aria-hidden="true">{{ d.level === 'mastery' ? 'M' : 'L' }}</span>
               <!-- The badge carries the figure rather than a bare cross: "two
                    more correct answers" is actionable, "✕" is not. -->
               <span v-if="d.need > 0" class="dim-need">{{ d.need }}</span>
@@ -136,6 +137,17 @@ defineEmits(['select'])
   background: var(--bad, #ff5c5c);
   border-radius: 999px;
   box-shadow: 0 0 0 1.5px var(--card, #1d2745);
+}
+.dim-level {
+  position: absolute;
+  bottom: -0.15rem;
+  left: -0.15rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--muted);
+  background: var(--card);
+  border-radius: 2px;
 }
 .risk-need {
   background: var(--warn, #f59e0b);
