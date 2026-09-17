@@ -60,6 +60,7 @@ const DRILLS = [
   { to: '/verb-government', label: 'Verb government' },
   { to: '/listening', label: 'Listening' },
   { to: '/speaking', label: 'Speaking' },
+  { to: '/bomb', label: 'Bomb disposal 💣' },
 ]
 
 function openDrill(to) {

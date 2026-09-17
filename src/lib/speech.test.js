@@ -1,5 +1,12 @@
 import { describe, it, expect, afterEach, vi } from 'vitest'
-import { speak, speechSupported, estimateSpeechMs, sequenceDurationMs, SLOW_RATE } from './speech.js'
+import {
+  speak,
+  speechSupported,
+  estimateSpeechMs,
+  sequenceDurationMs,
+  voiceAvailable,
+  SLOW_RATE,
+} from './speech.js'
 
 afterEach(() => {
   delete window.speechSynthesis
@@ -102,5 +109,38 @@ describe('sequenceDurationMs', () => {
   it('is zero for an empty or missing sequence', () => {
     expect(sequenceDurationMs([])).toBe(0)
     expect(sequenceDurationMs(undefined)).toBe(0)
+  })
+})
+
+describe('voiceAvailable', () => {
+  const withVoices = (voices) => {
+    window.SpeechSynthesisUtterance = class {}
+    window.speechSynthesis = { getVoices: () => voices, cancel: vi.fn(), speak: vi.fn() }
+  }
+
+  it('is false without the Web Speech API at all', () => {
+    expect(voiceAvailable('ru-RU')).toBe(false)
+  })
+
+  it('finds an exact match, and a looser one on the base language', () => {
+    withVoices([{ lang: 'en-US' }, { lang: 'ru-RU' }])
+    expect(voiceAvailable('ru-RU')).toBe(true)
+    withVoices([{ lang: 'ru' }])
+    expect(voiceAvailable('ru-RU')).toBe(true)
+  })
+
+  it('is false when only other languages are installed', () => {
+    withVoices([{ lang: 'en-US' }, { lang: 'de-DE' }])
+    expect(voiceAvailable('ru-RU')).toBe(false)
+  })
+
+  it('is false while the voice list is still empty — asked too early, not answered "none"', () => {
+    withVoices([])
+    expect(voiceAvailable('ru-RU')).toBe(false)
+  })
+
+  it('defaults to Russian', () => {
+    withVoices([{ lang: 'ru-RU' }])
+    expect(voiceAvailable()).toBe(true)
   })
 })

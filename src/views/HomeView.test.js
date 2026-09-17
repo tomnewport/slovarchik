@@ -75,9 +75,12 @@ describe('HomeView', () => {
   it('links to the standalone free-practice drills', async () => {
     const wrapper = mount(HomeView)
     const drills = wrapper.findAll('.drill')
-    expect(drills.length).toBe(11)
+    expect(drills.length).toBe(12)
     await drills[0].trigger('click') // Vocabulary
     expect(push).toHaveBeenCalledWith('/vocab')
+
+    await drills[drills.length - 1].trigger('click') // Bomb disposal
+    expect(push).toHaveBeenCalledWith('/bomb')
   })
 
   it('shows the committed batch name as a non-clickable card', () => {

@@ -62,10 +62,12 @@ src/
                         #   session-driven from HomeView, not a route bar.
   router/index.js       # 16 routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
-                        #   /verb-government, /listening, /speaking, /numbers, and the
+                        #   /verb-government, /listening, /speaking, /numbers, /bomb, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
-  views/*.vue           # one screen per route (HomeView + SessionView are the big ones)
+  views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
+                        #   BombDisposalView is the first minigame — #726's between-practice
+                        #   interludes, reachable on its own from the drill list for now)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,
@@ -136,6 +138,9 @@ src/
                         #     senses), the sentence's English last, and a null rather than a guess —
                         #     the residue is the `align:` worklist that check:align ratchets
                         #   quiz/recognition/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
+                        #     grammar that both SAYS the instruction in Russian and grades the cut,
+                        #     so the sentence and the right answer cannot drift apart
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)

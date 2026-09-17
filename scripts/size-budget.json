@@ -38,11 +38,19 @@
     "script tag, so entryJs appeared to fall 87.9 -> 28.2 KiB while the bytes a",
     "launch downloads barely moved. It now counts the preloaded chunks too, and",
     "the comparable figure is 85.4 KiB \u2014 2.5 KiB *below* the Vite 6 number, so",
-    "the limit stays at 91200 B and keeps its headroom."
+    "the limit stays at 91200 B and keeps its headroom.",
+    "",
+    "Raised for the bomb-disposal minigame (#728). The game itself is a lazy",
+    "route chunk and costs the entry nothing; what lands in the entry is",
+    "`voiceAvailable` in lib/speech.js, the new route and the extra drill-list",
+    "entry \u2014 together 89266 -> 89938 B, about 670 B. Without the raise the entry",
+    "would sit at 98.6% of budget and the next one-line change would fail the",
+    "build, so the limit moves 91200 -> 92000 B, restoring the ~2 KB of headroom",
+    "the number is set with."
   ],
   "limits": {
     "entryJs": {
-      "bytes": 91200,
+      "bytes": 92000,
       "label": "Entry JS (gzip)",
       "why": "The bundle every launch pays for before anything renders. Vue, the router, the stores and the lib engine accumulate here; route chunks are lazy and deliberately excluded, so a route module pulled into the entry by a stray top-level import shows up as growth here."
     },
