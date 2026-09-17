@@ -52,11 +52,19 @@
     "game rows and their icons take entry CSS 4845 -> 4910 B, about 65 B, which",
     "left only 120 B under the old 5030 B limit \u2014 below the ~200 B this number",
     "is set with \u2014 so it moves 5030 -> 5150 B. Entry JS moves 89940 -> 90116 B",
-    "with the list and its markup, and stays inside the limit raised above."
+    "with the list and its markup, and stays inside the limit raised above.",
+    "",
+    "Raised for the firewatch minigame (#731). Like bomb disposal it is a lazy",
+    "route chunk \u2014 the simulation, the canvas renderer and the numeral parser",
+    "all land there \u2014 so what reaches the entry is only the new route and the",
+    "extra Minigames row: 90116 -> 90256 B, about 140 B. That left 1744 B under",
+    "the 92000 B limit, below the ~2 KB this number is set with, so it moves",
+    "92000 -> 92300 B. Entry CSS is unchanged at 4908 B: the game's styles are",
+    "scoped to the lazy view."
   ],
   "limits": {
     "entryJs": {
-      "bytes": 92000,
+      "bytes": 92300,
       "label": "Entry JS (gzip)",
       "why": "The bundle every launch pays for before anything renders. Vue, the router, the stores and the lib engine accumulate here; route chunks are lazy and deliberately excluded, so a route module pulled into the entry by a stray top-level import shows up as growth here."
     },

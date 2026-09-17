@@ -60,15 +60,20 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 16 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
-                        #   /verb-government, /listening, /speaking, /numbers, /bomb, and the
+                        #   /verb-government, /listening, /speaking, /numbers, /bomb,
+                        #   /firewatch, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView is the first minigame — #726's between-practice
-                        #   interludes, launched for now from HomeView's Minigames section
-                        #   rather than from inside a session)
+                        #   BombDisposalView and FirewatchView are the minigames — #726's
+                        #   between-practice interludes, launched for now from HomeView's
+                        #   Minigames section rather than from inside a session.
+                        #   FirewatchView is the only canvas in the app: 10 000 cells
+                        #   cannot be DOM nodes, so the terrain is painted once into an
+                        #   offscreen canvas and patched per cell, and each frame blits
+                        #   that and draws only the fire, the planes and the cross-hairs)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,
@@ -120,6 +125,8 @@ src/
                         #     whether to count them learned/mastered now (#725) instead of
                         #     drilling a word the learner has just demonstrated
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
+                        #     (numerals.js also READS numerals back: `parseCardinal` turns
+                        #      «со́рок три» into 43 off the same checked atom tables that spell it)
                         #   paradigmShape  — why a verb's table is a different shape (no present tense,
                         #     third-person only, impersonal), in a sentence beside the table
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
@@ -145,6 +152,11 @@ src/
                         #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
                         #     grammar that both SAYS the instruction in Russian and grades the cut,
                         #     so the sentence and the right answer cannot drift apart
+                        #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
+                        #     spreads through it, what a water drop's 5×5 kernel does (put out,
+                        #     and leave the ground too wet to catch), and the curve the plane
+                        #     flies. Pure and seeded, so a two-minute round can be simulated in a
+                        #     millisecond — which is how DEFAULTS was tuned rather than by playing
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)
