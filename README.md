@@ -81,6 +81,24 @@ the whole drill is gated behind a capability check and shows a clear notice wher
 it isn't available. The recogniser wrapper and grading live in
 [`src/lib/recognition.js`](src/lib/recognition.js).
 
+Inside a **practice session** the spoken drill is a different shape (#733): the
+prompt is the **English**, and there is nothing to echo — the learner has to
+produce the sentence. Three rungs of help stand behind it, and only the last
+costs anything:
+
+| Rung           | What it shows                                                                              | Cost               |
+| -------------- | ------------------------------------------------------------------------------------------ | ------------------ |
+| **Dictionary** | every word of the sentence except the assessed one, as headwords, alphabetically. Always on. | free               |
+| **Order**      | those words arranged into the sentence in their real forms, with the target word blanked.    | free               |
+| **Reveal**     | the blank filled in.                                                                         | the fire goes out  |
+
+"Free" means the attempt stays **flawless**, so the word remains eligible for
+quick progression (#725); the reveal is what spends it. And the session drill
+never marks an answer wrong on the recogniser's say-so: a match counts as
+correct, and anything else is put to the learner, who heard themselves say it.
+Only a self-certified miss records a wrong answer. See
+[`src/lib/speakingAid.js`](src/lib/speakingAid.js).
+
 > **Privacy:** unlike the rest of the app, speaking drills aren't local. In
 > Chrome/Edge the Web Speech API streams your microphone audio to the browser
 > maker's cloud service for transcription (which is why it needs a network

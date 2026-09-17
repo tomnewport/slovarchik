@@ -107,7 +107,7 @@ src/
     settings.js         #   user preferences (not learning progress)
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
-    hints.js            #   in-phrase word-hint glue
+    hints.js            #   in-phrase word-hint glue + the spoken drill's dictionary (#733)
     errorToast.js       #   transient error toast state
   lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
                         #   progression/schedule/batches/session/sessionPools/sessionRunner/
@@ -136,6 +136,9 @@ src/
                         #     senses), the sentence's English last, and a null rather than a guess —
                         #     the residue is the `align:` worklist that check:align ratchets
                         #   quiz/recognition/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   speakingAid  — what the spoken drill hands the learner when it prompts in
+                        #     English: the free dictionary of the sentence's non-target words, the
+                        #     blanked sentence behind the first hint, and which rung costs the fire (#733)
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)
