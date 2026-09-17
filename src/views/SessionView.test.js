@@ -445,7 +445,9 @@ describe('SessionView', () => {
 
     const offer = wrapper.find('[data-testid="quick-offer"]')
     expect(offer.exists()).toBe(true)
-    expect(offer.text()).toContain('already')
+    expect(offer.find('h2').text()).toContain('learned this word already.')
+    expect(offer.find('p.muted').text()).toContain('Shall we consider it learned?')
+    expect(offer.text()).toContain('no separate mastery drills')
     expect(progress.isKnown('t1')).toBe(false)
 
     await offer.find('button.quick-yes').trigger('click')
@@ -454,6 +456,36 @@ describe('SessionView', () => {
     expect(['learned', 'mastered']).toContain(progress.stateOf('t1'))
     // The lesson carries straight on with the next exercise.
     expect(wrapper.find('[data-testid="quick-offer"]').exists()).toBe(false)
+  })
+
+  it('says mastered only when the word has separate mastery drills', async () => {
+    const word = vocabState.words.find((w) => progress.hasInflections(w.key))
+    const key = word.key
+    for (const dimension of ['identification', 'usage', 'hearing', 'speaking']) {
+      for (let i = 0; i < 3; i++) {
+        await progress.recordAttempt({
+          word: key, dimension, level: 'learning', correct: true, flawless: true,
+        })
+      }
+    }
+    const masteryDimensions = progress.hasContextDrill(key)
+      ? ['identification', 'context']
+      : ['identification']
+    for (const dimension of masteryDimensions) {
+      await progress.recordAttempt({
+        word: key, dimension, level: 'mastery', correct: true, flawless: true,
+      })
+    }
+    mockExercises.value = [{ ...defaultExercises[0], targets: [key], level: 'mastery' }]
+    const wrapper = mount(SessionView)
+    await flushPromises()
+    await answer(wrapper, 'дом')
+
+    const offer = wrapper.find('[data-testid="quick-offer"]')
+    expect(offer.exists()).toBe(true)
+    expect(offer.find('h2').text()).toContain('mastered this word already.')
+    expect(offer.find('p.muted').text()).toContain('Shall we consider it mastered?')
+    expect(offer.text()).not.toContain('no separate mastery drills')
   })
 
   it('keeps teaching on a no, and asks only once', async () => {
