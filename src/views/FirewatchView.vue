@@ -19,14 +19,16 @@ import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
 
 import {
   BURNED,
-  DROP_AT,
-  KERNEL,
+  KERNEL_REACH,
+  PLANE,
   SIZE,
+  approachHeading,
   cellGlyph,
+  coordinateFrom,
+  coordinateLabel,
   douse,
   generateForest,
   planePath,
-  approachFrom,
   resolveGlyphs,
   stats,
   step,
@@ -39,10 +41,20 @@ const ROUND_MS = 120_000
 // The simulation runs on its own fixed tick so the fire spreads at the same
 // rate on a 120Hz screen as on a throttled one; the frame loop only draws.
 const TICK_S = 0.1
-// A flight, end to end. #726 asks for "about a second" to the drop, which
-// DROP_AT (0.55 of the way through) puts at 1.2s.
-const FLIGHT_MS = 2200
-const WATER_MS = 800
+// Cells a second. Flights are timed from their length rather than given a
+// fixed duration, so every plane flies at the same speed whether it is
+// crossing the map or turning at the edge.
+const PLANE_SPEED = 80
+const WATER_MS = 700
+// How many planes the learner has at once. It grows through the round: the
+// fires get worse, and by then they are reading coordinates off the map fast
+// enough to keep more than two in the air.
+const FLEET_START = 2
+const FLEET_MAX = 6
+const FLEET_EVERY_MS = 22_000
+// Typing ahead is the point, but an unbounded queue would let a round be won
+// in the first twenty seconds and then watched.
+const QUEUE_MAX = 6
 // Every tenth line gets a tick label — the ruler the learner reads off.
 const TICKS = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
 const GROUND = '#2b3826'
@@ -56,6 +68,10 @@ const saved = ref(1)
 const housesLost = ref(0)
 const sent = ref(0)
 const doused = ref(0)
+const inAir = ref(0)
+const fleet = ref(FLEET_START)
+// Coordinates typed but not yet flown, in the order they were typed.
+const queued = ref(/** @type {{x: number, y: number}[]} */ ([]))
 const best = ref(0)
 const entry = ref('')
 const marker = ref(/** @type {{x: number, y: number}|null} */ (null))
@@ -94,25 +110,32 @@ const reduceMotion = () =>
 // ── What the typing means ────────────────────────────────────────────────
 
 const typed = computed(() => parseCardinals(entry.value))
-/** The coordinate the box currently spells, if it spells a whole one. A parsed
- *  cardinal cannot exceed 99, so anything two numbers long is on the map. */
-const target = computed(() => {
-  const nums = typed.value
-  if (!nums || nums.length !== 2) return null
-  return { x: nums[0], y: nums[1] }
-})
-// Said back as it is typed, because reading "со́рок три → 43" while typing it is
-// most of the lesson — and because a box that silently does nothing when you
-// misspell a numeral teaches only frustration.
+/** The square the box currently spells, if it spells a whole one. */
+const target = computed(() => coordinateFrom(typed.value))
+/**
+ * What the box says so far, as the four digits of a coordinate — never as a
+ * labelled pair. Working out that x=12 and y=3 means «1203» is arithmetic, and
+ * arithmetic is not the thing being practised: the number on screen has to be
+ * the number to say. A half not yet typed shows as dots in its place, so the
+ * shape of the answer is visible before it is finished.
+ */
 const parseHint = computed(() => {
   const nums = typed.value
-  if (nums === null) return '✗ Not a number I know'
-  if (nums.length === 0) return 'Two numbers: across, then down.'
-  if (nums.length === 1) return `→ X ${nums[0]} · Y …`
-  if (nums.length > 2) return '✗ Two numbers, not more'
-  return `→ X ${nums[0]} · Y ${nums[1]}`
+  if (nums === null) return { bad: 'Not a number I know' }
+  // Nothing typed yet: a worked example rather than an instruction, because
+  // «со́рок три два́дцать» → 4320 shown once is the whole rule.
+  if (nums.length === 0) return { example: true, across: '43', down: '20' }
+  const here = target.value
+  if (here) return { across: coordinateLabel(here.x, here.y).slice(0, 2), down: coordinateLabel(here.x, here.y).slice(2) }
+  if (nums.length === 1) return { across: String(nums[0]).padStart(2, '0'), down: '··' }
+  return { bad: 'Two numbers, not more' }
 })
 const words = (n) => cardinalNominative(n)
+/** A square as its four digits, split for the two-tone display. */
+const digits = (p) => ({
+  across: coordinateLabel(p.x, p.y).slice(0, 2),
+  down: coordinateLabel(p.x, p.y).slice(2),
+})
 
 const seconds = computed(() => Math.ceil(msLeft.value / 1000))
 const savedPct = computed(() => Math.round(saved.value * 1000) / 10)
@@ -208,7 +231,7 @@ function layout() {
   // Bigger than a cell, both of them: at a phone's width a cell is three or
   // four pixels, and a plane that small is a speck.
   waterSprite = sprite(glyphs.water, Math.max(8, cell * 2))
-  planeSprite = sprite(glyphs.plane, Math.max(16, cell * 4))
+  planeSprite = sprite(glyphs.plane, Math.max(14, cell * 3))
   glowSprite = glow(Math.max(20, cell * 6))
   paintTerrain()
 }
@@ -268,17 +291,21 @@ function drawGrid() {
  * numbers to type.
  */
 function drawCrosshairs(x, y, colour, { fill = null, lines = 0.45 } = {}) {
-  const half = KERNEL.length / 2
-  const left = (x - half + 0.5) * cell
-  const top = (y - half + 0.5) * cell
+  // The whole area a flight can wet: the circle the water is released on, plus
+  // how far a release reaches. Drawn before the plane arrives, so the learner
+  // can see whether the drop they just called will cover the fire.
+  const reach = PLANE.dropRadius + KERNEL_REACH
+  const side = reach * 2 + 1
+  const left = (x - reach) * cell
+  const top = (y - reach) * cell
   ctx.save()
   ctx.strokeStyle = colour
   ctx.lineWidth = Math.max(2, cell / 3)
   if (fill) {
     ctx.fillStyle = fill
-    ctx.fillRect(left, top, cell * 5, cell * 5)
+    ctx.fillRect(left, top, cell * side, cell * side)
   }
-  ctx.strokeRect(left, top, cell * 5, cell * 5)
+  ctx.strokeRect(left, top, cell * side, cell * side)
   ctx.globalAlpha = lines
   ctx.lineWidth = Math.max(1, cell / 4)
   ctx.beginPath()
@@ -329,8 +356,14 @@ function draw(now) {
 
   drawGrid()
 
+  // What is already called for, so the learner does not send two planes to the
+  // same fire: amber for a coordinate still waiting its turn, red once a plane
+  // is on its way to it.
+  for (const waiting of queued.value) {
+    drawCrosshairs(waiting.x, waiting.y, '#f0a020', { lines: 0.25 })
+  }
   for (const plane of planes) {
-    if (!plane.dropped) {
+    if (plane.dropped < plane.flight.releases.length) {
       drawCrosshairs(plane.target.x, plane.target.y, '#ff3b2f', {
         fill: 'rgb(255 59 47 / 22%)',
         lines: 0.55,
@@ -356,7 +389,7 @@ function draw(now) {
   }
 
   for (const plane of planes) {
-    const at = plane.path(Math.min(1, (now - plane.born) / FLIGHT_MS))
+    const at = plane.flight.at(Math.min(1, (now - plane.born) / plane.duration))
     const s = planeSprite.width
     ctx.save()
     ctx.translate(at.x * cell, at.y * cell)
@@ -375,6 +408,26 @@ function readHud() {
   saved.value = s.saved
   housesLost.value = s.housesLost
   doused.value = s.doused
+  inAir.value = planes.length
+}
+
+/** Put a plane in the air for the next coordinate waiting, if one can go. */
+function launch(now) {
+  while (planes.length < fleet.value && queued.value.length) {
+    const to = queued.value[0]
+    queued.value = queued.value.slice(1)
+    const flight = planePath(to, approachHeading())
+    planes.push({
+      target: to,
+      flight,
+      duration: (flight.length / PLANE_SPEED) * 1000,
+      born: now,
+      // How many of this flight's releases have already been applied.
+      dropped: 0,
+    })
+    sent.value++
+  }
+  inAir.value = planes.length
 }
 
 function simulate(dt, now) {
@@ -386,22 +439,34 @@ function simulate(dt, now) {
   for (const i of world.changed) patch(i)
   world.changed.clear()
 
+  fleet.value = Math.min(
+    FLEET_MAX,
+    FLEET_START + Math.floor((ROUND_MS - msLeft.value) / FLEET_EVERY_MS),
+  )
+  launch(now)
+
+  const still = reduceMotion()
   planes = planes.filter((plane) => {
-    const t = (now - plane.born) / FLIGHT_MS
-    if (t >= DROP_AT && !plane.dropped) {
-      plane.dropped = true
-      const hit = douse(world, plane.target.x, plane.target.y)
-      if (hit) playFeedback(true)
-      if (!reduceMotion()) {
-        for (let n = 0; n < 8; n++) {
-          drops.push({
-            x: plane.target.x + (Math.random() - 0.5) * 4,
-            y: plane.target.y + (Math.random() - 0.5) * 4,
-            vx: (Math.random() - 0.5) * 3,
-            vy: (Math.random() - 0.5) * 3,
-            born: now,
-          })
-        }
+    const t = (now - plane.born) / plane.duration
+    // Water goes out release by release as the plane comes round, not in one
+    // go: the ring has to appear under the plane and nowhere else, or the
+    // circuit is a lie the learner can watch being told.
+    while (plane.dropped < plane.flight.releases.length) {
+      const release = plane.flight.releases[plane.dropped]
+      if (t < release.t) break
+      plane.dropped++
+      const x = Math.round(release.x)
+      const y = Math.round(release.y)
+      if (douse(world, x, y)) playFeedback(true)
+      if (still) continue
+      for (let n = 0; n < 3; n++) {
+        drops.push({
+          x: x + (Math.random() - 0.5) * 2,
+          y: y + (Math.random() - 0.5) * 2,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          born: now,
+        })
       }
     }
     return t < 1
@@ -429,6 +494,8 @@ function start() {
   planes = []
   drops = []
   carry = 0
+  queued.value = []
+  fleet.value = FLEET_START
   sent.value = 0
   entry.value = ''
   marker.value = null
@@ -448,6 +515,7 @@ function finish() {
   phase.value = 'over'
   planes = []
   drops = []
+  queued.value = []
   readHud()
   if (saved.value > best.value) {
     best.value = saved.value
@@ -462,22 +530,22 @@ function stop() {
   world = null
 }
 
-/** Send a plane, if the box spells a coordinate. */
+/**
+ * Call for a plane. It joins the queue rather than taking off at once, so the
+ * learner can keep typing while the last one is still flying — which is the
+ * whole point of drilling the numbers to speed. A plane leaves as soon as one
+ * of the fleet is free.
+ */
 function send() {
   if (phase.value !== 'playing') return
   const to = target.value
-  if (!to) {
+  if (!to || queued.value.length >= QUEUE_MAX) {
     playFeedback(false)
     return
   }
-  planes.push({
-    target: to,
-    path: planePath(approachFrom(to), to),
-    born: performance.now(),
-    dropped: false,
-  })
-  sent.value++
+  queued.value = [...queued.value, to]
   entry.value = ''
+  launch(performance.now())
 }
 
 /** Tap (or drag) the map to read the coordinate off it. */
@@ -519,19 +587,21 @@ onUnmounted(() => {
   <section v-if="phase === 'idle'" class="grid">
     <h2 style="margin: 0">Firewatch 🔥</h2>
     <p class="muted" style="margin: 0">
-      A forest, 100 squares across and 100 down, and fires that spread. Send a water plane by
-      typing where it should go — two numbers in Russian words, across then down: «со́рок три
-      два́дцать». Planes are unlimited and take about a second to arrive.
+      A forest, 100 squares across and 100 down, and fires that spread. Every square has a
+      four-digit number — <b><span class="across">43</span><span class="down">20</span></b>,
+      across then down — and you send a water plane to one by saying it in Russian: «со́рок три
+      два́дцать». Tap the map and it tells you the number; the colours match the ticks
+      along the top and the side.
     </p>
     <p class="muted" style="margin: 0">
-      A drop covers five squares by five and is only certain in the middle. Where it lands it
-      puts the fire out <em>and</em> leaves the ground too wet to catch, so a plane dropped just
-      ahead of a fire cuts a break and stops it — which is the only way to beat a blaze that has
-      got going. Catch them early.
+      The plane circles the fire and lets water go all the way round. Where it lands it puts the
+      fire out <em>and</em> leaves the ground too wet to catch, so a ring laid around a fire pens
+      it in — which is the only way to beat a blaze that has got going. Catch them early.
     </p>
     <p class="muted" style="margin: 0">
-      Tap the map to read a coordinate off it, and watch the numbers along the top and the side.
-      Two minutes; the score is how much forest is left standing.
+      Keep typing while they fly: the next coordinates queue up and go as planes come free. You
+      start with two planes and earn more as the round wears on. Two minutes; the score is how
+      much forest is left standing.
     </p>
     <div class="row">
       <button class="primary" @click="start">Start</button>
@@ -545,6 +615,7 @@ onUnmounted(() => {
       <span class="muted">🔥 {{ burning }}</span>
       <span class="muted">🌲 {{ savedPct }}%</span>
       <span v-if="housesLost" class="muted">🏚️ {{ housesLost }}</span>
+      <span class="muted fleet">✈️ {{ inAir }}/{{ fleet }}</span>
     </div>
 
     <div ref="wrapEl" class="map-wrap">
@@ -571,7 +642,11 @@ onUnmounted(() => {
 
     <p class="readout" :class="{ empty: !marker }">
       <template v-if="marker">
-        📍 X <b>{{ marker.x }}</b> · Y <b>{{ marker.y }}</b>
+        📍
+        <b class="coord"
+          ><span class="across">{{ digits(marker).across }}</span
+          ><span class="down">{{ digits(marker).down }}</span></b
+        >
         <span v-if="showWords" lang="ru" class="muted">
           — {{ words(marker.x) }} {{ words(marker.y) }}</span
         >
@@ -579,8 +654,16 @@ onUnmounted(() => {
       <template v-else>📍 Tap the map for a coordinate</template>
     </p>
 
-    <p v-if="phase === 'playing'" class="parse muted" :class="{ bad: typed === null }">
-      {{ parseHint }}
+    <p v-if="phase === 'playing'" class="parse muted" :class="{ bad: !!parseHint.bad }">
+      <template v-if="parseHint.bad">✗ {{ parseHint.bad }}</template>
+      <template v-else>
+        <span v-if="parseHint.example" lang="ru">«со́рок три два́дцать»</span>
+        <template v-else>→</template>
+        <b class="coord"
+          ><span class="across">{{ parseHint.across }}</span
+          ><span class="down">{{ parseHint.down }}</span></b
+        >
+      </template>
     </p>
     <form v-if="phase === 'playing'" class="send" @submit.prevent="send">
       <input
@@ -595,6 +678,17 @@ onUnmounted(() => {
       />
       <button class="primary" type="submit" :disabled="!target">Send ✈️</button>
     </form>
+
+    <p v-if="phase === 'playing'" class="queue" :class="{ empty: !queued.length }">
+      <template v-if="queued.length">
+        <span class="muted">Waiting:</span>
+        <span v-for="(q, i) in queued" :key="`${q.x}-${q.y}-${i}`" class="chip coord"
+          ><span class="across">{{ digits(q).across }}</span
+          ><span class="down">{{ digits(q).down }}</span></span
+        >
+      </template>
+      <span v-else class="muted">Type the next one while these fly.</span>
+    </p>
 
     <template v-if="phase === 'over'">
       <p class="feedback" :class="saved > 0.9 ? 'good' : 'bad'" style="margin: 0">
@@ -616,6 +710,14 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* Warm for across, cool for down. Far enough apart to tell at a glance at
+   tick size, and both legible against the page and the map's dark ground. */
+.firewatch,
+.grid {
+  --across: #f0b429;
+  --down: #56b7e8;
+}
+
 .map-wrap {
   width: 100%;
 }
@@ -642,7 +744,35 @@ onUnmounted(() => {
   font-size: var(--tick);
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  opacity: 0.65;
+  opacity: 0.85;
+}
+
+/* The two halves of a coordinate, tinted to match the axis each is read off.
+   That colour is the whole explanation of what 4320 means: no legend, no
+   "x = 43, y = 20", nothing to work out. */
+.across {
+  color: var(--across);
+}
+
+.down {
+  color: var(--down);
+}
+
+.axis.x span {
+  color: var(--across);
+}
+
+.axis.y span {
+  color: var(--down);
+}
+
+.coord {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.parse .coord {
+  margin-left: 0.25rem;
 }
 
 .axis.x {
@@ -696,8 +826,29 @@ onUnmounted(() => {
   opacity: 0.6;
 }
 
-.readout b {
-  font-size: 1.15rem;
+.readout .coord {
+  font-size: 1.5rem;
+}
+
+.fleet {
+  margin-left: auto;
+}
+
+.queue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0;
+  min-height: 1.6rem;
+  font-size: 0.85rem;
+}
+
+.chip {
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: rgb(127 127 127 / 18%);
+  font-weight: 600;
 }
 
 .send {

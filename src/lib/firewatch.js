@@ -25,18 +25,34 @@ export const BURNING = 1
 export const BURNED = 2
 
 /**
- * The plane's 5×5 drop, as percentage chances of putting a burning cell out.
- * Straight from #726: certain in the middle, a coin-flip at the corners of the
- * inner ring, mostly a miss at the edges. Being *unreliable* is the design —
- * it means a fire front needs several numbers, not one.
+ * What ONE release of water covers, as percentage chances of wetting a cell,
+ * by its distance in cells from where the release happened.
+ *
+ * #726 gives a 5×5 table with 100 in the middle, for a plane that drops once.
+ * This plane circles the fire and releases a dozen times on the way round
+ * (see `planePath`), so the numbers here are what a single puff does and the
+ * footprint is what they add up to: a wet ring a little wider than the circle
+ * the plane flies, soaked in the middle where every release reaches. Each puff
+ * stays unreliable, which is the part of #726's design that matters — a fire
+ * front needs several numbers, not one.
  */
-export const KERNEL = [
-  [10, 30, 50, 30, 10],
-  [30, 50, 80, 50, 30],
-  [50, 80, 100, 80, 50],
-  [30, 50, 80, 50, 30],
-  [10, 30, 50, 30, 10],
-]
+const DROP_PROFILE = [70, 60, 42, 22]
+
+/** Square table of the profile above, by rounded Euclidean distance. */
+function radialKernel(profile) {
+  const reach = profile.length - 1
+  const size = reach * 2 + 1
+  return Array.from({ length: size }, (_, ky) =>
+    Array.from({ length: size }, (_, kx) => {
+      const d = Math.round(Math.hypot(kx - reach, ky - reach))
+      return d < profile.length ? profile[d] : 0
+    }),
+  )
+}
+
+export const KERNEL = radialKernel(DROP_PROFILE)
+/** How far the kernel reaches from its centre, in cells. */
+export const KERNEL_REACH = (KERNEL.length - 1) / 2
 
 // ── Terrain ──────────────────────────────────────────────────────────────
 // `glyph` and `burnedGlyph` are *names*, not emoji: which character actually
@@ -130,10 +146,11 @@ export function cellGlyph(kind, state, glyphs) {
 // ── Tuning ───────────────────────────────────────────────────────────────
 // Open question 4 on #731 asked for a tuning pass. These numbers are the
 // answer, and they were found by simulating whole rounds rather than by
-// playing: a model player who drops on the biggest blaze every N seconds,
-// swept against spread and spawn rates, twelve seeded forests apiece.
+// playing: a model player who reads the biggest blaze off the map every N
+// seconds and types it, with the same fleet and queue the view gives them,
+// swept against spread and spawn rates over ten seeded forests apiece.
 //
-// Two things the sweep settled:
+// Three things the sweep settled:
 //
 //  - #726's 0.01/sec per neighbouring fire is *sub-critical*. A cell burns for
 //    `burnSeconds` with eight neighbours, so a fire only grows when
@@ -143,21 +160,25 @@ export function cellGlyph(kind, state, glyphs) {
 //  - Fires must be few and fierce, not many and mild. A learner types perhaps
 //    twenty coordinates in two minutes, so a round that starts forty fires is
 //    lost however well it is played, and the score stops measuring anything.
-//    A dozen starts, each of which becomes a disaster if ignored, is what
-//    makes the difference between playing and not playing visible.
+//
+//  - The spread rate is the sharp one. Between 0.052 and 0.070 the round goes
+//    from "a slow player saves the lot" to "a fast player loses most of it" —
+//    percolation is like that near its threshold, and it is why this is swept
+//    rather than reasoned about. It also has to be re-swept whenever the
+//    plane changes, because a bigger drop moves the same cliff.
 //
 // Where they land, as the share of the forest lost over a two-minute round:
-//   left alone      ~24%     a drop every 8s   ~13%
-//   a drop every 6s  ~9%     a drop every 4s    ~4%
+//   left alone       ~60%     a coordinate every 10s   ~30%
+//   one every 7s     ~23%     one every 5s              ~6%
 export const DEFAULTS = {
   /** Chance per second that one burning cell lights one given neighbour. */
-  spreadPerSecond: 0.052,
+  spreadPerSecond: 0.056,
   /** How long a cell burns before it is lost for good. */
   burnSeconds: 7,
   /** New fires per second at the start of a round. */
-  spawnPerSecond: 0.04,
+  spawnPerSecond: 0.07,
   /** …and how much that grows per second elapsed, so a round has a curve. */
-  spawnRamp: 0.0008,
+  spawnRamp: 0.003,
   /**
    * How long ground the plane has wetted stays too wet to catch.
    *
@@ -424,7 +445,7 @@ export function douse(world, x, y, rng = Math.random) {
   let out = 0
   for (let ky = 0; ky < KERNEL.length; ky++) {
     for (let kx = 0; kx < KERNEL[ky].length; kx++) {
-      const i = cellAt(x + kx - 2, y + ky - 2)
+      const i = cellAt(x + kx - KERNEL_REACH, y + ky - KERNEL_REACH)
       if (i < 0) continue
       // One roll per cell decides everything about it: the kernel's number is
       // the chance the water lands there at all. Where it lands, a fire goes
@@ -464,89 +485,187 @@ export function stats(world) {
 }
 
 // ── The plane's path ─────────────────────────────────────────────────────
-// #726 asks for an ice-cream cone: straight out, a smooth curve passing over
-// the spot, straight back. That is exactly a circle through the target with
-// the two tangents from where the plane came in — so it is built as one,
-// rather than eyeballed with a Bézier, and the drop lands on the point of the
-// arc that is the target rather than near it.
+// The plane joins a circle around the fire, flies a turn and a quarter of it
+// releasing water as it goes, and leaves on a different tangent from the one
+// it arrived on — so the water lands as a ring around the fire rather than a
+// blot on top of it, which is both what putting a fire out looks like and, with
+// wetted ground, what actually contains one.
+//
+// Built by construction rather than by finding tangents from where the plane
+// happens to be: the approach *is* the tangent at the joining point, so the
+// entry point is found by walking backwards from it. That makes both joins
+// exactly smooth — no kink where a straight leg meets the arc — and leaves the
+// sweep a free parameter, which is what lets the circuit be more than the half
+// turn a tangent-from-a-distant-point construction can give.
 
-/** Fractions of the flight spent flying in, looping, and flying out. */
-export const LEG_IN = 0.38
-export const LEG_ARC = 0.34
-/** When in the flight the water leaves the plane: the top of the loop. */
-export const DROP_AT = LEG_IN + LEG_ARC / 2
+export const PLANE = {
+  /** The circle the plane flies around the target, in cells. */
+  loopRadius: 7,
+  /** …and the circle the water lands on, inside it. */
+  dropRadius: 3,
+  /** How many times water is released during the circuit. */
+  releases: 12,
+  /**
+   * Turns of that circuit. The quarter past a full turn is what puts the exit
+   * on a different tangent from the entry; a whole number of turns would send
+   * the plane back out along the line it came in on.
+   */
+  turns: 1.25,
+  /** How far beyond the map's edge the plane enters and leaves, in cells. */
+  margin: 5,
+}
 
-/**
- * @param {{x: number, y: number}} from where the plane enters, in cell coords
- * @param {{x: number, y: number}} to   the target cell
- * @returns {(t: number) => {x: number, y: number, angle: number}} position and
- *   heading (radians, 0 = east) at a fraction `t` of the flight
- */
-export function planePath(from, to) {
-  let vx = from.x - to.x
-  let vy = from.y - to.y
-  let dist = Math.hypot(vx, vy)
-  if (dist < 1e-6) {
-    // A flight of no length has no direction to fly it in; pick one, at the
-    // usual approach distance, rather than dividing by zero.
-    vx = 0
-    vy = -SIZE * 0.85
-    dist = SIZE * 0.85
-  }
-  const nx = vx / dist
-  const ny = vy / dist
-  // The loop is a circle through the target, sitting between it and the
-  // plane's approach, so the arc's far point *is* the target. Its radius is a
-  // share of the approach, floored so a near-target drop still reads as a
-  // loop and capped below dist/2 so the tangents below stay real.
-  const r = Math.max(dist * 0.16, Math.min(2, dist * 0.4))
-  const cx = to.x + r * nx
-  const cy = to.y + r * ny
-  const d = dist - r
-  // Tangent points from `from` onto that circle. d > r always holds because r
-  // is capped at 0.4·dist, which leaves d ≥ 0.6·dist.
-  const alpha = Math.acos(Math.min(1, r / d))
-  const phi = Math.atan2(from.y - cy, from.x - cx)
-  const onCircle = (angle) => ({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) })
-  const a = onCircle(phi + alpha)
-  const b = onCircle(phi - alpha)
-  const sweep = 2 * Math.PI - 2 * alpha // the long way round, over the target
-  const straight = (p0, p1, u) => ({
-    x: p0.x + (p1.x - p0.x) * u,
-    y: p0.y + (p1.y - p0.y) * u,
-    angle: Math.atan2(p1.y - p0.y, p1.x - p0.x),
-  })
-
-  return (t) => {
-    const u = Math.min(1, Math.max(0, t))
-    if (u < LEG_IN) return straight(from, a, u / LEG_IN)
-    if (u < LEG_IN + LEG_ARC) {
-      const theta = phi + alpha + ((u - LEG_IN) / LEG_ARC) * sweep
-      const p = onCircle(theta)
-      return { x: p.x, y: p.y, angle: theta + Math.PI / 2 }
-    }
-    return straight(b, from, (u - LEG_IN - LEG_ARC) / (1 - LEG_IN - LEG_ARC))
-  }
+/** How far along a ray from `p` the map's edge (plus a margin) is. */
+function rayToEdge(p, dx, dy, margin) {
+  const lo = -margin
+  const hi = SIZE - 1 + margin
+  const wall = (d, from) =>
+    Math.abs(d) < 1e-9 ? Infinity : Math.max((lo - from) / d, (hi - from) / d)
+  // Floored: a target near a corner can put the joining point outside the box
+  // already, where the walls are behind the plane and the answer comes out
+  // negative. A leg of a fixed minimum length is the sane reading of that.
+  return Math.max(SIZE * 0.35, Math.min(wall(dx, p.x), wall(dy, p.y)))
 }
 
 /**
- * Where a plane comes in from: just off the edge of the map, in a random
- * direction. Found by walking a ray out from the target to the map's boundary
- * rather than by stepping a fixed distance, because a fixed distance puts a
- * plane heading for the middle of the map far off screen — and a plane nobody
- * sees until it is already looping is not the plane #726 describes.
- * @param {{x: number, y: number}} to
- * @param {() => number} [rng]
- * @param {number} [margin] how far beyond the edge it starts, in cells
+ * @typedef {object} Flight
+ * @property {(t: number) => {x: number, y: number, angle: number}} at  position
+ *   and heading (radians, 0 = east) at a fraction `t` of the flight
+ * @property {{t: number, x: number, y: number}[]} releases  when water leaves
+ *   the plane, and where it lands — inside the circle the plane is flying,
+ *   because that is where water dropped from a banking aircraft goes, and
+ *   because it lets the circuit be big enough to see while the ring it lays
+ *   stays tight enough to be worth aiming
+ * @property {number} length  in cells, so a caller can fly it at a fixed speed
  */
-export function approachFrom(to, rng = Math.random, margin = 6) {
-  const angle = rng() * 2 * Math.PI
-  const dx = Math.cos(angle)
-  const dy = Math.sin(angle)
-  const lo = -margin
-  const hi = SIZE - 1 + margin
-  // How far along the ray each wall is; the nearest one is the way out.
-  const wall = (d, from) => (Math.abs(d) < 1e-9 ? Infinity : Math.max((lo - from) / d, (hi - from) / d))
-  const reach = Math.min(wall(dx, to.x), wall(dy, to.y))
-  return { x: to.x + reach * dx, y: to.y + reach * dy }
+
+/**
+ * Build a flight around `to`, arriving on `heading` (radians, 0 = east).
+ * @param {{x: number, y: number}} to
+ * @param {number} heading
+ * @param {Partial<typeof PLANE>} [opts]
+ * @returns {Flight}
+ */
+export function planePath(to, heading, opts = {}) {
+  const { loopRadius, dropRadius, releases, turns, margin } = { ...PLANE, ...opts }
+  const ux = Math.cos(heading)
+  const uy = Math.sin(heading)
+  // The left-hand normal: which side of the fire the plane passes on, and so
+  // the point at which its approach is tangent to the circle.
+  const join = { x: to.x - loopRadius * uy, y: to.y + loopRadius * ux }
+  const onCircle = (theta, r = loopRadius) => ({
+    x: to.x + r * Math.cos(theta),
+    y: to.y + r * Math.sin(theta),
+  })
+  // Travelling along `heading` at `join` means going round by DECREASING angle.
+  const thetaIn = heading + Math.PI / 2
+  const sweep = 2 * Math.PI * turns
+  const thetaOut = thetaIn - sweep
+  const leave = onCircle(thetaOut)
+  // On a circle swept this way the heading is always a quarter turn behind the
+  // angle, which is exactly why both joins come out smooth.
+  const headingAt = (theta) => theta - Math.PI / 2
+  const outHeading = headingAt(thetaOut)
+  const vx = Math.cos(outHeading)
+  const vy = Math.sin(outHeading)
+
+  const lenIn = rayToEdge(join, -ux, -uy, margin)
+  const lenOut = rayToEdge(leave, vx, vy, margin)
+  const lenArc = loopRadius * sweep
+  const length = lenIn + lenArc + lenOut
+  const entry = { x: join.x - lenIn * ux, y: join.y - lenIn * uy }
+  const exit = { x: leave.x + lenOut * vx, y: leave.y + lenOut * vy }
+  // Time is shared out by distance, so the plane flies at one speed throughout
+  // rather than dawdling through the loop and sprinting down the straights.
+  const tIn = lenIn / length
+  const tArc = lenArc / length
+
+  const at = (t) => {
+    const u = Math.min(1, Math.max(0, t))
+    if (u < tIn) {
+      const s = u / tIn
+      return { x: entry.x + (join.x - entry.x) * s, y: entry.y + (join.y - entry.y) * s, angle: heading }
+    }
+    if (u < tIn + tArc) {
+      const theta = thetaIn - sweep * ((u - tIn) / tArc)
+      const p = onCircle(theta)
+      return { x: p.x, y: p.y, angle: headingAt(theta) }
+    }
+    const s = (u - tIn - tArc) / (1 - tIn - tArc)
+    return { x: leave.x + (exit.x - leave.x) * s, y: leave.y + (exit.y - leave.y) * s, angle: outHeading }
+  }
+
+  const drops = []
+  for (let k = 0; k < releases; k++) {
+    // Half-steps, so the first and last releases are a half-gap from the ends
+    // of the arc and the ring closes evenly rather than doubling up at a seam.
+    const s = (k + 0.5) / releases
+    const p = onCircle(thetaIn - sweep * s, dropRadius)
+    drops.push({ t: tIn + tArc * s, x: p.x, y: p.y })
+  }
+
+  return { at, releases: drops, length }
+}
+
+/**
+ * The direction a plane arrives from, in radians. Random, so successive drops
+ * on the same fire ring it from different sides.
+ * @param {() => number} [rng]
+ */
+export function approachHeading(rng = Math.random) {
+  return rng() * 2 * Math.PI
+}
+
+// ── Coordinates ──────────────────────────────────────────────────────────
+// The learner is typing a place on a 100 × 100 map, and the one thing they must
+// never have to do is arithmetic: no "x is 12 and y is 3, so that's…". So a
+// coordinate is shown as the four digits it is — 1203 — with the two halves
+// tinted to match the two axes, and never as a pair of labelled numbers.
+
+/**
+ * A coordinate written the way it is typed: across, then down, two digits each.
+ * @param {number} x
+ * @param {number} y
+ * @returns {string}
+ */
+export function coordinateLabel(x, y) {
+  return `${String(x).padStart(2, '0')}${String(y).padStart(2, '0')}`
+}
+
+/**
+ * The ways one half of a coordinate could start at `i`, best reading first.
+ *
+ * A half below ten may be said either way — «три» for 03, or «ноль три»
+ * reading the digits off the screen — and both have to work, or the
+ * four-digit display would be teaching a reading the box then rejects. But
+ * the two are ambiguous: «ноль оди́н» is 0001 read as two halves just as much
+ * as it is half of 01-something. So both are offered, the plain reading
+ * first, and `coordinateFrom` takes whichever completes a coordinate.
+ * @param {number[]} numbers
+ * @param {number} i
+ * @returns {{value: number, next: number}[]}
+ */
+function halfReadings(numbers, i) {
+  if (i >= numbers.length) return []
+  const readings = [{ value: numbers[i], next: i + 1 }]
+  const after = numbers[i + 1]
+  if (numbers[i] === 0 && after > 0 && after < 10) readings.push({ value: after, next: i + 2 })
+  return readings
+}
+
+/**
+ * The square a run of spoken numbers names, or null if they do not name one.
+ * @param {number[]|null} numbers
+ * @returns {{x: number, y: number}|null}
+ */
+export function coordinateFrom(numbers) {
+  if (!numbers) return null
+  for (const across of halfReadings(numbers, 0)) {
+    for (const down of halfReadings(numbers, across.next)) {
+      if (down.next !== numbers.length) continue
+      if (cellAt(across.value, down.value) < 0) continue
+      return { x: across.value, y: down.value }
+    }
+  }
+  return null
 }

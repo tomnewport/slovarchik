@@ -6,15 +6,17 @@ import {
   BURNING,
   CLEARING_KINDS,
   DEFAULTS,
-  DROP_AT,
-  GLYPH_CHAINS,
   HOUSE_KIND,
   KERNEL,
+  KERNEL_REACH,
+  PLANE,
   SIZE,
   TERRAIN,
-  approachFrom,
+  approachHeading,
   cellAt,
   cellGlyph,
+  coordinateFrom,
+  coordinateLabel,
   douse,
   generateForest,
   ignite,
@@ -23,6 +25,7 @@ import {
   spawnFire,
   stats,
   step,
+  GLYPH_CHAINS,
 } from './firewatch.js'
 import { mulberry32 } from './seed.js'
 
@@ -213,9 +216,10 @@ describe('step', () => {
     world.opts.spawnPerSecond = 0
     world.opts.spawnRamp = 0
     world.opts.spreadPerSecond = 0
+    const reached = KERNEL.flat().filter((p) => p > 0).length
     douse(world, 43, 20, () => 0)
     step(world, world.opts.wetSeconds - 1, () => 0.99)
-    expect(world.wet.size).toBe(25)
+    expect(world.wet.size).toBe(reached)
     expect(ignite(world, cellAt(43, 20))).toBe(false)
     step(world, 2, () => 0.99)
     expect(world.wet.size).toBe(0)
@@ -351,46 +355,60 @@ describe('step', () => {
 })
 
 describe('douse', () => {
-  it('always puts out the cell under the middle of the kernel', () => {
+  it('puts out the cell it lands on', () => {
     const world = solidForest()
     ignite(world, cellAt(43, 20))
-    expect(douse(world, 43, 20, () => 0.999)).toBe(1)
+    expect(douse(world, 43, 20, () => 0)).toBeGreaterThanOrEqual(1)
     expect(world.state[cellAt(43, 20)]).toBe(ALIVE)
-    expect(world.doused).toBe(1)
+    expect(world.doused).toBeGreaterThanOrEqual(1)
+  })
+
+  it('is never certain, not even in the middle', () => {
+    // One release out of the dozen the plane makes on its way round; a sure
+    // thing here would make the whole circuit one.
+    const world = solidForest()
+    ignite(world, cellAt(43, 20))
+    expect(douse(world, 43, 20, () => 0.999)).toBe(0)
+    expect(world.state[cellAt(43, 20)]).toBe(BURNING)
   })
 
   it('reaches the whole 5×5 when every roll lands', () => {
     const world = solidForest()
-    for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) ignite(world, cellAt(43 + dx, 20 + dy))
-    expect(douse(world, 43, 20, () => 0)).toBe(25)
-    expect(world.burning.size).toBe(0)
+    const reached = KERNEL.flat().filter((p) => p > 0).length
+    for (let dy = -KERNEL_REACH; dy <= KERNEL_REACH; dy++) {
+      for (let dx = -KERNEL_REACH; dx <= KERNEL_REACH; dx++) ignite(world, cellAt(43 + dx, 20 + dy))
+    }
+    expect(douse(world, 43, 20, () => 0)).toBe(reached)
   })
 
   it('misses the corners when the roll is above their chance', () => {
     const world = solidForest()
-    for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) ignite(world, cellAt(43 + dx, 20 + dy))
-    // 0.5 → 50: beats the 10s and the 30s, ties the 50s (which miss), loses to 80/100.
-    const out = douse(world, 43, 20, () => 0.5)
-    expect(out).toBe(KERNEL.flat().filter((p) => p > 50).length)
+    for (let dy = -KERNEL_REACH; dy <= KERNEL_REACH; dy++) {
+      for (let dx = -KERNEL_REACH; dx <= KERNEL_REACH; dx++) ignite(world, cellAt(43 + dx, 20 + dy))
+    }
+    // A roll of 0.5 is 50: it beats everything above 50 and nothing below it.
+    expect(douse(world, 43, 20, () => 0.5)).toBe(KERNEL.flat().filter((p) => p > 50).length)
   })
 
   it('wets what it lands on, so the drop is a break and not just a rescue', () => {
     const world = solidForest()
+    const reached = KERNEL.flat().filter((p) => p > 0).length
     douse(world, 43, 20, () => 0)
-    expect(world.wet.size).toBe(25)
+    expect(world.wet.size).toBe(reached)
     // Nothing can catch there while it is wet — that is what containing a
     // fire front means, and what a drop ahead of the fire buys.
     expect(ignite(world, cellAt(43, 20))).toBe(false)
-    expect(ignite(world, cellAt(45, 22))).toBe(false)
-    expect(ignite(world, cellAt(46, 20))).toBe(true)
+    expect(ignite(world, cellAt(43 + KERNEL_REACH, 20))).toBe(false)
+    expect(ignite(world, cellAt(43 + KERNEL_REACH + 1, 20))).toBe(true)
   })
 
   it('does not water ground that has already burned', () => {
     const world = solidForest()
+    const reached = KERNEL.flat().filter((p) => p > 0).length
     world.state[cellAt(43, 20)] = BURNED
     douse(world, 43, 20, () => 0)
     expect(world.wet.has(cellAt(43, 20))).toBe(false)
-    expect(world.wet.size).toBe(24)
+    expect(world.wet.size).toBe(reached - 1)
   })
 
   it('wets only where the kernel says the water landed', () => {
@@ -428,7 +446,7 @@ describe('stats', () => {
     douse(world, 50, 50, () => 0)
     const s = stats(world)
     expect(s.burning).toBe(1)
-    expect(s.wet).toBe(25)
+    expect(s.wet).toBe(KERNEL.flat().filter((p) => p > 0).length)
     expect(s.houses).toBe(world.houses)
     expect(s.housesLost).toBe(0)
   })
@@ -467,85 +485,207 @@ describe('glyphs', () => {
   })
 })
 
-describe('planePath', () => {
-  const to = { x: 43, y: 20 }
-
-  it('starts where the plane came in and ends back there', () => {
-    const from = { x: -40, y: 20 }
-    const at = planePath(from, to)
-    expect(at(0).x).toBeCloseTo(from.x, 6)
-    expect(at(0).y).toBeCloseTo(from.y, 6)
-    expect(at(1).x).toBeCloseTo(from.x, 6)
-    expect(at(1).y).toBeCloseTo(from.y, 6)
+describe('the drop', () => {
+  it('is a disc around where the water was released', () => {
+    expect(KERNEL.length).toBe(KERNEL_REACH * 2 + 1)
+    const centre = KERNEL[KERNEL_REACH][KERNEL_REACH]
+    for (const row of KERNEL) for (const v of row) expect(v).toBeLessThanOrEqual(centre)
+    // Corners are out of reach; the edge midpoints are not.
+    expect(KERNEL[0][0]).toBe(0)
+    expect(KERNEL[0][KERNEL_REACH]).toBeGreaterThan(0)
   })
 
-  it('passes over the target at the moment it drops', () => {
-    for (const from of [{ x: -40, y: 20 }, { x: 43, y: 120 }, { x: 130, y: -50 }]) {
-      const p = planePath(from, to)(DROP_AT)
-      expect(Math.hypot(p.x - to.x, p.y - to.y)).toBeLessThan(0.01)
-    }
-  })
-
-  it('flies a continuous path with no jump at the seams', () => {
-    const at = planePath({ x: -40, y: 20 }, to)
-    let prev = at(0)
-    for (let t = 0.01; t <= 1; t += 0.01) {
-      const next = at(t)
-      expect(Math.hypot(next.x - prev.x, next.y - prev.y)).toBeLessThan(6)
-      prev = next
-    }
-  })
-
-  it('turns smoothly: the heading never jumps, seams included', () => {
-    const at = planePath({ x: -40, y: 20 }, to)
-    // Smallest turn between two headings, so ±π does not read as a jump.
-    const turn = (a, b) => Math.abs(Math.atan2(Math.sin(b - a), Math.cos(b - a)))
-    let prev = at(0).angle
-    for (let t = 0.005; t <= 1; t += 0.005) {
-      const next = at(t).angle
-      expect(turn(prev, next)).toBeLessThan(0.2)
-      prev = next
-    }
-  })
-
-  it('clamps a fraction outside the flight to its ends', () => {
-    const at = planePath({ x: -40, y: 20 }, to)
-    expect(at(-1)).toEqual(at(0))
-    expect(at(2)).toEqual(at(1))
-  })
-
-  it('picks a direction rather than dividing by zero when there is no distance to fly', () => {
-    const at = planePath({ x: 43, y: 20 }, to)
-    expect(Number.isFinite(at(0.5).x)).toBe(true)
-    expect(Number.isFinite(at(0.5).y)).toBe(true)
+  it('is what #726 asks for and no more: never certain, even in the middle', () => {
+    // The plane releases a dozen times on the way round, so one puff being a
+    // sure thing would make the whole circuit one.
+    expect(KERNEL[KERNEL_REACH][KERNEL_REACH]).toBeLessThan(100)
   })
 })
 
-describe('approachFrom', () => {
-  const offMap = (p) => p.x < 0 || p.y < 0 || p.x > SIZE - 1 || p.y > SIZE - 1
+describe('coordinates', () => {
+  it('writes a square as the four digits the learner types', () => {
+    expect(coordinateLabel(12, 3)).toBe('1203')
+    expect(coordinateLabel(43, 20)).toBe('4320')
+    expect(coordinateLabel(0, 0)).toBe('0000')
+    expect(coordinateLabel(99, 99)).toBe('9999')
+  })
 
-  it('comes in from off the map, whichever corner the fire is in', () => {
-    for (const to of [{ x: 50, y: 50 }, { x: 0, y: 0 }, { x: 99, y: 99 }, { x: 99, y: 3 }]) {
-      for (let i = 1; i <= 40; i++) {
-        expect(offMap(approachFrom(to, mulberry32(i)))).toBe(true)
+  it('reads two spoken numbers as a square', () => {
+    expect(coordinateFrom([43, 20])).toEqual({ x: 43, y: 20 })
+    expect(coordinateFrom([0, 0])).toEqual({ x: 0, y: 0 })
+    expect(coordinateFrom([99, 99])).toEqual({ x: 99, y: 99 })
+  })
+
+  it('accepts a half under ten said either way', () => {
+    // 1203 read off the screen digit-pair by digit-pair is «двенадцать ноль
+    // три»; said as a number it is «двенадцать три». Both mean the same square,
+    // and rejecting the first would teach a reading the box does not take.
+    expect(coordinateFrom([12, 3])).toEqual({ x: 12, y: 3 })
+    expect(coordinateFrom([12, 0, 3])).toEqual({ x: 12, y: 3 })
+    expect(coordinateFrom([0, 3, 12])).toEqual({ x: 3, y: 12 })
+    expect(coordinateFrom([0, 3, 0, 5])).toEqual({ x: 3, y: 5 })
+  })
+
+  it('does not swallow a zero that is a half in its own right', () => {
+    expect(coordinateFrom([43, 0])).toEqual({ x: 43, y: 0 })
+    expect(coordinateFrom([0, 43])).toEqual({ x: 0, y: 43 })
+    // The ambiguous case: «ноль оди́н» is 0001 — two halves — and not the start
+    // of a half 01-something, because reading it that way leaves nothing for
+    // the second half. The plain reading wins whenever it completes.
+    expect(coordinateFrom([0, 1])).toEqual({ x: 0, y: 1 })
+    expect(coordinateFrom([0, 9])).toEqual({ x: 0, y: 9 })
+  })
+
+  it('names no square for anything else', () => {
+    expect(coordinateFrom(null)).toBe(null)
+    expect(coordinateFrom([])).toBe(null)
+    expect(coordinateFrom([43])).toBe(null)
+    expect(coordinateFrom([43, 20, 7])).toBe(null)
+  })
+
+  it('round-trips every square on the map', () => {
+    for (const x of [0, 1, 9, 10, 43, 99]) {
+      for (const y of [0, 1, 9, 10, 20, 99]) {
+        const label = coordinateLabel(x, y)
+        expect(coordinateFrom([Number(label.slice(0, 2)), Number(label.slice(2))])).toEqual({ x, y })
+      }
+    }
+  })
+})
+
+describe('planePath', () => {
+  const to = { x: 50, y: 50 }
+  const turn = (a, b) => Math.abs(Math.atan2(Math.sin(b - a), Math.cos(b - a)))
+
+  it('starts and ends off the map, so the plane flies in and away', () => {
+    const offMap = (p) => p.x < 0 || p.y < 0 || p.x > SIZE - 1 || p.y > SIZE - 1
+    for (let i = 1; i <= 24; i++) {
+      for (const target of [to, { x: 0, y: 0 }, { x: 99, y: 4 }]) {
+        const flight = planePath(target, approachHeading(mulberry32(i)))
+        expect(offMap(flight.at(0))).toBe(true)
+        expect(offMap(flight.at(1))).toBe(true)
       }
     }
   })
 
-  it('starts just beyond the edge, not half a map away', () => {
-    // The point of walking to the boundary: a plane heading for the middle
-    // enters the picture straight away rather than spending its approach out
-    // of sight.
-    for (let i = 1; i <= 40; i++) {
-      const from = approachFrom({ x: 50, y: 50 }, mulberry32(i))
-      expect(Math.max(Math.abs(from.x - 49.5), Math.abs(from.y - 49.5))).toBeLessThan(SIZE)
-      expect(Math.hypot(from.x - 50, from.y - 50)).toBeGreaterThan(SIZE / 2)
+  it('circles the fire rather than passing over it', () => {
+    const flight = planePath(to, 0.7)
+    let onTheLoop = 0
+    for (let t = 0; t <= 1; t += 0.001) {
+      const p = flight.at(t)
+      if (Math.abs(Math.hypot(p.x - to.x, p.y - to.y) - PLANE.loopRadius) < 0.01) onTheLoop++
+    }
+    // A quarter of the flight or more is spent at exactly the loop's radius.
+    expect(onTheLoop / 1000).toBeGreaterThan(0.25)
+  })
+
+  it('goes all the way round, and comes out on a different tangent', () => {
+    const flight = planePath(to, 0.7)
+    // Every direction from the fire is flown over at some point in the circuit.
+    const seen = new Set()
+    for (let t = 0; t <= 1; t += 0.001) {
+      const p = flight.at(t)
+      if (Math.abs(Math.hypot(p.x - to.x, p.y - to.y) - PLANE.loopRadius) > 0.01) continue
+      seen.add(Math.floor((Math.atan2(p.y - to.y, p.x - to.x) + Math.PI) / (Math.PI / 8)))
+    }
+    expect(seen.size).toBe(16)
+    // …and it leaves on a heading a quarter turn off the one it arrived on,
+    // rather than back out along the line it came in on.
+    expect(turn(flight.at(0).angle, flight.at(1).angle)).toBeCloseTo(Math.PI / 2, 6)
+  })
+
+  it('flies a smooth path at one speed, with no kink where the legs meet the arc', () => {
+    const flight = planePath(to, 0.7)
+    const steps = []
+    let prev = flight.at(0)
+    for (let t = 0.002; t <= 1; t += 0.002) {
+      const next = flight.at(t)
+      steps.push(Math.hypot(next.x - prev.x, next.y - prev.y))
+      // A kink would show as the heading jumping between two samples.
+      expect(turn(prev.angle, next.angle)).toBeLessThan(0.1)
+      prev = next
+    }
+    // Constant speed: every step covers the same ground.
+    expect(Math.max(...steps) / Math.min(...steps)).toBeLessThan(1.15)
+  })
+
+  it('reports how far it is, so a caller can fly it at a fixed speed', () => {
+    const flight = planePath(to, 0.7)
+    let walked = 0
+    let prev = flight.at(0)
+    for (let t = 0.001; t <= 1; t += 0.001) {
+      const next = flight.at(t)
+      walked += Math.hypot(next.x - prev.x, next.y - prev.y)
+      prev = next
+    }
+    expect(walked).toBeCloseTo(flight.length, 0)
+  })
+
+  it('releases water all the way round, inside the circle it is flying', () => {
+    const flight = planePath(to, 0.7)
+    expect(flight.releases).toHaveLength(PLANE.releases)
+    const angles = new Set()
+    for (const drop of flight.releases) {
+      expect(Math.hypot(drop.x - to.x, drop.y - to.y)).toBeCloseTo(PLANE.dropRadius, 6)
+      angles.add(Math.floor((Math.atan2(drop.y - to.y, drop.x - to.x) + Math.PI) / (Math.PI / 4)))
+    }
+    // Spread right round the fire, not bunched on one side.
+    expect(angles.size).toBe(8)
+  })
+
+  it('releases only while it is on the loop, and in order', () => {
+    const flight = planePath(to, 0.7)
+    let last = 0
+    for (const drop of flight.releases) {
+      expect(drop.t).toBeGreaterThan(last)
+      last = drop.t
+      const p = flight.at(drop.t)
+      expect(Math.hypot(p.x - to.x, p.y - to.y)).toBeCloseTo(PLANE.loopRadius, 6)
+    }
+    expect(last).toBeLessThan(1)
+  })
+
+  it('lays a wet ring that soaks the middle and reaches well past it', () => {
+    const world = solidForest()
+    const flight = planePath({ x: 50, y: 50 }, 0.7)
+    const rng = mulberry32(2)
+    for (const drop of flight.releases) douse(world, Math.round(drop.x), Math.round(drop.y), rng)
+    // Bigger than the single 5×5 blot #726 describes — the point of circling.
+    expect(world.wet.size).toBeGreaterThan(60)
+    let reach = 0
+    for (const i of world.wet) {
+      const x = i % SIZE
+      reach = Math.max(reach, Math.hypot(x - 50, (i - x) / SIZE - 50))
+    }
+    expect(reach).toBeGreaterThan(PLANE.dropRadius + 2)
+    // The fire the learner actually typed is in the middle of it, not in a hole.
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) expect(world.wet.has(cellAt(50 + dx, 50 + dy))).toBe(true)
     }
   })
 
-  it('takes a margin, so a plane can enter closer in or further out', () => {
-    const near = approachFrom({ x: 50, y: 50 }, () => 0, 2)
-    const far = approachFrom({ x: 50, y: 50 }, () => 0, 30)
-    expect(far.x).toBeGreaterThan(near.x)
+  it('takes a heading, so repeated drops ring a fire from different sides', () => {
+    const a = planePath(to, 0)
+    const b = planePath(to, Math.PI)
+    expect(a.at(0).x).not.toBeCloseTo(b.at(0).x, 1)
+  })
+
+  it('clamps a fraction outside the flight to its ends', () => {
+    const flight = planePath(to, 0.7)
+    expect(flight.at(-1)).toEqual(flight.at(0))
+    expect(flight.at(2)).toEqual(flight.at(1))
+  })
+})
+
+describe('approachHeading', () => {
+  it('is a direction, and not always the same one', () => {
+    const seen = new Set()
+    for (let i = 1; i <= 30; i++) {
+      const heading = approachHeading(mulberry32(i))
+      expect(heading).toBeGreaterThanOrEqual(0)
+      expect(heading).toBeLessThan(2 * Math.PI)
+      seen.add(Math.floor(heading))
+    }
+    expect(seen.size).toBeGreaterThan(3)
   })
 })

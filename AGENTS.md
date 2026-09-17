@@ -153,10 +153,13 @@ src/
                         #     grammar that both SAYS the instruction in Russian and grades the cut,
                         #     so the sentence and the right answer cannot drift apart
                         #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
-                        #     spreads through it, what a water drop's 5×5 kernel does (put out,
-                        #     and leave the ground too wet to catch), and the curve the plane
-                        #     flies. Pure and seeded, so a two-minute round can be simulated in a
-                        #     millisecond — which is how DEFAULTS was tuned rather than by playing
+                        #     spreads through it, what one release of water does (put out, and
+                        #     leave the ground too wet to catch), the circuit the plane flies
+                        #     around a fire releasing a dozen times on the way, and the
+                        #     four-digit coordinate the learner says. Pure and seeded, so a
+                        #     two-minute round can be simulated in a millisecond — which is how
+                        #     DEFAULTS was tuned, and re-tuned whenever the plane changed,
+                        #     rather than by playing
                         #   noise  — Perlin, and the fractal sum of it. There to warp the
                         #     coordinates firewatch's Voronoi layout is looked up at: a Voronoi
                         #     cell is a convex polygon, so the stands come out straight-edged

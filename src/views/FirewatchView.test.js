@@ -39,6 +39,8 @@ async function start(wrapper) {
 }
 
 const hint = (wrapper) => wrapper.find('p.parse').text()
+/** Just the coordinate the box has understood so far. */
+const hintCoord = (wrapper) => wrapper.find('p.parse .coord').text()
 
 beforeEach(() => {
   vi.stubGlobal('requestAnimationFrame', () => 1)
@@ -80,13 +82,16 @@ describe('reading what was typed', () => {
     await start(wrapper)
     const box = wrapper.find('input[lang="ru"]')
 
-    expect(hint(wrapper)).toContain('Two numbers')
+    // Nothing typed: a worked example of the rule, not an instruction.
+    expect(hint(wrapper)).toContain('4320')
+    expect(hint(wrapper)).toContain('со́рок три два́дцать')
     await box.setValue('со́рок')
-    expect(hint(wrapper)).toBe('→ X 40 · Y …')
+    expect(hintCoord(wrapper)).toBe('40··')
     await box.setValue('со́рок три')
-    expect(hint(wrapper)).toBe('→ X 43 · Y …')
+    expect(hintCoord(wrapper)).toBe('43··')
     await box.setValue('со́рок три два́дцать')
-    expect(hint(wrapper)).toBe('→ X 43 · Y 20')
+    expect(hintCoord(wrapper)).toBe('4320')
+    expect(hint(wrapper)).toContain('→')
   })
 
   it('says so when the words are not a number, rather than going quiet', async () => {
@@ -108,7 +113,7 @@ describe('reading what was typed', () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
     await wrapper.find('input[lang="ru"]').setValue('девяносто девять ноль')
-    expect(hint(wrapper)).toBe('→ X 99 · Y 0')
+    expect(hintCoord(wrapper)).toBe('9900')
   })
 })
 
@@ -142,6 +147,75 @@ describe('sending a plane', () => {
   })
 })
 
+describe('the four-digit coordinate', () => {
+  it('pads a single-digit half, so the shape is always four digits', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await wrapper.find('input[lang="ru"]').setValue('двенадцать три')
+    expect(hintCoord(wrapper)).toBe('1203')
+  })
+
+  it('takes a half under ten read off the screen as «ноль три»', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await wrapper.find('input[lang="ru"]').setValue('двенадцать ноль три')
+    expect(hintCoord(wrapper)).toBe('1203')
+  })
+
+  it('tints each half to match the axis it is read off', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    sizeMap(wrapper, 400)
+    await point(wrapper.find('canvas.board').element, 'pointerdown', 174, 82)
+    expect(wrapper.find('.readout .across').text()).toBe('43')
+    expect(wrapper.find('.readout .down').text()).toBe('20')
+    // The same two classes carry the ticks, which is the whole explanation.
+    expect(wrapper.findAll('.axis.x span').length).toBeGreaterThan(0)
+    expect(wrapper.find('.axis.x').classes()).toContain('x')
+  })
+})
+
+describe('the fleet', () => {
+  it('starts with two planes and puts the first two straight in the air', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    expect(wrapper.vm.fleet).toBe(2)
+    for (const where of ['десять десять', 'двадцать двадцать']) {
+      await wrapper.find('input[lang="ru"]').setValue(where)
+      await wrapper.find('form.send').trigger('submit')
+    }
+    expect(wrapper.vm.inAir).toBe(2)
+    expect(wrapper.vm.queued).toHaveLength(0)
+    expect(wrapper.vm.sent).toBe(2)
+  })
+
+  it('queues the rest, so typing never has to wait for a plane', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    for (const where of ['десять десять', 'двадцать двадцать', 'тридцать тридцать']) {
+      await wrapper.find('input[lang="ru"]').setValue(where)
+      await wrapper.find('form.send').trigger('submit')
+    }
+    expect(wrapper.vm.inAir).toBe(2)
+    expect(wrapper.vm.queued).toEqual([{ x: 30, y: 30 }])
+    expect(wrapper.find('.queue').text()).toContain('3030')
+    // The box is empty and ready either way.
+    expect(wrapper.find('input[lang="ru"]').element.value).toBe('')
+  })
+
+  it('turns away a coordinate once the queue is full, rather than hoarding them', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    for (let n = 0; n < 12; n++) {
+      await wrapper.find('input[lang="ru"]').setValue('десять десять')
+      await wrapper.find('form.send').trigger('submit')
+    }
+    expect(wrapper.vm.queued.length).toBeLessThanOrEqual(6)
+    // The one that bounced is still in the box to try again.
+    expect(wrapper.find('input[lang="ru"]').element.value).toBe('десять десять')
+  })
+})
+
 describe('reading a coordinate off the map', () => {
   it('starts by inviting a tap', async () => {
     const wrapper = mount(FirewatchView)
@@ -155,8 +229,9 @@ describe('reading a coordinate off the map', () => {
     const canvas = sizeMap(wrapper, 400) // 4px a square
     await point(canvas, 'pointerdown', 174, 82)
     expect(wrapper.vm.marker).toEqual({ x: 43, y: 20 })
-    expect(wrapper.find('.readout').text()).toContain('X 43')
-    expect(wrapper.find('.readout').text()).toContain('Y 20')
+    // The four digits to say, not a pair to assemble.
+    expect(wrapper.find('.readout .coord').text()).toBe('4320')
+    expect(wrapper.find('.readout').text()).not.toContain('X 43')
   })
 
   it('follows a drag, but not a hover with nothing pressed', async () => {
