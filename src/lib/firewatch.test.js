@@ -29,13 +29,27 @@ import {
 } from './firewatch.js'
 import { mulberry32 } from './seed.js'
 
-/** A forest with no houses and no gaps: every cell burns, so spread is easy to reason about. */
-function solidForest(seed = 1) {
-  const world = generateForest({ houseRate: 0, gapRate: 0, seeds: 1 }, mulberry32(seed))
+/**
+ * A forest with no houses and no gaps: every cell burns, so spread is easy to
+ * reason about.
+ *
+ * Laid out once and cloned, rather than generated per call. Generating warps
+ * three Perlin fields over ten thousand cells — nothing once, but the
+ * statistical tests below want hundreds of rounds apiece, and it timed the
+ * suite out on CI. None of that work survives the `kind.fill` on the next line
+ * anyway, so every seed produced the same forest regardless.
+ */
+const BLANK = (() => {
+  const world = generateForest({ houseRate: 0, gapRate: 0, seeds: 1 }, mulberry32(1))
   world.kind.fill(0)
   world.burnable = world.kind.length
+  world.houses = 0
   return world
-}
+})()
+
+/** A fresh copy of it. `structuredClone` copies the typed arrays and the sets,
+ *  so there is no field list here to fall out of step with the world's shape. */
+const solidForest = () => structuredClone(BLANK)
 
 describe('the map', () => {
   it('is the 0–99 grid the drill needs', () => {
@@ -289,7 +303,7 @@ describe('step', () => {
     // Over one second at 0.5/sec that neighbour should light about half the
     // time — whether the second arrives as one tick or as twenty.
     const caught = (dt, seed) => {
-      const world = solidForest(seed)
+      const world = solidForest()
       world.opts.spawnPerSecond = 0
       world.opts.spawnRamp = 0
       world.opts.spreadPerSecond = 0.5
