@@ -82,6 +82,26 @@ describe('FlashcardExercise', () => {
     expect(playFeedback).toHaveBeenCalledWith(true)
   })
 
+  it('accepts cafe and café for the café card without recording a miss (#724)', async () => {
+    const cafe = { ...exercise, pairs: [{ key: 'кафе=café', ru: 'кафе́', en: 'café' }] }
+    for (const spelling of ['cafe', 'café']) {
+      const wrapper = mount(FlashcardExercise, { props: { exercise: cafe } })
+      expect(wrapper.find('.combo-input').attributes('data-answer')).toBe('café')
+      await wrapper.find('.combo-input').setValue(spelling)
+      expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
+      expect(wrapper.find('.reveal').exists()).toBe(false)
+      wrapper.unmount()
+    }
+  })
+
+  it('still rejects a different English word for the café card', async () => {
+    const cafe = { ...exercise, pairs: [{ key: 'кафе=café', ru: 'кафе́', en: 'café' }] }
+    const wrapper = mount(FlashcardExercise, { props: { exercise: cafe } })
+    await wrapper.find('.combo-input').setValue('cafes')
+    await wrapper.find('form').trigger('submit')
+    expect(wrapper.find('.reveal-en').text()).toBe('café')
+  })
+
   it('reveals the correct answer when a wrong guess is submitted', async () => {
     const wrapper = mount(FlashcardExercise, { props: { exercise } })
     await wrapper.find('.combo-input').setValue('summer')
@@ -147,6 +167,17 @@ describe('FlashcardExercise', () => {
     await wrapper.find('.speak-toggle').trigger('click')
     // The spoken "spring" was accepted and the card advanced.
     expect(wrapper.find('.ru').text()).toBe('ме́сяц')
+  })
+
+  it('accepts an unaccented spoken café answer', async () => {
+    listenImpl = (opts) => {
+      opts.onEnd('cafe', [])
+      return { stop() {}, abort() {} }
+    }
+    const cafe = { ...exercise, pairs: [{ key: 'кафе=café', ru: 'кафе́', en: 'café' }] }
+    const wrapper = mount(FlashcardExercise, { props: { exercise: cafe } })
+    await wrapper.find('.speak-toggle').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true, wrong: [] })
   })
 
   it('a wrong spoken answer reveals the correct answer', async () => {
