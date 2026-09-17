@@ -1,25 +1,23 @@
 <script setup>
-// Progress screen: a words-known-by-day chart, expandable learned/mastered word
+// Progress screen: a words-known-by-day chart, searchable word explorer,
 // lists, per-CEFR-level coverage bars, the learner's weakest skills, and
 // achievement badges.
 import { computed, nextTick, onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { learnedCount, masteredCount, history, learnedWords, masteredWords, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar, cefrStats, partStats } from '../stores/progress.js'
+import { learnedCount, masteredCount, history, weakestSkills, earnedAchievements, state as progressState, batchProgress, currentStreak, longestStreak, dailyRecord, totalExercises, activityCalendar, cefrStats, partStats } from '../stores/progress.js'
 import { ACHIEVEMENTS } from '../lib/achievements.js'
 import { buildChart } from '../lib/progressChart.js'
+import { dayKey } from '../lib/streak.js'
 import { CEFR_ORDER } from '../lib/batches.js'
 import { curriculumParts } from '../stores/vocab.js'
 import AchievementBadge from '../components/AchievementBadge.vue'
+import ProgressWords from '../components/ProgressWords.vue'
 
 const router = useRouter()
 
 const points = computed(() => history())
 const skills = computed(() => weakestSkills())
-const showList = ref(null) // 'learned' | 'mastered' | null
-
-const learned = computed(() => learnedWords())
-const mastered = computed(() => masteredWords())
 
 // One bar per curriculum part (#674) — "A2 Part I", not the whole of A2, which
 // is years of study behind one unmoving bar. Each is drawn as three nested
@@ -91,6 +89,7 @@ const calendar = computed(() => {
 const streak = computed(() => currentStreak.value)
 const best = computed(() => longestStreak.value)
 const record = computed(() => dailyRecord.value)
+const todayCount = computed(() => progressState.activity[dayKey(Date.now())]?.count ?? 0)
 const total = computed(() => totalExercises.value)
 
 // Open the calendar scrolled to the most recent week, the way GitHub does.
@@ -128,9 +127,6 @@ function focus(id) {
   router.push({ path: '/session', query: { type: 'standard', focus: id } })
 }
 
-function toggle(which) {
-  showList.value = showList.value === which ? null : which
-}
 </script>
 
 <template>
@@ -153,6 +149,7 @@ function toggle(which) {
         <dl class="streak-stats">
           <div><dt>Best</dt><dd>{{ best }} days</dd></div>
           <div><dt>Record</dt><dd>{{ record }} / day</dd></div>
+          <div><dt>Today</dt><dd>{{ todayCount }} / day</dd></div>
           <div><dt>Total</dt><dd>{{ total }}</dd></div>
         </dl>
       </div>
@@ -331,19 +328,7 @@ function toggle(which) {
       </div>
     </div>
 
-    <!-- Learned / mastered word lists -->
-    <div class="row">
-      <button class="toggle" :class="{ active: showList === 'learned' }" @click="toggle('learned')">
-        Show learned ({{ learned.length }})
-      </button>
-      <button class="toggle" :class="{ active: showList === 'mastered' }" @click="toggle('mastered')">
-        Show mastered ({{ mastered.length }})
-      </button>
-    </div>
-    <ul v-if="showList" class="words card">
-      <li v-for="key in (showList === 'learned' ? learned : mastered)" :key="key" lang="ru">{{ key }}</li>
-      <li v-if="(showList === 'learned' ? learned : mastered).length === 0" class="muted">Nothing yet.</li>
-    </ul>
+    <ProgressWords />
 
     <!-- Weakest skills → focused sessions -->
     <div v-if="skills.length" class="card">
@@ -650,19 +635,6 @@ function toggle(which) {
 }
 .dot-mastered {
   fill: var(--gold);
-}
-.toggle.active {
-  border-color: var(--primary);
-}
-.words {
-  list-style: none;
-  margin: 0;
-  padding: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  max-height: 14rem;
-  overflow: auto;
 }
 .chips {
   gap: 0.5rem;

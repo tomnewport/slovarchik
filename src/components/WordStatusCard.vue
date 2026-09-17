@@ -1,33 +1,24 @@
 <script setup>
-// One of the home screen's two status cards — at-risk or slipped words.
+// The home screen's combined problem-word card (slipped and at-risk words).
 //
 // The rows are the batch rows' equal: each opens the word's progress card, and
 // each says on its face what dropped and what would put it back (the count on
 // an unmet pip, the plan's sentence underneath). Both cards render from the same
-// `buildStatusWordList` rows, so "at risk" and "slipped" differ in their copy
-// and colour, not in how much they explain.
-const props = defineProps({
-  /** 'risk' | 'slipped' — decides the accent colour and the heading copy. */
-  kind: { type: String, required: true },
+// `buildStatusWordList` rows, each with its own recovery explanation.
+defineProps({
   /** Rows from `buildStatusWordList` (lib/homeDashboard.js). */
   words: { type: Array, required: true },
 })
 defineEmits(['select'])
 
-const COPY = {
-  risk: { label: 'At risk', blurb: 'one wrong answer from slipping' },
-  slipped: { label: 'Slipped', blurb: 'dropped below their best state' },
-}
-
-const copy = COPY[props.kind] ?? COPY.risk
 </script>
 
 <template>
-  <div class="card status-card" :class="`${kind}-card`">
+  <div class="card status-card problem-card">
     <div class="status-header">
-      <span class="status-label" :class="`${kind}-label`">{{ copy.label }}</span>
+      <span class="status-label problem-label">Problem words</span>
       <span class="muted status-count">
-        {{ words.length }} word{{ words.length === 1 ? '' : 's' }} — {{ copy.blurb }}
+        {{ words.length }} word{{ words.length === 1 ? '' : 's' }} worth another look
       </span>
     </div>
     <div class="word-scroll">
@@ -79,16 +70,10 @@ const copy = COPY[props.kind] ?? COPY.risk
   display: grid;
   gap: 0.6rem;
 }
-.risk-card {
-  border-left: 4px solid var(--warn, #f59e0b);
-}
-.slipped-card {
+.problem-card {
   border-left: 4px solid var(--bad, #ef4444);
 }
-.risk-label {
-  color: var(--warn, #f59e0b);
-}
-.slipped-label {
+.problem-label {
   color: var(--bad, #ef4444);
 }
 .status-count {

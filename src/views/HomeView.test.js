@@ -157,7 +157,7 @@ describe('HomeView', () => {
 
   it('flags the unmet skills on a slipped word with a missing badge', () => {
     // A word that reached "learned" (peak 2) but whose attempts now only place
-    // it back at "learning" shows up under Slipped. Its not-yet-recovered
+    // it back at "learning" shows up under Problem words. Its not-yet-recovered
     // dimensions should be marked so the learner sees what to practise.
     progress.records = {
       'кот=cat': {
@@ -169,8 +169,9 @@ describe('HomeView', () => {
       },
     }
     const wrapper = mount(HomeView)
-    const card = wrapper.find('.slipped-card')
+    const card = wrapper.find('.problem-card')
     expect(card.exists()).toBe(true)
+    expect(card.find('.status-label').text()).toBe('Problem words')
     // At least one dimension is missing, and missing pips carry the badge class.
     const missing = card.findAll('.dim-missing')
     expect(missing.length).toBeGreaterThan(0)
@@ -186,7 +187,7 @@ describe('HomeView', () => {
       },
     }
     const wrapper = mount(HomeView)
-    const row = wrapper.find('.slipped-card .word-row')
+    const row = wrapper.find('.problem-card .word-row')
     expect(row.attributes('role')).toBe('button')
 
     await row.trigger('click')
@@ -201,10 +202,32 @@ describe('HomeView', () => {
         peak: 2,
       },
     }
-    const card = mount(HomeView).find('.slipped-card')
+    const card = mount(HomeView).find('.problem-card')
     expect(card.find('.row-plan').text()).toContain('Slipped from Learned back to Learning')
     // An unmet pip carries the figure it still owes, not a bare cross.
     expect(card.findAll('.dim-need').map((n) => n.text())).toContain('2')
+  })
+
+  it('puts slipped and at-risk words in the same problem card', () => {
+    vocabState.words = [{ key: 'дом=house', pos: 'noun', hasInflections: false }]
+    const passed = ['identification', 'usage', 'hearing'].flatMap((dimension) =>
+      [1, 2, 3].map((ts) => ({ dimension, level: 'learning', correct: true, ts })),
+    )
+    progress.records = {
+      'кот=cat': { word: 'кот=cat', events: [{ dimension: 'identification', level: 'learning', correct: true, ts: 1 }], peak: 2 },
+      'дом=house': {
+        word: 'дом=house', peak: 3,
+        events: [
+          ...passed,
+          ...[1, 2, 3].map((ts) => ({ dimension: 'speaking', level: 'learning', correct: true, ts })),
+          { dimension: 'hearing', level: 'learning', correct: false, ts: 4 },
+        ],
+      },
+    }
+    const wrapper = mount(HomeView)
+    expect(wrapper.findAll('.problem-card')).toHaveLength(1)
+    expect(wrapper.findAll('.problem-card .word-row')).toHaveLength(2)
+    expect(wrapper.find('.problem-card').text()).toContain('2 words')
   })
 
   it('offers a waiting update rather than taking it (#691)', async () => {

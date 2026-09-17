@@ -25,6 +25,7 @@ import {
   buildWordList,
   buildStatusWordList,
 } from '../lib/homeDashboard.js'
+import { problemKeys } from '../lib/progressWords.js'
 import BatchSearchAdd from '../components/BatchSearchAdd.vue'
 import WordStatusCard from '../components/WordStatusCard.vue'
 import WordProgressModal from '../components/WordProgressModal.vue'
@@ -118,8 +119,9 @@ const statusCtx = computed(() => ({
   hasContextDrill,
   hasInflections,
 }))
-const atRiskWords = computed(() => buildStatusWordList(atRisk.value, statusCtx.value))
-const slippedWords = computed(() => buildStatusWordList(lost.value, statusCtx.value))
+const problemWords = computed(() =>
+  buildStatusWordList(problemKeys(lost.value, atRisk.value), statusCtx.value),
+)
 
 function submitPendingReport(report) {
   window.open(report.url, '_blank', 'noopener')
@@ -265,18 +267,11 @@ const FOCUSED = [
       </button>
     </div>
 
-    <!-- At-risk and slipped words. Rows open the same word card as a batch
-         row, and each says what dropped and what would put it back. -->
+    <!-- Slipped and at-risk words share one list; each row still explains its
+         own recovery steps and opens the word card. -->
     <WordStatusCard
-      v-if="atRiskWords.length"
-      kind="risk"
-      :words="atRiskWords"
-      @select="selectedWord = $event"
-    />
-    <WordStatusCard
-      v-if="slippedWords.length"
-      kind="slipped"
-      :words="slippedWords"
+      v-if="problemWords.length"
+      :words="problemWords"
       @select="selectedWord = $event"
     />
 

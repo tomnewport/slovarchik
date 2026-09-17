@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 
 import { state as progress } from '../stores/progress.js'
 import { state as vocabState } from '../stores/vocab.js'
+import { dayKey } from '../lib/streak.js'
 
 const push = vi.fn()
 vi.mock('vue-router', () => ({ useRouter: () => ({ push }) }))
@@ -27,19 +28,23 @@ beforeEach(() => {
   progress.metWords = {}
   vocabState.partsDef = null
   vocabState.words = []
+  localStorage.clear()
   push.mockClear()
 })
 
 describe('ProgressView', () => {
-  it('renders the words-known chart and an expandable learned list', async () => {
+  it('renders the words-known chart and opens a known word from the combined list', async () => {
     vocabState.words = [{ key: 'дом=house', pos: 'noun', gender: 'm', hasInflections: false }]
     progress.records = { 'дом=house': masteredRecord('дом=house', Date.parse('2026-06-01T10:00:00Z')) }
 
     const wrapper = mount(ProgressView)
     expect(wrapper.find('.line-learned').exists()).toBe(true)
 
-    await wrapper.findAll('.toggle')[0].trigger('click') // Show learned
-    expect(wrapper.find('.words').text()).toContain('дом=house')
+    const row = wrapper.find('.explorer-row')
+    expect(row.text()).toContain('дом')
+    expect(row.text()).toContain('house')
+    await row.trigger('click')
+    expect(wrapper.find('.modal[aria-label="Word progress"]').exists()).toBe(true)
     // A single history day draws a dot (a lone line has nothing to stroke).
     expect(wrapper.find('.dot-learned').exists()).toBe(true)
   })
@@ -83,9 +88,51 @@ describe('ProgressView', () => {
     // Two consecutive active days ending today → a 2-day streak.
     expect(wrapper.find('.streak-num').text()).toBe('2')
     expect(wrapper.find('.streak-now').classes()).toContain('lit')
+    expect(wrapper.find('.streak-stats').text()).toContain('Today5 / day')
     // At least one cell has been painted with an HSV colour.
     const painted = wrapper.findAll('.cal-cell').filter((c) => c.attributes('style')?.includes('background'))
     expect(painted.length).toBeGreaterThanOrEqual(2)
+  })
+
+  it('shows zero today even when the personal record was on another day, and updates as activity arrives', async () => {
+    progress.activity = { '2025-01-01': { count: 12, correct: 10, hue: 40 } }
+    const wrapper = mount(ProgressView)
+    expect(wrapper.findAll('.streak-stats dd').map((n) => n.text())).toEqual(['1 days', '12 / day', '0 / day', '12'])
+    progress.activity[dayKey(Date.now())] = { count: 3, correct: 3, hue: 40 }
+    await wrapper.vm.$nextTick()
+    expect(wrapper.findAll('.streak-stats dd')[2].text()).toBe('3 / day')
+  })
+
+  it('searches unlearned and gloss-only words, and keeps a wishlist through remount', async () => {
+    vocabState.words = [
+      { key: 'кот=cat', ru: 'кот', headword: 'ко́т', meaning: 'cat', pos: 'noun' },
+      { key: 'кошка=cat', ru: 'кошка', headword: 'ко́шка', meaning: 'cat', pos: 'noun', learnable: false },
+    ]
+    const wrapper = mount(ProgressView)
+    await wrapper.find('input[type="search"]').setValue('cat')
+    expect(wrapper.findAll('.explorer-item')).toHaveLength(2)
+    await wrapper.find('.explorer-item .explorer-row').trigger('click')
+    expect(wrapper.find('.modal[aria-label="Word progress"]').exists()).toBe(true)
+    await wrapper.find('.modal-close').trigger('click')
+    await wrapper.find('.wishlist-add').trigger('click')
+    expect(wrapper.find('.wishlist').text()).toContain('ко́шка')
+    expect(JSON.parse(localStorage.getItem('slovarchik:vocabulary-wishlist:v1'))).toHaveLength(1)
+    wrapper.unmount()
+    const remounted = mount(ProgressView)
+    await remounted.vm.$nextTick()
+    expect(remounted.find('.wishlist summary').text()).toContain('(1)')
+  })
+
+  it('lets a missing Russian word join the wishlist and opens a prefilled issue at checkout', async () => {
+    const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+    const wrapper = mount(ProgressView)
+    await wrapper.find('input[type="search"]').setValue('ёжик')
+    await wrapper.find('.request-word').trigger('click')
+    await wrapper.find('.checkout').trigger('click')
+    const url = new URL(open.mock.calls[0][0])
+    expect(url.pathname).toBe('/tomnewport/slovarchik/issues/new')
+    expect(url.searchParams.get('body')).toContain('ёжик')
+    open.mockRestore()
   })
 
   it('shows a coverage bar per CEFR level, with the mastered slice inside it', () => {
