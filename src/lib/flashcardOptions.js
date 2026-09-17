@@ -15,6 +15,7 @@
 // containing a common letter.
 //
 // Pure and framework-free.
+import { foldLatinAccents } from './text.js'
 
 /** Show the shortlist only once the substring match is narrower than this. */
 export const OPTION_LIMIT = 10
@@ -55,7 +56,7 @@ export function buildOptions({
   keyOf = (o) => o.key,
   textOf = (o) => o.en,
 } = {}) {
-  const guess = stripBrackets(typed).toLowerCase()
+  const guess = foldLatinAccents(stripBrackets(typed)).toLowerCase()
   // Nothing typed yet: no autocomplete to offer (an empty guess substring-matches
   // the whole dictionary, which would just be noise).
   if (!guess) return []
@@ -63,7 +64,7 @@ export function buildOptions({
   const seen = new Set()
   const matches = []
   for (const o of pool) {
-    const text = stripBrackets(textOf(o)).toLowerCase()
+    const text = foldLatinAccents(stripBrackets(textOf(o))).toLowerCase()
     if (!text || !text.includes(guess)) continue
     const k = keyOf(o)
     if (seen.has(k)) continue

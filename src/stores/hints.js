@@ -12,6 +12,7 @@ import { alignOptsFor, formIndex, wordsByKey } from './vocab.js'
 import { state as progressState, stateOf } from './progress.js'
 import { senseGloss } from '../lib/phraseHint.js'
 import { alignedHintTokens } from '../lib/phraseAlign.js'
+import { buildSpeakingAid } from '../lib/speakingAid.js'
 import { buildGlossIndex, diagnose, diagnoseEnglish } from '../lib/confusables.js'
 import { STATES } from '../lib/progression.js'
 
@@ -80,6 +81,27 @@ export function hintTokensFor(phrase) {
   return alignedHintTokens(phrase, formIndex.value, alignOptsFor(phrase)).map(
     ({ text, hint }) => ({ text, hint: hintIfShowable(hint) }),
   )
+}
+
+/**
+ * The aids a speaking exercise offers for one sentence: the free dictionary of
+ * its non-target words and the blanked sentence behind the first hint (#733).
+ *
+ * Lives here rather than in the component because it needs the same two things
+ * `hintTokensFor` does — the surface-form index and the sentence's alignment
+ * options — and building either twice is pure waste. Unlike `hintTokensFor` it
+ * glosses every non-target word, learned or not: the drill is asking the
+ * learner to *produce* the sentence, so a word they can recognise is still one
+ * they may not be able to summon.
+ *
+ * @param {string} phrase  the Russian sentence
+ * @param {{targets?: string[], targetTokens?: string[]}} [about]  the word(s)
+ *   being assessed — never glossed, and blanked out of the sentence
+ * @returns {{dictionary: PlainObject[], skeleton: PlainObject[], hasSkeleton: boolean}}
+ */
+export function speakingAidFor(phrase, about = {}) {
+  const tokens = alignedHintTokens(phrase, formIndex.value, alignOptsFor(phrase))
+  return buildSpeakingAid(tokens, about)
 }
 
 /**

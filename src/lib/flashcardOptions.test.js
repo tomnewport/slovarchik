@@ -45,6 +45,15 @@ describe('buildOptions', () => {
     expect(out.map((o) => o.key)).toEqual(['d'])
   })
 
+  it('suggests an accented gloss for the unaccented spelling and vice versa', () => {
+    const cafes = [
+      { key: 'cafe', en: 'café', label: 'café' },
+      { key: 'other', en: 'coffee', label: 'coffee' },
+    ]
+    expect(buildOptions({ typed: 'cafe', pool: cafes }).map((o) => o.key)).toEqual(['cafe'])
+    expect(buildOptions({ typed: 'café', pool: [{ key: 'cafe', en: 'cafe' }] })).toHaveLength(1)
+  })
+
   it('hides the list until fewer than the limit match', () => {
     // Every word contains "o"? No — but build a wide field to test the cutoff.
     const wide = Array.from({ length: OPTION_LIMIT }, (_, i) => ({

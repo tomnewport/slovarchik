@@ -40,6 +40,20 @@ export function normalize(value) {
 }
 
 /**
+ * Fold accents on Latin letters in English answers (café → cafe), without
+ * changing Cyrillic letters such as й or ё. Removing every combining mark
+ * after NFD would merge й and и.
+ * @param {string} value
+ * @returns {string}
+ */
+export function foldLatinAccents(value) {
+  return String(value ?? '')
+    .normalize('NFD')
+    .replace(/(\p{Script=Latin})\p{M}+/gu, '$1')
+    .normalize('NFC')
+}
+
+/**
  * Compare two answers while preserving the position of their stress mark.
  * Case, whitespace and ё/е are still folded like `normalize`; the supported
  * acute-accent variants are canonicalised instead of removed.

@@ -10,7 +10,7 @@
 //   match    flashcards (produce the English)  (match-vocab, listen-match)
 //   wordbank assemble a translation          (translate-phrase, listen-translate)
 //   type     spell with the hintable keyboard (spell-word, spell-phrase, dictation)
-//   speak    repeat aloud                     (repeat-word, repeat-phrase)
+//   speak    say it aloud from the English     (repeat-word, repeat-phrase)
 //   inflect  fill an inflection table         (inflect-bank, inflect-keyboard)
 //   verb-contrast pick the aspect / motion partner per sentence, then conjugate
 //            (inflect-keyboard, emitted instead of the table for paired verbs)
@@ -406,9 +406,11 @@ function buildPhrase(practice, pi, ctx, make, kind) {
       // the English can annotate the ambiguous word (see phraseAmbiguity.js).
       ...(p.enNotes?.length ? { enNotes: p.enNotes } : {}),
     }
-    // For spelling (type) a phrase, record which token(s) are the word being
-    // assessed so a wrong answer only penalises the word if the slip was in it.
-    if (kind === 'type' && p.source) {
+    // Record which token(s) of the phrase are the word being assessed. Spelling
+    // (type) uses it so a wrong answer only penalises the word if the slip was
+    // in it; speaking uses it to know what to blank out of the sentence and
+    // leave out of the free dictionary (#733).
+    if ((kind === 'type' || kind === 'speak') && p.source) {
       const record = ctx.recordByKey.get(p.source)
       const tokens = record ? wordTokensInPhrase(p.ru, record) : []
       // Only set where the tokens were found, so the property is absent rather

@@ -34,7 +34,7 @@
 import { computed, nextTick, onBeforeUnmount, ref } from 'vue'
 
 import { phraseCorrect } from '../../lib/phrases.js'
-import { normalize } from '../../lib/text.js'
+import { foldLatinAccents, normalize } from '../../lib/text.js'
 import { buildOptions } from '../../lib/flashcardOptions.js'
 import { speak } from '../../lib/speech.js'
 import { gradeSpoken, listen, recognitionSupported } from '../../lib/recognition.js'
@@ -77,14 +77,16 @@ const answerLabel = computed(() => card.value?.label ?? answer.value)
 // A typed / selected candidate is right when it matches the gloss bar case,
 // punctuation, stress and articles.
 function isAnswer(text) {
-  return phraseCorrect(text, [answer.value])
+  return phraseCorrect(foldLatinAccents(text), [foldLatinAccents(answer.value)])
 }
 // A spoken answer is graded more forgivingly — letter overlap, like the speaking
 // drill — so a slightly mis-heard word still counts.
 function isSpokenAnswer(guesses) {
   const list = Array.isArray(guesses) ? guesses : [guesses]
-  if (list.some((g) => phraseCorrect(g, [answer.value]))) return true
-  return gradeSpoken(list, answer.value, SPEAK_THRESHOLD).correct
+  const expected = foldLatinAccents(answer.value)
+  const heard = list.map(foldLatinAccents)
+  if (heard.some((g) => phraseCorrect(g, [expected]))) return true
+  return gradeSpoken(heard, expected, SPEAK_THRESHOLD).correct
 }
 
 // --- Per-card state ---------------------------------------------------------
@@ -135,7 +137,9 @@ function pickOption(o) {
   if (revealed.value) return
   typed.value = o.label ?? o.en ?? ''
   const correct =
-    o.key === card.value?.key || normalize(o.label ?? o.en ?? '') === normalize(answerLabel.value)
+    o.key === card.value?.key ||
+    normalize(foldLatinAccents(o.label ?? o.en ?? '')) ===
+      normalize(foldLatinAccents(answerLabel.value))
   if (correct) succeed()
   else miss(typed.value)
 }

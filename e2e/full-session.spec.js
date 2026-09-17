@@ -127,6 +127,9 @@ async function solveSpeak(ex) {
     await ex.getByRole('button', { name: /Grade it yourself/ }).first().click()
   }
   await ex.getByRole('button', { name: /I said it/ }).first().click()
+  // Since #733 the verdict has its own step — the model answer and the word's
+  // facts — before the exercise reports back.
+  await ex.getByRole('button', { name: /Next/ }).first().click()
 }
 
 /** Inflection table — word-bank (DragTable) or keyboard (BlindEndings) variant. */
