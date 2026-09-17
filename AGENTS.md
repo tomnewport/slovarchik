@@ -157,6 +157,10 @@ src/
                         #     and leave the ground too wet to catch), and the curve the plane
                         #     flies. Pure and seeded, so a two-minute round can be simulated in a
                         #     millisecond — which is how DEFAULTS was tuned rather than by playing
+                        #   noise  — Perlin, and the fractal sum of it. There to warp the
+                        #     coordinates firewatch's Voronoi layout is looked up at: a Voronoi
+                        #     cell is a convex polygon, so the stands come out straight-edged
+                        #     unless something bends them
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)

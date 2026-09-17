@@ -11,6 +11,8 @@
 // on #731): `step` takes its own `dt` and `rng`, so a whole two-minute round
 // can be simulated in a millisecond.
 
+import { fbm2, perlin2 } from './noise.js'
+
 // ── The world ────────────────────────────────────────────────────────────
 // 100 × 100, because the pedagogy picked the axes: a coordinate is exactly the
 // two-digit range the learner is drilling. Nothing about the *display* follows
@@ -145,8 +147,8 @@ export function cellGlyph(kind, state, glyphs) {
 //    makes the difference between playing and not playing visible.
 //
 // Where they land, as the share of the forest lost over a two-minute round:
-//   left alone      ~24%     a drop every 8s   ~16%
-//   a drop every 6s  ~8%     a drop every 4s    ~3%
+//   left alone      ~24%     a drop every 8s   ~13%
+//   a drop every 6s  ~9%     a drop every 4s    ~4%
 export const DEFAULTS = {
   /** Chance per second that one burning cell lights one given neighbour. */
   spreadPerSecond: 0.052,
@@ -175,6 +177,16 @@ export const DEFAULTS = {
   gapRate: 0.05,
   /** Voronoi seeds. Few enough that stands are large and obviously mixed. */
   seeds: 28,
+  /** How far, in cells, the Perlin warp drags a stand's boundary about. */
+  warp: 22,
+  /**
+   * …over what distance, in cells, that warp turns. Shorter than the stands
+   * are wide, so a boundary wanders within itself rather than the whole
+   * diagram sliding; much shorter than this and the stands fray into islands.
+   */
+  warpScale: 18,
+  /** …and over what distance the canopy thins and thickens into glades. */
+  gapScale: 14,
 }
 
 /** @typedef {ReturnType<typeof generateForest>} World */
@@ -202,8 +214,19 @@ const NEIGHBOURS = [
  * Lay out a forest with Voronoi noise: a handful of seeds, each a species, and
  * every cell takes its nearest seed. That gives stands rather than static —
  * which matters because a fire spreading through one species reads as a front,
- * where a per-cell shuffle reads as noise. Houses and canopy gaps are then
- * scattered on top at random, as #726 asks.
+ * where a per-cell shuffle reads as noise.
+ *
+ * A Voronoi cell is a convex polygon, though, so a forest built on one alone
+ * has dead-straight edges between its stands and looks drawn rather than
+ * grown. So the *coordinates* are warped by a pair of Perlin fields before the
+ * nearest seed is looked up: the same diagram, the same stands, with
+ * boundaries that wander. A third field thins and thickens the canopy, so the
+ * gaps gather into glades instead of freckling the map evenly — without
+ * changing how much bare ground there is overall, because the weighting
+ * averages to one and the fire tuning above depends on how much of the map
+ * can burn.
+ *
+ * Houses stay uniformly random, as #726 asks.
  * @param {Partial<typeof DEFAULTS>} [opts]
  * @param {() => number} [rng]
  */
@@ -222,14 +245,23 @@ export function generateForest(opts = {}, rng = Math.random) {
     })
   }
 
+  // Two fields to drag the lookup about, and one for how open the canopy is.
+  // Each gets its own draw from `rng`, so they are independent.
+  const warpX = fbm2(perlin2(rng), 3)
+  const warpY = fbm2(perlin2(rng), 3)
+  const canopy = fbm2(perlin2(rng), 3)
+  const { warp, warpScale, gapScale } = settings
+
   const kind = new Uint8Array(SIZE * SIZE)
   for (let y = 0; y < SIZE; y++) {
     for (let x = 0; x < SIZE; x++) {
+      const wx = x + warp * warpX(x / warpScale, y / warpScale)
+      const wy = y + warp * warpY(x / warpScale, y / warpScale)
       let best = 0
       let bestD = Infinity
       for (const seed of seeds) {
-        const dx = seed.x - x
-        const dy = seed.y - y
+        const dx = seed.x - wx
+        const dy = seed.y - wy
         const d = dx * dx + dy * dy
         if (d < bestD) {
           bestD = d
@@ -240,13 +272,30 @@ export function generateForest(opts = {}, rng = Math.random) {
     }
   }
 
+  // How open the canopy is, cell by cell. Cubed, because the linear field
+  // gives a gentle wash where what reads as a forest is glades: mostly closed
+  // canopy with clearings in it. Then divided through by its own mean, so
+  // however the curve is shaped the map still ends up with exactly the bare
+  // ground `gapRate` asks for — the fire tuning above depends on how much of
+  // the map can burn, and it must not move when the look is adjusted.
+  const openness = new Float32Array(SIZE * SIZE)
+  let opennessTotal = 0
+  for (let i = 0; i < openness.length; i++) {
+    const x = i % SIZE
+    const y = (i - x) / SIZE
+    const open = Math.max(0, 0.5 + 0.5 * canopy(x / gapScale, y / gapScale))
+    openness[i] = open * open * open
+    opennessTotal += openness[i]
+  }
+  const opennessMean = opennessTotal / openness.length
+
   let houses = 0
   let burnable = 0
   for (let i = 0; i < kind.length; i++) {
     const roll = rng()
     if (TERRAIN[kind[i]].burns) {
       if (roll < settings.houseRate) kind[i] = HOUSE_KIND
-      else if (roll < settings.houseRate + settings.gapRate) {
+      else if (roll < settings.houseRate + (settings.gapRate * openness[i]) / opennessMean) {
         kind[i] = BARE_KINDS[Math.floor(rng() * BARE_KINDS.length)]
       }
     }

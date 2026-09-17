@@ -86,6 +86,77 @@ describe('generateForest', () => {
     expect(houses).toBeGreaterThan(0)
   })
 
+  it('bends its stand boundaries rather than drawing straight edges', () => {
+    // A Voronoi cell is a convex polygon, so an unwarped diagram's boundaries
+    // are line segments — the shortest a boundary can be. Warping the lookup
+    // makes them wander, which is longer. Measured as the number of cells with
+    // a differently-kinded neighbour, over a map with no gaps or houses on it
+    // so this counts the stand boundaries alone.
+    const edgeLength = (world) => {
+      let edge = 0
+      for (let y = 1; y < SIZE - 1; y++) {
+        for (let x = 1; x < SIZE - 1; x++) {
+          const k = world.kind[cellAt(x, y)]
+          if (k !== world.kind[cellAt(x + 1, y)] || k !== world.kind[cellAt(x, y + 1)]) edge++
+        }
+      }
+      return edge
+    }
+    const plain = { houseRate: 0, gapRate: 0 }
+    let warped = 0
+    let straight = 0
+    for (let seed = 1; seed <= 8; seed++) {
+      warped += edgeLength(generateForest(plain, mulberry32(seed)))
+      straight += edgeLength(generateForest({ ...plain, warp: 0 }, mulberry32(seed)))
+    }
+    expect(warped).toBeGreaterThan(straight * 1.3)
+  })
+
+  it('gathers its gaps into glades without changing how much bare ground there is', () => {
+    // Only the *sprinkled* gaps are in question here, not the bare stands the
+    // Voronoi seeds lay down, so each forest is masked against the same layout
+    // generated with no gaps at all — the same seed gives the same stands.
+    const measure = (opts, seed) => {
+      const full = generateForest(opts, mulberry32(seed))
+      const stands = generateForest({ ...opts, gapRate: 0, houseRate: 0 }, mulberry32(seed))
+      const sprinkled = (x, y) => {
+        const i = cellAt(x, y)
+        return !TERRAIN[full.kind[i]].burns && TERRAIN[stands.kind[i]].burns
+      }
+      let pairs = 0
+      let gaps = 0
+      for (let y = 0; y < SIZE - 1; y++) {
+        for (let x = 0; x < SIZE - 1; x++) {
+          if (!sprinkled(x, y)) continue
+          gaps++
+          if (sprinkled(x + 1, y)) pairs++
+          if (sprinkled(x, y + 1)) pairs++
+        }
+      }
+      return { clumping: pairs / gaps, gaps }
+    }
+
+    let glades = 0
+    let freckles = 0
+    let gladeGaps = 0
+    let freckleGaps = 0
+    for (let seed = 1; seed <= 8; seed++) {
+      const a = measure({}, seed)
+      // A canopy field sampled over a vast distance is flat: an even sprinkle.
+      const b = measure({ gapScale: 1e9 }, seed)
+      glades += a.clumping
+      freckles += b.clumping
+      gladeGaps += a.gaps
+      freckleGaps += b.gaps
+    }
+    // A gap next to another gap, more often than chance alone would put it.
+    expect(glades).toBeGreaterThan(freckles * 1.15)
+    // …and the same amount of bare ground either way, because the fire tuning
+    // depends on how much of the map can burn.
+    expect(gladeGaps / freckleGaps).toBeGreaterThan(0.92)
+    expect(gladeGaps / freckleGaps).toBeLessThan(1.08)
+  })
+
   it('is reproducible from a seed', () => {
     const a = generateForest({}, mulberry32(42))
     const b = generateForest({}, mulberry32(42))
