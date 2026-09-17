@@ -40,6 +40,11 @@ const failure = ref('')
 
 let ticker = null
 let advance = null
+// When this round's time is up, as a wall-clock instant. The countdown is read
+// from it rather than counted down a tick at a time: a backgrounded tab
+// throttles its timers heavily, and subtracting a fixed TICK_MS per callback
+// would quietly hand the player back however long the tab was asleep.
+let deadline = 0
 
 // Asked afresh each round rather than once at mount: voices load
 // asynchronously, so the answer early in a page's life is often a
@@ -88,12 +93,13 @@ function arm() {
   cut.value = []
   failure.value = ''
   msLeft.value = bomb.value.seconds * 1000
+  deadline = Date.now() + msLeft.value
   showText.value = !canHear.value
   showGloss.value = false
   phase.value = 'armed'
   say()
   ticker = setInterval(() => {
-    msLeft.value -= TICK_MS
+    msLeft.value = Math.max(0, deadline - Date.now())
     if (msLeft.value <= 0) explode('timeout')
   }, TICK_MS)
 }
@@ -101,6 +107,14 @@ function arm() {
 function start() {
   round.value = 1
   arm()
+}
+
+/** Leave the game. The clock and the voice have to go with it, or the round
+ *  keeps running underneath the start screen and detonates on top of it. */
+function stop() {
+  stopClock()
+  cancelSpeech()
+  phase.value = 'idle'
 }
 
 function explode(reason) {
@@ -213,8 +227,8 @@ onUnmounted(() => {
         @click="cutWire(w)"
       >
         <span class="lug" />
-        <span class="core" :style="wireStyle(w)" />
-        <span class="core" :style="wireStyle(w)" />
+        <span class="core left" :style="wireStyle(w)" />
+        <span class="core right" :style="wireStyle(w)" />
         <span class="lug" />
       </button>
     </div>
@@ -241,11 +255,11 @@ onUnmounted(() => {
       <p class="feedback bad" style="margin: 0">💥 {{ failure }}</p>
       <div class="row">
         <button class="primary" @click="start">Again</button>
-        <button @click="phase = 'idle'">Stop</button>
+        <button @click="stop">Stop</button>
       </div>
     </template>
     <p v-else-if="phase === 'defused'" class="feedback good" style="margin: 0">✓ Defused</p>
-    <button v-else style="justify-self: start" @click="phase = 'idle'">Stop</button>
+    <button v-else style="justify-self: start" @click="stop">Stop</button>
   </section>
 </template>
 
@@ -281,19 +295,21 @@ onUnmounted(() => {
   box-shadow: inset 0 -3px 6px rgb(0 0 0 / 25%);
 }
 
-.core:first-of-type {
+/* Named rather than positional: `:first-of-type` counts SPANS, and the first
+   and last spans in a wire are its lugs, so those selectors matched no core. */
+.core.left {
   border-radius: 3px 0 0 3px;
 }
 
-.core:last-of-type {
+.core.right {
   border-radius: 0 3px 3px 0;
 }
 
-.wire.cut .core:first-of-type {
+.wire.cut .core.left {
   margin-right: 1.25rem;
 }
 
-.wire.cut .core:last-of-type {
+.wire.cut .core.right {
   margin-left: 1.25rem;
 }
 

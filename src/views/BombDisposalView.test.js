@@ -63,8 +63,12 @@ beforeEach(() => {
   globalThis.indexedDB = new IDBFactory()
   rng.next = mulberry32(1)
   // Only the timers the view itself uses: fake-indexeddb completes its
-  // transactions on setImmediate, which must stay real.
-  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval'] })
+  // transactions on setImmediate, which must stay real. `Date` is faked too,
+  // because the countdown reads wall-clock time against a deadline rather than
+  // counting ticks — advancing the timers has to advance the clock with them.
+  vi.useFakeTimers({
+    toFake: ['setTimeout', 'clearTimeout', 'setInterval', 'clearInterval', 'Date'],
+  })
 })
 
 afterEach(() => {
@@ -206,6 +210,60 @@ describe('BombDisposalView', () => {
 
     expect(wrapper.vm.phase).toBe('armed')
     expect(wrapper.vm.cut).toEqual([first])
+  })
+
+  it('takes the clock and the voice with it when the player stops', async () => {
+    giveRussianVoice()
+    const wrapper = mount(BombDisposalView)
+    await start(wrapper)
+
+    const stop = wrapper.findAll('button').find((b) => b.text() === 'Stop')
+    await stop.trigger('click')
+    expect(wrapper.vm.phase).toBe('idle')
+    expect(window.speechSynthesis.cancel).toHaveBeenCalled()
+
+    // Left running, the round would detonate on top of the start screen.
+    vi.advanceTimersByTime(60_000)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.phase).toBe('idle')
+  })
+
+  it('counts down against the wall clock, not against ticks it might not get', async () => {
+    const wrapper = mount(BombDisposalView)
+    await start(wrapper)
+    const limit = wrapper.vm.bomb.seconds * 1000
+
+    // A backgrounded tab is throttled: time passes but the interval fires far
+    // less often than every TICK_MS. Counting callbacks would hand the player
+    // back everything the tab slept through.
+    vi.setSystemTime(Date.now() + limit - 500)
+    vi.advanceTimersByTime(100)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.phase).toBe('armed')
+    expect(wrapper.vm.msLeft).toBeLessThanOrEqual(500)
+
+    vi.setSystemTime(Date.now() + 600)
+    vi.advanceTimersByTime(100)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.vm.phase).toBe('boom')
+    expect(wrapper.text()).toContain('Out of time')
+  })
+
+  it('splits a cut wire into two halves the stylesheet can pull apart', async () => {
+    const wrapper = mount(BombDisposalView)
+    await start(wrapper)
+
+    // The gap is drawn on the two cores by name. They were once selected with
+    // :first-of-type / :last-of-type, which count spans — and the first and
+    // last span of a wire are its lugs, so the rules matched nothing.
+    const wire = wireButtons(wrapper)[0]
+    expect(wire.find('.core.left').exists()).toBe(true)
+    expect(wire.find('.core.right').exists()).toBe(true)
+
+    const [first] = safeOrder(wrapper)
+    await cutById(wrapper, first)
+    const cutWire = wrapper.findAll('button.wire').find((b) => b.classes().includes('cut'))
+    expect(cutWire.findAll('.core')).toHaveLength(2)
   })
 
   it('stops the clock when the view goes away', async () => {

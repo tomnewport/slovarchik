@@ -452,8 +452,24 @@ function shapePatternSet(wires, rng) {
 }
 
 /**
+ * What one arm of a conditional may ask for: a single named wire, or — when
+ * the board carries a pattern to name — every wire showing it. The second kind
+ * is what #728's own example asks for ("cut anything with a white stripe"), so
+ * without it the conditional levels would only ever say "cut the green wire".
+ */
+function branchArms(wires) {
+  const arms = wires.map((w) => plan([baseColor(w.color)]))
+  for (const w of wires) {
+    if (w.accent) arms.push(plan([withAccent(w.pattern, w.accent)]))
+  }
+  return arms
+}
+
+/**
  * "If there is no amber wire, cut … Otherwise cut …" The probe colour is
- * absent from the board half the time, so neither branch becomes the habit.
+ * absent from the board half the time, so neither branch becomes the habit,
+ * and the two arms are chosen to cut different wires — otherwise the condition
+ * is decoration and `ruleIssues` would refuse the rule anyway.
  */
 function shapeBranch(wires, spec, rng) {
   if (wires.length < 3) return null
@@ -462,12 +478,17 @@ function shapeBranch(wires, spec, rng) {
   const wantAbsent = rng() < 0.5
   const probe = wantAbsent ? pick(missing, rng) : pick(onBoard, rng)
   if (!probe) return null
-  const [a, b] = sample(wires, 2, rng)
+
+  const arms = shuffle(branchArms(wires), rng)
+  const cuts = (p) => stageTargets(p, wires).flat().join(',')
+  const then = arms[0]
+  const otherwise = arms.find((p) => cuts(p) !== cuts(then))
+  if (!otherwise) return null
   return {
     kind: 'branch',
     condition: { kind: 'absent', selector: baseColor(probe) },
-    then: plan([baseColor(a.color)]),
-    otherwise: plan([baseColor(b.color)]),
+    then,
+    otherwise,
   }
 }
 

@@ -454,6 +454,26 @@ suite('generateBomb', () => {
     expect(bomb.level).toBe(1)
   })
 
+  it('gives a conditional arm a pattern to name, not only a bare colour', () => {
+    // #728's own conditional is "…cut anything with a white stripe. Otherwise
+    // cut the green wire." Arms built solely from base colours can never say
+    // the first half, so the example would exist only in this test file.
+    let patterned = 0
+    let total = 0
+    for (let seed = 1; seed <= 80; seed += 1) {
+      const rng = mulberry32(seed)
+      for (const round of [6, 7]) {
+        const bomb = generateBomb(round, rng)
+        if (bomb.rule.kind !== 'branch') continue
+        total += 1
+        const arms = [bomb.rule.then, bomb.rule.otherwise]
+        if (arms.some((p) => p.stages.some((s) => s.kind === 'accent'))) patterned += 1
+      }
+    }
+    expect(total).toBeGreaterThan(0)
+    expect(patterned).toBeGreaterThan(0)
+  })
+
   it('reaches every shape across a sweep — no shape is dead code', () => {
     const seen = new Set()
     for (let seed = 1; seed <= 80; seed += 1) {
