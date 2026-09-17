@@ -129,19 +129,29 @@ export function recoveryPlan(events, word = {}, opts = {}) {
     .map((d) => step(events, repair, d, word, 'recover', now))
     .filter((s) => s.need > 0)
 
-  // Nothing outstanding at the repair level: the word is whole but riding on a
-  // wrong last answer somewhere, and holding on to it takes one correct answer
-  // in exactly that drill (a correct answer elsewhere leaves the wrong attempt
-  // as the pair's most recent — see `borderlineDimensions`).
-  const borderline = borderlineDimensions(events, word)
-  const steps = owed.length
-    ? owed
-    : borderline.map(({ level: l, dimension }) => step(events, l, dimension, word, 'defend', now))
+  // A mastered word can miss a learning skill without losing the mastery
+  // answers it already gave in other dimensions. Inspect both levels for actual
+  // shortfalls, but only after mastery was reached: an ordinary learned word
+  // has not yet attempted those criteria, so they are not a problem to recover.
+  if (repair === 'learning' && peak === 'mastered' && wordHasInflections(word)) {
+    owed.push(...applicableDimensions('mastery', word)
+      .map((d) => step(events, 'mastery', d, word, 'recover', now))
+      .filter((s) => s.need > 0))
+  }
 
-  // The level the row's pips should show. `repairLevel` only speaks for a word
-  // that still owes something; for a word that owes nothing the interesting
-  // level is wherever the risk sits — and the lower one when it sits at both,
-  // since a learning-level slip is the more consequential.
+  // A met dimension can still be riding on a wrong last answer. Include it
+  // even when another dimension is already broken, so each skill reports its
+  // own work independently. An owed dimension cannot also need defending.
+  const borderline = borderlineDimensions(events, word)
+  const steps = [
+    ...owed,
+    ...borderline
+      .filter(({ level: l, dimension }) => !owed.some((s) => s.level === l && s.dimension === dimension))
+      .map(({ level: l, dimension }) => step(events, l, dimension, word, 'defend', now)),
+  ]
+
+  // Keep the primary level for callers that need one summary level. The row
+  // itself reads each step's level, so it can show both when both need work.
   const level = owed.length || !borderline.length
     ? repair
     : borderline.some((b) => b.level === 'learning')

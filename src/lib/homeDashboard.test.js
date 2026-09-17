@@ -210,10 +210,10 @@ describe('buildStatusWordList', () => {
     expect(row.dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
   })
 
-  it('grades mastered words at the mastery level', () => {
+  it('leaves every dimension off a steady mastered word', () => {
     const [row] = buildStatusWordList(['кот=cat'], ctx)
     expect(row.state).toBe('mastered')
-    expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
+    expect(row.dims).toEqual([])
   })
 
   it('shows mastery pips for a word that slipped out of mastery', () => {
@@ -231,7 +231,7 @@ describe('buildStatusWordList', () => {
     expect(row.dims.every((d) => !d.met)).toBe(true)
   })
 
-  it('still shows learning pips when the learning level is what broke', () => {
+  it('shows only the learning skill that broke', () => {
     // A word that slipped all the way past `learned` owes learning work first,
     // even though it once reached mastery.
     const ctx2 = {
@@ -249,14 +249,8 @@ describe('buildStatusWordList', () => {
       hasContextDrill: () => true,
     }
     const [row] = buildStatusWordList(['кот=cat'], ctx2)
-    expect(row.dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
+    expect(row.dims.map((d) => d.name)).toEqual(['usage'])
     expect(row.dims.find((d) => d.name === 'usage').met).toBe(false)
-  })
-
-  it('grades an at-risk word with everything met by its current state', () => {
-    const [row] = buildStatusWordList(['кот=cat'], ctx)
-    expect(row.state).toBe('mastered')
-    expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
   })
 
   it('never grades an uninflected word at the mastery level', () => {
@@ -292,11 +286,9 @@ describe('buildStatusWordList', () => {
     expect(usage.need).toBe(2)
     // Two answers, and — because this mastery criterion is day-spaced — not
     // both in the same sitting.
-    expect(usage.hint).toBe('Usage — 2 correct answers, spread over two days')
-    // A met pip owes nothing and says so.
-    expect(
-      buildStatusWordList(['кот=cat'], ctx)[0].dims.find((d) => d.name === 'identification'),
-    ).toMatchObject({ need: 0, hint: 'Identification — met' })
+    expect(usage.hint).toBe('Mastery Usage — 2 correct answers, spread over two days')
+    // A met skill is not presented as a problem.
+    expect(buildStatusWordList(['кот=cat'], ctx)[0].dims).toEqual([])
   })
 
   it('marks the one pip an at-risk word is riding on', () => {
@@ -320,8 +312,51 @@ describe('buildStatusWordList', () => {
     // The risk is at the learning level, so that is the level the pips show —
     // the word's own state (mastered) would have pointed at the wrong table.
     expect(row.level).toBe('learning')
+    expect(row.dims.map((d) => d.name)).toEqual(['hearing'])
     expect(row.dims.filter((d) => d.atRisk).map((d) => d.name)).toEqual(['hearing'])
     expect(row.dims.every((d) => d.need === 0)).toBe(true)
+  })
+
+  it('shows only the missed hearing skill when a mastered word slips in learning', () => {
+    const events = [
+      ...met('learning', LEARNING_DIMS),
+      ...met('mastery', MASTERY_DIMS),
+      ev('hearing', 'learning', false, 9e12),
+      ev('hearing', 'learning', false, 9e12 + 1),
+    ]
+    const [row] = buildStatusWordList(['варежки=mittens'], {
+      records: { 'варежки=mittens': { word: 'варежки=mittens', events, peak: 3 } },
+      vocabByKey: new Map([['варежки=mittens', { pos: 'noun', ru: 'ва́режки' }]]),
+      stateOf: () => 'learning',
+      hasContextDrill: () => true,
+      hasInflections: () => true,
+      now: 9e12 + 2,
+    })
+    expect(row.dims.map((d) => [d.level, d.name])).toEqual([['learning', 'hearing']])
+    expect(row.dims[0].hint).toContain('Learning Hearing')
+    expect(row.plan.steps).toHaveLength(1)
+  })
+
+  it('keeps separate learning and mastery debts when both actually broke', () => {
+    const events = [
+      ...met('learning', LEARNING_DIMS),
+      ...met('mastery', MASTERY_DIMS),
+      ev('hearing', 'learning', false, 9e12),
+      ev('hearing', 'learning', false, 9e12 + 1),
+      ev('usage', 'mastery', false, 9e12 + 2),
+      ev('usage', 'mastery', false, 9e12 + 3),
+    ]
+    const [row] = buildStatusWordList(['варежки=mittens'], {
+      records: { 'варежки=mittens': { word: 'варежки=mittens', events, peak: 3 } },
+      vocabByKey: new Map([['варежки=mittens', { pos: 'noun', ru: 'ва́режки' }]]),
+      stateOf: () => 'learning',
+      hasContextDrill: () => true,
+      hasInflections: () => true,
+      now: 9e12 + 4,
+    })
+    expect(row.dims.map((d) => [d.level, d.name])).toEqual([
+      ['learning', 'hearing'], ['mastery', 'usage'],
+    ])
   })
 
   it('takes the inflection answer from the store, not the shaped vocab record', () => {
@@ -342,9 +377,9 @@ describe('buildStatusWordList', () => {
     expect(row.dims.map((d) => d.name)).toEqual(MASTERY_DIMS)
     expect(row.plan.headline).toContain('Slipped from Mastered back to Learned')
 
-    // And a word that genuinely has no table still stays at the learning level.
+    // No missing learning criteria: an uninflected word has no mastery debt.
     const flat = buildStatusWordList(['кот=cat'], { ...ctx2, hasInflections: () => false })
-    expect(flat[0].dims.map((d) => d.name)).toEqual(LEARNING_DIMS)
+    expect(flat[0].dims).toEqual([])
   })
 
   it('uses the same disambiguated gloss as current-batch rows', () => {

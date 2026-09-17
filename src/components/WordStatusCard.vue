@@ -1,33 +1,23 @@
 <script setup>
-// One of the home screen's two status cards — at-risk or slipped words.
+// The home screen's combined problem-word card (slipped and at-risk words).
 //
 // The rows are the batch rows' equal: each opens the word's progress card, and
-// each says on its face what dropped and what would put it back (the count on
-// an unmet pip, the plan's sentence underneath). Both cards render from the same
-// `buildStatusWordList` rows, so "at risk" and "slipped" differ in their copy
-// and colour, not in how much they explain.
-const props = defineProps({
-  /** 'risk' | 'slipped' — decides the accent colour and the heading copy. */
-  kind: { type: String, required: true },
+// each shows only the affected skills (with their learning/mastery level) and
+// what would put them back. The row's plan supplies the explanation underneath.
+defineProps({
   /** Rows from `buildStatusWordList` (lib/homeDashboard.js). */
   words: { type: Array, required: true },
 })
 defineEmits(['select'])
 
-const COPY = {
-  risk: { label: 'At risk', blurb: 'one wrong answer from slipping' },
-  slipped: { label: 'Slipped', blurb: 'dropped below their best state' },
-}
-
-const copy = COPY[props.kind] ?? COPY.risk
 </script>
 
 <template>
-  <div class="card status-card" :class="`${kind}-card`">
+  <div class="card status-card problem-card">
     <div class="status-header">
-      <span class="status-label" :class="`${kind}-label`">{{ copy.label }}</span>
+      <span class="status-label problem-label">Problem words</span>
       <span class="muted status-count">
-        {{ words.length }} word{{ words.length === 1 ? '' : 's' }} — {{ copy.blurb }}
+        {{ words.length }} word{{ words.length === 1 ? '' : 's' }} worth another look
       </span>
     </div>
     <div class="word-scroll">
@@ -49,15 +39,17 @@ const copy = COPY[props.kind] ?? COPY.risk
           <div class="word-dims">
             <span
               v-for="d in w.dims"
-              :key="d.name"
+              :key="`${d.level}:${d.name}`"
               class="dim-pip"
               :class="[
                 d.met ? 'dim-met' : d.attempts > 0 ? 'dim-partial' : 'dim-empty',
                 { 'dim-missing': d.need > 0, 'dim-risk': !d.need && d.atRisk },
               ]"
               :title="d.hint"
+              :aria-label="d.hint"
             >
               <span class="dim-glyph">{{ d.label }}</span>
+              <span class="dim-level" aria-hidden="true">{{ d.level === 'mastery' ? 'M' : 'L' }}</span>
               <!-- The badge carries the figure rather than a bare cross: "two
                    more correct answers" is actionable, "✕" is not. -->
               <span v-if="d.need > 0" class="dim-need">{{ d.need }}</span>
@@ -79,16 +71,10 @@ const copy = COPY[props.kind] ?? COPY.risk
   display: grid;
   gap: 0.6rem;
 }
-.risk-card {
-  border-left: 4px solid var(--warn, #f59e0b);
-}
-.slipped-card {
+.problem-card {
   border-left: 4px solid var(--bad, #ef4444);
 }
-.risk-label {
-  color: var(--warn, #f59e0b);
-}
-.slipped-label {
+.problem-label {
   color: var(--bad, #ef4444);
 }
 .status-count {
@@ -151,6 +137,17 @@ const copy = COPY[props.kind] ?? COPY.risk
   background: var(--bad, #ff5c5c);
   border-radius: 999px;
   box-shadow: 0 0 0 1.5px var(--card, #1d2745);
+}
+.dim-level {
+  position: absolute;
+  bottom: -0.15rem;
+  left: -0.15rem;
+  font-size: 0.55rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--muted);
+  background: var(--card);
+  border-radius: 2px;
 }
 .risk-need {
   background: var(--warn, #f59e0b);

@@ -29,11 +29,11 @@ const LEVEL_LABEL = { learning: 'Learning', mastery: 'Mastery' }
 // open: a heading that names the drop, and a line per skill saying its price.
 const RECOVERY_COPY = {
   slipped: {
-    badge: 'Slipped',
+    badge: 'Problem word',
     lead: 'This word has dropped below the best state it reached. To win it back:',
   },
   'at-risk': {
-    badge: 'At risk',
+    badge: 'Problem word',
     lead: 'Still meeting every criterion, but the last answer here was wrong — one more miss drops it. To secure it:',
   },
 }

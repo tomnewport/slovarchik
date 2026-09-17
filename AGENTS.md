@@ -71,7 +71,7 @@ src/
                         #   rather than from inside a session)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
-                        #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,
+                        #   BatchSearchAdd, WordProgressModal, WordStatusCard, ProgressWords, WordFacts,
                         #   AnnotatedEnglish, ComprehensionCheck, HintPassButton — the
                         #   🔥|Hints → 🤔|Pass help control the typing drills share, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
@@ -162,6 +162,7 @@ src/
                         #   comprehension  — what the Russian says that the English translation cannot (aspect, det/indet motion),
                         #     asked after a correct RU→EN answer; informational, never graded
                         #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
+                        #   progressWords/wordWishlist — searchable status rows and local vocabulary requests
                         #   progressChart  — axes, gridlines and stepped cumulative lines for the Progress
                         #     screen's words-known chart (a real time axis; idle weeks take up width)
                         #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
