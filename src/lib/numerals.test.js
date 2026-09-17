@@ -9,6 +9,8 @@ import {
   yearPhrase,
   pluralCategory,
   agree,
+  parseCardinal,
+  parseCardinals,
 } from './numerals.js'
 import { stripStress } from './text.js'
 
@@ -196,5 +198,54 @@ describe('count agreement', () => {
     expect(agree(2, год)).toBe('года')
     expect(agree(5, год)).toBe('лет')
     expect(agree(21, год)).toBe('год')
+  })
+})
+
+describe('reading cardinals back', () => {
+  it('round-trips every number the 0–99 drill can ask for', () => {
+    for (let n = 0; n <= 99; n++) {
+      expect(parseCardinal(cardinalNominative(n))).toBe(n)
+    }
+  })
+
+  it('does not need the stress marks the generator writes', () => {
+    expect(parseCardinal(stripStress(cardinalNominative(43)))).toBe(43)
+    expect(parseCardinal('COРOK')).toBe(null) // Latin look-alikes are not Cyrillic
+    expect(parseCardinal('СОРОК ТРИ')).toBe(43)
+  })
+
+  it('takes the feminine and neuter forms of one and two', () => {
+    expect(parseCardinal('одна')).toBe(1)
+    expect(parseCardinal('одно')).toBe(1)
+    expect(parseCardinal('две')).toBe(2)
+    expect(parseCardinal('два́дцать две')).toBe(22)
+  })
+
+  it('takes «нуль» as well as «ноль», and е for ё', () => {
+    expect(parseCardinal('нуль')).toBe(0)
+    expect(parseCardinal('ноль')).toBe(0)
+    expect(parseCardinal('семьдесят восемь')).toBe(78)
+  })
+
+  it('does not join a ten to a zero', () => {
+    expect(parseCardinals('двадцать ноль')).toEqual([20, 0])
+  })
+
+  it('reads a run of numbers, which is how a coordinate is typed', () => {
+    expect(parseCardinals('со́рок три два́дцать')).toEqual([43, 20])
+    expect(parseCardinals('  девяносто   девять  ноль ')).toEqual([99, 0])
+  })
+
+  it('says nothing was typed, rather than nothing was understood', () => {
+    expect(parseCardinals('')).toEqual([])
+    expect(parseCardinals('   ')).toEqual([])
+    expect(parseCardinal('')).toBe(null)
+  })
+
+  it('rejects a string with anything in it that is not part of a number', () => {
+    expect(parseCardinals('сорок собака')).toBe(null)
+    expect(parseCardinals('43')).toBe(null)
+    expect(parseCardinals('сто')).toBe(null)
+    expect(parseCardinal('сорок три два')).toBe(null)
   })
 })

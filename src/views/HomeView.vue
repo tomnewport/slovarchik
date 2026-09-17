@@ -72,6 +72,12 @@ const MINIGAMES = [
     label: 'Bomb disposal',
     skill: 'Colours, and following a spoken instruction to the letter.',
   },
+  {
+    to: '/firewatch',
+    icon: '🔥',
+    label: 'Firewatch',
+    skill: 'Building two-digit numbers, and saying them at speed.',
+  },
 ]
 
 function openDrill(to) {
