@@ -29,9 +29,7 @@ async function pick(option) {
   // no batch yet), continue straight into that session. Otherwise — the usual
   // case of choosing the next batch after finishing one — return home.
   if (route.query.next === 'session') {
-    const query = { type: String(route.query.type ?? 'standard') }
-    if (route.query.size) query.size = String(route.query.size)
-    router.push({ path: '/session', query })
+    router.push({ path: '/session', query: { type: String(route.query.type ?? 'standard') } })
     return
   }
   router.push('/')

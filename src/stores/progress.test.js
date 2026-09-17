@@ -446,7 +446,7 @@ describe('sessions', () => {
     setVocab(makeWords(20, { hasInflections: false }))
     await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1', 'w2'], size: 3 })
     await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
-    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(3))
+    const session = startSession({ type: 'standard' }, seededRng(3))
     expect(session.practices).toHaveLength(12)
     expect(session.pools).toHaveProperty('current')
     for (const p of session.practices) {
@@ -461,7 +461,7 @@ describe('sessions', () => {
     setVocab(makeWords(20, { hasInflections: true }))
     await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0'], size: 1 })
     // No mastery batch committed.
-    const session = startSession({ type: 'standard', size: 'super' }, seededRng(4))
+    const session = startSession({ type: 'standard' }, seededRng(4))
     expect(session.practices.every((p) => p.level === 'learning')).toBe(true)
   })
 
@@ -469,7 +469,7 @@ describe('sessions', () => {
     setVocab(makeWords(20, { hasInflections: true }))
     // Commit a mastery batch with a word that has not yet been mastered.
     await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w0'], size: 1 })
-    const session = startSession({ type: 'standard', size: 'super' }, seededRng(5))
+    const session = startSession({ type: 'standard' }, seededRng(5))
     expect(session.practices.some((p) => p.level === 'mastery')).toBe(true)
   })
 
@@ -479,7 +479,7 @@ describe('sessions', () => {
     await commitBatch({ name: 'animals', collection: 'animals', level: 'learning', color: 'green', words: ['w0', 'w1'], size: 2 })
     // Mastery batch: w2 (not yet mastered).
     await commitBatch({ name: 'animals', collection: 'animals', level: 'mastery', color: 'gold', words: ['w2'], size: 1 })
-    const session = startSession({ type: 'grammar', size: 'super' }, seededRng(6))
+    const session = startSession({ type: 'grammar' }, seededRng(6))
     const masteryPractices = session.practices.filter((p) => p.level === 'mastery')
     expect(masteryPractices.length).toBeGreaterThan(0)
     for (const p of masteryPractices) {
@@ -500,10 +500,10 @@ describe('sessions', () => {
       }
     }
     await recordAttempt({ word: 'w0', dimension: 'speaking', level: 'learning', correct: true })
-    // Over several super sessions, speaking should dominate because it's the only
+    // Over several standard sessions, speaking should dominate because it's the only
     // unmet dimension and its weakness weight gets boosted above the others.
     const practices = Array.from({ length: 5 }, (_, i) =>
-      startSession({ type: 'standard', size: 'super' }, seededRng(i + 100)).practices,
+      startSession({ type: 'standard' }, seededRng(i + 100)).practices,
     ).flat()
     const speakingFraction = practices.filter((p) => p.dimension === 'speaking').length / practices.length
     expect(speakingFraction).toBeGreaterThan(0.5)
@@ -530,7 +530,7 @@ describe('sessions', () => {
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false })
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'learning', correct: false })
     const practices = Array.from({ length: 8 }, (_, i) =>
-      startSession({ type: 'standard', size: 'super' }, seededRng(i + 300)).practices,
+      startSession({ type: 'standard' }, seededRng(i + 300)).practices,
     ).flat()
     const count = (dim) => practices.filter((p) => p.dimension === dim).length
     expect(count('speaking')).toBeGreaterThan(count('identification'))
@@ -560,7 +560,7 @@ describe('sessions', () => {
     expect(lost.value).toContain('w5')
     // w5 is in no committed batch and is below `learned`, so the reinforce pools
     // exclude it — only the current-pool fold gets it tested again.
-    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(11))
+    const session = startSession({ type: 'standard' }, seededRng(11))
     expect(session.pools.current).toContain('w5')
   })
 
@@ -578,7 +578,7 @@ describe('sessions', () => {
     // weakness is ~0; only the unmet-mastery boost tips selection toward the
     // identification practice that would finish the word.
     const practices = Array.from({ length: 5 }, (_, i) =>
-      startSession({ type: 'grammar', size: 'super' }, seededRng(i + 200)).practices,
+      startSession({ type: 'grammar' }, seededRng(i + 200)).practices,
     ).flat()
     const idFraction =
       practices.filter((p) => p.dimension === 'identification').length / practices.length
@@ -598,7 +598,7 @@ describe('sessions', () => {
       await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true, ts: now })
     }
     const usagePractices = Array.from({ length: 5 }, (_, i) =>
-      startSession({ type: 'grammar', size: 'super', now }, seededRng(i + 300)).practices,
+      startSession({ type: 'grammar', now }, seededRng(i + 300)).practices,
     )
       .flat()
       .filter((p) => p.level === 'mastery' && p.dimension === 'usage')
@@ -623,11 +623,11 @@ describe('sessions', () => {
       await recordAttempt({ word: 'w0', dimension: 'usage', level: 'mastery', correct: true, ts: now })
     }
     expect(stateOf('w0')).toBe('learned') // still unmastered — but blocked today
-    const session = startSession({ type: 'standard', size: 'super', now }, seededRng(32))
+    const session = startSession({ type: 'standard', now }, seededRng(32))
     expect(session.practices.length).toBeGreaterThan(0)
     expect(session.practices.every((p) => p.level === 'learning')).toBe(true)
     // Tomorrow the word can advance again, so mastery practices return.
-    const tomorrow = startSession({ type: 'standard', size: 'super', now: now + DAY }, seededRng(33))
+    const tomorrow = startSession({ type: 'standard', now: now + DAY }, seededRng(33))
     expect(tomorrow.practices.some((p) => p.level === 'mastery')).toBe(true)
   })
 
@@ -643,7 +643,7 @@ describe('sessions', () => {
     }
     // A grammar session has no learning-level practices to retreat to: the
     // day-blocked batch still fills the session (review beats an empty screen).
-    const session = startSession({ type: 'grammar', size: 'super', now }, seededRng(34))
+    const session = startSession({ type: 'grammar', now }, seededRng(34))
     expect(session.practices.length).toBeGreaterThan(0)
     for (const p of session.practices.filter((x) => x.level === 'mastery')) {
       expect(p.pool).toContain('w0')
@@ -659,7 +659,7 @@ describe('sessions', () => {
     await recordAttempt({ word: 'w5', dimension: 'hearing', level: 'learning', correct: false })
     expect(atRisk.value).toContain('w5')
     const atRiskPractices = Array.from({ length: 5 }, (_, i) =>
-      startSession({ type: 'standard', size: 'super' }, seededRng(i + 400)).practices,
+      startSession({ type: 'standard' }, seededRng(i + 400)).practices,
     )
       .flat()
       .filter((p) => p.bucket === 'atRisk')
@@ -683,7 +683,7 @@ describe('sessions', () => {
     // Mastery practices only ever draw from the current mastery batch, so
     // without the at-risk carve-out this word could never see the mastery
     // identification drill again — it would stay at risk forever.
-    const session = startSession({ type: 'standard', size: 'super' }, seededRng(41))
+    const session = startSession({ type: 'standard' }, seededRng(41))
     const derisking = session.practices.filter(
       (p) => p.level === 'mastery' && p.dimension === 'identification',
     )
@@ -781,7 +781,7 @@ describe('memory scheduler (#313)', () => {
     for (const d of ['identification', 'usage', 'hearing']) {
       await recordAttempt({ word: 'w1', dimension: d, level: 'learning', correct: true, ts: now - DAY })
     }
-    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(21))
+    const session = startSession({ type: 'standard' }, seededRng(21))
     const pool = session.pools.untested
     expect(pool.indexOf('w0')).toBeGreaterThanOrEqual(0)
     expect(pool.indexOf('w0')).toBeLessThan(pool.indexOf('w1'))
@@ -793,7 +793,7 @@ describe('memory scheduler (#313)', () => {
     // Simulate a legacy record: strip the schedule the attempts created.
     state.records.w0.schedule = {}
     await learnConfirmed('w1', Date.now() - DAY)
-    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(22))
+    const session = startSession({ type: 'standard' }, seededRng(22))
     const pool = session.pools.untested
     // w0's last attempt is ancient → more overdue than w1 even without a schedule.
     expect(pool.indexOf('w0')).toBeLessThan(pool.indexOf('w1'))
@@ -823,13 +823,13 @@ describe('confirmation reviews (#313)', () => {
     await recordAttempt({ word: 'w5', dimension: 'usage', level: 'learning', correct: false, ts: 1 + DAY })
     expect(stateOf('w5')).toBe('mastered') // criteria still met (uninflected)
     expect(state.records.w5.confirmFailedAt).toBe(1 + DAY)
-    const session = startSession({ type: 'standard', size: 'normal' }, seededRng(23))
+    const session = startSession({ type: 'standard' }, seededRng(23))
     expect(session.pools.current).toContain('w5')
     // A later correct spaced review finally confirms it and releases it.
     await recordAttempt({ word: 'w5', dimension: 'usage', level: 'learning', correct: true, ts: 2 + DAY })
     expect(state.records.w5.confirmedAt).toBe(2 + DAY)
     expect(state.records.w5.confirmFailedAt).toBeNull()
-    const after = startSession({ type: 'standard', size: 'normal' }, seededRng(24))
+    const after = startSession({ type: 'standard' }, seededRng(24))
     expect(after.pools.current).not.toContain('w5')
   })
 

@@ -20,13 +20,9 @@ function seededRng(seed) {
 }
 
 describe('sessionSize', () => {
-  it('standard offers quick / normal / super', () => {
-    expect(sessionSize('standard', 'quick')).toBe(4)
-    expect(sessionSize('standard', 'normal')).toBe(12)
-    expect(sessionSize('standard', 'super')).toBe(20)
-  })
-  it('standard defaults to normal when no size given', () => {
-    expect(sessionSize('standard')).toBe(SESSION_TYPES.standard.sizes.normal)
+  it('standard has a fixed twelve practices', () => {
+    expect(sessionSize('standard')).toBe(SESSION_TYPES.standard.size)
+    expect(sessionSize('standard')).toBe(12)
   })
   it('focused sessions are a fixed four practices', () => {
     for (const type of ['speaking', 'listening', 'words', 'phrases', 'grammar']) {
@@ -66,20 +62,22 @@ describe('allocateBuckets', () => {
 })
 
 describe('buildSession', () => {
-  it('produces one practice per slot for the requested size', () => {
-    const s = buildSession({ type: 'standard', size: 'super', rng: seededRng(1) })
-    expect(s.practices).toHaveLength(20)
-    expect(s.size).toBe(20)
+  it('produces twelve standard practices, even for legacy size options', () => {
+    for (const size of [undefined, 'quick', 'super']) {
+      const s = buildSession({ type: 'standard', size, rng: seededRng(1) })
+      expect(s.practices).toHaveLength(12)
+      expect(s.size).toBe(12)
+    }
   })
   it('tags learning-only sessions with buckets matching the 25/25/50 allocation', () => {
-    const s = buildSession({ type: 'standard', size: 'normal', levels: ['learning'], rng: seededRng(2) })
+    const s = buildSession({ type: 'standard', levels: ['learning'], rng: seededRng(2) })
     const counts = { atRisk: 0, untested: 0, current: 0 }
     for (const p of s.practices) counts[p.bucket]++
     expect(counts).toEqual(allocateBuckets(12))
   })
   it('reserves a third of the session for mastery when both levels are available', () => {
     // Both learning and mastery practices eligible (no `levels` filter).
-    const s = buildSession({ type: 'standard', size: 'normal', rng: seededRng(2) })
+    const s = buildSession({ type: 'standard', rng: seededRng(2) })
     expect(s.practices).toHaveLength(12)
     const mastery = s.practices.filter((p) => p.level === 'mastery')
     // A third of 12 = 4 mastery slots, all targeting the current batch —
@@ -92,20 +90,15 @@ describe('buildSession', () => {
     for (const p of learning) counts[p.bucket]++
     expect(counts).toEqual(allocateBuckets(8))
   })
-  it('always reserves at least one mastery slot in a small session', () => {
-    const s = buildSession({ type: 'standard', size: 'quick', rng: seededRng(7) })
-    expect(s.practices).toHaveLength(4)
-    expect(s.practices.filter((p) => p.level === 'mastery').length).toBeGreaterThanOrEqual(1)
-  })
   it('only uses practices eligible for the session type', () => {
     const s = buildSession({ type: 'grammar', rng: seededRng(3) })
     expect(s.practices.every((p) => p.content === 'inflection')).toBe(true)
   })
   it('weights practice choice towards the weakest dimension', () => {
     const weakness = { ...evenWeakness(), usage: 1000 }
-    const s = buildSession({ type: 'standard', size: 'super', weakness, rng: seededRng(4) })
+    const s = buildSession({ type: 'standard', weakness, rng: seededRng(4) })
     const usage = s.practices.filter((p) => p.dimension === 'usage').length
-    expect(usage).toBeGreaterThanOrEqual(15)
+    expect(usage).toBeGreaterThanOrEqual(8)
   })
   it('weights each level by its own needs when given a per-level weakness map', () => {
     // identification is heavy only for mastery; usage heavy only for learning.
@@ -115,7 +108,7 @@ describe('buildSession', () => {
       learning: { identification: 0.05, usage: 1000, hearing: 0.05, speaking: 0.05 },
       mastery: { identification: 1000, usage: 0.05, context: 0.05 },
     }
-    const s = buildSession({ type: 'standard', size: 'super', weakness, rng: seededRng(8) })
+    const s = buildSession({ type: 'standard', weakness, rng: seededRng(8) })
     const learning = s.practices.filter((p) => p.level === 'learning')
     const mastery = s.practices.filter((p) => p.level === 'mastery')
     // Learning slots favour usage (its heavy dimension), not identification.
@@ -135,7 +128,7 @@ describe('buildSession', () => {
       learning: { identification: 1000, usage: 0.05, hearing: 0.05, speaking: 0.05 },
       atRisk: { identification: 0.05, usage: 0.05, hearing: 1000, speaking: 0.05 },
     }
-    const s = buildSession({ type: 'standard', size: 'super', levels: ['learning'], weakness, rng: seededRng(9) })
+    const s = buildSession({ type: 'standard', levels: ['learning'], weakness, rng: seededRng(9) })
     const atRisk = s.practices.filter((p) => p.bucket === 'atRisk')
     expect(atRisk.length).toBeGreaterThan(0)
     expect(atRisk.filter((p) => p.dimension === 'hearing').length).toBeGreaterThan(
@@ -147,14 +140,14 @@ describe('buildSession', () => {
     )
   })
   it('restricts practice levels when levels parameter is supplied', () => {
-    const s = buildSession({ type: 'standard', size: 'super', levels: ['learning'], rng: seededRng(5) })
+    const s = buildSession({ type: 'standard', levels: ['learning'], rng: seededRng(5) })
     expect(s.practices.every((p) => p.level === 'learning')).toBe(true)
-    expect(s.practices).toHaveLength(20)
+    expect(s.practices).toHaveLength(12)
   })
   it('mastery identification always comes before mastery usage', () => {
     // Force max weight on mastery dimensions to guarantee both types appear.
     const weakness = { identification: 1000, usage: 1000, hearing: 0, speaking: 0 }
-    const s = buildSession({ type: 'grammar', size: 'normal', weakness, rng: seededRng(6) })
+    const s = buildSession({ type: 'grammar', weakness, rng: seededRng(6) })
     const masteryPractices = s.practices.filter((p) => p.level === 'mastery')
     const firstUsageIdx = masteryPractices.findIndex((p) => p.dimension === 'usage')
     const lastIdIdx = [...masteryPractices].map((p, i) => p.dimension === 'identification' ? i : -1).filter(i => i >= 0).at(-1) ?? -1
@@ -166,7 +159,7 @@ describe('buildSession', () => {
     // A standard session interleaves both levels; the ordering must survive it
     // (#645). Learning slots keep their own shuffled positions either way.
     for (let seed = 1; seed <= 30; seed++) {
-      const s = buildSession({ type: 'standard', size: 'super', rng: seededRng(seed) })
+      const s = buildSession({ type: 'standard', rng: seededRng(seed) })
       const mastery = s.practices.filter((p) => p.level === 'mastery')
       const lastId = mastery.map((p) => p.dimension).lastIndexOf('identification')
       const firstUsage = mastery.findIndex((p) => p.dimension === 'usage')

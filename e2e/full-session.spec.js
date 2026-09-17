@@ -15,7 +15,7 @@ import { test, expect } from '@playwright/test'
 // whatever is dealt, so the test stays green across seeds and vocab changes.
 const SEED = Number(process.env.PW_SEED ?? 1)
 
-// Generous budget: a Normal session is a dozen practices and a matching board
+// Generous budget: a standard session is a dozen practices and a matching board
 // alone is a dozen cards, so the whole run is a few hundred interactions.
 test.setTimeout(180_000)
 
@@ -246,10 +246,10 @@ test('completes a full session and persists progress across a reload', async ({ 
 
   await page.goto('/')
 
-  // Start a Normal standard session — a broad mix so the run exercises the full
+  // Start a standard session — a broad mix so the run exercises the full
   // spread of exercise types. With an empty IndexedDB there is no batch yet, so
   // this routes through batch selection first.
-  await page.getByRole('button', { name: /Normal/ }).click()
+  await page.getByRole('button', { name: /Start session/ }).click()
 
   // Batch selection blocks on vocab sync; the options appearing is that signal.
   // Picking one commits it and continues straight into the session.
@@ -291,7 +291,7 @@ test('introduces a brand-new word before the first exercise that tests it', asyn
   }, SEED)
 
   await page.goto('/')
-  await page.getByRole('button', { name: /Normal/ }).click()
+  await page.getByRole('button', { name: /Start session/ }).click()
 
   const firstBatch = page.locator('.batch-select .option').first()
   await expect(firstBatch).toBeVisible({ timeout: 30_000 })

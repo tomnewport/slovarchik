@@ -11,9 +11,7 @@ test('homepage renders key sections', async ({ page }) => {
 
   // Standard practice section
   await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible()
-  await expect(page.getByRole('button', { name: /Quick/ })).toBeVisible()
-  await expect(page.getByRole('button', { name: /Normal/ })).toBeVisible()
-  await expect(page.getByRole('button', { name: /Super/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Start session 12 practices/ })).toBeVisible()
 
   // Focused session buttons
   await expect(page.getByRole('button', { name: /Speaking/ })).toBeVisible()

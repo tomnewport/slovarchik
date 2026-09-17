@@ -95,7 +95,7 @@ test('the app boots and Home renders with the network cut', async ({ page, conte
   // precache partition shows up right here, as a failed navigation.
   await expect(page).toHaveTitle(/Slovarchik/)
   await expect(page.getByRole('heading', { name: 'Practice' })).toBeVisible({ timeout: 60_000 })
-  await expect(page.getByRole('button', { name: /Quick/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /Start session 12 practices/ })).toBeVisible()
   await expect(page.getByText('Learning')).toBeVisible()
 })
 

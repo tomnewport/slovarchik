@@ -263,15 +263,13 @@ export function masteryBatchActive(ctx, now = Date.now()) {
  * @param snapshot the store snapshot passed to {@link makeContext}
  * @param {object} [opts]
  * @param {string} [opts.type] which shape of session to assemble
- * @param {string} [opts.size] size key for a standard session
- *   (quick/normal/super); {@link buildSession} turns it into a count
  * @param {string[]|null} [opts.focusKeys] restrict the draw to these words
  * @param {number} [opts.now] clock injection point for the due calculation
  * @param {() => number} [rng]
  */
 export function assembleSession(
   snapshot,
-  { type = 'standard', size, focusKeys = null, now = Date.now() } = {},
+  { type = 'standard', focusKeys = null, now = Date.now() } = {},
   rng = Math.random,
 ) {
   const ctx = makeContext(snapshot)
@@ -379,7 +377,7 @@ export function assembleSession(
   }
   // `weakness` is per-dimension until an at-risk override is folded in above,
   // at which point it is the per-level shape buildSession also accepts.
-  const session = buildSession({ type, size, weakness: /** @type {any} */ (weakness), rng, levels })
+  const session = buildSession({ type, weakness: /** @type {any} */ (weakness), rng, levels })
   let pools
   if (focusKeys) {
     // Focused session: every bucket is restricted to the filtered words, which
