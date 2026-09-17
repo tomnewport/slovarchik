@@ -51,6 +51,7 @@ describe('InflectExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: false,
+      flawless: false,
     })
     vocabState.words = saved
   })
@@ -73,6 +74,7 @@ describe('InflectExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: true,
+      flawless: true,
     })
   })
 
@@ -95,6 +97,7 @@ describe('InflectExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      flawless: false,
     })
   })
 
@@ -114,6 +117,7 @@ describe('InflectExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      flawless: false,
     })
   })
 
@@ -131,6 +135,35 @@ describe('InflectExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: false,
+      flawless: false,
+    })
+  })
+
+  // ── The 🔥 | Hints → 🤔 | Pass control (#725) ────────────────────────────
+  it('unlocks the keyboard hint on demand, and only then offers a pass', async () => {
+    const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
+    const help = wrapper.findComponent({ name: 'HintPassButton' })
+    expect(help.text()).toContain('Hints')
+    expect(keyboard.allowed).toBe(false)
+
+    await help.find('button').trigger('click')
+    expect(keyboard.allowed).toBe(true)
+    expect(keyboard.on).toBe(true)
+    await wrapper.vm.$nextTick()
+    expect(help.text()).toContain('Pass')
+  })
+
+  it('passing grades the table as it stands, blanks and all', async () => {
+    const wrapper = mount(InflectExercise, { props: { exercise: keyboardExercise() } })
+    const help = wrapper.findComponent({ name: 'HintPassButton' })
+    await help.find('button').trigger('click') // hints first
+    await help.find('button').trigger('click') // then pass
+    await wrapper.find('button.next').trigger('click')
+    expect(wrapper.emitted('done')[0][0]).toEqual({
+      correct: false,
+      correctedOnRetry: false,
+      double: false,
+      flawless: false,
     })
   })
 })

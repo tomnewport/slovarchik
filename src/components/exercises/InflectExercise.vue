@@ -15,7 +15,7 @@ import { paradigmFor } from '../../lib/paradigm.js'
 import { isTableClean, markTableClean } from '../../stores/progress.js'
 import { isCleanTable } from '../../lib/tableStage.js'
 import { speak } from '../../lib/speech.js'
-import { keyboard, resetHint, setHintAllowed } from '../../stores/keyboard.js'
+import { keyboard, resetHint, setHintAllowed, toggleHint } from '../../stores/keyboard.js'
 import { playFeedback } from '../../stores/settings.js'
 import DragTable from '../inflection/DragTable.vue'
 import BlindEndings from '../inflection/BlindEndings.vue'
@@ -23,6 +23,7 @@ import ParadigmShapeNote from '../inflection/ParadigmShapeNote.vue'
 import SpeakButton from '../SpeakButton.vue'
 import WordFacts from '../WordFacts.vue'
 import CelebrationBurst from '../CelebrationBurst.vue'
+import HintPassButton from '../HintPassButton.vue'
 
 const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
@@ -79,6 +80,23 @@ function onRetry() {
   playFeedback(false)
 }
 
+// The table itself, so a pass can reach into it and grade what is there (#725).
+const table = ref(null)
+
+// The first ask for help: unlock the keyboard hint and switch it on, so one
+// press both opens the door and walks through it.
+function askForHints() {
+  setHintAllowed(true)
+  if (!keyboard.on) toggleHint()
+}
+
+// Give up on the table: grade it as it stands — blanks and all — and reveal the
+// answers. Only reachable once help has been taken, so it is never the first
+// thing the learner reaches for.
+function pass() {
+  table.value?.giveUp?.()
+}
+
 function onGraded(correct, records = []) {
   graded.value = true
   wasCorrect.value = !!correct
@@ -101,6 +119,10 @@ function next() {
     correct: paradigm.value ? (retried.value ? false : wasCorrect.value) : true,
     correctedOnRetry: retried.value && wasCorrect.value,
     double: double.value,
+    // Right first time with no hint and no retry (#725). Unlike `double` this
+    // covers the word-bank variant too, which has no keyboard to hint and so
+    // never counts double — but can still be filled in perfectly.
+    flawless: !!paradigm.value && wasCorrect.value && !hintUsed.value && !retried.value,
   })
 }
 
@@ -142,6 +164,7 @@ onBeforeUnmount(() => {
       :is="component"
       v-if="paradigm"
       :key="exercise.id"
+      ref="table"
       :paradigm="paradigm"
       :staged="staged"
       :allow-retry="isKeyboard"
@@ -149,6 +172,13 @@ onBeforeUnmount(() => {
       @graded="onGraded"
     />
     <p v-else class="muted">No inflection table available.</p>
+
+    <!-- 🔥 while the table is being filled unaided; once the hint is on, the
+         fire goes out and what is left is a pass (#725). Keyboard tables only —
+         there is no hint to ask for in the word-bank variant. -->
+    <div v-if="isKeyboard && paradigm && !graded" class="row help-row">
+      <HintPassButton :hinted="hintUsed" @hints="askForHints" @pass="pass" />
+    </div>
 
     <!-- About this word (#586) — once the table is graded, right or wrong: the
          breakdown and the word's family explain the forms just filled in. -->
@@ -171,5 +201,9 @@ onBeforeUnmount(() => {
 /* Anchor the 🔥 burst over the Next button. */
 .next-row {
   position: relative;
+}
+/* Help sits out at the end of its own row, well away from Check. */
+.help-row {
+  justify-content: flex-end;
 }
 </style>

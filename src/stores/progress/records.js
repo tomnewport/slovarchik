@@ -55,7 +55,8 @@ const RECENT_LIMIT = 12
 //     sound when the event-window cap keeps the length steady, or when two
 //     attempts share a `ts`;
 //   * `known` — `markKnown` swaps in the relaxed criteria without appending
-//     any event.
+//     any event, and a wrong answer inside a current batch swaps them back
+//     out (#725) alongside one that it does append.
 //
 // The vocab side is covered by dropping the whole memo whenever `wordIndex`
 // rebuilds (it produces a fresh Map each time `vocabState.words` is replaced),
@@ -248,9 +249,11 @@ function ensureRecord(key) {
     state.records[key] = {
       word: key,
       events: [],
-      // "I know this word" (#321): when set, the pure model grades this word on
-      // relaxed single-answer criteria, so one clean pass of each exercise
-      // confirms it as learned/mastered instead of the usual repeated drilling.
+      // Vouched for by the learner (#321, and since #725 through the quick
+      // progression offer a flawless pass earns): when set, the pure model
+      // grades this word on relaxed single-answer criteria, so one clean pass
+      // of each exercise confirms it as learned/mastered instead of the usual
+      // repeated drilling.
       known: false,
       learnedAt: null,
       masteredAt: null,
@@ -349,6 +352,15 @@ export async function recordAttempt({
     return stateOf(word)
   }
   const rec = ensureRecord(word)
+  // Quick progression is fragile by design (#725). A word promoted on the
+  // learner's say-so is graded on the relaxed single-answer criteria, and the
+  // deal is that one wrong answer while it is still in a current batch ends
+  // that — no second chances. The attempt is graded exactly as any other; what
+  // goes is the relaxed bar, so the word now has to earn its state the long
+  // way. Outside a current batch the flag stands: a spaced review that goes
+  // wrong slips the word on its own (a window of one cannot survive a miss),
+  // and stripping the flag as well would punish the same answer twice.
+  if (!correct && rec.known && inCurrentBatch(word)) rec.known = false
   for (let i = 0; i < Math.max(1, times); i++) {
     rec.events.push({ dimension, level, correct: !!correct, ts })
   }
@@ -397,6 +409,35 @@ export async function recordAttempt({
 /** Whether the learner has flagged a word "I know this word". */
 export function isKnown(key) {
   return !!state.records[key]?.known
+}
+
+/** Is this word in one of the committed batches the learner is working now? */
+function inCurrentBatch(key) {
+  return ['learning', 'mastery'].some((level) => state[level]?.words?.includes(key))
+}
+
+/**
+ * The quick progression offer (#725): the state this word would be in right
+ * now if the learner said they already knew it — or null when there is nothing
+ * worth asking about.
+ *
+ * The question is only worth putting when the answer changes something, so the
+ * offer is withheld unless the relaxed criteria would lift the word *above*
+ * where it already stands, and lift it at least as far as `learned`. That test
+ * does the session's arithmetic for it: the relaxed criteria want one correct
+ * answer in every dimension the level is graded on, so a word only clears the
+ * bar once it has actually been drilled on each of them.
+ *
+ * @param {string} key
+ * @returns {'learned'|'mastered'|null} the state on offer
+ */
+export function quickProgressOffer(key) {
+  const rec = state.records[key]
+  if (!rec || rec.known) return null
+  const projected = wordState(events(key), { ...wordRecord(key), known: true })
+  if (rank(projected) < rank('learned')) return null
+  if (rank(projected) <= rank(stateOf(key))) return null
+  return projected === 'mastered' ? 'mastered' : 'learned'
 }
 
 /**

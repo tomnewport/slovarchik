@@ -28,6 +28,7 @@ import {
   resetProgress,
   markIntroduced,
   wasIntroduced,
+  quickProgressOffer,
   history,
   learnedWords,
   masteredWords,
@@ -1657,6 +1658,70 @@ describe('known words (#321)', () => {
     expect(wordProgressDetail('w0').known).toBe(false)
     await markKnown('w0')
     expect(wordProgressDetail('w0').known).toBe(true)
+  })
+})
+
+// The quick progression route (#725): the offer the session puts after a
+// flawless pass, and the deal the learner takes by accepting it.
+describe('quick progression (#725)', () => {
+  async function onePassLearning(word, ts = 1) {
+    for (const d of ['identification', 'usage', 'hearing', 'speaking']) {
+      await recordAttempt({ word, dimension: d, level: 'learning', correct: true, ts })
+    }
+  }
+
+  it('offers nothing until the relaxed criteria would actually lift the word', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    expect(quickProgressOffer('w0')).toBeNull() // never attempted
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: true })
+    // One dimension answered; the others have nothing at all, relaxed or not.
+    expect(quickProgressOffer('w0')).toBeNull()
+  })
+
+  it('offers `learned` once every learning dimension has a clean answer', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0')
+    expect(stateOf('w0')).toBe('learning')
+    expect(quickProgressOffer('w0')).toBe('learned')
+  })
+
+  it('offers nothing for a word already there on the standard criteria', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    for (let i = 0; i < 3; i++) await onePassLearning('w0', i + 1)
+    expect(stateOf('w0')).toBe('learned')
+    expect(quickProgressOffer('w0')).toBeNull()
+  })
+
+  it('offers nothing for a word the learner has already vouched for', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0')
+    await markKnown('w0')
+    expect(quickProgressOffer('w0')).toBeNull()
+  })
+
+  it('drops a promoted word back to the standard criteria on one wrong answer in the batch', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    commitBatch({ level: 'learning', name: 'batch', words: ['w0'], size: 1 })
+    await onePassLearning('w0')
+    await markKnown('w0')
+    expect(stateOf('w0')).toBe('learned')
+
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: false })
+    // No second chances: the relaxed bar is gone and the word is back in the
+    // lesson, where the standard criteria now hold it.
+    expect(isKnown('w0')).toBe(false)
+    expect(stateOf('w0')).toBe('learning')
+  })
+
+  it('leaves the flag alone when the wrong answer is outside the current batch', async () => {
+    setVocab(makeWords(1, { hasInflections: true }))
+    await onePassLearning('w0')
+    await markKnown('w0')
+    await recordAttempt({ word: 'w0', dimension: 'usage', level: 'learning', correct: false })
+    // Still vouched for — but a one-attempt window cannot survive a miss, so the
+    // word slips all the same.
+    expect(isKnown('w0')).toBe(true)
+    expect(stateOf('w0')).toBe('learning')
   })
 })
 

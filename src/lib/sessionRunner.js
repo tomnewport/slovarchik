@@ -188,6 +188,23 @@ export function dropQueued(s, shouldDrop) {
   return s
 }
 
+/**
+ * Every word the session still has an exercise queued for — the rest of this
+ * round plus the misses already collected for the next one.
+ *
+ * The quick progression offer (#725) waits for a word's session to be over
+ * before asking whether the learner already knows it, and "over" has to include
+ * the repeat round: a word waiting in `wrong` is coming back, and asking about
+ * it now would be asking in the middle of its drilling.
+ * @returns {Set<string>}
+ */
+export function remainingTargets(s) {
+  const keys = new Set()
+  for (const ex of s.queue.slice(s.pos)) for (const k of ex.targets ?? []) keys.add(k)
+  for (const ex of s.wrong) for (const k of ex.targets ?? []) keys.add(k)
+  return keys
+}
+
 /** Total planned exercises (the first-pass denominator). */
 export function plannedTotal(s) {
   return s.plan.length

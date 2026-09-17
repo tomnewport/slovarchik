@@ -17,6 +17,16 @@
 //   * the inline glosses under a word-bank cue, which are not opt-in at all,
 //     so only the audio variant of that drill can prove anything.
 //
+// Since #725 the Dictionary panel opens with the exercise rather than waiting
+// to be asked for, on the reasoning that the words it glosses are not the ones
+// being graded, so hunting for them was friction with nothing behind it. The
+// cost lands here: a typed phrase now reports `dictUsed` whenever there was a
+// dictionary to show, so it proves an encounter only for a phrase with nothing
+// unlearned in it — which has nothing to credit anyway. In practice the spoken
+// word-bank drill is now the source of encounters. The rule below is unchanged
+// and deliberately so: it is the panel's default that moved, and if it moves
+// back the evidence comes back with it.
+//
 // The spoken drills are deliberately not a source. Their grade comes from the
 // Web Speech API, which is language-model-assisted: it will happily return the
 // sentence it expected from half-mumbled input, so a "correct" there is much

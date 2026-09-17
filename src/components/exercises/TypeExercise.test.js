@@ -30,6 +30,17 @@ const exercise = {
   en: 'house',
 }
 
+/**
+ * Reach the "I don't know" (#725): it is the spent half of the 🔥 | Hints
+ * control, so help has to have been taken before it is on offer. Pressing the
+ * control once asks for hints; pressing it again opens the confirmation.
+ */
+async function giveUp(wrapper) {
+  const help = wrapper.find('button.hint-pass')
+  await help.trigger('click')
+  await help.trigger('click')
+}
+
 describe('TypeExercise', () => {
   it('shows the part of speech the answer should be (#503)', () => {
     const wrapper = mount(TypeExercise, { props: { exercise: { ...exercise, en: 'cold', pos: 'adjective' } } })
@@ -77,6 +88,7 @@ describe('TypeExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: true,
+      flawless: true,
       dictUsed: false,
       wordCorrect: true,
     })
@@ -111,6 +123,7 @@ describe('TypeExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: true,
+      flawless: true,
       dictUsed: false,
       wordCorrect: true,
     })
@@ -130,6 +143,7 @@ describe('TypeExercise', () => {
       correct: true,
       correctedOnRetry: false,
       double: false,
+      flawless: false,
       dictUsed: false,
       wordCorrect: true,
     })
@@ -158,6 +172,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: false,
       double: false,
+      flawless: false,
       dictUsed: false,
       wordCorrect: false,
     })
@@ -185,6 +200,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      flawless: false,
       dictUsed: false,
       wordCorrect: false,
     })
@@ -242,6 +258,7 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
+      flawless: false,
       dictUsed: false,
       wordCorrect: false,
     })
@@ -254,7 +271,7 @@ describe('TypeExercise', () => {
 
     await wrapper.find('input[lang="ru"]').setValue('сшить')
     await wrapper.find('button.check').trigger('click')
-    await wrapper.find('button.dunno').trigger('click')
+    await giveUp(wrapper)
     expect(wrapper.text()).not.toContain('Answer:')
     await wrapper.find('button.reveal').trigger('click')
 
@@ -276,7 +293,7 @@ describe('TypeExercise', () => {
 
   it('says what I don’t know costs, and grades nothing until it is confirmed', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
-    await wrapper.find('button.dunno').trigger('click')
+    await giveUp(wrapper)
 
     const confirm = wrapper.find('.dunno-confirm')
     expect(confirm.text()).toContain('I don’t know')
@@ -289,12 +306,12 @@ describe('TypeExercise', () => {
     expect(wrapper.find('.dunno-confirm').exists()).toBe(false)
     expect(wrapper.emitted('done')).toBeUndefined()
     // And the way back out is still there.
-    expect(wrapper.find('button.dunno').exists()).toBe(true)
+    expect(wrapper.find('button.hint-pass').text()).toContain('Pass')
   })
 
   it('gives up on an untouched prompt only through the confirmation', async () => {
     const wrapper = mount(TypeExercise, { props: { exercise } })
-    await wrapper.find('button.dunno').trigger('click')
+    await giveUp(wrapper)
     await wrapper.find('button.reveal').trigger('click')
 
     expect(wrapper.text()).toContain('Answer:')
@@ -407,7 +424,8 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: false,
       double: false,
-      dictUsed: false,
+      flawless: false,
+      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: true,
     })
   })
@@ -428,7 +446,8 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
-      dictUsed: false,
+      flawless: false,
+      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: true,
     })
   })
@@ -445,7 +464,8 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: false,
       double: false,
-      dictUsed: false,
+      flawless: false,
+      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: false,
     })
   })
@@ -572,7 +592,8 @@ describe('TypeExercise', () => {
       correct: false,
       correctedOnRetry: true,
       double: false,
-      dictUsed: false,
+      flawless: false,
+      dictUsed: true, // the Dictionary opens with a phrase now (#725)
       wordCorrect: true,
     })
   })
@@ -594,7 +615,7 @@ describe('TypeExercise', () => {
 
   it("lists the phrase's unlearned words alphabetically, never the assessed word", async () => {
     const wrapper = mount(TypeExercise, { props: { exercise: dictPhrase } })
-    await wrapper.find('.dict-toggle').trigger('click')
+    // Open from the start (#725) — nothing to click.
     const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
     // абзац (the assessed word) is excluded; the rest appear, alphabetised.
     expect(words).toEqual(['в', 'две', 'ошибки', 'этом'])
@@ -606,7 +627,6 @@ describe('TypeExercise', () => {
     const wrapper = mount(TypeExercise, {
       props: { exercise: { ...dictPhrase, targets: [], targetTokens: [] } },
     })
-    await wrapper.find('.dict-toggle').trigger('click')
     const words = wrapper.findAll('.dict-ru').map((n) => bare(n.text()))
     expect(words).toContain('абзаце')
   })

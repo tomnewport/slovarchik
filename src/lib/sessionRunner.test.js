@@ -12,6 +12,7 @@ import {
   advance,
   dropQueued,
   runnerSummary,
+  remainingTargets,
 } from './sessionRunner.js'
 
 // Minimal exercise descriptors.
@@ -313,5 +314,28 @@ describe('dropQueued (a word the learner says they already know)', () => {
     dropQueued(s, () => false)
     expect(s.queue).toHaveLength(1)
     expect(s.phase).toBe('exercise')
+  })
+})
+
+describe('remainingTargets (#725)', () => {
+  const ex = (id, targets) => ({ id, dimension: 'usage', practiceIndex: 0, targets })
+
+  it('names the words the rest of this round still asks about', () => {
+    const s = initRunner([ex('a', ['кот=cat']), ex('b', ['дом=house'])])
+    expect([...remainingTargets(s)]).toEqual(['кот=cat', 'дом=house'])
+    submit(s, true)
+    expect([...remainingTargets(s)]).toEqual(['дом=house'])
+  })
+
+  it('counts a word waiting in the repeat round as still coming back', () => {
+    const s = initRunner([ex('a', ['кот=cat']), ex('b', ['дом=house'])])
+    submit(s, false) // 'кот' missed — it will be repeated
+    expect([...remainingTargets(s)]).toContain('кот=cat')
+  })
+
+  it('is empty once the session is over', () => {
+    const s = initRunner([ex('a', ['кот=cat'])])
+    submit(s, true)
+    expect(remainingTargets(s).size).toBe(0)
   })
 })
