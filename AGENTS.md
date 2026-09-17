@@ -60,16 +60,17 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, /bomb,
-                        #   /firewatch, and the
+                        #   /firewatch, /reader/:bookId, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
                         #   BombDisposalView and FirewatchView are the minigames — #726's
                         #   between-practice interludes, launched for now from HomeView's
                         #   Minigames section rather than from inside a session.
+                        #   ReaderView paginates literature by stable sentence ID.
                         #   FirewatchView is the only canvas in the app: 10 000 cells
                         #   cannot be DOM nodes, so the terrain is painted once into an
                         #   offscreen canvas and patched per cell, and each frame blits

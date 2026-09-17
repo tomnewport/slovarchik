@@ -9,7 +9,7 @@ import ErrorToast from './components/ErrorToast.vue'
 // The session runner carries its own header (close + progress bar), so the app
 // chrome steps out of the way while a session is in progress.
 const route = useRoute()
-const showHeader = computed(() => route.name !== 'session')
+const showHeader = computed(() => route.name !== 'session' && route.name !== 'reader')
 </script>
 
 <template>

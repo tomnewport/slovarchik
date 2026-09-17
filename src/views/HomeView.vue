@@ -78,6 +78,12 @@ const MINIGAMES = [
     label: 'Firewatch',
     skill: 'Building two-digit numbers, and saying them at speed.',
   },
+  {
+    to: '/reader/preview',
+    icon: '📖',
+    label: 'Literature reader',
+    skill: 'Read Russian at your own pace.',
+  },
 ]
 
 function openDrill(to) {
