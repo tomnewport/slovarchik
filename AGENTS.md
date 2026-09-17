@@ -67,7 +67,8 @@ src/
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
                         #   BombDisposalView is the first minigame — #726's between-practice
-                        #   interludes, reachable on its own from the drill list for now)
+                        #   interludes, launched for now from HomeView's Minigames section
+                        #   rather than from inside a session)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, WordFacts,

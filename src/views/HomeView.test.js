@@ -75,12 +75,26 @@ describe('HomeView', () => {
   it('links to the standalone free-practice drills', async () => {
     const wrapper = mount(HomeView)
     const drills = wrapper.findAll('.drill')
-    expect(drills.length).toBe(12)
+    expect(drills.length).toBe(11)
     await drills[0].trigger('click') // Vocabulary
     expect(push).toHaveBeenCalledWith('/vocab')
+  })
 
-    await drills[drills.length - 1].trigger('click') // Bomb disposal
+  it('lists the minigames in their own section, apart from the drills', async () => {
+    const wrapper = mount(HomeView)
+    const games = wrapper.findAll('.game')
+    expect(games).toHaveLength(1)
+
+    // A game says which habit it is for — that is the reason to pick one.
+    expect(games[0].text()).toContain('Bomb disposal')
+    expect(games[0].text()).toContain('Colours')
+
+    await games[0].trigger('click')
     expect(push).toHaveBeenCalledWith('/bomb')
+
+    // Not also in the free-practice list: a game is a break from practice,
+    // not another drill.
+    expect(wrapper.findAll('.drill').map((d) => d.text())).not.toContain('Bomb disposal')
   })
 
   it('shows the committed batch name as a non-clickable card', () => {
