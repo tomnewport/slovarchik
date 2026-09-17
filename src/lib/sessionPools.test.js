@@ -322,7 +322,7 @@ describe('assembleSession', () => {
     for (let i = 0; i < 5; i++) records[`w${i}`] = { events: [ev('identification', 'learning', true)] }
     const session = assembleSession(
       snapshot(records, { learning: { words: ['w0', 'w1', 'w2'] } }),
-      { type: 'standard', size: 'normal' },
+      { type: 'standard' },
     )
     expect(session.practices.length).toBeGreaterThan(0)
     expect(session.pools).toHaveProperty('current')
@@ -343,7 +343,7 @@ describe('assembleSession', () => {
   })
 
   it('defaults focusKeys to null for an unfocused session', () => {
-    const session = assembleSession(snapshot({}), { type: 'standard', size: 'quick' })
+    const session = assembleSession(snapshot({}), { type: 'standard' })
     expect(session.focusKeys).toBeNull()
   })
 
@@ -415,7 +415,7 @@ describe('assembleSession', () => {
     const records = { w0: { events: learnedEvents(), peak: 3 } }
     const session = assembleSession(
       snapshot(records, { inflected: { w0: true }, lost: ['w0'] }),
-      { type: 'standard', size: 'normal' },
+      { type: 'standard' },
     )
     const mastery = session.practices.filter((p) => p.level === 'mastery')
     expect(mastery.length).toBeGreaterThan(0)
@@ -433,7 +433,7 @@ describe('assembleSession', () => {
         mastery: { words: ['w1'] },
         lost: ['w0'],
       }),
-      { type: 'standard', size: 'normal' },
+      { type: 'standard' },
     )
     const mastery = session.practices.filter((p) => p.level === 'mastery')
     expect(mastery.length).toBeGreaterThan(0)
@@ -449,7 +449,7 @@ describe('assembleSession', () => {
     }
     const session = assembleSession(
       snapshot(records, { inflected: { w0: true, w1: true }, lost: ['w0', 'w1'] }),
-      { type: 'standard', size: 'normal', focusKeys: ['w1'] },
+      { type: 'standard', focusKeys: ['w1'] },
     )
     for (const p of session.practices) expect(p.pool).not.toContain('w0')
   })

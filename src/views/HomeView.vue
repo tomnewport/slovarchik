@@ -34,16 +34,14 @@ const router = useRouter()
 // The word whose progress-detail modal is open, or null.
 const selectedWord = ref(null)
 
-function startSession(type, size) {
+function startSession(type) {
   if (!progress.learning) {
     // Carry the session intent so batch selection continues into practice
     // rather than dropping the learner back on the home screen.
-    const query = { level: 'learning', next: 'session', type }
-    if (size) query.size = size
-    router.push({ path: '/batch', query })
+    router.push({ path: '/batch', query: { level: 'learning', next: 'session', type } })
     return
   }
-  router.push({ path: '/session', query: size ? { type, size } : { type } })
+  router.push({ path: '/session', query: { type } })
 }
 
 // Open-ended standalone drills (no progress tracking) — kept reachable as free
@@ -236,21 +234,13 @@ const FOCUSED = [
       </div>
     </div>
 
-    <!-- Standard session: Quick / Normal / Super -->
+    <!-- Standard session -->
     <div class="card standard">
       <h2>Practice</h2>
       <p class="muted">A balanced mix — half new words, half reinforcement.</p>
-      <div class="row sizes">
-        <button class="primary size quick" @click="startSession('standard', 'quick')">
-          Quick<small>4</small>
-        </button>
-        <button class="primary size normal" @click="startSession('standard', 'normal')">
-          Normal<small>12</small>
-        </button>
-        <button class="primary size super" @click="startSession('standard', 'super')">
-          Super<small>20</small>
-        </button>
-      </div>
+      <button class="primary start-session" @click="startSession('standard')">
+        Start session <small>12 practices</small>
+      </button>
     </div>
 
     <!-- Focused sessions -->
@@ -483,18 +473,16 @@ const FOCUSED = [
 .standard h2 {
   margin: 0 0 0.25rem;
 }
-.sizes {
+.start-session {
+  width: 100%;
   margin-top: 0.75rem;
-}
-.size {
-  flex: 1 1 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.1rem;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 0.9rem 0.5rem;
 }
-.size small {
+.start-session small {
   opacity: 0.8;
   font-weight: 400;
 }

@@ -20,11 +20,11 @@ import { DIMENSIONS } from './progression.js'
 import { practicesForSession } from './practices.js'
 
 /**
- * Session types and their sizes (number of practices). Standard offers three
- * sizes; the focused sessions are a fixed four practices each.
+ * Session types and their sizes (number of practices). Standard has twelve
+ * practices; focused sessions have four each.
  */
 export const SESSION_TYPES = Object.freeze({
-  standard: { sizes: { quick: 4, normal: 12, super: 20 }, default: 'normal' },
+  standard: { size: 12 },
   speaking: { size: 4 },
   listening: { size: 4 },
   words: { size: 4 },
@@ -48,12 +48,9 @@ export const BUCKET_SHARES = Object.freeze({ atRisk: 0.25, untested: 0.25, curre
  */
 export const MASTERY_SESSION_SHARE = 1 / 3
 
-/** Resolve the practice count for a session type (+ size key for standard). */
-export function sessionSize(type, sizeKey) {
-  const spec = SESSION_TYPES[type]
-  if (!spec) return 0
-  if (spec.sizes) return spec.sizes[sizeKey] ?? spec.sizes[spec.default]
-  return spec.size
+/** Resolve the practice count for a session type. */
+export function sessionSize(type) {
+  return SESSION_TYPES[type]?.size ?? 0
 }
 
 /**
@@ -61,7 +58,7 @@ export function sessionSize(type, sizeKey) {
  * refresh buckets (at-risk / untested) round *down*, and the current-batch
  * bucket absorbs the whole remainder. This both keeps the counts summing to
  * `size` and guarantees the current batch is never rounded away to zero in a
- * short session: current always gets at least ⌈size/2⌉ slots, so a quick
+ * short session: current always gets at least ⌈size/2⌉ slots, so a small
  * learning portion of just one or two slots still spends them on the current
  * batch (where unlearned/slipped words live) rather than on retention.
  * @returns {{atRisk: number, untested: number, current: number}}
@@ -128,7 +125,6 @@ function weightedPick(items, weightOf, rng) {
  * Build a session.
  * @param {object} args
  * @param {string} [args.type] session type (see {@link SESSION_TYPES})
- * @param {string} [args.size] size key for a standard session (quick/normal/super)
  * @param {Partial<Record<string, number>>} [args.weakness] per-dimension weights;
  *   higher means weaker, so that dimension is favoured. Defaults to equal. May
  *   instead be a per-level map `{ learning: {...}, mastery: {...}, atRisk?: {...} }`
@@ -139,10 +135,10 @@ function weightedPick(items, weightOf, rng) {
  *   null takes every practice the type allows
  * @returns {{type, size, buckets, practices: PlainObject[]}}
  */
-export function buildSession({ type = 'standard', size: sizeKey, weakness = {}, rng = Math.random, levels = null } = {}) {
+export function buildSession({ type = 'standard', weakness = {}, rng = Math.random, levels = null } = {}) {
   const all = practicesForSession(type)
   const eligible = levels ? all.filter((p) => levels.includes(p.level)) : all
-  const size = sessionSize(type, sizeKey)
+  const size = sessionSize(type)
 
   const masteryPractices = eligible.filter((p) => p.level === 'mastery')
   const learningPractices = eligible.filter((p) => p.level === 'learning')

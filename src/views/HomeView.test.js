@@ -27,10 +27,10 @@ beforeEach(() => {
 describe('HomeView', () => {
   it('redirects to batch selection (carrying the session intent) when starting a session with no batch', async () => {
     const wrapper = mount(HomeView)
-    await wrapper.find('.size.quick').trigger('click')
+    await wrapper.find('.start-session').trigger('click')
     expect(push).toHaveBeenCalledWith({
       path: '/batch',
-      query: { level: 'learning', next: 'session', type: 'standard', size: 'quick' },
+      query: { level: 'learning', next: 'session', type: 'standard' },
     })
   })
 
@@ -43,15 +43,13 @@ describe('HomeView', () => {
     })
   })
 
-  it('launches the three standard session sizes once a batch is set', async () => {
+  it('offers one twelve-practice standard session once a batch is set', async () => {
     progress.learning = { name: 'animals', level: 'learning', words: [], size: 20 }
     const wrapper = mount(HomeView)
-    await wrapper.find('.size.quick').trigger('click')
-    await wrapper.find('.size.normal').trigger('click')
-    await wrapper.find('.size.super').trigger('click')
-    expect(push).toHaveBeenNthCalledWith(1, { path: '/session', query: { type: 'standard', size: 'quick' } })
-    expect(push).toHaveBeenNthCalledWith(2, { path: '/session', query: { type: 'standard', size: 'normal' } })
-    expect(push).toHaveBeenNthCalledWith(3, { path: '/session', query: { type: 'standard', size: 'super' } })
+    expect(wrapper.findAll('.start-session')).toHaveLength(1)
+    expect(wrapper.find('.start-session').text()).toContain('12 practices')
+    await wrapper.find('.start-session').trigger('click')
+    expect(push).toHaveBeenCalledExactlyOnceWith({ path: '/session', query: { type: 'standard' } })
   })
 
   it('launches each focused session type once a batch is set', async () => {

@@ -50,7 +50,7 @@ describe('BatchSelectView', () => {
     expect(push).toHaveBeenCalledWith('/')
   })
 
-  it('continues into the session when launched mid-session-start', async () => {
+  it('continues into the session without carrying a legacy size query', async () => {
     query.next = 'session'
     query.type = 'standard'
     query.size = 'quick'
@@ -65,7 +65,7 @@ describe('BatchSelectView', () => {
     expect(progress.state.learning).toBeTruthy()
     expect(push).toHaveBeenCalledWith({
       path: '/session',
-      query: { type: 'standard', size: 'quick' },
+      query: { type: 'standard' },
     })
   })
 
