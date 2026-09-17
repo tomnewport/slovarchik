@@ -4,6 +4,8 @@ import { RouterLink } from 'vue-router'
 import * as idb from '../lib/idb.js'
 import { pageEnd, pageParagraphs, pageStart } from '../lib/readerPage.js'
 import { previewBook } from '../lib/readerPreview.js'
+import { lookupReaderWord, readerTokens } from '../lib/readerDictionary.js'
+import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
 
 const book = ref(previewBook)
 const start = ref(0)
@@ -11,6 +13,7 @@ const end = ref(0)
 const revealedId = ref(null)
 const bookmarks = ref([])
 const showingBookmarks = ref(false)
+const openedWord = ref(null)
 const theme = ref('dark')
 const typeface = ref('serif')
 const readingPage = ref(null)
@@ -18,6 +21,9 @@ const measuringPage = ref(null)
 const visibleParagraphs = computed(() => pageParagraphs(book.value.sentences.slice(start.value, end.value)))
 const progress = computed(() => Math.round(100 * end.value / book.value.sentences.length))
 const savedSentences = computed(() => book.value.sentences.filter((sentence) => bookmarks.value.includes(sentence.id)))
+const definitions = computed(() => openedWord.value
+  ? lookupReaderWord(openedWord.value, formIndex.value, wordsByKey.value)
+  : [])
 let observer
 let resizeFrame
 let swipeStart = null
@@ -69,12 +75,14 @@ function scheduleLayout() {
 
 async function move(to) {
   start.value = to
+  openedWord.value = null
   await idb.setMeta(`reader:position:${book.value.id}`, book.value.sentences[to].id)
   layout()
   readingPage.value?.scrollTo(0, 0)
 }
 
 async function reveal(sentence) {
+  openedWord.value = null
   revealedId.value = revealedId.value === sentence.id ? null : sentence.id
   await nextTick()
   layout()
@@ -100,6 +108,11 @@ function pointerUp(event, sentence) {
 
 function clickReveal(sentence) {
   if (!suppressRevealClick) void reveal(sentence)
+}
+
+function openWord(surface) {
+  if (suppressRevealClick) return
+  openedWord.value = openedWord.value === surface ? null : surface
 }
 
 async function toggleBookmark(sentence) {
@@ -195,7 +208,7 @@ onBeforeUnmount(() => {
       <article ref="readingPage" class="reader-page" aria-label="Russian text">
         <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph">
           <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null">
-            <span>{{ sentence.ru }}</span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
+            <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex"><button v-if="token.word" class="reader-word" :aria-label="`Look up ${token.text}`" @click.stop="openWord(token.text)">{{ token.text }}</button><span v-else>{{ token.text }}</span></span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
               {{ sentence.en }}
               <span class="reader-translation-actions"><button :aria-pressed="bookmarks.includes(sentence.id)" @click="toggleBookmark(sentence)">{{ bookmarks.includes(sentence.id) ? 'Bookmarked' : 'Bookmark' }}</button></span>
@@ -204,6 +217,13 @@ onBeforeUnmount(() => {
         </p>
       </article>
       <div ref="measuringPage" class="reader-page reader-measure" aria-hidden="true" />
+      <aside v-if="openedWord" class="reader-dictionary" role="dialog" :aria-label="`Dictionary: ${openedWord}`">
+        <button class="reader-dictionary-close" aria-label="Close dictionary" @click="openedWord = null">×</button>
+        <strong>{{ openedWord }}</strong>
+        <p v-if="vocabState.status === 'loading' && !vocabState.words.length">Loading dictionary…</p>
+        <p v-else-if="!definitions.length">No dictionary entry for this form.</p>
+        <ul v-else><li v-for="entry in definitions" :key="entry.key"><strong>{{ entry.lemma }}</strong> <small>{{ entry.pos }}</small><br>{{ entry.meaning }}<small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small></li></ul>
+      </aside>
     </div>
 
     <nav class="reader-bottom" aria-label="Reading pages">
@@ -237,6 +257,15 @@ onBeforeUnmount(() => {
 .reader-sentence { touch-action: pan-y; }
 .reader-reveal { font: .65em system-ui, sans-serif; margin: 0 .12em; vertical-align: baseline; opacity: .5; }
 .reader button.reader-reveal { padding: 0 .12em; }
+.reader button.reader-word { padding: 0; font: inherit; line-height: inherit; border-radius: 0; }
+.reader button.reader-word:hover, .reader button.reader-word:focus-visible { text-decoration: underline; text-underline-offset: .15em; }
+.reader-dictionary { position: absolute; z-index: 1; bottom: 1rem; left: 1rem; right: 1rem; max-width: 28rem; max-height: 50%; overflow: auto; padding: .75rem 1rem; border: 1px solid var(--rule); border-radius: .6rem; background: var(--paper); box-shadow: 0 .4rem 1.5rem #0005; font: .9rem/1.4 system-ui, sans-serif; }
+.reader-dictionary p { margin: .5rem 0 0; }
+.reader-dictionary ul { margin: .5rem 0 0; padding: 0; list-style: none; }
+.reader-dictionary li + li { margin-top: .55rem; padding-top: .55rem; border-top: 1px solid var(--rule); }
+.reader-dictionary small { color: var(--subtle); }
+.reader-morph { display: block; margin-top: .15rem; }
+.reader-dictionary-close { float: right; font-size: 1.3rem; }
 .reader-translation { display: block; margin: .25em 0 .7em; padding-left: 1.2em; color: var(--subtle); font: .73em/1.5 Georgia, 'Times New Roman', serif; text-indent: 0; }
 .reader-translation-actions { display: block; margin-top: .25em; font: .7rem system-ui, sans-serif; }
 .reader-translation-actions button { padding: 0; font-size: inherit; color: var(--subtle); }
