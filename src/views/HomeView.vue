@@ -78,6 +78,18 @@ const MINIGAMES = [
     label: 'Inflection crush',
     skill: 'Reading a form on sight — which gender it agrees with, or which case it is in.',
   },
+  {
+    to: '/firewatch',
+    icon: '🔥',
+    label: 'Firewatch',
+    skill: 'Building two-digit numbers, and saying them at speed.',
+  },
+  {
+    to: '/maze',
+    icon: '🧭',
+    label: 'Meaning maze',
+    skill: 'Knowing a translation on sight — and knowing when it is not one.',
+  },
 ]
 
 function openDrill(to) {

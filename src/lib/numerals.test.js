@@ -9,6 +9,8 @@ import {
   yearPhrase,
   pluralCategory,
   agree,
+  parseCardinal,
+  parseCardinals,
 } from './numerals.js'
 import { stripStress } from './text.js'
 
@@ -196,5 +198,70 @@ describe('count agreement', () => {
     expect(agree(2, год)).toBe('года')
     expect(agree(5, год)).toBe('лет')
     expect(agree(21, год)).toBe('год')
+  })
+})
+
+describe('reading cardinals back', () => {
+  it('round-trips every number the map can name', () => {
+    // 0–9999 is the firewatch map's whole address space (#762), and the
+    // reverse lookup is built off the same atom tables that spell them.
+    for (let n = 0; n <= 9999; n++) {
+      expect(parseCardinal(cardinalNominative(n))).toBe(n)
+    }
+  })
+
+  it('assembles thousands, hundreds and the tail', () => {
+    expect(parseCardinal('\u0442\u044b\u0441\u044f\u0447\u0430')).toBe(1000)
+    expect(parseCardinal('\u0442\u044b\u0441\u044f\u0447\u0430 \u0434\u0432\u0435\u0441\u0442\u0438 \u0442\u0440\u0438')).toBe(1203)
+    expect(parseCardinal('\u0447\u0435\u0442\u044b\u0440\u0435 \u0442\u044b\u0441\u044f\u0447\u0438 \u0434\u0435\u0432\u044f\u043d\u043e\u0441\u0442\u043e \u0432\u043e\u0441\u0435\u043c\u044c')).toBe(4098)
+    expect(parseCardinal('\u043f\u044f\u0442\u044c \u0442\u044b\u0441\u044f\u0447')).toBe(5000)
+    expect(parseCardinal('\u0434\u0435\u0432\u044f\u0442\u044c\u0441\u043e\u0442')).toBe(900)
+    expect(parseCardinal('\u0434\u0432\u0435\u0441\u0442\u0438 \u0442\u0440\u0438')).toBe(203)
+  })
+
+  it('takes \u00ab\u043e\u0434\u043d\u0430\u0301 \u0442\u044b\u0301\u0441\u044f\u0447\u0430\u00bb as well as the bare \u00ab\u0442\u044b\u0301\u0441\u044f\u0447\u0430\u00bb', () => {
+    // The generator drops the multiplier before a scale noun; a learner
+    // saying it out does not have to.
+    expect(parseCardinal('\u043e\u0434\u043d\u0430 \u0442\u044b\u0441\u044f\u0447\u0430 \u0434\u0432\u0435\u0441\u0442\u0438 \u0442\u0440\u0438')).toBe(1203)
+  })
+
+  it('does not need the stress marks the generator writes', () => {
+    expect(parseCardinal(stripStress(cardinalNominative(4098)))).toBe(4098)
+    expect(parseCardinal('CO\u0420OK')).toBe(null) // Latin look-alikes are not Cyrillic
+    expect(parseCardinal('\u0421\u041e\u0420\u041e\u041a \u0422\u0420\u0418')).toBe(43)
+  })
+
+  it('takes the feminine and neuter forms of one and two', () => {
+    expect(parseCardinal('\u043e\u0434\u043d\u0430')).toBe(1)
+    expect(parseCardinal('\u043e\u0434\u043d\u043e')).toBe(1)
+    expect(parseCardinal('\u0434\u0432\u0435')).toBe(2)
+    expect(parseCardinal('\u0434\u0432\u0430\u0301\u0434\u0446\u0430\u0442\u044c \u0434\u0432\u0435')).toBe(22)
+  })
+
+  it('takes \u00ab\u043d\u0443\u043b\u044c\u00bb as well as \u00ab\u043d\u043e\u043b\u044c\u00bb, and \u0435 for \u0451', () => {
+    expect(parseCardinal('\u043d\u0443\u043b\u044c')).toBe(0)
+    expect(parseCardinal('\u043d\u043e\u043b\u044c')).toBe(0)
+    expect(parseCardinal('\u0441\u0435\u043c\u044c\u0434\u0435\u0441\u044f\u0442 \u0432\u043e\u0441\u0435\u043c\u044c')).toBe(78)
+  })
+
+  it('does not join a ten to a zero', () => {
+    expect(parseCardinals('\u0434\u0432\u0430\u0434\u0446\u0430\u0442\u044c \u043d\u043e\u043b\u044c')).toEqual([20, 0])
+  })
+
+  it('reads a run of separate numbers as separate numbers', () => {
+    expect(parseCardinals('\u0441\u043e\u0440\u043e\u043a \u0442\u0440\u0438 \u0434\u0432\u0430\u0434\u0446\u0430\u0442\u044c')).toEqual([43, 20])
+    expect(parseCardinals('\u0442\u044b\u0441\u044f\u0447\u0430 \u0442\u044b\u0441\u044f\u0447\u0430')).toEqual([1000, 1000])
+  })
+
+  it('says nothing was typed, rather than nothing was understood', () => {
+    expect(parseCardinals('')).toEqual([])
+    expect(parseCardinals('   ')).toEqual([])
+    expect(parseCardinal('')).toBe(null)
+  })
+
+  it('rejects a string with anything in it that is not part of a number', () => {
+    expect(parseCardinals('\u0441\u043e\u0440\u043e\u043a \u0441\u043e\u0431\u0430\u043a\u0430')).toBe(null)
+    expect(parseCardinals('4098')).toBe(null)
+    expect(parseCardinal('\u0442\u044b\u0441\u044f\u0447\u0430 \u0441\u043e\u0431\u0430\u043a')).toBe(null)
   })
 })
