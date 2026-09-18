@@ -107,6 +107,7 @@ src/
       phrases.js        #     sentences already presented — gates first-encounter
                         #       teaching glosses across drills (#740)
       batches.js        #     the current learning/mastery batches
+      wishlist.js       #     persistent requests for words in the next learning batch
       sessions.js       #     session assembly + the per-word / per-skill views
       analytics.js      #     the Progress screen's learned/mastered history
       lifecycle.js      #     load / reset

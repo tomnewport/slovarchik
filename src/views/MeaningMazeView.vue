@@ -35,6 +35,7 @@ import {
 import { vocab } from '../stores/vocab.js'
 import { loadSettings, playCelebration, playFeedback } from '../stores/settings.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
+import NextBatchButton from '../components/NextBatchButton.vue'
 
 /** How many cells across the magnifier shows. Odd, so it has a middle. */
 const LENS_SPAN = 5
@@ -72,6 +73,13 @@ const elapsed = computed(() => (finishedAt.value || now.value) - startedAt.value
 const head = computed(() => (path.value.length ? path.value[path.value.length - 1] : -1))
 const onPath = computed(() => new Set(path.value))
 const over = computed(() => solved.value || gaveUp.value)
+const lastTranslated = computed(() => {
+  if (!maze.value || path.value.length < 2) return null
+  const from = maze.value.cells[path.value.at(-2)]
+  const to = maze.value.cells[path.value.at(-1)]
+  return from.side === 'ru' && to.side === 'en'
+    ? { key: from.key, ru: from.text, en: to.text } : null
+})
 
 const lens = computed(() => (maze.value ? lensView(maze.value, lensCentre.value, LENS_SPAN) : null))
 
@@ -378,6 +386,10 @@ onUnmounted(() => {
             {{ shown[cell.i] }}
           </button>
         </div>
+        <div v-if="lastTranslated" class="row translated-word">
+          <span><span lang="ru">{{ lastTranslated.ru }}</span> — {{ lastTranslated.en }}</span>
+          <NextBatchButton :word-key="lastTranslated.key" />
+        </div>
         <!-- The refusal belongs beside the tiles it is about: on a phone the
              magnifier is where the player is looking, and on a wide screen the
              foot of the page is half a board away. -->
@@ -536,6 +548,8 @@ onUnmounted(() => {
   display: grid;
   gap: 0.5rem;
 }
+
+.translated-word { justify-content: space-between; gap: .4rem; font-size: .85rem; }
 
 .lens-grid {
   display: grid;

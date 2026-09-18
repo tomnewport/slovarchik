@@ -212,4 +212,38 @@ describe('buildBatchOptions', () => {
       expect(opt.words.some((k) => k.startsWith('g'))).toBe(false)
     }
   })
+
+  it('makes room for wished-for words while retaining two thirds from the current part', () => {
+    const current = words('fruit', 16, 'A1', ['fruit'])
+    const other = words('other', 24, 'A1', ['animals'])
+    const future = words('rare', 7, 'B1', ['fruit'])
+    const glue = GLUE_POS.slice(0, 3).map((pos, i) => ({ key: `glue${i}`, cefr: 'A1', pos }))
+    const wanted = [...current, ...future].map((w) => w.key)
+    const options = buildBatchOptions({ words: [...current, ...other, ...future, ...glue],
+      wishlistKeys: wanted, level: 'learning', rng: seededRng(14) })
+    expect(options.length).toBeGreaterThan(0)
+    const mostWished = options.reduce((best, option) =>
+      (option.wishlistCount ?? 0) > (best.wishlistCount ?? 0) ? option : best)
+    expect(mostWished.wishlistCount).toBe(23)
+    expect(mostWished.words).toHaveLength(23)
+    for (const option of options) {
+      expect(new Set(option.words).size).toBe(option.size)
+      expect(option.words.filter((key) => !key.startsWith('rare')).length).toBeGreaterThanOrEqual(
+        Math.ceil(option.size * 2 / 3))
+    }
+  })
+
+  it('finishes a thin part with a smaller batch, ignoring already learned wishlist entries', () => {
+    const current = words('a', 5, 'A1', ['animals'])
+    const future = words('b', 25, 'A2', ['animals'])
+    const options = buildBatchOptions({ words: [...current, ...future],
+      stateOf: stateOf({ b0: 'learned' }), wishlistKeys: ['b0', 'b1', 'b2', 'b3'],
+      level: 'learning', rng: seededRng(15) })
+    expect(options.length).toBeGreaterThan(0)
+    for (const option of options) {
+      expect(option.words.filter((key) => key.startsWith('a')).length).toBeGreaterThanOrEqual(
+        Math.ceil(option.size * 2 / 3))
+      expect(option.words).not.toContain('b0')
+    }
+  })
 })

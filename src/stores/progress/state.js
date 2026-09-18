@@ -13,6 +13,7 @@ import { STATES } from '../../lib/progression.js'
 import { learnableWords } from '../../lib/vocabBuild.js'
 
 export const BATCH_META_KEY = (level) => `batch:${level}`
+export const WISHLIST_META_KEY = 'batch:learning-wishlist'
 
 export const state = reactive({
   loaded: false,
@@ -22,6 +23,8 @@ export const state = reactive({
   /** the committed current batches, or null */
   learning: null,
   mastery: null,
+  /** Learnable word keys the learner wants offered in a future learning batch. */
+  learningWishlist: [],
   /** epoch ms of first use (for the "how long" stat on the Data screen) */
   firstUseAt: null,
   /** Set of achievement IDs the user has already been notified about. */

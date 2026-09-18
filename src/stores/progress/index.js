@@ -26,6 +26,7 @@
 // lifecycle and an import invalidate it through the exported `clearMemo`.
 
 export { state } from './state.js'
+export { queueForNextBatch, removeFromNextBatch } from './wishlist.js'
 export { persistenceSettled } from './persistence.js'
 export { hasMet, metCount, markMet, recordEncounter } from './encounters.js'
 export { firstPhraseEncounter } from './phrases.js'

@@ -32,6 +32,7 @@ import {
 import { loadSettings, playCelebration, playFeedback } from '../stores/settings.js'
 import CelebrationBurst from '../components/CelebrationBurst.vue'
 import WordFacts from '../components/WordFacts.vue'
+import NextBatchButton from '../components/NextBatchButton.vue'
 
 const ROWS = 6
 const COLS = 5
@@ -418,6 +419,7 @@ onUnmounted(clearTimers)
       <div class="row" style="gap: 0.5rem">
         <button @click="dismissCard">Got it</button>
         <button @click="keepCard">🔖 Read later</button>
+        <NextBatchButton :word-key="card.key" />
       </div>
     </div>
 
@@ -433,6 +435,7 @@ onUnmounted(clearTimers)
             <span class="muted"> — {{ w.en }}</span>
           </div>
           <WordFacts :word-key="w.key" />
+          <NextBatchButton :word-key="w.key" />
         </div>
       </div>
       <div class="row">

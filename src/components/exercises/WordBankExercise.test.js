@@ -197,8 +197,8 @@ describe('WordBankExercise type-ahead', () => {
 
   it('types a prefix and places the matching tile with Enter', async () => {
     const wrapper = mount(WordBankExercise, { props: { exercise } })
-    // Type "ci" to single out "city", then commit it with Enter.
-    for (const ch of 'ci') press(ch)
+    // The full word distinguishes "city" from distractors such as "civilisation".
+    for (const ch of 'city') press(ch)
     press('Enter')
     await wrapper.vm.$nextTick()
     expect(wrapper.find('.answer-line').text().toLowerCase()).toContain('city')

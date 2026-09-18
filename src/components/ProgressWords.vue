@@ -4,12 +4,14 @@
 // entries included); a local wishlist handles words absent from that corpus.
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
-import { state as progress, learnedWords, lost, atRisk } from '../stores/progress.js'
+import { state as progress, learnedWords, lost, atRisk, commitBatch } from '../stores/progress.js'
 import { state as vocabState, wordsByKey } from '../stores/vocab.js'
 import { stateOf } from '../stores/progress.js'
 import { problemKeys, progressWordRow, searchProgressWords, sortProgressWords } from '../lib/progressWords.js'
 import { addWishlistItem, buildWishlistIssueUrl, WISHLIST_LIMIT } from '../lib/wordWishlist.js'
+import { toPlain } from '../lib/plain.js'
 import WordProgressModal from './WordProgressModal.vue'
+import NextBatchButton from './NextBatchButton.vue'
 
 const STORAGE_KEY = 'slovarchik:vocabulary-wishlist:v1'
 const tab = ref('known')
@@ -35,6 +37,10 @@ const rows = computed(() => {
   ), order.value)
 })
 const visibleRows = computed(() => rows.value.slice(0, visibleCount.value))
+const queuedWords = computed(() => progress.learningWishlist.map((key) => {
+  const word = wordsByKey.value.get(key)
+  return { key, ru: word?.headword || word?.ru || key, en: word?.meaning || word?.en || '' }
+}))
 watch([query, tab, order], () => (visibleCount.value = 80))
 
 function sameRussian(a, b) {
@@ -87,6 +93,15 @@ function removeFromWishlist(ru) {
 function checkout() {
   const url = buildWishlistIssueUrl(wishlist.value)
   if (url) window.open(url, '_blank', 'noopener')
+}
+
+async function addCurrentBatch(row) {
+  if (!progress.learning || progress.learning.words.includes(row.key) ||
+    !['unknown', 'learning'].includes(stateOf(row.key))) return
+  const updated = toPlain(progress.learning)
+  updated.words.push(row.key)
+  updated.size = updated.words.length
+  await commitBatch(updated)
 }
 
 function stateLabel(row) {
@@ -158,16 +173,33 @@ function seenLabel(lastAt) {
         <button v-if="searching && !w.learnable" class="wishlist-add" :disabled="isWishlisted(w.ru) || wishlist.length >= WISHLIST_LIMIT" @click="addToWishlist(w.ru, w.fullEn)">
           {{ isWishlisted(w.ru) ? '✓ Wishlisted' : '+ Wishlist' }}
         </button>
+        <div v-if="searching && w.learnable" class="explorer-actions">
+          <NextBatchButton :word-key="w.key" />
+          <button v-if="progress.learning && !progress.learning.words.includes(w.key) && ['unknown', 'learning'].includes(w.state)"
+            :aria-label="`Add ${w.ru} to current batch`" @click="addCurrentBatch(w)">+ Current batch</button>
+        </div>
       </li>
     </ul>
     <p v-else class="muted empty-list">{{ searching ? 'No dictionary matches.' : tab === 'problem' ? 'No problem words.' : 'No learned words yet.' }}</p>
     <button v-if="rows.length > visibleCount" class="show-more" @click="visibleCount += 80">Show more ({{ rows.length - visibleCount }} remaining)</button>
 
+    <details class="learning-wishlist">
+      <summary>Next batch wishlist ({{ queuedWords.length }})</summary>
+      <p class="muted">Words you met while reading or playing. New learning batches reserve at least two thirds for your current curriculum part.</p>
+      <ul v-if="queuedWords.length">
+        <li v-for="word in queuedWords" :key="word.key">
+          <span lang="ru">{{ word.ru }}</span><span class="muted"> — {{ word.en }}</span>
+          <NextBatchButton :word-key="word.key" />
+        </li>
+      </ul>
+      <p v-else class="muted">No words saved for the next batch yet.</p>
+    </details>
+
     <button v-if="requestableQuery" class="request-word" :disabled="isWishlisted(requestableQuery) || wishlist.length >= WISHLIST_LIMIT" @click="addToWishlist(requestableQuery)">
       {{ isWishlisted(requestableQuery) ? '✓ On wishlist' : `+ Add “${requestableQuery}” to wishlist` }}
     </button>
     <details ref="wishlistDetails" class="wishlist">
-      <summary>🛒 Wishlist ({{ wishlist.length }})</summary>
+      <summary>🛒 Dictionary requests ({{ wishlist.length }})</summary>
       <p class="muted">Request words to add to lessons. Checkout opens a prefilled GitHub issue for you to submit.</p>
       <ul v-if="wishlist.length">
         <li v-for="item in wishlist" :key="item.ru">
@@ -211,14 +243,16 @@ button.explorer-row:hover, button.explorer-row:focus-visible { background: var(-
 .status-icon { font-size: 1rem; }
 .wishlist-add, .show-more, .request-word { font-size: 0.8rem; }
 .wishlist-add { flex-shrink: 0; }
+.explorer-actions { display: flex; gap: .3rem; flex-wrap: wrap; justify-content: end; padding: .3rem; }
+.explorer-actions button { font-size: .8rem; padding: .35rem .55rem; }
 .empty-list { padding: 0.6rem 0; }
 .show-more, .request-word { justify-self: start; }
-.wishlist { border-top: 1px solid var(--border); padding-top: 0.7rem; font-size: 0.85rem; }
-.wishlist summary { cursor: pointer; font-weight: 600; }
-.wishlist p { margin: 0.5rem 0; }
-.wishlist ul { list-style: none; padding: 0; margin: 0.4rem 0; display: grid; gap: 0.35rem; }
-.wishlist li { display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; }
-.wishlist li button { margin-left: auto; font-size: 0.75rem; }
+.wishlist, .learning-wishlist { border-top: 1px solid var(--border); padding-top: 0.7rem; font-size: 0.85rem; }
+.wishlist summary, .learning-wishlist summary { cursor: pointer; font-weight: 600; }
+.wishlist p, .learning-wishlist p { margin: 0.5rem 0; }
+.wishlist ul, .learning-wishlist ul { list-style: none; padding: 0; margin: 0.4rem 0; display: grid; gap: 0.35rem; }
+.wishlist li, .learning-wishlist li { display: flex; align-items: center; gap: 0.3rem; flex-wrap: wrap; }
+.wishlist li button, .learning-wishlist li button { margin-left: auto; font-size: 0.75rem; }
 .checkout { margin: 0.3rem 0; }
 @media (max-width: 430px) {
   .explorer-item { flex-wrap: wrap; }

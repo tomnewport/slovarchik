@@ -40,6 +40,9 @@ async function pick(option) {
   <section class="grid batch-select" :class="level" style="gap: 1rem">
     <h1>{{ level === 'mastery' ? 'Master next' : 'Learn next' }}</h1>
     <p class="muted">Pick a set of words to focus on.</p>
+    <p v-if="level === 'learning' && progress.state.learningWishlist.length" class="muted">
+      {{ progress.state.learningWishlist.length }} word{{ progress.state.learningWishlist.length === 1 ? '' : 's' }} on your next batch wishlist. Each option keeps at least two thirds from your current curriculum part.
+    </p>
 
     <p v-if="!ready" class="muted">Loading…</p>
 
@@ -51,6 +54,7 @@ async function pick(option) {
         @click="pick(opt)"
       >
         <strong class="name">{{ opt.name }}</strong>
+        <span v-if="opt.wishlistCount" class="pill">{{ opt.wishlistCount }} requested</span>
         <span class="muted size">{{ opt.size }} words</span>
       </button>
     </template>
@@ -68,6 +72,8 @@ async function pick(option) {
 <style scoped>
 .option {
   display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   text-align: left;

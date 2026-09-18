@@ -1,6 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { mount } from '@vue/test-utils'
+import 'fake-indexeddb/auto'
+import { IDBFactory } from 'fake-indexeddb'
+import { mount, flushPromises } from '@vue/test-utils'
 
+import * as idb from '../lib/idb.js'
+import * as progressStore from '../stores/progress.js'
 import { state as progress } from '../stores/progress.js'
 import { state as vocabState } from '../stores/vocab.js'
 import { dayKey } from '../lib/streak.js'
@@ -26,6 +30,8 @@ beforeEach(() => {
   progress.records = {}
   progress.activity = {}
   progress.metWords = {}
+  progress.learning = null
+  progress.learningWishlist = []
   vocabState.partsDef = null
   vocabState.words = []
   localStorage.clear()
@@ -224,5 +230,34 @@ describe('ProgressView', () => {
       expect.objectContaining({ path: '/session', query: expect.objectContaining({ type: 'standard' }) }),
     )
     expect(typeof push.mock.calls[0][0].query.focus).toBe('string')
+  })
+
+  it('queues a searched word, then adds it as a supplement to the current batch', async () => {
+    globalThis.indexedDB = new IDBFactory()
+    idb._resetForTests()
+    await progressStore.resetProgress()
+    await progressStore.loadProgress()
+    vocabState.words = [
+      { key: 'кот=cat', ru: 'кот', headword: 'ко́т', meaning: 'cat', pos: 'noun', cefr: 'A1' },
+      { key: 'дом=house', ru: 'дом', headword: 'до́м', meaning: 'house', pos: 'noun', cefr: 'A1' },
+    ]
+
+    const wrapper = mount(ProgressView)
+    await wrapper.find('input[type="search"]').setValue('cat')
+    expect(progress.loaded).toBe(true)
+    expect(progressStore.stateOf('кот=cat')).toBe('unknown')
+    expect(wrapper.find('.explorer-actions .next-batch').attributes('aria-pressed')).toBe('false')
+    await wrapper.find('.explorer-actions .next-batch').trigger('click')
+    await vi.waitFor(() => expect(progress.learningWishlist).toEqual(['кот=cat']))
+    await flushPromises()
+    expect(wrapper.find('.learning-wishlist summary').text()).toContain('(1)')
+
+    await progressStore.commitBatch({ level: 'learning', name: 'home', words: ['дом=house'], size: 1 })
+    await wrapper.findAll('.explorer-actions button').find((button) => button.text() === '+ Current batch').trigger('click')
+    await vi.waitFor(() => expect(progress.learningWishlist).toEqual([]))
+    await flushPromises()
+    expect(progress.learning.words).toEqual(['дом=house', 'кот=cat'])
+    expect(progress.learning.size).toBe(2)
+    expect(wrapper.find('.explorer-actions .next-batch').exists()).toBe(false)
   })
 })

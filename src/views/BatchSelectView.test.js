@@ -69,6 +69,19 @@ describe('BatchSelectView', () => {
     })
   })
 
+  it('marks options containing a requested word and consumes it when chosen', async () => {
+    const word = vocabState.words.find((w) => w.cefr === 'A1' && w.learnable !== false && w.pos === 'noun')
+    await progress.queueForNextBatch(word.key)
+    const wrapper = mount(BatchSelectView)
+    await flushPromises()
+    expect(wrapper.text()).toContain('1 word on your next batch wishlist')
+    const option = wrapper.findAll('.option').find((button) => button.text().includes('1 requested'))
+    expect(option).toBeTruthy()
+    await option.trigger('click')
+    await vi.waitFor(() => expect(progress.state.learningWishlist).toEqual([]))
+    expect(progress.state.learning.words).toContain(word.key)
+  })
+
   it('explains the lock when no mastery options are available', async () => {
     query.level = 'mastery' // nothing learned yet → mastery is locked
     const wrapper = mount(BatchSelectView)

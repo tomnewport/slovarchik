@@ -1,11 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { setImmediate } from 'node:timers'
 import 'fake-indexeddb/auto'
 import { IDBFactory } from 'fake-indexeddb'
-import { mount } from '@vue/test-utils'
+import { mount, flushPromises } from '@vue/test-utils'
 
 import InflectionCrushView from './InflectionCrushView.vue'
 import { state as vocabState } from '../stores/vocab.js'
-import { resetProgress } from '../stores/progress.js'
+import { resetProgress, loadProgress, state as progressState } from '../stores/progress.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 import {
   CHASE_MS_PER_FEATURE,
@@ -225,6 +226,18 @@ describe('InflectionCrushView', () => {
     expect(wrapper.find('.word-card').text()).toContain(card.lemma)
     expect(wrapper.find('.word-card').text()).toContain(card.en)
     expect(wrapper.find('.word-card').text()).toContain('on the board as')
+  })
+
+  it('lets a translated word card join the next batch wishlist', async () => {
+    await loadProgress()
+    const wrapper = await play('case')
+    await tapCell(wrapper, 0, 0)
+    const key = wrapper.vm.cards[0].key
+    await wrapper.find('.word-card .next-batch').trigger('click')
+    await new Promise((resolve) => setImmediate(resolve))
+    await flushPromises()
+    expect(progressState.learningWishlist).toContain(key)
+    wrapper.unmount()
   })
 
   it('keeps a card for the summary when the player asks to read it later', async () => {
