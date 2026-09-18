@@ -65,6 +65,11 @@ export const routes = [
     component: () => import('../views/BombDisposalView.vue'),
   },
   {
+    path: '/crush',
+    name: 'crush',
+    component: () => import('../views/InflectionCrushView.vue'),
+  },
+  {
     path: '/firewatch',
     name: 'firewatch',
     component: () => import('../views/FirewatchView.vue'),

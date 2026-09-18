@@ -80,7 +80,16 @@
     "92300 B limit. After merging meaning maze, entry JS is 92243 B, up from",
     "91865 B on the new main. The limit moves 93900 -> 94200 B, leaving 1957 B",
     "of headroom. Reader code remains lazy. Entry CSS is 4925 B and vocab is",
-    "1171168 B, both within their existing limits."
+    "1171168 B, both within their existing limits.",
+    "",
+    "Inflection crush (#751) needs no raise of its own \u2014 the same shape of cost",
+    "as the other games: a lazy route chunk, scoped CSS riding with it, and only",
+    "the route and the Minigames row reaching the entry \u2014 92252 -> 92375 B,",
+    "about 123 B, measured against main at the literature-reader merge. That",
+    "leaves 1825 B under the 94200 B above, the ~2 KB this number is",
+    "set with, so the limit is left alone deliberately: the headroom the previous",
+    "raise bought is there to be spent, and moving the number for every game",
+    "would make it a rubber stamp rather than a ratchet."
   ],
   "limits": {
     "entryJs": {
