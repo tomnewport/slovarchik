@@ -30,7 +30,20 @@ const menuButton = ref(null)
 const readingPage = ref(null)
 const measuringPage = ref(null)
 const visibleParagraphs = computed(() => pageParagraphs(book.value.sentences.slice(start.value, end.value)))
-const progress = computed(() => Math.round(100 * end.value / book.value.sentences.length))
+// The page is a range of text, not a fixed page number. Use Russian text length
+// so a short sentence and a long paragraph take proportionate space in the bar.
+const bookOffsets = computed(() => {
+  const offsets = [0]
+  for (const sentence of book.value?.sentences ?? []) offsets.push(offsets.at(-1) + sentence.ru.length + 1)
+  return offsets
+})
+const progressRange = computed(() => {
+  const offsets = bookOffsets.value
+  const total = Math.max(1, offsets.at(-1))
+  return { from: 100 * offsets[start.value] / total, to: 100 * offsets[end.value] / total }
+})
+const progressLabel = computed(() =>
+  `Current page: ${Math.floor(progressRange.value.from)}–${Math.ceil(progressRange.value.to)}% of book`)
 const savedSentences = computed(() => book.value.sentences.filter((sentence) => bookmarks.value.includes(sentence.id)))
 const definitions = computed(() => openedWord.value
   ? lookupReaderWord(openedWord.value, formIndex.value, wordsByKey.value)
@@ -327,15 +340,21 @@ onBeforeUnmount(() => {
 
     <nav class="reader-bottom" aria-label="Reading pages">
       <button :disabled="start === 0" aria-label="Previous page" @click="previous">←</button>
-      <span role="status">{{ progress }}% · {{ Math.min(start + 1, book.sentences.length) }} / {{ book.sentences.length }}</span>
+      <div class="reader-progress">
+        <div class="reader-progress-track" role="progressbar" aria-label="Book progress" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="Math.round(progressRange.to)" :aria-valuetext="progressLabel">
+          <span class="reader-progress-read" :style="{ width: `${progressRange.from}%` }" />
+          <span class="reader-progress-current" :style="{ left: `${progressRange.from}%`, width: `${progressRange.to - progressRange.from}%` }" />
+        </div>
+        <span class="reader-progress-label" role="status">{{ progressLabel }}</span>
+      </div>
       <button :disabled="end >= book.sentences.length" aria-label="Next page" @click="next">→</button>
     </nav>
   </section>
 </template>
 
 <style>
-.reader { --paper: #111723; --ink: #e9e5dd; --subtle: #a9a9a7; --rule: #39414d; position: relative; display: flex; flex-direction: column; height: 100dvh; min-height: 22rem; margin: -1.5rem -1rem 0; padding: 0 1rem; background: var(--paper); color: var(--ink); }
-.reader-light { --paper: #f9f5eb; --ink: #272a2b; --subtle: #626466; --rule: #d7d0c3; }
+.reader { --paper: #111723; --ink: #e9e5dd; --subtle: #a9a9a7; --rule: #39414d; --reader-accent: #8ab0ff; position: relative; display: flex; flex-direction: column; height: 100dvh; min-height: 22rem; margin: -1.5rem -1rem 0; padding: 0 1rem; background: var(--paper); color: var(--ink); }
+.reader-light { --paper: #f9f5eb; --ink: #272a2b; --subtle: #626466; --rule: #d7d0c3; --reader-accent: #315ad9; }
 .reader-sans { font-family: system-ui, sans-serif; }
 .reader-serif { font-family: Georgia, 'Times New Roman', serif; }
 .reader-top { display: flex; align-items: center; gap: .7rem; min-height: 4rem; border-bottom: 1px solid var(--rule); font-family: system-ui, sans-serif; }
@@ -385,5 +404,11 @@ onBeforeUnmount(() => {
 .reader-translation-actions a { color: var(--subtle); }
 .reader-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; border-top: 1px solid var(--rule); color: var(--subtle); font: .82rem system-ui, sans-serif; }
 .reader-bottom button { font-size: 1.5rem; min-width: 3rem; }
+.reader-progress { display: grid; flex: 1; gap: .3rem; min-width: 0; }
+.reader-progress-track { position: relative; height: .55rem; overflow: hidden; border-radius: 999px; background: var(--rule); }
+.reader-progress-read, .reader-progress-current { position: absolute; top: 0; bottom: 0; }
+.reader-progress-read { left: 0; background: var(--subtle); opacity: .55; }
+.reader-progress-current { min-width: 2px; border-radius: 999px; background: var(--reader-accent); }
+.reader-progress-label { text-align: center; font-variant-numeric: tabular-nums; }
 @media (max-width: 540px) { .reader-top { gap: .3rem; } .reader-page { padding: 1.2rem .3rem; } }
 </style>
