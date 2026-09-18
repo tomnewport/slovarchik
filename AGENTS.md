@@ -159,10 +159,15 @@ src/
                         #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
                         #     grammar that both SAYS the instruction in Russian and grades the cut,
                         #     so the sentence and the right answer cannot drift apart
-                        #   inflectionCrush  — the match-three minigame (#751): what each inflected
-                        #     form COULD be (кни́ги is genitive singular and nominative plural, so it
-                        #     matches as both), what clears, what falls, and what the chase window
-                        #     after a line is worth — a second per feature the line fired on
+                        #   inflectionCrush  — the falling-forms minigame (#751), Yoshi with
+                        #     grammar: what each inflected form COULD be (кни́ги is genitive
+                        #     singular and nominative plural, so it stacks as both), the four
+                        #     CATEGORIES a level deals from and the deck that carries only them,
+                        #     the whole-column swap, what two stacked forms sharing a category
+                        #     clear, the colour that clear reveals, and what the chase window
+                        #     after it is worth — a second per category the stack fired on.
+                        #     RUN is 2 rather than 3 on a measurement, not a preference: see
+                        #     its doc comment
                         #   meaningMaze  — the translation-path minigame (#752): a chessboard of
                         #     Russian and English words carved over a half-resolution lattice, and
                         #     the one invariant the game rests on — no unintended valid adjacency,

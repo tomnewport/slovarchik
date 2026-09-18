@@ -1,27 +1,35 @@
 // Inflection crush minigame (#751).
 //
-// Candy Crush with grammar: the tiles are inflected Russian forms and a line
-// matches on a *feature* — a gender in one mode, a case in the other — rather
-// than on a colour. Everything that decides what a tile could be, what clears,
-// what falls and what the chase window is worth lives here, pure and seedable;
-// the view owns the clock and the animation and nothing else.
+// Yoshi with grammar. Inflected Russian forms fall one at a time into four
+// columns; the player swaps whole columns underneath them; two stacked in one
+// column that share a grammatical CATEGORY collapse, revealing that category's
+// colour as they go. Everything that decides what a tile could be, what clears,
+// what falls and what a clear is worth lives here, pure and seedable; the view
+// owns the clock, the taps and the animation and nothing else.
 //
-// Three ideas carry the whole thing:
+// Four ideas carry the whole thing:
 //
-//   - A TILE is one surface form plus the features it *could* carry. A form is
-//     rarely one slot: кни́ги is genitive singular and nominative plural, но́вого
-//     is masculine and neuter, and an animate accusative wears the genitive's
-//     clothes. Reading a form as everything it might be is the skill the game
-//     drills, so a tile holds a *set* of features and a line under either
-//     reading is legitimate.
-//   - A MATCH is a maximal run of three or more consecutive tiles that all
-//     carry one feature. Per feature rather than per run, because the same run
-//     can fire twice — three tiles that are all both genitive and accusative
-//     are two matches, and the chase window below is paid per feature fired.
-//   - The CHASE window is what the fired features buy: one second each, to tap
-//     any other tile in the grid carrying one of them.
+//   - A TILE is one surface form plus the categories it *could* carry. A form
+//     is rarely one slot: кни́ги is genitive singular and nominative plural,
+//     но́вого is masculine and neuter, and an animate accusative wears the
+//     genitive's clothes. Reading a form as everything it might be is the skill
+//     the game drills, so a tile holds a *set* of categories and a stack under
+//     either reading is legitimate.
+//   - A LEVEL fixes four categories up front — all four genders, or four of the
+//     six cases — and deals only tiles that carry one of them. Four is what
+//     makes the board readable: with all six cases in play the stacks are a
+//     soup, and the player cannot hold what they are hunting for in their head.
+//   - The SWAP is Yoshi's: two adjacent columns exchange their whole stacks, as
+//     often as the player likes and at no cost. What is scarce is time, not
+//     moves — the next tile is always falling.
+//   - A CLEAR is a run of `RUN` or more tiles stacked in one column that all
+//     carry one of the level's categories, reported once per category, because
+//     the same run can fire twice: two tiles that are both genitive *and*
+//     accusative are two clears, and the chase window below is paid per
+//     category fired. The run names the category it fired on, which is what the
+//     view colours the collapse with.
 //
-// Why features are derived from `buildParadigm` rather than read out of the
+// Why categories are derived from `buildParadigm` rather than read out of the
 // YAML: nouns are stored as case × number and adjectives as case × gender, and
 // the paradigm model already reconciles the two into one { rows, cols, cells }
 // shape — including the derived animate-accusative row. Deriving here would be
@@ -31,13 +39,13 @@ import { ACC_ANIMATE, CASES, CASE_LABELS } from './declension.js'
 import { buildParadigm } from './paradigm.js'
 import { shuffle } from './quiz.js'
 
-/** The two axes a grid can match on. */
+/** The two axes a level can be played on. */
 export const MODES = Object.freeze(['gender', 'case'])
 
 /** Agreement features: the three genders in the singular, plus the plural. */
 export const GENDERS = Object.freeze(['m', 'f', 'n', 'pl'])
 
-/** The features each mode matches on, in display order. */
+/** The categories each mode draws its four from, in display order. */
 export const FEATURES = Object.freeze({ gender: GENDERS, case: CASES })
 
 /** Human labels, for the summary and anywhere there is room to spell it out. */
@@ -50,9 +58,9 @@ export const FEATURE_LABELS = Object.freeze({
 })
 
 /**
- * The same features abbreviated, for the chase bar — which is one line on a
- * phone with a countdown already in it, and «dative or nominative or
- * accusative» does not fit on one line.
+ * The same categories abbreviated, for the column of level categories and the
+ * chase bar — both of which are one line on a phone, and «dative or nominative
+ * or accusative» does not fit on one.
  */
 export const FEATURE_SHORT = Object.freeze({
   m: 'masc',
@@ -61,6 +69,39 @@ export const FEATURE_SHORT = Object.freeze({
   pl: 'plur',
   ...Object.fromEntries(CASES.map((c) => [c, c])),
 })
+
+/**
+ * A bright colour per category, and the ink that reads on it.
+ *
+ * Keyed on the category itself rather than on which of a level's four slots it
+ * landed in, so the colour is learnable: the genitive is this red in every
+ * level it turns up in, and by the tenth level the colour is a second name for
+ * the case. A mode only ever plays one of the two groups, so the genders are
+ * free to reuse the cases' hues.
+ *
+ * Colour is never the only channel. The tiles are neutral while they are on the
+ * board — reading the form is the exercise, and a coloured tile would answer
+ * the question before it was asked — and the colour appears only as a run
+ * collapses, next to the category's name in the header. A player who cannot
+ * tell the hues apart loses a flourish, not the game.
+ */
+export const CATEGORY_COLORS = Object.freeze({
+  nom: '#4cc3ff',
+  gen: '#ff6b6b',
+  dat: '#ffd166',
+  acc: '#57e06a',
+  ins: '#c58cff',
+  pre: '#ff9f43',
+  m: '#4cc3ff',
+  f: '#ff7ab8',
+  n: '#ffd166',
+  pl: '#57e06a',
+})
+
+/** The colour a category reveals, or a neutral grey for anything unknown. */
+export function colorFor(category) {
+  return CATEGORY_COLORS[category] ?? '#9aa4c7'
+}
 
 /** The levels a minigame may draw on — the ones a learner here is working in. */
 export const ELIGIBLE_CEFR = Object.freeze(['A1', 'A2', 'B1'])
@@ -72,15 +113,33 @@ export const ELIGIBLE_CEFR = Object.freeze(['A1', 'A2', 'B1'])
  */
 export const MAX_FORM_LENGTH = 10
 
-/** Points for a tile cleared by a swap, before the cascade multiplier. */
+/** Points for a tile cleared by a stack, before the cascade multiplier. */
 export const TILE_SCORE = 10
 /** Points for a tile cleared by a chase tap. */
 export const CHASE_SCORE = 25
-/** How long one fired feature keeps the chase window open. */
+/** How long one fired category keeps the chase window open. */
 export const CHASE_MS_PER_FEATURE = 1000
 
-/** Swaps a run allows before the summary. The chase window is the pressure. */
-export const MOVES_PER_GAME = 20
+/** Columns on the board — one per category the level deals from. */
+export const COLUMNS = 4
+/** How tall a column may get before the board is topped out. */
+export const ROWS = 8
+/**
+ * How many stacked tiles sharing a category it takes to clear them.
+ *
+ * Two, as in Yoshi. Three is playable too — simulating a bot that places every
+ * tile as well as a swap could, both lengths hold a board indefinitely — so the
+ * choice is about how much slack a mistake gets, and the measurement is what
+ * settled it: dropping tiles at random, a board survives ~64 drops at two and
+ * ~36 at three. Two, because the difficulty here is meant to be *reading the
+ * form*, not the puzzle around it; a learner who is still working out whether
+ * кни́ги could be a nominative should not also be on a thirty-drop clock.
+ */
+export const RUN = 2
+/** How many categories a level plays with. */
+export const LEVEL_CATEGORIES = 4
+/** Tiles cleared before the level ticks over (faster, and new categories). */
+export const CLEARS_PER_LEVEL = 12
 
 const ACUTE = '́'
 
@@ -197,34 +256,6 @@ export function buildTilePool(words, { rng = Math.random, maxWords = 90 } = {}) 
 }
 
 /**
- * Re-weight a pool so each of the mode's features is about as likely as the
- * others.
- *
- * Taken raw, the corpus is lopsided in a way that would spoil the gender game:
- * half of a noun's cells are plural and every gender collapses into `pl` there,
- * so `pl` is a third of the pool and neuter a seventh. A board where nearly
- * every triple is a plural triple asks nothing.
- *
- * The fix is a deck rather than a filter: one bucket per feature, shuffled, and
- * drawn round-robin to the depth of the *smallest* bucket. A tile carrying two
- * features (но́вым is masculine and plural) sits in both buckets and is
- * correspondingly likelier — which is right, since it is likelier to be useful.
- *
- * @returns {Array<PlainObject>} the deck a dealer should draw from
- */
-export function balancedDeck(pool, mode, { rng = Math.random } = {}) {
-  const buckets = FEATURES[mode]
-    .map((feature) => pool.filter((tile) => featuresOf(tile, mode).includes(feature)))
-    .filter((bucket) => bucket.length)
-  if (!buckets.length) return pool.slice()
-  const shuffled = buckets.map((bucket) => shuffle(bucket, rng))
-  const depth = Math.min(...shuffled.map((bucket) => bucket.length))
-  const deck = []
-  for (let i = 0; i < depth; i++) for (const bucket of shuffled) deck.push(bucket[i])
-  return deck
-}
-
-/**
  * A source of fresh tile instances.
  *
  * Instances rather than the pool entries themselves: two cells can hold the
@@ -251,236 +282,234 @@ export function createDealer(pool, rng = Math.random) {
   }
 }
 
-/** The tile at (r, c), or undefined off the board. */
-export function at(grid, r, c) {
-  if (r < 0 || c < 0 || r >= grid.rows || c >= grid.cols) return undefined
-  return grid.cells[r * grid.cols + c]
-}
 
-const cellKey = (r, c) => `${r},${c}`
+// ── Levels ───────────────────────────────────────────────────────────────
 
-/** A grid with two cells exchanged. Neither argument is mutated. */
-export function swapped(grid, a, b) {
-  const cells = grid.cells.slice()
-  const i = a.r * grid.cols + a.c
-  const j = b.r * grid.cols + b.c
-  ;[cells[i], cells[j]] = [cells[j], cells[i]]
-  return { ...grid, cells }
-}
-
-/** Whether two cells are orthogonally adjacent. */
-export function adjacent(a, b) {
-  return Math.abs(a.r - b.r) + Math.abs(a.c - b.c) === 1
+/**
+ * The four categories a level plays with.
+ *
+ * Gender mode has exactly four to begin with, so every level is m/f/n/pl; case
+ * mode picks four of the six, which is what keeps successive levels from being
+ * the same game — and what stops the board being a soup of all six at once.
+ *
+ * @param {'gender'|'case'} mode
+ * @param {() => number} [rng]
+ * @returns {string[]} four categories, in the axis's canonical order
+ */
+export function pickCategories(mode, rng = Math.random) {
+  const all = FEATURES[mode]
+  if (all.length <= LEVEL_CATEGORIES) return [...all]
+  return orderFeatures(shuffle([...all], rng).slice(0, LEVEL_CATEGORIES), mode)
 }
 
 /**
- * Every maximal run of three or more in a row or column whose tiles all carry
- * one feature, reported once per feature.
+ * How long a tile takes to fall one row at `level`.
  *
- * @returns {Array<{feature: string, dir: 'row'|'col', cells: Array<{r: number, c: number}>}>}
+ * Geometric rather than linear, and floored: the first levels want to be
+ * readable — a learner has to actually parse the form, which is the whole
+ * exercise — and the last want to be faster than comfortable. Level one crosses
+ * the board in about six seconds and the floor in about two, and the floor is
+ * far enough above a frame that the fall is always something the eye follows.
  */
-export function findMatches(grid, mode = grid.mode) {
+export function dropMsFor(level) {
+  return Math.max(260, Math.round(800 * 0.88 ** (level - 1)))
+}
+
+/**
+ * Tiles from `pool` that carry at least one of `categories`, re-weighted so
+ * each of the four is about as likely as the others.
+ *
+ * Both halves matter. The filter is what makes a level's four categories real
+ * rather than decorative — a tile with none of them could never clear and would
+ * silently fill a column. The weighting is what the gender mode needs: taken
+ * raw, half a noun's cells are plural and every gender collapses into `pl`
+ * there, so a board where nearly every stack is a plural stack asks nothing.
+ */
+export function levelDeck(pool, mode, categories, { rng = Math.random } = {}) {
+  const buckets = categories
+    .map((category) => pool.filter((tile) => featuresOf(tile, mode).includes(category)))
+    .filter((bucket) => bucket.length)
+  if (!buckets.length) return []
+  const shuffled = buckets.map((bucket) => shuffle(bucket, rng))
+  const depth = Math.min(...shuffled.map((bucket) => bucket.length))
+  const deck = []
+  for (let i = 0; i < depth; i++) for (const bucket of shuffled) deck.push(bucket[i])
+  return deck
+}
+
+// ── The board ────────────────────────────────────────────────────────────
+// A board is `cols`, one array per column, ordered BOTTOM FIRST: index 0 rests
+// on the floor. Bottom-first because gravity is then a `push`/`splice` rather
+// than an index flip on every read, and every rule here is about what sits on
+// what.
+
+/** An empty board for a level. */
+export function createBoard(mode, categories, { rows = ROWS, columns = COLUMNS, run = RUN } = {}) {
+  return { rows, run, mode, categories, cols: Array.from({ length: columns }, () => []) }
+}
+
+/** How many tiles are stacked in column `c`. */
+export function heightOf(board, c) {
+  return board.cols[c]?.length ?? 0
+}
+
+/** The tallest column — what decides whether the board has topped out. */
+export function tallest(board) {
+  return Math.max(0, ...board.cols.map((col) => col.length))
+}
+
+/** Whether a column has reached the ceiling, which ends the game. */
+export function isToppedOut(board) {
+  return tallest(board) >= board.rows
+}
+
+/** A copy of `board` with `tile` dropped onto column `c`. */
+export function landTile(board, c, tile) {
+  const cols = board.cols.map((col, i) => (i === c ? [...col, tile] : col))
+  return { ...board, cols }
+}
+
+/**
+ * Yoshi's move: two adjacent columns exchange their whole stacks.
+ *
+ * Whole stacks rather than single tiles, because that is the move the game is
+ * built on — it is how a tile at the bottom of one column ever meets its match,
+ * and it makes a swap a decision about two futures rather than one pair. It is
+ * free and unlimited; the pressure is the falling tile, not a move budget.
+ */
+export function swapColumns(board, a, b) {
+  if (a === b || !board.cols[a] || !board.cols[b]) return board
+  const cols = board.cols.slice()
+  ;[cols[a], cols[b]] = [cols[b], cols[a]]
+  return { ...board, cols }
+}
+
+/** Whether two columns are side by side. */
+export function adjacentColumns(a, b) {
+  return Math.abs(a - b) === 1
+}
+
+/**
+ * Every run of `board.run` or more stacked tiles in one column that all carry
+ * one of the level's categories, reported once per category.
+ *
+ * Per category rather than per run because the same run can fire twice: three
+ * tiles that are all genitive *and* accusative are two clears, and the chase
+ * window is paid per category fired.
+ *
+ * @returns {Array<{col: number, from: number, to: number, category: string}>}
+ *   `from`/`to` are inclusive bottom-first indices into that column.
+ */
+export function findRuns(board) {
   const out = []
-  // One pass per (feature, line): walk the line and close a run whenever the
-  // feature stops. The trailing index runs one past the end so a run finishing
-  // at the edge is closed by the same branch as any other.
-  const scan = (dir, lines, length, cellOf) => {
-    for (const feature of FEATURES[mode]) {
-      for (let line = 0; line < lines; line++) {
-        let run = []
-        for (let i = 0; i <= length; i++) {
-          const cell = i < length ? cellOf(line, i) : null
-          const tile = cell && at(grid, cell.r, cell.c)
-          if (tile && featuresOf(tile, mode).includes(feature)) {
-            run.push(cell)
-          } else {
-            if (run.length >= 3) out.push({ feature, dir, cells: run })
-            run = []
-          }
+  for (let c = 0; c < board.cols.length; c++) {
+    const col = board.cols[c]
+    for (const category of board.categories) {
+      let start = -1
+      for (let i = 0; i <= col.length; i++) {
+        const carries = i < col.length && featuresOf(col[i], board.mode).includes(category)
+        if (carries) {
+          if (start < 0) start = i
+        } else {
+          const run = board.run ?? RUN
+          if (start >= 0 && i - start >= run) out.push({ col: c, from: start, to: i - 1, category })
+          start = -1
         }
       }
     }
   }
-  scan('row', grid.rows, grid.cols, (r, c) => ({ r, c }))
-  scan('col', grid.cols, grid.rows, (c, r) => ({ r, c }))
   return out
 }
 
-/** The distinct cells covered by `matches`, as "r,c" keys. */
-export function matchedCells(matches) {
-  const keys = new Set()
-  for (const m of matches) for (const cell of m.cells) keys.add(cellKey(cell.r, cell.c))
-  return keys
-}
-
-/** The distinct features `matches` fired on — what the chase window is paid in. */
-export function firedFeatures(matches, mode) {
+/** The distinct categories `runs` fired on — what the chase window is paid in. */
+export function firedCategories(runs, mode) {
   return orderFeatures(
-    matches.map((m) => m.feature),
+    runs.map((r) => r.category),
     mode,
   )
 }
 
-/** Whether any single adjacent swap would produce a match. */
-export function hasLegalMove(grid, mode = grid.mode) {
-  for (let r = 0; r < grid.rows; r++) {
-    for (let c = 0; c < grid.cols; c++) {
-      for (const b of [
-        { r, c: c + 1 },
-        { r: r + 1, c },
-      ]) {
-        if (!at(grid, b.r, b.c)) continue
-        if (findMatches(swapped(grid, { r, c }, b), mode).length) return true
-      }
-    }
+/** Column index → the set of positions `runs` cover there. */
+function runCells(runs) {
+  const byCol = new Map()
+  for (const run of runs) {
+    const set = byCol.get(run.col) ?? new Set()
+    for (let i = run.from; i <= run.to; i++) set.add(i)
+    byCol.set(run.col, set)
   }
-  return false
+  return byCol
+}
+
+/** A copy of `board` with the given positions removed and the rest closed up. */
+export function removeCells(board, byCol) {
+  const cols = board.cols.map((col, c) => {
+    const drop = byCol.get(c)
+    return drop ? col.filter((_, i) => !drop.has(i)) : col
+  })
+  return { ...board, cols }
 }
 
 /**
- * Clear `keys`, let the survivors fall and deal replacements into the gaps.
- * Column by column, so a tile only ever falls straight down.
+ * Resolve one round of clearing, or null when the board is settled.
  *
- * The replacements are held to the same rule as the opening deal: a fresh tile
- * that would land already three in a line is refused. Without it the board
- * cascades on nearly every move — the corpus puts an average of 1.4 case
- * readings on a tile, which makes a random triple far likelier to match than a
- * Candy Crush colour — and a board that scores itself is not being played. What
- * survives is the cascade the player actually earned: survivors that line up on
- * the way down.
- *
- * The gaps are filled bottom-up so each new tile sees as many settled
- * neighbours as it can; the dealer's veto is advisory, so an impossible corner
- * still gets a tile rather than a hole.
- */
-export function collapse(grid, keys, dealer) {
-  const cells = new Array(grid.rows * grid.cols).fill(null)
-  const gaps = []
-  for (let c = 0; c < grid.cols; c++) {
-    const kept = []
-    for (let r = 0; r < grid.rows; r++) {
-      if (!keys.has(cellKey(r, c))) kept.push(at(grid, r, c))
-    }
-    const drop = grid.rows - kept.length
-    for (let r = 0; r < grid.rows; r++) {
-      if (r < drop) gaps.push({ r, c })
-      else cells[r * grid.cols + c] = kept[r - drop]
-    }
-  }
-  const next = { ...grid, cells }
-  gaps.sort((a, b) => b.r - a.r || a.c - b.c)
-  for (const { r, c } of gaps) {
-    cells[r * grid.cols + c] = dealer.deal((tile) => completesRun(next, r, c, tile))
-  }
-  return next
-}
-
-/**
- * Resolve one round of matching, or null when the board is settled.
- *
- * One step rather than the whole cascade so the view can show each clear
+ * One step rather than the whole cascade so the view can show each collapse
  * landing before the next one starts; the caller loops until it gets null.
  *
- * @returns {?{matches: Array, keys: Set<string>, cleared: Array, features: string[], grid: PlainObject}}
+ * @returns {?{runs: Array, cleared: Array, categories: string[], board: PlainObject}}
  */
-export function nextStep(grid, dealer, mode = grid.mode) {
-  const matches = findMatches(grid, mode)
-  if (!matches.length) return null
-  const keys = matchedCells(matches)
-  const cleared = [...keys].map((k) => {
-    const [r, c] = k.split(',').map(Number)
-    return at(grid, r, c)
-  })
+export function nextClear(board) {
+  const runs = findRuns(board)
+  if (!runs.length) return null
+  const byCol = runCells(runs)
+  const cleared = []
+  for (const [c, positions] of byCol) for (const i of positions) cleared.push(board.cols[c][i])
   return {
-    matches,
-    keys,
+    runs,
     cleared,
-    features: firedFeatures(matches, mode),
-    grid: collapse(grid, keys, dealer),
+    categories: firedCategories(runs, board.mode),
+    board: removeCells(board, byCol),
   }
 }
 
-/**
- * Would putting `tile` at (r, c) finish a run of three?
- *
- * Checks the six pairs a third tile can complete — two to a side and one either
- * side, in both directions — and ignores any pair with a cell that is empty or
- * off the board, so the same test serves a board being dealt (where everything
- * ahead is still empty) and a gap being refilled (where most of it is settled).
- */
-export function completesRun(grid, r, c, tile, mode = grid.mode) {
-  const features = featuresOf(tile, mode)
-  if (!features.length) return false
-  const pairs = [
-    [[r, c - 1], [r, c - 2]],
-    [[r, c - 1], [r, c + 1]],
-    [[r, c + 1], [r, c + 2]],
-    [[r - 1, c], [r - 2, c]],
-    [[r - 1, c], [r + 1, c]],
-    [[r + 1, c], [r + 2, c]],
-  ]
-  return pairs.some((pair) => {
-    const neighbours = pair.map(([rr, cc]) => at(grid, rr, cc))
-    if (neighbours.some((t) => !t)) return false
-    return features.some((f) => neighbours.every((t) => featuresOf(t, mode).includes(f)))
-  })
+// ── The chase window ─────────────────────────────────────────────────────
+// A clear pays out in seconds: one per category it fired on. While the window
+// is open a tap on any *other* tile carrying one of those categories takes it
+// off the board — which is both a reprieve when the stacks are high and the
+// only way to reach a tile the swaps cannot help.
+
+/** How long a chase window paid for by `categories` stays open. */
+export function chaseWindowMs(categories) {
+  return categories.length * CHASE_MS_PER_FEATURE
 }
 
-/**
- * Deal a board that is stable and playable: no line of three already on it, and
- * at least one swap that would make one.
- *
- * Stability is enforced as the board is dealt — a candidate that would complete
- * a run with the two cells already to its left or above it is refused — rather
- * than by dealing and re-dealing whole boards, which at 5×6 fails far too often
- * to converge. Playability can only be checked once the board is whole, so that
- * one *is* a retry; `attempts` bounds it, and the last board is returned either
- * way. A board with no legal move is not a broken board — the view offers a
- * reshuffle, which is this same call again.
- */
-export function generateGrid(dealer, { rows = 6, cols = 5, mode = 'case', attempts = 12 } = {}) {
-  let grid = null
-  for (let attempt = 0; attempt < attempts; attempt++) {
-    const cells = new Array(rows * cols).fill(null)
-    const partial = { rows, cols, mode, cells }
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        cells[r * cols + c] = dealer.deal((tile) => completesRun(partial, r, c, tile))
-      }
-    }
-    grid = partial
-    if (!findMatches(grid, mode).length && hasLegalMove(grid, mode)) return grid
-  }
-  return grid
+/** Whether the tile at (col, i) carries one of the window's categories. */
+export function isChaseHit(board, categories, c, i) {
+  const tile = board.cols[c]?.[i]
+  return !!tile && featuresOf(tile, board.mode).some((f) => categories.includes(f))
 }
 
-/** How long a chase window paid for by `features` stays open. */
-export function chaseWindowMs(features) {
-  return features.length * CHASE_MS_PER_FEATURE
-}
-
-/** Every cell carrying one of `features` — what a chase tap may legally hit. */
-export function chaseTargets(grid, features, mode = grid.mode) {
+/** Every stacked tile a chase tap could legally take, as {col, i} pairs. */
+export function chaseTargets(board, categories) {
   const out = []
-  for (let r = 0; r < grid.rows; r++) {
-    for (let c = 0; c < grid.cols; c++) {
-      const tile = at(grid, r, c)
-      if (tile && featuresOf(tile, mode).some((f) => features.includes(f))) out.push({ r, c })
+  for (let c = 0; c < board.cols.length; c++) {
+    for (let i = 0; i < board.cols[c].length; i++) {
+      if (isChaseHit(board, categories, c, i)) out.push({ col: c, i })
     }
   }
   return out
 }
 
-/** Whether the tile at (r, c) carries one of the window's features. */
-export function isChaseHit(grid, features, r, c, mode = grid.mode) {
-  const tile = at(grid, r, c)
-  return !!tile && featuresOf(tile, mode).some((f) => features.includes(f))
+/** A copy of `board` with one tile taken out of a column. */
+export function removeOne(board, c, i) {
+  return removeCells(board, new Map([[c, new Set([i])]]))
 }
 
+// ── Scoring ──────────────────────────────────────────────────────────────
+
 /**
- * What a cascade step is worth. Depth 0 is the swap's own clear; each further
- * step it sets off is worth one more multiple, because a cascade the player set
- * up is the thing worth setting up.
+ * What a cascade step is worth. Depth 0 is the stack the player built; each
+ * further collapse it sets off is worth one more multiple, because a cascade
+ * the player set up is the thing worth setting up.
  */
 export function stepScore(cleared, depth) {
   return cleared * TILE_SCORE * (depth + 1)
@@ -495,8 +524,15 @@ export function chaseScore(streak) {
   return CHASE_SCORE * streak
 }
 
+/** Which level `cleared` tiles into a run the player is on (1-based). */
+export function levelFor(cleared) {
+  return Math.floor(cleared / CLEARS_PER_LEVEL) + 1
+}
+
+// ── Word cards ───────────────────────────────────────────────────────────
+
 /**
- * The card a tile earns: what the word *is*, as opposed to the slot the grid
+ * The card a tile earns: what the word *is*, as opposed to the slot the board
  * was testing. The uninflected headword and its English, plus the form that was
  * actually on the board so the player can connect the two.
  */
@@ -507,9 +543,9 @@ export function cardFor(tile) {
 /**
  * Append cards for `tiles` to `queue`, one per word.
  *
- * Deduplicated against the queue rather than against the whole game: clearing
- * a line of five нового/новому/новом should say "но́вый" once, but meeting the
- * word again ten moves later is a fresh occasion to be told.
+ * Deduplicated against the queue rather than against the whole game: clearing a
+ * stack of нового/новому/новом should say "но́вый" once, but meeting the word
+ * again ten drops later is a fresh occasion to be told.
  */
 export function queueCards(queue, tiles) {
   const seen = new Set(queue.map((card) => card.key))
