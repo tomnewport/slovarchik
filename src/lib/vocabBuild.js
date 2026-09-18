@@ -13,12 +13,15 @@ import { normalizeGoverns } from './verbGovernment.js'
 /** Map a vocab filename (without extension) to its part of speech. */
 export const POS_BY_FILE = {
   nouns: 'noun',
+  names: 'noun', // personal names, used for lookup rather than drills
+  'reader-nouns': 'noun',
   calendar: 'noun', // days, months and festivals — nouns grouped by topic
   pronouns: 'pronoun',
   numerals: 'numeral',
   verbs: 'verb',
   adjectives: 'adjective',
   adverbs: 'adverb',
+  'reader-adverbs': 'adverb',
   prepositions: 'preposition',
   conjunctions: 'conjunction',
   interjections: 'interjection',
@@ -27,6 +30,7 @@ export const POS_BY_FILE = {
   // so phrase hints can translate every tappable word, and are filtered out of
   // every drill by learnableWords.
   glossary: 'glossary',
+  'reader-glosses': 'glossary',
 }
 
 /** Parts of speech in a stable display order. */

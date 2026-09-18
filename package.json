@@ -8,9 +8,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "predev": "node scripts/gen-manifest.mjs",
+    "predev": "node scripts/build-book-packs.mjs && node scripts/gen-manifest.mjs",
     "dev": "vite",
-    "build": "node scripts/gen-manifest.mjs && vite build",
+    "build": "node scripts/build-book-packs.mjs && node scripts/gen-manifest.mjs && vite build",
+    "gen:books": "node scripts/build-book-packs.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",

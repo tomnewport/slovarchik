@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "books": [
+    {
+      "id": "krylov-dragonfly-ant",
+      "title": "Стрекоза и Муравей",
+      "author": "Иван Крылов",
+      "shelf": "Children’s",
+      "summary": "A singing dragonfly asks a working ant for shelter. Complete fable in verse.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Krylov, Complete Works, vol. III (1946), p. 45; Wikisource revision 5131119",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5131119"
+      },
+      "rights": {
+        "original": "Krylov (died 1844); underlying Russian work first published in 1808 and public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "835cfd8893f96fc6533ff9aad922ab1eacb23d49b4520e2c697bff892e198b2f"
+    },
+    {
+      "id": "tolstoy-ant-dove",
+      "title": "Муравей и голубка",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A tiny fable of two creatures returning a kindness. Complete story.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Муравей и голубка; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "67840a7acc38c77f38f671ca66ed5410a894b4029f9b49cfa96c5b654e6772fd"
+    },
+    {
+      "id": "tolstoy-plum-stone",
+      "title": "Косточка",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "Vanya steals a plum, then gives himself away at dinner. Complete story.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Косточка; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "e865d34486242f84d5c38561c13a31b0bfdc2dd40ce812c4c4b218444134e4bd"
+    }
+  ]
+}

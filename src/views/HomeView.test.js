@@ -81,9 +81,9 @@ describe('HomeView', () => {
   it('lists the minigames in their own section, apart from the drills', async () => {
     const wrapper = mount(HomeView)
     const games = wrapper.findAll('.game')
-    expect(games).toHaveLength(4)
+    expect(games).toHaveLength(5)
 
-    // A game says which habit it is for — that is the reason to pick one.
+    // Each option says what the learner will practise or read.
     expect(games[0].text()).toContain('Bomb disposal')
     expect(games[0].text()).toContain('Colours')
     expect(games[1].text()).toContain('Inflection crush')
@@ -92,6 +92,8 @@ describe('HomeView', () => {
     expect(games[2].text()).toContain('two-digit numbers')
     expect(games[3].text()).toContain('Meaning maze')
     expect(games[3].text()).toContain('translation on sight')
+    expect(games[4].text()).toContain('Literature reader')
+    expect(games[4].text()).toContain('Read Russian')
 
     await games[0].trigger('click')
     expect(push).toHaveBeenCalledWith('/bomb')
@@ -101,14 +103,16 @@ describe('HomeView', () => {
     expect(push).toHaveBeenCalledWith('/firewatch')
     await games[3].trigger('click')
     expect(push).toHaveBeenCalledWith('/maze')
+    await games[4].trigger('click')
+    expect(push).toHaveBeenCalledWith('/library')
 
-    // Not also in the free-practice list: a game is a break from practice,
-    // not another drill.
+    // These options live in their own section, outside the drill list.
     const drills = wrapper.findAll('.drill').map((d) => d.text())
     expect(drills).not.toContain('Bomb disposal')
     expect(drills).not.toContain('Inflection crush')
     expect(drills).not.toContain('Firewatch')
     expect(drills).not.toContain('Meaning maze')
+    expect(drills).not.toContain('Literature reader')
   })
 
   it('shows the committed batch name as a non-clickable card', () => {

@@ -14,8 +14,8 @@ import * as idb from './idb.js'
 import { failWrites } from '../test/idbFailure.js'
 
 const DB_NAME = 'slovarchik'
-const VERSION = 6
-const STORES = ['activity', 'issue-reports', 'meta', 'progress', 'vocab-files']
+const VERSION = 7
+const STORES = ['activity', 'book-packs', 'issue-reports', 'meta', 'progress', 'vocab-files']
 
 beforeEach(async () => {
   globalThis.indexedDB = new IDBFactory()
@@ -246,6 +246,16 @@ describe('reads, writes and deletes round-trip', () => {
     await idb.setMeta('settings', { voice: 'ru-RU' })
     await idb.setMeta('settings', { voice: 'ru-RU', rate: 0.9 })
     expect(await idb.getMeta('settings')).toEqual({ voice: 'ru-RU', rate: 0.9 })
+  })
+
+  it('keeps book packs separately removable without losing reading position', async () => {
+    await idb.setMeta('reader:position:fable', 'fable:p1:1')
+    await idb.putBook({ id: 'fable', packVersion: 1, translationVersion: 1, blob: new Blob(['{"id":"fable"}']) })
+    expect((await idb.getBook('fable')).packVersion).toBe(1)
+    expect((await idb.getAllBooks()).map((book) => book.id)).toEqual(['fable'])
+    await idb.deleteBook('fable')
+    expect(await idb.getBook('fable')).toBeUndefined()
+    expect(await idb.getMeta('reader:position:fable')).toBe('fable:p1:1')
   })
 })
 

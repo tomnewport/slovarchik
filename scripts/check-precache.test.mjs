@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import {
   precacheEntries,
   vocabEntries,
+  bookEntries,
   versionEntries,
   vocabRuntimeRoutes,
   renderSummary,
@@ -57,6 +58,14 @@ describe('the vocab partition', () => {
   it('does not mistake a lookalike filename for the vocab directory', () => {
     const entries = precacheEntries('[{url:"assets/vocabBuild-abc.js",revision:null}]')
     expect(vocabEntries(entries)).toEqual([])
+  })
+})
+
+describe('the opt-in book partition', () => {
+  it('detects books even under the app base path', () => {
+    const entries = precacheEntries('[{url:"slovarchik/books/packs/fable.json",revision:"a"}]')
+    expect(bookEntries(entries).map((entry) => entry.url)).toEqual(['slovarchik/books/packs/fable.json'])
+    expect(renderSummary(entries, [], [], [], bookEntries(entries))).toContain('Book packs — precached')
   })
 })
 
@@ -119,6 +128,10 @@ describe('the workbox config still declares the partition', () => {
 
   it('ignores the deployed-version document too', () => {
     expect(config).toMatch(/globIgnores:\s*\[[^\]]*version\.json/)
+  })
+
+  it('ignores optional literature data', () => {
+    expect(config).toMatch(/globIgnores:\s*\[[^\]]*books/)
   })
 
   it('keeps a runtime caching rule for the vocab instead', () => {

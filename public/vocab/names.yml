@@ -1,0 +1,380 @@
+# Personal names for dictionary lookup, not the practice curriculum.
+---
+words:
+  "Александр=Alexander":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Alexander (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Alexander; Саша and Сашенька are familiar forms."
+        see: ["Саша=Sasha", "Сашенька=dear Sasha"]
+    declension:
+      sg_nom: Алекса́ндр
+      sg_gen: Алекса́ндра
+      sg_dat: Алекса́ндру
+      sg_acc: Алекса́ндра
+      sg_ins: Алекса́ндром
+      sg_pre: Алекса́ндре
+  "Саша=Sasha":
+    cefr_level: A2
+    learn: false
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Sasha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Александр or Александра; used for men and women."
+        see: ["Александр=Alexander", "Сашенька=dear Sasha"]
+    declension:
+      sg_nom: Са́ша
+      sg_gen: Са́ши
+      sg_dat: Са́ше
+      sg_acc: Са́шу
+      sg_ins: Са́шей
+      sg_pre: Са́ше
+  "Сашенька=dear Sasha":
+    cefr_level: A2
+    learn: false
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "dear Sasha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Affectionate diminutive of Саша."
+        see: ["Саша=Sasha"]
+    declension:
+      sg_nom: Са́шенька
+      sg_gen: Са́шеньки
+      sg_dat: Са́шеньке
+      sg_acc: Са́шеньку
+      sg_ins: Са́шенькой
+      sg_pre: Са́шеньке
+  "Мария=Maria":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Maria (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Maria; Маша and Машенька are familiar forms."
+        see: ["Маша=Masha", "Машенька=dear Masha"]
+    declension:
+      sg_nom: Мари́я
+      sg_gen: Мари́и
+      sg_dat: Мари́и
+      sg_acc: Мари́ю
+      sg_ins: Мари́ей
+      sg_pre: Мари́и
+  "Маша=Masha":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Masha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Мария."
+        see: ["Мария=Maria", "Машенька=dear Masha"]
+    declension:
+      sg_nom: Ма́ша
+      sg_gen: Ма́ши
+      sg_dat: Ма́ше
+      sg_acc: Ма́шу
+      sg_ins: Ма́шей
+      sg_pre: Ма́ше
+  "Машенька=dear Masha":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "dear Masha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Affectionate diminutive of Маша."
+        see: ["Маша=Masha"]
+    declension:
+      sg_nom: Ма́шенька
+      sg_gen: Ма́шеньки
+      sg_dat: Ма́шеньке
+      sg_acc: Ма́шеньку
+      sg_ins: Ма́шенькой
+      sg_pre: Ма́шеньке
+  "Екатерина=Yekaterina":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Yekaterina (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Yekaterina; Катя is a familiar form."
+        see: ["Катя=Katya"]
+    declension:
+      sg_nom: Екатери́на
+      sg_gen: Екатери́ны
+      sg_dat: Екатери́не
+      sg_acc: Екатери́ну
+      sg_ins: Екатери́ной
+      sg_pre: Екатери́не
+  "Катя=Katya":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Katya (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Екатерина."
+        see: ["Екатерина=Yekaterina"]
+    declension:
+      sg_nom: Ка́тя
+      sg_gen: Ка́ти
+      sg_dat: Ка́те
+      sg_acc: Ка́тю
+      sg_ins: Ка́тей
+      sg_pre: Ка́те
+  "Дмитрий=Dmitry":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Dmitry (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Dmitry; Дима is a familiar form."
+        see: ["Дима=Dima"]
+    declension:
+      sg_nom: Дми́трий
+      sg_gen: Дми́трия
+      sg_dat: Дми́трию
+      sg_acc: Дми́трия
+      sg_ins: Дми́трием
+      sg_pre: Дми́трии
+  "Дима=Dima":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Dima (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Дмитрий."
+        see: ["Дмитрий=Dmitry"]
+    declension:
+      sg_nom: Ди́ма
+      sg_gen: Ди́мы
+      sg_dat: Ди́ме
+      sg_acc: Ди́му
+      sg_ins: Ди́мой
+      sg_pre: Ди́ме
+  "Алексей=Alexei":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Alexei (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Alexei; Алёша and Лёша are familiar forms."
+        see: ["Алёша=Alyosha", "Лёша=Lyosha"]
+    declension:
+      sg_nom: Алексе́й
+      sg_gen: Алексе́я
+      sg_dat: Алексе́ю
+      sg_acc: Алексе́я
+      sg_ins: Алексе́ем
+      sg_pre: Алексе́е
+  "Алёша=Alyosha":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Alyosha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Алексей."
+        see: ["Алексей=Alexei", "Лёша=Lyosha"]
+    declension:
+      sg_nom: Алёша
+      sg_gen: Алёши
+      sg_dat: Алёше
+      sg_acc: Алёшу
+      sg_ins: Алёшей
+      sg_pre: Алёше
+  "Лёша=Lyosha":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Lyosha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Алексей."
+        see: ["Алексей=Alexei", "Алёша=Alyosha"]
+    declension:
+      sg_nom: Лёша
+      sg_gen: Лёши
+      sg_dat: Лёше
+      sg_acc: Лёшу
+      sg_ins: Лёшей
+      sg_pre: Лёше
+  "Иван=Ivan":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Ivan (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Ivan; Ваня is a familiar form."
+        see: ["Ваня=Vanya", "Иванович=Ivanovich"]
+    declension:
+      sg_nom: Ива́н
+      sg_gen: Ива́на
+      sg_dat: Ива́ну
+      sg_acc: Ива́на
+      sg_ins: Ива́ном
+      sg_pre: Ива́не
+  "Ваня=Vanya":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Vanya (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Иван."
+        see: ["Иван=Ivan"]
+    declension:
+      sg_nom: Ва́ня
+      sg_gen: Ва́ни
+      sg_dat: Ва́не
+      sg_acc: Ва́ню
+      sg_ins: Ва́ней
+      sg_pre: Ва́не
+  "Николай=Nikolai":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Nikolai (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Nikolai; Николаевич and Николаевна are patronymics derived from it."
+        see: ["Николаевич=Nikolaevich", "Николаевна=Nikolaevna"]
+    declension:
+      sg_nom: Никола́й
+      sg_gen: Никола́я
+      sg_dat: Никола́ю
+      sg_acc: Никола́я
+      sg_ins: Никола́ем
+      sg_pre: Никола́е
+  "Николаевич=Nikolaevich":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Nikolaevich (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Masculine patronymic meaning son of Nikolai; often used with a given name in polite address."
+        see: ["Николай=Nikolai"]
+    declension:
+      sg_nom: Никола́евич
+      sg_gen: Никола́евича
+      sg_dat: Никола́евичу
+      sg_acc: Никола́евича
+      sg_ins: Никола́евичем
+      sg_pre: Никола́евиче
+  "Николаевна=Nikolaevna":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Nikolaevna (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Feminine patronymic meaning daughter of Nikolai."
+        see: ["Николай=Nikolai"]
+    declension:
+      sg_nom: Никола́евна
+      sg_gen: Никола́евны
+      sg_dat: Никола́евне
+      sg_acc: Никола́евну
+      sg_ins: Никола́евной
+      sg_pre: Никола́евне
+  "Иванович=Ivanovich":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Ivanovich (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Masculine patronymic meaning son of Ivan."
+        see: ["Иван=Ivan"]
+    declension:
+      sg_nom: Ива́нович
+      sg_gen: Ива́новича
+      sg_dat: Ива́новичу
+      sg_acc: Ива́новича
+      sg_ins: Ива́новичем
+      sg_pre: Ива́новиче
+  "Анна=Anna":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Anna (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Anna; Анну is the accusative form, used when Anna is the object."
+    declension:
+      sg_nom: А́нна
+      sg_gen: А́нны
+      sg_dat: А́нне
+      sg_acc: А́нну
+      sg_ins: А́нной
+      sg_pre: А́нне
