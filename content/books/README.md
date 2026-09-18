@@ -32,6 +32,14 @@ keeps the change from familiar speech to servile honorifics and the original's
 dated final comparison; the translation is newly prepared here, not lifted from
 another edition.
 
+The Political shelf begins with «Государство и революция — глава I, § 1»: the
+complete first section of chapter I, 19 paragraphs and 39 reader units. It is
+explicitly a selection from Lenin's longer book. The text follows the pinned
+Wikisource transcription of the 1969 collected works; editorial note callouts
+and notes are excluded, while Lenin's own embedded page citation remains. The
+English keeps Lenin's polemical voice distinct from the extended quotation of
+Engels. Later sections need separate translation review before publication.
+
 `npm run gen:books` validates sources, writes `public/books/packs/*.json`, and
 updates the catalog with SHA-256 hashes. Commit the editorial JSON and generated
 pack/catalog together. Increase `packVersion` when Russian text, sentence IDs,

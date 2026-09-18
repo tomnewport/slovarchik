@@ -108,7 +108,7 @@ test('the book accordion fits a phone and Read looks like an action', async ({ p
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
   const books = page.locator('.library-book')
-  await expect(books).toHaveCount(4)
+  await expect(books).toHaveCount(5)
   await expect(page.locator('.library-book[open]')).toHaveCount(0)
 
   const first = books.filter({ hasText: 'Муравей и голубка' })
@@ -165,4 +165,55 @@ test('the complete Chekhov story downloads, paginates and retains its bookmark a
   await page.locator('.reader-saved').click()
   await page.locator('.reader-bookmarks').getByRole('button', { name: /На вокзале Николаевской/ }).click()
   await expect(text).toContainText('На вокзале Николаевской железной дороги')
+})
+
+test('the Lenin selection downloads and keeps sentence progress and bookmarks', async ({ page }) => {
+  await page.setViewportSize({ width: 393, height: 620 })
+  await page.goto('/')
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция' })
+  await selection.locator('summary.library-book-summary').click()
+  await expect(selection).toContainText('Selection from a longer work')
+  await selection.getByRole('button', { name: 'Download' }).click()
+  await selection.getByRole('link', { name: 'Read' }).click()
+
+  const text = page.getByRole('article', { name: 'Russian text' })
+  await expect(text).toContainText('С учением Маркса происходит теперь то')
+  await text.getByRole('button', { name: /Reveal translation for С учением Маркса/ }).click()
+  await expect(text.getByText('What is happening now to Marx’s teaching', { exact: false })).toBeVisible()
+  await text.getByRole('button', { name: 'Bookmark' }).click()
+  await expect(page.locator('.reader-saved')).toContainText('1')
+
+  const next = page.getByRole('button', { name: 'Next page' })
+  const current = page.locator('.reader-progress-current')
+  const longSentence = text.getByRole('button', { name: /Reveal translation for Все, или по крайней мере/ })
+  let checkedLongSentence = false
+  let pages = 0
+  while (await next.isEnabled() && pages < 45) {
+    if (!checkedLongSentence && await longSentence.count()) {
+      await longSentence.click()
+      await expect(text.getByText('All, or at least all the decisive passages', { exact: false })).toBeVisible()
+      await page.setViewportSize({ width: 320, height: 480 })
+      await expect.poll(() => text.evaluate((node) => node.scrollHeight - node.clientHeight)).toBeGreaterThan(0)
+      await text.evaluate((node) => node.scrollTo(0, node.scrollHeight))
+      await expect.poll(() => text.evaluate((node) => node.scrollTop)).toBeGreaterThan(0)
+      await page.setViewportSize({ width: 393, height: 620 })
+      checkedLongSentence = true
+    }
+    const previousRange = await current.getAttribute('style')
+    await next.click()
+    await expect(current).not.toHaveAttribute('style', previousRange)
+    pages++
+  }
+  expect(checkedLongSentence).toBe(true)
+  expect(pages).toBeGreaterThan(1)
+  await expect(next).toBeDisabled()
+  await expect(text).toContainText('«забыл» и извратил.')
+  await expect(page.getByRole('progressbar', { name: 'Book progress' })).toHaveAttribute('aria-valuenow', '100')
+
+  await page.reload()
+  await expect(text).toContainText('«забыл» и извратил.')
+  await page.locator('.reader-saved').click()
+  await page.locator('.reader-bookmarks').getByRole('button', { name: /С учением Маркса/ }).click()
+  await expect(text).toContainText('С учением Маркса происходит теперь то')
 })
