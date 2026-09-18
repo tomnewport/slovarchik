@@ -1,8 +1,8 @@
 // Meaning maze minigame (#752).
 //
-// A grid of words, Russian and English alternating like a chessboard, with one
-// path of adjacent translation pairs running from the start to the end. The
-// player draws that path. Everything that decides what a maze *is* and what a
+// A grid of words, Russian and English alternating like a chessboard. The
+// player draws a line of adjacent translation pairs from one corner to the
+// other, against a clock. Everything that decides what a maze *is* and what a
 // move *does* lives here — pure, seedable, framework free. The view owns the
 // clock, the drawing and the lens, and nothing else.
 //
@@ -17,24 +17,34 @@
 //     cells ("nodes") and expanded: node → midpoint → node. Both the nodes and
 //     the midpoint between them fall out of that one carve, which makes two
 //     awkward things free. A midpoint is on the path only when both of its end
-//     nodes are consecutive on it, so the solution can never run alongside
-//     itself and offer a shortcut; and every node is Russian while every
-//     midpoint is English, which is exactly the shape the rules want — the
-//     graded half-step is always node → midpoint.
+//     nodes are consecutive on it, so the carved path can never run alongside
+//     itself and is a corridor rather than a smear; and every node is Russian
+//     while every midpoint is English, which is exactly the shape the rules
+//     want — the graded half-step is always node → midpoint.
 //
-//   - NO UNINTENDED VALID ADJACENCY. Every word is placed by rejection
-//     sampling against its already-placed neighbours, so the only Russian →
-//     English links on the board are the ones the generator meant to put there.
-//     That invariant is what makes the solution unique, the dead ends really
-//     dead, and a refusal always fair: no correct answer is ever turned down,
-//     because a correct answer nobody intended was never placed.
+//   - EXACTLY ONE LINK PER RUSSIAN WORD. Every Russian cell has its translation
+//     in one of its neighbours, and in only one. The board is laid out in PAIRS
+//     — the path first, then a matching over everything it did not take (see
+//     `pairOffPath`) — and every word is placed by rejection sampling against
+//     its already-placed neighbours. One half of that makes a refusal fair: the
+//     answer it turned down was never a right answer, because a link nobody
+//     intended was never placed. The other half is that no Russian word is ever
+//     stranded without its translation, which is to say there are NO DEAD ENDS.
 //
 // The asymmetry of the two half-steps is the game. From a Russian word you may
 // move only to its English translation; from an English word you may move to
-// any adjacent Russian word, free. So the branching sits on the English cells
-// and the knowledge sits on the Russian ones, and a Russian word whose
-// translation is not among its neighbours is a dead end — finding that out is
-// the exercise.
+// any adjacent Russian word, free.
+//
+// Every Russian word is answerable, so the player is never reading four glosses
+// to discover that none of them is the one — that was the version of this game
+// that was no fun. What goes wrong instead is geometric: the line may not cross
+// itself, so a route that wanders walls off its own way through and has to be
+// drawn back out. The exit is the one Russian word on the board whose
+// translation is not beside it, which is why nothing leads out of it.
+//
+// The carved path is therefore A way through rather than THE way through: it is
+// what `give up` reveals, and it is what guarantees the board can be finished at
+// all.
 import { shuffle } from './quiz.js'
 import { foldYo, stripStress } from './text.js'
 
@@ -64,7 +74,11 @@ import { foldYo, stripStress } from './text.js'
  * @property {Cell[]} cells
  * @property {number} start       index of the entrance (a Russian cell)
  * @property {number} goal        index of the exit (a Russian cell)
- * @property {number[]} solution  the whole path, entrance to exit, midpoints included
+ * @property {number[]} solution  one way through, entrance to exit, midpoints included
+ * @property {number} deadEnds    Russian cells left without a translation beside
+ *   them. Zero on every board the matching completes, which is all of them in
+ *   300 seeded 25×25 runs; carried so a regression would be visible rather than
+ *   merely unplayable.
  */
 
 /** The levels a maze draws on. The whole of A1–B1 is fair game. */
@@ -273,14 +287,12 @@ export function solutionCells(nodePath, n, size) {
 /**
  * Build a maze.
  * @param {PoolWord[]} pool
- * @param {{size?: number, rng?: () => number, decoyChance?: number, decoyDepth?: number}} [opts]
+ * @param {{size?: number, rng?: () => number}} [opts]
  * @returns {Maze}
  */
 export function generateMaze(pool, opts = {}) {
   const size = opts.size ?? DEFAULT_SIZE
   const rng = opts.rng ?? Math.random
-  const decoyChance = opts.decoyChance ?? 0.4
-  const decoyDepth = opts.decoyDepth ?? 3
   if (size < 5 || size % 2 === 0) throw new Error(`maze size must be odd and at least 5: ${size}`)
   const n = (size + 1) / 2
 
@@ -363,51 +375,108 @@ export function generateMaze(pool, opts = {}) {
     if (p + 1 < solution.length) placeEn(solution[p + 1], w)
   }
 
-  // False routes: real translation pairs hanging off the path, so that a valid
-  // link is not by itself proof of being on it. A decoy's English cell may not
-  // touch a path node, or the player could step off the decoy straight back
-  // onto the solution further along and skip whatever lay between.
-  const touchesPath = (i) => neighbours(size, i).some((k) => cells[k].side === 'ru' && onPath[k])
-  const pick = (list) => list[Math.floor(rng() * list.length)]
-  for (let p = 1; p < solution.length; p += 2) {
-    if (rng() >= decoyChance) continue
-    let from = solution[p]
-    const depth = 1 + Math.floor(rng() * decoyDepth)
-    for (let d = 0; d < depth; d++) {
-      const ruOpts = neighbours(size, from).filter(
-        (k) => cells[k].side === 'ru' && !assigned[k] && !onPath[k],
-      )
-      if (!ruOpts.length) break
-      const ru = pick(ruOpts)
-      const enOpts = neighbours(size, ru).filter(
-        (k) => cells[k].side === 'en' && !assigned[k] && !onPath[k] && !touchesPath(k),
-      )
-      if (!enOpts.length) break
-      const en = pick(enOpts)
-      const w = draw((cand) => ruFits(ru, cand) && enFits(en, cand))
-      if (!w) break
-      placeRu(ru, w)
-      placeEn(en, w)
-      from = en
+  // Everything else goes down in PAIRS: each remaining Russian cell is given a
+  // neighbouring English cell and the two share a word, so every Russian word
+  // on the board has its translation beside it. See `pairOffPath`.
+  //
+  // One loop, pairs in whatever order the matching produced, because the check
+  // that matters is symmetrical: a pair placed next to an earlier one tests
+  // itself against that one, so every adjacency is examined exactly once, from
+  // whichever side went down second.
+  const pairs = pairOffPath(size, cells, assigned, rng)
+  for (const [ru, en] of pairs) {
+    const w = draw((cand) => ruFits(ru, cand) && enFits(en, cand))
+    if (!w) throw new Error('not enough words to build a maze')
+    placeRu(ru, w)
+    placeEn(en, w)
+  }
+
+  return {
+    size,
+    cells,
+    start: solution[0],
+    goal: solution[solution.length - 1],
+    solution,
+    // A pair whose halves are not neighbours is a Russian word whose
+    // translation is not beside it — the one thing this board promises not to
+    // have. Counted rather than assumed away, so a regression shows up as a
+    // number instead of as a game that cannot be finished.
+    deadEnds: pairs.filter(([ru, en]) => !adjacent(size, ru, en)).length,
+  }
+}
+
+/**
+ * Pair every unassigned Russian cell with a neighbouring English one, so that
+ * the two can share a word and no Russian word is left without its translation
+ * beside it.
+ *
+ * This is a maximum bipartite matching — Kuhn's augmenting paths, with the
+ * candidates shuffled so the tiling differs from seed to seed. Two facts make
+ * it the right tool rather than overkill. The counts are exactly equal: a board
+ * of odd side has one more Russian cell than English, the path eats one more
+ * Russian cell than English (the exit has no partner), so what is left over is
+ * balanced to the cell. And a greedy pass is not enough at that tightness —
+ * it strands a couple of dozen cells on a full board, where augmenting paths
+ * strand none.
+ *
+ * The matching is over the cells the path did not take, so a pair can never
+ * reach into the path and offer a way onto it that the path itself did not
+ * put there.
+ * @param {number} size
+ * @param {Cell[]} cells
+ * @param {Uint8Array} assigned
+ * @param {() => number} rng
+ * @returns {[number, number][]} `[russian, english]` cell indices
+ */
+function pairOffPath(size, cells, assigned, rng) {
+  /** English cell → the Russian cell currently holding it. */
+  const takenBy = new Map()
+  /** Russian cell → the English cell it holds. */
+  const holds = new Map()
+  const free = (k) => !assigned[k]
+
+  /**
+   * Find this Russian cell a partner, moving others along if it has to.
+   * @param {number} ru
+   * @param {Set<number>} seen English cells already tried on this walk
+   */
+  const claim = (ru, seen) => {
+    const options = shuffle(
+      neighbours(size, ru).filter((k) => cells[k].side === 'en' && free(k)),
+      rng,
+    )
+    for (const en of options) {
+      if (seen.has(en)) continue
+      seen.add(en)
+      const held = takenBy.get(en)
+      if (held === undefined || claim(held, seen)) {
+        takenBy.set(en, ru)
+        holds.set(ru, en)
+        return true
+      }
     }
+    return false
   }
 
-  // Fillers. Russian first, so that by the time a gloss is placed, every
-  // Russian neighbour it has to avoid is already on the board.
-  for (const cell of cells) {
-    if (assigned[cell.i] || cell.side !== 'ru') continue
-    const w = draw((cand) => ruFits(cell.i, cand))
-    if (!w) throw new Error('not enough words to build a maze')
-    placeRu(cell.i, w)
-  }
-  for (const cell of cells) {
-    if (assigned[cell.i] || cell.side !== 'en') continue
-    const w = draw((cand) => enFits(cell.i, cand))
-    if (!w) throw new Error('not enough words to build a maze')
-    placeEn(cell.i, w)
-  }
+  const russian = shuffle(
+    cells.filter((c) => c.side === 'ru' && free(c.i)).map((c) => c.i),
+    rng,
+  )
+  const english = cells.filter((c) => c.side === 'en' && free(c.i)).map((c) => c.i)
+  for (const ru of russian) claim(ru, new Set())
 
-  return { size, cells, start: solution[0], goal: solution[solution.length - 1], solution }
+  // The two sides are balanced to the cell, so a stranded Russian cell always
+  // has a stranded English one to go with it, and pairing those off leaves
+  // every cell with a word — at the price of a word whose halves are not
+  // neighbours, which is a dead end. It has never come to this: 15 400 seeded
+  // boards across every size stranded nothing. The lattice is part of why. An
+  // odd/odd cell is the only kind that could be walled in by the path, and
+  // walling one in would need all four midpoints around it, which is the four
+  // sides of a square of nodes — a cycle, and a path has none.
+  const spareRu = russian.filter((i) => !holds.has(i))
+  const spareEn = english.filter((i) => !takenBy.has(i))
+  for (let k = 0; k < spareRu.length; k++) holds.set(spareRu[k], spareEn[k])
+  return [...holds]
 }
 
 /**

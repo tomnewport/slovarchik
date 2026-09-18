@@ -164,8 +164,10 @@ src/
                         #     after a line is worth — a second per feature the line fired on
                         #   meaningMaze  — the translation-path minigame (#752): a chessboard of
                         #     Russian and English words carved over a half-resolution lattice, and
-                        #     the one invariant the game rests on — no unintended valid adjacency,
-                        #     so the solution is unique and a refusal is never a right answer.
+                        #     the one invariant the game rests on — every Russian word has EXACTLY
+                        #     one of its translations beside it, the board being laid out in pairs
+                        #     (a bipartite matching over what the carved path did not take). So
+                        #     there are no dead ends, and a refusal is never a right answer.
                         #     Also `hyphenate`: the school break rules for both languages, because a
                         #     cell is four characters wide and no browser here has a ru dictionary
                         #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
