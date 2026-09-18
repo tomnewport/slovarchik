@@ -129,7 +129,8 @@ src/
                         #     drilling a word the learner has just demonstrated
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #     (numerals.js also READS numerals back: `parseCardinal` turns
-                        #      «со́рок три» into 43 off the same checked atom tables that spell it)
+                        #      «ты́сяча две́сти три» into 1203 off the same checked atom
+                        #      tables that spell it — 0–9999, round-tripped over every value)
                         #   paradigmShape  — why a verb's table is a different shape (no present tense,
                         #     third-person only, impersonal), in a sentence beside the table
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
@@ -165,7 +166,8 @@ src/
                         #     spreads through it, what one release of water does (put out, and
                         #     leave the ground too wet to catch), the circuit the plane flies
                         #     around a fire releasing a dozen times on the way, and the
-                        #     four-digit coordinate the learner says. Pure and seeded, so a
+                        #     four-digit coordinate the learner says — ONE cardinal 0–9999
+                        #     («четы́ре ты́сячи девяно́сто во́семь»), never two halves (#762). Pure and seeded, so a
                         #     two-minute round can be simulated in a millisecond — which is how
                         #     DEFAULTS was tuned, and re-tuned whenever the plane changed,
                         #     rather than by playing

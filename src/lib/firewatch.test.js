@@ -17,6 +17,7 @@ import {
   cellGlyph,
   coordinateFrom,
   coordinateLabel,
+  coordinateNumber,
   douse,
   generateForest,
   ignite,
@@ -27,6 +28,7 @@ import {
   step,
   GLYPH_CHAINS,
 } from './firewatch.js'
+import { cardinalNominative, parseCardinals } from './numerals.js'
 import { mulberry32 } from './seed.js'
 
 /**
@@ -230,6 +232,7 @@ describe('step', () => {
     world.opts.spawnPerSecond = 0
     world.opts.spawnRamp = 0
     world.opts.spreadPerSecond = 0
+    world.opts.spreadRamp = 0
     const reached = KERNEL.flat().filter((p) => p > 0).length
     douse(world, 43, 20, () => 0)
     step(world, world.opts.wetSeconds - 1, () => 0.99)
@@ -245,6 +248,7 @@ describe('step', () => {
     world.opts.spawnPerSecond = 0
     world.opts.spawnRamp = 0
     world.opts.spreadPerSecond = 0
+    world.opts.spreadRamp = 0
     const i = cellAt(50, 50)
     ignite(world, i)
     step(world, DEFAULTS.burnSeconds - 1, () => 0.99)
@@ -260,6 +264,7 @@ describe('step', () => {
     world.opts.spawnPerSecond = 0
     world.opts.spawnRamp = 0
     world.opts.spreadPerSecond = 0
+    world.opts.spreadRamp = 0
     const i = cellAt(20, 20)
     world.kind[i] = HOUSE_KIND
     ignite(world, i)
@@ -307,6 +312,7 @@ describe('step', () => {
       world.opts.spawnPerSecond = 0
       world.opts.spawnRamp = 0
       world.opts.spreadPerSecond = 0.5
+      world.opts.spreadRamp = 0
       world.opts.burnSeconds = 1e6
       const bare = TERRAIN.findIndex((t) => !t.burns)
       world.kind.fill(bare)
@@ -336,6 +342,7 @@ describe('step', () => {
   it('spawns new fires at the stated rate, and more of them as a round wears on', () => {
     const world = solidForest()
     world.opts.spreadPerSecond = 0
+    world.opts.spreadRamp = 0
     world.opts.burnSeconds = 1e6
     world.opts.spawnPerSecond = 1
     world.opts.spawnRamp = 0
@@ -348,6 +355,7 @@ describe('step', () => {
   it('spawns more than one fire in a step that is due more than one', () => {
     const world = solidForest()
     world.opts.spreadPerSecond = 0
+    world.opts.spreadRamp = 0
     world.opts.burnSeconds = 1e6
     world.opts.spawnPerSecond = 3
     world.opts.spawnRamp = 0
@@ -355,12 +363,41 @@ describe('step', () => {
     expect(world.burning.size).toBeGreaterThanOrEqual(3)
   })
 
-  it('is tuned above the threshold where a fire dies out on its own', () => {
-    // 8 neighbours × spread × burnSeconds must exceed 1 or every fire fizzles.
+  it('starts above the line where a fire dies out on its own', () => {
+    // 8 neighbours × spread × burnSeconds must exceed 1 or every fire fizzles
+    // and there is nothing to put out. It only just does at dawn, which is the
+    // point — an early fire grows slowly enough to be caught.
     expect(8 * DEFAULTS.spreadPerSecond * DEFAULTS.burnSeconds).toBeGreaterThan(1)
+  })
+
+  it('spreads faster as the shift wears on', () => {
+    // The sunrise ramp (#762). Measured as how far one fire gets in fifteen
+    // seconds, starting at dawn and starting at the end of the shift.
+    const reach = (startTime, seed) => {
+      const world = solidForest()
+      world.opts.spawnPerSecond = 0
+      world.opts.spawnRamp = 0
+      world.time = startTime
+      const rng = mulberry32(seed)
+      ignite(world, cellAt(50, 50))
+      for (let t = 0; t < 15; t += 0.1) step(world, 0.1, rng)
+      return world.lost + world.burning.size
+    }
+    const mean = (startTime) => {
+      let total = 0
+      for (let seed = 1; seed <= 40; seed++) total += reach(startTime, seed)
+      return total / 40
+    }
+    const dawn = mean(0)
+    const noon = mean(120)
+    expect(noon).toBeGreaterThan(dawn * 1.5)
+  })
+
+  it('is fierce by the end of a shift, left alone', () => {
     const world = solidForest()
     world.opts.spawnPerSecond = 0
     world.opts.spawnRamp = 0
+    world.time = 100
     const rng = mulberry32(4)
     ignite(world, cellAt(50, 50))
     for (let t = 0; t < 40; t += 0.1) step(world, 0.1, rng)
@@ -517,51 +554,45 @@ describe('the drop', () => {
 })
 
 describe('coordinates', () => {
-  it('writes a square as the four digits the learner types', () => {
+  it('writes a square as the four digits it is', () => {
     expect(coordinateLabel(12, 3)).toBe('1203')
     expect(coordinateLabel(43, 20)).toBe('4320')
     expect(coordinateLabel(0, 0)).toBe('0000')
     expect(coordinateLabel(99, 99)).toBe('9999')
+    expect(coordinateNumber(12, 3)).toBe(1203)
+    expect(coordinateNumber(0, 7)).toBe(7)
   })
 
-  it('reads two spoken numbers as a square', () => {
-    expect(coordinateFrom([43, 20])).toEqual({ x: 43, y: 20 })
-    expect(coordinateFrom([0, 0])).toEqual({ x: 0, y: 0 })
-    expect(coordinateFrom([99, 99])).toEqual({ x: 99, y: 99 })
+  it('reads one spoken number as a square', () => {
+    expect(coordinateFrom([1203])).toEqual({ x: 12, y: 3 })
+    expect(coordinateFrom([4320])).toEqual({ x: 43, y: 20 })
+    expect(coordinateFrom([0])).toEqual({ x: 0, y: 0 })
+    expect(coordinateFrom([9999])).toEqual({ x: 99, y: 99 })
+    expect(coordinateFrom([7])).toEqual({ x: 0, y: 7 })
   })
 
-  it('accepts a half under ten said either way', () => {
-    // 1203 read off the screen digit-pair by digit-pair is «двенадцать ноль
-    // три»; said as a number it is «двенадцать три». Both mean the same square,
-    // and rejecting the first would teach a reading the box does not take.
-    expect(coordinateFrom([12, 3])).toEqual({ x: 12, y: 3 })
-    expect(coordinateFrom([12, 0, 3])).toEqual({ x: 12, y: 3 })
-    expect(coordinateFrom([0, 3, 12])).toEqual({ x: 3, y: 12 })
-    expect(coordinateFrom([0, 3, 0, 5])).toEqual({ x: 3, y: 5 })
-  })
-
-  it('does not swallow a zero that is a half in its own right', () => {
-    expect(coordinateFrom([43, 0])).toEqual({ x: 43, y: 0 })
-    expect(coordinateFrom([0, 43])).toEqual({ x: 0, y: 43 })
-    // The ambiguous case: «ноль оди́н» is 0001 — two halves — and not the start
-    // of a half 01-something, because reading it that way leaves nothing for
-    // the second half. The plain reading wins whenever it completes.
-    expect(coordinateFrom([0, 1])).toEqual({ x: 0, y: 1 })
-    expect(coordinateFrom([0, 9])).toEqual({ x: 0, y: 9 })
+  it('refuses the halves said separately, which is the habit it replaces', () => {
+    // «со́рок три два́дцать» reads the square off the axes instead of
+    // saying it; taking it would let the learner skip the whole drill (#762).
+    expect(coordinateFrom([43, 20])).toBe(null)
+    expect(coordinateFrom([12, 3])).toBe(null)
   })
 
   it('names no square for anything else', () => {
     expect(coordinateFrom(null)).toBe(null)
     expect(coordinateFrom([])).toBe(null)
-    expect(coordinateFrom([43])).toBe(null)
-    expect(coordinateFrom([43, 20, 7])).toBe(null)
+    expect(coordinateFrom([10_000])).toBe(null)
+    expect(coordinateFrom([-1])).toBe(null)
+    expect(coordinateFrom([12.5])).toBe(null)
   })
 
-  it('round-trips every square on the map', () => {
-    for (const x of [0, 1, 9, 10, 43, 99]) {
-      for (const y of [0, 1, 9, 10, 20, 99]) {
-        const label = coordinateLabel(x, y)
-        expect(coordinateFrom([Number(label.slice(0, 2)), Number(label.slice(2))])).toEqual({ x, y })
+  it('round-trips every square on the map, said out loud in Russian', () => {
+    // The whole drill, end to end: a square becomes a number, the number
+    // becomes the Russian for it, and the Russian becomes the square again.
+    for (let x = 0; x < SIZE; x++) {
+      for (let y = 0; y < SIZE; y++) {
+        const spoken = cardinalNominative(coordinateNumber(x, y))
+        expect(coordinateFrom(parseCardinals(spoken))).toEqual({ x, y })
       }
     }
   })

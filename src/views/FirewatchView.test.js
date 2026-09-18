@@ -83,14 +83,15 @@ describe('reading what was typed', () => {
     const box = wrapper.find('input[lang="ru"]')
 
     // Nothing typed: a worked example of the rule, not an instruction.
-    expect(hint(wrapper)).toContain('4320')
-    expect(hint(wrapper)).toContain('со́рок три два́дцать')
-    await box.setValue('со́рок')
-    expect(hintCoord(wrapper)).toBe('40··')
-    await box.setValue('со́рок три')
-    expect(hintCoord(wrapper)).toBe('43··')
-    await box.setValue('со́рок три два́дцать')
-    expect(hintCoord(wrapper)).toBe('4320')
+    expect(hint(wrapper)).toContain('1203')
+    expect(hint(wrapper)).toContain('ты́сяча две́сти три')
+    // The number assembles itself as the words arrive.
+    await box.setValue('ты́сяча')
+    expect(hintCoord(wrapper)).toBe('1000')
+    await box.setValue('ты́сяча две́сти')
+    expect(hintCoord(wrapper)).toBe('1200')
+    await box.setValue('ты́сяча две́сти три')
+    expect(hintCoord(wrapper)).toBe('1203')
     expect(hint(wrapper)).toContain('→')
   })
 
@@ -102,18 +103,20 @@ describe('reading what was typed', () => {
     expect(wrapper.find('p.parse').classes()).toContain('bad')
   })
 
-  it('refuses a third number', async () => {
+  it('refuses the halves said separately, and says why', async () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
-    await wrapper.find('input[lang="ru"]').setValue('оди́н два три')
-    expect(hint(wrapper)).toContain('Two numbers, not more')
+    // The habit the drill exists to replace: reading 4320 off the two axes.
+    await wrapper.find('input[lang="ru"]').setValue('со́рок три два́дцать')
+    expect(hint(wrapper)).toContain('One number for the whole square')
+    expect(wrapper.find('button[type="submit"]').attributes('disabled')).toBeDefined()
   })
 
   it('accepts the numbers without their stress marks', async () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
-    await wrapper.find('input[lang="ru"]').setValue('девяносто девять ноль')
-    expect(hintCoord(wrapper)).toBe('9900')
+    await wrapper.find('input[lang="ru"]').setValue('девять тысяч девятьсот девяносто девять')
+    expect(hintCoord(wrapper)).toBe('9999')
   })
 })
 
@@ -123,16 +126,16 @@ describe('sending a plane', () => {
     await start(wrapper)
     const button = wrapper.find('button[type="submit"]')
     expect(button.attributes('disabled')).toBeDefined()
-    await wrapper.find('input[lang="ru"]').setValue('со́рок три')
+    await wrapper.find('input[lang="ru"]').setValue('соба́ка')
     expect(button.attributes('disabled')).toBeDefined()
-    await wrapper.find('input[lang="ru"]').setValue('со́рок три два́дцать')
+    await wrapper.find('input[lang="ru"]').setValue('четы́ре ты́сячи три́дцать два')
     expect(button.attributes('disabled')).toBeUndefined()
   })
 
   it('sends it and clears the box, ready for the next one', async () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
-    await wrapper.find('input[lang="ru"]').setValue('со́рок три два́дцать')
+    await wrapper.find('input[lang="ru"]').setValue('четы́ре ты́сячи три́дцать два')
     await wrapper.find('form.send').trigger('submit')
     expect(wrapper.vm.sent).toBe(1)
     expect(wrapper.find('input[lang="ru"]').element.value).toBe('')
@@ -148,18 +151,11 @@ describe('sending a plane', () => {
 })
 
 describe('the four-digit coordinate', () => {
-  it('pads a single-digit half, so the shape is always four digits', async () => {
+  it('pads a small number, so the shape is always four digits', async () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
-    await wrapper.find('input[lang="ru"]').setValue('двенадцать три')
-    expect(hintCoord(wrapper)).toBe('1203')
-  })
-
-  it('takes a half under ten read off the screen as «ноль три»', async () => {
-    const wrapper = mount(FirewatchView)
-    await start(wrapper)
-    await wrapper.find('input[lang="ru"]').setValue('двенадцать ноль три')
-    expect(hintCoord(wrapper)).toBe('1203')
+    await wrapper.find('input[lang="ru"]').setValue('семь')
+    expect(hintCoord(wrapper)).toBe('0007')
   })
 
   it('tints each half to match the axis it is read off', async () => {
@@ -180,7 +176,7 @@ describe('the fleet', () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
     expect(wrapper.vm.fleet).toBe(2)
-    for (const where of ['десять десять', 'двадцать двадцать']) {
+    for (const where of ['тысяча', 'две тысячи']) {
       await wrapper.find('input[lang="ru"]').setValue(where)
       await wrapper.find('form.send').trigger('submit')
     }
@@ -192,7 +188,7 @@ describe('the fleet', () => {
   it('queues the rest, so typing never has to wait for a plane', async () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
-    for (const where of ['десять десять', 'двадцать двадцать', 'тридцать тридцать']) {
+    for (const where of ['тысяча', 'две тысячи', 'три тысячи тридцать']) {
       await wrapper.find('input[lang="ru"]').setValue(where)
       await wrapper.find('form.send').trigger('submit')
     }
@@ -207,12 +203,12 @@ describe('the fleet', () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
     for (let n = 0; n < 12; n++) {
-      await wrapper.find('input[lang="ru"]').setValue('десять десять')
+      await wrapper.find('input[lang="ru"]').setValue('тысяча')
       await wrapper.find('form.send').trigger('submit')
     }
     expect(wrapper.vm.queued.length).toBeLessThanOrEqual(6)
     // The one that bounced is still in the box to try again.
-    expect(wrapper.find('input[lang="ru"]').element.value).toBe('десять десять')
+    expect(wrapper.find('input[lang="ru"]').element.value).toBe('тысяча')
   })
 })
 
@@ -258,12 +254,12 @@ describe('reading a coordinate off the map', () => {
     await start(wrapper)
     const canvas = sizeMap(wrapper, 400)
     await point(canvas, 'pointerdown', 174, 82)
-    expect(wrapper.find('.readout').text()).not.toContain('со́рок')
+    expect(wrapper.find('.readout').text()).not.toContain('ты́сячи')
 
     const toggle = wrapper.findAll('button').find((b) => b.text().includes('Show the words'))
     await toggle.trigger('click')
-    expect(wrapper.find('.readout').text()).toContain('со́рок три')
-    expect(wrapper.find('.readout').text()).toContain('два́дцать')
+    // 4320, said whole — not «со́рок три» and «два́дцать».
+    expect(wrapper.find('.readout').text()).toContain('четы́ре ты́сячи три́ста два́дцать')
   })
 })
 
