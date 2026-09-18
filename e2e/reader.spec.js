@@ -11,6 +11,7 @@ test('swiping reveals a read-aloud action, and reading settings survive a reload
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
   const fable = page.locator('.library-book').filter({ hasText: 'Стрекоза и Муравей' })
+  await fable.locator('summary.library-book-summary').click()
   await fable.getByRole('button', { name: 'Download' }).click()
   await fable.getByRole('link', { name: 'Read' }).click()
 
@@ -24,6 +25,21 @@ test('swiping reveals a read-aloud action, and reading settings survive a reload
   const nextVerse = text.locator('.reader-verse .reader-sentence + .reader-sentence').first()
   await expect(nextVerse).toBeVisible()
   expect(await nextVerse.evaluate((node) => parseFloat(getComputedStyle(node).marginBlockStart))).toBeGreaterThan(6)
+
+  await page.setViewportSize({ width: 393, height: 600 })
+  const progress = page.getByRole('progressbar', { name: 'Book progress' })
+  await expect(progress).toHaveAttribute('aria-valuemin', '0')
+  await expect(progress).toHaveAttribute('aria-valuemax', '100')
+  await expect.poll(() => progress.locator('.reader-progress-current').evaluate((node) => parseFloat(node.style.width))).toBeLessThan(100)
+  const firstPageEnd = await progress.locator('.reader-progress-current').evaluate((node) => parseFloat(node.style.width))
+  expect(firstPageEnd).toBeGreaterThan(0)
+  expect(firstPageEnd).toBeLessThan(100)
+  await expect(page.locator('.reader-progress-label')).toContainText('Current page: 0–')
+  await page.getByRole('button', { name: 'Next page' }).click()
+  await expect.poll(() => progress.locator('.reader-progress-current').evaluate((node) => parseFloat(node.style.left))).toBeCloseTo(firstPageEnd, 4)
+  await expect.poll(() => progress.locator('.reader-progress-current').evaluate((node) => parseFloat(node.style.width))).toBeGreaterThan(0)
+  await page.getByRole('button', { name: 'Previous page' }).click()
+  await expect.poll(() => progress.locator('.reader-progress-current').evaluate((node) => parseFloat(node.style.left))).toBe(0)
 
   async function expectPageFits() {
     await expect.poll(() => text.evaluate((node) => node.scrollHeight - node.clientHeight)).toBeLessThanOrEqual(1)
@@ -76,6 +92,7 @@ test('prose sentences have a visible gap without adding word buttons', async ({ 
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
   const fable = page.locator('.library-book').filter({ hasText: 'Муравей и голубка' })
+  await fable.locator('summary.library-book-summary').click()
   await fable.getByRole('button', { name: 'Download' }).click()
   await fable.getByRole('link', { name: 'Read' }).click()
 
@@ -84,4 +101,29 @@ test('prose sentences have a visible gap without adding word buttons', async ({ 
   await expect(nextSentence).toBeVisible()
   expect(await nextSentence.evaluate((node) => parseFloat(getComputedStyle(node).marginInlineStart))).toBeGreaterThan(6)
   expect(await text.locator('.reader-word').count()).toBeGreaterThan(await text.getByRole('button').count())
+})
+
+test('the book accordion fits a phone and Read looks like an action', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 })
+  await page.goto('/')
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  const books = page.locator('.library-book')
+  await expect(books).toHaveCount(3)
+  await expect(page.locator('.library-book[open]')).toHaveCount(0)
+
+  const first = books.filter({ hasText: 'Муравей и голубка' })
+  await first.locator('summary.library-book-summary').click()
+  await expect(first).toHaveAttribute('open', '')
+  await expect(first.getByRole('button', { name: 'Download' })).toBeVisible()
+  await first.getByRole('button', { name: 'Download' }).click()
+  const read = first.getByRole('link', { name: 'Read' })
+  await expect(read).toBeVisible()
+  expect(await read.evaluate((node) => getComputedStyle(node).backgroundColor)).toBe('rgb(79, 125, 255)')
+
+  const second = books.filter({ hasText: 'Косточка' })
+  await second.locator('summary.library-book-summary').click()
+  await expect(first).not.toHaveAttribute('open', '')
+  await expect(second).toHaveAttribute('open', '')
+  await second.getByText('Source and rights').click()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320)
 })

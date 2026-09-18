@@ -124,6 +124,7 @@ test('a chosen literature pack opens, bookmarks and survives offline, then remov
 
   const fable = page.locator('.library-book').filter({ hasText: 'Стрекоза и Муравей' })
   await expect(fable.getByText('Иван Крылов')).toBeVisible()
+  await fable.locator('summary.library-book-summary').click()
   await fable.getByRole('button', { name: 'Download' }).click()
   await expect(fable.getByRole('link', { name: 'Read' })).toBeVisible()
   await fable.getByRole('link', { name: 'Read' }).click()
@@ -143,6 +144,7 @@ test('a chosen literature pack opens, bookmarks and survives offline, then remov
   await expect(page.getByRole('dialog', { name: 'Dictionary: Стрекоза' })).toBeVisible()
 
   await page.getByRole('link', { name: 'Back to library' }).click()
+  await fable.locator('summary.library-book-summary').click()
   await fable.getByRole('button', { name: 'Remove download' }).click()
   await expect(fable.getByRole('link', { name: 'Read' })).toHaveCount(0)
   await expect(fable.getByRole('button', { name: 'Download' })).toBeVisible()
