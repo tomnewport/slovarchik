@@ -129,7 +129,7 @@ test('a chosen literature pack opens, bookmarks and survives offline, then remov
   await fable.getByRole('link', { name: 'Read' }).click()
   await expect(page.getByRole('article', { name: 'Russian text' })).toContainText('Попрыгунья Стрекоза')
   await page.getByRole('button', { name: /Reveal translation for Попрыгунья Стрекоза/ }).click()
-  await expect(page.getByText('The sprightly Dragonfly')).toBeVisible()
+  await expect(page.getByRole('article', { name: 'Russian text' }).getByText('The sprightly Dragonfly')).toBeVisible()
   await page.getByRole('button', { name: 'Bookmark' }).click()
   await page.getByRole('button', { name: 'Next page' }).click()
 
