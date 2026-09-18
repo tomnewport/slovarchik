@@ -72,6 +72,12 @@ const MINIGAMES = [
     label: 'Bomb disposal',
     skill: 'Colours, and following a spoken instruction to the letter.',
   },
+  {
+    to: '/maze',
+    icon: '🧭',
+    label: 'Meaning maze',
+    skill: 'Knowing a translation on sight — and knowing when it is not one.',
+  },
 ]
 
 function openDrill(to) {
