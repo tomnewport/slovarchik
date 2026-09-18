@@ -198,6 +198,7 @@ test('the Lenin selection downloads and keeps sentence progress and bookmarks', 
       await text.evaluate((node) => node.scrollTo(0, node.scrollHeight))
       await expect.poll(() => text.evaluate((node) => node.scrollTop)).toBeGreaterThan(0)
       await page.setViewportSize({ width: 393, height: 620 })
+      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
       checkedLongSentence = true
     }
     const previousRange = await current.getAttribute('style')
