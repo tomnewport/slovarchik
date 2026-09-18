@@ -63,13 +63,12 @@ src/
   router/index.js       # routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, /bomb,
-                        #   /firewatch, /library, /reader/:bookId, and the
+                        #   /firewatch, /maze, /library, /reader/:bookId, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView and FirewatchView are the minigames — #726's
-                        #   between-practice interludes, launched for now from HomeView's
-                        #   Minigames section rather than from inside a session.
+                        #   BombDisposalView, FirewatchView and MeaningMazeView are
+                        #   between-practice minigames launched from HomeView.
                         #   LibraryView downloads opt-in book packs; ReaderView
                         #   paginates literature by stable sentence ID.
                         #   FirewatchView is the only canvas in the app: 10 000 cells
@@ -131,7 +130,8 @@ src/
                         #     drilling a word the learner has just demonstrated
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
                         #     (numerals.js also READS numerals back: `parseCardinal` turns
-                        #      «со́рок три» into 43 off the same checked atom tables that spell it)
+                        #      «ты́сяча две́сти три» into 1203 off the same checked atom
+                        #      tables that spell it — 0–9999, round-tripped over every value)
                         #   paradigmShape  — why a verb's table is a different shape (no present tense,
                         #     third-person only, impersonal), in a sentence beside the table
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
@@ -157,11 +157,18 @@ src/
                         #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
                         #     grammar that both SAYS the instruction in Russian and grades the cut,
                         #     so the sentence and the right answer cannot drift apart
+                        #   meaningMaze  — the translation-path minigame (#752): a chessboard of
+                        #     Russian and English words carved over a half-resolution lattice, and
+                        #     the one invariant the game rests on — no unintended valid adjacency,
+                        #     so the solution is unique and a refusal is never a right answer.
+                        #     Also `hyphenate`: the school break rules for both languages, because a
+                        #     cell is four characters wide and no browser here has a ru dictionary
                         #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
                         #     spreads through it, what one release of water does (put out, and
                         #     leave the ground too wet to catch), the circuit the plane flies
                         #     around a fire releasing a dozen times on the way, and the
-                        #     four-digit coordinate the learner says. Pure and seeded, so a
+                        #     four-digit coordinate the learner says — ONE cardinal 0–9999
+                        #     («четы́ре ты́сячи девяно́сто во́семь»), never two halves (#762). Pure and seeded, so a
                         #     two-minute round can be simulated in a millisecond — which is how
                         #     DEFAULTS was tuned, and re-tuned whenever the plane changed,
                         #     rather than by playing

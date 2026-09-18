@@ -421,35 +421,45 @@ export function yearCardinal(n) {
 
 // ── Reading cardinals back ───────────────────────────────────────────────
 // The generator above turns a number into words; this turns words back into a
-// number, for drills where the learner *types* the numeral (#731). Scope is
-// deliberately 0–99: the grammar of a two-digit cardinal is a closed, tiny
-// thing (a ten, a teen, a unit, or a ten followed by a unit) and the atoms are
-// already in this file, so the reverse lookup is the same checked table read
-// the other way rather than a second source of truth.
+// number, for drills where the learner *says* the numeral (#731, #762). The
+// atoms are already in this file, so the reverse is the same checked table
+// read the other way rather than a second source of truth — and the round
+// trip is tested over every number in range.
+//
+// Scope is 0–9999, which is the range #762 asks the firewatch map to drill:
+// «четы́ре ты́сячи девяно́сто во́семь», not «со́рок» «девяно́сто во́семь». That
+// means the full shape of a Russian cardinal below ten thousand — a thousands
+// group, a hundreds word, and a teen or a ten-and-unit — assembled the same
+// way `cardinal` assembles it.
 
 /** Normalised word → value, built once from the atom tables above. */
 const UNIT_WORDS = new Map()
 const TEEN_WORDS = new Map()
 const TENS_WORDS = new Map()
+const HUNDRED_WORDS = new Map()
+/** The three forms of «ты́сяча» a count governs: 1, 2–4, and 5+. */
+const THOUSAND_WORDS = new Set(['тысяча', 'тысячи', 'тысяч'])
 {
   const put = (map, word, value) => map.set(normalize(word), value)
   UNITS.forEach((word, value) => put(UNIT_WORDS, word, value))
   // «нуль» is the other everyday word for zero; «одна/одно/две» are the forms
-  // a learner reaches for when a feminine or neuter noun is in their head.
+  // a learner reaches for when a feminine or neuter noun is in their head —
+  // and «одна ты́сяча» is one of them, since ты́сяча is feminine.
   put(UNIT_WORDS, 'нуль', 0)
   for (const [value, word] of Object.entries(UNITS_F)) put(UNIT_WORDS, word, Number(value))
   for (const [value, word] of Object.entries(UNITS_N)) put(UNIT_WORDS, word, Number(value))
   TEENS.forEach((word, i) => put(TEEN_WORDS, word, 10 + i))
   TENS.forEach((word, i) => word && put(TENS_WORDS, word, i * 10))
+  HUNDREDS.forEach((word, i) => word && put(HUNDRED_WORDS, word, i * 100))
 }
 
 /**
- * Read one 0–99 cardinal starting at `i`.
+ * Read the 0–99 tail of a group: a teen, or a ten with an optional unit.
  * @param {string[]} tokens
  * @param {number} i
  * @returns {{value: number, next: number}|null}
  */
-function readCardinal(tokens, i) {
+function readTensUnits(tokens, i) {
   const word = tokens[i]
   if (TENS_WORDS.has(word)) {
     const tens = /** @type {number} */ (TENS_WORDS.get(word))
@@ -461,6 +471,65 @@ function readCardinal(tokens, i) {
   if (TEEN_WORDS.has(word)) return { value: /** @type {number} */ (TEEN_WORDS.get(word)), next: i + 1 }
   if (UNIT_WORDS.has(word)) return { value: /** @type {number} */ (UNIT_WORDS.get(word)), next: i + 1 }
   return null
+}
+
+/**
+ * Read a 0–999 group: an optional hundreds word, then its 0–99 tail.
+ * @param {string[]} tokens
+ * @param {number} i
+ * @returns {{value: number, next: number}|null}
+ */
+function readGroup(tokens, i) {
+  let value = 0
+  let j = i
+  let read = false
+  if (HUNDRED_WORDS.has(tokens[j])) {
+    value += /** @type {number} */ (HUNDRED_WORDS.get(tokens[j]))
+    j += 1
+    read = true
+  }
+  const tail = readTensUnits(tokens, j)
+  if (tail) {
+    value += tail.value
+    j = tail.next
+    read = true
+  }
+  return read ? { value, next: j } : null
+}
+
+/**
+ * Read one 0–9999 cardinal starting at `i`.
+ *
+ * The thousands group is read speculatively: a group only counts as thousands
+ * if a form of «ты́сяча» follows it, so «три» stays 3 and «три ты́сячи» becomes
+ * 3000 without either reading having to be guessed at.
+ * @param {string[]} tokens
+ * @param {number} i
+ * @returns {{value: number, next: number}|null}
+ */
+function readCardinal(tokens, i) {
+  let value = 0
+  let j = i
+  let read = false
+  const multiplier = readGroup(tokens, j)
+  if (multiplier && THOUSAND_WORDS.has(tokens[multiplier.next])) {
+    value += multiplier.value * 1000
+    j = multiplier.next + 1
+    read = true
+  } else if (THOUSAND_WORDS.has(tokens[j])) {
+    // A bare «ты́сяча» is 1000: the generator drops the multiplier before a
+    // scale noun, and so does everyday speech.
+    value += 1000
+    j += 1
+    read = true
+  }
+  const rest = readGroup(tokens, j)
+  if (rest) {
+    value += rest.value
+    j = rest.next
+    read = true
+  }
+  return read ? { value, next: j } : null
 }
 
 /**
@@ -488,7 +557,7 @@ export function parseCardinals(text) {
 }
 
 /**
- * Read exactly one 0–99 cardinal, or null if the string is anything else.
+ * Read exactly one 0–9999 cardinal, or null if the string is anything else.
  * @param {string} text
  * @returns {number|null}
  */

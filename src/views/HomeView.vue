@@ -61,10 +61,7 @@ const DRILLS = [
   { to: '/speaking', label: 'Speaking' },
 ]
 
-// Minigames (#726). Not drills: a game is a break from practice that happens
-// to drill something, so they get their own section rather than a pill in the
-// free-practice list — and they say which habit they are for, because that is
-// the reason to pick one over another.
+// Other ways to practise outside a session, gathered on Home (#726).
 const MINIGAMES = [
   {
     to: '/bomb',
@@ -77,6 +74,12 @@ const MINIGAMES = [
     icon: '🔥',
     label: 'Firewatch',
     skill: 'Building two-digit numbers, and saying them at speed.',
+  },
+  {
+    to: '/maze',
+    icon: '🧭',
+    label: 'Meaning maze',
+    skill: 'Knowing a translation on sight — and knowing when it is not one.',
   },
   {
     to: '/library',
