@@ -15,6 +15,11 @@
 // themselves say it. Only a self-certified miss records a wrong answer — which
 // also means the learner is trusted when they say they got it, exactly as they
 // already are when the recogniser is unavailable altogether.
+//
+// Whoever is grading, the learner never gives a verdict blind: the 'judge' step
+// puts the model answer on screen AND reads it aloud before asking. You cannot
+// say whether you said it right until you have heard what right sounds like —
+// and the recogniser's transcript, when there is one, is not that.
 import { computed, onBeforeUnmount, ref } from 'vue'
 
 import { typingSequence } from '../../lib/phrases.js'
@@ -38,6 +43,11 @@ const props = defineProps({ exercise: { type: Object, required: true } })
 const emit = defineEmits(['done'])
 
 const canRecognize = recognitionSupported()
+// Whether the model answer can be *heard* rather than only read. Without a
+// voice the verdict step still shows the sentence, and the wording stops
+// promising a read-aloud that won't come.
+const canSpeak = speechSupported()
+const checkVerb = canSpeak ? 'hear' : 'check'
 
 // Grade by hand when there's no recogniser at all, or when the learner has
 // turned self-grading on for the rest of this app session.
@@ -107,7 +117,8 @@ function takeHint() {
 // --- Speaking and grading ---------------------------------------------------
 
 // phase: 'prompt' (thinking, waiting to speak) | 'listening'
-//      | 'judge' (heard something that didn't match — the learner decides)
+//      | 'judge' (the attempt is over — the answer is read out and the
+//                 learner decides; reached by a mismatch or by self-grading)
 //      | 'graded'
 const phase = ref('prompt')
 const transcript = ref('')
@@ -252,8 +263,18 @@ function tryAgain() {
   beginListen()
 }
 
-// The learner's own verdict — from the judge step, or from self-grading, where
-// it is the only verdict there is. It counts exactly as a recognised attempt
+// Self-grading: the learner has said it aloud and is ready for the verdict.
+// The same judge step the recogniser path uses — the answer shown and read
+// slowly — and only then the question. Free, and deliberately so: HINT_REVEAL
+// costs the fire because it helps *produce* the sentence, and by here there is
+// nothing left to produce.
+function checkAnswer() {
+  phase.value = 'judge'
+  speakTargetSlow()
+}
+
+// The learner's own verdict — from the judge step, whether they arrived there
+// from a mismatch or by self-grading. It counts exactly as a recognised attempt
 // would, right or wrong.
 function selfAssessed(correct) {
   settle(correct)
@@ -386,6 +407,41 @@ onBeforeUnmount(() => {
       </div>
     </template>
 
+    <!-- The attempt is over and the verdict is the learner's to give — because
+         the recogniser heard something that didn't match, or because there is
+         no recogniser and they have said they're done. Either way the model
+         answer is on screen and read aloud before the question: nobody can say
+         whether they said it right without hearing what right sounds like, and
+         a transcript of what the recogniser thought it heard is not that.
+         Free, deliberately — HINT_REVEAL charges the fire for help *producing*
+         the sentence, and by here there is nothing left to produce. -->
+    <template v-else-if="phase === 'judge'">
+      <div class="answer">
+        <span lang="ru" class="ru">{{ exercise.ru }}</span>
+        <SpeakButton :text="exercise.ru" :slow="true" />
+      </div>
+      <p v-if="transcript" class="muted heard" style="margin: 0">
+        Heard: "{{ transcript }}"
+        <span class="match-score">· {{ Math.round(similarity * 100) }}% letters</span>
+      </p>
+      <p class="muted info">
+        <template v-if="!selfGrading">
+          That isn't what we heard — but the recogniser mishears plenty. Was what you said right?
+        </template>
+        <template v-else-if="canSpeak">
+          Here's the answer, read out — was that what you said?
+        </template>
+        <template v-else>
+          Here's the answer — was that what you said?
+        </template>
+      </p>
+      <div class="row">
+        <button class="primary next" @click="selfAssessed(true)">✓ I said it</button>
+        <button class="missed" @click="selfAssessed(false)">✗ Not quite</button>
+        <button v-if="!selfGrading" @click="tryAgain">🎤 Try again</button>
+      </div>
+    </template>
+
     <!-- With a working recogniser: listen, and let a match stand on its own. -->
     <template v-else-if="!selfGrading">
       <p v-if="errorMessage && phase === 'prompt'" class="feedback bad" style="margin: 0">
@@ -403,64 +459,53 @@ onBeforeUnmount(() => {
         </div>
       </template>
 
-      <template v-else-if="phase === 'prompt'">
+      <template v-else>
         <div class="row">
           <button class="primary mic" @click="beginListen">🎤 Speak</button>
         </div>
       </template>
-
-      <!-- Heard something that didn't match. That is not a wrong answer — the
-           recogniser is not reliable enough to conclude one — so the learner
-           looks at the model, at what was heard, and decides. -->
-      <template v-else-if="phase === 'judge'">
-        <div class="answer">
-          <span lang="ru" class="ru">{{ exercise.ru }}</span>
-          <SpeakButton :text="exercise.ru" :slow="true" />
-        </div>
-        <p v-if="transcript" class="muted heard" style="margin: 0">
-          Heard: "{{ transcript }}"
-          <span class="match-score">· {{ Math.round(similarity * 100) }}% letters</span>
-        </p>
-        <p class="muted info">
-          That isn't what we heard — but the recogniser mishears plenty. Was what you said right?
-        </p>
-        <div class="row">
-          <button class="primary next" @click="selfAssessed(true)">✓ I said it</button>
-          <button class="missed" @click="selfAssessed(false)">✗ Not quite</button>
-          <button @click="tryAgain">🎤 Try again</button>
-        </div>
-      </template>
-
-      <!-- Escape hatch for a recogniser that can't do the job — mis-hearing this
-           word, or drowned out on a noisy train. Hands grading to the learner
-           rather than putting a verdict to them about every single attempt. -->
-      <button class="self-certify" @click="certifySelf">
-        Speech not working? Grade it yourself
-      </button>
     </template>
 
-    <!-- Self-graded: say it aloud, then report how it went. It counts exactly
-         as a recognised attempt would, right or wrong. -->
+    <!-- Self-graded: say it aloud, then ask for the answer and report how it
+         went. Two steps, not one — the answer arrives *after* the attempt, so
+         it judges the attempt rather than supplying it. The verdict counts
+         exactly as a recognised attempt would, right or wrong. -->
     <template v-else>
       <p class="muted info">
         <template v-if="canRecognize">
-          You're grading yourself — say it aloud, then mark how it went. It counts the same as a
-          recognised answer.
+          You're grading yourself — say it aloud, then {{ checkVerb }} the answer and mark how it
+          went. It counts the same as a recognised answer.
         </template>
         <template v-else>
           Speech recognition isn't available in this browser (try Chrome or Edge) — say it aloud,
-          then mark how it went.
+          then {{ checkVerb }} the answer and mark how it went.
         </template>
       </p>
       <div class="row">
-        <button class="primary said" @click="selfAssessed(true)">✓ I said it</button>
-        <button class="missed" @click="selfAssessed(false)">✗ Not quite</button>
+        <button class="primary said" @click="checkAnswer">
+          I've said it — {{ checkVerb }} the answer
+        </button>
         <button v-if="revealed" @click="speakSlow">🐢 Slow</button>
       </div>
-      <button v-if="canRecognize" class="self-certify" @click="useMic">
-        Speech working again? Use the microphone
-      </button>
     </template>
+
+    <!-- Escape hatch for a recogniser that can't do the job — mis-hearing this
+         word, or drowned out on a noisy train. Hands grading to the learner
+         rather than putting a verdict to them about every single attempt. Still
+         offered at the judge step: a mismatch is exactly when the learner
+         discovers the recogniser is useless here. -->
+    <button v-if="!selfGrading && phase !== 'graded'" class="self-certify" @click="certifySelf">
+      Speech not working? Grade it yourself
+    </button>
+    <!-- Only from the prompt: switching back mid-verdict would throw away an
+         attempt that has already been made. -->
+    <button
+      v-if="selfGrading && canRecognize && phase === 'prompt'"
+      class="self-certify"
+      @click="useMic"
+    >
+      Speech working again? Use the microphone
+    </button>
   </div>
 </template>
 
