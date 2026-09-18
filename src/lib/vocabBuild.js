@@ -13,6 +13,7 @@ import { normalizeGoverns } from './verbGovernment.js'
 /** Map a vocab filename (without extension) to its part of speech. */
 export const POS_BY_FILE = {
   nouns: 'noun',
+  names: 'noun', // personal names, used for lookup rather than drills
   calendar: 'noun', // days, months and festivals — nouns grouped by topic
   pronouns: 'pronoun',
   numerals: 'numeral',

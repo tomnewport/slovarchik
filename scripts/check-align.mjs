@@ -202,10 +202,10 @@ export function auditLemmaLinks(words) {
       problems.push(`${where}\n    names no word in the corpus`)
       continue
     }
-    if (target.learnable === false) {
+    if (target.pos === 'glossary' || target.lemma) {
       problems.push(
         `${where}\n    names another gloss-only entry. Alignment follows one hop only, so a` +
-          `\n    chain silently stops at the middle link — point it at the curriculum word`,
+          `\n    chain silently stops at the middle link — point it at a dictionary headword`,
       )
       continue
     }

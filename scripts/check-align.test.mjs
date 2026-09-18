@@ -232,6 +232,18 @@ describe('auditLemmaLinks', () => {
     expect(auditLemmaLinks(stub({ lemma: 'мыть=to wash' }))).toEqual([])
   })
 
+  it('accepts a dictionary-only name as the headword of a glossary case form', () => {
+    const words = corpus([
+      { pos: 'noun', doc: { words: { 'Маша=Masha': {
+        learn: false, number: ['sg'], declension: { sg_nom: 'Ма́ша', sg_acc: 'Ма́шу' },
+      } } } },
+      { pos: 'glossary', doc: { words: { 'машу=Masha': {
+        learn: false, accented: 'Ма́шу', lemma: 'Маша=Masha',
+      } } } },
+    ])
+    expect(auditLemmaLinks(words)).toEqual([])
+  })
+
   it('says nothing about a stub with no link at all', () => {
     expect(auditLemmaLinks(stub({}))).toEqual([])
   })

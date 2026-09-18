@@ -237,7 +237,7 @@ onBeforeUnmount(() => {
         <strong>{{ openedWord }}</strong>
         <p v-if="vocabState.status === 'loading' && !vocabState.words.length">Loading dictionary…</p>
         <p v-else-if="!definitions.length">No dictionary entry for this form.</p>
-        <ul v-else><li v-for="entry in definitions" :key="entry.key"><strong>{{ entry.lemma }}</strong> <small>{{ entry.pos }}</small><br>{{ entry.meaning }}<small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small></li></ul>
+        <ul v-else><li v-for="entry in definitions" :key="entry.key"><strong>{{ entry.lemma }}</strong> <small>{{ entry.pos }}</small><br>{{ entry.meaning }}<small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small><small v-for="note in entry.notes" :key="note" class="reader-morph">{{ note }}</small></li></ul>
       </aside>
     </div>
 

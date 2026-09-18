@@ -50,6 +50,7 @@ import { buildWords, corpusToken, phraseNotesFrom, shapePhrases } from '../src/l
 // registered here (the script fails loudly if disk and this list disagree).
 export const FILES = [
   { pos: 'noun', file: 'nouns.yml' },
+  { pos: 'noun', file: 'names.yml' }, // dictionary-only personal names and patronymics
   { pos: 'noun', file: 'calendar.yml' },
   { pos: 'pronoun', file: 'pronouns.yml' },
   { pos: 'numeral', file: 'numerals.yml' },

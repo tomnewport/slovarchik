@@ -205,6 +205,7 @@ src/
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
+                        #   names.yml adds dictionary-only names and patronymics
                         #   + parts.yml — the curriculum parts (#674). COMMITTED and
                         #   maintainer-owned, unlike the generated files below: the
                         #   packing is not stable under corpus growth, so a person
