@@ -26,6 +26,7 @@ import {
   cellGlyph,
   coordinateFrom,
   coordinateLabel,
+  coordinateNumber,
   douse,
   generateForest,
   planePath,
@@ -113,22 +114,27 @@ const typed = computed(() => parseCardinals(entry.value))
 /** The square the box currently spells, if it spells a whole one. */
 const target = computed(() => coordinateFrom(typed.value))
 /**
- * What the box says so far, as the four digits of a coordinate — never as a
- * labelled pair. Working out that x=12 and y=3 means «1203» is arithmetic, and
- * arithmetic is not the thing being practised: the number on screen has to be
- * the number to say. A half not yet typed shows as dots in its place, so the
- * shape of the answer is visible before it is finished.
+ * What the box says so far, as the four digits of a coordinate. Never as a
+ * labelled pair: working out that x=12 and y=3 means «1203» is arithmetic, and
+ * arithmetic is not the thing being practised — the number on screen has to be
+ * the number to say.
+ *
+ * It updates as the words arrive, so «ты́сяча» reads 1000 and «ты́сяча
+ * две́сти» reads 1200 on the way to 1203. Watching the number assemble itself
+ * is most of the lesson.
  */
 const parseHint = computed(() => {
   const nums = typed.value
   if (nums === null) return { bad: 'Not a number I know' }
   // Nothing typed yet: a worked example rather than an instruction, because
-  // «со́рок три два́дцать» → 4320 shown once is the whole rule.
-  if (nums.length === 0) return { example: true, across: '43', down: '20' }
-  const here = target.value
-  if (here) return { across: coordinateLabel(here.x, here.y).slice(0, 2), down: coordinateLabel(here.x, here.y).slice(2) }
-  if (nums.length === 1) return { across: String(nums[0]).padStart(2, '0'), down: '··' }
-  return { bad: 'Two numbers, not more' }
+  // «ты́сяча две́сти три» → 1203 shown once is the whole rule.
+  if (nums.length === 0) return { example: true, across: '12', down: '03' }
+  // Two numbers is the old habit — reading the halves off separately — which
+  // is exactly what this drill exists to replace, so say so rather than
+  // silently refusing.
+  if (nums.length > 1) return { bad: 'One number for the whole square' }
+  const digits4 = String(Math.min(9999, Math.max(0, nums[0]))).padStart(4, '0')
+  return { across: digits4.slice(0, 2), down: digits4.slice(2) }
 })
 const words = (n) => cardinalNominative(n)
 /** A square as its four digits, split for the two-tone display. */
@@ -321,6 +327,18 @@ function draw(now) {
   if (!ctx || !world) return
   ctx.clearRect(0, 0, base.width, base.height)
   ctx.drawImage(base, 0, 0)
+
+  // Dawn. The fire spreads faster as the shift wears on (#762), and a
+  // difficulty that only ever gets *felt* is a difficulty the player thinks is
+  // their own fault — so the light goes with it, blue and flat at the start,
+  // warm by the end. One rectangle a frame, over the terrain and under
+  // everything that moves, so it costs nothing and never tints a flame.
+  const sun = 1 - msLeft.value / ROUND_MS
+  ctx.save()
+  ctx.globalCompositeOperation = 'overlay'
+  ctx.fillStyle = `rgb(${120 + 135 * sun} ${140 + 60 * sun} ${190 - 110 * sun} / ${12 + 20 * sun}%)`
+  ctx.fillRect(0, 0, base.width, base.height)
+  ctx.restore()
 
   // The break the last drop laid, under the flames rather than over them: a
   // front running up against blue and stopping is the thing the player is
@@ -587,11 +605,11 @@ onUnmounted(() => {
   <section v-if="phase === 'idle'" class="grid">
     <h2 style="margin: 0">Firewatch 🔥</h2>
     <p class="muted" style="margin: 0">
-      A forest, 100 squares across and 100 down, and fires that spread. Every square has a
-      four-digit number — <b><span class="across">43</span><span class="down">20</span></b>,
-      across then down — and you send a water plane to one by saying it in Russian: «со́рок три
-      два́дцать». Tap the map and it tells you the number; the colours match the ticks
-      along the top and the side.
+      A forest, 100 squares across and 100 down, and fires that spread. Every square is a
+      four-digit number — <b><span class="across">12</span><span class="down">03</span></b>,
+      across then down — and you send a water plane to one by saying that number in Russian,
+      whole: «ты́сяча две́сти три». Tap the map and it tells you which one; the colours
+      match the ticks along the top and the side.
     </p>
     <p class="muted" style="margin: 0">
       The plane circles the fire and lets water go all the way round. Where it lands it puts the
@@ -600,8 +618,9 @@ onUnmounted(() => {
     </p>
     <p class="muted" style="margin: 0">
       Keep typing while they fly: the next coordinates queue up and go as planes come free. You
-      start with two planes and earn more as the round wears on. Two minutes; the score is how
-      much forest is left standing.
+      start with two planes and earn more as the shift wears on — which you will want, because
+      the forest dries out as the sun comes up and the fires spread faster with it. Two minutes;
+      the score is how much forest is left standing.
     </p>
     <div class="row">
       <button class="primary" @click="start">Start</button>
@@ -648,7 +667,7 @@ onUnmounted(() => {
           ><span class="down">{{ digits(marker).down }}</span></b
         >
         <span v-if="showWords" lang="ru" class="muted">
-          — {{ words(marker.x) }} {{ words(marker.y) }}</span
+          — {{ words(coordinateNumber(marker.x, marker.y)) }}</span
         >
       </template>
       <template v-else>📍 Tap the map for a coordinate</template>
@@ -657,7 +676,7 @@ onUnmounted(() => {
     <p v-if="phase === 'playing'" class="parse muted" :class="{ bad: !!parseHint.bad }">
       <template v-if="parseHint.bad">✗ {{ parseHint.bad }}</template>
       <template v-else>
-        <span v-if="parseHint.example" lang="ru">«со́рок три два́дцать»</span>
+        <span v-if="parseHint.example" lang="ru">«ты́сяча две́сти три»</span>
         <template v-else>→</template>
         <b class="coord"
           ><span class="across">{{ parseHint.across }}</span
@@ -673,8 +692,8 @@ onUnmounted(() => {
         autocomplete="off"
         autocapitalize="off"
         spellcheck="false"
-        placeholder="со́рок три два́дцать"
-        aria-label="Where to send the plane, as two Russian numbers"
+        placeholder="ты́сяча две́сти три"
+        aria-label="Where to send the plane, as a Russian number"
       />
       <button class="primary" type="submit" :disabled="!target">Send ✈️</button>
     </form>

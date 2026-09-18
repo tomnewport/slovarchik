@@ -161,24 +161,46 @@ export function cellGlyph(kind, state, glyphs) {
 //    twenty coordinates in two minutes, so a round that starts forty fires is
 //    lost however well it is played, and the score stops measuring anything.
 //
-//  - The spread rate is the sharp one. Between 0.052 and 0.070 the round goes
-//    from "a slow player saves the lot" to "a fast player loses most of it" —
-//    percolation is like that near its threshold, and it is why this is swept
-//    rather than reasoned about. It also has to be re-swept whenever the
-//    plane changes, because a bigger drop moves the same cliff.
+//  - The spread rate is a *sharp* knob. A fixed rate flips the round from "a
+//    slow player saves the lot" to "a fast player loses most of it" over a
+//    range of about 0.02 — percolation is like that near its threshold, which
+//    is why this is swept rather than reasoned about, and why it has to be
+//    re-swept whenever the plane or the typing changes. It has been, three
+//    times.
 //
-// Where they land, as the share of the forest lost over a two-minute round:
-//   left alone       ~60%     a coordinate every 10s   ~30%
-//   one every 7s     ~23%     one every 5s              ~6%
+//  - Both rates climb through the round rather than sitting flat (#762). A
+//    flat rate made the first minute as fierce as the last, which is no way to
+//    meet a learner still working out how to say 4098 — and a four-digit
+//    cardinal takes a good deal longer to say than two short ones, so the
+//    whole curve is gentler than it was when a square was drilled as a pair.
+//
+// Where they land, as the share of the forest lost over a two-minute shift.
+// The halfway column is what makes the ramp worth having: next to nothing is
+// lost in the first minute whatever you do, and the shift is won or lost once
+// the sun is up.
+//
+//                             by the end   at halfway
+//   left alone                    ~39%         ~2%
+//   a coordinate every 12s        ~26%         ~1%
+//   one every 9s                  ~10%        <~1%
+//   one every 6s                   ~3%        <~1%
 export const DEFAULTS = {
-  /** Chance per second that one burning cell lights one given neighbour. */
-  spreadPerSecond: 0.056,
+  /**
+   * Chance per second that one burning cell lights one given neighbour, at the
+   * start of a shift — and how much that grows per second as the sun comes up
+   * (#762). A fixed rate made the first minute as fierce as the last, which
+   * left no room to find your feet: a learner who is still working out how to
+   * say 4098 is behind from the first fire. Now the forest starts damp and
+   * dries out, which is both kinder and truer.
+   */
+  spreadPerSecond: 0.030,
+  spreadRamp: 0.0003,
   /** How long a cell burns before it is lost for good. */
   burnSeconds: 7,
   /** New fires per second at the start of a round. */
   spawnPerSecond: 0.07,
-  /** …and how much that grows per second elapsed, so a round has a curve. */
-  spawnRamp: 0.003,
+  /** …and how much that grows per second elapsed, for the same reason. */
+  spawnRamp: 0.002,
   /**
    * How long ground the plane has wetted stays too wet to catch.
    *
@@ -409,7 +431,8 @@ export function step(world, dt, rng = Math.random) {
 
   // Per-neighbour chance compounded over dt, so the spread rate is the same
   // whether the view ticks at 10Hz or the tuner runs a round in one step.
-  const p = 1 - Math.pow(1 - world.opts.spreadPerSecond, dt)
+  const spread = world.opts.spreadPerSecond + world.opts.spreadRamp * world.time
+  const p = 1 - Math.pow(1 - spread, dt)
   const lighting = new Set()
   for (const i of world.burning) {
     const x = i % SIZE
@@ -617,55 +640,44 @@ export function approachHeading(rng = Math.random) {
 }
 
 // ── Coordinates ──────────────────────────────────────────────────────────
-// The learner is typing a place on a 100 × 100 map, and the one thing they must
-// never have to do is arithmetic: no "x is 12 and y is 3, so that's…". So a
-// coordinate is shown as the four digits it is — 1203 — with the two halves
-// tinted to match the two axes, and never as a pair of labelled numbers.
+// A square on the map IS a number, 0000–9999: the first two digits across, the
+// last two down. Not a pair, and not two numbers said one after the other —
+// #762 is explicit that the drill is the whole four-digit cardinal, said out
+// in full («четы́ре ты́сячи девяно́сто во́семь» for 4098), which is exactly the
+// range and the shape a learner needs and never practises otherwise.
+//
+// So the learner never does arithmetic: the number on screen is the number to
+// say. The two halves are only ever *tinted* apart, to match the two axes.
+
+/** The square a four-digit coordinate names. */
+export function coordinateNumber(x, y) {
+  return x * 100 + y
+}
 
 /**
- * A coordinate written the way it is typed: across, then down, two digits each.
+ * A coordinate written the way it is shown: four digits, across then down.
  * @param {number} x
  * @param {number} y
  * @returns {string}
  */
 export function coordinateLabel(x, y) {
-  return `${String(x).padStart(2, '0')}${String(y).padStart(2, '0')}`
-}
-
-/**
- * The ways one half of a coordinate could start at `i`, best reading first.
- *
- * A half below ten may be said either way — «три» for 03, or «ноль три»
- * reading the digits off the screen — and both have to work, or the
- * four-digit display would be teaching a reading the box then rejects. But
- * the two are ambiguous: «ноль оди́н» is 0001 read as two halves just as much
- * as it is half of 01-something. So both are offered, the plain reading
- * first, and `coordinateFrom` takes whichever completes a coordinate.
- * @param {number[]} numbers
- * @param {number} i
- * @returns {{value: number, next: number}[]}
- */
-function halfReadings(numbers, i) {
-  if (i >= numbers.length) return []
-  const readings = [{ value: numbers[i], next: i + 1 }]
-  const after = numbers[i + 1]
-  if (numbers[i] === 0 && after > 0 && after < 10) readings.push({ value: after, next: i + 2 })
-  return readings
+  return String(coordinateNumber(x, y)).padStart(4, '0')
 }
 
 /**
  * The square a run of spoken numbers names, or null if they do not name one.
+ *
+ * Exactly one number, and it is the whole coordinate. Two numbers is the
+ * learner reading the halves off separately, which is the thing this drill
+ * exists to replace, so it is refused rather than quietly accepted.
  * @param {number[]|null} numbers
  * @returns {{x: number, y: number}|null}
  */
 export function coordinateFrom(numbers) {
-  if (!numbers) return null
-  for (const across of halfReadings(numbers, 0)) {
-    for (const down of halfReadings(numbers, across.next)) {
-      if (down.next !== numbers.length) continue
-      if (cellAt(across.value, down.value) < 0) continue
-      return { x: across.value, y: down.value }
-    }
-  }
-  return null
+  if (!numbers || numbers.length !== 1) return null
+  const value = numbers[0]
+  if (!Number.isInteger(value) || value < 0 || value > 9999) return null
+  const x = Math.floor(value / 100)
+  const y = value % 100
+  return cellAt(x, y) >= 0 ? { x, y } : null
 }
