@@ -2,6 +2,25 @@
   "schemaVersion": 1,
   "books": [
     {
+      "id": "chekhov-fat-thin",
+      "title": "Толстый и тонкий",
+      "author": "Антон Чехов",
+      "shelf": "Intermediate",
+      "summary": "Two old school friends meet by chance at a railway station. Complete short story.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Chekhov, Complete Works, vol. I (1903), Толстый и тонкий; Wikisource revision 5613739",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5613739"
+      },
+      "rights": {
+        "original": "Chekhov (died 1904); the Russian story was published in 1883 and is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "eee91bf812654ef5082edb10921799a9d3128a50c1124bd2449a3155b7b3e68d"
+    },
+    {
       "id": "krylov-dragonfly-ant",
       "title": "Стрекоза и Муравей",
       "author": "Иван Крылов",

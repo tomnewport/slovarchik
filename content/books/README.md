@@ -25,6 +25,13 @@ under the source site's CC BY-SA terms; our English translations are licensed
 CC BY-SA 4.0. These text/data terms are separate from the app's software
 license. Maintain attribution when redistributing the packs.
 
+The Intermediate shelf begins with Chekhov's complete «Толстый и тонкий» from
+the 1903 collected-works transcription. Its 81 reader units retain all 17
+paragraphs, including dialogue and the repeated closing sentence. The English
+keeps the change from familiar speech to servile honorifics and the original's
+dated final comparison; the translation is newly prepared here, not lifted from
+another edition.
+
 `npm run gen:books` validates sources, writes `public/books/packs/*.json`, and
 updates the catalog with SHA-256 hashes. Commit the editorial JSON and generated
 pack/catalog together. Increase `packVersion` when Russian text, sentence IDs,
