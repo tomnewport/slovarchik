@@ -328,6 +328,9 @@ try {
   let added = 0
   let promoted = 0
   for (const file of wordFiles) {
+    // New files were not present when this review began; there are no
+    // proposals for them to replay against the old base.
+    if (!existsSync(join(work, 'public', 'vocab', file))) continue
     const replayed = reviewedByKey(readFileSync(join(work, 'public', 'vocab', file), 'utf8'))
     const committed = reviewedByKey(readFileSync(join(vocabDir, file), 'utf8'))
     for (const [key, text] of replayed) {

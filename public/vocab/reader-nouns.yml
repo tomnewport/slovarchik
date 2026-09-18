@@ -1,0 +1,124 @@
+# Dictionary-only nouns in the shipped literature. Full paradigms allow lookup
+# from the story's inflected forms; none is added to the practice curriculum.
+---
+words:
+  "голубка=dove":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "dove (female pigeon)"
+    declension:
+      sg_nom: голу́бка
+      sg_gen: голу́бки
+      sg_dat: голу́бке
+      sg_acc: голу́бку
+      sg_ins: голу́бкой
+      sg_pre: голу́бке
+      pl_nom: голу́бки
+      pl_gen: голу́бок
+      pl_dat: голу́бкам
+      pl_acc: голу́бок
+      pl_ins: голу́бками
+      pl_pre: голу́бках
+  "горница=room":
+    cefr_level: B2
+    learn: false
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "room (old-fashioned word for a living room)"
+    declension:
+      sg_nom: го́рница
+      sg_gen: го́рницы
+      sg_dat: го́рнице
+      sg_acc: го́рницу
+      sg_ins: го́рницей
+      sg_pre: го́рнице
+      pl_nom: го́рницы
+      pl_gen: го́рниц
+      pl_dat: го́рницам
+      pl_acc: го́рницы
+      pl_ins: го́рницами
+      pl_pre: го́рницах
+  "косточка=stone":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "stone (the hard seed inside a plum)"
+    declension:
+      sg_nom: ко́сточка
+      sg_gen: ко́сточки
+      sg_dat: ко́сточке
+      sg_acc: ко́сточку
+      sg_ins: ко́сточкой
+      sg_pre: ко́сточке
+      pl_nom: ко́сточки
+      pl_gen: ко́сточек
+      pl_dat: ко́сточкам
+      pl_acc: ко́сточки
+      pl_ins: ко́сточками
+      pl_pre: ко́сточках
+  "окошко=little window":
+    cefr_level: B1
+    learn: false
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "little window"
+    declension:
+      sg_nom: око́шко
+      sg_gen: око́шка
+      sg_dat: око́шку
+      sg_acc: око́шко
+      sg_ins: око́шком
+      sg_pre: око́шке
+      pl_nom: око́шки
+      pl_gen: око́шек
+      pl_dat: око́шкам
+      pl_acc: око́шки
+      pl_ins: око́шками
+      pl_pre: око́шках
+  "попрыгунья=carefree hopper":
+    cefr_level: B2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "carefree hopper (Krylov's lively dragonfly)"
+    declension:
+      sg_nom: попрыгу́нья
+      sg_gen: попрыгу́ньи
+      sg_dat: попрыгу́нье
+      sg_acc: попрыгу́нью
+      sg_ins: попрыгу́ньей
+      sg_pre: попрыгу́нье
+  "рак=crayfish":
+    cefr_level: B1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "crayfish (as in 'red as a crayfish')"
+    declension:
+      sg_nom: рак
+      sg_gen: ра́ка
+      sg_dat: ра́ку
+      sg_acc: ра́ка
+      sg_ins: ра́ком
+      sg_pre: ра́ке
+      pl_nom: ра́ки
+      pl_gen: ра́ков
+      pl_dat: ра́кам
+      pl_acc: ра́ков
+      pl_ins: ра́ками
+      pl_pre: ра́ках

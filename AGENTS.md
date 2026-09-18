@@ -60,17 +60,17 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 18 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, /bomb,
-                        #   /firewatch, /maze, and the shared inflection view at
-                        #   /declension /verbs /pronouns
+                        #   /firewatch, /maze, /library, /reader/:bookId, and the
+                        #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView, FirewatchView and MeaningMazeView are the
-                        #   minigames — #726's between-practice interludes, launched for
-                        #   now from HomeView's Minigames section rather than from inside
-                        #   a session.
+                        #   BombDisposalView, FirewatchView and MeaningMazeView are
+                        #   between-practice minigames launched from HomeView.
+                        #   LibraryView downloads opt-in book packs; ReaderView
+                        #   paginates literature by stable sentence ID.
                         #   FirewatchView is the only canvas in the app: 10 000 cells
                         #   cannot be DOM nodes, so the terrain is painted once into an
                         #   offscreen canvas and patched per cell, and each frame blits
@@ -116,6 +116,7 @@ src/
                         #     deployment says it is serving and when it last said it,
                         #     for the Data screen's version check
     settings.js         #   user preferences (not learning progress)
+    library.js          #   opt-in book catalog, download and removal
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
     hints.js            #   in-phrase word-hint glue + the spoken drill's dictionary (#733)
@@ -200,6 +201,7 @@ src/
                         #   appVersion  — the build running here vs the build deployed, how old
                         #     the last check is, and which of the deployment's dated release
                         #     notes are new to THIS install (the Data screen's Versions card)
+                        #   readerPage/readerDictionary/readerReport/bookPack — literature layout, lookup, issue links and pack schema
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
                         #   coalesce  — share one in-flight run between concurrent callers, so the boot
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
@@ -210,6 +212,7 @@ src/
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
+                        #   names.yml adds dictionary-only names and patronymics
                         #   + parts.yml — the curriculum parts (#674). COMMITTED and
                         #   maintainer-owned, unlike the generated files below: the
                         #   packing is not stable under corpus growth, so a person
@@ -217,6 +220,11 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
                         #   + phrase-notes.json — the corpus-wide phrase
                         #   annotations derived at build time (#657); generated,
                         #   not committed, like the manifest and the *.json
+content/books/          # reviewed Russian works and new sentence translations;
+                        #   source revisions, rights and stable IDs live here
+public/books/           # generated AND committed catalog and opt-in, versioned
+                        #   JSON packs; unlike vocab's manifest, these are tracked
+                        #   and kept outside the service worker precache
 e2e/                    # Playwright specs (homepage, full-session, versions, and offline —
                         #   the last runs against the preview build, where the SW exists)
 docs/                   # design notes for in-flight features
@@ -224,6 +232,8 @@ docs/                   # design notes for in-flight features
                         #     (Cache Storage + IndexedDB), what each copy is for,
                         #     and why manifest.json is kept out of the SW rule
 scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
+                        #   build-book-packs.mjs checks reviewed editorial JSON in
+                        #   content/books/ and emits versioned public/books/ data
                         #   check-ci.mjs runs CI's `test` job locally, in order
                         #   size-summary.mjs gates the shipped payload (entry chunk,
                         #     entry CSS, dist/vocab/*.json gzipped) against the
@@ -274,6 +284,7 @@ npm run test:coverage # same suite + coverage over src/lib, src/stores, src/comp
 npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
 npm run typecheck   # non-strict `tsc --checkJs` over src/lib, src/stores, src/composables
 npm run build       # production build into dist/
+npm run gen:books  # validate content/books/ and regenerate the committed public/books/ packs
 npm run preview     # serve the production build
 npm run test:e2e    # Playwright end-to-end tests
 

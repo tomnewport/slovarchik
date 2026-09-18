@@ -160,7 +160,7 @@ export default defineConfig({
         // `version.json` joins the vocab outside the precache, for a different
         // reason: it is the answer to "what is deployed?", and a precached copy
         // would answer with the build doing the asking.
-        globIgnores: ['**/vocab/**', 'version.json'],
+        globIgnores: ['**/vocab/**', '**/books/**', 'version.json'],
         // Nothing else caches the vocab at the network layer, deliberately (#670).
         //
         // There used to be a `runtimeCaching` rule giving vocab/*.json its own

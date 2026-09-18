@@ -90,11 +90,11 @@ export function tokenCandidates(text, index) {
   return index.candidates?.get(bare) ?? [index.get(bare).key]
 }
 
-/** Follow a stub's `lemma:` link to the curriculum word it is a form of. */
+/** Follow a stub's `lemma:` link to its dictionary headword. */
 function lexeme(key, byKey) {
   const word = byKey?.get(key)
   const lemma = word?.lemma
-  // One hop only. A lemma link points at a curriculum headword, which has no
+  // One hop only. A lemma link points at a headword with no
   // lemma of its own; a chain would mean the data is wrong, and following it
   // would hide that from `check:align`.
   return lemma && byKey?.has(lemma) ? lemma : key
