@@ -20,12 +20,14 @@ import {
   coordinateNumber,
   douse,
   generateForest,
+  hintWordAt,
   ignite,
   planePath,
   resolveGlyphs,
   spawnFire,
   stats,
   step,
+  wordsSaid,
   GLYPH_CHAINS,
 } from './firewatch.js'
 import { cardinalNominative, parseCardinals } from './numerals.js'
@@ -595,6 +597,53 @@ describe('coordinates', () => {
         expect(coordinateFrom(parseCardinals(spoken))).toEqual({ x, y })
       }
     }
+  })
+})
+
+describe('the hint', () => {
+  const answer = 'четы́ре ты́сячи три́ста два́дцать'
+
+  it('counts the leading words already said', () => {
+    expect(wordsSaid(answer, '')).toBe(0)
+    expect(wordsSaid(answer, 'четыре')).toBe(1)
+    expect(wordsSaid(answer, 'четыре тысячи')).toBe(2)
+    expect(wordsSaid(answer, 'четыре тысячи триста двадцать')).toBe(4)
+  })
+
+  it('does not need the stress marks, because it is not marking the typing', () => {
+    expect(wordsSaid(answer, 'ЧЕТЫ́РЕ ТЫ́СЯЧИ')).toBe(2)
+    expect(wordsSaid('её две', 'ЕЕ  две ')).toBe(2)
+  })
+
+  it('stops at the first word that is not the one wanted', () => {
+    // Otherwise a wrong numeral would march the hint past the word the
+    // learner is actually stuck on.
+    expect(wordsSaid(answer, 'четыре тысячи три')).toBe(2)
+    expect(wordsSaid(answer, 'пять')).toBe(0)
+    expect(wordsSaid(answer, 'собака четыре')).toBe(0)
+  })
+
+  it('offers the next word, in the spelling that shows the stress', () => {
+    expect(hintWordAt(answer, 0)).toBe('четы́ре')
+    expect(hintWordAt(answer, 3)).toBe('два́дцать')
+  })
+
+  it('has nothing left to offer once the whole answer is said', () => {
+    expect(hintWordAt(answer, 4)).toBe(null)
+    expect(hintWordAt(answer, -1)).toBe(null)
+    expect(hintWordAt('', 0)).toBe(null)
+  })
+
+  it('walks a whole numeral one word at a time', () => {
+    let typed = ''
+    const given = []
+    for (let step = 0; step < 10; step++) {
+      const word = hintWordAt(answer, wordsSaid(answer, typed))
+      if (!word) break
+      given.push(word)
+      typed = `${typed} ${word}`.trim()
+    }
+    expect(given).toEqual(answer.split(' '))
   })
 })
 

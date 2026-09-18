@@ -12,6 +12,7 @@
 // can be simulated in a millisecond.
 
 import { fbm2, perlin2 } from './noise.js'
+import { normalize } from './text.js'
 
 // ── The world ────────────────────────────────────────────────────────────
 // 100 × 100, because the pedagogy picked the axes: a coordinate is exactly the
@@ -662,6 +663,41 @@ export function coordinateNumber(x, y) {
  */
 export function coordinateLabel(x, y) {
   return String(coordinateNumber(x, y)).padStart(4, '0')
+}
+
+/**
+ * How much of `answer` the learner has already said, in whole words.
+ *
+ * Leading words only, and they have to match: typing something else does not
+ * advance it. That is what lets the hint below always offer the word actually
+ * wanted next, rather than counting words and losing its place the moment a
+ * numeral comes out wrong.
+ *
+ * Stress marks and ё/е fold away (`normalize`), because the hint is there to
+ * tell the learner *which word*, not to mark their typing.
+ * @param {string} answer  the whole numeral, e.g. «четы́ре ты́сячи три́ста»
+ * @param {string} typed   what is in the box
+ * @returns {number}
+ */
+export function wordsSaid(answer, typed) {
+  const wanted = answer.split(' ').filter(Boolean).map(normalize)
+  const said = normalize(typed).split(' ').filter(Boolean)
+  let n = 0
+  while (n < said.length && n < wanted.length && said[n] === wanted[n]) n++
+  return n
+}
+
+/**
+ * The word a hint should show: the next one the learner has not said yet, in
+ * the spelling the app writes elsewhere — stress marks and all, since being
+ * told where the stress falls is half of what a numeral hint is for.
+ * @param {string} answer
+ * @param {number} index
+ * @returns {string|null}
+ */
+export function hintWordAt(answer, index) {
+  const words = answer.split(' ').filter(Boolean)
+  return index >= 0 && index < words.length ? words[index] : null
 }
 
 /**

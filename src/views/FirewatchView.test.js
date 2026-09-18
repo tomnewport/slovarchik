@@ -249,17 +249,99 @@ describe('reading a coordinate off the map', () => {
     expect(wrapper.vm.marker).toEqual({ x: 0, y: 99 })
   })
 
-  it('offers the Russian for the coordinate, but only when asked', async () => {
+  it('sends nothing to the readout until a square is tapped', async () => {
     const wrapper = mount(FirewatchView)
     await start(wrapper)
+    expect(wrapper.find('.readout').text()).toContain('Tap the map')
+  })
+})
+
+describe('the hint', () => {
+  /** Tap 4320, whose answer is «четы́ре ты́сячи три́ста два́дцать». */
+  async function tap4320(wrapper) {
     const canvas = sizeMap(wrapper, 400)
     await point(canvas, 'pointerdown', 174, 82)
-    expect(wrapper.find('.readout').text()).not.toContain('ты́сячи')
+  }
+  const hintBtn = (wrapper) => wrapper.findAll('button').find((b) => b.text().includes('Hint'))
 
-    const toggle = wrapper.findAll('button').find((b) => b.text().includes('Show the words'))
-    await toggle.trigger('click')
-    // 4320, said whole — not «со́рок три» and «два́дцать».
-    expect(wrapper.find('.readout').text()).toContain('четы́ре ты́сячи три́ста два́дцать')
+  it('offers nothing until there is a square to hint at', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    expect(hintBtn(wrapper).attributes('disabled')).toBeDefined()
+    await tap4320(wrapper)
+    expect(hintBtn(wrapper).attributes('disabled')).toBeUndefined()
+  })
+
+  it('gives one word at a time, never the whole answer', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await tap4320(wrapper)
+    expect(wrapper.find('.hint-word').exists()).toBe(false)
+
+    await hintBtn(wrapper).trigger('click')
+    expect(wrapper.find('.hint-word').text()).toContain('четы́ре')
+    expect(wrapper.find('.hint-word').text()).not.toContain('ты́сячи')
+  })
+
+  it('clears once the word is entered into the box', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await tap4320(wrapper)
+    await hintBtn(wrapper).trigger('click')
+    expect(wrapper.find('.hint-word').exists()).toBe(true)
+
+    await wrapper.find('input[lang="ru"]').setValue('четыре')
+    expect(wrapper.find('.hint-word').exists()).toBe(false)
+  })
+
+  it('gives the next word on the next press, walking the whole numeral', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await tap4320(wrapper)
+    const box = wrapper.find('input[lang="ru"]')
+    const given = []
+    for (const typed of ['', 'четыре', 'четыре тысячи', 'четыре тысячи триста']) {
+      await box.setValue(typed)
+      await hintBtn(wrapper).trigger('click')
+      given.push(wrapper.find('.hint-word').text().replace('💡', '').trim())
+    }
+    expect(given).toEqual(['четы́ре', 'ты́сячи', 'три́ста', 'два́дцать'])
+
+    // …and once the whole thing is said there is nothing left to give.
+    await box.setValue('четыре тысячи триста двадцать')
+    expect(hintBtn(wrapper).attributes('disabled')).toBeDefined()
+  })
+
+  it('comes back if the learner deletes the word again', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await tap4320(wrapper)
+    const box = wrapper.find('input[lang="ru"]')
+    await hintBtn(wrapper).trigger('click')
+    await box.setValue('четыре')
+    expect(wrapper.find('.hint-word').exists()).toBe(false)
+    await box.setValue('четы')
+    expect(wrapper.find('.hint-word').text()).toContain('четы́ре')
+  })
+
+  it('does not march on when a word comes out wrong', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await tap4320(wrapper)
+    await wrapper.find('input[lang="ru"]').setValue('четыре сотни')
+    await hintBtn(wrapper).trigger('click')
+    // Still stuck on the second word, which is where the learner is.
+    expect(wrapper.find('.hint-word').text()).toContain('ты́сячи')
+  })
+
+  it('starts afresh on a different square', async () => {
+    const wrapper = mount(FirewatchView)
+    await start(wrapper)
+    await tap4320(wrapper)
+    await hintBtn(wrapper).trigger('click')
+    expect(wrapper.find('.hint-word').exists()).toBe(true)
+    await point(wrapper.find('canvas.board').element, 'pointerdown', 40, 40)
+    expect(wrapper.find('.hint-word').exists()).toBe(false)
   })
 })
 

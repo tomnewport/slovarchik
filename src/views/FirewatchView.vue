@@ -29,10 +29,12 @@ import {
   coordinateNumber,
   douse,
   generateForest,
+  hintWordAt,
   planePath,
   resolveGlyphs,
   stats,
   step,
+  wordsSaid,
 } from '../lib/firewatch.js'
 import { cardinalNominative, parseCardinals } from '../lib/numerals.js'
 import { loadSettings, playCelebration, playFeedback } from '../stores/settings.js'
@@ -76,7 +78,9 @@ const queued = ref(/** @type {{x: number, y: number}[]} */ ([]))
 const best = ref(0)
 const entry = ref('')
 const marker = ref(/** @type {{x: number, y: number}|null} */ (null))
-const showWords = ref(false)
+// How far into the answer the learner asked to be shown. Cleared by saying the
+// word, not by a second press — see `hint` below.
+const hintAt = ref(/** @type {number|null} */ (null))
 const mapPx = ref(320)
 const wrapEl = useTemplateRef('wrapEl')
 const canvasEl = useTemplateRef('canvasEl')
@@ -137,6 +141,32 @@ const parseHint = computed(() => {
   return { across: digits4.slice(0, 2), down: digits4.slice(2) }
 })
 const words = (n) => cardinalNominative(n)
+
+// ── The hint ───────────────────────────────────────────────────────
+// One word at a time, and only the word wanted next. Showing the whole numeral
+// is a pass — the learner reads it off and learns nothing — but being stuck on
+// «четы́ре ты́сячи…» with no way forward is worse. A word at a time keeps
+// the rest of the numeral theirs to produce.
+
+/** The answer for the square the learner has tapped, if they have tapped one. */
+const answer = computed(() => (marker.value ? words(coordinateNumber(marker.value.x, marker.value.y)) : ''))
+/** How much of it is already in the box. */
+const said = computed(() => wordsSaid(answer.value, entry.value))
+/**
+ * The word on show, if any. Derived rather than stored, so saying the word
+ * clears the hint by itself: once it is in the box `said` moves past the index
+ * that was asked for and there is nothing to show. Deleting it brings the hint
+ * back, which is the right answer to a typo.
+ */
+const hint = computed(() =>
+  hintAt.value !== null && hintAt.value === said.value ? hintWordAt(answer.value, hintAt.value) : null,
+)
+/** Whether there is anything left to hint at. */
+const canHint = computed(() => !!answer.value && hintWordAt(answer.value, said.value) !== null)
+
+function showHint() {
+  if (canHint.value) hintAt.value = said.value
+}
 /** A square as its four digits, split for the two-tone display. */
 const digits = (p) => ({
   across: coordinateLabel(p.x, p.y).slice(0, 2),
@@ -237,7 +267,7 @@ function layout() {
   // Bigger than a cell, both of them: at a phone's width a cell is three or
   // four pixels, and a plane that small is a speck.
   waterSprite = sprite(glyphs.water, Math.max(8, cell * 2))
-  planeSprite = sprite(glyphs.plane, Math.max(14, cell * 3))
+  planeSprite = sprite(glyphs.plane, Math.max(28, cell * 6))
   glowSprite = glow(Math.max(20, cell * 6))
   paintTerrain()
 }
@@ -513,6 +543,7 @@ function start() {
   drops = []
   carry = 0
   queued.value = []
+  hintAt.value = null
   fleet.value = FLEET_START
   sent.value = 0
   entry.value = ''
@@ -562,7 +593,12 @@ function send() {
     return
   }
   queued.value = [...queued.value, to]
+  // A clean slate for the next coordinate: the box, the square that was tapped
+  // and any hint taken on it all go together, so nothing from the last call is
+  // still on screen while the next one is being read off the map.
   entry.value = ''
+  marker.value = null
+  hintAt.value = null
   launch(performance.now())
 }
 
@@ -578,6 +614,7 @@ function pick(e) {
     x: Math.min(SIZE - 1, Math.max(0, x)),
     y: Math.min(SIZE - 1, Math.max(0, y)),
   }
+  hintAt.value = null
 }
 
 function onDown(e) {
@@ -609,7 +646,8 @@ onUnmounted(() => {
       four-digit number — <b><span class="across">12</span><span class="down">03</span></b>,
       across then down — and you send a water plane to one by saying that number in Russian,
       whole: «ты́сяча две́сти три». Tap the map and it tells you which one; the colours
-      match the ticks along the top and the side.
+      match the ticks along the top and the side. 💡 Hint gives you the next word of it and
+      nothing more — say that word and it goes, ready to give you the one after.
     </p>
     <p class="muted" style="margin: 0">
       The plane circles the fire and lets water go all the way round. Where it lands it puts the
@@ -659,19 +697,33 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <p class="readout" :class="{ empty: !marker }">
-      <template v-if="marker">
-        📍
-        <b class="coord"
-          ><span class="across">{{ digits(marker).across }}</span
-          ><span class="down">{{ digits(marker).down }}</span></b
-        >
-        <span v-if="showWords" lang="ru" class="muted">
-          — {{ words(coordinateNumber(marker.x, marker.y)) }}</span
-        >
-      </template>
-      <template v-else>📍 Tap the map for a coordinate</template>
-    </p>
+<!-- The hint button lives up here with the readout, not in the row of
+         controls below the box. On a phone the shared Russian keyboard covers
+         the bottom of the screen the whole time the learner is typing, which
+         is exactly when they reach for a hint — a button under it is a button
+         that does not exist. -->
+    <div class="readout" :class="{ empty: !marker }">
+      <p class="readout-text">
+        <template v-if="marker">
+          📍
+          <b class="coord"
+            ><span class="across">{{ digits(marker).across }}</span
+            ><span class="down">{{ digits(marker).down }}</span></b
+          >
+          <span v-if="hint" lang="ru" class="hint-word">💡 {{ hint }}</span>
+        </template>
+        <template v-else>📍 Tap the map for a coordinate</template>
+      </p>
+      <button
+        v-if="phase === 'playing'"
+        type="button"
+        class="hint-btn"
+        :disabled="!canHint"
+        @click="showHint"
+      >
+        💡 Hint
+      </button>
+    </div>
 
     <p v-if="phase === 'playing'" class="parse muted" :class="{ bad: !!parseHint.bad }">
       <template v-if="parseHint.bad">✗ {{ parseHint.bad }}</template>
@@ -720,9 +772,6 @@ onUnmounted(() => {
       </div>
     </template>
     <div v-else class="row" style="gap: 0.5rem; flex-wrap: wrap">
-      <button type="button" @click="showWords = !showWords">
-        {{ showWords ? '🙈 Hide the words' : '👁 Show the words' }}
-      </button>
       <button type="button" @click="finish">Stop</button>
     </div>
   </section>
@@ -837,16 +886,36 @@ onUnmounted(() => {
 }
 
 .readout {
-  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-variant-numeric: tabular-nums;
 }
 
-.readout.empty {
+.readout-text {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.readout.empty .readout-text {
   opacity: 0.6;
+}
+
+.hint-btn {
+  flex: none;
 }
 
 .readout .coord {
   font-size: 1.5rem;
+}
+
+.hint-word {
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  background: rgb(240 180 41 / 18%);
+  font-size: 1.05rem;
 }
 
 .fleet {
