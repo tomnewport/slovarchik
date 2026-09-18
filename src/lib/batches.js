@@ -150,6 +150,43 @@ function signature(option) {
   return option.words.slice().sort().join('|')
 }
 
+/** Swap queued words into an option, never spending more than a third of its
+ * places on words outside the part currently being learned. Prefer a wish that
+ * belongs to the option's collection, so a useful theme survives when possible.
+ */
+function includeWishlist(option, wishlist, byKey, rankOf, currentRank) {
+  if (!wishlist.length) return option
+  const keys = option.words.slice()
+  const wanted = new Set(wishlist.map((word) => word.key))
+  const inPart = (key) => rankOf(byKey.get(key)) === currentRank
+  const floor = Math.ceil(keys.length * 2 / 3)
+  let current = keys.filter(inPart).length
+  const ordered = wishlist.slice().sort((a, b) =>
+    Number((b.collections ?? []).includes(option.collection)) -
+    Number((a.collections ?? []).includes(option.collection)))
+  for (const word of ordered) {
+    if (keys.includes(word.key)) continue
+    const samePart = inPart(word.key)
+    // Replacing an unrelated word from the same part preserves the ratio;
+    // replacing one from outside improves it. A future-part wish may replace
+    // a current-part word only while the two-thirds floor still holds.
+    const replace = keys.findIndex((key) => !wanted.has(key) && !inPart(key))
+    const at = replace >= 0 ? replace : keys.findIndex((key) => !wanted.has(key) &&
+      (samePart || current > floor) && inPart(key))
+    if (at < 0) continue
+    if (inPart(keys[at])) current--
+    if (samePart) current++
+    keys[at] = word.key
+  }
+  const included = keys.filter((key) => wanted.has(key)).length
+  if (!included) return option
+  const coherent = option.collection &&
+    keys.filter((key) => (byKey.get(key)?.collections ?? []).includes(option.collection)).length >=
+      Math.ceil(keys.length * SAME_COLLECTION_RATIO)
+  return { ...option, name: coherent ? `${option.name} + wishlist` : 'Wishlist mix',
+    collection: coherent ? option.collection : null, words: keys, wishlistCount: included }
+}
+
 /**
  * Turn a refined pool into up to {@link BATCH_OPTIONS} batch options,
  * prioritising named (non-random) batches, then padding with random batches.
@@ -201,6 +238,7 @@ export function assembleOptions(pool, size, level, rng = Math.random) {
  * @param {() => number} [args.rng]
  * @param {(word: PlainObject) => number} [args.rankOf] curriculum order; defaults to
  *   the CEFR level (see {@link refineToLowest})
+ * @param {string[]} [args.wishlistKeys] existing words requested for a future batch
  * @returns {PlainObject[]} up to five batch options
  */
 export function buildBatchOptions({
@@ -209,6 +247,7 @@ export function buildBatchOptions({
   level = 'learning',
   rng = Math.random,
   rankOf = undefined,
+  wishlistKeys = [],
 } = {}) {
   const size = batchSize(level)
   const eligible = words.filter((w) => isEligible(stateOf(w), level))
@@ -231,7 +270,29 @@ export function buildBatchOptions({
   }
 
   if (mainEligible.length === 0) return []
-  const pool = refineToLowest(mainEligible, size, rng, rankOf)
-  const options = assembleOptions(pool, size, level, rng)
-  return options.map((opt) => addGlue(opt, refinedGlue, rng))
+  if (level === 'mastery') return assembleOptions(refineToLowest(mainEligible, size, rng, rankOf), size, level, rng)
+
+  const rank = rankOf ?? ((w) => cefrRank(w.cefr))
+  const currentRank = Math.min(...mainEligible.map(rank))
+  const currentCount = mainEligible.filter((w) => rank(w) === currentRank).length
+  // At a part boundary, finish the remaining words in a smaller batch instead
+  // of filling it with so many future-part words that the learner loses focus.
+  const glueCount = Math.min(GLUE_PER_BATCH, Math.floor(currentCount / 2))
+  refinedGlue = refinedGlue.slice(0, glueCount)
+  const target = Math.min(size, Math.max(1, Math.floor(currentCount * 1.5) - refinedGlue.length))
+  const pool = refineToLowest(mainEligible, target, rng, rankOf)
+  const byKey = new Map(eligible.map((w) => [w.key, w]))
+  const wishlist = [...new Set(wishlistKeys)].map((key) => byKey.get(key)).filter(Boolean)
+  const seen = new Set()
+  return assembleOptions(pool, target, level, rng)
+    .map((opt) => addGlue(opt, refinedGlue, rng))
+    .filter((opt) => opt.words.filter((key) => rank(byKey.get(key)) === currentRank).length >=
+      Math.ceil(opt.size * 2 / 3))
+    .map((opt) => includeWishlist(opt, wishlist, byKey, rank, currentRank))
+    .filter((opt) => {
+      const sig = signature(opt)
+      if (seen.has(sig)) return false
+      seen.add(sig)
+      return true
+    })
 }

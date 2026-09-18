@@ -12,6 +12,7 @@ import { minExercisesToLevel } from '../../lib/progression.js'
 import { curriculumParts, partOfWord } from '../vocab.js'
 
 import { state, BATCH_META_KEY, wordRecord, rank, events, vocabWords } from './state.js'
+import { clearChosenWishlistWords } from './wishlist.js'
 import { stateOf, isPendingConfirmation } from './records.js'
 
 /**
@@ -53,6 +54,7 @@ export function getBatchOptions(level = 'learning', rng = Math.random) {
     level,
     rng,
     rankOf: partRank(),
+    wishlistKeys: state.learningWishlist,
   })
 }
 
@@ -91,6 +93,7 @@ export async function commitBatch(option) {
   const plainOption = toPlain(option)
   state[plainOption.level] = plainOption
   await idb.setMeta(BATCH_META_KEY(plainOption.level), plainOption)
+  if (plainOption.level === 'learning') await clearChosenWishlistWords(plainOption.words)
 }
 
 /** Target state a word must reach for a batch of the given level to count it. */

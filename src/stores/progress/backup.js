@@ -3,7 +3,7 @@ import * as idb from '../../lib/idb.js'
 import { toPlain } from '../../lib/plain.js'
 import { buildActivityFromEvents, randomHue } from '../../lib/streak.js'
 
-import { state, BATCH_META_KEY } from './state.js'
+import { state, BATCH_META_KEY, WISHLIST_META_KEY } from './state.js'
 import { persistedShape, persistenceSettled } from './persistence.js'
 import { clearMemo, acknowledgeAchievements } from './records.js'
 import { batchSignature, activityRecord } from './activity.js'
@@ -18,9 +18,9 @@ import {
  * Bumped if the export schema (or the meaning of its data) changes; guards
  * imports. v2: mastery criteria tightened to two spaced correct answers per
  * dimension (#313) — pre-v2 backups get their mastered peaks re-checked on
- * import (see {@link recheckMasteredPeak}).
+ * import (see {@link recheckMasteredPeak}). v3: next-batch wishlist.
  */
-export const EXPORT_VERSION = 2
+export const EXPORT_VERSION = 3
 
 /** A serialisable snapshot of all progress data (plain, proxy-free). */
 export function exportData() {
@@ -31,6 +31,7 @@ export function exportData() {
     firstUseAt: state.firstUseAt,
     records: Object.values(state.records).map((rec) => persistedShape(rec)),
     batches: { learning: state.learning, mastery: state.mastery },
+    learningWishlist: state.learningWishlist,
     seenAchievements: [...state.seenAchievements],
     achievementsEarnedAt: state.achievementsEarnedAt,
     metWords: state.metWords,
@@ -96,6 +97,9 @@ export async function importData(data) {
   state.mastery = masteryBatch
   await idb.setMeta(BATCH_META_KEY('learning'), learningBatch)
   await idb.setMeta(BATCH_META_KEY('mastery'), masteryBatch)
+  state.learningWishlist = Array.isArray(data.learningWishlist)
+    ? [...new Set(data.learningWishlist.filter((key) => typeof key === 'string'))] : []
+  await idb.setMeta(WISHLIST_META_KEY, [...state.learningWishlist])
   if (data.firstUseAt) {
     state.firstUseAt = data.firstUseAt
     await idb.setMeta('firstUseAt', data.firstUseAt)

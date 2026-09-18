@@ -1,8 +1,11 @@
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import 'fake-indexeddb/auto'
-import { mount } from '@vue/test-utils'
+import { IDBFactory } from 'fake-indexeddb'
+import { mount, flushPromises } from '@vue/test-utils'
 
 import MeaningMazeView from './MeaningMazeView.vue'
+import * as idb from '../lib/idb.js'
+import * as progress from '../stores/progress.js'
 import { state } from '../stores/vocab.js'
 import { loadFixtureWords } from '../test/fixtures.js'
 import { neighbours } from '../lib/meaningMaze.js'
@@ -75,6 +78,24 @@ describe('MeaningMazeView', () => {
     await tile(wrapper, next).trigger('click')
     expect(wrapper.vm.path).toEqual([wrapper.vm.maze.start, next.i])
     expect(wrapper.vm.mistakes).toBe(0)
+  })
+
+  it('saves a successfully translated word for a future batch', async () => {
+    globalThis.indexedDB = new IDBFactory()
+    idb._resetForTests()
+    await progress.resetProgress()
+    await progress.loadProgress()
+    const wrapper = await play()
+    const maze = wrapper.vm.maze
+    const next = maze.cells[maze.solution[1]]
+    const wordKey = maze.cells[maze.start].key
+    await tile(wrapper, next).trigger('click')
+    expect(wrapper.find('.translated-word').text()).toContain(next.text)
+    await wrapper.find('.translated-word .next-batch').trigger('click')
+    await new Promise((resolve) => setTimeout(resolve))
+    await flushPromises()
+    expect(progress.state.learningWishlist).toContain(wordKey)
+    wrapper.unmount()
   })
 
   it('refuses a wrong translation, says which two words, and draws nothing', async () => {

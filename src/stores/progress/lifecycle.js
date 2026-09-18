@@ -12,7 +12,7 @@ import {
   hueForDay,
 } from '../../lib/streak.js'
 
-import { state, BATCH_META_KEY } from './state.js'
+import { state, BATCH_META_KEY, WISHLIST_META_KEY } from './state.js'
 import { persistedShape, persistenceSettled } from './persistence.js'
 import { clearMemo } from './records.js'
 import { batchSignature, activityRecord } from './activity.js'
@@ -72,6 +72,9 @@ async function doLoadProgress() {
   state.records = map
   state.learning = (await idb.getMeta(BATCH_META_KEY('learning'))) ?? null
   state.mastery = (await idb.getMeta(BATCH_META_KEY('mastery'))) ?? null
+  const wishlist = await idb.getMeta(WISHLIST_META_KEY)
+  state.learningWishlist = Array.isArray(wishlist)
+    ? [...new Set(wishlist.filter((key) => typeof key === 'string'))] : []
   // Stamp first use the first time we ever load.
   state.firstUseAt = (await idb.getMeta('firstUseAt')) ?? null
   if (state.firstUseAt == null) {
@@ -153,6 +156,7 @@ export async function resetProgress() {
   await idb.clearProgress()
   await idb.setMeta(BATCH_META_KEY('learning'), null)
   await idb.setMeta(BATCH_META_KEY('mastery'), null)
+  await idb.setMeta(WISHLIST_META_KEY, [])
   await idb.setMeta('firstUseAt', null)
   await idb.setMeta('seenAchievements', [])
   await idb.setMeta('achievementsEarnedAt', {})
@@ -166,6 +170,7 @@ export async function resetProgress() {
   state.records = {}
   state.learning = null
   state.mastery = null
+  state.learningWishlist = []
   state.firstUseAt = null
   state.seenAchievements = new Set()
   state.achievementsEarnedAt = {}

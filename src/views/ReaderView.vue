@@ -8,6 +8,7 @@ import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
 import { loadBook } from '../stores/library.js'
 import { translationIssueUrl } from '../lib/readerReport.js'
 import { cancelSpeech, speak, speechSupported } from '../lib/speech.js'
+import NextBatchButton from '../components/NextBatchButton.vue'
 
 const FONT_SIZES = ['Small', 'Default', 'Large', 'Extra large']
 const canSpeak = speechSupported()
@@ -334,7 +335,15 @@ onBeforeUnmount(() => {
         <strong>{{ openedWord }}</strong>
         <p v-if="vocabState.status === 'loading' && !vocabState.words.length">Loading dictionary…</p>
         <p v-else-if="!definitions.length">No dictionary entry for this form.</p>
-        <ul v-else><li v-for="entry in definitions" :key="entry.key"><strong>{{ entry.lemma }}</strong> <small>{{ entry.pos }}</small><br>{{ entry.meaning }}<small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small><small v-for="note in entry.notes" :key="note" class="reader-morph">{{ note }}</small></li></ul>
+        <ul v-else>
+          <li v-for="entry in definitions" :key="entry.key">
+            <strong>{{ entry.lemma }}</strong> <small>{{ entry.pos }}</small><br>
+            {{ entry.meaning }}
+            <small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small>
+            <small v-for="note in entry.notes" :key="note" class="reader-morph">{{ note }}</small>
+            <NextBatchButton :word-key="entry.key" />
+          </li>
+        </ul>
       </aside>
     </div>
 
@@ -396,6 +405,7 @@ onBeforeUnmount(() => {
 .reader-dictionary ul { margin: .5rem 0 0; padding: 0; list-style: none; }
 .reader-dictionary li + li { margin-top: .55rem; padding-top: .55rem; border-top: 1px solid var(--rule); }
 .reader-dictionary small { color: var(--subtle); }
+.reader-dictionary button.next-batch { display: block; margin-top: .45rem; border: 1px solid var(--reader-accent); border-radius: .45rem; padding: .35rem .55rem; background: color-mix(in srgb, var(--reader-accent) 12%, var(--paper)); color: var(--ink); }
 .reader-morph { display: block; margin-top: .15rem; }
 .reader-dictionary-close { float: right; font-size: 1.3rem; }
 .reader-translation { display: block; margin: .25em 0 .7em; padding-left: 1.2em; color: var(--subtle); font: .73em/1.5 Georgia, 'Times New Roman', serif; text-indent: 0; }

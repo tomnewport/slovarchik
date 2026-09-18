@@ -14,6 +14,8 @@ import {
   recentlyLearned,
   recordAttempt,
   getBatchOptions,
+  queueForNextBatch,
+  removeFromNextBatch,
   commitBatch,
   batchProgress,
   batchExerciseProgress,
@@ -941,13 +943,13 @@ describe('confirmation reviews (#313)', () => {
     expect(state.records.w0.peak).toBe(2)
     expect(lost.value).not.toContain('w0')
 
-    // A current (v2) backup keeps genuine peaks untouched.
+    // A current backup keeps genuine peaks untouched.
     await resetProgress()
     await master('w0', 10_000)
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
     await recordAttempt({ word: 'w0', dimension: 'identification', level: 'mastery', correct: false })
     const snapshot = exportData()
-    expect(snapshot.version).toBe(2)
+    expect(snapshot.version).toBe(3)
     await resetProgress()
     await importData(snapshot)
     expect(state.records.w0.peak).toBe(3)
@@ -966,6 +968,24 @@ describe('confirmation reviews (#313)', () => {
 })
 
 describe('persistence', () => {
+  it('keeps next-batch requests through reload and backup, then consumes chosen words', async () => {
+    setVocab(makeWords(2))
+    await queueForNextBatch('w0')
+    await queueForNextBatch('w1')
+    await queueForNextBatch('w1')
+    await removeFromNextBatch('w1')
+    const backup = exportData()
+    state.learningWishlist = []
+    await loadProgress()
+    expect(state.learningWishlist).toEqual(['w0'])
+    await commitBatch({ name: 'animals', collection: 'animals', level: 'learning',
+      color: 'green', words: ['w0'], size: 1 })
+    expect(state.learningWishlist).toEqual([])
+    await resetProgress()
+    await importData(backup)
+    expect(state.learningWishlist).toEqual(['w0'])
+  })
+
   it('glosses a sentence once across spellings, reloads, reset and backup', async () => {
     const ru = 'В су́пе мно́го о́вощей.'
     expect(firstPhraseEncounter(ru)).toBe(true)
