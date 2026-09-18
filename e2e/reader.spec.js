@@ -29,6 +29,6 @@ test('reading pages fit after resizing, changing typeface, and revealing a trans
   await expectPageFits()
   await page.setViewportSize({ width: 393, height: 851 })
   await expectPageFits()
-  await page.getByRole('button', { name: 'Serif type' }).click()
+  await page.getByRole('button', { name: 'Serif type', exact: true }).click()
   await expectPageFits()
 })
