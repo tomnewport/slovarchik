@@ -8,7 +8,7 @@ export function validateCatalog(data) {
   for (const entry of data.books) {
     if (!/^[a-z0-9-]+$/.test(entry.id ?? '') || ids.has(entry.id) ||
       !SHELVES.includes(entry.shelf) || !entry.title || !entry.author ||
-      !entry.source?.url || !entry.rights?.original || !entry.rights?.translation ||
+      !/^https:\/\//.test(entry.source?.url ?? '') || !entry.rights?.original || !entry.rights?.translation ||
       !Number.isInteger(entry.packVersion) || !Number.isInteger(entry.translationVersion) ||
       !/^[a-f0-9]{64}$/.test(entry.sha256 ?? '')) throw new Error('Invalid book catalog entry')
     ids.add(entry.id)
@@ -38,6 +38,7 @@ export function validatePack(pack, entry) {
 }
 
 export async function sha256(bytes) {
-  const hash = await crypto.subtle.digest('SHA-256', bytes)
+  if (!globalThis.crypto?.subtle) throw new Error('Downloads require a secure connection (HTTPS or localhost).')
+  const hash = await globalThis.crypto.subtle.digest('SHA-256', bytes)
   return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, '0')).join('')
 }

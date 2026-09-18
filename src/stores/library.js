@@ -20,7 +20,14 @@ async function doLoadCatalog() {
   const [installed, cached] = await Promise.all([idb.getAllBooks(), idb.getMeta('reader:catalog')])
   library.installed = Object.fromEntries(installed.map(({ id, packVersion, translationVersion }) =>
     [id, { packVersion, translationVersion }]))
-  if (cached) library.books = validateCatalog(cached)
+  library.books = []
+  let validCached = false
+  if (cached) {
+    try {
+      library.books = validateCatalog(cached)
+      validCached = true
+    } catch { /* A damaged local copy must not prevent a fresh catalog fetch. */ }
+  }
   try {
     const response = await fetch(catalogUrl, { cache: 'no-store' })
     if (!response.ok) throw new Error(`Catalog download failed (${response.status})`)
@@ -29,8 +36,8 @@ async function doLoadCatalog() {
     await idb.setMeta('reader:catalog', catalog)
     library.status = 'ready'
   } catch (error) {
-    library.status = cached ? 'ready' : 'unavailable'
-    if (!cached) library.error = error.message
+    library.status = validCached ? 'ready' : 'unavailable'
+    if (!validCached) library.error = error.message
   }
   return library.books
 }
@@ -69,9 +76,13 @@ export async function downloadBook(entry) {
 
 export async function removeBook(id) {
   library.busyId = id
+  library.error = null
   try {
     await idb.deleteBook(id)
     delete library.installed[id]
+  } catch (error) {
+    library.error = error.message
+    throw error
   } finally {
     library.busyId = null
   }

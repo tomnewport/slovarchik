@@ -370,7 +370,7 @@ const FOCUSED = [
     <!-- Minigames -->
     <div class="card minigames">
       <h2>Minigames</h2>
-      <p class="muted">Short games to make a habit automatic. They don't track progress.</p>
+      <p class="muted">Other ways to practise away from a session. They don't track progress.</p>
       <div class="grid games">
         <button v-for="g in MINIGAMES" :key="g.to" class="game" @click="openDrill(g.to)">
           <span class="game-icon" aria-hidden="true">{{ g.icon }}</span>

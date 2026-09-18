@@ -60,11 +60,18 @@
     "extra Minigames row: 90116 -> 90256 B, about 140 B. That left 1744 B under",
     "the 92000 B limit, below the ~2 KB this number is set with, so it moves",
     "92000 -> 92300 B. Entry CSS is unchanged at 4908 B: the game's styles are",
-    "scoped to the lazy view."
+    "scoped to the lazy view.",
+    "",
+    "Raised for the literature reader (#754/#763). Home's Literature entry and",
+    "the library route grow the first-load JS from 89.4 KiB on main to 92137 B",
+    "(90.0 KiB) in this PR. The old 92300 B limit left 163 B of headroom, so it",
+    "moves to 94200 B, restoring roughly 2 KiB. Reader code remains lazy.",
+    "Entry CSS is 4925 B under its existing 5150 B limit; vocab is 1171170 B",
+    "under its existing 1200000 B limit."
   ],
   "limits": {
     "entryJs": {
-      "bytes": 92300,
+      "bytes": 94200,
       "label": "Entry JS (gzip)",
       "why": "The bundle every launch pays for before anything renders. Vue, the router, the stores and the lib engine accumulate here; route chunks are lazy and deliberately excluded, so a route module pulled into the entry by a stray top-level import shows up as growth here."
     },

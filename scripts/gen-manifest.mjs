@@ -51,6 +51,7 @@ import { buildWords, corpusToken, phraseNotesFrom, shapePhrases } from '../src/l
 export const FILES = [
   { pos: 'noun', file: 'nouns.yml' },
   { pos: 'noun', file: 'names.yml' }, // dictionary-only personal names and patronymics
+  { pos: 'noun', file: 'reader-nouns.yml' }, // dictionary-only words in the shipped books
   { pos: 'noun', file: 'calendar.yml' },
   { pos: 'pronoun', file: 'pronouns.yml' },
   { pos: 'numeral', file: 'numerals.yml' },
@@ -59,10 +60,12 @@ export const FILES = [
   { pos: 'grammar-rules', file: 'grammar-rules.yml' },
   { pos: 'parts', file: 'parts.yml' },
   { pos: 'adverb', file: 'adverbs.yml' },
+  { pos: 'adverb', file: 'reader-adverbs.yml' },
   { pos: 'preposition', file: 'prepositions.yml' },
   { pos: 'conjunction', file: 'conjunctions.yml' },
   { pos: 'interjection', file: 'interjections.yml' },
   { pos: 'glossary', file: 'glossary.yml' },
+  { pos: 'glossary', file: 'reader-glosses.yml' },
 ]
 
 export const MANIFEST_VERSION = 1

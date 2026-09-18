@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { buildFormIndex } from './phraseHint.js'
 import { lookupReaderWord, readerTokens } from './readerDictionary.js'
+import { loadFixtureWords } from '../test/fixtures.js'
 
 describe('literature dictionary', () => {
   it('keeps punctuation while making individual words tappable', () => {
@@ -21,5 +22,17 @@ describe('literature dictionary', () => {
 
   it('returns no entries when a literary name is absent from the dictionary', () => {
     expect(lookupReaderWord('Непридуманное', buildFormIndex([]), new Map())).toEqual([])
+  })
+
+  it('looks up the shipped titles and their inflected story forms without adding drills', () => {
+    const words = loadFixtureWords()
+    const index = buildFormIndex(words)
+    const byKey = new Map(words.map((word) => [word.key, word]))
+    for (const surface of ['голубка', 'голубку', 'косточка', 'косточки', 'косточку', 'горнице', 'рак', 'окошко', 'нехорошо', 'пропела', 'настает']) {
+      const entries = lookupReaderWord(surface, index, byKey)
+      expect(entries.length, surface).toBeGreaterThan(0)
+      expect(entries.some((entry) => words.find((word) => word.key === entry.key)?.learnable === false), surface).toBe(true)
+    }
+    expect(lookupReaderWord('косточку', index, byKey).find((entry) => entry.key === 'косточка=stone').morphology).toContain('Accusative singular')
   })
 })

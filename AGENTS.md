@@ -215,8 +215,9 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
                         #   not committed, like the manifest and the *.json
 content/books/          # reviewed Russian works and new sentence translations;
                         #   source revisions, rights and stable IDs live here
-public/books/           # generated catalog and opt-in, versioned JSON packs;
-                        #   kept outside the service worker precache
+public/books/           # generated AND committed catalog and opt-in, versioned
+                        #   JSON packs; unlike vocab's manifest, these are tracked
+                        #   and kept outside the service worker precache
 e2e/                    # Playwright specs (homepage, full-session, versions, and offline —
                         #   the last runs against the preview build, where the SW exists)
 docs/                   # design notes for in-flight features
@@ -276,6 +277,7 @@ npm run test:coverage # same suite + coverage over src/lib, src/stores, src/comp
 npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
 npm run typecheck   # non-strict `tsc --checkJs` over src/lib, src/stores, src/composables
 npm run build       # production build into dist/
+npm run gen:books  # validate content/books/ and regenerate the committed public/books/ packs
 npm run preview     # serve the production build
 npm run test:e2e    # Playwright end-to-end tests
 

@@ -10,6 +10,10 @@ onMounted(() => { void loadCatalog() })
 async function download(entry) {
   try { await downloadBook(entry) } catch { /* The error is shown beside the library. */ }
 }
+
+async function remove(id) {
+  try { await removeBook(id) } catch { /* The error is shown beside the library. */ }
+}
 </script>
 
 <template>
@@ -27,7 +31,7 @@ async function download(entry) {
         <div class="library-actions">
           <RouterLink v-if="library.installed[entry.id]" :to="`/reader/${entry.id}`">Read</RouterLink>
           <button v-if="!library.installed[entry.id] || library.installed[entry.id].packVersion !== entry.packVersion || library.installed[entry.id].translationVersion !== entry.translationVersion" :disabled="!!library.busyId" @click="download(entry)">{{ library.busyId === entry.id ? 'Downloading…' : library.installed[entry.id] ? 'Update' : 'Download' }}</button>
-          <button v-if="library.installed[entry.id]" :disabled="!!library.busyId" @click="removeBook(entry.id)">Remove download</button>
+          <button v-if="library.installed[entry.id]" :disabled="!!library.busyId" @click="remove(entry.id)">Remove download</button>
         </div>
         <details class="library-source"><summary>Source and rights</summary><p>{{ entry.source.editionId }} · <a :href="entry.source.url" target="_blank" rel="noopener noreferrer">Wikisource text and attribution</a></p><p>{{ entry.rights.original }} {{ entry.rights.transcription }} {{ entry.rights.translation }}</p></details>
       </div>

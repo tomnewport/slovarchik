@@ -43,7 +43,12 @@ function fits(from, to) {
     for (const sentence of group.sentences) {
       const line = document.createElement('span')
       line.className = 'reader-sentence'
-      line.append(document.createTextNode(sentence.ru))
+      for (const token of readerTokens(sentence.ru)) {
+        const span = document.createElement('span')
+        if (token.word) span.className = 'reader-word'
+        span.textContent = token.text
+        line.append(span)
+      }
       const action = document.createElement('button')
       action.className = 'reader-reveal'
       action.tabIndex = -1
@@ -52,14 +57,15 @@ function fits(from, to) {
       if (revealedId.value === sentence.id && sentence.en) {
         const translation = document.createElement('span')
         translation.className = 'reader-translation'
+        translation.lang = 'en'
         translation.textContent = sentence.en
         const actions = document.createElement('span')
         actions.className = 'reader-translation-actions'
         const bookmark = document.createElement('button')
-        bookmark.textContent = 'Bookmark'
+        bookmark.textContent = bookmarks.value.includes(sentence.id) ? 'Bookmarked' : 'Bookmark'
         bookmark.tabIndex = -1
         actions.append(bookmark)
-        const query = document.createElement('span')
+        const query = document.createElement('a')
         query.textContent = ' · Query translation'
         actions.append(query)
         translation.append(actions)
@@ -76,6 +82,8 @@ function fits(from, to) {
 function layout() {
   if (!measuringPage.value || !book.value.sentences.length) return
   end.value = pageEnd(book.value.sentences.length, start.value, fits)
+  // Leave the mirror on the chosen page so browser tests can catch height drift.
+  fits(start.value, end.value)
 }
 
 function scheduleLayout() {
@@ -123,6 +131,12 @@ function clickReveal(sentence) {
 function openWord(surface) {
   if (suppressRevealClick) return
   openedWord.value = openedWord.value === surface ? null : surface
+}
+
+function clickSentence(event) {
+  if (!(event.target instanceof Element)) return
+  const word = event.target.closest('[data-reader-word]')
+  if (word && event.currentTarget.contains(word)) openWord(word.dataset.readerWord)
 }
 
 async function toggleBookmark(sentence) {
@@ -222,8 +236,8 @@ onBeforeUnmount(() => {
     <div class="reader-body">
       <article ref="readingPage" class="reader-page" aria-label="Russian text">
         <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph" :class="{ 'reader-verse': book.form === 'verse' }">
-          <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null">
-            <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex"><button v-if="token.word" class="reader-word" :aria-label="`Look up ${token.text}`" @click.stop="openWord(token.text)">{{ token.text }}</button><span v-else>{{ token.text }}</span></span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
+          <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null" @click="clickSentence">
+            <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex" :class="{ 'reader-word': token.word }" :data-reader-word="token.word ? token.text : null">{{ token.text }}</span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
               {{ sentence.en }}
               <span class="reader-translation-actions"><button :aria-pressed="bookmarks.includes(sentence.id)" @click="toggleBookmark(sentence)">{{ bookmarks.includes(sentence.id) ? 'Bookmarked' : 'Bookmark' }}</button> · <a :href="translationIssueUrl(book, sentence.id)" target="_blank" rel="noopener noreferrer">Query translation</a></span>
@@ -274,8 +288,8 @@ onBeforeUnmount(() => {
 .reader-verse .reader-sentence { display: block; white-space: pre-line; }
 .reader-reveal { font: .65em system-ui, sans-serif; margin: 0 .12em; vertical-align: baseline; opacity: .5; }
 .reader button.reader-reveal { padding: 0 .12em; }
-.reader button.reader-word { padding: 0; font: inherit; line-height: inherit; border-radius: 0; }
-.reader button.reader-word:hover, .reader button.reader-word:focus-visible { text-decoration: underline; text-underline-offset: .15em; }
+.reader-word { cursor: pointer; }
+.reader-word:hover { text-decoration: underline; text-underline-offset: .15em; }
 .reader-dictionary { position: absolute; z-index: 1; bottom: 1rem; left: 1rem; right: 1rem; max-width: 28rem; max-height: 50%; overflow: auto; padding: .75rem 1rem; border: 1px solid var(--rule); border-radius: .6rem; background: var(--paper); box-shadow: 0 .4rem 1.5rem #0005; font: .9rem/1.4 system-ui, sans-serif; }
 .reader-dictionary p { margin: .5rem 0 0; }
 .reader-dictionary ul { margin: .5rem 0 0; padding: 0; list-style: none; }

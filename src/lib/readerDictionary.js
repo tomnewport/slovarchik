@@ -25,7 +25,7 @@ export function lookupReaderWord(surface, index, byKey) {
     key: word.key,
     lemma: word.headword || word.ru,
     meaning: word.meaning || word.en,
-    pos: word.pos === 'glossary' ? 'glossary' : word.pos,
+    pos: word.pos,
     morphology: morphologyFor(word, surface),
     notes: word.facts?.filter((fact) => fact.kind === 'note').map((fact) => fact.text) ?? [],
   }))

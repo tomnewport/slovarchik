@@ -139,7 +139,7 @@ test('a chosen literature pack opens, bookmarks and survives offline, then remov
   await page.locator('.reader-saved').click()
   await page.locator('.reader-bookmarks').getByRole('button', { name: /Попрыгунья Стрекоза/ }).click()
   await expect(page.getByRole('article', { name: 'Russian text' })).toContainText('Попрыгунья Стрекоза')
-  await page.getByRole('button', { name: 'Look up Стрекоза' }).first().click()
+  await page.getByRole('article', { name: 'Russian text' }).locator('.reader-word', { hasText: 'Стрекоза' }).first().click()
   await expect(page.getByRole('dialog', { name: 'Dictionary: Стрекоза' })).toBeVisible()
 
   await page.getByRole('link', { name: 'Back to library' }).click()

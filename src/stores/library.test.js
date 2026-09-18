@@ -4,6 +4,8 @@ import { IDBFactory } from 'fake-indexeddb'
 import { Blob as NodeBlob } from 'node:buffer'
 import { createHash, webcrypto } from 'node:crypto'
 import * as idb from '../lib/idb.js'
+import { failWrites } from '../test/idbFailure.js'
+import { validateCatalog } from '../lib/bookPack.js'
 import { library, loadBook, loadCatalog, downloadBook, removeBook } from './library.js'
 
 const pack = {
@@ -56,5 +58,48 @@ describe('optional literature packs', () => {
     await loadCatalog()
     expect(library.books.map((book) => book.id)).toEqual(['fable'])
     expect(library.status).toBe('ready')
+  })
+
+  it('replaces a corrupt cached catalog with the network copy', async () => {
+    await idb.setMeta('reader:catalog', { schemaVersion: 0, books: [entry] })
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, json: async () => ({ schemaVersion: 1, books: [entry] }) })))
+    await loadCatalog()
+    expect(library.books.map((book) => book.id)).toEqual(['fable'])
+    expect(library.status).toBe('ready')
+    expect(await idb.getMeta('reader:catalog')).toEqual({ schemaVersion: 1, books: [entry] })
+  })
+
+  it('shows unavailable when both the cached catalog and network fail', async () => {
+    await idb.setMeta('reader:catalog', { schemaVersion: 0, books: [entry] })
+    vi.stubGlobal('fetch', vi.fn(async () => { throw new Error('offline') }))
+    await loadCatalog()
+    expect(library.books).toEqual([])
+    expect(library.status).toBe('unavailable')
+    expect(library.error).toBe('offline')
+  })
+
+  it('rejects an unsafe source link in a cached catalog', () => {
+    expect(() => validateCatalog({ schemaVersion: 1, books: [
+      { ...entry, source: { ...entry.source, url: 'javascript:alert(1)' } },
+    ] })).toThrow('Invalid book catalog entry')
+  })
+
+  it('explains when a download cannot be verified without a secure context', async () => {
+    vi.stubGlobal('crypto', {})
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, arrayBuffer: async () => bytes.buffer })))
+    await expect(downloadBook(entry)).rejects.toThrow('secure connection')
+    expect(library.error).toMatch(/secure connection/)
+  })
+
+  it('keeps an installed book visible and reports a failed removal', async () => {
+    await idb.putBook({ id: 'fable', packVersion: 2, translationVersion: 3, blob: new NodeBlob([JSON.stringify(pack)]) })
+    library.installed.fable = { packVersion: 2, translationVersion: 3 }
+    const restore = await failWrites({ stores: ['book-packs'] })
+    try {
+      await expect(removeBook('fable')).rejects.toThrow()
+      expect(library.installed.fable).toBeDefined()
+      expect(library.error).toBeTruthy()
+      expect(library.busyId).toBeNull()
+    } finally { restore() }
   })
 })
