@@ -72,6 +72,12 @@ const MINIGAMES = [
     label: 'Bomb disposal',
     skill: 'Colours, and following a spoken instruction to the letter.',
   },
+  {
+    to: '/crush',
+    icon: '💠',
+    label: 'Inflection crush',
+    skill: 'Reading a form on sight — which gender it agrees with, or which case it is in.',
+  },
 ]
 
 function openDrill(to) {

@@ -60,15 +60,16 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 16 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
-                        #   /verb-government, /listening, /speaking, /numbers, /bomb, and the
+                        #   /verb-government, /listening, /speaking, /numbers, /bomb,
+                        #   /crush, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView is the first minigame — #726's between-practice
-                        #   interludes, launched for now from HomeView's Minigames section
-                        #   rather than from inside a session)
+                        #   BombDisposalView and InflectionCrushView are the minigames —
+                        #   #726's between-practice interludes, launched for now from
+                        #   HomeView's Minigames section rather than from inside a session)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, ProgressWords, WordFacts,
@@ -147,6 +148,10 @@ src/
                         #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
                         #     grammar that both SAYS the instruction in Russian and grades the cut,
                         #     so the sentence and the right answer cannot drift apart
+                        #   inflectionCrush  — the match-three minigame (#751): what each inflected
+                        #     form COULD be (кни́ги is genitive singular and nominative plural, so it
+                        #     matches as both), what clears, what falls, and what the chase window
+                        #     after a line is worth — a second per feature the line fired on
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)
