@@ -191,6 +191,10 @@ describe('solutionCells', () => {
   })
 })
 
+/** The English neighbours a Russian cell may legally be linked to. */
+const links = (maze, cell) =>
+  neighbours(maze.size, cell.i).filter((k) => linkOk(cell, maze.cells[k]))
+
 describe('generateMaze', () => {
   const maze = generateMaze(pool(900), { size: 25, rng: mulberry32(42) })
   const cellsOf = (m) => m.cells
@@ -257,40 +261,40 @@ describe('generateMaze', () => {
     })
   })
 
-  it('places no link it did not mean to: every Russian cell has at most one', () => {
+  it('gives every Russian word exactly one translation beside it', () => {
     for (const cell of cellsOf(maze)) {
       if (cell.side !== 'ru') continue
-      const valid = neighbours(maze.size, cell.i).filter((k) => linkOk(cell, maze.cells[k]))
-      expect(valid.length).toBeLessThanOrEqual(1)
+      const valid = links(maze, cell)
+      // One and only one: no dead end to waste a scan on, and no second answer
+      // for a refusal to have turned down.
+      expect(valid).toHaveLength(cell.i === maze.goal ? 0 : 1)
+    }
+    expect(maze.deadEnds).toBe(0)
+  })
+
+  it('leaves nothing but the exit with no way out', () => {
+    const stuck = cellsOf(maze).filter((c) => c.side === 'ru' && !links(maze, c).length)
+    expect(stuck.map((c) => c.i)).toEqual([maze.goal])
+  })
+
+  it('pairs every English cell with exactly one Russian word too', () => {
+    // The corollary of the matching: no gloss is the answer to two questions.
+    for (const cell of cellsOf(maze)) {
+      if (cell.side !== 'en') continue
+      const owners = neighbours(maze.size, cell.i).filter((k) => linkOk(maze.cells[k], cell))
+      expect(owners).toHaveLength(1)
     }
   })
 
-  it('hangs false routes off the path that lead nowhere', () => {
-    const onPath = new Set(maze.solution)
-    const decoys = cellsOf(maze).filter(
-      (c) =>
-        c.side === 'ru' &&
-        !onPath.has(c.i) &&
-        neighbours(maze.size, c.i).some((k) => linkOk(c, maze.cells[k])),
-    )
-    expect(decoys.length).toBeGreaterThan(0)
-    // A false route must not hand the player back onto the solution: no decoy's
-    // English cell may sit beside a Russian cell of the path.
-    for (const decoy of decoys) {
-      const en = neighbours(maze.size, decoy.i).filter((k) => linkOk(decoy, maze.cells[k]))
-      for (const k of en) {
-        for (const back of neighbours(maze.size, k)) {
-          if (maze.cells[back].side === 'ru') expect(onPath.has(back)).toBe(false)
-        }
+  it('finds a pairing for every cell on every size, over many seeds', () => {
+    // The matching is what makes the no-dead-ends promise, and it is the one
+    // part of the generator that can come up short: the counts are balanced to
+    // the cell, so a single stranded cell is a visible failure.
+    for (const size of SIZES) {
+      for (let seed = 1; seed <= 12; seed++) {
+        expect(generateMaze(pool(900), { size, rng: mulberry32(seed) }).deadEnds).toBe(0)
       }
     }
-  })
-
-  it('leaves most Russian cells as dead ends', () => {
-    const dead = cellsOf(maze).filter(
-      (c) => c.side === 'ru' && !neighbours(maze.size, c.i).some((k) => linkOk(c, maze.cells[k])),
-    )
-    expect(dead.length).toBeGreaterThan(maze.cells.length / 4)
   })
 
   it('is reproducible from a seed, and different without one', () => {
@@ -325,17 +329,6 @@ describe('generateMaze', () => {
     expect(m.cells.every((c) => c.text !== '')).toBe(true)
   })
 
-  it('draws no decoys when it is told not to', () => {
-    const plain = generateMaze(pool(900), { size: 13, rng: mulberry32(5), decoyChance: 0 })
-    const onPath = new Set(plain.solution)
-    const strays = plain.cells.filter(
-      (c) =>
-        c.side === 'ru' &&
-        !onPath.has(c.i) &&
-        neighbours(plain.size, c.i).some((k) => linkOk(c, plain.cells[k])),
-    )
-    expect(strays).toEqual([])
-  })
 })
 
 describe('moving', () => {

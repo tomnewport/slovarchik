@@ -47,12 +47,68 @@ describe('MeaningMazeView', () => {
     const wrapper = mount(MeaningMazeView)
     expect(wrapper.text()).toContain('only to its English translation')
     expect(wrapper.text()).toContain('any Russian word beside it, free')
+    expect(wrapper.text()).toContain('Every Russian word has its translation beside it')
     expect(wrapper.find('#maze-size').exists()).toBe(true)
   })
 
   it('offers only the sizes the dictionary can fill', () => {
     const wrapper = mount(MeaningMazeView)
     expect(wrapper.vm.sizes).toEqual([13, 17, 25])
+  })
+
+  it('starts with every level in play, and narrows the pool as they come off', () => {
+    const wrapper = mount(MeaningMazeView)
+    expect(wrapper.vm.levels).toEqual(['A1', 'A2', 'B1'])
+    const all = wrapper.vm.pool.length
+    wrapper.vm.toggleLevel('B1')
+    expect(wrapper.vm.levels).toEqual(['A1', 'A2'])
+    expect(wrapper.vm.pool.length).toBeLessThan(all)
+    wrapper.vm.toggleLevel('B1')
+    expect(wrapper.vm.pool.length).toBe(all)
+  })
+
+  it('keeps at least one level on: an empty selection is no game', () => {
+    const wrapper = mount(MeaningMazeView)
+    for (const level of ['A2', 'B1', 'A1']) wrapper.vm.toggleLevel(level)
+    expect(wrapper.vm.levels).toEqual(['A1'])
+    wrapper.vm.toggleLevel('A1')
+    expect(wrapper.vm.levels).toEqual(['A1'])
+  })
+
+  it('drops a board the chosen levels can no longer fill, rather than lying about it', async () => {
+    const wrapper = mount(MeaningMazeView)
+    expect(wrapper.vm.size).toBe(25)
+    // A1 alone is a few hundred words — not the 625 a full board needs.
+    wrapper.vm.toggleLevel('A2')
+    wrapper.vm.toggleLevel('B1')
+    expect(wrapper.vm.sizes).not.toContain(25)
+    expect(wrapper.vm.sizes).toContain(wrapper.vm.size)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.text()).toContain('the bigger boards are off the list')
+    expect(wrapper.findAll('#maze-size option').map((o) => o.text())).toEqual(
+      wrapper.vm.sizes.map((s) => `${s} × ${s}`),
+    )
+  })
+
+  it('builds a board from the levels in play, and from no others', async () => {
+    const wrapper = mount(MeaningMazeView)
+    wrapper.vm.toggleLevel('A1')
+    wrapper.vm.toggleLevel('A2')
+    wrapper.vm.size = 13
+    await wrapper.vm.$nextTick()
+    await wrapper.find('button.primary').trigger('click')
+    const keys = new Set(wrapper.vm.maze.cells.map((c) => c.key))
+    const levelOf = new Map(state.words.map((w) => [w.key, w.cefr]))
+    for (const key of keys) expect(levelOf.get(key)).toBe('B1')
+  })
+
+  it('turns a level on by tapping its chip', async () => {
+    const wrapper = mount(MeaningMazeView)
+    const chip = wrapper.findAll('.level').find((b) => b.text() === 'B1')
+    expect(chip.attributes('aria-pressed')).toBe('true')
+    await chip.trigger('click')
+    expect(chip.attributes('aria-pressed')).toBe('false')
+    expect(wrapper.vm.levels).toEqual(['A1', 'A2'])
   })
 
   it('waits for the dictionary rather than starting on an empty board', async () => {
@@ -67,6 +123,7 @@ describe('MeaningMazeView', () => {
   it('lays out a board with the line starting in the corner', async () => {
     const wrapper = await play()
     expect(wrapper.findAll('.board .cell')).toHaveLength(169)
+    expect(wrapper.vm.maze.deadEnds).toBe(0)
     expect(wrapper.vm.path).toEqual([wrapper.vm.maze.start])
     expect(wrapper.vm.maze.start).toBe(0)
     expect(wrapper.find('.clock').text()).toMatch(/^\d+:\d\d$/)

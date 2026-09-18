@@ -22,6 +22,7 @@ import { computed, nextTick, onMounted, onUnmounted, reactive, ref } from 'vue'
 
 import {
   DEFAULT_SIZE,
+  LEVELS,
   SIZES,
   advance,
   formatTime,
@@ -45,6 +46,12 @@ const FLASH_MS = 700
 const TICK_MS = 250
 
 const size = ref(DEFAULT_SIZE)
+/**
+ * Which CEFR levels are in play. All three by default; A1 on its own is 458
+ * words, which is not enough for a 25 × 25 board (625 cells), so the board
+ * sizes on offer follow from this rather than the other way round.
+ */
+const levels = ref([...LEVELS])
 const maze = ref(null)
 const path = ref([])
 const mistakes = ref(0)
@@ -65,9 +72,26 @@ const now = ref(0)
 let ticker = null
 let flashTimer = null
 
-const pool = computed(() => mazeWordPool(vocab.value))
+const vocabReady = computed(() => vocab.value.length > 0)
+const pool = computed(() => mazeWordPool(vocab.value, { levels: levels.value }))
 const sizes = computed(() => SIZES.filter((s) => s * s <= pool.value.length))
 const ready = computed(() => sizes.value.length > 0)
+
+/**
+ * Turn a level on or off, keeping at least one on: an empty selection is not a
+ * harder game, it is no game, and the only thing to do with it would be to
+ * refuse to start.
+ */
+function toggleLevel(level) {
+  if (!levels.value.includes(level)) levels.value = [...levels.value, level]
+  else if (levels.value.length > 1) levels.value = levels.value.filter((l) => l !== level)
+  // Narrowing the levels can take the chosen board off the list, and a select
+  // showing a size it no longer offers is a select that lies about what Start
+  // will do.
+  if (sizes.value.length && !sizes.value.includes(size.value)) {
+    size.value = sizes.value[sizes.value.length - 1]
+  }
+}
 
 const elapsed = computed(() => (finishedAt.value || now.value) - startedAt.value)
 const head = computed(() => (path.value.length ? path.value[path.value.length - 1] : -1))
@@ -268,28 +292,52 @@ onUnmounted(() => {
   <section v-if="!maze" class="grid">
     <h2 style="margin: 0">Meaning maze 🧭</h2>
     <p class="muted" style="margin: 0">
-      A grid of words, Russian and English alternating. One path of translations runs from the
-      top-left corner to the bottom-right one — draw it.
+      A grid of words, Russian and English alternating. Draw a line of translations from the
+      top-left corner to the bottom-right one, as fast as you can.
     </p>
     <ul class="muted rules">
       <li>From a <strong>Russian</strong> word you may move only to its English translation. Anything
         else is refused.</li>
       <li>From an <strong>English</strong> word you may move to any Russian word beside it, free.</li>
-      <li>Most Russian words are dead ends, and a few real pairs lead nowhere at all. Draw back over
-        the line to retreat.</li>
+      <li>Every Russian word has its translation beside it — the exit is the only one that does not.
+        The line may not cross itself, so wander too far and you will wall off your own way through;
+        draw back over the line to retreat.</li>
     </ul>
     <p class="muted" style="margin: 0">
       The board is a map: touch it to move the magnifier. The magnifier is where you play — its tiles
-      are big enough to read. A1, A2 and B1 vocabulary.
+      are big enough to read.
     </p>
-    <div v-if="ready" class="row">
-      <label class="muted" for="maze-size">Board</label>
-      <select id="maze-size" v-model.number="size">
-        <option v-for="s in sizes" :key="s" :value="s">{{ s }} × {{ s }}</option>
-      </select>
-      <button class="primary" @click="start">Start</button>
-    </div>
-    <p v-else class="muted" style="margin: 0">Loading the dictionary…</p>
+    <template v-if="ready">
+      <div class="row">
+        <span class="muted">Vocabulary</span>
+        <button
+          v-for="level in LEVELS"
+          :key="level"
+          type="button"
+          class="level"
+          :class="{ on: levels.includes(level) }"
+          :aria-pressed="levels.includes(level)"
+          @click="toggleLevel(level)"
+        >
+          {{ level }}
+        </button>
+        <span class="muted">{{ pool.length }} words</span>
+      </div>
+      <div class="row">
+        <label class="muted" for="maze-size">Board</label>
+        <select id="maze-size" v-model.number="size">
+          <option v-for="s in sizes" :key="s" :value="s">{{ s }} × {{ s }}</option>
+        </select>
+        <button class="primary" @click="start">Start</button>
+      </div>
+      <p v-if="!sizes.includes(DEFAULT_SIZE)" class="muted" style="margin: 0">
+        A {{ DEFAULT_SIZE }} × {{ DEFAULT_SIZE }} board needs {{ DEFAULT_SIZE * DEFAULT_SIZE }}
+        words and these levels have {{ pool.length }}, so the bigger boards are off the list.
+      </p>
+    </template>
+    <p v-else class="muted" style="margin: 0">
+      {{ vocabReady ? 'Not enough words at these levels to fill a board.' : 'Loading the dictionary…' }}
+    </p>
     <p v-if="best[size]" class="muted" style="margin: 0">
       Best on {{ size }} × {{ size }}: {{ formatTime(best[size]) }}
     </p>
@@ -610,6 +658,20 @@ onUnmounted(() => {
 .small {
   font-size: 0.8rem;
   padding: 0.25rem 0.5rem;
+}
+
+.level {
+  min-width: 3rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  background: var(--bg-soft);
+  color: var(--muted);
+}
+
+.level.on {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
 }
 
 .legend {

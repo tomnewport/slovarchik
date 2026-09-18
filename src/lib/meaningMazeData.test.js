@@ -13,7 +13,15 @@ import { fileURLToPath } from 'node:url'
 import * as yaml from 'js-yaml'
 
 import { POS_BY_FILE, buildWords, shapeVocab } from './vocabBuild.js'
-import { DEFAULT_SIZE, generateMaze, largestSize, linkOk, mazeWordPool, neighbours } from './meaningMaze.js'
+import {
+  DEFAULT_SIZE,
+  LEVELS,
+  generateMaze,
+  largestSize,
+  linkOk,
+  mazeWordPool,
+  neighbours,
+} from './meaningMaze.js'
 
 const vocabDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/vocab')
 const files = Object.keys(POS_BY_FILE).map((name) => ({
@@ -44,6 +52,25 @@ describe('the maze word pool over the whole corpus', () => {
     // maze cannot quiz a word that exists solely to gloss a phrase.
     expect(pool.every((w) => w.ru && w.en && w.glosses.length)).toBe(true)
   })
+
+  it('leaves every level able to fill a board of some size on its own', () => {
+    // The player picks the levels, so each one has to be playable alone. A1 is
+    // the small one and fills 17 × 17 but not 25 × 25 — the view says so rather
+    // than offering a board it cannot build.
+    for (const level of LEVELS) {
+      const own = mazeWordPool(shapeVocab(buildWords(files)), { levels: [level] })
+      expect(largestSize(own.length)).toBeGreaterThanOrEqual(13)
+    }
+  })
+
+  it('still lets any pair of levels fill the biggest board', () => {
+    for (const drop of LEVELS) {
+      const rest = mazeWordPool(shapeVocab(buildWords(files)), {
+        levels: LEVELS.filter((l) => l !== drop),
+      })
+      expect(largestSize(rest.length)).toBe(DEFAULT_SIZE)
+    }
+  })
 })
 
 describe('a board built from the real lexicon', () => {
@@ -54,8 +81,9 @@ describe('a board built from the real lexicon', () => {
     for (const cell of maze.cells) {
       if (cell.side !== 'ru') continue
       const valid = neighbours(maze.size, cell.i).filter((k) => linkOk(cell, maze.cells[k]))
-      expect(valid.length).toBeLessThanOrEqual(1)
+      expect(valid).toHaveLength(cell.i === maze.goal ? 0 : 1)
     }
+    expect(maze.deadEnds).toBe(0)
   })
 
   it('is solvable along the path it carved', () => {
