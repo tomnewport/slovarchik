@@ -60,15 +60,21 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # 18 routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
-                        #   /verb-government, /listening, /speaking, /numbers, /bomb, /maze,
-                        #   and the shared inflection view at /declension /verbs /pronouns
+                        #   /verb-government, /listening, /speaking, /numbers, /bomb,
+                        #   /firewatch, /maze, and the shared inflection view at
+                        #   /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView and MeaningMazeView are the minigames — #726's
-                        #   between-practice interludes, launched for now from HomeView's
-                        #   Minigames section rather than from inside a session)
+                        #   BombDisposalView, FirewatchView and MeaningMazeView are the
+                        #   minigames — #726's between-practice interludes, launched for
+                        #   now from HomeView's Minigames section rather than from inside
+                        #   a session.
+                        #   FirewatchView is the only canvas in the app: 10 000 cells
+                        #   cannot be DOM nodes, so the terrain is painted once into an
+                        #   offscreen canvas and patched per cell, and each frame blits
+                        #   that and draws only the fire, the planes and the cross-hairs)
   components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, ProgressWords, WordFacts,
@@ -122,6 +128,8 @@ src/
                         #     whether to count them learned/mastered now (#725) instead of
                         #     drilling a word the learner has just demonstrated
                         #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
+                        #     (numerals.js also READS numerals back: `parseCardinal` turns
+                        #      «со́рок три» into 43 off the same checked atom tables that spell it)
                         #   paradigmShape  — why a verb's table is a different shape (no present tense,
                         #     third-person only, impersonal), in a sentence beside the table
                         #   tableStage  — how much of an inflection table the word-bank drill deals at once
@@ -153,6 +161,18 @@ src/
                         #     so the solution is unique and a refusal is never a right answer.
                         #     Also `hyphenate`: the school break rules for both languages, because a
                         #     cell is four characters wide and no browser here has a ru dictionary
+                        #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
+                        #     spreads through it, what one release of water does (put out, and
+                        #     leave the ground too wet to catch), the circuit the plane flies
+                        #     around a fire releasing a dozen times on the way, and the
+                        #     four-digit coordinate the learner says. Pure and seeded, so a
+                        #     two-minute round can be simulated in a millisecond — which is how
+                        #     DEFAULTS was tuned, and re-tuned whenever the plane changed,
+                        #     rather than by playing
+                        #   noise  — Perlin, and the fractal sum of it. There to warp the
+                        #     coordinates firewatch's Voronoi layout is looked up at: a Voronoi
+                        #     cell is a convex polygon, so the stands come out straight-edged
+                        #     unless something bends them
                         #   recovery  — what a slipped or at-risk word has lost and what would win it
                         #     back: the level it owes, the dimensions that broke, and how many correct
                         #     answers each wants (and when the day-spacing rule means not today)
