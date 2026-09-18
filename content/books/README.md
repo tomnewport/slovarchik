@@ -15,6 +15,16 @@ any unresolved concern in this file; the pack builder rejects missing or
 unchecked translations. This check is editorial, not a claim of independent
 human sign-off. Avoid importing an existing published English translation.
 
+The three initial works were checked against the exact pinned Wikisource
+revisions recorded in each file. Each pack includes the whole named short work,
+without editorial line numbers or notes. English is newly prepared for this
+project; it is not a transcription of an existing literary translation. The
+source link and rights statements travel with the pack and appear in the
+library. The Russian transcriptions are attributed to Wikisource contributors
+under the source site's CC BY-SA terms; our English translations are licensed
+CC BY-SA 4.0. These text/data terms are separate from the app's software
+license. Maintain attribution when redistributing the packs.
+
 `npm run gen:books` validates sources, writes `public/books/packs/*.json`, and
 updates the catalog with SHA-256 hashes. Commit the editorial JSON and generated
 pack/catalog together. Increase `packVersion` when Russian text, sentence IDs,

@@ -13,6 +13,7 @@ const SHELVES = ['Children’s', 'Beginner', 'Intermediate', 'Advanced', 'Politi
 export function buildPack(source) {
   if (!/^[a-z0-9-]+$/.test(source?.id ?? '') || !SHELVES.includes(source.shelf) ||
     !source.title || !source.author || !source.summary ||
+    !['prose', 'verse'].includes(source.form ?? 'prose') ||
     !Number.isInteger(source.packVersion) || source.packVersion < 1 ||
     !Number.isInteger(source.translationVersion) || source.translationVersion < 1 ||
     !source.source?.editionId || !/^https:\/\//.test(source.source.url ?? '') ||
@@ -36,6 +37,7 @@ export function buildPack(source) {
     title: source.title,
     author: source.author,
     shelf: source.shelf,
+    form: source.form ?? 'prose',
     packVersion: source.packVersion,
     translationVersion: source.translationVersion,
     source: source.source,
@@ -49,6 +51,7 @@ export function assertVersionBump(previous, next) {
   if (!previous || previous.id !== next.id) return
   const text = (pack) => pack.sentences.map(({ id, paragraph, ru }) => ({ id, paragraph, ru }))
   const changedText = JSON.stringify(text(previous)) !== JSON.stringify(text(next)) ||
+    ['title', 'author', 'shelf', 'form'].some((key) => previous[key] !== next[key]) ||
     JSON.stringify(previous.source) !== JSON.stringify(next.source) ||
     JSON.stringify(previous.rights) !== JSON.stringify(next.rights)
   const changedEnglish = JSON.stringify(previous.sentences.map((s) => s.en)) !==
@@ -71,7 +74,7 @@ export function main() {
     writeFileSync(output, bytes)
     entries.push({ id: pack.id, title: pack.title, author: pack.author, shelf: pack.shelf,
       summary: source.summary, packVersion: pack.packVersion,
-      translationVersion: pack.translationVersion,
+      translationVersion: pack.translationVersion, source: pack.source, rights: pack.rights,
       sha256: createHash('sha256').update(bytes).digest('hex') })
   }
   writeFileSync(catalogFile, `${JSON.stringify({ schemaVersion: 1, books: entries }, null, 2)}\n`)

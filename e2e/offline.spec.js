@@ -117,6 +117,37 @@ test('the corpus survives the network cut, so a drill has words to deal', async 
   expect(await cachedDocCount(page)).toBe(before)
 })
 
+test('a chosen literature pack opens, bookmarks and survives offline, then removes cleanly', async ({ page, context }) => {
+  await primeCaches(page)
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  await expect(page.getByRole('heading', { name: 'Literature' })).toBeVisible()
+
+  const fable = page.locator('.library-book').filter({ hasText: 'Стрекоза и Муравей' })
+  await expect(fable.getByText('Иван Крылов')).toBeVisible()
+  await fable.getByRole('button', { name: 'Download' }).click()
+  await expect(fable.getByRole('link', { name: 'Read' })).toBeVisible()
+  await fable.getByRole('link', { name: 'Read' }).click()
+  await expect(page.getByRole('article', { name: 'Russian text' })).toContainText('Попрыгунья Стрекоза')
+  await page.getByRole('button', { name: /Reveal translation for Попрыгунья Стрекоза/ }).click()
+  await expect(page.getByText('The sprightly Dragonfly')).toBeVisible()
+  await page.getByRole('button', { name: 'Bookmark' }).click()
+  await page.getByRole('button', { name: 'Next page' }).click()
+
+  await context.setOffline(true)
+  await page.reload()
+  await expect(page.getByText('Стрекоза и Муравей', { exact: true })).toBeVisible()
+  await page.locator('.reader-saved').click()
+  await page.locator('.reader-bookmarks').getByRole('button', { name: /Попрыгунья Стрекоза/ }).click()
+  await expect(page.getByRole('article', { name: 'Russian text' })).toContainText('Попрыгунья Стрекоза')
+  await page.getByRole('button', { name: 'Look up Стрекоза' }).first().click()
+  await expect(page.getByRole('dialog', { name: 'Dictionary: Стрекоза' })).toBeVisible()
+
+  await page.getByRole('link', { name: 'Back to library' }).click()
+  await fable.getByRole('button', { name: 'Remove download' }).click()
+  await expect(fable.getByRole('link', { name: 'Read' })).toHaveCount(0)
+  await expect(fable.getByRole('button', { name: 'Download' })).toBeVisible()
+})
+
 test('a route never visited online still opens offline', async ({ page, context }) => {
   await primeCaches(page)
 

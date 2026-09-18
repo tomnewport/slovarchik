@@ -15,6 +15,7 @@ describe('literature editorial gate', () => {
     const pack = buildPack(source)
     expect(pack.sentences).toEqual([{ id: 'fable:p1:1', paragraph: 'p1', ru: 'Была зима.', en: 'Winter had come.' }])
     expect(() => buildPack({ ...source, sentences: [{ ...source.sentences[0], review: 'draft' }] })).toThrow('Unreviewed')
+    expect(() => buildPack({ ...source, form: 'scroll' })).toThrow('Incomplete')
   })
 
   it('allows an English-only revision without changing Russian IDs or the app', () => {
@@ -24,5 +25,6 @@ describe('literature editorial gate', () => {
     expect(() => assertVersionBump(oldPack, revised)).not.toThrow()
     expect(() => assertVersionBump(oldPack, { ...revised, translationVersion: 1 })).toThrow('translationVersion')
     expect(() => assertVersionBump(oldPack, { ...revised, sentences: [{ ...revised.sentences[0], ru: 'Зима пришла.' }] })).toThrow('packVersion')
+    expect(() => assertVersionBump(oldPack, { ...oldPack, form: 'verse' })).toThrow('packVersion')
   })
 })

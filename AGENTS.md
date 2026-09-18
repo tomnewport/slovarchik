@@ -213,6 +213,10 @@ public/vocab/           # *.yml word data (one per part of speech) + manifest.js
                         #   + phrase-notes.json — the corpus-wide phrase
                         #   annotations derived at build time (#657); generated,
                         #   not committed, like the manifest and the *.json
+content/books/          # reviewed Russian works and new sentence translations;
+                        #   source revisions, rights and stable IDs live here
+public/books/           # generated catalog and opt-in, versioned JSON packs;
+                        #   kept outside the service worker precache
 e2e/                    # Playwright specs (homepage, full-session, versions, and offline —
                         #   the last runs against the preview build, where the SW exists)
 docs/                   # design notes for in-flight features

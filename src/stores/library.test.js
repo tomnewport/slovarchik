@@ -7,7 +7,7 @@ import * as idb from '../lib/idb.js'
 import { library, loadBook, loadCatalog, downloadBook, removeBook } from './library.js'
 
 const pack = {
-  schemaVersion: 1, id: 'fable', packVersion: 2, translationVersion: 3,
+  schemaVersion: 1, id: 'fable', form: 'prose', packVersion: 2, translationVersion: 3,
   source: { editionId: 'source-1', url: 'https://example.org/source' },
   rights: { original: 'public domain', translation: 'original translation' },
   sentences: [{ id: 'fable:p1:1', paragraph: 'p1', ru: 'Зима пришла.', en: 'Winter came.' }],
@@ -15,6 +15,7 @@ const pack = {
 const bytes = new TextEncoder().encode(JSON.stringify(pack))
 const entry = {
   id: 'fable', title: 'Fable', author: 'Author', shelf: 'Children’s',
+  source: pack.source, rights: pack.rights,
   packVersion: 2, translationVersion: 3,
   sha256: createHash('sha256').update(bytes).digest('hex'),
 }

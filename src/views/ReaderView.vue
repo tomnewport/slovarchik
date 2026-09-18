@@ -3,16 +3,15 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import * as idb from '../lib/idb.js'
 import { pageEnd, pageParagraphs, pageStart } from '../lib/readerPage.js'
-import { previewBook } from '../lib/readerPreview.js'
 import { lookupReaderWord, readerTokens } from '../lib/readerDictionary.js'
 import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
 import { loadBook } from '../stores/library.js'
 import { translationIssueUrl } from '../lib/readerReport.js'
 
 const route = useRoute()
-const book = ref(route.params.bookId === 'preview' ? previewBook : null)
+const book = ref(null)
 const loadError = ref(null)
-const loading = ref(!book.value)
+const loading = ref(true)
 const start = ref(0)
 const end = ref(0)
 const revealedId = ref(null)
@@ -40,14 +39,16 @@ function fits(from, to) {
   node.replaceChildren()
   for (const group of pageParagraphs(book.value.sentences.slice(from, to))) {
     const paragraph = document.createElement('p')
-    paragraph.className = 'reader-paragraph'
+    paragraph.className = `reader-paragraph${book.value.form === 'verse' ? ' reader-verse' : ''}`
     for (const sentence of group.sentences) {
-      paragraph.append(document.createTextNode(sentence.ru))
+      const line = document.createElement('span')
+      line.className = 'reader-sentence'
+      line.append(document.createTextNode(sentence.ru))
       const action = document.createElement('button')
       action.className = 'reader-reveal'
       action.tabIndex = -1
       action.textContent = '↔'
-      paragraph.append(action)
+      line.append(action)
       if (revealedId.value === sentence.id && sentence.en) {
         const translation = document.createElement('span')
         translation.className = 'reader-translation'
@@ -62,8 +63,9 @@ function fits(from, to) {
         query.textContent = ' · Query translation'
         actions.append(query)
         translation.append(actions)
-        paragraph.append(translation)
+        line.append(translation)
       }
+      paragraph.append(line)
       paragraph.append(document.createTextNode(' '))
     }
     node.append(paragraph)
@@ -167,11 +169,9 @@ function handleKey(event) {
 }
 
 onMounted(async () => {
-  if (!book.value) {
-    try { book.value = await loadBook(String(route.params.bookId)) }
-    catch (error) { loadError.value = error.message }
-    loading.value = false
-  }
+  try { book.value = await loadBook(String(route.params.bookId)) }
+  catch (error) { loadError.value = error.message }
+  loading.value = false
   if (!book.value) return
   const [saved, savedTheme, savedTypeface, savedBookmarks] = await Promise.all([
     idb.getMeta(`reader:position:${book.value.id}`),
@@ -221,7 +221,7 @@ onBeforeUnmount(() => {
 
     <div class="reader-body">
       <article ref="readingPage" class="reader-page" aria-label="Russian text">
-        <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph">
+        <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph" :class="{ 'reader-verse': book.form === 'verse' }">
           <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null">
             <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex"><button v-if="token.word" class="reader-word" :aria-label="`Look up ${token.text}`" @click.stop="openWord(token.text)">{{ token.text }}</button><span v-else>{{ token.text }}</span></span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
@@ -270,6 +270,8 @@ onBeforeUnmount(() => {
 .reader-measure { visibility: hidden; pointer-events: none; overflow: hidden; }
 .reader-paragraph { margin: 0 0 1em; text-indent: 1.2em; }
 .reader-sentence { touch-action: pan-y; }
+.reader-verse { text-indent: 0; }
+.reader-verse .reader-sentence { display: block; white-space: pre-line; }
 .reader-reveal { font: .65em system-ui, sans-serif; margin: 0 .12em; vertical-align: baseline; opacity: .5; }
 .reader button.reader-reveal { padding: 0 .12em; }
 .reader button.reader-word { padding: 0; font: inherit; line-height: inherit; border-radius: 0; }

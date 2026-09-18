@@ -29,6 +29,7 @@ async function download(entry) {
           <button v-if="!library.installed[entry.id] || library.installed[entry.id].packVersion !== entry.packVersion || library.installed[entry.id].translationVersion !== entry.translationVersion" :disabled="!!library.busyId" @click="download(entry)">{{ library.busyId === entry.id ? 'Downloading…' : library.installed[entry.id] ? 'Update' : 'Download' }}</button>
           <button v-if="library.installed[entry.id]" :disabled="!!library.busyId" @click="removeBook(entry.id)">Remove download</button>
         </div>
+        <details class="library-source"><summary>Source and rights</summary><p>{{ entry.source.editionId }} · <a :href="entry.source.url" target="_blank" rel="noopener noreferrer">Wikisource text and attribution</a></p><p>{{ entry.rights.original }} {{ entry.rights.transcription }} {{ entry.rights.translation }}</p></details>
       </div>
     </section>
   </section>
@@ -41,6 +42,9 @@ async function download(entry) {
 .library-shelf h2 { font-size: 1.1rem; }
 .library-book { display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
 .library-book > div:first-child { display: grid; }
+.library-book { flex-wrap: wrap; }
+.library-source { flex-basis: 100%; font-size: .78rem; }
+.library-source p { margin-top: .35rem; }
 .library-book small { margin-top: .3rem; }
 .library-actions { display: flex; gap: .5rem; flex-wrap: wrap; justify-content: end; }
 .library-actions a { align-self: center; }

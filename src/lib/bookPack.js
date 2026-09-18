@@ -8,6 +8,7 @@ export function validateCatalog(data) {
   for (const entry of data.books) {
     if (!/^[a-z0-9-]+$/.test(entry.id ?? '') || ids.has(entry.id) ||
       !SHELVES.includes(entry.shelf) || !entry.title || !entry.author ||
+      !entry.source?.url || !entry.rights?.original || !entry.rights?.translation ||
       !Number.isInteger(entry.packVersion) || !Number.isInteger(entry.translationVersion) ||
       !/^[a-f0-9]{64}$/.test(entry.sha256 ?? '')) throw new Error('Invalid book catalog entry')
     ids.add(entry.id)
@@ -19,7 +20,8 @@ export function validatePack(pack, entry) {
   if (pack?.schemaVersion !== 1 || pack.id !== entry.id ||
     pack.packVersion !== entry.packVersion || pack.translationVersion !== entry.translationVersion ||
     !pack.source?.editionId || !pack.source?.url || !pack.rights?.original ||
-    !pack.rights?.translation || !Array.isArray(pack.sentences) || !pack.sentences.length) {
+    !pack.rights?.translation || !['prose', 'verse'].includes(pack.form) ||
+    !Array.isArray(pack.sentences) || !pack.sentences.length) {
     throw new Error('Book pack does not match the catalog')
   }
   const ids = new Set()
