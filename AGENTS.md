@@ -60,16 +60,17 @@ src/
   App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
                         #   + global RussianKeyboard + ErrorToast. Navigation is
                         #   session-driven from HomeView, not a route bar.
-  router/index.js       # 17 routes → views. Highlights: / (home), /session, /batch,
+  router/index.js       # 18 routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, /bomb,
-                        #   /firewatch, and the
-                        #   shared inflection view at /declension /verbs /pronouns
+                        #   /firewatch, /maze, and the shared inflection view at
+                        #   /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView and FirewatchView are the minigames — #726's
-                        #   between-practice interludes, launched for now from HomeView's
-                        #   Minigames section rather than from inside a session.
+                        #   BombDisposalView, FirewatchView and MeaningMazeView are the
+                        #   minigames — #726's between-practice interludes, launched for
+                        #   now from HomeView's Minigames section rather than from inside
+                        #   a session.
                         #   FirewatchView is the only canvas in the app: 10 000 cells
                         #   cannot be DOM nodes, so the terrain is painted once into an
                         #   offscreen canvas and patched per cell, and each frame blits
@@ -154,6 +155,12 @@ src/
                         #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
                         #     grammar that both SAYS the instruction in Russian and grades the cut,
                         #     so the sentence and the right answer cannot drift apart
+                        #   meaningMaze  — the translation-path minigame (#752): a chessboard of
+                        #     Russian and English words carved over a half-resolution lattice, and
+                        #     the one invariant the game rests on — no unintended valid adjacency,
+                        #     so the solution is unique and a refusal is never a right answer.
+                        #     Also `hyphenate`: the school break rules for both languages, because a
+                        #     cell is four characters wide and no browser here has a ru dictionary
                         #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
                         #     spreads through it, what one release of water does (put out, and
                         #     leave the ground too wet to catch), the circuit the plane flies

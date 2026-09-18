@@ -78,6 +78,12 @@ const MINIGAMES = [
     label: 'Firewatch',
     skill: 'Building two-digit numbers, and saying them at speed.',
   },
+  {
+    to: '/maze',
+    icon: '🧭',
+    label: 'Meaning maze',
+    skill: 'Knowing a translation on sight — and knowing when it is not one.',
+  },
 ]
 
 function openDrill(to) {

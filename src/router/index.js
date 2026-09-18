@@ -70,6 +70,11 @@ export const routes = [
     component: () => import('../views/FirewatchView.vue'),
   },
   {
+    path: '/maze',
+    name: 'maze',
+    component: () => import('../views/MeaningMazeView.vue'),
+  },
+  {
     path: '/phrases',
     name: 'phrases',
     component: () => import('../views/PhraseTesterView.vue'),
