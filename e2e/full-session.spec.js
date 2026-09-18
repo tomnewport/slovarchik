@@ -123,12 +123,15 @@ async function solveMatch(page) {
 
 /** Say-it-aloud: grade it ourselves — there's no usable mic in CI. */
 async function solveSpeak(ex) {
-  const said = ex.getByRole('button', { name: /I said it/ })
-  if (!(await said.count())) {
+  const check = ex.getByRole('button', { name: /I've said it/ })
+  if (!(await check.count())) {
     // Recognition present but nothing to hear: switch to self-grading, which
     // then stays on for the rest of the session.
     await ex.getByRole('button', { name: /Grade it yourself/ }).first().click()
   }
+  // Self-grading asks for the answer before the verdict: the learner hears the
+  // model read out, and only then says whether that is what they said.
+  await ex.getByRole('button', { name: /I've said it/ }).first().click()
   await ex.getByRole('button', { name: /I said it/ }).first().click()
   // Since #733 the verdict has its own step — the model answer and the word's
   // facts — before the exercise reports back.
