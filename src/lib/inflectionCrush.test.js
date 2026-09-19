@@ -3,38 +3,50 @@ import { describe, it, expect } from 'vitest'
 import {
   CHASE_MS_PER_FEATURE,
   CHASE_SCORE,
+  CLEARS_PER_LEVEL,
+  COLUMNS,
   ELIGIBLE_CEFR,
   FEATURES,
   FEATURE_LABELS,
+  FEATURE_SHORT,
+  LEVEL_CATEGORIES,
   MAX_FORM_LENGTH,
   MODES,
+  ROWS,
+  RUN,
   TILE_SCORE,
-  adjacent,
-  at,
+  adjacentColumns,
   buildTilePool,
   cardFor,
   chaseScore,
   chaseTargets,
   chaseWindowMs,
-  collapse,
+  createBoard,
   createDealer,
+  dropMsFor,
   eligibleWords,
   featuresOf,
-  findMatches,
-  firedFeatures,
-  generateGrid,
-  hasLegalMove,
+  findRuns,
+  firedCategories,
+  heightOf,
   isChaseHit,
-  matchedCells,
-  nextStep,
+  isToppedOut,
+  landTile,
+  levelDeck,
+  levelFor,
+  nextClear,
+  pickCategories,
   queueCards,
+  removeCells,
+  removeOne,
   stepScore,
-  swapped,
+  swapColumns,
+  tallest,
   tilesForWord,
 } from './inflectionCrush.js'
 import { buildWords } from './vocabBuild.js'
 
-// A deterministic RNG, so a board that fails once fails the same way twice.
+/** A deterministic RNG, so a board that fails once fails the same way twice. */
 function seeded(seed = 1) {
   let s = seed >>> 0
   return () => {
@@ -125,8 +137,8 @@ function adjective(overrides = {}) {
   return word
 }
 
-/** A bare tile with the features stated outright — the grid tests want no corpus. */
-function tile(id, gender, kase) {
+/** A bare tile with its categories stated outright — the board tests want no corpus. */
+function tile(id, kase, gender = ['m']) {
   return {
     id,
     key: `k${id}`,
@@ -138,48 +150,38 @@ function tile(id, gender, kase) {
   }
 }
 
-/**
- * A dealer handing out a fixed sequence, so a refill is something a test can
- * state rather than something it has to work back from a seed.
- */
-function sequenceDealer(tiles) {
-  let n = 0
-  return { deal: () => ({ ...tiles[n % tiles.length], id: `f${++n}` }) }
-}
-
-/** Lay a grid out from a table of tiles, rows outermost. */
-function gridOf(rows, mode = 'case') {
-  return { rows: rows.length, cols: rows[0].length, mode, cells: rows.flat() }
+/** A board whose columns are given bottom-first. */
+function boardOf(cols, categories = ['nom', 'gen', 'dat', 'acc'], opts = {}) {
+  return { rows: 9, run: RUN, mode: 'case', categories, cols, ...opts }
 }
 
 describe('tilesForWord', () => {
   it('reads a noun cell as its case plus the word gender, and pl in the plural', () => {
     const tiles = tilesForWord(noun())
-    const nomSg = tiles.find((t) => t.form === 'кни́га')
-    expect(nomSg.features).toEqual({ gender: ['f'], case: ['nom'] })
-    const insPl = tiles.find((t) => t.form === 'кни́гами')
-    expect(insPl.features).toEqual({ gender: ['pl'], case: ['ins'] })
+    expect(tiles.find((t) => t.form === 'кни́га').features).toEqual({ gender: ['f'], case: ['nom'] })
+    expect(tiles.find((t) => t.form === 'кни́гами').features).toEqual({
+      gender: ['pl'],
+      case: ['ins'],
+    })
   })
 
   it('gives one tile every reading its form could have', () => {
     // кни́ги is genitive singular, nominative plural and accusative plural at
     // once — so it is feminine *and* plural, and three cases.
-    const kniqi = tilesForWord(noun()).find((t) => t.form === 'кни́ги')
-    expect(kniqi.features.case).toEqual(['nom', 'gen', 'acc'])
-    expect(kniqi.features.gender).toEqual(['f', 'pl'])
+    const knigi = tilesForWord(noun()).find((t) => t.form === 'кни́ги')
+    expect(knigi.features.case).toEqual(['nom', 'gen', 'acc'])
+    expect(knigi.features.gender).toEqual(['f', 'pl'])
   })
 
   it('merges the cells a form shares without merging across a stress difference', () => {
-    const tiles = tilesForWord(noun())
     // кни́ге is dative and prepositional singular: one tile, two cases.
-    const knige = tiles.filter((t) => t.form === 'кни́ге')
+    const knige = tilesForWord(noun()).filter((t) => t.form === 'кни́ге')
     expect(knige).toHaveLength(1)
     expect(knige[0].features.case).toEqual(['dat', 'pre'])
   })
 
   it('reads an adjective column as its gender', () => {
-    const tiles = tilesForWord(adjective())
-    const novogo = tiles.find((t) => t.form === 'но́вого')
+    const novogo = tilesForWord(adjective()).find((t) => t.form === 'но́вого')
     expect(novogo.features.gender).toEqual(['m', 'n'])
     // Genitive by storage, accusative by the derived animate row (ви́жу но́вого).
     expect(novogo.features.case).toEqual(['gen', 'acc'])
@@ -187,7 +189,7 @@ describe('tilesForWord', () => {
 
   it('drops a form too long to read on a tile', () => {
     const tiles = tilesForWord(adjective())
-    expect(tiles.every((t) => t.form.replace(/\u0301/g, '').length <= MAX_FORM_LENGTH)).toBe(true)
+    expect(tiles.every((t) => t.form.replace(/́/g, '').length <= MAX_FORM_LENGTH)).toBe(true)
   })
 
   it('refuses a noun whose gender the corpus does not give', () => {
@@ -226,276 +228,280 @@ describe('eligibleWords and buildTilePool', () => {
   })
 })
 
-describe('createDealer', () => {
-  it('gives every tile its own identity', () => {
-    const dealer = createDealer([tile('a', ['m'], ['nom'])], seeded(2))
-    const [one, two] = [dealer.deal(), dealer.deal()]
-    expect(one.form).toBe(two.form)
-    expect(one.id).not.toBe(two.id)
+describe('levels', () => {
+  it('plays gender on all four genders, every level', () => {
+    expect(pickCategories('gender', seeded(5))).toEqual(['m', 'f', 'n', 'pl'])
+    expect(LEVEL_CATEGORIES).toBe(4)
   })
 
-  it('honours a veto, and deals anyway when every candidate is vetoed', () => {
-    const pool = [tile('a', ['m'], ['nom']), tile('b', ['f'], ['gen'])]
-    const dealer = createDealer(pool, seeded(4))
-    expect(dealer.deal((t) => t.form === 'a').form).toBe('b')
-    expect(dealer.deal(() => true).form).toMatch(/[ab]/)
+  it('picks four of the six cases, in canonical order', () => {
+    const rng = seeded(11)
+    for (let i = 0; i < 20; i++) {
+      const picked = pickCategories('case', rng)
+      expect(picked).toHaveLength(4)
+      expect(new Set(picked).size).toBe(4)
+      expect(picked.every((c) => FEATURES.case.includes(c))).toBe(true)
+      // Canonical order, so the header reads the same way every level.
+      expect(picked).toEqual(FEATURES.case.filter((c) => picked.includes(c)))
+    }
+  })
+
+  it('varies the four across levels rather than dealing one fixed set', () => {
+    const rng = seeded(13)
+    const seen = new Set(Array.from({ length: 12 }, () => pickCategories('case', rng).join()))
+    expect(seen.size).toBeGreaterThan(1)
+  })
+
+  it('speeds the fall up level by level, down to a floor', () => {
+    expect(dropMsFor(1)).toBeGreaterThan(dropMsFor(2))
+    expect(dropMsFor(2)).toBeGreaterThan(dropMsFor(5))
+    expect(dropMsFor(99)).toBe(260)
+  })
+
+  it('counts a level per batch of cleared tiles', () => {
+    expect(levelFor(0)).toBe(1)
+    expect(levelFor(CLEARS_PER_LEVEL - 1)).toBe(1)
+    expect(levelFor(CLEARS_PER_LEVEL)).toBe(2)
   })
 })
 
-describe('findMatches', () => {
-  it('finds a run of three sharing a case, in a row and in a column', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['gen']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['gen'])],
-      [tile('4', ['m'], ['nom']), tile('5', ['f'], ['gen']), tile('6', ['n'], ['dat'])],
-      [tile('7', ['m'], ['acc']), tile('8', ['f'], ['gen']), tile('9', ['n'], ['ins'])],
-    ])
-    const rows = findMatches(g, 'case').filter((m) => m.dir === 'row')
-    const cols = findMatches(g, 'case').filter((m) => m.dir === 'col')
-    expect(rows).toHaveLength(1)
-    expect(rows[0].cells).toEqual([
-      { r: 0, c: 0 },
-      { r: 0, c: 1 },
-      { r: 0, c: 2 },
-    ])
-    expect(cols).toHaveLength(1)
-    expect(cols[0].cells.map((c) => c.r)).toEqual([0, 1, 2])
+describe('levelDeck', () => {
+  const pool = tilesForWord(noun()).concat(tilesForWord(adjective()))
+
+  it('deals only tiles that carry one of the level categories', () => {
+    const deck = levelDeck(pool, 'case', ['gen', 'dat'], { rng: seeded(3) })
+    expect(deck.length).toBeGreaterThan(0)
+    expect(
+      deck.every((t) => featuresOf(t, 'case').some((f) => ['gen', 'dat'].includes(f))),
+    ).toBe(true)
   })
 
-  it('reports the same run once per feature it fires on', () => {
+  it('gives each category about the same weight', () => {
+    const cats = ['m', 'f', 'n', 'pl']
+    const deck = levelDeck(pool, 'gender', cats, { rng: seeded(4) })
+    const counts = cats.map((c) => deck.filter((t) => featuresOf(t, 'gender').includes(c)).length)
+    expect(Math.min(...counts)).toBeGreaterThan(0)
+    // Round-robin to the smallest bucket, so nothing runs away with the deck.
+    expect(Math.max(...counts) / Math.min(...counts)).toBeLessThan(3)
+  })
+
+  it('is empty when no tile carries any of the categories', () => {
+    expect(levelDeck([tile('a', ['nom'])], 'case', ['gen'], { rng: seeded(5) })).toEqual([])
+  })
+})
+
+describe('the board', () => {
+  it('starts empty, one column per category', () => {
+    const board = createBoard('case', ['nom', 'gen', 'dat', 'acc'])
+    expect(board.cols).toHaveLength(COLUMNS)
+    expect(board.rows).toBe(ROWS)
+    expect(tallest(board)).toBe(0)
+    expect(isToppedOut(board)).toBe(false)
+  })
+
+  it('stacks a landed tile on top of its column, leaving the others alone', () => {
+    let board = createBoard('case', ['nom', 'gen', 'dat', 'acc'])
+    board = landTile(board, 1, tile('a', ['nom']))
+    board = landTile(board, 1, tile('b', ['gen']))
+    expect(heightOf(board, 1)).toBe(2)
+    expect(heightOf(board, 0)).toBe(0)
+    // Bottom-first: the first tile landed is index 0.
+    expect(board.cols[1].map((t) => t.form)).toEqual(['a', 'b'])
+  })
+
+  it('tops out when a column reaches the ceiling', () => {
+    let board = createBoard('case', ['nom'], { rows: 2 })
+    board = landTile(board, 0, tile('a', ['nom']))
+    expect(isToppedOut(board)).toBe(false)
+    board = landTile(board, 0, tile('b', ['gen']))
+    expect(isToppedOut(board)).toBe(true)
+  })
+})
+
+describe('swapColumns', () => {
+  it('exchanges two whole stacks without touching the original', () => {
+    const board = boardOf([[tile('a', ['nom'])], [tile('b', ['gen']), tile('c', ['dat'])], [], []])
+    const next = swapColumns(board, 0, 1)
+    expect(next.cols[0].map((t) => t.form)).toEqual(['b', 'c'])
+    expect(next.cols[1].map((t) => t.form)).toEqual(['a'])
+    expect(board.cols[0].map((t) => t.form)).toEqual(['a'])
+  })
+
+  it('is a no-op on a column that is not there, or on itself', () => {
+    const board = boardOf([[tile('a', ['nom'])], [], [], []])
+    expect(swapColumns(board, 0, 0)).toBe(board)
+    expect(swapColumns(board, 0, 9)).toBe(board)
+  })
+
+  it('calls only side-by-side columns adjacent', () => {
+    expect(adjacentColumns(0, 1)).toBe(true)
+    expect(adjacentColumns(2, 1)).toBe(true)
+    expect(adjacentColumns(0, 2)).toBe(false)
+    expect(adjacentColumns(1, 1)).toBe(false)
+  })
+})
+
+describe('findRuns', () => {
+  it('finds two stacked tiles sharing a category', () => {
+    expect(RUN).toBe(2)
+    const board = boardOf([[tile('a', ['gen']), tile('b', ['gen'])], [], [], []])
+    expect(findRuns(board)).toEqual([{ col: 0, from: 0, to: 1, category: 'gen' }])
+  })
+
+  it('leaves a stack whose neighbours share nothing', () => {
+    const board = boardOf([[tile('a', ['gen']), tile('b', ['dat'])], [], [], []])
+    expect(findRuns(board)).toEqual([])
+  })
+
+  it('reports a run once per category it fires on', () => {
     const both = ['gen', 'acc']
-    const g = gridOf([[tile('1', ['m'], both), tile('2', ['m'], both), tile('3', ['m'], both)]])
-    expect(findMatches(g, 'case').map((m) => m.feature)).toEqual(['gen', 'acc'])
-    expect(firedFeatures(findMatches(g, 'case'), 'case')).toEqual(['gen', 'acc'])
+    const board = boardOf([[tile('a', both), tile('b', both)], [], [], []])
+    expect(findRuns(board).map((r) => r.category)).toEqual(['gen', 'acc'])
+    expect(firedCategories(findRuns(board), 'case')).toEqual(['gen', 'acc'])
   })
 
-  it('matches on the mode it is asked about and not the other', () => {
-    const g = gridOf([[tile('1', ['m'], ['nom']), tile('2', ['m'], ['gen']), tile('3', ['m'], ['dat'])]])
-    expect(findMatches(g, 'case')).toEqual([])
-    expect(findMatches(g, 'gender')).toHaveLength(1)
-    expect(MODES).toEqual(['gender', 'case'])
-  })
-
-  it('ignores a run of two', () => {
-    const g = gridOf([[tile('1', ['m'], ['gen']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['dat'])]])
-    expect(findMatches(g, 'case')).toEqual([])
-  })
-
-  it('counts a run that ends at the far edge', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['dat']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['gen']), tile('4', ['n'], ['gen'])],
+  it('takes the whole run, not just the first two', () => {
+    const board = boardOf([
+      [tile('a', ['gen']), tile('b', ['gen']), tile('c', ['gen']), tile('d', ['dat'])],
+      [],
+      [],
+      [],
     ])
-    expect(findMatches(g, 'case')[0].cells).toHaveLength(3)
+    expect(findRuns(board)).toEqual([{ col: 0, from: 0, to: 2, category: 'gen' }])
+  })
+
+  it('ignores a category the level is not playing with', () => {
+    const board = boardOf([[tile('a', ['pre']), tile('b', ['pre'])], [], [], []], [
+      'nom',
+      'gen',
+      'dat',
+      'acc',
+    ])
+    expect(findRuns(board)).toEqual([])
+  })
+
+  it('matches on the mode the board is playing', () => {
+    const board = boardOf([[tile('a', ['nom'], ['m']), tile('b', ['gen'], ['m'])], [], [], []], [
+      'm',
+      'f',
+      'n',
+      'pl',
+    ])
+    expect(findRuns(board)).toEqual([])
+    expect(findRuns({ ...board, mode: 'gender' })).toHaveLength(1)
+  })
+
+  it('honours a board built with a longer run', () => {
+    const cols = [[tile('a', ['gen']), tile('b', ['gen'])], [], [], []]
+    expect(findRuns(boardOf(cols, undefined, { run: 3 }))).toEqual([])
+    cols[0].push(tile('c', ['gen']))
+    expect(findRuns(boardOf(cols, undefined, { run: 3 }))).toHaveLength(1)
   })
 })
 
-describe('matchedCells', () => {
-  it('counts a cell shared by a row and a column once', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['gen']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['gen'])],
-      [tile('4', ['m'], ['nom']), tile('5', ['f'], ['gen']), tile('6', ['n'], ['dat'])],
-      [tile('7', ['m'], ['acc']), tile('8', ['f'], ['gen']), tile('9', ['n'], ['ins'])],
+describe('nextClear', () => {
+  it('takes the run out and closes the column up', () => {
+    const board = boardOf([
+      [tile('floor', ['dat']), tile('a', ['gen']), tile('b', ['gen']), tile('roof', ['nom'])],
+      [],
+      [],
+      [],
     ])
-    expect(matchedCells(findMatches(g, 'case')).size).toBe(5)
-  })
-})
-
-describe('swapped, adjacent and at', () => {
-  const g = gridOf([
-    [tile('1', ['m'], ['nom']), tile('2', ['f'], ['gen'])],
-    [tile('3', ['n'], ['dat']), tile('4', ['pl'], ['acc'])],
-  ])
-
-  it('exchanges two cells without touching the original', () => {
-    const next = swapped(g, { r: 0, c: 0 }, { r: 1, c: 1 })
-    expect(at(next, 0, 0).form).toBe('4')
-    expect(at(next, 1, 1).form).toBe('1')
-    expect(at(g, 0, 0).form).toBe('1')
-  })
-
-  it('reads nothing off the board', () => {
-    expect(at(g, -1, 0)).toBeUndefined()
-    expect(at(g, 0, 5)).toBeUndefined()
-  })
-
-  it('calls only orthogonal neighbours adjacent', () => {
-    expect(adjacent({ r: 0, c: 0 }, { r: 0, c: 1 })).toBe(true)
-    expect(adjacent({ r: 0, c: 0 }, { r: 1, c: 1 })).toBe(false)
-    expect(adjacent({ r: 0, c: 0 }, { r: 0, c: 0 })).toBe(false)
-  })
-})
-
-describe('hasLegalMove', () => {
-  it('finds the swap that would make a line', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['gen']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['dat'])],
-      [tile('4', ['m'], ['nom']), tile('5', ['f'], ['acc']), tile('6', ['n'], ['gen'])],
-    ])
-    expect(hasLegalMove(g, 'case')).toBe(true)
-  })
-
-  it('says so when no swap helps', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['nom']), tile('2', ['f'], ['gen'])],
-      [tile('3', ['n'], ['dat']), tile('4', ['pl'], ['acc'])],
-    ])
-    expect(hasLegalMove(g, 'case')).toBe(false)
-  })
-})
-
-describe('collapse', () => {
-  it('drops the survivors and deals into the gaps from above', () => {
-    const g = gridOf([
-      [tile('a', ['m'], ['nom'])],
-      [tile('b', ['f'], ['gen'])],
-      [tile('c', ['n'], ['dat'])],
-    ])
-    const dealer = createDealer([tile('new', ['pl'], ['ins'])], seeded(5))
-    const next = collapse(g, new Set(['1,0']), dealer)
-    expect(next.cells.map((t) => t.form)).toEqual(['new', 'a', 'c'])
-  })
-
-  it('clears a whole column', () => {
-    const g = gridOf([[tile('a', ['m'], ['nom'])], [tile('b', ['f'], ['gen'])]])
-    const dealer = createDealer([tile('new', ['pl'], ['ins'])], seeded(5))
-    const next = collapse(g, new Set(['0,0', '1,0']), dealer)
-    expect(next.cells.every((t) => t.form === 'new')).toBe(true)
-  })
-})
-
-describe('nextStep', () => {
-  // The refills, in the order collapse() asks for them: three instrumentals
-  // (which land as a row and cascade), then three that settle the board.
-  const refills = () =>
-    sequenceDealer([
-      tile('x1', ['m'], ['ins']),
-      tile('x2', ['f'], ['ins']),
-      tile('x3', ['n'], ['ins']),
-      tile('y1', ['m'], ['nom']),
-      tile('y2', ['f'], ['gen']),
-      tile('y3', ['n'], ['dat']),
-    ])
-
-  it('clears the matched cells and reports what they were', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['gen']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['gen'])],
-      [tile('4', ['m'], ['nom']), tile('5', ['f'], ['acc']), tile('6', ['n'], ['dat'])],
-    ])
-    const step = nextStep(g, sequenceDealer([tile('y1', ['m'], ['nom'])]), 'case')
-    expect(step.cleared.map((t) => t.form).sort()).toEqual(['1', '2', '3'])
-    expect(step.features).toEqual(['gen'])
-    expect(step.grid.cells.slice(3).map((t) => t.form)).toEqual(['4', '5', '6'])
+    const step = nextClear(board)
+    expect(step.cleared.map((t) => t.form).sort()).toEqual(['a', 'b'])
+    expect(step.categories).toEqual(['gen'])
+    expect(step.board.cols[0].map((t) => t.form)).toEqual(['floor', 'roof'])
   })
 
   it('returns null on a settled board, which is what ends a cascade', () => {
-    const g = gridOf([[tile('1', ['m'], ['nom']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['dat'])]])
-    expect(nextStep(g, refills(), 'case')).toBeNull()
+    const board = boardOf([[tile('a', ['gen']), tile('b', ['dat'])], [], [], []])
+    expect(nextClear(board)).toBeNull()
   })
 
-  it('cascades: a refill that lands in a line clears in its turn', () => {
-    const g = gridOf([
-      [tile('1', ['m'], ['gen']), tile('2', ['f'], ['gen']), tile('3', ['n'], ['gen'])],
-      [tile('4', ['m'], ['nom']), tile('5', ['f'], ['acc']), tile('6', ['n'], ['dat'])],
-      [tile('7', ['m'], ['ins']), tile('8', ['f'], ['pre']), tile('9', ['n'], ['nom'])],
+  it('cascades: what closes up behind a clear can clear in its turn', () => {
+    // Removing the two datives leaves the two genitives stacked.
+    const board = boardOf([
+      [tile('a', ['gen']), tile('x', ['dat']), tile('y', ['dat']), tile('b', ['gen'])],
+      [],
+      [],
+      [],
     ])
-    const d = refills()
+    let current = board
     const fired = []
-    let current = g
-    for (let i = 0; i < 10; i++) {
-      const step = nextStep(current, d, 'case')
+    for (let i = 0; i < 8; i++) {
+      const step = nextClear(current)
       if (!step) break
-      fired.push(step.features.join('+'))
-      current = step.grid
+      fired.push(step.categories.join('+'))
+      current = step.board
     }
-    expect(fired).toEqual(['gen', 'ins'])
-    expect(findMatches(current, 'case')).toEqual([])
+    expect(fired).toEqual(['dat', 'gen'])
+    expect(current.cols[0]).toEqual([])
+  })
+
+  it('clears two columns in one step', () => {
+    const board = boardOf([
+      [tile('a', ['gen']), tile('b', ['gen'])],
+      [tile('c', ['dat']), tile('d', ['dat'])],
+      [],
+      [],
+    ])
+    const step = nextClear(board)
+    expect(step.cleared).toHaveLength(4)
+    expect(step.categories).toEqual(['gen', 'dat'])
   })
 })
 
-describe('collapse refills', () => {
-  it('refuses a replacement that would land already three in a line', () => {
-    // The gap opens at the top of the middle column, between two genitives —
-    // so a genitive refill would be a row on arrival, and the two survivors
-    // falling under it are both nominative, so a nominative would be a column.
-    // The dealer offers one of each and the veto has to take the dative.
-    const g = gridOf([
-      [tile('a', ['m'], ['gen']), tile('b', ['f'], ['acc']), tile('c', ['n'], ['gen'])],
-      [tile('d', ['m'], ['dat']), tile('e', ['f'], ['nom']), tile('f', ['n'], ['ins'])],
-      [tile('g', ['m'], ['ins']), tile('h', ['f'], ['nom']), tile('i', ['n'], ['dat'])],
+describe('removeCells and removeOne', () => {
+  it('takes one tile out of the middle and closes the stack up', () => {
+    const board = boardOf([
+      [tile('a', ['nom']), tile('b', ['gen']), tile('c', ['dat'])],
+      [],
+      [],
+      [],
     ])
-    const dealer = createDealer(
-      [tile('gen', ['pl'], ['gen']), tile('nom', ['pl'], ['nom']), tile('dat', ['pl'], ['dat'])],
-      seeded(21),
-    )
-    const next = collapse(g, new Set(['0,1']), dealer)
-    expect(next.cells[1].form).toBe('dat')
-    expect(findMatches(next, 'case')).toEqual([])
+    expect(removeOne(board, 0, 1).cols[0].map((t) => t.form)).toEqual(['a', 'c'])
   })
 
-  it('fills the gap anyway when every candidate would match', () => {
-    const g = gridOf([
-      [tile('a', ['m'], ['gen']), tile('b', ['f'], ['acc']), tile('c', ['n'], ['gen'])],
-      [tile('d', ['m'], ['dat']), tile('e', ['f'], ['nom']), tile('f', ['n'], ['ins'])],
-    ])
-    const dealer = createDealer([tile('gen', ['pl'], ['gen'])], seeded(23))
-    const next = collapse(g, new Set(['0,1']), dealer)
-    expect(next.cells.every(Boolean)).toBe(true)
-    expect(next.cells[1].form).toBe('gen')
-  })
-})
-
-describe('generateGrid', () => {
-  it('deals a board with no line already on it and a move available', () => {
-    const pool = tilesForWord(noun()).concat(tilesForWord(adjective()))
-    for (const mode of MODES) {
-      const grid = generateGrid(createDealer(pool, seeded(11)), { rows: 6, cols: 5, mode })
-      expect(grid.cells).toHaveLength(30)
-      expect(findMatches(grid, mode)).toEqual([])
-      expect(hasLegalMove(grid, mode)).toBe(true)
-    }
-  })
-
-  it('still returns a board when it cannot find a playable one', () => {
-    // One tile, so every cell is identical: no deal can avoid a line.
-    const grid = generateGrid(createDealer([tile('a', ['m'], ['nom'])], seeded(13)), {
-      rows: 3,
-      cols: 3,
-      mode: 'case',
-      attempts: 2,
-    })
-    expect(grid.cells).toHaveLength(9)
+  it('leaves a column it was given nothing for', () => {
+    const board = boardOf([[tile('a', ['nom'])], [tile('b', ['gen'])], [], []])
+    const next = removeCells(board, new Map([[0, new Set([0])]]))
+    expect(next.cols[0]).toEqual([])
+    expect(next.cols[1].map((t) => t.form)).toEqual(['b'])
   })
 })
 
 describe('the chase window', () => {
-  const g = gridOf([
-    [tile('1', ['m'], ['gen']), tile('2', ['f'], ['dat'])],
-    [tile('3', ['n'], ['acc']), tile('4', ['pl'], ['nom'])],
+  const board = boardOf([
+    [tile('a', ['gen']), tile('b', ['dat'])],
+    [tile('c', ['acc'])],
+    [],
+    [],
   ])
 
-  it('is worth a second per feature the line fired on', () => {
+  it('is worth a second per category the clear fired on', () => {
     expect(chaseWindowMs(['gen'])).toBe(CHASE_MS_PER_FEATURE)
     expect(chaseWindowMs(['gen', 'acc'])).toBe(2 * CHASE_MS_PER_FEATURE)
     expect(chaseWindowMs([])).toBe(0)
   })
 
-  it('opens every cell carrying one of its features', () => {
-    expect(chaseTargets(g, ['gen', 'acc'], 'case')).toEqual([
-      { r: 0, c: 0 },
-      { r: 1, c: 0 },
+  it('opens every stacked tile carrying one of its categories', () => {
+    expect(chaseTargets(board, ['gen', 'acc'])).toEqual([
+      { col: 0, i: 0 },
+      { col: 1, i: 0 },
     ])
   })
 
-  it('grades a tap by whether the tile carries a feature', () => {
-    expect(isChaseHit(g, ['gen'], 0, 0, 'case')).toBe(true)
-    expect(isChaseHit(g, ['gen'], 0, 1, 'case')).toBe(false)
-    expect(isChaseHit(g, ['gen'], 9, 9, 'case')).toBe(false)
+  it('grades a tap by whether the tile carries a category', () => {
+    expect(isChaseHit(board, ['gen'], 0, 0)).toBe(true)
+    expect(isChaseHit(board, ['gen'], 0, 1)).toBe(false)
+    expect(isChaseHit(board, ['gen'], 9, 9)).toBe(false)
   })
 })
 
 describe('scoring', () => {
   it('pays a cascade one more multiple per step', () => {
-    expect(stepScore(3, 0)).toBe(3 * TILE_SCORE)
-    expect(stepScore(3, 2)).toBe(9 * TILE_SCORE)
+    expect(stepScore(2, 0)).toBe(2 * TILE_SCORE)
+    expect(stepScore(2, 2)).toBe(6 * TILE_SCORE)
   })
 
   it('pays a chase tap by its place in the streak', () => {
@@ -505,7 +511,7 @@ describe('scoring', () => {
 })
 
 describe('word cards', () => {
-  it('names the word rather than the slot the grid was testing', () => {
+  it('names the word rather than the slot the board was testing', () => {
     const t = tilesForWord(noun()).find((x) => x.form === 'кни́гами')
     expect(cardFor(t)).toEqual({
       key: 'книга=book',
@@ -530,15 +536,92 @@ describe('word cards', () => {
   })
 })
 
-describe('feature vocabulary', () => {
-  it('labels every feature of both modes', () => {
+describe('createDealer', () => {
+  it('gives every tile its own identity', () => {
+    const dealer = createDealer([tile('a', ['nom'])], seeded(2))
+    const [one, two] = [dealer.deal(), dealer.deal()]
+    expect(one.form).toBe(two.form)
+    expect(one.id).not.toBe(two.id)
+  })
+
+  it('honours a veto, and deals anyway when every candidate is vetoed', () => {
+    const pool = [tile('a', ['nom']), tile('b', ['gen'])]
+    const dealer = createDealer(pool, seeded(4))
+    expect(dealer.deal((t) => t.form === 'a').form).toBe('b')
+    expect(dealer.deal(() => true).form).toMatch(/[ab]/)
+  })
+})
+
+describe('category vocabulary', () => {
+  it('labels every category of both modes, long and short', () => {
     for (const mode of MODES) {
-      for (const f of FEATURES[mode]) expect(FEATURE_LABELS[f]).toBeTruthy()
+      for (const f of FEATURES[mode]) {
+        expect(FEATURE_LABELS[f]).toBeTruthy()
+        expect(FEATURE_SHORT[f]).toBeTruthy()
+      }
     }
   })
 
   it('reads a missing feature set as empty', () => {
     expect(featuresOf(null, 'case')).toEqual([])
     expect(featuresOf({}, 'case')).toEqual([])
+  })
+})
+
+describe('a whole game', () => {
+  // The balance argument in RUN's doc, held to by a test: a player who places
+  // every tile as well as a swap could must be able to hold a board, and a
+  // player dropping them anywhere must not.
+  const pool = () => {
+    const words = []
+    for (const [gender, forms] of Object.entries({
+      m: ['стол', 'стола', 'столу', 'столом'],
+      f: ['книга', 'книги', 'книге', 'книгой'],
+      n: ['окно', 'окна', 'окну', 'окном'],
+    })) {
+      forms.forEach((form, i) => {
+        words.push(tile(`${gender}${i}`, [FEATURES.case[i]], [gender]))
+      })
+    }
+    return words
+  }
+
+  function play({ skilled, rng, drops = 200 }) {
+    const categories = ['nom', 'gen', 'dat', 'acc']
+    const dealer = createDealer(levelDeck(pool(), 'case', categories, { rng }), rng)
+    let board = createBoard('case', categories)
+    let dropped = 0
+    for (; dropped < drops; dropped++) {
+      const next = dealer.deal()
+      let column = Math.floor(rng() * COLUMNS)
+      if (skilled) {
+        // A swap can put any stack under the falling tile, so choosing the
+        // column is exactly the reach the real move has.
+        let best = -Infinity
+        for (let c = 0; c < COLUMNS; c++) {
+          if (heightOf(board, c) >= board.rows) continue
+          const landed = landTile(board, c, next)
+          const gain = (nextClear(landed)?.cleared.length ?? 0) * 100 - heightOf(board, c)
+          if (gain > best) [best, column] = [gain, c]
+        }
+      }
+      if (heightOf(board, column) >= board.rows) break
+      board = landTile(board, column, next)
+      for (let i = 0; i < 20; i++) {
+        const step = nextClear(board)
+        if (!step) break
+        board = step.board
+      }
+      if (isToppedOut(board)) break
+    }
+    return dropped
+  }
+
+  it('can be held indefinitely by a player who places well', () => {
+    expect(play({ skilled: true, rng: seeded(21) })).toBe(200)
+  })
+
+  it('tops out on a player who does not', () => {
+    expect(play({ skilled: false, rng: seeded(21) })).toBeLessThan(200)
   })
 })
