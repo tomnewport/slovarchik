@@ -124,9 +124,9 @@ async function move(to) {
   showingAppearance.value = false
   start.value = to
   openedWord.value = null
-  await idb.setMeta(`reader:position:${book.value.id}`, book.value.sentences[to].id)
   layout()
   readingPage.value?.scrollTo(0, 0)
+  await idb.setMeta(`reader:position:${book.value.id}`, book.value.sentences[to].id)
 }
 
 async function reveal(sentence) {

@@ -28,7 +28,7 @@ separate, clearly labelled selections with their own IDs and versions.
 | Advanced | Tolstoy — *Война и мир* | Planned |
 | Political | Gorky — *Мать* | Planned; check territory and edition rights |
 | Political | Chernyshevsky — *Что делать?* | Planned |
-| Political | Lenin — *Государство и революция* | Planned; check territory and edition rights |
+| Political | Lenin — *Государство и революция* | **Available:** chapter I, § 1 selection (19 complete paragraphs); remainder planned |
 
 The downloadable works and their provenance are the JSON files in
 `content/books/`. Add another title only after checking the exact source and
