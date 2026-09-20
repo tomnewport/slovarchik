@@ -1,0 +1,80 @@
+{
+  "id": "tolstoy-stone",
+  "title": "Камень",
+  "author": "Лев Толстой",
+  "shelf": "Beginner",
+  "form": "prose",
+  "summary": "A beggar keeps the stone a rich man threw at him, and waits. Complete story.",
+  "packVersion": 1,
+  "translationVersion": 1,
+  "source": {
+    "editionId": "First Russian Book for Reading, Камень; Wikisource revision 5737293",
+    "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+  },
+  "rights": {
+    "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+    "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+    "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+  },
+  "translationReview": {
+    "method": "Checked all eight sentences against the pinned source. Kept «за пазуху» / «из-за пазухи» as the same place in English so the stone’s long keeping is visible, and kept the closing turn from anger to pity."
+  },
+  "sentences": [
+    {
+      "id": "tolstoy-stone:01",
+      "paragraph": "1",
+      "ru": "Один бедный пришел к богатому и стал просить милостыню.",
+      "en": "A poor man came to a rich man and began asking for alms.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:02",
+      "paragraph": "1",
+      "ru": "Богатый не дал ничего и сказал: «Поди вон!»",
+      "en": "The rich man gave him nothing and said: “Get out!”",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:03",
+      "paragraph": "1",
+      "ru": "Но бедный не уходил.",
+      "en": "But the poor man did not go.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:04",
+      "paragraph": "1",
+      "ru": "Тогда богатый рассердился, поднял камень и бросил им в бедного.",
+      "en": "Then the rich man grew angry, picked up a stone and threw it at the poor man.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:05",
+      "paragraph": "1",
+      "ru": "Бедный поднял камень, положил за пазуху и сказал: «До тех пор буду носить этот камень, пока не придется и мне бросить в него».",
+      "en": "The poor man picked the stone up, put it inside his coat and said: “I shall carry this stone until the day comes when I can throw it at him.”",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:06",
+      "paragraph": "1",
+      "ru": "И пришло это время.",
+      "en": "And that time came.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:07",
+      "paragraph": "1",
+      "ru": "Богатый сделал дурное дело; у него отняли всё, что у него было, и повезли в тюрьму.",
+      "en": "The rich man did a wicked thing; everything he had was taken from him, and he was driven off to prison.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-stone:08",
+      "paragraph": "1",
+      "ru": "Когда его везли в тюрьму, бедный подошел к нему, вынул из-за пазухи камень и замахнулся; потом пораздумался, бросил камень наземь и сказал: «Напрасно я так долго носил этот камень: когда он был богат и силен, я боялся его; а теперь мне жалко его».",
+      "en": "As he was being driven to prison, the poor man went up to him, took the stone out from inside his coat and raised it; then he thought better of it, threw the stone on the ground and said: “I carried this stone all that time for nothing: when he was rich and strong I was afraid of him, and now I am sorry for him.”",
+      "review": "checked"
+    }
+  ]
+}
