@@ -44,6 +44,27 @@ words:
       pl_acc: го́рницы
       pl_ins: го́рницами
       pl_pre: го́рницах
+  "зверинец=menagerie":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "menagerie (a travelling show of caged wild animals)"
+    declension:
+      sg_nom: звери́нец
+      sg_gen: звери́нца
+      sg_dat: звери́нцу
+      sg_acc: звери́нец
+      sg_ins: звери́нцем
+      sg_pre: звери́нце
+      pl_nom: звери́нцы
+      pl_gen: звери́нцев
+      pl_dat: звери́нцам
+      pl_acc: звери́нцы
+      pl_ins: звери́нцами
+      pl_pre: звери́нцах
   "косточка=stone":
     cefr_level: A2
     learn: false
@@ -122,3 +143,24 @@ words:
       pl_acc: ра́ков
       pl_ins: ра́ками
       pl_pre: ра́ках
+  "собачка=little dog":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "little dog (affectionate diminutive of соба́ка)"
+    declension:
+      sg_nom: соба́чка
+      sg_gen: соба́чки
+      sg_dat: соба́чке
+      sg_acc: соба́чку
+      sg_ins: соба́чкой
+      sg_pre: соба́чке
+      pl_nom: соба́чки
+      pl_gen: соба́чек
+      pl_dat: соба́чкам
+      pl_acc: соба́чек
+      pl_ins: соба́чками
+      pl_pre: соба́чках

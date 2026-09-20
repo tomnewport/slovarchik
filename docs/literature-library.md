@@ -19,7 +19,7 @@ separate, clearly labelled selections with their own IDs and versions.
 | Children’s | Mayakovsky — *Что такое хорошо и что такое плохо?* (1925) | Planned; rights clear on all three tests |
 | Children’s | Sasha Chorny — *Детский остров* (1921) | Planned; rights clear on all three tests |
 | Children’s | Public-domain Russian folk-tale collection | Planned; verify collection editor and edition |
-| Beginner | Tolstoy — children’s prose / *Азбука* | **Available:** complete *Муравей и голубка* and *Косточка* |
+| Beginner | Tolstoy — children’s prose / *Азбука* | **Available:** complete *Муравей и голубка*, *Косточка* and *Лев и собачка*; further pieces queued |
 | Beginner | Chekhov — selected short stories | Planned |
 | Beginner | Turgenev — *Муму* | Planned |
 | Intermediate | Pushkin — *Капитанская дочка* | Planned |
