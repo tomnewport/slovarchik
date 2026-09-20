@@ -1,0 +1,73 @@
+{
+  "id": "afanasyev-turnip",
+  "title": "Репка",
+  "author": "Народная сказка",
+  "shelf": "Children’s",
+  "form": "prose",
+  "summary": "The whole household pulls at one turnip. Complete tale, in Afanasyev’s Archangel variant.",
+  "packVersion": 1,
+  "translationVersion": 1,
+  "source": {
+    "editionId": "Народные русские сказки (Афанасьев), № 89, Репка (recorded in Arkhangelsk province by A. Kharitonov); Wikisource revision 1136168",
+    "url": "https://ru.wikisource.org/w/index.php?oldid=1136168"
+  },
+  "rights": {
+    "original": "Afanasyev (died 1871); the collection Народные русские сказки was published 1855–63 and is public domain. The tale itself is traditional and anonymous.",
+    "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; the collection’s editorial footnote about where the tale was recorded is omitted.",
+    "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+  },
+  "translationReview": {
+    "method": "Checked all seven paragraphs against the pinned source, keeping its stress marks (Со́звал, но́га, дру́га, пя́та) and its dialect «не можут» for «не могут». This is Afanasyev’s Archangel variant, in which legs rather than the familiar granddaughter–dog–cat–mouse chain join the pull, and his own parenthetical abbreviating the repetition is kept as part of the tale; his editorial «(?)» after the first «но́га», which marks his doubt about the word, is not. The English repeats the chain exactly as the Russian does, because the repetition is the tale."
+  },
+  "sentences": [
+    {
+      "id": "afanasyev-turnip:01",
+      "paragraph": "1",
+      "ru": "Посеял дедка репку; пошёл репку рвать, захватился за репку: тянет-потянет, вытянуть не может!",
+      "en": "Grandfather sowed a turnip; he went to pull the turnip up, took hold of the turnip: he pulls and pulls, and cannot pull it up!",
+      "review": "checked"
+    },
+    {
+      "id": "afanasyev-turnip:02",
+      "paragraph": "2",
+      "ru": "Со́звал дедка бабку; бабка за дедку, дедка за репку, тянут-потянут, вытянуть не можут!",
+      "en": "Grandfather called grandmother; grandmother takes hold of grandfather, grandfather of the turnip, they pull and pull, and cannot pull it up!",
+      "review": "checked"
+    },
+    {
+      "id": "afanasyev-turnip:03",
+      "paragraph": "3",
+      "ru": "Пришла внучка; внучка за бабку, бабка за дедку, дедка за репку, тянут-потянут, вытянуть не можут!",
+      "en": "The granddaughter came; the granddaughter takes hold of grandmother, grandmother of grandfather, grandfather of the turnip, they pull and pull, and cannot pull it up!",
+      "review": "checked"
+    },
+    {
+      "id": "afanasyev-turnip:04",
+      "paragraph": "4",
+      "ru": "Пришла сучка; сучка за внучку, внучка за бабку, бабка за дедку, дедка за репку, тянут-потянут, вытянуть не можут!",
+      "en": "The little dog came; the dog takes hold of the granddaughter, the granddaughter of grandmother, grandmother of grandfather, grandfather of the turnip, they pull and pull, and cannot pull it up!",
+      "review": "checked"
+    },
+    {
+      "id": "afanasyev-turnip:05",
+      "paragraph": "5",
+      "ru": "Пришла но́га. Но́га за сучку, сучка за внучку, внучка за бабку, бабка за дедку, дедка за репку, тянут-потянут, вытянуть не можут!",
+      "en": "A leg came. The leg takes hold of the dog, the dog of the granddaughter, the granddaughter of grandmother, grandmother of grandfather, grandfather of the turnip, they pull and pull, and cannot pull it up!",
+      "review": "checked"
+    },
+    {
+      "id": "afanasyev-turnip:06",
+      "paragraph": "6",
+      "ru": "Пришла дру́га но́га; дру́га но́га за но́гу, но́га за сучку, сучка за внучку, внучка за бабку, бабка за дедку, дедка за репку, тянут-потянут, вытянуть не можут! (и так далее до пятой но́ги).",
+      "en": "A second leg came; the second leg takes hold of the first leg, the leg of the dog, the dog of the granddaughter, the granddaughter of grandmother, grandmother of grandfather, grandfather of the turnip, they pull and pull, and cannot pull it up! (and so on up to the fifth leg).",
+      "review": "checked"
+    },
+    {
+      "id": "afanasyev-turnip:07",
+      "paragraph": "7",
+      "ru": "Пришла пя́та но́га. Пять ног за четыре, четыре но́ги за три, три но́ги за две, две но́ги за но́гу, но́га за сучку, сучка за внучку, внучка за бабку, бабка за дедку, дедка за репку, тянут-потянут: вытянули репку!",
+      "en": "The fifth leg came. Five legs take hold of four, four legs of three, three legs of two, two legs of one, the leg of the dog, the dog of the granddaughter, the granddaughter of grandmother, grandmother of grandfather, grandfather of the turnip, they pull and pull: and up came the turnip!",
+      "review": "checked"
+    }
+  ]
+}
