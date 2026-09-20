@@ -50,6 +50,38 @@ async function play(mode = 'case') {
 const strips = (wrapper) => wrapper.findAll('button.strip')
 const tiles = (wrapper) => wrapper.findAll('button.tile')
 
+/**
+ * Play the falling tile the way the game asks to be played: if the stack it is
+ * about to land on shares none of its categories but a neighbouring stack does,
+ * trade the two columns first. Without this the tests only ever pile tiles up,
+ * and whether a run of drops reaches a level turn or tops a column out is the
+ * luck of the deal rather than anything the code decides.
+ */
+async function playWell(wrapper) {
+  const board = wrapper.vm.board
+  const falling = wrapper.vm.falling
+  if (!falling) return
+  const wanted = new Set(featuresOf(falling.tile, board.mode).filter((f) => board.categories.includes(f)))
+  const topShares = (c) => {
+    const top = board.cols[c].at(-1)
+    return !!top && featuresOf(top, board.mode).some((f) => wanted.has(f))
+  }
+  const here = falling.col
+  if (wanted.size && !topShares(here)) {
+    const helpful = [here - 1, here + 1].find((c) => c >= 0 && c < board.cols.length && topShares(c))
+    // Failing a match, get out from under the tallest column so the board lasts.
+    const shorter = [here - 1, here + 1].find(
+      (c) => c >= 0 && c < board.cols.length && board.cols[c].length < board.cols[here].length - 1,
+    )
+    const swapWith = helpful ?? shorter
+    if (swapWith != null) {
+      await strips(wrapper)[here].trigger('click')
+      await strips(wrapper)[swapWith].trigger('click')
+    }
+  }
+  await slam(wrapper)
+}
+
 /** Drop the falling tile now and let any collapse finish. */
 async function slam(wrapper) {
   await wrapper
@@ -294,7 +326,7 @@ describe('InflectionCrushView', () => {
     for (let i = 0; i < 200 && wrapper.vm.phase === 'playing'; i++) {
       if (wrapper.vm.chase) await vi.advanceTimersByTimeAsync(4000)
       if (!wrapper.vm.falling) break
-      await slam(wrapper)
+      await playWell(wrapper)
       if (wrapper.vm.clearedCount >= CLEARS_PER_LEVEL) {
         turned = true
         break
