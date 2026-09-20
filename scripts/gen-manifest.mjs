@@ -51,6 +51,7 @@ import { buildWords, corpusToken, phraseNotesFrom, shapePhrases } from '../src/l
 export const FILES = [
   { pos: 'noun', file: 'nouns.yml' },
   { pos: 'noun', file: 'names.yml' }, // dictionary-only personal names and patronymics
+  { pos: 'noun', file: 'reader-names.yml' }, // people and places the shipped books name
   { pos: 'noun', file: 'reader-nouns.yml' }, // dictionary-only words in the shipped books
   { pos: 'noun', file: 'calendar.yml' },
   { pos: 'pronoun', file: 'pronouns.yml' },

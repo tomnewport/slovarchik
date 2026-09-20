@@ -10,6 +10,15 @@ describe('literature dictionary', () => {
     ])
   })
 
+  it('leaves alone what no Russian dictionary can explain: Latin text and a stranded ordinal ending', () => {
+    expect(readerTokens('ученик III класса').map((t) => [t.text, t.word])).toEqual([
+      ['ученик', true], [' ', false], ['III', false], [' ', false], ['класса', true],
+    ])
+    expect(readerTokens('6-ым изданием').map((t) => [t.text, t.word])).toEqual([
+      ['6-', false], ['ым', false], [' ', false], ['изданием', true],
+    ])
+  })
+
   it('shows every dictionary claimant for an ambiguous inflected form', () => {
     const words = [
       { key: 'стать=become', ru: 'стать', headword: 'ста́ть', meaning: 'to become', pos: 'verb', aspect: 'pf', extra: { conjugation: { past_pl: 'ста́ли' } } },
@@ -34,5 +43,11 @@ describe('literature dictionary', () => {
       expect(entries.some((entry) => words.find((word) => word.key === entry.key)?.learnable === false), surface).toBe(true)
     }
     expect(lookupReaderWord('косточку', index, byKey).find((entry) => entry.key === 'косточка=stone').morphology).toContain('Accusative singular')
+  })
+
+  it('prints no part of speech for a gloss-only stub, whose "glossary" is a filing decision', () => {
+    const words = loadFixtureWords()
+    const entries = lookupReaderWord('каутскианством', buildFormIndex(words), new Map(words.map((w) => [w.key, w])))
+    expect(entries.map((entry) => entry.pos)).toEqual([''])
   })
 })

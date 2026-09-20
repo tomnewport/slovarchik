@@ -4,9 +4,27 @@ import { hasStressMark, normToken, normTokenStress } from './phraseHint.js'
 import { CASE_LABELS, NUMBER_LABELS } from './declension.js'
 
 const WORD = /[\p{L}\p{M}]+(?:[-’][\p{L}\p{M}]+)*|[^\p{L}\p{M}]+/gu
+const CYRILLIC = /\p{Script=Cyrillic}/u
+// «6-ым изданием»: the tokeniser splits on the digits, so the grammatical
+// ending arrives as a token of its own. It is a suffix, not a word, and no
+// dictionary will ever hold it — so it is text, like the digits it belongs to.
+const ORDINAL_TAIL = /\d[-‑–—]$/
 
+/**
+ * Split a sentence into rendered tokens, marking the ones worth tapping.
+ *
+ * Only Cyrillic tokens are tappable: a Latin «III» or a page number is printed
+ * as it stands, because the tap dictionary has nothing to say about it and an
+ * always-empty popup reads as a broken lookup rather than a foreign word.
+ * @param {string} sentence
+ * @returns {{text: string, word: boolean}[]}
+ */
 export function readerTokens(sentence) {
-  return [...String(sentence).matchAll(WORD)].map(([text]) => ({ text, word: /\p{L}/u.test(text) }))
+  const tokens = [...String(sentence).matchAll(WORD)].map(([text]) => ({ text, word: CYRILLIC.test(text) }))
+  for (let i = 1; i < tokens.length; i++) {
+    if (ORDINAL_TAIL.test(tokens[i - 1].text)) tokens[i].word = false
+  }
+  return tokens
 }
 
 /** Return every dictionary record that claims this form, including homographs. */
@@ -25,7 +43,10 @@ export function lookupReaderWord(surface, index, byKey) {
     key: word.key,
     lemma: word.headword || word.ru,
     meaning: word.meaning || word.en,
-    pos: word.pos,
+    // `glossary` is a filing decision, not a part of speech — the reader-only
+    // and example-sentence stubs live under it — so the popup is given nothing
+    // to print rather than the word "glossary".
+    pos: word.pos === 'glossary' ? '' : word.pos,
     morphology: morphologyFor(word, surface),
     notes: word.facts?.filter((fact) => fact.kind === 'note').map((fact) => fact.text) ?? [],
   }))

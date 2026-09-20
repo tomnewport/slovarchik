@@ -1,0 +1,231 @@
+# People and places the shipped literature names, for dictionary lookup only.
+#
+# names.yml holds the common Russian given names, diminutives and patronymics a
+# learner meets everywhere (#760). These are the other kind: Chekhov's Нафанаи́л,
+# the historical figures Lenin argues with, and the one German city he cites
+# from. They are here so that tapping a capitalised word in the reader answers
+# "this is a person" rather than nothing at all, and `learn: false` keeps every
+# one of them out of the drills and the progress engine.
+#
+# Full singular paradigms rather than bare glosses: the books use these names in
+# the oblique cases far more often than in the nominative («По Ма́рксу»,
+# «Геростра́том»), and a paradigm also lets the popup say which case it is.
+---
+words:
+  "Нафанаил=Nathanael":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Nathanael (old-fashioned Russian boy's name, from the Hebrew)"
+    facts:
+      - kind: note
+        text: "Chekhov's schoolboy son; Нафа́ня is the familiar form his father uses."
+        see: ["Нафаня=Nafanya"]
+    declension:
+      sg_nom: Нафанаи́л
+      sg_gen: Нафанаи́ла
+      sg_dat: Нафанаи́лу
+      sg_acc: Нафанаи́ла
+      sg_ins: Нафанаи́лом
+      sg_pre: Нафанаи́ле
+  "Нафаня=Nafanya":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Nafanya (familiar form of Нафанаи́л)"
+    facts:
+      - kind: note
+        text: "Familiar form of Нафанаи́л."
+        see: ["Нафанаил=Nathanael"]
+    declension:
+      sg_nom: Нафа́ня
+      sg_gen: Нафа́ни
+      sg_dat: Нафа́не
+      sg_acc: Нафа́ню
+      sg_ins: Нафа́ней
+      sg_pre: Нафа́не
+  "Луиза=Louise":
+    cefr_level: B2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Louise (a western European woman's name, used in Russian)"
+    declension:
+      sg_nom: Луи́за
+      sg_gen: Луи́зы
+      sg_dat: Луи́зе
+      sg_acc: Луи́зу
+      sg_ins: Луи́зой
+      sg_pre: Луи́зе
+  "Ванценбах=Wanzenbach":
+    cefr_level: B2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Wanzenbach (a German surname)"
+    facts:
+      - kind: note
+        text: "A foreign surname borne by a woman does not decline in Russian, so every case looks the same."
+    declension:
+      sg_nom: Ванценба́х
+      sg_gen: Ванценба́х
+      sg_dat: Ванценба́х
+      sg_acc: Ванценба́х
+      sg_ins: Ванценба́х
+      sg_pre: Ванценба́х
+  "Порфирий=Porfiry":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Porfiry (a Russian man's name of Greek origin)"
+    declension:
+      sg_nom: Порфи́рий
+      sg_gen: Порфи́рия
+      sg_dat: Порфи́рию
+      sg_acc: Порфи́рия
+      sg_ins: Порфи́рием
+      sg_pre: Порфи́рии
+  "Герострат=Herostratus":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Herostratus (the Greek who burned a temple down to be remembered)"
+    declension:
+      sg_nom: Геростра́т
+      sg_gen: Геростра́та
+      sg_dat: Геростра́ту
+      sg_acc: Геростра́та
+      sg_ins: Геростра́том
+      sg_pre: Геростра́те
+  "Эфиальт=Ephialtes":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Ephialtes (the Greek who betrayed the pass at Thermopylae)"
+    declension:
+      sg_nom: Эфиа́льт
+      sg_gen: Эфиа́льта
+      sg_dat: Эфиа́льту
+      sg_acc: Эфиа́льта
+      sg_ins: Эфиа́льтом
+      sg_pre: Эфиа́льте
+  "Станислав=Stanislaus":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Stanislaus (the imperial Order of St Stanislaus, given for service)"
+    declension:
+      sg_nom: Станисла́в
+      sg_gen: Станисла́ва
+      sg_dat: Станисла́ву
+      sg_acc: Станисла́ва
+      sg_ins: Станисла́вом
+      sg_pre: Станисла́ве
+  "Маркс=Marx":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Marx (Karl Marx, 1818–1883)"
+    facts:
+      - kind: note
+        text: "The surname declines like an ordinary masculine noun: по Ма́рксу, о Ма́рксе."
+        see: ["Энгельс=Engels"]
+    declension:
+      sg_nom: Маркс
+      sg_gen: Ма́ркса
+      sg_dat: Ма́рксу
+      sg_acc: Ма́ркса
+      sg_ins: Ма́рксом
+      sg_pre: Ма́рксе
+  "Энгельс=Engels":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Engels (Friedrich Engels, 1820–1895)"
+    facts:
+      - kind: note
+        text: "Marx's co-author; Lenin cites the two together throughout."
+        see: ["Маркс=Marx"]
+    declension:
+      sg_nom: Э́нгельс
+      sg_gen: Э́нгельса
+      sg_dat: Э́нгельсу
+      sg_acc: Э́нгельса
+      sg_ins: Э́нгельсом
+      sg_pre: Э́нгельсе
+  "Гегель=Hegel":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Hegel (Georg Wilhelm Friedrich Hegel, 1770–1831)"
+    declension:
+      sg_nom: Ге́гель
+      sg_gen: Ге́геля
+      sg_dat: Ге́гелю
+      sg_acc: Ге́геля
+      sg_ins: Ге́гелем
+      sg_pre: Ге́геле
+  "Каутский=Kautsky":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Kautsky (Karl Kautsky, 1854–1938, the German Marxist Lenin attacks)"
+    facts:
+      - kind: note
+        text: "A surname in -ский declines like an adjective: Ка́утского, Ка́утскому."
+    declension:
+      sg_nom: Ка́утский
+      sg_gen: Ка́утского
+      sg_dat: Ка́утскому
+      sg_acc: Ка́утского
+      sg_ins: Ка́утским
+      sg_pre: Ка́утском
+  "Штутгарт=Stuttgart":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: "Stuttgart (the German city)"
+    declension:
+      sg_nom: Шту́тгарт
+      sg_gen: Шту́тгарта
+      sg_dat: Шту́тгарту
+      sg_acc: Шту́тгарт
+      sg_ins: Шту́тгартом
+      sg_pre: Шту́тгарте

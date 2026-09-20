@@ -59,6 +59,11 @@ jobs:
       # corpus's own structure; this validates the align: annotations that
       # settle the rest, and fails when the unsettled residue grows.
       - run: npm run check:align
+      # The literature reader's only single-word help is the tap dictionary, and
+      # a book pack deliberately carries no lexicon of its own — so a word the
+      # dictionary has never heard of is a word the reader silently refuses to
+      # explain (#782). This fails when a book uses one.
+      - run: npm run check:reader
       # The same suite as `npm test`, with coverage measured over the logic
       # layers. The per-layer thresholds in vite.config.js are a ratchet: they
       # fail the job when coverage of src/lib, src/stores or src/composables

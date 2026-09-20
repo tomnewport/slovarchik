@@ -14,6 +14,7 @@ import { normalizeGoverns } from './verbGovernment.js'
 export const POS_BY_FILE = {
   nouns: 'noun',
   names: 'noun', // personal names, used for lookup rather than drills
+  'reader-names': 'noun', // people and places the shipped books name (#782)
   'reader-nouns': 'noun',
   calendar: 'noun', // days, months and festivals — nouns grouped by topic
   pronouns: 'pronoun',

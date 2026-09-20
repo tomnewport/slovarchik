@@ -215,6 +215,10 @@ src/
                         #     the last check is, and which of the deployment's dated release
                         #     notes are new to THIS install (the Data screen's Versions card)
                         #   readerPage/readerDictionary/readerReport/bookPack — literature layout, lookup, issue links and pack schema
+                        #   readerGlossCoverage  — which words in the shipped books the tap
+                        #     dictionary cannot explain. A book pack carries no lexicon of its
+                        #     own, so an unglossed word is one the reader silently refuses to
+                        #     explain; `check:reader` fails the build on one (#782)
                         #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
                         #   coalesce  — share one in-flight run between concurrent callers, so the boot
                         #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
@@ -225,7 +229,10 @@ src/
   test/fixtures.js      # shared test fixtures
   test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
 public/vocab/           # *.yml word data (one per part of speech) + manifest.json
-                        #   names.yml adds dictionary-only names and patronymics
+                        #   names.yml adds dictionary-only names and patronymics;
+                        #   reader-names/reader-nouns/reader-adverbs/reader-glosses.yml are the
+                        #   reader-only dictionary — every word the shipped books use and the
+                        #   curriculum does not teach, all `learn: false` (#782)
                         #   + parts.yml — the curriculum parts (#674). COMMITTED and
                         #   maintainer-owned, unlike the generated files below: the
                         #   packing is not stable under corpus growth, so a person
@@ -270,6 +277,9 @@ scripts/                # node maintenance scripts (icons, vocab sorting, covera
                         #     group (align-baseline.json); --list is the worklist.
                         #     gen-lemma-links.mjs proposes the lemma: links that dissolve a
                         #     third of the ambiguity outright
+                        #   check-reader-glosses.mjs is the reader GATE: every tappable word in
+                        #     content/books/ resolves through the reader's own lookup; --list is
+                        #     the worklist, each missing word in the sentence it appears in
 ```
 
 Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
@@ -308,10 +318,12 @@ npm run check:inflect:cases  # every inflect: annotation agrees with the case it
 npm run check:prompts        # no growth in English prompts matching more than one Russian sentence
 npm run check:parts          # parts.yml still describes the corpus (no orphans, bounds held)
 npm run check:align          # every phrase token resolves to one word, and the residue hasn't grown
+npm run check:reader         # every tappable word in the shipped books has a dictionary entry
 
 # The alignment worklist and the generator behind it (NOT gates):
 npm run align:list           # the unresolved ambiguity groups, busiest first
 npm run gen:lemma-links      # propose lemma: links for gloss-only stubs (--apply writes them)
+npm run reader:glosses       # the same books, with each unglossed word in context
 
 # Build gate — reads dist/, so it runs after `npm run build`:
 npm run check:size    # entry chunk, entry CSS and the vocab JSON against
@@ -350,6 +362,10 @@ tells you nothing about whether CI will accept your change.
 
 ## Where to make common changes
 
+- **A book the reader can't explain a word in** → `npm run reader:glosses` names
+  it; add a stress-marked `learn: false` entry to the `public/vocab/reader-*.yml`
+  file that fits (see [`docs/reader-glosses.md`](docs/reader-glosses.md)). Never
+  by dropping the word from the text.
 - **A drill's behaviour/UI** → the matching `src/views/*View.vue`.
 - **Quiz/declension/grading logic** → the pure module in `src/lib/` (keep it
   framework-free so it stays unit-testable), and add/extend its `*.test.js`.

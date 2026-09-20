@@ -28,6 +28,8 @@
     "check:prompts": "node scripts/check-prompt-ambiguity.mjs",
     "check:parts": "node scripts/check-parts.mjs",
     "check:align": "node scripts/check-align.mjs",
+    "check:reader": "node scripts/check-reader-glosses.mjs",
+    "reader:glosses": "node scripts/check-reader-glosses.mjs --list",
     "align:list": "node scripts/check-align.mjs --list",
     "gen:lemma-links": "node scripts/gen-lemma-links.mjs",
     "gen:parts": "node scripts/gen-parts.mjs",

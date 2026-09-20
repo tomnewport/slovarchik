@@ -337,7 +337,7 @@ onBeforeUnmount(() => {
         <p v-else-if="!definitions.length">No dictionary entry for this form.</p>
         <ul v-else>
           <li v-for="entry in definitions" :key="entry.key">
-            <strong>{{ entry.lemma }}</strong> <small>{{ entry.pos }}</small><br>
+            <strong>{{ entry.lemma }}</strong> <small v-if="entry.pos">{{ entry.pos }}</small><br>
             {{ entry.meaning }}
             <small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small>
             <small v-for="note in entry.notes" :key="note" class="reader-morph">{{ note }}</small>
