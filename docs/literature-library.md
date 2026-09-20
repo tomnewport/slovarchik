@@ -14,7 +14,7 @@ separate, clearly labelled selections with their own IDs and versions.
 
 | Shelf | Candidate | Status |
 | --- | --- | --- |
-| Children’s | Krylov — selected fables | **Available:** complete *Стрекоза и Муравей*; further fables queued |
+| Children’s | Krylov — selected fables | **Available:** complete *Стрекоза и Муравей* and *Лебедь, Щука и Рак*; further fables queued |
 | Children’s | Pushkin — selected fairy tales | Planned; *Сказка о рыбаке и рыбке* first |
 | Children’s | Mayakovsky — *Что такое хорошо и что такое плохо?* (1925) | Planned; rights clear on all three tests |
 | Children’s | Sasha Chorny — *Детский остров* (1921) | Planned; rights clear on all three tests |
