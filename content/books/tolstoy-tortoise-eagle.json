@@ -1,0 +1,45 @@
+{
+  "id": "tolstoy-tortoise-eagle",
+  "title": "Черепаха и орёл",
+  "author": "Лев Толстой",
+  "shelf": "Beginner",
+  "form": "prose",
+  "summary": "A tortoise talks an eagle into teaching her to fly. Complete fable.",
+  "packVersion": 1,
+  "translationVersion": 1,
+  "source": {
+    "editionId": "First Russian Book for Reading, Черепаха и орёл; Wikisource revision 5737293",
+    "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+  },
+  "rights": {
+    "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+    "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+    "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+  },
+  "translationReview": {
+    "method": "Checked all three sentences against the pinned source and read the English against the whole fable. Kept «ей не пристало» as a statement about what is fitting for a tortoise rather than about ability, which is the fable’s point."
+  },
+  "sentences": [
+    {
+      "id": "tolstoy-tortoise-eagle:01",
+      "paragraph": "1",
+      "ru": "Черепаха просила орла, чтобы научил ее летать.",
+      "en": "A tortoise begged an eagle to teach her to fly.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-tortoise-eagle:02",
+      "paragraph": "1",
+      "ru": "Орёл не советовал, потому что ей не пристало, а она все просила.",
+      "en": "The eagle advised against it, because flying was not a fitting thing for her, but she went on begging.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-tortoise-eagle:03",
+      "paragraph": "1",
+      "ru": "Орёл взял ее в когти, поднял вверх и пустил: она упала на камни и разбилась.",
+      "en": "The eagle took her in his talons, carried her up and let go: she fell on the rocks and was dashed to pieces.",
+      "review": "checked"
+    }
+  ]
+}
