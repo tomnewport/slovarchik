@@ -247,3 +247,45 @@ test('tapping a word the curriculum never teaches still explains it', async ({ p
   await expect(teaching).toContainText('teaching')
   await expect(teaching).not.toContainText('glossary')
 })
+
+test('an illustration appears between the sentences, and the switch survives a reload', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  const story = page.locator('.library-book').filter({ hasText: 'Косточка' })
+  await story.locator('summary.library-book-summary').click()
+  await story.getByRole('button', { name: 'Download' }).click()
+  await story.getByRole('link', { name: 'Read' }).click()
+
+  const text = page.getByRole('article', { name: 'Russian text' })
+  const picture = text.locator('.reader-illustration').first()
+  await expect(picture).toBeVisible()
+  // Large and centred: the point of it is that it reads as an illustration.
+  expect(await picture.evaluate((node) => parseFloat(getComputedStyle(node).fontSize)))
+    .toBeGreaterThan(30)
+  expect(await picture.evaluate((node) => getComputedStyle(node).textAlign)).toBe('center')
+
+  await page.getByRole('button', { name: 'Reading settings' }).click()
+  await page.getByRole('button', { name: 'Hide illustrations' }).click()
+  await expect(text.locator('.reader-illustration')).toHaveCount(0)
+
+  // Wait for the choice to reach storage rather than for the screen to catch
+  // up: the reload below can outrun an IndexedDB write that a person never
+  // could, and it is the stored value this test is about.
+  await expect.poll(() => readSetting(page, 'reader:illustrations')).toBe(false)
+  await page.reload()
+  await expect(text).toContainText('Купила мать слив')
+  await expect(text.locator('.reader-illustration')).toHaveCount(0)
+})
+
+/** Read one stored reader setting straight out of IndexedDB. */
+function readSetting(page, key) {
+  return page.evaluate((name) => new Promise((resolve, reject) => {
+    const open = indexedDB.open('slovarchik')
+    open.onerror = () => reject(open.error)
+    open.onsuccess = () => {
+      const request = open.result.transaction('meta', 'readonly').objectStore('meta').get(name)
+      request.onsuccess = () => resolve(request.result?.value)
+      request.onerror = () => reject(request.error)
+    }
+  }), key)
+}

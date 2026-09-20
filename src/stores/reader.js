@@ -16,13 +16,13 @@ export const FONT_SIZES = Object.freeze(['Small', 'Default', 'Large', 'Extra lar
 export const THEMES = Object.freeze(['dark', 'light'])
 export const TYPEFACES = Object.freeze(['serif', 'sans'])
 
-const DEFAULTS = Object.freeze({ theme: 'dark', typeface: 'serif', fontSize: 1 })
+const DEFAULTS = Object.freeze({ theme: 'dark', typeface: 'serif', fontSize: 1, illustrations: true })
 
 /**
  * How the page looks. One setting for every book: a learner who has chosen
  * large serif type has chosen it for reading, not for one title.
  */
-/** @type {{theme: string, typeface: string, fontSize: number, loaded: boolean}} */
+/** @type {{theme: string, typeface: string, fontSize: number, illustrations: boolean, loaded: boolean}} */
 export const appearance = reactive({ ...DEFAULTS, loaded: false })
 
 const positionKey = (bookId) => `reader:position:${bookId}`
@@ -34,11 +34,13 @@ function oneOf(choices, value, fallback) {
 }
 
 async function readAppearance() {
-  const [theme, typeface, fontSize] = await Promise.all([
+  const [theme, typeface, fontSize, illustrations] = await Promise.all([
     idb.getMeta('reader:theme'),
     idb.getMeta('reader:typeface'),
     idb.getMeta('reader:font-size'),
+    idb.getMeta('reader:illustrations'),
   ])
+  appearance.illustrations = typeof illustrations === 'boolean' ? illustrations : DEFAULTS.illustrations
   appearance.theme = oneOf(THEMES, theme, DEFAULTS.theme)
   appearance.typeface = oneOf(TYPEFACES, typeface, DEFAULTS.typeface)
   appearance.fontSize = Number.isInteger(fontSize) && fontSize >= 0 && fontSize < FONT_SIZES.length
@@ -59,6 +61,18 @@ export async function setTheme(value) {
 export async function setTypeface(value) {
   appearance.typeface = oneOf(TYPEFACES, value, appearance.typeface)
   await idb.setMeta('reader:typeface', appearance.typeface)
+}
+
+/**
+ * Turn the emoji illustrations on or off.
+ *
+ * On by default: a picture every few sentences is what the feature is for, and
+ * a reader who would rather have the page bare finds the switch in the same
+ * menu as the typeface.
+ */
+export async function setIllustrations(value) {
+  appearance.illustrations = !!value
+  await idb.setMeta('reader:illustrations', appearance.illustrations)
 }
 
 /** Step the reading size, clamped to the offered range. */

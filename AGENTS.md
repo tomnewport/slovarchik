@@ -219,6 +219,10 @@ src/
                         #     the last check is, and which of the deployment's dated release
                         #     notes are new to THIS install (the Data screen's Versions card)
                         #   readerPage/readerDictionary/readerReport/bookPack — literature layout, lookup, issue links and pack schema
+                        #   readerIllustrations  — the optional emoji drawn every few sentences
+                        #     in the reader: a hand-written stem lexicon, one picture per
+                        #     window of sentences, and never the same one twice running.
+                        #     `npm run reader:art` prints what each book would get
                         #   readerGlossCoverage  — which words in the shipped books the tap
                         #     dictionary cannot explain. A book pack carries no lexicon of its
                         #     own, so an unglossed word is one the reader silently refuses to
@@ -328,6 +332,7 @@ npm run check:reader         # every tappable word in the shipped books has a di
 npm run align:list           # the unresolved ambiguity groups, busiest first
 npm run gen:lemma-links      # propose lemma: links for gloss-only stubs (--apply writes them)
 npm run reader:glosses       # the same books, with each unglossed word in context
+npm run reader:art           # the emoji illustration each book's sentences would get
 
 # Build gate — reads dist/, so it runs after `npm run build`:
 npm run check:size    # entry chunk, entry CSS and the vocab JSON against

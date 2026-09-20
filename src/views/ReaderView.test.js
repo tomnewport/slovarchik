@@ -33,6 +33,9 @@ const pack = {
   ],
 }
 
+const settings = (wrapper, label) =>
+  wrapper.findAll('.reader-appearance button').find((button) => button.attributes('aria-label') === label)
+
 const words = [{
   key: 'зима=winter', ru: 'зима', headword: 'зима́', meaning: 'winter', pos: 'noun',
   gender: 'f', forms: { sg: { nom: 'зима́' } },
@@ -126,6 +129,35 @@ describe('ReaderView', () => {
     const wrapper = await openReader()
     expect(page(wrapper).text()).toContain('Снег идёт')
     expect(page(wrapper).text()).not.toContain('Зима пришла')
+  })
+
+  it('draws a picture between the sentences, and takes it away again', async () => {
+    const wrapper = await openReader()
+    // Winter, from a sentence that says so — and one picture, not one each.
+    expect(page(wrapper).findAll('.reader-illustration').map((node) => node.text())).toEqual(['❄️'])
+
+    await settings(wrapper, 'Hide illustrations').trigger('click')
+    await settle()
+    expect(page(wrapper).findAll('.reader-illustration')).toHaveLength(0)
+
+    await settings(wrapper, 'Show illustrations').trigger('click')
+    await settle()
+    expect(page(wrapper).findAll('.reader-illustration')).toHaveLength(1)
+  })
+
+  it('remembers that the illustrations were turned off', async () => {
+    await idb.setMeta('reader:illustrations', false)
+    const wrapper = await openReader()
+    expect(page(wrapper).findAll('.reader-illustration')).toHaveLength(0)
+    expect(settings(wrapper, 'Hide illustrations').attributes('aria-pressed')).toBe('true')
+  })
+
+  it('measures the page with the pictures it is about to draw', async () => {
+    // The hidden mirror is what pagination trusts; a picture missing from it
+    // would make every page one illustration too long.
+    const wrapper = await openReader()
+    expect(wrapper.find('.reader-measure').findAll('.reader-illustration').length)
+      .toBe(page(wrapper).findAll('.reader-illustration').length)
   })
 
   it('dresses the page in the appearance the store loaded', async () => {
