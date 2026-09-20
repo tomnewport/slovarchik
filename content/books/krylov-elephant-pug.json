@@ -1,0 +1,52 @@
+{
+  "id": "krylov-elephant-pug",
+  "title": "Слон и Моська",
+  "author": "Иван Крылов",
+  "shelf": "Children’s",
+  "form": "verse",
+  "summary": "A small dog barks at an elephant to make herself a name. Complete fable in verse.",
+  "packVersion": 1,
+  "translationVersion": 1,
+  "source": {
+    "editionId": "Krylov, Басни; Wikisource revision 4751137",
+    "url": "https://ru.wikisource.org/w/index.php?oldid=4751137"
+  },
+  "rights": {
+    "original": "Krylov (died 1844); underlying Russian work first published in 1808 and public domain.",
+    "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+    "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+  },
+  "translationReview": {
+    "method": "Checked all 20 verse lines against the pinned source, taking the printed text and not the «Драматический вестник» variants in its footnotes, and dropping the transcription’s line numbers. Kept the Pug’s closing quotation inside her own speech, as the source prints it."
+  },
+  "sentences": [
+    {
+      "id": "krylov-elephant-pug:01",
+      "paragraph": "1",
+      "ru": "По улицам Слона водили,\nКак видно напоказ —\nИзвестно, что Слоны в диковинку у нас —\nТак за Слоном толпы зевак ходили.",
+      "en": "An Elephant was being led through the streets,\nPlainly to be shown off —\nEveryone knows that Elephants are a rarity here —\nAnd so crowds of gapers walked along behind him.",
+      "review": "checked"
+    },
+    {
+      "id": "krylov-elephant-pug:02",
+      "paragraph": "1",
+      "ru": "Отколе ни возьмись, навстречу Моська им.\nУвидевши Слона, ну на него метаться,\nИ лаять, и визжать, и рваться,\nНу, так и лезет в драку с ним.",
+      "en": "From out of nowhere, a Pug comes to meet them.\nCatching sight of the Elephant, she hurls herself at him,\nBarking and yelping and straining,\nFairly picking a fight with him.",
+      "review": "checked"
+    },
+    {
+      "id": "krylov-elephant-pug:03",
+      "paragraph": "1",
+      "ru": "«Соседка, перестань срамиться»,\nЕй шавка говорит: «тебе ль с Слоном возиться?\nСмотри, уж ты хрипишь, а он себе идёт\nВперёд\nИ лаю твоего совсем не примечает».—",
+      "en": "“Neighbour, stop disgracing yourself,”\nA mongrel says to her: “is it for you to tangle with an Elephant?\nLook, you are hoarse already, and he walks on\nAhead\nAnd takes no notice whatever of your barking.” —",
+      "review": "checked"
+    },
+    {
+      "id": "krylov-elephant-pug:04",
+      "paragraph": "1",
+      "ru": "«Эх, эх!» ей Моська отвечает:\n«Вот то-то мне и духу придаёт,\nЧто я, совсем без драки,\nМогу попасть в большие забияки.\nПускай же говорят собаки:\n«Ай, Моська! знать она сильна,\nЧто лает на Слона!»",
+      "en": "“Ah, ah!” the Pug answers her:\n“That is the very thing that gives me spirit —\nThat with no fight at all\nI can pass for a great brawler.\nLet the dogs say:\n‘Aha, Pug! she must be strong,\nIf she barks at an Elephant!’”",
+      "review": "checked"
+    }
+  ]
+}
