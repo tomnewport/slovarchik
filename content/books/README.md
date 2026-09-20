@@ -40,6 +40,11 @@ and notes are excluded, while Lenin's own embedded page citation remains. The
 English keeps Lenin's polemical voice distinct from the extended quotation of
 Engels. Later sections need separate translation review before publication.
 
+Before any of that, check that the work may ship at all: out of copyright in
+Russia, in the United States and in the EU/UK, since a pack downloads to a
+learner anywhere. `docs/literature-library.md` sets out the three tests, the two
+Russian extensions that catch people out, and the titles already ruled out.
+
 `npm run gen:books` validates sources, writes `public/books/packs/*.json`, and
 updates the catalog with SHA-256 hashes. Commit the editorial JSON and generated
 pack/catalog together. Increase `packVersion` when Russian text, sentence IDs,

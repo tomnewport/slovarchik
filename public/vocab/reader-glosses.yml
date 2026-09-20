@@ -1,52 +1,2024 @@
-# Exact literary surface forms without a full dictionary paradigm. These are
-# lookup-only glosses, following the surface-form convention of glossary.yml.
+# Reader-only glosses: the words the shipped literature uses and the curriculum
+# does not teach (#782).
+#
+# Every tappable word in a book must resolve through the ordinary dictionary —
+# a book pack carries no lexicon of its own — so a word with no entry is a word
+# the reader silently refuses to explain. These entries close that gap without
+# putting Chekhov's civil-service ranks or Lenin's «каутскиа́нство» into anyone's
+# drills: `learn: false` keeps them out of the vocab, inflection and phrase
+# drills and out of the batch/progress engine entirely.
+#
+# Unlike the auto-generated glossary.yml, whose keys are surface forms, these
+# are keyed by the word's own dictionary form, with `forms:` listing the surface
+# forms the books actually print. A reader who taps «противоре́чия» is better
+# served by «противоре́чие — antagonism» than by an entry that only exists in the
+# genitive, and a reader-only word has no paradigm anywhere else to conflict
+# with. Where a full paradigm earns its keep the word belongs in
+# reader-nouns.yml (declinable nouns) or reader-names.yml (people and places).
+#
+# `npm run check:reader` fails the build when a book uses a word none of these
+# files explains. docs/reader-glosses.md says how to add one, and which of these
+# words deserve promotion to real curriculum entries.
 ---
 words:
+  "антипод=opposite":
+    cefr_level: C1
+    learn: false
+    accented: антипо́д
+    forms:
+      - антипо́дом
+    en_gb:
+      standard: "opposite (the direct antithesis of something)"
+  "асессор=assessor":
+    cefr_level: C1
+    learn: false
+    accented: асе́ссор
+    forms:
+      - асе́ссором
+    en_gb:
+      standard: "assessor (a middling civil-service rank; колле́жский асе́ссор)"
+  "батюшки=good heavens":
+    cefr_level: B2
+    learn: false
+    accented: ба́тюшки
+    en_gb:
+      standard: "good heavens (exclamation of surprise)"
+  "безвредный=harmless":
+    cefr_level: B2
+    learn: false
+    accented: безвре́дный
+    forms:
+      - безвре́дные
+    en_gb:
+      standard: "harmless (incapable of doing damage)"
+  "бесплодный=fruitless":
+    cefr_level: B2
+    learn: false
+    accented: беспло́дный
+    forms:
+      - беспло́дной
+    en_gb:
+      standard: "fruitless (leading nowhere)"
+  "бессильный=powerless":
+    cefr_level: B2
+    learn: false
+    accented: бесси́льный
+    forms:
+      - бесси́льно
+    en_gb:
+      standard: "powerless (unable to do anything about it)"
+  "бесспорный=indisputable":
+    cefr_level: B2
+    learn: false
+    accented: бесспо́рный
+    forms:
+      - бесспо́рных
+    en_gb:
+      standard: "indisputable (beyond argument)"
+  "бесчисленный=countless":
+    cefr_level: B2
+    learn: false
+    accented: бесчи́сленный
+    forms:
+      - бесчи́сленные
+    en_gb:
+      standard: "countless (too many to number)"
+  "бесшабашный=reckless":
+    cefr_level: C1
+    learn: false
+    accented: бесшаба́шный
+    forms:
+      - бесшаба́шным
+    en_gb:
+      standard: "reckless (wildly unrestrained)"
+  "бешеный=furious":
+    cefr_level: B2
+    learn: false
+    accented: бе́шеный
+    forms:
+      - бе́шеной
+    en_gb:
+      standard: "furious (rabid, frenzied)"
+  "благоговение=reverence":
+    cefr_level: C1
+    learn: false
+    accented: благогове́ние
+    forms:
+      - благогове́ния
+    en_gb:
+      standard: "reverence (awed respect)"
+  "благожелательный=well-disposed":
+    cefr_level: C1
+    learn: false
+    accented: благожела́тельный
+    forms:
+      - благожела́тельных
+    en_gb:
+      standard: "well-disposed (friendly, approving)"
+  "боле=more":
+    cefr_level: C1
+    learn: false
+    accented: бо́ле
+    en_gb:
+      standard: "more (archaic, poetic form of бо́лее)"
+  "большевик=Bolshevik":
+    cefr_level: B2
+    learn: false
+    accented: большеви́к
+    forms:
+      - большевики́
+    en_gb:
+      standard: "Bolshevik (member of Lenin's wing of the party)"
+  "буржуазия=bourgeoisie":
+    cefr_level: B2
+    learn: false
+    accented: буржуази́я
+    forms:
+      - буржуази́и
+    en_gb:
+      standard: "bourgeoisie (the propertied class)"
+  "буржуазный=bourgeois":
+    cefr_level: B2
+    learn: false
+    accented: буржуа́зный
+    forms:
+      - буржуа́зные
+    en_gb:
+      standard: "bourgeois (belonging to the propertied class)"
+  "важнейший=most important":
+    cefr_level: B2
+    learn: false
+    accented: важне́йший
+    forms:
+      - важне́йшему
+    en_gb:
+      standard: "most important (superlative of ва́жный)"
+  "ведение=waging":
+    cefr_level: C1
+    learn: false
+    accented: веде́ние
+    forms:
+      - веде́ния
+    en_gb:
+      standard: "waging (the conduct of a war or of affairs)"
+  "ведомство=department":
+    cefr_level: C1
+    learn: false
+    accented: ве́домство
+    forms:
+      - ве́домству
+    en_gb:
+      standard: "department (a branch of government service)"
+  "великолепно=splendidly":
+    cefr_level: B1
+    learn: false
+    accented: великоле́пно
+    en_gb:
+      standard: "splendidly (magnificently well)"
+  "величие=grandeur":
+    cefr_level: B2
+    learn: false
+    accented: вели́чие
+    forms:
+      - вели́чии
+    en_gb:
+      standard: "grandeur (full greatness or magnitude)"
+  "вельможи-с=grandees, sir":
+    cefr_level: C1
+    learn: false
+    accented: вельмо́жи-с
+    en_gb:
+      standard: "grandees, sir (вельмо́жа, grandee, with the servile -с)"
+  "вешний=spring":
+    cefr_level: C1
+    learn: false
+    accented: ве́шний
+    forms:
+      - ве́шних
+    en_gb:
+      standard: "spring (poetic word for of the spring)"
+  "влага=moisture":
+    cefr_level: B2
+    learn: false
+    accented: вла́га
+    forms:
+      - вла́ги
+    en_gb:
+      standard: "moisture (life-giving liquid)"
+  "воплотить=to embody":
+    cefr_level: C1
+    learn: false
+    accented: воплоти́ть
+    forms:
+      - воплощено́
+    en_gb:
+      standard: "to embody (to give something concrete form)"
+  "восстановление=restoration":
+    cefr_level: B2
+    learn: false
+    accented: восстановле́ние
+    forms:
+      - восстановле́нии
+    en_gb:
+      standard: "restoration (putting something back as it was)"
+  "восторженно=rapturously":
+    cefr_level: B2
+    learn: false
+    accented: восто́рженно
+    en_gb:
+      standard: "rapturously (with open delight)"
+  "вскружить=to turn":
+    cefr_level: C1
+    learn: false
+    accented: вскружи́ть
+    forms:
+      - вскружи́ло
+    en_gb:
+      standard: "to turn (to make someone's head spin)"
   "вспорхнула=took flight":
     cefr_level: B2
     learn: false
     accented: вспорхну́ла
     en_gb:
       standard: "took flight (suddenly fluttered up)"
+  "вы-с=you, sir":
+    cefr_level: C1
+    learn: false
+    accented: вы-с
+    en_gb:
+      standard: "you, sir (вы with the servile -с of old service speech)"
+  "выглядывать=to peer out":
+    cefr_level: B2
+    learn: false
+    accented: выгля́дывать
+    forms:
+      - выгля́дывала
+    en_gb:
+      standard: "to peer out (to look out from behind something)"
+  "выдвигать=to bring forward":
+    cefr_level: B2
+    learn: false
+    accented: выдвига́ть
+    forms:
+      - выдвига́ют
+    en_gb:
+      standard: "to bring forward (to push something to the fore)"
+  "выражена=is expressed":
+    cefr_level: B1
+    learn: false
+    accented: вы́ражена
+    en_gb:
+      standard: "is expressed (short passive participle of вы́разить)"
+  "вытянуться=to stand to attention":
+    cefr_level: B2
+    learn: false
+    accented: вы́тянуться
+    forms:
+      - вы́тянулся
+    en_gb:
+      standard: "to stand to attention (to draw oneself up straight)"
+  "выхолащивать=to emasculate":
+    cefr_level: C1
+    learn: false
+    accented: выхола́щивать
+    forms:
+      - выхола́щивая
+    en_gb:
+      standard: "to emasculate (to strip something of its substance)"
+  "гимназист=schoolboy":
+    cefr_level: B2
+    learn: false
+    accented: гимнази́ст
+    en_gb:
+      standard: "schoolboy (a pupil at a гимна́зия)"
+  "гимназия=grammar school":
+    cefr_level: B2
+    learn: false
+    accented: гимна́зия
+    forms:
+      - гимна́зии
+    en_gb:
+      standard: "grammar school (the old academic secondary school)"
   "голубчик=dear fellow":
     cefr_level: B2
     learn: false
     accented: голу́бчик
     en_gb:
       standard: "dear fellow (affectionate address)"
+  "господство=rule":
+    cefr_level: B2
+    learn: false
+    accented: госпо́дство
+    forms:
+      - госпо́дства
+    en_gb:
+      standard: "rule (domination of one class or power over others)"
+  "господствующий=ruling":
+    cefr_level: B2
+    learn: false
+    accented: госпо́дствующий
+    forms:
+      - госпо́дствующим
+    en_gb:
+      standard: "ruling (dominant, prevailing)"
+  "грабительский=predatory":
+    cefr_level: C1
+    learn: false
+    accented: граби́тельский
+    forms:
+      - граби́тельской
+    en_gb:
+      standard: "predatory (waged for plunder)"
+  "гуща=grounds":
+    cefr_level: B2
+    learn: false
+    accented: гу́ща
+    forms:
+      - гу́щей
+    en_gb:
+      standard: "grounds (the thick sediment left by coffee)"
+  "демократ=democrat":
+    cefr_level: B2
+    learn: false
+    accented: демокра́т
+    forms:
+      - демокра́ты
+    en_gb:
+      standard: "democrat (a supporter of democracy)"
+  "департамент=department":
+    cefr_level: B2
+    learn: false
+    accented: департа́мент
+    forms:
+      - департа́менте
+    en_gb:
+      standard: "department (a division of a ministry)"
+  "доказано=has been proved":
+    cefr_level: B1
+    learn: false
+    accented: дока́зано
+    en_gb:
+      standard: "has been proved (short passive participle of доказа́ть)"
+  "документально=from the record":
+    cefr_level: C1
+    learn: false
+    accented: документа́льно
+    en_gb:
+      standard: "from the record (proved by documents)"
+  "дослужиться=to rise in the ranks":
+    cefr_level: C1
+    learn: false
+    accented: дослужи́ться
+    forms:
+      - дослужи́лся
+    en_gb:
+      standard: "to rise in the ranks (to reach a rank by long service)"
+  "дразнить=to tease":
+    cefr_level: B1
+    learn: false
+    accented: дразни́ть
+    forms:
+      - дразни́ли
+    en_gb:
+      standard: "to tease (to call someone names)"
+  "душонок=little rogue":
+    cefr_level: C1
+    learn: false
+    accented: душо́нок
+    en_gb:
+      standard: "little rogue (mocking diminutive of душа́, a small soul)"
+  "жалованье=pay":
+    cefr_level: B2
+    learn: false
+    accented: жа́лованье
+    en_gb:
+      standard: "pay (an official's salary)"
+  "живительный=life-giving":
+    cefr_level: C1
+    learn: false
+    accented: живи́тельный
+    forms:
+      - живи́тельной
+    en_gb:
+      standard: "life-giving (reviving, restoring)"
+  "запуталось=became entangled":
+    cefr_level: B2
+    learn: false
+    accented: запу́талось
+    en_gb:
+      standard: "became entangled (got hopelessly caught up in something)"
+  "затушёвываться=to be glossed over":
+    cefr_level: C1
+    learn: false
+    accented: затушёвываться
+    forms:
+      - затушёвывается
+    en_gb:
+      standard: "to be glossed over (to be blurred out of sight)"
+  "захихикать=to giggle":
+    cefr_level: B2
+    learn: false
+    accented: захихи́кать
+    forms:
+      - захихи́кал
+    en_gb:
+      standard: "to giggle (to break into a titter)"
+  "захлестнуть=to wash over":
+    cefr_level: B2
+    learn: false
+    accented: захлестну́ть
+    forms:
+      - захлестну́ла
+    en_gb:
+      standard: "to wash over (of a wave breaking over something)"
   "захлопнуть=snap shut":
     cefr_level: B2
     learn: false
     accented: захло́пнуть
     en_gb:
       standard: "snap shut (a trap or net)"
+  "злоба=rage":
+    cefr_level: B2
+    learn: false
+    accented: зло́ба
+    forms:
+      - зло́бой
+    en_gb:
+      standard: "rage (spiteful fury)"
+  "идеолог=ideologist":
+    cefr_level: C1
+    learn: false
+    accented: идео́лог
+    forms:
+      - идео́логи
+    en_gb:
+      standard: "ideologist (a spokesman for a class's ideas)"
+  "идущий=running":
+    cefr_level: B2
+    learn: false
+    accented: иду́щий
+    forms:
+      - иду́щее
+    en_gb:
+      standard: "running (going, proceeding along a line)"
+  "избавиться=to be rid":
+    cefr_level: B2
+    learn: false
+    accented: изба́виться
+    en_gb:
+      standard: "to be rid (to free oneself of something)"
+  "извне=from outside":
+    cefr_level: C1
+    learn: false
+    accented: извне́
+    en_gb:
+      standard: "from outside (imposed from without)"
+  "извратить=to distort":
+    cefr_level: C1
+    learn: false
+    accented: изврати́ть
+    forms:
+      - изврати́л
+    en_gb:
+      standard: "to distort (to twist a meaning out of shape)"
+  "извращение=distortion":
+    cefr_level: C1
+    learn: false
+    accented: извраще́ние
+    en_gb:
+      standard: "distortion (a perversion of the original sense)"
+  "изложение=exposition":
+    cefr_level: B2
+    learn: false
+    accented: изложе́ние
+    forms:
+      - изложе́нии
+    en_gb:
+      standard: "exposition (an account set out in writing)"
+  "изумиться=to be amazed":
+    cefr_level: B2
+    learn: false
+    accented: изуми́ться
+    forms:
+      - изуми́лся
+    en_gb:
+      standard: "to be amazed (to be struck with astonishment)"
+  "искажать=to distort":
+    cefr_level: B2
+    learn: false
+    accented: искажа́ть
+    forms:
+      - искажа́ют
+    en_gb:
+      standard: "to distort (to misrepresent something)"
+  "искажение=distortion":
+    cefr_level: B2
+    learn: false
+    accented: искаже́ние
+    forms:
+      - искаже́ний
+    en_gb:
+      standard: "distortion (a misrepresentation)"
+  "искривиться=to contort":
+    cefr_level: C1
+    learn: false
+    accented: искриви́ться
+    forms:
+      - искриви́лось
+    en_gb:
+      standard: "to contort (to twist out of shape)"
+  "истребление=stamping out":
+    cefr_level: C1
+    learn: false
+    accented: истребле́ние
+    forms:
+      - истребле́нию
+    en_gb:
+      standard: "stamping out (extermination)"
+  "казённый=state-issued":
+    cefr_level: C1
+    learn: false
+    accented: казённый
+    forms:
+      - казённую
+    en_gb:
+      standard: "state-issued (belonging to the treasury or the school)"
+  "канонизировать=to canonize":
+    cefr_level: C1
+    learn: false
+    accented: канонизи́ровать
+    en_gb:
+      standard: "to canonize (to turn someone into a harmless saint)"
+  "картонка=hatbox":
+    cefr_level: B2
+    learn: false
+    accented: карто́нка
+    forms:
+      - карто́нки
+      - карто́нками
+    en_gb:
+      standard: "hatbox (a cardboard travelling box)"
+  "каутскианский=Kautskyite":
+    cefr_level: C1
+    learn: false
+    accented: каутскиа́нский
+    forms:
+      - каутскиа́нское
+    en_gb:
+      standard: "Kautskyite (of Kautsky's reading of Marx)"
+  "каутскианство=Kautskyism":
+    cefr_level: C1
+    learn: false
+    accented: каутскиа́нство
+    forms:
+      - каутскиа́нством
+    en_gb:
+      standard: "Kautskyism (Kautsky's reading of Marx)"
+  "кислота=sourness":
+    cefr_level: B2
+    learn: false
+    accented: кислота́
+    forms:
+      - кислоты́
+    en_gb:
+      standard: "sourness (a sour expression; also acid)"
+  "классовый=class":
+    cefr_level: B2
+    learn: false
+    accented: кла́ссовый
+    forms:
+      - кла́ссовая
+      - кла́ссовые
+      - кла́ссовых
+      - кла́ссового
+    en_gb:
+      standard: "class (belonging to the struggle between social classes)"
+  "клевета=slander":
+    cefr_level: B2
+    learn: false
+    accented: клевета́
+    forms:
+      - клеветы́
+    en_gb:
+      standard: "slander (malicious lies about someone)"
+  "кое-как=somehow":
+    cefr_level: B1
+    learn: false
+    accented: кое-ка́к
+    en_gb:
+      standard: "somehow (any old how, just about managing)"
+  "коллежский=collegiate":
+    cefr_level: C1
+    learn: false
+    accented: колле́жский
+    forms:
+      - колле́жским
+    en_gb:
+      standard: "collegiate (of the imperial civil-service ranks)"
+  "конкретно-исторический=concrete historical":
+    cefr_level: C1
+    learn: false
+    accented: конкре́тно-истори́ческий
+    forms:
+      - конкре́тно-истори́ческого
+    en_gb:
+      standard: "concrete historical (grounded in the actual history of a case)"
+  "коренному=fundamental":
+    cefr_level: B2
+    learn: false
+    accented: коренно́му
+    en_gb:
+      standard: "fundamental (dative of коренно́й: going to the root of the matter)"
+  "кофейный=coffee":
+    cefr_level: B1
+    learn: false
+    accented: кофе́йный
+    forms:
+      - кофе́йной
+    en_gb:
+      standard: "coffee (made of or belonging to coffee)"
+  "красавец=handsome man":
+    cefr_level: B1
+    learn: false
+    accented: краса́вец
+    en_gb:
+      standard: "handsome man (a fine-looking fellow)"
+  "кум=friend":
+    cefr_level: C1
+    learn: false
+    accented: кум
+    en_gb:
+      standard: "friend (godfather of one's child, used as a familiar address)"
+  "кумушка=my dear":
+    cefr_level: C1
+    learn: false
+    accented: ку́мушка
+    en_gb:
+      standard: "my dear (teasing address to a woman; godmother of one's child)"
+  "лобызание=kissing":
+    cefr_level: C1
+    learn: false
+    accented: лобыза́ние
+    forms:
+      - лобыза́ния
+    en_gb:
+      standard: "kissing (archaic, solemn word for an embrace and kiss)"
+  "лосниться=to glisten":
+    cefr_level: C1
+    learn: false
+    accented: лосни́ться
+    forms:
+      - лосни́лись
+    en_gb:
+      standard: "to glisten (to shine with grease)"
+  "ль=whether":
+    cefr_level: B2
+    learn: false
+    accented: ль
+    en_gb:
+      standard: "whether (shortened form of the question particle ли)"
+  "лютеранка=Lutheran woman":
+    cefr_level: B2
+    learn: false
+    accented: лютера́нка
+    en_gb:
+      standard: "Lutheran woman (a woman of the Lutheran church)"
+  "марксизм=Marxism":
+    cefr_level: B2
+    learn: false
+    accented: маркси́зм
+    forms:
+      - маркси́зма
+    en_gb:
+      standard: "Marxism (the teaching of Karl Marx)"
+  "марксист=Marxist":
+    cefr_level: B2
+    learn: false
+    accented: маркси́ст
+    forms:
+      - маркси́сты
+    en_gb:
+      standard: "Marxist (a follower of Marx)"
+  "мелкобуржуазный=petty-bourgeois":
+    cefr_level: C1
+    learn: false
+    accented: мелкобуржуа́зный
+    forms:
+      - мелкобуржуа́зная
+      - мелкобуржуа́зной
+      - мелкобуржуа́зные
+      - мелкобуржуа́зных
+    en_gb:
+      standard: "petty-bourgeois (of the small property-owning class)"
+  "меньшевик=Menshevik":
+    cefr_level: B2
+    learn: false
+    accented: меньшеви́к
+    forms:
+      - меньшевики́
+    en_gb:
+      standard: "Menshevik (member of the wing of the party opposed to the Bolsheviks)"
+  "мещанский=philistine":
+    cefr_level: C1
+    learn: false
+    accented: меща́нский
+    forms:
+      - меща́нских
+      - меща́нской
+    en_gb:
+      standard: "philistine (narrow, small-town in outlook)"
+  "милостивый=gracious":
+    cefr_level: C1
+    learn: false
+    accented: ми́лостивый
+    forms:
+      - ми́лостивое
+    en_gb:
+      standard: "gracious (kindly condescending)"
+  "многочисленность=sheer number":
+    cefr_level: C1
+    learn: false
+    accented: многочи́сленность
+    forms:
+      - многочи́сленности
+    en_gb:
+      standard: "sheer number (how numerous something is)"
+  "мундир=uniform":
+    cefr_level: B2
+    learn: false
+    accented: мунди́р
+    forms:
+      - мунди́ра
+    en_gb:
+      standard: "uniform (a dress uniform coat)"
+  "мурава=meadow grass":
+    cefr_level: C1
+    learn: false
+    accented: мурава́
+    forms:
+      - мурава́х
+    en_gb:
+      standard: "meadow grass (poetic word for soft young grass)"
+  "мыслитель=thinker":
+    cefr_level: B2
+    learn: false
+    accented: мысли́тель
+    forms:
+      - мысли́телей
+    en_gb:
+      standard: "thinker (someone whose work is ideas)"
+  "навьючить=to load up":
+    cefr_level: C1
+    learn: false
+    accented: навью́чить
+    forms:
+      - навью́чен
+    en_gb:
+      standard: "to load up (to pile baggage on someone like a pack animal)"
+  "навязанный=imposed":
+    cefr_level: B2
+    learn: false
+    accented: навя́занный
+    forms:
+      - навя́занной
+    en_gb:
+      standard: "imposed (forced on someone from outside)"
+  "наглядно=plainly":
+    cefr_level: B2
+    learn: false
+    accented: нагля́дно
+    en_gb:
+      standard: "plainly (so that it can be seen for oneself)"
+  "наглядный=clear":
+    cefr_level: B2
+    learn: false
+    accented: нагля́дный
+    forms:
+      - нагля́дных
+    en_gb:
+      standard: "clear (obvious at a glance)"
   "напиться=to get a drink":
     cefr_level: B1
     learn: false
     accented: напи́ться
     en_gb:
       standard: "to get a drink (drink one's fill)"
+  "насильственный=violent":
+    cefr_level: B2
+    learn: false
+    accented: наси́льственный
+    forms:
+      - наси́льственной
+    en_gb:
+      standard: "violent (carried through by force)"
   "настает=is coming":
     cefr_level: B2
     learn: false
     accented: настаёт
     en_gb:
       standard: "is coming (of a time or event)"
+  "национально-немецкий=national-German":
+    cefr_level: C1
+    learn: false
+    accented: национа́льно-неме́цкий
+    forms:
+      - национа́льно-неме́цком
+    en_gb:
+      standard: "national-German (German in a nationalist sense)"
+  "немедленный=immediate":
+    cefr_level: B2
+    learn: false
+    accented: неме́дленный
+    forms:
+      - неме́дленного
+    en_gb:
+      standard: "immediate (admitting of no delay)"
+  "неполный=incomplete":
+    cefr_level: B1
+    learn: false
+    accented: непо́лный
+    forms:
+      - непо́лны
+    en_gb:
+      standard: "incomplete (with parts missing)"
+  "непримиримость=irreconcilability":
+    cefr_level: C1
+    learn: false
+    accented: непримири́мость
+    forms:
+      - непримири́мости
+    en_gb:
+      standard: "irreconcilability (the impossibility of reconciling two sides)"
+  "непримиримый=irreconcilable":
+    cefr_level: C1
+    learn: false
+    accented: непримири́мый
+    forms:
+      - непримири́мые
+      - непримири́мы
+    en_gb:
+      standard: "irreconcilable (impossible to reconcile)"
+  "неразрешимый=insoluble":
+    cefr_level: C1
+    learn: false
+    accented: неразреши́мый
+    forms:
+      - неразреши́мое
+    en_gb:
+      standard: "insoluble (that cannot be resolved)"
+  "неслыханный=unheard-of":
+    cefr_level: B2
+    learn: false
+    accented: неслы́ханный
+    forms:
+      - неслы́ханной
+    en_gb:
+      standard: "unheard-of (without precedent)"
+  "неудовлетворительно=unsatisfactorily":
+    cefr_level: B2
+    learn: false
+    accented: неудовлетвори́тельно
+    en_gb:
+      standard: "unsatisfactorily (badly, not good enough)"
+  "никоим=in no":
+    cefr_level: C1
+    learn: false
+    accented: нико́им
+    en_gb:
+      standard: "in no (нико́им о́бразом — by no means)"
+  "николаевский=Nikolaevsky":
+    cefr_level: C1
+    learn: false
+    accented: никола́евский
+    forms:
+      - никола́евской
+    en_gb:
+      standard: "Nikolaevsky (of the Petersburg–Moscow railway named after Nicholas I)"
+  "нисколько=not in the least":
+    cefr_level: B1
+    learn: false
+    accented: ниско́лько
+    en_gb:
+      standard: "not in the least (not at all)"
+  "нравственный=moral":
+    cefr_level: B2
+    learn: false
+    accented: нра́вственный
+    forms:
+      - нра́вственной
+    en_gb:
+      standard: "moral (to do with right and wrong)"
+  "нюхать=to sniff":
+    cefr_level: B1
+    learn: false
+    accented: ню́хать
+    forms:
+      - ню́хал
+    en_gb:
+      standard: "to sniff (to smell something repeatedly)"
+  "облобызаться=to kiss":
+    cefr_level: C1
+    learn: false
+    accented: облобыза́ться
+    forms:
+      - облобыза́лись
+    en_gb:
+      standard: "to kiss (archaic, mock-solemn word for kissing in greeting)"
+  "обогреть=to keep warm":
+    cefr_level: B2
+    learn: false
+    accented: обогре́ть
+    forms:
+      - обогре́й
+    en_gb:
+      standard: "to keep warm (to warm someone through)"
+  "обработка=reworking":
+    cefr_level: B2
+    learn: false
+    accented: обрабо́тка
+    forms:
+      - обрабо́тке
+    en_gb:
+      standard: "reworking (the treatment something is given)"
+  "объективно=objectively":
+    cefr_level: B2
+    learn: false
+    accented: объекти́вно
+    en_gb:
+      standard: "objectively (as a matter of fact, whatever anyone wishes)"
+  "одурачение=duping":
+    cefr_level: C1
+    learn: false
+    accented: одураче́ние
+    forms:
+      - одураче́ния
+    en_gb:
+      standard: "duping (making a fool of someone)"
+  "окаменеть=to turn to stone":
+    cefr_level: B2
+    learn: false
+    accented: окамене́ть
+    forms:
+      - окамене́л
+    en_gb:
+      standard: "to turn to stone (to freeze with shock)"
+  "опошлять=to vulgarize":
+    cefr_level: C1
+    learn: false
+    accented: опошля́ть
+    forms:
+      - опошля́я
+    en_gb:
+      standard: "to vulgarize (to make something banal)"
+  "оппортунист=opportunist":
+    cefr_level: C1
+    learn: false
+    accented: оппортуни́ст
+    forms:
+      - оппортуни́сты
+    en_gb:
+      standard: "opportunist (someone who trims principle to advantage)"
+  "определённость=precision":
+    cefr_level: C1
+    learn: false
+    accented: определённость
+    forms:
+      - определённостью
+    en_gb:
+      standard: "precision (definiteness, leaving nothing vague)"
+  "организованный=organized":
+    cefr_level: B1
+    learn: false
+    accented: организо́ванный
+    forms:
+      - организо́ванные
+    en_gb:
+      standard: "organized (put in order, set up)"
+  "оригинал=original":
+    cefr_level: B2
+    learn: false
+    accented: оригина́л
+    forms:
+      - оригина́лов
+    en_gb:
+      standard: "original (the text as first written)"
+  "освобождение=liberation":
+    cefr_level: B1
+    learn: false
+    accented: освобожде́ние
+    en_gb:
+      standard: "liberation (being set free)"
+  "основоположник=founder":
+    cefr_level: C1
+    learn: false
+    accented: основополо́жник
+    forms:
+      - основополо́жников
+    en_gb:
+      standard: "founder (the person a body of thought begins with)"
+  "остриё=edge":
+    cefr_level: B2
+    learn: false
+    accented: остриё
+    en_gb:
+      standard: "edge (the cutting edge or point of something)"
+  "отнимать=to take away":
+    cefr_level: B1
+    learn: false
+    accented: отнима́ть
+    en_gb:
+      standard: "to take away (to deprive someone of something)"
+  "отрицаться=to be denied":
+    cefr_level: B2
+    learn: false
+    accented: отрица́ться
+    forms:
+      - отрица́ется
+    en_gb:
+      standard: "to be denied (to be rejected as untrue)"
+  "оттирать=to push aside":
+    cefr_level: C1
+    learn: false
+    accented: оттира́ть
+    forms:
+      - оттира́ют
+    en_gb:
+      standard: "to push aside (to elbow something out of the way)"
+  "отчуждающий=alienating":
+    cefr_level: C1
+    learn: false
+    accented: отчужда́ющий
+    forms:
+      - отчужда́ющая
+    en_gb:
+      standard: "alienating (making something ever more foreign)"
+  "отчуждение=alienation":
+    cefr_level: C1
+    learn: false
+    accented: отчужде́ние
+    en_gb:
+      standard: "alienation (the state of being made foreign to something)"
+  "охнуть=to gasp":
+    cefr_level: B2
+    learn: false
+    accented: о́хнуть
+    forms:
+      - о́хнул
+    en_gb:
+      standard: "to gasp (to cry out in pain or surprise)"
+  "ошеломить=to stun":
+    cefr_level: B2
+    learn: false
+    accented: ошеломи́ть
+    forms:
+      - ошеломлены́
+    en_gb:
+      standard: "to stun (to leave someone dumbfounded)"
+  "папироска=cigarette":
+    cefr_level: B2
+    learn: false
+    accented: папиро́ска
+    forms:
+      - папиро́ской
+    en_gb:
+      standard: "cigarette (affectionate form of папиро́са)"
+  "переведён=has been transferred":
+    cefr_level: B1
+    learn: false
+    accented: переведён
+    en_gb:
+      standard: "has been transferred (short passive participle of перевести́: moved to another post)"
+  "по-видимому=apparently":
+    cefr_level: B2
+    learn: false
+    accented: по-ви́димому
+    en_gb:
+      standard: "apparently (to all appearances)"
+  "побледнеть=to turn pale":
+    cefr_level: B1
+    learn: false
+    accented: побледне́ть
+    forms:
+      - побледне́л
+    en_gb:
+      standard: "to turn pale (to lose colour from fright)"
+  "подводить=to sum up":
+    cefr_level: B2
+    learn: false
+    accented: подводи́ть
+    forms:
+      - подводя́
+    en_gb:
+      standard: "to sum up (подводи́ть ито́ги — to draw conclusions)"
+  "подползти=to creep up":
+    cefr_level: B2
+    learn: false
+    accented: подползти́
+    forms:
+      - подпо́лз
+    en_gb:
+      standard: "to creep up (to crawl close to something)"
+  "подправлять=to touch up":
+    cefr_level: B2
+    learn: false
+    accented: подправля́ть
+    forms:
+      - подправля́ют
+    en_gb:
+      standard: "to touch up (to correct something slightly)"
+  "подёрнутый=filmed over":
+    cefr_level: C1
+    learn: false
+    accented: подёрнутый
+    forms:
+      - подёрнутые
+    en_gb:
+      standard: "filmed over (covered with a thin layer)"
+  "пожрать=to devour":
+    cefr_level: C1
+    learn: false
+    accented: пожра́ть
+    forms:
+      - пожра́ли
+    en_gb:
+      standard: "to devour (to eat up, said with contempt)"
+  "показано=has been shown":
+    cefr_level: A2
+    learn: false
+    accented: пока́зано
+    en_gb:
+      standard: "has been shown (short passive participle of показа́ть)"
+  "полнейший=complete":
+    cefr_level: B2
+    learn: false
+    accented: полне́йший
+    forms:
+      - полне́йшей
+    en_gb:
+      standard: "complete (superlative of по́лный)"
+  "помертветь=to go lifeless":
+    cefr_level: C1
+    learn: false
+    accented: помертве́ть
+    forms:
+      - помертве́ло
+    en_gb:
+      standard: "to go lifeless (to become deathly still)"
+  "помиловать=to have mercy":
+    cefr_level: B2
+    learn: false
+    accented: поми́ловать
+    forms:
+      - поми́луйте
+    en_gb:
+      standard: "to have mercy (поми́луйте — good gracious, spare me)"
+  "поморщиться=to wince":
+    cefr_level: B2
+    learn: false
+    accented: помо́рщиться
+    forms:
+      - помо́рщился
+      - помо́рщились
+    en_gb:
+      standard: "to wince (to wrinkle up with distaste)"
+  "поплясать=to dance":
+    cefr_level: B2
+    learn: false
+    accented: попляса́ть
+    forms:
+      - попляши́
+    en_gb:
+      standard: "to dance (to have a dance, folk style)"
+  "популярность=accessibility":
+    cefr_level: B2
+    learn: false
+    accented: популя́рность
+    forms:
+      - популя́рности
+    en_gb:
+      standard: "accessibility (being easy for a wide readership; also popularity)"
+  "портсигар=cigarette case":
+    cefr_level: B2
+    learn: false
+    accented: портсига́р
+    forms:
+      - портсига́ры
+    en_gb:
+      standard: "cigarette case (a flat case for papirosas)"
+  "посодействовать=to help":
+    cefr_level: C1
+    learn: false
+    accented: посоде́йствовать
+    forms:
+      - посоде́йствуют
+    en_gb:
+      standard: "to help (to do something towards a result)"
+  "постольку=insofar":
+    cefr_level: C1
+    learn: false
+    accented: посто́льку
+    en_gb:
+      standard: "insofar (посто́льку, поско́льку — to the extent that)"
   "потопила=drowned":
     cefr_level: B1
     learn: false
     accented: потопи́ла
     en_gb:
       standard: "drowned (caused to sink)"
-  "пропела=sang away":
+  "почти-социалистический=almost socialist":
+    cefr_level: C1
+    learn: false
+    accented: почти́-социалисти́ческий
+    forms:
+      - почти́-социалисти́ческой
+    en_gb:
+      standard: "almost socialist (socialist-sounding but not socialist)"
+  "почтительный=deferential":
     cefr_level: B2
+    learn: false
+    accented: почти́тельный
+    forms:
+      - почти́тельной
+    en_gb:
+      standard: "deferential (respectfully submissive)"
+  "превосходительство=excellency":
+    cefr_level: C1
+    learn: false
+    accented: превосходи́тельство
+    forms:
+      - превосходи́тельства
+    en_gb:
+      standard: "excellency (the address due to a senior official)"
+  "превратить=to turn into":
+    cefr_level: B1
+    learn: false
+    accented: преврати́ть
+    en_gb:
+      standard: "to turn into (to make one thing become another)"
+  "предоставить=to grant":
+    cefr_level: B1
+    learn: false
+    accented: предоста́вить
+    en_gb:
+      standard: "to grant (to let someone have something)"
+  "преследование=persecution":
+    cefr_level: B2
+    learn: false
+    accented: пресле́дование
+    forms:
+      - пресле́дованиями
+    en_gb:
+      standard: "persecution (relentless hounding)"
+  "приватно=privately":
+    cefr_level: C1
+    learn: false
+    accented: прива́тно
+    en_gb:
+      standard: "privately (on the side, outside one's service)"
+  "приведение=quoting":
+    cefr_level: C1
+    learn: false
+    accented: приведе́ние
+    en_gb:
+      standard: "quoting (the bringing in of quotations or evidence)"
+  "приведены=are quoted":
+    cefr_level: B1
+    learn: false
+    accented: приведены́
+    en_gb:
+      standard: "are quoted (short passive participle of привести́, to bring in)"
+  "приемлемый=acceptable":
+    cefr_level: B2
+    learn: false
+    accented: прие́млемый
+    forms:
+      - прие́млемо
+      - прие́млемым
+    en_gb:
+      standard: "acceptable (tolerable, that can be lived with)"
+  "примирение=reconciliation":
+    cefr_level: B2
+    learn: false
+    accented: примире́ние
+    forms:
+      - примире́ния
+    en_gb:
+      standard: "reconciliation (the settling of a conflict)"
+  "примирить=to reconcile":
+    cefr_level: B2
+    learn: false
+    accented: примири́ть
+    forms:
+      - примирены́
+      - примирён
+    en_gb:
+      standard: "to reconcile (to bring two sides to terms)"
+  "примирять=to reconcile":
+    cefr_level: B2
+    learn: false
+    accented: примиря́ть
+    forms:
+      - примиря́ет
+    en_gb:
+      standard: "to reconcile (to keep bringing two sides to terms)"
+  "притом=and at that":
+    cefr_level: B2
+    learn: false
+    accented: прито́м
+    en_gb:
+      standard: "and at that (moreover, in addition)"
+  "притуплять=to blunt":
+    cefr_level: C1
+    learn: false
+    accented: притупля́ть
+    forms:
+      - притупля́я
+    en_gb:
+      standard: "to blunt (to take the edge off something)"
+  "прищуренный=screwed up":
+    cefr_level: B2
+    learn: false
+    accented: прищу́ренный
+    forms:
+      - прищу́ренным
+    en_gb:
+      standard: "screwed up (of an eye narrowed to a squint)"
+  "приятно-с=a pleasure, sir":
+    cefr_level: C1
+    learn: false
+    accented: прия́тно-с
+    en_gb:
+      standard: "a pleasure, sir (прия́тно with the servile -с)"
+  "пробавляться=to scrape by":
+    cefr_level: C1
+    learn: false
+    accented: пробавля́ться
+    forms:
+      - пробавля́емся
+    en_gb:
+      standard: "to scrape by (to get along on very little)"
+  "проглотить=to swallow":
+    cefr_level: B1
+    learn: false
+    accented: проглоти́ть
+    forms:
+      - проглоти́т
+    en_gb:
+      standard: "to swallow (to get something down)"
+  "прожечь=to burn a hole":
+    cefr_level: B2
+    learn: false
+    accented: проже́чь
+    forms:
+      - прожёг
+    en_gb:
+      standard: "to burn a hole (to scorch right through something)"
+  "происшедший=arisen":
+    cefr_level: C1
+    learn: false
+    accented: происше́дший
+    forms:
+      - происше́дшая
+    en_gb:
+      standard: "arisen (having come out of something)"
+  "прокорми=feed me":
+    cefr_level: B2
+    learn: false
+    accented: прокорми́
+    en_gb:
+      standard: "feed me (imperative of прокорми́ть, to keep someone fed)"
+  "пропела=sang away":
+    cefr_level: B1
     learn: false
     accented: пропе́ла
     en_gb:
-      standard: "sang away (spent a time singing)"
+      standard: "sang away (spent the whole time singing)"
+  "пропитать=to steep":
+    cefr_level: C1
+    learn: false
+    accented: пропита́ть
+    forms:
+      - пропи́таны
+    en_gb:
+      standard: "to steep (to soak something through)"
+  "прославлять=to glorify":
+    cefr_level: B2
+    learn: false
+    accented: прославля́ть
+    forms:
+      - прославля́ют
+    en_gb:
+      standard: "to glorify (to sing something's praises)"
+  "противоположность=opposite":
+    cefr_level: B2
+    learn: false
+    accented: противополо́жность
+    forms:
+      - противополо́жности
+    en_gb:
+      standard: "opposite (a contrary side or quality)"
+  "противоречивый=conflicting":
+    cefr_level: B2
+    learn: false
+    accented: противоречи́вый
+    forms:
+      - противоречи́выми
+    en_gb:
+      standard: "conflicting (at odds with one another)"
+  "противоречия=antagonisms":
+    cefr_level: B2
+    learn: false
+    accented: противоре́чия
+    forms:
+      - противоре́чий
+    en_gb:
+      standard: "antagonisms (plural of противоре́чие, a contradiction between two sides)"
+  "прощанье=parting":
+    cefr_level: B1
+    learn: false
+    accented: проща́нье
+    en_gb:
+      standard: "parting (на проща́нье — in farewell)"
+  "публицист=publicist":
+    cefr_level: C1
+    learn: false
+    accented: публици́ст
+    forms:
+      - публици́стов
+    en_gb:
+      standard: "publicist (a writer on public affairs)"
+  "пуговка=little button":
+    cefr_level: B1
+    learn: false
+    accented: пу́говка
+    forms:
+      - пу́говки
+    en_gb:
+      standard: "little button (affectionate form of пу́говица)"
+  "расколоться=to split":
+    cefr_level: B2
+    learn: false
+    accented: расколо́ться
+    forms:
+      - расколо́лось
+    en_gb:
+      standard: "to split (to break into opposing parts)"
+  "распространённость=prevalence":
+    cefr_level: C1
+    learn: false
+    accented: распространённость
+    forms:
+      - распространённости
+    en_gb:
+      standard: "prevalence (how widespread something is)"
+  "распространённый=widely read":
+    cefr_level: B1
+    learn: false
+    accented: распространённый
+    forms:
+      - распространённого
+    en_gb:
+      standard: "widely read (widespread, common)"
   "расставил=set out":
     cefr_level: B2
     learn: false
     accented: расста́вил
     en_gb:
       standard: "set out (a net or trap)"
+  "революционер=revolutionary":
+    cefr_level: B2
+    learn: false
+    accented: революционе́р
+    forms:
+      - революционе́ров
+    en_gb:
+      standard: "revolutionary (someone who makes revolutions)"
+  "революционный=revolutionary":
+    cefr_level: B2
+    learn: false
+    accented: революцио́нный
+    forms:
+      - революцио́нное
+      - революцио́нного
+      - революцио́нную
+      - революцио́нных
+    en_gb:
+      standard: "revolutionary (belonging to revolution)"
+  "резвость=frolicking":
+    cefr_level: C1
+    learn: false
+    accented: ре́звость
+    en_gb:
+      standard: "frolicking (playful liveliness)"
+  "резолюция=resolution":
+    cefr_level: B2
+    learn: false
+    accented: резолю́ция
+    forms:
+      - резолю́ции
+    en_gb:
+      standard: "resolution (a formal decision of a meeting)"
+  "самостоятельный=independent":
+    cefr_level: B1
+    learn: false
+    accented: самостоя́тельный
+    forms:
+      - самостоя́тельное
+    en_gb:
+      standard: "independent (formed on one's own)"
+  "свержение=overthrow":
+    cefr_level: C1
+    learn: false
+    accented: сверже́ние
+    en_gb:
+      standard: "overthrow (the bringing down of a power)"
+  "сгорбиться=to hunch":
+    cefr_level: B2
+    learn: false
+    accented: сго́рбиться
+    forms:
+      - сго́рбился
+    en_gb:
+      standard: "to hunch (to bend one's back over)"
+  "скатиться=to slide":
+    cefr_level: B2
+    learn: false
+    accented: скати́ться
+    forms:
+      - скати́лись
+    en_gb:
+      standard: "to slide (to slip down into something worse)"
+  "сладость=sweetness":
+    cefr_level: B2
+    learn: false
+    accented: сла́дость
+    forms:
+      - сла́дости
+    en_gb:
+      standard: "sweetness (cloying sweetness of manner)"
+  "собою=itself":
+    cefr_level: B2
+    learn: false
+    accented: собо́ю
+    en_gb:
+      standard: "itself (older form of собо́й)"
+  "совокупность=whole body":
+    cefr_level: C1
+    learn: false
+    accented: совоку́пность
+    forms:
+      - совоку́пности
+    en_gb:
+      standard: "whole body (the sum total taken together)"
+  "создан=was created":
+    cefr_level: A2
+    learn: false
+    accented: со́здан
+    en_gb:
+      standard: "was created (short passive participle of созда́ть)"
+  "социал-шовинист=social-chauvinist":
+    cefr_level: C1
+    learn: false
+    accented: социа́л-шовини́ст
+    forms:
+      - социа́л-шовини́сты
+    en_gb:
+      standard: "social-chauvinist (a socialist who backed his own country's war)"
+  "социалист=socialist":
+    cefr_level: B1
+    learn: false
+    accented: социали́ст
+    forms:
+      - социали́сты
+    en_gb:
+      standard: "socialist (a supporter of socialism)"
+  "социалисты-революционеры=Socialist Revolutionaries":
+    cefr_level: C1
+    learn: false
+    accented: социали́сты-революционе́ры
+    en_gb:
+      standard: "Socialist Revolutionaries (the peasant-based party, the эсе́ры)"
+  "спастись=to be saved":
+    cefr_level: B1
+    learn: false
+    accented: спасти́сь
+    forms:
+      - спа́сся
+    en_gb:
+      standard: "to be saved (to escape danger)"
+  "сплошь=everywhere":
+    cefr_level: B2
+    learn: false
+    accented: сплошь
+    en_gb:
+      standard: "everywhere (сплошь и ря́дом — time and again)"
+  "ссылка=reference":
+    cefr_level: B2
+    learn: false
+    accented: ссы́лка
+    forms:
+      - ссы́лках
+    en_gb:
+      standard: "reference (a citation of someone's words)"
+  "ставящий=placing":
+    cefr_level: B2
+    learn: false
+    accented: ста́вящий
+    forms:
+      - ста́вящая
+    en_gb:
+      standard: "placing (putting itself in a position)"
+  "статский=state councillor":
+    cefr_level: C1
+    learn: false
+    accented: ста́тский
+    en_gb:
+      standard: "state councillor (ста́тский сове́тник, a senior civil rank)"
+  "столкновение=conflict":
+    cefr_level: B2
+    learn: false
+    accented: столкнове́ние
+    en_gb:
+      standard: "conflict (a clash between two sides)"
+  "столоначальник=section chief":
+    cefr_level: C1
+    learn: false
+    accented: столонача́льник
+    forms:
+      - столонача́льником
+    en_gb:
+      standard: "section chief (head of a desk in a government office)"
+  "стошнить=to feel sick":
+    cefr_level: B2
+    learn: false
+    accented: стошни́ть
+    forms:
+      - стошни́ло
+    en_gb:
+      standard: "to feel sick (used impersonally: его́ стошни́ло)"
+  "стр=p.":
+    cefr_level: B2
+    learn: false
+    accented: стр
+    en_gb:
+      standard: "p. (страни́ца — page, in a citation)"
+  "ступень=stage":
+    cefr_level: B2
+    learn: false
+    accented: ступе́нь
+    forms:
+      - ступе́ни
+    en_gb:
+      standard: "stage (a step in a development)"
+  "сузиться=to narrow":
+    cefr_level: B2
+    learn: false
+    accented: су́зиться
+    forms:
+      - су́зился
+    en_gb:
+      standard: "to narrow (to grow thinner and smaller)"
+  "сходиться=to agree":
+    cefr_level: B2
+    learn: false
+    accented: сходи́ться
+    forms:
+      - схо́дятся
+    en_gb:
+      standard: "to agree (to come together on something)"
+  "счесть=to count up":
+    cefr_level: B2
+    learn: false
+    accented: счесть
+    forms:
+      - сочла́
+    en_gb:
+      standard: "to count up (to reckon a number of things)"
+  "съёживаться=shrinking":
+    cefr_level: B2
+    learn: false
+    accented: съёживаться
+    forms:
+      - съёживаясь
+    en_gb:
+      standard: "shrinking (cringing smaller and smaller)"
+  "съёжиться=to shrink":
+    cefr_level: B2
+    learn: false
+    accented: съёжиться
+    forms:
+      - съёжился
+      - съёжились
+    en_gb:
+      standard: "to shrink (to huddle up, to cringe)"
+  "теоретически=theoretically":
+    cefr_level: B2
+    learn: false
+    accented: теорети́чески
+    en_gb:
+      standard: "theoretically (in theory, as opposed to in practice)"
+  "тонуть=to drown":
+    cefr_level: B1
+    learn: false
+    accented: тону́ть
+    forms:
+      - то́нет
+    en_gb:
+      standard: "to drown (to be going under)"
+  "троекратно=three times over":
+    cefr_level: C1
+    learn: false
+    accented: троекра́тно
+    en_gb:
+      standard: "three times over (the customary three kisses)"
+  "туловище=body":
+    cefr_level: B2
+    learn: false
+    accented: ту́ловище
+    forms:
+      - ту́ловищем
+    en_gb:
+      standard: "body (the trunk, the body without head or limbs)"
+  "тяжеловесный=ponderous":
+    cefr_level: C1
+    learn: false
+    accented: тяжелове́сный
+    forms:
+      - тяжелове́сным
+    en_gb:
+      standard: "ponderous (heavy going to read)"
+  "угнетатель=oppressor":
+    cefr_level: C1
+    learn: false
+    accented: угнета́тель
+    forms:
+      - угнета́телей
+    en_gb:
+      standard: "oppressor (one who keeps others down)"
+  "угнетающий=oppressing":
+    cefr_level: C1
+    learn: false
+    accented: угнета́ющий
+    forms:
+      - угнета́ющие
+    en_gb:
+      standard: "oppressing (that keeps others down)"
+  "угнетение=oppression":
+    cefr_level: B2
+    learn: false
+    accented: угнете́ние
+    forms:
+      - угнете́ния
+    en_gb:
+      standard: "oppression (the keeping down of one class by another)"
+  "угнетённый=oppressed":
+    cefr_level: B2
+    learn: false
+    accented: угнетённый
+    forms:
+      - угнетённых
+      - угнетённого
+    en_gb:
+      standard: "oppressed (kept down by another class)"
+  "удручить=to weigh down":
+    cefr_level: C1
+    learn: false
+    accented: удручи́ть
+    forms:
+      - удручена́
+    en_gb:
+      standard: "to weigh down (to crush with grief)"
+  "узаконять=to legalize":
+    cefr_level: C1
+    learn: false
+    accented: узаконя́ть
+    forms:
+      - узаконя́ет
+    en_gb:
+      standard: "to legalize (to give something the force of law)"
+  "умерять=to moderate":
+    cefr_level: C1
+    learn: false
+    accented: умеря́ть
+    forms:
+      - умеря́ет
+      - умеря́ла
+      - умеря́я
+    en_gb:
+      standard: "to moderate (to keep something within bounds)"
+  "уничтожение=destruction":
+    cefr_level: B2
+    learn: false
+    accented: уничтоже́ние
+    forms:
+      - уничтоже́ния
+    en_gb:
+      standard: "destruction (the doing away with something)"
+  "упрочивать=to consolidate":
+    cefr_level: C1
+    learn: false
+    accented: упро́чивать
+    forms:
+      - упро́чивает
+    en_gb:
+      standard: "to consolidate (to make something firm and lasting)"
+  "упускаться=to be overlooked":
+    cefr_level: C1
+    learn: false
+    accented: упуска́ться
+    forms:
+      - упуска́ется
+    en_gb:
+      standard: "to be overlooked (to be let slip out of sight)"
+  "урождённая=née":
+    cefr_level: C1
+    learn: false
+    accented: урождённая
+    en_gb:
+      standard: "née (a married woman's maiden name)"
+  "уронить=to drop":
+    cefr_level: B1
+    learn: false
+    accented: урони́ть
+    forms:
+      - урони́л
+    en_gb:
+      standard: "to drop (to let something fall)"
+  "устремить=to fix":
+    cefr_level: C1
+    learn: false
+    accented: устреми́ть
+    forms:
+      - устреми́ли
+    en_gb:
+      standard: "to fix (to direct one's eyes at something)"
+  "уступка=discount":
+    cefr_level: B2
+    learn: false
+    accented: усту́пка
+    en_gb:
+      standard: "discount (a price concession; also a concession in an argument)"
+  "утешение=consolation":
+    cefr_level: B2
+    learn: false
+    accented: утеше́ние
+    forms:
+      - утеше́ния
+    en_gb:
+      standard: "consolation (comfort offered for a loss)"
+  "учение=teaching":
+    cefr_level: B2
+    learn: false
+    accented: уче́ние
+    forms:
+      - уче́нием
+      - уче́ниями
+    en_gb:
+      standard: "teaching (a body of doctrine)"
+  "филистерский=philistine":
+    cefr_level: C1
+    learn: false
+    accented: филисте́рский
+    forms:
+      - филисте́рских
+      - филисте́рской
+    en_gb:
+      standard: "philistine (smugly conventional)"
+  "флёр-д’оранж=orange blossom":
+    cefr_level: C1
+    learn: false
+    accented: флёр-д’ора́нж
+    forms:
+      - флёр-д’ора́нжем
+    en_gb:
+      standard: "orange blossom (a sweet scent worn at weddings)"
+  "фр=Fr.":
+    cefr_level: B2
+    learn: false
+    accented: фр
+    en_gb:
+      standard: "Fr. (Фр. — short for the first name Фри́дрих)"
+  "фразеология=phraseology":
+    cefr_level: C1
+    learn: false
+    accented: фразеоло́гия
+    forms:
+      - фразеоло́гией
+    en_gb:
+      standard: "phraseology (the turns of phrase someone uses)"
+  "фрунт=attention":
+    cefr_level: C1
+    learn: false
+    accented: фрунт
+    en_gb:
+      standard: "attention (old military drill stance; вы́тянуться во фрунт)"
+  "фуражка=peaked cap":
+    cefr_level: B2
+    learn: false
+    accented: фура́жка
+    forms:
+      - фура́жку
+    en_gb:
+      standard: "peaked cap (a uniform or school cap)"
+  "херес=sherry":
+    cefr_level: B2
+    learn: false
+    accented: хе́рес
+    forms:
+      - хе́ресом
+    en_gb:
+      standard: "sherry (the fortified wine)"
+  "хи-хи-с=hee-hee, sir":
+    cefr_level: C1
+    learn: false
+    accented: хи-хи́-с
+    en_gb:
+      standard: "hee-hee, sir (a giggle with the servile -с)"
+  "хи-хи-хи=hee-hee-hee":
+    cefr_level: B2
+    learn: false
+    accented: хи-хи-хи́
+    en_gb:
+      standard: "hee-hee-hee (a thin, ingratiating giggle)"
+  "хо-хо=ho-ho":
+    cefr_level: B2
+    learn: false
+    accented: хо-хо́
+    en_gb:
+      standard: "ho-ho (a hearty laugh)"
+  "хотел-было=was about to":
+    cefr_level: C1
+    learn: false
+    accented: хоте́л-бы́ло
+    en_gb:
+      standard: "was about to (хоте́л with бы́ло: started to, then stopped)"
+  "худенький=slight":
+    cefr_level: B1
+    learn: false
+    accented: ху́денький
+    forms:
+      - ху́денькая
+    en_gb:
+      standard: "slight (affectionate form of худо́й, thin)"
+  "целиком=entirely":
+    cefr_level: B1
+    learn: false
+    accented: целико́м
+    en_gb:
+      standard: "entirely (as a whole, completely)"
+  "чинопочитание=deference to rank":
+    cefr_level: C1
+    learn: false
+    accented: чинопочита́ние
+    en_gb:
+      standard: "deference to rank (grovelling before seniority)"
+  "шаркнуть=to scrape":
+    cefr_level: C1
+    learn: false
+    accented: ша́ркнуть
+    forms:
+      - ша́ркнул
+    en_gb:
+      standard: "to scrape (to scrape one foot in an old-fashioned bow)"
+  "шестого=sixth":
+    cefr_level: A2
+    learn: false
+    accented: шесто́го
+    en_gb:
+      standard: "sixth (genitive of шесто́й)"
+  "широчайший=broadest":
+    cefr_level: B2
+    learn: false
+    accented: широча́йший
+    forms:
+      - широча́йшей
+    en_gb:
+      standard: "broadest (superlative of широ́кий)"
+  "щёголь=dandy":
+    cefr_level: C1
+    learn: false
+    accented: щёголь
+    en_gb:
+      standard: "dandy (a man who dresses to be admired)"
+  "эсер=Socialist Revolutionary":
+    cefr_level: C1
+    learn: false
+    accented: эсе́р
+    forms:
+      - эсе́ры
+    en_gb:
+      standard: "Socialist Revolutionary (member of the эсе́ры party)"
+  "ябедничать=to tell tales":
+    cefr_level: B2
+    learn: false
+    accented: я́бедничать
+    en_gb:
+      standard: "to tell tales (to inform on other people)"
+  "ясность=clarity":
+    cefr_level: B2
+    learn: false
+    accented: я́сность
+    forms:
+      - я́сностью
+    en_gb:
+      standard: "clarity (clearness of statement)"

@@ -218,3 +218,32 @@ test('the Lenin selection downloads and keeps sentence progress and bookmarks', 
   await page.locator('.reader-bookmarks').getByRole('button', { name: /С учением Маркса/ }).click()
   await expect(text).toContainText('С учением Маркса происходит теперь то')
 })
+
+test('tapping a word the curriculum never teaches still explains it', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция' })
+  await selection.locator('summary.library-book-summary').click()
+  await selection.getByRole('button', { name: 'Download' }).click()
+  await selection.getByRole('link', { name: 'Read' }).click()
+
+  const text = page.getByRole('article', { name: 'Russian text' })
+  await expect(text).toContainText('С учением Маркса происходит')
+
+  // A name and a political abstraction: both reader-only entries, and both
+  // returned "No dictionary entry for this form" before #782.
+  await text.locator('[data-reader-word="Маркса"]').first().click()
+  const popup = page.getByRole('dialog', { name: 'Dictionary: Маркса' })
+  await expect(popup).toContainText('Маркс')
+  await expect(popup).toContainText('Marx')
+  await expect(popup).toContainText('Genitive singular')
+  await expect(popup).not.toContainText('No dictionary entry')
+  // Reader-only words are not curriculum, so there is nothing to add to a batch.
+  await expect(popup.getByRole('button', { name: /next batch wishlist/ })).toHaveCount(0)
+
+  await text.locator('[data-reader-word="учением"]').first().click()
+  const teaching = page.getByRole('dialog', { name: 'Dictionary: учением' })
+  await expect(teaching).toContainText('уче́ние')
+  await expect(teaching).toContainText('teaching')
+  await expect(teaching).not.toContainText('glossary')
+})

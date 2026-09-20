@@ -483,6 +483,14 @@ stub when its key is the lemma itself, and recording that in
 `accented`/`forms` entry for each surface form that appears, and **no** full
 declension table.
 
+The literature reader has its own set of these, in **`reader-glosses.yml`**,
+**`reader-nouns.yml`**, **`reader-adverbs.yml`** and **`reader-names.yml`**: the
+words the shipped books use and the curriculum does not teach. They follow the
+same `learn: false` rules but are keyed on the dictionary form with `forms:`
+listing the surface forms the books print, and `npm run check:reader` fails the
+build when a book uses a word none of them explains. See
+[`docs/reader-glosses.md`](../../docs/reader-glosses.md).
+
 The bulk of these live in **[`glossary.yml`](glossary.yml)** — an
 auto-generated, alphabetised bank of gloss-only entries (its own `glossary`
 "part of speech") covering the long tail of example-sentence words. The test
