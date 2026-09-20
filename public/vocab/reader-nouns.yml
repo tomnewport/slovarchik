@@ -143,6 +143,27 @@ words:
       sg_acc: попрыгу́нью
       sg_ins: попрыгу́ньей
       sg_pre: попрыгу́нье
+  "пряха=spinner":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "spinner (a woman who spins thread)"
+    declension:
+      sg_nom: пря́ха
+      sg_gen: пря́хи
+      sg_dat: пря́хе
+      sg_acc: пря́ху
+      sg_ins: пря́хой
+      sg_pre: пря́хе
+      pl_nom: пря́хи
+      pl_gen: прях
+      pl_dat: пря́хам
+      pl_acc: прях
+      pl_ins: пря́хами
+      pl_pre: пря́хах
   "рак=crayfish":
     cefr_level: B1
     learn: false
