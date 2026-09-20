@@ -1,0 +1,45 @@
+{
+  "id": "chorny-foal",
+  "title": "Жеребёнок",
+  "author": "Саша Чёрный",
+  "shelf": "Children’s",
+  "form": "verse",
+  "summary": "A foal sucks at everything it finds, then bolts for the field. Complete poem from Детский остров.",
+  "packVersion": 1,
+  "translationVersion": 1,
+  "source": {
+    "editionId": "Саша Чёрный, Детский остров (1921), Жеребёнок; Wikisource revision 4735748",
+    "url": "https://ru.wikisource.org/w/index.php?oldid=4735748"
+  },
+  "rights": {
+    "original": "Sasha Chorny (died 1932); the poem was published in 1921. Public domain in Russia and in life-plus-70 jurisdictions since 2003, and in the United States as a work published before 1931.",
+    "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+    "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+  },
+  "translationReview": {
+    "method": "Checked all sixteen lines against the pinned source, which prints the poem without ё throughout («Жеребенок», «звездочкой», «Взвизгнет») — kept as transcribed. Divided at the two stanzas’ verse units. The English keeps the internal rhyme of the short paired lines where it can and never at the cost of what the line says."
+  },
+  "sentences": [
+    {
+      "id": "chorny-foal:01",
+      "paragraph": "1",
+      "ru": "Хвост косичкой,\nНожки — спички,\nОттопырил вниз губу…\nВесь пушистый, золотистый,\nС белой звездочкой на лбу.",
+      "en": "Tail like a little plait,\nLegs like matchsticks,\nHis lower lip stuck out…\nAll downy, all golden,\nWith a white star on his forehead.",
+      "review": "checked"
+    },
+    {
+      "id": "chorny-foal:02",
+      "paragraph": "1",
+      "ru": "Юбку, палку,\nКлок мочалки —\nЧто ни видит, все сосет.\nХодит сзади тети Нади,\nЖучку дразнит у ворот.",
+      "en": "A skirt, a stick,\nA wisp of bast —\nWhatever he sees, he sucks at it.\nHe walks behind auntie Nadya,\nAnd teases the dog at the gate.",
+      "review": "checked"
+    },
+    {
+      "id": "chorny-foal:03",
+      "paragraph": "2",
+      "ru": "Выйдет в поле —\nВот раздолье!\nДолго смотрит вдаль и вдруг\nВзвизгнет свинкой,\nВскинет спинкой\nИ галопом к маме в луг.",
+      "en": "He comes out into the field —\nWhat freedom!\nHe gazes into the distance a long while, and suddenly\nSqueals like a piglet,\nKicks up his back\nAnd gallops off to his mother in the meadow.",
+      "review": "checked"
+    }
+  ]
+}

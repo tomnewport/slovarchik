@@ -1,12 +1,24 @@
 # Invariable words from the shipped books; lookup only.
 ---
 words:
+  "вдаль=into the distance":
+    cefr_level: B1
+    learn: false
+    accented: вдаль
+    en_gb:
+      standard: "into the distance (off towards the horizon)"
   "впрок=to good effect":
     cefr_level: C1
     learn: false
     accented: впрок
     en_gb:
       standard: "to good effect (in «не впрок» — it does no good)"
+  "галопом=at a gallop":
+    cefr_level: B2
+    learn: false
+    accented: гало́пом
+    en_gb:
+      standard: "at a gallop (running flat out, of a horse)"
   "ежели=if":
     cefr_level: C1
     learn: false
