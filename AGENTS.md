@@ -119,6 +119,10 @@ src/
                         #     for the Data screen's version check
     settings.js         #   user preferences (not learning progress)
     library.js          #   opt-in book catalog, download and removal
+    reader.js           #   what the reader remembers between visits: each book's place
+                        #     (a sentence id, never a page number) and saved sentences,
+                        #     plus the one set of reading appearance settings. Removing a
+                        #     book forgets its place, rather than leaving rows behind
     reports.js          #   offline-queued issue reports
     keyboard.js         #   shared on-screen keyboard hint state
     hints.js            #   in-phrase word-hint glue + the spoken drill's dictionary (#733)
