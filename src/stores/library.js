@@ -2,6 +2,7 @@ import { reactive } from 'vue'
 import * as idb from '../lib/idb.js'
 import { coalesce } from '../lib/coalesce.js'
 import { sha256, validateCatalog, validatePack } from '../lib/bookPack.js'
+import { forgetBook } from './reader.js'
 
 const BASE = import.meta.env.BASE_URL || '/'
 const catalogUrl = `${BASE}books/catalog.json`
@@ -79,6 +80,9 @@ export async function removeBook(id) {
   library.error = null
   try {
     await idb.deleteBook(id)
+    // The place in the book and the sentences saved out of it go with it: a
+    // removed book must not leave rows behind that nothing will read again.
+    await forgetBook(id)
     delete library.installed[id]
   } catch (error) {
     library.error = error.message
