@@ -2,6 +2,25 @@
   "schemaVersion": 1,
   "books": [
     {
+      "id": "afanasyev-turnip",
+      "title": "Репка",
+      "author": "Народная сказка",
+      "shelf": "Children’s",
+      "summary": "The whole household pulls at one turnip. Complete tale, in Afanasyev’s Archangel variant.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Народные русские сказки (Афанасьев), № 89, Репка (recorded in Arkhangelsk province by A. Kharitonov); Wikisource revision 1136168",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=1136168"
+      },
+      "rights": {
+        "original": "Afanasyev (died 1871); the collection Народные русские сказки was published 1855–63 and is public domain. The tale itself is traditional and anonymous.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; the collection’s editorial footnote about where the tale was recorded is omitted.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "919de848f69d14e9fc1c28c366fb682512d5c83b42a09ff091e3ff383360ce52"
+    },
+    {
       "id": "chekhov-fat-thin",
       "title": "Толстый и тонкий",
       "author": "Антон Чехов",
