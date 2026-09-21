@@ -7,6 +7,7 @@ import * as idb from '../lib/idb.js'
 import { failWrites } from '../test/idbFailure.js'
 import { validateCatalog } from '../lib/bookPack.js'
 import { library, loadBook, loadCatalog, downloadBook, removeBook } from './library.js'
+import { loadBookState, savePosition, toggleBookmark } from './reader.js'
 
 const pack = {
   schemaVersion: 1, id: 'fable', form: 'prose', packVersion: 2, translationVersion: 3,
@@ -42,6 +43,20 @@ describe('optional literature packs', () => {
     expect((await loadBook('fable')).sentences[0].en).toBe('Winter came.')
     await removeBook('fable')
     expect(await loadBook('fable')).toBeNull()
+  })
+
+  it('forgets where the reader was in a book it removes', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, arrayBuffer: async () => bytes.buffer })))
+    await downloadBook(entry)
+    await savePosition('fable', 'fable:p1:1')
+    await toggleBookmark('fable', [], 'fable:p1:1')
+
+    await removeBook('fable')
+
+    // Not merely absent from the reader: gone from storage, so a removed book
+    // leaves no rows that nothing will ever read again.
+    expect(await loadBookState('fable')).toEqual({ positionId: null, bookmarks: [] })
+    expect(await idb.getMeta('reader:bookmarks:fable')).toBeUndefined()
   })
 
   it('rejects corrupt updates without discarding the installed book', async () => {

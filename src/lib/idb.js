@@ -282,6 +282,14 @@ export function setMeta(key, value) {
   })
 }
 
+/** Remove a single app setting, leaving no row behind. */
+export function deleteMeta(key) {
+  return tx(META_STORE, 'readwrite', (store) => {
+    store.delete(key)
+    return { value: key }
+  })
+}
+
 /** Read every day of the stored activity calendar. */
 export function getAllActivity() {
   return getAll(ACTIVITY_STORE)

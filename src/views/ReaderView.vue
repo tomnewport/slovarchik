@@ -1,16 +1,27 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import * as idb from '../lib/idb.js'
 import { pageEnd, pageParagraphs, pageStart } from '../lib/readerPage.js'
 import { lookupReaderWord, readerTokens } from '../lib/readerDictionary.js'
+import { illustrate } from '../lib/readerIllustrations.js'
 import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
 import { loadBook } from '../stores/library.js'
+import {
+  FONT_SIZES,
+  appearance,
+  loadAppearance,
+  loadBookState,
+  savePosition,
+  setIllustrations,
+  setTheme,
+  setTypeface,
+  stepFontSize,
+  toggleBookmark as saveBookmark,
+} from '../stores/reader.js'
 import { translationIssueUrl } from '../lib/readerReport.js'
 import { cancelSpeech, speak, speechSupported } from '../lib/speech.js'
 import NextBatchButton from '../components/NextBatchButton.vue'
 
-const FONT_SIZES = ['Small', 'Default', 'Large', 'Extra large']
 const canSpeak = speechSupported()
 
 const route = useRoute()
@@ -24,9 +35,6 @@ const bookmarks = ref([])
 const showingBookmarks = ref(false)
 const showingAppearance = ref(false)
 const openedWord = ref(null)
-const theme = ref('dark')
-const typeface = ref('serif')
-const fontSize = ref(1)
 const menuButton = ref(null)
 const readingPage = ref(null)
 const measuringPage = ref(null)
@@ -46,6 +54,11 @@ const progressRange = computed(() => {
 const progressLabel = computed(() =>
   `Current page: ${Math.floor(progressRange.value.from)}–${Math.ceil(progressRange.value.to)}% of book`)
 const savedSentences = computed(() => book.value.sentences.filter((sentence) => bookmarks.value.includes(sentence.id)))
+// Chosen once for the whole book, so a picture cannot move when the page is
+// re-measured at a new width — and cheap to leave computed while the setting is
+// off, since turning it on then costs nothing.
+const illustrations = computed(() => illustrate(book.value?.sentences ?? []))
+const illustrationFor = (sentence) => (appearance.illustrations ? illustrations.value.get(sentence.id) : null)
 const definitions = computed(() => openedWord.value
   ? lookupReaderWord(openedWord.value, formIndex.value, wordsByKey.value)
   : [])
@@ -54,6 +67,14 @@ let resizeFrame
 let swipeStart = null
 let suppressRevealClick = false
 
+// Measure a candidate page by building it in a hidden mirror of the real one.
+//
+// The binary search in readerPage.js asks about a dozen candidate ranges per
+// layout and needs each answer before choosing the next, so the mirror is built
+// imperatively: a Vue re-render is a tick away, and a tick is too late. The
+// mirror carries `inert`, which keeps this whole copy of the page out of the
+// tab order and the accessibility tree — without it every element built here
+// would have to opt out of focus one at a time.
 function fits(from, to) {
   const node = measuringPage.value
   if (!node) return false
@@ -72,9 +93,15 @@ function fits(from, to) {
       }
       const action = document.createElement('button')
       action.className = 'reader-reveal'
-      action.tabIndex = -1
       action.textContent = '↔'
       line.append(action)
+      const picture = illustrationFor(sentence)
+      if (picture) {
+        const figure = document.createElement('span')
+        figure.className = 'reader-illustration'
+        figure.textContent = picture
+        line.append(figure)
+      }
       if (revealedId.value === sentence.id && sentence.en) {
         const translation = document.createElement('span')
         translation.className = 'reader-translation'
@@ -86,12 +113,10 @@ function fits(from, to) {
           const audio = document.createElement('button')
           audio.className = 'reader-speak'
           audio.textContent = '🔊 Read Russian'
-          audio.tabIndex = -1
           actions.append(audio)
         }
         const bookmark = document.createElement('button')
         bookmark.textContent = bookmarks.value.includes(sentence.id) ? 'Bookmarked' : 'Bookmark'
-        bookmark.tabIndex = -1
         actions.append(bookmark)
         const query = document.createElement('a')
         query.textContent = 'Query translation'
@@ -126,7 +151,7 @@ async function move(to) {
   openedWord.value = null
   layout()
   readingPage.value?.scrollTo(0, 0)
-  await idb.setMeta(`reader:position:${book.value.id}`, book.value.sentences[to].id)
+  await savePosition(book.value.id, book.value.sentences[to].id)
 }
 
 async function reveal(sentence) {
@@ -171,11 +196,7 @@ function clickSentence(event) {
 }
 
 async function toggleBookmark(sentence) {
-  const id = sentence.id
-  bookmarks.value = bookmarks.value.includes(id)
-    ? bookmarks.value.filter((saved) => saved !== id)
-    : [...bookmarks.value, id]
-  await idb.setMeta(`reader:bookmarks:${book.value.id}`, bookmarks.value)
+  bookmarks.value = await saveBookmark(book.value.id, bookmarks.value, sentence.id)
   await nextTick()
   layout()
 }
@@ -198,22 +219,24 @@ function previous() {
 }
 
 async function chooseTheme(value) {
-  theme.value = value
-  await idb.setMeta('reader:theme', value)
+  await setTheme(value)
+}
+
+async function chooseIllustrations(value) {
+  await setIllustrations(value)
+  await nextTick()
+  layout()
 }
 
 async function chooseTypeface(value) {
-  typeface.value = value
-  await idb.setMeta('reader:typeface', value)
+  await setTypeface(value)
   await nextTick()
   layout()
 }
 
 async function changeFontSize(delta) {
-  const nextSize = Math.max(0, Math.min(FONT_SIZES.length - 1, fontSize.value + delta))
-  if (nextSize === fontSize.value) return
-  fontSize.value = nextSize
-  await idb.setMeta('reader:font-size', nextSize)
+  const before = appearance.fontSize
+  if (await stepFontSize(delta) === before) return
   await nextTick()
   layout()
 }
@@ -247,23 +270,17 @@ onMounted(async () => {
   catch (error) { loadError.value = error.message }
   loading.value = false
   if (!book.value) return
-  const [saved, savedTheme, savedTypeface, savedFontSize, savedBookmarks] = await Promise.all([
-    idb.getMeta(`reader:position:${book.value.id}`),
-    idb.getMeta('reader:theme'),
-    idb.getMeta('reader:typeface'),
-    idb.getMeta('reader:font-size'),
-    idb.getMeta(`reader:bookmarks:${book.value.id}`),
-  ])
-  const index = book.value.sentences.findIndex((sentence) => sentence.id === saved)
-  start.value = Math.max(0, index)
-  if (['light', 'dark'].includes(savedTheme)) theme.value = savedTheme
-  if (['serif', 'sans'].includes(savedTypeface)) typeface.value = savedTypeface
-  if (Number.isInteger(savedFontSize) && savedFontSize >= 0 && savedFontSize < FONT_SIZES.length) fontSize.value = savedFontSize
-  if (Array.isArray(savedBookmarks)) bookmarks.value = savedBookmarks.filter((id) => typeof id === 'string')
+  const [saved] = await Promise.all([loadBookState(book.value.id), loadAppearance()])
+  start.value = Math.max(0, book.value.sentences.findIndex((sentence) => sentence.id === saved.positionId))
+  bookmarks.value = saved.bookmarks
   await nextTick()
   layout()
-  observer = new ResizeObserver(scheduleLayout)
-  observer.observe(readingPage.value)
+  // Guarded like the Progress chart's: a browser without ResizeObserver still
+  // gets a readable page, laid out once, rather than a view that fails to mount.
+  if (typeof ResizeObserver !== 'undefined') {
+    observer = new ResizeObserver(scheduleLayout)
+    observer.observe(readingPage.value)
+  }
   window.addEventListener('keydown', handleKey)
 })
 
@@ -277,7 +294,7 @@ onBeforeUnmount(() => {
 
 <template>
   <section v-if="!book" class="card"><p>{{ loading ? 'Opening book…' : loadError || 'This book is not downloaded.' }}</p><RouterLink to="/library">Back to library</RouterLink></section>
-  <section v-else class="reader" :class="[`reader-${theme}`, `reader-${typeface}`, `reader-size-${fontSize}`]">
+  <section v-else class="reader" :class="[`reader-${appearance.theme}`, `reader-${appearance.typeface}`, `reader-size-${appearance.fontSize}`]">
     <div class="reader-top">
       <RouterLink to="/library" class="reader-back" aria-label="Back to library">←</RouterLink>
       <div class="reader-title"><strong>{{ book.title }}</strong><small>{{ book.author }}</small></div>
@@ -290,23 +307,30 @@ onBeforeUnmount(() => {
       <div class="reader-setting">
         <span id="reader-theme-label">Theme</span>
         <div class="reader-setting-controls" role="group" aria-labelledby="reader-theme-label">
-          <button :aria-pressed="theme === 'dark'" aria-label="Dark mode" @click="chooseTheme('dark')">Dark</button>
-          <button :aria-pressed="theme === 'light'" aria-label="Light mode" @click="chooseTheme('light')">Light</button>
+          <button :aria-pressed="appearance.theme === 'dark'" aria-label="Dark mode" @click="chooseTheme('dark')">Dark</button>
+          <button :aria-pressed="appearance.theme === 'light'" aria-label="Light mode" @click="chooseTheme('light')">Light</button>
         </div>
       </div>
       <div class="reader-setting">
         <span id="reader-typeface-label">Typeface</span>
         <div class="reader-setting-controls" role="group" aria-labelledby="reader-typeface-label">
-          <button :aria-pressed="typeface === 'serif'" aria-label="Serif type" @click="chooseTypeface('serif')">Serif</button>
-          <button :aria-pressed="typeface === 'sans'" aria-label="Sans serif type" @click="chooseTypeface('sans')">Sans serif</button>
+          <button :aria-pressed="appearance.typeface === 'serif'" aria-label="Serif type" @click="chooseTypeface('serif')">Serif</button>
+          <button :aria-pressed="appearance.typeface === 'sans'" aria-label="Sans serif type" @click="chooseTypeface('sans')">Sans serif</button>
+        </div>
+      </div>
+      <div class="reader-setting">
+        <span id="reader-illustrations-label">Illustrations</span>
+        <div class="reader-setting-controls" role="group" aria-labelledby="reader-illustrations-label">
+          <button :aria-pressed="appearance.illustrations" aria-label="Show illustrations" @click="chooseIllustrations(true)">On</button>
+          <button :aria-pressed="!appearance.illustrations" aria-label="Hide illustrations" @click="chooseIllustrations(false)">Off</button>
         </div>
       </div>
       <div class="reader-setting">
         <span id="reader-size-label">Font size</span>
         <div class="reader-setting-controls" role="group" aria-labelledby="reader-size-label">
-          <button aria-label="Decrease font size" :disabled="fontSize === 0" @click="changeFontSize(-1)">A−</button>
-          <output class="reader-size-label" aria-live="polite">{{ FONT_SIZES[fontSize] }}</output>
-          <button aria-label="Increase font size" :disabled="fontSize === FONT_SIZES.length - 1" @click="changeFontSize(1)">A+</button>
+          <button aria-label="Decrease font size" :disabled="appearance.fontSize === 0" @click="changeFontSize(-1)">A−</button>
+          <output class="reader-size-label" aria-live="polite">{{ FONT_SIZES[appearance.fontSize] }}</output>
+          <button aria-label="Increase font size" :disabled="appearance.fontSize === FONT_SIZES.length - 1" @click="changeFontSize(1)">A+</button>
         </div>
       </div>
     </div>
@@ -322,6 +346,7 @@ onBeforeUnmount(() => {
         <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph" :class="{ 'reader-verse': book.form === 'verse' }">
           <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null" @click="clickSentence">
             <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex" :class="{ 'reader-word': token.word }" :data-reader-word="token.word ? token.text : null">{{ token.text }}</span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
+            <span v-if="illustrationFor(sentence)" class="reader-illustration" role="img" :aria-label="`Illustration for this sentence: ${illustrationFor(sentence)}`">{{ illustrationFor(sentence) }}</span>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
               {{ sentence.en }}
               <span class="reader-translation-actions"><button v-if="canSpeak" class="reader-speak" aria-label="Read Russian sentence aloud" @click.stop="speak(sentence.ru)">🔊 Read Russian</button><button :aria-pressed="bookmarks.includes(sentence.id)" @click="toggleBookmark(sentence)">{{ bookmarks.includes(sentence.id) ? 'Bookmarked' : 'Bookmark' }}</button><a :href="translationIssueUrl(book, sentence.id)" target="_blank" rel="noopener noreferrer">Query translation</a></span>
@@ -329,7 +354,7 @@ onBeforeUnmount(() => {
           </span>{{ ' ' }}
         </p>
       </article>
-      <div ref="measuringPage" class="reader-page reader-measure" aria-hidden="true" />
+      <div ref="measuringPage" class="reader-page reader-measure" aria-hidden="true" inert />
       <aside v-if="openedWord" class="reader-dictionary" role="dialog" :aria-label="`Dictionary: ${openedWord}`">
         <button class="reader-dictionary-close" aria-label="Close dictionary" @click="openedWord = null">×</button>
         <strong>{{ openedWord }}</strong>
@@ -337,7 +362,8 @@ onBeforeUnmount(() => {
         <p v-else-if="!definitions.length">No dictionary entry for this form.</p>
         <ul v-else>
           <li v-for="entry in definitions" :key="entry.key">
-            <strong>{{ entry.lemma }}</strong> <small v-if="entry.pos">{{ entry.pos }}</small><br>
+            <strong>{{ entry.lemma }}</strong> <small v-if="entry.pos">{{ entry.pos }}</small>
+            <button v-if="canSpeak" class="reader-speak reader-say-word" :aria-label="`Read ${entry.lemma} aloud`" @click="speak(entry.lemma)">🔊</button><br>
             {{ entry.meaning }}
             <small v-if="entry.morphology.length" class="reader-morph">{{ entry.morphology.join(' · ') }}</small>
             <small v-for="note in entry.notes" :key="note" class="reader-morph">{{ note }}</small>
@@ -378,6 +404,11 @@ onBeforeUnmount(() => {
 .reader-size-label { min-width: 5.5rem; text-align: center; }
 .reader-bookmarks { position: absolute; z-index: 2; top: 4rem; left: 1rem; right: 1rem; max-height: 60dvh; overflow: auto; padding: 1rem; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 .6rem 1.5rem #0004; font: .9rem system-ui, sans-serif; }
 .reader-bookmarks button { display: block; width: 100%; text-align: left; border-bottom: 1px solid var(--rule); }
+/* A woodcut between the sentences: its own line, centred, and out of the
+   reading rhythm rather than inside it. */
+.reader-illustration { display: block; margin: .5em 0; font-size: 2.6em; line-height: 1.2; text-align: center; text-indent: 0; }
+.reader-verse .reader-illustration { margin: .35em 0; }
+.reader-say-word { min-height: 1.9rem; margin-left: .35rem; padding: .1rem .4rem; font-size: .8rem; }
 .reader-back { color: var(--ink); font-size: 1.4rem; text-decoration: none; }
 .reader-title { display: flex; flex: 1; min-width: 0; flex-direction: column; text-align: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .85rem; }
 .reader-title small { color: var(--subtle); }
