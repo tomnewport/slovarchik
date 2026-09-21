@@ -30,6 +30,7 @@ separate, clearly labelled selections with their own IDs and versions.
 | Advanced | Tolstoy — *Война и мир* | Planned |
 | Political | Gorky — *Мать* | Planned; rights checked — Gorky died 1936 (Russian term ran out in 2007) and the novel was published 1906–07, so it is out of US copyright too |
 | Political | Chernyshevsky — *Что делать?* | Planned |
+| Political | Kropotkin — *О заложниках: письмо В. И. Ленину* | **Available:** complete 1920 letter, written in Russian |
 | Political | Lenin — *Государство и революция* | **Available:** chapter I, § 1 selection (19 complete paragraphs); remainder planned |
 
 ## Which works may ship

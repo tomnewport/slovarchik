@@ -95,6 +95,25 @@ words:
       sg_acc: Ва́ню
       sg_ins: Ва́ней
       sg_pre: Ва́не
+  "Владимир=Vladimir":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Vladimir (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Vladimir; Володя and Вова are familiar forms."
+        see: ["Ильич=Ilyich"]
+    declension:
+      sg_nom: Влади́мир
+      sg_gen: Влади́мира
+      sg_dat: Влади́миру
+      sg_acc: Влади́мира
+      sg_ins: Влади́миром
+      sg_pre: Влади́мире
   "Дима=Dima":
     cefr_level: A2
     learn: false
@@ -190,6 +209,25 @@ words:
       sg_acc: Ива́новича
       sg_ins: Ива́новичем
       sg_pre: Ива́новиче
+  "Ильич=Ilyich":
+    cefr_level: B1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Ilyich (Russian patronymic meaning son of Ilya)"
+    facts:
+      - kind: note
+        text: "Lenin’s patronymic in the address Влади́мир Ильи́ч."
+        see: ["Владимир=Vladimir"]
+    declension:
+      sg_nom: Ильи́ч
+      sg_gen: Ильича́
+      sg_dat: Ильичу́
+      sg_acc: Ильича́
+      sg_ins: Ильичо́м
+      sg_pre: Ильиче́
   "Катя=Katya":
     cefr_level: A2
     learn: false

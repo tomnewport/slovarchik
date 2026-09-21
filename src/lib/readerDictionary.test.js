@@ -37,7 +37,11 @@ describe('literature dictionary', () => {
     const words = loadFixtureWords()
     const index = buildFormIndex(words)
     const byKey = new Map(words.map((word) => [word.key, word]))
-    for (const surface of ['голубка', 'голубку', 'косточка', 'косточки', 'косточку', 'горнице', 'рак', 'окошко', 'нехорошо', 'пропела', 'настает']) {
+    for (const surface of [
+      'голубка', 'голубку', 'косточка', 'косточки', 'косточку', 'горнице', 'рак',
+      'окошко', 'нехорошо', 'пропела', 'настает', 'Савинкова', 'Вольтерина',
+      'заложники', 'офицеров-врангелевцев', 'беспощадно', 'попы', 'Правде',
+    ]) {
       const entries = lookupReaderWord(surface, index, byKey)
       expect(entries.length, surface).toBeGreaterThan(0)
       expect(entries.some((entry) => words.find((word) => word.key === entry.key)?.learnable === false), surface).toBe(true)

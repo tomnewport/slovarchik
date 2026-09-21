@@ -40,6 +40,13 @@ and notes are excluded, while Lenin's own embedded page citation remains. The
 English keeps Lenin's polemical voice distinct from the extended quotation of
 Engels. Later sections need separate translation review before publication.
 
+Kropotkin's «О заложниках: письмо В. И. Ленину» is a complete ten-paragraph
+letter from 21 December 1920, divided into 16 reader units. Unlike several of
+Kropotkin's best-known books, it was written in Russian. The text follows a
+pinned Wikisource transcription, with its date and Russian manuscript
+provenance checked against the archival catalogue; the English is a new
+translation prepared for this reader.
+
 Before any of that, check that the work may ship at all: out of copyright in
 Russia, in the United States and in the EU/UK, since a pack downloads to a
 learner anywhere. `docs/literature-library.md` sets out the three tests, the two
