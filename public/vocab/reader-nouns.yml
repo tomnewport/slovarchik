@@ -44,6 +44,90 @@ words:
       pl_acc: го́рницы
       pl_ins: го́рницами
       pl_pre: го́рницах
+  "дворянка=noblewoman":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "noblewoman (a woman of the gentry)"
+    declension:
+      sg_nom: дворя́нка
+      sg_gen: дворя́нки
+      sg_dat: дворя́нке
+      sg_acc: дворя́нку
+      sg_ins: дворя́нкой
+      sg_pre: дворя́нке
+      pl_nom: дворя́нки
+      pl_gen: дворя́нок
+      pl_dat: дворя́нкам
+      pl_acc: дворя́нок
+      pl_ins: дворя́нками
+      pl_pre: дворя́нках
+  "зверинец=menagerie":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "menagerie (a travelling show of caged wild animals)"
+    declension:
+      sg_nom: звери́нец
+      sg_gen: звери́нца
+      sg_dat: звери́нцу
+      sg_acc: звери́нец
+      sg_ins: звери́нцем
+      sg_pre: звери́нце
+      pl_nom: звери́нцы
+      pl_gen: звери́нцев
+      pl_dat: звери́нцам
+      pl_acc: звери́нцы
+      pl_ins: звери́нцами
+      pl_pre: звери́нцах
+  "землянка=dugout":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "dugout (a hut dug into the earth)"
+    declension:
+      sg_nom: земля́нка
+      sg_gen: земля́нки
+      sg_dat: земля́нке
+      sg_acc: земля́нку
+      sg_ins: земля́нкой
+      sg_pre: земля́нке
+      pl_nom: земля́нки
+      pl_gen: земля́нок
+      pl_dat: земля́нкам
+      pl_acc: земля́нки
+      pl_ins: земля́нками
+      pl_pre: земля́нках
+  "корыто=washing trough":
+    cefr_level: B2
+    learn: false
+    gender: n
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "washing trough (a wooden trough for laundry; «разби́тое коры́то» = back where you started)"
+    declension:
+      sg_nom: коры́то
+      sg_gen: коры́та
+      sg_dat: коры́ту
+      sg_acc: коры́то
+      sg_ins: коры́том
+      sg_pre: коры́те
+      pl_nom: коры́та
+      pl_gen: коры́т
+      pl_dat: коры́там
+      pl_acc: коры́та
+      pl_ins: коры́тами
+      pl_pre: коры́тах
   "косточка=stone":
     cefr_level: A2
     learn: false
@@ -65,6 +149,27 @@ words:
       pl_acc: ко́сточки
       pl_ins: ко́сточками
       pl_pre: ко́сточках
+  "невод=dragnet":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "dragnet (a large fishing net dragged through the water)"
+    declension:
+      sg_nom: не́вод
+      sg_gen: не́вода
+      sg_dat: не́воду
+      sg_acc: не́вод
+      sg_ins: не́водом
+      sg_pre: не́воде
+      pl_nom: невода́
+      pl_gen: неводо́в
+      pl_dat: невода́м
+      pl_acc: невода́
+      pl_ins: невода́ми
+      pl_pre: невода́х
   "окошко=little window":
     cefr_level: B1
     learn: false
@@ -86,6 +191,27 @@ words:
       pl_acc: око́шки
       pl_ins: око́шками
       pl_pre: око́шках
+  "пазуха=bosom":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: i
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "bosom (the space inside a coat at the chest; «за па́зухой» = next to the skin)"
+    declension:
+      sg_nom: па́зуха
+      sg_gen: па́зухи
+      sg_dat: па́зухе
+      sg_acc: па́зуху
+      sg_ins: па́зухой
+      sg_pre: па́зухе
+      pl_nom: па́зухи
+      pl_gen: па́зух
+      pl_dat: па́зухам
+      pl_acc: па́зухи
+      pl_ins: па́зухами
+      pl_pre: па́зухах
   "попрыгунья=carefree hopper":
     cefr_level: B2
     learn: false
@@ -101,6 +227,27 @@ words:
       sg_acc: попрыгу́нью
       sg_ins: попрыгу́ньей
       sg_pre: попрыгу́нье
+  "пряха=spinner":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "spinner (a woman who spins thread)"
+    declension:
+      sg_nom: пря́ха
+      sg_gen: пря́хи
+      sg_dat: пря́хе
+      sg_acc: пря́ху
+      sg_ins: пря́хой
+      sg_pre: пря́хе
+      pl_nom: пря́хи
+      pl_gen: прях
+      pl_dat: пря́хам
+      pl_acc: прях
+      pl_ins: пря́хами
+      pl_pre: пря́хах
   "рак=crayfish":
     cefr_level: B1
     learn: false
@@ -122,3 +269,66 @@ words:
       pl_acc: ра́ков
       pl_ins: ра́ками
       pl_pre: ра́ках
+  "рыбка=little fish":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "little fish (diminutive of ры́ба; the tale’s golden fish)"
+    declension:
+      sg_nom: ры́бка
+      sg_gen: ры́бки
+      sg_dat: ры́бке
+      sg_acc: ры́бку
+      sg_ins: ры́бкой
+      sg_pre: ры́бке
+      pl_nom: ры́бки
+      pl_gen: ры́бок
+      pl_dat: ры́бкам
+      pl_acc: ры́бок
+      pl_ins: ры́бками
+      pl_pre: ры́бках
+  "собачка=little dog":
+    cefr_level: A2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "little dog (affectionate diminutive of соба́ка)"
+    declension:
+      sg_nom: соба́чка
+      sg_gen: соба́чки
+      sg_dat: соба́чке
+      sg_acc: соба́чку
+      sg_ins: соба́чкой
+      sg_pre: соба́чке
+      pl_nom: соба́чки
+      pl_gen: соба́чек
+      pl_dat: соба́чкам
+      pl_acc: соба́чек
+      pl_ins: соба́чками
+      pl_pre: соба́чках
+  "царица=tsaritsa":
+    cefr_level: B1
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg", "pl"]
+    en_gb:
+      standard: "tsaritsa (an empress, or a tsar’s wife)"
+    declension:
+      sg_nom: цари́ца
+      sg_gen: цари́цы
+      sg_dat: цари́це
+      sg_acc: цари́цу
+      sg_ins: цари́цей
+      sg_pre: цари́це
+      pl_nom: цари́цы
+      pl_gen: цари́ц
+      pl_dat: цари́цам
+      pl_acc: цари́ц
+      pl_ins: цари́цами
+      pl_pre: цари́цах

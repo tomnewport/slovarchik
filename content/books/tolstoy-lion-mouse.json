@@ -1,0 +1,73 @@
+{
+  "id": "tolstoy-lion-mouse",
+  "title": "Лев и мышь",
+  "author": "Лев Толстой",
+  "shelf": "Beginner",
+  "form": "prose",
+  "summary": "A lion spares a mouse and is repaid when hunters tie him to a tree. Complete fable.",
+  "packVersion": 1,
+  "translationVersion": 1,
+  "source": {
+    "editionId": "First Russian Book for Reading, Лев и мышь; Wikisource revision 5737293",
+    "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+  },
+  "rights": {
+    "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+    "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+    "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+  },
+  "translationReview": {
+    "method": "Checked all seven sentences across both paragraphs against the pinned source. Kept «добро сделать» as one repeated phrase in English so the mouse’s promise and the closing line still answer each other."
+  },
+  "sentences": [
+    {
+      "id": "tolstoy-lion-mouse:01",
+      "paragraph": "1",
+      "ru": "Лев спал.",
+      "en": "A lion was asleep.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-lion-mouse:02",
+      "paragraph": "1",
+      "ru": "Мышь пробежала ему по телу.",
+      "en": "A mouse ran across his body.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-lion-mouse:03",
+      "paragraph": "1",
+      "ru": "Он проснулся и поймал ее.",
+      "en": "He woke up and caught her.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-lion-mouse:04",
+      "paragraph": "1",
+      "ru": "Мышь стала просить, чтобы он пустил ее; она сказала: «Если ты меня пустишь, и я тебе добро сделаю».",
+      "en": "The mouse began begging him to let her go; she said: “If you let me go, I will do you a good turn too.”",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-lion-mouse:05",
+      "paragraph": "1",
+      "ru": "Лев засмеялся, что мышь обещает ему добро сделать, и пустил ее.",
+      "en": "The lion laughed that a mouse should promise to do him a good turn, and let her go.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-lion-mouse:06",
+      "paragraph": "2",
+      "ru": "Потом охотники поймали льва и привязали веревкой к дереву.",
+      "en": "Later hunters caught the lion and tied him to a tree with a rope.",
+      "review": "checked"
+    },
+    {
+      "id": "tolstoy-lion-mouse:07",
+      "paragraph": "2",
+      "ru": "Мышь услыхала львиный рев, прибежала, перегрызла веревку и сказала: «Помнишь, ты смеялся, не думал, чтобы я могла тебе добро сделать, а теперь видишь, — бывает и от мыши добро».",
+      "en": "The mouse heard the lion’s roaring, came running, gnawed through the rope and said: “Remember how you laughed, and never thought I could do you a good turn — and now you see, good can come even from a mouse.”",
+      "review": "checked"
+    }
+  ]
+}

@@ -2,6 +2,25 @@
   "schemaVersion": 1,
   "books": [
     {
+      "id": "afanasyev-turnip",
+      "title": "Репка",
+      "author": "Народная сказка",
+      "shelf": "Children’s",
+      "summary": "The whole household pulls at one turnip. Complete tale, in Afanasyev’s Archangel variant.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Народные русские сказки (Афанасьев), № 89, Репка (recorded in Arkhangelsk province by A. Kharitonov); Wikisource revision 1136168",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=1136168"
+      },
+      "rights": {
+        "original": "Afanasyev (died 1871); the collection Народные русские сказки was published 1855–63 and is public domain. The tale itself is traditional and anonymous.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; the collection’s editorial footnote about where the tale was recorded is omitted.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "919de848f69d14e9fc1c28c366fb682512d5c83b42a09ff091e3ff383360ce52"
+    },
+    {
       "id": "chekhov-fat-thin",
       "title": "Толстый и тонкий",
       "author": "Антон Чехов",
@@ -19,6 +38,44 @@
         "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
       },
       "sha256": "eee91bf812654ef5082edb10921799a9d3128a50c1124bd2449a3155b7b3e68d"
+    },
+    {
+      "id": "chorny-foal",
+      "title": "Жеребёнок",
+      "author": "Саша Чёрный",
+      "shelf": "Children’s",
+      "summary": "A foal sucks at everything it finds, then bolts for the field. Complete poem from Детский остров.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Саша Чёрный, Детский остров (1921), Жеребёнок; Wikisource revision 4735748",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=4735748"
+      },
+      "rights": {
+        "original": "Sasha Chorny (died 1932); the poem was published in 1921. Public domain in Russia and in life-plus-70 jurisdictions since 2003, and in the United States as a work published before 1931.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "36b4f11baf6ff7177ad5a0b53d76226f2731763a310935e17a56809d29a37980"
+    },
+    {
+      "id": "krylov-crow-fox",
+      "title": "Ворона и Лисица",
+      "author": "Иван Крылов",
+      "shelf": "Children’s",
+      "summary": "A fox flatters a crow out of her cheese. Complete fable in verse.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Krylov, Works in two volumes (1955), Басни, Книга первая, XIII; Wikisource revision 5710681",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5710681"
+      },
+      "rights": {
+        "original": "Krylov (died 1844); underlying Russian work first published in 1808 and public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "332a8ed6793387c963af5d445228e66c310001dc950cae841663e19cb92ffd92"
     },
     {
       "id": "krylov-dragonfly-ant",
@@ -40,6 +97,44 @@
       "sha256": "835cfd8893f96fc6533ff9aad922ab1eacb23d49b4520e2c697bff892e198b2f"
     },
     {
+      "id": "krylov-elephant-pug",
+      "title": "Слон и Моська",
+      "author": "Иван Крылов",
+      "shelf": "Children’s",
+      "summary": "A small dog barks at an elephant to make herself a name. Complete fable in verse.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Krylov, Басни; Wikisource revision 4751137",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=4751137"
+      },
+      "rights": {
+        "original": "Krylov (died 1844); underlying Russian work first published in 1808 and public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "386d15a82f25e4315fbfee54dbcc39e11f24102d3d1a52ff87a8e4985e84d0c2"
+    },
+    {
+      "id": "krylov-swan-pike-crayfish",
+      "title": "Лебедь, Щука и Рак",
+      "author": "Иван Крылов",
+      "shelf": "Children’s",
+      "summary": "Three creatures harness themselves to one cart and pull three ways. Complete fable in verse.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Krylov, Басни, Книга четвёртая, V; Wikisource revision 4796646",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=4796646"
+      },
+      "rights": {
+        "original": "Krylov (died 1844); underlying Russian work first published in 1816 and public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "83ddf12658f4fc7f47f2cd9716a585c172f021ce8944a86bff6f0070cece0fd9"
+    },
+    {
       "id": "lenin-state-revolution-1-1",
       "title": "Государство и революция — глава I, § 1",
       "author": "В. И. Ленин",
@@ -57,6 +152,44 @@
         "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
       },
       "sha256": "38f4b9b4fbdd7a0959c01b58a68fca2fb7c14d060b4d8af2bb3a12414ee9e638"
+    },
+    {
+      "id": "mayakovsky-good-and-bad",
+      "title": "Что такое хорошо и что такое плохо?",
+      "author": "Владимир Маяковский",
+      "shelf": "Children’s",
+      "summary": "A small boy asks his father what is good and what is bad, and gets sixteen answers. Complete poem.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Маяковский, Что такое хорошо и что такое плохо? (1925); Wikisource revision 4807329",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=4807329"
+      },
+      "rights": {
+        "original": "Mayakovsky (died 1930); the poem was published in 1925. Public domain in Russia and in life-plus-70 jurisdictions since 2001, and in the United States as a work published before 1931.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; the edition’s textual note about the manuscript is omitted, as is its line numbering.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "02eb7dbe9be4000a07d99734af6ba14824528ca42cf828e767707ca1661b7195"
+    },
+    {
+      "id": "pushkin-fisherman-fish",
+      "title": "Сказка о рыбаке и рыбке",
+      "author": "Александр Пушкин",
+      "shelf": "Children’s",
+      "summary": "A golden fish grants an old woman everything she asks for, until she asks for one thing too many. Complete tale in verse.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Пушкин, Сказка о рыбаке и рыбке (14 октября 1833); Wikisource revision 5019506",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5019506"
+      },
+      "rights": {
+        "original": "Pushkin (died 1837); the tale was written in 1833 and is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; the page’s illustrations, its editorial notes and the draft episode it prints under «Вариант» are omitted — the latter is a passage Pushkin himself left out of the finished tale.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "8c6d6fff3ec1c8ceb8b173df85ace703b29b227aa5cbd08e1f0994cf8faf2fb0"
     },
     {
       "id": "tolstoy-ant-dove",
@@ -78,6 +211,63 @@
       "sha256": "f8429473e3136216fbbbdb523c8133b76deb8846f68c92d64397e412a5ba46be"
     },
     {
+      "id": "tolstoy-fine-threads",
+      "title": "Тонкие нитки",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A man demands ever finer thread, and is sold thread no one can see. Complete fable.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Тонкие нитки; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "ba859b4c4340417809b17245a4bf5dd63a5733b9de618e66074c7d821c8e08d8"
+    },
+    {
+      "id": "tolstoy-lion-dog",
+      "title": "Лев и собачка",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A little dog is thrown into a lion's cage as food, and the lion keeps her. Complete story.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "Tolstoy, Лев и собачка (1880), Collected Works vol. 10; Wikisource revision 5641650",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5641650"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "2a0b6a110ca8b3aca1b3909acb01ba2863c3b150a3cbfe11a2cf024f0f3aacb8"
+    },
+    {
+      "id": "tolstoy-lion-mouse",
+      "title": "Лев и мышь",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A lion spares a mouse and is repaid when hunters tie him to a tree. Complete fable.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Лев и мышь; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "b90019acdeb00a8192c6d44c30318d8ffaa74101612e79d917c4764482117f5e"
+    },
+    {
       "id": "tolstoy-plum-stone",
       "title": "Косточка",
       "author": "Лев Толстой",
@@ -95,6 +285,82 @@
         "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
       },
       "sha256": "e865d34486242f84d5c38561c13a31b0bfdc2dd40ce812c4c4b218444134e4bd"
+    },
+    {
+      "id": "tolstoy-polecat",
+      "title": "Хорёк",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A polecat licks a metalworker’s file and mistakes its own blood for iron. Complete fable.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Хорёк; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "3e74f64cc825db1bd6ae551292bbd066468528769475c8595b788d8f400c8f4a"
+    },
+    {
+      "id": "tolstoy-snake-head-tail",
+      "title": "Голова и хвост змеи",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A snake’s tail argues that it should lead, and gets its way. Complete fable.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Голова и хвост змеи; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "f3083b5e30ccfe722af923f091374e553686995a6c27db58fe9d0854d239cd5d"
+    },
+    {
+      "id": "tolstoy-stone",
+      "title": "Камень",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A beggar keeps the stone a rich man threw at him, and waits. Complete story.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Камень; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "4746febda1acf9ce98dde841b07f1745c3fc0696491de33a30515d932475a1e9"
+    },
+    {
+      "id": "tolstoy-tortoise-eagle",
+      "title": "Черепаха и орёл",
+      "author": "Лев Толстой",
+      "shelf": "Beginner",
+      "summary": "A tortoise talks an eagle into teaching her to fly. Complete fable.",
+      "packVersion": 1,
+      "translationVersion": 1,
+      "source": {
+        "editionId": "First Russian Book for Reading, Черепаха и орёл; Wikisource revision 5737293",
+        "url": "https://ru.wikisource.org/w/index.php?oldid=5737293"
+      },
+      "rights": {
+        "original": "Tolstoy (died 1910); underlying Russian work is public domain.",
+        "transcription": "Russian transcription from Wikisource contributors, CC BY-SA; source page links to its revision history and terms.",
+        "translation": "New English translation for Slovarchik, CC BY-SA 4.0; no published translation reused."
+      },
+      "sha256": "4f71862860b640399507ae0c66cd66329e8ccc4ba97c3b3211fc463686e1bd33"
     }
   ]
 }

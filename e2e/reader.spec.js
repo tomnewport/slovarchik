@@ -1,4 +1,11 @@
+import { readFileSync } from 'node:fs'
+
 import { test, expect } from '@playwright/test'
+
+// The library lists what the catalog holds, so the count comes from the
+// catalog rather than a number in this file — adding a book is a routine
+// change, and it should not have to edit an assertion to stay green.
+const catalog = JSON.parse(readFileSync(new URL('../public/books/catalog.json', import.meta.url), 'utf8'))
 
 test('swiping reveals a read-aloud action, and reading settings survive a reload', async ({ page }) => {
   await page.addInitScript(() => {
@@ -108,7 +115,7 @@ test('the book accordion fits a phone and Read looks like an action', async ({ p
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
   const books = page.locator('.library-book')
-  await expect(books).toHaveCount(5)
+  await expect(books).toHaveCount(catalog.books.length)
   await expect(page.locator('.library-book[open]')).toHaveCount(0)
 
   const first = books.filter({ hasText: 'Муравей и голубка' })

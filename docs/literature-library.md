@@ -14,12 +14,12 @@ separate, clearly labelled selections with their own IDs and versions.
 
 | Shelf | Candidate | Status |
 | --- | --- | --- |
-| Children’s | Krylov — selected fables | **Available:** complete *Стрекоза и Муравей*; further fables queued |
+| Children’s | Krylov — selected fables | **Available:** complete *Ворона и Лисица*, *Лебедь, Щука и Рак*, *Слон и Моська* and *Стрекоза и Муравей*; further fables queued |
 | Children’s | Pushkin — selected fairy tales | Planned; *Сказка о рыбаке и рыбке* first |
 | Children’s | Mayakovsky — *Что такое хорошо и что такое плохо?* (1925) | Planned; rights clear on all three tests |
-| Children’s | Sasha Chorny — *Детский остров* (1921) | Planned; rights clear on all three tests |
+| Children’s | Sasha Chorny — *Детский остров* (1921) | **Available:** complete *Жеребёнок*; further poems queued |
 | Children’s | Public-domain Russian folk-tale collection | Planned; verify collection editor and edition |
-| Beginner | Tolstoy — children’s prose / *Азбука* | **Available:** complete *Муравей и голубка* and *Косточка* |
+| Beginner | Tolstoy — children’s prose / *Азбука* | **Available:** complete *Голова и хвост змеи*, *Камень*, *Косточка*, *Лев и мышь*, *Лев и собачка*, *Муравей и голубка*, *Тонкие нитки*, *Хорёк* and *Черепаха и орёл*; further pieces queued |
 | Beginner | Chekhov — selected short stories | Planned |
 | Beginner | Turgenev — *Муму* | Planned |
 | Intermediate | Pushkin — *Капитанская дочка* | Planned |

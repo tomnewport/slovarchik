@@ -12,6 +12,24 @@
 # «Геростра́том»), and a paradigm also lets the popup say which case it is.
 ---
 words:
+  "Жучка=Zhuchka":
+    cefr_level: B2
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Zhuchka (the commonest Russian name for a small yard dog)"
+    facts:
+      - kind: note
+        text: "A name rather than a breed: any mongrel about the yard may be a Жу́чка."
+    declension:
+      sg_nom: Жу́чка
+      sg_gen: Жу́чки
+      sg_dat: Жу́чке
+      sg_acc: Жу́чку
+      sg_ins: Жу́чкой
+      sg_pre: Жу́чке
   "Нафанаил=Nathanael":
     cefr_level: B2
     learn: false
