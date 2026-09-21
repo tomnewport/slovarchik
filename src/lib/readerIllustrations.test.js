@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { illustrate, illustrationFor, LEXICON } from './readerIllustrations.js'
+import { readFileSync, readdirSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { FEATURED_MOMENTS, illustrate, illustrationFor, LEXICON } from './readerIllustrations.js'
 
 const s = (id, ru, en = '') => ({ id, ru, en })
 
@@ -58,6 +61,22 @@ describe('illustrating a book', () => {
     expect(picked).toEqual(['🕊️'])
   })
 
+  it('uses the authored moments for a shipped book', () => {
+    const polecat = [
+      s('tolstoy-polecat:01', 'Хорёк зашел к меднику и стал лизать подпилок.'),
+      s(
+        'tolstoy-polecat:02',
+        'Из языка пошла кровь, а хорек радовался, лизал.',
+        'Blood ran from his tongue, and the polecat was delighted and went on licking.',
+      ),
+    ]
+
+    expect([...illustrate(polecat).entries()]).toEqual([
+      ['tolstoy-polecat:01', '🔧'],
+      ['tolstoy-polecat:02', '🩸'],
+    ])
+  })
+
   it('leaves a stretch with nothing to draw bare', () => {
     const quiet = Array.from({ length: 8 }, (_, i) => s(String(i), 'Он сказал, что это именно так.'))
     expect(illustrate(quiet).size).toBe(0)
@@ -86,5 +105,42 @@ describe('the lexicon itself', () => {
   it('claims each emoji once, so one picture has one meaning', () => {
     const emoji = LEXICON.map((entry) => entry.emoji)
     expect(new Set(emoji).size).toBe(emoji.length)
+  })
+})
+
+describe('the authored story moments', () => {
+  it('gives every normal book three or four moments without padding the two-sentence fable', () => {
+    for (const [bookId, moments] of Object.entries(FEATURED_MOMENTS)) {
+      const count = Object.keys(moments).length
+      expect(count, bookId).toBeLessThanOrEqual(4)
+      expect(count, bookId).toBeGreaterThanOrEqual(bookId === 'tolstoy-polecat' ? 2 : 3)
+    }
+  })
+
+  it('keeps every moment attached to its own book', () => {
+    for (const [bookId, moments] of Object.entries(FEATURED_MOMENTS)) {
+      for (const [sentenceId, emoji] of Object.entries(moments)) {
+        expect(sentenceId.startsWith(`${bookId}:`), sentenceId).toBe(true)
+        expect(emoji, sentenceId).toBeTruthy()
+      }
+    }
+  })
+
+  it('covers every shipped book with valid moments from its text', () => {
+    const packs = resolve(dirname(fileURLToPath(import.meta.url)), '../../public/books/packs')
+    for (const filename of readdirSync(packs).filter((name) => name.endsWith('.json'))) {
+      const pack = JSON.parse(readFileSync(resolve(packs, filename), 'utf8'))
+      const moments = FEATURED_MOMENTS[pack.id]
+      expect(moments, pack.id).toBeTruthy()
+
+      const sentenceIds = new Set(pack.sentences.map((sentence) => sentence.id))
+      for (const sentenceId of Object.keys(moments)) {
+        expect(sentenceIds.has(sentenceId), sentenceId).toBe(true)
+      }
+
+      const pictures = illustrate(pack.sentences)
+      expect(pictures.size, pack.id).toBeGreaterThanOrEqual(Math.min(3, pack.sentences.length))
+      expect(pictures.size, pack.id).toBeLessThanOrEqual(Math.min(4, pack.sentences.length))
+    }
   })
 })
