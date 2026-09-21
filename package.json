@@ -30,6 +30,7 @@
     "check:align": "node scripts/check-align.mjs",
     "check:reader": "node scripts/check-reader-glosses.mjs",
     "reader:glosses": "node scripts/check-reader-glosses.mjs --list",
+    "reader:art": "node scripts/reader-illustrations.mjs",
     "align:list": "node scripts/check-align.mjs --list",
     "gen:lemma-links": "node scripts/gen-lemma-links.mjs",
     "gen:parts": "node scripts/gen-parts.mjs",

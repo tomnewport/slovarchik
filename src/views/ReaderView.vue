@@ -3,6 +3,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { pageEnd, pageParagraphs, pageStart } from '../lib/readerPage.js'
 import { lookupReaderWord, readerTokens } from '../lib/readerDictionary.js'
+import { illustrate } from '../lib/readerIllustrations.js'
 import { formIndex, wordsByKey, state as vocabState } from '../stores/vocab.js'
 import { loadBook } from '../stores/library.js'
 import {
@@ -11,6 +12,7 @@ import {
   loadAppearance,
   loadBookState,
   savePosition,
+  setIllustrations,
   setTheme,
   setTypeface,
   stepFontSize,
@@ -52,6 +54,11 @@ const progressRange = computed(() => {
 const progressLabel = computed(() =>
   `Current page: ${Math.floor(progressRange.value.from)}–${Math.ceil(progressRange.value.to)}% of book`)
 const savedSentences = computed(() => book.value.sentences.filter((sentence) => bookmarks.value.includes(sentence.id)))
+// Chosen once for the whole book, so a picture cannot move when the page is
+// re-measured at a new width — and cheap to leave computed while the setting is
+// off, since turning it on then costs nothing.
+const illustrations = computed(() => illustrate(book.value?.sentences ?? []))
+const illustrationFor = (sentence) => (appearance.illustrations ? illustrations.value.get(sentence.id) : null)
 const definitions = computed(() => openedWord.value
   ? lookupReaderWord(openedWord.value, formIndex.value, wordsByKey.value)
   : [])
@@ -88,6 +95,13 @@ function fits(from, to) {
       action.className = 'reader-reveal'
       action.textContent = '↔'
       line.append(action)
+      const picture = illustrationFor(sentence)
+      if (picture) {
+        const figure = document.createElement('span')
+        figure.className = 'reader-illustration'
+        figure.textContent = picture
+        line.append(figure)
+      }
       if (revealedId.value === sentence.id && sentence.en) {
         const translation = document.createElement('span')
         translation.className = 'reader-translation'
@@ -208,6 +222,12 @@ async function chooseTheme(value) {
   await setTheme(value)
 }
 
+async function chooseIllustrations(value) {
+  await setIllustrations(value)
+  await nextTick()
+  layout()
+}
+
 async function chooseTypeface(value) {
   await setTypeface(value)
   await nextTick()
@@ -299,6 +319,13 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <div class="reader-setting">
+        <span id="reader-illustrations-label">Illustrations</span>
+        <div class="reader-setting-controls" role="group" aria-labelledby="reader-illustrations-label">
+          <button :aria-pressed="appearance.illustrations" aria-label="Show illustrations" @click="chooseIllustrations(true)">On</button>
+          <button :aria-pressed="!appearance.illustrations" aria-label="Hide illustrations" @click="chooseIllustrations(false)">Off</button>
+        </div>
+      </div>
+      <div class="reader-setting">
         <span id="reader-size-label">Font size</span>
         <div class="reader-setting-controls" role="group" aria-labelledby="reader-size-label">
           <button aria-label="Decrease font size" :disabled="appearance.fontSize === 0" @click="changeFontSize(-1)">A−</button>
@@ -319,6 +346,7 @@ onBeforeUnmount(() => {
         <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph" :class="{ 'reader-verse': book.form === 'verse' }">
           <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null" @click="clickSentence">
             <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex" :class="{ 'reader-word': token.word }" :data-reader-word="token.word ? token.text : null">{{ token.text }}</span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
+            <span v-if="illustrationFor(sentence)" class="reader-illustration" role="img" :aria-label="`Illustration for this sentence: ${illustrationFor(sentence)}`">{{ illustrationFor(sentence) }}</span>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
               {{ sentence.en }}
               <span class="reader-translation-actions"><button v-if="canSpeak" class="reader-speak" aria-label="Read Russian sentence aloud" @click.stop="speak(sentence.ru)">🔊 Read Russian</button><button :aria-pressed="bookmarks.includes(sentence.id)" @click="toggleBookmark(sentence)">{{ bookmarks.includes(sentence.id) ? 'Bookmarked' : 'Bookmark' }}</button><a :href="translationIssueUrl(book, sentence.id)" target="_blank" rel="noopener noreferrer">Query translation</a></span>
@@ -376,6 +404,10 @@ onBeforeUnmount(() => {
 .reader-size-label { min-width: 5.5rem; text-align: center; }
 .reader-bookmarks { position: absolute; z-index: 2; top: 4rem; left: 1rem; right: 1rem; max-height: 60dvh; overflow: auto; padding: 1rem; background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 .6rem 1.5rem #0004; font: .9rem system-ui, sans-serif; }
 .reader-bookmarks button { display: block; width: 100%; text-align: left; border-bottom: 1px solid var(--rule); }
+/* A woodcut between the sentences: its own line, centred, and out of the
+   reading rhythm rather than inside it. */
+.reader-illustration { display: block; margin: .5em 0; font-size: 2.6em; line-height: 1.2; text-align: center; text-indent: 0; }
+.reader-verse .reader-illustration { margin: .35em 0; }
 .reader-say-word { min-height: 1.9rem; margin-left: .35rem; padding: .1rem .4rem; font-size: .8rem; }
 .reader-back { color: var(--ink); font-size: 1.4rem; text-decoration: none; }
 .reader-title { display: flex; flex: 1; min-width: 0; flex-direction: column; text-align: center; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: .85rem; }

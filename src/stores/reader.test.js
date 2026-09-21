@@ -9,6 +9,7 @@ import {
   loadAppearance,
   loadBookState,
   savePosition,
+  setIllustrations,
   setTheme,
   setTypeface,
   stepFontSize,
@@ -19,7 +20,7 @@ import {
 beforeEach(async () => {
   globalThis.indexedDB = new IDBFactory()
   idb._resetForTests()
-  Object.assign(appearance, { theme: 'dark', typeface: 'serif', fontSize: 1, loaded: false })
+  Object.assign(appearance, { theme: 'dark', typeface: 'serif', fontSize: 1, illustrations: true, loaded: false })
 })
 
 describe('reading appearance', () => {
@@ -45,6 +46,16 @@ describe('reading appearance', () => {
 
     await loadAppearance()
     expect(appearance).toMatchObject({ theme: 'dark', typeface: 'serif', fontSize: 1 })
+  })
+
+  it('starts with illustrations on, and keeps them off once turned off', async () => {
+    await loadAppearance()
+    expect(appearance.illustrations).toBe(true)
+
+    await setIllustrations(false)
+    Object.assign(appearance, { illustrations: true })
+    await loadAppearance()
+    expect(appearance.illustrations).toBe(false)
   })
 
   it('will not step the size past either end', async () => {
