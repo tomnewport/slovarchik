@@ -2,13 +2,14 @@
 /**
  * reader-illustrations.mjs — what the reader would draw in each shipped book.
  *
- * The emoji illustrations are chosen by a hand-written lexicon of stems
- * (src/lib/readerIllustrations.js), and the only way to judge a lexicon is to
- * read what it picks. This prints every picture each book would get, beside the
- * sentence that earned it, so a wrong one is obvious.
+ * The shipped books have three or four hand-picked story moments (or every beat
+ * in a very short fable). A stem lexicon previews pictures while a new book is
+ * being prepared; tests require curated choices before it ships. This prints
+ * every picture each book would get beside the sentence it punctuates, so a
+ * wrong or mistimed one is obvious.
  *
- * A worklist, not a gate: a book with few pictures is not a failure, and
- * nothing here fails the build.
+ * A review surface, not a gate: the unit tests hold the authored count, while
+ * this is where a human judges the editorial choices.
  *
  * Usage:
  *   node scripts/reader-illustrations.mjs          # every shipped book

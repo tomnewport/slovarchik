@@ -1,14 +1,14 @@
 // Emoji illustrations for the literature reader: one picture every few
 // sentences, the way a children's edition breaks a page of prose.
 //
-// The rule the design has to satisfy is a rhythm, not a density — a picture
-// roughly every one to five sentences, never two in a row, and never one that
-// has nothing to do with the sentence it sits under. So this walks the book in
-// windows of at most `every` sentences and illustrates the best-matching
-// sentence in each window, leaving a window blank when nothing in it earns a
-// picture. Pure and deterministic: the same book always gets the same pictures,
-// which matters because the page they land on has to be stable across a
-// re-render and a re-paginate.
+// The shipped books use a small authored set of important moments: normally
+// three or four over the whole work, and every meaningful beat in a very short
+// fable. That makes the pictures punctuation rather than wallpaper. The stem
+// matcher below is the preview for a newly added book while its moments are
+// being chosen; a corpus test requires that choice before the book ships. Pure
+// and deterministic: the same book always gets the same pictures, which matters
+// because the page they land on has to be stable across a re-render and a
+// re-paginate.
 //
 // Matching is deliberately shallow. The Russian is matched by stem, because a
 // literary text inflects everything and the reader's real dictionary is one
@@ -26,6 +26,127 @@ const MAX_ENDING = 3
 
 /** A picture needs more than one passing English word to earn its place. */
 const MIN_SCORE = 3
+
+/**
+ * The story beats worth punctuating in the shipped library. Sentence IDs are
+ * stable editorial IDs, so the choice stays beside the exact moment it was
+ * made for even when pagination or screen size changes.
+ *
+ * The two-sentence polecat has two pictures rather than inventing a third beat;
+ * the other very short works use three. Everything else gets four.
+ */
+export const FEATURED_MOMENTS = Object.freeze({
+  'afanasyev-turnip': Object.freeze({
+    'afanasyev-turnip:01': '🌱',
+    'afanasyev-turnip:02': '👵',
+    'afanasyev-turnip:04': '🐶',
+    'afanasyev-turnip:07': '🎉',
+  }),
+  'chekhov-fat-thin': Object.freeze({
+    'chekhov-fat-thin:001': '🚂',
+    'chekhov-fat-thin:036': '🎓',
+    'chekhov-fat-thin:060': '⭐',
+    'chekhov-fat-thin:078': '🙇',
+  }),
+  'chorny-foal': Object.freeze({
+    'chorny-foal:01': '🐴',
+    'chorny-foal:02': '🐶',
+    'chorny-foal:03': '🏇',
+  }),
+  'krylov-crow-fox': Object.freeze({
+    'krylov-crow-fox:02': '🧀',
+    'krylov-crow-fox:03': '🦊',
+    'krylov-crow-fox:05': '👑',
+    'krylov-crow-fox:06': '🎵',
+  }),
+  'krylov-dragonfly-ant': Object.freeze({
+    'krylov-dragonfly-ant:01': '☀️',
+    'krylov-dragonfly-ant:03': '❄️',
+    'krylov-dragonfly-ant:05': '🙏',
+    'krylov-dragonfly-ant:09': '💃',
+  }),
+  'krylov-elephant-pug': Object.freeze({
+    'krylov-elephant-pug:01': '🐘',
+    'krylov-elephant-pug:02': '🐶',
+    'krylov-elephant-pug:03': '🙉',
+    'krylov-elephant-pug:04': '💪',
+  }),
+  'krylov-swan-pike-crayfish': Object.freeze({
+    'krylov-swan-pike-crayfish:01': '🤝',
+    'krylov-swan-pike-crayfish:02': '🛒',
+    'krylov-swan-pike-crayfish:03': '🧭',
+    'krylov-swan-pike-crayfish:04': '⏳',
+  }),
+  'lenin-state-revolution-1-1': Object.freeze({
+    'lenin-state-revolution-1-1:003': '🖼️',
+    'lenin-state-revolution-1-1:009': '🏛️',
+    'lenin-state-revolution-1-1:018': '⚔️',
+    'lenin-state-revolution-1-1:037': '🔥',
+  }),
+  'mayakovsky-good-and-bad': Object.freeze({
+    'mayakovsky-good-and-bad:01': '👨‍👦',
+    'mayakovsky-good-and-bad:06': '🧼',
+    'mayakovsky-good-and-bad:12': '🛡️',
+    'mayakovsky-good-and-bad:16': '✅',
+  }),
+  'pushkin-fisherman-fish': Object.freeze({
+    'pushkin-fisherman-fish:03': '🐟',
+    'pushkin-fisherman-fish:18': '🏠',
+    'pushkin-fisherman-fish:31': '👑',
+    'pushkin-fisherman-fish:42': '🪣',
+  }),
+  'tolstoy-ant-dove': Object.freeze({
+    'tolstoy-ant-dove:02': '🌊',
+    'tolstoy-ant-dove:03': '🕊️',
+    'tolstoy-ant-dove:05': '🏹',
+    'tolstoy-ant-dove:06': '🐜',
+  }),
+  'tolstoy-fine-threads': Object.freeze({
+    'tolstoy-fine-threads:01': '🧵',
+    'tolstoy-fine-threads:03': '🫥',
+    'tolstoy-fine-threads:05': '👀',
+    'tolstoy-fine-threads:06': '💰',
+  }),
+  'tolstoy-lion-dog': Object.freeze({
+    'tolstoy-lion-dog:03': '🦁',
+    'tolstoy-lion-dog:10': '🥩',
+    'tolstoy-lion-dog:16': '💔',
+    'tolstoy-lion-dog:23': '🕯️',
+  }),
+  'tolstoy-lion-mouse': Object.freeze({
+    'tolstoy-lion-mouse:01': '🦁',
+    'tolstoy-lion-mouse:04': '🙏',
+    'tolstoy-lion-mouse:06': '🪢',
+    'tolstoy-lion-mouse:07': '🐭',
+  }),
+  'tolstoy-plum-stone': Object.freeze({
+    'tolstoy-plum-stone:01': '🍑',
+    'tolstoy-plum-stone:07': '🤫',
+    'tolstoy-plum-stone:14': '☠️',
+    'tolstoy-plum-stone:16': '🪟',
+  }),
+  'tolstoy-polecat': Object.freeze({
+    'tolstoy-polecat:01': '🔧',
+    'tolstoy-polecat:02': '🩸',
+  }),
+  'tolstoy-snake-head-tail': Object.freeze({
+    'tolstoy-snake-head-tail:01': '🐍',
+    'tolstoy-snake-head-tail:03': '🌳',
+    'tolstoy-snake-head-tail:05': '💔',
+    'tolstoy-snake-head-tail:06': '🕳️',
+  }),
+  'tolstoy-stone': Object.freeze({
+    'tolstoy-stone:01': '🙏',
+    'tolstoy-stone:04': '🪨',
+    'tolstoy-stone:07': '⛓️',
+    'tolstoy-stone:08': '❤️',
+  }),
+  'tolstoy-tortoise-eagle': Object.freeze({
+    'tolstoy-tortoise-eagle:01': '🐢',
+    'tolstoy-tortoise-eagle:02': '🦅',
+    'tolstoy-tortoise-eagle:03': '💥',
+  }),
+})
 
 /**
  * Stems and the picture they earn. Each entry is
@@ -101,6 +222,8 @@ export const LEXICON = Object.freeze([
   { emoji: '😨', ru: ['страх', 'испуг', 'бояз', 'боял'], en: ['fear', 'frightened', 'afraid'], weight: 2 },
   { emoji: '😴', ru: ['спал', 'сон', 'засн', 'уснул'], en: ['slept', 'sleep', 'asleep', 'dream'], weight: 2 },
   { emoji: '❤️', ru: ['любов', 'любил', 'серд'], en: ['love', 'loved', 'heart'], weight: 1 },
+  // Exact forms keep кровать (bed) from becoming blood.
+  { emoji: '🩸', ru: [], ruExact: ['кровь', 'крови', 'кровью'], en: ['blood'], weight: 2 },
 
   // Things and places
   { emoji: '🏠', ru: ['дом', 'изб', 'хат'], en: ['house', 'home', 'hut'], weight: 1 },
@@ -187,9 +310,9 @@ export function illustrationFor(sentence) {
 /**
  * Which sentences get a picture, as `sentence id → emoji`.
  *
- * One per window of `every` sentences at most, so the rhythm holds however
- * richly a passage happens to match, and a window with nothing to illustrate
- * stays bare rather than reaching for something vague.
+ * A shipped book returns its authored story beats. An uncurated book falls back
+ * to at most one match per window of `every` sentences, so the audit has useful
+ * proposals without letting a richly matching passage become a strip cartoon.
  *
  * Never the same picture twice running, even where that costs a window its
  * picture. Half of Lenin's § 1 is about the state, and a column of identical
@@ -202,6 +325,18 @@ export function illustrationFor(sentence) {
 export function illustrate(sentences, { every = 5 } = {}) {
   const chosen = new Map()
   const all = sentences ?? []
+  const firstId = String(all[0]?.id ?? '')
+  const separator = firstId.indexOf(':')
+  const bookId = separator < 0 ? '' : firstId.slice(0, separator)
+  const featured = FEATURED_MOMENTS[bookId]
+  if (featured) {
+    for (const sentence of all) {
+      const emoji = featured[sentence.id]
+      if (emoji) chosen.set(sentence.id, emoji)
+    }
+    return chosen
+  }
+
   let previous = null
   for (let from = 0; from < all.length; from += every) {
     let best = null
