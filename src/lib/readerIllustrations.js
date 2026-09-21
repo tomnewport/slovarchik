@@ -53,6 +53,12 @@ export const FEATURED_MOMENTS = Object.freeze({
     'chorny-foal:02': '🐶',
     'chorny-foal:03': '🏇',
   }),
+  'kropotkin-hostages-letter': Object.freeze({
+    'kropotkin-hostages-letter:002': '🔒',
+    'kropotkin-hostages-letter:007': '⏳',
+    'kropotkin-hostages-letter:014': '😨',
+    'kropotkin-hostages-letter:016': '💭',
+  }),
   'krylov-crow-fox': Object.freeze({
     'krylov-crow-fox:02': '🧀',
     'krylov-crow-fox:03': '🦊',
@@ -247,6 +253,8 @@ export const LEXICON = Object.freeze([
   { emoji: '⛓️', ru: ['угнет', 'гнёт', 'гнет', 'подавл'], en: ['oppression', 'oppressed', 'suppress'], weight: 2 },
   { emoji: '⚖️', ru: ['класс', 'противореч', 'примирен'], en: ['class', 'antagonism', 'reconciliation'], weight: 1 },
   { emoji: '📜', ru: ['учен', 'сочинен', 'цитат', 'теор'], en: ['teaching', 'writings', 'quotation', 'theory'], weight: 1 },
+  { emoji: '🔒', ru: ['заложник'], en: ['hostage', 'hostages'], weight: 2 },
+  { emoji: '💭', ru: ['помыс'], en: ['thought'], weight: 2 },
 ])
 
 /** Every stem/word in the lexicon, indexed for a single pass over a sentence. */

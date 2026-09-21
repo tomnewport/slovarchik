@@ -10,6 +10,8 @@ describe('choosing a picture for one sentence', () => {
   it('reads the Russian, inflected as the text has it', () => {
     expect(illustrationFor(s('1', 'Голубка несла ветку.')).emoji).toBe('🕊️')
     expect(illustrationFor(s('2', 'Муравей спустился к ручью.')).emoji).toBe('🐜')
+    expect(illustrationFor(s('3', 'Заложника держали в тюрьме.')).emoji).toBe('🔒')
+    expect(illustrationFor(s('4', 'Один помысел об этом будущем.')).emoji).toBe('💭')
   })
 
   it('takes the translation as a second opinion, not as the only one', () => {
