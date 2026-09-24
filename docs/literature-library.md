@@ -20,7 +20,7 @@ separate, clearly labelled selections with their own IDs and versions.
 | Children’s | Sasha Chorny — *Детский остров* (1921) | **Available:** complete *Жеребёнок*; further poems queued |
 | Children’s | Public-domain Russian folk-tale collection | Planned; verify collection editor and edition |
 | Beginner | Tolstoy — children’s prose / *Азбука* | **Available:** complete *Голова и хвост змеи*, *Камень*, *Косточка*, *Лев и мышь*, *Лев и собачка*, *Муравей и голубка*, *Тонкие нитки*, *Хорёк* and *Черепаха и орёл*; further pieces queued |
-| Beginner | Chekhov — selected short stories | Planned |
+| Beginner | Chekhov — selected short stories | **Available on Intermediate:** complete *Толстый и тонкий* and *Смерть чиновника*; further stories queued, and the shelf is Intermediate rather than Beginner — Chekhov's civil-service world is not beginner reading |
 | Beginner | Turgenev — *Муму* | Planned |
 | Intermediate | Pushkin — *Капитанская дочка* | Planned |
 | Intermediate | Lermontov — *Герой нашего времени* | Planned |
