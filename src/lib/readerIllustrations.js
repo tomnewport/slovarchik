@@ -77,6 +77,12 @@ export const FEATURED_MOMENTS = Object.freeze({
     'krylov-elephant-pug:03': '🙉',
     'krylov-elephant-pug:04': '💪',
   }),
+  'krylov-quartet': Object.freeze({
+    'krylov-quartet:01': '🐒',
+    'krylov-quartet:03': '🎻',
+    'krylov-quartet:07': '💺',
+    'krylov-quartet:12': '🐦',
+  }),
   'krylov-swan-pike-crayfish': Object.freeze({
     'krylov-swan-pike-crayfish:01': '🤝',
     'krylov-swan-pike-crayfish:02': '🛒',
