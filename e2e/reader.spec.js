@@ -178,7 +178,7 @@ test('the Lenin selection downloads and keeps sentence progress and bookmarks', 
   await page.setViewportSize({ width: 393, height: 620 })
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
-  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция' })
+  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция — глава I, § 1' })
   await selection.locator('summary.library-book-summary').click()
   await expect(selection).toContainText('Selection from a longer work')
   await selection.getByRole('button', { name: 'Download' }).click()
@@ -229,7 +229,7 @@ test('the Lenin selection downloads and keeps sentence progress and bookmarks', 
 test('tapping a word the curriculum never teaches still explains it', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
-  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция' })
+  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция — глава I, § 1' })
   await selection.locator('summary.library-book-summary').click()
   await selection.getByRole('button', { name: 'Download' }).click()
   await selection.getByRole('link', { name: 'Read' }).click()
