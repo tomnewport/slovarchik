@@ -59,6 +59,12 @@ export const FEATURED_MOMENTS = Object.freeze({
     'kropotkin-hostages-letter:014': '😨',
     'kropotkin-hostages-letter:016': '💭',
   }),
+  'lenin-state-revolution-1-2': Object.freeze({
+    'lenin-state-revolution-1-2:003': '🗺️',
+    'lenin-state-revolution-1-2:011': '🔗',
+    'lenin-state-revolution-1-2:022': '⚔️',
+    'lenin-state-revolution-1-2:031': '💣',
+  }),
   'krylov-crow-fox': Object.freeze({
     'krylov-crow-fox:02': '🧀',
     'krylov-crow-fox:03': '🦊',
