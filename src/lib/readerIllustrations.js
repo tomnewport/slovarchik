@@ -42,6 +42,12 @@ export const FEATURED_MOMENTS = Object.freeze({
     'afanasyev-turnip:04': '🐶',
     'afanasyev-turnip:07': '🎉',
   }),
+  'chekhov-death-of-a-clerk': Object.freeze({
+    'chekhov-death-of-a-clerk:006': '🤧',
+    'chekhov-death-of-a-clerk:014': '🎖️',
+    'chekhov-death-of-a-clerk:065': '😡',
+    'chekhov-death-of-a-clerk:070': '⚰️',
+  }),
   'chekhov-fat-thin': Object.freeze({
     'chekhov-fat-thin:001': '🚂',
     'chekhov-fat-thin:036': '🎓',
