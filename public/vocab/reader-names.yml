@@ -202,6 +202,24 @@ words:
       sg_acc: Мише́ль
       sg_ins: Мише́ль
       sg_pre: Мише́ль
+  "Мишенька=Mishenka":
+    cefr_level: B1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Mishenka (coaxing form of Ми́ша, the everyday name for a bear in Russian tales)"
+    facts:
+      - kind: note
+        text: "The Monkey coaxes the bear by name while telling him where to sit."
+    declension:
+      sg_nom: Ми́шенька
+      sg_gen: Ми́шеньки
+      sg_dat: Ми́шеньке
+      sg_acc: Ми́шеньку
+      sg_ins: Ми́шенькой
+      sg_pre: Ми́шеньке
   "Нафанаил=Nathanael":
     cefr_level: B2
     learn: false
