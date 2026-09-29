@@ -9,6 +9,10 @@ const sourceDir = resolve(root, 'content/books')
 const outputDir = resolve(root, 'public/books/packs')
 const catalogFile = resolve(root, 'public/books/catalog.json')
 const SHELVES = ['Children’s', 'Beginner', 'Intermediate', 'Advanced', 'Political']
+// A unit is text unless it says otherwise. A heading or an epigraph is still a
+// reader unit — tappable, revealable, bookmarkable — but set apart from the
+// verse, so a part title never reads as one more line of the poem.
+const KINDS = ['heading', 'epigraph']
 
 export function buildPack(source) {
   if (!/^[a-z0-9-]+$/.test(source?.id ?? '') || !SHELVES.includes(source.shelf) ||
@@ -28,8 +32,9 @@ export function buildPack(source) {
       !s.ru?.trim() || !s.en?.trim() || s.review !== 'checked') {
       throw new Error(`Unreviewed, untranslated or duplicate sentence: ${s.id ?? '(unnamed)'}`)
     }
+    if (s.kind !== undefined && !KINDS.includes(s.kind)) throw new Error(`Unknown unit kind: ${s.id}`)
     ids.add(s.id)
-    return { id: s.id, paragraph: s.paragraph, ru: s.ru.trim(), en: s.en.trim() }
+    return { id: s.id, paragraph: s.paragraph, ...(s.kind ? { kind: s.kind } : {}), ru: s.ru.trim(), en: s.en.trim() }
   })
   return {
     schemaVersion: 1,
@@ -49,7 +54,7 @@ export function buildPack(source) {
 /** Corpus edits must advertise a new data version; translations can change alone. */
 export function assertVersionBump(previous, next) {
   if (!previous || previous.id !== next.id) return
-  const text = (pack) => pack.sentences.map(({ id, paragraph, ru }) => ({ id, paragraph, ru }))
+  const text = (pack) => pack.sentences.map(({ id, paragraph, kind, ru }) => ({ id, paragraph, kind, ru }))
   const changedText = JSON.stringify(text(previous)) !== JSON.stringify(text(next)) ||
     ['title', 'author', 'shelf', 'form'].some((key) => previous[key] !== next[key]) ||
     JSON.stringify(previous.source) !== JSON.stringify(next.source) ||

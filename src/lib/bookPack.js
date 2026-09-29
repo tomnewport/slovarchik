@@ -1,6 +1,8 @@
 // A book's text and prepared translations are one versioned, opt-in JSON pack.
 // Lexical meaning stays in the separately cached Slovarchik dictionary.
 export const SHELVES = ['Children’s', 'Beginner', 'Intermediate', 'Advanced', 'Political']
+/** A unit with no `kind` is text; these set a part title or its epigraph apart. */
+export const UNIT_KINDS = ['heading', 'epigraph']
 
 export function validateCatalog(data) {
   if (data?.schemaVersion !== 1 || !Array.isArray(data.books)) throw new Error('Unsupported book catalog')
@@ -29,7 +31,8 @@ export function validatePack(pack, entry) {
     if (!sentence.id?.startsWith(`${pack.id}:`) || ids.has(sentence.id) ||
       typeof sentence.paragraph !== 'string' || !sentence.paragraph ||
       typeof sentence.ru !== 'string' || !sentence.ru.trim() ||
-      typeof sentence.en !== 'string' || !sentence.en.trim()) {
+      typeof sentence.en !== 'string' || !sentence.en.trim() ||
+      (sentence.kind !== undefined && !UNIT_KINDS.includes(sentence.kind))) {
       throw new Error('Invalid or untranslated sentence in book pack')
     }
     ids.add(sentence.id)

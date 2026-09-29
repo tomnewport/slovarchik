@@ -59,6 +59,15 @@ export const FEATURED_MOMENTS = Object.freeze({
     'chorny-foal:02': '🐶',
     'chorny-foal:03': '🏇',
   }),
+  // Over two and a half thousand lines, four pictures are the four things the
+  // tale is about: the little horse's first words, the feather that starts every
+  // trouble, the whale with a village on its back, and Ivan made tsar.
+  'ershov-humpbacked-horse': Object.freeze({
+    'ershov-humpbacked-horse:1.14.1': '🐴',
+    'ershov-humpbacked-horse:1.21.1': '🔥',
+    'ershov-humpbacked-horse:3.3.4': '🐋',
+    'ershov-humpbacked-horse:3.36.1': '👑',
+  }),
   'kropotkin-hostages-letter': Object.freeze({
     'kropotkin-hostages-letter:002': '🔒',
     'kropotkin-hostages-letter:007': '⏳',

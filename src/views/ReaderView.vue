@@ -84,7 +84,7 @@ function fits(from, to) {
     paragraph.className = `reader-paragraph${book.value.form === 'verse' ? ' reader-verse' : ''}`
     for (const sentence of group.sentences) {
       const line = document.createElement('span')
-      line.className = 'reader-sentence'
+      line.className = `reader-sentence${sentence.kind ? ` reader-${sentence.kind}` : ''}`
       for (const token of readerTokens(sentence.ru)) {
         const span = document.createElement('span')
         if (token.word) span.className = 'reader-word'
@@ -344,7 +344,7 @@ onBeforeUnmount(() => {
     <div class="reader-body" @pointerdown="showingAppearance = false">
       <article ref="readingPage" class="reader-page" aria-label="Russian text" lang="ru">
         <p v-for="paragraph in visibleParagraphs" :key="paragraph.id" class="reader-paragraph" :class="{ 'reader-verse': book.form === 'verse' }">
-          <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null" @click="clickSentence">
+          <span v-for="sentence in paragraph.sentences" :key="sentence.id" class="reader-sentence" :class="sentence.kind && `reader-${sentence.kind}`" @pointerdown="pointerDown" @pointerup="pointerUp($event, sentence)" @pointercancel="swipeStart = null" @click="clickSentence">
             <span v-for="(token, tokenIndex) in readerTokens(sentence.ru)" :key="tokenIndex" :class="{ 'reader-word': token.word }" :data-reader-word="token.word ? token.text : null">{{ token.text }}</span><button class="reader-reveal" :aria-label="revealedId === sentence.id ? 'Hide translation' : `Reveal translation for ${sentence.ru}`" :aria-expanded="revealedId === sentence.id" @click="clickReveal(sentence)">↔</button>
             <span v-if="illustrationFor(sentence)" class="reader-illustration" role="img" :aria-label="`Illustration for this sentence: ${illustrationFor(sentence)}`">{{ illustrationFor(sentence) }}</span>
             <span v-if="revealedId === sentence.id && sentence.en" class="reader-translation" lang="en">
@@ -427,6 +427,10 @@ onBeforeUnmount(() => {
 .reader-verse { text-indent: 0; }
 .reader-verse .reader-sentence { display: block; white-space: pre-line; }
 .reader-verse .reader-sentence + .reader-sentence { margin-inline-start: 0; margin-block-start: .65em; }
+/* A part title and its epigraph: still units the learner can tap and reveal,
+   but centred and set apart so they never read as a line of the text. */
+.reader-heading { display: block; margin: .4em 0 .2em; font-weight: 600; letter-spacing: .04em; text-align: center; text-indent: 0; }
+.reader-epigraph { display: block; margin: 0 0 .9em auto; max-width: 80%; font-size: .85em; font-style: italic; text-align: right; text-indent: 0; }
 .reader-reveal { font: .65em system-ui, sans-serif; margin: 0 .12em; vertical-align: baseline; opacity: .5; }
 .reader button.reader-reveal { padding: 0 .12em; }
 .reader-word { cursor: pointer; }

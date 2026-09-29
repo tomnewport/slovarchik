@@ -18,6 +18,17 @@ describe('literature editorial gate', () => {
     expect(() => buildPack({ ...source, form: 'scroll' })).toThrow('Incomplete')
   })
 
+  it('sets a part heading or epigraph apart, and nothing else', () => {
+    const heading = { id: 'fable:0:1', paragraph: '0', kind: 'heading', ru: 'Часть I', en: 'Part I', review: 'checked' }
+    const pack = buildPack({ ...source, sentences: [heading, ...source.sentences] })
+    expect(pack.sentences[0]).toEqual({ id: 'fable:0:1', paragraph: '0', kind: 'heading', ru: 'Часть I', en: 'Part I' })
+    expect(pack.sentences[1]).not.toHaveProperty('kind')
+    expect(() => buildPack({ ...source, sentences: [{ ...heading, kind: 'footnote' }] })).toThrow('Unknown unit kind')
+    // Turning a line into a heading changes the text a learner sees.
+    expect(() => assertVersionBump(buildPack(source), buildPack({ ...source,
+      sentences: [{ ...source.sentences[0], kind: 'heading' }] }))).toThrow('packVersion')
+  })
+
   it('allows an English-only revision without changing Russian IDs or the app', () => {
     const oldPack = buildPack(source)
     const revised = buildPack({ ...source, translationVersion: 2,
