@@ -20856,7 +20856,10 @@ words:
         en_gb: They will open a new shop.
         inflect: { token: 2, tense: future, person: 3pl, rule: verb-future }
       - ru: Ты бы откры́л окно́ поши́ре.
-        en_gb: You would open the window a bit wider.
+        en_gb: You should open the window a bit wider.
+        en_alt:
+          - Why don't you open the window a bit wider?
+          - You ought to open the window a bit wider.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
       - ru: Ско́ро они́ откро́ют но́вую ста́нцию.
         en_gb: Soon they will open a new station.
