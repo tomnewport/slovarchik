@@ -112,7 +112,23 @@
     "growing with each book — unlike the entry-JS raises above, which were",
     "one-off costs of a route. If it becomes the dominant term, the thing to",
     "reconsider is whether the reader dictionary should ship with the corpus at",
-    "all, or download per book pack."
+    "all, or download per book pack.",
+    "",
+    "Raised again for Ershov's «Конёк-горбунок» (#818), merged together with",
+    "five shorter books (Chekhov's «Смерть чиновника», three Krylov fables and",
+    "Lenin's chapter I, § 2). Measured on dist/vocab after `npm run build`:",
+    "main @ 89c0d4a 1201636 B; with the five shorter books 1214864 B",
+    "(+13228 B, inside the old limit); with Ershov 1263017 B (+48153 B). The",
+    "tale is 2,510 lines of 1830s folk verse, and check:reader wanted 1,625",
+    "surface forms nothing explained: 1,318 new learn: false entries and new",
+    "forms on 51 existing ones. The limit moves 1225000 -> 1285000 B, about",
+    "21 KiB of headroom for the next few short books.",
+    "",
+    "reader-glosses.json is now 79.6 KiB gzipped — the fourth largest vocab",
+    "file, behind nouns, verbs and adjectives, and about 6.5% of the payload.",
+    "It is still not the dominant term the note above warns about, but one more",
+    "book of this length would make the per-pack dictionary worth building",
+    "rather than raising this number again."
   ],
   "limits": {
     "entryJs": {
@@ -126,7 +142,7 @@
       "why": "The render-blocking stylesheet, for the same reason."
     },
     "vocab": {
-      "bytes": 1225000,
+      "bytes": 1285000,
       "label": "Vocab payload (gzip)",
       "why": "Every dist/vocab/*.json a first install downloads. It only ever grows, and nouns.json is roughly half of it. Build-time derived data (#657) legitimately moves work into this number — that is the trade being made, so raise the limit there and say by how much."
     }
