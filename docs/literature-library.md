@@ -14,24 +14,25 @@ separate, clearly labelled selections with their own IDs and versions.
 
 | Shelf | Candidate | Status |
 | --- | --- | --- |
-| Children’s | Krylov — selected fables | **Available:** complete *Ворона и Лисица*, *Лебедь, Щука и Рак*, *Слон и Моська* and *Стрекоза и Муравей*; further fables queued |
+| Children’s | Krylov — selected fables | **Available:** complete *Волк и Ягнёнок*, *Ворона и Лисица*, *Квартет*, *Лебедь, Щука и Рак*, *Мартышка и очки*, *Слон и Моська* and *Стрекоза и Муравей*; further fables queued |
 | Children’s | Pushkin — selected fairy tales | Planned; *Сказка о рыбаке и рыбке* first |
 | Children’s | Mayakovsky — *Что такое хорошо и что такое плохо?* (1925) | Planned; rights clear on all three tests |
 | Children’s | Sasha Chorny — *Детский остров* (1921) | **Available:** complete *Жеребёнок*; further poems queued |
 | Children’s | Public-domain Russian folk-tale collection | Planned; verify collection editor and edition |
 | Beginner | Tolstoy — children’s prose / *Азбука* | **Available:** complete *Голова и хвост змеи*, *Камень*, *Косточка*, *Лев и мышь*, *Лев и собачка*, *Муравей и голубка*, *Тонкие нитки*, *Хорёк* and *Черепаха и орёл*; further pieces queued |
-| Beginner | Chekhov — selected short stories | Planned |
+| Beginner | Chekhov — selected short stories | **Available on Intermediate:** complete *Толстый и тонкий* and *Смерть чиновника*; further stories queued, and the shelf is Intermediate rather than Beginner — Chekhov's civil-service world is not beginner reading |
 | Beginner | Turgenev — *Муму* | Planned |
 | Intermediate | Pushkin — *Капитанская дочка* | Planned |
 | Intermediate | Lermontov — *Герой нашего времени* | Planned |
 | Intermediate | Turgenev — *Отцы и дети* | Planned |
+| Advanced | Ershov — *Конёк-горбунок* (1834; the 1868 text) | **Available:** the complete verse tale in three parts, from the last edition of the author's lifetime — children's literature by subject, Advanced by its folk register, inversions and archaic vocabulary |
 | Advanced | Dostoevsky — *Преступление и наказание* | Planned |
 | Advanced | Gogol — *Мёртвые души* | Planned |
 | Advanced | Tolstoy — *Война и мир* | Planned |
 | Political | Gorky — *Мать* | Planned; rights checked — Gorky died 1936 (Russian term ran out in 2007) and the novel was published 1906–07, so it is out of US copyright too |
 | Political | Chernyshevsky — *Что делать?* | Planned |
 | Political | Kropotkin — *О заложниках: письмо В. И. Ленину* | **Available:** complete 1920 letter, written in Russian |
-| Political | Lenin — *Государство и революция* | **Available:** chapter I, § 1 selection (19 complete paragraphs); remainder planned |
+| Political | Lenin — *Государство и революция* | **Available:** chapter I, § 1 and § 2 selections (19 and 14 complete paragraphs); §§ 3–4 and later chapters planned |
 
 ## Which works may ship
 

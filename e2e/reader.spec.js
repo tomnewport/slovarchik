@@ -178,7 +178,7 @@ test('the Lenin selection downloads and keeps sentence progress and bookmarks', 
   await page.setViewportSize({ width: 393, height: 620 })
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
-  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция' })
+  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция — глава I, § 1' })
   await selection.locator('summary.library-book-summary').click()
   await expect(selection).toContainText('Selection from a longer work')
   await selection.getByRole('button', { name: 'Download' }).click()
@@ -226,10 +226,64 @@ test('the Lenin selection downloads and keeps sentence progress and bookmarks', 
   await expect(text).toContainText('С учением Маркса происходит теперь то')
 })
 
+test('the complete Ershov tale sets its parts apart and keeps its place across them', async ({ page }) => {
+  await page.setViewportSize({ width: 393, height: 620 })
+  await page.goto('/')
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  const tale = page.locator('.library-book').filter({ hasText: 'Конёк-горбунок' })
+  await tale.locator('summary.library-book-summary').click()
+  await expect(tale.getByText('Пётр Ершов')).toBeVisible()
+  await tale.getByRole('button', { name: 'Download' }).click()
+  await tale.getByRole('link', { name: 'Read' }).click()
+
+  // A part title and its epigraph are units like any other, but set apart
+  // from the verse rather than reading as its first lines.
+  const text = page.getByRole('article', { name: 'Russian text' })
+  const heading = text.locator('.reader-heading').first()
+  await expect(heading).toHaveText(/Часть I\b/)
+  expect(await heading.evaluate((node) => getComputedStyle(node).textAlign)).toBe('center')
+  await expect(text.locator('.reader-epigraph').first()).toContainText('Начинается сказка сказываться.')
+  await text.getByRole('button', { name: /Reveal translation for За горами, за лесами/ }).click()
+  await expect(text.getByText('Beyond the mountains, beyond the forests', { exact: false })).toBeVisible()
+  await text.getByRole('button', { name: 'Bookmark' }).click()
+  await expect(page.locator('.reader-saved')).toContainText('1')
+
+  // Paging through 2,500 lines is not the point: start where a returning
+  // reader would, at the head of Part II, and cross the boundary both ways.
+  await writeSetting(page, 'reader:position:ershov-humpbacked-horse', 'ershov-humpbacked-horse:2.0.1')
+  await page.reload()
+  await expect(text.locator('.reader-heading').first()).toHaveText(/Часть II\b/)
+  await expect(text.locator('.reader-epigraph').first()).toContainText('Скоро сказка сказывается')
+  await page.getByRole('button', { name: 'Previous page' }).click()
+  await expect(text).toContainText('Как он сделался царём.')
+  await page.reload()
+  await expect(text).toContainText('Как он сделался царём.')
+
+  // A page that spans the boundary still sets the new part's title apart.
+  await writeSetting(page, 'reader:position:ershov-humpbacked-horse', 'ershov-humpbacked-horse:1.33.4')
+  await page.reload()
+  await expect(text).toContainText('Как он сделался царём.')
+  await expect(text.locator('.reader-heading')).toHaveText(/Часть II\b/)
+
+  // A bookmark from Part I brings the reader back across the boundary, and
+  // the place it lands on is the one a reload restores.
+  await page.locator('.reader-saved').click()
+  await page.locator('.reader-bookmarks').getByRole('button', { name: /За горами, за лесами/ }).click()
+  await expect(text).toContainText('За горами, за лесами')
+  await page.reload()
+  await expect(text).toContainText('За горами, за лесами')
+
+  await writeSetting(page, 'reader:position:ershov-humpbacked-horse', 'ershov-humpbacked-horse:3.39.2')
+  await page.reload()
+  await expect(text).toContainText('В рот ни капли не попало.')
+  await expect(page.getByRole('button', { name: 'Next page' })).toBeDisabled()
+  await expect(page.getByRole('progressbar', { name: 'Book progress' })).toHaveAttribute('aria-valuenow', '100')
+})
+
 test('tapping a word the curriculum never teaches still explains it', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: /Literature reader/ }).click()
-  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция' })
+  const selection = page.locator('.library-book').filter({ hasText: 'Государство и революция — глава I, § 1' })
   await selection.locator('summary.library-book-summary').click()
   await selection.getByRole('button', { name: 'Download' }).click()
   await selection.getByRole('link', { name: 'Read' }).click()
@@ -283,6 +337,20 @@ test('an illustration appears between the sentences, and the switch survives a r
   await expect(text).toContainText('Купила мать слив')
   await expect(text.locator('.reader-illustration')).toHaveCount(0)
 })
+
+/** Store one reader setting straight into IndexedDB, as the app would. */
+function writeSetting(page, key, value) {
+  return page.evaluate(([name, stored]) => new Promise((resolve, reject) => {
+    const open = indexedDB.open('slovarchik')
+    open.onerror = () => reject(open.error)
+    open.onsuccess = () => {
+      const transaction = open.result.transaction('meta', 'readwrite')
+      transaction.objectStore('meta').put({ key: name, value: stored })
+      transaction.oncomplete = () => resolve()
+      transaction.onerror = () => reject(transaction.error)
+    }
+  }), [key, value])
+}
 
 /** Read one stored reader setting straight out of IndexedDB. */
 function readSetting(page, key) {

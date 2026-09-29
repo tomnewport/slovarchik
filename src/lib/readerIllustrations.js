@@ -42,6 +42,12 @@ export const FEATURED_MOMENTS = Object.freeze({
     'afanasyev-turnip:04': '🐶',
     'afanasyev-turnip:07': '🎉',
   }),
+  'chekhov-death-of-a-clerk': Object.freeze({
+    'chekhov-death-of-a-clerk:006': '🤧',
+    'chekhov-death-of-a-clerk:014': '🎖️',
+    'chekhov-death-of-a-clerk:065': '😡',
+    'chekhov-death-of-a-clerk:070': '⚰️',
+  }),
   'chekhov-fat-thin': Object.freeze({
     'chekhov-fat-thin:001': '🚂',
     'chekhov-fat-thin:036': '🎓',
@@ -53,11 +59,26 @@ export const FEATURED_MOMENTS = Object.freeze({
     'chorny-foal:02': '🐶',
     'chorny-foal:03': '🏇',
   }),
+  // Over two and a half thousand lines, four pictures are the four things the
+  // tale is about: the little horse's first words, the feather that starts every
+  // trouble, the whale with a village on its back, and Ivan made tsar.
+  'ershov-humpbacked-horse': Object.freeze({
+    'ershov-humpbacked-horse:1.14.1': '🐴',
+    'ershov-humpbacked-horse:1.21.1': '🔥',
+    'ershov-humpbacked-horse:3.3.4': '🐋',
+    'ershov-humpbacked-horse:3.36.1': '👑',
+  }),
   'kropotkin-hostages-letter': Object.freeze({
     'kropotkin-hostages-letter:002': '🔒',
     'kropotkin-hostages-letter:007': '⏳',
     'kropotkin-hostages-letter:014': '😨',
     'kropotkin-hostages-letter:016': '💭',
+  }),
+  'lenin-state-revolution-1-2': Object.freeze({
+    'lenin-state-revolution-1-2:003': '🗺️',
+    'lenin-state-revolution-1-2:011': '🔗',
+    'lenin-state-revolution-1-2:022': '⚔️',
+    'lenin-state-revolution-1-2:031': '💣',
   }),
   'krylov-crow-fox': Object.freeze({
     'krylov-crow-fox:02': '🧀',
@@ -76,6 +97,24 @@ export const FEATURED_MOMENTS = Object.freeze({
     'krylov-elephant-pug:02': '🐶',
     'krylov-elephant-pug:03': '🙉',
     'krylov-elephant-pug:04': '💪',
+  }),
+  'krylov-monkey-glasses': Object.freeze({
+    'krylov-monkey-glasses:01': '🐒',
+    'krylov-monkey-glasses:02': '👓',
+    'krylov-monkey-glasses:03': '😤',
+    'krylov-monkey-glasses:04': '💥',
+  }),
+  'krylov-quartet': Object.freeze({
+    'krylov-quartet:01': '🐒',
+    'krylov-quartet:03': '🎻',
+    'krylov-quartet:07': '💺',
+    'krylov-quartet:12': '🐦',
+  }),
+  'krylov-wolf-lamb': Object.freeze({
+    'krylov-wolf-lamb:02': '🐑',
+    'krylov-wolf-lamb:03': '🐺',
+    'krylov-wolf-lamb:06': '⚖️',
+    'krylov-wolf-lamb:09': '🌲',
   }),
   'krylov-swan-pike-crayfish': Object.freeze({
     'krylov-swan-pike-crayfish:01': '🤝',

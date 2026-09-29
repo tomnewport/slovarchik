@@ -150,6 +150,38 @@ test('a chosen literature pack opens, bookmarks and survives offline, then remov
   await expect(fable.getByRole('button', { name: 'Download' })).toBeVisible()
 })
 
+test('the complete Ershov tale reads offline, with every word it prints explained', async ({ page, context }) => {
+  await primeCaches(page)
+  await page.getByRole('button', { name: /Literature reader/ }).click()
+  const tale = page.locator('.library-book').filter({ hasText: 'Конёк-горбунок' })
+  await tale.locator('summary.library-book-summary').click()
+  await tale.getByRole('button', { name: 'Download' }).click()
+  await tale.getByRole('link', { name: 'Read' }).click()
+  const text = page.getByRole('article', { name: 'Russian text' })
+  await expect(text).toContainText('За горами, за лесами')
+
+  await context.setOffline(true)
+  await page.reload()
+  await expect(text.locator('.reader-heading').first()).toHaveText(/Часть I\b/)
+  await page.getByRole('button', { name: /Reveal translation for За горами, за лесами/ }).click()
+  await expect(text.getByText('Beyond the mountains, beyond the forests', { exact: false })).toBeVisible()
+  await page.getByRole('button', { name: 'Next page' }).click()
+  await expect(text).not.toContainText('За горами, за лесами')
+
+  // The reader dictionary is part of the cached corpus, so the tale's folk
+  // forms explain themselves offline too: whatever words this page holds.
+  const words = text.locator('.reader-word')
+  expect(await words.count()).toBeGreaterThan(5)
+  for (let i = 0; i < 6; i++) {
+    const surface = await words.nth(i).getAttribute('data-reader-word')
+    await words.nth(i).click()
+    const popup = page.getByRole('dialog', { name: `Dictionary: ${surface}` })
+    await expect(popup).toBeVisible()
+    await expect(popup).not.toContainText('No dictionary entry')
+    await popup.getByRole('button', { name: 'Close dictionary' }).click()
+  }
+})
+
 test('a route never visited online still opens offline', async ({ page, context }) => {
   await primeCaches(page)
 
