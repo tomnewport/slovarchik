@@ -95,6 +95,25 @@ words:
       sg_acc: Ва́ню
       sg_ins: Ва́ней
       sg_pre: Ва́не
+  "Ванюша=Vanyusha":
+    cefr_level: B1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Vanyusha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Affectionate form of Иван, warmer than Ваня."
+        see: ["Иван=Ivan", "Ваня=Vanya"]
+    declension:
+      sg_nom: Ваню́ша
+      sg_gen: Ваню́ши
+      sg_dat: Ваню́ше
+      sg_acc: Ваню́шу
+      sg_ins: Ваню́шей
+      sg_pre: Ваню́ше
   "Владимир=Vladimir":
     cefr_level: A2
     learn: false
@@ -209,6 +228,44 @@ words:
       sg_acc: Ива́новича
       sg_ins: Ива́новичем
       sg_pre: Ива́новиче
+  "Иванушка=Ivanushka":
+    cefr_level: B1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Ivanushka (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Affectionate form of Иван; the name folk tales give Ivan the Fool."
+        see: ["Иван=Ivan"]
+    declension:
+      sg_nom: Ива́нушка
+      sg_gen: Ива́нушки
+      sg_dat: Ива́нушке
+      sg_acc: Ива́нушку
+      sg_ins: Ива́нушкой
+      sg_pre: Ива́нушке
+  "Иваша=Ivasha":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Ivasha (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Familiar form of Иван."
+        see: ["Иван=Ivan"]
+    declension:
+      sg_nom: Ива́ша
+      sg_gen: Ива́ши
+      sg_dat: Ива́ше
+      sg_acc: Ива́шу
+      sg_ins: Ива́шей
+      sg_pre: Ива́ше
   "Ильич=Ilyich":
     cefr_level: B1
     learn: false
@@ -266,6 +323,24 @@ words:
       sg_acc: Лёшу
       sg_ins: Лёшей
       sg_pre: Лёше
+  "Макар=Makar":
+    cefr_level: B1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Makar (Russian personal name)"
+    facts:
+      - kind: note
+        text: "A peasant name in proverbs: доселева Мака́р огоро́ды копа́л, а ны́нече Мака́р в воево́ды попа́л = rags to riches."
+    declension:
+      sg_nom: Мака́р
+      sg_gen: Мака́ра
+      sg_dat: Мака́ру
+      sg_acc: Мака́ра
+      sg_ins: Мака́ром
+      sg_pre: Мака́ре
   "Мария=Maria":
     cefr_level: A2
     learn: false
@@ -432,6 +507,24 @@ words:
       sg_acc: Никола́я
       sg_ins: Никола́ем
       sg_pre: Никола́е
+  "Петрович=Petrovich":
+    cefr_level: A2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Petrovich (Russian personal name)"
+    facts:
+      - kind: note
+        text: "Masculine patronymic meaning son of Пётр."
+    declension:
+      sg_nom: Петро́вич
+      sg_gen: Петро́вича
+      sg_dat: Петро́вичу
+      sg_acc: Петро́вича
+      sg_ins: Петро́вичем
+      sg_pre: Петро́виче
   "Саша=Sasha":
     cefr_level: A2
     learn: false

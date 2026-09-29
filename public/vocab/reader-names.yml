@@ -463,3 +463,127 @@ words:
       sg_acc: Эфиа́льта
       sg_ins: Эфиа́льтом
       sg_pre: Эфиа́льте
+
+  # ── Ершов, «Конёк-горбунок» (#818) ───────────────────────────────────────
+  # Ivan's two brothers go by the folk forms of their names, which decline like
+  # feminine nouns in -а: «Гаври́ле говори́т», «мы с Гаври́лой».
+  "Данило=Danilo":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Danilo (Ivan's eldest brother; the folk form of Дании́л)"
+    declension:
+      sg_nom: Дани́ло
+      sg_gen: Дани́лы
+      sg_dat: Дани́ле
+      sg_acc: Дани́лу
+      sg_ins: Дани́лой
+      sg_pre: Дани́ле
+  "Гаврило=Gavrilo":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Gavrilo (Ivan's middle brother; the folk form of Гаврии́л)"
+    declension:
+      sg_nom: Гаври́ло
+      sg_gen: Гаври́лы
+      sg_dat: Гаври́ле
+      sg_acc: Гаври́лу
+      sg_ins: Гаври́лой
+      sg_pre: Гаври́ле
+  "Еруслан=Yeruslan":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Yeruslan (Еруслан Лазаревич, the mighty hero of a Russian chapbook tale; храпи́т, как Ерусла́н = snores like a giant)"
+    declension:
+      sg_nom: Ерусла́н
+      sg_gen: Ерусла́на
+      sg_dat: Ерусла́ну
+      sg_acc: Ерусла́на
+      sg_ins: Ерусла́ном
+      sg_pre: Ерусла́не
+  "Салтан=Saltan":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Saltan (a sultan: the folk tales' foreign tsar, царь Салта́н)"
+    declension:
+      sg_nom: Салта́н
+      sg_gen: Салта́на
+      sg_dat: Салта́ну
+      sg_acc: Салта́на
+      sg_ins: Салта́ном
+      sg_pre: Салта́не
+  "Мамай=Mamai":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Mamai (the Golden Horde commander routed in 1380; сло́вно шёл Мама́й войно́й = as if the Tatars had swept through)"
+    declension:
+      sg_nom: Мама́й
+      sg_gen: Мама́я
+      sg_dat: Мама́ю
+      sg_acc: Мама́я
+      sg_ins: Мама́ем
+      sg_pre: Мама́е
+  "Бобыл=Bobyl":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Bobyl (the prince in a chapbook tale's title, князь Бобы́л)"
+    declension:
+      sg_nom: Бобы́л
+      sg_gen: Бобы́ла
+      sg_dat: Бобы́лу
+      sg_acc: Бобы́ла
+      sg_ins: Бобы́лом
+      sg_pre: Бобы́ле
+  "Буян=Buyan":
+    cefr_level: C1
+    learn: false
+    gender: m
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: "Buyan (the magic island of Russian folklore: на о́строве Буя́не)"
+    declension:
+      sg_nom: Буя́н
+      sg_gen: Буя́на
+      sg_dat: Буя́ну
+      sg_acc: Буя́н
+      sg_ins: Буя́ном
+      sg_pre: Буя́не
+  "Пресня=Presnya":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: i
+    number: ["sg"]
+    en_gb:
+      standard: "Presnya (a district of Moscow, in the song «Ходи́л молоде́ц на Пре́сню»)"
+    declension:
+      sg_nom: Пре́сня
+      sg_gen: Пре́сни
+      sg_dat: Пре́сне
+      sg_acc: Пре́сню
+      sg_ins: Пре́сней
+      sg_pre: Пре́сне

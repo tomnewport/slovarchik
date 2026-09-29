@@ -233,6 +233,8 @@ words:
     cefr_level: C1
     learn: false
     accented: пред
+    forms:
+      - пре́до
     en_gb:
       standard: "before (poetic form of the preposition пе́ред)"
   "пускай=let":
@@ -301,3 +303,579 @@ words:
     accented: то́лько-то́лько
     en_gb:
       standard: "only just (barely, and only at that moment)"
+
+  # ── Ершов, «Конёк-горбунок» (1868) ─────────────────────────────────────────
+  # Every word the complete verse tale uses that nothing else explains (#818).
+  # Folk and archaic forms (окия́н, севодни, the -ся after a vowel in
+  # верну́лися), the emphatic -то and coaxing -ка compounds the tokeniser keeps
+  # whole, and the surface forms of curriculum words the tale bends out of
+  # their paradigm: those are keyed on the surface form, never on the lemma,
+  # so no curriculum word gains a rival entry.
+  "бережно=carefully, gently":
+    cefr_level: B2
+    learn: false
+    accented: бе́режно
+    en_gb:
+      standard: "carefully, gently"
+  "бешено=wildly, furiously":
+    cefr_level: B2
+    learn: false
+    accented: бе́шено
+    en_gb:
+      standard: "wildly, furiously"
+  "благополучно=all right, safely":
+    cefr_level: B1
+    learn: false
+    accented: благополу́чно
+    en_gb:
+      standard: "all right, safely (всё благополу́чно = all is well)"
+  "босиком=barefoot":
+    cefr_level: B1
+    learn: false
+    accented: босико́м
+    en_gb:
+      standard: "barefoot"
+  "вдругорядь=a second time, again":
+    cefr_level: C2
+    learn: false
+    accented: вдруго́рядь
+    forms:
+      - вдруго́редь
+    en_gb:
+      standard: "a second time, again (folk; also вдруго́редь)"
+  "вечерком=in the evening":
+    cefr_level: B1
+    learn: false
+    accented: вечерко́м
+    en_gb:
+      standard: "in the evening (colloquial)"
+  "вконец=completely, for good":
+    cefr_level: C1
+    learn: false
+    accented: вконе́ц
+    en_gb:
+      standard: "completely, for good"
+  "влево=to the left":
+    cefr_level: B1
+    learn: false
+    accented: вле́во
+    en_gb:
+      standard: "to the left"
+  "вмиг=in an instant":
+    cefr_level: B2
+    learn: false
+    accented: вмиг
+    en_gb:
+      standard: "in an instant"
+  "волчком=like a top":
+    cefr_level: C1
+    learn: false
+    accented: волчко́м
+    en_gb:
+      standard: "like a top (вскочи́л волчко́м = sprang up spinning)"
+  "вплоть=right up":
+    cefr_level: B2
+    learn: false
+    accented: вплоть
+    en_gb:
+      standard: "right up (вплоть до утра́ = right up till morning)"
+  "впоследни=for the last time":
+    cefr_level: C2
+    learn: false
+    accented: впосле́дни
+    en_gb:
+      standard: "for the last time (folk: в после́дний раз)"
+  "вправо=to the right":
+    cefr_level: B1
+    learn: false
+    accented: впра́во
+    en_gb:
+      standard: "to the right"
+  "вприсядку=in a squatting dance":
+    cefr_level: C1
+    learn: false
+    accented: вприся́дку
+    en_gb:
+      standard: "in a squatting dance (the Russian dance done in a crouch, kicking out the legs)"
+  "враз=at once, at the same time":
+    cefr_level: C1
+    learn: false
+    accented: враз
+    en_gb:
+      standard: "at once, at the same time"
+  "всамделе=really, sure enough":
+    cefr_level: C2
+    learn: false
+    accented: всамде́ле
+    en_gb:
+      standard: "really, sure enough (folk: в са́мом де́ле)"
+  "втихомолку=on the quiet":
+    cefr_level: C1
+    learn: false
+    accented: втихомо́лку
+    en_gb:
+      standard: "on the quiet"
+  "вчерась=yesterday":
+    cefr_level: C2
+    learn: false
+    accented: вчера́сь
+    en_gb:
+      standard: "yesterday (folk form of вчера́)"
+  "глухо=dully, muffled":
+    cefr_level: B2
+    learn: false
+    accented: глу́хо
+    en_gb:
+      standard: "dully, muffled"
+  "горько=bitterly":
+    cefr_level: B1
+    learn: false
+    accented: го́рько
+    en_gb:
+      standard: "bitterly"
+  "дополна=to the brim":
+    cefr_level: C1
+    learn: false
+    accented: допо́лна
+    en_gb:
+      standard: "to the brim"
+  "доселе=until now":
+    cefr_level: C1
+    learn: false
+    accented: досе́ле
+    en_gb:
+      standard: "until now (archaic)"
+  "доселева=until now, formerly":
+    cefr_level: C2
+    learn: false
+    accented: досе́лева
+    en_gb:
+      standard: "until now, formerly (folk form of досе́ле)"
+  "дружно=in harmony, together":
+    cefr_level: B1
+    learn: false
+    accented: дру́жно
+    en_gb:
+      standard: "in harmony, together"
+  "дыбом=rearing":
+    cefr_level: C1
+    learn: false
+    accented: ды́бом
+    en_gb:
+      standard: "rearing (ходи́ть ды́бом = to rear up)"
+  "жутко=terrifying":
+    cefr_level: B2
+    learn: false
+    accented: жу́тко
+    en_gb:
+      standard: "terrifying (жу́тко бы́ло = it was terrifying)"
+  "зельно=terribly, very":
+    cefr_level: C2
+    learn: false
+    accented: зе́льно
+    en_gb:
+      standard: "terribly, very (archaic: зе́льно пьян = roaring drunk)"
+  "исправно=properly, dutifully":
+    cefr_level: C1
+    learn: false
+    accented: испра́вно
+    en_gb:
+      standard: "properly, dutifully"
+  "как-нибудь=somehow":
+    cefr_level: B1
+    learn: false
+    accented: ка́к-нибудь
+    en_gb:
+      standard: "somehow"
+  "канальски=damnably":
+    cefr_level: C2
+    learn: false
+    accented: кана́льски
+    en_gb:
+      standard: "damnably (from кана́лья, rogue)"
+  "кишма=in a swarm":
+    cefr_level: C2
+    learn: false
+    accented: кишма́
+    en_gb:
+      standard: "in a swarm (folk: кишма́ кише́ть = to seethe)"
+  "куда-то=somewhere":
+    cefr_level: B1
+    learn: false
+    accented: куда́-то
+    en_gb:
+      standard: "somewhere (away)"
+  "легонько=lightly, gently":
+    cefr_level: C1
+    learn: false
+    accented: лего́нько
+    en_gb:
+      standard: "lightly, gently"
+  "ливмя=in torrents":
+    cefr_level: C1
+    learn: false
+    accented: ливмя́
+    en_gb:
+      standard: "in torrents (дождь ливмя́ лил = it poured)"
+  "любо-дорого=a treat to":
+    cefr_level: C1
+    learn: false
+    accented: лю́бо-до́рого
+    en_gb:
+      standard: "a treat to (лю́бо-до́рого смотре́ть = a sight for sore eyes)"
+  "мешкотно=slowly":
+    cefr_level: C2
+    learn: false
+    accented: ме́шкотно
+    en_gb:
+      standard: "slowly (folk: де́ло ме́шкотно твори́тся = a deed is slowly done)"
+  "набок=to one side, askew":
+    cefr_level: B2
+    learn: false
+    accented: на́бок
+    en_gb:
+      standard: "to one side, askew"
+  "назавтра=the next day":
+    cefr_level: B2
+    learn: false
+    accented: наза́втра
+    en_gb:
+      standard: "the next day"
+  "назло=out of spite":
+    cefr_level: B2
+    learn: false
+    accented: назло́
+    en_gb:
+      standard: "out of spite"
+  "налегке=travelling light":
+    cefr_level: C1
+    learn: false
+    accented: налегке́
+    en_gb:
+      standard: "travelling light (here: without clothes)"
+  "наперёд=forward":
+    cefr_level: C1
+    learn: false
+    accented: наперёд
+    en_gb:
+      standard: "forward (за́дом наперёд = back to front)"
+  "наподхват=in chorus, taking up the tune":
+    cefr_level: C2
+    learn: false
+    accented: наподхва́т
+    en_gb:
+      standard: "in chorus, taking up the tune (гря́нуть пе́сню наподхва́т)"
+  "напоследок=at last, finally":
+    cefr_level: C1
+    learn: false
+    accented: напосле́док
+    en_gb:
+      standard: "at last, finally"
+  "насилу=barely, with difficulty":
+    cefr_level: C1
+    learn: false
+    accented: наси́лу
+    en_gb:
+      standard: "barely, with difficulty"
+  "недалече=not far":
+    cefr_level: C2
+    learn: false
+    accented: недале́че
+    en_gb:
+      standard: "not far (folk)"
+  "немедля=without delay":
+    cefr_level: C1
+    learn: false
+    accented: неме́для
+    en_gb:
+      standard: "without delay"
+  "несподручно=awkward, inconvenient":
+    cefr_level: C2
+    learn: false
+    accented: несподру́чно
+    en_gb:
+      standard: "awkward, inconvenient"
+  "неча=no need":
+    cefr_level: C2
+    learn: false
+    accented: не́ча
+    en_gb:
+      standard: "no need (folk: не́ча мо́лвить = no denying)"
+  "николи=never":
+    cefr_level: C2
+    learn: false
+    accented: нико́ли
+    en_gb:
+      standard: "never (folk)"
+  "нынече=now, nowadays":
+    cefr_level: C2
+    learn: false
+    accented: ны́нече
+    en_gb:
+      standard: "now, nowadays (folk form of ны́не)"
+  "отродяся=ever in one's life":
+    cefr_level: C2
+    learn: false
+    accented: отродя́ся
+    en_gb:
+      standard: "ever in one's life (folk form of отродя́сь)"
+  "оттого-то=that's why":
+    cefr_level: B2
+    learn: false
+    accented: оттого́-то
+    en_gb:
+      standard: "that's why (оттого́ with emphatic -то)"
+  "оттудова=from there":
+    cefr_level: C2
+    learn: false
+    accented: отту́дова
+    en_gb:
+      standard: "from there (folk form of отту́да)"
+  "пластью=flat, spread flat":
+    cefr_level: C2
+    learn: false
+    accented: пла́стью
+    en_gb:
+      standard: "flat, spread flat (folk: ви́снет пла́стью = hangs flat)"
+  "плотно=firmly, heavily":
+    cefr_level: B2
+    learn: false
+    accented: пло́тно
+    forms:
+      - плотне́й
+    en_gb:
+      standard: "firmly, heavily (плотне́й: comparative — держи́ плотне́й = hold tighter)"
+  "по-прежнему=as before":
+    cefr_level: B1
+    learn: false
+    accented: по-пре́жнему
+    en_gb:
+      standard: "as before"
+  "поныне=to this day":
+    cefr_level: C1
+    learn: false
+    accented: поны́не
+    en_gb:
+      standard: "to this day"
+  "порою=at times":
+    cefr_level: C1
+    learn: false
+    accented: поро́ю
+    en_gb:
+      standard: "at times (ино́й поро́ю = now and then)"
+  "послее=after, later":
+    cefr_level: C2
+    learn: false
+    accented: по́слее
+    en_gb:
+      standard: "after, later (folk form of по́сле)"
+  "поутру=in the morning":
+    cefr_level: C1
+    learn: false
+    accented: поутру́
+    en_gb:
+      standard: "in the morning"
+  "пошто=why, what for":
+    cefr_level: C2
+    learn: false
+    accented: пошто́
+    en_gb:
+      standard: "why, what for (folk)"
+  "преважно=most importantly, with great self-importance":
+    cefr_level: C2
+    learn: false
+    accented: прева́жно
+    en_gb:
+      standard: "most importantly, with great self-importance"
+  "преспокойно=quite peacefully":
+    cefr_level: C1
+    learn: false
+    accented: преспоко́йно
+    en_gb:
+      standard: "quite peacefully"
+  "престрого=most strictly":
+    cefr_level: C2
+    learn: false
+    accented: престро́го
+    en_gb:
+      standard: "most strictly"
+  "протяжно=in a drawl, drawn out":
+    cefr_level: C1
+    learn: false
+    accented: протя́жно
+    en_gb:
+      standard: "in a drawl, drawn out"
+  "прямиком=straight, directly":
+    cefr_level: C1
+    learn: false
+    accented: прямико́м
+    en_gb:
+      standard: "straight, directly"
+  "разумеется=of course":
+    cefr_level: B1
+    learn: false
+    accented: разуме́ется
+    en_gb:
+      standard: "of course"
+  "рядком=in a row, side by side":
+    cefr_level: C1
+    learn: false
+    accented: рядко́м
+    en_gb:
+      standard: "in a row, side by side"
+  "самолично=in person, oneself":
+    cefr_level: C2
+    learn: false
+    accented: самоли́чно
+    en_gb:
+      standard: "in person, oneself"
+  "севодни=today":
+    cefr_level: C2
+    learn: false
+    accented: сево́дни
+    en_gb:
+      standard: "today (folk spelling of сего́дня)"
+  "складно=properly, coherently":
+    cefr_level: C1
+    learn: false
+    accented: скла́дно
+    en_gb:
+      standard: "properly, coherently"
+  "славно=splendid, well done":
+    cefr_level: B1
+    learn: false
+    accented: сла́вно
+    en_gb:
+      standard: "splendid, well done"
+  "сладкогласно=in honeyed tones":
+    cefr_level: C2
+    learn: false
+    accented: сладкогла́сно
+    en_gb:
+      standard: "in honeyed tones"
+  "слыхом=even by hearsay":
+    cefr_level: C1
+    learn: false
+    accented: слы́хом
+    en_gb:
+      standard: "even by hearsay (слы́хом не слыха́ть = never to have heard of)"
+  "смиренно=humbly":
+    cefr_level: C1
+    learn: false
+    accented: смире́нно
+    en_gb:
+      standard: "humbly"
+  "смирно=quietly, meekly":
+    cefr_level: B2
+    learn: false
+    accented: сми́рно
+    en_gb:
+      standard: "quietly, meekly (сми́рно! = quiet!)"
+  "сполна=in full":
+    cefr_level: C1
+    learn: false
+    accented: сполна́
+    en_gb:
+      standard: "in full"
+  "спросонков=half asleep":
+    cefr_level: C2
+    learn: false
+    accented: спросо́нков
+    en_gb:
+      standard: "half asleep (folk form of спросо́нок)"
+  "супротив=opposite, across from":
+    cefr_level: C2
+    learn: false
+    accented: супроти́в
+    en_gb:
+      standard: "opposite, across from (folk form of про́тив)"
+  "сызнова=anew, once again":
+    cefr_level: C2
+    learn: false
+    accented: сы́знова
+    en_gb:
+      standard: "anew, once again"
+  "тайком=secretly":
+    cefr_level: B2
+    learn: false
+    accented: тайко́м
+    en_gb:
+      standard: "secretly"
+  "теперича=now":
+    cefr_level: C2
+    learn: false
+    accented: тепе́рича
+    en_gb:
+      standard: "now (folk form of тепе́рь)"
+  "теперя=now":
+    cefr_level: C2
+    learn: false
+    accented: тепе́ря
+    en_gb:
+      standard: "now (folk form of тепе́рь)"
+  "тишком=quietly, on the quiet":
+    cefr_level: C2
+    learn: false
+    accented: тишко́м
+    en_gb:
+      standard: "quietly, on the quiet"
+  "точнёхонько=exactly":
+    cefr_level: C2
+    learn: false
+    accented: точнёхонько
+    en_gb:
+      standard: "exactly (folk intensive of то́чно)"
+  "туго=tight; hard going":
+    cefr_level: B2
+    learn: false
+    accented: ту́го
+    en_gb:
+      standard: "tight; hard going (ту́го? = in a tight spot?)"
+  "тяжко=heavily, grievously":
+    cefr_level: C1
+    learn: false
+    accented: тя́жко
+    en_gb:
+      standard: "heavily, grievously"
+  "усердно=diligently":
+    cefr_level: C1
+    learn: false
+    accented: усе́рдно
+    en_gb:
+      standard: "diligently"
+  "четырежды=four times":
+    cefr_level: B2
+    learn: false
+    accented: четы́режды
+    en_gb:
+      standard: "four times"
+  "чисто-начисто=spotlessly clean":
+    cefr_level: C1
+    learn: false
+    accented: чи́сто-начи́сто
+    en_gb:
+      standard: "spotlessly clean"
+  "чудно=wondrous, strange":
+    cefr_level: C1
+    learn: false
+    accented: чу́дно
+    en_gb:
+      standard: "wondrous, strange (чу́дно де́ло! = a wondrous business!)"
+  "чуточку=a tiny bit":
+    cefr_level: B1
+    learn: false
+    accented: чу́точку
+    en_gb:
+      standard: "a tiny bit"
+  "эвон=over there, yonder":
+    cefr_level: C2
+    learn: false
+    accented: э́вон
+    en_gb:
+      standard: "over there, yonder (folk)"
+  "этак=like this, so":
+    cefr_level: B2
+    learn: false
+    accented: э́так
+    en_gb:
+      standard: "like this, so"
