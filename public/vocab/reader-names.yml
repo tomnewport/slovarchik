@@ -12,6 +12,39 @@
 # «Геростра́том»), and a paradigm also lets the popup say which case it is.
 ---
 words:
+  "Аркадия=Arcadia":
+    cefr_level: C1
+    learn: false
+    gender: f
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Arcadia (a pleasure garden with a theatre in Petersburg)"
+    declension:
+      sg_nom: Арка́дия
+      sg_gen: Арка́дии
+      sg_dat: Арка́дии
+      sg_acc: Арка́дию
+      sg_ins: Арка́дией
+      sg_pre: Арка́дии
+  "Бризжалов=Brizzhalov":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Brizzhalov (the general Chervyakov sneezes over)"
+    facts:
+      - kind: note
+        text: "The name suggests брюзжа́ть, to grumble."
+    declension:
+      sg_nom: Бризжа́лов
+      sg_gen: Бризжа́лова
+      sg_dat: Бризжа́лову
+      sg_acc: Бризжа́лова
+      sg_ins: Бризжа́ловым
+      sg_pre: Бризжа́лове
   "Ванценбах=Wanzenbach":
     cefr_level: B2
     learn: false
@@ -98,6 +131,21 @@ words:
       sg_acc: де-Кле́р
       sg_ins: де-Кле́р
       sg_pre: де-Кле́р
+  "Дмитрич=Dmitrich":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Dmitrich (spoken short form of the patronymic Дми́триевич)"
+    declension:
+      sg_nom: Дми́трич
+      sg_gen: Дми́трича
+      sg_dat: Дми́тричу
+      sg_acc: Дми́трича
+      sg_ins: Дми́тричем
+      sg_pre: Дми́триче
   "Жучка=Zhuchka":
     cefr_level: B2
     learn: false
@@ -285,6 +333,24 @@ words:
       sg_acc: Станисла́ва
       sg_ins: Станисла́вом
       sg_pre: Станисла́ве
+  "Червяков=Chervyakov":
+    cefr_level: B2
+    learn: false
+    gender: m
+    animacy: a
+    number: ["sg"]
+    en_gb:
+      standard: "Chervyakov (the clerk of the story; the name is built on червя́к, a worm)"
+    facts:
+      - kind: note
+        text: "Chekhov names him after a worm, and the story never says so."
+    declension:
+      sg_nom: Червяко́в
+      sg_gen: Червяко́ва
+      sg_dat: Червяко́ву
+      sg_acc: Червяко́ва
+      sg_ins: Червяко́вым
+      sg_pre: Червяко́ве
   "Чернов=Chernov":
     cefr_level: C1
     learn: false
