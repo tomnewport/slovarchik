@@ -20774,7 +20774,10 @@ words:
         en_gb: From December, we will open the shop at eight.
         inflect: { token: 4, tense: future, person: 1pl, rule: verb-future }
       - ru: Я открыва́л бы о́кна по утра́м.
-        en_gb: I would open the windows in the mornings.
+        en_gb: I'd open the windows in the mornings.
+        en_alt:
+          - If I were you, I'd open the windows in the mornings.
+          - I would open the windows in the mornings.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
   "открываться=to open":
     cefr_level: B1
