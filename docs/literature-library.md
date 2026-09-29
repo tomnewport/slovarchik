@@ -25,6 +25,7 @@ separate, clearly labelled selections with their own IDs and versions.
 | Intermediate | Pushkin — *Капитанская дочка* | Planned |
 | Intermediate | Lermontov — *Герой нашего времени* | Planned |
 | Intermediate | Turgenev — *Отцы и дети* | Planned |
+| Advanced | Ershov — *Конёк-горбунок* (1834; the 1868 text) | **Available:** the complete verse tale in three parts, from the last edition of the author's lifetime — children's literature by subject, Advanced by its folk register, inversions and archaic vocabulary |
 | Advanced | Dostoevsky — *Преступление и наказание* | Planned |
 | Advanced | Gogol — *Мёртвые души* | Planned |
 | Advanced | Tolstoy — *Война и мир* | Planned |

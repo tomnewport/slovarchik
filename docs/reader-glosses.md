@@ -90,6 +90,12 @@ have anything to say about it (`readerTokens`).
 - **The political lexicon of one text.** каутскиа́нство, социа́л-шовини́ст,
   мелкобуржуа́зный, эсе́р, меньшеви́к. A learner who wants these has the reader.
 - **Poetic and archaic forms.** мурава́, бо́ле, ве́шний, кум, ку́мушка, ль.
+- **Folk verse, whole.** Ershov's «Конёк-горбунок» alone brought 1,625
+  unexplained forms: окия́н, сево́дни, вдруго́рядь, the reflexive -ся after a
+  vowel (верну́лися, заика́яся), the folk short adjectives (бе́лы ру́ки,
+  по чи́сту по́лю), and the emphatic -то and coaxing -ка compounds the
+  tokeniser keeps whole (глаза́-то, посто́й-ка). Where one of these bends a
+  curriculum word, the entry is keyed on the surface form, never on the lemma.
 
 None of these is a candidate for drills, and promoting them would fill a
 learner's batches with words they will meet once in their life.

@@ -47,6 +47,26 @@ pinned Wikisource transcription, with its date and Russian manuscript
 provenance checked against the archival catalogue; the English is a new
 translation prepared for this reader.
 
+The Advanced shelf begins with Ershov's complete «Конёк-горбунок», from the
+seventh edition of 1868 — the last published in his lifetime — in the pinned
+Wikisource transcription of the Russian State Library scan. Its 2,510 lines
+are 473 reader units: each of the three parts opens with its heading and
+proverb epigraph, the source's stanzas are the paragraphs, and inside a stanza
+a unit ends where a sentence closes a rhyming couplet, normally every four to
+eight lines. Where the source's stanza break falls inside a couplet, or a
+sentence runs on across one, the sentence decides. The English is line for
+line and unrhymed, and every recurring formula is translated the same way each
+time; `translationReview` records the individual choices. Unit IDs are
+`part.stanza.n` (`ershov-humpbacked-horse:2.17.5`), so a later revision of one
+stanza's division cannot renumber the rest of the book.
+
+A unit may carry `"kind": "heading"` or `"kind": "epigraph"`. Both are still
+units — tappable, revealable, bookmarkable — but the reader sets them apart
+from the text, so a part title never reads as a line of the poem. The builder
+rejects any other kind, and changing a unit's kind is a text change that needs
+a `packVersion` bump. Clients older than the field show such units as ordinary
+lines.
+
 Before any of that, check that the work may ship at all: out of copyright in
 Russia, in the United States and in the EU/UK, since a pack downloads to a
 learner anywhere. `docs/literature-library.md` sets out the three tests, the two
