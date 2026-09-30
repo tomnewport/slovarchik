@@ -85,6 +85,11 @@ export const routes = [
     component: () => import('../views/ReaderView.vue'),
   },
   {
+    path: '/emporium',
+    name: 'emporium',
+    component: () => import('../views/CelebrationEmporiumView.vue'),
+  },
+  {
     path: '/maze',
     name: 'maze',
     component: () => import('../views/MeaningMazeView.vue'),

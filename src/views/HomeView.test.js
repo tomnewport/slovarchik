@@ -81,7 +81,7 @@ describe('HomeView', () => {
   it('lists the minigames in their own section, apart from the drills', async () => {
     const wrapper = mount(HomeView)
     const games = wrapper.findAll('.game')
-    expect(games).toHaveLength(5)
+    expect(games).toHaveLength(6)
 
     // Each option says what the learner will practise or read.
     expect(games[0].text()).toContain('Bomb disposal')
@@ -92,8 +92,10 @@ describe('HomeView', () => {
     expect(games[2].text()).toContain('two-digit numbers')
     expect(games[3].text()).toContain('Meaning maze')
     expect(games[3].text()).toContain('translation on sight')
-    expect(games[4].text()).toContain('Literature reader')
-    expect(games[4].text()).toContain('Read Russian')
+    expect(games[4].text()).toContain('Celebration Emporium')
+    expect(games[4].text()).toContain('ages and years')
+    expect(games[5].text()).toContain('Literature reader')
+    expect(games[5].text()).toContain('Read Russian')
 
     await games[0].trigger('click')
     expect(push).toHaveBeenCalledWith('/bomb')
@@ -104,6 +106,8 @@ describe('HomeView', () => {
     await games[3].trigger('click')
     expect(push).toHaveBeenCalledWith('/maze')
     await games[4].trigger('click')
+    expect(push).toHaveBeenCalledWith('/emporium')
+    await games[5].trigger('click')
     expect(push).toHaveBeenCalledWith('/library')
 
     // These options live in their own section, outside the drill list.
@@ -112,6 +116,7 @@ describe('HomeView', () => {
     expect(drills).not.toContain('Inflection crush')
     expect(drills).not.toContain('Firewatch')
     expect(drills).not.toContain('Meaning maze')
+    expect(drills).not.toContain('Celebration Emporium')
     expect(drills).not.toContain('Literature reader')
   })
 
