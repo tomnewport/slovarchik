@@ -114,6 +114,29 @@ describe('comprehensionCheck (#597)', () => {
     )
     expect(check.answer).toBe('indet')
   })
+
+  // носи́ть is a verb of motion only some of the time: in «Ты но́сишь очки́?» it
+  // is "to wear", and there is no journey to be one-way or round (#735).
+  it('says nothing about a motion verb the English shows is not moving', () => {
+    const nosit = verb({
+      key: 'носить=to wear',
+      ru: 'носить',
+      headword: 'носи́ть',
+      aspect: 'impf',
+      aspectPair: null,
+      motion: 'indet',
+      motionPair: { key: 'нести=to be carrying', ru: 'нести́', motion: 'det' },
+    })
+    const byKey = new Map([[nosit.key, nosit]])
+    const annotated = (ru, en) => new Map([['носить=to wear', [{ ru, en, target: { token: 2, tense: 'present' } }]]])
+    expect(comprehensionCheck({ ru: 'Ты но́сишь очки́?', source: 'носить=to wear' },
+      { byKey, annotations: annotated('Ты но́сишь очки́?', 'Do you wear glasses?') })).toBeNull()
+    // The same verb carrying something about is still motion, and still asked.
+    const carrying = comprehensionCheck({ ru: 'Она́ но́сит зо́нтик.', source: 'носить=to wear' },
+      { byKey, annotations: annotated('Она́ но́сит зо́нтик.', 'She carries an umbrella.') })
+    expect(carrying.kind).toBe('motion')
+    expect(carrying.answer).toBe('indet')
+  })
 })
 
 describe('comprehensionCheck over the bundled corpus', () => {

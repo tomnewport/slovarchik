@@ -49,8 +49,20 @@ const ASPECT_READINGS = {
  */
 const MOTION_READINGS = {
   det: 'one journey, going one way',
-  indet: 'a regular trip, or there and back',
+  // Wide on purpose: the indeterminate verb is habit, ability and aimless
+  // movement as much as the round trip — «Она́ хорошо́ пла́вает» is none of
+  // "a regular trip, or there and back", and a probe that offers only that
+  // reading makes its own right answer look wrong.
+  indet: 'movement in general: a habit, a skill, or there and back',
 }
+
+/**
+ * English that shows the sentence uses a motion verb in a sense that is not
+ * motion at all, so there is no direction to ask about. носи́ть is "to wear" far
+ * more often than "to carry about", and «Ты но́сишь очки́?» asked as one journey
+ * or a round trip is nonsense (#735).
+ */
+const NOT_MOTION = /\b(wear|wears|wore|worn|wearing)\b/i
 
 /** How to name the form the sentence actually used, in the explanation. */
 const LABELS = {
@@ -123,7 +135,7 @@ export function comprehensionCheck(phrase, { byKey, annotations } = {}) {
   // Motion first where a verb has both partners. Aspect is a distinction English
   // can at least gesture at with a progressive; идти́ against ходи́ть is one it
   // cannot make at all, so it is the more useful question of the two.
-  if (word.motionPair && MOTION_READINGS[word.motion]) {
+  if (word.motionPair && MOTION_READINGS[word.motion] && !NOT_MOTION.test(annotation.en ?? '')) {
     return probe({
       kind: 'motion',
       readings: MOTION_READINGS,

@@ -48,6 +48,19 @@ export function typingSequence(phrase) {
 }
 
 /**
+ * A translation with its bracketed notes removed. «Как тебя́ зову́т?» is "What
+ * is your name? (informal)", and the note tells the learner which "you" the
+ * Russian used — it is not part of the translation, so it is never a tile to
+ * place nor a word the answer must contain (#783). The feedback still shows the
+ * sentence with its note.
+ * @param {string} phrase
+ * @returns {string}
+ */
+export function withoutNotes(phrase) {
+  return String(phrase ?? '').replace(/\s*\([^)]*\)/g, ' ')
+}
+
+/**
  * Strip standalone English articles ("a", "an", "the") from a normalised
  * sequence so that wrong or missing articles in English translations of Russian
  * phrases are never counted as errors (Russian has no articles).
@@ -78,10 +91,10 @@ function stripArticles(seq) {
  * @returns {boolean}
  */
 export function phraseCorrect(input, target) {
-  const got = foldYo(stripArticles(typingSequence(input)))
+  const got = foldYo(stripArticles(typingSequence(withoutNotes(input))))
   const targets = Array.isArray(target) ? target : [target]
   return targets.some((t) => {
-    const wanted = foldYo(stripArticles(typingSequence(t)))
+    const wanted = foldYo(stripArticles(typingSequence(withoutNotes(t))))
     return wanted.length > 0 && got === wanted
   })
 }
@@ -92,7 +105,7 @@ export function phraseCorrect(input, target) {
  * @returns {Map<string, number>}
  */
 function wordBag(phrase) {
-  const seq = foldYo(stripArticles(typingSequence(phrase)))
+  const seq = foldYo(stripArticles(typingSequence(withoutNotes(phrase))))
   const bag = new Map()
   for (const w of seq.split(' ').filter(Boolean)) bag.set(w, (bag.get(w) ?? 0) + 1)
   return bag
@@ -385,7 +398,7 @@ export function phraseFeedback(input, target) {
  * @returns {string[]}
  */
 export function listeningTokens(phrase) {
-  return phraseTokens(phrase)
+  return phraseTokens(withoutNotes(phrase))
     .map((w) =>
       stripStress(w)
         .toLowerCase()

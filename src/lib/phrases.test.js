@@ -67,6 +67,20 @@ describe('typingSequence', () => {
   })
 })
 
+describe('a bracketed note in a translation (#783)', () => {
+  it('is neither a tile to place nor a word the answer must contain', () => {
+    const en = 'What is your name? (informal)'
+    expect(listeningTokens(en)).toEqual(['what', 'is', 'your', 'name'])
+    expect(phraseCorrect('what is your name', en)).toBe(true)
+    expect(phraseCorrectBagOfWords('your name is what', en)).toBe(true)
+    expect(phraseCorrect('he got a two for the test', 'He got a two (a failing grade) for the test.')).toBe(true)
+  })
+
+  it('still grades the words outside the note', () => {
+    expect(phraseCorrect('what is his name', 'What is your name? (informal)')).toBe(false)
+  })
+})
+
 describe('phraseCorrect', () => {
   it('accepts an answer that differs only in punctuation, case and stress', () => {
     expect(phraseCorrect('я иду в школу', 'Я иду́ в шко́лу.')).toBe(true)

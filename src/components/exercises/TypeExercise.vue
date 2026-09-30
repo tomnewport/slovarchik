@@ -470,7 +470,12 @@ onBeforeUnmount(() => setHintAllowed(true))
         <span lang="ru" class="answer-text">{{ exercise.ru }}</span>
         <SpeakButton :text="exercise.ru" />
       </div>
-      <p v-if="exercise.audio && exercise.en && (!isPhrase || firstEncounter)" class="translation-hint">{{ exercise.en }}</p>
+      <!-- What the learner just heard, once the answer is in. This is not a
+           teaching gloss — the question is over — so the first-encounter rule
+           (#740) that keeps help off a phrase seen before does not apply to it:
+           a listening drill that never says what the sentence meant only
+           teaches dictation (#785, #830). -->
+      <p v-if="exercise.audio && exercise.en" class="translation-hint">{{ exercise.en }}</p>
       <!-- About this word (#586) — only once the answer is resolved, right,
            wrong or given up on. A `build` fact spells the word out, so showing
            it any earlier would hand over the answer. -->

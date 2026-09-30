@@ -63,13 +63,13 @@ src/
   router/index.js       # routes → views. Highlights: / (home), /session, /batch,
                         #   /progress, /data, /vocab, /phrases, /phrase-fix,
                         #   /verb-government, /listening, /speaking, /numbers, /bomb,
-                        #   /crush, /firewatch, /maze, /library, /reader/:bookId, and the
+                        #   /crush, /firewatch, /maze, /emporium, /library, /reader/:bookId, and the
                         #   shared inflection view at /declension /verbs /pronouns
                         #   /adjectives (one InflectionView fed a different `pos` prop).
   views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
-                        #   BombDisposalView, InflectionCrushView, FirewatchView and
-                        #   MeaningMazeView are between-practice minigames launched from
-                        #   HomeView.
+                        #   BombDisposalView, InflectionCrushView, FirewatchView,
+                        #   MeaningMazeView and CelebrationEmporiumView are between-practice
+                        #   minigames launched from HomeView.
                         #   LibraryView downloads opt-in book packs; ReaderView
                         #   paginates literature by stable sentence ID.
                         #   FirewatchView is the only canvas in the app: 10 000 cells
@@ -189,6 +189,13 @@ src/
                         #     two-minute round can be simulated in a millisecond — which is how
                         #     DEFAULTS was tuned, and re-tuned whenever the plane changed,
                         #     rather than by playing
+                        #   celebrationEmporium  — the cake-shop minigame (#727): customers
+                        #     ask for a cake for an age («Моему́ бра́ту девятна́дцать лет», with
+                        #     only believable relations for each age) or a year (the ordinal
+                        #     «ты́сяча девятьсо́т два́дцать шесто́й год»), all spelled by
+                        #     numerals.js; the warm-up rule (the first few only want cakes on
+                        #     the shelves), the arrival ramp from 10 s down to the 3 s bake,
+                        #     and what the intercom will and won't bake
                         #   noise  — Perlin, and the fractal sum of it. There to warp the
                         #     coordinates firewatch's Voronoi layout is looked up at: a Voronoi
                         #     cell is a convex polygon, so the stands come out straight-edged

@@ -88,6 +88,12 @@ const MINIGAMES = [
     skill: 'Knowing a translation on sight — and knowing when it is not one.',
   },
   {
+    to: '/emporium',
+    icon: '🎂',
+    label: 'Celebration Emporium',
+    skill: 'Hearing ages and years, and dialling them back as numbers.',
+  },
+  {
     to: '/library',
     icon: '📖',
     label: 'Literature reader',
