@@ -44,6 +44,19 @@ async function giveUp(wrapper) {
 }
 
 describe('TypeExercise', () => {
+  // The first-encounter rule (#740) keeps help off a phrase seen before; once
+  // the answer is in, the question is over and the meaning is feedback, not
+  // help (#785, #830).
+  it('says what a heard phrase meant once it is answered, even on a later encounter', async () => {
+    const heard = { ...exercise, content: 'phrase', audio: true, ru: 'Я иду́ домо́й.', en: 'I am going home.' }
+    progressState.seenPhrases = new Set(['я иду домой'])
+    const wrapper = mount(TypeExercise, { props: { exercise: heard } })
+    expect(wrapper.find('.translation-hint').exists()).toBe(false)
+    await wrapper.find('input[lang="ru"]').setValue('я иду домой')
+    await wrapper.find('button.check').trigger('click')
+    expect(wrapper.find('.translation-hint').text()).toBe('I am going home.')
+  })
+
   it('shows the part of speech the answer should be (#503)', () => {
     const wrapper = mount(TypeExercise, { props: { exercise: { ...exercise, en: 'cold', pos: 'adjective' } } })
     expect(wrapper.find('.pos').text()).toBe('adjective')
