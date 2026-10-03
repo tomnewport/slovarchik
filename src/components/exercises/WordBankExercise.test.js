@@ -253,8 +253,10 @@ describe('WordBankExercise honesty system', () => {
     expect(wrapper.text()).toContain('Marked correct')
     expect(wrapper.emitted('dispute')).toBeTruthy()
     expect(wrapper.emitted('dispute')[0][0]).toEqual({ submitted })
-    // Once overridden, the prompt is gone — no nagging.
+    // Once overridden, the prompt is gone — no nagging — and the learner is
+    // thanked for a report that is how the sentence set improves.
     expect(wrapper.find('.dispute').exists()).toBe(false)
+    expect(wrapper.find('.contribute-note').text()).toContain('Thank you')
 
     await wrapper.find('button.next').trigger('click')
     expect(wrapper.emitted('done')[0][0]).toEqual({ correct: true })
