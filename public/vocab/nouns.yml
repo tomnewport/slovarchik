@@ -14576,6 +14576,14 @@ words:
       - ru: Суд потре́бовал серьёзных доказа́тельств.
         en_gb: The court demanded serious proof.
         inflect: { token: 4, case: gen, number: pl, rule: noun-gen-pl }
+    facts:
+      - kind: build
+        text: "Доказа́ть with -тельство on it: the -тель of писа́тель and the -ство of лека́рство fused into one noun ending, as in обстоя́тельство. It names what does the proving."
+        parts:
+          - { ru: "до-", en: "all the way to" }
+          - { ru: "каза́", en: "show" }
+          - { ru: "-тельство", en: "noun ending" }
+        see: ["доказать=to prove", "обстоятельство=circumstance"]
   "доклад=report":
     cefr_level: B1
     gender: m
@@ -17689,6 +17697,13 @@ words:
       pl_acc: зака́зы
       pl_ins: зака́зами
       pl_pre: зака́зах
+    facts:
+      - kind: build
+        text: "Заказа́ть with the verb ending taken off: what you asked for ahead of time. Something made на зака́з is made to order."
+        parts:
+          - { ru: "за-", en: "ahead" }
+          - { ru: "ка́з", en: "show, point" }
+        see: ["заказать=to order"]
   "заключение=conclusion":
     cefr_level: B1
     gender: n
@@ -35296,6 +35311,17 @@ words:
       pl_acc: наказа́ния
       pl_ins: наказа́ниями
       pl_pre: наказа́ниях
+    facts:
+      - kind: build
+        text: "The -ние noun of наказа́ть, to punish. Dostoevsky's Преступле́ние и наказа́ние is Crime and Punishment."
+        parts:
+          - { ru: "на-", en: "(as in наказа́ть)" }
+          - { ru: "каза́", en: "show" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["преступление=crime"]
+      - kind: origin
+        text: "The verb once meant to instruct, and in Church Slavonic наказа́ние was teaching and discipline; punishing is the lesson that hurts. The older sense is still in Ершо́в's Конёк-горбуно́к: «Городни́чий ... наказа́л престро́го всем» — he gave everyone strict orders."
+        see: ["наказал=ordered"]
   "наличие=presence":
     cefr_level: B1
     gender: n
@@ -39981,6 +40007,13 @@ words:
       - ru: Она́ отве́тила реши́тельным отка́зом.
         en_gb: She answered with a firm refusal.
         inflect: { token: 4, case: ins, number: sg, rule: noun-ins-sg }
+    facts:
+      - kind: build
+        text: "Отказа́ться with the verb ending taken off, keeping its от- and its от + genitive: отка́з от предложе́ния, turning down an offer. Of a machine it is a failure: отка́з дви́гателя."
+        parts:
+          - { ru: "от-", en: "away from" }
+          - { ru: "ка́з", en: "show" }
+        see: ["отказаться=to refuse"]
   "открытие=discovery":
     cefr_level: B1
     gender: n
@@ -45475,6 +45508,14 @@ words:
       - ru: Адвока́т сомнева́лся в его́ показа́нии.
         en_gb: The lawyer doubted his testimony.
         inflect: { token: 5, case: pre, number: sg, rule: noun-pre-sg }
+    facts:
+      - kind: build
+        text: "The -ние noun of показа́ть: what is shown. In court that is testimony, and on a meter it is the reading: показа́ния счётчика."
+        parts:
+          - { ru: "по-", en: "(as in показа́ть)" }
+          - { ru: "каза́", en: "show" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["показать=to show"]
   "поклонник=admirer":
     cefr_level: B2
     gender: m
@@ -48733,6 +48774,15 @@ words:
       - ru: Генера́л отда́л не́сколько прика́зов.
         en_gb: The general gave several orders.
         inflect: { token: 4, case: gen, number: pl, rule: noun-count-gen-pl }
+    facts:
+      - kind: build
+        text: "Приказа́ть with the verb ending taken off: the command itself. A зака́з is what a customer asks for; a прика́з is what a superior gives."
+        parts:
+          - { ru: "при-", en: "to, toward" }
+          - { ru: "ка́з", en: "show, point" }
+        see: ["приказать=to order"]
+      - kind: origin
+        text: "In Muscovite Russia a прика́з was also a government department (the Посо́льский прика́з handled foreign affairs) until Peter the Great replaced them with colleges."
   "приключение=adventure":
     cefr_level: B1
     gender: n
@@ -51956,6 +52006,16 @@ words:
       pl_acc: расска́зы
       pl_ins: расска́зами
       pl_pre: расска́зах
+    facts:
+      - kind: build
+        text: "Рассказа́ть with the verb ending taken off: the telling, and so a story. Russian makes nouns this way all the time; зака́з, прика́з and отка́з are built the same."
+        parts:
+          - { ru: "рас-", en: "out, at length" }
+          - { ru: "ска́з", en: "say (сказа́ть)" }
+        see: ["рассказать=to tell", "заказ=order", "приказ=order", "отказ=refusal"]
+      - kind: note
+        text: "As a literary form a расска́з is a short story, like Chekhov's in the library; a по́весть is longer, and a рома́н is a novel."
+        see: ["повесть=tale", "роман=novel"]
   "расследование=investigation":
     cefr_level: B2
     gender: n
@@ -57149,6 +57209,16 @@ words:
       pl_acc: ска́зки
       pl_ins: ска́зками
       pl_pre: ска́зках
+    facts:
+      - kind: build
+        text: "Literally a thing told: сказа́ть's stem with the noun ending -ка. Russian tales open with жи́ли-бы́ли as English ones open with once upon a time."
+        parts:
+          - { ru: "ска́з", en: "say (сказа́ть)" }
+          - { ru: "-ка", en: "noun ending" }
+        see: ["сказать=to say", "жили-были=once upon a time there lived"]
+      - kind: note
+        text: "A при́сказка is the rhyme told before the tale proper. Ершо́в's Конёк-горбуно́к, in the library, opens its later parts with one and says so: «Э́то при́сказка: пожди́, ска́зка бу́дет впереди́»."
+        see: ["присказка=prelude, saying"]
   "скала=cliff":
     cefr_level: B1
     gender: f
@@ -67082,6 +67152,14 @@ words:
         en_alt:
           - We work on the boss's instructions.
         inflect: { token: 4, case: dat, number: sg, rule: noun-dat-sg }
+    facts:
+      - kind: build
+        text: "The -ние noun of указа́ть, to point out: an указа́ние points you somewhere, as a direction or an instruction."
+        parts:
+          - { ru: "у-", en: "(as in указа́ть)" }
+          - { ru: "каза́", en: "show, point" }
+          - { ru: "-ние", en: "the act of it" }
+        see: ["указать=to indicate"]
   "укол=injection":
     cefr_level: B1
     gender: m
