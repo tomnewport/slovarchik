@@ -2055,6 +2055,19 @@ words:
         f: взята́
         n: взя́то
         pl: взя́ты
+    facts:
+      - kind: build
+        text: "Formed from вз- and an old verb *jęti, to take."
+        parts:
+          - { ru: "вз-", en: "prefix" }
+          - { ru: "я", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+      - kind: root
+        text: "The same old verb is behind поня́ть, приня́ть, снять, заня́ть, подня́ть, обня́ть and отня́ть, where it appears as -нять. The н comes from снять and внять, which were reanalysed as с- and в- plus -нять; other verbs in -нять were then made the same way."
+        see: ["понять=to understand", "принять=to accept", "снять=to take off", "занять=to occupy", "поднять=to lift", "обнять=to embrace", "отнять=to take away"]
+      - kind: origin
+        text: "Vasmer compares Lithuanian im̃ti and Latin emō, both to take. Име́ть, to have, comes from the same root."
+        see: ["иметь=to have"]
   "взяться=to take hold of":
     cefr_level: B1
     accented: взя́ться
@@ -2781,6 +2794,14 @@ words:
       past_f: вошла́
       past_n: вошло́
       past_pl: вошли́
+    facts:
+      - kind: build
+        text: "во- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "во-", en: "prefix: в- before some consonant clusters" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "волноваться=to worry":
     cefr_level: B1
     accented: волнова́ться
@@ -4448,6 +4469,14 @@ words:
       past_f: вы́шла
       past_n: вы́шло
       past_pl: вы́шли
+    facts:
+      - kind: build
+        text: "вы́- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти", en: "verb ending" }
+        see: ["идти=to go"]
   "выключить=to turn off":
     cefr_level: A2
     accented: вы́ключить
@@ -7371,6 +7400,14 @@ words:
       - ru: Ты дойдёшь до магази́на пешко́м?
         en_gb: Will you get to the shop on foot?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "до- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "до-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "доказать=to prove":
     cefr_level: B1
     accented: доказа́ть
@@ -9623,6 +9660,14 @@ words:
       past_f: зашла́
       past_n: зашло́
       past_pl: зашли́
+    facts:
+      - kind: build
+        text: "за- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "заказать=to order":
     cefr_level: A2
     accented: заказа́ть
@@ -10595,6 +10640,15 @@ words:
           - Are you taking my place?
           - Are you occupying my seat?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "за- and -нима́ть, from an old verb meaning to take."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "заниматься=to study":
     cefr_level: A1
     accented: занима́ться
@@ -10662,6 +10716,16 @@ words:
       - ru: Вы занима́етесь спо́ртом?
         en_gb: Do you do sport?
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Занима́ть with the reflexive suffix -ся; занима́ть is за- and -нима́ть, from an old verb meaning to take."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["взять=to take"]
   "занять=to occupy":
     cefr_level: B1
     accented: заня́ть
@@ -10711,6 +10775,14 @@ words:
       - ru: Ты займёшь пе́рвое ме́сто?
         en_gb: Will you take first place?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "за- and -нять, from an old verb meaning to take, the same one as in взять. Old Russian had зая́ти; the н was inserted by analogy with внима́ть and снять."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "заняться=to take up":
     cefr_level: A1
     accented: заня́ться
@@ -10765,6 +10837,15 @@ words:
       - ru: Ты займёшься рисова́нием?
         en_gb: Will you take up drawing?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Заня́ть with the reflexive suffix -ся; заня́ть is за- and -нять, from an old verb meaning to take, the same one as in взять."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["взять=to take"]
   "заорать=to start yelling":
     cefr_level: B2
     accented: заора́ть
@@ -12480,6 +12561,12 @@ words:
       past_f: шла
       past_n: шло
       past_pl: шли
+    facts:
+      - kind: root
+        text: "After a prefix the verb appears as -йти́: войти́, вы́йти, пойти́, прийти́, найти́ and the rest. It comes from Proto-Slavic *jьti, to go, as does the older infinitive ити; the infinitive with д is attested from the 14th century, under the influence of иду́."
+        see: ["войти=to enter", "выйти=to go out", "пойти=to go", "прийти=to come", "найти=to find"]
+      - kind: origin
+        text: "The past tense шёл comes from a different Proto-Slavic form, *šьdlъ. Shansky compares Latin īre."
   "избегать=to avoid":
     cefr_level: B1
     accented: избега́ть
@@ -12847,6 +12934,10 @@ words:
         en_alt:
           - In such a case, he would have the right to refuse.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: root
+        text: "From the same old root as взять, to take; Shansky glosses име́ть literally as to possess what has been taken."
+        see: ["взять=to take"]
   "иметься=to be available":
     cefr_level: B1
     accented: име́ться
@@ -16361,6 +16452,16 @@ words:
         en_alt:
           - The keys are found.
         inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "на- and -йти́, the form идти́ takes after a prefix. Proto-Slavic *najьti already meant to find."
+        parts:
+          - { ru: "на-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
+      - kind: note
+        text: "Dictionaries also list a second найти́: to run into something while going along. Tikhonov splits that one на/й/ти́, but treats the find sense as a single root, най-."
   "найтись=to be found":
     cefr_level: B1
     accented: найти́сь
@@ -16401,6 +16502,15 @@ words:
       - ru: Ну́жные слова́ найду́тся в ну́жный моме́нт.
         en_gb: The right words will be found at the right moment.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Найти́ with the reflexive suffix -сь, the form -ся usually takes after a vowel."
+        parts:
+          - { ru: "на-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+          - { ru: "-сь", en: "reflexive suffix" }
+        see: ["идти=to go"]
   "наклониться=to lean":
     cefr_level: B1
     accented: наклони́ться
@@ -18138,6 +18248,14 @@ words:
       - ru: Ты обни́мешь своего́ сы́на?
         en_gb: Will you embrace your son?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "об- and -нять, from an old verb meaning to take, the same one as in взять. It grew out of объя́ть, to encompass, with the н added by analogy with снять."
+        parts:
+          - { ru: "об-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "обожать=to adore":
     cefr_level: B1
     accented: обожа́ть
@@ -18216,6 +18334,14 @@ words:
       - ru: Ты обойдёшь лу́жу стороно́й?
         en_gb: Will you go around the puddle?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "обо- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "обо-", en: "prefix: об- before some consonant clusters" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "обойтись=to manage without":
     cefr_level: B1
     accented: обойти́сь
@@ -18258,6 +18384,15 @@ words:
       - ru: Ты обойдёшься без по́мощи?
         en_gb: Will you manage without help?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Обойти́ with the reflexive suffix -сь. Обойти́сь без is to make do without something."
+        parts:
+          - { ru: "обо-", en: "prefix: об- before some consonant clusters" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+          - { ru: "-сь", en: "reflexive suffix" }
+        see: ["идти=to go"]
   "оборачиваться=to turn around":
     cefr_level: B1
     accented: обора́чиваться
@@ -21272,6 +21407,14 @@ words:
       - ru: Ты отойдёшь на мину́ту?
         en_gb: Will you step away for a minute?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "ото- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "ото-", en: "prefix: от- before some consonant clusters" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "оторвать=to tear off":
     cefr_level: B1
     accented: оторва́ть
@@ -22686,6 +22829,14 @@ words:
       - ru: Ты перейдёшь доро́гу здесь?
         en_gb: Will you cross the road here?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "пере- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "перенести=to carry across":
     cefr_level: B1
     accented: перенести́
@@ -24458,6 +24609,15 @@ words:
       - ru: Ты поднима́ешь тяжёлый груз?
         en_gb: Are you lifting a heavy load?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "под- and -нима́ть, from an old verb meaning to take."
+        parts:
+          - { ru: "под-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "подниматься=to go up":
     cefr_level: B1
     accented: поднима́ться
@@ -24504,6 +24664,16 @@ words:
       past_f: поднима́лась
       past_n: поднима́лось
       past_pl: поднима́лись
+    facts:
+      - kind: build
+        text: "Поднима́ть with the reflexive suffix -ся; поднима́ть is под- and -нима́ть, from an old verb meaning to take."
+        parts:
+          - { ru: "под-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["взять=to take"]
   "поднять=to raise":
     cefr_level: A2
     accented: подня́ть
@@ -24550,6 +24720,14 @@ words:
       - ru: Ты подни́мешь груз кра́ном?
         en_gb: Will you raise the load with a crane?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "под- and -нять, from an old verb meaning to take, the same one as in взять."
+        parts:
+          - { ru: "под-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "поднять=to lift":
     cefr_level: A2
     accented: подня́ть
@@ -24603,6 +24781,14 @@ words:
       - ru: Ру́ки по́дняты.
         en_gb: Hands are raised.
         inflect: { token: 2, form: pass_short, gender: pl, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "под- and -нять, from an old verb meaning to take, the same one as in взять."
+        parts:
+          - { ru: "под-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "подняться=to go up":
     cefr_level: B1
     accented: подня́ться
@@ -24647,6 +24833,15 @@ words:
       past_f: подняла́сь
       past_n: подняло́сь
       past_pl: подняли́сь
+    facts:
+      - kind: build
+        text: "Подня́ть with the reflexive suffix -ся; подня́ть is под- and -нять, from an old verb meaning to take, the same one as in взять."
+        parts:
+          - { ru: "под-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["взять=to take"]
   "подобрать=to pick up":
     cefr_level: B1
     accented: подобра́ть
@@ -24843,6 +25038,14 @@ words:
       past_f: подошла́
       past_n: подошло́
       past_pl: подошли́
+    facts:
+      - kind: build
+        text: "подо- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "подо-", en: "prefix: под- before some consonant clusters" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "подписать=to sign":
     cefr_level: B1
     accented: подписа́ть
@@ -25746,6 +25949,14 @@ words:
       - ru: Ско́ро де́ти пойду́т в шко́лу.
         en_gb: Soon the children will go to school.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "показать=to show":
     cefr_level: A1
     accented: показа́ть
@@ -27106,6 +27317,15 @@ words:
       act_pres: понима́ющий
       act_past: понима́вший
     gerund: понима́я
+    facts:
+      - kind: build
+        text: "по- and -нима́ть, from an old verb meaning to take. English Wiktionary relates it to пойма́ть."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take", "поймать=to catch"]
   "понравиться=to be liked":
     cefr_level: A1
     accented: понра́виться
@@ -27219,6 +27439,14 @@ words:
         f: понята́
         n: по́нято
         pl: по́няты
+    facts:
+      - kind: build
+        text: "по- and -нять, from an old verb meaning to take, the same one as in взять."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "пообедать=to have lunch":
     cefr_level: A2
     accented: пообе́дать
@@ -30498,6 +30726,14 @@ words:
       past_f: пришла́
       past_n: пришло́
       past_pl: пришли́
+    facts:
+      - kind: build
+        text: "при- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "при-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "прийтись=to have to":
     cefr_level: B1
     accented: прийти́сь
@@ -30529,6 +30765,15 @@ words:
       - ru: Е́сли пойдёт дождь, придётся оста́ться.
         en_gb: If it rains, we will have to stay.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Прийти́ with the reflexive suffix -сь. Used impersonally with an infinitive it means to have to: вам придётся подожда́ть."
+        parts:
+          - { ru: "при-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+          - { ru: "-сь", en: "reflexive suffix" }
+        see: ["идти=to go"]
   "приказать=to order":
     cefr_level: B1
     accented: приказа́ть
@@ -30886,6 +31131,15 @@ words:
       - ru: Ты принима́ешь моё предложе́ние?
         en_gb: Do you accept my offer?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "при- and -нима́ть, from an old verb meaning to take."
+        parts:
+          - { ru: "при-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "приносить=to bring":
     cefr_level: A2
     accented: приноси́ть
@@ -30996,6 +31250,14 @@ words:
       - ru: Ва́ше предложе́ние при́нято.
         en_gb: Your proposal has been accepted.
         inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "при- and -нять, from an old verb meaning to take, the same one as in взять. Older Russian had прия́ть; the н came in under the influence of снять and внима́ть."
+        parts:
+          - { ru: "при-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "приобрести=to acquire":
     cefr_level: B2
     accented: приобрести́
@@ -32403,6 +32665,14 @@ words:
       - ru: Без вас э́то не произошло́ бы.
         en_gb: Without you this would not have happened.
         inflect: { token: 5, tense: past, person: past_n, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Про- and изойти́, itself built on -йти́, the form идти́ takes after a prefix. Tikhonov splits it произо/й/ти́."
+        parts:
+          - { ru: "произо-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "происходить=to happen":
     cefr_level: B1
     accented: происходи́ть
@@ -32485,6 +32755,14 @@ words:
         en_alt:
           - The pain would have passed quickly with medicine.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "про- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "про-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "пропадать=to disappear":
     cefr_level: B1
     accented: пропада́ть
@@ -34244,6 +34522,15 @@ words:
         en_alt:
           - Will you go your separate ways late?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "разо- and -йти́, the form идти́ takes after a prefix, with the reflexive suffix -сь."
+        parts:
+          - { ru: "разо-", en: "prefix: раз- before some consonant clusters" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+          - { ru: "-сь", en: "reflexive suffix" }
+        see: ["идти=to go"]
   "разработать=to develop":
     cefr_level: B2
     accented: разрабо́тать
@@ -37540,6 +37827,15 @@ words:
       - ru: Ты снима́ешь пальто́ в прихо́жей?
         en_gb: Do you take off your coat in the hallway?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "с- and -нима́ть, from an old verb meaning to take."
+        parts:
+          - { ru: "с-", en: "prefix" }
+          - { ru: "ним", en: "take (old *jьmati)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "сниться=to be dreamt":
     cefr_level: B1
     accented: сни́ться
@@ -37631,6 +37927,14 @@ words:
       - ru: Фильм снят в Москве́.
         en_gb: The film was shot in Moscow.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "Formed from с- and an old verb *ęti, to take. The prefix was once сън-, and that is where the н comes from: Proto-Slavic *sъnęti."
+        parts:
+          - { ru: "сн-", en: "prefix, once сън-" }
+          - { ru: "я", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "собирать=to collect":
     cefr_level: A2
     accented: собира́ть
@@ -38226,6 +38530,14 @@ words:
       - ru: Ты сойдёшь на бе́рег?
         en_gb: Will you go ashore?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "со- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "со-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "сомневаться=to doubt":
     cefr_level: B1
     accented: сомнева́ться
@@ -42181,6 +42493,14 @@ words:
       past_f: ушла́
       past_n: ушло́
       past_pl: ушли́
+    facts:
+      - kind: build
+        text: "у- and -йти́, the form идти́ takes after a prefix."
+        parts:
+          - { ru: "у-", en: "prefix" }
+          - { ru: "й", en: "go (идти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["идти=to go"]
   "указать=to indicate":
     cefr_level: B1
     accented: указа́ть

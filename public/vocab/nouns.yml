@@ -7845,6 +7845,13 @@ words:
       sg_acc: внима́ние
       sg_ins: внима́нием
       sg_pre: внима́нии
+    facts:
+      - kind: build
+        text: "Borrowed from Old Church Slavonic въниманиѥ, from вънимати, to listen, which is the prefix вън- (in) and имати, to take."
+        parts:
+          - { ru: "вним", en: "внима́ть (OCS вънимати, to listen)" }
+          - { ru: "-а́ние", en: "noun suffix" }
+        see: ["взять=to take"]
   "внук=grandson":
     cefr_level: A2
     gender: m

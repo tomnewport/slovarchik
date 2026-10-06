@@ -3270,6 +3270,14 @@ words:
       - отня́ли
     en_gb:
       standard: "to take away (to seize something from someone)"
+    facts:
+      - kind: build
+        text: "от- and -нять, from an old verb meaning to take, the same one as in взять. It replaced an older отъя́ть under the influence of внима́ть."
+        parts:
+          - { ru: "от-", en: "prefix" }
+          - { ru: "ня́", en: "take (old *ęti)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["взять=to take"]
   "оторваться=to tear away":
     cefr_level: B1
     learn: false
