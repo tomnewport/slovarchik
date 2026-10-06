@@ -304,6 +304,48 @@ checks that the morphemes appear, in order, inside the headword. Consonant
 alternations are fine (`писа́ть` → `пис` + `-а́ть`); a breakdown pasted onto the
 wrong word is not.
 
+#### Sources — every fact is in a dictionary first
+
+A fact says only what a standard dictionary or etymological dictionary says.
+Nothing from memory and nothing interpretive: a picture of what a prefix
+"really" means, a mnemonic bridge, or a gloss sharper than the source all stay
+out, however plausible they sound. The evidence goes in
+[`review/facts-sources.jsonl`](../../review/facts-sources.jsonl), one line per
+fact:
+
+```json
+{"key": "сказать=to say", "kind": "build", "text": "<the fact, exactly as in the YAML>",
+ "parts": [{"ru": "с-", "en": "prefix"}, …], "see": ["показать=to show"],
+ "claims": [{"claim": "сказа́ть is a prefixed derivative of каза́ть",
+             "sources": [{"source": "Шанский, Школьный этимологический словарь, «сказать»",
+                          "url": "https://gufo.me/dict/shansky/…",
+                          "quote": "Преф. производное от общеслав. казати «говорить, показывать»."}]}],
+ "review": {"status": "approved", "by": "…", "date": "YYYY-MM-DD"}}
+```
+
+- **Every sentence, chip gloss, example and `see:` link** is covered by a claim,
+  and every claim by a quote that can be found, verbatim, at its URL.
+- **Someone other than the author reviews it**: re-fetches each source, checks
+  the quote is there and says what the claim says, and checks the fact asserts
+  nothing beyond its claims. Only then is the line `approved`.
+- **Morphemes**: say whose analysis the chips follow. Tikhonov's
+  morphemic dictionary often fuses a prefix into the root (`доказ/а́/ть`) where an
+  etymological dictionary derives the word from prefix + verb; either is a
+  source, but the text must not present one as the other. A prefix chip whose
+  meaning in this word no source states is glossed just `prefix`.
+- Sources that have served so far: Фасмер, Шанский, Крылов, Семёнов
+  (etymology); Ожегов, Ушаков, Ефремова, Даль (meaning, including dated senses);
+  Тихонов, Кузнецова–Ефремова (morphemes, as quoted by Викисловарь); Wiktionary
+  (both languages) for etymologies and affixes; the library's own book texts
+  for a quotation from them.
+
+`factSources.test.js` holds the corpus to this: a fact with no approved ledger
+line fails, and so does a ledger line whose fact has since been reworded —
+editing a reviewed fact means reviewing it again. Facts written before the
+ledger existed are listed by fingerprint in
+`review/facts-unsourced-baseline.json`; that list only shrinks. Source one, and
+delete its line there.
+
 #### `region` — the word 400 miles away
 
 A word can mean something else, or be called something else, at the other end of

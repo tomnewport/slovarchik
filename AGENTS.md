@@ -147,6 +147,9 @@ src/
                         #     topic collections inside one CEFR level (#674)
                         #   verbGovernment  — which case / preposition frame a verb forces on its object
                         #   wordFacts  — a word's authored facts (build/root/origin/region/mnemonic) and its related words, derived + authored
+                        #   factSources  — the sourcing rule for those facts: every fact has an approved line in
+                        #     review/facts-sources.jsonl citing a dictionary for each claim, or predates the ledger
+                        #     and is on review/facts-unsourced-baseline.json (a ratchet that only shrinks). A CI guard
                         #   factCoverage  — which words most deserve a fact, and the sound-alike and diminutive shortlists
                         #     (worklists, NOT CI guards; rejections live in review/confusables-reviewed.jsonl and
                         #      review/diminutives-reviewed.jsonl)
@@ -382,6 +385,11 @@ tells you nothing about whether CI will accept your change.
   it; add a stress-marked `learn: false` entry to the `public/vocab/reader-*.yml`
   file that fits (see [`docs/reader-glosses.md`](docs/reader-glosses.md)). Never
   by dropping the word from the text.
+- **A word fact** (the "About this word" panel: build/root/origin/note) → `facts:`
+  in the YAML **and** a line in `review/facts-sources.jsonl` quoting a dictionary
+  for every claim, checked by someone other than the author. Nothing from memory;
+  `factSources.test.js` fails an unsourced fact (see "Sources" in the corpus
+  CONTRIBUTING).
 - **A drill's behaviour/UI** → the matching `src/views/*View.vue`.
 - **Quiz/declension/grading logic** → the pure module in `src/lib/` (keep it
   framework-free so it stays unit-testable), and add/extend its `*.test.js`.
