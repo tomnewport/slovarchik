@@ -5096,6 +5096,14 @@ words:
         en_alt:
           - Will you express your doubts?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Вы- is out, so вы́сказать is to say something out: to state an opinion. Like every perfective вы- verb, it keeps the stress on вы́ in every form: вы́скажу, вы́сказал."
+        parts:
+          - { ru: "вы́-", en: "out" }
+          - { ru: "сказ", en: "say (сказа́ть)" }
+          - { ru: "-ать", en: "verb ending" }
+        see: ["сказать=to say"]
   "выскочить=to jump out":
     cefr_level: B1
     accented: вы́скочить
@@ -7405,6 +7413,14 @@ words:
       - ru: Ты дока́жешь свою́ правоту́?
         en_gb: Will you prove that you are right?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "До- is all the way to, so доказа́ть is to show a thing through to the end, until it is proved. Доказа́тельство is the proof."
+        parts:
+          - { ru: "до-", en: "all the way to" }
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["показать=to show", "доказательство=proof"]
   "доказывать=to prove":
     cefr_level: B1
     accented: дока́зывать
@@ -7446,6 +7462,15 @@ words:
       - ru: Ты дока́зываешь свою́ правоту́?
         en_gb: Are you proving that you are right?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Доказа́ть with -ыва- added: proving as a process, and so often just arguing a point, whether or not it ends up proved. The -ыва- is never stressed, so the stress moves back onto the root: дока́зывать."
+        parts:
+          - { ru: "до-", en: "all the way to" }
+          - { ru: "ка́з", en: "show" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["доказательство=proof"]
   "докладывать=to report":
     cefr_level: B1
     accented: докла́дывать
@@ -9655,6 +9680,16 @@ words:
       - ru: Такси́ уже́ зака́зано.
         en_gb: The taxi has already been ordered.
         inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "To point out ahead of time what you want: a meal, a taxi, a ticket. This is ordering as a customer; ordering someone about is приказа́ть."
+        parts:
+          - { ru: "за-", en: "ahead" }
+          - { ru: "каз", en: "show, point" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["показать=to show", "заказ=order"]
+      - kind: origin
+        text: "The older sense was to forbid, and it survives in two places: a зака́зник is a nature reserve where hunting is banned, and «туда́ мне путь зака́зан» means that way is closed to me."
   "заказывать=to order":
     cefr_level: A2
     accented: зака́зывать
@@ -9689,6 +9724,15 @@ words:
       past_f: зака́зывала
       past_n: зака́зывало
       past_pl: зака́зывали
+    facts:
+      - kind: build
+        text: "Заказа́ть with -ыва- added, for ordering that repeats, like the same coffee every morning. The -ыва- is never stressed, so the stress moves back onto the root: зака́зывать."
+        parts:
+          - { ru: "за-", en: "ahead" }
+          - { ru: "ка́з", en: "show, point" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["заказ=order"]
   "заканчивать=to finish":
     cefr_level: A2
     accented: зака́нчивать
@@ -13385,6 +13429,18 @@ words:
       - ru: Без подска́зки зада́ча каза́лась бы сло́жной.
         en_gb: Without a hint the task would seem complicated.
         inflect: { token: 4, tense: past, person: past_f, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "The root каз- means to show, and -ся turns it back on the subject: to show oneself, and so to seem. The з becomes ж in the present, which is why мне ка́жется (it seems to me) looks different."
+        parts:
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+          - { ru: "-ся", en: "oneself" }
+      - kind: root
+        text: "The same каз- runs through a whole family: показа́ть, сказа́ть, рассказа́ть, доказа́ть, указа́ть, заказа́ть and приказа́ть. The bare verb каза́ть (to show) is now only colloquial; standard Russian uses the prefixed ones."
+        see: ["показать=to show", "сказать=to say", "рассказать=to tell", "доказать=to prove", "указать=to indicate", "заказать=to order", "приказать=to order"]
+      - kind: origin
+        text: "Next door the root went other ways: Ukrainian каза́ти is to say, Polish kazać is to order someone to do something. Russian keeps show, say and order side by side, sorted by prefix."
   "касаться=to touch":
     cefr_level: B1
     accented: каса́ться
@@ -19154,6 +19210,15 @@ words:
         en_alt:
           - Soon everything will fall into place.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Literally to show oneself: оказа́ться is to turn out to be something, or to find yourself somewhere. Drop the -ся and оказа́ть means to render: оказа́ть по́мощь, to give help."
+        parts:
+          - { ru: "о-", en: "perfective prefix" }
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+          - { ru: "-ся", en: "oneself" }
+        see: ["показать=to show"]
   "оказываться=to turn out":
     cefr_level: B1
     accented: ока́зываться
@@ -19192,6 +19257,15 @@ words:
       - ru: Без подска́зок он ре́дко ока́зывался бы прав.
         en_gb: Without hints he would rarely turn out to be right.
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Оказа́ться with -ыва- added, for what turns out that way repeatedly or as a rule. The -ыва- is never stressed, so the stress moves back onto the root: ока́зываться."
+        parts:
+          - { ru: "о-", en: "prefix of оказа́ться" }
+          - { ru: "ка́з", en: "show" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "oneself" }
   "окончить=to graduate":
     cefr_level: B1
     accented: око́нчить
@@ -20685,6 +20759,15 @@ words:
       - ru: Ты отка́жешься от по́мощи?
         en_gb: Will you refuse the help?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "От- is away from, the same от that follows it: отказа́ться от предложе́ния is to turn yourself away from an offer, to refuse it. Drop the -ся and отказа́ть is to refuse someone else: отказа́ть ему́ в по́мощи."
+        parts:
+          - { ru: "от-", en: "away from" }
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+          - { ru: "-ся", en: "oneself" }
+        see: ["показать=to show", "отказ=refusal"]
   "отказываться=to refuse":
     cefr_level: B1
     accented: отка́зываться
@@ -20729,6 +20812,16 @@ words:
       - ru: Ты отка́зываешься отвеча́ть?
         en_gb: Are you refusing to answer?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Отказа́ться with -ыва- added: refusing as a habit, or still in the middle of refusing. The -ыва- is never stressed, so the stress moves back onto the root: отка́зываться."
+        parts:
+          - { ru: "от-", en: "away from" }
+          - { ru: "ка́з", en: "show" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "oneself" }
+        see: ["отказ=refusal"]
   "открывать=to open":
     cefr_level: A1
     accented: открыва́ть
@@ -25696,6 +25789,14 @@ words:
       - ru: Ты пока́жешь биле́т контролёру?
         en_gb: Will you show your ticket to the inspector?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Каз- is the old root for to show, and here it keeps that meaning most plainly; по- mostly just makes it perfective. The з becomes ж in the future: покажу́, пока́жешь."
+        parts:
+          - { ru: "по-", en: "perfective prefix" }
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["казаться=to seem"]
   "показаться=to seem":
     cefr_level: A2
     accented: показа́ться
@@ -25739,6 +25840,16 @@ words:
       - ru: Ско́ро вдали́ пока́жется на́ша дере́вня.
         en_gb: Soon our village will come into view in the distance.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Каза́ться made perfective with по-: to show itself once. So it is both to come into view (вдали́ показа́лся дом) and to seem at one moment (мне показа́лось, it seemed to me just then)."
+        parts:
+          - { ru: "по-", en: "perfective prefix" }
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+          - { ru: "-ся", en: "oneself" }
+      - kind: note
+        text: "Показа́ться врачу́ is to see a doctor: literally, to show yourself to one."
   "показывать=to show":
     cefr_level: A1
     accented: пока́зывать
@@ -25788,6 +25899,15 @@ words:
       - ru: Ты пока́зываешь биле́т?
         en_gb: Are you showing your ticket?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Показа́ть with -ыва- added, the suffix that turns a perfective back into an imperfective: showing that goes on or repeats. The -ыва- is never stressed, so the stress moves back onto the root: пока́зывать."
+        parts:
+          - { ru: "по-", en: "prefix of показа́ть" }
+          - { ru: "ка́з", en: "show" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["казаться=to seem"]
   "покачать=to rock":
     cefr_level: B1
     accented: покача́ть
@@ -30442,6 +30562,16 @@ words:
       - ru: Я не приказа́л бы тако́е без причи́ны.
         en_gb: I would not order such a thing without reason.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "При- is to, toward, so приказа́ть is to point a task at someone: to command. Ordering a soldier is приказа́ть; ordering a meal is заказа́ть."
+        parts:
+          - { ru: "при-", en: "to, toward" }
+          - { ru: "каз", en: "show, point" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["показать=to show", "приказ=order"]
+      - kind: origin
+        text: "In Muscovite Russia a прика́з was also a government department (the Посо́льский прика́з handled foreign affairs) until Peter the Great replaced them with colleges."
   "прикрыть=to cover":
     cefr_level: B2
     accented: прикры́ть
@@ -34435,6 +34565,14 @@ words:
       past_f: рассказа́ла
       past_n: рассказа́ло
       past_pl: рассказа́ли
+    facts:
+      - kind: build
+        text: "Рас- spreads an action out, so рассказа́ть is to say something at length, from start to finish: to tell a story. Расска́з is the story itself."
+        parts:
+          - { ru: "рас-", en: "out, at length" }
+          - { ru: "сказ", en: "say (сказа́ть)" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["сказать=to say", "рассказ=story"]
   "рассказывать=to tell":
     cefr_level: A2
     accented: расска́зывать
@@ -34490,6 +34628,15 @@ words:
       past_f: расска́зывала
       past_n: расска́зывало
       past_pl: расска́зывали
+    facts:
+      - kind: build
+        text: "Рассказа́ть with -ыва- added, for telling that goes on or happens often. The -ыва- is never stressed, so the stress moves back onto the root: расска́зывать."
+        parts:
+          - { ru: "рас-", en: "out, at length" }
+          - { ru: "ска́з", en: "say (сказа́ть)" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["сказать=to say", "рассказ=story"]
   "рассматривать=to examine":
     cefr_level: B1
     accented: рассма́тривать
@@ -36319,6 +36466,17 @@ words:
       past_f: сказа́ла
       past_n: сказа́ло
       past_pl: сказа́ли
+    facts:
+      - kind: build
+        text: "The same каз- as in показа́ть: to say something is to show it in words. The з becomes ж in the future (скажу́, ска́жешь), and the imperfective partner is not a -ывать verb but говори́ть, from another root entirely."
+        parts:
+          - { ru: "с-", en: "perfective prefix" }
+          - { ru: "каз", en: "show" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["показать=to show"]
+      - kind: root
+        text: "Ска́зка, a fairy tale, is something told, and рассказа́ть and вы́сказать are built on сказа́ть itself. The old imperfective ска́зывать survives in those same fairy tales."
+        see: ["сказка=fairy tale", "рассказать=to tell", "высказать=to express"]
   "скачать=to download":
     cefr_level: B1
     accented: скача́ть
@@ -42057,6 +42215,14 @@ words:
       - ru: Ты ука́жешь на оши́бку в те́ксте?
         en_gb: Will you point out the mistake in the text?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "To show which way: указа́ть is to point something out. The family is all pointing: указа́тель is a signpost, and указа́тельный па́лец the index finger."
+        parts:
+          - { ru: "у-", en: "perfective prefix" }
+          - { ru: "каз", en: "show, point" }
+          - { ru: "-а́ть", en: "verb ending" }
+        see: ["показать=to show", "указание=instruction"]
   "указывать=to indicate":
     cefr_level: B1
     accented: ука́зывать
@@ -42096,6 +42262,15 @@ words:
       - ru: Ты ука́зываешь доро́гу?
         en_gb: Are you showing the way?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Указа́ть with -ыва- added, for pointing out that goes on or repeats. The -ыва- is never stressed, so the stress moves back onto the root: ука́зывать."
+        parts:
+          - { ru: "у-", en: "prefix of указа́ть" }
+          - { ru: "ка́з", en: "show, point" }
+          - { ru: "-ыва-", en: "ongoing or repeated" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["указание=instruction"]
   "украсть=to steal":
     cefr_level: B1
     accented: укра́сть
