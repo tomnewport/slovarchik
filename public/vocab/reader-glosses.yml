@@ -5665,6 +5665,12 @@ words:
     accented: ступи́ть
     en_gb:
       standard: "to step (to take a step; «ни ступи́ть, ни мо́лвить» = to know how to do nothing properly)"
+    facts:
+      - kind: root
+        text: "With a prefix it gives вступи́ть, вы́ступить, наступи́ть and поступи́ть."
+        see: ["вступить=to enter", "выступить=to perform", "наступить=to step on", "поступить=to act"]
+      - kind: origin
+        text: "Inherited from Proto-Slavic *stǫpiti. Shansky relates ступа́ть to Greek stembō, to trample."
   "стыдись=be ashamed":
     cefr_level: B2
     learn: false
@@ -14234,6 +14240,14 @@ words:
       - ступа́йте
     en_gb:
       standard: "to go (ступа́йте = off you go)"
+    facts:
+      - kind: build
+        text: "Ступи́ть with -а́ть: its imperfective."
+        parts:
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "стучаться=to knock":
     cefr_level: B1
     learn: false

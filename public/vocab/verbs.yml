@@ -3678,6 +3678,15 @@ words:
         en_alt:
           - Will you join the conversation?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "в- and ступи́ть, to step."
+        parts:
+          - { ru: "в-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "входить=to enter":
     cefr_level: A2
     accented: входи́ть
@@ -5317,6 +5326,15 @@ words:
       - ru: Ты выступа́ешь на сце́не?
         en_gb: Are you performing on stage?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "вы- and ступа́ть, the imperfective of ступи́ть, to step."
+        parts:
+          - { ru: "вы-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "выступить=to perform":
     cefr_level: B1
     accented: вы́ступить
@@ -5359,6 +5377,15 @@ words:
       - ru: За́втра он вы́ступит с ва́жным заявле́нием.
         en_gb: Tomorrow he will make an important statement.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "вы́- and ступи́ть, to step. Ozhegov gives both stepping forward out of a line (вы́ступить из шере́нги) and performing in public."
+        parts:
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "вытащить=to drag out":
     cefr_level: B1
     accented: вы́тащить
@@ -7587,6 +7614,14 @@ words:
       - ru: За́втра он доло́жит о результа́тах прове́рки.
         en_gb: Tomorrow he'll report on the results of the inspection.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "до- and ложи́ть, to lay (non-standard on its own)."
+        parts:
+          - { ru: "до-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
   "доноситься=to reach":
     cefr_level: B2
     accented: доноси́ться
@@ -10145,6 +10180,15 @@ words:
       - ru: Ты закрыва́ешь окно́ на́ ночь?
         en_gb: Do you close the window at night?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "Закры́ть with the imperfective suffix -ва-."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "кры", en: "cover (крыть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "закрываться=to close":
     cefr_level: B1
     accented: закрыва́ться
@@ -10173,6 +10217,16 @@ words:
       past_f: закрыва́лась
       past_n: закрыва́лось
       past_pl: закрыва́лись
+    facts:
+      - kind: build
+        text: "Закрыва́ть with the reflexive suffix -ся; закрыва́ть is закры́ть with the imperfective suffix -ва-."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "кры", en: "cover (крыть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["крыша=roof"]
   "закрыть=to close":
     cefr_level: A2
     accented: закры́ть
@@ -10235,6 +10289,14 @@ words:
       - ru: Магази́н закры́т до утра́.
         en_gb: The shop is closed until morning.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "за- and крыть, to cover."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "закрыться=to shut":
     cefr_level: B1
     accented: закры́ться
@@ -10263,6 +10325,15 @@ words:
       past_f: закры́лась
       past_n: закры́лось
       past_pl: закры́лись
+    facts:
+      - kind: build
+        text: "Закры́ть with the reflexive suffix -ся; закры́ть is за- and крыть, to cover."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["крыша=roof"]
   "закурить=to light up":
     cefr_level: B1
     accented: закури́ть
@@ -10349,6 +10420,14 @@ words:
       - ru: Ско́ро стро́ители зало́жат пе́рвый ка́мень.
         en_gb: Soon the builders will lay the first stone.
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "за- and ложи́ть, to lay (non-standard on its own)."
+        parts:
+          - { ru: "за-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
   "заменить=to replace":
     cefr_level: B1
     accented: замени́ть
@@ -15032,6 +15111,17 @@ words:
       past_f: ложи́лась
       past_n: ложи́лось
       past_pl: ложи́лись
+    facts:
+      - kind: build
+        text: "Ложи́ть, to lay (non-standard on its own), with the reflexive suffix -ся; its perfective partner is лечь."
+        parts:
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+      - kind: root
+        text: "Vasmer calls the verb a causative of лежа́ть, to lie, and compares Gothic lagjan and Old Norse leggia, to put. English Wiktionary gives English lay as a cognate of ложи́ть."
+        see: ["лежать=to lie"]
   "ломать=to break":
     cefr_level: A2
     accented: лома́ть
@@ -17130,6 +17220,15 @@ words:
         en_alt:
           - Without warmth summer would come late.
         inflect: { token: 4, tense: past, person: past_n, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "на- and ступа́ть, the imperfective of ступи́ть, to step."
+        parts:
+          - { ru: "на-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "наступить=to step on":
     cefr_level: B1
     accented: наступи́ть
@@ -17172,6 +17271,17 @@ words:
       - ru: Ско́ро насту́пит но́вый год.
         en_gb: Soon the new year will arrive.
         inflect: { token: 2, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "на- and ступи́ть, to step."
+        parts:
+          - { ru: "на-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
+      - kind: note
+        text: "A second наступи́ть means to come or begin: наступи́ла весна́, spring has come. Tikhonov treats that one as a single root, наступ-."
   "научить=to teach":
     cefr_level: A1
     accented: научи́ть
@@ -21010,6 +21120,15 @@ words:
       - ru: Я открыва́л бы о́кна по утра́м.
         en_gb: I would open the windows in the mornings.
         inflect: { token: 2, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Откры́ть with the imperfective suffix -ва-."
+        parts:
+          - { ru: "от-", en: "prefix" }
+          - { ru: "кры", en: "cover (крыть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "открываться=to open":
     cefr_level: B1
     accented: открыва́ться
@@ -21044,6 +21163,16 @@ words:
       - ru: Дверь не открыва́лась бы без ключа́.
         en_gb: The door would not open without a key.
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Открыва́ть with the reflexive suffix -ся; открыва́ть is откры́ть with the imperfective suffix -ва-."
+        parts:
+          - { ru: "от-", en: "prefix" }
+          - { ru: "кры", en: "cover (крыть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["крыша=roof"]
   "открыть=to open":
     cefr_level: A1
     accented: откры́ть
@@ -21104,6 +21233,14 @@ words:
       - ru: Музе́й откры́т сего́дня.
         en_gb: The museum is open today.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "от- and крыть, to cover. Its sense to discover is a calque of French découvrir or German entdecken."
+        parts:
+          - { ru: "от-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "открыться=to open":
     cefr_level: B1
     accented: откры́ться
@@ -21138,6 +21275,15 @@ words:
       - ru: Ско́ро парк откро́ется для посети́телей.
         en_gb: Soon the park will open to visitors.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Откры́ть with the reflexive suffix -ся; откры́ть is от- and крыть, to cover."
+        parts:
+          - { ru: "от-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["крыша=roof"]
   "отличаться=to differ":
     cefr_level: B1
     accented: отлича́ться
@@ -26293,6 +26439,14 @@ words:
       - ru: Ско́ро снег покро́ет всю зе́млю.
         en_gb: Soon snow will cover the whole ground.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- and крыть, to cover; it is also the perfective partner of крыть itself."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "покупать=to buy":
     cefr_level: A1
     accented: покупа́ть
@@ -26653,6 +26807,17 @@ words:
       - ru: Кни́га поло́жена на по́лку.
         en_gb: The book has been put on the shelf.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
+    facts:
+      - kind: build
+        text: "по- and ложи́ть, to lay."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ложиться=to lie down"]
+      - kind: note
+        text: "Without a prefix, ложи́ть is considered non-standard: the imperfective to use is класть."
   "получать=to receive":
     cefr_level: A1
     accented: получа́ть
@@ -28557,6 +28722,15 @@ words:
       - ru: Ты поступа́ешь че́стно?
         en_gb: Do you act honestly?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "по- and ступа́ть, the imperfective of ступи́ть, to step; Tikhonov treats поступ- as a single root."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "поступить=to act":
     cefr_level: B1
     accented: поступи́ть
@@ -28598,6 +28772,15 @@ words:
       - ru: Ско́ро сын посту́пит в университе́т.
         en_gb: Soon my son will enrol at university.
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "по- and ступи́ть, to step; Tikhonov treats поступ- as a single root."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ступ", en: "step (ступи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ступить=to step"]
   "постучать=to knock":
     cefr_level: A2
     accented: постуча́ть
@@ -29487,6 +29670,14 @@ words:
       past_f: предложи́ла
       past_n: предложи́ло
       past_pl: предложи́ли
+    facts:
+      - kind: build
+        text: "Borrowed from Old Church Slavonic прѣдъложити; by surface analysis, пред- and ложи́ть, to lay (non-standard on its own). Tikhonov treats предлож- as a single root."
+        parts:
+          - { ru: "пред-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
   "предполагать=to assume":
     cefr_level: B1
     accented: предполага́ть
@@ -29565,6 +29756,16 @@ words:
       - ru: Я предположи́ла бы, что он опозда́ет.
         en_gb: I would suppose that he will be late.
         inflect: { token: 2, tense: past, person: past_f, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "пред- and положи́ть, to put; Tikhonov treats предполож- as a single root."
+        parts:
+          - { ru: "пред-", en: "prefix" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["положить=to put"]
   "предпочитать=to prefer":
     cefr_level: B1
     accented: предпочита́ть
@@ -30866,6 +31067,14 @@ words:
       - ru: Ты прикро́ешь глаза́ руко́й?
         en_gb: Will you cover your eyes with your hand?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "при- and крыть, to cover."
+        parts:
+          - { ru: "при-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "прилететь=to arrive by air":
     cefr_level: B1
     accented: прилете́ть
@@ -34727,6 +34936,14 @@ words:
       - ru: Ты раскро́ешь преступле́ние?
         en_gb: Will you solve the crime?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "рас- and крыть, to cover."
+        parts:
+          - { ru: "рас-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "распахнуть=to fling open":
     cefr_level: B1
     accented: распахну́ть
@@ -34806,6 +35023,16 @@ words:
       - ru: Ты располо́жишь ме́бель ина́че?
         en_gb: Will you arrange the furniture differently?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "рас- and положи́ть, to put; Tikhonov splits off both prefixes, рас- and по-."
+        parts:
+          - { ru: "рас-", en: "prefix" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["положить=to put"]
   "рассказать=to tell":
     cefr_level: A2
     accented: рассказа́ть
@@ -36868,6 +37095,15 @@ words:
       - ru: Че́стный челове́к не скрыва́л бы э́того.
         en_gb: An honest person would not hide this.
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
+    facts:
+      - kind: build
+        text: "Скрыть, to hide, with the imperfective suffix -ва-. By surface analysis скрыть is с- and крыть, to cover, though Tikhonov treats скры- as a single root."
+        parts:
+          - { ru: "с-", en: "prefix" }
+          - { ru: "кры", en: "cover (крыть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["крыша=roof"]
   "скрыться=to hide oneself":
     cefr_level: B1
     accented: скры́ться
@@ -36907,6 +37143,15 @@ words:
       - ru: Ты скро́ешься в темноте́?
         en_gb: Will you disappear into the darkness?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Скрыть, to hide, with the reflexive suffix -ся. By surface analysis скрыть is с- and крыть, to cover, though Tikhonov treats скры- as a single root."
+        parts:
+          - { ru: "с-", en: "prefix" }
+          - { ru: "кры́", en: "cover (крыть)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["крыша=roof"]
   "слать=to send":
     cefr_level: B1
     accented: слать
@@ -37078,6 +37323,14 @@ words:
       - ru: Ты сло́жишь письмо́ попола́м?
         en_gb: Will you fold the letter in half?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "с- and ложи́ть, to lay (non-standard on its own)."
+        parts:
+          - { ru: "с-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
   "сложиться=to take shape":
     cefr_level: B1
     accented: сложи́ться
@@ -37117,6 +37370,15 @@ words:
       - ru: Вы сло́житесь на пода́рок?
         en_gb: Will you chip in for a present?
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
+    facts:
+      - kind: build
+        text: "Сложи́ть with the reflexive suffix -ся; сложи́ть is с- and ложи́ть, to lay (non-standard on its own)."
+        parts:
+          - { ru: "с-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
   "сломать=to break":
     cefr_level: A2
     accented: слома́ть
@@ -42711,6 +42973,14 @@ words:
       - ru: Ты уло́жишь дете́й спать?
         en_gb: Will you put the children to bed?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+    facts:
+      - kind: build
+        text: "у- and ложи́ть, to lay (non-standard on its own)."
+        parts:
+          - { ru: "у-", en: "prefix" }
+          - { ru: "лож", en: "lay (ложи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
   "улыбаться=to smile":
     cefr_level: A2
     accented: улыба́ться

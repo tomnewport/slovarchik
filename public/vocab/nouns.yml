@@ -27644,6 +27644,12 @@ words:
       pl_acc: кры́ши
       pl_ins: кры́шами
       pl_pre: кры́шах
+    facts:
+      - kind: root
+        text: "From Proto-Slavic *kryša, from *kryti, to cover or hide: the verb that is крыть today, behind закры́ть, откры́ть and покры́ть. Shansky puts сокро́вище, a treasure, in the same family."
+        see: ["закрыть=to close", "открыть=to open", "покрыть=to cover"]
+      - kind: origin
+        text: "Shansky compares the verb with Greek kryptō, I hide."
   "крышка=lid":
     cefr_level: B1
     gender: f
