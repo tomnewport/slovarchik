@@ -28951,7 +28951,7 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
   "походить=to be like":
     cefr_level: B1
-    accented: похо́дить
+    accented: походи́ть
     aspect: impf
     collections:
       - people
@@ -28968,10 +28968,10 @@ words:
         "1pl": похо́дим
         "2pl": похо́дите
         "3pl": похо́дят
-      past_m: похо́дил
-      past_f: похо́дила
-      past_n: похо́дило
-      past_pl: похо́дили
+      past_m: походи́л
+      past_f: походи́ла
+      past_n: походи́ло
+      past_pl: походи́ли
     usage:
       - ru: Сын о́чень похо́дит на отца́.
         en_gb: The son is very much like his father.
@@ -28981,13 +28981,13 @@ words:
         en_alt:
           - These twins resemble each other.
         inflect: { token: 3, tense: present, person: 3pl, rule: verb-present }
-      - ru: Её го́лос похо́дил на пе́ние пти́цы.
+      - ru: Её го́лос походи́л на пе́ние пти́цы.
         en_gb: Her voice was like the singing of a bird.
         inflect: { token: 3, tense: past, person: past_m, rule: verb-past }
-      - ru: С во́зрастом он бу́дет похо́дить на де́да.
+      - ru: С во́зрастом он бу́дет походи́ть на де́да.
         en_gb: With age he will come to resemble his grandfather.
         inflect: { token: 4, tense: future, person: 3sg, rule: verb-future }
-      - ru: Без причёски я бы похо́дила на бра́та.
+      - ru: Без причёски я бы походи́ла на бра́та.
         en_gb: Without a hairstyle I would look like my brother.
         en_alt:
           - Without my hairstyle I would look like my brother.
@@ -28995,13 +28995,6 @@ words:
       - ru: Ты похо́дишь на отца́?
         en_gb: Are you like your father?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
-    facts:
-      - kind: build
-        text: "По- with ходи́ть is going about in someone else's manner, and from there simply being like them. Note the stress: похо́дить is to resemble, while походи́ть, stressed on the ending, is to walk about for a while."
-        parts:
-          - { ru: "по", en: "about, in the manner of" }
-          - { ru: "хо́дить", en: "walk" }
-        see: ["ходить=to walk"]
   "поцеловать=to kiss":
     cefr_level: A2
     accented: поцелова́ть
