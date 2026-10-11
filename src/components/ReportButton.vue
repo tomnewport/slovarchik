@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { submitReport } from '../stores/reports.js'
+import ContributeNote from './ContributeNote.vue'
 
 const props = defineProps({
   exercise: { type: Object, required: true },
@@ -9,6 +10,10 @@ const props = defineProps({
 })
 
 const queued = ref(false)
+// Whether this exercise has been reported, so the thank-you stays until the
+// next one rather than flashing past while the issue form opens.
+const reported = ref(false)
+watch(() => props.exercise, () => { reported.value = false })
 
 function getContext() {
   return {
@@ -26,6 +31,7 @@ function getContext() {
 
 async function report() {
   const { queued: wasQueued } = await submitReport(getContext())
+  reported.value = true
   if (wasQueued) {
     queued.value = true
     setTimeout(() => {
@@ -40,6 +46,7 @@ async function report() {
     <template v-if="queued">Saved for later</template>
     <template v-else>Report issue</template>
   </button>
+  <ContributeNote v-if="reported" class="report-thanks" />
 </template>
 
 <style scoped>
@@ -56,6 +63,9 @@ async function report() {
 .report-btn:hover {
   color: var(--text);
   border-color: var(--muted);
+}
+.report-thanks {
+  flex-basis: 100%;
 }
 .report-btn.queued {
   color: var(--good);

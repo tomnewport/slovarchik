@@ -43430,6 +43430,8 @@ words:
         inflect: { token: 3, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В письме́ бы́ли хоро́шие но́вости.
         en_gb: There was good news in the letter.
+        en_alt:
+          - Good news was in the letter.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Она́ получа́ет мно́го пи́сем.
         en_gb: She receives many letters.
@@ -59163,6 +59165,8 @@ words:
         inflect: { token: 4, case: gen, number: sg, rule: noun-gen-sg }
       - ru: В магази́не мно́го ра́зных со́ков.
         en_gb: There are many different juices in the shop.
+        en_alt:
+          - Many different juices are in the shop.
         inflect: { token: 5, case: gen, number: pl, rule: noun-count-gen-pl }
     declension:
       sg_nom: сок
@@ -62870,6 +62874,8 @@ words:
         inflect: { token: 4, case: acc, number: sg, rule: noun-acc-sg }
       - ru: В су́пе мно́го о́вощей.
         en_gb: There are many vegetables in the soup.
+        en_alt:
+          - Many vegetables are in the soup.
         inflect: { token: 2, case: pre, number: sg, rule: noun-pre-sg }
       - ru: Я съел таре́лку су́па.
         en_gb: I ate a plate of soup.

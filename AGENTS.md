@@ -80,7 +80,8 @@ src/
                         #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
                         #   BatchSearchAdd, WordProgressModal, WordStatusCard, ProgressWords, WordFacts,
                         #   AnnotatedEnglish, ComprehensionCheck, HintPassButton — the
-                        #   🔥|Hints → 🤔|Pass help control the typing drills share, …)
+                        #   🔥|Hints → 🤔|Pass help control the typing drills share,
+                        #   ContributeNote — the thank-you after a report or a disputed grade, …)
     exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
                         #   PhraseFix, VerbContrast, IntroCard — the non-graded
                         #   "here is a new word" step)

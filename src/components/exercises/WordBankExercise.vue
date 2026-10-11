@@ -21,6 +21,7 @@ import { chipGlossesFor } from '../../stores/hints.js'
 import HintablePhrase from '../HintablePhrase.vue'
 import SpeakButton from '../SpeakButton.vue'
 import ComprehensionCheck from '../ComprehensionCheck.vue'
+import ContributeNote from '../ContributeNote.vue'
 import WordFacts from '../WordFacts.vue'
 
 const props = defineProps({
@@ -327,6 +328,7 @@ onUnmounted(() => {
         Sure your translation also works?
         <button type="button" class="link" @click="markCorrect">I was right →</button>
       </p>
+      <ContributeNote v-else-if="overridden" />
 
       <!-- The graded question is answered and right; this asks what the Russian
            said that the English could not (#597). Nothing renders for a sentence
