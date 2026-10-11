@@ -24,7 +24,9 @@
 // *where* it went wrong (without giving the letters away), then unlock the
 // keyboard hint for a second, aided try. Phrases additionally get a
 // ❓ Dictionary revealing — with no penalty — unlearned phrase words on the
-// phrase's first encounter (the ones they can't yet be expected to spell).
+// (the ones they can't yet be expected to spell) — on every presentation, not
+// just the first: seeing a sentence once teaches none of its words, and this
+// drill asks the learner to *produce* them.
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 import {
@@ -58,9 +60,12 @@ const emit = defineEmits(['done'])
 // Only phrases get the Dictionary (a single word's dictionary entry would be
 // the answer); the withhold-then-hint flow applies to words and phrases alike.
 const isPhrase = computed(() => props.exercise.content === 'phrase')
-// Keep the first-presentation decision fixed for this question. Marking the
-// phrase immediately prevents a later drill from handing out the same glosses.
-const firstEncounter = isPhrase.value && firstPhraseEncounter(props.exercise.ru)
+// Mark the phrase as presented, so the recognition drills (inline glosses,
+// bilingual chips) don't hand out its glosses again (#740). The Dictionary
+// below deliberately ignores this: an English prompt can't be answered in
+// Russian words the learner has never been taught, however often the sentence
+// has come round.
+if (isPhrase.value) firstPhraseEncounter(props.exercise.ru)
 
 const typed = ref('')
 const checked = ref(false)
@@ -156,7 +161,7 @@ const gradeTargets = computed(() => [props.exercise.ru, ...(props.exercise.alsoR
 // entry — so the answer is never handed out. Sorted alphabetically like a real
 // dictionary.
 const dictionary = computed(() => {
-  if (!isPhrase.value || !firstEncounter) return []
+  if (!isPhrase.value) return []
   const assessedKeys = new Set(props.exercise.targets ?? [])
   const assessedTokens = new Set(props.exercise.targetTokens ?? [])
   const seen = new Set()

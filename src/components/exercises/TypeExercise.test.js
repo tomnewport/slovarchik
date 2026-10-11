@@ -639,12 +639,15 @@ describe('TypeExercise', () => {
     expect(words).toContain('абзаце')
   })
 
-  it('removes the dictionary on the next encounter of the same sentence', () => {
+  // A repeat teaches none of the sentence's unlearned words, and this drill asks
+  // the learner to produce them — so the Dictionary stays (#740 gates only the
+  // recognition drills' glosses).
+  it('keeps the dictionary on the next encounter of the same sentence', () => {
     const first = mount(TypeExercise, { props: { exercise: dictPhrase } })
     expect(first.find('.dictionary').exists()).toBe(true)
     first.unmount()
     const again = mount(TypeExercise, { props: { exercise: dictPhrase } })
-    expect(again.find('.dictionary').exists()).toBe(false)
+    expect(again.find('.dictionary').exists()).toBe(true)
   })
 })
 
