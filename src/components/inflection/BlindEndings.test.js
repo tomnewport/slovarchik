@@ -191,3 +191,39 @@ describe('BlindEndings — rule reminders', () => {
     expect(wrapper.findAll('.rule-hint')).toHaveLength(0)
   })
 })
+
+describe('BlindEndings — focusing a box reveals its stem (#842)', () => {
+  // jsdom lays nothing out, so pin the rectangles: a 100px-wide sticky heading
+  // over a scroller from 0 to 300px.
+  function layout(wrapper, cellLeft, cellRight) {
+    const scroller = wrapper.find('.table-scroll').element
+    scroller.getBoundingClientRect = () => ({ left: 0, right: 300 })
+    for (const th of wrapper.findAll('.rowhead')) th.element.getBoundingClientRect = () => ({ right: 100 })
+    for (const td of wrapper.findAll('td')) td.element.getBoundingClientRect = () => ({ left: cellLeft, right: cellRight })
+    return scroller
+  }
+
+  it('scrolls back so a cell under the row heading shows its stem', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm } })
+    const scroller = layout(wrapper, 60, 200)
+    scroller.scrollLeft = 80
+    await wrapper.find('input.ending-input').trigger('focus')
+    expect(scroller.scrollLeft).toBe(40)
+  })
+
+  it('scrolls forward so a cell past the right edge is shown whole', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm } })
+    const scroller = layout(wrapper, 200, 350)
+    scroller.scrollLeft = 0
+    await wrapper.find('input.ending-input').trigger('focus')
+    expect(scroller.scrollLeft).toBe(50)
+  })
+
+  it('leaves a cell that is already in view alone', async () => {
+    const wrapper = mount(BlindEndings, { props: { paradigm } })
+    const scroller = layout(wrapper, 120, 250)
+    scroller.scrollLeft = 10
+    await wrapper.find('input.ending-input').trigger('focus')
+    expect(scroller.scrollLeft).toBe(10)
+  })
+})

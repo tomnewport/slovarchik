@@ -255,8 +255,8 @@ function nextStage() {
         </thead>
         <tbody>
           <tr v-for="row in paradigm.rows" :key="row.key">
-            <th class="rowhead">
-              {{ row.label }}<button
+            <th class="rowhead" :title="row.short ? row.label : undefined">
+              {{ row.short ?? row.label }}<button
                 v-if="row.note"
                 type="button"
                 class="info"
@@ -403,6 +403,7 @@ function nextStage() {
 }
 .rowhead small {
   display: block;
+  white-space: normal;
   font-weight: 400;
   font-size: 0.7rem;
 }

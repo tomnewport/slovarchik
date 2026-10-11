@@ -38,6 +38,15 @@ export const CASE_LABELS = {
   acc_anim: 'Accusative (animate)',
 }
 
+/**
+ * Terser row headings for the inflection tables, where the first column is
+ * sticky and every character of it is taken from the cells on a phone (#842).
+ * Only the labels that set the column's width need one.
+ */
+export const CASE_SHORT_LABELS = {
+  acc_anim: 'Acc. (anim.)',
+}
+
 /** Short hint of the question each case answers, handy for learners. */
 export const CASE_HINTS = {
   nom: 'who / what (subject)',
