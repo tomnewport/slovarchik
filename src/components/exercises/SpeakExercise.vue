@@ -59,7 +59,10 @@ const THRESHOLD = 0.8
 
 // Give a reasonable window to finish speaking: ~3s for a word, ~10s for a phrase.
 const isPhrase = computed(() => props.exercise.content === 'phrase')
-const firstEncounter = isPhrase.value && firstPhraseEncounter(props.exercise.ru)
+// Claim the presentation for the recognition drills (#740). The dictionary
+// below is shown regardless — as in the typing drill, the learner must produce
+// words they haven't been taught, and a repeat doesn't teach them.
+if (isPhrase.value) firstPhraseEncounter(props.exercise.ru)
 const maxListenMs = computed(() => (isPhrase.value ? 10000 : 3000))
 
 // Letters expected, so we can stop early once roughly that much has been heard
@@ -344,9 +347,9 @@ onBeforeUnmount(() => {
       </small>
     </div>
 
-    <!-- Rung 0: on the first encounter, unlearned non-target headwords with
-         glosses, alphabetically. Free, and on from the start. -->
-    <ul v-if="firstEncounter && aid.dictionary.length && aidVisible" class="dict-list">
+    <!-- Rung 0: unlearned non-target headwords with glosses, alphabetically.
+         Free, on from the start, and on every encounter. -->
+    <ul v-if="aid.dictionary.length && aidVisible" class="dict-list">
       <li v-for="entry in aid.dictionary" :key="entry.key">
         <span lang="ru" class="dict-ru">{{ entry.ru }}</span>
         <span lang="en" class="dict-en">{{ entry.en }}</span>

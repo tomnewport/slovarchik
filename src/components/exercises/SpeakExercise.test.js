@@ -119,13 +119,13 @@ describe('SpeakExercise hint ladder', () => {
     expect(words).toEqual(['в', 'два', 'ошибка', 'этот'])
   })
 
-  it('withholds the dictionary after this phrase has appeared once', () => {
+  it('keeps the dictionary when this phrase comes round again', () => {
     installRecognition()
     const first = mount(SpeakExercise, { props: { exercise: phrase } })
     expect(first.find('.dict-list').exists()).toBe(true)
     first.unmount()
     const again = mount(SpeakExercise, { props: { exercise: phrase } })
-    expect(again.find('.dict-list').exists()).toBe(false)
+    expect(again.find('.dict-list').exists()).toBe(true)
     // The hint ladder is still available for producing the Russian sentence.
     expect(again.find('button.hint-rung').exists()).toBe(true)
   })
