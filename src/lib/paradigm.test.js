@@ -395,6 +395,12 @@ describe('buildParadigm — adjective', () => {
     expect(p.stem).toBe('нов')
     expect(p.lemma).toBe('но́вый') // accented masculine headword
   })
+  it('gives the animate-accusative row a terse heading, keeping the full label (#842)', () => {
+    const anim = p.rows.find((r) => r.key === 'acc_anim')
+    expect(anim.short).toBe('Acc. (anim.)')
+    expect(anim.label).toBe('Accusative (animate)')
+    expect(p.rows.find((r) => r.key === 'acc').short).toBeUndefined()
+  })
   it('derives the animate accusative (= genitive) for masculine and plural only', () => {
     const animCells = p.cells.filter((c) => c.row === 'acc_anim')
     expect(animCells.map((c) => c.col)).toEqual(['m', 'pl'])

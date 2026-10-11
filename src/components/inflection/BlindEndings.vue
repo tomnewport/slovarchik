@@ -114,6 +114,21 @@ function focusNext(e) {
   order.find((el) => !el.value.trim())?.focus()
 }
 
+// A focused box is scrolled into view on its own, but the stem beside it can
+// be left under the sticky row heading — so the learner types an ending to a
+// word they cannot see (#842). Bring the whole cell, stem and box, into view.
+function revealCell(e) {
+  const cell = e.target.closest('td')
+  const scroller = e.target.closest('.table-scroll')
+  const head = cell?.parentElement.querySelector('.rowhead')
+  if (!cell || !scroller || !head) return
+  const c = cell.getBoundingClientRect()
+  const hidden = head.getBoundingClientRect().right - c.left
+  const overflow = c.right - scroller.getBoundingClientRect().right
+  if (hidden > 0) scroller.scrollLeft -= hidden
+  else if (overflow > 0) scroller.scrollLeft += overflow
+}
+
 onMounted(() => speak(props.paradigm.lemma))
 </script>
 
@@ -129,8 +144,8 @@ onMounted(() => speak(props.paradigm.lemma))
         </thead>
         <tbody>
           <tr v-for="row in paradigm.rows" :key="row.key">
-            <th class="rowhead">
-              {{ row.label }}<button
+            <th class="rowhead" :title="row.short ? row.label : undefined">
+              {{ row.short ?? row.label }}<button
                 v-if="row.note"
                 type="button"
                 class="info"
@@ -160,6 +175,7 @@ onMounted(() => speak(props.paradigm.lemma))
                   autocapitalize="off"
                   spellcheck="false"
                   @keydown.enter.prevent="focusNext"
+                  @focus="revealCell"
                 />
                 <button
                   v-if="cellAt(row.key, col.key).note"
@@ -254,6 +270,7 @@ onMounted(() => speak(props.paradigm.lemma))
 }
 .rowhead small {
   display: block;
+  white-space: normal;
   font-weight: 400;
   font-size: 0.7rem;
 }

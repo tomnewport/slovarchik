@@ -10,6 +10,7 @@ import { stripStress, normalize } from './text.js'
 import {
   CASES,
   CASE_LABELS,
+  CASE_SHORT_LABELS,
   CASE_HINTS,
   CASE_NOTES,
   LOCATIVE,
@@ -27,7 +28,13 @@ import {
   shortPassiveCell,
 } from './participles.js'
 
-const caseRow = (c) => ({ key: c, label: CASE_LABELS[c], sub: CASE_HINTS[c], note: CASE_NOTES[c] })
+const caseRow = (c) => ({
+  key: c,
+  label: CASE_LABELS[c],
+  ...(CASE_SHORT_LABELS[c] && { short: CASE_SHORT_LABELS[c] }),
+  sub: CASE_HINTS[c],
+  note: CASE_NOTES[c],
+})
 
 // Noun rows: the six core cases plus the optional second locative. The locative
 // row is pruned automatically for nouns that don't declare one (see assemble).
