@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterEach, vi } from 'vitest'
 import 'fake-indexeddb/auto'
 import { IDBFactory } from 'fake-indexeddb'
-import { mount, flushPromises } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 
 import MeaningMazeView from './MeaningMazeView.vue'
 import * as idb from '../lib/idb.js'
@@ -149,9 +149,9 @@ describe('MeaningMazeView', () => {
     await tile(wrapper, next).trigger('click')
     expect(wrapper.find('.translated-word').text()).toContain(next.text)
     await wrapper.find('.translated-word .next-batch').trigger('click')
-    await new Promise((resolve) => setTimeout(resolve))
-    await flushPromises()
-    expect(progress.state.learningWishlist).toContain(wordKey)
+    // The wishlist changes only once the IndexedDB write resolves, and
+    // fake-indexeddb settles on timers — how many is load-dependent.
+    await vi.waitFor(() => expect(progress.state.learningWishlist).toContain(wordKey))
     wrapper.unmount()
   })
 
