@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { spellOutInitialisms } from './initialism.js'
+import { spellOutInitialisms, sayLoneConsonantWords, speechText } from './initialism.js'
 
 describe('spellOutInitialisms', () => {
   it('dot-separates a bare Russian initialism so it is spelled out', () => {
@@ -34,5 +34,38 @@ describe('spellOutInitialisms', () => {
     expect(spellOutInitialisms('')).toBe('')
     expect(spellOutInitialisms(null)).toBe('')
     expect(spellOutInitialisms(undefined)).toBe('')
+  })
+})
+
+describe('sayLoneConsonantWords', () => {
+  it('respells a preposition spoken on its own so it is not read as a letter name', () => {
+    expect(sayLoneConsonantWords('с')).toBe('съ')
+    expect(sayLoneConsonantWords('в')).toBe('въ')
+    expect(sayLoneConsonantWords('к')).toBe('къ')
+    expect(sayLoneConsonantWords(' С ')).toBe(' СЪ ')
+  })
+
+  it('respells it when nothing Russian follows, as in a gloss', () => {
+    expect(sayLoneConsonantWords('с / со')).toBe('съ / со')
+    expect(sayLoneConsonantWords('в (+ prep)')).toBe('въ (+ prep)')
+  })
+
+  it('leaves a preposition alone when its word follows', () => {
+    expect(sayLoneConsonantWords('Я гуля́ю с дру́гом.')).toBe('Я гуля́ю с дру́гом.')
+    expect(sayLoneConsonantWords('В Москве́')).toBe('В Москве́')
+    expect(sayLoneConsonantWords('к врачу́')).toBe('к врачу́')
+  })
+
+  it('leaves vowel words and letters inside words alone', () => {
+    expect(sayLoneConsonantWords('и')).toBe('и')
+    expect(sayLoneConsonantWords('я')).toBe('я')
+    expect(sayLoneConsonantWords('сок')).toBe('сок')
+  })
+})
+
+describe('speechText', () => {
+  it('applies both transforms without one disturbing the other', () => {
+    expect(speechText('с')).toBe('съ')
+    expect(speechText('в США')).toBe('в С.Ш.А.')
   })
 })

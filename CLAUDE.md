@@ -1,1 +1,428 @@
-AGENTS.md
+# AGENTS.md — orientation for AI agents (and humans in a hurry)
+
+> **Stack in one line: this is a Vue 3 + Vite app. It is _not_ React.**
+> There is no JSX, no `react`/`react-dom`, no hooks, no Redux. If you catch
+> yourself about to write `useState`, a `.jsx` file, or `ReactDOM.render`, stop —
+> you've pattern-matched the wrong framework. Read this file first; treat any
+> further checking as a quick confirmation, not an exploration.
+
+## Why agents mistake this for React (and the quick tells that it isn't)
+
+A few signals here look React-ish at a glance. Here's what each one actually is:
+
+| Looks like React because…            | …but it's actually                                                |
+| ------------------------------------ | ----------------------------------------------------------------- |
+| It's built with **Vite**             | Vite is framework-agnostic; here it runs **`@vitejs/plugin-vue`**. |
+| There's a **`src/stores/`** dir      | Vue **reactive stores** (`reactive()`/`computed()`), not Redux/Zustand. |
+| There's `src/views/` + `src/components/` | Standard Vue SPA layout; the files are **`.vue`** Single-File Components. |
+| There's an `@` import alias          | Vue convention too — `@` → `src/` (see `vite.config.js`).          |
+
+**The 10-second confirmation:** `package.json` `dependencies` are `vue` +
+`vue-router` (no react). `index.html` mounts `<div id="app">` (not `#root`).
+`src/main.js` calls `createApp(App).use(router).mount('#app')`. Components are
+`.vue` files using `<script setup>` + `<template>`.
+
+## What this is
+
+**Slovarchik** — an offline-first **PWA** for practising Russian: vocabulary
+(both directions), inflection drills for every inflecting part of speech (nouns,
+adjectives, pronouns, verbs), phrases, listening and speaking. A
+spaced-repetition engine tracks per-word mastery and assembles practice
+sessions. No backend, no accounts; everything runs in the browser and works
+offline. Deployed to GitHub Pages under the `/slovarchik/` base path.
+
+- **Vue 3** (`<script setup>` SFCs) + **Vue Router** (hash history)
+- **Vite 8** build, **vite-plugin-pwa** (Workbox) for the service worker/offline cache
+- **Vitest** + **@vue/test-utils** + jsdom for unit tests; **Playwright** for e2e
+- Vocabulary is **YAML files** in `public/vocab/`, cached in **IndexedDB** (and
+  precached by the service worker for first-launch offline) — not part of the JS
+  bundle. (`js-yaml` is a **devDependency**: the YAML is converted to JSON at
+  build time by `scripts/gen-manifest.mjs`, and the browser only ever calls
+  `response.json()` — it never parses YAML, and js-yaml is not bundled.)
+
+## Project map
+
+```
+index.html              # app shell — mounts #app, loads src/main.js
+vite.config.js          # Vite + Vue plugin + PWA + Vitest config; base = /slovarchik/
+                        #   also emits dist/version.json (what the deployment is
+                        #   serving, plus dated release notes) and keeps it out
+                        #   of the SW precache
+playwright.config.js    # e2e config. Two servers: `npm run dev` on :5173 for the
+                        #   `chromium` and `pixel5` projects, and `npm run build &&
+                        #   npm run preview` on :4173 for the `offline` project —
+                        #   vite-plugin-pwa registers no service worker under `dev`,
+                        #   so offline/precache behaviour is only testable on a build
+eslint.config.js        # flat config: js.recommended + eslint-plugin-vue
+jsconfig.json           # the `checkJs` probe (#666): non-strict, logic layers only, no emit
+src/
+  main.js               # entry: createApp(App).use(router).mount('#app')
+  App.vue               # shell: header (Home logo + Data avatar) + <RouterView>
+                        #   + global RussianKeyboard + ErrorToast. Navigation is
+                        #   session-driven from HomeView, not a route bar.
+  router/index.js       # routes → views. Highlights: / (home), /session, /batch,
+                        #   /progress, /data, /vocab, /phrases, /phrase-fix,
+                        #   /verb-government, /listening, /speaking, /numbers, /bomb,
+                        #   /crush, /firewatch, /maze, /emporium, /library, /reader/:bookId, and the
+                        #   shared inflection view at /declension /verbs /pronouns
+                        #   /adjectives (one InflectionView fed a different `pos` prop).
+  views/*.vue           # one screen per route (HomeView + SessionView are the big ones;
+                        #   BombDisposalView, InflectionCrushView, FirewatchView,
+                        #   MeaningMazeView and CelebrationEmporiumView are between-practice
+                        #   minigames launched from HomeView.
+                        #   LibraryView downloads opt-in book packs; ReaderView
+                        #   paginates literature by stable sentence ID.
+                        #   FirewatchView is the only canvas in the app: 10 000 cells
+                        #   cannot be DOM nodes, so the terrain is painted once into an
+                        #   offscreen canvas and patched per cell, and each frame blits
+                        #   that and draws only the fire, the planes and the cross-hairs)
+  components/*.vue       # shared UI (RussianKeyboard, SpeakButton, HintablePhrase,
+                        #   ProgressPill, ReportButton, CelebrationBurst, AchievementBadge,
+                        #   BatchSearchAdd, WordProgressModal, WordStatusCard, ProgressWords, WordFacts,
+                        #   AnnotatedEnglish, ComprehensionCheck, HintPassButton — the
+                        #   🔥|Hints → 🤔|Pass help control the typing drills share,
+                        #   ContributeNote — the thank-you after a report or a disputed grade, …)
+    exercises/*.vue     #   per-exercise UIs (Flashcard, Type, WordBank, Inflect, Speak,
+                        #   PhraseFix, VerbContrast, IntroCard — the non-graded
+                        #   "here is a new word" step)
+    inflection/*.vue    #   inflection-table UIs (DragTable, BlindEndings, IdentifyForm,
+                        #   ParadigmShapeNote — why this table is a different shape)
+  composables/          # stateful Vue orchestration shared between views (needs a
+                        #   component lifecycle, so it can't live in lib/):
+    useSpeechLoop.js    #   sequence guards, timer registry, speech watchdogs, wake
+                        #   lock, mic lifecycle — SpeakingView
+  stores/               # VUE reactive stores (app state), NOT Redux:
+    vocab.js            #   reactive vocab/nouns/phrases + IndexedDB sync
+    progress.js         #   barrel — re-exports stores/progress/ so consumers import one module
+    progress/           #   the core engine, split along its section banners (#667):
+      state.js          #     the reactive `state` + the lookups over it (the floor: imports
+                        #     nothing else in here, so everything else may import it)
+      persistence.js    #     writing to IndexedDB, and noticing when a write fails
+      migrations.js     #     bringing an older record up to the current shape — ONE place,
+                        #     called by both the load path and an import
+      records.js        #     the per-word derivation memo, the derived computeds, and every
+                        #     path that records an attempt (sole owner of the memo)
+      activity.js       #     streak + activity calendar
+      encounters.js     #     words MET but not taught — one meta blob, never a record,
+                        #       because an encounter is not an attempt (#675)
+      phrases.js        #     sentences already presented — gates first-encounter
+                        #       teaching glosses across drills (#740)
+      batches.js        #     the current learning/mastery batches
+      wishlist.js       #     persistent requests for words in the next learning batch
+      sessions.js       #     session assembly + the per-word / per-skill views
+      analytics.js      #     the Progress screen's learned/mastered history
+      lifecycle.js      #     load / reset
+      backup.js         #     export / import
+      index.js          #     re-export; dependencies point one way only, no cycles
+    appUpdate.js        #   whether a newer build is waiting, and taking it when the
+                        #     learner asks — never mid-question (#691); also what the
+                        #     deployment says it is serving and when it last said it,
+                        #     for the Data screen's version check
+    settings.js         #   user preferences (not learning progress)
+    library.js          #   opt-in book catalog, download and removal
+    reader.js           #   what the reader remembers between visits: each book's place
+                        #     (a sentence id, never a page number) and saved sentences,
+                        #     plus the one set of reading appearance settings. Removing a
+                        #     book forgets its place, rather than leaving rows behind
+    reports.js          #   offline-queued issue reports
+    keyboard.js         #   shared on-screen keyboard hint state
+    hints.js            #   in-phrase word-hint glue + the spoken drill's dictionary (#733)
+    errorToast.js       #   transient error toast state
+  lib/                  # framework-free pure modules (unit-tested in isolation). Grouped:
+                        #   progression/schedule/batches/session/sessionPools/sessionRunner/
+                        #     practices/exerciseBuild/flashcardRepeat/focus/achievements/streak  — the learning engine
+                        #   quickProgress  — which words a session has answered flawlessly (right
+                        #     first time, no hint, no do-over) and finished with, so it can ask
+                        #     whether to count them learned/mastered now (#725) instead of
+                        #     drilling a word the learner has just demonstrated
+                        #   declension/paradigm/adjectiveDeclension/participles/numerals/numberDrill  — inflection & numbers
+                        #     (numerals.js also READS numerals back: `parseCardinal` turns
+                        #      «ты́сяча две́сти три» into 1203 off the same checked atom
+                        #      tables that spell it — 0–9999, round-tripped over every value)
+                        #   paradigmShape  — why a verb's table is a different shape (no present tense,
+                        #     third-person only, impersonal), in a sentence beside the table
+                        #   tableStage  — how much of an inflection table the word-bank drill deals at once
+                        #     (big tables one column at a time until built with nothing misplaced)
+                        #   curriculum  — the ~500-word PARTS a learner works through ("A2 Part I"),
+                        #     read from the committed public/vocab/parts.yml; a part is a bundle of
+                        #     topic collections inside one CEFR level (#674)
+                        #   verbGovernment  — which case / preposition frame a verb forces on its object
+                        #   wordFacts  — a word's authored facts (build/root/origin/region/mnemonic) and its related words, derived + authored
+                        #   factCoverage  — which words most deserve a fact, and the sound-alike and diminutive shortlists
+                        #     (worklists, NOT CI guards; rejections live in review/confusables-reviewed.jsonl and
+                        #      review/diminutives-reviewed.jsonl)
+                        #   phrases/phraseHint/phraseAlign/phraseContext/phraseAmbiguity/promptDisambiguation/glossCoverage/glossaryPromotion  — phrases & glossary→curriculum
+                        #   phraseAlign  — WHICH dictionary word each Russian token in a phrase is,
+                        #     as opposed to what phraseHint shows for it. Structural rungs first
+                        #     (a stub's lemma: link, a derivational family, one word's several
+                        #     senses), the sentence's English last, and a null rather than a guess —
+                        #     the residue is the `align:` worklist that check:align ratchets
+                        #   quiz/recognition/speakingDrill/speech/feedbackSound/spellReveal  — drills & speech
+                        #   speakingAid  — what the spoken drill hands the learner when it prompts in
+                        #     English: the free dictionary of the sentence's non-target words, the
+                        #     blanked sentence behind the first hint, and which rung costs the fire (#733)
+                        #   bombDisposal  — the wire-cutting minigame (#728): a small closed rule
+                        #     grammar that both SAYS the instruction in Russian and grades the cut,
+                        #     so the sentence and the right answer cannot drift apart
+                        #   inflectionCrush  — the falling-forms minigame (#751), Yoshi with
+                        #     grammar: what each inflected form COULD be (кни́ги is genitive
+                        #     singular and nominative plural, so it stacks as both), the four
+                        #     CATEGORIES a level deals from and the deck that carries only them,
+                        #     the whole-column swap, what two stacked forms sharing a category
+                        #     clear, the colour that clear reveals, and what the chase window
+                        #     after it is worth — a second per category the stack fired on.
+                        #     RUN is 2 rather than 3 on a measurement, not a preference: see
+                        #     its doc comment
+                        #   meaningMaze  — the translation-path minigame (#752): a chessboard of
+                        #     Russian and English words carved over a half-resolution lattice, and
+                        #     the one invariant the game rests on — every Russian word has EXACTLY
+                        #     one of its translations beside it, the board being laid out in pairs
+                        #     (a bipartite matching over what the carved path did not take). So
+                        #     there are no dead ends, and a refusal is never a right answer.
+                        #     Also `hyphenate`: the school break rules for both languages, because a
+                        #     cell is four characters wide and no browser here has a ru dictionary
+                        #   firewatch  — the fire-fighting minigame (#731): the forest, how fire
+                        #     spreads through it, what one release of water does (put out, and
+                        #     leave the ground too wet to catch), the circuit the plane flies
+                        #     around a fire releasing a dozen times on the way, and the
+                        #     four-digit coordinate the learner says — ONE cardinal 0–9999
+                        #     («четы́ре ты́сячи девяно́сто во́семь»), never two halves (#762). Pure and seeded, so a
+                        #     two-minute round can be simulated in a millisecond — which is how
+                        #     DEFAULTS was tuned, and re-tuned whenever the plane changed,
+                        #     rather than by playing
+                        #   celebrationEmporium  — the cake-shop minigame (#727): customers
+                        #     ask for a cake for an age («Моему́ бра́ту девятна́дцать лет», with
+                        #     only believable relations for each age) or a year (the ordinal
+                        #     «ты́сяча девятьсо́т два́дцать шесто́й год»), all spelled by
+                        #     numerals.js; the warm-up rule (the first few only want cakes on
+                        #     the shelves), the arrival ramp from 10 s down to the 3 s bake,
+                        #     and what the intercom will and won't bake
+                        #   noise  — Perlin, and the fractal sum of it. There to warp the
+                        #     coordinates firewatch's Voronoi layout is looked up at: a Voronoi
+                        #     cell is a convex polygon, so the stands come out straight-edged
+                        #     unless something bends them
+                        #   recovery  — what a slipped or at-risk word has lost and what would win it
+                        #     back: the level it owes, the dimensions that broke, and how many correct
+                        #     answers each wants (and when the day-spacing rule means not today)
+                        #   reviewState  — when the scheduler expects each skill back, and whether a
+                        #     word passed the overnight confirmation review: the word card's
+                        #     "Spaced review" panel, and the only caller of schedule.js's `isDue`
+                        #   confusables  — what a wrong answer actually was (aspect partner, synonym, wrong form…) and how to say so, in either direction
+                        #   ruleOracle  — which STATEABLE rule a wrong answer broke (the seven-letter rule, animacy,
+                        #     a preposition with only one case) when the rule is the whole of what went wrong; the
+                        #     reminder is shown mid-attempt and never spells the answer out. Ordinary declension /
+                        #     conjugation gaps deliberately return nothing — that is the lesson, not a reminder.
+                        #   encounters  — what a correctly-answered phrase proves the learner has MET, as
+                        #     opposed to what it grades: the words around the target, credited only when
+                        #     nothing on screen (keyboard hint, ❓ Dictionary, inline glosses) gave them away
+                        #   comprehension  — what the Russian says that the English translation cannot (aspect, det/indet motion),
+                        #     asked after a correct RU→EN answer; informational, never graded
+                        #   flashcardOptions/initialism/stressAudit/spellPrompt/homeDashboard  — drill & dashboard view-model helpers
+                        #   progressWords/wordWishlist — searchable status rows and local vocabulary requests
+                        #   progressChart  — axes, gridlines and stepped cumulative lines for the Progress
+                        #     screen's words-known chart (a real time axis; idle weeks take up width)
+                        #   stressAudit/stressGolden/morphOracle/morphGolden/genderBalance/degreeCoverage/participleCoverage/spellPrompt/wordFacts  — corpus data-integrity oracles (CI guards on the vocab)
+                        #   translationAudit  — ranks example sentences for a translation-quality review (a worklist, NOT a CI guard — see docs/translation-review.md)
+                        #   appVersion  — the build running here vs the build deployed, how old
+                        #     the last check is, and which of the deployment's dated release
+                        #     notes are new to THIS install (the Data screen's Versions card)
+                        #   readerPage/readerDictionary/readerReport/bookPack — literature layout, lookup, issue links and pack schema
+                        #   readerIllustrations  — the optional emoji drawn every few sentences
+                        #     in the reader: a hand-written stem lexicon, one picture per
+                        #     window of sentences, and never the same one twice running.
+                        #     `npm run reader:art` prints what each book would get
+                        #   readerGlossCoverage  — which words in the shipped books the tap
+                        #     dictionary cannot explain. A book pack carries no lexicon of its
+                        #     own, so an unglossed word is one the reader silently refuses to
+                        #     explain; `check:reader` fails the build on one (#782)
+                        #   vocabBuild/idb/plain/text/collections/reportIssue/seed  — data & utilities
+                        #   coalesce  — share one in-flight run between concurrent callers, so the boot
+                        #     loaders (initVocab, loadProgress, loadSettings, loadReports) can't duplicate
+                        #     their work when main.js and a deep-linked view both start them
+  types/globals.d.ts    # browser globals the DOM lib omits (prefixed Web Speech/Audio)
+  types/jsdoc.d.ts      # the JSDoc vocabulary the checkJs probe needs: `PlainObject`,
+                        #   the plain record whose fields the probe does not check
+  test/fixtures.js      # shared test fixtures
+  test/idbFailure.js    # forces IndexedDB writes to abort (persistence-failure tests)
+public/vocab/           # *.yml word data (one per part of speech) + manifest.json
+                        #   names.yml adds dictionary-only names and patronymics;
+                        #   reader-names/reader-nouns/reader-adverbs/reader-glosses.yml are the
+                        #   reader-only dictionary — every word the shipped books use and the
+                        #   curriculum does not teach, all `learn: false` (#782)
+                        #   + parts.yml — the curriculum parts (#674). COMMITTED and
+                        #   maintainer-owned, unlike the generated files below: the
+                        #   packing is not stable under corpus growth, so a person
+                        #   owns it and `check:parts` says when it has drifted
+                        #   + phrase-notes.json — the corpus-wide phrase
+                        #   annotations derived at build time (#657); generated,
+                        #   not committed, like the manifest and the *.json
+content/books/          # reviewed Russian works and new sentence translations;
+                        #   source revisions, rights and stable IDs live here
+public/books/           # generated AND committed catalog and opt-in, versioned
+                        #   JSON packs; unlike vocab's manifest, these are tracked
+                        #   and kept outside the service worker precache
+e2e/                    # Playwright specs (homepage, full-session, versions, and offline —
+                        #   the last runs against the preview build, where the SW exists)
+docs/                   # design notes for in-flight features
+                        #   vocab-caching.md — why the corpus is cached twice
+                        #     (Cache Storage + IndexedDB), what each copy is for,
+                        #     and why manifest.json is kept out of the SW rule
+scripts/                # node maintenance scripts (icons, vocab sorting, coverage)
+                        #   build-book-packs.mjs checks reviewed editorial JSON in
+                        #   content/books/ and emits versioned public/books/ data
+                        #   check-ci.mjs runs CI's `test` job locally, in order
+                        #   size-summary.mjs gates the shipped payload (entry chunk,
+                        #     entry CSS, dist/vocab/*.json gzipped) against the
+                        #     committed budget in size-budget.json, and publishes
+                        #     the table to the job summary on pass and on fail
+                        #   check-precache.mjs asserts vocab/** stays out of the
+                        #     generated SW precache manifest (the #266 partition), and
+                        #     version.json with it
+                        #   release-notes.mjs reads the commit log at build time —
+                        #     the release notes shipped in version.json and compiled
+                        #     into the app (no changelog file, no tags: the commit
+                        #     subjects are the changelog)
+                        #   check-parts.mjs is the curriculum-parts GATE; gen-parts.mjs is
+                        #     the worklist that proposes a packing (--repack for the
+                        #     minimal repair when the gate fails)
+                        #   typecheck.mjs holds the JSDoc/signature drift to a per-file
+                        #     ratchet (typecheck-baseline.json); meant to reach zero
+                        #   check-align.mjs validates the align: annotations and the lemma:
+                        #     links, refuses a duplicated sentence whose copies would align
+                        #     differently, and ratchets the unresolved residue per ambiguity
+                        #     group (align-baseline.json); --list is the worklist.
+                        #     gen-lemma-links.mjs proposes the lemma: links that dissolve a
+                        #     third of the ambiguity outright
+                        #   check-reader-glosses.mjs is the reader GATE: every tappable word in
+                        #     content/books/ resolves through the reader's own lookup; --list is
+                        #     the worklist, each missing word in the sentence it appears in
+```
+
+Tests live next to their source as `*.test.js`; e2e specs live in `e2e/`.
+
+Coverage is measured over the logic layers only — `src/lib/`, `src/stores/` and
+`src/composables/` — not the `.vue` views, which @vue/test-utils and Playwright
+cover in ways a line count says little about. Each layer has a threshold in
+`vite.config.js` set just under where it stands today, so a change that drops
+coverage fails CI; raise the thresholds when the real figure climbs past them.
+
+The shipped payload has the same kind of guard: `scripts/size-budget.json`
+holds gzipped limits for the entry chunk, the entry CSS and `dist/vocab/*.json`,
+and `npm run check:size` fails the build when one is exceeded. Like the coverage
+thresholds it is a ratchet — raise a limit in the PR that grows the payload, and
+say in the commit message what grew and by how much.
+
+## Commands
+
+```bash
+npm install
+npm run dev         # local dev server
+npm test            # run unit tests once (vitest)
+npm run test:watch  # watch mode
+npm run test:coverage # same suite + coverage over src/lib, src/stores, src/composables
+npm run lint        # eslint (correctness rules; formatting left to Prettier/editor)
+npm run typecheck   # non-strict `tsc --checkJs` over src/lib, src/stores, src/composables
+npm run build       # production build into dist/
+npm run gen:books  # validate content/books/ and regenerate the committed public/books/ packs
+npm run preview     # serve the production build
+npm run test:e2e    # Playwright end-to-end tests
+
+# Corpus gates — they read the YAML in public/vocab/, they fail CI, and
+# nothing else runs them (a green `npm test` says nothing about them):
+npm run verify:review        # replaying review/proposals reproduces the committed vocab
+npm run check:inflect:cases  # every inflect: annotation agrees with the case its preposition governs
+npm run check:prompts        # no growth in English prompts matching more than one Russian sentence
+npm run check:parts          # parts.yml still describes the corpus (no orphans, bounds held)
+npm run check:align          # every phrase token resolves to one word, and the residue hasn't grown
+npm run check:reader         # every tappable word in the shipped books has a dictionary entry
+
+# The alignment worklist and the generator behind it (NOT gates):
+npm run align:list           # the unresolved ambiguity groups, busiest first
+npm run gen:lemma-links      # propose lemma: links for gloss-only stubs (--apply writes them)
+npm run reader:glosses       # the same books, with each unglossed word in context
+npm run reader:art           # the emoji illustration each book's sentences would get
+
+# Build gate — reads dist/, so it runs after `npm run build`:
+npm run check:size    # entry chunk, entry CSS and the vocab JSON against
+                      # scripts/size-budget.json (a ratchet, like coverage)
+npm run check:precache  # vocab/** is absent from the generated SW precache manifest
+
+# The two that answer "did I break CI?"
+npm run check:corpus  # just the four gates above, in CI's order (~5s)
+npm run check:ci      # the whole CI `test` job, in order, stopping where it would
+```
+
+The typecheck is a **per-file ratchet** in `scripts/typecheck-baseline.json`,
+and it is now **empty**: the JSDoc drift it was built to retire is gone, so any
+new error fails the build by name. Adding an entry back is not a fix — a new
+error means a doc block and its signature disagree, and the repair is to make
+them agree, or to say at the site why TypeScript is narrowing correct JS badly
+(as `src/types/globals.d.ts` does). Per file rather than one total, so a new
+error cannot hide behind a fix somewhere else (#666).
+
+CI (`.github/workflows/ci.yml`) runs, in this order, `lint`, `typecheck`, `verify:review`
+(only when `review/proposals/*.jsonl` exists), `check:inflect:cases`,
+`check:prompts`, `check:parts`, `check:align`, `test:coverage`, `build`, `check:size` and
+`check:precache` in its `test` job, plus the Playwright `e2e` job — every one of them on every push,
+publishing the coverage table to the run's job summary via
+`scripts/coverage-summary.mjs` and the size table via `scripts/size-summary.mjs`.
+`npm run check:ci` runs that same `test` job list locally and gives the same
+verdict; `scripts/check-ci.test.mjs` reads `ci.yml` and fails if the two ever
+drift apart, so this paragraph cannot go stale unnoticed.
+
+**Gates vs worklists.** Everything above fails the build. The rest of
+`scripts/` — `check:stress`, `check:morph`, `audit:cefr`, `audit:translations`,
+`audit:gender`, `coverage:facts`, `promote:glossary`, `align:list`,
+`gen:lemma-links` — are **worklists**: they
+rank findings for a human to work down, are not wired to CI, and passing one
+tells you nothing about whether CI will accept your change.
+
+## Where to make common changes
+
+- **A book the reader can't explain a word in** → `npm run reader:glosses` names
+  it; add a stress-marked `learn: false` entry to the `public/vocab/reader-*.yml`
+  file that fits (see [`docs/reader-glosses.md`](docs/reader-glosses.md)). Never
+  by dropping the word from the text.
+- **A drill's behaviour/UI** → the matching `src/views/*View.vue`.
+- **Quiz/declension/grading logic** → the pure module in `src/lib/` (keep it
+  framework-free so it stays unit-testable), and add/extend its `*.test.js`.
+- **Add/edit words** → just edit the YAML in `public/vocab/`. `manifest.json` is
+  generated (content hashes drive the client's cache invalidation, dates come
+  from git history) and **not committed** — `npm run build` and `npm run dev`
+  regenerate it, so there's nothing to bump and nothing to conflict over on
+  parallel branches. `npm run gen:manifest` regenerates it on demand if you want
+  to eyeball it — it also emits `phrase-notes.json`, the phrase annotations
+  `shapePhrases` would otherwise re-derive in every browser on every launch
+  (#657); the store falls back to deriving them whenever its cached corpus isn't
+  the one they were built from, so that path stays live. `vocabBuild.test.js`/`declension.test.js` guard the shape.
+  Full schema reference: [`public/vocab/CONTRIBUTING.md`](public/vocab/CONTRIBUTING.md).
+- **A phrase hint glossing the wrong word, or a word the encounter bars won't
+  credit** → `npm run align:list` names the ambiguity; settle it with an
+  `align:` block on the usage example (see the corpus CONTRIBUTING), or with a
+  new rung in `src/lib/phraseAlign.js` if a *rule* decides it rather than a
+  human. A rung needs its accuracy measured before it ships — the corpus's own
+  `inflect:` annotations are the ground truth to measure against.
+- **App-wide state** → the relevant `src/stores/*.js` (Vue reactive store);
+  most learning state lives in `progress.js`, delegating to the pure `lib` engine.
+- **The session/practice flow** → `src/views/SessionView.vue` +
+  `src/lib/sessionRunner.js` / `session.js` / `exerciseBuild.js`.
+- **Mic/speech timing in the spoken drill** (watchdogs, sequence guards, wake
+  lock) → `src/composables/useSpeechLoop.js`, used by SpeakingView.
+- **Routing** → `src/router/index.js`. There's no nav bar; the user navigates
+  from `HomeView` (the header in `App.vue` is just the Home logo + Data avatar).
+
+See `README.md` for the deeper architecture (vocab loading, offline caching).
+
+## Agent workflow (GitHub issues)
+
+When working from a GitHub issue:
+
+1. **Branch name** — create a branch that reflects the issue, e.g. `fix/123-short-description` or `feat/123-short-description`. Do not use random suffixes.
+2. **Implement** the changes on that branch and push.
+3. **Raise a PR** when the work is complete — do not wait to be asked.
+4. **Reference the issue in a commit message** — put `Closes #<issue-number>` (or `Fixes`/`Resolves`) in the body of a commit, not just the PR title or description. That way the link travels with the commits into whatever PR is opened, even when you don't open it yourself, and GitHub auto-closes the issue on merge. A `#123` in the title does nothing; a mention without a closing keyword doesn't auto-close. If the change genuinely closes no issue (a chore, a pure refactor), say so explicitly with a `No-issue: <reason>` line in a commit message. CI enforces this: the **PR issue link** check fails a PR with neither a closing reference (in a commit message or the PR body) nor a `No-issue` declaration (or the `no-issue` label, which Dependabot-style PRs use).
+
+**Keep this map honest.** When a change adds or removes a route, store, or a
+`src/lib/` module — or a whole `components/` subtree — update the "Project map"
+above in the same PR. The map above drifts every few features otherwise; a
+one-line edit alongside the code keeps onboarding (human and agent) accurate.
