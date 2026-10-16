@@ -537,11 +537,35 @@ describe('makeReplacementPicker', () => {
     expect(rep.dimension).toBe('identification')
   })
 
-  it('cycles through priority words round-robin across a backfill', () => {
-    const picker = makeReplacementPicker({ wordKeys: ['a=a', 'b=b'], vocabById })
-    expect(picker.word().key).toBe('a=a')
+  it('hands out each priority word once, fresh ones first, then runs dry', () => {
+    const picker = makeReplacementPicker({ wordKeys: ['a=a', 'b=b'], vocabById, exclude: new Set(['a=a']) })
     expect(picker.word().key).toBe('b=b')
-    expect(picker.word().key).toBe('a=a') // wraps, never stuck on one word
+    expect(picker.word().key).toBe('a=a')
+    expect(picker.word()).toBeNull() // never wraps back onto a word it gave
+  })
+
+  it('never expands a skipped board into one word over and over', () => {
+    // One fresh word left in the pool: a wrapping picker made every card of a
+    // skipped listening board the same word to spell.
+    const picker = makeReplacementPicker({
+      wordKeys: ['a=a', 'b=b'],
+      vocabById,
+      exclude: new Set(['b=b', 'c=c', 'd=d']),
+    })
+    const skipped = {
+      kind: 'match',
+      dimension: 'hearing',
+      practiceIndex: 0,
+      pairs: [
+        { key: 'c=c', ru: 'В', en: 'c' },
+        { key: 'a=a', ru: 'А', en: 'a' },
+        { key: 'd=d', ru: 'Г', en: 'd' },
+        { key: 'e=e', ru: 'Д', en: 'e' },
+      ],
+    }
+    const keys = makeVisualReplacement(skipped, 0, picker).map((r) => r.targets[0])
+    expect(keys).toEqual(['a=a', 'b=b', 'd=d', 'e=e'])
+    expect(new Set(keys).size).toBe(keys.length)
   })
 
   it('falls back to the skipped content when the priority pool is empty', () => {

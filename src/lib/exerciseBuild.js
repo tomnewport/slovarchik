@@ -602,19 +602,25 @@ function visWordbank(content, skipped, id) {
   }
 }
 
-/** Cycle through a list, wrapping at the end (null for an empty list). */
-function cyclePicker(list) {
+/**
+ * Hand out each item of a list once, in order, then null. Never wraps: with one
+ * fresh word left in the pool, a wrapping picker turned a skipped twelve-card
+ * board into the same word to spell twelve times over.
+ */
+function oncePicker(list) {
   let i = 0
-  return () => (list.length ? list[i++ % list.length] : null)
+  return () => (i < list.length ? list[i++] : null)
 }
 
 /**
  * Create a picker that hands out the highest-priority replacement content for a
  * skipped modality, recalculated from the current pools rather than reusing the
  * skipped word. `wordKeys`/`phrases` arrive already in priority order (worst
- * understood first); words/phrases already covered this session (`exclude`) are
- * dropped so a backfill targets fresh priorities, and each candidate is yielded
- * round-robin so a long backfill never drills the same word repeatedly.
+ * understood first). Words/phrases not yet covered this session (`exclude`) come
+ * first, so a backfill targets fresh priorities; the covered ones follow. Each
+ * candidate is handed out at most once — after that the picker returns null and
+ * the caller falls back to the skipped item's own content — so a long backfill
+ * never drills the same word repeatedly.
  *
  * @returns {{word: () => PlainObject|null, phrase: () => PlainObject|null}}
  */
@@ -625,20 +631,21 @@ export function makeReplacementPicker({
   exclude = new Set(),
   rng = Math.random,
 } = {}) {
-  const words = wordKeys.filter((k) => vocabById.has(k))
-  const freshWords = words.filter((k) => !exclude.has(k))
-  const nextWordKey = cyclePicker(freshWords.length ? freshWords : words)
+  const freshFirst = (list, key) => [
+    ...list.filter((x) => !exclude.has(key(x))),
+    ...list.filter((x) => exclude.has(key(x))),
+  ]
+  const words = [...new Set(wordKeys)].filter((k) => vocabById.has(k))
+  const nextWordKey = oncePicker(freshFirst(words, (k) => k))
 
   const usable = phrases.filter((p) => p?.source && p?.ru && p?.en)
-  const freshPhrases = usable.filter((p) => !exclude.has(p.source))
-  const nextPhrase = cyclePicker(freshPhrases.length ? freshPhrases : usable)
+  const nextPhrase = oncePicker(freshFirst(usable, (p) => p.source))
 
   return {
     word() {
       const k = nextWordKey()
       if (k == null) return null
       const v = vocabById.get(k)
-      if (!v) return null
       const d = vocabDisplay(v, rng)
       return { key: k, ru: d.ru, en: enText(d.en), note: v.note, pos: v.pos }
     },
@@ -669,11 +676,17 @@ export function makeVisualReplacement(skipped, seq, picker = null) {
 
   // Match exercises bundle multiple pairs with no top-level ru/en — expand each
   // into an individual type (spell-word) exercise, re-prioritised when possible.
+  // A board never expands into the same word twice: once the picker runs dry
+  // the board's own pairs fill in, and a pair already drawn is dropped.
   if (skipped?.kind === 'match' && skipped.pairs?.length) {
+    const used = new Set()
     return skipped.pairs
       .map((pair, i) => {
-        const content = pick(true) || { key: pair.key, ru: pair.ru, en: pair.en, pos: pair.pos }
-        return content.ru && content.en ? visType(content, skipped, `vis${seq}_${i}`) : null
+        let content = pick(true)
+        if (!content || used.has(content.key)) content = { key: pair.key, ru: pair.ru, en: pair.en, pos: pair.pos }
+        if (!content.ru || !content.en || used.has(content.key)) return null
+        used.add(content.key)
+        return visType(content, skipped, `vis${seq}_${i}`)
       })
       .filter(Boolean)
   }
