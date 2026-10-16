@@ -3859,10 +3859,12 @@ words:
         inflect: { token: 3, form: pass_short, gender: m, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "Вы- is out, so вы́брать is to take out of a set: to choose."
+        text: "вы- and брать, to take: to choose, to pick out."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "брать", en: "take" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "выбраться=to get out":
     cefr_level: B1
@@ -4045,10 +4047,12 @@ words:
         inflect: { token: 5, tense: past, person: past_m, rule: verb-conditional }
     facts:
       - kind: build
-        text: "Вы- is out, so вы́глядеть is how you look outward — your appearance, not your looking. It is what other people see, not what you see."
+        text: "вы́- and гляде́ть, to look: to look or appear a certain way. English Wiktionary calls it apparently a calque of German aussehen."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "глядеть", en: "look" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "гляд", en: "look (гляде́ть)" }
+          - { ru: "-е", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["глядеть=to look"]
   "выдавать=to give out":
     cefr_level: B1
@@ -4247,10 +4251,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Вы- is out and all the way through: to hold out."
+        text: "вы- and держа́ть, to hold: to withstand, to endure; also to pass an exam."
         parts:
-          - { ru: "вы́", en: "out, through" }
-          - { ru: "держать", en: "hold" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "держ", en: "hold (держа́ть)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["держать=to hold"]
   "выехать=to drive out":
     cefr_level: A2
@@ -4735,10 +4741,12 @@ words:
         pl: вы́питы
     facts:
       - kind: build
-        text: "вы- carries the drinking through to the end — the glass is empty."
+        text: "вы- and пить, to drink; it is пить's perfective."
         parts:
-          - { ru: "вы́-", en: "makes it perfective" }
-          - { ru: "пить", en: "to drink" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "пи", en: "drink (пить)" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["пить=to drink"]
   "выполнить=to fulfil":
     cefr_level: B1
     accented: вы́полнить
@@ -4923,10 +4931,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Вы- is out: to let out — a prisoner, a book, a breath."
+        text: "вы́- and пусти́ть, to let go. Its senses include to let out or release, and to release a film."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "пустить", en: "let go" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["пустить=to let"]
   "выражать=to express":
     cefr_level: B1
@@ -7734,10 +7744,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "До- is as far as, so допусти́ть is to let something get that far: to allow it."
+        text: "до- and пусти́ть, to let go: to admit, to allow."
         parts:
-          - { ru: "до", en: "as far as" }
-          - { ru: "пусти́ть", en: "let go" }
+          - { ru: "до-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["пустить=to let"]
   "доставать=to get":
     cefr_level: A2
@@ -9010,10 +9022,12 @@ words:
       past_pl: забра́ли
     facts:
       - kind: build
-        text: "За- is off and away with it: to collect something, or take it off someone."
+        text: "за- and брать, to take: to take away, to collect."
         parts:
-          - { ru: "за", en: "off, away" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "забывать=to forget":
     cefr_level: A1
@@ -9630,10 +9644,12 @@ words:
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "За- holds a thing back behind where it wanted to go: to delay it, or to detain someone."
+        text: "за- and держа́ть, to hold: to hold up, to delay, to detain."
         parts:
-          - { ru: "за", en: "back, behind" }
-          - { ru: "держа́ть", en: "hold" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "держ", en: "hold (держа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["держать=to hold"]
   "задуматься=to start thinking":
     cefr_level: B1
@@ -11394,10 +11410,12 @@ words:
       past_pl: запусти́ли
     facts:
       - kind: build
-        text: "За- sends it off beyond: to let a thing fly, to launch or start it up."
+        text: "за- and пусти́ть, to let go: to launch, to start."
         parts:
-          - { ru: "за", en: "off, beyond" }
-          - { ru: "пусти́ть", en: "let go" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["пустить=to let"]
   "зарабатывать=to earn":
     cefr_level: A2
@@ -12044,10 +12062,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "за- marks the moment the wanting starts, rather than the wanting itself."
+        text: "за- and хоте́ть, to want: to begin to want. It is хоте́ть's perfective."
         parts:
-          - { ru: "за-", en: "makes it perfective" }
-          - { ru: "хоте́ть", en: "to want" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "хот", en: "want (хоте́ть)" }
+          - { ru: "-е́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["хотеть=to want"]
   "захотеться=to feel like":
     cefr_level: A2
     accented: захоте́ться
@@ -16082,10 +16103,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "На- is onto, and up to a quantity: to gather a number of things — including the digits of a phone number."
+        text: "на- and брать, to take. Its senses include to gather or collect, and to type or compose a text."
         parts:
-          - { ru: "на", en: "onto, up to a number" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "надевать=to put on":
     cefr_level: A2
@@ -16822,10 +16845,13 @@ words:
         pl: напи́саны
     facts:
       - kind: build
-        text: "на- here adds nothing but completion — написа́ть is писа́ть with the writing finished."
+        text: "на- and писа́ть, to write; it is писа́ть's perfective. English Wiktionary gives Latin pingō, the source of English paint and picture, as a cognate."
         parts:
-          - { ru: "на-", en: "makes it perfective" }
-          - { ru: "писа́ть", en: "to write" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "пис", en: "write (писа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["писать=to write"]
   "напоминать=to remind":
     cefr_level: A2
     accented: напомина́ть
@@ -16969,10 +16995,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "На- is onto, so напра́вить is to steer something onto a course."
+        text: "на- and the root of пра́вить, to rule, and (dated) to steer: to direct, to aim, to send. Tikhonov treats направ- as a single root."
         parts:
-          - { ru: "на", en: "onto" }
-          - { ru: "пра́вить", en: "steer, set straight" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "пра́в", en: "rule; (dated) steer (пра́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["править=to rule"]
   "направиться=to head":
     cefr_level: B1
@@ -17022,11 +17050,13 @@ words:
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
     facts:
       - kind: build
-        text: "The same на- with -ся: to steer yourself onto a course, and so to head somewhere."
+        text: "Напра́вить, to direct, with the reflexive suffix -ся: to head somewhere, to make one's way."
         parts:
-          - { ru: "на", en: "onto" }
-          - { ru: "пра́ви", en: "steer, set straight" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "пра́в", en: "rule; (dated) steer (пра́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["направить=to direct"]
   "нарезать=to slice":
     cefr_level: B1
@@ -17108,10 +17138,13 @@ words:
         pl: нарисо́ваны
     facts:
       - kind: build
-        text: "на- here adds nothing but completion — the drawing is finished."
+        text: "на- and рисова́ть, to draw; it is рисова́ть's perfective."
         parts:
-          - { ru: "на-", en: "makes it perfective" }
-          - { ru: "рисова́ть", en: "to draw" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "рис", en: "draw (рисова́ть)" }
+          - { ru: "-ова́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["рисовать=to draw"]
   "нарушить=to violate":
     cefr_level: B1
     accented: нару́шить
@@ -17360,10 +17393,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "на- marks the teaching as having got somewhere; the verb is otherwise учи́ть."
+        text: "на- and учи́ть, to teach; it is учи́ть's perfective."
         parts:
-          - { ru: "на-", en: "makes it perfective" }
-          - { ru: "учи́ть", en: "to teach" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "уч", en: "teach (учи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["учить=to teach"]
   "научиться=to learn":
     cefr_level: A1
     accented: научи́ться
@@ -17414,10 +17450,14 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "The same на- as in научи́ть, on the reflexive: to have learned something rather than to be studying it."
+        text: "Научи́ть with the reflexive suffix -ся: to learn. It is учи́ться's perfective."
         parts:
-          - { ru: "на-", en: "makes it perfective" }
-          - { ru: "учи́ться", en: "to study" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "уч", en: "teach (учи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["учиться=to study"]
   "находить=to find":
     cefr_level: A1
     accented: находи́ть
@@ -19167,10 +19207,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "О- goes round, so огляде́ть is to look a thing over, all the way round it."
+        text: "о- and гляде́ть, to look: to examine, to look over."
         parts:
-          - { ru: "о", en: "round" }
-          - { ru: "гляде́ть", en: "look" }
+          - { ru: "о-", en: "prefix" }
+          - { ru: "гляд", en: "look (гляде́ть)" }
+          - { ru: "-е́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["глядеть=to look"]
   "оглядываться=to look around":
     cefr_level: B1
@@ -19895,10 +19937,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "О- is down: to let something down."
+        text: "о- and пусти́ть, to let go: to let down, to lower."
         parts:
-          - { ru: "о", en: "down" }
-          - { ru: "пусти́ть", en: "let go" }
+          - { ru: "о-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["пустить=to let"]
   "опуститься=to sink":
     cefr_level: B1
@@ -19941,12 +19985,14 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
     facts:
       - kind: build
-        text: "The same о- as in опусти́ть, with -ся: to let yourself down, to sink."
+        text: "Опусти́ть, to lower, with the reflexive suffix -ся: to go down, to settle; figuratively, to sink into poverty or vice."
         parts:
-          - { ru: "о", en: "down" }
-          - { ru: "пусти́", en: "let go" }
-          - { ru: "ться", en: "oneself" }
-        see: ["опустить=to lower"]
+          - { ru: "о-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["пустить=to let", "опустить=to lower"]
   "орать=to yell":
     cefr_level: B2
     accented: ора́ть
@@ -21502,10 +21548,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "От- is away from someone. Note the о: before бр- the prefix grows one, because отбрать is unsayable. The same happens in подобра́ть and разобра́ть."
+        text: "ото-, the form от- takes before some consonant clusters, and брать, to take: to select, or to take away."
         parts:
-          - { ru: "ото", en: "away from" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "ото-", en: "prefix: от- before some consonant clusters" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "отозваться=to respond":
     cefr_level: B1
@@ -21684,11 +21732,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "The root пра́в- is straight and right — the one in пра́вый, пра́вда and пра́вило. Пра́вить is to steer, and от- steers a thing away from here: to send it off."
+        text: "от- and пра́вить, to rule, and (dated) to steer: to send, to dispatch. By surface analysis пра́вить is пра́вый and -ить; пра́вый is inherited from Proto-Slavic *pravъ, from which пра́вда is also derived."
         parts:
-          - { ru: "от", en: "away" }
-          - { ru: "пра́вить", en: "steer, set straight" }
-        see: ["правый=right", "правда=truth"]
+          - { ru: "от-", en: "prefix" }
+          - { ru: "пра́в", en: "rule; (dated) steer (пра́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["править=to rule", "правый=right", "правда=truth"]
   "отправиться=to set off":
     cefr_level: A2
     accented: отпра́виться
@@ -21739,11 +21789,13 @@ words:
         inflect: { token: 2, tense: future, person: 2pl, rule: verb-future }
     facts:
       - kind: build
-        text: "The same от- on пра́вить, turned back with -ся: to steer yourself away, to set off."
+        text: "Отпра́вить, to send, with the reflexive suffix -ся: to depart, to set off."
         parts:
-          - { ru: "от", en: "away" }
-          - { ru: "пра́ви", en: "steer, set straight" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "пра́в", en: "rule; (dated) steer (пра́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["отправить=to send"]
   "отправляться=to set off":
     cefr_level: A2
@@ -21839,10 +21891,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "От- is away, so отпусти́ть is to let go of something and let it go off."
+        text: "от- and пусти́ть, to let go: to let go, to let off."
         parts:
-          - { ru: "от", en: "away" }
-          - { ru: "пусти́ть", en: "let go" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["пустить=to let"]
   "отрезать=to cut off":
     cefr_level: B1
@@ -24093,10 +24147,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Верну́ть is to turn something back. По- sets the turn going: to turn."
+        text: "по- and верну́ть, to return: to turn."
         parts:
-          - { ru: "по", en: "setting off" }
-          - { ru: "верну́ть", en: "turn" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "вер", en: "root of верну́ть" }
+          - { ru: "-ну́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["вернуть=to return"]
   "повернуться=to turn around":
     cefr_level: B1
@@ -24364,10 +24420,13 @@ words:
         inflect: { token: 3, tense: past, person: past_f, rule: verb-conditional }
     facts:
       - kind: build
-        text: "По- gives гляде́ть a moment and an end: to have a look."
+        text: "по- and гляде́ть, to look; it is гляде́ть's perfective."
         parts:
-          - { ru: "по", en: "a while, and done" }
-          - { ru: "гляде́ть", en: "look" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "гляд", en: "look (гляде́ть)" }
+          - { ru: "-е́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["глядеть=to look"]
   "поглядывать=to glance":
     cefr_level: B2
     accented: погля́дывать
@@ -24568,10 +24627,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "по- only marks completion — one gift given, rather than giving."
+        text: "по- and дари́ть, to give, to make a present; it is дари́ть's perfective."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "дари́ть", en: "to give" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "дар", en: "give (дари́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["дарить=to give"]
   "подать=to serve":
     cefr_level: B1
     accented: пода́ть
@@ -24711,10 +24773,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Под- is from underneath: to hold a thing up from below. English support is built the same way, from sub and portare, carried from under."
+        text: "под- and держа́ть, to hold: to support. English Wiktionary calls it a calque of Latin supportō."
         parts:
-          - { ru: "под", en: "from underneath" }
-          - { ru: "держа́ть", en: "hold" }
+          - { ru: "под-", en: "prefix" }
+          - { ru: "держ", en: "hold (держа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["держать=to hold"]
   "поддерживать=to support":
     cefr_level: B1
@@ -25090,10 +25154,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Под- is up from underneath, with the same helping о that ото- needed: to pick up what has fallen, or to pick out what matches."
+        text: "подо-, the form под- takes before some consonant clusters, and брать, to take: to pick up, or to select."
         parts:
-          - { ru: "подо", en: "up from under" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "подо-", en: "prefix: под- before some consonant clusters" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "подождать=to wait":
     cefr_level: A1
@@ -25394,10 +25460,13 @@ words:
     gerund: поду́мав
     facts:
       - kind: build
-        text: "по- adds no meaning of its own here — поду́мать is ду́мать with the thinking done."
+        text: "по- and ду́мать, to think; it is ду́мать's perfective."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "ду́мать", en: "to think" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ду́м", en: "think (ду́мать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["думать=to think"]
   "подхватить=to catch":
     cefr_level: B2
     accented: подхвати́ть
@@ -25772,10 +25841,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "по- only marks completion: one call, rather than calling."
+        text: "по- and звать, to call; it is звать's perfective."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "зва́ть", en: "to call" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "зв", en: "call (звать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["звать=to call"]
   "позволить=to allow":
     cefr_level: A2
     accented: позво́лить
@@ -25924,10 +25996,13 @@ words:
       past_pl: позвони́ли
     facts:
       - kind: build
-        text: "по- only marks completion: one telephone call, made and over."
+        text: "по- and звони́ть, to call by telephone; it is звони́ть's perfective."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "звони́ть", en: "to call" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "звон", en: "ring, call (звони́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["звонить=to call"]
   "поздравлять=to congratulate":
     cefr_level: B1
     accented: поздравля́ть
@@ -25988,12 +26063,13 @@ words:
       past_pl: познако́мились
     facts:
       - kind: build
-        text: "По- on знако́мый (familiar), itself from знать — and -ся makes it mutual: the two of you come to know each other. Познако́мить without -ся is to introduce two other people."
+        text: "по- and знако́миться, to get acquainted; it is знако́миться's perfective."
         parts:
-          - { ru: "по-", en: "makes it a completed act" }
-          - { ru: "знако́м", en: "familiar (from знать, to know)" }
-          - { ru: "-иться", en: "verb ending, reflexive" }
-        see: ["знать=to know", "знакомый=familiar", "знакомство=acquaintance"]
+          - { ru: "по-", en: "prefix" }
+          - { ru: "знако́м", en: "get acquainted (знако́миться)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
     usage:
       - ru: Познако́мьтесь, э́то мой друг.
         en_gb: Let me introduce you — this is my friend.
@@ -27598,10 +27674,14 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
     facts:
       - kind: build
-        text: "по- only marks completion: the moment of taking to something."
+        text: "по- and нра́виться, to please; it is нра́виться's perfective. The person who likes the thing goes in the dative, and English turns it round: Э́то кино́ мне не понра́вилось, I didn't like this movie."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "нра́виться", en: "to be liked" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "нра́в", en: "please (нра́виться)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["нравиться=to be liked"]
   "понять=to understand":
     cefr_level: A1
     accented: поня́ть
@@ -27967,11 +28047,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "По- with пра́вить is to put a thing straight again: to correct it, or to adjust it."
+        text: "по- and пра́вить, to rule, and (dated) to steer: to correct, to repair, to adjust."
         parts:
-          - { ru: "по", en: "straight again" }
-          - { ru: "пра́вить", en: "steer, set straight" }
-        see: ["правило=rule"]
+          - { ru: "по-", en: "prefix" }
+          - { ru: "пра́в", en: "rule; (dated) steer (пра́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["править=to rule"]
   "попробовать=to try":
     cefr_level: A2
     accented: попро́бовать
@@ -28411,10 +28493,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "по- only marks completion — a spell of listening that ends."
+        text: "по- and слу́шать, to listen; it is слу́шать's perfective."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "слу́шать", en: "to listen" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "слу́ш", en: "listen (слу́шать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["слушать=to listen"]
   "послышаться=to be heard":
     cefr_level: B1
     accented: послы́шаться
@@ -28501,10 +28586,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "по- only marks completion: one look, rather than looking."
+        text: "по- and смотре́ть, to look; it is смотре́ть's perfective."
         parts:
-          - { ru: "по-", en: "makes it perfective" }
-          - { ru: "смотре́ть", en: "to watch" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "смотр", en: "look (смотре́ть)" }
+          - { ru: "-е́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["смотреть=to watch"]
   "посоветовать=to advise":
     cefr_level: B1
     accented: посове́товать
@@ -30681,10 +30769,13 @@ words:
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "при- marks the cooking as finished; the verb is otherwise гото́вить."
+        text: "при- and гото́вить, to prepare; it is a perfective of гото́вить."
         parts:
-          - { ru: "при-", en: "makes it perfective" }
-          - { ru: "гото́вить", en: "to cook" }
+          - { ru: "при-", en: "prefix" }
+          - { ru: "гото́в", en: "prepare (гото́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["готовить=to cook"]
   "придумать=to think up":
     cefr_level: A2
     accented: приду́мать
@@ -33191,10 +33282,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Про- is through and past. Пропусти́ть is to let something through — or to let it go past you, which is how the same word means to miss it."
+        text: "про- and пусти́ть, to let go. Its senses include to let through, to omit, and to miss or skip."
         parts:
-          - { ru: "про", en: "through, past" }
-          - { ru: "пусти́ть", en: "let go" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["пустить=to let"]
   "просить=to ask for":
     cefr_level: A2
@@ -33519,10 +33612,13 @@ words:
         pl: прочи́таны
     facts:
       - kind: build
-        text: "про- here means read all the way through, rather than read in some other way."
+        text: "про- and чита́ть, to read: to read, or to read through. It is чита́ть's perfective."
         parts:
-          - { ru: "про-", en: "makes it perfective" }
-          - { ru: "чита́ть", en: "to read" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "чит", en: "read (чита́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["читать=to read"]
   "прошептать=to whisper":
     cefr_level: B2
     accented: прошепта́ть
@@ -34223,10 +34319,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Раз- is apart and open: to turn a thing out of its folds — to unwrap it, to spread it out."
+        text: "раз- and верну́ть, to return: to unroll, to unfold, to unwrap."
         parts:
-          - { ru: "раз", en: "apart, open" }
-          - { ru: "верну́ть", en: "turn" }
+          - { ru: "раз-", en: "prefix" }
+          - { ru: "вер", en: "root of верну́ть" }
+          - { ru: "-ну́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["вернуть=to return"]
   "развести=to breed":
     cefr_level: B2
@@ -34399,10 +34497,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Раз- takes things apart, so разгляде́ть is to look until the thing separates from everything round it: to make it out."
+        text: "раз- and гляде́ть, to look: to make out, to discern."
         parts:
-          - { ru: "раз", en: "apart" }
-          - { ru: "гляде́ть", en: "look" }
+          - { ru: "раз-", en: "prefix" }
+          - { ru: "гляд", en: "look (гляде́ть)" }
+          - { ru: "-е́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["глядеть=to look"]
   "разглядывать=to examine":
     cefr_level: B1
@@ -34733,10 +34833,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Раз- is apart, again with the helping о: to take to pieces, and from there to make out what something says."
+        text: "разо-, the form раз- takes before some consonant clusters, and брать, to take: to take apart, and to analyse."
         parts:
-          - { ru: "разо", en: "apart" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "разо-", en: "prefix: раз- before some consonant clusters" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "разобраться=to sort out":
     cefr_level: B1
@@ -36614,10 +36716,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "С- is off and together at once, which is why сверну́ть is both turning off a road and rolling something up: the same movement seen from either end."
+        text: "с- and верну́ть. Its senses include to roll up (сверну́ть ковёр, to roll up the carpet) and to turn (сверну́ть напра́во, to turn to the right)."
         parts:
-          - { ru: "с", en: "off, together" }
-          - { ru: "верну́ть", en: "turn" }
+          - { ru: "с-", en: "prefix" }
+          - { ru: "вер", en: "root of верну́ть" }
+          - { ru: "-ну́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["вернуть=to return"]
   "светиться=to glow":
     cefr_level: B1
@@ -36815,10 +36919,13 @@ words:
         pl: сде́ланы
     facts:
       - kind: build
-        text: "с- adds no meaning of its own — сде́лать is де́лать, seen through to the end. The pattern is what to learn here, not a second word."
+        text: "с- and де́лать, to do, to make; it is де́лать's perfective."
         parts:
-          - { ru: "с-", en: "makes it perfective" }
-          - { ru: "де́лать", en: "to do" }
+          - { ru: "с-", en: "prefix" }
+          - { ru: "де́л", en: "do, make (де́лать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["делать=to do"]
   "сделаться=to become":
     cefr_level: B1
     accented: сде́латься
@@ -38111,10 +38218,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "с- makes мочь perfective: managing something once, rather than being able in general."
+        text: "с- and мочь, to be able: to be able, to manage. It is мочь's perfective."
         parts:
-          - { ru: "с-", en: "makes it perfective" }
-          - { ru: "мочь", en: "to be able" }
+          - { ru: "с-", en: "prefix" }
+          - { ru: "мочь", en: "be able (мочь)" }
+        see: ["мочь=to be able"]
   "снизить=to reduce":
     cefr_level: B2
     accented: сни́зить
@@ -38449,10 +38557,12 @@ words:
         inflect: { token: 3, form: pass_short, gender: pl, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "Со- is together: to take things together, to gather them up."
+        text: "со- and брать, to take: to gather, to collect, to assemble."
         parts:
-          - { ru: "со", en: "together" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "со-", en: "prefix" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "собраться=to gather":
     cefr_level: A2
@@ -38735,10 +38845,12 @@ words:
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
     facts:
       - kind: build
-        text: "Со- is together, so содержа́ть is to hold together: what a thing contains, or the family you keep."
+        text: "From Church Slavonic съдрьжати, built on the root of держа́ть. It means to contain, and to keep or maintain. Tikhonov treats содерж- as a single root."
         parts:
-          - { ru: "со", en: "together" }
-          - { ru: "держа́ть", en: "hold" }
+          - { ru: "со-", en: "prefix" }
+          - { ru: "держ", en: "hold (держа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["держать=to hold"]
   "соединить=to unite":
     cefr_level: B1
@@ -39875,12 +39987,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "С- is together and off, and -ся puts it on you: to get yourself straight with something, and so to manage it."
+        text: "Спра́вить with the reflexive suffix -ся: to cope with, to manage. Tikhonov treats справ- as a single root."
         parts:
-          - { ru: "с", en: "together, off" }
-          - { ru: "пра́ви", en: "steer, set straight" }
-          - { ru: "ться", en: "oneself" }
-        see: ["править=to rule"]
+          - { ru: "спра́в", en: "root" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
   "спрашивать=to ask":
     cefr_level: A1
     accented: спра́шивать
@@ -40122,11 +40234,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "С- is down and off, with -ся on the end: to let yourself down."
+        text: "Спусти́ть with the reflexive suffix -ся: to descend, to go down."
         parts:
-          - { ru: "с", en: "down, off" }
-          - { ru: "пусти́", en: "let go" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "с-", en: "prefix" }
+          - { ru: "пуст", en: "let go (пусти́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["пустить=to let"]
   "ссориться=to quarrel":
     cefr_level: B1
@@ -42141,10 +42255,12 @@ words:
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "У- is away, so убра́ть is to take away: to clear, to tidy."
+        text: "у-, away, and брать, to take: to remove, to take away, and to tidy up."
         parts:
-          - { ru: "у", en: "away" }
-          - { ru: "бра́ть", en: "take" }
+          - { ru: "у-", en: "prefix: away" }
+          - { ru: "бр", en: "take (брать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["брать=to take"]
   "уважать=to respect":
     cefr_level: B1
@@ -42236,10 +42352,13 @@ words:
         inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
     facts:
       - kind: build
-        text: "у- here adds nothing but completion: catching sight of something, rather than seeing."
+        text: "у- and ви́деть, to see: to see, to catch sight of. It is ви́деть's perfective."
         parts:
-          - { ru: "у-", en: "makes it perfective" }
-          - { ru: "ви́деть", en: "to see" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "ви́д", en: "see (ви́деть)" }
+          - { ru: "-е", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["видеть=to see"]
   "увлекаться=to be keen on":
     cefr_level: B1
     accented: увлека́ться
@@ -43551,10 +43670,13 @@ words:
         inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
     facts:
       - kind: build
-        text: "у- here adds nothing but completion: catching a sound, rather than hearing."
+        text: "у- and слы́шать, to hear; it is слы́шать's perfective."
         parts:
-          - { ru: "у-", en: "makes it perfective" }
-          - { ru: "слы́шать", en: "to hear" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "слы́ш", en: "hear (слы́шать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["слышать=to hear"]
   "усмехнуться=to smirk":
     cefr_level: B2
     accented: усмехну́ться
