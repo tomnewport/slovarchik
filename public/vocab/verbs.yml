@@ -1447,10 +1447,11 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
     facts:
       - kind: build
-        text: "В- is into, so ввести́ is to lead something in: a person, a rule, a new word."
+        text: "в- and вести́, to lead: to bring in, to introduce."
         parts:
-          - { ru: "в", en: "in" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "в-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "везти=to be taking":
     cefr_level: B1
@@ -3371,10 +3372,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "В- is in, so вста́вить is to stand something inside something else: to insert."
+        text: "в- and ста́вить, to put: to insert, to put in."
         parts:
-          - { ru: "в", en: "in" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "в-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "встать=to stand up":
     cefr_level: A1
@@ -3421,10 +3424,11 @@ words:
       past_pl: вста́ли
     facts:
       - kind: build
-        text: "Стать now means to become, but it began as to stand, and this family keeps the older sense. The в- is a worn-down вз-, up: to get up."
+        text: "From Old East Slavic възстати, въз- and стати; by surface analysis, вз- or вс-, up, and стать, to stand. It means to stand up, to get up."
         parts:
-          - { ru: "в", en: "up" }
-          - { ru: "стать", en: "stand, come to be" }
+          - { ru: "в-", en: "prefix" }
+          - { ru: "ста", en: "stand (стать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["стать=to become"]
   "встретить=to meet":
     cefr_level: A1
@@ -3740,11 +3744,12 @@ words:
       past_pl: входи́ли
     facts:
       - kind: build
-        text: "в- is into, so входи́ть is to go in — the same ход- as in ходи́ть."
+        text: "в- and ходи́ть, to walk: to go in."
         parts:
-          - { ru: "в-", en: "into" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "в-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "выбирать=to choose":
     cefr_level: A2
@@ -3993,10 +3998,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Вы- is out, the exact opposite of the в- in ввести́: to lead out, and so to remove."
+        text: "вы- and вести́, to lead: to lead out, to take out."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "вести", en: "lead" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти", en: "verb ending" }
         see: ["вести=to be leading"]
   "выглядеть=to look":
     cefr_level: A2
@@ -4093,10 +4099,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "Вы- is out: to give out, to issue — and, of a person, to give them away."
+        text: "вы- and дава́ть, to give. Its senses include to give out or issue, and to give away or betray."
         parts:
-          - { ru: "вы", en: "out" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "вы-", en: "prefix" }
+          - { ru: "да", en: "give (дава́ть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "выдать=to give out":
     cefr_level: B1
@@ -4144,10 +4152,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Вы- is out: to give out, to issue — and, of a person, to give them away."
+        text: "вы́- and дать, to give. Its senses include to give out or issue, and to give away or betray."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "дать", en: "give" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "выделить=to allocate":
     cefr_level: B1
@@ -4612,10 +4621,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Вы- is out: to carry something out. It also means to bear a thing, which is the same picture — carrying the weight all the way out."
+        text: "вы- and нести́, to carry: to carry out, and also to endure."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "нести", en: "carry" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "нес", en: "carry (нести́)" }
+          - { ru: "-ти", en: "verb ending" }
         see: ["нести=to be carrying"]
   "вынуть=to take out":
     cefr_level: A2
@@ -5274,10 +5284,12 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Вы- is out: to put something out, and so to exhibit it."
+        text: "вы́- and ста́вить, to put. Its senses include to put outside and to display."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "ставить", en: "put, set standing" }
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "став", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "выступать=to perform":
     cefr_level: B1
@@ -5527,11 +5539,12 @@ words:
       past_pl: выходи́ли
     facts:
       - kind: build
-        text: "вы- is out, so выходи́ть is to go out — the same ход- as in ходи́ть."
+        text: "вы- and ходи́ть, to walk: to go out."
         parts:
-          - { ru: "вы-", en: "out" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "вы-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "выяснить=to find out":
     cefr_level: B1
@@ -7111,10 +7124,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "До- is as far as, so довести́ is to lead something all the way to a point — a place, or a state."
+        text: "до- and вести́, to lead: to lead or take someone to a place."
         parts:
-          - { ru: "до", en: "as far as" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "до-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "догадаться=to guess":
     cefr_level: B1
@@ -7665,11 +7679,13 @@ words:
         inflect: { token: 6, tense: past, person: past_m, rule: verb-conditional }
     facts:
       - kind: build
-        text: "До- is as far as, with -ся: a sound carries itself all the way to where you are."
+        text: "Доноси́ть with the reflexive suffix -ся: to reach one's ears, to be heard, or to be carried by the wind."
         parts:
-          - { ru: "до", en: "as far as" }
-          - { ru: "носи́", en: "carry about" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "до-", en: "prefix" }
+          - { ru: "нос", en: "carry (носи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["носить=to wear"]
   "допустить=to allow":
     cefr_level: B1
@@ -7810,10 +7826,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "До- is all the way there, so доста́вить is to get something to where it was going."
+        text: "до- and ста́вить, to put: to deliver, to supply. Tikhonov treats достав- as a single root."
         parts:
-          - { ru: "до", en: "all the way to" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "до-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "достать=to get":
     cefr_level: A2
@@ -7863,10 +7881,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "До- is as far as, so доста́ть is to reach that far — and reaching a thing is how you come to have it."
+        text: "до- and стать, to stand: to reach, and to get or obtain."
         parts:
-          - { ru: "до", en: "as far as" }
-          - { ru: "ста́ть", en: "stand, come to be" }
+          - { ru: "до-", en: "prefix" }
+          - { ru: "ста́", en: "stand (стать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["стать=to become"]
   "достаться=to fall to":
     cefr_level: B1
@@ -7908,12 +7927,13 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
     facts:
       - kind: build
-        text: "The до- of доста́ть turned back with -ся: the thing reaches as far as someone and stays there — it falls to them."
+        text: "Доста́ть with the reflexive suffix -ся: colloquially, to fall to someone's share or lot."
         parts:
-          - { ru: "до", en: "as far as" }
-          - { ru: "ста́", en: "stand, come to be" }
-          - { ru: "ться", en: "oneself" }
-        see: ["достать=to get"]
+          - { ru: "до-", en: "prefix" }
+          - { ru: "ста́", en: "stand (стать)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
+        see: ["стать=to become", "достать=to get"]
   "достигать=to reach":
     cefr_level: B1
     accented: достига́ть
@@ -8076,11 +8096,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "до- is as far as, so доходи́ть is to get all the way there on foot — the same ход- as in ходи́ть."
+        text: "до- and ходи́ть, to walk: to reach, usually on foot."
         parts:
-          - { ru: "до-", en: "as far as" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "до-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "драться=to fight":
     cefr_level: B1
@@ -9137,10 +9158,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "За- takes вести́ round behind something, and from there to setting it going: a car, a conversation, a dog."
+        text: "за- and вести́, to lead. Its senses include to acquire, to set up, and to start (завести́ разгово́р, to start a conversation)."
         parts:
-          - { ru: "за", en: "behind, into motion" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "завидовать=to envy":
     cefr_level: B1
@@ -9483,10 +9505,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "The prefix does the work here. Дать is only to give; за- sets the thing in front of someone, so this is to set a question, a task, homework."
+        text: "Зада́ть with the imperfective suffix -ва-: to set or assign a lesson, or to ask a question."
         parts:
-          - { ru: "за", en: "set, put to" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "задать=to assign":
     cefr_level: A2
@@ -9535,10 +9559,11 @@ words:
         inflect: { token: 3, tense: future, person: 3sg, rule: verb-future }
     facts:
       - kind: build
-        text: "The prefix does the work here. Дать is only to give; за- sets the thing in front of someone, so this is to set a question, a task, homework."
+        text: "за- and дать, to give: to set or assign an exercise or lesson."
         parts:
-          - { ru: "за", en: "set, put to" }
-          - { ru: "да́ть", en: "give" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "задержать=to detain":
     cefr_level: B1
@@ -11642,10 +11667,12 @@ words:
         inflect: { token: 3, tense: future, person: 3pl, rule: verb-future }
     facts:
       - kind: build
-        text: "За- blocks the way. Заста́вить first meant to block someone in with furniture, and cornering a person is how it came to mean making them do something."
+        text: "за- and ста́вить, to put. Ozhegov and Tikhonov list two заста́вить: to fill a space with things (заста́вить ко́мнату ме́белью), and to compel, which Tikhonov treats as a single root, застав-."
         parts:
-          - { ru: "за", en: "blocking, behind" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "заставлять=to make":
     cefr_level: B1
@@ -11964,11 +11991,12 @@ words:
         inflect: { token: 7, tense: past, person: past_pl, rule: verb-conditional }
     facts:
       - kind: build
-        text: "за- is in passing, so заходи́ть is to call in on your way — the same ход- as in ходи́ть."
+        text: "за- and ходи́ть, to walk: to call in, to drop in."
         parts:
-          - { ru: "за-", en: "in passing" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "за-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "захотеть=to want":
     cefr_level: A1
@@ -17438,11 +17466,12 @@ words:
         inflect: { token: 2, tense: present, person: 2pl, rule: verb-present }
     facts:
       - kind: build
-        text: "на- is onto, and coming upon something on foot is how you find it. The same ход- as in ходи́ть."
+        text: "на- and ходи́ть, to walk. Tikhonov treats the find sense as a single root, наход-, and splits на/ход/и́/ть only for coming across something."
         parts:
-          - { ru: "на-", en: "onto" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "на-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "находиться=to be located":
     cefr_level: A2
@@ -17486,12 +17515,12 @@ words:
         inflect: { token: 4, tense: past, person: past_m, rule: verb-conditional }
     facts:
       - kind: build
-        text: "На- plus ходи́ть with -ся: to have walked yourself onto something, and so to be found there. Находи́ться is simply where a thing is."
+        text: "Находи́ть, to find, with the reflexive suffix -ся: to be found, and to be located."
         parts:
-          - { ru: "на", en: "onto" }
-          - { ru: "ходи́", en: "walk" }
-          - { ru: "ться", en: "oneself" }
-        see: ["ходить=to walk"]
+          - { ru: "наход", en: "find (находи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
   "начать=to begin":
     cefr_level: A1
     accented: нача́ть
@@ -20281,10 +20310,12 @@ words:
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "О- leaves the thing standing where it is, and walks off: to leave behind."
+        text: "о- and ста́вить, to put: to leave, to leave alone, to abandon."
         parts:
-          - { ru: "о", en: "aside, where it is" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "о-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "оставлять=to leave":
     cefr_level: A2
@@ -20519,11 +20550,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "О- leaves you standing where you were, and -ся makes it your own doing: to stay."
+        text: "о- and стать, to stand: to stay, to remain, to be left."
         parts:
-          - { ru: "о", en: "where you are" }
-          - { ru: "ста́", en: "stand, come to be" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "о-", en: "prefix" }
+          - { ru: "ста́", en: "stand (стать)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["стать=to become"]
   "отвернуться=to turn away":
     cefr_level: B1
@@ -20612,10 +20644,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "От- is away from here, so отвести́ is to take someone off somewhere: to school, or to one side."
+        text: "от- and вести́, to lead: to lead away, to take aside."
         parts:
-          - { ru: "от", en: "away" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "ответить=to answer":
     cefr_level: A1
@@ -20769,10 +20802,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "От- is away and back, so this is to give back: to return what was not yours to keep."
+        text: "от- and дава́ть, to give: to give back, or to hand over."
         parts:
-          - { ru: "от", en: "away, back" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "да", en: "give (дава́ть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "отдать=to give back":
     cefr_level: A2
@@ -20831,10 +20866,11 @@ words:
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "От- is away and back, so this is to give back: to return what was not yours to keep."
+        text: "от- and дать, to give: to give back, or to hand over."
         parts:
-          - { ru: "от", en: "away, back" }
-          - { ru: "да́ть", en: "give" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "отдохнуть=to rest":
     cefr_level: A1
@@ -21414,11 +21450,13 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "От- is away, носи́ть is carrying, and -ся turns it back on you: how you carry yourself towards a thing is how you regard it."
+        text: "Относи́ть with the reflexive suffix -ся. With к and a dative it means to treat someone in a certain way, or to concern something."
         parts:
-          - { ru: "от", en: "towards, away" }
-          - { ru: "носи́", en: "carry about" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "нос", en: "carry (носи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["носить=to wear"]
   "отобрать=to take away":
     cefr_level: B1
@@ -21935,10 +21973,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "От- is away, so отходи́ть is to walk off from something. It is what a train does when it leaves the platform."
+        text: "от- and ходи́ть, to walk: to go away, to move aside."
         parts:
-          - { ru: "от", en: "away" }
-          - { ru: "ходи́ть", en: "walk" }
+          - { ru: "от-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "отыскать=to find":
     cefr_level: B1
@@ -22636,10 +22676,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Пере- is across. Перевести́ is to lead across — a road, or a language, and that second one is why it means to translate."
+        text: "пере- and вести́, to lead. Its senses include to transfer and to translate."
         parts:
-          - { ru: "пере", en: "across, over" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "переводить=to translate":
     cefr_level: B1
@@ -22674,10 +22715,12 @@ words:
       past_pl: переводи́ли
     facts:
       - kind: build
-        text: "The imperfective side of перевести́, built on води́ть rather than вести́. Пере- is still across, and leading a language across is still what makes it to translate."
+        text: "пере- and води́ть, to lead: the imperfective of перевести́, whose senses it shares, among them to translate."
         parts:
-          - { ru: "пере", en: "across" }
-          - { ru: "води́ть", en: "lead, take about" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "вод", en: "lead (води́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["водить=to drive"]
   "передавать=to pass on":
     cefr_level: B1
@@ -22727,10 +22770,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "Пере- is across, so this is to hand something across: to pass it on, or to broadcast it."
+        text: "Переда́ть with the imperfective suffix -ва-: to hand over, to broadcast, to tell or take a message."
         parts:
-          - { ru: "пере", en: "across, over" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "передать=to pass on":
     cefr_level: B1
@@ -22782,10 +22827,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Пере- is across, so this is to hand something across: to pass it on, or to broadcast it."
+        text: "Inherited from Old East Slavic передати, from Proto-Slavic *perdati; by surface analysis, пере- and дать, to give. It is a doublet of преда́ть, to betray, which was borrowed from Old Church Slavonic."
         parts:
-          - { ru: "пере", en: "across, over" }
-          - { ru: "да́ть", en: "give" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "передумать=to change one's mind":
     cefr_level: B1
@@ -23034,10 +23080,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Пере- is across: to carry something over, to move it — and so to come through an illness or a hardship and out the other side."
+        text: "пере- and нести́, to carry. Its senses include to transfer, to postpone and to endure."
         parts:
-          - { ru: "пере", en: "across" }
-          - { ru: "нести́", en: "carry" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "нес", en: "carry (нести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["нести=to be carrying"]
   "переодеваться=to change clothes":
     cefr_level: B1
@@ -23160,10 +23207,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Пере- is across and over, so переста́ть is to be over and done with doing it."
+        text: "Inherited from Proto-Slavic *perstati; by surface analysis, пере- and стать. It means to stop, to cease."
         parts:
-          - { ru: "пере", en: "over" }
-          - { ru: "ста́ть", en: "stand, come to be" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "ста́", en: "stand (стать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["стать=to become"]
   "переходить=to cross":
     cefr_level: B1
@@ -23212,11 +23260,13 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "Пере- is across: to walk across. The noun made the same way is перехо́д, a crossing."
+        text: "пере- and ходи́ть, to walk: to cross."
         parts:
-          - { ru: "пере", en: "across" }
-          - { ru: "ходи́ть", en: "walk" }
-        see: ["переход=crossing"]
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ходить=to walk", "переход=crossing"]
   "петь=to sing":
     cefr_level: A1
     accented: петь
@@ -23782,10 +23832,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "По- sets the running going: to break into a run."
+        text: "по- and бежа́ть, to run: to start running."
         parts:
-          - { ru: "по", en: "setting off" }
-          - { ru: "бежа́ть", en: "run" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "беж", en: "run (бежа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["бежать=to run"]
   "побеждать=to win":
     cefr_level: B1
@@ -23948,10 +24000,11 @@ words:
         inflect: { token: 3, tense: past, person: past_n, rule: verb-conditional }
     facts:
       - kind: build
-        text: "По- sets везти́ going. Impersonally it is Russian for being lucky: мне повезло́, it carried well for me, with the person in the dative."
+        text: "по- and везти́, to convey by vehicle. Used impersonally, with the person in the dative, it means to be lucky."
         parts:
-          - { ru: "по", en: "setting off" }
-          - { ru: "везти́", en: "take by vehicle" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "вез", en: "convey (везти́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["везти=to be taking"]
   "поверить=to believe":
     cefr_level: A2
@@ -24454,10 +24507,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "По- is toward someone, so this is to give in their direction: to serve a dish, to hand in a form."
+        text: "по- and дава́ть, to give: to give, to offer, to pass (подава́ть ру́ку, to offer one's hand)."
         parts:
-          - { ru: "по", en: "toward" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "да", en: "give (дава́ть)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "подарить=to give a present":
     cefr_level: A1
@@ -24562,10 +24617,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "По- is toward someone, so this is to give in their direction: to serve a dish, to hand in a form."
+        text: "по- and дать, to give: to give, to offer, to pass."
         parts:
-          - { ru: "по", en: "toward" }
-          - { ru: "да́ть", en: "give" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "подготовить=to prepare":
     cefr_level: B1
@@ -25085,10 +25141,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "подо- is по- with a vowel added so подожда́ть can be said at all; it marks a spell of waiting that ends."
+        text: "подо-, the form под- takes before some consonant clusters, and ждать, to wait; it is ждать's perfective."
         parts:
-          - { ru: "подо-", en: "makes it perfective" }
-          - { ru: "жда́ть", en: "to wait" }
+          - { ru: "подо-", en: "prefix: под- before some consonant clusters" }
+          - { ru: "жд", en: "wait (ждать)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ждать=to wait"]
   "подозревать=to suspect":
     cefr_level: B1
     accented: подозрева́ть
@@ -25429,10 +25488,12 @@ words:
       past_pl: подходи́ли
     facts:
       - kind: build
-        text: "Под- is up to and under, so подходи́ть is to walk up to something — and to suit, in the sense of coming up to what was wanted."
+        text: "под- and ходи́ть, to walk: to approach, and, with a dative, to suit."
         parts:
-          - { ru: "под", en: "up to" }
-          - { ru: "ходи́ть", en: "walk" }
+          - { ru: "под-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "подчеркнуть=to underline":
     cefr_level: B1
@@ -25534,10 +25595,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "по- on a verb of motion is setting off, so пое́хать is to head off somewhere by transport."
+        text: "по- and е́хать, to go by vehicle; it is е́хать's perfective."
         parts:
-          - { ru: "по-", en: "setting off" }
-          - { ru: "-е́хать", en: "to go by transport" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "е́х", en: "go by vehicle (е́хать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ехать=to go by transport"]
   "пожалеть=to feel sorry":
     cefr_level: B1
@@ -27406,10 +27469,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "По- sets нести́ going: to start carrying, or to be carried off."
+        text: "по- and нести́, to carry; it is нести́'s perfective."
         parts:
-          - { ru: "по", en: "setting off" }
-          - { ru: "нести́", en: "carry" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "нес", en: "carry (нести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["нести=to be carrying"]
   "понимать=to understand":
     cefr_level: A1
@@ -28541,10 +28605,13 @@ words:
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "The one prefix in this family that adds nothing. По- only makes ста́вить perfective; the meaning stays exactly where it was. In the other eight the prefix is the whole difference."
+        text: "по- and ста́вить, to put; it is ста́вить's perfective. Tikhonov lists a second поста́вить (поста́вить това́р), which he treats as a single root."
         parts:
-          - { ru: "по", en: "finishes the action" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ставить=to place"]
   "постараться=to try hard":
     cefr_level: A2
     accented: постара́ться
@@ -29178,6 +29245,15 @@ words:
       - ru: Ты похо́дишь на отца́?
         en_gb: Are you like your father?
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
+    facts:
+      - kind: build
+        text: "по- and ходи́ть, to walk. Ozhegov lists two походи́ть: to resemble (сын похо́дит на отца́), and to walk about for a while."
+        parts:
+          - { ru: "по-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ходить=to walk"]
   "поцеловать=to kiss":
     cefr_level: A2
     accented: поцелова́ть
@@ -29856,10 +29932,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Пред- is before. Предста́вить is to set something before someone: to present it, or to picture it."
+        text: "Probably a calque of German vorstellen, possibly via Polish przedstawić; by surface analysis, пред- and ста́вить, to put. Its senses include to present, to introduce and to imagine."
         parts:
-          - { ru: "пред", en: "before, in front of" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "пред-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "представлять=to present":
     cefr_level: B1
@@ -30293,11 +30371,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "При- is arrival, везти́ is taking something by vehicle: привезти́ is to bring it in a car, a train, a suitcase. Russian makes you say how the thing arrives. При- is arrival either way; the stem is the difference. Принести́ brings it in your hands."
+        text: "при- and везти́, to convey by vehicle: to bring by vehicle."
         parts:
-          - { ru: "при", en: "arriving" }
-          - { ru: "везти́", en: "take by vehicle" }
-        see: ["везти=to be taking", "принести=to bring"]
+          - { ru: "при-", en: "prefix" }
+          - { ru: "вез", en: "convey (везти́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["везти=to be taking"]
   "привести=to bring":
     cefr_level: B1
     accented: привести́
@@ -30344,10 +30423,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "При- is arrival, so привести́ is to bring someone here: the counterpart of отвести́."
+        text: "при- and вести́, to lead: to bring someone along."
         parts:
-          - { ru: "при", en: "to, arriving" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "при-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "приводить=to bring":
     cefr_level: B1
@@ -30392,10 +30472,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "The imperfective side of привести́, on води́ть. При- is arrival: to bring a person here, on foot."
+        text: "при- and води́ть, to lead: the imperfective of привести́, to bring someone along."
         parts:
-          - { ru: "при", en: "arriving" }
-          - { ru: "води́ть", en: "lead, take about" }
+          - { ru: "при-", en: "prefix" }
+          - { ru: "вод", en: "lead (води́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["водить=to drive"]
   "привыкнуть=to get used to":
     cefr_level: B1
@@ -30747,10 +30829,12 @@ words:
       past_pl: прие́хали
     facts:
       - kind: build
-        text: "The same при- as in приходи́ть, on е́хать instead of ходи́ть: arriving, but by transport rather than on foot."
+        text: "при- and е́хать, to go by vehicle: to arrive by vehicle or on horseback."
         parts:
-          - { ru: "при-", en: "arriving" }
-          - { ru: "-е́хать", en: "to go by transport" }
+          - { ru: "при-", en: "prefix" }
+          - { ru: "е́х", en: "go by vehicle (е́хать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ехать=to go by transport"]
   "прижать=to press":
     cefr_level: B2
@@ -31282,11 +31366,12 @@ words:
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "При- is arrival, нести́ is carrying: принести́ is to bring something in your hands. Russian makes you say how the thing arrives. При- is arrival either way; the stem is the difference. Привезти́ brings it by vehicle, привести́ brings a person on foot."
+        text: "при- and нести́, to carry: to bring on foot, to fetch."
         parts:
-          - { ru: "при", en: "arriving" }
-          - { ru: "нести́", en: "carry" }
-        see: ["нести=to be carrying", "привезти=to bring", "привести=to bring"]
+          - { ru: "при-", en: "prefix" }
+          - { ru: "нес", en: "carry (нести́)" }
+          - { ru: "-ти́", en: "verb ending" }
+        see: ["нести=to be carrying"]
   "принимать=to accept":
     cefr_level: B1
     accented: принима́ть
@@ -31387,10 +31472,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "The imperfective side of принести́, on носи́ть, which is carrying about rather than carrying in one direction."
+        text: "при- and носи́ть, to carry: the imperfective of принести́, to bring on foot, to fetch."
         parts:
-          - { ru: "при", en: "arriving" }
-          - { ru: "носи́ть", en: "carry about" }
+          - { ru: "при-", en: "prefix" }
+          - { ru: "нос", en: "carry (носи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["носить=to wear"]
   "принять=to accept":
     cefr_level: B1
@@ -31721,11 +31808,12 @@ words:
       past_pl: приходи́ли
     facts:
       - kind: build
-        text: "при- is arriving, so приходи́ть is to come on foot — the same ход- as in ходи́ть."
+        text: "при- and ходи́ть, to walk: to come, to arrive."
         parts:
-          - { ru: "при-", en: "arriving" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "при-", en: "prefix: motion towards an end point" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "приходиться=to have to":
     cefr_level: B1
@@ -31760,11 +31848,13 @@ words:
         inflect: { token: 2, tense: past, person: past_n, rule: verb-past }
     facts:
       - kind: build
-        text: "При- is arrival and -ся turns it back on itself: the thing comes round to you. Russian has the obligation arrive at the person, which is why they stand in the dative — мне прихо́дится."
+        text: "Приходи́ть with the reflexive suffix -ся. Used impersonally, with a dative and an infinitive, it means to have to."
         parts:
-          - { ru: "при", en: "arriving" }
-          - { ru: "ходи́", en: "walk" }
-          - { ru: "ться", en: "oneself" }
+          - { ru: "при-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["ходить=to walk"]
   "пришивать=to sew on":
     cefr_level: B2
@@ -31882,10 +31972,12 @@ words:
       past_pl: пробежа́ли
     facts:
       - kind: build
-        text: "Про- is through and past: to run a distance, or to run past something."
+        text: "про- and бежа́ть, to run: to run past or through, or to run a certain distance."
         parts:
-          - { ru: "про", en: "through, past" }
-          - { ru: "бежа́ть", en: "run" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "беж", en: "run (бежа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["бежать=to run"]
   "пробовать=to try":
     cefr_level: A2
@@ -32121,10 +32213,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Про- is through. Провести́ is to lead through, and time led through is time spent."
+        text: "про- and вести́, to lead. Its senses include to lead or guide, to carry out, and to spend time."
         parts:
-          - { ru: "про", en: "through" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "проводить=to accompany":
     cefr_level: B1
@@ -32172,10 +32265,12 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
     facts:
       - kind: build
-        text: "Про- is through, on води́ть. Проводи́ть is to lead someone on their way, and of time, to lead it through — to spend it."
+        text: "про- and води́ть, to lead. Tikhonov lists two проводи́ть: one from провести́, and one that belongs with провожа́ть. Wiktionary gives the first as the imperfective of провести́, and the second, to see off, as the perfective of провожа́ть."
         parts:
-          - { ru: "про", en: "through" }
-          - { ru: "води́ть", en: "lead, take about" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "вод", en: "lead (води́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["водить=to drive"]
   "провожать=to see off":
     cefr_level: B1
@@ -32322,10 +32417,12 @@ words:
       past_pl: продава́ли
     facts:
       - kind: build
-        text: "Про- carries the sense of parting with something for good, so this is to give it up for money: to sell."
+        text: "Прода́ть with the imperfective suffix -ва-: to sell."
         parts:
-          - { ru: "про", en: "away, through" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "продаваться=to be sold":
     cefr_level: B2
@@ -32358,11 +32455,13 @@ words:
       past_pl: продава́лись
     facts:
       - kind: build
-        text: "Прода́ть with -ся on the end: to sell itself, which is how Russian says a thing is on sale."
+        text: "Продава́ть with the reflexive suffix -ся: to sell, intransitively; it is also the passive of продава́ть."
         parts:
-          - { ru: "про", en: "away, through" }
-          - { ru: "дава́", en: "give" }
-          - { ru: "ться", en: "itself" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["давать=to give"]
   "продать=to sell":
     cefr_level: A2
@@ -32422,10 +32521,11 @@ words:
         pl: про́даны
     facts:
       - kind: build
-        text: "Про- carries the sense of parting with something for good, so this is to give it up for money: to sell."
+        text: "про- and дать, to give: to sell, and to sell out or betray."
         parts:
-          - { ru: "про", en: "away, through" }
-          - { ru: "да́ть", en: "give" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "продолжать=to continue":
     cefr_level: A2
@@ -33350,11 +33450,13 @@ words:
         inflect: { token: 2, tense: past, person: past_n, rule: verb-conditional }
     facts:
       - kind: build
-        text: "Про- is through: to walk through, past, or over. The noun is прохо́д, a passage."
+        text: "про- and ходи́ть, to walk: to pass, to go."
         parts:
-          - { ru: "про", en: "through" }
-          - { ru: "ходи́ть", en: "walk" }
-        see: ["проход=passage"]
+          - { ru: "про-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["ходить=to walk", "проход=passage"]
   "прочитать=to read":
     cefr_level: A1
     accented: прочита́ть
@@ -34170,10 +34272,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Раз- is apart, so развести́ is to lead two things away from each other: a couple, or a powder into water."
+        text: "раз- and вести́, to lead. Its senses include to separate, to dilute and to divorce."
         parts:
-          - { ru: "раз", en: "apart" }
-          - { ru: "вести́", en: "lead" }
+          - { ru: "раз-", en: "prefix" }
+          - { ru: "вес", en: "lead (вести́)" }
+          - { ru: "-ти́", en: "verb ending" }
         see: ["вести=to be leading"]
   "развиваться=to develop":
     cefr_level: B1
@@ -34431,11 +34534,12 @@ words:
         inflect: { token: 3, tense: past, person: past_m, rule: verb-conditional }
     facts:
       - kind: build
-        text: "Раз- is outward in all directions, so разда́ться is to give itself out: a sound spreading through a room."
+        text: "раз- and дать, to give, with the reflexive suffix -ся: to sound, to ring out (вдруг разда́лся вы́стрел, suddenly a shot rang out)."
         parts:
-          - { ru: "раз", en: "outward" }
-          - { ru: "да́", en: "give" }
-          - { ru: "ться", en: "itself" }
+          - { ru: "раз-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["дать=to give"]
   "раздеваться=to get undressed":
     cefr_level: B1
@@ -36339,11 +36443,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "С- is off and down: to run off, to escape."
+        text: "с- and бежа́ть, to run: to run down, and to run away."
         parts:
-          - { ru: "с", en: "off, down" }
-          - { ru: "бежа́ть", en: "run" }
-        see: ["убежать=to run away"]
+          - { ru: "с-", en: "prefix" }
+          - { ru: "беж", en: "run (бежа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["бежать=to run"]
   "сбить=to knock down":
     cefr_level: B1
     accented: сбить
@@ -36582,10 +36688,12 @@ words:
       past_pl: сдава́ли
     facts:
       - kind: build
-        text: "С- is off and over, so this is to hand something over: an exam, a key, a coat at the door."
+        text: "Сдать with the imperfective suffix -ва-: to hand in, to hand over."
         parts:
-          - { ru: "с", en: "off, over" }
-          - { ru: "дава́ть", en: "give" }
+          - { ru: "с-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["давать=to give"]
   "сдать=to hand in":
     cefr_level: A2
@@ -36645,10 +36753,11 @@ words:
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
     facts:
       - kind: build
-        text: "С- is off and over, so this is to hand something over: an exam, a key, a coat at the door."
+        text: "с- and дать, to give: to hand in, to hand over."
         parts:
-          - { ru: "с", en: "off, over" }
-          - { ru: "дать", en: "give" }
+          - { ru: "с-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["дать=to give"]
   "сделать=to do/make":
     cefr_level: A1
@@ -39183,10 +39292,12 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "Со- is together, so соста́вить is to stand things side by side: to put together."
+        text: "Inherited from Old East Slavic съставити; by surface analysis, со- and ста́вить, to put. Its senses include to make up and to compose or draw up."
         parts:
-          - { ru: "со", en: "together" }
-          - { ru: "ста́вить", en: "put, set standing" }
+          - { ru: "со-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ставить=to place"]
   "составлять=to compile":
     cefr_level: B1
@@ -41838,11 +41949,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "У- is away and gone, so убежа́ть is to run away for good — a shade more final than сбежа́ть, which is more of a bolt."
+        text: "у- and бежа́ть, to run: to run away."
         parts:
-          - { ru: "у", en: "away, gone" }
-          - { ru: "бежа́ть", en: "run" }
-        see: ["сбежать=to run away"]
+          - { ru: "у-", en: "prefix" }
+          - { ru: "беж", en: "run (бежа́ть)" }
+          - { ru: "-а́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["бежать=to run"]
   "убивать=to kill":
     cefr_level: B1
     accented: убива́ть
@@ -42272,11 +42385,13 @@ words:
         inflect: { token: 5, tense: past, person: past_n, rule: verb-conditional }
     facts:
       - kind: build
-        text: "У- plus дава́ть with -ся: the thing gives itself. Russian says the attempt succeeds itself, which is why the person goes in the dative — мне удаётся."
+        text: "Уда́ться with the imperfective suffix -ва-: to turn out well; used impersonally, to succeed (мне удаётся реши́ть э́ту зада́чу, I am managing to solve this problem)."
         parts:
-          - { ru: "у", en: "off well" }
-          - { ru: "дава́", en: "give" }
-          - { ru: "ться", en: "itself" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "да", en: "give (дать)" }
+          - { ru: "-ва́", en: "imperfective suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["давать=to give"]
   "удалить=to delete":
     cefr_level: B1
@@ -42387,11 +42502,12 @@ words:
         inflect: { token: 4, tense: past, person: past_n, rule: verb-conditional }
     facts:
       - kind: build
-        text: "У- plus дать with -ся on the end: the thing gave itself. Russian says the attempt succeeded itself, which is why the person goes in the dative — мне удало́сь."
+        text: "у- and дать, to give: to turn out well, to be a success."
         parts:
-          - { ru: "у", en: "off well" }
-          - { ru: "да́", en: "give" }
-          - { ru: "ться", en: "itself" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "да́", en: "give (дать)" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["дать=to give"]
   "удержаться=to hold on":
     cefr_level: B1
@@ -42607,10 +42723,12 @@ words:
       past_pl: уе́хали
     facts:
       - kind: build
-        text: "The same у- as in уходи́ть: away, but by transport rather than on foot."
+        text: "у- and е́хать, to go by vehicle: to leave by vehicle."
         parts:
-          - { ru: "у-", en: "away" }
-          - { ru: "-е́хать", en: "to go by transport" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "е́х", en: "go by vehicle (е́хать)" }
+          - { ru: "-а", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ехать=to go by transport"]
   "узнавать=to find out":
     cefr_level: A2
@@ -43728,11 +43846,13 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "У- plus ста́вить plus -ся: to set yourself on something and not move. That is staring."
+        text: "Уста́вить with the reflexive suffix -ся: to find room, and to stare."
         parts:
-          - { ru: "у", en: "onto, fixed" }
-          - { ru: "ста́ви", en: "put, set standing" }
-          - { ru: "-ться", en: "oneself" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "ста́в", en: "put (ста́вить)" }
+          - { ru: "-и", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+          - { ru: "-ся", en: "reflexive suffix" }
         see: ["ставить=to place"]
   "установить=to install":
     cefr_level: B1
@@ -43823,10 +43943,11 @@ words:
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
     facts:
       - kind: build
-        text: "У- is off and done with, so уста́ть is to have stopped. What is left of you afterwards is tired."
+        text: "у- and стать, to stand: to get tired."
         parts:
-          - { ru: "у", en: "off, done" }
-          - { ru: "ста́ть", en: "stand, come to be" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "ста́", en: "stand (стать)" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["стать=to become"]
   "устраивать=to arrange":
     cefr_level: B1
@@ -44037,11 +44158,12 @@ words:
       past_pl: уходи́ли
     facts:
       - kind: build
-        text: "у- is away, so уходи́ть is to go off — the same ход- as in ходи́ть."
+        text: "у- and ходи́ть, to walk: to leave, to go away."
         parts:
-          - { ru: "у-", en: "away" }
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "у-", en: "prefix" }
+          - { ru: "ход", en: "walk (ходи́ть)" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
         see: ["ходить=to walk"]
   "участвовать=to participate":
     cefr_level: B1
@@ -44437,10 +44559,12 @@ words:
       past_pl: ходи́ли
     facts:
       - kind: build
-        text: "The root ход- is going on foot. Give it a prefix and you get a dozen more verbs, each with its own direction."
+        text: "Inherited from Proto-Slavic *xoditi. Its root, ход-, is the root of входи́ть, выходи́ть, приходи́ть and уходи́ть."
         parts:
-          - { ru: "ход", en: "going on foot" }
-          - { ru: "-и́ть", en: "verb ending" }
+          - { ru: "ход", en: "root" }
+          - { ru: "-и́", en: "verb suffix" }
+          - { ru: "-ть", en: "verb ending" }
+        see: ["входить=to enter", "выходить=to go out", "приходить=to come", "уходить=to leave"]
   "хотеть=to want":
     cefr_level: A1
     accented: хоте́ть

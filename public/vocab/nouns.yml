@@ -9481,11 +9481,11 @@ words:
       pl_pre: вхо́дах
     facts:
       - kind: build
-        text: "В- is in and ход is the going: an вход is the place where the going-in happens."
+        text: "From входи́ть, with no suffix of its own."
         parts:
-          - { ru: "в", en: "in" }
-          - { ru: "ход", en: "going" }
-        see: ["ход=move"]
+          - { ru: "в-", en: "prefix" }
+          - { ru: "ход", en: "movement (ход)" }
+        see: ["входить=to enter"]
   "выбор=choice":
     cefr_level: A2
     gender: m
@@ -9802,11 +9802,11 @@ words:
       pl_pre: вы́ходах
     facts:
       - kind: build
-        text: "Вы- is out, the opposite of the в- in вход: where the going-out happens, and of a situation, the way out of it."
+        text: "From выходи́ть, with no suffix of its own."
         parts:
-          - { ru: "вы́", en: "out" }
-          - { ru: "ход", en: "going" }
-        see: ["вход=entrance"]
+          - { ru: "вы́-", en: "prefix" }
+          - { ru: "ход", en: "movement (ход)" }
+        see: ["выходить=to go out"]
   "вяз=elm":
     cefr_level: C1
     gender: m
@@ -15314,11 +15314,11 @@ words:
       pl_pre: дохо́дах
     facts:
       - kind: build
-        text: "До- is up to and as far as, so дохо́д is what comes as far as you: income."
+        text: "Inherited from Proto-Slavic *doxodъ. Russian Wiktionary calls East Slavic доходъ a back-formation from the verb доходити, itself до- and ходити. Tikhonov treats дохо́д as a single root."
         parts:
-          - { ru: "до", en: "as far as" }
-          - { ru: "хо́д", en: "going" }
-        see: ["ход=move"]
+          - { ru: "до-", en: "prefix" }
+          - { ru: "хо́д", en: "movement (ход)" }
+        see: ["доходить=to reach"]
   "дочка=daughter":
     cefr_level: A1
     gender: f
@@ -42514,10 +42514,10 @@ words:
       pl_pre: перехо́дах
     facts:
       - kind: build
-        text: "The same пере- as in переходи́ть, put on ход instead: a crossing, whether over a road or from one state to another."
+        text: "пере- and ход, movement: a crossing, a passage."
         parts:
-          - { ru: "пере", en: "across" }
-          - { ru: "хо́д", en: "going" }
+          - { ru: "пере-", en: "prefix" }
+          - { ru: "хо́д", en: "movement (ход)" }
         see: ["переходить=to cross"]
   "перец=pepper":
     cefr_level: B1
@@ -47420,11 +47420,11 @@ words:
       pl_pre: похо́дах
     facts:
       - kind: build
-        text: "По- sets the going going: a похо́д is a journey undertaken on purpose — a hike, or a campaign."
+        text: "From Proto-Slavic *poxodъ; Tikhonov splits it по/хо́д. It is a hike, or a military campaign."
         parts:
-          - { ru: "по", en: "setting off" }
-          - { ru: "хо́д", en: "going" }
-        see: ["ход=move"]
+          - { ru: "по-", en: "prefix" }
+          - { ru: "хо́д", en: "movement (ход)" }
+        see: ["ходить=to walk"]
   "поцелуй=kiss":
     cefr_level: B1
     gender: m
@@ -50168,10 +50168,10 @@ words:
         inflect: { token: 4, case: acc, number: pl, rule: noun-acc-pl }
     facts:
       - kind: build
-        text: "Про- is through, so a прохо́д is the space you go through: a passage, an aisle."
+        text: "From проходи́ть, with no suffix of its own: a passage, an aisle."
         parts:
-          - { ru: "про", en: "through" }
-          - { ru: "хо́д", en: "going" }
+          - { ru: "про-", en: "prefix" }
+          - { ru: "хо́д", en: "movement (ход)" }
         see: ["проходить=to pass"]
   "процент=per cent":
     cefr_level: B1
@@ -52239,11 +52239,11 @@ words:
       pl_pre: расхо́дах
     facts:
       - kind: build
-        text: "Рас- is out and apart, the exact opposite of the до- in дохо́д: what goes out again."
+        text: "Tikhonov splits it рас/хо́д: the prefix рас- and the root of ход and ходи́ть, with no suffix. It means an expense."
         parts:
-          - { ru: "рас", en: "out, apart" }
-          - { ru: "хо́д", en: "going" }
-        see: ["доход=income"]
+          - { ru: "рас-", en: "prefix" }
+          - { ru: "хо́д", en: "movement (ход)" }
+        see: ["ходить=to walk"]
   "расчёт=calculation":
     cefr_level: B1
     gender: m
@@ -68210,11 +68210,11 @@ words:
         inflect: { token: 2, case: nom, number: sg, rule: noun-nom-sg }
     facts:
       - kind: build
-        text: "У- is away, so ухо́д is a going away. The other sense, care, comes by way of уха́живать за ке́м-то, to attend on someone."
+        text: "Tikhonov splits it у/хо́д and lists two: one from уходи́ть, and this one, care (уход за больным), which Ozhegov refers to уха́живать."
         parts:
-          - { ru: "у", en: "away" }
-          - { ru: "хо́д", en: "going" }
-        see: ["ход=move"]
+          - { ru: "у-", en: "prefix" }
+          - { ru: "хо́д", en: "movement (ход)" }
+        see: ["ухаживать=to look after"]
   "участие=participation":
     cefr_level: B1
     gender: n
