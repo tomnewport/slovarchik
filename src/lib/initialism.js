@@ -29,9 +29,10 @@ export function spellOutInitialisms(text) {
 // The opposite failure: a one-letter consonant word — the prepositions с, в, к —
 // spoken with nothing after it (a flashcard or intro card for the preposition, a
 // tapped hint token, a gloss like "с / со") is read as the NAME of the letter
-// ("эс", "вэ", "ка") rather than as the word. A trailing hard sign makes it a
-// pronounceable syllable again: Russian letter-to-sound rules treat ъ as silent,
-// so "съ" comes out as the bare [s] a learner should hear. Only a consonant word
+// ("эс", "вэ", "ка") rather than as the word. It is spoken as its vowel form
+// instead — со, во, ко — which is the same preposition and which every voice
+// reads as a word. (A trailing hard sign, "съ", was tried first: at least one
+// Android voice reads that as "эс твёрдый знак".) Only a consonant word
 // with no Cyrillic word following is touched — "с дру́гом" is already read
 // correctly, and the vowel words (а, и, о, у, я) sound the same either way.
 const LONE_CONSONANT_WORD = /(?<![А-ЯЁа-яё.]|\u0301)([ВКСвкс])(?![А-ЯЁа-яё.]|\u0301)(?!\s*[А-ЯЁа-яё])/g
@@ -46,7 +47,7 @@ const LONE_CONSONANT_WORD = /(?<![А-ЯЁа-яё.]|\u0301)([ВКСвкс])(?![А
 export function sayLoneConsonantWords(text) {
   const str = String(text ?? '')
   if (!str) return str
-  return str.replace(LONE_CONSONANT_WORD, (letter) => letter + (letter === letter.toUpperCase() ? 'Ъ' : 'ъ'))
+  return str.replace(LONE_CONSONANT_WORD, (letter) => letter + (letter === letter.toUpperCase() ? 'О' : 'о'))
 }
 
 /**

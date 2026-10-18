@@ -39,15 +39,15 @@ describe('spellOutInitialisms', () => {
 
 describe('sayLoneConsonantWords', () => {
   it('respells a preposition spoken on its own so it is not read as a letter name', () => {
-    expect(sayLoneConsonantWords('с')).toBe('съ')
-    expect(sayLoneConsonantWords('в')).toBe('въ')
-    expect(sayLoneConsonantWords('к')).toBe('къ')
-    expect(sayLoneConsonantWords(' С ')).toBe(' СЪ ')
+    expect(sayLoneConsonantWords('с')).toBe('со')
+    expect(sayLoneConsonantWords('в')).toBe('во')
+    expect(sayLoneConsonantWords('к')).toBe('ко')
+    expect(sayLoneConsonantWords(' С ')).toBe(' СО ')
   })
 
   it('respells it when nothing Russian follows, as in a gloss', () => {
-    expect(sayLoneConsonantWords('с / со')).toBe('съ / со')
-    expect(sayLoneConsonantWords('в (+ prep)')).toBe('въ (+ prep)')
+    expect(sayLoneConsonantWords('с / со')).toBe('со / со')
+    expect(sayLoneConsonantWords('в (+ prep)')).toBe('во (+ prep)')
   })
 
   it('leaves a preposition alone when its word follows', () => {
@@ -65,7 +65,7 @@ describe('sayLoneConsonantWords', () => {
 
 describe('speechText', () => {
   it('applies both transforms without one disturbing the other', () => {
-    expect(speechText('с')).toBe('съ')
+    expect(speechText('с')).toBe('со')
     expect(speechText('в США')).toBe('в С.Ш.А.')
   })
 })
