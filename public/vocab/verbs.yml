@@ -2311,6 +2311,9 @@ words:
       - ru: Свет включён.
         en_gb: The light is switched on.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Не оставля́йте включённые прибо́ры без присмо́тра.
+        en_gb: Do not leave appliances switched on unattended.
+        inflect: { token: 3, form: pass_past, case: acc, gender: pl, rule: verb-participle-pass-past }
   "владеть=to own":
     cefr_level: B1
     accented: владе́ть
@@ -5781,6 +5784,20 @@ words:
       - ru: Говоря́ ти́хо, он объясни́л пра́вило.
         en_gb: Speaking quietly, he explained the rule.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: В на́шем кла́ссе у́чатся де́ти, говоря́щие на двух языка́х.
+        en_gb: There are children in our class who speak two languages.
+        inflect: { token: 6, form: act_pres, gender: pl, rule: verb-participle-act-pres }
+      - ru: Же́нщина, говори́вшая по телефо́ну, вдруг замолча́ла.
+        en_gb: The woman who had been talking on the phone suddenly fell silent.
+        inflect: { token: 2, form: act_past, gender: f, rule: verb-participle-act-past }
+      - ru: Че́стно говоря́, мне э́тот фильм не понра́вился.
+        en_gb: To be honest, I didn't like this film.
+        en_alt:
+          - Honestly, I didn't like this film.
+        inflect: { token: 2, form: gerund, rule: verb-gerund-impf }
+      - ru: Он вы́шел из ко́мнаты, ни сло́ва не говоря́.
+        en_gb: He left the room without saying a word.
+        inflect: { token: 8, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: говори́
@@ -6593,6 +6610,17 @@ words:
         en_alt:
           - While doing his homework, he was listening to music.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Мы позвони́ли ма́стеру, де́лающему ме́бель на зака́з.
+        en_gb: We rang the craftsman who makes furniture to order.
+        en_alt:
+          - We called the craftsman who makes furniture to order.
+        inflect: { token: 4, form: act_pres, case: dat, gender: m, rule: verb-participle-act-pres }
+      - ru: Кни́га расска́зывает о хиру́рге, де́лавшем опера́ции во вре́мя войны́.
+        en_gb: The book is about a surgeon who performed operations during the war.
+        inflect: { token: 5, form: act_past, case: pre, gender: m, rule: verb-participle-act-past }
+      - ru: Он слу́шал ра́дио, де́лая у́треннюю заря́дку.
+        en_gb: He listened to the radio while doing his morning exercises.
+        inflect: { token: 4, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: де́лай
@@ -8140,6 +8168,17 @@ words:
       - ru: Ду́мая о до́ме, он улыбну́лся.
         en_gb: Thinking about home, he smiled.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Тако́й рабо́те нужны́ лю́ди, ду́мающие самостоя́тельно.
+        en_gb: Work like this needs people who think for themselves.
+        inflect: { token: 5, form: act_pres, gender: pl, rule: verb-participle-act-pres }
+      - ru: Все, ду́мавшие, что ко́нкурс отме́нят, оши́блись.
+        en_gb: Everyone who thought the competition would be cancelled was wrong.
+        inflect: { token: 2, form: act_past, gender: pl, rule: verb-participle-act-past }
+      - ru: Она́ согласи́лась, не ду́мая ни секу́нды.
+        en_gb: She agreed without a second's thought.
+        en_alt:
+          - She agreed without thinking for a second.
+        inflect: { token: 4, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: ду́май
@@ -8806,6 +8845,16 @@ words:
         inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
       - ru: Живя́ в дере́вне, он мно́го гуля́л.
         en_gb: Living in the village, he walked a lot.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Мы пи́шем пи́сьма друзья́м, живу́щим за грани́цей.
+        en_gb: We write letters to friends who live abroad.
+        inflect: { token: 5, form: act_pres, case: dat, gender: pl, rule: verb-participle-act-pres }
+      - ru: Учёные изуча́ют ко́сти живо́тных, жи́вших здесь миллио́ны лет наза́д.
+        en_gb: Scientists study the bones of animals that lived here millions of years ago.
+        inflect: { token: 5, form: act_past, case: gen, gender: pl, rule: verb-participle-act-past }
+        align: { 3: "кость=bone", 4: "животное=animal" }
+      - ru: Живя́ одна́, она́ научи́лась всё де́лать сама́.
+        en_gb: Living alone, she learned to do everything herself.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
@@ -9527,6 +9576,9 @@ words:
       - ru: Рейс заде́ржан.
         en_gb: The flight has been delayed.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Заде́ржанного отпусти́ли че́рез три часа́.
+        en_gb: The detained man was released three hours later.
+        inflect: { token: 1, form: pass_past, case: acc, gender: m, animate: true, rule: verb-participle-pass-past }
     facts:
       - kind: build
         text: "За- holds a thing back behind where it wanted to go: to delay it, or to detain someone."
@@ -10168,6 +10220,9 @@ words:
       - ru: Магази́н закры́т до утра́.
         en_gb: The shop is closed until morning.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Встре́ча прошла́ при закры́тых дверя́х.
+        en_gb: The meeting took place behind closed doors.
+        inflect: { token: 4, form: pass_past, case: pre, gender: pl, rule: verb-participle-pass-past }
   "закрыться=to shut":
     cefr_level: B1
     accented: закры́ться
@@ -12253,6 +12308,15 @@ words:
         en_alt:
           - Knowing the truth, she was silent.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Мы и́щем перево́дчика, зна́ющего кита́йский язы́к.
+        en_gb: We are looking for a translator who knows Chinese.
+        inflect: { token: 4, form: act_pres, case: acc, gender: m, animate: true, rule: verb-participle-act-pres }
+      - ru: Ни оди́н челове́к, зна́вший пра́вду, не сказа́л ни сло́ва.
+        en_gb: Not one person who knew the truth said a word.
+        inflect: { token: 4, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Не зна́я доро́ги, тури́сты заблуди́лись в лесу́.
+        en_gb: Not knowing the way, the tourists got lost in the forest.
+        inflect: { token: 2, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: знай
@@ -12374,6 +12438,17 @@ words:
         en_alt:
           - Playing football, he broke his leg.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Он познако́мился с де́вушкой, игра́ющей на скри́пке в орке́стре.
+        en_gb: He met a girl who plays the violin in an orchestra.
+        inflect: { token: 5, form: act_pres, case: ins, gender: f, rule: verb-participle-act-pres }
+      - ru: Футболи́ст, игра́вший за сбо́рную де́сять лет, стал тре́нером.
+        en_gb: The footballer who played for the national team for ten years became a coach.
+        inflect: { token: 2, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Де́ти у́чатся, игра́я.
+        en_gb: Children learn through play.
+        en_alt:
+          - Children learn by playing.
+        inflect: { token: 3, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: игра́й
@@ -15053,6 +15128,19 @@ words:
       - ru: Любя́ дете́й, она́ ста́ла учи́телем.
         en_gb: Loving children, she became a teacher.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Ка́ждому ребёнку нужна́ лю́бящая семья́.
+        en_gb: Every child needs a loving family.
+        inflect: { token: 4, form: act_pres, gender: f, rule: verb-participle-act-pres }
+      - ru: Э́то пода́рок от де́душки, люби́вшего путеше́ствовать.
+        en_gb: This is a present from Grandad, who loved travelling.
+        en_alt:
+          - This is a present from Grandfather, who loved travelling.
+        inflect: { token: 5, form: act_past, case: gen, gender: m, rule: verb-participle-act-past }
+      - ru: Ба́бушка руга́ла вну́ка, но любя́.
+        en_gb: Grandmother scolded her grandson, but affectionately.
+        en_alt:
+          - Granny scolded her grandson, but lovingly.
+        inflect: { token: 5, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: люби́
@@ -20707,6 +20795,15 @@ words:
       - ru: Отдыха́я на мо́ре, они́ мно́го пла́вали.
         en_gb: While resting at the seaside, they swam a lot.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Отдыха́ющие загора́ли на пля́же весь день.
+        en_gb: The holidaymakers sunbathed on the beach all day.
+        inflect: { token: 1, form: act_pres, gender: pl, rule: verb-participle-act-pres }
+      - ru: Тури́сты, отдыха́вшие на о́строве, не могли́ уе́хать из-за што́рма.
+        en_gb: The tourists who were holidaying on the island could not leave because of the storm.
+        inflect: { token: 2, form: act_past, gender: pl, rule: verb-participle-act-past }
+      - ru: Мы провели́ неде́лю в гора́х, отдыха́я от городско́го шу́ма.
+        en_gb: We spent a week in the mountains, getting away from the noise of the city.
+        inflect: { token: 6, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: отдыха́й
@@ -20967,6 +21064,9 @@ words:
       - ru: Музе́й откры́т сего́дня.
         en_gb: The museum is open today.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Конце́рт прошёл под откры́тым не́бом.
+        en_gb: The concert was held in the open air.
+        inflect: { token: 4, form: pass_past, case: ins, gender: n, rule: verb-participle-pass-past }
   "открыться=to open":
     cefr_level: B1
     accented: откры́ться
@@ -23105,6 +23205,12 @@ words:
       - ru: Писа́вший письмо́ ма́льчик встал.
         en_gb: The boy who had been writing the letter stood up.
         inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: В углу́ стоя́ла ста́рая пи́шущая маши́нка.
+        en_gb: An old typewriter stood in the corner.
+        inflect: { token: 5, form: act_pres, gender: f, rule: verb-participle-act-pres }
+      - ru: Поэ́т, писа́вший под псевдони́мом, до́лго остава́лся неизве́стным.
+        en_gb: The poet, who wrote under a pseudonym, remained unknown for a long time.
+        inflect: { token: 2, form: act_past, gender: m, rule: verb-participle-act-past }
     conjugation:
       imperative:
         sg: пиши́
@@ -23287,6 +23393,9 @@ words:
       - ru: Мать обняла́ пла́чущего ребёнка.
         en_gb: The mother hugged the crying child.
         inflect: { token: 3, form: act_pres, case: acc, gender: m, animate: true, rule: verb-participle-act-pres }
+      - ru: Пла́чущую де́вочку успоко́ила стюарде́сса.
+        en_gb: A flight attendant calmed the crying girl.
+        inflect: { token: 1, form: act_pres, case: acc, gender: f, rule: verb-participle-act-pres }
     conjugation:
       imperative:
         sg: плачь
@@ -24822,6 +24931,11 @@ words:
       - ru: Подозрева́емый отказа́лся отвеча́ть.
         en_gb: The suspect refused to answer.
         inflect: { token: 1, form: pass_pres, gender: m, rule: verb-participle-pass-pres }
+      - ru: Поли́ция задержа́ла подозрева́емого в кра́же.
+        en_gb: The police detained the theft suspect.
+        en_alt:
+          - The police detained the man suspected of theft.
+        inflect: { token: 3, form: pass_pres, case: acc, gender: m, animate: true, rule: verb-participle-pass-pres }
   "подойти=to approach":
     cefr_level: B1
     accented: подойти́
@@ -24999,6 +25113,11 @@ words:
       - ru: Ты поду́маешь об э́том?
         en_gb: Will you think about it?
         inflect: { token: 2, tense: future, person: 2sg, rule: verb-future }
+      - ru: Поду́мав, она́ отказа́лась от предложе́ния.
+        en_gb: After thinking it over, she turned down the offer.
+        en_alt:
+          - Having thought it over, she turned down the offer.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
     conjugation:
       imperative:
         sg: поду́май
@@ -27089,6 +27208,15 @@ words:
       - ru: Понима́я его́ страх, она́ обняла́ его́.
         en_gb: Understanding his fear, she hugged him.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Мне повезло́ с нача́льником, понима́ющим, что у люде́й есть се́мьи.
+        en_gb: I'm lucky to have a boss who understands that people have families.
+        inflect: { token: 5, form: act_pres, case: ins, gender: m, rule: verb-participle-act-pres }
+      - ru: Пило́т, понима́вший, что топли́ва не хва́тит, посади́л самолёт в по́ле.
+        en_gb: The pilot, who realised there would not be enough fuel, landed the plane in a field.
+        inflect: { token: 2, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Он кива́л, не понима́я ни сло́ва.
+        en_gb: He nodded without understanding a word.
+        inflect: { token: 4, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: понима́й
@@ -28520,6 +28648,9 @@ words:
       - ru: Кошелёк поте́рян.
         en_gb: The wallet is lost.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Бюро́ нахо́док возвраща́ет поте́рянные ве́щи.
+        en_gb: The lost property office returns lost belongings.
+        inflect: { token: 4, form: pass_past, case: acc, gender: pl, rule: verb-participle-pass-past }
   "потратить=to spend":
     cefr_level: B1
     accented: потра́тить
@@ -31000,6 +31131,10 @@ words:
       - ru: Ва́ше предложе́ние при́нято.
         en_gb: Your proposal has been accepted.
         inflect: { token: 3, form: pass_short, gender: n, rule: verb-participle-short }
+      - ru: Зако́н, при́нятый в про́шлом году́, уже́ де́йствует.
+        en_gb: The law passed last year is already in force.
+        inflect: { token: 2, form: pass_past, gender: m, rule: verb-participle-pass-past }
+        align: { 4: "прошлый=past" }
   "приобрести=to acquire":
     cefr_level: B2
     accented: приобрести́
@@ -32574,6 +32709,9 @@ words:
       - ru: Поли́ция и́щет пропа́вшего ребёнка.
         en_gb: The police are looking for the missing child.
         inflect: { token: 3, form: act_past, case: acc, gender: m, animate: true, rule: verb-participle-act-past }
+      - ru: Объявле́ния о пропа́вшей соба́ке висе́ли на ка́ждом столбе́.
+        en_gb: Notices about the missing dog hung on every lamp post.
+        inflect: { token: 3, form: act_past, case: pre, gender: f, rule: verb-participle-act-past }
   "пропустить=to miss":
     cefr_level: B1
     accented: пропусти́ть
@@ -32921,6 +33059,9 @@ words:
       - ru: Кни́га прочи́тана до конца́.
         en_gb: The book has been read to the end.
         inflect: { token: 2, form: pass_short, gender: f, rule: verb-participle-short }
+      - ru: Все прочи́танные кни́ги она́ отдаёт в библиоте́ку.
+        en_gb: She gives all the books she has read to the library.
+        inflect: { token: 2, form: pass_past, case: acc, gender: pl, rule: verb-participle-pass-past }
     conjugation:
       imperative:
         sg: прочита́й
@@ -33449,6 +33590,15 @@ words:
         inflect: { token: 1, form: act_past, gender: m, rule: verb-participle-act-past }
       - ru: Рабо́тая в Москве́, она́ вы́учила ру́сский.
         en_gb: While working in Moscow, she learned Russian.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Число́ люде́й, рабо́тающих из до́ма, вы́росло.
+        en_gb: The number of people working from home has grown.
+        inflect: { token: 3, form: act_pres, case: gen, gender: pl, rule: verb-participle-act-pres }
+      - ru: Всем, рабо́тавшим в пра́здники, запла́тят вдво́йне.
+        en_gb: Everyone who worked over the holidays will be paid double.
+        inflect: { token: 2, form: act_past, case: dat, gender: pl, rule: verb-participle-act-past }
+      - ru: Рабо́тая медсестро́й, она́ учи́лась по вечера́м в университе́те.
+        en_gb: While working as a nurse, she studied at university in the evenings.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
@@ -35262,6 +35412,12 @@ words:
       - ru: Э́то был реша́ющий матч.
         en_gb: That was the decisive match.
         inflect: { token: 3, form: act_pres, gender: m, rule: verb-participle-act-pres }
+      - ru: Его́ го́лос стал реша́ющим.
+        en_gb: His vote was decisive.
+        en_alt:
+          - His vote turned out to be decisive.
+        inflect: { token: 4, form: act_pres, case: ins, gender: m, rule: verb-participle-act-pres }
+        align: { 1: "его=his" }
     conjugation:
       imperative:
         sg: реша́й
@@ -36388,6 +36544,15 @@ words:
       - ru: Си́дя на дива́не, она́ смотре́ла телеви́зор.
         en_gb: Sitting on the sofa, she watched television.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Учи́тель попроси́л ученико́в, сидя́щих на после́дних па́ртах, вы́йти к доске́.
+        en_gb: The teacher asked the pupils sitting at the back desks to come up to the board.
+        inflect: { token: 4, form: act_pres, case: acc, gender: pl, animate: true, rule: verb-participle-act-pres }
+      - ru: Охра́нник, сиде́вший у вхо́да, ничего́ не заме́тил.
+        en_gb: The guard who was sitting by the entrance noticed nothing.
+        inflect: { token: 2, form: act_past, gender: m, rule: verb-participle-act-past }
+      - ru: Нельзя́ весь день рабо́тать си́дя.
+        en_gb: You shouldn't spend the whole day working sitting down.
+        inflect: { token: 5, form: gerund, rule: verb-gerund-impf }
     facts:
       - kind: origin
         text: "The same word as English sit."
@@ -36890,6 +37055,9 @@ words:
       - ru: Стул сло́ман.
         en_gb: The chair is broken.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Врач осмотре́л сло́манную ру́ку ма́льчика.
+        en_gb: The doctor examined the boy's broken arm.
+        inflect: { token: 3, form: pass_past, case: acc, gender: f, rule: verb-participle-pass-past }
   "служить=to serve":
     cefr_level: A2
     accented: служи́ть
@@ -37067,6 +37235,16 @@ words:
       - ru: Слу́шая му́зыку, она́ гото́вила у́жин.
         en_gb: While listening to music, she cooked dinner.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Я ви́жу люде́й, слу́шающих у́личного музыка́нта.
+        en_gb: I can see people who are listening to a street musician.
+        inflect: { token: 4, form: act_pres, case: acc, gender: pl, animate: true, rule: verb-participle-act-pres }
+      - ru: Профе́ссор поговори́л со студе́нтами, слу́шавшими его́ ле́кцию.
+        en_gb: The professor talked to the students who had attended his lecture.
+        inflect: { token: 5, form: act_past, case: ins, gender: pl, rule: verb-participle-act-past }
+        align: { 6: "его=his" }
+      - ru: Она́ засыпа́ет, слу́шая шум мо́ря.
+        en_gb: She falls asleep listening to the sound of the sea.
+        inflect: { token: 3, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: слу́шай
@@ -39837,6 +40015,19 @@ words:
       - ru: Сто́я в о́череди, он чита́л газе́ту.
         en_gb: Standing in the queue, he read a newspaper.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Мы пи́ли ко́фе в кафе́, стоя́щем на берегу́ реки́.
+        en_gb: We had coffee in a café standing on the bank of the river.
+        en_alt:
+          - We drank coffee at a café standing on the riverbank.
+        inflect: { token: 6, form: act_pres, case: pre, gender: n, rule: verb-participle-act-pres }
+      - ru: Маши́на, стоя́вшая у до́ма всю зи́му, наконе́ц исче́зла.
+        en_gb: The car that had stood outside the house all winter finally disappeared.
+        inflect: { token: 2, form: act_past, gender: f, rule: verb-participle-act-past }
+      - ru: Пассажи́ры е́хали сто́я всю доро́гу.
+        en_gb: The passengers travelled standing the whole way.
+        en_alt:
+          - The passengers stood the whole way.
+        inflect: { token: 3, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: стой
@@ -40121,6 +40312,9 @@ words:
         inflect: { token: 2, tense: present, person: 2sg, rule: verb-present }
       - ru: Су́дя по всему́, бу́дет дождь.
         en_gb: By all appearances, it is going to rain.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Су́дя по акце́нту, он с ю́га.
+        en_gb: Judging by his accent, he is from the south.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
   "суметь=to manage":
     cefr_level: A2
@@ -41572,6 +41766,9 @@ words:
       - ru: Уви́дев меня́, он улыбну́лся.
         en_gb: Having seen me, he smiled.
         inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
+      - ru: Соба́ка зала́яла, уви́дев незнако́мца.
+        en_gb: The dog barked when it saw the stranger.
+        inflect: { token: 3, form: gerund, rule: verb-gerund-pf }
     facts:
       - kind: build
         text: "у- here adds nothing but completion: catching sight of something, rather than seeing."
@@ -42332,6 +42529,9 @@ words:
       - ru: Велосипе́д укра́ден.
         en_gb: The bicycle has been stolen.
         inflect: { token: 2, form: pass_short, gender: m, rule: verb-participle-short }
+      - ru: Карти́на, укра́денная из музе́я в девяно́стые го́ды, нашла́сь в Пари́же.
+        en_gb: The painting stolen from the museum in the nineties turned up in Paris.
+        inflect: { token: 2, form: pass_past, gender: f, rule: verb-participle-pass-past }
   "укусить=to bite":
     cefr_level: B1
     accented: укуси́ть
@@ -42849,6 +43049,11 @@ words:
         inflect: { token: 5, tense: past, person: past_f, rule: verb-conditional }
       - ru: Услы́шав но́вость, она́ запла́кала.
         en_gb: Having heard the news, she burst into tears.
+        inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
+      - ru: Услы́шав звоно́к, де́ти вы́бежали из кла́сса.
+        en_gb: Hearing the bell, the children ran out of the classroom.
+        en_alt:
+          - When they heard the bell, the children ran out of the classroom.
         inflect: { token: 1, form: gerund, rule: verb-gerund-pf }
     facts:
       - kind: build
@@ -44188,6 +44393,15 @@ words:
       - ru: Чита́я кни́гу, он засну́л.
         en_gb: While reading the book, he fell asleep.
         inflect: { token: 1, form: gerund, rule: verb-gerund-impf }
+      - ru: Спаси́бо всем, чита́ющим наш блог!
+        en_gb: Thank you to everyone who reads our blog!
+        inflect: { token: 3, form: act_pres, case: dat, gender: pl, rule: verb-participle-act-pres }
+      - ru: Мне́ния люде́й, чита́вших рома́н, раздели́лись.
+        en_gb: Opinions were divided among people who had read the novel.
+        inflect: { token: 3, form: act_past, case: gen, gender: pl, rule: verb-participle-act-past }
+      - ru: Он е́дет на рабо́ту, чита́я но́вости в телефо́не.
+        en_gb: He is on his way to work, reading the news on his phone.
+        inflect: { token: 5, form: gerund, rule: verb-gerund-impf }
     conjugation:
       imperative:
         sg: чита́й
