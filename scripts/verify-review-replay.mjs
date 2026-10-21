@@ -102,6 +102,33 @@ function reviewedByKey(text) {
   return new Map([...out].map(([k, v]) => [k, v.join('\n')]))
 }
 
+/**
+ * The committed lines with every usage sentence the replay has never heard of
+ * taken out, and how many there were.
+ *
+ * The same argument as for a word added after the base: a sentence authored
+ * since — a second participle example for a verb, say — is not the review's to
+ * reproduce. Only a sentence ABSENT from the replay is dropped, so a hand
+ * rewrite of a reviewed sentence still fails: the replay's version of it is
+ * then missing from the committed side.
+ */
+function withoutNewSentences(committed, replayed) {
+  const known = new Set(replayed.split('\n').filter((l) => /^ {6}- ru:/.test(l)))
+  const kept = []
+  let skipping = false
+  let dropped = 0
+  for (const line of committed.split('\n')) {
+    if (/^ {6}- ru:/.test(line)) {
+      skipping = !known.has(line)
+      if (skipping) dropped += 1
+    } else if (!/^ {8}/.test(line)) {
+      skipping = false
+    }
+    if (!skipping) kept.push(line)
+  }
+  return { text: kept.join('\n'), dropped }
+}
+
 const work = mkdtempSync(join(tmpdir(), 'review-replay-'))
 let failed = false
 try {
@@ -327,6 +354,7 @@ try {
   let compared = 0
   let added = 0
   let promoted = 0
+  let authored = 0
   for (const file of wordFiles) {
     // New files were not present when this review began; there are no
     // proposals for them to replay against the old base.
@@ -356,9 +384,11 @@ try {
         continue
       }
       compared += 1
-      if (text === committed.get(key)) continue
+      const own = withoutNewSentences(committed.get(key), text)
+      authored += own.dropped
+      if (text === own.text) continue
       const a = text.split('\n')
-      const b = committed.get(key).split('\n')
+      const b = own.text.split('\n')
       // Scan the longer side: when one is a prefix of the other (a block added
       // on one side only) scanning `a` alone finds no differing index and the
       // report reads "(nothing)" against "(nothing)".
@@ -373,7 +403,9 @@ try {
     for (const key of committed.keys()) if (!replayed.has(key)) added += 1
   }
   if (!failed) {
-    const note = promoted ? `; ${promoted} promoted out of the glossary` : ''
+    const note =
+      (promoted ? `; ${promoted} promoted out of the glossary` : '') +
+      (authored ? `; ${authored} usage sentence(s) authored since the base` : '')
     console.log(
       `  ${compared} word(s) compared; ${added} added since the base and outside the review's remit${note}`,
     )
